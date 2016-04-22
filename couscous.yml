@@ -22,5 +22,5 @@ menu:
         foo:
             text: Administrators Guide
             # Or absolute urls
-            absoluteUrl: doc/admin.html
+            relativeUrl: doc/admin.html
 
