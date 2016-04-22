@@ -13,6 +13,7 @@ title: OSG Documentation
 subTitle: All you want to know about the OSG
 
 # The left menu bar
+# NOTE: the macro engine does not convert links here from .md to .html automatically.
 menu:
     items:
         ce:
@@ -20,7 +21,7 @@ menu:
             relativeUrl: docs/Computing_Element/htcondor_ce.html
         squid:
             text: HTTP Cache (squid)
-            relativeUrl: docs/Frontier_Squid/squid.md
+            relativeUrl: docs/Frontier_Squid/squid.html
 
 # Various macros used in documentation pages:
 supportedOs: Red Hat Enterprise Linux 5, 6, 7, and variants (see [details...](Common/SupportedOperatingSystems))
