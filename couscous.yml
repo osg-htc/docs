@@ -17,10 +17,11 @@ menu:
     items:
         home:
             text: Home page
-            # You can use relative urls
             relativeUrl: index.html
-        foo:
-            text: Administrators Guide
-            # Or absolute urls
-            relativeUrl: doc/admin.html
+        guides:
+            text: Administrators Guides
+            subItems:
+                ce:
+                    test: 
+                    relativeUrl: Computing_Element/htcondor_ce.html
 
