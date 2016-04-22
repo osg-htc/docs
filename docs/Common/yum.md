@@ -50,12 +50,9 @@ tricks and tips on using yum.
 To use the packages in a repository without adding special options to
 the yum command the repository must be enabled.
 
-<span class="twiki-macro STARTSECTION">OSGRepoBrief</span>
-
 + Install the Yum Repositories required by OSG
 
-The OSG RPMs currently support <span
-class="twiki-macro SUPPORTED_OS"></span>.
+The OSG RPMs currently support {{supportedOs}}
 
 OSG RPMs are distributed via the OSG yum repositories. Some packages
 depend on packages distributed via the
