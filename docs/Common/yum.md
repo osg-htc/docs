@@ -143,11 +143,11 @@ depending on your EL version:
         | **OSG 3.2** | `https://repo.grid.iu.edu/osg/3.2/osg-3.2-el6-release-latest.rpm`  | N/A
         | **OSG 3.3** | `https://repo.grid.iu.edu/osg/3.3/osg-3.3-el6-release-latest.rpm`  | `https://repo.grid.iu.edu/osg/3.3/osg-3.3-el7-release-latest.rpm` |
 
-2. For EL5, download the repo file and install it using the following:
-    ```
-    # curl -O https://repo.grid.iu.edu/osg/3.2/osg-3.2-el5-release-latest.rpm
-    # rpm -Uvh osg-3.2-el5-release-latest.rpm
-    ```
+    2. For EL5, download the repo file and install it using the following:
+        ```
+        # curl -O https://repo.grid.iu.edu/osg/3.2/osg-3.2-el5-release-latest.rpm
+        # rpm -Uvh osg-3.2-el5-release-latest.rpm
+        ```
 
 Priorities
 ==========
