@@ -277,19 +277,24 @@ service runs as either the `tomcat` user or the account specified by the
 `user` option in `/etc/osg/config.d/30-gip.ini`, thus your service
 certificates need to be owned by the appropriate user.
 
-1.  \<p\>Enable osg-info-services in
-    `/etc/osg/config.d/30-infoservices.ini`:\</p\>\\ \<pre
-    class="file"\>enabled = *True*\</pre\>
-2.  \<p\>Generate a `user-vo-map` file with your authorization set
-    up:\</p\>
-    i.  \<p\>If you're using edg-mkgridmap, run the following:\</p\>\\
-        \<pre class="rootscreen"\><span
-        class="twiki-macro UCL_PROMPT_ROOT"></span>
-        edg-mkgridmap\</pre\>
-    ii. \<p\>If you're using GUMS, run the following:\</p\>\\ \<pre
-        class="rootscreen"\><span
-        class="twiki-macro UCL_PROMPT_ROOT"></span>
-        gums-host-cron\</pre\>
+1.  Enable osg-info-services in
+    `/etc/osg/config.d/30-infoservices.ini`:
+
+    ```
+    enabled = *True*
+    ```
+2.  Generate a `user-vo-map` file with your authorization set
+    up:
+    i.  If you're using edg-mkgridmap, run the following:
+
+        ```
+        edg-mkgridmap
+        ```
+    ii. If you're using GUMS, run the following:
+    
+        ```
+        gums-host-cron
+        ```
 
 ### Applying configuration settings
 
@@ -302,19 +307,25 @@ validate (to a limited extent) and apply the settings to the relevant
 software components. The `osg-configure` software is included
 automatically in an HTCondor CE installation.
 
-1.  \<p\>Make all changes to `.ini` files in the `/etc/osg/config.d`
-    directory\</p\>\\ \<p\>**Note:** This document describes the
+1.  Make all changes to `.ini` files in the `/etc/osg/config.d`
+    directory
+
+    **Note:** This document describes the
     critical settings for HTCondor CE and related software. You may need
     to configure other software that is installed on your HTCondor CE
-    host, too.\</p\>
-2.  \<p\>Validate the configuration settings\</p\>\\ \<pre
-    class="rootscreen"\><span
-    class="twiki-macro UCL_PROMPT_ROOT"></span>
-    osg-configure -v\</pre\>\\ \<p\>Fix any errors (at least) that
-    `osg-configure` reports.\</p\>
-3.  \<p\>Once the validation command succeeds without errors, apply the
-    configuration settings:\</p\>\\ \<pre class="rootscreen"\><span
-    class="twiki-macro UCL_PROMPT_ROOT"></span> osg-configure -c\</pre\>
+    host, too.
+2.  Validate the configuration settings
+
+    ```
+    osg-configure -v
+    ```
+    Fix any errors (at least) that `osg-configure` reports.
+3.  Once the validation command succeeds without errors, apply the
+    configuration settings:
+
+    ```
+    osg-configure -c
+    ```
 
 ### Optional configuration
 
@@ -329,9 +340,6 @@ HTCondor CE](#UsingHTCondorCE).
 -   [HTCondor accounting groups](#AccountingGroups)
 -   [Installing the HTCondor-CE View](#CeView)
 
-JobRoutes
----------
-
 #### Transforming and filtering jobs
 
 If you need to modify or filter jobs, more information can be found in
@@ -340,8 +348,6 @@ document.
 
 <span class="twiki-macro NOTE"></span> If you need to assign jobs to
 HTCondor accounting groups, refer to [this](#AccountingGroups) section.
-
-\#NetworkInterfaces
 
 #### Configuring for multiple network interfaces
 
@@ -420,15 +426,12 @@ consulted first and contains lines of the form:
 uid GroupName
 ```
 
-<span
-class="twiki-macro TWISTY">%TWISTY\_OPTS\_OUTPUT% showlink="Click to expand example uid\_table.txt…"</span>
+Example `uid_table.txt`:
 
 ```
 uscms02 TestGroup
 osg     other.osgedu
 ```
-
-<span class="twiki-macro ENDTWISTY"></span>
 
 ##### Mapping by DN or VOMS attribute
 
@@ -437,13 +440,13 @@ To map DN’s or VOMS attributes to an accounting group, use
 not found in the UID file and it contains lines of the form:
 
 ```
-<span style="background-color: #FFCCFF;">SubjectOrAttribute</span> GroupName
+SubjectOrAttribute GroupName
 ```
 
-The \<span style="background-color:
-\#FFCCFF;"\>SubjectOrAttribute\</span\> can be a Perl regular
-expression. <span
-class="twiki-macro TWISTY">%TWISTY\_OPTS\_OUTPUT% showlink="Click to expand example extattr\_table.txt…"</span>
+The SubjectOrAttribute can be a Perl regular
+expression.
+
+Example `extattr_table.txt`:
 
 ```
 cmsprio cms.other.prio
@@ -451,9 +454,6 @@ cms\/Role=production cms.prod
 .* other
 ```
 
-<span class="twiki-macro ENDTWISTY"></span>
-
-\#CeView
 
 #### Install and run the HTCondor-CE-View
 
@@ -494,34 +494,24 @@ In addition to the HTCondor CE job gateway service itself, there are a
 number of supporting services in your installation. The specific
 services are:
 
-<span class="twiki-macro TABLE" sort="off"></span>
-
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Software            Service name                                        Notes
-  ------------------- --------------------------------------------------- ----------------------------------------------------------------------------------------
-  Fetch CRL           On EL 6: `fetch-crl-boot` and `fetch-crl-cron`\     See [CA documentation](InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui) for more info
-                       On EL 5: `fetch-crl3-boot` and `fetch-crl3-cron`
-
-  Gratia              `gratia-probes-cron`                                Accounting software
-
-  Your batch system   `condor` or `pbs_server` or …
-
-  OSG Info Services   `osg-info-services`
-
-  HTCondor-CE         `condor-ce`
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Software           | Service name                                       | Notes
+| -------------------|--------------------------------------------------- | ----------------------------------------------------------------------------------------
+| Fetch CRL          |On EL 6: `fetch-crl-boot` and `fetch-crl-cron`  <br>   On EL 5: `fetch-crl3-boot` and `fetch-crl3-cron`   | See [CA documentation](InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui) for more info |
+|  Gratia            | `gratia-probes-cron`                               | Accounting software |
+| Your batch system  |`condor` or `pbs_server` or …                       |                     |
+| OSG Info Services  |`osg-info-services`                                 |                     |
+|  HTCondor-CE       |`condor-ce`                                         |                     |
 
 Start the services in the order listed and stop them in reverse order.
 As a reminder, here are common service commands (all run as `root`):
 
-<span class="twiki-macro TABLE" sort="off"></span>
 
-  To …                                          Run the command …
-  --------------------------------------------- ---------------------------------------
-  Start a service                               `service <em>SERVICE-NAME</em> start`
-  Stop a service                                `service <em>SERVICE-NAME</em> stop`
-  Enable a service to start during boot         `chkconfig <em>SERVICE-NAME</em> on`
-  Disable a service from starting during boot   `chkconfig <em>SERVICE-NAME</em> off`
+| To …                                         |Run the command …                      |
+| ---------------------------------------------|---------------------------------------|
+| Start a service                              |`service <em>SERVICE-NAME</em> start`  |
+| Stop a service                               |`service <em>SERVICE-NAME</em> stop`   |
+| Enable a service to start during boot        |`chkconfig <em>SERVICE-NAME</em> on`   |
+| Disable a service from starting during boot  |`chkconfig <em>SERVICE-NAME</em> off`  |
 
 ### Using HTCondor-CE tools
 
@@ -567,8 +557,6 @@ Getting Help
 To get assistance, please use the [this
 page](Documentation.HelpProcedure).
 
-\#ReferenceSection
-
 Reference
 ---------
 
@@ -586,37 +574,36 @@ directories are parsed in the order presented and thus configuration
 within the final directory will override configuration specified in the
 previous directories.
 
-  Location                           Comment
-  ---------------------------------- ----------------------------------------------------------------------------------------------------------------------------
-  `/usr/share/condor-ce/config.d/`   Configuration defaults (overwritten on package updates)
-  `/etc/condor-ce/config.d/`         Files in this directory are parsed in alphanumeric order (i.e., `99-local.conf` will override values in `01-ce-auth.conf`)
+| Location                           | Comment                                      |
+| ---------------------------------- | -------------------------------------------- | 
+| `/usr/share/condor-ce/config.d/`   | Configuration defaults (overwritten on package updates) |
+| `/etc/condor-ce/config.d/`         | Files in this directory are parsed in alphanumeric order (i.e., `99-local.conf` will override values in `01-ce-auth.conf`) |
 
 For a detailed order of the way configuration files are parsed, run the
 following command:
 
 ```
-%UCL_PROMPT% condor_ce_config_val -config
+# condor_ce_config_val -config
 ```
 
 ### Users
 
-<span class="twiki-macro STARTSECTION">Users</span> The following users
-are needed by HTCondor-CE at all sites:
+The following users are needed by HTCondor-CE at all sites:
 
-| **User** | **Comment** | | `condor` | The HTCondor-CE will be run as
-root, but perform most of its operations as the `condor` user. | |
-`gratia` | Runs the Gratia probes to collect accounting data | |
-`tomcat` | Default user that runs GIP | <span
-class="twiki-macro ENDSECTION">Users</span>
+| **User** | **Comment** |
+| -------- | ----------- |
+| `condor` | The HTCondor-CE will be run as root, but perform most of its operations as the `condor` user. |
+| `gratia` | Runs the Gratia probes to collect accounting data |
+| `tomcat` | Default user that runs GIP |
 
 ### Certificates
 
-  Certificate        User that owns certificate   Path to certificate
-  ------------------ ---------------------------- ---------------------------------------------------------------------------
-  Host certificate   `root`                       `/etc/grid-security/hostcert.pem` \<br\> `/etc/grid-security/hostkey.pem`
+  |Certificate        |User that owns certificate  | Path to certificate                                                       |
+  |------------------ |--------------------------- |---------------------------------------------------------------------------|
+  |Host certificate   |`root`                      |`/etc/grid-security/hostcert.pem` \<br\> `/etc/grid-security/hostkey.pem`  |
 
 Find instructions to request a host certificate
-[here](Documentation/Release3.GetHostServiceCertificates).
+[here](GetHostServiceCertificates).
 
 <!--  TODO: Fixup
 ### Networking
