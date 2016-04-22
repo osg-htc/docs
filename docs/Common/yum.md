@@ -136,7 +136,7 @@ depending on your EL version:
         rpm -Uvh URL
         ```
         
-        Where `%RED%URL%ENDCOLOR%` is one of the following:
+        Where `URL` is one of the following:
     
         | Series      | EL6 URL (for RHEL 6, CentOS 6, or SL 6) | EL7 URL (for RHEL 7, CentOS 7, or SL 7) |
         |----------   | ----------------------------------------| --------------------------------------- | 
@@ -161,7 +161,7 @@ want to enable another one, such as `osg-testing`, then edit its file
 (e.g. `/etc/yum.repos.d/osg-testing.repo`) and change the enabled option
 from 0 to 1:
 
-``` {.file}
+```
 [osg-testing]
 name=OSG Software for Enterprise Linux 5 - Testing - $basearch
 #baseurl=http://repo.grid.iu.edu/osg/3.2/el5/testing/$basearch
@@ -173,7 +173,7 @@ gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 ```
 
-<span class="twiki-macro WARNING"></span> if you have your own mirror or
+If you have your own mirror or
 configuration of the EPEL repository, you **MUST** verify that the OSG
 repository has a better yum priority than EPEL. Otherwise, you will have
 strange dependency resolution issues.
