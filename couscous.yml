@@ -1,0 +1,26 @@
+template:
+    url: https://github.com/CouscousPHP/Template-Light
+
+# Base URL of the published website
+baseUrl: http://djw8605.github.io/osg-docs
+
+# Used to link to the GitHub project
+github:
+    user: djw8605
+    repo: osg-docs
+
+title: OSG Documentation
+subTitle: All you want to know about the OSG
+
+# The left menu bar
+menu:
+    items:
+        home:
+            text: Home page
+            # You can use relative urls
+            relativeUrl: doc/home.html
+        foo:
+            text: Administrators Guide
+            # Or absolute urls
+            absoluteUrl: doc/admin.html
+
