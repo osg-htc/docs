@@ -1,7 +1,9 @@
+---
+current_menu: ce
+---
 Installing and Maintaining HTCondor-CE
 ======================================
 
-<span class="twiki-macro TOC" depth="3"></span>
 
 About This Guide
 ----------------
@@ -37,7 +39,7 @@ host) steps to prepare in advance:
 -   Ensure the host has [a supported operating
     system](SupportedOperatingSystems)
 -   Obtain root access to the host
--   Prepare [the required Yum repositories](YumRepositories)
+-   Prepare [the required Yum repositories](/Common/yum)
 -   Install [CA certificates](InstallCertAuth)
 
 Installing HTCondor-CE
@@ -102,18 +104,22 @@ However, if you are updating a host that used a Globus GRAM job gateway
 2.  Edit the gateway configuration file
     `/etc/osg/config.d/10-gateway.ini` to reflect your choice
     To enable HTCondor CE and disable GRAM CE:
+
     ```
     gram_gateway_enabled = False
+    htcondor_gateway_enabled = True
+    ```
+    To enable both HTCondor and GRAM CEs:
+    
+    ```
+    gram_gateway_enabled = True
+    htcondor_gateway_enabled = True
     ```
 
-htcondor\_gateway\_enabled = True\</pre\>\\ \<p\>To enable both HTCondor
-and GRAM CEs:\</p\>\\ \<pre class="file"\>gram\_gateway\_enabled = True
-htcondor\_gateway\_enabled = True\</pre\>
+More information about the Globus GRAM CE can be found [here](Computing_Element/InstallComputeElement).
 
-More information about the Globus GRAM CE can be found
-[here](Documentation.Release3.InstallComputeElement).
-
-\#BatchSystem
+BatchSystem
+-----------
 
 ### Configuring the batch system
 
@@ -121,7 +127,7 @@ Enable your batch system by editing the `enabled` field in the
 `/etc/osg/config.d/20-<span style="background-color: #FFCCFF;">YOUR BATCH SYSTEM</span>.ini`
 file:\\
 
-``` {.file}
+```
 enabled = <span style="background-color: #FFCCFF;">True</span>
 ```
 
@@ -150,7 +156,7 @@ control this by setting `SPOOL` in
 `/etc/condor-ce/config.d/99-local.conf`. For example, the following sets
 the `SPOOL` directory to `/home/condor`:
 
-``` {.file}
+```
 SPOOL=/home/condor
 ```
 
@@ -164,7 +170,7 @@ Worker node proxy renewal is not used by HTCondor-CE and leaving it on
 will cause some jobs to be held. Edit `/etc/blah.config` on the
 HTCondor CE host and set the following two values:
 
-``` {.file}
+```
 blah_disable_wn_proxy_renewal=yes
 blah_delegate_renewed_proxies=no
 ```
@@ -172,7 +178,8 @@ blah_delegate_renewed_proxies=no
 <span class="twiki-macro NOTE"></span> There should be no whitespace
 around the `=`.
 
-\#ConfiguringAuthorization
+ConfiguringAuthorization
+------------------------
 
 ### Configuring authorization
 
@@ -317,7 +324,8 @@ HTCondor CE](#UsingHTCondorCE).
 -   [HTCondor accounting groups](#AccountingGroups)
 -   [Installing the HTCondor-CE View](#CeView)
 
-\#JobRoutes
+JobRoutes
+---------
 
 #### Transforming and filtering jobs
 
@@ -405,14 +413,14 @@ DN, or their VOMS attributes.
 To map UID’s to an accounting group, use `/etc/osg/uid_table.txt`. It is
 consulted first and contains lines of the form:
 
-``` {.file}
+```
 uid GroupName
 ```
 
 <span
 class="twiki-macro TWISTY">%TWISTY\_OPTS\_OUTPUT% showlink="Click to expand example uid\_table.txt…"</span>
 
-``` {.file}
+```
 uscms02 TestGroup
 osg     other.osgedu
 ```
@@ -425,7 +433,7 @@ To map DN’s or VOMS attributes to an accounting group, use
 `/etc/osg/extattr_table.txt`. This file is only consulted if the user is
 not found in the UID file and it contains lines of the form:
 
-``` {.file}
+```
 <span style="background-color: #FFCCFF;">SubjectOrAttribute</span> GroupName
 ```
 
@@ -463,8 +471,6 @@ CE. To run the View,
 
 By default, the website is served from port 80. This may be configured
 in `/etc/condor-ce/config.d/05-ce-view.conf` as well.
-
-\#UsingHTCondorCE
 
 Using HTCondor-CE
 -----------------
@@ -585,7 +591,7 @@ previous directories.
 For a detailed order of the way configuration files are parsed, run the
 following command:
 
-``` {.screen}
+```
 %UCL_PROMPT% condor_ce_config_val -config
 ```
 
