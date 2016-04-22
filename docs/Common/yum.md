@@ -52,7 +52,7 @@ the yum command the repository must be enabled.
 
 + Install the Yum Repositories required by OSG
 
-The OSG RPMs currently support {{supportedOs}}
+The OSG RPMs currently support {{ supportedOs }}
 
 OSG RPMs are distributed via the OSG yum repositories. Some packages
 depend on packages distributed via the
