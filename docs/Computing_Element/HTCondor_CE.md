@@ -21,7 +21,7 @@ Before Starting
 Before starting the installation process, consider the following points
 (consulting [the Reference section below](#ReferenceSection) as needed):
 
--   **User IDs:** If they do not exist already, the installation will
+-   *User IDs:* If they do not exist already, the installation will
     create the Linux user IDs `condor` (UID 4716), `tomcat` (UID 91) and
     `gratia` (UID 42401)
 -   **Service certificate:** The HTCondor-CE service uses a host
