@@ -1,24 +1,14 @@
--   **YUM Repositories**
--   About This Document
--   Repositories
--   Enabling Repositories
--   Priorities
--   References
--   Comments
 
-**YUM Repositories** {#yum-repositories .unnumbered}
+**YUM Repositories**
 ====================
 
-<span class="twiki-macro DOC_STATUS_TABLE"></span> <span
-class="twiki-macro TOC"></span>
-
 About This Document
-===================
+-------------------
 
 This document introduces YUM repositories and how OSG uses them.
 
 Repositories
-============
+------------
 
 OSG hosts four public-facing repositories at
 [repo.grid.iu.edu](http://repo.grid.iu.edu/):
@@ -51,7 +41,7 @@ repositories. If you use packages from other repositories, like
 `jpackage`, `dag`, or `rpmforge`, you may encounter problems.
 
 Enabling Repositories
-=====================
+---------------------
 
 In [our advice on using
 yum](Documentation/Release3.InstallBestPractices) you will learn many
@@ -62,7 +52,7 @@ the yum command the repository must be enabled.
 
 <span class="twiki-macro STARTSECTION">OSGRepoBrief</span>
 
-—%SHIFT%+ Install the Yum Repositories required by OSG
++ Install the Yum Repositories required by OSG
 
 The OSG RPMs currently support <span
 class="twiki-macro SUPPORTED_OS"></span>.
@@ -72,33 +62,26 @@ depend on packages distributed via the
 [EPEL](http://fedoraproject.org/wiki/EPEL) repositories. So both
 repositories must be enabled.
 
-—%SHIFT%++ Install EPEL
+### Install EPEL
 
 -   Install the EPEL repository, if not already present. **Note:** This
     enables EPEL by default. Choose the right version to match your OS
-    version. \<pre class=“rootscreen”\>
+    version.
+    ```
+    # EPEL 5 (For RHEL 5, CentOS 5, and SL 5)
+    $ curl -O https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm
+    $ rpm -Uvh epel-release-latest-5.noarch.rpm
+    # EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
+    $ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+    # EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
+    $ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    ```
+    **WARNING**: if you have your own mirror or configuration of the EPEL
+    repository, you **MUST** verify that the OSG repository has a better yum
+    priority than EPEL ([details](Common/InstallBestPractices#YumPriorities)).
+    Otherwise, you will have strange dependency resolution (*depsolving*) issues.
 
-%RED%\# EPEL 5 (For RHEL 5, CentOS 5, and SL 5) <span
-class="twiki-macro ENDCOLOR"></span> <span
-class="twiki-macro UCL_PROMPT_ROOT"></span> curl -O
-<https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm>
-<span class="twiki-macro UCL_PROMPT_ROOT"></span> rpm -Uvh
-epel-release-latest-5.noarch.rpm %RED%\# EPEL 6 (For RHEL 6, CentOS 6,
-and SL 6) <span class="twiki-macro ENDCOLOR"></span> <span
-class="twiki-macro UCL_PROMPT_ROOT"></span> rpm -Uvh
-<https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm>
-%RED%\# EPEL 7 (For RHEL 7, CentOS 7, and SL 7) <span
-class="twiki-macro ENDCOLOR"></span> <span
-class="twiki-macro UCL_PROMPT_ROOT"></span> rpm -Uvh
-<https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm>\</pre\>
-**WARNING**: if you have your own mirror or configuration of the EPEL
-repository, you **MUST** verify that the OSG repository has a better yum
-priority than EPEL
-([details](Documentation.Release3.InstallBestPractices#YumPriorities)).
-Otherwise, you will have strange dependency resolution (*depsolving*)
-issues.
-
-—%SHIFT%++ Install the Yum priorities package
+### Install the Yum priorities package
 
 For packages that exist in both OSG and EPEL repositories, it is
 important to prefer the OSG ones or else OSG software installs may fail.
@@ -122,7 +105,7 @@ system to work.
     required key you can force the installation using
     `--nogpgcheck=; e.g., =yum install --nogpgcheck yum-priorities`.
 
-—%SHIFT%++ Install OSG Repositories
+### Install OSG Repositories
 
 \<ol\> \<li\> \<p\>If you are upgrading from OSG 3.1 (or 3.2) to OSG 3.2
 (or 3.3), remove the old OSG repository definition files and clean the
@@ -196,13 +179,3 @@ References
 
 -   [Basic use of Yum](YumRpmBasics)
 -   [Best practices in using Yum](InstallBestPractices)
-
-Comments
-========
-
-  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------- ---------------------
-  When will RHEL/Centos/SL 7 be supported?                                                                                                                                                                                                                                                 Main.MickTimony   11 Dec 2014 - 19:32
-  OSG 3.1 will be unsupported after April 2015:\<br /\>[http://osggoc.blogspot.com/2015/02/announcing-osg-software-versions-3220.html\<br](http://osggoc.blogspot.com/2015/02/announcing-osg-software-versions-3220.html<br) /\>\<br /\>It would be nice if the docs would reflect this.   Main.MickTimony   11 Feb 2015 - 17:15
-  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------- ---------------------
-
-<span class="twiki-macro COMMENT" type="tableappend"></span>
