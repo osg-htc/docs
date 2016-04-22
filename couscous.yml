@@ -16,7 +16,6 @@ subTitle: All you want to know about the OSG
 menu:
     items:
          ce:
-             name: ce
              text: HTCondor-CE
              relativeUrl: docs/Computing_Element/htcondor_ce.html
 
