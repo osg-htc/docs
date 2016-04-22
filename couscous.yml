@@ -18,7 +18,7 @@ menu:
         home:
             text: Home page
             # You can use relative urls
-            absoluteUrl: /index.html
+            relativeUrl: index.html
         foo:
             text: Administrators Guide
             # Or absolute urls
