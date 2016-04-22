@@ -14,15 +14,12 @@ subTitle: All you want to know about the OSG
 
 # The left menu bar
 menu:
-    items:
-        home:
-            text: Home page
-            relativeUrl: index.html
+    sections:
         guides:
-            text: Administrators Guides
-            subItems:
+            name: Administrator's Guides
+            items:
                 ce:
-                    test: 
+                    text: HTCondor-CE
                     relativeUrl: Computing_Element/htcondor_ce.html
 
 # Various macros used in documentation pages:
