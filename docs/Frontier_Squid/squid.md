@@ -3,17 +3,17 @@ Frontier Squid Caching Proxy Installation Guide
 
 <span class="twiki-macro TOC" depth="3"></span>
 
-#About This Document
+## About This Document
 
 This document is intended for System Administrators who are installing
 `frontier-squid`, the OSG distribution of the Frontier Squid software.
 
-# Applicable Versions
+## Applicable Versions
 
 The applicable software versions for this document are OSG Version >= 3.1.40 or >=
 3.2.16. The version of frontier-squid installed should be >= 2.7.STABLE9-19.1
 
-# About Frontier Squid
+## About Frontier Squid
 
 Frontier Squid is a distribution of the well-known [squid HTTP caching
 proxy software](http://squid-cache.org) that is optimized for use with
@@ -25,7 +25,7 @@ CVMFS.
 The OSG distribution of frontier-squid is a straight rebuild of the
 upstream frontier-squid package for the convenience of OSG users.
 
-# Frontier Squid is Recommended
+## Frontier Squid is Recommended
 
 OSG recommends that all sites run a caching proxy for HTTP and HTTPS to
 help reduce bandwidth and improve throughput. To that end, Compute
@@ -44,20 +44,20 @@ users who have not added the proxy location to their CE configuration.
 In the future, a proxy will be required and osg-configure will fail if
 the proxy location is not set.
 
-# Engineering Considerations
+## Engineering Considerations
 
 If you will be supporting the Frontier application at your site, review
 the [upstream documentation Hardware considerations
 section](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Hardware)
 to determine how to size your equipment.
 
-# Requirements
+## Requirements
 
-## Host and OS
+### Host and OS
 -   OS is Red Hat Enterprise Linux 5, 6, 7, and variants
 -   Root access
 
-## Users The frontier-squid installation will create one user account
+### Users The frontier-squid installation will create one user account
 unless it already exists.
 
 | User    |  Comment  | 
@@ -69,7 +69,7 @@ create a configuration file before installation. Details are in the
 [upstream documentation Preparation
 section](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Preparation).
 
-## Networking
+### Networking
 
 | Service Name | Protocol | Port Number | Inbound | Outbound | Comment  |
 | ------------ | -------  | ----------  | ------- | -------- | -------- |
@@ -85,7 +85,7 @@ The addresses of the WLCG monitoring servers for use in firewalls are
 listed in the [upstream documentation Enabling monitoring
 section](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring).
 
-# Install Instructions 
+## Install Instructions 
 
 ### Install the Yum Repositories required by OSG
 The OSG RPMs currently support Red Hat Enterprise Linux 5, 6, 7, and variants
@@ -120,7 +120,10 @@ Replace PACKAGE with the package name from the previous step.
 ```
 plugins=1
 ```
-*NOTE*: If you do not have a required key you can force the installation using ```--nogpgcheck```; e.g., ```yum install --nogpgcheck yum-priorities```
+*NOTE*: If you do not have a required key you can force the installation using ```--nogpgcheck```; e.g., 
+```
+yum install --nogpgcheck yum-priorities
+```
 
 #### Install OSG Repositories
 1. If you are upgrading from OSG 3.1 (or 3.2) to OSG 3.2 (or 3.3), remove the old OSG repository definition files and clean the Yum cache:
@@ -128,9 +131,9 @@ plugins=1
 [root@client ~]$ yum clean all
 [root@client ~]$ rpm -e osg-release
 ```
-This step ensures that local changes to ```*.repo``` files will not block the installation of the new OSG repositories. After this step, ```*.repo``` files that have been changed will exist in ```/etc/yum.repos.d/``` with the ```*.rpmsave``` extension. After installing the new OSG repositories (the next step) you may want to apply any changes made in the ```*.rpmsave``` files to the new ```*.repo``` files.
+This step ensures that local changes to `*.repo` files will not block the installation of the new OSG repositories. After this step, `*.repo` files that have been changed will exist in `/etc/yum.repos.d/` with the `*.rpmsave` extension. After installing the new OSG repositories (the next step) you may want to apply any changes made in the `*.rpmsave` files to the new `*.repo` files.
 2. Install the OSG repositories using one of the following methods depending on your EL version:
-..1. For EL versions greater than EL5, install the files directly from ```repo.grid.iu```:
+..1. For EL versions greater than EL5, install the files directly from `repo.grid.iu`:
 ```bash
 [root@client ~]$ rpm -Uvh URL
 ```
@@ -194,13 +197,13 @@ Squid service:
 
 Starting frontier-squid:
 
-``` {.rootscreen}
+```
 [root@client ~]# service frontier-squid start
 ```
 
 Stopping frontier-squid:
 
-``` {.rootscreen}
+```
 [root@client ~]# service frontier-squid stop
 ```
 
@@ -210,7 +213,7 @@ As any user on another computer, do the following (where
 %RED%yoursquid.your.domain<span class="twiki-macro ENDCOLOR"></span> is
 the fully qualified domain name of your squid server):
 
-``` {.screen}
+```
 [user@client ~]$ export http_proxy=http://yoursquid.your.domain:3128
 [user@client ~]$ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
 X-Cache: MISS from yoursquid.your.domain
@@ -227,12 +230,12 @@ good to do the test in the [upstream documentation Testing the
 installation
 section](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Testing_the_installation).
 
-# Frontier Squid Log Files
+## Frontier Squid Log Files
 
 Log file contents are explained in the [upstream documentation Log file
 contents
 section](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Log_file_contents).
 
-# Getting Help 
+## Getting Help 
 To get assistance please use [Help
 Procedure](HelpProcedure).
