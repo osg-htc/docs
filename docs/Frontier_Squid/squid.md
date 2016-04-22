@@ -157,9 +157,9 @@ Then enable it to start at boot time with this command:
 [root@client ~]# chkconfig frontier-squid on
 ```
 
-# Configuring Frontier Squid
+## Configuring Frontier Squid
 
-## Configuring the Frontier Squid Service
+### Configuring the Frontier Squid Service
 
 To configure the Frontier Squid service itself:
 
@@ -178,7 +178,7 @@ To configure the Frontier Squid service itself:
     and [register the squid in
     OIM](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#OIM).
 
-## Configuring the OSG CE
+### Configuring the OSG CE
 
 To configure the OSG Compute Element (CE) to know about your Frontier
 Squid service:
@@ -193,7 +193,7 @@ Squid service:
 2.  Run `osg-configure` to propagate the changes on your CE
 **Note:** You may want to finish other CE configuration tasks before running `osg-configure`. Just be sure to run it once before starting CE services.
 
-# Starting and Stopping the Frontier Squid Service
+## Starting and Stopping the Frontier Squid Service
 
 Starting frontier-squid:
 
@@ -207,7 +207,7 @@ Stopping frontier-squid:
 [root@client ~]# service frontier-squid stop
 ```
 
-# Testing Frontier Squid
+## Testing Frontier Squid
 
 As any user on another computer, do the following (where
 %RED%yoursquid.your.domain<span class="twiki-macro ENDCOLOR"></span> is
@@ -230,7 +230,7 @@ good to do the test in the [upstream documentation Testing the
 installation
 section](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Testing_the_installation).
 
-## Frontier Squid Log Files
+### Frontier Squid Log Files
 
 Log file contents are explained in the [upstream documentation Log file
 contents
