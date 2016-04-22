@@ -1,6 +1,6 @@
 
-**YUM Repositories**
-====================
+YUM Repositories
+================
 
 About This Document
 -------------------
