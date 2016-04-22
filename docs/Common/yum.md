@@ -67,6 +67,7 @@ repositories must be enabled.
 -   Install the EPEL repository, if not already present. **Note:** This
     enables EPEL by default. Choose the right version to match your OS
     version.
+
     ```
     # EPEL 5 (For RHEL 5, CentOS 5, and SL 5)
     $ curl -O https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm
@@ -76,6 +77,7 @@ repositories must be enabled.
     # EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
     $ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
     ```
+    
     **WARNING**: if you have your own mirror or configuration of the EPEL
     repository, you **MUST** verify that the OSG repository has a better yum
     priority than EPEL ([details](Common/InstallBestPractices#YumPriorities)).
