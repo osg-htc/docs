@@ -14,13 +14,10 @@ subTitle: All you want to know about the OSG
 
 # The left menu bar
 menu:
-    sections:
-        guides:
-            name: Administrator's Guides
-            items:
-                ce:
-                    text: HTCondor-CE
-                    relativeUrl: Computing_Element/htcondor_ce.html
+    items:
+         ce:
+             text: HTCondor-CE
+             relativeUrl: Computing_Element/htcondor_ce.html
 
 # Various macros used in documentation pages:
 supportedOs: Red Hat Enterprise Linux 5, 6, 7, and variants (see [details...](Common/SupportedOperatingSystems))
