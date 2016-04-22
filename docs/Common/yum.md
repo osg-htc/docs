@@ -101,52 +101,53 @@ system to work.
 3.  Ensure that `/etc/yum.conf` has the following line in the
     `[main]` section (particularly when using ROCKS), thereby enabling
     Yum plugins, including the priorities one:
+
      ```
      plugins=1
      ```
+     
     **NOTE**: If you do not have a
     required key you can force the installation using
     `--nogpgcheck=; e.g., =yum install --nogpgcheck yum-priorities`.
 
 ### Install OSG Repositories
 
-\<ol\> \<li\> \<p\>If you are upgrading from OSG 3.1 (or 3.2) to OSG 3.2
-(or 3.3), remove the old OSG repository definition files and clean the
-Yum cache:\</p\>\\ \<pre class=“rootscreen”\><span
-class="twiki-macro UCL_PROMPT_ROOT"></span> yum clean all <span
-class="twiki-macro UCL_PROMPT_ROOT"></span> rpm -e osg-release\</pre\>\\
-\<p\>This step ensures that local changes to `*.repo` files will not
-block the installation of the new OSG repositories. After this step,
-`*.repo` files that have been changed will exist in `/etc/yum.repos.d/`
-with the `*.rpmsave` extension. After installing the new OSG
-repositories (the next step) you may want to apply any changes made in
-the `*.rpmsave` files to the new `*.repo` files.\</p\> \</li\> \<li\>
-\<p\>Install the OSG repositories using one of the following methods
-depending on your EL version:\</p\>\\ \<ol\> \<li\> \<p\>For EL versions
-greater than EL5, install the files directly from
-`repo.grid.iu`:\</p\>\\ \<pre class=“rootscreen”\><span
-class="twiki-macro UCL_PROMPT_ROOT"></span> rpm -Uvh
-%RED%URL%ENDCOLOR%\</pre\>\\ \<p\>Where `%RED%URL%ENDCOLOR%` is one of
-the following:\</p\>\\ <span class="twiki-macro TABLE"
-SORT="off"></span>
+1. If you are upgrading from OSG 3.1 (or 3.2) to OSG 3.2
+   (or 3.3), remove the old OSG repository definition files and clean the
+   Yum cache:
 
-  Series                      EL6 URL (for RHEL 6, CentOS 6, or SL 6)                             EL7 URL (for RHEL 7, CentOS 7, or SL 7)
-  ------------- ------------------------------------------------------------------- -------------------------------------------------------------------
-  **OSG 3.2**    `https://repo.grid.iu.edu/osg/3.2/osg-3.2-el6-release-latest.rpm`                                  N/A
-  **OSG 3.3**    `https://repo.grid.iu.edu/osg/3.3/osg-3.3-el6-release-latest.rpm`   `https://repo.grid.iu.edu/osg/3.3/osg-3.3-el7-release-latest.rpm`
+   ```
+   # yum clean all
+   # rpm -e osg-release
+   ```
+   
+   This step ensures that local changes to `*.repo` files will not
+   block the installation of the new OSG repositories. After this step,
+   `*.repo` files that have been changed will exist in `/etc/yum.repos.d/`
+   with the `*.rpmsave` extension. After installing the new OSG
+   repositories (the next step) you may want to apply any changes made in
+   the `*.rpmsave` files to the new `*.repo` files.
+2. Install the OSG repositories using one of the following methods
+depending on your EL version:
+    1. For EL versions greater than EL5, install the files directly from
+`repo.grid.iu`:
 
-\</li\> \<li\> \<p\>For EL5, download the repo file and install it using
-the following:\</p\> \<pre class=“rootscreen”\><span
-class="twiki-macro UCL_PROMPT_ROOT"></span> curl -O
-<https://repo.grid.iu.edu/osg/3.2/osg-3.2-el5-release-latest.rpm> <span
-class="twiki-macro UCL_PROMPT_ROOT"></span> rpm -Uvh
-osg-3.2-el5-release-latest.rpm\</pre\> \</li\> \</ol\> \</li\> \</ol\>
+        ```
+        rpm -Uvh URL
+        ```
+        
+        Where `%RED%URL%ENDCOLOR%` is one of the following:
+    
+        | Series      | EL6 URL (for RHEL 6, CentOS 6, or SL 6) | EL7 URL (for RHEL 7, CentOS 7, or SL 7) |
+        |----------   | ----------------------------------------| --------------------------------------- | 
+        | **OSG 3.2** | `https://repo.grid.iu.edu/osg/3.2/osg-3.2-el6-release-latest.rpm`  | N/A
+        | **OSG 3.3** | `https://repo.grid.iu.edu/osg/3.3/osg-3.3-el6-release-latest.rpm`  | `https://repo.grid.iu.edu/osg/3.3/osg-3.3-el7-release-latest.rpm` |
 
-<span class="twiki-macro IF"
-then="For more details, please see our [[Documentation.Release3.YumRepositories][yum repository documentation]]."
-else="&quot;&quot;">\$ TOPIC != 'YumRepositories'</span>
-
-<span class="twiki-macro ENDSECTION">OSGRepoBrief</span>
+2. For EL5, download the repo file and install it using the following:
+    ```
+    # curl -O https://repo.grid.iu.edu/osg/3.2/osg-3.2-el5-release-latest.rpm
+    # rpm -Uvh osg-3.2-el5-release-latest.rpm
+    ```
 
 Priorities
 ==========
@@ -180,5 +181,5 @@ strange dependency resolution issues.
 References
 ==========
 
--   [Basic use of Yum](YumRpmBasics)
--   [Best practices in using Yum](InstallBestPractices)
+-   [Basic use of Yum](Common/YumRpmBasics)
+-   [Best practices in using Yum](Common/InstallBestPractices)
