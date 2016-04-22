@@ -50,7 +50,7 @@ tricks and tips on using yum.
 To use the packages in a repository without adding special options to
 the yum command the repository must be enabled.
 
-+ Install the Yum Repositories required by OSG
+### Install the Yum Repositories required by OSG
 
 The OSG RPMs currently support {{ supportedOs }}
 
@@ -87,20 +87,24 @@ important to prefer the OSG ones or else OSG software installs may fail.
 Installing the Yum priorities package enables the repository priority
 system to work.
 
-1.  \<p\>Choose the correct package name based on your operating
-    system’s major version:\</p\>
+1.  Choose the correct package name based on your operating
+    system’s major version:
     -   For EL 5 systems, use `yum-priorities`
     -   For EL 6 and EL 7 systems, use `yum-plugin-priorities`
 
-2.  \<p\>Install the Yum priorities package:\</p\>\\ \<pre
-    class=“rootscreen”\><span
-    class="twiki-macro UCL_PROMPT_ROOT"></span> yum install
-    *PACKAGE*\</pre\>\\ \<p\>Replace *`PACKAGE`* with the package name
-    from the previous step.\</p\>
-3.  \<p\>Ensure that `/etc/yum.conf` has the following line in the
+2.  Install the Yum priorities package:
+    ```
+    yum install *PACKAGE*
+    ```
+    Replace *`PACKAGE`* with the package name
+    from the previous step.
+3.  Ensure that `/etc/yum.conf` has the following line in the
     `[main]` section (particularly when using ROCKS), thereby enabling
-    Yum plugins, including the priorities one:\</p\>\\ \<pre
-    class=“file”\>plugins=1\</pre\> **NOTE**: If you do not have a
+    Yum plugins, including the priorities one:
+     ```
+     plugins=1
+     ```
+    **NOTE**: If you do not have a
     required key you can force the installation using
     `--nogpgcheck=; e.g., =yum install --nogpgcheck yum-priorities`.
 
