@@ -118,17 +118,17 @@ However, if you are updating a host that used a Globus GRAM job gateway
 
 More information about the Globus GRAM CE can be found [here](Computing_Element/InstallComputeElement).
 
-BatchSystem
------------
+Batch System
+------------
 
 ### Configuring the batch system
 
 Enable your batch system by editing the `enabled` field in the
-`/etc/osg/config.d/20-<span style="background-color: #FFCCFF;">YOUR BATCH SYSTEM</span>.ini`
-file:\\
+`/etc/osg/config.d/20-YOUR-BATCH-SYSTEM.ini`
+file:
 
 ```
-enabled = <span style="background-color: #FFCCFF;">True</span>
+enabled = True
 ```
 
 #### Batch systems other than HTCondor
@@ -147,7 +147,7 @@ document) on the **CE host**. In this setup, HTCondor-CE writes to the
 local spool directory, the NFS server exports the it, and the NFS server
 shares the it with all of the worker nodes.
 
-<span class="twiki-macro NOTE"></span> If you choose not to host the NFS
+**NOTE**: If you choose not to host the NFS
 server on your CE, you will need to turn off root squash so that the
 HTCondor-CE daemons can write to the spool directory.
 
@@ -160,7 +160,7 @@ the `SPOOL` directory to `/home/condor`:
 SPOOL=/home/condor
 ```
 
-<span class="twiki-macro NOTE"></span> The shared spool directory must
+**NOTE**: The shared spool directory must
 be readable and writeable by the `condor` user for HTCondor CE to
 function correctly.
 
@@ -175,18 +175,14 @@ blah_disable_wn_proxy_renewal=yes
 blah_delegate_renewed_proxies=no
 ```
 
-<span class="twiki-macro NOTE"></span> There should be no whitespace
-around the `=`.
-
-ConfiguringAuthorization
-------------------------
+**NOTE**: This configuration file uses bash syntax rules; there should be no whitespace around the `=`.
 
 ### Configuring authorization
 
 There are two methods to manage authorization for incoming jobs,
-edg-mkgridmap and GUMS. edg-mkgridmap is easy to set up and maintain,
+`edg-mkgridmap` and GUMS. `edg-mkgridmap` is easy to set up and maintain,
 and GUMS has more features and capabilities. We recommend using
-edg-mkgridmap unless you have specific needs that require the use of
+`edg-mkgridmap` unless you have specific needs that require the use of
 GUMS. Some examples of these specific requirements are:
 
 -   You want to map users based on rules
@@ -195,48 +191,59 @@ GUMS. Some examples of these specific requirements are:
 
 #### Authorization with edg-mkgridmap
 
-To configure your CE to use edg-mkgridmap:
+To configure your CE to use `edg-mkgridmap`:
 
-1.  \<p\>Follow the configuration instructions in [the edg-mkgridmap
+1.  Follow the configuration instructions in [the edg-mkgridmap
     document](Edg-mkgridmap) to define the VOs that your site
-    accepts\</p\>
-2.  \<p\>Set some critical gridmap attributes by editing the
+    accepts
+2.  Set some critical gridmap attributes by editing the
     `/etc/osg/config.d/10-misc.ini` file on the HTCondor CE
-    host:\</p\>\\ \<pre class="file"\>
+    host:
 
-authorization\_method = gridmap \</pre\>
+    ```
+    authorization_method = gridmap
+    ```
 
-1.  \<p\>Enable edg-mkgridmap and disable GUMS in the `/etc/lcmaps.db`
-    file\</p\>\\ \<p\>In the `authorize_only` section, comment out the
+1.  Enable edg-mkgridmap and disable GUMS in the `/etc/lcmaps.db`
+    file.
+
+    In the `authorize_only` section, comment out the
     `gumsclient` line and uncomment the `gridmapfile` line. The result
-    should be as follows:\</p\>\\ \<pre class="file"\>
+    should be as follows:
+    
+    ```
+    authorize_only:
+    # gumsclient -> good | bad
+    gridmapfile -> good | bad
+    ```
 
-authorize\_only: \# gumsclient -\> good | bad gridmapfile -\> good | bad
-\</pre\>
+2.  Specify the location of your grid mapfile in
+    `/etc/condor-ce/config.d/01-common-auth.conf`:
 
-1.  \<p\>Specify the location of your grid mapfile in
-    `/etc/condor-ce/config.d/01-common-auth.conf`:\</p\>\\ \<pre
-    class="file"\>GRIDMAP = /etc/grid-security/grid-mapfile\</pre\>\\
-    \<p\>**Note:** The standard location for the grid mapfile is shown
+    ```
+    GRIDMAP = /etc/grid-security/grid-mapfile
+    ```
+    **Note:** The standard location for the grid mapfile is shown
     above. Use that location unless you have specific reasons to put the
-    file somewhere else.\</p\>
+    file somewhere else.
 
 #### Authorization with GUMS
 
-1.  \<p\>Follow the instructions in [the GUMS installation and
-    configuration document](InstallGums) to prepare GUMS\</p\>
-2.  \<p\>Set some critical GUMS attributes by editing the
+1.  Follow the instructions in [the GUMS installation and
+    configuration document](InstallGums) to prepare GUMS
+2.  Set some critical GUMS attributes by editing the
     `/etc/osg/config.d/10-misc.ini` file on the HTCondor CE
-    host:\</p\>\\ \<pre class="file"\>
+    host:
 
-authorization\_method = xacml gums\_host = \<span
-style="background-color: \#FFCCFF;"\>YOUR GUMS HOSTNAME\</span\>
-\</pre\>
+    ```
+    authorization_method = xacml
+    gums_host = YOUR GUMS HOSTNAME
+    ```
 
-<span class="twiki-macro NOTE"></span> Once gsi-authz.conf is in place,
+**NOTE** Once `gsi-authz.conf` is in place,
 your local HTCondor will attempt to utilize the LCMAPS callouts if
-enabled in the condor\_mapfile. If this is not the desired behavior, set
-GSI\_AUTHZ\_CONF=/dev/null in the local HTCondor configuration.
+enabled in the `condor_mapfile`. If this is not the desired behavior, set
+`GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
 
 ### Configuring information systems
 
@@ -309,8 +316,6 @@ automatically in an HTCondor CE installation.
     configuration settings:\</p\>\\ \<pre class="rootscreen"\><span
     class="twiki-macro UCL_PROMPT_ROOT"></span> osg-configure -c\</pre\>
 
-\#OptionalConfig
-
 ### Optional configuration
 
 The following configuration steps are optional and will likely not be
@@ -346,15 +351,13 @@ communicating to each other. Generally, you will want to set
 `NETWORK_HOSTNAME` to the hostname of your public interface in
 `/etc/condor-ce/config.d/99-local.conf` directory with the line:
 
-``` {.file}
+```
 NETWORK_HOSTNAME=<span style="background-color: #FFCCFF;">condorce.example.com</span>
 ```
 
 Replacing \<span style="background-color:
 \#FFCCFF;"\>condorce.example.com\</span\> text with your public
 interface’s hostname.
-
-\#LocalUni
 
 #### Limiting or disabling locally jobs running on the CE
 
@@ -442,7 +445,7 @@ The \<span style="background-color:
 expression. <span
 class="twiki-macro TWISTY">%TWISTY\_OPTS\_OUTPUT% showlink="Click to expand example extattr\_table.txt…"</span>
 
-``` {.file}
+```
 cmsprio cms.other.prio
 cms\/Role=production cms.prod
 .* other
@@ -615,6 +618,7 @@ class="twiki-macro ENDSECTION">Users</span>
 Find instructions to request a host certificate
 [here](Documentation/Release3.GetHostServiceCertificates).
 
+<!--  TODO: Fixup
 ### Networking
 
 <span class="twiki-macro STARTSECTION">Firewalls</span> <span
@@ -626,3 +630,4 @@ servers, such as GUMS and the batch system head-node only ephemeral
 outgoing ports are necessary.\</br\>
 
 <span class="twiki-macro ENDSECTION">Firewalls</span>
+-->
