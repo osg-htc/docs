@@ -39,7 +39,7 @@ host) steps to prepare in advance:
 -   Ensure the host has [a supported operating
     system](SupportedOperatingSystems)
 -   Obtain root access to the host
--   Prepare [the required Yum repositories](/Common/yum)
+-   Prepare [the required Yum repositories](../Common/yum.md)
 -   Install [CA certificates](InstallCertAuth)
 
 Installing HTCondor-CE
