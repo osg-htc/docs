@@ -2,7 +2,7 @@ template:
     url: https://github.com/CouscousPHP/Template-Light
 
 # Base URL of the published website
-baseUrl: http://djw8605.github.io/osg-docs
+baseUrl: https://djw8605.github.io/osg-docs
 
 # Used to link to the GitHub project
 github:
