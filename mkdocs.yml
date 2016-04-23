@@ -8,11 +8,12 @@ extra_css:
 
 pages:
 - Home: 'index.md'
-- Admin Guide:
-  - 'HTCondor-CE Install': 'Computing_Element/HTCondor_CE.md'
-  - 'Squid Install': 'Frontier_Squid/squid.md'
+- Install Guides:
   - 'Yum Repos': 'Common/yum.md'
-  - 'GSISSH': 'Other/gsissh.md'
+  - 'HTCondor-CE': 'Computing_Element/HTCondor_CE.md'
+  - 'HTTP Cache': 'Frontier_Squid/squid.md'
+  - 'GSI-enabled SSH': 'Other/gsissh.md'
+  - 'Worker Node': 'Other/wn.md'
 
 markdown_extensions:
   - admonition

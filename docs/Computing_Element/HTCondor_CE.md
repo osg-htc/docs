@@ -314,16 +314,20 @@ automatically in an HTCondor CE installation.
 1.  Make all changes to `.ini` files in the `/etc/osg/config.d`
     directory
 
-    **Note:** This document describes the
-    critical settings for HTCondor CE and related software. You may need
-    to configure other software that is installed on your HTCondor CE
-    host, too.
+    !!! note
+        This document describes the
+        critical settings for HTCondor CE and related software. You may need
+        to configure other software that is installed on your HTCondor CE
+        host, too.
+
 2.  Validate the configuration settings
 
     ```
     osg-configure -v
     ```
+
     Fix any errors (at least) that `osg-configure` reports.
+
 3.  Once the validation command succeeds without errors, apply the
     configuration settings:
 
@@ -386,6 +390,7 @@ starter process for each job), so we will be configuring them in unison.
     START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning < $(LOCAL_JOB_LIMIT)
     START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
     ```
+
     (updating `LOCAL_JOB_LIMIT` as appropriate.)
 
 -   **To only allow a specific user** to start locally run jobs, add the
@@ -468,12 +473,14 @@ CE. To run the View,
       ```
       yum install htcondor-ce-view
       ```
+
 2.  Next, uncomment the `DAEMON_LIST` configuration located at
     `/etc/condor-ce/config.d/05-ce-view.conf`:
 
       ```
       DAEMON_LIST = $(DAEMON_LIST), CEVIEW, GANGLIAD
-      ```
+]]]]      ```
+
 3.  Restart the CE service.
 
       ```
@@ -606,7 +613,7 @@ The following users are needed by HTCondor-CE at all sites:
 
 | **Certificate**   | **User that owns certificate**  | **Path to certificate**                                                     |
 | ----------------- | ------------------------------- | --------------------------------------------------------------------------- |
-| Host certificate  | `root`                          | `/etc/grid-security/hostcert.pem` \<br\> `/etc/grid-security/hostkey.pem`   |
+| Host certificate  | `root`                          | `/etc/grid-security/hostcert.pem` <br\>  `/etc/grid-security/hostkey.pem`   |
 
 Find instructions to request a host certificate [here](GetHostServiceCertificates).
 
