@@ -10,5 +10,9 @@ language: python
 before_script:
 - pip install mkdocs
 script:
-- mkdocs -v gh-deploy --clean
+- git config user.name "Automatic Publish"
+- git config user.email "djw8605@gmail.com"
+- git remote add gh-token "https://${GH_TOKEN}@github.com/djw8605/osg-docs.git";
+- git fetch gh-token && git fetch gh-token gh-pages:gh-pages;
+- mkdocs gh-deploy -v --clean --remote-name gh-token;
 
