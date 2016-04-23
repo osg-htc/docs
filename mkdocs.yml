@@ -12,4 +12,5 @@ pages:
   - 'HTCondor-CE Install': 'Computing_Element/HTCondor_CE.md'
   - 'Squid Install': 'Frontier_Squid/squid.md'
   - 'Yum Repos': 'Common/yum.md'
+  - 'GSISSH': 'Other/gsissh.md'
 
