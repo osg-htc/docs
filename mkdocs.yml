@@ -10,6 +10,7 @@ pages:
 - Home: 'index.md'
 - Install Guides:
   - 'Yum Repos': 'Common/yum.md'
+  - 'CA Certificates': 'Common/ca.md'
   - 'HTCondor-CE': 'Computing_Element/HTCondor_CE.md'
   - 'HTTP Cache': 'Frontier_Squid/squid.md'
   - 'CVMFS': 'Other/cvmfs.md'
