@@ -61,24 +61,24 @@ repositories must be enabled.
 
 ### Install EPEL
 
--   Install the EPEL repository, if not already present. **Note:** This
-    enables EPEL by default. Choose the right version to match your OS
-    version.
+Install the EPEL repository, if not already present. **Note:** This
+enables EPEL by default. Choose the right version to match your OS
+version.
 
-    ```
-    # EPEL 5 (For RHEL 5, CentOS 5, and SL 5)
-    $ curl -O https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm
-    $ rpm -Uvh epel-release-latest-5.noarch.rpm
-    # EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
-    $ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-    # EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
-    $ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-    ```
+```bash
+# EPEL 5 (For RHEL 5, CentOS 5, and SL 5)
+$ curl -O https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm
+$ rpm -Uvh epel-release-latest-5.noarch.rpm
+# EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
+$ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+# EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
+$ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+```
     
-    **WARNING**: if you have your own mirror or configuration of the EPEL
-    repository, you **MUST** verify that the OSG repository has a better yum
-    priority than EPEL ([details](Common/InstallBestPractices#YumPriorities)).
-    Otherwise, you will have strange dependency resolution (*depsolving*) issues.
+**WARNING**: if you have your own mirror or configuration of the EPEL
+repository, you **MUST** verify that the OSG repository has a better yum
+priority than EPEL ([details](Common/InstallBestPractices#YumPriorities)).
+Otherwise, you will have strange dependency resolution (*depsolving*) issues.
 
 ### Install the Yum priorities package
 
