@@ -252,7 +252,7 @@ To enable the `fetch-crl` service to keep the CRLs up to date after reboots:
 To stop `fetch-crl`:
 
 ```
-%RED%# For RHEL 5, CentOS 5, and SL5
+%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
 %UCL_PROMPT_ROOT% /sbin/service fetch-crl3-boot stop
 %UCL_PROMPT_ROOT% /sbin/service fetch-crl3-cron stop
 %RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
@@ -285,17 +285,17 @@ How to ensure you are get up-to-date CA/CRL information
 1.  If you installed CAs using rpm packages (`osg-ca-certs`,`igtf-ca-certs`) (Options 1, 4), you will need to install the software described in [the CA update document](ca_updater.md), and enable `osg-ca-certs-updater` service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.
 2.  If you use Option 2 (i.e. `osg-update-certs`) then make sure that you have the corresponding service enabled.
 
-```
-%UCL_PROMPT_ROOT% /sbin/service osg-update-certs-cron  status
-Periodic osg-update-certs is enabled.
-```
+   ```
+   %UCL_PROMPT_ROOT% /sbin/service osg-update-certs-cron  status
+   Periodic osg-update-certs is enabled.
+   ```
 
-1.  Ensure that fetch-crl cron is enabled\\
+3.  Ensure that fetch-crl cron is enabled\\
 
-```
-%UCL_PROMPT_ROOT% /sbin/service fetch-crl-cron  status
-Periodic fetch-crl is enabled.
-```
+  ```
+  %UCL_PROMPT_ROOT% /sbin/service fetch-crl-cron  status
+  Periodic fetch-crl is enabled.
+  ```
 
 Troubleshooting
 ===============
@@ -319,17 +319,15 @@ The index and change log files contain a summary of all the CA distributed and t
 
 Logs files:
 
-| Package        | File Description             | Location                                        | Comment |
-|:---------------|:-----------------------------|:------------------------------------------------|:--------|
-| osg-ca-scripts | Log file of osg-update-certs | `/var/log/osg-update-certs.log`                 |         |
-| osg-ca-scripts | Stdout of osg-update-certs   | `/var/log/osg-ca-certs-status.system.out`       |         |
-| osg-ca-scripts | Stdout of osg-ca-manage      | `/var/log/osg-ca-manage.system.out`             |         |
-| osg-ca-scripts | Stdout of initial CA setup   | `/var/log/osg-setup-ca-certificates.system.out` |         |
+| Package        | File Description             | Location                                        |
+|:---------------|:-----------------------------|:------------------------------------------------|
+| osg-ca-scripts | Log file of osg-update-certs | `/var/log/osg-update-certs.log`                 |
+| osg-ca-scripts | Stdout of osg-update-certs   | `/var/log/osg-ca-certs-status.system.out`       |
+| osg-ca-scripts | Stdout of osg-ca-manage      | `/var/log/osg-ca-manage.system.out`             |
+| osg-ca-scripts | Stdout of initial CA setup   | `/var/log/osg-setup-ca-certificates.system.out` |
 
 Tests
 -----
-
-### Test the host certificates
 
 To test the host certificate of a server `openssl s_client` can be used. Here is an example with the gatekeeper:
 
