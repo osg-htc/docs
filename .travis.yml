@@ -10,5 +10,5 @@ language: python
 before_script:
 - pip install mkdocs
 script:
-- mkdocs gh-deploy --clean
+- mkdocs -v gh-deploy --clean
 
