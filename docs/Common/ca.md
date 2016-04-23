@@ -260,7 +260,16 @@ To stop `fetch-crl`:
 %UCL_PROMPT_ROOT% /sbin/service fetch-crl-cron stop
 ```
 
-<span class="twiki-macro STARTSECTION">OSGBriefFetchCrlDisable</span> To disable the fetch-crl service:\<pre class=“rootscreen”\> %RED%\# For RHEL 5, CentOS 5, and SL5 <span class="twiki-macro ENDCOLOR"></span> %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-boot off %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-cron off %RED%\# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7, or OSG 3 *older* than 3.1.15<span class="twiki-macro ENDCOLOR"></span> %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-boot off %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-cron off \</pre\> <span class="twiki-macro ENDSECTION">OSGBriefFetchCrlDisable</span>
+To disable the fetch-crl service:
+
+```
+%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-boot off
+%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-cron off
+%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-boot off
+%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-cron off
+```
 
 Updating CAs/CRLs
 =================
@@ -270,27 +279,23 @@ Why maintain up-to-date Trusted CA /CRL information
 
 The Trusted Certificate Authority (CA) certificates, and their associated Certificate Revocation Lists (CRLs), are used for every transaction on a resource that establishes an authenticated network connection based on end user’s certificate. In order for the authentication to succeed, the user’s certificate must have been issued by one of the CAs in the Trusted CA directory, and the user’s certificate must not be listed in the CRL for that CA. CRLs can be thought of as a black list of certificates. CAs are the trust authorities, similar to DMV that issues you the driving license. (Another way of thinking CRLs is the do-not-fly lists at the airports. if your certificate shows up in CRLs, you are not allowed access.) This is handled at the certificate validation stage even before the authorization check (which will provide the mapping of an authenticated user to a local account UID/GID). So you do not need to do worry about it; the grid software will do this for you. However, you should make sure that your site has the most up-to-date list of Trusted CAs. There are multiple trust authorities in OSG (think of it as a different DMV for each state). If you do not have an up-to-date list of CAs it is possible that some of your users transactions at your site will start to fail. A current CRL list for each CA is also necessary, since without one transactions for users of that CA will fail.
 
-<span class="twiki-macro STARTSECTION">OSGBriefCaCrlUpdates</span>
-
 How to ensure you are get up-to-date CA/CRL information
 -------------------------------------------------------
 
-1.  \<p\>If you installed CAs using rpm packages (osg-ca-certs,igtf-ca-certs) (Options 1, 4), you will need to install the software described in OsgCaCertsUpdater, and enable osg-ca-certs-updater service to keep the CAs automatically updated. If you do not install OsgCaCertsUpdater you will have to regularly run yum update to keep the CAs updated.\</p\>
-2.  If you use Option 2 (i.e. osg-update-certs) then make sure that you have cron enabled\\
+1.  If you installed CAs using rpm packages (`osg-ca-certs`,`igtf-ca-certs`) (Options 1, 4), you will need to install the software described in [the CA update document](ca_updater.md), and enable `osg-ca-certs-updater` service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.
+2.  If you use Option 2 (i.e. `osg-update-certs`) then make sure that you have the corresponding service enabled.
 
-``` screen
+```
 %UCL_PROMPT_ROOT% /sbin/service osg-update-certs-cron  status
 Periodic osg-update-certs is enabled.
 ```
 
 1.  Ensure that fetch-crl cron is enabled\\
 
-``` screen
+```
 %UCL_PROMPT_ROOT% /sbin/service fetch-crl-cron  status
 Periodic fetch-crl is enabled.
 ```
-
-<span class="twiki-macro ENDSECTION">OSGBriefCaCrlUpdates</span>
 
 Troubleshooting
 ===============
@@ -328,7 +333,7 @@ Tests
 
 To test the host certificate of a server `openssl s_client` can be used. Here is an example with the gatekeeper:
 
-``` screen
+```
 %UCL_PROMPT% openssl s_client -showcerts -cert /etc/grid-security/hostcert.pem -key /etc/grid-security/hostkey.pem -CApath /etc/grid-security/certificates/ -debug -connect osg-gk.mwt2.org:2119
 ```
 
@@ -337,7 +342,7 @@ Frequently Asked Questions
 
 ### Location of Certificates?
 
-``` file
+```
  /etc/grid-security/certificates 
 ```
 
@@ -356,7 +361,7 @@ Details of CAs in OSG distribution can be found [here](Documentation.CaDistribut
 
 ### How can I add or remove a particular CA file?
 
-Add and remove of CA files are supported only if you CA files are being installed using osg-update-certs, which is included in the osg-ca-scripts package (option 2), for all other options no support for adding and removing a particular CA file is provided by OSG. The preferred approach to add or remove a CA is to use [osg-ca-manage](OsgCaManage). For adding a new CA `osg-ca-manage add [--dir <local_dir>] --hash <CA_hash>` may be used, while a CA is removed using `osg-ca-manage remove --hash <CA_hash>`.
+Add and remove of CA files are supported only if you CA files are being installed using `osg-update-certs`, which is included in the `osg-ca-scripts` package (option 2), for all other options no support for adding and removing a particular CA file is provided by OSG. The preferred approach to add or remove a CA is to use [osg-ca-manage](OsgCaManage). For adding a new CA `osg-ca-manage add [--dir <local_dir>] --hash <CA_hash>` may be used, while a CA is removed using `osg-ca-manage remove --hash <CA_hash>`.
 
 ### Are there any log files or configuration files associated with CA certificate package?
 
@@ -380,13 +385,13 @@ For Option 4: run `yum update osg-ca-certs`
 
 For Option 2: You do not need to do a manual update, make sure `osg-update-certs-cron` is enabled using
 
-``` screen
+```
 %UCL_PROMPT_ROOT% /sbin/service osg-update-certs-cron  status
 ```
 
 If the service is disabled, enable it using
 
-``` screen
+```
 %UCL_PROMPT_ROOT% /sbin/service osg-update-certs-cron  start
 ```
 
