@@ -152,7 +152,7 @@ uid=13160(fnalgrid) gid=9767(fnalgrid) groups=65000(glexec00)
 
 If your `lcmaps.db` is set up to not use a host certificate as described in GlexecPilotCert, you should also set
 
-``
+```
 export X509_USER_PROXY=/tmp/x509up_uNNN
 ```
 
