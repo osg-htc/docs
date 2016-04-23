@@ -1,6 +1,3 @@
----
-current_menu: ce
----
 Installing and Maintaining HTCondor-CE
 ======================================
 
@@ -71,7 +68,11 @@ single command.
    |SGE                       |`osg-ce-sge`                        |
    |SLURM                     |`osg-ce-slurm`                      |
 
-3. Install the CE software: <pre class="rootscreen"> $yum install *PACKAGE(S)*</pre>
+3. Install the CE software:
+
+   ```
+   yum install *PACKAGE(S)*
+   ```
 
 To ease the transition from GRAM
 to HTCondor-CEs, the convenience RPMs install both types of job gateway
@@ -80,9 +81,10 @@ gateway is disabled, which is the correct configuration for most
 HTCondor-CE-based sites (but see the gateway configuration section below
 for more options).
 
-**NOTE**: HTCondor CE version 1.6 or later
-is required to send site resource information to OSG for matching jobs
-to resources.
+!!! note
+    HTCondor CE version 1.6 or later
+    is required to send site resource information to OSG for matching jobs
+    to resources.
 
 Configuring HTCondor-CE
 -----------------------
@@ -109,6 +111,7 @@ However, if you are updating a host that used a Globus GRAM job gateway
     gram_gateway_enabled = False
     htcondor_gateway_enabled = True
     ```
+
     To enable both HTCondor and GRAM CEs:
     
     ```
@@ -211,18 +214,18 @@ To configure your CE to use `edg-mkgridmap`:
     `gumsclient` line and uncomment the `gridmapfile` line. The result
     should be as follows:
     
-    ```
-    authorize_only:
-    # gumsclient -> good | bad
-    gridmapfile -> good | bad
-    ```
+     ```
+     authorize_only:
+     # gumsclient -> good | bad
+     gridmapfile -> good | bad
+     ```
 
 2.  Specify the location of your grid mapfile in
     `/etc/condor-ce/config.d/01-common-auth.conf`:
 
-    ```
-    GRIDMAP = /etc/grid-security/grid-mapfile
-    ```
+     ```
+     GRIDMAP = /etc/grid-security/grid-mapfile
+     ```
     **Note:** The standard location for the grid mapfile is shown
     above. Use that location unless you have specific reasons to put the
     file somewhere else.
@@ -240,10 +243,11 @@ To configure your CE to use `edg-mkgridmap`:
     gums_host = YOUR GUMS HOSTNAME
     ```
 
-**NOTE** Once `gsi-authz.conf` is in place,
-your local HTCondor will attempt to utilize the LCMAPS callouts if
-enabled in the `condor_mapfile`. If this is not the desired behavior, set
-`GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
+!!! note
+    Once `gsi-authz.conf` is in place,
+    your local HTCondor will attempt to utilize the LCMAPS callouts if
+    enabled in the `condor_mapfile`. If this is not the desired behavior, set
+    `GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
 
 ### Configuring information systems
 
@@ -461,20 +465,20 @@ CE. To run the View,
 
 1.  Begin by installing the package htcondor-ce-view:
 
-    ```
-    yum install htcondor-ce-view
-    ```
+      ```
+      yum install htcondor-ce-view
+      ```
 2.  Next, uncomment the `DAEMON_LIST` configuration located at
     `/etc/condor-ce/config.d/05-ce-view.conf`:
 
-    ```
-    DAEMON_LIST = $(DAEMON_LIST), CEVIEW, GANGLIAD
-    ```
+      ```
+      DAEMON_LIST = $(DAEMON_LIST), CEVIEW, GANGLIAD
+      ```
 3.  Restart the CE service.
 
-    ```
-    service condor-ce restart
-    ```
+      ```
+      service condor-ce restart
+      ```
 
 By default, the website is served from port 80. This may be configured
 in `/etc/condor-ce/config.d/05-ce-view.conf` as well.
