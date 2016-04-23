@@ -105,17 +105,18 @@ To configure the Frontier Squid service itself:
     documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid),
     in [the Configuration
     section](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Configuration)\\
-    !!! note
-        An important difference between the standard Squid
-        software and the Frontier Squid variant is that Frontier Squid
-        changes are in `/etc/squid/customize.sh` instead of
-        `/etc/squid/squid.conf`.
 2.  Enable, start, and test the service (as described below)
 3.  Enable WLCG monitoring as described in the [upstream documentation
     on enabling
     monitoring](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring)
     and [register the squid in
     OIM](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#OIM).
+
+!!! note
+    An important difference between the standard Squid
+    software and the Frontier Squid variant is that Frontier Squid
+    changes are in `/etc/squid/customize.sh` instead of
+    `/etc/squid/squid.conf`.
 
 ### Configuring the OSG CE
 
@@ -130,8 +131,10 @@ Squid service:
         reasons to change them
 
 2.  Run `osg-configure` to propagate the changes on your CE
-    !!! note
-        You may want to finish other CE configuration tasks before running `osg-configure`. Just be sure to run it once before starting CE services.
+
+!!! note
+    You may want to finish other CE configuration tasks before running
+    `osg-configure`. Just be sure to run it once before starting CE services.
 
 ## Starting and Stopping the Frontier Squid Service
 
