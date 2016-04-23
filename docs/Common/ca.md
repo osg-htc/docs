@@ -1,6 +1,6 @@
 
-Installing Certificate Authorities Certificates and related RPMs <span class="twiki-macro TOC"></span>
-======================================================================================================
+Installing Certificate Authorities Certificates and related RPMs
+================================================================
 
 This document provides you with details of various options to install the Certificate Authority (CA) certificates and have up-to-date certificate revocation list (CRL).
 
@@ -101,7 +101,7 @@ Option 3: Install an RPM that installs no CAs
 Install this with:
 
 ```
-yum install empty-ca-certs –enablerepo=osg-empty
+yum install empty-ca-certs –-enablerepo=osg-empty
 ```
 
 !!! warning
@@ -117,96 +117,150 @@ Install other CAs
 
 In addition to the above CAs, you can install other CAs via RPM. These only work with the RPMs that provide CAs (that is, `osg-ca-certs` and the like, but not `osg-ca-scripts`.) They are in addition to the above RPMs, so do not only install these extra CAs.
 
-<span class="twiki-macro TABLE" sort="off" valign="top"></span> | **Set of CAs** | **Format** | **RPM name** | **Installation command (as root)** | | cilogon-basic & cilogon-openid | OpenSSL-both | cilogon-ca-certs | `yum install cilogon-ca-certs` |
+| **Set of CAs**                 | **Format**   | **RPM name**     | **Installation command (as root)** |
+|--------------------------------|--------------|------------------|------------------------------------|
+| cilogon-basic & cilogon-openid | OpenSSL-both | cilogon-ca-certs | `yum install cilogon-ca-certs`     |
 
 Managing Certificate Revocation Lists
 =====================================
 
 In addition to CA certificates, you normally need to have updated Certificate Revocation Lists (CRLs) which are are lists of certificates that have been revoked for any reason. Software in the OSG Software Stack use these to ensure that you are talking to valid clients or servers. We use a tool named `fetch-crl` that periodically updates the CRLs. Fetch CRL is a utility that updates Certificate Authority (CA) Certificate Revocation Lists (CRLs). These are lists of certificates that were granted by the CA, but have since been revoked. It is good practice to regularly update the CRL list for each CA to ensure that you do not authenticate any certificate that has been revoked.
 
-Unlike the older Pacman-based version, fetch-crl is now installed as two different system services. The fetch-crl-boot service runs only at boot time. The fetch-crl-cron “service” runs fetch-crl every 6 hours (with a random sleep time included) by default. Both services are disabled by default. At the very minimum, the fetch-crl-cron “service” needs to be enabled otherwise services will begin to fail as the existing CRLs expire. In RHEL5 (CentOS 5, SL5) systems there has been a disruptive update in OSG 3.1.15 that changed the name from fetch-crl to fetch-crl3. If you are affected by the update or want to read more please [check here](UpgradeFetchCrl2to3).
+`fetch-crl` is installed as two different system services. The fetch-crl-boot service runs only
+at boot time. The `fetch-crl-cron` service runs `fetch-crl` every 6 hours (with a random sleep
+time included) by default. Both services are disabled by default. At the very minimum, the
+`fetch-crl-cron` service needs to be enabled otherwise services will begin to fail as the
+existing CRLs expire.
 
 Install `fetch-crl`
 -------------------
 
-<span class="twiki-macro STARTSECTION">FetchCRLInstall</span> Normally fetch-crl is installed when you install the rest of the software and you do not need to specifically install it. If you do wish to install it, you can install it as: <span class="twiki-macro STARTSECTION">FetchCRLInstallShort</span> \<pre class=“rootscreen”\> %RED%\# For RHEL 5, CentOS 5, and SL5 <span class="twiki-macro ENDCOLOR"></span> <span class="twiki-macro UCL_PROMPT_ROOT"></span> yum install fetch-crl3 %RED%\# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7, or OSG 3 *older* than 3.1.15<span class="twiki-macro ENDCOLOR"></span> <span class="twiki-macro UCL_PROMPT_ROOT"></span> yum install fetch-crl \</pre\> <span class="twiki-macro ENDSECTION">FetchCRLInstallShort</span>
+Normally `fetch-crl` is installed when you install the rest of the software and you do not need
+to specifically install it. If you do wish to install it, you can install it as:
 
-<span class="twiki-macro NOTE"></span> The fetch-crl scripts for RHEL 5 (CentOS 5, and SL5) have changed name in OSG 3.1.15. Both the package and the scripts are called `fetch-crl3...` instead of `fetch-crl...` <span class="twiki-macro ENDSECTION">FetchCRLInstall</span>
+```
+%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
+%UCL_PROMPT_ROOT% yum install fetch-crl3
+%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
+%UCL_PROMPT_ROOT% yum install fetch-crl
+```
 
-<span class="twiki-macro STARTSECTION">FetchCRLConfig</span> —%SHIFT%++ Enable and Start `fetch-crl` To enable fetch-crl (fetch Certificate Revocation Lists) services by default on the node:
+### Enable and Start `fetch-crl`
 
-``` rootscreen
+To enable fetch-crl (fetch Certificate Revocation Lists) services by default on the node:
+
+```
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
 %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-boot on
 %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-cron on
-%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7, or OSG 3 _older_ than 3.1.15%ENDCOLOR% 
+%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR% 
 %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-boot on
 %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-cron on
 ```
 
 To start fetch-crl:
 
-``` rootscreen
+```
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
 %UCL_PROMPT_ROOT% /sbin/service fetch-crl3-boot start
 %UCL_PROMPT_ROOT% /sbin/service fetch-crl3-cron start
-%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7, or OSG 3 _older_ than 3.1.15%ENDCOLOR% 
+%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR% 
 %UCL_PROMPT_ROOT% /sbin/service fetch-crl-boot start
 %UCL_PROMPT_ROOT% /sbin/service fetch-crl-cron start
 ```
 
-**NOTE**: while it is necessary to start `fetch-crl-cron` in order to have it active, `fetch-crl-boot` is started automatically at boot time if enabled. The start command will run `fetch-crl-boot` at the moment when it is invoked and it may take some time to complete.
+!!! note
+    While it is necessary to start `fetch-crl-cron` in order to have it active, `fetch-crl-boot` is started automatically at boot time if enabled. The start command will run `fetch-crl-boot` at the moment when it is invoked and it may take some time to complete.
 
-—%SHIFT%++ Configure `fetch-crl` To modify the times that fetch-crl-cron runs, edit `/etc/cron.d/fetch-crl` (or `/etc/cron.d/fetch-crl3` depending on the version you have).
+### Configure `fetch-crl`
 
-<span class="twiki-macro STARTSECTION">FetchCRLConfigProxy</span> By default, `fetch-crl` connects directly to the remote CA; this is inefficient and potentially harmful if done simultaneously by many nodes (e.g. all the worker nodes of a big cluster). We recommend you provide a HTTP proxy (such as squid) the worker nodes can connect to. [Here](InstallFrontierSquid) are instructions to install a squid proxy.
+To modify the times that fetch-crl-cron runs, edit `/etc/cron.d/fetch-crl` (or `/etc/cron.d/fetch-crl3` depending on the version you have).
+
+By default, `fetch-crl` connects directly to the remote CA; this is
+inefficient and potentially harmful if done simultaneously by many nodes
+(e.g. all the worker nodes of a big cluster). We recommend you provide a
+HTTP proxy (such as `squid`) the worker nodes can utilize; OSG provides
+[packaging of squid](../Frontier_Squid/squid.md).
 
 To configure fetch-crl to use an HTTP proxy server:
 
--   If using `fetch-crl` version 2 (the `fetch-crl` package on RHEL5 only), then create the file `/etc/sysconfig/fetch-crl` and add the following line: \<pre class=“file”\>
+-   If using `fetch-crl` version 2 (the `fetch-crl` package on RHEL5 only), then create the file `/etc/sysconfig/fetch-crl` and add the following line:
 
-export http\_proxy=%RED%[http://your.squid.fqdn:port%ENDCOLOR](http://your.squid.fqdn:port%ENDCOLOR)% \</pre\> Adjust the URL appropriately for your proxy server.
+      ```
+      export http_proxy=%RED%http://your.squid.fqdn:port%ENDCOLOR%
+      ```
 
--   If using `fetch-crl` version 3 on RHEL5 via the `fetch-crl3` package or on RHEL6/RHEL7 via the `fetch-crl` package, then create or edit the file `/etc/fetch-crl3.conf` (RHEL5) or `/etc/fetch-crl.conf` (RHEL6/RHEL7) and add the following line: \<pre class=“file”\>
+    Adjust the URL appropriately for your proxy server.
 
-http\_proxy=%RED%[http://your.squid.fqdn:port%ENDCOLOR](http://your.squid.fqdn:port%ENDCOLOR)% \</pre\> Again, adjust the URL appropriately for your proxy server.
+-   If using `fetch-crl` version 3 on RHEL5 via the `fetch-crl3` package
+    or on RHEL6/RHEL7 via the `fetch-crl` package, then create or edit the
+    file `/etc/fetch-crl3.conf` (RHEL5) or `/etc/fetch-crl.conf`
+    (RHEL6/RHEL7) and add the following line:
 
-Note that the **`nosymlinks`** option in the configuration files refers to ignoring links within the certificates directory (e.g. two different names for the same file). It is perfectly fine if the path of the CA certificates directory itself (`infodir`) is a link to a directory.
+      ```
+      http_proxy=%RED%http://your.squid.fqdn:port%ENDCOLOR%
+      ```
+
+    Again, adjust the URL appropriately for your proxy server.
+
+Note that the **`nosymlinks`** option in the configuration files refers
+to ignoring links within the certificates directory (e.g. two different
+names for the same file). It is perfectly fine if the path of the CA
+certificates directory itself (`infodir`) is a link to a directory.
 
 Any modifications to the configuration file will be preserved during an RPM update.
 
-<span class="twiki-macro IF" then="For more details, please see our [[Documentation.Release3.InstallCertAuth][fetch-crl documentation]]." else="&quot;&quot;">$ TOPIC != 'InstallCertAuth'</span> <span class="twiki-macro ENDSECTION">FetchCRLConfigProxy</span>
+Current versions of `fetch-crl` and `fetch-crl3` produce more output.
+It is possible to send the output to syslog instead of the default email system. To do so:
 
-Current versions of fetch-crl and fetch-crl3 produce more output. It is possible to send the output to syslog instead of the default email system. To do so:
+1.  Change the configuration file to enable syslog:
 
-1.  Change the configuration file to enable syslog: \<pre class=“file”\>
-
-logmode = syslog syslogfacility = daemon\</pre\>
+      ```
+      logmode = syslog
+      syslogfacility = daemon\</pre\>
+      ```
 
 1.  Make sure the file `/var/log/daemon` exists, e.g. touching the file
 2.  Change `/etc/logrotate.d` files to rotate it
 
-<span class="twiki-macro ENDSECTION">FetchCRLConfig</span>
+### Start/Stop fetch-crl: A quick guide
 
-<span class="twiki-macro STARTSECTION">OSGBriefCaCerts</span> —%SHIFT%+ Install the CA Certificates: A quick guide
+You need to fetch the latest CA Certificate Revocation Lists (CRLs) and you should enable the fetch-crl service to keep the CRLs up to date:
 
-You must perform one of the following `yum` commands below to select this host’s CA certificates.
+```
+%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /usr/sbin/fetch-crl3 # This fetches the CRLs
+%UCL_PROMPT_ROOT% /sbin/service fetch-crl3-boot start
+%UCL_PROMPT_ROOT% /sbin/service fetch-crl3-cron start
+%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7%ENDCOLOR%
+%UCL_PROMPT_ROOT% /usr/sbin/fetch-crl # This fetches the CRLs
+%UCL_PROMPT_ROOT% /sbin/service fetch-crl-boot start
+%UCL_PROMPT_ROOT% /sbin/service fetch-crl-cron start
+```
 
-| **Set of CAs** | **CA certs name** | \* Installation command (as root)\* | | OSG | osg-ca-certs | `yum install osg-ca-certs` %RED%**Recommended**<span class="twiki-macro ENDCOLOR"></span> | | IGTF | igtf-ca-certs | `yum install igtf-ca-certs` | | None\* | empty-ca-certs | `yum install empty-ca-certs --enablerepo=osg-empty` | | Any\*\* | Any | `yum install osg-ca-scripts` |
+To enable the `fetch-crl` service to keep the CRLs up to date after reboots:
 
-\* The `empty-ca-certs` RPM indicates you will be manually installing the CA certificates on the node. \<br/\> \*\* The `osg-ca-scripts` RPM provides a cron script that automatically downloads CA updates, and requires further configuration. \<br/\>
+```
+%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-boot on
+%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-cron on
+%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-boot on
+%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-cron on
+```
 
-<span class="twiki-macro NOTE"></span> If you use options 1 or 2, then you will need to run “yum update” in order to get the latest version of CAs when they are released. With option 4 a cron service is provided which will always download the updated CA package for you. <span class="twiki-macro NOTE"></span> If you use services like Apache’s httpd you must restart them after each update of the CA certificates, otherwise they will continue to use the old version of the CA certificates. <span class="twiki-macro IF" then="For more details and options, please see our [[Documentation.Release3.InstallCertAuth][CA certificates documentation]]." else="&quot;&quot;">$ TOPIC != 'InstallCertAuth'</span> <span class="twiki-macro ENDSECTION">OSGBriefCaCerts</span>
+To stop `fetch-crl`:
 
-<span class="twiki-macro STARTSECTION">OSGBriefFetchCrlStartStop</span> —%SHIFT%+ Start/Stop fetch-crl: A quick guide
+```
+%RED%# For RHEL 5, CentOS 5, and SL5
+%UCL_PROMPT_ROOT% /sbin/service fetch-crl3-boot stop
+%UCL_PROMPT_ROOT% /sbin/service fetch-crl3-cron stop
+%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/service fetch-crl-boot stop
+%UCL_PROMPT_ROOT% /sbin/service fetch-crl-cron stop
+```
 
-<span class="twiki-macro STARTSECTION">OSGBriefFetchCrlStart</span> You need to fetch the latest CA Certificate Revocation Lists (CRLs) and you should enable the fetch-crl service to keep the CRLs up to date:\<pre class=“rootscreen”\> %RED%\# For RHEL 5, CentOS 5, and SL5 <span class="twiki-macro ENDCOLOR"></span> <span class="twiki-macro UCL_PROMPT_ROOT"></span> /usr/sbin/fetch-crl3 \# This fetches the CRLs <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/service fetch-crl3-boot start <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/service fetch-crl3-cron start %RED%\# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7, or OSG 3 *older* than 3.1.15<span class="twiki-macro ENDCOLOR"></span> <span class="twiki-macro UCL_PROMPT_ROOT"></span> /usr/sbin/fetch-crl \# This fetches the CRLs <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/service fetch-crl-boot start <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/service fetch-crl-cron start \</pre\> <span class="twiki-macro IF" then="For more details and options, please see our [[Documentation.Release3.InstallCertAuth#Managing_Certificate_Revocation][CRL documentation]]." else="&quot;&quot;">$ TOPIC != 'InstallCertAuth'</span> <span class="twiki-macro ENDSECTION">OSGBriefFetchCrlStart</span>
-
-<span class="twiki-macro STARTSECTION">OSGBriefFetchCrlEnable</span> To enable the fetch-crl service to keep the CRLs up to date after reboots:\<pre class=“rootscreen”\> %RED%\# For RHEL 5, CentOS 5, and SL5 <span class="twiki-macro ENDCOLOR"></span> <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/chkconfig fetch-crl3-boot on <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/chkconfig fetch-crl3-cron on %RED%\# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7, or OSG 3 *older* than 3.1.15<span class="twiki-macro ENDCOLOR"></span> <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/chkconfig fetch-crl-boot on <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/chkconfig fetch-crl-cron on \</pre\> <span class="twiki-macro ENDSECTION">OSGBriefFetchCrlEnable</span>
-
-<span class="twiki-macro STARTSECTION">OSGBriefFetchCrlStop</span> To stop fetch-crl:\<pre class=“rootscreen”\> %RED%\# For RHEL 5, CentOS 5, and SL5 <span class="twiki-macro ENDCOLOR"></span> <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/service fetch-crl3-boot stop <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/service fetch-crl3-cron stop %RED%\# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7, or OSG 3 *older* than 3.1.15<span class="twiki-macro ENDCOLOR"></span> <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/service fetch-crl-boot stop <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/service fetch-crl-cron stop \</pre\> <span class="twiki-macro IF" then="For more details and options, please see our [[Documentation.Release3.InstallCertAuth#Managing_Certificate_Revocation][CRL documentation]]." else="&quot;&quot;">$ TOPIC != 'InstallCertAuth'</span> <span class="twiki-macro ENDSECTION">OSGBriefFetchCrlStop</span> <span class="twiki-macro ENDSECTION">OSGBriefFetchCrlStartStop</span>
-
-<span class="twiki-macro STARTSECTION">OSGBriefFetchCrlDisable</span> To disable the fetch-crl service:\<pre class=“rootscreen”\> %RED%\# For RHEL 5, CentOS 5, and SL5 <span class="twiki-macro ENDCOLOR"></span> <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/chkconfig fetch-crl3-boot off <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/chkconfig fetch-crl3-cron off %RED%\# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7, or OSG 3 *older* than 3.1.15<span class="twiki-macro ENDCOLOR"></span> <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/chkconfig fetch-crl-boot off <span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/chkconfig fetch-crl-cron off \</pre\> <span class="twiki-macro ENDSECTION">OSGBriefFetchCrlDisable</span>
+<span class="twiki-macro STARTSECTION">OSGBriefFetchCrlDisable</span> To disable the fetch-crl service:\<pre class=“rootscreen”\> %RED%\# For RHEL 5, CentOS 5, and SL5 <span class="twiki-macro ENDCOLOR"></span> %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-boot off %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-cron off %RED%\# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7, or OSG 3 *older* than 3.1.15<span class="twiki-macro ENDCOLOR"></span> %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-boot off %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-cron off \</pre\> <span class="twiki-macro ENDSECTION">OSGBriefFetchCrlDisable</span>
 
 Updating CAs/CRLs
 =================
