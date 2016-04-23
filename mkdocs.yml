@@ -1,0 +1,14 @@
+site_name: OSG Documentation
+site_url: https://djw8605.github.io/osg-docs-mkdocs/
+repo_url: https://github.com/djw8605/osg-docs-mkdocs/
+
+extra_css:
+  - css/extra.css
+
+pages:
+- Home: 'index.md'
+- Admin Guide:
+  - 'HTCondor-CE Install': 'Computing_Element/HTCondor_CE.md'
+  - 'Squid Install': 'Frontier_Squid/squid.md'
+  - 'Yum Repos': 'Common/yum.md'
+
