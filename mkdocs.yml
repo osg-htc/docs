@@ -14,6 +14,7 @@ pages:
   - 'HTTP Cache': 'Frontier_Squid/squid.md'
   - 'GSI-enabled SSH': 'Other/gsissh.md'
   - 'Worker Node': 'Other/wn.md'
+  - 'Worker node glexec': 'Other/glexec.md'
 
 markdown_extensions:
   - admonition
