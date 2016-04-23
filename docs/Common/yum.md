@@ -65,7 +65,7 @@ Install the EPEL repository, if not already present. **Note:** This
 enables EPEL by default. Choose the right version to match your OS
 version.
 
-```
+```bash
 # EPEL 5 (For RHEL 5, CentOS 5, and SL 5)
 $ curl -O https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm
 $ rpm -Uvh epel-release-latest-5.noarch.rpm
