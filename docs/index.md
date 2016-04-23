@@ -14,4 +14,10 @@ Our most common software products include:
   between the grid and your batch system.
 * [HTTP Proxy](Frontier_Squid/squid.md): Caches the most commonly-used files at your
   site to preserve bandwidth (a custom packaging of the venerable `squid2` software).
+* [CVMFS](Other/cvmfs.md) The CernVM File System (CVMFS) is a global-scale, read-only,
+  hierarchical filesystem.  CVMFS volumes distribute the majority of the scientific
+  software used on OSG in addition to the OSG worker node client.
+* [Worker node client](Other/wn.md) and [glexec](Other/glexec.md): An RPM-based install
+  of the worker node software; this includes the `glexec` binary (not provided by the
+  CVMFS install) which allows pilots to securely isolate payload jobs.
 
