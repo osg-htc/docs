@@ -12,6 +12,7 @@ In a pilot-based infrastructure, users submit their jobs to a centralized site (
 Glexec is a security tool that can be used to resolve this problem. It is meant to be used by VOs that run these pilot-based jobs. It has a number of authentication plugins and can be used both by European grid and by OSG.
 
 The pilot job will “pull” user jobs down from the central queue and invoke glexec which will then
+
 1. authenticate the user job’s proxy,
 2. perform an authorization callout (to GUMS in the case of OSG, or possibly a gridmapfile) similar to that done by the gatekeeper,
 3. and then run the user job under the local account assigned by the authorization service for that user.
@@ -21,6 +22,7 @@ In effect, glexec functions much the same as a compute element gatekeeper, excep
 Many worker node clusters use shared file systems like NFS for much of their software and user home accounts. Since glexec is an suid program, it must be installed on every single worker node individually. Most shared file systems do not handle this correctly so it cannot and must not be NFS-exported.
 
 For more information regarding pilot-based systems and glexec:
+
 1. [glideinWMS - The glidein based WMS](http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.html)
 2. [Addressing the pilot security problem with gLExec (pdf)](http://iopscience.iop.org/1742-6596/119/5/052029/pdf/jpconf8_119_052029.pdf)
 
