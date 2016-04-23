@@ -138,9 +138,11 @@ To start the services:
 
 You should also enable the appropriate services so that they are automatically started when your system is powered on:
 
--   To enable OpenSSH by default on the node: \<pre class=“rootscreen”\>
+-   To enable OpenSSH by default on the node:
 
-<span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/chkconfig gsisshd on \</pre\>
+    ```
+    chkconfig gsisshd on
+    ```
 
 Stopping and Disabling Services
 -------------------------------
@@ -149,15 +151,17 @@ To stop the services:
 
 1.  To stop OpenSSH you can use: \<pre class=“rootscreen”\>
 
-    ``` screen
+    ```
     service gsisshd stop
     ```
 
 In addition, you can disable services by running the following commands. However, you don't need to do this normally.
 
--   Optionally, to disable OpenSSH: \<pre class=“rootscreen”\>
+-   Optionally, to disable OpenSSH:
 
-<span class="twiki-macro UCL_PROMPT_ROOT"></span> /sbin/chkconfig gsisshd off \</pre\>
+    ```
+    chkconfig gsisshd off
+    ```
 
 Troubleshooting
 ===============
