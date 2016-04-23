@@ -1,6 +1,6 @@
 site_name: OSG Documentation
-site_url: https://djw8605.github.io/osg-docs-mkdocs/
-repo_url: https://github.com/djw8605/osg-docs-mkdocs/
+site_url: https://djw8605.github.io/osg-docs/
+repo_url: https://github.com/djw8605/osg-docs/
 
 extra_css:
   - css/extra.css
