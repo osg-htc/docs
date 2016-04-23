@@ -54,10 +54,10 @@ As a reminder, here are common service commands (all run as `root`):
 
 | To …                                        | Run the command …                     |
 |:--------------------------------------------|:--------------------------------------|
-| Start a service                             | `service <em>SERVICE-NAME</em> start` |
-| Stop a service                              | `service <em>SERVICE-NAME</em> stop`  |
-| Enable a service to start during boot       | `chkconfig <em>SERVICE-NAME</em> on`  |
-| Disable a service from starting during boot | `chkconfig <em>SERVICE-NAME</em> off` |
+| Start a service                             | `service SERVICE-NAME start` |
+| Stop a service                              | `service SERVICE-NAME stop`  |
+| Enable a service to start during boot       | `chkconfig SERVICE-NAME on`  |
+| Disable a service from starting during boot | `chkconfig SERVICE-NAME off` |
 
 Validing the Worker Node Client
 -------------------------------
