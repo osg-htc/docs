@@ -1,2 +1,4 @@
 couscous.phar
 .couscous/
+src/osg_markdown/*.pyc
+site/

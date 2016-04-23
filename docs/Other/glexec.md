@@ -141,11 +141,11 @@ The following steps need to be done after the glexec installation is complete.
 Testing the Installation of glexec
 ----------------------------------
 
-Now, ***as a non-privileged user (not root)*** , do the following (where __yourvo__ is your VO, and __NNN__ is your uid as reported by `/usr/bin/id`):
+Now, ***as a non-privileged user (not root)*** , do the following (where %yourvo% is your VO, and __NNN__ is your uid as reported by `/usr/bin/id`):
 
 ```
 voms-proxy-init -voms yourvo:/yourvo
-export GLEXEC_CLIENT_CERT=/tmp/x509up_uNNN
+export GLEXEC_CLIENT_CERT=/tmp/x509up_u%RED%NNN%ENDCOLOR%
 /usr/sbin/glexec /usr/bin/id
 uid=13160(fnalgrid) gid=9767(fnalgrid) groups=65000(glexec00)
 ```
@@ -153,7 +153,7 @@ uid=13160(fnalgrid) gid=9767(fnalgrid) groups=65000(glexec00)
 If your `lcmaps.db` is set up to not use a host certificate as described in GlexecPilotCert, you should also set
 
 ```
-export X509_USER_PROXY=/tmp/x509up_uNNN
+export X509_USER_PROXY=/tmp/x509up_u%NNN%
 ```
 
 (substitute `NNN` for your UID) before running glexec.
