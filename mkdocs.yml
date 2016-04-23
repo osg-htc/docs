@@ -1,6 +1,7 @@
 site_name: OSG Documentation
 site_url: https://djw8605.github.io/osg-docs/
 repo_url: https://github.com/djw8605/osg-docs/
+theme: readthedocs
 
 extra_css:
   - css/extra.css
