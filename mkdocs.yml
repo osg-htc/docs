@@ -12,6 +12,7 @@ pages:
   - 'Yum Repos': 'Common/yum.md'
   - 'HTCondor-CE': 'Computing_Element/HTCondor_CE.md'
   - 'HTTP Cache': 'Frontier_Squid/squid.md'
+  - 'CVMFS': 'Other/cvmfs.md'
   - 'GSI-enabled SSH': 'Other/gsissh.md'
   - 'Worker Node': 'Other/wn.md'
   - 'Worker node glexec': 'Other/glexec.md'
