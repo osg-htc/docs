@@ -1,19 +1,16 @@
-<span class="twiki-macro DOC_STATUS_TABLE"></span>
+
 
 OSG CA Certificates Updater
 ===========================
 
-<span class="twiki-macro TOC"></span>
-
-About this Document This document explains the installation and use of `osg-ca-certs-updater`, a package in the OSG Software 3.x distribution that provides automatic updates of CA certificates.
-=================================================================================================================================================================================================
+This document explains the installation and use of `osg-ca-certs-updater`, a package in the OSG Software 3.x distribution that provides automatic updates of CA certificates.
 
 Requirements
 ============
 
 -   OS must be Red Hat Enterprise Linux 5 or 6 or variants.
--   The OSG repositories must be installed and enabled. See the [Yum Repositories](YumRepositories) page for instructions.
--   One grid-certificates package from the OSG repositories must be installed as described [here](InstallCertAuth#First_Set_up_the_yum_repositorie). Currently, these are: `igtf-ca-certs`, `osg-ca-certs`.
+-   The OSG repositories must be installed and enabled. See the [Yum Repositories](yum.md) page for instructions.
+-   One grid-certificates package from the OSG repositories must be installed as described [here](ca.md#First_Set_up_the_yum_repositorie). Currently, these are: `igtf-ca-certs`, `osg-ca-certs`.
 
 Install instructions
 ====================
