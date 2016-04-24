@@ -45,7 +45,7 @@ Depending on your choice, you select one of two RPMs:
 
 ### How do I keep CAs updated?
 
-Please follow the [update instructions](ca_update.md) to make sure that the CAs are kept updated.
+Please follow the [update instructions](ca_updater.md) to make sure that the CAs are kept updated.
 
 Option 2: Install osg-update-certs
 ----------------------------------

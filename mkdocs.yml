@@ -17,6 +17,12 @@ pages:
   - 'GSI-enabled SSH': 'Other/gsissh.md'
   - 'RPM-based Worker Node': 'Other/wn.md'
   - 'Worker node glexec': 'Other/glexec.md'
+- In-Progress Docs:
+  - 'CA Updater': 'Common/ca_updater.md'
+  - 'Certificate Request Scripts': 'Common/cert_scripts.md'
+  - 'Job Router Recipe': 'Computing_Element/job_router.md'
+  - 'OASIS-based Worker Node': 'Other/wn_oasis.md'
+  - 'GridFTP Server': 'Storage/gridftp.md'
 
 markdown_extensions:
   - admonition
