@@ -1,10 +1,10 @@
 
 env:
   global:
-    - GIT_NAME: "'Markdown autodeploy'"
-    - GIT_EMAIL: djw8605@gmail.com
-    - GH_REF: github.com/djw8605/osg-docs.git
-    - secure: PFZOU1kxZ8dx3HWNDar3XhoFUGKhF92hMRLtDW3MPBD1mwFpsGoSq7Y5XZe/qq8VKdlOpLOKTiLS2Uvdz9th6aprTERDGvQ4G5/ZLiXP1fxpXFKcZWnqhF+QyA6Cxm1gDK0SCwv3E0U26nyBUS8T770pWTw5/zo91B8ozxfHRxWnWHlnWj0prdK7Cmer7rNldxW0QWbwkvkfGtEGfmevt78i1B45Kv+yO55wFAUwxclM1HvDIkcUsMDYTTibe/dH5SuZRJCLQYrWq9eD4eoIQk10AW0ybYgBt1k5VnLgcSjHKxCjpBe9bFZj5bWvdYU+1NOtFFrI1DDN42yZIciFtWKdenmiL+9MYouWAemjJW03Q/OQTXvSt/T4xXX6kssbHrspD2TQ/uiVUa9QJuQbKVtJP2RLAkxIGfs5LdldPwMwj+u2ipuX+A8zLkVSwv2KmV/Oq3hKiYbtjx5Ely/HrFCkm6jgotPZvhNf6IWHEgeDq3uYJwTC4F1NbBy74gCUIS0d0crJxIVwJZQgq6CLqIi3YBsToFEUFjhj65RNejkwuQj9q/iLCluPekEqLZdjxTAA2zNbPZ83gPCaIaiC019D4aqLoK12qhA4ROW4n1trVTGKAmwCAuFuVEzNrBTVo9ZhjQROoTMswvweP9JzpDpgb38wmBagELEhscGjVaM=
+  - GIT_NAME="'Markdown autodeploy'"
+  - GIT_EMAIL="djw8605@gmail.com"
+  - GH_REF="github.com/djw8605/osg-docs.git"
+  - secure: PFZOU1kxZ8dx3HWNDar3XhoFUGKhF92hMRLtDW3MPBD1mwFpsGoSq7Y5XZe/qq8VKdlOpLOKTiLS2Uvdz9th6aprTERDGvQ4G5/ZLiXP1fxpXFKcZWnqhF+QyA6Cxm1gDK0SCwv3E0U26nyBUS8T770pWTw5/zo91B8ozxfHRxWnWHlnWj0prdK7Cmer7rNldxW0QWbwkvkfGtEGfmevt78i1B45Kv+yO55wFAUwxclM1HvDIkcUsMDYTTibe/dH5SuZRJCLQYrWq9eD4eoIQk10AW0ybYgBt1k5VnLgcSjHKxCjpBe9bFZj5bWvdYU+1NOtFFrI1DDN42yZIciFtWKdenmiL+9MYouWAemjJW03Q/OQTXvSt/T4xXX6kssbHrspD2TQ/uiVUa9QJuQbKVtJP2RLAkxIGfs5LdldPwMwj+u2ipuX+A8zLkVSwv2KmV/Oq3hKiYbtjx5Ely/HrFCkm6jgotPZvhNf6IWHEgeDq3uYJwTC4F1NbBy74gCUIS0d0crJxIVwJZQgq6CLqIi3YBsToFEUFjhj65RNejkwuQj9q/iLCluPekEqLZdjxTAA2zNbPZ83gPCaIaiC019D4aqLoK12qhA4ROW4n1trVTGKAmwCAuFuVEzNrBTVo9ZhjQROoTMswvweP9JzpDpgb38wmBagELEhscGjVaM=
 
 language: python
 before_script:
@@ -15,5 +15,5 @@ script:
 - git config user.email "djw8605@gmail.com"
 - git remote add gh-token "https://${GH_TOKEN}@github.com/djw8605/osg-docs.git";
 - git fetch gh-token && git fetch gh-token gh-pages:gh-pages;
-- PYTHONPATH=src/ mkdocs gh-deploy -v --clean --remote-name gh-token;
+- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then PYTHONPATH=src/ mkdocs gh-deploy -v --clean --remote-name gh-token; fi;
 
