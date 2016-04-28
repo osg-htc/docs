@@ -3,7 +3,7 @@
 
     
     <url>
-     <loc>https://djw8605.github.io/osg-docs//</loc>
+     <loc>https://opensciencegrid.github.io/docs/</loc>
      <lastmod>2016-04-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -12,49 +12,49 @@
     
         
     <url>
-     <loc>https://djw8605.github.io/osg-docs//Common/yum/</loc>
+     <loc>https://opensciencegrid.github.io/docs/Common/yum/</loc>
      <lastmod>2016-04-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://djw8605.github.io/osg-docs//Common/ca/</loc>
+     <loc>https://opensciencegrid.github.io/docs/Common/ca/</loc>
      <lastmod>2016-04-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://djw8605.github.io/osg-docs//Computing_Element/HTCondor_CE/</loc>
+     <loc>https://opensciencegrid.github.io/docs/Computing_Element/HTCondor_CE/</loc>
      <lastmod>2016-04-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://djw8605.github.io/osg-docs//Frontier_Squid/squid/</loc>
+     <loc>https://opensciencegrid.github.io/docs/Frontier_Squid/squid/</loc>
      <lastmod>2016-04-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://djw8605.github.io/osg-docs//Other/cvmfs/</loc>
+     <loc>https://opensciencegrid.github.io/docs/Other/cvmfs/</loc>
      <lastmod>2016-04-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://djw8605.github.io/osg-docs//Other/gsissh/</loc>
+     <loc>https://opensciencegrid.github.io/docs/Other/gsissh/</loc>
      <lastmod>2016-04-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://djw8605.github.io/osg-docs//Other/wn/</loc>
+     <loc>https://opensciencegrid.github.io/docs/Other/wn/</loc>
      <lastmod>2016-04-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://djw8605.github.io/osg-docs//Other/glexec/</loc>
+     <loc>https://opensciencegrid.github.io/docs/Other/glexec/</loc>
      <lastmod>2016-04-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -64,31 +64,31 @@
     
         
     <url>
-     <loc>https://djw8605.github.io/osg-docs//Common/ca_updater/</loc>
+     <loc>https://opensciencegrid.github.io/docs/Common/ca_updater/</loc>
      <lastmod>2016-04-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://djw8605.github.io/osg-docs//Common/cert_scripts/</loc>
+     <loc>https://opensciencegrid.github.io/docs/Common/cert_scripts/</loc>
      <lastmod>2016-04-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://djw8605.github.io/osg-docs//Computing_Element/job_router/</loc>
+     <loc>https://opensciencegrid.github.io/docs/Computing_Element/job_router/</loc>
      <lastmod>2016-04-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://djw8605.github.io/osg-docs//Other/wn_oasis/</loc>
+     <loc>https://opensciencegrid.github.io/docs/Other/wn_oasis/</loc>
      <lastmod>2016-04-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://djw8605.github.io/osg-docs//Storage/gridftp/</loc>
+     <loc>https://opensciencegrid.github.io/docs/Storage/gridftp/</loc>
      <lastmod>2016-04-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
