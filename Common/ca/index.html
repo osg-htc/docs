@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>CA Certificates - OSG Documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "CA Certificates";
+    var mkdocs_page_input_path = "Common/ca.md";
+    var mkdocs_page_url = "/Common/ca/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Install Guides</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../yum/">Yum Repos</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">CA Certificates</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#installing-certificate-authorities-certificates-and-related-rpms">Installing Certificate Authorities Certificates and related RPMs</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#install-ca-certificates-options">Install CA certificates: Options</a></li>
+                
+                    <li><a class="toctree-l4" href="#option-1-install-an-rpm-for-a-specific-set-of-ca-certificates">Option 1: Install an RPM for a specific set of CA certificates</a></li>
+                
+                    <li><a class="toctree-l4" href="#option-2-install-osg-update-certs">Option 2: Install osg-update-certs</a></li>
+                
+                    <li><a class="toctree-l4" href="#option-3-install-an-rpm-that-installs-no-cas">Option 3: Install an RPM that installs no CAs</a></li>
+                
+                    <li><a class="toctree-l4" href="#option-4-make-no-choice-let-yum-decide-for-you">Option 4: Make no choice, let yum decide for you</a></li>
+                
+                    <li><a class="toctree-l4" href="#install-other-cas">Install other CAs</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#managing-certificate-revocation-lists">Managing Certificate Revocation Lists</a></li>
+                
+                    <li><a class="toctree-l4" href="#install-fetch-crl">Install fetch-crl</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#updating-cascrls">Updating CAs/CRLs</a></li>
+                
+                    <li><a class="toctree-l4" href="#why-maintain-up-to-date-trusted-ca-crl-information">Why maintain up-to-date Trusted CA /CRL information</a></li>
+                
+                    <li><a class="toctree-l4" href="#how-to-ensure-you-are-get-up-to-date-cacrl-information">How to ensure you are get up-to-date CA/CRL information</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#troubleshooting">Troubleshooting</a></li>
+                
+                    <li><a class="toctree-l4" href="#useful-configuration-and-log-files">Useful configuration and log files</a></li>
+                
+                    <li><a class="toctree-l4" href="#tests">Tests</a></li>
+                
+                    <li><a class="toctree-l4" href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#references">References</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Computing_Element/HTCondor_CE/">HTCondor-CE</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Frontier_Squid/squid/">HTTP Cache</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Other/cvmfs/">CVMFS</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Other/gsissh/">GSI-enabled SSH</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Other/wn/">RPM-based Worker Node</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Other/glexec/">Worker node glexec</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>In-Progress Docs</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../ca_updater/">CA Updater</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../cert_scripts/">Certificate Request Scripts</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Computing_Element/job_router/">Job Router Recipe</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Other/wn_oasis/">OASIS-based Worker Node</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Storage/gridftp/">GridFTP Server</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Install Guides &raquo;</li>
+        
+      
+    
+    <li>CA Certificates</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/djw8605/osg-docs/" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="installing-certificate-authorities-certificates-and-related-rpms">Installing Certificate Authorities Certificates and related RPMs</h1>
+<p>This document provides you with details of various options to install the Certificate Authority (CA) certificates and have up-to-date certificate revocation list (CRL).</p>
+<p>When installing software with RPMs, you need to decide how you want to install the Certificate Authority (CA) certificates. You might ask "why do I care? Can’t you just give them to me?" We can, but you have a few things to consider:</p>
+<ul>
+<li>What set of CA certificates do you want? How much control do you want over the set of CA certificates? (Some sites might not want to install specific CAs for policy or security reasons.)</li>
+<li>How do you want to update them?</li>
+<li>Do you want to centrally manage the CA certificates or install them on each computer at your site?</li>
+</ul>
+<p>You have four options for installing CA certificates:</p>
+<ol>
+<li>Install an RPM for a specific set of CA certificates.</li>
+<li>Install <code>osg-update-certs</code>, a program that lets you install/update a predefined set of CA certificates, then adjust the set by adding or deleting specific CAs.</li>
+<li>Install an RPM that installs <strong>no</strong> CAs. This is useful when you want your RPM installations to succeed (because our RPMs require CA certificates, and this RPM satisfies that dependency) but you want to manage them with your own technique.</li>
+<li>Make no choice, let <code>yum</code> decide for you.</li>
+</ol>
+<p>Additionally this page also provides instruction on installation of a tool (fetch-crl) to ensure your site has up-to-date certificate revocation list (CRL) from the CA.</p>
+<p>Prior to following the instructions on this page, you must enable our <a href="../yum/">yum repositories</a></p>
+<h1 id="install-ca-certificates-options">Install CA certificates: Options</h1>
+<p>Please choose one of the four options to install the CA certificates.</p>
+<h2 id="option-1-install-an-rpm-for-a-specific-set-of-ca-certificates">Option 1: Install an RPM for a specific set of CA certificates</h2>
+<p>If you want to install an RPM for one of our predefined CA certificates, you have two choices to make:</p>
+<h3 id="which-set-of-cas">Which set of CAs?</h3>
+<ol>
+<li>(<em>recommended</em>) The OSG CA certificates. This is similar to the IGTF set, but may have a small number of additions or deletions. (See <a href="../InstallCertAuth#Contents_of_OSG_CA_package">here</a> for details)</li>
+<li>The default <a href="http://www.igtf.net/">IGTF</a> CA certificates.</li>
+</ol>
+<p>Depending on your choice, you select one of two RPMs:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Set of CAs</strong></th>
+<th><strong>Format</strong> --</th>
+<th><strong>RPM name</strong></th>
+<th><strong>Installation command (as root)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSG</td>
+<td>OpenSSL-both</td>
+<td>osg-ca-certs</td>
+<td><code>yum install osg-ca-certs</code></td>
+</tr>
+<tr>
+<td>IGTF</td>
+<td>OpenSSL-both</td>
+<td>igtf-ca-certs</td>
+<td><code>yum install igtf-ca-certs</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-do-i-keep-cas-updated">How do I keep CAs updated?</h3>
+<p>Please follow the <a href="../ca_updater/">update instructions</a> to make sure that the CAs are kept updated.</p>
+<h2 id="option-2-install-osg-update-certs">Option 2: Install osg-update-certs</h2>
+<p>Install this with:</p>
+<pre><code>[root@client ~]$ yum install osg-ca-scripts
+</code></pre>
+
+<p>You have the same choices for CA certificates as above. In order to choose, you will run <code>osg-ca-manage</code>, which will install the CA certificates. Then (if desired) you need to enable periodic updating of the CA certificates.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Set of CAs</strong></th>
+<th><strong>Format</strong></th>
+<th><strong>CA certs name</strong></th>
+<th><em>Installation command (as root)</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSG</td>
+<td>OpenSSL-both</td>
+<td>osg</td>
+<td><code>/usr/sbin/osg-ca-manage setupCA --location root --url osg</code></td>
+</tr>
+<tr>
+<td>IGTF</td>
+<td>OpenSSL-both</td>
+<td>igtf</td>
+<td><code>/usr/sbin/osg-ca-manage setupCA --location root --url igtf</code></td>
+</tr>
+</tbody>
+</table>
+<p>Here is an example:</p>
+<pre><code>[root@client ~]$ /usr/sbin/osg-ca-manage setupCA --location root --url osg 
+Setting up CA Certificates for OSG installation
+CA Certificates will be installed into /etc/grid-security/certificates
+osg-update-certs
+  Log file: /var/log/osg-update-certs.log
+  Updates from: http://software.grid.iu.edu/pacman/cadist/ca-certs-version-new
+
+Will update CA certificates from version unknown to version 1.21NEW.
+Update successful.
+
+Setup completed successfully.
+</code></pre>
+
+<p>Initially the CA certificates will not be updated. You can tell by looking at:</p>
+<pre><code>[root@client ~]$ /sbin/service osg-update-certs-cron  status
+Periodic osg-update-certs is disabled.
+</code></pre>
+
+<p>You can enable the <code>cron</code> job that updates the CA certs with:</p>
+<pre><code>[root@client ~]$ /sbin/service osg-update-certs-cron  start
+Enabling periodic osg-update-certs:                        [  <span style="color:green">OK</span>  ]
+</code></pre>
+
+<p>A complete set of options available though <code>osg-ca-manage</code> command, including your interface to adding and removing CAs, could be found at <a href="../OsgCaManage">osg-ca-manage documentation</a></p>
+<h2 id="option-3-install-an-rpm-that-installs-no-cas">Option 3: Install an RPM that installs no CAs</h2>
+<p>Install this with:</p>
+<pre><code>yum install empty-ca-certs –-enablerepo=osg-empty
+</code></pre>
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you choose this option, you are responsible for installing the CA certificates yourself. You must install them in <code>/etc/grid-security/certificates</code>, or make a symlink from that location to the directory that contains the CA certificates.</p>
+</div>
+<h2 id="option-4-make-no-choice-let-yum-decide-for-you">Option 4: Make no choice, let yum decide for you</h2>
+<p>If you use <code>yum</code> to install software that requires CA certificates but you haven’t made one of these choices, yum will choose a default. Right now, it is Option #1 from above (<em>Install an RPM for a specific set of CA certificates</em>), and the osg-ca-certs RPM is chosen.</p>
+<h2 id="install-other-cas">Install other CAs</h2>
+<p>In addition to the above CAs, you can install other CAs via RPM. These only work with the RPMs that provide CAs (that is, <code>osg-ca-certs</code> and the like, but not <code>osg-ca-scripts</code>.) They are in addition to the above RPMs, so do not only install these extra CAs.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Set of CAs</strong></th>
+<th><strong>Format</strong></th>
+<th><strong>RPM name</strong></th>
+<th><strong>Installation command (as root)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cilogon-basic &amp; cilogon-openid</td>
+<td>OpenSSL-both</td>
+<td>cilogon-ca-certs</td>
+<td><code>yum install cilogon-ca-certs</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="managing-certificate-revocation-lists">Managing Certificate Revocation Lists</h1>
+<p>In addition to CA certificates, you normally need to have updated Certificate Revocation Lists (CRLs) which are are lists of certificates that have been revoked for any reason. Software in the OSG Software Stack use these to ensure that you are talking to valid clients or servers. We use a tool named <code>fetch-crl</code> that periodically updates the CRLs. Fetch CRL is a utility that updates Certificate Authority (CA) Certificate Revocation Lists (CRLs). These are lists of certificates that were granted by the CA, but have since been revoked. It is good practice to regularly update the CRL list for each CA to ensure that you do not authenticate any certificate that has been revoked.</p>
+<p><code>fetch-crl</code> is installed as two different system services. The fetch-crl-boot service runs only
+at boot time. The <code>fetch-crl-cron</code> service runs <code>fetch-crl</code> every 6 hours (with a random sleep
+time included) by default. Both services are disabled by default. At the very minimum, the
+<code>fetch-crl-cron</code> service needs to be enabled otherwise services will begin to fail as the
+existing CRLs expire.</p>
+<h2 id="install-fetch-crl">Install <code>fetch-crl</code></h2>
+<p>Normally <code>fetch-crl</code> is installed when you install the rest of the software and you do not need
+to specifically install it. If you do wish to install it, you can install it as:</p>
+<pre><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
+[root@client ~]$ yum install fetch-crl3
+<span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span>
+[root@client ~]$ yum install fetch-crl
+</code></pre>
+
+<h3 id="enable-and-start-fetch-crl">Enable and Start <code>fetch-crl</code></h3>
+<p>To enable fetch-crl (fetch Certificate Revocation Lists) services by default on the node:</p>
+<pre><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
+[root@client ~]$ /sbin/chkconfig fetch-crl3-boot on
+[root@client ~]$ /sbin/chkconfig fetch-crl3-cron on
+<span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span> 
+[root@client ~]$ /sbin/chkconfig fetch-crl-boot on
+[root@client ~]$ /sbin/chkconfig fetch-crl-cron on
+</code></pre>
+
+<p>To start fetch-crl:</p>
+<pre><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
+[root@client ~]$ /sbin/service fetch-crl3-boot start
+[root@client ~]$ /sbin/service fetch-crl3-cron start
+<span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span> 
+[root@client ~]$ /sbin/service fetch-crl-boot start
+[root@client ~]$ /sbin/service fetch-crl-cron start
+</code></pre>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While it is necessary to start <code>fetch-crl-cron</code> in order to have it active, <code>fetch-crl-boot</code> is started automatically at boot time if enabled. The start command will run <code>fetch-crl-boot</code> at the moment when it is invoked and it may take some time to complete.</p>
+</div>
+<h3 id="configure-fetch-crl">Configure <code>fetch-crl</code></h3>
+<p>To modify the times that fetch-crl-cron runs, edit <code>/etc/cron.d/fetch-crl</code> (or <code>/etc/cron.d/fetch-crl3</code> depending on the version you have).</p>
+<p>By default, <code>fetch-crl</code> connects directly to the remote CA; this is
+inefficient and potentially harmful if done simultaneously by many nodes
+(e.g. all the worker nodes of a big cluster). We recommend you provide a
+HTTP proxy (such as <code>squid</code>) the worker nodes can utilize; OSG provides
+<a href="../../Frontier_Squid/squid/">packaging of squid</a>.</p>
+<p>To configure fetch-crl to use an HTTP proxy server:</p>
+<ul>
+<li>
+<p>If using <code>fetch-crl</code> version 2 (the <code>fetch-crl</code> package on RHEL5 only), then create the file <code>/etc/sysconfig/fetch-crl</code> and add the following line:</p>
+<p><code>export http_proxy=<span style="color:red">http://your.squid.fqdn:port</span></code></p>
+<p>Adjust the URL appropriately for your proxy server.</p>
+</li>
+<li>
+<p>If using <code>fetch-crl</code> version 3 on RHEL5 via the <code>fetch-crl3</code> package
+    or on RHEL6/RHEL7 via the <code>fetch-crl</code> package, then create or edit the
+    file <code>/etc/fetch-crl3.conf</code> (RHEL5) or <code>/etc/fetch-crl.conf</code>
+    (RHEL6/RHEL7) and add the following line:</p>
+<p><code>http_proxy=<span style="color:red">http://your.squid.fqdn:port</span></code></p>
+<p>Again, adjust the URL appropriately for your proxy server.</p>
+</li>
+</ul>
+<p>Note that the <strong><code>nosymlinks</code></strong> option in the configuration files refers
+to ignoring links within the certificates directory (e.g. two different
+names for the same file). It is perfectly fine if the path of the CA
+certificates directory itself (<code>infodir</code>) is a link to a directory.</p>
+<p>Any modifications to the configuration file will be preserved during an RPM update.</p>
+<p>Current versions of <code>fetch-crl</code> and <code>fetch-crl3</code> produce more output.
+It is possible to send the output to syslog instead of the default email system. To do so:</p>
+<ol>
+<li>
+<p>Change the configuration file to enable syslog:</p>
+<p><code>logmode = syslog
+  syslogfacility = daemon\&lt;/pre\&gt;</code></p>
+</li>
+<li>
+<p>Make sure the file <code>/var/log/daemon</code> exists, e.g. touching the file</p>
+</li>
+<li>Change <code>/etc/logrotate.d</code> files to rotate it</li>
+</ol>
+<h3 id="startstop-fetch-crl-a-quick-guide">Start/Stop fetch-crl: A quick guide</h3>
+<p>You need to fetch the latest CA Certificate Revocation Lists (CRLs) and you should enable the fetch-crl service to keep the CRLs up to date:</p>
+<pre><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
+[root@client ~]$ /usr/sbin/fetch-crl3 # This fetches the CRLs
+[root@client ~]$ /sbin/service fetch-crl3-boot start
+[root@client ~]$ /sbin/service fetch-crl3-cron start
+<span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7</span>
+[root@client ~]$ /usr/sbin/fetch-crl # This fetches the CRLs
+[root@client ~]$ /sbin/service fetch-crl-boot start
+[root@client ~]$ /sbin/service fetch-crl-cron start
+</code></pre>
+
+<p>To enable the <code>fetch-crl</code> service to keep the CRLs up to date after reboots:</p>
+<pre><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
+[root@client ~]$ /sbin/chkconfig fetch-crl3-boot on
+[root@client ~]$ /sbin/chkconfig fetch-crl3-cron on
+<span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span>
+[root@client ~]$ /sbin/chkconfig fetch-crl-boot on
+[root@client ~]$ /sbin/chkconfig fetch-crl-cron on
+</code></pre>
+
+<p>To stop <code>fetch-crl</code>:</p>
+<pre><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
+[root@client ~]$ /sbin/service fetch-crl3-boot stop
+[root@client ~]$ /sbin/service fetch-crl3-cron stop
+<span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span>
+[root@client ~]$ /sbin/service fetch-crl-boot stop
+[root@client ~]$ /sbin/service fetch-crl-cron stop
+</code></pre>
+
+<p>To disable the fetch-crl service:</p>
+<pre><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
+[root@client ~]$ /sbin/chkconfig fetch-crl3-boot off
+[root@client ~]$ /sbin/chkconfig fetch-crl3-cron off
+<span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span>
+[root@client ~]$ /sbin/chkconfig fetch-crl-boot off
+[root@client ~]$ /sbin/chkconfig fetch-crl-cron off
+</code></pre>
+
+<h1 id="updating-cascrls">Updating CAs/CRLs</h1>
+<h2 id="why-maintain-up-to-date-trusted-ca-crl-information">Why maintain up-to-date Trusted CA /CRL information</h2>
+<p>The Trusted Certificate Authority (CA) certificates, and their associated Certificate Revocation Lists (CRLs), are used for every transaction on a resource that establishes an authenticated network connection based on end user’s certificate. In order for the authentication to succeed, the user’s certificate must have been issued by one of the CAs in the Trusted CA directory, and the user’s certificate must not be listed in the CRL for that CA. CRLs can be thought of as a black list of certificates. CAs are the trust authorities, similar to DMV that issues you the driving license. (Another way of thinking CRLs is the do-not-fly lists at the airports. if your certificate shows up in CRLs, you are not allowed access.) This is handled at the certificate validation stage even before the authorization check (which will provide the mapping of an authenticated user to a local account UID/GID). So you do not need to do worry about it; the grid software will do this for you. However, you should make sure that your site has the most up-to-date list of Trusted CAs. There are multiple trust authorities in OSG (think of it as a different DMV for each state). If you do not have an up-to-date list of CAs it is possible that some of your users transactions at your site will start to fail. A current CRL list for each CA is also necessary, since without one transactions for users of that CA will fail.</p>
+<h2 id="how-to-ensure-you-are-get-up-to-date-cacrl-information">How to ensure you are get up-to-date CA/CRL information</h2>
+<ol>
+<li>If you installed CAs using rpm packages (<code>osg-ca-certs</code>,<code>igtf-ca-certs</code>) (Options 1, 4), you will need to install the software described in <a href="../ca_updater/">the CA update document</a>, and enable <code>osg-ca-certs-updater</code> service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.</li>
+<li>If you use Option 2 (i.e. <code>osg-update-certs</code>) then make sure that you have the corresponding service enabled.</li>
+</ol>
+<p><code>[root@client ~]$ /sbin/service osg-update-certs-cron  status
+   Periodic osg-update-certs is enabled.</code></p>
+<ol>
+<li>Ensure that fetch-crl cron is enabled\</li>
+</ol>
+<p><code>[root@client ~]$ /sbin/service fetch-crl-cron  status
+  Periodic fetch-crl is enabled.</code></p>
+<h1 id="troubleshooting">Troubleshooting</h1>
+<h2 id="useful-configuration-and-log-files">Useful configuration and log files</h2>
+<p>Configuration files:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Package</th>
+<th align="left">File Description</th>
+<th align="left">Location</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">All CA Packages</td>
+<td align="left">CA File Location</td>
+<td align="left"><code>/etc/grid-security/certificates</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">All CA Packages</td>
+<td align="left">Index files</td>
+<td align="left"><code>/etc/grid-security/certificates/INDEX.html</code> or <code>/etc/grid-security/certificates/INDEX.txt</code></td>
+<td align="left">Latest version also available at <a href="http://software.grid.iu.edu/pacman/cadist/">http://software.grid.iu.edu/pacman/cadist/</a></td>
+</tr>
+<tr>
+<td align="left">All CA Packages</td>
+<td align="left">Change Log</td>
+<td align="left"><code>/etc/grid-security/certificates/CHANGES</code></td>
+<td align="left">Latest version also available at <a href="http://software.grid.iu.edu/pacman/cadist/CHANGES">http://software.grid.iu.edu/pacman/cadist/CHANGES</a></td>
+</tr>
+<tr>
+<td align="left">osg-ca-certs or igtf-ca-certs</td>
+<td align="left">contain only CA files</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">osg-ca-scripts</td>
+<td align="left">Configuration File for osg-update-certs</td>
+<td align="left"><code>/etc/osg/osg-update-certs.conf</code></td>
+<td align="left">This file may be edited by hand, though it is recommended to use osg-ca-manage to set configuration parameters.</td>
+</tr>
+<tr>
+<td align="left">fetch-crl-2.x</td>
+<td align="left">Configuration file</td>
+<td align="left"><code>/etc/fetch-crl.conf</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">fetch-crl-3.x</td>
+<td align="left">Configuration file</td>
+<td align="left"><code>/etc/fetch-crl3.conf</code></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>The index and change log files contain a summary of all the CA distributed and their version.</p>
+<p>Logs files:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Package</th>
+<th align="left">File Description</th>
+<th align="left">Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">osg-ca-scripts</td>
+<td align="left">Log file of osg-update-certs</td>
+<td align="left"><code>/var/log/osg-update-certs.log</code></td>
+</tr>
+<tr>
+<td align="left">osg-ca-scripts</td>
+<td align="left">Stdout of osg-update-certs</td>
+<td align="left"><code>/var/log/osg-ca-certs-status.system.out</code></td>
+</tr>
+<tr>
+<td align="left">osg-ca-scripts</td>
+<td align="left">Stdout of osg-ca-manage</td>
+<td align="left"><code>/var/log/osg-ca-manage.system.out</code></td>
+</tr>
+<tr>
+<td align="left">osg-ca-scripts</td>
+<td align="left">Stdout of initial CA setup</td>
+<td align="left"><code>/var/log/osg-setup-ca-certificates.system.out</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="tests">Tests</h2>
+<p>To test the host certificate of a server <code>openssl s_client</code> can be used. Here is an example with the gatekeeper:</p>
+<pre><code><span style="color:red">UCL_PROMPT</span> openssl s_client -showcerts -cert /etc/grid-security/hostcert.pem -key /etc/grid-security/hostkey.pem -CApath /etc/grid-security/certificates/ -debug -connect osg-gk.mwt2.org:2119
+</code></pre>
+
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<h3 id="location-of-certificates">Location of Certificates?</h3>
+<pre><code> /etc/grid-security/certificates 
+</code></pre>
+
+<h3 id="what-is-the-version-of-osg-ca-package-i-have-installed-and-what-are-its-contents">What is the version of OSG CA package I have installed and what are its contents?</h3>
+<p>The version of the CA package ca be found at <code>/etc/grid-security/certificates/INDEX.html</code> or <code>/etc/grid-security/certificates/INDEX.txt</code>. The changes file can be found at <code>/etc/grid-security/certificates/CHANGES</code>.</p>
+<h3 id="contents-of-osg-ca-package">Contents of OSG CA package?</h3>
+<p>The OSG CA Distribution contains:</p>
+<ul>
+<li><a href="http://dist.eugridpma.info/distribution/igtf/current/">IGTF Distribution of Authority Root Certificates</a> (CAs accredited by the <a href="http://igtf.net/">International Grid Trust Federation</a>)</li>
+<li><a href="http://tg-ca.purdue.teragrid.org:8080/ejbca/">Purdue TeraGrid CA</a></li>
+</ul>
+<p>Details of CAs in OSG distribution can be found <a href="../Documentation.CaDistribution#Contents">here</a>. For additional details what is in the current release, see the <a href="http://software.grid.iu.edu/pacman/cadist/">distribution site</a> and <a href="http://software.grid.iu.edu/pacman/cadist/CHANGES">change log</a>.</p>
+<h3 id="how-can-i-add-or-remove-a-particular-ca-file">How can I add or remove a particular CA file?</h3>
+<p>Add and remove of CA files are supported only if you CA files are being installed using <code>osg-update-certs</code>, which is included in the <code>osg-ca-scripts</code> package (option 2), for all other options no support for adding and removing a particular CA file is provided by OSG. The preferred approach to add or remove a CA is to use <a href="../OsgCaManage">osg-ca-manage</a>. For adding a new CA <code>osg-ca-manage add [--dir &lt;local_dir&gt;] --hash &lt;CA_hash&gt;</code> may be used, while a CA is removed using <code>osg-ca-manage remove --hash &lt;CA_hash&gt;</code>.</p>
+<h3 id="are-there-any-log-files-or-configuration-files-associated-with-ca-certificate-package">Are there any log files or configuration files associated with CA certificate package?</h3>
+<p>If CA files are installed using <code>osg-ca-certs</code> or <code>igtf-ca-certs</code> rpms (i.e. options 1, 4) no log or configuration files are present.</p>
+<p>Log and configuration files are however present for <code>osg-ca-scripts</code> rpm package (option 2).</p>
+<p>Config files: <code>/etc/osg/osg-update-certs.conf</code> Log files: <code>/var/log/osg-update-certs.log</code>, <code>/var/log/osg-ca-certs-status.system.out</code>, <code>/var/log/osg-ca-manage.system.out</code>, <code>/var/log/osg-setup-ca-certificates.system.out</code></p>
+<h3 id="are-ca-packages-automatically-updated">Are CA packages automatically updated?</h3>
+<p>If CA files are installed using <code>osg-ca-certs</code> or <code>igtf-ca-certs</code> rpms (i.e. options 1, 4), you will need to install the software described in OsgCaCertsUpdater, and enable osg-ca-certs-updater service to keep the CAs automatically updated.</p>
+<p>If CA files are being installed using <code>osg-ca-scripts</code> rpm package (option 2), CA files are kept up-to-date as long as <code>osg-update-certs-cron</code> service the package provides has been started.</p>
+<h3 id="how-do-i-manually-update-my-ca-package">How do I manually update my CA package?</h3>
+<p>For Option 1: run one of the following <code>yum update osg-ca-certs</code> or <code>yum update igtf-ca-certs</code> depending on the rpm package you installed.</p>
+<p>For Option 4: run <code>yum update osg-ca-certs</code></p>
+<p>For Option 2: You do not need to do a manual update, make sure <code>osg-update-certs-cron</code> is enabled using</p>
+<pre><code>[root@client ~]$ /sbin/service osg-update-certs-cron  status
+</code></pre>
+
+<p>If the service is disabled, enable it using</p>
+<pre><code>[root@client ~]$ /sbin/service osg-update-certs-cron  start
+</code></pre>
+
+<p>If for some extraordinary reason you need to manually update the CA you could run <code>osg-ca-manage [--force] refreshCA</code>.</p>
+<h3 id="where-are-the-configuration-files-for-fetch-crl">Where are the configuration files for fetch-crl?</h3>
+<p><code>/etc/fetch-crl.conf</code> or <code>/etc/fetch-crl3.conf</code> for fetch-crl 2.x or 3.x respectively</p>
+<h1 id="references">References</h1>
+<p>Some guides on x509 certificates:</p>
+<ul>
+<li>Useful commands: <a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html</a></li>
+<li>Install GSI authentication on a server: <a href="http://security.ncsa.illinois.edu/research/wssec/gsihttps/">http://security.ncsa.illinois.edu/research/wssec/gsihttps/</a></li>
+<li>Certificates how-to: <a href="http://www.nordugrid.org/documents/certificate_howto.html">http://www.nordugrid.org/documents/certificate_howto.html</a></li>
+</ul>
+<p>Some examples about verifying the certificates:</p>
+<ul>
+<li><a href="http://gagravarr.org/writing/openssl-certs/others.shtml">http://gagravarr.org/writing/openssl-certs/others.shtml</a></li>
+<li><a href="http://www.cyberciti.biz/faq/test-ssl-certificates-diagnosis-ssl-certificate/">http://www.cyberciti.biz/faq/test-ssl-certificates-diagnosis-ssl-certificate/</a></li>
+<li><a href="http://www.cyberciti.biz/tips/debugging-ssl-communications-from-unix-shell-prompt.html">http://www.cyberciti.biz/tips/debugging-ssl-communications-from-unix-shell-prompt.html</a></li>
+</ul>
+<p>Related software:</p>
+<ul>
+<li>Description, manual and examples of OsgCaManage</li>
+<li>OsgCaCertsUpdater</li>
+<li><a href="../UpgradeFetchCrl2to3">Upgrading Fetch-Crl 2 to Fetch-Crl 3 on EL5</a></li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../Computing_Element/HTCondor_CE/" class="btn btn-neutral float-right" title="HTCondor-CE">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../yum/" class="btn btn-neutral" title="Yum Repos"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/djw8605/osg-docs/" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../yum/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../Computing_Element/HTCondor_CE/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
