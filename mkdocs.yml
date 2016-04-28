@@ -1,6 +1,6 @@
 site_name: OSG Documentation
-site_url: https://djw8605.github.io/osg-docs/
-repo_url: https://github.com/djw8605/osg-docs/
+site_url: https://opensciencegrid.github.io/docs
+repo_url: https://github.com/opensciencegrid/docs
 theme: readthedocs
 
 extra_css:
