@@ -233,7 +233,7 @@
                 <h1 id="configuring-a-site-to-use-the-worker-node-client-software-from-oasis">Configuring a Site to Use the Worker Node Client Software From OASIS</h1>
 <p><span class="twiki-macro TOC"></span></p>
 <h2 id="about-this-guide">About This Guide</h2>
-<p>The <em>OSG Worker Node Client</em> is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use. See the <a href="#ReferenceSection">reference section</a> below for contents of the Worker Node Client.</p>
+<p>The <em>OSG Worker Node Client</em> is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use. See the <a href="#reference">reference section</a> below for contents of the Worker Node Client.</p>
 <p>It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:</p>
 <ul>
 <li>Use the Worker Node Client software from OASIS (this guide) - useful when <a href="../NavTechOASIS">OASIS</a> is already mounted on your worker nodes</li>
@@ -249,7 +249,10 @@
 <p>Also note that, once configured to use OASIS, each use of Worker Node Client software will cause that software and its associated files to be downloaded from a CVMFS server or your local cache thereof. This may result in extra network activity, especially if Worker Node Client tools are used heavily.</p>
 <h2 id="configuring-your-site-to-use-the-worker-node-client-from-oasis">Configuring Your Site to Use the Worker Node Client From OASIS</h2>
 <p>Below are the one-time steps that you must perform to configure your site to use the Worker Node Client software from OASIS.</p>
-<p>\<ol\> \<li\>\<p\>On every worker node, <a href="InstallCvmfs">install and configure OASIS</a>\</p\>\</li\> \<li\> \<p\>Determine the OASIS path to the Worker Node Client software for your worker nodes:\</p\> <span class="twiki-macro TABLE" sort="off"></span></p>
+<ol>
+<li>On every worker node, <a href="../InstallCvmfs">install and configure OASIS</a></li>
+<li>Determine the OASIS path to the Worker Node Client software for your worker nodes: <span class="twiki-macro TABLE" sort="off"></span></li>
+</ol>
 <table>
 <thead>
 <tr>
@@ -268,7 +271,15 @@
 </tr>
 </tbody>
 </table>
-<p>\</li\> \<li\> \<p\>On the CE, in the <code>/etc/osg/config.d/10-storage.ini</code> file, set the <code>grid_dir</code> configuration setting to the path from the previous step\</p\> \<p\>For more information, see the <a href="EnvironmentVariables">OSG environment variables reference page</a> and the <a href="IniConfigurationOptions#Storage">CE configuration instructions</a>.\</p\> \</li\> \<li\> \<p\>Once you finish making changes to configuration files on your CE, validate, fix, and apply the configuration:\</p\> \<pre class=“rootscreen”\><span class="twiki-macro UCL_PROMPT_ROOT"></span> osg-configure -v <span class="twiki-macro UCL_PROMPT_ROOT"></span> osg-configure -c\&lt;/pre> \&lt;/li> \&lt;/ol></p>
+<ol>
+<li>On the CE, in the <code>/etc/osg/config.d/10-storage.ini</code> file, set the <code>grid_dir</code> configuration setting to the path from the previous step</li>
+</ol>
+<p>For more information, see the <a href="../EnvironmentVariables">OSG environment variables reference page</a> and the <a href="../IniConfigurationOptions#Storage">CE configuration instructions</a>.
+4. Once you finish making changes to configuration files on your CE, validate, fix, and apply the configuration: </p>
+<pre><code>osg-configure -v  
+osg-configure -c
+</code></pre>
+
 <h2 id="validing-the-worker-node-client">Validing the Worker Node Client</h2>
 <p>To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job’s output.</p>
 <ol>
@@ -277,7 +288,9 @@
 </ol>
 <h3 id="manually-using-the-worker-node-client-from-oasis">Manually Using the Worker Node Client From OASIS</h3>
 <p>If you must log onto a worker node and use the Worker Node Client software directly during your login session, use the steps below to set up access to the software:</p>
-<p>\<ol\> \<li\> \<p\>Determine the OASIS path to the Worker Node Client software for your worker nodes:\</p\> <span class="twiki-macro TABLE" sort="off"></span></p>
+<ol>
+<li>Determine the OASIS path to the Worker Node Client software for your worker nodes:</li>
+</ol>
 <table>
 <thead>
 <tr>
@@ -296,13 +309,38 @@
 </tr>
 </tbody>
 </table>
-<p>\</li\> \<li\> \<p\>Set up access to the Worker Node Client software for the duration of your login session:\</p\> \<pre class=“screen”\><span class="twiki-macro UCL_PROMPT"></span> source <em>PATH</em>\&lt;/pre> \&lt;p>where <code>&lt;em&gt;PATH&lt;/em&gt;</code> is from the previous step. \&lt;/li> \&lt;/ol></p>
+<ol>
+<li>Set up access to the Worker Node Client software for the duration of your login session:</li>
+</ol>
+<pre><code>source **PATH**
+</code></pre>
+
+<p>where <code>PATH</code> is from the previous step.</p>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p>Some possible issues that may come up:</p>
-<p>* A missing softlink to the CA certs directory. To check this, run:\ \<pre class=“screen‘\>ls -l /cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.2/current/el5-x86\_64/etc/grid-security/\</pre\>\\ \<p\>and check that <code>certificates</code> is linked to somewhere. The fix is to yum update the oasis-config package to version 4. A known workaround is to run:\</p\>\\ \<pre class=“screen”\>export X509\_CERT\_DIR=/cvmfs/oasis.opensciencegrid.org/mis/certificates\</pre\>\\ \<p\>before any commands.\</p\> \* OpenJDK 7 must be installed from RPMs before using software that needs Java (e.g., <code>srm-ls</code>) from OASIS. There are some instructions <a href="Documentation.Release3.InstallSoftwareWithOpenJDK7">here</a>. If you are running under an EL5 distribution, java programs may produce an error like this:\\ \<pre class=’screen’\>Exception in thread”main" java.lang.NoClassDefFoundError: org/globus/gsi/OpenSSLKey\</pre\> This shouldn‘t happen under EL6 distributions. The (unofficial) workaround is to run the following as root:\\ \<pre class=’screen’\><span class="twiki-macro UCL_PROMPT_ROOT"></span> mkdir /usr/share/java-1.7.0 <span class="twiki-macro UCL_PROMPT_ROOT"></span> mkdir /usr/lib/java-1.7.0\&lt;/pre>\ This problem is also mentioned <a href="../SoftwareTeam.Java6MigrationDetails">here</a>.</p>
+<ul>
+<li>A missing softlink to the CA certs directory. To check this, run:</li>
+</ul>
+<pre><code>ls -l /cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.2/current/el5-x86_64/etc/grid-security
+</code></pre>
+
+<p>and check that <code>certificates</code> is linked to somewhere. The fix is to yum update the oasis-config package to version 4. A known workaround is to run:</p>
+<pre><code>export X509\_CERT\_DIR=/cvmfs/oasis.opensciencegrid.org/mis/certificates
+</code></pre>
+
+<p>before any commands.
+- OpenJDK 7 must be installed from RPMs before using software that needs Java (e.g., <code>srm-ls</code>) from OASIS. There are some instructions <a href="../Documentation.Release3.InstallSoftwareWithOpenJDK7">here</a>. If you are running under an EL5 distribution, java programs may produce an error like this:</p>
+<pre><code>Exception in thread ”main&quot; java.lang.NoClassDefFoundError: org/globus/gsi/OpenSSLKey
+</code></pre>
+
+<p>This shouldn‘t happen under EL6 distributions. The (unofficial) workaround is to run the following as root:</p>
+<pre><code>mkdir /usr/share/java-1.7.0
+/usr/lib/java-1.7.0
+</code></pre>
+
+<p>This problem is also mentioned <a href="../SoftwareTeam.Java6MigrationDetails">here</a>.</p>
 <h2 id="how-to-get-help">How to get Help?</h2>
 <p>To get assistance please use this <a href="../HelpProcedure">Help Procedure</a>.</p>
-<p>#ReferenceSection</p>
 <h2 id="reference">Reference</h2>
 <p>Please see the documentation on using <a href="../Documentation/Release3.YumRpmBasics">yum and RPM</a>, <a href="../Documentation/Release3.InstallBestPractices">the best practices</a> for using yum to install software, and using <a href="../Documentation/Release3.YumRepositories">yum repositories</a>.</p>
               
