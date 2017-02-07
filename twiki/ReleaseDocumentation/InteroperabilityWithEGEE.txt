@@ -1,0 +1,38 @@
+%META:TOPICINFO{author="KyleGross" date="1476285753" format="1.1" version="1.18"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++ Why interoperate with EGEE?
+
+"The OSG Consortium builds and operates the OSG. The Consortium was formed in 2004 to bring resources and researchers from universities and national laboratories together to give scientists from many fields access to shared resources worldwide."  (<a href="http://www.opensciencegrid.org/?pid=1000063">Source</a>)  Interoperation with EGEE will allow scientists access to the OSG shared resources, helping to fulfill one of OSG's goals.
+
+---++ Information services
+OSG installations have the [[GenericInformationProvider][Generic Information Provider]] (GIP) configured automatically.  The GIP provides information to the [[http://grid.pd.infn.it/cemon/field.php][CEMon]] (CEMonitor) service.  The CEMonitor service pushes collected information in [[http://www.cs.wisc.edu/condor/classad/][ClassAd]] format to a central [[Trash/Trash/ResourceSelection.WebHome][Information Gatherer]] (IG) running on designated host (<i>osg-ress-1.fnal.gov</i>). IG advertises these classads to the [[http://www.cs.wisc.edu/condor][Condor Match Maker]] service which also runs on <i>osg-ress-1.fnal.gov</i>.  (For OSG-ITB it is osg-ress-4.fnal.gov).  CEMon also is configured by default to publish GIP data in "RAW" (LDIF) format to the OSG BDII at the GOC.<p>
+
+The production [[http://is.grid.iu.edu/cgi-bin/status.cgi][CEMon/BDII]] page and the ITB [[http://is-itb.grid.iu.edu/cgi-bin/status.cgi][CEMon/BDII]] page display the incoming information provided by the GIP via CEMon and the served BDII data.  <p>
+
+The production EGEE information service checks MyOSG for a list of OSG sites that should be included for interoperability.  The OSG BDII is queried regularly to keep the EGEE information current.  A similar listing for the ITB feeds the EGEE PPS information system. 
+
+---++ Accounting services
+[[Accounting][Gratia]] collects grid accounting information and provides an interface to publish that information.  The [[Interoperability.AccountingAndWLCG][Accounting And WLCG]] topic describes how EGEE receives and utilizes the OSG grid accounting information.
+
+---++ Site availability monitoring
+EGEE runs [[http://www.cern.ch/sam-docs][Service Availability Monitor (SAM)]] tests to determine availability.  Availability is defined in depth at [[http://goc.grid.sinica.edu.tw/gocwiki/SAM_Metrics_calculation][http://goc.grid.sinica.edu.tw/gocwiki/SAM_Metrics_calculation]].
+
+
+---++ More information
+OSG [[CentralInformationServices][Central Information Services]]%BR%
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.BurtHolzman - 23 Oct 2007 %BR%
+%REVIEW% Main.AnthonyTiradani - 12 June 2008 %BR%
+%REVCOM% %BR%
+%REVFLAG% %Y% %BR%
+
+
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%

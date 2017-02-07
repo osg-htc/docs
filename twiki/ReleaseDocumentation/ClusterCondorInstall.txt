@@ -1,0 +1,281 @@
+%META:TOPICINFO{author="KyleGross" date="1476804104" format="1.1" version="1.21"}%
+%META:TOPICPARENT{name="GridColombiaWorkshop2009"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+<!-- Local variables
+   * Set CONDORREL = 7.4.1
+-->
+
+---++ Introduction
+We will use the latest stable release of Condor. As of February 10, 2010, this is %CONDORREL%. If your platform does not support RPM, you can use the TAR file installation described in Trash/Tier3.CondorSharedInstall
+
+This installation uses the Condor RPM distribution. It can be downloaded from the Condor site or installed using a RPM or yum repository.
+The Condor team set up a yum repository that can be used for this installation.
+
+Condor needs to be installed (using the procedure below) on all nodes of the batch queue, the headnode and the worker nodes, and also on the interactive nodes used to submit condor jobs.
+
+Certain operations, like the RPM installation and some system configuration, has to be repeated on each node.
+Some steps like the configuration of _condor_config_ are performed only once, e.g. on the head node =osg-ce=, others like the customization of the local condor configuration file is different for each node.
+
+Sharing at least the directory hosting the configuration files allows to simplify a bit the configuration by making it easy to make cluster-wide configuration changes.
+Anyway this installation is possible also having no shared directories if the customized _condor_config_ file is replicated on all nodes of the queue.
+
+Some useful links:
+   * Condor download: http://www.cs.wisc.edu/condor/downloads-v2/download.pl
+   * Installation manual: http://www.cs.wisc.edu/condor/manual/v7.4/3_2Installation.html
+   * Condor YUM repository: http://www.cs.wisc.edu/condor/yum/condor_install.html
+
+%BR%
+*A note about the directory structure:*
+This Condor installation was structured to facilitate upgrades to Condor with minimal effort.  Condor RPM follows the [[http://www.pathname.com/fhs/][Filesystem Hierarchy Standard]]. For more information on the directory structure check the [[http://www.cs.wisc.edu/condor/yum/condor_install.html][release notes]]. 
+The =/var/lib/condor= directory contains the Condor spool and may be mounted from a different partition as detailed in the section about [[#Mounting_a_separate_partition_fo][isolated spool directory]].
+In addition to the files provided by the RPM there is a shared directory to simplify the configuration (=/nfs/condor/condor-etc=). 
+
+---++ Preparing the yum install
+If you don't have it already, download the YUM repository information provided by the Condor team in =http://www.cs.wisc.edu/condor/yum/repo.d/=, e.g. for RHEL5 (and derived):<pre>
+cd /etc/yum.repos.d
+wget http://www.cs.wisc.edu/condor/yum/repo.d/condor-rhel5.repo
+</pre>
+
+---++ Condor Installation and Configuration
+*On each node* Start with installing Condor from the repository
+<pre>
+yum install condor
+</pre>
+
+---+++ Shared configuration files
+On the server exporting =/nfs/condor/condor-etc= (other nodes cannot write if you choose to export the directory with root squash) edit the following configuration files:
+   * Create the cluster Condor configuration file =/nfs/condor/condor-etc/condor_config.cluster= with the following content:
+      * Copy the following content changing the values to suite your cluster (yourdomain.org, gc1-ce.yourdomain.org, the ones in %RED%red%ENDCOLOR%). You may find some suggestion in the local configuration file =/etc/condor/condor_config.local= provided by the RPM installation:<pre>
+## Condor configuration for OSG cluster
+## For more detial please see
+## http://www.cs.wisc.edu/condor/manual/v7.4/3_3Configuration.html
+LOCAL_CONFIG_FILE = /nfs/condor/condor-etc/condor_config.$(HOSTNAME)
+# The following should be your cluster domain
+UID_DOMAIN = %RED%yourdomain.org%ENDCOLOR%
+# Human readable name for your Condor pool
+COLLECTOR_NAME = "Condor at $(UID_DOMAIN)"
+# A shared file system (NFS), e.g. job dir, is assumed if the name is the same
+FILESYSTEM_DOMAIN = $(UID_DOMAIN)
+ALLOW_WRITE = *.$(UID_DOMAIN)
+CONDOR_ADMIN = root@$(FULL_HOSTNAME)
+# The following should be the full name of the head node
+CONDOR_HOST = %RED%gc1-ce.yourdomain.org%ENDCOLOR%
+# Port range should be opened in the firewall (can be different on different machines)
+# This 9000-9999 is coherent with the iptables configuration in the documentation 
+IN_HIGHPORT = 9999
+IN_LOWPORT = 9000
+# This is to enforce password authentication
+SEC_DAEMON_AUTHENTICATION = required
+SEC_DAEMON_AUTHENTICATION_METHODS = password
+SEC_CLIENT_AUTHENTICATION_METHODS = password,fs,gsi
+SEC_PASSWORD_FILE = /var/lib/condor/condor_credential
+ALLOW_DAEMON = condor_pool@*
+##  Sets how often the condor_negotiator starts a negotiation cycle 
+##  for negotiator and schedd). 
+#  It is defined in seconds and defaults to 60 (1 minute), default is 300. 
+NEGOTIATOR_INTERVAL = 20
+##  Scheduling parameters for the startd
+TRUST_UID_DOMAIN = TRUE
+# start as available and do not suspend, preempt or kill
+START = TRUE
+SUSPEND = FALSE
+PREEMPT = FALSE
+KILL = FALSE
+</pre>
+      * Make sure that you have the following important line in the file <pre>CONDOR_HOST = gc1-ce</pre>
+         * Note: =CONDOR_HOST= can be set with or without the domain name: =gc1-ce= or =gc1-ce.yourdomain.org=
+   *  On the NFS server create the files with the host configuration specific for the nodes using the following content. We will create 3 base configuration files: one for the headnode, one for worker nodes, one for the interactive nodes (user interface). (specific for the headnode) copying the following line:
+      * For the headnode, =/nfs/condor/condor-etc/condor_config.headnode=. If the headnode is also the gatekeeper, it needs to run also the Condor schedd to submit the Grid jobs and if you are using Managed Fork the local universe should be enabled:<pre>
+## OSG host configuration
+## For more info: http://www.cs.wisc.edu/condor/manual/v7.4/3_3Configuration.html
+# List of daemons on the node (headnode requires collector and negotiator, 
+# schedd required to submit jobs, startd to run jobs)
+DAEMON_LIST = MASTER, COLLECTOR, NEGOTIATOR, SCHEDD
+# required to run Managed Fork on the CE
+START_LOCAL_UNIVERSE = TotalLocalJobsRunning < 20 || GridMonitorJob =?= TRUE 
+</pre>
+      * For the worker nodes, =/nfs/condor/condor-etc/condor_config.worker=:<pre>
+## OSG host configuration
+## For more info: http://www.cs.wisc.edu/condor/manual/v7.4/3_3Configuration.html
+# List of daemons on the node (headnode requires collector and negotiator, 
+# schedd required to submit jobs, startd to run jobs)
+DAEMON_LIST = MASTER, STARTD
+</pre>
+      * For the interactive nodes, =/nfs/condor/condor-etc/condor_config.interactive=:<pre>
+## OSG host configuration
+## For more info: http://www.cs.wisc.edu/condor/manual/v7.4/3_3Configuration.html
+# List of daemons on the node (headnode requires collector and negotiator, 
+# schedd required to submit jobs, startd to run jobs)
+DAEMON_LIST = MASTER, SCHEDD
+</pre>
+   * Then, always on the NFS server, for each node create a link pointing to the template, e.g.:<pre>
+cd /nfs/condor/condor-etc/
+ln -s condor_config.headnode condor_config.gc1-ce
+ln -s condor_config.interactive condor_config.gc1-ui1
+ln -s condor_config.worker condor_config.gc1-c001
+ln -s condor_config.worker condor_config.gc1-c002
+ln -s condor_config.worker condor_config.gc1-c003
+</pre> Each node must have its own =condor_config.&lt;hostname>= file. If some nodes require a special configuration you can copy the template (e.g. =condor_config.worker=) and customize it.
+
+---+++ Remaining node configuration
+*On each node* perform these remaining configuration steps.
+   * Edit the file =/etc/condor/condor_config=. This is the default configuration that will be invoked when condor is started. We will direct this file to be followed by specific configurations for cluster purposes. Replace:<pre>
+##  Where is the machine-specific local config file for each host?
+LOCAL_CONFIG_FILE      = $(RELEASE_DIR)/etc/$(HOSTNAME).local
+</pre>With<pre>
+##  Next configuration to be read is for the cluster setup
+LOCAL_CONFIG_FILE       = /nfs/condor/condor-etc/condor_config.cluster
+</pre>
+
+   * Remove the default condor_config.local in the /etc/condor directory to avoid possible confusion.<pre>
+rm /etc/condor/condor_config.local
+</pre>
+   * Set the password that will be used by the Condor system (at the prompt enter the same password for all nodes):<pre>
+condor_store_cred -c add
+</pre>
+   * Enable automatic startup at boot:<pre >
+chkconfig --level 235 condor on
+</pre>
+
+---++ Start and test Condor
+Condor is starting automatically during reboots. You can start it manually typing <pre >
+/etc/init.d/condor start </pre>  (should say ok)
+
+To check the running processes:<pre >
+ps -ef |grep condor
+condor    4404     1  0 06:42 ?        00:00:00 /opt/condor/sbin/condor_master
+condor    4405  4404  0 06:42 ?        00:00:00 condor_collector -f
+condor    4406  4404  1 06:43 ?        00:00:00 condor_negotiator -f
+root      4410  4348  0 06:43 pts/2    00:00:00 grep condor
+</pre>
+
+You can check if Condor is running correctly<pre>
+condor_config_val log   # (should be /var/log/condor/)
+cd /var/log/condor/
+#check master log file
+less MasterLog
+# verify the status of the negotiator
+condor_status -negotiator</pre>
+
+You can see the resources in your Condor cluster using =condor_status= and submit test jobs with =condor_submit=. 
+Check "Testing the installation" below for more.
+
+---++ Setup
+Condor is installed in the default path, so there is no need of special setup to use it. It will be automatically in the environment of every user.
+
+---++ Upgrades
+Only one version of Condor  at the time can be installed via RPM and used. 
+To install a different version just remove the old RPM and install the new one following the instructions above.
+The configuration files in the shared directory will persist so you can skip that step during updates.
+
+---++ Special needs
+The following sections present instructions or suggestion for uncommon configurations
+
+
+
+---+++ Swap configuration on the condor submit host
+If you have no swap space on the submit host all your job submissions will fail and in =/scratch/condor/log/SchedLog= you will see errors like "Swap space estimate reached! No more jobs can be run!". 
+
+You can check your swap memory with =cat /proc/meminfo |grep Swap= and you will see something like:<pre> 
+SwapCached:          0 kB
+SwapTotal:     2097144 kB
+SwapFree:      2097080 kB
+</pre>
+If the numbers above are all 0, you have no swap space.
+
+The recommendation is to enable a swap space on your host. Here some information to [[http://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/][add a swap file]] or [[http://www.xenotime.net/linux/doc/swap-mini-howto.txt][a swap-howto, see section 5]]. If you cannot, here is a workaround in Condor to avoid to use swap space. It will work for small test clusters.
+
+In the file =condor_config.gc1-ui= file add the line: <pre>
+RESERVED_SWAP = 0
+</pre>
+
+
+---++ Testing the installation
+You can see the resources in your Condor cluster using =condor_status=. Here is the output on =gs1-ce.mwt2.org= (the Condor headnode in the laptop):
+<pre>
+> condor_status
+
+Name               OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
+
+gs1-c001.mwt2.org  LINUX      INTEL  Owner     Idle     0.000   503  0+00:10:10
+gs1-c002.mwt2.org  LINUX      INTEL  Owner     Idle     0.000   503  0+00:05:10
+
+                     Total Owner Claimed Unclaimed Matched Preempting Backfill
+
+         INTEL/LINUX     2     2       0         0       0          0        0
+
+               Total     2     2       0         0       0          0        0
+</pre>
+
+To test condor you have to create  a submit file (=mytest.submit=) and submit a job.
+   * submit file:<pre>
+#  A test Condor submission file - mytest.submit
+executable = /bin/hostname
+universe = vanilla
+log = test.log
+output = test.out
+error = test.err
+queue
+</pre>
+   * Submit with:<pre>
+condor_submit mytest.submit
+</pre>
+   * Check the jobs:<pre>
+condor_q
+</pre>
+   * Inspect the files test.log/out/err. You can submit more than one test job. A different test can have =transfer_executable=true=.
+
+---+++ A CPU intensive test
+Here is a condor test to submit 20 CPU intensive jobs.
+   * submit file (save it as =mytestcpu.sub=):<pre>
+########################
+# Submit description file for CPU test program
+########################
+Executable     = /home/gsadmin/use-processor.pl
+# should_transfer_files  can be YES NO IF_NEEDED
+should_transfer_files = YES
+# when_to_transfer_output  can be ON_EXIT ON_EXIT_OR_EVICT 
+when_to_transfer_output = ON_EXIT
+Universe       = vanilla 
+Output         = cputest.$(Process).out
+Error          = cputest.$(Process).err
+Log            = cputest.$(Process).log 
+Queue 20
+</pre>
+   * Download the attached file [[%ATTACHURL%/use-processor.pl.txt][use-processor.pl]] and save it in =/home/gsadmin/= and make it executable, e.g. if you have wget: <pre>
+wget https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/ClusterCondorInstall/use-processor.pl.txt
+cp use-processor.pl.txt /home/gsadmin/use-processor.pl
+chmod a+x /home/gsadmin/use-processor.pl
+</pre>
+   * Submit with:<pre>
+condor_submit mytestcpu.sub
+</pre>
+   * Check the jobs:<pre>
+condor_q
+</pre>
+   * Inspect the files =cputest.XX.log/out/err=, where XX is a number from 1 to 20. 
+
+---++ More information
+   * Examples running Condor jobs: http://www.cs.wisc.edu/condor/quick-start.html
+   * Condor instalation for the Tier 3s: https://twiki.grid.iu.edu/bin/view/Trash/Trash/Tier3/WebHome#Phase_2_Quick_guide_for_setting
+   * Old document from the Grid Colombia 09 workshop: ClusterCondorInstall09
+   * [[%ATTACHURL%/Guia_instalacion_CONDORx.pdf][Guia instalacion CONDOR (en Espanol)]]: Condor installation guide in Spanish, written by Cesar Orlando Diaz. The installation is different from the one documented here in English but it could be of help, specially  for students not so familiar with English.
+
+
+%BR%
+%COMPLETE2% %BR%
+%RESPONSIBLE% Main.MarcoMambelli - 18 Feb 2010 %BR%
+%REVIEW%
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/GridColombiaWorkshop2009/centerpageborder.css
+-->
+
+%META:FILEATTACHMENT{name="use-processor.pl.txt" attachment="use-processor.pl.txt" attr="" comment="" date="1256677149" path="use-processor.pl" size="508" stream="use-processor.pl" tmpFilename="/usr/tmp/CGItemp20826" user="MarcoMambelli" version="1"}%
+%META:FILEATTACHMENT{name="Guia_instalacion_CONDORx.pdf" attachment="Guia_instalacion_CONDORx.pdf" attr="" comment="Condor installation guide in spanish" date="1268418894" path="Guia_instalacion_CONDORx.pdf" size="137134" stream="Guia_instalacion_CONDORx.pdf" tmpFilename="/usr/tmp/CGItemp37542" user="MarcoMambelli" version="1"}%

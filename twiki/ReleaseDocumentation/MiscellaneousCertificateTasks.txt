@@ -1,0 +1,168 @@
+%META:TOPICINFO{author="KyleGross" date="1481047987" format="1.1" version="1.8"}%
+%META:TOPICPARENT{name="CertificateGetWebNew"}%
+---+!! Miscellaneous Certificate Tasks
+%DOC_STATUS_TABLE%
+%TOC%
+
+---++ About This Document
+
+This document is intended as a reference on specific tasks for users who already have
+a certificate. Users who need a new certificate should instead go to the
+[[ReleaseDocumentation.CertificateGetWebNew][Getting a User Certificate]]
+page. 
+
+---++ Renewing an Unexpired Certificate
+
+If you have a valid DOEGrids certificate in your web browser that is
+not expired or revoked, then you can renew it by following these
+instructions:
+
+   1 Go to the [[https://software.grid.iu.edu/cert/certrenew.php][Replacement Certificate]] page.
+   1 Verify that the certificate DN and the expiry date (in red) are
+     correct and refer to the certificate you wish to renew.
+      * If the certificate listed is incorrect, please make sure that
+        you have the appropriate certificate installed in the browser
+        and presented to the page when prompted. You may have to close
+        the browser session and select the correct certificate to be
+        presented to the page when prompted.
+   1 Select the appropriate Key Length or Cryptographic Provider
+     (depending upon your browser):
+      * Cryptographic Provider: 
+         * Linux or other Unix Mozilla/Firefox/Netscape users: Select 2048(High grade). 
+         * Windows Mozilla/Firefox/Netscape users: Select Strong Cryptographic Provider. 
+         * Windows Internet Explorer users: Select Microsoft Enhanced Cryptographic Provider.
+   1 If you receive any prompts about trusting this CA or certificate
+     being installed, select Yes.
+   1 Then you will see a message that your certificate has been
+      successfully imported. *Click OK*.
+   1 The browser will display your certificate in base 64 encoded format.
+   1 Check your email. You should have received a message from
+      DOEGrids.
+   1 Your new certificate should now be imported. To check this in
+     Firefox, go to the certificate manager:
+     [[http://kb.mozillazine.org/Menu_differences_in_Windows,_Linux,_and_Mac][Options/Preferences]] -> Advanced -> Encryption -> View Certificates -> Your  Certificates.
+     If the new certificate is not there, follow
+     the link to the URL given in the email message and click the
+     _Import_ button, as directed in the email message.
+   1 If you are an OSG RA Agent or Grid Admin, you will need to send
+     email signed by your new certificate to renew your Agent or Grid
+     Admin role. See [[Security.OsgRaOperations]] for details.
+
+
+---++ Replacing an Expired Certificate
+
+This section applies if you had a certificate from DOEgrids CA
+previously and the certificate is expired after a year. You need to
+get a new certificate, but you want have the same
+[[Documentation.GlossaryD#DefsDistinguishedName][DN]] since then you
+can continue accessing resources without any re-configuration or
+changes.
+
+Follow the steps for [[ReleaseDocumentation.CertificateGetWebNew][getting a new certificate]]
+but enter your old DN in the "Expired DN" field.
+
+How to find your old DN:
+
+With openssl:
+   1 Create a pem format certificate from the p12 format certificate that you
+   had exported:
+   <pre class="screen">
+     openssl pkcs12 -clcerts -nokeys -in usercred.p12 -out usercert.pem   </pre>
+   1 Get the DN from this:
+   <pre class="screen">
+        openssl x509 -noout -subject -in usercert.pem   </pre>
+
+In Firefox:
+   1 Go to go to [[http://kb.mozillazine.org/Menu_differences_in_Windows,_Linux,_and_Mac][Options/Preferences]] -> Advanced -> Encryption -> View Certificates -> Your Certificates
+   1 Double click on your certificate.
+   1 Then click on "Details", select "Subject" from the list in the middle,
+    and "Field Value" in the box at the bottom is your subject.
+
+
+---++ Importing a p12 Certificate from Disk
+
+Here is how to import your certificate to another
+installation of Firefox.
+
+   1. Copy your p12 Certificate to the disk where
+   the other Firefox is running.
+   1. In Firefox, go to
+     [[http://kb.mozillazine.org/Menu_differences_in_Windows,_Linux,_and_Mac][Options/Preferences]] -> Advanced -> Encryption -> View Certificates,
+   and click on the "Import" button.
+   %TWISTY{
+   showlink="Screenshot"
+   hidelink="Hide"
+   showimgleft="%ICONURLPATH{toggleopen-small}%"
+   hideimgleft="%ICONURLPATH{toggleclose-small}%"
+   }%
+   %BR%
+     %ATTACHURL%/import_certificate_1.png
+   %ENDTWISTY{}%
+   1. Navigate to the certificate location and "Open" it.
+   1. Type in the password you used when you exported
+   the certificate.
+   1. Finally you will get a message that the import worked:
+    %ATTACHURL%/import_certificate_5.png %BR%
+  And the newly imported certificate should show up in Firefox's
+  Certificate Manager window, which in Step 2 was empty.
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = MarkoSlyz
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|General|Trash/Integration|Monitoring|Operations|Security|Storage|Trash/Tier3|User|VO)
+   * Local DOC_AREA       = User
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Developer|Documenter|Scientist|Student|SysAdmin|VOManager)
+   * Local DOC_ROLE       = Scientist
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (HowTo|Installation|Knowledge|Navigation|Planning|Training|Troubleshooting)
+   * Local DOC_TYPE       = HowTo
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = DerekWeitzel
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = DerekWeitzel
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+%META:FILEATTACHMENT{name="import_certificate_1.png" attachment="import_certificate_1.png" attr="h" comment="" date="1315282089" path="import_certificate_1.png" size="42815" stream="import_certificate_1.png" tmpFilename="/usr/tmp/CGItemp37489" user="MarkoSlyz" version="1"}%
+%META:FILEATTACHMENT{name="import_certificate_5.png" attachment="import_certificate_5.png" attr="h" comment="" date="1315282143" path="import_certificate_5.png" size="13632" stream="import_certificate_5.png" tmpFilename="/usr/tmp/CGItemp37420" user="MarkoSlyz" version="1"}%

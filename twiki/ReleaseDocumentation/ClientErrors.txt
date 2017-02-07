@@ -1,0 +1,210 @@
+%META:TOPICINFO{author="KyleGross" date="1481047984" format="1.1" version="1.13"}%
+%META:TOPICPARENT{name="TroubleshootingComputeElement"}%
+%DOC_STATUS_TABLE%
+
+---+!! Globus Client Errors
+%TOC%
+
+---+ About this Document
+<!-- useful variable definitions
+   * Local UCL_CWD = /opt/osg-%VERSION%
+-->
+
+%ICON{hand}% This document is for System Administrators and Grid Users. It contains a brief description of errors occurring during job submissions to a %LINK_GLOSSARY_CE%.
+
+%STARTINCLUDE%
+
+%STARTSECTION{"GramErrors"}%
+---%SHIFT%+ Globus Gram Client Errors
+
+There may be several reasons causing a client side error condition. These are a list of the known ones.
+
+---%SHIFT%++ Error Code 47
+
+The grid user is authorized to submit a job to %LINK_GLOSSARY_GRAM%, but the assigned Unix account does not exist on the %LINK_GLOSSARY_CE%:
+
+<pre class="screen">
+%UCL_PROMPT% globus-job-run cms-xen1.fnal.gov:2119/jobmanager-fork /bin/date
+GRAM Job submission failed because the gatekeeper failed to run the job manager (%RED%error code 47%ENDCOLOR%)
+</pre>
+
+The GRAM log file on the Compute Element =$VDT_LOCATION/globus/var/globus-gatekeeper.log= will contain an entry indicating the missing Unix account:
+
+<pre class="file">
+TIME: Tue Feb 27 09:51:34 2007
+ PID: 16564 -- Failure: getpwname() failed to find uscmspool591
+</pre>
+
+---%SHIFT%+ Globus GRAM-WS Client Errors
+
+---%SHIFT%++ Error Code 200
+
+The grid user is authorized to submit a job to %LINK_GLOSSARY_GRAM_WS%, but the =/etc/sudoers= file is misconfigured on the %LINK_GLOSSARY_CE%:
+
+<pre class="screen">
+%UCL_PROMPT% globusrun-ws -submit -F cms-xen1.fnal.gov:9443 -Ft Fork -c /bin/date
+Submitting job...Done.
+Job ID: uuid:5d85bb28-c67c-11db-ac3b-00163e010001
+Termination time: 02/28/2007 16:05 GMT
+Current job state: Failed
+Destroying job...Done.
+globusrun-ws: Job failed: %RED%Error code: 200%ENDCOLOR%
+Sudo is misconfigured to run the globus-job-manager-script.pl script for user uscmspool591.
+ERROR: Job FAILED with return code (255)
+</pre>
+
+The GRAM-WS log file on the Compute Element =$VDT_LOCATION/globus/var/container.log= will contain an entry:
+
+<pre class="file">
+2007-02-27 10:02:32,138 INFO  exec.StateMachine [RunQueueThread_15,logJobAccepted:3492] 
+     Job ee6b5450-c67b-11db-8fab-bf5150c2cbdd accepted for local user 'uscmspool591'
+2007-02-27 10:02:32,260 WARN  
+     exec.StateMachine [RunQueueThread_15,createFaultFromErrorCode:3264] 
+     Unhandled fault %RED%code 200%ENDCOLOR%
+</pre>
+
+The misconfiguration is likely associated with first entry in the =/etc/sudoers= file which is associated with authorizations for the globus-ws container user:
+
+<pre class="file">
+%UCL_CWD%/globus/libexec/globus-job-manager-script.pl *
+</pre>
+
+---%SHIFT%++ Error Code 201
+
+The grid user is authorized to submit a job to %LINK_GLOSSARY_GRAM_WS%, but the assigned Unix account does not exist on the %LINK_GLOSSARY_CE%:
+
+<pre class="screen">
+%UCL_PROMPT% globusrun-ws -submit -F cms-xen1.fnal.gov:9443 -Ft Fork -c /bin/date
+Submitting job...Done.
+Job ID: uuid:099303dc-c67b-11db-a358-00163e010001
+Termination time: 02/28/2007 15:56 GMT
+Current job state: Failed
+Destroying job...Done.
+globusrun-ws: Job failed: %RED%Error code: 201%ENDCOLOR%
+Script stderr:
+/usr/bin/sudo: no passwd entry for uscmspool591!
+ERROR: Job FAILED with return code (255)
+</pre>
+
+The GRAM-WS log file on the Compute Element =$VDT_LOCATION/globus/var/container.log= will contain an entry:
+
+<pre class="file">
+2007-02-27 10:02:32,138 INFO  exec.StateMachine [RunQueueThread_15,logJobAccepted:3492] 
+     Job ee6b5450-c67b-11db-8fab-bf5150c2cbdd accepted for local user 'uscmspool591'
+2007-02-27 10:02:32,260 WARN  
+     exec.StateMachine [RunQueueThread_15,createFaultFromErrorCode:3264] 
+     Unhandled fault %RED%code 201%ENDCOLOR%
+</pre>
+
+---%SHIFT%++ Invalid File Permissions on STDOUT
+
+The grid user is authorized to submit a job to %LINK_GLOSSART_GRAM_WS%, but the =/etc/sudoers= file is misconfigured on the %LINK_GLOSSARY_CE%. The error will only occur when output is _streamed_ back to the client as either stdout/stderr or in the form of a file:
+
+<pre class="screen">
+%UCL_PROMPT% globusrun-ws -submit -F cms-xen1.fnal.gov:9443 -Ft Fork -s -c /bin/date
+ 
+Delegating user credentials...Done.
+Submitting job...Done.
+Job ID: uuid:fd40d51c-c67c-11db-ae39-00163e010001
+Termination time: 02/28/2007 16:10 GMT
+Current job state: Failed
+Destroying job...Done.
+Cleaning up any delegated credentials...Done.
+globusrun-ws: Job failed: %RED%Invalid file permissions on stdout%ENDCOLOR% /fd40d51c-c67c-11db-ae39-00163e010001.0.stdout.
+starter: the job manager failed to open stdout
+ERROR: Job FAILED with return code (255)
+</pre>
+
+The GRAM-WS log file on the Compute Element =$VDT_LOCATION/globus/var/container.log= will contain an entry:
+
+<pre class="file">
+2007-02-27 10:10:11,655 INFO  authorization.ServiceAuthorizationChain 
+      [RunQueueThread_1,authorize:285] Authorized "/DC=org/DC=doegrids/OU=People/CN=John Weigand 458491"
+       to invoke "{http://www.globus.org/namespaces/2004/10/rft}start".
+2007-02-27 10:10:18,309 ERROR service.TransferWork [WorkThread-3389,run:724] Terminal transfer error:
+Error deleting a file
+ "/fd40d51c-c67c-11db-ae39-00163e010001.0.stdout" 
+  [Caused by: Server refused performing the request. Custom message: Server refused deleting file (error code 1) 
+  [Nested exception message:  Custom message: Unexpected reply: 500-Command failed : 
+  globus_gridftp_server_file.c:globus_l_gfs_file_delete:724:
+500-System error in unlink: No such file or directory
+500-A system call failed: No such file or directory
+500 End.]]
+Error deleting a file
+ "/fd40d51c-c67c-11db-ae39-00163e010001.0.stdout"
+<b>.... followed by a java stacktrace.....</b>
+</pre>
+
+The misconfiguration is likely associated with _second_ entry in the =/etc/sudoers= file which is associated with the processing of the delegated proxy for the globus-ws container user:
+
+<pre class="file">
+%UCL_CWD%/globus/libexec/globus-gram-local-proxy-tool *
+</pre>
+
+%NOTE% After the =/etc/sudoers= file is corrected, a restart of the =globus-ws= container will be required to effect the change.
+
+%ENDSECTION{"GramErrors"}%
+
+%STOPINCLUDE%
+
+---+ Comments
+
+| PM2RPM_TASK = CLIENT | Main.RobertEngel | 28 Aug 2011 - 05:49 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = SuchandraThapa
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Troubleshooting
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = KarthikArun 
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->

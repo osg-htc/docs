@@ -1,0 +1,305 @@
+%META:TOPICINFO{author="KyleGross" date="1481047986" format="1.1" version="1.10"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{%TOPIC%}%*
+%TOC{depth="2"}%
+
+
+---++ Introduction
+This hands-on tutorial, created for the 2011 OSG Summer Workshop, explains how to use Globus Online
+to complete an example file transfer using the command line interface and the web interface.
+
+
+---+++!!Engineering Considerations
+
+You will need two endpoints to transfer files between.  At least one of them must be a gridFTP server that you have access to, either using x509 credentials or a !MyProxy server.  The other can also be a gridFTP server, or it can be a "GlobusConnect" client running on your machine (e.g. your laptop).
+
+---++ Checklist
+Before this tutorial, you will need to sign up for a Globus Online account at:
+https://www.globusonline.org/SignUp
+
+---++ Manage Identities
+
+Globus Online is controlled via ssh.  In order to connect to the globus online, you will need to configure a way to access
+the command line interface at cli.globusonline.org.  Below are two ways to do this.
+One way to do this using a public/private key pair.
+Another is to use a similar procedure to import your x509 certificate (e.g. !DoEgrid cert) in order to use gsissh.
+
+---+++ Using a Certificate
+
+You can also use a x509 certificate to access globus online.
+This is especially useful to do as you can use your !DoE grid certificate or other grid certificates available.
+Once you have done this, you can also use "gsissh" (currently packaged with ClientInstallationGuide) to
+access Globus Resources.
+
+First print out your grid certificate:
+
+<pre class="screen">
+[dstrain@gw014k0 ~]$ more .globus/usercert2011.pem
+Bag Attributes
+    friendlyName: Doug Strain 834323's  ID
+    localKeyID: 56 0D DC 1C 12 1F 5F 5D 60 B0 3D 52 51 7B FA 7B 78 8C B8 00
+subject=/DC=org/DC=doegrids/OU=People/CN=Doug Strain 834323
+issuer=/DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1
+-----BEGIN CERTIFICATE-----
+MIIEIDCCAwigAwIBAgIDANUdMA0GCSqGSIb3DQEBBQUAMGkxEzARBgoJkiaJk/Is
+ZAEZFgNvcmcxGDAWBgoJkiaJk/IsZAEZFghET0VHcmlkczEgMB4GA1UECxMXQ2Vy
+dGlmaWNhdGUgQXV0aG9yaXRpZXMxFjAUBgNVBAMTDURPRUdyaWRzIENBIDEwHhcN
+MTEwMzE0MTQzMDQyWhcNMTIwMzEzMTQzMDQyWjBdMRMwEQYKCZImiZPyLGQBGRYD
+b3JnMRgwFgYKCZImiZPyLGQBGRYIZG9lZ3JpZHMxDzANBgNVBAsTBlBlb3BsZTEb
+... cut for brevity ... 
+-----END CERTIFICATE-----
+</pre>
+
+
+Log into the Globus Online and add this key to your account.  
+Under Globus Online, go to "My Profile" -> "Manage Accounts" -> "Add X.509 Certificate"
+
+     <img src="%ATTACHURLPATH%/globus9.png" alt="globus9.png" width='100%' />    
+
+Cut and paste your certificate into the space provided.  
+
+     <img src="%ATTACHURLPATH%/globus10.png" alt="globus10.png" />    
+
+You can verify it was read in correctly
+by viewing the issuer and owner in the "view details" box of your certificate.
+
+
+     <img src="%ATTACHURLPATH%/globus11.png" alt="globus11.png" />    
+
+After this, you should be able to connect to Globus Online shell (cli.globusonline.org).
+Note that it takes a few moments to update.
+
+---+++ Creating a Key Pair
+
+First create a key pair:
+<pre class="screen">
+[dstrain@dhcp-131-225-82-65 test-ssh]$ ssh-keygen -t rsa -b 1024
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/dstrain/.ssh/id_dsa): /home/dstrain/.ssh/id_rsa
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/dstrain/.ssh/id_rsa.
+Your public key has been saved in /home/dstrain/.ssh/id_rsa.pub.
+The key fingerprint is:
+89:82:f8:e7:29:05:d0:9b:f4:b1:8b:01:8d:6f:6e:ca dstrain@dhcp-131-225-82-65
+[dstrain@dhcp-131-225-82-65 test-ssh]$ more id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEArF5znbvb4x3VFo1CG/kIZ+0K+ZpXHNVarM436ooPkdZF
+JygCl33+U8CYvudHZCEll0TAZXVFqhbeK38vroAEaR08MivKm2Bewk0lC/zIgxEliksHlXeLQlwfhlB/
+lfcDvBVRWW7zvNmjmnykbhO6/KgSL3gcc9Hs88k81lq8KsU=
+</pre>
+
+
+Log into the Globus Online and add this key to your account.  
+Under Globus Online, go to "My Profile" -> "Manage Accounts" -> "Add SSH public key"
+
+     <img src="%ATTACHURLPATH%/globus1.png" alt="globus1.png" width='100%' />    
+
+Cut and paste your ssh key into the space provided.  (Include the header "ssh-rsa" etc)
+
+     <img src="%ATTACHURLPATH%/globus2.png" alt="globus2.png" width='333' height='261' />    
+
+After this, you should be able to connect to Globus Online shell (cli.globusonline.org).
+Note that it takes a few moments to update.
+
+<pre class="screen">
+ssh -i .ssh/id_rsa cli.globusonline.org
+</pre>
+
+The "-i" option specifies what key to use.  If you have used the default, you can skip this option.
+
+
+---++ Installing Globus Connect
+
+Globus Connect is a mini-GridFTP server that you can start on your laptop or other non-server
+machine to transfer files.  It will act as a client to transfer files to/from permanent endpoints.
+As of now, you cannot transfer between two "Globus Connect" clients.
+
+To install Globus Connect, sign in to Globus Online and click on "Globus Connect":
+
+     <img src="%ATTACHURLPATH%/globus3.png" alt="globus3.png" width='50%' />    
+
+To install,
+* Click on the appropriate OS for download.
+* Enter a name and description for the globus connect server (nickname)
+* Copy the resulting setup key.
+* Download and extract it: (eg for linux)
+<pre class="screen">
+[dstrain@dhcp-131-225-82-65 globus]$ tar xzvf globusconnect-latest.tgz
+globusconnect-1.0/
+globusconnect-1.0/gt_i386/
+globusconnect-1.0/gt_i386/etc/
+...
+[dstrain@dhcp-131-225-82-65 globus]$ cd globusconnect-1.0/
+[dstrain@dhcp-131-225-82-65 globusconnect-1.0]$ ls
+gc  globusconnect  gt_amd64  gt_i386
+[dstrain@dhcp-131-225-82-65 globusconnect-1.0]$ ./globusconnect
+</pre>
+
+Enter the setup code into the "Security Code" field in the dialog box:
+
+     <img src="%ATTACHURLPATH%/globus4.png" alt="globus4.png" />    
+
+After this, you should get a "Registration successful" message and a status screen like the following:
+
+     <img src="%ATTACHURLPATH%/globus5.png" alt="globus5.png" />    
+
+---++ Activating an endpoint
+
+There are two ways to activate an endpoint:
+
+1) Use gsissh from a server with a voms proxy
+
+2) Use myproxy to handle credentials
+
+---+++ Using gsissh
+
+First, initialize your proxy, then gsissh to cli.globusonline.org:
+<pre class="screen">
+[dstrain@gw014k0 ~]$ voms-proxy-init --voms Engage
+Your identity: /DC=org/DC=doegrids/OU=People/CN=Doug Strain 834323
+Creating temporary proxy ................................................. Done
+Contacting  osg-engage.renci.org:15001 [/DC=org/DC=doegrids/OU=Services/CN=osg-engage.renci.org] "Engage" Done
+Creating proxy ..................................................................................................... Done
+Your proxy is valid until Tue Aug  2 23:47:34 2011
+[dstrain@gw014k0 ~]$ gsissh -t dstrain@cli.globusonline.org "endpoint-activate -g dstrain#fermigridosg1"
+Credential Subject  : /DC=org/DC=doegrids/OU=People/CN=Doug Strain 834323/CN=proxy/CN=proxy
+Credential Time Left: 11:41:29
+Activating 'fermigridosg1'
+</pre>
+
+
+---+++ Using My Proxy
+
+For this part, you will need an myproxy-client.  This is included with OSG-Client.
+You can either use ClientInstallationGuide or the new osg-client RPM.
+
+<pre class="screen">
+[dstrain@gw014k0 ~]$ source /usr/local/osg-client/setup.sh
+[dstrain@gw014k0 ~]$ myproxy-init -v -l dstrain --voms Engage -s myproxy.ncsa.uiuc.edu
+MyProxy v5.3 17 Jan 2011 PAM VOMS OCSP
+Attempting to connect to 141.142.148.123:7512
+Successfully connected to myproxy.ncsa.uiuc.edu:7512
+Detected Globus version: 22
+Unspecified proxy version, settling on Globus version: 2
+Number of bits in key :2048
+Using configuration file /usr/local/osg_client/glite/etc/vomses
+Using configuration file /usr/local/osg_client/glite/etc/vomses
+Files being used:
+ CA certificate file: none
+ Trusted certificates directory : /usr/local/osg_client/globus/TRUSTED_CA
+ Proxy certificate file : /tmp/myproxy-proxy.44678.17774
+ User certificate file: /home/dstrain/.globus/usercert.pem
+ User key file: /home/dstrain/.globus/userkey.pem
+Output to /tmp/myproxy-proxy.44678.17774
+Your identity: /DC=org/DC=doegrids/OU=People/CN=Doug Strain 834323
+verify OK
+Using configuration file /usr/local/osg_client/glite/etc/vomses
+Using configuration file /usr/local/osg_client/glite/etc/vomses
+Using configuration file /usr/local/osg_client/glite/etc/vomses
+Using configuration file /usr/local/osg_client/glite/etc/vomses
+Using configuration file /usr/local/osg_client/glite/etc/vomses
+Using configuration file /usr/local/osg_client/glite/etc/vomses
+Creating temporary proxy to /tmp/tmp_x509up_u44678_17775 .........................................................+++
+.........+++
+ Done
+Contacting  osg-engage.renci.org:15001 [/DC=org/DC=doegrids/OU=Services/CN=osg-engage.renci.org] "Engage" Done
+
+Warning: osg-engage.renci.org:15001: The validity of this VOMS AC in your proxy is shortened to 86400 seconds!
+
+Creating proxy to /tmp/myproxy-proxy.44678.17774 .................+++
+..............................................................................................................................+++
+ Done
+Your proxy is valid until Tue Aug  9 11:48:12 2011
+using trusted certificates directory /usr/local/osg_client/globus/TRUSTED_CA
+server name: /C=US/O=National Center for Supercomputing Applications/OU=Services/CN=myproxy.ncsa.uiuc.edu
+checking that server name is acceptable...
+server name does not match "myproxy@myproxy.ncsa.uiuc.edu"
+server name matches "host@myproxy.ncsa.uiuc.edu"
+authenticated server name is acceptable
+Enter MyProxy pass phrase:
+Verifying - Enter MyProxy pass phrase:
+A proxy valid for 168 hours (7.0 days) for user dstrain now exists on myproxy.ncsa.uiuc.edu.
+</pre>
+
+At this point you can enter your username/password when prompted to 
+when activating an endpoint in the web-interface:
+
+     <img src="%ATTACHURLPATH%/globus6.png" alt="globus6.png"  />    
+
+You can also activate endpoints via the command line interface:
+<pre class="screen">
+[dstrain@gw014k0 ~]$ ssh -t dstrain@cli.globusonline.org "endpoint-activate dstrain#grase -m myproxy.ncsa.uiuc.edu -U dstrain"
+Contacting 'myproxy.ncsa.uiuc.edu'...
+Enter MyProxy pass phrase:
+Credential Subject  : /DC=org/DC=doegrids/OU=People/CN=Doug Strain 834323/CN=proxy/CN=proxy/CN=proxy
+Credential Time Left: 12:00:00
+Activating 'grase'
+Connection to cli.globusonline.org closed.
+</pre>
+
+---++ Transfers
+
+At this point, you will be able to transfer between any activated endpoints.
+Note that Globus Connect endpoints do not need to be activated 
+(they are automatically activated for your account).  From henceforth, there is no
+difference from a Globus Connect endpoint and a !GridFTP endpoint.
+
+For Globus Connect clients, the name will be of the form "username#nickname", where the first part is the username (such as "dstrain") and the second is the endpoint name that you picked out in the previous step (such as "dstrain-laptop").
+
+There are two ways to transfer files
+
+1) Using the web interface
+
+2) Using the command line (ssh) interface
+
+---+++ Web interface
+
+You can begin a transfer by logging into Globus Online and going to file transfer.
+You will need to choose two endpoints and directories on each endpoint.
+
+     <img src="%ATTACHURLPATH%/globus7.png" alt="globus7.png" width='100%' />    
+
+At this point, you can click the arrow to begin the transfer.
+You can view the progress of the transfer by clicking "View Transfers" under the "Go To" menu:
+
+     <img src="%ATTACHURLPATH%/globus8.png" alt="globus8.png" width='100%' />    
+
+
+
+---+++ Command-line interface
+
+Using an ssh client and an authentication method listed in the web interface, you can now transfer between activated endpoints.
+
+For instance, using gsissh and a x509 certificate:
+<pre class="screen">
+[dstrain@gw014k0 ~]$ gsissh -t dstrain@cli.globusonline.org "scp dstrain-ubuntu:/home/dstrain/code/globusconnect-1.0/globusconnect-latest.tgz fermigridosg1:/grid/data/engage/tmp/globusconnect-latest.tar.gz"
+Task ID: d2e91272-bd5b-11e0-bc85-12313804ec2a
+[XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX] 1/1 3.00 mbps
+Connection to cli.globusonline.org closed.
+</pre>
+
+Or using ssh and an authorized public key:
+<pre class="screen">
+[dstrain@gw014k0 ~]$ ssh -i .ssh/id_dsa -t dstrain@cli.globusonline.org "scp dstrain-ubuntu:/home/dstrain/code/globusconnect-1.0/globusconnect-latest.tgz fermigridosg1:/grid/data/engage/tmp/globusconnect-latest.tar.gz"
+Task ID: afc72ec2-bd5c-11e0-bc85-12313804ec2a
+[XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX] 1/1 3.30 mbps
+Connection to cli.globusonline.org closed.
+</pre>
+
+The above examples use "scp" which is a simple source / destination utility.  For more complicated transfers and more options, you can use the "transfer" utility.
+
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/HandsOn/centerpageborder.css
+-->
+
+%META:FILEATTACHMENT{name="globus1.png" attachment="globus1.png" attr="" comment="Globus Online - create key" date="1312295521" path="globus1.png" size="44125" stream="globus1.png" tmpFilename="/usr/tmp/CGItemp3205" user="DouglasStrain" version="1"}%
+%META:FILEATTACHMENT{name="globus2.png" attachment="globus2.png" attr="" comment="Globus Online - add key" date="1312295544" path="globus2.png" size="9983" stream="globus2.png" tmpFilename="/usr/tmp/CGItemp3145" user="DouglasStrain" version="1"}%
+%META:FILEATTACHMENT{name="globus3.png" attachment="globus3.png" attr="" comment="Globus Online - download Globus Connect" date="1312298235" path="globus3.png" size="46467" stream="globus3.png" tmpFilename="/usr/tmp/CGItemp6348" user="DouglasStrain" version="2"}%
+%META:FILEATTACHMENT{name="globus4.png" attachment="globus4.png" attr="" comment="Globus Online - setup Globus Connect" date="1312298256" path="globus4.png" size="18104" stream="globus4.png" tmpFilename="/usr/tmp/CGItemp3233" user="DouglasStrain" version="1"}%
+%META:FILEATTACHMENT{name="globus5.png" attachment="globus5.png" attr="" comment="Globus Online - run Globus Connect" date="1312298327" path="globus5.png" size="5691" stream="globus5.png" tmpFilename="/usr/tmp/CGItemp3256" user="DouglasStrain" version="1"}%
+%META:FILEATTACHMENT{name="globus6.png" attachment="globus6.png" attr="" comment="Globus - Add Myproxy" date="1312327405" path="globus6.png" size="25743" stream="globus6.png" tmpFilename="/usr/tmp/CGItemp39113" user="DouglasStrain" version="1"}%
+%META:FILEATTACHMENT{name="globus7.png" attachment="globus7.png" attr="" comment="" date="1312327416" path="globus7.png" size="88485" stream="globus7.png" tmpFilename="/usr/tmp/CGItemp39185" user="DouglasStrain" version="1"}%
+%META:FILEATTACHMENT{name="globus8.png" attachment="globus8.png" attr="" comment="Globus Online - View Transfer" date="1312327980" path="globus8.png" size="60006" stream="globus8.png" tmpFilename="/usr/tmp/CGItemp39200" user="DouglasStrain" version="1"}%
+%META:FILEATTACHMENT{name="globus9.png" attachment="globus9.png" attr="" comment="Globus - Add x509" date="1312822007" path="globus9.png" size="45073" stream="globus9.png" tmpFilename="/usr/tmp/CGItemp50210" user="DouglasStrain" version="1"}%
+%META:FILEATTACHMENT{name="globus10.png" attachment="globus10.png" attr="" comment="Globus - add x509 part 2" date="1312822031" path="globus10.png" size="10517" stream="globus10.png" tmpFilename="/usr/tmp/CGItemp50307" user="DouglasStrain" version="1"}%
+%META:FILEATTACHMENT{name="globus11.png" attachment="globus11.png" attr="" comment="Globus - View x509" date="1312822049" path="globus11.png" size="16565" stream="globus11.png" tmpFilename="/usr/tmp/CGItemp50335" user="DouglasStrain" version="1"}%

@@ -1,0 +1,21 @@
+%META:TOPICINFO{author="ScotKronenfeld" date="1287509746" format="1.1" version="1.1"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+ OSG 1.2.15 Update Notification
+
+Date: October 19, 2010
+
+---++ Affected Components
+The following components are affected:
+   * CE installations
+   * Client installations
+   * Bestman installations
+
+---++ Summary
+This release includes the following updates:
+   * The Gratia !GridFTP probe will be properly configured to report results
+   * The Generic Information Provider has been updated
+   * The OSG Discovery Tools have been updated
+   * Other small changes, see the VDT release notes for full details:     <a href="http://vdt.cs.wisc.edu/releases/2.0.0/release-p22.html" target="_blank">http://vdt.cs.wisc.edu/releases/2.0.0/release-p22.html</a>
+
+---++ Update Instructions
+Update instructions can be found on the OSG Twiki under the OSG 1.2 <a href="https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OSG12UpdateInstructions" target="_blank">update instructions</a>.

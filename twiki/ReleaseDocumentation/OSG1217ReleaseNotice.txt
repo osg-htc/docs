@@ -1,0 +1,44 @@
+%META:TOPICINFO{author="KyleGross" date="1476285322" format="1.1" version="1.3"}%
+%META:TOPICPARENT{name="WebHome"}%
+<div style="font-family: Tahoma, Geneva, sans-serif;">
+<div class="announcement-head" style="border: thin solid #000; background-color: #F90;">
+  <h1 align="center">OSG 1.2.17 Update Notification</h1>
+</div>
+<br/>
+
+<div class="date" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; border: thin solid #000; background-color: #F93;">Date: <span class="date-text" style="font-size: 14px; font-weight: normal;">February 7, 2011</span></div>
+<br/>
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Affected Components</div>
+<div>
+  <p>The following components are affected:</p>
+  <ul>
+    <li> All OSG software installations</li>
+  </ul>
+
+</div>
+<br/>
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Summary</div>
+<div> 
+  <p>This release incorporates a variety of fixes and changes to various OSG software components. RSV has been changed to use a new <code>rsv-control</code> script that allows for more control when starting, stopping, and running RSV probes.  RSV now also has better support for a standalone RSV monitoring system. Bestman and Bestman2 have been updated to more recent version with several improvements and bug fixes. In addition, a new version of GIP has been included. The GIP update includes several job manager related bug fixes as well as support for WLCG site attributes..</p>
+  <ul>
+    <li>RSV has had a major overhaul to how it works. See the [[Trash/Trash/MonitoringInformation/RSV][RSV documentation]] for full details.</li>
+
+    <li>Bestman and SRM-Client-LBNL have been updated to 2.2.1.3.18</li>
+    <li>Bestman2, Bestman-Client, and SRM-Tester3-LBNL have been updated to 2.0.5</li>
+    <li>SRM-Client-Fermi has been updated to 1.9.5-23</li>
+    <li>GIP has been updated to 1.1.14 and now supports advertising of WLCG site information</li>
+    <li>MyProxy has been updated to address a security issue</li>
+    <li>Gratia has been updated and now supports HTPC accounting</li>
+
+  </ul>
+  <p>&nbsp;</p>
+</div>
+<br/>
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Update Instructions</div>
+<div>Update instructions can be found on the OSG Twiki under the OSG 1.2 <a href="https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OSG12UpdateInstructions">update instructions</a>.</div>
+<br/>
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Additional Information</div>
+<div>The release notes for the VDT 2.0.0p24 release underlying this release can be found <a href="http://vdt.cs.wisc.edu/releases/2.0.0/release-p24.html">here</a>.</div>
+
+<br/>
+</div>

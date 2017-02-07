@@ -1,0 +1,52 @@
+%META:TOPICINFO{author="StevenTimm" date="1309975924" format="1.1" version="1.9"}%
+%DOC_STATUS_TABLE%
+
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++ Installing Standalone Condor Batch System from the VDT
+%EDITTHIS%
+%RED%This page should be deprecated.  The installation instructions are out of date.  Better info 
+on installing condor can be found at CondorBatchSystemInstallation, and on maintaining condor at CondorBatchSystemHints.%ENDCOLOR%
+
+Most site administrators find it convenient to 
+have a Condor installation that is independent from the rest of the OSG CE installation.
+This allows for upgrading Condor independently of the rest of the VDT, and also allows
+for persistent log files even though the VDT is wiped and reinstalled.  We advise to install
+Condor in a separate directory from the rest of the VDT.  This installation should be 
+done before installing the CE software.
+
+The Condor installation from the VDT will, by default, make a standalone Personal Condor in which 
+one machine runs all the daemons, master, collector, negotiator, schedd, startd.   For large condor
+clusters there is more information at CondorBatchSystemHints. 
+
+   * Pick an install directory different from where you're going to install the OSG CE software, and =cd= to it. 
+   * See CondorBatchSystemHints for more information.
+   * Use pacman to install Condor (shown for VDT %VDT_VERSION%):
+
+<pre class="screen">
+# pacman -get http://vdt.cs.wisc.edu/%VDT_CACHE%:Condor
+</pre>
+      *  By default Condor runs as user daemon, it can use user condor if it is there.
+      * Answer =y= when asked about trusting the caches and agreeing to license.
+      * Answer =y= when asked if you want to update the CRL's automatically.
+      * Answer =l= when asked where to install the CA files.
+      * Answer =y= to Condor running automatically.
+      * See [[CondorBatchSystemHints]]. 
+      * Once the installation is complete, =source setup.sh= and =vdt-control --on= to start up condor.
+
+
+---++ Alternative install methods
+Condor can also be installed via RPMS or .tar.gz files directly from the [[http://www.cs.wisc.edu/condor/downloads][Condor]] Web site.  See that site for instructions 
+on how to do this.  This can sometimes prove beneficial since not all bug fix releases of Condor are
+necessarily released as updates to the VDT.  
+
+---++ Known issue
+
+---++ More information
+
+
+%STOPINCLUDE%
+
+
+

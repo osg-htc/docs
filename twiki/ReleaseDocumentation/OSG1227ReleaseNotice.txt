@@ -1,0 +1,25 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1329252634" format="1.1" version="1.1"}%
+%META:TOPICPARENT{name="WebHome"}%
+
+  <div style="font-family: Tahoma, Geneva, sans-serif;">&#13;
+<div style="background-color: #F90; border: thin solid #000;">&#13;
+  <h1 align="center">OSG 1.2.27 Update Notification</h1>&#13;
+</div>&#13;
+<br /><div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #F93; border: thin solid #000;">Date: <span style="font-size: 14px; font-weight: normal;">February 14, 2012</span></div>&#13;
+<br /><div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; color: #CCC; border: thin solid #000;">Affected Components</div>&#13;
+<div>&#13;
+  <p>The following components are affected:</p>&#13;
+  <ul><li>Curl</li>&#13;
+    <li>Apache</li>&#13;
+&#13;
+  </ul></div>&#13;
+<br /><div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; color: #CCC; border: thin solid #000;">Summary</div>&#13;
+<div> &#13;
+  <p>This release contains the following updates to address security vulnerabilities:</p>&#13;
+  <ul><li>curl (<a href="http://curl.haxx.se/docs/adv_20120124B.html">advisory</a>)</li>&#13;
+    <li>Apache httpd 2.2.22 (<a href="http://www.apache.org/dist/httpd/CHANGES_2.2.22">vulnerabilities/changelog</a>)</li></ul><p>This update includes a security fix for curl to correct a security vulnerability when using curl is using openssl. In addition, Apache httpd has been updated to address multiple security vulnerabilities.</p>&#13;
+</div>&#13;
+<div>Update instructions can be found on the OSG Twiki under the OSG 1.2 <a href="https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OSG12UpdateInstructions">update instructions</a>.</div>&#13;
+<br /><div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; color: #CCC; border: thin solid #000;">Additional Information</div>&#13;
+<div>The release notes for the VDT 2.0.0p34 release underlying this release can be found <a href="http://vdt.cs.wisc.edu/releases/2.0.0/release-p34.html">here</a>.</div>&#13;
+<br /></div>

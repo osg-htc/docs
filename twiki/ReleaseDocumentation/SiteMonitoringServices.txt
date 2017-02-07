@@ -1,0 +1,21 @@
+%META:TOPICINFO{author="KyleGross" date="1476285322" format="1.1" version="1.8"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+<P> NOTE: Arvind needs to go over this RSN..
+
+---++ Introduction
+This topic discusses site-level service monitoring (for eg., of compute elements) that is collected and monitored centrally.
+
+---++ RSV
+In OSG, the [[Trash/Trash/MonitoringInformation/RSV][RSV]] system, as installed on %CACHE% %VERSION% compute elements, reports locally scheduled probe results to a central collector operated by the GOC.  At present there is no web-visible monitor for this service, but the data upload into the collector is monitored by the GOC staff. More information on RSV is [[Trash/Trash/MonitoringInformation/RSV][available here]].
+
+---++ Nagios consoles
+A set of Nagios probe wrappers designed for RSV probe output is being prepared, and should be available in an RSV community probe respository.  The Nagios probes (wrappers) can be used for site-level Nagios consoles that may be in use for local fabric monitoring (eg. define an OSG service group) or they may be reported to facility-wide Nagios monitors.  At present, there is no OSG-wide Nagios console, but some VOs run these for their facilities and may find these probes useful. More information on this will be made available in the near future (EOT: Spring 2008)
+
+
+%BR%
+%COMPLETE2% %BR%
+%RESPONSIBLE% -- Main.ArvindGopu - 06 Jun 2008 %BR%
+%REVIEW%

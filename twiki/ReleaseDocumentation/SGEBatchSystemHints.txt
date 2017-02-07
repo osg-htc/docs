@@ -1,0 +1,95 @@
+%META:TOPICINFO{author="KyleGross" date="1481047990" format="1.1" version="1.19"}%
+%META:TOPICPARENT{name="SiteFabricBestPractices"}%
+---+Hints for the SGE Batch System Admins
+%SHOW_DOC_STATUS_TABLE%
+%TOC%
+
+---++ About This Document
+
+This document aims to provide assistance for the systems administrators whose Compute Elements interface to the SGE batch system.
+%STARTINCLUDE%
+
+Here are some details that are needed to get an SGE batch system work with the Compute Element and for the monitoring system to correctly report  submitted jobs. 
+
+---++Installation environment
+Prior to installing =Globus-SGE-Setup= make sure that your environment points to the appropriate SGE installation. This is usually done by sourcing the SGE setup file =/path-to-sge/common/settings.sh= . This should define the variables =$SGE_ROOT= and =$SGE_CELL=.
+---++Gratia accounting 
+For Gratia to work "accounting" must be turned on: <pre class=screen><b>$qconf -mconf</b> 
+...snip... 
+reporting_params  	accounting=true, ...
+... snip ...
+</pre>
+Also Gratia reporting does not work if your accounting file rotates. In case you have a rotating accounting file please open a ticket with =GOC= to get help.
+---++SGE and WS-GRAM
+For WS-GRAM to work "reporting" must be turned on <pre class=screen><b>$qconf -mconf</b> 
+...snip... 
+reporting_params  	..., reporting=true, ...
+...snip...
+</pre>
+
+As of OSG 1.0 release, the SGE-GT4 adaptor handles rotating the =reporting= file when the rotation follows the SGE standard model of <pre class=screen>
+<b>reporting</b> is current file
+<b>reporting.0</b> is previous file
+...snip...
+<b>reporting.9</b> is oldest file
+</pre>  
+WS-GRAM will not work if SGE's ARCO service is also being run on the installation as that tool deletes the =reporting= file with each read.  The effect is that jobs are submitted and pass thru the  batch system but GRAM never registers that the submission occurred. 
+
+
+%STOPINCLUDE%
+%BR%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = StevenTimm
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = SuchandraThapa
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+ 
+-->

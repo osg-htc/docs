@@ -1,0 +1,20 @@
+%META:TOPICINFO{author="KyleGross" date="1476285322" format="1.1" version="1.7"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++ RSV - WLCG SAM data exchange
+
+<P> NOTE: Arvind needs to edit this RSN..
+
+<p> One of the less talked about objectives of [[Trash/Trash/MonitoringInformation/RSV][RSV]] is the RSV-WLCG SAM data exchange. The OSG GOC will put an infrastructure in place to transfer resource and service availablity metrics from the central RSV database to the WLCG SAM system. This data transfer is expected to be reasonably streamlined and straight forward since both parties will be conforming to the [[https://twiki.cern.ch/twiki/bin/view/LCG/GridMonitoringProbeSpecification][the current version (0.91) of the WLCG grid monitoring probe specification]].
+
+<p> Once the infrastructure is in place, and completely automated (EOT: Dec 2007 for ITB CE data; Jan 2008 for OSG production CE data), WLCG SAM will not probe individual OSG resources. Instead it will pick up availability data from the !RSV database.
+
+<p> More information on this topic will be made available in the near future. If you have any questions. please contact [[http://rsv.grid.iu.edu/documentation/rsv-contact-info.html][the RSV development team]].
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% -- Main.ArvindGopu - 06 Jun 2008 %BR%
+%REVIEW% Main.BurtHolzman

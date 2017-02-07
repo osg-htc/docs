@@ -1,0 +1,25 @@
+%META:TOPICINFO{author="AnandPadmanabhan" date="1211924596" format="1.1" reprev="1.4" version="1.4"}%
+%META:TOPICPARENT{name="SiteValidationTable"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+
+---++ General 
+I conducted the tests on several persistent and test ITB site. The test were simple jobs using both Globus (pre-ws and ws) and Condor-G interface along with simple stagein. We also conducted storage validation to test space reservation.
+
+---++ Process
+   * Compute Elements Tests
+      * Tests were successful on FNAL_FERMIGRID_ITB, BNL_ITB_Test1, LBNL_DSD_ITB, and CIGI-ITB.
+   * Storage Tests 
+      * I was successfully able to test opportunistic storage on both d-cache (FNAL and BNL) and Bestman (LBNL). 
+      * UC-ITB is still having authentication issues
+      * During the testing I discovered couple of bugs:
+         1. fermi srm client tools do not work with BestMan storage. This bug has been fixed in the new VDT release.
+         1. When using the lbnl client tool, I was not able to reserve 5GB space.On further investigation I found a bug in the srm-client-lbnl. The maximum size reservation one can make is limited to 2147483647 (2^31-1). This was because a client is using a 4 byte signed int for size that overflows at 2^31 causing the problem. Alex confirmed the problem and has developed the fix that will be included in the next VDT release 
+
+---++ Status 
+   * We can consider the validation successful
+
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE%  Anand Padmanabhan %BR%
+%REVIEW%   %BR%
+%REVCOM%   

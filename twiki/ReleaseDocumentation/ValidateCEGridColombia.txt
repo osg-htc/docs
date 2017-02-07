@@ -1,0 +1,26 @@
+%META:TOPICINFO{author="JamesWeichel" date="1317327685" format="1.1" version="1.7"}%
+%META:TOPICPARENT{name="GridColombiaWorkshop2010"}%
+---+!! *<nop>%SPACEOUT{%TOPIC%}%*
+
+%TOC{depth="2"}%
+
+---++ Introduction
+This page provides a table to track validation of a CE.  There's also links to instructions on validating various CE services.
+
+---++ Validation Table
+
+%TABLE{ tableborder="1" cellpadding="0" cellspacing="1" dataalign="left"}%
+%EDITTABLE{  header="| *Cluster* | *Site Verify * | *BDII* | *ReSS* | *Gratia* | *GUMS* |  *RSV Probes*  | *Clients* |" format="| text, 5 | text, 5 | text, 5 | text, 5 | text, 5 | text, 5 |text, 5 | text, 5 |"  changerows="on" quietsave="on" editbutton="Edit table" }%
+| *Cluster* | *Site Verify * | *BDII* | *ReSS* | *Gratia* | *GUMS* | *RSV Probes* | *Clients* |
+| *Instructions* | [[ReleaseDocumentation.ValidateSiteVerify][SiteVerify]] | [[GridColombiaValidateBDII][BDII]] | [[ReleaseDocumentation.GridColombiaValidateRess][ReSS]] | [[GridColombiaValidateGratia][Gratia]] | [[ReleaseDocumentation.ValidateGUMS][GUMS]] | [[ReleaseDocumentation.ValidateRSVProbes][RSV probes]] | [[ReleaseDocumentation.ValidateClients][Clients]] |
+| gs-ce1 | %Y% | | | | | | |
+| gs-ce2 | %Y% | | | | | | |
+| gs-ce3 | %Y% | | | | | | |
+| gs-ce4 | %Y% | | | | | | |
+| gs-ce5 | %Y% | | | | | | |
+
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+-- Main.SuchandraThapa - 26 Feb 2010

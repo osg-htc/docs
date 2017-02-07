@@ -1,0 +1,48 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1309459031" format="1.1" version="1.1"}%
+%META:TOPICPARENT{name="WebHome"}%
+<div style="font-family: Tahoma, Geneva, sans-serif;">
+<div style="border: thin solid #000; background-color: #F90;">
+  <h1 align="center">OSG 1.2.20 Update Notification</h1>
+</div>
+<br/>
+
+<div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; border: thin solid #000; background-color: #F93;">Date: <span style="font-size: 14px; font-weight: normal;">June 30, 2011</span></div>
+<br/>
+<div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Affected Components</div>
+<div>
+  <p>The following components are affected:</p>
+  <ul>
+    <li> All RSV installations </li>
+    <li>CE installations</li>
+
+  </ul>
+</div>
+<br/>
+<div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Summary</div>
+<div> 
+  <p>This release contains the following updates:</p>
+  <ul>
+    <li>Several gatekeeper changes for CMS
+      <ul>
+        <li>Optional re-nicing of the globus-gatekeeper to give it a lower priority to keep the gatekeeper more responsive under heavy loads</li>
+
+        <li>Random sleep for fork jobs to prevent unwanted synchronization of grid monitor processes        </li>
+      </ul>
+    </li>
+    <li>Condor job manager changes to support group accounting</li>
+    <li>SGE job manager changes to use a more reliable polling method</li>
+    <li>Cleanup scripts are now provided by VDT so that files left by globus in user home directories can be removed automatically</li>
+  </ul>
+
+  <p>Several other updates are also included in this release, see the VDT update page for more details.</p>
+  <p><strong>Due to the fourth of July holiday weekend, OSG support resources will be limited so admins may want to wait until Tuesday July 5th before updating.</strong></p>
+</div>
+<br/>
+<div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Update Instructions</div>
+<div>Update instructions can be found on the OSG Twiki under the OSG 1.2 <a href="https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OSG12UpdateInstructions">update instructions</a>.</div>
+<br/>
+<div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Additional Information</div>
+
+<div>The release notes for the VDT 2.0.0p27 release underlying this release can be found <a href="http://vdt.cs.wisc.edu/releases/2.0.0/release-p27.html">here</a>.</div>
+<br/>
+</div>

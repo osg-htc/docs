@@ -1,0 +1,285 @@
+%META:TOPICINFO{author="KyleGross" date="1476804327" format="1.1" version="1.10"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+_Instructions for the rsv-control utility._
+
+%EDITTHIS%
+%BR%
+
+---++ Introduction
+*Metrics* are the values measured by _probes_ and have names like <tt>org.osg.general.ping-host</tt>. 
+*Probes* are scripts that can be executed locally or against a specific HOST and evaluate _metrics_.
+For a definition of the probes see the [[https://twiki.cern.ch/twiki/bin/view/LCG/GridMonitoringProbeSpecification][probe specification document]]. To write your own probe see [[Trash/MonitoringInformation.WriteYourOwnRSVProbe][this RSV document]]. OSG-RSV is described [[Trash/MonitoringInformation.RSV][here]].
+
+=rsv-control= has been added to OSG-RSV.
+Note that attached there is also a tarfile of the OSG-RSV trunk as of 11/10 2009: [[%ATTACHURL%/rsvcontrol-test-v013-full.tgz][rsvcontrol-test-v013-full.tgz]]
+
+---++ Installation
+While waiting for Pacman packaging, the current beta version of configure-rsv is attached to this page:  [[%ATTACHURL%/rsvcontrol-test-v013.tar.gz][rsvcontrol-test-v013.tar.gz]]
+<pre>
+&lt;download> rsvcontrol-test-v013.tar.gz 
+tar xvzf rsvcontrol-test-v013.tar.gz 
+export PATH=$PATH:`pwd`/osg-rsv/sbin
+</pre>
+
+<!--
+<pre>
+pacman -get
+</pre>
+-->
+
+---+++ Requirements
+<tt>rsv-control</tt> requires Pacman for the installation.
+It can be installed anywhere but it is recommended to install it inside a VDT installation.
+It acts on a OSG-RSV installation and uses also Condor-Cron (required by OSG-RSV).
+
+---+++ Upgrade
+At the moment there is no upgrade of rsv-control. Just remove the installation directory and install it again.
+
+---++ Setup
+<!--
+<pre>
+</pre>
+-->
+<pre>
+source $VDT_LOCATION/setup.sh
+export PATH=$PATH:<install_dir>/rsvctrl-test/bin/
+</pre>
+
+---++ Description
+<pre>
+usage: rsv-control [ --verbose ] 
+      --help | -h 
+      --version 
+      --setup  NOT IMPLEMENTED ... COMING SOON
+      --list [ --wide | -w | --full-width] [ --format &lt;format> ] [ all | &lt;probeID>]
+      --enable  [--user &lt;user>] --metric  &lt;metric-name>  --host &lt;host-name>
+      --enable  [--user &lt;user>] --service &lt;service-name> --host &lt;host-name>
+      --disable [--user &lt;user>] --metric  &lt;metric-name>  --host &lt;host-name>
+      --disable [--user &lt;user>] --service &lt;service-name> --host &lt;host-name>
+      --full-test    [--user &lt;user>] --metric &lt;metric-name>   --host &lt;host-name>
+      --test    [--user &lt;user>] --metric &lt;metric-name>   --host &lt;host-name>
+
+This script is used to control or verify a probe.
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -p DIR, --vdt-location=DIR, --vdt-install=DIR
+                        Root directory of the OSG or VDT installation (prefer
+                        --vdt-location)
+  --verbose             Verbose output
+  -l, --list            List probe information
+  -w, --wide            Wide list display
+  --full-width          To avoid truncation in probe listing
+  -f LIST_FORMAT, --format=LIST_FORMAT
+                        Specify the list format (['local', 'brief', 'long',
+                        'full', 'log', 'out', 'err']; default: local)
+  --test                Run a probe and return its output.
+  --full-test           Test a probe within OSG-RSV. Probe is executed only
+                        once, immediately.
+  -e, --enable          Enable probe
+  -d, --disable         Disable probe
+  --setup               NOT READY... COMING SOON: Setup the RSV installation
+                        (change file permissions, start Condor, ...)
+  --user=USER           Specify the user to run OSG-RSV probes
+  --metric=METRIC       Specify the metric to enable/disable (e.g.
+                        org.osg.general.ping-host)
+  --service=SERVICE     Specify the service to enable/disable (e.g. OSG-CE)
+  --host=URI            Specify the host FQDN and optionally the port to be
+                        used by the probe (e.g. host or host:port)
+</pre>    
+
+Here is a description of the options, grouped according to the command. Long options are preceeded by "--", short by "-". Options may have an argument. Between parenthesis there are alternative formats for the option. Some options specify commands for rsv-control, some are modifiers.
+
+Generic options (no commands):
+   * *--version*: show program's version number and exit
+   * *--help* (*-h*): show a help message and exit
+
+For all commands:
+   * *--vdt-location=DIR* (*-pDIR*, *--vdt-install=DIR*): Specify the root directory of the OSG or VDT installation (prefer --vdt-location)
+   * *--verbose*: verbose output on standard output (console)
+
+*--list* (*-l*) List probe information. If no probe is specified in the argument all probes are listed in a short tabular form. Each line has probe name, type and status or host (if the probe is enabled). Lines may be truncated to fit the page. The table list one line for each enabled metric. If that metric is not enabled against any host, it list one line with the metric status (probably DISABLED). 
+   * *--wide* (*-w*): Wide list display (156 columns instead of the 76 by default)
+   * *--full-width*: To avoid truncation in probe listing
+   * *--format=LIST_FORMAT* (*-fLIST_FORMAT*): Specify the list format (['local', 'brief', 'long', 'full', 'log', 'out', 'err']; default: 'local')
+      * *local*: status in OSG-RSV
+      * *brief*: status for the submitter (condor-cron)
+      * *long*: long status (output of 'condor_cron_q ID')
+      * *full*: full status (full list of classads returned by condor-cron)
+      * *log*: dump of the log file (userlog for condor-cron)
+      * *out*: dump of the stdout returned by the probe execution againsts the specific host 
+      * *err*: dump of the stderr returned by the probe execution againsts the specific host 
+  
+*--test* Run against the host URI the probe returning METRIC. --metric is mandatory. --host may be mandatory if the probe requires it (see the documentation for the specific probe). Probe is executed and output returned. No file is written.
+   * *--user=USER* Specify the user to run OSG-RSV probes
+   * *--metric=METRIC* Specify the metric to enable/disable (e.g. <tt>org.osg.general.ping-host</tt>)
+   * *--host=URI* Specify the host FQDN and optionally the port to be used by the probe (e.g. host or host:port)
+
+*--full-test* Test against the host URI the probe returning METRIC. --metric is mandatory. --host may be mandatory if the probe requires it (see the documentation for the specific probe). Probe is executed only once, immediately. Testing a probe will not affect normal execution. Log, output and error files are different. Support the same options as test.
+
+*--enable* (*-e*) Enable probe.  Support the same options as test plus --service.
+   * *--service=SERVICE* Specify the service to enable/disable (e.g. <tt>OSG-CE</tt>)
+
+*--disable* (*-d*) Disable probe. Support the same options as enable.
+  
+*--describe* NOT READY... COMING SOON: Describes the probe returning METRIC.
+   * *--metric=METRIC* Specify the metric to enable/disable (e.g. <tt>org.osg.general.ping-host</tt>)
+
+*--setup* NOT READY... COMING SOON: Setup the RSV installation (change file permissions, start Condor, ...)
+
+---++ Use cases
+Follows a list of practical use cases
+
+---+++ List all the metrics
+<pre>
+./rsv-control -l
+</pre>
+
+---+++ Enable/Disable a metric
+To enable a metric you can type:
+<pre>
+./rsv-control --user rsvuser --enable --metric org.osg.batch.jobmanager-pbs-status --host uct3-edge7.uchicago.edu
+</pre>
+In a personal installation (non root) you can run the probes as yourself.
+
+To disable a probe (only the user that enabled the probe can disable it. A different user would fail to remove the job in condor-cron):
+<pre>
+./rsv-control --user rsvuser --disable --metric org.osg.batch.jobmanager-pbs-status --host uct3-edge7.uchicago.edu
+</pre>
+
+---+++ Troubleshoot a probe
+The different listing options are useful to troubleshoot a probe.
+The unique identifier of a probe instance (the submission to condor-cron of a probe running against an host/URI) is formed by the <uri>__<probe_file_name>@<metric_name>.
+
+Once you know this you can troubleshoot the execution of the probe using the --list command and try new immediate submissions with --test. If a probe is disabled, it makes no sense to check how it is running. So I assume that the probe in the following examples is enabled. Use [[][Test a probe] if you are testing a new probe.
+
+<tt>--format long</tt> allows to see the condor job: job 11, Idle (1). Healthy probes should be Idle (waiting to start) or Running.
+<pre>
+./rsv-control --list --format long uct2-dss.uchicago.edu__certificate-expiry-local-probe@org.osg.local.hostcert-expiry
+
+-- Submitter: uct2-dss.uchicago.edu : <128.135.158.230:60778> : uct2-dss.uchicago.edu
+ ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD               
+  11.0   marco           6/5  15:32   2+02:38:25 I  0   0.0  probe_wrapper.pl /
+</pre>
+
+<tt>--format full</tt> will return the full classads about the job. Below are some of the lines returned:
+   * !OnExitRemove = FALSE - probe is rerun
+   * Cron* - define period
+   * Args = "/raid/tests/rsv090605/osg-rsv/bin/probes/certificate-expiry-local-probe -m org.osg.local.hostcert-expiry --verbose" - local execution string
+   * !JobStatus = 1 - should be 1 or 2
+<pre>
+./rsv-control --list --format full uct2-dss.uchicago.edu__certificate-expiry-local-probe@org.osg.local.hostcert-expiry
+
+-- Submitter: uct2-dss.uchicago.edu : <128.135.158.230:60778> : uct2-dss.uchicago.edu
+MyType = "Job"
+TargetType = "Machine"
+ClusterId = 11
+QDate = 1244233961
+
+RootDir = "/"
+
+JobUniverse = 12
+Cmd = "/raid/tests/rsv090605/osg-rsv/bin/probes/probe_wrapper.pl"
+
+Env = "PATH=/usr/bin:/bin;VDT_LOCATION=/raid/tests/rsv090605;PERL5LIB=/raid/tests/rsv090605/osg-rsv/bin/probes"
+
+PeriodicRemove = FALSE
+OnExitHold = FALSE
+OnExitRemove = FALSE
+LeaveJobInQueue = FALSE
+Args = "/raid/tests/rsv090605/osg-rsv/bin/probes/certificate-expiry-local-probe -m org.osg.local.hostcert-expiry --verbose"
+OSGRSV = "probes"
+GlobalJobId = "uct2-dss.uchicago.edu#1244233961#11.0"
+ProcId = 0
+JobStartDate = 1244244961
+OrigMaxHosts = 1
+JobLastStartDate = 1253878740
+JobCurrentStartDate = 1253900340
+NumShadowStarts = 448
+</pre>
+
+*--format log* prints the log file of all executions:
+<pre>
+ ./rsv-control --list --format log uct2-dss.uchicago.edu__certificate-expiry-local-probe@org.osg.local.hostcert-expiry
+000 (011.000.000) 06/05 15:32:41 Job submitted from host: <128.135.158.230:60778>
+...
+001 (011.000.000) 06/05 18:43:00 Job executing on host: <128.135.158.230:48190>
+
+001 (011.000.000) 09/25 12:43:00 Job executing on host: <128.135.158.230:60603>
+...
+004 (011.000.000) 09/25 12:43:01 Job was evicted.
+	(0) Job terminated and was requeued
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	(1) Normal termination (return value 1)
+	The job attribute OnExitRemove expression 'FALSE' evaluated to FALSE
+...
+</pre>
+
+*--format out* and *--format err* do the same with standard output and standard error returned by the probe execution:
+   * the output and the error files are overwritten each time the probe executes
+   * the log file is appended
+<pre>
+./rsv-control --list --format out uct2-dss.uchicago.edu__certificate-expiry-local-probe@org.osg.local.hostcert-expiry
+metricName: org.osg.local.hostcert-expiry
+metricType: status
+timestamp: 2009-09-25T17:43:01Z
+metricStatus: OK
+serviceType: OSG-Local-Monitor
+hostName: uct2-dss.uchicago.edu
+summaryData: OK
+detailsData: /etc/grid-security/hostcert.pem: notAfter=Sep  8 15:52:51 2010 GMT
+EOT
+</pre>
+
+---+++Test a probe
+If you like to execute a probe in the exact same way that it would be executed by OSG-RSV but you want to do it without waiting and without enabling it, then you can use --test. Testing a probe will not affect normal execution. Log, output and error files are different.
+
+<pre>
+./rsv-control --test --metric org.osg.local.hostcert-expiry --host uct2-dss.uchicago.edu
+Submitting job(s).
+Logging submit event(s).
+1 job(s) submitted to cluster 37.
+</pre>
+---++ Known issues
+
+---++ More information (Reference)
+   * http://rsv.grid.iu.edu/
+   * https://twiki.cern.ch/twiki/bin/view/LCG/GridMonitoringProbeSpecification
+   * http://rsv.grid.iu.edu/documentation/vdt-package.html
+   * https://twiki.grid.iu.edu/twiki/bin/view/Trash/Trash/MonitoringInformation/WebHome
+   * http://rsv.grid.iu.edu/documentation/sample_status.html
+   * https://twiki.grid.iu.edu/bin/view/Trash/Trash/ArchivedDocumentation/ITB/ITB090/ValidateRSV-Probes
+   * http://rsv.grid.iu.edu/documentation/rsv-contact-info.html
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% Main.MarcoMambelli - 25 Sep 2009 %BR%
+%REVIEW%
+   * [[%ATTACHURL%/rsv-scripts-test-v08.tar.gz][rsv-scripts-test-v08.tar.gz]]: configure-rsv
+
+   * [[%ATTACHURL%/rsv-scripts-test-v09.tar.gz][rsv-scripts-test-v09.tar.gz]]: v0.9: ordered list, fixed parser.exit
+
+   * [[%ATTACHURL%/rsvcontrol-test-v010.tar.gz][rsvcontrol-test-v010.tar.gz]]: rsvcontrol-test-v010.tar.gz
+
+   * [[%ATTACHURL%/rsvcontrol-test-v013-full.tgz][rsvcontrol-test-v013-full.tgz]]: Full OSG-RSV trunk
+
+   * [[%ATTACHURL%/rsvcontrol-test-v013.tgz][rsvcontrol-test-v013.tgz]]: rsv-control scripts only
+
+   * [[%ATTACHURL%/rsvcontrol-test-v013.tgz][rsvcontrol-test-v013.tgz]]: rsv-control scripts only
+
+%META:FILEATTACHMENT{name="rsv-scripts-test-v08.tar.gz" attachment="rsv-scripts-test-v08.tar.gz" attr="" comment="configure-rsv" date="1253914845" path="rsv-scripts-test-v08.tar.gz" size="30405" stream="rsv-scripts-test-v08.tar.gz" tmpFilename="/usr/tmp/CGItemp17157" user="MarcoMambelli" version="1"}%
+%META:FILEATTACHMENT{name="rsv-scripts-test-v09.tar.gz" attachment="rsv-scripts-test-v09.tar.gz" attr="" comment="v0.9: ordered list, fixed parser.exit" date="1254153845" path="rsv-scripts-test-v09.tar.gz" size="31108" stream="rsv-scripts-test-v09.tar.gz" tmpFilename="/usr/tmp/CGItemp6782" user="MarcoMambelli" version="1"}%
+%META:FILEATTACHMENT{name="rsvcontrol-test-v010.tar.gz" attachment="rsvcontrol-test-v010.tar.gz" attr="" comment="" date="1254378548" path="rsvcontrol-test-v010.tar.gz" size="31058" stream="rsvcontrol-test-v010.tar.gz" tmpFilename="/usr/tmp/CGItemp16816" user="MarcoMambelli" version="1"}%
+%META:FILEATTACHMENT{name="rsvcontrol-test-v013-full.tgz" attachment="rsvcontrol-test-v013-full.tgz" attr="" comment="Full OSG-RSV trunk" date="1257883357" path="rsvcontrol-test-v013-full.tgz" size="510907" stream="rsvcontrol-test-v013-full.tgz" tmpFilename="/usr/tmp/CGItemp17083" user="MarcoMambelli" version="1"}%
+%META:FILEATTACHMENT{name="rsvcontrol-test-v013.tgz" attachment="rsvcontrol-test-v013.tgz" attr="" comment="rsv-control scripts only" date="1257883837" path="rsvcontrol-test-v013.tgz" size="51014" stream="rsvcontrol-test-v013.tgz" tmpFilename="/usr/tmp/CGItemp17078" user="MarcoMambelli" version="2"}%

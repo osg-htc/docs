@@ -1,0 +1,87 @@
+%META:TOPICINFO{author="KyleGross" date="1481047990" format="1.1" version="1.18"}%
+%META:TOPICPARENT{name="Documentation.SecuritySiteResponsibilities"}%
+---+ *When to report a security incident to OSG*
+%DOC_STATUS_TABLE%
+%TOC%
+
+---++ About This Document
+This document is to help security contacts and administrators report and respond to security incidents at their sites.
+
+---++ Introduction
+The goal of the OSG security team in incident handling is to first contain the incident to prevent it from spreading, and then to help the site administrators diagnose the cause or vulnerability of the incident.  Then we can learn from the incident and improve the infrastructure accordingly.  Because we are participating in a world wide infrastructure, the OSG will %RED%confidentially%ENDCOLOR% share information about incidents that is relevant to our partners in other countries. This means that we will keep you in the loop before we disclose any information about your site. When you first contact us, we will work with you and your local security team to decide what information we can share with other communities. We will not endanger your site's public reputation. We will share information when we believe other grid sites also subject to the same attack.
+
+Any circumstance that causes the grid credentials (X.509 certificate private key or proxy certificate) to be compromised should be reported to the OSG. What does compromised mean? It means the private key of an X.509 certificate, or a proxy certificate file, is accessible to someone or some process which is not the owner of the credential (not counting the root account). Also, if the root account is hacked on any system which stores X.509 private keys or proxy certificate files then all those credentials should be considered compromised.  If you have evidence that the compromised credentials were actually used by the intruder, that should be reported as well. Note that these credentials can be either for a person or for a host or service.  If it is an X.509 certificate private key that is compromised, that should also be reported to the issuing Certificate Authority so that certificate can be revoked.
+
+If any system which runs grid services, hosts grid software, or runs grid batch jobs has its root account hacked, then that incident should be reported to OSG.
+
+When an incident is confidentially reported to the OSG then someone from the OSG security team will follow-up with the site and proceed according to the circumstances.
+
+---++ Responding to an Incident
+We have not had a serious grid incident so far. But this does not mean we will not have one. Incidents and attacks are a regular part of computer security lifecycle and they are expected to happen. So there is no need to be ashamed or overly panicked when they happen.  
+
+The first step is to realize that something out of ordinary is happening, a new user launching thousands of jobs, or new ports opening up, etc. If you cannot decide whether it is a security incident or not, err on the side of being cautious. Email us anytime at security@opensciengrid.org. If it turns out to be a non-issue, great. We do not even open a ticket and will close the issue. If it turns out to be a local security issue, not related to grid software, again, we will close the issue silently. You can go back to your local team. Our goal is not to judge your abilities as a site admin or police your actions, but to help all of us being secure. If your suspicions turns out to be a real issue, we will work with you at every step. We will inform you before making any announcements, work with you on how much we disclose, and keep you in the loop.
+
+The details of Incident response process is listed at [[Documentation.IncidentDiscoveryReporting][Incident discovery reporting process]] 
+
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesBarlow
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = IgorSfiligoi
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
+
+%META:TOPICMOVED{by="JamesBarlow" date="1273172829" from="Documentation.ReportRespondToSecurityIncidents" to="ReleaseDocumentation.ReportRespondToSecurityIncidents"}%

@@ -1,0 +1,135 @@
+%META:TOPICINFO{author="KyleGross" date="1481047991" format="1.1" version="1.33"}%
+%META:TOPICPARENT{name="Documentation.UsingTheGrid"}%
+%DOC_STATUS_TABLE%
+
+---+!! Instructions to use a Compute Element
+%TOC%
+
+---+ About this Document
+
+<!-- conventions used in this document
+   * Local UCL_CWD  = %URLPARAM{"INPUT_CWD" encode="quote" default="~"}%
+   * Local UCL_HOST = %URLPARAM{"INPUT_HOST" encode="quote" default="client"}%
+   * Local UCL_USER = %URLPARAM{"INPUT_USER" encode="quote" default="user"}%
+   * Local UCL_DOMAIN = %URLPARAM{"INPUT_DOMAIN" encode="quote" default="opensciencegrid.org"}%
+   * Local UCL_CE = %URLPARAM{"INPUT_CE" encode="quote" default="ce.opensciencegrid.org"}%
+-->
+
+%ICON{hand}% This document is for grid users. Simple tests will be introduced which may help testing the correct authentication with and operation of grid resources. This document also provides a _step-by-step guide_ to determine the approximate cause of an error.
+
+---+ Customize this Document
+
+<form action="%SCRIPTURLPATH{"view"}%/%WEB%/%TOPIC%">
+<table>
+  <tr>
+    <td>
+      Server (CE) Host Name
+    </td>
+    <td>
+      <input type="text" name="INPUT_CE" value="%UCL_CE%"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Client Host Name
+    </td>
+    <td>
+      <input type="text" name="INPUT_HOST" value="%UCL_HOST%"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Client Login Name
+    </td>
+    <td>
+      <input type="text" name="INPUT_USER" value="%UCL_USER%"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+     &nbsp;
+     <input type="submit" class="twikiSubmit" value="Customize" />
+    </td>
+  </tr>
+</table>
+</form>
+
+---+ Introduction
+
+Using a grid resource involves a series of steps that differ from the steps taken on a Unix resource. The following sections introduce and demonstrate each step required to run a basic grid job submission scenario. By understanding these simple tests you will be well prepared to understand, operate and debug complex grid scenarios. The series of tests are:
+
+   1 [[ReleaseDocumentation/UserCESimpleTest#Authentication_Test][Authentication Test]]: create and verify your grid proxy used to authenticate yourself with a grid resource
+   1 [[ReleaseDocumentation/UserCESimpleTest#Data_Transfer_Test][Data Transfer Test]]: copy data to and from a grid resource
+   1 [[ReleaseDocumentation/UserCESimpleTest#Job_Submission_Test][Job Submission Test]]: execute a program on a grid resource
+
+%NOTE% The *Data Transfer Test* and the *Job Submission Test* depend on the successful completion of the *Authentication Test*. Both tests are independent of each other for the purpose of this document and require access to a %LINK_GLOSSARY_CE%, which is the terminology used in the OSG to describe a grid resource that can run jobs. 
+
+---+ Requirements
+
+   1 access to a resource that has [[ReleaseDocumentation/ClientInstallationGuide][Globus client tools]] installed
+   1 a [[ReleaseDocumentation/CertificateWhatIs][grid user certificate]] installed on the same resource in =$HOME/.globus=
+   1 access to a potential test resource ( see next paragraph )
+
+---+ Choose a Test Resource
+
+%ICON{hand}% Except for the [[ReleaseDocumentation/UserCESimpleTest#Authentication_Test][Authentication Test]] all tests require a grid resource to test against. Consider [[Documentation.FindAvailableResource][this guide]] for choosing an OSG grid resource to run the tests. Make sure to know what your membership %LINK_GLOSSARY_VO% is and that the grid resource you choose supports this VO! This document uses =osg-ce.ligo.caltech.edu= as an example which should not be used to run your tests!
+
+%INCLUDE{"ReleaseDocumentation/CESimpleTest"}%
+
+---+ Comments
+| PM2RPM_TASK = CLIENT | Main.RobertEngel | 28 Aug 2011 - 05:57 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = BrianBockelman
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = User
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = Scientist
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Training
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

@@ -1,0 +1,88 @@
+%META:TOPICINFO{author="KyleGross" date="1481047983" format="1.1" version="1.6"}%
+%META:TOPICPARENT{name="Security.OsgRaPlanning"}%
+%DOC_STATUS_TABLE%
+
+%TOC%
+
+---++ Bulk Issuance of Host Certificates using Grid Admin
+
+This page is to help a discussion of how to improve management of
+host certificates.
+Diagram below shows possible workflow for managing host certificates in bulk.
+
+<img src="%ATTACHURLPATH%/bulk-no-pin.jpg" alt="bulk-no-pin.jpg" width='960' height='720' />
+
+   * Each host has software and context to request and download certificates, but not privilege to sign them
+   * Cluster admin checks requests and installed serial #&#8217;s for issued certificates
+   * Grid Admin verifies DNS scope for requested certificates.
+      * Compare digital signature with DNS scope and email address for certificates
+   * How much effort is this loop, and how often to do it?
+      * Grid Admin stage is ~ 10 min. per bulk request
+   * What reports for monitoring?
+      * CN duplication
+      * Publish ordered lists of valid certificates
+         * Order by CN alphabetical, date, email address
+      * Require cluster admin to review reports?
+      * What frequency? Weekly, Monthly?
+   * Does this work for new host installations?  How quickly does initial certificate need to be installed?
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesBarlow
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MineAltunay
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %NO%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->     
+
+%META:FILEATTACHMENT{name="bulk-no-pin.jpg" attachment="bulk-no-pin.jpg" attr="" comment="Bulk host certs workflow" date="1192478636" path="bulk-no-pin.jpg" size="83331" stream="bulk-no-pin.jpg" user="Main.DougOlson" version="1"}%
+%META:TOPICMOVED{by="JamesBarlow" date="1273175811" from="Security.BulkHostCertsNoPIN" to="ReleaseDocumentation.BulkHostCertsNoPIN"}%

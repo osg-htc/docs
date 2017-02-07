@@ -1,0 +1,466 @@
+%META:TOPICINFO{author="KyleGross" date="1481047984" format="1.1" version="1.145"}%
+%DOC_STATUS_TABLE%
+
+---+!! Compute Element Installation Guide
+%TOC{depth="3"}%
+
+---+ About this Document
+
+<!-- conventions used in this document
+   * Local UCL_CWD  = %URLPARAM{"INPUT_CWD" encode="quote" default="/opt/osg-%VERSION%"}%
+   * Local UCL_HOST = %URLPARAM{"INPUT_HOST" encode="quote" default="ce"}%
+   * Local UCL_USER = %URLPARAM{"INPUT_USER" encode="quote" default="user"}%
+   * Local UCL_DOMAIN = %URLPARAM{"INPUT_DOMAIN" encode="quote" default="opensciencegrid.org"}%
+   * Local BATCH_SYSTEM = %URLPARAM{"BATCH_SYSTEM" encode="quote" default="Any"}%
+   * Local UCL_CONFIG = =%UCL_CWD%/osg/etc/config.ini=
+-->
+
+%ICON{hand}% This document is for System Administrators. It covers the installation of a %LINK_GLOSSARY_CE% to be integrated into the %LINK_OSG%. This document applies to the latest release %RED% OSG-%OSG_VERSION% %ENDCOLOR%. All procedures presented in this document in general require _root_ privileges.
+
+%INCLUDE{"Documentation/DocumentationTeam/DocConventions" section="Header"}%
+%INCLUDE{"Documentation/DocumentationTeam/DocConventions" section="CommandLine"}%
+
+---+ Customize this Document
+
+<form action="%SCRIPTURLPATH{"view"}%/%WEB%/%TOPIC%">
+<table>
+  <tr>
+    <td>
+      Host Name
+    </td>
+    <td>
+      <input type="text" name="INPUT_HOST" value="%UCL_HOST%"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Domain Name
+    </td>
+    <td>
+      <input type="text" name="INPUT_DOMAIN" value="%UCL_DOMAIN%"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Login Name
+    </td>
+    <td>
+      <input type="text" name="INPUT_USER" value="%UCL_USER%"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Installation Path
+    </td>
+    <td>
+      <input type="text" name="INPUT_CWD" value="%UCL_CWD%"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Batch System
+    </td>
+    <td>
+      <select name="BATCH_SYSTEM">
+        <option value="%BATCH_SYSTEM%">%BATCH_SYSTEM%</option>
+        <option value="Any">Any</option>
+        <option value="Condor">Condor</option>
+        <option value="PBS">PBS</option>
+        <option value="SGE">SGE</option>
+        <option value="LSF">LSF</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>
+     &nbsp;
+     <input type="submit" class="twikiSubmit" value="Customize" />
+    </td>
+  </tr>
+</table>
+</form>
+
+---+ Engineering Considerations
+
+A %LINK_GLOSSARY_CE% is a selection of software provided by the %LINK_VDT% bundled for the use on the %LINK_OSG%.  A Compute Element provides services to allow grid users to run jobs on a grid resource. The [[ReleaseDocumentation/SitePlanning][Site Planning Guide]] will help you avoid many of the common problems while installing a new site.
+
+After successfully completing this procedure, you should proceed to install the [[ReleaseDocumentation/WorkerNodeClient][Worker Node Client]].
+
+---+ Requirements
+The CE enables a cluster to receive grid jobs but this document supposes that you have a working cluster and are familiar with its management. If this is not the case you may check the [[Trash/Tier3.WebHome][OSG Tier 3 documentation]], a guide more simple for system administrators at their first experiences with clusters and High Throughput Computing. 
+
+   1 new System Administrators should read the [[ReleaseDocumentation/SitePlanning][Site Planning Guide]]
+   1 execute all steps to [[ReleaseDocumentation/PreparingComputeElement][prepare your Compute Element]]
+   1 verify that your Operating System is [[http://vdt.cs.wisc.edu/releases/2.0.0/requirements.html][supported]]
+   1 a %LINK_PACMAN% installation of version %PACMAN_VERSION% or later
+   1 a valid [[ReleaseDocumentation/GetGridCertificates][grid host certificate]] is required
+   1 to test and use the installation a valid [[ReleaseDocumentation.CertificateGet][grid user certificate]] is required
+
+---+ How to get Help?
+
+To get assistance please use [[HelpProcedure][this page]]. 
+
+---+ Installation Procedure
+
+The installation procedure consists of the following steps:
+
+   1 deactivate an existing installation
+   1 create an installation directory
+   1 use %LINK_PACMAN% to install the %LINK_GLOSSARY_CE%
+   1 install the [[Documentation/GlossaryC#DefsCA][CA Certificates]] and the %LINK_GLOSSARY_CRL%
+   1 connect %LINK_GLOSSARY_GRAM% to =managedfork= and your batch system back-end
+   1 execute the post installation script
+
+---++ Deactivate an existing Installation (Optional)
+
+Before you proceed you must [[ReleaseDocumentation/ComputeElementInstall#Service_Deactivation][deactivate]] an existing installation to avoid to have leftover processes. Make sure to start the installation with a clean environment. If =$VDT_LOCATION= is in your environment you probably need to log-in again and make sure that no setup file is sourced by your log-in script.
+
+---++ Reuse an existing Configuration (Optional)
+
+This [[ReleaseDocumentation/ReusingConfigurationInformation][guide]] describes how to re-use the configuration from an _existing_ installation.
+
+%STARTSECTION{"CreateInstallationDirectory"}%
+---%SHIFT%++ Create the Installation Directory
+
+Create an installation directory and change into it. Make sure the directory is world readable if the installation is to be shared by grid users: 
+
+<pre class="rootscreen">
+[root@%UCL_HOST% ~]$ mkdir -p %UCL_CWD%
+[root@%UCL_HOST% ~]$ cd %UCL_CWD%
+</pre>
+
+%WARNING% Please do not use a system directory like =/opt= or =/usr= for the installation directory. The installation routine will create many sub-directories in the main directory.
+%ENDSECTION{"CreateInstallationDirectory"}%
+
+---++ Use Pacman to Install the Compute Element Software
+
+In the next step we will use the =pacman= command line tool to install the package from the OSG software cache. %LINK_PACMAN% will ask whether you want to "trust the caches and accept the license", answer =yall= and =y= to install Compute Element.
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% pacman -get %CACHE%:ce
+Do you want to add [%CACHE%] to [trusted.caches]? (y/n/yall): %RED%yall%ENDCOLOR%
+...
+</pre>
+
+%TWISTY{%TWISTY_OPTS_OUTPUT%}%
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% pacman -get %CACHE%:ce
+Do you want to add [%CACHE%] to [trusted.caches]? (y/n/yall): %RED%yall%ENDCOLOR%
+Beginning VDT prerequisite checking script vdt-common/vdt-prereq-check...       
+
+All prerequisite checks are satisfied.
+                                                          
+
+
+========== IMPORTANT ==========
+Most of the software installed by the VDT *will not work* until you install
+certificates.  To complete your CA certificate installation, see the notes
+in the post-install/README file.
+
+                                                                              
+Pacman Installation of OSG-%VERSION% Complete
+ </pre>
+%ENDTWISTY%
+
+%NOTE% Depending on your network connection and hardware capabilities the installation process will take between 5 and 30 minutes to complete. Meanwhile you can =tail= the main installation logfile =%UCL_CWD%/vdt-install.log=.
+
+%WARNING% Do not continue if the pacman command indicated an error! In this case review the main installation log file and consult the [[ReleaseDocumentation.HelpProcedure][help page]].
+
+
+%STARTSECTION{"UpdateEnvironment"}%
+---%SHIFT%++ Update the Environment
+
+Depending on your shell update your environment by sourcing =%UCL_CWD%/setup.sh= or =%UCL_CWD%/setup.csh=:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% . %UCL_CWD%/setup.sh
+</pre>
+
+Depending on your preference you might want to optionally include the setup script in your system or user profile.
+%ENDSECTION{"UpdateEnvironment"}%
+
+
+%INCLUDE{"ReleaseDocumentation/CaCertificatesInstall" section="InstallACertificateAuthorityPackage" INPUT_SCREEN="rootscreen"}%
+%INCLUDE{"ReleaseDocumentation/CaCertificatesInstall" section="EnableCACertificates" INPUT_SCREEN="rootscreen"}%
+%INCLUDE{"ReleaseDocumentation/CaCertificatesInstall" section="EnableCRL" INPUT_SCREEN="rootscreen"}%
+
+---++ Connect GRAM to Managed Fork and your Batch System Backend
+
+The Grid Resource Allocation Manager connects to the batch system using a %LINK_GLOSSARY_JM%. By default only the =fork= job manager is supported which allows grid users to execute jobs on the %LINK_GLOSSARY_GATEKEEPER%. To connect %LINK_GLOSSARY_GRAM% to an _existing_ batch system, you need to install the _corresponding_ job manager.
+
+---+++ Define Globus Port Ranges
+
+%LINK_GLOSSARY_GRAM% and %LINK_GLOSSARY_GRIDFTP% use *TCP ports* to handle connection requests. The range of TCP ports that will be used by the Compute Element is defined by two environment variables =$GLOBUS_TCP_PORT_RANGE= for _outbound_ and =$GLOBUS_TCP_SOURCE_RANGE= for _inbound_ connections respectively.
+
+The range of ports required dependents on the number of _job slots_ your Compute Element provides to grid users. Each job slot in use requires 2 TCP ports within the port range. 
+
+%INCLUDE{"ReleaseDocumentation/ComputeElementFirewalls" section="VDT_CONFIG"}%
+
+It may be necessary to _limit_ the Linux ephemeral port range to avoid the Globus ports defined above. Please check the =/etc/sysctl.conf= file for the following lines; insert if needed:
+
+<pre class="file">
+# Limit ephemeral ports to avoid globus TCP port range
+# See OSG CE install guide
+net.ipv4.ip_local_port_range = 10240 %RED%&lt;begin port minus 1 port&gt;%ENDCOLOR% 
+</pre>
+
+Execute =sysctl= as the _root_ user for these settings to take effect:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% sysctl -p
+</pre>
+
+%WARNING% An insufficient range of TCP ports reserved will make grid jobs hang randomly! Do not set the port ranges by editing the =xinetd= configuration files!
+
+%NOTE% Please proceed to configure your [[ReleaseDocumentation/ComputeElementFirewalls][firewall]] accordingly.
+
+---+++ Instructions for Managed Fork
+
+The default job manager =fork= allows grid users to run arbitrary many jobs on the %LINK_GLOSSARY_GATEKEEPER%. This may result in dangerous load values which will render the Gatekeeper unusable eventually. The =managedfork= job manager routes incoming =fork= requests through Condor instead, which can be used to restrict the number of jobs executing on the Gatekeeper.
+
+Before you proceed to install the =managedfork= job manager, you may define two environment variables that point to an _existing_ Condor installation and its configuration file. Otherwise _skip_ this step:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% export VDTSETUP_CONDOR_LOCATION = &lt;Path to Condor&gt;
+%UCL_PROMPT_ROOT% export VDTSETUP_CONDOR_CONFIG   = &lt;Path to Condor configuration file&gt;
+</pre>
+
+Then continue to use =pacman= to install the =managedfork= job manager:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% pacman -get %CACHE%:ManagedFork
+</pre>
+
+By default =managedfork= does not restrict the execution of jobs _forked_ on the gatekeeper. Restrictions can be defined using the Condor configuration file =$CONDOR_CONFIG=:
+
+<pre class="file">
+START_LOCAL_UNIVERSE = TotalLocalJobsRunning < %RED%5%ENDCOLOR% || GridMonitorJob =?= TRUE
+</pre>
+
+%NOTE% Match =TotalLocalJobsRunning= to the capabilities of your gatekeeper. You must execute =condor_reconfig= as _root_ for the changes to take effect.
+
+
+%AH_CONDOR_BEGIN%---+++ Instructions for Condor
+
+Before you proceed to install the Condor job manager, you must define two environment variables that point to the _existing_ Condor installation and its configuration file:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% export VDTSETUP_CONDOR_LOCATION = &lt;Path to Condor&gt;
+%UCL_PROMPT_ROOT% export VDTSETUP_CONDOR_CONFIG   = &lt;Path to Condor configuration file&gt;
+</pre>
+
+Then continue to use =pacman= to install the Condor job manager:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% pacman -get %CACHE%:Globus-Condor-Setup
+</pre>
+
+By default the Condor job manager requires all jobs to be run on a %LINK_GLOSSARY_WN% of the _same_ architecture as the %LINK_GLOSSARY_GATEKEEPER% architecture. Disable this feature if some or all worker nodes use a different architecture by commenting out following line in the file =%UCL_CWD%/globus/lib/perl/Globus/GRAM/JobManager/condor.pm=:
+
+<pre class="file">
+#    $requirements .= " && Arch == \"" . $description->condor_arch() . "\" ";
+</pre>
+
+Next, optimize Gratia probe performance by changing the directory to record the job history. The location can be changed in the file =$VDTSETUP_CONDOR_CONFIG= using the variable *PER_JOB_HISTORY_DIR*:
+
+<pre class="file">
+PER_JOB_HISTORY_DIR = %UCL_CWD%/gratia/var/data
+</pre>
+
+Finalize the changes by running =condor_reconfig=:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% condor_reconfig
+</pre>
+
+%AH_CONDOR_END%
+
+%AH_PBS_BEGIN%---+++ Instructions for PBS
+
+Before you proceed make sure that the =$PATH= environment variable contains the path to the binaries for the [[http://en.wikipedia.org/wiki/Portable_Batch_System][Portable Batch System]]. Then use =pacman= to install the PBS job manager:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% pacman -get %CACHE%:Globus-PBS-Setup
+</pre>
+
+Otherwise the installation will silently fail and the error will be reported to =%UCL_CWD%/vdt-install.log= only. In this case you must _remove_ the =Globus-PBS-Setup= package, correct the =$PATH= environment variable and install the PBS job manager once again. To remove the =Globus-PBS-Setup= use:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% pacman -remove %CACHE%:Globus-PBS-Setup
+</pre>
+
+%AH_PBS_END%
+
+%AH_SGE_BEGIN%---+++ Instructions for SGE
+
+Before you proceed make sure that the =$PATH= environment variable contains the path to the binaries for the [[http://gridengine.sunsource.net/][SUN Grid Engine]]. Then use =pacman= to install the SGE job manager:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% pacman -get %CACHE%:Globus-SGE-Setup
+</pre>
+
+%AH_SGE_END%
+
+%AH_LSF_BEGIN%---+++ Instructions for LSF
+
+Before you proceed make sure that the =$PATH= environment variable contains the path to the binaries for the [[http://www.platform.com/workload-management/high-performance-computing][Platform LSF]]. Then use =pacman= to install the LSF job manager:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% pacman -get %CACHE%:Globus-LSF-Setup
+</pre>
+
+%AH_LSF_END%
+
+---++ Enable Log-file Rotation (Optional)
+
+Optionally enable the rotation of all log-files using =vdt-control=:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% vdt-control --enable vdt-rotate-logs
+</pre>
+
+---++ Post-Install Procedure
+
+To finalize your installation you must run the =vdt-post-install= program on the command line:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% vdt-post-install
+Starting...
+Configuring PRIMA... Done.
+Configuring EDG-Make-Gridmap... Done.
+Configuring PRIMA-GT4... Done.
+Done.
+</pre>
+
+<!-- the main page is composed of several includes -->
+
+%INCLUDE{"ReleaseDocumentation/ConfigureOSGAttributes" section="ConfigurationProcedure"}%
+%INCLUDE{"ReleaseDocumentation/ConfigureOSGAttributes" section="EditConfigFile"}%
+
+%INCLUDE{"ReleaseDocumentation/FullPrivPreConfig" section="EnableFullMode" TOC_SHIFT="++"}%
+
+%INCLUDE{"ReleaseDocumentation/GipConfiguration" section="ConfigurationStart" TOC_SHIFT="++"}%
+%INCLUDE{"ReleaseDocumentation/GipConfiguration" section="MultiCE" TOC_SHIFT="++"}%
+%INCLUDE{"ReleaseDocumentation/GipConfiguration" section="SubCluster" TOC_SHIFT="++"}%
+%INCLUDE{"ReleaseDocumentation/GipConfiguration" section="ForComputeElements" TOC_SHIFT="++"}%
+%INCLUDE{"ReleaseDocumentation/GipConfiguration" section="AdvertiseAvailableServices" TOC_SHIFT="++"}%
+
+%INCLUDE{"ReleaseDocumentation/InstallAndConfigureRSV" section="Configuration" TOC_SHIFT="++"}%
+
+%INCLUDE{"ReleaseDocumentation/ConfigureOSGAttributes" section="VerifyConfigFile"}%
+%INCLUDE{"ReleaseDocumentation/ConfigureOSGAttributes" section="RunConfigFile"}%
+
+---+ Activate and Deactivate Services
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="About" TOC_SHIFT="+"}%
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="List" TOC_SHIFT="+"}%
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="Activate" TOC_SHIFT="+"}%
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="Deactivate" TOC_SHIFT="+"}%
+
+---+ Register the Compute Element with the Grid Operations Center
+
+Every _new_ Compute Element should be registered with the %LINK_GOC_OPEN_TICKET% using [[Documentation/RegisterWithOsg][these instructions]]. 
+
+---+ Verify the Operation of the Compute Element
+
+Follow [[ReleaseDocumentation/CESimpleTest][these instructions]] to verify the correct operation of the Compute Element.
+
+---++ !ManagedFork
+
+To verify the correct operation of the =managedfork= jobmanager submit a simple grid job to your gatekeeper (%UCL_HOST_FQDN%). This operation requires a _valid_ grid proxy:
+
+<pre class="screen">
+%UCL_PROMPT% globus-job-run %UCL_HOST_FQDN%:2119/jobmanager-fork /bin/sleep 900
+</pre>
+
+Next log into your gatekeeper (%UCL_HOST_FQDN%) while the job is running and query Condor for a list of a jobs using =managedfork= as their jobmanager:
+
+<pre class="screen">
+%UCL_PROMPT% condor_q -constraint 'JobUniverse==12'
+2784794.0   fnalgrid       10/7  22:19   0+00:00:11 R  0   0.0  sleep 900 
+</pre>
+
+The jobmanager =managedfork= may not work correctly if you don't see the test job among the list of jobs printed to the terminal.
+
+---+ References
+
+   * [[ReleaseDocumentation/PreparingComputeElement][Preparing the Compute Element Installation]]
+   * [[ReleaseDocumentation/WorkerNodeClient][Installing the Worker Node Client]]
+   * [[ReleaseDocumentation/CESoftWare][Compute Element Software and Services]]
+   * [[ReleaseDocumentation/ComputeElementFirewalls][Compute Element Firewalls]]
+   * [[ReleaseDocumentation/TroubleshootingComputeElement][Compute Element Troubleshooting Guide]]
+
+---+ Troubleshooting
+
+Please see the [[ReleaseDocumentation/TroubleshootingComputeElement][Compute Element Troubleshooting Guide]].
+
+
+---+ *Comments*
+| If the OLD_VDT_LOCATION is set there is no need to run the cert updater by hand, the certs will be handled same way as they were in the old install. I am not sure whether that happens always, but always for me.<br />Also seems to me that the Enabling Full Privilege Authentication is done automatically based on config.ini and the files are placed where they need to be - nothing to be done for it these days.<br /> | Main.IwonaSakrejda | 23 Jul 2009 - 20:54 |
+| If Condor has been installed via RPM what should VDTSETUP_CONDOR_LOCATION be? Or, better, how do I point the condor-jobmanager to it? | Main.MarcoMambelli | 26 May 2010 - 23:44 |
+| Above, in the multi-ce section it says: %BR%Set the value of site_name in the &#34;Site Information&#34; section to be the same for each CE.%BR%Shouldn't that be resource_group setting to be the same now, and resource (only used by gratia) to be different for each (localhost); | Main.StevenTimm | 30 Aug 2010 - 17:57 |
+| Marco--if condor has been installed via the old-style RPM, then VDTSETUP_CONDOR_LOCATION should be set to the top level, i.e. /opt/condor-7.4.3&#60;br /&#62;in the case of condor-7.4.3.. this is for old style condor rpms up to and including condor 7.4.x.&#60;br /&#62;You can also make a version-neutral symlink, i.e  ln -s /opt/condor-7.4.3 /opt/condor&#60;br /&#62;and then set it to that, this allows you to upgrade condor rpms without changing your vdt install&#60;br /&#62;Condor 7.5 and greater rpms will be put in /usr/bin and /usr/sbin. | Main.StevenTimm | 08 Oct 2010 - 02:23 |
+| RE: latitude and longitude--myosg has a plugin by which you can modify the latitude and&#60;br /&#62;longitude of your cluster with a on-screen google map, docs should reflect that. | Main.StevenTimm | 08 Oct 2010 - 02:33 |
+| re: PBS instructions--the pbs binaries qstat, qsub, and pbsnodes have to be available&#60;br /&#62;in the PATH all the time, not just at install time, because the Generic Information Provider&#60;br /&#62;routines for PBS assumes that they are in the PATH. | Main.StevenTimm | 08 Oct 2010 - 02:35 |
+| re: Condor Instructions, in the text &#39;The location can be changed in the file $VDTSETUP_CONDOR_LOCATION using the variable PER_JOB_HISTORY_DIR&#39;, I think the $VDTSETUP_CONDOR_CONFIG variable is meant. | Main.SarahWilliams | 22 Mar 2011 - 17:37 |
+| PM2RPM_TASK = CE | Main.RobertEngel | 28 Aug 2011 - 06:03 |
+%COMMENT{type="tableappend"}%
+
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = SuchandraThapa
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MarcoMambelli
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+
+%META:TOPICMOVED{by="RobGardner" date="1192745464" from="Integration/ITB_0_7.ComputeElementInstallGuide" to="Integration/ITB_0_7.ComputeElementInstall"}%

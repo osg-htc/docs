@@ -1,0 +1,146 @@
+%META:TOPICINFO{author="KyleGross" date="1481047992" format="1.1" version="1.22"}%
+%META:TOPICPARENT{name="WebHome"}%
+%DOC_STATUS_TABLE%
+
+---+!! VDT Maintenance 
+%TOC{}%
+
+---+ About this Document
+<!-- useful variable definitions
+   * Local UCL_HOST = ce
+   * Local UCL_CWD = /opt/osg-%VERSION%
+   * Local UCL_SERVICE = vdt-cleanup
+-->
+
+%ICON{"hand"}% This Document is for System Administrators. It introduces the usage of cleanup scripts provided by the %LINK_VDT% to perform maintenance on a %LINK_GLOSSARY_CE%.
+
+---+ About the Cleanup Procedure
+
+The cleanup script located at =$VDT_LOCATION/vdt/cleanup-scripts/vdt-cleanup= is run by the =cron= daemon on the user's behalf and cleans up following files and directories:
+
+   * Globus TMP directory: =$VDT_LOCATION/globus/tmp=
+   * user gass cache =&lt;user home&gt;/.globus/.gass_cache=
+   * user Globus job directory =&lt;user home&gt;/.globus/job=
+   * user GRAM job manager logs =&lt;user home&gt;/gram_job_mgr_&lt;integer&gt;.log=
+   * user GRAM scratch directories =&lt;user home&gt;/gram_scratch_&lt;random string&gt;=
+
+---+ Installation
+
+The cleanup scripts are installed as part of the [[ReleaseDocumentation/ComputeElementInstall][Compute Element Installation]].
+
+%NOTE% If you are updating a CE from a version of OSG prior to 1.2.20 you will need to _add_ the following lines to your main configuration file =$VDT_LOCATION/osg/etc/config.ini=.
+
+<pre class="file">
+; As of OSG 1.2.20 cleanup scripts are included to help delete old files                             
+; For more information see the Twiki:                                                                
+;   https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/VdtCleanupScripts                        
+enable_cleanup = %(enable)s
+
+; The age in days after with files, that have not been accessed, should be deleted.                  
+; Jobs that run longer than this number of days may be killed because necessary                      
+; files in VDT_LOCATION/globus/tmp may be removed.  If this is a problem for you                     
+; do not run the vdt-cleanup script and email vdt-support@opensciencegrid.org   
+; Default = 14                    
+cleanup_age_in_days = 14
+
+; The user's home directories that should be cleaned up.  The default value                          
+; is @vo-file.  This will open osg-user-vo-map.txt and try to get the list                           
+; of users from this file.  Alternatively you can specify a whitespace separated                     
+; list of users.                                                                                     
+cleanup_users_list = @vo-file
+
+; The cron time at which the cleanup script will run.  By default it will run                        
+; once a day during the night.                                                                       
+cleanup_cron_time = 15 1 * * *
+</pre>
+
+%IMPORTANT% If you set the age to 14 days, jobs that run for longer than 14 days may be killed because necessary files are cleaned up from the =$VDT_LOCATION/globus/tmp= directory.  You should set this value to a number of days higher than you expect your long running jobs to take to complete.  If this is a problem for you then do not use the =vdt-cleanup= script.
+
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="EnableService" INPUT_SCREEN="rootscreen" TOC_SHIFT=""}%
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="Activate" INPUT_SCREEN="rootscreen" TOC_SHIFT=""}%
+
+---+ Advanced Topic: Adding Custom Cleanup Scripts
+
+The cron job automatically executes all scripts found in =$VDT_LOCATION/vdt/cleanup-scripts= directory that are:
+
+   * owned by _root_
+   * permissions set to _0700_
+
+Following environment variables will be present during the execution of the scripts:
+
+| *Variable* | *Comment* |
+| $VDT_LOCATION | Location of the VDT installation. |
+| $VDT_CLEANUP_AGE | Age in days after which files will be deleted. |
+| $VDT_CLEANUP_USER_FILE | Path to a file containing a list of user accounts and home directories to clean up.  The format is: &lt;user&gt; &lt;user home&gt; |
+
+---+ Validation of Service Operation
+
+   1 Verify that the log file =$VDT_LOCATION/logs/vdt-cleanup.log= has been created and inspect its content
+   1 Run the cleanup script =$VDT_LOCATION/vdt/cleanup-scripts/vdt-cleanup= with the =--dry-run= option and inspect the output<pre class="rootscreen">
+%UCL_PROMPT_ROOT% $VDT_LOCATION/vdt/cleanup-scripts/vdt-cleanup --dry-run</pre>
+
+---+ Known Issues
+
+Currently none.
+
+---+ References
+
+   1 [[ReleaseDocumentation/HandyWorkerNodeScripts][More Handy Worker Nodes Scripts]]
+
+---+ *Comments*
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = ScotKronenfeld
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = SuchandraThapa
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+-- Main.JamesWeichel - 03 Feb 2010

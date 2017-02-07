@@ -1,0 +1,313 @@
+%META:TOPICINFO{author="KyleGross" date="1481047991" format="1.1" version="1.28"}%
+%META:TOPICPARENT{name="ValidatingComputeElement"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%DOC_STATUS_TABLE%
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+%EDITTHIS%
+%BR%
+
+---++ OSG Client
+
+The OSG Client package provides a set of tools useful for user-access to Grid services.  Below are a series of test you can do after installing the client software via the Trash.Trash/Trash/IntegrationClientInstallationGuide and sourcing the =setup.(c)sh= script to test the operability of the software.
+
+---+++ Obtain a Grid Proxy: *grid-proxy-init* and *voms-proxy-init*
+
+In the following examples it is assumed that your =usercert.pem= and =userkey.pem= files are in =$HOME/.globus/=. If not, you will need to specify them explicitly via "-cert" and "-key" arguments to the xxxx-proxy-init commands.
+
+   * Obtain a grid-proxy via =grid-proxy-init= <pre class=screen>
+$ grid-proxy-init
+<b>
+Your identity: /DC=org/DC=doegrids/OU=People/CN=XXX XXXXX #####
+Enter GRID pass phrase for this identity:
+Creating proxy ....................................... Done
+Your proxy is valid until: Wed Aug 22 04:57:38 2007
+</b>
+</pre>
+
+   * Obtain a voms-proxy via =voms-proxy-init=:<pre class=screen>
+$ voms-proxy-init -voms osg
+<b>
+Cannot find file or dir: /home/condor/execute/dir_14135/userdir/glite/etc/vomses
+Enter GRID pass phrase:
+Your identity: /DC=org/DC=doegrids/OU=People/CN=XXX XXXXX #####
+Cannot find file or dir: /home/condor/execute/dir_14135/userdir/glite/etc/vomses
+Creating temporary proxy ................................ Done
+Contacting  voms.opensciencegrid.org:15027 [/DC=org/DC=doegrids/OU=Services/CN=host/voms.opensciencegrid.org] "osg" Done
+Creating proxy .................................... Done
+Your proxy is valid until Tue Oct 30 23:32:54 2007
+</b>
+</pre>
+
+<b>Note</b>: the apparent error message ==Cannot find file or dir: /home/condor/.....== is not an error but an artifact of the software build used in the VDT.  You should ignore that message.
+
+---+++ Querying Resources  
+
+%NOTE% This section refers to the ldapsearch command.  The ldapsearch command is not part of the standard OSG installation, it is commonly found on many standard linux installations. If you do not have it, it is part of the VDT.  Install the OpenLDAP package using pacman with the following command: <br/><pre class="screen">pacman -get http://vdt.cs.wisc.edu/vdt_200_cache/:OpenLDAP</pre>
+
+The client tools include utilities to query Grid resources. Examples here used to test the client are directed the OSG-ITB repositories.
+
+   * Query ReSS <pre class=screen>condor_status -pool osg-ress-4.fnal.gov -format '%s\n' GlueSiteName | uniq
+<b>CIT_ITB_1
+ITB_INSTALL_TEST_2
+ITB_INSTALL_TEST_3
+CMS-BURT-ITB
+...</b>
+</pre>
+   * Query BDII (see ValidateBDII documentation) <pre class=screen>ldapsearch -x -LLL -p 2170 -h is-itb.grid.iu.edu -b mds-vo-name=LBNL_VTB,mds-vo-name=local,o=grid
+<b>dn: mds-vo-name=LBNL_VTB,mds-vo-name=local,o=grid
+objectClass: GlueTop
+ 
+dn: GlueSEUniqueID=osp1.lbl.gov,mds-vo-name=LBNL_VTB,mds-vo-name=local,o=grid
+...</b>
+</pre>
+   * Query by LCG tools (<b>NOTE</b> =lcg-info= and =lcg-infosites= are not in ones path by default):<pre class=screen> $VDT_LOCATION/lcg/bin/lcg-info --list-ce --bdii is-itb.grid.iu.edu:2170 --vo osg
+<b>- CE: cithep201.ultralight.org:2119/jobmanager-condor-osg
+- CE: cms-xen1.fnal.gov:2119/jobmanager-condor-osg
+....</b>
+
+$VDT_LOCATION/lcg/bin/lcg-info --list-se --bdii is-itb.grid.iu.edu:2170 --vo osg
+<b>- SE: cit-se.ultralight.org
+- SE: cms-xen1.fnal.gov
+...</b> 
+ 
+$VDT_LOCATION/lcg/bin/lcg-infosites --vo osg -f ce  --is is-itb.grid.iu.edu 
+<b>valor del bdii: is-itb.grid.iu.edu:2170
+#CPU    Free    Total Jobs      Running Waiting ComputingElement
+----------------------------------------------------------
+  40      40       0              0        0    osp1.lbl.gov:2119/jobmanager-pbs-batch
+   2       0       0              0        0    tb10.grid.iu.edu:2119/jobmanager-condor-osg
+1042       2       0              0        0    itb.rcac.purdue.edu:2119/jobmanager-condor-osg
+...</b>
+
+$VDT_LOCATION/lcg/bin/lcg-infosites --vo osg -f se  --is is-itb.grid.iu.edu 
+<b>Avail Space(Kb) Used Space(Kb)  Type    SEs
+----------------------------------------------------------
+125             2               n.a     osp1.lbl.gov
+28824440        10638628        n.a     tb10.grid.iu.edu
+37              242             n.a     itb.rcac.purdue.edu
+...</b>
+</pre>
+
+---+++ Simple Client Jobs
+
+Some of the examples here are also documented in Trash.Trash/Trash/IntegrationCESimpleTest with a emphasis on observiny the CE response via the log files.  Here we simply note the response you should observe from the client.  It is assumed that you have sourced the =$VDT_LOCATION/setup.(c)sh= script , have a valid grid-proxy, and are aware of resources available to you. 
+
+----++++ Submit a remote job: =globus-job-run=
+
+To the default (fork) queue:
+
+<pre class=screen>
+$globus-job-run osp1.lbl.gov/jobmanager /bin/hostname
+<b>osp1.lbl.gov</b>
+</pre>
+
+To the local batch system queue: (specific syntax depends on what batch system is deployed [Condor|PBS|LSF|SGE])
+
+<pre class=screen>
+$globus-job-run osp1.lbl.gov/jobmanager-pbs /bin/hostname
+<b>osp3.lbl.gov</b>
+</pre>
+
+----++++ File tranfer: =globus-url-copy,srmcp,uberftp=
+
+Copy a file using globus-url-copy from a local system to a remote gsiftp server.
+
+<pre class=screen>
+$ls -l /tmp/testdata_10.dat
+<b>-rw-r--r--  1 qwerty qwerty 2121000 Nov 15 11:25 /tmp/testdata_10.dat</b>
+
+$globus-url-copy file:///tmp/testdata_10.dat gsiftp://osp4.lbl.gov:2811/tmp/testdata_destination.dat
+</pre>
+
+Now copy it back and compare:
+
+<pre class=screen>
+$globus-url-copy gsiftp://osp4.lbl.gov:2811/tmp/testdata_destination.dat  file:///tmp/testdata_return.dat
+$ls -l /tmp/testdata_return.dat
+<b>-rw-r--r--  1 qwerty qwerty 2121000 Nov 15 11:27 /tmp/testdata_return.dat</b>
+
+$diff /tmp/testdata_10.dat /tmp/testdata_return.dat
+</pre>
+
+You can repeat the above tests between two remote gsiftp servers using the syntax:
+<pre class=screen>
+$globus-url-copy  gsiftp://server1:2811/filesystem/filename gsiftp://server2:2811/filesystem2/filename2
+</pre>
+
+You can repeat the above tests using =srmcp= instead of =globus-url-copy=. In addition you can access a remote SRM service explicitly. For example:
+
+<pre class=screen>
+$srmcp gsiftp://osp4.lbl.gov:2811/tmp/testdata.dat srm://osg-itb.ligo.caltech.edu:8643/pnfs/ligo.caltech.edu/data/star/testdata_dest.dat
+</pre>
+
+You may also use the "-debug" flag which will generate diagnostic messages.  Also, <b>srm-v2-client</b> package is included in the OSG-client installation but the software is not added to ones path by default. 
+
+To test =uberftp=, simply point to a known resource:
+
+<pre class=screen>$ uberftp osg-itb.ligo.caltech.edu
+<b>220 osg-itb.ligo.caltech.edu GridFTP Server 2.5 (gcc32dbg, 1182369948-63) ready.
+230 User qwerty logged in.
+</b>
+</pre>
+
+
+----++++ Submit a remote job to WS GRAM: =globusrun-ws=
+
+Typically, WS-GRAM is unused on the OSG as a client or server; we maintain the below test instructions for posterity's sake.
+
+%TWISTY{
+mode="div"
+showlink="Show..."
+hidelink="Hide"
+showimgleft="%ICONURLPATH{toggleopen-small}%"
+hideimgleft="%ICONURLPATH{toggleclose-small}%"
+}%
+Basic submission using WS GRAM is done with =globusrun-ws= analgous to =globus-job-run= with GRAM.   A wide range of tests are shown in the  ValidateGramWebServices documentation.  Here is a basic test to verify that the client tools are in order.
+
+<pre class=screen>
+
+$globusrun-ws -submit -F osp1.lbl.gov:9443 -Ft Fork -s -c /bin/hostname
+<b>
+Delegating user credentials...Done.
+Submitting job...Done.
+Job ID: uuid:7bfd4324-93b7-11dc-8f33-00304889ddce
+Termination time: 11/16/2007 20:15 GMT
+Current job state: Active
+Current job state: CleanUp-Hold
+osp1.lbl.gov
+Current job state: CleanUp
+Current job state: Done
+Destroying job...Done.
+Cleaning up any delegated credentials...Done.
+</b>
+</pre>
+
+%ENDTWISTY%
+---+++ *Condor-G submission*
+
+OSG Client includes a condor package for use as a Condor-G submit host. To test this service 
+
+   * verify service is running:<pre class=screen> $condor_q
+ 
+-- Submitter: qwerty@osp3.lbl.gov : <128.3.30.238:59969> : osp3.lbl.gov
+ ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD               
+ 
+0 jobs; 0 idle, 0 running, 0 held
+</pre>
+
+   * prepare submit file for either GRAM or WS-GRAM <pre class=screen> $cat test.submit
+<b>#specify resource destination
+Universe            = grid
+grid_resource       = gt4 https://hostname:9443 [Condor|PBS|SGE]
+
+# specify executable
+Executable          = /bin/hostname
+Transfer_Executable = false
+ 
+# copy stdout stderr to local files, referenced by job (Process) and submission id (Cluster)
+output  =  mytest.out.$(Cluster).$(Process)
+error   =    mytest.err.$(Cluster).$(Process)
+#a single local log file for tracking Condor-g submission
+log    = mytest.log
+ 
+# do not send email notification
+notification=Never
+
+# submit 2 identical jobs: Process=0 and Process=1
+Queue 2</b>
+</pre>
+   * Submit job <pre class=screen>$condor_submit test.submit 
+<b>Submitting job(s)..
+Logging submit event(s)..
+2 job(s) submitted to cluster 51.</b>
+</pre>
+   * monitor jobs <pre class=screen>$condor_q
+  
+<b>-- Submitter: qwerty@osp3.lbl.gov : <128.3.30.238:59969> : osp3.lbl.gov
+ ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD               
+  51.0   qwerty         11/15 12:29   0+00:00:00 I  0   9.8  hostname          
+  51.1   qwerty         11/15 12:29   0+00:00:00 I  0   9.8  hostname          
+  52.0   qwerty         11/15 12:29   0+00:00:15 R 0   0.0  gridftp_wrapper.sh
+ 
+3 jobs; 2 idle, 1 running, 0 held</b>
+</pre>
+   * verify jobs completed <pre class=scree>$cat mytest.out.51.0
+<b>osp3.lbl.gov</b>
+</pre>
+
+
+---++ Worker node client
+
+The worker node client is a subset of client tools assumed to be needed, not by an interactive user, but by a batch job which lands on a worker node.  These tools can be checked via the methods listed above where applicable.  To validate one should test the job-submission tools (=globus-job-run= and =globusrun-ws=) and the data transfer tools (=globus-url-copy=, =srmcp= and =uberftp=) as described for the OSG Client package.
+
+
+
+%STOPINCLUDE%
+
+---+ Comments
+
+| PM2RPM_TASK = CLIENT | Main.RobertEngel | 28 Aug 2011 - 05:49 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = SuchandraThapa
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = Scientist
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
+
+%META:TOPICMOVED{by="RobGardner" date="1193339124" from="Integration/ITB_0_7.ValClients" to="Integration/ITB_0_7.ValidateClients"}%

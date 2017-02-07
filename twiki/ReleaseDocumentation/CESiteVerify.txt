@@ -1,0 +1,97 @@
+%META:TOPICINFO{author="KyleGross" date="1481047983" format="1.1" version="1.24"}%
+%META:TOPICPARENT{name="WebHome"}%
+%SHOW_DOC_STATUS_TABLE%
+
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+%EDITTHIS%
+%BR%
+
+Now you're ready to run the full CE site verification test suite. All elements of this test should now pass.
+
+%NOTE% To run the site verify script you should not be <b>root</b> .
+
+%RED%Caveats from ValidateSiteVerify:%BR%
+   * this script is being phased out but still performs checks not packaged elsewhere
+   * you need a valid proxy
+   * the vds checks fail and can be ignored since vds has been replaced with pegasus
+%ENDCOLOR%
+
+<pre class="screen">
+#  <b>cd $VDT_LOCATION</b>
+#  <b>source ./setup.sh </b>
+#  <b>grid-proxy-init </b>
+     <i>....enter your passphrase</i>
+#  <b>cd verify </b>
+#  <b>./site_verify.pl </b>
+</pre>
+
+The results will indicate the various tests that are performed with results indicating  PASSED, FAILED, UNTESTED,  NOT WORKING,  NONE or  NO. conditions.
+
+If you need more help troubleshooting your site please see the RSV probe section of the documentation [[https://twiki.grid.iu.edu/twiki/bin/view/ReleaseDocumentation/ValidatingComputeElement#Included_topic_Validate_RSV_Infr][here]].
+
+%STOPINCLUDE%
+
+
+
+---++ *Comments*
+| Are we still supporting this script? Has it been recently tested? | Main.IwonaSakrejda | 31 May 2010 - 09:46 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = RobQ
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = HorstSeverini 
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = KarthikArun 
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

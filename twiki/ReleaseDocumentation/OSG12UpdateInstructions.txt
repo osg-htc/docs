@@ -1,0 +1,11 @@
+%META:TOPICINFO{author="ScotKronenfeld" date="1287509301" format="1.1" reprev="1.6" version="1.6"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{%TOPIC%}%*
+
+---++ Update Instructions
+
+If you are updating from OSG 1.0.x or earlier, you must do a brand new installation because OSG 1.2.x uses a different Pacman cache from prior releases. There are installation guides for installing from scratch the various components available in ReleaseDocumentation.WebHome. In addition, for experienced admins, there is a ReleaseDocumentation.QuickInstallGuide available.
+
+If you are updating an OSG 1.2 installation, use the =osg-version= utility to determine your OSG version:
+   * If you are updating from OSG 1.2.13 or earlier, [[OSG12UpdateInstructionsPre1214][follow these update instructions]].
+   * If you are updating from OSG 1.2.14 or later, [[OSG12NewUpdateInstructions][follow these streamlined update instructions]].

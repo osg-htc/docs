@@ -1,0 +1,136 @@
+%META:TOPICINFO{author="KyleGross" date="1481047991" format="1.1" version="1.25"}%
+%META:TOPICPARENT{name="ReleaseDocumentation/Storage"}%
+%DOC_STATUS_TABLE%
+
+---+!! *<noop>%SPACEOUT{ Storage for the Application Developer}%*
+%TOC{depth="2"}% 
+
+---++Overview
+
+   * File Transfer Services
+      * _globus.org_ service takes simple command line requests for data movement and executes the needed storage operations on behalf of the user.
+      * _FTS_ is a file transfer service used by LHC experiments.
+      * _PhEDEx_ is a file transfer service used by the CMS LHC experiment.
+      * _DAGMan_ is a meta-scheduler for Condor with the capability of staging and moving data within a Compute Element context.
+
+   * Software Development Collaboration
+      * _Developer Groups._ A statement on the participation of software development groups in the OSG.
+
+#FileTransferServices
+---++File Transfer Services
+
+In this section several file transfer services that can be using in the Open Science Grid are described. With the exception of [[#DAGMan][DAGMan]] these services generally treat data movement as a matter of staging files for job execution. It is worth noting that while one might choose the kind of data movement that best fits the processing, it is also desirable that the processing be designed to facilitate efficient use of storage resources. In addition, the data movement portion of a computational model may depend on other factors, such as the capabilities of co-located Compute Elements and the needs of other projects acting on the same data.
+
+---+++The globus.org service
+
+The intention of the globus.org service is to provide a simple interface to users for requesting data movement. The service maintains a database of site-specific software and configuration information, and uses that to compose and execute file transfers between gridftp endpoints on behalf of the user. The user may therefore compose data transfer requests in a uniform manner regardless of disparities that may exist due to site-specific deployments. No software installation is needed, as requests are made directly to the globus.org server through an ssh command. The actual storage software to be executed is maintained on the server side. 
+
+The server manages the file transfers withe the ability to detect faults and perform retries. A web-based interface allows the user to monitor transfers and cancel  requests. The file transfer service is the first among others such as job execution to be offered through the globus.org service. For more information, please see [[http://www.globus.org/service][globus.org service]] or [[http://www.mcs.anl.gov/~childers/GlobusWorld2010/quickstart][globus CLI quickstart]].
+
+---+++Reliable File Transfer
+
+The Reliable File Transfer service is provided by Globus and manages 3rd party transfers and deletion of files and directories using !GridFTP. RFT includes two commands
+
+   * *rft* - Submit and monitor a 3rd party !GridFTP transfer
+   * *rft-delete* - Command-line client to delete files using RFT
+
+The service is used by [[http://www.globus.org/toolkit/docs/5.0/5.0.2][Globus GRAM]] and the [[http://www.globus.org/toolkit/docs/4.0/techpreview/datarep][Globus Data Replication Service]]. For more information see the [[http://www.globus.org/toolkit/docs/4.0/data/rft/][Globus RFT documentation]].
+
+---+++FTS
+
+Developed by [[http://glite.web.cern.ch/glite][gLite]], the File Transfer Service is used by the ATLAS and CMS experiments of the Large Hadron Collider to do high-volume distribution of experimental physics data.
+
+From the [[http://egee-jra1-dm.web.cern.ch/egee-jra1-dm/FTS][FTS homepage]], "The File Transfer Service (FTS) is the lowest-level data movement service defined in the gLite architecture. It is responsible for moving sets of files from one site to another, allowing participating sites to control the network resource usage. It is designed for point to point movement of physical files. The FTS has dedicated interfaces for managing the network resource and to display statistics of ongoing transfers. Optionally, the FTS supports Logical File Names (LFNs), i.e. is able to provide catalog lookup and registration."
+
+The service executes data transfer queues as "channels" by which the user can request such items as transfer endpoints, protocol, number of streams, quota adherence, and priority. Authorization is via the role-based X509 Grid Security Infrastructure, that is, a user's privilege is determined by their role within a Virtual Organization. Endpoints can be specified as groups of sites or wildcard names, and storage service discovery is supported. Agents are launched by FTS to perform the actual file transfers by SRM using either gridftp or !SrmCopy as the actual transfer mechanism, and the state of the transfer such as "submitted", "active", or "done" is tracked by the service.  A database employed to save channel and state information. FTS manages transfers using load balancing and includes the capabilities of monitoring and the generation of statistics.
+
+FTS provides command-line clients, and additionally, APIs for Java, C, and (partially) PERL.
+
+
+---+++<nop>PhEDEx
+
+The [[http://cmsweb.cern.ch/phedex][Physics Experiment Data Export]] package is designed to facilitate very large scale data transfers in the CMS experiment. Data movement is based on "subscriptions", so that sets of data may be automatically transferred. Data movement relies on the Storage Resource Manager interface, though the actual file transfers made through direct calls to gridftp servers. Additional transfer options for local data movement are available. !PhEDEx is able to monitor and retry transfers, and reroute data flow to avoid problems. 
+
+!PhEDEx is composed of a collection of stateless agents for various tasks, mostly written in PERL, which communicate information such as replica count and transfer status through a common database. There are various agents, such as those responsible for computing and comparing file checksums, and for staging files to and from tape backend systems. Local agents act after file transfer completion and perform tasks such as merging of files and catalog registration. Agent tasks are coordinated through !PhEDEx-specific workflows.
+
+#DAGManLink
+---+++DAGMan
+
+DAGMan(Directed Acyclic Graph Manager) is job management software. It cannot work directly with Storage Resource Managers, but does has the ability to stage files into a job, stage files out of a job, and move files between compute resources via Condor processes.
+
+DAGMan submits jobs to Condor in an order represented by a DAG and processes the results. An input file defined prior to submission describes the DAG, and a Condor submit description file for each program in the DAG is used by Condor. Each node (program) in the DAG needs its own Condor submit description file. Nodes may specify data movement. As DAGMan submits jobs to Condor, it uses a single Condor log file to enforce the ordering required for the DAG.  The DAG itself is defined by the contents of a DAGMan input file. DAGMan is responsible for scheduling, recovery, and reporting for the set of programs submitted to Condor. DAGMan can also be used in conjunction with the Pegasus Workflow Management System, which provides a resource-independent interface and management technologies that map the workflow specification onto Condor pools, campus clusters and other cyberinfrastrure resources.
+
+For more information on DAGMan, please see http://www.cs.wisc.edu/condor/dagman.
+
+
+
+#SoftwareDevelopmentCollaboration
+---++Software Development Collaboration
+
+---+++Developer Groups
+One of the purposes of the Open Science Grid is to foster collaboration among members of the consortium. Software development teams are considered as stakeholders in the Open Science Grid, as are sites and research groups or experiments. There are several software development teams that have close ties to the OSG, and the OSG provides direct support for some critical software components. Coordination of storage-related software development and evaluation of new software technologies is done through the [[Storage/WebHome][OSG Storage Activities]] group. Please contact the OSG Storage Activities group for further information.
+
+
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = DouglasStrain
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = Developer
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       =  TanyaLevshina
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################ 
+-->
+
+
+-- Main.TedHesselroth - 13 Jan 2010
+
+%META:TOPICMOVED{by="TedHesselroth" date="1271787423" from="Storage.StorageApplicationDeveloper" to="ReleaseDocumentation.StorageApplicationDeveloper"}%

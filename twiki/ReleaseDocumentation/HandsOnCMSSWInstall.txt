@@ -1,0 +1,401 @@
+%META:TOPICINFO{author="PatrickGartung" date="1281455998" format="1.1" version="1.4"}%
+%META:TOPICPARENT{name="SiteAdminsWorkshopTutorialsAug10"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++Introduction
+This hands tutorial will walk you through the bootstraping of the CMSSW  installation environment using the bootstrap script created for this purpose. The second part will walk you through installing your first CMSSW release.
+---++System Requirements
+An installation of a RHEL5 clone (Scientific Linux, CentOS?, Rocks). An install account with write permissions in the directory (local or NFS) where the software will be installed. A minimum of 20GB is required to download and install one full CMSSW release. A 64-bit installation is preferred but not required. 
+
+For the demonstration I will use a VirtualBox with SL5.5 installed.
+
+---++Bootstrapping the CMSSW installation environment
+
+---+++Install dependencies
+CMSSW depends upon a handful of system packages: which, wget, tk, tcsh, zsh, freetype, fontconfig, compat-libstdc++-33, libidn, libXmu, libXcursor, libXrandr, libXft, mesa-libGLU, libXi, libXinerama, libXpm (these are the SLC5 package names. In your distribution, these might differ ...).
+
+The bootstrap script checks the system rpm database for the dependencies listed above. If it does not find these it will error out. To avoid that we will make sure these dependencies are installed first.
+<pre class="screen">
+su -
+yum -y install which wget tk tcsh zsh freetype fontconfig compat-libstdc++-33 libidn libXmu libXcursor libXrandr libXft mesa-libGLU libXi libXinerama libXpm
+</pre>
+
+If you are installing on a SL5 64-bit system you can download and install the [[https://twiki.cern.ch/twiki/bin/view/LCG/SL5DependencyRPM][LCG SL5DependencyRPM]] instead. This has the same effect because the dependency RPM has dependencies on all of the needed system packages.
+
+---+++ Get the script 
+
+You now need to download the bootstrap.sh script which is used to setup and initialize a CMS software area. 
+Log into the install account.  Make a directory called software and download the bootstrap script there.
+
+<pre class="screen">
+mkdir software
+export VO_CMS_SW_DIR=$PWD/software
+wget -O $VO_CMS_SW_DIR/bootstrap.sh http://cmsrep.cern.ch/cmssw/cms/bootstrap.sh
+</pre>
+
+---+++ Initialize the software area
+
+This setup depends on a directory /tmp/<username> being already present. If not
+<pre class="screen">
+mkdir /tmp/$USER
+</pre>
+
+
+In order to initialize a CMS software area for a given architecture you need to set the environment variable SCRAM_ARCH accordingly:
+
+| *Architecture* | *SCRAM_ARCH* |
+| SL4 32bit       | slc4_ia32_gcc345 |
+| SL5 32bit       | slc5_ia32_gcc434 |
+| SL5 64bit      | slc5_amd64_gcc434|
+
+For this exercise we will install a 32bit SL5 release.
+<pre class="screen">
+export SCRAM_ARCH=slc5_ia32_gcc434 
+</pre>
+
+Then you should execute the bootstrap script as:
+
+<pre class="screen">
+sh $VO_CMS_SW_DIR/bootstrap.sh setup -path $VO_CMS_SW_DIR -arch $SCRAM_ARCH 
+</pre>
+
+If the scripts completes successfully you will see
+<verbatim>
+Everything completed correctly.
+</verbatim> 
+If the bootstrap failed due to missing system dependencies, install those dependencies, delete
+things under $VO_CMS_SW_DIR (everything if this was a completely new SW area, only the new arch directory if there were
+preexisting installs for other arches) and then re-download the bootstrap script and execute it again.
+
+---++Installing CMSSW Releases
+
+  Commands in the section can be repeated as often as needed.
+
+---+++ Preparation for installation/updates
+
+Each time you want to install or upgrade software, two commands should be executed:
+
+<verbatim>
+source $VO_CMS_SW_DIR/$SCRAM_ARCH/external/apt/<apt-version>/etc/profile.d/init.sh
+# OR source $VO_CMS_SW_DIR/$SCRAM_ARCH/external/apt/<apt-version>/etc/profile.d/init.csh
+apt-get update
+</verbatim>
+
+For this exercise use
+
+<pre class="screen">
+source $VO_CMS_SW_DIR/$SCRAM_ARCH/external/apt/0.5.15lorg3.2-cms2/etc/profile.d/init.sh
+apt-get update
+</pre>
+
+After this, all the subsequent apt-get / apt-cache commands will refer to the installation area in $VO_CMS_SW_DIR.
+
+---+++ Packages available for installation
+
+The full set of rpms available for installation can be seen with:
+
+<verbatim>
+source $VO_CMS_SW_DIR/$SCRAM_ARCH/external/apt/<apt-version>/etc/profile.d/init.sh
+# OR source $VO_CMS_SW_DIR/$SCRAM_ARCH/external/apt/<apt-version>/etc/profile.d/init.csh
+apt-cache pkgnames | egrep '^(cms|lcg|external)'
+</verbatim>
+
+and in particular the available CMSSW releases can be seen with:
+
+<verbatim>
+apt-cache search cmssw
+</verbatim>
+
+The latter will output something like:
+
+<verbatim>
+cms+cmssw+CMSSW_3_3_1 - CMS Experiment package SpecChecksum:e7234d954f273ebc0d6bbdffbe5317a6
+cms+cmssw+CMSSW_3_3_2 - CMS Experiment package SpecChecksum:2e6d15c3fc9cdca5ca75ee4439ad88b9
+cms+cmssw+CMSSW_3_3_3 - CMS Experiment package SpecChecksum:2b1b04cef1f079c13a2982f4e5e2cc7c
+cms+cmssw+CMSSW_3_3_4 - CMS Experiment package SpecChecksum:4b0cd391de463707906d37997b1763fd
+cms+cmssw+CMSSW_3_3_5 - CMS Experiment package SpecChecksum:300d3ea116fe5801c423a7328cd1fa16
+cms+cmssw+CMSSW_3_3_6 - CMS Experiment package SpecChecksum:dddeee57aafd5cb1b2bdac6a6c046c14
+[snip]
+</verbatim>
+
+---+++ Installing CMSSW release with apt-get
+
+Install a CMSSW with 
+<verbatim>
+apt-get install cms+cmssw+CMSSW_X_Y_Z
+</verbatim>
+
+For this exercise we will install a CMSSW FWLITE release since the space need is less than 1GB :
+
+<pre class="screen">
+apt-get install cms+fwlite+CMSSW_3_6_1_FWLITE
+</pre>
+
+If you are interested in installing CMSSW_3_7_0_patch4 for the CRAB tutorial use this command:
+
+<pre class="screen">
+apt-get install  cms+cmssw-patch+CMSSW_3_7_0_patch4
+</pre>
+
+As can be seen in the log below you need ~8GB to download and install this release.
+
+---+++ Configuring CMSSW for accessing files in mass storage
+
+CMSSW makes use of the PhEDEx storage.xml file to locate files in mass storage by their LFN. It expects to find storage.xml at :
+
+<verbatim>
+$VO_CMS_SW_DIR/SITECONF/local/PhEDEx/storage.xml
+</verbatim>
+
+---++References
+
+   1 https://twiki.cern.ch/twiki/bin/view/CMSPublic/SDTCMSSW_aptinstaller
+
+---++Log of CMSSW Installation
+<pre class="screen">
+ yum -y install which wget tk tcsh zsh freetype fontconfig compat-libstdc++-33 libidn libXmu libXcursor libXrandr libXft mesa-libGLU libXi libXinerama libXpm
+Loaded plugins: kernel-module
+Setting up Install Process
+Package which-2.16-7.i386 already installed and latest version
+Package wget-1.11.4-2.el5_4.1.i386 already installed and latest version
+Package tk-8.4.13-5.el5_1.1.i386 already installed and latest version
+Package tcsh-6.14-17.el5.i386 already installed and latest version
+Package freetype-2.2.1-25.el5_5.i386 already installed and latest version
+Package fontconfig-2.4.1-7.el5.i386 already installed and latest version
+Package libidn-0.6.5-1.1.i386 already installed and latest version
+Package libXmu-1.0.2-5.i386 already installed and latest version
+Package libXcursor-1.1.7-1.1.i386 already installed and latest version
+Package libXrandr-1.1.1-3.3.i386 already installed and latest version
+Package libXft-2.1.10-1.1.i386 already installed and latest version
+Package mesa-libGLU-6.5.1-7.8.el5.i386 already installed and latest version
+Package libXi-1.0.1-4.el5_4.i386 already installed and latest version
+Package libXinerama-1.0.1-2.1.i386 already installed and latest version
+Package libXpm-3.5.5-3.i386 already installed and latest version
+Resolving Dependencies
+--> Running transaction check
+---> Package compat-libstdc++-33.i386 0:3.2.3-61 set to be updated
+---> Package zsh.i386 0:4.2.6-3.el5 set to be updated
+--> Finished Dependency Resolution
+Beginning Kernel Module Plugin
+Finished Kernel Module Plugin
+
+Dependencies Resolved
+
+================================================================================
+ Package                    Arch        Version            Repository      Size
+================================================================================
+Installing:
+ compat-libstdc++-33        i386        3.2.3-61           sl-base        232 k
+ zsh                        i386        4.2.6-3.el5        sl-base        1.7 M
+
+Transaction Summary
+================================================================================
+Install       2 Package(s)
+Upgrade       0 Package(s)
+
+Total download size: 1.9 M
+Downloading Packages:
+(1/2): compat-libstdc++-33-3.2.3-61.i386.rpm             | 232 kB     00:00     
+(2/2): zsh-4.2.6-3.el5.i386.rpm                          | 1.7 MB     00:00     
+--------------------------------------------------------------------------------
+Total                                           6.1 MB/s | 1.9 MB     00:00     
+Running rpm_check_debug
+Running Transaction Test
+Finished Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing     : compat-libstdc++-33                                      1/2 
+  Installing     : zsh                                                      2/2 
+
+Installed:
+  compat-libstdc++-33.i386 0:3.2.3-61           zsh.i386 0:4.2.6-3.el5          
+
+Complete!
+
+ mkdir software
+ export VO_CMS_SW_DIR=$PWD/software
+ wget -O $VO_CMS_SW_DIR/bootstrap.sh http://cmsrep.cern.ch/cmssw/cms/bootstrap.sh
+--2010-08-03 12:17:07--  http://cmsrep.cern.ch/cmssw/cms/bootstrap.sh
+Resolving cmsrep.cern.ch... 128.142.167.150
+Connecting to cmsrep.cern.ch|128.142.167.150|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 45818 (45K) [application/x-sh]
+Saving to: `/home/gartung/software/bootstrap.sh'
+
+100%[======================================>] 45,818      --.-K/s   in 0.01s   
+
+2010-08-03 12:17:08 (3.54 MB/s) - `/home/gartung/software/bootstrap.sh' saved [45818/45818]
+
+mkdir /tmp/$USER
+export SCRAM_ARCH=slc5_ia32_gcc434
+sh -x $VO_CMS_SW_DIR/bootstrap.sh setup -path $VO_CMS_SW_DIR -arch $SCRAM_ARCH 
+source $VO_CMS_SW_DIR/$SCRAM_ARCH/external/apt/0.5.15lorg3.2-cms2/etc/profile.d/init.sh
+apt-get update
+
+Get:1 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434 release [731B]
+Fetched 731B in 0s (2679B/s)
+Hit http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/cms pkglist
+Hit http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/cms release
+Hit http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/lcg pkglist
+Hit http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/lcg release
+Hit http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external pkglist
+Hit http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external release
+Reading Package Lists... Done                       
+Building Dependency Tree... Done
+
+ apt-get install cms+fwlite+CMSSW_3_6_1_FWLITE
+Reading Package Lists... Done
+Building Dependency Tree... Done
+The following extra packages will be installed:
+  cms+data-Fireworks-Geometry+2-cms cms+fwlite-tool-conf+7.7 cms+fwlitedata+23 cms+gcc-toolfile+10.0-cms6 external+boost+1.42.0
+  external+boost-build+2.0.m12 external+castor+2.1.9.4 external+clhep+2.0.4.2-cms external+cmake+2.4.6-cms2 external+dcap+1.7.0.48
+  external+elementtree+1.2.6-cms7 external+fakesystem+1.0-cms external+gccxml+0.9.0_20100114-cms external+gdbm+1.8.3 external+gmake+3.81
+  external+gsl+1.10-cms external+hepmc+2.05.01-cms external+libjpg+6b external+libpng+1.2.10 external+libtiff+3.8.2 external+libungif+4.1.4
+  external+pcre+4.4 external+python+2.6.4-cms5 external+qt+4.5.2-cms2 external+sigcpp+2.2.3 external+sqlite+3.6.10
+  external+systemtools+19-cms2 external+uuid+1.38 external+xrootd+20090727.1318 lcg+SCRAMV1+V2_2_0 lcg+roofit+5.26.00-cms3
+  lcg+root+5.22.00d-cms16
+The following NEW packages will be installed:
+  cms+data-Fireworks-Geometry+2-cms cms+fwlite+CMSSW_3_6_1_FWLITE cms+fwlite-tool-conf+7.7 cms+fwlitedata+23 cms+gcc-toolfile+10.0-cms6
+  external+boost+1.42.0 external+boost-build+2.0.m12 external+castor+2.1.9.4 external+clhep+2.0.4.2-cms external+cmake+2.4.6-cms2
+  external+dcap+1.7.0.48 external+elementtree+1.2.6-cms7 external+fakesystem+1.0-cms external+gccxml+0.9.0_20100114-cms external+gdbm+1.8.3
+  external+gmake+3.81 external+gsl+1.10-cms external+hepmc+2.05.01-cms external+libjpg+6b external+libpng+1.2.10 external+libtiff+3.8.2
+  external+libungif+4.1.4 external+pcre+4.4 external+python+2.6.4-cms5 external+qt+4.5.2-cms2 external+sigcpp+2.2.3 external+sqlite+3.6.10
+  external+systemtools+19-cms2 external+uuid+1.38 external+xrootd+20090727.1318 lcg+SCRAMV1+V2_2_0 lcg+roofit+5.26.00-cms3
+  lcg+root+5.22.00d-cms16
+0 upgraded, 33 newly installed, 0 removed and 0 not upgraded.
+Need to get 174MB of archives.
+After unpacking 632MB of additional disk space will be used.
+Do you want to continue? [Y/n] 
+Get:1 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/cms cms+data-Fireworks-Geometry+2-cms 1-1 [2363kB]
+Get:2 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+fakesystem+1.0-cms 1-1 [5065B]
+Get:3 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/cms cms+fwlitedata+23 1-1 [5074B]
+Get:4 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/cms cms+gcc-toolfile+10.0-cms6 1-1 [5835B]
+Get:5 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+boost-build+2.0.m12 1-1 [70.8kB]
+Get:6 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+gdbm+1.8.3 1-1 [90.9kB]
+Get:7 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+sqlite+3.6.10 1-1 [1325kB]
+Get:8 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+python+2.6.4-cms5 1-1 [17.2MB]
+Get:9 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+boost+1.42.0 1-1 [8148kB]                    
+Get:10 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+castor+2.1.9.4 1-1 [7505kB]                 
+Get:11 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+clhep+2.0.4.2-cms 1-1 [3416kB]              
+Get:12 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+cmake+2.4.6-cms2 1-1 [4885kB]               
+Get:13 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+dcap+1.7.0.48 1-1 [309kB]                   
+Get:14 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+elementtree+1.2.6-cms7 1-1 [46.6kB]         
+Get:15 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+gccxml+0.9.0_20100114-cms 1-1 [4056kB]      
+Get:16 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+gmake+3.81 1-1 [574kB]                      
+Get:17 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+gsl+1.10-cms 1-1 [2130kB]                   
+Get:18 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+hepmc+2.05.01-cms 1-1 [3058kB]              
+Get:19 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+libjpg+6b 1-1 [219kB]                       
+Get:20 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+libpng+1.2.10 1-1 [715kB]                   
+Get:21 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+libtiff+3.8.2 1-1 [1494kB]                  
+Get:22 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+libungif+4.1.4 1-1 [338kB]                  
+Get:23 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+pcre+4.4 1-1 [232kB]                        
+Get:24 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+qt+4.5.2-cms2 1-1 [28.2MB]                  
+Get:25 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+sigcpp+2.2.3 1-1 [4653kB]                   
+Get:26 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+systemtools+19-cms2 1-1 [5794B]             
+Get:27 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+uuid+1.38 1-1 [40.6kB]                      
+Get:28 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/external external+xrootd+20090727.1318 1-1 [16.1MB]           
+Get:29 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/lcg lcg+root+5.22.00d-cms16 1-1 [40.6MB]                      
+Get:30 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/lcg lcg+roofit+5.26.00-cms3 1-1 [4100kB]                      
+Get:31 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/cms cms+fwlite-tool-conf+7.7 1-1 [18.4kB]                     
+Get:32 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/lcg lcg+SCRAMV1+V2_2_0 1-1 [93.3kB]                           
+Get:33 http://cmsrep.cern.ch cms/cpt/Software/download/cms/apt/slc5_ia32_gcc434/cms cms+fwlite+CMSSW_3_6_1_FWLITE 1-1 [22.6MB]                
+Fetched 174MB in 7m17s (399kB/s)                                                                                                              
+Executing RPM (-Uvh)...
+Preparing...                ########################################### [100%]
+   1:external+fakesystem+1.0########################################### [  3%]
+   2:cms+data-Fireworks-Geom########################################### [  6%]
+   3:cms+fwlitedata+23      ########################################### [  9%]
+   4:external+systemtools+19########################################### [ 12%]
+   5:cms+gcc-toolfile+10.0-c########################################### [ 15%]
+   6:external+sqlite+3.6.10 ########################################### [ 18%]
+   7:external+gdbm+1.8.3    ########################################### [ 21%]
+   8:external+python+2.6.4-c########################################### [ 24%]
+   9:external+libjpg+6b     ########################################### [ 27%]
+  10:external+cmake+2.4.6-cm########################################### [ 30%]
+  11:external+gccxml+0.9.0_2########################################### [ 33%]
+  12:external+libtiff+3.8.2 ########################################### [ 36%]
+  13:external+qt+4.5.2-cms2 ########################################### [ 39%]
+  14:external+pcre+4.4      ########################################### [ 42%]
+  15:external+libungif+4.1.4########################################### [ 45%]
+  16:external+libpng+1.2.10 ########################################### [ 48%]
+  17:external+gsl+1.10-cms  ########################################### [ 52%]
+  18:external+dcap+1.7.0.48 ########################################### [ 55%]
+  19:external+castor+2.1.9.4########################################### [ 58%]
+  20:external+boost-build+2.########################################### [ 61%]
+  21:external+boost+1.42.0  ########################################### [ 64%]
+  22:external+uuid+1.38     ########################################### [ 67%]
+  23:external+sigcpp+2.2.3  ########################################### [ 70%]
+  24:external+hepmc+2.05.01-########################################### [ 73%]
+  25:external+gmake+3.81    ########################################### [ 76%]
+  26:external+clhep+2.0.4.2-########################################### [ 79%]
+  27:external+elementtree+1.########################################### [ 82%]
+  28:lcg+SCRAMV1+V2_2_0     ########################################### [ 85%]
+  29:external+xrootd+2009072########################################### [ 88%]
+  30:lcg+root+5.22.00d-cms16########################################### [ 91%]
+  31:lcg+roofit+5.26.00-cms3########################################### [ 94%]
+  32:cms+fwlite-tool-conf+7.########################################### [ 97%]
+  33:cms+fwlite+CMSSW_3_6_1_########################################### [100%]
+Done.
+ apt-get install cms+cmssw-patch+CMSSW_3_7_0_patch4
+Reading Package Lists... Done
+Building Dependency Tree... Done
+The following extra packages will be installed:
+  cms+cmssw+CMSSW_3_7_0 cms+cmssw-patch-tool-conf+1.0-cms11 cms+cmssw-tool-conf+16.0-cms19 cms+cmsswdata+23-cms9 cms+coral+CORAL_2_3_2-cms22
+  cms+coral-tool-conf+1.0-cms21 cms+data-FastSimulation-MaterialEffects+20 cms+data-FastSimulation-PileUpProducer+22-cms2
+  cms+data-L1Trigger-RPCTrigger+2-cms2 cms+data-MagneticField-Interpolation+26-cms cms+data-RecoMuon-MuonIdentification+20
+  cms+data-RecoParticleFlow-PFBlockProducer+19 cms+data-RecoParticleFlow-PFProducer+1 cms+data-RecoParticleFlow-PFTracking+23
+  cms+data-RecoTracker-RingESSource+19 cms+data-RecoTracker-RoadMapESSource+19 cms+data-SimG4CMS-Calo+20 cms+data-Validation-Geometry+19
+  cms+dbs-client+DBS_2_0_9_patch_4-cms2 cms+oracle-env+25.0 cms+pool+POOL_2_9_8_pre2-cms6 cms+pool-tool-conf+2.0-cms29 cms+rulechecker+2.6
+  external+alpgen+213-cms external+boost+1.42.0-cms external+charybdis+1.003-cms external+coin+3.1.0 external+cppunit+1.12.1
+  external+curl+7.15.3 external+dpm+1.7.0.6 external+elementtree+1.2.6-cms8 external+evtgenlhc+9.1-cms2 external+fastjet+2.4.0
+  external+frontier_client+2.7.15 external+gdb+7.1-cms external+geant4+9.3.p01 external+glimpse+4.18.5 external+google-perftools+1.4
+  external+graphviz+2.16.1-cms external+gsl+1.10 external+hector+1_3_4-cms19 external+heppdt+3.03.00 external+herwig+6.510.3-cms
+  external+herwigpp+2.4.2-cms5 external+jimmy+4.2-cms4 external+ktjet+1.06-cms external+lhapdf+5.6.0-cms external+lhapdf+5.6.0-cms2
+  external+libhepml+0.2.1 external+mcdb+1.0.2-cms2 external+meschach+1.2.pCMS1 external+millepede+03.00.00-cms3 external+mimetic+0.9.6-cms
+  external+openldap+2.3.39 external+oracle+11.2.0.1.0p2 external+photos+215.5 external+py2-pyxml+0.8.4-cms6 external+py2-zsi+2.0-cms6
+  external+pyqt+4.5.4-cms9 external+pythia6+422-cms2 external+pythia8+135 external+python+2.6.4-cms6 external+python-ldap+2.3.5-cms6
+  external+sherpa+1.2.1 external+simage+1.6.1 external+sip+4.8.2-cms8 external+soqt+1.4.1-cms3 external+tauola+27.121.5-cms3
+  external+thepeg+1.6.1 external+thepeg+1.6.1-cms4 external+tkonlinesw+2.7.0-cms3 external+toprex+4.23 external+valgrind+3.5.0
+  external+xdaq+VR16021-cms2 external+xerces-c+2.8.0 lcg+roofit+5.26.00-cms5 lcg+root+5.22.00d-cms18
+The following NEW packages will be installed:
+  cms+cmssw+CMSSW_3_7_0 cms+cmssw-patch+CMSSW_3_7_0_patch4 cms+cmssw-patch-tool-conf+1.0-cms11 cms+cmssw-tool-conf+16.0-cms19
+  cms+cmsswdata+23-cms9 cms+coral+CORAL_2_3_2-cms22 cms+coral-tool-conf+1.0-cms21 cms+data-FastSimulation-MaterialEffects+20
+  cms+data-FastSimulation-PileUpProducer+22-cms2 cms+data-L1Trigger-RPCTrigger+2-cms2 cms+data-MagneticField-Interpolation+26-cms
+  cms+data-RecoMuon-MuonIdentification+20 cms+data-RecoParticleFlow-PFBlockProducer+19 cms+data-RecoParticleFlow-PFProducer+1
+  cms+data-RecoParticleFlow-PFTracking+23 cms+data-RecoTracker-RingESSource+19 cms+data-RecoTracker-RoadMapESSource+19
+  cms+data-SimG4CMS-Calo+20 cms+data-Validation-Geometry+19 cms+dbs-client+DBS_2_0_9_patch_4-cms2 cms+oracle-env+25.0
+  cms+pool+POOL_2_9_8_pre2-cms6 cms+pool-tool-conf+2.0-cms29 cms+rulechecker+2.6 external+alpgen+213-cms external+boost+1.42.0-cms
+  external+charybdis+1.003-cms external+coin+3.1.0 external+cppunit+1.12.1 external+curl+7.15.3 external+dpm+1.7.0.6
+  external+elementtree+1.2.6-cms8 external+evtgenlhc+9.1-cms2 external+fastjet+2.4.0 external+frontier_client+2.7.15 external+gdb+7.1-cms
+  external+geant4+9.3.p01 external+glimpse+4.18.5 external+google-perftools+1.4 external+graphviz+2.16.1-cms external+gsl+1.10
+  external+hector+1_3_4-cms19 external+heppdt+3.03.00 external+herwig+6.510.3-cms external+herwigpp+2.4.2-cms5 external+jimmy+4.2-cms4
+  external+ktjet+1.06-cms external+lhapdf+5.6.0-cms external+lhapdf+5.6.0-cms2 external+libhepml+0.2.1 external+mcdb+1.0.2-cms2
+  external+meschach+1.2.pCMS1 external+millepede+03.00.00-cms3 external+mimetic+0.9.6-cms external+openldap+2.3.39
+  external+oracle+11.2.0.1.0p2 external+photos+215.5 external+py2-pyxml+0.8.4-cms6 external+py2-zsi+2.0-cms6 external+pyqt+4.5.4-cms9
+  external+pythia6+422-cms2 external+pythia8+135 external+python+2.6.4-cms6 external+python-ldap+2.3.5-cms6 external+sherpa+1.2.1
+  external+simage+1.6.1 external+sip+4.8.2-cms8 external+soqt+1.4.1-cms3 external+tauola+27.121.5-cms3 external+thepeg+1.6.1
+  external+thepeg+1.6.1-cms4 external+tkonlinesw+2.7.0-cms3 external+toprex+4.23 external+valgrind+3.5.0 external+xdaq+VR16021-cms2
+  external+xerces-c+2.8.0 lcg+roofit+5.26.00-cms5 lcg+root+5.22.00d-cms18
+0 upgraded, 78 newly installed, 0 removed and 0 not upgraded.
+Need to get 2599MB of archives.
+After unpacking 4830MB of additional disk space will be used.
+E: You don't have enough free space in /home/gartung/software/slc5_ia32_gcc434/var/lib/cache/slc5_ia32_gcc434/.
+
+
+</pre>
+
+
+%BR%
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/HandsOn/centerpageborder.css
+-->
+
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% you %BR%
+%REVIEW%

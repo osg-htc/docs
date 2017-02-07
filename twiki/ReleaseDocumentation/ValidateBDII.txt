@@ -1,0 +1,99 @@
+%META:TOPICINFO{author="KyleGross" date="1481047991" format="1.1" version="1.33"}%
+%META:TOPICPARENT{name="ValidatingComputeElement"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%DOC_STATUS_TABLE%
+%TOC%
+
+---+ Introduction
+This document is intended for administrators seeking to validate that their resource is reporting correctly to the BDII collectors and for ITB participants to verify that the BDII reporting is working correctly on their resources.
+
+%NOTE%  This page refers to the ldapsearch command.  The ldapsearch command is not part of the standard OSG installation, it is commonly
+on many standard linux installations. If you do not have it and would like to get it
+from the VDT it is part of the VDT OpenLDAP package that can be pulled using pacman
+and refer to the VDT Package 'OpenLDAP.'
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+
+---++ Validating BDII
+
+   * Check the GIP validator 
+      * [[http://myosg.grid.iu.edu/wizardgipstatus/index?datasource=gipstatus&summary_attrs_showservice=on&summary_attrs_showrsvstatus=on&summary_attrs_showfqdn=on&gip_status_attrs_showtestresults=on&gip_status_attrs_showfqdn=on&account_type=cumulative_hours&ce_account_type=gip_vo&se_account_type=vo_transfer_volume&start_type=7daysago&start_date=02%2F23%2F2009&end_type=now&end_date=03%2F02%2F2009&all_resources=on&gridtype=on&gridtype_1=on&service=on&service_1=on&active_value=1&disable_value=1][BDII at myosg]]  %RED% for production%ENDCOLOR%
+      * [[http://myosg.grid.iu.edu/wizardgipstatus/index?datasource=gipstatus&summary_attrs_showservice=on&summary_attrs_showrsvstatus=on&summary_attrs_showfqdn=on&gip_status_attrs_showtestresults=on&gip_status_attrs_showfqdn=on&account_type=cumulative_hours&ce_account_type=gip_vo&se_account_type=vo_transfer_volume&start_type=7daysago&start_date=02%2F23%2F2009&end_type=now&end_date=03%2F02%2F2009&all_resources=on&gridtype=on&gridtype_2=on&service=on&service_1=on&active_value=1&disable_value=1][BDII at myosg]] %RED%  for ITB %ENDCOLOR%
+   * Next check your system is reporting using the following command.  If your resource is a production resource, you need to query =is.grid.iu.edu= instead of =is-itb.grid.iu.edu=
+<pre class="screen">
+%UCL_PROMPT% ldapsearch -x -LLL -p 2170 -h is-itb.grid.iu.edu -b mds-vo-name=YOUR_SITE_NAME_HERE,mds-vo-name=local,o=grid
+</pre>
+   * If the information if not being reported correctly, run the following on your CE
+<pre class="screen">
+%UCL_PROMPT% $VDT_LOCATION/gip/bin/gip_info
+</pre>
+If this information is correct, then your local GIP is configured correctly.
+   * If your information is still not reported to BDII, you might have a problem with the CEMon publishing service. To troubleshoot your CEMon installation see the [[Trash/Trash/ResourceSelection.CEMonTroubleshootingGuide][CEMon troubleshooting guide]].
+
+%STOPINCLUDE%
+%BR%
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = AnandPadmanabhan
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Integration
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %NO%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       =  GabrieleGarzoglio
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->
+
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+
+%META:TOPICMOVED{by="RobGardner" date="1192651088" from="Integration/ITB_0_7.ValBDII" to="Integration/ITB_0_7.ValidateBDII"}%

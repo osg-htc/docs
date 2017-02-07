@@ -1,0 +1,482 @@
+%META:TOPICINFO{author="KyleGross" date="1481047983" format="1.1" version="1.58"}%
+%META:TOPICPARENT{name="ValidatingComputeElement"}%
+%DOC_STATUS_TABLE%
+
+---+!! Testing Services provided by a Compute Element
+%TOC%
+
+---+ About this Document
+
+<!-- conventions used in this document
+   * Local UCL_CWD  = %URLPARAM{"INPUT_CWD" encode="quote" default="~"}%
+   * Local UCL_HOST = %URLPARAM{"INPUT_HOST" encode="quote" default="client"}%
+   * Local UCL_USER = %URLPARAM{"INPUT_USER" encode="quote" default="user"}%
+   * Local UCL_DOMAIN = %URLPARAM{"INPUT_DOMAIN" encode="quote" default="opensciencegrid.org"}%
+   * Local UCL_CE = %URLPARAM{"INPUT_CE" encode="quote" default="ce.opensciencegrid.org"}%
+-->
+
+%ICON{hand}% This document is for OSG users. Simple tests will be introduced which may help testing the correct authentication with and operation of grid resources. This document also provides a _step-by-step guide_ to determine the approximate cause of an error followed by recommendations when a ticket with the %LINK_GOC_OPEN_TICKET% should be opened. 
+
+%NOTE% This document does not demonstrate how the Open Science Grid should be used for production runs. None of the techniques presented will _scale_ to production levels! %RED%Do not use these tools for large scale productions runs%ENDCOLOR%, as these will cause the remote site to crash and possible get your account banned - [[Documentation/CondorSubmittingSingleJob][Condor-G]] will work much better.
+
+---+ Customize this Document
+
+<form action="%SCRIPTURLPATH{"view"}%/%WEB%/%TOPIC%">
+<table>
+  <tr>
+    <td>
+      Server (CE) Host Name
+    </td>
+    <td>
+      <input type="text" name="INPUT_CE" value="%UCL_CE%"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Client Host Name
+    </td>
+    <td>
+      <input type="text" name="INPUT_HOST" value="%UCL_HOST%"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Client Login Name
+    </td>
+    <td>
+      <input type="text" name="INPUT_USER" value="%UCL_USER%"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+     &nbsp;
+     <input type="submit" class="twikiSubmit" value="Customize" />
+    </td>
+  </tr>
+</table>
+</form>
+
+%STARTINCLUDE%
+
+---+ Authentication Test
+
+The purpose of your [[ReleaseDocumentation/CertificateWhatIs][grid certificate]] is to authenticate yourself with every service provided by a %LINK_GLOSSARY_CE%. The authentication process is based on the [[http://en.wikipedia.org/wiki/X.509][X.509 Public Key Infrastructure]] which consists of a private key (=userkey.pem=) and a public key (=usercert.pem=). Both files together form your _certificate_ and are by default located in =$HOME/.globus=:
+
+<pre class="screen">
+%UCL_PROMPT% ls -al $HOME/.globus
+total 68
+drwxr-x---  4 %UCL_USER% %UCL_USER%  4096 Mar 18 18:50 .
+drwx------ 29 %UCL_USER% %UCL_USER% 12288 Jul 28 08:38 ..
+drwxrwxr-x  5 %UCL_USER% %UCL_USER%  4096 Jul 20 11:18 .gass_cache
+drwx------  4 %UCL_USER% %UCL_USER%  4096 Mar 27 12:14 job
+-rw-r-----  1 %UCL_USER% %UCL_USER%  1724 Dec 16  2008 usercert.pem
+-r--------  1 %UCL_USER% %UCL_USER%  1919 Dec 16  2008 userkey.pem
+</pre>
+
+Your certificate can be used to create a limited life-time %LINK_GLOSSARY_GRID_PROXY% or a %LINK_GLOSSARY_VOMS_PROXY%. You should use a VOMS Proxy if your membership %LINK_GLOSSARY_VO% supports VOMS Proxies and is providing a VOMS Server. Some OSG sites may require the use of a VOMS Proxy and will reject authentication requests using Grid Proxies.
+
+%NOTE% If uncertain please contact the *VO Manager* for your membership *VO*.
+
+%STARTSECTION{"AuthenticationTest"}%
+---%SHIFT%++ Authentication using a Grid Proxy
+
+To display detailed information about your grid proxy =grid-proxy-info= can be used:
+
+<pre class="screen">
+%UCL_PROMPT% grid-proxy-info
+subject  : /DC=org/DC=doegrids/OU=People/CN=Firstname Lastname 392994/CN=1692124231
+issuer   : /DC=org/DC=doegrids/OU=People/CN=Firstname Lastname 392994
+identity : /DC=org/DC=doegrids/OU=People/CN=Firstname Lastname 392994
+type     : Proxy draft (pre-RFC) compliant impersonation proxy
+strength : 512 bits
+path     : /tmp/x509up_u500
+timeleft : 291:11:00  (12.1 days)
+</pre>
+
+_Identity_ is sometimes also referred to as _Grid Identity_ or more frequently as %LINK_GLOSSARY_DN%. The last line of the output above indicates how long your current grid proxy will be valid. A grid proxy is said to have _expired_ if there is not time left on it. To _renew_  your grid proxy the program =grid-proxy-init= is used together with your grid password:
+
+<pre class="screen">
+%UCL_PROMPT% grid-proxy-init -valid 500:00
+Your identity: /DC=org/DC=doegrids/OU=People/CN=Firstname Lastname 392994
+Enter GRID pass phrase for this identity:
+Creating proxy ................................. Done
+Your proxy is valid until: Tue Aug 18 08:06:35 2009
+</pre>
+
+---%SHIFT%++ Authentication using a VOMS Proxy
+
+To display detailed information about your voms proxy =voms-proxy-info= can be used:
+
+<pre class="screen">
+%UCL_PROMPT% voms-proxy-info -all
+WARNING: Unable to verify signature! Server certificate possibly not installed.
+Error: Cannot verify AC signature!
+subject   : /DC=org/DC=doegrids/OU=People/CN=Firstname Lastname 392994/CN=proxy
+issuer    : /DC=org/DC=doegrids/OU=People/CN=Firstname Lastname 392994
+identity  : /DC=org/DC=doegrids/OU=People/CN=Firstname Lastname 392994
+type      : proxy
+strength  : 1024 bits
+path      : /tmp/x509up_u506
+timeleft  : 388:18:27
+%RED%=== VO LIGO extension information ===
+VO        : LIGO
+subject   : /DC=org/DC=doegrids/OU=People/CN=Firstname Lastname 392994
+issuer    : /DC=org/DC=doegrids/OU=Services/CN=voms.ligo.org
+attribute : /LIGO/Role=NULL/Capability=NULL
+timeleft  : 0:00:00
+uri       : voms.phys.uwm.edu:15001%ENDCOLOR%
+</pre>
+
+_Identity_ is sometimes also referred to as _Grid Identity_ or more frequently as %LINK_GLOSSARY_DN%. Note the display of the %RED%extended attributes%ENDCOLOR% The first line marked =timeleft= of the output above indicates how long your current voms proxy will be valid. A voms proxy is said to have _expired_ if there is not time left on it. To _renew_  your voms proxy the program =voms-proxy-init= is used together with your grid password:
+
+<pre class="screen">
+%UCL_PROMPT% voms-proxy-init %RED%-voms LIGO:/LIGO%ENDCOLOR% -valid 500:00
+Enter GRID pass phrase:
+Your identity: /DC=org/DC=doegrids/OU=People/CN=Firstname Lastname 392994
+Creating temporary proxy ................................ Done
+Contacting  voms.phys.uwm.edu:15001 [/DC=org/DC=doegrids/OU=Services/CN=voms.ligo.org] "LIGO" Done
+Creating proxy ......................................................... Done
+</pre>
+
+%NOTE% The command line option =%RED%-voms LIGO:/LIGO%ENDCOLOR%= tells =voms-proxy-init= to contact the VOMS server for the LIGO VO. This may be different for your VO. Locate a file named =vomses= on your submission host to find out more about available VOMS servers. 
+%ENDSECTION{"AuthenticationTest"}%
+
+%STARTSECTION{"MappingTest"}%
+---%SHIFT%++ Mapping Test
+
+A valid grid proxy does not guarantee that you may successfully authenticate with a remote grid resource. For a successful authentication your %LINK_GLOSSARY_DN% must be _mapped_ on the remote resource. A simple and quick way to check if your *DN* is mapped is to use =globus-run=:
+
+<pre class="screen">
+%UCL_PROMPT% globusrun -a -r %UCL_CE%
+
+GRAM Authentication test successful
+</pre>
+
+%NOTE% This example requires the _Grid Resource Allocation Manager (%LINK_GLOSSARY_GRAM%)_ to be available on the resource. This is usually the case on a %LINK_GLOSSARY_CE%, but not on a  %LINK_GLOSSARY_SE%. If you want to test authentication with a Storage Element, use the next example instead.
+%ENDSECTION{"MappingTest"}%
+
+
+---+ Data Transfer Test
+
+Data can be transferred to and from a grid resource using a version of ftp that supports grid authentication called %LINK_GLOSSARY_GRIDFTP%. The =globus-url-copy= command can be used for that purpose.
+
+To verify that !GridFTP is working correctly we will 
+
+   1 create a file using =dd=
+   1 transfer the file _to_ the grid resource using =globus-url-copy=
+   1 transfer the file back _from_ the grid resource using =globus-url-copy=
+   1 compare both files using =diff=
+
+First let's create the test file:
+
+<pre class="screen">
+%UCL_PROMPT% dd if=/dev/zero of=/tmp/%UCL_CE%.test.0 bs=1k count=1024
+1024+0 records in
+1024+0 records out
+1048576 bytes (1.0 MB) copied, 0.005332 seconds, 197 MB/s
+</pre>
+
+Next let's transfer the file to the grid resource:
+
+<pre class="screen">
+%UCL_PROMPT% globus-url-copy file:///tmp/%UCL_CE%.test.0 gsiftp://%UCL_CE%/~/%UCL_CE%.test.0
+%UCL_PROMPT% echo $?
+0
+</pre>
+
+To copy the file back to your resource use:
+
+<pre class="screen">
+%UCL_PROMPT% globus-url-copy gsiftp://%UCL_CE%/~/%UCL_CE%.test.0 file:///tmp/%UCL_CE%.test.1
+%UCL_PROMPT% echo $?
+0
+</pre>
+
+Finally let's compare the _original_ with the _copy_ received back from the remote resource:
+
+<pre class="screen">
+%UCL_PROMPT% diff /tmp/%UCL_CE%.test.0  /tmp/%UCL_CE%.test.1
+%UCL_PROMPT% echo $?
+0
+</pre>
+
+%NOTE% The =file= protocol in the *URI* is used for files on a local file system. In this case no authentication is performed with the local resource before the file is read or written. Replacing =file= by =gsiftp= always requires a %LINK_GLOSSARY_GRIDFTP% server running at the resource specified in the URI.
+
+ 
+---+ Job Submission Test
+
+---++ Job Submission using GRAM
+
+The <b>G</b>rid <b>R</b>esource <b>A</b>llocation <b>M</b>anager (%LINK_GLOSSARY_GRAM%) is a service running on a %LINK_GLOSSARY_CE% that services your job submission request and which puts your job into execution after successful authentication.
+
+Here we use the =globus-job-run= command to execute the =id= command on the remote resource using the default *fork* %LINK_GLOSSARY_JM%:
+ 
+<pre class="screen">
+%UCL_PROMPT% globus-job-run %UCL_CE% /usr/bin/id
+uid=506(ligo) gid=506(ligo) groups=506(ligo)
+</pre>
+
+Upon success =/usr/bin/id= returns information about the user account which has been used to execute the program itself on the grid resource. This is the account that your %LINK_GLOSSARY_DN% is mapped to. Unlike the [[ReleaseDocumentation/CESimpleTest#Mapping_Test][Mapping Test]] this test also verifies that the account exists and that the job manager was able to run the command on your behalf on the compute element.
+
+%NOTE% Please open a ticket with the %LINK_GOC_OPEN_TICKET% for the resource in case the command did not succeed.
+
+---+++ Test the Availability of a Job Manager
+
+A %LINK_GLOSSARY_JM% is a process running on the %LINK_GLOSSARY_CE% which is managing the execution of your job. By default the job manager =fork= will be used to _fork_ your program directly on the compute element. As a general rule of thumb you should %RED%avoid to use fork%ENDCOLOR% and to execute programs on the compute element unless that is your intention. A not complete list of job managers includes =fork=, =managedfork=, =ccs=, =condor=, =lsf=, =pbs= and =sge=. Depending on the setup of the grid resource more than one job manager may be supported.
+
+Just like in the previous example we can use =globus-job-run= to verify that the =fork= job manager is available and used for the execution:
+
+<pre class="screen">
+%UCL_PROMPT% globus-job-run %UCL_CE%/jobmanager-fork /usr/bin/id
+uid=506(ligo) gid=506(ligo) groups=506(ligo)
+</pre>
+
+Notice how we append =/jobmanager-fork= to the grid resource to explicitly request it. This can be used to detect if a certain job managers such as =condor= is available:
+
+<pre class="screen">
+%UCL_PROMPT% globus-job-run %UCL_CE%/jobmanager-condor /bin/hostname
+dom118
+</pre>
+
+Because the job is scheduled to be executed through %LINK_GLOSSARY_CONDOR% this command will likely require more time to complete. Here we used the =/bin/hostname= command to return the _hostname_ of the worker node executing the job.
+
+To specify a job manager that is not supported by the grid resource creates a convenient way to find out what job managers are supported by the resource from the comfort of the command line:
+
+<pre class="screen">
+%UCL_PROMPT% globus-job-run %UCL_CE%/jobmanager-pbs /bin/hostname
+GRAM Job submission failed because the gatekeeper failed to find the requested service (error code 93)
+%UCL_PROMPT% echo $?
+93
+</pre>
+
+%NOTE% The <b>names for job managers are case sensitive</b> and are <b>all lower case for %LINK_GLOSSARY_GRAM%</b>.
+
+---+ Troubleshooting
+
+%ICON{hand}% The following sections provide a _step-by-step guide_ helping you to determine the approximate cause of an error that has occurred. Knowing the approximate cause of an error will allow you to write more _meaningful error reports_ when opening a ticket with the %LINK_GOC_OPEN_TICKET%. 
+
+---++ !GridFTP
+
+Several causes can make the [[ReleaseDocumentation/CESimpleTest#Data_Transfer_Test][Data Transfer Test]] fail:
+
+   1 the !GridFTP daemon is not answering on the default port =2811= or the remote resource is down
+   1 the directory on the !GridFTP server you want to access does not exist
+   1 the directory on the !GridFTP server you want to write into is mounted read-only
+   1 your Distinguished Name is mapped to an account that has not sufficient privileges to access a given directory on the !GridFTP server
+
+%NOTE% We assume that you successfully completed the [[ReleaseDocumentation/CESimpleTest#Mapping_Test][Mapping Test]] before you proceed!
+
+---+++ Test if the !GridFTP service is answering on the default port 2811
+
+The =telnet= program can be used to connect to the default !GridFTP port =2811= on the server side to check if the GridFTP server will answer:
+
+<pre class="screen">
+%UCL_PROMPT% telnet %UCL_CE% 2811
+Trying 131.215.114.48...
+%RED%Connected to %UCL_CE% (131.215.114.48)%ENDCOLOR%.
+Escape character is '^]'.
+220 %UCL_CE% GridFTP Server 2.8 (gcc64dbg, 1217607445-63) [VDT patched 4.0.8] ready.
+Connection closed by foreign host.
+</pre>
+
+!GridFTP is available if you received a '%RED%Connected to ...%ENDCOLOR%' message. Otherwise you may want to contact the %LINK_GOC_OPEN_TICKET% and open a ticket for the resource!
+
+---+++ Test if the target directory on the !GridFTP server exists
+
+A convenient way to check for the existence of the target directory on the !GridFTP server is to use =globus-job-run= to list its content:
+
+<pre class="screen">
+%UCL_PROMPT% globus-job-run %UCL_CE% /bin/bash -c "ls -al ~"
+total 17632
+drwxr-xr-x 18 ligo ligo    69632 Jun 14 18:40 .
+drwxr-xr-x 43 root root     4096 Jun  8 14:06 ..
+-rw-------  1 ligo ligo     1118 Jun 14 16:34 .Xauthority
+-rw-------  1 ligo ligo    27105 Jun 10 19:50 .bash_history
+-rw-------  1 ligo ligo       33 Jan 21  2009 .bash_logout
+-rw-------  1 ligo ligo      414 Sep 28  2009 .bash_profile
+-rwx------  1 ligo ligo      225 Jul 14  2009 .bashrc
+drwx------  4 ligo ligo     4096 Dec  7  2009 .globus
+-rw-rw-r--  1 ligo ligo       36 Mar 17 20:55 .gnuplot_history
+-rw-------  1 ligo ligo       42 May 28 12:22 .lesshst
+drwxrwxr-x  3 ligo ligo     4096 Aug 22  2009 .mc
+drwx------  2 ligo ligo     4096 Apr 22 15:10 .ssh
+drwx------  3 ligo ligo     4096 Jun 13  2009 .subversion
+-rwxr-xr-x  1 ligo ligo    10582 Jun  8 10:11 .viminfo
+-rw-r--r--  1 ligo ligo  1048576 Jun 14 18:13 %UCL_CE%.test.0
+</pre>
+
+If the directory is not available you may _try_ to create it using =globus-job-run=:
+
+<pre class="screen">
+%UCL_PROMPT% globus-job-run %UCL_CE% /bin/bash -c "mkdir -p /tmp/example"
+%UCL_PROMPT% echo $?
+0
+</pre>
+
+If you are certain that the directory should exist on the server, you may want to contact the %LINK_GOC_OPEN_TICKET% and open a ticket for the resource!
+
+---+++ Test that the target directory on the !GridFTP server is not mounted read-only
+
+It is relatively common that directories are mounted _read-only_. You can test if that is the case by using the =mount= command:
+
+<pre class="screen">
+%UCL_PROMPT% globus-job-run %UCL_CE%/jobmanager-fork /bin/bash -c "/bin/mount"
+/dev/mapper/VolGroup00-LogVol00 on / type ext3 (rw)
+proc on /proc type proc (rw)
+sysfs on /sys type sysfs (rw)
+devpts on /dev/pts type devpts (rw,gid=5,mode=620)
+/dev/xvda1 on /boot type ext3 (rw)
+tmpfs on /dev/shm type tmpfs (rw)
+none on /proc/sys/fs/binfmt_misc type binfmt_misc (rw)
+sunrpc on /var/lib/nfs/rpc_pipefs type rpc_pipefs (rw)
+10.10.1.2:/home on /home type nfs (rw,addr=10.10.1.2)
+fuse on /mnt/hadoop type fuse (rw,nosuid,nodev,allow_other,default_permissions)
+</pre>
+
+%NOTE% This test will only return a meaningful result for partitions that are %GREEN%mounted%ENDCOLOR% on the Compute Element. It will not report partitions that are %RED%automounted%ENDCOLOR%. Replace the job manager =fork= with another job manager like =condor= to execute the same test on a worker node in this case.
+
+If you are certain that the directory should be mounted or be mounted with _write permissions_, you may want to contact the %LINK_GOC_OPEN_TICKET% to open a ticket for the resource!
+
+---+++ Test if your DN is mapped to an account with sufficient privileges
+
+Please compare the result of the =id= program on the !GridFTP server side:
+
+<pre class="screen">
+%UCL_PROMPT% globus-job-run %UCL_CE% /bin/bash -c "id"
+uid=506(ligo) gid=506(ligo) groups=506(ligo)
+</pre>
+
+with the ownership and group membership information of the target directory on the !GridFTP server ( [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/CESimpleTest#Test_if_the_target_directory_on][see here]] ).
+
+If you are certain that the directory should be mounted or be mounted with write-access, you may want to contact the %LINK_GOC_OPEN_TICKET% to open a ticket for the resource!
+
+---++ GRAM
+
+Several causes can make the [[ReleaseDocumentation/CESimpleTest#Job_Submission_Test][Job Submission Test]] fail:
+
+   1 the %LINK_GLOSSARY_GRAM% daemon is not answering on the default port =2911= or the remote resource is down
+   1 your %LINK_GLOSSARY_DN% is mapped to a unix account that does not exist
+   1 you are trying to access a %LINK_GLOSSARY_JM% that is not supported by the grid resource
+
+%NOTE% We assume that you successfully completed the [[ReleaseDocumentation/CESimpleTest#Mapping_Test][Mapping Test]] before you proceed!
+
+---+++ Test that the GRAM service is answering on the default port 2911
+
+Here we will use =telnet= to connect to the default GRAM port =2911= on the server side:
+
+<pre class="screen">
+%UCL_PROMPT% telnet %UCL_CE% 2119
+Trying 131.215.114.48...
+%RED%Connected to %UCL_CE% (131.215.114.48).%ENDCOLOR%
+Escape character is '^]'.
+Connection closed by foreign host.
+</pre>
+
+GRAM is running if you receive a '%RED%Connected to ...%ENDCOLOR%' message. Otherwise you may want to contact the %LINK_GOC_OPEN_TICKET% to open a ticket for the resource.
+
+---+++ Test if your Distinguished Name is mapped to an existing unix account
+
+If you can successfully authenticate with a resource, but the local system administrator didn't create the account your %LINK_GLOSSARY_DN% is mapped to, you will receive an error. In this case the [[ReleaseDocumentation/CESimpleTest#Mapping_Test][Mapping Test]] will succeed, but the jobmanager will report that it %RED%failed to put the job into execution%ENDCOLOR% during the [[ReleaseDocumentation/CESimpleTest#Job_Submission_Test][Job Submission Test]]. Please open a ticket with the %LINK_GOC_OPEN_TICKET%.
+
+---+++ Test if a particular Job Manager is supported
+
+By default the =fork= %LINK_GLOSSARY_JM% is used to execute your command on the %LINK_GLOSSARY_CE%. To test if a particular job manager is supported by the resource, try to submit the =id= command to that job manager:
+
+<pre class="screen">
+%UCL_PROMPT% globus-job-run %UCL_CE%:2119/jobmanager-pbs /bin/bash -c "id"
+GRAM Job submission failed because the gatekeeper failed to find the requested service (error code 93)
+</pre>
+
+%NOTE% The list of known jobmanagers supported by %LINK_GLOSSARY_GRAM% includes =fork=, =managedfork=, =condor=, =sge=, =pbs=, =lsf=, =ccs=. The spelling is _case-sensitive_ and differs slightly for %LINK_GLOSSARY_GRAM_WS%: =Fork=, =ManagedFork=, =Condor=, =SGE=, =PBS=, =LSF=, =CCS=! It is also called a %LINK_GLOSSARY_FT% by GRAM-WS.
+
+Please open a ticket with the %LINK_GOC_OPEN_TICKET% if you are certain that the job manager name you provided should be supported by the resource.
+
+---+++ Does Condor-G fail when Globus commmands succeed?
+
+Sometimes Condor-G will fail even when the simple Globus commands succeed.  This is because Condor-G exercises the GRAM protocol more than most =globus-job-run= invocations. In particular, it requires that more client network ports be open.  Condor-G will listen for incoming connections on the client coming from the CE (so, the Condor-G client acts like a server to some extent).  If either client or the remote site has a firewall blocking these ports, Condor-G will fail but =globus-job-run= will succeed.
+
+Firewall issues may be difficult to track down. The three possible places where you might run into a firewall are:
+   1 On the client Condor-G host.  This is the most common, as many operating systems block incoming connections.  This is discussed below.
+   1 On the client's network.  It's common security practice at some universities or sites to lock down incoming connections.  To fix this, you may need to contact your local site security.
+   1 On the remote CE host.  This is unlikely, as it's not very common to block outgoing connections on a CE.  
+
+To solve the first problem, you need to punch a hole in the firewall. You need a port range with at least 13 ports per user that might use Condor-G. For example, if you have ten people that might submit jobs via Condor-G, you'll need at least 130 ports in the port range.  Once you have the port range, you need to change the Condor-G client's configuration for the condor_gridmanager component. For example, if the port range is 8000-8129, you would set in your =condor_config=:
+
+<pre>
+GRIDMANAGER.IN_LOWPORT = 8000
+GRIDMANAGER.IN_HIGHPORT = 8129
+</pre>
+After changing this configuration, restart Condor-G.
+
+---+ Recommendations on opening a ticket with the GOC
+
+The OSG provides a ticketing system through the %LINK_GOC_OPEN_TICKET% (GOC) for addressing issues users have working with production resources. In order to address your issue as quick as possible you should:
+
+   * make sure that the error is not an error on your side
+   * consult [[https://myosg.grid.iu.edu/rgdowntime/index?datasource=downtime&downtime_attrs_showpast=&account_type=cumulative_hours&ce_account_type=gip_vo&se_account_type=vo_transfer_volume&bdiitree_type=total_jobs&start_type=7daysago&start_date=06%2F16%2F2010&end_type=now&end_date=06%2F16%2F2010&all_resources=on&facility_10009=on&gridtype=on&gridtype_1=on&service_1=on&service_5=on&service_central_value=0&service_hidden_value=0&active=on&active_value=1&disable_value=1][MyOSG]] to find out if a resource has scheduled maintenance 
+   * provide a clear description of the problem
+   * if possible include a test and the output you receive, so that an administrator could duplicate the problem
+
+%NOTE% You must import your grid certificate into your browser in order to authenticate yourself with the Grid Operations Center.
+
+%STOPINCLUDE%
+
+---+ Comments
+| PM2RPM_TASK = CLIENT | Main.RobertEngel | 28 Aug 2011 - 05:54 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = SuchandraThapa
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = Scientist
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = SuchandraThapa
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+%META:TOPICMOVED{by="ForrestChristian" date="1166042277" from="Integration.CESimpleTest050" to="Integration/ITB_0_5.CESimpleTest"}%

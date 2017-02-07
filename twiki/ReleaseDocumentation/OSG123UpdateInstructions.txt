@@ -1,0 +1,98 @@
+%META:TOPICINFO{author="ScotKronenfeld" date="1258488239" format="1.1" version="1.11"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>OSG 1.2.3 Update Instructions*
+
+%BR%
+
+---++ Release Notes for the OSG 1.2.3 upgrade
+This release is a minor upgrade to OSG 1.2 installations and is not critical except for sites using glexec or sites that run jobs that check the lcg-utils version. Release notes for the VDT packages that have been updated can be found [[http://vdt.cs.wisc.edu/releases/2.0.0/release-p10.html][here]].  
+
+---++ Update Instructions
+If you have OSG 1.2 services installed you can follow the instructions below to *update* your existing installation.  This method will work for all OSG packages including =ce=, =client=, =wn-client=, and Storage Elements.  This release can be applied to all OSG 1.2 installations, since the vdt-updater will not take any actions if glexec, java, or lcg-utils are not installed.
+
+*NOTE: If you are using packages from OSG 1.0.x or earlier, you must do a brand new installation because OSG 1.2.x uses a different Pacman cache from prior releases. There are installation guides for installing from scratch the various components available in ReleaseDocumentation.WebHome. In addition, for experienced admins, there is a ReleaseDocumentation.QuickInstallGuide available.*
+
+---++ Update Instructions from OSG 1.2.x to OSG 1.2.3
+
+---+++ Preliminaries
+Go to the directory where you installed your software (root directory of the Pacman installation, <tt>[software location]</tt>) and source the setup script so that the following steps will work correctly.
+<pre class="screen">
+cd [software location]
+source setup.sh
+</pre>
+
+
+---+++ Stop VDT Services
+Some packages (e.g. =client= or =wn-client=) may not be running any services, however, doing this step will not cause problems.  
+
+<pre class="screen">
+vdt-control --off
+</pre>
+
+---+++ Backup your software
+<pre class="screen">
+cp -a $VDT_LOCATION [BACKUP_LOCATION]
+</pre>
+
+---+++ Update the VDT updater script itself
+If you do not yet have the updater script, then fetch it:
+
+<pre class="screen">
+pacman -get http://vdt.cs.wisc.edu/vdt_200_cache:VDT-Updater
+</pre>
+
+If you already have the updater, update it:
+<pre class="screen">
+pacman -update VDT-Updater
+</pre>
+
+Note: If you are not sure if you have the updater, look for =$VDT_LOCATION/vdt/update/vdt-updater= 
+
+---+++ Backup
+
+Backup again since the vdt-updater script will request the location of your backup and verify that the backup is identical to the current contents of the install directory before updating your installation.
+<pre class="screen">
+cp -a $VDT_LOCATION BACKUP-LOCATION
+</pre> 
+
+---+++ Get VDT Updates
+This will update VDT packages specifically.
+<pre class="screen">
+vdt/update/vdt-updater
+</pre>
+
+---+++ Get OSG Updates
+In this release, the only package out of the OSG cache itself is the =osg-version= package which must be updated.
+<pre class="screen">
+pacman -update osg-version</verbatim>
+</pre>
+
+
+---+++ Post Install Configuration
+
+<pre class="screen">
+vdt-post-install
+</pre>
+
+On a CE, you will also need to reconfigure your system
+<pre class="screen">
+configure-osg -c
+</pre>
+
+
+---+++ Restart VDT Services
+This step can be omitted if you are not running any services.  If you are not certain, you can run it since services are disabled by default so the only services that will be started are ones that you have explicitly enabled.
+<pre class="screen">
+vdt-control --on
+</pre>
+
+
+---++ *Comments*
+| Preliminaries: Isn't there a standard $ variable we use for "software location"?  Is it $VDT_LOCATION?<br /><br /> | Main.JamesWeichel | 23 Sep 2009 - 21:18 |
+| The $VDT_LOCATION won't be defined until setup.sh is sourced so it can't be used. | Main.SuchandraThapa | 23 Sep 2009 - 21:22 |
+%COMMENT{type="tableappend"}%
+
+
+%COMPLETE3% %BR%
+%RESPONSIBLE%  Main.SuchandraThapa - 23 Sep 2009 %BR%
+%REVIEW%

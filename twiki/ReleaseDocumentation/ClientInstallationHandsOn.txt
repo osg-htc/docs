@@ -1,0 +1,140 @@
+%META:TOPICINFO{author="MarcoMambelli" date="1318436510" format="1.1" version="1.22"}%
+%META:TOPICPARENT{name="HandsOn"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++Introduction
+=OSG-client= is the package provided by OSG for user interaction with the Grid: it allows to initiate the proxies and provides the clients to use Compute Elements and Storage Elements.
+It can be installed as root for all the users in the system or by regular users for personal consumption.
+
+Root installation of the client, both using Pacman and RPM packages, is covered in detail by the OSG release documentation:
+   * [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallOSGClient][Installing OSG client using RPM]] (new release candidate)
+   * [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/ClientInstallationGuide][Installing OSG client using Pacman]] (OSG 1.2)
+
+This page presents a short version of the installation and covers mainly the personal installation.
+OSG supports multiple Unix shells. The examples in this page use =sh= (=bash=). For =csh= or other shells see the referenced documentation.
+
+Other hands-on guides are available at HandsOn.
+
+---++Requirements
+=OSG-client= requires for you to have one of the many VDT supported platforms (see the [[http://vdt.cs.wisc.edu/releases/2.0.0/requirements.html][VDT requirements]]), network connection and about 1.2 GB of disk space available. To use the Grid you will need also your [[ReleaseDocumentation.CertificateUserGet][Grid Certificate]].
+
+To install OSG client using RPM you need also a RHEL5 based OS (Centos 5 or SL5 are OK) and root access to the machine.
+
+---++ Installing OSG Client using RPM
+We assume that you are familiar with the basics of package management in a RHEL OSG, specially the use of =rpm= and =yum= commands. If not please check the referenced documentation.
+
+---+++ Add the package repositories
+OSG software is distributed via the OSG yum repositories. Some packages depend on packages distributed via the [[http://fedoraproject.org/wiki/EPEL][EPEL]] repositories. Both need to be enabled to install OSG RPMs.
+   1. If not already present, install the package to use the EPEL repository: <pre class="rootscreen">
+wget http://download.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
+rpm -i epel-release-5-4.noarch.rpm </pre>
+   1. Install the OSG repositories: <pre class="rootscreen">
+rpm -Uvh http://vdt.cs.wisc.edu/repos/3.0/el5/testing/x86_64/osg-release-3.0-3.noarch.rpm </pre>
+
+*WARNING*: enabling new repositories may add new packages or change the version of packages that you may get from other repositories
+       
+*WARNING*: if you have your own mirror or configuration of the EPEL repository, you *MUST* verify that it contains the latest packages from EPEL and that the OSG repository has a better yum priority than EPEL.  Otherwise, you will have strange deploying issues.
+
+---+++ Install OSG client
+  1. Install the osg-client meta package, which will pull in all dependencies. <pre class="rootscreen">
+yum install --enablerepo=osg-testing --nogpgcheck osg-client   </pre>
+
+---++ Installing OSG Client using Pacman
+---+++Getting Pacman
+%LINK_GLOSSARY_PACMAN% is a package management used by OSG.
+OSG 1.2 requires Pacman 3.28 or later. If you have an earlier version or no Pacman, you need to [[PacmanInstall][install Pacman]]:
+<pre class="screen">
+wget http://physics.bu.edu/pacman/sample_cache/tarballs/pacman-3.28.tar.gz
+tar --no-same-owner -xzvf pacman-3.28.tar.gz
+cd pacman-3.28
+source setup.sh
+</pre>
+
+---+++Installing OSG-client
+
+It is recommended to install OSG-client in a local file system (on shared ones the installation may fail due to load). In the example I will use =/scratch/=, a local directory with write access to regular users
+
+<pre class="screen">
+source /scratch/pacman-3.28/setup.sh 
+mkdir /scratch/osg-client
+cd /scratch/osg-client
+pacman -get http://software.grid.iu.edu/osg-1.2:client
+</pre>
+Answer =yall= when asked to trust the caches (you will trust al the caches used in the installation).
+
+The installation should complete with something like:
+<pre class="screen">
+Beginning VDT prerequisite checking script vdt-common/vdt-prereq-check...       
+
+All prerequisite checks are satisfied.
+
+========== IMPORTANT ==========
+Most of the software installed by the VDT *will not work* until you install
+certificates.  To complete your CA certificate installation, see the notes
+in the post-install/README file.
+
+The VDT version 2.0.0 has been installed.
+                                         
+The OSG Client package OSG version 1.2 has been installed.
+>ls
+ant           gpt           osg                      srm-client-lbnl      berkeley-db   jdk1.5        owamp                    trusted.caches
+bwctl         lcg           pacman-platform-mapping  vdt       cert-scripts  licenses      pegasus                  vdt-app-data
+condor        logrotate     perl                     vdt-install.log  curl          logs          post-install             voms
+expat         ndt           pyglobus-url-copy        wget           fetch-crl     npad          setup.csh
+glite         o..pacman..o  setup.sh        globus        openldap      srm-client-fermi
+</pre>
+
+Post install steps: [[http://vdt.cs.wisc.edu/releases/2.0.0/certificate_authorities.html][downloading the CA certificates]]
+<pre class="screen">
+source ./setup.sh 
+vdt-ca-manage setupca --location local --url osg
+</pre>
+
+More information about installing and using OSG-client is available in the ClientInstallationGuide
+
+More information on available commands and how to use the OSG Client can be found in the ClientUseHandsOn and the [[ReleaseDocumentation.ValidateClients][CE and Client validation section]] both referenced below.
+
+---++Client use
+
+If you installed OSG client using Pacman, each time you want to use the client you must source the setup file (e.g. =source /opt/client/setup.sh=).
+A Pacman installation is a sandbox not affecting your default system environment.
+
+If you installed OSG client using RPM, all the commands will be in your path ready to be used.
+
+Here is a brief presentation placing the OSG client within the Grid stack and introducing the [[ClientUseHandsOn][end user tutorial]] that was presented during the March 09 OSG All Hands meeting.
+In the ClientUseHandsOn tutorial you will find useful information and examples of basic commands that you can run once you install the OSG client.
+
+<embed src="%ATTACHURL%/OSGAH-client.pdf" width="792" height="612">
+
+---++References
+
+   1 VDT 2.0 (requirements and release notes): http://vdt.cs.wisc.edu/releases/2.0.0/
+   1 Grid Certificates (request and use): https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/CertificateUserGet
+   1 RPM package manager: http://en.wikipedia.org/wiki/RPM_Package_Manager
+   1 YUM - Yellowdog updater: http://en.wikipedia.org/wiki/RPM_Package_Manager
+   1 %LINK_GLOSSARY_PACMAN%
+   1 OSG Client: https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/ClientInstallationGuide
+   1 Choosing Certificate Authorities: http://vdt.cs.wisc.edu/releases/2.0.0/certificate_authorities.html
+   1 Older OSG End User Tools tutorial: http://twiki.mwt2.org/bin/view/ITB/UserTutorial
+   1 OSG End User tutorial: https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/ClientUseHandsOn
+   1 CE and Client validation: https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/ValidateClients
+
+---++ *Comments*
+| Shouldn&#39;t these commands also be executed at the bottom of the page?&#60;br /&#62;vdt-control --enable vdt-update-certs&#60;br /&#62;vdt-control --on vdt-update-certs | Main.RobSnihur | 06 Aug 2010 - 16:16 |
+%COMMENT{type="tableappend"}%
+
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/HandsOn/centerpageborder.css
+-->
+
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% Main.MarcoMambelli - 20 Jul 2010 %BR%
+%REVIEW% Main.RobertEngel - 21 Jul 2009 %BR%
+%REVFLAG% %X% %BR%
+
+   * [[%ATTACHURL%/Condor.zip][Condor.zip]]: serial64ff source file
+
+%META:FILEATTACHMENT{name="test_pres.pdf" attachment="test_pres.pdf" attr="" comment="Test presentation" date="1248174978" path="test_pres.pdf" size="23968" stream="test_pres.pdf" tmpFilename="/usr/tmp/CGItemp22948" user="MarcoMambelli" version="1"}%
+%META:FILEATTACHMENT{name="OSGAH-client.pdf" attachment="OSGAH-client.pdf" attr="" comment="OSG client" date="1248977559" path="OSGAH-client.pdf" size="439798" stream="OSGAH-client.pdf" tmpFilename="/usr/tmp/CGItemp23037" user="MarcoMambelli" version="1"}%

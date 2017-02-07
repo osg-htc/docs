@@ -1,0 +1,40 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1249071171" format="1.1" reprev="1.2" version="1.2"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+A explanation of the major differences between OSG 1.0 and OSG 1.2 and how that will affect installation, configuration, and maintenance.
+
+%EDITTHIS%
+%BR%
+
+---++ Software Caches
+The biggest difference between the two installations is the software cache that is must be used to get the software.  OSG 1.0 uses the OSG symbol so installing the ce package would be done by running =pacman -get OSG:ce= .  OSG 1.2 now uses an url to the cache.  So to install the ce package from OSG 1.2, you would need to run =pacman -get http://software.grid.iu.edu/osg-1.2:ce=.  
+
+The motivation for this change was to allow OSG 1.0 and OSG 1.2 installations to be fully supported and to allow sites using osg 1.0.x to update as new releases come out.  Because pacman records the cache it used, the OSG symbol needed to be kept in order to prevent OSG 1.0 installations from breaking if they tried to run an update.  Going forward, future OSG releases will probably use an url to specify the cache.
+
+---++ Post-installation setup
+There has also been a change in the post-installation configuration.  After installing packages from the OSG 1.2 cache, you will need to run =source setup.sh= followed by =vdt-post-install=.  In addition, in order to setup your CA certificates, you will now need to run the =vdt-ca-manage= script.  This script takes options to specify the whether to use the goc or vdt ca certificates distribution (or a custom distribution) as well as the location of the ca certificates directory.  Finally this script is also run to keep your certificates up to date.
+
+---++ Service status
+Another large change in this version of OSG and in the VDT 2.0.x release, is that services are disabled by default when they are installed. =configure-osg= will enable services for you on the CE, but for non-ce installations, you will need to enable services manually using =vdt-control --enable=.
+
+---++ Configure-osg
+The largest difference between OSG 1.2 and OSG 1.0 in regards to configure-osg is that the configure-osg script has been renamed to =configure-osg=.  In addition, the script is now in your path when you source setup.sh.  Another change includes a change in the location of the config file.  =configure-osg= now uses =$VDT_LOCATION/osg/etc/config.ini= for configuration information.  You will not be able to use any other configuration file.  
+
+Also, the extract functionality of configure-osg has been removed.  This functionality has been moved to a separate script called =extract-config=.  This script will now look for configuration information in the location specified by the =$OLD_VDT_LOCATION= variable and generate a file called =extracted-config.ini= in the current directory.  You can use this file as the basis of a new config.ini to configure your site.
+
+---++ File layout
+The file layout of the CE has been changed slightly.  As of OSG 1.2, there is a new directory called =osg= that holds osg related configuration files in =osg/etc/= and osg related binaries in =osg/bin=.  The old monitoring directory is now a symlink to =osg/etc= for backwards compatibility.  
+
+Other layout changes include a new toplevel directory called =logs=, which currently has some vdt-control logging information.  This will expand in the future to make log information easier to locate.
+
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% Main.SuchandraThapa - 31 Jul 2009 %BR%
+%REVIEW%

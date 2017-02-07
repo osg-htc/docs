@@ -1,0 +1,44 @@
+%META:TOPICINFO{author="X509_2fDC_3dorg_2fDC_3ddoegrids_2fOU_3dPeople_2fCN_3dSuchandra_20Thapa_20757586" date="1291151518" format="1.1" version="1.1"}%
+%META:TOPICPARENT{name="WebHome"}%
+
+<div style="font-family: Tahoma, Geneva, sans-serif;">
+<div class="announcement-head" style="border: thin solid #000; background-color: #F90;">
+  <h1 align="center">OSG 1.2.16 Update Notification</h1>
+</div>
+<br/>
+
+<div class="date" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; border: thin solid #000; background-color: #F93;">Date: <span class="date-text" style="font-size: 14px; font-weight: normal;">November 30, 2010</span></div>
+<br/>
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Affected Components</div>
+<div>
+  <p>The following components are affected:</p>
+  <ul>
+    <li> All OSG software installations</li>
+  </ul>
+
+</div>
+<br/>
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Summary</div>
+<div> 
+  <p>This release incorporates a variety of fixes and changes to various OSG software components. The CA cert scripts have been updated to support a new format for CA certs. The existing CA cert format is still supported but the new format will allow the security group to distribute certs that work with the hash names that OpenSSL 1.0 uses. A summary of the main changes are as follows:</p>
+  <ul>
+    <li>vdt-ca-manage and vdt-cert-update scripts have been updated to allow the CA certificates to be distributed in the new format</li>
+    <li>Bestman and SRM-Client-LBNL have been updated to 2.2.1.3.16</li>
+    <li>Bestman2, Bestman-Client, and SRM-Tester3-LBNL have been updated to 2.0.3</li>
+
+    <li>Symlinks to various log files have been added to the $VDT_LOCATION/logs directory</li>
+    <li>PHP has been updated to 5.2.14 to fix a small security issue</li>
+    <li>UberFTP has been updated to 2.6<br/>
+    </li>
+  </ul>
+  <p>&nbsp;</p>
+</div>
+<br/>
+
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Update Instructions</div>
+<div>Update instructions can be found on the OSG Twiki under the OSG 1.2 <a href="https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OSG12UpdateInstructions">update instructions</a>.</div>
+<br/>
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Additional Information</div>
+<div>The release notes for the VDT 2.0.0p23 release underlying this release can be found <a href="http://vdt.cs.wisc.edu/releases/2.0.0/release-p23.html">here</a>.</div>
+<br/>
+</div>

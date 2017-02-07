@@ -1,0 +1,97 @@
+%META:TOPICINFO{author="KyleGross" date="1481047988" format="1.1" version="1.14"}%
+%META:TOPICPARENT{name="Documentation/DocumentationTeam.Navigation"}%
+%DOC_STATUS_TABLE%
+
+---+!! Grid User Accounts
+%TOC%
+
+%ICON{"hand"}% The %LINK_OSG% provides access to [[Documentation/GlossaryC#DefsComputeElement][compute]] and [[Documentation/GlossaryS#DefsStorageElement][storage]] resources using [[http://en.wikipedia.org/wiki/X.509][X509]] [[ReleaseDocumentation/CertificateWhatIs][Grid User Certificates]] which are part of a [[http://en.wikipedia.org/wiki/Public_key_infrastructure][Public Key Infrastructure]]. Grid User Certificates are just another form of authorization and are as easy to use as passwords or [[http://en.wikipedia.org/wiki/SSH_public_key][ssh keys]]. The technical details and the implementation of the public key infrastructure do not need to be a concern to the grid user.
+
+Each [[ReleaseDocumentation/CertificateWhatIs][Grid User Certificate]] is associated with a %LINK_GLOSSARY_DN%; a unique string containing the full name of the grid user for identification. This _DN_ is used by resource providers to map grid users to local Unix accounts on the compute and storage resources.
+
+---+ Apply for a Grid User Certificate
+
+The preferred way to apply for a [[ReleaseDocumentation/CertificateWhatIs][Grid User Certificate]] is using your [[ReleaseDocumentation/CertificateGetWeb][web browser]]. Once the Grid Certificate will be issued you may _export_ and _install_ it on a Unix resource to use it.
+
+Alternatively use the [[ReleaseDocumentation/CertificateGetCmd][Unix command line]] to apply for a Grid User Certificate. Once the Grid Certificate will be issued you should _import_ it into your web browser in order to access the [[Main][!Twiki]] and to open tickets with the %LINK_GOC_OPEN_TICKET%.
+
+%TWISTY{%TWISTY_OPTS_REVIEW%}%
+   * create and link documentation how to export a grid user certificate from a web browser
+   * create and link documentation how to import a grid user certificate into a web browser
+   * link documentation how to install a grid certificate on a Unix resource
+%ENDTWISTY%
+
+---+ Test your Grid User Certificate
+
+Install the [[ReleaseDocumentation/ClientInstallationGuide][OSG Client Tools]] on a Unix resource to [[ReleaseDocumentation/UserCertificate#TestPGC][test]] your [[ReleaseDocumentation/CertificateWhatIs][Grid User Certificate]] and to access [[Documentation/GlossaryC#DefsComputeElement][compute]] and [[Documentation/GlossaryS#DefsStorageElement][storage]] resources provided by the %LINK_OSG%.
+
+---+ A Word of Advice
+
+Your [[ReleaseDocumentation/CertificateWhatIs][Grid User Certificate]] potentially provides you access to large amounts of [[Documentation/GlossaryC#DefsComputeElement][compute cycles]] and [[Documentation/GlossaryS#DefsStorageElement][storage space]]. Safeguard your Grid User Certificate and associated _password_ with the same care used to protect your Social Security Number or Bank Account Information. Contact the %LINK_GOC_OPEN_TICKET% if you suspect your Grid User Certificate has been compromised!
+
+---+ References
+ 
+   * [[ReleaseDocumentation/CertificateWhatIs][What is a Grid User Certificate?]]
+   * [[ReleaseDocumentation/CertificateGet][Apply for a Grid User Certificate]]
+   * [[Documentation/GetAccessToGrid][Access to Grid Resources]]
+   * [[ReleaseDocumentation/ClientInstallationGuide][OSG Client Tools Installation Guide]]
+   * [[ReleaseDocumentation/CertificateGetWeb][Apply for a Grid User Certificate: Web Interface]]
+   * [[ReleaseDocumentation/UserCertificate][Grid User Certificate]]
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesBarlow
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Navigation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->

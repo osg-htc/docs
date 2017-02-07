@@ -1,0 +1,167 @@
+%META:TOPICINFO{author="BrittaDaudert" date="1248292944" format="1.1" reprev="1.25" version="1.25"}%
+%META:TOPICPARENT{name="SiteValidationOSG12"}%
+---+!! %SPACEOUT{ "%TOPIC%" }%
+%TOC%
+
+%RED%Hello Britta, Kent. We are temporarily filling in the table. Please keep quick snapshot posted on table with %Y%, %S%, %T%. <br> 
+On this page, please keep details posted. If a site issue needs urgent attention, highlight it here for quick action. <br> Thanks. -- ASR & RWG %ENDCOLOR%
+
+---+ Summary
+
+---++ EINSTEIN AT HOME
+
+---+++LIGO_CIT %GREEN%Validated %ENDCOLOR%
+   
+   * Code deployed 07/13
+
+   *  test-jobs submitted 07/14 and 07/15
+
+      * all succeeded 
+
+---+++LBNL_DSD_ITB grolsch.lbl.gov  %GREEN% Validated%ENDCOLOR%
+
+   * 07/10 : something was fixed
+   *  re-try deployment  (07/11) successful!
+   * submit test jobs (07/11) executing
+   * conbtinue running over weekend --> suvccessfull
+
+ 
+---+++ FNAL_FERMIGRID_ITB  fgitbgkc2.fnal.gov  %GREEN% Validated %ENDCOLOR%
+
+   * Validated with gk  fgitbgkc2.fnal.gov (was fgitb-gk.fnal.gov ) 07/16
+   
+---+++ CIT_ITB_1 cit-itb.ultralight.org %GREEN%Validated%ENDCOLOR% 
+
+   *  Deployment fail:  make ncurses/mysql fails : no g++ compiler on gatekeeper
+   * 07/22 Michael installes g++ compiler --> deployment successful
+   * 10 test jobs ran successfully
+ 
+
+
+   * %BLUE% DETAILS of deployment fail
+
+
+       *ncurses
+ 
+globus-job-run cit-itb.ultralight.org /bin/bash -c 'cat /home/raid2/osg-data/ligo/bdaudert/GEO600-1.3.x/src/ncurses-5.6/make.log'
+
+make[1]: Entering directory `/home/raid2/osg-data/ligo/bdaudert/GEO600-1.3.x/src/ncurses-5.6/c++'
+cd ../objects;   -I../c++ -I../include -I/home/raid2/osg-data/ligo/bdaudert/GEO600-1.3.x/src/ncurses-5.6/c++ -DHAVE_CONFIG_H -I/home/raid2/osg-data/ligo/bdaudert/GEO600-1.3.x/src/ncurses-5.6/c++/../include -I. -I../include  -D_GNU_SOURCE -DNDEBUG -I/home/raid2/osg-data/ligo/bdaudert/GEO600-1.3.x/build/ncurses-5.6/include/ncurses  -c /home/raid2/osg-data/ligo/bdaudert/GE600-1.3.x/src/ncurses-5.6/c++/cursesf.cc
+/bin/sh: -I../c++: No such file or directory
+make[1]: *** [../objects/cursesf.o] Error 127
+make[1]: Leaving directory `/home/raid2/osg-data/ligo/bdaudert/GEO600-1.3.x/src/ncurses-5.6/c++'
+
+
+      *  mysql
+
+ globus-job-run cit-itb.ultralight.org /bin/bash -c 'cat /home/raid2/osg-data/ligo/bdaudert/GEO600-1.3.x/src/mysql-5.0.37/make.log'
+
+
+/home/raid2/osg-data/ligo/bdaudert/GEO600-1.3.x/src/mysql-5.0.37/depcomp: line 512: exec: g++: not found
+make[2]: *** [my_new.o] Error 127
+make[2]: Leaving directory `/home/raid2/osg-data/ligo/bdaudert/GEO600-1.3.x/src/mysql-5.0.37/mysys'
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory `/home/raid2/osg-data/ligo/bdaudert/GEO600-1.3.x/src/mysql-5.0.37'
+make: *** [all] Error 2 %ENDCOLOR%
+
+ ---+++ BNL_ITB_1 gridtest01.racf.bnl.gov  %GREEN% Validated%ENDCOLOR%
+
+   * Code deployed 
+
+   * Submitted test jobs, will run over weekend --> running
+
+
+---+++ UC_ITB uct3-edge7.uchicago.edu  %GREEN% Validated%ENDCOLOR%
+
+   * Code deployed
+   
+   * Submitted test jobs  , will run over weekend -- Running
+
+
+---++ BINARY  INSPIRAL
+
+   * General
+
+      * %BLUE%Used of 64 bit LIGO binaries caused failures at BNL, LBNL, UC_ITB, CIT_ITB_1 --> fixed 07/22%ENDCOLOR%
+
+      * %BLUE% 07/21 Switch all work-flows to run globus-url-copy nodes (transfer jobs) on gatekeepers. %ENDCOLOR% 
+
+      * Run all transfer jobs on gatekeeper!!!   
+  
+         * GUC hangs at UC_ITB when executed on WN
+
+         * CIT_TB_1: shared library error message even when GLOBUS, LD_LIBRARY_PATH set correctly
+
+      * take out ATLAS RLS server at AEI: rls://ldr.aei.uni-hannover.de , permission issue-- change in pegasus properties
+
+      * BNL: gridftp server does not accept http sources : manual change in .in file needed
+
+---+++ LIGO_CIT %GREEN%Validated%ENDCOLOR%
+
+   * Manually created site entry in sites catalogue
+   
+   * work-flow ran successfully 07/16
+  
+---+++ LBNL_DSD_ITB grolsch.lbl.gov %GREEN% Validated %ENDCOLOR%
+
+   * LBNL_DSD_ITB implemented some site specific changes 7/21 and before 
+
+   * LIGO changed binaries from 64 bit to 32
+
+   * work-flow ran successfully 07/21
+
+   * %BLUE% Previous Problem: tmplt bank job fail with exit code 127
+
+   * caused by use 64 bit binaries not starting on 32 bit WN %ENDCOLOR%
+ 
+  
+---+++ FNAL_FERMIGRID_ITB fgitbgkc2.fnal.gov%GREEN%Validated%ENDCOLOR%
+
+   *  voms proxy needed
+   *  work-flow ran successfully 07/16
+
+---+++ CIT_ITB_1 cit-itb.ultralight.org %GREEN%Validated%ENDCOLOR%
+
+   * 07/21 change LIGO binaries to 32 bit
+
+ 
+---+++ BNL_ITB_1 gridtest01.racf.bnl.gov %GREEN% Validated %ENDCOLOR%
+   
+   * gsiftp server does not except http sources: change stage in file manually to transfer pegasus executable
+   
+   * LIGO changed binaries from 64 bit to 32
+
+   * Work-flow ran successfully 07/21
+
+   * %BLUE% Previous Problem: tmplt bank job fail with exit code 127
+
+   * caused by use 64 bit binaries not starting on 32 bit WN %ENDCOLOR%
+
+
+
+ 
+ 
+---+++ UC_ITB uct3-edge7.uchicago.edu %GREEN%Validated%ENDCOLOR%
+
+   *  GUC hangs at UC_ITB when executed on WN (change to GK execution 07/21)
+   * 07/21  changed LIGO binaries from 64 bit to 32
+   * work-flow ran successfully 07/21
+ 
+
+-- Main.BrittaDaudert - 06 Jul 2009
+
+
+
+
+%BR% 
+%COMPLETE2% %BR% 
+%RESPONSIBLE% Main.BrittaDaudert %BR% 
+%REVIEW% Main.IwonaSakrejda - 21 Jul 2009 %BR% 
+%REVFLAG% %X%  %BR% 
+
+
+---++ *Comments*
+| Page is poorly formatted. | Main.RobGardner | 09 Jul 2009 - 17:01 |
+| More importantly, are all the LIGO issues getting resolved? | Main.RobGardner | 09 Jul 2009 - 17:01 |
+| I believe I have fixed the problem with grolsch.lbl.gov. Somehow the libc6-dev package was missing. Please try again. | Main.KeithJackson | 10 Jul 2009 - 16:37 |
+%COMMENT{type="tableappend"}%

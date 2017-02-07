@@ -1,0 +1,187 @@
+%META:TOPICINFO{author="KyleGross" date="1481047984" format="1.1" version="1.15"}%
+%META:TOPICPARENT{name="ComputeElementInstall"}%
+---+!! *<nop>%SPACEOUT{%TOPIC%}%*
+%DOC_STATUS_TABLE%
+%TOC{depth="2"}%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+Compatibility Authorization Pre-configuration steps
+
+%EDITTHIS%
+%BR%
+---++Introduction
+%RED% This document is now completely out of date.  The "Compatibility mode" is now completely
+deprecated in OSG 1.2 and cannot be selected anymore.  this page should be purged %ENDCOLOR%
+It is necessary to enable some mode of authentication before you can successfully 
+run the OSG configuration script.  There is no mode of authentication that is enabled by 
+default.  This section of the document describes how to enable a mode called "Compatibility Mode".
+There is more 
+background information about the other privilege modes  at AboutAuthorizationForCE.
+If you  wish to enable a different mode, please consult [[FullPrivPreConfig][Full Privilege authorization page]] or [[LocalAuthPreConfig][Local authorization page]].
+
+
+In the early days of OSG there was a mode called "Compatibility Mode".  This mode is rarely used
+anymore.  This document is a short summary of the steps you need to do to implement this mode before
+running the OSG configuration tool.
+In Compatibliity mode, authorization is still performed using the <i>grid-mapfile</i> but your site must run a GUMS server; see [[InstallConfigureAndManageGUMS][GUMS installation instructions]].  The difference relative to the Grid3 configuration is in the source of the VO membership data/account assignments.  Instead of each CE node pulling independently from the VO VOMS servers, each CE node for your site pulls the data from your site's GUMS server.  Thus, centralized mapping is enabled.  Your site's GUMS server polls the VOs' VOMS servers much the same as the <i>edg-mkgridmap</i> process did, the difference being that all CE nodes account assignments are managed in one place, the GUMS server.  Given the GUMS configuration options, account pools (many accounts, one-to-one DN-to-account mapping) can be implemented as well as group accounts (many-to-one DN-to-account mapping).
+
+The GUMS client software, which is installed with every CE node installation, contains a script that periodically creates/updates the grid-mapfile. This script is a <i>root</i> cron process.
+
+A couple of points to be aware of regarding this configuration relative to Full Privilege:
+   * You will not be able to provide role based authorization in this configuration. For info, see [[Documentation/VORolesAndGroups][How Fine-Grained Authorization is Implemented using VO-defined Roles and Groups]]. In particular, users belonging to multiple VOs will always be mapped to the same Unix account. This will introduce inaccuracies in the accounting records.
+   * You will introduce delays since each gatekeeper will have to regenerate the map before implementing the new policy or allowing new users. 
+
+In the compatibility configuration, you will have:
+   * One GUMS server per local account domain to manage the mapping from Grid identity (DN+attributes) to local username
+   * The GUMS client program <i>gums-host</i> running via cron on your gatekeeper(s) to retrieve both the forward and inverse maps (where forward is DN-to-account, inverse is user-to-VO).
+
+---++ Prerequisites
+To successfully complete the steps below, you need to have installed a GUMS service. See the [[InstallConfigureAndManageGUMS][Install Configure And Manage GUMS]] topic of the %CACHE% documentation for information on installing GUMS. %BR%  
+---++ Configure GUMS clients to point to the correct GUMS service
+The GUMS-Client package is installed as part of the %CACHE% CE install  The essential configuration files are located in the =$VDT_LOCATION/gums/scripts= directory.
+
+You will need to configure these for the Compatibility authorization mode.
+
+---+++!! gums-client.properties file
+You need to edit the =$VDT_LOCATION/gums/config/gums-client.properties= configuration file to point to the appropriate GUMS server.   Upon installation, the file contains two entries both populated with the hostname of the CE node you are configuring, in the following example, the GUMS node is on =gums.domain.org= .  For the Compatibility authorization mode, only the =gums.location= property needs to be changed to the hostname of your GUMS server.   If you set the VDT_GUMS_HOST variable when you installed the VDT these changes will have been made automatically for you already.
+
+<pre class="programlisting">
+gums.location=https://gums.domain.org:8443/gums/services/GUMSAdmin
+gums.authz=https://gums.domain.org:8443/gums/services/GUMSAuthorizationServicePort
+</pre>
+
+The =gums.authz= entry is only used if you wish to use the  client tool to test specific mappings from this host.  Documentation of this client is found at the [[https://www.racf.bnl.gov/Facility/GUMS/1.2/use_test.html][GUMS web site]].  This same functionality can be executed using the GUMS web UI.
+
+---++ Enable and run  the gums-host-cron service
+In Compatibility mode, the =$VDT_LOCATION/gums/scripts/gums-host= command is used to generate two essential files:
+   * =/etc/grid-security/grid-mapfile=
+   * =$VDT_LOCATION/monitoring/osg-user-vo-map.txt=
+
+This command is run  by the =gums-host-cron= cron service that was installed but not  activated. The activation of this service is *critical* in Compatibility authorization mode.  
+Enable it with the following command (as root)
+
+<pre>
+vdt-control --enable gums-host-cron
+</pre>
+Then run gums-host-cron manually once to populate the osg-user-vo-map.txt.  This step is critical 
+because it is the full list of VO's you will support and this information is needed as input to
+the OSG configuration step which comes next.
+
+<pre>
+$VDT_LOCATION/gums/scripts/gums-host-cron
+</pre>
+
+---++ Configure Globus to use the Compatibility mode
+The Globus gatekeeper is a CE service (also known as Pre_WS-GRAM) that submits user jobs from the grid to an underlying local batch system. Users present their grid identities (user proxy) to Globus. 
+This identity is mapped to a local user (UNIX username) using the PRIMA libraries.
+Jobs are then run in the batch system using this local identity.
+
+No configuration changes are needed. The Globus gatekeeper will use the =/etc/grid-security/grid-mapfile= maintained by the =gums-host-cron= cron service.
+
+---++ WS-GRAM services configuration
+WS-GRAM is a CE service that submits user jobs from the grid to an underlying local batch system. Users present their grid identities (user proxy) to WS-GRAM. This identity is mapped to a local user (UNIX username), for example using a gridmap-file (as explained above). Jobs are run in the batch system using this local identity. 
+
+---+++!! WS-GRAM configuration for full privilege mode
+The default authorization mode for WS_GRAM is Local or Compatibility.  It uses the =/etc/grid-security/grid-mapfile= as the basis for authorization.  
+
+So no changes to the configuration are needed.
+
+---+++!! WS-GRAM services sudoers file
+Pre-WS-GRAM and WS-GRAM use two different mechanisms to switch to the appropriate local user.
+
+The <i>pre-WS</i> GRAM processes run as privileged user (root) and can, therefore, change to any local unprivileged user. This mechanism, however, may present security risks: bugs in the code, which runs as root, may be exploited to gain privileged access to the machine.
+
+To mitigate this risk, WS-GRAM processes run as an unprivileged user (either <b>globus</b> or <b>daemon</b>, depending on the local configuration). In order for these users to be able to switch to another local unprivileged user, though, the local =sudo= service must be appropriately configured. The configuration requires editing the =/etc/sudoers= file manually.  
+
+In =$VDT_LOCATION/post-install/README=, the section <i>Globus-Base-WSGRAM-Server</i> describes the modifications to =/etc/sudoers= necessary for the web services GRAM to function properly.  To facilitate the necessary modification, the =configure-osg.py= script produces the necessary additions for the =/etc/sudoers= file and writes them into a new file =$VDT_LOCATION/monitoring/sudo-example.txt= . The administrator should simply copy and paste the content of that file into the =/etc/sudoers= file using =visudo=.
+*Note the following:*
+   * You __must__ use the same authorization mode for pre-ws and web services.
+   * This must be done manually.
+   * The path defined in =/etc/sudoer= cannot be soft links. Use full paths only. Therefore, if you have your $VDT_LOCATION (e.g. /opt/local/ce-1.0/) soft linked from a generic directory (e.g. /opt/local/ce), it is the explicit path (e.g. ce-1.0) that *must* used in the =/etc/sudoers= file. If you install another version of the software into a different directory, you must change the =/etc/sudoers= to reflect the new installation since making a softlink will not work.
+   * Use the =visudo= command to modify the =/etc/sudoers= file. 
+   * Beware of extra whitespace when modifying the =sudoers= file, especially at the end of a line.
+
+Make these changes now, keeping in mind the user under which VDT determined your container will run.
+
+In the example (for Compatibility mode) that follows, the web services user is the <i>daemon</i> user and the real path to the VDT_LOCATION is =/usr/local/osg-ce=:
+<pre class="programlisting">
+Runas_Alias GLOBUSUSERS = ALL, !root
+
+daemon ALL=(GLOBUSUSERS) \
+        NOPASSWD: /usr/local/osg-ce/globus/libexec/globus-gridmap-and-execute \
+        -g /etc/grid-security/grid-mapfile \
+        /usr/local/osg-ce/globus/libexec/globus-job-manager-script.pl *
+
+daemon ALL=(GLOBUSUSERS) \
+        NOPASSWD: /usr/local/osg-ce/globus/libexec/globus-gridmap-and-execute \
+        -g /etc/grid-security/grid-mapfile \
+        /usr/local/osg-ce/globus/libexec/globus-gram-local-proxy-tool *
+</pre>
+
+---++ Known issues
+
+---++ More information
+
+
+%STOPINCLUDE%
+%BR%
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = StevenTimm
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = IwonaSakrejda
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = IwonaSakrejda
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

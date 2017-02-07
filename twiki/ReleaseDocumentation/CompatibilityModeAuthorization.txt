@@ -1,0 +1,134 @@
+%META:TOPICINFO{author="KyleGross" date="1481047984" format="1.1" version="1.30"}%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%DOC_STATUS_TABLE%
+%TOC{depth="2"}%
+
+---++ This page is obsolete
+
+This Web page is obsolete. It is here just to host a few bits of information that have not been verified to exist elsewhere.
+
+Please refer to for [[CompatibilityAuthPreConfig][the Compatibility Authorization information]] from now on.
+
+---++ Old info
+
+---++++ !!Test grid-mapfile generation
+To test =grid-mapfile= generation, you need to run the below sequence (as root).  Note this uses the CE's host certificate.
+
+<pre class="screen">
+# <b>source $VDT_LOCATION/setup.sh </b>
+# <b>cd $VDT_LOCATION/gums/scripts </b>
+# <b>./gums-host generateGridMapfile</b>    <em>(output goes  to stdout. To get 
+                                      a file: either redirect stdout or 
+                                      use '--file file_name')</em>
+     <em>...output  should look similar to the following dependent on your 
+     GUMS server mappings..</em>
+   #---- members of vo: osg ----#
+    "/DC=org/DC=doegrids/OU=People/CN=Alexis Rodriguez 233072" osg01
+   "/DC=org/DC=doegrids/OU=People/CN=Andrew Zahn 730598" osg01
+   "/DC=org/DC=doegrids/OU=People/CN=Craig Phillip Prescott 50911" osg01
+   #---- members of vo: Test3userGroup ----#
+   "/DC=org/DC=doegrids/OU=People/CN=Anne Heavey 830711" osg01account
+   "/DC=org/DC=doegrids/OU=People/CN=John Weigand 458491" osg01account
+      <em>.... and so on</em>
+</pre>
+
+If gums-host generateGrid3UserVoMap fails, the GUMS server configuration may not be correct.  Please contact your administrator, or if you are the administrator, make sure you have the following elements in your gums.config (which can be easily configured from the web interface):
+   * A hostToGroupMapping element which matches the host name from which you are issuing the request
+   * A groupToAccountMapping (referenced by the hostToGroupMapping) element which contains a user group and account mapper
+   * A userGroup element (referenced by the groupToAccountMapping) to validate membership of the requested DN
+   * A accountMapper element (referenced by the groupToAccountMapping) to return the account for the requested DN
+
+---++++ !!Test osg-user-vo-map generation
+To test the =osg-user-vo-map= generation, you need to run as <i>root</i>.  This uses the CE host certificate.
+<pre class="screen">
+# <b>source $VDT_LOCATION/setup.sh </b>
+# <b>cd $VDT_LOCATION/gums/scripts </b>
+# <b>./gums-host generateOsgUserVoMap</b>   <em>(output goes  to stdout. To get
+                                        a file: either redirect stdout 
+                                        or use '--file file_name')</em>
+     <em>...output  should look similar to the following dependent on your GUMS
+     server mappings..</em>
+  #User-VO map
+  # #comment line, format of each regular line line: account VO
+  # Next 2 lines with VO names, same order, all lowercase, with case (lines starting with #voi, #VOc)
+  #voi xxx test3
+  #VOc OSG TEST3
+  #---- accounts for vo: osg ----#
+  osg01 xxx
+  #---- accounts for vo: Test3userGroup ----#
+  osg01account test3
+  <em>  .... and so on</em>
+</pre>
+
+If gums-host generateGrid3UserVoMap fails, the GUMS server configuration may not be correct.  Please contact your administrator, or if you are the administrator, make sure you have the following elements in your gums.config (which can be easily configured from the web interface):
+   * A hostToGroupMapping element which matches the host name from which you are issuing the request
+   * A groupToAccountMapping (referenced by the hostToGroupMapping) element which contains a user group and account mapper
+   * A userGroup element (referenced by the groupToAccountMapping) to validate membership of the requested DN
+   * A accountMapper element (referenced by the groupToAccountMapping) to return the account for the requested DN
+
+---++ Retest the authorization mode using site verify
+Run the [[ValidateSiteVerify][Site Verification]] script again locally (as a regular user, not root) and verify that the authorization still works. 
+
+
+%BR%
+
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = SamHoover
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = RobGardner
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = IwonaSakrejda
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+%META:TOPICMOVED{by="AnneHeavey" date="1192818795" from="Integration/ITB_0_7.OsgCEAuthCompatibility" to="Integration/ITB_0_7.CompatibilityModeAuthorization"}%

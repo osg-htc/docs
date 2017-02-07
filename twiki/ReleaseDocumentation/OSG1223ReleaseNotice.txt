@@ -1,0 +1,23 @@
+%META:TOPICINFO{author="ScotKronenfeld" date="1317223248" format="1.1" version="1.1"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+ OSG 1.2.23 Update Notification
+
+Date: September 27, 2011
+
+---++ Affected Components
+   * CE installations
+   * !RSV installations
+   * !CEMon
+   * GUMS/VOMS
+   * Any other installation that uses Apache httpd or Tomcat
+
+---++ Summary
+This release contains the following security updates:
+   * Apache httpd
+   * Apache Tomcat
+   * Other small changes, see the VDT release notes for full details:     <a href="http://vdt.cs.wisc.edu/releases/2.0.0/release-p30.html" target="_blank">http://vdt.cs.wisc.edu/releases/2.0.0/release-p30.html</a>
+
+This update addresses and closes a DOS attacks on Apache httpd and Tomcat. Sites using components that use Apache httpd or tomcat are encouraged to update as soon as possible.
+
+---++ Update Instructions
+Update instructions can be found on the OSG Twiki under the OSG 1.2 <a href="https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OSG12UpdateInstructions" target="_blank">update instructions</a>.

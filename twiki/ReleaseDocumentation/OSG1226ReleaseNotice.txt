@@ -1,0 +1,42 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1327439357" format="1.1" version="1.1"}%
+%META:TOPICPARENT{name="WebHome"}%
+
+<div style="font-family: Tahoma, Geneva, sans-serif;">
+<div style="background-color: #F90; border: thin solid #000;">
+  <h1 align="center">OSG 1.2.26 Update Notification</h1>
+</div>
+<br/>
+
+<div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #F93; border: thin solid #000;">Date: <span style="font-size: 14px; font-weight: normal;">January 24, 2012</span></div>
+<br/>
+<div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; color: #CCC; border: thin solid #000;">Affected Components</div>
+<div>
+  <p>The following components are affected:</p>
+  <ul>
+    <li>Gratia PBS probes</li>
+    <li>Tomcat</li>
+
+  </ul>
+</div>
+<br/>
+<div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; color: #CCC; border: thin solid #000;">Summary</div>
+<div> 
+  <p>This release contains the following updates:</p>
+  <ul>
+    <li>Tomcat 5.5.35 </li>
+    <li>Gratia-Common-Probe 1.07.02e-2.osg</li>
+
+  </ul>
+  <p>This update includes a fix for a <a href="https://bugzilla.redhat.com/show_bug.cgi?id=750521">DOS vulnerability</a> in tomcat. This update also provides a new version of the Gratia probes that fixes a critical accounting error.</p>
+</div>
+<div>Update instructions can be found on the OSG Twiki under the OSG 1.2 <a href="https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OSG12UpdateInstructions">update instructions</a>.</div>
+<br/>
+<div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; color: #CCC; border: thin solid #000;">Additional Information</div>
+<div>The release notes for the VDT 2.0.0p33 release underlying this release can be found <a href="http://vdt.cs.wisc.edu/releases/2.0.0/release-p33.html">here</a>.</div>
+
+<br/>
+
+<style type="text/css">
+body { font-family: Tahoma, Geneva, sans-serif !important; }
+</style>
+</div>

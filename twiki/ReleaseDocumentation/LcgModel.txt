@@ -1,0 +1,40 @@
+%META:TOPICINFO{author="TanyaLevshina" date="1285850433" format="1.1" reprev="1.13" version="1.13"}%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+An introduction and explanation of the LCG storage model.
+
+%EDITTHIS%
+%BR%
+---++ LCG Model
+The LCG Model follows the LHC Computing Grid's (see further reading below) standard model for storage.  It associates a default storage element (SE) with the CE that can be used to stage data in and out of the CE.  This model replaces the [[LocalStorageConfiguration#OsgData][$OSG_DATA]] or  [[LocalStorageConfiguration#OsgSiteRead][$OSG_SITE_READ]] and [[LocalStorageConfiguration#OsgSiteWrite][$OSG_SITE_WRITE]] directories with a [[LocalStorageConfiguration#OsgDefaultSe][$OSG_DEFAULT_SE]].    However, since many VO applications don't support or understand how to use a SE to stage data in or out of a site, those directories should be provided as well if your site will provide support for more than a few VOs.  The required areas in this model are
+   * [[LocalStorageConfiguration#OsgGrid][$OSG_GRID]]
+   * [[LocalStorageConfiguration#OsgApp][$OSG_APP]]
+   * [[LocalStorageConfiguration#OsgDefaultSe][$OSG_DEFAULT_SE]]
+   * [[LocalStorageConfiguration#OsgWnTmp][$OSG_WN_TMP]]
+
+However, you should also provide [[LocalStorageConfiguration#OsgData][$OSG_DATA]] as well in order to support VO applications.
+
+A dataflow example may be: 
+   * Site admin intervention or external transfer 
+   * =srmcp=: $OSG_DEFAULT_SE &rarr; $OSG_WN_TMP
+   * Job execution
+   * =srmcp=: $OSG_WN_TMP &rarr; $OSG_DEFAULT_SE
+   * External stage-out
+
+---++ Further reading
+   * [[http://lcg.web.cern.ch/LCG/][LHC Computing Grid]]
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.SuchandraThapa - 17 Oct 2007 %BR%
+%REVIEW% 
+
+<!--
+ Main.ForrestChristian 13 Nov 2006: Pulled out of LocalStorageRequirements050
+-->

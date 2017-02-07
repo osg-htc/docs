@@ -1,0 +1,656 @@
+%META:TOPICINFO{author="KyleGross" date="1481047983" format="1.1" version="1.104"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>BeStMan Gateway*
+%DOC_STATUS_TABLE%
+%TOC{depth="3"}%
+%STARTINCLUDE%
+
+---+ About this Document
+%INCLUDE{"BeStMan" section="AboutBestman"}%
+
+<!-- conventions used in this document
+   * LOCAL 
+   * Local UCL_HOST = bestman
+   * Local UCL_CWD  =/opt/osg-%VERSION%-bestman
+   * Local BESTMAN_TYPE=gateway
+-->
+
+
+---+ Introduction
+%INCLUDE{"BeStMan" section="IntroductionGeneric"}% 
+!BeStMan-Gateway supports subset of  SRM v2.2 on any existing file system without internal queuing or space management. This is a main difference between !BeStMan-Gateway and [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/BeStMan][BeStMan -fullmode]].
+
+%INCLUDE{"BeStMan" section="MoreInfo"}% 
+
+---+ Engineering Considerations
+%INCLUDE{"BeStMan" section="EngineeringConsiderationsPart1"}%
+<img src="%ATTACHURLPATH%/bestman_gateway_arch.jpeg" alt="bestman_gateway_arch.jpeg" width='384' height='288' />
+ 
+ %INCLUDE{"BeStMan" section="EngineeringConsiderationsPart2"}%
+   $ Q. _Do you need to support static space tokens?_ : !BeStMan-Gateway supports pre-defined, static space tokens that could be included in configuration. It doesn't keep track of the contents in the space with the static space tokens, nor enforce allocations.  If you want to partition your storage space and have a “designated” space for some VOs or users, you can choose to use space tokens. You will have to provide the names and descriptions of the tokens as well as the size of the area.  
+
+%INCLUDE{"BeStMan" section="GetStorageHelp"}%
+
+%INCLUDE{"BeStMan" section="Requirements"}%
+%INCLUDE{"BeStMan" section="Installation"}%
+%INCLUDE{"BeStMan" section="CAInstallation"}%
+%INCLUDE{"BeStMan" section="PostInstall"}%
+
+<a name="Configuring_BeStMan_gateway" />
+---+ !BeStMan-gateway Configuration
+
+You will need to configure !BeStMan-Gateway first in order to enable it as a service. !BeStMan is recommended to run under non-root account.
+
+The simplest configuration example is shown below. It utilizes all the default values including the default user (in this configuration !BeStMan runs as user ==daemon==) and the default path to certificate and key ( ==/etc/grid-security/http/httpcert.pem==, ==/etc/grid-security/http/httpkey.pem==) that should have the right set of permission and belong to user ==daemon==. See [[#Requirements][Requirements]] for details.
+
+<pre class="rootscreen">
+<code>%UCL_PROMPT_ROOT% $VDT_LOCATION/vdt/setup/configure_bestman --server y --enable-gateway</code>
+</pre>
+
+This command will install !BeStMan that will be 
+   * running  by user ==daemon==,
+   * using certificate  ==/etc/grid-security/http/httpcert.pem== and certificate key ==/etc/grid-security/http/httpkey.pem==
+   * listening on secure port 10443 and public port 10080
+   * utilizing  gridftp server running on the same host on 2811 port
+   * using grid-mapfile for authorization
+%ICON{warning}% This configuration command doesn't specify any storage area for !BeStMan , so the user will be able to write files only in the directories where she can access to (e.g ==/tmp== or under user's home directory if it exists on the node). 
+
+If you don't want to try more complex configuration, you may skip the remaining of this and proceed to the [[#Sudoers_File_Modification][next sub-section]]  about the sudoers file.
+
+The more complex installation example is shown below:
+
+%STARTSECTION{"ComplexConfiguration"}%  
+
+The example below shows how to configure !BeStMan in gateway-mode, enable !GUMS
+and space token usage. If you would like to use pre-defined, static space tokens you need to provide a list of  space token names, description and size of space allocated for each token. Keep in mind that in gateway-mode, !BeStMan is not _managing_ the space. 
+
+<pre class="rootscreen">
+<code>%UCL_PROMPT_ROOT% $VDT_LOCATION/vdt/setup/configure_bestman --server y \</br>
+--user %RED%user%ENDCOLOR% \</br>
+--cert %RED%service_cert%ENDCOLOR% \</br> 
+--key  %RED%service_key%ENDCOLOR% \</br>
+--http-port  %RED%public_port%ENDCOLOR% \</br>
+--https-port  %RED%secure_port%ENDCOLOR% \</br>
+--gums-host  %RED%GUMS hostname%ENDCOLOR%  \</br> 
+--gums-port  %RED%GUMS port%ENDCOLOR%  \</br>
+--enable-gateway  \</br>
+--with-allowed-paths %RED%allowed_dir_list%ENDCOLOR%  \</br> 
+--with-blocked-paths %RED%blocked_dir_list%ENDCOLOR%  \</br> 
+--with-tokens-list  "%RED%TOKEN_1_NAME%ENDCOLOR%[desc:%RED%TOKEN_1_DESC%ENDCOLOR%][%RED%TOKEN_1_SIZE_GB%ENDCOLOR%];%RED%TOKEN_2_NAME%ENDCOLOR%[desc:%RED%TOKEN_2_DESC%ENDCOLOR%][%RED%TOKEN_2_SIZE%ENDCOLOR%]"   \</br> 
+--with-transfer-servers  %RED%GridFTP_servers_list%ENDCOLOR%</code>
+</pre> 
+ 
+| *Argument Value* | *Default Value* | *Comment*| 
+| ==user_name==| daemon | name of the non-privileged user that runs !BeStMan server process|
+| ==service_cert==| /etc/grid-security/http/httpcert.pem|is a path to service certificate| 
+|==service_key==| /etc/grid-security/http/httpkey.pem| is a path to service certificate private key|
+|==public_port==|10080|!BeStMan public port|
+|==secure_port==|10443|!BeStMan private port  %ICON{"warning"}% Please, make sure that these two ports are open if  you have a firewall on your node|
+|==GUMS_hostname==|localhost|is the FQDN name of  !GUMS server|
+|==GUMS_port==|8443| is the port of !GUMS  server|
+|==GridFTP_servers_list==|localhost| is a list !FQDN of your !GridFTP servers, separated by ; . e.g. “gsiftp://host1.domain.tld;gsiftp://host2.domain.tld”|
+|==low_port,high_port==|N/A| the open ports range that is allowed for all outbound globus connections for gridftp (see also how to deal with firewall in [[#GridFTP_Configuration][ in this section]])|
+|==allowed_dir_list==| |list of directories, separated by semicolon, accessible to users|
+|==blocked_dir_list==| /;/etc;/var| list of directories separated by semicolon, non-accessible to users (default are "") . One of the  --with-allowed-paths or --with-blocked-paths options should be used for storage access policy.|
+|==token_list==|N/A|token list format: ==token_name[KEY:VALUE][token_size_in_GB]==||
+
+Where token list format:
+   * KEY = desc, owner, retention, latency, path, usedBytesCommand. All KEY:VALUE pairs are optional
+   * desc = in ATLAS experiment, _desc_ value needs to be the same as the space token name as exampled below.
+   * retention available values = CUSTODIAL, OUTPUT, REPLICA. Normally, REPLICA and CUSTODIAL are used.
+   * latency  available values = ONLINE, NEARLINE
+   * usedBytesCommand = e.g. some custom script or "du -s -b". Its output shall have the available bytes as the first value
+   * multiple token names are separated by semi-colon
+
+For example:
+"USATLASDATA1[desc:USATLASDATA1][owner:atlas][retention:REPLICA][latency:ONLINE][path:/project/usatlas/data][usedBytesCommand:/usr/bin/du -s -b][120]"
+
+If you want to use grid-mapfile for user authentication and authorization do not specify  the following options:
+ 
+ --gums-host   %BR%
+ --gums-port 
+ 
+If you do not want to use pre-defined, static space tokens, do not specify the following 
+options: 
+
+--with-tokens-list 
+
+If you are running your !BeStMan-Gateway on the node that doesn’t have an access to  your file system, you will have to modify the following attributes in ==$VDT_LOCATION/bestman/conf/bestman.rc== configuration file: 
+<pre class="rootscreen"> 
+checkSizeWithFS=false 
+checkSizeWithGsiftp=true 
+</pre>
+These options will allow file system access through !GridFTP. However, this requires full GSI delegation from the clients.
+%INCLUDE{"BeStMan" section="SudoersFile"}%
+%ENDSECTION{"ComplexConfiguration"}%
+%INCLUDE{"BeStMan" section="GridFTPConfiguration"}%
+%INCLUDE{"BeStMan" section="GridFTPProbeConfiguration"}%
+%INCLUDE{"BeStMan" section="EnableServices"}%
+
+
+---+ Validation of Service Operation 
+
+%INCLUDE{"BeStMan" section="Testing"}%
+%INCLUDE{"BeStMan" section="ClientInstall"}%
+
+---++ Executing SRM-client commands 
+After you manage to get your personal proxy certificate created and access to srm client commands, you can verify !BeStMan server installation:
+
+Execute srm-ping: 
+<pre class="screen">
+ <code>srm-ping srm://%RED%BeStMan_host:secure_port%ENDCOLOR%/srm/v2/server 
+########################################### 
+SRM_HOME is /usr/local/osg-client/srm-client-lbnl 
+JAVA_HOME is /usr/local/osg-client/jdk1.5 X509_CERT_DIR = 
+/usr/local/osg-client/globus/TRUSTED_CA 
+GSI_DAEMON_TRUSTED_CA_DIR = /usr/local/osg-client/globus/TRUSTED_CA 
+########################################### 
+
+SRM-CLIENT: got remote srm object 
+ 
+SRM-PING: Thu Sep 18 11:55:50 CDT 2008 Calling SrmPing Request... 
+Ping versionInfo=v2.2 
+Extra information 
+        Key=backend_type 
+        Value=BeStMan 
+        Key=backend_version 
+        Value=2.2.1.1 
+        Key=GatewayMode 
+        Value=Enabled 
+        Key=gsiftpTxfServers 
+        Value=gsiftp://osg-ress-2.fnal.gov 
+        Key=clientDN 
+        Value=/DC=org/DC=doegrids/OU=People/CN=Tanya Levshina 508821 
+        Key=localIDMapped 
+        Value=fnalgrid 
+        Key=staticToken(0) 
+        Value=DISK1 desc=DATA1 size=1073741824 
+        Key=staticToken(1) 
+        Value=DISK2 desc=DATA2 size=2147483648</code>
+</pre>
+Please check that your ==gumsIDMapped== is not ==null==. If this is the case you have probably misconfigured your grid-mapfile or !GUMS related configuration.
+If you have reasonable result you may try to srm copy. 
+
+If srm-ping is successful, you can test to copy local file to your !BeStman-%BESTMAN_TYPE%-mode. First, create a file ==test1== in _/tmp_ directory and execute: 
+ 
+<pre class="screen">
+<code> srm-copy   file:////tmp/test1 
+srm://%RED%BeStMan_host:secure_port%ENDCOLOR%/srm/v2/server\?SFN=%RED%FS_ROOT_DIR%ENDCOLOR%/test1 -spacetoken %TOKEN_1_NAME%ENDCOLOR%
+
+########################################### 
+SRM_HOME is /usr/local/vdt_client/srm-client-lbnl 
+JAVA_HOME is /usr/local/vdt_client/jdk1.5 
+X509_CERT_DIR = /etc/grid-security/certificates 
+GSI_DAEMON_TRUSTED_CA_DIR = /etc/grid-security/certificates 
+########################################### 
+SRM-CLIENT: Mon Nov 03 11:32:03 CST 2008 Connecting to 
+httpg://fapl118.fnal.gov:8443/srm/v2/server 
+%TWISTY{%TWISTY_OPTS_OUTPUT%}%
+SRM-CLIENT: Mon Nov 03 11:32:04 CST 2008 Calling SrmPrepareToPutRequest 
+now ... 
+request.token=put:5 
+status=SRM_SUCCESS 
+explanation=null 
+ 
+SRM-CLIENT: RequestFileStatus for SURL=file:////tmp/test1_1 is Ready. 
+SRM-CLIENT: received 
+TURL=gsiftp://fg0x5.fnal.gov//home/tlevshin/cache/test_4 
+>>>Total Memory=17932288 
+>>>Free Memory=6875256 
+>>>Memory in use=11057032 
+ 
+SRM-CLIENT: Mon Nov 03 11:32:08 CST 2008 start file transfer. 
+SRM-CLIENT:Source=file:////tmp/test1_1 
+SRM-CLIENT:Target=gsiftp://fg0x5.fnal.gov//home/tlevshin/cache/test_4 
+ 
+SRM-CLIENT: Mon Nov 03 11:32:10 CST 2008 end file transfer. 
+ 
+SRM-CLIENT: Mon Nov 03 11:32:10 CST 2008 Calling putDone for 
+srm://fapl118.fnal.gov:8443/srm/v2/server?SFN=/home/tlevshin/cache/test_4 
+
+SRM-CLIENT: Mon Nov 03 11:32:18 CST 2008 end file transfer. 
+ 
+SRM-CLIENT: Mon Nov 03 11:32:18 CST 2008 end file transfer. 
+ 
+SRM-CLIENT: Request completed with success 
+ 
+SRM-CLIENT: Printing text report now ... 
+ 
+SRM-CLIENT*REQUESTTYPE=put 
+SRM-CLIENT*TOTALFILES=1 
+SRM-CLIENT*TOTAL_SUCCESS=1 
+SRM-CLIENT*TOTAL_FAILED=0 
+SRM-CLIENT*REQUEST_TOKEN=put:5 
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS 
+SRM-CLIENT*SOURCEURL[0]=file:////tmp/test1_1 
+SRM- CLIENT*TARGETURL[0]=srm://fapl118.fnal.gov:8443/srm/v2/server?SFN=/home/tlevshin/cache/test_4 
+SRM-CLIENT*TRANSFERURL[0]=gsiftp://fg0x5.fnal.gov//home/tlevshin/cache/test_4 
+SRM-CLIENT*ACTUALSIZE[0]=16 
+SRM-CLIENT*FILE_STATUS[0]=SRM_SUCCESS 
+SRM-CLIENT*EXPLANATION[0]=SRM-CLIENT: PutDone is called successfully 
+ExitCode=0 
+%ENDTWISTY%
+</pre>
+
+If you turned on Gratia !GridFTP transfer probes, you should be able to see the accounting information by accessing your Gratia collector. See details in  [[GratiaTransferProbe][Preparing, Installing and Validating Gratia transfer probe]].
+%INCLUDE{"BeStMan" section="Troubleshooting"}%
+
+---+References
+   * [[ReleaseDocumentation.BeStMan][OSG BeStMan Full Mode page]]
+ %INCLUDE{"BeStMan" section="References"}%
+---+Screen Dump of the Complete Install Process 
+---++ Basic Installation and Configuration
+
+Below is a screen dump of basic installation and configuration of !BeStMan-Gateway:
+   * using grid-mapfile
+   * running on default ports
+   * using default certificate and key files
+   * not configuring storage area 
+   * not enabling gratia probe services
+%TWISTY%
+<pre class="rootscreen">
+# cd /usr/local
+# cd pacman-3.29
+# source setup.sh
+# cd ..
+# mkdir osg_1.2_bestman
+# cd osg_1.2_bestman
+# pacman -get http://software.grid.iu.edu/osg-1.2:Bestman
+Do you want to add [http://software.grid.iu.edu/osg-1.2] to [trusted.caches]? (y/n/yall): yall
+Beginning VDT prerequisite checking script vdt-common/vdt-prereq-check...       
+
+All prerequisite checks are satisfied.
+                                                                          
+
+
+========== IMPORTANT ==========
+Most of the software installed by the VDT *will not work* until you install
+certificates.  To complete your CA certificate installation, see the notes
+in the post-install/README file.
+
+# source setup.sh
+
+# $VDT_LOCATION/vdt/bin/vdt-ca-manage setupca --location local -url osg
+Setting CA Certificates for VDT installation at '/usr/local/osg_1.2.6_bestman_gridmap'
+
+Setup completed successfully.
+
+# vdt-post-install
+Starting...
+Configuring PRIMA... Done.
+Configuring EDG-Make-Gridmap... Done.
+Completed all configuration.
+
+# vdt-control --list
+Service                 | Type   | Desired State
+------------------------+--------+--------------
+fetch-crl               | cron   | do not enable
+vdt-rotate-logs         | cron   | do not enable
+vdt-update-certs        | cron   | do not enable
+gsiftp                  | inetd  | do not enable
+gratia-gridftp-transfer | cron   | do not enable
+gums-host-cron          | cron   | do not enable
+edg-mkgridmap           | cron   | do not enable
+
+
+# vdt-version
+
+You have installed a subset of VDT version 2.0.0p13:
+
+Software                                                 Status              
+--------                                                 ------              
+Berkeley Storage Manager (BeStMan) 2.2.1.3.8             OK                  
+vdt-ca-manage 1.1                                        OK                  
+vdt-update-certs 2.5                                     OK                  
+CA Certificates 1.12 (includes IGTF 1.33 CAs)            -                   
+EDG Make Gridmap 3.0.0                                   OK                  
+Fetch CRL 2.6.6                                          OK                  
+GPT 3.2-4.0.8p1                                          OK                  
+Gratia GridFTP Probe 1.06.13b-1                          OK                  
+Grid User Management System (GUMS) Client 1.3.17         OK                  
+Java 5 SDK 1.5.0_21                                      OK                  
+Java 6 SDK 1.6.0_16                                      OK                  
+Logrotate 3.7                                            OK                  
+PRIMA Authorization Module 0.8.4                         OK                  
+pyOpenSSL module 0.9                                     OK                  
+VOMS Client 1.8.8-2p1                                    OK                  
+Wget 1.11.4                                              OK                  
+
+
+Status legend:
+OK: Software is up to date with the latest release in VDT version 2.0.0
+- : Not enough information to determine if updates are available.
+See man page for more information.
+
+# osg-version
+OSG 1.2.6
+
+# $VDT_LOCATION/vdt/setup/configure_bestman --server y --enable-gateway
+# vi /etc/sudoers 
+.......
+Cmnd_Alias SRM_CMD = /bin/rm, /bin/mkdir, /bin/rmdir, /bin/mv, /bin/ls
+Runas_Alias SRM_USR = ALL, !root
+daemon ALL=(SRM_USR) NOPASSWD: SRM_CMD
+
+
+# vdt-control -enable fetch-crl vdt-rotate-logs vdt-update-certs edg-mkgridmap
+# edg/sbin/edg-mkgridmap 
+# vdt-control -on
+</pre>
+
+Login as user:
+<pre class="screen">
+$ source /usr/local/osg_1.2.6_bestman/setup.sh
+$ export PATH=/usr/local/osg_1.2.6_bestman/bestman/bin:$PATH
+$ grid-proxy-init 
+Your identity: /DC=org/DC=doegrids/OU=People/CN=Tanya Levshina 508821
+Enter GRID pass phrase for this identity:
+Creating proxy ...................................... Done
+Your proxy is valid until: Fri Feb 19 03:27:02 2010
+$ srm-ping srm://fg0x5.fnal.gov:10443
+srm-ping   2.2.1.3.8   Wed Dec  2 22:54:35 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+
+SRM-CLIENT: SURL does not contains ?SFN 
+SRM-CLIENT: serviceHandle /srm/v2/server is taken from the srmclient.conf 
+SRM-CLIENT: SFN is assumed as 
+SRM-CLIENT: Connecting to serviceurl httpg://fg0x5.fnal.gov:10443/srm/v2/server
+
+SRM-PING: Thu Feb 18 15:27:51 CST 2010  Calling SrmPing Request...
+versionInfo=v2.2
+
+Extra information (Key=Value)
+backend_type=BeStMan
+backend_version=2.2.1.3.8
+backend_build_date=2009-12-03T05:09:16.000Z 
+gsiftpTxfServers[0]=gsiftp://fg0x5.fnal.gov
+GatewayMode=Enabled
+clientDN=/DC=org/DC=doegrids/OU=People/CN=Tanya Levshina 508821
+localIDMapped=tlevshin
+
+$ echo "This is a test " > /tmp/test
+
+$ srm-copy file:///tmp/test  srm://fg0x5.fnal.gov:10443/srm/v2/server\?SFN=/tmp/test_tanya
+srm-copy   2.2.1.3.8   Wed Dec  2 22:54:35 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+SRM-CLIENT: Thu Feb 18 15:30:42 CST 2010 Connecting to httpg://fg0x5.fnal.gov:10443/srm/v2/server
+
+SRM-CLIENT: Thu Feb 18 15:30:43 CST 2010 Calling SrmPrepareToPutRequest now ...
+request.token=put:0
+Request.status=SRM_SUCCESS
+explanation=null
+SRM-CLIENT: received TURL=gsiftp://fg0x5.fnal.gov//tmp/test_tanya
+
+SRM-CLIENT: Thu Feb 18 15:30:45 CST 2010 start file transfer
+SRM-CLIENT:Source=file:////tmp/test
+SRM-CLIENT:Target=gsiftp://fg0x5.fnal.gov//tmp/test_tanya
+
+SRM-CLIENT: Thu Feb 18 15:30:47 CST 2010 end file transfer for file:///tmp/test
+
+SRM-CLIENT: Thu Feb 18 15:30:47 CST 2010 Calling putDone for srm://fg0x5.fnal.gov:10443/srm/v2/server?SFN=/tmp/test_tanya
+Result.status=SRM_SUCCESS
+Result.Explanation=null
+
+SRM-CLIENT: Request completed with success
+
+SRM-CLIENT: Printing text report now ...
+
+SRM-CLIENT*REQUESTTYPE=put
+SRM-CLIENT*TOTALFILES=1
+SRM-CLIENT*TOTAL_SUCCESS=1
+SRM-CLIENT*TOTAL_FAILED=0
+SRM-CLIENT*REQUEST_TOKEN=put:0
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*SOURCEURL[0]=file:///tmp/test
+SRM-CLIENT*TARGETURL[0]=srm://fg0x5.fnal.gov:10443/srm/v2/server?SFN=/tmp/test_tanya
+SRM-CLIENT*TRANSFERURL[0]=gsiftp://fg0x5.fnal.gov//tmp/test_tanya
+SRM-CLIENT*ACTUALSIZE[0]=15
+SRM-CLIENT*FILE_STATUS[0]=SRM_SUCCESS
+SRM-CLIENT*EXPLANATION[0]=SRM-CLIENT: PutDone is called successfully
+</pre>
+%ENDTWISTY%
+
+---++Advanced Installation and Configuration
+
+The is a screen dump of basic installation and configuration of !BeStMan:
+   * using GUMS for authorization
+   * running on specified ports
+   * using different certificate and key files
+   * specifying a particular  storage area
+   * using space tokens 
+   * enabling gratia probe services
+%TWISTY%
+<pre class="rootscreen">
+# cd /usr/local
+# mkdir osg_1.2.6_bestman
+# cd osg_1.2.6_bestman
+# export VDT_GUMS_HOST=gums.fnal.gov
+# source ../pacman-3.29/setup.sh
+# pacman -get http://software.grid.iu.edu/osg-1.2:Bestman
+Do you want to add [http://software.grid.iu.edu/osg-1.2] to [trusted.caches]? (y/n/yall): yall
+Beginning VDT prerequisite checking script vdt-common/vdt-prereq-check...       
+
+All prerequisite checks are satisfied.
+                                                                          
+
+
+========== IMPORTANT ==========
+Most of the software installed by the VDT *will not work* until you install
+certificates.  To complete your CA certificate installation, see the notes
+in the post-install/README file.
+
+
+
+# source setup.sh
+
+#  $VDT_LOCATION/vdt/bin/vdt-ca-manage setupca --location local -url osg
+Setting CA Certificates for VDT installation at '/usr/local/osg_1.2.6_bestman'
+
+Setup completed successfully.
+# vdt-post-install
+Starting...
+Configuring PRIMA... Done.
+Configuring EDG-Make-Gridmap... Done.
+Completed all configuration.
+# $VDT_LOCATION/vdt/setup/configure_bestman --server y --cert /etc/grid-security/bestman_cert/bestmancert.pem --key /etc/grid-security/bestman_cert/bestmankey.pem --gums-host gums.fnal.gov --gums-port 8443 --with-transfer-servers gsiftp://fg0x5.fnal.gov --with-tokens-list "FermiDATADISK[desc:FERMIDATADISK][9] [retention:CUSTODIAL][latency:ONLINE][usedBytesCommand:/usr/bin/du -s -b /cache]" --http-port 10080 --https-port 10443 --user daemon --with-allowed-paths /cache --enable-gateway
+
+
+#vi /etc/sudoers 
+.......
+Cmnd_Alias SRM_CMD = /bin/rm, /bin/mkdir, /bin/rmdir, /bin/mv, /bin/ls
+Runas_Alias SRM_USR = ALL, !root
+daemon ALL=(SRM_USR) NOPASSWD: SRM_CMD
+
+
+# cp post-install/prima-authz.conf /etc/grid-security/
+# cp post-install/gsi-authz.conf  /etc/grid-security/
+
+# vdt-control --list
+Service                 | Type   | Desired State
+------------------------+--------+--------------
+fetch-crl               | cron   | do not enable
+vdt-rotate-logs         | cron   | do not enable
+vdt-update-certs        | cron   | do not enable
+gsiftp                  | inetd  | do not enable
+gratia-gridftp-transfer | cron   | do not enable
+gums-host-cron          | cron   | do not enable
+edg-mkgridmap           | cron   | do not enable
+bestman                 | init   | enable
+
+# $VDT_LOCATION/vdt/setup/configure_gratia --probe-cron --force-probe-config --site-name FERMI_TEST_1 --report-to gratia-osg-itb.opensciencegrid.org:8881 --probe gridftp-transfer
+
+# vdt-control --enable fetch-crl  vdt-rotate-logs vdt-update-certs  gums-host-cron vdt-update-certs gsiftp gratia-gridftp-transfer
+running 'vdt-register-service --name fetch-crl --enable'... ok
+running 'vdt-register-service --name vdt-update-certs --enable'... ok
+running 'vdt-register-service --name gums-host-cron --enable'... ok
+running 'vdt-register-service --name vdt-update-certs --enable'... ok
+running 'vdt-register-service --name gsiftp --enable'... ok
+running 'vdt-register-service --name gratia-gridftp-transfer --enable'... ok
+
+# vdt-control -on
+enabling cron service fetch-crl... ok
+skipping cron service 'vdt-rotate-logs' -- marked as disabled
+enabling cron service vdt-update-certs... ok
+enabling inetd service gsiftp... ok
+enabling cron service gratia-gridftp-transfer... ok
+enabling cron service gums-host-cron... ok
+skipping cron service 'edg-mkgridmap' -- marked as disabled
+enabling init service bestman... ok
+
+
+#mkdir /cache
+#chmod 777 /cache
+</pre>
+Login as user:
+<pre class="screen">
+$ source /usr/local/osg_1.2.6_bestman/setup.sh
+$ export PATH=/usr/local/osg_1.2.6_bestman/bestman/bin:$PATH
+$ grid-proxy-init 
+Your identity: /DC=org/DC=doegrids/OU=People/CN=Tanya Levshina 508821
+Enter GRID pass phrase for this identity:
+Creating proxy ...................................... Done
+Your proxy is valid until: Fri Feb 19 03:27:02 2010
+
+
+$  export PATH=/usr/local/osg_1.2.6_bestman/bestman/bin:$PATH
+-bash-3.00$  srm-ping srm://fg0x5.fnal.gov:10443
+srm-ping   2.2.1.3.8   Wed Dec  2 22:54:35 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+
+SRM-CLIENT: SURL does not contains ?SFN 
+SRM-CLIENT: serviceHandle /srm/v2/server is taken from the srmclient.conf 
+SRM-CLIENT: SFN is assumed as 
+SRM-CLIENT: Connecting to serviceurl httpg://fg0x5.fnal.gov:10443/srm/v2/server
+
+SRM-PING: Thu Feb 18 16:03:46 CST 2010  Calling SrmPing Request...
+versionInfo=v2.2
+
+Extra information (Key=Value)
+backend_type=BeStMan
+backend_version=2.2.1.3.8
+backend_build_date=2009-12-03T05:09:16.000Z 
+gsiftpTxfServers[0]=gsiftp://fg0x5.fnal.gov
+GatewayMode=Enabled
+clientDN=/DC=org/DC=doegrids/OU=People/CN=Tanya Levshina 508821
+gumsIDMapped=fnalgrid
+staticToken(0)=FermiDATADISK desc=FERMIDATADISK size=9663676416
+
+$ srm-copy file:///tmp/test  srm://fg0x5.fnal.gov:10443/srm/v2/server\?SFN=/cache/fnalgrid/test_tanya  -mkdir
+srm-copy   2.2.1.3.8   Wed Dec  2 22:54:35 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+SRM-CLIENT: Thu Feb 18 16:23:08 CST 2010 Connecting to httpg://fg0x5.fnal.gov:10443/srm/v2/server
+
+SRM-CLIENT: Thu Feb 18 16:23:08 CST 2010 Calling SrmPrepareToPutRequest now ...
+request.token=put:2
+Request.status=SRM_SUCCESS
+explanation=null
+SRM-CLIENT: received TURL=gsiftp://fg0x5.fnal.gov//cache/fnalgrid/test_tanya
+
+SRM-CLIENT: Thu Feb 18 16:23:10 CST 2010 start file transfer
+SRM-CLIENT:Source=file:////tmp/test
+SRM-CLIENT:Target=gsiftp://fg0x5.fnal.gov//cache/fnalgrid/test_tanya
+
+SRM-CLIENT: Thu Feb 18 16:23:13 CST 2010 end file transfer for file:///tmp/test
+
+SRM-CLIENT: Thu Feb 18 16:23:13 CST 2010 Calling putDone for srm://fg0x5.fnal.gov:10443/srm/v2/server?SFN=/cache/fnalgrid/test_tanya
+Result.status=SRM_SUCCESS
+Result.Explanation=null
+
+SRM-CLIENT: Request completed with success
+
+SRM-CLIENT: Printing text report now ...
+
+SRM-CLIENT*REQUESTTYPE=put
+SRM-CLIENT*TOTALFILES=1
+SRM-CLIENT*TOTAL_SUCCESS=1
+SRM-CLIENT*TOTAL_FAILED=0
+SRM-CLIENT*REQUEST_TOKEN=put:2
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*SOURCEURL[0]=file:///tmp/test
+SRM-CLIENT*TARGETURL[0]=srm://fg0x5.fnal.gov:10443/srm/v2/server?SFN=/cache/fnalgrid/test_tanya
+SRM-CLIENT*TRANSFERURL[0]=gsiftp://fg0x5.fnal.gov//cache/fnalgrid/test_tanya
+SRM-CLIENT*ACTUALSIZE[0]=15
+SRM-CLIENT*FILE_STATUS[0]=SRM_SUCCESS
+SRM-CLIENT*EXPLANATION[0]=SRM-CLIENT: PutDone is called successfully
+</pre>
+
+%ENDTWISTY%
+
+%STOPINCLUDE%
+
+
+---+ Comments
+
+| PM2RPM_TASK = SE | Main.RobertEngel | 28 Aug 2011 - 05:49 |
+%COMMENT{type="tableappend"}%
+
+ 
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = DouglasStrain
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = AlexSim
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = MarcoMambelli
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+%META:FILEATTACHMENT{name="bestman_gateway_arch.jpeg" attachment="bestman_gateway_arch.jpeg" attr="" comment="BeStMan-gateway architecture" date="1234996663" path="bestman_gateway_arch.jpeg" size="9978" stream="bestman_gateway_arch.jpeg" tmpFilename="/usr/tmp/CGItemp8720" user="TanyaLevshina" version="1"}%
+%META:FILEATTACHMENT{name="bestman-gateway-howitworks.jpg" attachment="bestman-gateway-howitworks.jpg" attr="" comment="BeStMan-Gateway - How it works" date="1237491448" path="bestman-gateway-howitworks.jpg" size="50852" stream="bestman-gateway-howitworks.jpg" tmpFilename="/usr/tmp/CGItemp6374" user="AlexSim" version="1"}%

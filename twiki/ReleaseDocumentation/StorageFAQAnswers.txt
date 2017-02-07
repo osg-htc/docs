@@ -1,0 +1,51 @@
+%META:TOPICINFO{author="JamesWeichel" date="1324585330" format="1.1" version="1.8"}%
+%META:TOPICPARENT{name="Storage.SEToolsTipsFAQs"}%
+---+!! 
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++ Can I use dccp to copy files in to reserved area?
+
+Not at present. Developers are working on it.
+---++ Is there a command line tool available for reading a file stored on dCache or concatenating individual files stored on dCache?
+
+No. In order to perform file operations (reading, concatenating, etc), you must copy files locally, manipulate/use them and copy them back to storage location.
+---++ Can I find out pool name for a file using dCap?
+
+No. There is no way to find out pool name on client side.
+---++ How do I clean up files belonging to non-existent pools?
+
+Recommended way is to clean out all the replicas from the companion DB via postgres, then run "pnfs register" on each pool via the admin interface.
+---++ I accidently deleted the parent directory,how can I change parent id of files in PNFS?
+
+Send an email to osg-storage@opensciencegrid.org to get the solution. It is not posted here because of its critical nature.
+---++ Can I create soft links on SRM server as a non-admin?
+
+No. Only Storage Element Admin can do so.
+---++ How can I install Fermi srmclient package?
+
+Use the "pacman -get OSG:client" command.
+---++ As a SE admin, how can I set up group access on a storage location?
+
+This can be obtained by having a few users belong to a special group/role within your VO and then using standard unix like permissions on the storage locations in question for the user to which this VO/group/role gets mapped to.
+---++ What happens to data stored under an expired Space Reservation?
+
+At present, nothing UNLESS you explicitly run a space cleaner tool which cleanups expired space reservations.
+---++ Do pool nodes need host certificates? Why?
+
+Yes. Credentials are delegated to pools so that they can act as clients when receiving data in pull mode or delivering <br />data in push mode. See slides 14 and 16 of https://srm.fnal.gov/twiki/pub/SrmProject/SrmPresentations/SRMDesign.pdf. Therefore in these cases they <br />need host certificates.
+---++ Some of the gridftp doors (which are on both public and private network) are returning private ip address to SRM server. How can I get around it?
+
+Following different approaches have worked for admins in the past. However, you are responsible for making sure that this does not break other things on the system
+   * In /etc/hosts, map both the public and private host names to the public IP address. 
+   * Swap IP address definitions for eth0 and eth1. 
+   * Check that the public/private NICs occupy the same slots of the PCI bus on the doors that don't work as they do on the doors that do work and physically swap them if different. 
+---++ What do the terms "Free Space","Available Space" and "Reserved Space" mean?
+ *Free Space* - amount of available pool space for link group <br /> *Reserved Space* - amount of space you reserved <br /> *Available Space* - amount of space available for reservation <br /> (Available space=Free Space-Reserved Space) 
+---++ How can I setup Opportunistic Storage on my SE?
+
+Two links may be useful to you: [[https://twiki.grid.iu.edu/bin/view/Storage/OpportunisticStorageUse][Opportunistic Storage Use]] and [[https://twiki.grid.iu.edu/bin/view/Trash/StorageOpportunisticStorageModelForCMS][Opportunistic Storage Model for USCMS]]
+---++ Do I need to maintain same dCache version on all my SE nodes (admin, PNFS, pool etc)?
+
+Yes, we highly recommend it. There have been cases of slow response from commands like srmcp, srmls when nodes were running different dCache versions.
+%META:TOPICMOVED{by="JamesWeichel" date="1324585330" from="ReleaseDocumentation.SEFAQAnswers" to="ReleaseDocumentation.StorageFAQAnswers"}%

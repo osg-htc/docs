@@ -1,0 +1,60 @@
+%META:TOPICINFO{author="RobGardner" date="1248211113" format="1.1" version="1.7"}%
+%META:TOPICPARENT{name="SiteValidationTable"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+<i>
+From: Haifeng Pi 
+
+Date: March 26, 2009 1:36:03 PM PDT
+
+To: Michael Thomas 
+
+Cc: Burt Holzman, Frank Wuerthwein, Sanjay Padhi
+
+Subject: Validation done! 
+
+Hi Mike,
+
+Congratulations! It is working now.
+
+
+Hi Frank and Burt,
+
+Following tests are done with CIT ITB! Everything is working well.
+
+1. direct condor_g jobs with standard OSG configuration, CMSSW
+configuration, stage-in and stage-out
+
+2. Prodagent jobs with stageout to CIT and datasets publication at DBS
+
+3. Crab jobs submission to CIT ITB sites with datasets produced via ITB.
+The ITB Bdii is working as expected as well.
+
+Cheers,
+
+Haifeng 
+
+</i>
+----
+
+We ran the same analysis workflow that we are presently running on about 40 sites globally.
+This was done on an itb CE at UCSD that provides access to the production cluster and the production SE.
+It's the only sensible way that we can do this kind of test.
+
+It's not clear to us to what extend this test is guaranteeing anything with respect to the quality of the upcoming release.
+As this release validation is happening in the middle of CCRC08, this is the best we can do at this point.
+
+We are confident that we can deal with whatever remaining problems there might be, and that we have not caught
+by doing this test.
+
+Thanks, Frank
+
+%BR%
+%COMPLETE2% %BR%
+%RESPONSIBLE%  %BR%
+%REVIEW%  Main.RobGardner - 21 Jul 2009  %BR%
+%REVFLAG% %Y% %BR%
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%

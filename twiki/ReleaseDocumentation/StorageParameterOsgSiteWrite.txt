@@ -1,0 +1,31 @@
+%META:TOPICINFO{author="TedHesselroth" date="1271185628" format="1.1" version="1.15"}%
+%META:TOPICPARENT{name="Storage"}%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%RED%
+Merge with LocalStorageConfiguration
+%ENDCOLOR%
+
+---++ Introduction
+OSG_SITE_WRITE is a write-only (or "mostly write") transient / volatile storage area that is visible from all worker nodes and optimized for high-performance write operations and holds the output from jobs running on the CE that is required to persist beyond the originating job's lifetime.  
+
+OSG_SITE_WRITE allows open, set flags, write (sequential, with multiple write operations), and close, although it may not be possible to modify a file once it is closed.  OSG_SITE_WRITE is provided through a grid file access library specific for the underlying storage, and programs may use it transparently as a local disk space.  This field should have a srm protocol url (e.g. =srm://mysrmnode.athome.edu:8443/= ).  
+
+%NOTE% Limitations should be avoided when possible, and be clearly stated.
+
+Users shall not have read access to this area. In cases where read access is necessary, the site administrator must facilitate access, or provide mechanisms external to the CE, such as supporting Storage Element reading that area.
+
+---++ Typical uses of OSG_SITE_WRITE
+   * Storage of datasets produced by the jobs executing on the worker nodes
+   * Data waiting to be staged out
+
+
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.SuchandraThapa - 19 Oct 2007 %BR%
+%REVIEW% Main.HorstSeverini - 16 Jun 2008 %BR%
+
+%REVFLAG% %Y% %BR%
+
+%META:TOPICMOVED{by="SuchandraThapa" date="1192833044" from="Integration/ITB_0_7.AboutStorageAreaOsgSiteWrite" to="Integration/ITB_0_7.StorageParameterOsgSiteWrite"}%

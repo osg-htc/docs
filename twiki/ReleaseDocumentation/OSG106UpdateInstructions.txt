@@ -1,0 +1,57 @@
+%META:TOPICINFO{author="ScotKronenfeld" date="1270661557" format="1.1" reprev="1.2" version="1.2"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+
+%STARTINCLUDE%
+%BR%
+
+---++ Release Notes
+
+Release notes can be found [[ReleaseDocumentation.OSG106ReleaseNotice][here]].
+
+---++ Update Instructions
+If you have OSG 1.0.x installed you can update following the instructions below.
+
+There are installation guides for installing the various components available at the [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/WebHome][release documentation web]]. In addition, for experienced admins, there is a [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/QuickInstallGuide][streamlined installation guide]] available as well.
+
+---++ Update Instructions from OSG 1.0.x to OSG 1.0.6
+
+*Stop VDT Services*
+<verbatim># cd $VDT_LOCATION
+# source setup.sh
+# vdt-control --off</verbatim>
+
+*Update the VDT updater script*
+
+ If you do not yet have the updater script, then fetch it:
+
+<verbatim># pacman -get http://vdt.cs.wisc.edu/vdt_1101_cache:VDT-Updater</verbatim>
+
+If you already have the updater, update it:
+<verbatim># pacman -update VDT-Updater</verbatim>
+
+Note: If you are not sure if you have the updater, look for VDT_LOCATION/vdt/update/vdt-updater 
+
+*Backup*
+<verbatim># cp -pr $VDT_LOCATION BACKUP-LOCATION</verbatim>  or <verbatim># rsync -a $VDT_LOCATION/ BACKUP-LOCATION</verbatim>
+
+*Get VDT Updates*
+<verbatim># vdt/update/vdt-updater</verbatim>
+
+*Get OSG Updates*
+<verbatim># pacman -update osg-version</verbatim>
+
+*Post Install Configuration*
+<verbatim>
+# cd monitoring
+# ./configure-osg.py -c</verbatim>
+
+
+*Restart VDT Services*
+<verbatim># vdt-control --on</verbatim>
+
+%STOPINCLUDE%
+%BR%
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%

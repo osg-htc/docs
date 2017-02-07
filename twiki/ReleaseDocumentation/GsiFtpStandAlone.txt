@@ -1,0 +1,423 @@
+%META:TOPICINFO{author="KyleGross" date="1481047986" format="1.1" version="1.50"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{GRIDFTP Server Installation}%*
+%DOC_STATUS_TABLE%
+%TOC{depth="3"}%
+%STARTINCLUDE%
+
+---+ About this Document
+
+%ICON{hand}% This document is for System Administrators who are planning to install !GridFTP server on a designated node to achieve better load balancing for your !BeStMan installation.
+This document applies to the latest release %RED% OSG-%OSG_VERSION% %ENDCOLOR%. All procedures presented in this document in general require _root_ privileges.
+
+%INCLUDE{"Documentation/DocumentationTeam/DocConventions" section="Header"}%
+%INCLUDE{"Documentation/DocumentationTeam/DocConventions" section="CommandLine"}%
+
+---++Introduction
+
+<div id="indent">
+The !BeStMan server is using !GridFTP server to transfer files to/from any Posix compliant file system.The !GridFTP package contains components necessary to set up a stand-alone gsiftp server and tools used to monitor and report its performance.
+A stand-alone !GridFTP server might be used under the following circumstances:
+   * A simple front-end to a filesystem allowing access over WAN - for example NFS.
+   * [[BeStMan][BeStMan]] is capable of distributing its workload among several gsiftp servers so if you expect large movements of data into/out of your site, multiple gsiftp servers can be set up.
+</div>
+
+
+---+++!!Engineering Considerations
+
+<div id="indent">
+It is recommended that the !GridFTP package be installed on its own server if:
+   * You are serving the VOs that use storage heavily (CMS, ATLAS, CDF, and D0) and have more than 250 cores
+   * Your site will be managing more than 50 TB of disk space
+</div>
+
+If you are planning to have a Storage Element with !BeStMan and have more
+than 1Gbps bandwidth, then you should plan on at least one !GridFTP server
+per 4Gbps of available bandwidth (assuming you have 10Gbps interfaces on the
+server) if you want to maximize throughput. 
+</p>
+
+You have to decide what authorization mechanism do you prefer. You may use either grid-mapfile or !GUMS server for users’ authentication and authorization. More details about !GUMS could be found at [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/InstallConfigureAndManageGUMS GUMS Installation Guide]]. %BR% %BR% We currently recommend using GUMS as it provides superior flexibility and allows a site to manage all of its mappings in one central location; most large sites use GUMS.
+---+++ How to get Help?
+
+If a problem occurs during installation or verification of the service, see [[#DebugInfo][Debugging Information]].
+
+If you cannot resolve the problem, the best way to get help is by following  [[HelpProcedure][this page]]. 
+
+---++ Requirements
+
+   1. [[PacmanInstall][pacman]] version >=%PACMAN_VERSION% is required
+   1. The server must have a fully qualified domain name and a valid [[GetHostServiceCertificates][grid host certificate]] installed in =/etc/grid-security/=. 
+   1. The firewall must allow incoming connections to the gsiftp port (default 2811). Outgoing connections must be allowed from high ports ( typically in range 32769-65535 ). We recommend to consult the [[ComputeElementFirewalls][Firewall Guide]] if you install the !GridFTP server for the first time.
+   1. A working GUMS server or a gridmap-file are needed for authorization using grid certificates.
+
+---++Installation Procedure
+Login as root and check if pacman version >=%PACMAN_VERSION% is installed:
+<pre class="screen">
+cd &lt;PACMAN3.28_LOCATION&gt;
+. setup.sh
+pacman -version
+</pre>
+
+Next create and change to an installation directory. This directory, referred here as ==VDT_LOCATION==, will later be used to get the !GridFTP package  from the %CACHE% cache.
+<pre class="screen">
+mkdir -p /opt/osg/osg-%OSG_VERSION%-gsiftp/
+cd /opt/osg/osg-%OSG_VERSION%-gsiftp/
+</pre>
+
+If you are using GUMS authorization method you will need to setup _VDT_GUMS_HOST_ environment variable, if you are using  gridmap-file ,please, proceed to the next step.
+<pre class="screen"> 
+cd &lt;VDT_LOCATION&gt;
+export VDT_GUMS_HOST=&lt;GUMS hostname&gt;  
+</pre>
+
+Finally execute pacman to get the !GridFTP package from the %CACHE% cache. Pacman will ask whether you want to trust the cache (=yall=) and whether you want to accept the license (=y=).
+<pre class="screen">
+pacman -get %CACHE%:GridFTP
+</pre>
+
+The install procedure will print out a warning:
+<verbatim>
+========== IMPORTANT ==========
+Most of the software installed by the VDT *will not work* until you install
+certificates.  To complete your CA certificate installation, see the notes
+in the post-install/README file.
+</verbatim>
+
+%INCLUDE{"ReleaseDocumentation/CaCertificatesInstall" section="InstallACertificateAuthorityPackage"}%
+---++ Post-Install Procedure
+
+To finalize your installation you must run the =vdt-post-install= program on the command line:
+
+<pre class="rootscreen">
+vdt-post-install
+</pre>
+
+You can verify that the version installed is the version you expected by executing =vdt-version=. To see all services available use =vdt-control -list=
+<pre class="screen">
+vdt-version
+vdt-control --list
+</pre>
+
+This completes the installation of the !GridFTP server. Move to the next step to configure the server.
+
+---++ Service Configuration
+
+If you don't have to worry about firewall please go to [[#GridftpConfig][GridFTP Configuration section]]. If you are dealing with firewall the gridftp port range should be properly set.
+In order to do so you will have to modify _vdt-local-setup.sh_.
+<pre class="file">
+<verbatim>
+#edit $VDT_LOCATION/vdt/etc/vdt-local-setup.sh 
+GLOBUS_TCP_SOURCE_RANGE=<low_port,high_port>
+GLOBUS_TCP_PORT_RANGE=<low_port,high_port>
+export GLOBUS_TCP_SOURCE_RANGE
+export GLOBUS_TCP_PORT_RANGE
+</verbatim>
+</pre>
+
+Where _low_port,high_port_ - is the ports range that is allowed for all outbound globus connections for gridftp (e.g GLOBUS_TCP_SOURCE_RANGE=40000,49150). See [[ReleaseDocumentation/ComputeElementFirewalls#iptables_for_RHEL_or_compatible][Firewall Guide]]  for more information how to modify iptables.
+
+If you are using GUMS authorization method, please, copy the following two files from _$VDT_LOCATION/post-install_ to in _/etc/grid-security_, otherwise skip this step: 
+ <pre class="screen">
+cp $VDT_LOCATION/post-install/prima-authz.conf /etc/grid-security 
+cp $VDT_LOCATION/post-install/gsi-authz.conf /etc/grid-security 
+</pre>
+
+You will need to make sure that users have write permission in to the storage area.  
+
+#GridftpConfig
+---+++ Gratia !GridFTP Transfer Probe Configuration
+
+If you would like to collect and report to Gratia file transfer statistic you have to enable and configure Gratia !GrdFTP transfer probe  and perform the actions described in
+ [[GratiaTransferProbe][Preparing, Installing and Validating Gratia transfer probe]]
+
+
+---++ Enabling the Services
+
+You can use the _vdt-control -list_ command to see all services that are installed as part of the install, and whether or not they are enabled or disabled. 
+You will need to enable the following services:
+   * fetch-crl   
+   * vdt-rotate-logs  
+   * vdt-update-certs       
+   * gsiftp           
+   * gratia-gridftp-transfer  %ICON{warning}% In case you want to run Gratia !GridFTP transfer probe
+   * gums-host-cron   %ICON{warning}% In case you want to run Gratia !GridFTP transfer probe and are using !GUMS for authorization
+   * edg-mkgridmap     %ICON{warning}% In case you want to generate and/or update gridmap-file and use it  for authorization 
+
+You can execute _vdt-control -enable_ command and list all services you want to enable:
+<pre class="screen">
+<verbatim>
+cd <VDT_LOCATION>
+source setup.sh
+vdt-control -enable fetch-crl vdt-rotate-logs vdt-update-certs gsiftp
+</verbatim>
+</pre> 
+
+If you are using !GUMS or have gridmap-file and don't want to use automatically generated one, please, skip this section:
+<pre class="screen">
+<verbatim>
+cd <VDT_LOCATION>
+source setup.sh
+vdt-control -enable edg-mkgridmap
+edg/sbin/edg-mkgridmap
+</verbatim>
+</pre> 
+---++ Service Startup/Shutdown
+
+The operation of !GridFTP requires a set of the services you have just enabled to be executed periodically as a cron jobs. gsiftp server requires =/etc/services= and =/etc/inetd.conf= to be changed. All these operation can be done by using =vdt-control= that makes the necessary changes to =inetd= and =cron=: 
+
+<pre class="screen">
+vdt-control --on
+</pre>
+
+To stop services and revert the changes simply execute:
+
+<pre class="screen">
+vdt-control --off
+</pre>
+
+Please note that on some unix systems =xinetd= instead of =inetd= will be used.
+The detailed description of all the options available to start/stop services could be found [[ReleaseDocumentation/StartingServices][here]].
+
+---++ Validation of Service Operation
+---+++ Self-testing with globus-url-copy command
+
+To validate the operation of the !GridFTP server use the =globus-url-copy= client to transfer a file.
+In order to do so you have to have access to your certificate and private key and create a proxy certificate (_grid-proxy-init_ or _voms_proxy_init_ command).
+   * Login on the node you have installed !GridFTP as "yourself"
+   * Setup location of !BeStMan installation
+<pre class="screen">
+cd &lt;VDT_LOCATION&gt;
+. setup.sh
+</pre>
+   * Make sure that you have access to your certificate and private key on that node, you will need it to create a proxy certificate. Execute grid-proxy-init:
+<pre class="screen">
+grid-proxy-init
+Your identity: .....
+Enter GRID pass phrase for this identity:
+</pre>
+
+Then create a file and copy it into another file using ==globus-url-copy== command:
+<pre class="screen">
+dd if=/dev/zero of=/tmp/zero.source bs=1k count=1024
+
+> globus-url-copy file:///tmp/zero.source gsiftp://yourhost.yourdomain/tmp/zero
+> echo $?
+0
+
+> globus-url-copy gsiftp://yourhost.yourdomain/tmp/zero file:///tmp/zero.destination
+> echo $?
+0
+
+> diff /tmp/zero.source /tmp/zero.destination 
+> echo $?
+0
+
+</pre>
+
+Verify that the [[GratiaTransferProbe#Sanity_Check][gratia probe is working]].
+
+
+
+---++Debugging Information
+---+++!!File Locations
+
+   * Configuration file:
+      * $VDT_LOCATION/vdt/services/vdt-run-gsiftp.sh.env  
+      * $VDT_LOCATION/gratia/probe/gridftp-transfer/ProbeConfig	 
+   * Log Files
+      * $VDT_LOCATION/globus/var/log/gridftp.log
+      * $VDT_LOCATION/globus/var/log/gridftp-auth.log 
+      * $VDT_LOCATION/gratia/var/logs 
+
+---+++!!Debugging Procedure
+
+   * Look at the [[#Requirements][Requirements]] and make sure you really checked those items.
+
+---+++!!Caveates/Known Issues
+---+++!!Screen Dump of the Complete Install Process 
+
+%TWISTY{
+mode="div"
+showlink="Show..."
+hidelink="Hide"
+showimgleft="%ICONURLPATH{toggleopen-small}%"
+hideimgleft="%ICONURLPATH{toggleclose-small}%"
+}% 
+
+<pre class="screen">
+###LOGIN as root
+# . /usr/local/pacman-3.28/setup.sh
+# mkdir /opt/osg_%OSG_VERSION%-gridftp
+# cd opt/osg_%OSG_VERSION%-gridftp
+# export VDT_GUMS_HOST=gums.fnal.gov
+# pacman -get %CACHE%:GridFTP
+Do you want to add [http://software.grid.iu.edu/osg-1.2] to [trusted.caches]? (y/n/yall): yall
+Beginning VDT prerequisite checking script vdt-common/vdt-prereq-check...       
+
+All prerequisite checks are satisfied.
+                                                          
+
+
+========== IMPORTANT ==========
+Most of the software installed by the VDT *will not work* until you install
+certificates.  To complete your CA certificate installation, see the notes
+in the post-install/README file.
+
+# . setup.sh
+# $VDT_LOCATION/vdt/bin/vdt-ca-manage setupca --location local -url osg
+Setting CA Certificates for VDT installation at '/opt/osg_1.2.8-gridftp'
+
+Setup completed successfully.
+# vdt-post-install
+Starting...
+Configuring PRIMA... Done.
+Configuring EDG-Make-Gridmap... Done.
+Completed all configuration.
+# vdt-version
+
+You have installed a subset of VDT version 2.0.0p15:
+
+Software                                                 Status              
+--------                                                 ------              
+vdt-ca-manage 1.1                                        OK                  
+vdt-update-certs 2.5                                     OK                  
+CA Certificates 1.13 (includes IGTF 1.34 CAs)            -                   
+EDG Make Gridmap 3.0.0                                   OK                  
+Fetch CRL 2.6.6                                          OK                  
+GPT 3.2-4.0.8p1                                          OK                  
+Gratia GridFTP Probe 1.06.15h-1                          OK                  
+Grid User Management System (GUMS) Client 1.3.17         OK                  
+Java 5 SDK 1.5.0_22                                      OK                  
+Logrotate 3.7                                            OK                  
+PRIMA Authorization Module 0.8.4                         OK                  
+pyOpenSSL module 0.9                                     OK                  
+VOMS Client 1.8.8-2p1                                    OK                  
+Wget 1.12                                                OK                  
+
+
+Status legend:
+OK: Software is up to date with the latest release in VDT version 2.0.0
+- : Not enough information to determine if updates are available.
+See man page for more information.
+# vdt-control --list
+Service                 | Type   | Desired State
+------------------------+--------+--------------
+fetch-crl               | cron   | do not enable
+vdt-rotate-logs         | cron   | do not enable
+vdt-update-certs        | cron   | do not enable
+gsiftp                  | inetd  | do not enable
+gratia-gridftp-transfer | cron   | do not enable
+gums-host-cron          | cron   | do not enable
+edg-mkgridmap           | cron   | do not enable
+
+
+
+# vi $VDT_LOCATION/vdt/etc/vdt-local-setup.sh 
+# This file is sourced by setup.sh.  Use it for any custom setup for this site.
+# This file will be preserved across VDT installations if OLD_VDT_LOCATION is set.
+GLOBUS_TCP_SOURCE_RANGE=40000,49150
+GLOBUS_TCP_PORT_RANGE=40000,49150
+export GLOBUS_TCP_SOURCE_RANGE
+export GLOBUS_TCP_PORT_RANGE
+
+
+# cp $VDT_LOCATION/post-install/prima-authz.conf /etc/grid-security 
+# cp $VDT_LOCATION/post-install/gsi-authz.conf /etc/grid-security 
+
+# vdt-control -enable fetch-crl vdt-rotate-logs vdt-update-certs gsiftp
+running 'vdt-register-service --name fetch-crl --enable'... ok
+running 'vdt-register-service --name vdt-rotate-logs --enable'... ok
+running 'vdt-register-service --name vdt-update-certs --enable'... ok
+running 'vdt-register-service --name gsiftp --enable'... ok
+
+#  vdt-control --list
+Service                 | Type   | Desired State
+------------------------+--------+--------------
+fetch-crl               | cron   | enable
+vdt-rotate-logs         | cron   | enable
+vdt-update-certs        | cron   | enable
+gsiftp                  | inetd  | enable
+gratia-gridftp-transfer | cron   | do not enable
+gums-host-cron          | cron   | do not enable
+edg-mkgridmap           | cron   | do not enable
+
+#vdt-control -on
+
+#LOGIN as yourself on the same node, make sure that certificate and key are available
+$ . /opt/osg_1.2.8-gridftp/setup.sh
+$ grid-proxy-init
+Your identity: /DC=org/DC=doegrids/OU=People/CN=Tanya Levshina 508821
+Enter GRID pass phrase for this identity:
+Creating proxy .................................... Done
+Your proxy is valid until: Thu Apr 22 23:22:33 2010
+$ globus-url-copy file:///tmp/zero.source gsiftp://fg0x1.fnal.gov/tmp/zero
+$ globus-url-copy gsiftp://fg0x1.fnal.gov/tmp/zero  file:///tmp/zero.destination
+$ diff /tmp/zero.source /tmp/zero.destination 
+
+</pre>
+%ENDTWISTY% 
+
+
+---++Comments
+| Is it mandatory to edit $VDT_LOCATION/vdt/etc/vdt-local-setup.sh. What default values will be used if one skips that step? | Main.RobertEngel | 05 Nov 2009 - 04:03 |
+| PM2RPM_TASK = CE | Main.RobertEngel | 28 Aug 2011 - 06:07 |
+| PM2RPM_TASK = SE | Main.RobertEngel | 28 Aug 2011 - 06:28 |
+%COMMENT{type="tableappend"}%
+
+%STOPINCLUDE%
+%BR%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = DouglasStrain
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = TedHesselroth
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = MarcoMambelli
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

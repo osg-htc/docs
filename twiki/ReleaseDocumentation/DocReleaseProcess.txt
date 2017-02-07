@@ -1,0 +1,93 @@
+%META:TOPICINFO{author="KyleGross" date="1481047985" format="1.1" version="1.10"}%
+%META:TOPICPARENT{name="Documentation/DocumentationTeam.WebHome"}%
+---+ Documentation Release Process
+%DOC_STATUS_TABLE%
+%TOC%
+
+---++ Key Policies Affecting the Documentation Release Process
+   1 OSG releases are numbered r.n.p (e.g. 1.2.5).  
+   1 Major releases are denoted by a change in "n" which is always an even number.  Odd numbers of "n" are used for integration testing but never an official release to the consortium.
+   1 OSG's policy is to support the current and previous major release (e.g. 1.0.x & 1.2.x).
+   1 Point releases are denoted by a change in "p" (e.g. 1.2.4 to 1.2.5).  Those can be frequent (a month apart) and often contain significant new functionality desired by OSG members.  Typically, these do not have a major affect on documentation, but it can have some affect on particular documents.
+
+---++ Documentation Release Process
+Although the following represents the standard process, judgment of the Trash/Integration Team will determine how a particular case will be handled.
+
+---+++ Major Releases
+   1 For major releases, the release documentation tree will be copied to the ITB TWiki and then modified for the new release.  When the release goes to production, this tree will become the new production tree and the old tree will be moved to the a previous release tree.  Changes that are made to improve documents that are independent of the new release will have to be made in the ITB and production TWiki just as they are between the current and previous release.
+   1 Navigation into release documentation will always default to the current release.  A pointer on the navigation page will direct a user to the documentation tree for the previous release.
+
+---+++ Point Releases
+   1 For point releases with few changes, the documentation will be modified with notes so that the documents will serve for all point releases within a major release.
+   1 For point releases with more extensive changes which should always be concentrated in a particular area, the (few) documents in that area (i.e. the set of documents with the more extensive changes) will be split into a version for the previous release and a version for the new release.  The process will be:
+      * The original document(s) (e.g. !DocName) will be copied with the name changed by appending a number representing the release r.n.p (e.g. 1.2.4 becomes 124 appended to the TWiki word, as in !DocName124).  Another copy will be  modified for the new point release and named by appending its release r.n.p+1 (e.g. 1.2.5 becomes !DocName125).  The original document with the original TWiki name (e.g. !DocName) will be changed to describe the two documents and releases to which they they apply.  For the next major release, the latest version r.n.p+1 (e.g. !DocName125) can be copied back to the original (e.g. !DocName) and the previous version (e.g. !DocName124) will be deleted so that there will again be only one version of the document.
+<div style='margin-left:6em'>
+Pictorial Representation
+%TABLE{valign="middle"}%
+| *Release 1.2.4* |  *Release 1.2.5*  || *Release 1.4.0* |
+|  !DocName  |  !DocName >  | !DocName124 | !DocName |
+| ^ | ^ | !DocName125 | ^ |
+</div>
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = SuchandraThapa
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = Documenter
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = JamesWeichel
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->
+
+-- Main.JamesWeichel - 07 Jan 2010
+
+%META:TOPICMOVED{by="JamesWeichel" date="1266965110" from="Documentation/DocumentationTeam.DocReleaseProcess" to="ReleaseDocumentation.DocReleaseProcess"}%

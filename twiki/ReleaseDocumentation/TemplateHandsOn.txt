@@ -1,0 +1,41 @@
+%META:TOPICINFO{author="MarcoMambelli" date="1279652637" format="1.1" reprev="1.2" version="1.2"}%
+%META:TOPICPARENT{name="HandsOn"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++Introduction
+
+---++Requirements
+
+---++More Information
+
+---++Commands
+<pre class="screen">
+
+</pre>
+
+---++Presentation
+Can include attached PDF presentation. Until you attach the presentation you'll see a Not Found error.
+
+<embed src="%ATTACHURL%/presentation2.pdf" width="792" height="612">
+
+---++References
+
+   1 Ref 1
+   1 Ref 2
+
+%BR%
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/HandsOn/centerpageborder.css
+-->
+
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% you %BR%
+%REVIEW%
+
+%META:FILEATTACHMENT{name="presentation.pdf" attachment="presentation.pdf" attr="" comment="" date="1279652202" path="presentation.pdf" size="175844" stream="presentation.pdf" tmpFilename="/usr/tmp/CGItemp121" user="MarcoMambelli" version="1"}%

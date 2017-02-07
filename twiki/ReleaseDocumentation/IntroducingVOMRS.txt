@@ -1,0 +1,111 @@
+%META:TOPICINFO{author="KyleGross" date="1481047987" format="1.1" version="1.17"}%
+%META:TOPICPARENT{name="VomrsInstallGuide"}%
+%DOC_STATUS_TABLE%
+
+---+!! Introduction to the Virtual Organization Management Registration Service (VOMRS)
+%TOC{}%
+
+
+---+ About this Document
+
+%ICON{"hand"}% This document describes the [[http://www.fnal.gov/docs/products/vomrs/index.html][Virtual Organization Management Registration Service (VOMRS)]].  It is part of the larger document [[ReleaseDocumentation.VomrsInstallGuide][VOMRS Install Guide]].
+
+
+%STARTSECTION{"Main"}%
+
+---%SHIFT%+ About the Virtual Organization Management Registration Service (VOMRS)
+
+The [[http://www.fnal.gov/docs/products/vomrs/index.html][Virtual Organization Management Registration Service (VOMRS)]] 
+is compliant with OSG %LINK_GLOSSARY_VO% policy and offers a comprehensive set of services that facilitates secure 
+and authenticated management of VO membership, grid resource
+authorization and privileges:
+
+   * Implements a registration workflow providing means for collaborators to register with a Virtual Organization (VO)
+   * Supports management of multiple grid certificates per member
+   * Permits VO-level control of member's privileges 
+   * Provides email notifications of selected events
+   * Keeps track of Grid and VO AUPs signed by members
+   * Supports VO-level control over its trusted set of Certificate Authorities (CA)
+   * Permits delegation of responsibilities within the various VO administrators
+   * Manages groups and group roles
+   * Is capable of interfacing to third-party systems and pulling or pushing relevant member information from/to them
+   * Is synchronized with VOMS 
+
+---%SHIFT%+ Components
+
+VOMRS consists of three components: 
+
+   1 !MySQL database which is a persistent repository for VO membership information, 
+   1 VOMRS admin which provides the Web UI/services to maintain the VO membership. This requires Apache/Tomcat.
+   1 VOMRS server, a daemon process which performs variety of tasks that include synchronization with VOMS, sending email notifications, managing Certificate Authorities certificates within VOMRS, etc.
+
+Also included in the installation is a VOMRS soapclient that allows to execute any webservice supported by VOMRS for testing.
+
+When you install VOMRS, you get all three parts.  VOMRS is synchronized with VOMS, so VOMS will be installed on your system as well. Please refer to [[VomsInstallGuide][VOMS Installation Guide]] for all issues related to VOMS.
+
+VOMRS comes with a test VO called _VDT_. We suggest that you use it for testing. You're going to need to create your real VO with the appropriate name. Instructions for doing that are also on this page.
+
+
+%ENDSECTION{"Main"}%
+
+---+ References
+
+   * Official web page:  [[http://www.fnal.gov/docs/products/vomrs/index.html][Virtual Organization Management Registration Service (VOMRS)]] 
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = TerrenceMartin
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = VO
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = VOManager
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = TerrenceMartin
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->

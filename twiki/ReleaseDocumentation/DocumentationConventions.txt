@@ -1,0 +1,32 @@
+%META:TOPICINFO{author="RobGardner" date="1212527597" format="1.1" reprev="1.16" version="1.16"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+%EDITTHIS%
+
+The following conventions are used in these pages:
+   * =mono-spaced text= indicates terminal output 
+   * ==bold mono-spaced text== indicates terminal input (by the user)
+   * =<i>mono-spaced text in italics</i>= indicates variable data that may differ on your installation
+   * the =&gt;= prompt indicates commands that do not require a specific shell or root access
+   * the =#= prompt indicates commands that require root access
+   * the =$= prompt indicates sh- or bash-specific commands
+   * the =%= prompt indicates csh- or tcsh-specific commands
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.RobGardner - 18 Oct 2007 %BR%
+%REVIEW% -- Main.RobGardner - 03 Jun 2008  %BR%
+%REVCOM% Possible orphan
+
+<!--
+ Major updates
+Future editors should add their signatures beneath yours!
+ Main.RobQ - 01 May 2006    %BR%
+ -->
+
+%META:TOPICMOVED{by="AnneHeavey" date="1192741040" from="Integration/ITB_0_7.OsgConventions" to="Integration/ITB_0_7.DocumentationConventions"}%

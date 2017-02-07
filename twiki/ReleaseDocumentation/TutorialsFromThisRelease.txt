@@ -1,0 +1,34 @@
+%META:TOPICINFO{author="RobGardner" date="1265930343" format="1.1" version="1.11"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+
+---++ Introduction
+While this  Release Documentation [[ReleaseDocumentation.WebHome][twiki web]] comprises a comprehensive source of technical documentation for OSG %OSG_VERSION%, it is sometimes helpful to have condensed "how-to" tutorials for workshops, grid-schools, etc. 
+
+*NOTE: tutorials are not considered "official" !ReleaseDocumentation and are thus set off by a blue or orange border, such as this page.*
+
+---++ Workshops
+   * [[GridColombiaWorkshop2010][Colombia Workshop 2010]] - Bucaramanga, Columbia, March 2010
+   * [[GridColombiaWorkshop2009][Colombia Workshop 2009]] - Bogota, Columbia, October 2009
+   * [[SiteAdminsWorkshopTutorialsAug09][OSG Site Administrator's Workshop]] (@ the GOC/Indianapolis, Aug 6-7, 2009)
+   * [[ChileWorkshop09][CMM U Chile (January 2009)]] - Sarah Williams
+
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.RobGardner - 16 Jan 2009 %BR%
+%REVIEW% Main.RobGardner  - 21 Jul 2009  %BR%
+%REVFLAG%  %Y% %BR%
+
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/HandsOn/centerpageborder.css
+-->
+
+%META:FILEATTACHMENT{name="centerpageborder.css" attachment="centerpageborder.css" attr="" comment="" date="1256356267" path="centerpageborder.css" size="101" stream="centerpageborder.css" tmpFilename="/usr/tmp/CGItemp32571" user="RobGardner" version="1"}%

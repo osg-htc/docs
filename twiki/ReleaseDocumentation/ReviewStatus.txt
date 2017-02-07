@@ -1,0 +1,24 @@
+%META:TOPICINFO{author="RobGardner" date="1248209192" format="1.1" reprev="1.18" version="1.18"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+This page gives an inventory of twiki topics in the %CACHE% release documentation twiki, and the state of their completion and review. Comments/questions to osg-int@opensciencegrid.org. %BR% *Key:*
+   * %S% Fixes or edits needed by Responsible author (high priority)
+   * %X% Needs review
+   * %Y% Finished
+
+%TABLE{ dataalign="left" cellpadding="2" cellspacing="1" databg="#FFFFFF" headerbg="#8D929A"}%
+| *Topic* | *Responsible* | *Content Status* | *Last Modified* | *Modifier* | *Assigned Reviewer* | *Review Status* | *Comment* |
+%SEARCH{ "^*" scope="topic" excludetopic="Web*, *LeftBar" regex="on" nosearch="on" nototal="on" order="modified" reverse="on"  format="| [[$topic]] | $pattern(.*RESPONSIBLE%\s+(\S*?) .*) | <img src=\"http://www.mwt2.org/complete$pattern(.*%COMPLETE(\d)%.*).png\"  /> | $date | $wikiusername  | $pattern(.*REVIEW%\s+(\S+?)\s+-.*)| $pattern(.*REVFLAG%\s+([\S\s]+?) .*) | $pattern(.*REVCOM%\s+([\S\s]+?)\n.*) |"}%
+
+%COMPLETE3% <br /> 
+%RESPONSIBLE% Main.RobGardner <br /> 
+%REVIEW% Main.RobGardner - 05 Jun 2008 %BR% 
+%REVCOM% %BR% 
+%REVFLAG% %Y% %BR%
+
+
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+%META:TOPICMOVED{by="RobGardner" date="1194542355" from="ReleaseDocumentation.ReviewSummary" to="ReleaseDocumentation.ReviewStatus"}%

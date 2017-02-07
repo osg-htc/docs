@@ -1,0 +1,68 @@
+%META:TOPICINFO{author="KyleGross" date="1227280706" format="1.1" version="1.15"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++ VOMS shutdown and vdt-control
+
+Since VDT 1.6.1 and later, all services (=/etc/init.d=, =/etc/xinetd.d=, =cron=) should be turned on/off using the =$VDT_LOCATION/vdt/sbin/vdt-control= script.  This includes VOMS services.  Note for vdt-control there is a <i>man</i> page available for the script, just type =man vdt-control=. You can also find the man page here:  %VDT_DOCS_URL%/man/vdt-control.html.
+
+---++ Services controlled by <i>vdt-control</i>
+To view all services controlled by <i>vdt-control</i>:
+<pre class="screen">
+&gt; <b>source $VDT_LOCATION/setup.sh </b>
+&gt; <b>vdt-control --list </b>
+Service            | Type   | Desired State
+-------------------+--------+--------------
+fetch-crl          | cron   | enable
+vdt-rotate-logs    | cron   | enable
+vdt-update-certs   | cron   | enable
+mysql              | init   | enable
+apache             | init   | enable
+tomcat-55          | init   | enable
+voms               | init   | enable
+</pre>
+
+To shutdown <em>all</em> services:
+
+<pre class="screen">
+&gt; <b>source $VDT_LOCATION/setup.sh </b>
+&gt; <b>vdt-control --off </b>
+</pre>
+
+To shutdown <b>individual</b> services:
+
+<pre class="screen">
+&gt; <b>source $VDT_LOCATION/setup.sh </b>
+&gt; <b>vdt-control --off  Service </b>
+</pre>
+
+To shutdown the VOMS server for an individual VO and leave others up, you will need to use the =/etc/init.d= service directly.  The =vdt-control= script starts/stops =ALL= VO servers.
+<pre class="screen">
+> <b>service voms stop VO_NAME</b>
+</pre>
+
+
+---++ /etc/init.d services
+For =/etc/init.d= services, the script will be removed from the directory and the service will be stopped.
+
+---++ crontabs
+For =root= cron entries, the entry will be removed from the crontab.
+
+---++ VDT 1.6.0 and earlier
+
+Earlier versions of the VDT did not contain the ==vdt-control== script.  For these earlier versions of the VDT, it is necessary to stop the services by manually running the ==/etc/init.d== control scripts.  Some or all of the following will need to be run depending on what was installed on the system:
+
+<pre class="screen">
+> <b>service tomcat-5 stop </b>
+> <b>service apache stop </b>
+> <b>service voms stop </b>
+> <b>service mysql stop </b>
+> <b>service edg-crl-upgraded stop </b>
+</pre>
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.TanyaLevshina - 18 Oct 2007 %BR%
+%REVIEW% Main.TanyaLevshina - 20 Nov 2007 %BR%
+%REVCOM% 

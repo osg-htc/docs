@@ -1,0 +1,83 @@
+%META:TOPICINFO{author="KyleGross" date="1481047989" format="1.1" version="1.16"}%
+%META:TOPICPARENT{name="Documentation.SecuritySiteResponsibilities"}%
+---+ *Maintenance of Contact Info in OIM*
+%DOC_STATUS_TABLE%
+%TOC%
+
+---++ About This Document
+This document covers the importance of site security contacts keeping their OIM information up-to-date, the periodic assessment by the OSG, and instructions on updating contacts OIM profile page.
+
+---++ Maintenance of Contact Info in OIM
+Site security contacts can update their contact information from the [[https://oim.grid.iu.edu/][OSG Information Management (OIM)]] system by clicking the Profile link at the top.  However, you will need a [[ReleaseDocumentation.CertificateUserGet][personal X.509 certificate]] in your web browser in order to register with OIM and for access to update your information.
+
+The OSG will do a periodic assessment of the contact information (once a year) to remind users to keep their information up-to-date.  But it is expected that people will keep their own information current.
+
+%NOTE%
+Even if there are no changes to your contact information on your profile page you will still need to update your confirmation date.  At the bottom of your profile page there is a "Confirmation" section.  You will need to click on the "Update Confirmation Date", and then you MUST also click on the "Submit" button at the bottom in order for the new confirmation date to take affect.
+
+Please update OIM and notify the GOC whenever the operations or security contacts for your site changes.
+
+Maintaining valid contact information is 50% of being a GREAT site admin! Seriously. We will send you security patch notices, updates, instructions for risk mitigation, and so on. Without valid contact information your site will not get these important notices. Also, if you become unresponsive to all of our notification attempts, we will start thinking your site is no longer participating in the OSG.
+
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesBarlow
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = IgorSfiligoi
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
+
+%META:TOPICMOVED{by="JamesBarlow" date="1273172737" from="Documentation.OIMSecurityContactInfo" to="ReleaseDocumentation.OIMSecurityContactInfo"}%

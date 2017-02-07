@@ -1,0 +1,189 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1281373176" format="1.1" version="1.18"}%
+%META:TOPICPARENT{name="GridColombiaWorkshop2009"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++ Introduction
+These instructions assume that the CE software is being installed on a new installation of 32 bit installation of a RHEL 5.x based system (e.g. Scientific Linux, Centos, etc.). After following these instructions, you should have a complete and functional CE installation.  
+
+---++ Prerequisites
+You'll need the following before the CE installation is started. 
+   * RHEL 5.x based system
+   * Working job manager (e.g. Condor)
+   * Working GUMS installation
+
+---++ Installation
+---+++ Creating Directories and Installing Certificates
+The first thing to create are the directories that will be used for the installation and ancillary files.  These directories are 
+   * =/opt/ce-1.2= (for the CE installation)
+   * =/etc/grid-security= (for the host and service certificates)
+To create these directories, the following directories will need to be created:
+   * =mkdir -p /opt/ce-1.2=
+   * =chmod 755 /opt/ce-1.2=
+   * =mkdir /etc/grid-security=
+   * =chmod 755 /etc/grid-security=
+   * =mkdir /etc/grid-security/http=
+   * =chmod 755 /etc/grid-security/http=
+
+Next, the host and security certificates will need to be placed in the proper places in =/etc/grid-security=.  These instructions assume that the following files are in the current directory
+   * =hostcert.pem= - host certificate file
+   * =hostkey.pem= - host key file
+   * =httpcert.pem= - http service certificate file
+   * =httpkey.pem= - http service key file
+These files will need to be placed in the correct locations.  The following commands will do this:
+   * =cp hostcert.pem /etc/grid-security/=
+   * =cp hostkey.pem /etc/grid-security/=
+   * =cp httpcert.pem /etc/grid-security/http=   
+   * =cp httpkey.pem /etc/grid-security/http=   
+Now set the permissions for the certificate and key files:
+   * =chmod 400 /etc/grid-security/hostkey.pem=
+   * =chmod 444 /etc/grid-security/hostcert.pem=
+   * =chmod 400 /etc/grid-security/http/httpkey.pem=
+   * =chmod 444 /etc/grid-security/http/httpcert.pem=
+
+---+++ Install pacman
+Pacman is used to install the CE software and will need to be installed if it's not present already.  In order to install pacman, you'll need to:
+   * =cd /opt=
+   * <tt>wget http://atlas.bu.edu/~youssef/pacman/sample_cache/tarballs/pacman-latest.tar.gz</tt>
+   * =tar xzf pacman-latest.tar.gz=
+   * =cd pacman-3.29/=
+   * =source setup.sh=
+
+---+++ Setup shared directories for cluster
+The following steps should occur be done on the NFS server (=gc1-nfs=) as root:
+   * =mkdir /exports/osg/data=
+   * =mkdir -p /exports/osg/app/etc=
+   * =chmod 1777 /exports/osg/app=
+
+---+++ RSV preparations
+RSV will need an user  account to run it's probes and a proxy.  We will use proxy generated using your user certificate (you will need to recreate and refresh it once a week).
+    * =useradd rsvuser= to create an account called rsvuser for rsv to use
+To generate the proxy, do the following:
+    * run =grid-proxy-init -valid 168:0= on a system which has your grid certificate and the osg client tools in your path
+    * run =grid-proxy-info= and then note the file given in the line starting with path (e.g. = path     : /tmp/x509up_u20016= )
+    * copy this file to =/tmp/rsv_proxy= on the machine where you are installing your CE (e.g. =scp /tmp/x509up_u20016 root@host:/tmp/rsv_proxy=)
+    * run =chown rsvuser:rsvuser /tmp/rsv_proxy= 
+
+---+++ Install CE software
+We'll install the osg software in =/opt/ce-1.2=.  This will be done by running the following commands:
+   * =export VDTSETUP_CONDOR_LOCATION=/usr= # this indicates the pre-installed condor should be used
+   * =export VDTSETUP_CONDOR_CONFIG=/etc/condor/condor_config=
+
+   * =cd /opt/ce-1.2=
+   * =pacman -retry 3=
+   * <tt>pacman -allow trust-all-caches -http-proxy http://192.168.109.130:3128 -get http://osg-vtb.uchicago.edu/gco:ce</tt>
+   * <tt>pacman -allow trust-all-caches -http-proxy http://192.168.109.130:3128 -get http://osg-vtb.uchicago.edu/gco:Globus-Condor-Setup</tt>
+   * <tt>pacman -allow trust-all-caches -http-proxy http://192.168.109.130:3128 -get http://osg-vtb.uchicago.edu/gco:ManagedFork</tt>
+After downloading and installing the software, you'll need to do some configuration by running the following commands:
+   * =source setup.sh= 
+   * =vdt-post-install=
+   * =vdt-ca-manage setupCA --url osg --location local=
+---+++ Configuring CE
+Now, the CE will need to configured so that it can be brought online:
+   * Edit =osg/etc/config.ini=
+   * In =[Default]= section
+      * Set =localhost= to the correct dns name for your CE (e.g. localhost = your.domain)
+      * Set =admin_email= to your email address
+   * In the =[Site Information]= section, set the following options:
+      * =group= to OSG-ITB
+      * =resource= to your site's name
+      * =resource_group= to your site's name 
+      * =sponsor= to the site sponsor, for this school use =osgedu:100=
+      * =site_policy= to an url pointing to your site's usage policy. Example: http://www.mwt2.org/policy.html
+      * =contact= to your name
+      * =city= to the city that the cluster is located in
+      * =country= to =Colombia=
+      * =latitude= to the latitude of the city given in the =city= option, see [http://www.mapsofworld.com/lat_long/colombia-lat-long.html][this page]] for the latitude and longitude of cities in columbia
+      * =longitude= to the longitude of the city specified in the =city= option
+   * In the =[Condor]= section, set the following options:
+      * =enabled= to =%(enable)s=
+      * =condor_location= to =/usr=
+      * =condor_config= to =/etc/condor/condor_config=
+   * In the =[ManagedFork]= section, set the following options:
+      * =enabled= to =%(enable)s=
+      * =condor_location= to =/usr=
+   * In the =[Misc Services]= section, set the following options:
+      * =use_cert_updater= to =%(enable)s=
+      * If the CE is using gums, set the following options:
+         * =authorization_method= to =xacml=
+         * =gums_host= to =gs-gums.grid=
+      * If the CE is using a gridmap file, set the following options:
+         * =authorization_method= to =gridmap=
+   * In the  =[CEMon]= section, set the following options:
+      * =enabled= to =%(enable)s=
+      * =ress_servers= to =https://gs-ress.uchicago.edu:8443/ig/services/CEInfoCollector[OLD_CLASSAD]=
+      * =bdii_servers= to =http://gs-bdii.uchicago.edu:14001[RAW]=
+   * In the =[Storage]= section, set the following options:
+      * =grid_dir= to =/share/osg/wn-client=
+      * =app_dir= to =/share/osg/app=
+      * =data_dir= to =/share/osg/data=
+      * =worker_node_temp= to =/tmp=
+      * =site_read= to =/share/osg/data=
+      * =site_write= to =/share/osg/data=
+   * In the  =[GIP]= section, set the following options:
+      * =batch= to =condor=
+   * In the  =[Subcluster CHANGEME]= section, set the following options:
+      * Change name to =[Subcluster Main]=
+      * =name= to =Main=
+      * =node_count=  to the number of worker nodes your cluster has. For this tutorial, enter =1=
+      * =ram_mb= to that amount of ram that worker nodes in your cluster have in MB 
+      * =cpu_module= to the model of your  cluster's cpus.  You can get this information by running =cat /proc/cpuinfo=
+      * =cpu_vendor= to the vendor of your  cluster's cpus (e.g. =Intel= or =AMD=)
+      * =cpu_speed_mhz= to the clock speed of your  cluster's cpus in MHz
+      * =cpu_platform= to the cpu platform (.e.g =i686= or =x86_64=)
+      * =cpus_per_node= to number of chips per node (e.g. =1=)
+      * =cores_per_node= to number of cores total in the node (e.g. =8= for a dual socket, quad core node)
+   * In the  =[Gratia]= section, set the following options:
+      * =enabled= to =%(enable)s=
+      * =probes= to =jobmanager:gs-gratia.uchicago.edu:80, metric:rsv-itb.grid.iu.edu:8880=
+   * In the  =[SE CHANGEME]= section, set the following options:
+      * =enabled= to =%(disable)s=
+   * In the =[RSV]= section, set the following options:
+      * =enabled= to =%(enable)s=
+      * =rsv_user= to =rsvuser=
+      * =enable_ce_probes= to  =%(enable)s=
+      * =ce_hosts= to =%(localhost)s=
+      * =proxy_file= to =/tmp/rsv_proxy=
+      * =setup_for_apache= to  =%(enable)s=
+At this point, the config.ini file can be verified to check that it is consistent by running:
+   * =configure-osg -v=
+The output should indicate that config.ini was successfully  verified.  If this is the case, then you can configure the system by running:
+   * =configure-osg -c=
+If an error occurs during the verification of the config.ini file, there will be an error message output that indicates the location of the error and what the problem is.
+
+---+++ Creating gridmap file
+If you are using a gridmap file for authorization, you'll need to create the file itself in =/etc/grid-security=.  You can do so running:
+   * =touch /etc/grid-security/grid=mapfile=
+   * =chmod 644 /etc/grid-security/grid-mapfile=
+Then the file will  need to be populated with adding lines containing a DN followed by the user account for that DN (e.g. ="/C=AR/O=e-Ciencia/OU=UNLP/L=CeSPI/CN=Fernando Monticelli" usatlas1=) 
+Given an user cert, the DN can be obtained by running =openssl x509 -subject -in CERT_FILE -noout= where =CERT_FILE= is the certificate file (e.g. =usercert.pem=).
+
+---+++ Turning on your services
+At this point, the services on the CE can be turned on by running the following command:
+   * =vdt-control --on=
+
+If you need to turn off your services, you can run
+   * =vdt-control --off=
+
+
+---+++ Verification
+You can verify correct operation of the by either running =globus-job-run= to verify jobs are running against the CE or by running =site-verify.pl=.  In order to run =site-verify.pl=, you'll need to do the following:
+   * login into the CE with a non-root account which has your grid certificate 
+   * =source /opt/ce-1.2/setup.sh=
+   * =grid-proxy-init= # to generate a proxy file
+   * =cd /opt/ce-1.2/verify =
+   * =./site_verify.pl= # to run the site verify script, you should get a PASS for the majority of the tests, a few tests like the ones for MONALISA or ganglia may fail but that is okay
+
+
+
+
+
+
+
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/GridColombiaWorkshop2009/centerpageborder.css
+-->

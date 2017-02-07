@@ -1,0 +1,52 @@
+%META:TOPICINFO{author="MarcoMambelli" date="1267233311" format="1.1" version="1.6"}%
+%META:TOPICPARENT{name="GridColombiaWorkshop2010"}%
+---+!! <nop>%TOPIC%
+
+   * gco cache (http://osg-vtb.uchicago.edu/gco/) %Y%
+   * Matchmaker service (gc-mm.uchicago.edu)
+      * Check matchmaker service %Y%
+      * Correct install if needed %Y% (Already running and getting information from servers)
+      * Check / update documentation %Y%
+   * BDII service (gc-bdii.uchicago.edu)
+      * Check service functionality %Y% (Need to investigate an error but data is being collected from clusters in columbia)
+      * Correct install if needed
+      * Check / update documentation %Y%
+   * Check Gratia service (gc-gratia.uchicago.edu)
+      * Check service functionality
+      * Correct install if needed
+      * Check / update documentation %Y%
+   * Check ReSS service (gc-ress.uchicago.edu)
+      * Check service functionality %Y% 
+      * Correct install if needed %Y% (Already running and wsdl/condor pool output available)
+      * Check / update documentation %Y%
+   * Setup example cluster
+      * CE
+         * Check data being sent to:
+            * ReSS
+            * Matchmaker
+            * Gratia
+            * BDII %Y%
+      * Condor 
+         * CE
+         * Worker node(s)
+         * NFS server
+   * Squid %Y%
+      * Install and configure %Y%
+      * Prepopulate cache with gco content %Y%
+   * Colombia Install
+      * Install and configure local GUMS %Y%
+      * Install and configure local test condor cluster %Y%
+      * Install and configure head/interactive nodes for 4 other condor clusters
+      * Install and configure worker nodes and SE elements for 5 condor clusters
+   * User machine
+      * Verify/create user accounts (train01-train80)
+      * Verify/create proxies for user accounts
+      * Update osg client install
+   * Documentation
+      * Update Condor installation and test %Y%
+      * Tests for CE: Globus and Condor-G %Y%
+      * Check tutorials and verify
+         * CE Install
+      * Write local install presentation/tutorial with local configuration details
+   * Survey %Y%
+   * Laptop with VMware server up and running %Y% 

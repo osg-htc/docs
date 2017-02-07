@@ -1,0 +1,349 @@
+%META:TOPICINFO{author="IwonaSakrejda" date="1248997764" format="1.1" reprev="1.6" version="1.6"}%
+%META:TOPICPARENT{name="SiteValidationOSG12"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++ Introduction
+Testing for the OSG 1.2 release on the ITB 1.1.4 testbed.
+
+---++ Setup
+   * Using UC_ITB site since it has been configured in Panda, and has a nearby storage element with ATLAS data.
+   * First problem: Panda queue is not configured correctly - email to experts. Resolved.
+   * Autopilot status submission: http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7  (UCITB_EDGE7 is the Panda queue name)
+   * Queue information http://panda.cern.ch:25880/server/pandamon/query?tp=queue&id=UCITB_EDGE7-pbs
+   
+---++ Local Site Mover
+For ATLAS purposes, UC_ITB is attached to the MWT2_UC.  It shares the (space-tokenized) storage elements of MWT2_UC, in particular ATLASPRODISK.  It also uses the installed ATLAS release (exported to UC_ITB nodes over NFS).  However, it utilizes the UC_ITB gatekeeper, job manager, and GUMS server.
+
+The MWT2 storage element is dCache-based, and access to it is via a special set of "local site mover" tools invoked by ATLAS pilot jobs.  A custom version of these tools was developed for UC_ITB.   Additional sources of debug info: /var/log/lsm/* on the uct3 WNs. For reference, the lsm scripts are at: http://repo.mwt2.org/viewvc/lsm/UCITB/.
+
+
+---++ Submitting test jobs
+   * http://twiki.mwt2.org/bin/view/Admins/TestJobs
+   * Look for recent jobs: http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&site=UCITB_EDGE7&hours=72
+
+---++ Job results
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html><head><title>Panda monitor and browser</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta name="robots" content="noindex,nofollow" />
+<meta name="author" content="Torre Wenaus" />
+<meta name="description" content="Panda monitor and browser" />
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<link rel="alternate" type="application/atom+xml" title="Panda monitor RSS Feed" href="http://atldbdev01.cern.ch/cool/feed/rss" />
+<link rel=start href="http://panda.cern.ch:25980/server/pandamon/query" title="Panda monitor/browser home page">
+<!-- <link rel="stylesheet" type="text/css" href="/cool.css"> -->
+<style type="text/css">
+/* comment */
+/*
+body {
+  color: black;
+  background-color: #cc9966;
+}
+*/
+
+td {
+font-family: sans-serif;
+font-size: small;
+}
+
+#tophome{
+text-align: center;
+vertical-align: middle;
+font-family: sans-serif;
+font-size: small;
+}
+
+#topheader{
+text-align: left;
+vertical-align: middle;
+font-family: sans-serif;
+font-size: small;
+}
+
+#browsertitle{
+ visibility: hidden;
+}
+
+#homeup{
+text-align: center;
+vertical-align: middle;
+font-family: sans-serif;
+font-size: medium;
+font-weight: bold;
+}
+
+#hometop{
+text-align: center;
+vertical-align: middle;
+font-family: sans-serif;
+}
+
+#homedown{
+text-align: center;
+vertical-align: middle;
+font-family: sans-serif;
+}
+
+#titleheader{
+text-align: left;
+vertical-align: middle;
+font-family: sans-serif;
+font-size: large;
+font-weight: bold;
+}
+
+#nav{
+vertical-align: middle;
+font-family: sans-serif;
+}
+
+#menu{
+vertical-align: top;
+font-family: sans-serif;
+}
+
+#main{
+text-align: left;
+vertical-align: top;
+font-family: sans-serif;
+}
+
+#foot{
+font-size: small;
+font-family: sans-serif;
+}
+
+.headerbar {
+  background: #ffcccc;
+  font-family: sans-serif;
+}
+
+.menubar {
+  background: #ffcc88;
+  font-family: sans-serif;
+  font-size: small;
+}
+
+.overlap {
+  background: #ffccaa;
+  font-family: sans-serif;
+  font-size: small;
+}
+
+.mainpage {
+  background: white;
+  font-family: sans-serif;
+  font-size: small;
+}
+</style>
+<!-- Page-specific header insertion -->
+
+</head>
+<noscript>
+JavaScript must be enabled in order for you to use this browser.
+</noscript>
+
+    <!--    <script src="http://tjweb.org/scripts/xml_http_request.js"></script> -->
+        <script type="text/javascript">
+        gAnswer = "";  // Global answer
+        // gHTTP = getHTTPObject(); // HTTP object for XMLHttpRequest
+
+        var datael = new Array( );
+        datastate = 0;
+
+        function dataToggle() { if ( datastate == 1 ) { datastate=0;} else {datastate=1;} dataControl(datastate);}
+        function dataControl(state) {
+          for (var el in datael) {
+            setDisplay(datael[el],state)
+          }
+        }
+
+        function pause(numberMillis) {
+          var now = new Date();
+          var exitTime = now.getTime() + numberMillis;
+          while (true) {
+            now = new Date();
+            if (now.getTime() > exitTime)
+            return;
+          }
+        }
+
+        function domDynamicContent(elid,content) {
+          rng = document.createRange();
+          el = document.getElementById(elid);
+          rng.setStartBefore(el);
+          htmlFrag = rng.createContextualFragment(content);
+          while (el.hasChildNodes()) el.removeChild(el.lastChild);
+            el.appendChild(htmlFrag);
+        }
+
+        function fieldContent(elid,content) {
+          rng = document.createRange();
+          el = document.getElementById(elid);
+          rng.setStartBefore(el);
+          htmlFrag = rng.createContextualFragment(content);
+          while (el.hasChildNodes()) el.removeChild(el.lastChild);
+            el.appendChild(htmlFrag);
+        }
+
+        function folderContent(elid,content,folder) {
+          rng = document.createRange();
+          el = document.getElementById(elid);
+          rng.setStartBefore(el);
+          htmlFrag = rng.createContextualFragment(content);
+          while (el.hasChildNodes()) el.removeChild(el.lastChild);
+            el.appendChild(htmlFrag);
+          el = document.getElementById('nav');
+          rng.setStartBefore(el);
+          htmlFrag = rng.createContextualFragment(folder);
+          while (el.hasChildNodes()) el.removeChild(el.lastChild);
+            el.appendChild(htmlFrag);
+        }
+
+        // Retrieve contents of a page element from a URL
+        function getHTTPElement(url,elid) {
+          gHTTP = new XMLHttpRequest(); // HTTP object for XMLHttpRequest
+
+          gHTTP.open("GET",url,false); // Third param means asynch=true. Always use.
+          gHTTP.onreadystatechange=function() {
+            if (gHTTP.readyState==4) {
+              domDynamicContent(elid,gHTTP.responseText);
+              gHTTP = null;
+              delete gHTTP;
+            }
+          }
+          gHTTP.send(null)
+        }
+
+        function getHTTPFolder(url,elid,folder) {
+          gHTTP = new XMLHttpRequest(); // HTTP object for XMLHttpRequest
+
+          gHTTP.open("GET",url,false); // Third param means asynch=true. Always use.
+          gHTTP.onreadystatechange=function() {
+            if (gHTTP.readyState==4) {
+              folderContent(elid,gHTTP.responseText, folder);
+              gHTTP = null;
+              delete gHTTP;
+            }
+          }
+          gHTTP.send(null)
+        }
+
+        function setDisplay(elid,i) {
+          var el = document.getElementById(elid);
+          if (i == 0)
+            el.style.display = "none";
+          else
+            el.style.display = "";
+        }
+
+        function toggleDisplay(elid) {
+          // Use visibility, not this
+          var el = document.getElementById(elid);
+          if (el.style.display=="")
+            el.style.display = "none";
+          else
+            el.style.display = "";
+        }
+        function toggleVisibility(elid) {
+        var el = document.getElementById(elid);
+        if (el.style.visibility=="visible")
+          el.style.visibility = "hidden";
+        else
+          el.style.visibility = "visible";
+        }
+        </script>
+        <body marginwidth=0>
+<table border=0 width="100%" cellspacing=0 cellpadding=5>
+  <tr height="12px">
+  <td width="3px"></td>
+  <td id="tophome" class="menubar" nowrap> <b> &nbsp; &nbsp; &nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=config'>Configuration</a> &nbsp;&nbsp; &nbsp;  </b></td>
+  <td id="topheader" width="100%" colspan=2> <a href='http://panda.cern.ch:25980/server/pandamon/query?dash=prod'>Production</a> &nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds'>Clouds</a> &nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dash=ddm'>DDM</a> &nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?ddm=dash'>PandaMover</a> &nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=main'>AutoPilot</a> &nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dash=site'>Sites</a> &nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dash=analysis'>Analysis</a> &nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dash=physics'>Physics data</a> &nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dash=Quota'>Usage</a> &nbsp;<a href='http://dashb-atlas-prodsys-test.cern.ch/dashboard/request.py/overview'>ProdDash</a> &nbsp;<a href='http://dashb-atlas-data-test.cern.ch/dashboard/request.py/site'>DDMDash</a> &nbsp;</td>
+  </tr>
+  <tr>
+  <td height="12px" class="headerbar"></td>
+  <td id="hometop" class="overlap" nowrap> <a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7'>Update</a></td>
+  <td id="topright" class="headerbar" align="left" width="75%"> &nbsp;&nbsp;</font></td>
+  <td id="topright" class="headerbar" align="right" style="vertical-align:top"> Not logged in. <a href='http://panda.cern.ch:25980/server/pandamon/query?ui=users&days=7'>List users</a></td>
+  </tr>
+  <tr>
+  <td height="40px" class="headerbar"></td>
+  <td id="homeup" class="overlap" nowrap> <a href='http://panda.cern.ch:25980/server/pandamon/query'>Panda monitor</a><br><b><font size=-1>Times are in UTC</font></b></td>
+  <td id="titleheader" class="headerbar"  colspan=2> Panda job information for test jobs</td>
+  </tr>
+  <tr>
+  <td height="20px" class="headerbar"></td>
+  <td id="homedown" class="overlap" nowrap> <a href='http://panda.cern.ch:25980/server/pandamon/query?overview=info'>Panda info and help</a></td>
+  <td id="nav" class="headerbar" align="left"> <b>Selection parameters:</b><br>&nbsp; &nbsp;  <b>type</b>:test &nbsp;  <b>days</b>:3 &nbsp; <p><script>function clearHelp() {fieldContent('help',"<div id='help'><a onClick='showHelp()'><font color=blue><u>Click for help</u></font></a></div>")}</script><script>function showHelp() {fieldContent('help',"<a onClick='clearHelp()'><font color=blue><u>Close help</u></font></a><br><tr><td>Seemingly duplicated jobs with different jobStatus may show up briefly as the jobs move from one state to another.<br>The jobs with earlier jobStatus will eventually be removed upon successful transition to the new state </tr>")}</script><div id='help'><a onClick='showHelp()'><font color=blue><u>Click for help</u></font></a></div></td>
+  <td id="nav" class="headerbar" align="right"  style="vertical-align:bottom"> &nbsp;</td>
+  </tr>  
+  <tr>
+  <td></td>
+  <td id="menu" class="menubar"> <p><b>Jobs</b> - <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=jobquery'>search</a><br>Recent <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=active&jobStatus=running'>running</a>, <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=active&jobStatus=activated'>activated</a>, <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=waiting'>waiting</a>, <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=defined&jobStatus=assigned'>assigned</a>, <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=defined&jobStatus=defined'>defined</a>, <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=archive&jobStatus=finished&hours=3'>finished</a>, <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=archive&jobStatus=failed&hours=3'>failed</a> jobs<br>Select&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=analysis&hours=3'>analysis</a>,&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=production&hours=3'>prod</a>, <a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&prodSourceLabel=software&hours=3'>install</a>, <a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&hours=3'>test</a> jobs<form method=GET style='margin-top:0; margin:0; border:0; font-size:8pt;'         action='http://panda.cern.ch:25980/server/pandamon/query'><b>Quick&nbsp;search</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>Job <input style='margin-top:0; margin:0;         border:0; font-size:8pt;' type=text border=0 name=job size=6 maxlength=100></form><form method=GET style='margin-top:0; margin:0; border:0; font-size:8pt;'         action='http://panda.cern.ch:25980/server/pandamon/query'>Dataset <input style='margin-top:0; margin:0; border:0; font-size:8pt;'         type=text border=0 name=name size=6 maxlength=100><input type=hidden name=mode         value=dset></form><form method=GET style='margin-top:0; margin:0; border:0; font-size:8pt;'         action='http://panda.cern.ch:25980/server/pandamon/query'>Task&nbsp;request&nbsp;<input style='margin-top:0; margin:0; border:0;         font-size:8pt;' type=text border=0 name=qTID size=6 maxlength=100><input type=hidden         name=mode value=taskquery><input type=hidden name=qsubmit value=QuerySubmit></form><form method=GET style='margin-top:0; margin:0; border:0; font-size:8pt;'         action='http://panda.cern.ch:25980/server/pandamon/query'>Task&nbsp;status&nbsp;<input style='margin-top:0; margin:0; border:0;         font-size:8pt;' type=text border=0 name=taskname size=6 maxlength=100><input type=hidden         name=overview value=taskinfo></form><form method=GET style='margin-top:0; margin:0; border:0; font-size:8pt;'         action='http://panda.cern.ch:25980/server/pandamon/query'>File <input style='margin-top:0; margin:0; border:0; font-size:8pt;'         type=text border=0 name=lfn size=6 maxlength=200><input type=hidden name=overview         value=findfile><input type=hidden name=archive value=yes></form><p><form method=GET style='margin:1px; border:0; font-size:8pt;' action='http://panda.cern.ch:25980/server/pandamon/query'>        <b>Summaries</b><br>Blocks:&nbsp;<input style='margin-top:0; margin:0; border:0;         font-size:8pt;' type=text border=0 name=days size=3 maxlength=3><input type=hidden         name=overview value=prodlist>&nbsp;days</form><form method=GET style='margin:1px; border:0; font-size:8pt;' action='http://panda.cern.ch:25980/server/pandamon/query'>        Errors:&nbsp;<input style='margin-top:0; margin:0; border:0; font-size:8pt;' type=text         border=0 name=days size=3 maxlength=3><input type=hidden name=overview value=errorlist>        &nbsp;days</form><form method=GET style='margin:1px; border:0; font-size:8pt;' action='http://panda.cern.ch:25980/server/pandamon/query'>        Nodes:&nbsp;<input style='margin-top:0; margin:0; border:0; font-size:8pt;' type=text         border=0 name=days size=3 maxlength=3><input type=hidden name=overview value=wnlist>        &nbsp;days<br>Usage <a href='http://panda.cern.ch:25980/server/pandamon/query?overview=usage'>1</a>, <a href='http://panda.cern.ch:25980/server/pandamon/query?overview=daysusage&days=3'>        3</a> days</form><p><b>Tasks</b> - <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=taskquery'>search</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=reqtask1'>Generic Task Req</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=reqtask2&type=evgen'>EvGen Task Req</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=reqtask2&type=ctbsim'>CTBsim Task Req</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=listtask'>Task list</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=defNewTag'>New Tag</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=listBugReport'>Bug Report</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=tinfoSearch'>Task overview query</a><p><b>Datasets</b> - <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=dbquery'>search</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=dsPopularity'>Popular datasets</a><!-- <br><a href='http://panda.cern.ch:25980/server/pandamon/query?overview=dsnew&days=1'>New datasets</a> --><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=listAbortedDatasets'>Aborted datasets</a><p><b>Datasets Distribution </b><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=reqsubs0'>DDM Req</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=listPatterns'>Req list</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=listAODReplications'>AODs</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=listEVNTReplications'>EVNTs</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=listConditionsDB'>Conditions DS</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=listDBRelease'>DB Releases</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=listPacballs'>SIT pacballs</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=listValidationReplications'>Validation Samples</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=listFunctionalTests'>Functional Tests</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=listCR'>ATLAS Data</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=listReproDSReplications'>Reprocessed_Datasets</a><p><b>Sites</b> -  <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=site&site=all'>see all</a><br> <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=site&site=BNL'>BNL</a> <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=site&site=BU'>BU</a> <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=site&site=IU'>IU</a> <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=site&site=OU'>OU</a> <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=site&site=SLAC'>SLAC</a> <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=site&site=UC'>UC</a> <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=site&site=UMICH'>UMICH</a> <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=site&site=UTA'>UTA</a> <a href='http://panda.cern.ch:25980/server/pandamon/query?mode=site&site=LCG'>LCG</a><p><b>Applications</b><br><a href='http://panda.cern.ch:25980/server/pandamon/query?vomon=charmm'>CHARMM</a><!-- <p><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=stats'><b>System statistics</b></a> --><p><a href='http://panda.cern.ch:25980/server/pandamon/query?mode=mon&hours=6'><b>Logging monitor</b></a></td>
+  <td id="main" class="mainpage" colspan=2> <p><table width='100%' bgcolor=lightblue><tr><td><b><form method=GET style='margin-top:1; margin:1; border:1; font-size:10pt;' action='http://panda.cern.ch:25980/server/pandamon/query'><input type=hidden name='job' value='*'><input type=hidden name='type' value='test'>Summary of <select input style='margin-top:1; margin:1; border:1; font-size:10pt;' name='type' size=1><option  value='analysis'>analysis</option><option  value='production'>production</option><option selected value='test'>test</option><option value=''>all</option></select> jobs for the last <input style='margin-top:1; margin:1; border:1; font-size:10pt;' type=text name=days size=3                         maxlength=3 value=3> days, jobID <input style='margin-top:1; margin:1; border:1; font-size:10pt;' type=text name=jobDefinitionID size=4                 maxlength=4 value=any> in <select input style='margin-top:1; margin:1; border:1; font-size:10pt;' name='jobStatus' size=1><option  value='defined'>defined</option><option  value='assigned'>assigned</option><option  value='waiting'>waiting</option><option  value='activated'>activated</option><option  value='running'>running</option><option  value='transferring'>transferring</option><option  value='holding'>holding</option><option  value='finished'>finished</option><option  value='failed'>failed</option><option selected value=''>any</option></select> state  at <select input style='margin-top:1; margin:1; border:1; font-size:10pt;' name='site' size=1><option  value='AGLT2'>AGLT2</option><option  value='AGLT2_Install'>AGLT2_Install</option><option  value='ALBERTA-LCG2'>ALBERTA-LCG2</option><option  value='ANALY_AGLT2'>ANALY_AGLT2</option><option  value='ANALY_ALBERTA'>ANALY_ALBERTA</option><option  value='ANALY_ARC'>ANALY_ARC</option><option  value='ANALY_AUSTRALIA'>ANALY_AUSTRALIA</option><option  value='ANALY_BEIJING'>ANALY_BEIJING</option><option  value='ANALY_BHAM'>ANALY_BHAM</option><option  value='ANALY_BNL_ATLAS_1'>ANALY_BNL_ATLAS_1</option><option  value='ANALY_BNL_LOCAL'>ANALY_BNL_LOCAL</option><option  value='ANALY_BNL_test'>ANALY_BNL_test</option><option  value='ANALY_BNL_test2'>ANALY_BNL_test2</option><option  value='ANALY_BNL_test3'>ANALY_BNL_test3</option><option  value='ANALY_BRUNEL'>ANALY_BRUNEL</option><option  value='ANALY_CAM'>ANALY_CAM</option><option  value='ANALY_CERN'>ANALY_CERN</option><option  value='ANALY_CERN_XROOTD'>ANALY_CERN_XROOTD</option><option  value='ANALY_CNAF'>ANALY_CNAF</option><option  value='ANALY_CPPM'>ANALY_CPPM</option><option  value='ANALY_CSCS'>ANALY_CSCS</option><option  value='ANALY_CSTCDIE'>ANALY_CSTCDIE</option><option  value='ANALY_CYF'>ANALY_CYF</option><option  value='ANALY_DESY-HH'>ANALY_DESY-HH</option><option  value='ANALY_DESY-ZN'>ANALY_DESY-ZN</option><option  value='ANALY_FREIBURG'>ANALY_FREIBURG</option><option  value='ANALY_FZK'>ANALY_FZK</option><option  value='ANALY_FZU'>ANALY_FZU</option><option  value='ANALY_GLASGOW'>ANALY_GLASGOW</option><option  value='ANALY_GLOW-ATLAS'>ANALY_GLOW-ATLAS</option><option  value='ANALY_GOEGRID'>ANALY_GOEGRID</option><option  value='ANALY_GRIF-IRFU'>ANALY_GRIF-IRFU</option><option  value='ANALY_GRIF-LAL'>ANALY_GRIF-LAL</option><option  value='ANALY_GRIF-LPNHE'>ANALY_GRIF-LPNHE</option><option  value='ANALY_HEPHY-UIBK'>ANALY_HEPHY-UIBK</option><option  value='ANALY_HU_ATLAS_Tier2'>ANALY_HU_ATLAS_Tier2</option><option  value='ANALY_IFAE'>ANALY_IFAE</option><option  value='ANALY_IFIC'>ANALY_IFIC</option><option  value='ANALY_IHEP'>ANALY_IHEP</option><option  value='ANALY_INFN-FRASCATI'>ANALY_INFN-FRASCATI</option><option  value='ANALY_INFN-MILANO'>ANALY_INFN-MILANO</option><option  value='ANALY_INFN-NAPOLI'>ANALY_INFN-NAPOLI</option><option  value='ANALY_INFN-ROMA1'>ANALY_INFN-ROMA1</option><option  value='ANALY_ITEP'>ANALY_ITEP</option><option  value='ANALY_IllinoisHEP'>ANALY_IllinoisHEP</option><option  value='ANALY_JINR'>ANALY_JINR</option><option  value='ANALY_LAL'>ANALY_LAL</option><option  value='ANALY_LANCS'>ANALY_LANCS</option><option  value='ANALY_LAPP'>ANALY_LAPP</option><option  value='ANALY_LIP-Coimbra'>ANALY_LIP-Coimbra</option><option  value='ANALY_LIP-Lisbon'>ANALY_LIP-Lisbon</option><option  value='ANALY_LIV'>ANALY_LIV</option><option  value='ANALY_LONG_BNL_ATLAS'>ANALY_LONG_BNL_ATLAS</option><option  value='ANALY_LONG_BNL_LOCAL'>ANALY_LONG_BNL_LOCAL</option><option  value='ANALY_LONG_LYON'>ANALY_LONG_LYON</option><option  value='ANALY_LONG_LYON_DCACHE'>ANALY_LONG_LYON_DCACHE</option><option  value='ANALY_LPC'>ANALY_LPC</option><option  value='ANALY_LPSC'>ANALY_LPSC</option><option  value='ANALY_LRZ'>ANALY_LRZ</option><option  value='ANALY_LYON'>ANALY_LYON</option><option  value='ANALY_LYON_DCACHE'>ANALY_LYON_DCACHE</option><option  value='ANALY_MANC1'>ANALY_MANC1</option><option  value='ANALY_MANC2'>ANALY_MANC2</option><option  value='ANALY_MCGILL'>ANALY_MCGILL</option><option  value='ANALY_MPPMU'>ANALY_MPPMU</option><option  value='ANALY_MWT2'>ANALY_MWT2</option><option  value='ANALY_MWT2_SHORT'>ANALY_MWT2_SHORT</option><option  value='ANALY_NET2'>ANALY_NET2</option><option  value='ANALY_NIKHEF-ELPROD'>ANALY_NIKHEF-ELPROD</option><option  value='ANALY_OU_OCHEP_SWT2'>ANALY_OU_OCHEP_SWT2</option><option  value='ANALY_OX'>ANALY_OX</option><option  value='ANALY_PIC'>ANALY_PIC</option><option  value='ANALY_PNPI'>ANALY_PNPI</option><option  value='ANALY_PSNC'>ANALY_PSNC</option><option  value='ANALY_QMUL'>ANALY_QMUL</option><option  value='ANALY_RAL'>ANALY_RAL</option><option  value='ANALY_RALPP'>ANALY_RALPP</option><option  value='ANALY_RHUL'>ANALY_RHUL</option><option  value='ANALY_ROMANIA02'>ANALY_ROMANIA02</option><option  value='ANALY_ROMANIA07'>ANALY_ROMANIA07</option><option  value='ANALY_RRC-KI'>ANALY_RRC-KI</option><option  value='ANALY_SARA'>ANALY_SARA</option><option  value='ANALY_SFU'>ANALY_SFU</option><option  value='ANALY_SHEF'>ANALY_SHEF</option><option  value='ANALY_SLAC'>ANALY_SLAC</option><option  value='ANALY_SWT2_CPB'>ANALY_SWT2_CPB</option><option  value='ANALY_TAIWAN'>ANALY_TAIWAN</option><option  value='ANALY_TEST'>ANALY_TEST</option><option  value='ANALY_TOKYO'>ANALY_TOKYO</option><option  value='ANALY_TOKYO_RFIO'>ANALY_TOKYO_RFIO</option><option  value='ANALY_TORONTO'>ANALY_TORONTO</option><option  value='ANALY_TR-10-ULAKBIM'>ANALY_TR-10-ULAKBIM</option><option  value='ANALY_TRIUMF'>ANALY_TRIUMF</option><option  value='ANALY_TW-FTT'>ANALY_TW-FTT</option><option  value='ANALY_UAM'>ANALY_UAM</option><option  value='ANALY_UBC'>ANALY_UBC</option><option  value='ANALY_UCLCENT'>ANALY_UCLCENT</option><option  value='ANALY_UNI-DORTMUND'>ANALY_UNI-DORTMUND</option><option  value='ANALY_UTA'>ANALY_UTA</option><option  value='ANALY_VICTORIA'>ANALY_VICTORIA</option><option  value='ANALY_WEIZMANN'>ANALY_WEIZMANN</option><option  value='ANALY_wuppertalprod'>ANALY_wuppertalprod</option><option  value='ARC'>ARC</option><option  value='ARC-T2'>ARC-T2</option><option  value='ASGC'>ASGC</option><option  value='ASGC_REPRO'>ASGC_REPRO</option><option  value='Australia-ATLAS'>Australia-ATLAS</option><option  value='BARNETT_TEST'>BARNETT_TEST</option><option  value='BEIJING'>BEIJING</option><option  value='BNL_ATLAS_1'>BNL_ATLAS_1</option><option  value='BNL_ATLAS_DDM'>BNL_ATLAS_DDM</option><option  value='BNL_ATLAS_Install'>BNL_ATLAS_Install</option><option  value='BNL_ATLAS_test'>BNL_ATLAS_test</option><option  value='BNL_ITB'>BNL_ITB</option><option  value='BNL_ITB_Install'>BNL_ITB_Install</option><option  value='BNL_Install_test'>BNL_Install_test</option><option  value='BNL_XRD'>BNL_XRD</option><option  value='BU_ATLAS_Tier2'>BU_ATLAS_Tier2</option><option  value='BU_ATLAS_Tier2o'>BU_ATLAS_Tier2o</option><option  value='BU_ATLAS_test'>BU_ATLAS_test</option><option  value='BU_Atlas_Tier2o_Install'>BU_Atlas_Tier2o_Install</option><option  value='CERN-BUILDS'>CERN-BUILDS</option><option  value='CERN-PROD'>CERN-PROD</option><option  value='CERN-RELEASE'>CERN-RELEASE</option><option  value='CERN-UNVALID'>CERN-UNVALID</option><option  value='CPPM'>CPPM</option><option  value='CSCS-LCG2'>CSCS-LCG2</option><option  value='CYF'>CYF</option><option  value='DESY-HH'>DESY-HH</option><option  value='DESY-ZN'>DESY-ZN</option><option  value='FZK-LCG2'>FZK-LCG2</option><option  value='FZU'>FZU</option><option  value='GENERIC_TEST'>GENERIC_TEST</option><option  value='GLOW-ATLAS'>GLOW-ATLAS</option><option  value='GLOW-ATLAS_Install'>GLOW-ATLAS_Install</option><option  value='GRIF-IRFU'>GRIF-IRFU</option><option  value='GRIF-LAL'>GRIF-LAL</option><option  value='GRIF-LPNHE'>GRIF-LPNHE</option><option  value='GoeGrid'>GoeGrid</option><option  value='HEPHY-UIBK'>HEPHY-UIBK</option><option  value='HU_ATLAS_Tier2'>HU_ATLAS_Tier2</option><option  value='HU_ATLAS_Tier2_Install'>HU_ATLAS_Tier2_Install</option><option  value='IFAE'>IFAE</option><option  value='IFIC'>IFIC</option><option  value='IHEP'>IHEP</option><option  value='IN2P3-LPSC'>IN2P3-LPSC</option><option  value='INFN-BARI'>INFN-BARI</option><option  value='INFN-BOLOGNA'>INFN-BOLOGNA</option><option  value='INFN-CAGLIARI'>INFN-CAGLIARI</option><option  value='INFN-CNAF'>INFN-CNAF</option><option  value='INFN-FERRARA'>INFN-FERRARA</option><option  value='INFN-FRASCATI'>INFN-FRASCATI</option><option  value='INFN-LNL-2'>INFN-LNL-2</option><option  value='INFN-LNS'>INFN-LNS</option><option  value='INFN-MILANO'>INFN-MILANO</option><option  value='INFN-MILANO-ATLASC'>INFN-MILANO-ATLASC</option><option  value='INFN-NAPOLI'>INFN-NAPOLI</option><option  value='INFN-NAPOLI-ATLAS'>INFN-NAPOLI-ATLAS</option><option  value='INFN-PISA'>INFN-PISA</option><option  value='INFN-ROMA1'>INFN-ROMA1</option><option  value='INFN-T1'>INFN-T1</option><option  value='INFN-T1_REPRO'>INFN-T1_REPRO</option><option  value='INFN-TORINO'>INFN-TORINO</option><option  value='INFN-TRIESTE'>INFN-TRIESTE</option><option  value='ITEP'>ITEP</option><option  value='IU_OSG'>IU_OSG</option><option  value='IU_OSG_Install'>IU_OSG_Install</option><option  value='IllinoisHEP'>IllinoisHEP</option><option  value='IllinoisHEP_Install'>IllinoisHEP_Install</option><option  value='JINR-LCG2'>JINR-LCG2</option><option  value='LAPP'>LAPP</option><option  value='LIP-COIMBRA'>LIP-COIMBRA</option><option  value='LIP-LISBON'>LIP-LISBON</option><option  value='LPC'>LPC</option><option  value='LRZ'>LRZ</option><option  value='LTU_CCT'>LTU_CCT</option><option  value='LYON'>LYON</option><option  value='LYON_REPRO'>LYON_REPRO</option><option  value='Lyon-T2'>Lyon-T2</option><option  value='MPP'>MPP</option><option  value='MWT2_IU'>MWT2_IU</option><option  value='MWT2_IU_Install'>MWT2_IU_Install</option><option  value='MWT2_UC'>MWT2_UC</option><option  value='MWT2_UC_Install'>MWT2_UC_Install</option><option  value='NDGF'>NDGF</option><option  value='NIKHEF-ELPROD'>NIKHEF-ELPROD</option><option  value='OU_OCHEP_SWT2'>OU_OCHEP_SWT2</option><option  value='OU_OCHEP_SWT2_Install'>OU_OCHEP_SWT2_Install</option><option  value='OU_OSCER_ATLAS'>OU_OSCER_ATLAS</option><option  value='OU_OSCER_ATLAS_Install'>OU_OSCER_ATLAS_Install</option><option  value='OU_OSCER_ATLASdeb'>OU_OSCER_ATLASdeb</option><option  value='OU_PAUL_TEST'>OU_PAUL_TEST</option><option  value='PIC'>PIC</option><option  value='PSNC'>PSNC</option><option  value='RAL'>RAL</option><option  value='RDIGTEST'>RDIGTEST</option><option  value='ROMANIA02'>ROMANIA02</option><option  value='ROMANIA07'>ROMANIA07</option><option  value='RRC-KI'>RRC-KI</option><option  value='RU-Protvino-IHEP'>RU-Protvino-IHEP</option><option  value='SARA-MATRIX'>SARA-MATRIX</option><option  value='SARA_REPRO'>SARA_REPRO</option><option  value='SFU-LCG2'>SFU-LCG2</option><option  value='SLACXRD'>SLACXRD</option><option  value='SLAC_PAUL_TEST'>SLAC_PAUL_TEST</option><option  value='SWT2_CPB'>SWT2_CPB</option><option  value='SWT2_CPB_Install'>SWT2_CPB_Install</option><option  value='TECHNION-HEP'>TECHNION-HEP</option><option  value='TEST1'>TEST1</option><option  value='TEST2'>TEST2</option><option  value='TEST3'>TEST3</option><option  value='TEST4'>TEST4</option><option  value='TESTCHARMM'>TESTCHARMM</option><option  value='TESTGLIDE'>TESTGLIDE</option><option  value='TOKYO'>TOKYO</option><option  value='TORONTO-LCG2'>TORONTO-LCG2</option><option  value='TR-10-ULAKBIM'>TR-10-ULAKBIM</option><option  value='TRIUMF'>TRIUMF</option><option  value='TRIUMF_DDM'>TRIUMF_DDM</option><option  value='TRIUMF_REPRO'>TRIUMF_REPRO</option><option  value='TW-FTT'>TW-FTT</option><option  value='TWTEST'>TWTEST</option><option  value='Taiwan-IPAS-LCG2'>Taiwan-IPAS-LCG2</option><option  value='TestPilot'>TestPilot</option><option  value='Tufts_ATLAS_Tier3'>Tufts_ATLAS_Tier3</option><option  value='Tufts_ATLAS_Tier3_Install'>Tufts_ATLAS_Tier3_Install</option><option  value='UAM-LCG2'>UAM-LCG2</option><option  value='UBC'>UBC</option><option  value='UBC_PAUL_TEST'>UBC_PAUL_TEST</option><option selected value='UCITB_EDGE7'>UCITB_EDGE7</option><option  value='UC_ATLAS_MWT2'>UC_ATLAS_MWT2</option><option  value='UC_ATLAS_MWT2_Install'>UC_ATLAS_MWT2_Install</option><option  value='UC_Teraport'>UC_Teraport</option><option  value='UKI-LT2-Brunel1'>UKI-LT2-Brunel1</option><option  value='UKI-LT2-Brunel2'>UKI-LT2-Brunel2</option><option  value='UKI-LT2-IC-HEP'>UKI-LT2-IC-HEP</option><option  value='UKI-LT2-QMUL'>UKI-LT2-QMUL</option><option  value='UKI-LT2-RHUL'>UKI-LT2-RHUL</option><option  value='UKI-LT2-UCL-CENTRAL'>UKI-LT2-UCL-CENTRAL</option><option  value='UKI-NORTHGRID-LANCS-HEP'>UKI-NORTHGRID-LANCS-HEP</option><option  value='UKI-NORTHGRID-LIV-HEP'>UKI-NORTHGRID-LIV-HEP</option><option  value='UKI-NORTHGRID-MAN-HEP1'>UKI-NORTHGRID-MAN-HEP1</option><option  value='UKI-NORTHGRID-MAN-HEP2'>UKI-NORTHGRID-MAN-HEP2</option><option  value='UKI-NORTHGRID-SHEF-HEP'>UKI-NORTHGRID-SHEF-HEP</option><option  value='UKI-SCOTGRID-DURHAM'>UKI-SCOTGRID-DURHAM</option><option  value='UKI-SCOTGRID-ECDF'>UKI-SCOTGRID-ECDF</option><option  value='UKI-SCOTGRID-GLASGOW'>UKI-SCOTGRID-GLASGOW</option><option  value='UKI-SOUTHGRID-BHAM-HEP'>UKI-SOUTHGRID-BHAM-HEP</option><option  value='UKI-SOUTHGRID-BRIS-HEP'>UKI-SOUTHGRID-BRIS-HEP</option><option  value='UKI-SOUTHGRID-CAM-HEP'>UKI-SOUTHGRID-CAM-HEP</option><option  value='UKI-SOUTHGRID-OX-HEP'>UKI-SOUTHGRID-OX-HEP</option><option  value='UKI-SOUTHGRID-RALPP'>UKI-SOUTHGRID-RALPP</option><option  value='UMESHTEST'>UMESHTEST</option><option  value='UNI-DORTMUND'>UNI-DORTMUND</option><option  value='UNI-FREIBURG'>UNI-FREIBURG</option><option  value='UNI-SIEGEN-HEP'>UNI-SIEGEN-HEP</option><option  value='UTA-DPCC'>UTA-DPCC</option><option  value='UTA-DPCC-test'>UTA-DPCC-test</option><option  value='UTA_PAUL_TEST'>UTA_PAUL_TEST</option><option  value='UTA_SWT2'>UTA_SWT2</option><option  value='UTA_SWT2_Install'>UTA_SWT2_Install</option><option  value='UTD-HEP'>UTD-HEP</option><option  value='UTD-HEP_Install'>UTD-HEP_Install</option><option  value='VICTORIA-LCG2'>VICTORIA-LCG2</option><option  value='WEIZMANN-LCG2'>WEIZMANN-LCG2</option><option  value='WT2_Install'>WT2_Install</option><option  value='Wuppertal'>Wuppertal</option><option  value='csTCDie'>csTCDie</option><option  value='prague_cesnet_lcg2'>prague_cesnet_lcg2</option><option  value='ru-Moscow-SINP-LCG2'>ru-Moscow-SINP-LCG2</option><option  value='ru-PNPI'>ru-PNPI</option><option value=''>any</option></select> site <button style='margin-top:1; margin:1; border:1; font-size:10pt;' type='submit'>Go</button>&nbsp;&nbsp;&nbsp;&nbsp;<button style='margin-top:1; margin:1; border:1; font-size:10pt;' input type=hidden name='retrieveAll'                 value='yes' align='right'>Retrieve All</button></form></b></td></tr></table><br><b>28 jobs.</b> Click job number to see details.<br><b>States: </b> <font color=forestgreen>finished</font>:<a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&jobStatus=finished'>28</a> <br><b>Users: </b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Charles%20G%20Waldman'>Charles G Waldman</a>:<a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&user=Charles G Waldman'>6</a> &nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a>:<a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&user=Nurcan Ozturk'>22</a> <br><b>Releases: </b>&nbsp;Atlas-14.2.20:<a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&AtlasRelease=Atlas-14.2.20'>6</a> &nbsp;Atlas-15.1.0:<a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&AtlasRelease=Atlas-15.1.0'>11</a> &nbsp;Atlas-15.3.0:<a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&AtlasRelease=Atlas-15.3.0'>11</a> <br><b>Processing type: </b>&nbsp;test:<a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&processingType=test'>28</a> <br><b>Sites: </b>&nbsp;UCITB_EDGE7:<a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&computingSite=UCITB_EDGE7'>28</a> <p><p><table><td class='online-navigation'> <td align='left'>                     <b>Showing 28 jobs modified from 2009-07-20 22:38 to 2009-07-20 15:00<b> </td></table> <p><table width='100%' bgcolor=lightblue><tr><td><b>Jobs:</b></td></tr></table><table border=1 cellspacing=0 cellpadding=2><tr style='font-weight: bold' align=middle><td><a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&sort=PandaID'>PandaID</a>, <a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&sort=username'>Owner</a>, Working group</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&sort=jobName'>Job</a></td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&sort=jobStatus'>Status</a></td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&sort=creationTime'>Created</a></td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&sort=tostart'>Time to start</a></td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&sort=duration'>Duration</a></td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&sort=endt'>Ended/ Modified</a></td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&sort=cloud'>Cloud</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&sort=computingSite'>Site</a>, <a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&sort=prodSourceLabel'>Type</a></td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7&sort=currentPriority'>Priority</a></td><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016429440'>1016429440</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/15.3.0.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 20:54</td><td>0:52:26</td><td>0:51:01</td><td>07-20 22:38</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.d493d745-f201-4a70-b1e7-44bb67c2e080&compsite=UCITB_EDGE7'>testpanda.destDB.d493d745-f201-4a70-b1e7-44bb67c2e080</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016429439'>1016429439</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/15.3.0.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 20:54</td><td>0:52:20</td><td>0:51:02</td><td>07-20 22:38</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.4f33cce2-687e-4eb0-949e-08f0b9193117&compsite=UCITB_EDGE7'>testpanda.destDB.4f33cce2-687e-4eb0-949e-08f0b9193117</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016429438'>1016429438</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/15.3.0.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 20:54</td><td>0:52:11</td><td>0:51:01</td><td>07-20 22:37</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.42d11531-8231-45a9-8d6e-e59aa9620871&compsite=UCITB_EDGE7'>testpanda.destDB.42d11531-8231-45a9-8d6e-e59aa9620871</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016429437'>1016429437</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/15.3.0.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 20:54</td><td>0:52:10</td><td>0:51:00</td><td>07-20 22:37</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.87fd3564-6143-4e45-9849-689b4c540d8a&compsite=UCITB_EDGE7'>testpanda.destDB.87fd3564-6143-4e45-9849-689b4c540d8a</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016429436'>1016429436</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/15.3.0.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 20:54</td><td>0:01:21</td><td>0:51:04</td><td>07-20 21:47</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.d07ddc23-01b9-45d5-865f-22d7a87f4c25&compsite=UCITB_EDGE7'>testpanda.destDB.d07ddc23-01b9-45d5-865f-22d7a87f4c25</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016429435'>1016429435</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/15.3.0.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 20:54</td><td>0:01:18</td><td>0:51:04</td><td>07-20 21:47</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.c5772d45-11c3-4d88-95f6-b191300b4730&compsite=UCITB_EDGE7'>testpanda.destDB.c5772d45-11c3-4d88-95f6-b191300b4730</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016429434'>1016429434</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/15.3.0.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 20:54</td><td>0:00:56</td><td>0:51:03</td><td>07-20 21:46</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.c4aade6c-91f1-437b-b058-1ea7e329583a&compsite=UCITB_EDGE7'>testpanda.destDB.c4aade6c-91f1-437b-b058-1ea7e329583a</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016429433'>1016429433</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/15.3.0.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 20:54</td><td>0:00:55</td><td>0:51:02</td><td>07-20 21:46</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.e6ca7656-f3a3-4d10-a7bd-32e13e818cf9&compsite=UCITB_EDGE7'>testpanda.destDB.e6ca7656-f3a3-4d10-a7bd-32e13e818cf9</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016429432'>1016429432</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/15.3.0.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 20:54</td><td>0:00:40</td><td>0:51:06</td><td>07-20 21:46</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.9b26b468-d9e7-46e4-9c64-f6df019f37d4&compsite=UCITB_EDGE7'>testpanda.destDB.9b26b468-d9e7-46e4-9c64-f6df019f37d4</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016429431'>1016429431</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/15.3.0.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 20:54</td><td>0:00:42</td><td>0:51:04</td><td>07-20 21:46</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.8d132650-7702-4dde-bab8-9f7259491c58&compsite=UCITB_EDGE7'>testpanda.destDB.8d132650-7702-4dde-bab8-9f7259491c58</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016422401'>1016422401</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_evgen_trf.py, pkg=AtlasProduction/15.1.0.3</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 19:34</td><td>0:08:39</td><td>0:07:16</td><td>07-20 19:50</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>1000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.83be5fd3-7dc4-4526-b01e-77cd09ff5837&compsite=UCITB_EDGE7'>testpanda.destDB.83be5fd3-7dc4-4526-b01e-77cd09ff5837</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016422400'>1016422400</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_evgen_trf.py, pkg=AtlasProduction/15.1.0.3</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 19:34</td><td>0:07:57</td><td>0:07:16</td><td>07-20 19:49</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>1000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.2d7e89cc-2586-4ea3-9fcf-e5e0bb126fe2&compsite=UCITB_EDGE7'>testpanda.destDB.2d7e89cc-2586-4ea3-9fcf-e5e0bb126fe2</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016422399'>1016422399</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_evgen_trf.py, pkg=AtlasProduction/15.1.0.3</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 19:34</td><td>0:07:59</td><td>0:07:16</td><td>07-20 19:49</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>1000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.6a388977-61dc-44db-9972-626b4c7135e5&compsite=UCITB_EDGE7'>testpanda.destDB.6a388977-61dc-44db-9972-626b4c7135e5</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016422398'>1016422398</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_evgen_trf.py, pkg=AtlasProduction/15.1.0.3</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 19:34</td><td>0:08:00</td><td>0:07:16</td><td>07-20 19:49</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>1000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.165e34f9-cdbf-44aa-8fe0-27fe2fb2a418&compsite=UCITB_EDGE7'>testpanda.destDB.165e34f9-cdbf-44aa-8fe0-27fe2fb2a418</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016422397'>1016422397</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_evgen_trf.py, pkg=AtlasProduction/15.1.0.3</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 19:34</td><td>0:01:21</td><td>0:07:16</td><td>07-20 19:43</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>1000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.d8903932-f405-42af-b527-fffbbbff2ee4&compsite=UCITB_EDGE7'>testpanda.destDB.d8903932-f405-42af-b527-fffbbbff2ee4</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016422396'>1016422396</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_evgen_trf.py, pkg=AtlasProduction/15.1.0.3</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 19:34</td><td>0:01:22</td><td>0:07:16</td><td>07-20 19:43</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>1000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.fa874b3b-4717-4f84-9e57-94fbecd8b047&compsite=UCITB_EDGE7'>testpanda.destDB.fa874b3b-4717-4f84-9e57-94fbecd8b047</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016422395'>1016422395</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_evgen_trf.py, pkg=AtlasProduction/15.1.0.3</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 19:34</td><td>0:01:01</td><td>0:07:16</td><td>07-20 19:42</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>1000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.7cce871e-fea7-468d-afbf-ebaef725dd7a&compsite=UCITB_EDGE7'>testpanda.destDB.7cce871e-fea7-468d-afbf-ebaef725dd7a</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016422394'>1016422394</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_evgen_trf.py, pkg=AtlasProduction/15.1.0.3</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 19:34</td><td>0:00:15</td><td>0:07:17</td><td>07-20 19:42</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>1000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.f31a4107-8d92-47bd-9ace-140b722990c7&compsite=UCITB_EDGE7'>testpanda.destDB.f31a4107-8d92-47bd-9ace-140b722990c7</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016422393'>1016422393</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_evgen_trf.py, pkg=AtlasProduction/15.1.0.3</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 19:34</td><td>0:00:17</td><td>0:07:17</td><td>07-20 19:42</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>1000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.33eb3272-d954-4aab-a65d-2300759ac53d&compsite=UCITB_EDGE7'>testpanda.destDB.33eb3272-d954-4aab-a65d-2300759ac53d</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016422392'>1016422392</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_evgen_trf.py, pkg=AtlasProduction/15.1.0.3</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 19:34</td><td>0:00:21</td><td>0:07:17</td><td>07-20 19:42</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>1000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.53f10e20-82e6-435c-b277-3daed1591392&compsite=UCITB_EDGE7'>testpanda.destDB.53f10e20-82e6-435c-b277-3daed1591392</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016422136'>1016422136</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/15.3.0.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 19:25</td><td>0:00:20</td><td>0:52:02</td><td>07-20 20:18</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.f05f5b2d-ab10-4f2e-80e5-a9449b516ff5&compsite=UCITB_EDGE7'>testpanda.destDB.f05f5b2d-ab10-4f2e-80e5-a9449b516ff5</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016420907'>1016420907</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Nurcan%20Ozturk'>Nurcan Ozturk</a></td><td >trans=csc_evgen_trf.py, pkg=AtlasProduction/15.1.0.3</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 18:56</td><td>0:00:15</td><td>0:08:17</td><td>07-20 19:05</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>1000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.b8529521-e481-479d-931e-66e3096ba0da&compsite=UCITB_EDGE7'>testpanda.destDB.b8529521-e481-479d-931e-66e3096ba0da</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016384563'>1016384563</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Charles%20G%20Waldman'>Charles G Waldman</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/14.2.20.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 14:27</td><td>0:02:10</td><td>0:44:56</td><td>07-20 15:14</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.891ce3b5-d031-4b14-a706-89e80cded716&compsite=UCITB_EDGE7'>testpanda.destDB.891ce3b5-d031-4b14-a706-89e80cded716</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016384562'>1016384562</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Charles%20G%20Waldman'>Charles G Waldman</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/14.2.20.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 14:27</td><td>0:01:51</td><td>0:44:58</td><td>07-20 15:14</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.531eacd3-82a8-4102-bc37-492ed11450bf&compsite=UCITB_EDGE7'>testpanda.destDB.531eacd3-82a8-4102-bc37-492ed11450bf</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016384561'>1016384561</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Charles%20G%20Waldman'>Charles G Waldman</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/14.2.20.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 14:27</td><td>0:01:22</td><td>0:44:57</td><td>07-20 15:13</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.ba41f0c9-8565-44f5-ae3e-21c4fc43827f&compsite=UCITB_EDGE7'>testpanda.destDB.ba41f0c9-8565-44f5-ae3e-21c4fc43827f</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016384538'>1016384538</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Charles%20G%20Waldman'>Charles G Waldman</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/14.2.20.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 14:20</td><td>0:06:13</td><td>0:47:30</td><td>07-20 15:14</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.505a547c-f8de-4914-b7b2-3874e1712c94&compsite=UCITB_EDGE7'>testpanda.destDB.505a547c-f8de-4914-b7b2-3874e1712c94</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016383749'>1016383749</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Charles%20G%20Waldman'>Charles G Waldman</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/14.2.20.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 14:04</td><td>0:09:34</td><td>0:48:31</td><td>07-20 15:02</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.9f07d899-0600-44b1-94a8-92603fa78184&compsite=UCITB_EDGE7'>testpanda.destDB.9f07d899-0600-44b1-94a8-92603fa78184</a></td></tr><tr><td align=middle rowspan=2><a href='http://panda.cern.ch:25980/server/pandamon/query?job=1016383748'>1016383748</a><br><a href='http://panda.cern.ch:25980/server/pandamon/query?ui=user&name=Charles%20G%20Waldman'>Charles G Waldman</a></td><td >trans=csc_simul_reco_trf.py, pkg=AtlasProduction/14.2.20.1</td><td bgcolor=#00CC00>finished</td><td>2009-07-20 14:04</td><td>0:04:30</td><td>0:52:07</td><td>07-20 15:00</td><td><a href='http://panda.cern.ch:25980/server/pandamon/query?dash=clouds#US'>US</a>/<a href='http://panda.cern.ch:25980/server/pandamon/query?tp=pilots&accepts=UCITB_EDGE7'>UCITB_EDGE7</a>, test</td><td>10000</td></tr>
+<tr><td colspan=8 bgcolor='#ffffbb'><b>In:</b>&nbsp;&nbsp; <a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986&compsite=UCITB_EDGE7'>mc08.105031.Jimmy_jetsJ2.evgen.EVNT.e347_tid023986</a> <b>Out:</b>&nbsp;<a href='http://panda.cern.ch:25980/server/pandamon/query?dataset=testpanda.destDB.c4144aff-5d7f-4a8e-8345-e460c8b63126&compsite=UCITB_EDGE7'>testpanda.destDB.c4144aff-5d7f-4a8e-8345-e460c8b63126</a></td></tr></table>
+<p><p><table><td class='online-navigation'> <td align='left'>                     <b>Showing 28 jobs modified from 2009-07-20 22:38 to 2009-07-20 15:00<b> </td></table> </td>
+  </tr></table>
+</body>
+</html>
+<div id="foot"><address><br>Bookmark URL: <a href='http://panda.cern.ch?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7'>http://panda.cern.ch?...too long to display. Get it by copying this link.</a><br>
+
+<a href='http://panda.cern.ch?job=*&type=test&type=test&days=3&jobDefinitionID=any&jobStatus=&site=UCITB_EDGE7'>Redirect to recommended monitor instance</a>
+
+<br>Code Rev: 3948 <br><a href='mailto:wenaus@gmail.com'>Contact</a></address></div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-4802332-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</body></html>
+
+
+
+
+
+---++ References
+   * Previous validations: [[ATLASComments]], and [[Integration/ITB090.ATLASComments][here]].
+
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.RobGardner - 09 Jul 2009 %BR%
+%REVIEW% Main.IwonaSakrejda - 21 Jul 2009 %BR%
+%REVFLAG% %Y% %BR%
+
+
+---++ *Comments*
+| Good to see what actually was done. I just suggested to another VO that they report more details in the next validation cycle. | Main.IwonaSakrejda | 30 Jul 2009 - 23:49 |
+%COMMENT{type="tableappend"}%

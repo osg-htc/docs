@@ -1,0 +1,22 @@
+%META:TOPICINFO{author="JamesWeichel" date="1318440564" format="1.1" version="1.6"}%
+%META:TOPICPARENT{name="FormattingRules"}%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC{depth="2"}%
+%NOTE% TOC{Depth="2"} is usually best for the TOC to keep it from being too cluttered with detail.
+
+---++ Introduction
+Here we introduce the topic.
+
+---++ Major Point 1
+Here we introduce major point 1.
+---+++ Sub Point 1.A
+Here we describe sub point 1.A.
+---+++ Sub Point 1.B
+Here we describe sub point 1.B.
+---++ Major Point 2
+Here we introduce major point 2.
+---+++ Subpoint 2.A
+Here we describe sub point 2.A.
+---+++ Subpoint 2.B
+Here we describe sub point 2.B.
+---++ More information

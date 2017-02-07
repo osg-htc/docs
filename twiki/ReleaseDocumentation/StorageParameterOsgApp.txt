@@ -1,0 +1,9 @@
+%META:TOPICINFO{author="TedHesselroth" date="1271185627" format="1.1" version="1.19"}%
+%META:TOPICPARENT{name="Storage"}%
+deprecated
+
+%RED%
+Merge r17 with LocalStorageConfiguration
+%ENDCOLOR%
+
+%META:TOPICMOVED{by="SuchandraThapa" date="1192832916" from="Integration/ITB_0_7.AboutStorageAreaOsgApp" to="Integration/ITB_0_7.StorageParameterOsgApp"}%

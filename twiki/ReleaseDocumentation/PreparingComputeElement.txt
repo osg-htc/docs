@@ -1,0 +1,120 @@
+%META:TOPICINFO{author="KyleGross" date="1481047990" format="1.1" version="1.42"}%
+%DOC_STATUS_TABLE%
+
+---+!! Prepare the Compute Element Installation
+%TOC%
+
+---+ About this Document
+
+%ICON{hand}% This document is for system administrators. It contains requirements that must be met and procedures completed before beginning the [[ReleaseDocumentation/ComputeElementInstall][Compute Element Installation]]. 
+
+---+ Before you Begin
+
+   1 Read the [[SitePlanning][Site Planning Guide]] and plan your site on paper.
+   1 Verify that the Operating System you are using is [[OperatingSystems][supported]].
+   1 Verify the operation of your local batch system.
+   1 Read the [[PacmanInstall][Pacman]] notes for installation and best practices.
+   1 Decide if your site will join the *Production Grid* or the *Trash/Trash/Integration Testbed* of the OSG.
+   1 Know your CE's *resource* name and *resouce group*.  These are values that you filled out when you registered the site in [[https://oim.grid.iu.edu][OIM]].
+   1 Determine your site sponsors.  These are the Virtual Organizations that own the computing resources behind the CE.
+
+---+ Operating System and Networking Requirements
+
+   * a working network connection
+   * a fully qualified domain name for the gatekeeper
+   * a working forward and reverse DNS lookup for the IP address of the gatekeeper
+   * a valid host and several service certificates issued for the fully qualified domain name of the gatekeeper
+   * synchronized clocks using NTP for all resources constituting the Compute Element 
+   * outbound network connections, please review the [[ReleaseDocumentation/ComputeElementFirewalls][Firewall Document]]
+
+---+ Required Service Accounts
+
+| *Service Name*  | *Account*  | *Comment*  |
+| %LINK_GLOSSARY_GRAM%  | =globus=  | if not present, the =daemon= account will be used  |
+| CEMon  | =daemon=  |  |
+| RSV  | =rsvuser=  | test with =su -c "/bin/date" rsvuser=  |
+
+---+ Required User Accounts
+
+Unix user accounts need to be created for each %LINK_GLOSSARY_VO%. The =uid= and =name= of the account can be locally determined. You will be asked to provide a mapping from local accounts to VOs later during the configuration process.  Since VO's are frequently added to the OSG, you should access the current list of registered VO's at [[http://myosg.grid.iu.edu/vosummary?datasource=summary&all_vos=on&active_value=1][MyOSG's Virtual Organization menu item]]. Any new VO's will also appear in on the CE in the file =$VDT_LOCATION/monitoring/osg-user-vo-map.txt=.
+
+---+ Required Host and Service Certificates
+
+The following table lists OSG services that require a service certificate for their operation. Please [[ReleaseDocumentation/CertificateGetCmd#Obtain_a_host_or_service_certifi][request and install]] the certificates before you proceed with the installation.
+
+| *Purpose*  | *Default Location*  | *Comment*  |
+| host  | =/etc/grid-security/hostcert.pem= %BR% =/etc/grid-security/hostkey.pem=  | owned by the =root= account  |
+| %LINK_GLOSSARY_GRAM_WS%  | =/etc/grid-security/http/httpcert.pem= %BR% =/etc/grid-security/http/httpkey.pem=  | owned by the =globus= account  |
+| RSV  | =/etc/grid-security/rsvcert.pem= %BR% =/etc/grid-security/rsvkey.pem=  | owned by the =rsvuser= acount  |
+| CEMon  |  | owned by the =daemon= account  |
+
+---+ Do you have a Grid User Certificate?
+
+As the system administrator you are required to test the functionality provided by the Compute Element. This requires a [[ReleaseDocumentation/CertificateGetCmd][grid user certificate]] issued for you.
+
+---+ FAQ
+
+---++ Should I use the root account to install the OSG Compute Element?
+
+*Short answer*: Yes, especially for new sysadmins.
+
+*Long answer*: Most site admins install OSG compute element services as root. Paraphrasing from the [[%VDT_DOCS_URL%/installation_think.html][VDT site]], if you install as root the VDT's programs can be made available to all the users on your system. Additionally, the VDT will be able to configure and start some of the grid services you might be installing.  Some services can only be run if you are root. _Corollary:_ If you don't install as root, you cannot do these things.  Unless your local policy states otherwise, you will want to install the OSG compute element as root.
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = SuchandraThapa
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
+
+%META:TOPICMOVED{by="RobGardner" date="1192751105" from="Integration/ITB_0_7.PrepareForCEInstall" to="Integration/ITB_0_7.PreparingComputeElement"}%

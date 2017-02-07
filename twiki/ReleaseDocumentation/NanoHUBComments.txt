@@ -1,0 +1,24 @@
+%META:TOPICINFO{author="KyleGross" date="1227280705" format="1.1" version="1.5"}%
+%META:TOPICPARENT{name="SiteValidationTable"}%
+---+!! *nanoHUB Comments*
+
+
+<b>
+Testing for ITB 0.9 -> OSG 1.0 migration
+</b>
+
+The testing procedure for nanoHUB is simple and quite straight forward. Basically only three steps are required for each test site. First a configuration file file must be prepared, second a nanoHUB scratch directory is created under $OSG_DATA, third the test application is submitted and results tested. 
+
+The configuration file contains a set of Condor classads describing the test site. Of critical importance are the gatekeeper URL, jobmanager, ftp URL, and work or scratch directory location. This information was culled from the OSG VORS pages.
+
+In order to accurately determine the location of the scratch directory a simple fork-manager job is sent to each site to probe the environment. This simple test also verifies the viability of the nanoHUB account on the test site.
+ 
+The test application used was the Nanowire application [[https://www.nanohub.org/tools/nanowire]].  Each job runs serially and requires 15 minutes to an hour of computation time. A moderate amount of memory is required.  A set of three to five jobs was launched simultaneously on each site. This is a small number of simulations but is usually enough to discover typical problems. 
+
+All stages of this test process proceeded smoothly.
+
+%BR%
+%COMPLETE2% %BR%
+%RESPONSIBLE%  %BR%
+%REVIEW%   %BR%
+%REVCOM%   

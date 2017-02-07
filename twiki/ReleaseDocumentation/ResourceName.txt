@@ -1,0 +1,30 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1290208195" format="1.1" version="1.22"}%
+%META:TOPICPARENT{name="Trash.ReleaseDocumentationPrepareForComputeElementConfigure"}%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+Each OSG resource needs a unique name by which services and resources may refer to the resource.  This name will be displayed on the resource catalog, the OSG Information Management System ([[https://oim.grid.iu.edu][OIM]]) and used for monitoring and accounting. For example, the resource at University of New Mexico has a unique name of UNM_HPC.
+
+In addition to the resource name, the resource usually belongs to a logical group, called the *resource group*.  This is also registered in OIM.  For small sites, there may only a be a CE, so the resource name can be used as the resource group name.  Larger clusters might have multiple CEs or an attached storage element (SE); all of the CEs and SEs for a single cluster should be in the same resource group.
+
+%WARNING% The default name in most configuration scripts is the hostname of the node the installation is performed on.  Do not use this name.
+
+%IMPORTANT% It is important that system administrators use the same resource and resource_group in all locations including the [[SitePlanning#Registering_with_OSG][registration]] step, this will allow the [[http://osggoc.blogspot.com/][Grid Operations Center (GOC)]] to validate monitoring systems and other grid services
+
+If you do not consistently use the same resource name, you may receive a helpdesk ticket from the GOC requesting you to make the change.
+
+Currently the complete list of resource names from OIM is the authoritative list of names. The !MyOSG Information Presentation system also contain a list of current resource names across both the OSG and ITB, and can be used to determine names already in use. 
+
+For a list of the resource names already in use, you may view:
+   * [[https://oim.grid.iu.edu/oim/resource][Listing Pulled from OSG Information Management (OIM) system - you need to be registered to view this page]]
+   * [[http://tinyurl.com/yea3fbk][OSG Resource Names via !MyOSG]]
+   * [[http://tinyurl.com/y8bfvw8][ITB Resource Names via !MyOSG]]
+
+
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.RobQ - 17 Oct 2007 %BR%
+%REVIEW% Main.SuchandraThapa - 12 Jun 2008 %BR%
+%REVCOM% %BR%
+%REVFLAG% %Y% %BR%
+
+%META:TOPICMOVED{by="AnneHeavey" date="1192832473" from="Integration/ITB_0_7.OSGResourceName" to="Integration/ITB_0_7.ResourceName"}%

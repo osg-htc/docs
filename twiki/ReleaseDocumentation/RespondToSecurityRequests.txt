@@ -1,0 +1,78 @@
+%META:TOPICINFO{author="KyleGross" date="1481047990" format="1.1" version="1.18"}%
+%META:TOPICPARENT{name="Documentation.SecuritySiteResponsibilities"}%
+---+ *Respond to requests from the OSG Security Officer*
+%DOC_STATUS_TABLE%
+%TOC%
+
+---++ About This Document
+This document covers information on how sites can respond to security incidents.
+
+---++ Introduction
+In many ways, the most important security requirement for running a site is that you communicate with the OSG Security Officer and the [[Security.SecurityTeamMembers][Security Team]].  When issues come up or incidents occur there is usually some manual intervention required and this means reading email from the OSG security team or taking phone calls (in the most urgent cases).  In order to be sure that OSG can communicate with the site administrator responsible for security of a site there is the periodic update of contact information in [[OIMSecurityContactInfo][OIM]].
+
+If you have confidential information to provide to the OSG security team, it can be sent via [[SecureEmail][encrypted email]] or submitted as a [[https://ticket.grid.iu.edu/goc/security][security ticket to the GOC]] (requires a registered X509 certificate in your browser). Of course, you can always use the telephone as well for secure communications (call the [[Operations/WebHome][GOC]] or [[Security.SecurityTeamMembers][individual security team members]]). 
+
+%NOTE%Anything you tell OSG security team in confidentiality will be kept confidential. We will not share it with any other parties, including other sites, VOs, and OSG management. Of course, if the preservation of the information presents an imminent threat against the security of OSG, we may need to share it with other parties.  BUT, before doing that we will inform you first, and decide how much to disclose and how to disclose the information.
+
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesBarlow
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = IgorSfiligoi
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
+
+%META:TOPICMOVED{by="JamesBarlow" date="1273172871" from="Documentation.RespondToSecurityRequests" to="ReleaseDocumentation.RespondToSecurityRequests"}%

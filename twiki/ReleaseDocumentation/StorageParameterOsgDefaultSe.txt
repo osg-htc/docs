@@ -1,0 +1,32 @@
+%META:TOPICINFO{author="TedHesselroth" date="1271185628" format="1.1" version="1.14"}%
+%META:TOPICPARENT{name="Storage"}%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+%RED%
+Merge with LocalStorageConfiguration
+%ENDCOLOR%
+---++ Introduction
+The OSG_DEFAULT_SE variable represents a Storage Element closely related to the CE, accessible from within the cluster (visible to worker nodes) only via SE access methods such as Gridftp or SRM. If OSG_DEFAULT_SE is accessible from outside, it is the preferred SE for the CE and should be used when doing a two- or more step copy of input datasets to the CE. For example, doing a 3rd-party transfer to OSG_DEFAULT_SE, then copying to OSG_WN_TMP using a client program.
+
+In a simple cluster, OSG_DEFAULT_SE could be an SE visible from both inside and outside, and serving an internally shared space like OSG_DATA. This would allow I/O via grid tools in sites that had no shared space.
+
+The value to be specified in OSG_DEFAULT_SE is the full URL, including method, host/port and path of the base dir. This full URL must be reachable from inside as well as outside the cluster. The OSG_DEFAULT_SE generally supports only put and get, rather than open/read/write/close. 
+
+If the CE has no default SE it can use the value UNAVAILABLE for OSG_DEFAULT_SE or it can use the address for the gridftp server that has access to [[StorageParameterOsgData][OSG_DATA]].
+
+---++ Typical uses of OSG_DEFAULT_SE
+   * Staging in of large input files (e.g. datasets)
+   * Staging out of large output files (e.g. datasets)
+
+---++ Notes
+   * The current release supports SRM and gsiftp for OSG_DEFAULT_SE.
+   * The read and write access urls to the OSG_DEFAULT_SE can be used for [[StorageParameterOsgSiteRead][OSG_SITE_READ]] and [[StorageParameterOsgSiteWrite][OSG_SITE_WRITE]].
+
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.SuchandraThapa - 19 Oct 2007 %BR%
+%REVIEW% Main.HorstSeverini - 16 Jun 2008 %BR%
+
+%REVFLAG% %Y% %BR%
+
+%META:TOPICMOVED{by="SuchandraThapa" date="1192833101" from="Integration/ITB_0_7.AboutStorageAreaOsgDefaultSe" to="Integration/ITB_0_7.StorageParameterOsgDefaultSe"}%

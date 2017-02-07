@@ -1,0 +1,51 @@
+%META:TOPICINFO{author="AbhishekSinghRana" date="1211573059" format="1.1" version="1.6"}%
+%META:TOPICPARENT{name="SiteValidationTable"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+
+<b>
+Feedback and discussion ongoing, offline via Email.
+
+SDSS/DES is also participating in Opportunistic Storage validation. 
+</b>
+
+---++ Validation procedure
+
+The test job we are running on ITB mimics operations that real DES simulation program is doing. It is a shell script that starting on WN creates in the
+WN-TMP a working directory. Then it copies data and executables from submission host using globus-url-copy.
+After unziping and untaring files it execute the Java program that produces one result file. This file is then copied to an opportunistically reserved
+space on a SE using srmcp command. After this the working directory is removed.
+
+
+---++ Old feedback
+
+LBNL_DSD_ITB : the site configuration seems to be wrong.                                                                                                  
+Submitted job does not see OSG_GRID directory and can not setup OSG environment.      
+
+CIT_ITB_1       OK
+
+LBNL_VTB        OK
+
+BNL_ITB_Test1   OK
+
+OUHEP_ITB   -- fail (Globus error 47 )
+
+FNAL_FERMIGRID_ITB -- jobs do not start, all day in idle status, so one job was successfully completed
+
+CIGI_ITB  -- fail (Globus error 47)
+
+OSG_ITB_PSU   jobs do not start, stay idle
+
+Purdue-ITB     OK
+
+TTU-TESWULF  -- jobs do not start
+
+UCSDT2-ITB1  -- jobs do not start
+
+UC-ITB         OK
+
+
+%BR%
+%COMPLETE2% %BR%
+%RESPONSIBLE%  %BR%
+%REVIEW%   %BR%
+%REVCOM%   

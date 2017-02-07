@@ -1,0 +1,1215 @@
+%META:TOPICINFO{author="KyleGross" date="1481047984" format="1.1" version="1.17"}%
+%META:TOPICPARENT{name="ClientInstallationHandsOn"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC{depth="3"}%
+
+<!-- conventions used in this document
+   * Local UCL_CWD = /opt/client
+   * Local UCL_HOST = uct3-edge5
+   * Local UCL_HOSTFQ = uct3-edge5.uchicago.edu
+   * Local GR_CE = uct3-edge7.uchicago.edu
+   * Local GR_CE = itb1.uchicago.edu
+
+GR_CE must have a Condor LRM
+-->
+
+
+---++Introduction
+These exercises introduce you to some simple Grid activities. They will give you the necessary skills to begin using OSG for your own applications. Most of these can be applied to other Globus-based grids.
+
+These notes have been written for the client hands-on tutorial at the [[https://indico.fnal.gov/event/osgsw2011][August 2011 OSG Summer Workshop]].
+During the OSG Client contribution in the Users forum track the main part of this tutorial will be explained.
+To follow the session you are expected to have installed already OSG Client on the machine that you will be using as explained in ClientInstallationHandsOn.
+Please follow along and do not hesitate to ask questions. 
+
+You are welcome to use these notes in a later time to guide you through the presented exercises at your own pace. You will be given commands to type, along with the expected output and notes highlighting the key points of each step.
+
+These notes have transcripts from a machine called =%UCL_HOSTFQ%= used as client host. Most likely you might be using a different machine, in which case you should be careful to replace =%UCL_HOSTFQ%= with the name of the machine you are logged in to. Most of the examples submit jobs to =%GR_CE%=, a host I have access to when writing the tutorial. If you are submitting to a different host please replace =%GR_CE%= with the correct hostname.
+
+---++ Requirements
+To follow this tutorial you need:
+   * A host with OSG client installed (see ClientInstallationHandsOn)
+   * A valid [[ReleaseDocumentation.CertificateUserGet][Grid Certificate]]
+
+---++Client installation and setup
+For the installation of OSG client please check ClientInstallationHandsOn or the full documentation there referenced.
+
+If you are using a Pacman installation To use the client is sufficient to source the setup file:
+<pre class="screen">
+> source your-osg-client-dir/setup.(c)sh
+</pre>
+This is not needed if you are using OSG client installed using RPMs.
+
+If you have a firewall pay attention at the GLOBUS_TCP_PORT_RANGE variable: https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/ClientInstallationGuide#Firewall_Considerations
+
+---++Security
+This exercise will provide hands-on experience in using various tools to setup and use the Grid Security Infrastructure (GSI) for working on the grid. The first few sections delve into certificates and proxies and demonstrate how pre-configured credentials can be used to run some grid enable programs. (more information)
+
+If you don't have a Grid certificate, check [[ReleaseDocumentation.CertificateUserGet][how to obtain a Grid Certificate]]
+
+---+++Proxies
+
+In order to do things (like submit jobs or transfer data) on the grid, you need a grid proxy. A grid proxy contains everything necessary to authenticate you to grid resources. 
+The OSG Summer Workshop has a session all about security and recommendations.
+
+You can create a proxy certificate with <pre class="screen">voms-proxy-init</pre>. You can check the result with the =voms-proxy-info= (or =grid-proxy-info=) command.
+
+<pre class="screen">
+> voms-proxy-init -voms atlas:/atlas/usatlas/Role=software -hours 300
+Enter GRID pass phrase:
+Your identity: /DC=org/DC=doegrids/OU=People/CN=Marco Mambelli 325802
+Creating temporary proxy ......................... Done
+Contacting  lcg-voms.cern.ch:15001 [/DC=ch/DC=cern/OU=computers/CN=lcg-voms.cern.ch] "atlas" Done
+Creating proxy ................................................................ Done
+Your proxy is valid until Sun Mar 15 05:37:47 2009
+</pre>
+When you request a VOMS proxy you need to have your x509 certificate (in the ~/.globus directory) and you can activate any VO, group or role enabled for your certificate.
+The parameter =-voms atlas:/atlas/usatlas/Role=software= instructs to connect to the ATLAS VOMS server, activates a proxy for the ATLAS VO, in the /atlas/usatlas group and with a software Role.
+
+Here the command to check a proxy:
+<pre class="screen">
+> voms-proxy-info -all
+WARNING: Unable to verify signature! Server certificate possibly not installed.
+Error: Cannot verify AC signature!
+subject   : /DC=org/DC=doegrids/OU=People/CN=Marco Mambelli 325802/CN=proxy
+issuer    : /DC=org/DC=doegrids/OU=People/CN=Marco Mambelli 325802
+identity  : /DC=org/DC=doegrids/OU=People/CN=Marco Mambelli 325802
+type      : proxy
+strength  : 1024 bits
+path      : /tmp/x509up_u20003
+timeleft  : 299:57:53
+=== VO atlas extension information ===
+VO        : atlas
+subject   : /DC=org/DC=doegrids/OU=People/CN=Marco Mambelli 325802
+issuer    : /DC=ch/DC=cern/OU=computers/CN=lcg-voms.cern.ch
+attribute : /atlas/usatlas/Role=software/Capability=NULL
+attribute : /atlas/lcg1/Role=NULL/Capability=NULL
+attribute : /atlas/usatlas/Role=NULL/Capability=NULL
+attribute : /atlas/Role=NULL/Capability=NULL
+attribute : nickname =  (atlas)
+timeleft  : 11:57:53
+uri       : lcg-voms.cern.ch:15001
+</pre>
+
+Look at the timeleft field. This tells you how much time this proxy will be valid for. Check that there is some time left on your proxy. (When this proxy has expired, you will no longer be able to use the grid, and you will have to get a new proxy)
+
+Note that the expiration time of the extended attributes is shorter than the one of the general proxy. The VOMS server may limit the longevity of the proxy to a time shorter to the one requested (server configuration).
+
+You can play with different options to =voms-proxy-init= and checking the content, specially the extended attributes.
+=grid-proxy-info= will give a similar information without the extended attributes.
+
+Do not worry about about the message "WARNING: Unable to verify signature! Server certificate possibly not installed.
+Error: Cannot verify AC signature!". It means that the signature of the server adding the extensions could not be verified. This will be done by the servers accepting your requests. Here we are interested in verifying the content of the proxy more than its authenticity.
+
+
+---+++Grid Proxy Details
+
+   * *subject* - The distingushed name (DN) from the certificate, appended with a uniqe string of numbers.
+   * *issuer* - The distinguished name of the user certificate itself.
+   * *path* - The file system location where the your proxy is stored.
+   * *timeleft* - How much longer the proxy will be valid, in hours, minutes and seconds.
+
+As you can see, the issuer of the grid certificate is the user certificate. This shows the chain of trust: CA -> user certificate -> proxy certificate. The chain can be arbitrary long: you can generate a proxy out of a proxy.
+In fact =voms-proxy-init= is first generating a regular grid proxy, then sending that one to the VOMS server to add the extended attributes.
+
+The proxy certificate contains the private key generated for proxy, corresponding public key, and is signed like a certificate by the user certificate.
+
+Now list the contents of the proxy using =grid-cert-info=, specifying the full path to your proxy.
+<pre class="screen">
+> grid-cert-info -file /tmp/x509up_u20003
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 26685 (0x683d)
+        Signature Algorithm: md5WithRSAEncryption
+        Issuer: DC=org, DC=doegrids, OU=People, CN=Marco Mambelli 325802
+        Validity
+            Not Before: Mar  2 13:20:47 2009 GMT
+            Not After : Mar 15 01:25:47 2009 GMT
+        Subject: DC=org, DC=doegrids, OU=People, CN=Marco Mambelli 325802, CN=proxy
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+            RSA Public Key: (1024 bit)
+                Modulus (1024 bit):
+                    00:e9:ea:5f:28:ad:86:d1:f6:97:3c:41:8f:34:2a:
+                    1b:4e:c8:18:33:1e:02:74:cd:44:4b:4d:c7:fb:15:
+                    49:b9:73:f4:51:11:9b:cb:43:21:28:56:4e:3b:e6:
+                    7e:96:7d:ed:1c:21:1d:04:5a:aa:64:51:49:2c:e2:
+                    9e:14:be:d9:c0:e9:e0:8b:74:04:7e:58:9e:e5:ba:
+                    da:cc:d7:c5:72:5e:68:7f:c7:4b:4f:2c:17:45:84:
+                    63:bf:cd:59:30:48:35:2d:d1:38:11:08:1d:98:22:
+                    a8:1d:30:ea:60:1c:a5:28:3f:e6:0e:20:21:fd:75:
+                    a5:99:d6:f4:48:be:33:e6:21
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            1.3.6.1.4.1.8005.100.100.5: 
+                0..90..50..10......0l.j0d.b0`1.0..
+..&...,d....org1.0..
+..U....People1.0...U....Marco Mambelli 325802..h=.b0`.^0\1.0..
+..&...,d....org1.0..
+.......*.:.0"..20090302132546Z..20090303012546Z0..0...acf.bnl.gov0
++.....Edd.1..0......atlas://vo.racf.bnl.gov:150030...,/atlas/usatlas/Role=software/Capability=NULL. /atlas/Role=NULL/Capability=NULL.(/atlas/usatlas/Role=NULL/Capability=NULL.%/atl.................F.@..!.lity=NULL0,0...U.
+..+....
+            X509v3 Key Usage: critical
+            Digital Signature, Key Encipherment, Data Encipherment
+            1.3.6.1.4.1.8005.100.100.6: 
+                03
+    Signature Algorithm: md5WithRSAEncryption
+        3d:22:a7:50:55:5f:cb:0f:ed:f8:95:a5:7d:13:be:b4:ab:04:
+        13:7a:96:e9:ff:ff:61:22:bb:5a:38:e1:9d:8a:de:46:bb:0e:
+        3d:61:4c:08:7d:87:54:cc:f9:04:e3:69:9b:0a:54:40:a5:74:
+        bd:c9:9e:2e:04:47:44:90:37:a5:e0:80:70:15:d1:ca:60:30:
+        34:e7:b0:d2:7a:7c:ec:b1:6f:dd:90:bc:88:c8:a3:11:83:c9:
+        99:5b:9e:31:16:f7:b2:f7:42:e9:4e:19:5f:da:87:fa:00:ae:
+        1a:ae:26:fa:6a:f3:d9:62:fb:fb:df:3a:ad:37:14:87:f2:a3:
+        e5:dd
+</pre>
+Pay attention that the length of the proxy may be shorter than the one requested.
+The contents are similar to your user certificate (run grid-cert-info against it), but there are some differences; for example, the issuer is the DN of the user certificate, rather than of the certificate authority.
+
+=grid-cert-info= is useful to see how long your proxy certificate will last (the =Not Before= and =Not After= lines under =Validity=).
+
+---+++Contents of the Grid Mapfile
+Globus services (for example, GRAM and !GridFTP) use a grid-map file located by default in =/etc/grid-security/grid-mapfile= on each server.
+This file has restricted write access, but the file can be read by anyone.
+
+You can look at the gridmap file and will see lines like these:
+<pre class="file">
+"/DC=org/DC=doegrids/OU=People/CN=Suchandra Thapa 757586" sthapa
+"/DC=org/DC=doegrids/OU=People/CN=Martin Feller 807394"  mfeller
+"/DC=org/DC=doegrids/OU=People/CN=R Jefferson Porter 227760" ivdgl
+</pre>
+
+Grid-map files can be created by system administrators by hand or using a number of tools. Most OSG sites use a tool called GUMS this allows to generate a grid-map file or to have callouts to verify the certificate's authorization and map Grid users to local users dynamically. Only GUMS callouts allow to support Grid users groups and roles.
+
+
+---++Job submission with GRAM
+GRAM is the underlying protocol used by Globus Computing Elements (CEs)
+
+---+++Running Grid Jobs with Globus Commands
+Now you should be able to run some jobs on a Computing Element.
+
+First we'll try a simple 'Hello World' job:
+<pre class="screen">
+> globus-job-run %GR_CE% /bin/echo Hello World
+Hello World
+</pre>
+
+You've just submitted a job (the Linux command echo) to run on %GR_CE%. This is a simple building block for grid execution.
+
+The globus-job-run utility runs commands on remote sites. You must tell this command several pieces of information:
+
+The name of the host on which to run the job. In this example, we specified 'localhost', meaning the host you are using.
+
+The name of the command to execute remotely. This must be be fully qualified path names (i.e., it must start with a "/"). In this example, we specified '/bin/echo'.
+
+Parameters to pass to the command. In this example, we specify a message for echo, the text 'Hello World'.
+
+Now we will run the Linux command hostname on the remote site to verify that we're talking to the resource we think we are.
+
+Run it locally to make sure you are invoking it correctly. This works best if you are running locally on a gatekeeper that you want to verify. It will likely work if the system is similar (in my case =%UCL_HOSTFQ%= and =%GR_CE%= are both SL5).
+<pre class="screen"> 
+> hostname
+%UCL_HOSTFQ%
+</pre>
+
+Use the command which to discover the location of the version of hostname that you are using. It will return a fully-qualified path name.
+<pre class="screen">
+> which hostname
+/bin/hostname
+</pre>
+
+This tells you that to run hostname via =globus-job-run=, use =/bin/hostname=.
+
+Use which to discover the location of the following commands on the system:
+<pre>
+id
+env
+ps
+uptime
+</pre>
+
+Now run hostname remotely, on %GR_CE%, to verify that you really are reaching a remote system:
+<pre class="screen">
+> globus-job-run %GR_CE% /bin/hostname
+%GR_CE%</pre>
+
+Next, see what else can you learn about the remote system with this approach.
+
+Discover what user ID your job ran under using id.
+
+Discover what environment variables are set using env.
+
+Discover the load on the remote Grid server using uptime.
+
+Discover the default working directory in which your remote job will run using pwd.
+
+Do an ls of this working directory.
+
+Use df to discover how much storage space exists in this working directory.
+
+Use df to discover how much storage space exists in the remote /tmp directory.
+
+---+++Immediate and Batch Job Managers
+GRAM, the Globus component for running remote jobs, supports the concept of a job manager as an adapter to Local Resource Managers (LRM). Each site can support one or more such job managers. Our lab systems have two job managers: The fork job manager runs a job immediately, spawning a process on the gatekeeper to execute the job. The Condor job manager submits jobs into the Condor batch scheduling system.
+
+Now we will investigate some of the differences between the fork and Condor jobmanagers. Which do you think will be faster? Use the command time to test which jobmanager is faster.
+
+The "fork" job manager is very fast - it has low scheduling latency. It runs trivial commands very quickly. But it also has very little compute power - its usually just a single CPU on a front-end computer called the head node. A batch job manager, on the other hand, has a higher scheduling overhead, but usually gives you access to all computers in a cluster and access to a lot more compute power.
+
+%GR_CE% uses the Condor  LRM. Other sites systems sometimes use other LRMs. For example, Portable Batch System (PBS) is very common. To submit a job to a site using PBS, you must specify jobmanager-pbs. OSG supports also jobmanager-lsf and jobmanager-sge.
+
+Now try a job through PBS on a different machine, e.g. =uct2-grid6.uchicago.edu=:
+<pre class="screen">
+> globus-job-run uct2-grid6.uchicago.edu/jobmanager-pbs /bin/hostname
+uct2-grid6.uchicago.edu
+</pre>
+
+To time a command, enter =time commandname=:
+<pre class="screen">
+> time sleep 3
+real    0m3.007s
+user    0m0.004s
+sys     0m0.000s
+</pre>
+
+Use this to time a few trivial Grid jobs to compare Fork and Condor:
+<pre class="screen">
+> time globus-job-run %GR_CE%/jobmanager-condor /bin/hostname
+%GR_CE%
+
+real    0m10.678s
+user    0m0.090s
+sys     0m0.030s
+
+> time globus-job-run %GR_CE%/jobmanager-fork /bin/hostname
+%GR_CE%
+
+real    0m0.488s
+user    0m0.090s
+sys     0m0.020s
+</pre>
+
+---++Condor components for job management
+Earlier we learned about Condor as a LRM. Condor allows to manage also remote jobs. In this case it is called Condor-G. Now we will submit some simple jobs using it. It will facilitate to keep track of your jobs.
+
+Submission to Condor-G requires a submit file (to complex for a single command line) and the use of additional file will ease the monitoring of the job providing a log file and a copy of the job's standard output and standard error.
+
+---+++Getting set up
+You need to start your local Condor-G. If OSG was installed by root, then this command should be run by root; the user can run it for personal client installations.
+<pre class="rootscreen">
+> condor_master
+</pre>
+Make sure that you can write in the log dir of Condor (=OSG_LOCATION/condor/hostname=). Condor will complain if there are problems and not start =condor_master= and =condor_schedd=.
+
+To kill your local Condor-G you use <pre class="rootscreen">condor_off -all</pre> and make sure that you don't have any =condor_*= process left.
+Again, Condor can be stopped only by root if OSG client was installed by root.
+
+Check the Condor queue with condor_q
+<pre class="screen">
+> condor_q
+
+-- Submitter: %UCL_HOSTFQ% : <10.1.3.249:54103> : %UCL_HOSTFQ%
+ ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD               
+
+0 jobs; 0 idle, 0 running, 0 held
+</pre>
+This command lists everything that Condor (in our case Condor-G) has been asked to run. Everyone will be using the same Condor installation for these exercises, so you will often see other users' jobs in the queue alongside your own.
+
+Next, create some directories for you to work in. Make them in your home directory:
+<pre class="screen">
+> cd ~
+> mkdir condor-tutorial
+> cd condor-tutorial
+> mkdir submit
+</pre>
+
+---+++Submit a Simple Grid Job with !CondorG
+Now we are ready to submit our first job with Condor-G. The basic procedure is to create a Condor job submit description file. This file can tell Condor what executable to run, what resources to use, how to handle failures, where to store the job's output, and many other characteristics of the job submission. Then this file is given to =condor_submit=.
+
+There are many options that can be specified in a Condor-G submit description file. We will start out with just a few. We'll be sending the job to the host %GR_CE% and running under the "jobmanager-fork" job manager. We're setting notification to never to avoid getting email messages about the completion of our job, and redirecting the stdout/err of the job back to the submission computer.
+
+For more information, see the =condor_submit= manual.
+
+---++++!!Create the Submit File
+Here is an example for a remote job submission.
+Note the universe variable in the following snippet. It defines where to send the job. If the universe used were vanilla, the job would be executed on the submitting site itself (Condor would have to be configured to allow local execution). 
+To submit jobs to a remote resource, like in our examples, the universe has to be set to =grid= (the resource will vary depending on the protocol used). Here is the example:
+<pre class="file">
+########################################
+#                       
+#  A sample Condor-G submission file
+#                                        
+########################################
+
+executable = APPDIR/YOURUSERNAME/primetest
+
+transfer_executable = false
+universe       = grid
+grid_resource = gt2 SITE/jobmanager
+log            = prime.log
+arguments      = 100 2 100
+output = prime.out
+
+queue
+</pre>
+Note few elements in the submit file:
+   * transfer_executable  - false, the executable is available at the destination. If the executable is small you can ask Condor to transfer it.
+   * executable - remote or local (depending on transfer) path to the executable
+   * universe (see above)
+   * grid_resource (see above)
+
+Move to the scratch submission directory and create the submit file. Verify that it was entered correctly:
+<pre class="screen">
+> cd ~/condor-tutorial/submit
+USE YOUR FAVORITE TEXT EDITOR TO ENTER THE FILE
+CONTENT
+> cat myjob.submit
+executable=/share/osg/app/allhands/primetest
+arguments=143
+output=results.output
+error=results.error
+log=results.log
+notification=never
+universe=grid
+grid_resource=gt2 %GR_CE%/jobmanager-fork
+queue
+</pre>
+
+Submit your test job to Condor-G
+<pre class="screen">
+> condor_submit myjob.submit
+Submitting job(s).
+Logging submit event(s).
+1 job(s) submitted to cluster 1.
+</pre>
+
+Run condor_q to see the progress of your job. You can also run condor_q -globus to see Globus-specific status information. (See the condor_q manual for more information.)
+<pre class="screen">
+> condor_q
+
+-- Submitter: %UCL_HOSTFQ% : <10.1.3.249:54103> : %UCL_HOSTFQ%
+ ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD               
+   1.0   marco           3/2  17:40   0+00:00:22 R  0   0.0  primetest 143     
+
+1 jobs; 0 idle, 1 running, 0 held
+> condor_q -globus
+
+-- Submitter: %UCL_HOSTFQ% : <10.1.3.249:54103> : %UCL_HOSTFQ%
+ ID      OWNER          STATUS  MANAGER  HOST                EXECUTABLE        
+   1.0   marco         ACTIVE fork     uct3-edge7.uchicag  /share/osg/app/all
+</pre>
+
+*Tip*
+
+If condor_q lists too many entries, you can use the =job-id= to refer your job. In the above example, this is =1= in the line =1 job(s) submitted to cluster 1= returned by condor_submit. Now you can just do condor_q XXX. You can also try using condor_q marco to enlist jobs submitted by user =marco=.
+You can try various options like -long and -globus with condor_q to see more details.
+
+
+---++++!! Monitoring Progress with tail
+In another window, run tail -f on the log file for your job to monitor progress. Re-run tail when you submit one or more jobs throughout this tutorial. You will see how typical Condor-G jobs progress. Use Ctrl+C to stop watching the file.
+<pre class="screen">
+> cd ~/condor-tutorial/submit
+> tail -f --lines=500 results.log
+000 (001.000.000) 03/02 17:40:34 Job submitted from host: <10.1.3.249:54103>
+...
+017 (001.000.000) 03/02 17:40:48 Job submitted to Globus
+    RM-Contact: %GR_CE%/jobmanager-fork
+    JM-Contact: https://%GR_CE%:33276/2757/1236037244/
+    Can-Restart-JM: 1
+...
+027 (001.000.000) 03/02 17:40:48 Job submitted to grid resource
+    GridResource: gt2 %GR_CE%/jobmanager-fork
+    GridJobId: gt2 %GR_CE%/jobmanager-fork https://%GR_CE%:33276/2757/1236037244/
+...
+001 (001.000.000) 03/02 17:40:56 Job executing on host: gt2 %GR_CE%/jobmanager-fork
+...
+005 (001.000.000) 03/02 17:44:01 Job terminated.
+        (1) Normal termination (return value 0)
+                Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+                Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+                Usr 0 00:00:00, Sys 0 00:00:00  -  Total Remote Usage
+                Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+        0  -  Run Bytes Sent By Job
+        0  -  Run Bytes Received By Job
+        0  -  Total Bytes Sent By Job
+        0  -  Total Bytes Received By Job
+...
+</pre>
+
+---+++Verifying completed jobs
+When the job is no longer listed in condor_q, or when the log file reports Job terminated, the results can be viewed using condor_history:
+<pre class="screen">
+> condor_history 
+ ID      OWNER            SUBMITTED     RUN_TIME ST   COMPLETED CMD            
+   1.0   marco           3/2  17:40   0+00:03:00 C   3/2  17:44 /share/osg/app/
+</pre>
+When the job completes, verify that the output is as expected. The binary name is different from what you created because of how Globus and Condor-G cooperate to stage your file to execute computer.
+<pre class="screen">
+> ls
+myjob.submit  myscript.sh*  results.error  results.log   results.output
+> cat results.error
+> cat results.output 
+NO - 11 is a factor
+</pre>
+
+If you didn't watch results.log with =tail -f=, you will want to examine the logged information with =cat results.log=.
+
+---+++!!Submitting a job to batch queues
+This is a variation of the previous job submission. Instead of run the jobs on the remote gatekeeper, these will run in the remote batch queue (Condor).
+
+Create a new submit file:
+<pre class="screen">
+> cat > myjob2.submit
+executable=/share/osg/app/allhands/primetest
+arguments=143
+output=results2.output
+error=results2.error
+log=results2.log
+notification=never
+universe=grid
+grid_resource=gt2 %GR_CE%/jobmanager-condor
+queue
+Ctrl+D
+$ cat myjob2.submit
+executable=/share/osg/app/allhands/primetest
+arguments=143
+output=results2.output
+error=results2.error
+log=results2.log
+notification=never
+universe=grid
+grid_resource=gt2 %GR_CE%/jobmanager-condor
+queue
+</pre>
+Notice that the setting for the grid_resource now refers to Condor instead of fork. Globus will submit the job to Condor on %GR_CE% instead of running the job directly with fork on the gatekeeper.
+
+Submit the job to Condor-G:
+<pre class="screen">
+$ condor_submit myjob2.submit
+Submitting job(s).
+Logging submit event(s).
+1 job(s) submitted to cluster 2.
+</pre>
+
+You can monitor the job's progress just like the first job. If you log into %GR_CE% in another window, you can see your job in the Condor queue there. Be quick, or the job will finish before you look!
+<pre class="screen">
+> ssh %GR_CE%
+marco@%GR_CE%'s password: 
+> condor_status 
+
+Name               OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
+
+slot1@uct3-edge7.u LINUX      INTEL  Unclaimed Idle     0.090  2030  0+00:40:04
+slot2@uct3-edge7.u LINUX      INTEL  Unclaimed Idle     0.000  2030  6+16:45:45
+slot3@uct3-edge7.u LINUX      INTEL  Unclaimed Idle     0.000  2030  6+16:45:46
+slot4@uct3-edge7.u LINUX      INTEL  Unclaimed Idle     0.000  2030  6+16:45:47
+
+                     Total Owner Claimed Unclaimed Matched Preempting Backfill
+
+         INTEL/LINUX     4     0       0         4       0          0        0
+
+               Total     4     0       0         4       0          0        0
+> condor_q
+
+
+-- Submitter: %GR_CE% : <10.1.3.251:57171> : %GR_CE%
+ ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD               
+
+0 jobs; 0 idle, 0 running, 0 held
+</pre>
+
+Clean up the results after the second job has finished running:
+<pre class="screen">
+$ rm results.* results2.*
+</pre>
+
+---+++!! A second example submitting to a batch queue
+This is a variation of the previous job submission running in the remote batch queue (Condor). 
+This time it is a different job and the executable is transferred from the submit host. The files to prepare the executable are attached to this page.
+
+The lines necessary to submit to the Grid are highlighted In %RED%red%ENDCOLOR%. A local Condor job would have a different =universe= (e.g. =Universe=vanilla=) and no =grid_resource=. 
+<pre class="file">
+%RED%
+Universe=grid
+grid_resource=gt2 %GR_CE%/jobmanager-condor
+%ENDCOLOR%
+#notify_user = <user email address>
+Executable = serial64ff
+#transfer_executable = false
+# Files (and directory) in the submit host: log, stdout, stderr, stdin, other files
+InitialDir = run_1
+Log = serial64ff.log
+Output = serial64ff.stdout
+Error = serial64ff.stderr
+#input = serial64.in
+fetch_files=serial64ff.in
+#Arguments = <arg1> <arg2> <argn>
+should_transfer_files = IF_NEEDED
+when_to_transfer_output = ON_EXIT
+
+Queue
+</pre>
+
+Also this job can be submitted and monitored using =condor_submit= and =condor_q=.
+
+
+---++ Job submission to a Campus Grid
+[[Trash/Trash/CampusGrids.WebHome][Campus grids]] allow to connect together different resources that a scientist is allowed to access: these can be his/her local resources, other clusters running Condor, clusters running PBS or LSF (using a Campus Factory). Tese can be in the same campus, a different one or even Grid resources. 
+Once setup the Campus Grid appears to its users as a single big Condor pool.
+A previous talk in the OSG Summer workshop described how to setup a Campus Grid.
+
+Submitting a job, once the Condor submit host has been configured correctly, is no different than submitting to a local Condor queue.
+
+A typical submit file will look like:
+<pre class="file">
+Universe = vanilla
+#notify_user = <user email address>
+Executable = serial64ff
+#transfer_executable = false
+# Files (and directory) in the submit host: log, stdout, stderr, stdin, other files
+InitialDir = run_1
+Log = serial64ff.log
+Output = serial64ff.stdout
+Error = serial64ff.stderr
+#input = serial64.in
+fetch_files=serial64ff.in
+#Arguments = <arg1> <arg2> <argn>
+should_transfer_files = IF_NEEDED
+when_to_transfer_output = ON_EXIT
+
+Queue
+</pre>
+
+And jobs can be submitted and monitored using =condor_submit= and =condor_q=.
+For more examples check Trash/Trash/CampusGrids.RunningCampusGridJobs.
+
+---++ Job submission using OSG's !GlideinWMS system
+The purpose of the [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/index.html][glideinWMS] is to provide a simple way to access the Grid resources.
+!GlideinWMS is a Glidein Based WMS (Workload Management System) that works on top of Condor: it separates the glideins (or pilots) submitted to the Grid by a central factory from the user jobs that land on top of nodes already occupied by a running glidein, allowing late binding scheduling and reducing failures.
+!GlideinWMS is the recommended way to submit jobs to OSG.
+To submit !GlideinWMS it is necessary to have also a glidein factory, a VO Frontend and a Condor submit host, as documented in Documentation.GlideinWMSVOFrontendInstall.
+A previous talk in the OSG Summer Workshop discussed the !GliedeinWMS infrastructure.
+
+Submitting a job using the !GlideinWMS, once the Condor submit host has been configured correctly, is very similar to submitting to a local Condor queue.
+
+A typical submit file will look like (differences from a regular Condor job are highlighted in %RED%red%ENDCOLOR%): 
+<pre class="file">
+Universe = vanilla
+#notify_user = <user email address>
+Executable = serial64ff
+#transfer_executable = false
+# Files (and directory) in the submit host: log, stdout, stderr, stdin, other files
+InitialDir = run_1
+Log = serial64ff.log
+Output = serial64ff.stdout
+Error = serial64ff.stderr
+#input = serial64.in
+fetch_files=serial64ff.in
+#Arguments = <arg1> <arg2> <argn>
+should_transfer_files = IF_NEEDED
+when_to_transfer_output = ON_EXIT
+
+%RED%
+# This line is required to specify that this job should run on GlideinWMS system
+requirements = IS_GLIDEIN == True
+x509userproxy=/tmp/x509up_u20003
+%ENDCOLOR%
+
+Queue
+</pre>
+
+Jobs will land on the Grid, but as you can see in the above submit file there is no need anymore to select a Grid resource like in the Condor-G submission.
+The glidein factory selects the resources and Condor is configured to send the jobs to the glideins. All the setup can be done once and the job submission becomes simpler.
+
+And jobs can be submitted and monitored using =condor_submit= and =condor_q=.
+For more examples check Documentation.CondorGToGlidein.
+
+
+---++Data Management
+These examples use programs included in OSG clients that allow to transfer files.
+
+---+++Getting set up
+Make a working directory for this exercise. For the rest of this exercise, all your work should be done in there.
+<pre class="screen">
+> mkdir dataex
+> cd dataex
+</pre>
+
+Next create some files of different sizes, to use for exercises:
+<pre class="screen">
+> dd if=/dev/zero of=smallfile-marco bs=1M count=10
+> dd if=/dev/zero of=mediumfile-marco bs=1M count=50
+> dd if=/dev/zero of=largefile-marco bs=1M count=200
+> ls -sh
+total 260M
+200M largefile-marco   50M mediumfile-marco   10M smallfile-marco
+</pre>
+
+---+++Moving Files with !GridFTP
+
+---++++!! Transfers to a remote site
+Now try transferring a file to a remote site.
+
+First you will need some scratch space on the remote system. You can create a working directory in the remote data directory.
+<pre class="screen">
+> globus-job-run %GR_CE% /bin/env | grep OSG_DATA
+OSG_DATA=/share/osg/data
+> globus-job-run %GR_CE% /bin/mkdir /share/osg/data/osgallhand-marco
+</pre>
+
+Now copy the file over to this directory:
+<pre class="screen">
+> globus-url-copy -vb file:///home/marco/dataex/smallfile-marco gsiftp://%GR_CE%/share/osg/data/osgallhand-marco/ex1
+Source: file:///home/marco/dataex/
+Dest:   gsiftp://%GR_CE%/share/osg/data/osgallhand-marco/
+  smallfile-marco  ->  ex1
+      1048576 bytes         1.84 MB/sec avg         1.84 MB/sec inst
+</pre>
+
+You will probably find that the transfer rate is much lower than when copying to local machines.
+
+You can try copying to other sites in addition to %GR_CE%. Remember that you might need to make a scratch directory on each one, and that the place for this will be different for each site.
+
+---+++Measuring transfer speed
+
+See how fast the file transfer is happening by using the -vb flag when copying the large file. Since this is a transfer over a local network that should not be too busy it should be fairly quick:
+<pre class="screen">
+> globus-url-copy -vb file:///home/marco/dataex/largefile-marco gsiftp://%GR_CE%/share/osg/data/osgallhand-marco/ex1
+Source: file:///home/marco/dataex/
+Dest:   gsiftp://%GR_CE%/share/osg/data/osgallhand-marco/
+  largefile-marco  ->  ex1
+    134217728 bytes        90.85 MB/sec avg       127.00 MB/sec inst
+</pre>
+
+---+++URL formats
+A quick reminder on URL formats: We've seen two kind of URLs so far.
+
+=file:///home/marco/dataex/largefile= - a file called largefile on the local file system, in the directory =/home/marco/dataex/=.
+
+=gsiftp://%GR_CE%/share/osg/data/osgallhand-marco/= - a directory accessible via gsiftp on the host called =%GR_CE%= in directory =/share/osg/data/osgallhand-marco/=.
+
+---+++Parallel streams
+Trying using 4 parallel data streams by adding the -p flag with an argument of 4:
+
+Use the following globus-url-copy command to transfer the file from %UCL_HOSTFQ% to the %GR_CE%:
+<pre class="screen">
+> globus-url-copy  -p 4 -vb file:///home/marco/dataex/smallfile-marco gsiftp://%GR_CE%/share/osg/data/osgallhand-marco/ex1
+Source: file:///home/marco/dataex/
+Dest:   gsiftp://%GR_CE%/share/osg/data/osgallhand-marco/
+  smallfile-marco  ->  ex1
+     10485760 bytes        11.11 MB/sec avg        11.11 MB/sec inst
+</pre>
+Experiment with transferring different file sizes and numbers of parallel streams, to both local and remote sites and see how the speed varies.
+
+---+++Third party transfers
+Next try a third-party transfer. You do this by specifying two gsiftp URLs, instead of one gsiftp URL and one file URL.
+
+globus-url-copy will control the transfers but data will not pass through the local machine. Instead, it will go directly between the source and destination machines.
+
+Transfer a file between two remote sites, and see if it is faster than if you had transferred it to workshop2.ci.uchicago.edu and then back out again.
+
+Try to make up a command line for this yourself - you should use two gsiftp URLs, instead of a file url and a gsiftp URL.
+
+---++Data Management 2: SRM
+
+---+++Getting set up
+Make a working directory for this exercise. For the rest of this exercise, all your work should be done in there.
+<pre class="screen">
+> mkdir srmex
+> cd srmex
+</pre>
+
+There are a few environmental variables already set for you (in OSG-Client setup):
+   * SRM_CONFIG : srm client configuration file (includes installation directory and defaults)
+You may define some variables for your convenience:
+   * SRMEP : SRM service endpoint; srm://gwdca04.fnal.gov:8443/srm/managerv2
+   * SRMPATH : Working directory on SRM storage; /pnfs/fnal.gov/data/osgedu
+   * MYNAME : your login
+<pre class="screen">
+> export SRMEP=srm://%GR_SE%:8443/srm/v2/server
+> export SRMPATH=/xrootd/mount
+> export MYNAME=marco
+</pre>
+
+Next create a file to use for exercises:
+<pre class="screen">
+> dd if=/dev/zero of=smallfile-$MYNAME bs=1M count=2
+2+0 records in
+2+0 records out
+> ls -l
+total 2048
+-rw-r--r--  1 marco mwt2 2097152 Mar  3 17:11 smallfile-marco
+</pre>
+
+---++++!!Assumptions
+
+You already have used globus-url-copy to move your files from your local machine to one of designated target machine and from a remote gridftp server to your local machine.
+
+---+++Basic operations
+
+---++++!!Checking the status of SRM
+
+Use srm-ping to find out the status of SRM server on $SRMEP.
+
+<pre class="screen">
+> srm-ping $SRMEP
+</pre>
+This returns SRM version number, similar to the following.
+<pre class="screen">
+Ping versionInfo=v2.2
+Extra information
+        Key=backend_type
+        Value=BeStMan
+        Key=backend_version
+        Value=2.2.1.2.i2
+        Key=backend_build_date
+        Value=2009-02-09T16:24:42.000Z 
+        Key=GatewayMode
+        Value=Enabled
+        Key=gsiftpTxfServers
+        Value=gsiftp://itb1.uchicago.edu
+        Key=clientDN
+        Value=/DC=org/DC=doegrids/OU=People/CN=Marco Mambelli 325802
+        Key=gumsIDMapped
+        Value=usatlas2
+        Key=staticToken(0)
+        Value=ATLASDATADISK desc=ATLASDATADISK size=5368709120
+        Key=staticToken(1)
+        Value=ATLASPRODDISK desc=ATLASPRODDISK size=3221225472
+        Key=staticToken(2)
+        Value=ATLASGROUPDISK desc=ATLASGROUPDISK size=3221225472
+</pre>
+There is a lot of information returned by srm-ping. E.g. it allows to find out that we are speaking to a BeStMan SRM server, installes in GatewayMode (it does not support space reservation, opposed to the FullMode that supports it) and that it is using GUMS (gumsIDMapped) and not a static gridmap file.
+
+---++++Putting a file into SRM managed storage
+
+File transfer into SRM managed storage goes through several protocols including gridftp file transfer. This client operation communicates with SRM server through several interfaces internally; srmPrepareToPut to request your file request, !srmStatusOfPutRequest to check your request, gridftp file transfer and srmPutDone to finalize the state of your file transfer.
+<pre class="screen">
+> srm-copy file:////home/marco/srmex/smallfile-$MYNAME \
+           $SRMEP\?SFN=$SRMPATH/smallfile-$MYNAME
+</pre>
+
+Upon successful completion, this returns a summary similar to the following:
+<pre class="screen">
+SRM-CLIENT*REQUESTTYPE=put
+SRM-CLIENT*TOTALFILES=1
+SRM-CLIENT*TOTAL_SUCCESS=1
+SRM-CLIENT*TOTAL_FAILED=0
+SRM-CLIENT*REQUEST_TOKEN=put:2
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*SOURCEURL[0]=file:////home/marco/srmex/smallfile-marco
+SRM-CLIENT*TARGETURL[0]=srm://itb1.uchicago.edu:8443/srm/v2/server?SFN=/xrootd/mount/smallfile-marco
+SRM-CLIENT*TRANSFERURL[0]=gsiftp://itb1.uchicago.edu//xrootd/mount/smallfile-marco
+SRM-CLIENT*ACTUALSIZE[0]=2097152
+SRM-CLIENT*FILE_STATUS[0]=SRM_SUCCESS
+SRM-CLIENT*EXPLANATION[0]=SRM-CLIENT: PutDone is called successfully
+ExitCode=0
+</pre>
+
+---++++URL formats
+A quick reminder on URL formats:
+
+We've seen two kinds of URLs so far.
+
+=file:////home/marco/srmex/smallfile= - a file called smallfile on the local file system, in directory =/home/marco/srmex/=. The appended $MYNAME is only to make the filename unique.
+
+=srm://%GR_SE%:8443/srm/v2/server\?SFN=/xrootd/mount/smallfile-marco= - a SiteURL for a file name smallfile-marco on SRM running on the host called =i%GR_SE%= and port 8443 with the web service handle =/srm/v2/server= in directory =/xrootd/mount=. SFN represents Site File Name.
+
+---++++Browsing a file in SRM managed storage
+Now try to find out the properties of the file that you just put into SRM.
+<pre class="screen">
+> srm-ls   $SRMEP\?SFN=$SRMPATH/smallfile-$MYNAME -fulldetailed
+</pre>
+Upon successful completion, this returns a summary similar to the following:
+<pre class="screen">
+SRM-DIR: Printing text report now ...
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*SURL=/xrootd/mount/smallfile-marco
+SRM-CLIENT*BYTES=2097152
+SRM-CLIENT*FILETYPE=FILE
+SRM-CLIENT*FILE_STATUS=SRM_SUCCESS
+SRM-CLIENT*FILE_EXPLANATION=Read from disk
+SRM-CLIENT*OWNERPERMISSION=owner
+SRM-CLIENT*LIFETIMELEFT=-1
+SRM-CLIENT*FILELOCALITY=ONLINE
+SRM-CLIENT*OWNERPERMISSION.USERID=owner
+SRM-CLIENT*OWNERPERMISSION.MODE=RWX
+SRM-CLIENT*GROUPPERMISSION.GROUPID=defaultGroup
+SRM-CLIENT*GROUPPERMISSION.MODE=RX
+SRM-CLIENT*OTHERPERMISSION=RX
+SRM-CLIENT*LASTACCESSED=2009-3-3-18-5-49
+ExitCode=0
+</pre>
+
+---++++Getting a file from SRM managed storage
+Now try to get the file that you just browsed and put into SRM from the SRM managed storage to your local machine. This client operation communicates with SRM server through several interfaces internally: !srmPrepareToGet to request your file request, !srmStatusOfGetRequest to check your request, gridftp file transfer and !srmReleaseFiles to release the file after your transfer.
+<pre class="screen">
+> srm-copy $SRMEP\?SFN=$SRMPATH/smallfile-$MYNAME \
+           file:////home/marco/srmex/my-smallfile
+</pre>
+Upon successful completion, this returns a summary similar to the following:
+<pre class="screen">
+SRM-CLIENT*REQUESTTYPE=get
+SRM-CLIENT*TOTALFILES=1
+SRM-CLIENT*TOTAL_SUCCESS=1
+SRM-CLIENT*TOTAL_FAILED=0
+SRM-CLIENT*REQUEST_TOKEN=get:3
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*SOURCEURL[0]=srm://itb1.uchicago.edu:8443/srm/v2/server?SFN=/xrootd/mount/smallfile-marco
+SRM-CLIENT*TARGETURL[0]=file:////home/marco/srmex/my-smallfile
+SRM-CLIENT*TRANSFERURL[0]=gsiftp://itb1.uchicago.edu//xrootd/mount/smallfile-marco
+SRM-CLIENT*ACTUALSIZE[0]=2097152
+SRM-CLIENT*FILE_STATUS[0]=SRM_FILE_PINNED
+ExitCode=0
+</pre>
+After srm-copy is completed, find out the file size at the target on your local machine:
+<pre class="screen">
+> ls -l
+total 4096
+-rw-r--r--  1 marco mwt2 2097152 Mar  4 00:03 my-smallfile
+-rw-r--r--  1 marco mwt2 2097152 Mar  3 17:11 smallfile-marco
+</pre>
+
+---++++Removing a file in SRM managed storage
+Now try to remove the file that you put from the SRM managed storage.
+<pre class="screen">
+> srm-rm $SRMEP\?SFN=$SRMPATH/smallfile-$MYNAME
+</pre>
+Upon successful completion, this returns a summary similar to the following:
+<pre class="screen">
+SRM-DIR: Total files to remove: 1
+        status=SRM_SUCCESS
+        explanation=null
+        surl=srm://itb1.uchicago.edu:8443/srm/v2/server?SFN=/xrootd/mount/smallfile-marco
+        status=SRM_SUCCESS
+        explanation=null
+</pre>
+
+After srm-rm returns successfully, find out the file properties of the same SURL on the SRM with srm-ls. You should see that the SURL is invalid.
+
+---++++Creating and removing a directory in SRM managed storage
+Now try to create a directory in SRM managed storage.
+<pre class="screen">
+> srm-mkdir $SRMEP\?SFN=$SRMPATH/$MYNAME
+</pre>
+This will create a directory under the SRM that you can use in your SURLs. Upon successful completion, this returns a summary similar to the following:
+<pre class="screen">
+SRM-DIR: Wed Mar 04 00:06:17 CST 2009 Calling SrmMkdir
+        status=SRM_SUCCESS
+        explanation=null
+</pre>
+Browse the directory to see what kind of property information that you retrieve from SRM.
+
+Now try to remove the directory from SRM.
+<pre class="screen">
+> srm-rmdir $SRMEP\?SFN=$SRMPATH/$MYNAME
+</pre>
+This will remove a directory under the SRM. Upon successful completion, this returns a summary similar to the following:
+<pre class="screen">
+SRM-DIR: Wed Mar 04 00:06:56 CST 2009 Calling SrmRmdir
+Sending srmRmdir request ...
+SRM-DIR: ........................
+        status=SRM_SUCCESS
+        explanation=null
+</pre>
+
+---++++Summary of basic operations
+Experiment with putting and getting files with different file sizes and numbers of parallel streams to and from the remote SRM site, and see the differences. When you use 4 parallel data streams by adding the -parallelism option with an argument of 4, the client operation goes through the same protocol, and the parallel streams are used in the gridftp file transfer. Larger files would make a significant difference in file transfer performance.
+
+Experiment with directory structure in your path.
+
+%NOTE% Remember to remove those files and directories that you created afterwards.
+
+<!--
+---+++!!Space management and related operations
+For space reservation I will use a different SRM endpoint, always on UC_ITB, since the !BeStMan SRM at UC_ITB does not support space reservation. This endpoint uses dCache and has a different path as well:
+<pre class="screen">
+> export SRMEP=srm://%GR_SE%:8443/srm/managerv2
+> export SRMPATH=/pnfs/uchicago.edu/data/usatlas3
+</pre>
+
+---++++!!Reserving a space in SRM for opportunistic use
+Now, let's make a space reservation for 5M bytes of total space, 4M bytes of guaranteed space and lifetime of 900 seconds:
+<pre class="screen">
+> srm-sp-reserve -serviceurl $SRMEP -size 5000000 -gsize 4000000 -lifetime 900
+</pre>
+Upon successful completion, this returns a summary similar to the following:
+<pre class="screen">
+SRM-CLIENT: Tue Mar 17 15:15:35 CDT 2009 Calling Reserve space request
+SRM-CLIENT: Status Code for spaceStatusRequest SRM_SUCCESS
+        explanation=
+        SpaceToken=10004
+        TotalReservedSpaceSize=4000000
+        Retention Policy=REPLICA
+        Access Latency=ONLINE
+
+Printing text report now...
+
+SRM-CLIENT*REQUEST_STATUS=SRM_REQUEST_INPROGRESS
+SRM-CLIENT*REQUEST_EXPLANATION= at Tue Mar 17 15:15:04 CDT 2009 state TQueued : put on the thread queue
+SRM-CLIENT*REQUEST-TOKEN=-2147482141
+SRM-CLIENT*SPACE-TOKEN=10004
+SRM-CLIENT*EXPLANATION=
+SRM-CLIENT*TOTALRESERVEDSPACESIZE=4000000
+SRM-CLIENT*RETENTIONPOLICY=REPLICA
+SRM-CLIENT*ACCESSLATENCY=ONLINE
+</pre>
+Upon successful space reservation, this will show you the space token which will be used in the next exercises. (e.g. 258138 from above, but it is not necessarily numbers always and different storage may return different string format.) Note that your reserved space was returned as 4MB. Let's set the returned space token as an environment variable to re-use later on:
+<pre class="screen">
+> export SPTOKEN=10004
+</pre>
+Finding out space properties from SRM
+
+Now, let's find out the space information with the space token that you just received above:
+<pre class="screen">
+> srm-sp-info -serviceurl $SRMEP -spacetoken $SPTOKEN
+</pre>
+Upon successful completion, this returns a summary similar to the following:
+<pre class="screen">
+SRM-CLIENT:  ....space token details ....
+        status=SRM_SUCCESS
+        SpaceToken=10004
+        TotalSize=4000000
+        Owner=VoGroup=/atlas/usatlas VoRole=software
+        LifetimeAssigned=900
+        LifetimeLeft=682
+        UnusedSize=4000000
+        GuaranteedSize=4000000
+        RetentionPolicy=REPLICA
+        AccessLatency=ONLINE
+        status=SRM_SUCCESS
+        explanation=ok
+</pre>
+
+---++++!!Retrieving space tokens from SRM
+
+Supposed you lost your space token, and let's find out how to retrieve the space tokens that belong to you:
+<pre class="screen">
+> srm-sp-tokens -serviceurl $SRMEP 
+</pre>
+Upon successful completion, this returns a summary similar to the following:
+<pre  class="screen">
+SRM-CLIENT: ...................................
+        Status=SRM_SUCCESS
+        Explanation=OK
+SRM-CLIENT (0)SpaceToken=10004
+</pre>
+This would show all the space tokens that belong to your grid identity and its mapping on the server.
+
+---++++!!Updating a space in SRM
+
+Some time passed since the above space reservation, and the lifetime of the reserved space may be near the expiration. Now, let's update the lifetime of the space as well as the size of the space. We'llll use 7MB of total space with 6MB of guaranteed space, and make the lifetime 950 seconds:
+<pre class="screen">
+> srm-sp-update -serviceurl $SRMEP -spacetoken $SPTOKEN -size 7000000 -gsize 6000000 -lifetime 950
+</pre>
+Upon successful completion, this returns a summary similar to the following because the target SRM storage does not support this functionality.
+<pre class="screen">
+SRM-SPACE: Sat Jan 12 19:09:55 CST 2008 Calling updateSpace request
+        status=SRM_NOT_SUPPORTED
+        explanation=can not find a handler, not implemented
+        Request token=null
+</pre>
+However, when the SRM storage supports the functionality and the request is successful, this returns a summary similar to the following.
+<pre class="screen">
+SRM-SPACE: Sat Jan 12 21:22:50 PST 2008 Calling updateSpace request
+        status=SRM_SUCCESS
+        Request token=null
+        lifetime=950
+        Min=7000000
+        Max=7000000
+</pre>
+Your space token is the same as before, and upon successful completion, the lifetime and size of your space should be updated. Let&#8217;s find out the space information from the SRM and verify using srm-sp-info to see the new updated information.
+
+---++++!!Putting a file into the reserved space in SRM
+
+Now let's put a file into your reserved space using the space token. This client operation communicates with the SRM server, same as before. However, because of your space token, your file will be written into the space that you have reserved. (Since the previous token expired, I requested a new one before the copy, 10006 - so you can make sense of the number in the examples). 
+<pre class="screen">
+> srm-copy file:////home/train99/srmex/smallfile-$MYNAME \
+           $SRMEP\?SFN=$SRMPATH/smallfile-space-$MYNAME \
+	   -spacetoken $SPTOKEN
+</pre>
+Upon successful completion, this returns a summary similar to the following:
+<pre class="screen">
+SRM-CLIENT*REQUESTTYPE=put
+SRM-CLIENT*TOTALFILES=1
+SRM-CLIENT*TOTAL_SUCCESS=1
+SRM-CLIENT*TOTAL_FAILED=0
+SRM-CLIENT*REQUEST_TOKEN=-2147482128
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*REQUEST_EXPLANATION= at Tue Mar 17 15:35:18 CDT 2009 state Pending : created
+SRM-CLIENT*SOURCEURL[0]=file:////home/marco/srmex/smallfile-marco
+SRM-CLIENT*TARGETURL[0]=srm://uct3-edge6.uchicago.edu:8443/srm/managerv2?SFN=/pnfs/uchicago.edu/data/usatlas3/smallfile-space-marco
+SRM-CLIENT*TRANSFERURL[0]=gsiftp://uct3-edge6.uchicago.edu:2811///smallfile-space-marco
+SRM-CLIENT*ACTUALSIZE[0]=2097152
+SRM-CLIENT*FILE_STATUS[0]=SRM_SUCCESS
+SRM-CLIENT*EXPLANATION[0]=Done
+</pre>
+After successful completion, find out the file properties with srm-ls.
+<pre class="screen">
+> srm-ls $SRMEP\?SFN=$SRMPATH/smallfile-space-$MYNAME
+</pre>
+Upon successful completion, this returns a summary similar to the following:
+<pre class="screen">
+SRM-DIR: Printing text report now ...
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*REQUEST_EXPLANATION=srm-ls completed normally
+SRM-CLIENT*SURL=/pnfs/uchicago.edu/data/usatlas3/smallfile-space-marco
+SRM-CLIENT*BYTES=2097152
+SRM-CLIENT*FILETYPE=FILE
+SRM-CLIENT*STORAGETYPE=PERMANENT
+SRM-CLIENT*FILE_STATUS=SRM_SUCCESS
+SRM-CLIENT*OWNERPERMISSION=21003
+SRM-CLIENT*LIFETIMELEFT=-1
+SRM-CLIENT*LIFETIMEASSIGNED=-1
+SRM-CLIENT*CHECKSUMTYPE=adler32
+SRM-CLIENT*CHECKSUMVALUE=01e00001
+SRM-CLIENT*FILELOCALITY=ONLINE
+SRM-CLIENT*OWNERPERMISSION.USERID=21003
+SRM-CLIENT*OWNERPERMISSION.MODE=RW
+SRM-CLIENT*GROUPPERMISSION.GROUPID=21005
+SRM-CLIENT*GROUPPERMISSION.MODE=R
+SRM-CLIENT*OTHERPERMISSION=R
+SRM-CLIENT*SPACETOKENS(0)=10006
+SRM-CLIENT*RETENTIONPOLICY=REPLICA
+SRM-CLIENT*ACCESSLATENCY=ONLINE
+SRM-CLIENT*LASTACCESSED=2009-3-17-15-35-52
+SRM-CLIENT*CREATEDATTIME=Tue Mar 17 15:35:52 CDT 2009
+</pre>
+Note from the previous srm-ls output that this time it shows the space token you used when putting your file into the SRM managed storage.
+
+---++++!!Releasing the reserved space from SRM
+
+Now let's release the reserved space using the space token.
+<pre class="screen">
+> srm-sp-release -serviceurl $SRMEP -spacetoken $SPTOKEN
+</pre>
+Upon successful completion, this returns a summary similar to the following:
+<pre class="screen">
+SRM-CLIENT: Releasing space for token=10006
+        status=SRM_SUCCESS
+        explanation=Space released
+</pre>
+This operation may fail if you have any files in the space associated with the space token. In such case, remove the files with srm-rm to try releasing the space again.
+<pre class="screen">
+> srm-rm  $SRMEP\?SFN=$SRMPATH/smallfile-space-$MYNAME
+</pre>
+After successful releasing your reserved space, find out the space properties with srm-sp-info.
+
+---++++Summary of space management operations
+
+Experiment on reserving spaces with different space sizes and lifetimes, and putting your files into the reserved spaces with space token. Experiment updating the reserved space after you put your files into the reserved space. Experiment with directory structure in your SURL.
+
+Note: Remember to remove those files and directories that you created afterwards. Also remember to release those spaces that you reserved if still active.
+
+-->
+
+---++ Other commands
+
+---+++ Discovering resources
+The [[ReleaseDocumentation.OSGStorageDiscoveryTool][OSG discovery tools]] query the [[Documentation.InformationServicesStorage][information system]] to find resources or specific information.
+Here a couple of examples:
+
+<pre class="screen">
+%UCL_PROMPT% get_os_versions --vo Engage --match "ScientificSLF Lederman"
+
+Site Name           Compute Element ID                                          OS Version                    
+FNAL_FERMIGRID      fermigridosg1.fnal.gov:2119/jobmanager-condor-default       ScientificSLF Lederman 5.5    
+FNAL_GPGRID_1       fnpcosg1.fnal.gov:2119/jobmanager-condor-default            ScientificSLF Lederman 5.3    
+FNAL_GPGRID_1       fnpcosg1.fnal.gov:2119/jobmanager-condor-group_engage       ScientificSLF Lederman 5.3    
+Found OS ScientificSLF Lederman 5.5 for Engage VO at site FNAL_FERMIGRID 
+</pre>
+<pre class="screen">
+%UCL_PROMPT% get_surl --vo Engage --show_site_name
+
+SITE NAME                     SURL                                                                                                
+UCSDT2                        srm://bsrm-1.t2.ucsd.edu:8443/srm/v2/server?SFN=/hadoop/engage/TESTFILE                             
+UCR-HEP                       srm://charm.ucr.edu:10443/srm/v2/server?SFN=/data/bottom/cms/TESTFILE             
+CIT_CMS_T2                    srm://cit-se.ultralight.org:8443/srm/v2/server?SFN=/mnt/hadoop/osg/engage/TESTFILE                  
+GLOW                          srm://cmssrm.hep.wisc.edu:8443/srm/v2/server?SFN=/osg/vo/engage/TESTFILE                            
+..
+</pre>
+
+[[ReleaseDocumentation.ComputeElementDiscoveryScripts][Here]] you can find more about the scripts querying for computing resources.
+
+[[ReleaseDocumentation.OpportunisticStorageSearchScripts][Here]] you can find more about the scripts querying for opportunistic storage.
+
+
+---++Acknowledgments and references
+This document frequently is concise and presents only some specific examples. For more complete information please read the referred documents.
+
+References:
+   * VOMS http://www.globus.org/grid_software/security/voms.php
+   * Worker Node client https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/WorkerNodeClient
+   * VORS search https://twiki.grid.iu.edu/bin/view/Documentation/FindAvailableResource
+   * Site monitoring https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/SiteMonitoringServices
+   * SE introduction https://twiki.grid.iu.edu/bin/view/Documentation/EndUserSE
+   * CE introduction https://twiki.grid.iu.edu/bin/view/Documentation/IntroEndUser
+   * Campus Grids
+      * https://twiki.grid.iu.edu/bin/view/CampusGrids
+      * https://twiki.grid.iu.edu/bin/view/Trash/Trash/Trash/Trash/CampusGrids/RunningCampusGridJobs
+   * OSG Client
+      * Installation via Pacman: https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/ClientInstallationGuide
+      * RPM installation: https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallOSGClient
+      * Validation: https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TestOSGClient
+   * Glidein WMS
+      * VO frontend installation: https://twiki.grid.iu.edu/bin/view/Documentation/GlideinWMSVOFrontendInstall
+      * Reference doc: http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/index.html
+      * Job submission: https://twiki.grid.iu.edu/bin/view/Documentation/CondorGToGlidein
+   * Discovery tools
+      * https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OSGStorageDiscoveryTool
+      * https://twiki.grid.iu.edu/bin/view/Documentation/InformationServicesStorage#DiscoveryTool
+   * Troubleshooting
+      * Troubleshooting in OSG (Condor and Globus errors): https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingGuide
+
+
+This tutorial is based on material from the OSG documentation and previous tutorials. Thank you to all the authors that contributed time to the OSG documentation. And many thanks to the Open Science Grid Education, Outreach and Training group that wrote previos similar tutorials. 
+
+Other tutorials or educational material:
+   *https://twiki.grid.iu.edu/bin/view/Education/MWGS2008Syllabus
+   * http://www.ci.uchicago.edu/osgedu/schools/2008/clemson/
+   * https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/ValidatingComputeElement
+   * https://twiki.grid.iu.edu/bin/view/Trash/Trash/Trash/Trash/Integration/SimpleCEandClientValidationModule
+   * http://twiki.mwt2.org/bin/view/ITB/UserTutorial (2009 tutorial, space reservation in SRM, !CondorG example)
+
+<!-- twisty example
+---+++!!Screen Dump of the Complete Install Process
+%TWISTY{
+mode="div"
+showlink="Show..."
+hidelink="Hide"
+showimgleft="%ICONURLPATH{toggleopen-small}%"
+hideimgleft="%ICONURLPATH{toggleclose-small}%"
+}%
+<pre class="screen">
+complete screen dump of the install procedure
+</pre>
+%ENDTWISTY%
+-->
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+
+   * [[%ATTACHURL%/primetest][primetest]]: primetest
+
+   * [[%ATTACHURL%/primetest.c][primetest.c]]: Source file for the prime test
+
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/HandsOn/centerpageborder.css
+-->
+
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% Main.MarcoMambelli - 20 Jul 2010 %BR%
+%REVIEW% Main.RobertEngel - 21 Jul 2009 %BR%
+%REVFLAG% %X% %BR%
+   * [[%ATTACHURL%/primetest.c][primetest.c]]: primetest source file
+
+   * [[%ATTACHURL%/primetest][primetest]]: primetest compiled binary
+
+   * [[%ATTACHURL%/Condor.zip][Condor.zip]]: serial64ff source file
+
+%META:FILEATTACHMENT{name="primetest.c" attachment="primetest.c" attr="" comment="primetest source file" date="1312730583" path="primetest.c" size="623" stream="primetest.c" tmpFilename="/usr/tmp/CGItemp35510" user="MarcoMambelli" version="1"}%
+%META:FILEATTACHMENT{name="primetest" attachment="primetest" attr="" comment="primetest compiled binary" date="1312730759" path="primetest" size="7914" stream="primetest" tmpFilename="/usr/tmp/CGItemp35505" user="MarcoMambelli" version="1"}%
+%META:FILEATTACHMENT{name="Condor.zip" attachment="Condor.zip" attr="" comment="serial64ff source file" date="1312927630" path="Condor.zip" size="36982" stream="Condor.zip" tmpFilename="/usr/tmp/CGItemp22307" user="MarcoMambelli" version="1"}%

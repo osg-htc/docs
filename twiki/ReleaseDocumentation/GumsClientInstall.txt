@@ -1,0 +1,150 @@
+%META:TOPICINFO{author="KyleGross" date="1481047986" format="1.1" version="1.37"}%
+%META:TOPICPARENT{name="InstallConfigureAndManageGUMS"}%
+%DOC_STATUS_TABLE%
+---+!! GUMS Client Installation Guide
+%TOC%
+
+---+ About this Document
+
+%ICON{"hand"}% The GUMS Client package provides command line utilities to remotely administer %LINK_GLOSSARY_GUMS%. It provides the capability of retrieving information available via the =gums=, =gums-host= and =gums-service= commands.
+
+<!-- useful variable definitions:
+   * Local UCL_CWD = /opt/gums-client
+-->
+
+---+ Requirements
+
+   * %LINK_PACMAN%
+   * [[Documentation/GUMS][GUMS Server Installation]]
+   * A [[ReleaseDocumentation/CertificateGet][Grid User Certificate]]
+   * The associated %LINK_GLOSSARY_DN% need to be defined in GUMS as belonging to the _admin_ group
+  
+---+ Installation Instructions
+
+   1. Create a directory for the gums-client and 'cd' into that directory:
+   <pre class="screen">
+[%UCL_USER%@%UCL_HOST% ~]$ mkdir -p %UCL_CWD%
+[%UCL_USER%@%UCL_HOST% ~]$ cd %UCL_CWD%</pre>
+   1. Set the =VDT_GUMS_HOST= variable to point to your [[Documentation/GUMS][GUMS Server]]:
+   <pre class="screen">
+%UCL_PROMPT% export VDT_GUMS_HOST=%RED%&lt;YOUR_GUMS_SERVER>%ENDCOLOR%</pre>
+   This will set the variables in =$VDT_LOCATION/gums/config/gums-client.properties= to point to your GUMS server when pacman is run.
+   1. Retrieve the gums-client package from the %LINK_VDT% pacman cache: 
+   <pre class="screen">
+%UCL_PROMPT% pacman -get http://vdt.cs.wisc.edu/%VDT_CACHE%:GUMS-Client </pre>
+   When asked to trust the VDT cache, answer =yall=.
+   1. Update your shell environment:
+   <pre class="screen">
+%UCL_PROMPT% source $VDT_LOCATION/setup.sh</pre>
+   1. Run the %LINK_GLOSSARY_CA% setup script:
+   <pre class="screen">
+%UCL_PROMPT% vdt-ca-manage setupca --location local  --url osg </pre>
+   Advanced installation options for the %LINK_GLOSSARY_CA% package can be found [[ReleaseDocumentation/CaCertificatesInstall][here]].
+   1. Enable automatic updates for the %LINK_GLOSSARY_CRL% and %LINK_GLOSSARY_CA% certificates:
+   <pre class="screen">
+%UCL_PROMPT%  vdt-control --non-root --on fetch-crl vdt-update-certs </pre>
+   1. Update the %LINK_GLOSSARY_CRL% manually to avoid waiting for cron (optional)
+    <pre class="screen">
+%UCL_PROMPT% $VDT_LOCATION/gums-client/fetch-crl/share/doc/fetch-crl-2.8.5/fetch-crl.cron </pre>
+
+
+---+ Provided Command Line Tools
+
+Following command line tools have been installed in =$VDT_LOCATION/gums/bin= :
+
+   * =gums= - administrator functionality (required a grid user proxy)
+   * =gums-host= - basic functionality (requires a grid host certificate)
+   * =gums-hosts-cron= - cron job for gums-host  (requires a grid host certificate)
+   * =gums-service= - administrator functionality (requires a grid host and grid user certificate)
+
+%NOTE% You must be permitted read access by your GUMS server installation. Contact your GUMS administrator to obtain it.
+
+---+ Verify the Installation
+
+Verify the correct operation of the command line tools by generating a =grid-mapfile= listing remotely using the =gums= command:
+
+   1. Generate a grid proxy using your grid certificate:
+   <pre class="screen">
+%UCL_PROMPT% grid-proxy-init 
+Your identity: /DC=org/DC=doegrids/OU=People/CN=Derek Weitzel 285345
+Enter GRID pass phrase for this identity:
+Creating proxy ............................... Done
+Your proxy is valid until: Thu Jun 16 02:41:59 2011 </pre>
+   1. Generate a =grid-mapfile= using the =gums= command:
+   <pre class="screen">
+%UCL_PROMPT% gums generateGridMapfile %RED%"/DC=org/DC=doegrids/OU=Services/CN=cmssrv09.fnal.gov"%ENDCOLOR%  </pre>
+   Replace the %LINK_GLOSSARY_DN% with a %LINK_GLOSSARY_CE% that is registered in the GUMS configuration.
+
+
+---+ Troubleshooting
+
+---++!! Connection Failure
+
+Verify that the =gums.location= and =gums.authz= variables defined in =$VDT_LOCATION/gums/config/gums-client.properties= point to your GUMS server. Here is an example:
+
+<pre class="file">
+  gums.location=https://gratiax31.fnal.gov:8443/gums/services/GUMSAdmin
+  gums.authz=https://gratiax31.fnal.gov:8443/gums/services/GUMSAuthorizationServicePort
+</pre>
+
+---+ Comments
+
+| PM2RPM_TASK = 2012 | Main.RobertEngel | 28 Aug 2011 - 00:32 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = DerekWeitzel
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = VO
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = TerrenceMartin 
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+
+############################################################################################################
+-->
+
+%META:TOPICMOVED{by="JohnWeigand" date="1181312706" from="Documentation.GumsClientInstall" to="Integration/ITB_0_7.GumsClientInstall"}%

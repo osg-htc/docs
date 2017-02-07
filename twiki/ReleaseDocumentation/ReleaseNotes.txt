@@ -1,0 +1,92 @@
+%META:TOPICINFO{author="KyleGross" date="1481047990" format="1.1" version="1.18"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%DOC_STATUS_TABLE%
+%TOC%
+
+
+---++ Changes to OSG
+
+---+++ GIP 
+GIP now supports reading it's configuration from the config.ini file.  In addition, it supports having separate sections in the config.ini for subclusters and SEs.  These changes should make configuring gip easier.
+ 
+---+++ Configure-osg
+Configure-osg now uses the config.ini in =monitoring/config.ini= for configuration information.  You will not be able to specify a configuration file in another location.  This change was made to allow gip to use the same configuration as configure-osg.  In addition, after successfully configuring your system, configure-osg will save the configuration used to =monitoring/configs= with a time stamp in the file name (e.g. =20090304-180744-config.ini=).  You can use this to go back to previously working configurations.  
+
+%NOTE% The =Local Settings= section in the =config.ini= now works correctly.  If you've previously written variables to the =osg-local-job-environment.conf=, you should move those variables to the =Local Settings= section since your =osg-local-job-environment.conf= file will be overwritten.
+
+
+---+++ Bestman and Bestman/Xrootd
+Bestman packages for various Bestman configurations are now available in the OSG cache.  Please see the storage element section of the release documentation for instructions on installing Bestman using these packages.
+
+%NOTE% If you've previously installed bestman or xrootd from the vdt 1.10.1 cache, you can still update those packages using the pacman -update of the appropriate packages.  If you'd like to sync up with the OSG bestman packages, you should be able to do a =pacman -get= of the appropriate packages from the OSG cache without having to download or install any packages.   
+
+---+++ Condor-NFSLite
+A package to support sites using Condor-NFSLite has been added. You can install this on your CE by doing installing =Globus-CondorNFSLite-Setup= instead of =Globus-Condor-Setup=. 
+
+---+++ OSG version script
+There is now a new osg-version script installed in the root of your osg installation.  Running this without parameters will give the old output (e.g. =OSG 1.0.1=) but giving the =--verbose= option to this script will now allow you see the vdt version the installation is based on (e.g. =OSG 1.0.1 (VDT 1.10.1v)=).
+
+---+++ OSG version numbers
+The osg version number change reflects a new policy to increment the minor version number of the osg release whenever a new vdt letter update comes out.  Previously a lettered vdt update (e.g. from 1.10.1a to 1.10.1b) would not have resulted in the osg version changing.  Now in order to help sites and users better characterize the software on an osg site, the minor version will increase. For example, OSG 1.0.1 corresponds to a VDT 1.10.1v release, when VDT 1.10.1w is released, the OSG version will be incremented to OSG 1.0.2. 
+
+---+++ VDT-Updater
+The VDT team has created and now distributes a VDT updater script that will make the update process much easier.  You will be able to download and use the updater script to easily update your installations through several updates.  E.g. The updater script will let you update from 1.10.1b to 1.10.1v with a single invocation. 
+
+---+++ VDT Updates
+To see other vdt updates that have been made, see the [[http://vdt.cs.wisc.edu/releases/1.10.1/release-v.html][vdt update page]]. 
+
+---++ Known issues
+   
+---++ More information
+   * [[https://twiki.grid.iu.edu/bin/view/Trash/ReleaseDocumentationUpdateInstructions][Update Instructions]]
+
+
+%BR%
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = SuchandraThapa
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+############################################################################################################
+-->

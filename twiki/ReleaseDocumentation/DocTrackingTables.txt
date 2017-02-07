@@ -1,0 +1,247 @@
+%META:TOPICINFO{author="KyleGross" date="1481047985" format="1.1" version="1.12"}%
+%META:TOPICPARENT{name="Documentation.DocHowTo"}%
+---+!! *Document Tracking Tables*
+%DOC_STATUS_TABLE%
+%TOC{depth="3"}%
+
+---++ About This Document
+
+%ICON{hand}% This document is for document [[ReleaseDocumentation/DocOwnerResponsibilities][owners]], [[ReleaseDocumentation/DocReviewerResponsibilities][reviewers]] and [[ReleaseDocumentation/DocTesterResponsibilities][testers]]. The document introduces tools developed by the [[Documentation/DocumentationTeam/WebHome][Documentation Team]] to track the status of documents on the individual homepages of those Twiki users.
+
+%NOTE% All tools described represent _choices_ and may be used in any order or combination.
+
+---++ Requirements
+
+The tools described here will only function correctly if _%RED%your%ENDCOLOR%_ Twiki username is defined on _%RED%your%ENDCOLOR%_ Twiki homepage inside an HTML comment such as this:
+
+<pre class="file">
+<verbatim><!-- CONTENT MANAGEMENT PROJECT
+   * Local OWNER  = JamesWeichel
+--></verbatim>
+</pre>
+
+
+---++ Create Tables of Documents with Which You are Associated
+
+You can easily create tables of documents you _own_ or have been assigned to _review_ and _test_. By including the following Twiki statements on your Twiki homepage, you will stay informed about these documents:
+
+---+++ Include a Table of Documents that You Own
+ 
+<pre class="file">
+%%NOP%QUERY_OWNER_FORMAT%
+%%NOP%TWISTY{%%NOP%TWISTY_OPTS%}%
+%%NOP%SEARCH{%%NOP%QUERY_OWNER%}%
+%%NOP%ENDTWISTY%
+</pre>
+
+---+++ Include a Table of Documents that You are assigned to Review
+
+<pre class="file">
+%%NOP%QUERY_REVIEWER_FORMAT%
+%%NOP%TWISTY{%%NOP%TWISTY_OPTS_CLOSED%}%
+%%NOP%SEARCH{%%NOP%QUERY_REVIEWER%}%
+%%NOP%ENDTWISTY%
+</pre>
+
+%NOTE% Only documents that are flagged REVIEW_READY = %%NOP%YES% and RELEASE_READY = %%NOP%NO% will be displayed!
+
+---+++ Include a Table of Documents that You are assigned to Test
+
+<pre class="file">
+%%NOP%QUERY_TESTER_FORMAT%
+%%NOP%TWISTY{%%NOP%TWISTY_OPTS_CLOSED%}%
+%%NOP%SEARCH{%%NOP%QUERY_TESTER%}%
+%%NOP%ENDTWISTY%
+</pre>
+
+%NOTE% Only documents that are flagged TEST_READY = %%NOP%YES% and RELEASE_READY = %%NOP%NO% will be displayed!
+
+---++ Create Tables of Documents by Area, Role, or Type
+
+Every documents belongs to a %LINK_DOC_AREA% and is targeting at a particular %LINK_DOC_ROLE% of the reader. The %LINK_DOC_TYPE% describes the purpose or application of the document. 
+
+---+++ Search Documents According to their Area
+
+To search all documents that match a specified %LINK_DOC_AREA% use:
+
+<pre class="file"><verbatim>
+<--
+   * Local DOC_AREA = <a valid document area>
+-->
+%QUERY_AREA_FORMAT%
+%TWISTY{%TWISTY_OPTS%}%
+%SEARCH{%QUERY_AREA%}%
+%ENDTWISTY%</verbatim></pre>
+
+---+++ Search Documents According to their Role
+
+To search all documents that match a specified %LINK_DOC_ROLE% use:
+
+<pre class="file"><verbatim>
+<--
+   * Local DOC_ROLE = <a valid document role>
+-->
+%QUERY_ROLE_FORMAT%
+%TWISTY{%TWISTY_OPTS%}%
+%SEARCH{%QUERY_ROLE%}%
+%ENDTWISTY%</verbatim></pre>
+
+---+++ Search Documents According to their Type
+
+To search all documents that match a specified %LINK_DOC_TYPE% use:
+
+<pre class="file"><verbatim>
+<--
+   * Local DOC_TYPE = <a valid document type>
+-->
+%QUERY_TYPE_FORMAT%
+%TWISTY{%TWISTY_OPTS%}%
+%SEARCH{%QUERY_TYPE%}%
+%ENDTWISTY%</verbatim></pre>
+
+---++ Custom Searches
+
+All examples above execute the search as soon as the page containing them is loaded. Depending on the particular search used this can take a few seconds up to several minutes. Under this circumstances it may be desirable to define a search that only executes if it was requested by a click on a search button. The following searches serve this purpose.
+
+---+++ Create a Button that Creates a Table of all Documents
+
+Include the following Twiki code on a page:
+
+<pre class="file">
+%%NOP%FindAllFormAction%
+%%NOP%TWISTY{%%NOP%TWISTY_OPTS%}%
+%%NOP%FindAllFormat%
+%%NOP%SEARCH{%%NOP%FindAllQuery%}%
+%%NOP%ENDTWISTY%
+</pre>
+
+to include this functionality:
+
+%FindAllFormAction%
+%TWISTY{%TWISTY_OPTS%}%
+%FindAllFormat%
+%SEARCH{%FindAllQuery%}%
+%ENDTWISTY%
+
+---+++ Create a Search that uses a selected User Name
+
+Include following Twiki code on a page:
+
+<pre class="file">
+%%NOP%FindByUserFormAction%
+%%NOP%TWISTY{%%NOP%TWISTY_OPTS%}%
+%%NOP%FindByUserFormat%
+%%NOP%SEARCH{%%NOP%FindByUserQuery%}%
+%%NOP%ENDTWISTY%
+</pre>
+
+to include this functionality:
+
+%FindByUserFormAction%
+%TWISTY{%TWISTY_OPTS%}%
+%FindByUserFormat%
+%SEARCH{%FindByUserQuery%}%
+%ENDTWISTY%
+
+%NOTE% The user name must match the exact Twiki user name of the user!
+
+---+++ Create a Search for Document Area, Type and Role
+
+The following Twiki code:
+
+<pre class="file">
+%%NOP%FindByOrganizationFormAction%
+%%NOP%TWISTY{%%NOP%TWISTY_OPTS%}%
+%%NOP%FindByOrganizationFormat%
+%%NOP%SEARCH{%%NOP%FindByOrganizationQuery%}%
+%%NOP%ENDTWISTY%
+</pre>
+
+creates a horizontal search, with an option to search the %LINK_DOC_AREA%, %LINK_DOC_TYPE% and %LINK_DOC_ROLE% that can be chosen from a drop-down menu:
+
+%FindByOrganizationFormAction%
+%TWISTY{%TWISTY_OPTS%}%
+%FindByOrganizationFormat%
+%SEARCH{%FindByOrganizationQuery%}%
+%ENDTWISTY%
+
+---+++ Create a Search for Documents according to their Review Status
+
+Include this Twiki code in any page:
+
+<pre class="file">
+%%NOP%FindByStatusFormAction%
+%%NOP%TWISTY{%%NOP%TWISTY_OPTS%}%
+%%NOP%FindByStatusFormat%
+%%NOP%SEARCH{%%NOP%FindByStatusQuery%}%
+%%NOP%ENDTWISTY%
+</pre>
+
+to create a horizontal search bar that lets you choose the variable and value for the review status to query:
+
+%FindByStatusFormAction%
+%TWISTY{%TWISTY_OPTS%}%
+%FindByStatusFormat%
+%SEARCH{%FindByStatusQuery%}%
+%ENDTWISTY%
+
+%NOTE% This search likely takes up to two minutes to complete!
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = JamesWeichel
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = Documenter
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = JamesWeichel
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = TedHesselroth
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+-- Main.JamesWeichel - 07 May 2010

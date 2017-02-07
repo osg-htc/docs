@@ -1,0 +1,355 @@
+%META:TOPICINFO{author="DouglasStrain" date="1319576864" format="1.1" version="1.19"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+
+%WARNING%
+%RED%
+WARNING! This page is for an older version of Hadoop.
+For newer versions, please visit [[Documentation/Release3.InstallHadoopSE][Hadoop Release 3 Installation]]
+%ENDCOLOR%
+
+
+%TOC%
+
+---++Introduction
+
+%WARNING%
+%RED%
+WARNING! This page is for an older version of Hadoop.
+For newer versions, please visit [[Documentation/Release3.InstallHadoopSE][Hadoop Release 3 Installation]]
+%ENDCOLOR%
+
+
+This tutorial covers the installation of a SE based on [[ReleaseDocumentation/Hadoop][Hadoop]] and [[ReleaseDocumentation/Bestman][BeStMan-gateway].  At the end of this tutorial you will be able to use [[https://sdm.lbl.gov/srm-wg/doc/SRM.v2.2.html][SRM]] to copy files into and out of the SE, access files through a local file system mount, and know how to add more storage space to Hadoop.
+
+For more detailed information on each of the components, see the references at the bottom of this document.
+
+---++Requirements
+
+   * The participants will need to have a minimum of three servers and root access on both servers, but four or more is ideal.  
+   * All servers should have a single public IP address. 
+   * All servers must have the OS be SL4 or newer.
+   * All servers must have the fuse kernel module and fuse userspace packages installed. Some instructions about this are below.
+   * All servers must have Sun Java 1.6 installed. 
+   * A working gums service is required for user mappings on the [[ReleaseDocumentation/GsiFtpStandAlone][GridFTP server]]; grid-mapfile mappings are not currently supported. The gums service will also be used by the !BeStMan server.
+   * The operation of !BeStMan requires a valid service certificate. If you are planning to support access to your SE by LCG-Utils tools this certificate must be the copy of the host certificate. Otherwise, use a valid service certificate. 
+
+There will be four servers referred to in the below tutorial.  The examples will use the following hostnames:
+   * *NameNode* (namenode.host): This will host the Hadoop !NameNode and will serve the meta-data for the Hadoop file system.  This must have at least 4GB of memory.
+   * *Secondary !NameNode* (secondary.host): This server will host the Hadoop Secondary !NameNode and acts as a backup and fail-over for the !NameNode.  This server can be omitted if necessary, though it is highly discouraged.
+   * *DataNode* (datanode.host): This server will host the Hadoop !DataNode of the Hadoop file system. The actual data will be housed on this server. 
+   * *SRM* (srm.host): The !SRM server will have the !BestMan service to act as the SRM Endpoint.  It will also host the !GridFTP server to serve as a gsiftp endpoint.  If you only have three servers, these can be run on the Secondary !NameNode.
+
+---++ Installation Procedure
+
+---+++ Install Hadoop
+
+*Hadoop should be installed on the !NameNode, Secondary !NameNode, and !DataNode.  The SRM server will also need hadoop installed in order for a Hadoop (HDFS) fuse mount point*
+
+
+Run the following as the root user:
+<pre class="rootscreen">
+rpm -ivh http://vdt.cs.wisc.edu/hadoop/osg-hadoop-1-2.el5.noarch.rpm
+yum install hadoop
+</pre>
+
+Configure Hadoop by editing  ==/etc/sysconfig/hadoop==.  In general, you should be able to use an identical copy of ==/etc/sysconfig/hadoop== on all of your nodes.  The specific settings that you will want to change are listed below.  Descriptions of the settings are in the configuration file itself, and also here:  https://twiki.grid.iu.edu/bin/view/Storage/HadoopInstallation#Edit_etc_sysconfig_hadoop
+
+<pre class="file">
+HADOOP_NAMENODE
+HADOOP_REPLICATION_DEFAULT
+HADOOP_SECONDARY_NAMENODE
+HADOOP_CHECKPOINT_DIRS
+HADOOP_CHECKPOINT_INTERVAL
+HADOOP_DATADIR
+HADOOP_DATA
+
+HADOOP_USER (optional if you want a different user besides "hadoop")
+HADOOP_GANGLIA_ADDRESS (only if using ganglia)
+HADOOP_NAMENODE_HEAP (optional, for memory tuning)
+HADOOP_MIN_DATANODE_SIZE (optional, safeguard for verifying data directory size)
+</pre>
+
+Example: 
+%TWISTY%
+<pre class="file">
+# The directory that contains the hadoop configuration files.
+# Don't change this unless you know what you're doing!
+HADOOP_CONF_DIR=/etc/hadoop
+
+# The server that will act as the namenode.  This must match the
+# output of 'hostname -s' on the namenode server so that
+# /etc/init.d/hadoop can identify when it is being run on the namenode.
+HADOOP_NAMENODE=namenode.host
+
+# The port that the namenode will listen on.  This is usually set to
+# 9000 unless you are running an unsupported configuration with
+# a datanode and namenode on the same host.
+HADOOP_NAMEPORT=9000
+
+# The host:port for accessing the namenode web interface.  This is
+# used by the checkpoint server for getting checkpoints.
+HADOOP_PRIMARY_HTTP_ADDRESS=${HADOOP_NAMENODE}:50070
+
+# Default number of replicas requested by the client.  The default
+# number of replicas for each file is a _client_ side setting, not
+# a setting on the namenode.
+HADOOP_REPLICATION_DEFAULT=1
+
+# Minimum number of replicas allowed by the server.  1 is a good
+# value.  Clients will not be able to request fewer than this
+# number of replicas.
+HADOOP_REPLICATION_MIN=1
+
+# Maximum number of replicas allowed by the server.  Clients will
+# not be able to requeset more than this number of replicas.
+HADOOP_REPLICATION_MAX=512
+
+# The user that the hadoop datanode and checkpoint server processes will run as.
+# Namenodes always run as root.
+HADOOP_USER=hadoop
+
+# The base directory where most datanode files are stored
+HADOOP_DATADIR=/opt/hadoop/datadir
+
+# The directory that will store the actual hdfs data on this datanode
+# Multiple directories can be specified using a comma-separated list of
+# directory names (with no spaces)
+HADOOP_DATA=${HADOOP_DATADIR}/data
+
+# The directory where the namenode/datanode log files are stored
+HADOOP_LOG=/var/log/hadoop
+
+# The directory where the namenode stores the hdfs namespace
+HADOOP_SCRATCH=${HADOOP_DATADIR}/scratch
+
+# Set this to an empty string to have the hadoop-firstboot script
+# try to determine the ganglia multicast address from /etc/gmond.conf
+HADOOP_GANGLIA_ADDRESS=@HADOOP_GANGLIA_ADDRESS@
+HADOOP_GANGLIA_PORT=8649
+# The interval, in seconds, at which metrics are reported to Ganglia.
+HADOOP_GANGLIA_INTERVAL=10
+
+# The name of the checkpoint server.  This must match the output
+# of 'hostname -s' so that the hadoop init script knows where
+# to start the checkpoint service.
+HADOOP_SECONDARY_NAMENODE=secondary.host
+HADOOP_SECONDARY_HTTP_ADDRESS=${HADOOP_SECONDARY_NAMENODE}:50090
+
+# Comma-separated list of directories that will be used for storing namenode
+# checkpoints.  At least one of these should be on nfs.
+HADOOP_CHECKPOINT_DIRS=/opt/hadoop/checkpoints
+
+# The interval, in seconds, between checkpoints.  Set to 3600 to
+# generate a checkpoint once per hour.  If set to 3600, then if
+# the namenode gets corrupted then you should not lose any
+# namespace changes that are > 1 hour old.
+HADOOP_CHECKPOINT_PERIOD=1200
+
+# The default block size for files in hdfs.  The default is 128M.
+HADOOP_DATANODE_BLOCKSIZE=134217728
+
+# The minimum size of the hadoop data directory, in GB.  The hadoop init
+# script checks that the partition is at least this size before
+# attempting to start the datanode.  This can be used to prevent starting
+# a datanode on systems that don't have very much data space.  Set to
+# zero to skip this check
+HADOOP_MIN_DATANODE_SIZE=0
+
+# The umask used by hadoop when writing files through the command
+# line tool.
+HADOOP_UMASK=002
+
+# The name of a script that takes a list of IP addresses and returns
+# a list of rack names.  Hadoop uses this to make rack-aware intelligent
+# decisions for data block replication.
+HADOOP_RACKAWARE_SCRIPT=
+
+# The central syslog collector.  If set, then logs will be sent to the
+# syslog server in addition to being stored locally.
+HADOOP_SYSLOG_HOST=
+
+# Set this to '1' to automatically update fstab with an entry for
+# the hadoop fuse mount on /mnt/hadoop.  If you prefer to add this manually,
+# then you will need to add the following to fstab, replacing 'namenode.host'
+# with the fqdn of your namenode.
+# hdfs# /mnt/hadoop fuse server=namenode.host,port=9000,rdbuffer=131072,allow_ot
+her 0 0
+HADOOP_UPDATE_FSTAB=0
+</pre>
+%ENDTWISTY%
+
+Start Hadoop on the !NameNode first, then on the !Datanode second, and finally on the Secondary !NameNode using the same set of commands on each:
+<pre class="rootscreen">
+service hadoop-firstboot start
+chkconfig hadoop on
+service hadoop start
+</pre>
+*Note: you do not need to start Hadoop on the SRM server.*
+
+---+++ Accessing Hadoop with Client Commands
+
+*Note: At this point, you will need to logout and login again in order to pick up profile and environment changes.  If you do not, you will get JAVA_HOME and HADOOP_CLASSPATH related errors when using client commands.*
+
+
+At this point you should be able to point your web browser at =http://%RED%namenode.host%ENDCOLOR%:50070/= and see your !NameNode status page and a single !Datanode.    Double-check the capacity of the !Datanode to make sure it is reasonable.  If the capacity is not right, you may need to edit ==/etc/hadoop/hadoop-site.xml== and change =dfs.datanode.du.reserved= to the size that you wish to reserve for hadoop DFS.
+
+You can also copy files into and out of HDFS using the native hadoop commands, such as:
+
+<pre class="rootscreen">
+hadoop fs -mkdir /osg
+hadoop fs -chown 777 /osg
+hadoop fs -copyFromLocal /etc/hosts /osg/hosts.txt
+</pre>
+
+Verify that the file was copied with:
+
+<pre class="rootscreen">
+hadoop fs -ls /
+</pre>
+
+---+++ Accessing Hadoop with fuse mount
+
+Before you can use the POSIX fuse mount, you need to install the appropriate packages:
+   * Fuse kernel module:  For newer kernels, this module is included in the kernel already.  To check, use the command ==lsmod== or run ==modprobe fuse==.
+   * Fuse libraries: ==rpm -qa | grep fuse-libs== should return something similar to "fuse-libs-2.7.4-8_10.el5.x86_64" (your version/architecture may differ).
+   * Fuse userspace tools: ==rpm -qa | grep fuse== should return something similar to "fuse-2.7.4-1.el3.rf.x86_64" (your version/architecture may differ).  Also, the file ==/sbin/mount.fuse== should exist.
+
+Once fuse is installed, you can install the hadoop fuse package with:
+<pre class="rootscreen">
+yum install hadoop-fuse
+</pre>
+
+Now you can try mounting the POSIX fuse mount for hadoop by adding the following to ==/etc/fstab==
+<pre class="rootscreen">
+hdfs# /mnt/hadoop fuse server=%RED%NameNode.host%ENDCOLOR%,port=9000,rdbuffer=32768,allow_other 0 0
+</pre>
+
+Now mount the filesystem with:
+<pre class="rootscreen">
+mkdir -p /mnt/hadoop
+mount /mnt/hadoop
+</pre>
+
+If you are having problems with fuse, you can also mount the filesystem manually with:
+<pre class="rootscreen">
+nohup /usr/bin/hdfs  /mnt/hadoop -o rw,server=%RED%NameNode.hostname%ENDCOLOR%,port=9000,rdbuffer=131072,allow_other -d &
+</pre>
+
+At this point you should be able to ls, cat, cp, and rm files in ==/mnt/hadoop==.  Verify that the file you copied earlier with the native hadoop commands appears in the POSIX fuse mount. 
+
+
+---+++ Install !GridFTP
+
+If you are installing on four or more servers, the !GridFTP service will be installed on the SRM node.  If you are using three nodes, the SRM node will be combined with the Secondary !NameNode server, and !GridFTP will be installed on this node.
+
+<pre class="rootscreen">
+rpm -ivh http://vdt.cs.wisc.edu/hadoop/osg-hadoop-1-2.el5.noarch.rpm
+yum install gridftp-hdfs
+</pre>
+
+Verify that you have modified ==/etc/sysconfig/hadoop== appropriately (see above).  
+
+Set your gums hostname in ==/etc/grid-security/prima-authz.conf==:  
+<pre class="file">
+imsContact https://%RED%your.gums.host:8443%ENDCOLOR%/gums/services/GUMSAuthorizationServicePort
+</pre>
+
+Now configure hadoop and restart xinetd so that it recognizes the new service.
+<pre class="rootscreen">
+service hadoop-firstboot start
+service xinetd restart
+</pre>
+
+At this point you should be able to use globus-url-copy to copy files into and out of HDFS.  From a host with the osg client installed, run the following after replacing ==srm.host== with the hostname of the !GridFTP server:
+<pre class="screen">
+globus-url-copy file:////etc/hosts gsiftp://%RED%srm.host%ENDCOLOR%:2811/osg/junk.txt
+</pre>
+
+Now use the hadoop commands on any of your hadoop nodes to verify the file:
+
+<pre class="rootscreen">
+hadoop fs -ls /osg
+hadoop fs -cat /osg/junk.txt
+</pre>
+
+---+++ Install !BeStMan SRM
+
+The !BeStMan service will be installed on the *SRM* server if you are using four or more servers.  If you are using three nodes, the SRM node will be combined with the Secondary !NameNode server, and !GridFTP will be installed on this node.  This service uses a UNIX account to run as.  By default, this is the "bestman" user.
+
+The operation of !BeStMan requires a valid service certificate. If you are planning to support access to your SE by LCG-Utils tools this certificate must be the copy of the host certificate. Otherwise, use a valid service certificate. This certificate needs to be owned by the bestman user.  This certificate will be assumed to be under ==/etc/grid-security/http== and will be owned by the bestman user.
+
+Since we are installing !BeStMan on the same node as !GridFTP, we don't have to install the =osg-hadoop= setup package again and can proceed directly with the installation of !BeStMan.  Make sure to fix the ownership of your http cert/key pair after !BeStMan is installed:
+
+<pre class="rootscreen">
+yum install bestman hadoop-fuse
+chown -R bestman: /etc/grid-security/http
+</pre>
+
+Make sure the POSIX fuse mount is available, following the directions above.
+
+You should now modify your !BeStMan configuration in =/opt/bestman/conf/bestman.rc= to point to your !GridFTP server, set the allowed list of paths that !BeStMan can access, and point to your gums server.  For the ==GUMSCurrHostDN==, fill out the DN from your service certificate.
+<pre class="rootscreen">
+supportedProtocolList=gsiftp://%RED%srm.host%ENDCOLOR%:2811
+GUMSserviceURL=https://%RED%your.gums.host:8443%ENDCOLOR%/gums/services/GUMSAuthorizationServicePort
+GUMSCurrHostDN=%RED%/DC=org/DC=YOUR_ORG/OU=YOUR_OU/CN=CN_FROM_BESTMAN_SERVICE_CERT%ENDCOLOR%
+localPathListAllowed=/mnt/hadoop
+</pre>
+
+You also need to run =visudo= to update the =/etc/sudoers= file with settings to allow !BeStMan to access files in HDFS.  By default, this is the ==bestman== account.  Add the following to the end of this file, and comment out the line that reads =Defaults  requiretty=
+
+<pre class="file">
+#Defaults  requiretty
+
+Cmnd_Alias SRM_CMD = /bin/rm, /bin/mkdir, /bin/rmdir, /bin/mv, /bin/ls 
+Runas_Alias SRM_USR = ALL, !root 
+bestman ALL=(SRM_USR) NOPASSWD:SRM_CMD
+</pre>
+
+Now you can start the !BeStMan service with:
+
+<pre class="rootscreen">
+service bestman start
+</pre>
+
+At this point you should be able to use srmcp and srm-copy to copy files into and out of Hadoop.  (The following assumes that you have created the "osg" directory with the client commands above).
+<pre class="screen">
+srmls -2 srm://%RED%srm.host%ENDCOLOR%:8443/srm/v2/server?SFN=/mnt/hadoop/osg
+srmcp -2 file:////etc/hosts srm://%RED%srm.host%ENDCOLOR%:8443/srm/v2/server?SFN=/mnt/hadoop/osg/junk2.txt
+srm-copy file:////etc/hosts srm://%RED%srm.host%ENDCOLOR%:8443/srm/v2/server?SFN=/mnt/hadoop/osg/junk3.txt
+</pre>
+
+Congratulations!  You now have a working SE using Hadoop/HDFS and !BeStMan Gateway.
+
+---++Presentation
+
+<embed src="%ATTACHURL%/Hadoop_OSG-SiteAdmin_August_2010.pdf" width="792" height="612">
+
+---++References
+
+   1 https://twiki.grid.iu.edu/bin/view/Storage/Hadoop
+   1 https://twiki.grid.iu.edu/bin/view/Storage/HadoopInstallation
+   1 https://twiki.grid.iu.edu/bin/view/Storage/HadoopGridFTP
+   1 https://twiki.grid.iu.edu/bin/view/Storage/HadoopSRM
+   1 https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/BeStMan
+   1 https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/BestmanGateway
+   1 https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/HadoopInstall
+   1 https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/GsiFtpStandAlone
+
+%BR%
+
+---++ *Comments*
+| During the tutorial there were problems with the fuse install.  We really need to move the fuse packages (except for hadoop-fuse) out of the yum repository. | Main.MichaelThomas | 11 Aug 2010 - 21:33 |
+%COMMENT{type="tableappend"}%
+
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/HandsOn/centerpageborder.css
+-->
+
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% you %BR%
+%REVIEW%
+   * [[%ATTACHURL%/Hadoop_OSG-SiteAdmin_August_2010.pdf][Hadoop_OSG-SiteAdmin_August_2010.pdf]]: Hadoop overview
+
+%META:FILEATTACHMENT{name="Hadoop_OSG-SiteAdmin_August_2010.pdf" attachment="Hadoop_OSG-SiteAdmin_August_2010.pdf" attr="" comment="Hadoop overview" date="1281449427" path="Hadoop_OSG-SiteAdmin_August_2010.pdf" size="90302" stream="Hadoop_OSG-SiteAdmin_August_2010.pdf" tmpFilename="/usr/tmp/CGItemp25189" user="MichaelThomas" version="1"}%

@@ -1,0 +1,296 @@
+%META:TOPICINFO{author="KyleGross" date="1481047984" format="1.1" version="1.46"}%
+%META:TOPICPARENT{name="TroubleshootingComputeElement"}%
+%DOC_STATUS_TABLE%
+
+---+!! Compute Element Log Files
+%TOC{}%
+
+---+ About this Document
+<!-- useful variable definitions
+   * Local UCL_HOST = ce
+   * Local UCL_CWD  = /opt/osg-%VERSION%
+-->
+
+%ICON{hand}% This document is a reference for System Administrators of a %LINK_GLOSSARY_CE%. It lists all log files and their location for services running on a Compute Element. 
+
+%STARTINCLUDE% 
+
+%STARTSECTION{"Logfiles"}%
+---+ List of Compute Element Log Files
+
+The table lists the location of log files relative to =$VDT_LOCATION=. This environment variable points to your installation of the %LINK_GLOSSARY_VDT%.
+
+%TWISTY{%TWISTY_OPTS_REVIEW%}%
+   * logrotate log not found, where is it?
+%ENDTWISTY%
+
+<!-- some useful variable definitions
+   * Local VDT = $VDT_LOCATION
+-->
+
+| *Service or Process* | *Log and Error Files* | *Log File Configuration* |
+| %LINK_GLOSSARY_GRAM% | =%VDT%/globus/var/accounting.log= %BR% =%VDT%/globus/var/globus-gatekeeper.log= %BR% =%VDT%/globus/var/globus-fork.log= %BR% =%VDT%/globus/var/globus-%OPT_JM%.log=  | =%VDT%/vdt-app-data/vdt-logrotate/vdt.logrotate=  |
+| %LINK_GLOSSARY_GRAM_WS%  | =%VDT%/globus/var/container.log=  | =%VDT%/globus/container-log4j.properties=  |
+| %LINK_GLOSSARY_GRIDFTP%  | =%VDT%/globus/var/log/gridftp.log= %BR% =%VDT%/globus/var/log/gridftp-auth.log=  | =%VDT%/vdt-app-data/vdt-logrotate/vdt.logrotate=  |
+| Apache  | =%VDT%/apache/logs/access_log= %BR% =%VDT%/apache/logs/error_log= %BR% =%VDT%/apache/logs/mod_jk.log= %BR% =%VDT%/apache/logs/ssl_request_log= | =%VDT%/vdt-app-data/vdt-logrotate/vdt.logrotate=  |
+| Tomcat  | =%VDT%/tomcat/v55/logs/admin.%OPT_DATE%.log= %BR% =%VDT%/tomcat/v55/logs/catalina.%OPT_DATE%.log= %BR% =%VDT%/tomcat/v55/logs/catalina.out= %BR% =%VDT%/tomcat/v55/logs/host-manager.%OPT_DATE%.log= %BR% =%VDT%/tomcat/v55/logs/localhost.%OPT_DATE%.log= %BR% =%VDT%/tomcat/v55/logs/manager.%OPT_DATE%.log= | =%VDT%/vdt-app-data/vdt-logrotate/vdt.logrotate=  |
+| CEMon  | =%VDT%/glite/var/log/glite-ce-monitor.log=  | =%VDT%/vdt-app-data/vdt-logrotate/vdt.logrotate= %BR% =%VDT%/tomcat/v55/webapps/ce-monitor/WEB-INF/classes/log4j.properties=  |
+| GIP  | =%VDT%/gip/var/logs/gip.log= %BR% =%VDT%/gip/var/logs/modules.log=  | =%VDT%/gip/etc/logging.conf=  |
+| Gratia  | =%VDT%/gratia/var/logs/%OPT_DATE%.log= %BR% =%VDT%/gratia/var/logs/gratia-probe-%OPT_JM%.log=  | |
+| %LINK_GLOSSARY_GUMS%  | =%VDT%/gums/log/gums-developer.%OPT_USER%.log= %BR% =%VDT%/gums/log/gums-egee-security.%OPT_USER%.log= %BR% =%VDT%/gums/log/gums-privilege.%OPT_USER%.log=  | |
+| gums-host-cron  | =%VDT%/osg/etc/log/gums-host-cron.log= %BR% =%VDT%/monitoring/log/gums-host-cron.log=  | |
+| !MySQL  | =%VDT%/vdt-app-data/mysql5/var/%OPT_HOST%.log=  | |
+| !MonaLisa  | =%VDT%/MonaLisa/Service/VDTFarm/ML0.log= %BR% =%VDT%/MonaLisa/Service/VDTFarm/ML.log= %BR% =%VDT%/MonaLisa/Service/VDTFarm/update.log= %BR% =%VDT%/MonaLisa/Service/VDTFarm/lastUpdate.log= %BR% =%VDT%/MonaLisa/Service/VDTFarm/JStore%OPT_DATE%.log= %BR% | |
+| !PostgreSQL  | =$VDT_LOCATION/psql/postmaster.log= %BR% =$VDT_LOCATION/psql/init.log=  | |
+| RSV  | =%VDT%/osg-rsv/logs/consumers/html-consumer.log= %BR% =%VDT%/osg-rsv/logs/proxy-generator.log= %BR% =%VDT%/osg-rsv/logs/gratia-script-consumer.log=  | |
+| rsv probes  | =%VDT%/osg-rsv/logs/probes/%OPT_HOST%/%OPT_PROBE%.log=  | |
+| logrotate  | =%VDT%/logrotate/rotate_html_files.log=  | |
+| condor-cron  | =%VDT%/condor-cron/local.%OPT_HOST%/spool/job_queue.log= %BR% =%VDT%/condor-cron/local.%OPT_HOST%/spool/job_queue.log=  | |
+| vdt-control  | =%VDT%/vdt-install.log= %BR% =%VDT%/logs/vdt-control.log=  | |
+| vdt-update-certs  | =%VDT%/logs/vdt-update-certs.log= %BR% =%VDT%/logs/vdt-update-certs.log.system_output= %BR% =%VDT%/logs/vdt-update-certs.log.updates=  | =%VDT%/vdt-app-data/vdt-logrotate/vdt.logrotate=  |
+| edg-mkgridmap  | =%VDT%/edg/log/edg-mkgridmap.log= %BR% =%VDT%/osg/etc/osg-user-vo-map.txt= %BR% =%VDT%/osg/etc/osg-supported-vo-list.txt= %BR% =%VDT%/osg/etc/osg-undefined-accounts.txt=  | |
+| %LINK_GLOSSARY_CONDOR%  | =%VDT%/condor/local.%OPT_HOST%/log= %BR% =%VDT%/condor/log/local.%OPT_HOST%/spool/job_queue.log= =%VDT%/local.%OPT_HOST%/spool/Accountantnew.log= | |
+| srm-client-lbnl  | =%VDT%/srm-client-lbnl/setup/config.log= %BR% =%VDT%/srm-client-lbnl/setup/bestman.%OPT_NUMBER%.log=  | |
+
+%ENDSECTION{"Logfiles"}%
+
+
+---+ Find Log Files on the Command Line
+
+Use the =find= command on the Unix command line to find all %LINK_GLOSSARY_CE% log files:
+
+<pre class="screen">
+%UCL_PROMPT% echo $VDT_LOCATION 
+%UCL_CWD%
+%UCL_PROMPT% find $VDT_LOCATION -name "*log" -print
+%UCL_CWD%/o..pacman..o/logs/pacman.log
+...
+</pre>
+
+%TWISTY{%TWISTY_OPTS_OUTPUT%}%
+<pre class="screen">
+%UCL_PROMPT% echo $VDT_LOCATION 
+%UCL_CWD%
+%UCL_PROMPT% find $VDT_LOCATION -name "*log" -print
+%UCL_CWD%/o..pacman..o/logs/pacman.log
+%UCL_CWD%/o..pacman..o/logs/wget.log
+%UCL_CWD%/o..pacman..o/logs/shellout.log
+%UCL_CWD%/o..pacman..o/logs/update.log
+%UCL_CWD%/vdt-app-data/mysql5/var/uct3-edge7.log
+%UCL_CWD%/logs/vdt-update-certs.log
+%UCL_CWD%/logs/vdt-control.log
+%UCL_CWD%/logs/vdt-update.log
+%UCL_CWD%/berkeley-db/docs/ref/changelog
+%UCL_CWD%/berkeley-db/docs/ref/log
+%UCL_CWD%/berkeley-db/bin/db_printlog
+%UCL_CWD%/vdt-install.log
+%UCL_CWD%/globus/var/globus-fork.log
+%UCL_CWD%/globus/var/log
+%UCL_CWD%/globus/var/log/gridftp.log
+%UCL_CWD%/globus/var/log/gridftp-auth.log
+%UCL_CWD%/globus/var/gridftp.log
+%UCL_CWD%/globus/var/container.log
+%UCL_CWD%/globus/var/container-real.log
+%UCL_CWD%/globus/var/globus-gatekeeper.log
+%UCL_CWD%/globus/var/accounting.log
+%UCL_CWD%/globus/setup/globus/config.log
+%UCL_CWD%/mysql5/mysql-test/std_data/ndb_backup50_data_le/BACKUP-1.1.log
+%UCL_CWD%/mysql5/mysql-test/std_data/ndb_backup50_data_le/BACKUP-1.2.log
+%UCL_CWD%/mysql5/mysql-test/std_data/ndb_backup50_data_be/BACKUP-1.1.log
+%UCL_CWD%/mysql5/mysql-test/std_data/ndb_backup50_data_be/BACKUP-1.2.log
+%UCL_CWD%/mysql5/bin/myisamlog
+%UCL_CWD%/mysql5/bin/mysql_explain_log
+%UCL_CWD%/mysql5/bin/mysqlbinlog
+%UCL_CWD%/jdk1.6/db/demo/databases/toursdb/log
+%UCL_CWD%/glite/var/log
+%UCL_CWD%/glite/var/log/glite-ce-monitor.log
+%UCL_CWD%/gip/var/logs/gip.log
+%UCL_CWD%/gip/var/logs/module.log
+%UCL_CWD%/edg/log
+%UCL_CWD%/gums/log
+%UCL_CWD%/gums/log/gums-developer.root.log
+%UCL_CWD%/gums/log/gums-privilege.root.log
+%UCL_CWD%/gums/log/gums-egee-security.root.log
+%UCL_CWD%/gums/log/gums-developer.rsv.log
+%UCL_CWD%/gums/log/gums-privilege.rsv.log
+%UCL_CWD%/gums/log/gums-egee-security.rsv.log
+%UCL_CWD%/MonaLisa/Service/usr_code/VoModules-v0.38/testlogs/VoJobs-SGE.log
+%UCL_CWD%/MonaLisa/Service/usr_code/VoModules-v0.38/testlogs/VoJobs-LSF.log
+%UCL_CWD%/MonaLisa/Service/usr_code/VoModules-v0.38/testlogs/VoJobs-CONDOR.log
+%UCL_CWD%/MonaLisa/Service/usr_code/VoModules-v0.38/testlogs/VoJobs-FBS.log
+%UCL_CWD%/MonaLisa/Service/usr_code/VoModules-v0.38/testlogs/VOgsiftpIO.log
+%UCL_CWD%/MonaLisa/Service/usr_code/VoModules-v0.38/testlogs/VoJobs-PBS.log
+%UCL_CWD%/srm-client-lbnl/setup/config.log
+%UCL_CWD%/srm-client-lbnl/setup/bestman.101116122009.log
+%UCL_CWD%/srm-client-lbnl/setup/bestman.110118195109.log
+%UCL_CWD%/condor-cron/bin/condor_userlog
+%UCL_CWD%/condor-cron/sbin/condor_fetchlog
+%UCL_CWD%/condor-cron/wrappers/condor_cron_userlog
+%UCL_CWD%/condor-cron/local.uct3-edge7/log
+%UCL_CWD%/condor-cron/local.uct3-edge7/spool/job_queue.log
+%UCL_CWD%/apache/logs/error_log
+%UCL_CWD%/apache/logs/access_log
+%UCL_CWD%/apache/logs/ssl_request_log
+%UCL_CWD%/apache/logs/mod_jk.log
+%UCL_CWD%/apache/bin/xmlcatalog
+%UCL_CWD%/discovery/log
+%UCL_CWD%/gratia/var/logs/gratia-probe-pbs.log
+%UCL_CWD%/gratia/var/logs/2011-01-19.log
+%UCL_CWD%/gratia/var/logs/gratia-probe-condor.log
+%UCL_CWD%/gratia/var/logs/2011-01-20.log
+%UCL_CWD%/gratia/var/logs/2011-01-21.log
+%UCL_CWD%/gratia/var/logs/2011-01-22.log
+%UCL_CWD%/gratia/var/logs/2011-01-23.log
+%UCL_CWD%/gratia/var/logs/2011-01-24.log
+%UCL_CWD%/gratia/var/logs/2011-01-25.log
+%UCL_CWD%/gratia/var/logs/2011-01-26.log
+%UCL_CWD%/gratia/var/logs/2011-01-27.log
+%UCL_CWD%/gratia/var/logs/2011-01-18.log
+%UCL_CWD%/gratia/var/rsv/logs/2011-01-27.log
+%UCL_CWD%/gratia/var/rsv/logs/2011-01-20.log
+%UCL_CWD%/gratia/var/rsv/logs/2011-01-21.log
+%UCL_CWD%/gratia/var/rsv/logs/2011-01-22.log
+%UCL_CWD%/gratia/var/rsv/logs/2011-01-23.log
+%UCL_CWD%/gratia/var/rsv/logs/2011-01-24.log
+%UCL_CWD%/gratia/var/rsv/logs/2011-01-25.log
+%UCL_CWD%/gratia/var/rsv/logs/2011-01-26.log
+%UCL_CWD%/osg-rsv/logs/logrotate/rotate_html_files.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__gums-authorization-validator-probe@org.osg.gums.authorization-status.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__certificate-expiry-local-probe@org.osg.local.containercert-expiry.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__certificate-expiry-local-probe@org.osg.local.hostcert-expiry.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__certificate-expiry-local-probe@org.osg.local.httpcert-expiry.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__ping-host-probe@org.osg.general.ping-host.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__vo-supported-probe@org.osg.general.vo-supported.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__jobmanagers-status-probe@org.osg.batch.jobmanager-default-status.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__gratia-config-probe@org.osg.gratia.condor.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__osg-directories-permissions-ce-probe@org.osg.general.osg-directories-CE-permissions.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__gratia-config-probe@org.osg.gratia.metric.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__gratia-config-probe@org.osg.gratia.pbs.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__osg-version-probe@org.osg.general.osg-version.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__gram-authentication-probe@org.osg.globus.gram-authentication.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__jobmanagers-available-probe@org.osg.batch.jobmanagers-available.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__vdt-version-probe@org.osg.general.vdt-version.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__cacert-verify-probe@org.osg.certificates.cacert-expiry.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__crl-freshness-probe@org.osg.certificates.crl-expiry.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__gridftp-simple-probe@org.osg.globus.gridftp-simple.log
+%UCL_CWD%/osg-rsv/logs/probes/itb-dcache1.uchicago.edu__srm-ping-probe@org.osg.srm.srmping.log
+%UCL_CWD%/osg-rsv/logs/probes/itb-dcache1.uchicago.edu__srmcp-srm-probe@org.osg.srm.srmcp-readwrite.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.certificates.cacert-expiry.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.gip.consistency.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.globus.gridftp-simple.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.gip.lastrun.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.gratia.pbs.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.general.vdt-version.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.batch.jobmanagers-available.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.certificates.crl-expiry.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.general.osg-directories-CE-permissions.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.local.containercert-expiry.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.gratia.condor.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.local.hostcert-expiry.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.gratia.metric.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.general.vo-supported.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.general.osg-version.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.batch.jobmanager-default-status.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.globus.gram-authentication.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.local.httpcert-expiry.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.gip.freshness.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.general.ping-host.log
+%UCL_CWD%/osg-rsv/logs/probes/uct3-edge7.uchicago.edu__org.osg.ress.cemon-containerkeyfile-CE-permissions.log
+%UCL_CWD%/osg-rsv/logs/probes/itb-dcache1.uchicago.edu__org.osg.srm.srmping.log
+%UCL_CWD%/osg-rsv/logs/probes/itb-dcache1.uchicago.edu__org.osg.srm.srmcp-readwrite.log
+%UCL_CWD%/osg-rsv/logs/consumers/gratia-script-consumer.log
+%UCL_CWD%/osg-rsv/logs/consumers/html-consumer.log
+%UCL_CWD%/osg-rsv/logs/consumers/proxy-generator.log
+%UCL_CWD%/osg-rsv/logs/consumers/gratia-consumer.log
+%UCL_CWD%/tomcat/v55/logs/catalina.2010-11-16.log
+%UCL_CWD%/tomcat/v55/logs/localhost.2010-11-16.log
+%UCL_CWD%/tomcat/v55/logs/manager.2010-11-16.log
+%UCL_CWD%/tomcat/v55/logs/admin.2010-11-16.log
+%UCL_CWD%/tomcat/v55/logs/host-manager.2010-11-16.log
+%UCL_CWD%/tomcat/v55/logs/catalina.2010-11-28.log
+%UCL_CWD%/tomcat/v55/logs/localhost.2010-11-28.log
+%UCL_CWD%/tomcat/v55/logs/manager.2010-11-28.log
+%UCL_CWD%/tomcat/v55/logs/admin.2010-11-28.log
+%UCL_CWD%/tomcat/v55/logs/host-manager.2010-11-28.log
+%UCL_CWD%/tomcat/v55/logs/catalina.2010-11-30.log
+%UCL_CWD%/tomcat/v55/logs/localhost.2010-11-30.log
+%UCL_CWD%/tomcat/v55/logs/manager.2010-11-30.log
+%UCL_CWD%/tomcat/v55/logs/admin.2010-11-30.log
+%UCL_CWD%/tomcat/v55/logs/host-manager.2010-11-30.log
+%UCL_CWD%/tomcat/v55/logs/catalina.2010-12-02.log
+%UCL_CWD%/tomcat/v55/logs/catalina.2011-01-18.log
+%UCL_CWD%/tomcat/v55/logs/localhost.2011-01-18.log
+%UCL_CWD%/tomcat/v55/logs/manager.2011-01-18.log
+%UCL_CWD%/tomcat/v55/logs/admin.2011-01-18.log
+%UCL_CWD%/tomcat/v55/logs/host-manager.2011-01-18.log
+%UCL_CWD%/tomcat/v55/logs/catalina.2011-01-19.log
+%UCL_CWD%/tomcat/v55/logs/localhost.2011-01-19.log
+%UCL_CWD%/tomcat/v55/logs/manager.2011-01-19.log
+%UCL_CWD%/tomcat/v55/logs/admin.2011-01-19.log
+%UCL_CWD%/tomcat/v55/logs/host-manager.2011-01-19.log
+%UCL_CWD%/tomcat/v55/logs/catalina.2011-01-27.log
+%UCL_CWD%/osg/etc/log
+%UCL_CWD%/osg/etc/log/gums-host-cron.log
+%UCL_CWD%/condor/bin/condor_userlog
+%UCL_CWD%/condor/sbin/condor_fetchlog
+%UCL_CWD%/condor/local.uct3-edge7/log
+%UCL_CWD%/condor/local.uct3-edge7/spool/Accountantnew.log
+%UCL_CWD%/condor/local.uct3-edge7/spool/job_queue.log
+%UCL_CWD%/srm-tester-lbnl/setup/config.log
+%UCL_CWD%/srm-tester-lbnl/setup/bestman.110118195118.log
+</pre>
+%ENDTWISTY%
+
+%STOPINCLUDE%
+
+---+ Comments
+| PM2RPM_TASK = CE | Main.RobertEngel | 28 Aug 2011 - 06:17 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = SuchandraThapa
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+   * Local TEST_PASSED = %IN_PROGRESS%
+
+############################################################################################################
+-->
+
+%META:TOPICMOVED{by="AnneHeavey" date="1192740036" from="Integration/ITB_0_7.CELogFiles" to="Integration/ITB_0_7.ComputeElementLogFiles"}%

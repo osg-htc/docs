@@ -1,0 +1,85 @@
+%META:TOPICINFO{author="KyleGross" date="1481047984" format="1.1" version="1.18"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{%TOPIC%}%*
+%DOC_STATUS_TABLE%
+%TOC{depth="2"}%
+
+---++ About This Document
+
+%ICON{hand}% This document is intended for System Administrators or developers interested in looking at the source code for components used on the OSG.
+
+---++ OSG Related Repositories
+There are three subversion repositories that contain the pacman package files used to create the caches for the various releases.  The repositories are listed below along with the people responsible for the repositories.  Everyone has read access by default but you will need to contact the administator(s) for the repository in order to gain write access to the repository.
+
+
+%TABLE{ tableborder="1" cellpadding="0" cellspacing="1" headerbg="#99CCCC" databg="#FFFFCC, #FFFFFF"}%
+%EDITTABLE{  header="|*Repository*| *Location*|*Admin*|" format="| textarea, 1x30 | textarea, 3x50 | text, 25 |"  changerows="on" quietsave="on" editbutton="Edit table" }%
+| *Repository* | *Location* | *Admin* |
+| VTB Pacman Cache | http://vtb-svn.uchicago.edu/svn/cache/ | [[Main.SuchandraThapa][Suchandra Thapa]] |
+| ITB & OSG Pacman Cache | https://osg-svn.rtinfo.indiana.edu/softwarecache/ | [[Main.RobQ][GOC]] |
+| VDT Cache | http://vdt.cs.wisc.edu/viewsvn/ | [[Main.ScotKronenfeld][VDT]] |
+
+There is also a subversion cache for scripts that might be of use to site administrators located at 
+%TABLE{ tableborder="1" cellpadding="0" cellspacing="1" headerbg="#99CCCC" databg="#FFFFCC, #FFFFFF"}%
+%EDITTABLE{  header="|*Repository*| *Location*|*Admin*|" format="| textarea, 1x30 | textarea, 3x50 | text, 25 |"  changerows="on" quietsave="on" editbutton="Edit table" }%
+|*Repository*|*Location*|*Admin*|
+| OSG Scripts Cache | http://vtb-svn.uchicago.edu/svn/osg-repository/ | [[Main.SuchandraThapa][Suchandra Thapa]] |
+
+---++ Storage Related Repositories
+The following caches host scripts that might be useful to administrators that work with storage elements.  The current repositories listed are focused primarily on !DCache. 
+%TABLE{ tableborder="1" cellpadding="0" cellspacing="1" headerbg="#99CCCC" databg="#FFFFCC, #FFFFFF"}%
+%EDITTABLE{  header="|*Repository*| *Location*|*Admin*|" format="| textarea, 1x30 | textarea, 3x50 | text, 25 |"  changerows="on" quietsave="on" editbutton="Edit table" }%
+| *Repository* | *Location* | *Admin* |
+| UNL Dcache scripts | http://t2.unl.edu:8092/browser/dCacheNebraska/scripts | Brian Bockelman (<a href="mailto:.b.b.o.c.k.e.l.m.@.m.a.t.h">bbockelm@math</a>.unl.edu) |
+| MWT2 Repository | http://repo.mwt2.org/viewvc/admin-scripts/dcache/<br> http://repo.mwt2.org/viewvc/dCacheToolKit/ <br> http://repo.mwt2.org/viewvc/cluster-utils/ | Charles Waldman (<a href="mailto:.c.g.w.@.h.e.p">cgw@hep</a>.uchicago.edu) |
+
+
+---++ Other Repositories
+
+%STOPINCLUDE%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = SuchandraThapa
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+   * Local TEST_PASSED = %IN_PROGRESS%
+############################################################################################################
+-->

@@ -1,0 +1,128 @@
+%META:TOPICINFO{author="KyleGross" date="1481047989" format="1.1" version="1.17"}%
+%META:TOPICPARENT{name="Documentation.SecuritySiteResponsibilities"}%
+---+ *Reading Security Notifications from OSG*
+%DOC_STATUS_TABLE%
+%TOC%
+
+---++ About This Document
+This document discusses the importance of reading and keeping up-to-date on the OSG security notices that are sent out.  There is an example of what a security notice will look like, and how to check the PGP signature.
+
+---++ Read Security Notifications from OSG
+OSG sends out security notifications to all security contacts when important events occur, such as a vulnerability notice requiring a software update.  If you receive a notice you are expected to read it and the detailed information linked to a GOC ticket (if there is a link).  The OSG security team also keeps a blog of all old and current security announcements and notifications at: http://osgsec.blogspot.com/
+
+%NOTE% You will need your personal certificate that is registered with OIM in your browser in order to read the details of the notice in the ticket.
+
+Email notices will look similar to:
+
+<pre class="file">
+-------- Original Message --------
+Subject: OSG-SEC-NOTIFY-2009-06-20
+Date: Sat, 20 Jun 2009 00:22:49 +0000 (UTC)
+From: goc@OPENSCIENCEGRID.ORG
+To: goc@OPENSCIENCEGRID.ORG
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+OSG Security Contacts,
+
+The OSG Security Team wants to inform you of an increased risk to the
+OSG infrastructure. No immediate action is required. We are sharing
+this information with you so you can use it to better protect your
+systems and monitor for misuse. Details are available at:
+
+https://ticket.grid.iu.edu/goc/viewer?id=XXXX
+
+To access the above URL, you must authenticate with the certificate
+you have registered in OIM.
+
+Please contact security@opensciencegrid.org to report any security
+incidents or if you have any questions or concerns.
+
+This message is digitally signed. We encourage you to verify the
+digital signatures on OSG security announcements according to:
+
+https://twiki.grid.iu.edu/bin/view/Security/SecureEmail
+
+Sincerely,
+Jim Basney
+on behalf of the OSG Security Team
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (Darwin)
+
+iEYEARECAAYFAkpx+rwACgkQ/or7cpGJ8sJBPwCfWDBMSnANbcvtuWFU64GcUD8y
+aQ0An1Md2rB7n1tFG9IACkG7vdOP1wNj
+=jcL2
+-----END PGP SIGNATURE-----
+
+</pre>
+
+Any subsequent correspondence you have about a particular notice should include the
+OSG-SEC-NOTIFY tag in the subject line (<tt>OSG-SEC-NOTIFY-2009-06-20</tt> in the example above).
+
+As indicated, the notice should be digitally signed either as S/MIME with an X.509 certificate, or using PGP key from security@opensciencegrid.org.  If you do not know how to verify signed emails then go to [[Documentation.SecureEmail][Secure Email]] and we will explain step-by-step how to do this.
+
+Using PGP for these messages, rather than S/MIME based on grid certificates, is useful for several reasons. The PGP trust is separate from the X.509 PKI trust basis and can still be used if something compromises the PKI trust used for all grid computational transactions. Also, PGP keys do not expire in a year so you can always read old emails. You do not need to understand all these details, although you are welcome to ask questions if you wish to learn. We just expect you to be able to verify PGP encrypted or X.509 encrypted emails.  OSG security team uses PGP keys in email communications because they are easier to work with. However, at some point in time you may need to verify X.509 encrypted emails because all of the grid software is built on X.509 certificates. 
+
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesBarlow
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = IgorSfiligoi
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
+
+%META:TOPICMOVED{by="JamesBarlow" date="1273172782" from="Documentation.OSGSecurityNotifications" to="ReleaseDocumentation.OSGSecurityNotifications"}%

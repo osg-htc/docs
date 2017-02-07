@@ -1,0 +1,334 @@
+%META:TOPICINFO{author="KyleGross" date="1481047990" format="1.1" version="1.24"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{%TOPIC%}%*
+%DOC_STATUS_TABLE%
+%TOC{depth="2"}%
+
+---++ Introduction
+
+The following document explains how to use and configure pigeon tools to monitor storage elements that support a VO.
+Pigeon-tools is currently available via the VDT and will be available in the osg in 
+%RED% *osg-version 1.2* %ENDCOLOR% (or higher).  This document is aimed towards system administrators or 
+site administrators who wish to run pigeon tools using the RSV framework.
+
+Pigeon-tools is based on [[Trash/Trash/MonitoringInformation/RSV][RSV]] and will use RSV and apache to display results of storage tests.
+
+Further help can be obtained by emailing the OSG-storage mailing list.
+%INCLUDE{"Documentation/DocumentationTeam/DocConventions" section="Header"}%
+%INCLUDE{"Documentation/DocumentationTeam/DocConventions" section="CommandLine"}%
+
+---++ Requirements
+
+   * You will need to have a [[ReleaseDocumentation/UserCESimpleTest#Authentication_using_a_Grid_Proxproxy][grid proxy]] certificate signed by your VO (virtual-organization).  This is needed to access grid services.  
+   * You will need %LINK_PACMAN% installed in order to install the VDT packages.
+   * You will need to create a location for the VDT.  If you already have an existing VDT installation, you can use that.  This location will be later referred to as ==$VDT_LOCATION==.
+   * You will need to configure [[Trash/Trash/MonitoringInformation/RSV][RSV]] as part of the installation.  If you already use RSV, you can use that installation.  If you do not, instructions to configure the minimum RSV needed for pigeon is explained below under "RSV configuration".
+   * Root access is generally needed to install RSV.  This procedure assumes that your VDT installation is done as root.  Installs as a non-privileged user may be possible, but it is likely that you will need to create some directories, ports, and permissions by hand.  Dealing with these complications is out of scope for this page and further help should be obtained from the OSG mailing lists.
+
+
+---++ Pigeon Tools Installation Procedure
+
+Pigeon tools is a package of the VDT and is installed on top of [[Trash/Trash/MonitoringInformation/RSV][RSV]].  If you already have VDT installed 
+and you would like to install it in that location, perform these commands in ==$VDT_LOCATION== (after sourcing ==setup.sh==).
+
+<pre class="rootscreen">
+cd $VDT_LOCATION
+pacman -get http://software.grid.iu.edu/osg-1.2:pigeon-tools
+. setup.sh
+</pre>
+
+This step will also install [[Trash/Trash/MonitoringInformation/RSV][RSV]] as a dependency.  
+
+If this is the first VDT package you have installed, you will need to install the certificates. 
+For more information, see the [[ReleaseDocumentation/CaCertificatesInstall][CA Certificate instructions]].
+
+%INCLUDE{"ReleaseDocumentation/CaCertificatesInstall" section="LocalInstallation" INPUT_SCREEN="rootscreen"}%
+%INCLUDE{"ReleaseDocumentation/CaCertificatesInstall" section="EnableCACertificates" INPUT_SCREEN="rootscreen"}%
+ *If you are you using a pre-installed VDT, you do not enable the certificates again.*
+
+%INCLUDE{"ReleaseDocumentation/CaCertificatesInstall" section="EnableCRL" INPUT_SCREEN="rootscreen"}%
+ *If you are you using a pre-installed VDT, you do not enable the fetch-crl again.*
+
+
+---++ RSV configuration
+
+Edit ==$VDT_LOCATION/osg/etc/config.ini==.  *Note:* If you are running RSV/pigeon standalone, you will probably want to 
+use the rsv.ini instead of configuring the full config.ini as follows:
+
+<pre class="rootscreen">
+cd osg/etc
+cp rsv.ini config.ini
+vi config.ini
+configure-osg -v
+configure-osg -c
+</pre>
+
+You will need to modify the following attributes:
+
+<pre class="file">
+; The rsv_user option gives the user that the RSV service should use.  It must  ; be a valid unix user account                                                  
+rsv_user = UNIX_ACCT
+
+; This option will enable RSV record uploading to the central RSV collector at the GOC.  
+; Consider changing this to "False" so that improper pigeon results are not sent to GOC.
+enable_gratia = False
+
+; You must use a certificate with RSV.  Either you can use a service certificate
+; or a user certificate.  Using a service certificate is highly recommended
+; because it will be automatically renewed for you with each job that runs.
+;
+; To use a service certificate, set the following variables:
+use_service_cert = True
+rsv_cert_file = server_cert.pem
+rsv_key_file = server_key.pem
+rsv_proxy_out_file = where_proxy_will_go
+
+; To use a user certificate, uncomment and set the following variables:
+;use_service_cert = False
+;proxy_file=/tmp/x509_proxy_file
+</pre>
+
+You will need to designate a user account for RSV.  You will also have to designate either a service cert/key pair OR a user generated proxy file.
+If you use a proxy file, you will probably need a mechanism to automatically update it, as it will expire after some time.
+
+
+---++ Pigeon configuration
+
+Next, you will need to configure Pigeon.  
+
+<pre class="rootscreen">
+$VDT_LOCATION/vdt/setup/configure_pigeon --rsvuser %RED%rsv_user%ENDCOLOR% --vo %RED%vo_name%ENDCOLOR% --server y
+</pre>
+
+*Note: If you re-run ==configure-osg==, you may need to re-run the above command to re-enable the pigeon-consumer (which outputs the pigeon results on to the HTML page).*
+
+| *rsvuser* | daemon | The unix account that RSV and pigeon will run as. |
+| *vo* |  Engage | The name of the VO that you will query. |
+| *server* | y | Whether pigeon should be installed as a VDT service and run regularly as a cron job.  If you specify as "n", then you will need to run "vdt-control --enable pigeon-tools" later to enable the cron job, or you will need to run it manually as described below. |
+
+
+If you are interested in modifying the configuration manually.  
+You can find it in ==$VDT_LOCATION/pigeon-tools/etc/pigeon.ini==.  
+
+<pre class="file">
+vo=Engage
+timeout=120
+surl_metric=org.osg.srm.srmclient-ping
+surl_metric=org.osg.srm.srmclient-put
+surl_metric=org.osg.srm.srmclient-mv
+surl_metric=org.osg.srm.srmclient-rm
+surl_metric=org.osg.srm.srmclient-mkdir
+surl_metric=org.osg.srm.srmclient-rmdir
+turl_metric=org.osg.globus.gridftp-simple
+</pre>
+
+| *vo* | Engage | The name of the VO you would like to query.  Pigeon will find all storage elements that advertise support for this VO. |
+| *timeout* | 120 | The number of seconds that pigeon will wait before exiting long-running commands and assume failure. |
+| *surl_metric* | org.osg.srm.srmclient-ping | The name of an RSV metric that will run for each SRM surl found.  You can specify this argument multiple times as above. A list of metrics can be found at [[Trash/Trash/MonitoringInformation/RSVOwners][RSV Metrics]].|
+| *turl_metric* | org.osg.globus.gridftp-simple | The name of an RSV metric that will run for each Grid FTP url found. You can specify this argument multiple times. A list of metrics can be found at [[Trash/Trash/MonitoringInformation/RSVOwners][RSV Metrics]]. |
+
+
+
+---++ Running Pigeon
+
+Pigeon can be run manually or as a cron/condor_cron script.  
+
+Pigeon comes with a ==pigeon-tools== services.  This allows pigeon to be run nightly.  This will be enabled only if you set the server option above.  To turn on this cron job for pigeon to run nightly, execute the following command:
+<pre class="rootscreen">
+vdt-control --on pigeon-tools
+</pre>
+
+If you are ready to run pigeon right now, you can also run the tests manually.  This can be run as root or as the user specified above as the rsvuser.
+
+<pre class="rootscreen">
+$VDT_LOCATION/pigeon-tools/bin/pigeon
+</pre>
+
+Note: This will take a while to run.  It will query BDII and test each storage element returned.  This can take several hours.  
+
+---++ Viewing Pigeon Results
+
+You will need to turn on both the apache and osg-rsv services in order to see the results.  
+
+To enable these services so that they will turn on by default:
+<pre class="rootscreen">
+vdt-control --enable apache
+vdt-control --enable osg-rsv
+</pre>
+
+To turn them on right now:
+<pre class="rootscreen">
+vdt-control --on apache
+vdt-control --on osg-rsv
+</pre>
+
+
+You will be able to see the results at https://hostname.com:8443/pigeon.  Note that results may take a few minutes (up to five minutes) to show up if this is the first time you are running pigeon.
+
+Results are updated every five minutes.
+
+You should see an output that looks similar to this:
+
+     <img src="%ATTACHURLPATH%/snapshot6.png" alt="Snapshot of an example pigeon output HTML" width='90%'  />    
+
+
+---++ Debugging Information
+
+Pigeon prints out information to stdout.  If this does not help, you may need to see the !RSV logs.
+These can be found in ==$VDT_LOCATION/osg-rsv/logs/probes==.  
+
+There will be a output and error file for each host/probe combination, for instance: ==gw014k1.fnal.gov:8443__org.osg.srm.srmping.log==.
+
+You can also look at the consumer logs (which are the processes that create the html pages and gratia records) at
+==$VDT_LOCATION/osg-rsv/logs/consumers==.
+
+---+++ Common Problems
+
+   * No html pages: Run ==condor_cron_q== and see if the html-consumer and pigeon-consumer are running.  If a long run-time shows up next to html-consumer, try running ==vdt-control --off== followed by ==vdt-control --on== to restart it.
+   * No pigeon-consumer exists: re-run the ==configure_pigeon== commands.
+   * Permission issues: ==$VDT_LOCATION/osg-rsv/output== and its sub directories should be owned by the rsvuser.  If not, you may see permission problems in the logs.
+   * Directories missing in osg-rsv: Verify config.ini entries and re-run ==configure-osg -c==.  Then, re-run ==configure_pigeon==.
+
+
+---+++!!Screen Dump of the Complete Install Process
+%TWISTY{
+mode="div"
+showlink="Show..."
+hidelink="Hide"
+showimgleft="%ICONURLPATH{toggleopen-small}%"
+hideimgleft="%ICONURLPATH{toggleclose-small}%"
+}%
+
+
+<pre class="rootscreen">
+[root@gw014k1 local]# mkdir vdt-rsv
+[root@gw014k1 local]# cd vdt-rsv
+[root@gw014k1 vdt-rsv]# pacman -get http://software.grid.iu.edu/osg-1.2:pigeon-tools
+Do you want to add [http://osg-vtb.uchicago.edu/vtb/] to [trusted.caches]? (y/n/yall): yall
+Beginning VDT prerequisite checking script vdt-common/vdt-prereq-check...
+
+All prerequisite checks are satisfied.
+
+
+
+========== IMPORTANT ==========
+Most of the software installed by the VDT *will not work* until you install
+certificates.  To complete your CA certificate installation, see the notes
+in the post-install/README file.
+
+
+
+
+Pacman Installation of OSG RSV Complete
+[root@gw014k1 vdt-rsv]# . setup.sh
+[root@gw014k1 vdt-rsv]# cp osg/etc/rsv.ini osg/etc/config.ini
+[root@gw014k1 vdt-rsv]# vi osg/etc/config.ini
+[root@gw014k1 vdt-rsv]# vdt-ca-manage setupca --location local --url osg
+Setting up CA Certificates for VDT installation at '/usr/local/vdt-rsv'
+CA Certificates will be installed into /usr/local/vdt-rsv/globus/share/certificates
+
+Setup completed successfully.
+[root@gw014k1 vdt-rsv]# vdt-control --enable vdt-update-certs
+running 'vdt-register-service --name vdt-update-certs --enable'... ok
+[root@gw014k1 vdt-rsv]# vdt-control --enable fetch-crl
+running 'vdt-register-service --name fetch-crl --enable'... ok
+[root@gw014k1 vdt-rsv]# configure-osg -v
+Using /usr/local/vdt-rsv/osg/etc/config.ini for configuration information
+Configuration verified successfully
+[root@gw014k1 vdt-rsv]# configure-osg -c
+Using /usr/local/vdt-rsv/osg/etc/config.ini for configuration information
+running 'vdt-register-service --name vdt-rotate-logs --enable'... ok
+INFO: Resetting all metrics and consumers to disabled because --reset was supplied
+INFO: Configuring RSV to use a user proxy.
+Enabling consumers: html-consumer gratia-consumer
+Enabling default metrics of type 'OSG-SRM' for host 'gw014k1.fnal.gov:8443'
+Enabling default metrics of type 'OSG-SRM' for host 'fndca1.fnal.gov:8443'
+running 'vdt-register-service --name condor-cron --enable'... ok
+Configure-osg completed successfully
+[root@gw014k1 vdt-rsv]# vdt/setup/configure_pigeon --rsvuser rsvuser --vo Engage --server y
+Setting cron for 23 5 * * *
+[root@gw014k1 vdt-rsv]# vdt-control --on
+enabling cron service vdt-rotate-logs... ok
+enabling init service condor-cron... ok
+enabling cron service fetch-crl... ok
+enabling cron service vdt-update-certs... ok
+enabling init service apache... ok
+enabling init service osg-rsv... ok
+enabling cron service pigeon-tools... ok
+[root@gw014k1 vdt-rsv]# pigeon
+Querying BDII for SEs for VO Engage...
+Found 16 SEs
+Querying BDII for GridFTP servers for VO Engage...
+Found 32 SEs
+Monitoring SE Firefly (ff-se.unl.edu)
+source /usr/local/vdt-rsv/setup.sh; rsv-control -r -u ff-se.unl.edu:8443 --no-ping --extra-config-file /tmp/pigeon.ABOmoW.ini org.osg.srm.srmclient-ping
+Probe Successfully Ran.  See HTML page for results.
+source /usr/local/vdt-rsv/setup.sh; rsv-control -r -u ff-se.unl.edu:8443 --no-ping --extra-config-file /tmp/pigeon.ABOmoW.ini org.osg.srm.srmclient-put
+Probe Successfully Ran.  See HTML page for results.
+source /usr/local/vdt-rsv/setup.sh; rsv-control -r -u ff-se.unl.edu:8443 --no-ping --extra-config-file /tmp/pigeon.ABOmoW.ini org.osg.srm.srmclient-rm
+Probe Successfully Ran.  See HTML page for results.
+source /usr/local/vdt-rsv/setup.sh; rsv-control -r -u ff-se.unl.edu:8443 --no-ping --extra-config-file /tmp/pigeon.ABOmoW.ini org.osg.srm.srmclient-mkdir
+...
+
+</pre>
+%ENDTWISTY%
+
+---++ *Comments*
+| PM2RPM_TASK = RSV | Main.RobertEngel | 28 Aug 2011 - 06:19 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = DouglasStrain
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = TanyaLevshina
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = NehaSharma
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+%META:FILEATTACHMENT{name="snapshot6.png" attachment="snapshot6.png" attr="" comment="This is a snapshot of an example pigeon output HTML" date="1295883969" path="snapshot6.png" size="78834" stream="snapshot6.png" tmpFilename="/usr/tmp/CGItemp24896" user="X509_2fDC_3dorg_2fDC_3ddoegrids_2fOU_3dPeople_2fCN_3dDoug_20Strain_20834323" version="1"}%

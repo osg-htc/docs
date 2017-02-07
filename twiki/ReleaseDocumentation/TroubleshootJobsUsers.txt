@@ -1,0 +1,312 @@
+%META:TOPICINFO{author="KyleGross" date="1481047991" format="1.1" version="1.9"}%
+%DOC_STATUS_TABLE%
+
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+This document is mean for people attempting to submit jobs to Open Science Grid (OSG) sites, when the jobs are failing. It only addresses issues regarding basic running of jobs, and not data transfer or storage. There is a [[TroubleshootingJobsAdmins][companion document for system administrators who are helping users debug why jobs won't run at their site.]]
+
+---++First step: Let us know!
+A number of users have had problems getting jobs running at sites. We don't want you to suffer, and we consider fixing this sort of problem to be very high priority. Please contact our trained operators who are standing by waiting to assist you [[https://ticket.grid.iu.edu/goc/open][via a handy web form]]. If you can do any of the debugging steps that follow, please describe the results: they will be invaluable.
+
+The GOC will work with you and the system administrators of the problem sites to debug the problem as quickly as possible. The GOC may request help from members of the OSG troubleshooting team. 
+
+---++ Summary of Debugging
+   1. vdt-version
+   1. condor_version
+   1. globus-version
+   1. grid-proxy-info
+   1. voms-proxy-info -all
+   1. globusrun -a -r _sitename_
+   1. globus-job-run _sitename_/jobmanager-fork /bin/hostname
+
+---++ What software are you using?
+What software are you using? If you are using the VDT, please run the following command to get specific information:
+
+<pre>vdt-version</pre>
+
+If you are using Condor-G, please run this command:
+
+<pre>condor_version</pre>
+
+If you are using Globus, please run this command:
+
+<pre>globus-version</pre>
+
+---++ What is your identity?
+If you are using grid-proxy-init to create your grid proxy, please run the following command (note that the output is example output only):
+<pre>
+> grid-proxy-info
+subject  : /DC=org/DC=doegrids/OU=People/CN=Alain Roy
+424511/CN=801637001
+issuer   : /DC=org/DC=doegrids/OU=People/CN=Alain Roy 424511
+identity : /DC=org/DC=doegrids/OU=People/CN=Alain Roy 424511
+type     : Proxy draft (pre-RFC) compliant impersonation proxy
+strength : 512 bits
+path     : /tmp/x509up_u8471
+timeleft : 11:59:54
+</pre>
+
+If you are using voms-proxy-init to create your grid proxy, please run the following command (note that the output is example output only):
+
+<pre>
+> voms-proxy-info -all
+WARNING: Unable to verify signature! Server certificate possibly not
+installed.
+Error: Cannot find certificate of AC issuer for vo nanohub
+subject   : /DC=org/DC=doegrids/OU=People/CN=Alain Roy 424511/CN=proxy
+issuer    : /DC=org/DC=doegrids/OU=People/CN=Alain Roy 424511
+identity  : /DC=org/DC=doegrids/OU=People/CN=Alain Roy 424511
+type      : proxy
+strength  : 512 bits
+path      : /tmp/x509up_u8471
+timeleft  : 11:59:51
+=== VO nanohub extension information ===
+VO        : nanohub
+subject   : /DC=org/DC=doegrids/OU=People/CN=Alain Roy 424511
+issuer    : /DC=org/DC=doegrids/OU=Services/CN=host/fermigrid2.fnal.gov
+attribute : /nanohub/Role=NULL/Capability=NULL
+timeleft  : 11:59:51
+</pre>
+
+*Don&rsquo;t worry:* You can ignore that "WARNING" and "Error" that voms-proxy-init printed: it's not a worry here.
+
+*Hint:* Some OSG sites *require* that you use a VOMS proxy instead of a basic grid proxy. For example, Fermilab either requires a VOMS proxy or special permission to use a grid proxy. In addition, as of this writing (28-April-28), Fermilab cannot recognize VOMS proxies derived from certificates granted by the Purdue CA
+
+---++ Can you connect?
+
+Can you connect to the gatekeeper using telnet? If the gatekeeper isn't listening, you see a message like this:
+
+<pre>
+> telnet vdt-fc4-ia32 2119
+Trying 192.168.0.205...
+telnet: connect to address 192.168.0.205: Connection refused
+telnet: Unable to connect to remote host: Connection refused
+</pre>
+
+---++  Can you be authenticated and authorized?
+Try to run the following command, which contacts Globus GRAM 2 (the software that accepts job submissions) and asks for authorization but doesn't actually run a job.
+
+<pre>
+<b>Command:</b>
+globusrun -a -r <i>sitename</i>
+
+<b>Example:</b>
+> globusrun -a -r vdt-rhas3-ia32.cs.wisc.edu
+
+GRAM Authentication test successful
+</pre>
+
+If it fails, you might see output like this:
+
+<pre>
+> globusrun -a -r vdt-rhas3-ia32
+
+GRAM Authentication test failure: connecting to the job manager
+failed.  Possible reasons: job terminated, invalid job contact,
+network problems, ...
+</pre>
+
+Common reasons for failure include:
+
+   * The site is down.
+   * The site doesn't recognize the CA that granted your certificate. (This is an authentication failure.)
+   * The site's certificate revocation list for your CA that granted your certificate has expired. (This is an authentication failure.)
+   * Your clock isn't synchronized with the site's clock. The best solution is to make sure that both your computer and the remote site are running NTP.
+   * The site can't authorize you. (You're not in the grid-mapfile, or in GUMS.) 
+
+If the remote site has a GridFTP server on the same computer as the gatekeeper, you can often get better error messages for authentication and authorization failures from globus-url-copy. For example, if the remote site doesn't recognize your CA:
+
+<pre>
+> globus-url-copy gsiftp://vdt-rhas3-ia32/etc/motd file:///home/roy/motd
+
+error: globus_ftp_control_client.c:globus_l_ftp_control_send_cmd_cb:2748:
+gss_init_sec_context failed
+GSS Major Status: Authentication Failed
+init_sec_context.c:gss_init_sec_context:190:
+SSLv3 handshake problems
+globus_i_gsi_gss_utils.c:globus_i_gsi_gss_handshake:889:
+Unable to verify remote side's credentials
+globus_i_gsi_gss_utils.c:globus_i_gsi_gss_handshake:862:
+SSLv3 handshake problems: Couldn't do ssl handshake
+OpenSSL Error: s3_clnt.c:842: in library: SSL routines, function SSL3_GET_SERVER_CERTIFICATE: certificate verify failed
+globus_gsi_callback.c:globus_gsi_callback_handshake_callback:531:
+Could not verify credential
+globus_gsi_callback.c:globus_i_gsi_callback_cred_verify:681:
+Can't get the local trusted CA certificate: 
+Cannot find issuer certificate for local credential with subject: 
+/DC=org/DC=doegrids/OU=Services/CN=vdt-rhas3-ia32.cs.wisc.edu
+</pre>
+
+If you aren't in the grid-mapfile:
+
+<pre>
+> globus-url-copy gsiftp://vdt-rhas3-ia32/etc/motd file:///home/roy/motd
+
+error:
+globus_ftp_client_state.c:globus_l_ftp_client_connection_error:4105:
+the server responded with an error
+530 530-Login incorrect. :
+gridmap.c:globus_l_gss_assist_gridmap_lookup:2035:
+530-Gridmap lookup failure: Could not map /DC=org/DC=doegrids/OU=People/CN=Alain Roy 424511
+530-
+530 End.
+</pre>
+
+If you are mapped to a user that doesn't exist:
+
+<pre>
+globus-url-copy gsiftp://vdt-rhas3-ia32/etc/motd file:///home/roy/motd
+
+error: globus_ftp_client_state.c:globus_l_ftp_client_connection_error:4105:
+the server responded with an error
+530 530-Login incorrect. : globus_i_gfs_data.c:globus_l_gfs_data_authorize:1050:
+530-Mapped user 'royy' is invalid.
+530 End.
+</pre>
+
+If it connects and appears to "hang", you've leanred that the gatekeeper is alive and listening. In some rare circumstances, you might see an error message printed out. If so, that information is invaluable, but this is rare. This happens if xinetd is unable to start up the gatekeeper process at all: perhaps the executable is missing, or it cannot find some shared libraries. 
+
+---++ Can you run a simple fork job?
+Try to run a simple GRAM 2 (a.k.a pre-web services) job that runs on the gatekeeper. A successful run will look something like this:
+
+<pre>
+<b>Command:</b>
+globus-job-run <i>sitename</i>/jobmanager-fork /bin/hostname
+
+<b>Example:</b>
+> globus-job-run vdt-rhas3-ia32/jobmanager-fork /bin/hostname
+vdt-rhas3-ia32
+</pre>
+
+Common reasons for failure include:
+
+   * You are not authorized to run a job (either you are not in the grid-mapfile, or in GUMS. See above for more details.
+   * The local site didn't create a user for you on the system, even though they decided what user name you should have. Sometimes the error for this looks like:
+<pre>
+> globus-job-run  vdt-rhas3-ia32/jobmanager-fork /bin/hostname
+GRAM Job submission failed because the gatekeeper failed to run the job manager (error code 47)
+</pre>
+   * You don't have a home directory on the gatekeeper. Sometimes the error for this looks like:
+<pre>
+> globus-job-run  vdt-rhas3-ia32/jobmanager-fork /bin/hostname
+GRAM Job submission failed because the job manager failed to create an internal script argument file (error code 22)
+</pre>
+   * The program doesn't exist. Sometimes the error for this looks like:.
+<pre?
+      > globus-job-run  vdt-fc3-ia32/jobmanager-fork /bin/nonexistent_program
+      GRAM Job failed because the executable does not exist (error code 5)
+</pre>
+
+---++ Can you run a simple batch job?
+
+Try to run a simple GRAM 2 (a.k.a pre-web services) job that runs on on a worker node. A successful run will look something like this:
+
+<pre>
+<b>Command:</b>
+globus-job-run <i>sitename</i>/<jobmanager> /bin/hostname
+
+<b>Example:</b>
+> globus-job-run vdt-rhas3-ia32/jobmanager-condor /bin/hostname
+node-0018
+</pre>
+
+An example failure caused by Condor being down at the remote site:
+
+<pre>
+> globus-job-run vdt-rhas3-ia32/jobmanager-condor /bin/hostname
+
+ERROR: Can't find address of local schedd
+GRAM Job failed because the job failed when the job manager attempted to run it (error code 17)
+</pre>
+
+Common reasons for failure include:
+
+   * If your job doesn't complete before you give up, the batch system might be very busy or you might have very low priority.
+   * If the job just fails, the batch system at the site may be misconfigured.
+   * Some sites require that you specify a queue name, and the default queue may not be appropriate. You can specify a queue in your Condor-G submit file with:
+<pre>
+globus_rsl=(queue=somequeuename)
+</pre>
+There currently isn't a nice way to get a list of available queues at a site, but you probably need to contact the site directly. Don't worry about Condor sites: they don't use separately named queues. 
+
+---++ Does Condor-G fail when Globus commmands succeed?
+
+Condor-G exercises the GRAM protocol more than most globus-job-run or globusrun invocations. In particular, it requires that more network ports be open: if either your site or the remote site has a firewall blocking these ports, Condor-G will fail when the Globus command succeed. If you find that you can use globus-job-run but not Condor-G, this is likely to be your problem.
+
+The cause of the problem is that Globus on the remote site needs to contact Condor-G, and a firewall that blocks incoming connections prevents that connection from being made. (It's also possible that a firewall at the remote site blocks outgoing connections, but that's much less likely.) This firewall might be on the local computer (perhaps with iptables), or it might be "in the network".
+
+To solve the problem, you need to punch a hole in the firewall. You need a port range with at least three ports per user that might use Condor-G. For example, if you have ten people that might submit jobs via Condor-G, you'll need at least thirty ports in the port range. (Note that a user is a unique DN, not a unique user id.)
+
+Once you have the port range, you need to change the Condor configuration for the condor_gridmanager component. For example, if the port range is 8000-8029, you would set:
+
+<pre>
+GRIDMANAGER.IN_LOWPORT = 8000
+GRIDMANAGER.IN_HIGHPORT = 8029
+</pre>
+After changing this configuration, restart Condor.
+%STOPINCLUDE%
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.AlainRoy - 20 Nov 2007 %BR%
+%REVIEW%
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = BrianBockelman
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = User
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = Scientist
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Troubleshooting
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = RobertEngel
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %NO%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = MarcoMambelli
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->

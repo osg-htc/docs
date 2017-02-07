@@ -1,0 +1,131 @@
+%META:TOPICINFO{author="KyleGross" date="1481047986" format="1.1" version="1.10"}%
+%META:TOPICPARENT{name="GridColombiaWorkshop2009"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%DOC_STATUS_TABLE%
+
+---++ Introduction
+See Trash.Trash/IntegrationCertScripts for information about all this.
+
+
+---++ Example user certificate request & retrieval
+
+   * Setup the osg-client: <pre>
+source /opt/client/setup.sh
+</pre>
+   * Then follow the instructions in Trash.IntegrationCertScripts  (=cert-request --ou p=, and answer questions). When it asks you to input your sponsor's name, email, phone, use me as your sponsor:<pre>
+input your email address: rwg@uchicago.edu
+input your complete phone number: 312-804-0859
+input your sponsor's name: Rob Gardner
+input your sponsor's email address: rwg@uchicago.edu
+input your sponsor's phone number: 312-804-0859
+</pre>
+   * Then, for the registration authority, choose OSG:<pre>Choose a registration authority to which you are affiliated.
+If nothing else applies, pick OSG.
+_Enter__this____for this registration authority
+	ANL	 Argonne National Lab
+	ESG	 Earth System Grid
+	ESnet	 DOE Science network
+	FNAL	 Fermilab host and service certificates
+	FusionGRID	 National Fusion Collaboratory Project
+	LBNL	 Berkeley Lab
+	LCG	 LHC Computing Grid Catchall
+	NERSC	 computer center
+	ORNL	 Oak Ridge National Lab
+	OSG	 Open Science Grid (choose this if nothing else applies)
+	PNNL	 Pacific Northwest National Lab
+(choose from left column): OSG</pre>
+   * And for the VO, choose OSGEDU.
+   * You'll get an email when its approved, with a serial number (eg. 37709)
+   * Then retrieve it with: =cert-retrieve --serialnum 37709 --p12 usercert.p12=
+
+---++ PKCS12 format
+   * If you did not user the =--p12= option with the =cert-retrieve= command you can still generate a PKCS12 format file with the openssl command.
+   * You'll need a version of your certificate to insert into your browser.
+   * Do this: =openssl pkcs12 -export -in usercert.pem -inkey userkey.pem -out usercert.p12=
+   * Import the =usercert.p12= into your browser
+
+
+---++ Example host and http service certificate request
+   * Here is a (dryrun) example to request a host certificate (courtesy Steve Timm):
+<verbatim>
+$ cert-request --dryrun --agree --ou s --name "Steven C Timm" \
+      --host gc1-ce --email timm@fnal.gov --phone 630-840-8525 \
+      --reason "Colombia Grid School" --affiliation osg --vo osgedu -dir .
+</verbatim>
+   * Remove the =-dryrun= and then the cert request will be submitted.
+   * To request an  httpd service, add =--service http=.
+
+
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% Main.RobGardner - 27 Oct 2009 %BR%
+%REVIEW%
+
+%TWISTY{%TWISTY_OPTS_REVIEW%}%
+Why is this document even there. Is it designed to be an example common usecase invocation for the cert-request command. 
+I would recommend removing this page.
+We should probably include contents from it as an example in [[CertificateGetCmd]]
+%ENDTWISTY%
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesBarlow
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = AnandPadmanabhan
+
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %NO%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = MineAltunay
+
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+
+-->
+
+%META:TOPICMOVED{by="RobGardner" date="1256672623" from="ReleaseDocumentation.GridUserCertificateRequestTutorial" to="ReleaseDocumentation.GridCertificateRequestTutorial"}%

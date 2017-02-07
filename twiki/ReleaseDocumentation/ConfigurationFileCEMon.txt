@@ -1,0 +1,31 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1261171188" format="1.1" reprev="1.1" version="1.1"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+%EDITTHIS%
+%BR%
+
+---++ Introduction
+%NOTE% This only applies to OSG 1.2 or later
+
+This section gives information on the cemon settings and probes.
+
+---++ Options
+
+| Option | Values Accepted | Explanation |
+| *enabled* | =True= , =False= | This should be set to True if gratia should be configured and enabled on the installation being configured |
+| *ress_servers* | String | This should be set to the !ReSS servers that the installation should report information to.  This should be formatted as server_url[FORMAT],server_url2[FORMAT] where FORMAT is the !CEMon format to use for reporting.  The format for is OLD_CLASSAD for most !ReSS servers. E.g. for production resources this might be =https://osg-ress-1.fnal.gov:8443/ig/services/CEInfoCollector[OLD_CLASSAD]= |
+| *bdii_servers* | String | This should be set to the BDII servers that the installation should report information to.  This should be formatted as server_url[FORMAT],server_url2[FORMAT] where FORMAT is the !CEMon format to use for reporting.  The format is RAW for most !BDII servers. E.g. for production resources this might be =http://is1.grid.iu.edu:14001[RAW], http://is2.grid.iu.edu:14001[RAW]= |
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE2% %BR%
+%RESPONSIBLE% Main.SuchandraThapa - 18 Dec 2009 %BR%
+%REVIEW%
+
+---++ Comments
+%COMMENT{type="tableappend"}%

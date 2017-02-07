@@ -1,0 +1,26 @@
+%META:TOPICINFO{author="RobGardner" date="1248194992" format="1.1" reprev="1.9" version="1.9"}%
+%META:TOPICPARENT{name="SiteValidationTable"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+
+The Fermilab VO acceptance tests are continuously run against both the OSG production and integration sites.  The latest results for the OSG integration sites are available at:
+
+http://fermigrid.fnal.gov/monitor/fermigrid0-fermilab-vo-integration-monitor-summary.html
+
+The only failure we saw was against BNL_ITB_Test1 where we were unable to
+globus-url-copy back the file that we put there.  This is due to a recent change in 
+Keith's DN such that his DN mapped to a different pool account than it did previously
+and he could no longer write his test directory.  We do not consider this a barrier
+to deployment of the new release.
+
+Fermilab VO does not test SE's, except for the one we run on our own site.
+
+-- Keith and Steve 
+
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE%  Main.KeithChadwick %BR%
+%REVIEW% Main.IwonaSakrejda - 21 Jul 2009  %BR%
+%REVFLAG% %X% %BR%
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%

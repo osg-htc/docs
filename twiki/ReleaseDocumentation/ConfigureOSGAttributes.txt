@@ -1,0 +1,533 @@
+%META:TOPICINFO{author="KyleGross" date="1481047985" format="1.1" version="1.82"}%
+%META:TOPICPARENT{name="ComputeElementInstall"}%
+%DOC_STATUS_TABLE%
+
+---+ !! How to Configure the Virtual Data Toolkit
+%TOC%
+
+---+ About this Document
+<!-- conventions used in this document
+   * Local UCL_CWD  = /opt/osg-%VERSION%
+   * Local UCL_HOST = ce
+-->
+
+%ICON{hand}% This document is for System Administrators. The procedure to configure an installation of the %LINK_VDT% is presented and all configuration variables will be introduced.
+
+%STARTINCLUDE%
+
+%STARTSECTION{"ConfigurationProcedure"}%
+---%SHIFT%+ Configuration Procedure
+
+The procedure to configure an installation of the %LINK_VDT% consists of three steps:
+
+   1 edit the configuration file =%UCL_CWD%/osg/etc/config.ini=
+   1 verify the configuration file =%UCL_CWD%/osg/etc/config.ini= using =%UCL_CWD%/osg/bin/configure-osg=
+   1 run the configuration script =%UCL_CWD%/osg/bin/configure-osg=
+
+The final steps are:
+
+   * set attributes in =config.ini= as described below
+   * run post installation for standard services (GIP, Gratia, CEMon, Authentication, RSV, and WS-GRAM)
+   * configure any optional services (Squid, <nop>MonALISA)
+   * copy =%UCL_CWD%/osg/etc/locations/grid3-locations.txt= to =$OSG_APP/etc/grid3-locations.txt= 
+%ENDSECTION{"ConfigurationProcedure"}%
+
+%STARTSECTION{"EditConfigFile"}%
+---%SHIFT%++ Edit the Configuration File
+
+Syntax and formatting rules for the configuration file can be found [[ConfigurationFileFormat][here]]. An exhaustive discussion of configuration options can be found in the [[ConfigurationFileHelp][reference guide]]. Refer to the [[QuickInstallGuide][Quick Install Guide]] for a minimal number of changes required for =config.ini=.
+
+---%SHIFT%+++ Default Information
+
+The first section in the configuration file =%UCL_CWD%/osg/etc/config.ini= is used to specify default attributes to be used in the remainder of the file. Please fill in the fully qualified domain name of your resource and the administrator e-mail.
+
+%TWISTY{%TWISTY_OPTS_MORE%}%
+%CODE{"scheme"}%
+[DEFAULT]
+; Use this section to define variables that will be used in other sections
+; For example, if you define a variable called dcache_root here
+; you can use it in the gip section as %(dcache_root)s  (e.g.
+; my_vo_1_dir = %(dcache_root)s/my_vo_1
+; my_vo_2_dir = %(dcache_root)s/my_vo_2
+
+; Defaults, please don't modify these variables
+unavailable = UNAVAILABLE
+default = UNAVAILABLE
+
+; Name these variables disable and enable rather than disabled and enabled
+; to avoid infinite recursions
+disable = False
+enable = True
+
+; You can modify the following and use them
+localhost = %UCL_HOST_FQDN%
+admin_email = admin@%UCL_HOST_FQDN%
+%ENDCODE%
+%ENDTWISTY%
+
+---%SHIFT%+++ Site Information
+
+The attributes in the section labeled =[Site Information]= require that you registered your resource with the %LINK_OIM%. All attributes in this section are required and must be set.
+
+%ICON{hand}% The =latitude= and =longitude= for your resource location can be found using this [[http://www.earthtools.org/][external tool]] not affiliated with the %LINK_OSG%.
+
+%TWISTY{%TWISTY_OPTS_MORE%}%
+%CODE{"scheme"}%
+[Site Information]
+; The group option indicates the group that the OSG site should be listed in,
+; for production sites this should be OSG, for vtb or itb testing it should be
+; OSG-ITB
+;
+; YOU WILL NEED TO CHANGE THIS
+group = OSG-ITB
+
+; The host_name setting should give the host name of the CE  that is being
+; configured, this setting must be a valid dns name that resolves
+;
+; YOU WILL NEED TO CHANGE THIS
+host_name = %(localhost)s
+
+; The resource setting should be set to the same value as used in the OIM
+; registration at the goc
+;
+; YOU WILL NEED TO CHANGE THIS
+resource = LIGO_CIT
+
+
+; The resource_group setting should be set to the same value as used in the OIM
+; registration at the goc
+;
+; YOU WILL NEED TO CHANGE THIS
+resource_group = LIGO-CIT-ITB
+
+; The sponsor setting should list the sponsors for your cluster, if your cluster
+; has multiple sponsors, you can separate them using commas or specify the
+; percentage using the following format 'osg, atlas, cms' or
+; 'osg:10, atlas:45, cms:45'
+;
+; YOU WILL NEED TO CHANGE THIS
+sponsor = LIGO
+
+; The site_policy setting should give an url that lists your site's usage
+; policy
+site_policy = %(unavailable)s
+
+; The contact setting should give the name of the admin/technical contact
+; for the cluster
+;
+; YOU WILL NEED TO CHANGE THIS
+contact = <Full Name of System Administrator>
+
+; The email setting should give the email address for the technical contact
+; for the cluster
+;
+; YOU WILL NEED TO CHANGE THIS
+email = %(admin_email)s
+
+; The city setting should give the city that the cluster is located in
+;
+; YOU WILL NEED TO CHANGE THIS
+city = Pasadena
+
+; The country setting should give the country that the cluster is located in
+;
+; YOU WILL NEED TO CHANGE THIS
+country = USA
+
+; The longitude setting should give the longitude for the cluster's location
+; if you are in the US, this should be negative
+; accepted values are between -180 and 180
+;
+; YOU WILL NEED TO CHANGE THIS
+longitude = -118.123874
+
+; The latitude setting should give the latitude for the cluster's location
+; accepted values are between -90 and 90
+;
+; YOU WILL NEED TO CHANGE THIS
+latitude = 34.13647
+%ENDCODE%
+%ENDTWISTY%
+
+
+---%SHIFT%+++ Batch System Information
+
+The configuration file contains sections for each supported batch system. Please fill in the information for the batch system used on your resource.
+
+%WARNING% If no batch system is enabled, the current release of =configure-osg= will fail to configure the CE and not give you any warning or indication of this!
+
+%TWISTY{%TWISTY_OPTS_MORE%}%
+%CODE{"scheme"}%
+[PBS]
+; This section has settings for configuring your CE for a PBS job manager
+
+; The enabled setting indicates whether you want your CE to use a PBS job
+; manager
+; valid answers are True or False
+enabled = %(disable)s
+
+; The home setting should give the location of the pbs install directory
+home = %(unavailable)s
+
+; The pbs_location setting should give the location of pbs install directory
+; This should be the same as the home setting above
+pbs_location = %(home)s
+
+; The job_contact setting should give the contact string for the jobmanager
+; on this CE (e.g. host.name/jobmanager-pbs)
+job_contact = %(localhost)s/jobmanager-pbs
+
+; The util_contact should give the contact string for the default jobmanager
+; on this CE (e.g. host.name/jobmanager)
+util_contact = %(localhost)s/jobmanager
+
+; The wsgram setting should be set to True or False depending on whether you
+; wish to enable wsgram on this CE
+wsgram = %(disable)s
+
+[Condor]
+; This section has settings for configuring your CE for a Condor job manager
+
+; The enabled setting indicates whether you want your CE to use a Condor job
+; manager
+; valid answers are True or False
+enabled = %(disable)s
+
+; The condor_location setting should give the location of condor install directory
+condor_location = %(unavailable)s
+
+; The condor_location setting should give the location of condor config file,
+; This is typically  etc/condor_config within the condor install directory.
+; If you leave this set to %(unavailable)s, configure-osg will attempt to
+; determine the correct value.
+condor_config = %(unavailable)s
+
+; The job_contact setting should give the contact string for the jobmanager
+; on this CE (e.g. host.name/jobmanager-condor)
+job_contact = %(localhost)s/jobmanager-condor
+
+; The util_contact should give the contact string for the default jobmanager
+; on this CE (e.g. host.name/jobmanager)
+util_contact = %(localhost)s/jobmanager
+
+; The wsgram setting should be set to True or False depending on whether you
+; wish to enable wsgram on this CE
+wsgram = %(disable)s
+
+[SGE]
+; This section has settings for configuring your CE for a SGE job manager
+
+; The enabled setting indicates whether you want your CE to use a SGE job
+; manager
+; valid answers are True or False
+enabled = %(disable)s
+
+; The sge_root setting should give the location of sge install directory
+;
+; The VDT will bootstrap your SGE environment by sourcing
+;   $SGE_ROOT/$SGE_CELL/common/settings.sh
+; where $SGE_ROOT and $SGE_CELL are the values given for sge_root and sge_cell.
+sge_root = %(unavailable)s
+
+; The sge_cell setting should be set to the value of $SGE_CELL for your SGE
+; install.
+sge_cell = %(unavailable)s
+
+
+; The job_contact setting should give the contact string for the jobmanager
+; on this CE (e.g. host.name/jobmanager-sge)
+job_contact = %(localhost)s/jobmanager-sge
+
+; The util_contact should give the contact string for the default jobmanager
+; on this CE (e.g. host.name/jobmanager)
+util_contact = %(localhost)s/jobmanager
+
+; The wsgram setting should be set to True or False depending on whether you
+; wish to enable wsgram on this CE
+wsgram = %(disable)s
+
+[LSF]
+; This section has settings for configuring your CE for a LSF job manager
+
+; The enabled setting indicates whether you want your CE to use a LSF job
+; manager
+; valid answers are True or False
+enabled = %(disable)s
+
+; The home setting should give the location of the lsf install directory
+home = %(unavailable)s
+
+; The lsf_location setting should give the location of lsf install directory
+; This should be the same as the home setting above
+lsf_location = %(home)s
+
+; The job_contact setting should give the contact string for the jobmanager
+; on this CE (e.g. host.name/jobmanager-lsf)
+job_contact = %(localhost)s/jobmanager-lsf
+
+; The util_contact should give the contact string for the default jobmanager
+; on this CE (e.g. host.name/jobmanager)
+util_contact = %(localhost)s/jobmanager
+
+; The wsgram setting should be set to True or False depending on whether you
+; wish to enable wsgram on this CE
+wsgram = %(disable)s
+
+[Managed Fork]
+; The enabled setting indicates whether managed fork is in use on the system
+; or not. You should set this to True or False
+enabled = %(disable)s
+%ENDCODE%
+%ENDTWISTY%
+
+---%SHIFT%+++ Accounting and Information Services
+
+The =[Gratia]= and =[CEMon]= sections configure accounting and information services respectively.  For each finished grid job on your %LINK_GLOSSARY_CE%, Gratia sends a record to the central OSG server; this ensures usage of your site gets fairly accounted for.  CEMon will periodically run a software called GIP, saving the resulting information about your site, and uploading it to various servers.
+
+
+---%SHIFT%++++ CEMon
+
+The =[Cemon]= section in the resource configuration file =%UCL_CWD%/osg/etc/config.ini= defines variables =ress_servers= and =bdii_servers=. The default values are chosen according to your type of installation and do not require to be changed.
+
+
+---%SHIFT%++++ Gratia
+
+The =[Gratia]= section in the resource configuration file =%UCL_CWD%/osg/etc/config.ini= contains the =probes= attribute which can be used to define the list of probes to be run. The default values are chosen according to your type of installation and do not require to be changed.
+
+
+---%SHIFT%+++ Storage Information
+
+Use the =[Storage]= section to define the mass storage provided by your site.
+
+   * =grid_dir=: the top-level directory of the worker node client on the worker nodes.
+   * =app_dir=: shared directory where VO applications will be installed; also known as $OSG_APP
+   * =data_dir=: shared directory where VOs may save their data files; also known as $OSG_DATA
+   * =worker_node_tmp=: location of a non-shared directory on the worker nodes where VOs can write their scratch files; also known as $OSG_WN_TMP
+
+%TWISTY{%TWISTY_OPTS_MORE%}%
+%CODE{"scheme"}%
+[Storage]
+;
+; Several of these values are constrained and need to be set in a way
+; that is consistent with one of the OSG storage models
+;
+; Please refer to the OSG release documentation for an indepth explanation
+; of the various storage models and the requirements for them
+
+; If you have a SE available for your cluster and wish to make it available
+; to incoming jobs, set se_available to True, otherwise set it to False
+se_available = %(disable)s
+
+; If you indicated that you have an se available at your cluster, set default_se to
+; the hostname of this SE, otherwise set default_se to UNAVAILABLE
+default_se = %(unavailable)s
+
+; The grid_dir setting should point to the directory which holds the files
+; from the OSG worker node package, it should be visible on all of the computer
+; nodes (read access is required, worker nodes don't need to be able to write)
+; 
+; YOU WILL NEED TO CHANGE THIS
+grid_dir = %(unavailable)s
+
+; The app_dir setting should point to the directory which contains the VO
+; specific applications, this should be visible on both the CE and worker nodes
+; but only the CE needs to have write access to this directory
+; 
+; YOU WILL NEED TO CHANGE THIS
+app_dir = /mnt/nfs/osg/app
+
+; The data_dir setting should point to a directory that can be used to store
+; and stage data in and out of the cluster.  This directory should be readable
+; and writable on both the CE and worker nodes
+; 
+; YOU WILL NEED TO CHANGE THIS
+data_dir = /mnt/nfs/osg/data
+
+; The worker_node_temp directory should point to a directory that can be used
+; as scratch space on compute nodes, it should allow read and write access on the
+; worker nodes but can be local to each worker node
+; 
+; YOU WILL NEED TO CHANGE THIS
+worker_node_temp = /tmp
+
+; The site_read setting should be the location or url to a directory that can
+; be read to stage in data, this is an url if you are using a SE
+; 
+; YOU WILL NEED TO CHANGE THIS
+site_read = %(unavailable)s
+
+; The site_write setting should be the location or url to a directory that can
+; be write to stage out data, this is an url if you are using a SE
+;
+; YOU WILL NEED TO CHANGE THIS
+site_write = %(unavailable)s
+%ENDCODE%
+%ENDTWISTY%
+
+If you'll be advertising an SE associated with your resource, you should make sure to add the [[GipConfiguration#StorageElementConfiguration][appropriate entries]] to your ini file as well.
+%ENDSECTION{"EditConfigFile"}%
+
+%STARTSECTION{"VerifyConfigFile"}%
+---%SHIFT%++ Verify the Configuration File
+
+Here we assume that you have completed the previous step to edit the configuration file. Before you proceed you should verify the new configuration file using =configure-osg=:
+
+<pre class="screen">
+%UCL_PROMPT% configure-osg -v
+Using %UCL_CWD%/osg/etc/config.ini for configuration information
+Configuration verified successfully
+</pre>
+
+%NOTE% Inspect the terminal output and the log file =%UCL_CWD%/vdt-install.log= in case of errors!
+%ENDSECTION{"VerifyConfigFile"}%
+
+%STARTSECTION{"RunConfigFile"}%
+---%SHIFT%++ Run the Configuration Script
+
+If the configuration file was successfully verified in the previous step, you can proceed to configure the installation:
+
+<pre class="rootscreen">
+%UCL_PROMPT% configure-osg -c
+</pre>
+
+%TWISTY{%TWISTY_OPTS_OUTPUT%}%
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% configure-osg -c
+Using %UCL_CWD%/osg/etc/config.ini for configuration information
+running 'vdt-register-service --name gums-host-cron --enable'... ok
+running 'vdt-register-service --name edg-mkgridmap --disable'... ok
+The following consumer subscription has been installed:
+	HOST:    http://is-itb2.grid.iu.edu:14001
+	TOPIC:   OSG_CE
+	DIALECT: RAW
+
+running 'vdt-register-service --name tomcat-55 --enable'... ok
+running 'vdt-register-service --name apache --enable'... ok
+The following consumer subscription has been installed:
+	HOST:    http://is-itb1.grid.iu.edu:14001
+	TOPIC:   OSG_CE
+	DIALECT: RAW
+
+running 'vdt-register-service --name tomcat-55 --enable'... ok
+running 'vdt-register-service --name apache --enable'... ok
+The following consumer subscription has been installed:
+	HOST:    https://osg-ress-4.fnal.gov:8443/ig/services/CEInfoCollector
+	TOPIC:   OSG_CE
+	DIALECT: OLD_CLASSAD
+
+running 'vdt-register-service --name tomcat-55 --enable'... ok
+running 'vdt-register-service --name apache --enable'... ok
+running 'vdt-register-service --name vdt-rotate-logs --enable'... ok
+running 'vdt-register-service --name mysql5 --enable'... ok
+running 'vdt-register-service --name gsiftp --enable'... ok
+Configure-osg completed successfully
+</pre>
+%ENDTWISTY%
+
+%NOTE% The script will append log messages to =%UCL_CWD%/vdt-install.log=. Providing the =-d= command line option switches on debugging messages to be written to the log file.
+
+%NOTE% Each successful execution of the =configure-osg= script will update following files:
+
+   * =%UCL_CWD%/osg/etc/osg-attributes.conf=
+   * =%UCL_CWD%/osg/etc/osg-job-environment.conf=
+   * =%UCL_CWD%/osg/etc/osg-local-job-environment.conf=
+%ENDSECTION{"RunConfigFile"}%
+
+<!--
+---+!! Advanced Topics
+
+
+Feedback from reviewer was that they found this section confusing and unnecessary, especially in the install documents.  Commenting it out so we can review things later; at the least, the migration steps aren't going to work.
+
+ Typical Workflows 
+
+There are three typical use cases for using the configure-osg script:  moving/upgrading an existing installation, configuring a brand new installation,  modifying the configuration of a working installation.  The workflows for these three cases are listed here.
+
+   * *Moving/upgrading an existing installation* not configured using configure-osg
+      * Source =setup.sh= from the new installation
+      * export OLD_VDT_LOCATION pointing to source installation.
+      * Extract the old configuration by running =configure-osg -e= . This will produce a configuration file, =extracted-config.ini=.
+      * Edit the extracted-config.ini to correct any mistakes, change any references to the original installation, and to add any missing options.  Then backup =$OSG_LOCATION/osg/etc/config.ini=, and then copy =extracted-config.ini= to =$OSG_LOCATION/osg/etc/config.ini=
+      * <b>Test</b> the configuration by running =configure-osg -v=. 
+      * Configure the new installation by running =configure-osg -c=
+   * *Moving/upgrading an existing installation* configured using configure-osg
+      * Source =setup.sh= from the new installation
+      * Locate the ini file used to configure the old installation and copy it to =$OSG_LOCATION/osg/etc/config.ini=
+      * Change any path references in the config.ini from the old installation location to the current installation location
+      * <b>Test</b> the configuration by running =configure-osg -v=. 
+      * Configure the new installation by running =configure-osg -c=
+   * *Configuration of a brand new installation*:
+      * Source =setup.sh= from the new installation
+      * Create or copy a  =$VDT_LOCATION/osg/etc/config.ini= with information that is required for your site 
+      * <b>Test</b> the configuration by running =configure-osg -v=.
+      * Configure the new installation by running =configure-osg -c=
+   * *Modify the configuration* of a working installation
+      * edit =$VDT_LOCATION/osg/etc/config.ini= file with changes (e.g. new SE, number of nodes in cluster, ...)
+      * <b>Test</b> the configuration by running =configure-osg -v=.
+      * Configure the new installation by running =configure-osg -c= 
+-->
+
+%STOPINCLUDE%
+
+---+ Comments
+| PM2RPM_TASK = CE&#60;br /&#62; | Main.RobertEngel | 28 Aug 2011 - 06:18 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = AlainRoy
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = SuchandraThapa
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+ 
+-->
+
+%META:TOPICMOVED{by="ForrestChristian" date="1166046785" from="Integration.ConfigureOSGAttributes050" to="Integration/ITB_0_5.ConfigureOSGAttributes"}%

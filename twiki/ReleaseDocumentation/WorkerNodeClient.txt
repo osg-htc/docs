@@ -1,0 +1,260 @@
+%META:TOPICINFO{author="KyleGross" date="1481047992" format="1.1" version="1.81"}%
+%DOC_STATUS_TABLE%
+
+---+!! Worker Node Client Installation
+%TOC%
+
+---+ About this Document
+
+<!-- conventions used in this document
+   * Local UCL_CWD  = %URLPARAM{"INPUT_CWD" encode="quote" default="/opt/osg-%VERSION%"}%
+   * Local UCL_HOST = %URLPARAM{"INPUT_HOST" encode="quote" default="wn"}%
+   * Local UCL_USER = %URLPARAM{"INPUT_USER" encode="quote" default="user"}%
+   * Local UCL_DOMAIN = %URLPARAM{"INPUT_DOMAIN" encode="quote" default="opensciencegrid.org"}%
+   * Local UCL_CONFIG = =%UCL_CWD%/osg/etc/config.ini=
+-->
+
+%ICON{hand}% This document is for System Administrators. It contains the instructions to install the Worker Node Client package.
+
+%INCLUDE{"Documentation/DocumentationTeam/DocConventions" section="Header"}%
+%INCLUDE{"Documentation/DocumentationTeam/DocConventions" section="CommandLine"}%
+
+---+ What is the Worker Node Client and When do you need it?
+
+The worker node client package contains grid tools used by jobs running on the worker nodes of a cluster. It must be installed on all worker nodes that may execute jobs associated with a %LINK_GLOSSARY_CE%. It is also required on the %LINK_GLOSSARY_GATEKEEPER% if grid users are allowed to submit jobs to %LINK_GLOSSARY_GRAM% using the =fork= job manager.
+
+%NOTE% A worker node will _only_ require a grid certificate if [[ReleaseDocumentation/WorkerNodeClient#About_gLexec][gLexec]] is required to be used.
+
+
+---+ Requirements
+
+   1 new System Administrators should read the [[ReleaseDocumentation/SitePlanning][Site Planning Guide]]
+   1 verify that your Operating System is [[http://vdt.cs.wisc.edu/releases/2.0.0/requirements.html][supported]]
+   1 a %LINK_PACMAN% installation of version %PACMAN_VERSION% or later
+   1 allow outgoing network connection _from every worker node_ for a =local= installation
+   1 allow outgoing network connection _from the installation host_ for a =shared= installation only
+
+
+---+ How to get Help?
+
+To get assistance please use [[HelpProcedure][this page]]. 
+
+
+---+ Installation Procedure
+
+   1 choose between a =local= installation on a single worker node and a =shared= installation on a network file system that is shared by several worker nodes
+   1 create an installation directory
+   1 use %LINK_PACMAN% to install the Worker Node Client Package
+   1 install the [[Documentation/GlossaryC#DefsCA][CA Certificates]] and the %LINK_GLOSSARY_CRL%
+
+%NOTE% The =shared= installation must be carried out only once and provides the worker node client to all worker nodes using a network file system. A =local= installation requires the installation procedure to be carried out on every worker node individually. The procedures do not differ in both cases.
+
+%IMPORTANT% If you are installing this package on a head node / compute element where an OSG CE install will also be done afterwards, it is recommended that you log out and log back in before continuing with the main OSG CE Install, otherwise all the wn-client stuff will be in your path and confuse the installation scripts. *Never mix the environment of two VDT installations*.
+
+---++ Installation Options
+
+   * =local= installation if support for *gLexec* is required.  Perform the following installation steps on every worker node.
+   * =shared= installation on a network file system serving a homogeneous set of worker nodes.  Perform the following installation steps on just one node in a partition that is NFS-exported to all worker nodes.
+
+%NOTE% Choose a _common_ path on all worker nodes in case of a =local= installation! 
+
+
+---++ Create the Installation Directory
+
+Create an empty installation directory and change into it. Make sure the directory is world readable if the installation is to be shared by grid users: 
+
+<pre class="rootscreen">
+[root@%UCL_HOST% ~]$ mkdir -p %UCL_CWD%
+[root@%UCL_HOST% ~]$ cd %UCL_CWD%
+[root@%UCL_HOST% %UCL_CWD%]$ ln -s %UCL_CWD% %UCL_CWD%/../osg
+</pre>
+
+%WARNING% Please don't directly use a system directory like =/opt= or =/usr= here. The installation routine will create many sub-directories in the install directory chosen.
+
+
+---++ Use Pacman to Install the Worker Node Client
+
+In the next step we will use the =pacman= command line tool to install the package from the OSG software cache. %LINK_PACMAN% will ask whether you want to "trust the caches and accept the license", answer =yall= and =y= to install the Worker Node Client.
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% pacman -get %CACHE%:wn-client
+Do you want to add [%CACHE%] to [trusted.caches]? (y/n/yall): %RED%yall%ENDCOLOR%
+...
+</pre>
+
+%TWISTY{%TWISTY_OPTS_OUTPUT%}%
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% pacman -get %CACHE%:wn-client
+Do you want to add [%CACHE%] to [trusted.caches]? (y/n/yall): %RED%yall%ENDCOLOR%
+Beginning VDT prerequisite checking script vdt-common/vdt-prereq-check...        
+
+All prerequisite checks are satisfied.
+                                                          
+========== IMPORTANT ==========
+Most of the software installed by the VDT *will not work* until you install
+certificates.  To complete your CA certificate installation, see the notes
+in the post-install/README file.
+                                           
+The OSG Worker Node Client package OSG version %VERSION% has been installed.
+</pre>
+%ENDTWISTY%
+
+%NOTE% Depending on your network connection and hardware capabilities the installation process will take between 2 and 10 minutes to complete. Meanwhile you can =tail= the main installation logfile =%UCL_CWD%/vdt-install.log=.
+
+%WARNING% Do not continue if the pacman command indicated an error! In this case review the main installation log file and consult the [[ReleaseDocumentation/HelpProcedure][help page]].
+
+---++ Update the Environment
+
+Depending on your shell update your environment by sourcing =%UCL_CWD%/setup.sh= or =%UCL_CWD%/setup.csh=:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% . %UCL_CWD%/setup.sh
+</pre>
+
+Depending on your preference you might want to optionally include the setup script in your system or user profile.
+
+
+<!-- How to install and handle CA Certificates and the CRL on storage and worker nodes -->
+%INCLUDE{"ReleaseDocumentation/CaCertificatesInstall" section="CACertificatesOnNodes" TOC_SHIFT=""}%
+
+---+ Activate and Deactivate Services
+
+No running services are necessary for %LINK_GLOSSARY_WN% functions. The following step is required to keep the %LINK_GLOSSARY_CA% distribution (including the %LINK_GLOSSARY_CRL%) current. The =fetch-crl= and =vdt-update-certs= services must be only on the node owning the CA Package installation which depends on the option chosen in the [[#CA_Certificates_Installation_on][installation above]].
+
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="EnableService" TOC_SHIFT="+" INPUT_SERVICE="fetch-crl vdt-update-certs"}%
+
+---++ Enable Log-file Rotation (Optional)
+
+Optionally enable the rotation of all log-files using =vdt-control=:
+
+<pre class="screen">
+%UCL_PROMPT% vdt-control --enable vdt-rotate-logs
+</pre>
+
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="Activate" TOC_SHIFT="+" INPUT_SERVICE="" }%
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="Deactivate" TOC_SHIFT="+" INPUT_SERVICE="" }%
+
+---+ Advanced Installation Options
+
+---++ About gLexec 
+
+*gLexec* is a software package provided by the %LINK_VDT% version >= 1.8.0 optionally to be installed on worker nodes of resources on the %LINK_OSG%. It allows one user to execute programs on the behalf of another user while running on a worker node.
+
+This functionality is required for _pilot jobs_. A %LINK_GLOSSARY_VO% may submit pilot jobs utilizing one %LINK_GLOSSARY_DN%. The pilot job will later _call back_ to the Virtual Organization requesting a job to be executed on the waiting pilot. In which case the pilot job used the users credentials to authenticate him and authorize him to execute the job on the worker node.
+
+Instructions on how to install and configure gLexec can be found [[ReleaseDocumentation/GlexecInstall][here]]. 
+
+---++ Automation of the Installation Process
+
+The Worker Node Client installation process can be automated for many installation scenarios by defining following environment variables on the command line before the =pacman= command will be involved:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% export VDTSETUP_AGREE_TO_LICENSES=y
+%UCL_PROMPT_ROOT% export VDTSETUP_EDG_CRL_UPDATE=n
+%UCL_PROMPT_ROOT% export VDTSETUP_ENABLE_ROTATE=n
+%UCL_PROMPT_ROOT% export VDTSETUP_CA_CERT_UPDATER=n
+</pre> 
+
+%INCLUDE{"ReleaseDocumentation/CaCertificatesInstall" section="MultipleVdtInstall" TOC_SHIFT=""}%
+
+%INCLUDE{"ReleaseDocumentation/CaCertificatesInstall" section="CondorSpecialRequirements" TOC_SHIFT=""}%
+
+<!--
+long-standing GLOBUS_LOCATION problem now fixed in vdt 1.8.1/osg 0.7.0 and
+greater.  S. Timm 10/4/07
+%IMPORTANT% A side effect of the worker node client as currently configured, is that $GLOBUS_LOCATION can and does wind up in a different location on the head node than it does on the worker node.  The environment at the beginning of the job will give you $GLOBUS_LOCATION on the head node.  You have to source =$OSG_GRID/setup.sh= to get where $GLOBUS_LOCATION is available to you on the worker node. %BR% %BR%   To avoid this, it is required to add an appropriate softlink on every worker node such that $GLOBUS_LOCATION as defined on the head node points to the place where it is located on the worker node after the wn client installation. E.g., CMS analysis jobs submitted via Resource Broker will presently fail without this softlink. %RED% It has been claimed that in OSG 0.8.0/VDT 1.8.x, the vdt-job-environment routines which are called by the Globus jobmanager.pm to 
+insert all the OSG variables into the job environment, will fix the $GLOBUS_LOCATION too, but in fact the problem still persists.%ENDCOLOR%.
+-->
+
+<!--
+
+Installation of the worker node client package does imply maintenance of the certificates that it installs.  
+It is possible to rsync either the full worker node client package to the worker nodes, or just the
+CA certificate directory found in $VDT_LOCATION/globus/TRUSTED_CA.  This eliminates the 
+need to do multiple pacman updates every time a new CA-Certificates package comes out, which 
+is on the average of every couple of months.  
+
+It is not enough to rsync the OSG CE installation, or NFS-mount it to the worker nodes.  The Worker 
+Node client package now contains software that is not in the base OSG CE installation and VO's are
+expecting it to be there, so it must be made available somewhere.
+
+Doing anything automatically on the worker nodes requires care.  An example script that looks to see what worker nodes on a cluster using pbsnodes is attached to this page.  It can be edited or replaced with a more general version to match your specific cluster conditions.  Note that the example script does not use the batch system itself, but uses a feature of the local batch scheduler to avoid trying to push certificates to worker nodes that are down and to build a list of operating nodes to receive the update.  To use this script with the greatest amount of integration into existing certificate update procedures, it can be called just after the edg-fetch-crl call in the edg/sbin/edg-crl-upgrade script that should be in the edg/sbin area of your OSG VDT installation.  Example code to do so would look like:
+%RED% These instructions are obsolete from osg 0.6.0 and greater because they refer to adding code to the now-obsolete edg-crl-upgrade script.  A new wn-cert-sync package is in 
+preparation currently and should be released soon %ENDCOLOR%
+<pre class="programlisting">
+# Add section to upgrade the worker nodes:
+    if [ -x $VDT_LOCATION/edg/sbin/wn-cert-sync ]; then
+        $VDT_LOCATION/edg/sbin/wn-cert-sync -l $CRL_UPGRADE_PATH -q
+    else
+        echo "In edg-crl-upgrade: Worker node certificates not synchronized! "
+    fi
+</pre>
+
+where =wn-cert-sync= is a soft link to your particular cluster's worker node certificate synchronization script, as in the example attached. (Customize one to your cluster configuration.)
+   * This issue deserves further discussion and repair in the current OSG releases.
+-->
+
+---+ Comments
+| I tested these instructions for WN Client installed on SL5.4 x86_64 without gLexec and using CA certificates from a different installation, and had no problems. | Main.DougOlson | 17 Nov 2010 - 22:09 |
+| PM2RPM_TASK = WNCLIENT | Main.RobertEngel | 28 Aug 2011 - 05:50 |
+| PM2RPM_TASK = CE | Main.RobertEngel | 28 Aug 2011 - 06:13 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = MarcoMambelli
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+%META:TOPICMOVED{by="ForrestChristian" date="1166058606" from="Integration.WorkerNodeClient050" to="Integration/ITB_0_5.WorkerNodeClient"}%

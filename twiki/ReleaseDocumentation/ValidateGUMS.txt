@@ -1,0 +1,120 @@
+%META:TOPICINFO{author="KyleGross" date="1481047991" format="1.1" version="1.27"}%
+%META:TOPICPARENT{name="SiteValidationTable"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%DOC_STATUS_TABLE%
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+%EDITTHIS%
+%BR%
+
+%TWISTY{%TWISTY_OPTS_REVIEW%}%
+* why is this a stand-alone-document not part of the installation instructions?
+* ST--there used to be a whole Validation section as part of the Trash/Trash/Integration web which got shoved into the ReleaseDocumentation web as part of an earlier doc release, the osg 1.0 release I think.  The Validate documents used to be worked through one by one by the ITB sites and they would have to check off a table to say they completed the validation.
+* what documents include this document?
+* Strike all references to CompatibilityAuthPreconfig.. ST
+%ENDTWISTY%
+
+---++ GUMS server
+ *Note:* This only applies if you are using the [[FullPrivPreConfig][Full Privilege Authorization]]  or  the [[Trash.ReleaseDocumentationCompatibilityAuthPreConfig][Compatibility Authorization]] mode.
+
+
+ On your GUMS server, run <pre>
+$VDT_LOCATION/tomcat/v55/webapps/gums/WEB-INF/scripts/gums-add-mysql-admin "{Your user DN}"
+</pre>
+
+ With your user certificate loaded in your browser, use the Administration interface at <pre>https://hostname:port/gums</pre> 
+   * Check <b> Summary </b> link on navigation panel and review results
+   * Select <b> Update V0 Members </b> and check for errors and updates in <pre>$VDT_LOCATION/tomcat/v55/logs/gums-service-admin.log</pre> 
+
+---++ CE GUMS-client 
+ *Note:* This only applies if you are using the [[FullPrivPreConfig][Full Privilege Authorization]] mode.
+
+
+   * Check that the server is pointed to in $VDT_LOCATION/gums/config/gums-client.properties
+   * For use of gums to maintain grid-mapfile:
+      * execute <pre class="screen"> gums-host-cron --gumsdebug</pre>  Look for error messages or premature termination.
+      * Review those files created and documented in [[https://twiki.grid.iu.edu/twiki/bin/view/ReleaseDocumentation/ComputeElementInstall#Identifying_the_OSG_VOs_your_CE][OSG_VOs on CE]], namely:<pre>
+       /etc/grid-security/grid-mapfile
+       $VDT_LOCATION/osg/etc/osg-user-vo-map.txt
+       $VDT_LOCATION/osg/etc/osg-undefined-accounts.txt
+       $VDT_LOCATION/osg/etc/osg-supported-vos-list.txt 
+</pre>
+   * GT2 prima callout
+      * get a voms-proxy
+      * submit a job using globus-job-run
+      * review $VDT_LOCATION/globus/var/globus-gatekeeper.log file for <b>PRIMA INFO</b> records associated with job. Should find records to identify the GUMS server contacted, the User DN, and local account assigned
+      * can crosscheck the GUMS server response in $VDT_LOCATION/tomcat/v55/logs/gums-service-admin.log using timestamps
+   * GT4 prima callout
+      * get a voms-proxy
+      * submit a job using globusrun-ws
+      * review $VDT_LOCATION/globus/var/container-real.log file for <b>PRIMA GT4 AUTHORIZATION</b> records associated with job. Should find records to identify the GUMS server, the user DN, and local account assigned 
+      * can crosscheck the GUMS server response in $VDT_LOCATION/tomcat/v55/logs/gums-service-admin.log using timestamps
+   * If these tests succeed, make %Y% entry in the validation table for your site.
+
+
+%STOPINCLUDE%
+
+---++ *Comments*
+| References to compatibility authorization mode in this doc. should be deleted. | Main.StevenTimm | 30 Sep 2010 - 20:34 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = TerrenceMartin
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = SuchandraThapa
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %NO%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = SuchandraThapa
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->
+
+
+
+%META:TOPICMOVED{by="AnneHeavey" date="1192748792" from="Integration/ITB_0_7.ValGUMS" to="Integration/ITB_0_7.ValidateGUMS"}%

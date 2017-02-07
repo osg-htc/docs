@@ -1,0 +1,232 @@
+%META:TOPICINFO{author="KyleGross" date="1481047987" format="1.1" version="1.30"}%
+%META:TOPICPARENT{name="ComputeElementInstall"}%
+%DOC_STATUS_TABLE%
+
+---+!! Local Authorization Guide
+%TOC{}%
+
+---+ About this Document
+
+<!-- useful variable definition
+   * Local UCL_CWD = /opt/osg-%OSG_VERSION%
+   * Local UCL_SERVICE = edg-mkgridmap
+   * Local UCL_HOST = server
+-->
+
+%ICON{hand}% This document is for System Administrators. It describes how to set up local authorization for a %LINK_GLOSSARY_CE% _or_ %LINK_GLOSSARY_SE% using *edg-mkgridmap*. This service creates the =/etc/grid-security/grid-mapfile= by querying VOMS servers.
+
+%NOTE% Alternatively [[ReleaseDocumentation/InstallConfigureAndManageGUMS][GUMS]] can be used for authorization!
+
+---+ Introduction
+
+%TWISTY{%TWISTY_OPTS_REVIEW%}%
+   * you use authorization and authentication throughout the text, have a look at http://en.wikipedia.org/wiki/Authentication#Authentication_vs._authorization *FIXED*
+   * the ugly Twiki names as this AboutAuthorizationForCE should never appear in the text, but be made proper links such as this [[ReleaseDocumentation/AboutAuthorizationForCE][here]], it is shorter and hides the mess of document naming that was created in the Twiki
+   * the file output below clearly belongs in the configuration section of the document, not in the introduction
+   * watch language: "You are a small site ...". I know what you want to say, but in terms of language your sentence makes no sense, because the reader is not a small site.
+   * ask yourself what question the reader might have reading a paragraph and provide links to further reading, such as:
+      * What other forms of authentication exist? -> GUMS
+      * What is a gatekeeper, CE, SE? -> %LINK_GLOSSARY_GATEKEEPER%, %LINK_GLOSSARY_CE%, %LINK_GLOSSARY_SE%
+      * What is authentication and how does it differ from authorization? -> http://en.wikipedia.org/wiki/Authentication#Authentication_vs._authorization
+      * ...
+   * I add section how to activate and deactivate service, because it was missing in the document
+   * link to VO and VOMS in Glossary
+   * make file output fit a standard screen width. I read at 1920 pixels width and I still can't get the output to fit my screen. 
+%ENDTWISTY%
+
+It is necessary to enable some mode of authorization before you can successfully run the OSG configuration script.  There is no mode of authorization that is enabled by default.  This section of the document describes how to enable the Local Authorization mode. There is more background information about the other privilege modes [[AboutAuthorizationForCE][here]].   If you wish to enable a different mode, please consult [[FullPrivPreConfig][Full Privilege authorization page]]. The Local Authorization mode uses an ASCII file called a grid-mapfile to make all decisions about authorization. With this mode it is not possible to correctly implement role-based authorization for Virtual Organizations, and difficult to implement VO Groups correctly. This  document provides a short guide to the steps that are necessary to perform for this mode before you run the OSG configuration utility.
+
+Local authorization is the preferred method for:
+
+   * small sites using a single %LINK_GLOSSARY_GATEKEEPER%
+   * sites providing access to a small set of static %LINK_GLOSSARY_VO%s
+   * sites that do not require to support _role-based_ authorization
+
+---+ Configuration
+
+   1 enable gridmap authorization in =%UCL_CWD%/osg/etc/config.ini=
+   1 adjust the list of supported %LINK_GLOSSARY_VO%s
+   1 add local users to the gridmap file
+
+---++ Enable Gridmap Authorization
+
+Edit the =[Misc Services]= section in =%UCL_CWD%/osg/etc/config.ini= and choose *gridmap* for _authorization_method_:
+
+<pre class="file">
+[Misc Services]
+
+; This setting should be set to one of the following, gridmap, prima, xacml 
+; to indicate whether gridmap files, prima callouts, or prima callouts with xacml
+; should be used
+authorization_method = gridmap
+</pre>
+
+
+---++ Adjust the List of supported Virtual Organizations
+
+By default _all_ virtual organizations registered and approved by the %LINK_OSG% are listed in the _default configuration file_ generated at =$VDT_LOCATION/edg/etc/edg-mkgridmap.conf= during the installation of *edg-mkgridmap*. Please review the entries in =$VDT_LOCATION/edg/etc/edg-mkgridmap.conf= and comment out entries of all virtual organizations that you don't want to access your resource:
+
+The syntax of the *edg-mkgridmap* configuration file is documented [[http://vdt.cs.wisc.edu/extras/edg-mkgridmap.conf.html][here]].
+
+The following is a snippet of the =edg-mkgridmap.conf= file with some brief comments related to the syntax.
+
+%TWISTY{%TWISTY_OPTS_REVIEW%}%
+   * please document the syntax of the configuration file outside the file example.
+   * then show one or more examples illustrating what you want to say
+   * the file output below now has two comments (#,__), which make this really difficult to read
+%ENDTWISTY%
+
+<pre class="file">
+__Comment lines start with "#" as in a shell script.__  
+#### GROUP: group URI [lcluser] #      
+__"# USER-VO-MAP" line has special significance in OSG:      - the 1st and 2nd tokens after this string are the subgroup and VO respectively      - it then shows the  VO administrator, VO admin email address)__ 
+# USER-VO-MAP cdf CDF -- 1 -- Gabriele Compostella (compostella@tn.infn.it)      
+__1st token indicates 'group' accounts are used     2nd token (starts with "vomss:") - specifies the  web services address of this VO's VOMS service     3rd token - specifies the 'group' account assigned each member; here it is "cdf"__ 
+group vomss://voms.cnaf.infn.it:8443/voms/cdf cdf      
+__Note that for Fermilab VO the support center is used__ 
+# USER-VO-MAP fermilab FERMILAB -- 2 -- Fermilab Grid Support Center (helpdesk-admin@fnal.gov) group vomss://voms.fnal.gov:8443/voms/fermilab fermilab   :     
+__Some VO's may have multiple VOMS lines__ 
+# USER-VO-MAP usatlas ATLAS -- 10 -- (usatlas-support-l@lists.bnl.gov) 
+#group vomss://vo.racf.bnl.gov:8443/voms/atlas?/atlas/usatlas usatlas1 
+#group vomss://vo.racf.bnl.gov:8443/voms/atlas?/atlas/usatlas usatlas2 
+#group vomss://vo.racf.bnl.gov:8443/voms/atlas?/atlas/usatlas usatlas3    :  
+</pre>
+
+The syntax of the =# USER-VO-MAP= line is significant for OSG accounting and monitoring to be effective. If you have not already done so, read the [[OsgSupportedVos][OSG Supported VOs]] topic *now*.
+
+---++ Add Local Users to the Gridmap File
+
+You probably want to keep some portion of your current =grid-mapfile= (at least your own entry) as locally known users so that you won't get locked out should there be a problem with a VOMS server.
+
+You can accomplish this by adding the following directive to the end of the =edg-mkgridmap.conf= file.
+
+<pre class="file">
+#### GMF_LOCAL: gmf_local grid-mapfile-local 
+gmf_local   /etc/grid-security/grid-mapfile-local 
+</pre>
+
+The local entries from this file are added to the actual =/etc/grid-security/grid-mapfile= every time the cron script is executed. A couple of key points about this file and the entry shown above:
+   * In the configuration file, the location of the local grid-mapfile must contain the fully qualified path 
+   * The location and name of the local file shown in above is just a recommendation. You can keep it anywhere and name it anything. 
+   * The syntax of the =grid-mapfile-local= is the same as the real =grid-mapfile= 
+   * Any =gmf_local= directive(s) *must* (otherwise they could get overwritten) be the last entries in the =edg-mkgridmap.conf= file. 
+
+---++ GRAM Service Configuration
+
+%LINK_GLOSSARY_GRAM% is a service provided on a %LINK_GLOSSARY_CE% that accepts jobs by grid users and submits them to the underlying local batch system. The %LINK_GLOSSARY_GRID_PROXY% of the user is _mapped_ to a local Unix account using the PRIMA libraries. Jobs are then run in the batch system using this Unix account.
+
+No configuration changes are needed. The Globus gatekeeper will automatically use the =/etc/grid-security/grid-mapfile=.
+
+---++ WS-GRAM Service Configuration
+
+%LINK_GLOSSARY_GRAM_WS% is the web-service implementation of %LINK_GLOSSARY_GRAM% and provides identical functionality. The default authorization mode for WS_GRAM is Local. No configuration changes are needed. 
+
+---++ WS-GRAM services sudoers file
+
+Pre-WS-GRAM and WS-GRAM use two different mechanisms to switch to the appropriate local user.
+
+The <i>pre-WS</i> GRAM processes run as privileged user (root) and can, therefore, change to any local unprivileged user. This mechanism, however, may present security risks: bugs in the code, which runs as root, may be exploited to gain privileged access to the machine.
+
+To mitigate this risk, WS-GRAM processes run as an unprivileged user (either <b>globus</b> or <b>daemon</b>, depending on the local configuration). In order for these users to be able to switch to another local unprivileged user, though, the local =sudo= service must be appropriately configured. The configuration requires editing the =/etc/sudoers= file manually.  
+
+In =$VDT_LOCATION/post-install/README=, the section <i>Globus-Base-WSGRAM-Server</i> describes the modifications to =/etc/sudoers= necessary for the web services GRAM to function properly.  To facilitate the necessary modification, the =configure-osg= script produces the necessary additions for the =/etc/sudoers= file and writes them into a new file =$VDT_LOCATION/monitoring/sudo-example.txt= . The administrator should simply copy and paste the content of that file into the =/etc/sudoers= file using =visudo=.
+*Note the following:*
+   * You __must__ use the same authorization mode for pre-ws and web services.
+   * This must be done manually.
+   * The path defined in =/etc/sudoer= cannot be soft links. Use full paths only. Therefore, if you have your $VDT_LOCATION (e.g. /opt/local/ce-1.0/) soft linked from a generic directory (e.g. /opt/local/ce), it is the explicit path (e.g. ce-1.0) that *must* used in the =/etc/sudoers= file. If you install another version of the software into a different directory, you must change the =/etc/sudoers= to reflect the new installation since making a softlink will not work.
+   * Use the =visudo= command to modify the =/etc/sudoers= file. 
+   * Beware of extra whitespace when modifying the =sudoers= file, especially at the end of a line.
+
+Make these changes now, keeping in mind the user under which VDT determined your container will run.
+
+In the example (for Local/Gridmap mode) that follows, the web services user is the _daemon_ user and the real path to the VDT_LOCATION is =/usr/local/osg-ce=:
+<pre class="file">
+Runas_Alias GLOBUSUSERS = ALL, !root  
+daemon ALL=(GLOBUSUSERS)          \
+NOPASSWD: /usr/local/osg-ce/globus/libexec/globus-gridmap-and-execute       \
+   -g /etc/grid-security/grid-mapfile          /usr/local/osg-ce/globus/libexec/globus-job-manager-script.pl *  
+daemon ALL=(GLOBUSUSERS)         \
+ NOPASSWD: /usr/local/osg-ce/globus/libexec/globus-gridmap-and-execute         \
+ -g /etc/grid-security/grid-mapfile          /usr/local/osg-ce/globus/libexec/globus-gram-local-proxy-tool * 
+</pre>
+
+---+ Enable the Service
+
+<pre class="rootscreen">%UCL_PROMPT_ROOT% vdt-control --enable edg-mkgridmap </pre>
+
+To manually create a new =/etc/grid-security/grid-mapfile= use:
+
+<pre class="rootscreen">%UCL_PROMPT_ROOT% $VDT_LOCATION/edg/sbin/edg-mkgridmap </pre>
+
+---+ Activate and Deactivate the Service
+
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="Activate" TOC_SHIFT="+" }%
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="Deactivate" TOC_SHIFT="+" }%
+
+---+ Update the Gridmap File
+
+The configuration file =$VDT_LOCATION/edg/etc/edg-mkgridmap.conf= is updated periodically by the %LINK_GOC_OPEN_TICKET%. Notifications will be sent to resource administrators to update the vo-package:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% pacman update vo-package
+</pre>
+
+It is recommended that you do not delete entries, but only comment them out. This will allow you to do a comparison of your current configuration against any new OSG version more accurately and you will be more readily aware of those VOs you omitted intentionally.
+
+---+ Known issues
+
+---+ Troubleshooting
+
+Refer to the [[EdgMkgridmapTroubleshootingGuide][edg-mkgridmap troubleshooting guide]] for any problems/errors.
+
+---+ References
+
+---+ *Comments*
+
+| PM2RPM_TASK = CE | Main.RobertEngel | 28 Aug 2011 - 06:07 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = StevenTimm
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %NO%
+
+
+############################################################################################################
+-->

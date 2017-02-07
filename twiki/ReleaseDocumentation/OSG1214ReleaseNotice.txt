@@ -1,0 +1,50 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1286296349" format="1.1" version="1.1"}%
+%META:TOPICPARENT{name="WebHome"}%
+
+
+<div style="font-family: Tahoma, Geneva, sans-serif;">
+<div class="announcement-head" style="border: thin solid #000; background-color: #F90;">
+  <h1 align="center">OSG 1.2.14 Update Notification</h1>
+</div>
+<br />
+
+<div class="date" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; border: thin solid #000; background-color: #F93;">Date: <span class="date-text" style="font-size: 14px; font-weight: normal;">October 5, 2010</span></div>
+<br />
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Affected Components</div>
+<div>
+  <p>The following components are affected:</p>
+  <ul>
+    <li> CE installations </li>
+    <li>CEMon being used for reporting on larger sites</li>
+
+    <li>OSG client and wn-client installation (due to updates to MyProxy, Fetch-CRL, Glexec, and OpenLDAP)</li>
+    <li>Sites using Glexec</li>
+  </ul>
+</div>
+<br />
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Summary</div>
+<div> 
+  <p>This release also incorporates smaller fixes to a variety of components distributed in the OSG stack. Although any given change is not very large, a large number of components have been updated. Highlights of the changes include:</p>
+  <ul>
+
+    <li>setup.sh is no longer sourced by the Globus jobmanager, reducing the load and I/O on gatekeepers</li>
+    <li>Tomcat's settings have been altered to use 512MB of memory, this helps to avoid out-of-memory error in CEMon seen by larger sites</li>
+    <li>the vdt-updater script has been altered so that subsequent updates will not require a second backup</li>
+    <li>Glexec has been updated and includes a fix for users that have run a grid-proxy-init instead of voms-proxy-init</li>
+    <li>small security updates to MySQL, Apache httpd, and OpenLDAP</li>
+    <li>LFC has been updated to 1.7.4-7<br />
+
+    </li>
+  </ul>
+</div>
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Issues Fixed</div>
+<div>See the VDT release notice for more detailed information. Notable fixes include support for grid-proxy-init in Glexec and security fixes in MySQL, Apache, and OpenLDAP.</div>
+<br />
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Update Instructions</div>
+<div>Update instructions can be found on the OSG Twiki under the OSG 1.2 <a href="https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OSG12UpdateInstructions">update instructions</a>.</div>
+<br />
+
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Additional Information</div>
+<div>The release notes for the VDT 2.0.0p21 release underlying this release can be found <a href="http://vdt.cs.wisc.edu/releases/2.0.0/release-p21.html">here</a>.</div>
+<br />
+</div>

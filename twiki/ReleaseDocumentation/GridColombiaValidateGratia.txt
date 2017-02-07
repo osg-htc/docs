@@ -1,0 +1,24 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1278698156" format="1.1" reprev="1.2" version="1.2"}%
+%META:TOPICPARENT{name="ValidateCEGridColombia"}%
+---+!! *<nop>%SPACEOUT{%TOPIC%}%*
+%TOC{depth="2"}%
+
+---++ Introduction
+Brief description of function of software and how it fits into the overall system.
+
+
+
+---++ Gratia Probe
+
+   * Ensure the batch system for which you have installed a probe has completed jobs and at least 10 minutes has elapsed.
+   * Then, visit <noautolink><tt>https://gs-gratia.uchicago.edu:8443/gratia-administration/monitor-status.html?sitename=RESOURCE_NAME</tt></noautolink> to check that your probe is reporting. You can also visit the [[https://gs-gratia.uchicago.edu:8443/gratia-reporting/][gratia reporting page]] and check to see if the system has reporting information for your resource.  
+   * Note that this status page may show multiple probes, some of which may be obsolete. One way this can arise is that old installations may identify a probe as =pbs-lsf:myhost.mydomain=, whereas new installations identify a probe as =pbs:myhost.mydomain= or =pbs-lsf:myhost.mydomain= as appropriate.
+   * If you get no entry at all, double-check by using the probe name (=MeterName= in the =ProbeConfig= file: usually "probe-type:dns-name"), viz:%BR%<noautolink><tt>https://gs-gratia.uchicago.edu:8443/gratia-administration/monitor-status.html?probename=probe-type:myhost.mydomain</tt></noautolink>.%BR%  The reason for the fallback is: if Gratia has seen a probe by this name before (previous installation, for instance) it will use the old site name for accounting purposes. 
+   * As a last resort, peruse the [[https://gs-gratia.uchicago.edu:8443/gratia-administration/monitor-status.html?allsites=1][whole list]] of reporting probes.
+   * If you are still unable to find evidence that your probe has contacted the collector, download [[https://twiki.grid.iu.edu/twiki/bin/viewfile/Accounting/TroubleShootingInstructions?filename=gratia-site-diag][<tt>gratia-site-diag</tt>]] and run it to diagnose possible problems. Report same immediately; see [[Accounting.TroubleShootingInstructions][Gratia troubleshooting instructions]] for more details.
+   * Assuming you find evidence of recent contact using one of the methods above, you may wish to further verify the receipt of real records by obtaining a report from the [[http://gs-gratia.uchicago.edu:8443/gratia-reporting/][Gratia reporting site]], for example [[http://gratia.opensciencegrid.org:%GratiaCollectorPort%/gratia-reporting/index.jsp?link=GratiaParameterInput.jsp?report=/data/tomcat-gratia/webapps/gratia-reports/reports/DailyUsageByVOForSite.rptdesign,DisplayMetric=wallclock,reportTitle=Daily%20Usage%20by%20VO%20for%20Site][Daily jobs by VO for site]] from the main Gratia reporting service. Also, Run the special SQL query "Probe / Local UID combinations corresponding to Unknown VO in the last week" and check for a large number of OSG-like user names that are being mapped to the Unknown VO. This indicates a problem either with the !ProbeConfig knowing the location of the osg-user-vo-map.txt or with the reverse map file itself. 
+
+
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%

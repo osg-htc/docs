@@ -1,0 +1,47 @@
+%META:TOPICINFO{author="StevenTimm" date="1249508009" format="1.1" reprev="1.2" version="1.2"}%
+%META:TOPICPARENT{name="SiteAdminsWorkshopTutorialsAug09"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++Introduction
+   The second phase of the tutorial will describe how to make a highly available GUMS server.  For this you 
+will need six virtual or real machines.  Two GUMS servers, two MySQL servers, and two LVS servers.
+---++Requirements
+   You should have your machines, real or virtual, ready in advance.  This tutorial will *not* cover virtual
+machine OS installation. 
+---++More Information
+    The goal is the following:  First build a self-replicating multi-master MySQL database, then an LVS frontend
+to front both it and the GUMS server, and then take the existing GUMS server installed in part 1 and add a 
+2nd server as installed in part 2.
+---++Commands
+<pre class="screen">
+
+</pre>
+
+---++Presentation
+Can include attached PDF presentation. Until you attach the presentation you'll see a Not Found error.
+
+<embed src="%ATTACHURL%/ha.pdf" width="792" height="612">
+
+---++References
+
+   1 [[http://docs.google.com/Doc?docid=0AVY11NMVz7mPZGdmNjg0bWZfMmZiNWttbmQ0&hl=en][FermiGrid Gums HA howto in Google Docs]]
+   1 Ref 2
+
+%BR%
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/HandsOn/centerpageborder.css
+-->
+
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% you %BR%
+%REVIEW%
+   * [[%ATTACHURL%/ha.pdf][ha.pdf]]: Slides for 2nd half of gums install fest
+
+%META:FILEATTACHMENT{name="ha.pdf" attachment="ha.pdf" attr="" comment="Slides for 2nd half of gums install fest" date="1249507947" path="ha.pdf" size="172662" stream="ha.pdf" tmpFilename="/usr/tmp/CGItemp12085" user="StevenTimm" version="2"}%
+%META:FILEATTACHMENT{name="GumsHA2009.pdf" attachment="GumsHA2009.pdf" attr="" comment="PDF export of the google docs howto for gums install fest 2" date="1249508009" path="GumsHA2009.pdf" size="304501" stream="GumsHA2009.pdf" tmpFilename="/usr/tmp/CGItemp16935" user="StevenTimm" version="1"}%

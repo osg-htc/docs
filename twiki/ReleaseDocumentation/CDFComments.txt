@@ -1,0 +1,106 @@
+%META:TOPICINFO{author="RobGardner" date="1248205025" format="1.1" version="1.16"}%
+%META:TOPICPARENT{name="SiteValidationTable"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+<b>
+Feedback and discussion ongoing, offline via Email.
+
+CDF is also participating in Opportunistic Storage validation.
+
+</b>
+
+as of 28-May-08 
+
+CDF glidein's startup at BNL but there are authorization problems on the CDF side
+(So we feel that the test is successful enough)
+
+CDF glidein's return no error or log files for the UC (working with UC admin's to solve)
+
+---+++  ITB Validation
+
+This section discusses comments from CDF regarding validation on ITB 0.9.2 for OSG 1.0.
+
+*Status as of March 02, 2009*
+
+We are using the service certificate of SAM for accessing the SE.  Its host/key method is being used for authentication with the storage element. There  exists
+problem in accessing all the  ITB SE using the SAM service certificate.  The concerned site admins had been informed.  Following 
+are the response from the site admins.
+
+---++ From FNAL_FERMIGRID_ITB
+
+The SAM cert is failing because it does not have a VOMS attribute.
+All accounts in the CDF VO are required to have a VOMS attribute
+to successfully map in GUMS.  I realize that it is impossible
+to use a SAM service cert in its intended method, as a host/key
+pair, that way.
+
+Comment:  We are using the SAM service certificate for accessing the SE provided by UCSD and Gridka.  It seems that the problem is related to FNAL site.
+
+*Status as of 11th Mar, 2009*
+
+Got reply from the admin and able to list the folder content in SE using the SAM service certificate.  It is giving 'SRM_AUTHORIZATION_FAILURE "  while creating the folder in the SE.  The site admin has been informed.
+
+*Status as of 19th Mar, 2009*
+
+Able to list the contents of folder on the FNAL_FERMIGRID_ITB SE.  Facing "SRM_AUTHENTICATION FAILURE" while creating new folder on the SRM.  The site admin has been informed.
+
+SE at the UC_ITB site passed the SE  test suites on __20th Mar 2009__.
+
+---++ From BNL_ITB_Test1
+
+The  SE  "srm://grid19.racf.bnl.gov"  don't exist. It is __not feasible to check the SRM operations__ with the available gridftp server only.
+
+---++ From LBNL_DSD_ITB
+
+It is the same problem that we had faced for FNAL_FERMIGRID_ITB.  The site admin would have to authorize the SAM service  certificate for accessing the SE.  The error is " connection refused" while accessing its SE.  Following is the subject of the SAM service certificate 
+
+/DC=org/DC=doegrids/OU=Services/CN=sam/cdfsam15.fnal.gov
+
+*Status as of 11th Mar, 2009*
+
+The SE URL at LBNL_DSD_ITB has been changed.  Site admin suggested us to use another port 60443.  The new URL looks like "srm://osp4.lbl.gov:8443/srm/v2/server?SFN=/srmcache/~/test-file"  .  We are still facing the authentication problem while accessing the concerned SE using the SAM service certificate.  The site admin has been informed and waiting for his response.
+
+*Status as of 19thMar, 2009*
+
+Now facing problem while transferring file from local disk to ITB SRM at LBNL. Error seems to be related to authentication.  Site admin has been been informed.
+
+---++ From UC_ITB 
+The site admin would have to authorize the SAM service  certificate for accessing the SE.  The error is " connection refused" while accessing its SE.  Following is the subject of the SAM service certificate 
+
+/DC=org/DC=doegrids/OU=Services/CN=sam/cdfsam15.fnal.gov
+The site admin has been informed and waiting for response.
+
+SE at the UC_ITB site passed the following tests on __13th Mar 2009__.
+
+---+++ *Following table shows the status of test suite for different sites*
+   | Test Suite |  *FNAL_FERMIGRID_ITB*  |  *BNL_ITB*  |  *LBNL_DSD_ITB*  |  *UC_ITB*  |
+   | * Fermi SRM Client Test Suite* |||||
+   | *srmcp*|  %Y%  |  NA  |  %S%  |  %Y%  |
+   | *srmmkdir*|  %Y%  |  NA  |  %Y%  |  %Y%  |
+   | *srmmv*|  %Y%  |  NA  |  %S%  |  %Y%  |
+   | *srmls*|  %Y%  |  NA  |  %Y%  |  %Y%  |
+   | *srm-get-permission*|  %Y%  |  NA  |  %S%  |  %Y%  |
+   | *srm-check-permission*|  %Y%  |  NA  |  %S%  |  %Y%  |
+   | *srm-set-permission*|  %Y%  |  NA  |  %S%  |  %Y%  |
+   | *srm-reserve-space*|  %Y%  |  NA  |  %S%  |  %Y%  |
+   | *srm-release-space*|  %Y%  |  NA  |  %S%  |  %Y%  |
+   | *srmrm*|  %Y%  |  NA  |  %S%  |  %Y%  |
+   | * srmrmdir*|  %Y%  |  NA  |  %S%  |  %Y%  |
+   | *SRM Space Management test suite*.  Space allocation/release with various options including: |||||
+   | *retention_policy*|  %Y%  |  NA  |  %S%  |  %Y%  |
+   | *guaranteed_size*|  %Y%  |  NA  |  %S%  |  %Y%  |
+   | *desired_size* |  %Y%  |  NA  |  %S%  |  %Y%  |
+   | *lifetime* |  %Y%  |  NA  |  %S%  |  %Y%  |
+   | *access_latency* |  %Y%  |  NA  |  %S%  |  %Y%  |
+
+
+
+%BR%
+%COMPLETE2% %BR%
+%RESPONSIBLE% Main.ManojJha - 21 Jul 2009 %BR%
+%REVIEW% Main.IwonaSakrejda   - 21 Jul 2009 %BR%
+%REVFLAG% %X% %BR%
+
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%

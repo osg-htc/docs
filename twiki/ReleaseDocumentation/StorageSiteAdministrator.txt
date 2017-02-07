@@ -1,0 +1,224 @@
+%META:TOPICINFO{author="KyleGross" date="1481047991" format="1.1" version="1.32"}%
+%META:TOPICPARENT{name="ReleaseDocumentation/Storage"}%
+%DOC_STATUS_TABLE%
+
+---+!! *<noop>%SPACEOUT{ "Storage for the Site Administrator" }%*
+%TOC{depth="2"}%
+
+---++Introduction
+
+This page includes information general storage hardware requirements and the selection of storage software. Links are given to the installation documentation. Before planning storage for your site, please make sure you understand the overall storage infrastructure as described in [[ReleaseDocumentation.StorageInfrastructureSoftware][Storage Infrastructure Software]].
+
+---++Planning and Configuration
+
+For descriptions of the specific software discussed below, please see the [[ReleaseDocumentation.StorageInfrastructureSoftware][Storage Infrastructure Software]] page. 
+
+---+++Choosing the storage software
+
+Each site may chose what storage software to deploy. If you can anticipate usage patterns you can more effectively plan your system. To see a summary of data movement patterns, see [[ReleaseDocumentation.StorageEndUser#DataMovementPatterns][Storage for the End User]]. Based on expected job runtime and data movement profiles, the following are rules of thumb for addressing this issue. Further information and installation instructions are provided in succeeding sections. 
+
+   * *Shared file system.* If the jobs running on your site need less than a few terabytes of storage and have lightweight, local data transfer requirements, a NFS filesystem shared among worker nodes would be sufficient. In further documentation, this option is covered in the "Local Storage" section, since it must be configured along with additional required storage that resides on the worker node itself.
+
+   * *gridftp server.* If access to authorized off-site entities is required and storage size and data-handling capacities are moderate, a gridFTP server should be deployed. Since Storage Elements also include bundled gripFTP servers, consider the cost/benefit of installing a Storage Element in this case. A Storage Element may be somewhat more complex to set up, but offers benefits in throughput and expandability.
+
+   * *Storage Element.* If your site will provide storage for many terabytes of data, or will provide extensive storage access to off-site entities, you will need to install a Storage Element. There are choices among Storage Element implementations that present a range of complexity and capability; see the following sections.
+
+Sites often employ some combination of the above, for example, allowing jobs with light storage requirements to use a shared file system, but making a Storage Element available for greater storage needs. In some cases the Storage Element and the shared file system may use the same underlying distributed file system, providing local access from the worker nodes and external access through the gsiftp protocol, or the SRM specification.
+
+---+++ Other Required Software
+
+In addition to the above, on the Open Science Grid other software for grid-wide monitoring and accounting of storage must be installed.
+
+   * *Gratia.* For OSG Grid Accounting, probes are installed to gather information on storage transactions and report the the central gratia server. For details, see [[Accounting.WebHome][OSG Accounting]]
+
+   * *GIP.* For OSG Discovery services, an information provider is installed to send storage configuration such as endpoints and authorization policies to the central discovery server. For more information, see [[InformationServices.WebHome][OSG Information Services]]
+
+   * *RSV.* For OSG Monitoring, probes are run to test the functionality of a site, reporting to the central Grid Operations Center RSV collector/server. The OSG documentation for RSV may be found at [[Trash/MonitoringInformation.RSV][RSV Monitoring Information]].
+
+---+++ Optional Software
+
+Depending the size and complexity of your site, you may also find useful the following. 
+
+   * *Operational Tools.* Scripts running independently of storage software processes have been developed to aid in management, monitoring, and troubleshooting tasks. Please see the section below on the [[#OperationsToolkit][OSG Storage Operational Tools]].
+
+   * *Catalog.* Larger experiments often employ a catalog to allow tracking of the location of data sets and allow logical file names to be used by applications in place of site-specific paths. The Virtual Organization itself typically writes and operates its own catalog. For this reason, OSG does not provide catalog software. As well as software written by and for specific VOs, there are some generic implementations, see the [[ReleaseDocumentation.StorageInfrastructureSoftware][Storage Infrastructure Software]] topic for more information.
+
+---+++Hardware Requirements for Storage Elements
+
+For a storage size of from several to a few tens of terabytes, a disk array is recommended. If data redundancy through RAID5 is desired, the usable storage will be about half of the installed disk space.  It is recommended that any Storage Element be installed on at least one dedicated server, several if higher performance is needed, up to dozens if a large distributed storage system is employed. For very high transfer rates, 10 Gbs network connections are used if available through the campus network infrastructure. Except for the largest sites, processor requirements are not more severe than for computational nodes, though namespace nodes for systems storing a large number for files may need 8 or even 16 GB memory. 
+
+To determine the number of nodes needed for a Storage Element, we provide general hardware requirements for the !BeStMan and dCache SRM implementations. Also see the discussion in [[ReleaseDocumentation/SitePlanning][Release Site Planning page]] on the kind of nodes needed for sites of various sizes.
+
+---++Installation
+
+Installation of the software listed above is provided in the [[ReleaseDocumentation.WebHome][release documentation]]. Specific links are shown below.
+
+---+++Shared file system
+
+OSG does not provide instructions for creating a shared NFS file system.  Assuming such has be set up, instructions for configuring OSG software to make use of it and other needed storage types are found in [[ReleaseDocumentation.LocalStorageConfiguration][Local Storage Configuration]]. Some Storage Elements allow sharing of files through mount points. See the documentation for each storage element to determine its local access capability.
+
+#GridFTPLink
+---+++gridftp server
+
+A stand-alone gridftp server was once called a storage element, and so is still sometimes referred to as a "classic SE". Installation of a gridftp server is included in the OSG distribution, see [[ReleaseDocumentation.GsiFtpStandAlone][GSIFTP Server Installation]]. Configuration of worker nodes to use a gridftp server is explained in [[Storage.StorageElementAdmins][Storage Element Admins]]. For an overview of the general features and use of gridftp, please see [[Documentation/StorageGridFTP][Overview of GridFTP in the Open Science Grid ]].
+
+#LinkToxrootdInstall
+---+++xrootd
+
+xrootd provides posix-like file access in the context of physics analysis programs written with "root". It is included in the OSG distribution. For installation instructions, see [[https://twiki.grid.iu.edu/bin/view/Trash/Trash/Tier3/XrootdInstall][Xrootd Stand Alone]]. Note that xrootd may also be installed with !BeStMan for serving files through gridftp and the SRM specification, and the dCache SRM implementation supports the xrootd protocol. 
+
+---+++Storage Element
+
+All Storage Element implementations in the Open Science Grid support the gsiftp protocol and the SRM specification (with the exception of the !BeStMan gateway, which supports key elements of the SRM specification, not including space reservation). Implementations vary in other features, such as the choice of underlying distributed storage, support for additional file transfer protocols, and support for a tape-archival backend. Because it allows for a choice among various distributed storage implementations, there are several flavors of !BeStMan in particular.
+
+#BestmanLink
+---++++<nop>BeStMan
+
+Berkeley Storage Manager (!BeStMan) is a full implementation of SRM v2.2 that works on top of existing disk-based unix file systems. Developed by Lawrence Berkeley National Laboratory, for a disk based storage and mass storage systems such as HPSS, it has been reported so far to work on file systems such as NFS, GPFS, PVFS, GFS, Ibrix, HFS+, Hadoop, <nop>XrootdFS and Lustre. It also works with any existing file transfer service, such as gsiftp, http, https, bbftp and ftp.
+
+!BeStMan-gateway is a variant of !BeStMan that supports a subset of the SRM v2.2 specification. The difference between !BeStMan (sometimes specifically called !BeStMan-fullmode) and !BeStMan-gateway is that !BeStMan is always installed over a disk-based unix filesystem and satisfies all of the SRM specification, while !BeStMan-gateway satisfies "core" SRM specifications but can be installed over any mounted filesystem. Space reservation via client callout is not supported in !BeStMan-gateway, but can be done by site administrators. !BeStMan-gateway is specifically designed to work with gLite File Transfer Service (FTS), glite-url-copy and LCG-utils, componments of gLite software used by the ATLAS experiment on the Large Hadron Collider. !BeStMan-gateway is included in the OSG software distribution. If installing !BeStMan-gateway specifically on an xrootd or hadoop filesystem, see the corresponding sections below. For other filesystems, see [[ReleaseDocumentation.BestmanGateway][BeStMan Gateway]].
+
+The fullmode version of !BeStMan is included in the OSG software distribution. For installation instructions, see [[ReleaseDocumentation.BeStMan][Berkeley Storage Manager (BeStMan)]]. If you choose to install either the !BeStMan fullmode version or !BeStMan-gateway on a server that is a Compute Element, please follow the instructions at [[ReleaseDocumentation.BestmanOnCE][BeStMan On CE]].
+
+#BestmanStorageHardwareRequirements
+A !BeStMan-based SE consists of one !BeStMan installation and one or more !GridFTP installations. 
+
+   * If your site will be allowing VOs to do heavy data movement (dedicated or opportunistic), you should have a node dedicated to !BeStMan.  At the time of this writing, the VOs that use storage heavily are CMS, ATLAS, CDF, and D0.
+   * If you serve one of the above VOs and have more than 250 cores, you should *definitely* have a dedicated !BeStMan node.
+   * If your site will be managing more than 50 TB of disk space, you should have a node dedicated to !BeStMan.
+   * If none of the above apply, you can co-locate !BeStMan and your !GridFTP server on the same node.
+   * If you have less than 1Gbps bandwidth to your site, then you need only one !GridFTP server - at most, 2 servers will be needed.
+   * If you have more than 1Gbps bandwidth, then you should plan on at least one !GridFTP server per 4Gbps of available bandwidth (assuming you have 10Gbps interfaces on the server) if you want to maximize throughput.  If you do not have 10Gbps interfaces, make sure you have roughly 1.5 Gbps of network interface cards per 1 Gbps of WAN bandwidth.  In this case, you should not co-locate your !GridFTP and !BeStMan server.
+
+If you have absolutely no idea what your site's usage will be, we recommend 1 server (!BeStMan + !GridFTP combined) for 0-200 cores, one to two dedicated !GridFTP servers for 200 - 500 cores, and 2 to 10 dedicated !GridFTP servers for over 500 cores, depending on your site's load.
+
+#BestmanXrootdLink
+---+++++<nop>BeStMan-xrootd
+
+If some applications need to access the storage through an xrootd server, and other applications need access the gsiftp protocol or SRM specification, then !BeStMan-gateway over an xrootd filesystem should be installed. For installation instructions, see [[ReleaseDocumentation.BestmanGatewayXrootd][BeStManGateway Xrootd]].
+
+In order to serve files through the xroot protocol, additional nodes are needed beyond the standard !BeStMan installation. The absolute minimum number of nodes is 3: 
+   1. !BeStMan, !XrootdFS, FUSE, !GridFTP  
+   1. Xrootd redirector 
+   1. Xrootd data server node
+
+Please see the above [[#BestmanLink][BeStMan section]] for guidance on additional nodes that may be needed according to usage. Added file servers could be Xrootd data server nodes or !GridFTP servers -the decision should be based on your application requirements. 
+
+#BestmanHadoopLink
+---++++<nop>BeStMan-hadoop
+
+HPFS is a distributed filesystem that uses the hadoop computing paradigm and implementation. To allow additional access to a hadoop filesystem through gridftp SRM, install !BeStMan-gateway over the "hadoop" filesystem. OSG provides installation through a VDT yum repository.  Community support is available through an osg-hadoop mailing list. For installation instructions, please see the [[ReleaseDocumentation/Hadoop][Hadoop HDFS release documentation]].
+
+The minimal !BeStMan-hadoop deployment will have two nameservice nodes, datanodes, and a node for !BeStMan and gridftp. Expansion to hundreds of terabytes is possible by the addition of additional gridftp servers and storage nodes. For details, see [[Storage.HadoopUnderstanding#HadoopStorageRecommendedHardware][Hadoop Recommended Hardware]] 
+
+#LinkTodCacheInstall
+---++++dCache
+
+The OSG makes available a [[http://vdt.cs.wisc.edu/software/dcache/server][dCache installation package]] through the [[http://vdt.cs.wisc.edu][Virtual Data Toolkit]]. The package bundles the needed components and their dependencies and provides scripts for configuration and installation. VDT has bundled the dCache server rpm into a package which includes a configuration dialog and installation scripts for postgres and pnfs, which are services used by dCache. In addition, OSG provides Gratia probes for site and grid-wide monitoring, Generic Information Providers for the support of information services, and a suite of test scripts to validate a dCache installation. Information and links for installing dCache may be found at [[ReleaseDocumentation.dCache][Preparing, Installing and Validating dCache]] 
+
+The architecture for medium and large sites is similar among the Storage Element implementations: a node to handle incoming SRM requests, an node for the namespace server, nodes for gridftp servers, and storage nodes.  The general guidelines given in the !BeStMan planning material (see above) for the numbers needed are applicable for dCache installations as well. The [[ReleaseDocumentation/SitePlanning][Release Site Planning page]]  has examples of how the services are distributed among nodes in medium and large dCache deployments. More detailed diagrams of dCache setups for small, medium, and large sites may be found at [[https://indico.desy.de/getFile.py/access?contribId=19&sessionId=5&resId=0&materialId=slides&confId=138][dCache hardware layouts]]. This document provides a good guide for the layout of dCache hardware in a variety of scales.
+
+---+++Gratia
+
+Gratia probes are provided for each of the supported storage implementations. For installation instructions, please see the links contained in the installation documentation for the specific storage element being installed.
+
+---+++GIP
+
+Installation procedures for Generic Information Providers are provided in the Release Documentation for each supported storage implementation. The GIP is configured as part of a Compute Element installation; see [[ReleaseDocumentation/ComputeElementInstall#StorageElementConfiguration][Compute Element Install]]
+
+---+++RSV
+
+RSV probes are included in OSG software packaging. The probes are normally installed on a Compute Element, see [[ReleaseDocumentation.InstallAndConfigureRSV][Install And Configure RSV]] for installation instructions. The probes may also be installed on a non-CE machine; see [[Trash/MonitoringInformation.InstallAndConfigureRsvAdvanced#Install_standalone_RSV_package_f][Install standalone RSV package]]
+
+
+---+++ OSG Storage Operational Tools
+#OperationsToolkit
+
+For dCache installations, the [[http://datagrid.ucsd.edu/toolkit/][OSG Storage Operations Toolkit]] provides community-contributed scripts to assist in or automate storage operational tasks. The tools are installed as rpms. For the current functionality of the toolkit, please see the [[http://datagrid.ucsd.edu/toolkit/docs.html][Operations Toolkit documentation]].
+
+---++Tuning
+
+The article [[http://cd-docdb.fnal.gov/cgi-bin/RetrieveFile?docid=1837&version=1&filename=dcache_tuning.pdf"][ _dCache Tuning_ ]] gives recommended Linux TCP/IP parameter tunings for dCache. Since the tuning was done at the operating system level, it would also apply to other Storage Element implementations.
+
+
+---++Troubleshooting
+
+Troubleshooting procedure is generally specific to the storage implementation used; please see the release documentation links above for tips on troubleshooting your installation. For further help, the following resources are available.
+
+---+++OSG support process
+
+For problems encountered by users, upon submitting a ticket to the Grid Operations Center,  the first line of support is their Virtual Organization. The VO may contact the site if the problem requires it. For further escalation, sites may submit tickets through GOC to receive help from the OSG Storage group.
+
+---++++A Note on Support  from Software Providers
+
+Software providers often have their own support channels independent of the OSG. We discourage direct submission of requests to providers whose storage software is supported by the OSG. The OSG Storage group has support relationships with providers whereby tickets may be escalated to them as need be. Submitting tickets through the GOC process allows for orderly dispatch of requested help and a record of problems/solutions that will ultimately benefit the community as a whole.
+
+---+++OSG Storage mailing list
+
+Sites may also request help directly to the OSG Storage mailing list, in which case questions may be answered by the community or a GOC ticket opened by OSG Storage as deemed necessary. In order to post a message, you must first join the list; see [[Storage/WebHome][OSG Storage Activities]] for more information.
+
+
+
+
+---+++ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = DouglasStrain
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       =  TanyaLevshina
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################ 
+-->
+-- Main.TedHesselroth - 13 Jan 2010
+
+%META:TOPICMOVED{by="TedHesselroth" date="1271185927" from="Storage.StorageSiteAdministrator" to="ReleaseDocumentation.StorageSiteAdministrator"}%

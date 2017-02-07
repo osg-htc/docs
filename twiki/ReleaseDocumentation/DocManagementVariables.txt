@@ -1,0 +1,210 @@
+%META:TOPICINFO{author="KyleGross" date="1481047985" format="1.1" version="1.36"}%
+%META:TOPICPARENT{name="Documentation.DocHowTo"}%
+---+!! *Document Management Variables*
+%DOC_STATUS_TABLE%
+%TOC{depth="3"}%
+
+---++ About This Document
+
+%ICON{hand}% This document is for document [[ReleaseDocumentation/DocOwnerResponsibilities][owners]], [[ReleaseDocumentation/DocReviewerResponsibilities][reviewers]] and [[ReleaseDocumentation/DocTesterResponsibilities][testers]]. The Document Management Variables will be introduced and it will be explained how they are used in the [[ReleaseDocumentation/DocProcess][document process]].
+
+---++ Introduction
+
+The [[Documentation/DocumentationTeam/WebHome][Documentation Project]] created the [[ReleaseDocumentation/DocProcess][document process]] which aims to support the interaction between the document [[ReleaseDocumentation/DocOwnerResponsibilities][owner]], [[ReleaseDocumentation/DocReviewerResponsibilities][reviewer]] and [[ReleaseDocumentation/DocTesterResponsibilities][tester]]. The goal of the [[ReleaseDocumentation/DocProcess][document process]] is to improve the _quality_ of the OSG documentation and ensure its _correctness_. See the following table for the list of document variables and their meaning.
+
+---++ Document Management Variables
+%STARTINCLUDE%
+%EDITTHIS%
+
+%ICON{hand}% A _required_ variable must be assigned a value, while an _optional_ variable may be left blank!
+
+%ICON{hand}% A _static_ variable describes a fixed property of the document, while a _dynamic_ variable is part of the document process and may change!
+
+---+++ Document Owner Variables
+
+The following variables may be set by the [[ReleaseDocumentation/DocOwnerResponsibilities][Owner]] of the document. 
+| *Variable*  | *Description*  |  *Comment*  |
+| OWNER  | The Twiki username of the owner of the document.  | _required, static_ |
+| INCLUDE_REVIEW  | Specifies if the document should be reviewed before release.  | _required, static_ |
+| INCLUDE_TEST  | Specifies if the document should be tested before release.  | _required, static_ |
+| REVIEWER  | The Twiki username of the reviewer chosen for the document.  | _optional, dynamic_ |
+| REVIEW_READY  | Marks a document ready to be _reviewed_ for the reviewer. | _required, dynamic_ |
+| TESTER  | The Twiki username of the reviewer chosen for the document.  | _optional, dynamic_ |
+| TEST_READY  | Marks a document ready to be _tested_ for the tester. | _required, dynamic_ |
+
+The following set of variables are set by the Owner but refer to the document itself.
+%TABLE{columnwidths="15%,70%,15%"}%
+| *Variable* | *Description*  |  *Comment*  |
+| DOC_TYPE | The type of this document as defined in [[DocClassifications#Document_Types_and_Templates][Document Types]] | _optional, static_ |
+| DOC_ROLE | The role of the intended reader of this document as defined in [[DocClassifications#Document_User_Roles][Document User Roles]] | _optional, static_ |
+| DOC_AREA | The document organizational area to which this document belongs as defined in [[DocClassifications#Document_Areas][Document Areas]] | _optional, static_ |
+
+---+++ Document Reviewer Variables
+
+The following variables may be set by the [[ReleaseDocumentation/DocReviewerResponsibilities][Reviewer]] of the document. 
+| *Variable*  | *Description*  |  *Comment*  |
+| REVIEWER  | The Twiki username of the reviewer chosen for the document.  | _optional, dynamic_ |
+| REVIEW_PASSED  | Defines the _current_ status of the review process. | &#37;IN_PROGRESS%, &#37;YES&#37; for _passed_,  &#37;NO&#37; for _failed_ |
+
+---+++ Document Tester Variables
+
+The following variables may be set by the [[ReleaseDocumentation/DocTesterResponsibilities][Tester]] of the document. 
+| *Variable*  | *Description*  |  *Comment*  |
+| TESTER  | The Twiki username of the tester chosen for the document.  | _optional, dynamic_ |
+| TEST_PASSED  | Defines the _current_ status of the test process. | &#37;IN_PROGRESS%, &#37;YES&#37; for _passed_,  &#37;NO&#37; for _failed_ |
+
+---+++ HTML Comment Containing the Content Management Control Variables
+
+Please include the following HTML comment at the bottom of those pages that should be part of the _official_ OSG documentation. 
+
+#HtmlComment
+%TWISTY{mode="div" showlink="Show HTML comment ..." hidelink="Hide HTML comment!" showimgleft="%ICONURLPATH{toggleopen-small}%" hideimgleft="%ICONURLPATH{toggleclose-small}%"}%
+<pre class="file"><verbatim>
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = <FirstLast>
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|General|Integration|Monitoring|Operations|Security|Storage|Tier3|User|VO)
+   * Local DOC_AREA       = 
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Developer|Documenter|Scientist|Student|SysAdmin|VOManager)
+   * Local DOC_ROLE       = 
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (HowTo|Installation|Knowledge|Navigation|Planning|Training|Troubleshooting)
+   * Local DOC_TYPE       = 
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %NO%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = <FirstLast>
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = <FirstLast>
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+--></verbatim></pre>
+%ENDTWISTY%
+%STOPINCLUDE%
+
+---++ Include the Document Status Table
+
+A graphical presentation of the document process will be displayed at the beginning of the document when the following Twiki variable is included at the _very beginning_ of the document:
+
+<pre class="file">
+%%NOP%DOC_STATUS_TABLE%
+</pre>
+
+%NOTE% A detailed document status table will be displayed as long as the document was not marked ready for release. Whenever the document is marked ready for release a simpler table will be displayed instead.
+
+---++ Make it easy for readers to comment on your page
+
+A small input text field used by readers for _comments_ will be displayed at the bottom of the page when following Twiki statement is used:
+
+<pre class="file">
+%%NOP%COMMENT{type="tableappend"}%
+</pre>
+
+%NOTE% See for example the comment section at the bottom of this page.
+
+---++ Frequently asked Questions?
+
+---+++ What is _official_ OSG Documentation?
+
+_All_ OSG Documentation is _official_ and should be edited with care. Some technical documents are read by OSG users and system administrators that require to be well written (_reviewed_) and checked for correctness (_tested_). Those documents are managed by the [[ReleaseDocumentation/DocProcess][document process]] and are referred here as _official_. All documents in the [[ReleaseDocumentation/WebHome][Release Documentation Web]] are _official_ and managed by the [[ReleaseDocumentation/DocProcess][document process]]. In comparison meeting notes as used by many webs are _not official_. 
+
+
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesWeichel
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Developer|Documenter|Scientist|Student|SysAdmin|VOManager)
+   * Local DOC_ROLE       = Documenter
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (HowTo|Installation|Knowledge|Navigation|Planning|Training|Troubleshooting)
+   * Local DOC_TYPE       = HowTo
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %%NOP%YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = TedHesselroth
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->
+-- Main.JamesWeichel - 05 Feb 2010
+
+%META:TOPICMOVED{by="JamesWeichel" date="1266964828" from="Documentation/DocumentationTeam.DocManagementVariables" to="ReleaseDocumentation.DocManagementVariables"}%

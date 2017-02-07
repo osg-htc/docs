@@ -1,0 +1,162 @@
+%META:TOPICINFO{author="KyleGross" date="1481047991" format="1.1" version="1.29"}%
+%META:TOPICPARENT{name="ReleaseDocumentation/Storage"}%
+%DOC_STATUS_TABLE%
+
+---+!! *<noop>%SPACEOUT{ "Storage for the End User" }%*
+%TOC{depth="3"}% 
+
+#IntroStorageEndUser
+---++ Storage for the End User
+
+If you are just starting to use the Open Science Grid, please read the topic [[Documentation/UsingTheGrid][An Introduction to OSG for End-Users]]. Prerequisites for running jobs, such as installing OSG client software, obtaining user certificates, and joining a Virtual Organization apply to accessing storage as well.
+
+---+++Overview
+
+The end user of storage is primarily concerned with data movement. Other aspects, such as operation of the Storage Element, space management, and policies for retention and access are handled by the Virtual Organization or site. If you are already a member of a Virtual Organization, it may be useful to consult the documentation for your VO regarding data movement, as tools and computing models for your research may be available. 
+
+#DataMovementPatterns
+---+++Data movement patterns
+
+There are several patterns of data movement that have evolved and can be found in use on the Open Science Grid. For computations of some complexity, several of these patterns might be used in combination.
+
+   * _Files moved through Automated Data Distribution_: (VDT: RFT, Other: Phedex,FTS) When there are a large number of files to be moved, or data movement is an ongoing process, or a file catalog is employed an extra layer of software to handle data transfers may be used. Such a layer provides features that the simple clients lack. Some features of a data movement services are: taking requests for a set of transfers, handling requests according to file catalog name, subscribing to a published data stream, scheduling and initiating transfers, reporting on the status of transfers, and retrying failed transfers.
+   * _Files moved in a staging process_: A staging process may have some of the features of a data distribution service, but is more closely tied to job submission. The data movement request is part of a workflow that may include job execution. As a simple example, the workflow may indicate, "move the data in to the site, if that succeeds, run the analysis on it." File transfers and monitoring are handled by the workflow management system.
+   * _Files moved during job execution_: Jobs running on worker nodes may also move files within the job context. Clients exist in the software environment for simple data movement and may be invoked as part of a job sequence. This approach has the advantage of simplicity, but may be inefficient when the same file is repeatedly moved by different jobs, or only a fraction of the content of a moved file is actually needed. Whenever data is moved out from a worker node, the network topology needs to be taken into account; when the worker node in on a private network, not all transfer modes will be available.
+   * _Files read during job execution_: Strictly speaking, this should be referred to as data access rather than data movement.  Rather than moving a whole file, job executables may read read from a file while leaving it in place. Files available from an NFS system as a part of a [[ReleaseDocumentation.LocalStorageConfiguration][Local Storage Configuration]] may be read through standard language calls. Most Storage Element implementations also support posix IO, though in some cases their use in complicated by the need for preloaded libraries. The Storage Element namespace must also be mounted on the worker node, which is not always the case. Finally, some Storage Elements do not allow appending data to a file, due to difficulties associated with maintaining replicas and tape-backed copies. The use of file access techniques rather than data movement makes for efficient use of bandwidth, and simplifies job management by making data placement a separate process.
+
+
+---+++Client tools
+
+Clients for file transfer can be divided into three categories. Documentation for specific implementations may be found below. This topic covers command-line tools only; for more sophisticated data movement software, please see the [[ReleaseDocumentation/StorageApplicationDeveloper#FileTransferServices][File Transfer Services]] section of the [[ReleaseDocumentation/StorageApplicationDeveloper][Storage for the Application Developer]] topic.
+
+
+   * *wget* and *curl.* Used for very light access to a http server.
+   * *Clients for gridftp.* Gridftp clients and servers comply with the gsiftp protocol, see the documentation. Included in the OSG software are globus-url-copy and uberftp.
+   * *Clients for SRM.* Storage Resource Manager clients and servers comply with the [[https://sdm.lbl.gov/srm-wg][SRM]] specification. Three implementations are included in the OSG software: the Fermliab SRM Clients (ReleaseDocumentation.FermiSrmClientCommands), the LBL SRM Clients (ReleaseDocumentation.LBNLSrmClient), and glite's lcg-utils.
+   * *Implementation-specific clients.* Storage software implementations often have their own clients which can be used to access the data but do not conform to any external specification. In the OSG software, dccp for dCache is provided. For xrootd and hadoop, clients are not provided by OSG because other methods of access are available.
+
+SRM and gsiftp rely on the [[http://www.globus.org/security/overview.html][Grid Security Infrastructure]]  for their authorization mechanisms; therefore proxies created through [[https://twiki.cnaf.infn.it/cgi-bin/twiki/view/VOMS/WebHome][VOMS]] servers are required for their clients to operate. 
+
+
+---+++Discovery
+
+Knowing what sites authorize your VO, what the software environment is, and what the endpoints are (among other information) is a requirement for being able to use storage elements. The OSG runs an information service, the [[http://is.grid.iu.edu/documentation.html][OSG BDII]], from which the needed information may be discovered. See the  [[ReleaseDocumentation.InformationServicesStorage#DiscoveryTool][Discovery]] section of the [[ReleaseDocumentation.InformationServicesStorage][Storage and Information Services]] page.
+
+#ClientTools
+---++Client Tools for Storage
+
+A number of clients are available for accessing storage. All client tools for storage are installed as part of the OSG client installation package and are available the path once the VDT setup.sh at the top of the installation is sourced. See the [[ReleaseDocumentation/ClientInstallationGuide][Client Installation Guide]] for installation instructions.
+
+---+++wget and curl
+
+These unix utilities are useful for simple access to small amounts of data served over http. They can be used without authentication. A [[http://vdt.cs.wisc.edu/components/squid.html][squid]] proxy server is available in the OSG software for site installation so that frequently-accessed data may be served locally.  Documentation is available through the wget and curl man pages. 
+
+---+++globus-url-copy
+
+This utility is used to move files to and from a [[Documentation/StorageGridFTP][GridFTP]] server. High data transfer rates may be reached through the use of multiple data channels. For a complete list of features and usage, please see the documentation on the [[http://www.globus.org/toolkit/docs/4.0/data/gridftp/rn01re01.html][globus-url-copy]] page.
+
+---+++uberftp
+This is a file transfer similar to globus-url-copy. Documentation may be found at [[https://twiki.grid.iu.edu/bin/view/Storage/StorageUberFTP][UberFTP]].
+
+---+++Fermi National Accelerator Laboratory SRM Clients
+
+This set of srmclient commands (developed and maintained at Fermilab), can be used to access any Storage Element that complies with the  [[https://sdm.lbl.gov/srm-wg][SRM]] specification. If you are interested in getting the latest Fermi srmclient package apart from a VDT release, you can download the rpm from the main [[http://www.dcache.org/downloads][dCache website]]. After you have installed the rpm, by default the commands will be available in the /opt/d-cache/srm/bin directory. For examples of how to use the clients, see [[ReleaseDocumentation.FermiSrmClientCommands][Fermi Srm Client Commands]].
+
+
+---+++ Lawrence Berkeley National Laboratory SRM Clients
+
+A set of SRM client commands, developed at LBNL as generic SRM v2.2 clients, are available to access any [[https://sdm.lbl.gov/srm-wg][SRM]] v2.2 based storage components. They have been tested for all current SRM v2.2 implementations such as [[ReleaseDocumentation/BestmanStorageElement][BeStMan]], CASTOR, dCache, DPM, SRM/SRB and !StoRM. They are continuously being tested for compatibility and interoperability. This can be installed from the VDT distribution or from the tar file download from [[http://datagrid.lbl.gov/bestman][SDM group at LBNL]].  Sample command line examples for [[ReleaseDocumentation/BestmanStorageElement][BeStMan]] at NERSC and for dCache at FNAL are available on [[ReleaseDocumentation.LBNLSrmClient][LBNL Srm Client]].
+
+
+---+++ LCG Utils
+
+LCG Utils is a suite of client tools for data movement written for the LHC Computing Grid. The tools are based on the Grid File Access Library, which is also included. Commands which access [[https://sdm.lbl.gov/srm-wg][SRM]] servers are conformant to the SRM v2.2 specification. Some commands use logical file names and require a connection to a BDII-based catalog; exceptions are file copies and deletions, which take endpoints based on the SRM URL. Examples are shown in [[ReleaseDocumentation.LcgUtilities][LCG Utils]].
+
+
+---++ Clients Not Supplied by OSG Client Installation
+
+---+++dccp and gsidcap
+
+dccp is the implementation-specific file access client for the dCache storage element. It is available as part of the VDT Worker Node pacman installation. dccp supports the "dcap" and "gsidcap" protocols of dCache. dcap transfers are not authenticated, ond can only work locally, from worker nodes on which the dCache nameserver is installed. The gsidcap protocol uses the [[http://www.globus.org/security/overview.html][Grid Security Infrastructure]] X509-based authentication and dCache authorization, in a manner similar to that of a dCache gridftp endpoint. For futher information, see the [[Documentation/StorageDcacheCopying][Using dCache Copy]] or the [[http://www-dcache.desy.de/manuals/dccp.html][dCache dccp documentation]].
+
+---+++xrootd clients
+
+No special client is needed for local access to xrootd when the FUSE-based filesystem xrootdFS is present, as is the norm for an [[ReleaseDocumentation/BestmanGatewayXrootd][OSG Bestman-xrootd installation]]. If the site to be accessed has installed xrootd from the VDT distribution without FUSE, specific clients are needed. Clients created as part of the xrootd distribution are included in the OSG xrootd cache. For more information on these clients, see [[https://confluence.slac.stanford.edu/display/ds/Xrootd+Client+Tools][xrootd website]]. xrootd is also accessible through the ROOT software package, which might be installed by your VO in addition to OSG software.
+
+---+++hadoop client
+
+The standard [[Storage/Hadoop][OSG hadoop hdfs installation procedure]] includes FUSE deployment and therefore standard unix filesystem operations may be used to access the storage. No special client is needed. There does exist a hadoop-specific client for accessing storage apart from FUSE, as described in [[http://hadoop.apache.org/common/docs/current/hdfs_shell.html][HDFS File System Shell Guide]]. Note that the OSG organization does not support software that is not included in its packing.
+
+---++Advanced client software
+
+For information on more advanced client software than command-line operations, please consult the following.
+
+   * The *[[ReleaseDocumentation/StorageApplicationDeveloper#FileTransferServices][File Transfer Services]]* section of the [[ReleaseDocumentation/StorageApplicationDeveloper][Storage for the Application Developer]] topic.
+   * The *[[ReleaseDocumentation/InformationServicesStorage#CatalogsLink][Catalogs]]* section of the [[ReleaseDocumentation/InformationServicesStorage][Storage and Information Services]] topic.
+
+---+++Getting help
+
+Requests for help may be submitted through the [[https://ticket.grid.iu.edu/goc/open][GOC ticketing system]]. Tickets are initially assigned to your Virtual Organization, which then may dispatch or escalate the ticket to another organization.
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = DouglasStrain
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = Scientist
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       =  TanyaLevshina
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################ 
+-->
+
+
+-- Main.TedHesselroth - Feb 25 2010
+
+%META:TOPICMOVED{by="TedHesselroth" date="1271185796" from="Storage.StorageEndUser" to="ReleaseDocumentation.StorageEndUser"}%

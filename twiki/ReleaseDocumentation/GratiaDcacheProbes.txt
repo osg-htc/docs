@@ -1,0 +1,688 @@
+%META:TOPICINFO{author="KyleGross" date="1480625620" format="1.1" version="1.40"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *Installation of %SPACEOUT{ "%TOPIC%" }%*
+%DOC_STATUS_TABLE%
+%TOC{depth="3"}%
+---++ About This Document
+
+%ICON{hand}% This document is intended for System Administrators installing the Gratia dCache  transfer or storage probes.
+
+---++ Introduction
+The probes report storage related information to [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/GratiaSiteCollector][the central Gratia collector]]. There are two types of probes:
+   * The dCache-transfer probe reports to Gratia the details of each file transfer into or out of a dCache file server. 
+   * The dCache-storage probe is responsible for reporting storage capacity and storage usage to the central Gratia collector. The information reported is:
+      * The storage capacity and amount used for each dCache pool.
+      * The storage capacity and amount used for each SRM Space reservation.
+
+---+++ Prerequisites
+They depend on 
+
+   * dcache 1.9.5-12 (or higher)
+   * postgres 8.3.7 (or higher) 
+   * osg-version 1.2.3 (or higher)
+   * vdt-version  2.0.0 (or higher)
+   * pyOpenSSL package. Please install it using yum (or find an appropriate rpm package). See [[#DebugInfo][Debugging Information]] for help.
+   * [[PacmanInstall][pacman]] version %PACMAN_VERSION% (or higher) is required in order to create OSG User-VO Mapping. Please read  [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OsgSupportedVos][this page]] about files that are required to accurately collect grid resource usage and metrics by a VO for transfers submitted using grid proxies or where voms proxy information is not available.
+
+---+++ Engineering Considerations
+
+<div id="indent">
+It is recommended that the Gratia dCache probes are installed on a dCache admin node, where a dCache billing database is located. 
+The dCache transfer probe performs queries on the billing database so if the probe is installed somewhere else you will need to configure database access accordingly. 
+The dCache storage probe polls the information from its dCache Information Provider, so it doesn't have to be installed on an admin node.
+</div>
+The installation procedure depends on your current dCache installation. You can do one of the following actions:
+   * Install  vdt-dcache (fresh install) 
+   * Upgrade existing vdt-dcache installation (full upgrade)
+   * Upgrade just the Gratia dCache probes without upgrading vdt-dcache (partial upgrade)
+   * Install the Gratia dCache probes on top of "native" dCache installation (i.e. from [[http://www.dcache.org][dCache site]]installation without using VDT-dCache)
+
+---+++ Help!
+If a problem occurs during the installation or the verification of the service, see [[#DebugInfo][Debugging Information]].
+ 
+---++Installation Procedure
+
+%INCLUDE{"Documentation/DocumentationTeam/DocConventions" section="Header"}%
+%INCLUDE{"Documentation/DocumentationTeam/DocConventions" section="CommandLine"}%
+---+++ Download
+The Gratia dCache probes are packaged as rpms and can be downloaded either directly or with the vdt-dcache package from the [[http://vdt.cs.wisc.edu/components/dcache.html][VDT dCache homepage]].
+---+++  Fresh VDT-dCache installation
+Detailed installation procedure for latest production release is described [[http://vdt.cs.wisc.edu/extras/3.0.7/InstallingDcacheForOSG.README.html][here]].
+
+
+
+1) Configure 
+
+Before you run the vdt-dcache install script, you need to configure following settings in the vdt-dcache-[OS]-[ARCH]-[VERSION]/install/siteinfo.conf file:
+
+In Section #1
+<pre class="file">
+# Would you like to install/use Gratia dCache storage and transfer probes?
+# Options: yes or no
+INSTALL_DCACHE_GRATIA_PROBES="yes"
+</pre>
+ 
+In Section #3 
+<pre class='file'>
+<verbatim>
+GRATIA_COLLECTOR_HOST="<gratia-collector-host>:<gratia-collector-port>"
+GRATIA_SITE_NAME="<site-name>"
+GRATIA_GRID_NAME="<grid-name>"
+GRATIA_TRANSFER_PROBE_DB="<billingdb-name>"  (usually "billing")
+GRATIA_SEND_EMAIL="<yes or no>"  (usually "yes")
+REPORT_POOL_USAGE="<1 or 0>" ( 1 - report info about pools    0 - do not report info about pools) 
+SUMMARIZE="<1 or 0>" ( 1 - send summarized info   0 - send unsummarized info)
+
+Below Needed Only if GRATIA_SEND_EMAIL="yes"
+
+GRATIA_EMAIL_SRVHOST="<hostname of smtp server>"
+GRATIA_EMAIL_FROM="dCacheProbe" 
+GRATIA_EMAIL_TO="<comma separated list of email addresses>"
+
+</verbatim>
+</pre>
+
+where:
+
+_gratia-collector-host_ = "gratia-osg-transfer.opensciencegrid.org" (for OSG) or "gratia-osg-itb.opensciencegrid.org" (for ITB) or hostname of your site specific collector 
+
+_gratia-collector-port_   = "80" (for OSG and ITB) or port on which your site specific collector is listening
+
+_site-name_ = Name of your Storage Element
+
+_grid-name_  = "OSG" or "OSG-ITB"
+
+
+2) Do rest of dCache related configuration and run the vdt-dcache-[OS]_[ARCH]-[VERSION]/install/install.py script
+
+Upon doing a fresh install, you will see error messages about missing indexes in billing database. You need to first start the dCache services (so that the tables in billing database get created) and then create indexes following instructions mentioned [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/GratiaDcacheProbes#Setting_index_on_dCache_billing][here.]] For more information, read the [[http://vdt.cs.wisc.edu/extras/3.0.7/InstallingDcacheForOSG.README.html][installation procedure for latest production release]]
+
+
+---+++  Full upgrade of existing VDT-dCache installation 
+
+Detailed upgrade procedure for latest production release is described [[http://vdt.cs.wisc.edu/extras/3.0.7/UpgradingDcacheForOSG.README.html][here]]. 
+
+If you had configured and enabled Gratia probes during previous installation, make sure  [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/GratiaDcacheProbes#Setting_index_on_dCache_billing][indexes are set properly]]
+
+If you didn't enable Gratia dCache probes in previous installation, you need to follow instructions mentioned in above section "Fresh VDT-dCache Installation" 
+
+---+++  Upgrade Gratia dCache probes without upgrading VDT-dCache (partial upgrade) or Install without VDT-dCache (i.e. on top of "native" dCache installation)
+Perform following steps on admin node:
+
+  1. Download the new release (Check the right architecture, OS and postgres version):
+<pre class="rootscreen">
+<verbatim>
+cd /usr/local/vdt-dcache-<OS>_<ARCH>-<VERSION>/RPMS
+wget http://vdt.cs.wisc.edu/software/dcache/gratia/<VERSION>_post_8.3.7/gratia-probe-dcache-<OS>_<ARCH>-<VERSION>_postgres_8.3.7.tar.gz</verbatim>
+</pre>
+
+  where  [OS] is SL5,  [ARCH] could be  "32" or "64" and [VERSION] is the current production or ITB version of the gratia probes.
+         
+For example:
+<pre class="rootscreen">
+wget http://vdt.cs.wisc.edu/software/dcache/gratia/	1.07.02d-2_post_8.3.7/gratia-probe-dcache-1.07.02d-2_SL5_32_postgres_8.3.7.tar.gz
+</pre>
+
+  2. Untar it
+<pre class="rootscreen">
+<verbatim>
+tar xvfz gratia-probe-dcache-<OS>_<ARCH>-<VERSION>_postgres_8.3.7.tar.gz
+</verbatim>
+</pre>
+
+  3. Upgrade all rpms that have been created during the previous step:
+<pre class="rootscreen">
+<verbatim>
+rpm -Uvh gratia-probe-dCache-transfer-itb-<VERSION>.noarch.rpm   
+rpm -Uvh  gratia-probe-dCache-storage-itb-<VERSION>.noarch.rpm  
+rpm -Uvh  gratia-probe-common-<VERSION>.noarch.rpm
+rpm -Uvh  gratia-probe-extra-libs-arch-spec-<VERSION>.i386.rpm
+#or
+rpm -Uvh  gratia-probe-extra-libs-arch-spec-<VERSION>.x86_64.rpm
+</verbatim>
+</pre>
+
+Make sure [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/GratiaDcacheProbes#Setting_index_on_dCache_billing][indexes on billing database are set properly]]
+
+You will also need to do the [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation//GratiaDcacheProbes#Enable_Gratia_dCache_Probes_Manually][configuration manually]] 
+
+---++Enabling Gratia dCache Probes Manually 
+%ICON{"warning"}% If you are doing upgrade of the Gratia dCache probes keep in mind that _ProbeConfig_ has been changed!!!. The new file will be _ProbeConfig.rpmnew_. You will need to edit _ProbeConfig.rpmnew_ file incorporating all the modifications you have done in old _ProbeConfig_, then move _ProbeConfig.rpmnew_ to _ProbeConfig_.
+
+If you have not enabled the Gratia dCache probes you have to modify probe configuration files manually. In order to do so, you have to login on admin node and modify __ProbeConfig__ files for storage and transfer probes. The _ProbeConfig_ files for storage and transfer probes are  located under ==/opt/d-cache/gratia/probe/dCache-storage== and ==/opt/d-cache/gratia/probe/dCache-transfer== directories.
+You have to edit both files. On dCache admin node do the following:
+<pre class="rootscreen">
+cd /opt/d-cache/gratia/probe/dCache-transfer/
+edit ProbeConfig   
+</pre>
+
+The minimum set of parameters that have to be  modified for transfer probe:
+<pre class="file">
+<verbatim>
+CollectorHost="<gratia-collector-host>:<gratia-collector-port>"
+SiteName="<site-name>"
+Grid="<grid-name>" 
+OnlySendInterSiteTransfers="false"
+EnableProbe="1"
+Summarize="0"
+DCacheServerHost="<dcache-admin-node>"
+EmailServerHost="smtp.domain>"
+EmailFromAddress="dCacheProbe"
+EmailToList="<email1@domain,email2@domain>"
+</verbatim>
+</pre>
+
+Set Summarize to "1" if you want to enable summarization.
+
+For the storage probe you have to change directory:
+<pre class="rootscreen">
+cd /opt/d-cache/gratia/probe/dCache-storage/
+edit ProbeConfig   
+</pre>
+and modify storage _ProbeConfig_ file:
+
+<pre class="file">
+<verbatim>
+CollectorHost="<gratia-collector-host>:<gratia-collector-port>"
+SiteName="<site-name>"
+Grid="<grid-name>" 
+EnableProbe="1"
+InfoProviderUrl = "http://<dcache-admin-node>:2288/info"
+</verbatim>
+</pre>
+
+Where 
+ 
+_gratia-collector-host_:_gratia-collector-port_ - gratia-osg-transfer.opensciencegrid.org:80 for OSG or gratia-osg-itb.opensciencegrid.org:80 for ITB, if your site is running its own collector you should specify the hostname and port of that collector
+
+_grid-name_ - OSG or OSG-ITB
+
+_smtp.domain_     -  your  smtp server
+
+_email1@domain,email2@domain_ - list of email addresses that will receive email when probe server start/stop
+
+_dcache-admin-node_ - fqdn of dCache admin node
+
+---++ Setting index on dCache billing database
+
+Skip this section if you have already set indexes on your billing database. Index should be set on the datestamp and transaction fields, otherwise the probe will put significant load on your DB! 
+
+In order to set index you have to log in to the billing (or whatever database name you may have) DB using the following command:
+<pre class="rootscreen">
+psql -U postgres billing
+\d doorinfo
+\d billinginfo
+# If you don't see an index, execute the following commands:
+
+create unique index transaction on doorinfo(transaction);
+create index dates_di on doorinfo(datestamp);
+create index initiator on billinginfo(initiator);
+create index dates on billinginfo(datestamp);
+</pre>
+ 
+The above commands may take a while before they finish, especially if your billing database is large.
+
+---++ Creating  OSG User-VO Mapping 
+
+Please read  [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OsgSupportedVos][this page]] about files that are required to accurately collect grid resource usage and metrics by VO for transfer submitted using grid proxies or where voms proxy information is not available. 
+
+You will have to install VO-Map-Utilities from VDT. In order to so you will need first to download and install pacman:
+<pre class="rootscreen">
+wget http://physics.bu.edu/pacman/sample_cache/tarballs/pacman-3.28.tar.gz
+tar xzf pacman-3.28.tar.gz
+cd pacman-3.28
+. setup.sh
+</pre>
+
+
+Then you have to decide if you are going to use gridmap-file or GUMS for user-vo mapping and answer appropriately questions asked during package installation. If you are using GUMS, setup VDT_GUMS_HOST:
+
+<pre class="rootscreen">
+<verbatim>
+export VDT_GUMS_HOST=<GUMS hostname>  
+</verbatim>
+</pre>
+
+The next step is to install vo-map-utilities:
+
+<pre class="rootscreen">
+cd /opt
+mkdir  osg_vo_map
+cd osg_vo_map
+pacman -get  %CACHE%:VO-Map-Utilities
+. setup.sh
+</pre>
+
+ Pacman will ask whether you want to trust the cache (=yall=).
+
+The install procedure will print out a warning:
+<verbatim>
+========== IMPORTANT ==========
+Most of the software installed by the VDT *will not work* until you install
+certificates.  To complete your CA certificate installation, see the notes
+in the post-install/README file.
+</verbatim>
+
+The information provided in the README is out of date. Please setup the CA certificates in the following way instead:
+<pre class="rootscreen">
+source setup.sh
+$VDT_LOCATION/vdt/bin/vdt-ca-manage setupca --location local -url osg
+</pre>
+
+This command will download certificates distributed by the OSG to =$VDT_LOCATION/globus/share/certificates= and create a symlink from =$VDT_LOCATION/globus/TRUSTED_CA= to that location. [[VDTCAManage][Other options]] are also available.
+
+To reflect the changes update the environment and run the post installation script:
+<pre class="rootscreen">
+vdt-post-install
+</pre>
+
+You can verify that the version installed is the version you expected by executing =vdt-version=. To see all services available use =vdt-control -list=
+<pre class="rootscreen">
+vdt-version
+vdt-control --list
+</pre>
+
+You will have to enable and start all the services related to user-vo mapping:
+
+   * if you are using GUMS
+<pre class="rootscreen">
+vdt-control -enable gums-host-cron
+vdt-control -on gums-host-cron
+$VDT_LOCATION/gums/scripts/gums-host-cron
+</pre>
+
+   * if you are using edg-grid-map file
+<pre class="rootscreen">
+vdt-control -enable edg-mkgridmap
+vdt-control -on edg-mkgridmap
+</pre>
+
+To enable and start crl download , certificate update do the following:
+
+<pre class="rootscreen">
+vdt-control -enable vdt-update-certs fetch-crl
+vdt-control -on vdt-update-certs fetch-crl
+</pre>
+
+Check that osg-user-vo-map.txt is present and not empty, eg:
+<pre class="rootscreen">
+ls -l   $VDT_LOCATION/osg/etc/osg-user-vo-map.txt
+-rw-r--r--  1 root root 6224 Apr 14 14:23 /opt/vdt_vomap/osg/etc/osg-user-vo-map.txt
+</pre>
+
+As a last step you will need to modify _ProbeConfig_ files  to add location of osg-user-vo-map.txt.
+<pre class="file">
+<verbatim>
+UserVOMapFile="<VDT_LOCATION>/osg/etc/osg-user-vo-map.txt"
+</verbatim>
+</pre>
+
+---++ Starting/Stopping Gratia dCache Probes
+To start/stop the Gratia dCache-transfer probe that should be running on dCache admin host do the following:
+<pre class="rootscreen">
+/etc/init.d/gratia-dcache-transfer start/stop
+</pre>
+
+The Gratia dCache-storage probe is a cronjob that is run by default every hour. The cron file gratia-probe-dcache-storage.cron is located in /etc/cron.d
+The detailed procedure to activate and deactivate services provided by an installation of the VDT is described in [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/StartingServices][this document]]. 
+---++ Sanity Check
+
+If you turned on the Gratia dCache probes you should be able to see the accounting information by accessing your Gratia collector. Keep in mind that storage probe collection is executed by a cron job, so check the time the cron job will be executed:
+<pre class="rootscreen">
+[root@gwdca04 ~]# cat /etc/cron.d/gratia-probe-dcache-storage.cron 
+22 * * * * root "/opt/d-cache/gratia/probe/dCache-storage/dCache-storage_meter.cron.sh"
+</pre>
+
+Also, some delay due to Collector being under heavy load is possible. So, be patient. 
+
+To access the information about Gratia dCache-transfer probe, go to http://[gratia_host]:[gratia_port]/gratia-reporting/, click on "Custom SQL Query" on the left site menu frame, and enter the following query into provided text box:
+<pre class="file">
+<verbatim>
+select * from MasterTransferSummary where ProbeName like 'dcache-transfer:<dcache_admin_host_name>';
+</verbatim>
+</pre>
+click on "Execute Query" and you will see the total number of transfers per user.
+
+
+To access the information about the Gratia dCache-storage probe, go to http://[gratia_host]:[gratia_port]/gratia-reporting/, click on "Custom SQL Query" on the left site menu frame, and enter the following query into provided text box:
+<pre class="file">
+<verbatim>
+select * from StorageElement where ProbeName like 'dcache-storage:<dcache_admin_host_name>';
+</verbatim>
+</pre>
+
+click on "Execute Query" and you will see the storage information. 
+
+To check ITB Gratia collector click here [[http://gratia-osg-itb.opensciencegrid.org/gratia-reporting/][ITB Gratia]].
+
+To check OSG Gratia collector click here [[http://gratia-osg-transfer.opensciencegrid.org/gratia-reporting/][OSG Gratia]].
+
+---++ Known issues
+
+---++ Support
+   If you cannot find answers, please send all your questions to osg-storage@opensciencegrid.org  
+#DebugInfo
+---++ Debugging Information
+---+++!!File Locations
+You could find log and configuration files for each of the probes in the following location:
+|*Probe Name* |  *Configuration files* | *Log files* | 
+|Storage|/opt/d-cache/gratia/probes/dCache-storage/ProbeConfig|/opt/d-cache/gratia/var/logs/[YYYY-MM-DD].log  | 
+|Transfer|/opt/d-cache/gratia/probes/dCache-transfer/ProbeConfig|/opt/d-cache/gratia/var/logs/dcacheTransfer.log |
+
+
+---+++Screen Dump of the Complete Install Process 
+
+This is an example of the manual installation of the Gratia dCache probes. You will have to login as root to your dCache admin node. We assume that dCache is installed and running on that node.
+
+Check if  pyOpenSSL is installed:
+<pre class="rootscreen">
+#  yum list pyOpenSSL
+Loaded plugins: kernel-module
+Installed Packages
+pyOpenSSL.x86_64                                                           0.6-1.p24.7.2.2                                                           installed
+</pre>
+If you don't have pyOpenSSL installed do the following:
+%TWISTY%
+<pre class="rootscreen">
+#  yum list pyOpenSSL
+Loaded plugins: kernel-module
+Available Packages
+pyOpenSSL.x86_64                                  0.6-1.p24.7.2.2                                  sl-base
+</pre>
+
+<pre class="rootscreen">
+yum install pyOpenSSL.x86_64
+Loaded plugins: kernel-module
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package pyOpenSSL.x86_64 0:0.6-1.p24.7.2.2 set to be updated
+--> Finished Dependency Resolution
+Beginning Kernel Module Plugin
+Finished Kernel Module Plugin
+
+Dependencies Resolved
+
+==========================================================================================================
+ Package                 Arch                 Version                         Repository             Size
+==========================================================================================================
+Installing:
+ pyOpenSSL               x86_64               0.6-1.p24.7.2.2                 sl-base               120 k
+
+Transaction Summary
+==========================================================================================================
+Install      1 Package(s)         
+Update       0 Package(s)         
+Remove       0 Package(s)         
+
+Total download size: 120 k
+Is this ok [y/N]: y
+Downloading Packages:
+pyOpenSSL-0.6-1.p24.7.2.2.x86_64.rpm                                               | 120 kB     00:00     
+Running rpm_check_debug
+Running Transaction Test
+Finished Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing     : pyOpenSSL                                                                          1/1 
+
+Installed:
+  pyOpenSSL.x86_64 0:0.6-1.p24.7.2.2                                                                      
+
+Complete!
+</pre>
+
+Check OS and architecture:
+<pre class="rootscreen">
+# uname -a
+Linux fgt0x6.fnal.gov 2.6.18-194.3.1.el5xen #1 SMP Fri May 7 02:05:32 EDT 2010 x86_64 x86_64 x86_64 GNU/Linux
+# more /etc/redhat-release 
+Scientific Linux SLF release 5.3 (Lederman)
+</pre>
+
+So we will need the Gratia dCache probes for SL5_64.
+<pre class="rootscreen">
+cd /tmp
+wget http://vdt.cs.wisc.edu/software/dcache/gratia/1.06.16c-1_post_8.3.7/gratia-probe-dcache-1.06.16c-1_SL5_64_postgres_8.3.7.tar.gz
+tar xvfz gratia-probe-dcache-1.06.16c-1_SL5_64_postgres_8.3.7.tar.gz
+gratia_rpms/1.06.16c-1/SL5_64/
+gratia_rpms/1.06.16c-1/SL5_64/gratia-probe-extra-libs-1.06.16c-1.noarch.rpm
+gratia_rpms/1.06.16c-1/SL5_64/gratia-probe-extra-libs-arch-spec-1.06.16c-1.x86_64.rpm
+gratia_rpms/1.06.16c-1/SL5_64/gratia-probe-common-1.06.16c-1.noarch.rpm
+gratia_rpms/1.06.16c-1/SL5_64/gratia-probe-dCache-transfer-itb-1.06.16c-1.noarch.rpm
+gratia_rpms/1.06.16c-1/SL5_64/gratia-probe-services-1.06.16c-1.noarch.rpm
+gratia_rpms/1.06.16c-1/SL5_64/gratia-probe-dCache-storage-itb-1.06.16c-1.noarch.rpm
+</pre>
+
+Install/upgrade rpms:
+<pre class="rootscreen">
+# cd gratia_rpms/1.06.16c-1/SL5_64
+# ls 
+gratia-probe-common-1.06.16c-1.noarch.rpm               gratia-probe-extra-libs-1.06.16c-1.noarch.rpm
+gratia-probe-dCache-storage-itb-1.06.16c-1.noarch.rpm   gratia-probe-extra-libs-arch-spec-1.06.16c-1.x86_64.rpm
+gratia-probe-dCache-transfer-itb-1.06.16c-1.noarch.rpm  gratia-probe-services-1.06.16c-1.noarch.rpm
+# rpm -Uvh gratia-probe-services-1.06.16c-1.noarch.rpm gratia-probe-extra-libs-arch-spec-1.06.16c-1.x86_64.rpm  gratia-probe-extra-libs-1.06.16c-1.noarch.rpm gratia-probe-common-1.06.16c-1.noarch.rpm gratia-probe-dCache-storage-itb-1.06.16c-1.noarch.rpm  gratia-probe-dCache-transfer-itb-1.06.16c-1.noarch.rpm 
+Preparing...                ########################################### [100%]
+   1:gratia-probe-extra-libs########################################### [ 17%]
+   2:gratia-probe-common    ########################################### [ 33%]
+   3:gratia-probe-services  ########################################### [ 50%]
+IMPORTANT: please check /opt/d-cache/gratia/probe/services/ProbeConfig and remember to set EnableProbe = 1 to start operation.
+   4:gratia-probe-extra-libs########################################### [ 67%]
+   5:gratia-probe-dCache-sto########################################### [ 83%]
+IMPORTANT: please check /opt/d-cache/gratia/probe/dCache-storage/ProbeConfig and remember to set EnableProbe = 1 to start operation.
+   6:gratia-probe-dCache-tra########################################### [100%]
+IMPORTANT: please check /opt/d-cache/gratia/probe/dCache-transfer/ProbeConfig and remember to set EnableProbe = 1 to start operation.
+
+
+Execute:
+
+service gratia-dcache-transfer start
+
+to start the service.
+
+</pre>
+
+Check that the cron job for the storage probe has been installed:
+<pre class="rootscreen">
+ls -l /etc/cron.d/gratia-probe-dcache-storage.cron 
+-rw-r--r-- 1 root root 88 Jul  1 13:23 /etc/cron.d/gratia-probe-dcache-storage.cron
+</pre>
+
+Modify configuration files:
+<pre class="rootscreen">
+# cd /opt/d-cache/gratia/probe/dCache-transfer/
+# vi ProbeConfig
+</pre>
+<pre class="file">
+...
+    CollectorHost="gratia-osg-itb.opensciencegrid.org:80"
+...
+    SiteName="FNAL_Gridworks"
+    Grid="OSG-ITB"
+...
+    EnableProbe="1"
+
+</pre>
+and
+<pre class="rootscreen">
+# cd /opt/d-cache/gratia/probe/dCache-storage/
+# vi ProbeConfig
+</pre>
+<pre class="file">
+...
+    CollectorHost="gratia-osg-itb.opensciencegrid.org:80"
+...
+    SiteName="FNAL_Gridworks"
+    Grid="OSG-ITB"
+...
+    EnableProbe="1"
+....
+   InfoProviderUrl="http://gwdca06.fnal.gov:2288/info"
+</pre>
+
+Install vdt vo mapping package.
+<pre class="rootscreen">
+# wget http://physics.bu.edu/pacman/sample_cache/tarballs/pacman-3.28.tar.gz
+--2010-07-01 13:57:08--  http://physics.bu.edu/pacman/sample_cache/tarballs/pacman-3.28.tar.gz
+Resolving physics.bu.edu... 128.197.41.42
+Connecting to physics.bu.edu|128.197.41.42|:80... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: http://atlas.bu.edu/~youssef/pacman/sample_cache/tarballs/pacman-3.28.tar.gz [following]
+--2010-07-01 13:57:08--  http://atlas.bu.edu/~youssef/pacman/sample_cache/tarballs/pacman-3.28.tar.gz
+Resolving atlas.bu.edu... 192.5.207.10
+Connecting to atlas.bu.edu|192.5.207.10|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 856237 (836K) [application/x-gzip]
+Saving to: `pacman-3.28.tar.gz'
+
+100%[====================================================================================================================>] 856,237     1.66M/s   in 0.5s    
+
+2010-07-01 13:57:09 (1.66 MB/s) - `pacman-3.28.tar.gz' saved [856237/856237]
+
+# tar xvf pacman-3.28.tar.gz
+pacman-3.28/
+pacman-3.28/democache/
+pacman-3.28/democache/Package-E.pacman
+pacman-3.28/democache/Package-C.pacman
+pacman-3.28/democache/Python.pacman
+pacman-3.28/democache/WorkSpace.pacman
+...
+
+# cd pacman-3.28
+# . setup.sh
+# cd /opt
+# mkdir vdt-vo-map
+# mkdir osg_vo_map
+# cd osg_vo_map
+# export VDT_GUMS_HOST=gums.fnal.gov
+# pacman -get http://software.grid.iu.edu/osg-1.2:VO-Map-Utilities
+Do you want to add [http://software.grid.iu.edu/osg-1.2] to [trusted.caches]? (y/n/yall): yall
+Beginning VDT prerequisite checking script vdt-common/vdt-prereq-check...    
+
+The VDT installs a variety of software, each with its own license.
+In order to continue, you must agree to the licenses.
+You can view the licenses online at:
+
+    http://vdt.cs.wisc.edu/licenses/
+
+After the installation has completed, you will also be able to
+view the licenses in the "licenses" directory.
+
+Do you agree to the licenses? [y/n]
+y
+All prerequisite checks are satisfied.
+                                                             
+
+
+========== IMPORTANT ==========
+Most of the software installed by the VDT *will not work* until you install
+certificates.  To complete your CA certificate installation, see the notes
+in the post-install/README file.
+
+# source setup.sh                           
+# $VDT_LOCATION/vdt/bin/vdt-ca-manage setupca --location local -url osg
+Setting CA Certificates for VDT installation at '/opt/osg_vo_map'
+
+Setup completed successfully.
+# vdt-post-install
+Starting...
+Configuring EDG-Make-Gridmap... Done.
+Done.
+# vdt-control --list
+Service                 | Type   | Desired State
+------------------------+--------+--------------
+fetch-crl               | cron   | do not enable
+vdt-rotate-logs         | cron   | do not enable
+vdt-update-certs        | cron   | do not enable
+gums-host-cron          | cron   | do not enable
+edg-mkgridmap           | cron   | do not enable
+# vdt-control -enable gums-host-cron
+running 'vdt-register-service --name gums-host-cron --enable'... ok
+# vdt-control -on gums-host-cron
+enabling cron service gums-host-cron... ok
+
+# $VDT_LOCATION/gums/scripts/gums-host-cron
+# vdt-control -enable vdt-update-certs fetch-crl
+running 'vdt-register-service --name vdt-update-certs --enable'... ok
+running 'vdt-register-service --name fetch-crl --enable'... ok
+# vdt-control -on vdt-update-certs fetch-crl
+enabling cron service vdt-update-certs... ok
+enabling cron service fetch-crl... ok
+# ls -l   $VDT_LOCATION/osg/etc/osg-user-vo-map.txt
+-rw-r--r-- 1 root root 7998 Jul  1 14:05 /opt/osg_vo_map/osg/etc/osg-user-vo-map.txt
+</pre>
+
+Edit !ProbeConfig files to add reference to the user-vo map file:
+<pre class="rootscreen">
+cd /opt/d-cache/gratia/probe/dCach-storage
+vi ProbeConfig
+</pre>
+<pre class="file">
+UserVOMapFile="/opt/osg_vo_map/osg/etc/osg-user-vo-map.txt"
+</pre>
+<pre class="rootscreen">
+cd /opt/d-cache/gratia/probe/dCach-transfer
+vi ProbeConfig
+</pre>
+<pre class="file">
+UserVOMapFile="/opt/osg_vo_map/osg/etc/osg-user-vo-map.txt"
+</pre>
+%ENDTWISTY%
+
+---++ *Comments*
+| PM2RPM_TASK = SE | Main.RobertEngel | 28 Aug 2011 - 06:27 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = NehaSharma
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = NehaSharma
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = SuchandraThapa
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

@@ -1,0 +1,38 @@
+%META:TOPICINFO{author="TedHesselroth" date="1271185628" format="1.1" version="1.16"}%
+%META:TOPICPARENT{name="Storage"}%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%RED%
+Merge with LocalStorageConfiguration
+%ENDCOLOR%
+
+---++ Introduction
+OSG_SITE_READ is a transient storage area visible from all worker nodes and optimized for high-performance read operations that holds input data shared among different applications running on different worker nodes.
+
+Relative paths must resolve consistently between gatekeeper and worker nodes.
+
+OSG_SITE_READ allows open, seek, read, and close by regular programs, which may use it transparently as a local disk space. It is provided through a grid file access library, and the users do not have to know the storage location and its underlying implementation. The usage is uniform across OSG.
+
+Users have no write access to this area from the worker node. Users can write from the grid side of the Storage Element. However, site administrators can write files to the area.  This parameter should be filled in using a dcap url (e.g. =dcap://mydcapnode.athome.edu:22136//pnfs/athome.edu=).
+
+
+
+---++ Typical uses of OSG_SITE_READ
+   * Input datasets for jobs executing on the worker nodes
+   * Data staged in 
+
+---++ Notes
+In some cases, gsiftp can put/get files into the SE that are then visible via OSG_SITE_READ or [[StorageParameterOsgSiteWrite][OSG_SITE_WRITE]] from the worker nodes. If so, the OSG_DEFAULT_SE entry may be used to publish the gsiftp URL of the SE that can do so. However, both put and get must be supported.
+
+If the gatekeeper cannot write to this area, job managers may have problems using a shared directory to transfer the executable or some data.
+
+
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.SuchandraThapa - 19 Oct 2007 %BR%
+%REVIEW% Main.HorstSeverini - 16 Jun 2008 %BR%
+
+%REVFLAG% %Y% %BR%
+
+%META:TOPICMOVED{by="SuchandraThapa" date="1192832982" from="Integration/ITB_0_7.AboutStorageAreaOsgSiteRead" to="Integration/ITB_0_7.StorageParameterOsgSiteRead"}%

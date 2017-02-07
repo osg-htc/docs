@@ -1,0 +1,73 @@
+%META:TOPICINFO{author="JamesWeichel" date="1318265624" format="1.1" version="1.36"}%
+%META:TOPICPARENT{name="ComputeElementInstall"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%DOC_STATUS_TABLE%
+%TOC%
+
+---+ About this Document
+
+This document describes the different authorization methods you can use in the OSG.  You'll need to determine which of these authorization modes you wish to implement and the mode you choose will determine who can access your resources and how.  For additional background information, see [[Documentation/UserAuthAndPrivilege][An Introduction to User Authorization and Privilege in OSG]].  OSG supports these scenarios: 
+
+   * [[#Local_grid_mapfile][Local authorization - grid mapfile]]
+   * [[#Full_Privilege][Full Privilege - GUMS]].
+
+---+ Introduction
+
+The first step you will need to do is to determine if you want to use a local grid mapfile or full privilege with GUMS.  One easy way to determine this is to ask "Is your site going to support role-based authorization?" (role-based authorization uses VOMS proxies with extended attributes), if you do then you must use GUMS, otherwise you can use either grid mapfiles or GUMS.  For a explanation on what GUMS is you can refer to the [[InstallConfigureAndManageGUMS#Introduction][GUMS introduction]].
+
+
+---+ Local grid-mapfile 
+
+In this mode, authorization is performed using a grid-mapfile on the local CE host.  This grid-mapfile is what is used to map grid certificate DN's to local user accounts.  The grid-mapfile on the host can be created either manually or by adding the =edg-mkgridmap= script to root's cron entry.
+
+This script uses a configuration file =edg-mkgridmap.conf=, located in the systems =$VDT_LOCATION/edg/etc= directory, to create the grid-gridmap file.  The =edg-mkgridmap.conf= file is installed by a VO package and can be used to add or update VO information.  The OSG Operations sends announcements regarding this package to the VO support centers and to the =osg-sites@opensciencegrid.org= mailing list.  For subscribing to this list, or other sysadmin resources, you can look at the [[Documentation.SiteAdminResources][site admin resources page]].
+
+If a site operates multiple CE's, then manual synchronization of the grid-mapfiles is required.
+
+You may prefer this configuration if:
+   * You operate a small site, such as you only have one gatekeeper.
+   * You deal with a small set of semi-static VOs
+   * You are *not* supporting  *role-based* authorization
+
+See [[LocalAuthPreConfig][local grid-mapfile web page]] for more details.
+
+
+---+ Full Privilege  
+This scenario uses a GUMS service and *does not* use a grid-mapfile.   The PRIMA authorization module with a GUMS service is used for all authorizations.  Globus gatekeeper and WS-GRAM use a callout to PRIMA, such that upon receipt of each request, PRIMA forwards the request to a GUMS service which performs the dynamic mapping of the user's certificate to a local Unix account.  In this configuration multiple CE's can use a single GUMS service for authorization, thus centrally locating all of your sites authorization.
+
+See [[FullPrivPreConfig][Full Privilege web page]] for more details.
+
+%NOTE%
+
+   * A single GUMS service providing identity mapping services for multiple CEs at a site can become a single point of authentication failure.  Therefore care must be taken to monitor the health of the GUMS host and availability of the service. 
+
+
+---+ Comments
+%COMMENT{type="tableappend"}%
+
+
+<!-- REVIEW PROCESS
+
+   * Local DOC_ROLE		  = SysAdmin
+   
+   * Local DOC_TYPE		  = Knowledge
+   
+   * Local DOC_AREA               = ComputeElement
+
+   * Local OWNER                    = MineAltunay
+   * Local INCLUDE_REVIEW  = %YES%
+   * Local INCLUDE_TEST   = %NO%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %NO%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = StevenTimm
+   * Local REVIEW_PASSED  = %YES%
+   * Local TEST_PASSED = %IN_PROGRESS%
+ 
+      
+-->
+
+%META:FILEATTACHMENT{name="auth-flowchart.png" attachment="auth-flowchart.png" attr="" comment="" date="1295046905" path="auth-flowchart.png" size="43015" stream="auth-flowchart.png" tmpFilename="/usr/tmp/CGItemp42538" user="X509_2fDC_3dorg_2fDC_3ddoegrids_2fOU_3dPeople_2fCN_3dSuchandra_20Thapa_20757586" version="2"}%
+%META:FILEATTACHMENT{name="auth-flowchart.graffle" attachment="auth-flowchart.graffle" attr="" comment="" date="1295046867" path="auth-flowchart.graffle" size="103374" stream="auth-flowchart.graffle" tmpFilename="/usr/tmp/CGItemp42822" user="X509_2fDC_3dorg_2fDC_3ddoegrids_2fOU_3dPeople_2fCN_3dSuchandra_20Thapa_20757586" version="2"}%
+%META:TOPICMOVED{by="AnneHeavey" date="1192833710" from="Integration/ITB_0_7.AboutOsgAuthorizationForCE" to="Integration/ITB_0_7.AboutAuthorizationForCE"}%

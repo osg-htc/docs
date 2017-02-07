@@ -1,0 +1,297 @@
+%META:TOPICINFO{author="KyleGross" date="1481047987" format="1.1" version="1.23"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *LCG Utilities*
+%DOC_STATUS_TABLE%
+%TOC{depth="2"}%
+
+---+ About this Document
+%ICON{hand}% This document is for SRM Storage end users. It provides some usage examples of [[http://grid-deployment.web.cern.ch/grid-deployment/documentation/LFC_DPM/lcg_util/][LCG Data Management Client Tools]]. 
+
+This document applies to the latest release %RED% OSG-%OSG_VERSION% %ENDCOLOR%
+
+%INCLUDE{"Documentation/DocumentationTeam/DocConventions" section="Header"}%
+%INCLUDE{"Documentation/DocumentationTeam/DocConventions" section="CommandLine"}%
+
+---+ Introduction
+LCG Utils is a suite of client tools for data movement written for the [[http://lhc.web.cern.ch/lhc/][LHC Computing Grid]]. The tools are based on the [[http://grid-deployment.web.cern.ch/grid-deployment/gis/GFAL/GFALindex.html][Grid File Access Library]], which is also included. The tools allow users to copy files between CE (Compute Element), WN (Worker Node) and a SE (Storage Element) and to register entries in the file catalog and replicate files between SEs. Some commands use logical file names and require a connection to a BDII-based catalog; exceptions are file copies and deletions, which take endpoints based on the SRM URL. This document does not contain examples of commands that require access to file catalog. The usage of such command is explained in the  [[https://edms.cern.ch/file/454439//LCG-2-UserGuide.html#SECTION00097000000000000000][LCG User Guide.]]
+
+This document is intended for users who want to use lcg-utils clients to do any of following
+   * list files at a storage location
+   * get files from a storage location
+   * put files in a storage location (in volatile or space reserved area)
+   * transfer files from one storage location to another
+ . 
+---+ How to get Help?
+If you cannot resolve the problem, the best way to get help is by following  [[HelpProcedure][this page]]. 
+If you cannot find answers, please send all your questions to :
+   * osg-storage@opensciencegrid.org
+
+---+ Requirements
+   * A valid [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/UserCESimpleTest#Authentication_using_a_Grid_Prox][grid proxy]] or [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/UserCESimpleTest#Authentication_using_a_VOMS_Prox][voms proxy]]
+   * Permission to actually get/put/list the data 
+     (You should be allowed to actually retrieve/store the data on the storage element.)
+   * [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/ClientInstallationGuide][OSG Client]], [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/PreparingComputeElement][CE]] or [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/WorkerNodeClient][WN]] software installed
+   * The url for the Storage Element you are trying to access
+
+---+ Using LCG Utils commands
+---++ Setting up LCG Utils
+LCG Utils toolkit is packaged in to VDT and should be available on any node that has the OSG Client, CE or WN software installed.
+To run the clients, you need to 
+   * login to proper node and set up the proper environment
+<pre class="screen">
+<code>%UCL_PROMPT% source %RED%VDT-INSTALL%ENDCOLOR%/setup.sh</code>
+</pre>
+   * generate your voms credentials
+   * make sure you have clients in your ==PATH== by running example command such as
+<pre class="screen">
+<code>%UCL_PROMPT% which lcg-cp</code>
+</pre>
+*Notes* 
+   * Command line options available for each command can be listed by using %RED%--help%ENDCOLOR% 
+   * The url for %LINK_BESTMAN% based SE is of form - srm://[HOSTNAME]:[PORT]/srm/v2/server
+   * The url for [[http://www.dcache.org][dCache]] based SE is of form  srm://[HOSTNAME]:[PORT]/srm/managerv2 
+   * The output for the same command run against different type of SE may vary
+
+After setting environment variables and generating voms proxy certificate, you can try to execute basic commands.
+
+---++ lcg-cp command
+This command is used to perform file transfers.<br></br>
+%ICON{"warning"}% lcg-cp will create any missing directories if needed.
+
+Options can be listed as follows
+<pre class="screen">
+<code>%UCL_PROMPT% lcg-cp --help
+Usage:  lcg-cp [-h,--help] [-c,--config config_file] [-n nbstreams] [-b,--nobdii] [-D,--defaultsetype se|srmv1|srmv2]
+        [-T,--srcsetype se|srmv1|srmv2] [-U,--dstsetype se|srmv1|srmv2] [-s,--sst src_spacetokendesc]
+        [-S,--dst dest_spacetokendesc] [--connect-timeout value] [--sendreceive-timeout value]
+        [--bdii-timeout value] [--srm-timeout value] [--checksum] [--checksum-type type]
+        [-v,--verbose] [-V,--vo vo] [--version] src_file  dest_file</code>
+</pre>
+
+*Copying a local file to the remote SRM endpoint*
+
+Syntax
+<pre class="screen">
+<code>%UCL_PROMPT% lcg-cp -v -b -D srmv2 file://%RED%local_file%ENDCOLOR% %RED%SURL%ENDCOLOR%</code>
+</pre> 
+where
+
+%RED%local_file%ENDCOLOR% - absolute location of source file beginning with a "/"
+
+%RED%SURL%ENDCOLOR% - remote storage file location
+
+Example
+<pre class="screen">
+<code>%UCL_PROMPT% lcg-cp -v -b -D srmv2 file:///tmp/test   srm://fgitb315.fnal.gov:10443/srm/v2/server?SFN=/cache/test/test100
+VO name: fermilab
+Checksum type: None
+Destination SE type: SRMv2
+Destination SRM Request Token: put:7
+Source URL: file:/tmp/test
+File size: 15
+Source URL for copy: file:/tmp/test
+Destination URL: gsiftp://fgitb315.fnal.gov//cache/test/test100
+# streams: 1
+           15 bytes      0.04 KB/sec avg      0.04 KB/sec inst
+Transfer took 1010 ms</code>
+</pre>
+
+*Copying file from remote SRM endpoint to local machine*
+
+Syntax
+<pre class="screen">
+<code>%UCL_PROMPT% lcg-cp -v -b -D srmv2 %RED%SURL%ENDCOLOR%</code>  file://%RED%local_file%ENDCOLOR%</code>
+</pre> 
+
+where
+
+%RED%local_file%ENDCOLOR% - absolute location of source file beginning with a "/"
+
+%RED%SURL%ENDCOLOR% - remote storage file location
+
+Example
+<pre class="screen">
+<code>%UCL_PROMPT%  lcg-cp -v -b -D srmv2 srm://fgitb315.fnal.gov:10443/srm/v2/server?SFN=/cache/test/test100 file:///home/neha/fileback.txt
+Using grid catalog type: UNKNOWN
+Using grid catalog : (null)
+VO name: fermilab
+Checksum type: None
+Trying SURL srm://fgitb315.fnal.gov:10443/srm/v2/server?SFN=/cache/test/test100 ...
+Source SE type: SRMv2
+Source SRM Request Token: get:11
+Source URL: srm://fgitb315.fnal.gov:10443/srm/v2/server?SFN=/cache/test/test100
+File size: 593
+Source URL for copy: gsiftp://fgitb315.fnal.gov//cache/test/test100
+Destination URL: file:/home/neha/fileback.txt
+# streams: 1
+            0 bytes      0.00 KB/sec avg      0.00 KB/sec inst
+Transfer took 1010 ms
+-bash-3.00$</code>
+</pre>
+*Copying file in to a reserved space area*
+
+In order to copy file to a reserved space area you need to know a space token description. 
+
+Syntax
+<pre class="screen">
+<code>%UCL_PROMPT% lcg-cp -v -b -D srmv2 file://%RED%local_file%ENDCOLOR% %RED%SURL%ENDCOLOR% -s %RED%space_token_description%ENDCOLOR%</code>
+</pre> 
+
+where
+
+%RED%local_file%ENDCOLOR% - absolute location of source file beginning with a "/"
+
+%RED%SURL%ENDCOLOR% - remote storage file location
+
+Example
+
+Let's assume that space token with description  ==MY_SPACE== has been already reserved for you on SRM endpoint you are using.
+<pre class="screen">
+<code>%UCL_PROMPT% lcg-cp -v -b -D srmv2 file:///tmp/test   srm://gw015k1.fnal.gov:8443/srm/v2/server?SFN=/data/xrootdfs/public/test/test100 -s MY_SPACE
+Using grid catalog type: UNKNOWN
+Using grid catalog : (null)
+VO name: fermilab
+Checksum type: None
+Destination SE type: SRMv2
+Destination SRM Request Token: put:56
+Source URL: file:/tmp/test
+File size: 15
+Source URL for copy: file:/tmp/test
+Destination URL: gsiftp://gw015k1.fnal.gov//data/xrootdfs/public/test/test100
+# streams: 1
+           15 bytes      0.00 KB/sec avg      0.00 KB/sec inst
+Transfer took 7010 ms</code>
+</pre>
+
+---++ lcg-del command
+This command is used to delete a file.
+
+%ICON{"warning"}% LCG Utils toolkit doesn't provide a means to delete a directory.
+
+Options can be listed as follows
+<pre class="screen">
+<code>%UCL_PROMPT% lcg-del --help
+Usage: lcg-del [-a] [-c,--config config_file] [-h,--help] [--force] [-b,--nobdii] [-d,--dir] [--srm-timeout value]
+        [--connect-timeout value] [--sendreceive-timeout value] [--bdii-timeout value]
+        [-D,--defaultsetype se|srmv1|srmv2] [-T,--setype se|srmv1|srmv2] [-l,--nolfc]
+        [-s,--se se] [-v,--verbose] [-V,--vo vo] [--version] (-f file | surl [...])</code>
+</pre>
+
+Syntax
+<pre class="screen">
+<code>%UCL_PROMPT% lcg-del -b -v -l  -D srmv2 %RED%SURL%ENDCOLOR%</code>
+</pre>
+
+where
+
+%RED%SURL%ENDCOLOR% - remote storage location of file you want to delete
+
+Example
+<pre class="screen">
+<code>%UCL_PROMPT% lcg-del -b -v -l -D srmv2  srm://gw015k1.fnal.gov:8443/srm/v2/server?SFN=/data/xrootdfs/public/test/test1/test2/test100
+VO name: fermilab
+SE type: SRMv2
+srm://gw015k1.fnal.gov:8443/srm/v2/server?SFN=/data/xrootdfs/public/test/test1/test2/test100 - DELETED</code>
+</pre>
+
+---++ lcg-ls command
+
+This command is used to list contents of a directory. 
+
+Options can be listed as follows
+<pre class="screen">
+<code>%UCL_PROMPT% lcg-ls --help
+Usage: lcg-ls [-l] [-d] [-D,--defaultsetype se|srmv1|srmv2] [-T,--setype se|srmv1|srmv2]
+        [--connect-timeout value] [--sendreceive-timeout value] [--bdii-timeout value]
+        [--srm-timeout value] [-b,--nobdii] [-V,--vo vo] [-h,--help] [--version] file [...]</code>
+</pre>
+%ICON{"warning"}% ==-l== option here specifies a long listing format
+
+Syntax
+</pre>
+<pre class="screen">
+<code>%UCL_PROMPT% lcg-ls -b -v -l  -D srmv2 %RED%SURL%ENDCOLOR%</code>
+</pre>
+
+where
+
+%RED%SURL%ENDCOLOR% - location of remote directory whose contents you want to list
+
+Examples
+<pre class="screen">
+<code>%UCL_PROMPT%lcg-ls -ld -v -b -D srmv2   srm://fgitb315.fnal.gov:10443/srm/v2/server?SFN=/cache/test/test12
+SE type: SRMv2
+-rwxr-xr-x   1     2     2      15               ONLINE /cache/test/test12
+
+%UCL_PROMPT% lcg-ls  -v -b -D srmv2   srm://fgitb315.fnal.gov:10443/srm/v2/server?SFN=/cache/test
+SE type: SRMv2
+/cache/test/test12
+/cache/test/test6
+/cache/test/test11
+/cache/test/test10
+/cache/test/test8
+/cache/test/test100</code>
+</pre>
+
+---+ References
+   *  [[https://edms.cern.ch/file/454439//LCG-2-UserGuide.html#SECTION00097000000000000000][LCG User Guide]]
+   *  [[http://grid-deployment.web.cern.ch/grid-deployment/gis/GFAL/GFALindex.html][Grid File Access Library]]
+---+ *Comments*
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER =  DouglasStrain
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = EndUser
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = DouglasStrain
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = NehaSharma
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+%META:TOPICMOVED{by="JamesWeichel" date="1317327430" from="ReleaseDocumentation.LcgUtils" to="ReleaseDocumentation.LcgUtilities"}%

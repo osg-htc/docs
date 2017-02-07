@@ -1,0 +1,114 @@
+%META:TOPICINFO{author="KyleGross" date="1481047992" format="1.1" version="1.22"}%
+%META:TOPICPARENT{name="VomrsInstallGuide"}%
+%DOC_STATUS_TABLE%
+
+---+!! VOMRS Activation
+%TOC{}%
+
+---+ About this Document
+
+%ICON{"hand"}% This document is for VO Administrators. It describes how to add the _first_ member to a VO and make that member the VO Administrator.
+
+%STARTSECTION{"Main"}%
+
+---%SHIFT%+ Add the VO Administrator
+
+The following sub-sections will reference the default _VDT_ VO in the text and examples. Please remember to use your _real_ VO when executing the procedure.
+
+---%SHIFT%++ Add the first VO Member
+
+The first member of a %LINK_GLOSSARY_VO% is a designated as a VO Administrator for the VOMRS VO created earlier. This member has administrative rights within VOMRS that a normal VO member will not have.
+
+Choose among the two possibilities below to add the first member to the VO. Only the first member of a VO can be added the way described below.
+
+   1 If the member has a valid grid user certificate:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% $VDT_LOCATION/vomrs/sbin/add_admin 
+          --vo %RED%&lt;your VO&gt;%ENDCOLOR%
+          --firstname %RED%&lt;Member's First Name&gt;%ENDCOLOR%
+          --lastname %RED%&lt;Member's Last Name&gt;%ENDCOLOR% 
+          --phone %RED%&lt;Member's Work Phone&gt;%ENDCOLOR%
+          --org %RED%&lt;Member's Organization&gt;%ENDCOLOR%
+          --file %RED%&lt;members usercert.pem file&gt;%ENDCOLOR%</pre>
+   1 _otherwise_:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% $VDT_LOCATION/vomrs/sbin/add_admin
+          --vo %RED%&lt;your VO&gt;%ENDCOLOR%
+          --firstname %RED%&lt;Member's First Name&gt;%ENDCOLOR%
+          --lastname %RED%&lt;Member's Last Name&gt;%ENDCOLOR% 
+          --phone %RED%&lt;Member's Work Phone&gt;%ENDCOLOR%
+          --org %RED%&lt;Member's Organization&gt;%ENDCOLOR%
+          --nousercert  
+          --dn "%RED%&lt;Member's Distinguished Name&gt;%ENDCOLOR%"
+          --ca "%RED%&lt;Member's Certificate Authority&gt;%ENDCOLOR%"</pre>
+
+---++ Verifying the Administrative Rights of the first Member
+
+This step requires the grid user certificate of the first member to be imported into the web browser you are using for the test.
+
+   1. Point a _certificate-enabled_ web browser window to =https://%UCL_HOST_FQDN%:8443/vomrs/VDT/vomrs=
+   1. In order to expend menu click on <i>[+]</i>, to collapse click on <i>[-]</i>
+   1. Click on *Members* in order to see all members of the VO
+   1. Select *Search*. You should see just one entry - yours.
+
+Please refer to the [[http://computing.fnal.gov/docs/products/vomrs/vomrs1_3/wwhelp/wwhimpl/java/html/wwhelp.htm][VOMRS User Guide]] for further information
+
+%ENDSECTION{"Main"}%
+
+---+ Comments
+
+| PM2RPM_TASK = NORPM | Main.RobertEngel | 28 Aug 2011 - 00:32 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = StevenTimm
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = VO
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %NO%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->

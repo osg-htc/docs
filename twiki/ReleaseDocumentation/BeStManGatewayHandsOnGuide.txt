@@ -1,0 +1,558 @@
+%META:TOPICINFO{author="KyleGross" date="1481047983" format="1.1" version="1.24"}%
+%META:TOPICPARENT{name="SiteAdminsWorkshopTutorialsAug10"}%
+---+!! *<nop>BeStMan-gateway Hands-on Guide*
+%DOC_STATUS_TABLE%
+%TOC{depth="2"}%
+
+---++ Introduction
+This tutorial covers step by step !BeStman installation and gateway mode configuration. We will also provide tips some tips on  how to increase scalability and reliability of your !BeStMan installation for heavy load. We will explain how to enable and configure gratia !gridFTP transfer probe in case you would like to report transfer data to Gratia (the OSG accounting service).
+
+---+++!! Applicable Versions
+The applicable software versions for this document are 
+%RED%
+*osg-version 1.2* 
+%ENDCOLOR%
+(or higher) and 
+%RED%
+*vdt-version  2.0*
+%ENDCOLOR%
+(or higher).
+
+---+++!!Engineering Considerations
+The [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/BestmanGateway][BeStMan Installation Guide]] provides detailed instructions and various configuration options. Please refer to this guide for more information.
+It is recommended to install !BeStMan on its own server though, in principal, it could be installed on CE node and configured to use !GridFTP server  that have been already installed with CE.  
+
+You can choose to run multiple !GridFTP servers to achieve load balance and better performance if you are installing !BeStMan not on the local disk but on NFS or some other DFS. If you really expecting a heavy load on your SE you should acquire additional nodes for your !GRidFTP servers and have a node for !BeStMan server.
+
+---+++!!Help!
+If you cannot resolve the problem, the best way to get help is by following this [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/BestmanGateway#Debugging_Information][debugging information]].
+
+#CheckList
+---++ Checklist
+   1. you have at least one node you can login as root
+   1. [[ReleaseDocumentation/PacmanInstall][pacman]] version >= %PACMAN_VERSION% is required
+   1. The server must have a fully qualified domain name and a valid [[ReleaseDocumentation/GetGridCertificates][grid host certificate]] installed in =/etc/grid-security/=
+   1. !BeStMan server needs to have a valid service certificate. The certificate should be own by a user login that is running !BeStMan server.The right permission (600) should be set on those files. By default !BeStMan is using a service certificate =/etc/grid-security/http/httpcert.pem= and certificate key =/etc/grid-security/http/httpkey.pem=. %ICON{warning}%  !BeStMan should be configured with host certificate in order to be able to handle requests from !LCG-Utils tools. This is mandatory for at least all !BeStMan servers that support ATLAS experiment. Normally the OSG !BeStMan implementation uses a service certificate, not a host certificate. This causes lcg-cp to fail because the certificate name (which looks like http/hostname instead of just hostname or host/hostname) doesn't match the hostname. 
+   1. The firewall must allow incoming connections for two !BeStMan ports (defaults: 1080, 10443)
+   1. The firewall must allow incoming connections to the !GridFTP port (default 2811). Outgoing connections must be allowed from high ports ( typically in range 32769-65535 ). We recommend to consult the [[ReleaseDocumentation/ComputeElementFirewalls][Firewall Guide]] if you install the !GridFTP server for the first time.
+   1. A working GUMS server or a grid-mapfile is needed for authentication and authorization using grid certificates.
+   1. A disk area that you want to export with !BeStMan ==/cache== in this document. This directory should have adequate permissions so users have read/write/execute access. 
+   1.  You will have to have all unix users mapped in GUMS or grid-mapfile to be listed in /etc/passwd. The users do not need to be able to login on the node.
+
+---++ Installation Procedure
+This installation procedure assumes that you have functional GUMS server and are installing !BeStMan on dedicated node. It also assumes that you don't have firewall on that node. 
+#PreInstall
+---+++ Pre-installation steps
+Login on the node dedicated for !BeStMan as user ==root==. 
+
+If you have pacman installed on that node skip to the next step, otherwise do this:<pre class="screen">
+<verbatim>
+cd /opt
+wget http://physics.bu.edu/pacman/sample_cache/tarballs/pacman-latest.tar.gz
+tar xvfz pacman-latest.tar.gz 
+cd pacman-3.29
+. setup.sh
+</verbatim>
+</pre>
+
+If you have already installed pacman in <PACMAN_LOCATION> directory do:<pre class="screen">
+. %BLUE%&lt;PACMAN_LOCATION&gt;%ENDCOLOR%/setup.sh
+</pre>
+
+Create a directory with certificate and key files that belong to !BeStMan owner (default is ==daemon==):<pre class="screen">
+<verbatim>
+cd /etc/grid-security
+mkdir bestman_cert
+cp hostcert.pem bestman_cert/bestmancert.pem  
+cp hostkey.pem bestman_cert/bestmankey.pem
+chown -R daemon.daemon bestman_cert
+chmod 644 bestman_cert/bestmancert.pem  
+chmod 600 bestman_cert/bestmankey.pem
+</verbatim>
+</pre>
+---+++ !BeStMan Installation 
+Set up ==VDT_GUMS_HOST== environment variable (replace  %BLUE%your_gums_host%ENDCOLOR% with the FQN of the host where  GUMS service is installed):<pre class="screen">
+ export VDT_GUMS_HOST=%BLUE%your_gums_host%ENDCOLOR%
+</pre>
+Install !BeStMan from OSG cache:<pre class="screen">
+<verbatim>
+cd /opt
+mkdir osg-bestman
+cd osg-bestman
+pacman -get http://software.grid.iu.edu/osg-1.2:Bestman
+Do you want to add [http://software.grid.iu.edu/osg-1.2] to [trusted.caches]? (y/n/yall): yall
+</verbatim>
+</pre>
+
+---+++ Post-installation steps
+Perform required post-install actions:
+   1. setup environment <pre class="screen">
+<verbatim>
+cd /opt/osg-bestman
+. setup.sh
+</verbatim>
+</pre>
+   1. run post-install script <pre class="screen">
+<verbatim>
+vdt-post-install 
+Starting...
+Configuring PRIMA... Done.
+Configuring EDG-Make-Gridmap... Done.
+Done.
+</verbatim>
+</pre>
+   1. install CAs <pre class="screen">
+<verbatim>
+$VDT_LOCATION/vdt/bin/vdt-ca-manage setupca --location local  --url osg
+ </verbatim>
+</pre>
+   1. copy the configuration files that required for !GridFTP if GUMS is used: <pre class="screen">
+<verbatim>
+cp post-install/gsi-authz.conf  /etc/grid-security/gsi-authz.conf
+cp post-install/prima-authz.conf  /etc/grid-security/prima-authz.conf 
+</verbatim>
+</pre>
+
+
+---++ Service Configuration 
+---+++ Configure !BeStMan
+Create a storage area that will be used by !BeStMan to store files: <pre class="screen">
+<verbatim>
+mkdir /cache
+chmod 777 /cache
+chown daemon.daemon /cache
+</verbatim>
+</pre>
+
+Configure !BeStMan with these options:<pre class="screen">
+<verbatim>
+$VDT_LOCATION/vdt/setup/configure_bestman --server y --user daemon \
+--cert /etc/grid-security/bestman_cert/bestmancert.pem \
+--key /etc/grid-security/bestman_cert/bestmankey.pem \
+--with-allowed-paths /cache \
+--gums-host  your_gums_host \
+--gums-port 8443 \
+--enable-gateway
+</verbatim>
+</pre>
+---++++Sudoers File Modification
+Please, make the appropriate modification to ==/etc/sudoers== described in the !BeStMan documentation.  You may need to use the special command "visudo" to edit this file.  Add the following lines to this file : <pre class="file">
+<verbatim>
+# Comment out this line, if it is in your ==/etc/sudoers== file (RHEL5+)
+#Defaults    requiretty
+
+Cmnd_Alias SRM_CMD = /bin/rm, /bin/mkdir, /bin/rmdir, /bin/mv, /bin/ls 
+Runas_Alias SRM_USR = ALL, !root 
+daemon ALL=(SRM_USR) NOPASSWD: SRM_CMD 
+</verbatim>
+</pre>
+
+---+++ Configure Gratia !GridFTP Transfer Probe
+Configure transfer probe, replace ==your_site_name== with actual name of your sites: <pre class="screen">
+<verbatim>
+$VDT_LOCATION/vdt/setup/configure_gratia --probe gridftp-transfer \
+--report-to gratia-osg-itb.opensciencegrid.org:8881 --probe-cron \
+--site-name <your_site_name>
+</verbatim>
+</pre>
+Run ==gums-host-cron== command to generate VO-user mapping file:
+<pre class="screen">
+<vebratim>
+$VDT_LOCATION/gums/scripts/gums-host-cron
+</verbatim>
+</pre>
+
+---++ Enabling Services
+Check what services are need to be enabled: <pre class="screen">
+<vebratim>
+vdt-control -list
+Service                 | Type   | Desired State
+------------------------+--------+--------------
+fetch-crl               | cron   | do not enable
+vdt-rotate-logs         | cron   | do not enable
+vdt-update-certs        | cron   | do not enable
+gsiftp                  | inetd  | do not enable
+gratia-gridftp-transfer | cron   | enable
+gums-host-cron          | cron   | do not enable
+edg-mkgridmap           | cron   | do not enable
+bestman                 | init   | enable
+</verbatim>
+</pre>
+
+Enable the following services: <pre class="screen">
+<vebratim>
+ vdt-control -enable gsiftp vdt-update-certs vdt-rotate-logs fetch-crl gums-host-cron
+</verbatim>
+</pre>
+
+---++ Service Startup/Shutdown
+Start all the services: <pre class="screen">
+<vebratim>
+vdt-control -on
+</verbatim>
+%TWISTY%
+enabling cron service fetch-crl... ok
+enabling cron service vdt-rotate-logs... ok
+enabling cron service vdt-update-certs... ok
+enabling inetd service gsiftp... ok
+enabling cron service gratia-gridftp-transfer... ok
+enabling cron service gums-host-cron... ok
+skipping cron service 'edg-mkgridmap' -- marked as disabled
+enabling init service bestman... ok
+%ENDTWISTY%
+</pre>
+Stop all the services: <pre class="screen">
+<vebratim>
+vdt-control -off
+</verbatim>
+%TWISTY%
+disabling init service bestman... ok
+disabling cron service edg-mkgridmap... ok
+disabling cron service gums-host-cron... ok
+disabling cron service gratia-gridftp-transfer... ok
+disabling inetd service gsiftp... ok
+disabling cron service vdt-update-certs... ok
+disabling cron service vdt-rotate-logs... ok
+disabling cron service fetch-crl... ok
+%ENDTWISTY%
+</pre>
+
+Stop/start a specific service:<pre class="screen">
+vdt-control -off %BLUE%&lt;service_name&gt;%ENDCOLOR%
+vdt-control -on %BLUE%&lt;service_name&gt;%ENDCOLOR%
+</pre>
+
+#ServiceValidation
+---++ Validation of Service Operations
+In order to verify that the service is working login as yourself on the node where OSG Client is installed. Setup environment and generate proxy:
+<pre class="screen">
+. %BLUE%&lt;VDT_LOCATION&gt;%ENDCOLOR%/setup.sh
+voms-proxy-init --voms cms
+</pre>
+
+Ping !BeStMan service:<pre class="screen">
+srm-ping srm://%BLUE%&lt;bestman_host_name&gt;%ENDCOLOR%:10443
+%TWISTY%
+srm-ping   2.2.1.3.6   Mon Nov 30 09:10:48 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+
+SRM-CLIENT: SURL does not contains ?SFN 
+SRM-CLIENT: serviceHandle /srm/v2/server is taken from the srmclient.conf 
+SRM-CLIENT: SFN is assumed as 
+SRM-CLIENT: Connecting to serviceurl httpg://fg0x1.fnal.gov:10443/srm/v2/server
+
+SRM-PING: Wed Aug 04 21:21:10 CDT 2010  Calling SrmPing Request...
+versionInfo=v2.2
+
+Extra information (Key=Value)
+backend_type=BeStMan
+backend_version=2.2.1.3.13
+backend_build_date=2010-04-28T18:55:52.000Z 
+gsiftpTxfServers[0]=gsiftp://fg0x1.fnal.gov
+GatewayMode=Enabled
+clientDN=/DC=org/DC=doegrids/OU=People/CN=Tanya Levshina 508821
+gumsIDMapped=fnalgrid
+%ENDTWISTY%
+</pre>
+
+Create a local file and copy it to the !BeStMan storage under ==/cache/${USER}== directory: <pre class="screen">
+echo "This is a test" >/tmp/test
+srm-copy file:////tmp/test srm://%BLUE%&lt;bestman_host_name&gt;%ENDCOLOR%:10443/srm/v2/server\?SFN=/cache/${USER}/test -mkdir
+%TWISTY%
+srm-copy   2.2.1.3.6   Mon Nov 30 09:10:48 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+SRM-CLIENT: Wed Aug 04 21:27:55 CDT 2010 Connecting to httpg://fg0x1.fnal.gov:10443/srm/v2/server
+
+SRM-DIR: Wed Aug 04 21:27:56 CDT 2010 Calling SrmMkdir
+SRM-DIR: DirectoryPath(0)=srm://fg0x1.fnal.gov:10443/srm/v2/server?SFN=/cache
+        status=SRM_DUPLICATION_ERROR
+        explanation=already existss
+
+SRM-DIR: Wed Aug 04 21:27:58 CDT 2010 Calling SrmMkdir
+SRM-DIR: DirectoryPath(0)=srm://fg0x1.fnal.gov:10443/srm/v2/server?SFN=/cache/tlevshin
+        status=SRM_SUCCESS
+        explanation=null
+
+SRM-CLIENT: Wed Aug 04 21:27:59 CDT 2010 Calling SrmPrepareToPutRequest now ...
+request.token=put:1
+Request.status=SRM_SUCCESS
+explanation=null
+SRM-CLIENT: received TURL=gsiftp://fg0x1.fnal.gov//cache/tlevshin/test
+
+SRM-CLIENT: Wed Aug 04 21:28:00 CDT 2010 start file transfer
+SRM-CLIENT:Source=file:////tmp/test
+SRM-CLIENT:Target=gsiftp://fg0x1.fnal.gov//cache/tlevshin/test
+
+SRM-CLIENT: Wed Aug 04 21:28:03 CDT 2010 end file transfer for file:////tmp/test
+
+SRM-CLIENT: Wed Aug 04 21:28:03 CDT 2010 Calling putDone for srm://fg0x1.fnal.gov:10443/srm/v2/server?SFN=/cache/tlevshin/test
+Result.status=SRM_SUCCESS
+Result.Explanation=null
+
+SRM-CLIENT: Request completed with success
+
+SRM-CLIENT: Printing text report now ...
+
+SRM-CLIENT*REQUESTTYPE=put
+SRM-CLIENT*TOTALFILES=1
+SRM-CLIENT*TOTAL_SUCCESS=1
+SRM-CLIENT*TOTAL_FAILED=0
+SRM-CLIENT*REQUEST_TOKEN=put:1
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*SOURCEURL[0]=file:////tmp/test
+SRM-CLIENT*TARGETURL[0]=srm://fg0x1.fnal.gov:10443/srm/v2/server?SFN=/cache/tlevshin/test
+SRM-CLIENT*TRANSFERURL[0]=gsiftp://fg0x1.fnal.gov//cache/tlevshin/test
+SRM-CLIENT*ACTUALSIZE[0]=0
+SRM-CLIENT*FILE_STATUS[0]=SRM_SUCCESS
+SRM-CLIENT*EXPLANATION[0]=SRM-CLIENT: PutDone is called successfully
+%ENDTWISTY%
+</pre>
+
+Verify that Gratia !GridFTP transfer probe is running:
+   1. check that cron job is installed and if it has not ran yet execute the command manually:<pre class="screen">
+crontab -l
+...
+0,10,20,30,40,50 * * * * /usr/local/osg-bestman/gratia/probe/gridftp-transfer/gridftp-transfer_meter.cron.sh > /usr/local/osg-bestman/gratia/var/logs/gratia-probe-gridftp-transfer.log 2>&1
+
+/usr/local/osg-bestman/gratia/probe/gridftp-transfer/gridftp-transfer_meter.cron.sh > /usr/local/osg-bestman/gratia/var/logs/gratia-probe-gridftp-transfer.log 2>&1
+</pre>
+   1. Open browser at [[http://gratia-osg-itb.opensciencegrid.org/gratia-reporting/][Gratia ITB]] webpage. Select ==Custom SQL Report== under  SQL Queries menu item on the right hand side. Enter the following query into the textarea (substitute ==fqn_gridftp_server== with the name of your node):<pre class="screen">
+select * from MasterTransferSummary where ProbeName like 'gridftp-transfer:%BLUE%&lt;fqn_gridftp_server&gt;%ENDCOLOR%';
+</pre> You should see some records related to the transfers you have performed.   
+
+
+---++ LCG-Utils commands
+LCG Utils is a suite of client tools for data movement written for the LHC Computing Grid. The tools are based on the Grid File Access Library, which is also included. Some commands use logical file names and require a connection to a BDII-based catalog; exceptions are file copies and deletions, which take endpoints based on the SRM URL. The detailed manual could be found  [[https://edms.cern.ch/file/722398/1.3/gLite-3-UserGuide.html][here]]. Some basic commands are listed below:
+
+Copy a local file to SE. If directories in the path do not exist they will be created:
+<pre class="screen">
+lcg-cp -b -D srmv2 file:/tmp/test  srm://fg0x1.fnal.gov:10443/srm/v2/server\?SFN=/cache/${USER}/test_dir/test
+</pre>
+
+List file:
+<pre class="screen">
+lcg-ls  -b -D srmv2 -l srm://fg0x1.fnal.gov:10443/srm/v2/server\?SFN=/cache/${USER}/test_dir/test
+-rwxr-xr-x   1     2     2      54               ONLINE /cache/tlevshin/test_dir/test
+</pre>
+
+Delete file:
+<pre class="screen">
+lcg-del -b -l -D srmv2  srm://fg0x1.fnal.gov:10443/srm/v2/server\?SFN=/cache/${USER}/test_dir/test
+</pre>
+---++ Screen Dump for !BeStMan Installation with grid-mapfile authorization
+Please, make sure that you have verified all the steps listed in [[#CheckList][Checklsit section]]
+This installation procedure shows how to install and configure !BeStMan-gateway with grid-mapfile. First, you will need to do all the steps described in [[#PreInstall][Pre-Installation  section]]. Then proceed with !BeStMan installation and configuration:
+<pre class="screen">
+<verbatim>
+mkdir /opt/osg-bestman
+cd /opt/osg-bestman
+pacman -get http://software.grid.iu.edu/osg-1.2:Bestman
+Do you want to add [http://software.grid.iu.edu/osg-1.2] to [trusted.caches]? (y/n/yall): yall
+</verbatim>
+%TWISTY%
+<verbatim>
+
+. setup.sh        
+
+visudo                             
+# Comment out this line, if it is in your ==/etc/sudoers== file (RHEL5+)
+#Defaults    requiretty
+
+Cmnd_Alias SRM_CMD = /bin/rm, /bin/mkdir, /bin/rmdir, /bin/mv, /bin/ls 
+Runas_Alias SRM_USR = ALL, !root 
+daemon ALL=(SRM_USR) NOPASSWD: SRM_CMD 
+
+mkdir /cache
+chmod 777 /cache
+chown daemon.daemon /cache
+
+vdt-post-install 
+Starting...
+Configuring PRIMA... Done.
+Configuring EDG-Make-Gridmap... Done.
+Done.
+
+$VDT_LOCATION/vdt/bin/vdt-ca-manage setupca --location local  --url osg
+Setting CA Certificates for VDT installation at '/usr/local/osg-bestman'
+
+Setup completed successfully.
+
+$VDT_LOCATION/vdt/setup/configure_bestman --server y --user daemon --cert /etc/grid-security/bestman_cert/bestmancert.pem --key /etc/grid-security/bestman_cert/bestmankey.pem --with-allowed-paths /cache  --enable-gateway
+$VDT_LOCATION/vdt/setup/configure_gratia --probe gridftp-transfer --report-to gratia-osg-itb.opensciencegrid.org:8881 --probe-cron --site-name <YOUR_SITE_NAME> #!replace YOUR_SITE_NAME
+vdt-control -enable gsiftp vdt-update-certs vdt-rotate-logs fetch-crl edg-mkgridmap 
+running 'vdt-register-service --name gsiftp --enable'... ok
+running 'vdt-register-service --name vdt-update-certs --enable'... ok
+running 'vdt-register-service --name vdt-rotate-logs --enable'... ok
+running 'vdt-register-service --name fetch-crl --enable'... ok
+running 'vdt-register-service --name edg-mkgridmap --enable'... ok
+
+edg/sbin/edg-mkgridmap
+
+vdt-control -on
+enabling cron service fetch-crl... ok
+enabling cron service vdt-rotate-logs... ok
+enabling cron service vdt-update-certs... ok
+enabling inetd service gsiftp... ok
+enabling cron service gratia-gridftp-transfer... ok
+skipping cron service 'gums-host-cron' -- marked as disabled
+enabling cron service edg-mkgridmap... ok
+enabling init service bestman... ok
+</verbatim>
+%ENDTWISTY%
+</pre>
+After you have installed, configured and started !BeStMan-gateway with grid-mapfile  you may proceed to the [[#ServiceValidation][Service Validation section]].
+
+---++ Screen Dump for !BeStMan Installation on Compute Element node
+Please, make sure that you have verified all the steps listed in [[#CheckList][Checklsit section]]
+This installation procedure shows how to install and configure !BeStMan-gateway with GUMS authorization on the same node where CE is installed. First, you will need to do all the steps described in [[#PreInstall][Pre-Installation  section]]. Then proceed with !BeStMan installation and configuration: <pre class="screen">
+mkdir  /opt/osg-bestman/
+%TWISTY%
+<verbatim>
+export VDT_GUMS_HOST=<your_GUMS_host>
+cd /opt/osg-bestman/
+pacman -get http://software.grid.iu.edu/osg-1.2:Bestman
+Do you want to add [http://software.grid.iu.edu/osg-1.2] to [trusted.caches]? (y/n/yall): yall
+
+. setup.sh                                         
+
+vdt-post-install
+Starting...
+Configuring PRIMA... Done.
+Configuring EDG-Make-Gridmap... Done.
+Done.
+
+$VDT_LOCATION/vdt/bin/vdt-ca-manage setupca --location local  --url osg
+Setting CA Certificates for VDT installation at '/opt/osg-bestman'
+
+Setup completed successfully.
+ $VDT_LOCATION/vdt/setup/configure_bestman --server y --user daemon --cert /etc/grid-security/bestman_cert/bestmancert.pem --key /etc/grid-security/bestman_cert/bestmankey.pem --with-allowed-paths /cache --gums-host cms-xen4.fnal.gov --gums-port 8443  --enable-gateway
+
+vi /etc/sudoers
+# Comment out this line, if it is in your ==/etc/sudoers== file (RHEL5+)
+#Defaults    requiretty
+
+Cmnd_Alias SRM_CMD = /bin/rm, /bin/mkdir, /bin/rmdir, /bin/mv, /bin/ls 
+Runas_Alias SRM_USR = ALL, !root 
+daemon ALL=(SRM_USR) NOPASSWD: SRM_CMD 
+
+mkdir /cache
+chmod 777 /cache
+chown daemon.daemon /cache
+
+$VDT_LOCATION/vdt/setup/configure_gratia --probe gridftp-transfer \
+ --report-to gratia-osg-itb.opensciencegrid.org:8881 --probe-cron \
+  --site-name <YOUR_SITE_NAME>
+
+cd gratia/probe/gridftp-transfer/
+
+# You will need to edit ProbeConfig file to specify location of osg-user mapfile and gridftp logs. You will need to know the path to your CE installation (replace <CE_VDT_LOCATION> with actual path)
+vi ProbeConfig
+...
+UserVOMapFile="<CE_VDT_LOCATION>/osg/etc/osg-user-vo-map.txt"
+GridftpLogDir="<CE_VDT_LOCATION>/globus/var/log"
+
+vdt-control --list
+Service                 | Type   | Desired State
+------------------------+--------+--------------
+fetch-crl               | cron   | do not enable
+vdt-rotate-logs         | cron   | do not enable
+vdt-update-certs        | cron   | do not enable
+gsiftp                  | inetd  | do not enable
+gratia-gridftp-transfer | cron   | enable
+gums-host-cron          | cron   | do not enable
+edg-mkgridmap           | cron   | do not enable
+bestman                 | init   | enable
+
+vdt-control -enable fetch-crl  vdt-rotate-logs vdt-update-certs 
+running 'vdt-register-service --name fetch-crl --enable'... ok
+running 'vdt-register-service --name vdt-rotate-logs --enable'... ok
+running 'vdt-register-service --name vdt-update-certs --enable'... ok
+
+vdt-control -on
+enabling cron service fetch-crl... ok
+enabling cron service vdt-rotate-logs... ok
+enabling cron service vdt-update-certs... ok
+skipping inetd service 'gsiftp' -- marked as disabled
+enabling cron service gratia-gridftp-transfer... ok
+skipping cron service 'gums-host-cron' -- marked as disabled
+skipping cron service 'edg-mkgridmap' -- marked as disabled
+enabling init service bestman... ok
+</verbatim>
+%ENDTWISTY%
+</pre>
+After you have installed, configured and started !BeStMan-gateway with grid-mapfile  you may proceed to the [[#ServiceValidation][Service Validation section]].
+---++ References
+   * [[ReleaseDocumentation.BestmanGateway][OSG BeStMan Gateway Installation Guide]]
+   * [[ReleaseDocumentation.BestmanOnCE][OSG BeStMan Gateway Installation Guide]]
+   * [[ReleaseDocumentation.GratiaTransferProbe][OSG Gratia Transfer Probe page]]
+   * [[http://sdm.lbl.gov/bestman][BeStMan Home Page at LBNL]] - [[http://sdm.lbl.gov/bestman/docs/bestman-guide.html][BeStMan User guides]], [[http://sdm.lbl.gov/bestman/docs/bestman-faq.html][BeStMan FAQ]] and latest downloadable tar files available here. Latest downloadables should be the same version as in VDT.
+   * [[ReleaseDocumentation.LBNLSrmClient][SRM v2.2 LBNL client command line examples]]
+   * [[https://twiki.grid.iu.edu/bin/view/Documentation/StorageOverview][Data Storage and Management in the OSG]] - An overview of storage technologies used in the Open Science Grid. 
+
+---+ Comments
+
+%COMMENT{type="tableappend"}%
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/HandsOn/centerpageborder.css
+-->
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = DouglasStrain
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MarcoMambelli
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = RobSnihur
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+-- Main.JamesWeichel - 03 Feb 2010

@@ -1,0 +1,197 @@
+%META:TOPICINFO{author="JohnWeigand" date="1248269017" format="1.1" reprev="1.17" version="1.17"}%
+%META:TOPICPARENT{name="VomsInstallGuide"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+%EDITTHIS%
+%BR%
+All the daemon services should be up and running once you have enabled the services and started the processes.   Until you have created your first VO the _voms_ initd service will is the only one that will not be running. This section will take you through the steps necessary to verify that and can also serve as a basic operational trouble shooting guide.
+
+For all the verifications, you will need to source the VDT setup.(c)sh script, if not already done:
+
+<pre class="screen">
+# <b>cd <em>VDT_LOCATION</em></b>
+# <b>source setup.sh</b>
+</pre>
+
+---++ The Certificate update cron
+This program is used to update the VDT CA certificate distribution which in a location pointed to by a symlink, $VDT_LOCATION/globus/TRUSTED_CA.
+<pre class="programlisting">
+29 * * * *      /usr/local/osg-voms/vdt/sbin/vdt-update-certs-wrapper --vdt-install /usr/local/osg-voms --called-from-cron
+</pre>
+Detailed information on this process is available at %VDT_DOCS_URL%/man/vdt-update-certs.html .
+
+---++ The CRL update cron
+The EDG CRL update process (essential if you are collaborating with EDG people) updates the certificate revocation lists on a daily (default) basis.  This process is invoked as a <i>root</i> cron process. Do as a user <i>root</i>. 
+
+<pre class="screen">
+# crontab -l
+</pre>
+<pre class="programlisting">
+33 5 * * * YOUR_VDT_LOCATION/fetch-crl/share/doc/fetch-crl-2.6.6/fetch-crl.cron
+</pre>
+
+
+The time (05:33 in this case) was selected randomly at installation time and should be different for each installation. This was done to avoid contention on the CA hosts.
+
+Now that it is a cron process, it's a little more difficult to verify that it is running.  If the time has past for the cron <i>fetch-crl.cron</i> process to run, you can simply go to your certificates directory ($X509_CADIR) and see if the <i>*.r0</i> files exist and have time stamps close to the cron time.  If they exist and have a timestamp close to the cron time, all is well:
+
+<pre class="screen">
+# <b>cd <em>VDT_LOCATION</em></b>
+# <b>source setup.sh</b>
+# <b>cd $X509_CADIR</b>
+# <b>ls -l *.r0</b>
+<i>....(some sample output)....</i>
+-rw-r--r--    1 root     root        10024 Nov  20 05:33 9dd23746.r0
+-rw-r--r--    1 root     root        62032 Nov  20 05:33 a317c467.r0
+-rw-r--r--    1 root     root        17723 Nov  1 05:33 a692434d.r0
+</pre>
+
+If it does not look like it is working, you can run the <i>fetch-crl.cron</i> process manually and review the output.  
+
+The current <i>fetch-crl.cron</i> script checks a variable called <i>QUIET</i> to suppress output.  If you want to see what fetch-crl.cron is doing set and export QUIET variable and run the script manually:
+<pre class="screen">
+# <b>setenv QUIET no </b>
+# <b> /usr/local/osg-voms/fetch-crl/share/doc/fetch-crl-2.6.6/fetch-crl.cron</b>
+fetch-crl[31222]: 20071120T104844-0600 Using OpenSSL version OpenSSL 0.9.7d 17 Mar 2004 
+           at /usr/local/osg-voms/globus/bin/openssl
+fetch-crl[31222]: 20071120T104844-0600 processing '/usr/local/osg-voms/globus/TRUSTED_CA//03aa0ecb.crl_url'
+fetch-crl[31222]: 20071120T104844-0600 updating CRL 'BEGrid CA/emailAddress=gridca@belnet.be (03aa0ecb)'
+:
+</pre>
+
+%NOTE% The number of CRL files does not directly correlate to the number of CAs, but there should be at least one and they should never be more than a day old unless the cron or cron job is not working.
+
+
+---++ The apache/tomcat daemon
+To verify that Apache is running:
+<pre class="screen">
+# <b>ps -efwww |  grep  apache  |grep httpd</b>
+  <em>(there will be a number of these)</em>
+root     31071     1  0 10:34 ?        00:00:00 /usr/local/osg/apache/bin/httpd -d /usr/local/osg/apache
+    -k start -f /usr/local/osg-voms/apache/conf/httpd.conf
+daemon   31165 31071  0 10:34 ?        00:00:00 /usr/local/osg/apache/bin/httpd -d /usr/local/osg/apache 
+    -k start -f /usr/local/osg-voms/apache/conf/httpd.conf
+daemon   31166 31071  0 10:34 ?        00:00:00 /usr/local/osg/apache/bin/httpd -d /usr/local/osg/apache
+     -k start -f /usr/local/osg-voms/apache/conf/httpd.conf
+      :
+</pre>
+
+%NOTE% Verify that there is  only one running with <i>init (pid=1)</i> as its parent and the path contains your VDT_LOCATION.  
+
+
+To verify Tomcat is running:
+<pre class="screen">
+&gt; <b>ps -efwww |  grep tomcat</b>
+daemon   16633     1  0 Apr10 ?        00:00:12 /usr/local/osg-voms/jdk1.5/bin/java -server -Xmx256M 
+    -XX:MaxPermSize=256m -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager 
+    -Djava.util.logging.config.file=/usr/local/osg-voms/tomcat/v55/conf/logging.properties 
+    -Djava.endorsed.dirs=/usr/local/osg-voms/tomcat/v55/common/endorsed 
+    -classpath :/usr/local/osg-voms/tomcat/v55/bin/bootstrap.jar:/usr/local/osg-voms/tomcat/v55/bin/commons-logging-api.jar  
+    -Dcatalina.base=/usr/local/osg-voms/tomcat/v55 -Dcatalina.home=/usr/local/osg-voms/tomcat/v55 
+    -Djava.io.tmpdir=/usr/local/osg-voms/tomcat/v55/temp org.apache.catalina.startup.Bootstrap start
+    :
+</pre>
+
+%NOTE% Verify that there is the only one running with <tt>init (pid=1)</tt> as its parent and the path contains your VDT_LOCATION.  
+
+
+---++ The mysql daemon
+<nop>MySql  is used to provide persistent storage of the VOMS VO membership data. To verify it is running:
+
+<pre class="screen">
+# <b>ps -efwww |  grep  mysql</b>
+root     16481     1  0 Apr10 ?        00:00:00 perl /usr/local/osg-voms/mysql/bin/mysqld_safe 
+     --datadir=/usr/local/osg-voms/vdt-app-data/mysql/var 
+     --pid-file=/usr/local/osg-voms/vdt-app-data/mysql/var/cms-xen3.fnal.gov.pid
+root     16483 16481  0 Apr10 ?        00:00:00 /bin/sh /usr/local/osg-voms/mysql/real-bin/mysqld_safe 
+     --defaults-file=/usr/local/osg-voms/mysql/var/my.cnf 
+     --datadir=/usr/local/osg-voms/vdt-app-data/mysql/var 
+     --pid-file=/usr/local/osg-voms/vdt-app-data/mysql/var/cms-xen3.fnal.gov.pid
+root     16517 16483  0 Apr10 ?        00:00:00 perl /usr/local/osg-voms/mysql/libexec/mysqld 
+     --defaults-file=/usr/local/osg-voms/mysql/var/my.cnf 
+     --basedir=/usr/local/osg-voms/mysql 
+     --datadir=/usr/local/osg-voms/vdt-app-data/mysql/var 
+     --user=daemon 
+     --pid-file=/usr/local/osg-voms/vdt-app-data/mysql/var/cms-xen3.fnal.gov.pid 
+     --skip-external-locking 
+     --port=49151 
+     --socket=/usr/local/osg-voms/vdt-app-data/mysql/var/mysql.sock
+    :
+</pre>
+
+%NOTE% Verify that there is only one running with <i>init (pid=1)</i> as its parent and that the path contains your VDT_LOCATION. 
+
+---++ The VOMS WEB UI
+If all the certificates were in place prior to the pacman installation, a default VO called <i>VDT</i> was configured.
+To verify it is accessible:
+
+   1. Point a certificate-enabled browser window to <nop>https://<i>your.host.name</i>:8443/voms/VDT
+      * You should be prompted for your certificates passphrase
+      * You should get a <i>Welcome to voms-admin registration for the  VDT VO.</i> page
+
+At this point, you know your VOMS WEB UI is functional.  There is really nothing more you can do to test it since no VO-Admins's have been defined.  This is something you will do later.
+
+---++ The VOMS server daemon
+The VOMS server's only purpose is to service <i>voms-proxy-init</i> requests for your VO. 
+To verify the VOMS server is running:
+<pre class="screen">
+# <b>ps -efwww | grep edg-voms</b>
+daemon   31183     1  0 10:34 pts/0    00:00:00 /usr/local/osg-voms/glite/sbin/edg-voms 
+    --conf /usr/local/osg-voms/glite/etc/voms/VDT/voms.conf
+daemon   31185     1  0 10:34 ?        00:00:00 /usr/local/osg-voms/glite/sbin/edg-voms 
+    --conf /usr/local/osg-voms/glite/etc/voms/VDT/voms.conf
+
+</pre>
+
+%NOTE% There are individual <i>VOMS servers</i> for each VO, each using a unique port to service requests.
+%NOTE% There are usually 2 <i>edg-voms</i> processes that are running for each VO. There are times when only one is running and the server works fine. This is one of those mysteries in life that one just accepts.
+%NOTE% Verify that  the path contains your <i>VDT_LOCATION</i>.
+
+---++ The VOMS version
+The voms-admin and voms server versions can be verified using the following command:
+<pre class="screen">
+# <b>voms-admin   --version</b>
+voms-admin v. 2.0.7-1
+
+# <b>edg-voms --version</b>
+voms
+Version: 1.8.8
+Compiled: Jan 12 2009 15:28:59
+</pre>
+
+If the versions do not display, then there is a problem with either the web interface or the VOMS server.
+
+---++ Security
+---+++ !!Securing your server
+All access to VOMS is through apache and tomcat, even the command line <i>voms-admin</i> command.  To secure your server and require only authenticated access, run the following command.
+
+<pre class="screen">
+# <b>source $VDT_LOCATION/setup.sh</b>
+# <b>$VDT_LOCATION/vdt/setup/configure_apache --secure</b>
+# <b>/etc/init.d/apache restart</b>
+restart
+</pre>
+
+---+++ !!Securing the <nop>MySQL database
+The installation does <b>not</b> set the <i>root</i> password for the <nop>MySQL database used by VOMS. 
+
+%NOTE% Once the <i>root</i> password is set, you will be prompted for your password on all subsequent =configure_voms= and =voms-admin= admin commands.
+
+To set the <i>root</i> password:
+
+<pre class="screen">
+# <b>source $VDT_LOCATION/setup.sh</b>
+# <b>mysqladmin -uroot  password 'YOUR_ROOT_PASSWORD'</b>
+</pre>
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.TanyaLevshina - 17 Oct 2007 %BR%
+%REVIEW%Main.TanyaLevshina - 20 Nov 2007
+
+%META:TOPICMOVED{by="JohnWeigand" date="1172606959" from="Integration/ITB_0_5.VOMSInstallationVerification" to="Integration/ITB_0_5.VomsInstallationVerification"}%

@@ -1,0 +1,72 @@
+%META:TOPICINFO{author="RobGardner" date="1248192609" format="1.1" version="1.8"}%
+%META:TOPICPARENT{name="SiteValidationOSG12"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+
+
+%RED%Hello Steve. We are temporarily filling in. Please keep ongoing details posted here. <br> Thanks. -- ASR & RWG %ENDCOLOR%
+
+---++ Validation monitoring 
+
+  Probe testing: http://nanohub.org/usage/gridprobe?mode=pf&group=OSG-ITB&window=00086400
+
+  Application testing : http://nanohub.org/usage/gridapptest?mode=pf&group=OSG-ITB&application=Total&problem=Total&window=00086400
+
+---++ Known issues
+
+07/08/2009: 
+
+Only the UC_ITB site supports nanoHUB as reported in RSV,
+
+07/10/2009: 
+
+I am looking at http://tinyurl.com/kude3y derived from 
+
+http://myosg.grid.iu.edu/wizardsummary/index?datasource=summary&summary_attrs_showdesc=on&summary_attrs_showservice=on&summary_attrs_showrsvstatus=on&summary_attrs_showvomembership=on&account_type=cumulative_hours&ce_account_type=gip_vo&se_account_type=vo_transfer_volume&start_type=7daysago&start_date=06%2F12%2F2009&end_type=now&end_date=06%2F12%2F2009&all_resources=on&gridtype=on&gridtype_2=on&vosup=on&vosup_26=on&active_value=1&disable_value=1
+
+Only four sites are listed ITB_INSTALL_TEST, ITB_INSTALL_TEST_3, LBNL_VTB, UC_ITB.
+
+07/10/2009: 
+
+The five Persistent ITB sites can now be successfully be probed by nanoHUB.
+Results of the probe testing are reported at
+
+  http://nanohub.org/usage/gridprobe?mode=pf&group=OSG-ITB&window=00086400
+
+Application testing can now proceed.
+
+07/11/2009:
+
+%RED%LBNL_DSD_ITB is giving errors. Needs site attention.%ENDCOLOR%
+
+%RED%The problem is your script that runs and creates the output file. It is not valid sh, it is a bash script. If you want bash, you need to #!/bin/bash. If you use #!/bin/sh you can only expect bourne syntax.%ENDCOLOR%
+
+   * URL: http://nanohub.org/usage/gridprobe?mode=pf&group=OSG-ITB&window=00086400&site=LBNL_DSD_ITB&sortKey=destination&sortDir=ascending#reports
+
+   * [[%ATTACHURL%/20090712-001700_000261578_000012.txt][Sample error report]]: 20090712-001700_000261578_000012.txt
+
+07/15/2009
+Iwona & Keith got an e-mail from Steve:
+<verbatim>
+I changed my scripts to conform to sh only commands and periodic probe testing
+has continued. The site has been testing positive for at least the last 24 hours.
+</verbatim>
+
+---++ More information
+
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% Main.StevenClark - 09 Jul 2009 %BR%
+%REVIEW% Main.IwonaSakrejda - 21 Jul 2009 %BR%
+%REVFLAG% %X%  %BR%
+
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+%META:FILEATTACHMENT{name="20090712-001700_000261578_000012.txt" attachment="20090712-001700_000261578_000012.txt" attr="" comment="" date="1247366058" path="20090712-001700_000261578_000012.txt" size="13429" stream="20090712-001700_000261578_000012.txt" tmpFilename="/usr/tmp/CGItemp14381" user="AbhishekSinghRana" version="1"}%

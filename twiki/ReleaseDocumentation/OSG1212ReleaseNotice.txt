@@ -1,0 +1,32 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1281456191" format="1.1" version="1.1"}%
+%META:TOPICPARENT{name="WebHome"}%
+
+<div style="font-family: Tahoma, Geneva, sans-serif;">
+<div class="announcement-head" style="border: thin solid #000; background-color: #F90;">
+  <h1 align="center">OSG 1.2.12 Update Notification</h1>
+</div>
+<br />
+
+<div class="date" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; border: thin solid #000; background-color: #F93;">Date: <span class="date-text" style="font-size: 14px; font-weight: normal;">August 10, 2010</span></div>
+<br />
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Affected Components</div>
+<div>This update affects all OSG CE installations and SE installations that would like to report to BDII without having a CE.</div>
+<br />
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Summary</div>
+<div> 
+  <p>This release updates GIP to allow GIP to report SE information without having to rely on a CE to report information to the OSG BDII servers.  There have also been several bug fixes to the GIP code.
+</p></div><div> </div>
+<br />
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Issues Fixed</div>
+
+<div>
+  The GIP reporting has been updated with the ability to report SE information in a standalone configuration without a CE. In addition several other bugfixes have been implemented.</div>
+<br />
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Update Instructions</div>
+<div>Update instructions can be found on the OSG twiki under the OSG 1.2.12 <a href="https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OSG12UpdateInstructions">update instructions</a>.</div>
+<br />
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Additional Information</div>
+<div>The release notes for the VDT 2.0.0p19 release underlying this release can be found <a href="http://vdt.cs.wisc.edu/releases/2.0.0/release-p19.html">here</a>.</div>
+
+<br />
+</div>

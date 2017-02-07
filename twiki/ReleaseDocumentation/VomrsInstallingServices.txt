@@ -1,0 +1,146 @@
+%META:TOPICINFO{author="KyleGross" date="1481047992" format="1.1" version="1.25"}%
+%META:TOPICPARENT{name="VomrsInstallGuide"}%
+%DOC_STATUS_TABLE%
+
+---+!! VOMRS Installation
+%TOC{}%
+
+%STARTSECTION{"Main"}%
+<!-- useful variable definitions
+   * Local UCL_CWD = /opt/vomrs
+   * Local UCL_HOST = myvoms
+-->
+
+---%SHIFT%+ Requirements
+
+   * a %LINK_PACMAN% installation
+   * *root* privileges on the installation server
+   * GNU Compiler Collection
+   * a *http service certificate* installed in =/etc/grid-security/http/httpcert.pem= and =/etc/grid-security/http/httpkey.pem= respectively
+  
+Please make sure that the =/etc/hosts= file contains an entry for the external FQDN of the VOMRS server separately from the localhost line, for example:
+
+<pre class="file">
+127.0.0.1 localhost.localdomain localhost
+123.45.67.89 %UCL_HOST_FQDN% %UCL_HOST%
+</pre>
+
+---%SHIFT%+ VOMRS Installation Procedure
+
+   1 create an installation directory
+   1 use %LINK_PACMAN% to install VOMRS
+   1 update the environment
+
+---%SHIFT%++ Create an Installation Directory
+
+Create a directory for the installation and change into it. For simplicity in this document we'll call it =/opt/vomrs=.
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% mkdir /opt/vomrs
+</pre>
+
+%WARNING% You can install VOMRS in any arbitrary directory. Please don't directly use a system directory like =/opt= or =/usr= here. The installation routine will create many sub-directories in the install directory chosen.
+
+---%SHIFT%++ Use Pacman to install VOMRS
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% cd %UCL_CWD%
+%UCL_PROMPT_ROOT% pacman -get  %CACHE%:vomrs  
+</pre>
+
+%TWISTY{%TWISTY_OPTS_OUTPUT%}%
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% pacman -get %CACHE%:vomrs
+Do you want to add [http://software.grid.iu.edu/osg-1.2] to [trusted.caches]? (y/n/yall): %RED%y%ENDCOLOR%
+Do you want to add [http://vdt.cs.wisc.edu/vdt_200_cache] to [trusted.caches]? (y/n/yall): %RED%y%ENDCOLOR%
+Beginning VDT prerequisite checking script vdt-common/vdt-prereq-check... 
+
+All prerequisite checks are satisfied.
+                                                                          
+========== IMPORTANT ==========
+Most of the software installed by the VDT *will not work* until you install
+certificates.  To complete your CA certificate installation, see the notes
+in the post-install/README file.
+</pre>
+%ENDTWISTY%
+
+%NOTE% The installation log file can be found in =%UCL_CWD%/install.log=
+
+---++%SHIFT% Update your Environment
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% cd %UCL_CWD%
+%UCL_PROMPT_ROOT% source setup.sh
+</pre>
+
+---%SHIFT%++ Secure the Server
+
+All access to VOMRS is through Apache and Tomcat. To secure your server and require only authenticated access, run the following command that redirects non-SSL traffic from localhost as well.
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% $VDT_LOCATION/vdt/setup/configure_apache --secure
+/etc/init.d/apache restart
+restart
+</pre>
+
+%ENDSECTION{"Main"}%
+
+---+ Comments
+
+| PM2RPM_TASK = NORPM | Main.RobertEngel | 28 Aug 2011 - 00:32 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = StevenTimm
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = VO
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %NO%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->

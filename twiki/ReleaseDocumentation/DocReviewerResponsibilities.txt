@@ -1,0 +1,86 @@
+%META:TOPICINFO{author="KyleGross" date="1481047985" format="1.1" version="1.23"}%
+%META:TOPICPARENT{name="Documentation.DocHowTo"}%
+---+ Document Reviewer Responsibilities
+%DOC_STATUS_TABLE%
+---++
+
+%STARTINCLUDE%
+%EDITTHIS%
+%BR%
+All documents in the official OSG Documentation TWiki have a Reviewer during their creation or update process.
+%BR%%BR%
+The reviewer of a document should have knowledge about standards and format for the type of document being reviewed and is responsible for:
+   1. Performing a review (when the [[Documentation.DocForOwners][Owner]] marks the document as REVIEW_READY and REVIEW_PASSED is IN_PROGRESS) and correcting or noting issues (via email or the document Comment block) for the Owner.  The review should verify that the document:
+      a. Contains the relevant sections specified in the template for the relevant document type.  See [[Documentation.DocClassifications#Document_Types_and_Templates][Document Types and Templates]]. %RED%Only applies if a template is provided.%ENDCOLOR%
+      a. Sections and content conform to the formatting standards for the relevant document type.  See DocFormattingRules.
+      a. Is clearly written and can be understood by a reader with a suitable level of expertise.
+      a. Has or refers to a diagram of the appropriate architecture (if applicable).
+      a. Is technically accurate and complete (the Reviewer is not responsible for actually testing a procedure).
+      a. Contains no typos or wording errors.
+   1. Updating the [[Documentation.DocManagementVariables#Document_Reviewer_Variables][REVIEW_PASSED variable]] in the HTML block at the end of the document.  Do this by editing the document using the Edit link at the bottom of the page.
+   1. Working in collaboration with the Owner to ensure the issues you identify are resolved in the document.
+   1. Doing a final review when you, the [[Documentation.DocForTesters][Tester]], and the Owner agree it is complete and updating the REVIEW_PASSED variable.
+   1. Notifying the Document Architect if unable to continue to fulfill the responsibilities of the Reviewer.
+%STOPINCLUDE%
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesWeichel
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = Documenter
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = TedHesselroth
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+-- Main.JamesWeichel - 08 Feb 2010
+
+%META:TOPICMOVED{by="JamesWeichel" date="1266964525" from="Documentation/DocumentationTeam.DocReviewerResponsibilities" to="ReleaseDocumentation.DocReviewerResponsibilities"}%

@@ -1,0 +1,216 @@
+%META:TOPICINFO{author="KyleGross" date="1481047990" format="1.1" version="1.66"}%
+%DOC_STATUS_TABLE%
+
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC{depth="3"}%
+
+---++ About this Document
+<!-- definitions used in this document
+   * Local OSG_VERSION_MAJOR = 1.2
+   * Local OSG_VERSION_MINOR = 14
+   * Local VERSION = %OSG_VERSION_MAJOR%:%OSG_VERSION_MINOR%
+   * Local UCL_HOST = host
+   * Local UCL_CWD = /opt/osg-%OSG_VERSION_MAJOR%
+-->
+
+%ICON{hand}% This document is for System Administrators. It contains usage instructions for %LINK_GLOSSARY_PACMAN% which is required to install any software provided by the %LINK_OSG%.
+
+%INCLUDE{"ReleaseDocumentation/PacmanInstall" section="AboutPacman" TOC_SHIFT="" }%
+
+The installation instructions for Pacman can be found [[PacmanInstall][here]].
+
+---++ Using Pacman
+
+---+++ Install Software
+
+Unlike other software repository tools Pacman does not install software in pre-defined places on the file-system. Pacman will always use the current working directory as the installation directory instead:
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% mkdir -p %UCL_CWD%
+%UCL_PROMPT_SHORT% cd %UCL_CWD%
+%UCL_PROMPT_SHORT% pacman -get %CACHE%:%RED%&lt;PACKAGE_NAME&gt;%ENDCOLOR%
+</pre>
+
+%NOTE% Pacman will create many sub-directories in the installation directory. Do not use common directories like =/opt= or =/usr= for your installation directory! Instead, make a subdirectory.
+
+
+---+++ Update Software
+
+The %LINK_VDT% provides incremental updates for released versions. For example VDT version %VDT_VERSION% may be updated to %VDT_VERSION% %VDT_VERSION%p1. The update process is documented by the Grid Operation Center and the VDT team as part of the _release notes_.
+
+
+---+++ Remove Installed Packages
+
+If an _installed_ package becomes unnecessary, you may remove it by executing the =pacman= command with the =-remove= option:
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% pacman -remove %RED%&lt;PACKAGE_NAME&gt;%ENDCOLOR%
+</pre>
+
+%WARNING% Removing a Pacman package can have unintended consequences. _Be careful and backup your $VDT_LOCATION first!_
+
+---+++ Remove an Installation
+
+To remove a complete installation disable it first, then delete the installation directory.
+
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="Deactivate" TOC_SHIFT="+++" INPUT_SERVICE="" }%
+
+---++++ Delete the Installation Directory
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% rm -rf %UCL_CWD%
+</pre>
+
+For details on these commands also see the external documentation available on %LINK_PACMAN%.
+
+
+---++ Pacman Options
+
+---+++ Using a Web-Proxy
+
+Pacman may be configured to use a web-proxy to connect to the software repositories if necessary:
+ 
+<pre class="screen">
+%UCL_PROMPT_SHORT% pacman -http-proxy http://%RED%&lt;proxy hostname&gt;%ENDCOLOR%:%RED%&lt;proxy port&gt;%ENDCOLOR%
+</pre>
+
+---+++ Trusting Software Caches
+
+When you install software for the first time, Pacman will prompt you twice to trust the [[VdtRelease][software caches]] it is using. Once for the cache of the %LINK_OSG% and once more for the cache of the %LINK_VDT%. Provide the =-trust-all-caches= option on the command line to =pacman= to trust caches by  default:
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% pacman %RED%-trust-all-caches%ENDCOLOR% -get %CACHE%:&lt;PACKAGE_NAME&gt;
+</pre>
+
+---+++ Installations on Unsupported Platforms
+
+You may succeed installing software from a Pacman repository on an unsupported platform by following these [[%VDT_DOCS_URL%/installation_advanced#unsup_plat][instructions]]. For a list of supported platforms see [[%VDT_DOCS_URL%/requirements.html][here]]. 
+
+
+---+++ Installing the i386 Version on a x86_64 computer
+
+You may _force_ the installation of the 32-Bit version of a software component on a 64-Bit platform by following these [[%VDT_DOCS_URL%/installation_advanced#pretend_32][instructions]].
+
+
+---++ Pacman Best Practices
+
+---+++ Do Not Mix Versions
+
+Under no circumstances should you mix software from different versions of the VDT unless it is provided as part of an incremental update to the installed version. For example, do not install software from VDT 1.10.1 (OSG 0.8) and VDT 2.0.0 (OSG 1.0) in the same installation directory. However, it is safe to install two different versions if they are in different directories.
+
+---+++ Use Version-ed Directories
+
+Good practice is to install into a _version-ed_ directory such as =/opt/osg-1.2= and then create a link from an _unversion-ed_ directory =/opt/osg= to the installation directory. 
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% ln -s %UCL_CWD% /opt/osg
+</pre>
+
+If you prefer, you can consider the alternative of using a bind mount instead:
+
+<pre class="rootscreen">
+%UCL_PROMPT_SHORT% mount --bind %UCL_CWD% /opt/osg
+</pre>
+
+and placing it into =/etc/fstab=:
+
+<pre class="file">
+%UCL_CWD%   /opt/osg   bind   defaults,bind   0 0
+</pre>
+
+%NOTE% A OSG software update increases the _minor_ version number. We therefor recommend to only use the _major_ version number of the OSG software stack for the version-ed directory as in the example above! 
+
+
+---++ Troubleshooting
+
+A Pacman installation may fail. Our sincere apologies if this happens to you. 
+
+---+++ Pacman Log File
+
+The installation log file is written to =%UCL_CWD%/vdt-install.log=. Please attach the log file, or relevant parts of it, when you open a ticket with the %LINK_GOC_OPEN_TICKET%.
+
+---+++ Running the VDT Profiler
+
+The installation may have progressed far enough to install the VDT profiler in =%UCL_CWD%/vdt/bin/vdt-system-profiler=. In this case set the =$VDT_LOCATION= environment variable and run the profiler:
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% cd %UCL_CWD%
+%UCL_PROMPT_SHORT% . %UCL_CWD%/setup.sh=
+%UCL_PROMPT_SHORT% export VDT_LOCATION=%UCL_CWD%
+%UCL_PROMPT_SHORT% vdt-system-profiler
+</pre>
+
+The profile will be created in =%UCL_CWD%/vdt-profile.txt=. Please attache this file, when you open a ticket with the %LINK_GOC_OPEN_TICKET%.
+
+
+---+++ Damaged Environment Definitions
+
+Pacman creates environment definitions for the Bourne shell and the TC shell at =%UCL_CWD%/setup.sh= and =%UCL_CWD%/setup.csh=. You may attempt to recreate these files providing the =-setup= argument to the =pacman= command:
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% pacman %RED%-setup%ENDCOLOR%
+</pre>
+
+
+---++ References
+
+   * Pacman [[http://physics.bu.edu/pacman][Home Page]]
+   * Pacman [[ReleaseDocumentation/PacmanInstall][Installation Instructions]]
+
+
+---++ Comments
+
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = AlainRoy
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       =  MarcoMambelli
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+############################################################################################################
+-->
+
+
+
+%META:TOPICMOVED{by="RobGardner" date="1192749711" from="Integration/ITB_0_7.PacmanInfo" to="Integration/ITB_0_7.PacmanBestPractices"}%

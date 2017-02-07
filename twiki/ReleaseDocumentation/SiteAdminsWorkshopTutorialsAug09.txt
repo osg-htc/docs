@@ -1,0 +1,127 @@
+%META:TOPICINFO{author="KyleGross" date="1481047991" format="1.1" version="1.46"}%
+%META:TOPICPARENT{name="TutorialsFromThisRelease"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++ Introduction
+
+This is a repository of information for the OSG site administrator's workshop held at the OSG Grid Operations Center in Indianapolis, August 6-7, 2009.   
+   * Meeting homepage in OSG Indico system is [[http://indico.fnal.gov/conferenceDisplay.py?confId=2497][here]],  [[http://indico.fnal.gov/conferenceTimeTable.py?confId=2497][agenda]].
+   * Planning and organization: SiteCoordination.SiteAdminsWorkshopAug2009
+   * Suggest format for hands-on guides [[HandsOn][here]], for example: ClientInstallationHandsOn.
+
+
+---++ OSG 1.2 (Marco Mambelli)
+This session presents an overview of OSG 1.2, VDT 2.0 and introduces some OSG concepts to newcomers.  This will be followed by brief presentations for the hands-on sessions.
+
+---++ GUMS: Standalone and High Availability GUMS (Steve Timm)
+
+The first part of the GUMS installation will show how to install a single GUMS server using the normal OSG Release Documentation.  We will also cover simple administration tasks of GUMS such as adding a new group.  We will then show how to replicate the high-availability GUMS setup at Fermilab.  For first part of gums hands onyou need 1 machine real or virtual, a http cert, 2GB RAM, ~10GB disk.  For 2nd part you need 6 real or virtual machines.
+   * GUMSHandsOn
+   * HighAvailabilityHandsOn
+
+
+---++ Compute Element (Suchandra Thapa)
+
+*CE Installation* walk through, then one on one tutoring/problem solving.
+   * ComputingElementHandsOn
+*Requirements* This session requires participants to have a server and root access to the server.  The system should have an full access to the internet and about 5GB of space available.  In addition, you should have a personal certificate and server, http, and rsv certificates as well.
+
+
+---++ Security best practices (Doug Olson)
+Security best practices. Unix security best practices, OSG processes and expectations
+   *  [[%ATTACHURL%/olson-security.ppt][Agenda]] ([[%ATTACHURL%/olson-security.pdf][pdf]]) review/welcome (Doug)  – 5min.
+   * [[https://twiki.grid.iu.edu/bin/view/Documentation/SecurityRisksCE?cover=print][Security risks]] and non-risks discussion (Doug) – 10min
+   * [[https://twiki.grid.iu.edu/bin/view/Documentation/SecuritySiteResponsibilities?cover=print][Site admin responsibilities]] and [[Documentation.SecurityBestPractices][Best Practices]] (Doug) – 45min
+   * Incident Response Forensics and Review security drill ([[%ATTACHURL%/Padmanabhan_OSG_SiteAdmin09_Security.pdf][pdf]]) – (Anand) - 30 
+   * [[%ATTACHURL%/olson-security-QA.ppt][Q&A]] ([[%ATTACHURL%/olson-security-QA.pdf][pdf]]) on Trash/Tier3 Issues - (Doug, Anand) - 10min
+   * Certificate Handling – tutorial (Doug, if time permits) – 10
+
+---++ Network performance and troubleshooting (Rich Carlson)
+Hands-on troubleshooting using the client tools - In this session attendees would have to use the clients included in VDT or boot their laptop using the Knoppix ISO.  This would give them access to the client tools.  Rich would run a server on his laptop and can create network faults that the attendees would find.   If time allows some tips on configuring the !perfSONAR server will be provided.
+
+*Hands-on guide:*
+   * NetworkPerformanceHandsOn
+   * See also NetworkPerformanceToolkit
+
+*Requirements.*
+This session will require a network switch in the meeting room with access to the Internet for NTP & DHCP. Attendees will need a laptop with OSG-Client installed. If this is not possible (e.g. Windows machines) they could boot the laptop using the Knoppix live CD provided including the client tools.
+
+
+---++ Storage Element Installation (Several)
+
+Installation tips and help, one on one tutoring and problem solving. SRM (what is, different options in VDT dCache and various !BeStMans), Support for different FS in !BeStMan(xrootd, Hadoop, NFS or other POSIX like)    
+
+Session schedules:
+   * [[http://indico.fnal.gov/sessionDisplay.py?sessionId=12&slotId=0&confId=2497#2009-08-07][First session]]
+   * [[http://indico.fnal.gov/sessionDisplay.py?sessionId=13&slotId=0&confId=2497#2009-08-07][Second session]]
+
+Some recommended references:
+   * [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/DCacheInstall][dCache]]
+   * [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/BestmanGateway][BeStMan Gateway]]
+   * [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/BestmanGatewayXrootd][BeStMan Gateway + Xrootd]]
+   * [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/BestmanOnCE][BeStMan Gateway on CE node]]
+   * [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/BeStMan][BeStMan]]
+   * [[https://www.usatlas.bnl.gov/twiki/bin/view/Admins/BestMan][BeStMan Gateway for US ATLAS specific installation]]
+
+*Hands-on guides:*
+   * Will use the reference [[BestmanGateway][BeStMan Gateway]] 
+   * [[BestmanGatewayXrootdHandsOn][BeStMan Gateway + Xrootd hands-on]] derived from the reference [[BestmanGatewayXrootd][BeStMan Gateway +Xrootd]] 
+   * Will use the reference document [[BestmanOnCE][BeStMan Gateway on CE node]]
+   * Will use the reference document [[BeStMan][BeStMan]]
+   * [[https://twiki.grid.iu.edu/bin/view/Storage/HadoopInstallation][Hadoop Installation document]], with separate pages for the rpm-based install of [[https://twiki.grid.iu.edu/bin/view/Storage/HadoopGridFTP][GridFTP]] and [[https://twiki.grid.iu.edu/bin/view/Storage/HadoopSRM][Bestman SRM]]
+   * Will use the reference [[GratiaTransferProbe][Gratia transfer probe]]
+
+*Requirements*
+Attendees should have the necessary server/s and possibly have already server/service certificates. Servers must be a platform [[http://vdt.cs.wisc.edu/releases/2.0.0/requirements.html][supported by VDT]] and you will need admin (root) privileges.
+All installations are possible on a single server, but multiple servers are recommended for bigger and more performant installations, e.g. for use in bigger production sites. See the recommended references for more information.
+
+You will need fuse, fuse libs and fuse kernel module to be installed on one of two nodes for !BeStMan-xrootd installation and !Hadoop installation.<br>
+The advance reading of the referenced document describing your SE of choice is recommended.
+
+You can write to osg-storage@opensciencegrid.org if you have specific questions about your configuration and requirements. If you are updating an existing installation, a backup of the existing installation is recommended.
+
+
+---++ Virtual Machines (Alex Younts)
+   * Hands-on session demonstrating the use of a Nimbus Cloud: VirtualMachinesHandsOn
+   * Hands-on session with the Condor Virtual Machine Universe
+   * Local VM setup and use (Alden Stradling) -- hands-on with a sample Grid- and analysis-capable VM: Trash/Tier3VMHandsOn
+   * Use cases for deploying small T3 clusters with software and configurations baked in
+
+*Requirements*
+Participants should bring a laptop with a Core Duo or better, and 3 GB of RAM or better. Bringing a power adaptor would also be a good idea. VM images will be downloadable here in the next 24 hours, or Alden will provide DVD/USB methods of VM distribution on-site. Downloading and installing a copy of VMware Player (Windows or Linux) or VMware Fusion (Mac, trial versions available) before the session would be appreciated. Grid certificates are necessary if you want to test the Grid capabilities of the VM.
+
+Please contact Alden.Stradling@cernSPAMMENOT.ch or ayounts@purdue.edu if you are interested in the tutorial.
+
+---++ Monitoring (Rob Quick)
+   * Hands-on session explaining how administrators can use [[http://myosg.grid.iu.edu][MyOSG]] to their advantage to monitor status, debug, look for accounting data, etc. 
+   * Information on ensuring clean topology information in OIM -- lot of other services depend on OIM data, and can produce misleading results if OIM has bad data
+   * How to convert existing scripts into an RSV probe; how to plug it into an existing RSV setup?
+   * How to upload RSV results from a site level RSV client to a Nagios server.
+*Hands-on Guide:*
+   * RSVNagiosHandsOn
+
+
+---++ General Requirements
+Attendees should already have a valid grid certificate. Attendees should install an OSG 1.2 Grid client ([[ClientInstallationHandsOn][OSG client installation]]), specially if they plan to attend the Network session or to test grid resources. Information about certificates is available [[Documentation.GetAccessToGrid][here]].  Attendees will work with their own servers which should have pre-installed certificates. GUMS and CE installations will require one server each (it can be the same if you are just testing) with a platform [[http://vdt.cs.wisc.edu/releases/2.0.0/requirements.html][supported by VDT]].  You will need admin (root) privileges.  The installation of a High Availability GUMS server will require a machine to host two VMWare virtual machines.
+
+
+
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% Main.MarcoMambelli - 23 Jul 2009 %BR%
+%REVIEW% Main.SuchandraThapa - 24 Jul 2009 %BR%
+%REVFLAG% %S%  %BR%
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/HandsOn/centerpageborder.css
+-->
+
+%META:FILEATTACHMENT{name="olson-security.ppt" attachment="olson-security.ppt" attr="" comment="Security session agenda (ppt)" date="1249554810" path="olson-security.ppt" size="229376" stream="olson-security.ppt" tmpFilename="/usr/tmp/CGItemp23966" user="DougOlson" version="2"}%
+%META:FILEATTACHMENT{name="olson-security.pdf" attachment="olson-security.pdf" attr="" comment="Security agenda (pdf)" date="1249554774" path="olson-security.pdf" size="60012" stream="olson-security.pdf" tmpFilename="/usr/tmp/CGItemp24573" user="DougOlson" version="2"}%
+%META:FILEATTACHMENT{name="olson-security-QA.ppt" attachment="olson-security-QA.ppt" attr="" comment="Security Q&A (ppt)" date="1249530926" path="olson-security-QA.ppt" size="216064" stream="olson-security-QA.ppt" tmpFilename="/usr/tmp/CGItemp23790" user="DougOlson" version="2"}%
+%META:FILEATTACHMENT{name="olson-security-QA.pdf" attachment="olson-security-QA.pdf" attr="" comment="Security Q&A (pdf)" date="1249530849" path="olson-security-QA.pdf" size="48756" stream="olson-security-QA.pdf" tmpFilename="/usr/tmp/CGItemp23716" user="DougOlson" version="2"}%
+%META:FILEATTACHMENT{name="Padmanabhan_OSG_SiteAdmin09_Security.pdf" attachment="Padmanabhan_OSG_SiteAdmin09_Security.pdf" attr="" comment="" date="1250265610" path="Padmanabhan_OSG_SiteAdmin09_Security.pdf" size="532042" stream="Padmanabhan_OSG_SiteAdmin09_Security.pdf" tmpFilename="/usr/tmp/CGItemp31674" user="AnandPadmanabhan" version="1"}%

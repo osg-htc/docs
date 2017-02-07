@@ -1,0 +1,88 @@
+%META:TOPICINFO{author="KyleGross" date="1481047985" format="1.1" version="1.17"}%
+%META:TOPICPARENT{name="Documentation.DocHowTo"}%
+---+ Document Tester Responsibilities
+%DOC_STATUS_TABLE%
+
+---++
+%STARTINCLUDE%
+
+%EDITTHIS%
+%BR%
+Procedural documents in the official OSG Documentation TWiki should have a Tester.
+%BR%%BR%
+Each installation or procedure document in the OSG Documentation TWiki should be tested. The purpose of the test is to check if the documented procedures yield expected results when carried out. The [[Documentation.DocForOwners][Owner]] of a document will typically request involvement of a Tester when a document needs tested.  A document needs to be tested:
+   1. After it has been created.
+   1. After major changes to the document have been made.
+   1. Before major releases.%BR%
+The Tester should preferably be a person that is not:
+   1. The developer of the software or procedure described in the document.
+   1. The Owner of the document.%BR%
+The Tester of a document should only have a general knowledge about the topic of the document. To follow the instructions of the document, the tester must have access to facilities needed for the test (e.g. a local site resource or ITB resource). The Tester is responsible for:
+   1. Performing a test (when the Owner marks the document TEST_READY and TEST_PASSED is IN_PROGRESS) of the instructions on the software and version the document is meant to be used with and noting any problems or anomalies.
+   1. Updating the [[Documentation.DocManagementVariables#Document_Tester_Variables][TEST_PASSED variable]] in the HTML block at the end of the document.  Do this by editing the document using the Edit link at the bottom of the page.
+   1. Working in collaboration with the Owner of the document to resolve issues from a test of procedures.
+   1. Doing a final test (if necessary) after the issues are resolved to verify the procedure presented the document can be performed successfully and updating TEST_PASSED variable.
+   1. Notifying the Document Architect if unable to continue to fulfill the responsibilities of the Tester.
+%NOTE%  The roles of the [[DocReviewerResponsibilities][Reviewer]] and Tester are different!  The Reviewer is only responsible to check documents for their readability, logical structure, and conformance to standards, while the Tester must apply the procedures as described in the document.
+%STOPINCLUDE%
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesWeichel
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = Documenter
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = TedHesselroth
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->
+
+%META:TOPICMOVED{by="JamesWeichel" date="1266964470" from="Documentation/DocumentationTeam.DocTesterResponsibilities" to="ReleaseDocumentation.DocTesterResponsibilities"}%

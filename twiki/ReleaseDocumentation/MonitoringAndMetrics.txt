@@ -1,0 +1,81 @@
+%META:TOPICINFO{author="KyleGross" date="1227280705" format="1.1" version="1.8"}%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+---++ Intro
+This document is now deprecated since it describes how to change the frequency of services which 
+themselves are all deprecated.
+
+Describes recommended best practices for OSG site monitoring and metrics. From [[Main.StevenTimm][StevenTimm's]] talk on [[http://osg-docdb.opensciencegrid.org/cgi-bin/RetrieveFile?docid=455][Lessons Learned & Best Practices]].
+
+---++ Monitoring Packages in the OSG
+There are four major monitoring packages in OSG 0.4.1:
+   * *<nop>MonALISA*
+   * *MIS-­CI*: feeds GridCat, did feed ACDC dashboard)
+   * *<nop>CEMon*: executes the Generic Information Provider
+   * *GRIS*:  executes Generic Information provider
+
+In OSG 0.6.0, GRIS is deprecated and CEMON is used for all delivery of stuff from the information providers.
+MIS-CI is also removed.  So there are only two.
+
+Frequencies of all monitoring software in the OSG are adjustable. See documentation for more information. Going slower than the default frequency is essential to a smooth operation.  Testing has found that a five minute frequency both
+for sending information to collectors and executing the Generic Information Providers is about right for CEMon.
+These frequencies are set in $VDT_LOCATION/glite/etc/glite-ce-monitor/cemonitor-config.xml and are set
+in units of 1000th's of a second..i.e. the default frequency 300000 means 300 seconds or 5 minutes.
+
+The more things that are calling =condor_q=, the more potential for trouble.
+
+Recent report suggests that grep can be faster if <tt>LOCALE=C</tt> rather than =US-­ENGLISH=
+In VDT 1.6.1/OSG 0.6.0  this has now been added to the default Generic Information Provider script.
+
+If a VO is listed in =grid3-­user-­vo-­map.txt=, your site needs to support it. =grid3-­user-­vo-­map.txt= has to be right before the Generic Information provider (GIP) is configured.
+VDT.1.6.1/OSG 0.6.0 the file is renamed to osg-user-vo-map.txt and consistency checks are made to make 
+sure that the users and VO's that you have in your user-vo map actually exist, and the GIP is reconfigured
+automatically when new VO's are added.
+
+Be sure Generic Information Provider (GIP) advertises the right number of job slots. Otherwise, it's a &#8220;kick me&#8221; sign to the LCG.
+
+%STARTInsetBox%
+   $ %I% *%RED% NOTE %ENDCOLOR%*: _Stuff breaks._ Look at the daily !MonALISA email and check that Tomcat (in which CEMon runs, is up..
+%ENDInsetBox%
+
+CEMon is new. We have been running it at FNAL under OSG 0.4.1.  It can be memory­-hungry.
+
+Do we have to split some monitoring off to another node? Maybe eventually, especially with advent of web services. 
+
+Monitoring should use =condor_q ­-format= and =condor_status ­-format=.
+
+---++ Tracking jobs
+
+---+++ Tracking jobs from submission job
+Get <nop>GridJobId:
+<verbatim>
+$ condor_q -l | grep GridJobId
+  GridJobId = "gt2 fng-p­osg.fnal.gov/jobmanager­-condor https://fngp­-osg.fnal.gov:18764/10515/1156102663/"
+</verbatim>
+
+---+++ Tracking jobs in /var/log/messages
+<verbatim>
+  Aug 20 14:37:48 fngp-­osg gridinfo[10515]:
+  JMA 2006/08/20 14:37:48 
+  GATEKEEPER_JM_ID 2006­-08­-20.14:37:43.0000010457.0000000000 
+  for /DC=gov/DC=fnal/O=Fermilab/OU=People/
+  CN=Charles C. Polly/UID=polly on 131.225.167.42
+
+  Aug 20 14:37:48 fngp-­osg gridinfo[10515]: 
+  JMA 2006/08/20 14:37:48 
+  GATEKEEPER_JM_ID 2006-­08­-20.14:37:43.0000010457.0000000000 
+  mapped to minboone (12755, 5468)
+
+  Aug 20 14:37:48 fngp-­osg gridinfo[10515]: 
+  JMA 2006/08/20 14:37:48 
+  GATEKEEPER_JM_ID 2006-­08-­20.14:37:43.0000010457.0000000000 
+  has GRAM_SCRIPT_JOB_ID 507209 manager type condor
+</verbatim>
+
+
+
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% Main.StevenTimm - 18 Oct 2007 %BR%
+%REVIEW% Main.RobGardner - 09 Nov 2007 %BR%
+%REVCOM% Deprecate?  Yes, deprecate (ST).

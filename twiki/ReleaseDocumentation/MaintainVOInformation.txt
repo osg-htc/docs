@@ -1,0 +1,88 @@
+%META:TOPICINFO{author="KyleGross" date="1481047987" format="1.1" version="1.15"}%
+%META:TOPICPARENT{name="ReleaseDocumentation.SecuritySiteResponsibilities"}%
+---+ *Maintaining up-to-date VO and user access information*
+%DOC_STATUS_TABLE%
+%TOC%
+
+---++ About This Document
+This document covers how sites can keep the pertinent user authorization information up-to-date at their site.  Whether use GUMS or gridmap files it is very important that sites make sure these are being updated.
+
+---++ Maintain up-to-date VO and user access information
+
+Each VO on OSG keeps a up-to-date list of their members. These are the users that should be given access to sites on behalf of the VOs. It is important to keep these lists up to date so that when VO removes a user for whatever reason, your site would also stop providing access to the particular user. 
+
+OSG software is already configured to keep a valid VO membership list, so you do not need to worry about this except for initially configuring the service.
+
+There are two services: [[ReleaseDocumentation.InstallConfigureAndManageGUMS][GUMS]] and [[ReleaseDocumentation.LocalAuthPreConfig][edg-mkgridmap tool]]. They both keep the list of VO members for your site. When a user makes an access request, s/he is first authenticated, then s/he is is sent to either GUMS or edg-mkgridmap tool. If one of the tools finds the user name listed in a VO member list, the user is granted access.
+
+GUMS is a Java-based service running in Tomcat. If you have multiple gatekeepers, storage elements, grid services, they can all connect to GUMS for authorization information. If you choose to use GUMS, all of the services you install at your site which require authentication and authorization for outside users should be configured to [[ReleaseDocumentation.FullPrivPreConfig][use this GUMS server]] as the source for authorization. You need to carefully check the documentation for each service you install (CE, SE, VOMS, ...) to make sure that
+it is configured to use your GUMS server.
+
+edg-mkgridmap tool runs via cron to get updated VO membership information (VO membership is kept in VOMS servers) and generates a grid-mapfile. The grid-map file is a simple text file listing the names of VO members. If you have grid services installed on more than one node, then you will need to have multiple copies of this grid-mapfile on each node. This can lead to confusion, opportunities for errors and reduced reliability.
+
+You have two responsibilities regarding authorization: 1) is to keep VO membership lists up-to-date at your site. When you configure GUMS or edg-mkgridmap tool correctly, this will happen automatically. So all you need to do to check your log files every so often to ensure everything works as expected.  OSG provides default configuration templates for both tools. So you should make sure that you get the right configuration template, which is your second responsibility.
+
+2) When the OSG makes a change to the configuration file, the GOC (Grid Operations Center) will send out an email. You should fetch the new configuration template and install it. At this time (August 2009) there is not an automatic update of the GUMS configuration or edg-mkgridmap so you must take some manual action. However, we are working on an automated configuration mechanism which will eliminate any of the manual intervention. So until then you should watch out for these emails from GOC.
+
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesBarlow
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = IgorSfiligoi
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
+
+%META:TOPICMOVED{by="JamesBarlow" date="1273172692" from="Documentation.MaintainVOInformation" to="ReleaseDocumentation.MaintainVOInformation"}%

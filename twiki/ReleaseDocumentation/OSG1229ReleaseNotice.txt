@@ -1,0 +1,36 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1340741348" format="1.1" version="1.1"}%
+%META:TOPICPARENT{name="WebHome"}%
+
+
+<div style="font-family: Tahoma, Geneva, sans-serif;">
+<div class="announcement-head" style="border-left-width: thin; border-top-color: #000; border-right-color: #000; border-bottom-color: #000; border-left-color: #000; border-top-style: solid; border-bottom-width: thin; border-bottom-style: solid; border-left-style: solid; border-top-width: thin; border-right-width: thin; border-right-style: solid; background-color: #F90;">
+  <h1 align="center">OSG 1.2.29 Update Notification</h1>
+</div>
+<br/>
+<div class="date" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; border-top-style: solid; border-top-color: #000; border-right-color: #000; border-bottom-color: #000; border-left-color: #000; border-left-width: thin; border-right-style: solid; border-bottom-width: thin; border-left-style: solid; border-top-width: thin; border-right-width: thin; border-bottom-style: solid; background-color: #F93;">Date: <span class="date-text" style="font-size: 14px; font-weight: normal;">June 26, 2012</span></div>
+<br/>
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border-left-color: #000; border-top-color: #000; border-right-color: #000; border-bottom-color: #000; border-left-width: thin; border-top-style: solid; border-right-style: solid; border-bottom-width: thin; border-left-style: solid; border-top-width: thin; border-right-width: thin; border-bottom-style: solid; color: #CCC;">Affected Components</div>
+<div>
+  <p>The following components are affected:</p>
+  <ul>
+    <li>Java</li>
+  </ul>
+</div>
+<br/>
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border-left-color: #000; border-top-color: #000; border-right-color: #000; border-bottom-color: #000; border-left-width: thin; border-top-style: solid; border-right-style: solid; border-bottom-width: thin; border-left-style: solid; border-top-width: thin; border-right-width: thin; border-bottom-style: solid; color: #CCC;">Summary</div>
+<div> 
+  <p>This release contains the following updates to address security vulnerabilities:</p>
+  <ul>
+    <li>Java 1.6.0_33</li></ul>
+  <p>&nbsp;</p>
+</div>
+<div>Update instructions can be found on the OSG Twiki under the OSG 1.2 <a href="https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OSG12UpdateInstructions">update instructions</a>.</div>
+<br/>
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border-left-color: #000; border-top-color: #000; border-right-color: #000; border-bottom-color: #000; border-left-width: thin; border-top-style: solid; border-right-style: solid; border-bottom-width: thin; border-left-style: solid; border-top-width: thin; border-right-width: thin; border-bottom-style: solid; color: #CCC;">Additional Information</div>
+<div>The release notes for the VDT 2.0.0p36 release underlying this release can be found <a href="http://vdt.cs.wisc.edu/releases/2.0.0/release-p36.html">here</a>.</div>
+<br/>
+
+<style type="text/css">
+body { font-family: Tahoma, Geneva, sans-serif !important; }
+</style>
+</div>

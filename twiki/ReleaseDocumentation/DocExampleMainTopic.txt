@@ -1,0 +1,83 @@
+%META:TOPICINFO{author="KyleGross" date="1481047985" format="1.1" version="1.6"}%
+%META:TOPICPARENT{name="ReleaseDocumentation.DocFormattingRules"}%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%DOC_STATUS_TABLE%
+%TOC{depth="2"}%
+%NOTE% TOC{Depth="2"} is usually best for the TOC to keep it from being too cluttered with detail.
+
+---++ Introduction
+Here we introduce the topic.
+
+---++ Major Point 1
+Here we introduce major point 1.
+---+++ Sub point 1.A
+Here we describe sub point 1.A.
+---+++ Sub point 1.B
+Here we describe sub point 1.B.
+---++ Major Point 2
+Here we introduce major point 2.
+---+++ Sub point 2.A
+Here we describe sub point 2.A.
+---+++ Sub point 2.B
+Here we describe sub point 2.B.
+---++ More Information for You
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesWeichel
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = Documenter
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %NO%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->
+-- Main.JamesWeichel - 27 Jan 2010
+
+%META:TOPICMOVED{by="JamesWeichel" date="1266966462" from="Documentation/DocumentationTeam.DocExampleMainTopic" to="ReleaseDocumentation.DocExampleMainTopic"}%

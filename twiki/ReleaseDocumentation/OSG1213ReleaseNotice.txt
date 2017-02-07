@@ -1,0 +1,36 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1282930678" format="1.1" reprev="1.1" version="1.1"}%
+%META:TOPICPARENT{name="WebHome"}%
+
+<div class="announcement-head" style="border: thin solid #000; background-color: #F90;">
+  <h1 align="center">OSG 1.2.13 Update Notification</h1>
+</div>
+<br />
+
+<div class="date" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; border: thin solid #000; background-color: #F93;">Date: <span class="date-text" style="font-size: 14px; font-weight: normal;">August 26, 2010</span></div>
+<br />
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Affected Components</div>
+<div>
+  <p>The following components are affected:</p>
+  <ul>
+    <li>Gratia accounting on CE installations</li>
+    <li>Xrootd installations </li>
+    <li>OSG client and wn-client installations</li>
+    <li>Systems using gratia rpms</li>
+  </ul>
+</div>
+<br />
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Summary</div>
+<div> 
+  <p>This release has updates to three components. Xrootd, Gratia, and the Fermi SRM clients have been updated. The updates are fairly minor and do not necessitate an immediate update unless you are encountering an issue that is corrected in these updates.</p></div><div> </div>
+<br />
+
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Issues Fixed</div>
+<div>See the VDT release notice for more detailed information. However, notable fixes include correct a syntax issue when specifying the redirector on a data server. Gratia has been updated to correct several bugs and has added accounting probes for Xrootd. Fermi SRM clients have been updated as well.</div>
+<br />
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Update Instructions</div>
+<div>Update instructions can be found on the OSG Twiki under the OSG 1.2.13 <a href="https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OSG12UpdateInstructions">update instructions</a>.</div>
+<br />
+<div class="update-heading" style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Additional Information</div>
+<div>The release notes for the VDT 2.0.0p20 release underlying this release can be found <a href="http://vdt.cs.wisc.edu/releases/2.0.0/release-p20.html">here</a>.</div>
+
+<br />

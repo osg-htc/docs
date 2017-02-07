@@ -1,0 +1,121 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1275078143" format="1.1" reprev="1.7" version="1.7"}%
+%META:TOPICPARENT{name="Trash.ReleaseDocumentationITBTestingInstructions"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+Testing advertisements to !ReSS using CEMon
+
+%EDITTHIS%
+%BR%
+
+---++ Configuring Support for MPI to be advertised to !ReSS
+
+---+++ Configuring !CEMon to advertise MPI attributes
+Sites can advertise support for MPI using following Glue attributes -
+   * !GlueSoftwareLocalID
+   * !GlueSoftwareName
+   * !GlueSoftwareVersion
+   * !GlueSoftwareInstalledRoot
+   * !GlueSoftwareEnvironmentSetup
+   * !GlueSoftwareModuleName
+   * !GlueSoftwareDataParams
+
+The following example adds !IntelCompilers_9 MPI library. Change $VDT_LOCATION/gip/etc/add-attributes.conf to add MPI related information you would like to publish
+
+<verbatim>
+dn: GlueSoftwareLocalID=IntelCompilers_9,GlueSubClusterUniqueID=lepton.rcac.purdue.edu,GlueClusterUniqueID=lepton.rcac.purdue.edu,mds-vo-name=Purdue-Steele,mds-vo-name=local,o=grid
+objectClass: GlueClusterTop
+objectClass: GlueSoftware
+objectClass: GlueKey
+objectClass: GlueSchemaVersion
+GlueHostApplicationSoftwareRunTimeEnvironment: IntelCompilers_9
+GlueSoftwareLocalID: IntelCompilers_9
+GlueSoftwareName: IntelCompilers
+GlueSoftwareVersion: 9
+GlueSoftwareInstalledRoot: /opt/intel
+GlueSoftwareEnvironmentSetup: module load intel/9.1.049
+GlueSoftwareModuleName: intel/9.1.049
+GlueChunkKey: GlueSubClusterUniqueID=lepton.rcac.purdue.edu
+GlueSchemaVersionMajor: 1
+GlueSchemaVersionMinor: 3
+</verbatim>
+
+Make following changes to etc/alter-attributes.conf: 
+<verbatim>
+GlueHostApplicationSoftwareRunTimeEnvironment: IntelCompilers_9
+</verbatim>
+
+
+---+++ Verifying that MPI attributes are being advertised to !ReSS
+Once you configure your site to advertise MPI advertise, restart tomcat. It should take around 10 minutes (based on the CEMon configuration) for CEMon to start publishing latest information to !ReSS at osg-ress-1.fnal.gov
+
+Run following condor_status command to verify that the MPI information is published correctly.
+
+<verbatim>
+condor_status -pool osg-ress-1.fnal.gov -constraint 'GlueSiteName == "Purdue-Steele"' \
+                                                                -format 'GlueSiteName=%s\n' GlueSiteName \
+                                                                -format 'GlueSoftwareLocalID=%s\n' GlueSoftwareLocalID \
+                                                                -format 'GlueSoftwareName=%s\n' GlueSoftwareName \
+                                                                -format 'GlueSoftwareVersion=%s\n' GlueSoftwareVersion \
+                                                                -format 'GlueSoftwareInstalledRoot=%s\n' GlueSoftwareInstalledRoot \
+                                                                -format 'GlueSoftwareEnvironmentSetup=%s\n' GlueSoftwareEnvironmentSetup \
+                                                                -format 'GlueSoftwareModuleName=%s\n' GlueSoftwareModuleName \
+                                                                -format 'GlueSoftwareDataParams=%s\n\n' GlueSoftwareDataParams
+</verbatim>
+
+The output from running above command should look like
+
+<verbatim>
+GlueSiteName=Purdue-Steele                                                                                                                                                          
+GlueSoftwareLocalID=IntelCompilers_9,MPICH_1.2.7p1_intel,MPICH_1.2.7p1_gcc,MPICH_1.2.7p1_pgi,MPICH2_1.0.7_intel,MPICH2_1.0.7_gcc,MPICH2_1.0.7_pgi,MPICH2_1.0.7_nemesis_intel,MPICH2_1.0.7_nemesis_pgi                                                                                                                                                                   
+GlueSoftwareName=IntelCompilers,MPICH,MPICH,MPICH,MPICH2,MPICH2,MPICH2,MPICH2,MPICH2                                                                                                
+GlueSoftwareVersion=9,1.2.7.p1_intel,1.2.7p1_gcc,1.2.7p1_pgi,1.0.7_intel,1.0.7_gcc,1.0.7_pgi,1.0.7_nemesis_intel,1.0.7_nemesis_pgi                                                  
+GlueSoftwareInstalledRoot=/opt/intel,/apps/steele/mpich-1.2.7p1/64/p4-intel-10.1.015,/apps/steele/mpich-1.2.7p1/64/p4-gcc-4.3.0,/apps/steele/mpich-1.2.7p1/64/p4-pgi-7.1-6,/apps/steele/mpich2-1.0.7/64/ssm-intel-10.1.015,/apps/steele/mpich2-1.0.7/64/ssm-gcc-4.3.0,/apps/steele/mpich2-1.0.7/64/ssm-pgi-7.1-6,/apps/steele/mpich2-1.0.7/64/nemesis-intel-10.1.015,/apps/steele/mpich2-1.0.7/64/nemesis-pgi-7.1-6                                                                                                                                         
+GlueSoftwareEnvironmentSetup=module load intel/9.1.049,module load mpich-intel,module load mpich-gcc                                                                                
+GlueSoftwareModuleName=intel/9.1.049,mpich-intel,mpich-gcc,mpich-pgi,mpich2-intel,mpich2-gcc,mpich2-pgi,mpich2-nemesis-intel,mpich2-nemesis-pgi                                     
+GlueSoftwareDataParams=,,,,,,,,                                                                                                                                                
+
+[. . .]
+</verbatim>
+
+---++ Verifying number of classads to be advertised to !ReSS
+Run verify-gip-for-cemon-wrapper command to verify if the number of classads that will be published to !ReSS by your sites is coorect based on the configuration
+
+<verbatim>
+[root@cmssrv09 glite-ce-monitor]# source /usr/local/osg-ce/setup.sh 
+[root@cmssrv09 glite-ce-monitor]# /storage/local/data1/osg-ce/verify-gip-for-cemon/verify-gip-for-cemon-wrapper                                                 
+Total number of  CLASSADs: 96                                                   
+Info for CLASSAD #1 **********************                                      
+ CE cmssrv09.fnal.gov:2119/jobmanager-condor-default                            
+  Cluster cmssrv09.fnal.gov                                                     
+   SubCluster cmssrv09.fnal.gov                                                 
+    VO View  cdf                                                                
+     SE cmssrv09.fnal.gov                                                       
+      SA default                                                                
+Info for CLASSAD #2 **********************                                      
+ CE cmssrv09.fnal.gov:2119/jobmanager-condor-default                            
+  Cluster cmssrv09.fnal.gov                                                     
+   SubCluster cmssrv09.fnal.gov                                                 
+    VO View  cdf                                                                
+     SE cmssrv09.fnal.gov                                                       
+      SA default                                                                
+[...]
+</verbatim>
+
+---++ Known issues
+   * Configuration of MPI attributes is not done automatically and the admins need to manually add/modify information in the GIP's add-attributes.conf file
+
+---++ More information
+Andrew Howard has put up a nice page with more details on configuring other components to enable MPI support for your site. You can find these instructions at https://twiki.grid.iu.edu/bin/view/Sandbox/AdminSetupMPI , as well as instructions on how to compile and submit MPI jobs at https://twiki.grid.iu.edu/bin/view/Sandbox/CompilingMPIJobs .
+
+
+
+
+%STOPINCLUDE%
+%BR%
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%

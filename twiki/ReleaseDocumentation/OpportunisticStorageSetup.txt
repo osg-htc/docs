@@ -1,0 +1,306 @@
+%META:TOPICINFO{author="KyleGross" date="1481047990" format="1.1" version="1.11"}%
+%META:TOPICPARENT{name="Storage.DCache18Preview"}%
+%DOC_STATUS_TABLE%
+https://twiki.grid.iu.edu/twiki/pub/Storage/WebHome/images.jpg
+
+---+++ Configuration of Storage Elements for Opportunistic Use
+
+---++++ Introduction
+
+The general requirements for a storage element supporting opportunistic use are
+
+   * There is a capability of specifying a portion of the total storage for opportunistic use.
+   * It is possible to allow particular VOs and Roles a privilege to use space other than that included in opportunistic storage.
+   * Files created through opportunistic use will not be permanently available in the storage system.
+
+---++++ Procedure for dCache 1.8 with SRM 2.2
+
+SRM 2.2 supports [[Storage.SpaceReservation][Storage.SpaceReservation]]. A storage site administrator may configure the site for opportunistic use through space reservation. In SRM-dCache 1.8 the creation of space reservations is controlled by use use of link groups. The site administrator may assign storage pools to link groups. This shall be the basis of dividing the storage; certain pools are designated for opportunistic use.
+
+Here are the operations that are performed to enable opportunistic use of storage. In summary, the steps are to designate a portion of the storage for opportunistic use, authorize VOs to make space reservations, and authorize the supported VOs to write to a designated directory.  
+
+---+++++ Modification of the Storage Element Configuration
+
+Please start from the [[ReleaseDocumentation.PoolManager][ReleaseDocumentation.PoolManager.conf]] file described in the Storage.SpaceReservation topic. This file is installed through the VDT packeage for dCache unless the install is an upgrade from a previous dCache version.
+
+1. Determine which pools shall be designated for opportunistic use.  In [[ReleaseDocumentation.PoolManager][ReleaseDocumentation.PoolManager.conf]], add a line for each of these pools. The names to use are the ones used internally by dCache. See the dCache documentation for how to determine the correct pool names.
+
+<verbatim>
+psu create pool poolnode1_1
+psu create pool poolnode1_2
+psu create pool poolnode2_1
+psu create pool poolnode2_2
+psu create pool poolnode3_2
+psu create pool poolnode3_2
+</verbatim>
+
+2. Find the pool group for opportunistic use and add the pools to it.
+
+<verbatim>
+psu create pgroup public
+psu addto pgroup public poolnode1_1
+psu addto pgroup public poolnode1_2
+psu addto pgroup public poolnode2_1
+psu addto pgroup public poolnode2_2
+psu addto pgroup public poolnode3_1
+psu addto pgroup public poolnode3_2
+</verbatim>
+
+3. Verify that there is a link that includes this pool group.
+
+<verbatim>
+# public - will be linkGrouped as opportunistic storage area
+psu create link public-link any-store world-net any-protocol
+psu set link public-link -readpref=10 -writepref=10 -cachepref=10 -p2ppref=-1
+psu add link public-link public
+</verbatim>
+
+4. Verify that there is a link group that includes this link.
+
+<verbatim>
+psu create linkGroup public-link-group
+psu addto linkGroup public-link-group public-link
+psu set linkGroup custodialAllowed public-link-group true
+psu set linkGroup onlineAllowed public-link-group true
+psu set linkGroup nearlineAllowed public-link-group true
+psu set linkGroup replicaAllowed public-link-group true
+psu set linkGroup outputAllowed public-link-group false
+psu set linkGroup attribute public-link-group HSM=None
+</verbatim>
+
+Save the [[Storage.OpportunisticPoolManager][new ReleaseDocumentation.PoolManager.conf]]. 
+
+5. Load the new rules into the <nop>ReleaseDocumentation.PoolManager.
+
+<verbatim>
+$ ssh -l admin -c blowfish -p 22223 localhost
+admin@localhost's password: 
+
+    dCache Admin (VII) (user=admin)
+
+
+(local) admin > cd PoolManager
+(PoolManager) admin > reload -yes
+
+</verbatim>
+
+6. Check that the rules were loaded into the <nop>ReleaseDocumentation.PoolManager.
+
+<verbatim>
+(PoolManager) admin > psu dump setup 
+#
+# Printed by diskCacheV111.poolManager.PoolSelectionUnitV2 at Wed Nov 14 09:56:54 CST 2007
+#
+#
+#
+# The units ...
+#
+psu create unit -net    0.0.0.0/255.255.255.255
+psu create unit -net    0.0.0.0/0.0.0.0
+psu create unit -store  *@*
+psu create unit -protocol */*
+#
+...
+</verbatim>
+
+The settings shown may vary if you have made other customizations to ReleaseDocumentation.PoolManager.conf.
+
+7. Verify in /opt/d-cache/config/srmSetup that the space manager is enabled.
+
+<verbatim>
+srmSpaceManagerEnabled=yes
+</verbatim>
+
+and make sure that implicit space reservation is off: check the line in /opt/d-cache/config/srmSetup
+
+<verbatim>
+srmImplicitSpaceManagerEnabled=no
+</verbatim>
+
+Having the option on would allow users to write to the storage element without space tokens. In that case, a space reservation would be made for them for the duration of the transfer. This would complicate the freeing of space from expired reservations, since the file would immediately be in an expired reservation. Therefore if a site intends to recycle space in the opportunistic storage area it is recommended that implicit space reservation be turned off.
+
+8. Check the default <nop>LinkGroupAuthorization.conf described in  [[ReleaseDocumentation.SpaceResServerSetup][Server Setup]], which is installed by the VDT packaing of dCache. The default authorizes any authenticated user to make space reservations in the opportunistic storage area and gives an example of restricting access to the reserved link group. /opt/d-cache/etc/LinkGroupAuthorization.conf is
+
+<verbatim> 
+LinkGroup reserved-link-group
+cms/Role=*
+atlas/Role=*
+
+LinkGroup public-link-group
+*/Role=*
+</verbatim>
+
+If you would like a more restrictive policy for the public link group, see step 13 below.
+
+9. If you changed /opt/d-cache/config/srmSetup in step 7, restart srm to pick up the changes. Otherwise, reload the link groups and link group authorizations in <nop>srmSpaceManger.
+
+<verbatim>
+$ ssh -l admin -c blowfish -p 22223 localhost
+admin@localhost's password: 
+
+    dCache Admin (VII) (user=admin)
+
+
+(local) admin > cd SrmSpaceManager@srm-oursiteDomain
+(SrmSpaceManager@srm-cd-oursiteDomain) admin > update link groups
+update started
+(SrmSpaceManager@srm-oursiteDomain) admin > 
+</verbatim>
+
+10. Create a directory for the rootpath of the opportunistic storage area.
+
+<verbatim>
+# cd /pnfs/oursite.edu/data
+# mkdir public
+# chmod 777 public
+</verbatim>
+
+Alternatively, a site could make a directory for each VO which shall be supported.
+
+11. Find out what user names opportunistic users will map to, either from [[http://grid.racf.bnl.gov/GUMS/guide_config_gums.html][gums.config]] on your GUMS server, or from [[http://www.dcache.org/manuals/Book/ch12s05.shtml][grid-volemap]] on your gPlazma node, depending on which method is activated. Authorize these users to access the storage area defined above by adding lines to /etc/grid-security/storage-authzdb on the gPlazma node such as.
+
+<verbatim>
+authorize cdf    read-write 9500 5000 / /pnfs/oursite.edu/data/public /
+authorize dzero  read-write 9501 5001 / /pnfs/oursite.edu/data/public /
+authorize gadu   read-write 9502 5002 / /pnfs/oursite.edu/data/public /
+authorize sdss   read-write 9503 5003 / /pnfs/oursite.edu/data/public /
+authorize ligo   read-write 9504 5004 / /pnfs/oursite.edu/data/public /
+authorize star   read-write 9505 5005 / /pnfs/oursite.edu/data/public /
+authorize ivdgl  read-write 9506 5006 / /pnfs/oursite.edu/data/public /
+authorize gridex read-write 9507 5007 / /pnfs/oursite.edu/data/public /
+authorize fmri   read-write 9508 5008 / /pnfs/oursite.edu/data/public /
+authorize mis    read-write 9509 5009 / /pnfs/oursite.edu/data/public /
+authorize grase  read-write 9510 5010 / /pnfs/oursite.edu/data/public /
+authorize glow   read-write 9511 5011 / /pnfs/oursite.edu/data/public /
+</verbatim>
+
+If in step 10 a unique directory for each supported VO has been created, that should be reflected in the above lines.
+
+13. (Optional) If you would like to restrict opportuntistic use to particular VOs, modify the authorization for opportunistic link group in /opt/d-cache/etc/LinkGroupAuthorization.conf such as the following.
+
+<verbatim> 
+LinkGroup opportunistic-link-group
+cdf/Role=*
+dzero/Role=*
+gadu/Role=*
+sdss/Role=*
+ligo/Role=*
+star/Role=*
+ivdgl/Role=*
+gridex/Role=*
+fmri/Role=*
+mis/Role=*
+grase/Role=*
+glow/Role=*
+</verbatim>
+
+Repeat step 9 to cause the authorization file to be reloaded into <nop>srmSpaceManager.
+
+14. Users can now make their own space reservations, or if srmImplicitSpaceManagerEnabled set to "yes" in srmSetup (see step 7), srm will create space reservations for them per transfer. If you would like to make a space reservation for opportunistic use, do so with a command such as the following.
+
+<verbatim>
+$ /opt/d-cache/srm/bin/srm-reserve-space --retention_policy=REPLICA --access_latency=ONLINE -lifetime=7776000 \
+-desired_size=500000000000 -guaranteed_size=500000000000 -space_desc=public-token srm://cd-97177.fnal.gov:8443
+Storage Resource Manager (SRM) CP Client version 2.0
+...
+Space token =107
+lifetime = null
+access latency = ONLINE
+retention policy = REPLICA
+guaranteed size = 500000000000
+total size = 500000000000
+$
+</verbatim>
+
+The above creates a space reservation of 250GB that expires in 90 days. If you would rather that users access the opportunistic storage area through such a pre-created space token, rather than making their own, restrict the authorization for making tokens in step 13. It is acceptable to have no VOs authorized for a link group; in that case reservations can still be made through the admin interface and users will be able to use a token created by the site administrator.
+
+15. Upgrade your ldap server to use glue schema 1.3 and publish your opportunistic storage area. See Storage.GlueOpportunisticStorageArea. Also, on your site's policy web page publish your policy on usage and deletions (see below), along with the needed srm endpoint and root path, and the site-created space token if you are using one. Direct users to Storage.SpaceResClientCommands for information on making and using space reservations.
+
+---+++++ Maintenance of the Opportunistic Storage Area
+
+To prevent the opportunistic storage area from filling up, files from expired space reservations should be deleted. A tool for doing that is available. The storage tools package may be found at http://datagrid.ucsd.edu/toolkit.
+
+If you prefer to delete files from expired reservations by hand, download and unpack the toolkit from http://vdt.cs.wisc.edu/software/dcache/tools/maintenance, cd to the tools directory and run
+
+<verbatim>
+/opt/jython2.2b1/jython  listInvalidFiles.py localhost  22223 admin dickerelch
+</verbatim>
+
+Then parse the output
+
+<verbatim>
+In space 31:
+33 uscms157 null 31 6463746 1194905589202 14399656 /pnfs/fnal.gov/data/test22 0001000000000000000014C8 Stored 
+35 uscms157 null 31 6463746 1194906199540 14399533 /pnfs/fnal.gov/data/test23 0001000000000000000014F8 Stored 
+37 uscms157 null 31 6463746 1194907237992 14399576 /pnfs/fnal.gov/data/public/test1 000100000000000000001550 Stored 
+
+In space 44:
+45 uscms157 null 44 6463746 1194907622350 14399561 /pnfs/fnal.gov/data/public/test2 000100000000000000001580 Stored 
+
+In space 81:
+82 uscms157 null 81 6463746 1194988553552 14399661 /pnfs/fnal.gov/data/public/test14 000100000000000000001838 Stored 
+</verbatim>
+
+for the file full paths. Remove the files from the parsed output, for example, by piping it into the "rm" command.
+
+Bear in mind here that if users are allowed to write without explicit space reservations, some of the files in expired reservations may be very recent (see step 10, above). Therefore, it is advisable to examine the timestamp (sixth field of the output) and retain files that may still be in use.
+
+
+
+-- Main.TedHesselroth - 9 May 2008
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = TedHesselroth 
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = TanyaLevshina
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %NO%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = NehaSharma
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %NO%
+############################################################################################################
+-->
+
+%META:TOPICMOVED{by="TedHesselroth" date="1271186789" from="Storage.OpportunisticStorageSetup" to="ReleaseDocumentation.OpportunisticStorageSetup"}%

@@ -1,0 +1,92 @@
+%META:TOPICINFO{author="KyleGross" date="1481047986" format="1.1" version="1.44"}%
+%DOC_STATUS_TABLE%
+---+!! Grid User Mapping Service (GUMS) Host Cron
+%TOC%
+
+---++ About this Document
+This document describes the gums-host-cron.  The gums-host-cron is used to keep the =grid-mapfile= (if used) and =osg-user-vo-map.txt= files up to date.  
+
+---+++ Background
+To keep the *grid-mapfile* (if used) and *osg-user-vo-map.txt* files up to date, a cron file and script were installed but need to be activated.
+   * In the Compatibility mode, both the grid-mapfile and osg-user-vo-map-txt need to be updated at the same time from your GUMS server. 
+   * In the Full Privilege mode, only the osg-user-vo-map.txt needs to be updated from your GUMS server.
+
+---++ Service Activiation
+To turn on the gums-host-cron for a [[ReleaseDocumentation.ComputeElementInstall][CE installation]].  
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% source $VDT_LOCATION/setup.sh
+%UCL_PROMPT_ROOT% vdt-control --on gums-host-cron
+</pre>
+
+These commands will make a entry in root's crontab.
+
+---++ Service Operation
+The gums-host-cron script (=$VDT_LOCATION/gums/scripts/gums-host-cron=) does the following:
+   1. It executes the =gums-host= command  using both the =generateGridMapfile= and =generateGrid3UserVoMap= arguments. In order to determine your authorization mode, the script looks for the existence of the PRIMA callout in the =/etc/grid-security/gsi-authz.conf= file.  If present, it assumes Full Privilege mode.  If not, it assumes Compatiblity mode.
+   1. It will create a temporary copy of the files and compare them against the current copy.
+   1. It only updates the CE nodes current copy if a change has occurred.  When a change is effected, a backup of the old file with a =*.cronsaved= suffix will be created.   This allows an administrator to more easily identify any changes.   The date of the backup file will reflect when it was last in effect.
+   1. At the completion of each successful run, it will create an empty =osg-user-vo-map.last-checked= file.  This file allows the administrator(s) to more easily verify the currency of the data.
+   1. Finally, it calls the =configure_gip= script to make sure that any newly-supported VO's are correctly published to the Generic Information Providers.
+
+---++ Service Verification
+To test the =gums-host-cron= script and to initially populate the two files for the first time using your GUMS server (as =root=):
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% $VDT_LOCATION/gums/scripts/gums-host-cron
+</pre>
+
+
+%IMPORTANT% Beginning with OSG 0.6.0/ITB 0.5.1, the =grid3-user-vo-map.txt= file was deprecated.  It is replaced by =osg-user-vo-map.txt= (same contents, new file name).   To facilitate the transition, the scripts that maintain this file will insure both files exists (the old one symlinked to the new one).   So when you see this occur, do not be concerned.  At some point in the future when all components referencing this file have been changed, the scripts will remove all evidence of this little inconvenience.
+
+---+ Comments
+
+| PM2RPM_TASK = 2012 | Main.RobertEngel | 28 Aug 2011 - 00:32 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = DerekWeitzel
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = VO
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = TerrenceMartin
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+############################################################################################################
+-->
+
+
+%META:TOPICMOVED{by="ForrestChristian" date="1166051290" from="Integration.GumsHostCron050" to="Integration/ITB_0_5.GumsHostCron"}%

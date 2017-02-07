@@ -1,0 +1,135 @@
+%META:TOPICINFO{author="KyleGross" date="1481047985" format="1.1" version="1.14"}%
+%META:TOPICPARENT{name="Documentation.DocHowTo"}%
+---+!! *Template for a Procedure Document*
+%DOC_STATUS_TABLE%
+%TOC{depth="2"}%
+%NOTE% The following sections are intended to be a super set for an How To (or Procedure) Document.  Particular sections may not apply to all documents, but use all the sections that make sense for the procedure you are documenting.
+%NOTE% Items in common with many procedures should have their own page and be pointed to by or included in this document.
+%NOTE% Create a new How To document if some software or operational change requires more than a few changes to the procedure and the old procedure still needs to be available for use.
+
+---++ About This Document
+Describe the intended audience or primary user for the document.
+
+Include a brief description of object of this procedure and how this procedure fits into any larger workflow or process.
+
+The applicable environment for use of this procedure.  This might include the OSG release for which this procedure applies and the type of site, VO, or User that is is designed for.
+
+---++ Requirements
+An in-line numbered list of items assumed to have been already performed before you follow this procedure.
+E.g.:
+   1. Security items (need a Certificate)
+   1. Membership in a VO
+   1. Gotten access by being a recognized user
+   1. Etc.
+
+---++ Procedure
+Begin with an overview or list of the high level steps so the reader understands the overall procedure.  
+
+This can be followed by a more thorough description of the steps of this procedure (including the links to forms, web pages, commands and options required).
+
+Each step that requires unix commands should show the commands in a green box using 
+<verbatim><pre class="screen">
+command parameters
+</pre></verbatim> tag which will look like this.
+<pre class="screen">
+command parameters
+</pre>
+%BR%
+%NOTE% Standard variables (such as $VDT_LOCATION) should be used where they exist
+%NOTE% The terminal interaction must be verbatim with no extra characters so that a user can copy and paste the command lines.
+
+This procedure covers the success legs only 
+
+---++ Validation of Success
+Show how to verify the procedure was successful, especially if that is a separate step and is not given as a direct response from performing the steps.
+
+---++ Problem Resolution and Help
+---+++!!Where to look for information
+Location of information that is important for resolving the problem with the procedure.  
+
+---+++!!Problem procedure
+What are the first things to check, step-by-step instructions to determine source of problem
+%BR%
+If you cannot resolve the problem, the best way to get help on this procedure is to: ....
+
+---+++!!Caveats/Known issues
+Restrictions and/or work around for known issues 
+
+---+++!!References
+References to additional information.  This document should be as concise as possible, but the reader can use these links if he/she wants more background or information.
+
+---+++!!Screen dump of the complete procedure
+Include if the procedure includes use of terminal commands.
+%BR%
+%TWISTY{
+mode="div"
+showlink="Show..."
+hidelink="Hide"
+showimgleft="%ICONURLPATH{toggleopen-small}%"
+hideimgleft="%ICONURLPATH{toggleclose-small}%"
+}%
+<pre class="screen">
+complete screen dump of the procedure
+</pre>
+%ENDTWISTY%
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = JamesWeichel
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|General|Trash/Trash/Integration|Monitoring|Operations|Security|Storage|Trash/Tier3|User|VO)
+   * Local DOC_AREA       = General
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (Developer|Documenter|Scientist|Student|SysAdmin|VOManager)
+   * Local DOC_ROLE       = VOManager
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (HowTo|Installation|Knowledge|Navigation|Planning|Training|Troubleshooting)
+   * Local DOC_TYPE       = HowTo
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = ElizabethChism
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->
+
+-- Main.JamesWeichel - 23 Feb 2010
+
+%META:TOPICMOVED{by="JamesWeichel" date="1273086373" from="Documentation/DocumentationTeam.DocHowToTemplate" to="ReleaseDocumentation.DocHowToTemplate"}%

@@ -1,0 +1,139 @@
+%META:TOPICINFO{author="KyleGross" date="1481047992" format="1.1" version="1.21"}%
+%META:TOPICPARENT{name="VomrsInstallGuide"}%
+%DOC_STATUS_TABLE%
+
+---+!! VOMRS Configuration
+%TOC{}%
+
+---+ About this Document
+
+%ICON{"hand"}% This document is for VO Administrators. It provides details on the configuration of the VOMRS Service.
+
+%STARTSECTION{"Main"}%
+<!-- useful variable definitions
+   * Local UCL_HOST = myvoms
+   * Local UCL_CWD = /opt/vomrs
+   * Local UCL_SERVICE = tomcat-55
+-->
+
+---%SHIFT%+ VOMRS Configuration
+
+The configuration is done entirely using the =$VDT_LOCATION/vdt/setup/configure_vomrs= script. The =$VDT_LOCATION/vdt-install.log= contains additional log messages not shown on the command line.
+
+---%SHIFT%++ Creating a VO
+
+Use the =configure_vomrs= script and following arguments to create a %LINK_GLOSSARY_VO%:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% configure_vomrs 
+               --server %GREEN%&lt;y|n&gt;%ENDCOLOR%
+               --vo %GREEN%&lt;name of the VO&gt;%ENDCOLOR%
+               --mail-from %GREEN%&lt;sender address for vomrs mail&gt;%ENDCOLOR%
+               --smtp-host %GREEN%&lt;outgoing smtp server&gt;%ENDCOLOR%
+               --vdt-install $VDT_LOCATION 
+</pre>
+
+This will:
+
+   1 create a <nop>MySQL database named *vomrs13_vdt*<pre class="rootscreen">
+%UCL_PROMPT_ROOT% mysql -uroot
+mysql&gt; %GREEN%show databases;%ENDCOLOR%
++----------------+
+| Database       |
++----------------+
+| mysql          |
+| test           |
+| vomrs13_vdt    |
++----------------+</pre>
+   1 create all VOMRS configuration files for your VO in =$VDT_LOCATION/vomrs/var/etc/vomrs_&lt;vo_name&gt;.<pre class="rootscreen">
+%UCL_PROMPT_ROOT% ls -al $VDT_LOCATION/vomrs/var/etc/vomrs_vdt
+-rw-r--r--  1 root   root    802 Jul 31 11:10 initial.conf
+-rw-r--r--  1 root   root    607 Jul 31 11:10 log4j.properties
+-rw-r--r--  1 root   root    608 Jul 31 11:10 log4j_webui.properties
+drwxr-xr-x  2 root   root   4096 Jul 31 11:12 logs
+-rw-------  1 root   root   1014  Jul 31 11:10 member.data
+-rw-r--r--  1 root   root    258 Jul 31 11:10 vomrs_vdt.xml
+lrwxrwxrwx  1 root   root     42 Jul 31 11:10 vomrs.xsd -> %UCL_CWD%/vomrs/etc/cfg/vomrs.xsd</pre>
+   1 update the *Apache*, *Tomcat* and *glite* configuration files for the new VOMS VO
+   1 restart all the necessary services
+
+Default values applied during the configuration process can be viewed in the =$VDT_LOCATION/vdt-install.log= searching for 'This is vomrs-configure'.
+
+%NOTE% Refer to the [[ReleaseDocumentation/VomsInstallGuide#Creating_a_VO][VOMS Installation Guide (Configuring VOMS section)]] to learn how to add a %LINK_GLOSSARY_VO% to VOMS.
+
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="Activate" INPUT_SCREEN="rootscreen" TOC_SHIFT="+"}%
+
+---%SHIFT%++ Removing a VO
+
+We apologize, but there exists currently no script to remove a VOMS instance. Instead perform the following steps manually:
+
+   1 stop the VOMRS server
+   1 remove the associated !MySql database
+   1 remove =$VDT_LOCATION/var/etc/vomrs_<vo_name> directory
+   1 remove context file from =$VDT_LOCATION/tomcat/v55/config/Catalina/localhost/vomrs#<vo_name.xml=
+   1 remove the =$VDT_LOCATION/tomcat/v55/webapps/vomrs/<vo_name> directory
+   1 restart tomcat-55
+
+%NOTE% Refer to the [[ReleaseDocumentation/VomsInstallGuide#Removing_a_VO][VOMS Installation Guide (Configuring VOMS section)]] to learn how to remove a %LINK_GLOSSARY_VO% from VOMS.
+
+%ENDSECTION{"Main"}%
+
+---+ Comments
+
+| PM2RPM_TASK = NORPM | Main.RobertEngel | 28 Aug 2011 - 00:32 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = StevenTimm
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = VO
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %NO%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->

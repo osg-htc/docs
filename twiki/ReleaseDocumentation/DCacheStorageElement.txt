@@ -1,0 +1,15 @@
+%META:TOPICINFO{author="JamesWeichel" date="1318282215" format="1.1" version="1.7"}%
+%META:TOPICPARENT{name="Documentation.StorageInfrastructureSoftware"}%
+
+
+DEPRECATED!!!
+
+
+
+%META:FILEATTACHMENT{name="dcache_tier2.png" attachment="dcache_tier2.png" attr="" comment="Typical dCache service distribution for a Tier 2 level setup." date="1269445783" path="dcache_tier2.png" size="157327" stream="dcache_tier2.png" tmpFilename="/usr/tmp/CGItemp9503" user="TedHesselroth" version="1"}%
+%META:FILEATTACHMENT{name="WhatisaSE.png" attachment="WhatisaSE.png" attr="" comment="" date="1270503415" path="WhatisaSE.png" size="62734" stream="WhatisaSE.png" tmpFilename="/usr/tmp/CGItemp10914" user="TedHesselroth" version="1"}%
+%META:FILEATTACHMENT{name="Data_lifecycle_and_role_of_SRM.png" attachment="Data_lifecycle_and_role_of_SRM.png" attr="" comment="Data life cycle" date="1270503870" path="Data_lifecycle_and_role_of_SRM.png" size="54376" stream="Data_lifecycle_and_role_of_SRM.png" tmpFilename="/usr/tmp/CGItemp10934" user="TedHesselroth" version="1"}%
+%META:FILEATTACHMENT{name="FNAL_SRM_system_context.png" attachment="FNAL_SRM_system_context.png" attr="" comment="storage system" date="1270503894" path="FNAL_SRM_system_context.png" size="67965" stream="FNAL_SRM_system_context.png" tmpFilename="/usr/tmp/CGItemp10940" user="TedHesselroth" version="1"}%
+%META:FILEATTACHMENT{name="SRMCopytodisk.png" attachment="SRMCopytodisk.png" attr="" comment="srm copy state diagram" date="1270503917" path="SRMCopytodisk.png" size="35321" stream="SRMCopytodisk.png" tmpFilename="/usr/tmp/CGItemp10929" user="TedHesselroth" version="1"}%
+%META:FILEATTACHMENT{name="SRMPrepareToPut.png" attachment="SRMPrepareToPut.png" attr="" comment="prepare to put state diagram" date="1270503954" path="SRMPrepareToPut.png" size="27226" stream="SRMPrepareToPut.png" tmpFilename="/usr/tmp/CGItemp10940" user="TedHesselroth" version="1"}%
+%META:TOPICMOVED{by="TedHesselroth" date="1271186415" from="Storage.DCacheStorageElement" to="ReleaseDocumentation.DCacheStorageElement"}%

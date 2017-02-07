@@ -1,0 +1,13 @@
+%META:TOPICINFO{author="RobGardner" date="1212707205" format="1.1" version="1.15"}%
+%META:TOPICPARENT{name="SiteValidationTable"}%
+This page has been superceded by ValidatingDcache.
+
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE%  Main.RobGardner - 06 Jun 2008 %BR%
+%REVIEW% Main.RobGardner - 06 Jun 2008 %BR%
+%REVCOM%    %BR%
+%REVFLAG% %Y%  %BR%
+
+
+%META:TOPICMOVED{by="AnneHeavey" date="1193000202" from="Integration/ITB_0_7.ValStorageServices" to="Integration/ITB_0_7.ValidateStorageServices"}%

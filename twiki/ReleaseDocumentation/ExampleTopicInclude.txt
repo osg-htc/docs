@@ -1,0 +1,23 @@
+%META:TOPICINFO{author="JamesWeichel" date="1318440532" format="1.1" version="1.12"}%
+%META:TOPICPARENT{name="FormattingRules"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+++ %SPACEOUT{ "%TOPIC%" }%
+%EDITTHIS%
+%BR%
+_One line introduction._
+
+
+---+++ Heading (keep at level 3 or below so the including document can control the level 2 structure.)
+
+---+++ Known issues
+
+---+++ More information
+
+%STOPINCLUDE%
+
+
+%META:TOPICMOVED{by="RobGardner" date="1192581754" from="Integration/ITB_0_7.ExampleTemplateInclude" to="Integration/ITB_0_7.ExampleTopicInclude"}%

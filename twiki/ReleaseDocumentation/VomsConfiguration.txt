@@ -1,0 +1,119 @@
+%META:TOPICINFO{author="MarcoMambelli" date="1304543278" format="1.1" reprev="1.15" version="1.15"}%
+%META:TOPICPARENT{name="VomsInstallGuide"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+%EDITTHIS%
+%BR%
+
+---++ Configuration script
+
+The =$VDT_LOCATION/vdt/setup/configure_voms= script has been provided for creating and removing VOs from VOMS.
+
+During the VOMS installation process, this script is executed and creates a 'test' VO called =VDT=.  After the installation completes, the verification process  uses this =VDT= test VO to determine the success of the installation.  By reviewing this section of the documentation now, you will be more aware of what to look for when you create your own VO(s).
+
+The =configure_voms= script is also used to remove any VOs that are no longer needed and will be documented here as well.
+
+---++Creating a VO
+All VOs should be created using the =configure_voms= script.
+
+Syntax:
+<pre>
+configure_voms --server &lt y,n &gt
+               --vo &lt vo name &gt
+               --mail-from &lt from address on voms mail &gt
+               --smtp-host &lt outgoing smtp host &gt
+               --vdt-install &lt VDT installation root &gt
+</pre>
+
+%NOTE% The =$VDT_LOCATION/vdt-install.log= contains all messages from its execution not visible in =stdout/err= on the command line.
+
+%NOTE% The configuration is saved into the file =$VDT_LOCATION/glite/var/etc/voms-admin/&lt;vo name>/voms.service.properties=. You can edit that file directly to change the configuration. There is an undocumented option to change the port of the SMTP host used to send notification messages (from the default 25) =voms.notification.smtp-server.port=, e.g.: <pre class="file"># sets only the server name (FQDN) 
+voms.notification.smtp-server = myhost.mydomain
+# sets the port you want to use
+voms.notification.smtp-server.port =  2525
+</pre>
+
+The =configure_voms= script does the following (note: the examples that follow show the files for the =VDT= test VO that is created):
+<ol>
+  <li>Creates a <nop>MySql database called =voms_VDT=.
+<pre class="screen">
+&gt; <b>mysql -uroot</b>
+mysql&gt; <b>show databases;</b>
++----------------+
+| Database       |
++----------------+
+| mysql          |
+| test           |
+| voms_VDT       |
++----------------+
+</pre>
+  </li>
+  <li>Creates all the necessary VOMS configuration files for your VO.
+<pre>
+&gt; ls <b>$VDT_LOCATION/vdt-app-data/voms  </b>
+-rw-r--r--    1 root    root        5 Sep  1 10:45 last_port   <b><i>(Maintains the last port number 
+                                                                assigned a  VO's server)</b></i>
+drwxr-xr-x    6 root    root     4096 Sep  1 10:45 voms        <b<i>(VOMS server configuration data
+                                                                for each VO)</b></i
+drwxr-xr-x    6 root    root     4096 Sep  1 10:45 voms-admin  <b<i>(WEB UI configuration data for 
+                                                                each VO)</b></i>
+drwxr-xr-x    2 root    root     4096 Sep  1 10:45 vomses      <b<i>(voms-proxy-init configuration file 
+                                                                for each VO)</b></i>
+
+&gt; ls <b>$VDT_LOCATION/vdt-app-data/voms/voms/VDT</b>
+-rw-r-----    1 daemon  daemon    367 Aug 31 23:06 voms.conf
+-rw-r-----    1 daemon  daemon     23 Aug 31 23:05 voms.pass
+ 
+&gt; ls <b>$VDT_LOCATION/vdt-app-data/voms/voms-admin/VDT</b>
+-rw-r--r--    1 root    daemon    946 Aug 31 23:05 voms-admin-VDT.xml
+-rw-r-----    1 daemon  daemon    921 Aug 31 23:05 voms.database.properties
+-rw-r--r--    1 root    root     9354 Aug 31 23:06 voms.service.properties
+-rw-r--r--    1 root    daemon     95 Aug 31 23:05 vomses
+
+&gt; ls <b>$VDT_LOCATION/vdt-app-data/voms/vomses</b>
+-rw-r--r--    1 root     root          100 Aug 31 23:06 VDT    <b<i>(voms-proxy-init configuration file
+                                                                for the VDT VO)</b></i>
+
+&gt <b>cat VDT</b>
+"VDT" "cms-xen3.fnal.gov" "15000" "/DC=org/DC=doegrids/OU=Services/CN=cms-xen3.fnal.gov" "VDT" "40"
+</pre>
+
+  </li>
+  <li>Updates the apache, tomcat and glite configuration files for the new VOMS VO.</li>
+  <li>Restarts all the necessary services including the VOMS server.</li>
+  <li>An acl is created for the HOST certificate for this server with =VO-Admin= capabilities.  This lets the =root= user on this machine update the VOMS VO using the =voms-admin= command, so =root= is, in effect, already a VO-Admin  in this VO.  It is not, however, a member of the VO, which is an important distinction. %BR% %BR% This =root= user capability can be removed after an individual  is assigned the VO-Admin role as described in the next section. </li>
+</ol>
+
+Many default values were applied during this process.  The values applied can  be viewed in the 
+=$VDT_LOCATION/vdt-install.log= and searching for 'This is voms-admin-configure'.
+
+
+---++Removing a VO 
+The =configure_voms= script is also used to remove a VO from the VOMS installation:
+
+<pre class="screen">
+&gt; <b>source  $VDT_LOCATION/setup.sh</b>
+&gt; <b>$VDT_LOCATION/vdt/setup/configure_voms  -vo &lt vo name &gt  --remove</b>
+</pre>
+
+No output indicates success, hopefully.
+
+%NOTE% If you have set the =root= password for <nop>MySQL, you will be prompted for the password when you execute the script.
+
+The script will:
+   * stop the VO's VOMS server, 
+   * remove the associated !MySql database, 
+   * remove all configuration files for the VO
+   * restart tomcat and apache
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.TanyaLevshina - 2 Nov 2007 %BR%
+%REVIEW% Main.AnandPadmanabhan - 12 Jun 2008  %BR%
+%REVCOM%    %BR%
+%REVFLAG%  %Y%  %BR%

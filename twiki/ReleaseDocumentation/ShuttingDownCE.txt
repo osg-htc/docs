@@ -1,0 +1,151 @@
+%META:TOPICINFO{author="KyleGross" date="1481047991" format="1.1" version="1.39"}%
+%DOC_STATUS_TABLE%
+
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++ Introduction
+
+In %CACHE% 0.6.0 and later, all services (=/etc/init.d=, =/etc/xinetd.d=, =cron=) should be turned on/off using the =$VDT_LOCATION/vdt/sbin/vdt-control= script.  This section will provide just a general overview. There is a <i>man</i> page available for the script, just type =man vdt-control=. You can also [[%VDT_DOCS_URL%/man/vdt-control.html read the man page online]].  Additional information is given by [[StartingServices][Starting Services]] documentation.
+
+You need to be root to run this script.
+
+---++ View OSG services
+To view all services controlled by =vdt-control=:
+<pre class="screen">
+# <b>source $VDT_LOCATION/setup.sh </b>
+# <b>vdt-control --list </b>
+Service            | Type   | Desired State
+-------------------+--------+--------------
+fetch-crl          | cron   | enable
+vdt-rotate-logs    | cron   | enable
+gris               | init   | do not enable
+globus-gatekeeper  | inetd  | enable
+gsiftp             | inetd  | enable
+mysql              | init   | enable
+globus-ws          | init   | enable
+edg-mkgridmap      | cron   | do not enable
+gums-host-cron     | cron   | enable
+MLD                | init   | enable
+apache             | init   | enable
+tomcat-5           | init   | enable
+condor             | init   | enable
+gratia-condor      | cron   | enable
+</pre>
+
+%NOTE% This is output from a typically enabled CE installation.
+
+---++ Shutdown Services
+
+   * To shutdown <em>all</em> services: <pre class="screen">
+ <b>source $VDT_LOCATION/setup.sh </b>
+ <b>vdt-control --off </b>
+</pre>
+   * To shutdown an individual service of name <i>Service</i>: <pre class="screen">
+ <b>source $VDT_LOCATION/setup.sh </b>
+ <b>vdt-control --off  Service </b>
+</pre>
+
+   * If there is a problem with shutting off a service you will encounter: <pre class="screen">
+<b>vdt-control --off </b>
+disabling <i>type</i> service <i>Service</i>... FAILED! (see vdt-install.log)
+    found conflicting, <i> ... description of conflict ... </i>;
+    use the --force option to remove the entry
+</pre>
+
+%NOTE% While you may need to run =vdt-control --off --force= in some cases (e.g. if the vdt installed files have been modified), you should be %RED%very%ENDCOLOR% careful when doing this since this may disable services being run from other vdt installations on the same system or from non-vdt installations.   Always consult the ==vdt-install.log== file for a description of the failures. 
+
+<!--   Jeff Porter, 6/12/08 simplified some text and removed the following
+ - - -++ Shutdown individual services
+To shutdown <b>individual</b> services:
+
+<pre class="screen">
+ <b>source $VDT_LOCATION/setup.sh </b>
+ <b>vdt-control - -off  Service </b>
+</pre>
+
+%NOTE% You may need to run =vdt-control - -off - -force Service= in some cases if the vdt installed files have been modified.  However, you should be %RED%very%ENDCOLOR% careful when doing this since this may disable services being run from other vdt installations (or non-vdt services of the same name) on the same system.
+-->
+
+
+---++ Actions taken by vdt-control
+
+Behind the scenes, =vdt-control= will take the following actions to stop sevices.  
+   * For =/etc/init.d= services, =vdt-control= will stop the service by running =/etc/init.d/service-script stop= and then will delete the script.  
+   * For =/etc/xinet.d= services, vdt-control will remove the script from the directory and then restart the =xinetd= daemon. 
+   * For =root= cron entries, the crontab entry will be removed. 
+
+---++ Shutting down services on older installations
+To shutdown services installed by releases of the OSG software earlier than the 0.6.0 release, please refer to this [[Trash.ReleaseDocumentationShuttingDownOldCE][guide]].
+
+---++ Hung processes
+Look for hung globus-job-manager or globus-gatekeeper processes.  In exceptional situations where
+processes have been hung, some of these processes can survive the vdt-control --off.  They 
+have to be killed manually, if so.
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.SuchandraThapa - 18 Oct 2007 %BR%
+%REVIEW% Main.JeffPorter - 12 Jun 2008 %BR%
+%REVFLAG% %Y% %BR%
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = 
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = RobertEngel
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = IwonaSakrejda
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
+
+
+%META:TOPICMOVED{by="RobGardner" date="1192746289" from="Integration/ITB_0_7.OSGShutdownGuide" to="Integration/ITB_0_7.ShuttingDownCE"}%

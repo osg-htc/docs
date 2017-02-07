@@ -1,0 +1,130 @@
+%META:TOPICINFO{author="KyleGross" date="1481047990" format="1.1" version="1.23"}%
+%META:TOPICPARENT{name="Documentation.SecurityBestPractices"}%
+---+ *Cyber Security Risks of Grid Resources*
+%DOC_STATUS_TABLE%
+%TOC%
+
+---++ About This Document
+This document covers what security risk is, and how that applies to the different aspects of the OSG.
+
+---++ What is Risk?
+A risk is a combination of a threat and a vulnerability.  A threat is someone (or something) making an attempt to do some harm to a site (computer resource).  It can be malicious, accidental or just "some kids out for fun".  A vulnerability is a weakness in the system that can be exploited by someone to cause harm to the system.  Examples are kernel vulnerabilities that can be exploited to cause privilege escalation whereby a normal user can become superuser, or a service that can handle only a limited number of connection attempts so it can suffer from denial of service attacks.
+
+Risks can be graded by the probability of occurrence and the amount of damage that can be caused by exploiting the vulnerability.  
+A vulnerability can exist but if there is no threat community trying to exploit it then the risk is low (at least for now).  If a threat community is very active in trying to exploit a vulnerability (such as ssh) but the system is not vulnerable (ssh is restricted to the local subnet and the system has no normal user accounts) then the risk is low.  If a system is left unpatched (like a new install of an OS), exposed to the public internet and runs many services, like
+ssh, http, nfs, smb, ... then the risk is very high.  There are stories of plugging an unpatched Windows system into a campus network and it will be infected by the time it finishes booting up.
+
+As a system administrator, there are risks for the systems you maintain. If and when your systems get infected then they become a source of risk for other computers on the network and the grid.  When one of your systems gets hacked then credentials on your system can be used to access other systems on the network where those credentials are authorized.
+
+The normal best practice to minimize risk is to run only the necessary services, limit network access with a host-based firewall (such as iptables) and to keep up with the OS and middleware patches.
+
+---++ How does Risk of Grid Resource Compare to Risk of Other Networked Services?
+Connecting a compute resource to OSG, and enabling users from the participating VOs to access the resource, you are adding potentially thousands of new users to your resources.  The users are vetted by their VOs to some extent but one should assume that some of those users may have malicious intents.  
+Because of the way grid credentials are issued and handled (expiration, can be revoked by CA, can be removed from VOMS) the risk of a grid resource is certainly less than a case of granting ssh access to the same thousands of users.  But since there are thousands of users that can authenticate successfully to your resource you should assume that some of them will be probing for vulnerabilities on your site, looking for ways to gain root privilege, etc.  The best way to minimize the risks for grid resources are basically the same as any other internet-connected service; i.e., keep up with patches, don't run more services than required, have services run under a separate non-root account where possible, and take care in the configurations of the services.
+
+In today's internet, general purpose web services and ssh servers are at significantly greater risk of being hacked than grid services, mostly because there is a large, persistent and active community of people trying to attack those services but also because the authentication/authorization infrastructure for grid services is stronger than is typical for web and ssh services.
+
+---++ Credential Theft
+Grid credentials (proxy certificates) are stored as files owned by the local account to which that grid identity is mapped.  The protection of those credentials consists of the local filesystem permissions and the expiration lifetime of the credentials. The default lifetime for proxy credentials is usually 12 hours but users can set it much longer (and some do).  If a grid proxy certificate with a few month lifetime is stolen then that proxy can be used to impersonate the real user for the remaining lifetime of that proxy. 
+
+However, most of the time the proxy certificates sitting at a site (remote from the client submission point) are "[[http://dev.globus.org/wiki/Security/ProxyCertTypes#Limited_and_Restricted_Proxies][limited proxies]]".  "Limited proxies" can not be used to submit jobs to Globus GRAM or login via Gsi-ssh, but only for file transfer. Therefore, even when stolen, limited proxies do not constitute a big risk. 
+
+VOs determine how their members should be given accounts at remote sites. VOs prepare configuration templates that determine which local accounts the VO members should be mapped into at a site. Many VOs requests mapping all users from one VO to the same local user account.  In this case it is not very difficult for different users within the same VO to acquire each other's proxy credentials but then the risk is primarily within members of the VO and it's the VO responsibility to manage their users. Sites are only required to follow the configurations given by the VOs. 
+
+Under no circumstances should different VOs be mapped to the same local account. You can find a discussion of different grid DN to local account mapping scheme [[Documentation.SecurityBestPractices#Mapping_Grid_DN_s_to_Local_Accou][here]].
+
+---++ !DoS
+The gatekeeper is susceptible to denial of service (DoS) by having too many jobs submitted to it.  This is one of the reasons OSG encourages the use of condor-g for client job submission since it has mechanisms to avoid accidental denial of service.
+
+Gridftp servers are also susceptible to denial of service and that is one reason why most people use higher level tools when moving large amounts of data so transfers can be scheduled and resources not overloaded.
+
+If the compute resource is shared between local users and grid users there is a possibility that grid usage can overload resources.
+
+---++ Software Vulnerabilities
+
+The fact that you are installing grid software on your site that interacts on the network increases the risk compared to not installing the grid software.  There are bugs and vulnerabilities in the grid software that are discovered from time to time leading to patches and software updates to perform.  The VDT team and the OSG security team maintain an active awareness of the various discussion and announcement lists where news of security vulnerabilities affecting
+the OSG software stack are provided along with some triage based on the estimated risk of each vulnerability.  This results in notices being sent to all site contacts when there is some software update to perform, or possibly a mitigating action to take until a software patch is available.
+
+The primary issue for site administrators is to keep up to date with the notices from the GOC and OSG security team, and to keep up with the software patches.  The security announcements are archived at the [[http://osgsec.blogspot.com/][OSG Security Blog]].
+
+---++ Data Integrity
+Data integrity is primarily an issue of how the mapping is done to translate the grid identity (the X.509 subjectname of the grid certificate) to a local account that will own the files on your local system. Obviously, if multiple grid identities are mapped to the same local account then that data is effectively owned by both those grid users.  There are many cases of VO groups where group ownership of the data is desired but that is not always the case.
+
+The installation and configuration of the GUMS service, and how other services will access GUMS, is important for managing data integrity properly.  Following the default authorization configuration distributed by OSG is the safest choice for a site admin.
+
+The minimal data services provided by the OSG software do not provide for any data confidentiality beyond what is managed by the local filesystem permissions.  If applications need strong data confidentiality, as might be obtained using encryption, then additional software and infrastructure is required to support those requirements.
+
+---++ Trusted CAs and CRLs
+The authentication mechanisms used for the grid rely on a trust fabric consisting of information about a set of Certificate Authorities which are accepted for issuing certificates that will access your site.  
+If a proxy credential accompanying a grid transaction to your site did not come from a certificate signed by one of the CAs in your Trusted CAs directory then that credential won't be accepted and the transaction will get an error for an invalid credential.  Each CA issues a certificate revocation list (CRL) containing the serial numbers of certificates issued by that CA that have been revoked.  When a certificate is being validated as part of the authentication to your site, if the serial number shows up in the CRL for the CA that issued the certificate then the authentication will fail.
+
+Maintaining accurate information about the trusted CAs and their associated CRLs is important for the authentication step to work correctly.  
+Even though OSG provides a CA distribution containing all the IGTF + OSG specific CAs, it is upto the sites to decide which CA they wish to accept. Tools (e.g. [[VdtCaManage][vdt-ca-manage]]) are provided to facilitate the management of CAs and CRLs at the sites.
+The services which maintain this information (vdt-update-certs, and fetch-crl) should be running properly and the Trusted CA directory should only be writable by the administrative account.
+
+If the trusted CA information gets stale or corrupted the first effect will be a denial of service.  
+
+If a malicious intruder installs another CA into the trusted CAs directory they will also need to modify information in the authorization/mapping service  (GUMS, VOMS, ...) in order to access the site.  In this case it is probably easier to steal a valid credential from an authorized user than manipulate the authentication/authorization framework.
+
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesBarlow
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = AnandPadmanabhan
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
+
+%META:TOPICMOVED{by="JamesBarlow" date="1274384950" from="Security.SecurityRisksCE" to="ReleaseDocumentation.SecurityRisksCE"}%

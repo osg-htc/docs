@@ -1,0 +1,63 @@
+%META:TOPICINFO{author="RichardCarlson" date="1249396110" format="1.1" reprev="1.3" version="1.3"}%
+%META:TOPICPARENT{name="SiteAdminsWorkshopTutorialsAug09"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+
+---++Introduction
+The need to transfer terabyte data-sets in hours instead of days between OSG sites will soon become commonplace.  To convert this need into a routine event, site administrators will need to monitor the network infrastructure to proactively identify potential performance problems.  They will also need tools and services that can be used to quickly resolve problems that develop on these end-2-end paths.  This hands-on training session will introduce you to the perfSONAR services, and a suite of diagnostic tools that can be used to address both of these activities.
+
+Through a short presentation you will be introduced to the tools and services that can make monitoring and troubleshooting more manageable.  Following this presentation you will actively use a suite of diagnostic and troubleshooting tools that can help reduce the amount of time required to identify a performance problem.  A testbed network will be used to allow attendees the opportunity to learn how these diagnostic tools operate.  Once a baseline set of measurements are made, realistic network problems will be introduced into the testbed and attendees will use these tools to identify the problem.
+
+---++Requirements
+A testbed switch and cables will be provided.  The instructors laptop will be connected to this switch and used for the baseline and troubleshooting exercises.  The attendees will be required to boot a live-CD to gain access to the command line tools, or they may gain access to these tools via the VDT packages.
+
+---++More Information
+http://www.perfsonar.net  contains information about the perfSONAR services and has links to the various tools
+
+---++Commands
+<pre class="screen">
+1) verify Network Time Protocol (NTP) is functional
+     % ntpq -p
+
+2) request a one-way delay measurement
+    % owping server.domain.name  (captures delay, loss, reordering statistics in each direction)
+
+3) request a NDT test
+    % web10clt -n server.domain.name  (reports upload/download throughput, bottleneck link speed, and other basic info)
+  alt command 1
+    % web100clt -ln server.domain.name  (report basic info + detailed statistics)
+  alt command 2
+    % web100clt -lln server.domain.name  (report even more details)
+
+4 request a NPAD test
+    % diag-client server.domain.name 8100 40 90  (asks if the local infrastructure would support a 90 Mbps flow over a 40 msec path)
+
+</pre>
+
+---++Presentation
+Attached PDF presentation -- also see link at bottom of page
+
+<embed src="%ATTACHURL%/all-staff-08-06-09.pdf" width="792" height="612">
+
+---++References
+
+   1 Ref 1
+   1 Ref 2
+
+%BR%
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/HandsOn/centerpageborder.css
+-->
+
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% Main.RichardCarlson - 22 Jul 2009 %BR%
+%REVIEW%
+   * [[%ATTACHURL%/all-staff-08-06-09.pdf][all-staff-08-06-09.pdf]]: Network performance presentation
+
+%META:FILEATTACHMENT{name="all-staff-08-06-09.pdf" attachment="all-staff-08-06-09.pdf" attr="" comment="Network performance presentation" date="1249395957" path="all-staff-08-06-09.pdf" size="2713541" stream="all-staff-08-06-09.pdf" tmpFilename="/usr/tmp/CGItemp12582" user="RichardCarlson" version="1"}%

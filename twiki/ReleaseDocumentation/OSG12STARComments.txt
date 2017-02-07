@@ -1,0 +1,49 @@
+%META:TOPICINFO{author="IwonaSakrejda" date="1248993444" format="1.1" version="1.6"}%
+%META:TOPICPARENT{name="SiteValidationOSG12"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+STAR (Leve Hadju) tested 3 permanent ITB sites, CIT_ITB_1, LBNL_DSD_ITB, UC_ITB.
+
+%BR%
+
+---++ Comments
+Sites not listed below were note tested.
+
+---+++ CIT_ITB
+
+
+---+++ LBNL_DSD_ITB
+
+<tt>
+Iwona Sakrejda and Alex Sim have been working on the site tenaciously.
+After trying again all our tests passed in contrast to last time.
+srm clients had to have their shells changed from /bin/sh to /bin/bash
+- syntax in the scripts crashing the UBUNTU /bin/dash. The problem will be corrected in the next release.
+ 
+The SRM push and get commands for this site are:
+srm-copy file:////$SCRATCH/testfile.data 
+srm://oliver.lbl.gov:10443/srm/v2/server\?SFN=/srmcache/star/testfile.data
+srm-copy
+srm://oliver.lbl.gov:10443/srm/v2/server\?SFN=/srmcache/star/testfile.data
+file:////star/u/lbhajdu/temp/file_from_srm_pdfs.data
+  </tt>
+
+---+++ UC_ITB
+<tt>
+environment problems prevent testing
+ </tt>  
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.DougOlson - 16 Jul 2009 %BR%
+%REVIEW% Main.IwonaSakrejda - 21 Jul 2009 %BR%
+%REVFLAG% %Y%  %BR%
+
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%

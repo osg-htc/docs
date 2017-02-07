@@ -1,0 +1,37 @@
+%META:TOPICINFO{author="MarcoMambelli" date="1282341984" format="1.1" version="1.2"}%
+%META:TOPICPARENT{name="CaCertificatesInstall"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+Instructions for setting up CA certificates updates for OSG 1.0 installations.
+
+%EDITTHIS%
+%BR%
+
+As of September 2008, certificate authority certificates will no longer be installed and configured during installation.  Many components of the installation will not work until these are installed.  In order to finish installing the CA-Certificates package on your system you will need to do the following one-time configuration.  For more information, see http://vdt.cs.wisc.edu/releases/1.10.1/certificate_authorities.html
+
+   1 Edit the value of cacerts_url in the configuration file at $VDT_LOCATION/vdt/etc/vdt-update-certs.conf by un-commenting the following line:
+      * #cacerts_url = http://software.grid.iu.edu/osg-1.2/cadist/ca-certs-version
+   1 Then, run the following commands to download the certificates
+      * source (or 'dot' execute) $VDT_LOCATION/vdt-questions.sh
+      * $VDT_LOCATION/vdt/sbin/vdt-setup-ca-certificates
+   1 Make sure vdt-update-certs is enabled, so that future certificate updates are fetched automatically.  If you are root, you can use vdt-control
+      * vdt-control --enable vdt-update-certs
+      * vdt-control --on vdt-update-certs
+
+
+
+---++ Known issues
+None
+
+---++ More information
+
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.SuchandraThapa - 06 Oct 2009 %BR%
+%REVIEW%

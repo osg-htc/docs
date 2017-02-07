@@ -1,0 +1,565 @@
+%META:TOPICINFO{author="KyleGross" date="1481047983" format="1.1" version="1.44"}%
+%META:TOPICPARENT{name="WebHome"}%
+%DOC_STATUS_TABLE%
+
+---+!! CA Certificates Installation Guide
+%TOC%
+
+---+ About this Document
+
+<!-- useful variable definitions
+   * Local UCL_USER = user
+   * Local UCL_HOST = host
+   * Local UCL_CWD   = /opt/osg-%VERSION%
+-->
+
+%ICON{hand}% This document is for system administrators and grid users alike. It contains the procedure to install certificates from [[Documentation/GlossaryC#DefsCA][Certificate Authorities]] recognized by the %LINK_OSG%.
+
+---+ About Certificate Authorities and the Certificate Revocation List
+
+The %LINK_OSG% distributes a number of certificates of [[Documentation/GlossaryC#DefsCA][Certificate Authorities]] that issue certificates to their members. By installing these certificates you establish a chain of trust with each of the certificate authorities and trust the servers and services certified by those authorities. The %LINK_GLOSSARY_CRL% is used to inform you about individual certificates that have been revoked.
+
+%NOTE% The installation of CA Certificates is required on a %LINK_GLOSSARY_CE%, a %LINK_GLOSSARY_SE%, a [[ReleaseDocumentation/ClientInstallationGuide][OSG Client]] and in some cases on %LINK_GLOSSARY_WN%s.
+
+---+ How to get Help?
+
+If a problem cannot be resolved by following the [[#Troubleshooting][Troubleshooting Information]] on this page then follow the generic help procedures [[ReleaseDocumentation/HelpProcedure][here]]!
+
+---+ Requirements
+
+Before you proceed:
+
+   1. decide which %LINK_GLOSSARY_CA% Package you want to install, see [[ReleaseDocumentation/CaCertificatesInstall#Install_a_Certificate_Authority][here]]
+   1. decide between a _system wide_ or _local_ installation, [[ReleaseDocumentation/CaCertificatesInstall#Install_a_Certificate_Authority][here]]
+   1. make sure the Certificate Scripts Package has been [[ReleaseDocumentation/CaCertificatesInstall#Install_the_Certificate_Scripts][installed]]
+
+%STARTINCLUDE%
+
+---+%SHIFT% CA Certificates Installation Procedure
+
+The installation procedure contains several steps:
+
+   1. Install the Certificate Scripts Package (Optional).
+   1. Install a %LINK_GLOSSARY_CA% Package using =vdt-ca-manage=.
+   1. Configure automatic updates of the CA Package and the %LINK_GLOSSARY_CRL%
+
+The installation generally does not require root privileges but  a user performing it requires write permission in the =$VDT_LOCATION= and in the directory where  the CA package is being installed.
+
+%NOTE% If you need multiple installations of the CA Package on the same or on different nodes, then you may consider one of the suggestions in the [[ReleaseDocumentation/CaCertificatesInstall#MultipleCAPackageInstallations][section about shared installations]].
+
+%NOTE% In particular there are instructions specific for worker and storage nodes part of a %LINK_GLOSSARY_CE% and %LINK_GLOSSARY_SE%. Please review the available [[ReleaseDocumentation/CaCertificatesInstall#CA_Installation_on_Worker_and_St][installation options]] before you proceed!
+
+<!-- include instructions that test and install the Certificate Scripts Package from the VDT -->
+%INCLUDE{"ReleaseDocumentation/GetGridCertificates" section="InstallCertificateScriptsPackage" TOC_SHIFT="+"}%
+
+%STARTSECTION{"InstallACertificateAuthorityPackage"}%
+
+---++%SHIFT% Install a Certificate Authority Package
+Before you proceed to install a Certificate Authority Package you should decide which of the available packages to install. Choose according to the _resource group_ you chose earlier during the resource registration process with the %LINK_OIM%:
+
+   * =osg= the package recommended to be used by production resources on the %LINK_OSG%. It is based on the CA distribution from the %LINK_IGTF%, but it may differ slightly as decided by the [[Security/WebHome][Security Team]].
+   * =itb= the package recommended to be used by resources of the %LINK_GLOSSARY_ITB%, approved by the OSG Security Team.
+   * =vdt= the package distributed with the %LINK_VDT% identical to the %LINK_GLOSSARY_CA% distribution of the %LINK_IGTF%
+   * =url= a package provided at a given URL
+
+%NOTE% If in doubt, please consult the policies of your home institution and get in contact with the [[Security/WebHome][Security Team]]. You may [[ReleaseDocumentation/CaCertificatesInstall#Inspect_Installed_CA_Certificate][inspect]] and [[ReleaseDocumentation/CaCertificatesInstall#Remove_a_CA_Certificate][remove]] CA Certificates after the installation process completed!
+
+Next decide at what location to install the Certificate Authority Package:
+
+   1. on the =local= file system beneath the current installation directory =%UCL_CWD%=
+   1. on the =root= file system in a system directory =/etc/grid-security/certificates=
+   1. in a =custom= directory that can also be shared
+
+The instructions below illustrate each method using the Certificate Authority Package used on the %LINK_OSG%. Choose a package by changing the =--url= argument provided to =vdt-ca-manage=. 
+
+
+%STARTSECTION{"LocalInstallation"}%
+---+++%SHIFT% Local Installation of the CA Certificates
+
+This local installation of the Certificate Authority Package is preferably be used by grid users without root privileges _or_ if the CA certificates will not be shared by other VDT installations on the same host.
+
+<pre class="%UCL_SCREEN%">
+%UCL_PROMPT% vdt-ca-manage setupca --location %RED%local%ENDCOLOR% --url osg
+Setting CA Certificates for VDT installation at '%UCL_CWD%'
+
+Setup completed successfully.
+</pre>
+
+After a successful installation the certificates will be installed in (=$VDT_LOCATION/globus/share/certificates=, =%UCL_CWD%/globus/share/certificates= in this example).
+
+%ENDSECTION{"LocalInstallation"}%
+
+
+---+++%SHIFT% Root Installation
+
+This root installation of the Certificate Authority Package is preferably be used if the CA certificates will be shared by several VDT installations on the same host. This installation requires always root privileges because the CA Package is installed in a system directory.
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% vdt-ca-manage setupca --location %RED%root%ENDCOLOR% --url osg
+Setting CA Certificates for VDT installation at '%UCL_CWD%'
+
+Setup completed successfully.
+</pre>
+
+After a successful installation the certificates will be installed in =/etc/grid-security/certificates=.
+
+---+++%SHIFT% Custom Installation
+
+This custom installation of the Certificate Authority Package is preferably be used if the CA certificates will be shared by several VDT installations on different hosts.
+
+<pre class="%UCL_SCREEN%">
+%UCL_PROMPT% vdt-ca-manage setupca --location %RED%/mnt/nfs%ENDCOLOR% --url osg
+Setting CA Certificates for VDT installation at '%UCL_CWD%'
+
+Setup completed successfully.
+</pre>
+
+After a successful installation the certificates will be installed in =/mnt/nfs/certificates=.
+
+
+---+++%SHIFT% Provide and Install a custom CA Package
+
+If a custom %LINK_GLOSSARY_CA% certificates package was made available on a web server, it can be used to be installed using the =--url= option on the command line to =vdt-ca-manage=:
+
+<pre class="%UCL_SCREEN%">
+%UCL_PROMPT% vdt-ca-manage setupca --location /mnt/nfs --url %RED%&lt;url to custom CA Package&gt;%ENDCOLOR%
+Setting CA Certificates for VDT installation at '%UCL_CWD%'
+
+Setup completed successfully.
+</pre>
+
+After a successful installation the certificates provided at the provided =--url= location will be installed in =/mnt/nfs/certificates=.
+%ENDSECTION{"InstallACertificateAuthorityPackage"}%
+
+---++%SHIFT% Inspect Installed CA Certificates
+
+Take a moment to inspect the list of CA Certificates that have been installed:
+
+<pre class="%UCL_SCREEN%">
+%UCL_PROMPT% vdt-ca-manage listCA
+</pre>
+
+%TWISTY{%TWISTY_OPTS_OUTPUT%}%
+<pre class="%UCL_SCREEN%">
+%UCL_PROMPT% vdt-ca-manage listCA
+Hash=09ff08b7; Subject= /C=FR/O=CNRS/CN=CNRS2-Projets; Issuer= /C=FR/O=CNRS/CN=CNRS2; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=0a12b607; Subject= /DC=org/DC=ugrid/CN=UGRID CA; Issuer= /DC=org/DC=ugrid/CN=UGRID CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=0a2bac92; Subject= /C=BR/O=ICPEDU/O=UFF BrGrid CA/CN=UFF Brazilian Grid Certification Authority; Issuer= /C=BR/O=ICPEDU/O=UFF BrGrid CA/CN=UFF Brazilian Grid Certification Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=1149214e; Subject= /C=DE/O=DFN-Verein/OU=DFN-PKI/CN=DFN-Verein PCA Grid - G01; Issuer= /C=DE/O=DFN-Verein/OU=DFN-PKI/CN=DFN-Verein PCA Grid - G01; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=11b4a5a2; Subject= /C=PT/O=LIPCA/CN=LIP Certification Authority; Issuer= /C=PT/O=LIPCA/CN=LIP Certification Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=163af95c; Subject= /C=FR/O=CNRS/CN=CNRS2; Issuer= /C=FR/O=CNRS/CN=CNRS2; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=1691b9ba; Subject= /C=TR/O=TRGrid/CN=TR-Grid CA; Issuer= /C=TR/O=TRGrid/CN=TR-Grid CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=169d7f9c; Subject= /C=NL/O=TERENA/CN=TERENA eScience Personal CA; Issuer= /C=US/ST=UT/L=Salt Lake City/O=The USERTRUST Network/OU=http://www.usertrust.com/CN=UTN-USERFirst-Client Authentication and Email; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=16da7552; Subject= /C=NL/O=NIKHEF/CN=NIKHEF medium-security certification auth; Issuer= /C=NL/O=NIKHEF/CN=NIKHEF medium-security certification auth; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=1c3f2ca8; Subject= /DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1; Issuer= /DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=1d879c6c; Subject= /DC=ch/DC=cern/CN=CERN Trusted Certification Authority; Issuer= /DC=ch/DC=cern/CN=CERN Root CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=1e12d831; Subject= /C=AU/O=APACGrid/OU=CA/CN=APACGrid/emailAddress=camanager@vpac.org; Issuer= /C=AU/O=APACGrid/OU=CA/CN=APACGrid/emailAddress=camanager@vpac.org; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=1e43b9cc; Subject= /C=IE/O=Grid-Ireland/CN=Grid-Ireland Certification Authority; Issuer= /C=IE/O=Grid-Ireland/CN=Grid-Ireland Certification Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=1f0e8352; Subject= /O=Grid/O=NorduGrid/CN=NorduGrid Certification Authority; Issuer= /O=Grid/O=NorduGrid/CN=NorduGrid Certification Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=1f3834d0; Subject= /DC=RO/DC=RomanianGRID/O=ROSA/OU=Certification Authority/CN=RomanianGRID CA; Issuer= /DC=RO/DC=RomanianGRID/O=ROSA/OU=Certification Authority/CN=RomanianGRID CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=2418a3f3; Subject= /DC=bg/DC=acad/CN=BG.ACAD CA; Issuer= /DC=bg/DC=acad/CN=BG.ACAD CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=24c3ccde; Subject= /C=MX/O=UNAMgrid/OU=UNAM/CN=CA; Issuer= /C=MX/O=UNAMgrid/OU=UNAM/CN=CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=28a58577; Subject= /C=GR/O=HellasGrid/OU=Certification Authorities/CN=HellasGrid Root CA 2006; Issuer= /C=GR/O=HellasGrid/OU=Certification Authorities/CN=HellasGrid Root CA 2006; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=295adc19; Subject= /C=CL/O=REUNACA/CN=REUNA Certification Authority; Issuer= /C=CL/O=REUNACA/CN=REUNA Certification Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=2a237f16; Subject= /DC=org/DC=balticgrid/CN=Baltic Grid Certification Authority; Issuer= /DC=org/DC=balticgrid/CN=Baltic Grid Certification Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=2ac09305; Subject= /DC=EDU/DC=UTEXAS/DC=TACC/O=UT-AUSTIN/CN=TACC MICS CA; Issuer= /DC=EDU/DC=UTEXAS/DC=TACC/O=UT-AUSTIN/CN=TACC Root CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=2f3fadf6; Subject= /C=IT/O=INFN/CN=INFN CA; Issuer= /C=IT/O=INFN/CN=INFN CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=304cf809; Subject= /C=CH/O=Switch - Teleinformatikdienste fuer Lehre und Forschung/CN=SWITCHslcs CA; Issuer= /C=CH/O=Switch - Teleinformatikdienste fuer Lehre und Forschung/CN=SWITCHgrid Root CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=3232b9bc; Subject= /DC=me/DC=ac/DC=MREN/CN=MREN-CA; Issuer= /DC=me/DC=ac/DC=MREN/CN=MREN-CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=367b75c3; Subject= /C=UK/O=eScienceCA/OU=Authority/CN=UK e-Science CA; Issuer= /C=UK/O=eScienceRoot/OU=Authority/CN=UK e-Science Root; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=393f7863; Subject= /C=RS/O=AEGIS/CN=AEGIS-CA; Issuer= /C=RS/O=AEGIS/CN=AEGIS-CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=3d5be7bc; Subject= /C=SI/O=SiGNET/CN=SiGNET CA; Issuer= /C=SI/O=SiGNET/CN=SiGNET CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=3f0f4285; Subject= /C=VE/O=Grid/O=Universidad de Los Andes/OU=CeCalCULA/CN=ULAGrid Certification Authority; Issuer= /C=VE/O=Grid/O=Universidad de Los Andes/OU=CeCalCULA/CN=ULAGrid Certification Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=468d15b3; Subject= /DC=ORG/DC=SEE-GRID/CN=SEE-GRID CA; Issuer= /DC=ORG/DC=SEE-GRID/CN=SEE-GRID CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=4798da47; Subject= /DC=HK/DC=HKU/DC=GRID/CN=HKU Grid CA; Issuer= /DC=HK/DC=HKU/DC=GRID/CN=HKU Grid CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=55994d72; Subject= /C=RU/O=RDIG/CN=Russian Data-Intensive Grid CA; Issuer= /C=RU/O=RDIG/CN=Russian Data-Intensive Grid CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=5cf9d536; Subject= /C=BM/O=QuoVadis Limited/OU=Root Certification Authority/CN=QuoVadis Root Certification Authority; Issuer= /C=BM/O=QuoVadis Limited/OU=Root Certification Authority/CN=QuoVadis Root Certification Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=617ff41b; Subject= /C=JP/O=KEK/OU=CRC/CN=KEK GRID Certificate Authority; Issuer= /C=JP/O=KEK/OU=CRC/CN=KEK GRID Certificate Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=67e8acfa; Subject= /CN=Purdue TeraGrid RA/OU=Purdue TeraGrid/O=Purdue University/ST=Indiana/C=US; Issuer= /CN=PurdueCA/O=Purdue University/ST=Indiana/C=US; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=684261aa; Subject= /DC=EDU/DC=UTEXAS/DC=TACC/O=UT-AUSTIN/CN=TACC Root CA; Issuer= /DC=EDU/DC=UTEXAS/DC=TACC/O=UT-AUSTIN/CN=TACC Root CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=6e3b436b; Subject= /C=AT/O=AustrianGrid/OU=Certification Authority/CN=Certificate Issuer; Issuer= /C=AT/O=AustrianGrid/OU=Certification Authority/CN=Certificate Issuer; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=6fee79b0; Subject= /C=IL/O=IUCC/CN=IUCC/emailAddress=ca@mail.iucc.ac.il; Issuer= /C=IL/O=IUCC/CN=IUCC/emailAddress=ca@mail.iucc.ac.il; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=709bed08; Subject= /DC=by/DC=grid/O=uiip.bas-net.by/CN=Belarusian Grid Certification Authority; Issuer= /DC=by/DC=grid/O=uiip.bas-net.by/CN=Belarusian Grid Certification Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=712ae4cc; Subject= /DC=cz/DC=cesnet-ca/O=CESNET CA/CN=CESNET CA 3; Issuer= /DC=cz/DC=cesnet-ca/O=CESNET CA/CN=CESNET CA Root; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=71a89a47; Subject= /DC=TW/DC=ORG/DC=NCHC/CN=NCHC CA; Issuer= /DC=TW/DC=ORG/DC=NCHC/CN=NCHC CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=722e5071; Subject= /C=KR/O=KISTI/O=GRID/CN=KISTI Grid Certificate Authority; Issuer= /C=KR/O=KISTI/O=GRID/CN=KISTI Grid Certificate Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=742edd45; Subject= /DC=LV/DC=latgrid/CN=Certification Authority for Latvian Grid; Issuer= /DC=LV/DC=latgrid/CN=Certification Authority for Latvian Grid; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=75680d2e; Subject= /C=GB/ST=Greater Manchester/L=Salford/O=Comodo CA Limited/CN=AAA Certificate Services; Issuer= /C=GB/ST=Greater Manchester/L=Salford/O=Comodo CA Limited/CN=AAA Certificate Services; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=7721d4d3; Subject= /DC=NET/DC=PRAGMA-GRID/CN=PRAGMA-UCSD CA; Issuer= /DC=NET/DC=PRAGMA-GRID/CN=PRAGMA-UCSD CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=7b54708e; Subject= /C=MA/O=MaGrid/CN=MaGrid CA; Issuer= /C=MA/O=MaGrid/CN=MaGrid CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=7d0d064a; Subject= /C=MK/O=MARGI/CN=MARGI-CA; Issuer= /C=MK/O=MARGI/CN=MARGI-CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=82b36fca; Subject= /C=GR/O=HellasGrid/OU=Certification Authorities/CN=HellasGrid CA 2006; Issuer= /C=GR/O=HellasGrid/OU=Certification Authorities/CN=HellasGrid Root CA 2006; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=8a047de1; Subject= /C=TH/O=NECTEC/OU=GOC/CN=NECTEC GOC CA; Issuer= /C=TH/O=NECTEC/OU=GOC/CN=NECTEC GOC CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=8a661490; Subject= /C=PL/O=GRID/CN=Polish Grid CA; Issuer= /C=PL/O=GRID/CN=Polish Grid CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=95009ddc; Subject= /CN=PurdueCA/O=Purdue University/ST=Indiana/C=US; Issuer= /CN=PurdueCA/O=Purdue University/ST=Indiana/C=US; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=98ef0ee5; Subject= /C=UK/O=eScienceRoot/OU=Authority/CN=UK e-Science Root; Issuer= /C=UK/O=eScienceRoot/OU=Authority/CN=UK e-Science Root; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=99f9f5a3; Subject= /DC=gov/DC=fnal/O=Fermilab/OU=Certificate Authorities/CN=Kerberized CA HSM; Issuer= /DC=gov/DC=fnal/O=Fermilab/OU=Certificate Authorities/CN=Kerberized CA HSM; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=9b59ecad; Subject= /DC=cz/DC=cesnet-ca/CN=CESNET CA; Issuer= /DC=cz/DC=cesnet-ca/CN=CESNET CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=9b95bbf2; Subject= /C=US/O=National Center for Supercomputing Applications/OU=Certificate Authorities/CN=CACL; Issuer= /C=US/O=National Center for Supercomputing Applications/OU=Certificate Authorities/CN=CACL; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=9cd75e87; Subject= /C=TW/O=AS/CN=Academia Sinica Grid Computing Certification Authority Mercury; Issuer= /C=TW/O=AS/CN=Academia Sinica Grid Computing Certification Authority Mercury; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=9dd23746; Subject= /DC=es/DC=irisgrid/CN=IRISGridCA; Issuer= /DC=es/DC=irisgrid/CN=IRISGridCA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=9ec3a561; Subject= /C=US/ST=UT/L=Salt Lake City/O=The USERTRUST Network/OU=http://www.usertrust.com/CN=UTN-USERFirst-Client Authentication and Email; Issuer= /C=GB/ST=Greater Manchester/L=Salford/O=Comodo CA Limited/CN=AAA Certificate Services; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=9ff26ea4; Subject= /DC=MD/DC=MD-Grid/O=RENAM/OU=Certification Authority/CN=MD-Grid CA; Issuer= /DC=MD/DC=MD-Grid/O=RENAM/OU=Certification Authority/CN=MD-Grid CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=a02131f7; Subject= /C=DE/O=DFN-Verein/OU=DFN-PKI/CN=DFN SLCS-CA; Issuer= /C=DE/O=DFN-Verein/OU=DFN-PKI/CN=DFN SLCS-CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=a317c467; Subject= /C=JP/O=AIST/OU=GRID/CN=Certificate Authority; Issuer= /C=JP/O=AIST/OU=GRID/CN=Certificate Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=a87d9192; Subject= /C=JP/O=National Research Grid Initiative/OU=CGRD/CN=NAREGI CA; Issuer= /C=JP/O=National Research Grid Initiative/OU=CGRD/CN=NAREGI CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=a9082267; Subject= /DC=BR/DC=UFF/DC=IC/O=UFF LACGrid CA/CN=UFF Latin American and Caribbean Catch-all Grid CA; Issuer= /DC=BR/DC=UFF/DC=IC/O=UFF LACGrid CA/CN=UFF Latin American and Caribbean Catch-all Grid CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=afe55e66; Subject= /C=CY/O=CyGrid/O=HPCL/CN=CyGridCA; Issuer= /C=CY/O=CyGrid/O=HPCL/CN=CyGridCA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=b2771d44; Subject= /DC=CN/DC=Grid/CN=Root Certificate Authority at CNIC; Issuer= /DC=CN/DC=Grid/CN=Root Certificate Authority at CNIC; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=b7bcb7b2; Subject= /C=AR/O=e-Ciencia/OU=UNLP/L=CeSPI/CN=PKIGrid; Issuer= /C=AR/O=e-Ciencia/OU=UNLP/L=CeSPI/CN=PKIGrid; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=b93d6240; Subject= /DC=net/DC=ES/OU=Certificate Authorities/CN=NERSC Online CA; Issuer= /DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=ba2f39ca; Subject= /C=CN/O=HEP/CN=gridca-cn/emailAddress=gridca@ihep.ac.cn; Issuer= /C=CN/O=HEP/CN=gridca-cn/emailAddress=gridca@ihep.ac.cn; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=bffbd7d0; Subject= /C=CA/O=Grid/CN=Grid Canada Certificate Authority; Issuer= /C=CA/O=Grid/CN=Grid Canada Certificate Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=c48c63f3; Subject= /DC=CN/DC=Grid/DC=SDG/CN=Scientific Data Grid CA; Issuer= /DC=CN/DC=Grid/CN=Root Certificate Authority at CNIC; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=cc800af0; Subject= /C=HU/O=NIIF/OU=Certificate Authorities/CN=NIIF Root CA; Issuer= /C=HU/O=NIIF/OU=Certificate Authorities/CN=NIIF Root CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=ce33db76; Subject= /C=IR/O=IPM/O=IRAN-GRID/CN=IRAN-GRID CA; Issuer= /C=IR/O=IPM/O=IRAN-GRID/CN=IRAN-GRID CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=d0b701c0; Subject= /C=CH/O=Switch - Teleinformatikdienste fuer Lehre und Forschung/CN=SWITCHgrid Root CA; Issuer= /C=CH/O=Switch - Teleinformatikdienste fuer Lehre und Forschung/CN=SWITCHgrid Root CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=d0c2a341; Subject= /C=AM/O=ArmeSFo/CN=ArmeSFo CA; Issuer= /C=AM/O=ArmeSFo/CN=ArmeSFo CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=d11f973e; Subject= /C=FR/O=CNRS/CN=GRID2-FR; Issuer= /C=FR/O=CNRS/CN=CNRS2-Projets; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=d1737728; Subject= /C=SG/O=Netrust Certificate Authority 1/OU=Netrust CA1; Issuer= /C=SG/O=Netrust Certificate Authority 1/OU=Netrust CA1; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=d1b603c3; Subject= /DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1; Issuer= /DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=d254cc30; Subject= /DC=ch/DC=cern/CN=CERN Root CA; Issuer= /DC=ch/DC=cern/CN=CERN Root CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=da75f6a8; Subject= /DC=IN/DC=GARUDAINDIA/CN=Indian Grid Certification Authority; Issuer= /DC=IN/DC=GARUDAINDIA/CN=Indian Grid Certification Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=dd4b34ea; Subject= /C=DE/O=GermanGrid/CN=GridKa-CA; Issuer= /C=DE/O=GermanGrid/CN=GridKa-CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=e13e0fcf; Subject= /C=SK/O=SlovakGrid/CN=SlovakGrid CA; Issuer= /C=SK/O=SlovakGrid/CN=SlovakGrid CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=e5cc84c2; Subject= /DC=EDU/DC=UTEXAS/DC=TACC/O=UT-AUSTIN/CN=TACC Classic CA; Issuer= /DC=EDU/DC=UTEXAS/DC=TACC/O=UT-AUSTIN/CN=TACC Root CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=e72045ce; Subject= /C=BM/O=QuoVadis Limited/OU=Issuing Certification Authority/CN=QuoVadis Grid ICA; Issuer= /C=BM/O=QuoVadis Limited/OU=Root Certification Authority/CN=QuoVadis Root Certification Authority; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=e8ac4b61; Subject= /C=US/O=National Center for Supercomputing Applications/OU=Certificate Authorities/CN=GridShib CA; Issuer= /C=US/O=National Center for Supercomputing Applications/OU=Certificate Authorities/CN=GridShib CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=e8d818e6; Subject= /C=BE/OU=BEGRID/O=BELNET/CN=BEgrid CA; Issuer= /C=BE/OU=BEGRID/O=BELNET/CN=BEgrid CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=edca0fc0; Subject= /DC=cz/DC=cesnet-ca/O=CESNET CA/CN=CESNET CA Root; Issuer= /DC=cz/DC=cesnet-ca/O=CESNET CA/CN=CESNET CA Root; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=f2e89fe3; Subject= /C=US/O=National Center for Supercomputing Applications/OU=Certificate Authorities/CN=MyProxy; Issuer= /C=US/O=National Center for Supercomputing Applications/OU=Certificate Authorities/CN=MyProxy; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=f5ead794; Subject= /C=PK/O=NCP/CN=PK-GRID-CA; Issuer= /C=PK/O=NCP/CN=PK-GRID-CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+Hash=ff94d436; Subject= /C=HR/O=edu/OU=srce/CN=SRCE CA; Issuer= /C=HR/O=edu/OU=srce/CN=SRCE CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+</pre>
+%ENDTWISTY%
+
+Any certificate issued by any of the Certificate Authorities listed will be trusted. If in doubt please contact the [[Security/WebHome][OSG Security Team]] and review the policies of your home institution.
+
+
+---%SHIFT%++ Remove a CA Certificate
+
+If you do not wish to trust one or more Certificate Authorities, you may remove its CA Certificate using the =vdt-ca-manage= command:
+
+<pre class="%UCL_SCREEN%">
+%UCL_PROMPT% vdt-ca-manage listCA | grep IRAN
+Hash=%RED%ce33db76%ENDCOLOR%; Subject= /C=IR/O=IPM/O=IRAN-GRID/CN=IRAN-GRID CA; Issuer= /C=IR/O=IPM/O=IRAN-GRID/CN=IRAN-GRID CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+
+%UCL_PROMPT% vdt-ca-manage remove --hash %RED%ce33db76%ENDCOLOR% --auto-refresh
+</pre>
+
+
+%STARTSECTION{"EnableCACertificates"}%
+---%SHIFT%++ Enable Updates of the CA Certificates
+
+CA certificates have a limited lifetime and will expire. To keep the installed certificates current it is necessary to update them automatically using the =vdt-update-certs= provided by the %LINK_VDT%:
+
+To _enable_  the service use:
+
+<pre class="%UCL_SCREEN%">
+%UCL_PROMPT% vdt-control %RED%--enable%ENDCOLOR% vdt-update-certs
+running 'vdt-register-service --name vdt-update-certs --enable'... %GREEN%ok%ENDCOLOR%
+</pre>
+%ENDSECTION{"EnableCACertificates"}%
+
+
+%STARTSECTION{"EnableCRL"}%
+---%SHIFT%++ Enable Updates of the Certificate Revocation List
+
+The %LINK_GLOSSARY_CRL% lists certificates that have been temporarily or permanently revoked. To keep the CRL current it is necessary to update it automatically using =fetch-crl= provided by the %LINK_VDT%:
+
+<pre class="%UCL_SCREEN%">
+%UCL_PROMPT% vdt-control %RED%--enable%ENDCOLOR% fetch-crl
+running 'vdt-register-service --name vdt-update-certs --enable'... %GREEN%ok%ENDCOLOR%
+</pre>
+%ENDSECTION{"EnableCRL"}%
+
+---++ Activate and Deactivate Services
+The services updating CA certificates and CRLs are both cron services, so they can be activated/deactivated by root or by the owner of the Certificate Authority Package installation.
+
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="List" TOC_SHIFT="++"}%
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="Activate" TOC_SHIFT="++"}%
+%INCLUDE{"ReleaseDocumentation/StartingServices" section="Deactivate" TOC_SHIFT="++"}%
+
+%STARTSECTION{"CACertificatesShort"}%
+%ENDSECTION{"CACertificatesShort"}%
+
+
+%STARTSECTION{"MultipleCAPackageInstallations"}%
+---+%SHIFT% Multiple CA Package Installations 
+
+Often a cluster residing in the same local network contains multiple VDT installations requiring a CA Package and sometime there may be multiple VDT installations on a single host. This section presents ways to limit the number of installations and mostly to limit the number of downloads caused by the update of CA certificates and CRLs:
+   * A VDT installation can use the a CA Package installation already installed on the same host or exported on a shared file system
+   * Multiple CA Package installations can use a Web proxy to cache the certificates and CRLs
+   * A VDT installation can have a synchronized replica of an existing CA Package installation
+
+%STARTSECTION{"UseAnExistingCAInstallation"}%
+---++%SHIFT% Use an existing CA Installation
+
+It is often practical to reuse an existing %LINK_GLOSSARY_CA% Installation instead of creating a new installation. It is preferably be used when another VDT installation is managing the CA Installation. This installation can be on the same host or a different host who is providing the certificates on a shared file system.
+
+See [[ReleaseDocumentation/CaCertificatesInstall#CA_Certificates_Installation_Pro][these instructions]] to install the CA Certificates in a shared location before you proceed.
+
+<pre class="%UCL_SCREEN%">
+%UCL_PROMPT% vdt-ca-manage setupca --location /mnt/nfs/certificates %RED%--no-update%ENDCOLOR%
+Setting CA Certificates for VDT installation at '%UCL_CWD%'
+
+Setup completed successfully.
+</pre>
+
+%ICON{hand}% The command line option =--location= points to the existing installation. The command creates a softlink from =%UCL_CWD%/globus/TRUSTED_CA= to the existing installation =/mnt/nfs/certificates=.
+%ENDSECTION{"UseAnExistingCAInstallation"}%
+
+%STARTSECTION{"UseAWebProxy"}%
+---++%SHIFT% Use a Web Proxy
+
+An existing web proxy can be used to cache the requests from the individual nodes by creating the file =/etc/sysconfig/fetch-crl= with following content.
+
+<pre class="file">
+export http_proxy=your.existing.proxy:3128
+</pre>
+
+If you are not using the default port =3128= of the Squid Web Proxy, adjust the port as well.
+%ENDSECTION{"UseAWebProxy"}%
+
+
+---++%SHIFT% Sync the local CA Installation
+
+To synchronize the Certificate Authority Package to an existing and updated master installation, first install the Certificate Authority Package in a =local= or =custom= directory and disable automatic updates:
+
+<pre class="%UCL_SCREEN%">
+%UCL_PROMPT% vdt-ca-manage setupca --location local %RED%--no-update%ENDCOLOR%
+Setting CA Certificates for VDT installation at '%UCL_CWD%'
+
+Setup completed successfully.
+</pre>
+
+Next use your preferred synchronization tool, e.g =rsync=, to replicate all the CA certificates and the CRLs from the master installation.
+
+You may find useful the =csync= tool that was developed at Fermilab. It is handy but undocumented.
+%TWISTY{}%
+You can download and untar the =csync= utility provided Fermigrid:
+<pre class="%UCL_SCREEN%">
+%UCL_PROMPT% wget -q http://fermigrid.fnal.gov/files/csync/csync-0.9.0.tgz
+%UCL_PROMPT% tar -zxf csync-0.9.0.tgz
+</pre>
+%ENDTWISTY%
+
+%ENDSECTION{"MultipleCAPackageInstallations"}%
+
+---+ Use cases
+Follow examples of specific installations:
+   * a typical installation for clients or self-contained servers
+   * most common options for worker nodes and storage nodes
+
+%STARTSECTION{"InstallTheOSGCACertificateAuthorityPackage"}%
+---++%SHIFT% Install the OSG CA Certificate Authority Package 
+These are short instructions providing a self contained installation of the OSG distribution of Certificate Authorities certificates. Certificates identify users and servers. [[Documentation/GlossaryC#DefsCA][Certificate Authorities]] issue certificates to their members. By installing these certificates you establish a chain of trust with each of the certificate authorities and trust the users, the servers and the services certified by those authorities. The %LINK_GLOSSARY_CRL% is used to inform you about individual certificates that have been revoked.
+
+%WARNING% This is important security matter and we recommend you to read the [[ReleaseDocumentation/CaCertificatesInstall][full documentation]] to understand the implications and to learn about available options.
+
+%INCLUDE{"ReleaseDocumentation/CaCertificatesInstall" section="LocalInstallation" TOC_SHIFT="%SHIFT%"}%
+%ENDSECTION{"InstallTheOSGCACertificateAuthorityPackage"}%
+
+
+%STARTSECTION{"CACertificatesOnNodes"}%
+
+---++%SHIFT% CA Certificates Installation on Worker and Storage Nodes
+
+A %LINK_GLOSSARY_CE% or a %LINK_GLOSSARY_SE% may contain many worker or storage nodes respectively. Each node is likely to require a %LINK_GLOSSARY_CA% Package installation. Several options exist to make CA Package available:
+
+   1 Install the CA Certificates [[ReleaseDocumentation/CaCertificatesInstall#Local_Installation][locally]] on each node _and either_ proceed to instruction describing how to:
+      * enable updates of the [[ReleaseDocumentation/CaCertificatesInstall#Enable_Updates_of_the_CA_Certifi][CA Certificates]] and the [[ReleaseDocumentation/CaCertificatesInstall#Enable_Updates_of_the_Certificat][Certificate Revocation List]] (%RED%Not recommended!%ENDCOLOR%) _or_
+      * [[ReleaseDocumentation/CaCertificatesInstall#Use_a_Web][use a web proxy]] to cache update requests from nodes _or_
+      * [[ReleaseDocumentation/CaCertificatesInstall#Sync_the_local_CA_Installation][sync]] the CA Installation with one that has the updates enabled.
+   1 Install and provide the CA Package in a [[ReleaseDocumentation/CaCertificatesInstall#Custom_Installation][shared location]] on another host _and_ proceed to instructions describing how to [[ReleaseDocumentation.CaCertificatesInstall#Use_an_existing_CA_Installation][reuse]] an existing CA Package installation.
+
+
+%ENDSECTION{"CACertificatesOnNodes"}%
+
+%STARTSECTION{"MultipleVdtInstall"}%
+
+---++%SHIFT% Multiple VDT Installations on one host
+
+If more than one installation of the %LINK_VDT% exist on the same node or if directories are shared across multiple nodes, please ensure that one and only one installation takes care to update the CA certificates and the CRLs.
+
+One installation is managing the updates, the others use the existing installation as specified in [[ReleaseDocumentation.CaCertificatesInstall#Use_an_existing_CA_Installation][this section about using an existing CA package installation]].
+
+
+<!-- 
+If more than one installation of the %LINK_VDT% exist on the same node, please ensure that =fetch-crl= is operating on the correct installation by using =crontab -l= for the _root_ user.
+
+If for example the OSG CE is installed in =/usr/local/vdt= , and the OSG WN Client is installed in =/usr/local/grid=, then check the =/usr/local/grid/globus/TRUSTED_CA= link. It should point to the location where your certificates have been installed. In this example =/usr/local/vdt/globus/share/certificates=. If it doesn't, change it to that location.
+
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% ls -l %UCL_CWD%/globus/TRUSTED_CA
+lrwxrwxrwx  1 root root 41 Mar 16 15:44 TRUSTED_CA -> %UCL_CWD%/globus/share/certificates
+</pre>
+-->
+
+%ENDSECTION{"MultipleVdtInstall"}%
+
+
+%STARTSECTION{"CondorSpecialRequirements"}%
+
+---++%SHIFT% Non VDT Condor special requirements
+
+All VDT packages can be configured with =vdt-ca-manage=. Non VDT software may use different ways to look for the CA certificates and one of the most common default locations is =/etc/grid-security/certificates=.
+
+If you are having authentication problems while using non VDT GSI authenticated software we recommend, if not present, to create a symlink from =/etc/grid-security/certificates= to your installation of the CA Certificates (i.e. the shared directory or =$VDT_LOCATION/globus/TRUSTED_CA= ).
+
+If you have a gsi-authenticated Condor pool, specially if installed and configured outside of the VDT, it will look for the CA certifcates in =/etc/grid-security/certificates by default=. Anyway Condor can be told the location of the CA certificate dir with "GSI_DAEMON_TRUSTED_CA_DIR". For an explanation and complete configuration instructions see the GSI Authentication section of the Condor manual ([[http://www.cs.wisc.edu/condor/manual/v7.5/3_6Security.html#SECTION00463100000000000000][Sec. 3.6.3.1 for Condor 7.5]]). 
+
+%ENDSECTION{"CondorSpecialRequirements"}%
+
+
+
+%STOPINCLUDE%
+
+---+ Troubleshooting
+
+#DefsTroubleshooting
+
+---++!! CA Information and known paths
+OSG and VDT underneath use the the Grid Security Infrastructure (GSI) provided by Globus. The Globus tools will trust certificates issued by a CA if (and only if) it can find information about the CA in the trusted certificates directory.
+
+The trusted certificates directory is located as described below and exists either on a per-machine or on a per-installation basis.
+
+X509_CERT_DIR is the environment variable used to specify the path to the trusted certificates directory. This directory contains information about which CAs are trusted (including the CA certificates themselves) and, in some cases, configuration information used by grid-cert-request to formulate certificate requests. The location of the trusted certificates directory is looked for in the following order:
+
+   1. value of the X509_CERT_DIR environment variable
+   1. $HOME/.globus/certificates
+   1. /etc/grid-security/certificates exists
+   1. $GLOBUS_LOCATION/share/certificates
+
+Doc source: http://www.globus.org/toolkit/docs/4.2/4.2.1/security/gsic/pi/#id2554930
+
+More information is in the source file of globus_gsi_sysconfig_get_cert_dir (in [[http://viewcvs.globus.org/viewcvs.cgi/gsi/sysconfig/source/library/globus_gsi_system_config.c?revision=1.85&view=markup][globus_gsi_system_config.c]]): Get the Trusted Certificate Directory containing the trusted Certificate Authority certificates.  This directory is determined in the order shown below.  Failure in one method results in attempting the next.
+
+On UNIX:
+   * *X509_CERT_DIR environment variable* - if this is set, the trusted certificates will be searched for in that directory.  This variable allows the end user to specify the location of trusted certificates.
+   * *$HOME/.globus/certificates* - If this directory exists, and the previous methods of determining the trusted certs directory failed, this directory will be used.  
+   * */etc/grid-security/certificates* - This location is intended to be independent of the globus installation ($GLOBUS_LOCATION), and  is generally only writeable by the host system administrator.  
+   * *$GLOBUS_LOCATION/share/certificates*
+On Windows 
+   * *X509_CERT_DIR environment variable* - if this is set, the trusted certificates will be searched for in that directory.  This variable allows the end user to specify the location of trusted certificates.
+   * *x509_cert_dir registry key* - If this registry key is set on windows, the directory it points to should contain the trusted certificates.  The path to the registry key is =software\\Globus\\GSI=
+   * *\\&lt;user home directory&gt;\\.globus\\certificates* - If this directory exists, and the previous methods of determining the trusted certs directory failed, this directory will be used.  
+   * *Host Trusted Cert Dir* - This location is intended to be independent of the globus installation ($GLOBUS_LOCATION), and is generally only writeable by the host system administrator.  
+   * *Globus Install Trusted Cert Dir* - this is =$GLOBUS_LOCATION\\share\\certificates=.  
+
+Globus 4.2 has a diagnostic tool =grid-cert-diagnostics= (not in VDT 2.0) that can be useful to troubleshoot certificate problems:
+http://www.globus.org/toolkit/docs/4.2/4.2.0/security/gsic/user/grid-cert-diagnostics.html
+
+
+
+---++!!Debugging Procedure
+If you suspect that your certificates or CRLs are not updated you can update them manually.
+
+---++ Updating manually CRLs and CA certificates
+To update the CRLs you can run =vdt-ca-manage fetchCRL=. To do so you have first to enable and activate the =fetch-crl= service if it is not already. =vdt-ca-manage fetchCRL= works only if it is in the cron as well (else it is refusing to run):
+<pre class="%UCL_SCREEN%">
+%UCL_PROMPT% vdt-control --enable fetch-crl
+%UCL_PROMPT% vdt-control --on fetch-crl
+%UCL_PROMPT% vdt-ca-manage fetchCRL
+</pre>
+
+Alternatively you can go to the location where the CA Package is installed and run manually =fetch-crl=: 
+<pre class="%UCL_SCREEN%">
+%UCL_PROMPT% cd CA_PACKAGE_DIR
+%UCL_PROMPT% $VDT_LOCATION/fetch-crl/sbin/fetch-crl
+</pre>
+
+To update the CA certificates and check the status of the certificates:
+<pre class="%UCL_SCREEN%">
+%UCL_PROMPT% vdt-update-certs
+%UCL_PROMPT% vdt-ca-certs-status
+</pre>
+
+You will see additional log output in the log files in the =$VDT_LOCATION/logs= directory: =vdt-control.log= and =vdt-update-certs.log= (and =vdt-update-certs.log.system_output= for a greater detail).
+If a certificate/CRL download is failing, check if you can connect to the server used for the download, e.g. use =ping= or =wget=.
+
+---++ Check manually the validity of a certificate
+If you are having problems with a specific certificate you may want to verify that directly. The certificate can be a host certificate, like =/etc/grid-security/hostcert.pem= or a user certificate like =~/.globus/usercert.pem=. In the commands below it is =/tmp/usercert.pem=. CA_PACKAGE_DIR is the directory of your certificates, e.g. =$VDT_LOCATION/globus/share/certificates/=. This test will verify that you have all the required CA certificates and CRLs to verify the certificate.
+
+If your certificate is in PKCS#12 format first convert the certificate:<pre class="screen">%UCL_PROMPT% openssl pkcs12 -clcerts -nokeys -in /tmp/usercred.p12 -out /tmp/usercert.pem</pre>
+You may need to enter the passphrase if you used any.
+
+Then verify the certificate:<pre class="screen">%UCL_PROMPT% openssl verify -CApath CA_PACKAGE_DIR  /tmp/usercert.pem 
+/tmp/usercert.pem: OK
+</pre>
+
+---++!!Caveats/Known Issues
+
+If a certificate has been downloaded partially you have to remove it. The utilities will not overwrite it.
+
+You can use =vdt-ca-certs-status= to check the status of the certificates.
+
+---++!! References
+
+   * VDT documentation of [[http://vdt.cs.wisc.edu/releases/2.0.0/certificate_authorities.html][vdt-ca-manage]]
+   * !MyProxy trustroots: http://grid.ncsa.illinois.edu/myproxy/trustroots/
+   * Globus document about GSI configuration: http://www.globus.org/toolkit/docs/3.2/gsi/admin/configuration.html
+   * Generic introduction to CA: http://www.globus.org/toolkit/docs/4.0/security/key-index.html
+   * Diagnostic tool: http://globus-proxy-utils.sourcearchive.com/documentation/2.5-4/grid__cert__diagnostics_8c-source.html
+
+
+---+ Comments
+
+| PM2RPM_TASK = CE | Main.RobertEngel | 28 Aug 2011 - 06:02 |
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = MarcoMambelli
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+-- Main.JamesWeichel - 03 Feb 2010

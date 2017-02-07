@@ -1,0 +1,51 @@
+%META:TOPICINFO{author="KyleGross" date="1227280705" format="1.1" version="1.10"}%
+%META:TOPICPARENT{name="VomrsInstallGuide"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+%EDITTHIS%
+%BR%
+
+---++ VOMRS validation
+
+There are several tests you have to perform in order to ferify that VOMRS is operational.
+   * Verify that vomrs server is running:
+<pre class="screen">
+&gt; <b>source $VDT_LOCATION/setup.sh</b>
+&gt; <b>service vomrs status</b>
+<em>...output follows.. </em>
+Status VORegistrationServer(vdt): Running...pid=22184      [  OK  ]
+</pre>
+   * Verify that VOMRS webservices are accessible. As _root_ user execute the following commands:
+<pre class="screen">
+&gt; <b>source $VDT_LOCATION/setup.sh</b>
+&gt; <b>$VDT_LOCATION/vomrs/client/bin/vomrs_soapclient <em>hostname</em> 8443 vomrs/<em>VO_NAME</em> getCAs</b>
+ <em>...output follows.. </em>
+- Client CN=http/osg-ress-3.fnal.gov, OU=Services, DC=doegrids, DC=org accepted
+/C=AM/O=ArmeSFo/CN=ArmeSFo CA
+/C=AT/O=AustrianGrid/OU=Certification Authority/CN=Certificate Issuer
+/C=AU/O=APACGrid/OU=CA/CN=APACGrid/Email=camanager@vpac.org
+/C=BE/O=BELNET/OU=BEGrid/CN=BEGrid CA/Email=gridca@belnet.be
+/C=BR/O=ICPEDU/O=UFF BrGrid CA/CN=UFF Brazilian Grid Certification Authority
+/C=CA/O=Grid/CN=Grid Canada Certificate Authority
+....
+</pre>
+
+   * Verify that you can access VOMRS WEB UI. 
+<pre class="screen">
+https://<em>hostname</em>:8443/vomrs/<em>VO_NAME</em>/vomrs
+</pre>
+%NOTE%You have to have a valid certificate to be loaded into your bowser first
+
+   * Verify that VOMS is accessible - see [[VomsInstallGuide#Included_topic_Voms_Testing_Serv][VOMS Installation Guide]].
+   * Verify that you are a VO-Admin in VOMS - see [[VomsInstallGuide#Verifying_you_are_a_VO_Admin][VOMS Installation Guide]]. This indicates that VOMRS/VOMS synchronization is working.
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.TanyaLevshina - 19 Nov 2007 %BR%
+%REVIEW% Main.RobGardner - 09 Nov 2007 %BR%
+%REVCOM% ok? Main.RobGardner - I think that is fine Main.TanyaLevshina

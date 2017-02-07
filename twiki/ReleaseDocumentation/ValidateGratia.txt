@@ -1,0 +1,95 @@
+%META:TOPICINFO{author="KyleGross" date="1481047991" format="1.1" version="1.24"}%
+%META:TOPICPARENT{name="SiteValidationTable"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+%EDITTHIS%
+%BR%
+
+<!--
+
+   * Set GratiaHost = %IF{"%CACHE% = OSG" then="gratia-osg-prod.opensciencegrid.org:80" else="gratia-osg-itb.opensciencegrid.org:80"}%
+
+-->
+
+---++ Gratia Probe
+
+   * Ensure the batch system for which you have installed a probe has completed jobs and at least 10 minutes has elapsed.
+   * Then, visit <noautolink><tt>http://gratia.opensciencegrid.org:%GratiaCollectorPort%/gratia-administration/monitor-status.html?sitename=my-site</tt></noautolink> to check that your probe is reporting (eg working example link: http://%GratiaHost%/gratia-administration/monitor-status.html?sitename=FNAL_FERMIGRID_ITB). 
+   * Note that this status page may show multiple probes, some of which may be obsolete. One way this can arise is that old installations may identify a probe as =pbs-lsf:myhost.mydomain=, whereas new installations identify a probe as =pbs:myhost.mydomain= or =pbs-lsf:myhost.mydomain= as appropriate. Please [[mailto:gratia-operation@opensciencegrid.org?subject=Please%20Mark%20Obsolete%20Probe%20Inactive][notify the Gratia team]] and we will correct the record.
+   * If you get no entry at all, double-check by using the probe name (=MeterName= in the =ProbeConfig= file: usually "probe-type:dns-name"), viz:%BR%<noautolink><tt>http://gratia.opensciencegrid.org:%GratiaCollectorPort%/gratia-administration/monitor-status.html?probename=probe-type:myhost.mydomain</tt></noautolink>.%BR%  The reason for the fallback is: if Gratia has seen a probe by this name before (previous installation, for instance) it will use the old site name for accounting purposes until [[mailto:gratia-operation@opensciencegrid.org?subject=Changed%20Site%20Name][we are notified]] otherwise. Working example link: http://gratia.opensciencegrid.org:%GratiaCollectorPort%/gratia-administration/monitor-status.html?probename=condor:fngp-osg.fnal.gov.
+   * As a last resort, peruse the [[http://gratia.opensciencegrid.org:%GratiaCollectorPort%/gratia-administration/monitor-status.html?allsites=1][whole list]] of reporting probes.
+   * If you are still unable to find evidence that your probe has contacted the collector, download [[https://twiki.grid.iu.edu/twiki/bin/viewfile/Accounting/TroubleShootingInstructions?filename=gratia-site-diag][<tt>gratia-site-diag</tt>]] and run it to diagnose possible problems. Report same immediately; see [[Accounting.TroubleShootingInstructions][Gratia troubleshooting instructions]] for more details.
+   * Assuming you find evidence of recent contact using one of the methods above, you may wish to further verify the receipt of real records by obtaining a report from the [[http://gratia.opensciencegrid.org:%GratiaCollectorPort%/gratia-reporting/][Gratia reporting site]], for example [[http://gratia.opensciencegrid.org:%GratiaCollectorPort%/gratia-reporting/index.jsp?link=GratiaParameterInput.jsp?report=/data/tomcat-gratia/webapps/gratia-reports/reports/DailyUsageByVOForSite.rptdesign,DisplayMetric=wallclock,reportTitle=Daily%20Usage%20by%20VO%20for%20Site][Daily jobs by VO for site]] from the main Gratia reporting service. Also, Run the special SQL query "Probe / Local UID combinations corresponding to Unknown VO in the last week" and check for a large number of OSG-like user names that are being mapped to the Unknown VO. This indicates a problem either with the !ProbeConfig knowing the location of the osg-user-vo-map.txt or with the reverse map file itself. Please investigate and [[mailto:gratia-operation@opensciencegrid.org?subject=Unknown%VO%Reporting%Problem][report to the the Gratia team]].
+
+---++ Gratia Collector
+
+   * Check that the reporting is operational: <noautolink><tt>http://mygratiahost.example.com:port/gratia-reporting/</tt></noautolink>.
+   * Check that the administration page is operational: <noautolink><tt>http://mygratiahost.example.com:port/gratia-administration/</tt></noautolink>.
+   * Configure a probe to send to the collector (set =SOAPHost= appropriately) and check the above pages for entries.
+   * If there is no evidence of received data, check <noautolink><tt>$VDT_LOCATION/tomcat/v55/logs/gratia-0.log</tt></noautolink> and <noautolink><tt>$VDT_LOCATION/tomcat/v55/logs/catalina.out</tt></noautolink>. An "empty data set" exception and/or blank report page is OK; everything else should be reported to [[mailto:gratia-operation@opensciencegrid.org?subject=Problems%20with%20VDT%20install%20of%20collector][the Gratia team]].
+
+
+%STOPINCLUDE%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = PhilippeCanal
+PhilippeCanal
+NEW - 08 Jun 2005 - 20:04 
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = SuchandraThapa
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = SuchandraThapa
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+
+%META:TOPICMOVED{by="AnneHeavey" date="1192748528" from="Integration/ITB_0_7.ValGratia" to="Integration/ITB_0_7.ValidateGratia"}%

@@ -1,0 +1,6 @@
+%META:TOPICINFO{author="AlainRoy" date="1330639080" format="1.1" reprev="1.18" version="1.18"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+This page is no longer accurate. Please see [[Documentation.Release3][the new RPM documentation]].
+
+%META:TOPICMOVED{by="AnneHeavey" date="1192831286" from="Integration/ITB_0_7.VDTRPMs" to="Integration/ITB_0_7.VdtRPMs"}%

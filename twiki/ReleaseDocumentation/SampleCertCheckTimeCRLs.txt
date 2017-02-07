@@ -1,0 +1,146 @@
+%META:TOPICINFO{author="KyleGross" date="1481047990" format="1.1" version="1.19"}%
+%META:TOPICPARENT{name="Trash.ReleaseDocumentationDocumentationTable"}%
+%DOC_STATUS_TABLE%
+
+%TOC%
+
+%TWISTY{%TWISTY_OPTS_REVIEW%}%
+Needs TOC, About and formatting.
+%ENDTWISTY%
+
+---+ Sample Certificate Check Time CRL's
+
+Following instllation of OSG 0.3.6 or later, and execution the fetch-crl cron entry you can check the lifetime
+of the certificate revocation lists for the installed CAs.  See the [[Security.CSReadMe#cert_check_time][full man page]] of the command for additional options.
+
+<pre class="screen">
+> <b>cert-check-time -r </b>
+</pre>
+
+Result: shows the remaining lifetime of the CRL in days, the CA issuing the CRL, and the full path to the CRL file.
+
+<pre class="programlisting">
+         days  name       CRL file
+        365.1 issuer=/C=CA/O=Grid/CN=Grid Canada CA  crl:/opt/osg036/globus/TRUSTED_CA/5f54f417.r0
+        340.8 issuer=/CN=SWITCH CA/emailAddress=switch.ca@switch.ch/O=Switch - Teleinformatikdienste fuer Lehre und Forschung/C=CH  crl:/opt/osg036/globus/TRUSTED_CA/c4435d12.r0
+        317.1 issuer=/C=FR/O=CNRS/CN=CNRS-Projets  crl:/opt/osg036/globus/TRUSTED_CA/34a509c3.r0
+        317.1 issuer=/C=FR/O=CNRS/CN=CNRS  crl:/opt/osg036/globus/TRUSTED_CA/cf4ba8c8.r0
+        257.1 issuer=/CN=SwissSign Silver CA/emailAddress=silver@swisssign.com/O=SwissSign/C=CH  crl:/opt/osg036/globus/TRUSTED_CA/e9d08b40.r0
+        257.1 issuer=/CN=SwissSign Bronze CA/emailAddress=bronze@swisssign.com/O=SwissSign/C=CH  crl:/opt/osg036/globus/TRUSTED_CA/e36e7a72.r0
+        204.4 issuer=/DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1  crl:/opt/osg036/globus/TRUSTED_CA/d1b603c3.r0
+        149.4 issuer=/C=CH/O=SwissSign/CN=SwissSign CA (RSA IK May 6 1999 18:00:58)/emailAddress=ca@SwissSign.com  crl:/opt/osg036/globus/TRUSTED_CA/7b2d086c.r0
+         31.0 issuer=/C=RU/O=RDIG/CN=Russian Data-Intensive Grid CA  crl:/opt/osg036/globus/TRUSTED_CA/55994d72.r0
+         30.0 issuer=/C=DE/O=DFN-Verein/OU=DFN-PKI/CN=DFN-Verein Server CA Grid - G01  crl:/opt/osg036/globus/TRUSTED_CA/fe102e03.r0
+         30.0 issuer=/C=DE/O=DFN-Verein/OU=DFN-PKI/CN=DFN-Verein User CA Grid - G01  crl:/opt/osg036/globus/TRUSTED_CA/34f8e29c.r0
+         29.9 issuer=/C=IT/O=INFN/CN=INFN Certification Authority  crl:/opt/osg036/globus/TRUSTED_CA/49f18420.r0
+         29.9 issuer=/C=CY/O=CyGrid/O=HPCL/CN=CyGridCA  crl:/opt/osg036/globus/TRUSTED_CA/afe55e66.r0
+         29.9 issuer=/C=IE/O=Grid-Ireland/CN=Grid-Ireland Certification Authority  crl:/opt/osg036/globus/TRUSTED_CA/1e43b9cc.r0
+         29.7 issuer=/DC=es/DC=irisgrid/CN=IRISGridCA  crl:/opt/osg036/globus/TRUSTED_CA/9dd23746.r0
+         29.7 issuer=/C=IL/O=IUCC/CN=IUCC/emailAddress=ca@mail.iucc.ac.il  crl:/opt/osg036/globus/TRUSTED_CA/6fee79b0.r0
+         29.6 issuer=/DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1  crl:/opt/osg036/globus/TRUSTED_CA/1c3f2ca8.r0
+         29.5 issuer=/C=TW/O=AS/CN=Academia Sinica Grid Computing Certification Authority  crl:/opt/osg036/globus/TRUSTED_CA/a692434d.r0
+         29.3 issuer=/C=FR/O=CNRS/CN=GRID-FR  crl:/opt/osg036/globus/TRUSTED_CA/12a1d8c2.r0
+         29.1 issuer=/C=DE/O=GermanGrid/CN=GridKa-CA  crl:/opt/osg036/globus/TRUSTED_CA/dd4b34ea.r0
+         28.8 issuer=/C=JP/O=National Research Grid Initiative/OU=GRID/CN=NAREGI CA  crl:/opt/osg036/globus/TRUSTED_CA/0cb5fc2c.r0
+         28.3 issuer=/C=AU/O=APACGrid/OU=CA/CN=APACGrid/emailAddress=camanager@vpac.org  crl:/opt/osg036/globus/TRUSTED_CA/1e12d831.r0
+         27.9 issuer=/DC=ORG/DC=SEE-GRID/CN=SEE-GRID CA  crl:/opt/osg036/globus/TRUSTED_CA/468d15b3.r0
+         27.9 issuer=/C=GR/O=HellasGrid/CN=HellasGrid CA  crl:/opt/osg036/globus/TRUSTED_CA/ede78092.r0
+         27.1 issuer=/C=NL/O=NIKHEF/CN=NIKHEF medium-security certification auth  crl:/opt/osg036/globus/TRUSTED_CA/16da7552.r0
+         27.0 issuer=/C=PL/O=GRID/CN=Polish Grid CA  crl:/opt/osg036/globus/TRUSTED_CA/8a661490.r0
+         26.8 issuer=/O=Grid/O=NorduGrid/CN=NorduGrid Certification Authority  crl:/opt/osg036/globus/TRUSTED_CA/1f0e8352.r0
+         25.9 issuer=/C=AM/O=ArmeSFo/CN=ArmeSFo CA  crl:/opt/osg036/globus/TRUSTED_CA/d0c2a341.r0
+         25.9 issuer=/C=BE/O=BELNET/OU=BEGrid/CN=BEGrid CA/emailAddress=gridca@belnet.be  crl:/opt/osg036/globus/TRUSTED_CA/03aa0ecb.r0
+         24.0 issuer=/C=UK/O=eScience/OU=Authority/CN=CA/emailAddress=ca-operator@grid-support.ac.uk  crl:/opt/osg036/globus/TRUSTED_CA/01621954.r0
+         23.9 issuer=/C=HU/O=KFKI RMKI CA/CN=KFKI RMKI CA  crl:/opt/osg036/globus/TRUSTED_CA/5e5501f3.r0
+         23.9 issuer=/C=SK/O=SlovakGrid/CN=SlovakGrid CA  crl:/opt/osg036/globus/TRUSTED_CA/e13e0fcf.r0
+         23.1 issuer=/C=PT/O=LIPCA/CN=LIP Certification Authority  crl:/opt/osg036/globus/TRUSTED_CA/11b4a5a2.r0
+         23.0 issuer=/C=PT/O=LIP/OU=LISCC/CN=LIP Certification Authority  crl:/opt/osg036/globus/TRUSTED_CA/41380387.r0
+         23.0 issuer=/C=AT/O=AustrianGrid/OU=Certification Authority/CN=Certificate Issuer  crl:/opt/osg036/globus/TRUSTED_CA/6e3b436b.r0
+         22.9 issuer=/C=CZ/O=CESNET/CN=CESNET CA  crl:/opt/osg036/globus/TRUSTED_CA/ed99a497.r0
+         21.9 issuer=/C=KR/O=KISTI/CN=KISTI GRID ROOT CA  crl:/opt/osg036/globus/TRUSTED_CA/47183fda.r0
+         21.7 issuer=/C=CN/O=HEP/CN=gridca-cn/emailAddress=gridca@ihep.ac.cn  crl:/opt/osg036/globus/TRUSTED_CA/ba2f39ca.r0
+         21.1 issuer=/C=CH/O=CERN/OU=GRID/CN=CERN CA  crl:/opt/osg036/globus/TRUSTED_CA/fa3af1d7.r0
+         19.1 issuer=/C=SI/O=SiGNET/CN=SiGNET CA/emailAddress=signet-ca@ijs.si  crl:/opt/osg036/globus/TRUSTED_CA/747183a5.r0
+         16.0 issuer=/DC=org/DC=balticgrid/CN=Baltic Grid Certification Authority  crl:/opt/osg036/globus/TRUSTED_CA/2a237f16.r0
+         15.9 issuer=/C=EE/O=Grid/CN=Estonian Grid Certification Authority  crl:/opt/osg036/globus/TRUSTED_CA/566bf40f.r0
+         12.9 issuer=/C=PK/O=NCP/CN=ncp.edu.pk  crl:/opt/osg036/globus/TRUSTED_CA/d2a353a5.r0
+         11.3 issuer=/C=US/ST=California/L=Los Angeles/O=University of Southern California/CN=University of Southern California PKI-Lite CA, release 1/emailAddress=nmiadmin@usc.edu  crl:/opt/osg036/globus/TRUSTED_CA/2ca73e82.r0
+         10.8 issuer=/C=RU/O=DataGrid/CN=Russian DataGrid CA  crl:/opt/osg036/globus/TRUSTED_CA/d64ccb53.r0
+          9.7 issuer=/C=TR/O=TRGrid/CN=TR-Grid CA  crl:/opt/osg036/globus/TRUSTED_CA/1691b9ba.r0
+          9.3 issuer=/C=US/O=Pittsburgh Supercomputing Center/CN=PSC Root Certificate Authority  crl:/opt/osg036/globus/TRUSTED_CA/aa99c057.r0
+          9.2 issuer=/C=ES/O=DATAGRID-ES/CN=DATAGRID-ES CA  crl:/opt/osg036/globus/TRUSTED_CA/13eab55e.r0
+          8.0 issuer=/C=DE/O=DFN-Verein/OU=DFN-PKI/CN=DFN-Verein PCA Grid - G01  crl:/opt/osg036/globus/TRUSTED_CA/1149214e.r0
+          7.7 issuer=/C=JP/O=AIST/OU=GRID/CN=Certificate Authority  crl:/opt/osg036/globus/TRUSTED_CA/a317c467.r0
+          7.2 issuer=/DC=cz/DC=cesnet-ca/CN=CESNET CA  crl:/opt/osg036/globus/TRUSTED_CA/9b59ecad.r0
+ ***      6.8 issuer=/C=US/O=SDSC/OU=SDSC-CA/CN=Certificate Authority/UID=certman  crl:/opt/osg036/globus/TRUSTED_CA/3deda549.r0
+ ***      6.2 issuer=/C=CA/O=Grid/CN=Grid Canada Certificate Authority  crl:/opt/osg036/globus/TRUSTED_CA/bffbd7d0.r0
+ ***      4.4 issuer=/C=HU/O=NIIF/OU=Certificate Authorities/CN=NIIF Root CA  crl:/opt/osg036/globus/TRUSTED_CA/cc800af0.r0
+ ***      4.2 issuer=/C=US/O=UTAustin/OU=TACC/CN=TACC Certification Authority/UID=caman  crl:/opt/osg036/globus/TRUSTED_CA/9a1da9f9.r0
+ ***      1.1 issuer=/CN=PurdueCA/O=Purdue University/ST=Indiana/C=US  crl:/opt/osg036/globus/TRUSTED_CA/95009ddc.r0
+ ***      1.0 issuer=/C=CH/O=SWITCH - Teleinformatikdienste fuer Lehre und Forschung/CN=SWITCH Server CA/emailAddress=switch.server.ca@switch.ch  crl:/opt/osg036/globus/TRUSTED_CA/072fe468.r0
+ ***      1.0 issuer=/C=CH/O=SWITCH - Teleinformatikdienste fuer Lehre und Forschung/CN=SWITCH Personal CA/emailAddress=switch.personal.ca@switch.ch  crl:/opt/osg036/globus/TRUSTED_CA/4aa5ef7d.r0
+ ***      1.0 issuer=/CN=SWITCH Personal CA/emailAddress=switch.personal.ca@switch.ch/O=SWITCH - Teleinformatikdienste fuer Lehre und Forschung/C=CH  crl:/opt/osg036/globus/TRUSTED_CA/7c0f6d74.r0
+ ***      1.0 issuer=/CN=SWITCH Server CA/emailAddress=switch.server.ca@switch.ch/O=SWITCH - Teleinformatikdienste fuer Lehre und Forschung/C=CH  crl:/opt/osg036/globus/TRUSTED_CA/f8b4299c.r0
+ ***      1.0 issuer=/CN=Purdue TeraGrid RA/OU=Purdue TeraGrid/O=Purdue University/ST=Indiana/C=US  crl:/opt/osg036/globus/TRUSTED_CA/67e8acfa.r0
+nearest CRL expiration 0.951088 days
+</pre>
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesBarlow
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = DougOlson
+
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = AnandPadmanabhan
+
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+
+-->
+
+%META:TOPICMOVED{by="ForrestChristian" date="1166056541" from="Integration.SampleCertCheckTimeCRLs050" to="Integration/ITB_0_5.SampleCertCheckTimeCRLs"}%

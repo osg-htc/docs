@@ -1,0 +1,52 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1272649184" format="1.1" version="1.12"}%
+%META:TOPICPARENT{name="VomsInstallGuide"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+%EDITTHIS%
+%BR%
+
+---++ 64 bit support
+VOMS nows runs on 64-bit computers. However, there are some known problems with VOMS Admin.
+
+VOMS Admin is the web interface to VOMS. VDT 1.7.1 has version 1.2.19-2-pre2-0. There have been persistent failures when installing VOMS Admin on Fedora Core 4, x86-64. Although this is not a widely used platform, the problems are not well understood and it is not known if they will manifest elsewhere.
+
+If you install VOMS Admin and the installation fails while installing VOMS:
+
+<pre class="programlisting">
+Package [/opt:vdt.caches:http://vdt.cs.wisc.edu/vdt_171_cache:VOMS] not [installed]: 
+Package [/opt:vdt.caches:http://vdt.cs.wisc.edu/vdt_171_cache:VOMS] has not been installed.  Can't setup. 
+Package [/opt:vdt.caches:http://vdt.cs.wisc.edu/vdt_171_cache:VDT] not [installed]:
+Package  [/opt:vdt.caches:http://vdt.cs.wisc.edu/vdt_171_cache:VDT] has not been installed.  Can't setup.
+</pre>
+
+Look in the +$VDT_LOCATION/vdt-install.log_. If you see an error like this while installing VOMS-Server, it may be the same problem and the VDT team would like to know about it. Contact them via email at vdt-support@opensciencegrid.org.
+
+<pre class="programlisting">
+ERROR [main] Could not update org.glite.security.voms.database.flavours.
+          MySQLSequence$1@7745c859: update affected 0 rows. -  flavours.MySQLSequence
+ERROR [main] Internal database inconsistency detected: 
+          Could not update org.glite.security.voms.database.flavours.MySQLSequence$1@7745c859: update affected 0 rows.
+         -  database.Database
+         Database deployment failed.  Inspect above messages for an explanation.
+</pre>
+
+Also, VOMS Admin 1.2.19-2-pre2-0 contains a known bug ([[https://savannah.cern.ch/bugs/?func=detailitem&item_id=13863][https://savannah.cern.ch/bugs/?func=detailitem&item_id=13863]])for which VDT has installed a workaround. However, the workaround disables the automatic request clean-up feature. It is hoped a that this will be resolved in a subsequent release before any automatic clean-ups would occur.
+
+%INCLUDE{"VomsKnownProblems"}%
+
+---++ Resolved VOMS problems/issues for this release.
+Nothing to report for this release.
+
+---++ Other
+See also [[Trash.ReleaseDocumentationVdtReleaseNotes][VDT Release Notes]] as needed.
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.TanyaLevshina - 23 Oct 2007 %BR%
+%REVIEW% Main.RobGardner - 08 Nov 2007 %BR%
+%REVCOM% Need-checking Main.RobGardner

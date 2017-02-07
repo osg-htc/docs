@@ -1,0 +1,115 @@
+%META:TOPICINFO{author="KyleGross" date="1481047991" format="1.1" version="1.49"}%
+%DOC_STATUS_TABLE%
+
+---+!! Compute Element Troubleshooting Guide
+%TOC{}%
+
+---+ About this Document
+
+%ICON{hand}% This document provides troubleshooting information for System Administrators and Grid Users of a %LINK_GLOSSARY_CE%.
+
+%INCLUDE{"ReleaseDocumentation/ComputeElementLogFiles" section="Logfiles" VDT="$VDT_LOCATION" }%
+%INCLUDE{"ReleaseDocumentation/ClientErrors" section="GramErrors" }%
+
+---+ Edg-Mkgridmap Troubleshooting Guide
+%INCLUDE{"ReleaseDocumentation/EdgMkgridmapTroubleshootingGuide" section="Troubleshooting" }%
+
+---+ Reasons for a hanging CE
+
+---++ Too many condor_shadow processes 
+
+If you use condor, each running job needs a condor_shadow process on the submitter, each of which consumes a little amount memory (~0.5-1MB), but if you run, let's say 2000 jobs under the same CE, you will have (~1MB * 2000) memory being consumed.  As the number of jobs increase, the memory usage will increase until the server starts swapping resulting in very low performance.
+
+One of the solutions is to scale to more than one CE, or add a extra CE  to your site, and if is to jump from 1 to 2 CE's, you can also benefit from the backup and maintenance benefits, as you can do a maintenance on 1 CE while the other works, and your site won't be down.
+
+Other solution is to raise the available memory on the CE(s).
+
+Another solutions may be limit your CE Capacity - and letting it do just what it can take :
+
+   * Limit the number of running condor_shadow processes by condor configuration
+   * Set on condor configuration a lower priority (renice) for these processes - they don't need a high one
+
+To know more about shadows see these [[http://www.cs.wisc.edu/condor/tutorials/infn-admin/sld013.htm two slides ]]
+
+%TWISTY{%TWISTY_OPTS_REVIEW%}%
+   * instead of saying 'some little amount of memory' provide an estimate in MB so readers have a better understand as to when they run out of memory.
+   * I would like to link to the document that explains how to setup more than one CE for load balancing. I'll contact Suchandra about this.
+   * Can you please provide more detailed instrcutions how to limit the number of running condor_shadow processes and how to renice the processes by default?
+%ENDTWISTY%
+
+---+ Using the Resource Service Validation (RSV) as a monitoring and troubleshooting tool
+Every OSG CE installation runs a Resource Service Validation (RSV) tool (though this could also be installed on a host separate from the CE itself). The RSV tool consists of a set of probes that probe into the various essential functionalities of the Compute Element and other services of the OSG like the Storage Element. The RSV results are nicely presented in a webpage that is color coded based on the status of the various probes. This webpage should be by default available at the following address:
+
+https://FQDN_of_your_rsv_host:8443/rsv.  For example the RSV page for the site OUHEP_ITB is available at https://osgitb1.nhn.ou.edu:8443/rsv
+
+We highly encourage system administrators to look at the RSV page once in a while to check on the health of their OSG services. If any service/probe is failing it will be marked CRITICAL and will be showing up in red. Clicking on a particular probe will take you to the detailed results page of that probe, where it would provide further details on where to look further (like log files etc.) in order to troubleshoot further about an issue with a service. 
+
+---+ References
+
+   1 [[ReleaseDocumentation/TroubleshootingJobsAdmins][Job Submission Troubleshooting Guide for System Administrators]]
+   1 [[Documentation.Release3.TroubleshootingFaq][FAQ for Grid Users]]
+   1 [[TroubleshootingGuide][Troubleshooting Guide for Grid Users]]
+   1 [[ReleaseDocumentation/KnownIssues][Known Issues in OSG-%VERSION% release]]
+
+---+ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = SuchandraThapa
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Troubleshooting
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = KarthikArun 
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->
+
+
+%META:TOPICMOVED{by="RobGardner" date="1192745408" from="Integration/ITB_0_7.TroubleshootingYourComputeElementInstall" to="Integration/ITB_0_7.TroubleshootingComputeElement"}%

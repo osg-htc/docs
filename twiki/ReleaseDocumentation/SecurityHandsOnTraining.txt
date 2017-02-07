@@ -1,0 +1,130 @@
+%META:TOPICINFO{author="KyleGross" date="1481047990" format="1.1" version="1.13"}%
+%META:TOPICPARENT{name="ReleaseDocumentation.BestPractices"}%
+---+ Security Hands on Training 
+
+%DOC_STATUS_TABLE%
+
+%TOC%
+
+---++ Topics covered 
+   * How to respond to a security incident 
+   * How to ban a user DN from your site 
+   * How to track down jobs submitted by a DN
+   * How to locate relevant log files
+   * Basic forensics steps for incident response
+
+---++ The scenario 
+   * OSG Security Team contacts you about a “bad DN”
+   * We're submitting jobs using the “bad DN”
+   * In a real incident
+      * Contact security at opensciencegrid.org  and local security response
+      * Security team will send you a signed email indicating the action to be taken
+      * Take actions identified in the email ASAP
+      * Detailed incident response procedures can be found [[ReleaseDocumentation.IncidentDiscoveryReporting][here]]
+
+---++ Major steps to take when responding to compromised user DN
+   * Stop further exposure
+   * Find out if your site was exposed and to what extent
+   * Conduct basic forensics
+   * Clean up suspect jobs
+
+---+++ How to stop further exposure of your site?
+   * Ban the user DN. We will discuss how later.
+   * Keep CAs and CRLs upto date
+      * Ensure that tools like vdt-update-certs and fetch-CRL have been enabled
+   * Keep the VO list updated
+      * Check if GUMS is contacting the VOMS server periodically and gums-host-cron service from VDT is enabled on CE
+      * If using end-mkgridmap ensure that the edg-mkgridmap service is enabled in VDT
+   * Watch the logs 
+      * Gatekeeper logs, batch system logs and syslogs
+
+[[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/BanningUsersAtSite][Banning users at a site]]
+
+---++++ Best practices to limit exposure 
+   * Keep CAs and CRLs upto date
+      * Ensure that tools like vdt-update-certs and fetch-CRL have been enabled
+   * Keep the VO list updated
+      * Check if GUMS is contacting the VOMS server periodically and gums-host-cron service from VDT is enabled on CE
+      * If using end-mkgridmap ensure that the edg-mkgridmap service is enabled in VDT
+   * Watch the logs 
+
+---++++ What did this step accomplish 
+   * User will not be able to submit new jobs (or get authorized in the future) to your site.
+   * Existing jobs will continue to run.
+
+---+++  Find out if your site was exposed?
+
+   *  Look at log files 
+      *  Globus gatekeeper and accounting logs
+      * GUMS log can provide a centralized place to check multiple gatekeepers
+      * Check syslogs
+   * Location of some log files can be found at
+      * [[https://twiki.grid.iu.edu/bin/view/Trash/Trash/Integration/ITB092/ComputeElementLogFiles]]
+
+---++++ What should log files tell you
+   * Has the “bad DN” run on your site?
+   * What IP address did the job originate from?
+   * When (timestamps)? 
+   * What unix account did the user map to?
+   * Did the mapping use a pool account or were all users from VO mapped to the same account?
+
+[[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/BasicForensics][Basic Forensics techniques]]
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesBarlow
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = AnandPadmanabhan
+
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         =
+
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+
+-->
+
+%META:TOPICMOVED{by="JamesBarlow" date="1274384801" from="Security.SecurityHandsOnTraining" to="ReleaseDocumentation.SecurityHandsOnTraining"}%

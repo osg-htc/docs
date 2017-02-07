@@ -1,0 +1,101 @@
+%META:TOPICINFO{author="KyleGross" date="1481047991" format="1.1" version="1.14"}%
+%META:TOPICPARENT{name="WebHome"}%
+%SHOW_DOC_STATUS_TABLE%
+
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+Information and background on the (optional) syslog-ng service
+ 
+---++ Introduction
+Syslog-ng provides log collection and distribution services for OSG CE installations.  If it is enabled, you can use it to forward CE related logs to a centralized log collector to help with troubleshooting or debugging issues on your CE.  You can also use syslog-ng to centralize logging for your cluster on a single machine.  Syslog-ng allows admins to arbitrarily forward log messages to a collection of hosts as well as to filter log messages by matching on various criteria such as hostname or regular expressions on the log message.  Syslog-ng has been tested on the ITB testbed to provide centralized logging services as well as by logging DQ2 messages for the US ATLAS production system.
+
+---++ Installation
+Syslog-ng is installed with the CE pacman package.  However, if you would like to install it separately, you can install it using =pacman -get %CACHE%:Syslog-ng= .  This will download and install syslog-ng using the pacman package from the OSG cache.  
+
+----++ Configuration
+If you would just like to set your CE to submit logs to the central collector, you can enable it in the =Misc Services= section of the configuration file  used by =configure-osg.py=.
+
+A full explanation of how to configure syslog-ng is beyond the scope this documentation, however the concepts involved will be briefly described.  Syslog-ng splits its logging configuration into 4 different components: sources, destinations, filters, and log statements.  Sources are definitions that describe where and how log messages may be received and can include tcp ports, unix sockets, files, etc. Destinations define where messages can be sent and include tcp ports, unix sockets, files, and other destination types.  Filters define how messages can be differentiated and can include checks for source hostnames, message contents, date/time stamps, source file, etc.  Finally, log statements define how sources and destinations should be connected and what filtering, if any, should be done between source and destination.
+
+A single source can be connected to multiple destinations by using several log definitions.  Conversely, a single destination can be connected to several sources by using several log definitions.  Using these two methods, arbitrary fan-ins and fan-outs can be setup for messages.  This allows admins to send log messages to both a cluster specific log collector as well as a centralized osg collector.  The logs sent to each collector can vary allowing the site specific collector to collect logs that may not be appropriate for the centralized osg collector (/var/log/messages, /var/log/secure, etc.).  
+
+Once the configuration for syslog-ng is completed, it can be started using =$VDT_LOCATION/vdt/setup/configure_syslog_ng --server y= followed by a =vdt-control --on syslog-ng= .
+
+---++ Files forwarded
+The following files are forwarded by default if syslog-ng is enabled:
+   * =$VDT_LOCATION/globus/var/container-real.log=
+   * =$VDT_LOCATION/globus/var/container.log=
+   * =$VDT_LOCATION/globus/var/globus-gatekeeper.log=
+   * =$VDT_LOCATION/globus/var/log/gridftp.log=
+   * =$VDT_LOCATION/globus/var/log/gridftp-auth.log=
+   * =$VDT_LOCATION/edg/log/edg-mkgridmap.log=
+   * =$VDT_LOCATION/apache/logs/access_log=
+   * =$VDT_LOCATION/apache/logs/error_log=
+   * =$VDT_LOCATION/globus/var/accounting.log=
+---++ Known issues
+   * Stunnel is provided but we don't currently configure it to provide ssl encrypted links
+
+---++ More information
+   * [[http://freshmeat.net/projects/syslog-ng/][Freshmeat syslog-ng project page]]
+   * [[http://www.balabit.com/network-security/syslog-ng/][Balabit's syslog-ng page]]
+   * [[http://www.balabit.com/dl/html/syslog-ng-admin-guide_en.html/index.html][Documentation for syslog-ng]]
+
+%STOPINCLUDE%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = AlainRoy
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = HorstSeverini
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = IwonaSakrejda
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->

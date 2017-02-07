@@ -1,0 +1,716 @@
+%META:TOPICINFO{author="RobGardner" date="1248199278" format="1.1" version="1.10"}%
+%META:TOPICPARENT{name="ChileWorkshop09"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++ Acknowledgements
+   * Thanks to Main.SuchandraThapa whose excellent CE Installation notes are the basis for this tutorial.
+   * Thanks to Main.SarahWilliams for initial version of this tutorial
+
+---++ Requirements
+   * A !RedHat-linux based server like !RHEL, !CentOS, and Scientific Linux.
+   * A fully-qualifed hostname for the server
+   * A valid host certificate
+   * SSH access and root access
+   * These ports open through the firewall: 2119, 2811, 8443
+
+---++ Caveats
+   * Skipping full authorization setup (see documentation for changes needed to do this)
+   * Assumes condor will be used and installed in osg ce directory 
+   
+---++ Preparing the server
+   * Create the /etc/grid-security directory to hold the server certificates
+<pre class="screen">
+$ cd /etc
+$ mkdir grid-security
+$ chmod 755 grid-security
+</pre>
+   * Copy hostcert.pem & hostkey.pem to /etc/grid-security/
+<pre class="screen">
+$ scp host*.pem root@installhost:/etc/grid-security/
+</pre>
+   * Check that the hostcert is correct.  The CN should be the fully qualified domain name of your server, and notAfter should not be expired.
+<pre class="screen">
+$ openssl x509 -in /etc/grid-security/hostcert.pem -noout -subject -enddate
+subject= /DC=org/DC=doegrids/OU=Services/CN=uct2-grid6.uchicago.edu
+notAfter=Oct 23 17:24:54 2009 GMT
+</pre>
+   * Turn off SELinux
+   * Check for required library libstdc++.so.5
+<pre class="screen">
+$ ldconfig -p | grep libstdc++.so.5
+</pre>
+If necessary, install it:
+<pre class="screen">
+$ yum -y install compat-libstdc++-33
+</pre>
+   * Check for required client ldapsearch, and install if neccessary
+<pre class="screen">
+$ which ldapsearch
+$ yum -y install openldap-clients
+</pre>
+   * Add a user account and install your personal grid certificate
+<pre class="screen">
+$ useradd sarah
+$ passwd sarah
+$ su – sarah
+$ mkdir .globus
+$ chmod 0755 .globus
+$ cd .globus
+$ scp user*.pem installhost:/home/sarah/.globus/
+$ chmod 0644 usercert.pem 
+$ chmod 0400 userkey.pem
+</pre>
+   * Add a user account for the RSV service
+<pre class="screen">
+$ useradd rsv_user
+$ passwd rsv_user
+</pre>
+
+---++ Installation
+This guide will assume that you install software in the /opt directory and that this directory is located on a local drive (or a networked drive that has fairly high performance and low latency).  The installation will require about 4 GB of space.  This guide will also install a condor batch manager in your osg installation.  *Please adjust this to your specific circumstances.*
+
+If you are installing on a server that already has a jobmanager, please read the documentation on [[https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/ComputeElementInstall#Install_job_managers][Install job managers]].  If you do not have a jobmanager, Condor will be installed with OSG:Globus-Condor-Setup.
+
+---+++ Create directories for OSG services
+<pre class="screen">
+$  cd /opt
+$ mkdir share
+$ mkdir share/data
+$ mkdir share/app
+$  mkdir wn-client
+$  chmod a+rwx /opt/share/*
+$  mkdir osg
+$  mkdir osg-1.0.0
+$  mount --bind osg-1.0.0 osg
+$  mkdir pacman
+</pre>
+ Using a bind mount lets you refer to things in /opt/osg so that you can upgrade your osg ce installation in a versioned directory (e.g. osg-x.y.z) and seamlessly switch from an older install to a newer install.
+
+---+++ Pacman
+The first component you will need to install is pacman.  Pacman is the package manager that is used by the OSG to distribute it's software.  The installation process for this is fairly simple and is outlined below
+
+<pre class="screen">
+$ cd /opt
+$ wget http://physics.bu.edu/pacman/sample_cache/tarballs/pacman-latest.tar.gz
+--15:20:25--  http://physics.bu.edu/pacman/sample_cache/tarballs/pacman-latest.tar.gz
+           => `pacman-latest.tar.gz'
+Resolving physics.bu.edu... 128.197.41.42
+Connecting to physics.bu.edu|128.197.41.42|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 852,424 (832K) [application/x-gzip]
+
+100%[====================================>] 852,424        1.67M/s             
+
+15:20:26 (1.67 MB/s) - `pacman-latest.tar.gz' saved [852424/852424]
+$ tar xzf pacman-latest.tar.gz
+</pre>
+   * At this point you will have a directory called pacman-*x.xx* where *x.xx* is version number of pacman
+<pre class="screen">
+$ mount --bind pacman-*x.xx* pacman
+</pre>
+This will allow you to upgrade pacman at a later time without changing your references to the pacman binaries
+<pre class="screen">
+$ cd pacman
+$ source setup.sh
+</pre>
+ This step will initialize the pacman setup and get the correct environment variables and paths into your environment.
+
+At this point, pacman is setup and is ready for your use.
+
+---+++ Installing the CE software
+This guide assumes that you will be using a gridmap for your setup and not a GUMS server.  To setup things up using a gums server, please refer to the release documentation for OSG CE software.
+
+<pre class="screen">
+$ cd osg
+$ export PER_JOB_HISTORY_DIR=/opt/osg/gratia/var/data
+$ pacman -get OSG:ce
+Do you want to add [http://software.grid.iu.edu/pacman/] to [trusted.caches]? (y/n/yall): yall
+Beginning VDT prerequisite checking script vdt-common/vdt-prereq-check...       
+
+All prerequisite checks are satisfied.
+                                                               
+
+
+========== IMPORTANT ==========
+The VDT no longer installs certificate authority certificates at install time.
+Most of the software installed by the VDT *will not work* until you install
+certificates.  To complete your CA certificate installation, see the notes
+in the post-install/README file.
+
+
+
+Existing /tmp/opt/osg-1.0.0/edg/etc/edg-mkgridmap.conf moved to /tmp/opt/osg-1.0.0/edg/etc/edg-mkgridmap.conf.orig
+Merge it manually with the new /tmp/opt/osg-1.0.0/edg/etc/edg-mkgridmap.conf if you had a special edg-mkgridmap.conf
+                                  
+Pacman Installation of OSG-1.0.0 Complete
+</pre>
+<pre class="screen">
+$ source setup.sh
+$ pacman -get OSG:Globus-Condor-Setup
+$ pacman -get OSG:ManagedFork
+</pre>
+
+The software should be installed at this point and you can move on to configuration.
+
+---+++ Configuring the CE software
+At this point, the CE software will have been installed and is partially configured.  There are a few more steps needed to get a working setup.
+
+---++++ Generating service certificates (Optional)
+If you already have your service certificates, or if you only intend this CE as a demonstration, you can skip this section.  Otherwise, the instructions in this section will allow you to create service certificates.
+
+Log in to a machine with OSG clients installed. Go to a directory that is readable only by you and which can be used to hold your certificate requests and private keys. Then run the following commands:
+<pre class="screen">
+$ source $OSG_LOCATION/setup.sh
+
+$ mkdir http_cert
+$ cd http_cert
+$ cert-request  -host your.host  -dir .  -ou s -service http 
+$ mkdir rsv_cert
+$ cd rsv_cert
+$ cert-request  -host your.host  -dir .  -ou s -service rsv 
+</pre>
+
+You will need to answer a few questions when generating the requests and will get a serial number after the command completes.  This serial will let you retrieve your certificate once it has been signed.  Also after running these commands, you will have a file of the form xxxkey.pem where xxx is a number.  You will need that file since it contains the private key for your certificate.    
+
+After a little time, you should receive an email from the registration authority (RA) of the virtual organization (VO) that you indicated that your site is a member of.  The email will give you instructions on how to retrieve your host certificates.  When you have retrieved them, install them on your server.
+<pre class="screen">
+$ mkdir /etc/grid-security/http
+$ mkdir /etc/grid-security/rsv
+$ cp http_cert/*key.pem /etc/grid-security/http/httpkey.pem
+$ cp http_cert/*cert.pem /etc/grid-security/http/httpcert.pem
+$ cp rsv_cert/*cert.pem /etc/grid-security/rsv/rsvcert.pem
+$ cp rsv_cert/*key.pem /etc/grid-security/rsv/rsvkey.pem
+</pre>
+
+---++++ Installing service certificates
+
+If you do not have service certificates for RSV and HTTP, you will need to use your host cert.
+<pre class="screen">
+$ cd /etc/grid-security
+$ mkdir http
+$ mkdir rsv
+$ cp hostkey.pem http/httpkey.pem
+$ cp hostcert.pem http/httpcert.pem
+$ cp hostkey.pem rsv/rsvkey.pem
+$ cp hostcert.pem rsv/rsvcert.pem
+</pre>
+
+Then, set permissions correctly on your certs.
+<pre class="screen">
+$ chmod 755 /etc/grid-security/http
+$ chmod 755 /etc/grid-security/rsv
+$ chmod 644 /etc/grid-security/hostcert.pem
+$ chmod 400 /etc/grid-security/hostkey.pem
+$ chmod 644 /etc/grid-security/http/httpcert.pem
+$ chmod 400 /etc/grid-security/http/httpkey.pem
+$ chmod 644 /etc/grid-security/containercert.pem
+$ chmod 400 /etc/grid-security/containerkey.pem
+$ chmod 644 /etc/grid-security/rsv/rsvcert.pem
+$ chmod 400 /etc/grid-security/rsv/rsvkey.pem
+ </pre>  
+
+---++++ Setting up a simple gridmap file
+For a simple install, you can use a gridmap file to create a list of users that are allowed to access your compute element. 
+
+Here you will need to replace *DN* with the DN of your personal grid certificate and *USER_ACCOUNT* with the name of the account that this DN should map to.  *Note, the do not map this DN to root or any other privileged account*
+      * Hint: =openssl x509 -in /home/sarah/.globus/usercert.pem -noout -subject=
+<pre class="screen">
+$ echo '"DN" USER_ACCOUNT' >> grid-mapfile
+</pre>
+Here you will need to replace *DN* with the DN of your rsv service certificate.  *Note, the do not map this DN to root or any other privileged account*
+      * Hint: =openssl x509 -in /etc/grid-security/rsv/rsvcert.pem -noout -subject=
+<pre class="screen">
+$ echo '"RSVDN" rsv_user' >> grid-mapfile
+$ chmod 644 grid-mapfile
+</pre>
+
+---++++ Add VO support to the gridmap file
+In order to support VOs you will need to download their users and add accounts for them.  First, back up your local users:
+<pre class="screen">
+$ cp /etc/grid-security/grid-mapfile /etc/grid-security/grid-mapfile-local
+</pre>
+Edit /opt/osg/edg/etc/edg-mkgridmap.conf and add this line to the end. 
+<pre class="screen">
+gmf_local /etc/grid-security/grid-mapfile-local
+</pre>
+Also, in this file you will see lines that look like this:
+<pre class="screen">
+# USER-VO-MAP ilc ILC -- 31 -- Lynn Garren (garren@fnal.gov)
+group vomss://voms.fnal.gov:8443/voms/ilc ilc
+</pre>
+Each is a VO that will be allowed to log in to your gatekeeper.  Comment out each that you do not wish to support.  For our exercise, we want OSG and OSGEDU only.  We should create accounts for these users:
+<pre class="screen">
+$ useradd osg
+$ passwd osg
+$ useradd osgedu
+$ passwd osg
+</pre>
+
+If this is too much typing, here is a correct copy of [[https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/GridSiteInstallationTutorial/edg-mkgridmap.conf][edg-mkgridmap.conf]]
+
+Turn on edg-mkgridmap and run it for the first time.
+<pre class="screen">
+$ vdt-register-service --name edg-mkgridmap --enable
+$ vdt-control --on edg-mkgridmap
+$ /opt/osg/edg/sbin/edg-mkgridmap  >>/opt/osg/edg/log/edg-mkgridmap.log 2>&1
+</pre>
+
+Check the gridmap to see the new account mappings.
+<pre class="screen">
+$ head /etc/grid-security/grid-mapfile
+"/C=AR/O=e-Ciencia/OU=UNLP/L=CeSPI/CN=Fernando Monticelli" usatlas1
+"/C=AT/O=AustrianGrid/OU=UIBK/OU=astro/OU=HEPHY/CN=Brigitte Epp" usatlas1
+"/C=AT/O=AustrianGrid/OU=UIBK/OU=astro/OU=HEPHY/CN=Emmerich Kneringer" usatlas1
+</pre>
+
+---++++ Setting up your CA certificate updater
+You will now need to setup and retrieve the ca certs updater
+   * Open =/opt/osg/vdt/etc/vdt-update-certs.conf= in your text editor of choice
+   * Uncomment the line the following line (i.e. remove the leading =#= mark)
+<pre class="screen">
+#cacerts_url = http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+</pre>
+   * Run the following commands at the command line:
+<pre class="screen">
+$ source $VDT_LOCATION/vdt-questions.sh; $VDT_LOCATION/vdt/sbin/vdt-setup-ca-certificates
+$ vdt-control --enable vdt-update-certs
+$ vdt-control --on vdt-update-certs
+</pre>
+
+You should now have the ca certs updater setup and it will automatically update your ca certificates using the certs distributed by the OSG grid operations center (GOC).
+
+---++++ Configuring your system 
+Here we will configure the majority of the system using the configure-osg script and a configuration file.  In order to do this, follow the steps below:
+
+<pre class="screen">
+$ cd /opt/osg/
+$ source /opt/osg/setup.sh
+</pre>
+   * Edit the =/opt/osg/monitoring/config.ini= file and make the following changes
+      * Go to the section starting with =[Default]=
+         * =localhost= set to the install server's fully qualified host name
+         * =admin_email= set to your email address
+         * =osg_location=set to '/opt/osg=
+      * Go to the section starting with =[Site Information]=
+         * Remove the =%(unavailable)s= and replace it with the correct values for the variables listed below
+         * =site_name= A short name for your site. Example: MWT2_IU, OU_HEP , REUNA1
+         * =sponsor= For this workshop, use 'osg'
+         * =site_policy= A url to your site's usage policy. Example: http://www.mwt2.org/policy.html
+         * =contact=, set this to your email address
+         * =city=
+         * =country=
+         * =latitude= You can set this to 0 if you do not know your lattitude
+         * =longitude= Like latitude
+      * Go to the section starting with =[Condor]=
+         * Remove the =%(unavailable)s= and replace it with the correct values for the variables listed below
+         * =enabled= , change the =%(unavailable)s= to =%(enable)s=
+         * =home=, set this to =/opt/osg/condor=
+         * =wsgram= , change the =%(unavailable)s= to =%(enable)s=
+      * Go to the section starting with =[ManagedFork]=
+         * Remove the =%(unavailable)s= and replace it with the correct values for the variables listed below
+         * =enabled= , change the =%(unavailable)s= to =%(enable)s=
+         * =condor_location= , change the =%(unavailable)s= to =/opt/osg/condor=
+      * Go to the section starting with =[Misc Services]=
+         * Remove the =%(unavailable)s= and replace it with the correct values for the variables listed below
+         * =use_cert_updater= , change the =%(unavailable)s= to =%(enable)s=
+      * Go to the section starting with =[Storage]=
+         * Remove the =%(unavailable)s= and replace it with the correct values for the variables listed below
+         * =grid_dir= , change the =%(unavailable)s= to =/opt/wn-client=
+         * =app_dir= , change the =%(unavailable)s= to =/opt/share/app=
+         * =data_dir= , change the =%(unavailable)s= to =/opt/share/data=
+         * =worker_node_temp= , change the =%(unavailable)s= to =/tmp=
+         * =site_read= , change the =%(unavailable)s= to =/opt/share/data=
+         * =site_write= , change the =%(unavailable)s= to =/opt/share/data=
+      * Go to the section starting with =[GIP]=
+         * Remove the =%(unavailable)s= and replace it with the correct values for the variables listed below
+         * =batch= , change the =%(unavailable)s= to =condor=
+      * Go to section starting with =[Subcluster CHANGEME]=
+         * Change name to =[Subcluster Main]=
+         * =name=, change to =Main=
+         * =node_count= , change the =NUMBER_OF_NODE= to the number of worker nodes your cluster has. For this tutoril, enter =1=
+         * =ram_mb= , change the =MB_OF_RAM= to the ram that your cluster has in MB (hint: =cat /proc/meminfo=)
+         * =cpu_module= , change the =CPU_MODEL_FROM_/proc/cpuinfo= to the model of your  cluster's cpus (hint: =cat /proc/cpuinfo=)
+         * =cpu_vendor= , change the =VENDOR_AMD_OR_INTEL= to the vendor of your  cluster's cpus (e.g. =Intel=, =AMD=)
+         * =cpu_speed_mhz= , change the =CLOCK_SPEED_MHZ= to the clock speed of your  cluster's cpus in MHz. For example, a 2.83GHz cpue runs at 2830 MHz.
+         * =cpus_per_node=, change =#_PHYSICAL_CHIPS_PER_NODE= to number of chips per node (e.g. =1=)
+         * =cores_per_node=, change =#_CORES_PER_NODE= to number of cores total in the node (e.g. =8= for a dual socket, quad core node)
+      * Go to the section starting with =[RSV]=
+         * Remove the =%(unavailable)s= and replace it with the correct values for the variables listed below
+         * =enabled= , change the =%(unavailable)s= to =%(enable)s=
+         * =rsv_user= , change the =%(unavailable)s= to name of the account that has been created for rsv ( rsv_user)
+         * =enable_ce_probes= , change the =%(unavailable)s= to =%(enable)s=
+         * =ce_hosts= , change the =%(unavailable)s= to =%(localhost)s=
+         * =enable_gridftp_probes= , change the =%(unavailable)s= to =%(enable)s=
+         * =gridftp_hosts= , change the =%(unavailable)s= to =%(localhost)s=
+         * =use_service_cert= , change the =%(unavailable)s= to =%(enable)s=
+         * =rsv_cert_file= , change the =%(unavailable)s= to =/etc/grid-security/rsv/rsvcert.pem=
+         * =rsv_key_file= , change the =%(unavailable)s= to =/etc/grid-security/rsv/rsvkey.pem=
+   * Then install the configuration
+<pre class="screen">
+[root@itb1 grid-security]#  /opt/osg/monitoring/configure-osg.py -c
+Using /opt/osg/monitoring as the installation directory
+Using /opt/osg/monitoring/config.ini as the configuration file
+The following consumer subscription has been installed:
+	HOST:    https://osg-ress-1.fnal.gov:8443/ig/services/CEInfoCollector
+	TOPIC:   OSG_CE
+	DIALECT: OLD_CLASSAD
+
+The following consumer subscription has been installed:
+	HOST:    http://is1.grid.iu.edu:14001
+	TOPIC:   OSG_CE
+	DIALECT: RAW
+
+The following consumer subscription has been installed:
+	HOST:    http://is2.grid.iu.edu:14001
+	TOPIC:   OSG_CE
+	DIALECT: RAW
+
+## cacerts_url specifies where to get CAs from
+# There should only be 1 uncommented line declaring cacerts_url
+#cacerts_url = http://vdt.cs.wisc.edu/software/certificates/vdt-igtf-ca-certs-version
+cacerts_url = http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+#cacerts_url = [ URL of the version file ]
+Not defined: PER_JOB_HISTORY_DIR
+INFO: Attempting to install RSV consumers. 
+INFO: Attempting to install RSV probes on appropriate URI(s). 
+INFO: Creating .sub files for RSV probes of type OSG-Local-Monitor
+	 for URI: itb1.uchicago.edu (host: itb1.uchicago.edu)
+INFO: Creating .sub files for RSV probes of type OSG-CE
+	 for URI: itb1.uchicago.edu (host: itb1.uchicago.edu)
+INFO: Re-using metrics config file for itb1.uchicago.edu
+ /opt/osg/osg-rsv/config/itb1.uchicago.edu_metrics.conf
+ Existing settings like on/off and metric intervals will be re-used.
+ Any new metrics found in probe set will be added with their default settings.
+
+INFO: Creating .sub files for RSV probes of type GridFTP
+	 for URI: itb1.uchicago.edu (host: itb1.uchicago.edu)
+INFO: Re-using metrics config file for itb1.uchicago.edu
+ /opt/osg/osg-rsv/config/itb1.uchicago.edu_metrics.conf
+ Existing settings like on/off and metric intervals will be re-used.
+ Any new metrics found in probe set will be added with their default settings.
+
+INFO: Attempting to configure Apache to serve local RSV probe output
+ Adding RSV alias to point to the current RSV installation.
+ Apache setup properly to serve results from current RSV installation.
+ Restart Apache for changes to take effect.
+ Enabling the Apache service using vdt-control ...
+ Pages can be viewed at https://HOSTNAME:8443/rsv
+Configure-osg completed successfully
+
+</pre>
+
+---++++ Configuring WS-GRAM
+The ws-gram system is a web services enabled method for submitting and monitoring jobs on grid resources.  The ws-gram system requires the following steps to configure it.
+   * Set the ownership for the new container certs
+<pre class="screen">
+$ chown daemon /etc/grid-security/container*.pem
+</pre>
+   * run =visudo= to edit the sudoers file
+<pre class="screen">
+$ visudo
+</pre>
+   * add this:
+<pre class="screen">
+Runas_Alias GLOBUSUSERS = ALL, !root
+daemon ALL=(GLOBUSUSERS) \
+       NOPASSWD: /opt/osg/globus/libexec/globus-gridmap-and-execute \
+       -g /etc/grid-security/grid-mapfile \
+       /opt/osg/globus/libexec/globus-job-manager-script.pl *
+daemon ALL=(GLOBUSUSERS) \
+       NOPASSWD: /opt/osg/globus/libexec/globus-gridmap-and-execute \
+       -g /etc/grid-security/grid-mapfile \
+       /opt/osg/globus/libexec/globus-gram-local-proxy-tool *
+</pre>
+
+---++++ Start the services
+Now we will start the services.
+<pre class="screen">
+$ vdt-control --on
+enabling cron service fetch-crl... ok
+enabling cron service vdt-rotate-logs... ok
+enabling cron service vdt-update-certs... ok
+skipping init service 'gris' -- marked as disabled
+enabling inetd service globus-gatekeeper... ok
+enabling inetd service gsiftp... ok
+enabling init service mysql... ok
+enabling init service globus-ws... ok
+enabling cron service edg-mkgridmap... ok
+skipping cron service 'gums-host-cron' -- marked as disabled
+skipping init service 'MLD' -- marked as disabled
+enabling init service condor-cron... ok
+enabling init service apache... ok
+enabling init service osg-rsv... ok
+enabling init service tomcat-55... ok
+enabling init service syslog-ng-sender... ok
+enabling init service condor... ok
+enabling cron service gratia-condor... ok
+</pre>
+
+---++++ Install Worker Node Client
+The worker node client is a sub-set of the OSG client.  All worker nodes are expected to have this software.  Because in this workshop our gatekeeper is also a worker node, we install it here.  
+   * Log out and log back in, to remove your OSG:CE settings.
+<pre class="screen">
+$ source /opt/pacman/setup.sh
+$ cd /opt/wn-client/
+$ pacman -get OSG:wn-client
+Do you want to add [http://software.grid.iu.edu/pacman/] to [trusted.caches]? (y/n/yall): yall
+Beginning VDT prerequisite checking script vdt-common/vdt-prereq-check...       
+
+All prerequisite checks are satisfied.
+                                                          
+VDT 1.10.1 installs a variety of software, each with its own license.
+In order to continue, you must agree to the licenses.
+You can view the licenses online at:
+
+     http://vdt.cs.wisc.edu/licenses/1.10.1
+
+After the installation has completed, you will also be able to
+view the licenses in the "licenses" directory.
+
+Do you agree to the licenses? [y/n] y
+
+Several services provided by the VDT create unbounded log files.  If you wish, we can rotate those file on a daily basis.
+
+Would you like to setup daily rotation of VDT log files?
+
+Possible answers:
+    y: Yes, I want the service to run automatically (once enabled)
+    n: No, I do NOT want the service to run automatically
+
+Note: Services are enabled with vdt-control; see 'post-install/README'.
+
+y
+
+Do you want to run a cron job that will update the CA certificate
+revocation lists automatically? This will use the fetch-crl program
+that comes with the VDT. The cron job will run at a random time
+between midnight and 6:00am. We select a random time to avoid having
+all VDT installations fetching CRLs at the same time.
+
+Do you want to update the CA certification revocation lists (CRLs) automatically? [y/n] y
+
+Do you want to automatically update your CA certificates? If so,
+we will check for updates once a day via cron.
+
+Do you want to automatically update your CA Certificates? [y/n] y
+
+The VDT typically installs public certificates and signing policy files 
+for the well-known public CA's. This is necessary in order for you to 
+perform GSI authentication with any remote Grid services (that have 
+service/host certificates signed by these CA's).
+
+For more information please refer to the VDT documentation:
+http://vdt.cs.wisc.edu/releases/1.10.1/setup_ca.html
+
+Where would you like to install CA files?
+
+Choices:
+	r (root)  - install into /etc/grid-security/certificates
+	           (existing CA files will be preserved)
+	l (local) - install into $VDT_LOCATION/globus/share/certificates
+	n (no)    - do not install
+l
+                                                        
+
+
+========== IMPORTANT ==========
+The VDT no longer installs certificate authority certificates at install time.
+Most of the software installed by the VDT *will not work* until you install
+certificates.  To complete your CA certificate installation, see the notes
+in the post-install/README file.
+
+
+
+                                                                         
+The OSG Worker Node Client package version 1.0.1 has been installed.
+</pre>
+
+---+++++ Setting up your CA certificate updater
+Similar to the OSG:CE install, you will now need to setup and retrieve the ca certs updater
+   * Open =/opt/wn-client/vdt/etc/vdt-update-certs.conf= in your text editor of choice
+   * Uncomment the line the following line (i.e. remove the leading =#= mark)
+<pre class="screen">
+#cacerts_url = http://software.grid.iu.edu/pacman/cadist/ca-certs-version
+</pre>
+   * Run the following commands at the command line:
+<pre class="screen">
+$ source /opt/wn-client/setup.sh
+$ source $VDT_LOCATION/vdt-questions.sh; $VDT_LOCATION/vdt/sbin/vdt-setup-ca-certificates
+$ vdt-control --enable vdt-update-certs
+$ vdt-control --on vdt-update-certs
+</pre>
+
+You should now have the ca certs updater setup and it will automatically update your ca certificates using the certs distributed by the OSG grid operations center (GOC).
+
+---++++ Verify the install
+   * Switch to your personal account, create a grid proxy and run the site verify script
+<pre class="screen">
+$ su - sarah
+$ source /opt/osg/setup.sh
+$ grid-proxy-init
+Your identity: /DC=org/DC=doegrids/OU=People/CN=Sarah Williams 349314
+Enter GRID pass phrase for this identity:
+Creating proxy ................................................................................... Done
+Your proxy is valid until: Wed Jan 21 20:51:17 2009
+$ /opt/osg/verify/site_verify.pl
+===============================================================================
+Info: Site verification initiated at Wed Jan 21 13:51:28 2009 GMT.
+===============================================================================
+-------------------------------------------------------------------------------
+------------ Begin iut2-c122.iu.edu at Wed Jan 21 13:51:28 2009 GMT -----------
+-------------------------------------------------------------------------------
+Checking prerequisites needed for testing: PASS
+Checking for a valid proxy for root@iut2-c122.iu.edu: PASS
+Checking if remote host is reachable: PASS
+Checking for a running gatekeeper: YES; port 2119
+Checking authentication: PASS
+Checking 'Hello, World' application: PASS
+Checking remote host uptime: PASS
+   08:51:29 up 5 days, 18:40,  1 user,  load average: 0.01, 0.04, 0.01
+Checking remote Internet network services list: PASS
+Checking remote Internet servers database configuration: PASS
+Checking for GLOBUS_LOCATION: /opt/osg/globus
+Checking expiration date of remote host certificate: Jan 16 21:06:26 2010 GMT
+Checking for gatekeeper configuration file: YES
+  /opt/osg/globus/etc/globus-gatekeeper.conf
+Checking users in grid-mapfile, if none must be using Prima: rsv_user,sarah,usatlas1
+Checking for remote globus-sh-tools-vars.sh: YES
+Checking configured grid services: PASS
+  jobmanager,jobmanager-condor,jobmanager-fork,jobmanager-managedfork
+Checking for OSG osg-attributes.conf: YES
+Checking scheduler types associated with remote jobmanagers: PASS
+  jobmanager is of type fork
+  jobmanager-condor is of type condor
+  jobmanager-fork is of type fork
+  jobmanager-managedfork is of type managedfork
+Checking for paths to binaries of remote schedulers: PASS
+  Path to condor binaries is /opt/osg/condor/bin
+  Path to managedfork binaries is .
+Checking remote scheduler status: PASS
+  condor : 0 jobs running, 0 jobs idle/pending
+Checking if Globus is deployed from the VDT: YES; version 1.10.1r
+Checking for OSG version: YES; version 1.0.0
+Checking for OSG grid3-user-vo-map.txt: YES
+  usatlas users: usatlas1
+Checking for OSG site name: IUT2-C122
+Checking for OSG $GRID3 definition: /opt/osg
+Checking for OSG $OSG_GRID definition: /opt/wn-client
+Checking for OSG $APP definition: /opt/share/app
+Checking for OSG $DATA definition: /opt/share/data
+Checking for OSG $TMP definition: /opt/share/data
+Checking for OSG $WNTMP definition: /tmp
+Checking for OSG $OSG_GRID existence: PASS
+Checking for OSG $APP existence: PASS
+Checking for OSG $DATA existence: PASS
+Checking for OSG $TMP existence: PASS
+Checking for OSG $APP writability: PASS
+Checking for OSG $DATA writability: PASS
+Checking for OSG $TMP writability: PASS
+Checking for OSG $APP available space: 416.467 GB
+Checking for OSG $DATA available space: 416.467 GB
+Checking for OSG $TMP available space: 416.467 GB
+Checking for OSG additional site-specific variable definitions: YES
+Checking for OSG execution jobmanager(s): iut2-c122.iu.edu/jobmanager-condor
+Checking for OSG utility jobmanager(s): iut2-c122.iu.edu/jobmanager-condor
+Checking for OSG sponsoring VO: usatlas
+Checking for OSG policy expression: NONE
+Checking for OSG setup.sh: YES
+Checking for OSG $Monalisa_HOME definition: /opt/osg/MonaLisa
+Checking for MonALISA configuration: PASS
+  key ml_env vars:
+    FARM_NAME = iut2-c122.iu.edu
+    FARM_HOME = /opt/osg/MonaLisa/Service/VDTFarm
+    FARM_CONF_FILE = /opt/osg/MonaLisa/Service/VDTFarm/vdtFarm.conf
+    SHOULD_UPDATE = false
+    URL_LIST_UPDATE = http://monalisa.cacr.caltech.edu/FARM_ML,http://monalisa.cern.ch/MONALISA/FARM_ML
+  key ml_properties vars:
+    lia.Monitor.group = Test
+    lia.Monitor.useIPaddress = undef
+    MonaLisa.ContactEmail = root@iut2-c122.iu.edu
+Checking for a running MonALISA: NO
+  MonALISA does not appear to be running
+Checking for a running GANGLIA gmond daemon: NO
+  gmond does not appear to be running
+Checking for a running GANGLIA gmetad daemon: NO
+  gmetad does not appear to be running
+Checking for a running gsiftp server: YES; port 2811
+Checking gsiftp (local client, local host -> remote host): PASS
+Checking gsiftp (local client, remote host -> local host): PASS
+Checking that no differences exist between gsiftp'd files: PASS
+-------------------------------------------------------------------------------
+------------- End iut2-c122.iu.edu at Wed Jan 21 13:51:55 2009 GMT ------------
+-------------------------------------------------------------------------------
+===============================================================================
+Info: Site verification completed at Wed Jan 21 13:51:55 2009 GMT.
+</pre>
+
+---++  Testing your installation
+We will test your installation by checking to see whether it accepts grid jobs, gridftp requests, ws-gram job requests and that the rsv system checks are up and running.
+
+For these steps, you will need to  login to your user account which should have your grid cert and key in the =~/.globus= directory.  Before you start you will need to do the following:
+<pre class="screen">
+$ source  /opt/osg/setup.sh
+$ grid-proxy-init
+[sthapa@uct3-edge6 ~]$ grid-proxy-init
+Your identity: /DC=org/DC=doegrids/OU=People/CN=Suchandra Thapa 757586
+Enter GRID pass phrase for this identity:
+Creating proxy ...................................................... Done
+Your proxy is valid until: Wed Nov 12 23:21:53 2008
+</pre>
+
+----++++ Testing grid jobs
+Here we will test the grid job submission system.  You can do this using the following steps, where your.ce.hostname is replaced with the hostname of your install host:
+<pre class="screen">
+$ globus-job-run your.ce.hostname:2119/jobmanager /usr/bin/id
+</pre>
+
+You should get the uid and gids for the user account that your DN is mapped to.  In addition, you should be able to do this using a different job manager by specifying jobmanager-condor instead of jobmanager.
+
+---++++ Testing gridftp
+Gridftp is a system for transfering files between various grid aware systems.  You can test your system by following the steps below:
+ <pre class="screen">   
+$ echo "test file" > test.file
+$ globus-url-copy file:///$PWD/test.file gsiftp://your.ce.hostname/tmp/
+</pre>
+   * Once this is done, you should see a test.file in the /tmp on your ce
+<pre class="screen">
+$ globus-url-copy gsiftp://your.ce.hostname/tmp/test.file file:///$PWD/new.file
+</pre>
+   * Once this is done, you should have a file called new.file in your current directory
+
+---++++ Testing WS-GRAM
+Testing ws-gram is similar to testing the job grid submission:
+<pre class="screen">
+$ globusrun-ws -submit -Ft Fork -F your.ce.hostname:9443 -s -c /usr/bin/whoami=
+</pre>
+
+You should get the uid and gids for the user account that your DN is mapped to.  In addition, you should be able to do this using a different job manager by specifying Condor instead of Fork.
+
+---++++ Checking RSV
+RSV consists of a series of probes that run at varying intervals on your system to test your system's integrity and functionality. You can see the results of these probe tests by going to [[https://your.ce.hostname:8443/rsv/][https://your.ce.hostname:8443/rsv/]].
+
+----++++
+At this point your installation should be complete and operational. 
+
+
+Main.SarahWilliams - 20 Jan 2009 %BR%
+
+
+
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.SuchandraThapa - 9 Jul 2009 %BR%
+%REVIEW% Main.MarcoMambelli - 21 Jul 2009 %BR%
+%REVFLAG% %X% %BR%
+
+
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/HandsOn/centerpageborder.css
+       
+
+%META:FILEATTACHMENT{name="edg-mkgridmap.conf" attachment="edg-mkgridmap.conf" attr="h" comment="Example edg-mkgridmap.conf with OSG and OSGEDU only" date="1232546963" path="edg-mkgridmap.conf" size="4904" stream="edg-mkgridmap.conf" tmpFilename="/usr/tmp/CGItemp13797" user="SarahWilliams" version="1"}%

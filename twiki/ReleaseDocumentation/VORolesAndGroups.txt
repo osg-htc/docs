@@ -1,0 +1,57 @@
+%META:TOPICINFO{author="JamesBarlow" date="1272050855" format="1.1" version="1.8"}%
+%META:TOPICPARENT{name="AdminDocVO"}%
+---+ How Fine-Grained Authorization is Implemented using VO-defined Roles and Groups
+%TOC%
+---++Introduction
+The concepts of _groups_ and _roles_ are associated with the [[http://computing.fnal.gov/docs/products/voprivilege/][VO Privilege Project]], which seeks to implement finer-grained authorization for access to grid-enabled resources and services in order to improve user account assignment and management at grid sites, and reduce the associated administrative overhead.
+
+This figure introduces you to the VO Privilege project components, which are involved in implementing fine-grained authorization.  This shows the workflow, and superposed on that is a (purple) identifier for each component showing its full name. %BR%
+
+     <img src="%ATTACHURLPATH%/voprivilege_ce_se.gif" alt="voprivilege_ce_se.gif" width='665' height='469' />
+
+---++ About Groups and Roles
+A *group* is a VO-defined organizational entity which refers to a subdivision of the VO's overall project, and to which some subset of the VO's members are assigned, according to their responsibilities in the project (e.g., subproject affiliation).  A recommended way for a VO to organize groups is hierarchically, starting with a single VO-wide root group to which all members get assigned. There would then be next-level-down parent groups forming the top of each suggroup hierarchy. A member assigned to a given group (somewhere down in the hierarchy) would be granted membership in all parent groups.
+
+Some VO members (even those in the same group) will inevitably require greater privileges than others. This differentiation is accomplished via *roles* that correspond to particular computing privileges  (e.g., admin, "super-user", standard user, and so on).  
+
+---++ Implementation
+Each VO defines its own set of groups and roles. Then it may set varying policies for different groups and roles in order to limit which tasks the users can perform and with what priorities, on an access-by-access basis.  A user may be assigned to multiple groups and to multiple roles.
+
+When submitting a job, a user chooses an appropriate group/role combination from those assigned to him/her, according to the activity to be performed. The user is charged with enabling only those rights needed for the job, following the least privilege access principle. VOMS dynamically adds these attributes to a user's proxy certificate so that this information is available to the site at which the job will be run. A piece of software known as GUMS is installed at the site, and it maps users to local accounts. The site's computing and storage resources are thus able to intelligently enforce priorities and data access rights set at the VO level and to identify users (and stop their activities as needed), while also adhering to their own site-specific security requirements.
+
+---
+Above content adapted from:
+
+   * [[http://computing.fnal.gov/docs/products/vomrs/vomrs1_3/wwhelp/wwhimpl/js/html/wwhelp.htm][VOMRS manual version 1_3]]
+   * [[http://computing.fnal.gov/docs/products/voprivilege/documents/motivation-2005-01-14.pdf][Motivation and Overview (of) U.S. CMS and U.S. ATLAS Privilege Project]]
+---
+<!--
+More information found later in [[http://osg-docdb.opensciencegrid.org/0002/000288/001/Multi-VOs_Multi-Sites_OpenScienceGrid_Approach_GGF-15.pdf][Abishek's talk Oct 05]].  I still have to integrate it into text.
+
+VO defines Roles and associated privileges by specifying expected functionality.
+      * E.g. cmssoft may install software in area that is read-only by all cmsgrid user jobs running on site/campus.
+      *  E.g. cmssvc may deploy DB cache available to all cmsgrid user jobs running on site/campus.
+   * Site maps VO scope identities to local scope identities.
+      * Site wide management of mapping.
+      * Service level granularity of mapping.
+   * Site enforces VO privilege policies within local scope identities.
+   * Authorization = !(Site-vetoed) && (VO-allowed)
+
+
+   * VO-Global specification of privilege requirements per role.
+      * Means to do so are lacking today!
+      * Making progress.
+   * Site central mapping of role to implementation of privilege requirements.
+      * Simple solutions in production usage.
+   * Local enforcement of privilege requirements.
+      * Simple solutions in production usage.
+      * Moving forward to designing more advanced solutions.
+-->
+
+| *[[Documentation/WebHome][Return to documentation hub]]* |
+
+-- Main.AnneHeavey - 20 Sep 2006
+
+
+%META:FILEATTACHMENT{name="voprivilege_ce_se.gif" attachment="voprivilege_ce_se.gif" attr="" comment="VO Privilege components" date="1158787382" path="voprivilege_ce_se.gif" size="37508" stream="voprivilege_ce_se.gif" user="Main.AnneHeavey" version="1"}%
+%META:TOPICMOVED{by="JamesBarlow" date="1272050855" from="Documentation.VORolesAndGroups" to="ReleaseDocumentation.VORolesAndGroups"}%

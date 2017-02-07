@@ -1,0 +1,71 @@
+%META:TOPICINFO{author="KyleGross" date="1476803221" format="1.1" version="1.15"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+
+
+---++ News & updates
+
+<table width="100%" border="2"> <tbody><tr> 
+
+<td valign="top">
+
+|  %MAROON% *Production OSG* %ENDCOLOR%   |   *Releases and updates*   |
+| 2011-02-07 | OSG 1.2.17 has been released! [[OSG12UpdateInstructions][Update Instructions]]  and [[OSG1217ReleaseNotice][Release Notes]]. |
+| 2010-11-30 | OSG 1.2.16 has been released! [[OSG12UpdateInstructions][Update Instructions]]  and [[OSG1216ReleaseNotice][Release Notes]]. |
+| 2010-10-19 | OSG 1.2.15 has been released! [[OSG12UpdateInstructions][Update Instructions]]  and [[OSG1215ReleaseNotice][Release Notes]]. |
+| 2010-10-05 | OSG 1.2.14 has been released! [[OSG12UpdateInstructions][Update Instructions]]  and [[OSG1214ReleaseNotice][Release Notes]]. |
+| 2010-08-26 | OSG 1.2.13 has been released! [[OSG12UpdateInstructions][Update Instructions]]  and [[OSG1213ReleaseNotice][Release Notes]]. |
+| 2010-08-10 | OSG 1.2.12 has been released! [[OSG12UpdateInstructions][Update Instructions]]  and [[OSG1212ReleaseNotice][Release Notes]]. |
+| 2010-07-01 | OSG 1.2.11 has been released! [[OSG12UpdateInstructions][Update Instructions]]  and [[OSG1211ReleaseNotice][Release Notes]]. |
+| 2010-06-10 | OSG 1.2.10 has been released! [[OSG12UpdateInstructions][Update Instructions]]  and [[OSG1210ReleaseNotice][Release Notes]]. |
+| 2010-04-22 | OSG 1.2.9 has been released! [[OSG12UpdateInstructions][Update Instructions]]  and [[OSG129ReleaseNotice][Release Notes]]. |
+| 2010-03-31   | OSG 1.0.6 has been released!  This is a security update for all OSG installations using Gratia probes.   [[OSG106UpdateInstructions][Update instructions]] and [[OSG106ReleaseNotice][Release Notice]]. |
+| 2010-03-31 | Testing for OSG 1.0.6 completed |
+| 2010-03-18  | Testing for the OSG 1.0.6 release started |
+| 2010-03-17   | OSG 1.2.8 has been released!  This is a security update for all OSG installations using Gratia probes.  [[OSG128UpdateInstructions][Update instructions]] and [[OSG128ReleaseNotice][Release Notice]]. |
+| 2010-03-08   | OSG 1.2.7 released<br>[[OSG12UpdateInstructions][Update instructions]]<br>[[OSG127ReleaseNotice][Release Notice]] |
+| 2010-01-28   | OSG 1.2.6 released<br>[[OSG12UpdateInstructions][Update instructions]]<br>[[OSG126ReleaseNotice][Release Notice]] |
+| 2010-01-08   | OSG 1.2.5 released<br>[[OSG12UpdateInstructions][Update instructions]]<br>[[OSG125ReleaseNotice][Release Notice]] |
+| 2009-11-17   | OSG 1.2.4 released<br>[[OSG12UpdateInstructions][Update instructions]]<br>[[OSG124ReleaseNotice][Release Notice]] |
+| 2009-09-22   | OSG 1.2.3 released<br>[[OSG12UpdateInstructions][Update instructions]] |
+| 2009-09-16   | OSG 1.2.2 released<br>[[OSG12UpdateInstructions][Update instructions]] |
+| 2009-08-28   | OSG 1.0.5 released<br>[[OSG105UpdateInstructions][Update instructions]] |
+| 2009-08-24   | OSG 1.2.1 released<br>[[OSG12UpdateInstructions][Update instructions]] |
+| 2009-07-27   | [[OSG12Overview][OSG 1.2]] released   |
+
+</td> 
+
+<td valign="top">
+
+| %MAROON% *Trash/Trash/Integration Testbed* %ENDCOLOR% | *ITB activities*  |
+| 2010-03-10  | OSG Trash/Trash/Integration Testbed 1.1.19 has been released.  [[Trash/Trash/Integration.ITB1119Documentation][Release Notes]].  This test will form the basis of the OSG 1.2.8 release.  |
+| 2010-02-11  | [[Trash/Trash/Integration.ITB1118Documentation][ITB 1.1.18 released]] |
+| 2009-12-14  | ITB 1.1.16 released |
+| 2009-12-08  | VTB/ITB cycle for OSG 1.2.5 started |
+| 2009-11-17  | ITB cycle concluded |
+| 2009-11-13  | ITB-1.1.14 released |
+| 2009-11-05  | ITB-1.1.13 released |
+| 2009-10-21  | ITB-1.1.12 released |
+| 2009-10-21  | ITB testing started |
+| 2009-07-24  | ITB cycle concluded |
+| 2009-07-17  | ITB-1.1.6 released |
+| 2009-07-09  | Validation page relocated [[SiteValidationOSG12][here]] for this release. |
+| 2009-06-08  | ITB testing underway for OSG 1.2.  Documentation changes related to OSG 1.2 release should be noted. See [[SoftwareTools.OSG12Plan][OSG 1.2 Plan]] for current release schedule. |
+
+</tr>
+
+</tbody>
+</table>
+
+
+|   **   |   **   |
+|  2009-06-18  | [[http://osggoc.blogspot.com/2009/06/vdt-1101y-released.html][OSG 1.0.4 (VDT 1.10.1y)]] released |
+| 2009-06-09 | OSG 1.0.3 (VDT 1.10.1x) released |
+| 2009-06-05 | [[http://osggoc.blogspot.com/2009/06/vdt-1101w-released.html][OSG 1.0.2 (VDT 1.10.1w)]] released.  The minor version of the release number will be incremented with each VDT letter update in order to avoid having OSG releases that may have the same version but vary due to VDT updates |
+| 2009-04-27 | [[http://integrationcloud.campfirenow.com][Campfire chat]]  support is available, see Trash/Trash/SiteCoordination.ChatCalendar. |  
+| 2009-04-27 | OSG 1.0.1  released. See [[ReleaseNotes][Release Notes]] and Trash.ReleaseDocumentationWhyUpgrade for new features in this release.  A automated update mechanism to an existing OSG 1.0.0 compute element is possible with this release, see  [[Trash.ReleaseDocumentationUpdateInstructions][Update Instructions]].  A few OSG 1.0.0 test compute elements have been correctly updated with this new method. *The updater method should be considered  _beta_ status*.     |
+
+
+%BR%
+
+%META:TOPICMOVED{by="RobGardner" date="1253738513" from="ReleaseDocumentation.OlderReleaseNews" to="ReleaseDocumentation.PriorReleaseNews"}%

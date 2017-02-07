@@ -1,0 +1,100 @@
+%META:TOPICINFO{author="KyleGross" date="1481047987" format="1.1" version="1.22"}%
+%META:TOPICPARENT{name="Security.WebHome"}%
+---+ *Incident Discovery and Reporting*
+%DOC_STATUS_TABLE%
+%TOC%
+
+---++ About This Document
+This document describes the process of reporting a security incident to the OSG Security Team.
+
+---++ Reporting a problem
+If you suspect a security problem, please *report it immediately*. 
+
+Also do NOT forget to report security incidents to your *local/home organization's* incident response team.
+
+Please promptly report security incidents involving OSG resources using any of the following methods. The phone and email address is monitored 24*7:
+   * [[https://ticket.grid.iu.edu/goc/security][Submit a Ticket]]
+   * Call the Grid Operations Center (GOC) at +1 317-278-9699. 
+   * Send email to security@opensciencegrid.org. If you would like to submit encrypted information, see ReleaseDocumentation.SecureEmail for instructions.
+
+Please include the following information in your report:
+
+   * Your name: 
+   * Your email address: 
+   * Your phone number: 
+   * An alternate number such as a cell phone:
+   * What is your affiliation with the OSG? Which Virtual Organization are you a member of?  
+   * Did this incident occur on a Site machine or on a VO machine or on your personal computer? Please provide detailed information (names, IPs, URLs, etc.) if you have
+   * Do you think your your grid identity (certificate and/or proxy) compromised?
+   * A description of the incident, including time(s), systems and user accounts involved, and any related event () 
+   * Any additional comments or questions you have 
+
+
+Thank you for reporting security incidents promptly.
+
+---++ What to Do After an Incident is Reported
+
+After reporting an incident, follow [[ReleaseDocumentation.IncidentFirstSteps][the first steps for dealing with an incident]].
+
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesBarlow
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MineAltunay
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
+
+%META:TOPICMOVED{by="JamesBarlow" date="1274286192" from="Security.IncidentDiscoveryReporting" to="ReleaseDocumentation.IncidentDiscoveryReporting"}%

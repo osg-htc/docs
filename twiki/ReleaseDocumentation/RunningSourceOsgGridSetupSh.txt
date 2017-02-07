@@ -1,0 +1,158 @@
+%META:TOPICINFO{author="KyleGross" date="1481047990" format="1.1" version="1.8"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++Introduction
+The following environment variables are added to all OSG jobs, either fork or 
+batch-system specific, by the JobManager.  It reads the file $VDT_LOCATION/osg-job-environment.conf
+which is a subset of the osg-attributes.conf, and sets all the environment variables.  From VDT 1.8.1 
+and onward, the GLOBUS_LOCATION is correctly set in the job environment to be the GLOBUS_LOCATION
+that is visible on the worker node (which can be and often is different from the GLOBUS_LOCATION
+found on the CE install.)
+<pre class="screen">
+OSG_LOCATION="/usr/local/vdt-1.8.1"
+GLOBUS_LOCATION="/usr/local/vdt-1.8.1/globus"
+OSG_SITE_NAME="FNAL_GPFARM"
+GRID3_SITE_NAME="FNAL_GPFARM"
+OSG_HOSTNAME="fngp-osg.fnal.gov"
+OSG_GRID="/usr/local/grid"
+GRID3_BASE_DIR="/usr/local/vdt-1.8.1"
+OSG_APP="/grid/app"
+GRID3_APP_DIR="/grid/app"
+OSG_DATA="/grid/data"
+GRID3_DATA_DIR="/grid/data"
+GRID3_TMP_DIR="/grid/data"
+OSG_WN_TMP="/local/stage1"
+GRID3_TMP_WN_DIR="/local/stage1"
+OSG_STORAGE_ELEMENT="y"
+OSG_DEFAULT_SE="fndca1.fnal.gov"
+OSG_SITE_READ="dcap://fndca1.fnal.gov:24525//pnfs/fnal.gov/usr/fermigrid/volatil
+e"
+OSG_SITE_WRITE="srm://fndca1.fnal.gov:8443//pnfs/fnal.gov/usr/fermigrid/volatile
+/"
+OSG_SQUID_LOCATION="squid.fnal.gov"
+OSG_JOB_CONTACT="fngp-osg.fnal.gov/jobmanager-condor"
+OSG_GLEXEC_LOCATION="/opt/glite/sbin/glexec"
+</pre>
+
+---++ Running =source $OSG_GRID/setup.sh= : The First Job of Any Job
+
+The first command any job should execute after it is started in a batch slot at an OSG site is:
+
+<pre class="screen">
+$ <b>source $OSG_GRID/setup.sh</b>
+</pre>
+=setup.sh= sets up several environment variables and configures certain client tools, such as srmcp, and adds them to the job's path. 
+These environment variables include:
+<pre class="screen">
+PAC_ANCHOR=/usr/local/grid
+VOMS_USERCONF=/usr/local/grid/glite/etc/vomses
+GLOBUS_PATH=/usr/local/grid/globus
+GLOBUS_LOCATION=/usr/local/vdt-1.8.1/globus
+GLITE_LOCATION=/usr/local/grid/glite
+PEGASUS_HOME=/usr/local/grid/pegasus
+PACMAN_LOCATION=/usr/local/pacman-3.21
+PATH=/usr/local/grid/prima/bin:/usr/local/grid/glite/sbin:/usr/local/grid/glite/bin:/usr/local/grid/dccp/bin:/usr/local/grid/srm-v1-client/sbin:/usr/local/grid/srm-v1-client/bin:/usr/local/grid/curl/bin:/usr/local/grid/wget/bin:/usr/local/grid/logrotate/sbin:/usr/local/grid/ant/bin:/usr/local/grid/jdk1.5/bin:/usr/local/grid/gpt/sbin:/usr/local/grid/globus/bin:/usr/local/grid/globus/sbin:/usr/local/pacman-3.21/src:/usr/local/grid/vdt/sbin:/usr/local/grid/vdt/bin:/usr/krb5/sbin:/usr/krb5/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/opt/condor/bin:/opt/condor/sbin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/X11R6/bin:/root/bin
+LD_LIBRARY_PATH=/usr/local/grid/glexec-osg/lib:/usr/local/grid/prima/lib:/usr/local/grid/glite/lib:/usr/local/grid/curl/lib:/usr/local/grid/jdk1.5/jre/lib/i386:/usr/local/grid/jdk1.5/jre/lib/i386/server:/usr/local/grid/jdk1.5/jre/lib/i386/client:/usr/local/grid/globus/lib:/usr/local/grid/berkeley-db/lib:/usr/local/grid/expat/lib:
+
+</pre>
+
+See the [[ComputeElementInstall][CE Install Guide]] and [[LocalStorageConfiguration][Local Storage Configuration]] for more information. 
+
+
+---++ Sample Output
+The following is output from a test run of a job with the scripts configured correctly:
+<pre class="screen">
+[timm@fngp-osg ~]$ globus-job-run fgitb-gk/jobmanager-condor /usr/bin/printenv
+_CONDOR_ANCESTOR_28668=28669:1190819791:495265920
+_CONDOR_ANCESTOR_28669=25909:1195590358:2044699779
+_CONDOR_ANCESTOR_25909=25915:1195590361:2072113792
+HOME=/grid/home/fnalgrid
+OSG_WN_TMP=/local/stage1
+OSG_DATA=/grid/data
+LD_LIBRARY_PATH=/usr/local/vdt-1.8.1/apache/lib:/usr/local/vdt-1.8.1/MonaLisa/Service/VDTFarm/pgsql/lib:/usr/local/vdt-1.8.1/glite/lib:/usr/local/vdt-1.8.1/prima/lib:/usr/local/vdt-1.8.1/mysql/lib/mysql:/usr/local/vdt-1.8.1/jdk1.5/jre/lib/i386:/usr/local/vdt-1.8.1/jdk1.5/jre/lib/i386/server:/usr/local/vdt-1.8.1/jdk1.5/jre/lib/i386/client:/usr/local/vdt-1.8.1/berkeley-db/lib:/usr/local/vdt-1.8.1/expat/lib:/usr/local/vdt-1.8.1/globus/lib:
+GRID3_SITE_NAME=FNAL_FERMIGRID_ITB
+GRID3_TMP_WN_DIR=/local/stage1
+GRID3_TMP_DIR=/grid/data
+OSG_LOCATION=/usr/local/vdt-1.8.1
+OSG_HOSTNAME=fgitb-gk.fnal.gov
+OSG_STORAGE_ELEMENT=y
+OSG_JOB_CONTACT=fgitb-gk.fnal.gov/jobmanager-condor
+OSG_APP=/grid/app
+GRID3_DATA_DIR=/grid/data
+GRID3_BASE_DIR=/usr/local/vdt-1.8.1
+OSG_DEFAULT_SE=FNAL_FAPL_ITB_SE
+OSG_GRID=/usr/local/grid
+LOGNAME=fnalgrid
+OSG_SQUID_LOCATION=fermigrid4.fnal.gov
+GLOBUS_GRAM_JOB_CONTACT=https://fgitb-gk.fnal.gov:49005/11503/1195590354/
+GLOBUS_LOCATION=/usr/local/grid/globus
+OSG_SITE_NAME=FNAL_FERMIGRID_ITB
+GLOBUS_GRAM_MYJOB_CONTACT=URLx-nexus://fgitb-gk.fnal.gov:49006/
+OSG_SITE_WRITE=srm://fapl032.fnal.gov:8443
+GRID3_APP_DIR=/grid/app
+X509_USER_PROXY=/grid/home/fnalgrid/.globus/job/fgitb-gk.fnal.gov/11503.1195590354/x509_up
+OSG_SITE_READ=dcap://fapl035.fnal.gov:24525
+_CONDOR_SCRATCH_DIR=/local/stage1/condor/execute/dir_25909
+_CONDOR_SLOT=1
+_CONDOR_HIGHPORT=65535
+_CONDOR_LOWPORT=61440
+</pre>
+%STOPINCLUDE%
+%BR%
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = StevenTimm
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Integration
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = Documenter
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %NO%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->

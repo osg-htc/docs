@@ -1,0 +1,43 @@
+%META:TOPICINFO{author="HorstSeverini" date="1213663088" format="1.1" version="1.4"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+An introduction to the modified Grid3 model.
+
+%EDITTHIS%
+%BR%
+
+---++ Modified Grid3 model
+This model takes the Grid3 model and splits the [[StorageParameterOsgData][$OSG_DATA]] into [[StorageParameterOsgSiteRead][$OSG_SITE_READ]] and [[StorageParameterOsgSiteWrite][$OSG_SITE_WRITE]] directories.
+   * [[StorageParameterOsgGrid][$OSG_GRID]]
+   * [[StorageParameterOsgApp][$OSG_APP]]
+   * [[StorageParameterOsgSiteRead][$OSG_SITE_READ]]
+   * [[StorageParameterOsgSiteWrite][$OSG_SITE_WRITE]]
+   * [[StorageParameterOsgWnTmp][$OSG_WN_TMP]]
+Please note that in this model the [[StorageParameterOsgSiteWrite][$OSG_SITE_WRITE]] and  [[StorageParameterOsgSiteRead][$OSG_SITE_READ]], provide write access and read access to the same logical file system.  The separation is made so that different access methods optimized for write or read access can be used for each operation.
+
+A dataflow example may be:
+   * Site administrator's intervention or external transfer 
+   * =srmcp=: $OSG_SITE_READ  &rarr;  $OSG_WN_TMP 
+   * Job execution 
+   * =dccp=: $OSG_WN_TMP  &rarr;  $OSG_SITE_WRITE 
+   * External stage-out
+
+---++ Example setup
+Here is an example configuration for this model:
+   * OSG_GRID = /share/wn
+   * OSG_APP = /share/osg/app
+   * OSG_SITE_READ = /share/osg/data
+   * OSG_SITE_WRITE = /share/osg/data
+   * OSG_WN_TMP = /scratch
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE3% %BR%
+%RESPONSIBLE% Main.SuchandraThapa - 08 Nov 2007 %BR%
+%REVIEW% Main.HorstSeverini - 16 Jun 2008 %BR%
+
+%REVFLAG% %Y% %BR%

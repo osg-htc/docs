@@ -1,0 +1,258 @@
+%META:TOPICINFO{author="KyleGross" date="1481047984" format="1.1" version="1.59"}%
+%META:TOPICPARENT{name="ComputeElementPostInstall"}%
+%DOC_STATUS_TABLE%
+
+
+---+ !!OSG Services and Firewalls
+%TOC{}%
+
+
+%STARTINCLUDE%
+
+---+ About this Document
+<!-- some useful variable definistion
+   * Local UCL_HOST = ce
+   * Local UCL_CWD  = /opt/osg-%VERSION%
+-->
+
+%ICON{hand}% This document is for System Administrators. A brief description of services provided by a %LINK_GLOSSARY_CE% and %LINK_GLOSSARY_SE% will be given, followed by recommendations how to adjust the firewall for their correct operation. [[ClientInstallationGuide][OSG Client]] installations only have to worry about the =GLOBUS_TCP_PORT_RANGE= and =GLOBUS_TCP_SOURCE_RANGE=.
+
+---+ Introduction
+
+Network traffic may be blocked by a [[http://en.wikipedia.org/wiki/Firewall_%28networking%29][firewall]] for inbound and outbound traffic in dependence on host- and domain names, IP addresses, port numbers and protocols. In this document we distinguish between two types of firewalls:
+
+   1 network firewalls administrated centrally and typically outside of your administrative domain
+   1 host-based firewalls within your administrative domain
+
+The protocol and port requirements for a %LINK_GLOSSARY_CE% and %LINK_GLOSSARY_SE% are listed below. Please provide them to the administrator of a _network firewall_ potentially blocking network traffic to your host. Next, follow the instructions to adjust the firewall settings on your host-based firewall.
+
+---+ Requirements
+
+   1 be familiar with your institute's network policy and firewall configuration
+   1 _root_ access is required to configure a host-based firewall using =iptables=
+
+---+ Compute Element Services and Firewall Requirements
+
+| *Service Name*  | *Protocol* | *Port Number* | *Inbound* | *Outbound* | *Comment*  |
+| %LINK_GLOSSARY_GRAM%  |  tcp  |  2119  |  %ICON{choice-yes}%  | | |
+| %LINK_GLOSSARY_GRAM% callback  |  tcp  | =GLOBUS_TCP_PORT_RANGE= |  %ICON{choice-yes}%  | | contiguous range of ports (8*number of job slots) |
+| %LINK_GLOSSARY_GRAM% callback  |  tcp  | =GLOBUS_TCP_SOURCE_RANGE= | |  %ICON{choice-yes}%  | contiguous range of ports  |
+| %LINK_GLOSSARY_GRAM_WS%  |  tcp  |  9443  |  %ICON{choice-yes}%  |  %ICON{choice-yes}%  | |
+| %LINK_GLOSSARY_GRIDFTP%  |  tcp  |  2811  |  %ICON{choice-yes}%  | | service !GridFTP on the CE |
+| Monalisa  |  udp  |  9000  |  %ICON{choice-yes}%  | | for ABping, see =$VDT_LOCATION/MonaLisa/Service/VDTFarm/ml.properties=  |
+
+---+ Storage Element Services and Firewall Requirements
+
+| *Service Name*  | *Protocol* | *Port Number* | *Inbound* | *Outbound* | *Comment*  |
+| %LINK_GLOSSARY_GRIDFTP%  |  tcp  |  2811  |  %ICON{choice-yes}%  | | |
+| %LINK_GLOSSARY_GRAM% callback  |  tcp  | =GLOBUS_TCP_PORT_RANGE= |  %ICON{choice-yes}%  | | contiguous range of ports  |
+| %LINK_GLOSSARY_GRAM% callback  |  tcp  | =GLOBUS_TCP_SOURCE_RANGE= | |  %ICON{choice-yes}%  | contiguous range of ports  |
+| %LINK_GLOSSARY_SRM%  |  tcp  |  8080  |  %ICON{choice-yes}%  | |  |
+| %LINK_GLOSSARY_SRM%  |  tcp  |  8443  |  %ICON{choice-yes}%  | |  |
+
+---+ Other Optional Services and Firewall Requirements
+
+You may need to open the following _required_ inbound ports for listed _optional_ services. 
+
+| *Service Name*  | *Protocol* | *Port Number* | *Inbound* | *Outbound* | *Comment*  |
+| MDS  |  tcp  |  2135  |  %ICON{choice-yes}%  | | obsolete |
+| GIIS  |  tcp  |  2136  |  %ICON{choice-yes}%  | | obsolete |
+| GSISSH  |  tcp  |  22 or 2222  |  %ICON{choice-yes}%  | | |
+| !MyProxy  |  tcp  |  7512  |  %ICON{choice-yes}%  | | |
+| GUMS  |  tcp  |  8443  |  %ICON{choice-yes}%  | | |
+| VOMS  |  tcp  |  15001+  |  %ICON{choice-yes}%  | | range of ports, increment by 1 for each VO supported  |
+| RLS  |  tcp  |  39281  |  %ICON{choice-yes}%  | | |
+| Squid  |  tcp  |  3128  |  %ICON{choice-yes}%  | | |
+
+---+ Host-based Firewall Configuration
+
+The default firewall configuration for !RedHat's iptables defines a stateful packet filter; no ports that are not explicitly opened by =iptables= will be open. This includes high numbered ports that are often used by grid services. 
+
+If your preference is to leave as much of the stateful packet filtering in place but enable just those grid services you want to deploy, then you can use the following instructions. On RHEL or similar systems the firewall is configured using the =/etc/sysconfig/iptables= file:
+
+<pre class="file">
+# GLOBUS_TCP_PORT_RANGE
+-A RH-Firewall-1-INPUT  -m state --state NEW -p tcp -m tcp --dport %RED%&lt;begin port&gt;%ENDCOLOR%:%RED%&lt;end port&gt;%ENDCOLOR% -j ACCEPT
+# Monalisa, grabs 3 ports from the following range
+-A RH-Firewall-1-INPUT  -m state --state NEW -p tcp -m tcp --dport 9000:9010 -j ACCEPT
+-A RH-Firewall-1-INPUT  -m state --state NEW -p udp -m udp --dport 9000 -j ACCEPT
+# GRAM
+-A RH-Firewall-1-INPUT  -m state --state NEW -p tcp -m tcp --dport 2119 -j ACCEPT
+# Gridftp
+-A RH-Firewall-1-INPUT  -m state --state NEW -p tcp -m tcp --dport 2811 -j ACCEPT
+# Optional Services
+# RLS Server
+-A RH-Firewall-1-INPUT  -m state --state NEW -p tcp -m tcp --dport 39281 -j ACCEPT
+# MyProxy
+-A RH-Firewall-1-INPUT  -m state --state NEW -p tcp -m tcp --dport 7512 -j ACCEPT
+# GSISSH/SSH
+-A RH-Firewall-1-INPUT  -m state --state NEW -p tcp -m tcp --dport 22 -j ACCEPT
+# MDS
+-A RH-Firewall-1-INPUT  -m state --state NEW -p tcp -m tcp --dport 2135 -j ACCEPT
+# GIIS
+-A RH-Firewall-1-INPUT  -m state --state NEW -p tcp -m tcp --dport 2136 -j ACCEPT
+# GUMS/VOMS
+-A RH-Firewall-1-INPUT  -m state --state NEW -p tcp -m tcp --dport 8443 -j ACCEPT
+# WebServices
+-A RH-Firewall-1-INPUT  -m state --state NEW -p tcp -m tcp --dport 9443 -j ACCEPT
+</pre>
+
+%NOTE% Please open the range of [[ReleaseDocumentation/ComputeElementInstall#Define_Globus_Port_Ranges][Globus Ports]] according to your Compute Element configuration. Also, if you are using a *Scientific Linux* variant (*SL*, *SLF*, or *SLC*), then you may have to change =RH-Firewall-1-INPUT= above to =INPUT=. Just model the rules after the ones already existing in your =iptables= file.
+
+Finally restart the firewall as the _root_ user for changes to take effect:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /etc/rc.d/init.d/iptables restart
+  Flushing firewall rules:                                   [  OK  ]
+  Setting chains to policy ACCEPT: filter                    [  OK  ]
+  Unloading iptables modules:                                [  OK  ]
+  Applying iptables firewall rules:                          [  OK  ]
+
+%UCL_PROMPT_ROOT% /etc/rc.d/init.d/xinetd reload
+  Reloading configuration:                                   [  OK  ] 
+</pre>
+
+---+ Stateful Firewalls
+
+A [[http://en.wikipedia.org/wiki/Stateful_firewall][Stateful Firewall]] keeps track of the state of network connections. If a TCP connection is closed unexpectedly a stateful firewall will not know that it has been closed. In this case the operating system may allow programs to reuse the port number, but the firewall will not.
+
+To avoid using the same ports too quickly, and hopefully avoid the situation where a stateful firewall will not allow a port to be reused. The %LINK_GLOBUS_TOOLKIT% keeps a record of TCP ports using two files which are defined by two environment variables.
+
+%STARTSECTION{"VDT_CONFIG"}%
+The two variables are defined in =%UCL_CWD%/vdt/etc/vdt-local-setup.sh= for the Bourne Shell:
+
+<pre class="file">
+# This file is sourced by setup.sh.  Use it for any custom setup for this site.
+# This file will be preserved across VDT installations if OLD_VDT_LOCATION is set.
+
+# Set GLOBUS_TCP_PORT_RANGE to define communication ports for inbound connections.
+export GLOBUS_TCP_PORT_RANGE=%RED%&lt;begin port&gt;%ENDCOLOR%,%RED%&lt;end port&gt;%ENDCOLOR%
+
+# Set GLOBUS_TCP_SOURCE_RANGE to define communication ports for outbound connections.
+export GLOBUS_TCP_SOURCE_RANGE=%RED%&lt;begin port&gt;%ENDCOLOR%,%RED%&lt;end port&gt;%ENDCOLOR%
+
+# Set GLOBUS_TCP_PORT_RANGE_STATE_FILE to the location where Globus should record
+# TCP port usage for outbound connections in case of a %RED%stateful firewall%ENDCOLOR%.
+export GLOBUS_TCP_PORT_RANGE_STATE_FILE=%RED%&lt;location on file system&gt;%ENDCOLOR%
+
+# Set GLOBUS_TCP_SOURCE_RANGE_STATE_FILE to the location where Globus should record
+# TCP port usage for inbound connections in case of a %RED%stateful firewall%ENDCOLOR%.
+export GLOBUS_TCP_SOURCE_RANGE_STATE_FILE=%RED%&lt;location on file system&gt;%ENDCOLOR%
+</pre>
+
+and for the TC Shell in =%UCL_CWD%/vdt/etc/vdt-local-setup.csh= :
+
+<pre class="file">
+# This file is sourced by setup.sh.  Use it for any custom setup for this site.
+# This file will be preserved across VDT installations if OLD_VDT_LOCATION is set.
+
+# Set GLOBUS_TCP_PORT_RANGE to define communication ports for inbound connections.
+setenv GLOBUS_TCP_PORT_RANGE %RED%&lt;begin port&gt;%ENDCOLOR%,%RED%&lt;end port&gt;%ENDCOLOR%
+
+# Set GLOBUS_TCP_SOURCE_RANGE to define communication ports for outbound connections.
+setenv GLOBUS_TCP_SOURCE_RANGE %RED%&lt;begin port&gt;%ENDCOLOR%,%RED%&lt;end port&gt;%ENDCOLOR%
+
+# Set GLOBUS_TCP_PORT_RANGE_STATE_FILE to the location where Globus should record
+# TCP port usage for outbound connections in case of a %RED%stateful firewall%ENDCOLOR%.
+setenv GLOBUS_TCP_PORT_RANGE_STATE_FILE %RED%&lt;location on file system&gt;%ENDCOLOR%
+
+# Set GLOBUS_TCP_SOURCE_RANGE_STATE_FILE to the location where Globus should record
+# TCP port usage for inbound connections in case of a %RED%stateful firewall%ENDCOLOR%.
+setenv GLOBUS_TCP_SOURCE_RANGE_STATE_FILE %RED%&lt;location on file system&gt;%ENDCOLOR%
+</pre>
+%ENDSECTION{"VDT_CONFIG"}%
+
+---+ Additional Steps for Scientific Linux
+
+Scientific Linux uses =/etc/hosts.deny= to block all connections requests. Please add following lines to =/etc/hosts.allow= to open access to %LINK_GLOSSARY_GRIDFTP% and %LINK_GLOSSARY_GRAM%:
+
+<pre class="file">
+  %UCL_CWD%/vdt/services/vdt-run-gsiftp.sh : ALL
+  %UCL_CWD%/vdt/services/vdt-run-globus-gatekeeper.sh : ALL
+</pre>
+
+---+ Testing and Monitoring
+
+Use =telnet= to check whether the ports required are accessible on your %LINK_GLOSSARY_CE% or %LINK_GLOSSARY_SE% by trying to connect to the respective TCP port from the outside:
+
+<pre class="screen">
+%UCL_PROMPT% telnet &lt;the FQDN of the CE or SE&gt; &lt;port number to check&gt;
+</pre>
+
+The port is accessible if you get a response. Otherwise =telnet= will hang or report a _no route to host_ error.
+
+If you configured =iptables= to log events, you should be able to see blocked events by inspecting =/var/log/messages=.
+
+---+ References
+
+   1 [[http://www.globus.org/toolkit/security/firewalls/][Globus Firewall Settings]]
+   1 [[http://www.cs.wisc.edu/condor/manual/v6.8.6/3_7Networking.html#SECTION00471000000000000000][Condor Firewall Settings]]
+   1 [[http://en.wikipedia.org/wiki/Firewall_%28networking%29][Wikipedia Article on Firewalls]]
+   1 [[http://en.wikipedia.org/wiki/Iptables][Wikipedia Article on IPTables]]
+   1 [[http://en.wikipedia.org/wiki/Stateful_firewall][Wikipedia Article on Stateful Firewalls]]
+   
+%STOPINCLUDE%
+
+---+ *Comments*
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = HorstSeverini
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY   = %YES%
+
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = SuchandraThapa
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = SuchandraThapa
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+
+
+############################################################################################################
+-->
+
+%META:TOPICMOVED{by="RobGardner" date="1192750453" from="Integration/ITB_0_7.ComputeElementFireWalls" to="Integration/ITB_0_7.ComputeElementFirewalls"}%

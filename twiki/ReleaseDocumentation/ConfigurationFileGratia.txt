@@ -1,0 +1,32 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1261171197" format="1.1" reprev="1.1" version="1.1"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+%STARTINCLUDE%
+%BR%
+---+ _%INCLUDEHEADING%  %SPACEOUT{ "%TOPIC%" }%_
+%EDITTHIS%
+%BR%
+
+---++ Introduction
+%NOTE% This only applies to OSG 1.2 or later
+
+This section gives information on the gratia settings and probes.
+
+---++ Options
+
+| Option | Values Accepted | Explanation |
+| *enabled* | =True= , =False= | This should be set to True if gratia should be configured and enabled on the installation being configured |
+| *resource* | String | This should be set to the resource name as given in the OIM registration |
+| *probes* | String | This should be set to the gratia probes that should be enabled.  A probe is specified by using as [probe_type]:server:port .  Valid probe_types are metric (for rsv), jobmanager (for the appropriate jobmanager probe) and gridftp for the gridftp-transfer-probe |
+
+
+%STOPINCLUDE%
+%BR%
+%COMPLETE2% %BR%
+%RESPONSIBLE% Main.SuchandraThapa - 18 Dec 2009 %BR%
+%REVIEW%
+
+---++ Comments
+%COMMENT{type="tableappend"}%

@@ -1,0 +1,160 @@
+%META:TOPICINFO{author="JamesWeichel" date="1317224459" format="1.1" reprev="1.2" version="1.2"}%
+%META:TOPICPARENT{name="GridColombiaWorkshop2009"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++ Installation
+---+++ Introduction
+This installation guide assumes that the admin will be installing BDII aggregator on a SL 5.3 installation.  The cemon-bdii aggregator will be installed at =/usr/local/cemon_bdii_aggregator=. 
+
+---+++ Create Directories
+First, you'll need to create the directories that will be used.  
+<pre class="screen">
+mkdir -p /usr/local/cemon_bdii_aggregator
+chmod g+s -R /usr/local/cemon_bdii_aggregator
+cd /usr/local/cemon_bdii_aggregator
+mkdir -p var/log
+mkdir -p data/cemon_raw_incoming
+mkdir -p data/cemon_transitory
+mkdir -p data/cemon_processed_wlcg_interop_unfiltered
+mkdir -p data/cemon_processed_wlcg_interop 
+mkdir -p data/misc
+mkdir -p data/bdii_osg/ldif 
+mkdir -p data/bdii_osg/plugin
+mkdir -p data/bdii_osg/var/bdii/db/stats
+mkdir -p data/bdii_osg/var/lock/subsys
+mkdir -p data/bdii_osg/var/run/
+mkdir -p data/bdii_osg/var/archive
+mkdir -p data/bdii_wlcg_interop/ldif
+mkdir -p data/bdii_wlcg_interop/provider
+mkdir -p data/bdii_wlcg_interop/plugin
+mkdir -p data/bdii_wlcg_interop/var/bdii/db/stats
+mkdir -p data/bdii_wlcg_interop/var/lock/subsys
+mkdir -p data/bdii_wlcg_interop/var/run/
+mkdir -p data/bdii_wlcg_interop/var/archive
+mkdir -p data/bdii_osg/provider
+mkdir -p data/cemon_processed_osg
+</pre>
+
+---+++ Download and install rpms for bdii
+The cemon-bdii aggregator service requires a few rpms to be installed.  These rpms are a part of the SL 5.3 distribution so you can install them using =yum=.
+<pre class="screen">
+yum install httpd openldap-servers openldap-clients perl-libwww-perl perl-XML-Writer perl-XML-Simple perl-XML-Parser expect
+</pre>
+
+---+++ Download and install other files
+Next, the cemon-bdii aggregator tarball from the GOC will need to be downloaded and extracted:
+<pre class="screen">
+mkdir /opt/bdii
+cd /opt/bdii
+wget http://dev.grid.iu.edu/~agopu/cemon_bdii_setup.tgz
+tar xvzf cemon_bdii_setup.tgz
+</pre>
+After this has been completed, rpms from the tarball will need to be installed:
+<pre class="screen">
+cd /opt/bdii/cemon_bdii_aggregator/files/svn_files/
+rpm -Uvh glue-schema-1.3.0-4.noarch.rpm  bdii-4.0.2-2.noarch.rpm
+</pre>
+After the bdii rpm has been installed, a few changes and symlinks need to be created:
+<pre class="screen">
+ln -sf /usr/local/cemon_bdii_aggregator/etc/DB_CONFIG /opt/bdii
+ln -sf /usr/local/etc/default.ldif /opt/bdii/etc/default.ldif
+chmod u+x /etc/init.d/bdii
+</pre>
+Now, other rpms in the tarball can be installed:
+<pre class="screen">
+rpm -ivh gpt-3.2autotools2004_NMI_9.0_x86_rhap_5-1.i386.rpm
+rpm -ivh vdt_globus_essentials-VDT1.10.1x86_rhap_5-1.i386.rpm
+rpm -ivh c-ares-1.3.0-2.fc3.i386.rpm
+</pre>
+The cemon-bdii aggregator needs an older version of some software, so existing rpms on the system will need to be replaced.  If an error occurs when removing rpms (i.e. running =rpm -ef [package]=, that is acceptable)
+<pre class="screen">
+rpm -ev boost-devel-1.33.1-10.el5.i386
+boost-1.33.1-10.el5 
+rpm -ivh boost-1.32.0-5.fc3.i386.rpm
+</pre>
+Finally, the glite rpms will need to be installed:
+<pre class="screen">
+rpm -ivh glite-security-gsoap-plugin-1.5.4-2.slc4.i386.rpm
+rpm -ivh glite-ce-monitor-client-api-c-1.9.3-0.slc4.i386.rpm
+</pre>
+
+---+++ Create symlinks
+Several symlinks will need to be created in order for the services to work correctly:
+   * Data directories <pre class="screen">
+ln -sf /usr/local/cemon_bdii_aggregator/data /usr/local/cemon_bdii_aggregator/var/www/html/data
+</pre>
+   * init.d scripts <pre class="screen">
+ln -sf /usr/local/cemon_bdii_aggregator/sbin/cemon.init /etc/init.d/cemon-consumer
+ln -sf /usr/local/cemon_bdii_aggregator/sbin/bdii-osg.init /etc/init.d/bdii-osg
+ln -sf /usr/local/cemon_bdii_aggregator/sbin/bdii-wlcg-interop.init /etc/init.d/bdii-wlcg-interop
+</pre>
+   * Configuration files <pre class="screen">
+ln -sf /usr/local/cemon_bdii_aggregator/etc/httpd.conf /etc/httpd/conf/httpd.conf
+ln -sf /usr/local/cemon_bdii_aggregator/etc/cemon-bdii-aggregator.logrotate /etc/logrotate.d/cemon-bdii-aggregator
+</pre>
+   * Log directories <pre class="screen">
+ln -sf /usr/local/cemon_bdii_aggregator/data/bdii_osg /usr/local/cemon_bdii_aggregator/var/log/
+ln -sf /usr/local/cemon_bdii_aggregator/data/bdii_wlcg_interop /usr/local/cemon_bdii_aggregator/var/log/
+</pre>
+---+++ Other tasks
+There are several other things that will also need to be done:
+   * Remove configuration file <pre class="screen">
+rm -f /opt/bdii/etc/bdii.conf /opt/bdii/etc/bdii-update.conf /opt/bdii/etc/bdii-slapd.conf
+</pre>
+   * Change directory permissions <pre class="screen">
+chmod -R g+rwX /usr/local/cemon_bdii_aggregator/
+</pre>
+   * Alter selinux settings <pre class="screen">
+semanage fcontext -a -t bin_t /usr/local/cemon_bdii_aggregator'/var/www/cgi-bin/status.cgi'
+chcon -t httpd_sys_content_t '/bin/ls'
+</pre>
+   * Set services to start at boot <pre class="screen">
+chkconfig --level 345 httpd on
+chkconfig --level 345 bdii-osg on
+chkconfig --level 345 bdii-wlcg-interop on
+chkconfig --level 345 cemon-consumer on
+</pre>
+   * Create crontab entries <pre class="screen">
+install -bp -o root -g root -m 0644 /usr/local/cemon_bdii_aggregator/etc/cemon_bdii_server.crontab /etc/cron.d/cemon_bdii_server
+</pre>
+   * Run initialization scripts <pre class="screen">
+/usr/bin/perl /usr/local/cemon_bdii_aggregator/bin/cache-myosg-xml --myosg-resource-summary --verbose 1>>/usr/local/cemon_bdii_aggregator/var/log/cache-myosg-xml.out 2>>/usr/local/cemon_bdii_aggregator/var/log/cache-myosg-xml.err
+/usr/bin/perl /usr/local/cemon_bdii_aggregator/bin/cache-myosg-xml --myosg-cpuinfo-summary --verbose 1>>/usr/local/cemon_bdii_aggregator/var/log/cache-myosg-xml.out 2>>/usr/local/cemon_bdii_aggregator/var/log/cache-myosg-xml.err
+</pre>
+   * Edit =/usr/local/cemon_bdii_aggregator/etc/cemon-consumer.conf= so that it has the following entries: <pre class="screen">
+## This is a home grown conf file for the CEMon consumer's init script
+
+CEMON_CONSUMER_DIR=/opt/glite/
+
+CEMON_CONSUMER_VAR_DIR=/usr/local/cemon_bdii_aggregator/var
+CEMON_CONSUMER_OUTPUT_DIR=/usr/local/cemon_bdii_aggregator/data/cemon_raw_incoming
+
+CEMON_CONSUMER_LISTEN_PORT=14001
+
+GLOBUS_LIB_DIR=/opt/globus/lib
+
+#CEMON_CONSUMER_USER=root
+
+</pre>
+---+++ Start services
+At this point, the cemon-bdii aggregator can be turned on: 
+<pre class="screen">
+/etc/init.d/httpd restart
+/etc/init.d/cemon-consumer restart
+/etc/init.d/bdii-osg stop
+/etc/init.d/bdii-wlcg-interop stop
+/etc/init.d/bdii-osg start
+/etc/init.d/bdii-wlcg-interop start
+</pre>
+%BR%
+%COMPLETE2% %BR%
+%RESPONSIBLE% Main.SuchandraThapa - 03 Dec 2009 %BR%
+%REVIEW%
+
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/GridColombiaWorkshop2009/centerpageborder.css
+-->

@@ -1,0 +1,484 @@
+%META:TOPICINFO{author="KyleGross" date="1481047984" format="1.1" version="1.26"}%
+%META:TOPICPARENT{name="WebHome"}%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%DOC_STATUS_TABLE%
+%TOC{depth="2"}%
+
+---+ About this Document
+
+%ICON{hand}% This document outlines the settings and options found in the config.ini file for system administers that are installing and configuring osg software.
+
+---+ Introduction
+This page gives an overview of the options for each of the sections of the configuration file that =configure-osg= uses.  A description of the syntax for the configuration file can be found [[ConfigurationFileFormat][here]].  
+
+---+ Conventions 
+
+Mandatory options for a section are given in bold type.  Options that are not found in the default config.ini file are in italics.
+
+---+ Options and settings
+---++ Default variables
+The default configuration files has a few convenience variables that are used to make the configuration file more readable. The most common of these are the use of =%(enable)s= and =%(disable)s= in conjunction with the =enabled= setting to indicate whether a given feature should be enabled.  The =%(enable)s= variable evaluates to True and the =%(disable)s= variable evaluates to false.
+
+The =%(default)s= and =%(unavailable)s= are also used frequently.  Both of the variables evaluate to the same text string (=UNAVAILABLE=).  When =configure-osg= sees a setting set to this string, it will try to use a sensible default for setting if possible. 
+
+---++ Ignore setting
+As of OSG 1.2.14, the =enabled= setting also accepts =Ignore= as a possible value.  Using this value, results in the service associated with the section being ignored entirely.  This differs from using =False= (or =%(disabled)s= variable in the default configuration file), because using =False= results in the service associated with the section being disabled in vdt-control.  =configure-osg= will not change the configuration of the service  if the =enabled= is set to =Ignore=.  
+
+This is useful, if you have a complex configuration for a given that can't be set up using the =config.ini=.  You can manually configure that service by hand using the VDT configuration scripts and/or by editing config files and then use the =Ignore= setting so that =configure-osg= does not alter the service's configuration.
+
+
+---+ Site Information
+
+%STARTSECTION{"SiteInformation"}%
+The settings found in the =Site Information= section are described below.  This section is used to given information about a resource such as resource name, site sponsors, administrators, etc.
+
+| Option | Values Accepted | Description |
+| *group* | =OSG= , =OSG-ITB= | This should be set to either OSG or OSG-ITB depending on whether your resource is in the OSG or OSG-ITB group.  Most sites should specify OSG |
+| *host_name* | String | This should be set to be hostname of the CE that is being configured |
+| *resource* | String | The resource name of this CE endpoint as registered in OIM. *NEW* in OSG 1.2.6. |
+| *resource_group* | String | The resource_group of this CE as registered in OIM.  *NEW* in OSG 1.2.6. |
+| *site_name* | String | This should be set to the OSG site name for the CE. *NOTE*: This has been deprecated in OSG 1.2.6 and replaced by *resource* and *resource_group*. |
+| *sponsor* | String | This should be set to the sponsor of the resource, if your resource has multiple sponsors, you can separate them using commas or specify the  percentage using the following format 'osg, atlas, cms' or 'osg:10, atlas:45, cms:45'. The percentages must add up to 100 if multiple sponsors are used.  If you have a sponsor that is not an OSG VO, you can indicate this by using local as the VO.    |
+| *site_policy* | Url | This should be a url pointing to the resource's usage policy |
+| *contact* | String | This should be the name of the resource's admin contact |
+| *email* | Email address | This should be the email address of the admin contact for the resource |
+| *city* | String | This should be the city that the resource is located in |
+| *country* | String | This should be two letter country code for the country that the resource is located in.  |
+| *longitude* | Number | This should be the longitude of the resource. It should be a number between -180 and 180. |
+| *latitude* | Number| This should be the latitude of the resource. It should be a number between -90 and 90. |
+
+%ENDSECTION{"SiteInformation"}%
+
+
+---+ PBS
+
+%STARTSECTION{"PBS"}%
+
+This section describes the parameters for a pbs jobmanager if it's being used in the current CE installation.  If PBS is not being used, the =enabled= setting should be set to =False=.
+
+| Option | Values Accepted | Explanation |
+| *enabled* | =True=, =False=, =Ignore= | This indicates whether the PBS jobmanager is being used or not.   |
+| *home* | String | This should be set to be directory where pbs is installed (location of binaries) |
+| *pbs_location* | String | This should be set to be directory where pbs is installed (location of binaries) |
+| *job_contact* | String | This should be the contact string for the pbs jobmanager (e.g. my.host.com/jobmanager-pbs) |
+| *util_contact* | String | This should be the contact string for the default jobmanager (e.g. my.host.com/jobmanager) |
+| *wsgram* | =True=, =False= | This should be set to True or False depending on whether you want wsgram to be configured.  You will need to take [[https://twiki.grid.iu.edu/twiki/bin/view/Trash/Trash/Trash/Trash/Integration/ITB090/ComputeElementInstall#WS_GRAM_configuration_for_full_p][additional steps]] to get wsgram running in addition to this. |
+
+%ENDSECTION{"PBS"}%
+
+
+---+ LSF
+
+%STARTSECTION{"LSF"}%
+
+This section describes the parameters for a LSF jobmanager if it's being used in the current CE installation.  If LSF is not being used, the =enabled= setting should be set to =False=.
+
+| Option | Values Accepted | Explanation |
+| *enabled* | =True=, =False=, =Ignore= |This indicates whether the LSF jobmanager is being used or not.  |
+| *home* | String | This should be set to be directory where lsf is installed |
+| *lsf_location* | String | This should be set to be directory where lsf is installed |
+| *job_contact* | String | This should be the contact string for the lsf jobmanager (e.g. my.host.com/jobmanager-lsf) |
+| *util_contact* | String | This should be the contact string for the default jobmanager (e.g. my.host.com/jobmanager) |
+| *wsgram* | =True=, =False= | This should be set to True or False depending on whether you want wsgram to be configured.  You will need to take [[https://twiki.grid.iu.edu/twiki/bin/view/Trash/Trash/Trash/Trash/Integration/ITB090/ComputeElementInstall#WS_GRAM_configuration_for_full_p][additional steps]] to get wsgram running in addition to this. |
+
+%ENDSECTION{"LSF"}%
+
+---+ SGE
+
+%STARTSECTION{"SGE"}%
+
+This section describes the parameters for a SGE jobmanager if it's being used in the current CE installation.  If SGE is not being used, the =enabled= setting should be set to =False=.
+
+| Option | Values Accepted | Explanation |
+| *enabled* | =True=, =False=, =Ignore= | This indicates whether the SGE jobmanager is being used or not.   |
+| *home* | String | This should be set to be directory where sge is installed (e.g. same as <b>$SGE_ROOT</b> variable) |
+| *sge_root* | String | This should be set to be directory where sge is installed (e.g. same as <b>$SGE_ROOT</b> variable). The VDT will bootstrap your SGE environment by sourcing =$SGE_ROOT/$SGE_CELL/common/settings.sh= where =$SGE_ROOT= and =$SGE_CELL= are the values given for =sge_root= and =sge_cell= |
+| *sge_cell* | String | The sge_cell setting should be set to the value of $SGE_CELL for your SGE install. |
+| *job_contact* | String | This should be the contact string for the sge jobmanager (e.g. my.host.com/jobmanager-sge) |
+| *util_contact* | String | This should be the contact string for the default jobmanager (e.g. my.host.com/jobmanager) |
+| *wsgram* | =True=, =False= | This should be set to True or False depending on whether you want wsgram to be configured.  You will need to take [[https://twiki.grid.iu.edu/twiki/bin/view/Trash/Trash/Trash/Trash/Integration/ITB090/ComputeElementInstall#WS_GRAM_configuration_for_full_p][additional steps]] to get wsgram running in addition to this. |
+
+%ENDSECTION{"SGE"}%
+
+---+ Condor
+
+%STARTSECTION{"Condor"}%
+
+This section describes the parameters for a Condor jobmanager if it's being used in the current CE installation.  If Condor is not being used, the =enabled= setting should be set to =False=.
+
+| Option | Values Accepted | Explanation |
+| *enabled* | =True=, =False=, =Ignore= | This indicates whether the Condor jobmanager is being used or not.   |
+| *home* | String | This should be set to be directory where condor is installed |
+| *condor_location* | String | This should be set to be directory where condor is installed.  If this is set to a blank variable or UNAVAILABLE, the configure-osg script will try to get this from the VDTSETUP_CONDOR_LOCATION environment variable. |
+| *condor_config* | String | This should be set to be directory where the condor_config is located.   If this is set to a blank variable or UNAVAILABLE, the configure-osg script will try to get this from the VDTSETUP_CONDOR_CONFIG environment variable. |
+| *job_contact* | String | This should be the contact string for the condor jobmanager (e.g. my.host.com/jobmanager-condor) |
+| *util_contact* | String | This should be the contact string for the default jobmanager (e.g. my.host.com/jobmanager) |
+| *wsgram* | =True=, =False= | This should be set to True or False depending on whether you want wsgram to be configured.  You will need to take [[https://twiki.grid.iu.edu/twiki/bin/view/Trash/Trash/Trash/Trash/Integration/ITB090/ComputeElementInstall#WS_GRAM_configuration_for_full_p][additional steps]] to get wsgram running in addition to this. |
+
+%ENDSECTION{"Condor"}%
+
+---+ Managed Fork
+
+%STARTSECTION{"ManagedFork"}%
+
+This section determines whether the gatekeeper on your CE uses managed fork to handle the 
+
+| Option | Values Accepted | Explanation |
+| *enabled* | =True=, =False=, =Ignore= | This indicates whether the managed fork service is being used or not.   |
+| *accept_limited* | =True=, =False= | This setting is optional.  If set to =True= it will add the "accept_limited" option into =$VDT_LOCATION/globus/etc/grid-services/jobmanager-fork=.  If it is set to =False= or not set then that prefix will not be added.  _This option is new in OSG 1.2.14._ |
+| _condor_location_ | String | This should be set to be directory where condor is installed.  If this is set to a blank variable or UNAVAILABLE, the configure-osg script will try to get this from the =VDTSETUP_CONDOR_LOCATION= or =CONDOR_LOCATION= environment variable. *As for OSG 1.2.13, this has been deprecated and is no longer needed* |
+| _condor_config_ | String | This should be set to be directory where the condor_config is located.   If this is set to a blank variable or UNAVAILABLE, the configure-osg script will try to get this from the =VDTSETUP_CONDOR_CONFIG= or =CONDOR_CONFIG= environment variable.  *As for OSG 1.2.13, this has been deprecated and is no longer needed*  |
+
+
+%ENDSECTION{"ManagedFork"}%
+
+---+ Misc Services
+
+%STARTSECTION{"MiscServices"}%
+
+This section handles the configuration of services that do not have a dedicated section for their configuration.  
+
+| Option | Values Accepted | Explanation |
+| glexec_location | String | This gives the location of the glexec installation on the worker nodes, if it is present.  If it is not installed, set this to =UNAVAILABLE= |
+| _use_syslog_ng_ | =True=, =False= | This indicates whether syslog_ng should be setup.  It should be set to True or False. *Syslog-ng is no longer in use on a default installation and this option has been deprecated._ |
+| *gums_host* | String | This setting is used to indicate the hostname of the GUMS host that should be used for authentication.  If GUMS is not used, this should be set to =UNAVAILABLE= |
+| *use_cert_updater* | =True=, =False= | This indicates whether vdt certificate updater should be enabled.  It should be set to True or False.  If this is not enabled, you will need to use the rpm updates or pacman updates to keep your certificates up to date. |
+| *authorization_method* | =gridmap=, =prima=, =xacml=, =local-gridmap= | This indicates which authentication method your site uses.  |
+| *enable_webpage_creation* | =True=, =False= | This indicates whether to use a custom webpage instead of the default webpage at https://yoursite:8443/ |
+| enable_cleanup | =True=, =False= | (Optional) If true, enable the VDT cleanup scripts to run.  If false disable cleanup scripts.  Introduced in OSG 1.2.30 |
+| cleanup_age_in_days | Integer | (Optional) The number of days after which files should be cleaned up.  Introduced in OSG 1.2.30 |
+| cleanup_users_list | List of users or =@vo-file= | (Optional) The list of user's home directories to clean.  If =@vo-file= is supplied the list will be taken from =VDT_LOCATION/osg/etc/osg-user-vo-map.txt=  Introduced in OSG 1.2.30 |
+| cleanup_cron_time | Cron entry | (Optional) Defaults to once per day.  Introduced in OSG 1.2.30 |
+
+%ENDSECTION{"MiscServices"}%
+
+---+ RSV
+%ENDSECTION{"RSV"}%
+
+This section handles the configuration and setup of the RSV services
+
+| Option | Values Accepted | Explanation |
+| *enabled* | =True=, =False=, =Ignore= | This indicates whether the rsv  service is being used or not.  |
+| *rsv_user* | String | This gives username that rsv will run under.  If this is blank or set to =UNAVAILABLE=, it will default to rsvuser. |
+| *gratia_probes* | String | This settings indicates which rsv gratia probes should be used.  It is a list of probes separated by a comma.  Valid probes are metric, condor, pbs, lsf, sge, managedfork, hadoop-transfer, and gridftp-transfer |
+| *enable_ce_probes* | =True=, =False= | This indicates whether rsv should schedule CE probes.  It should be set to True or False. If this is enabled, related option(s) below must be set as well |
+| ce_hosts | String | This option lists the serviceURI of the CEs that the RSV CE probes should check.  This should be a list of serviceURIs (hostname[:port/service]) separated by a comma (e.g. my.host,my.host2,my.host3:2812). This must be set if enable_ce_probes is set. If this is left blank or set to =UNAVAILABLE=, the CE's hostname is used by default. | 
+| *enable_gums_probes* | =True=, =False= | This indicates whether rsv should schedule gums probes. It should be set to True or False. If this is enabled, related option(s) below must be set as well <br> Note that the GUMS probe is distributed as an experimental component, and admins are recommended *not to enable* it on production resources. |
+| gums_hosts | String | This option lists the serviceURI or FQDN of the CEs or SEs, using GUMS for authentication, that the RSV GUMS probes should check.  This should be a list of *CE* or *SE* FQDNs (and _not a !GUMS server FQDN_) separated by a comma (e.g. my.host,my.host2,my.host3).  This will default to the ce_hosts option if it is left blank or set to UNAVAILABLE | 
+| *enable_gridftp_probes* | =True=, =False= | This indicates whether rsv should schedule gridftp probes.  It should be set to True or False. If this is enabled, several of the following options must be set as well |
+| gridftp_hosts | String | This option lists the serviceURI of the gridftp servers that the RSV gridftp probes should check.  This should be a list of serviceURIs (hostname[:port/service]) separated by a comma (e.g. my.host.iu.edu:2812,my.host2,my.host3).  This will default to the ce_hosts option if it is left blank or set to =UNAVAILABLE= | 
+| gridftp_dir | String | This should be the directory that the gridftp probes should use during testing.  It must be given if enable_gridftp_probes is enabled. This defaults to /tmp if left blank or set to UNAVAILABLE. |
+| *enable_srm_probes* | =True=, =False= | This indicates whether rsv should run srm probes is being used or not.  It should be set to True or False. If this is enabled, several of the following options must be set as well |
+| *srm_hosts* | String | This option lists the serviceURI of the srm servers that the RSV srm probes should check.  This should be a list of serviceURIs (hostname[:port/service]) separated by a comma (e.g. my.host,my.host2,my.host3:8444).  This will default to the ce_hosts option if it is left blank or set to =UNAVAILABLE= | 
+| srm_dir | String | This should be the directory that the srm probes should use during testing.  It must be given if enable_srm_probes is enabled. |
+| srm_webservice_path | String | This option gives the webservice path that  SRM probes need to use along with the host: port. For dcache installations, this should work if left blank. However Bestman-xrootd SEs normally use srm/v2/server as web service path, and so Bestman-xrootd admins will have to pass this option with the appropriate value (for example: "srm/v2/server") for the SRM probes to pass on their SE. | 
+| *use_service_cert* | =True=, =False= | This option indicates whether rsv should use a service certificate or not.  If this is enabled, the following three options must be set as well.  This should be set to True or False. <br> If you run !RSV right on a CE (SE), and only monitor that CE (SE), then you can use a service certificate. The important factor is that the  _service certificate or its proxy, per its policy and the OSG security group's mandate_, *should not leave the host* it was generated for, and can only be used to test that one host.  <!-- Note from BB: removed this link as the page it was referring to already deleted the section. See Install And Configure RSV#Should_I_use_a_service_certifica for more details -->. |
+| rsv_cert_file | String | This option should point to the public key file (pem) for your service  certificate. If this is left blank or set to =UNAVAILABLE=  and the use_service_cert  setting is enabled, it will default to /etc/grid-security/rsvcert.pem | 
+| rsv_key_file | String | This option should point to the private key file (pem) for your service  certificate. If this is left blank or set to =UNAVAILABLE= and the use_service_cert  setting is enabled, it will default to /etc/grid-security/rsvkey.pem . |
+| rsv_proxy_out_file | String | This should point to the location of the rsv proxy file. If this is left blank or set to =UNAVAILABLE= and the use_service_cert  setting is enabled, it will default to /tmp/rsvproxy. |
+| proxy_file | String | If you don't use a service certificate for rsv, you will need to specify a  proxy file that RSV should use in the proxy_file setting.  This needs to be set if use_service_cert is disabled. |
+| *enable_gratia* | =True=, =False= | This option will enable RSV record uploading to central RSV collector at the GOC.   This should be set to True on all OSG resources (and to False on non-OSG resources). |
+| *print_local_time* | =True=, =False= | This option determines whether rsv will display times in the local time in the web pages that it produces.  If this is disabled, times displayed will be given in the GMT time zone.  This should be set to True or False. |
+| *setup_rsv_nagios* | =True=, =False= | This option indicates whether rsv should upload results to a local  nagios server instance. This should be set to True or False.<br> This plugiin is provided as an experimental component, and admins are recommend *not to enable* it on production resources.  |
+| rsv_nagios_conf_file | String | The rsv_nagios_conf_file option indicates the location of the rsv nagios  file to use for configuration details. This file *needs to be configured locally for  !RSV-Nagios forwarding to work* -- see inline comments in file for more information.|
+| *setup_for_apache* | =True=, =False= | The setup_rsv_nagios option indicates whether rsv try to create a webpage that can be used to view the status of the rsv tests.  Enabling this is  highly encouraged. |
+
+%ENDSECTION{"RSV"}%
+
+
+---+ Storage
+
+%STARTSECTION{"Storage"}%
+
+This section gives information about the options in the Storage section of the configuration file. Several of these values are constrained and need to be set in a way that is consistent with one of the OSG storage models.  Please review the Storage Related Parameters section of the [[EnvironmentVariables][Environment Variables]] description as well as the [[OverviewOfServicesInOSG][Overview of Services]] and [[SitePlanning][Site Planning]] discussions for explanations of the various storage models and the requirements for them.
+
+| Option | Values Accepted | Explanation |
+| *se_available* | =True=, =False= | This indicates whether there is an associated SE available.  It should be set to True or False. |
+| default_se | String | If an SE is available at your cluster, set default_se to the hostname of this SE, otherwise set default_se to UNAVAILABLE. |
+| *grid_dir* | String | The grid_dir setting should point to the directory which holds the files from the OSG worker node package. It should be visible on all of the computer nodes and will be accessed via the $OSG_GRID environment variable.  Read access is required, though worker nodes don't need write access. |
+| *app_dir* | String | The app_dir setting should point to the directory which contains the VO  specific applications, this should be visible on both the CE and worker nodes and will be accessed via $OSG_APP.  Only the CE needs to have write access to this directory. The $OSG_APP directory must also contain a sub-directory (etc) with 1777 permissions. |
+| data_dir | String | The data_dir setting should point to a directory that can be used to store and stage data in and out of the cluster and accessed via the $OSG_DATA variable.  This directory should be readable and writable on both the CE and worker nodes.  |
+| worker_node_temp | String | The worker_node_temp directory (accessed via $OSG_WN_TMP) should point to a directory that can be used as scratch space on compute nodes. It should allow read and write access on a worker node and can be visable to just that worker node. If not set, the default is UNAVAILABLE |
+| site_read | String | The site_read setting should be the location or url to a directory that can  be read to stage in data via the variable $OSG_SITE_READ.  This is an url if you are using a SE.  If not set, the default is UNAVAILABLE |
+| site_write | String | The site_write setting should be the location or url to a directory that can be write to stage out data via the variable $OSG_SITE_WRITE. This is an url if you are using a SE . If not set, the default is UNAVAILABLE |
+
+
+%ENDSECTION{"Storage"}%
+
+---+ Squid
+
+%STARTSECTION{"Squid"}%
+
+This section handles the configuration and setup of the squid web caching and proxy service.
+
+| Option | Values Accepted | Explanation |
+| *enabled* | =True=, =False=, =Ignore= | This indicates whether the squid service is being used or not.  |
+| location | String | This should be set to the location (directory or hostname) of the squid service.  This should be set to a directory if squid is installed on the CE. |
+| policy| String | This should be set to the policy that squid is using to manage it's cache (e.g. GDSF) |
+| cache_size | String | This option should be set to the size of the disk cache that squid has available. It should be given as the number of megabytes available (e.g. 1024) |
+| memory_size | String | This option should be set to the size of the memory cache that squid has available. It should be given as the number of megabytes available (e.g. 1024) |
+
+%ENDSECTION{"Squid"}%
+
+
+---+ !MonaLisa
+
+%STARTSECTION{"MonaLisa"}%
+
+The !MonaLisa service is configured and setup in this section.
+
+| Option | Values Accepted | Explanation |
+| *enabled* | =True=, =False=, =Ignore= | This indicates whether the MonaLisa service is being used or not.  |
+| use_vo_modules | String | If you want Monalisa to use the OSG_VO module to monitor job usage by VO, set this to True, otherwise set this to False.  This will default to True if left blank. |
+| ganglia_support | =True=, =False= | This setting should be enabled if you are using ganglia on your cluster and you wish Monalisa to use it as well. Set this to True or False. |
+| ganglia_host  | String | If you've enabled ganglia support, you should enter the hostname or IP address of the  ganglia server here. |
+| ganglia_port | String | If you've enabled ganglia support, you should enter the port that ganglia is running on. This will default to 8649 if left blank or set to UNAVAILABLE when ganglia_support is enabled. |
+
+%ENDSECTION{"MonaLisa"}%
+
+---+ GIP 
+
+%STARTSECTION{"GIP"}%
+
+---++ Introduction to GIP Configuration
+
+
+This section gives information about the options in the GIP, Subcluster*, and SE* sections of the configuration file.
+
+_Note for seasoned admins_:  This section has undergone a *significant amount of revision*; the latest update has introduced a new way to configure subclusters and SEs.  The old-style configuration will still work, but is deprecated.  *We strongly recommend updating your config to the new style.*  Once this is done, note that the GIP section itself has very few options left.
+
+---+++ Notes for multi-CE sites.
+
+If you would like to properly advertise multiple CEs per cluster, make sure that you:
+   * Set the value of cluster_name in the [GIP] section to be the same for each CE.
+   * Set the value of other_ces in the [GIP] section to be the hostname of the other CEs at your site; this should be comma separated.  So, if you have two CEs, ce1.example.com and ce2.example.com, the value of other_ces on ce1.example.com should be "ce2.example.com.  This assumes that the same queues are visible on each CE.
+   * Set the value of site_name in the "Site Information" section to be the same for each CE.
+   * Have the *exact* same configuration values for the GIP, SE*, and Subcluster* sections in each CE.
+
+It is good practice to run "diff" between the config.ini of the different CEs.  The only changes should be the value of localhost in the [DEFAULT] section and the value of other_ces in the [GIP] section.
+
+---++ GIP Section Options
+
+The options given in bold type are mandatory.
+
+
+| Option | Values Accepted | Explanation |
+| advertise_gums | =True=, =False= | Defaults to False. If you want GIP to query and advertise your gums server set this to True. |
+| advertise_gsiftp | =True=, =False= | Defaults to True.  If you don't want GIP to advertise your gridftp server set this to False. |
+| gsiftp_host  | String | This should be set to the name of the gridftp server GIP will advertise if the advertise_gridftp setting is set to True. |
+| cluster_name | String | This should *only* be set if you run multiple gatekeepers for the same cluster; if you do, set this value to the FQDN of the head node of the cluster. |
+| other_ces| String | This should *only* be set if you run multiple gatekeepers for the same cluster; if you do, set this value to the comma-separate list of FQDNs for the other CEs at this site. |
+
+---++ GIP Subcluster Configuration
+
+Each homogeneous set of worker node hardware is called a *subcluster*.  For each subcluster in your cluster, fill in the information about the worker node hardware by creating a new Subcluster section with a unique name in the following format:  =[Subcluster CHANGEME]= where CHANGEME is the globally unique subcluster name (yes, it must be a *globally* unique name for the whole grid, not just unique to your site.  Get creative).
+
+*At least one subcluster section* is required; please populate the information for all your subclusters.  For WLCG sites, information filled in here will be advertised as part of your !MoU commitment, so please strive to make sure it is correct.  The information needed is:
+
+|Option|Values Accepted|Explanation |
+|*name*|string|This is the same name that is in the Section label.  It should be *globally unique*|
+|*node_count*|Positive Integer|This is the number of worker nodes in the subcluster|
+|*ram_mb*|Positive Integer|Megabytes of RAM per node.|
+|*cpu_model*|String|CPU model, as taken from /proc/cpuinfo.  Please, no abbreviations!|
+|*cpu_vendor*|String|Vendor's name: AMD, Intel, or ??|
+|*cpu_speed_mhz*|Positive Integer|Approximate speed, in MHZ, of the chips|
+|*cpus_per_node*|Positive Integer|Number of CPUs (physical chips) per node.  Usually 1 or 2|
+|*cores_per_node*|Positive Integer|Number of cores per node.  Usually 4 or 8|
+|*inbound_network*|True, False|Set to true or false depending on inbound connectivity.  That is, external hosts can contact the worker nodes in this subcluster based on their hostname.|
+|*outbound_network*|True, False|Set to true or false depending on outbound connectivity.  Set to true if the worker nodes in this subcluster can communicate with the external internet.|
+| *cpu_platform* | x86_64, i686 | This option indicates the cpu platform. |
+
+[[https://twiki.grid.iu.edu/bin/view/InformationServices/SubclusterMapping][This page shows the mapping from these attribute names to GLUE attribute names]]
+
+---++ GIP SE Configuration
+
+For each storage element, add a new section called =[SE_CHANGEME]= where CHANGEME is the name of your SE.  Each SE name must be unique for the entire grid, so make sure to not pick anything generic like "MAIN".  Each SE section must start with the words "SE", and cannot actually be named "CHANGEME".
+
+SE configuration can be a bit tricky.  We provide [[InformationServicesSEConfig][a few examples here.]]
+
+---+++ Generic SE
+
+We first outline the configuration for a generic SE, then have additional comments for !BestMan and dCache SEs.  *For WLCG sites to be advertised correctly, they _must_ use the bestman or dcache19 provider.*:
+
+|Option|Values Accepted|Explanation|
+|*enabled*|Boolean|True/False Indicates whether or not this SE section is enabled for the GIP.|
+|*name*|String|Name of the SE as registered in OIM.|
+|*srm_endpoint*|String|The endpoint of the SE.  It MUST have the hostname, port, and the server location (such as /srm/v2/server).  It MUST NOT have the ?SFN= string.  Example:  srm://srm.example.com:8443/srm/v2/server |
+|*provider_implementation*|String|Set to *static* for a generic SE; we recommend !BestMan sites use the *bestman* implementation and dCache sites use *dcache* or *dcache19*.  See notes below|
+|*implementation*|String|Name of the SE implementation.|
+|*version*|String|Version number of the SE implementation.  Some provider implementations will attempt to auto-detect this.|
+|*default_path*|String|Default storage paths for the VOs; VONAME is replaced with the VO's name.|
+|vo_dirs|Comma-separated string|A comma-separated list of VONAME:PATH pairs; the PATH will override the *default_path* attribute for VONAME.|
+|allowed_vos|Comma-separated list of VOs|By default, all VOs are advertised as having access to your SE.  If you want only a subset of VOs to be advertised, list them here|
+
+---++ !BestMan and dCache notes
+
+For !BestMan-based SEs, there are a few additional comments to make and extra options:
+
+
+|Option|Values Accepted|Explanation|
+|*srm_endpoint*|String|The endpoint of the SE.  It is most likely of the form srm://srm.example.com:8443/srm/v2/server.|
+|*provider_implementation*|String|Set to 'bestman'|
+|*implementation*|String|Set to 'bestman'|
+|*version*|String|Version number; the "bestman" provider implementation will attempt to auto-detect this also.|
+|*use_df*|True, False|Set to True if the bestman provide can use 'df' on the directory referenced above to get the freespace information.  If set to false, it probably won't detect the correct info.  Use this if !BestMan writes into a file system which is mounted on your head node (such as xrootdfs, IBRIX, or GPFS).|
+The !BestMan provider will use srm-ping to query your !BestMan instance for information.  This means that the user *daemon* will need to read a valid hostcert in */etc/grid-security/http/httpcert.pem* and hostkey in */etc/grid-security/http/httpkey.pem*.  !BestMan server does not require any authorization to perform srmPing, so you do not need to change anything on your SRM server.
+
+For dCache-based SEs:
+
+|Option|Values Accepted|Explanation|
+|*srm_endpoint*|String|The endpoint of the SE.  It is most likely of the form srm://srm.example.com:8443/srm/managerv2.|
+|*provider_implementation*|String|Set to 'dcache' for dcache 1.8 (additional config is required), 'dcache19' for dcache 1.9, or 'static' for default values.   If you use the dcache provider with dCache 1.8, see [[InformationServices/DcacheGip][this page to complete installation]].  If you use the dcache19 provider, you must fill in the location of your dCache's information provider|
+|*infoprovider_endpoint*|String|Url to the dcache information provider.  Only necessary for the dcache19 provider.|
+|*implementation*|String|Set to 'dcache'|
+|*version*|String|dCache version; non-static providers will also attempt to auto-detect this.  This should be the version from the output of "rpm -q dcache-server".|
+|*srm_host*|String|This most likely does not need editing.  If your SRM endpoint has multiple aliases, the GIP might get confused when resolving the IP addresses given by dCache.  This setting will force the selection of a specific hostname.|
+dCache version 1.9 added a new read-only XML information service which feeds the dcache19 provider.  The location of the info provider is most likely:
+<verbatim>
+http://dcache_head_node.example.com:2288/info
+</verbatim>
+It runs on the same node that the dcache web interface does.  Check your dCache documentation on how to enable the info service if that link does not work.
+
+Since dCache 1.8 does not have a machine-readable information service, the "dcache" provider must access it through the admin interface; [[InformationServices/DcacheGip][this process is documented here]].  Some site admins consider this a security concern.
+
+
+---+++ SE Space configuration.
+Both the dCache and !BestMan providers have a concept of a logical storage grouping, or space.  You can control how the space access is advertise through adding options to the SE's section.  For dCache, a space may be one of several dCache concepts:
+   * A link group is a space, if link groups are configured.
+   * A pool group is a space.
+If a pool group is inside a link group, only the link group will be advertised.  The space name is the name of the link group or pool group.
+
+For !BestMan, a space is a SRM space token.  The name of the space is the space token description.
+
+The following space-related options are valid; replace NAME with the space's name:
+
+|Option|Values Accepted|Explanation|
+|spaces|Comma-delimited list|Comma-delimited list of all the spaces that should be restricted by VO|
+|space_NAME_vos|Comma-delimited list of VOs|By default, all VOs are allowed to access all spaces.  If you would like to change this for a specific space, "NAME", this should be a comma-delimited list of VOs allowed to access NAME.|
+|space_NAME_default_path|String|The default storage path for VOs for the space NAME.  As in the "default_path" option, the word VONAME is evaluated to be the VO's name.|
+|space_NAME_path|Comma-delimited list|A list of VONAME:PATH pairs for this space; works like the SE's vo_dirs variable.|
+
+These options are not required for !BestMan or dCache.  Both providers will attempt to guess the correct values for spaces, but are not always perfect.
+
+---++ No SE - Publish CE to SE Bindings for external SE
+In very rare cases, a site may not host an SE, but have an agreement with another site to share or otherwise use their SE.  For this use case, edit gip.conf in $VDT_LOCATION/gip/etc (create if not present).  Make sure the following lines are present:
+<verbatim>
+[cesebind]
+simple=False
+se_list=SE1.example.com,SE2.example.com,...
+</verbatim>
+The se_list is a comma delimited list of SE Unique ID's as configured at the external site.  Usually, the SE unique ID is set to the full hostname of the SRM endpoint.
+
+---++ Example Configurations for SE's and Subclusters
+Examples taken from working installations of the new style Storage Element and Subcluster sections can be found at ConfigurationFileGIPExamples.
+
+%ENDSECTION{"GIP"}%
+
+---++ Install Locations
+
+%STARTSECTION{"InstallLocations"}%
+
+This section gives information about the options in the Install Locations section of the configuration file.  %NOTE% this section is optional and does not need to be included in a config.ini file.  =configure-osg= can get the correct values for these settings based on environment variables.  Unless you need have a special need for to specify these locations, you should not have this section in your configuration file to avoid errors in your configuration.
+
+| Option | Values Accepted | Explanation |
+| osg | String | This should be the location of the osg installation.  This will default to =$VDT_LOCATION= if left blank or set to UNAVAILABLE. |
+| globus | String | This should be the location of the globus installation.  This will default to =$VDT_LOCATION/globus= if left blank or set to UNAVAILABLE. |
+| user_vo_map | String | This should be the location of the =osg-user-vo-map.txt= file .  This will default to =$VDT_LOCATION/monitoring/osg-user-vo-map.txt= if left blank or set to UNAVAILABLE. |
+| gridftp_log | String | This should be the location of the gridftp log file.  This will default to =$VDT_LOCATION/globus/var/log/gridftp.log= if left blank or set to UNAVAILABLE. |
+
+%ENDSECTION{"InstallLocations"}%
+
+---++ Local Settings
+
+%STARTSECTION{"LocalSettings"}%
+
+This section differs from other sections in that there are no set options in this section.  Rather, the options set in this section will be placed in the =osg-local-job-environment.conf= verbatim.  The options in this section are case sensitive and the case will be preserved when they are converted to environment variables.  The =osg-local-job-environment.conf= file gets source by jobs run on your cluster so any variables set in this section will appear in the environment of jobs run on your system.
+
+For example adding a line such as =My_Setting = my_Value= would result in the an environment variable called =My_Setting= set to =my_Value= being set in the environment when =osg-local-job-environment.conf= is sourced.  For example, to add a variable =MY_PATH= set to =/usr/local/myapp=, you'd have the following:
+<pre class="file">
+[Local Settings]
+
+MY_PATH = /usr/local/myapp
+</pre>
+
+
+%ENDSECTION{"LocalSettings"}%
+
+---+ !CEMon
+
+%STARTSECTION{"CeMon"}%
+
+!CEmon is configured in this section.  Please note that setting  =ress_servers= and =bdii_servers= to =%(default)s= or =%(unavailable)s= in the default configuration file will result in the correct servers being used for your reporting.  If you need to specify additional servers, the =%(osg-ress-servers)s=, =%(osg-bdii-servers)s=, %(itb-ress-servers)s=, or =%(itb-bdii-servers)s= variables are defined in the default configuration files to make it easier to specify that !CEMon should also report to the the various OSG collectors as well.
+
+| Option | Values Accepted | Explanation |
+| *enabled* | =True= , =False=, =Ignore= | This should be set to True if !CEMon should be configured and enabled on the installation being configured. |
+| *ress_servers* | String | This should be set to the !ReSS servers that the installation should report information to.  This should be formatted as server_url[FORMAT],server_url2[FORMAT] where FORMAT is the !CEMon format to use for reporting.  The format for is OLD_CLASSAD for most !ReSS servers. E.g. for production resources this might be =https://osg-ress-1.fnal.gov:8443/ig/services/CEInfoCollector[OLD_CLASSAD]= |
+| *bdii_servers* | String | This should be set to the BDII servers that the installation should report information to.  This should be formatted as server_url[FORMAT],server_url2[FORMAT] where FORMAT is the !CEMon format to use for reporting.  The format is RAW for most !BDII servers. E.g. for production resources this might be =http://is1.grid.iu.edu:14001[RAW], http://is2.grid.iu.edu:14001[RAW]= |
+
+
+%ENDSECTION{"CeMon"}%
+
+---+ Gratia
+
+%STARTSECTION{"GratiaConfigOptions"}%
+
+This section configures Gratia.  Like with the !CEMon configuration, if =probes= is set to =UNAVAILABLE=, then =configure-osg= will appropriate default values.  If you need to specify custom reporting (e.g. a local gratia collector) in addition to the default probes,  =%(osg-jobmanager-gratia)s=,  =%(osg-gridftp-gratia)s=, =%(osg-metric-gratia)s=,  
+=%(itb-jobmanager-gratia)s=, =%(itb-gridftp-gratia)s=, =%(itb-metric-gratia)s= are defined in the default configuration files to make it easier to specify the standard osg reporting.
+
+| Option | Values Accepted | Explanation |
+| *enabled* | =True= , =False=, =Ignore= | This should be set to True if gratia should be configured and enabled on the installation being configured. |
+| *resource* | String | This should be set to the resource name as given in the OIM registration |
+| *probes* | String | This should be set to the gratia probes that should be enabled.  A probe is specified by using as [probe_type]:server:port .  Valid probe_types are metric (for rsv), jobmanager (for the appropriate jobmanager probe) and gridftp for the gridftp-transfer-probe.  |
+
+%ENDSECTION{"GratiaConfigOptions"}%
+
+
+
+
+---+ *Comments*
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = SuchandraThapa
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = 
+
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+############################################################################################################
+-->

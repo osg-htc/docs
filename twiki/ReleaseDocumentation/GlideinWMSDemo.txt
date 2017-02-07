@@ -1,0 +1,171 @@
+%META:TOPICINFO{author="BurtHolzman" date="1256236345" format="1.1" reprev="1.1" version="1.1"}%
+%META:TOPICPARENT{name="GridColombiaWorkshop2009"}%
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++ Overview
+
+The goal of this demonstration is to execute a few user-defined jobs via glideinWMS.  For demonstration purposes, we've enabled two sites: MWT2_IU and CMS-BURT-ITB2.  Ordinarily a factory could scale up to the size of the OSG.
+
+---++ Starting a job
+
+First, use your assigned training account and ssh to tier2-d1.uchicago.edu. Then, copy the example to your home directory, and see what files and directories exists in the example directory:
+
+<pre class="screen">
+[train01@tier2-d1 ~]$ <b>cp -r ~burt/gwms-example ~</b>
+[train01@tier2-d1 ~]$ <b>cd gwms-example</b>
+[train01@tier2-d1 gwms-example]$ <b>ls</b>
+test.jdl
+test.sh
+input1.txt
+input2.txt
+</pre>
+
+Description of the files:
+
+   * *test.jdl* - This is the job description file for condor.  It specifies the executable name
+   * *test.sh* - A small shell script that prints out information and concatentaes input1 and input2 into an output file.
+   * *input1.txt*, *input2.txt* - Placeholder text files with sample text inside.
+
+Here's a description of the lines in test.jdl.  First, some standard Condor settings -- don't change these.
+<pre>
+### Standard Condor settings
+universe = vanilla
+should_transfer_files = true
+when_to_transfer_output = on_exit
+notification = never
+############################
+</pre>
+
+Below, the line that does match-making between the resources secured by the pilot jobs and your jobs.  If you need 64-bit, you could change the *Arch != "Dummy"* to *Arch == "X86_64"*, for example.
+
+<pre>
+## Glidein match-making ###
+Requirements = Arch != "DUMMY" && stringListMember(GLIDEIN_Site, DESIRED_Sites)
+############################
+</pre>
+
+Below are the locations of stdout, stderr, and the log.  The $ variables ensure that the stdout and sterr are unique for each job.
+
+<pre>
+### Logs, standard output and error ###
+Output = test.$(Cluster).$(Process).out
+Error  = test.$(Cluster).$(Process).err
+Log    = test.log
+############################
+</pre>
+
+And now the executable and any input files we want to transfer in.  Nota bene: we don't need to specify the names of output files.  If they get created in the current working directory (or in a subdirectory), they will automatically get transferred back.
+<pre>
+### Input files ###
+Executable = test.sh
+transfer_input_files = input1.txt, input2.txt
+############################
+</pre>
+
+Finally, here's where we tell the glideinWMS that we want to run one job at each of MWT2_IU and CMS-BURT-ITB:
+
+<pre>
+# One job for MWT2_IU
++DESIRED_Sites = "MWT2_IU"
+Queue 1
+
+# One job for CMS-BURT-ITB2
++DESIRED_Sites = "CMS-BURT-ITB2"
+Queue 1
+</pre>
+
+---++ Executing the job
+<pre class="screen">
+[train01@tier2-d1 gwms-example]$ <b>condor_submit test.jdl</b>
+Submitting job(s)...
+Logging submit event(s)...
+2 job(s) submitted to cluster 23.
+</pre>
+
+Note the cluster number (it will also get written to the =test.log= file).  My two jobs were created as 23.0 and 23.1.
+
+---++ Checking the job status
+<pre class="screen">
+[burt@tier2-d1 gwms-example]$ condor_q 23
+-- Submitter: tier2-d1.uchicago.edu : <128.135.158.204:46308> : tier2-d1.uchicago.edu
+ ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD               
+  23.0   burt           10/22 13:04   0+00:00:01 R  0   0.0  test.sh           
+  23.1   burt           10/22 13:04   0+00:00:01 R  0   0.0  test.sh   
+</pre>
+These jobs have already started running.  When they complete:
+
+<pre class="screen">
+[burt@tier2-d1 gwms-example]$ condor_q 23
+-- Submitter: tier2-d1.uchicago.edu : <128.135.158.204:46308> : tier2-d1.uchicago.edu
+ ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD               
+[burt@tier2-d1 gwms-example]$ 
+</pre>
+
+And the outputs have been transferred to my submit directory:
+<pre class="screen">
+[burt@tier2-d1 gwms-example]$ ls -l output*
+-rw-r--r-- 1 burt burt 108 Oct 22 13:04 output-cms-xen14.fnal.gov-19665.txt
+-rw-r--r-- 1 burt burt 108 Oct 22 13:04 output-iut2-c107.iu.edu-24201.txt
+</pre>
+
+Here's an overall monitoring link for the glidein factory:
+http://cms-xen6.fnal.gov:8319/glidefactory/monitor/glidein_gridwkshp/total/0Status.hours.large.html
+
+---++ Pseudo-interactive monitoring
+Edit test.sh and increase the sleep time from 30 to 300 (5 minutes).  Submit your jobs again (noting the cluster number), and check that they're running, ie:
+<pre class="screen">
+[burt@tier2-d1 gwms-example]$ condor_q 24
+-- Submitter: tier2-d1.uchicago.edu : <128.135.158.204:46308> : tier2-d1.uchicago.edu
+ ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD               
+  24.0   burt           10/22 13:08   0+00:01:09 R  0   0.0  test.sh           
+  24.1   burt           10/22 13:08   0+00:01:09 R  0   0.0  test.sh       
+</pre>
+
+Let's see what else is running alongside job 24.0, using an interactive tool (the syntax is =glidein_top.py $JOBID=):
+<pre class="screen">[burt@tier2-d1 gwms-example]$ /opt/glideinWMS/tools/glidein_top.py 24.0 | head -20
+top - 14:10:40 up 16 days, 48 min,  0 users,  load average: 7.07, 6.84, 6.94
+Tasks: 196 total,   8 running, 182 sleeping,   0 stopped,   6 zombie
+Cpu(s): 90.2% us,  0.3% sy,  0.0% ni,  9.3% id,  0.2% wa,  0.0% hi,  0.0% si
+Mem:  16635264k total, 15449484k used,  1185780k free,   127816k buffers
+Swap: 20971432k total,     4320k used, 20967112k free, 11489016k cached
+
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND            
+ 1122 usatlas1  25   0  769m 647m  88m R  100  4.0 769:43.25 python             
+21652 usatlas1  25   0  727m 613m  75m R   92  3.8  10:51.48 python             
+22106 usatlas1  25   0  728m 614m  75m R   92  3.8  10:18.62 python             
+24176 samgrid   25   0  410m 155m  27m R   92  1.0   7:41.21 d0gstar2.x         
+24512 usatlas1  25   0  765m 643m  88m R   92  4.0 791:32.31 python             
+26073 usatlas1  25   0  487m 355m  71m R   92  2.2   2:45.67 python             
+31695 usatlas1  25   0  768m 646m  88m R   92  4.0 772:36.85 python             
+ 2871 nobody    15   0  105m  55m 1004 S    2  0.3  87:41.02 gmond              
+    1 root      16   0  3392  548  468 S    0  0.0   0:02.16 init               
+    2 root      RT   0     0    0    0 S    0  0.0   0:01.08 migration/0        
+    3 root      34  19     0    0    0 S    0  0.0   0:00.12 ksoftirqd/0        
+    4 root      RT   0     0    0    0 S    0  0.0   0:00.73 migration/1        
+    5 root      34  19     0    0    0 S    0  0.0   0:00.06 ksoftirqd/1        
+close failed: [Errno 32] Broken pipe
+</pre>
+
+Also try out the other interactive tools in /opt/glideinWMS/tools:
+   * glidein_ps.py $JOBID: displays ps on the worker node
+   * glidein_ls.py $JOBID: display files of the current working directory on the worker node
+   * glidein_gdb.py $JOBID $PID: gdb backtrace on a PID on the worker node (can use the glidein_ps.py command to obtain)
+
+And finally, to execute your own arbitrary command, there is =glidein_interactive.py $JOBID $COMMAND $ARGS=, ie:
+<pre class="screen">
+[burt@tier2-d1 gwms-example]$ /opt/glideinWMS/tools/glidein_interactive.py 24.0 uname -a
+Linux iut2-c107.iu.edu 2.6.9-89.0.11.ELsmp #1 SMP Tue Sep 15 13:12:01 CDT 2009 i686 athlon i386 GNU/Linux
+</pre>
+
+That's it!  Have fun, change around test.sh and test.jdl (what happens if you do =Queue 2=?)  If the system's not too busy, try removing the sleep entirely and see how fast your job completes!  (Sometimes it will finish before I can even type condor_q).
+
+---++ More information
+
+glideinWMS:
+http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/
+
+%BR%
+%COMPLETE1% %BR%
+%RESPONSIBLE% Main.BurtHolzman - 22 Oct 2009 %BR%
+%REVIEW%

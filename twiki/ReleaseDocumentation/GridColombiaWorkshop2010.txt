@@ -1,0 +1,176 @@
+%META:TOPICINFO{author="KyleGross" date="1481047986" format="1.1" version="1.28"}%
+%META:TOPICPARENT{name="TutorialsFromThisRelease"}%
+<table width="100%">
+<tr><td valign="top">
+</td>
+<td valign="top">
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+---+++!! *Workshop Details*
+
+   * [[http://indico.fnal.gov/conferenceDisplay.py?confId=3137][Workshop agenda]]
+   * OSGEDU chat: https://integrationcloud.campfirenow.com/room/246255  (if you have an account)
+   * https://integrationcloud.campfirenow.com/e5714 for guest access
+   * ActionItemsGC2010
+
+---+++!! *Technical Reference Modules*
+
+%TOC%
+</td>
+<td valign="top" align="right" width="25%">
+%ATTACHURL%/osg-gco-logo.jpg
+</td>
+</tr>
+</table>
+
+
+---++ Part I: Scientific Computing on Grids
+
+---+++ Introductory Tutorial 
+   * [[http://www.ci.uchicago.edu/osgedu/schools/2009/gridcolombia/index.html][Grid Colombia 2009 user tutorial]]
+
+
+---+++ Working with the OSG Match Maker 
+   * [[OSGMatchMakerExercises][OSG Match Maker Exercises]]
+
+
+---+++ Working with the <nop>GlideinWMS job management system
+   * [[GlideinWMSDemo]]
+
+
+---+++ Working with information and discovery services
+   * [[http://indico.fnal.gov/getFile.py/access?contribId=15&sessionId=12&resId=0&materialId=slides&confId=2832][Background talk]]
+   * ReleaseDocumentation.OSGStorageDiscoveryTool is a toolkit for finding information about storage resources.
+
+---+++ Installing a personal OSG Client
+This installation of OSG client software is self sufficient and can be done on your desktop or laptop (if it is a supported Linux or OS X). For the installation on the test cluster, on =gc1-ui=, you may prefer the instructions in "Grid Clients and Certificates" that take advantage of the already installed Condor.
+   * [[Trash/Trash/SiteCoordination.GridClientTutorial][GridClientTutorial]]
+
+---++ Part II: Grid Site Building
+
+---+++ Grid Security
+   * Consult the OSG [[Documentation.SecurityRisksCE][security risks]] documentation.
+
+---+++ Grid Cluster Setup
+   * [[ClusterGettingStarted][Getting started]]
+   * [[ClusterNetworkConfiguration][Network configuration]]
+   * [[ClusterConfigureSSH][Setup SSH public key infrastructure]]
+   * [[ClusterNFSServer][Setup an NFS server]]
+   * [[Trash.ReleaseDocumentationClusterLocalConfig][Setup for Local Cluster]]
+   * [[ClusterCreateAccounts][Creating user accounts]]
+   * [[ClusterCondorInstall][Install Condor job management system]]
+
+---+++ Grid Clients and Certificates
+These instruction are meant solely for the client software installation on the interactive node of the cluster, =gc1-ui=. They rely on a working system Condor, installed and configured as described above in ClusterCondorInstall. This is different from the independent installation described above in "Installing a personal OSG Client".
+   * Let the OSG client use the system installation of Condor:<pre>
+export VDTSETUP_CONDOR_LOCATION=/usr
+export VDTSETUP_CONDOR_CONFIG=/etc/condor/condor_config
+</pre>
+   * [[Trash/Trash/SiteCoordination.GridClientTutorial][GridClientTutorial]] 
+      * Remember to use the *Grid Colombia* pacman cache, http://osg-vtb.uchicago.edu/gco, and the workshop Squid server. 
+      * So replace the =pacman -get= command in the above tutorial with: <pre>
+pacman -retry 3
+pacman -http-proxy http://192.168.109.130:3128 -get http://osg-vtb.uchicago.edu/gco:client</pre>
+   * [[Trash/SummerGridWorkshop.GridCertificateRequestTutorial][Request user and host certificate]]
+   * [[RequestVOMembershipTutorial][Request admission into the OSGEDU VO]]
+
+
+---+++ Worker Node Client
+   * Here are the standard instructions for the installation: WorkerNodeClient
+   * Modify these to use the Grid Colombia cache and workshop Squid server as discussed above.
+
+
+---+++ GUMS Installation
+   * GridColombiaInstallGUMS
+
+
+---+++ Compute Element
+   * [[ClusterLocalChecklist][Checklist for Local Cluster]]
+   * [[InstallCETutorial][Installing a Compute Element (CE)]]
+
+
+---+++ Validating the Compute Element
+   * [[ValidateCEGridColombia][Checklist and instructions for validating the CE]]
+   * [[OSGCETestExercises][More CE testing exercises]]
+
+
+
+---+++ Storage Element
+   * [[Trash.ReleaseDocumentationInstallSETutorial][Installing a Storage Element (SE)]]
+
+
+---++ Part III: Central Services
+
+
+---+++ GOC Services
+   * [[InstallReSSTutorial][Installing the !ReSS information service (GOC)]]
+   * [[InstallBDIITutorial][Installing the BDII information service (GOC)]]
+
+
+---++ Part IV: Other
+
+---+++ Match Making Service 
+   * [[InstallMatchMakingServiceTutorial][Install a match making service on a Grid client host]]
+
+
+---+++ Exercises
+   * Using the OSG MM service OSGMatchMakerExercises
+
+
+---+++ Network Performance
+   * [[NetworkPerformanceTutorial][Tutorial on network performance]]
+
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+
+<!--
+   * Set USERSTYLEURL = https://twiki.grid.iu.edu/twiki/pub/ReleaseDocumentation/GridColombiaWorkshop2009/centerpageborder.css
+-->
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = RobGardner
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = User
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = Student
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Training
+
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %NO%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       =  
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %NO%
+
+
+############################################################################################################
+-->
+
+%META:FILEATTACHMENT{name="osg-gco-logo.jpg" attachment="osg-gco-logo.jpg" attr="" comment="" date="1265930567" path="osg-gco-logo.jpg" size="12389" stream="osg-gco-logo.jpg" tmpFilename="/usr/tmp/CGItemp21646" user="RobGardner" version="1"}%

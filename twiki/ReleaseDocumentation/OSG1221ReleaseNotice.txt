@@ -1,0 +1,45 @@
+%META:TOPICINFO{author="SuchandraThapa" date="1313087759" format="1.1" version="1.1"}%
+%META:TOPICPARENT{name="WebHome"}%
+
+
+<div style="font-family: Tahoma, Geneva, sans-serif;">
+<div style="border: thin solid #000; background-color: #F90;">
+  <h1 align="center">OSG 1.2.21 Update Notification</h1>
+</div>
+<br/>
+
+<div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; border: thin solid #000; background-color: #F93;">Date: <span style="font-size: 14px; font-weight: normal;">August 11, 2011</span></div>
+<br/>
+<div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Affected Components</div>
+<div>
+  <p>The following components are affected:</p>
+  <ul>
+    <li> All RSV installations </li>
+    <li>CE installations</li>
+
+    <li>Gratia</li>
+  </ul>
+</div>
+<br/>
+<div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Summary</div>
+<div> 
+  <p>This release contains the following updates:</p>
+  <ul>
+    <li>GIP updates </li>
+
+    <li>Gratia probe updates</li>
+    <li>JDK update</li>
+    <li>Bestman2 update to 2.0.14</li>
+    <li>LFC update</li>
+  </ul>
+  <p>Several other updates are also included in this release, see the VDT update page for more details<br/>
+
+</p>
+</div>
+<div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Update Instructions</div>
+<div>Update instructions can be found on the OSG Twiki under the OSG 1.2 <a href="https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OSG12UpdateInstructions">update instructions</a>.</div>
+<br/>
+<div style="font-family: Tahoma, Geneva, sans-serif; font-size: 14px; font-weight: bold; background-color: #369; border: thin solid #000; color: #CCC;">Additional Information</div>
+<div>The release notes for the VDT 2.0.0p28 release underlying this release can be found <a href="http://vdt.cs.wisc.edu/releases/2.0.0/release-p28.html">here</a>.</div>
+<br/>
+</div>

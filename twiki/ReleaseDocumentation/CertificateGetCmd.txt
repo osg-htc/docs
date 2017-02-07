@@ -1,0 +1,364 @@
+%META:TOPICINFO{author="BrianLin" date="1486406290" format="1.1" version="1.28"}%
+%META:TOPICPARENT{name="ReleaseDocumentation.CertificateUserGet"}%
+---+!! Get or renew a certificate with the command line interface
+---+!! %RED% *This is obsolete!!!  OSG PKI documentation for the command line can be found [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/OSGPKICommandlineClients][here]].
+* %ENDCOLOR%
+%DOC_STATUS_TABLE%
+%TOC%
+
+---++ About This Document
+This document describes the process of getting an OSG certificate using the command line interface.
+
+---++ Preparation
+
+%NOTE% If you're going to request a certificate via your web browser, skip this section and jump to the [[https://twiki.grid.iu.edu/bin/view/Documentation/CertificateGetWeb][Web browser based instructions]].
+
+Instructions below describe using the cert-scripts package in VDT to request, retrieve and renew a certificate. To check that these are available, execute the following commands
+
+For sh shell variants:
+<pre class="screen">
+%UCL_PROMPT% source $VDT_LOCATION/setup.sh
+</pre>
+
+For csh shell variants:
+<pre class="screen">
+%UCL_PROMPT% source $VDT_LOCATION/setup.csh
+</pre>
+
+<pre class="screen">
+%UCL_PROMPT% cert-request -V
+checking CertLib version, V2-7,  This is the latest version, released 18 May 2009.
+  cert-request version: V2-7
+  CertLib version: V2-7
+</pre>
+
+If this succeeds then proceed with the script based instructions below. If you get an error, first follow the instructions to install the cert-scripts package.
+
+---+++ Install cert-scripts package
+ Follow the instructions for installing the cert-scripts package into a temporary location in the subsection shown at [[ReleaseDocumentation.GetHostServiceCertificates#Install_the_Certificate_Scripts][Certificate scripts package]] and then return here to continue with requesting your personal user certificate.
+
+---+++ Before you get your DOEGrids certificate
+ Before starting, determine which affiliation to choose (this corresponds to a Registration Authority, RA). If you are a member of OSG, choose OSG as your RA. See the list of RAs on the right side of the [[http://www.doegrids.org/][DOEGrids home page]], or type:
+
+<pre class="screen">
+%UCL_PROMPT% cert-request -list
+</pre>
+
+For a personal certificate you will also need to list a sponsor, an individual known to the RA who has met you in person and can vouch for your identity. Your VO can help you identify the appropriate sponsor. If you have trouble identifying a known sponsor then use your supervisor as your sponsor and be sure to mention the name of your home institution in the =-reason= message of the =cert-request= script (or "Comments" field of the web form).
+
+Think of a unique passphrase.
+
+Note that a DOEGrids certificate is valid for one year. You will receive email notices from DOEGrids prior to certificate expiration so that you can renew it in time to avoid an interruption in service. These notices are sent to the email address you provide when you request the certificate. If your email address changes before the certificate expires you are required to revoke that certificate, and most probably you should request a new certificate with the new email address (before you revoke the old one ;) ).
+
+---++ Script based instructions
+ The instructions here are based on using the default assumptions which includes storing your personal certificate (usercert.pem) and private key (userkey.pem) files in ~/.globus. There are additional options and capabilities available described in the [[Security.CSReadMe][full man pages]].
+
+---+++ Requirements
+ See the Preparation section above.
+
+---+++ Obtain a personal certificate via scripts
+
+---++++ cert-request  -ou p
+
+<pre class="screen">
+%UCL_PROMPT% cert-request -ou p -agree -name "Firstname Lastname" -email your@email.address  -phone 123456789 
+     -reason "to use OSG for my VO VVVV, my home institute is Wonderful University"             
+     -affiliation osg -vo VVVV   -sponsor_name "My Sponsor" -sponsor_email my.sponsor@wonderful.edu 
+     -sponsor_phone 987654321  -label req1
+checking CertLib version, V2-5,  This is latest version, released 24 Aug 2007. 
+Processing OU=People request. 
+you will be  prompted for a passphrase to encyrpt the private key that is being generated. 
+Generating a 2048 bit RSA private key 
+....+++ ................................+++ 
+writing new private key to '~/.globus/req1key.pem' 
+Enter PEM pass phrase: 
+Verifying - Enter PEM pass phrase: 
+----- 
+osg OSG OSG:OSG  
+Your Certificate Request has been successfully submitted 
+Your Certificate Request id: 99999          
+You will receive a notification email from the CA when your certificate         
+has been issued. Please disregard the instructions to download your         
+certificate though a web browser and use the cert-retrieve script instead.
+</pre>
+
+This example shows all parameters and command line arguments. Notice that multi-word arguments are enclosed in double quotes(") , as is usual for unix commands. The script will prompt you for any required arguments which are omitted. The meaning of these arguments is
+
+   * =-ou p= - *p* means a personal certificate, *s* means a [[ReleaseDocumentation/GetGridCertificates][host/service certificate]]. 
+   * =-agree= - means you agree to the subscriber obligation in the [[http://www.doegrids.org/Docs/CP-CPS.pdf][DOEGrids CP/CPS]]. 
+   * =-name= - your full name 
+   * =-email= - your email address, preferably from your home institution 
+   * =-phone= - your office phone number 
+   * =-reason= - a short description of why you need the certificate, and include the name of your home institution 
+   * =-affiliation osg= - *osg* is the name of the registration authority to handle this request. These scripts can be used for the other RAs working with DOEGrids. 
+   * =-vo VVVV= - *VVVV* should be the name of your virtual organization as registered with OSG, like LIGO, CMS, USATLAS, STAR, etc.<br />If you are working with OSG but your VO is not yet registered with OSG then you can specify the VO as =OSG=. 
+   * =-sponsor_name= - the name of your sponsor. 
+   * =-sponsor_email= - the email address of your sponsor 
+   * =-sponsor_phone= - the phone number of your sponsor 
+   * =-label= - a label to use for this request, which is used to name some temporary files that must be available at the time you download the issued certificate with the =cert-retrieve= command. 
+
+---+++ Notification of issuance
+ If your request is rejected you should receive some kind of email notice from the RA or an Agent explaining why. After your certificate request is processed and a certificate is issued you will receive an email like:
+
+<pre class="file">
+Subject: DOEGrids CA Certificate Request 
+Date: Fri, 30 Nov 2007 14:55:56 -0800 (PST) 
+From: DOEGrids-CA-1@doegrids.org 
+To: your@email.address  
+Your Personal certificate request has been processed successfully. 
+SubjectDN= CN=Firstname Lastname 999999,OU=People,DC=doegrids,DC=org 
+notAfter= Nov 29, 2008 2:55:51 PM 
+notBefore= Nov 30, 2007 2:55:51 PM 
+Serial Number= 0xNNNN   
+Complete details can be found here: 
+https://pki1.doegrids.org:443/displayBySerial?op=displayBySerial&serialNumber=DDDDD  
+Your certificate requested using the script interface, 
+request id: 99999, has been approved and is available for download.  
+To retrieve your certificate, execute the command below using the same 
+working directory from which the request was made.  
+# cert-retrieve -serialnum DDDDD  
+If you requested the certificate with optional parameters specifying labelling 
+or a non-standard directory for storing your certificate see the cert-retrieve 
+and cert-request man pages for additional explanation. 
+# cert-retrieve -help
+# cert-request -help
+</pre>
+
+In the example above =0xNNNN= and =DDDDD= is the certificate serial number in hexadecimal and decimal notation, respectively. =99999= is the same request ID that was shown for the result of =cert-request=.
+
+---++++ cert-retrieve
+
+<pre class="screen">
+%UCL_PROMPT% cert-retrieve -serialnum 0xNNNN -label req1 -p12 mycert.p12
+checking CertLib version, V2-5,  This is latest version, released 24 Aug 2007.  
+using CA doegrids Using URL 
+https://pki1.doegrids.org/displayBySerial?op=displayBySerial&serialNumber=0xNNNN 
+Checking that the usercert and ~/.globus/req1key.pem match 
+Enter pass phrase for /home/olson/.globus/req1key.pem: 
+writing RSA key 
+~/.globus/usercert.pem and ~/.globus/userkey.pem now contain your Globus credential 
+Enter pass phrase for ~/.globus/userkey.pem: 
+Enter Export Password: 
+Verifying - Enter Export Password: 
+Your PKCS12 file mycert.p12 credential with your certificate and private key was generated.  
+For information on how to import it into your favorite browser or email application   
+Google  import certificate  
+and you will get lots of examples.
+</pre>
+
+The arguments are:
+
+   * =-serialnum 0xNNNN= - the certificate serial number, 0xNNNN is the hexadecimal form, one can use the decimal form, DDDDD. 
+   * =-label= - this label matches that used for the =cert-request= command 
+   * =-p12= - optional generation of a PKCS12 format file which can be used to import the certificate into web/email applications. Without the =-p12= flag you will have a single prompt for your *passphrase*, and it must match what you used with the =cert-request= command. If you use the =-p12= flag you a receive another prompt for this same *passphrase* because there is another execution of openssl to produce the PKCS12 file after the certificate is already downloaded. Then you receive a prompt and verification for the *Export Password* which encrypts the PKCS12 file ( =mycert.p12= ). This file is in the format that can be imported into your web browser and email client, and you will use the same *Export Password* so your browser/email can unencrypt it during the import process. 
+
+---+++ Obtain a host or service certificate
+The same <tt>cert-request</tt> command line tool is used to request a host or service certificate as a personal certificate, just with different options. This tool submits a certificate request that must be processed by the RA before the certificate is issued.  There is also a privileged feature of the DOEGrids CA called gridadmin [link to something useful] which allows individuals to be pre-authorized to get host or service certificates immediately upon request without additional intervention.
+
+There is technically no real difference between a host and service certificate.  For both types the DOEGrids CA issued certificates with OU=Services.  Without the <tt>--service yyyy</tt> option of the cert-request command the subjectname of the certificate will have just CN=hostname rather than CN=yyyy/hostname. 
+
+After receiving email notification that your certificate was issued you download it and match it to the private key with the <tt>cert-retrieve</tt> command.  In order to match a certificate with the private key generated during the cert-request step, use the <tt>--label</tt> parameter.
+
+---++++ cert-request --ou s
+
+<pre class="screen">
+%UCL_PROMPT% cert-request --agree --ou s --host host.example.com --service test \
+       --email you@example.com --phone 1234567890 \
+       --name "First Lastname" --affiliation osg --vo YOURVO \
+      --reason "the comment recorded with this request" \
+      --label myhost
+checking CertLib version, V2-7,  This is the latest version, released 18 May 2009.
+Processing OU=Services request.
+Generating a 2048 bit RSA private key
+..........................................................................+++
+................................................+++
+writing new private key to './myhostkey.pem'
+-----
+osg
+OSG
+OSG:YOURVO
+
+Your Certificate Request has been successfully submitted
+Your Certificate Request id: NNNNN
+
+        You will receive a notification email from the CA when your certificate
+        has been issued. Please disregard the instructions to download your
+        certificate though a web browser and use the cert-retrieve script instead.
+
+
+%UCL_PROMPT% ls -l
+-rw------- 1 user group 1679 May 19 15:27 myhostkey.pem
+-rw-rw-rw- 1 user group   16 May 19 15:27 myhost.req
+</pre>
+
+You must give your name with the <tt>--name</tt> parameter.  If this certificate is used for a host that is managed
+by a group rather than an individual it is allowed (even encouraged) for the email address used in the certificate
+to be a group alias rather than an individual's address so that future notifications about this certificate
+are received by the group even if the individual that requested the certificate has moved on to other activities.
+
+---++++ cert-retrieve
+
+<pre class="screen">
+%UCL_PROMPT% cert-retrieve --serialnum 0xNNNN --label myhost --dir .
+checking CertLib version, V2-7,  This is the latest version, released 18 May 2009.
+ using CA doegrids
+Using URL https://pki1.doegrids.org/displayBySerial?op=displayBySerial&serialNumber=0xNNNN
+Checking that the certificate and ./myhostkey.pem match
+writing RSA key
+./hostcert.pem and ./hostkey.pem now contain your new credential
+
+%UCL_PROMPT% ls -l
+-rw-r--r-- 1 user group 1440 May 19 15:43 hostcert.pem
+-rw------- 1 user group 1679 May 19 15:27 hostkey.pem
+</pre>
+
+Notice that the cert-retrieve command has the --dir parameter specified as '.'.  
+This is because the default location to store the files for a service certificate request is your
+current working directory.  The serial number of the certificate to download is provided in the email notice
+sent to you when the certificate was issued.
+
+
+---+++ How to find out information stored in your certificate
+Once you get your certificate, you may need to tell others some information about your certificate, such as your Distinguished Name (DN) or when your certificate is issued or expires. 
+   * openssl x509 -text -in mycert.pem 
+
+will print all of the information in a human readable form. 
+
+
+---+++ Renew an existing personal certificate
+You can renew your personal certificate (before it expires) with the <tt>cert-renew</tt> command.  This command will
+authenticate to the DOEGrids CA using your existing certificate and you will be issued a new certificate immediately. 
+After your certificate expires
+you need to request a new certificate as described above.
+The default parameter values of the <tt>cert-renew</tt> command will obtain a new certificate for the one
+stored in your <tt>~/.globus/usercert.pem, ~/.globus/userkey.pem</tt> files.  The command will prompt you for any required parameters
+not supplied on the command line.
+If you want to renew a personal certificate stored in different
+files then check the full description of the command with <tt>cert-renew --help</tt>.
+Also shown in the example below is the creation of the PKCS12 format file (.p12) that holds both the new certificate and private key.
+This is the file format usually need to import your certificate into your web browser.
+
+---++++ cert-renew
+
+
+An example of use is shown below:
+<pre class="screen">
+%UCL_PROMPT% cert-renew --agree --p12 my-new-cert.p12
+checking CertLib version, V2-7,  This is the latest version, released 18 May 2009.
+you will be  prompted for a passphrase to encyrpt the private key that is being generated         .
+ using CA doegrids
+Generating a 2048 bit RSA private key
+.................................+++
+......+++
+writing new private key to '/home/user/.globus/newkey.pem'
+Enter PEM pass phrase:
+Verifying - Enter PEM pass phrase:
+-----
+Connecting to the CA. You will be prompted for the passphrase
+for /home/user/.globus/userkey.pem.
+Enter PEM pass phrase:
+your renewed certificate is in /home/user/.globus/newcert.pem
+You can move it to /home/user/.globus/usercert.pem to replace your
+current one
+Your new key is in /home/user/.globus/newkey.pem and should be moved to
+/home/user/.globus/userkey.pem
+
+Please ignore the mail that you will receive from the CA. It
+only applies to certificate requests that were made via a web browser
+
+Now creating PKCS12 file my-new-cert.p12.
+First you will enter your passphrase for your new private key,
+then you will enter the passphrase to encrypt the .p12 file.
+Enter pass phrase for /home/user/.globus/newkey.pem:
+Enter Export Password:
+Verifying - Enter Export Password:
+Your PKCS12 file my-new-cert.p12 credential with your certificate and
+private key was generated.  For information on how to import it
+into your favorite browser or email application
+  Google  import certificate <application name>
+and you will get lots of examples.
+
+%UCL_PROMPT% ls -ltr ~/.globus
+-rw-r--r-- 1 user group   28 Apr 15 15:13 usercert.pem
+-rw------- 1 user group   27 Apr 15 15:13 userkey.pem
+-rw------- 1 user group 1743 May 19 12:21 newkey.pem
+-rw-r--r-- 1 user group 1498 May 19 12:21 newcert.pem
+
+%UCL_PROMPT% ls -ltr *.p12
+-rw------- 1 user group 2661 May 19 12:21 my-new-cert.p12
+</pre>
+
+In this example you see that you enter your password/passphrase several times.  These are for your
+old private key, the new private key, and also the encryption passphrase for the PKCS12 file (.p12).
+If you use the same password or passphrase for each of these files then you can just enter
+the same one each time.
+
+The CA will send you a notification email as shown above under *Notification* but you
+can ignore it (as mentioned in the command output) since you have already
+downloaded your new certificate.
+
+---+ Comments
+| PM2RPM_TASK = CE | Main.RobertEngel | 28 Aug 2011 - 05:49 |
+| PM2RPM_TASK = SE | Main.RobertEngel | 28 Aug 2011 - 05:49 |
+| PM2RPM_TASK = SECURITY | Main.RobertEngel | 28 Aug 2011 - 05:49 |
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = JamesBarlow
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MineAltunay
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = IgorSfiligoi
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+ 
+-->
+
+%META:TOPICMOVED{by="JamesBarlow" date="1273172310" from="Documentation.CertificateGetCmd" to="ReleaseDocumentation.CertificateGetCmd"}%
