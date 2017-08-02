@@ -8,8 +8,6 @@ Plan the Site
 
 If you have not done so already, [plan the overall architecture of your OSG site](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SitePlanning). It is recommended that your plan be sufficiently detailed to include the OSG hosts that are needed and the main software components for each host. Be sure to consider [the operating systems that OSG supports](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SupportedOperatingSystems). A simple way to organize this information is in a table; for example, a basic site might include:
 
-<span class="twiki-macro TABLE" sort="off"></span>
-
 | Purpose              | Host                                | Major Software                                           |
 |:---------------------|:------------------------------------|:---------------------------------------------------------|
 | Compute Element (CE) | `osg-ce.example.edu`                | OSG CE, HTCondor Central Manager, etc. (`osg-ce-condor`) |
@@ -27,7 +25,8 @@ Add OSG Software
 
 If necessary, provision all OSG hosts that are in your site plan and that do not exist yet.
 
-<span class="twiki-macro NOTE"></span> For sites with more than a trivial number of hosts, it is recommended to use some sort of configuration management tool to install, configure, and maintain your site. While beyond the scope of OSG’s documentation to explain how to select and use such a system, some popular configuration management tools are [Puppet](http://puppetlabs.com), [Chef](https://www.chef.io), [Ansible](https://www.ansible.com), and [CFEngine](http://cfengine.com).
+!!! note
+    For sites with more than a trivial number of hosts, it is recommended to use some sort of configuration management tool to install, configure, and maintain your site. While beyond the scope of OSG’s documentation to explain how to select and use such a system, some popular configuration management tools are [Puppet](http://puppetlabs.com), [Chef](https://www.chef.io), [Ansible](https://www.ansible.com), and [CFEngine](http://cfengine.com).
 
 ### General Installation Instructions ###
 
@@ -112,7 +111,6 @@ To begin running [GlideinWMS](http://www.uscms.org/SoftwareComputing/Grid/WMS/gl
 -   The fully qualified hostname of the CE
 -   Resource/WLCG name
 -   OS major version of your worker nodes — EL 6, EL 7, or a mix of both?
--   Do your worker nodes use gLExec?
 -   Do you accept multicore jobs?
 -   Maximum job walltime
 -   Maximum job memory usage
