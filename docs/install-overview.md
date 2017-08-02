@@ -120,7 +120,7 @@ Once the factory team has enough information, they will start submitting pilots 
 Verify Reporting and Monitoring
 -------------------------------
 
-To verify that your site is correctly reporting to the OSG, check [http://gratiaweb.grid.iu.edu/gratia/site?facility=%RED%&lt;SITE](http://gratiaweb.grid.iu.edu/gratia/site?facility=%RED%%3CSITE) NAME&gt;<span class="twiki-macro ENDCOLOR"></span> for records of your site reports. If you have enabled the OSG VO, you can also check <http://osg-flock.grid.iu.edu/monitoring/condor/sites/all_1day.html>.
+To verify that your site is correctly reporting to the OSG, check [OSG's Accounting Portal](https://gracc.opensciencegrid.org/dashboard/db/site-summary) for records of your site reports (select your site from the drop-down box). If you have enabled the OSG VO, you can also check <http://osg-flock.grid.iu.edu/monitoring/condor/sites/all_1day.html>.
 
 Scale Up Site to Full Production
 --------------------------------
