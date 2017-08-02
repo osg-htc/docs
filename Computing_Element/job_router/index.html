@@ -46,143 +46,109 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
 	<ul class="current">
+	  
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../..">Home</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
           
-            <li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides</span>
     <ul class="subnav">
-    <li><span>Install Guides</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../Common/yum/">Yum Repos</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../Common/ca/">CA Certificates</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../HTCondor_CE/">HTCondor-CE</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../Frontier_Squid/squid/">HTTP Cache</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../Other/cvmfs/">CVMFS</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../Other/gsissh/">GSI-enabled SSH</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../Other/wn/">RPM-based Worker Node</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../Other/glexec/">Worker node glexec</a>
-        
-    </li>
-
-        
+                <li class="">
+                    
+    <a class="" href="../../Common/yum/">Yum Repos</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Common/ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../HTCondor_CE/">HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Frontier_Squid/squid/">HTTP Cache</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Other/cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Other/wn/">RPM-based Worker Node</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Other/glexec/">Worker node glexec</a>
+                </li>
     </ul>
-<li>
+	    </li>
           
-            <li>
+            <li class="toctree-l1">
+		
+    <span class="caption-text">In-Progress Docs</span>
     <ul class="subnav">
-    <li><span>In-Progress Docs</span></li>
+                <li class="">
+                    
+    <a class="" href="../../Common/ca_updater/">CA Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Common/cert_scripts/">Certificate Request Scripts</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Job Router Recipe</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#writing-routes-for-htcondor-ce">Writing Routes For HTCondor-CE</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#about-this-guide">About This Guide</a></li>
+        
+            <li><a class="toctree-l4" href="#quirks-and-pitfalls">Quirks and Pitfalls</a></li>
+        
+            <li><a class="toctree-l4" href="#how-job-routes-are-constructed">How Job Routes are Constructed</a></li>
+        
+            <li><a class="toctree-l4" href="#generic-routes">Generic Routes</a></li>
+        
+            <li><a class="toctree-l4" href="#routes-for-htcondor-batch-systems">Routes for HTCondor Batch Systems</a></li>
+        
+            <li><a class="toctree-l4" href="#routes-for-non-htcondor-batch-systems">Routes for non-HTCondor Batch Systems</a></li>
+        
+            <li><a class="toctree-l4" href="#example-configurations">Example Configurations</a></li>
+        
+            <li><a class="toctree-l4" href="#reference">Reference</a></li>
+        
+        </ul>
+    
 
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../Common/ca_updater/">CA Updater</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../Common/cert_scripts/">Certificate Request Scripts</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Job Router Recipe</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#writing-routes-for-htcondor-ce">Writing Routes For HTCondor-CE</a></li>
-                
-                    <li><a class="toctree-l4" href="#about-this-guide">About This Guide</a></li>
-                
-                    <li><a class="toctree-l4" href="#quirks-and-pitfalls">Quirks and Pitfalls</a></li>
-                
-                    <li><a class="toctree-l4" href="#how-job-routes-are-constructed">How Job Routes are Constructed</a></li>
-                
-                    <li><a class="toctree-l4" href="#generic-routes">Generic Routes</a></li>
-                
-                    <li><a class="toctree-l4" href="#routes-for-htcondor-batch-systems">Routes for HTCondor Batch Systems</a></li>
-                
-                    <li><a class="toctree-l4" href="#routes-for-non-htcondor-batch-systems">Routes for non-HTCondor Batch Systems</a></li>
-                
-                    <li><a class="toctree-l4" href="#example-configurations">Example Configurations</a></li>
-                
-                    <li><a class="toctree-l4" href="#reference">Reference</a></li>
-                
-            
-            </ul>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../Other/wn_oasis/">OASIS-based Worker Node</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../Storage/gridftp/">GridFTP Server</a>
-        
-    </li>
-
-        
     </ul>
-<li>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Other/wn_oasis/">OASIS-based Worker Node</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Storage/gridftp/">GridFTP Server</a>
+                </li>
+    </ul>
+	    </li>
           
         </ul>
       </div>
@@ -923,7 +889,7 @@ JOB_ROUTER_ENTRIES = \
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/opensciencegrid/docs" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../../Common/cert_scripts/" style="color: #fcfcfc;">&laquo; Previous</a></span>
