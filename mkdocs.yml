@@ -8,6 +8,7 @@ extra_css:
 
 pages:
 - Home: 'index.md'
+- Installation Overview: 'install-overview.md'
 - Install Guides:
   - 'Yum Repos': 'Common/yum.md'
   - 'CA Certificates': 'Common/ca.md'
