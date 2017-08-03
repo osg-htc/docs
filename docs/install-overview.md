@@ -11,7 +11,7 @@ If you have not done so already, [plan the overall architecture of your OSG site
 | Purpose              | Host                                | Major Software                                           |
 |:---------------------|:------------------------------------|:---------------------------------------------------------|
 | Compute Element (CE) | `osg-ce.example.edu`                | OSG CE, HTCondor Central Manager, etc. (`osg-ce-condor`) |
-| Worker Nodes         | `w<em>NNN</em>.cluster.example.edu` | OSG worker node client (`osg-wn-client`)                 |
+| Worker Nodes         | `wNNN.cluster.example.edu`          | OSG worker node client (`osg-wn-client`)                 |
 
 Prepare the Batch System
 ------------------------
