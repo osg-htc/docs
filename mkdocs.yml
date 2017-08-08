@@ -10,22 +10,22 @@ pages:
 - Home: 'index.md'
 - Installation Overview: 'install-overview.md'
 - Install Guides:
-  - 'Yum Repos': 'Common/yum.md'
-  - 'CA Certificates': 'Common/ca.md'
-  - 'HTCondor-CE': 'Computing_Element/HTCondor_CE.md'
-  - 'HTTP Cache': 'Frontier_Squid/squid.md'
-  - 'CVMFS': 'Other/cvmfs.md'
-  - 'GSI-enabled SSH': 'Other/gsissh.md'
-  - 'RPM-based Worker Node': 'Other/wn.md'
-  - 'Worker node glexec': 'Other/glexec.md'
+  - 'Yum Repos': 'common/yum.md'
+  - 'CA Certificates': 'common/ca.md'
+  - 'HTCondor-CE': 'compute-element/HTCondor_CE.md'
+  - 'HTTP Cache': 'frontier-squid/squid.md'
+  - 'CVMFS': 'other/cvmfs.md'
+  - 'GSI-enabled SSH': 'other/gsissh.md'
+  - 'RPM-based Worker Node': 'other/wn.md'
+  - 'Worker node glexec': 'other/glexec.md'
 - Release Information:
-  - 'RPM Signing': 'Release/signing.md'
+  - 'RPM Signing': 'release/signing.md'
 - In-Progress Docs:
-  - 'CA Updater': 'Common/ca_updater.md'
-  - 'Certificate Request Scripts': 'Common/cert_scripts.md'
-  - 'Job Router Recipe': 'Computing_Element/job_router.md'
-  - 'OASIS-based Worker Node': 'Other/wn_oasis.md'
-  - 'GridFTP Server': 'Storage/gridftp.md'
+  - 'CA Updater': 'common/ca_updater.md'
+  - 'Certificate Request Scripts': 'common/cert_scripts.md'
+  - 'Job Router Recipe': 'compute-element/job_router.md'
+  - 'OASIS-based Worker Node': 'other/wn_oasis.md'
+  - 'GridFTP Server': 'storage/gridftp.md'
 
 markdown_extensions:
   - admonition

@@ -77,7 +77,7 @@ $ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rp
     
 **WARNING**: if you have your own mirror or configuration of the EPEL
 repository, you **MUST** verify that the OSG repository has a better yum
-priority than EPEL ([details](Common/InstallBestPractices#YumPriorities)).
+priority than EPEL ([details](common/InstallBestPractices#YumPriorities)).
 Otherwise, you will have strange dependency resolution (*depsolving*) issues.
 
 ### Install the Yum priorities package
@@ -181,5 +181,5 @@ strange dependency resolution issues.
 References
 ==========
 
--   [Basic use of Yum](Common/YumRpmBasics)
--   [Best practices in using Yum](Common/InstallBestPractices)
+-   [Basic use of Yum](common/YumRpmBasics)
+-   [Best practices in using Yum](common/InstallBestPractices)

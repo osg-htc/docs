@@ -19,7 +19,7 @@ You have four options for installing CA certificates:
 
 Additionally this page also provides instruction on installation of a tool (fetch-crl) to ensure your site has up-to-date certificate revocation list (CRL) from the CA.
 
-Prior to following the instructions on this page, you must enable our [yum repositories](../Common/yum.md)
+Prior to following the instructions on this page, you must enable our [yum repositories](../common/yum.md)
 
 Install CA certificates: Options
 ================================
@@ -180,7 +180,7 @@ By default, `fetch-crl` connects directly to the remote CA; this is
 inefficient and potentially harmful if done simultaneously by many nodes
 (e.g. all the worker nodes of a big cluster). We recommend you provide a
 HTTP proxy (such as `squid`) the worker nodes can utilize; OSG provides
-[packaging of squid](../Frontier_Squid/squid.md).
+[packaging of squid](../frontier-squid/squid.md).
 
 To configure fetch-crl to use an HTTP proxy server:
 

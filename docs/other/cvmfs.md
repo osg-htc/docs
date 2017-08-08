@@ -57,7 +57,7 @@ rm -rf /var/cache/cvmfs/*.*
 Install Instructions
 --------------------
 
-Prior to installing CVMFS, make sure the [yum repositories](../Common/yum.md) are correctly configured for OSG.
+Prior to installing CVMFS, make sure the [yum repositories](../common/yum.md) are correctly configured for OSG.
 
 The following will install cvmfs from the OSG repository. It will also install cern public keys as well as fuse and autofs if you do not have them, and it will install the configuration for the OSG CVMFS distribution, OASIS.
 
