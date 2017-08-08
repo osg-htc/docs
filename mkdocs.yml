@@ -18,6 +18,8 @@ pages:
   - 'GSI-enabled SSH': 'Other/gsissh.md'
   - 'RPM-based Worker Node': 'Other/wn.md'
   - 'Worker node glexec': 'Other/glexec.md'
+- Release Information:
+  - 'RPM Signing': 'Release/signing.md'
 - In-Progress Docs:
   - 'CA Updater': 'Common/ca_updater.md'
   - 'Certificate Request Scripts': 'Common/cert_scripts.md'
@@ -27,5 +29,6 @@ pages:
 
 markdown_extensions:
   - admonition
+  - codehilite
   - osg_markdown.colors
 
