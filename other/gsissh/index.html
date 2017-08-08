@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>GSI-enabled SSH - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "GSI-enabled SSH";
+    var mkdocs_page_input_path = "other/gsissh.md";
+    var mkdocs_page_url = "/other/gsissh/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/yum/">Yum Repos</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/HTCondor_CE/">HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../frontier-squid/squid/">HTTP Cache</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../cvmfs/">CVMFS</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">GSI-enabled SSH</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#installing-gsi-openssh">Installing GSI OpenSSH</a></li>
+    
+
+    <li class="toctree-l3"><a href="#requirements">Requirements</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#host-and-os">Host and OS</a></li>
+        
+            <li><a class="toctree-l4" href="#users-and-groups">Users and Groups</a></li>
+        
+            <li><a class="toctree-l4" href="#networking">Networking</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#installation-procedure">Installation procedure</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#gsi-openssh-installation">GSI OpenSSH Installation</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#configuration-and-operations">Configuration and Operations</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#useful-configuration-and-log-files">Useful configuration and log files</a></li>
+        
+            <li><a class="toctree-l4" href="#configuration">Configuration</a></li>
+        
+            <li><a class="toctree-l4" href="#configuration_1">Configuration</a></li>
+        
+            <li><a class="toctree-l4" href="#using-a-gridmap-file-for-authorization">Using a gridmap file for authorization</a></li>
+        
+            <li><a class="toctree-l4" href="#using-lcmaps-and-gums-for-authorization">Using LCMAPS and GUMS for authorization</a></li>
+        
+            <li><a class="toctree-l4" href="#starting-and-enabling-services">Starting and Enabling Services</a></li>
+        
+            <li><a class="toctree-l4" href="#stopping-and-disabling-services">Stopping and Disabling Services</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#troubleshooting">Troubleshooting</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#test-gsi-openssh">Test GSI OpenSSH</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#how-to-get-help">How to get Help?</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../wn/">RPM-based Worker Node</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../glexec/">Worker node glexec</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">In-Progress Docs</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca_updater/">CA Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/cert_scripts/">Certificate Request Scripts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job_router/">Job Router Recipe</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../wn_oasis/">OASIS-based Worker Node</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../storage/gridftp/">GridFTP Server</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Install Guides &raquo;</li>
+        
+      
+    
+    <li>GSI-enabled SSH</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/other/gsissh.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="installing-gsi-openssh">Installing GSI OpenSSH</h1>
+<p>This document gives instructions on installing and using the GSI OpenSSH server available in the OSG repository and configuring it so that you can use on your cluster.</p>
+<h1 id="requirements">Requirements</h1>
+<h2 id="host-and-os">Host and OS</h2>
+<p>The GSI OpenSSH rpms will require an user account and group in order for the privilege separation to work.</p>
+<h2 id="users-and-groups">Users and Groups</h2>
+<p>The RPM installation will try to create the <code>gsisshd</code> user and group and the <code>/var/empty/gsisshd</code> directory with the correct ownership if they are not present. If you are using a configuration management system or ROCKS, you should make sure that these users and groups are created before installing the RPMs to avoid potential issues. The gsisshd user should have an empty home directory. By default, this is home directory set to <code>/var/empty/gsisshd</code> and belongs to the <code>gsisshd</code> user and group. You may change it if needed to something else as long as the ownerships remain the same.</p>
+<h2 id="networking">Networking</h2>
+<p>You'll find more client specific details also in the <a href="#Firewall_Considerations">Firewall section</a> of this document.</p>
+<h1 id="installation-procedure">Installation procedure</h1>
+<p>Prior to install, make sure you have:
+<em> <a href="../../common/yum/">Yum repositories correctly configured</a> for OSG.
+</em> <a href="../../common/ca/">CA certificates installed</a></p>
+<h2 id="gsi-openssh-installation">GSI OpenSSH Installation</h2>
+<p>Start with installing GSI OpenSSH from the repository</p>
+<pre class="codehilite"><code class="language-rootscreen">yum install gsi-openssh-server gsi-openssh-clients</code></pre>
+
+
+<p>In addition, you'll need to install CA certificates in order for GSIOpenSSH to work. You can follow the instructions below in order to install them:</p>
+<h1 id="configuration-and-operations">Configuration and Operations</h1>
+<h2 id="useful-configuration-and-log-files">Useful configuration and log files</h2>
+<p>Configuration Files</p>
+<table>
+<thead>
+<tr>
+<th align="left">Service or Process</th>
+<th align="left">Configuration File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">gsisshd</td>
+<td align="left"><code>/etc/gsissh/sshd_config</code></td>
+<td align="left">Configuration file</td>
+</tr>
+<tr>
+<td align="left">gsisshd</td>
+<td align="left"><code>/etc/sysconfig/gsisshd</code></td>
+<td align="left">Environment variables for gsisshd</td>
+</tr>
+<tr>
+<td align="left">gsisshd</td>
+<td align="left"><code>/etc/lcmaps.db</code></td>
+<td align="left">LCMAPS configuration</td>
+</tr>
+</tbody>
+</table>
+<p>Log Files</p>
+<table>
+<thead>
+<tr>
+<th align="left">Service or Process</th>
+<th align="left">Log File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">gsisshd</td>
+<td align="left"><code>/var/log/messages</code></td>
+<td align="left">All log messages</td>
+</tr>
+</tbody>
+</table>
+<p>Other Files</p>
+<table>
+<thead>
+<tr>
+<th align="left">Service or Process</th>
+<th align="left">File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">gsisshd</td>
+<td align="left"><code>/etc/grid-security/hostcert.pem</code></td>
+<td align="left">Host certificate</td>
+</tr>
+<tr>
+<td align="left">gsisshd</td>
+<td align="left"><code>/etc/grid-security/hostcert.pem</code></td>
+<td align="left">Key certificate</td>
+</tr>
+<tr>
+<td align="left">gsisshd</td>
+<td align="left"><code>/etc/gsissh/ssh_host_rsa_key</code></td>
+<td align="left">RSA Host key</td>
+</tr>
+</tbody>
+</table>
+<h2 id="configuration">Configuration</h2>
+<h2 id="configuration_1">Configuration</h2>
+<p>In order to get a running instance of the GSI OpenSSH server, you'll
+need to change the default configuration. However, before you go any
+further, you'll need to decide whether you want GSI OpenSSH to be your 
+primary ssh service or not (e.g. whether the GSI OpenSSH service will 
+replace your existing SSH service). If you choose not to replace your 
+existing service, you'll need to change the port setting in the GSI 
+OpenSSH configuration to another port (e.g. 2222) so that you can run 
+both SSH services at the same time. Regardless of your choice, you 
+should probably have both services use the same host key. In order 
+to do this, symlink <code>/etc/gsissh/ssh_host_dsa_key</code> and <code>/etc/gsissh/ssh_host_rsa_key</code> 
+to <code>/etc/ssh/ssh_host_dsa_key</code> and <code>/etc/ssh/ssh_host_rsa_key</code> respectively. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Regardless of the authorization method used for the user, any 
+account that will be used with GSI OpenSSH must have a shell 
+assigned to it and not be locked (have ! in the password field of <code>/etc/shadow</code>).</p>
+</div>
+<h2 id="using-a-gridmap-file-for-authorization">Using a gridmap file for authorization</h2>
+<p>In order to use gsissh, you'll need to create mappings in your 
+<code>/etc/grid-security/grid-mapfile</code> for the DNs that you will 
+allow to login. The mappings should be entered one to a line, 
+with each line consisting of DN followed by the account the DN 
+should map to. Also, you should ensure that the 
+<code>/etc/grid-security/gsi-authz.conf</code> file is empty or that all 
+of the lines in the file are commented out using a <code>#</code> at the beginning of the line.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The mappings will not consider VOMS extensions so the first mapping that matches will be used regardless of the VO role or VO present in the users proxy</p>
+</div>
+<p>An example of the <code>/etc/grid-security/grid-mapfile</code> follows:</p>
+<pre class="codehilite"><code class="language-file">&quot;/DC=org/DC=doegrids/OU=People/CN=USER NAME 123456&quot; useraccount</code></pre>
+
+
+<h2 id="using-lcmaps-and-gums-for-authorization">Using LCMAPS and GUMS for authorization</h2>
+<p>In order to use LCMAPS callouts with GSI OpenSSH, you'll first need to edit <code>/etc/grid-security/gsi-authz.conf</code> to indicate that Globus should do a GSI callout for authorization. The file should contain the following:</p>
+<pre class="codehilite"><code class="language-file">globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout</code></pre>
+
+
+<p>so that LCMAPS is used. Next, install the lcmaps rpms:</p>
+<pre class="codehilite"><code class="language-rootscreen">yum install lcmaps lcas-lcmaps-gt4-interface</code></pre>
+
+
+<p>Finally, you'll need to modify <code>/etc/lcmaps.db</code> so that the <code>gumsclient</code> entry has the correct endpoint for your gums server.</p>
+<h2 id="starting-and-enabling-services">Starting and Enabling Services</h2>
+<p>To start the services:</p>
+<ol>
+<li>
+<p>To start GSI OpenSSH you can use the service command, e.g.:</p>
+<p><code>service gsisshd start</code></p>
+</li>
+</ol>
+<p>You should also enable the appropriate services so that they are automatically started when your system is powered on:</p>
+<ul>
+<li>
+<p>To enable OpenSSH by default on the node:</p>
+<p><code>chkconfig gsisshd on</code></p>
+</li>
+</ul>
+<h2 id="stopping-and-disabling-services">Stopping and Disabling Services</h2>
+<p>To stop the services:</p>
+<ol>
+<li>
+<p>To stop OpenSSH you can use: \&lt;pre class=“rootscreen”></p>
+<p><code>service gsisshd stop</code></p>
+</li>
+</ol>
+<p>In addition, you can disable services by running the following commands. However, you don't need to do this normally.</p>
+<ul>
+<li>
+<p>Optionally, to disable OpenSSH:</p>
+<p><code>chkconfig gsisshd off</code></p>
+</li>
+</ul>
+<h1 id="troubleshooting">Troubleshooting</h1>
+<p>You can get information on troubleshooting errors on the <a href="http://grid.ncsa.illinois.edu/ssh/ts_server.html">NCSA page</a>.</p>
+<p>To troubleshoot LCMAPS authorization, you can add the following to <code>/etc/sysconfig/gsisshd</code> and choose a higher debug level:</p>
+<pre class="codehilite"><code class="language-file"># level 0: no messages, 1: errors, 2: also warnings, 3: also notices,
+#  4: also info, 5: maximum debug
+LCMAPS_DEBUG_LEVEL=2</code></pre>
+
+
+<p>Output goes to <code>/var/log/messages</code> by default.</p>
+<h2 id="test-gsi-openssh">Test GSI OpenSSH</h2>
+<p>After starting the <code>gsisshd</code> service you can check if it is running correctly</p>
+<pre class="codehilite"><code class="language-screen">$ grid-proxy-init
+Your identity: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=User Name
+Enter GRID pass phrase for this identity:
+Creating proxy ............................................................................................... Done
+Your proxy is valid until: Sat Apr 23 08:18:27 2016
+$ gsissh localhost -p 2222
+Last login: Tue Sep 18 16:08:03 2012 from itb4.uchicago.edu
+$</code></pre>
+
+
+<h1 id="how-to-get-help">How to get Help?</h1>
+<p>To get assistance please use this <a href="../HelpProcedure">Help Procedure</a>.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../wn/" class="btn btn-neutral float-right" title="RPM-based Worker Node">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../cvmfs/" class="btn btn-neutral" title="CVMFS"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../cvmfs/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../wn/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

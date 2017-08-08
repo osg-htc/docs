@@ -20,59 +20,49 @@
     
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/Common/yum/</loc>
+     <loc>https://opensciencegrid.github.io/docs/common/yum/</loc>
      <lastmod>2017-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/Common/ca/</loc>
+     <loc>https://opensciencegrid.github.io/docs/common/ca/</loc>
      <lastmod>2017-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/Computing_Element/HTCondor_CE/</loc>
+     <loc>https://opensciencegrid.github.io/docs/compute-element/HTCondor_CE/</loc>
      <lastmod>2017-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/Frontier_Squid/squid/</loc>
+     <loc>https://opensciencegrid.github.io/docs/frontier-squid/squid/</loc>
      <lastmod>2017-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/Other/cvmfs/</loc>
+     <loc>https://opensciencegrid.github.io/docs/other/cvmfs/</loc>
      <lastmod>2017-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/Other/gsissh/</loc>
+     <loc>https://opensciencegrid.github.io/docs/other/gsissh/</loc>
      <lastmod>2017-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/Other/wn/</loc>
+     <loc>https://opensciencegrid.github.io/docs/other/wn/</loc>
      <lastmod>2017-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/Other/glexec/</loc>
-     <lastmod>2017-08-08</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    
-
-    
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/Release/signing/</loc>
+     <loc>https://opensciencegrid.github.io/docs/other/glexec/</loc>
      <lastmod>2017-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -82,31 +72,41 @@
     
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/Common/ca_updater/</loc>
+     <loc>https://opensciencegrid.github.io/docs/release/signing/</loc>
+     <lastmod>2017-08-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/common/ca_updater/</loc>
      <lastmod>2017-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/Common/cert_scripts/</loc>
+     <loc>https://opensciencegrid.github.io/docs/common/cert_scripts/</loc>
      <lastmod>2017-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/Computing_Element/job_router/</loc>
+     <loc>https://opensciencegrid.github.io/docs/compute-element/job_router/</loc>
      <lastmod>2017-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/Other/wn_oasis/</loc>
+     <loc>https://opensciencegrid.github.io/docs/other/wn_oasis/</loc>
      <lastmod>2017-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/Storage/gridftp/</loc>
+     <loc>https://opensciencegrid.github.io/docs/storage/gridftp/</loc>
      <lastmod>2017-08-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
