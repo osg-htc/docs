@@ -121,6 +121,17 @@
           
             <li class="toctree-l1">
 		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Release/signing/">RPM Signing</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <span class="caption-text">In-Progress Docs</span>
     <ul class="subnav">
                 <li class="">
@@ -233,14 +244,14 @@ repositories must be enabled.</p>
 <p>Install the EPEL repository, if not already present. <strong>Note:</strong> This
 enables EPEL by default. Choose the right version to match your OS
 version.</p>
-<pre><code class="bash"># EPEL 5 (For RHEL 5, CentOS 5, and SL 5)
+<pre class="codehilite"><code class="language-bash"># EPEL 5 (For RHEL 5, CentOS 5, and SL 5)
 $ curl -O https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm
 $ rpm -Uvh epel-release-latest-5.noarch.rpm
 # EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
 $ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
 # EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
-$ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-</code></pre>
+$ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</code></pre>
+
 
 <p><strong>WARNING</strong>: if you have your own mirror or configuration of the EPEL
 repository, you <strong>MUST</strong> verify that the OSG repository has a better yum
@@ -294,7 +305,7 @@ required key you can force the installation using
 depending on your EL version:
     1. For EL versions greater than EL5, install the files directly from
 <code>repo.grid.iu</code>:</p>
-<pre><code>    ```
+<pre class="codehilite"><code>    ```
     rpm -Uvh URL
     ```
 
@@ -309,8 +320,9 @@ depending on your EL version:
     ```
     # curl -O https://repo.grid.iu.edu/osg/3.2/osg-3.2-el5-release-latest.rpm
     # rpm -Uvh osg-3.2-el5-release-latest.rpm
-    ```
-</code></pre>
+    ```</code></pre>
+
+
 <h1 id="priorities">Priorities</h1>
 <p><span class="twiki-macro NOTE"></span> Make sure you installed the Yum
 priorities plugin, as described above. Not doing so is a common mistake
@@ -319,7 +331,7 @@ that causes failed installations.</p>
 want to enable another one, such as <code>osg-testing</code>, then edit its file
 (e.g. <code>/etc/yum.repos.d/osg-testing.repo</code>) and change the enabled option
 from 0 to 1:</p>
-<pre><code>[osg-testing]
+<pre class="codehilite"><code>[osg-testing]
 name=OSG Software for Enterprise Linux 5 - Testing - $basearch
 #baseurl=http://repo.grid.iu.edu/osg/3.2/el5/testing/$basearch
 mirrorlist=http://repo.grid.iu.edu/mirror/osg/3.2/el5/testing/$basearch
@@ -327,8 +339,8 @@ failovermethod=priority
 priority=98
 enabled=<span style="color:red">1</span>
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
-</code></pre>
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG</code></pre>
+
 
 <p>If you have your own mirror or
 configuration of the EPEL repository, you <strong>MUST</strong> verify that the OSG

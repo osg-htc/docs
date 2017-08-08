@@ -117,6 +117,17 @@
           
             <li class="toctree-l1">
 		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Release/signing/">RPM Signing</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <span class="caption-text">In-Progress Docs</span>
     <ul class="subnav">
                 <li class="">
@@ -244,48 +255,47 @@ The version of cvmfs installed should be &gt;= 2.1.20-1.osg or greater.</p>
 <p>When upgrading from a cvmfs 2.0.X version, all <code>/cvmfs</code> repositories must be unmounted in order to upgrade. When upgrading between 2.1.X versions, repositories may be mounted.</p>
 <p>Note that version 2.1 removed the <code>/etc/init.d/cvmfs</code> script. Starting it didn't actually do anything anyway (it is automatically starts when mounted), and the stop function has been moved to <code>cvmfs_config umount</code>.
 The <code>restartautofs</code> function is instead done by <code>service autofs restart</code>. The <code>probe</code> function has also been moved to <code>cvmfs_config probe</code>. Since 2.1.X enables shared cache by default, so in order to reclaim the previous cache space when upgrading from 2.0.X you must manually remove the old caches. For example</p>
-<pre><code>rm -rf /var/cache/cvmfs/*.*
-</code></pre>
+<pre class="codehilite"><code>rm -rf /var/cache/cvmfs/*.*</code></pre>
+
 
 <h2 id="install-instructions">Install Instructions</h2>
 <p>Prior to installing CVMFS, make sure the <a href="../../Common/yum/">yum repositories</a> are correctly configured for OSG.</p>
 <p>The following will install cvmfs from the OSG repository. It will also install cern public keys as well as fuse and autofs if you do not have them, and it will install the configuration for the OSG CVMFS distribution, OASIS.</p>
-<pre><code>yum install osg-oasis
-</code></pre>
+<pre class="codehilite"><code>yum install osg-oasis</code></pre>
+
 
 <p>Create or edit <code>/etc/fuse.conf</code>. It should contain the following in order to allow fuse to do proper file ownership:</p>
-<pre><code>user_allow_other
-</code></pre>
+<pre class="codehilite"><code>user_allow_other</code></pre>
+
 
 <p>Create or edit <code>/etc/auto.master</code>. It should contain the following in order to allow cvmfs to automount:</p>
-<pre><code>/cvmfs /etc/auto.cvmfs
-</code></pre>
+<pre class="codehilite"><code>/cvmfs /etc/auto.cvmfs</code></pre>
+
 
 <p>Restart autofs to make the change take effect:</p>
-<pre><code class="rootscreen">service autofs restart
+<pre class="codehilite"><code class="language-rootscreen">service autofs restart
 Stopping automount:                       [  OK  ]
-Starting automount:                       [  OK  ]
-</code></pre>
+Starting automount:                       [  OK  ]</code></pre>
+
 
 <p>Create or edit <code>/etc/cvmfs/default.local</code>, a file that controls the cvmfs configuration.
 Below is a sample configuration, <strong>but please note</strong> that you will need to customize this for your site. (In particular, the <code>CVMFS_HTTP_PROXY</code> line below only works within the .fnal.gov domain.)</p>
-<pre><code>CVMFS_REPOSITORIES=&quot;`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u)|tr ' ' ,`&quot;
+<pre class="codehilite"><code>CVMFS_REPOSITORIES=&quot;`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u)|tr ' ' ,`&quot;
 CVMFS_CACHE_BASE=/var/cache/cvmfs
 CVMFS_QUOTA_LIMIT=20000
-CVMFS_HTTP_PROXY=&quot;http://squid.fnal.gov:3128&quot;
-</code></pre>
+CVMFS_HTTP_PROXY=&quot;http://squid.fnal.gov:3128&quot;</code></pre>
+
 
 <p>CVMFS 2.1 by default allows any repository to be mounted. The recommended CVMFS_REPOSITORIES setting is what it is above so that tools such as <code>cvmfs_config</code> and <code>cvmfs_talk</code> that use known repositories will use two common repositories plus any additional that have been mounted. You may want to choose a different set of always-known repositories. A full list of cern.ch repositories is found at <a href="http://cernvm.cern.ch/portal/cvmfs/examples">http://cernvm.cern.ch/portal/cvmfs/examples</a>. The only opensciencegrid.org repository is currently oasis.</p>
 <p>Set up a list of cvmfs HTTP proxies to retrieve from in CVMFS_HTTP_PROXY. Vertical bars separating proxies means to load balance between them and try them all before continuing. A semicolon between proxies means to try that one only after the previous ones have failed. A special proxy called DIRECT can be placed last in the list to indicate directly connecting to servers if all other proxies fail. This is acceptable for small sites but discouraged for large sites because of the potential load that could be put upon the stratum one servers.</p>
 <p>Set up the cache limit in <code>CVMFS_QUOTA_LIMIT</code> (in MB). Recommended for most applications is 20GB. This is the combined limit for all repositories. This cache will be stored in <code>$CVMFS_CACHE_BASE</code>. Make sure that at least 20% more than that amount of space stays available for cvmfs in that filesystem. This is very important, since if that space is not available it can cause many I/O errors and application crashes. Many system administrators choose to put the cache space in a separate filesystem.</p>
 <h2 id="verifying-cvmfs">Verifying cvmfs</h2>
 <p>After CVMFS is installed, you should be able to see the <code>/cvmfs</code> directory. But note that it will initially appear to be empty:</p>
-<pre><code>$ ls /cvmfs
+<pre class="codehilite"><code>$ ls /cvmfs</code></pre>
 
-</code></pre>
 
 <p>Directories within <code>/cvmfs</code> will not be mounted until you examine them. For instance:</p>
-<pre><code># ls -l /cvmfs/atlas.cern.ch
+<pre class="codehilite"><code># ls -l /cvmfs/atlas.cern.ch
 /cvmfs/atlas.cern.ch:
 total 5
 drwxr-xr-x 1 cvmfs cvmfs 4096 Mar  5  2012 repo
@@ -297,8 +307,8 @@ lrwxrwxrwx 1 cvmfs cvmfs 18 May 28 10:33 cms -&gt; /cvmfs/cms.cern.ch
 total 5
 drwxr-xr-x 9 cvmfs cvmfs 4096 Feb  7  2014 glast
 # ls /cvmfs
-atlas.cern.ch  cms.cern.ch  glast.egi.eu  oasis.opensciencegrid.org
-</code></pre>
+atlas.cern.ch  cms.cern.ch  glast.egi.eu  oasis.opensciencegrid.org</code></pre>
+
 
 <h2 id="troubleshooting-problems">Troubleshooting problems</h2>
 <p>If no directories exist under <code>/cvmfs/</code>, you can try the following steps to debug:</p>
@@ -312,15 +322,15 @@ atlas.cern.ch  cms.cern.ch  glast.egi.eu  oasis.opensciencegrid.org
 <h3 id="starting-and-stopping-services">Starting and Stopping services</h3>
 <p>Once it is set up, cvmfs is always automatically started when one of the repositories are accessed.</p>
 <p>cvmfs can be stopped via:</p>
-<pre><code># cvmfs_config umount
+<pre class="codehilite"><code># cvmfs_config umount
 Unmounting /cvmfs/atlas.cern.ch: OK
 Unmounting /cvmfs/oasis.opensciencegrid.org: OK
 Unmounting /cvmfs/cms.cern.ch: OK
-Unmounting /cvmfs/glast.egi.eu: OK
-</code></pre>
+Unmounting /cvmfs/glast.egi.eu: OK</code></pre>
+
 
 <h3 id="screendump-of-install">Screendump of Install</h3>
-<pre><code>[root@fermicloud044 ~]# rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+<pre class="codehilite"><code>[root@fermicloud044 ~]# rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 Retrieving http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 Preparing...                ########################################### [100%]
    1:epel-release           ########################################### [100%]
@@ -558,8 +568,8 @@ Unmounting /cvmfs/atlas.cern.ch: OK
 Unmounting /cvmfs/oasis.opensciencegrid.org: OK
 Unmounting /cvmfs/cms.cern.ch: OK
 Unmounting /cvmfs/glast.egi.eu: OK
-[root@fermicloud044 ~]# 
-</code></pre>
+[root@fermicloud044 ~]# </code></pre>
+
 
 <h3 id="file-locations">File Locations</h3>
 <table>

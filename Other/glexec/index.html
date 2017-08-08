@@ -125,6 +125,17 @@
           
             <li class="toctree-l1">
 		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Release/signing/">RPM Signing</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <span class="caption-text">In-Progress Docs</span>
     <ul class="subnav">
                 <li class="">
@@ -273,8 +284,8 @@ Finally, GUMS versions \>= 1.3.18 can be configured to not require a certificate
 <p><code>yum install condor-procd</code></p>
 </div>
 <p>After meeting all the requirements in the previous section, install glexec with this command:</p>
-<pre><code>yum install osg-wn-client-glexec
-</code></pre>
+<pre class="codehilite"><code>yum install osg-wn-client-glexec</code></pre>
+
 
 <h2 id="configuring-glexec">Configuring glexec</h2>
 <p>The following steps need to be done after the glexec installation is complete.</p>
@@ -307,62 +318,62 @@ Finally, GUMS versions \>= 1.3.18 can be configured to not require a certificate
 </ol>
 <h2 id="testing-the-installation-of-glexec">Testing the Installation of glexec</h2>
 <p>Now, <strong><em>as a non-privileged user (not root)</em></strong> , do the following (where <span style="color:red">yourvo</span> is your VO, and <strong>NNN</strong> is your uid as reported by <code>/usr/bin/id</code>):</p>
-<pre><code>voms-proxy-init -voms yourvo:/yourvo
+<pre class="codehilite"><code>voms-proxy-init -voms yourvo:/yourvo
 export GLEXEC_CLIENT_CERT=/tmp/x509up_u<span style="color:red">NNN</span>
 /usr/sbin/glexec /usr/bin/id
-uid=13160(fnalgrid) gid=9767(fnalgrid) groups=65000(glexec00)
-</code></pre>
+uid=13160(fnalgrid) gid=9767(fnalgrid) groups=65000(glexec00)</code></pre>
+
 
 <p>If your <code>lcmaps.db</code> is set up to not use a host certificate as described in GlexecPilotCert, you should also set</p>
-<pre><code>export X509_USER_PROXY=/tmp/x509up_u<span style="color:red">NNN</span>
-</code></pre>
+<pre class="codehilite"><code>export X509_USER_PROXY=/tmp/x509up_u<span style="color:red">NNN</span></code></pre>
+
 
 <p>(substitute <code>NNN</code> for your UID) before running glexec.</p>
 <p>If <code>glexec</code> is successful, it will print out the uid and gid that your proxy would normally be mapped to by your GUMS server, plus a supplementary tracking group. (The actual names and numbers will be different from what you see above.)</p>
 <p>If you have problems, please read about <a href="../TroubleshootingGlexecLcmaps">troubleshooting glexec</a>.</p>
 <h2 id="glexec-log-files">Glexec log files</h2>
 <p><code>Glexec</code> sends all its log information by default to syslog. Where it goes from there depends on your syslog configuration, but by default they go to <code>/var/log/messages</code>. Here are some sample messages:</p>
-<pre><code>Apr 25 16:36:16 fermicloud053 glexec[2867]: lcmaps: lcmaps.mod-PluginInit(): plugin glexectracking not found (arguments: )
+<pre class="codehilite"><code>Apr 25 16:36:16 fermicloud053 glexec[2867]: lcmaps: lcmaps.mod-PluginInit(): plugin glexectracking not found (arguments: )
 Apr 25 16:36:16 fermicloud053 glexec[2867]: lcmaps: lcmaps.mod-lcmaps_startPluginManager(): error initializing plugin: glexectracking
 Apr 25 16:36:16 fermicloud053 glexec[2867]: lcmaps: lcmaps_init() error: could not start plugin manager
-Apr 25 16:36:16 fermicloud053 glexec[2867]: Initialisation of LCMAPS failed.
-</code></pre>
+Apr 25 16:36:16 fermicloud053 glexec[2867]: Initialisation of LCMAPS failed.</code></pre>
+
 
 <p>These particular messages are pretty common, caused by forgetting to uncomment the beginning of the glexectracking rule in <code>/etc/lcmaps.db</code>.</p>
 <p>It is possible to redirect glexec log messages to a different file with standard syslog. To do that, choose one of the <code>LOG_LOCAL[0-7]</code> log facilities that are unused, for example <code>LOG_LOCAL1</code>. Then set the following in <code>/etc/glexec.conf</code>:</p>
-<pre><code>syslog_facility = LOG_LOCAL1
-</code></pre>
+<pre class="codehilite"><code>syslog_facility = LOG_LOCAL1</code></pre>
+
 
 <p>and add a corresponding parameter to the <code>lcmaps_glexec_tracking.mod</code> entry in <code>/etc/lcmaps.db</code>:</p>
-<pre><code>  &quot;-log-facility LOG_LOCAL1&quot;
-</code></pre>
+<pre class="codehilite"><code>  &quot;-log-facility LOG_LOCAL1&quot;</code></pre>
+
 
 <p>Then in <code>/etc/syslog.conf</code> on el5 or <code>/etc/rsyslog.conf</code> on el6 add a line like this</p>
-<pre><code>local1.* /var/log/glexec.log
-</code></pre>
+<pre class="codehilite"><code>local1.* /var/log/glexec.log</code></pre>
+
 
 <p>and also exclude those messages from <code>/var/log/messages</code> by adding <code>local1.none</code> after other wildcards on the existing <code>/var/log/messages</code> line, for example:</p>
-<pre><code>*.info;local1.none;mail.none;authpriv.none;cron.none /var/log/messages
-</code></pre>
+<pre class="codehilite"><code>*.info;local1.none;mail.none;authpriv.none;cron.none /var/log/messages</code></pre>
+
 
 <p>Be sure to notify the system logger to re-read the configuration file with <code>service syslog reload</code> on el5, or with <code>service rsyslog restart</code> on el6.</p>
 <p><code>rsyslog</code>, by default, limits the rate at which messages may be logged, and if maximum debugging is enabled in glexec this limit is reached. To avoid that, you can add the following to <code>/etc/rsyslog.conf</code> after the line "$ModLoad imuxsock.so":</p>
-<pre><code>$SystemLogRateLimitInterval 0
-$SystemLogRateLimitBurst 0
-</code></pre>
+<pre class="codehilite"><code>$SystemLogRateLimitInterval 0
+$SystemLogRateLimitBurst 0</code></pre>
+
 
 <p>and of course do <code>service rsyslog restart</code>.</p>
 <p>Alternatively, <code>syslog-ng</code> (available in the EPEL repository) can do the same job by matching all the messages that have the string "glexec" in the name.
 These rules in <code>/etc/syslog-ng/syslog-ng.conf</code> will separate the glexec messages into <code>/var/log/glexec.log</code>:</p>
-<pre><code>destination d_glexec { file(&quot;/var/log/glexec.log&quot;); };
+<pre class="codehilite"><code>destination d_glexec { file(&quot;/var/log/glexec.log&quot;); };
 filter f_glexec { program(&quot;^glexec&quot;); };
 filter f_notglexec { not program(&quot;^glexec&quot;); };
-log { source(s_sys); filter(f_glexec); destination(d_glexec); };
-</code></pre>
+log { source(s_sys); filter(f_glexec); destination(d_glexec); };</code></pre>
+
 
 <p>Then later, in the log rule writing sending to <code>d_mesg</code>, add a <code>filter(f_notglexec);</code> before the destination rule to keep glexec messages out of <code>/var/log/messages</code>:</p>
-<pre><code>log { source(s_sys); filter(f_filter1); filter(f_notglexec); destination(d_mesg); };
-</code></pre>
+<pre class="codehilite"><code>log { source(s_sys); filter(f_filter1); filter(f_notglexec); destination(d_mesg); };</code></pre>
+
 
 <h2 id="how-to-get-help">How to get Help?</h2>
 <p>To get assistance please use <a href="../HelpProcedure">Help Procedure</a>.</p>
@@ -373,7 +384,7 @@ log { source(s_sys); filter(f_glexec); destination(d_glexec); };
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../Common/ca_updater/" class="btn btn-neutral float-right" title="CA Updater">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../Release/signing/" class="btn btn-neutral float-right" title="RPM Signing">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../wn/" class="btn btn-neutral" title="RPM-based Worker Node"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -407,7 +418,7 @@ log { source(s_sys); filter(f_glexec); destination(d_glexec); };
         <span><a href="../wn/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../Common/ca_updater/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../Release/signing/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

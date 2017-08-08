@@ -99,6 +99,17 @@
           
             <li class="toctree-l1">
 		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Release/signing/">RPM Signing</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <span class="caption-text">In-Progress Docs</span>
     <ul class="subnav">
                 <li class="">
@@ -239,16 +250,16 @@
 <p><span class="twiki-macro INCLUDE" section="OSGBriefCaCerts" TOC_SHIFT="+">InstallCertAuth</span></p>
 <p><span class="twiki-macro STARTSECTION">OSGBriefInstallCertScripts</span></p>
 <h2 id="install-the-certificate-scripts-package-the-cert-scripts-package-can-be-installed-with-the-following-command">Install the certificate scripts package The Cert Scripts package can be installed with the following command:</h2>
-<pre><code class="rootscreen">[root@client ~]$ yum install osg-cert-scripts
-</code></pre>
+<pre class="codehilite"><code class="language-rootscreen">[root@client ~]$ yum install osg-cert-scripts</code></pre>
+
 
 <p><span class="twiki-macro ENDSECTION">OSGBriefInstallCertScripts</span> <span class="twiki-macro ENDSECTION">OSGAllInstallCertScripts</span></p>
 <h1 id="usage-of-certificate-scripts-package-this-package-is-mainly-used-to-request-certificates-via-the-command-line-either-host-and-service-certificates-or-user-certificates">Usage of certificate scripts package This package is mainly used to request certificates via the command line: either host and service certificates or user certificates.</h1>
 <h2 id="get-host-and-service-certificates-using-command-line"><a href="../Documentation/Release3.GetHostServiceCertificates">Get host and service certificates using command line</a></h2>
 <h2 id="example-usage-of-check-cert-time-the-cert-check-time-script-is-helpful-in-setting-up-and-monitoring-the-ca-certificates-and-crls-that-get-installed-in-your-trusted-certificates-directory-this-section-describes-using-these-scripts-to-check-the-ca-and-crl-status-checking-ca-certificates">Example usage of check-cert-time The cert-check-time script is helpful in setting up and monitoring the CA certificates and CRL’s that get installed in your trusted certificates directory. This section describes using these scripts to check the CA and CRL status. —+++! Checking CA certificates</h2>
 <p>There are numerous CA certificates installed with VDT and you may not want to allow all of them on your site. The <code>cert-check-time</code> is a helpful command for reviewing them. This must be run in a directory where you have write access even though it does not create any permanent files. You may want to redirect stdout to a file you can then review.</p>
-<pre><code class="screen"><span style="color:red">UCL_PROMPT</span> &lt;b&gt;cert-check-time -cR -s /usr/share/osg-cert-scripts/&lt;/b&gt;
-</code></pre>
+<pre class="codehilite"><code class="language-screen"><span style="color:red">UCL_PROMPT</span> &lt;b&gt;cert-check-time -cR -s /usr/share/osg-cert-scripts/&lt;/b&gt;</code></pre>
+
 
 <p>For each CA, the output shows:</p>
 <ul>
@@ -257,7 +268,7 @@
 <li>and the location of the actual certificate file.</li>
 </ul>
 <p><span class="twiki-macro TWISTY"><span style="color:red">TWISTY_OPTS_OUTPUT</span></span></p>
-<pre><code class="screen">         days  name       CA certificate file
+<pre class="codehilite"><code class="language-screen">         days  name       CA certificate file
        6712.9 subject= /DC=HK/DC=HKU/DC=GRID/CN=HKU Grid CA  cert:/ncsa/apps-local/itb-1.2/globus/TRUSTED_CA/4798da47.0
        6674.9 subject= /DC=cz/DC=cesnet-ca/O=CESNET CA/CN=CESNET CA Root  cert:/ncsa/apps-local/itb-1.2/globus/TRUSTED_CA/edca0fc0.0
        6640.8 subject= /C=FR/O=CNRS/CN=CNRS2  cert:/ncsa/apps-local/itb-1.2/globus/TRUSTED_CA/163af95c.0
@@ -348,16 +359,16 @@
         279.7 subject= /C=SI/O=SiGNET/CN=SiGNET CA  cert:/ncsa/apps-local/itb-1.2/globus/TRUSTED_CA/3d5be7bc.0
         179.9 subject= /O=Grid/O=NorduGrid/CN=NorduGrid Certification Authority  cert:/ncsa/apps-local/itb-1.2/globus/TRUSTED_CA/1f0e8352.0
         135.0 subject= /C=JP/O=KEK/OU=CRC/CN=KEK GRID Certificate Authority  cert:/ncsa/apps-local/itb-1.2/globus/TRUSTED_CA/617ff41b.0
-nearest CA certificate expiration 134.984 days
-</code></pre>
+nearest CA certificate expiration 134.984 days</code></pre>
+
 
 <p><span class="twiki-macro ENDTWISTY"></span></p>
 <p>In addition, at the bottom of the listing it points out which CA’s do not have a CRL. This is useful AFTER the edg-crl-upgraded daemon has run at least once because then it shows those CA’s which have not published a certificate revocation list. Note that two of the CAs, Kerberos CAs from PSC (85ca9edc.0) and FNAL (e1fce4e9.0) don’t really need CRLs since they only generate short lived certificates.</p>
 <h3 id="checking-crls">Checking CRL’s</h3>
 <p>Certificate revocation lists contain the list of certificates (by serial number) that have been issued by a CA but were then revoked, meaning you should not accept them. CRL’s are updated frequently and typically have a lifetime limited to a month or less. When a CRL has expired, the CRL file will still exist in the trusted certificates directory, but Globus will fail <strong>all</strong> authentication attempts for <strong>all</strong> certificates issued by the corresponding CA.</p>
 <p>For this reason, and others, it is important that CRL files are current and not expired. Another variation of the cert-check-time script will list the remaining lifetime of CRL’s in the trusted certificates directory. This must be run in a directory where you have write access even though it does not create any files. You may want to redirect stdout to a file you can then review.</p>
-<pre><code class="screen"><span style="color:red">UCL_PROMPT</span> &lt;b&gt;cert-check-time -r -s /usr/share/osg-cert-scripts/ &lt;/b&gt;
-</code></pre>
+<pre class="codehilite"><code class="language-screen"><span style="color:red">UCL_PROMPT</span> &lt;b&gt;cert-check-time -r -s /usr/share/osg-cert-scripts/ &lt;/b&gt;</code></pre>
+
 
 <p>For each CRL, the sample output below shows:</p>
 <ul>
@@ -366,7 +377,7 @@ nearest CA certificate expiration 134.984 days
 <li>and the actual CRL file.</li>
 </ul>
 <p><span class="twiki-macro TWISTY"><span style="color:red">TWISTY_OPTS_OUTPUT</span></span></p>
-<pre><code class="screen">         days  name       CRL file
+<pre class="codehilite"><code class="language-screen">         days  name       CRL file
         365.1 issuer=/C=CA/O=Grid/CN=Grid Canada CA  crl:/opt/osg036/globus/TRUSTED_CA/5f54f417.r0
         340.8 issuer=/CN=SWITCH CA/emailAddress=switch.ca@switch.ch/O=Switch - Teleinformatikdienste fuer Lehre und Forschung/C=CH  crl:/opt/osg036/globus/TRUSTED_CA/c4435d12.r0
         317.1 issuer=/C=FR/O=CNRS/CN=CNRS-Projets  crl:/opt/osg036/globus/TRUSTED_CA/34a509c3.r0
@@ -428,8 +439,8 @@ nearest CA certificate expiration 134.984 days
  ***      1.0 issuer=/CN=SWITCH Personal CA/emailAddress=switch.personal.ca@switch.ch/O=SWITCH - Teleinformatikdienste fuer Lehre und Forschung/C=CH  crl:/opt/osg036/globus/TRUSTED_CA/7c0f6d74.r0
  ***      1.0 issuer=/CN=SWITCH Server CA/emailAddress=switch.server.ca@switch.ch/O=SWITCH - Teleinformatikdienste fuer Lehre und Forschung/C=CH  crl:/opt/osg036/globus/TRUSTED_CA/f8b4299c.r0
  ***      1.0 issuer=/CN=Purdue TeraGrid RA/OU=Purdue TeraGrid/O=Purdue University/ST=Indiana/C=US  crl:/opt/osg036/globus/TRUSTED_CA/67e8acfa.r0
-nearest CRL expiration 0.951088 days
-</code></pre>
+nearest CRL expiration 0.951088 days</code></pre>
+
 
 <p><span class="twiki-macro ENDTWISTY"></span></p>
 <p>Site administrators may find it useful to run this command in a daily cron job following the edg-crl-upgraded daemon as a way to monitor the status of the CRL’s.</p>
@@ -485,26 +496,26 @@ nearest CRL expiration 0.951088 days
 <h1 id="faq">FAQ</h1>
 <p>How to perform common tasks. In <span style="color:red">red<span class="twiki-macro ENDCOLOR"></span> the items you have to change.</p>
 <h2 id="request-a-certificate-for-myself-personal-certificate">Request a certificate for myself (personal certificate)</h2>
-<pre><code class="screen"><span style="color:red">UCL_PROMPT</span> cert-request -ou p
-</code></pre>
+<pre class="codehilite"><code class="language-screen"><span style="color:red">UCL_PROMPT</span> cert-request -ou p</code></pre>
+
 
 <p>Full details in the <a href="../Documentation/Release3.CertificateGetCmd">command line document</a> or in the <a href="../Documentation.CertificateGetWeb">Web interface document</a> (for a browser based alt.).</p>
 <h2 id="request-a-certificate-for-my-computer-host-certificate">Request a certificate for my computer (host certificate)</h2>
-<pre><code class="screen"><span style="color:red">UCL_PROMPT</span> cert-request -ou s
-</code></pre>
+<pre class="codehilite"><code class="language-screen"><span style="color:red">UCL_PROMPT</span> cert-request -ou s</code></pre>
+
 
 <p>Full details in the <a href="../Documentation/Release3.GetHostServiceCertificates">host and service certificates document</a>.</p>
 <h2 id="request-a-certificate-for-the-http-service-on-my-computer-service-certificate">Request a certificate for the http service on my computer (service certificate)</h2>
-<pre><code class="screen"><span style="color:red">UCL_PROMPT</span> cert-request -ou s -service http -host <span style="color:red">my-computer.some.domain</span> -label <span style="color:red">http-my-computer</span>
-</code></pre>
+<pre class="codehilite"><code class="language-screen"><span style="color:red">UCL_PROMPT</span> cert-request -ou s -service http -host <span style="color:red">my-computer.some.domain</span> -label <span style="color:red">http-my-computer</span></code></pre>
+
 
 <p>Full details in the <a href="../Documentation/Release3.GetHostServiceCertificates">host and service certificates document</a>.</p>
 <h2 id="retrieve-a-certificate">Retrieve a certificate</h2>
 <ol>
 <li>Check the email notice you got when the certificate was granted for the serial number (<em>0xNNNN</em>)</li>
 </ol>
-<pre><code class="screen"><span style="color:red">UCL_PROMPT</span> cert-retrieve -serial <span style="color:red">0xNNNN</span> [-label <span style="color:red">label-matching-cert-request</span>]
-</code></pre>
+<pre class="codehilite"><code class="language-screen"><span style="color:red">UCL_PROMPT</span> cert-retrieve -serial <span style="color:red">0xNNNN</span> [-label <span style="color:red">label-matching-cert-request</span>]</code></pre>
+
 
 <p>Use the <code>-p12</code> option to create the PKCS12 format file useful for importing your certificate into a web browser or email program.</p>
 <h2 id="if-you-need-to-get-lots-of-service-certificates">If you need to get lots of service certificates</h2>

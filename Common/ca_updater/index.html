@@ -99,6 +99,17 @@
           
             <li class="toctree-l1">
 		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Release/signing/">RPM Signing</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <span class="caption-text">In-Progress Docs</span>
     <ul class="subnav">
                 <li class=" current">
@@ -214,28 +225,28 @@
 </ul>
 <h1 id="install-instructions">Install instructions</h1>
 <p>Run the following command to install the latest version of the updater.</p>
-<pre><code class="rootscreen">[root@client ~]$ yum install osg-ca-certs-updater
-</code></pre>
+<pre class="codehilite"><code class="language-rootscreen">[root@client ~]$ yum install osg-ca-certs-updater</code></pre>
+
 
 <h1 id="services">Services</h1>
 <h2 id="starting-and-enabling-services">Starting and Enabling Services</h2>
 <p>Run the following to enable the updater. This will persist until the machine is rebooted.</p>
-<pre><code class="rootscreen">[root@client ~]$ service osg-ca-certs-updater-cron start
-</code></pre>
+<pre class="codehilite"><code class="language-rootscreen">[root@client ~]$ service osg-ca-certs-updater-cron start</code></pre>
+
 
 <p>Run the following to enable the updater when the machine is rebooted.</p>
-<pre><code class="rootscreen">[root@client ~]$ chkconfig osg-ca-certs-updater-cron on
-</code></pre>
+<pre class="codehilite"><code class="language-rootscreen">[root@client ~]$ chkconfig osg-ca-certs-updater-cron on</code></pre>
+
 
 <p>Run both commands if you wish for the service to activate immediately and remain active throughout reboots.</p>
 <h2 id="stopping-and-disabling-services">Stopping and Disabling Services</h2>
 <p>Enter the following to disable the updater. This will persist until the machine is rebooted.</p>
-<pre><code class="rootscreen">[root@client ~]$ service osg-ca-certs-updater-cron stop
-</code></pre>
+<pre class="codehilite"><code class="language-rootscreen">[root@client ~]$ service osg-ca-certs-updater-cron stop</code></pre>
+
 
 <p>Enter the following to disable the updater when the machine is rebooted.</p>
-<pre><code class="rootscreen">[root@client ~]$ chkconfig osg-ca-certs-updater-cron off
-</code></pre>
+<pre class="codehilite"><code class="language-rootscreen">[root@client ~]$ chkconfig osg-ca-certs-updater-cron off</code></pre>
+
 
 <p>Run both commands if you wish for the service to deactivate immediately and not get reactivated during reboots.</p>
 <h1 id="configuration">Configuration</h1>
@@ -309,7 +320,7 @@
         <a href="../cert_scripts/" class="btn btn-neutral float-right" title="Certificate Request Scripts">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../Other/glexec/" class="btn btn-neutral" title="Worker node glexec"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../Release/signing/" class="btn btn-neutral" title="RPM Signing"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -337,7 +348,7 @@
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../Other/glexec/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../Release/signing/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../cert_scripts/" style="color: #fcfcfc">Next &raquo;</a></span>

@@ -158,6 +158,17 @@
           
             <li class="toctree-l1">
 		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Release/signing/">RPM Signing</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <span class="caption-text">In-Progress Docs</span>
     <ul class="subnav">
                 <li class="">
@@ -277,8 +288,8 @@
 <p>Please follow the <a href="../ca_updater/">update instructions</a> to make sure that the CAs are kept updated.</p>
 <h2 id="option-2-install-osg-update-certs">Option 2: Install osg-update-certs</h2>
 <p>Install this with:</p>
-<pre><code>[root@client ~]$ yum install osg-ca-scripts
-</code></pre>
+<pre class="codehilite"><code>[root@client ~]$ yum install osg-ca-scripts</code></pre>
+
 
 <p>You have the same choices for CA certificates as above. In order to choose, you will run <code>osg-ca-manage</code>, which will install the CA certificates. Then (if desired) you need to enable periodic updating of the CA certificates.</p>
 <table>
@@ -306,7 +317,7 @@
 </tbody>
 </table>
 <p>Here is an example:</p>
-<pre><code>[root@client ~]$ /usr/sbin/osg-ca-manage setupCA --location root --url osg 
+<pre class="codehilite"><code>[root@client ~]$ /usr/sbin/osg-ca-manage setupCA --location root --url osg 
 Setting up CA Certificates for OSG installation
 CA Certificates will be installed into /etc/grid-security/certificates
 osg-update-certs
@@ -316,24 +327,24 @@ osg-update-certs
 Will update CA certificates from version unknown to version 1.21NEW.
 Update successful.
 
-Setup completed successfully.
-</code></pre>
+Setup completed successfully.</code></pre>
+
 
 <p>Initially the CA certificates will not be updated. You can tell by looking at:</p>
-<pre><code>[root@client ~]$ /sbin/service osg-update-certs-cron  status
-Periodic osg-update-certs is disabled.
-</code></pre>
+<pre class="codehilite"><code>[root@client ~]$ /sbin/service osg-update-certs-cron  status
+Periodic osg-update-certs is disabled.</code></pre>
+
 
 <p>You can enable the <code>cron</code> job that updates the CA certs with:</p>
-<pre><code>[root@client ~]$ /sbin/service osg-update-certs-cron  start
-Enabling periodic osg-update-certs:                        [  <span style="color:green">OK</span>  ]
-</code></pre>
+<pre class="codehilite"><code>[root@client ~]$ /sbin/service osg-update-certs-cron  start
+Enabling periodic osg-update-certs:                        [  <span style="color:green">OK</span>  ]</code></pre>
+
 
 <p>A complete set of options available though <code>osg-ca-manage</code> command, including your interface to adding and removing CAs, could be found at <a href="../OsgCaManage">osg-ca-manage documentation</a></p>
 <h2 id="option-3-install-an-rpm-that-installs-no-cas">Option 3: Install an RPM that installs no CAs</h2>
 <p>Install this with:</p>
-<pre><code>yum install empty-ca-certs –-enablerepo=osg-empty
-</code></pre>
+<pre class="codehilite"><code>yum install empty-ca-certs –-enablerepo=osg-empty</code></pre>
+
 
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -371,30 +382,30 @@ existing CRLs expire.</p>
 <h2 id="install-fetch-crl">Install <code>fetch-crl</code></h2>
 <p>Normally <code>fetch-crl</code> is installed when you install the rest of the software and you do not need
 to specifically install it. If you do wish to install it, you can install it as:</p>
-<pre><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
+<pre class="codehilite"><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
 [root@client ~]$ yum install fetch-crl3
 <span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span>
-[root@client ~]$ yum install fetch-crl
-</code></pre>
+[root@client ~]$ yum install fetch-crl</code></pre>
+
 
 <h3 id="enable-and-start-fetch-crl">Enable and Start <code>fetch-crl</code></h3>
 <p>To enable fetch-crl (fetch Certificate Revocation Lists) services by default on the node:</p>
-<pre><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
+<pre class="codehilite"><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
 [root@client ~]$ /sbin/chkconfig fetch-crl3-boot on
 [root@client ~]$ /sbin/chkconfig fetch-crl3-cron on
 <span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span> 
 [root@client ~]$ /sbin/chkconfig fetch-crl-boot on
-[root@client ~]$ /sbin/chkconfig fetch-crl-cron on
-</code></pre>
+[root@client ~]$ /sbin/chkconfig fetch-crl-cron on</code></pre>
+
 
 <p>To start fetch-crl:</p>
-<pre><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
+<pre class="codehilite"><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
 [root@client ~]$ /sbin/service fetch-crl3-boot start
 [root@client ~]$ /sbin/service fetch-crl3-cron start
 <span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span> 
 [root@client ~]$ /sbin/service fetch-crl-boot start
-[root@client ~]$ /sbin/service fetch-crl-cron start
-</code></pre>
+[root@client ~]$ /sbin/service fetch-crl-cron start</code></pre>
+
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -443,42 +454,42 @@ It is possible to send the output to syslog instead of the default email system.
 </ol>
 <h3 id="startstop-fetch-crl-a-quick-guide">Start/Stop fetch-crl: A quick guide</h3>
 <p>You need to fetch the latest CA Certificate Revocation Lists (CRLs) and you should enable the fetch-crl service to keep the CRLs up to date:</p>
-<pre><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
+<pre class="codehilite"><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
 [root@client ~]$ /usr/sbin/fetch-crl3 # This fetches the CRLs
 [root@client ~]$ /sbin/service fetch-crl3-boot start
 [root@client ~]$ /sbin/service fetch-crl3-cron start
 <span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7</span>
 [root@client ~]$ /usr/sbin/fetch-crl # This fetches the CRLs
 [root@client ~]$ /sbin/service fetch-crl-boot start
-[root@client ~]$ /sbin/service fetch-crl-cron start
-</code></pre>
+[root@client ~]$ /sbin/service fetch-crl-cron start</code></pre>
+
 
 <p>To enable the <code>fetch-crl</code> service to keep the CRLs up to date after reboots:</p>
-<pre><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
+<pre class="codehilite"><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
 [root@client ~]$ /sbin/chkconfig fetch-crl3-boot on
 [root@client ~]$ /sbin/chkconfig fetch-crl3-cron on
 <span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span>
 [root@client ~]$ /sbin/chkconfig fetch-crl-boot on
-[root@client ~]$ /sbin/chkconfig fetch-crl-cron on
-</code></pre>
+[root@client ~]$ /sbin/chkconfig fetch-crl-cron on</code></pre>
+
 
 <p>To stop <code>fetch-crl</code>:</p>
-<pre><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
+<pre class="codehilite"><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
 [root@client ~]$ /sbin/service fetch-crl3-boot stop
 [root@client ~]$ /sbin/service fetch-crl3-cron stop
 <span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span>
 [root@client ~]$ /sbin/service fetch-crl-boot stop
-[root@client ~]$ /sbin/service fetch-crl-cron stop
-</code></pre>
+[root@client ~]$ /sbin/service fetch-crl-cron stop</code></pre>
+
 
 <p>To disable the fetch-crl service:</p>
-<pre><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
+<pre class="codehilite"><code><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span>
 [root@client ~]$ /sbin/chkconfig fetch-crl3-boot off
 [root@client ~]$ /sbin/chkconfig fetch-crl3-cron off
 <span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span>
 [root@client ~]$ /sbin/chkconfig fetch-crl-boot off
-[root@client ~]$ /sbin/chkconfig fetch-crl-cron off
-</code></pre>
+[root@client ~]$ /sbin/chkconfig fetch-crl-cron off</code></pre>
+
 
 <h1 id="updating-cascrls">Updating CAs/CRLs</h1>
 <h2 id="why-maintain-up-to-date-trusted-ca-crl-information">Why maintain up-to-date Trusted CA /CRL information</h2>
@@ -587,13 +598,13 @@ It is possible to send the output to syslog instead of the default email system.
 </table>
 <h2 id="tests">Tests</h2>
 <p>To test the host certificate of a server <code>openssl s_client</code> can be used. Here is an example with the gatekeeper:</p>
-<pre><code><span style="color:red">UCL_PROMPT</span> openssl s_client -showcerts -cert /etc/grid-security/hostcert.pem -key /etc/grid-security/hostkey.pem -CApath /etc/grid-security/certificates/ -debug -connect osg-gk.mwt2.org:2119
-</code></pre>
+<pre class="codehilite"><code><span style="color:red">UCL_PROMPT</span> openssl s_client -showcerts -cert /etc/grid-security/hostcert.pem -key /etc/grid-security/hostkey.pem -CApath /etc/grid-security/certificates/ -debug -connect osg-gk.mwt2.org:2119</code></pre>
+
 
 <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
 <h3 id="location-of-certificates">Location of Certificates?</h3>
-<pre><code> /etc/grid-security/certificates 
-</code></pre>
+<pre class="codehilite"><code> /etc/grid-security/certificates </code></pre>
+
 
 <h3 id="what-is-the-version-of-osg-ca-package-i-have-installed-and-what-are-its-contents">What is the version of OSG CA package I have installed and what are its contents?</h3>
 <p>The version of the CA package ca be found at <code>/etc/grid-security/certificates/INDEX.html</code> or <code>/etc/grid-security/certificates/INDEX.txt</code>. The changes file can be found at <code>/etc/grid-security/certificates/CHANGES</code>.</p>
@@ -617,12 +628,12 @@ It is possible to send the output to syslog instead of the default email system.
 <p>For Option 1: run one of the following <code>yum update osg-ca-certs</code> or <code>yum update igtf-ca-certs</code> depending on the rpm package you installed.</p>
 <p>For Option 4: run <code>yum update osg-ca-certs</code></p>
 <p>For Option 2: You do not need to do a manual update, make sure <code>osg-update-certs-cron</code> is enabled using</p>
-<pre><code>[root@client ~]$ /sbin/service osg-update-certs-cron  status
-</code></pre>
+<pre class="codehilite"><code>[root@client ~]$ /sbin/service osg-update-certs-cron  status</code></pre>
+
 
 <p>If the service is disabled, enable it using</p>
-<pre><code>[root@client ~]$ /sbin/service osg-update-certs-cron  start
-</code></pre>
+<pre class="codehilite"><code>[root@client ~]$ /sbin/service osg-update-certs-cron  start</code></pre>
+
 
 <p>If for some extraordinary reason you need to manually update the CA you could run <code>osg-ca-manage [--force] refreshCA</code>.</p>
 <h3 id="where-are-the-configuration-files-for-fetch-crl">Where are the configuration files for fetch-crl?</h3>

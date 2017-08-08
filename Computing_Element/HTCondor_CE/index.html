@@ -131,6 +131,17 @@
           
             <li class="toctree-l1">
 		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Release/signing/">RPM Signing</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <span class="caption-text">In-Progress Docs</span>
     <ul class="subnav">
                 <li class="">
@@ -326,13 +337,15 @@ However, if you are updating a host that used a Globus GRAM job gateway
 <p>Edit the gateway configuration file
     <code>/etc/osg/config.d/10-gateway.ini</code> to reflect your choice
     To enable HTCondor CE and disable GRAM CE:</p>
-<pre><code>gram_gateway_enabled = False
-htcondor_gateway_enabled = True
-</code></pre>
+<pre class="codehilite"><code>gram_gateway_enabled = False
+htcondor_gateway_enabled = True</code></pre>
+
+
 <p>To enable both HTCondor and GRAM CEs:</p>
-<pre><code>gram_gateway_enabled = True
-htcondor_gateway_enabled = True
-</code></pre>
+<pre class="codehilite"><code>gram_gateway_enabled = True
+htcondor_gateway_enabled = True</code></pre>
+
+
 </li>
 </ol>
 <p>More information about the Globus GRAM CE can be found <a href="../Computing_Element/InstallComputeElement">here</a>.</p>
@@ -341,8 +354,8 @@ htcondor_gateway_enabled = True
 <p>Enable your batch system by editing the <code>enabled</code> field in the
 <code>/etc/osg/config.d/20-YOUR-BATCH-SYSTEM.ini</code>
 file:</p>
-<pre><code>enabled = True
-</code></pre>
+<pre class="codehilite"><code>enabled = True</code></pre>
+
 
 <h4 id="batch-systems-other-than-htcondor">Batch systems other than HTCondor</h4>
 <p>If you are using HTCondor as your <strong>local batch system</strong> (i.e., in
@@ -363,8 +376,8 @@ HTCondor-CE daemons can write to the spool directory.</p>
 control this by setting <code>SPOOL</code> in
 <code>/etc/condor-ce/config.d/99-local.conf</code>. For example, the following sets
 the <code>SPOOL</code> directory to <code>/home/condor</code>:</p>
-<pre><code>SPOOL=/home/condor
-</code></pre>
+<pre class="codehilite"><code>SPOOL=/home/condor</code></pre>
+
 
 <p><strong>NOTE</strong>: The shared spool directory must
 be readable and writeable by the <code>condor</code> user for HTCondor CE to
@@ -373,9 +386,9 @@ function correctly.</p>
 <p>Worker node proxy renewal is not used by HTCondor-CE and leaving it on
 will cause some jobs to be held. Edit <code>/etc/blah.config</code> on the
 HTCondor CE host and set the following two values:</p>
-<pre><code>blah_disable_wn_proxy_renewal=yes
-blah_delegate_renewed_proxies=no
-</code></pre>
+<pre class="codehilite"><code>blah_disable_wn_proxy_renewal=yes
+blah_delegate_renewed_proxies=no</code></pre>
+
 
 <p><strong>NOTE</strong>: This configuration file uses bash syntax rules; there should be no whitespace around the <code>=</code>.</p>
 <h3 id="configuring-authorization">Configuring authorization</h3>
@@ -533,8 +546,8 @@ HTCondor CE daemons need to know which hostname to use when
 communicating to each other. Generally, you will want to set
 <code>NETWORK_HOSTNAME</code> to the hostname of your public interface in
 <code>/etc/condor-ce/config.d/99-local.conf</code> directory with the line:</p>
-<pre><code>NETWORK_HOSTNAME=condorce.example.com
-</code></pre>
+<pre class="codehilite"><code>NETWORK_HOSTNAME=condorce.example.com</code></pre>
+
 
 <p>Replacing <code>condorce.example.com</code> text with your public
 interface’s hostname.</p>
@@ -583,28 +596,28 @@ DN, or their VOMS attributes.</p>
 <h5 id="mapping-by-uid">Mapping by UID</h5>
 <p>To map UID’s to an accounting group, use <code>/etc/osg/uid_table.txt</code>. It is
 consulted first and contains lines of the form:</p>
-<pre><code>uid GroupName
-</code></pre>
+<pre class="codehilite"><code>uid GroupName</code></pre>
+
 
 <p>Example <code>uid_table.txt</code>:</p>
-<pre><code>uscms02 TestGroup
-osg     other.osgedu
-</code></pre>
+<pre class="codehilite"><code>uscms02 TestGroup
+osg     other.osgedu</code></pre>
+
 
 <h5 id="mapping-by-dn-or-voms-attribute">Mapping by DN or VOMS attribute</h5>
 <p>To map DN’s or VOMS attributes to an accounting group, use
 <code>/etc/osg/extattr_table.txt</code>. This file is only consulted if the user is
 not found in the UID file and it contains lines of the form:</p>
-<pre><code>SubjectOrAttribute GroupName
-</code></pre>
+<pre class="codehilite"><code>SubjectOrAttribute GroupName</code></pre>
+
 
 <p>The SubjectOrAttribute can be a Perl regular
 expression.</p>
 <p>Example <code>extattr_table.txt</code>:</p>
-<pre><code>cmsprio cms.other.prio
+<pre class="codehilite"><code>cmsprio cms.other.prio
 cms\/Role=production cms.prod
-.* other
-</code></pre>
+.* other</code></pre>
+
 
 <h4 id="install-and-run-the-htcondor-ce-view">Install and run the HTCondor-CE-View</h4>
 <p>The HTCondor-CE-View is an optional web interface to the status of your
@@ -771,8 +784,8 @@ previous directories.</p>
 </table>
 <p>For a detailed order of the way configuration files are parsed, run the
 following command:</p>
-<pre><code># condor_ce_config_val -config
-</code></pre>
+<pre class="codehilite"><code># condor_ce_config_val -config</code></pre>
+
 
 <h3 id="users">Users</h3>
 <p>The following users are needed by HTCondor-CE at all sites:</p>
