@@ -83,7 +83,7 @@ section](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_mon
 
 ## Install Instructions 
 
-Prior to installing squid, make sure the host's `yum` repositories are [configured correctly](../Common/yum.md) for OSG.
+Prior to installing squid, make sure the host's `yum` repositories are [configured correctly](../common/yum.md) for OSG.
 
 Once configured, install `frontier-squid`:
 ```bash

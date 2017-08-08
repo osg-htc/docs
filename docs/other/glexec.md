@@ -79,9 +79,9 @@ Finally, GUMS versions \>= 1.3.18 can be configured to not require a certificate
 Install Instructions
 --------------------
 
-Prior to installing `glexec`, verify the [yum repositories](../Common/yum.md) are correctly configured.
+Prior to installing `glexec`, verify the [yum repositories](../common/yum.md) are correctly configured.
 
-Some of the worker node client software verifies proxies or certificates. In order to do this, they will need the [CA certificates](../Common/ca.md) used to sign the proxies.
+Some of the worker node client software verifies proxies or certificates. In order to do this, they will need the [CA certificates](../common/ca.md) used to sign the proxies.
 
 Install glexec
 --------------
