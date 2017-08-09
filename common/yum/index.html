@@ -244,13 +244,14 @@ repositories must be enabled.</p>
 <p>Install the EPEL repository, if not already present. <strong>Note:</strong> This
 enables EPEL by default. Choose the right version to match your OS
 version.</p>
-<pre class="codehilite"><code class="language-bash"># EPEL 5 (For RHEL 5, CentOS 5, and SL 5)
+<div class="codehilite"><pre><span></span><span class="c1"># EPEL 5 (For RHEL 5, CentOS 5, and SL 5)</span>
 $ curl -O https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm
 $ rpm -Uvh epel-release-latest-5.noarch.rpm
-# EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
+<span class="c1"># EPEL 6 (For RHEL 6, CentOS 6, and SL 6)</span>
 $ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-# EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
-$ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</code></pre>
+<span class="c1"># EPEL 7 (For RHEL 7, CentOS 7, and SL 7)</span>
+$ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+</pre></div>
 
 
 <p><strong>WARNING</strong>: if you have your own mirror or configuration of the EPEL
@@ -305,7 +306,7 @@ required key you can force the installation using
 depending on your EL version:
     1. For EL versions greater than EL5, install the files directly from
 <code>repo.grid.iu</code>:</p>
-<pre class="codehilite"><code>    ```
+<div class="codehilite"><pre><span></span>    ```
     rpm -Uvh URL
     ```
 
@@ -320,7 +321,8 @@ depending on your EL version:
     ```
     # curl -O https://repo.grid.iu.edu/osg/3.2/osg-3.2-el5-release-latest.rpm
     # rpm -Uvh osg-3.2-el5-release-latest.rpm
-    ```</code></pre>
+    ```
+</pre></div>
 
 
 <h1 id="priorities">Priorities</h1>
@@ -331,15 +333,16 @@ that causes failed installations.</p>
 want to enable another one, such as <code>osg-testing</code>, then edit its file
 (e.g. <code>/etc/yum.repos.d/osg-testing.repo</code>) and change the enabled option
 from 0 to 1:</p>
-<pre class="codehilite"><code>[osg-testing]
-name=OSG Software for Enterprise Linux 5 - Testing - $basearch
-#baseurl=http://repo.grid.iu.edu/osg/3.2/el5/testing/$basearch
-mirrorlist=http://repo.grid.iu.edu/mirror/osg/3.2/el5/testing/$basearch
-failovermethod=priority
-priority=98
-enabled=<span style="color:red">1</span>
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG</code></pre>
+<div class="codehilite"><pre><span></span><span class="k">[osg-testing]</span>
+<span class="na">name</span><span class="o">=</span><span class="s">OSG Software for Enterprise Linux 5 - Testing - $basearch</span>
+<span class="c1">#baseurl=http://repo.grid.iu.edu/osg/3.2/el5/testing/$basearch</span>
+<span class="na">mirrorlist</span><span class="o">=</span><span class="s">http://repo.grid.iu.edu/mirror/osg/3.2/el5/testing/$basearch</span>
+<span class="na">failovermethod</span><span class="o">=</span><span class="s">priority</span>
+<span class="na">priority</span><span class="o">=</span><span class="s">98</span>
+<span class="na">enabled</span><span class="o">=</span><span class="s"><span style="color:red">1</span></span>
+<span class="na">gpgcheck</span><span class="o">=</span><span class="s">1</span>
+<span class="na">gpgkey</span><span class="o">=</span><span class="s">file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG</span>
+</pre></div>
 
 
 <p>If you have your own mirror or

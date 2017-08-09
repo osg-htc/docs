@@ -244,8 +244,9 @@
 </ol>
 <p>For more information, see the <a href="../EnvironmentVariables">OSG environment variables reference page</a> and the <a href="../IniConfigurationOptions#Storage">CE configuration instructions</a>.
 4. Once you finish making changes to configuration files on your CE, validate, fix, and apply the configuration: </p>
-<pre class="codehilite"><code>osg-configure -v  
-osg-configure -c</code></pre>
+<div class="codehilite"><pre><span></span>osg-configure -v  
+osg-configure -c
+</pre></div>
 
 
 <h2 id="validing-the-worker-node-client">Validing the Worker Node Client</h2>
@@ -280,7 +281,8 @@ osg-configure -c</code></pre>
 <ol>
 <li>Set up access to the Worker Node Client software for the duration of your login session:</li>
 </ol>
-<pre class="codehilite"><code>source **PATH**</code></pre>
+<div class="codehilite"><pre><span></span>source **PATH**
+</pre></div>
 
 
 <p>where <code>PATH</code> is from the previous step.</p>
@@ -289,21 +291,25 @@ osg-configure -c</code></pre>
 <ul>
 <li>A missing softlink to the CA certs directory. To check this, run:</li>
 </ul>
-<pre class="codehilite"><code>ls -l /cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.2/current/el5-x86_64/etc/grid-security</code></pre>
+<div class="codehilite"><pre><span></span>ls -l /cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.2/current/el5-x86_64/etc/grid-security
+</pre></div>
 
 
 <p>and check that <code>certificates</code> is linked to somewhere. The fix is to yum update the oasis-config package to version 4. A known workaround is to run:</p>
-<pre class="codehilite"><code>export X509\_CERT\_DIR=/cvmfs/oasis.opensciencegrid.org/mis/certificates</code></pre>
+<div class="codehilite"><pre><span></span>export X509\_CERT\_DIR=/cvmfs/oasis.opensciencegrid.org/mis/certificates
+</pre></div>
 
 
 <p>before any commands.
 - OpenJDK 7 must be installed from RPMs before using software that needs Java (e.g., <code>srm-ls</code>) from OASIS. There are some instructions <a href="../Documentation.Release3.InstallSoftwareWithOpenJDK7">here</a>. If you are running under an EL5 distribution, java programs may produce an error like this:</p>
-<pre class="codehilite"><code>Exception in thread ”main&quot; java.lang.NoClassDefFoundError: org/globus/gsi/OpenSSLKey</code></pre>
+<div class="codehilite"><pre><span></span>Exception in thread ”main&quot; java.lang.NoClassDefFoundError: org/globus/gsi/OpenSSLKey
+</pre></div>
 
 
 <p>This shouldn‘t happen under EL6 distributions. The (unofficial) workaround is to run the following as root:</p>
-<pre class="codehilite"><code>mkdir /usr/share/java-1.7.0
-/usr/lib/java-1.7.0</code></pre>
+<div class="codehilite"><pre><span></span>mkdir /usr/share/java-1.7.0
+/usr/lib/java-1.7.0
+</pre></div>
 
 
 <p>This problem is also mentioned <a href="../SoftwareTeam.Java6MigrationDetails">here</a>.</p>

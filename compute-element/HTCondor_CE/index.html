@@ -337,13 +337,15 @@ However, if you are updating a host that used a Globus GRAM job gateway
 <p>Edit the gateway configuration file
     <code>/etc/osg/config.d/10-gateway.ini</code> to reflect your choice
     To enable HTCondor CE and disable GRAM CE:</p>
-<pre class="codehilite"><code>gram_gateway_enabled = False
-htcondor_gateway_enabled = True</code></pre>
+<div class="codehilite"><pre><span></span>gram_gateway_enabled = False
+htcondor_gateway_enabled = True
+</pre></div>
 
 
 <p>To enable both HTCondor and GRAM CEs:</p>
-<pre class="codehilite"><code>gram_gateway_enabled = True
-htcondor_gateway_enabled = True</code></pre>
+<div class="codehilite"><pre><span></span>gram_gateway_enabled = True
+htcondor_gateway_enabled = True
+</pre></div>
 
 
 </li>
@@ -354,7 +356,8 @@ htcondor_gateway_enabled = True</code></pre>
 <p>Enable your batch system by editing the <code>enabled</code> field in the
 <code>/etc/osg/config.d/20-YOUR-BATCH-SYSTEM.ini</code>
 file:</p>
-<pre class="codehilite"><code>enabled = True</code></pre>
+<div class="codehilite"><pre><span></span>enabled = True
+</pre></div>
 
 
 <h4 id="batch-systems-other-than-htcondor">Batch systems other than HTCondor</h4>
@@ -376,7 +379,8 @@ HTCondor-CE daemons can write to the spool directory.</p>
 control this by setting <code>SPOOL</code> in
 <code>/etc/condor-ce/config.d/99-local.conf</code>. For example, the following sets
 the <code>SPOOL</code> directory to <code>/home/condor</code>:</p>
-<pre class="codehilite"><code>SPOOL=/home/condor</code></pre>
+<div class="codehilite"><pre><span></span>SPOOL=/home/condor
+</pre></div>
 
 
 <p><strong>NOTE</strong>: The shared spool directory must
@@ -386,8 +390,9 @@ function correctly.</p>
 <p>Worker node proxy renewal is not used by HTCondor-CE and leaving it on
 will cause some jobs to be held. Edit <code>/etc/blah.config</code> on the
 HTCondor CE host and set the following two values:</p>
-<pre class="codehilite"><code>blah_disable_wn_proxy_renewal=yes
-blah_delegate_renewed_proxies=no</code></pre>
+<div class="codehilite"><pre><span></span>blah_disable_wn_proxy_renewal=yes
+blah_delegate_renewed_proxies=no
+</pre></div>
 
 
 <p><strong>NOTE</strong>: This configuration file uses bash syntax rules; there should be no whitespace around the <code>=</code>.</p>
@@ -546,7 +551,8 @@ HTCondor CE daemons need to know which hostname to use when
 communicating to each other. Generally, you will want to set
 <code>NETWORK_HOSTNAME</code> to the hostname of your public interface in
 <code>/etc/condor-ce/config.d/99-local.conf</code> directory with the line:</p>
-<pre class="codehilite"><code>NETWORK_HOSTNAME=condorce.example.com</code></pre>
+<div class="codehilite"><pre><span></span>NETWORK_HOSTNAME=condorce.example.com
+</pre></div>
 
 
 <p>Replacing <code>condorce.example.com</code> text with your public
@@ -596,27 +602,31 @@ DN, or their VOMS attributes.</p>
 <h5 id="mapping-by-uid">Mapping by UID</h5>
 <p>To map UID’s to an accounting group, use <code>/etc/osg/uid_table.txt</code>. It is
 consulted first and contains lines of the form:</p>
-<pre class="codehilite"><code>uid GroupName</code></pre>
+<div class="codehilite"><pre><span></span>uid GroupName
+</pre></div>
 
 
 <p>Example <code>uid_table.txt</code>:</p>
-<pre class="codehilite"><code>uscms02 TestGroup
-osg     other.osgedu</code></pre>
+<div class="codehilite"><pre><span></span>uscms02 TestGroup
+osg     other.osgedu
+</pre></div>
 
 
 <h5 id="mapping-by-dn-or-voms-attribute">Mapping by DN or VOMS attribute</h5>
 <p>To map DN’s or VOMS attributes to an accounting group, use
 <code>/etc/osg/extattr_table.txt</code>. This file is only consulted if the user is
 not found in the UID file and it contains lines of the form:</p>
-<pre class="codehilite"><code>SubjectOrAttribute GroupName</code></pre>
+<div class="codehilite"><pre><span></span>SubjectOrAttribute GroupName
+</pre></div>
 
 
 <p>The SubjectOrAttribute can be a Perl regular
 expression.</p>
 <p>Example <code>extattr_table.txt</code>:</p>
-<pre class="codehilite"><code>cmsprio cms.other.prio
+<div class="codehilite"><pre><span></span>cmsprio cms.other.prio
 cms\/Role=production cms.prod
-.* other</code></pre>
+.* other
+</pre></div>
 
 
 <h4 id="install-and-run-the-htcondor-ce-view">Install and run the HTCondor-CE-View</h4>
@@ -784,7 +794,8 @@ previous directories.</p>
 </table>
 <p>For a detailed order of the way configuration files are parsed, run the
 following command:</p>
-<pre class="codehilite"><code># condor_ce_config_val -config</code></pre>
+<div class="codehilite"><pre><span></span># condor_ce_config_val -config
+</pre></div>
 
 
 <h3 id="users">Users</h3>

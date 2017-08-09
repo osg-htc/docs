@@ -306,11 +306,13 @@ section</a>.</p>
 <h2 id="install-instructions">Install Instructions</h2>
 <p>Prior to installing squid, make sure the host's <code>yum</code> repositories are <a href="../../common/yum/">configured correctly</a> for OSG.</p>
 <p>Once configured, install <code>frontier-squid</code>:</p>
-<pre class="codehilite"><code class="language-bash">[root@client ~]$ yum install frontier-squid</code></pre>
+<div class="codehilite"><pre><span></span>[root@client ~]$ yum install frontier-squid
+</pre></div>
 
 
 <p>Then enable it to start at boot:</p>
-<pre class="codehilite"><code class="language-bash">[root@client ~]$ chkconfig frontier-squid on</code></pre>
+<div class="codehilite"><pre><span></span>[root@client ~]$ chkconfig frontier-squid on
+</pre></div>
 
 
 <h2 id="configuring-frontier-squid">Configuring Frontier Squid</h2>
@@ -360,22 +362,25 @@ Squid service:</p>
 </div>
 <h2 id="starting-and-stopping-the-frontier-squid-service">Starting and Stopping the Frontier Squid Service</h2>
 <p>Starting frontier-squid:</p>
-<pre class="codehilite"><code><span style="color:red">UCL_ROOT_PROMPT</span> service frontier-squid start</code></pre>
+<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">UCL_ROOT_PROMPT</span> service frontier-squid start</span>
+</pre></div>
 
 
 <p>Stopping frontier-squid:</p>
-<pre class="codehilite"><code><span style="color:red">UCL_ROOT_PROMPT</span> service frontier-squid stop</code></pre>
+<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">UCL_ROOT_PROMPT</span> service frontier-squid stop</span>
+</pre></div>
 
 
 <h2 id="testing-frontier-squid">Testing Frontier Squid</h2>
 <p>As any user on another computer, do the following (where
 <span style="color:red">yoursquid.your.domain</span> is
 the fully qualified domain name of your squid server):</p>
-<pre class="codehilite"><code>[user@client ~]$ export http_proxy=http://yoursquid.your.domain:3128
+<div class="codehilite"><pre><span></span>[user@client ~]$ export http_proxy=http://yoursquid.your.domain:3128
 [user@client ~]$ wget -qdO/dev/null http://frontier.cern.ch 2&gt;&amp;1|grep X-Cache
 X-Cache: MISS from yoursquid.your.domain
 [user@client ~]$ wget -qdO/dev/null http://frontier.cern.ch 2&gt;&amp;1|grep X-Cache
-X-Cache: HIT from yoursquid.your.domain</code></pre>
+X-Cache: HIT from yoursquid.your.domain
+</pre></div>
 
 
 <p>If the grep doesn’t print anything, try removing it from the pipeline to

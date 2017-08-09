@@ -250,7 +250,8 @@
 </em> <a href="../../common/ca/">CA certificates installed</a></p>
 <h2 id="gsi-openssh-installation">GSI OpenSSH Installation</h2>
 <p>Start with installing GSI OpenSSH from the repository</p>
-<pre class="codehilite"><code class="language-rootscreen">yum install gsi-openssh-server gsi-openssh-clients</code></pre>
+<div class="codehilite"><pre><span></span>yum install gsi-openssh-server gsi-openssh-clients
+</pre></div>
 
 
 <p>In addition, you'll need to install CA certificates in order for GSIOpenSSH to work. You can follow the instructions below in order to install them:</p>
@@ -359,16 +360,19 @@ of the lines in the file are commented out using a <code>#</code> at the beginni
 <p>The mappings will not consider VOMS extensions so the first mapping that matches will be used regardless of the VO role or VO present in the users proxy</p>
 </div>
 <p>An example of the <code>/etc/grid-security/grid-mapfile</code> follows:</p>
-<pre class="codehilite"><code class="language-file">&quot;/DC=org/DC=doegrids/OU=People/CN=USER NAME 123456&quot; useraccount</code></pre>
+<div class="codehilite"><pre><span></span>&quot;/DC=org/DC=doegrids/OU=People/CN=USER NAME 123456&quot; useraccount
+</pre></div>
 
 
 <h2 id="using-lcmaps-and-gums-for-authorization">Using LCMAPS and GUMS for authorization</h2>
 <p>In order to use LCMAPS callouts with GSI OpenSSH, you'll first need to edit <code>/etc/grid-security/gsi-authz.conf</code> to indicate that Globus should do a GSI callout for authorization. The file should contain the following:</p>
-<pre class="codehilite"><code class="language-file">globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout</code></pre>
+<div class="codehilite"><pre><span></span>globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout
+</pre></div>
 
 
 <p>so that LCMAPS is used. Next, install the lcmaps rpms:</p>
-<pre class="codehilite"><code class="language-rootscreen">yum install lcmaps lcas-lcmaps-gt4-interface</code></pre>
+<div class="codehilite"><pre><span></span>yum install lcmaps lcas-lcmaps-gt4-interface
+</pre></div>
 
 
 <p>Finally, you'll need to modify <code>/etc/lcmaps.db</code> so that the <code>gumsclient</code> entry has the correct endpoint for your gums server.</p>
@@ -405,22 +409,24 @@ of the lines in the file are commented out using a <code>#</code> at the beginni
 <h1 id="troubleshooting">Troubleshooting</h1>
 <p>You can get information on troubleshooting errors on the <a href="http://grid.ncsa.illinois.edu/ssh/ts_server.html">NCSA page</a>.</p>
 <p>To troubleshoot LCMAPS authorization, you can add the following to <code>/etc/sysconfig/gsisshd</code> and choose a higher debug level:</p>
-<pre class="codehilite"><code class="language-file"># level 0: no messages, 1: errors, 2: also warnings, 3: also notices,
+<div class="codehilite"><pre><span></span># level 0: no messages, 1: errors, 2: also warnings, 3: also notices,
 #  4: also info, 5: maximum debug
-LCMAPS_DEBUG_LEVEL=2</code></pre>
+LCMAPS_DEBUG_LEVEL=2
+</pre></div>
 
 
 <p>Output goes to <code>/var/log/messages</code> by default.</p>
 <h2 id="test-gsi-openssh">Test GSI OpenSSH</h2>
 <p>After starting the <code>gsisshd</code> service you can check if it is running correctly</p>
-<pre class="codehilite"><code class="language-screen">$ grid-proxy-init
-Your identity: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=User Name
-Enter GRID pass phrase for this identity:
+<div class="codehilite"><pre><span></span>$ grid-proxy-init
+Your identity: /DC<span class="o">=</span>ch/DC<span class="o">=</span>cern/OU<span class="o">=</span>Organic Units/OU<span class="o">=</span>Users/CN<span class="o">=</span>User Name
+Enter GRID pass phrase <span class="k">for</span> this identity:
 Creating proxy ............................................................................................... Done
-Your proxy is valid until: Sat Apr 23 08:18:27 2016
-$ gsissh localhost -p 2222
-Last login: Tue Sep 18 16:08:03 2012 from itb4.uchicago.edu
-$</code></pre>
+Your proxy is valid <span class="k">until</span>: Sat Apr <span class="m">23</span> <span class="m">08</span>:18:27 <span class="m">2016</span>
+$ gsissh localhost -p <span class="m">2222</span>
+Last login: Tue Sep <span class="m">18</span> <span class="m">16</span>:08:03 <span class="m">2012</span> from itb4.uchicago.edu
+$
+</pre></div>
 
 
 <h1 id="how-to-get-help">How to get Help?</h1>

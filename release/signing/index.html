@@ -192,16 +192,18 @@
 <h2 id="verifying-osgs-rpms">Verifying OSG's RPMs</h2>
 <p>We use a GPG key to sign our software packages. Normally <code>yum</code> and <code>rpm</code> transparently use the GPG signatures to verify the packages have not been corrupted and were created by us. You get our GPG public key when you install the <code>osg-release</code> RPM.</p>
 <p>If you wish to verify one of our RPMs manually, you can run:</p>
-<pre class="codehilite"><code class="language-console">$ rpm --checksig -v &lt;NAME.RPM&gt;</code></pre>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> rpm --checksig -v &lt;NAME.RPM&gt;
+</pre></div>
 
 
 <p>For example:</p>
-<pre class="codehilite"><code class="language-console">$ rpm --checksig -v globus-core-8.0-2.osg.x86_64.rpm 
-globus-core-8.0-2.osg.x86_64.rpm:
-    Header V3 DSA signature: OK, key ID 824b8603
-    Header SHA1 digest: OK (2b5af4348c548c27f10e2e47e1ec80500c4f85d7)
-    MD5 digest: OK (d11503a229a1a0e02262034efe0f7e46)
-    V3 DSA signature: OK, key ID 824b8603</code></pre>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> rpm --checksig -v globus-core-8.0-2.osg.x86_64.rpm 
+<span class="go">globus-core-8.0-2.osg.x86_64.rpm:</span>
+<span class="go">    Header V3 DSA signature: OK, key ID 824b8603</span>
+<span class="go">    Header SHA1 digest: OK (2b5af4348c548c27f10e2e47e1ec80500c4f85d7)</span>
+<span class="go">    MD5 digest: OK (d11503a229a1a0e02262034efe0f7e46)</span>
+<span class="go">    V3 DSA signature: OK, key ID 824b8603</span>
+</pre></div>
 
 
 <h2 id="the-osg-packaging-signing-key">The OSG Packaging Signing Key</h2>
@@ -236,10 +238,11 @@ globus-core-8.0-2.osg.x86_64.rpm:
 </tbody>
 </table>
 <p>You can see the fingerprint for yourself:</p>
-<pre class="codehilite"><code class="language-console">$ gpg --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
-pub  1024D/824B8603 2011-09-15 OSG Software Team (RPM Signing Key for Koji Packages) &lt;vdt-support@opensciencegrid.org&gt;
-      Key fingerprint = 6459 D9D2 AAA9 AB67 A251  FB44 2110 B1C8 824B 8603
-sub  2048g/28E5857C 2011-09-15</code></pre>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> gpg --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
+<span class="go">pub  1024D/824B8603 2011-09-15 OSG Software Team (RPM Signing Key for Koji Packages) &lt;vdt-support@opensciencegrid.org&gt;</span>
+<span class="go">      Key fingerprint = 6459 D9D2 AAA9 AB67 A251  FB44 2110 B1C8 824B 8603</span>
+<span class="go">sub  2048g/28E5857C 2011-09-15</span>
+</pre></div>
               
             </div>
           </div>
