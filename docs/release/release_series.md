@@ -64,7 +64,7 @@ Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4
 4. Update software:
 
         :::console
-        yum update
+        [root@client ~] # yum update
 
 This command will update **all** packages on your system.
 
