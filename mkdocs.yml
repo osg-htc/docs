@@ -20,6 +20,7 @@ pages:
   - 'Worker node glexec': 'other/glexec.md'
 - Release Information:
   - 'RPM Signing': 'release/signing.md'
+  - 'Supported Platforms': 'release/supported_platforms.md'
 - In-Progress Docs:
   - 'CA Updater': 'common/ca_updater.md'
   - 'Certificate Request Scripts': 'common/cert_scripts.md'
