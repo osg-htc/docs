@@ -72,6 +72,12 @@
     
         
     <url>
+     <loc>https://opensciencegrid.github.io/docs/release/release_series/</loc>
+     <lastmod>2017-08-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>https://opensciencegrid.github.io/docs/release/signing/</loc>
      <lastmod>2017-08-11</lastmod>
      <changefreq>daily</changefreq>
