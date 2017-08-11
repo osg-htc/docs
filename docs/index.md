@@ -10,14 +10,14 @@ power opportunistically to the grid.
 
 Our most common software products include:
 
-* [HTCondor CE Installation](Computing_Element/HTCondor_CE.md): Provides a _gateway_
+* [HTCondor CE Installation](compute-element/HTCondor_CE.md): Provides a _gateway_
   between the grid and your batch system.
-* [HTTP Proxy](Frontier_Squid/squid.md): Caches the most commonly-used files at your
+* [HTTP Proxy](frontier-squid/squid.md): Caches the most commonly-used files at your
   site to preserve bandwidth (a custom packaging of the venerable `squid2` software).
-* [CVMFS](Other/cvmfs.md) The CernVM File System (CVMFS) is a global-scale, read-only,
+* [CVMFS](other/cvmfs.md) The CernVM File System (CVMFS) is a global-scale, read-only,
   hierarchical filesystem.  CVMFS volumes distribute the majority of the scientific
   software used on OSG in addition to the OSG worker node client.
-* [Worker node client](Other/wn.md) and [glexec](Other/glexec.md): An RPM-based install
+* [Worker node client](other/wn.md) and [glexec](other/glexec.md): An RPM-based install
   of the worker node software; this includes the `glexec` binary (not provided by the
   CVMFS install) which allows pilots to securely isolate payload jobs.
 
@@ -35,9 +35,9 @@ to being included in the table of contents.
 If you'd like to contribute, please consider trying to clean up one of these
 documents:
 
-* [CA Certificate Updater script](Common/ca_updater.md)
-* [Host certificate management package](Common/cert_scripts.md)
-* [Job Router Recipes](Computing_Element/job_router.md)
-* [Installing the Worker Node from OASIS](Other/wn_oasis.md)
-* [Installing a GridFTP Server](Storage/gridftp.md)
+* [CA Certificate Updater script](common/ca_updater.md)
+* [Host certificate management package](common/cert_scripts.md)
+* [Job Router Recipes](compute-element/job_router.md)
+* [Installing the Worker Node from OASIS](other/wn_oasis.md)
+* [Installing a GridFTP Server](storage/gridftp.md)
 

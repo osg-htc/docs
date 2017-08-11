@@ -7,6 +7,7 @@ language: python
 before_script:
 - pip install mkdocs
 - pip install MarkdownHighlight
+- pip install pygments
 script:
 - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then openssl aes-256-cbc -K $encrypted_75e9e0f098a4_key -iv $encrypted_75e9e0f098a4_iv -in deploy-key.enc -out deploy_key -d; chmod 600 deploy_key; eval `ssh-agent -s`; ssh-add deploy_key; fi
 - git config user.name "Automatic Publish"

@@ -36,7 +36,7 @@ host) steps to prepare in advance:
 -   Ensure the host has [a supported operating
     system](SupportedOperatingSystems)
 -   Obtain root access to the host
--   Prepare [the required Yum repositories](../Common/yum.md)
+-   Prepare [the required Yum repositories](../common/yum.md)
 -   Install [CA certificates](InstallCertAuth)
 
 Installing HTCondor-CE
@@ -115,7 +115,7 @@ However, if you are updating a host that used a Globus GRAM job gateway
         gram_gateway_enabled = True
         htcondor_gateway_enabled = True
 
-More information about the Globus GRAM CE can be found [here](Computing_Element/InstallComputeElement).
+More information about the Globus GRAM CE can be found [here](compute-element/InstallComputeElement).
 
 Batch System
 ------------

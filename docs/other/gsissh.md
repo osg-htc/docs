@@ -25,8 +25,8 @@ Installation procedure
 ======================
 
 Prior to install, make sure you have:
-* [Yum repositories correctly configured](../Common/yum.md) for OSG.
-* [CA certificates installed](../Common/ca.md)
+* [Yum repositories correctly configured](../common/yum.md) for OSG.
+* [CA certificates installed](../common/ca.md)
 
 GSI OpenSSH Installation
 ------------------------
