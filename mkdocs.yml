@@ -26,6 +26,8 @@ pages:
   - 'Job Router Recipe': 'compute-element/job_router.md'
   - 'OASIS-based Worker Node': 'other/wn_oasis.md'
   - 'GridFTP Server': 'storage/gridftp.md'
+- Deprecated Software:
+  - 'BeStMan Overview': 'Storage/bestman-overview.md'
 
 markdown_extensions:
   - admonition
