@@ -118,6 +118,6 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
     if you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the OSG repository has a better yum priority than EPEL. Otherwise, you will have strange dependency resolution issues.
 
 !!! seealso "See Also"
-    -   [Basic use of Yum](YumRpmBasics)
-    -   [Best practices in using Yum](InstallBestPractices)
+    -   [Basic use of Yum](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRpmBasics)
+    -   [Best practices in using Yum](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices)
 
