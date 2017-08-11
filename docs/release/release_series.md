@@ -148,7 +148,7 @@ To cleanly uninstall CEMon from your CE, perform the following procedure (after 
 1.  Ensure that you are using a sufficiently new version of the `osg-ce` metapackages:
 
         :::console
-        [root@client ~] # rpm -q osg-ce&lt
+        [root@client ~] # rpm -q osg-ce
 
     should be at least 3.3-12 (OSG 3.3) or 3.4-1 (OSG 3.4). If not, update them:
 
