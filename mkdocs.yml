@@ -29,7 +29,7 @@ pages:
   - 'OASIS-based Worker Node': 'other/wn_oasis.md'
   - 'GridFTP Server': 'storage/gridftp.md'
 - Deprecated Software:
-  - 'BeStMan Overview': 'Storage/bestman-overview.md'
+  - 'BeStMan Overview': 'storage/bestman-overview.md'
 
 markdown_extensions:
   - admonition
