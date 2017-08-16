@@ -44,7 +44,7 @@
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/other/cvmfs/</loc>
+     <loc>https://opensciencegrid.github.io/docs/client/cvmfs/</loc>
      <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -56,13 +56,13 @@
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/other/wn/</loc>
+     <loc>https://opensciencegrid.github.io/docs/client/wn/</loc>
      <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/other/glexec/</loc>
+     <loc>https://opensciencegrid.github.io/docs/client/glexec/</loc>
      <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -112,7 +112,7 @@
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/other/wn_oasis/</loc>
+     <loc>https://opensciencegrid.github.io/docs/client/wn_oasis/</loc>
      <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
