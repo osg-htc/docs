@@ -14,10 +14,10 @@ pages:
   - 'CA Certificates': 'common/ca.md'
   - 'HTCondor-CE': 'compute-element/HTCondor_CE.md'
   - 'HTTP Cache': 'frontier-squid/squid.md'
-  - 'CVMFS': 'other/cvmfs.md'
+  - 'CVMFS': 'client/cvmfs.md'
   - 'GSI-enabled SSH': 'other/gsissh.md'
-  - 'RPM-based Worker Node': 'other/wn.md'
-  - 'Worker node glexec': 'other/glexec.md'
+  - 'RPM-based Worker Node': 'client/wn.md'
+  - 'Worker node glexec': 'client/glexec.md'
 - Release Information:
   - 'OSG Release Series': 'release/release_series.md'
   - 'RPM Signing': 'release/signing.md'
@@ -26,7 +26,7 @@ pages:
   - 'CA Updater': 'common/ca_updater.md'
   - 'Certificate Request Scripts': 'common/cert_scripts.md'
   - 'Job Router Recipe': 'compute-element/job_router.md'
-  - 'OASIS-based Worker Node': 'other/wn_oasis.md'
+  - 'OASIS-based Worker Node': 'client/wn_oasis.md'
   - 'GridFTP Server': 'storage/gridftp.md'
 - Deprecated Software:
   - 'BeStMan Overview': 'storage/bestman-overview.md'
