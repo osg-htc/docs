@@ -4,7 +4,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs/install-overview/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,49 +21,49 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/common/yum/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/common/ca/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/compute-element/HTCondor_CE/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/frontier-squid/squid/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/other/cvmfs/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/other/gsissh/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/other/wn/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/other/glexec/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -73,19 +73,19 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/release_series/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/signing/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/supported_platforms/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -95,31 +95,31 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/common/ca_updater/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/common/cert_scripts/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/compute-element/job_router/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/other/wn_oasis/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/storage/gridftp/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -129,7 +129,7 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/Storage/bestman-overview/</loc>
-     <lastmod>2017-08-14</lastmod>
+     <lastmod>2017-08-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
