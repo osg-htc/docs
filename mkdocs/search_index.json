@@ -1381,27 +1381,27 @@
             "title": "Install a GridFTP Server"
         }, 
         {
-            "location": "/Storage/bestman-overview/", 
+            "location": "/storage/bestman-overview/", 
             "text": "Berkeley Storage Manager\n\n\nBeStMan, or Berkeley Storage Manager, is a full implementation of SRM v2.2, developed by Lawrence Berkeley National Laboratory, for a disk based storage and mass storage systems. End users may have their own personal BeStMan that manages and gives an SRM interface to their own local disks. It works on top of existing disk-based unix file systems, and has been reported so far to work on file systems such as NFS, GPFS, PVFS, GFS, Ibrix, HFS+, Hadoop, XrootdFS and Lustre. It also works with any existing file transfer service, such as gsiftp, http, https, bbftp and ftp. It requires minimal administrative efforts on the deployment and updates. BeStMan2 is a Jetty based implementation of SRM v2.2.\n\n\nAs of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of June 2018.\n\n\nPlanning\n\n\n\n\nInformation on various BeStMan architectures\n\n\nBestman home page\n: Bestman project home\n\n\n\n\nInstallation\n\n\n\n\nInstall Bestman SE\n: BeStMan installation interfacing with local disk\n\n\nInstall Bestman Gateway Xrootd\n: BeStMan gateway mode on top of XRootD\n\n\nInstall Bestman Gateway Hadoop\n: BeStMan gateway mode on top of Hadoop\n\n\nLBNL Configuration Reference\n\n\n\n\nOperation\n\n\n\n\nLBNL SRM Client\n: SRM client provided with BeStMan.  This is deprecated; use of \ngfal-utils\n is strongly encouraged instead.\n\n\nBeStMan SRMTester\n: Tester for BeStMan SRM instances\n\n\nUsing Adler checksums with BeStMan", 
             "title": "BeStMan Overview"
         }, 
         {
-            "location": "/Storage/bestman-overview/#berkeley-storage-manager", 
+            "location": "/storage/bestman-overview/#berkeley-storage-manager", 
             "text": "BeStMan, or Berkeley Storage Manager, is a full implementation of SRM v2.2, developed by Lawrence Berkeley National Laboratory, for a disk based storage and mass storage systems. End users may have their own personal BeStMan that manages and gives an SRM interface to their own local disks. It works on top of existing disk-based unix file systems, and has been reported so far to work on file systems such as NFS, GPFS, PVFS, GFS, Ibrix, HFS+, Hadoop, XrootdFS and Lustre. It also works with any existing file transfer service, such as gsiftp, http, https, bbftp and ftp. It requires minimal administrative efforts on the deployment and updates. BeStMan2 is a Jetty based implementation of SRM v2.2.  As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of June 2018.", 
             "title": "Berkeley Storage Manager"
         }, 
         {
-            "location": "/Storage/bestman-overview/#planning", 
+            "location": "/storage/bestman-overview/#planning", 
             "text": "Information on various BeStMan architectures  Bestman home page : Bestman project home", 
             "title": "Planning"
         }, 
         {
-            "location": "/Storage/bestman-overview/#installation", 
+            "location": "/storage/bestman-overview/#installation", 
             "text": "Install Bestman SE : BeStMan installation interfacing with local disk  Install Bestman Gateway Xrootd : BeStMan gateway mode on top of XRootD  Install Bestman Gateway Hadoop : BeStMan gateway mode on top of Hadoop  LBNL Configuration Reference", 
             "title": "Installation"
         }, 
         {
-            "location": "/Storage/bestman-overview/#operation", 
+            "location": "/storage/bestman-overview/#operation", 
             "text": "LBNL SRM Client : SRM client provided with BeStMan.  This is deprecated; use of  gfal-utils  is strongly encouraged instead.  BeStMan SRMTester : Tester for BeStMan SRM instances  Using Adler checksums with BeStMan", 
             "title": "Operation"
         }
