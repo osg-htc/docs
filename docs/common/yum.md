@@ -1,13 +1,13 @@
-**YUM Repositories**
+YUM Repositories
 ====================
 
 About This Document
-===================
+-------------------
 
 This document introduces YUM repositories and how OSG uses them.
 
 Repositories
-============
+------------
 
 OSG hosts four public-facing repositories at [repo.grid.iu.edu](http://repo.grid.iu.edu/):
 
@@ -28,14 +28,14 @@ If one of these repositories is missing you may have missing dependencies.
     We did not test other repositories. If you use packages from other repositories, like `jpackage`, `dag`, or `rpmforge`, you may encounter problems.
 
 Enabling Repositories
-=====================
+---------------------
 
 In [our advice on using yum](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices) you will learn many tricks and tips on using yum.
 
 To use the packages in a repository without adding special options to the yum command the repository must be enabled.
 
 
-## Install the Yum Repositories required by OSG
+### Install the Yum Repositories required by OSG
 
 The OSG RPMs currently support Red Hat Enterprise Linux 6, 7, and variants.
 
@@ -56,7 +56,7 @@ OSG RPMs are distributed via the OSG yum repositories. Some packages depend on p
     if you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the OSG repository has a better yum priority than EPEL ([details](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices#YumPriorities)). Otherwise, you will have strange dependency resolution (*depsolving*) issues.
 
 
-## Install the Yum priorities package
+### Install the Yum priorities package
 
 For packages that exist in both OSG and EPEL repositories, it is important to prefer the OSG ones or else OSG software installs may fail. Installing the Yum priorities package enables the repository priority system to work.
 
@@ -73,7 +73,7 @@ For packages that exist in both OSG and EPEL repositories, it is important to pr
 !!! note
     If you do not have a required key you can force the installation using `--nogpgcheck=`; e.g., `yum install --nogpgcheck yum-priorities`.
 
-## Install OSG Repositories
+### Install OSG Repositories
 
 If you are upgrading from one OSG series to another, remove the old OSG repository definition files and clean the Yum cache:
 
@@ -96,7 +96,7 @@ Where `<URL>` is one of the following:
 | **OSG 3.4** | `https://repo.grid.iu.edu/osg/3.4/osg-3.4-el6-release-latest.rpm` | `https://repo.grid.iu.edu/osg/3.4/osg-3.4-el7-release-latest.rpm` |
 
 Priorities
-==========
+----------
 
 <span class="twiki-macro NOTE"></span> Make sure you installed the Yum priorities plugin, as described above. Not doing so is a common mistake that causes failed installations.
 
@@ -117,7 +117,9 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 !!! warning
     if you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the OSG repository has a better yum priority than EPEL. Otherwise, you will have strange dependency resolution issues.
 
-!!! seealso "See Also"
-    -   [Basic use of Yum](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRpmBasics)
-    -   [Best practices in using Yum](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices)
+Reference
+---------
+
+-   [Basic use of Yum](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRpmBasics)
+-   [Best practices in using Yum](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices)
 
