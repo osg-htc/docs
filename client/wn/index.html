@@ -95,13 +95,15 @@
     
         <ul>
         
+            <li><a class="toctree-l4" href="#about-this-guide">About This Guide</a></li>
+        
             <li><a class="toctree-l4" href="#before-starting">Before Starting</a></li>
         
             <li><a class="toctree-l4" href="#install-the-worker-node-client">Install the Worker Node Client</a></li>
         
             <li><a class="toctree-l4" href="#services">Services</a></li>
         
-            <li><a class="toctree-l4" href="#validing-the-worker-node-client">Validing the Worker Node Client</a></li>
+            <li><a class="toctree-l4" href="#validating-the-worker-node-client">Validating the Worker Node Client</a></li>
         
             <li><a class="toctree-l4" href="#how-to-get-help">How to get Help?</a></li>
         
@@ -216,25 +218,26 @@
             <div class="section">
               
                 <h1 id="installing-and-using-the-worker-node-client-from-rpms">Installing and Using the Worker Node Client From RPMs</h1>
-<p>The <strong>OSG Worker Node Client</strong> is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use. See the <a href="#reference">reference section</a> below for contents of the Worker Node Client.</p>
+<h2 id="about-this-guide">About This Guide</h2>
+<p>The <strong>OSG Worker Node Client</strong> is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use. See the reference section below for contents of the Worker Node Client.</p>
 <p>It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:</p>
 <ul>
-<li>Install using RPMs and <code>yum</code> (this guide) - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs</li>
-<li><a href="../InstallWNClientTarball">Install using a tarball</a> - useful when installing onto a shared filesystem for distribution to worker nodes</li>
-<li><a href="../UsingOSGWnClientFromOASIS">Use from OASIS</a> - useful when worker nodes already mount <a href="../NavTechOASIS">OASIS</a> on your worker nodes</li>
+<li>Install using RPMs and Yum (this guide) - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs</li>
+<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallWNClientTarball">Install using a tarball</a> - useful when installing onto a shared filesystem for distribution to worker nodes</li>
+<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/UsingOSGWnClientFromOASIS">Use from OASIS</a> - useful when worker nodes already mount OASIS on your worker nodes</li>
 </ul>
 <p>This document is intended to guide system administrators through the process of configuring a site to make the Worker Node Client software available from an RPM.</p>
 <h2 id="before-starting">Before Starting</h2>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
 <ul>
-<li>Ensure the host has <a href="../SupportedOperatingSystems">a supported operating system</a></li>
+<li>Ensure the host has <a href="../../release/supported_platforms/">a supported operating system</a></li>
 <li>Obtain root access to the host</li>
-<li>Prepare <a href="../YumRepositories">the required Yum repositories</a></li>
-<li>Install <a href="../InstallCertAuth">CA certificates</a></li>
+<li>Prepare <a href="../../common/yum/">the required Yum repositories</a></li>
+<li>Install <a href="../../common/ca/">CA certificates</a></li>
 </ul>
 <h2 id="install-the-worker-node-client">Install the Worker Node Client</h2>
 <p>Install the Worker Node Client RPM:</p>
-<div class="codehilite"><pre><span></span>yum install osg-wn-client
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~]#</span> yum install osg-wn-client
 </pre></div>
 
 
@@ -251,23 +254,18 @@
 <tbody>
 <tr>
 <td align="left">Fetch CRL</td>
-<td align="left">On EL6 and EL7: <code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">On EL5: <code>fetch-crl3-boot</code> and <code>fetch-crl3-cron</code></td>
-<td align="left">See <a href="../InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui">CA documentation</a> for more info</td>
-<td align="left"></td>
+<td align="left"><code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
+<td align="left">See <a href="../../common/ca/">CA documentation</a> for more info</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code>fetch-crl-boot</code> will begin fetching CRLS, which can take a few minutes
-and fail on transient errors. You can add configuration to ignore these
-transient errors in <code>/etc/fetch-crl.conf</code> for EL6 or EL7 machines or
-<code>/etc/fetch-crl3.conf</code> for EL5 machines:</p>
-<p><code>noerrors</code></p>
+<p><code>fetch-crl-boot</code> will begin fetching CRLS, which can take a few minutes and fail on transient errors. You can add configuration to ignore these transient errors in <code>/etc/fetch-crl.conf</code>: </p>
+<div class="codehilite"><pre><span></span>noerrors
+</pre></div>
+
+
 </div>
 <p>As a reminder, here are common service commands (all run as <code>root</code>):</p>
 <table>
@@ -296,22 +294,42 @@ transient errors in <code>/etc/fetch-crl.conf</code> for EL6 or EL7 machines or
 </tr>
 </tbody>
 </table>
-<h2 id="validing-the-worker-node-client">Validing the Worker Node Client</h2>
-<p>To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job’s output.</p>
+<h2 id="validating-the-worker-node-client">Validating the Worker Node Client</h2>
+<p>To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.</p>
 <ol>
-<li>Submit a job that executes the <code>env</code> command (e.g. Run <a href="../TroubleshootingHTCondorCE#condor_ce_trace">condor_ce_trace</a> with the <code>-d</code> flag from your HTCondor CE)</li>
+<li>Submit a job that executes the <code>env</code> command (e.g. Run <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE">condor_ce_trace</a> with the <code>-d</code> flag from your HTCondor CE)</li>
 <li>Verify that the value of <code>OSG_GRID</code> is set to <code>/etc/osg/wn-client</code></li>
 </ol>
 <h2 id="how-to-get-help">How to get Help?</h2>
-<p>To get assistance please use this <a href="../HelpProcedure">Help Procedure</a>.</p>
+<p>To get assistance please use this <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HelpProcedure">Help Procedure</a>.</p>
 <h2 id="reference">Reference</h2>
-<p>Please see the documentation on using <a href="../Documentation/Release3.YumRpmBasics">yum and RPM</a>, <a href="../Documentation/Release3.InstallBestPractices">the best practices</a> for using yum to install software, and using <a href="../Documentation/Release3.YumRepositories">yum repositories</a>.</p>
+<p>Please see the documentation on using <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRpmBasics">yum and RPM</a>, <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices">the best practices</a> for using yum to install software, and using <a href="../../common/yum/">yum repositories</a>.</p>
+<h3 id="worker-node-contents">Worker node contents</h3>
+<p>The worker node may be updated from time to time. As of OSG 3.3.21 in February 2017, the OSG worker node client contains:</p>
+<ul>
+<li>OSG Certificates</li>
+<li>curl</li>
+<li>Fetch CRL</li>
+<li>FTS client</li>
+<li>gfal2</li>
+<li>globus-url-copy (GridFTP client)</li>
+<li>globus-xio-udt-driver</li>
+<li>ldapsearch</li>
+<li>MyProxy</li>
+<li>osg-system-profiler</li>
+<li>osg-version</li>
+<li>UberFTP</li>
+<li>vo-client (includes /etc/vomses file)</li>
+<li>VOMS client</li>
+<li>wget</li>
+<li>xrdcp</li>
+</ul>
 <p>To see the currently installed version of the worker node package, run the following command:</p>
-<div class="codehilite"><pre><span></span>rpm -q --requires osg-wn-client
+<div class="codehilite"><pre><span></span>[root@client ~]# rpm -q --requires osg-wn-client
 </pre></div>
 
 
-<p>See <a href="../YumRpmBasics#ListDeps">our yum basics guide</a> for more details on using RPM to see what was installed.</p>
+<p>Click <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRpmBasics">here</a> for more details on using RPM to see what was installed.</p>
               
             </div>
           </div>
