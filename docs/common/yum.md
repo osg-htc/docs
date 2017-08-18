@@ -120,6 +120,6 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 Reference
 ---------
 
--   [Basic use of Yum](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRpmBasics)
+-   [Basic use of Yum](../release/yum-basics.md)
 -   [Best practices in using Yum](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices)
 
