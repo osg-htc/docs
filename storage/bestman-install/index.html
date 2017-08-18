@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>BeStMan Install - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "BeStMan Install";
+    var mkdocs_page_input_path = "storage/bestman-install.md";
+    var mkdocs_page_url = "/storage/bestman-install/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/yum/">Yum Repos</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/HTCondor_CE/">HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../frontier-squid/squid/">HTTP Cache</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn/">RPM-based Worker Node</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Usage Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/using-wn/">Worker Node Environment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">In-Progress Docs</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca_updater/">CA Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/cert_scripts/">Certificate Request Scripts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job_router/">Job Router Recipe</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn_oasis/">OASIS-based Worker Node</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../gridftp/">GridFTP Server</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deprecated Software</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../bestman-overview/">BeStMan Overview</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">BeStMan Install</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#installing-bestman">Installing BeStMan</a></li>
+    
+
+    <li class="toctree-l3"><a href="#about-this-document">About this Document</a></li>
+    
+
+    <li class="toctree-l3"><a href="#installing-bestman-storage-element">Installing BeStMan Storage Element</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#requirements">Requirements</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#install-instructions">Install Instructions</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#installing-bestman2">Installing BeStMan2</a></li>
+        
+            <li><a class="toctree-l4" href="#authorization">Authorization</a></li>
+        
+            <li><a class="toctree-l4" href="#edit-bestman-settings">Edit Bestman Settings</a></li>
+        
+            <li><a class="toctree-l4" href="#modify-etcsudoers">Modify /etc/sudoers</a></li>
+        
+            <li><a class="toctree-l4" href="#copying-certificates-to-an-alternate-location">Copying certificates to an alternate location</a></li>
+        
+            <li><a class="toctree-l4" href="#optional-using-a-different-bestman-user">(Optional) Using a different bestman user</a></li>
+        
+            <li><a class="toctree-l4" href="#optional-modifying-default-logging-for-eventsrmlog">(Optional) Modifying default logging for event.srm.log</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#starting-services">Starting Services</a></li>
+    
+
+    <li class="toctree-l3"><a href="#stopping-services">Stopping Services</a></li>
+    
+
+    <li class="toctree-l3"><a href="#validation-of-service-operation">Validation of Service Operation</a></li>
+    
+
+    <li class="toctree-l3"><a href="#troubleshooting">Troubleshooting</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#debugging-procedure">Debugging Procedure</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#useful-configuration-and-log-files">Useful Configuration and Log Files</a></li>
+    
+
+    <li class="toctree-l3"><a href="#upgrading-bestman">Upgrading BeStMan</a></li>
+    
+
+    <li class="toctree-l3"><a href="#how-to-get-help">How to get Help?</a></li>
+    
+
+    <li class="toctree-l3"><a href="#references">References</a></li>
+    
+
+    <li class="toctree-l3"><a href="#known-issues">Known Issues</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#requesting-host-certificates-in-rhel6">Requesting host certificates in RHEL6</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/glexec/">Worker node glexec</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Deprecated Software &raquo;</li>
+        
+      
+    
+    <li>BeStMan Install</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/storage/bestman-install.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="installing-bestman">Installing BeStMan</h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of June 2018.</p>
+</div>
+<h1 id="about-this-document">About this Document</h1>
+<p>This document explains how to install a BeStMan SRMv2 service. This procedure will guide one through the installation and configuration of a basic <code>bestman2</code> host with an underlying GridFTP server. This will allow the service to service requests via the SRM (Storage Resource Manager) protocol or the GridFTP protocol.</p>
+<h1 id="installing-bestman-storage-element">Installing BeStMan Storage Element</h1>
+<p>This procedure explains how to install the stand-alone BeStMan Storage Element server; <a href="#upgrading-bestman">see below</a> for notes on upgrading.  The service has the following components:</p>
+<ul>
+<li>BeStMan - provides load-balancing across GridFTP servers.</li>
+<li>GridFTP server - provides file transfer services using the GridFTP protocol.</li>
+<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GratiaTransferProbe">Gratia gridftp transfer probe</a> (optional) - provides transfer accounting information to the OSG.</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<h3 id="host-and-os">Host and OS</h3>
+<ul>
+<li>You need at least one node in order to install this service.</li>
+<li>The OS must be in the <a href="../../release/supported_platforms/">supported platforms</a> list.</li>
+<li>The <a href="../../common/yum/">OSG software repositories</a> must be configured correctly.</li>
+<li>All procedures in this document require <em>root</em> privileges.</li>
+</ul>
+<h3 id="users">Users</h3>
+<p>This installation will create following users unless they are already created:</p>
+<table>
+<thead>
+<tr>
+<th align="left">User</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>bestman</code></td>
+<td align="left">Used by Bestman SRM server</td>
+</tr>
+</tbody>
+</table>
+<p>For full functionality, the <code>bestman</code> account will need limited <code>sudo</code> access to a few commands, described below.</p>
+<p>For this package to function correctly, you will have to create the users needed for grid operation. Any user that can be authenticated should be created.  For grid-mapfile users, each line of the grid-mapfile is a certificate/user pair. Each user in this file should be created on the server. For GUMS sites, this means that each user that can be authenticated by GUMS should be created on the server.</p>
+<p>Note that these users must be kept in sync with the authentication method. For instance, if new users or rules are added in GUMS, then new users should also be added here.</p>
+<h3 id="certificates">Certificates</h3>
+<p>Two certificates are needed for operation of this service.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Certificate</th>
+<th align="left">User that owns certificate</th>
+<th align="left">Path to certificate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Host certificate</td>
+<td align="left"><code>root</code></td>
+<td align="left"><code>/etc/grid-security/hostcert.pem</code> and <code>/etc/grid-security/hostkey.pem</code></td>
+</tr>
+<tr>
+<td align="left">Bestman service certificate</td>
+<td align="left"><code>bestman</code></td>
+<td align="left"><code>/etc/grid-security/bestman/bestmancert.pem</code> and <code>/etc/grid-security/bestman/bestmankey.pem</code></td>
+</tr>
+</tbody>
+</table>
+<p>Following the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OSGPKICommandlineClients">instructions</a> to request a service certificate.</p>
+<p>You will also need a copy of CA certificates. Note that the <code>osg-se-bestman</code> package will automatically install a certificate package but will not necessarily pick the cert package you expect; see <a href="../../common/ca/">the CA certificates</a> documentation for more information.</p>
+<h3 id="networking">Networking</h3>
+<p>For more details on overall firewall configuration, please see our <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/FirewallInformation">firewall documentation</a>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Service Name</th>
+<th align="left">Protocol</th>
+<th align="left">Port Number</th>
+<th align="left">Inbound</th>
+<th align="left">Outbound</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">GridFTP data channels</td>
+<td align="left">tcp</td>
+<td align="left"><code>GLOBUS_TCP_PORT_RANGE</code></td>
+<td align="left">X</td>
+<td align="left"></td>
+<td align="left">contiguous range of ports is necessary.</td>
+</tr>
+<tr>
+<td align="left">GridFTP data channels</td>
+<td align="left">tcp</td>
+<td align="left"><code>GLOBUS_TCP_SOURCE_RANGE</code></td>
+<td align="left"></td>
+<td align="left">X</td>
+<td align="left">contiguous range of ports is necessary.</td>
+</tr>
+<tr>
+<td align="left">GridFTP control channel</td>
+<td align="left">tcp</td>
+<td align="left">2811</td>
+<td align="left">X</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">SRM</td>
+<td align="left">tcp</td>
+<td align="left">8443</td>
+<td align="left">X</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="engineering-considerations">Engineering Considerations</h3>
+<p>Please answer following questions before you proceed with installation and configuration of BeStMan storage element:</p>
+<p>Q. <em>What authorization mechanism should I use?</em></p>
+<p>Decide between a <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/Edg-mkgridmap">grid-mapfile</a> or a <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums">GUMS</a> server for authorization.  Both mechanisms are deprecated with a planned removal by June 2018.  The replacement mechanism, however, does not work with <code>bestman2</code>.</p>
+<p>Q. <em>How many GridFTP servers will I need?</em></p>
+<p>Choose to run multiple GridFTP servers for load balancing and better performance. We recommend to install additional GridFTP servers if your Storage Element:</p>
+<ul>
+<li>Is serving data to more than 1000 cores for VOs that use storage heavily (e.g. CMS, ATLAS, CDF, and D0),</li>
+<li>Is managing more than 500 TB of disk space, OR</li>
+<li>Has more than 10Gbps bandwidth</li>
+</ul>
+<p>We recommend approximately one GridFTP server for each 8Gbps of desired utilized bandwidth.</p>
+<p>Q. <em>Do I need to change default configuration of Gridftp server?</em></p>
+<p>Yes, you may want to do this if the node on which GridFTP server will be installed has multiple network interfaces. Read <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallOSGGridFTP#ConfigMultiHomed">this section</a> for more details.</p>
+<p>Q. <em>Do you need to enable Gratia gridftp-transfer probes?</em> <br />
+The Gratia gridftp-transfer probes provide OSG storage statistics for accounting purposes. The reports include the source and destination of transfers, certificate subject of transfer initiator, as well as the size and status of the transferred file. The probe needs to be installed on every GridFTP server.</p>
+<h1 id="install-instructions">Install Instructions</h1>
+<h2 id="installing-bestman2">Installing BeStMan2</h2>
+<ol>
+<li>Install Java using <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7#InstallingJava">these instructions</a>.</li>
+<li>Install the BeStMan Storage element meta-package:</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install osg-se-bestman
+</pre></div>
+
+
+<h2 id="authorization">Authorization</h2>
+<p>There are two authorization options:</p>
+<ul>
+<li>Gridmap file</li>
+<li>GUMS authentication server</li>
+</ul>
+<p>Please choose one of these and follow the instructions in one of the two following sections.</p>
+<h3 id="configuring-gridmap-support">Configuring Gridmap Support</h3>
+<p>By default, GridFTP uses a gridmap file, found in <code>/etc/grid-security/grid-mapfile</code>. This file is not generated by default. can generate this file. You can generate this file manually, by including DN/username combinations (this is most useful for debugging). Otherwise, you can use <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/Edg-mkgridmap"><code>edg-mkgridmap</code></a>, which will periodically contact a list of VOMS servers that you specify.</p>
+<p>Once <code>edg-mkgridmap</code> is configured, you will have to modify <code>/etc/bestman2/conf/bestman2.rc</code> and change <code>GridMapFileName</code> from <code>/etc/bestman2/conf/grid-mapfile.empty</code> to:</p>
+<div class="codehilite"><pre><span></span>GridMapFileName=/etc/grid-security/grid-mapfile
+</pre></div>
+
+
+<p>In <code>/etc/sysconfig/bestman2</code>, change</p>
+<div class="codehilite"><pre><span></span><span class="nv">BESTMAN_GUMS_ENABLED</span><span class="o">=</span>no
+</pre></div>
+
+
+<h3 id="configuring-gums-support">Configuring GUMS support</h3>
+<p>By default, GridFTP uses a gridmap file, found in <code>/etc/grid-security/gridmap-file</code>. If you want to use GUMS security (recommended), you will need to enable it using the following steps.</p>
+<p>First, edit <code>/etc/grid-security/gsi-authz.conf</code> and uncomment the authorization callout:</p>
+<div class="codehilite"><pre><span></span>globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout
+</pre></div>
+
+
+<p>Next edit <code>/etc/lcmaps.db</code> to enter the correct GUMS hostname:</p>
+<div class="codehilite"><pre><span></span>gumsclient = &quot;lcmaps_gums_client.mod&quot;
+             &quot;-resourcetype ce&quot;
+             &quot;-actiontype execute-now&quot;
+             &quot;-capath /etc/grid-security/certificates&quot;
+             &quot;-cert   /etc/grid-security/hostcert.pem&quot;
+             &quot;-key    /etc/grid-security/hostkey.pem&quot;
+             &quot;--cert-owner root&quot;
+# Change this URL to your GUMS server
+             &quot;--endpoint https://&lt;GUMS_HOSTNAME&gt;:8443/gums/services/GUMSXACMLAuthorizationServicePort&quot;
+</pre></div>
+
+
+<p>You will need to modify the following settings in <code>/etc/sysconfig/bestman2</code></p>
+<div class="codehilite"><pre><span></span><span class="nv">BESTMAN_GUMSCERTPATH</span><span class="o">=</span>/etc/grid-security/bestman/bestmancert.pem
+<span class="nv">BESTMAN_GUMSKEYPATH</span><span class="o">=</span>/etc/grid-security/bestman/bestmankey.pem
+</pre></div>
+
+
+<p>You will need to modify the following settings in <code>/etc/bestman2/conf/bestman2.rc</code></p>
+<div class="codehilite"><pre><span></span>GUMSserviceURL=https://&lt;GUMS_HOST&gt;:8443/gums/services/GUMSXACMLAuthorizationServicePort
+</pre></div>
+
+
+<h2 id="edit-bestman-settings">Edit Bestman Settings</h2>
+<p>Bestman settings are split into three files:</p>
+<ul>
+<li>Environment variables (except those that represent server and client libraries) are stored in <code>/etc/sysconfig/bestman2</code>.</li>
+<li>The server and client library environment variables are stored in <code>/etc/sysconfig/bestman2lib</code>.</li>
+<li>Configuration is stored in <code>/etc/bestman2/conf/bestman2.rc</code>.</li>
+</ul>
+<p>You should review these settings to make sure all of them comply with your environment. You are not expected to edit <code>/etc/sysconfig/bestman2lib</code> .</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are upgrading from a version prior to 2.3.0-9, you will need to remove <strong>all</strong> entries for <code>BESTMAN2_SERVER_LIB</code> and <code>BESTMAN2_CLIENT_LIB</code> in file <code>/etc/sysconfig/bestman2.</code> These settings are now present in file <code>/etc/sysconfig/bestman2lib</code></p>
+</div>
+<p>You will likely need to modify the following settings in <code>/etc/bestman2/conf/bestman2.rc</code>:</p>
+<div class="codehilite"><pre><span></span>localPathListAllowed=/tmp
+CertFileName=/etc/grid-security/bestman/bestmancert.pem
+KeyFileName=/etc/grid-security/bestman/bestmankey.pem
+supportedProtocolList=gsiftp://&lt;GRIDFTP_HOSTNAME&gt;;gsiftp://&lt;GRIDFTP_HOSTNAME2&gt;
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure the value for <code>localPathListAllowed</code> is correctly entered - i.e. each path separated by a <code>;</code>. If it is not, this parameter may not be effective.
+Make sure the permissions for the <code>localPathListAllowed</code> directory(ies) are set to 1777, which is the default for <code>/tmp</code>. Further, note that on many systems, <code>/tmp</code> gets cleared out automatically, so you may want to use a different location to ensure that the files persist.</p>
+</div>
+<p>BeStMan requires up to two sets of certificate pairs. One is for host services; when clients connect to BeStMan, they will receive this certificate (<code>CertFileName</code>, <code>KeyFileName</code>) as proof of the server identity. The second certificate pair (<code>BESTMAN_GUMSCERTPATH</code>, <code>BESTMAN_GUMSKEYPATH</code>) is used to communicate with GUMS when verifying identity information (this only applicable for GUMS-enabled sites). These two can (and usually will be) the same files, but can be split if your GUMS setup requires a specific identity.</p>
+<p><code>localPathListAllowed</code> determines which paths users will be able to access via SRM.</p>
+<p><code>supportedProtocolList</code> is a semi-colon list of GridFTP servers that the BeStMan will use as transfer agents. If you are using anything but the standard GridFTP port 2811, you will also have to add the port (ie <code>gsiftp://&lt;HOSTNAME&gt;:port</code>).</p>
+<p>Finally, modify <code>GUMSserviceURL</code> to use your local GUMS installation if you are using GUMS.</p>
+<h2 id="modify-etcsudoers">Modify <code>/etc/sudoers</code></h2>
+<p>BeStman requires the <code>sudo</code> command in order to write information as the proper user. You will need to give the <code>bestman</code> user the proper permissions to run these commands.</p>
+<p>Modify <code>/etc/sudoers</code> and comment the following line.</p>
+<div class="codehilite"><pre><span></span>#Defaults    requiretty
+</pre></div>
+
+
+<p>Then add the following lines at the end of the <code>/etc/sudoers</code> file.</p>
+<div class="codehilite"><pre><span></span>Cmnd_Alias SRM_CMD = /bin/rm, /bin/mkdir, /bin/rmdir, /bin/mv, /bin/cp, /bin/ls
+Runas_Alias SRM_USR = ALL, !root
+bestman   ALL=(SRM_USR) NOPASSWD: SRM_CMD
+</pre></div>
+
+
+<h2 id="copying-certificates-to-an-alternate-location">Copying certificates to an alternate location</h2>
+<p>BeStMan requires a certificate pair to function; this must be readable by the <code>bestman</code> user.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> cp /etc/grid-security/hostkey.pem /etc/grid-security/bestman/bestmankey.pem
+<span class="gp">[root@client ~] #</span> cp /etc/grid-security/hostcert.pem /etc/grid-security/bestman/bestmancert.pem
+<span class="gp">[root@client ~] #</span> chown -R bestman:bestman /etc/grid-security/bestman/
+</pre></div>
+
+
+<p>Verify <code>CertFileName</code> and <code>KeyFileName</code> in <code>/etc/bestman2/conf/bestman2.rc</code> are set appropriately.</p>
+<h2 id="optional-using-a-different-bestman-user">(Optional) Using a different bestman user</h2>
+<p>If you would like to use a different user than the default <code>bestman</code> user (<em>not recommended</em>), you will need to change the following:</p>
+<ul>
+<li>Ownership of bestman certs in <code>/etc/grid-security/bestman</code>.</li>
+<li><code>SRM_OWNER</code> in <code>/etc/sysconfig/bestman2</code> to the new user.</li>
+<li>User in <code>/etc/sudoers</code>. The last line (<code>bestman ALL(SRM_USR) NOPASSWD: SRM_CMD</code>) should be changed from <code>bestman</code> to the new user.</li>
+<li>Ownership of <code>/var/log/bestman2</code></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Currently the RPM packaging will change the ownership of the <code>/var/log/bestman2</code> directory back to <code>bestman</code> on upgrades.</p>
+</div>
+<h2 id="optional-modifying-default-logging-for-eventsrmlog">(Optional) Modifying default logging for <code>event.srm.log</code></h2>
+<p>The logging directory (<code>/var/log/bestman2</code>) has two types of logs - <code>bestman2.log</code> and <code>event.srm.log</code>.</p>
+<p>Log-rotation of <code>bestman2.log</code> file is controlled by <code>/etc/logrotate.d/bestman2</code> file.</p>
+<p>By default, the size of <code>event.srm.log</code> log file is set to 50MB within the Bestman code itself.</p>
+<p>Left unchanged, <code>event.srm.log</code> file counts will keep increasing indefinitely.  Depending on the usage, the number of these files can become high enough to fill up the partition that holds these logs.</p>
+<p>There are 3 ways to avoid this -</p>
+<ul>
+<li>
+<p>Modify following parameters (commented by default) in the <code>/etc/sysconfig/bestman2</code> file</p>
+<div class="codehilite"><pre><span></span><span class="c1"># Number of files to keep</span>
+<span class="nv">BESTMAN_EVENT_LOG_COUNT</span><span class="o">=</span><span class="m">10</span>
+<span class="c1"># Size of each file in bytes</span>
+<span class="nv">BESTMAN_EVENT_LOG_SIZE</span><span class="o">=</span><span class="m">20971520</span>
+</pre></div>
+
+
+<p>The optimal value for these depends on usage of the service.</p>
+</li>
+<li>
+<p>Create a directory under a much bigger partition and have a symlink from <code>/var/log/bestman2</code> to that directory.</p>
+</li>
+<li>Leave the default settings, but have your own custom script that cleans these files according to your needs.</li>
+</ul>
+<h1 id="starting-services">Starting Services</h1>
+<ol>
+<li>
+<p><code>fetch-crl</code></p>
+<p>For RHEL 6:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs </span>
+<span class="gp">[root@client ~] #</span> /sbin/service fetch-crl-boot start
+<span class="gp">[root@client ~] #</span> /sbin/service fetch-crl-cron start
+</pre></div>
+
+
+<p>For RHEL 7:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs </span>
+<span class="gp">[root@client ~] #</span> systemctl start fetch-crl-boot
+<span class="gp">[root@client ~] #</span> systemctl start fetch-crl-cron
+</pre></div>
+
+
+</li>
+<li>
+<p>GridFTP</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service globus-gridftp-server start
+</pre></div>
+
+
+</li>
+<li>
+<p>Bestman</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service bestman2 start
+</pre></div>
+
+
+<p>To start Bestman automatically at boot time</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> chkconfig bestman2 on
+</pre></div>
+
+
+</li>
+<li>
+<p>Gratia transfer probe:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service gratia-gridftp-transfer start
+</pre></div>
+
+
+</li>
+</ol>
+<h1 id="stopping-services">Stopping Services</h1>
+<ol>
+<li>
+<p>fetch-crl</p>
+<p>For RHEL 6:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs</span>
+<span class="gp">[root@client ~] #</span> /sbin/service fetch-crl-boot stop
+<span class="gp">[root@client ~] #</span> /sbin/service fetch-crl-cron stop
+</pre></div>
+
+
+<p>For RHEL 7:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs</span>
+<span class="gp">[root@client ~] #</span> systemctl stop fetch-crl-boot
+<span class="gp">[root@client ~] #</span> systemctl stop fetch-crl-cron
+</pre></div>
+
+
+</li>
+<li>
+<p>GridFTP</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service globus-gridftp-server stop
+</pre></div>
+
+
+</li>
+<li>
+<p>Bestman</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service bestman2 stop
+</pre></div>
+
+
+</li>
+<li>
+<p>Gratia transfer probe</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service gratia-gridftp-transfer stop
+</pre></div>
+
+
+</li>
+</ol>
+<h1 id="validation-of-service-operation">Validation of Service Operation</h1>
+<p>Once you have your SE setup and configured, there are several ways to monitor your installation. Refer to the following pages for more information:</p>
+<ul>
+<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SrmTester">BeStMan SRM Tester</a>.</li>
+<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallRSV">RSV</a> which includes SRM probes as well.</li>
+</ul>
+<p>You can also self-test to verify your installation with an SRM client such as <code>gfal-copy</code>.</p>
+<h1 id="troubleshooting">Troubleshooting</h1>
+<table>
+<thead>
+<tr>
+<th align="left">Service/Process</th>
+<th align="left">Log File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">BeStMan2</td>
+<td align="left"><code>/var/log/bestman2/bestman2.log</code></td>
+<td align="left">BeStMan2 server log and errors</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/var/log/bestman2/event.srm.log</code></td>
+<td align="left">Records all SRM transactions</td>
+</tr>
+<tr>
+<td align="left">GridFTP</td>
+<td align="left"><code>/var/log/gridftp.log</code></td>
+<td align="left">Transfer log</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/var/log/gridftp-auth.log</code></td>
+<td align="left">Authentication log</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/var/log/messages</code></td>
+<td align="left">Main system log (look here for LCMAPS errors)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="debugging-procedure">Debugging Procedure</h2>
+<p>If system validation failed, you would probably need to check each component in order to verify your installation. In order to do so, you should check all of them in the following order</p>
+<ul>
+<li>GUMS (if in use)</li>
+<li>GridFTP</li>
+<li>BeStMan</li>
+</ul>
+<h3 id="verifying-gums">Verifying GUMS</h3>
+<p>Make sure that the service certificate you specified for BeStMan configuration with <code>GUMSHOSTCERT</code>, <code>GUMSHOSTKEY</code> options and GridFTP service certificate are accepted by GUMS.</p>
+<p>Test GUMS by running:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> srm-ping srm://&lt;BESTMAN_HOST&gt;:8443/srm/v2/server
+</pre></div>
+
+
+<p>In the output, check that your <code>gumsIDMapped</code> is not <code>null</code>. It returns the <code>uid</code> that GUMS will map you to. This can be obtained from your GUMS administrator. Verify that this <code>uid</code> exists on BeStMan and GridFTP node.</p>
+<h3 id="verifying-gridftp">Verifying GridFTP</h3>
+<p>Login on the node where your certificate and <a href="../../client/wn/">OSG Client</a> is installed You will need to generate your proxy credentials using <code>grid-proxy-init</code> or <code>voms-proxy-init</code>.</p>
+<p>Then test GridFTP using <code>globus-url-copy</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> <span class="nb">echo</span> <span class="s2">&quot;This is a test&quot;</span> &gt;/tmp/test 
+<span class="gp">[user@client ~] $</span> globus-url-copy -dbg file:///tmp/test gsiftp://&lt;GRIDFTP_HOST&gt;/tmp/test 
+</pre></div>
+
+
+<p>Check the GridFTP logs to see if you have encountered any errors.</p>
+<h3 id="verifying-bestman">Verifying BeStMan</h3>
+<p>Make sure that the BeStMan process is running</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> ps -ef <span class="p">|</span> grep bestman
+<span class="go">bestman   5121     1 99 19:59 ?        00:00:01 /usr/java/latest/bin/java -server -Xmx1024m -XX:MaxDirectMemorySize=1024m -DX509_CERT_DIR=/etc/grid-security/certificates -DCADIR=/etc/grid-security/certificates -Daxis.socketSecureFactory=org.glite.security.trustmanager.axis.AXISSocketFactory -DsslCAFiles=/etc/grid-security/certificates/*.0 -DsslCertfile=/etc/grid-security/bestman/bestmancert.pem -DsslKey=/etc/grid-security/bestman/bestmankey.pem -DJettyConfiguration=/etc/bestman2/conf/WEB-INF/jetty.xml -DJettyDescriptor=/etc/bestman2/conf/WEB-INF/web.xml -DJettyResource=/etc/bestman2/conf/ -Dorg.eclipse.jetty.util.log.IGNORE=true gov.lbl.srm.server.Server /etc/bestman2/conf/bestman2.rc</span>
+</pre></div>
+
+
+<p>If <code>bestman2</code> is not running, check information in the log file <strong><code>/var/log/bestman2/bestman2.log</code></strong>.</p>
+<h1 id="useful-configuration-and-log-files">Useful Configuration and Log Files</h1>
+<table>
+<thead>
+<tr>
+<th align="left">Service/Process</th>
+<th align="left">Configuration File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">BeStMan2</td>
+<td align="left"><code>/etc/bestman2/conf/bestman2.rc</code></td>
+<td align="left">Main BeStMan2 configuration file</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/etc/sysconfig/bestman2</code></td>
+<td align="left">Environment variables used by BeStMan2</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/etc/sysconfig/bestman2lib</code></td>
+<td align="left">Environment variables that store values of various client and server libraries used by BeStMan2</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/etc/bestman2/conf/*</code></td>
+<td align="left">Other runtime configuration files</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/etc/init.d/bestman2</code></td>
+<td align="left">init.d startup script</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/etc/gridftp.conf</code></td>
+<td align="left">Startup parameters</td>
+</tr>
+<tr>
+<td align="left">GridFTP</td>
+<td align="left"><code>/etc/sysconfig/globus-gridftp-server</code></td>
+<td align="left">Environment variables for GridFTP</td>
+</tr>
+<tr>
+<td align="left">Gratia Probe</td>
+<td align="left"><code>/etc/gratia/gridftp-transfer/ProbeConfig</code></td>
+<td align="left">GridFTP Gratia Probe configuration</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/etc/cron.d/gratia-probe-gridftp-transfer.cron</code></td>
+<td align="left">Cron tab file</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">Service/Process</th>
+<th align="left">Log File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">BeStMan2</td>
+<td align="left"><code>/var/log/bestman2/bestman2.log</code></td>
+<td align="left">BeStMan2 container log</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/var/log/bestman2/event.srm.log</code></td>
+<td align="left">Records all SRM transactions</td>
+</tr>
+<tr>
+<td align="left">GridFTP</td>
+<td align="left"><code>/var/log/gridftp.log</code></td>
+<td align="left">Transfer log</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/var/log/gridftp-auth.log</code></td>
+<td align="left">GridFTP authorization log</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/var/log/messages</code></td>
+<td align="left">Main system log (look here for LCMAPS errors)</td>
+</tr>
+<tr>
+<td align="left">Gratia probe</td>
+<td align="left"><code>/var/log/gratia</code></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<h1 id="upgrading-bestman">Upgrading BeStMan</h1>
+<p>Upgrading BeStMan can be done by</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum upgrade bestman2-server
+</pre></div>
+
+
+<p>There are a few notes to be aware of when upgrading BeStMan.</p>
+<ul>
+<li>From many of the versions of the BeStMan, configuration changes have taken place. Do not ignore any warnings about rpmsave or rpmnew files. You will need to especially be careful about and <code>/etc/bestman2/conf/bestman2.rc</code>.</li>
+<li>Beginning with BeStMan 2.3.0-9, many dependency locations changed. Be sure that <code>/etc/sysconfig/bestman2lib</code> contains the <code>build-classpath</code> directives in the <code>BESTMAN2_SERVER_LIB</code> and <code>BESTMAN2_CLIENT_LIB</code>. Otherwise, you may get java class loading errors on startup or on run-time. Be sure to remove these entries from the <code>/etc/sysconfig/bestman2</code> file.</li>
+<li>For BeStMan 2.1.3, certain versions had a combined sysconfig and configuration file. You may need to split these files apart if this is the case.</li>
+</ul>
+<p>For more help, please contact the GOC to create a support ticket.</p>
+<h1 id="how-to-get-help">How to get Help?</h1>
+<p>If you cannot resolve the problem, there are several ways to receive help:</p>
+<ul>
+<li>For bug support and issues, submit a ticket to the <a href="https://ticket.grid.iu.edu/goc">Grid Operations Center</a>.</li>
+<li>For community support and best-effort software team support contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#115;&#103;&#45;&#115;&#111;&#102;&#116;&#119;&#97;&#114;&#101;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#111;&#115;&#103;&#45;&#115;&#111;&#102;&#116;&#119;&#97;&#114;&#101;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.</li>
+</ul>
+<p>For a full set of help options, see the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HelpProcedure">Help Procedure</a>.</p>
+<h1 id="references">References</h1>
+<ul>
+<li><a href="https://twiki.grid.iu.edu/bin/view/Documentation/StorageInfrastructureSoftware">Storage infrastructure software</a></li>
+<li><a href="https://twiki.grid.iu.edu/bin/view/Documentation/StorageSiteAdministrator">Information on planning, installing and validating storage software</a></li>
+<li><a href="https://twiki.grid.iu.edu/bin/view/Storage/SEToolsTipsFAQs">Tips and FAQ</a></li>
+<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GratiaTransferProbe">OSG Gratia Transfer Probe page</a></li>
+<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/LbnlSrmClient">SRM v2.2 LBNL client command line examples</a></li>
+<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SrmTester">SRM-Tester</a></li>
+<li><a href="http://sdm.lbl.gov/bestman">BeStMan official website</a><ul>
+<li><a href="http://sdm.lbl.gov/bestman/docs/bestman-guide.html">BeStMan User guides</a></li>
+<li><a href="http://sdm.lbl.gov/bestman/docs/bestman-faq.html">BeStMan FAQ</a></li>
+</ul>
+</li>
+<li><a href="http://wt2.slac.stanford.edu/xrootdfs/bestman-gateway.html">SLAC Gateway mode Instruction</a> - SLAC guide on gateway mode</li>
+<li><a href="http://www.usatlas.bnl.gov/twiki/bin/view/Admins/BestMan">US ATLAS instruction page</a></li>
+<li><a href="http://sdm.lbl.gov/srm-wg">SRM specifications and collaboration</a> - from SRM collaboration working group</li>
+<li><a href="http://s-2.sourceforge.net/">S2</a> - A SRM v2.2 test suite from CERN. It provides basic functionality tests based on use cases, and cross-copy tests, as part of the certification process and supports file access/transfer protocols: rfio, dcap, gsidcap, gsiftp</li>
+<li><a href="https://opensciencegrid.github.io/technology/projects/sha2-support/">SHA-2 compliance page</a></li>
+<li><a href="https://sdm.lbl.gov/twiki/bin/view/Software/BeStMan/BeStMan2Guide/ScalabilityNotes">Bestman scalability tuning</a></li>
+</ul>
+<h1 id="known-issues">Known Issues</h1>
+<h2 id="requesting-host-certificates-in-rhel6">Requesting host certificates in RHEL6</h2>
+<p>Bestman may not start if the certificates were requested on slc6. This is be caused by a bug in JGlobus (see <a href="https://github.com/jglobus/JGlobus/issues/118">JGlobusIssue118</a>), a <code>bestman2</code> dependency. A known workaround is to run this command</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> openssl rsa -in mykey.pem -out mykey.pem.old
+</pre></div>
+
+
+<p>This command on converts <code>mykey.pem</code> to <code>mykey.pem.old</code>; the latter format is supported.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../client/glexec/" class="btn btn-neutral float-right" title="Worker node glexec">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../bestman-overview/" class="btn btn-neutral" title="BeStMan Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../bestman-overview/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../client/glexec/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
