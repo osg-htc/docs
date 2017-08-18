@@ -30,6 +30,7 @@ pages:
   - 'GridFTP Server': 'storage/gridftp.md'
 - Deprecated Software:
   - 'BeStMan Overview': 'storage/bestman-overview.md'
+  - 'BeStMan Install': 'storage/bestman-install.md'
 
 markdown_extensions:
   - admonition
