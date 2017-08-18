@@ -39,15 +39,15 @@ For OSG 3.4:
 
 1.  Unpack the tarball.
 2.  Move the directory that was created to where you want the tarball client to be.
-3.  Run `osg-post-install` (**`%RED%/path/to/client/%ENDCOLOR%osg/osg-post-install`**) to fix the directories in the installation.
-4.  Source the setup **`source %RED%/path/to/client/%ENDCOLOR%setup.sh`** (or **`setup.csh`** depending on the shell).
+3.  Run `osg-post-install` (**`<PATH_TO_CLIENT>/osg/osg-post-install`**) to fix the directories in the installation.
+4.  Source the setup **`source <PATH_TO_CLIENT>/setup.sh`** (or **`setup.csh`** depending on the shell).
 5.  Download and set up CA certificiates using **`osg-ca-manage`** (See the [CA management documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaManage) for the available options).
 6.  Download CRLs using **`fetch-crl`**.
 
 !!! warning
     Once `osg-post-install` is run to relocate the install, it cannot be run again.  You will need to unpack a fresh copy.
 
-Example installation (in `/home/user/test-install`, the **`%RED%/path/to/client/%ENDCOLOR%`** is `/home/user/test-install/osg-wn-client` ):
+Example installation (in `/home/user/test-install`, the **`<PATH_TO_CLIENT>/`** is `/home/user/test-install/osg-wn-client` ):
 
 ```console
 [root@client ~] # mkdir /home/user/test-install
@@ -76,20 +76,20 @@ The WN client is a collection of client programs that do not require service sta
 
 You must create cron jobs to run `fetch-crl` and `osg-update-certs` to update your CRLs and certificates automatically.
 
-Here is what they should look like. (Note: fill in %RED%&<OSG_LOCATION>%ENDCOLOR% with the full path of your tarball install, including `osg-wn-client` that is created by the tarball).
+Here is what they should look like. (Note: fill in `<OSG_LOCATION>` with the full path of your tarball install, including `osg-wn-client` that is created by the tarball).
 
 ```text
 # Cron job to update certs.
 # Runs every hour by default, though does not update certs until they're at
 # least 24 hours old.  There is a random sleep time for up to 45 minutes (2700
 # seconds) to avoid overloading cert servers.
-10 * * * *   ( . %RED%<OSG_LOCATION>%ENDCOLOR%/setup.sh && osg-update-certs --random-sleep 2700 --called-from-cron )
+10 * * * *   ( . <OSG_LOCATION>/setup.sh && osg-update-certs --random-sleep 2700 --called-from-cron )
 ```
 
 ```text
 # Cron job to update CRLs
 # Runs every 6 hours at, 45 minutes +/- 3 minutes.
-42 */6 * * *   ( . %RED%<OSG_LOCATION>%ENDCOLOR%/setup.sh && fetch-crl -q -r 360 )
+42 */6 * * *   ( . <OSG_LOCATION>/setup.sh && fetch-crl -q -r 360 )
 ```
 
 You might want to configure proxy settings in `$OSG_LOCATION/etc/fetch-crl.conf`.
