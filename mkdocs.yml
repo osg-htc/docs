@@ -16,7 +16,8 @@ pages:
   - 'HTTP Cache': 'frontier-squid/squid.md'
   - 'CVMFS': 'client/cvmfs.md'
   - 'GSI-enabled SSH': 'other/gsissh.md'
-  - 'RPM-based Worker Node': 'client/wn.md'
+  - 'Worker Node (RPM install)': 'client/wn.md'
+  - 'Worker Node (tarball install)': 'client/wn-tarball.md'
 - Release Information:
   - 'OSG Release Series': 'release/release_series.md'
   - 'RPM Signing': 'release/signing.md'
