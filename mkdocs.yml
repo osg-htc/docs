@@ -11,6 +11,7 @@ pages:
 - Installation Overview: 'install-overview.md'
 - Install Guides:
   - 'Yum Repos': 'common/yum.md'
+  - 'Yum Basics': 'common/yum-basics.md'
   - 'CA Certificates': 'common/ca.md'
   - 'HTCondor-CE': 'compute-element/HTCondor_CE.md'
   - 'HTTP Cache': 'frontier-squid/squid.md'
