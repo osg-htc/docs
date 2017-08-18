@@ -135,7 +135,7 @@ If you want to know what package a file belongs to, you can ask rpm. For instanc
 If you want to know what other things are in a package--perhaps the other available tools or configuration files--you can do that as well:
 
     :::console
-    %UCL_PROMPT% rpm -ql bestman2-client
+    [user@client ~] $ rpm -ql bestman2-client
     /etc/bestman2/conf/bestman2.rc
     /etc/bestman2/conf/bestman2.rc.samples
     /etc/bestman2/conf/srmclient.conf
