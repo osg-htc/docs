@@ -191,7 +191,7 @@ This script does the following in the process of acquiring certificates for the 
 
 -   Reads a list of fully-qualified hostnames from a file specified by the user.
 -   For each hostname:
-    -   Generates a new private key and CS`.R
+    -   Generates a new private key and `CSR`.
     -   Only important part of CSR is `CN=<HOSTNAME>` component.
     -   Writes the private key to a file with filename: `<PREFIX>/<HOSTNAME>-key.pem`.
     -   Prompts the user for their private key pass phrase (the pass phrase is cached so user is not re-prompted).
@@ -447,7 +447,7 @@ The scripts have two modes of execution.
 
 In the normal mode of execution, the script connects to the production server and generated certificates are from default OSG CA.
 
-If the user provides a '-T' parameter on the command-line, the scripts connect to the OIM-ITB server and any generated certificates are issued by the OSG test CAs. This mode is intended for testing and training. The resulting certificates are not usable in a production environment.
+If the user provides a `-T` parameter on the command-line, the scripts connect to the OIM-ITB server and any generated certificates are issued by the OSG test CAs. This mode is intended for testing and training. The resulting certificates are not usable in a production environment.
 
 Current Limitations and Bugs
 ----------------------------
