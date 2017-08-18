@@ -85,7 +85,7 @@ The following steps need to be done after the glexec installation is complete.
 1. First, review the contents of `/etc/glexec.conf`. All of the defaults should be fine, but if you want to change the behavior, the parameters are described in `man glexec.conf`.
 2. Next, review all of the contents of `/etc/lcmaps.db` and in particular update the following pieces.
 
-    - If you have GUMS, change the yourgums.yourdomain in the following line to the fully qualified domain name of your GUMS server:
+    - If you have GUMS, change `<GUMS_HOST>` in the following line to the fully qualified domain name of your GUMS server:
 
             "–endpoint https://<GUMS_HOST>:8443/gums/services/GUMSXACMLAuthorizationServicePort"
 
@@ -112,12 +112,12 @@ The following steps need to be done after the glexec installation is complete.
 Testing the Installation of glexec
 ----------------------------------
 
-Now, _as a non-privileged user (not root)_, do the following (where %yourvo% is your VO, and __NNN__ is your uid as reported by `/usr/bin/id`):
+Now, _as a non-privileged user (not root)_, do the following (where <YOURVO> is your VO, and <UID> is your uid as reported by `/usr/bin/id`):
 
 ```console
-[user@client ~] $ voms-proxy-init -voms yourvo:/yourvo
-[user@client ~] $ export GLEXEC_CLIENT_CERT=/tmp/x509up_u%RED%NNN%ENDCOLOR%
-[user@client ~] $ export X509_USER_PROXY=/tmp/x509up_u%NNN%
+[user@client ~] $ voms-proxy-init -voms <YOURVO>:/<YOURVO>
+[user@client ~] $ export GLEXEC_CLIENT_CERT=/tmp/x509up_u<UID>
+[user@client ~] $ export X509_USER_PROXY=/tmp/x509up_u<UID>
 [user@client ~] $ /usr/sbin/glexec /usr/bin/id
 [user@client ~] $ uid=13160(fnalgrid) gid=9767(fnalgrid) groups=65000(glexec00)
 ```
