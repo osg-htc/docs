@@ -61,12 +61,6 @@
      <changefreq>daily</changefreq>
     </url>
         
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/client/glexec/</loc>
-     <lastmod>2017-08-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
     
 
     
@@ -145,6 +139,12 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/storage/bestman-overview/</loc>
+     <lastmod>2017-08-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/client/glexec/</loc>
      <lastmod>2017-08-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
