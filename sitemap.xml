@@ -78,6 +78,12 @@
     </url>
         
     <url>
+     <loc>https://opensciencegrid.github.io/docs/release/yum-basics/</loc>
+     <lastmod>2017-08-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>https://opensciencegrid.github.io/docs/release/signing/</loc>
      <lastmod>2017-08-18</lastmod>
      <changefreq>daily</changefreq>

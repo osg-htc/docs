@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Yum Basics - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Yum Basics";
+    var mkdocs_page_input_path = "release/yum-basics.md";
+    var mkdocs_page_url = "/release/yum-basics/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/yum/">Yum Repos</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/HTCondor_CE/">HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../frontier-squid/squid/">HTTP Cache</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn/">Worker Node (RPM install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn-tarball/">Worker Node (tarball install)</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../release_series/">OSG Release Series</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Yum Basics</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#basics-of-using-yum-and-rpm">Basics of using yum and RPM</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#about-this-document">About This Document</a></li>
+        
+            <li><a class="toctree-l4" href="#installation">Installation</a></li>
+        
+            <li><a class="toctree-l4" href="#verifying-packages-and-installations">Verifying Packages and Installations</a></li>
+        
+            <li><a class="toctree-l4" href="#understanding-a-package">Understanding a package</a></li>
+        
+            <li><a class="toctree-l4" href="#what-else-does-a-package-install">What else does a package install?</a></li>
+        
+            <li><a class="toctree-l4" href="#finding-rpm-packages">Finding RPM Packages</a></li>
+        
+            <li><a class="toctree-l4" href="#removing-packages">Removing Packages</a></li>
+        
+            <li><a class="toctree-l4" href="#upgrading-packages">Upgrading Packages</a></li>
+        
+            <li><a class="toctree-l4" href="#advanced-topic-only-geting-osg-updates">Advanced topic: Only geting OSG updates</a></li>
+        
+            <li><a class="toctree-l4" href="#advanced-topic-getting-debugging-information-for-installed-software">Advanced topic: Getting debugging information for installed software</a></li>
+        
+            <li><a class="toctree-l4" href="#troubleshooting">Troubleshooting</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#references">References</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../signing/">RPM Signing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../supported_platforms/">Supported Platforms</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Usage Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/using-wn/">Worker Node Environment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">In-Progress Docs</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca_updater/">CA Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/cert_scripts/">Certificate Request Scripts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job_router/">Job Router Recipe</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn_oasis/">OASIS-based Worker Node</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../storage/gridftp/">GridFTP Server</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deprecated Software</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../storage/bestman-overview/">BeStMan Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../storage/bestman-install/">BeStMan Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/glexec/">Worker node glexec</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Release Information &raquo;</li>
+        
+      
+    
+    <li>Yum Basics</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/yum-basics.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="basics-of-using-yum-and-rpm">Basics of using yum and RPM</h1>
+<h2 id="about-this-document">About This Document</h2>
+<p>This document introduces package management tools that help you install, update, and remove packages. OSG uses RPMs (the Red Hat Packaging Manager) to package its software. While RPM is the packaging format, <code>yum</code> is the command you will use to do the installation. For example, <code>yum</code> will resolve and download the dependencies for the package you want to install; <code>rpm</code> will simply complain if you want to install a package that does not have all its dependencies installed.</p>
+<h2 id="installation">Installation</h2>
+<p>Installation is done with the <code>yum install</code> command. Each of the individual installation guide shows you the correct command to use to do an installation. Here is an example installation with all of the output from yum.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> sudo yum install osg-ca-certs
+<span class="go">Loaded plugins: kernel-module, priorities</span>
+<span class="go">epel                                                                                         | 3.7 kB     00:00     </span>
+<span class="go">epel/primary_db                                                                              | 3.8 MB     00:00     </span>
+<span class="go">fermi-base                                                                                   | 2.1 kB     00:00     </span>
+<span class="go">fermi-base/primary_db                                                                        |  48 kB     00:00     </span>
+<span class="go">fermi-security                                                                               | 1.9 kB     00:00     </span>
+<span class="go">fermi-security/primary_db                                                                    | 1.7 MB     00:00     </span>
+<span class="go">osg                                                                                          | 1.9 kB     00:00     </span>
+<span class="go">osg/primary_db                                                                               |  65 kB     00:00     </span>
+<span class="go">sl-base                                                                                      | 2.1 kB     00:00     </span>
+<span class="go">sl-base/primary_db                                                                           | 2.0 MB     00:00     </span>
+<span class="go">957 packages excluded due to repository priority protections</span>
+<span class="go">Setting up Install Process</span>
+<span class="go">Resolving Dependencies</span>
+<span class="go">--&gt; Running transaction check</span>
+<span class="go">---&gt; Package osg-ca-certs.noarch 0:1.23-1 set to be updated</span>
+<span class="go">--&gt; Finished Dependency Resolution</span>
+<span class="go">Beginning Kernel Module Plugin</span>
+<span class="go">Finished Kernel Module Plugin</span>
+
+<span class="go">Dependencies Resolved</span>
+
+<span class="go">====================================================================================================================</span>
+<span class="go"> Package                         Arch                      Version                     Repository              Size</span>
+<span class="go">====================================================================================================================</span>
+<span class="go">Installing:</span>
+<span class="go"> osg-ca-certs                    noarch                    1.23-1                      osg                    450 k</span>
+
+<span class="go">Transaction Summary</span>
+<span class="go">====================================================================================================================</span>
+<span class="go">Install       1 Package(s)</span>
+<span class="go">Upgrade       0 Package(s)</span>
+
+<span class="go">Total download size: 450 k</span>
+<span class="go">Is this ok [y/N]: y</span>
+<span class="go">Downloading Packages:</span>
+<span class="go">osg-ca-certs-1.23-1.noarch.rpm                                                               | 450 kB     00:00     </span>
+<span class="go">warning: rpmts_HdrFromFdno: Header V3 DSA signature: NOKEY, key ID 824b8603</span>
+<span class="go">osg/gpgkey                                                                                   | 1.7 kB     00:00     </span>
+<span class="go">Importing GPG key 0x824B8603 &quot;OSG Software Team (RPM Signing Key for Koji Packages) &lt;vdt-support@opensciencegrid.org&gt;&quot; from /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG</span>
+<span class="go">Is this ok [y/N]: y</span>
+<span class="go">Running rpm_check_debug</span>
+<span class="go">Running Transaction Test</span>
+<span class="go">Finished Transaction Test</span>
+<span class="go">Transaction Test Succeeded</span>
+<span class="go">Running Transaction</span>
+<span class="go">  Installing     : osg-ca-certs                                                                                 1/1 </span>
+
+<span class="go">Installed:</span>
+<span class="go">  osg-ca-certs.noarch 0:1.23-1                                                                                      </span>
+
+<span class="go">Complete!</span>
+</pre></div>
+
+
+<p><strong>Please Note</strong>: When you first install a package from the OSG repository, you will be prompted to import the GPG key. We use this key to sign our RPMs as a security measure. You should double-check the key id (above it is 824B8603) with the <a href="../signing/">information on our signed RPMs</a>. If it doesn't match, there is a problem somewhere and you should report it to the OSG via goc@opensciencegrid.org.</p>
+<h2 id="verifying-packages-and-installations">Verifying Packages and Installations</h2>
+<p>You can check if an RPM has been modified. For instance, to check to see if any files have been modified in the <code>osg-ca-certs</code> RPM you just installed:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> rpm --verify osg-ca-certs
+</pre></div>
+
+
+<p>The lack of any output means there were no problems. If you would like to see all the files for which there are no problems, you can do:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> rpm --verify -v osg-ca-certs
+<span class="go">........    /etc/grid-security/certificates</span>
+<span class="go">........    /etc/grid-security/certificates/0119347c.0</span>
+<span class="go">........    /etc/grid-security/certificates/0119347c.namespaces</span>
+<span class="go">........    /etc/grid-security/certificates/0119347c.signing_policy</span>
+<span class="go">... etc ...</span>
+</pre></div>
+
+
+<p>Each dot indicates a specific check that was made and passed. If someone had modified a file, you might see this:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> rpm --verify osg-ca-certs
+<span class="go">..5....T    /etc/grid-security/certificates/ffc3d59b.0</span>
+</pre></div>
+
+
+<p>This means the files MD5 checksum has changed (so the contents have changed) and the timestamp is different. The complete set of changes you might see (copied from the <code>rpm</code> man page) are:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Letter</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>S</code></td>
+<td align="left">file Size differs</td>
+</tr>
+<tr>
+<td align="left"><code>M</code></td>
+<td align="left">Mode differs (includes permissions and file type)</td>
+</tr>
+<tr>
+<td align="left"><code>5</code></td>
+<td align="left">MD5 sum differs</td>
+</tr>
+<tr>
+<td align="left"><code>D</code></td>
+<td align="left">Device major/minor number mismatch</td>
+</tr>
+<tr>
+<td align="left"><code>L</code></td>
+<td align="left">readLink(2) path mismatch</td>
+</tr>
+<tr>
+<td align="left"><code>U</code></td>
+<td align="left">User ownership differs</td>
+</tr>
+<tr>
+<td align="left"><code>G</code></td>
+<td align="left">Group ownership differs</td>
+</tr>
+<tr>
+<td align="left"><code>T</code></td>
+<td align="left">mTime differs</td>
+</tr>
+</tbody>
+</table>
+<p>If you don't care about some of those changes, you can tell rpm to ignore them. For instance, to ignore changes in the modification time:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> rpm --verify --nomtime osg-ca-certs
+<span class="go">..5.....    /etc/grid-security/certificates/ffc3d59b.0</span>
+</pre></div>
+
+
+<h2 id="understanding-a-package">Understanding a package</h2>
+<p>If you want to know what package a file belongs to, you can ask rpm. For instance, if you're curious what package contains the <code>srm-ls</code> command, you can do:</p>
+<div class="codehilite"><pre><span></span><span class="gp">#</span> <span class="m">1</span>. Find the exact path
+<span class="gp">[user@client ~] $</span> which srm-ls
+<span class="go">/usr/bin/srm-ls</span>
+
+<span class="gp">#</span> <span class="m">2</span>. Ask rpm what package it is part of:
+<span class="gp">[user@client ~] $</span> rpm -q --file /usr/bin/srm-ls
+<span class="go">bestman2-client-2.2.0-14.osg.el5.noarch</span>
+</pre></div>
+
+
+<p>If you want to know what other things are in a package--perhaps the other available tools or configuration files--you can do that as well:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> rpm -ql bestman2-client
+<span class="go">/etc/bestman2/conf/bestman2.rc</span>
+<span class="go">/etc/bestman2/conf/bestman2.rc.samples</span>
+<span class="go">/etc/bestman2/conf/srmclient.conf</span>
+<span class="go">/etc/sysconfig/bestman2</span>
+<span class="go">/usr/bin/srm-copy</span>
+<span class="go">/usr/bin/srm-copy-status</span>
+<span class="go">/usr/bin/srm-extendfilelifetime</span>
+<span class="go">/usr/bin/srm-ls</span>
+<span class="go">/usr/bin/srm-ls-status</span>
+<span class="go">... output trimmed ...</span>
+</pre></div>
+
+
+<h2 id="what-else-does-a-package-install">What else does a package install?</h2>
+<p>Sometimes you need to understand what other software is installed by a package. This can be particularly useful for understanding <em>meta-packages</em>, which are packages such as the <code>osg-wn-client</code> (worker node client) that contain nothing by themselves but only depend on other RPMs. To do this, use the <code>--requires</code> option to rpm. For example, you can see that the worker node client (as of OSG 3.1.8 in early September, 2012) will install <code>curl</code>, <code>uberftp</code>, <code>lcg-utils</code>, and a dozen or so other packages.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> rpm -q --requires osg-wn-client
+<span class="go">/usr/bin/curl  </span>
+<span class="go">/usr/bin/dccp  </span>
+<span class="go">/usr/bin/ldapsearch  </span>
+<span class="go">/usr/bin/uberftp  </span>
+<span class="go">/usr/bin/wget  </span>
+<span class="go">bestman2-client  </span>
+<span class="go">config(osg-wn-client) = 3.0.0-16.osg.el5</span>
+<span class="go">dcache-srmclient  </span>
+<span class="go">dcap-tunnel-gsi  </span>
+<span class="go">edg-gridftp-client  </span>
+<span class="go">fetch-crl  </span>
+<span class="go">glite-fts-client  </span>
+<span class="go">globus-gass-copy-progs  </span>
+<span class="go">grid-certificates  </span>
+<span class="go">java-1.6.0-sun-compat  </span>
+<span class="go">lcg-utils  </span>
+<span class="go">lfc-client  </span>
+<span class="go">lfc-python  </span>
+<span class="go">myproxy  </span>
+<span class="go">osg-system-profiler  </span>
+<span class="go">osg-version  </span>
+<span class="go">rpmlib(CompressedFileNames) &lt;= 3.0.4-1</span>
+<span class="go">rpmlib(PayloadFilesHavePrefix) &lt;= 4.0-1</span>
+<span class="go">vo-client</span>
+</pre></div>
+
+
+<h2 id="finding-rpm-packages">Finding RPM Packages</h2>
+<p>It is normally best to read the OSG documentation to decide which packages to install because it may not be obvious what the correct packages to install are. That said, you can use yum to find out all sort of things. For instance, you can list packages that begin with "voms":</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> yum list <span class="s2">&quot;voms*&quot;</span>
+<span class="go">Loaded plugins: kernel-module, priorities</span>
+<span class="go">957 packages excluded due to repository priority protections</span>
+<span class="go">Available Packages</span>
+<span class="go">voms.i386                                                    2.0.6-3.osg                                        osg </span>
+<span class="go">voms.x86_64                                                  2.0.6-3.osg                                        osg </span>
+<span class="go">voms-admin-client.x86_64                                     2.0.16-1                                           osg </span>
+<span class="go">voms-admin-server.noarch                                     2.6.1-9                                            osg </span>
+<span class="go">voms-clients.x86_64                                          2.0.6-3.osg                                        osg </span>
+<span class="go">voms-compat.i386                                             1.9.19.2-6.osg                                     osg </span>
+<span class="go">voms-compat.x86_64                                           1.9.19.2-6.osg                                     osg </span>
+<span class="go">voms-devel.i386                                              2.0.6-3.osg                                        osg </span>
+<span class="go">voms-devel.x86_64                                            2.0.6-3.osg                                        osg </span>
+<span class="go">voms-doc.x86_64                                              2.0.6-3.osg                                        osg </span>
+<span class="go">voms-mysql-plugin.x86_64                                     3.1.5.1-1.el5                                      epel</span>
+<span class="go">voms-server.x86_64                                           2.0.6-3.osg                                        osg </span>
+<span class="go">vomsjapi.x86_64                                              2.0.6-3.osg                                        osg </span>
+<span class="go">vomsjapi-javadoc.x86_64                                      2.0.6-3.osg                                        osg</span>
+</pre></div>
+
+
+<p>If you want to search for packages that contain VOMS anywhere in the name or description, you can use <code>yum search</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> yum search voms
+<span class="go">Loaded plugins: kernel-module, priorities</span>
+<span class="go">957 packages excluded due to repository priority protections</span>
+<span class="go">================================================== Matched: voms ===================================================</span>
+<span class="go">osg-voms.noarch : OSG VOMS</span>
+<span class="go">perl-VOMS-Lite.noarch : Perl extension for VOMS Attribute certificate creation</span>
+<span class="go">perl-voms-server.noarch : Perl extension for VOMS Attribute certificate creation</span>
+<span class="go">php-voms-admin.noarch : Web based interface to control VOMS parameters written in PHP</span>
+<span class="go">voms.i386 : Virtual Organization Membership Service</span>
+<span class="go">voms.x86_64 : Virtual Organization Membership Service</span>
+<span class="go">... etc ...</span>
+</pre></div>
+
+
+<p>One last example, if you want to know what RPM would give you the <code>voms-proxy-init</code> command, you can ask <code>yum</code>. The <strong><code>*</code></strong> indicates that you don't know the full pathname of <code>voms-proxy-init</code>.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> yum whatprovides <span class="s2">&quot;*voms-proxy-init&quot;</span>
+<span class="go">Loaded plugins: kernel-module, priorities</span>
+<span class="go">957 packages excluded due to repository priority protections</span>
+<span class="go">voms-clients-2.0.6-3.osg.x86_64 : Virtual Organization Membership Service Clients</span>
+<span class="go">Repo        : osg</span>
+<span class="go">Matched from:</span>
+<span class="go">Filename    : /usr/bin/voms-proxy-init</span>
+</pre></div>
+
+
+<h2 id="removing-packages">Removing Packages</h2>
+<p>To remove a single RPM, you can use <code>yum remove</code>. Not only will it uninstall the RPM you requested, but it will uninstall anything that depends on it. For example, if I previously installed the <code>voms-clients</code> package, I also installed another package it depends on called <code>voms</code>. If I remove <code>voms</code>, yum will also remove <code>voms-clients</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> sudo yum remove voms
+<span class="go">Loaded plugins: kernel-module, priorities</span>
+<span class="go">Setting up Remove Process</span>
+<span class="go">Resolving Dependencies</span>
+<span class="go">--&gt; Running transaction check</span>
+<span class="go">---&gt; Package voms.x86_64 0:2.0.6-3.osg set to be erased</span>
+<span class="go">--&gt; Processing Dependency: libvomsapi.so.1()(64bit) for package: voms-clients</span>
+<span class="go">--&gt; Processing Dependency: voms = 2.0.6-3.osg for package: voms-clients</span>
+<span class="go">--&gt; Running transaction check</span>
+<span class="go">---&gt; Package voms-clients.x86_64 0:2.0.6-3.osg set to be erased</span>
+<span class="go">--&gt; Finished Dependency Resolution</span>
+<span class="go">Beginning Kernel Module Plugin</span>
+<span class="go">Finished Kernel Module Plugin</span>
+
+<span class="go">Dependencies Resolved</span>
+
+<span class="go">====================================================================================================================</span>
+<span class="go"> Package                      Arch                   Version                        Repository                 Size</span>
+<span class="go">====================================================================================================================</span>
+<span class="go">Removing:</span>
+<span class="go"> voms                         x86_64                 2.0.6-3.osg                    installed                 407 k</span>
+<span class="go">Removing for dependencies:</span>
+<span class="go"> voms-clients                 x86_64                 2.0.6-3.osg                    installed                 373 k</span>
+
+<span class="go">Transaction Summary</span>
+<span class="go">====================================================================================================================</span>
+<span class="go">Remove        2 Package(s)</span>
+<span class="go">Reinstall     0 Package(s)</span>
+<span class="go">Downgrade     0 Package(s)</span>
+
+<span class="go">Is this ok [y/N]: y</span>
+<span class="go">Downloading Packages:</span>
+<span class="go">Running rpm_check_debug</span>
+<span class="go">Running Transaction Test</span>
+<span class="go">Finished Transaction Test</span>
+<span class="go">Transaction Test Succeeded</span>
+<span class="go">Running Transaction</span>
+<span class="go">  Erasing        : voms                                                                                         1/2 </span>
+<span class="go">  Erasing        : voms-clients                                                                                 2/2 </span>
+
+<span class="go">Removed:</span>
+<span class="go">  voms.x86_64 0:2.0.6-3.osg                                                                                         </span>
+
+<span class="go">Dependency Removed:</span>
+<span class="go">  voms-clients.x86_64 0:2.0.6-3.osg                                                                                 </span>
+
+<span class="go">Complete!</span>
+</pre></div>
+
+
+<h2 id="upgrading-packages">Upgrading Packages</h2>
+<p>You can check for updates with <code>yum check-update</code>. For example:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum check-update
+<span class="go">Loaded plugins: kernel-module, priorities</span>
+<span class="go">957 packages excluded due to repository priority protections</span>
+
+<span class="go">kernel.x86_64                                            2.6.18-274.3.1.el5                           fermi-security</span>
+<span class="go">Obsoleting Packages</span>
+<span class="go">ocsinventory-agent.noarch                                1.1.2.1-1.el5                                epel          </span>
+<span class="go">    ocsinventory-client.noarch                           0.9.9-10                                     installed     </span>
+</pre></div>
+
+
+<p>You can do the update with <code>yum update</code>. Note that in this case we got more than was listed due to dependencies that needed to be resolved:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum update
+<span class="go">957 packages excluded due to repository priority protections</span>
+<span class="go">Setting up Update Process</span>
+<span class="go">Resolving Dependencies</span>
+<span class="go">--&gt; Running transaction check</span>
+<span class="go">---&gt; Package kernel.x86_64 0:2.6.18-274.3.1.el5 set to be installed</span>
+<span class="go">---&gt; Package ocsinventory-agent.noarch 0:1.1.2.1-1.el5 set to be updated</span>
+<span class="go">--&gt; Processing Dependency: perl(Crypt::SSLeay) for package: ocsinventory-agent</span>
+<span class="go">--&gt; Processing Dependency: perl(Proc::Daemon) for package: ocsinventory-agent</span>
+<span class="go">--&gt; Processing Dependency: monitor-edid for package: ocsinventory-agent</span>
+<span class="go">--&gt; Processing Dependency: perl(Net::IP) for package: ocsinventory-agent</span>
+<span class="go">--&gt; Processing Dependency: nmap for package: ocsinventory-agent</span>
+<span class="go">--&gt; Processing Dependency: perl(Net::SSLeay) for package: ocsinventory-agent</span>
+<span class="go">--&gt; Running transaction check</span>
+<span class="go">---&gt; Package monitor-edid.x86_64 0:2.5-1.el5.1 set to be updated</span>
+<span class="go">---&gt; Package nmap.x86_64 2:4.11-1.1 set to be updated</span>
+<span class="go">---&gt; Package perl-Crypt-SSLeay.x86_64 0:0.51-11.el5 set to be updated</span>
+<span class="go">---&gt; Package perl-Net-IP.noarch 0:1.25-2.fc6 set to be updated</span>
+<span class="go">---&gt; Package perl-Net-SSLeay.x86_64 0:1.30-4.fc6 set to be updated</span>
+<span class="go">---&gt; Package perl-Proc-Daemon.noarch 0:0.03-1.el5 set to be updated</span>
+<span class="go">--&gt; Finished Dependency Resolution</span>
+<span class="go">Beginning Kernel Module Plugin</span>
+<span class="go">Finished Kernel Module Plugin</span>
+<span class="go">--&gt; Running transaction check</span>
+<span class="go">---&gt; Package kernel.x86_64 0:2.6.18-238.1.1.el5 set to be erased</span>
+<span class="go">--&gt; Finished Dependency Resolution</span>
+
+<span class="go">Dependencies Resolved</span>
+
+<span class="go">====================================================================================================================</span>
+<span class="go"> Package                        Arch               Version                         Repository                  Size</span>
+<span class="go">====================================================================================================================</span>
+<span class="go">Installing:</span>
+<span class="go"> kernel                         x86_64             2.6.18-274.3.1.el5              fermi-security              21 M</span>
+<span class="go"> ocsinventory-agent             noarch             1.1.2.1-1.el5                   epel                       156 k</span>
+<span class="go">     replacing  ocsinventory-client.noarch 0.9.9-10</span>
+
+<span class="go">Removing:</span>
+<span class="go"> kernel                         x86_64             2.6.18-238.1.1.el5              installed                   93 M</span>
+<span class="go">Installing for dependencies:</span>
+<span class="go"> monitor-edid                   x86_64             2.5-1.el5.1                     epel                        82 k</span>
+<span class="go"> nmap                           x86_64             2:4.11-1.1                      sl-base                    680 k</span>
+<span class="go"> perl-Crypt-SSLeay              x86_64             0.51-11.el5                     sl-base                     45 k</span>
+<span class="go"> perl-Net-IP                    noarch             1.25-2.fc6                      sl-base                     31 k</span>
+<span class="go"> perl-Net-SSLeay                x86_64             1.30-4.fc6                      sl-base                    192 k</span>
+<span class="go"> perl-Proc-Daemon               noarch             0.03-1.el5                      epel                       9.4 k</span>
+
+<span class="go">Transaction Summary</span>
+<span class="go">====================================================================================================================</span>
+<span class="go">Install       8 Package(s)</span>
+<span class="go">Upgrade       0 Package(s)</span>
+<span class="go">Remove        1 Package(s)</span>
+<span class="go">Reinstall     0 Package(s)</span>
+<span class="go">Downgrade     0 Package(s)</span>
+
+<span class="go">Total download size: 22 M</span>
+<span class="go">Is this ok [y/N]: y</span>
+<span class="go">Downloading Packages:</span>
+<span class="go">(1/8): perl-Proc-Daemon-0.03-1.el5.noarch.rpm                                                | 9.4 kB     00:00     </span>
+<span class="go">(2/8): perl-Net-IP-1.25-2.fc6.noarch.rpm                                                     |  31 kB     00:00     </span>
+<span class="go">(3/8): perl-Crypt-SSLeay-0.51-11.el5.x86_64.rpm                                              |  45 kB     00:00     </span>
+<span class="go">(4/8): monitor-edid-2.5-1.el5.1.x86_64.rpm                                                   |  82 kB     00:00     </span>
+<span class="go">(5/8): ocsinventory-agent-1.1.2.1-1.el5.noarch.rpm                                           | 156 kB     00:00     </span>
+<span class="go">(6/8): perl-Net-SSLeay-1.30-4.fc6.x86_64.rpm                                                 | 192 kB     00:00     </span>
+<span class="go">(7/8): nmap-4.11-1.1.x86_64.rpm                                                              | 680 kB     00:00     </span>
+<span class="go">(8/8): kernel-2.6.18-274.3.1.el5.x86_64.rpm                                                  |  21 MB     00:00     </span>
+<span class="go">--------------------------------------------------------------------------------------------------------------------</span>
+<span class="go">Total                                                                               3.5 MB/s |  22 MB     00:06     </span>
+<span class="go">warning: rpmts_HdrFromFdno: Header V3 DSA signature: NOKEY, key ID 217521f6</span>
+<span class="go">epel/gpgkey                                                                                  | 1.7 kB     00:00     </span>
+<span class="go">Importing GPG key 0x217521F6 &quot;Fedora EPEL &lt;epel@fedoraproject.org&gt;&quot; from /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL</span>
+<span class="go">Is this ok [y/N]: y</span>
+<span class="go">Running rpm_check_debug</span>
+<span class="go">Running Transaction Test</span>
+<span class="go">Finished Transaction Test</span>
+<span class="go">Transaction Test Succeeded</span>
+<span class="go">Running Transaction</span>
+<span class="go">  Installing     : perl-Net-SSLeay                                                                             1/10 </span>
+<span class="go">  Installing     : nmap                                                                                        2/10 </span>
+<span class="go">  Installing     : monitor-edid                                                                                3/10 </span>
+<span class="go">  Installing     : perl-Crypt-SSLeay                                                                           4/10 </span>
+<span class="go">  Installing     : perl-Net-IP                                                                                 5/10 </span>
+<span class="go">  Installing     : perl-Proc-Daemon                                                                            6/10 </span>
+<span class="go">  Installing     : kernel                                                                                      7/10 </span>
+<span class="go">  Installing     : ocsinventory-agent                                                                          8/10 </span>
+<span class="go">ule, priorities</span>
+<span class="go">957 packages excluded due to repository priority protections</span>
+
+<span class="go">kernel.x86_64                                            2.6.18-274.3.1.el5                           fermi-security</span>
+<span class="go">Obsoleting Packages</span>
+<span class="go">ocsinventory-agent.noarch                                1.1.2.1-1.el5                                epel          </span>
+<span class="go">    ocsinventory-client.noarch                           0.9.9-10                                     installed     </span>
+<span class="go">  Erasing        : ocsinventory-client                                                                         9/10 </span>
+<span class="go">warning: /etc/ocsinventory-client/ocsinv.conf saved as /etc/ocsinventory-client/ocsinv.conf.rpmsave</span>
+<span class="go">  Cleanup        : kernel                                                                                     10/10 </span>
+
+<span class="go">Removed:</span>
+<span class="go">  kernel.x86_64 0:2.6.18-238.1.1.el5                                                                                </span>
+
+<span class="go">Installed:</span>
+<span class="go">  kernel.x86_64 0:2.6.18-274.3.1.el5                    ocsinventory-agent.noarch 0:1.1.2.1-1.el5                   </span>
+
+<span class="go">Dependency Installed:</span>
+<span class="go">  monitor-edid.x86_64 0:2.5-1.el5.1   nmap.x86_64 2:4.11-1.1                perl-Crypt-SSLeay.x86_64 0:0.51-11.el5  </span>
+<span class="go">  perl-Net-IP.noarch 0:1.25-2.fc6     perl-Net-SSLeay.x86_64 0:1.30-4.fc6   perl-Proc-Daemon.noarch 0:0.03-1.el5    </span>
+
+<span class="go">Replaced:</span>
+<span class="go">  ocsinventory-client.noarch 0:0.9.9-10                                                                             </span>
+
+<span class="go">Complete!</span>
+</pre></div>
+
+
+<h2 id="advanced-topic-only-geting-osg-updates">Advanced topic: Only geting OSG updates</h2>
+<p>If you only want to get updates from the OSG repository and <em>no other</em> repositories, you can tell yum to do that with the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum --disablerepo<span class="o">=</span>* --enablerepo<span class="o">=</span>osg update
+</pre></div>
+
+
+<h2 id="advanced-topic-getting-debugging-information-for-installed-software">Advanced topic: Getting debugging information for installed software</h2>
+<p>If you run into a problem with our software and have a hankering to debug it directly (or perhaps we need to ask you for some help), you can install so-called "debuginfo" packages. These packages will provide debugging symbols and source code so that you can do things like run <code>gdb</code> or <code>pstack</code> to get information about a program.</p>
+<p>Installing the debuginfo package requires three steps.</p>
+<ol>
+<li>
+<p>Enable the installation of debuginfo packages. This only needs to be done once. Edit the yum repo file, usually <code>/etc/yum.repos.d/osg.repo</code> to enable the separate debuginfo repository. Near the bottom of the file, you'll see the <code>osg-debug</code> repo: </p>
+<div class="codehilite"><pre><span></span><span class="k">[osg-debug]</span>
+
+<span class="na">name</span><span class="o">=</span><span class="s">OSG Software for Enterprise Linux 5 - $basearch - Debug</span>
+<span class="na">baseurl</span><span class="o">=</span><span class="s">http://repo.grid.iu.edu/osg-release/$basearch/debu</span>
+<span class="na">failovermethod</span><span class="o">=</span><span class="s">priority </span>
+<span class="na">priority</span><span class="o">=</span><span class="s">98 </span>
+<span class="na">enabled</span><span class="o">=</span><span class="s">1</span>
+<span class="na">gpgcheck</span><span class="o">=</span><span class="s">1 </span>
+<span class="na">gpgkey</span><span class="o">=</span><span class="s">file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG</span>
+</pre></div>
+
+
+<p>Make sure that "enabled" is set to 1.</p>
+</li>
+<li>
+<p>Figure out which package installed the program you want to debug. One way to figure it out is to ask RPM. For example, if you want to debug grid-proxy-init:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> rpm -qf <span class="sb">`</span>which grid-proxy-init<span class="sb">`</span>
+<span class="go">globus-proxy-utils-5.0-5.osg.x86_64</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Install the debugging information for that package. Continuing this example: </p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> debuginfo-install globus-proxy-utils
+<span class="go">...</span>
+<span class="go">=================================================================================================================================</span>
+<span class="go"> Package                                      Arch                   Version                     Repository                 Size</span>
+<span class="go">=================================================================================================================================</span>
+<span class="go">Installing:</span>
+<span class="go"> globus-proxy-utils-debuginfo                 x86_64                 5.0-5.osg                   osg-debug                  61 k</span>
+
+<span class="go">Transaction Summary</span>
+<span class="go">=================================================================================================================================</span>
+<span class="go">Install       1 Package(s)</span>
+<span class="go">Upgrade       0 Package(s)</span>
+
+<span class="go">Total download size: 61 k</span>
+<span class="go">Is this ok [y/N]: y</span>
+<span class="go">...</span>
+<span class="go">Installed:</span>
+<span class="go">  globus-proxy-utils-debuginfo.x86_64 0:5.0-5.osg</span>
+</pre></div>
+
+
+<p>This last step will select the right package name, then use <code>yum</code> to install it.</p>
+</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="yum-not-finding-packages">Yum not finding packages</h3>
+<p>If you is not finding some packages, e.g.:</p>
+<div class="codehilite"><pre><span></span>Error Downloading Packages:
+  packageXYZ: failure: packageXYZ.rpm from osg: [Errno 256] No more mirrors to try.
+</pre></div>
+
+
+<p>then you can try cleaning up Yum's cache: </p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum clean all --enablerpeo<span class="o">=</span>*
+</pre></div>
+
+
+<p>to make an even more thorough job you can follow also add:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum clean expire-cache --enablerepo<span class="o">=</span>*
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>yum clean</code> cleans only enabled repositories. If you want to also clean any (temporarily) disabled repositories you need to use <code>--enablerepo=’*’</code> option.</p>
+</div>
+<h3 id="yum-complaining-about-missing-keys">Yum complaining about missing keys</h3>
+<p>If yum is complaining you can re-import the keys in your distribution: </p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
+</pre></div>
+
+
+<h1 id="references">References</h1>
+<ul>
+<li><a href="http://yum.baseurl.org/">The main yum web site</a></li>
+<li>A good description of the commands for RPM and yum can be found at <a href="http://www.ibm.com/developerworks/linux/library/l-lpic1-v3-102-5/?ca=drs-">Learn Linux 101: RPM and YUM Package Management</a>.</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../signing/" class="btn btn-neutral float-right" title="RPM Signing">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../release_series/" class="btn btn-neutral" title="OSG Release Series"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../release_series/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../signing/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
