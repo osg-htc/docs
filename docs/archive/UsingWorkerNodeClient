@@ -1,0 +1,104 @@
+---+ Introduction
+
+The Worker Node Client is a collection of useful software components that is guaranteed to be on every OSG worker node. In addition, a job running on a worker node can access a handful of environment variables that your job can use to locate handy resources.
+
+This page describes how to initialize the environment of your job to correctly access the execution and data areas from the worker node.
+
+The OSG provides no scientific software dependencies or software build tools on the worker node; you are expected to bring along all application-level dependencies yourself. Sites are not required to provide any specific tools (gcc, svn, lapack, blas, etc.) beyond the ones in the OSG worker node client. 
+
+
+---+ The Environment
+
+All OSG sites should be configured so that the Worker Node Client software is in the default environment of the job and some variables are already defined when your job starts running.
+
+<pre>
+%UCL_PROMPT% globus-job-run red.unl.edu:/jobmanager-condor /usr/bin/printenv
+_CONDOR_ANCESTOR_10629=11149:1288983808:3570854656
+OSG_GLEXEC_LOCATION=/usr/sbin/glexec
+CHANGED_X509=/grid_home/uscmsPool018/.globus/job/red.unl.edu/2556.1288983706/x509_up
+GLOBUS_LOCATION=/opt/osg/osg-wn-source/globus
+TMPDIR=/scratch/condor/var/lib/condor/execute/dir_10629
+_CONDOR_SCRATCH_DIR=/scratch/condor/var/lib/condor/execute/dir_10629
+OLDPWD=/scratch/condor/var/lib/condor/execute/dir_10629
+OSG_WN_TMP=/scratch/condor/var/lib/condor/execute/dir_10629
+OSG_SQUID_LOCATION=red-squid1.unl.edu:3128
+OSG_JOB_CONTACT=red.unl.edu/jobmanager-condor
+OSG_SITE_WRITE=UNAVAILABLE
+TEMP=/scratch/condor/var/lib/condor/execute/dir_10629
+LD_LIBRARY_PATH=/opt/osg/osg-1.2/subversion/lib:/opt/osg/osg-1.2/apache/lib:/opt/osg/osg-1.2/MonaLisa/Service/VDTFarm/pgsql/lib:/opt/osg/osg-1.2/prima/lib:/opt/osg/osg-1.2/curl/lib:/opt/osg/osg-1.2/glite/lib64:/opt/osg/osg-1.2/glite/lib:/opt/osg/osg-1.2/mysql5/lib/mysql:/opt/osg/osg-1.2/jdk1.6/jre/lib/i386:/opt/osg/osg-1.2/jdk1.6/jre/lib/i386/server:/opt/osg/osg-1.2/jdk1.6/jre/lib/i386/client:/opt/osg/osg-1.2/berkeley-db/lib:/opt/osg/osg-1.2/expat/lib:/opt/osg/osg-1.2/globus/lib:/opt/osg/osg-1.2/subversion/lib:/opt/osg/osg-1.2/apache/lib:/opt/osg/osg-1.2/MonaLisa/Service/VDTFarm/pgsql/lib:/opt/osg/osg-1.2/prima/lib:/opt/osg/osg-1.2/curl/lib:/opt/osg/osg-1.2/glite/lib64:/opt/osg/osg-1.2/glite/lib:/opt/osg/osg-1.2/mysql5/lib/mysql:/opt/osg/osg-1.2/jdk1.6/jre/lib/i386:/opt/osg/osg-1.2/jdk1.6/jre/lib/i386/server:/opt/osg/osg-1.2/jdk1.6/jre/lib/i386/client:/opt/osg/osg-1.2/berkeley-db/lib:/opt/osg/osg-1.2/expat/lib:/opt/osg/osg-1.2/subversion/lib:/opt/osg/osg-1.2/apache/lib:/opt/osg/osg-1.2/MonaLisa/Service/VDTFarm/pgsql/lib:/opt/osg/osg-1.2/glite/lib64:/opt/osg/osg-1.2/glite/lib:/opt/osg/osg-1.2/prima/lib:/opt/osg/osg-1.2/mysql5/lib/mysql:/opt/osg/osg-1.2/berkeley-db/lib:/opt/osg/osg-1.2/expat/lib::
+OSG_LOCATION=/opt/osg/osg-1.2
+OSG_SITE_READ=UNAVAILABLE
+_CONDOR_ANCESTOR_4198=4208:1284756786:1513536384
+GLOBUS_GRAM_MYJOB_CONTACT=URLx-nexus://red.unl.edu:60265/
+MY_INITIAL_DIR=$_CONDOR_SCRATCH_DIR
+OSG_DATA=/opt/osg/data
+PWD=/scratch/condor/var/lib/condor/execute/dir_10629
+OSG_APP=/opt/osg/app
+_CONDOR_WRAPPER_ERROR_FILE=/scratch/condor/var/lib/condor/execute/dir_10629/.job_wrapper_failure
+_CONDOR_SLOT=7
+OSG_GRID=/opt/osg/osg-wn-source
+OSG_HOSTNAME=red.unl.edu
+SHLVL=0
+HOME=/grid_home/uscmsPool018
+_CONDOR_MACHINE_AD=/scratch/condor/var/lib/condor/execute/dir_10629/.machine.ad
+OSG_STORAGE_ELEMENT=True
+X509_USER_PROXY=/scratch/condor/var/lib/condor/execute/dir_10629/x509_up
+OSG_DEFAULT_SE=srm.unl.edu
+LOGNAME=uscmsPool018
+TMP=/scratch/condor/var/lib/condor/execute/dir_10629
+OSG_SITE_NAME=Nebraska
+_CONDOR_ANCESTOR_4208=10629:1288983806:3772562235
+_CONDOR_JOB_AD=/scratch/condor/var/lib/condor/execute/dir_10629/.job.ad
+GLOBUS_GRAM_JOB_CONTACT=https://red.unl.edu:32943/2556/1288983706/
+</pre>
+
+---+ Common software available on worker nodes.
+
+The OSG worker node client (called the =wn-client= package) contains the following software:
+
+   * The site's supported set of CA certificates (located in $X509_CERT_DIR after the environment is set up)
+   * Proxy management tools:
+      * Create proxies: =voms-proxy-init= and =grid-proxy-init=
+      * Show proxy info: =voms-proxy-info= and =grid-proxy-info=
+      * Destroy the current proxy: =voms-proxy-destroy= and =grid-proxy-destroy=
+   * Data transfer tools:
+      * HTTP/plain FTP protocol tools (via system dependencies):
+         * =wget= and =curl=: standard tools for downloading files with HTTP and FTP
+      * SRM clients
+         * LCG SRM Client (=lcg-cp= and others)
+         * LBNL SRM Client (=srm-copy= and others)
+         * FNAL SRM Client (=srmcp= and others)
+      * !GridFTP client
+         * Globus !GridFTP client (=globus-url-copy=)
+         * !UberFTP, another command-line client for !GridFTP; covers a wider variety of the !GridFTP protocol than just copying
+      * Site-specific protocols
+         * DCache client: =dccp=, a client specifically for sites running !dCache, on about 5–10 of the 80 OSG sites
+   * !MyProxy client tools
+
+Advanced users can list the content of the RPM
+
+
+---+ Directories in the Worker Node Environment
+
+The following table outlines the various important directories for the worker node environment. A job running on an OSG worker node can refer to each directory using the corresponding environment variable.
+
+%EDITTABLE{ header="| *Environment Variable* | *Purpose of a directory* | *Notes* |" format="| text | textarea, 2x30 | textarea, 2x30 |" changerows="on" }%
+| *Environment Variable* | *Purpose of a directory* | *Notes* |
+| =$OSG_APP= | Location for users to install software. | This directory is used by VO's to install software that will be used when running on the cluster.  For example, a VO may install the BLAST executable here.  The VO would submit jobs that executed the blast executable.  Access to this area varies from site-to-site.  Most sites allow software installation only from the head node (jobmanager-fork), while others require you to access it via a special job description of VOMS role. |
+| =$OSG_DATA= | Data files that are accessible via NFS from all batch slots, read-write. | %RED% Not all OSG sites have deployed this area. %ENDCOLOR%  You can test for existance by comparing the environment variable =$OSG_DATA= to =UNAVAILABLE=.  If true, then the directory is not available. |
+| =$OSG_WN_TMP= | Temporary storage area in which your job(s) run | Local to each batch slot.  Create a directory under this as your work area.  See NOTE below. |
+
+%NOTE% Be careful with using =$OSG_WN_TMP=, this  directory might be shared with other VOs.  We recommend the following code (suppose =gpn= is your VO's name):
+
+<pre class="screen">
+mkdir -p $OSG_WN_TMP/gpn
+export mydir=`mktemp -d -t gpn`
+cd $mydir
+# Run the rest of your application
+rm -rf $mydir
+</pre>
+
+A significant number of sites use the batch system to make an independent directory for each user job, and change =$OSG_WN_TMP= on the fly to point to this directory.
+
+There is no way to know in advance how much scratch disk space any given worker node has available, as OSG information systems don't advertise this.  Most of the times, it is shared among a number of job slots.
+
