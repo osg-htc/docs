@@ -94,6 +94,12 @@
     
         
     <url>
+     <loc>https://opensciencegrid.github.io/docs/common/pki-cli/</loc>
+     <lastmod>2017-08-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>https://opensciencegrid.github.io/docs/client/using-wn/</loc>
      <lastmod>2017-08-18</lastmod>
      <changefreq>daily</changefreq>

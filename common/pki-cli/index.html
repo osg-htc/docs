@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Certificate Tools - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Certificate Tools";
+    var mkdocs_page_input_path = "common/pki-cli.md";
+    var mkdocs_page_url = "/common/pki-cli/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../yum/">Yum Repos</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/HTCondor_CE/">HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../frontier-squid/squid/">HTTP Cache</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn/">RPM-based Worker Node</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/glexec/">Worker node glexec</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Usage Guides</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">Certificate Tools</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#osg-pki-command-line-clients">OSG PKI Command Line Clients</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#overview">Overview</a></li>
+        
+            <li><a class="toctree-l4" href="#prerequisites">Prerequisites</a></li>
+        
+            <li><a class="toctree-l4" href="#installation">Installation</a></li>
+        
+            <li><a class="toctree-l4" href="#usage">Usage</a></li>
+        
+            <li><a class="toctree-l4" href="#test-mode">Test Mode</a></li>
+        
+            <li><a class="toctree-l4" href="#current-limitations-and-bugs">Current Limitations and Bugs</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/using-wn/">Worker Node Environment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">In-Progress Docs</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../ca_updater/">CA Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../cert_scripts/">Certificate Request Scripts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job_router/">Job Router Recipe</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn_oasis/">OASIS-based Worker Node</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../storage/gridftp/">GridFTP Server</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deprecated Software</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../storage/bestman-overview/">BeStMan Overview</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Usage Guides &raquo;</li>
+        
+      
+    
+    <li>Certificate Tools</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/common/pki-cli.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="osg-pki-command-line-clients">OSG PKI Command Line Clients</h1>
+<h2 id="overview">Overview</h2>
+<p>The OSG PKI Command Line Clients provide a command-line interface for requesting and issuing host certificates from the OSG PKI. They complement the <a href="https://oim.grid.iu.edu/oim/certificateuser">OIM Web Interface</a>.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>If you have not already done so, you need to <a href="../yum/">configure the OSG software repositories</a>.</p>
+<h2 id="installation">Installation</h2>
+<p>The command-line scripts have been packaged as an RPM and are available from the OSG repositories.</p>
+<p>To install the RPM, run:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install osg-pki-tools
+</pre></div>
+
+
+<h2 id="usage">Usage</h2>
+<h3 id="configuration-files">Configuration Files</h3>
+<p>This configuration file contains information divided into two sections for testing and production.  Configuration variables include:</p>
+<ul>
+<li>Request URL</li>
+<li>Approve URL</li>
+<li>Retrieve URL</li>
+<li>Host URL</li>
+</ul>
+<p>These parameters are used as input to the script depending upon the mode of execution of the script (test or OIM). The command-line utilities check for configuration files in the following order:</p>
+<ul>
+<li><code>$HOME/.osg-pki/OSG_PKI.ini</code></li>
+<li><code>./pki-clients.ini</code></li>
+<li><code>/etc/pki-clients.ini</code></li>
+</ul>
+<h3 id="osg-cert-request">osg-cert-request</h3>
+<p>Sends a request for a host certificate.</p>
+<p>This script generates a private key and submits a request for a certificate to the OSG PKI. The request will be approved by an appropriate Grid Admin. You will receive an email when this approval has been completed containing directions on how to run <code>osg-cert-retreive</code> to retrieve the certificate. It works in two modes:</p>
+<ul>
+<li>CSR is provided by the user: the CSR provided is sent to the OIM.</li>
+<li>CSR is not provided by the user: the script generates a private key for the user. Writes it to default key file name or the one specified by <code>-o</code>.</li>
+</ul>
+<p>This script:</p>
+<ul>
+<li>Generates a new host private key and CSR (the only important part of CSR is <code>CN=&lt;HOSTNAME&gt;</code> component).</li>
+<li>Saves the host private key to disk (as specified by the user).</li>
+<li>Authenticates to OIM and posts the CSR as a request to OIM.</li>
+<li>Returns the request ID to the user.</li>
+</ul>
+<p>If the user provides the CSR, then this script would just send the same CSR to OIM.</p>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li>fully-qualified hostname</li>
+<li>filename to store private key (optional; default is <code>./hostkey.pem</code>).</li>
+<li>path to user's certificate (optional: default is path specified by <code>$X509_USER_CERT</code> environment variable, then <code>~/.globus/usercert.pem</code>).</li>
+<li>path to user's private key (optional: default is path specified by <code>$X509_USER_KEY</code> environment variable, then <code>~/.globus/userkey.pem</code>).</li>
+<li>Passphrase for user's private key (via non-echoing prompt).</li>
+<li>User needs to provide VO name if the requested hostname has multiple VO's assigned.</li>
+</ul>
+<p><strong>Outputs:</strong></p>
+<ul>
+<li>Private key, to filename specified by <code>-o</code> or <code>./hostkey.pem</code> by default.</li>
+<li>Request Id, to <code>stdout</code>.</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-request --help
+<span class="go">Usage: osg-cert-request [options]</span>
+
+<span class="go">Options:</span>
+<span class="go">  -h, --help            show this help message and exit</span>
+<span class="go">  -c CSR, --csr=CSR     Specify CSR name (default = gennew.csr)</span>
+<span class="go">  -o OUTPUT KEYFILE, --outkeyfile=OUTPUT KEYFILE</span>
+<span class="go">                        Specify the output filename for the retrieved user certificate.</span>
+<span class="go">                        Default is ./hostkey.pem</span>
+<span class="go">  -v VO name, --vo=VO name</span>
+<span class="go">                        Specify the VO for the host request</span>
+<span class="go">  -y CC LIST, --cc=CC LIST</span>
+<span class="go">                        Specify the CC list(the email id&#39;s to be CCed).</span>
+<span class="go">                        Separate values by &#39;,&#39;</span>
+<span class="go">  -m COMMENT, --comment=COMMENT</span>
+<span class="go">                        The comment to be added to the request</span>
+<span class="go">  -H CN, --hostname=CN  Specify a hostname for CSR (FQDN)</span>
+<span class="go">  -a HOSTNAME, --altname=HOSTNAME</span>
+<span class="go">                        Specify an alternative hostname for the CSR (FQDN). May be used more than once</span>
+<span class="go">  -e EMAIL, --email=EMAIL</span>
+<span class="go">                        Email address to receive certificate</span>
+<span class="go">  -n NAME, --name=NAME  Name of user receiving certificate</span>
+<span class="go">  -p PHONE, --phone=PHONE</span>
+<span class="go">                        Phone number of user receiving certificate</span>
+<span class="go">  -t TIMEOUT, --timeout=TIMEOUT</span>
+<span class="go">                        Specify the timeout in minutes</span>
+<span class="go">  -T, --test            Run in test mode</span>
+<span class="go">  -q, --quiet           don&#39;t print status messages to stdout</span>
+<span class="go">  -d WRITE_DIRECTORY, --directory=WRITE_DIRECTORY</span>
+<span class="go">                        Write the output files to this directory</span>
+<span class="go">  -V, --version         Print version information and exit</span>
+</pre></div>
+
+
+<h4 id="examples">Examples.</h4>
+<p>OSG generates the key pair for the request.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n <span class="s2">&quot;Your Name&quot;</span> -p <span class="m">9999999999</span> -y <span class="s2">&quot;xyz@domain.com,abc@domain.com&quot;</span> -m <span class="s2">&quot;This is my comment&quot;</span>
+</pre></div>
+
+
+<p>If you want to request a service certificate, you need to escape backslash for service name inside CN like following.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n <span class="s2">&quot;Your Name&quot;</span> -p <span class="m">9999999999</span> -y <span class="s2">&quot;rsv\/xyz@domain.com&quot;</span> -m <span class="s2">&quot;This is my comment&quot;</span>
+</pre></div>
+
+
+<p>You can create your CSR on your target hosts using tools such as <code>openssl</code>.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> <span class="nb">umask</span> <span class="m">077</span><span class="p">;</span> openssl req -new -newkey rsa:2048 -nodes -keyout hostkey.pem -subj <span class="s2">&quot;/CN=osg-ce.example.edu&quot;</span> -out csr.pem
+</pre></div>
+
+
+<p>Note that the DN will be overriden by the OSG PKI except for the CN component.</p>
+<p>Submitting the request:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n <span class="s2">&quot;Your Name&quot;</span> -p <span class="m">9999999999</span> -y <span class="s2">&quot;xyz@domain.com,abc@domain.com&quot;</span> -m <span class="s2">&quot;This is my comment&quot;</span> --csr csr.pem
+</pre></div>
+
+
+<h3 id="osg-cert-retrieve">osg-cert-retrieve</h3>
+<p>Retrieve a certificate (host or user) from OIM given a request Id. Typically you will run this script after submitting a request with <code>osg-cert-request</code> and receiving an email telling you your certificate has been approved.</p>
+<p>You can also use this script to retrieve other certificates that have been previously issued (assuming you know their request ID number).</p>
+<p>Since certificates are public, no authentication of the user is required.</p>
+<p>This script:</p>
+<ul>
+<li>Accepts a request Id from the user</li>
+<li>Connects to OIM and requests the certificate identified by the request ID</li>
+<li>Writes the certificate to disk (as specified by the user)</li>
+</ul>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li>Request ID</li>
+<li>Filename to store certificate (optional: default is <code>./hostcert.pem</code>).</li>
+</ul>
+<p><strong>Outputs:</strong></p>
+<ul>
+<li>Host certificate as PEM, to filename specified or <code>./hostcert.pem</code>.</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-retrieve --help
+<span class="go">Usage: osg-cert-retrieve [options] &lt;Request ID&gt;</span>
+<span class="go">Usage: osg-cert-retrieve -h/--help [for detailed explanations of options]</span>
+
+<span class="go">Options:</span>
+<span class="go">  -h, --help            show this help message and exit</span>
+<span class="go">  -o ID, --certfile=ID  Specify the output filename for the retrieved user</span>
+<span class="go">                        certificate . Default is ./hostcert.pem</span>
+<span class="go">  -T, --test            Run in test mode</span>
+<span class="go">  -t TIMEOUT, --timeout=TIMEOUT</span>
+<span class="go">                        Specify the timeout in minutes</span>
+<span class="go">  -q, --quiet           don&#39;t print status messages to stdout</span>
+<span class="go">  -d WRITE_DIRECTORY, --directory=WRITE_DIRECTORY</span>
+<span class="go">                        Write the output files to this directory</span>
+<span class="go">  -V, --version         Print version information and exit</span>
+<span class="go">  -i, --id              Specify ID# of certificate to be retrieved</span>
+<span class="go">                        [deprecated]</span>
+</pre></div>
+
+
+<p>Example:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-retrieve -i <span class="m">555</span>
+</pre></div>
+
+
+<h3 id="osg-gridadmin-cert-request">osg-gridadmin-cert-request</h3>
+<p>Request and retrieve multliple host certificates from OIM. Authenticates to OIM and is only for use by Grid Admins for certificates they are authorized to approve. This script is only supported with all hosts being in the same domain (so we ensure they go to the same Grid Admin). The certificates are stored with the format of <code>hostname-requestid.pem</code> (i.e. the id generated from the request for the certificate). The key is stored as <code>hostname-serial-key.pem</code>.</p>
+<p>This script does the following in the process of acquiring certificates for the hostnames specified:</p>
+<ul>
+<li>Reads a list of fully-qualified hostnames from a file specified by the user.</li>
+<li>For each hostname:<ul>
+<li>Generates a new private key and CSR.</li>
+<li>Only important part of CSR is <code>CN=&lt;HOSTNAME&gt;</code> component.</li>
+<li>Writes the private key to a file with filename: <code>&lt;PREFIX&gt;/&lt;HOSTNAME&gt;-key.pem</code>.</li>
+<li>Prompts the user for their private key pass phrase (the pass phrase is cached so user is not re-prompted).</li>
+<li>Authenticates to OIM and posts the CSRs as a single request to OIM.</li>
+<li>Request ID is returned and subsequently used.</li>
+<li>Authenticates to OIM and approves the request.</li>
+<li>Waits one minute for request to be processed by OIM.</li>
+<li>Connects to OIM and attempts to retrieve certificates.</li>
+<li>Writes out any certificates it retrieves with filename of <code>&lt;PREFIX&gt;/&lt;HOSTNAME&gt;-&lt;ID&gt;.pem</code>.</li>
+<li>If all certificates have been retrieved, exits loop.</li>
+<li>Wait 5 seconds and proceeds with the next repeat.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li>filename of list of hostnames.</li>
+<li>prefix path in which to write private keys and certificates (default: <code>.</code>.)</li>
+<li>path to user's certificate (optional: default is path specified by <code>$X509_USER_CERT</code> environment variable, then <code>~/.globus/usercert.pem</code>).</li>
+<li>path to user's private key (optional, default is path specified by <code>$X509_USER_KEY</code> environment variable, then <code>~/.globus/userkey.pem</code>).</li>
+<li>Passphrase for user's private key via non-echoing prompt.</li>
+</ul>
+<p><strong>Outputs:</strong></p>
+<ul>
+<li><code>N</code> host certificates in PEM format.</li>
+<li><code>N</code> private keys in PEM format.</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-gridadmin-cert-request --help
+<span class="go">Usage: osg-gridadmin-cert-request [options] arg</span>
+<span class="go">Usage: osg-gridadmin-cert-request -h/--help [for detailed explanations of options]</span>
+
+<span class="go">Options:</span>
+<span class="go">  -h, --help            show this help message and exit</span>
+<span class="go">  -k PKEY, --pkey=PKEY  Specify Requestor&#39;s private key (PEM Format). If not</span>
+<span class="go">                        specifiedwill take the value of X509_USER_KEY or</span>
+<span class="gp">                        $</span>HOME/.globus/userkey.pem
+<span class="go">  -c CERT, --cert=CERT  Specify Requestor&#39;s certificate (PEM Format). If not</span>
+<span class="go">                        specified, will take the value of X509_USER_CERT or</span>
+<span class="gp">                        $</span>HOME/.globus/usercert.pem
+<span class="go">  -a HOSTNAME, --altname=HOSTNAME</span>
+<span class="go">                        Specify an alternative hostname for CSR (FQDN). May be</span>
+<span class="go">                        used more than once and if specified, -f/--hostfile</span>
+<span class="go">                        will be ignored</span>
+<span class="go">  -v VO name, --vo=VO name</span>
+<span class="go">                        Specify the VO for the host request</span>
+<span class="go">  -y CC List, --cc=CC List</span>
+<span class="go">                        Specify the CC list(the email id&#39;s to be</span>
+<span class="go">                        CCed).Separate values by &#39;,&#39;</span>
+<span class="go">  -T, --test            Run in test mode</span>
+<span class="go">  -t TIMEOUT, --timeout=TIMEOUT</span>
+<span class="go">                        Specify the timeout in minutes</span>
+<span class="go">  -q, --quiet           don&#39;t print status messages to stdout</span>
+<span class="go">  -d WRITE_DIRECTORY, --directory=WRITE_DIRECTORY</span>
+<span class="go">                        Write the output files to this directory</span>
+<span class="go">  -V, --version         Print version information and exit</span>
+
+<span class="go">  Hostname Options:</span>
+<span class="go">    Use either of these options. Specify hostname as a single hostname</span>
+<span class="go">    using -H/--hostname or specify from a file using -f/--hostfile.</span>
+
+<span class="go">    -H HOSTNAME, --hostname=HOSTNAME</span>
+<span class="go">                        Specify the hostname or service/hostname for which you</span>
+<span class="go">                        want to request the certificate for. If specified,</span>
+<span class="go">                        -f/--hostfile will be ignored</span>
+<span class="go">    -f HOSTFILE, --hostfile=HOSTFILE</span>
+<span class="go">                        Filename with one host (hostname or service/hostname</span>
+<span class="go">                        and its optional,alternative hostnames, separated by</span>
+<span class="go">                        spaces) per line</span>
+</pre></div>
+
+
+<p>Examples:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-gridadmin-cert-request -f filename -k privatekeyfile -c certificatefile
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-gridadmin-cert-request -H hostname.domain.com -k privatekeyfile -c certificatefile
+</pre></div>
+
+
+<h3 id="osg-user-cert-renew">osg-user-cert-renew</h3>
+<p>Sends a request for renewing a user certificate and if the certificate can be renewed, fetches and writes the renewed certificate.</p>
+<p>The script generates request for renewing user certificate to the OIM, and if the certificate is renewed, it fetches the renewed user certificate. The user is authenticated before making such a request. If the user certificate is renewed, the user gets email notification regarding the same and the renewed certificate is saved by the name of the existing certificate suffixed by <code>-renewed.pem</code> (e.g. when we renew <code>my-cert.pem</code>, the renewed certificate is named <code>my-cert-renewed.pem</code>).</p>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li>path to user's certificate (optional: default is path specified by <code>$X509_USER_CERT</code> environment variable, then <code>~/.globus/usercert.pem</code>).</li>
+<li>path to user's private key (optional: default is path specified by <code>$X509_USER_KEY</code> environment variable, then <code>~/.globus/userkey.pem</code>).</li>
+<li>Passphrase for user's private key via non-echoing prompt.</li>
+<li>User needs to provide VO name if the requested hostname has multiple VO's assigned</li>
+</ul>
+<p><strong>Outputs:</strong></p>
+<ul>
+<li>On Renewal, the renewed certificate is stored with the filename of the older user certificate suffixed with <code>-renewed.pem</code>.  The certificate name for renewed certificate is sent to <code>stdout</code>.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the retrieval of user certificate fails for some reason, the user can download the renewed certificate from OIM web interface using the following URL (where <code>&lt;REQID&gt;</code> is the request ID number for the user certificate on OIM):</p>
+<div class="codehilite"><pre><span></span>https://oim.opensciencegrid.org/oim/certificateuser?id=&lt;REQID&gt;
+</pre></div>
+
+
+</div>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-user-cert-renew --help
+<span class="go">Usage: osg-user-cert-renew [options]</span>
+
+<span class="go">Options:</span>
+<span class="go">  -h, --help            show this help message and exit</span>
+<span class="go">  -k PKEY, --pkey=PKEY  Specify Requestor&#39;s private key (PEM Format). If not</span>
+<span class="go">                        specified  will take the value of X509_USER_KEY or</span>
+<span class="gp">                        $</span>HOME/.globus/userkey.pem
+<span class="go">  -c CERT, --cert=CERT  Specify Requestor&#39;s certificate (PEM Format).  If not</span>
+<span class="go">                        specified will take the value of X509_USER_CERT or</span>
+<span class="gp">                        $</span>HOME/.globus/usercert.pem
+<span class="go">  -T, --test            Run in test mode</span>
+<span class="go">  -t TIMEOUT, --timeout=TIMEOUT</span>
+<span class="go">                        Specify the timeout in minutes</span>
+<span class="go">  -d WRITE_DIRECTORY, --directory=WRITE_DIRECTORY</span>
+<span class="go">                        Write the output files to this directory</span>
+<span class="go">  -q, --quiet           don&#39;t print status messages to stdout</span>
+<span class="go">  -V, --version         Print version information and exit</span>
+</pre></div>
+
+
+<p><strong>Example</strong></p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-user-cert-renew -k userkey.pem -c usercert.pem
+</pre></div>
+
+
+<h3 id="osg-user-cert-revoke">osg-user-cert-revoke</h3>
+<p>Revoke a user certificate from OIM given a request ID or certificate ID. Usually the script is run when a user wants to revoke user certificate.</p>
+<p>For revoking user certificate, user authentication is done and if the user is authorized to revoke the user certificate, the certificate is immediately revoked and an email notification is sent informing the user that the user certificate is revoked.</p>
+<p><strong>The script:</strong></p>
+<ul>
+<li>Accepts a Request ID or Certificate ID from the user.</li>
+<li>Authenticates user and connects to OIM to revoke the user certificate identified by the request ID or the certificate ID.</li>
+</ul>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li>Private key for the user requesting host certificate revocation.</li>
+<li>User certificate for the user requesting host certificate revocation.</li>
+<li>Message for requesting the user certificate revocation.</li>
+<li>Request ID OR the certificate ID for the user certificate to be revoked.</li>
+</ul>
+<p><strong>Outputs:</strong></p>
+<ul>
+<li>Message if the revocation was successful along with the host cert request ID/certificate ID on <code>stdout</code>.</li>
+<li>Error message if the revocation was unsuccessful on <code>stdout</code>.</li>
+</ul>
+<p>If the user's private key and certificate are not provided, the script takes the private key and user certificate from the <code>~/.globus</code> folder using the default names (<code>userkey.pem</code> and <code>usercert.pem</code>, respectively)</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-user-cert-revoke --help
+<span class="go">Usage: osg-user-cert-revoke [options] &lt;Request ID&gt; &lt;message&gt;</span>
+<span class="go">Usage: osg-user-cert-revoke -h/--help [for detailed explanations of options]</span>
+
+<span class="go">Options:</span>
+<span class="go">  -h, --help            show this help message and exit</span>
+<span class="go">  -n, --certid          Treat the ID argument as the serial ID# for the</span>
+<span class="go">                        certificate to be revoked</span>
+<span class="go">  -u, --user            Certificate to be revoked is a user certificate.</span>
+<span class="go">                        Redundant when using `osg-user-cert-revoke`.</span>
+<span class="go">  -k PKEY, --pkey=PKEY  Specify Requestor&#39;s private key (PEM Format). If not</span>
+<span class="go">                        specified, this takes the value of X509_USER_KEY or</span>
+<span class="gp">                        $</span>HOME/.globus/userkey.pem
+<span class="go">  -c CERT, --cert=CERT  Specify Requestor&#39;s certificate (PEM Format). If not</span>
+<span class="go">                        specified, this takes the value of X509_USER_CERT or</span>
+<span class="gp">                        $</span>HOME/.globus/usercert.pem
+<span class="go">  -T, --test            Run in test mode</span>
+<span class="go">  -t TIMEOUT, --timeout=TIMEOUT</span>
+<span class="go">                        Specify the timeout in minutes</span>
+<span class="go">  -q, --quiet           don&#39;t print status messages to stdout</span>
+<span class="go">  -V, --version         Print version information and exit</span>
+<span class="go">  -m REASON, --message=REASON</span>
+<span class="go">                        Specify the reason for certificate revocation</span>
+<span class="go">                        [deprecated]</span>
+<span class="go">  -i, --id              Specify ID# of certificate to be retrieved</span>
+<span class="go">                        [deprecated]</span>
+</pre></div>
+
+
+<p><strong>Example:</strong></p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-user-cert-revoke -i <span class="m">999</span> -m <span class="s2">&quot;Testing user cert revocation&quot;</span> -k privatekeyfile -c usercertfile
+</pre></div>
+
+
+<h3 id="osg-cert-revoke">osg-cert-revoke</h3>
+<p>Revoke a host certificate from OIM given a request ID. Usually the script is run when a user wants to revoke host/service certificate.</p>
+<p>For revoking host certificate, user authentication is done and if the user is authorized to revoke the host certificate, the certificate is immediately revoked and an email notification is sent informing the user that the host certificate is revoked.</p>
+<p><strong>The script:</strong></p>
+<ul>
+<li>Accepts a request ID from the user.</li>
+<li>Authenticates user and connects to OIM to revoke the host certificate identified by the request ID.</li>
+</ul>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li>Private key for the user requesting host certificate revocation.</li>
+<li>certificate for the user requesting host certificate revocation.</li>
+<li>Message for requesting the host certificate revocation.</li>
+<li>Request ID for the host certificate to be revoked.</li>
+</ul>
+<p><strong>Outputs:</strong></p>
+<ul>
+<li>Message if the revocation was successful along with the host cert request ID on <code>stdout</code>.</li>
+<li>Error message if the revocation was unsuccessful on <code>stdout</code>.</li>
+</ul>
+<p>If the user's private key and certificate are not provided, the script takes the private key and user certificate from the <code>~/.globus</code> folder using the default names (<code>userkey.pem</code> and <code>usercert.pem</code>, respectively).</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-user-cert-revoke --help
+<span class="go">Usage: osg-cert-revoke [options] &lt;Request ID&gt; &lt;message&gt;</span>
+<span class="go">Usage: osg-cert-revoke -h/--help [for detailed explanations of options]</span>
+
+<span class="go">Options:</span>
+<span class="go">  -h, --help            show this help message and exit</span>
+<span class="go">  -n, --certid          Treat the ID argument as the serial ID# for the</span>
+<span class="go">                        certificate to be revoked</span>
+<span class="go">  -u, --user            Certificate to be revoked is a user certificate.</span>
+<span class="go">                        Redundant when using `osg-user-cert-revoke`.</span>
+<span class="go">  -k PKEY, --pkey=PKEY  Specify Requestor&#39;s private key (PEM Format). If not</span>
+<span class="go">                        specified, this takes the value of X509_USER_KEY or</span>
+<span class="gp">                        $</span>HOME/.globus/userkey.pem
+<span class="go">  -c CERT, --cert=CERT  Specify Requestor&#39;s certificate (PEM Format). If not</span>
+<span class="go">                        specified, this takes the value of X509_USER_CERT or</span>
+<span class="gp">                        $</span>HOME/.globus/usercert.pem
+<span class="go">  -T, --test            Run in test mode</span>
+<span class="go">  -t TIMEOUT, --timeout=TIMEOUT</span>
+<span class="go">                        Specify the timeout in minutes</span>
+<span class="go">  -q, --quiet           don&#39;t print status messages to stdout</span>
+<span class="go">  -V, --version         Print version information and exit</span>
+<span class="go">  -m REASON, --message=REASON</span>
+<span class="go">                        Specify the reason for certificate revocation</span>
+<span class="go">                        [deprecated]</span>
+<span class="go">  -i, --id              Specify ID# of certificate to be retrieved</span>
+<span class="go">                        [deprecated]</span>
+</pre></div>
+
+
+<p><strong>Example:</strong></p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-revoke -i <span class="m">999</span> -m <span class="s2">&quot;Testing host cert revocation&quot;</span> -k privatekeyfile -c usercertfile
+</pre></div>
+
+
+<h2 id="test-mode">Test Mode</h2>
+<p>The scripts have two modes of execution.</p>
+<p>In the normal mode of execution, the script connects to the production server and generated certificates are from default OSG CA.</p>
+<p>If the user provides a <code>-T</code> parameter on the command-line, the scripts connect to the OIM-ITB server and any generated certificates are issued by the OSG test CAs. This mode is intended for testing and training. The resulting certificates are not usable in a production environment.</p>
+<h2 id="current-limitations-and-bugs">Current Limitations and Bugs</h2>
+<ul>
+<li>Note that Common Names (CNs) are limited to 64 characters. This is a limitation of OpenSSL and the PKI standard. For details see <a href="https://jira.opensciencegrid.org/browse/OSGPKI-252">OSGPKI-252</a>.</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../client/using-wn/" class="btn btn-neutral float-right" title="Worker Node Environment">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../release/supported_platforms/" class="btn btn-neutral" title="Supported Platforms"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../release/supported_platforms/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../client/using-wn/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
