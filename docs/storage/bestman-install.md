@@ -305,7 +305,7 @@ Starting Services
         :::console
         [root@client ~] # chkconfig bestman2 on
 
-4. Gratia transfer and storage probes
+4. Gratia transfer probe:
 
         :::console
         [root@client ~] # service gratia-gridftp-transfer start
@@ -319,15 +319,15 @@ Stopping Services
 
         :::console
         [root@client ~] # /usr/sbin/fetch-crl   # This fetches the CRLs
-        [root@client ~] # /sbin/service fetch-crl-boot start
-        [root@client ~] # /sbin/service fetch-crl-cron start
+        [root@client ~] # /sbin/service fetch-crl-boot stop
+        [root@client ~] # /sbin/service fetch-crl-cron stop
 
     For RHEL 7:
 
         :::console
         [root@client ~] # /usr/sbin/fetch-crl   # This fetches the CRLs
-        [root@client ~] # systemctl start fetch-crl-boot
-        [root@client ~] # systemctl start fetch-crl-cron
+        [root@client ~] # systemctl stop fetch-crl-boot
+        [root@client ~] # systemctl stop fetch-crl-cron
 
 2. GridFTP
 
@@ -339,10 +339,10 @@ Stopping Services
         :::console
         [root@client ~] # service bestman2 stop
 
-4. Gratia transfer and storage probes
+4. Gratia transfer probe
 
         :::console
-        [root@client ~] # service gratia-gridftp-transfer start
+        [root@client ~] # service gratia-gridftp-transfer stop
 
 
 Validation of Service Operation
@@ -357,18 +357,6 @@ You can also self-test to verify your installation with an SRM client such as `g
 
 Troubleshooting
 ===============
-
-Useful Configuration and Log Files
-----------------------------------
-
-| Service/Process | Configuration File               | Description                                                                                     |
-|:----------------|:---------------------------------|:------------------------------------------------------------------------------------------------|
-| BeStMan2        | `/etc/bestman2/conf/bestman2.rc` | Main Configuration file                                                                         |
-|                 | `/etc/sysconfig/bestman2`        | Environment variables used by BeStMan2                                                          |
-|                 | `/etc/sysconfig/bestman2lib`     | Environment variables that store values of various client and server libraries used by BeStMan2 |
-|                 | `/etc/bestman2/conf/*`           | Other runtime configuration files                                                               |
-|                 | `/etc/init.d/bestman2`           | init.d startup script                                                                           |
-|                 | `/etc/gridftp.conf`              | Startup parameters                                                                              |
 
 | Service/Process | Log File                          | Description                                   |
 |:----------------|:----------------------------------|:----------------------------------------------|
@@ -425,18 +413,26 @@ If `bestman2` is not running, check information in the log file **`/var/log/best
 Useful Configuration and Log Files
 ==================================
 
-| Service/Process | Configuration File                               | Description                        |
-|:----------------|:-------------------------------------------------|:-----------------------------------|
-| BeStMan2        | `/etc/bestman2/conf/bestman2.rc`                 | Main BeStMan2 configuration file   |
-| GridFTP         | `/etc/sysconfig/globus-gridftp-server`           | Environment variables for GridFTP  |
-| Gratia Probe    | `/etc/gratia/gridftp-transfer/ProbeConfig`       | GridFTP Gratia Probe configuration |
-| Gratia Probe    | `/etc/cron.d/gratia-probe-gridftp-transfer.cron` | Cron tab file                      |
+| Service/Process | Configuration File                               | Description                                                                                     |
+|:----------------|:-------------------------------------------------|:------------------------------------------------------------------------------------------------|
+| BeStMan2        | `/etc/bestman2/conf/bestman2.rc`                 | Main BeStMan2 configuration file                                                                |
+|                 | `/etc/sysconfig/bestman2`                        | Environment variables used by BeStMan2                                                          |
+|                 | `/etc/sysconfig/bestman2lib`                     | Environment variables that store values of various client and server libraries used by BeStMan2 |
+|                 | `/etc/bestman2/conf/*`                           | Other runtime configuration files                                                               |
+|                 | `/etc/init.d/bestman2`                           | init.d startup script                                                                           |
+|                 | `/etc/gridftp.conf`                              | Startup parameters                                                                              |
+| GridFTP         | `/etc/sysconfig/globus-gridftp-server`           | Environment variables for GridFTP                                                               |
+| Gratia Probe    | `/etc/gratia/gridftp-transfer/ProbeConfig`       | GridFTP Gratia Probe configuration                                                              |
+|                 | `/etc/cron.d/gratia-probe-gridftp-transfer.cron` | Cron tab file                                                                                   |
 
-| Service/Process | Log File                         | Description               |
-|:----------------|:---------------------------------|:--------------------------|
-| BeStMan2        | `/var/log/bestman2/bestman2.log` | BeStMan2 container log    |
-| GridFTP         | `/var/log/gridftp-auth.log`      | GridFTP authorization log |
-| Gratia probe    | `/var/log/gratia`                |                           |
+| Service/Process | Log File                          | Description                                   |
+|:----------------|:----------------------------------|:----------------------------------------------|
+| BeStMan2        | `/var/log/bestman2/bestman2.log`  | BeStMan2 container log                        |
+|                 | `/var/log/bestman2/event.srm.log` | Records all SRM transactions                  |
+| GridFTP         | `/var/log/gridftp.log`            | Transfer log                                  |
+|                 | `/var/log/gridftp-auth.log`       | GridFTP authorization log                     |
+|                 | `/var/log/messages`               | Main system log (look here for LCMAPS errors) |
+| Gratia probe    | `/var/log/gratia`                 |                                               |
 
 Upgrading BeStMan
 =================
