@@ -191,7 +191,7 @@ This script does the following in the process of acquiring certificates for the 
 
 -   Reads a list of fully-qualified hostnames from a file specified by the user.
 -   For each hostname:
-    -   Generates a new private key and `CSR`.
+    -   Generates a new private key and CSR.
     -   Only important part of CSR is `CN=<HOSTNAME>` component.
     -   Writes the private key to a file with filename: `<PREFIX>/<HOSTNAME>-key.pem`.
     -   Prompts the user for their private key pass phrase (the pass phrase is cached so user is not re-prompted).
