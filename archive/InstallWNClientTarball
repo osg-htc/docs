@@ -1,0 +1,123 @@
+---+ Installing and Using the Worker Node Client from Tarballs (Anywhere by Anyone)
+%TOC{depth="3"}%
+
+---++ Introduction
+This document is intended to guide system administrators through the process of installing the worker node software and configuring the installed worker node software. Contents of the WN Client can be found [[InstallWNClient#4_Contents_of_the_worker_node][here]].
+
+If you are installing the OSG WN Client following these instruction, then remember to configure the =grid_dir= option on your CE - see [[#ConfigureTheCE][below]].
+
+---++ About This Guide
+
+The _OSG Worker Node Client_ is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use. See the [[#ReferenceSection][reference section]] below for contents of the Worker Node Client.
+
+It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:
+
+   * Install using a tarball (this guide) - useful when installing onto a shared filesystem for distribution to worker nodes
+   * [[InstallWNClient][Install using RPMs and Yum]] - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs
+   * [[UsingOSGWnClientFromOASIS][Use from OASIS]] - useful when worker nodes already mount [[NavTechOASIS][OASIS]] on your worker nodes
+
+This document is intended to guide system administrators through the process of configuring a site to make the Worker Node Client software available from a tarball.
+
+---++ Before Starting
+
+As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
+
+   * Ensure the host has [[SupportedOperatingSystems][a supported operating system]]
+
+---++ Download, Installation and Configuration Procedure
+
+---+++ Download the WN Client
+Please pick the =osg-wn-client= tarball that is appropriate for your distribution and architecture.
+You will find them in [[http://repo.grid.iu.edu/tarball-install/]] .
+
+The latest available the tarballs for OSG 3.3 are:
+   * [[http://repo.grid.iu.edu/tarball-install/3.3/osg-wn-client-latest.el6.i386.tar.gz][Worker-node-client for 32-bit RHEL6]]
+   * [[http://repo.grid.iu.edu/tarball-install/3.3/osg-wn-client-latest.el6.x86_64.tar.gz][Worker-node-client for 64-bit RHEL6]]
+   * [[http://repo.grid.iu.edu/tarball-install/3.3/osg-wn-client-latest.el7.x86_64.tar.gz][Worker-node-client for RHEL7]]
+
+---+++ Install the WN Client
+
+   1. Unpack the tarball.
+   1. Move the directory that was created to where you want the tarball WN client to be.
+   1. Run =osg-post-install= (==%RED%/path/to/client/%ENDCOLOR%osg/osg-post-install==) to fix the directories in the installation.<br/> \
+      Note that after this, you will not be able to relocate the install again.
+   1. Source the setup ==source %RED%/path/to/client/%ENDCOLOR%setup.sh== (or ==setup.csh== depending on the shell)
+   1. Download and set up CA certificiates using ==osg-ca-manage== (See OsgCaManage for the available options)
+   1. Download !CRLs using ==fetch-crl==
+
+Example install (in =$HOME/test-install=, the ==%RED%/path/to/client/%ENDCOLOR%== is =$HOME/test-install/osg-wn-client= ):
+
+<pre class='screen'>
+%UCL_PROMPT% mkdir $HOME/test-install
+%UCL_PROMPT% cd $HOME/test-install
+%UCL_PROMPT% wget http://repo.grid.iu.edu/tarball-install/3.3/osg-wn-client-latest.el6.x86_64.tar.gz
+%UCL_PROMPT% tar xzf osg-wn-client-latest.el6.x86_64.tar.gz
+%UCL_PROMPT% cd osg-wn-client
+%UCL_PROMPT% osg/osg-post-install
+%UCL_PROMPT% . setup.sh
+%UCL_PROMPT% osg-ca-manage setupCA --url osg
+%UCL_PROMPT% fetch-crl
+</pre>
+
+%NOTE% Unpacking the tarball creates an =osg-wn-client= subdirectory
+
+#ConfigureTheCE
+---++++ Configuring the CE for WN Client tarballs
+Using the wn-client software installed from the tarball will require a few changes on the compute element so that the resource's configuration can be correctly reported.
+
+Set =grid_dir= in the =Storage= section of your OSG-Configure configs: [[IniConfigurationOptions#Storage][CE configuration instructions]]. =grid_dir= is used as the =$OSG_GRID= environment variable in running jobs - see [[EnvironmentVariables]]. Pilot jobs source =$OSG_GRID/setup.sh= before performing any work.
+The value set for =grid_dir= must be the path of the wn-client installation directory. This is the path returned by ==echo $OSG_LOCATION== once you source the setup file created by this installation.
+
+---++ Services
+The WN client is a collection of client programs that do not require service startup or shutdown. 
+The only services are =osg-update-certs= that keeps the CA certificates up-to-date and fetch-crl that keeps the CRLs up-to-date.
+Following the instructions below you'll add the services to your crontab that will take care to run them periodically until you remove them.
+
+---+++ Auto-updating certificates and CRLs
+
+You must create cron jobs to run =fetch-crl= and =osg-update-certs= to update your !CRLs and certificates automatically.
+
+Here is what they should look like. (Note: fill in %RED%&lt;OSG_LOCATION&gt;%ENDCOLOR% with the full path of your tarball install, including =osg-wn-client= that is created by the tarball).
+
+<pre class='file'>
+# Cron job to update certs.
+# Runs every hour by default, though does not update certs until they're at
+# least 24 hours old.  There is a random sleep time for up to 45 minutes (2700
+# seconds) to avoid overloading cert servers.
+10 * * * *   ( . %RED%&lt;OSG_LOCATION&gt;%ENDCOLOR%/setup.sh &amp;&amp; osg-update-certs --random-sleep 2700 --called-from-cron )
+</pre>
+
+<pre class='file'>
+# Cron job to update CRLs
+# Runs every 6 hours at, 45 minutes +/- 3 minutes.
+42 */6 * * *   ( . %RED%&lt;OSG_LOCATION&gt;%ENDCOLOR%/setup.sh &amp;&amp; fetch-crl -q -r 360 )
+</pre>
+
+You might want to configure proxy settings in =$OSG_LOCATION/etc/fetch-crl.conf=.
+
+---+++ Starting and Enabling Services
+To start the services you must edit your cron with ==crontab -e== and add the lines above.
+
+---+++ Stopping and Disabling Services
+To stop the services you must edit your cron with ==crontab -e== and remove or comment the lines above.
+
+---++ Validing the Worker Node Client
+
+To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.
+
+   1. Submit a job that executes the =env= command (e.g. Run [[TroubleshootingHTCondorCE#condor_ce_trace][condor_ce_trace]] with the =-d= flag from your HTCondor CE)
+   1. Verify that the value of =$OSG_GRID= is set to the directory of your WN Client installation
+
+---++ How to get Help?
+To get assistance please use this [[HelpProcedure][Help Procedure]].
+
+
+#ReferenceSection
+---++ Reference
+
+Please see the documentation on using [[Documentation/Release3.YumRpmBasics][yum and RPM]], [[Documentation/Release3.InstallBestPractices][the best practices]] for using yum to install software, and using [[Documentation/Release3.YumRepositories][yum repositories]].
+
+#WnContents
+---+++ Worker node contents
+%INCLUDE{"Documentation/Release3/InstallWNClient" section="WnContents"}%
+

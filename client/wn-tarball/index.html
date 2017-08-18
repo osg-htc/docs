@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Worker Node (tarball install) - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Worker Node (tarball install)";
+    var mkdocs_page_input_path = "client/wn-tarball.md";
+    var mkdocs_page_url = "/client/wn-tarball/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/yum/">Yum Repos</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/HTCondor_CE/">HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../frontier-squid/squid/">HTTP Cache</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../wn/">Worker Node (RPM install)</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Worker Node (tarball install)</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#installing-and-using-the-worker-node-client-from-tarballs">Installing and Using the Worker Node Client from Tarballs</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#introduction">Introduction</a></li>
+        
+            <li><a class="toctree-l4" href="#about-this-guide">About This Guide</a></li>
+        
+            <li><a class="toctree-l4" href="#download-installation-and-configuration">Download, Installation and Configuration</a></li>
+        
+            <li><a class="toctree-l4" href="#services">Services</a></li>
+        
+            <li><a class="toctree-l4" href="#validing-the-worker-node-client">Validing the Worker Node Client</a></li>
+        
+            <li><a class="toctree-l4" href="#how-to-get-help">How to get Help?</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Usage Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../using-wn/">Worker Node Environment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">In-Progress Docs</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca_updater/">CA Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/cert_scripts/">Certificate Request Scripts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job_router/">Job Router Recipe</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../wn_oasis/">OASIS-based Worker Node</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../storage/gridftp/">GridFTP Server</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deprecated Software</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../storage/bestman-overview/">BeStMan Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../storage/bestman-install/">BeStMan Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../glexec/">Worker node glexec</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Install Guides &raquo;</li>
+        
+      
+    
+    <li>Worker Node (tarball install)</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/client/wn-tarball.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="installing-and-using-the-worker-node-client-from-tarballs">Installing and Using the Worker Node Client from Tarballs</h1>
+<h2 id="introduction">Introduction</h2>
+<p>This document is intended to guide users through the process of installing the worker node software and configuring the installed worker node software. Contents of the worker node client can be found <a href="../wn/#worker-node-contents">here</a>.  Although this document is oriented to system administrators, any unprivileged user may install and use the client.</p>
+<p>If you are installing the OSG worker node client following these instruction, remember to configure the <code>grid_dir</code> option on your CE - see <a href="#configure-the-ce">below</a>.</p>
+<h2 id="about-this-guide">About This Guide</h2>
+<p>The <em>OSG Worker Node Client</em> is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use.</p>
+<p>It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:  This guide is useful when installing onto a shared filesystem for distribution to worker nodes.  Other options include installing <a href="../wn/">via RPMs</a> or providing the client <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/UsingOSGWnClientFromOASIS">via OASIS (CVMFS)</a>.</p>
+<p>Before starting, ensure the host has <a href="../../release/supported_platforms/">a supported operating system</a>.</p>
+<h2 id="download-installation-and-configuration">Download, Installation and Configuration</h2>
+<h3 id="download-the-wn-client">Download the WN Client</h3>
+<p>Please pick the <code>osg-wn-client</code> tarball that is appropriate for your distribution and architecture. You will find them in <a href="https://repo.grid.iu.edu/tarball-install/">https://repo.grid.iu.edu/tarball-install/</a> .</p>
+<p>The latest available the tarballs for OSG 3.3 are:</p>
+<ul>
+<li><a href="https://repo.grid.iu.edu/tarball-install/3.3/osg-wn-client-latest.el6.i386.tar.gz">Binaries for 32-bit RHEL6</a></li>
+<li><a href="https://repo.grid.iu.edu/tarball-install/3.3/osg-wn-client-latest.el6.x86_64.tar.gz">Binaries for 64-bit RHEL6</a></li>
+<li><a href="https://repo.grid.iu.edu/tarball-install/3.3/osg-wn-client-latest.el7.x86_64.tar.gz">Binaries for RHEL7</a></li>
+</ul>
+<p>For OSG 3.4:</p>
+<ul>
+<li><a href="https://repo.grid.iu.edu/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz">Binaries for 64-bit RHEL6</a></li>
+<li><a href="https://repo.grid.iu.edu/tarball-install/3.4/osg-wn-client-latest.el7.x86_64.tar.gz">Binaries for RHEL7</a></li>
+</ul>
+<h3 id="install-the-wn-client">Install the WN Client</h3>
+<ol>
+<li>Unpack the tarball.</li>
+<li>Move the directory that was created to where you want the tarball client to be.</li>
+<li>Run <code>osg-post-install</code> (<strong><code>&lt;PATH_TO_CLIENT&gt;/osg/osg-post-install</code></strong>) to fix the directories in the installation.</li>
+<li>Source the setup <strong><code>source &lt;PATH_TO_CLIENT&gt;/setup.sh</code></strong> (or <strong><code>setup.csh</code></strong> depending on the shell).</li>
+<li>Download and set up CA certificiates using <strong><code>osg-ca-manage</code></strong> (See the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaManage">CA management documentation</a> for the available options).</li>
+<li>Download CRLs using <strong><code>fetch-crl</code></strong>.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Once <code>osg-post-install</code> is run to relocate the install, it cannot be run again.  You will need to unpack a fresh copy.</p>
+</div>
+<p>Example installation (in <code>/home/user/test-install</code>, the <strong><code>&lt;PATH_TO_CLIENT&gt;/</code></strong> is <code>/home/user/test-install/osg-wn-client</code> ):</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> mkdir /home/user/test-install
+<span class="gp">[root@client ~] #</span> <span class="nb">cd</span> /home/user/test-install
+<span class="gp">[root@client ~] #</span> wget http://repo.grid.iu.edu/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz
+<span class="gp">[root@client ~] #</span> tar xzf osg-wn-client-latest.el6.x86_64.tar.gz
+<span class="gp">[root@client ~] #</span> <span class="nb">cd</span> osg-wn-client
+<span class="gp">[root@client ~] #</span> ./osg/osg-post-install
+<span class="gp">[root@client ~] #</span> <span class="nb">source</span> setup.sh
+<span class="gp">[root@client ~] #</span> osg-ca-manage setupCA --url osg
+<span class="gp">[root@client ~] #</span> fetch-crl
+</pre></div>
+
+
+<h4 id="configure-the-ce">Configure the CE</h4>
+<p>Using the wn-client software installed from the tarball will require a few changes on the compute element so that the resource's configuration can be correctly reported.</p>
+<p>Set <code>grid_dir</code> in the <code>Storage</code> section of your OSG-Configure configs: <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/IniConfigurationOptions#Storage">CE configuration instructions</a>. <code>grid_dir</code> is used as the <code>$OSG_GRID</code> environment variable in running jobs - see <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/EnvironmentVariables">the environment variables document</a>. Pilot jobs source <code>$OSG_GRID/setup.sh</code> before performing any work. The value set for <code>grid_dir</code> must be the path of the wn-client installation directory. This is the path returned by <strong><code>echo $OSG_LOCATION</code></strong> once you source the setup file created by this installation.</p>
+<h2 id="services">Services</h2>
+<p>The WN client is a collection of client programs that do not require service startup or shutdown. The only services are <code>osg-update-certs</code> that keeps the CA certificates up-to-date and <code>fetch-crl</code> that keeps the CRLs up-to-date. Following the instructions below you'll add the services to your crontab that will take care to run them periodically until you remove them.</p>
+<h3 id="auto-updating-certificates-and-crls">Auto-updating certificates and CRLs</h3>
+<p>You must create cron jobs to run <code>fetch-crl</code> and <code>osg-update-certs</code> to update your CRLs and certificates automatically.</p>
+<p>Here is what they should look like. (Note: fill in <code>&lt;OSG_LOCATION&gt;</code> with the full path of your tarball install, including <code>osg-wn-client</code> that is created by the tarball).</p>
+<div class="codehilite"><pre><span></span># Cron job to update certs.
+# Runs every hour by default, though does not update certs until they&#39;re at
+# least 24 hours old.  There is a random sleep time for up to 45 minutes (2700
+# seconds) to avoid overloading cert servers.
+10 * * * *   ( . &lt;OSG_LOCATION&gt;/setup.sh &amp;&amp; osg-update-certs --random-sleep 2700 --called-from-cron )
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span># Cron job to update CRLs
+# Runs every 6 hours at, 45 minutes +/- 3 minutes.
+42 */6 * * *   ( . &lt;OSG_LOCATION&gt;/setup.sh &amp;&amp; fetch-crl -q -r 360 )
+</pre></div>
+
+
+<p>You might want to configure proxy settings in <code>$OSG_LOCATION/etc/fetch-crl.conf</code>.</p>
+<h3 id="starting-and-enabling-services">Starting and Enabling Services</h3>
+<p>To start the services you must edit your cron with <strong><code>crontab -e</code></strong> and add the lines above.</p>
+<h3 id="stopping-and-disabling-services">Stopping and Disabling Services</h3>
+<p>To stop the services you must edit your cron with <strong><code>crontab -e</code></strong> and remove or comment the lines above.</p>
+<h2 id="validing-the-worker-node-client">Validing the Worker Node Client</h2>
+<p>To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.</p>
+<ol>
+<li>Submit a job that executes the <code>env</code> command (e.g. Run <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_ce_trace"><code>condor_ce_trace</code></a> with the <code>-d</code> flag from your HTCondor CE)</li>
+<li>Verify that the value of <code>$OSG_GRID</code> is set to the directory of your worker node client installation</li>
+</ol>
+<h2 id="how-to-get-help">How to get Help?</h2>
+<p>To get assistance please use this <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HelpProcedure">Help Procedure</a>.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../release/release_series/" class="btn btn-neutral float-right" title="OSG Release Series">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../wn/" class="btn btn-neutral" title="Worker Node (RPM install)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../wn/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../release/release_series/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
