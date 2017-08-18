@@ -32,6 +32,7 @@ pages:
   - 'GridFTP Server': 'storage/gridftp.md'
 - Deprecated Software:
   - 'BeStMan Overview': 'storage/bestman-overview.md'
+  - 'BeStMan Install': 'storage/bestman-install.md'
   - 'Worker node glexec': 'client/glexec.md'
 
 markdown_extensions:
