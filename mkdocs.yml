@@ -17,7 +17,6 @@ pages:
   - 'CVMFS': 'client/cvmfs.md'
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'RPM-based Worker Node': 'client/wn.md'
-  - 'Worker node glexec': 'client/glexec.md'
 - Release Information:
   - 'OSG Release Series': 'release/release_series.md'
   - 'RPM Signing': 'release/signing.md'
@@ -33,6 +32,7 @@ pages:
   - 'GridFTP Server': 'storage/gridftp.md'
 - Deprecated Software:
   - 'BeStMan Overview': 'storage/bestman-overview.md'
+  - 'Worker node glexec': 'client/glexec.md'
 
 markdown_extensions:
   - admonition
