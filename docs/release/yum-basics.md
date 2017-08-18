@@ -12,7 +12,7 @@ Installation
 
 Installation is done with the `yum install` command. Each of the individual installation guide shows you the correct command to use to do an installation. Here is an example installation with all of the output from yum.
 
-```bash
+```console
 [root@client ~] # sudo yum install osg-ca-certs
 Loaded plugins: kernel-module, priorities
 epel                                                                                         | 3.7 kB     00:00     
@@ -68,12 +68,12 @@ Installed:
 Complete!
 ```
 
-**Please Note**: When you first install a package from the OSG repository, you will be prompted to import the GPG key. We use this key to sign our RPMs as a security measure. You should double-check the key id (above it is 824B8603) with the [information on our signed RPMs](Documentation.Release3.SignedRPMS). If it doesn't match, there is a problem somewhere and you should report it to us if you don't understand it.
+**Please Note**: When you first install a package from the OSG repository, you will be prompted to import the GPG key. We use this key to sign our RPMs as a security measure. You should double-check the key id (above it is 824B8603) with the [information on our signed RPMs](signing.md). If it doesn't match, there is a problem somewhere and you should report it to the OSG via goc@opensciencegrid.org.
 
 Verifying Packages and Installations
 ------------------------------------
 
-You can check if an RPM has been modified. For instance, to check to see if any files have been modified in the `osg-ca-certs` RPM I just installed, I can do:
+You can check if an RPM has been modified. For instance, to check to see if any files have been modified in the `osg-ca-certs` RPM you just installed:
 
     :::console
     [user@client ~] $ rpm --verify osg-ca-certs
@@ -101,14 +101,14 @@ This means the files MD5 checksum has changed (so the contents have changed) and
 
 | Letter | Meaning                                           |
 |:-------|:--------------------------------------------------|
-| S      | file Size differs                                 |
-| M      | Mode differs (includes permissions and file type) |
-| 5      | MD5 sum differs                                   |
-| D      | Device major/minor number mismatch                |
-| L      | readLink(2) path mismatch                         |
-| U      | User ownership differs                            |
-| G      | Group ownership differs                           |
-| T      | mTime differs                                     |
+| `S`    | file Size differs                                 |
+| `M`    | Mode differs (includes permissions and file type) |
+| `5`    | MD5 sum differs                                   |
+| `D`    | Device major/minor number mismatch                |
+| `L`    | readLink(2) path mismatch                         |
+| `U`    | User ownership differs                            |
+| `G`    | Group ownership differs                           |
+| `T`    | mTime differs                                     |
 
 If you don't care about some of those changes, you can tell rpm to ignore them. For instance, to ignore changes in the modification time:
 
@@ -151,7 +151,7 @@ If you want to know what other things are in a package--perhaps the other availa
 What else does a package install?
 ---------------------------------
 
-Sometimes you need to understand what other software is installed by a package. This can be particularly useful for understanding *meta-packages*, which are packages such as the `osg-wn-client` (worker node client) that contain nothing by themselves but only depend on other RPMs. To do this, use the `--requires` option to rpm. For example, you can see that the worker node client (as of OSG 3.1.8 in early September, 2012) will install curl, uberftp, lcg-utils, and a dozen or so other packages.
+Sometimes you need to understand what other software is installed by a package. This can be particularly useful for understanding *meta-packages*, which are packages such as the `osg-wn-client` (worker node client) that contain nothing by themselves but only depend on other RPMs. To do this, use the `--requires` option to rpm. For example, you can see that the worker node client (as of OSG 3.1.8 in early September, 2012) will install `curl`, `uberftp`, `lcg-utils`, and a dozen or so other packages.
 
     :::console
     [user@client ~] $ rpm -q --requires osg-wn-client
@@ -422,7 +422,7 @@ Advanced topic: Only geting OSG updates
 
 If you only want to get updates from the OSG repository and *no other* repositories, you can tell yum to do that with the following command:
 
-``` console
+```console
 [root@client ~] # yum --disablerepo=* --enablerepo=osg update
 ```
 
@@ -435,52 +435,47 @@ Installing the debuginfo package requires three steps.
 
 1.  Enable the installation of debuginfo packages. This only needs to be done once. Edit the yum repo file, usually `/etc/yum.repos.d/osg.repo` to enable the separate debuginfo repository. Near the bottom of the file, you'll see the `osg-debug` repo: 
 
-``` file
-[osg-debug]
+        [osg-debug]
 
-name=OSG Software for Enterprise Linux 5 - $basearch - Debug
-baseurl=http://repo.grid.iu.edu/osg-release/$basearch/debu
-failovermethod=priority 
-priority=98 
-enabled=1
-gpgcheck=1 
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
-```
+        name=OSG Software for Enterprise Linux 5 - $basearch - Debug
+        baseurl=http://repo.grid.iu.edu/osg-release/$basearch/debu
+        failovermethod=priority 
+        priority=98 
+        enabled=1
+        gpgcheck=1 
+        gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 
-Make sure that "enabled" is set to 1.
+    Make sure that "enabled" is set to 1.
 
-1.  Figure out which package installed the program you want to debug. One way to figure it out is to ask RPM. For example, if you want to debug grid-proxy-init:
+2.  Figure out which package installed the program you want to debug. One way to figure it out is to ask RPM. For example, if you want to debug grid-proxy-init:
 
-``` console
+        :::console
+        [user@client ~] $ rpm -qf `which grid-proxy-init`
+        globus-proxy-utils-5.0-5.osg.x86_64
 
-[user@client ~] $ rpm -qf `which grid-proxy-init`
-globus-proxy-utils-5.0-5.osg.x86_64
-```
+3.  Install the debugging information for that package. Continuing this example: 
 
-1.  Install the debugging information for that package. Continuing this example: 
+        :::console
+        [root@client ~] # debuginfo-install globus-proxy-utils
+        ...
+        =================================================================================================================================
+         Package                                      Arch                   Version                     Repository                 Size
+        =================================================================================================================================
+        Installing:
+         globus-proxy-utils-debuginfo                 x86_64                 5.0-5.osg                   osg-debug                  61 k
 
-``` console
-[root@client ~] # debuginfo-install globus-proxy-utils
-...
-=================================================================================================================================
- Package                                      Arch                   Version                     Repository                 Size
-=================================================================================================================================
-Installing:
- globus-proxy-utils-debuginfo                 x86_64                 5.0-5.osg                   osg-debug                  61 k
+        Transaction Summary
+        =================================================================================================================================
+        Install       1 Package(s)
+        Upgrade       0 Package(s)
 
-Transaction Summary
-=================================================================================================================================
-Install       1 Package(s)
-Upgrade       0 Package(s)
+        Total download size: 61 k
+        Is this ok [y/N]: y
+        ...
+        Installed:
+          globus-proxy-utils-debuginfo.x86_64 0:5.0-5.osg     
 
-Total download size: 61 k
-Is this ok [y/N]: y
-...
-Installed:
-  globus-proxy-utils-debuginfo.x86_64 0:5.0-5.osg     
-
-```
-This last step will select the right package name, then use yum to install it.
+    This last step will select the right package name, then use `yum` to install it.
 
 Troubleshooting
 ---------------
@@ -489,20 +484,20 @@ Troubleshooting
 
 If you is not finding some packages, e.g.:
 
-``` console
+```text
 Error Downloading Packages:
   packageXYZ: failure: packageXYZ.rpm from osg: [Errno 256] No more mirrors to try.
 ```
 
 then you can try cleaning up Yum's cache: 
 
-``` console
+```console
 [root@client ~] # yum clean all --enablerpeo=*
 ```
 
 to make an even more thorough job you can follow also add:
 
-``` console
+```console
 [root@client ~] # yum clean expire-cache --enablerepo=*
 ```
 
@@ -513,14 +508,13 @@ to make an even more thorough job you can follow also add:
 
 If yum is complaining you can re-import the keys in your distribution: 
 
-``` console
+```console
 [root@client ~] # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
 ```
 
 References
 ==========
 
-[The main yum web site](http://yum.baseurl.org/)
-
-A good description of the commands for RPM and yum can be found at [Learn Linux 101: RPM and YUM Package Management](http://www.ibm.com/developerworks/linux/library/l-lpic1-v3-102-5/?ca=drs-).
+- [The main yum web site](http://yum.baseurl.org/)
+- A good description of the commands for RPM and yum can be found at [Learn Linux 101: RPM and YUM Package Management](http://www.ibm.com/developerworks/linux/library/l-lpic1-v3-102-5/?ca=drs-).
 

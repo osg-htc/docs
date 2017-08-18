@@ -11,7 +11,6 @@ pages:
 - Installation Overview: 'install-overview.md'
 - Install Guides:
   - 'Yum Repos': 'common/yum.md'
-  - 'Yum Basics': 'common/yum-basics.md'
   - 'CA Certificates': 'common/ca.md'
   - 'HTCondor-CE': 'compute-element/HTCondor_CE.md'
   - 'HTTP Cache': 'frontier-squid/squid.md'
@@ -21,6 +20,7 @@ pages:
   - 'Worker node glexec': 'client/glexec.md'
 - Release Information:
   - 'OSG Release Series': 'release/release_series.md'
+  - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
 - In-Progress Docs:
