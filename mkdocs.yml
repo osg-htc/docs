@@ -23,6 +23,7 @@ pages:
   - 'RPM Signing': 'release/signing.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
 - Usage Guides:
+  - 'Certificate Tools': 'common/pki-cli.md'
   - 'Worker Node Environment': 'client/using-wn.md'
 - In-Progress Docs:
   - 'CA Updater': 'common/ca_updater.md'
