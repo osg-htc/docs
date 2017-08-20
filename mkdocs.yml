@@ -36,6 +36,7 @@ pages:
   - 'BeStMan Overview': 'storage/bestman-overview.md'
   - 'BeStMan Install': 'storage/bestman-install.md'
   - 'Worker node glexec': 'client/glexec.md'
+- 'Get Help': 'common/help.md'
 
 markdown_extensions:
   - admonition
