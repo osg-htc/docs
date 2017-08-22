@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>BeStMan Overview - OSG Documentation</title>
+  <title>Get Help - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "BeStMan Overview";
-    var mkdocs_page_input_path = "storage/bestman-overview.md";
-    var mkdocs_page_url = "/storage/bestman-overview/";
+    var mkdocs_page_name = "Get Help";
+    var mkdocs_page_input_path = "common/help.md";
+    var mkdocs_page_url = "/common/help/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -64,11 +64,11 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../common/yum/">Yum Repos</a>
+    <a class="" href="../yum/">Yum Repos</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../common/ca/">CA Certificates</a>
+    <a class="" href="../ca/">CA Certificates</a>
                 </li>
     </ul>
 	    </li>
@@ -110,7 +110,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../gridftp/">GridFTP Server</a>
+    <a class="" href="../../storage/gridftp/">GridFTP Server</a>
                 </li>
     </ul>
 	    </li>
@@ -144,7 +144,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+    <a class="" href="../pki-cli/">Certificate Tools</a>
                 </li>
                 <li class="">
                     
@@ -159,11 +159,11 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../common/ca_updater/">CA Updater</a>
+    <a class="" href="../ca_updater/">CA Updater</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../common/cert_scripts/">Certificate Request Scripts</a>
+    <a class="" href="../cert_scripts/">Certificate Request Scripts</a>
                 </li>
                 <li class="">
                     
@@ -180,29 +180,13 @@
 		
     <span class="caption-text">Deprecated Software</span>
     <ul class="subnav">
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">BeStMan Overview</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#berkeley-storage-manager">Berkeley Storage Manager</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#planning">Planning</a></li>
-        
-            <li><a class="toctree-l4" href="#installation">Installation</a></li>
-        
-            <li><a class="toctree-l4" href="#operation">Operation</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../../storage/bestman-overview/">BeStMan Overview</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../bestman-install/">BeStMan Install</a>
+    <a class="" href="../../storage/bestman-install/">BeStMan Install</a>
                 </li>
                 <li class="">
                     
@@ -211,9 +195,27 @@
     </ul>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../../common/help/">Get Help</a>
+    <a class="current" href="./">Get Help</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#how-to-get-help">How to Get Help</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#grid-operations-center">Grid Operations Center</a></li>
+        
+            <li><a class="toctree-l3" href="#security-incident">Security incident</a></li>
+        
+            <li><a class="toctree-l3" href="#information-required-to-help-you">Information Required to Help You</a></li>
+        
+            <li><a class="toctree-l3" href="#community-specific-resources">Community-specific Resources</a></li>
+        
+        </ul>
+    
+
+    </ul>
 	    </li>
           
         </ul>
@@ -237,15 +239,11 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
-        
-          <li>Deprecated Software &raquo;</li>
-        
-      
     
-    <li>BeStMan Overview</li>
+    <li>Get Help</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/storage/bestman-overview.md"
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/common/help.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -255,26 +253,36 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="berkeley-storage-manager">Berkeley Storage Manager</h1>
-<p>BeStMan, or Berkeley Storage Manager, is a full implementation of SRM v2.2, developed by Lawrence Berkeley National Laboratory, for a disk based storage and mass storage systems. End users may have their own personal BeStMan that manages and gives an SRM interface to their own local disks. It works on top of existing disk-based unix file systems, and has been reported so far to work on file systems such as NFS, GPFS, PVFS, GFS, Ibrix, HFS+, Hadoop, XrootdFS and Lustre. It also works with any existing file transfer service, such as gsiftp, http, https, bbftp and ftp. It requires minimal administrative efforts on the deployment and updates. BeStMan2 is a Jetty based implementation of SRM v2.2.</p>
-<p>As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of June 2018.</p>
-<h2 id="planning">Planning</h2>
+                <h1 id="how-to-get-help">How to Get Help</h1>
+<p>This page is aimed at OSG site administrators looking for support. Help for OSG users is found at <a href="https://support.opensciencegrid.org/support/home">our support desk</a>.</p>
+<h2 id="grid-operations-center">Grid Operations Center</h2>
+<p>The Grid Operations Center (GOC) is available to coordinate users, site admins, and developers around an issue.  Additionally, the GOC can provide basic monitoring and troubleshooting.  There are several ways to receive support:</p>
 <ul>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/BestmanStorageElement">Information on various BeStMan architectures</a></li>
-<li><a href="https://sdm.lbl.gov/bestman/">Bestman home page</a>: Bestman project home</li>
+<li>You can <a href="https://ticket.grid.iu.edu">submit a trouble ticket</a> or send an email to <a href="mailto:goc@opensciencegrid.org">goc@opensciencegrid.org</a> (which also accept general inquiries not intended for tickets.)</li>
+<li>The <a href="https://ticket.grid.iu.edu/goc/list/open">trouble ticket system</a> is searchable.  Historical tickets may contain the solution for similar problems others have encountered.</li>
+<li>The <a href="http://osggoc.blogspot.com/">operations blog</a> contains information about recent software releases, and important outage and maintenance notifications of central OSG services.</li>
+<li>For emergencies, the OSG Grid Operation Center provides extended support. Operators are on hand 24x7 at the GOC and can be reached via phone at +1 317-278-9699.   Non-emergency issues can be opened 24x7 but will be handled during normal business hours.</li>
 </ul>
-<h2 id="installation">Installation</h2>
+<h2 id="security-incident">Security incident</h2>
+<p>Security incidents can be reported by following the instructions on the <a href="https://opensciencegrid.github.io/security/IncidentDiscoveryReporting/">Incident Discovery and Reporting</a> page.  Additional steps to aid in the incident handling process are also linked from that page.</p>
+<h2 id="information-required-to-help-you">Information Required to Help You</h2>
+<p>If you came to this page from an installation or other document in this website, then follow instructions in the <strong>Troubleshooting</strong> and <strong>Debugging</strong> sections of that document and include results in your support inquiry, no matter which channel you choose (email, trouble ticket, web chat, ...)</p>
+<p>For problems with installation of some software run <code>osg-system-profiler</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-system-profiler
+</pre></div>
+
+
+<p>Attach the generated <code>osg-profile.txt</code> to your support inquiry.</p>
+<h2 id="community-specific-resources">Community-specific Resources</h2>
+<p>Some OSG VOs have dedicated forums or mechanisms for community-specific support.  If your VO provides user support, that should be a user's first line of support because the VO is most familiar with your applications and requirements.</p>
 <ul>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallOSGBestmanSE">Install Bestman SE</a>: BeStMan installation interfacing with local disk</li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestmanXrootdSE">Install Bestman Gateway Xrootd</a>: BeStMan gateway mode on top of XRootD</li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoop200SE">Install Bestman Gateway Hadoop</a>: BeStMan gateway mode on top of Hadoop</li>
-<li><a href="https://sdm.lbl.gov/twiki/bin/view/Software/BeStMan/BeStManGuide/Configuration">LBNL Configuration Reference</a></li>
+<li>The list of support contacts for OSG VOs can be found in the <a href="http://myosg.grid.iu.edu/scsummary/index?datasource=summary&amp;summary_attrs_showdesc=on&amp;summary_attrs_showcontact=on&amp;all_scs=on&amp;active=on&amp;active_value=1">Support Center Tab on MyOSG</a>.</li>
+<li>Resources for <strong>CMS</strong> sites:<ul>
+<li><a href="http://www.uscms.org/uscms_at_work/physics/computing/grid/index.shtml">http://www.uscms.org/uscms_at_work/physics/computing/grid/index.shtml</a></li>
+<li>CMS Hyper News: <a href="https://hypernews.cern.ch/HyperNews/CMS/get/osg-tier3.html">https://hypernews.cern.ch/HyperNews/CMS/get/osg-tier3.html</a></li>
+<li>CMS Twiki: <a href="https://twiki.cern.ch/twiki/bin/viewauth/CMS/USTier3Computing">https://twiki.cern.ch/twiki/bin/viewauth/CMS/USTier3Computing</a></li>
 </ul>
-<h2 id="operation">Operation</h2>
-<ul>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/LbnlSrmClient">LBNL SRM Client</a>: SRM client provided with BeStMan.  This is deprecated; use of <code>gfal-utils</code> is strongly encouraged instead.</li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SrmTester">BeStMan SRMTester</a>: Tester for BeStMan SRM instances</li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Storage/BestmanAdler32Checksum">Using Adler checksums with BeStMan</a></li>
+</li>
 </ul>
               
             </div>
@@ -283,10 +291,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../bestman-install/" class="btn btn-neutral float-right" title="BeStMan Install">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../../client/wn_oasis/" class="btn btn-neutral" title="OASIS-based Worker Node"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../client/glexec/" class="btn btn-neutral" title="Worker node glexec"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -314,10 +320,8 @@
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../client/wn_oasis/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../client/glexec/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../bestman-install/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
