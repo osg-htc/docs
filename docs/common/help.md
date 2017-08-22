@@ -22,7 +22,7 @@ Security incidents can be reported by following the instructions on the [Inciden
 Information Required to Help You
 --------------------------------
 
-If you came to this page from an installation or other document in this website, then follow instructions in the **Troubleshooting** and **Debugging** sections of the document and include results in your support inquiry, no matter which channel you choose (email, trouble ticket, web chat, ...)
+If you came to this page from an installation or other document in this website, then follow instructions in the **Troubleshooting** and **Debugging** sections of that document and include results in your support inquiry, no matter which channel you choose (email, trouble ticket, web chat, ...)
 
 For problems with installation of some software run `osg-system-profiler`:
 
