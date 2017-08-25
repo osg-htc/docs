@@ -9,15 +9,18 @@ extra_css:
 pages:
 - Home: 'index.md'
 - Installation Overview: 'install-overview.md'
-- Install Guides:
+- Install Guides - Common:
   - 'Yum Repos': 'common/yum.md'
   - 'CA Certificates': 'common/ca.md'
+- Install Guides - Compute:
   - 'HTCondor-CE': 'compute-element/HTCondor_CE.md'
-  - 'HTTP Cache': 'frontier-squid/squid.md'
-  - 'CVMFS': 'client/cvmfs.md'
   - 'GSI-enabled SSH': 'other/gsissh.md'
+  - 'CVMFS': 'client/cvmfs.md'
   - 'Worker Node (RPM install)': 'client/wn.md'
   - 'Worker Node (tarball install)': 'client/wn-tarball.md'
+- Install Guides - Data:
+  - 'HTTP Cache': 'frontier-squid/squid.md'
+  - 'GridFTP Server': 'storage/gridftp.md'
 - Release Information:
   - 'OSG Release Series': 'release/release_series.md'
   - 'Yum Basics': 'release/yum-basics.md'
@@ -31,11 +34,11 @@ pages:
   - 'Certificate Request Scripts': 'common/cert_scripts.md'
   - 'Job Router Recipe': 'compute-element/job_router.md'
   - 'OASIS-based Worker Node': 'client/wn_oasis.md'
-  - 'GridFTP Server': 'storage/gridftp.md'
 - Deprecated Software:
   - 'BeStMan Overview': 'storage/bestman-overview.md'
   - 'BeStMan Install': 'storage/bestman-install.md'
   - 'Worker node glexec': 'client/glexec.md'
+- 'Get Help': 'common/help.md'
 
 markdown_extensions:
   - admonition
