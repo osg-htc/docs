@@ -38,6 +38,6 @@ documents:
 * [CA Certificate Updater script](common/ca_updater.md)
 * [Host certificate management package](common/cert_scripts.md)
 * [Job Router Recipes](compute-element/job_router.md)
-* [Installing the Worker Node from OASIS](client/wn_oasis.md)
+* [Installing the Worker Node from OASIS](client/wn-oasis.md)
 * [Installing a GridFTP Server](storage/gridftp.md)
 

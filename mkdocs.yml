@@ -18,6 +18,7 @@ pages:
   - 'CVMFS': 'client/cvmfs.md'
   - 'Worker Node (RPM install)': 'client/wn.md'
   - 'Worker Node (tarball install)': 'client/wn-tarball.md'
+  - 'Worker Node (OASIS install)': 'client/wn-oasis.md'
 - Install Guides - Data:
   - 'HTTP Cache': 'frontier-squid/squid.md'
   - 'GridFTP Server': 'storage/gridftp.md'
@@ -33,7 +34,6 @@ pages:
   - 'CA Updater': 'common/ca_updater.md'
   - 'Certificate Request Scripts': 'common/cert_scripts.md'
   - 'Job Router Recipe': 'compute-element/job_router.md'
-  - 'OASIS-based Worker Node': 'client/wn_oasis.md'
 - Deprecated Software:
   - 'BeStMan Overview': 'storage/bestman-overview.md'
   - 'BeStMan Install': 'storage/bestman-install.md'

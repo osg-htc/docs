@@ -13,7 +13,7 @@ About This Guide
 
 The *OSG Worker Node Client* is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use.
 
-It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:  This guide is useful when installing onto a shared filesystem for distribution to worker nodes.  Other options include installing [via RPMs](wn.md) or providing the client [via OASIS (CVMFS)](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/UsingOSGWnClientFromOASIS).
+It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:  This guide is useful when installing onto a shared filesystem for distribution to worker nodes.  Other options include installing [via RPMs](wn.md) or providing the client [via OASIS (CVMFS)](wn-oasis.md).
 
 Before starting, ensure the host has [a supported operating system](../release/supported_platforms.md).
 
