@@ -50,9 +50,9 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 
 -   [Worker Node (WN) Client Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/UsingWorkerNodeClient)
 -   Install the WN client software on every worker node – pick a method:
-    -   [Using RPMs](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallWNClient) – useful when managing your worker nodes with a tool (e.g., Puppet, Chef)
-    -   [Using a tarball](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallWNClientTarball) – useful for installation onto a shared filesystem (does not require root access)
-    -   [Using OASIS](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/UsingOSGWnClientFromOASIS) – useful when [OASIS](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavTechOASIS) is already mounted on your worker nodes
+    -   [Using RPMs](client/wn) – useful when managing your worker nodes with a tool (e.g., Puppet, Chef)
+    -   [Using a tarball](client/wn-tarball) – useful for installation onto a shared filesystem (does not require root access)
+    -   [Using OASIS](client/wn-oasis) – useful when [OASIS](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavTechOASIS) is already mounted on your worker nodes
 -   (optional) [Install the CernVM-FS client](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCvmfs) to make it easy for user jobs to install needed software from OSG’s OASIS repositories
 -   (optional, advanced) [Install gLExec on the OSG worker node](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallGlexec), if you know you need it
 
