@@ -5,11 +5,11 @@ Configuring a Site to Use the Worker Node Client Software From OASIS
 About This Guide
 ----------------
 
-The *OSG Worker Node Client* is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use. See the [reference section](#Reference) below for contents of the Worker Node Client.
+The *OSG Worker Node Client* is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use.
 
 It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:
 
--   Use the Worker Node Client software from OASIS (this guide) - useful when [OASIS](cvmfs.md) is already mounted on your worker nodes
+-   Use the Worker Node Client software from OASIS (this guide) - useful when [OASIS](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCvmfs) is already mounted on your worker nodes
 -   [Install using RPMs and Yum](wn.md) - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs
 -   [Install using a tarball](wn-tarball.md) - useful when installing onto a shared filesystem for distribution to worker nodes
 
@@ -90,37 +90,4 @@ How to get Help?
 
 To get assistance please use this [Help Procedure](../common/help.md).
 
-Reference
----------
-
-Please see the documentation on using [yum and RPM](../release/yum-basics.md), [the best practices](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices) for using yum to install software, and using [yum repositories](../common/yum.md).
-
-### Worker node contents
-
-The worker node may be updated from time to time. As of OSG 3.3.21 in February 2017, the OSG worker node client contains:
-
--   OSG Certificates
--   curl
--   Fetch CRL
--   FTS client
--   gfal2
--   globus-url-copy (GridFTP client)
--   globus-xio-udt-driver
--   ldapsearch
--   MyProxy
--   osg-system-profiler
--   osg-version
--   UberFTP
--   vo-client (includes /etc/vomses file)
--   VOMS client
--   wget
--   xrdcp
-
-To see the currently installed version of the worker node package, run the following command:
-
-    :::console
-    [root@client ~]# rpm -q --requires osg-wn-client
-
-
-Click [here](../release/yum-basics.md) for more details on using RPM to see what was installed.
 
