@@ -121,6 +121,10 @@
                     
     <a class="" href="../wn-tarball/">Worker Node (tarball install)</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../wn-oasis/">Worker Node (OASIS install)</a>
+                </li>
     </ul>
 	    </li>
           
@@ -192,10 +196,6 @@
                 <li class="">
                     
     <a class="" href="../../compute-element/job_router/">Job Router Recipe</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../wn_oasis/">OASIS-based Worker Node</a>
                 </li>
     </ul>
 	    </li>
@@ -269,8 +269,8 @@
 <p>It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:</p>
 <ul>
 <li>Install using RPMs and Yum (this guide) - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs</li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallWNClientTarball">Install using a tarball</a> - useful when installing onto a shared filesystem for distribution to worker nodes</li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/UsingOSGWnClientFromOASIS">Use from OASIS</a> - useful when worker nodes already mount OASIS on your worker nodes</li>
+<li><a href="../wn-tarball/">Install using a tarball</a> - useful when installing onto a shared filesystem for distribution to worker nodes</li>
+<li><a href="../wn-oasis/">Use from OASIS</a> - useful when worker nodes already mount OASIS on your worker nodes</li>
 </ul>
 <p>This document is intended to guide system administrators through the process of configuring a site to make the Worker Node Client software available from an RPM.</p>
 <h2 id="before-starting">Before Starting</h2>
@@ -349,7 +349,7 @@
 <h2 id="how-to-get-help">How to get Help?</h2>
 <p>To get assistance please use this <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HelpProcedure">Help Procedure</a>.</p>
 <h2 id="reference">Reference</h2>
-<p>Please see the documentation on using <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRpmBasics">yum and RPM</a>, <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices">the best practices</a> for using yum to install software, and using <a href="../../common/yum/">yum repositories</a>.</p>
+<p>Please see the documentation on using <a href="../../release/yum-basics/">yum and RPM</a>, <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices">the best practices</a> for using yum to install software, and using <a href="../../common/yum/">yum repositories</a>.</p>
 <h3 id="worker-node-contents">Worker node contents</h3>
 <p>The worker node may be updated from time to time. As of OSG 3.3.21 in February 2017, the OSG worker node client contains:</p>
 <ul>
@@ -375,7 +375,7 @@
 </pre></div>
 
 
-<p>Click <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRpmBasics">here</a> for more details on using RPM to see what was installed.</p>
+<p>Click <a href="../../release/yum-basics/">here</a> for more details on using RPM to see what was installed.</p>
               
             </div>
           </div>
