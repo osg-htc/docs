@@ -13,7 +13,9 @@ pages:
   - 'Yum Repos': 'common/yum.md'
   - 'CA Certificates': 'common/ca.md'
 - Install Guides - Compute:
-  - 'HTCondor-CE': 'compute-element/HTCondor_CE.md'
+  - HTCondor-CE:
+      - 'Overview': 'compute-element/htcondor-ce-overview.md'
+      - 'Install Guide': 'compute-element/HTCondor_CE.md'
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'CVMFS': 'client/cvmfs.md'
   - 'Worker Node (RPM install)': 'client/wn.md'
