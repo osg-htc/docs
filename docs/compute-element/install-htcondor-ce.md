@@ -1,628 +1,448 @@
 Installing and Maintaining HTCondor-CE
 ======================================
 
-
 About This Guide
 ----------------
 
-The HTCondor-CE software is a *job gateway* for an OSG Compute Element
-(CE). As such, HTCondor-CE is the entry point for jobs coming from the
-OSG — it handles authorization and delegation of jobs to your local
-batch system. In OSG today, most CEs accept *pilot jobs* from a factory,
-which in turn are able to accept and run end-user jobs.
+The [HTCondor-CE](htcondor-ce-overview) software is a *job gateway* for an OSG Compute Element (CE). As such, HTCondor-CE is the entry point for jobs coming from the OSG — it handles authorization and delegation of jobs to your local batch system. In OSG today, most CEs accept *pilot jobs* from a factory, which in turn are able to accept and run end-user jobs.
 
-Use this page to learn how to install, configure, run, test, and
-troubleshoot HTCondor-CE from the OSG software repositories.
+Use this page to learn how to install, configure, run, test, and troubleshoot HTCondor-CE from the OSG software repositories.
 
 Before Starting
 ---------------
 
-Before starting the installation process, consider the following points
-(consulting [the Reference section below](#ReferenceSection) as needed):
+Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
--   *User IDs:* If they do not exist already, the installation will
-    create the Linux user IDs `condor` (UID 4716), `tomcat` (UID 91) and
-    `gratia` (UID 42401)
--   **Service certificate:** The HTCondor-CE service uses a host
-    certificate at `/etc/grid-security/host*.pem`
--   **Network ports:** The pilot factories must be able to contact your
-    HTCondor-CE service on ports 9619 and 9620 (TCP)
--   **Host choice:** HTCondor-CE should be installed on a host that
-    already has the ability to submit jobs into your local cluster
+-   **User IDs:** If they do not exist already, the installation will create the Linux users `condor` (UID 4716) and `gratia` (UID 42401)
+-   **Service certificate:** The HTCondor-CE service uses a host certificate at `/etc/grid-security/hostcert.pem` and an accompanying key at `/etc/grid-security/hostkey.pem`
+-   **Network ports:** The pilot factories must be able to contact your HTCondor-CE service on ports 9619 and 9620 for condor versions < 8.3.2 (TCP)
+-   **Host choice:** HTCondor-CE should be installed on a host that already has the ability to submit jobs into your local cluster
 
-As with all OSG software installations, there are some one-time (per
-host) steps to prepare in advance:
+As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
--   Ensure the host has [a supported operating
-    system](SupportedOperatingSystems)
--   Obtain root access to the host
--   Prepare [the required Yum repositories](../common/yum.md)
--   Install [CA certificates](InstallCertAuth)
+- Ensure the host has [a supported operating system](../release/supported_platforms)
+- Obtain root access to the host
+- Prepare the [required Yum repositories](../common/yum)
+- Install [CA certificates](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth)
 
 Installing HTCondor-CE
 ----------------------
 
-An HTCondor-CE installation consists of the job gateway (i.e., the
-HTCondor CE job router) and other support software (e.g., GridFTP, a
-Gratia probe, authorization software). To simplify installation, OSG
-provides convenience RPMs that install all required software with a
-single command.
+An HTCondor-CE installation consists of the job gateway (i.e., the HTCondor-CE job router) and other support software (e.g., GridFTP, a Gratia probe, authentication software). To simplify installation, OSG provides convenience RPMs that install all required software with a single command.
 
-1. If your batch system is already installed via non-RPM means and is
-   in the following list, install the appropriate 'empty' RPM. Otherwise,
-   skip to the next step.
+1. Clean yum cache:
 
-   |If your batch system is…  | Then run the following command…|
-   |--------------------------|-------------------------------------------------------|
-   |HTCondor                  |`yum install empty-condor --enablerepo=osg-empty`|
-   |PBS                       |`yum install empty-torque --enablerepo=osg-empty`|
-   |SGE                       |`yum install empty-gridengine --enablerepo=osg-empty`|
+        ::console
+        [root@client ~ ] $ yum clean all --enablerepo=*
 
-2. Select the appropriate convenience RPM(s):
+2. Update software:
 
-   |If your batch system is…  |Then use the following package(s)…  |
-   |--------------------------|------------------------------------|
-   |HTCondor                  |`osg-ce-condor`                     |
-   |LSF                       |`osg-ce-lsf`                        |
-   |PBS                       |`osg-ce-pbs`                        |
-   |SGE                       |`osg-ce-sge`                        |
-   |SLURM                     |`osg-ce-slurm`                      |
+        :::console
+        [root@client ~ ] $ yum update
+    This command will update **all** packages
 
-3. Install the CE software:
+3. If your batch system is already installed via non-RPM means and is in the following list, install the appropriate 'empty' RPM. Otherwise, skip to the next step.
 
-   ```
-   yum install *PACKAGE(S)*
-   ```
+    | If your batch system is… | Then run the following command…                       |
+    |:-------------------------|:------------------------------------------------------|
+    | HTCondor                 | `yum install empty-condor --enablerepo=osg-empty`     |
+    | PBS                      | `yum install empty-torque --enablerepo=osg-empty`     |
+    | SGE                      | `yum install empty-gridengine --enablerepo=osg-empty` |
+    | SLURM                    | `yum install empty-slurm --enablerepo=osg-empty`      |
 
-To ease the transition from GRAM
-to HTCondor-CEs, the convenience RPMs install both types of job gateway
-software. By default, the HTCondor gateway is enabled and the GRAM
-gateway is disabled, which is the correct configuration for most
-HTCondor-CE-based sites (but see the gateway configuration section below
-for more options).
+4. If your HTCondor batch system is already installed via non-OSG RPM means, add the line below to `/etc/yum.repos.d/osg.repo`. Otherwise, skip to the next step.
 
-!!! note
-    HTCondor CE version 1.6 or later
-    is required to send site resource information to OSG for matching jobs
-    to resources.
+        exclude=condor empty-condor
+
+5. Select the appropriate convenience RPM(s):
+
+    | If your batch system is… | Then use the following package(s)… |
+    |:-------------------------|:-----------------------------------|
+    | HTCondor                 | `osg-ce-condor`                    |
+    | LSF                      | `osg-ce-lsf`                       |
+    | PBS                      | `osg-ce-pbs`                       |
+    | SGE                      | `osg-ce-sge`                       |
+    | SLURM                    | `osg-ce-slurm`                     |
+
+6. Install the CE software:
+
+        [root@client ~] $ yum install *PACKAGE(S)*
+
 
 Configuring HTCondor-CE
 -----------------------
 
-There are a few required configuration steps to connect HTCondor CE with
-your batch system and authorization method. For more advanced
-configuration, see the section on [optional
-configurations](#OptionalConfig).
+There are a few required configuration steps to connect HTCondor-CE with your batch system and authentication method. For more advanced configuration, see the section on [optional configurations](#optional-configuration).
 
 ### Enabling HTCondor-CE
 
-If you are installing HTCondor CE on a new host, the default
-configuration is correct and you can [skip](#BatchSystem) this step!
-However, if you are updating a host that used a Globus GRAM job gateway
-(aka the Globus gatekeeper), you must enable the HTCondor job gateway.
+If you are installing HTCondor-CE on a new host, the default configuration is correct and you can skip this step and continue onto [Configuring the batch system](#configuring-the-batch-system)! However, if you are updating a host that used a Globus GRAM job gateway (aka the Globus gatekeeper), you must disable GRAM and enable the HTCondor job gateway. Edit the gateway configuration file `/etc/osg/config.d/10-gateway.ini` so that it reads:
 
-1.  Decide whether to disable GRAM (the preferred option) or run
-    both HTCondor and GRAM CEs
-2.  Edit the gateway configuration file
-    `/etc/osg/config.d/10-gateway.ini` to reflect your choice
-    To enable HTCondor CE and disable GRAM CE:
-    
-        gram_gateway_enabled = False
-        htcondor_gateway_enabled = True
-    
-    To enable both HTCondor and GRAM CEs:
-    
-        gram_gateway_enabled = True
-        htcondor_gateway_enabled = True
-
-More information about the Globus GRAM CE can be found [here](compute-element/InstallComputeElement).
-
-Batch System
-------------
+```
+gram_gateway_enabled = False
+htcondor_gateway_enabled = True
+```
 
 ### Configuring the batch system
 
-Enable your batch system by editing the `enabled` field in the
-`/etc/osg/config.d/20-YOUR-BATCH-SYSTEM.ini`
-file:
+Enable your batch system by editing the `enabled` field in the `/etc/osg/config.d/20-<YOUR BATCH SYSTEM>.ini`
 
+``` file
+enabled = %RED%True%ENDCOLOR%
 ```
-enabled = True
-```
+
+If you are using HTCondor as your **local batch system** (i.e., in addition to your HTCondor-CE), skip to the [configuring authentication](#configuring-authentication) section. For other batch systems (e.g., PBS, LSF, SGE, SLURM), keep reading.
 
 #### Batch systems other than HTCondor
 
-If you are using HTCondor as your **local batch system** (i.e., in
-addition to your HTCondor CE), skip to the [configuring
-authorization](#ConfiguringAuthorization) section. For other batch
-systems (e.g., PBS, LSF, SGE, SLURM), keep reading.
+Non-HTCondor batch systems require additional configuration to support file transfer to your site's worker nodes.
 
 ##### Sharing the spool directory
 
-To transfer files between the CE and the batch system, HTCondor CE
-requires a shared file system. The current recommendation is to run a
-dedicated NFS server (whose installation is beyond the scope of this
-document) on the **CE host**. In this setup, HTCondor-CE writes to the
-local spool directory, the NFS server exports the it, and the NFS server
-shares the it with all of the worker nodes.
+To transfer files between the CE and the batch system, HTCondor-CE requires a shared file system. The current recommendation is to run a dedicated NFS server (whose installation is beyond the scope of this document) on the **CE host**. In this setup, HTCondor-CE writes to the local spool directory and the NFS server shares the directory with all of the worker nodes.
 
-**NOTE**: If you choose not to host the NFS
-server on your CE, you will need to turn off root squash so that the
-HTCondor-CE daemons can write to the spool directory.
+!!! note
+    If you choose not to host the NFS server on your CE, you will need to turn off root squash so that the HTCondor-CE daemons can write to the spool directory.
 
-By default, the spool directory is `/var/lib/condor-ce` but you can
-control this by setting `SPOOL` in
-`/etc/condor-ce/config.d/99-local.conf`. For example, the following sets
-the `SPOOL` directory to `/home/condor`:
+By default, the spool directory is `/var/lib/condor-ce` but you can control this by setting `SPOOL` in `/etc/condor-ce/config.d/99-local.conf` (create this file if it doesn't exist). For example, the following sets the `SPOOL` directory to `/home/condor`:
 
-```
+``` file
 SPOOL=/home/condor
 ```
 
-**NOTE**: The shared spool directory must
-be readable and writeable by the `condor` user for HTCondor CE to
-function correctly.
+!!! note
+    The shared spool directory must be readable and writeable by the `condor` user for HTCondor-CE to function correctly.
 
 ##### Disable worker node proxy renewal
 
-Worker node proxy renewal is not used by HTCondor-CE and leaving it on
-will cause some jobs to be held. Edit `/etc/blah.config` on the
-HTCondor CE host and set the following two values:
+Worker node proxy renewal is not used by HTCondor-CE and leaving it on will cause some jobs to be held. Edit `/etc/blah.config` on the HTCondor-CE host and set the following values:
 
-```
+``` file
 blah_disable_wn_proxy_renewal=yes
 blah_delegate_renewed_proxies=no
+blah_disable_limited_proxy=yes
 ```
 
-**NOTE**: This configuration file uses bash syntax rules; there should be no whitespace around the `=`.
+!!! note
+    There should be no whitespace around the `=`.
 
-### Configuring authorization
+### Configuring authentication
 
-There are two methods to manage authorization for incoming jobs,
-`edg-mkgridmap` and GUMS. `edg-mkgridmap` is easy to set up and maintain,
-and GUMS has more features and capabilities. We recommend using
-`edg-mkgridmap` unless you have specific needs that require the use of
-GUMS. Some examples of these specific requirements are:
+In OSG 3.3, there are three methods to manage authentication for incoming jobs: the [LCMAPS VOMS plugin](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallLcmapsVoms), [edg-mkgridmap](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/Edg-mkgridmap) and [GUMS](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums). edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support [pool accounts](https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html), GUMS is the only software with that capability.
 
--   You want to map users based on rules
--   You need to support multiple VO roles
--   You need to support gLExec for pilot jobs
+In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution.
 
-#### Authorization with edg-mkgridmap
+#### Authentication with the LCMAPS VOMS plugin
 
-To configure your CE to use `edg-mkgridmap`:
+To configure your CE to use the LCMAPS VOMS plugin:
 
-1.  Follow the configuration instructions in [the edg-mkgridmap
-    document](Edg-mkgridmap) to define the VOs that your site
-    accepts
-2.  Set some critical gridmap attributes by editing the
-    `/etc/osg/config.d/10-misc.ini` file on the HTCondor CE
-    host:
+1. If you are using OSG 3.3, add the following line to `/etc/sysconfig/condor-ce`:
 
-    ```
-    authorization_method = gridmap
-    ```
+        export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1
 
-1.  Enable edg-mkgridmap and disable GUMS in the `/etc/lcmaps.db`
-    file.
-
-    In the `authorize_only` section, comment out the
-    `gumsclient` line and uncomment the `gridmapfile` line. The result
-    should be as follows:
-    
-     ```
-     authorize_only:
-     # gumsclient -> good | bad
-     gridmapfile -> good | bad
-     ```
-
-2.  Specify the location of your grid mapfile in
-    `/etc/condor-ce/config.d/01-common-auth.conf`:
-
-     ```
-     GRIDMAP = /etc/grid-security/grid-mapfile
-     ```
-    **Note:** The standard location for the grid mapfile is shown
-    above. Use that location unless you have specific reasons to put the
-    file somewhere else.
-
-#### Authorization with GUMS
-
-1.  Follow the instructions in [the GUMS installation and
-    configuration document](InstallGums) to prepare GUMS
-2.  Set some critical GUMS attributes by editing the
-    `/etc/osg/config.d/10-misc.ini` file on the HTCondor CE
-    host:
-
-    ```
-    authorization_method = xacml
-    gums_host = YOUR GUMS HOSTNAME
-    ```
+2. Follow the instructions in [the LCMAPS VOMS plugin installation and configuration document](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallLcmapsVoms) to prepare the LCMAPS VOMS plugin
 
 !!! note
-    Once `gsi-authz.conf` is in place,
-    your local HTCondor will attempt to utilize the LCMAPS callouts if
-    enabled in the `condor_mapfile`. If this is not the desired behavior, set
-    `GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
+    If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the `condor_mapfile`. If this is not the desired behavior, set `GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
 
-### Configuring information systems
+#### Authentication with edg-mkgridmap
 
-To split jobs between the various sites of the OSG, information about
-each site’s availability is uploaded to a central collector. The job
-factories then query the central collector for idle resources and submit
-pilot jobs to the available sites. To advertise your site, you will need
-to run the Generic Information Provider and OSG Info Services.
+!!! warning
+    edg-mkgridmap is unavailable in OSG 3.4
 
-#### Generic Information Provider (GIP)
+To configure your CE to use edg-mkgridmap:
 
-The `GIP` is a service that discovers information about your site
-resources like the number of available cores and what VO's are allowed
-to run on your site. Consult the [GIP configuration
-document](Documentation.Release3.GipConfiguration) for instructions on
-how to set up your `GIP` service.
+1. Follow the configuration instructions in [the edg-mkgridmap document](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/Edg-mkgridmap) to define the VOs that your site accepts
+2. Set some critical gridmap attributes by editing the `/etc/osg/config.d/10-misc.ini` file on the HTCondor-CE host:
 
-**NOTE**: If you have `gip-1.3.11-4`
-installed, manual intervention is required for correct reporting to
-BDII. See [3.2.20 known
-issues](Documentation/Release3.Release3220#KnownIssues).
+        authorization_method = gridmap
 
-#### OSG Info Services
+#### Authentication with GUMS
 
-`osg-info-services` takes the information collected from `GIP` and
-uploads it to OSG's central collector. For `osg-info-services` to
-communicate with the appropriate servers, it needs a service certificate
-and key located at `/etc/grid-security/http/httpcert.pem` and
-`/etc/grid-security/http/httpkey.pem`, respectively. Additionally, the
-service runs as either the `tomcat` user or the account specified by the
-`user` option in `/etc/osg/config.d/30-gip.ini`, thus your service
-certificates need to be owned by the appropriate user.
+!!! warning
+    GUMS is unavailable in OSG 3.4
 
-1.  Enable osg-info-services in
-    `/etc/osg/config.d/30-infoservices.ini`:
+1. Follow the instructions in [the GUMS installation and configuration document](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums) to prepare GUMS
+2. Set some critical GUMS attributes by editing the `/etc/osg/config.d/10-misc.ini` file on the HTCondor-CE host:
 
-    ```
-    enabled = *True*
-    ```
-2.  Generate a `user-vo-map` file with your authorization set
-    up:
-    i.  If you're using edg-mkgridmap, run the following:
+        authorization_method = xacml
+        gums_host = %RED%YOUR GUMS HOSTNAME%ENDCOLOR%
 
-    ```
-    edg-mkgridmap
-    ```
-    ii. If you're using GUMS, run the following:
-    
-    ```
-    gums-host-cron
-    ```
+!!! note
+    If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the `condor_mapfile`. If this is not the desired behavior, set `GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
+
+### Configuring CE collector advertising
+
+To split jobs between the various sites of the OSG, information about each site's capabilities are uploaded to a central collector. The job factories then query the central collector for idle resources and submit pilot jobs to the available sites. To advertise your site, you will need to enter some information about the worker nodes of your clusters.
+
+Please see the [Subcluster / Resource Entry configuration document](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/IniConfigurationOptions#Subcluster_Resource_Entry_Config) about configuring the data that will be uploaded to the central collector.
 
 ### Applying configuration settings
 
-Making changes to the OSG configuration files in the `/etc/osg/config.d`
-directory does not apply those settings to software automatically.
-Settings that are made outside of the OSG directory take effect
-immediately or at least when the relevant service is restarted. For the
-OSG settings, use the [osg-configure](IniConfigurationOptions) tool to
-validate (to a limited extent) and apply the settings to the relevant
-software components. The `osg-configure` software is included
-automatically in an HTCondor CE installation.
+Making changes to the OSG configuration files in the `/etc/osg/config.d` directory does not apply those settings to software automatically. Settings that are made outside of the OSG directory take effect immediately or at least when the relevant service is restarted. For the OSG settings, use the [osg-configure](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/IniConfigurationOptions) tool to validate (to a limited extent) and apply the settings to the relevant software components. The `osg-configure` software is included automatically in an HTCondor-CE installation.
 
-1.  Make all changes to `.ini` files in the `/etc/osg/config.d`
-    directory
+1. Make all changes to `.ini` files in the `/etc/osg/config.d` directory
 
     !!! note
-        This document describes the
-        critical settings for HTCondor CE and related software. You may need
-        to configure other software that is installed on your HTCondor CE
-        host, too.
+        This document describes the critical settings for HTCondor-CE and related software. You may need to configure other software that is installed on your HTCondor-CE host, too.
 
-2.  Validate the configuration settings
+2. Validate the configuration settings
 
-    ```
-    osg-configure -v
-    ```
+        :::console
+        [root@client ~ ] $ osg-configure -v
 
-    Fix any errors (at least) that `osg-configure` reports.
+3. Fix any errors (at least) that `osg-configure` reports.
+4. Once the validation command succeeds without errors, apply the configuration settings:
 
-3.  Once the validation command succeeds without errors, apply the
-    configuration settings:
+        [root@client ~ ] $ osg-configure -c
 
-    ```
-    osg-configure -c
-    ```
+5. Generate a `user-vo-map` file with your authentication set up (skip this step if you're using the LCMAPS VOMS plugin):
+    1. If you're using edg-mkgridmap, run the following:
+
+            :::console
+            [root@client ~ ] $ edg-mkgridmap
+
+    2. If you're using GUMS, run the following:
+
+            :::console
+            [root@client ~ ] $ gums-host-cron
 
 ### Optional configuration
 
-The following configuration steps are optional and will likely not be
-required for setting up a small site. If you do not need any of the
-following special configurations, skip to [the section on using
-HTCondor CE](#UsingHTCondorCE).
+The following configuration steps are optional and will likely not be required for setting up a small site. If you do not need any of the following special configurations, skip to [the section on using HTCondor-CE](#using-htcondor-ce).
 
--   [Transforming and filtering jobs](#JobRoutes)
--   [Configuring for multiple network interfaces](#NetworkInterfaces)
--   [Limiting or disabling locally running jobs on the CE](#LocalUni)
--   [HTCondor accounting groups](#AccountingGroups)
--   [Installing the HTCondor-CE View](#CeView)
+-   [Transforming and filtering jobs](#transforming-and-filtering-jobs)
+-   [Configuring for multiple network interfaces](#configuring-for-multiple-network-interfaces)
+-   [Limiting or disabling locally running jobs on the CE](#limiting-or-disabling-locally-running-jobs-on-the-ce)
+-   [Accounting with multiple CEs or local user jobs](#accounting-with-multiple-ces-or-local-user-jobs)
+-   [HTCondor accounting groups](#htcondor-accounting-groups)
+-   [Installing the HTCondor-CE View](#install-and-run-the-htcondor-ce-view)
 
 #### Transforming and filtering jobs
 
-If you need to modify or filter jobs, more information can be found in
-the [Job Router Recipes](Documentation/Release3.JobRouterRecipes)
-document.
+If you need to modify or filter jobs, more information can be found in the [Job Router Recipes](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/JobRouterRecipes) document.
 
-**NOTE**: If you need to assign jobs to
-HTCondor accounting groups, refer to [this](#AccountingGroups) section.
+!!! note
+    If you need to assign jobs to HTCondor accounting groups, refer to [this](#htcondor-accounting-groups) section.
 
 #### Configuring for multiple network interfaces
 
-If you have multiple network interfaces with different hostnames, the
-HTCondor CE daemons need to know which hostname to use when
-communicating to each other. Generally, you will want to set
-`NETWORK_HOSTNAME` to the hostname of your public interface in
-`/etc/condor-ce/config.d/99-local.conf` directory with the line:
+If you have multiple network interfaces with different hostnames, the HTCondor-CE daemons need to know which hostname and interface to use when communicating to each other. Set `NETWORK_HOSTNAME` and `NETWORK_INTERFACE` to the hostname and IP address of your public interface, respectively, in `/etc/condor-ce/config.d/99-local.conf` directory with the line:
 
-```
-NETWORK_HOSTNAME=condorce.example.com
+``` file
+NETWORK_HOSTNAME = %RED%condorce.example.com%ENDCOLOR%
+NETWORK_INTERFACE = %RED%127.0.0.1%ENDCOLOR%
 ```
 
-Replacing `condorce.example.com` text with your public
-interface’s hostname.
+Replacing `condorce.example.com` text with your public interface’s hostname and `127.0.0.1` with your public interface’s IP address.
 
-#### Limiting or disabling locally jobs running on the CE
+#### Limiting or disabling locally running jobs on the CE
 
-If you want to limit or disable jobs running locally on your CE, you
-will need to configure HTCondor-CE's local and scheduler universes.
-Local and scheduler universes are HTCondor CE’s analogue to GRAM’s
-managed fork: they allow jobs to be run on the CE itself. The two
-universes are effectively the same (scheduler universe launches a
-starter process for each job), so we will be configuring them in unison.
+If you want to limit or disable jobs running locally on your CE, you will need to configure HTCondor-CE's local and scheduler universes. Local and scheduler universes are HTCondor-CE’s analogue to GRAM’s managed fork: they allow jobs to be run on the CE itself, mainly for remote troubleshooting. Pilot jobs will not run as local/scheduler universe jobs so leaving them enabled does NOT turn your CE into another worker node.
 
--   **To change the default limit** on the number of locally run jobs
-    (the current default is 20), add the following to
-    `/etc/condor-ce/config.d/99-local.conf`:
+The two universes are effectively the same (scheduler universe launches a starter process for each job), so we will be configuring them in unison.
 
-    ```
-    LOCAL_JOB_LIMIT = 20
-    START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning < $(LOCAL_JOB_LIMIT)
-    START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
-    ```
+- **To change the default limit** on the number of locally run jobs (the current default is 20), add the following to `/etc/condor-ce/config.d/99-local.conf`: 
 
-    (updating `LOCAL_JOB_LIMIT` as appropriate.)
+        START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning < %RED%<JOB-LIMIT>%ENDCOLOR%
+        START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 
--   **To only allow a specific user** to start locally run jobs, add the
-    following to `/etc/condor-ce/config.d/99-local.conf`:
+- **To only allow a specific user** to start locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`: 
 
-    ```
-    ALLOWED_LOCAL_USER=alice
-    START_LOCAL_UNIVERSE = target.Owner =?= "$(ALLOWED_LOCAL_USER)"
-    START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
-    ```
+        START_LOCAL_UNIVERSE = target.Owner `?` "%RED%<USERNAME>%ENDCOLOR%"
+        START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 
--   **To disable** locally run jobs, add the following to
-    `/etc/condor-ce/config.d/99-local.conf`:
+- **To disable** locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`: 
 
-    ```
-    START_LOCAL_UNIVERSE = False
-    START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
-    ```
+        START_LOCAL_UNIVERSE = False
+        START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 
-**NOTE**: RSV requires the ability to start
-local universe jobs so if you are using RSV, you need to allow local
-universe jobs from the `rsv` user.
+!!! note
+    RSV requires the ability to start local universe jobs so if you are using RSV, you need to allow local universe jobs from the `rsv` user.
+
+#### Accounting with multiple CEs or local user jobs
+
+!!! note
+    For non-HTCondor batch systems only
+
+If your site has multiple CEs or you have non-grid users submitting to the same local batch system, the OSG accounting software needs to be configured so that it doesn't over report the number of jobs. Use the following table to determine which file requires editing:
+
+| If your batch system is… | Then edit the following file on your CE(s)… |
+|:-------------------------|:--------------------------------------------|
+| LSF                      | `/etc/gratia/pbs-lsf/ProbeConfig`           |
+| PBS                      | `/etc/gratia/pbs-lsf/ProbeConfig`           |
+| SGE                      | `/etc/gratia/sge/ProbeConfig`               |
+| SLURM                    | `/etc/gratia/slurm/ProbeConfig`             |
+
+Then edit the value of `SuppressNoDNRecords` so that it reads:
+
+``` file
+SuppressNoDNRecords="1"
+```
 
 #### HTCondor accounting groups
 
-**NOTE**: For HTCondor batch systems only
+!!! note
+    For HTCondor batch systems only
 
-If you want to provide fairshare on a group basis, as opposed to a Unix
-user basis, you can use HTCondor accounting groups. They are independent
-of the Unix groups the user may already be in, and are [documented in the HTCondor manual](http://research.cs.wisc.edu/condor/manual/v8.4/3_4User_Priorities.html#SECTION00447000000000000000).
-If you are using HTCondor accounting groups, you can map jobs from the
-CE into HTCondor accounting groups based on their numeric user id, their
-DN, or their VOMS attributes.
+If you want to provide fairshare on a group basis, as opposed to a Unix user basis, you can use HTCondor accounting groups. They are independent of the Unix groups the user may already be in and are [documented in the HTCondor manual](http://research.cs.wisc.edu/condor/manual/v8.2/3_4User_Priorities.html#SECTION00447000000000000000). If you are using HTCondor accounting groups, you can map jobs from the CE into HTCondor accounting groups based on their UID, their DN, or their VOMS attributes.
 
-##### Mapping by UID
+-   **To map UIDs to an accounting group,** add entries to `/etc/osg/uid_table.txt` with the following form:
 
-To map UID’s to an accounting group, use `/etc/osg/uid_table.txt`. It is
-consulted first and contains lines of the form:
+        uid GroupName
 
-```
-uid GroupName
-```
+    The following is an example `uid_table.txt`:
 
-Example `uid_table.txt`:
+        uscms02 TestGroup
+        osg     other.osgedu
 
-```
-uscms02 TestGroup
-osg     other.osgedu
-```
+-   **To map DNs or VOMS attributes to an accounting group,** add lines to `/etc/osg/extattr_table.txt` with the following form:
 
-##### Mapping by DN or VOMS attribute
+        %RED%SubjectOrAttribute%ENDCOLOR% GroupName
 
-To map DN’s or VOMS attributes to an accounting group, use
-`/etc/osg/extattr_table.txt`. This file is only consulted if the user is
-not found in the UID file and it contains lines of the form:
+    The %RED%SubjectOrAttribute%ENDCOLOR% can be a Perl regular expression. The following is an example `extattr_table.txt`:
 
-```
-SubjectOrAttribute GroupName
-```
+        cmsprio cms.other.prio
+        cms\/Role=production cms.prod
+        \/DC=com\/DC=DigiCert-Grid\/O=Open\ Science\ Grid\/OU=People\/CN=Brian\ Lin\ 1047 osg.test
+        .* other
 
-The SubjectOrAttribute can be a Perl regular
-expression.
+!!! note
+    Entries in `/etc/osg/uid_table.txt` are honored over `/etc/osg/extattr_table.txt` if a job would match to lines in both files.
 
-Example `extattr_table.txt`:
+#### Install and run the HTCondor-CE View
 
-```
-cmsprio cms.other.prio
-cms\/Role=production cms.prod
-.* other
-```
-
-
-#### Install and run the HTCondor-CE-View
-
-The HTCondor-CE-View is an optional web interface to the status of your
-CE. To run the View,
+The HTCondor-CE View is an optional web interface to the status of your CE. To run the View,
 
 1.  Begin by installing the package htcondor-ce-view:
 
-      ```
-      yum install htcondor-ce-view
-      ```
+        :::console
+        [root@client ~ ] $ yum install htcondor-ce-view
 
-2.  Next, uncomment the `DAEMON_LIST` configuration located at
-    `/etc/condor-ce/config.d/05-ce-view.conf`:
+2.  Next, uncomment the `DAEMON_LIST` configuration located at `/etc/condor-ce/config.d/05-ce-view.conf`:
 
-      ```
-      DAEMON_LIST = $(DAEMON_LIST), CEVIEW, GANGLIAD
-]]]]      ```
+        DAEMON_LIST = $(DAEMON_LIST), CEVIEW, GANGLIAD
 
-3.  Restart the CE service.
+3.  Restart the CE service:
 
-      ```
-      service condor-ce restart
-      ```
+        :::console
+        [root@client ~ ] $ service condor-ce restart
 
-By default, the website is served from port 80. This may be configured
-in `/etc/condor-ce/config.d/05-ce-view.conf` as well.
+4.  Verify the service by entering your CE's hostname into your web browser
+
+The website is served on port 80 by default. To change this default, edit the value of `HTCONDORCE_VIEW_PORT` in `/etc/condor-ce/config.d/05-ce-view.conf`.
 
 Using HTCondor-CE
 -----------------
 
-As a site administrator, there are a few ways in which you might use the
-HTCondor CE:
+As a site administrator, there are a few ways in which you might use the HTCondor-CE:
 
--   Managing the HTCondor CE and associated services
--   Using HTCondor CE administrative tools to monitor and maintain the
-    job gateway
--   Using HTCondor CE user tools to test gateway operations
+-   Managing the HTCondor-CE and associated services
+-   Using HTCondor-CE administrative tools to monitor and maintain the job gateway
+-   Using HTCondor-CE user tools to test gateway operations
 
-### Managing HTCondor CE and associated services
+### Managing HTCondor-CE and associated services
 
-In addition to the HTCondor CE job gateway service itself, there are a
-number of supporting services in your installation. The specific
-services are:
+In addition to the HTCondor-CE job gateway service itself, there are a number of supporting services in your installation. The specific services are:
 
-| Software           | Service name                                       | Notes
-| -------------------|--------------------------------------------------- | ----------------------------------------------------------------------------------------
-| Fetch CRL          |On EL 6: `fetch-crl-boot` and `fetch-crl-cron`  <br>   On EL 5: `fetch-crl3-boot` and `fetch-crl3-cron`   | See [CA documentation](InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui) for more info |
-|  Gratia            | `gratia-probes-cron`                               | Accounting software |
-| Your batch system  |`condor` or `pbs_server` or …                       |                     |
-| OSG Info Services  |`osg-info-services`                                 |                     |
-|  HTCondor-CE       |`condor-ce`                                         |                     |
+| Software          | Service name                          | Notes                                                                                  |
+|:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
+| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui) for more info |
+| Gratia            | `gratia-probes-cron`                  | Accounting software                                                                    |
+| Your batch system | `condor` or `pbs_server` or …         |                                                                                        |
+| HTCondor-CE       | `condor-ce`                           |                                                                                        |
 
-Start the services in the order listed and stop them in reverse order.
-As a reminder, here are common service commands (all run as `root`):
+Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as `root`):
 
-
-| To …                                         |Run the command …                      |
-| ---------------------------------------------|---------------------------------------|
-| Start a service                              |`service <em>SERVICE-NAME</em> start`  |
-| Stop a service                               |`service <em>SERVICE-NAME</em> stop`   |
-| Enable a service to start during boot        |`chkconfig <em>SERVICE-NAME</em> on`   |
-| Disable a service from starting during boot  |`chkconfig <em>SERVICE-NAME</em> off`  |
+| To...                                   | On EL6, run the command...                  | On EL7, run the command...                      |
+| :-------------------------------------- | :----------------------------------------   | :--------------------------------------------   |
+| Start a service                         | `service <SERVICE-NAME> start` | `systemctl start <SERVICE-NAME>`   |
+| Stop a  service                         | `service <SERVICE-NAME> stop`  | `systemctl stop <SERVICE-NAME>`    |
+| Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`  | `systemctl enable <SERVICE-NAME>`  |
+| Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off` | `systemctl disable <SERVICE-NAME>` |
 
 ### Using HTCondor-CE tools
 
-Some of the HTCondor CE administrative and user tools are documented in
-[the HTCondor CE troubleshooting guide](TroubleshootingHTCondorCE).
+Some of the HTCondor-CE administrative and user tools are documented in [the HTCondor-CE troubleshooting guide](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE).
 
 Validating HTCondor-CE
 ----------------------
 
-There are different ways to make sure that your HTCondor CE host is
-working well:
+There are different ways to make sure that your HTCondor-CE host is working well:
 
--   Perform automated validation by running [RSV](InstallRSV)
--   Manually verify your HTCondor CE using [the HTCondor CE
-    troubleshooting guide](TroubleshootingHTCondorCE); useful tools
-    include:
-    -   [condor\_ce\_run](TroubleshootingHTCondorCE#condor_ce_run)
-    -   [condor\_ce\_trace](TroubleshootingHTCondorCE#condor_ce_trace)
-    -   [condor\_submit](TroubleshootingHTCondorCE#condor_submit)
+-   Perform automated validation by running [RSV](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallRSV)
+-   Manually verify your HTCondor-CE using [HTCondor-CE troubleshooting guide](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE); useful tools include:
+    -   [condor\_ce\_run](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_ce_run)
+    -   [condor\_ce\_trace](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_ce_trace)
+    -   [condor\_submit](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_submit)
 
 Troubleshooting HTCondor-CE
 ---------------------------
 
-For information on how to troubleshoot your HTCondor CE, please refer to
-[the HTCondor CE troubleshooting guide](TroubleshootingHTCondorCE).
+For information on how to troubleshoot your HTCondor-CE, please refer to [the HTCondor-CE troubleshooting guide](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE).
 
 Registering the CE
 ------------------
 
-To be part of the OSG Production Grid, your CE must be registered in the
-[https://oim.grid.iu.edu/ OSG Information Management System](https://oim.grid.iu.edu/ OSG Information Management System)
-(OIM). To register your resource:
+To be part of the OSG Production Grid, your CE must be registered in the [OSG Information Management System](https://oim.opensciencegrid.org) (OIM). To register your resource:
 
-1.  [Obtain, install, and verify your user
-    certificate](Documentation.CertificateUserGet) (which you may have
-    done already)
-2.  [Register your site and CE in
-    OIM](Operations.OIMRegistrationInstructions)
+1.  [Obtain, install, and verify your user certificate](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CertificateUserGet) (which you may have done already)
+2.  [Register your site and CE in OIM](https://twiki.grid.iu.edu/bin/view/Operations/OIMRegistrationInstructions)
 
 Getting Help
 ------------
 
-To get assistance, please use the [this
-page](Documentation.HelpProcedure).
+To get assistance, please use the [this page](../common/help).
 
 Reference
 ---------
 
 Here are some other HTCondor-CE documents that might be helpful:
 
--   [HTCondor-CE overview and architecture](HTCondorCEOverview)
--   [Configuring HTCondor-CE job routes](JobRouterRecipes)
--   [The HTCondor-CE troubleshooting guide](TroubleshootingHTCondorCE)
--   [Submitting Jobs to HTCondor-CE](SubmittingHTCondorCE)
+-   [HTCondor-CE overview and architecture](htcondor-ce-overview)
+-   [Installing and maintaining HTCondor-CE-Bosco](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorBosco)
+-   [Configuring HTCondor-CE job routes](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/JobRouterRecipes)
+-   [The HTCondor-CE troubleshooting guide](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE)
+-   [Submitting jobs to HTCondor-CE](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/SubmittingHTCondorCE)
 
 ### Configuration
 
-The following directories contain the configuration for HTCondor-CE. The
-directories are parsed in the order presented and thus configuration
-within the final directory will override configuration specified in the
-previous directories.
+The following directories contain the configuration for HTCondor-CE. The directories are parsed in the order presented and thus configuration within the final directory will override configuration specified in the previous directories.
 
-| Location                           | Comment                                      |
-| ---------------------------------- | -------------------------------------------- | 
-| `/usr/share/condor-ce/config.d/`   | Configuration defaults (overwritten on package updates) |
-| `/etc/condor-ce/config.d/`         | Files in this directory are parsed in alphanumeric order (i.e., `99-local.conf` will override values in `01-ce-auth.conf`) |
+| Location                         | Comment                                                                                                                    |
+|:---------------------------------|:---------------------------------------------------------------------------------------------------------------------------|
+| `/usr/share/condor-ce/config.d/` | Configuration defaults (overwritten on package updates)                                                                    |
+| `/etc/condor-ce/config.d/`       | Files in this directory are parsed in alphanumeric order (i.e., `99-local.conf` will override values in `01-ce-auth.conf`) |
 
-For a detailed order of the way configuration files are parsed, run the
-following command:
+For a detailed order of the way configuration files are parsed, run the following command:
 
-```
-# condor_ce_config_val -config
+``` console
+[user@client ~ ] $ condor_ce_config_val -config
 ```
 
 ### Users
 
 The following users are needed by HTCondor-CE at all sites:
 
-| **User** | **Comment** |
-| -------- | ----------- |
+| User     | Comment                                                                                       |
+|:---------|:----------------------------------------------------------------------------------------------|
 | `condor` | The HTCondor-CE will be run as root, but perform most of its operations as the `condor` user. |
-| `gratia` | Runs the Gratia probes to collect accounting data |
-| `tomcat` | Default user that runs GIP |
+| `gratia` | Runs the Gratia probes to collect accounting data                                             |
 
 ### Certificates
 
-| **Certificate**   | **User that owns certificate**  | **Path to certificate**                                                     |
-| ----------------- | ------------------------------- | --------------------------------------------------------------------------- |
-| Host certificate  | `root`                          | `/etc/grid-security/hostcert.pem` <br\>  `/etc/grid-security/hostkey.pem`   |
+| File             | User that owns certificate | Path to certificate               |
+|:-----------------|:---------------------------|:----------------------------------|
+| Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` |
+| Host key         | `root`                     | `/etc/grid-security/hostkey.pem`  |
 
-Find instructions to request a host certificate [here](GetHostServiceCertificates).
+Find instructions to request a host certificate [here](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/GetHostServiceCertificates).
 
-<!--  TODO: Fixup
 ### Networking
 
-<span class="twiki-macro STARTSECTION">Firewalls</span> <span
-class="twiki-macro INCLUDE" section="FirewallTable"
-lines="htcondorce,htcondorce_shared">Documentation/Release3/FirewallInformation</span>
+| Service Name | Protocol | Port Number | Inbound | Outbound | Comment                 |
+| :----------- | :------: | :---------: | :-----: | :------: | :---------------------- |
+| Htcondor-CE  | tcp      | 9619        | X       |          | HTCondor-CE shared port |
 
-Allow inbound and outbound network connection to all internal site
-servers, such as GUMS and the batch system head-node only ephemeral
-outgoing ports are necessary.\</br\>
+Allow inbound and outbound network connection to all internal site servers, such as GUMS and the batch system head-node only ephemeral outgoing ports are necessary.
 
-<span class="twiki-macro ENDSECTION">Firewalls</span>
--->
