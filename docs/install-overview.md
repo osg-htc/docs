@@ -60,8 +60,8 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 
 -   [Preparing to install the compute element](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/PreparingComputeElement)
 -   Install the compute element (HTCondor-CE and other software):
-    -   [Overview and architecture](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HTCondorCEOverview)
-    -   [Install HTCondor-CE](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHTCondorCE)
+    -   [Overview and architecture](compute-element/htcondor-ce-overview)
+    -   [Install HTCondor-CE](compute-element/install-htcondor-ce)
     -   [Configure the HTCondor-CE job router](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/JobRouterRecipes), including common recipes
     -   [Troubleshooting HTCondor-CE installations](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE)
     -   [Submitting jobs to HTCondor-CE](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SubmittingHTCondorCE)
