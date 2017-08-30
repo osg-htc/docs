@@ -9,18 +9,17 @@ extra_css:
 pages:
 - Home: 'index.md'
 - Installation Overview: 'install-overview.md'
-- Install Guides - Common:
-  - 'Yum Repos': 'common/yum.md'
-  - 'CA Certificates': 'common/ca.md'
-- Install Guides - Compute:
-  - HTCondor-CE:
-      - 'Overview': 'compute-element/htcondor-ce-overview.md'
-      - 'Install Guide': 'compute-element/HTCondor_CE.md'
+- Install Guides - Client:
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'CVMFS': 'client/cvmfs.md'
   - 'Worker Node (RPM install)': 'client/wn.md'
   - 'Worker Node (tarball install)': 'client/wn-tarball.md'
   - 'Worker Node (OASIS install)': 'client/wn-oasis.md'
+- Install Guides - Common:
+  - 'Yum Repos': 'common/yum.md'
+  - 'CA Certificates': 'common/ca.md'
+- Install Guides - Compute:
+  - 'HTCondor-CE': 'compute-element/HTCondor_CE.md'
 - Install Guides - Data:
   - 'HTTP Cache': 'frontier-squid/squid.md'
   - 'GridFTP Server': 'storage/gridftp.md'
@@ -29,6 +28,8 @@ pages:
   - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
+- Overviews:
+  - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
 - Usage Guides:
   - 'Certificate Tools': 'common/pki-cli.md'
   - 'Worker Node Environment': 'client/using-wn.md'
