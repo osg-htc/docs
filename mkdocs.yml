@@ -23,13 +23,13 @@ pages:
 - Install Guides - Data:
   - 'GridFTP Server': 'storage/gridftp.md'
   - 'HTTP Cache': 'frontier-squid/squid.md'
+- Overviews:
+  - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
 - Release Information:
   - 'OSG Release Series': 'release/release_series.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
   - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
-- Overviews:
-  - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
 - Usage Guides:
   - 'Certificate Tools': 'common/pki-cli.md'
   - 'Worker Node Environment': 'client/using-wn.md'
