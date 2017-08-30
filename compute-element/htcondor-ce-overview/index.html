@@ -113,7 +113,7 @@
                 </li>
                 <li class="toctree-l3">
                     
-    <a class="" href="../HTCondor_CE/">Install Guide</a>
+    <a class="" href="../install-htcondor-ce/">Install Guide</a>
                 </li>
     </ul>
                 </li>
@@ -333,9 +333,9 @@
 <h3 id="over-ssh">Over SSH</h3>
 <p><a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorBosco">HTCondor-CE-Bosco</a> is a special configuration of HTCondor-CE that can submit jobs to a remote cluster over SSH. The HTCondor-CE-Bosco provides a simple starting point for opportunistic resource owners that want to start contributing to the OSG with minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a submit node in their cluster.</p>
 <p><img alt="HTCondor-CE-Bosco" src="../../images/HTCondorCEBosco.png" /></p>
-<p>HTCondor-CE-Bosco is intended for small sites or as an introduction to the OSG. If your site intends to run thousands of OSG jobs, you will need to host a standard <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorCE">HTCondor-CE</a> because HTCondor-CE-Bosco has not yet been optimized for such loads.</p>
+<p>HTCondor-CE-Bosco is intended for small sites or as an introduction to the OSG. If your site intends to run thousands of OSG jobs, you will need to host a standard <a href="../install-htcondor-ce">HTCondor-CE</a> because HTCondor-CE-Bosco has not yet been optimized for such loads.</p>
 <h2 id="how-the-ce-is-customized">How the CE is Customized</h2>
-<p>Aside from the <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorCE#Configuring_HTCondor_CE">basic configuration</a> required in the CE installation, there are two main ways to customize your CE (if you decide any customization is required at all):</p>
+<p>Aside from the <a href="../install-htcondor-ce#configuring-htcondor-ce">basic configuration</a> required in the CE installation, there are two main ways to customize your CE (if you decide any customization is required at all):</p>
 <ul>
 <li><strong>Deciding which VOs are allowed to run at your site:</strong> The method of limiting the VOs that are allowed to run on your site has not changed between GRAM and HTCondor-CE’s: select an authorization system, GUMS or edg-mkgridmap, and configure it accordingly.</li>
 <li><strong>How to filter and transform the grid jobs to be run on your batch system:</strong> Filtering and transforming grid jobs (i.e., setting site-specific attributes or resource limits), requires configuration of your site’s job routes. For examples of common job routes, consult the <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/JobRouterRecipes">JobRouter recipes</a> page.</li>
@@ -351,7 +351,7 @@
 <h2 id="next-steps">Next steps</h2>
 <p>If you're transitioning from a GRAM CE to HTCondor-CE, the process is the same as if you were setting up a completely new CE, whether you're installing it on a new machine or alongside your GRAM CE.</p>
 <ul>
-<li>Install <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorCE">HTCondor-CE</a> or <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorBosco">HTCondor-CE-Bosco</a></li>
+<li>Install <a href="../install-htcondor-ce">HTCondor-CE</a> or <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorBosco">HTCondor-CE-Bosco</a></li>
 <li>Setting up <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/JobRouterRecipes">job routes</a></li>
 <li><a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/SubmittingHTCondorCE">Submitting</a> jobs to HTCondor-CE</li>
 <li><a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE">Troubleshooting</a> HTCondor-CE</li>
@@ -365,7 +365,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../HTCondor_CE/" class="btn btn-neutral float-right" title="Install Guide">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../install-htcondor-ce/" class="btn btn-neutral float-right" title="Install Guide">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../../common/ca/" class="btn btn-neutral" title="CA Certificates"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -399,7 +399,7 @@
         <span><a href="../../common/ca/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../HTCondor_CE/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../install-htcondor-ce/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
