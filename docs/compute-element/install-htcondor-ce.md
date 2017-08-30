@@ -249,7 +249,7 @@ The two universes are effectively the same (scheduler universe launches a starte
 
 - **To only allow a specific user** to start locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`: 
 
-        START_LOCAL_UNIVERSE = target.Owner `?` "%RED%<USERNAME>%ENDCOLOR%"
+        START_LOCAL_UNIVERSE = target.Owner =?= "%RED%<USERNAME>%ENDCOLOR%"
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 
 - **To disable** locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`: 
