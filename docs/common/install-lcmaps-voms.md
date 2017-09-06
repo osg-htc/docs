@@ -32,8 +32,8 @@ The following section describes the steps required to configure the LCMAPS VOMS 
 
 Additionally, there is [optional configuration](#OptionalConfig) if you need to make changes to the default mappings.
 
-Enabling the LCMAPS VOMS plugin
--------------------------------
+
+### Enabling the LCMAPS VOMS plugin
 
 To configure your host to use LCMAPS VOMS plugin authentication, edit `/etc/osg/config.d/10-misc.ini` and set the following options:
 
