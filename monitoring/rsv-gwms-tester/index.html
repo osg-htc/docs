@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>RSV GlideinWMS Tester - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "RSV GlideinWMS Tester";
+    var mkdocs_page_input_path = "monitoring/rsv-gwms-tester.md";
+    var mkdocs_page_url = "/monitoring/rsv-gwms-tester/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Common</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/yum/">Yum Repos</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/ca/">CA Certificates</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Compute</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <span class="caption-text">HTCondor-CE</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../compute-element/htcondor-ce-overview/">Overview</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install Guide</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn/">Worker Node (RPM install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn-tarball/">Worker Node (tarball install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn-oasis/">Worker Node (OASIS install)</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../frontier-squid/squid/">HTTP Cache</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../storage/gridftp/">GridFTP Server</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Monitoring</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">RSV GlideinWMS Tester</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#installing-and-using-the-rsv-glideinwms-tester">Installing and Using the RSV GlideinWMS Tester</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#about-this-guide">About This Guide</a></li>
+        
+            <li><a class="toctree-l4" href="#before-starting">Before Starting</a></li>
+        
+            <li><a class="toctree-l4" href="#installing-the-tester">Installing the Tester</a></li>
+        
+            <li><a class="toctree-l4" href="#configuring-the-tester">Configuring the Tester</a></li>
+        
+            <li><a class="toctree-l4" href="#using-the-tester">Using the Tester</a></li>
+        
+            <li><a class="toctree-l4" href="#troubleshooting-rsv-gwms-tester">Troubleshooting RSV-GWMS-Tester</a></li>
+        
+            <li><a class="toctree-l4" href="#getting-help">Getting Help</a></li>
+        
+            <li><a class="toctree-l4" href="#reference">Reference</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Usage Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/using-wn/">Worker Node Environment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">In-Progress Docs</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca_updater/">CA Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/cert_scripts/">Certificate Request Scripts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job_router/">Job Router Recipe</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deprecated Software</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../storage/bestman-overview/">BeStMan Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../storage/bestman-install/">BeStMan Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/glexec/">Worker node glexec</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../common/help/">Get Help</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Install Guides - Monitoring &raquo;</li>
+        
+      
+    
+    <li>RSV GlideinWMS Tester</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/monitoring/rsv-gwms-tester.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="installing-and-using-the-rsv-glideinwms-tester">Installing and Using the RSV GlideinWMS Tester</h1>
+<h2 id="about-this-guide">About This Guide</h2>
+<p>The RSV GlideinWMS Tester (or <em>Tester</em>, in this document) is a tool that a VO front-end administrator can use to test remote sites for the ability to run the VO’s jobs. It is particularly useful when setting up a VO for the first time or when changing the sites at which a VO’s jobs can run. For a site to pass the test, it must successfully run a simple test job via the normal GlideinWMS mechanisms, in much the same way as a real VO job.</p>
+<p>Use this page to learn how to install, configure, and use the Tester for your VO front-end.</p>
+<h2 id="before-starting">Before Starting</h2>
+<p>Before starting the installation process, consider the following points (consulting <a href="#ReferenceSection">the Reference section below</a> as needed):</p>
+<ul>
+<li><strong>Software:</strong> You must have <a href="../InstallGlideinWMSFrontend">a GlideinWMS Front-end</a> installed</li>
+<li><strong>Configuration:</strong> The GlideinWMS Front-end must be configured (a) <a href="../InstallGlideinWMSFrontend#DesiredSites">to have at least one group that matches pilots to sites using DESIRED_SITES</a>, and (b) <a href="../InstallGlideinWMSFrontend#IsItb">to support the is_itb user job attribute</a></li>
+<li><strong>Host choice:</strong> The Tester should be installed on its own host; a small Virtual Machine (VM) is ideal</li>
+<li><strong>Service certificate:</strong> The Tester requires a host certificate at <code>/etc/grid-security/hostcert.pem</code> and an accompanying key at <code>/etc/grid-security/hostkey.pem</code></li>
+<li><strong>Network ports:</strong> Test jobs must be able to contact the tester using the HTCondor Shared Port on port 9615 (TCP), and you must be able to contact a web server on port 80 (TCP) to view test results.</li>
+</ul>
+<h2 id="installing-the-tester">Installing the Tester</h2>
+<p>The Tester software takes advantage of several other OSG software components, so the installation will also include OSG’s site validation system (RSV), HTCondor, and the GlideinWMS pilot submission software.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install rsv-gwms-tester
+</pre></div>
+
+
+<h2 id="configuring-the-tester">Configuring the Tester</h2>
+<p>Before you use the Tester, there are some one-time configuration steps to complete, one set on your GlideinWMS Front-end Central Manager host and one set on the Tester host.</p>
+<h3 id="configuring-the-glideinwms-front-end-central-manager">Configuring the GlideinWMS Front-end Central Manager</h3>
+<p>Complete these steps <strong>on your GlideinWMS Front-end Central Manager host</strong>:</p>
+<ol>
+<li>
+<p>Authorize the Tester host to connect to your Central Manager:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> glidecondor_addDN -allow-others -daemon <span style="color:red">&lt;COMMENT&gt; &lt;TESTER_DN&gt;</span> condor
+</pre></div>
+
+
+<p>Where <code>COMMENT</code> is a human-readable label for the Tester host (e.g., “RSV GWMS Tester at myhost”), and <code>TESTER_DN</code> is the Distinguished Name (DN) of the host certificate of your Tester host. Most likely, you will need to quote both of these values to protect them from the shell. For example:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> glidecondor_addDN -allow-others -daemon <span class="s1">&#39;RSV GWMS Tester on Fermicloud&#39;</span> <span class="s1">&#39;/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=fermicloud357.fnal.gov&#39;</span> condor
+</pre></div>
+
+
+</li>
+<li>
+<p>Restart HTCondor to apply the changes</p>
+<p>On <strong>EL 6</strong> systems:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service condor restart
+</pre></div>
+
+
+<p>On <strong>EL 7</strong> systems:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> systemctl restart condor
+</pre></div>
+
+
+</li>
+<li>
+<p>Add the new Tester to your GlideinWMS front-end configuration. 
+   Edit the file <code>/etc/gwms-frontend/frontend.xml</code> and add a line as follows within the <code>&lt;schedds&gt;</code> element</p>
+<div class="codehilite"><pre><span></span>&lt;schedd DN=&quot;<span style="color:red">&lt;TESTER_DN&gt;</span>&quot; fullname=&quot;<span style="color:red">&lt;TESTER_HOSTNAME&gt;</span>&quot;&gt;
+</pre></div>
+
+
+<p>Where <code>TESTER_DN</code> is the Distinguished Name (DN) of the host certificate of your Tester host (as above), and <code>TESTER_HOSTNAME</code> is the fully qualified hostname of the Tester host. For example:</p>
+<div class="codehilite"><pre><span></span>&lt;schedd DN=&quot;/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=fermicloud357.fnal.gov&quot; fullname=&quot;fermicloud357.fnal.gov&quot;&gt;
+</pre></div>
+
+
+<p>Reconfigure your GlideinWMS front-end to apply the changes:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service gwms-frontend reconfig
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="configuring-the-tester-host">Configuring the Tester host</h3>
+<p>Complete the following steps <strong>on your Tester host</strong>:</p>
+<ol>
+<li>
+<p>Configure the Tester for the VOs that your Front-end supports</p>
+<p>Edit the file <code>/etc/rsv/metrics/org.osg.local-gfactory-site-querying-local.conf</code>. The <code>constraint</code> line is an HTCondor ClassAd expression containing one <code>stringListMember</code> function per VO that your Front-end supports. If there is more than one VO, the function invocations are joined by the “logical or” operator, <code>||</code>. Edit the <code>constraint</code> line for your Front-end.</p>
+<p>For example, for a single VO named <code>Foo</code>, the line would be:</p>
+<div class="codehilite"><pre><span></span>constraint = stringListMember(&quot;Foo&quot;, GLIDEIN_Supported_VOs)
+</pre></div>
+
+
+<p>For two VOs named <code>Foo</code> and <code>Bar</code>, the line would be:</p>
+<div class="codehilite"><pre><span></span>constraint = stringListMember(&quot;Foo&quot;, GLIDEIN_Supported_VOs) || stringListMember(&quot;Bar&quot;, GLIDEIN_Supported_VOs)
+</pre></div>
+
+
+<p>Do not change the other settings in this file, unless you have clear and specific reasons to do so.</p>
+</li>
+<li>
+<p>Authorize the central manager of your Front-end to connect to the tester host:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> glidecondor_addDN -allow-others -daemon <span style="color:red">&lt;COMMENT&gt; &lt;CENTRAL_MGR&gt;</span> condor
+</pre></div>
+
+
+<p>Where <code>COMMENT</code> is a human-readable identifier for the Central Manager, and <code>CENTRAL_MGR</code> is the Distinguished Name (DN) of the host certificate of your GlideinWMS Front-end’s Central Manager host. Most likely, you will need to quote both of these values to protect them from the shell. For example:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> glidecondor_addDN -allow-others -daemon <span class="s1">&#39;UCSD central manager DN&#39;</span> <span class="s1">&#39;/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=osg-ligo-1.t2.ucsd.edu&#39;</span> condor
+</pre></div>
+
+
+</li>
+<li>
+<p>Configure the special HTCondor-RSV instance with your host IP address.</p>
+<p>Create the file <code>/etc/condor/config.d/98_public_interface.config</code> with this content:</p>
+<div class="codehilite"><pre><span></span>NETWORK_INTERFACE = <span style="color:red">&lt;ADDRESS&gt;</span>
+CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
+</pre></div>
+
+
+<p>Where <code>ADDRESS</code> is the IP address of your Tester host, and <code>CENTRAL_MGR</code> is the hostname of your GlideinWMS Front-end Central Manager.</p>
+</li>
+<li>
+<p>Enable the Tester’s RSV probe:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> rsv-control --enable org.osg.local-gfactory-site-querying-local --host localhost
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="using-the-tester">Using the Tester</h2>
+<p>There are at least two aspects of using the Tester:</p>
+<ul>
+<li>Managing the services that are associated with the Tester software</li>
+<li>Viewing results from the Tester</li>
+</ul>
+<h3 id="managing-tester-services">Managing Tester services</h3>
+<p>Because the Tester is built on other OSG software, there are a number of services in your installation. The specific services are:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Software</th>
+<th align="left">Service name</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Apache HTTP Server</td>
+<td align="left"><code>httpd</code></td>
+<td align="left">Web server for results</td>
+</tr>
+<tr>
+<td align="left">HTCondor-Cron</td>
+<td align="left"><code>condor-cron</code></td>
+<td align="left">cron-like jobs in HTCondor</td>
+</tr>
+<tr>
+<td align="left">RSV</td>
+<td align="left"><code>rsv</code></td>
+<td align="left">OSG site validator</td>
+</tr>
+</tbody>
+</table>
+<h3 id="viewing-tester-results">Viewing Tester results</h3>
+<p>Once the Tester RSV probe is enabled and active, and the services listed above have been started, there are two kinds of RSV probes that run periodically:</p>
+<ul>
+<li>One probe asks the GlideinWMS factory for the up-to-date list of sites supported by your VO(s) — runs every 30 minutes</li>
+<li>One probe submits and monitors one test job to each site supported by your VO(s) — run every 60 minutes</li>
+</ul>
+<p>You can view the latest results of both probe types on an RSV results web page, or you can manually run the first probe to see the full list of sites.</p>
+<h4 id="viewing-rsv-results-online">Viewing RSV results online</h4>
+<p>To see the latest results, access <code>https://<span style="color:red">&lt;HOSTNAME&gt;</span>/rsv/</code> (where <code>HOSTNAME</code> is the name of your Tester host).</p>
+<ul>
+<li>There should be one result row per site supported by your VO(s), using the “org.osg.general.dummy-vanilla-probe” probe (aka <em>metric</em>)</li>
+<li>There should be exactly one result row for the probe that fetches the list of sites, which is the “org.osg.local-gfactory-site-querying-local” probe (aka <em>metric</em>)</li>
+<li>There is a legend for the background colors at the end of the page</li>
+</ul>
+<p>Ideally, each site supported by your VO(s) should be shown with a green background, which indicates that a Tester job ran at that site recently and successfully. There may be transient failures but if you notice a site in the failed state over multiple days, contact OSG Factory Operations (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#115;&#103;&#45;&#103;&#102;&#97;&#99;&#116;&#111;&#114;&#121;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#112;&#104;&#121;&#115;&#105;&#99;&#115;&#46;&#117;&#99;&#115;&#100;&#46;&#101;&#100;&#117;">&#111;&#115;&#103;&#45;&#103;&#102;&#97;&#99;&#116;&#111;&#114;&#121;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#112;&#104;&#121;&#115;&#105;&#99;&#115;&#46;&#117;&#99;&#115;&#100;&#46;&#101;&#100;&#117;</a>) about the failing site, including a link to your Tester RSV results page.</p>
+<p>To see detailed information from each probe, click on the probe name in the Metric column.</p>
+<p>To see the list of sites that are supported by your VO(s) and are being tested, click the “org.osg.local-gfactory-site-querying-local” link at the bottom of the list of probes. You can also run the probe manually, as described next.</p>
+<h3 id="listing-supported-sites-manually">Listing supported sites manually</h3>
+<p>To manually run the probe that fetches the list of sites supported by your VO(s), run the following command on your Tester host:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> rsv-control --run org.osg.local-gfactory-site-querying-local --host localhost
+</pre></div>
+
+
+<p>The probe produces many lines of output, some of which are just about the probe execution itself. But look for lines like this:</p>
+<div class="codehilite"><pre><span></span><span class="go">MSG: Updating configuration for host <span style="color:red">&lt;UCSD&gt;</span></span>
+</pre></div>
+
+
+<p>The highlighted name is the site name, and there should be one such line per site supported by your VO(s).</p>
+<h2 id="troubleshooting-rsv-gwms-tester">Troubleshooting RSV-GWMS-Tester</h2>
+<p>You can find more information on troubleshooting in the <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallRSV#Troubleshooting_RSV">RSV troubleshooting section</a></p>
+<p>Logs and configuration:</p>
+<table>
+<thead>
+<tr>
+<th align="left">File Description</th>
+<th align="left">Location</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Condor Cron log files</td>
+<td align="left"><code>/var/log/condor-cron</code></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">File Description</th>
+<th align="left">Location</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Metric configuration</td>
+<td align="left"><code>/etc/rsv/metrics/org.osg.local-gfactory-site-querying-local.conf</code></td>
+<td align="left">To change arguments and environment</td>
+</tr>
+</tbody>
+</table>
+<h2 id="getting-help">Getting Help</h2>
+<p>To get assistance, please use the <a href="../../common/help/">this page</a>.</p>
+<h2 id="reference">Reference</h2>
+<h3 id="certificates">Certificates</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Certificate</th>
+<th align="left">User that owns certificate</th>
+<th align="left">Path to certificate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Host certificate</td>
+<td align="left"><code>root</code></td>
+<td align="left"><code>/etc/grid-security/hostcert.pem</code> &lt;br&gt; <code>/etc/grid-security/hostkey.pem</code></td>
+</tr>
+</tbody>
+</table>
+<p>Find instructions to request a host certificate <a href="../../common/pki-cli/">here</a>.</p>
+<h3 id="networking">Networking</h3>
+<p><a href="../common/firewall.md">Firewall Information</a></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../release/release_series/" class="btn btn-neutral float-right" title="OSG Release Series">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../storage/gridftp/" class="btn btn-neutral" title="GridFTP Server"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../storage/gridftp/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../release/release_series/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
