@@ -15,7 +15,7 @@ Before Starting
 Before starting the installation process, consider the following points (consulting [the Reference section below](#ReferenceSection) as needed):
 
 - **Software:** You must have [a GlideinWMS Front-end](InstallGlideinWMSFrontend) installed
-- **Configuration:** The GlideinWMS Front-end must be configured (a) [to have at least one group that matches pilots to sites using DESIRED\_SITES](InstallGlideinWMSFrontend#DesiredSites), and (b) [to support the is\_itb user job attribute](InstallGlideinWMSFrontend#IsItb)
+- **Configuration:** The GlideinWMS Front-end must be configured (a) [to have at least one group that matches pilots to sites using DESIRED_SITES](InstallGlideinWMSFrontend#DesiredSites), and (b) [to support the is_itb user job attribute](InstallGlideinWMSFrontend#IsItb)
 - **Host choice:** The Tester should be installed on its own host; a small Virtual Machine (VM) is ideal
 - **Service certificate:** The Tester requires a host certificate at `/etc/grid-security/hostcert.pem` and an accompanying key at `/etc/grid-security/hostkey.pem`
 - **Network ports:** Test jobs must be able to contact the tester using the HTCondor Shared Port on port 9615 (TCP), and you must be able to contact a web server on port 80 (TCP) to view test results.
@@ -43,13 +43,13 @@ Complete these steps **on your GlideinWMS Front-end Central Manager host**:
 1. Authorize the Tester host to connect to your Central Manager:
      
         :::console
-        [root@client ~] # glidecondor\_addDN -allow-others -daemon %RED%<COMMENT> <TESTER\_DN>%ENDCOLOR% condor
+        [root@client ~] # glidecondor_addDN -allow-others -daemon %RED%<COMMENT> <TESTER_DN>%ENDCOLOR% condor
 
 
      Where `COMMENT` is a human-readable label for the Tester host (e.g., “RSV GWMS Tester at myhost”), and `TESTER_DN` is the Distinguished Name (DN) of the host certificate of your Tester host. Most likely, you will need to quote both of these values to protect them from the shell. For example:
 
         :::console
-        [root@client ~] # glidecondor\_addDN -allow-others -daemon 'RSV GWMS Tester on Fermicloud' '/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=fermicloud357.fnal.gov' condor
+        [root@client ~] # glidecondor_addDN -allow-others -daemon 'RSV GWMS Tester on Fermicloud' '/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=fermicloud357.fnal.gov' condor
 
 2. Restart HTCondor to apply the changes
 
@@ -67,7 +67,7 @@ Complete these steps **on your GlideinWMS Front-end Central Manager host**:
    Edit the file `/etc/gwms-frontend/frontend.xml` and add a line as follows within the `<schedds>` element
 
         :::file
-        <schedd DN="%RED%<TESTER\_DN>%ENDCOLOR%" fullname="%RED%<TESTER\_HOSTNAME>%ENDCOLOR%">
+        <schedd DN="%RED%<TESTER_DN>%ENDCOLOR%" fullname="%RED%<TESTER_HOSTNAME>%ENDCOLOR%">
 
      Where `TESTER_DN` is the Distinguished Name (DN) of the host certificate of your Tester host (as above), and `TESTER_HOSTNAME` is the fully qualified hostname of the Tester host. For example:
 
@@ -90,32 +90,32 @@ Complete the following steps **on your Tester host**:
     For example, for a single VO named `Foo`, the line would be:
 
         :::file
-        constraint = stringListMember("Foo", GLIDEIN\_Supported\_VOs)
+        constraint = stringListMember("Foo", GLIDEIN_Supported_VOs)
 
     For two VOs named `Foo` and `Bar`, the line would be:
 
         :::file
-        constraint = stringListMember("Foo", GLIDEIN\_Supported\_VOs) || stringListMember("Bar", GLIDEIN\_Supported\_VOs)
+        constraint = stringListMember("Foo", GLIDEIN_Supported_VOs) || stringListMember("Bar", GLIDEIN_Supported_VOs)
 
     Do not change the other settings in this file, unless you have clear and specific reasons to do so.
 
 2. Authorize the central manager of your Front-end to connect to the tester host:
 
         :::console
-        [root@client ~] # glidecondor\_addDN -allow-others -daemon %RED%<COMMENT> <CENTRAL\_MGR>%ENDCOLOR% condor
+        [root@client ~] # glidecondor_addDN -allow-others -daemon %RED%<COMMENT> <CENTRAL_MGR>%ENDCOLOR% condor
 
     Where `COMMENT` is a human-readable identifier for the Central Manager, and `CENTRAL_MGR` is the Distinguished Name (DN) of the host certificate of your GlideinWMS Front-end’s Central Manager host. Most likely, you will need to quote both of these values to protect them from the shell. For example:
 
         :::console
-        [root@client ~] # glidecondor\_addDN -allow-others -daemon 'UCSD central manager DN' '/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=osg-ligo-1.t2.ucsd.edu' condor
+        [root@client ~] # glidecondor_addDN -allow-others -daemon 'UCSD central manager DN' '/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=osg-ligo-1.t2.ucsd.edu' condor
 
 3. Configure the special HTCondor-RSV instance with your host IP address.
    
     Create the file `/etc/condor/config.d/98_public_interface.config` with this content:
 
         :::file
-        NETWORK\_INTERFACE = %RED%<ADDRESS>%ENDCOLOR%
-        CONDOR\_HOST = %RED%<CENTRAL\_MGR>%ENDCOLOR%
+        NETWORK_INTERFACE = %RED%<ADDRESS>%ENDCOLOR%
+        CONDOR_HOST = %RED%<CENTRAL_MGR>%ENDCOLOR%
 
     Where `ADDRESS` is the IP address of your Tester host, and `CENTRAL_MGR` is the hostname of your GlideinWMS Front-end Central Manager.
 
