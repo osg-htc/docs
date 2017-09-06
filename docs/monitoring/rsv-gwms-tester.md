@@ -212,7 +212,7 @@ Reference
 |:-----------------|:---------------------------|:------------------------------------------------------------------------------|
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` &lt;br&gt; `/etc/grid-security/hostkey.pem` |
 
-Find instructions to request a host certificate [here](Documentation/Release3.GetHostServiceCertificates).
+Find instructions to request a host certificate [here](../common/pki-cli.md).
 
 ### Networking
 
