@@ -226,26 +226,27 @@ Troubleshooting the LCMAPS VOMS plugin
 
 LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity of the logging can be increased by setting the `LCMAPS_DEBUG_LEVEL` environment variable. You can also change the destination of the logging by setting the `LCMAPS_LOG_FILE` environment variable.
 
-**1.** Use the table below to choose the appropriate file to edit:
+1.  Use the table below to choose the appropriate file to edit:
 
-| If your host is a(n)... | Edit this file...                      |
-|:------------------------|:---------------------------------------|
-| HTCondor-CE             | `/etc/sysconfig/condor-ce`             |
-| GridFTP server          | `/etc/sysconfig/globus-gridftp-server` |
+    | If your host is a(n)... | Edit this file...                      |
+    |:------------------------|:---------------------------------------|
+    | HTCondor-CE             | `/etc/sysconfig/condor-ce`             |
+    | GridFTP server          | `/etc/sysconfig/globus-gridftp-server` |
 
-Add the following to the file chosen in the previous step:
-``` bash
-export LCMAPS_DEBUG_LEVEL=5
-# optional (uncomment the following line to output log messages to a file):
-# export LCMAPS_LOG_FILE=/tmp/lcmaps.log
-```
+    Add the following to the file chosen in the previous step:
 
-**2.** Use the table below to choose the appropriate service to restart:
+        :::bash
+        export LCMAPS_DEBUG_LEVEL=5
+        # optional (uncomment the following line to output log messages to a file):
+        # export LCMAPS_LOG_FILE=/tmp/lcmaps.log
 
-| If your host is a(n)... | Restart the following service... |
-|:------------------------|:---------------------------------|
-| HTCondor-CE             | `condor-ce`                      |
-| GridFTP server          | `globus-gridftp-server`          |
+
+2.  Use the table below to choose the appropriate service to restart:
+
+    | If your host is a(n)... | Restart the following service... |
+    |:------------------------|:---------------------------------|
+    | HTCondor-CE             | `condor-ce`                      |
+    | GridFTP server          | `globus-gridftp-server`          |
 
 
 ### Troubleshooting mapping with HTCondor-CE
