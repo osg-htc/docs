@@ -12,6 +12,7 @@ pages:
 - Install Guides - Common:
   - 'Yum Repos': 'common/yum.md'
   - 'CA Certificates': 'common/ca.md'
+  - 'LCMAPS-VOMS authentication': 'common/install-lcmaps-voms.md'
 - Install Guides - Compute:
   - HTCondor-CE:
       - 'Overview': 'compute-element/htcondor-ce-overview.md'
