@@ -155,7 +155,7 @@ You can view the latest results of both probe types on an RSV results web page, 
 
 #### Viewing RSV results online
 
-To see the latest results, access `https://<em>HOSTNAME</em>/rsv/` (where `HOSTNAME` is the name of your Tester host).
+To see the latest results, access `https://%RED%<HOSTNAME>%ENDCOLOR%/rsv/` (where `HOSTNAME` is the name of your Tester host).
 
 -   There should be one result row per site supported by your VO(s), using the “org.osg.general.dummy-vanilla-probe” probe (aka *metric*)
 -   There should be exactly one result row for the probe that fetches the list of sites, which is the “org.osg.local-gfactory-site-querying-local” probe (aka *metric*)
@@ -178,7 +178,7 @@ To manually run the probe that fetches the list of sites supported by your VO(s)
 The probe produces many lines of output, some of which are just about the probe execution itself. But look for lines like this:
 
 ```console
-MSG: Updating configuration for host <em>UCSD</em>
+MSG: Updating configuration for host %RED%<UCSD>%ENDCOLOR%
 ```
 
 The highlighted name is the site name, and there should be one such line per site supported by your VO(s).
@@ -208,16 +208,13 @@ Reference
 
 ### Certificates
 
-<span class="twiki-macro STARTSECTION">Certificates</span>
-
 | Certificate      | User that owns certificate | Path to certificate                                                           |
 |:-----------------|:---------------------------|:------------------------------------------------------------------------------|
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` &lt;br&gt; `/etc/grid-security/hostkey.pem` |
 
-Find instructions to request a host certificate [here](Documentation/Release3.GetHostServiceCertificates). <span class="twiki-macro ENDSECTION">Certificates</span>
+Find instructions to request a host certificate [here](Documentation/Release3.GetHostServiceCertificates).
 
 ### Networking
 
-<span class="twiki-macro STARTSECTION">Firewalls</span> <span class="twiki-macro INCLUDE" section="FirewallTable" lines="condorscheddshared,rsvin">FirewallInformation</span>
+[Firewall Information](../common/firewall.md)
 
-<span class="twiki-macro ENDSECTION">Firewalls</span>
