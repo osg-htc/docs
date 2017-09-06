@@ -98,10 +98,39 @@ For a table of the configuration files and their order of evaluation, consult th
 
 The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authentication on HTCondor-CE, GridFTP, and XRootD hosts, is no longer available starting in OSG 3.4. The LCMAPS VOMS plugin (package `lcmaps-plugins-voms`) now provides the same functionality. To migrate from edg-mkgridmap to the LCMAPS VOMS plugin, perform the following procedure:
 
-&lt;ol&gt; &lt;li&gt; &lt;p&gt;Configure user DN mappings:&lt;/p&gt; &lt;ul&gt; &lt;li&gt; &lt;p&gt;If you have a local grid mapfile (see [this section](Documentation.Release3/Edg-mkgridmap#3_0_Configuration)), replace the contents of `/etc/grid-security/grid-mapfile` with the contents of the local grid mapfile.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;If you do not have a local grid mapfile, remove `/etc/grid-security/grid-mapfile`.&lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;If you are remaining on OSG 3.3, ensure that the you have set `export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1` in the appropriate file. If you have updated your host to OSG 3.4, skip to the next step.&lt;/p&gt; | **If your host is a(n)...** | **Add the aforementioned line to...** | | HTCondor-CE | `/etc/sysconfig/condor-ce` | | GridFTP server | `/etc/sysconfig/globus-gridftp-server` | &lt;/li&gt; &lt;li&gt; &lt;p&gt;If you are converting an HTCondor-CE host, remove the HTCondor-CE `GRIDMAP` configuration. Otherwise, skip to the next step.&lt;/p&gt; &lt;ol&gt; &lt;li&gt; &lt;p&gt;Find the location of this configuration using the following command:&lt;/p&gt; &lt;pre class="rootscreen"&gt;<span class="twiki-macro UCL_PROMPT_ROOT"></span> condor\_ce\_config\_val -v GRIDMAP&lt;/pre&gt; &lt;li&gt; &lt;p&gt;Delete the line that sets the `GRIDMAP` configuration variable&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;Reconfigure HTCondor-CE:&lt;/p&gt; &lt;pre class="rootscreen"&gt;<span class="twiki-macro UCL_PROMPT_ROOT"></span> condor\_ce\_reconfig&lt;/pre&gt; &lt;/li&gt; &lt;/ol&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;Remove edg-mkgridmap and related packages:&lt;/p&gt; &lt;pre class="rootscreen"&gt;<span class="twiki-macro UCL_PROMPT_ROOT"></span> yum erase edg-mkgridmap&lt;/pre&gt; &lt;/li&gt; &lt;/ol&gt;
+1.  Configure user DN mappings:
 
-!!!note
-    In the output from this command, yum should **not** list other packages than the one. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their OSG 3.3 (or 3.4) versions (they should have ".osg33" or ".osg34" in their versions), and try again.
+    * If you have a local grid mapfile (see [this section](Documentation.Release3/Edg-mkgridmap#3_0_Configuration)), replace the contents of `/etc/grid-security/grid-mapfile` with the contents of the local grid mapfile.
+
+    * If you do not have a local grid mapfile, remove `/etc/grid-security/grid-mapfile`.
+
+2.  If you are remaining on OSG 3.3, ensure that the you have set `export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1` in the appropriate file. If you have updated your host to OSG 3.4, skip to the next step.
+
+    | **If your host is a(n)...** | **Add the aforementioned line to...**  |
+    |:----------------------------|:---------------------------------------|
+    | HTCondor-CE                 | `/etc/sysconfig/condor-ce`             |
+    | GridFTP server              | `/etc/sysconfig/globus-gridftp-server` |
+
+3.  If you are converting an HTCondor-CE host, remove the HTCondor-CE `GRIDMAP` configuration. Otherwise, skip to the next step.
+
+    1. Find the location of this configuration using the following command:
+
+            :::console
+            [root@ce]# condor_ce_config_val -v GRIDMAP
+
+    2. Delete the line that sets the `GRIDMAP` configuration variable
+    3. Reconfigure HTCondor-CE:
+
+            :::console
+            [root@ce]# condor_ce_reconfig
+
+    4. Remove edg-mkgridmap and related packages:
+
+            :::console
+            [root@ce]# yum erase edg-mkgridmap
+
+        !!!note
+            In the output from this command, yum should **not** list other packages than the one. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their OSG 3.3 (or 3.4) versions (they should have ".osg33" or ".osg34" in their versions), and try again.
 
 
 #### Mapping VOs
