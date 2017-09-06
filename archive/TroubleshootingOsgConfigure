@@ -1,0 +1,125 @@
+%DOC_STATUS_TABLE%
+
+---+!! Troubleshooting osg-configure
+
+%TOC%
+
+---# About this document
+This document will help you troubleshoot problems with =osg-configure=. 
+
+This document follows the general OSG documentation conventions: %TWISTY{%TWISTY_OPTS_OUTPUT% showlink="Click to expand document conventions..."}%
+%INCLUDE{"Trash/DocumentationTeam/DocConventions" section="Header"}%
+%INCLUDE{"Trash/DocumentationTeam/DocConventions" section="CommandLine"}%
+%ENDTWISTY%
+
+---# How to get Help?
+To get assistance please use our [[HelpProcedure][Help Procedure]]. 
+
+---# osg-configure: The big picture
+
+osg-configure is used to configure services. As of this writing (April, 2011) it is used only to configure the Compute Element, but it may be used for other services in the future. It works by reading configuration files in =/etc/osg/config/= and making appropriate changes to other configuration on your computer. 
+
+---# Common osg-configure Problems
+
+---## osg-configure reports that you have not specified a valid sponsor VO
+
+osg-configure sometimes reports that you have not specified a valid sponsor VO. For example:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% osg-configure -v
+ERROR    Option 'sponsor' in section 'Site Information' located in /etc/osg/config.d/40-siteinfo.ini: VO name cdf not found
+ERROR    Valid VO names are as follows:
+star
+usatlas
+uscms
+local
+</pre>
+
+The list of valid VO names varies. These are the names of VOs that osg-configure believes you can specify because you support them. 
+
+If you get this error, there are a few things to check:
+
+   1. Is the VO authorized to use your site? Make sure that the VO is included in either your =edg-mkgridmap= configuration (i.e. =/etc/edg-mkgridmap.conf=) or your GUMS configuration.<br> *Note*: You can see the list of VOs that appear to be supported in =/var/lib/osg/supported-vo-list=. 
+   1. Make sure that the appropriate user account(s) are created on your CE and worker nodes. If your =edg-mkgridmap= or GUMS configuration maps the VO to an account that does not exist on the CE, it can cause this error. You can see the list of accounts that don't exist but need to exist in order to support all the VOs you authorize in either:
+      * If you use GUMS: =/var/lib/osg/gums-undefined-accounts=
+      * If you use edg-mkgridmap: =/var/lib/osg/undefined-accounts=
+
+---# Remember to run osg-configure!
+Remember that it is not sufficient to edit the files in =/etc/osg/config.d/=, you need also to run =osg-configure -c= in order for the changes to take effect!
+
+Then when you run osg-configure some configuration files gets overwritten and you loose the custom edits that you may have made:
+   * the RSV probes that have been enabled and against which host these are running
+
+---# Appendix: Important osg-configure files
+
+This document cannot cover all the errors you might experience. If you need to look for more data, you can look at log files:
+
+| *File* | *Purpose* |
+| =/var/log/osg/osg-configure.log= | Detailed log file produced when you run =osg-configure= |
+
+The most common RPMs you will see are:
+
+| *RPM* | *Purpose* |
+| =gratia-probe-common= | Code shared between all Graita probes |
+
+---# References
+
+   * [[IniConfigurationOptions][Options in the osg-configure .ini files]]
+
+---# Comments
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = SuchandraThapa
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = User
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = AlainRoy 	
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = AlainRoy 	
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %NO%
+############################################################################################################
+-->
