@@ -24,6 +24,8 @@ pages:
 - Install Guides - Data:
   - 'HTTP Cache': 'frontier-squid/squid.md'
   - 'GridFTP Server': 'storage/gridftp.md'
+- Install Guides - Monitoring:
+  - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
 - Release Information:
   - 'OSG Release Series': 'release/release_series.md'
   - 'Yum Basics': 'release/yum-basics.md'
