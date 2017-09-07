@@ -10,9 +10,9 @@ power opportunistically to the grid.
 
 Our most common software products include:
 
-* [HTCondor CE Installation](compute-element/HTCondor_CE.md): Provides a _gateway_
+* [HTCondor CE Installation](compute-element/install-htcondor-ce.md): Provides a _gateway_
   between the grid and your batch system.
-* [HTTP Proxy](frontier-squid/squid.md): Caches the most commonly-used files at your
+* [HTTP Proxy](data/squid.md): Caches the most commonly-used files at your
   site to preserve bandwidth (a custom packaging of the venerable `squid2` software).
 * [CVMFS](client/cvmfs.md) The CernVM File System (CVMFS) is a global-scale, read-only,
   hierarchical filesystem.  CVMFS volumes distribute the majority of the scientific
@@ -39,5 +39,5 @@ documents:
 * [Host certificate management package](common/cert_scripts.md)
 * [Job Router Recipes](compute-element/job_router.md)
 * [Installing the Worker Node from OASIS](client/wn-oasis.md)
-* [Installing a GridFTP Server](storage/gridftp.md)
+* [Installing a GridFTP Server](data/gridftp.md)
 
