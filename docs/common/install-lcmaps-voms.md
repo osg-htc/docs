@@ -24,13 +24,13 @@ Install `lcmaps`, the default mapfile, and the configuration tools:
 Configuring the LCMAPS VOMS Plugin
 ----------------------------------
 
-The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication. If you are using OSG 3.3 packages, there are software-specific instructions that must be followed for [HTCondor-CE](Documentation.Release3/InstallHTCondorCE), [GridFTP](Documentation.Release3/InstallOSGGridFTP), and [XRootD](Documentation.Release3/InstallXrootd). To check if you are running OSG 3.3, run the following command:
+The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication. If you are using OSG 3.3 packages, there are software-specific instructions that must be followed for [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../storage/gridftp), and [XRootD](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd). To check if you are running OSG 3.3, run the following command:
 
 ``` console
 [root@server]# rpm -q --queryformat="%{VERSION}\n" osg-release
 ```
 
-Additionally, there is [optional configuration](#OptionalConfig) if you need to make changes to the default mappings.
+Additionally, there is [optional configuration](#optional-configuration) if you need to make changes to the default mappings.
 
 
 ### Enabling the LCMAPS VOMS plugin
@@ -46,7 +46,7 @@ authorization_method = vomsmap
 
 ### Supporting mapped VOs and users
 
-Unix accounts must exist for each VO, VO role, VO group, or user you choose to support in the [mapfiles](#RefConfigFiles):
+Unix accounts must exist for each VO, VO role, VO group, or user you choose to support in the [mapfiles](#configuration-files):
 
 1.  Consult the default VO mappings in `/usr/share/osg/voms-mapfile-default` to determine the mapped Unix account names. Each of the mapfiles has the following format:
 
@@ -54,7 +54,7 @@ Unix accounts must exist for each VO, VO role, VO group, or user you choose to s
 
 
 2.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support
-3.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](Documentation.Release3/IniConfigurationOptions#Subcluster_Resource_Entry_Config):
+3.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/IniConfigurationOptions#Subcluster_Resource_Entry_Config):
 
 ``` ini
 allowed_vos="VO1,VO2..."
@@ -62,7 +62,7 @@ allowed_vos="VO1,VO2..."
 
 ### Applying configuration settings
 
-Making changes to the OSG configuration files in the `/etc/osg/config.d` directory does not apply those settings to software automatically. For the OSG settings, use the [osg-configure](IniConfigurationOptions) tool to validate (to a limited extent) and apply the settings to the relevant software components. If instead you wish to manage the LCMAPS VOMS plugin configuration yourself, skip to the [manual configuration section](#RefManConfig).
+Making changes to the OSG configuration files in the `/etc/osg/config.d` directory does not apply those settings to software automatically. For the OSG settings, use the [osg-configure](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/IniConfigurationOptions) tool to validate (to a limited extent) and apply the settings to the relevant software components. If instead you wish to manage the LCMAPS VOMS plugin configuration yourself, skip to the [manual configuration section](#manual-configuration).
 
 1.  Make all changes to `.ini` files in the `/etc/osg/config.d` directory.
 
@@ -85,13 +85,13 @@ Making changes to the OSG configuration files in the `/etc/osg/config.d` directo
 
 The following subsections contain information on migration from `edg-mkgridmap`, mapping or banning users by their certificates' Distinguished Names (DNs) or by their proxies' VOMS attributes. Any optional configuration is to be performed after the installation and configuration sections above.
 
-For a table of the configuration files and their order of evaluation, consult the [reference section](#RefConfigFiles).
+For a table of the configuration files and their order of evaluation, consult the [reference section](#configuration-files).
 
--   [Migrating from edg-mkgridmap](#EdgmkgridmapMigration)
--   [Mapping VOs](#OptionalMapVos)
--   [Mapping users](#OptionalMapUsers)
--   [Banning VOs](#OptionalBanVos)
--   [Banning users](#OptionalBanUsers)
+-   [Migrating from edg-mkgridmap](#migrating-from-edg-mkgridmap)
+-   [Mapping VOs](#mapping-vos)
+-   [Mapping users](#mapping-users)
+-   [Banning VOs](#banning-vos)
+-   [Banning users](#banning-users)
 
 
 #### Migrating from edg-mkgridmap
@@ -100,7 +100,7 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
 
 1.  Configure user DN mappings:
 
-    * If you have a local grid mapfile (see [this section](Documentation.Release3/Edg-mkgridmap#3_0_Configuration)), replace the contents of `/etc/grid-security/grid-mapfile` with the contents of the local grid mapfile.
+    * If you have a local grid mapfile (see [this section](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/Edg-mkgridmap#3_0_Configuration)), replace the contents of `/etc/grid-security/grid-mapfile` with the contents of the local grid mapfile.
 
     * If you do not have a local grid mapfile, remove `/etc/grid-security/grid-mapfile`.
 
@@ -266,7 +266,7 @@ Once you are satisfied that your mappings are working, you may remove this file 
 Getting Help
 ------------
 
-To get assistance, please use the [this page](Documentation.HelpProcedure).
+To get assistance, please use the [this page](../common/help).
 
 Reference
 ---------
@@ -285,7 +285,7 @@ The files are evaluated in the following order, with earlier files taking preced
 
 ### Manual Configuration
 
-This section is intended for use as reference if you choose to forego configuring the LCMAPS VOMS plugin via osg-configure (i.e., if you prefer a configuration management system like [Ansible](https://www.ansible.com/) or [Puppet](https://puppet.com/)). Therefore, the following instructions serve as a replacement for [this section](#ApplyConfig).
+This section is intended for use as reference if you choose to forego configuring the LCMAPS VOMS plugin via osg-configure (i.e., if you prefer a configuration management system like [Ansible](https://www.ansible.com/) or [Puppet](https://puppet.com/)). Therefore, the following instructions serve as a replacement for [this section](#applying-configuration-settings) above.
 
 LCMAPS is configured in `/etc/lcmaps.db`. and since the VOMS plugin is a newer component, configuration for it may not be present in your existing `/etc/lcmaps.db` file.
 
