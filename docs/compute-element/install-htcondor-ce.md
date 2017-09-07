@@ -4,7 +4,7 @@ Installing and Maintaining HTCondor-CE
 About This Guide
 ----------------
 
-The [HTCondor-CE](htcondor-ce-overview) software is a *job gateway* for an OSG Compute Element (CE). As such, HTCondor-CE is the entry point for jobs coming from the OSG — it handles authorization and delegation of jobs to your local batch system. In OSG today, most CEs accept *pilot jobs* from a factory, which in turn are able to accept and run end-user jobs.
+The [HTCondor-CE](htcondor-ce-overview) software is a *job gateway* for an OSG Compute Element (CE). As such, HTCondor-CE is the entry point for jobs coming from the OSG — it handles authorization and delegation of jobs to your local batch system. In OSG today, most CEs accept *pilot jobs* from a factory, which in turn are able to accept and run end-user jobs.  See the [HTCondor-CE Overview](htcondor-ce-overview) for a much more detailed introduction.
 
 Use this page to learn how to install, configure, run, test, and troubleshoot HTCondor-CE from the OSG software repositories.
 
