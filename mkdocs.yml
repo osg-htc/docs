@@ -14,12 +14,12 @@ pages:
   - 'Yum Repos': 'common/yum.md'
 - Install Guides - Client:
   - 'CVMFS': 'client/cvmfs.md'
-  - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'Worker Node (RPM install)': 'client/wn.md'
   - 'Worker Node (tarball install)': 'client/wn-tarball.md'
   - 'Worker Node (OASIS install)': 'client/wn-oasis.md'
 - Install Guides - Compute:
   - 'HTCondor-CE': 'compute-element/install-htcondor-ce.md'
+  - 'GSI-enabled SSH': 'other/gsissh.md'
 - Install Guides - Data:
   - 'GridFTP Server': 'storage/gridftp.md'
   - 'HTTP Cache': 'frontier-squid/squid.md'
