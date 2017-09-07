@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Install Guide - OSG Documentation</title>
+  <title>HTCondor-CE - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Install Guide";
+    var mkdocs_page_name = "HTCondor-CE";
     var mkdocs_page_input_path = "compute-element/install-htcondor-ce.md";
     var mkdocs_page_url = "/compute-element/install-htcondor-ce/";
   </script>
@@ -64,67 +64,19 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../common/yum/">Yum Repos</a>
+    <a class="" href="../../common/ca/">CA Certificates</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../common/ca/">CA Certificates</a>
+    <a class="" href="../../common/yum/">Yum Repos</a>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Install Guides - Compute</span>
+    <span class="caption-text">Install Guides - Client</span>
     <ul class="subnav">
-                <li class=" current">
-                    
-    <span class="caption-text">HTCondor-CE</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../htcondor-ce-overview/">Overview</a>
-                </li>
-                <li class="toctree-l3 current">
-                    
-    <a class="current" href="./">Install Guide</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l4"><a href="#installing-and-maintaining-htcondor-ce">Installing and Maintaining HTCondor-CE</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l5" href="#about-this-guide">About This Guide</a></li>
-        
-            <li><a class="toctree-l5" href="#before-starting">Before Starting</a></li>
-        
-            <li><a class="toctree-l5" href="#installing-htcondor-ce">Installing HTCondor-CE</a></li>
-        
-            <li><a class="toctree-l5" href="#configuring-htcondor-ce">Configuring HTCondor-CE</a></li>
-        
-            <li><a class="toctree-l5" href="#using-htcondor-ce">Using HTCondor-CE</a></li>
-        
-            <li><a class="toctree-l5" href="#validating-htcondor-ce">Validating HTCondor-CE</a></li>
-        
-            <li><a class="toctree-l5" href="#troubleshooting-htcondor-ce">Troubleshooting HTCondor-CE</a></li>
-        
-            <li><a class="toctree-l5" href="#registering-the-ce">Registering the CE</a></li>
-        
-            <li><a class="toctree-l5" href="#getting-help">Getting Help</a></li>
-        
-            <li><a class="toctree-l5" href="#reference">Reference</a></li>
-        
-        </ul>
-    
-
-    </ul>
-                </li>
-    </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
-                </li>
                 <li class="">
                     
     <a class="" href="../../client/cvmfs/">CVMFS</a>
@@ -146,26 +98,86 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Install Guides - Data</span>
+    <span class="caption-text">Install Guides - Compute</span>
     <ul class="subnav">
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../../frontier-squid/squid/">HTTP Cache</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../storage/gridftp/">GridFTP Server</a>
+    <a class="current" href="./">HTCondor-CE</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#installing-and-maintaining-htcondor-ce">Installing and Maintaining HTCondor-CE</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#about-this-guide">About This Guide</a></li>
+        
+            <li><a class="toctree-l4" href="#before-starting">Before Starting</a></li>
+        
+            <li><a class="toctree-l4" href="#installing-htcondor-ce">Installing HTCondor-CE</a></li>
+        
+            <li><a class="toctree-l4" href="#configuring-htcondor-ce">Configuring HTCondor-CE</a></li>
+        
+            <li><a class="toctree-l4" href="#using-htcondor-ce">Using HTCondor-CE</a></li>
+        
+            <li><a class="toctree-l4" href="#validating-htcondor-ce">Validating HTCondor-CE</a></li>
+        
+            <li><a class="toctree-l4" href="#troubleshooting-htcondor-ce">Troubleshooting HTCondor-CE</a></li>
+        
+            <li><a class="toctree-l4" href="#registering-the-ce">Registering the CE</a></li>
+        
+            <li><a class="toctree-l4" href="#getting-help">Getting Help</a></li>
+        
+            <li><a class="toctree-l4" href="#reference">Reference</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Install Guides - Monitoring</span>
+    <span class="caption-text">Install Guides - Data</span>
     <ul class="subnav">
                 <li class="">
                     
+    <a class="" href="../../data/gridftp/">GridFTP Server</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/squid/">HTTP Cache</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Other</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../monitoring/rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Overviews</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../htcondor-ce-overview/">HTCondor-CE</a>
                 </li>
     </ul>
 	    </li>
@@ -180,15 +192,15 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../release/yum-basics/">Yum Basics</a>
                 </li>
                 <li class="">
                     
     <a class="" href="../../release/signing/">RPM Signing</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
                 </li>
     </ul>
 	    </li>
@@ -233,15 +245,15 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../storage/bestman-overview/">BeStMan Overview</a>
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../storage/bestman-install/">BeStMan Install</a>
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../client/glexec/">Worker node glexec</a>
+    <a class="" href="../../client/glexec/">Worker node glexec Install</a>
                 </li>
     </ul>
 	    </li>
@@ -276,12 +288,8 @@
           <li>Install Guides - Compute &raquo;</li>
         
       
-        
-          <li>HTCondor-CE &raquo;</li>
-        
-      
     
-    <li>Install Guide</li>
+    <li>HTCondor-CE</li>
     <li class="wy-breadcrumbs-aside">
       
         <a href="https://github.com/opensciencegrid/docs/edit/master/docs/compute-element/install-htcondor-ce.md"
@@ -296,7 +304,7 @@
               
                 <h1 id="installing-and-maintaining-htcondor-ce">Installing and Maintaining HTCondor-CE</h1>
 <h2 id="about-this-guide">About This Guide</h2>
-<p>The <a href="../htcondor-ce-overview">HTCondor-CE</a> software is a <em>job gateway</em> for an OSG Compute Element (CE). As such, HTCondor-CE is the entry point for jobs coming from the OSG — it handles authorization and delegation of jobs to your local batch system. In OSG today, most CEs accept <em>pilot jobs</em> from a factory, which in turn are able to accept and run end-user jobs.</p>
+<p>The <a href="../htcondor-ce-overview">HTCondor-CE</a> software is a <em>job gateway</em> for an OSG Compute Element (CE). As such, HTCondor-CE is the entry point for jobs coming from the OSG — it handles authorization and delegation of jobs to your local batch system. In OSG today, most CEs accept <em>pilot jobs</em> from a factory, which in turn are able to accept and run end-user jobs.  See the <a href="../htcondor-ce-overview">HTCondor-CE Overview</a> for a much more detailed introduction.</p>
 <p>Use this page to learn how to install, configure, run, test, and troubleshoot HTCondor-CE from the OSG software repositories.</p>
 <h2 id="before-starting">Before Starting</h2>
 <p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
@@ -922,10 +930,10 @@ cms\/Role=production cms.prod
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../other/gsissh/" class="btn btn-neutral float-right" title="GSI-enabled SSH">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../data/gridftp/" class="btn btn-neutral float-right" title="GridFTP Server">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../htcondor-ce-overview/" class="btn btn-neutral" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../client/wn-oasis/" class="btn btn-neutral" title="Worker Node (OASIS install)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -953,10 +961,10 @@ cms\/Role=production cms.prod
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../htcondor-ce-overview/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../client/wn-oasis/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../other/gsissh/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../data/gridftp/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

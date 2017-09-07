@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>LCMAPS-VOMS authentication - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "LCMAPS-VOMS authentication";
+    var mkdocs_page_input_path = "other/lcmaps-voms-authentication.md";
+    var mkdocs_page_url = "/other/lcmaps-voms-authentication/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Common</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/yum/">Yum Repos</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Client</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../client/cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn/">Worker Node (RPM install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn-tarball/">Worker Node (tarball install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn-oasis/">Worker Node (OASIS install)</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Compute</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/install-htcondor-ce/">HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/gridftp/">GridFTP Server</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/squid/">HTTP Cache</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Other</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">LCMAPS-VOMS authentication</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#installing-and-maintaining-the-lcmaps-voms-plugin">Installing and Maintaining the LCMAPS VOMS Plugin</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#about-this-guide">About This Guide</a></li>
+        
+            <li><a class="toctree-l4" href="#installing-the-lcmaps-voms-plugin">Installing the LCMAPS VOMS Plugin</a></li>
+        
+            <li><a class="toctree-l4" href="#configuring-the-lcmaps-voms-plugin">Configuring the LCMAPS VOMS Plugin</a></li>
+        
+            <li><a class="toctree-l4" href="#validating-the-lcmaps-voms-plugin-vo-mappings">Validating the LCMAPS VOMS plugin VO mappings</a></li>
+        
+            <li><a class="toctree-l4" href="#troubleshooting-the-lcmaps-voms-plugin">Troubleshooting the LCMAPS VOMS plugin</a></li>
+        
+            <li><a class="toctree-l4" href="#getting-help">Getting Help</a></li>
+        
+            <li><a class="toctree-l4" href="#reference">Reference</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../monitoring/rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Overviews</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Usage Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/using-wn/">Worker Node Environment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">In-Progress Docs</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca_updater/">CA Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/cert_scripts/">Certificate Request Scripts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job_router/">Job Router Recipe</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deprecated Software</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/glexec/">Worker node glexec Install</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../common/help/">Get Help</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Install Guides - Other &raquo;</li>
+        
+      
+    
+    <li>LCMAPS-VOMS authentication</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/other/lcmaps-voms-authentication.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="installing-and-maintaining-the-lcmaps-voms-plugin">Installing and Maintaining the LCMAPS VOMS Plugin</h1>
+<h2 id="about-this-guide">About This Guide</h2>
+<p>LCMAPS is a software library for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., <code>/cms/Role=production/Capability=NULL</code>. Starting in OSG 3.4, the LCMAPS VOMS plugin will replace GUMS and edg-mkgridmap as the authentication method at OSG sites.</p>
+<p>The OSG provides a default set of mappings from VOMS attributes to Unix accounts. By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to, banning based on VOMS attributes, banning a specific user, or adding a VO, VO group, VO role, and/or user that is not in the OSG's set of mappings.</p>
+<p>Use this page to learn how to install and configure the LCMAPS VOMS plugin to authenticate users to access your resources on a per-VO basis.</p>
+<h2 id="installing-the-lcmaps-voms-plugin">Installing the LCMAPS VOMS Plugin</h2>
+<p>Install <code>lcmaps</code>, the default mapfile, and the configuration tools:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> yum install lcmaps vo-client-lcmaps-voms osg-configure-misc
+</pre></div>
+
+
+<h2 id="configuring-the-lcmaps-voms-plugin">Configuring the LCMAPS VOMS Plugin</h2>
+<p>The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication. If you are using OSG 3.3 packages, there are software-specific instructions that must be followed for <a href="../../compute-element/install-htcondor-ce">HTCondor-CE</a>, <a href="../../storage/gridftp">GridFTP</a>, and <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd">XRootD</a>. To check if you are running OSG 3.3, run the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> rpm -q --queryformat<span class="o">=</span><span class="s2">&quot;%{VERSION}\n&quot;</span> osg-release
+</pre></div>
+
+
+<p>Additionally, there is <a href="#optional-configuration">optional configuration</a> if you need to make changes to the default mappings.</p>
+<h3 id="enabling-the-lcmaps-voms-plugin">Enabling the LCMAPS VOMS plugin</h3>
+<p>To configure your host to use LCMAPS VOMS plugin authentication, edit <code>/etc/osg/config.d/10-misc.ini</code> and set the following options:</p>
+<div class="codehilite"><pre><span></span><span class="na">glexec_location</span> <span class="o">=</span> <span class="s">UNAVAILABLE</span>
+<span class="na">edit_lcmaps_db</span> <span class="o">=</span> <span class="s">True</span>
+<span class="na">authorization_method</span> <span class="o">=</span> <span class="s">vomsmap</span>
+</pre></div>
+
+
+<h3 id="supporting-mapped-vos-and-users">Supporting mapped VOs and users</h3>
+<p>Unix accounts must exist for each VO, VO role, VO group, or user you choose to support in the <a href="#configuration-files">mapfiles</a>:</p>
+<ol>
+<li>
+<p>Consult the default VO mappings in <code>/usr/share/osg/voms-mapfile-default</code> to determine the mapped Unix account names. Each of the mapfiles has the following format:</p>
+<div class="codehilite"><pre><span></span>&quot;<span style="color:red">&lt;VO, VO role, VO group or user&gt;</span>&quot; <span style="color:red">&lt;Unix account&gt;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Create Unix accounts for each VO, VO role, VO group, and user that you wish to support</p>
+</li>
+<li>Edit <code>/etc/osg/config.d/30-gip.ini</code> and specify the supported VOs per <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/IniConfigurationOptions#Subcluster_Resource_Entry_Config">Subcluster or ResourceEntry section</a>:</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="na">allowed_vos</span><span class="o">=</span><span class="s">&quot;VO1,VO2...&quot;</span>
+</pre></div>
+
+
+<h3 id="applying-configuration-settings">Applying configuration settings</h3>
+<p>Making changes to the OSG configuration files in the <code>/etc/osg/config.d</code> directory does not apply those settings to software automatically. For the OSG settings, use the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/IniConfigurationOptions">osg-configure</a> tool to validate (to a limited extent) and apply the settings to the relevant software components. If instead you wish to manage the LCMAPS VOMS plugin configuration yourself, skip to the <a href="#manual-configuration">manual configuration section</a>.</p>
+<ol>
+<li>
+<p>Make all changes to <code>.ini</code> files in the <code>/etc/osg/config.d</code> directory.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This document only describes the critical settings for the LCMAPS VOMS plugin and related software. You may need to configure other software that is installed on your host, too.</p>
+</div>
+</li>
+<li>
+<p>Validate the configuration settings:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> osg-configure -v
+</pre></div>
+
+
+</li>
+<li>
+<p>Once the validation command succeeds without errors, apply the configuration settings:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> osg-configure -c
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="optional-configuration">Optional configuration</h3>
+<p>The following subsections contain information on migration from <code>edg-mkgridmap</code>, mapping or banning users by their certificates' Distinguished Names (DNs) or by their proxies' VOMS attributes. Any optional configuration is to be performed after the installation and configuration sections above.</p>
+<p>For a table of the configuration files and their order of evaluation, consult the <a href="#configuration-files">reference section</a>.</p>
+<ul>
+<li><a href="#migrating-from-edg-mkgridmap">Migrating from edg-mkgridmap</a></li>
+<li><a href="#mapping-vos">Mapping VOs</a></li>
+<li><a href="#mapping-users">Mapping users</a></li>
+<li><a href="#banning-vos">Banning VOs</a></li>
+<li><a href="#banning-users">Banning users</a></li>
+</ul>
+<h4 id="migrating-from-edg-mkgridmap">Migrating from edg-mkgridmap</h4>
+<p>The program edg-mkgridmap (found in the package <code>edg-mkgridmap</code>), used for authentication on HTCondor-CE, GridFTP, and XRootD hosts, is no longer available starting in OSG 3.4. The LCMAPS VOMS plugin (package <code>lcmaps-plugins-voms</code>) now provides the same functionality. To migrate from edg-mkgridmap to the LCMAPS VOMS plugin, perform the following procedure:</p>
+<ol>
+<li>
+<p>Configure user DN mappings:</p>
+<ul>
+<li>
+<p>If you have a local grid mapfile (see <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/Edg-mkgridmap#3_0_Configuration">this section</a>), replace the contents of <code>/etc/grid-security/grid-mapfile</code> with the contents of the local grid mapfile.</p>
+</li>
+<li>
+<p>If you do not have a local grid mapfile, remove <code>/etc/grid-security/grid-mapfile</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>If you are remaining on OSG 3.3, ensure that the you have set <code>export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1</code> in the appropriate file. If you have updated your host to OSG 3.4, skip to the next step.</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>If your host is a(n)...</strong></th>
+<th align="left"><strong>Add the aforementioned line to...</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">HTCondor-CE</td>
+<td align="left"><code>/etc/sysconfig/condor-ce</code></td>
+</tr>
+<tr>
+<td align="left">GridFTP server</td>
+<td align="left"><code>/etc/sysconfig/globus-gridftp-server</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>If you are converting an HTCondor-CE host, remove the HTCondor-CE <code>GRIDMAP</code> configuration. Otherwise, skip to the next step.</p>
+<ol>
+<li>
+<p>Find the location of this configuration using the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@ce]#</span> condor_ce_config_val -v GRIDMAP
+</pre></div>
+
+
+</li>
+<li>
+<p>Delete the line that sets the <code>GRIDMAP</code> configuration variable</p>
+</li>
+<li>
+<p>Reconfigure HTCondor-CE:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@ce]#</span> condor_ce_reconfig
+</pre></div>
+
+
+</li>
+<li>
+<p>Remove edg-mkgridmap and related packages:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@ce]#</span> yum erase edg-mkgridmap
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the output from this command, yum should <strong>not</strong> list other packages than the one. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their OSG 3.3 (or 3.4) versions (they should have ".osg33" or ".osg34" in their versions), and try again.</p>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="mapping-vos">Mapping VOs</h4>
+<p><code>/etc/grid-security/voms-mapfile</code> is used to map VOs, VO roles, or VO groups to Unix accounts based on their VOMS attributes. An example of the format of a <code>voms-mapfile</code> follows:</p>
+<div class="codehilite"><pre><span></span># map GLOW jobs to the &#39;glow&#39; Unix account.
+&quot;/GLOW/*&quot; glow
+# map GLOW jobs in the chtc group to the &#39;glow1&#39; Unix account.
+&quot;/GLOW/chtc/*&quot; glow1
+# map GLOW jobs with the htpc role to the &#39;glow2&#39; Unix account.
+&quot;/GLOW/Role=htpc/*&quot; glow2
+</pre></div>
+
+
+<p>Each non-commented line is a shell-style pattern which is compared against the user's VOMS attributes, and a Unix account that the user will be mapped to if the pattern matches.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Unix account must exist for the user to be mapped. If a VO's Unix account is missing, that VO will not be able to access your resources.</p>
+</div>
+<h4 id="mapping-users">Mapping users</h4>
+<p><code>/etc/grid-security/grid-mapfile</code> is used to map specific users to Unix accounts based on their certificates' DNs. An example of the format of a <code>grid-mapfile</code> follows:</p>
+<div class="codehilite"><pre><span></span># map Matyas&#39;s FNAL DN to the &#39;matyas&#39; Unix account
+&quot;/DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Matyas Selmeci/CN=UID:matyas&quot; matyas
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Unix account must exist for the user to be mapped. If a user's Unix account is missing, that user will not be able to access your resources.</p>
+</div>
+<h4 id="banning-vos">Banning VOs</h4>
+<p><code>/etc/grid-security/ban-voms-mapfile</code> is used to ban an entire VO or a role withing a VO from accessing resources on your machine. An example of the format of a <code>ban-voms-mapfile</code> follows:</p>
+<div class="codehilite"><pre><span></span># ban CMS production jobs
+&quot;/cms/Role=production/*&quot;
+</pre></div>
+
+
+<p>Each non-commented line is a shell-style pattern which is compared against a user's VOMS attributes. If the pattern matches, that user will be unable to access your resources.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>/etc/grid-security/ban-voms-mapfile</code> <em>must</em> exist, even if you are not banning any VOs. In that case, the file should be blank. If the file does not exist, LCMAPS will ban every user.</p>
+</div>
+<h4 id="banning-users">Banning users</h4>
+<p><code>/etc/grid-security/ban-mapfile</code> is used to ban specific users from accessing your resources based on their certificates' DNs. An example of the format of a <code>ban-mapfile</code> follows:</p>
+<div class="codehilite"><pre><span></span># ban Matyas&#39;s FNAL DN
+&quot;/DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Matyas Selmeci/CN=UID:matyas&quot;
+</pre></div>
+
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>/etc/grid-security/ban-mapfile</code> <em>must</em> exist, even if you are not banning any users. In that case, the file should be blank. If the file does not exist, LCMAPS will ban every user.</p>
+</div>
+<h2 id="validating-the-lcmaps-voms-plugin-vo-mappings">Validating the LCMAPS VOMS plugin VO mappings</h2>
+<p>To validate the LCMAPS VOMS plugin by itself, use the following procedure to test mapping your own cert to a user:</p>
+<ol>
+<li>Verify your DN is <em>not</em> in <code>/etc/grid-security/grid-mapfile</code>, or else it will generate a false positive</li>
+<li>Verify your DN is <em>not</em> in <code>/etc/grid-security/ban-mapfile</code>, or else it will generate a false negative</li>
+<li>
+<p>Install the <code>llrun</code> and <code>voms-clients</code> packages:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@host]#</span> yum install llrun voms-clients
+</pre></div>
+
+
+</li>
+<li>
+<p>As an unprivileged user, create a VOMS proxy (filling in <code>&lt;YOUR_VO&gt;</code> with a VO you are a member of):</p>
+<div class="codehilite"><pre><span></span><span class="gp">[you@client]$</span> voms-proxy-init -voms <span style="color:red">&lt;YOUR_VO&gt;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Verify that your credentials are mapped as expected:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[you@client]$</span> llrun -s -l <span class="nv">mode</span><span class="o">=</span>pem,policy<span class="o">=</span>authorize_only,db<span class="o">=</span>/etc/lcmaps.db <span class="se">\</span>
+    -p/tmp/x509up_u<span class="sb">`</span>id -u<span class="sb">`</span>
+</pre></div>
+
+
+</li>
+</ol>
+<p>If you did not get correctly mapped, check your proxy's FQAN by running:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[you@client]$</span> voms-proxy-info -fqan
+</pre></div>
+
+
+<p>and make sure it matches one of the patterns in <code>/etc/grid-security/voms-mapfile</code> or <code>/usr/share/osg/voms-mapfile-default</code>, and does not match any patterns in <code>/etc/grid-security/ban-voms-mapfile</code>.</p>
+<h2 id="troubleshooting-the-lcmaps-voms-plugin">Troubleshooting the LCMAPS VOMS plugin</h2>
+<p>LCMAPS logs to <code>journalctl</code> (EL7) or <code>/var/log/messages</code> (EL6) and the verbosity of the logging can be increased by setting the <code>LCMAPS_DEBUG_LEVEL</code> environment variable. You can also change the destination of the logging by setting the <code>LCMAPS_LOG_FILE</code> environment variable.</p>
+<ol>
+<li>
+<p>Use the table below to choose the appropriate file to edit:</p>
+<table>
+<thead>
+<tr>
+<th align="left">If your host is a(n)...</th>
+<th align="left">Edit this file...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">HTCondor-CE</td>
+<td align="left"><code>/etc/sysconfig/condor-ce</code></td>
+</tr>
+<tr>
+<td align="left">GridFTP server</td>
+<td align="left"><code>/etc/sysconfig/globus-gridftp-server</code></td>
+</tr>
+</tbody>
+</table>
+<p>Add the following to the file chosen in the previous step:</p>
+<div class="codehilite"><pre><span></span><span class="nb">export</span> <span class="nv">LCMAPS_DEBUG_LEVEL</span><span class="o">=</span><span class="m">5</span>
+<span class="c1"># optional (uncomment the following line to output log messages to a file):</span>
+<span class="c1"># export LCMAPS_LOG_FILE=/tmp/lcmaps.log</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Use the table below to choose the appropriate service to restart:</p>
+<table>
+<thead>
+<tr>
+<th align="left">If your host is a(n)...</th>
+<th align="left">Restart the following service...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">HTCondor-CE</td>
+<td align="left"><code>condor-ce</code></td>
+</tr>
+<tr>
+<td align="left">GridFTP server</td>
+<td align="left"><code>globus-gridftp-server</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h3 id="troubleshooting-mapping-with-htcondor-ce">Troubleshooting mapping with HTCondor-CE</h3>
+<p>HTCondor-CE caches auth lookups for 30 minutes by default. If you are testing changes to your various mapfiles with HTCondor-CE, you will need to disable this caching.</p>
+<p>To do this, create a file in <code>/etc/condor-ce/config.d</code> called e.g. <code>99-disablegsicache.conf</code> with the following line:</p>
+<div class="codehilite"><pre><span></span>GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION=0
+</pre></div>
+
+
+<p>and then restart <code>condor-ce</code>.</p>
+<p>Once you are satisfied that your mappings are working, you may remove this file and restart <code>condor-ce</code> in order to reduce the load on your CE caused by authentication.</p>
+<h2 id="getting-help">Getting Help</h2>
+<p>To get assistance, please use the <a href="../../common/help">this page</a>.</p>
+<h2 id="reference">Reference</h2>
+<h3 id="configuration-files">Configuration Files</h3>
+<p>The files are evaluated in the following order, with earlier files taking precedence over later ones:</p>
+<table>
+<thead>
+<tr>
+<th align="left">File</th>
+<th align="left">Provider</th>
+<th align="left">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>/etc/grid-security/ban-mapfile</code></td>
+<td align="left">Admin</td>
+<td align="left">Ban DNs</td>
+</tr>
+<tr>
+<td align="left"><code>/etc/grid-security/ban-voms-mapfile</code></td>
+<td align="left">Admin</td>
+<td align="left">Ban VOs</td>
+</tr>
+<tr>
+<td align="left"><code>/etc/grid-security/grid-mapfile</code></td>
+<td align="left">Admin</td>
+<td align="left">Map DNs</td>
+</tr>
+<tr>
+<td align="left"><code>/etc/grid-security/voms-mapfile</code></td>
+<td align="left">Admin</td>
+<td align="left">Map VOs</td>
+</tr>
+<tr>
+<td align="left"><code>/usr/share/osg/voms-mapfile-default</code></td>
+<td align="left">OSG</td>
+<td align="left">Map VOs (default)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="manual-configuration">Manual Configuration</h3>
+<p>This section is intended for use as reference if you choose to forego configuring the LCMAPS VOMS plugin via osg-configure (i.e., if you prefer a configuration management system like <a href="https://www.ansible.com/">Ansible</a> or <a href="https://puppet.com/">Puppet</a>). Therefore, the following instructions serve as a replacement for <a href="#applying-configuration-settings">this section</a> above.</p>
+<p>LCMAPS is configured in <code>/etc/lcmaps.db</code>. and since the VOMS plugin is a newer component, configuration for it may not be present in your existing <code>/etc/lcmaps.db</code> file.</p>
+<ol>
+<li>
+<p>Ensure the following lines are present in the "Module definitions" section (the top section, before <code>authorize_only</code>) of <code>/etc/lcmaps.db</code>:</p>
+<div class="codehilite"><pre><span></span>gridmapfile = &quot;lcmaps_localaccount.mod&quot;
+              &quot;-gridmap /etc/grid-security/grid-mapfile&quot;
+banfile = &quot;lcmaps_ban_dn.mod&quot;
+          &quot;-banmapfile /etc/grid-security/ban-mapfile&quot;
+banvomsfile = &quot;lcmaps_ban_fqan.mod&quot;
+              &quot;-banmapfile /etc/grid-security/ban-voms-mapfile&quot;
+vomsmapfile = &quot;lcmaps_voms_localaccount.mod&quot;
+              &quot;-gridmap /etc/grid-security/voms-mapfile&quot;
+defaultmapfile = &quot;lcmaps_voms_localaccount2.mod&quot;
+                 &quot;-gridmap /usr/share/osg/voms-mapfile-default&quot;
+
+verifyproxynokey = &quot;lcmaps_verify_proxy2.mod&quot;
+          &quot;--allow-limited-proxy&quot;
+          &quot;--discard_private_key_absence&quot;
+          &quot; -certdir /etc/grid-security/certificates&quot;
+</pre></div>
+
+
+</li>
+<li>
+<p>Edit the <code>authorize_only</code> section so that it contains only the following uncommented lines:</p>
+<div class="codehilite"><pre><span></span>verifyproxynokey -&gt; banfile
+banfile -&gt; banvomsfile | bad
+banvomsfile -&gt; gridmapfile | bad
+gridmapfile -&gt; good | vomsmapfile
+vomsmapfile -&gt; good | defaultmapfile
+defaultmapfile -&gt; good | bad
+</pre></div>
+
+
+</li>
+<li>
+<p>Edit <code>/etc/grid-security/gsi-authz.conf</code> and ensure that it contains the following line with a newline at the end:</p>
+<div class="codehilite"><pre><span></span>globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout
+</pre></div>
+
+
+</li>
+</ol>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../monitoring/rsv-gwms-tester/" class="btn btn-neutral float-right" title="RSV GlideinWMS Tester">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../gsissh/" class="btn btn-neutral" title="GSI-enabled SSH"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../gsissh/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../monitoring/rsv-gwms-tester/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

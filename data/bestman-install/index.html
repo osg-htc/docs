@@ -19,8 +19,8 @@
   <script>
     // Current page data
     var mkdocs_page_name = "BeStMan Install";
-    var mkdocs_page_input_path = "storage/bestman-install.md";
-    var mkdocs_page_url = "/storage/bestman-install/";
+    var mkdocs_page_input_path = "data/bestman-install.md";
+    var mkdocs_page_url = "/data/bestman-install/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -64,37 +64,19 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../common/yum/">Yum Repos</a>
+    <a class="" href="../../common/ca/">CA Certificates</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../common/ca/">CA Certificates</a>
+    <a class="" href="../../common/yum/">Yum Repos</a>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Install Guides - Compute</span>
+    <span class="caption-text">Install Guides - Client</span>
     <ul class="subnav">
-                <li class="">
-                    
-    <span class="caption-text">HTCondor-CE</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../compute-element/htcondor-ce-overview/">Overview</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../compute-element/install-htcondor-ce/">Install Guide</a>
-                </li>
-    </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
-                </li>
                 <li class="">
                     
     <a class="" href="../../client/cvmfs/">CVMFS</a>
@@ -116,26 +98,56 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Install Guides - Data</span>
+    <span class="caption-text">Install Guides - Compute</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../frontier-squid/squid/">HTTP Cache</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../gridftp/">GridFTP Server</a>
+    <a class="" href="../../compute-element/install-htcondor-ce/">HTCondor-CE</a>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Install Guides - Monitoring</span>
+    <span class="caption-text">Install Guides - Data</span>
     <ul class="subnav">
                 <li class="">
                     
+    <a class="" href="../gridftp/">GridFTP Server</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../squid/">HTTP Cache</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Other</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../monitoring/rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Overviews</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE</a>
                 </li>
     </ul>
 	    </li>
@@ -150,15 +162,15 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../release/yum-basics/">Yum Basics</a>
                 </li>
                 <li class="">
                     
     <a class="" href="../../release/signing/">RPM Signing</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
                 </li>
     </ul>
 	    </li>
@@ -289,7 +301,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../client/glexec/">Worker node glexec</a>
+    <a class="" href="../../client/glexec/">Worker node glexec Install</a>
                 </li>
     </ul>
 	    </li>
@@ -328,7 +340,7 @@
     <li>BeStMan Install</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/storage/bestman-install.md"
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/bestman-install.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -931,7 +943,7 @@ bestman   ALL=(SRM_USR) NOPASSWD: SRM_CMD
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../client/glexec/" class="btn btn-neutral float-right" title="Worker node glexec">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../client/glexec/" class="btn btn-neutral float-right" title="Worker node glexec Install">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../bestman-overview/" class="btn btn-neutral" title="BeStMan Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
