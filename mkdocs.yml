@@ -12,7 +12,6 @@ pages:
 - Install Guides - Common:
   - 'Yum Repos': 'common/yum.md'
   - 'CA Certificates': 'common/ca.md'
-  - 'LCMAPS-VOMS authentication': 'common/install-lcmaps-voms.md'
 - Install Guides - Compute:
   - HTCondor-CE:
       - 'Overview': 'compute-element/htcondor-ce-overview.md'
@@ -25,8 +24,9 @@ pages:
 - Install Guides - Data:
   - 'HTTP Cache': 'frontier-squid/squid.md'
   - 'GridFTP Server': 'storage/gridftp.md'
-- Install Guides - Monitoring:
+- Install Guides - Other:
   - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
+  - 'LCMAPS-VOMS authentication': 'other/install-lcmaps-voms.md'
 - Release Information:
   - 'OSG Release Series': 'release/release_series.md'
   - 'Yum Basics': 'release/yum-basics.md'
