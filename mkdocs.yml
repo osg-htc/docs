@@ -19,12 +19,13 @@ pages:
   - 'Worker Node (OASIS install)': 'client/wn-oasis.md'
 - Install Guides - Compute:
   - 'HTCondor-CE': 'compute-element/install-htcondor-ce.md'
-  - 'GSI-enabled SSH': 'other/gsissh.md'
 - Install Guides - Data:
   - 'GridFTP Server': 'storage/gridftp.md'
   - 'HTTP Cache': 'frontier-squid/squid.md'
 - Install Guides - Monitoring:
   - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
+- Install Guides - Other:
+  - 'GSI-enabled SSH': 'other/gsissh.md'
 - Overviews:
   - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
 - Release Information:
