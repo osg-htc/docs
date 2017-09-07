@@ -79,12 +79,12 @@ With non-HTCondor batch systems, HTCondor-CE cannot use internal HTCondor protoc
 
 ![HTCondor-CE-Bosco](../images/HTCondorCEBosco.png)
 
-HTCondor-CE-Bosco is intended for small sites or as an introduction to the OSG. If your site intends to run thousands of OSG jobs, you will need to host a standard [HTCondor-CE](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorCE) because HTCondor-CE-Bosco has not yet been optimized for such loads.
+HTCondor-CE-Bosco is intended for small sites or as an introduction to the OSG. If your site intends to run thousands of OSG jobs, you will need to host a standard [HTCondor-CE](install-htcondor-ce) because HTCondor-CE-Bosco has not yet been optimized for such loads.
 
 How the CE is Customized
 ------------------------
 
-Aside from the [basic configuration](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorCE#Configuring_HTCondor_CE) required in the CE installation, there are two main ways to customize your CE (if you decide any customization is required at all):
+Aside from the [basic configuration](install-htcondor-ce#configuring-htcondor-ce) required in the CE installation, there are two main ways to customize your CE (if you decide any customization is required at all):
 
 -   **Deciding which VOs are allowed to run at your site:** The method of limiting the VOs that are allowed to run on your site has not changed between GRAM and HTCondor-CE’s: select an authorization system, GUMS or edg-mkgridmap, and configure it accordingly.
 -   **How to filter and transform the grid jobs to be run on your batch system:** Filtering and transforming grid jobs (i.e., setting site-specific attributes or resource limits), requires configuration of your site’s job routes. For examples of common job routes, consult the [JobRouter recipes](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/JobRouterRecipes) page.
@@ -106,7 +106,7 @@ Next steps
 
 If you're transitioning from a GRAM CE to HTCondor-CE, the process is the same as if you were setting up a completely new CE, whether you're installing it on a new machine or alongside your GRAM CE.
 
--   Install [HTCondor-CE](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorCE) or [HTCondor-CE-Bosco](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorBosco)
+-   Install [HTCondor-CE](install-htcondor-ce) or [HTCondor-CE-Bosco](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorBosco)
 -   Setting up [job routes](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/JobRouterRecipes)
 -   [Submitting](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/SubmittingHTCondorCE) jobs to HTCondor-CE
 -   [Troubleshooting](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE) HTCondor-CE

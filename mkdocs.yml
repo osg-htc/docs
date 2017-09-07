@@ -9,12 +9,20 @@ extra_css:
 pages:
 - Home: 'index.md'
 - Installation Overview: 'install-overview.md'
+- Install Guides - Common:
+  - 'Yum Repos': 'common/yum.md'
+  - 'CA Certificates': 'common/ca.md'
 - Install Guides - Client:
   - 'CVMFS': 'client/cvmfs.md'
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'Worker Node (RPM install)': 'client/wn.md'
   - 'Worker Node (tarball install)': 'client/wn-tarball.md'
   - 'Worker Node (OASIS install)': 'client/wn-oasis.md'
+- Install Guides - Compute:
+  - HTCondor-CE:
+      - 'Overview': 'compute-element/htcondor-ce-overview.md'
+      - 'Install Guide': 'compute-element/install-htcondor-ce.md'
+  - 'GSI-enabled SSH': 'other/gsissh.md'
 - Install Guides - Common:
   - 'CA Certificates': 'common/ca.md'
   - 'Yum Repos': 'common/yum.md'
@@ -23,6 +31,8 @@ pages:
 - Install Guides - Data:
   - 'GridFTP Server': 'storage/gridftp.md'
   - 'HTTP Cache': 'frontier-squid/squid.md'
+- Install Guides - Monitoring:
+  - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
 - Overviews:
   - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
 - Release Information:

@@ -70,3 +70,8 @@
 .wy-nav-content {
     max-width: 90%;
 }
+
+code, tt {
+    font-size: 100%;
+}
+
