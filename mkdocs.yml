@@ -20,8 +20,8 @@ pages:
 - Install Guides - Compute:
   - 'HTCondor-CE': 'compute-element/install-htcondor-ce.md'
 - Install Guides - Data:
-  - 'GridFTP Server': 'storage/gridftp.md'
-  - 'HTTP Cache': 'frontier-squid/squid.md'
+  - 'GridFTP Server': 'data/gridftp.md'
+  - 'HTTP Cache': 'data/squid.md'
 - Install Guides - Monitoring:
   - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
 - Install Guides - Other:
@@ -41,8 +41,8 @@ pages:
   - 'Certificate Request Scripts': 'common/cert_scripts.md'
   - 'Job Router Recipe': 'compute-element/job_router.md'
 - Deprecated Software:
-  - 'BeStMan Overview': 'storage/bestman-overview.md'
-  - 'BeStMan Install': 'storage/bestman-install.md'
+  - 'BeStMan Overview': 'data/bestman-overview.md'
+  - 'BeStMan Install': 'data/bestman-install.md'
   - 'Worker node glexec Install': 'client/glexec.md'
 - 'Get Help': 'common/help.md'
 
