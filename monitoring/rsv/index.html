@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>RSV - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "RSV";
+    var mkdocs_page_input_path = "monitoring/rsv.md";
+    var mkdocs_page_url = "/monitoring/rsv/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Common</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/yum/">Yum Repos</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Client</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../client/cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn/">Worker Node (RPM install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn-tarball/">Worker Node (tarball install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn-oasis/">Worker Node (OASIS install)</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Compute</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/install-htcondor-ce/">HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/gridftp/">GridFTP Server</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/squid/">HTTP Cache</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Other</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Monitoring</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">RSV</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#installing-configuring-using-and-troubleshooting-rsv">Installing, Configuring, Using, and Troubleshooting RSV</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#about-this-guide">About This Guide</a></li>
+        
+            <li><a class="toctree-l4" href="#introduction-to-rsv">Introduction to RSV</a></li>
+        
+            <li><a class="toctree-l4" href="#before-starting">Before Starting</a></li>
+        
+            <li><a class="toctree-l4" href="#installing-rsv">Installing RSV</a></li>
+        
+            <li><a class="toctree-l4" href="#configuring-rsv">Configuring RSV</a></li>
+        
+            <li><a class="toctree-l4" href="#using-rsv">Using RSV</a></li>
+        
+            <li><a class="toctree-l4" href="#troubleshooting-rsv">Troubleshooting RSV</a></li>
+        
+            <li><a class="toctree-l4" href="#getting-help">Getting Help</a></li>
+        
+            <li><a class="toctree-l4" href="#reference">Reference</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Overviews</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Usage Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/using-wn/">Worker Node Environment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">In-Progress Docs</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca_updater/">CA Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/cert_scripts/">Certificate Request Scripts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job_router/">Job Router Recipe</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deprecated Software</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/glexec/">Worker node glexec Install</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../common/help/">Get Help</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Install Guides - Monitoring &raquo;</li>
+        
+      
+    
+    <li>RSV</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/monitoring/rsv.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="installing-configuring-using-and-troubleshooting-rsv">Installing, Configuring, Using, and Troubleshooting RSV</h1>
+<h2 id="about-this-guide">About This Guide</h2>
+<p>The Resource and Service Validation (RSV) software helps a site administrator verify that certain site resources and services are working as expected. OSG recommends that sites install and run RSV, but it is optional; further, each site selects which specific tests (called <em>probes</em>) to run.</p>
+<p>Use this page to learn more about RSV in general, and how to install, configure, run, test, and troubleshoot RSV from the OSG software repositories. For documentation on specific probes or on how to write your own probes, please check the <a href="#reference">Reference section</a>.</p>
+<h2 id="introduction-to-rsv">Introduction to RSV</h2>
+<p>The Resource and Service Validation (RSV) software provides OSG site administrators a scalable and easy-to-maintain resource and service monitoring infrastructure. The components of RSV are:</p>
+<ul>
+<li><strong>RSV Client.</strong> The client tools allow a site administrator to run tests against their site by providing a set of tests (which can run on the same or other hosts within a site), HTCondor-Cron for scheduling, and tools for collecting and storing the results (using Gratia). The client package is not installed by default and may be installed on a CE or other host. Generally, you configure the RSV client to run tests at scheduled time intervals and then it makes results available on a local website. Also, the client can upload test results to a central collector (see next item).</li>
+<li><strong>RSV Collector/Server.</strong> The central OSG RSV Collector accepts and stores results from RSV clients throughout OSG, which can be viewed in <a href="http://myosg.grid.iu.edu/">MyOSG</a>, on the “Current RSV Status” page and under the “Resource Group” menu.</li>
+<li><strong>Periodic Availability Reports.</strong> The availability of all active registered OSG resources and the services running on each of those resources is calculated using the results received for <a href="https://twiki.grid.iu.edu/bin/view/Operations/RsvEquivalency#Critical_Tests_for_OSG_Resources&gt;">critical metrics</a>. Once a day, these availability numbers are <a href="http://rsv.grid.iu.edu/daily-reports">published online</a> (More information: <a href="https://twiki.grid.iu.edu/bin/view/Operations/RSVPeriodicReporting">Outline of reports</a>).</li>
+<li><strong>RSV-SAM Transport.</strong> The WLCG RSV-SAM Transport infrastructure pushes out RSV results, for resources that are flagged to be part of the WLCG Interoperability agreement, from the GOC collector to WLCG's Service Availability Monitoring (SAM) system. More information on viewing these results is <a href="https://twiki.grid.iu.edu/twiki/bin/view/Operations/RsvSAMGridView">available here</a>.</li>
+<li><strong>MyOSG and OIM Links.</strong> RSV picks up resource information, WLCG interoperability information, etc., from a MyOSG resource group summary listing, which is in turn based on the <a href="https://oim.grid.iu.edu">OSG Information Management (OIM) (topology) system</a> (Requires registration). Resource <a href="https://twiki.grid.iu.edu/twiki/bin/view/Operations/OIMMaintTool">maintenance scheduled on OIM</a> are forwarded to WLCG SAM, if applicable.</li>
+</ul>
+<h2 id="before-starting">Before Starting</h2>
+<p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
+<ul>
+<li><strong>User IDs:</strong> If they do not exist already, the installation will create the Linux user IDs <code>rsv</code> and <code>cndrcron</code></li>
+<li><strong>Service certificate:</strong> The RSV service requires a service certificate (<code>/etc/grid-security/rsv/rsvcert.pem</code>) and matching key (<code>/etc/grid-security/rsv/rsvkey.pem</code>)</li>
+<li><strong>Network ports:</strong> To view results, port 80 must accept incoming requests; outbound connectivity to tested services must work, too</li>
+<li><strong>Host choice:</strong> Install RSV on your site CE unless you have specific reasons (e.g., performance) for installing on a separate host</li>
+</ul>
+<p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
+<ul>
+<li>Ensure the RSV host has <a href="../../common/yum/">a supported operating system</a></li>
+<li>Obtain root access to the host</li>
+<li>Prepare <a href="../../common/yum/">the required Yum repositories</a></li>
+<li>Install <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth">CA certificates</a></li>
+</ul>
+<h2 id="installing-rsv">Installing RSV</h2>
+<p>An installation of RSV at a site consists of the RSV client software, the Apache web server, parts of HTCondor (for its cron-like scheduling capabilities), and various other small tools. To simplify installation, OSG provides a convenience RPM that installs all required software with a single command.</p>
+<ol>
+<li>
+<p>Consider updating your local cache of Yum repository data and your existing RPM packages:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum clean all --enablerepo<span class="o">=</span><span class="se">\*</span>
+<span class="gp">[root@client ~] #</span> yum update
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>update</code> command will update <strong>all</strong> packages on your system.</p>
+</div>
+</li>
+<li>
+<p>If you have installed HTCondor already but not by RPM, install a special empty RPM to make RSV happy:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install empty-condor --enablerepo<span class="o">=</span>osg-empty
+</pre></div>
+
+
+</li>
+<li>
+<p>Install RSV and related software: </p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install rsv
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="configuring-rsv">Configuring RSV</h2>
+<p>After installation, there are some one-time configuration steps to tell RSV how to operate at your site.</p>
+<ol>
+<li>
+<p>Edit <code>/etc/osg/config.d/30-rsv.ini</code> and follow the instructions in the file. There are detailed comments for each setting. In the simplest case — to monitor only your CE — set the <code>htcondor_ce_hosts</code> variable to the fully qualified hostname of your CE.</p>
+</li>
+<li>
+<p>If you have installed HTCondor already but not by RPM, specify the location of the Condor installation in <code>30-rsv.ini</code> in the <code>condor_location</code> setting. If an HTCondor RPM is installed, you do not need to set <code>condor_location</code>.</p>
+</li>
+<li>
+<p>Complete the configuration using the <code>osg-configure</code> tool:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-configure -v
+<span class="gp">[root@client ~] #</span> osg-configure -c
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="optional-configuration">Optional configuration</h3>
+<p>The following configuration steps are optional and will likely not be required for setting up a small or typical site. If you do not need any of the following special configurations, skip to <a href="#using-rsv">the section on using RSV</a>.</p>
+<p>Generally speaking, read the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/ConfigureRsv">ConfigureRsv</a> page for more advanced configuration options.</p>
+<h4 id="configuring-rsv-to-run-probes-using-a-remote-server">Configuring RSV to run probes using a remote server</h4>
+<p>RSV monitors systems by running probes, which can run on the RSV host itself (the default case), via a separate batch system like HTCondor, or via a remote batch system using a Globus gatekeeper and its job manager. The last two options both can count those jobs and report them to, for example, Gratia.</p>
+<p>In this case, remember to:</p>
+<ul>
+<li>Add the RSV user <code>rsv</code> on all the systems where the probes may run, and</li>
+<li>Map the RSV service certificate to the user you intend to use for RSV. This should be a local user used exclusively for RSV and not belonging to an institutional VO to avoid for the RSV probes to be accounted as regular VO jobs in Gratia. This can be done in <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums">GUMS</a> or <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/Edg-mkgridmap">using a grid-mapfile-local</a> (if you use a grid-mapfile). <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/MapServiceCertToRsvUser">MapServiceCertToRsvUser</a> explains how to configure GUMS or the grid-mapfile. Also see the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavAdminCompute">CE installation document</a> for more information.</li>
+</ul>
+<h4 id="configuring-the-rsv-web-server-to-use-https-instead-of-http">Configuring the RSV web server to use HTTPS instead of HTTP</h4>
+<p>If you would like your local RSV web server to use HTTPS instead of the default HTTP (for compatibility or security reasons), complete the steps below. This procedure assumes that you already have an HTTP service certificate (or a copy of the host certificate) in <code>/etc/grid-security/http/</code>. If not, omit the <code>SSLCertificate*</code> modifications below, and your web server will start with its own, self-signed certificate.</p>
+<ol>
+<li>
+<p>Install <code>mod_ssl</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install mod_ssl
+</pre></div>
+
+
+</li>
+<li>
+<p>Make an alternate set of HTTP service certificate files:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> cp -p /etc/grid-security/http/httpcert.pem /etc/grid-security/http/httpcert2.pem
+<span class="gp">[root@client ~] #</span> cp -p /etc/grid-security/http/httpkey.pem /etc/grid-security/http/httpkey2.pem
+<span class="gp">[root@client ~] #</span> chown apache:apache /etc/grid-security/http/http*2.pem
+</pre></div>
+
+
+</li>
+<li>
+<p>Back up existing Apache configuration files:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> cp -p /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.orig
+<span class="gp">[root@client ~] #</span> cp -p /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.orig
+</pre></div>
+
+
+</li>
+<li>
+<p>Change the default port for HTTP connections to 8000 by editing <code>/etc/httpd/conf/httpd.conf</code></p>
+<div class="codehilite"><pre><span></span>Listen 8000
+</pre></div>
+
+
+</li>
+<li>
+<p>Set up HTTPS access by editing <code>/etc/httpd/conf.d/ssl.conf</code>:</p>
+<div class="codehilite"><pre><span></span>Listen 8443
+&lt;VirtualHost _default_:8443&gt;
+SSLCertificateFile /etc/grid-security/http/httpcert2.pem    
+SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
+</pre></div>
+
+
+<p>After these changes, when you start the Apache service, it will listening on ports <code>8000</code> (for HTTP) and <code>8443</code> (for HTTPS), rather than the default port <code>80</code> (for HTTP only).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>if you make the changes above, you must restart the Apache server after each CA certificate update to pick up the changes.</p>
+</div>
+</li>
+</ol>
+<h2 id="using-rsv">Using RSV</h2>
+<h3 id="managing-rsv-and-associated-services">Managing RSV and associated services</h3>
+<p>In addition to the RSV service itself, there are a number of supporting services in your installation. The specific services are:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Software</th>
+<th align="left">Service name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Fetch CRL</td>
+<td align="left"><code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
+<td>See <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui">CA documentation</a></td>
+</tr>
+<tr>
+<td align="left">Apache</td>
+<td align="left">httpd</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">HTCondor-Cron</td>
+<td align="left">condor-cron</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">RSV</td>
+<td align="left">rsv</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as <code>root</code>):</p>
+<table>
+<thead>
+<tr>
+<th align="left">To …</th>
+<th align="left">Run the command …</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Start a service</td>
+<td align="left"><code>service <span style="color:red">&lt;SERVICE-NAME&gt;</span> start</code></td>
+</tr>
+<tr>
+<td align="left">Stop a service</td>
+<td align="left"><code>service <span style="color:red">&lt;SERVICE-NAME&gt;</span> stop</code></td>
+</tr>
+<tr>
+<td align="left">Enable a service to start during boot</td>
+<td align="left"><code>chkconfig <span style="color:red">&lt;SERVICE-NAME&gt;</span> on</code></td>
+</tr>
+<tr>
+<td align="left">Disable a service from starting during boot</td>
+<td align="left"><code>chkconfig <span style="color:red">&lt;SERVICE-NAME&gt;</span> off</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="running-rsv-manually">Running RSV manually</h3>
+<p>Normally, the HTCondor-Cron scheduler runs RSV periodically. However, you can run RSV probes manually at any time:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> rsv-control --run --all-enabled
+</pre></div>
+
+
+<p>If successful, results will be available from your local RSV web server (e.g., <a href="http://localhost/rsv">http://localhost/rsv</a>) and, if enabled (which is the default) on <a href="http://myosg.grid.iu.edu/">MyOSG</a>.</p>
+<p>You can also run the metrics individually or pass special parameters as explained in the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvControl">rsv-control document</a>.</p>
+<h2 id="troubleshooting-rsv">Troubleshooting RSV</h2>
+<p>You can find more information on troubleshooting RSV in the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvControl">rsv-control documentation</a> and in <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv">TroubleshootRSV</a>.</p>
+<h3 id="important-file-locations">Important file locations</h3>
+<p>Logs and configuration:</p>
+<table>
+<thead>
+<tr>
+<th align="left">File Description</th>
+<th align="left">Location</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Metric log files</td>
+<td align="left"><code>/var/log/rsv/metrics</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Consumer log files</td>
+<td align="left"><code>/var/log/rsv/consumers</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">HTML files</td>
+<td align="left"><code>/usr/share/rsv/www/</code></td>
+<td align="left">Available at <a href="http://your.host.example.com/rsv">http://your.host.example.com/rsv</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">File Description</th>
+<th align="left">Location</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Initial configuration</td>
+<td align="left"><code>/etc/osg/config.d/30-rsv.ini</code></td>
+<td align="left">Read by <code>osg-configure</code></td>
+</tr>
+<tr>
+<td align="left">RSV configuration</td>
+<td align="left"><code>/etc/rsv</code></td>
+<td align="left">Generally files in this directory should not be edited directly. Use <code>osg-configure</code> instead.</td>
+</tr>
+<tr>
+<td align="left">Metric configuration</td>
+<td align="left"><code>/etc/rsv/metrics/HOSTNAME/METRICNAME.conf</code></td>
+<td align="left">To change arguments and environment</td>
+</tr>
+</tbody>
+</table>
+<p>To find the metrics and the other files in RSV you can use also the RPM commands: <code>rpm -ql rsv-metrics</code> and <code>rpm -ql rsv</code>.</p>
+<h3 id="getting-more-information-from-rsv-control">Getting more information from rsv-control</h3>
+<p>The first step to getting more information is to run rsv-control with more verbosity. Use the <code>--verbose</code> (<code>-v</code>) flag. This flag can be used with any of rsv-control's abilities (run, enable, list, etc). The verbosity levels are:</p>
+<ul>
+<li>0 = print nothing</li>
+<li>1 = print warnings and errors along with usual output of command being run (1 is the default level)</li>
+<li>2 = adds informational messages</li>
+<li>3 = full debugging output</li>
+</ul>
+<p>For example, here is the output when running a metric with -v2. </p>
+<p><details> 
+  <summary>Show detailed ouput</summary>
+   <p></p>
+<div class="codehilite"><pre><span></span><span class="go">   [root@fermicloud016 condor]# rsv-control -r org.osg.general.osg-version -v 2 -u osg-edu.cs.wisc.edu </span>
+<span class="go">   INFO: Reading configuration file /etc/rsv/rsv.conf</span>
+<span class="go">   INFO: Reading configuration file /etc/rsv/consumers.conf</span>
+<span class="go">   INFO: Validating configuration:</span>
+<span class="go">   INFO: Validating user:</span>
+<span class="go">INFO:     Invoked as root.  Switching to &#39;rsv&#39; user (uid: 100 - gid: 102)</span>
+<span class="go">INFO: Registered consumers: html-consumer, gratia-consumer</span>
+<span class="go">INFO: Loading config file &#39;/etc/rsv/meta/metrics/org.osg.general.osg-version.meta&#39;</span>
+<span class="go">INFO: Loading config file &#39;/etc/rsv/metrics/org.osg.general.osg-version.conf&#39;</span>
+<span class="go">INFO: Optional config file &#39;/etc/rsv/metrics/osg-edu.cs.wisc.edu/org.osg.general.osg-version.conf&#39; does not exist</span>
+<span class="go">INFO: Checking proxy:</span>
+<span class="go">INFO:     Using service certificate proxy</span>
+<span class="go">INFO: Running command with timeout (1200 seconds):</span>
+<span class="go">        /usr/bin/openssl x509 -in /tmp/rsvproxy -noout -enddate -checkend 21600</span>
+<span class="go">INFO: Exit code of job: 0</span>
+<span class="go">INFO:     Service certificate valid for at least 6 hours.</span>
+<span class="go">INFO: Pinging host osg-edu.cs.wisc.edu:</span>
+<span class="go">INFO: Running command with timeout (1200 seconds):</span>
+<span class="go">        /bin/ping -W 3 -c 1 osg-edu.cs.wisc.edu</span>
+<span class="go">INFO: Exit code of job: 0</span>
+<span class="go">INFO:     Ping successful</span>
+
+<span class="go">Running metric org.osg.general.osg-version:</span>
+
+<span class="go">INFO: Executing job remotely using Condor-G</span>
+<span class="go">INFO: Setting up job environment:</span>
+<span class="go">INFO:     No environment setup declared</span>
+<span class="go">INFO: Condor-G working directory: /var/tmp/rsv/condor_g-JiQthF</span>
+<span class="go">INFO: Forming arguments:</span>
+<span class="go">INFO:     Arguments: &#39;&#39;</span>
+<span class="go">INFO: List of files to transfer: /usr/libexec/rsv/probes/RSVMetric.pm</span>
+<span class="go">INFO: Condor submission: Submitting job(s).</span>
+<span class="go">1 job(s) submitted to cluster 2.</span>
+<span class="go">INFO: Trimming data to 10000 bytes because details-data-trim-length is set</span>
+<span class="go">INFO: Creating record for html-consumer consumer at &#39;/var/spool/rsv/html-consumer/org.osg.general.osg-version.7rgLfn&#39;</span>
+<span class="go">INFO: Creating record for gratia-consumer consumer at &#39;/var/spool/rsv/gratia-consumer/org.osg.general.osg-version.-qelnL&#39;</span>
+<span class="go">INFO: Result:</span>
+
+<span class="go">metricName: org.osg.general.osg-version</span>
+<span class="go">metricType: status</span>
+<span class="go">timestamp: 2012-01-25 16:12:40 CST</span>
+<span class="go">metricStatus: OK</span>
+<span class="go">serviceType: OSG-CE</span>
+<span class="go">serviceURI: osg-edu.cs.wisc.edu</span>
+<span class="go">gatheredAt: fermicloud016.fnal.gov</span>
+<span class="go">summaryData: OK</span>
+<span class="go">detailsData: OSG 1.2.26</span>
+
+<span class="go">EOT</span>
+</pre></div>
+
+
+<p></p>
+</details></p>
+<h2 id="getting-help">Getting Help</h2>
+<p>To get assistance, please use <a href="../../common/help/">this page</a>.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> rsv-control --profile
+<span class="go">Running the rsv-profiler...</span>
+<span class="go">OSG-RSV Profiler</span>
+<span class="go">Analyzing...</span>
+<span class="go">Making tarball (rsv-profiler.tar.gz)</span>
+</pre></div>
+
+
+<h2 id="reference">Reference</h2>
+<p>Here are some other RSV documents that might be helpful:</p>
+<ul>
+<li>A longer <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvOverview">introduction to RSV</a></li>
+<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvArchitecture">The RSV architecture</a></li>
+<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RSVStorageProbes">RSV storage probes</a></li>
+</ul>
+<h3 id="users">Users</h3>
+<p>The RSV installation will create two users unless they are already created. The users are created when the <code>rsv</code> and <code>condor-cron</code> packages are installed.</p>
+<table>
+<thead>
+<tr>
+<th align="left">User</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>rsv</code></td>
+<td align="left">Runs the RSV tests; the RSV certificate (below) will need to be owned by this user</td>
+</tr>
+<tr>
+<td align="left"><code>cndrcron</code></td>
+<td align="left">Runs the Condor Cron processes to schedule the running of the tests</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>if you pre-create the RSV user, it should have a working shell. That is, it shouldn't have a default shell of <code>/sbin/nologin</code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you manage your <code>/etc/passwd</code> file with configuration management software such as Puppet, CFEngine or 411, make sure the UID and GID in <code>/etc/condor-cron/config.d/condor_ids</code> matches the UID and GID of the <code>cndrcron</code> user and group in <code>/etc/passwd</code>. If it does not, create a file named <code>/etc/condor-cron/config.d/condor_ids_override</code> with the contents:</p>
+</div>
+<div class="codehilite"><pre><span></span>CONDOR_IDS=UID.GID
+</pre></div>
+
+
+<p>where <em>UID</em> and <em>GID</em> are the UID and GID of the <code>cndrcron</code> user and group.</p>
+<h3 id="certificates">Certificates</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Certificate</th>
+<th align="left">User that owns certificate</th>
+<th align="left">Path to certificate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">RSV service certificate</td>
+<td align="left"><code>rsv</code></td>
+<td align="left"><code>/etc/grid-security/rsv/rsvcert.pem</code></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"><code>/etc/grid-security/rsv/rsvkey.pem</code></td>
+</tr>
+</tbody>
+</table>
+<p>Ensure an RSV service certificate is installed in <code>/etc/grid-security/rsv/</code> and the certificate files are owned by the <code>rsv</code> user. Adjust the permissions if necessary (cert needs to be readable by all, key needs to be readable by nobody but owner).</p>
+<p>You may need another certificate owned by <code>apache</code> if you'd like an authenticated web server; see <a href="#configuring-the-rsv-web-server-to-use-https-instead-of-http">Configuring the RSV web server to use HTTPS instead of HTTP</a> above.</p>
+<p>See <a href="../../common/pki-cli/">instructions</a> to request a service certificate.</p>
+<h3 id="networking">Networking</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Service Name</th>
+<th align="left">Protocol</th>
+<th align="left">Port Number</th>
+<th align="left">Inbound</th>
+<th align="left">Outbound</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">HTTP</td>
+<td align="left">tcp</td>
+<td align="left">80</td>
+<td align="left">YES</td>
+<td align="left"></td>
+<td align="left">RSV runs an HTTP server (Apache) that publishes a page with the RSV testing results</td>
+</tr>
+<tr>
+<td align="left">HTTP</td>
+<td align="left">tcp</td>
+<td align="left">80</td>
+<td align="left"></td>
+<td align="left">YES</td>
+<td align="left">RSV pushes testing results to the OSG Gratia Collectors at opensciencegrid.org</td>
+</tr>
+<tr>
+<td align="left">various</td>
+<td align="left">various</td>
+<td align="left">various</td>
+<td align="left"></td>
+<td align="left">YES</td>
+<td align="left">Allow outbound network connection to all services that you want to test</td>
+</tr>
+</tbody>
+</table>
+<p>Or, if you'd rather have your RSV web page appear as <code><span style="color:red">https</span>://...:8443/rsv/</code> like it used to in OSG 1.2, the first column above would be <strong>HTTPS</strong> / <strong>tcp</strong> / <strong>8443</strong>. See <a href="#configuring-the-rsv-web-server-to-use-https-instead-of-http">above</a> for how to configure this.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../rsv-gwms-tester/" class="btn btn-neutral float-right" title="RSV GlideinWMS Tester">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../other/lcmaps-voms-authentication/" class="btn btn-neutral" title="LCMAPS-VOMS authentication"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../other/lcmaps-voms-authentication/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../rsv-gwms-tester/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

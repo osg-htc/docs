@@ -101,6 +101,16 @@
      <changefreq>daily</changefreq>
     </url>
         
+    
+
+    
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/monitoring/rsv/</loc>
+     <lastmod>2017-09-08</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     <url>
      <loc>https://opensciencegrid.github.io/docs/monitoring/rsv-gwms-tester/</loc>
      <lastmod>2017-09-08</lastmod>
