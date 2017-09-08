@@ -25,6 +25,8 @@ pages:
 - Install Guides - Other:
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'LCMAPS-VOMS authentication': 'other/lcmaps-voms-authentication.md'
+- Install Guides - Monitoring:
+  - 'RSV': 'monitoring/rsv.md'
   - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
 - Overviews:
   - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
