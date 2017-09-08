@@ -301,8 +301,8 @@ For historical reasons, this configuration is specified in the file named 30-gip
 
 This configuration uses multiple sections of the OSG configuration files:
 
--   [Subcluster\*](#GipSubcluster): options about homogeneous subclusters
--   [Resource Entry\*](#GipResourceEntry): options for specifying ATLAS queues for AGIS
+-   [Subcluster\*](#subcluster-configuration): options about homogeneous subclusters
+-   [Resource Entry\*](#resource-entry-configuration-atlas-only): options for specifying ATLAS queues for AGIS
 
 ### Notes for multi-CE sites.
 
@@ -311,7 +311,6 @@ If you would like to properly advertise multiple CEs per cluster, make sure that
 -   Set the value of site\_name in the "Site Information" section to be the same for each CE.
 -   Have the **exact** same configuration values for the Subcluster\* and Resource Entry\* sections in each CE.
 
-\#GipSubcluster
 
 ### Subcluster Configuration
 
@@ -336,7 +335,6 @@ The following attributes are optional:
 
 -   `allowed_vos` is mandatory
 
-\#GipResourceEntry
 
 ### Resource Entry Configuration (ATLAS only)
 
@@ -367,9 +365,9 @@ Local Settings
 
 This section differs from other sections in that there are no set options in this section. Rather, the options set in this section will be placed in the `osg-local-job-environment.conf` verbatim. The options in this section are case sensitive and the case will be preserved when they are converted to environment variables. The `osg-local-job-environment.conf` file gets sourced by jobs run on your cluster so any variables set in this section will appear in the environment of jobs run on your system.
 
-Adding a line such as =My\_Setting = my\_Value= would result in the an environment variable called `My_Setting` set to `my_Value` in the job's environment. `my_Value` can also be defined in terms of an environment variable (i.e =My\_Setting = $my\_Value`) that will be evaluated on the worker node. For example, to add a variable =MY_PATH` set to `/usr/local/myapp`, you'd have the following:
+Adding a line such as `My_Setting = my_Value` would result in the an environment variable called `My_Setting` set to `my_Value` in the job's environment. `my_Value` can also be defined in terms of an environment variable (i.e `My_Setting = $my_Value`) that will be evaluated on the worker node. For example, to add a variable `MY_PATH` set to `/usr/local/myapp`, you'd have the following:
 
-``` file
+``` ini
 [Local Settings]
 
 MY_PATH = /usr/local/myapp
