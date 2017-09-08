@@ -124,13 +124,14 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
             :::console
             [root@ce]# condor_ce_reconfig
 
-    4. Remove edg-mkgridmap and related packages:
+4. Restart the `condor-ce` service
+5. Remove edg-mkgridmap and related packages:
 
-            :::console
-            [root@ce]# yum erase edg-mkgridmap
+        :::console
+        [root@ce]# yum erase edg-mkgridmap
 
-        !!!note
-            In the output from this command, yum should **not** list other packages than the one. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their OSG 3.3 (or 3.4) versions (they should have ".osg33" or ".osg34" in their versions), and try again.
+    !!! warning
+        In the output from this command, yum should **not** list other packages than the one. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their OSG 3.3 (or 3.4) versions (they should have ".osg33" or ".osg34" in their versions), and try again.
 
 
 #### Mapping VOs
