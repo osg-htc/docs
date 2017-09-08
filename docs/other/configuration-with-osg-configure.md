@@ -231,17 +231,54 @@ This section gives information about the options in the Gateway section of the c
 Storage
 -------
 
-This section gives information about the options in the Storage section of the configuration file. Several of these values are constrained and need to be set in a way that is consistent with one of the OSG storage models. Please review the Storage Related Parameters section of the [Environment Variables](EnvironmentVariables) description as well as the [Overview of Services](OverviewOfServicesInOSG) and [Site Planning](SitePlanning) discussions for explanations of the various storage models and the requirements for them. This section is contained in `/etc/osg/config.d/10-storage.ini` which is provided by the `osg-configure-ce` RPM.
+This section gives information about the options in the Storage section of the configuration file.
+Several of these values are constrained and need to be set in a way that is consistent with one of the OSG storage models.
+Please review the Storage Related Parameters section of the [Environment Variables](EnvironmentVariables) description
+as well as the [Overview of Services](OverviewOfServicesInOSG) and [Site Planning](SitePlanning) discussions
+for explanations of the various storage models and the requirements for them.
 
-    | Option | Values Accepted | Explanation |
-    | *se_available* | =True=, =False= | This indicates whether there is an associated SE available.  Can be defined in terms of an environment variable (e.g. =$FOO=) that will be evaluated on the worker node. |
-    | default_se | String | If an SE is available at your cluster, set default_se to the hostname of this SE, otherwise set default_se to UNAVAILABLE. Can be defined in terms of an environment variable (e.g. =$FOO=) that will be evaluated on the worker node. |
-    | *grid_dir* | String | The grid_dir setting should point to the directory which holds the files from the OSG worker node package. If you have installed the worker node client via RPM (the normal case) it should be =/etc/osg/wn-client=. If you have somehow installed the worker node in a special location (perhaps via the worker node client tarball or via OASIS), it should be the location of that directory. This directory should be visible on all of the computer nodes and will be accessed via the $OSG_GRID environment variable.  Can be defined in terms of an environment variable (e.g. =$FOO=) that will be evaluated on the worker node.  Read access is required, though worker nodes don't need write access. |
-    | *app_dir* | String | The app_dir setting should point to the directory which contains the VO  specific applications, this should be visible on both the CE and worker nodes and will be accessed via $OSG_APP.  Can be defined in terms of an environment variable (e.g. =$FOO=) that will be evaluated on the worker node.  Only the CE needs to have write access to this directory. The $OSG_APP directory must also contain a sub-directory (etc) with 1777 permissions. |
-    | data_dir | String | The data_dir setting should point to a directory that can be used to store and stage data in and out of the cluster and accessed via the $OSG_DATA variable.  Can be defined in terms of an environment variable (e.g. =$FOO=) that will be evaluated on the worker node. This directory should be readable and writable on both the CE and worker nodes.  |
-    | worker_node_temp | String | The worker_node_temp directory (accessed via $OSG_WN_TMP) should point to a directory that can be used as scratch space on compute nodes. It should allow read and write access on a worker node and can be visible to just that worker node.  Can be defined in terms of an environment variable (e.g. =$FOO=) that will be evaluated on the worker node. If not set, the default is UNAVAILABLE |
-    | site_read | String | The site_read setting should be the location or url to a directory that can  be read to stage in data via the variable $OSG_SITE_READ.  This is an url if you are using a SE.  Can be defined in terms of an environment variable (e.g. =$FOO=) that will be evaluated on the worker node.  If not set, the default is UNAVAILABLE |
-    | site_write | String | The site_write setting should be the location or url to a directory that can be write to stage out data via the variable $OSG_SITE_WRITE. This is an url if you are using a SE . Can be defined in terms of an environment variable (e.g. =$FOO=) that will be evaluated on the worker node. If not set, the default is UNAVAILABLE |
+This section is contained in `/etc/osg/config.d/10-storage.ini` which is provided by the `osg-configure-ce` RPM.
+
+| Option           | Values Accepted | Explanation                                                                                                                                                                                                    |
+|------------------|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **se_available** | `True`, `False` | This indicates whether there is an associated SE available.                                                                                                                                                    |
+| default_se       | String          | If an SE is available at your cluster, set default_se to the hostname of this SE, otherwise set default_se to UNAVAILABLE.                                                                                     |
+| **grid_dir**     | String          | This setting should point to the directory which holds the files from the OSG worker node package. See note                                                                                                    |
+| **app_dir**      | String          | This setting should point to the directory which contains the VO specific applications. See note                                                                                                               |
+| data_dir         | String          | This setting should point to a directory that can be used to store and stage data in and out of the cluster. See note                                                                                          |
+| worker_node_temp | String          | This directory should point to a directory that can be used as scratch space on compute nodes. If not set, the default is UNAVAILABLE. See note                                                                |
+| site_read        | String          | This setting should be the location or url to a directory that can be read to stage in data via the variable `$OSG_SITE_READ`. This is an url if you are using a SE. If not set, the default is UNAVAILABLE    |
+| site_write       | String          | This setting should be the location or url to a directory that can be write to stage out data via the variable `$OSG_SITE_WRITE`. This is an url if you are using a SE. If not set, the default is UNAVAILABLE |
+
+
+!!! note
+    All of these can be defined in terms of an environment variable
+    (e.g. `$FOO`) that will be evaluated on the worker node.
+
+    **grid_dir**:<br/>
+    If you have installed the worker node client via RPM (the normal case) it
+    should be `/etc/osg/wn-client`.  If you have installed the worker node in a
+    special location (perhaps via the worker node client tarball or via OASIS),
+    it should be the location of that directory.
+
+    This directory will be accessed via the `$OSG_GRID` environment variable.
+    It should be visible on all of the compute nodes. Read access is required,
+    though worker nodes don't need write access.
+
+    **app_dir**:<br/>
+    This directory will be accesed via the `$OSG_APP` environment variable. It
+    should be visible on both the CE and worker nodes. Only the CE needs to
+    have write access to this directory. This directory must also contain a
+    sub-directory `etc/` with 1777 permissions.
+
+    **data_dir**:<br/>
+    This directory can be accessed via the `$OSG_DATA` environment variable. It
+    should be readable and writable on both the CE and worker nodes.
+
+    **worker_node_temp**:<br/>
+    This directory will be accessed via the `$OSG_WN_TMP` environment variable.
+    It should allow read and write access on a worker node and can be visible
+    to just that worker node.
 
 Squid
 -----
