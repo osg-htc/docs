@@ -15,8 +15,8 @@ The Resource and Service Validation (RSV) software provides OSG site administrat
 
 - **RSV Client.** The client tools allow a site administrator to run tests against their site by providing a set of tests (which can run on the same or other hosts within a site), HTCondor-Cron for scheduling, and tools for collecting and storing the results (using Gratia). The client package is not installed by default and may be installed on a CE or other host. Generally, you configure the RSV client to run tests at scheduled time intervals and then it makes results available on a local website. Also, the client can upload test results to a central collector (see next item).
 - **RSV Collector/Server.** The central OSG RSV Collector accepts and stores results from RSV clients throughout OSG, which can be viewed in [MyOSG](http://myosg.grid.iu.edu/), on the “Current RSV Status” page and under the “Resource Group” menu.
-- **Periodic Availability Reports.** The availability of all active registered OSG resources and the services running on each of those resources is calculated using the results received for [critical metrics](https://twiki.grid.iu.edu/bin/view/Operations/RsvEquivalency#Critical_Tests_for_OSG_Resources>). Once a day, these availability numbers are [published online](http://rsv.grid.iu.edu/daily-reports) and via email [as explained here](https://twiki.grid.iu.edu/bin/view/Trash/Trash/Trash/Trash/MeasurementsAndMetrics/RsvReportsOverview>) (More information: [Outline of reports](https://twiki.grid.iu.edu/bin/view/Operations/RSVPeriodicReporting), [Installation guide for GOC staff](https://twiki.grid.iu.edu/bin/view/Trash/Trash/Trash/Trash/MeasurementsAndMetrics/RsvReports)).
-- **RSV-SAM Transport.** The WLCG RSV-SAM Transport infrastructure pushes out RSV results, for resources that are flagged to be part of the WLCG Interoperability agreement, from the GOC collector to WLCG's Service Availability Monitoring (SAM) system. More information on viewing these results is [available here](Operations.RsvSAMGridView).
+- **Periodic Availability Reports.** The availability of all active registered OSG resources and the services running on each of those resources is calculated using the results received for [critical metrics](https://twiki.grid.iu.edu/bin/view/Operations/RsvEquivalency#Critical_Tests_for_OSG_Resources>). Once a day, these availability numbers are [published online](http://rsv.grid.iu.edu/daily-reports) (More information: [Outline of reports](https://twiki.grid.iu.edu/bin/view/Operations/RSVPeriodicReporting)).
+- **RSV-SAM Transport.** The WLCG RSV-SAM Transport infrastructure pushes out RSV results, for resources that are flagged to be part of the WLCG Interoperability agreement, from the GOC collector to WLCG's Service Availability Monitoring (SAM) system. More information on viewing these results is [available here](https://twiki.grid.iu.edu/twiki/bin/view/Operations/RsvSAMGridView).
 - **MyOSG and OIM Links.** RSV picks up resource information, WLCG interoperability information, etc., from a MyOSG resource group summary listing, which is in turn based on the [OSG Information Management (OIM) (topology) system](https://oim.grid.iu.edu) (Requires registration). Resource [maintenance scheduled on OIM](https://twiki.grid.iu.edu/twiki/bin/view/Operations/OIMMaintTool) are forwarded to WLCG SAM, if applicable.
 
 
@@ -35,7 +35,7 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Ensure the RSV host has [a supported operating system](../common/yum.md)
 - Obtain root access to the host
 - Prepare [the required Yum repositories](../common/yum.md)
-- Install [CA certificates](../security/ca-cert-auth.md)
+- Install [CA certificates](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth)
 
 Installing RSV
 --------------
@@ -66,7 +66,7 @@ Configuring RSV
  
 After installation, there are some one-time configuration steps to tell RSV how to operate at your site.
  
-1. Edit `/etc/osg/config.d/30-rsv.ini` and follow the instructions in the file. There are detailed comments for each setting. In the simplest case — to monitor only your CE — set the `htcondor_ce_hosts` variable (or `gram_ce_hosts` for a GRAM CE) to the fully qualified hostname of your CE. For a sample `rsv.ini` file, see the complete installation output [below](#InstallDetails)
+1. Edit `/etc/osg/config.d/30-rsv.ini` and follow the instructions in the file. There are detailed comments for each setting. In the simplest case — to monitor only your CE — set the `htcondor_ce_hosts` variable to the fully qualified hostname of your CE.
 
 2. If you have installed HTCondor already but not by RPM, specify the location of the Condor installation in `30-rsv.ini` in the `condor_location` setting. If an HTCondor RPM is installed, you do not need to set `condor_location`.
 
@@ -76,14 +76,11 @@ After installation, there are some one-time configuration steps to tell RSV how 
         [root@client ~] # osg-configure -v
         [root@client ~] # osg-configure -c
 
-    !!! note
-        The `osg-configure` tool produces a lot of output; see [below](#OsgConfigDetails) for an example.
-
 ### Optional configuration
 
 The following configuration steps are optional and will likely not be required for setting up a small or typical site. If you do not need any of the following special configurations, skip to [the section on using RSV](#using-rsv).
 
-Generally speaking, read the ConfigureRsv page for more advanced configuration options. Or see [below](#ConfigFileDetails) for specific advanced configuration scenarios.
+Generally speaking, read the [ConfigureRsv](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/ConfigureRsv) page for more advanced configuration options.
 
 #### Configuring RSV to run probes using a remote server
 
@@ -92,7 +89,7 @@ RSV monitors systems by running probes, which can run on the RSV host itself (th
 In this case, remember to:
 
 - Add the RSV user `rsv` on all the systems where the probes may run, and
-- Map the RSV service certificate to the user you intend to use for RSV. This should be a local user used exclusively for RSV and not belonging to an institutional VO to avoid for the RSV probes to be accounted as regular VO jobs in Gratia. This can be done in [GUMS](../security/gums.md) or [using a grid-mapfile-local](../security/Edg-mkgridmap.md) (if you use a grid-mapfile). MapServiceCertToRsvUser explains how to configure GUMS or the grid-mapfile. Also see the [CE installation document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavAdminCompute) for more information.
+- Map the RSV service certificate to the user you intend to use for RSV. This should be a local user used exclusively for RSV and not belonging to an institutional VO to avoid for the RSV probes to be accounted as regular VO jobs in Gratia. This can be done in [GUMS](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums) or [using a grid-mapfile-local](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/Edg-mkgridmap) (if you use a grid-mapfile). [MapServiceCertToRsvUser](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/MapServiceCertToRsvUser) explains how to configure GUMS or the grid-mapfile. Also see the [CE installation document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavAdminCompute) for more information.
 
 #### Configuring the RSV web server to use HTTPS instead of HTTP
 
@@ -145,7 +142,7 @@ In addition to the RSV service itself, there are a number of supporting services
 
 | Software      | Service name                                   | Notes                   |
 |:--------------|:-----------------------------------------------|------------------------ |
-| Fetch CRL     | On EL 6: `fetch-crl-boot` and `fetch-crl-cron` | See (CA documentation)[]|
+| Fetch CRL     | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui)|
 | Apache        | httpd                                          |                         |
 | HTCondor-Cron | condor-cron                                    |                         |
 | RSV           | rsv                                            |                         |
@@ -164,18 +161,18 @@ Start the services in the order listed and stop them in reverse order. As a remi
 
 Normally, the HTCondor-Cron scheduler runs RSV periodically. However, you can run RSV probes manually at any time:
 
-``` rootscreen
-%UCL_PROMPT_ROOT% rsv-control --run --all-enabled
+``` console
+[root@client ~] # rsv-control --run --all-enabled
 ```
 
 If successful, results will be available from your local RSV web server (e.g., <http://localhost/rsv>) and, if enabled (which is the default) on [MyOSG](http://myosg.grid.iu.edu/).
 
-You can also run the metrics individually or pass special parameters as explained in the [rsv-control document](../monitoring/rsv-control.md).
+You can also run the metrics individually or pass special parameters as explained in the [rsv-control document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvControl).
 
 Troubleshooting RSV
 -------------------
 
-You can find more information on troubleshooting RSV in the [rsv-control documentation](RsvControl) and in [TroubleshootRSV](TroubleshootRsv).
+You can find more information on troubleshooting RSV in the [rsv-control documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvControl) and in [TroubleshootRSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv).
 
 ### Important file locations
 
