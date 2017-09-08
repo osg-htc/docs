@@ -391,22 +391,25 @@
 </ul>
 </li>
 <li>
-<p>If you are remaining on OSG 3.3, ensure that the you have set <code>export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1</code> in the appropriate file. If you have updated your host to OSG 3.4, skip to the next step.</p>
+<p>If you are remaining on OSG 3.3, ensure that the you have set <code>export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1</code> in the appropriate file and restart the service. If you have updated your host to OSG 3.4, skip to the next step.</p>
 <table>
 <thead>
 <tr>
 <th align="left"><strong>If your host is a(n)...</strong></th>
 <th align="left"><strong>Add the aforementioned line to...</strong></th>
+<th align="left"><strong>And restart this service...</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">HTCondor-CE</td>
 <td align="left"><code>/etc/sysconfig/condor-ce</code></td>
+<td align="left"><code>condor-ce</code></td>
 </tr>
 <tr>
 <td align="left">GridFTP server</td>
 <td align="left"><code>/etc/sysconfig/globus-gridftp-server</code></td>
+<td align="left"><code>globus-gridftp-server</code></td>
 </tr>
 </tbody>
 </table>
@@ -424,12 +427,12 @@
 <li>
 <p>Delete the line that sets the <code>GRIDMAP</code> configuration variable</p>
 </li>
-<li>
-<p>Reconfigure HTCondor-CE:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@ce]#</span> condor_ce_reconfig
+<li>Reconfigure HTCondor-CE:<div class="codehilite"><pre><span></span><span class="gp">[root@ce]#</span> condor_ce_reconfig
 </pre></div>
 
 
+</li>
+</ol>
 </li>
 <li>
 <p>Remove edg-mkgridmap and related packages:</p>
@@ -437,12 +440,10 @@
 </pre></div>
 
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>In the output from this command, yum should <strong>not</strong> list other packages than the one. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their OSG 3.3 (or 3.4) versions (they should have ".osg33" or ".osg34" in their versions), and try again.</p>
 </div>
-</li>
-</ol>
 </li>
 </ol>
 <h4 id="mapping-vos">Mapping VOs</h4>
