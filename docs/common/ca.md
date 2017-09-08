@@ -180,7 +180,7 @@ By default, `fetch-crl` connects directly to the remote CA; this is
 inefficient and potentially harmful if done simultaneously by many nodes
 (e.g. all the worker nodes of a big cluster). We recommend you provide a
 HTTP proxy (such as `squid`) the worker nodes can utilize; OSG provides
-[packaging of squid](../frontier-squid/squid.md).
+[packaging of squid](../data/squid.md).
 
 To configure fetch-crl to use an HTTP proxy server:
 
