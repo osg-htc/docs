@@ -1,16 +1,9 @@
 Configuration with OSG-Configure
 ================================
 
-
-About this Document
-===================
-
-This document outlines the settings and options found in the ini files for system administers that are installing and configuring osg software.
-
-This page gives an overview of the options for each of the sections of the configuration files that `osg-configure` uses.
-
--   [Layout and Syntax](#layout-and-syntax)
--   [Configuration Sections](#configuration-sections):
+-   [About this document](#about-this-document)
+-   [Syntax and layout](#syntax-and-layout)
+-   [Configuration sections](#configuration-sections)
     -   Job managers (batch systems):
         -   [Bosco](#bosco)
         -   [Condor](#condor)
@@ -22,13 +15,23 @@ This page gives an overview of the options for each of the sections of the confi
         -   [Gratia](#gratia)
         -   [Info Services](#info-services)
         -   [RSV](#rsv)
-        -   [Subcluster / Resource-Entry](#subcluster-resource-entry)
+        -   [Subcluster / Resource Entry](#subcluster-resource-entry)
     -   [Gateway](#gateway)
     -   [Local Settings](#local-settings)
     -   [Misc Services](#misc-services)
     -   [Site Information](#site-information)
     -   [Squid](#squid)
     -   [Storage](#storage)
+
+
+About this document
+===================
+
+OSG-Configure and the INI files in `/etc/osg/config.d` allow a high level configuration of OSG services.
+This document outlines the settings and options found in the INI files for system administers that are installing and configuring OSG software.
+
+This page gives an overview of the options for each of the sections of the configuration files that `osg-configure` uses.
+
 
 
 Conventions
@@ -39,13 +42,9 @@ In the tables below:
 -   Mandatory options for a section are given in **bold** type. Sometime the default value may be OK and no edit required, but the variable has to be in the file.
 -   Options that are not found in the default ini file are in *italics*.
 
-Introduction
-============
-
-`osg-configure` and the INI files in `/etc/osg/config.d` allow a high level configuration of OSG services.
 
 
-Layout and Syntax
+Syntax and layout
 =================
 
 The configuration files used by `osg-configure` are the one supported by Python's [SafeConfigParser](http://docs.python.org/library/configparser.html), similar in format to the [INI configuration file](http://en.wikipedia.org/wiki/INI_file) used by MS Windows:
@@ -74,17 +73,18 @@ any option set in a given section can be used as a variable in that section.  As
     You will need to be careful when naming variables in order to avoid an
     infinite loop when resolving the variable substitution.
 
-Options and settings
-====================
+Special Settings
+----------------
 
 If a setting is set to UNAVAILABLE or DEFAULT or left blank, osg-configure will try to use a sensible default for setting if possible.
 
-Ignore setting
---------------
+### Ignore setting
 
 The `enabled` option, specifying whether a service is enabled or not, is a boolean but also accepts `Ignore` as a possible value. Using Ignore, results in the service associated with the section being ignored entirely (and any configuration is skipped). This differs from using `False` (or the `%(disabled)s` variable), because using `False` results in the service associated with the section being disabled. `osg-configure` will not change the configuration of the service if the `enabled` is set to `Ignore`.
 
 This is useful, if you have a complex configuration for a given that can't be set up using the ini configuration files. You can manually configure that service by hand editing config files, manually start/stop the service and then use the `Ignore` setting so that `osg-configure` does not alter the service's configuration and status.
+
+
 
 
 Configuration sections
