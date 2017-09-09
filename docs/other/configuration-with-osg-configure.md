@@ -380,38 +380,36 @@ Info Services
 
 Reporting to the central CE Collectors is configured in this section. For historical reasons, this is found in `30-infoservices.ini`, installed by the `osg-configure-infoservices` RPM. In the majority of cases, this file can be left untouched; you only need to configure this section if you wish to report to your own CE Collector instead of the ones run by OSG Operations.
 
-<table>
-<tbody>
-<tr class="odd">
-<td>Option</td>
-<td>Values Accepted</td>
-<td>Explanation</td>
-</tr>
-<tr class="even">
-<td><strong>enabled</strong></td>
-<td><code>True</code>, <code>False</code>, <code>Ignore</code></td>
-<td>True if reporting should be configured and enabled.</td>
-</tr>
-<tr class="odd">
-<td>ce_collectors</td>
-<td>String</td>
-<td>The server(s) HTCondor-CE information should be sent to. Setting this to <code>DEFAULT</code> will report to the OSG Production or ITB servers (depending on your <a href="#SiteInformation">Site Information</a> configuration);<br />
-setting this to <code>PRODUCTION</code> will report to the OSG Production servers;<br />
-setting this to <code>ITB</code> will report to the OSG ITB servers;<br />
-otherwise, set to the <code>hostname:port</code> of a host running a <code>condor-ce-collector</code> daemon.</td>
-</tr>
-</tbody>
-</table>
+| Option        | Values Accepted           | Explanation                                                       |
+|---------------|---------------------------|-------------------------------------------------------------------|
+| **enabled**   | `True`, `False`, `Ignore` | True if reporting should be configured and enabled                |
+| ce_collectors | String                    | The server(s) HTCondor-CE information should be sent to. See note |
+
+!!! note
+    **ce_collectors**:
+
+    -   Set this to `DEFAULT` to report to the OSG Production or ITB servers (depending on your [Site Information](#site-information) configuration).
+    -   Set this to `PRODUCTION` to report to the OSG Production servers
+    -   Set this to `ITB` to report to the OSG ITB servers
+    -   Otherwise, set this to the `hostname:port` of a host running a `condor-ce-collector` daemon
 
 Gratia
 ------
 
 This section configures Gratia. If `probes` is set to `UNAVAILABLE`, then `osg-configure` will use appropriate default values. If you need to specify custom reporting (e.g. a local gratia collector) in addition to the default probes, `%(osg-jobmanager-gratia)s`, `%(osg-gridftp-gratia)s`, `%(osg-metric-gratia)s`, `%(itb-jobmanager-gratia)s`, `%(itb-gridftp-gratia)s`, `%(itb-metric-gratia)s` are defined in the default configuration files to make it easier to specify the standard osg reporting. This section is contained in `/etc/osg/config.d/30-gratia.ini` which is provided by the `osg-configure-gratia` RPM.
 
-| Option       | Values Accepted            | Explanation                                                                                                                                                                                                                                                           |
-|--------------|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **enabled**  | `True` , `False`, `Ignore` | This should be set to True if gratia should be configured and enabled on the installation being configured.                                                                                                                                                           |
-| **resource** | String                     | This should be set to the resource name as given in the OIM registration                                                                                                                                                                                              |
-| **probes**   | String                     | This should be set to the gratia probes that should be enabled. A probe is specified by using as \[probe\_type\]:server:port . Valid probe\_types are metric (for rsv), jobmanager (for the appropriate jobmanager probe) and gridftp for the gridftp-transfer-probe. |
+| Option       | Values Accepted            | Explanation                                                                                                                           |
+|--------------|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| **enabled**  | `True` , `False`, `Ignore` | This should be set to True if gratia should be configured and enabled on the installation being configured.                           |
+| **resource** | String                     | This should be set to the resource name as given in the OIM registration                                                              |
+| **probes**   | String                     | This should be set to the gratia probes that should be enabled. A probe is specified by using as `[probe_type]:server:port`. See note |
+
+!!! note
+    **probes**:<br/>
+    Legal values for `probe_type` are:
+
+    -   `metric` (for RSV)
+    -   `jobmanager` (for the appropriate jobmanager probe)
+    -   `gridftp` (for the GridFTP transfer probe)
 
 
