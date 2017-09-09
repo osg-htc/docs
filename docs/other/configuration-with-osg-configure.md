@@ -19,21 +19,35 @@ In the tables below:
 Introduction
 ============
 
-`osg-configure` and the INI files in `/etc/osg/config.d` allow a higl level configuration of OSG services.
+`osg-configure` and the INI files in `/etc/osg/config.d` allow a high level configuration of OSG services.
 
 Layout
 ======
 
-The configuration files used by `osg-configure` are the one supported by Python's [SafeConfigParser](http://docs.python.org/library/configparser.html), similar in format to the [INI configuration file](http://en.wikipedia.org/wiki/INI_file) used by MS Windows. Long lines can be split up using continuations as specified in [email RFC 822](http://tools.ietf.org/html/rfc822.html) (each White Space Character can be preceded by a Newline to fold/continue the fileld on a new line). A config file is separated into sections with each section starting with a section name in square brackets (e.g. `[Section 1]`) . Lines that begin with a `;` or a `#` are treated as comments and ignored. Options can be set using either `name : value` or `name=value` pairs. Finally, variables and variable substitutions are supported.
+The configuration files used by `osg-configure` are the one supported by Python's [SafeConfigParser](http://docs.python.org/library/configparser.html), similar in format to the [INI configuration file](http://en.wikipedia.org/wiki/INI_file) used by MS Windows:
 
-`osg-configure` reads and uses all of the files in `/etc/osg/config.d` that have a "ini" suffix. The files in this directory are ordered with a numeric prefix with higher numbers being applied later and thus having higher precedence (e.g. 00-foo.ini has a lower precedence than 99-local-site-settings.ini). Configuration sections and options can be specified multiple times in different files. E.g. a section called \[PBS\] can be given in `20-pbs.ini` as well as `99-local-site-settings.ini`.
+-   Config files are separated into sections, specified by a section name in square brackets (e.g. `[Section 1]`)
+-   Options should be set using `name = value` pairs
+-   Lines that begin with `;` or `#` are comments
+-   Long lines can be split up using continutations: each white space character can be preceded by a newline to fold/continue the field on a new line (same syntax as specified in [email RFC 822](http://tools.ietf.org/html/rfc822.html))
+-   Variable substitutions are supported -- [see below](#variable-substitution)
+
+`osg-configure` reads and uses all of the files in `/etc/osg/config.d` that have a ".ini" suffix. The files in this directory are ordered with a numeric prefix with higher numbers being applied later and thus having higher precedence (e.g. 00-foo.ini has a lower precedence than 99-local-site-settings.ini). Configuration sections and options can be specified multiple times in different files. E.g. a section called `[PBS]` can be given in `20-pbs.ini` as well as `99-local-site-settings.ini`.
 
 Each of the files are successively read and merged to create a final configuration that is then used to configure OSG software. Options and settings in files read later override the ones in previous files. This allows admins to create a file with local settings (e.g. `99-local-site-settings.ini`) that can be read last and which will be take precedence over the default settings in configuration files installed by various RPMs and which will not be overwritten if RPMs are updated.
 
-Variables and variable substitution
-===================================
+Variable substitution
+=====================
 
-The osg-configure parser allows variables to be defined and used in the configuration file. Any option set in a given section can be used as a variable in that section. Note, this means that you will need to be careful when naming variables in order to avoid an infinite loop when resolving the variable substitution. Assuming that you have set an option with the name `myoption` in the section, you can substitute the value of that option elsewhere in the section by referring to it as `%(myoption)s` . Please note that the trailing `s` is required. Also the variable substitution will only occur when setting an option, so option names can not have a variable substitution in them.
+The osg-configure parser allows variables to be defined and used in the configuration file:
+any option set in a given section can be used as a variable in that section.  Assuming that you have set an option with the name `myoption` in the section, you can substitute the value of that option elsewhere in the section by referring to it as `%(myoption)s`.
+
+!!! note
+    The trailing `s` is required. Also, option names cannot have a variable subsitution in them.
+
+!!! warning
+    You will need to be careful when naming variables in order to avoid an
+    infinite loop when resolving the variable substitution.
 
 Options and settings
 ====================
@@ -53,6 +67,25 @@ Configuration sections
 The OSG configuration is divided into sections with each section starting with a section name in square brackets (e.g. `[Section 1]`). The configuration is split in multiple files and options form one section can be in more than one files.
 
 The following sections give an overview of the options for each of the sections of the configuration files that `osg-configure` uses.
+
+-   Batch system:
+    -   [Bosco](#bosco)
+    -   [Condor](#condor)
+    -   [LSF](#lsf)
+    -   [PBS](#pbs)
+    -   [SGE](#sge)
+    -   [Slurm](#slurm)
+-   Monitoring/reporting:
+    -   [Gratia](#gratia)
+    -   [Info Services](#info-services)
+    -   [RSV](#rsv)
+    -   [Subcluster / Resource-Entry](#subcluster-resource-entry)
+-   [Gateway](#gateway)
+-   [Local Settings](#local-settings)
+-   [Misc Services](#misc-services)
+-   [Site Information](#site-information)
+-   [Squid](#squid)
+-   [Storage](#storage)
 
 Site Information
 ----------------
