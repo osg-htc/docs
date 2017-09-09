@@ -1,12 +1,35 @@
 Configuration with OSG-Configure
 ================================
 
+
 About this Document
 ===================
 
 This document outlines the settings and options found in the ini files for system administers that are installing and configuring osg software.
 
 This page gives an overview of the options for each of the sections of the configuration files that `osg-configure` uses.
+
+-   [Layout and Syntax](#layout-and-syntax)
+-   [Configuration Sections](#configuration-sections):
+    -   Job managers (batch systems):
+        -   [Bosco](#bosco)
+        -   [Condor](#condor)
+        -   [LSF](#lsf)
+        -   [PBS](#pbs)
+        -   [SGE](#sge)
+        -   [Slurm](#slurm)
+    -   Monitoring/reporting:
+        -   [Gratia](#gratia)
+        -   [Info Services](#info-services)
+        -   [RSV](#rsv)
+        -   [Subcluster / Resource-Entry](#subcluster-resource-entry)
+    -   [Gateway](#gateway)
+    -   [Local Settings](#local-settings)
+    -   [Misc Services](#misc-services)
+    -   [Site Information](#site-information)
+    -   [Squid](#squid)
+    -   [Storage](#storage)
+
 
 Conventions
 -----------
@@ -21,8 +44,9 @@ Introduction
 
 `osg-configure` and the INI files in `/etc/osg/config.d` allow a high level configuration of OSG services.
 
-Layout
-======
+
+Layout and Syntax
+=================
 
 The configuration files used by `osg-configure` are the one supported by Python's [SafeConfigParser](http://docs.python.org/library/configparser.html), similar in format to the [INI configuration file](http://en.wikipedia.org/wiki/INI_file) used by MS Windows:
 
@@ -36,8 +60,9 @@ The configuration files used by `osg-configure` are the one supported by Python'
 
 Each of the files are successively read and merged to create a final configuration that is then used to configure OSG software. Options and settings in files read later override the ones in previous files. This allows admins to create a file with local settings (e.g. `99-local-site-settings.ini`) that can be read last and which will be take precedence over the default settings in configuration files installed by various RPMs and which will not be overwritten if RPMs are updated.
 
+
 Variable substitution
-=====================
+---------------------
 
 The osg-configure parser allows variables to be defined and used in the configuration file:
 any option set in a given section can be used as a variable in that section.  Assuming that you have set an option with the name `myoption` in the section, you can substitute the value of that option elsewhere in the section by referring to it as `%(myoption)s`.
@@ -61,6 +86,7 @@ The `enabled` option, specifying whether a service is enabled or not, is a boole
 
 This is useful, if you have a complex configuration for a given that can't be set up using the ini configuration files. You can manually configure that service by hand editing config files, manually start/stop the service and then use the `Ignore` setting so that `osg-configure` does not alter the service's configuration and status.
 
+
 Configuration sections
 ======================
 
@@ -68,54 +94,48 @@ The OSG configuration is divided into sections with each section starting with a
 
 The following sections give an overview of the options for each of the sections of the configuration files that `osg-configure` uses.
 
--   Batch system:
-    -   [Bosco](#bosco)
-    -   [Condor](#condor)
-    -   [LSF](#lsf)
-    -   [PBS](#pbs)
-    -   [SGE](#sge)
-    -   [Slurm](#slurm)
--   Monitoring/reporting:
-    -   [Gratia](#gratia)
-    -   [Info Services](#info-services)
-    -   [RSV](#rsv)
-    -   [Subcluster / Resource-Entry](#subcluster-resource-entry)
--   [Gateway](#gateway)
--   [Local Settings](#local-settings)
--   [Misc Services](#misc-services)
--   [Site Information](#site-information)
--   [Squid](#squid)
--   [Storage](#storage)
 
-Site Information
-----------------
 
-The settings found in the `Site Information` section are described below. This section is used to give information about a resource such as resource name, site sponsors, administrators, etc.
+Bosco
+-----
 
-This section is contained in `/etc/osg/config.d/40-siteinfo.ini` which is provided by the `osg-configure-ce` RPM.
+This section is contained in `/etc/osg/config.d/20-bosco.ini` which is provided by the `osg-configure-bosco` RPM.
 
-| Option              | Values Accepted   | Description                                                                                                                                  |
-|---------------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| **group**           | `OSG` , `OSG-ITB` | This should be set to either OSG or OSG-ITB depending on whether your resource is in the OSG or OSG-ITB group. Most sites should specify OSG |
-| **host\_name**      | String            | This should be set to be hostname of the CE that is being configured                                                                         |
-| **resource**        | String            | The resource name of this CE endpoint as registered in OIM.                                                                                  |
-| **resource\_group** | String            | The resource\_group of this CE as registered in OIM.                                                                                         |
-| **sponsor**         | String            | This should be set to the sponsor of the resource. See note.                                                                                 |
-| **site\_policy**    | Url               | This should be a url pointing to the resource's usage policy                                                                                 |
-| **contact**         | String            | This should be the name of the resource's admin contact                                                                                      |
-| **email**           | Email address     | This should be the email address of the admin contact for the resource                                                                       |
-| **city**            | String            | This should be the city that the resource is located in                                                                                      |
-| **country**         | String            | This should be two letter country code for the country that the resource is located in.                                                      |
-| **longitude**       | Number            | This should be the longitude of the resource. It should be a number between -180 and 180.                                                    |
-| **latitude**        | Number            | This should be the latitude of the resource. It should be a number between -90 and 90.                                                       |
+| Option       | Values Accepted           | Explanation                                                                                                                                                                                                                                                                                                                   |
+|--------------|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **enabled**  | `True`, `False`, `Ignore` | This indicates whether the Bosco jobmanager is being used or not.                                                                                                                                                                                                                                                             |
+| **users**    | String                    | A comma separated string. The existing usernames on the CE for which to install Bosco and allow submissions. In order to have separate usernames per VO, for example the CMS VO to have the cms username, each user must have Bosco installed. The osg-configure service will install Bosco on each of the users listed here. |
+| **endpoint** | String                    | The remote cluster submission host for which Bosco will submit jobs to the scheduler. This is in the form of <user@example.com>, exactly as you would use to ssh into the remote cluster.                                                                                                                                     |
+| **batch**    | String                    | The type of scheduler installed on the remote cluster.                                                                                                                                                                                                                                                                        |
+| **ssh\_key** | String                    | The location of the ssh key, as created above.                                                                                                                                                                                                                                                                                |
 
-!!! note
-    **sponsor**:<br/>
-    If your resource has multiple sponsors, you can separate them using commas
-    or specify the percentage using the following format 'osg, atlas, cms' or
-    'osg:10, atlas:45, cms:45'. The percentages must add up to 100 if multiple
-    sponsors are used. If you have a sponsor that is not an OSG VO, you can
-    indicate this by using 'local' as the VO.
+
+Condor
+------
+
+This section describes the parameters for a Condor jobmanager if it's being used in the current CE installation. If Condor is not being used, the `enabled` setting should be set to `False`.
+
+This section is contained in `/etc/osg/config.d/20-condor.ini` which is provided by the `osg-configure-condor` RPM.
+
+| Option            | Values Accepted           | Explanation                                                                                                                                                                                                                                                                                                                            |
+|-------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **enabled**       | `True`, `False`, `Ignore` | This indicates whether the Condor jobmanager is being used or not.                                                                                                                                                                                                                                                                     |
+| condor\_location  | String                    | This should be set to be directory where condor is installed. If this is set to a blank variable, DEFAULT or UNAVAILABLE, the `osg-configure` script will try to get this from the CONDOR\_LOCATION environment variable if available otherwise it will use `/usr` which works for the RPM installation.                               |
+| condor\_config    | String                    | This should be set to be path where the condor\_config file is located. If this is set to a blank variable, DEFAULT or UNAVAILABLE, the `osg-configure` script will try to get this from the CONDOR\_CONFIG environment variable if available otherwise it will use `/etc/condor/condor_config`, the default for the RPM installation. |
+
+
+LSF
+---
+
+This section describes the parameters for a LSF jobmanager if it's being used in the current CE installation. If LSF is not being used, the `enabled` setting should be set to `False`.
+
+This section is contained in `/etc/osg/config.d/20-lsf.ini` which is provided by the `osg-configure-lsf` RPM.
+
+| Option             | Values Accepted           | Explanation                                                     |
+|--------------------|---------------------------|-----------------------------------------------------------------|
+| **enabled**        | `True`, `False`, `Ignore` | This indicates whether the LSF jobmanager is being used or not. |
+| lsf\_location      | String                    | This should be set to be directory where lsf is installed       |
+
 
 PBS
 ---
@@ -131,17 +151,6 @@ This section is contained in `/etc/osg/config.d/20-pbs.ini` which is provided by
 | **accounting\_log\_directory** | String                    | This setting is used to tell Gratia where to find your accounting log files, and it is required for proper accounting.                    |
 | pbs\_server                    | String                    | This setting is optional and should point to your PBS server node if it is different from your OSG CE                                     |
 
-LSF
----
-
-This section describes the parameters for a LSF jobmanager if it's being used in the current CE installation. If LSF is not being used, the `enabled` setting should be set to `False`.
-
-This section is contained in `/etc/osg/config.d/20-lsf.ini` which is provided by the `osg-configure-lsf` RPM.
-
-| Option             | Values Accepted           | Explanation                                                     |
-|--------------------|---------------------------|-----------------------------------------------------------------|
-| **enabled**        | `True`, `False`, `Ignore` | This indicates whether the LSF jobmanager is being used or not. |
-| lsf\_location      | String                    | This should be set to be directory where lsf is installed       |
 
 SGE
 ---
@@ -164,18 +173,6 @@ This section is contained in `/etc/osg/config.d/20-sge.ini` which is provided by
     If `available_queues` is set, that list of queues will be used for
     validation, otherwise SGE will be queried for available queues.
 
-Condor
-------
-
-This section describes the parameters for a Condor jobmanager if it's being used in the current CE installation. If Condor is not being used, the `enabled` setting should be set to `False`.
-
-This section is contained in `/etc/osg/config.d/20-condor.ini` which is provided by the `osg-configure-condor` RPM.
-
-| Option            | Values Accepted           | Explanation                                                                                                                                                                                                                                                                                                                            |
-|-------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **enabled**       | `True`, `False`, `Ignore` | This indicates whether the Condor jobmanager is being used or not.                                                                                                                                                                                                                                                                     |
-| condor\_location  | String                    | This should be set to be directory where condor is installed. If this is set to a blank variable, DEFAULT or UNAVAILABLE, the `osg-configure` script will try to get this from the CONDOR\_LOCATION environment variable if available otherwise it will use `/usr` which works for the RPM installation.                               |
-| condor\_config    | String                    | This should be set to be path where the condor\_config file is located. If this is set to a blank variable, DEFAULT or UNAVAILABLE, the `osg-configure` script will try to get this from the CONDOR\_CONFIG environment variable if available otherwise it will use `/etc/condor/condor_config`, the default for the RPM installation. |
 
 Slurm
 -----
@@ -195,41 +192,49 @@ This section is contained in `/etc/osg/config.d/20-slurm.ini` which is provided 
 | db\_name            | String                    | Name of the SLURM database. This information is needed to configure the SLURM gratia probe.                                                       |
 | slurm\_cluster      | String                    | The name of the Slurm cluster                                                                                                                     |
 
-Bosco
------
 
-This section is contained in `/etc/osg/config.d/20-bosco.ini` which is provided by the `osg-configure-bosco` RPM.
+Gratia
+------
 
-| Option       | Values Accepted           | Explanation                                                                                                                                                                                                                                                                                                                   |
-|--------------|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **enabled**  | `True`, `False`, `Ignore` | This indicates whether the Bosco jobmanager is being used or not.                                                                                                                                                                                                                                                             |
-| **users**    | String                    | A comma separated string. The existing usernames on the CE for which to install Bosco and allow submissions. In order to have separate usernames per VO, for example the CMS VO to have the cms username, each user must have Bosco installed. The osg-configure service will install Bosco on each of the users listed here. |
-| **endpoint** | String                    | The remote cluster submission host for which Bosco will submit jobs to the scheduler. This is in the form of <user@example.com>, exactly as you would use to ssh into the remote cluster.                                                                                                                                     |
-| **batch**    | String                    | The type of scheduler installed on the remote cluster.                                                                                                                                                                                                                                                                        |
-| **ssh\_key** | String                    | The location of the ssh key, as created above.                                                                                                                                                                                                                                                                                |
+This section configures Gratia. If `probes` is set to `UNAVAILABLE`, then `osg-configure` will use appropriate default values. If you need to specify custom reporting (e.g. a local gratia collector) in addition to the default probes, `%(osg-jobmanager-gratia)s`, `%(osg-gridftp-gratia)s`, `%(osg-metric-gratia)s`, `%(itb-jobmanager-gratia)s`, `%(itb-gridftp-gratia)s`, `%(itb-metric-gratia)s` are defined in the default configuration files to make it easier to specify the standard osg reporting.
 
-Misc Services
+This section is contained in `/etc/osg/config.d/30-gratia.ini` which is provided by the `osg-configure-gratia` RPM.
+
+| Option       | Values Accepted            | Explanation                                                                                                                           |
+|--------------|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| **enabled**  | `True` , `False`, `Ignore` | This should be set to True if gratia should be configured and enabled on the installation being configured.                           |
+| **resource** | String                     | This should be set to the resource name as given in the OIM registration                                                              |
+| **probes**   | String                     | This should be set to the gratia probes that should be enabled. A probe is specified by using as `[probe_type]:server:port`. See note |
+
+!!! note
+    **probes**:<br/>
+    Legal values for `probe_type` are:
+
+    -   `metric` (for RSV)
+    -   `jobmanager` (for the appropriate jobmanager probe)
+    -   `gridftp` (for the GridFTP transfer probe)
+
+
+Info Services
 -------------
 
-This section handles the configuration of services that do not have a dedicated section for their configuration.
+Reporting to the central CE Collectors is configured in this section.  In the majority of cases, this file can be left untouched; you only need to configure this section if you wish to report to your own CE Collector instead of the ones run by OSG Operations.
 
-This section is contained in `/etc/osg/config.d/10-misc.ini` which is provided by the `osg-configure-misc` RPM.
+This section is contained in `/etc/osg/config.d/30-infoservices.ini`, which is provided by the `osg-configure-infoservices` RPM. (This is for historical reasons.)
 
-This section primarily deals with authentication/authorization. For information on suggested settings for your CE, see the [authentication section of the HTCondor-CE install documents](../compute-element/install-htcondor-ce#configuring-authentication).
+| Option        | Values Accepted           | Explanation                                                       |
+|---------------|---------------------------|-------------------------------------------------------------------|
+| **enabled**   | `True`, `False`, `Ignore` | True if reporting should be configured and enabled                |
+| ce_collectors | String                    | The server(s) HTCondor-CE information should be sent to. See note |
 
-| Option                                | Values Accepted                                | Explanation                                                                                                                                                                                                                                                                                                                                                                          |
-|---------------------------------------|------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| glexec\_location                      | String                                         | This gives the location of the glExec installation on the worker nodes, if it is present. Can be defined in terms of an environment variable (e.g. `$FOO`) that will be evaluated on the worker node. If it is not installed, set this to `UNAVAILABLE`. glExec does not work with the `vomsmap` authorization method on OSG 3.3 and **is entirely unsupported starting in OSG 3.4** |
-| **gums\_host**                        | String                                         | This setting is used to indicate the hostname of the GUMS host that should be used for authentication, if the authorization method below is set to `xacml`. If GUMS is not used, this should be set to `UNAVAILABLE`. **GUMS is deprecated in OSG 3.4**                                                                                                                              |
-| **authorization\_method**             | `gridmap`, `xacml`, `local-gridmap`, `vomsmap` | This indicates which authorization method your site uses. **`xacml`** **is deprecated in OSG 3.4**                                                                                                                                                                                                                                                                                   |
-| edit\_lcmaps\_db                      | `True`, `False`                                | (Optional, default True) If true, osg-configure will overwrite `/etc/lcmaps.db` to set your authorization method. The previous version will be backed up to `/etc/lcmaps.db.pre-configure`                                                                                                                                                                                           |
-| copy\_host\_cert\_for\_service\_certs | `True`, `False`                                | (Optional, default False) If true, osg-configure will create a copy or copies of your host cert and key as service certs for RSV and (on OSG 3.3) GUMS                                                                                                                                                                                                                               |
+!!! note
+    **ce_collectors**:
 
-**OSG 3.4 changes:**
+    -   Set this to `DEFAULT` to report to the OSG Production or ITB servers (depending on your [Site Information](#site-information) configuration).
+    -   Set this to `PRODUCTION` to report to the OSG Production servers
+    -   Set this to `ITB` to report to the OSG ITB servers
+    -   Otherwise, set this to the `hostname:port` of a host running a `condor-ce-collector` daemon
 
--   `glexec_location` must be `UNAVAILABLE` or unset
--   `authorization_method` defaults to `vomsmap`
--   `authorization_method` will raise a warning if set to `xacml`
 
 RSV
 ---
@@ -268,82 +273,6 @@ This section is contained in `/etc/osg/config.d/30-rsv.ini` which is provided by
     value (for example: `srm/v2/server`) for the SRM probes to pass on their
     SE.
 
-Gateway
--------
-
-This section gives information about the options in the Gateway section of the configuration files. These options control the behavior of job gateways on the CE. CEs are based on HTCondor-CE, which uses `condor-ce` as the gateway.
-
-This section is contained in `/etc/osg/config.d/10-gateway.ini` which is provided by the `osg-configure-gateway` RPM.
-
-| Option                         | Values Accepted | Explanation                                                                                                                                                                                                            |
-|--------------------------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **htcondor\_gateway\_enabled** | `True`, `False` | (default True). True if the CE is using HTCondor-CE, False otherwise. HTCondor-CE will be configured to support enabled batch systems. RSV will use HTCondor-CE to launch remote probes.                               |
-| **job\_envvar\_path**          | String          | The value of the PATH environment variable to put into HTCondor jobs running with HTCondor-CE. This value is ignored if not using that batch system/gateway combination.                                               |
-
-
-Storage
--------
-
-This section gives information about the options in the Storage section of the configuration file.
-Several of these values are constrained and need to be set in a way that is consistent with one of the OSG storage models.
-Please review the Storage Related Parameters section of the [Environment Variables](EnvironmentVariables) description
-as well as the [Overview of Services](OverviewOfServicesInOSG) and [Site Planning](SitePlanning) discussions
-for explanations of the various storage models and the requirements for them.
-
-This section is contained in `/etc/osg/config.d/10-storage.ini` which is provided by the `osg-configure-ce` RPM.
-
-| Option           | Values Accepted | Explanation                                                                                                                                                                                                    |
-|------------------|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **se_available** | `True`, `False` | This indicates whether there is an associated SE available.                                                                                                                                                    |
-| default_se       | String          | If an SE is available at your cluster, set default_se to the hostname of this SE, otherwise set default_se to UNAVAILABLE.                                                                                     |
-| **grid_dir**     | String          | This setting should point to the directory which holds the files from the OSG worker node package. See note                                                                                                    |
-| **app_dir**      | String          | This setting should point to the directory which contains the VO specific applications. See note                                                                                                               |
-| data_dir         | String          | This setting should point to a directory that can be used to store and stage data in and out of the cluster. See note                                                                                          |
-| worker_node_temp | String          | This directory should point to a directory that can be used as scratch space on compute nodes. If not set, the default is UNAVAILABLE. See note                                                                |
-| site_read        | String          | This setting should be the location or url to a directory that can be read to stage in data via the variable `$OSG_SITE_READ`. This is an url if you are using a SE. If not set, the default is UNAVAILABLE    |
-| site_write       | String          | This setting should be the location or url to a directory that can be write to stage out data via the variable `$OSG_SITE_WRITE`. This is an url if you are using a SE. If not set, the default is UNAVAILABLE |
-
-
-!!! note
-    All of these can be defined in terms of an environment variable
-    (e.g. `$FOO`) that will be evaluated on the worker node.
-
-    **grid_dir**:<br/>
-    If you have installed the worker node client via RPM (the normal case) it
-    should be `/etc/osg/wn-client`.  If you have installed the worker node in a
-    special location (perhaps via the worker node client tarball or via OASIS),
-    it should be the location of that directory.
-
-    This directory will be accessed via the `$OSG_GRID` environment variable.
-    It should be visible on all of the compute nodes. Read access is required,
-    though worker nodes don't need write access.
-
-    **app_dir**:<br/>
-    This directory will be accesed via the `$OSG_APP` environment variable. It
-    should be visible on both the CE and worker nodes. Only the CE needs to
-    have write access to this directory. This directory must also contain a
-    sub-directory `etc/` with 1777 permissions.
-
-    **data_dir**:<br/>
-    This directory can be accessed via the `$OSG_DATA` environment variable. It
-    should be readable and writable on both the CE and worker nodes.
-
-    **worker_node_temp**:<br/>
-    This directory will be accessed via the `$OSG_WN_TMP` environment variable.
-    It should allow read and write access on a worker node and can be visible
-    to just that worker node.
-
-Squid
------
-
-This section handles the configuration and setup of the squid web caching and proxy service.
-
-This section is contained in `/etc/osg/config.d/01-squid.ini` which is provided by the `osg-configure-squid` RPM.
-
-| Option      | Values Accepted           | Explanation                                                    |
-|-------------|---------------------------|----------------------------------------------------------------|
-| **enabled** | `True`, `False`, `Ignore` | This indicates whether the squid service is being used or not. |
-| location    | String                    | This should be set to the `hostname:port` of the squid server. |
 
 Subcluster / Resource Entry
 ---------------------------
@@ -415,6 +344,20 @@ The following attributes are optional:
 
 -   `allowed_vos` is mandatory
 
+
+Gateway
+-------
+
+This section gives information about the options in the Gateway section of the configuration files. These options control the behavior of job gateways on the CE. CEs are based on HTCondor-CE, which uses `condor-ce` as the gateway.
+
+This section is contained in `/etc/osg/config.d/10-gateway.ini` which is provided by the `osg-configure-gateway` RPM.
+
+| Option                         | Values Accepted | Explanation                                                                                                                                                                                                            |
+|--------------------------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **htcondor\_gateway\_enabled** | `True`, `False` | (default True). True if the CE is using HTCondor-CE, False otherwise. HTCondor-CE will be configured to support enabled batch systems. RSV will use HTCondor-CE to launch remote probes.                               |
+| **job\_envvar\_path**          | String          | The value of the PATH environment variable to put into HTCondor jobs running with HTCondor-CE. This value is ignored if not using that batch system/gateway combination.                                               |
+
+
 Local Settings
 --------------
 
@@ -430,45 +373,124 @@ MY_PATH = /usr/local/myapp
 
 This section is contained in `/etc/osg/config.d/40-localsettings.ini` which is provided by the `osg-configure-ce` RPM.
 
-Info Services
+
+Misc Services
 -------------
 
-Reporting to the central CE Collectors is configured in this section.  In the majority of cases, this file can be left untouched; you only need to configure this section if you wish to report to your own CE Collector instead of the ones run by OSG Operations.
+This section handles the configuration of services that do not have a dedicated section for their configuration.
 
-This section is contained in `/etc/osg/config.d/30-infoservices.ini`, which is provided by the `osg-configure-infoservices` RPM. (This is for historical reasons.)
+This section is contained in `/etc/osg/config.d/10-misc.ini` which is provided by the `osg-configure-misc` RPM.
 
-| Option        | Values Accepted           | Explanation                                                       |
-|---------------|---------------------------|-------------------------------------------------------------------|
-| **enabled**   | `True`, `False`, `Ignore` | True if reporting should be configured and enabled                |
-| ce_collectors | String                    | The server(s) HTCondor-CE information should be sent to. See note |
+This section primarily deals with authentication/authorization. For information on suggested settings for your CE, see the [authentication section of the HTCondor-CE install documents](../compute-element/install-htcondor-ce#configuring-authentication).
+
+| Option                                | Values Accepted                                | Explanation                                                                                                                                                                                                                                                                                                                                                                          |
+|---------------------------------------|------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| glexec\_location                      | String                                         | This gives the location of the glExec installation on the worker nodes, if it is present. Can be defined in terms of an environment variable (e.g. `$FOO`) that will be evaluated on the worker node. If it is not installed, set this to `UNAVAILABLE`. glExec does not work with the `vomsmap` authorization method on OSG 3.3 and **is entirely unsupported starting in OSG 3.4** |
+| **gums\_host**                        | String                                         | This setting is used to indicate the hostname of the GUMS host that should be used for authentication, if the authorization method below is set to `xacml`. If GUMS is not used, this should be set to `UNAVAILABLE`. **GUMS is deprecated in OSG 3.4**                                                                                                                              |
+| **authorization\_method**             | `gridmap`, `xacml`, `local-gridmap`, `vomsmap` | This indicates which authorization method your site uses. **`xacml`** **is deprecated in OSG 3.4**                                                                                                                                                                                                                                                                                   |
+| edit\_lcmaps\_db                      | `True`, `False`                                | (Optional, default True) If true, osg-configure will overwrite `/etc/lcmaps.db` to set your authorization method. The previous version will be backed up to `/etc/lcmaps.db.pre-configure`                                                                                                                                                                                           |
+| copy\_host\_cert\_for\_service\_certs | `True`, `False`                                | (Optional, default False) If true, osg-configure will create a copy or copies of your host cert and key as service certs for RSV and (on OSG 3.3) GUMS                                                                                                                                                                                                                               |
+
+**OSG 3.4 changes:**
+
+-   `glexec_location` must be `UNAVAILABLE` or unset
+-   `authorization_method` defaults to `vomsmap`
+-   `authorization_method` will raise a warning if set to `xacml`
+
+
+Site Information
+----------------
+
+The settings found in the `Site Information` section are described below. This section is used to give information about a resource such as resource name, site sponsors, administrators, etc.
+
+This section is contained in `/etc/osg/config.d/40-siteinfo.ini` which is provided by the `osg-configure-ce` RPM.
+
+| Option              | Values Accepted   | Description                                                                                                                                  |
+|---------------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| **group**           | `OSG` , `OSG-ITB` | This should be set to either OSG or OSG-ITB depending on whether your resource is in the OSG or OSG-ITB group. Most sites should specify OSG |
+| **host\_name**      | String            | This should be set to be hostname of the CE that is being configured                                                                         |
+| **resource**        | String            | The resource name of this CE endpoint as registered in OIM.                                                                                  |
+| **resource\_group** | String            | The resource\_group of this CE as registered in OIM.                                                                                         |
+| **sponsor**         | String            | This should be set to the sponsor of the resource. See note.                                                                                 |
+| **site\_policy**    | Url               | This should be a url pointing to the resource's usage policy                                                                                 |
+| **contact**         | String            | This should be the name of the resource's admin contact                                                                                      |
+| **email**           | Email address     | This should be the email address of the admin contact for the resource                                                                       |
+| **city**            | String            | This should be the city that the resource is located in                                                                                      |
+| **country**         | String            | This should be two letter country code for the country that the resource is located in.                                                      |
+| **longitude**       | Number            | This should be the longitude of the resource. It should be a number between -180 and 180.                                                    |
+| **latitude**        | Number            | This should be the latitude of the resource. It should be a number between -90 and 90.                                                       |
 
 !!! note
-    **ce_collectors**:
+    **sponsor**:<br/>
+    If your resource has multiple sponsors, you can separate them using commas
+    or specify the percentage using the following format 'osg, atlas, cms' or
+    'osg:10, atlas:45, cms:45'. The percentages must add up to 100 if multiple
+    sponsors are used. If you have a sponsor that is not an OSG VO, you can
+    indicate this by using 'local' as the VO.
 
-    -   Set this to `DEFAULT` to report to the OSG Production or ITB servers (depending on your [Site Information](#site-information) configuration).
-    -   Set this to `PRODUCTION` to report to the OSG Production servers
-    -   Set this to `ITB` to report to the OSG ITB servers
-    -   Otherwise, set this to the `hostname:port` of a host running a `condor-ce-collector` daemon
 
-Gratia
-------
+Squid
+-----
 
-This section configures Gratia. If `probes` is set to `UNAVAILABLE`, then `osg-configure` will use appropriate default values. If you need to specify custom reporting (e.g. a local gratia collector) in addition to the default probes, `%(osg-jobmanager-gratia)s`, `%(osg-gridftp-gratia)s`, `%(osg-metric-gratia)s`, `%(itb-jobmanager-gratia)s`, `%(itb-gridftp-gratia)s`, `%(itb-metric-gratia)s` are defined in the default configuration files to make it easier to specify the standard osg reporting.
+This section handles the configuration and setup of the squid web caching and proxy service.
 
-This section is contained in `/etc/osg/config.d/30-gratia.ini` which is provided by the `osg-configure-gratia` RPM.
+This section is contained in `/etc/osg/config.d/01-squid.ini` which is provided by the `osg-configure-squid` RPM.
 
-| Option       | Values Accepted            | Explanation                                                                                                                           |
-|--------------|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| **enabled**  | `True` , `False`, `Ignore` | This should be set to True if gratia should be configured and enabled on the installation being configured.                           |
-| **resource** | String                     | This should be set to the resource name as given in the OIM registration                                                              |
-| **probes**   | String                     | This should be set to the gratia probes that should be enabled. A probe is specified by using as `[probe_type]:server:port`. See note |
+| Option      | Values Accepted           | Explanation                                                    |
+|-------------|---------------------------|----------------------------------------------------------------|
+| **enabled** | `True`, `False`, `Ignore` | This indicates whether the squid service is being used or not. |
+| location    | String                    | This should be set to the `hostname:port` of the squid server. |
+
+
+Storage
+-------
+
+This section gives information about the options in the Storage section of the configuration file.
+Several of these values are constrained and need to be set in a way that is consistent with one of the OSG storage models.
+Please review the Storage Related Parameters section of the [Environment Variables](EnvironmentVariables) description
+as well as the [Overview of Services](OverviewOfServicesInOSG) and [Site Planning](SitePlanning) discussions
+for explanations of the various storage models and the requirements for them.
+
+This section is contained in `/etc/osg/config.d/10-storage.ini` which is provided by the `osg-configure-ce` RPM.
+
+| Option           | Values Accepted | Explanation                                                                                                                                                                                                    |
+|------------------|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **se_available** | `True`, `False` | This indicates whether there is an associated SE available.                                                                                                                                                    |
+| default_se       | String          | If an SE is available at your cluster, set default_se to the hostname of this SE, otherwise set default_se to UNAVAILABLE.                                                                                     |
+| **grid_dir**     | String          | This setting should point to the directory which holds the files from the OSG worker node package. See note                                                                                                    |
+| **app_dir**      | String          | This setting should point to the directory which contains the VO specific applications. See note                                                                                                               |
+| data_dir         | String          | This setting should point to a directory that can be used to store and stage data in and out of the cluster. See note                                                                                          |
+| worker_node_temp | String          | This directory should point to a directory that can be used as scratch space on compute nodes. If not set, the default is UNAVAILABLE. See note                                                                |
+| site_read        | String          | This setting should be the location or url to a directory that can be read to stage in data via the variable `$OSG_SITE_READ`. This is an url if you are using a SE. If not set, the default is UNAVAILABLE    |
+| site_write       | String          | This setting should be the location or url to a directory that can be write to stage out data via the variable `$OSG_SITE_WRITE`. This is an url if you are using a SE. If not set, the default is UNAVAILABLE |
+
 
 !!! note
-    **probes**:<br/>
-    Legal values for `probe_type` are:
+    All of these can be defined in terms of an environment variable
+    (e.g. `$FOO`) that will be evaluated on the worker node.
 
-    -   `metric` (for RSV)
-    -   `jobmanager` (for the appropriate jobmanager probe)
-    -   `gridftp` (for the GridFTP transfer probe)
+    **grid_dir**:<br/>
+    If you have installed the worker node client via RPM (the normal case) it
+    should be `/etc/osg/wn-client`.  If you have installed the worker node in a
+    special location (perhaps via the worker node client tarball or via OASIS),
+    it should be the location of that directory.
 
+    This directory will be accessed via the `$OSG_GRID` environment variable.
+    It should be visible on all of the compute nodes. Read access is required,
+    though worker nodes don't need write access.
+
+    **app_dir**:<br/>
+    This directory will be accesed via the `$OSG_APP` environment variable. It
+    should be visible on both the CE and worker nodes. Only the CE needs to
+    have write access to this directory. This directory must also contain a
+    sub-directory `etc/` with 1777 permissions.
+
+    **data_dir**:<br/>
+    This directory can be accessed via the `$OSG_DATA` environment variable. It
+    should be readable and writable on both the CE and worker nodes.
+
+    **worker_node_temp**:<br/>
+    This directory will be accessed via the `$OSG_WN_TMP` environment variable.
+    It should allow read and write access on a worker node and can be visible
+    to just that worker node.
 
