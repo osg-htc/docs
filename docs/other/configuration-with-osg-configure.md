@@ -57,7 +57,9 @@ The following sections give an overview of the options for each of the sections 
 Site Information
 ----------------
 
-The settings found in the `Site Information` section are described below. This section is used to give information about a resource such as resource name, site sponsors, administrators, etc. In the default installation, this section is found in `/etc/osg/config.d/40-siteinfo.ini` .
+The settings found in the `Site Information` section are described below. This section is used to give information about a resource such as resource name, site sponsors, administrators, etc.
+
+This section is contained in `/etc/osg/config.d/40-siteinfo.ini` which is provided by the `osg-configure-ce` RPM.
 
 | Option              | Values Accepted   | Description                                                                                                                                  |
 |---------------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -85,7 +87,9 @@ The settings found in the `Site Information` section are described below. This s
 PBS
 ---
 
-This section describes the parameters for a pbs jobmanager if it's being used in the current CE installation. If PBS is not being used, the `enabled` setting should be set to `False`. This section is contained in `/etc/osg/config.d/20-pbs.ini` which is provided by the `osg-configure-pbs` RPM.
+This section describes the parameters for a pbs jobmanager if it's being used in the current CE installation. If PBS is not being used, the `enabled` setting should be set to `False`.
+
+This section is contained in `/etc/osg/config.d/20-pbs.ini` which is provided by the `osg-configure-pbs` RPM.
 
 | Option                         | Values Accepted           | Explanation                                                                                                                               |
 |--------------------------------|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -97,7 +101,9 @@ This section describes the parameters for a pbs jobmanager if it's being used in
 LSF
 ---
 
-This section describes the parameters for a LSF jobmanager if it's being used in the current CE installation. If LSF is not being used, the `enabled` setting should be set to `False`. This section is contained in `/etc/osg/config.d/20-lsf.ini` which is provided by the `osg-configure-lsf` RPM.
+This section describes the parameters for a LSF jobmanager if it's being used in the current CE installation. If LSF is not being used, the `enabled` setting should be set to `False`.
+
+This section is contained in `/etc/osg/config.d/20-lsf.ini` which is provided by the `osg-configure-lsf` RPM.
 
 | Option             | Values Accepted           | Explanation                                                     |
 |--------------------|---------------------------|-----------------------------------------------------------------|
@@ -107,7 +113,9 @@ This section describes the parameters for a LSF jobmanager if it's being used in
 SGE
 ---
 
-This section describes the parameters for a SGE jobmanager if it's being used in the current CE installation. If SGE is not being used, the `enabled` setting should be set to `False`. This section is contained in `/etc/osg/config.d/20-sge.ini` which is provided by the `osg-configure-sge` RPM.
+This section describes the parameters for a SGE jobmanager if it's being used in the current CE installation. If SGE is not being used, the `enabled` setting should be set to `False`.
+
+This section is contained in `/etc/osg/config.d/20-sge.ini` which is provided by the `osg-configure-sge` RPM.
 
 | Option            | Values Accepted           | Explanation                                                                                                                                                            |
 |-------------------|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -126,7 +134,9 @@ This section describes the parameters for a SGE jobmanager if it's being used in
 Condor
 ------
 
-This section describes the parameters for a Condor jobmanager if it's being used in the current CE installation. If Condor is not being used, the `enabled` setting should be set to `False`. This section is contained in `/etc/osg/config.d/20-condor.ini` which is provided by the `osg-configure-condor` RPM.
+This section describes the parameters for a Condor jobmanager if it's being used in the current CE installation. If Condor is not being used, the `enabled` setting should be set to `False`.
+
+This section is contained in `/etc/osg/config.d/20-condor.ini` which is provided by the `osg-configure-condor` RPM.
 
 | Option            | Values Accepted           | Explanation                                                                                                                                                                                                                                                                                                                            |
 |-------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -137,7 +147,9 @@ This section describes the parameters for a Condor jobmanager if it's being used
 Slurm
 -----
 
-This section describes the parameters for a Slurm jobmanager if it's being used in the current CE installation. If Slurm is not being used, the `enabled` setting should be set to `False`. This section is contained in `/etc/osg/config.d/20-slurm.ini` which is provided by the `osg-configure-slurm` RPM.
+This section describes the parameters for a Slurm jobmanager if it's being used in the current CE installation. If Slurm is not being used, the `enabled` setting should be set to `False`.
+
+This section is contained in `/etc/osg/config.d/20-slurm.ini` which is provided by the `osg-configure-slurm` RPM.
 
 | Option              | Values Accepted           | Explanation                                                                                                                                       |
 |---------------------|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -153,6 +165,8 @@ This section describes the parameters for a Slurm jobmanager if it's being used 
 Bosco
 -----
 
+This section is contained in `/etc/osg/config.d/20-bosco.ini` which is provided by the `osg-configure-bosco` RPM.
+
 | Option       | Values Accepted           | Explanation                                                                                                                                                                                                                                                                                                                   |
 |--------------|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **enabled**  | `True`, `False`, `Ignore` | This indicates whether the Bosco jobmanager is being used or not.                                                                                                                                                                                                                                                             |
@@ -164,9 +178,11 @@ Bosco
 Misc Services
 -------------
 
-This section handles the configuration of services that do not have a dedicated section for their configuration. This section is contained in `/etc/osg/config.d/10-misc.ini` which is provided by the `osg-configure-misc` RPM.
+This section handles the configuration of services that do not have a dedicated section for their configuration.
 
-This section primarily deals with authorization. For information on suggested settings for your CE, see the [authorization section of the HTCondor-CE install documents](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorCE#Configuring_authorization).
+This section is contained in `/etc/osg/config.d/10-misc.ini` which is provided by the `osg-configure-misc` RPM.
+
+This section primarily deals with authentication/authorization. For information on suggested settings for your CE, see the [authentication section of the HTCondor-CE install documents](../compute-element/install-htcondor-ce#configuring-authentication).
 
 | Option                                | Values Accepted                                | Explanation                                                                                                                                                                                                                                                                                                                                                                          |
 |---------------------------------------|------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -185,7 +201,9 @@ This section primarily deals with authorization. For information on suggested se
 RSV
 ---
 
-This section handles the configuration and setup of the RSV services This section is contained in `/etc/osg/config.d/30-rsv.ini` which is provided by the `osg-configure-rsv` RPM.
+This section handles the configuration and setup of the RSV services.
+
+This section is contained in `/etc/osg/config.d/30-rsv.ini` which is provided by the `osg-configure-rsv` RPM.
 
 | Option               | Values Accepted           | Explanation                                                                                                                                                                                                                                                            |
 |----------------------|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -198,7 +216,7 @@ This section handles the configuration and setup of the RSV services This sectio
 | gridftp_hosts        | String                    | This option lists the serviceURI of the gridftp servers that the RSV gridftp probes should check.  This should be a list of serviceURIs (`hostname[:port/service]`) separated by a comma (e.g. `my.host.iu.edu:2812,my.host2,my.host3`).                               |
 | gridftp_dir          | String                    | This should be the directory that the gridftp probes should use during testing.  This defaults to `/tmp` if left blank or set to `UNAVAILABLE`.                                                                                                                        |
 | **srm_hosts**        | String                    | This option lists the serviceURI of the srm servers that the RSV srm probes should check.  This should be a list of serviceURIs (`hostname[:port/service]`) separated by a comma (e.g. `my.host,my.host2,my.host3:8444`).                                              |
-| srm_dir              | String                    | This should be the directory that the srm probes should use during testing.  It must be given if enable_srm_probes is enabled.                                                                                                                                         |
+| srm_dir              | String                    | This should be the directory that the srm probes should use during testing.                                                                                                                                                                                            |
 | srm_webservice_path  | String                    | This option gives the webservice path that SRM probes need to use along with the host:port. See note.                                                                                                                                                                  |
 | service_cert         | String                    | This option should point to the public key file (pem) for your service  certificate. If this is left blank or set to `UNAVAILABLE` and the `user_proxy` setting is set, it will default to `/etc/grid-security/rsvcert.pem`                                            |
 | service_key          | String                    | This option should point to the private key file (pem) for your service  certificate. If this is left blank or set to `UNAVAILABLE` and the `service_cert` setting is enabled, it will default to `/etc/grid-security/rsvkey.pem` .                                    |
@@ -221,6 +239,8 @@ Gateway
 -------
 
 This section gives information about the options in the Gateway section of the configuration files. These options control the behavior of job gateways on the CE. CEs are based on HTCondor-CE, which uses `condor-ce` as the gateway.
+
+This section is contained in `/etc/osg/config.d/10-gateway.ini` which is provided by the `osg-configure-gateway` RPM.
 
 | Option                         | Values Accepted | Explanation                                                                                                                                                                                                            |
 |--------------------------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -283,21 +303,23 @@ This section is contained in `/etc/osg/config.d/10-storage.ini` which is provide
 Squid
 -----
 
-This section handles the configuration and setup of the squid web caching and proxy service. This section is contained in `/etc/osg/config.d/01-squid.ini` which is provided by the `osg-configure-squid` RPM.
+This section handles the configuration and setup of the squid web caching and proxy service.
+
+This section is contained in `/etc/osg/config.d/01-squid.ini` which is provided by the `osg-configure-squid` RPM.
 
 | Option      | Values Accepted           | Explanation                                                    |
 |-------------|---------------------------|----------------------------------------------------------------|
 | **enabled** | `True`, `False`, `Ignore` | This indicates whether the squid service is being used or not. |
 | location    | String                    | This should be set to the `hostname:port` of the squid server. |
 
-Subcluster / Resource Entry Configuration
------------------------------------------
+Subcluster / Resource Entry
+---------------------------
 
 Subcluster and Resource Entry configuration is for reporting about the worker resources on your site. A **subcluster** is a homogeneous set of worker node hardware; a **resource** is a set of subcluster(s) with common capabilities that will be reported to the ATLAS AGIS system.
 
 **At least one Subcluster or Resource Entry section** is required on a CE; please populate the information for all your subclusters. This information will be reported to a central collector and will be used to send GlideIns / pilot jobs to your site; having accurate information is necessary for OSG jobs to effectively use your resources.
 
-For historical reasons, this configuration is specified in the file named 30-gip.ini, installed by the `osg-configure-gip` RPM.
+This section is contained in `/etc/osg/config.d/30-gip.ini` which is provided by the `osg-configure-gip` RPM. (This is for historical reasons.)
 
 This configuration uses multiple sections of the OSG configuration files:
 
@@ -378,7 +400,9 @@ This section is contained in `/etc/osg/config.d/40-localsettings.ini` which is p
 Info Services
 -------------
 
-Reporting to the central CE Collectors is configured in this section. For historical reasons, this is found in `30-infoservices.ini`, installed by the `osg-configure-infoservices` RPM. In the majority of cases, this file can be left untouched; you only need to configure this section if you wish to report to your own CE Collector instead of the ones run by OSG Operations.
+Reporting to the central CE Collectors is configured in this section.  In the majority of cases, this file can be left untouched; you only need to configure this section if you wish to report to your own CE Collector instead of the ones run by OSG Operations.
+
+This section is contained in `/etc/osg/config.d/30-infoservices.ini`, which is provided by the `osg-configure-infoservices` RPM. (This is for historical reasons.)
 
 | Option        | Values Accepted           | Explanation                                                       |
 |---------------|---------------------------|-------------------------------------------------------------------|
@@ -396,7 +420,9 @@ Reporting to the central CE Collectors is configured in this section. For histor
 Gratia
 ------
 
-This section configures Gratia. If `probes` is set to `UNAVAILABLE`, then `osg-configure` will use appropriate default values. If you need to specify custom reporting (e.g. a local gratia collector) in addition to the default probes, `%(osg-jobmanager-gratia)s`, `%(osg-gridftp-gratia)s`, `%(osg-metric-gratia)s`, `%(itb-jobmanager-gratia)s`, `%(itb-gridftp-gratia)s`, `%(itb-metric-gratia)s` are defined in the default configuration files to make it easier to specify the standard osg reporting. This section is contained in `/etc/osg/config.d/30-gratia.ini` which is provided by the `osg-configure-gratia` RPM.
+This section configures Gratia. If `probes` is set to `UNAVAILABLE`, then `osg-configure` will use appropriate default values. If you need to specify custom reporting (e.g. a local gratia collector) in addition to the default probes, `%(osg-jobmanager-gratia)s`, `%(osg-gridftp-gratia)s`, `%(osg-metric-gratia)s`, `%(itb-jobmanager-gratia)s`, `%(itb-gridftp-gratia)s`, `%(itb-metric-gratia)s` are defined in the default configuration files to make it easier to specify the standard osg reporting.
+
+This section is contained in `/etc/osg/config.d/30-gratia.ini` which is provided by the `osg-configure-gratia` RPM.
 
 | Option       | Values Accepted            | Explanation                                                                                                                           |
 |--------------|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
