@@ -1,10 +1,4 @@
-<span class="twiki-macro DOC_STATUS_TABLE"></span>
-
-Frontier Squid Caching Proxy Installation Guide
-===============================================
-
-
-## About This Document
+# Install the Frontier Squid HTTP Caching Proxy
 
 This document is intended for System Administrators who are installing
 `frontier-squid`, the OSG distribution of the Frontier Squid software.
