@@ -14,6 +14,7 @@ pages:
   - 'Yum Repos': 'common/yum.md'
 - Install Guides - Client:
   - 'CVMFS': 'client/cvmfs.md'
+  - 'Singularity': 'client/singularity.md'
   - 'Worker Node (RPM install)': 'client/wn.md'
   - 'Worker Node (tarball install)': 'client/wn-tarball.md'
   - 'Worker Node (OASIS install)': 'client/wn-oasis.md'
