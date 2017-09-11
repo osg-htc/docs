@@ -15,7 +15,7 @@ servers via HTTP.
 
 ### Host and OS
 
--  OS is RedHat 6, 7 or variants
+-  OS is Red Hat Enterprise Linux 6, 7 or variants
 -  `root` access
 -  Sufficient (~20GB+20%) cache space reserved, preferably in a
    separate filesystem (details [below](#configuring-cvmfs))
