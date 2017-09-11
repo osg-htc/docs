@@ -39,7 +39,7 @@ The installation will also create a cvmfs group and default the cvmfs user to th
 
 ### Networking
 
-You will need network access to a local squid server such as the [squid distributed by OSG](InstallFrontierSquid). The squid will need out-bound access to cvmfs stratum 1 servers.
+You will need network access to a local squid server such as the [squid distributed by OSG](../data/frontier-squid.md). The squid will need out-bound access to cvmfs stratum 1 servers.
 
 ### Upgrading
 
