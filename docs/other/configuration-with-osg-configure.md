@@ -2,6 +2,7 @@ Configuration with OSG-Configure
 ================================
 
 -   [About this document](#about-this-document)
+-   [Invocation and script usage](#invocation-and-script-usage)
 -   [Syntax and layout](#syntax-and-layout)
 -   [Configuration sections](#configuration-sections)
     -   Job managers (batch systems):
@@ -32,6 +33,59 @@ This document outlines the settings and options found in the INI files for syste
 
 This page gives an overview of the options for each of the sections of the configuration files that `osg-configure` uses.
 
+
+
+Invocation and script usage
+===========================
+
+The `osg-configure` script is used to process the INI files and apply changes to the system.
+`osg-configure` must be run as root.
+
+The typical workflow of OSG-Configure is to first edit the INI files, then verify them, then apply the changes.
+
+To verify the config files, run:
+``` console
+[root@server] osg-configure -v
+```
+
+OSG-Configure will list any errors in your configuration, usually including the section and option where the problem is.
+Potential problems are:
+
+-   Required option not filled in
+-   Invalid value
+-   Syntax error
+-   Inconsistencies between options
+
+To apply changes, run:
+``` console
+[root@server] osg-configure -c
+```
+
+If your INI files do not change, then re-running `osg-configure -c` will result in the same configuration as when you ran it the last time.
+This allows you to experiment with your settings without having to worry about messing up your system.
+
+OSG-Configure is split up into modules. Normally, all modules are run when calling `osg-configure`.
+However, it is possible to run specific modules separately.
+To see a list of modules, including whether they can be run separately, run:
+``` console
+[root@server] osg-configure -l
+```
+If the module can be run separately, specify it with the `-m %RED%<MODULE>%ENDCOLOR%` option:
+``` console
+[root@server] osg-configure -c -m %RED%<MODULE>%ENDCOLOR%
+```
+
+Options may be specified in multiple INI files, which may make it hard to determine which value OSG-Configure uses.
+You may query the final value of an option via one of these methods:
+``` console
+[root@server] osg-configure -o %RED%<OPTION>%ENDCOLOR%
+[root@server] osg-configure -o %RED%<SECTION>%ENDCOLOR%.%RED%<OPTION>%ENDCOLOR%
+```
+
+Logs are written to `/var/log/osg/osg-configure.log`.
+If something goes wrong, specify the `-d` flag to add more verbose output to `osg-configure.log`.
+
+The rest of this document will detail what to specify in the INI files.
 
 
 Conventions
