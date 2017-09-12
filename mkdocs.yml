@@ -37,6 +37,7 @@ pages:
   - 'RPM Signing': 'release/signing.md'
 - Usage Guides:
   - 'Certificate Tools': 'common/pki-cli.md'
+  - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
   - 'Worker Node Environment': 'client/using-wn.md'
 - In-Progress Docs:
   - 'CA Updater': 'common/ca_updater.md'
