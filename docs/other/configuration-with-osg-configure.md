@@ -123,10 +123,6 @@ any option set in a given section can be used as a variable in that section.  As
 !!! note
     The trailing `s` is required. Also, option names cannot have a variable subsitution in them.
 
-!!! warning
-    You will need to be careful when naming variables in order to avoid an
-    infinite loop when resolving the variable substitution.
-
 Special Settings
 ----------------
 
@@ -501,9 +497,10 @@ Storage
 
 This section gives information about the options in the Storage section of the configuration file.
 Several of these values are constrained and need to be set in a way that is consistent with one of the OSG storage models.
-Please review the Storage Related Parameters section of the [Environment Variables](EnvironmentVariables) description
-as well as the [Overview of Services](OverviewOfServicesInOSG) and [Site Planning](SitePlanning) discussions
-for explanations of the various storage models and the requirements for them.
+Please review the Storage Related Parameters section of the
+[Environment Variables](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/EnvironmentVariables)
+description and [Site Planning](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SitePlanning)
+discussions for explanations of the various storage models and the requirements for them.
 
 This section is contained in `/etc/osg/config.d/10-storage.ini` which is provided by the `osg-configure-ce` RPM.
 
@@ -523,28 +520,28 @@ This section is contained in `/etc/osg/config.d/10-storage.ini` which is provide
     All of these can be defined in terms of an environment variable
     (e.g. `$FOO`) that will be evaluated on the worker node.
 
-    **grid_dir**:<br/>
-    If you have installed the worker node client via RPM (the normal case) it
-    should be `/etc/osg/wn-client`.  If you have installed the worker node in a
-    special location (perhaps via the worker node client tarball or via OASIS),
-    it should be the location of that directory.
+**grid_dir**:<br/>
+If you have installed the worker node client via RPM (the normal case) it
+should be `/etc/osg/wn-client`.  If you have installed the worker node in a
+special location (perhaps via the worker node client tarball or via OASIS),
+it should be the location of that directory.
 
-    This directory will be accessed via the `$OSG_GRID` environment variable.
-    It should be visible on all of the compute nodes. Read access is required,
-    though worker nodes don't need write access.
+This directory will be accessed via the `$OSG_GRID` environment variable.
+It should be visible on all of the compute nodes. Read access is required,
+though worker nodes don't need write access.
 
-    **app_dir**:<br/>
-    This directory will be accesed via the `$OSG_APP` environment variable. It
-    should be visible on both the CE and worker nodes. Only the CE needs to
-    have write access to this directory. This directory must also contain a
-    sub-directory `etc/` with 1777 permissions.
+**app_dir**:<br/>
+This directory will be accesed via the `$OSG_APP` environment variable. It
+should be visible on both the CE and worker nodes. Only the CE needs to
+have write access to this directory. This directory must also contain a
+sub-directory `etc/` with 1777 permissions.
 
-    **data_dir**:<br/>
-    This directory can be accessed via the `$OSG_DATA` environment variable. It
-    should be readable and writable on both the CE and worker nodes.
+**data_dir**:<br/>
+This directory can be accessed via the `$OSG_DATA` environment variable. It
+should be readable and writable on both the CE and worker nodes.
 
-    **worker_node_temp**:<br/>
-    This directory will be accessed via the `$OSG_WN_TMP` environment variable.
-    It should allow read and write access on a worker node and can be visible
-    to just that worker node.
+**worker_node_temp**:<br/>
+This directory will be accessed via the `$OSG_WN_TMP` environment variable.
+It should allow read and write access on a worker node and can be visible
+to just that worker node.
 
