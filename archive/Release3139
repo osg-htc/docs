@@ -1,0 +1,91 @@
+---+ OSG Software Release 3.1.39
+
+*Release Date*: 2014-09-09
+
+---++ Summary of changes
+
+This release contains:
+   * Update [[http://www.eu-emi.eu/releases/emi-3-monte-bianco/updates/-/asset_publisher/5Na8/content/update-19-07-08-2014-v-3-10-0-1#dCache_server_v_2_6_31_and_dCach][dCache SRM client]] to version 2.2.27
+   * osg-pki-tools
+      * revoke specific certificates
+      * bug fix for uncaught exceptions
+   * blahp LSF script bug fix
+
+These [[https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%20%223.1.39%22][JIRA tickets]] were addressed in this release.
+
+Detailed changes are below. All of the documentation can be found in the [[Documentation.Release3][Release3]] area of the !TWiki.
+
+---++ Known issues
+
+---++ Updating to the new release
+
+You can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or glob]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed changes in this release
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=blahp-1.18.9.bosco-2.osg31.el5][blahp-1.18.9.bosco-2.osg31.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=dcache-srmclient-2.2.27-1.osg31.el5][dcache-srmclient-2.2.27-1.osg31.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-pki-tools-1.2.10-1.osg31.el5][osg-pki-tools-1.2.10-1.osg31.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.4.17-1.osg31.el5][osg-test-1.4.17-1.osg31.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.39-1.osg31.el5][osg-version-3.1.39-1.osg31.el5]]
+   
+---++++ Enterprise Linux 6
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=blahp-1.18.9.bosco-2.osg31.el6][blahp-1.18.9.bosco-2.osg31.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=dcache-srmclient-2.2.27-1.osg31.el6][dcache-srmclient-2.2.27-1.osg31.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-pki-tools-1.2.10-1.osg31.el6][osg-pki-tools-1.2.10-1.osg31.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.4.17-1.osg31.el6][osg-test-1.4.17-1.osg31.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.39-1.osg31.el6][osg-version-3.1.39-1.osg31.el6]]
+
+---+++ RPMs
+
+If you wish to manually update your system, you can run yum update against the following packages:
+
+<pre class="file">
+blahp blahp-debuginfo dcache-srmclient osg-pki-tools osg-pki-tools-tests osg-test osg-version
+</pre>
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+blahp-1.18.9.bosco-2.osg31.el5
+blahp-debuginfo-1.18.9.bosco-2.osg31.el5
+dcache-srmclient-2.2.27-1.osg31.el5
+osg-pki-tools-1.2.10-1.osg31.el5
+osg-pki-tools-tests-1.2.10-1.osg31.el5
+osg-test-1.4.17-1.osg31.el5
+osg-version-3.1.39-1.osg31.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+blahp-1.18.9.bosco-2.osg31.el6
+blahp-debuginfo-1.18.9.bosco-2.osg31.el6
+dcache-srmclient-2.2.27-1.osg31.el6
+osg-pki-tools-1.2.10-1.osg31.el6
+osg-pki-tools-tests-1.2.10-1.osg31.el6
+osg-test-1.4.17-1.osg31.el6
+osg-version-3.1.39-1.osg31.el6
+</pre>
