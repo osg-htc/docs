@@ -22,12 +22,12 @@ pages:
 - Install Guides - Data:
   - 'GridFTP Server': 'data/gridftp.md'
   - 'HTTP Cache': 'data/frontier-squid.md'
-- Install Guides - Other:
-  - 'GSI-enabled SSH': 'other/gsissh.md'
-  - 'LCMAPS-VOMS authentication': 'other/lcmaps-voms-authentication.md'
 - Install Guides - Monitoring:
   - 'RSV': 'monitoring/rsv.md'
   - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
+- Install Guides - Other:
+  - 'GSI-enabled SSH': 'other/gsissh.md'
+  - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
 - Overviews:
   - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
 - Release Information:
@@ -37,6 +37,7 @@ pages:
   - 'RPM Signing': 'release/signing.md'
 - Usage Guides:
   - 'Certificate Tools': 'common/pki-cli.md'
+  - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
   - 'Worker Node Environment': 'client/using-wn.md'
 - In-Progress Docs:
   - 'CA Updater': 'common/ca_updater.md'
