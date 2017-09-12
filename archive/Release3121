@@ -1,0 +1,510 @@
+---+ OSG Software Release 3.1.21
+
+*Release Date*: 2013-07-09
+
+---++ Summary of changes
+
+Changes include:
+ 
+   * HTCondor 7.8 RPM should not restart HTCondor on upgrade [[https://jira.opensciencegrid.org/browse/SOFTWARE-850][SOFTWARE-850]]
+   * Improve HTCondor init script [[https://jira.opensciencegrid.org/browse/SOFTWARE-1050][SOFTWARE-1050]]
+   * Globus SGE SEG generates an extra 'acct' at midnight [[https://jira.opensciencegrid.org/browse/SOFTWARE-1070][SOFTWARE-1070]]
+   * VOMS Logrotate is rotating already rotated files [[https://jira.opensciencegrid.org/browse/SOFTWARE-1084][SOFTWARE-1084]]
+   * Unclear document and/or symlink not created by osg-ca-manage [[https://jira.opensciencegrid.org/browse/SOFTWARE-1086][SOFTWARE-1086]]
+   * Recompile xacml with IPv6 [[https://jira.opensciencegrid.org/browse/SOFTWARE-1091][SOFTWARE-1091]]
+   * Test and Release CA cert packages with IGTF 1.54 release [[https://jira.opensciencegrid.org/browse/SOFTWARE-1107][SOFTWARE-1107]]
+   * Update vo-client to v45 [[https://jira.opensciencegrid.org/browse/SOFTWARE-1109][SOFTWARE-1109]]
+
+Also in the upcoming repository:
+
+   * Upgrade to HDFS 2.0 [[https://jira.opensciencegrid.org/browse/SOFTWARE-608][SOFTWARE-608]]
+   * Add important patches to HDFS 2 spec file [[https://jira.opensciencegrid.org/browse/SOFTWARE-877][SOFTWARE-877]]
+   * Trim condor_procd dependencies to avoid installing HTCondor [[https://jira.opensciencegrid.org/browse/SOFTWARE-989][SOFTWARE-989]]
+   * Release Java 7 packages into Upcoming [[https://jira.opensciencegrid.org/browse/SOFTWARE-1078][SOFTWARE-1078]]
+      * Please refer to the documentation in [[https://www.opensciencegrid.org/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7][Installing OSG Software to Use OpenJDK 7]]
+   * Upgrade to HTCondor >= 8.0.0 [[https://jira.opensciencegrid.org/browse/SOFTWARE-1081][SOFTWARE-1081]]
+
+ Detailed changes are below. All of the documentation can be found in the [[Documentation.Release3][Release3]] area of the !TWiki.
+
+---++ Known issues
+   * The jglobus package is at version 2.0.4 in upcoming.  It is 2.0.5 in the mainline.  This will be resolved in the next release.
+   * HTCondor 8.0.0 has two issues
+      * There is a wire incompatibility in the CHIRP protocol between HTCondor 7.8 and 8.0.0.  This will be fixed in 8.0.1 in the next release.
+      * DAGs start over from the beginning on upgrade.  Workaround: condor_rm the jobs before the upgrade.
+   * HDFS 2 depends on the bigtop-utils package found in the osg-upcoming-testing repository.  bigtop-utils will be released in the next release.
+
+---++ Updating to the new release
+
+You can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or glob]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed changes in this release
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5   
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-7.8.8-4.osg.el5][condor-7.8.8-4.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-sge-1.0-7.2.osg.el5][globus-gram-job-manager-sge-1.0-7.2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.54-1.osg.el5][igtf-ca-certs-1.54-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-compat-1.54-1.osg.el5][igtf-ca-certs-compat-1.54-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.35-1.osg.el5][osg-ca-certs-1.35-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-compat-1.35-1.osg.el5][osg-ca-certs-compat-1.35-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.21-1.osg.el5][osg-version-3.1.21-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-45-1.osg.el5][vo-client-45-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-2.0.8-1.9.osg.el5][voms-2.0.8-1.9.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=xacml-1.1.2-5.osg.el5][xacml-1.1.2-5.osg.el5]]
+
+---++++ Enterprise Linux 6
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-7.8.8-4.osg.el5][condor-7.8.8-4.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-sge-1.0-7.2.osg.el5][globus-gram-job-manager-sge-1.0-7.2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.54-1.osg.el5][igtf-ca-certs-1.54-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-compat-1.54-1.osg.el5][igtf-ca-certs-compat-1.54-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.35-1.osg.el5][osg-ca-certs-1.35-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-compat-1.35-1.osg.el5][osg-ca-certs-compat-1.35-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.21-1.osg.el5][osg-version-3.1.21-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-45-1.osg.el5][vo-client-45-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-2.0.8-1.9.osg.el5][voms-2.0.8-1.9.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=xacml-1.1.2-5.osg.el5][xacml-1.1.2-5.osg.el5]]
+
+---+++ RPMs
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+condor-7.8.8-4.osg.el5
+condor-classads-7.8.8-4.osg.el5
+condor-classads-devel-7.8.8-4.osg.el5
+condor-cream-gahp-7.8.8-4.osg.el5
+condor-debuginfo-7.8.8-4.osg.el5
+condor-kbdd-7.8.8-4.osg.el5
+condor-procd-7.8.8-4.osg.el5
+condor-vm-gahp-7.8.8-4.osg.el5
+globus-gram-job-manager-sge-1.0-7.2.osg.el5
+globus-gram-job-manager-sge-debuginfo-1.0-7.2.osg.el5
+globus-gram-job-manager-sge-doc-1.0-7.2.osg.el5
+globus-gram-job-manager-sge-setup-poll-1.0-7.2.osg.el5
+globus-gram-job-manager-sge-setup-seg-1.0-7.2.osg.el5
+igtf-ca-certs-1.54-1.osg.el5
+igtf-ca-certs-compat-1.54-1.osg.el5
+osg-ca-certs-1.35-1.osg.el5
+osg-ca-certs-compat-1.35-1.osg.el5
+osg-gums-config-45-1.osg.el5
+osg-version-3.1.21-1.osg.el5
+vo-client-45-1.osg.el5
+vo-client-edgmkgridmap-45-1.osg.el5
+voms-2.0.8-1.9.osg.el5
+voms-clients-2.0.8-1.9.osg.el5
+voms-compat-1.9.19.2-7.6.osg.el5
+voms-debuginfo-2.0.8-1.9.osg.el5
+voms-devel-2.0.8-1.9.osg.el5
+voms-doc-2.0.8-1.9.osg.el5
+voms-server-2.0.8-1.9.osg.el5
+xacml-1.1.2-5.osg.el5
+xacml-debuginfo-1.1.2-5.osg.el5
+xacml-devel-1.1.2-5.osg.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+condor-7.8.8-4.osg.el6
+condor-classads-7.8.8-4.osg.el6
+condor-classads-devel-7.8.8-4.osg.el6
+condor-cream-gahp-7.8.8-4.osg.el6
+condor-debuginfo-7.8.8-4.osg.el6
+condor-kbdd-7.8.8-4.osg.el6
+condor-procd-7.8.8-4.osg.el6
+condor-vm-gahp-7.8.8-4.osg.el6
+globus-gram-job-manager-sge-1.0-7.2.osg.el6
+globus-gram-job-manager-sge-debuginfo-1.0-7.2.osg.el6
+globus-gram-job-manager-sge-doc-1.0-7.2.osg.el6
+globus-gram-job-manager-sge-setup-poll-1.0-7.2.osg.el6
+globus-gram-job-manager-sge-setup-seg-1.0-7.2.osg.el6
+igtf-ca-certs-1.54-1.osg.el6
+igtf-ca-certs-compat-1.54-1.osg.el6
+osg-ca-certs-1.35-1.osg.el6
+osg-ca-certs-compat-1.35-1.osg.el6
+osg-gums-config-45-1.osg.el6
+osg-version-3.1.21-1.osg.el6
+vo-client-45-1.osg.el6
+vo-client-edgmkgridmap-45-1.osg.el6
+voms-2.0.8-1.9.osg.el6
+voms-clients-2.0.8-1.9.osg.el6
+voms-compat-1.9.19.2-7.6.osg.el6
+voms-debuginfo-2.0.8-1.9.osg.el6
+voms-devel-2.0.8-1.9.osg.el6
+voms-doc-2.0.8-1.9.osg.el6
+voms-server-2.0.8-1.9.osg.el6
+xacml-1.1.2-5.osg.el6
+xacml-debuginfo-1.1.2-5.osg.el6
+xacml-devel-1.1.2-5.osg.el6
+</pre>
+
+---+++ Upcoming Packages
+
+We added or updated the following packages to the *upcoming* OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5   
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=bestman2-2.3.0-14.osg.el5][bestman2-2.3.0-14.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=bigtop-jsvc-0.3.0-1.1.osg.el5][bigtop-jsvc-0.3.0-1.1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cog-jglobus-axis-1.8.0-3.osg.el5][cog-jglobus-axis-1.8.0-3.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-8.0.0-2.osg.el5][condor-8.0.0-2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=emi-trustmanager-3.0.3-5.osg.el5][emi-trustmanager-3.0.3-5.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=emi-trustmanager-axis-1.0.1-1.2.osg.el5][emi-trustmanager-axis-1.0.1-1.2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=emi-trustmanager-tomcat-3.0.0-8.osg.el5][emi-trustmanager-tomcat-3.0.0-8.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glite-data-transfer-interface-3.7.0-4.osg.el5][glite-data-transfer-interface-3.7.0-4.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glite-security-trustmanager-2.5.5-6.2.osg.el5][glite-security-trustmanager-2.5.5-6.2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glite-security-util-java-2.8.0-3.2.osg.el5][glite-security-util-java-2.8.0-3.2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gridftp-hdfs-0.5.4-9.osg.el5][gridftp-hdfs-0.5.4-9.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gums-1.3.18.009-15.9.osg.el5][gums-1.3.18.009-15.9.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=hadoop-0.20-0.20.2+737-33.osg.el5][hadoop-0.20-0.20.2+737-33.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=hadoop-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5][hadoop-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=jclassads-2.4-3.osg.el5][jclassads-2.4-3.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=jetty-8.1.4.v20120524-2.osg.el5][jetty-8.1.4.v20120524-2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=jglobus-2.0.4-7.osg.el5][jglobus-2.0.4-7.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=joda-time-1.5.2-7.1.tzdata2008d.osg.el5][joda-time-1.5.2-7.1.tzdata2008d.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=missing-java-1.7.0-dirs-1.0-2.osg.el5][missing-java-1.7.0-dirs-1.0-2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=ndt-3.6.5-3.osg.el5][ndt-3.6.5-3.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ce-3.0.0-31.osg.el5][osg-ce-3.0.0-31.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-client-3.0.0-20.osg.el5][osg-client-3.0.0-20.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-gridftp-xrootd-3.0.0-4.osg.el5][osg-gridftp-xrootd-3.0.0-4.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-se-bestman-3.0.0-9.osg.el5][osg-se-bestman-3.0.0-9.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-se-bestman-xrootd-3.0.0-6.osg.el5][osg-se-bestman-xrootd-3.0.0-6.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-se-hadoop-3.0.0-10.osg.el5][osg-se-hadoop-3.0.0-10.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-wn-client-3.0.0-19.osg.el5][osg-wn-client-3.0.0-19.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=pegasus-4.2.0-1.2.osg.el5][pegasus-4.2.0-1.2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=slf4j-1.5.2-5.osg.el5][slf4j-1.5.2-5.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-admin-server-2.7.0-1.5.osg.el5][voms-admin-server-2.7.0-1.5.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-api-java-2.0.8-1.5.osg.el5][voms-api-java-2.0.8-1.5.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=xrootd-hdfs-1.8.3-12.osg.el5][xrootd-hdfs-1.8.3-12.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=zookeeper-3.4.3+15-1.cdh4.0.1.p0.2.osg.el5][zookeeper-3.4.3+15-1.cdh4.0.1.p0.2.osg.el5]]
+
+---++++ Enterprise Linux 6
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=bestman2-2.3.0-14.osg.el6][bestman2-2.3.0-14.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=bigtop-jsvc-0.3.0-1.1.osg.el6][bigtop-jsvc-0.3.0-1.1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cog-jglobus-axis-1.8.0-3.osg.el6][cog-jglobus-axis-1.8.0-3.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-8.0.0-2.osg.el6][condor-8.0.0-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=emi-trustmanager-3.0.3-5.osg.el6][emi-trustmanager-3.0.3-5.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=emi-trustmanager-axis-1.0.1-1.2.osg.el6][emi-trustmanager-axis-1.0.1-1.2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=emi-trustmanager-tomcat-3.0.0-8.osg.el6][emi-trustmanager-tomcat-3.0.0-8.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glite-data-transfer-interface-3.7.0-4.osg.el6][glite-data-transfer-interface-3.7.0-4.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glite-security-trustmanager-2.5.5-6.2.osg.el6][glite-security-trustmanager-2.5.5-6.2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glite-security-util-java-2.8.0-3.2.osg.el6][glite-security-util-java-2.8.0-3.2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gridftp-hdfs-0.5.4-9.osg.el6][gridftp-hdfs-0.5.4-9.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gums-1.3.18.009-15.9.osg.el6][gums-1.3.18.009-15.9.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=hadoop-0.20-0.20.2+737-33.osg.el6][hadoop-0.20-0.20.2+737-33.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=hadoop-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6][hadoop-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=jclassads-2.4-3.osg.el6][jclassads-2.4-3.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=jetty-8.1.4.v20120524-2.osg.el6][jetty-8.1.4.v20120524-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=jglobus-2.0.4-7.osg.el6][jglobus-2.0.4-7.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=joda-time-1.5.2-7.1.tzdata2008d.osg.el6][joda-time-1.5.2-7.1.tzdata2008d.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=ndt-3.6.5-3.osg.el6][ndt-3.6.5-3.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ce-3.0.0-31.osg.el6][osg-ce-3.0.0-31.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-client-3.0.0-20.osg.el6][osg-client-3.0.0-20.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-gridftp-xrootd-3.0.0-4.osg.el6][osg-gridftp-xrootd-3.0.0-4.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-se-bestman-3.0.0-9.osg.el6][osg-se-bestman-3.0.0-9.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-se-bestman-xrootd-3.0.0-6.osg.el6][osg-se-bestman-xrootd-3.0.0-6.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-se-hadoop-3.0.0-10.osg.el6][osg-se-hadoop-3.0.0-10.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-wn-client-3.0.0-19.osg.el6][osg-wn-client-3.0.0-19.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=pegasus-4.2.0-1.2.osg.el6][pegasus-4.2.0-1.2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=slf4j-1.5.2-5.osg.el6][slf4j-1.5.2-5.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-admin-server-2.7.0-1.5.osg.el6][voms-admin-server-2.7.0-1.5.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-api-java-2.0.8-1.5.osg.el6][voms-api-java-2.0.8-1.5.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=xrootd-hdfs-1.8.3-12.osg.el6][xrootd-hdfs-1.8.3-12.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=zookeeper-3.4.3+15-1.cdh4.0.1.p0.2.osg.el6][zookeeper-3.4.3+15-1.cdh4.0.1.p0.2.osg.el6]]
+
+
+---+++ Upcoming RPMs
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+bestman2-2.3.0-14.osg.el5
+bestman2-client-2.3.0-14.osg.el5
+bestman2-client-libs-2.3.0-14.osg.el5
+bestman2-common-libs-2.3.0-14.osg.el5
+bestman2-server-2.3.0-14.osg.el5
+bestman2-server-dep-libs-2.3.0-14.osg.el5
+bestman2-server-libs-2.3.0-14.osg.el5
+bestman2-tester-2.3.0-14.osg.el5
+bestman2-tester-libs-2.3.0-14.osg.el5
+bigtop-jsvc-0.3.0-1.1.osg.el5
+bigtop-jsvc-debuginfo-0.3.0-1.1.osg.el5
+cog-jglobus-axis-1.8.0-3.osg.el5
+condor-8.0.0-2.osg.el5
+condor-bosco-8.0.0-2.osg.el5
+condor-classads-8.0.0-2.osg.el5
+condor-classads-devel-8.0.0-2.osg.el5
+condor-cream-gahp-8.0.0-2.osg.el5
+condor-debuginfo-8.0.0-2.osg.el5
+condor-kbdd-8.0.0-2.osg.el5
+condor-procd-8.0.0-2.osg.el5
+condor-python-8.0.0-2.osg.el5
+condor-vm-gahp-8.0.0-2.osg.el5
+emi-trustmanager-3.0.3-5.osg.el5
+emi-trustmanager-axis-1.0.1-1.2.osg.el5
+emi-trustmanager-tomcat-3.0.0-8.osg.el5
+glite-data-transfer-interface-3.7.0-4.osg.el5
+glite-security-trustmanager-2.5.5-6.2.osg.el5
+glite-security-trustmanager-javadoc-2.5.5-6.2.osg.el5
+glite-security-trustmanager-tomcat5-2.5.5-6.2.osg.el5
+glite-security-util-java-2.8.0-3.2.osg.el5
+glite-security-util-java-javadoc-2.8.0-3.2.osg.el5
+gridftp-hdfs-0.5.4-9.osg.el5
+gridftp-hdfs-debuginfo-0.5.4-9.osg.el5
+gums-1.3.18.009-15.9.osg.el5
+gums-client-1.3.18.009-15.9.osg.el5
+gums-service-1.3.18.009-15.9.osg.el5
+hadoop-0.20-0.20.2+737-33.osg.el5
+hadoop-0.20-conf-pseudo-0.20.2+737-33.osg.el5
+hadoop-0.20-datanode-0.20.2+737-33.osg.el5
+hadoop-0.20-debuginfo-0.20.2+737-33.osg.el5
+hadoop-0.20-docs-0.20.2+737-33.osg.el5
+hadoop-0.20-fuse-0.20.2+737-33.osg.el5
+hadoop-0.20-fuse-selinux-0.20.2+737-33.osg.el5
+hadoop-0.20-jobtracker-0.20.2+737-33.osg.el5
+hadoop-0.20-libhdfs-0.20.2+737-33.osg.el5
+hadoop-0.20-namenode-0.20.2+737-33.osg.el5
+hadoop-0.20-native-0.20.2+737-33.osg.el5
+hadoop-0.20-pipes-0.20.2+737-33.osg.el5
+hadoop-0.20-sbin-0.20.2+737-33.osg.el5
+hadoop-0.20-secondarynamenode-0.20.2+737-33.osg.el5
+hadoop-0.20-source-0.20.2+737-33.osg.el5
+hadoop-0.20-tasktracker-0.20.2+737-33.osg.el5
+hadoop-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-client-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-conf-pseudo-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-debuginfo-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-doc-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-hdfs-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-hdfs-datanode-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-hdfs-fuse-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-hdfs-fuse-selinux-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-hdfs-journalnode-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-hdfs-namenode-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-hdfs-secondarynamenode-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-hdfs-zkfc-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-httpfs-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-libhdfs-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-mapreduce-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+hadoop-yarn-2.0.0+545-1.cdh4.1.1.p0.18.osg.el5
+jclassads-2.4-3.osg.el5
+jetty-8.1.4.v20120524-2.osg.el5
+jetty-ajp-8.1.4.v20120524-2.osg.el5
+jetty-annotations-8.1.4.v20120524-2.osg.el5
+jetty-client-8.1.4.v20120524-2.osg.el5
+jetty-continuation-8.1.4.v20120524-2.osg.el5
+jetty-deploy-8.1.4.v20120524-2.osg.el5
+jetty-http-8.1.4.v20120524-2.osg.el5
+jetty-io-8.1.4.v20120524-2.osg.el5
+jetty-jmx-8.1.4.v20120524-2.osg.el5
+jetty-jndi-8.1.4.v20120524-2.osg.el5
+jetty-overlay-deployer-8.1.4.v20120524-2.osg.el5
+jetty-plus-8.1.4.v20120524-2.osg.el5
+jetty-policy-8.1.4.v20120524-2.osg.el5
+jetty-rewrite-8.1.4.v20120524-2.osg.el5
+jetty-security-8.1.4.v20120524-2.osg.el5
+jetty-server-8.1.4.v20120524-2.osg.el5
+jetty-servlet-8.1.4.v20120524-2.osg.el5
+jetty-servlets-8.1.4.v20120524-2.osg.el5
+jetty-util-8.1.4.v20120524-2.osg.el5
+jetty-webapp-8.1.4.v20120524-2.osg.el5
+jetty-websocket-8.1.4.v20120524-2.osg.el5
+jetty-xml-8.1.4.v20120524-2.osg.el5
+jglobus-2.0.4-7.osg.el5
+joda-time-1.5.2-7.1.tzdata2008d.osg.el5
+joda-time-javadoc-1.5.2-7.1.tzdata2008d.osg.el5
+missing-java-1.7.0-dirs-1.0-2.osg.el5
+ndt-3.6.5-3.osg.el5
+ndt-client-3.6.5-3.osg.el5
+ndt-debuginfo-3.6.5-3.osg.el5
+ndt-server-3.6.5-3.osg.el5
+osg-ce-3.0.0-31.osg.el5
+osg-ce-condor-3.0.0-31.osg.el5
+osg-ce-lsf-3.0.0-31.osg.el5
+osg-ce-pbs-3.0.0-31.osg.el5
+osg-ce-sge-3.0.0-31.osg.el5
+osg-client-3.0.0-20.osg.el5
+osg-client-condor-3.0.0-20.osg.el5
+osg-gridftp-xrootd-3.0.0-4.osg.el5
+osg-se-bestman-3.0.0-9.osg.el5
+osg-se-bestman-xrootd-3.0.0-6.osg.el5
+osg-se-hadoop-3.0.0-10.osg.el5
+osg-se-hadoop-client-3.0.0-10.osg.el5
+osg-se-hadoop-datanode-3.0.0-10.osg.el5
+osg-se-hadoop-gridftp-3.0.0-10.osg.el5
+osg-se-hadoop-namenode-3.0.0-10.osg.el5
+osg-se-hadoop-srm-3.0.0-10.osg.el5
+osg-wn-client-3.0.0-19.osg.el5
+osg-wn-client-glexec-3.0.0-19.osg.el5
+pegasus-4.2.0-1.2.osg.el5
+pegasus-debuginfo-4.2.0-1.2.osg.el5
+slf4j-1.5.2-5.osg.el5
+slf4j-javadoc-1.5.2-5.osg.el5
+slf4j-manual-1.5.2-5.osg.el5
+voms-admin-server-2.7.0-1.5.osg.el5
+voms-api-java-2.0.8-1.5.osg.el5
+voms-api-java-javadoc-2.0.8-1.5.osg.el5
+xrootd-hdfs-1.8.3-12.osg.el5
+xrootd-hdfs-debuginfo-1.8.3-12.osg.el5
+xrootd-hdfs-devel-1.8.3-12.osg.el5
+zookeeper-3.4.3+15-1.cdh4.0.1.p0.2.osg.el5
+zookeeper-server-3.4.3+15-1.cdh4.0.1.p0.2.osg.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+bestman2-2.3.0-14.osg.el6
+bestman2-client-2.3.0-14.osg.el6
+bestman2-client-libs-2.3.0-14.osg.el6
+bestman2-common-libs-2.3.0-14.osg.el6
+bestman2-server-2.3.0-14.osg.el6
+bestman2-server-dep-libs-2.3.0-14.osg.el6
+bestman2-server-libs-2.3.0-14.osg.el6
+bestman2-tester-2.3.0-14.osg.el6
+bestman2-tester-libs-2.3.0-14.osg.el6
+bigtop-jsvc-0.3.0-1.1.osg.el6
+bigtop-jsvc-debuginfo-0.3.0-1.1.osg.el6
+cog-jglobus-axis-1.8.0-3.osg.el6
+condor-8.0.0-2.osg.el6
+condor-bosco-8.0.0-2.osg.el6
+condor-classads-8.0.0-2.osg.el6
+condor-classads-devel-8.0.0-2.osg.el6
+condor-cream-gahp-8.0.0-2.osg.el6
+condor-debuginfo-8.0.0-2.osg.el6
+condor-kbdd-8.0.0-2.osg.el6
+condor-procd-8.0.0-2.osg.el6
+condor-python-8.0.0-2.osg.el6
+condor-vm-gahp-8.0.0-2.osg.el6
+emi-trustmanager-3.0.3-5.osg.el6
+emi-trustmanager-axis-1.0.1-1.2.osg.el6
+emi-trustmanager-tomcat-3.0.0-8.osg.el6
+glite-data-transfer-interface-3.7.0-4.osg.el6
+glite-security-trustmanager-2.5.5-6.2.osg.el6
+glite-security-trustmanager-javadoc-2.5.5-6.2.osg.el6
+glite-security-trustmanager-tomcat6-2.5.5-6.2.osg.el6
+glite-security-util-java-2.8.0-3.2.osg.el6
+glite-security-util-java-javadoc-2.8.0-3.2.osg.el6
+gridftp-hdfs-0.5.4-9.osg.el6
+gridftp-hdfs-debuginfo-0.5.4-9.osg.el6
+gums-1.3.18.009-15.9.osg.el6
+gums-client-1.3.18.009-15.9.osg.el6
+gums-service-1.3.18.009-15.9.osg.el6
+hadoop-0.20-0.20.2+737-33.osg.el6
+hadoop-0.20-conf-pseudo-0.20.2+737-33.osg.el6
+hadoop-0.20-datanode-0.20.2+737-33.osg.el6
+hadoop-0.20-debuginfo-0.20.2+737-33.osg.el6
+hadoop-0.20-docs-0.20.2+737-33.osg.el6
+hadoop-0.20-fuse-0.20.2+737-33.osg.el6
+hadoop-0.20-fuse-selinux-0.20.2+737-33.osg.el6
+hadoop-0.20-jobtracker-0.20.2+737-33.osg.el6
+hadoop-0.20-libhdfs-0.20.2+737-33.osg.el6
+hadoop-0.20-namenode-0.20.2+737-33.osg.el6
+hadoop-0.20-native-0.20.2+737-33.osg.el6
+hadoop-0.20-pipes-0.20.2+737-33.osg.el6
+hadoop-0.20-sbin-0.20.2+737-33.osg.el6
+hadoop-0.20-secondarynamenode-0.20.2+737-33.osg.el6
+hadoop-0.20-source-0.20.2+737-33.osg.el6
+hadoop-0.20-tasktracker-0.20.2+737-33.osg.el6
+hadoop-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-client-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-conf-pseudo-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-debuginfo-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-doc-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-hdfs-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-hdfs-datanode-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-hdfs-fuse-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-hdfs-fuse-selinux-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-hdfs-journalnode-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-hdfs-namenode-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-hdfs-secondarynamenode-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-hdfs-zkfc-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-httpfs-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-libhdfs-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-mapreduce-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+hadoop-yarn-2.0.0+545-1.cdh4.1.1.p0.18.osg.el6
+jclassads-2.4-3.osg.el6
+jetty-8.1.4.v20120524-2.osg.el6
+jetty-ajp-8.1.4.v20120524-2.osg.el6
+jetty-annotations-8.1.4.v20120524-2.osg.el6
+jetty-client-8.1.4.v20120524-2.osg.el6
+jetty-continuation-8.1.4.v20120524-2.osg.el6
+jetty-deploy-8.1.4.v20120524-2.osg.el6
+jetty-http-8.1.4.v20120524-2.osg.el6
+jetty-io-8.1.4.v20120524-2.osg.el6
+jetty-jmx-8.1.4.v20120524-2.osg.el6
+jetty-jndi-8.1.4.v20120524-2.osg.el6
+jetty-overlay-deployer-8.1.4.v20120524-2.osg.el6
+jetty-plus-8.1.4.v20120524-2.osg.el6
+jetty-policy-8.1.4.v20120524-2.osg.el6
+jetty-rewrite-8.1.4.v20120524-2.osg.el6
+jetty-security-8.1.4.v20120524-2.osg.el6
+jetty-server-8.1.4.v20120524-2.osg.el6
+jetty-servlet-8.1.4.v20120524-2.osg.el6
+jetty-servlets-8.1.4.v20120524-2.osg.el6
+jetty-util-8.1.4.v20120524-2.osg.el6
+jetty-webapp-8.1.4.v20120524-2.osg.el6
+jetty-websocket-8.1.4.v20120524-2.osg.el6
+jetty-xml-8.1.4.v20120524-2.osg.el6
+jglobus-2.0.4-7.osg.el6
+joda-time-1.5.2-7.1.tzdata2008d.osg.el6
+joda-time-javadoc-1.5.2-7.1.tzdata2008d.osg.el6
+ndt-3.6.5-3.osg.el6
+ndt-client-3.6.5-3.osg.el6
+ndt-debuginfo-3.6.5-3.osg.el6
+ndt-server-3.6.5-3.osg.el6
+osg-ce-3.0.0-31.osg.el6
+osg-ce-condor-3.0.0-31.osg.el6
+osg-ce-lsf-3.0.0-31.osg.el6
+osg-ce-pbs-3.0.0-31.osg.el6
+osg-ce-sge-3.0.0-31.osg.el6
+osg-client-3.0.0-20.osg.el6
+osg-client-condor-3.0.0-20.osg.el6
+osg-gridftp-xrootd-3.0.0-4.osg.el6
+osg-se-bestman-3.0.0-9.osg.el6
+osg-se-bestman-xrootd-3.0.0-6.osg.el6
+osg-se-hadoop-3.0.0-10.osg.el6
+osg-se-hadoop-client-3.0.0-10.osg.el6
+osg-se-hadoop-datanode-3.0.0-10.osg.el6
+osg-se-hadoop-gridftp-3.0.0-10.osg.el6
+osg-se-hadoop-namenode-3.0.0-10.osg.el6
+osg-se-hadoop-srm-3.0.0-10.osg.el6
+osg-wn-client-3.0.0-19.osg.el6
+osg-wn-client-glexec-3.0.0-19.osg.el6
+pegasus-4.2.0-1.2.osg.el6
+pegasus-debuginfo-4.2.0-1.2.osg.el6
+slf4j-1.5.2-5.osg.el6
+slf4j-javadoc-1.5.2-5.osg.el6
+slf4j-manual-1.5.2-5.osg.el6
+voms-admin-server-2.7.0-1.5.osg.el6
+voms-api-java-2.0.8-1.5.osg.el6
+voms-api-java-javadoc-2.0.8-1.5.osg.el6
+xrootd-hdfs-1.8.3-12.osg.el6
+xrootd-hdfs-debuginfo-1.8.3-12.osg.el6
+xrootd-hdfs-devel-1.8.3-12.osg.el6
+zookeeper-3.4.3+15-1.cdh4.0.1.p0.2.osg.el6
+zookeeper-server-3.4.3+15-1.cdh4.0.1.p0.2.osg.el6
+</pre>
+
+
+
+-- Main.TimTheisen - 09 Jul 2013
