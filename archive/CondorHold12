@@ -1,0 +1,35 @@
+---++Condor Hold Code 12
+
+---+++Syntax
+
+=Code 12 subcode &lt;unix_errno&gt;=
+
+---+++Known causes:
+
+Hold Code 12 indicates that condor failed to download the input files.
+
+---+++Recommendations:
+
+Check your firewall settings and see [[InstallCondor#NetworkingReq][Condor ports]].
+
+Check file permissions
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   * Local OWNER          = MarcoMambelli
+   * Local DOC_AREA       = User
+   * Local DOC_ROLE       = EndUser
+   * Local DOC_TYPE       = Troubleshooting
+   
+   * Local INCLUDE_REVIEW = %YES%
+   * Local INCLUDE_TEST   = %YES%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %YES%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = 
+   * Local REVIEW_PASSED  = %YES%
+   * Local TESTER         = 
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
