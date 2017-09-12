@@ -175,11 +175,11 @@ To configure your CE to use edg-mkgridmap:
 
 To split jobs between the various sites of the OSG, information about each site's capabilities are uploaded to a central collector. The job factories then query the central collector for idle resources and submit pilot jobs to the available sites. To advertise your site, you will need to enter some information about the worker nodes of your clusters.
 
-Please see the [Subcluster / Resource Entry configuration document](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/IniConfigurationOptions#Subcluster_Resource_Entry_Config) about configuring the data that will be uploaded to the central collector.
+Please see the [Subcluster / Resource Entry configuration document](../other/configuration-with-osg-configure#subcluster-resource-entry) about configuring the data that will be uploaded to the central collector.
 
 ### Applying configuration settings
 
-Making changes to the OSG configuration files in the `/etc/osg/config.d` directory does not apply those settings to software automatically. Settings that are made outside of the OSG directory take effect immediately or at least when the relevant service is restarted. For the OSG settings, use the [osg-configure](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/IniConfigurationOptions) tool to validate (to a limited extent) and apply the settings to the relevant software components. The `osg-configure` software is included automatically in an HTCondor-CE installation.
+Making changes to the OSG configuration files in the `/etc/osg/config.d` directory does not apply those settings to software automatically. Settings that are made outside of the OSG directory take effect immediately or at least when the relevant service is restarted. For the OSG settings, use the [osg-configure](../other/configuration-with-osg-configure) tool to validate (to a limited extent) and apply the settings to the relevant software components. The `osg-configure` software is included automatically in an HTCondor-CE installation.
 
 1. Make all changes to `.ini` files in the `/etc/osg/config.d` directory
 
