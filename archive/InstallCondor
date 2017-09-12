@@ -1,0 +1,384 @@
+%DOC_STATUS_TABLE%
+
+---+!! Installing HTCondor as a Batch System
+
+%TOC{depth="2"}%
+
+<!-- Variables used in this document
+-->
+
+
+---# About This Document
+
+This document describes the process of installing and configuring HTCondor to use as the batch system for your compute cluster. It is intended to help site administrators who are responsible for setting up and maintaining the cluster. HTCondor is a very large and rich software system, so this document cannot cover all of its possible use cases and configuration settings; instead, it presents the most common use cases and basic configuration. For more information about HTCondor, please refer to [[http://research.cs.wisc.edu/htcondor/manual/ the HTCondor Manual]].
+
+
+---# About the HTCondor Package
+
+This document uses the HTCondor RPM from the OSG repository. Our RPM was inspired by the Fedora project, which means that started with their source RPM and modified it for use in the OSG environment. The RPM provides most of HTCondor’s functionality, except for Standard Universe and HTCondor-G support for CREAM and !NorduGrid.
+
+Other RPMs, including those from the Fedora or HTCondor repositories, may be similar but the instructions in this document may need some adapting. Installing HTCondor using some other packaging (e.g., a tarball) is very different. Some cluster management tools, like Rocks, may install and configure HTCondor for you.
+
+See CondorInformation for an overview of the different options for installing HTCondor.
+ 
+%NOTE% Until late 2012, the HTCondor software was known as “Condor”. You may still see the older name referring to the same software.
+
+
+---# Engineering Considerations
+
+HTCondor must be installed and configured on all nodes of the batch system, including:
+   * Worker nodes (_aka_ computer nodes, execute nodes)
+   * One or more submit nodes, including the %LINK_GLOSSARY_CE% and any local interactive submission nodes
+   * A head node, containing the HTCondor Central Manager
+
+Installation and some configuration steps must be performed on each node, but the specific configuration for each node varies by the type of that node. For example, the head node and submit nodes may each have custom configuration, but all worker nodes may have the same configuration. For nodes that have similar or identical configuration, it may be helpful to use a cluster management system (e.g., cfengine, puppet, chef) to manage machine configuration centrally, or to use a shared filesystem for common configuration files. Deciding on and implementing a cluster configuration approach is beyond the scope of this document.
+
+Installing HTCondor from the RPMs means that all files are installed in common, default paths; generally, the RPMs follow [[http://www.pathname.com/fhs/ Filesystem Hierarchy Standard]]. Therefore, tasks like running common commands and viewing man pages just work for all users following the installation. Further, the installation procedure below is designed to simplify HTCondor software upgrades. Further notes on the layout of files in the HTCondor RPMs:
+   * The =/var/lib/condor= directory contains the HTCondor spool and may be mounted from a different partition (see [[#Mounting_a_separate_partition_fo][below]])
+   * The =/etc/condor= directory contains the HTCondor configuration files
+   * It is possible to use a shared configuration directory (e.g., =/nfs/condor/condor-etc=); see [[#HTCondor_configuration][below]] for options on sharing configuration
+
+Finally, it is important to decide if you plan to use GSI (x509 PKI) authentication with this HTCondor installation. The CA Certificates are not always necessary. You will need them if you use GSI authentication with HTCondor. If you are not using GSI authentication you can skip the installation of the CA Certificates below.
+
+
+---# Requirements
+
+---## Host and OS
+
+To install HTCondor, you will need:
+
+   * One host for the HTCondor head node (Collector and Negotiator)
+   * A %LINK_GLOSSARY_CE% for an HTCondor submit node (Schedd), plus other local submit nodes as desired
+   * Hosts for HTCondor to execute jobs (Startds)
+   * OS is %SUPPORTED_OS%
+   * Root access
+
+#NetworkingReq
+---## Network
+%STARTSECTION{"Firewalls"}%
+%INCLUDE{"FirewallInformation" section="FirewallTable" lines="condorcollector,condor"}%
+
+   * To force network communication over TCP, set =UPDATE_COLLECTOR_WITH_TCP=True= in your HTCondor configuration on each node.
+   * =LOWPORT= and =HIGHPORT= are two values set in the %LINK_GLOSSARY_CONDOR% configuration file, e.g.,\
+<pre class="file">LOWPORT = &lt;low port&gt;
+HIGHPORT = &lt;high port&gt;</pre>
+   * The %LINK_GLOSSARY_CONDOR% collector port can be changed in the configuration file. For more information please check the [[http://research.cs.wisc.edu/condor/manual/v8.2/3_7Networking_includes.html][Networking section of the HTCondor manual]].
+%ENDSECTION{"Firewalls"}%
+
+
+---# Installation Procedure
+
+%INCLUDE{"YumRepositories" section="OSGRepoBrief" TOC_SHIFT="+"}%
+
+%NOTE% The CA Certificates are not always necessary. You will need them if you use GSI (x509 PKI) authentication with HTCondor. If you are not using GSI authentication you can skip the following section
+
+%INCLUDE{"Documentation/Release3.InstallCertAuth" section="OSGBriefCaCerts" TOC_SHIFT="+"}%
+ 
+
+---## Installing HTCondor
+
+   1. Install HTCondor from the OSG yum repository. Choose one of the following, based on your architecture (most users will need the x86_64 version): 
+      <pre  class="rootscreen">%UCL_PROMPT_ROOT% yum install condor.x86_64
+%UCL_PROMPT_ROOT% yum install condor.i386</pre>
+
+---# Configuring HTCondor
+
+Most likely, your HTCondor system includes many nodes, especially worker nodes. Different nodes or types of nodes may require different configuration files, and yet the different configuration files may have many shared settings. There are several ways to manage your HTCondor configuration files, including:
+
+   * Use a cluster management tool (e.g., [[http://cfengine.com/][cfengine]], [[http://puppetlabs.com/][Puppet]], [[http://www.opscode.com/chef/][Chef]]) to manage configuration centrally
+   * Manually create and maintain configuration files centrally, and use a shared filesystem to distribute them (especially to worker nodes)
+   * Manually create, maintain, and distribute configuration files to each machine
+
+Select a method that works best for you.
+
+---## Head Node
+
+Configure your head node by edit the following file, depending on your configuration method:
+
+| *Configuration method*   | *File* |
+| Shared filesystem        | =/nfs/condor/condor-etc/condor_config.headnode= |  
+| Cluster management tool  | =/etc/condor/config.d/local.conf= |
+| Manual                   | =/etc/condor/config.d/local.conf= |
+
+And add the following text:
+
+<pre class="file">
+DAEMON_LIST = MASTER, COLLECTOR, NEGOTIATOR
+</pre>
+
+%NOTE% If your head node is also the gatekeeper of the cluster, then  you need to set the daemon list to the union of the two e.g. =DAEMON_LIST = MASTER, COLLECTOR, NEGOTIATOR, SCHEDD=
+
+---## Submit Node
+
+Configure your submit node by edit the following file, depending on your configuration method:
+
+| *Configuration method*   | *File* |
+| Shared filesystem        | =/nfs/condor/condor-etc/condor_config.submit= |  
+| Cluster management tool  | =/etc/condor/config.d/local.conf= |
+| Manual                   | =/etc/condor/config.d/local.conf= | 
+
+And add the following text:
+
+<pre class="file">
+DAEMON_LIST = MASTER, SCHEDD
+</pre>
+
+---## Worker Node
+
+Configure your worker node by edit the following file, depending on your configuration method:
+
+| *Configuration method*   | *File* |
+| Shared filesystem        | =/nfs/condor/condor-etc/condor_config.worker= |  
+| Cluster management tool  | =/etc/condor/config.d/local.conf= |
+| Manual                   | =/etc/condor/config.d/local.conf= | 
+
+And add the following text:
+
+<pre class="file">
+DAEMON_LIST = MASTER, STARTD
+</pre>
+
+---## Common Configuration
+
+*On all nodes* add the appropriate file with the following content (changing the values in %RED%red%ENDCOLOR% to suit your cluster). You may find some suggestions in a previously installed local configuration file =/etc/condor/condor_config.local=:
+
+This table specifies parameters and values that are required by each configuration method. Alternatively, this means that if an entire line is in %RED%red%ENDCOLOR%, it can be removed unless it is specified by your configuration method.
+| *Configuration method* | *File* | *Parameter* | *Value* |
+| Shared filesystem | =/nfs/condor/condor-etc/condor_config.cluster=| LOCAL_CONFIG_FILE |  =/nfs/condor/condor-etc/condor_config.$(HOSTNAME)= |
+| Cluster management tool | =/etc/condor/config.d/cluster.conf= | REQUIRE_LOCAL_CONFIG_FILE | FALSE |
+| Manual | =/etc/condor/config.d/cluster.conf= | REQUIRE_LOCAL_CONFIG_FILE | FALSE |
+
+%TWISTY{%TWISTY_OPTS_OUTPUT% showlink="Show full text of cluster config"}%<pre class="file">## Condor configuration for OSG Clusters
+## For more detail please see
+## http://www.cs.wisc.edu/condor/manual/v8.2/3_3Configuration.html
+%RED%LOCAL_CONFIG_FILE = /nfs/condor/condor-etc/condor_config.$(HOSTNAME)%ENDCOLOR%
+# The following should be your cluster domain. This is an arbitrary string used by Condor, not necessarily matching your IP domain
+UID_DOMAIN = %RED%yourdomain.org%ENDCOLOR%
+# Human readable name for your Condor pool
+COLLECTOR_NAME = "OSG Cluster Condor at $(UID_DOMAIN)"
+# A shared file system (NFS), e.g. job dir, is assumed if the name is the same
+FILESYSTEM_DOMAIN = $(UID_DOMAIN)
+# Here you have to use your network domain, or any comma separated list of hostnames and IP addresses including all your 
+# condor hosts. * can be used as wildcard
+ALLOW_WRITE = *.%RED%yourdomain.org%ENDCOLOR%
+CONDOR_ADMIN = root@$(FULL_HOSTNAME)
+# The following should be the full name of the head node (Condor central manager)
+CONDOR_HOST = %RED%gc-hn.yourdomain.org%ENDCOLOR%
+# Port range should be opened in the firewall (can be different on different machines)
+# This 9000-9999 is coherent with the iptables configuration in the Firewall documentation 
+IN_HIGHPORT = 9999
+IN_LOWPORT = 9000
+# This is to force communication over TCP
+UPDATE_COLLECTOR_WITH_TCP=True
+# This is to enforce password authentication
+SEC_DAEMON_AUTHENTICATION = required
+SEC_DAEMON_AUTHENTICATION_METHODS = password
+SEC_CLIENT_AUTHENTICATION_METHODS = password,fs,gsi
+SEC_PASSWORD_FILE = /var/lib/condor/condor_credential
+ALLOW_DAEMON = condor_pool@*
+##  Sets how often the condor_negotiator starts a negotiation cycle 
+##  for negotiator and schedd). 
+#  It is defined in seconds and defaults to 60 (1 minute), default is 300. 
+NEGOTIATOR_INTERVAL = 20
+##  Scheduling parameters for the startd
+TRUST_UID_DOMAIN = TRUE
+# start as available and do not suspend, preempt or kill
+START = TRUE
+SUSPEND = FALSE
+PREEMPT = FALSE
+KILL = FALSE
+# In this setup we use the config directory instead of the local config
+%RED%REQUIRE_LOCAL_CONFIG_FILE = False%ENDCOLOR%
+</pre>
+%ENDTWISTY%
+
+%NOTE% =CONDOR_HOST= can be set with or without the domain name: =gc-ce= or =gc-hn.yourdomain.org=
+
+---+++ Remaining node configuration
+*On each node* perform these remaining configuration steps.
+   1. If present, remove the previously installed =/etc/condor/condor_config.local= to avoid possible confusion.<pre class="rootscreen">
+%UCL_PROMPT_ROOT% rm /etc/condor/condor_config.local
+</pre>
+   1. Set the password that will be used by the Condor system (at the prompt enter the same password for all nodes):<pre class="rootscreen">
+%UCL_PROMPT_ROOT% condor_store_cred -c add
+</pre>
+   1. *Shared filesystem configuration only:* Edit the file =/etc/condor/condor_config=. This is the default configuration that will be invoked when condor is started. We will direct Condor to follow this configuration with the OSG specific configuration. Set the local config file to:<pre class="file">
+##  Next configuration to be read is for the OSG cluster setup
+LOCAL_CONFIG_FILE       = /nfs/condor/condor-etc/condor_config.cluster
+</pre>
+   1. Start Condor and enable automatic startup as [[#Starting_and_Enabling_Services][illustrated below]].
+
+---## Special needs
+The following sections present instructions or suggestion for uncommon configurations
+
+---+++ Changes to the Firewall (iptables)
+If you are using a Firewall (e.g. iptables) on all nodes you need to open the ports used by Condor:
+   * Edit the =/etc/sysconfig/iptables= file to add these lines ahead of the reject line:<pre class="file">
+-A RH-Firewall-1-INPUT  -s &lt;network_address> -m state --state ESTABLISHED,NEW -p tcp -m tcp --dport 9000:10000 -j ACCEPT  
+-A RH-Firewall-1-INPUT  -s &lt;network_address> -m state --state ESTABLISHED,NEW -p udp -m udp --dport 9000:10000 -j ACCEPT 
+</pre> where the _network_address_ is the address of the intranet of the OSG cluster, e.g. 192.168.192.0/18. (Or the extranet if your OSG cluster does not have a separate intranet). You can omit the =-s= option if you have nodes of your Condor cluster (startd, schedd, ...) outside of that network.
+   * Restart the firewall:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service iptables restart
+</pre>
+
+<!--
+---+++!! Installation without any shared directory
+If you choose not to use NFS in your cluster and there is no shared =/nfs/condor/condor-etc/=, then the section above about shared configuration files is not valid. All the configuration files should be in =/etc/condor=.
+   * =condor_config= should be edited to have <pre class="file">LOCAL_CONFIG_FILE = /etc/condor/condor_config.cluster</pre>
+   * =condor_config.cluster= should be created as described and replicated on each node in =/etc/condor= and should contain the modified:<pre class="file">LOCAL_CONFIG_FILE = /etc/condor/condor_config.$(HOSTNAME)</pre>
+   * =condor_config.&lt;hostname>= should be created on each node in =/etc/condor= by copying the proper =condor_config.headnode/worker/submit= described above and by customizing it for the needs of the node, if needed.
+
+Changes to the cluster config or to the configuration of one of the node types require synchronization by replicating the proper files on the whole cluster after the change.
+-->
+
+---+++ Mounting a separate partition for /var/lib/condor
+=/var/lib/condor= is the directory used by Condor for status files and spooling, sometime referred as the scratch space.
+For performance reasons it should always be on a local disk.
+Is is recommended for it to be big in order to accommodate jobs that use a lot of disk space (e.g. ATLAS recommends 20GB for each job slot on the worker nodes) and possibly on a separate partition so that when a job fills up the disk, it will not fill the system disk and bring down the system.
+The partition can be mounted on =/var/lib/condor= before installing Condor or at a later time, e.g.:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service condor stop
+%UCL_PROMPT_ROOT% cd /var/lib
+%UCL_PROMPT_ROOT% mv condor condor_old
+%UCL_PROMPT_ROOT% mkdir condor
+%UCL_PROMPT_ROOT% mount -t ext3 /dev/&lt;your partition> condor
+%UCL_PROMPT_ROOT% chown condor:condor condor
+%UCL_PROMPT_ROOT% mv condor_old/* condor/
+%UCL_PROMPT_ROOT% rmdir condor_old
+%UCL_PROMPT_ROOT% /sbin/service condor start
+</pre>
+
+
+---# Services
+
+The HTCondor master on each node taked care to start and monitor the correct services as selected in the configuration file.
+
+---## Starting and Enabling Services
+
+To start the services:
+
+   1. Start Condor:\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% /sbin/service condor start</pre>
+
+You should also enable the appropriate services so that they are automatically started when your system is powered on:
+
+   * Enable Condor (start automatically on boot):\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% /sbin/chkconfig condor on</pre>
+
+---## Stopping and Disabling Services
+
+To stop the services:
+
+   1. Stop Condor:\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% /sbin/service condor stop</pre>
+
+In addition, you can disable services by running the following commands.  However, you don't need to do this normally.
+
+   * Optionally, to disable Condor:\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% /sbin/chkconfig condor off</pre>
+
+
+---# Troubleshooting
+
+#ImportantFiles
+---## Useful configuration and log files
+
+Configuration Files
+| *Service or Process* | *Configuration File* | *Description* |
+| condor | =/etc/condor/condor_config= | Configuration file |
+| | =/etc/condor/condor_config.cluster= | Configuration file |
+
+Log files
+| *Service or Process* | *Log File* | *Description* |
+| condor | =/var/log/condor/= | All log files |
+
+---## Test Condor
+
+After starting Condor you can check if it is running correctly:\
+<pre  class="screen">
+%UCL_PROMPT% condor_config_val log   # (should be /var/log/condor/)
+%UCL_PROMPT% cd /var/log/condor/
+#check master log file
+%UCL_PROMPT% less MasterLog
+# verify the status of the negotiator
+%UCL_PROMPT% condor_status -negotiator</pre>
+
+You can see the resources in your Condor cluster using =condor_status= and submit test jobs with =condor_submit=. Check CondorTest for more.
+
+
+---# How to get Help?
+
+To get assistance please use this [[HelpProcedure][Help Procedure]].
+
+
+---# References
+
+   * [[http://research.cs.wisc.edu/condor/manual/][Condor manuals]]
+   * [[CondorInformation][Options for installing Condor]]
+   * The Condor team has a wonderful set of How-To recipes for condor's admins: [[https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=HowToAdminRecipes]]
+Additional configuration:
+   * SetupCondorAdvanced
+On using Condor:
+   * Documentation.CondorSubmittingSingleJob
+   * Documentation.CondorSubmittingMultipleJobs
+   * Documentation.CondorSubmittingMultipleComplexJobs
+
+---# Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################ 
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = MarcoMambelli
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       =  ComputeElement
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   reviewed during the DOC workshop
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = TimCartwright
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = TimTheisen
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################ 
+-->
