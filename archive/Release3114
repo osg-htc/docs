@@ -1,0 +1,137 @@
+%TOC%
+
+---+ OSG Software Release 3.1.14
+
+*Release Date*: 12 February 2013
+
+---++ Summary of changes
+
+This release includes the following changes:
+
+   * Updates to the CA certs package to the IGTF 1.52 distribution
+   * Addition of the frontier-squid packages
+   * Updates to Hadoop
+   * Updates to the OSG measurements metrics rpms (SL5 only)
+   * Updated oasis config rpm
+   * Updated osg build packages
+
+Detailed changes are below. All of the documentation can be found in [[Documentation.Release3][the "Release3"]] area of the !TWiki.
+
+---++ Known Issue
+
+---++ Updating to the new release
+
+If you have an existing installation, you can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or regex]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed changes in this release
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=frontier-squid-2.7.STABLE9-13.5.osg.el5][frontier-squid-2.7.STABLE9-13.5.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=hadoop-0.20-0.20.2+737-31.osg.el5][hadoop-0.20-0.20.2+737-31.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.52-1.osg.el5][igtf-ca-certs-1.52-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-compat-1.52-1.osg.el5][igtf-ca-certs-compat-1.52-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=oasis-config-1-1.osg.el5][oasis-config-1-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-build-1.2.4-1.osg.el5][osg-build-1.2.4-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.33-1.osg.el5][osg-ca-certs-1.33-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-compat-1.33-1.osg.el5][osg-ca-certs-compat-1.33-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-measurements-metrics-db-1.1-3][osg-measurements-metrics-db-1.1-3]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-measurements-metrics-web-1.1-3][osg-measurements-metrics-web-1.1-3]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.14-1.osg.el5][osg-version-3.1.14-1.osg.el5]]
+
+---++++ Enterprise Linux 6
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=frontier-squid-2.7.STABLE9-13.5.osg.el6][frontier-squid-2.7.STABLE9-13.5.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=hadoop-0.20-0.20.2+737-31.osg.el6][hadoop-0.20-0.20.2+737-31.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.52-1.osg.el6][igtf-ca-certs-1.52-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-compat-1.52-1.osg.el6][igtf-ca-certs-compat-1.52-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=oasis-config-1-1.osg.el6][oasis-config-1-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-build-1.2.4-1.osg.el6][osg-build-1.2.4-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.33-1.osg.el6][osg-ca-certs-1.33-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-compat-1.33-1.osg.el6][osg-ca-certs-compat-1.33-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.14-1.osg.el6][osg-version-3.1.14-1.osg.el6]]
+
+---+++ RPMs
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+frontier-squid-2.7.STABLE9-13.5.osg.el5
+frontier-squid-debuginfo-2.7.STABLE9-13.5.osg.el5
+hadoop-0.20-0.20.2+737-31.osg.el5
+hadoop-0.20-conf-pseudo-0.20.2+737-31.osg.el5
+hadoop-0.20-datanode-0.20.2+737-31.osg.el5
+hadoop-0.20-debuginfo-0.20.2+737-31.osg.el5
+hadoop-0.20-docs-0.20.2+737-31.osg.el5
+hadoop-0.20-fuse-0.20.2+737-31.osg.el5
+hadoop-0.20-fuse-selinux-0.20.2+737-31.osg.el5
+hadoop-0.20-jobtracker-0.20.2+737-31.osg.el5
+hadoop-0.20-libhdfs-0.20.2+737-31.osg.el5
+hadoop-0.20-namenode-0.20.2+737-31.osg.el5
+hadoop-0.20-native-0.20.2+737-31.osg.el5
+hadoop-0.20-pipes-0.20.2+737-31.osg.el5
+hadoop-0.20-sbin-0.20.2+737-31.osg.el5
+hadoop-0.20-secondarynamenode-0.20.2+737-31.osg.el5
+hadoop-0.20-source-0.20.2+737-31.osg.el5
+hadoop-0.20-tasktracker-0.20.2+737-31.osg.el5
+igtf-ca-certs-1.52-1.osg.el5
+igtf-ca-certs-compat-1.52-1.osg.el5
+oasis-config-1-1.osg.el5
+osg-build-1.2.4-1.osg.el5
+osg-ca-certs-1.33-1.osg.el5
+osg-ca-certs-compat-1.33-1.osg.el5
+osg-measurements-metrics-db-1.1-3
+osg-measurements-metrics-web-1.1-3
+osg-version-3.1.14-1.osg.el5</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+frontier-squid-2.7.STABLE9-13.5.osg.el6
+frontier-squid-debuginfo-2.7.STABLE9-13.5.osg.el6
+hadoop-0.20-0.20.2+737-31.osg.el6
+hadoop-0.20-conf-pseudo-0.20.2+737-31.osg.el6
+hadoop-0.20-datanode-0.20.2+737-31.osg.el6
+hadoop-0.20-debuginfo-0.20.2+737-31.osg.el6
+hadoop-0.20-docs-0.20.2+737-31.osg.el6
+hadoop-0.20-fuse-0.20.2+737-31.osg.el6
+hadoop-0.20-fuse-selinux-0.20.2+737-31.osg.el6
+hadoop-0.20-jobtracker-0.20.2+737-31.osg.el6
+hadoop-0.20-libhdfs-0.20.2+737-31.osg.el6
+hadoop-0.20-namenode-0.20.2+737-31.osg.el6
+hadoop-0.20-native-0.20.2+737-31.osg.el6
+hadoop-0.20-pipes-0.20.2+737-31.osg.el6
+hadoop-0.20-sbin-0.20.2+737-31.osg.el6
+hadoop-0.20-secondarynamenode-0.20.2+737-31.osg.el6
+hadoop-0.20-source-0.20.2+737-31.osg.el6
+hadoop-0.20-tasktracker-0.20.2+737-31.osg.el6
+igtf-ca-certs-1.52-1.osg.el6
+igtf-ca-certs-compat-1.52-1.osg.el6
+oasis-config-1-1.osg.el6
+osg-build-1.2.4-1.osg.el6
+osg-ca-certs-1.33-1.osg.el6
+osg-ca-certs-compat-1.33-1.osg.el6
+osg-version-3.1.14-1.osg.el6
+</pre>
+
+
+
+-- Main.SuchandraThapa - 12 Feb 2013
