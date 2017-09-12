@@ -1,0 +1,233 @@
+---+ OSG Software Release 3.1.19
+
+*Release Date*: 11 Jun 2013
+
+---++ Summary of changes
+
+Changes include:
+ 
+   * Upgrade !GlideinWMS to 2.7.1 [[https://jira.opensciencegrid.org/browse/SOFTWARE-1004][SOFTWARE-1004]]
+   * Update CVMFS to 2.0.19 [[https://jira.opensciencegrid.org/browse/SOFTWARE-1030][SOFTWARE-1030]]
+   * Fix: PBS gratia-probes are reporting >>> 100% efficiency [[https://jira.opensciencegrid.org/browse/SOFTWARE-1032][SOFTWARE-1032]]
+   * Fix: osg-ca-manage --location doesn't set proper cert location [[https://jira.opensciencegrid.org/browse/SOFTWARE-1040][SOFTWARE-1040]]
+   * Update to frontier-squid 2.7.STABLE9-16.1 [[https://jira.opensciencegrid.org/browse/SOFTWARE-1042][SOFTWARE-1042]]
+   * Fix bugs in client tarballs from 3.1.18 [[https://jira.opensciencegrid.org/browse/SOFTWARE-1052][SOFTWARE-1052]]
+   * Update OASIS config package [[https://jira.opensciencegrid.org/browse/SOFTWARE-1061][SOFTWARE-1061]]
+   * In gLExec test, suppress grid-proxy-info on non-existent path [[https://jira.opensciencegrid.org/browse/SOFTWARE-1064][SOFTWARE-1064]]
+   * Add npad-client to npad package [[https://jira.opensciencegrid.org/browse/SOFTWARE-1065][SOFTWARE-1065]]
+
+Also in the upcoming repository:
+
+   * Upgrade to HTCondor 7.9.6 in Upcoming [[https://jira.opensciencegrid.org/browse/SOFTWARE-869][SOFTWARE-869]]
+
+ Detailed changes are below. All of the documentation can be found in the [[Documentation.Release3][Release3]] area of the !TWiki.
+
+---++ Updating to the new release
+
+You can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or glob]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed changes in this release
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5   
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cvmfs-2.0.19-1.osg.el5][cvmfs-2.0.19-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=frontier-squid-2.7.STABLE9-16.1.osg.el5][frontier-squid-2.7.STABLE9-16.1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glideinwms-2.7.1-1.0.osg.el5][glideinwms-2.7.1-1.0.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.13.11-1.osg.el5][gratia-probe-1.13.11-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=npad-1.5.6-2.1.osg.el5][npad-1.5.6-2.1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=oasis-config-2-2.osg.el5][oasis-config-2-2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-scripts-1.1.3-1.osg.el5][osg-ca-scripts-1.1.3-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.2.8-1.osg.el5][osg-test-1.2.8-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.19-1.osg.el5][osg-version-3.1.19-1.osg.el5]]
+
+---++++ Enterprise Linux 6
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cvmfs-2.0.19-1.osg.el6][cvmfs-2.0.19-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=frontier-squid-2.7.STABLE9-16.1.osg.el6][frontier-squid-2.7.STABLE9-16.1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glideinwms-2.7.1-1.0.osg.el6][glideinwms-2.7.1-1.0.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.13.11-1.osg.el6][gratia-probe-1.13.11-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=npad-1.5.6-2.1.osg.el6][npad-1.5.6-2.1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=oasis-config-2-2.osg.el6][oasis-config-2-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-scripts-1.1.3-1.osg.el6][osg-ca-scripts-1.1.3-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.2.8-1.osg.el6][osg-test-1.2.8-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.19-1.osg.el6][osg-version-3.1.19-1.osg.el6]]
+
+
+
+---+++ RPMs
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+cvmfs-2.0.19-1.osg.el5
+cvmfs-debuginfo-2.0.19-1.osg.el5
+frontier-squid-2.7.STABLE9-16.1.osg.el5
+frontier-squid-debuginfo-2.7.STABLE9-16.1.osg.el5
+glideinwms-2.7.1-1.0.osg.el5
+glideinwms-factory-2.7.1-1.0.osg.el5
+glideinwms-factory-condor-2.7.1-1.0.osg.el5
+glideinwms-glidecondor-tools-2.7.1-1.0.osg.el5
+glideinwms-libs-2.7.1-1.0.osg.el5
+glideinwms-minimal-condor-2.7.1-1.0.osg.el5
+glideinwms-usercollector-2.7.1-1.0.osg.el5
+glideinwms-userschedd-2.7.1-1.0.osg.el5
+glideinwms-vofrontend-2.7.1-1.0.osg.el5
+glideinwms-vofrontend-standalone-2.7.1-1.0.osg.el5
+gratia-probe-1.13.11-1.osg.el5
+gratia-probe-bdii-status-1.13.11-1.osg.el5
+gratia-probe-common-1.13.11-1.osg.el5
+gratia-probe-condor-1.13.11-1.osg.el5
+gratia-probe-condor-events-1.13.11-1.osg.el5
+gratia-probe-dcache-storage-1.13.11-1.osg.el5
+gratia-probe-dcache-transfer-1.13.11-1.osg.el5
+gratia-probe-debuginfo-1.13.11-1.osg.el5
+gratia-probe-glexec-1.13.11-1.osg.el5
+gratia-probe-glideinwms-1.13.11-1.osg.el5
+gratia-probe-gram-1.13.11-1.osg.el5
+gratia-probe-gridftp-transfer-1.13.11-1.osg.el5
+gratia-probe-hadoop-storage-1.13.11-1.osg.el5
+gratia-probe-metric-1.13.11-1.osg.el5
+gratia-probe-onevm-1.13.11-1.osg.el5
+gratia-probe-pbs-lsf-1.13.11-1.osg.el5
+gratia-probe-psacct-1.13.11-1.osg.el5
+gratia-probe-services-1.13.11-1.osg.el5
+gratia-probe-sge-1.13.11-1.osg.el5
+gratia-probe-slurm-1.13.11-1.osg.el5
+gratia-probe-xrootd-storage-1.13.11-1.osg.el5
+gratia-probe-xrootd-transfer-1.13.11-1.osg.el5
+npad-1.5.6-2.1.osg.el5
+npad-client-1.5.6-2.1.osg.el5
+npad-debuginfo-1.5.6-2.1.osg.el5
+oasis-config-2-2.osg.el5
+osg-ca-scripts-1.1.3-1.osg.el5
+osg-test-1.2.8-1.osg.el5
+osg-version-3.1.19-1.osg.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+cvmfs-2.0.19-1.osg.el6
+cvmfs-debuginfo-2.0.19-1.osg.el6
+frontier-squid-2.7.STABLE9-16.1.osg.el6
+frontier-squid-debuginfo-2.7.STABLE9-16.1.osg.el6
+glideinwms-2.7.1-1.0.osg.el6
+glideinwms-factory-2.7.1-1.0.osg.el6
+glideinwms-factory-condor-2.7.1-1.0.osg.el6
+glideinwms-glidecondor-tools-2.7.1-1.0.osg.el6
+glideinwms-libs-2.7.1-1.0.osg.el6
+glideinwms-minimal-condor-2.7.1-1.0.osg.el6
+glideinwms-usercollector-2.7.1-1.0.osg.el6
+glideinwms-userschedd-2.7.1-1.0.osg.el6
+glideinwms-vofrontend-2.7.1-1.0.osg.el6
+glideinwms-vofrontend-standalone-2.7.1-1.0.osg.el6
+gratia-probe-1.13.11-1.osg.el6
+gratia-probe-bdii-status-1.13.11-1.osg.el6
+gratia-probe-common-1.13.11-1.osg.el6
+gratia-probe-condor-1.13.11-1.osg.el6
+gratia-probe-condor-events-1.13.11-1.osg.el6
+gratia-probe-dcache-storage-1.13.11-1.osg.el6
+gratia-probe-dcache-transfer-1.13.11-1.osg.el6
+gratia-probe-debuginfo-1.13.11-1.osg.el6
+gratia-probe-glexec-1.13.11-1.osg.el6
+gratia-probe-glideinwms-1.13.11-1.osg.el6
+gratia-probe-gram-1.13.11-1.osg.el6
+gratia-probe-gridftp-transfer-1.13.11-1.osg.el6
+gratia-probe-hadoop-storage-1.13.11-1.osg.el6
+gratia-probe-metric-1.13.11-1.osg.el6
+gratia-probe-onevm-1.13.11-1.osg.el6
+gratia-probe-pbs-lsf-1.13.11-1.osg.el6
+gratia-probe-psacct-1.13.11-1.osg.el6
+gratia-probe-services-1.13.11-1.osg.el6
+gratia-probe-sge-1.13.11-1.osg.el6
+gratia-probe-slurm-1.13.11-1.osg.el6
+gratia-probe-xrootd-storage-1.13.11-1.osg.el6
+gratia-probe-xrootd-transfer-1.13.11-1.osg.el6
+npad-1.5.6-2.1.osg.el6
+npad-client-1.5.6-2.1.osg.el6
+npad-debuginfo-1.5.6-2.1.osg.el6
+oasis-config-2-2.osg.el6
+osg-ca-scripts-1.1.3-1.osg.el6
+osg-test-1.2.8-1.osg.el6
+osg-version-3.1.19-1.osg.el6
+</pre>
+
+---+++ Upcoming Packages
+
+We added or updated the following packages to the *upcoming* OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5   
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=blahp-1.18.4.bosco-3.osg.el5][blahp-1.18.4.bosco-3.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-7.9.6-8.osg.el5][condor-7.9.6-8.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glite-ce-cream-client-api-c-1.14.0-4.6.osg.el5][glite-ce-cream-client-api-c-1.14.0-4.6.osg.el5]]
+
+---++++ Enterprise Linux 6
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=blahp-1.18.4.bosco-3.osg.el6][blahp-1.18.4.bosco-3.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-7.9.6-8.osg.el6][condor-7.9.6-8.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glite-ce-cream-client-api-c-1.14.0-4.6.osg.el6][glite-ce-cream-client-api-c-1.14.0-4.6.osg.el6]]
+
+
+---+++ Upcoming RPMs
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+blahp-1.18.4.bosco-3.osg.el5
+blahp-debuginfo-1.18.4.bosco-3.osg.el5
+condor-7.9.6-8.osg.el5
+condor-bosco-7.9.6-8.osg.el5
+condor-classads-7.9.6-8.osg.el5
+condor-classads-devel-7.9.6-8.osg.el5
+condor-cream-gahp-7.9.6-8.osg.el5
+condor-debuginfo-7.9.6-8.osg.el5
+condor-kbdd-7.9.6-8.osg.el5
+condor-procd-7.9.6-8.osg.el5
+condor-python-7.9.6-8.osg.el5
+condor-vm-gahp-7.9.6-8.osg.el5
+glite-ce-cream-client-api-c-1.14.0-4.6.osg.el5
+glite-ce-cream-client-api-c-debuginfo-1.14.0-4.6.osg.el5
+glite-ce-cream-client-devel-1.14.0-4.6.osg.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+blahp-1.18.4.bosco-3.osg.el6
+blahp-debuginfo-1.18.4.bosco-3.osg.el6
+condor-7.9.6-8.osg.el6
+condor-bosco-7.9.6-8.osg.el6
+condor-classads-7.9.6-8.osg.el6
+condor-classads-devel-7.9.6-8.osg.el6
+condor-cream-gahp-7.9.6-8.osg.el6
+condor-debuginfo-7.9.6-8.osg.el6
+condor-kbdd-7.9.6-8.osg.el6
+condor-procd-7.9.6-8.osg.el6
+condor-python-7.9.6-8.osg.el6
+condor-vm-gahp-7.9.6-8.osg.el6
+glite-ce-cream-client-api-c-1.14.0-4.6.osg.el6
+glite-ce-cream-client-api-c-debuginfo-1.14.0-4.6.osg.el6
+glite-ce-cream-client-devel-1.14.0-4.6.osg.el6
+</pre>
+
+
+
+-- Main.TimTheisen - 11 Jun 2013
