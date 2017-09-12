@@ -1,0 +1,33 @@
+---++Expired Proxy
+
+---+++Syntax:
+
+=ERROR: proxy has expired=
+
+---+++Known causes:
+
+Your proxy has expired  
+
+---+++Recommendations:
+
+   * Obtain a new proxy using:
+<pre class="screen">
+%UCL_PROMPT_SHORT% grid-proxy-init
+</pre>
+or
+<pre class="screen">
+%UCL_PROMPT_SHORT% voms-proxy-init
+</pre>
+
+Submit the job to the grid as the same user whose certificate was authenticated with voms-proxy-init.
+
+i.e. %RED%*do not do*%ENDCOLOR%:
+<pre class="screen">
+%UCL_PROMPT_SHORT% voms-proxy-init
+%UCL_PROMPT_SHORT% su
+%UCL_PROMPT_SHORT% globus-job-run &lt;site&gt; &lt;job&gt;
+</pre>
+
+---+++See Also
+   * [[Documentation/Release3.GlobusAuthFailures][Globus Authentication failures]]
+
