@@ -46,6 +46,7 @@ pages:
 - Deprecated Software:
   - 'BeStMan Overview': 'data/bestman-overview.md'
   - 'BeStMan Install': 'data/bestman-install.md'
+  - 'EDG-Mkgridmap Install': 'security/edg-mkgridmap.md'
   - 'Worker node glexec Install': 'client/glexec.md'
 - 'Get Help': 'common/help.md'
 
