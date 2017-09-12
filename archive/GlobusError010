@@ -1,0 +1,70 @@
+---++Globus Error: 10
+
+---+++Syntax:
+
+=GRAM Job submission failed because data transfer to the server failed (error code 10)=
+
+---+++Known causes:
+
+This is unfortunately an all-purpose Globus error. You will sometimes see it associated with problems in the grid-mapfile, but if some jobmanager (e.g. fork) works fine, then there is a different bug. Below some known causes.
+
+
+*Your DN is not in the gridmap file.*
+
+Most commonly, this error is seen by new users submitting jobs who have obtained their certificates but have not had their DN added to a VOMS server.  After a DN is added to a VOMS server, it should be taken up by all VOMS servers and added to gridmap files for the sites supporting that VO.  
+
+There are a few exceptions: 
+   * Grid administrators can remove entries from their gridmap files.
+   * Grid sites are not required to support every VO.
+
+*The jobmanager files have wrong permissions* as reported [[http://communitygrids.blogspot.com/2009/02/gram-job-submission-failed-because-data.html][here]].
+
+*A log directory is missing* or has wrong permissions as reported [[http://www.nics.tennessee.edu/computing-resources/Grid_Services][here]].
+
+----+++Recommendations:
+
+Check the =$GLOBUS_LOCATION/var/globus-gatekeeper.log= on the Compute Element. You will probably see something like:
+<pre class="file">Authenticated globus user: /O=Grid/O=Globus/OU=your.domain/OU=Your Name
+Failure: globus_gss_assist_gridmap() failed authorization. rc =1
+</pre>
+
+This indicates that your account is not in the grid-mapfile. Create the grid-mapfile in =/etc/grid-security= (or wherever the -gridmap flag in =$GLOBUS_LOCATION/etc/globus-gatekeeper.conf= points to) with an entry pairing your subject name to your user name. 
+
+
+If the user belongs to a VO make sure that the DN is registered in the VOMS server.
+To have your DN added to a VOMS server, you will need to contact an administrator of a site currently supporting a VOMS server and have them add your DN.  They will need the following information provided by grid-proxy-init -subject:
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% grid-proxy-init -subject
+ /DC=org/DC=<issuer>/OU=<group>/CN=<your_name> <unique_id>/CN=<CN_num>
+</pre>
+
+It will take a short period of time (usually a matter of hours) for the DN to be taken up by that particular VOMS server and longer for it to spread to others.
+
+If an administrator has removed your DN or a site does not support your VO, you should contact them with inquiries.
+
+
+If the DN is correctly in the grid-mapfile or in GUMS (e.g. if the error occurrs only for some jobmanagers) then look for other causes.
+
+The same error happened also on a CE where the LSF (PBS/HTCondor) job manager files were not given the correct permissions during the deployment. These should be 755 (group and world readable and executable). Find them with a command like ==find $GLOBUS_LOCATION -name "*lsf*"== and correct the permissions.
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   * Local OWNER          = MarcoMambelli
+   * Local DOC_AREA       = User
+   * Local DOC_ROLE       = EndUser
+   * Local DOC_TYPE       = Troubleshooting
+   
+   * Local INCLUDE_REVIEW = %YES%
+   * Local INCLUDE_TEST   = %YES%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %YES%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = 
+   * Local REVIEW_PASSED  = %YES%
+   * Local TESTER         = 
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
