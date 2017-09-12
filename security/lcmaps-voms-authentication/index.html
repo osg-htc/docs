@@ -220,6 +220,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../client/using-wn/">Worker Node Environment</a>
                 </li>
     </ul>
@@ -366,14 +370,14 @@
 <li>
 <p>Create Unix accounts for each VO, VO role, VO group, and user that you wish to support</p>
 </li>
-<li>Edit <code>/etc/osg/config.d/30-gip.ini</code> and specify the supported VOs per <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/IniConfigurationOptions#Subcluster_Resource_Entry_Config">Subcluster or ResourceEntry section</a>:</li>
+<li>Edit <code>/etc/osg/config.d/30-gip.ini</code> and specify the supported VOs per <a href="../../other/configuration-with-osg-configure#subcluster-resource-entry">Subcluster or ResourceEntry section</a>:</li>
 </ol>
 <div class="codehilite"><pre><span></span><span class="na">allowed_vos</span><span class="o">=</span><span class="s">&quot;VO1,VO2...&quot;</span>
 </pre></div>
 
 
 <h3 id="applying-configuration-settings">Applying configuration settings</h3>
-<p>Making changes to the OSG configuration files in the <code>/etc/osg/config.d</code> directory does not apply those settings to software automatically. For the OSG settings, use the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/IniConfigurationOptions">osg-configure</a> tool to validate (to a limited extent) and apply the settings to the relevant software components. If instead you wish to manage the LCMAPS VOMS plugin configuration yourself, skip to the <a href="#manual-configuration">manual configuration section</a>.</p>
+<p>Making changes to the OSG configuration files in the <code>/etc/osg/config.d</code> directory does not apply those settings to software automatically. For the OSG settings, use the <a href="../../other/configuration-with-osg-configure">osg-configure</a> tool to validate (to a limited extent) and apply the settings to the relevant software components. If instead you wish to manage the LCMAPS VOMS plugin configuration yourself, skip to the <a href="#manual-configuration">manual configuration section</a>.</p>
 <ol>
 <li>
 <p>Make all changes to <code>.ini</code> files in the <code>/etc/osg/config.d</code> directory.</p>

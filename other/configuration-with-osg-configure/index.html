@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Configuration with OSG-Configure - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Configuration with OSG-Configure";
+    var mkdocs_page_input_path = "other/configuration-with-osg-configure.md";
+    var mkdocs_page_url = "/other/configuration-with-osg-configure/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Common</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/yum/">Yum Repos</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Client</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../client/cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn/">Worker Node (RPM install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn-tarball/">Worker Node (tarball install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn-oasis/">Worker Node (OASIS install)</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Compute</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/install-htcondor-ce/">HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/gridftp/">GridFTP Server</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/squid/">HTTP Cache</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Other</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Monitoring</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../monitoring/rsv/">RSV</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../monitoring/rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Overviews</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Usage Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Configuration with OSG-Configure</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#configuration-with-osg-configure">Configuration with OSG-Configure</a></li>
+    
+
+    <li class="toctree-l3"><a href="#about-this-document">About this document</a></li>
+    
+
+    <li class="toctree-l3"><a href="#invocation-and-script-usage">Invocation and script usage</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#conventions">Conventions</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#syntax-and-layout">Syntax and layout</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#variable-substitution">Variable substitution</a></li>
+        
+            <li><a class="toctree-l4" href="#special-settings">Special Settings</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#configuration-sections">Configuration sections</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#bosco">Bosco</a></li>
+        
+            <li><a class="toctree-l4" href="#condor">Condor</a></li>
+        
+            <li><a class="toctree-l4" href="#lsf">LSF</a></li>
+        
+            <li><a class="toctree-l4" href="#pbs">PBS</a></li>
+        
+            <li><a class="toctree-l4" href="#sge">SGE</a></li>
+        
+            <li><a class="toctree-l4" href="#slurm">Slurm</a></li>
+        
+            <li><a class="toctree-l4" href="#gratia">Gratia</a></li>
+        
+            <li><a class="toctree-l4" href="#info-services">Info Services</a></li>
+        
+            <li><a class="toctree-l4" href="#rsv">RSV</a></li>
+        
+            <li><a class="toctree-l4" href="#subcluster-resource-entry">Subcluster / Resource Entry</a></li>
+        
+            <li><a class="toctree-l4" href="#gateway">Gateway</a></li>
+        
+            <li><a class="toctree-l4" href="#local-settings">Local Settings</a></li>
+        
+            <li><a class="toctree-l4" href="#misc-services">Misc Services</a></li>
+        
+            <li><a class="toctree-l4" href="#site-information">Site Information</a></li>
+        
+            <li><a class="toctree-l4" href="#squid">Squid</a></li>
+        
+            <li><a class="toctree-l4" href="#storage">Storage</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/using-wn/">Worker Node Environment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">In-Progress Docs</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca_updater/">CA Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/cert_scripts/">Certificate Request Scripts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job_router/">Job Router Recipe</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deprecated Software</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/glexec/">Worker node glexec Install</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../common/help/">Get Help</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Usage Guides &raquo;</li>
+        
+      
+    
+    <li>Configuration with OSG-Configure</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/other/configuration-with-osg-configure.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="configuration-with-osg-configure">Configuration with OSG-Configure</h1>
+<ul>
+<li><a href="#about-this-document">About this document</a></li>
+<li><a href="#invocation-and-script-usage">Invocation and script usage</a></li>
+<li><a href="#syntax-and-layout">Syntax and layout</a></li>
+<li><a href="#configuration-sections">Configuration sections</a><ul>
+<li>Job managers (batch systems):<ul>
+<li><a href="#bosco">Bosco</a></li>
+<li><a href="#condor">Condor</a></li>
+<li><a href="#lsf">LSF</a></li>
+<li><a href="#pbs">PBS</a></li>
+<li><a href="#sge">SGE</a></li>
+<li><a href="#slurm">Slurm</a></li>
+</ul>
+</li>
+<li>Monitoring/reporting:<ul>
+<li><a href="#gratia">Gratia</a></li>
+<li><a href="#info-services">Info Services</a></li>
+<li><a href="#rsv">RSV</a></li>
+<li><a href="#subcluster-resource-entry">Subcluster / Resource Entry</a></li>
+</ul>
+</li>
+<li><a href="#gateway">Gateway</a></li>
+<li><a href="#local-settings">Local Settings</a></li>
+<li><a href="#misc-services">Misc Services</a></li>
+<li><a href="#site-information">Site Information</a></li>
+<li><a href="#squid">Squid</a></li>
+<li><a href="#storage">Storage</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="about-this-document">About this document</h1>
+<p>OSG-Configure and the INI files in <code>/etc/osg/config.d</code> allow a high level configuration of OSG services.
+This document outlines the settings and options found in the INI files for system administers that are installing and configuring OSG software.</p>
+<p>This page gives an overview of the options for each of the sections of the configuration files that <code>osg-configure</code> uses.</p>
+<h1 id="invocation-and-script-usage">Invocation and script usage</h1>
+<p>The <code>osg-configure</code> script is used to process the INI files and apply changes to the system.
+<code>osg-configure</code> must be run as root.</p>
+<p>The typical workflow of OSG-Configure is to first edit the INI files, then verify them, then apply the changes.</p>
+<p>To verify the config files, run:</p>
+<div class="codehilite"><pre><span></span><span class="go">[root@server] osg-configure -v</span>
+</pre></div>
+
+
+<p>OSG-Configure will list any errors in your configuration, usually including the section and option where the problem is.
+Potential problems are:</p>
+<ul>
+<li>Required option not filled in</li>
+<li>Invalid value</li>
+<li>Syntax error</li>
+<li>Inconsistencies between options</li>
+</ul>
+<p>To apply changes, run:</p>
+<div class="codehilite"><pre><span></span><span class="go">[root@server] osg-configure -c</span>
+</pre></div>
+
+
+<p>If your INI files do not change, then re-running <code>osg-configure -c</code> will result in the same configuration as when you ran it the last time.
+This allows you to experiment with your settings without having to worry about messing up your system.</p>
+<p>OSG-Configure is split up into modules. Normally, all modules are run when calling <code>osg-configure</code>.
+However, it is possible to run specific modules separately.
+To see a list of modules, including whether they can be run separately, run:</p>
+<div class="codehilite"><pre><span></span><span class="go">[root@server] osg-configure -l</span>
+</pre></div>
+
+
+<p>If the module can be run separately, specify it with the <code>-m <span style="color:red">&lt;MODULE&gt;</span></code> option:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server] osg-configure -c -m <span style="color:red">&lt;MODULE&gt;</span></span>
+</pre></div>
+
+
+<p>Options may be specified in multiple INI files, which may make it hard to determine which value OSG-Configure uses.
+You may query the final value of an option via one of these methods:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server] osg-configure -o <span style="color:red">&lt;OPTION&gt;</span></span>
+<span class="gp">[root@server] osg-configure -o <span style="color:red">&lt;SECTION&gt;</span>.<span style="color:red">&lt;OPTION&gt;</span></span>
+</pre></div>
+
+
+<p>Logs are written to <code>/var/log/osg/osg-configure.log</code>.
+If something goes wrong, specify the <code>-d</code> flag to add more verbose output to <code>osg-configure.log</code>.</p>
+<p>The rest of this document will detail what to specify in the INI files.</p>
+<h2 id="conventions">Conventions</h2>
+<p>In the tables below:</p>
+<ul>
+<li>Mandatory options for a section are given in <strong>bold</strong> type. Sometime the default value may be OK and no edit required, but the variable has to be in the file.</li>
+<li>Options that are not found in the default ini file are in <em>italics</em>.</li>
+</ul>
+<h1 id="syntax-and-layout">Syntax and layout</h1>
+<p>The configuration files used by <code>osg-configure</code> are the one supported by Python's <a href="http://docs.python.org/library/configparser.html">SafeConfigParser</a>, similar in format to the <a href="http://en.wikipedia.org/wiki/INI_file">INI configuration file</a> used by MS Windows:</p>
+<ul>
+<li>Config files are separated into sections, specified by a section name in square brackets (e.g. <code>[Section 1]</code>)</li>
+<li>Options should be set using <code>name = value</code> pairs</li>
+<li>Lines that begin with <code>;</code> or <code>#</code> are comments</li>
+<li>Long lines can be split up using continutations: each white space character can be preceded by a newline to fold/continue the field on a new line (same syntax as specified in <a href="http://tools.ietf.org/html/rfc822.html">email RFC 822</a>)</li>
+<li>Variable substitutions are supported -- <a href="#variable-substitution">see below</a></li>
+</ul>
+<p><code>osg-configure</code> reads and uses all of the files in <code>/etc/osg/config.d</code> that have a ".ini" suffix. The files in this directory are ordered with a numeric prefix with higher numbers being applied later and thus having higher precedence (e.g. 00-foo.ini has a lower precedence than 99-local-site-settings.ini). Configuration sections and options can be specified multiple times in different files. E.g. a section called <code>[PBS]</code> can be given in <code>20-pbs.ini</code> as well as <code>99-local-site-settings.ini</code>.</p>
+<p>Each of the files are successively read and merged to create a final configuration that is then used to configure OSG software. Options and settings in files read later override the ones in previous files. This allows admins to create a file with local settings (e.g. <code>99-local-site-settings.ini</code>) that can be read last and which will be take precedence over the default settings in configuration files installed by various RPMs and which will not be overwritten if RPMs are updated.</p>
+<h2 id="variable-substitution">Variable substitution</h2>
+<p>The osg-configure parser allows variables to be defined and used in the configuration file:
+any option set in a given section can be used as a variable in that section.  Assuming that you have set an option with the name <code>myoption</code> in the section, you can substitute the value of that option elsewhere in the section by referring to it as <code>%(myoption)s</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The trailing <code>s</code> is required. Also, option names cannot have a variable subsitution in them.</p>
+</div>
+<h2 id="special-settings">Special Settings</h2>
+<p>If a setting is set to UNAVAILABLE or DEFAULT or left blank, osg-configure will try to use a sensible default for setting if possible.</p>
+<h3 id="ignore-setting">Ignore setting</h3>
+<p>The <code>enabled</code> option, specifying whether a service is enabled or not, is a boolean but also accepts <code>Ignore</code> as a possible value. Using Ignore, results in the service associated with the section being ignored entirely (and any configuration is skipped). This differs from using <code>False</code> (or the <code>%(disabled)s</code> variable), because using <code>False</code> results in the service associated with the section being disabled. <code>osg-configure</code> will not change the configuration of the service if the <code>enabled</code> is set to <code>Ignore</code>.</p>
+<p>This is useful, if you have a complex configuration for a given that can't be set up using the ini configuration files. You can manually configure that service by hand editing config files, manually start/stop the service and then use the <code>Ignore</code> setting so that <code>osg-configure</code> does not alter the service's configuration and status.</p>
+<h1 id="configuration-sections">Configuration sections</h1>
+<p>The OSG configuration is divided into sections with each section starting with a section name in square brackets (e.g. <code>[Section 1]</code>). The configuration is split in multiple files and options form one section can be in more than one files.</p>
+<p>The following sections give an overview of the options for each of the sections of the configuration files that <code>osg-configure</code> uses.</p>
+<h2 id="bosco">Bosco</h2>
+<p>This section is contained in <code>/etc/osg/config.d/20-bosco.ini</code> which is provided by the <code>osg-configure-bosco</code> RPM.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>enabled</strong></td>
+<td><code>True</code>, <code>False</code>, <code>Ignore</code></td>
+<td>This indicates whether the Bosco jobmanager is being used or not.</td>
+</tr>
+<tr>
+<td><strong>users</strong></td>
+<td>String</td>
+<td>A comma separated string. The existing usernames on the CE for which to install Bosco and allow submissions. In order to have separate usernames per VO, for example the CMS VO to have the cms username, each user must have Bosco installed. The osg-configure service will install Bosco on each of the users listed here.</td>
+</tr>
+<tr>
+<td><strong>endpoint</strong></td>
+<td>String</td>
+<td>The remote cluster submission host for which Bosco will submit jobs to the scheduler. This is in the form of <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#117;&#115;&#101;&#114;&#64;&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#99;&#111;&#109;">&#117;&#115;&#101;&#114;&#64;&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#99;&#111;&#109;</a>, exactly as you would use to ssh into the remote cluster.</td>
+</tr>
+<tr>
+<td><strong>batch</strong></td>
+<td>String</td>
+<td>The type of scheduler installed on the remote cluster.</td>
+</tr>
+<tr>
+<td><strong>ssh_key</strong></td>
+<td>String</td>
+<td>The location of the ssh key, as created above.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="condor">Condor</h2>
+<p>This section describes the parameters for a Condor jobmanager if it's being used in the current CE installation. If Condor is not being used, the <code>enabled</code> setting should be set to <code>False</code>.</p>
+<p>This section is contained in <code>/etc/osg/config.d/20-condor.ini</code> which is provided by the <code>osg-configure-condor</code> RPM.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>enabled</strong></td>
+<td><code>True</code>, <code>False</code>, <code>Ignore</code></td>
+<td>This indicates whether the Condor jobmanager is being used or not.</td>
+</tr>
+<tr>
+<td>condor_location</td>
+<td>String</td>
+<td>This should be set to be directory where condor is installed. If this is set to a blank variable, DEFAULT or UNAVAILABLE, the <code>osg-configure</code> script will try to get this from the CONDOR_LOCATION environment variable if available otherwise it will use <code>/usr</code> which works for the RPM installation.</td>
+</tr>
+<tr>
+<td>condor_config</td>
+<td>String</td>
+<td>This should be set to be path where the condor_config file is located. If this is set to a blank variable, DEFAULT or UNAVAILABLE, the <code>osg-configure</code> script will try to get this from the CONDOR_CONFIG environment variable if available otherwise it will use <code>/etc/condor/condor_config</code>, the default for the RPM installation.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="lsf">LSF</h2>
+<p>This section describes the parameters for a LSF jobmanager if it's being used in the current CE installation. If LSF is not being used, the <code>enabled</code> setting should be set to <code>False</code>.</p>
+<p>This section is contained in <code>/etc/osg/config.d/20-lsf.ini</code> which is provided by the <code>osg-configure-lsf</code> RPM.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>enabled</strong></td>
+<td><code>True</code>, <code>False</code>, <code>Ignore</code></td>
+<td>This indicates whether the LSF jobmanager is being used or not.</td>
+</tr>
+<tr>
+<td>lsf_location</td>
+<td>String</td>
+<td>This should be set to be directory where lsf is installed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pbs">PBS</h2>
+<p>This section describes the parameters for a pbs jobmanager if it's being used in the current CE installation. If PBS is not being used, the <code>enabled</code> setting should be set to <code>False</code>.</p>
+<p>This section is contained in <code>/etc/osg/config.d/20-pbs.ini</code> which is provided by the <code>osg-configure-pbs</code> RPM.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>enabled</strong></td>
+<td><code>True</code>, <code>False</code>, <code>Ignore</code></td>
+<td>This indicates whether the PBS jobmanager is being used or not.</td>
+</tr>
+<tr>
+<td>pbs_location</td>
+<td>String</td>
+<td>This should be set to be directory where pbs is installed. osg-configure will try to loocation for the pbs binaries in pbs_location/bin.</td>
+</tr>
+<tr>
+<td><strong>accounting_log_directory</strong></td>
+<td>String</td>
+<td>This setting is used to tell Gratia where to find your accounting log files, and it is required for proper accounting.</td>
+</tr>
+<tr>
+<td>pbs_server</td>
+<td>String</td>
+<td>This setting is optional and should point to your PBS server node if it is different from your OSG CE</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sge">SGE</h2>
+<p>This section describes the parameters for a SGE jobmanager if it's being used in the current CE installation. If SGE is not being used, the <code>enabled</code> setting should be set to <code>False</code>.</p>
+<p>This section is contained in <code>/etc/osg/config.d/20-sge.ini</code> which is provided by the <code>osg-configure-sge</code> RPM.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>enabled</strong></td>
+<td><code>True</code>, <code>False</code>, <code>Ignore</code></td>
+<td>This indicates whether the SGE jobmanager is being used or not.</td>
+</tr>
+<tr>
+<td><strong>sge_root</strong></td>
+<td>String</td>
+<td>This should be set to be directory where sge is installed (e.g. same as <strong>$SGE_ROOT</strong> variable).</td>
+</tr>
+<tr>
+<td><strong>sge_cell</strong></td>
+<td>String</td>
+<td>The sge_cell setting should be set to the value of $SGE_CELL for your SGE install.</td>
+</tr>
+<tr>
+<td>default_queue</td>
+<td>String</td>
+<td>This setting determines queue that jobs should be placed in if the job description does not specify a queue.</td>
+</tr>
+<tr>
+<td>available_queues</td>
+<td>String</td>
+<td>This setting indicates which queues are available on the cluster and should be used for validation when <code>validate_queues</code> is set.</td>
+</tr>
+<tr>
+<td>validate_queues</td>
+<td>String</td>
+<td>This setting determines whether the globus jobmanager should check the job RSL and verify that any queue specified matches a queue available on the cluster. See note.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>validate_queues</strong>:<br/>
+If <code>available_queues</code> is set, that list of queues will be used for
+validation, otherwise SGE will be queried for available queues.</p>
+</div>
+<h2 id="slurm">Slurm</h2>
+<p>This section describes the parameters for a Slurm jobmanager if it's being used in the current CE installation. If Slurm is not being used, the <code>enabled</code> setting should be set to <code>False</code>.</p>
+<p>This section is contained in <code>/etc/osg/config.d/20-slurm.ini</code> which is provided by the <code>osg-configure-slurm</code> RPM.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>enabled</strong></td>
+<td><code>True</code>, <code>False</code>, <code>Ignore</code></td>
+<td>This indicates whether the Slurm jobmanager is being used or not.</td>
+</tr>
+<tr>
+<td><strong>slurm_location</strong></td>
+<td>String</td>
+<td>This should be set to be directory where slurm is installed. osg-configure will try to location for the slurm binaries in slurm_location/bin.</td>
+</tr>
+<tr>
+<td>db_host</td>
+<td>String</td>
+<td>Hostname of the machine hosting the SLURM database. This information is needed to configure the SLURM gratia probe.</td>
+</tr>
+<tr>
+<td>db_port</td>
+<td>String</td>
+<td>Port of where the SLURM database is listening. This information is needed to configure the SLURM gratia probe.</td>
+</tr>
+<tr>
+<td>db_user</td>
+<td>String</td>
+<td>Username used to access the SLURM database. This information is needed to configure the SLURM gratia probe.</td>
+</tr>
+<tr>
+<td>db_pass</td>
+<td>String</td>
+<td>The location of a file containing the password used to access the SLURM database. This information is needed to configure the SLURM gratia probe.</td>
+</tr>
+<tr>
+<td>db_name</td>
+<td>String</td>
+<td>Name of the SLURM database. This information is needed to configure the SLURM gratia probe.</td>
+</tr>
+<tr>
+<td>slurm_cluster</td>
+<td>String</td>
+<td>The name of the Slurm cluster</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gratia">Gratia</h2>
+<p>This section configures Gratia. If <code>probes</code> is set to <code>UNAVAILABLE</code>, then <code>osg-configure</code> will use appropriate default values. If you need to specify custom reporting (e.g. a local gratia collector) in addition to the default probes, <code>%(osg-jobmanager-gratia)s</code>, <code>%(osg-gridftp-gratia)s</code>, <code>%(osg-metric-gratia)s</code>, <code>%(itb-jobmanager-gratia)s</code>, <code>%(itb-gridftp-gratia)s</code>, <code>%(itb-metric-gratia)s</code> are defined in the default configuration files to make it easier to specify the standard osg reporting.</p>
+<p>This section is contained in <code>/etc/osg/config.d/30-gratia.ini</code> which is provided by the <code>osg-configure-gratia</code> RPM.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>enabled</strong></td>
+<td><code>True</code> , <code>False</code>, <code>Ignore</code></td>
+<td>This should be set to True if gratia should be configured and enabled on the installation being configured.</td>
+</tr>
+<tr>
+<td><strong>resource</strong></td>
+<td>String</td>
+<td>This should be set to the resource name as given in the OIM registration</td>
+</tr>
+<tr>
+<td><strong>probes</strong></td>
+<td>String</td>
+<td>This should be set to the gratia probes that should be enabled. A probe is specified by using as <code>[probe_type]:server:port</code>. See note</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>probes</strong>:<br/>
+Legal values for <code>probe_type</code> are:</p>
+<ul>
+<li><code>metric</code> (for RSV)</li>
+<li><code>jobmanager</code> (for the appropriate jobmanager probe)</li>
+<li><code>gridftp</code> (for the GridFTP transfer probe)</li>
+</ul>
+</div>
+<h2 id="info-services">Info Services</h2>
+<p>Reporting to the central CE Collectors is configured in this section.  In the majority of cases, this file can be left untouched; you only need to configure this section if you wish to report to your own CE Collector instead of the ones run by OSG Operations.</p>
+<p>This section is contained in <code>/etc/osg/config.d/30-infoservices.ini</code>, which is provided by the <code>osg-configure-infoservices</code> RPM. (This is for historical reasons.)</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>enabled</strong></td>
+<td><code>True</code>, <code>False</code>, <code>Ignore</code></td>
+<td>True if reporting should be configured and enabled</td>
+</tr>
+<tr>
+<td>ce_collectors</td>
+<td>String</td>
+<td>The server(s) HTCondor-CE information should be sent to. See note</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>ce_collectors</strong>:</p>
+<ul>
+<li>Set this to <code>DEFAULT</code> to report to the OSG Production or ITB servers (depending on your <a href="#site-information">Site Information</a> configuration).</li>
+<li>Set this to <code>PRODUCTION</code> to report to the OSG Production servers</li>
+<li>Set this to <code>ITB</code> to report to the OSG ITB servers</li>
+<li>Otherwise, set this to the <code>hostname:port</code> of a host running a <code>condor-ce-collector</code> daemon</li>
+</ul>
+</div>
+<h2 id="rsv">RSV</h2>
+<p>This section handles the configuration and setup of the RSV services.</p>
+<p>This section is contained in <code>/etc/osg/config.d/30-rsv.ini</code> which is provided by the <code>osg-configure-rsv</code> RPM.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>enabled</strong></td>
+<td><code>True</code>, <code>False</code>, <code>Ignore</code></td>
+<td>This indicates whether the rsv  service is being used or not.</td>
+</tr>
+<tr>
+<td><strong>rsv_user</strong></td>
+<td>String</td>
+<td>This gives username that rsv will run under.  If this is blank or set to <code>UNAVAILABLE</code>, it will default to rsv.</td>
+</tr>
+<tr>
+<td><strong>gratia_probes</strong></td>
+<td>String</td>
+<td>This settings indicates which rsv gratia probes should be used.  It is a list of probes separated by a comma.  Valid probes are metric, condor, pbs, lsf, sge, managedfork, hadoop-transfer, and gridftp-transfer</td>
+</tr>
+<tr>
+<td>ce_hosts</td>
+<td>String</td>
+<td>This option lists the serviceURI of the CEs that generic RSV CE probes should check.  This should be a list of serviceURIs (<code>hostname[:port/service]</code>) separated by a comma (e.g. <code>my.host,my.host2,my.host3:2812</code>).</td>
+</tr>
+<tr>
+<td>htcondor_ce_hosts</td>
+<td>String</td>
+<td>This option lists the serviceURI of the HTCondor-CE-based CEs that the RSV HTCondor-CE probes should check. This should be a list of serviceURIs (<code>hostname[:port/service]</code>) separated by a comma (e.g. <code>my.host,my.host2,my.host3:2812</code>).</td>
+</tr>
+<tr>
+<td>gums_hosts</td>
+<td>String</td>
+<td>This option lists the serviceURI or FQDN of the CEs or SEs, using GUMS for authentication, that the RSV GUMS probes should check.  This should be a list of <em>CE</em> or <em>SE</em> FQDNs (and <em>not a GUMS server FQDN</em>) separated by a comma (e.g. <code>my.host,my.host2,my.host3</code>).</td>
+</tr>
+<tr>
+<td>gridftp_hosts</td>
+<td>String</td>
+<td>This option lists the serviceURI of the gridftp servers that the RSV gridftp probes should check.  This should be a list of serviceURIs (<code>hostname[:port/service]</code>) separated by a comma (e.g. <code>my.host.iu.edu:2812,my.host2,my.host3</code>).</td>
+</tr>
+<tr>
+<td>gridftp_dir</td>
+<td>String</td>
+<td>This should be the directory that the gridftp probes should use during testing.  This defaults to <code>/tmp</code> if left blank or set to <code>UNAVAILABLE</code>.</td>
+</tr>
+<tr>
+<td><strong>srm_hosts</strong></td>
+<td>String</td>
+<td>This option lists the serviceURI of the srm servers that the RSV srm probes should check.  This should be a list of serviceURIs (<code>hostname[:port/service]</code>) separated by a comma (e.g. <code>my.host,my.host2,my.host3:8444</code>).</td>
+</tr>
+<tr>
+<td>srm_dir</td>
+<td>String</td>
+<td>This should be the directory that the srm probes should use during testing.</td>
+</tr>
+<tr>
+<td>srm_webservice_path</td>
+<td>String</td>
+<td>This option gives the webservice path that SRM probes need to use along with the host:port. See note.</td>
+</tr>
+<tr>
+<td>service_cert</td>
+<td>String</td>
+<td>This option should point to the public key file (pem) for your service  certificate. If this is left blank or set to <code>UNAVAILABLE</code> and the <code>user_proxy</code> setting is set, it will default to <code>/etc/grid-security/rsvcert.pem</code></td>
+</tr>
+<tr>
+<td>service_key</td>
+<td>String</td>
+<td>This option should point to the private key file (pem) for your service  certificate. If this is left blank or set to <code>UNAVAILABLE</code> and the <code>service_cert</code> setting is enabled, it will default to <code>/etc/grid-security/rsvkey.pem</code> .</td>
+</tr>
+<tr>
+<td>service_proxy</td>
+<td>String</td>
+<td>This should point to the location of the rsv proxy file. If this is left blank or set to <code>UNAVAILABLE</code> and the use_service_cert  setting is enabled, it will default to <code>/tmp/rsvproxy</code>.</td>
+</tr>
+<tr>
+<td>user_proxy</td>
+<td>String</td>
+<td>If you don't use a service certificate for rsv, you will need to specify a  proxy file that RSV should use in the proxy_file setting.  If this is set, then  service_cert, service_key, and service_proxy should be left blank, or set to <code>UNAVAILABE</code> or <code>DEFAULT</code>.</td>
+</tr>
+<tr>
+<td><strong>enable_gratia</strong></td>
+<td><code>True</code>, <code>False</code></td>
+<td>This option will enable RSV record uploading to central RSV collector at the GOC.   This should be set to True on all OSG resources (and to False on non-OSG resources).</td>
+</tr>
+<tr>
+<td><strong>setup_rsv_nagios</strong></td>
+<td><code>True</code>, <code>False</code></td>
+<td>This option indicates whether rsv should upload results to a local  nagios server instance. This should be set to True or False.<br> This plugin is provided as an experimental component, and admins are recommend <em>not to enable</em> it on production resources.</td>
+</tr>
+<tr>
+<td>rsv_nagios_conf_file</td>
+<td>String</td>
+<td>This option indicates the location of the rsv nagios  file to use for configuration details. This file <em>needs to be configured locally for RSV-Nagios forwarding to work</em> -- see inline comments in file for more information.</td>
+</tr>
+<tr>
+<td>condor_location</td>
+<td>String</td>
+<td>If you installed Condor in a non-standard location (somewhere other than /usr, which is where the RPM puts it)  you must specify the path to the install dir here.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>srm_webservice_path</strong>:<br/>
+For dcache installations, this should work if left blank. However
+Bestman-xrootd SEs normally use <code>srm/v2/server</code> as web service path, and so
+Bestman-xrootd admins will have to pass this option with the appropriate
+value (for example: <code>srm/v2/server</code>) for the SRM probes to pass on their
+SE.</p>
+</div>
+<h2 id="subcluster-resource-entry">Subcluster / Resource Entry</h2>
+<p>Subcluster and Resource Entry configuration is for reporting about the worker resources on your site. A <strong>subcluster</strong> is a homogeneous set of worker node hardware; a <strong>resource</strong> is a set of subcluster(s) with common capabilities that will be reported to the ATLAS AGIS system.</p>
+<p><strong>At least one Subcluster or Resource Entry section</strong> is required on a CE; please populate the information for all your subclusters. This information will be reported to a central collector and will be used to send GlideIns / pilot jobs to your site; having accurate information is necessary for OSG jobs to effectively use your resources.</p>
+<p>This section is contained in <code>/etc/osg/config.d/30-gip.ini</code> which is provided by the <code>osg-configure-gip</code> RPM. (This is for historical reasons.)</p>
+<p>This configuration uses multiple sections of the OSG configuration files:</p>
+<ul>
+<li><a href="#subcluster-configuration">Subcluster*</a>: options about homogeneous subclusters</li>
+<li><a href="#resource-entry-configuration-atlas-only">Resource Entry*</a>: options for specifying ATLAS queues for AGIS</li>
+</ul>
+<h3 id="notes-for-multi-ce-sites">Notes for multi-CE sites.</h3>
+<p>If you would like to properly advertise multiple CEs per cluster, make sure that you:</p>
+<ul>
+<li>Set the value of site_name in the "Site Information" section to be the same for each CE.</li>
+<li>Have the <strong>exact</strong> same configuration values for the Subcluster* and Resource Entry* sections in each CE.</li>
+</ul>
+<h3 id="subcluster-configuration">Subcluster Configuration</h3>
+<p>Each homogeneous set of worker node hardware is called a <strong>subcluster</strong>. For each subcluster in your cluster, fill in the information about the worker node hardware by creating a new Subcluster section with a unique name in the following format: <code>[Subcluster CHANGEME]</code>, where CHANGEME is the globally unique subcluster name (yes, it must be a <strong>globally</strong> unique name for the whole grid, not just unique to your site. Get creative.)</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>name</strong></td>
+<td>String</td>
+<td>The same name that is in the Section label; it should be <strong>globally unique</strong></td>
+</tr>
+<tr>
+<td><strong>ram_mb</strong></td>
+<td>Positive Integer</td>
+<td>Megabytes of RAM per node</td>
+</tr>
+<tr>
+<td><strong>cores_per_node</strong></td>
+<td>Positive Integer</td>
+<td>Number of cores per node</td>
+</tr>
+<tr>
+<td><strong>allowed_vos</strong></td>
+<td>Comma-separated List or <code>*</code></td>
+<td>The VOs that are allowed to run jobs on this subcluster (autodetected if <code>*</code>). Optional on OSG 3.3</td>
+</tr>
+</tbody>
+</table>
+<p>The following attributes are optional:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>max_wall_time</td>
+<td>Positive Integer</td>
+<td>Maximum wall-clock time, in minutes, that a job is allowed to run on this subcluster (the default is one day or 1440 mins)</td>
+</tr>
+<tr>
+<td>queue</td>
+<td>String</td>
+<td>The queue to which jobs should be submitted in order to run on this subcluster</td>
+</tr>
+<tr>
+<td>extra_transforms</td>
+<td>Classad</td>
+<td>Transformation attributes which the HTCondor Job Router should apply to incoming jobs so they can run on this subcluster</td>
+</tr>
+</tbody>
+</table>
+<p><strong>OSG 3.4 changes:</strong></p>
+<ul>
+<li><code>allowed_vos</code> is mandatory</li>
+</ul>
+<h3 id="resource-entry-configuration-atlas-only">Resource Entry Configuration (ATLAS only)</h3>
+<p>If you are configuring a CE for the ATLAS VO, you must provide hardware information to advertise the queues that are available to AGIS. For each queue, create a new <code>Resource Entry</code> section with a unique name in the following format: <code>[Resource Entry RESOURCE]</code> where RESOURCE is a globally unique resource name (it must be a <strong>globally</strong> unique name for the whole grid, not just unique to your site). The following options are required for the <code>Resource Entry</code> section and are used to generate the data required by AGIS:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>name</strong></td>
+<td>String</td>
+<td>The same name that is in the <code>Resource Entry</code> label; it must be <strong>globally unique</strong></td>
+</tr>
+<tr>
+<td><strong>max_wall_time</strong></td>
+<td>Positive Integer</td>
+<td>Maximum wall-clock time, in minutes, that a job is allowed to run on this resource</td>
+</tr>
+<tr>
+<td><strong>queue</strong></td>
+<td>String</td>
+<td>The queue to which jobs should be submitted to run on this resource</td>
+</tr>
+<tr>
+<td><strong>cpucount</strong> (alias <strong>cores_per_node</strong>)</td>
+<td>Positive Integer</td>
+<td>Number of cores that a job using this resource can get</td>
+</tr>
+<tr>
+<td><strong>maxmemory</strong> (alias <strong>ram_mb</strong>)</td>
+<td>Positive Integer</td>
+<td>Maximum amount of memory (in MB) that a job using this resource can get</td>
+</tr>
+<tr>
+<td><strong>allowed_vos</strong></td>
+<td>Comma-separated List or <code>*</code></td>
+<td>The VOs that are allowed to run jobs on this resource (autodetected if <code>*</code>). Optional on OSG 3.3</td>
+</tr>
+</tbody>
+</table>
+<p>The following attributes are optional:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>subclusters</td>
+<td>Comma-separated List</td>
+<td>The physical subclusters the resource entry refers to; must be defined as Subcluster sections elsewhere in the file</td>
+</tr>
+<tr>
+<td>vo_tag</td>
+<td>String</td>
+<td>An arbitrary label that is added to jobs routed through this resource</td>
+</tr>
+</tbody>
+</table>
+<p><strong>OSG 3.4 changes:</strong></p>
+<ul>
+<li><code>allowed_vos</code> is mandatory</li>
+</ul>
+<h2 id="gateway">Gateway</h2>
+<p>This section gives information about the options in the Gateway section of the configuration files. These options control the behavior of job gateways on the CE. CEs are based on HTCondor-CE, which uses <code>condor-ce</code> as the gateway.</p>
+<p>This section is contained in <code>/etc/osg/config.d/10-gateway.ini</code> which is provided by the <code>osg-configure-gateway</code> RPM.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>htcondor_gateway_enabled</strong></td>
+<td><code>True</code>, <code>False</code></td>
+<td>(default True). True if the CE is using HTCondor-CE, False otherwise. HTCondor-CE will be configured to support enabled batch systems. RSV will use HTCondor-CE to launch remote probes.</td>
+</tr>
+<tr>
+<td><strong>job_envvar_path</strong></td>
+<td>String</td>
+<td>The value of the PATH environment variable to put into HTCondor jobs running with HTCondor-CE. This value is ignored if not using that batch system/gateway combination.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="local-settings">Local Settings</h2>
+<p>This section differs from other sections in that there are no set options in this section. Rather, the options set in this section will be placed in the <code>osg-local-job-environment.conf</code> verbatim. The options in this section are case sensitive and the case will be preserved when they are converted to environment variables. The <code>osg-local-job-environment.conf</code> file gets sourced by jobs run on your cluster so any variables set in this section will appear in the environment of jobs run on your system.</p>
+<p>Adding a line such as <code>My_Setting = my_Value</code> would result in the an environment variable called <code>My_Setting</code> set to <code>my_Value</code> in the job's environment. <code>my_Value</code> can also be defined in terms of an environment variable (i.e <code>My_Setting = $my_Value</code>) that will be evaluated on the worker node. For example, to add a variable <code>MY_PATH</code> set to <code>/usr/local/myapp</code>, you'd have the following:</p>
+<div class="codehilite"><pre><span></span><span class="k">[Local Settings]</span>
+
+<span class="na">MY_PATH</span> <span class="o">=</span> <span class="s">/usr/local/myapp</span>
+</pre></div>
+
+
+<p>This section is contained in <code>/etc/osg/config.d/40-localsettings.ini</code> which is provided by the <code>osg-configure-ce</code> RPM.</p>
+<h2 id="misc-services">Misc Services</h2>
+<p>This section handles the configuration of services that do not have a dedicated section for their configuration.</p>
+<p>This section is contained in <code>/etc/osg/config.d/10-misc.ini</code> which is provided by the <code>osg-configure-misc</code> RPM.</p>
+<p>This section primarily deals with authentication/authorization. For information on suggested settings for your CE, see the <a href="../../compute-element/install-htcondor-ce#configuring-authentication">authentication section of the HTCondor-CE install documents</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>glexec_location</td>
+<td>String</td>
+<td>This gives the location of the glExec installation on the worker nodes, if it is present. Can be defined in terms of an environment variable (e.g. <code>$FOO</code>) that will be evaluated on the worker node. If it is not installed, set this to <code>UNAVAILABLE</code>. glExec does not work with the <code>vomsmap</code> authorization method on OSG 3.3 and <strong>is entirely unsupported starting in OSG 3.4</strong></td>
+</tr>
+<tr>
+<td><strong>gums_host</strong></td>
+<td>String</td>
+<td>This setting is used to indicate the hostname of the GUMS host that should be used for authentication, if the authorization method below is set to <code>xacml</code>. If GUMS is not used, this should be set to <code>UNAVAILABLE</code>. <strong>GUMS is deprecated in OSG 3.4</strong></td>
+</tr>
+<tr>
+<td><strong>authorization_method</strong></td>
+<td><code>gridmap</code>, <code>xacml</code>, <code>local-gridmap</code>, <code>vomsmap</code></td>
+<td>This indicates which authorization method your site uses. <strong><code>xacml</code></strong> <strong>is deprecated in OSG 3.4</strong></td>
+</tr>
+<tr>
+<td>edit_lcmaps_db</td>
+<td><code>True</code>, <code>False</code></td>
+<td>(Optional, default True) If true, osg-configure will overwrite <code>/etc/lcmaps.db</code> to set your authorization method. The previous version will be backed up to <code>/etc/lcmaps.db.pre-configure</code></td>
+</tr>
+<tr>
+<td>copy_host_cert_for_service_certs</td>
+<td><code>True</code>, <code>False</code></td>
+<td>(Optional, default False) If true, osg-configure will create a copy or copies of your host cert and key as service certs for RSV and (on OSG 3.3) GUMS</td>
+</tr>
+</tbody>
+</table>
+<p><strong>OSG 3.4 changes:</strong></p>
+<ul>
+<li><code>glexec_location</code> must be <code>UNAVAILABLE</code> or unset</li>
+<li><code>authorization_method</code> defaults to <code>vomsmap</code></li>
+<li><code>authorization_method</code> will raise a warning if set to <code>xacml</code></li>
+</ul>
+<h2 id="site-information">Site Information</h2>
+<p>The settings found in the <code>Site Information</code> section are described below. This section is used to give information about a resource such as resource name, site sponsors, administrators, etc.</p>
+<p>This section is contained in <code>/etc/osg/config.d/40-siteinfo.ini</code> which is provided by the <code>osg-configure-ce</code> RPM.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>group</strong></td>
+<td><code>OSG</code> , <code>OSG-ITB</code></td>
+<td>This should be set to either OSG or OSG-ITB depending on whether your resource is in the OSG or OSG-ITB group. Most sites should specify OSG</td>
+</tr>
+<tr>
+<td><strong>host_name</strong></td>
+<td>String</td>
+<td>This should be set to be hostname of the CE that is being configured</td>
+</tr>
+<tr>
+<td><strong>resource</strong></td>
+<td>String</td>
+<td>The resource name of this CE endpoint as registered in OIM.</td>
+</tr>
+<tr>
+<td><strong>resource_group</strong></td>
+<td>String</td>
+<td>The resource_group of this CE as registered in OIM.</td>
+</tr>
+<tr>
+<td><strong>sponsor</strong></td>
+<td>String</td>
+<td>This should be set to the sponsor of the resource. See note.</td>
+</tr>
+<tr>
+<td><strong>site_policy</strong></td>
+<td>Url</td>
+<td>This should be a url pointing to the resource's usage policy</td>
+</tr>
+<tr>
+<td><strong>contact</strong></td>
+<td>String</td>
+<td>This should be the name of the resource's admin contact</td>
+</tr>
+<tr>
+<td><strong>email</strong></td>
+<td>Email address</td>
+<td>This should be the email address of the admin contact for the resource</td>
+</tr>
+<tr>
+<td><strong>city</strong></td>
+<td>String</td>
+<td>This should be the city that the resource is located in</td>
+</tr>
+<tr>
+<td><strong>country</strong></td>
+<td>String</td>
+<td>This should be two letter country code for the country that the resource is located in.</td>
+</tr>
+<tr>
+<td><strong>longitude</strong></td>
+<td>Number</td>
+<td>This should be the longitude of the resource. It should be a number between -180 and 180.</td>
+</tr>
+<tr>
+<td><strong>latitude</strong></td>
+<td>Number</td>
+<td>This should be the latitude of the resource. It should be a number between -90 and 90.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>sponsor</strong>:<br/>
+If your resource has multiple sponsors, you can separate them using commas
+or specify the percentage using the following format 'osg, atlas, cms' or
+'osg:10, atlas:45, cms:45'. The percentages must add up to 100 if multiple
+sponsors are used. If you have a sponsor that is not an OSG VO, you can
+indicate this by using 'local' as the VO.</p>
+</div>
+<h2 id="squid">Squid</h2>
+<p>This section handles the configuration and setup of the squid web caching and proxy service.</p>
+<p>This section is contained in <code>/etc/osg/config.d/01-squid.ini</code> which is provided by the <code>osg-configure-squid</code> RPM.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>enabled</strong></td>
+<td><code>True</code>, <code>False</code>, <code>Ignore</code></td>
+<td>This indicates whether the squid service is being used or not.</td>
+</tr>
+<tr>
+<td>location</td>
+<td>String</td>
+<td>This should be set to the <code>hostname:port</code> of the squid server.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="storage">Storage</h2>
+<p>This section gives information about the options in the Storage section of the configuration file.
+Several of these values are constrained and need to be set in a way that is consistent with one of the OSG storage models.
+Please review the Storage Related Parameters section of the
+<a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/EnvironmentVariables">Environment Variables</a>
+description and <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SitePlanning">Site Planning</a>
+discussions for explanations of the various storage models and the requirements for them.</p>
+<p>This section is contained in <code>/etc/osg/config.d/10-storage.ini</code> which is provided by the <code>osg-configure-ce</code> RPM.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Values Accepted</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>se_available</strong></td>
+<td><code>True</code>, <code>False</code></td>
+<td>This indicates whether there is an associated SE available.</td>
+</tr>
+<tr>
+<td>default_se</td>
+<td>String</td>
+<td>If an SE is available at your cluster, set default_se to the hostname of this SE, otherwise set default_se to UNAVAILABLE.</td>
+</tr>
+<tr>
+<td><strong>grid_dir</strong></td>
+<td>String</td>
+<td>This setting should point to the directory which holds the files from the OSG worker node package. See note</td>
+</tr>
+<tr>
+<td><strong>app_dir</strong></td>
+<td>String</td>
+<td>This setting should point to the directory which contains the VO specific applications. See note</td>
+</tr>
+<tr>
+<td>data_dir</td>
+<td>String</td>
+<td>This setting should point to a directory that can be used to store and stage data in and out of the cluster. See note</td>
+</tr>
+<tr>
+<td>worker_node_temp</td>
+<td>String</td>
+<td>This directory should point to a directory that can be used as scratch space on compute nodes. If not set, the default is UNAVAILABLE. See note</td>
+</tr>
+<tr>
+<td>site_read</td>
+<td>String</td>
+<td>This setting should be the location or url to a directory that can be read to stage in data via the variable <code>$OSG_SITE_READ</code>. This is an url if you are using a SE. If not set, the default is UNAVAILABLE</td>
+</tr>
+<tr>
+<td>site_write</td>
+<td>String</td>
+<td>This setting should be the location or url to a directory that can be write to stage out data via the variable <code>$OSG_SITE_WRITE</code>. This is an url if you are using a SE. If not set, the default is UNAVAILABLE</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All of these can be defined in terms of an environment variable
+(e.g. <code>$FOO</code>) that will be evaluated on the worker node.</p>
+</div>
+<p><strong>grid_dir</strong>:<br/>
+If you have installed the worker node client via RPM (the normal case) it
+should be <code>/etc/osg/wn-client</code>.  If you have installed the worker node in a
+special location (perhaps via the worker node client tarball or via OASIS),
+it should be the location of that directory.</p>
+<p>This directory will be accessed via the <code>$OSG_GRID</code> environment variable.
+It should be visible on all of the compute nodes. Read access is required,
+though worker nodes don't need write access.</p>
+<p><strong>app_dir</strong>:<br/>
+This directory will be accesed via the <code>$OSG_APP</code> environment variable. It
+should be visible on both the CE and worker nodes. Only the CE needs to
+have write access to this directory. This directory must also contain a
+sub-directory <code>etc/</code> with 1777 permissions.</p>
+<p><strong>data_dir</strong>:<br/>
+This directory can be accessed via the <code>$OSG_DATA</code> environment variable. It
+should be readable and writable on both the CE and worker nodes.</p>
+<p><strong>worker_node_temp</strong>:<br/>
+This directory will be accessed via the <code>$OSG_WN_TMP</code> environment variable.
+It should allow read and write access on a worker node and can be visible
+to just that worker node.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../client/using-wn/" class="btn btn-neutral float-right" title="Worker Node Environment">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../common/pki-cli/" class="btn btn-neutral" title="Certificate Tools"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../common/pki-cli/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../client/using-wn/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

@@ -226,6 +226,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../client/using-wn/">Worker Node Environment</a>
                 </li>
     </ul>
@@ -527,9 +531,9 @@ gums_host = <span style="color:red">YOUR GUMS HOSTNAME</span>
 </div>
 <h3 id="configuring-ce-collector-advertising">Configuring CE collector advertising</h3>
 <p>To split jobs between the various sites of the OSG, information about each site's capabilities are uploaded to a central collector. The job factories then query the central collector for idle resources and submit pilot jobs to the available sites. To advertise your site, you will need to enter some information about the worker nodes of your clusters.</p>
-<p>Please see the <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/IniConfigurationOptions#Subcluster_Resource_Entry_Config">Subcluster / Resource Entry configuration document</a> about configuring the data that will be uploaded to the central collector.</p>
+<p>Please see the <a href="../../other/configuration-with-osg-configure#subcluster-resource-entry">Subcluster / Resource Entry configuration document</a> about configuring the data that will be uploaded to the central collector.</p>
 <h3 id="applying-configuration-settings">Applying configuration settings</h3>
-<p>Making changes to the OSG configuration files in the <code>/etc/osg/config.d</code> directory does not apply those settings to software automatically. Settings that are made outside of the OSG directory take effect immediately or at least when the relevant service is restarted. For the OSG settings, use the <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/IniConfigurationOptions">osg-configure</a> tool to validate (to a limited extent) and apply the settings to the relevant software components. The <code>osg-configure</code> software is included automatically in an HTCondor-CE installation.</p>
+<p>Making changes to the OSG configuration files in the <code>/etc/osg/config.d</code> directory does not apply those settings to software automatically. Settings that are made outside of the OSG directory take effect immediately or at least when the relevant service is restarted. For the OSG settings, use the <a href="../../other/configuration-with-osg-configure">osg-configure</a> tool to validate (to a limited extent) and apply the settings to the relevant software components. The <code>osg-configure</code> software is included automatically in an HTCondor-CE installation.</p>
 <ol>
 <li>
 <p>Make all changes to <code>.ini</code> files in the <code>/etc/osg/config.d</code> directory</p>
