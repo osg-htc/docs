@@ -14,11 +14,23 @@ Use this page to learn how to install and configure the LCMAPS VOMS plugin to au
 Installing the LCMAPS VOMS Plugin
 ---------------------------------
 
-Install `lcmaps`, the default mapfile, and the configuration tools:
+To install the LCMAPS VOMS plugin, make sure that your host is up to date before installing the required packages:
 
-``` console
-[root@server]# yum install lcmaps vo-client-lcmaps-voms osg-configure-misc
-```
+1. Clean yum cache:
+
+        ::console
+        [root@client ~ ] $ yum clean all --enablerepo=*
+
+2. Update software:
+
+        :::console
+        [root@client ~ ] $ yum update
+    This command will update **all** packages
+
+3. Install `lcmaps`, the default mapfile, and the configuration tools:
+
+        :::console
+        [root@server]# yum install lcmaps vo-client-lcmaps-voms osg-configure-misc
 
 
 Configuring the LCMAPS VOMS Plugin
