@@ -1,0 +1,301 @@
+---+ OSG Software Release 3.2.8
+
+*Release Date*: 2014-04-08
+
+---++ Summary of changes
+
+These releases contain updated Certificate Authority (CA) bundles.
+It is imperative that these new CA packages are installed before
+June 1st. At that time, !DigiCert will begin issuing OSG certificates
+that depend on the new CA bundles.
+
+Hopefully, you have setup [[OsgCaCertsUpdater][automatic updates]] for the OSG CA certificates.
+If you have not setup automatic updates and you do not want to update to this version, you must update the OSG CA certificates [[InstallCertAuth#How_do_I_manually_update_my_CA_p][manually]].
+
+This release contains:
+   * Updated CA certificates
+      * New SHA-2 signed !DigiCert CA certificates
+      * DOEGrids CA certificates removed
+      * Old format CA certifcate bundles discontinued
+   * Update to CVMFS 2.1.17 ([[http://cernvm.cern.ch/portal/filesystem/cvmfs-2.1.17][many ehancements and bug fixes]])
+   * [[https://twiki.grid.iu.edu/bin/view/Operations/PackageV52][VO Package v52]]
+      * New Sub VOs: Lariat, Gendetrd, Lar1, and Okra
+      * New VOMS servers at CERN
+   * Bug fixes for VOMS admin
+   * Updated gratia probes (sge, lsf, htcondor)
+   * Update to RSV 3.7.15 (bug fixes)
+   * Update to !MyProxy 5.9 (bug fixes)
+   * Fix crash in gridftp-hdfs during transfer
+   * Many other minor bug fixes
+
+[[https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%20%223.2.8%22][26 JIRA tickets]] were addressed in this release.
+
+Detailed changes are below. All of the documentation can be found in the [[Documentation.Release3][Release3]] area of the !TWiki.
+
+---++ Known Issues
+
+---++ Updating to the new release
+
+---+++ Update Repositories
+
+This is a release in a newer [[Documentation.Release3.OSGReleaseSeries][OSG Release Series]].
+To update to this new series, you need [[Documentation.Release3.YumRepositories#Install_OSG_Repositories][install the new OSG repositories]].
+
+---+++ Update Software
+
+Once the new repositories are installed, you can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or glob]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed changes in this release
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5   
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-8.0.6-3.osg32.el5][condor-8.0.6-3.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cvmfs-2.1.17-1.3.osg32.el5][cvmfs-2.1.17-1.3.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gfal-1.16.0-1.osg32.el5][gfal-1.16.0-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.13.25-1.osg32.el5][gratia-probe-1.13.25-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gridftp-hdfs-0.5.4-11.osg32.el5][gridftp-hdfs-0.5.4-11.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.56-1.osg32.el5][igtf-ca-certs-1.56-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcg-util-1.16.0-2.2.osg32.el5][lcg-util-1.16.0-2.2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=myproxy-5.9-8.osg32.el5][myproxy-5.9-8.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=oasis-config-5-1.osg32.el5][oasis-config-5-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-build-1.3.5-2.osg32.el5][osg-build-1.3.5-2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.38-1.osg32.el5][osg-ca-certs-1.38-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-cleanup-1.7.2-1.osg32.el5][osg-cleanup-1.7.2-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-oasis-3-2.osg32.el5][osg-oasis-3-2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.4.13-1.osg32.el5][osg-test-1.4.13-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-tested-internal-3.2-2.osg32.el5][osg-tested-internal-3.2-2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.8-1.osg32.el5][osg-version-3.2.8-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-wn-client-3.0.0-20.osg32.el5][osg-wn-client-3.0.0-20.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.7.15-1.osg32.el5][rsv-3.7.15-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-52-1.osg32.el5][vo-client-52-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-admin-server-2.7.0-1.11.osg32.el5][voms-admin-server-2.7.0-1.11.osg32.el5]]
+
+---++++ Enterprise Linux 6
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-8.0.6-3.osg32.el6][condor-8.0.6-3.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cvmfs-2.1.17-1.3.osg32.el6][cvmfs-2.1.17-1.3.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gfal-1.16.0-1.osg32.el6][gfal-1.16.0-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.13.25-1.osg32.el6][gratia-probe-1.13.25-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gridftp-hdfs-0.5.4-11.osg32.el6][gridftp-hdfs-0.5.4-11.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.56-1.osg32.el6][igtf-ca-certs-1.56-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcg-util-1.16.0-2.2.osg32.el6][lcg-util-1.16.0-2.2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=myproxy-5.9-8.osg32.el6][myproxy-5.9-8.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=oasis-config-5-1.osg32.el6][oasis-config-5-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-build-1.3.5-2.osg32.el6][osg-build-1.3.5-2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.38-1.osg32.el6][osg-ca-certs-1.38-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-cleanup-1.7.2-1.osg32.el6][osg-cleanup-1.7.2-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-oasis-3-2.osg32.el6][osg-oasis-3-2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.4.13-1.osg32.el6][osg-test-1.4.13-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-tested-internal-3.2-2.osg32.el6][osg-tested-internal-3.2-2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.8-1.osg32.el6][osg-version-3.2.8-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-wn-client-3.0.0-20.osg32.el6][osg-wn-client-3.0.0-20.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.7.15-1.osg32.el6][rsv-3.7.15-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-52-1.osg32.el6][vo-client-52-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-admin-server-2.7.0-1.11.osg32.el6][voms-admin-server-2.7.0-1.11.osg32.el6]]
+
+---+++ RPMs
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+condor-8.0.6-3.osg32.el5
+condor-bosco-8.0.6-3.osg32.el5
+condor-classads-8.0.6-3.osg32.el5
+condor-classads-devel-8.0.6-3.osg32.el5
+condor-cream-gahp-8.0.6-3.osg32.el5
+condor-debuginfo-8.0.6-3.osg32.el5
+condor-kbdd-8.0.6-3.osg32.el5
+condor-procd-8.0.6-3.osg32.el5
+condor-python-8.0.6-3.osg32.el5
+condor-vm-gahp-8.0.6-3.osg32.el5
+cvmfs-2.1.17-1.3.osg32.el5
+cvmfs-devel-2.1.17-1.3.osg32.el5
+cvmfs-server-2.1.17-1.3.osg32.el5
+cvmfs-unittests-2.1.17-1.3.osg32.el5
+gfal-1.16.0-1.osg32.el5
+gfal-debuginfo-1.16.0-1.osg32.el5
+gfal-devel-1.16.0-1.osg32.el5
+gfal-doc-1.16.0-1.osg32.el5
+gfal-python-1.16.0-1.osg32.el5
+gfal-python26-1.16.0-1.osg32.el5
+gratia-probe-1.13.25-1.osg32.el5
+gratia-probe-bdii-status-1.13.25-1.osg32.el5
+gratia-probe-common-1.13.25-1.osg32.el5
+gratia-probe-condor-1.13.25-1.osg32.el5
+gratia-probe-condor-events-1.13.25-1.osg32.el5
+gratia-probe-dcache-storage-1.13.25-1.osg32.el5
+gratia-probe-dcache-transfer-1.13.25-1.osg32.el5
+gratia-probe-debuginfo-1.13.25-1.osg32.el5
+gratia-probe-glexec-1.13.25-1.osg32.el5
+gratia-probe-glideinwms-1.13.25-1.osg32.el5
+gratia-probe-gram-1.13.25-1.osg32.el5
+gratia-probe-gridftp-transfer-1.13.25-1.osg32.el5
+gratia-probe-hadoop-storage-1.13.25-1.osg32.el5
+gratia-probe-metric-1.13.25-1.osg32.el5
+gratia-probe-onevm-1.13.25-1.osg32.el5
+gratia-probe-pbs-lsf-1.13.25-1.osg32.el5
+gratia-probe-psacct-1.13.25-1.osg32.el5
+gratia-probe-services-1.13.25-1.osg32.el5
+gratia-probe-sge-1.13.25-1.osg32.el5
+gratia-probe-slurm-1.13.25-1.osg32.el5
+gratia-probe-xrootd-storage-1.13.25-1.osg32.el5
+gratia-probe-xrootd-transfer-1.13.25-1.osg32.el5
+gridftp-hdfs-0.5.4-11.osg32.el5
+gridftp-hdfs-debuginfo-0.5.4-11.osg32.el5
+igtf-ca-certs-1.56-1.osg32.el5
+lcg-util-1.16.0-2.2.osg32.el5
+lcg-util-debuginfo-1.16.0-2.2.osg32.el5
+lcg-util-devel-1.16.0-2.2.osg32.el5
+lcg-util-libs-1.16.0-2.2.osg32.el5
+lcg-util-python-1.16.0-2.2.osg32.el5
+lcg-util-python26-1.16.0-2.2.osg32.el5
+myproxy-5.9-8.osg32.el5
+myproxy-admin-5.9-8.osg32.el5
+myproxy-debuginfo-5.9-8.osg32.el5
+myproxy-devel-5.9-8.osg32.el5
+myproxy-doc-5.9-8.osg32.el5
+myproxy-libs-5.9-8.osg32.el5
+myproxy-server-5.9-8.osg32.el5
+oasis-config-5-1.osg32.el5
+osg-build-1.3.5-2.osg32.el5
+osg-ca-certs-1.38-1.osg32.el5
+osg-cleanup-1.7.2-1.osg32.el5
+osg-gums-config-52-1.osg32.el5
+osg-oasis-3-2.osg32.el5
+osg-test-1.4.13-1.osg32.el5
+osg-tested-internal-3.2-2.osg32.el5
+osg-version-3.2.8-1.osg32.el5
+osg-wn-client-3.0.0-20.osg32.el5
+osg-wn-client-glexec-3.0.0-20.osg32.el5
+rsv-3.7.15-1.osg32.el5
+rsv-consumers-3.7.15-1.osg32.el5
+rsv-core-3.7.15-1.osg32.el5
+rsv-metrics-3.7.15-1.osg32.el5
+vo-client-52-1.osg32.el5
+vo-client-edgmkgridmap-52-1.osg32.el5
+voms-admin-server-2.7.0-1.11.osg32.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+condor-8.0.6-3.osg32.el6
+condor-bosco-8.0.6-3.osg32.el6
+condor-classads-8.0.6-3.osg32.el6
+condor-classads-devel-8.0.6-3.osg32.el6
+condor-cream-gahp-8.0.6-3.osg32.el6
+condor-debuginfo-8.0.6-3.osg32.el6
+condor-kbdd-8.0.6-3.osg32.el6
+condor-procd-8.0.6-3.osg32.el6
+condor-python-8.0.6-3.osg32.el6
+condor-vm-gahp-8.0.6-3.osg32.el6
+cvmfs-2.1.17-1.3.osg32.el6
+cvmfs-devel-2.1.17-1.3.osg32.el6
+cvmfs-server-2.1.17-1.3.osg32.el6
+cvmfs-unittests-2.1.17-1.3.osg32.el6
+gfal-1.16.0-1.osg32.el6
+gfal-debuginfo-1.16.0-1.osg32.el6
+gfal-devel-1.16.0-1.osg32.el6
+gfal-doc-1.16.0-1.osg32.el6
+gfal-python-1.16.0-1.osg32.el6
+gratia-probe-1.13.25-1.osg32.el6
+gratia-probe-bdii-status-1.13.25-1.osg32.el6
+gratia-probe-common-1.13.25-1.osg32.el6
+gratia-probe-condor-1.13.25-1.osg32.el6
+gratia-probe-condor-events-1.13.25-1.osg32.el6
+gratia-probe-dcache-storage-1.13.25-1.osg32.el6
+gratia-probe-dcache-transfer-1.13.25-1.osg32.el6
+gratia-probe-debuginfo-1.13.25-1.osg32.el6
+gratia-probe-glexec-1.13.25-1.osg32.el6
+gratia-probe-glideinwms-1.13.25-1.osg32.el6
+gratia-probe-gram-1.13.25-1.osg32.el6
+gratia-probe-gridftp-transfer-1.13.25-1.osg32.el6
+gratia-probe-hadoop-storage-1.13.25-1.osg32.el6
+gratia-probe-metric-1.13.25-1.osg32.el6
+gratia-probe-onevm-1.13.25-1.osg32.el6
+gratia-probe-pbs-lsf-1.13.25-1.osg32.el6
+gratia-probe-psacct-1.13.25-1.osg32.el6
+gratia-probe-services-1.13.25-1.osg32.el6
+gratia-probe-sge-1.13.25-1.osg32.el6
+gratia-probe-slurm-1.13.25-1.osg32.el6
+gratia-probe-xrootd-storage-1.13.25-1.osg32.el6
+gratia-probe-xrootd-transfer-1.13.25-1.osg32.el6
+gridftp-hdfs-0.5.4-11.osg32.el6
+gridftp-hdfs-debuginfo-0.5.4-11.osg32.el6
+igtf-ca-certs-1.56-1.osg32.el6
+lcg-util-1.16.0-2.2.osg32.el6
+lcg-util-debuginfo-1.16.0-2.2.osg32.el6
+lcg-util-devel-1.16.0-2.2.osg32.el6
+lcg-util-libs-1.16.0-2.2.osg32.el6
+lcg-util-python-1.16.0-2.2.osg32.el6
+myproxy-5.9-8.osg32.el6
+myproxy-admin-5.9-8.osg32.el6
+myproxy-debuginfo-5.9-8.osg32.el6
+myproxy-devel-5.9-8.osg32.el6
+myproxy-doc-5.9-8.osg32.el6
+myproxy-libs-5.9-8.osg32.el6
+myproxy-server-5.9-8.osg32.el6
+oasis-config-5-1.osg32.el6
+osg-build-1.3.5-2.osg32.el6
+osg-ca-certs-1.38-1.osg32.el6
+osg-cleanup-1.7.2-1.osg32.el6
+osg-gums-config-52-1.osg32.el6
+osg-oasis-3-2.osg32.el6
+osg-test-1.4.13-1.osg32.el6
+osg-tested-internal-3.2-2.osg32.el6
+osg-version-3.2.8-1.osg32.el6
+osg-wn-client-3.0.0-20.osg32.el6
+osg-wn-client-glexec-3.0.0-20.osg32.el6
+rsv-3.7.15-1.osg32.el6
+rsv-consumers-3.7.15-1.osg32.el6
+rsv-core-3.7.15-1.osg32.el6
+rsv-metrics-3.7.15-1.osg32.el6
+vo-client-52-1.osg32.el6
+vo-client-edgmkgridmap-52-1.osg32.el6
+voms-admin-server-2.7.0-1.11.osg32.el6
+</pre>
+
+
+
+---+++ Upcoming Packages
+
+We added or updated the following packages to the *upcoming* OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5   
+
+---++++ Enterprise Linux 6
+
+
+
+---+++ Upcoming RPMs
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+</pre>
