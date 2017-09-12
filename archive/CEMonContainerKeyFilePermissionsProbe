@@ -1,0 +1,15 @@
+---++ !CEMonContainerKeyFilePermissionsProbe
+
+The !CEMonContainerKeyFilePermissionsProbe runs on the CE node and checks the permissions of !sslkeyfile used by !CEMon. In order to execute this probe, you will need a valid proxy and privileges to run a job on the CE node.
+
+---+++ Metric org.osg.ress.cemon-containerkeyfile-CE-permissions
+
+   * *CRITICAL:*
+      * If the permissions are not 400 or 600.
+
+   * *UKNOWN:*
+      * The key file cannot be determined.
+      * Unable to setup the environment or parse the $VDT_LOCATION/glite/etc/glite-ce-monitor/cemonitor-config.xml file
+
+
+If you have questions, contact the !VDT.
