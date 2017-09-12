@@ -313,11 +313,31 @@
 <p>The OSG provides a default set of mappings from VOMS attributes to Unix accounts. By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to, banning based on VOMS attributes, banning a specific user, or adding a VO, VO group, VO role, and/or user that is not in the OSG's set of mappings.</p>
 <p>Use this page to learn how to install and configure the LCMAPS VOMS plugin to authenticate users to access your resources on a per-VO basis.</p>
 <h2 id="installing-the-lcmaps-voms-plugin">Installing the LCMAPS VOMS Plugin</h2>
+<p>To install the LCMAPS VOMS plugin, make sure that your host is up to date before installing the required packages:</p>
+<ol>
+<li>
+<p>Clean yum cache:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> yum clean all --enablerepo<span class="o">=</span>*
+</pre></div>
+
+
+</li>
+<li>
+<p>Update software:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> yum update
+</pre></div>
+
+
+<p>This command will update <strong>all</strong> packages</p>
+</li>
+<li>
 <p>Install <code>lcmaps</code>, the default mapfile, and the configuration tools:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> yum install lcmaps vo-client-lcmaps-voms osg-configure-misc
 </pre></div>
 
 
+</li>
+</ol>
 <h2 id="configuring-the-lcmaps-voms-plugin">Configuring the LCMAPS VOMS Plugin</h2>
 <p>The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication. If you are using OSG 3.3 packages, there are software-specific instructions that must be followed for <a href="../../compute-element/install-htcondor-ce">HTCondor-CE</a>, <a href="../../storage/gridftp">GridFTP</a>, and <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd">XRootD</a>. To check if you are running OSG 3.3, run the following command:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> rpm -q --queryformat<span class="o">=</span><span class="s2">&quot;%{VERSION}\n&quot;</span> osg-release
