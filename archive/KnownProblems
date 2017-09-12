@@ -1,0 +1,142 @@
+%LINKCSS%
+
+---+ Known problems in the OSG RPM installation
+%TOC%
+
+
+---++ SHA-2 certificates require some software to be updated
+
+Starting on 11 February 2014, all OSG-issued Digicert certificates (host, service, and personal) will use the SHA-2 algorithm. Some software in the OSG software stack — notably <span style="color: #F60;">!BeStMan, dCache SRM client, GUMS, !jGlobus, and VOMS</span> — must be on a recent version to support SHA-2 certificates. Please visit [[SHA2Compliance][our SHA-2 compliance page]] for more information about minimum required versions of software components.
+
+
+---++ Problems with EPEL and/or yum-priorities
+
+When you install, you might see errors like this:
+<pre class="screen">
+Error: Missing Dependency: libglobus_gss_assist.so.3()(64bit) is needed by package CGSI-gSOAP-1.3.4.2-2.el5.x86_64 (epel-x86_64)
+Error: Missing Dependency: libglobus_gsi_credential.so.1()(64bit) is needed by package lcgdm-1.8.1.2-1.el5.x86_64 (epel-x86_64)
+Error: Missing Dependency: libglobus_gsi_callback.so.0()(64bit) is needed by package lcgdm-1.8.1.2-1.el5.x86_64 (epel-x86_64)
+Error: Missing Dependency: libglobus_gssapi_gsi.so.4()(64bit) is needed by package lcgdm-1.8.1.2-1.el5.x86_64 (epel-x86_64)
+...
+</pre>
+
+There are two possible reasons for this:
+
+   1. You didn't install =yum-priorities=. Our instructions include this step, and it's essential in order to avoid this problem.
+   1. For some reason, you pre-installed portions of Globus from the EPEL repository. Because we have a significantly newer (and better!) version of Globus in our repository, there are hard-to-resolve conflicts. You have to remove the old version of Globus before you proceed with the install. (And install =yum-priorities=.) To be clear, if you have pre-installed any of the following package from the EPEL repository, they should be removed:
+      * Packages beginning with =globus=
+      * CGSI-gSOAP
+      * lcgdm
+      * voms
+      * Maybe others we aren't yet aware of.
+
+You can remove them with a command such as:
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% rpm -e --nodeps %RED%packagename%ENDCOLOR%
+</pre>
+
+
+---++ Mixing rpm and pacman based CE installs causes problems
+If a rpm based CE is installed on a system with a pacman installation, the pacman installation will use binaries installed by the rpms.  Therefore, switching back from the rpm based CE installation to the pacman installation is non trivial and will require removing rpms and making further changes to the configuration files in /etc.  Due to the changes needed, going back to the pacman installation may not be possible without reinstalling the OS.
+
+#Reserved uids
+---++ Reserved user ids (especially for Tomcat)
+Please be aware that some user ids (uids) are reserved and you should not use them or you might run into problems. In general, do not assign any users a uid less than 500 because Red Hat reserves all uids less than 500. 
+
+One known case that has affected users is tomcat: When Tomcat is installed (for the CE, VOMS, GUMS, or Gratia) the =tomcat= rpm will try to create a tomcat user with uid 91. If the tomcat user doesn't exist but uid 91 is already taken, you will experience failures. 
+
+The workaround is to either not use the reserved uid, or pre-create the user with another uid. If you precreate the tomcat user, make sure the user has a working shell (i.e. not =/sbin/nologin=). 
+
+Known user ides that affect the OSG installation include:
+
+| *uid* | *username* |
+| 27 | mysql-server |
+| 48 | httpd |
+| 91 | tomcat |
+
+[[http://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/5/html/Deployment_Guide/s1-users-groups-standard-users.html][Red Hat list of standard users]]
+
+---++ Using new VOMS clients with older VOMS servers
+The new VOMS clients (such as =voms-proxy-init=) need to contact VOMS servers. Unfortunately, they do not work with the oldest VOMS servers. It works with both current and recent versions, but not much older versions. In particular, it didn't work with the VOMS servers hosted by Fermilab and the GOC.
+Fermilab VOMS servers voms.fnal.gov, voms.opensciencegrid.org were upgraded to a compatible version of VOMS in February of 2012, GOC voms server voms.grid.iu.edu is also now compatible.
+'
+
+---++ GIP ownership
+Your CE installation may have the wrong ownership on some directories. Fix this by doing:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% chown tomcat /var/log/gip
+%UCL_PROMPT_ROOT% chown tomcat /var/cache/gip
+</pre>
+
+#SetWNPath
+---++ Mixing Pacman-based CE with RPM-based worker nodes
+
+If you have a Pacman-based CE with RPM-based worker nodes, you need to tweak your CE, particularly if you use Condor. In particular, you want to ensure that the PATH is set so that the jobs can find the standard tools. With the old worker node, the jobs relied on =setup.sh=, which no longer exists. (Actually, it exists but is empty.) The new CE sets the PATH, but the default PATH for Condor is empty. You can edit =$VDT_LOCATION/etc/config.ini" to add a line to your local settings:
+
+<pre class="file">
+[Local Settings]
+%RED%PATH=/bin:/usr/bin%ENDCOLOR%
+</pre>
+
+You do not need to do this if you have an RPM-based CE because it will be done automatically.
+
+---++ Uninstall old version of osg-ca-certs
+
+If you've previously installed osg-ca-certs from the older software.grid.iu.repository, please remove it before starting your installation to avoid conflicts.
+
+We hope to have a smoother transition that doesn't requires you do to this, but for now you need to remove the old RPM. 
+
+---++ Old versions of Condor
+
+Several of the RPMs in our repository depend on Condor. These include:
+
+   * The Gratia Condor probes
+   * The Condor job managers
+   * glexec (just depends on the =condor_procd=, _not_ all of Condor)
+   * RSV
+
+If you don't have Condor installed, these will install Condor from our software repository. If you've installed Condor 7.6.0 or later from RPMs, your version will be used. However, if you've installed Condor 7.4.x or earlier from RPMs, it will appear not to satisfy the dependencies and our version of Condor will be installed. For now there is no good way around this--you must install Condor 7.6.0 or later if you need Condor. 
+
+In the case of glexec, it's not just RPM dependencies that are not resolved--it reuqires a =condor_procd= from Condor 7.6.0 or later to work. Condor 7.4.x will _not_ work.
+
+
+---++ Java upgrade
+
+You may see the following set of error messages while upgrading the =jdk= package:
+<pre>
+Unpacking JAR files...
+rt.jar...
+Error: Could not open input file: /usr/java/jdk1.6.0_26/jre/lib/rt.pack
+jsse.jar...
+Error: Could not open input file: /usr/java/jdk1.6.0_26/jre/lib/jsse.pack
+charsets.jar...
+Error: Could not open input file: /usr/java/jdk1.6.0_26/jre/lib/charsets.pack
+tools.jar...
+Error: Could not open input file: /usr/java/jdk1.6.0_26/lib/tools.pack
+localedata.jar...
+Error: Could not open input file: /usr/java/jdk1.6.0_26/jre/lib/ext/localedata.pack
+plugin.jar...
+Error: Could not open input file: /usr/java/jdk1.6.0_26/jre/lib/plugin.pack
+javaws.jar...
+Error: Could not open input file: /usr/java/jdk1.6.0_26/jre/lib/javaws.pack
+deploy.jar...
+Error: Could not open input file: /usr/java/jdk1.6.0_26/jre/lib/deploy.pack
+</pre>
+These are completely harmless and can be ignored.
+
+---++ RPM-based CE and running with the OSG glideinWMS factory
+
+The OSG glideinWMS factory explicitly disables the GT5 auto-detection logic.  If you switch a CE from GT2 to GT5 and support VOs that use the factory, you should file a GOC ticket requesting the factory change your site to GT5.
+
+---++ New Globus 5 CE needs Condor-G 7.6.x or later
+
+The new Globus 5 based CE is only "mostly" backward compatible with GRAM2 CEs.
+
+Newer versions of Condor-G (7.6.X and up) properly handle the difference, but older versions only work correctly if they specific that the CE is "gt5". If they specify that the CE is "gt2", they may find that they are are limited to 10 jobs total on each of the new Globus 5 CEs. (We haven't had consistent results with this--in some cases it seems to work, while in others there was this limit.)
+
+---++ ROCKS provides a bad version of libtool
+
+Globus requires libltdl.so.3 to function; ROCKS provides a copy of this in a non-system directory.  This satisfies the RPM requirement, but breaks Globus clients on ROCKS worker nodes.
+
+For now, ROCKS administrators should manually verify that the RPM "libtool-ltdl" is present on all systems.
