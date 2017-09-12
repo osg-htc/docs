@@ -90,13 +90,13 @@
     
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/other/gsissh/</loc>
+     <loc>https://opensciencegrid.github.io/docs/monitoring/rsv/</loc>
      <lastmod>2017-09-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/security/lcmaps-voms-authentication/</loc>
+     <loc>https://opensciencegrid.github.io/docs/monitoring/rsv-gwms-tester/</loc>
      <lastmod>2017-09-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -106,13 +106,13 @@
     
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/monitoring/rsv/</loc>
+     <loc>https://opensciencegrid.github.io/docs/other/gsissh/</loc>
      <lastmod>2017-09-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/monitoring/rsv-gwms-tester/</loc>
+     <loc>https://opensciencegrid.github.io/docs/security/lcmaps-voms-authentication/</loc>
      <lastmod>2017-09-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
