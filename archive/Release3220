@@ -1,0 +1,355 @@
+---+ OSG Software Release 3.2.20
+
+*Release Date*: 2015-02-10
+
+---++ Summary of changes
+
+This release contains:
+   * GIP now produces information about the HTCondor-CE for BDII (See the known issues section below for a manual configuration step)
+   * [[https://www-auth.cs.wisc.edu/lists/htcondor-users/2015-February/msg00055.shtml][HTCondor 8.2.7]]
+   * [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/history.html][GlideinWMS 3.2.8]] (improved monitoring and bug fixes)
+   * Based on request of OSG VOs, a subset of EGI.EU CVMFS repositories are now accessible by default with the oasis-config RPM
+   * Several updates to osg-configure
+   * Security fixes for HTCondor 8.3.2 in upcoming
+      * Fixed an [[https://htcondor-wiki.cs.wisc.edu/index.cgi/tktview?tn=4788][input validation issue]] that allows can allow unauthenticated user to crash any HTCondor daemon
+      * Configured HTCondor to use sendmail to send notifications to avoid privilege escalation issue in mailx ([[https://access.redhat.com/security/cve/CVE-2014-8126][CVE-2014-8126]])
+
+These [[https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.2.20%20ORDER%20BY%20priority%20DESC][JIRA tickets]] were addressed in this release.
+
+Detailed changes are below. All of the documentation can be found in the [[Documentation.Release3][Release3]] area of the !TWiki.
+
+#Trash.ReleaseDocumentationKnownIssues
+---++ Known Issues
+
+The changes to implement reporting of HTCondor CE attributes to BDII are incomplete. As a workaround, a configuration file can be manually edited to enable this functionality. The code is a work-in-progress and the settings in the configuration file are likely to change. This problem will be corrected in the next release of the OSG Software Stack.
+
+To enable reporting of HTCondor attributes to BDII, add the following section to 10-gateway.ini manually:
+
+<verbatim>
+[HTCondorCE]
+; Configuration related to the OSGCE (condor_ce)
+;
+enabled = True
+;
+; ; Required only if port is different from 9619 default.
+; ; port =
+port = 9619
+</verbatim>
+
+---++ Updating to the new release
+
+---+++ Update Repositories
+
+This is a release in a newer [[Documentation.Release3.OSGReleaseSeries][OSG Release Series]].
+To update to this new series, you need [[Documentation.Release3.YumRepositories#Install_OSG_Repositories][install the new OSG repositories]].
+
+---+++ Update Software
+
+Once the new repositories are installed, you can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or glob]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed changes in this release
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-8.2.7-1.1.osg32.el5][condor-8.2.7-1.1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gip-1.3.11-4.osg32.el5][gip-1.3.11-4.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glideinwms-3.2.8-1.osg32.el5][glideinwms-3.2.8-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.13.31-1.1.osg32.el5][gratia-probe-1.13.31-1.1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gums-1.4.2-1.osg32.el5][gums-1.4.2-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=htcondor-ce-1.9-3.osg32.el5][htcondor-ce-1.9-3.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=oasis-config-7-3.osg32.el5][oasis-config-7-3.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-configure-1.0.67-1.osg32.el5][osg-configure-1.0.67-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-oasis-4-2.osg32.el5][osg-oasis-4-2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-system-profiler-1.2.0-1.osg32.el5][osg-system-profiler-1.2.0-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.4.23-1.osg32.el5][osg-test-1.4.23-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.20-1.osg32.el5][osg-version-3.2.20-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.7.22-1.osg32.el5][rsv-3.7.22-1.osg32.el5]]
+
+---++++ Enterprise Linux 6
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-8.2.7-1.1.osg32.el6][condor-8.2.7-1.1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gip-1.3.11-4.osg32.el6][gip-1.3.11-4.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glideinwms-3.2.8-1.osg32.el6][glideinwms-3.2.8-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.13.31-1.1.osg32.el6][gratia-probe-1.13.31-1.1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gums-1.4.2-1.osg32.el6][gums-1.4.2-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=htcondor-ce-1.9-3.osg32.el6][htcondor-ce-1.9-3.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=oasis-config-7-3.osg32.el6][oasis-config-7-3.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-configure-1.0.67-1.osg32.el6][osg-configure-1.0.67-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-oasis-4-2.osg32.el6][osg-oasis-4-2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-system-profiler-1.2.0-1.osg32.el6][osg-system-profiler-1.2.0-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.4.23-1.osg32.el6][osg-test-1.4.23-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.20-1.osg32.el6][osg-version-3.2.20-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.7.22-1.osg32.el6][rsv-3.7.22-1.osg32.el6]]
+
+---+++ RPMs
+
+If you wish to manually update your system, you can run yum update against the following packages:
+
+<pre class="file">
+condor condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-vm-gahp gip glideinwms-factory glideinwms-factory-condor glideinwms-glidecondor-tools glideinwms-libs glideinwms-minimal-condor glideinwms-usercollector glideinwms-userschedd glideinwms-vofrontend glideinwms-vofrontend-standalone gratia-probe-bdii-status gratia-probe-common gratia-probe-condor gratia-probe-condor-events gratia-probe-dcache-storage gratia-probe-dcache-transfer gratia-probe-debuginfo gratia-probe-glexec gratia-probe-glideinwms gratia-probe-gram gratia-probe-gridftp-transfer gratia-probe-hadoop-storage gratia-probe-metric gratia-probe-onevm gratia-probe-pbs-lsf gratia-probe-psacct gratia-probe-services gratia-probe-sge gratia-probe-slurm gratia-probe-xrootd-storage gratia-probe-xrootd-transfer gums gums-client gums-service htcondor-ce htcondor-ce-client htcondor-ce-collector htcondor-ce-condor htcondor-ce-debuginfo htcondor-ce-lsf htcondor-ce-pbs htcondor-ce-sge oasis-config osg-configure osg-configure-ce osg-configure-cemon osg-configure-condor osg-configure-gateway osg-configure-gip osg-configure-gratia osg-configure-infoservices osg-configure-lsf osg-configure-managedfork osg-configure-misc osg-configure-monalisa osg-configure-network osg-configure-pbs osg-configure-rsv osg-configure-sge osg-configure-slurm osg-configure-squid osg-configure-tests osg-oasis osg-system-profiler osg-system-profiler-viewer osg-test osg-version rsv rsv-consumers rsv-core rsv-metrics
+</pre>
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+condor-8.2.7-1.1.osg32.el5
+condor-bosco-8.2.7-1.1.osg32.el5
+condor-classads-8.2.7-1.1.osg32.el5
+condor-classads-devel-8.2.7-1.1.osg32.el5
+condor-cream-gahp-8.2.7-1.1.osg32.el5
+condor-debuginfo-8.2.7-1.1.osg32.el5
+condor-kbdd-8.2.7-1.1.osg32.el5
+condor-procd-8.2.7-1.1.osg32.el5
+condor-python-8.2.7-1.1.osg32.el5
+condor-std-universe-8.2.7-1.1.osg32.el5
+condor-vm-gahp-8.2.7-1.1.osg32.el5
+gip-1.3.11-4.osg32.el5
+glideinwms-3.2.8-1.osg32.el5
+glideinwms-factory-3.2.8-1.osg32.el5
+glideinwms-factory-condor-3.2.8-1.osg32.el5
+glideinwms-glidecondor-tools-3.2.8-1.osg32.el5
+glideinwms-libs-3.2.8-1.osg32.el5
+glideinwms-minimal-condor-3.2.8-1.osg32.el5
+glideinwms-usercollector-3.2.8-1.osg32.el5
+glideinwms-userschedd-3.2.8-1.osg32.el5
+glideinwms-vofrontend-3.2.8-1.osg32.el5
+glideinwms-vofrontend-standalone-3.2.8-1.osg32.el5
+gratia-probe-1.13.31-1.1.osg32.el5
+gratia-probe-bdii-status-1.13.31-1.1.osg32.el5
+gratia-probe-common-1.13.31-1.1.osg32.el5
+gratia-probe-condor-1.13.31-1.1.osg32.el5
+gratia-probe-condor-events-1.13.31-1.1.osg32.el5
+gratia-probe-dcache-storage-1.13.31-1.1.osg32.el5
+gratia-probe-dcache-transfer-1.13.31-1.1.osg32.el5
+gratia-probe-debuginfo-1.13.31-1.1.osg32.el5
+gratia-probe-glexec-1.13.31-1.1.osg32.el5
+gratia-probe-glideinwms-1.13.31-1.1.osg32.el5
+gratia-probe-gram-1.13.31-1.1.osg32.el5
+gratia-probe-gridftp-transfer-1.13.31-1.1.osg32.el5
+gratia-probe-hadoop-storage-1.13.31-1.1.osg32.el5
+gratia-probe-metric-1.13.31-1.1.osg32.el5
+gratia-probe-onevm-1.13.31-1.1.osg32.el5
+gratia-probe-pbs-lsf-1.13.31-1.1.osg32.el5
+gratia-probe-psacct-1.13.31-1.1.osg32.el5
+gratia-probe-services-1.13.31-1.1.osg32.el5
+gratia-probe-sge-1.13.31-1.1.osg32.el5
+gratia-probe-slurm-1.13.31-1.1.osg32.el5
+gratia-probe-xrootd-storage-1.13.31-1.1.osg32.el5
+gratia-probe-xrootd-transfer-1.13.31-1.1.osg32.el5
+gums-1.4.2-1.osg32.el5
+gums-client-1.4.2-1.osg32.el5
+gums-service-1.4.2-1.osg32.el5
+htcondor-ce-1.9-3.osg32.el5
+htcondor-ce-client-1.9-3.osg32.el5
+htcondor-ce-collector-1.9-3.osg32.el5
+htcondor-ce-condor-1.9-3.osg32.el5
+htcondor-ce-debuginfo-1.9-3.osg32.el5
+htcondor-ce-lsf-1.9-3.osg32.el5
+htcondor-ce-pbs-1.9-3.osg32.el5
+htcondor-ce-sge-1.9-3.osg32.el5
+oasis-config-7-3.osg32.el5
+osg-configure-1.0.67-1.osg32.el5
+osg-configure-ce-1.0.67-1.osg32.el5
+osg-configure-cemon-1.0.67-1.osg32.el5
+osg-configure-condor-1.0.67-1.osg32.el5
+osg-configure-gateway-1.0.67-1.osg32.el5
+osg-configure-gip-1.0.67-1.osg32.el5
+osg-configure-gratia-1.0.67-1.osg32.el5
+osg-configure-infoservices-1.0.67-1.osg32.el5
+osg-configure-lsf-1.0.67-1.osg32.el5
+osg-configure-managedfork-1.0.67-1.osg32.el5
+osg-configure-misc-1.0.67-1.osg32.el5
+osg-configure-monalisa-1.0.67-1.osg32.el5
+osg-configure-network-1.0.67-1.osg32.el5
+osg-configure-pbs-1.0.67-1.osg32.el5
+osg-configure-rsv-1.0.67-1.osg32.el5
+osg-configure-sge-1.0.67-1.osg32.el5
+osg-configure-slurm-1.0.67-1.osg32.el5
+osg-configure-squid-1.0.67-1.osg32.el5
+osg-configure-tests-1.0.67-1.osg32.el5
+osg-oasis-4-2.osg32.el5
+osg-system-profiler-1.2.0-1.osg32.el5
+osg-system-profiler-viewer-1.2.0-1.osg32.el5
+osg-test-1.4.23-1.osg32.el5
+osg-version-3.2.20-1.osg32.el5
+rsv-3.7.22-1.osg32.el5
+rsv-consumers-3.7.22-1.osg32.el5
+rsv-core-3.7.22-1.osg32.el5
+rsv-metrics-3.7.22-1.osg32.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+condor-8.2.7-1.1.osg32.el6
+condor-bosco-8.2.7-1.1.osg32.el6
+condor-classads-8.2.7-1.1.osg32.el6
+condor-classads-devel-8.2.7-1.1.osg32.el6
+condor-cream-gahp-8.2.7-1.1.osg32.el6
+condor-debuginfo-8.2.7-1.1.osg32.el6
+condor-kbdd-8.2.7-1.1.osg32.el6
+condor-procd-8.2.7-1.1.osg32.el6
+condor-python-8.2.7-1.1.osg32.el6
+condor-std-universe-8.2.7-1.1.osg32.el6
+condor-vm-gahp-8.2.7-1.1.osg32.el6
+gip-1.3.11-4.osg32.el6
+glideinwms-3.2.8-1.osg32.el6
+glideinwms-factory-3.2.8-1.osg32.el6
+glideinwms-factory-condor-3.2.8-1.osg32.el6
+glideinwms-glidecondor-tools-3.2.8-1.osg32.el6
+glideinwms-libs-3.2.8-1.osg32.el6
+glideinwms-minimal-condor-3.2.8-1.osg32.el6
+glideinwms-usercollector-3.2.8-1.osg32.el6
+glideinwms-userschedd-3.2.8-1.osg32.el6
+glideinwms-vofrontend-3.2.8-1.osg32.el6
+glideinwms-vofrontend-standalone-3.2.8-1.osg32.el6
+gratia-probe-1.13.31-1.1.osg32.el6
+gratia-probe-bdii-status-1.13.31-1.1.osg32.el6
+gratia-probe-common-1.13.31-1.1.osg32.el6
+gratia-probe-condor-1.13.31-1.1.osg32.el6
+gratia-probe-condor-events-1.13.31-1.1.osg32.el6
+gratia-probe-dcache-storage-1.13.31-1.1.osg32.el6
+gratia-probe-dcache-transfer-1.13.31-1.1.osg32.el6
+gratia-probe-debuginfo-1.13.31-1.1.osg32.el6
+gratia-probe-glexec-1.13.31-1.1.osg32.el6
+gratia-probe-glideinwms-1.13.31-1.1.osg32.el6
+gratia-probe-gram-1.13.31-1.1.osg32.el6
+gratia-probe-gridftp-transfer-1.13.31-1.1.osg32.el6
+gratia-probe-hadoop-storage-1.13.31-1.1.osg32.el6
+gratia-probe-metric-1.13.31-1.1.osg32.el6
+gratia-probe-onevm-1.13.31-1.1.osg32.el6
+gratia-probe-pbs-lsf-1.13.31-1.1.osg32.el6
+gratia-probe-psacct-1.13.31-1.1.osg32.el6
+gratia-probe-services-1.13.31-1.1.osg32.el6
+gratia-probe-sge-1.13.31-1.1.osg32.el6
+gratia-probe-slurm-1.13.31-1.1.osg32.el6
+gratia-probe-xrootd-storage-1.13.31-1.1.osg32.el6
+gratia-probe-xrootd-transfer-1.13.31-1.1.osg32.el6
+gums-1.4.2-1.osg32.el6
+gums-client-1.4.2-1.osg32.el6
+gums-service-1.4.2-1.osg32.el6
+htcondor-ce-1.9-3.osg32.el6
+htcondor-ce-client-1.9-3.osg32.el6
+htcondor-ce-collector-1.9-3.osg32.el6
+htcondor-ce-condor-1.9-3.osg32.el6
+htcondor-ce-debuginfo-1.9-3.osg32.el6
+htcondor-ce-lsf-1.9-3.osg32.el6
+htcondor-ce-pbs-1.9-3.osg32.el6
+htcondor-ce-sge-1.9-3.osg32.el6
+oasis-config-7-3.osg32.el6
+osg-configure-1.0.67-1.osg32.el6
+osg-configure-ce-1.0.67-1.osg32.el6
+osg-configure-cemon-1.0.67-1.osg32.el6
+osg-configure-condor-1.0.67-1.osg32.el6
+osg-configure-gateway-1.0.67-1.osg32.el6
+osg-configure-gip-1.0.67-1.osg32.el6
+osg-configure-gratia-1.0.67-1.osg32.el6
+osg-configure-infoservices-1.0.67-1.osg32.el6
+osg-configure-lsf-1.0.67-1.osg32.el6
+osg-configure-managedfork-1.0.67-1.osg32.el6
+osg-configure-misc-1.0.67-1.osg32.el6
+osg-configure-monalisa-1.0.67-1.osg32.el6
+osg-configure-network-1.0.67-1.osg32.el6
+osg-configure-pbs-1.0.67-1.osg32.el6
+osg-configure-rsv-1.0.67-1.osg32.el6
+osg-configure-sge-1.0.67-1.osg32.el6
+osg-configure-slurm-1.0.67-1.osg32.el6
+osg-configure-squid-1.0.67-1.osg32.el6
+osg-configure-tests-1.0.67-1.osg32.el6
+osg-oasis-4-2.osg32.el6
+osg-system-profiler-1.2.0-1.osg32.el6
+osg-system-profiler-viewer-1.2.0-1.osg32.el6
+osg-test-1.4.23-1.osg32.el6
+osg-version-3.2.20-1.osg32.el6
+rsv-3.7.22-1.osg32.el6
+rsv-consumers-3.7.22-1.osg32.el6
+rsv-core-3.7.22-1.osg32.el6
+rsv-metrics-3.7.22-1.osg32.el6
+</pre>
+
+---+++ Upcoming Packages
+
+We added or updated the following packages to the *upcoming* OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-8.3.2-1.2.osgup.el5][condor-8.3.2-1.2.osgup.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=htcondor-ce-1.9-3.osgup.el5][htcondor-ce-1.9-3.osgup.el5]]
+
+---++++ Enterprise Linux 6
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-8.3.2-1.2.osgup.el6][condor-8.3.2-1.2.osgup.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=htcondor-ce-1.9-3.osgup.el6][htcondor-ce-1.9-3.osgup.el6]]
+
+---+++ Upcoming RPMs
+
+If you wish to manually update your system, you can run yum update against the following packages:
+
+<pre class="file">
+condor condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-vm-gahp htcondor-ce htcondor-ce-client htcondor-ce-collector htcondor-ce-condor htcondor-ce-debuginfo htcondor-ce-lsf htcondor-ce-pbs htcondor-ce-sge
+</pre>
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+condor-8.3.2-1.2.osgup.el5
+condor-bosco-8.3.2-1.2.osgup.el5
+condor-classads-8.3.2-1.2.osgup.el5
+condor-classads-devel-8.3.2-1.2.osgup.el5
+condor-cream-gahp-8.3.2-1.2.osgup.el5
+condor-debuginfo-8.3.2-1.2.osgup.el5
+condor-kbdd-8.3.2-1.2.osgup.el5
+condor-procd-8.3.2-1.2.osgup.el5
+condor-python-8.3.2-1.2.osgup.el5
+condor-std-universe-8.3.2-1.2.osgup.el5
+condor-vm-gahp-8.3.2-1.2.osgup.el5
+htcondor-ce-1.9-3.osgup.el5
+htcondor-ce-client-1.9-3.osgup.el5
+htcondor-ce-collector-1.9-3.osgup.el5
+htcondor-ce-condor-1.9-3.osgup.el5
+htcondor-ce-debuginfo-1.9-3.osgup.el5
+htcondor-ce-lsf-1.9-3.osgup.el5
+htcondor-ce-pbs-1.9-3.osgup.el5
+htcondor-ce-sge-1.9-3.osgup.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+condor-8.3.2-1.2.osgup.el6
+condor-bosco-8.3.2-1.2.osgup.el6
+condor-classads-8.3.2-1.2.osgup.el6
+condor-classads-devel-8.3.2-1.2.osgup.el6
+condor-cream-gahp-8.3.2-1.2.osgup.el6
+condor-debuginfo-8.3.2-1.2.osgup.el6
+condor-kbdd-8.3.2-1.2.osgup.el6
+condor-procd-8.3.2-1.2.osgup.el6
+condor-python-8.3.2-1.2.osgup.el6
+condor-std-universe-8.3.2-1.2.osgup.el6
+condor-vm-gahp-8.3.2-1.2.osgup.el6
+htcondor-ce-1.9-3.osgup.el6
+htcondor-ce-client-1.9-3.osgup.el6
+htcondor-ce-collector-1.9-3.osgup.el6
+htcondor-ce-condor-1.9-3.osgup.el6
+htcondor-ce-debuginfo-1.9-3.osgup.el6
+htcondor-ce-lsf-1.9-3.osgup.el6
+htcondor-ce-pbs-1.9-3.osgup.el6
+htcondor-ce-sge-1.9-3.osgup.el6
+</pre>
