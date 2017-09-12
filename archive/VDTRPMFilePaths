@@ -1,0 +1,45 @@
+%LINKCSS%
+
+<!-- This is the default OSG documentation template. Please modify it in -->
+<!-- the sections indicated to create your topic.                        --> 
+
+<!-- By default the title is the WikiWord used to create this topic. If  -->
+<!-- you want to modify it to something more meaningful, just replace    -->
+<!-- %TOPIC% below with i.e "My Topic".                                  -->
+
+---+!! %SPACEOUT{ "%TOPIC%" }%
+%TOC%
+
+%STARTINCLUDE%
+%EDITTHIS%
+
+---++ Notes on files placement in the file system
+Local OSG guidelines. Refer to the [[http://fedoraproject.org/wiki/How_to_create_an_RPM_package][Fedora RPM guide]] and the [[http://www.pathname.com/fhs/][File System Hierarchy standard]] for complete information. 
+
+OSG configuration files that may be edited by a site administrator: =/etc/osg=
+
+Generated files that are not edited: =/var/lib/%{name}= (=/var/lib/osg=)
+
+Package additional non generated files (www, ...): =/usr/share/%{name}=
+
+---++ Noteworthy files
+Some files are defined in RPM Packages and used also in others.
+Sometime the placement of a file affects more developers.
+
+|*File*|*Path*|*owner*|*other RPMs*|*definition/comments*|
+| *.ini |  /etc/osg/config.d | osg-configure | ini files used by osg-configure and gip for configuration ||
+| index.html | /usr/share/osg/www/htdocs/index.html | %RED%?%ENDCOLOR% | osg-site-web-page | main OSG web page for a site |
+
+---++ Other files
+Less important files, you can list them here if you want to provide examples or would like some comments. 
+|*File*|*Path*|*owner*|*other RPMs*|*comments*|
+| siteindexconfig.ini | /etc/osg | osg-site-web-page | ||
+|index.html|/usr/share/osg-site-web-page/www/|osg-site-web-page | | site information page|
+
+
+
+
+%STOPINCLUDE%
+
+
+-- Main.MarcoMambelli - 22 Jul 2011
