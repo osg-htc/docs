@@ -1,0 +1,578 @@
+%DOC_STATUS_TABLE%
+https://twiki.grid.iu.edu/twiki/pub/Storage/WebHome/images.jpg
+
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+The scripts described here provide for command line operation of the [[OsgStorageDiscoveryTool][OSG Discovery tool]]. 
+
+---++ Cache Scripts
+
+---+++ load_bdii_cache
+
+Loads the cache with information needed by the discovery tools. Removes all previous cache info.  For the latest RPM version, note that the cache is stored per user in their home directory at =~/.osg-discovery/bdii.xml=.
+
+*Script Name*
+
+load_bdii_cache
+
+
+*Usage*
+
+<pre>
+load_bdii_cache [ --verbose ]
+</pre>
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+| verbose | Print search strings | no |
+
+*Example Output*
+<verbatim>
+[xquery]$ bin/load_bdii_cache --verbose
+Loading cache /home/tdh/testing/discovery-1.0.5/cache/bdii.xml
+//GlueSE/GlueSA/GlueVOInfo[@GlueVOInfoAccessControlBaseRule]
+//GlueSE/GlueSEControlProtocol[@GlueSEControlProtocolVersion='2.2.0']
+//GlueCESEBind/@GlueCESEBindMountInfo
+//GlueSE/GlueSA/@GlueSAFreeOnlineSize
+//GlueSE/GlueSEAccessProtocol[@GlueSEAccessProtocolType='file']
+//GlueSE/GlueSEControlProtocol/@GlueSEControlProtocolEndpoint
+//GlueSE/GlueSA/GlueVOInfo/@GlueVOInfoPath
+//GlueCESEBind/@dn
+//GlueSE/@GlueSEUniqueID
+SEARCH //GlueSE/GlueSA/GlueVOInfo/@GlueVOInfoAccessControlBaseRule
+SEARCH //GlueSE/GlueSEControlProtocol/@GlueSEControlProtocolVersion='2.2.0'
+SEARCH //GlueCESEBind/@GlueCESEBindMountInfo
+SEARCH //GlueSE/GlueSA/@GlueSAFreeOnlineSize
+SEARCH //GlueSE/GlueSEAccessProtocol/@GlueSEAccessProtocolType='file'
+SEARCH //GlueSE/GlueSEControlProtocol/@GlueSEControlProtocolEndpoint
+SEARCH //GlueSE/GlueSA/GlueVOInfo/@GlueVOInfoPath
+SEARCH //GlueCESEBind/@dn
+SEARCH //GlueSE/@GlueSEUniqueID
+(&(objectclass=GlueVOInfo)(GlueVOInfoAccessControlBaseRule)) GlueVOInfoAccessControlBaseRule objectclass 
+objectclass=GlueVOInfo GlueVOInfoPath objectclass 
+(&(objectclass=GlueSEControlProtocol)(GlueSEControlProtocolVersion=2.2.0)) GlueSEControlProtocolVersion objectclass 
+objectclass=GlueSEControlProtocol GlueSEControlProtocolEndpoint objectclass 
+objectclass=GlueCESEBind GlueCESEBindMountInfo objectclass 
+objectclass=GlueCESEBind dn objectclass 
+objectclass=GlueSA GlueSAFreeOnlineSize objectclass 
+(&(objectclass=GlueSEAccessProtocol)(GlueSEAccessProtocolType=file)) GlueSEAccessProtocolType objectclass 
+objectclass=GlueSE GlueSEUniqueID objectclass 
+Done.
+</verbatim>
+
+---+++ update_bdii_cache
+
+Updates the cache with information needed by the discovery tools. Merges with previous cache info.
+
+*Script Name*
+
+update_bdii_cache
+
+*Usage*
+
+<pre>
+update_bdii_cache  [ --verbose ]
+</pre>
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+| verbose | Print search strings | no |
+
+*Example Output*
+<verbatim>
+[xquery]$ bin/update_bdii_cache
+Updating cache /home/tdh/testing/discovery-1.0.5/cache/bdii.xml
+Done.
+</verbatim>
+
+---++ SRM-related Search Scripts
+
+These scripts compose command lines for SRM and gridftp operations based on searches in the OSG BDII. All storage-related commands include the "--show_storage_element_id" option. When present, the storage element ID and the result of the search is shown on each line, in columnar format.
+
+Usage and examples of the scripts is as follows.
+
+
+---+++ get_surl
+
+Returns a list of example site URLS for Storage Elements on which the specified VO is authorized.
+
+*Script Name*
+
+get_surl
+
+*Usage*
+
+<pre>
+get_surl --vo &lt;VO name&gt; [--storage_element_id &lt;GlueSEUniqueID&gt;] [--free_online_size &lt;GlueSAFreeOnlineSize&gt;] [--show_storage_element_id] 
+</pre>
+ 
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+|vo                             |Virtual Organization name |yes|
+|storage_element_id             |Storage Element ID. Glue schema attribute is !GlueSEUniqueID. |no|
+|free_online_size               |Restrict to SEs with minimum available space, in MB. Glue schema attribute is !GlueSAFreeOnlineSize. |no|
+|show_storage_element_id        |Show the Storage Element ID for each surl.|no|
+
+
+*Example Output*
+<verbatim>
+[xquery]$  bin/get_surl --vo engage --show_storage_element_id
+STORAGE ELEMENT ID            SURL                                                                                                          
+bsrm-1.t2.ucsd.edu            srm://bsrm-1.t2.ucsd.edu:8443/srm/v2/server?SFN=/hadoop/engage/TESTFILE                                       
+charm.ucr.edu                 srm://charm.ucr.edu:10443/srm/v2/server?SFN=/data/bottom/cms/TESTFILE                                         
+cit-se.ultralight.org         srm://cit-se.ultralight.org:8443/srm/v2/server?SFN=/mnt/hadoop/osg/engage/TESTFILE                            
+cmssrm.hep.wisc.edu           srm://cmsdcache03.hep.wisc.edu:8443/srm/managerv2?SFN=/pnfs/hep.wisc.edu/data5/engage/TESTFILE                
+dcsrm.usatlas.bnl.gov         srm://dcsrm.usatlas.bnl.gov:8443/srm/managerv2?SFN=/pnfs/usatlas.bnl.gov/osg/engage/TESTFILE                  
+ff-se.unl.edu                 srm://ff-se.unl.edu:8443/srm/v2/server?SFN=/panfs/panasas/CMS/data/engage/TESTFILE                            
+gk03.atlas-swt2.org           srm://gk03.atlas-swt2.org:8443/srm/v2/server?SFN=/xrd/vos/engage/TESTFILE                                     
+grid16.racf.bnl.gov           srm://grid16.racf.bnl.gov:8443/srm/managerv2?SFN=/pnfs/itb.bnl.gov/data/public//TESTFILE                      
+red-srm1.unl.edu              srm://red-srm1.unl.edu:8443/srm/v2/server?SFN=/mnt/hadoop/public/engage/TESTFILE                              
+se.grid.unesp.br              srm://se.grid.unesp.br:8443/srm/v2/server?SFN=/store/engage/TESTFILE                                          
+se01.cmsaf.mit.edu            srm://se01.cmsaf.mit.edu:8443/srm/managerv2?SFN=/pnfs/cmsaf.mit.edu/t2bat//TESTFILE                           
+se1.accre.vanderbilt.edu      srm://se1.accre.vanderbilt.edu:6288/srm/v2/server?SFN=/store/user/engage/TESTFILE                             
+se1.phys.uconn.edu            srm://se1.phys.uconn.edu:8443/srm/managerv2?SFN=/engage/TESTFILE                                              
+srmb.ihepa.ufl.edu            srm://srmb.ihepa.ufl.edu:8443/srm/v2/server?SFN=/lustre/raidl/user/engage/TESTFILE                            
+srm-dcache.rcac.purdue.edu    srm://srm-dcache.rcac.purdue.edu:8443/srm/managerv2?SFN=/pnfs/rcac.purdue.edu/data/VO/engage/TESTFILE  
+</verbatim>
+
+---+++ get_srmcp_cmd
+
+Returns a list of example srmcp commands for Storage Elements on which the specified VO is authorized. The copy command client is the FNAL implmentation.
+
+
+*Script Name*
+get_srmcp_cmd 
+
+*Usage*
+<pre>
+get_srmcp_cmd --vo &lt;VO name&gt; [--storage_element_id &lt;GlueSEUniqueID&gt;] [--free_online_size &lt;GlueSAFreeOnlineSize&gt;] [--space_token &lt;Token from space reservation&gt;] [--show_storage_element_id] 
+</pre>
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+|vo                             |Virtual Organization name |yes|
+|storage_element_id             |Storage Element ID. Glue schema attribute is !GlueSEUniqueID. |no|
+|free_online_size               |Restrict to SEs with minimum available space, in MB. Glue schema attribute is !GlueSAFreeOnlineSize. |no|
+|space_token                    |Space Token. Numerical value returned by server when space reservation is made. |no|
+|show_storage_element_id        |Show the Storage Element ID for each srmcp command.|no|
+
+
+*Example Output*
+<verbatim>
+[xquery]$  get_srmcp_cmd --vo engage --space_token 12345
+srmcp -srm_protocol_version=2 -space_token=12345 file:////path/to/file srm://abitibi.sbgrid.org:8443/srm/managerv2?SFN=/opt/osg-shared/se/data/vo/vo/engage/TESTFILE
+srmcp -srm_protocol_version=2 -space_token=12345 file:////path/to/file srm://sigmorgh.hpcc.ttu.edu:49443/srm/v2/server.?SFN=/mnt/hep/TESTFILE
+srmcp -srm_protocol_version=2 -space_token=12345 file:////path/to/file srm://cit-se2.ultralight.org:8443/srm/v2/server?SFN=/mnt/hadoop/osg/TESTFILE
+srmcp -srm_protocol_version=2 -space_token=12345 file:////path/to/file srm://ff-se.unl.edu:8443/srm/v2/server?SFN=/panfs/panasas/CMS/data/engage/TESTFILE
+srmcp -srm_protocol_version=2 -space_token=12345 file:////path/to/file srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/engage/TESTFILE
+srmcp -srm_protocol_version=2 -space_token=12345 file:////path/to/file srm://osg-east.hms.harvard.edu:10443/srm/v2/server?SFN=/osg/storage/data/engage/TESTFILE
+srmcp -srm_protocol_version=2 -space_token=12345 file:////path/to/file srm://dcache07.unl.edu:8443/srm/v2/server?SFN=/mnt/hadoop/user/engage/TESTFILE
+</verbatim>
+
+---+++ get_srm_copy_cmd
+
+Returns a list of example srm_copy commands for Storage Elements on which the specified VO is authorized. The copy command client is the LBL implmentation.
+
+*Script Name*
+
+get_srm_copy_cmd
+
+*Usage*
+
+<pre>
+get_srm_copy_cmd --vo &lt;VO name&gt; [--storage_element_id &lt;GlueSEUniqueID&gt;] [--free_online_size &lt;GlueSAFreeOnlineSize&gt;] [--space_token &lt;Token from space reservation&gt;] [--show_storage_element_id]
+</pre>
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+|vo                             |Virtual Organization name |yes|
+|storage_element_id             |Storage Element ID. Glue schema attribute is !GlueSEUniqueID. |no|
+|free_online_size               |Restrict to SEs with minimum available space, in MB. Glue schema attribute is !GlueSAFreeOnlineSize. |no|
+|space_token                    |Space Token. Numerical value returned by server when space reservation is made. |no|
+|show_storage_element_id        |Show the Storage Element ID for each srm_copy command.|no|
+
+
+*Example Output*
+<verbatim>
+[xquery]$ get_srm_copy_cmd --vo engage --space_token 12345
+srm-copy file:////path/to/file srm://abitibi.sbgrid.org:8443/srm/managerv2?SFN=/opt/osg-shared/se/data/vo/vo/engage/TESTFILE -spacetoken 12345
+srm-copy file:////path/to/file srm://sigmorgh.hpcc.ttu.edu:49443/srm/v2/server.?SFN=/mnt/hep/TESTFILE -spacetoken 12345
+srm-copy file:////path/to/file srm://cit-se2.ultralight.org:8443/srm/v2/server?SFN=/mnt/hadoop/osg/TESTFILE -spacetoken 12345
+srm-copy file:////path/to/file srm://ff-se.unl.edu:8443/srm/v2/server?SFN=/panfs/panasas/CMS/data/engage/TESTFILE -spacetoken 12345
+srm-copy file:////path/to/file srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/engage/TESTFILE -spacetoken 12345
+srm-copy file:////path/to/file srm://dcache07.unl.edu:8443/srm/v2/server?SFN=/mnt/hadoop/user/engage/TESTFILE -spacetoken 12345
+</verbatim>
+
+
+---+++ get_srm_reserve_space_cmd
+
+Returns a list of example srm_reserve_space commands for Storage Elements on which the specified VO is authorized. The space reservation client is the FNAL implementation.
+
+*Script Name*
+
+get_srm_reserve_space_cmd
+
+
+*Usage*
+<pre>
+get_srm_reserve_space_cmd --vo &lt;VO name&gt; [--storage_element_id &lt;GlueSEUniqueID&gt;] [--free_online_size &lt;GlueSAFreeOnlineSize&gt;] --requested_size &lt;Size requested&gt; --guaranteed_size &lt;Size to be guaranteed&gt; [--retention_policy &lt;REPLICA|CUSTODIAL|OUTPUT&gt;] [--lifetime &lt;Time to expiration&gt;] [--description &lt;Space token description&gt;] [--show_storage_element_id] 
+</pre>
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+|vo                            |Virtual Organization name | yes |
+|storage_element_id            |Storage Element ID. Glue schema attribute is !GlueSEUniqueID. | no |
+|free_online_size              |Restrict to SEs with minimum available space, in MB. Glue schema attribute is !GlueSAFreeOnlineSize. | no |
+|requested_size                |Desired size of reservation, in bytes. | yes |
+|guaranteed_size               |Minimum acceptable size of reservation, in bytes. | yes |
+|retention_policy              |Policy under which data written to the reservation shall be kept.| no | 
+|lifetime                      |Time in seconds to expiration of reservation, -1 for no expiration. | no |
+|description                   |User-supplied word associated with the reservation. | no |
+|show_storage_element_id       |Show the Storage Element ID for each srm_reserve_space command.| no |
+
+*Example Output*
+<verbatim>
+[xquery]$ get_srm_reserve_space_cmd --vo engage --description mydesc --requested_size 3000 --guaranteed_size 2000 --lifetime 1000
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://bsrm-1.t2.ucsd.edu:8443/srm/v2/server              
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://charm.ucr.edu:10443/srm/v2/server                  
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://cit-se.ultralight.org:8443/srm/v2/server           
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://cmsdcache03.hep.wisc.edu:8443/srm/managerv2        
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://dcsrm.usatlas.bnl.gov:8443/srm/managerv2           
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://ff-se.unl.edu:8443/srm/v2/server                   
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://gk03.atlas-swt2.org:8443/srm/v2/server             
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://grid16.racf.bnl.gov:8443/srm/managerv2             
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://red-srm1.unl.edu:8443/srm/v2/server                
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://se.grid.unesp.br:8443/srm/v2/server                
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://se01.cmsaf.mit.edu:8443/srm/managerv2              
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://se1.accre.vanderbilt.edu:6288/srm/v2/server        
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://se1.phys.uconn.edu:8443/srm/managerv2              
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://srmb.ihepa.ufl.edu:8443/srm/v2/server              
+srm-reserve-space -space_desc=mydesc -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 srm://srm-dcache.rcac.purdue.edu:8443/srm/managerv2r
+</verbatim>
+
+---+++ get_srm_sp_reserve_cmd
+
+Returns a list of example srm-sp-reserve commands for Storage Elements on which the specified VO is authorized. The space reservation client is the LBL implmentation.
+
+*Script Name*
+
+get_srm_sp_reserve_cmd
+
+*Usage*
+
+<pre>
+get_srm_sp_reserve_cmd --vo &lt;VO name&gt; [--storage_element_id &lt;GlueSEUniqueID&gt;] [--free_online_size &lt;GlueSAFreeOnlineSize&gt;] --requested_size &lt;Size requested&gt; [--guaranteed_size &lt;Size to be guaranteed&gt;] [--lifetime &lt;Time to expiration&gt;] [--description &lt;Space token description&gt;] [--show_storage_element_id] 
+</pre>
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+|vo                             |Virtual Organization name |yes|
+|storage_element_id             |Storage Element ID. Glue schema attribute is !GlueSEUniqueID. |no|
+|free_online_size               |Restrict to SEs with minimum available space, in MB. Glue schema attribute is !GlueSAFreeOnlineSize. |no|
+|requested_size                 |Desired size of reservation, in bytes. |yes|
+|guaranteed_size                |Minimum acceptable size of reservation, in bytes. |no|
+|lifetime                       |Time in seconds to expiration of reservation, -1 for no expiration. |no|
+|description                    |User-supplied word associated with the reservation. |no|
+|show_storage_element_id        |Show the Storage Element ID for each srm_sp_reserve command.|no|
+
+*Example Output*
+<verbatim>
+[xquery]$ bin/get_srm_sp_reserve_cmd --vo engage --description mydesc --requested_size 3000 --guaranteed_size 2000 --lifetime 1000
+srm-sp-reserve -serviceurl srm://bsrm-1.t2.ucsd.edu:8443/srm/v2/server -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc               
+srm-sp-reserve -serviceurl srm://charm.ucr.edu:10443/srm/v2/server -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc                   
+srm-sp-reserve -serviceurl srm://cit-se.ultralight.org:8443/srm/v2/server -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc            
+srm-sp-reserve -serviceurl srm://cmsdcache03.hep.wisc.edu:8443/srm/managerv2 -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc         
+srm-sp-reserve -serviceurl srm://dcsrm.usatlas.bnl.gov:8443/srm/managerv2 -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc            
+srm-sp-reserve -serviceurl srm://ff-se.unl.edu:8443/srm/v2/server -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc                    
+srm-sp-reserve -serviceurl srm://gk03.atlas-swt2.org:8443/srm/v2/server -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc              
+srm-sp-reserve -serviceurl srm://grid16.racf.bnl.gov:8443/srm/managerv2 -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc              
+srm-sp-reserve -serviceurl srm://red-srm1.unl.edu:8443/srm/v2/server -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc                 
+srm-sp-reserve -serviceurl srm://se.grid.unesp.br:8443/srm/v2/server -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc                 
+srm-sp-reserve -serviceurl srm://se01.cmsaf.mit.edu:8443/srm/managerv2 -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc               
+srm-sp-reserve -serviceurl srm://se1.accre.vanderbilt.edu:6288/srm/v2/server -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc         
+srm-sp-reserve -serviceurl srm://se1.phys.uconn.edu:8443/srm/managerv2 -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc               
+srm-sp-reserve -serviceurl srm://srmb.ihepa.ufl.edu:8443/srm/v2/server -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc               
+srm-sp-reserve -serviceurl srm://srm-dcache.rcac.purdue.edu:8443/srm/managerv2 -desired_size=3000 -guaranteed_size=2000 -lifetime=1000 -space_desc=mydesc
+</verbatim>
+
+
+---+++ get_storage_element_id
+
+Returns a list of IDs for gridftp and SRM Storage Elements on which the specified VO is authorized.
+
+*Script Name*
+get_storage_element_id
+
+
+*Usage*
+
+<pre>
+get_storage_element_id --vo &lt;VO name&gt; [--free_online_size &lt;GlueSAFreeOnlineSize&gt;] [--show_site_name] 
+</pre>
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+|vo                     |Virtual Organization name |yes|
+|free_online_size       |Restrict to SEs with minimum available space, in MB. Glue schema attribute is !GlueSAFreeOnlineSize. |no|
+|show_site_name |Show the site name for each Storage Element ID.|no|
+
+*Example Output*
+<verbatim>
+[xquery]$  get_storage_element_id --vo ligo --show_site_name
+SITE NAME                     STORAGE ELEMENT ID                      
+BNL-ATLAS                     BNL-ATLAS_classicSE                     
+BNL-ATLAS-ITB                 BNL-ATLAS-ITB_classicSE                 
+UCSDT2                        bsrm-1.t2.ucsd.edu                      
+CIT_CMS_T2                    cit-se.ultralight.org                   
+GLOW                          cmssrm.hep.wisc.edu                     
+BNL-ATLAS                     dcsrm.usatlas.bnl.gov                   
+Firefly                       ff-se.unl.edu                           
+FNAL_FERMIGRID                FNAL_FERMIGRID_classicSE                
+FNAL_GPGRID_1                 FNAL_FERMIGRID_classicSE                
+...   
+</verbatim>
+
+---+++ get_srm_storage_element_id 
+Returns a list of IDs for SRM Storage Elements on which the specified VO is authorized.
+
+*Script Name*
+
+get_srm_storage_element_id
+
+*Usage*
+
+<pre>
+get_srm_storage_element_id --vo &lt;VO name&gt; [--free_online_size &lt;GlueSAFreeOnlineSize&gt;] [--show_site_name] 
+</pre>
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+|vo                     |Virtual Organization name |yes|
+|free_online_size       |Restrict to SEs with minimum available space, in MB. Glue schema attribute is !GlueSAFreeOnlineSize. |no|
+|show_site_name |Show the site name for each Storage Element ID.|no|
+
+*Example Output*
+<verbatim>
+[xquery]$ get_srm_storage_element_id --vo ligo --show_site_name
+SITE NAME           STORAGE ELEMENT ID            
+UCSDT2              bsrm-1.t2.ucsd.edu            
+CIT_CMS_T2          cit-se.ultralight.org         
+GLOW                cmssrm.hep.wisc.edu           
+BNL-ATLAS           dcsrm.usatlas.bnl.gov         
+Firefly             ff-se.unl.edu
+...
+</verbatim>
+
+---+++ get_site_name
+
+Returns a list of sites that authorize Storage Element access for the specified VO. Or, find the site name for the storage element with the specified storage element id.
+
+*Script Name*
+get_site_name
+
+*Usage*
+
+<pre>
+get_site_name --vo &lt;VO name&gt; | --storage_element_id &lt;GlueSEUniqueID&gt; [--show_storage_element_id] 
+</pre>
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+|vo                             |Virtual Organization name |no*|
+|storage_element_id             |Storage Element ID. Glue schema attribute is !GlueSEUniqueID. |no*|
+|show_storage_element_id        |Show the Storage Element ID for each site name.|no|
+
+*One of the two options must be specified.
+
+*Example Output*
+<verbatim>
+[xquery]$ get_site_name --storage_element_id abitibi.sbgrid.org
+SBGrid-Harvard-Exp
+</verbatim>
+
+---+++ get_site_name_for_seid
+
+Returns the site name for a storage element with the given id. See the command get_storage_element_id for finding Storage Element IDs by VO name.
+
+*Script Name*
+
+get_site_name_for_seid
+
+
+*Usage*
+<pre>
+get_site_name_for_seid --storage_element_id &lt;GlueSEUniqueID&gt; 
+</pre>
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+|storage_element_id     |Storage Element ID. Glue schema attribute is !GlueSEUniqueID.|yes|
+
+
+*Example Output*
+<verbatim>
+[xquery]$ get_site_name_for_seid --storage_element_id abitibi.sbgrid.org
+"SBGrid-Harvard-Exp"
+</verbatim>
+
+
+---++ gridftp-related Search Scripts
+
+---+++ get_gridftp_url
+
+Returns a list of example transfer URLS for gridftp Storage Elements on which the specified VO is authorized.
+
+*Script Name*
+
+get_gridftp_url
+
+
+
+*Usage*
+<pre>
+get_gridftp_url--vo &lt;VO name&gt; [--storage_element_id &lt;GlueSEUniqueID&gt;] [--free_online_size &lt;GlueSAFreeOnlineSize&gt;] [--show_storage_element_id] 
+</pre>
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+|vo                             |Virtual Organization name |yes|
+|storage_element_id             |Storage Element ID. Glue schema attribute is !GlueSEUniqueID. |no|
+|free_online_size               |Restrict to SEs with minimum available space, in MB. Glue schema attribute is !GlueSAFreeOnlineSize. |no|
+|show_storage_element_id        |Show the Storage Element ID for each gridftp url.|no|
+
+
+*Example Output*
+<verbatim>
+[xquery]$ get_gridftp_url --vo engage --show_storage_element_id
+STORAGE ELEMENT ID                      GRIDFTP URL                                                                               
+BNL-ATLAS_classicSE                     gsiftp://gridgk01.racf.bnl.gov:2811/usatlas/prodjob/share//TESTFILE                       
+BNL-ATLAS-ITB_classicSE                 gsiftp://gridtest01.racf.bnl.gov:2811/usatlas/prodjob/share//TESTFILE                     
+Clemson-Palmetto_classicSE              gsiftp:///projsmall/osg/data:2811/projsmall/osg/data/TESTFILE                             
+cmssrm.hep.wisc.edu                     gsiftp://g10n01.hep.wisc.edu:2811/pnfs/hep.wisc.edu/data5/engage/TESTFILE                 
+dcsrm.usatlas.bnl.gov                   gsiftp://192.12.15.226:2811/pnfs/usatlas.bnl.gov/osg/engage/TESTFILE                      
+ff-se.unl.edu                           gsiftp://ff-gridftp.unl.edu:2811/panfs/panasas/CMS/data/engage/TESTFILE                   
+FNAL_FERMIGRID_classicSE                gsiftp://fermigridosg1.fnal.gov:2811/grid/data/TESTFILE                                   
+FNAL_FERMIGRID_classicSE                gsiftp://fnpcosg1.fnal.gov:2811/grid/data/TESTFILE                                        
+gk03.atlas-swt2.org                     gsiftp://gk04.atlas-swt2.org:2811/xrd/vos/engage/TESTFILE                                 
+GLOW_classicSE                          gsiftp://cmsgrid01.hep.wisc.edu:2811/afs/hep.wisc.edu/osg/data/TESTFILE
+</verbatim>
+
+
+---+++ get_gridftp_storage_element_id
+
+Returns a list of IDs for gridftp Storage Elements on which the specified VO is authorized.
+
+*Script Name*
+
+get_gridftp_storage_element_id 
+
+
+
+
+*Usage*
+<pre>
+get_gridftp_storage_element_id --vo &lt;VO name&gt; [--free_online_size &lt;GlueSAFreeOnlineSize&gt;] [--show_site_name] 
+</pre>
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+|vo                     |Virtual Organization name |yes|
+|free_online_size       |Restrict to SEs with minimum available space, in MB. Glue schema attribute is !GlueSAFreeOnlineSize. |no|
+|show_site_name |Show the site name for each Storage Element ID.|no|
+
+
+*Example Output*
+<verbatim>
+[xquery]$ get_gridftp_storage_element_id --vo ilc
+BNL-ATLAS_classicSE                     
+BNL-ATLAS-ITB_classicSE                 
+dcsrm.usatlas.bnl.gov                   
+FNAL_FERMIGRID_classicSE                
+gk03.atlas-swt2.org                     
+GRASE-CSE-MAGIC_classicSE               
+GridUNESP_CENTRAL_classicSE             
+LIGO_UWM_NEMO_classicSE                 
+NYSGRID_CORNELL_NYS1_classicSE          
+NYSGRID-CCR-U2_classicSE                
+RENCI-Engagement_classicSE              
+se01.cmsaf.mit.edu                      
+SWT2_CPB_classicSE                      
+UColorado_HEP_classicSE                 
+UConn-OSG_classicSE                     
+UCSDT2_classicSE                        
+UTA_SWT2_classicSE                      
+WQCG-Harvard-OSG_classicSE
+</verbatim>
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = DouglasStrain
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = Scientist
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = NehaSharma
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = NehaSharma
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+
+-- Main.DouglasStrain - 11 Oct 2011

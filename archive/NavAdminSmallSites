@@ -1,0 +1,185 @@
+%DOC_STATUS_TABLE%
+
+---+!! Small Sites and Campus Infrastructures
+%TOC%
+
+---+ About this document
+This page collects a series of pointers that could be useful specially for sites that are not part of a bigger infrastructure or do not have already a clear plan on how to build the site.
+
+This page is meant to complement the content of OSG Release 3 documentation, based on RPM packages. For a complete guide based on OSG 1.2 Pacman packages see the the [[Trash/Tier3.WebHome][Tier 3 documents]].
+
+Some of the ideas below can be useful to anyone planning a cluster in OSG, including Campus Grids.  Some apply only when your resources are federated beyond the border of your institution to the [[Documentation.WhatIsOSG][OSG Production Grid]].
+
+If you are interested in Campus Infrastructures (aka Campus Grids), read the sections [[#Concepts][Concepts]], [[#OSG_Campus_Infrastructures][Campus Infrastructures]] and [[#Getting_help][Getting help]]. If you are interested in the Production Grid, then all the sections except Campus Infrastructures one will be of interest.
+
+---+ Concepts
+The [[Documentation.WhatIsOSG][OSG]] provides software and procedures to federate resources on a local, community scale (the OSG Campus Grids), or on a larger, cross-institution scale (the OSG Production Grid).
+
+Campus Infrastructures (aka Campus Grids):
+   * trust model based on local authentication (login to resources)
+   * can harvest the resources a scientist has access to
+   * no need to use privileged (root/administrator) accounts
+   * small footprint
+
+Production Grid:
+   * trust model based on x509 PKI infrastructure ([[Documentation.CertificateWhatIs][Grid certificates]])
+   * [[Documentation.WhatIsVO][Virtual Organization]] (VO) based model: resource owners grant access and privileges to VOs and groups; VOs manage user membership and roles
+   * VOs provide resources and user communities
+   * opportunistic use of resources (i.e. using resources owned by others)
+   * persistent services to access resources (CE, SE, ... see below)
+
+OSG resources (sites) typically provide one or more of the following capabilities:
+   * access to local computational resources using a batch queue
+   * interactive access to local computational resources
+   * storage of large amounts of data using a distributed file system
+   * access to external computing resources on the Campus or Production Grid
+   * the ability to transfer large datasets to and from the Production Grid
+
+A site can also offer computing resources and data to fellow grid users, e.g. on the OSG Production Grid.
+
+In a (OSG) cluster, there are three classes of nodes:
+   1 Batch queue worker nodes that execute jobs submitted via the batch queue. 
+   1 Shared Interactive nodes where users can log in directly and run their applications. 
+   1 Nodes that serve various roles such as batch queues, file systems, or other middleware components. In some cases, one node can host multiple roles while in other cases for a variety of reasons (e.g. security or performance), nodes should be set aside for single purpose uses.
+
+Important components (or roles) may include, depending on your configuration: a shared file system server (e.g. NFSv4), a Batch Queue (e.g. [[InstallCondor][Condor]]), a Distributed File System (e.g. [[XrootdOverview][Xroot]]); and, especially if you are interested in the Production Grid, a [[NavAdminStorage][Storage Element (SE)]], a [[NavAdminCompute][Compute Element (CE)]], and [[NavTechGUMS][GUMS]]. <!-- InstallGums -->.
+
+The [[Operations.OIMTermDefinition][OIM Definitions document]] explains the OSG resources as defined in the OSG blueprint.
+
+The next section provides information on setting up and using OSG Campus Infrastructures, the following sections are about generic cluster management and OSG Production Grids.
+
+---+ OSG Campus Infrastructures
+A Campus Infrastructure is a resource sharing capability that enables faculty, students, and researchers to submit jobs to multiple computational resources simultaneously using only their campus identity management credentials. A campus infrastructure is not limited to resources on a campus but incorporates the ability to use resources directly from other campuses and can also tie into resources from the national cyberinfrastructure such as the Open Science Grid ([[Main.WebHome][OSG]]) or [[https://www.xsede.org/][XSEDE]] resources.
+
+[[Trash/Trash/Trash/Trash/CampusGrids/BoSCO][BOSCO]] is a Condor based tool allowing scientists to manage large numbers (~1000s) of job submissions to the different resources that they can access. 
+BOSCO is the preferred Campus Grid setup.
+
+The [[Documentation.CampusFactoryInstall][Campus Factory]] is a component of the OSG Campus Grid Infrastructure.
+The Campus Factory allows job submission access to a single job queue (PBS or LSF) by creating an overlay allowing Condor jobs to flock into the queue as (PBS or LSF) user jobs owned by the user running the Campus Factory.
+The Campus Factory and the infrastructure described in  [[Documentation.CampusFactoryInstall][its install document]] allows joining different Condor, PBS and LSF clusters as a single Condor pool available for the Campus Grid users.
+This setup is more complex and heavy than BOSCO and it is recommended only when its added features are required.
+
+---+ Requirements and Planning
+Here some initial notes:
+
+   * The [[SitePlanning][site planning document]] can help you decide what you want and which hardware you may need
+   * This [[Documentation.ClusterTopology][topology document]] gives an idea of possible network configurations
+   * The [[FirewallInformation][Firewall information document]] provides information about network requirements (open ports, ...) needed for the OSG services. Additional information about specific network requirements is in the install document of each OSG software component
+   * HostTimeSetup will explain how to synchronize your hosts, essential for a distributed system like OSG
+
+To start working on the OSG Production Grid you will *need* [[Documentation.CertificateWhatIs][x509 certificates]]:
+   * [[CertificateUserGet][A personal grid certificate]]
+   * [[Trash.ReleaseDocumentationGetHostServiceCertificates][Certificates for your hosts and services]]
+
+And, once you decide the services provided by your resources and their names, you will have to register them in the OSG catalog, [[https://oim.grid.iu.edu/oim/home][OIM]] (requires a personal grid certificate):
+   * [[Operations.OIMRegistrationInstructions][OIM Registrations Instructions]] explains how to register your resources
+
+---+ Installation and Setup
+In Release3, we do not cover subjects like accounts, SSH and NFS configuration (in red in Figure 1). You can still see the notes about these in the [[Trash/Tier3.WebHome][Tier 3 Web documents]]. 
+
+   * Figure 1 - Stack of the available modules is presented: The Hardware, OS setup, and networking are in red; Condor (or other batch scheduler) is in yellow; Distributed storage and Production Grid components are in blue.  Experiment specific software would sit on top of this diagram and is not shown.  Lower modules provide services to the modules sitting above or inside them.  The included boxes enhance/modify the contents of the container.  Dashed boxes are optional (if used, they affect the components on top of them, but they are not required). <br />
+     <img src="%ATTACHURLPATH%/cluster-stack.png" alt="cluster-stack.png" width='459' height='171' />    
+
+The following steps refer to OSG Release 3 software that is supported on %SUPPORTED_OS% (currently most of our testing has been done on Scientific Linux 5).  You will need root access for Release3 installation; otherwise, you'll have to use the Pacman installation documented in [[Trash/Tier3.WebHome][Tier3]].
+
+Each cluster needs a _Local Resource Manager_ (LRM, also called _queue manager_ or _scheduler_) to schedule the jobs on the worker nodes. Common LRMs are Condor, LSF, PBS, SGE. if you have a preferred one you can use it.  If you don't have a prefered one, you can install Condor as documented in InstallCondor. SetupCondorAdvanced presents some unusual but useful Condor configurations like the use of [[SetupCondorAdvanced#How_to_setup_Condor_s_Hawkeye_mo][Condor Startd Cron]] (sometimes also called Hawkeye).
+
+Additional components are documented in the [[Documentation.Release3.WebHome][Release3]]. These include:
+   * The [[NavAdminStorage][Storage Element (SE)]]
+   * The [[NavAdminCompute][Compute Element (CE)]]: if you just installed Condor choose  "If you are using Condor"/"Configuring your CE to use Condor" and skip the other batch systems in InstallComputeElement
+   * The [[InstallWNClient][Worker Node client]] contains a small set of tools (30MB) that most grid jobs expect to find
+   * The Grid User Mapping Service ([[NavTechGUMS][GUMS]]) provides authentication services.  See [[Documentation.AboutGums][About GUMS]] for more infomation.
+   * The [[RsvOverview][RSV monitoring]] service provides a scalable and easy to maintain resource/service monitoring infrastructure for an OSG site admin
+   * The [[InstallOSGClient][OSG client]] for the user interface (interactive nodes). 
+
+---+ Operation
+Some recommendations about day to day operation:
+   * You can check you resources on [[http://myosg.grid.iu.edu/about][MyOSG]]
+   * [[EnvironmentVariables][These variables]] should be in the environment of grid jobs
+
+---+ Troubleshooting 
+Here is an useful collection of [[Trash.Documentation_Release3TroubleshootingGuide][Troubleshooting documents]]:
+   * Trash.Documentation_Release3TroubleshootingGuide
+   * CondorErrors
+   * GlobusErrors
+   * TroubleshootingFaq
+   * Trash.ReleaseDocumentationTroubleshootingComputeElement
+   * TestOSGClient
+   * TroubleshootRsv
+   * SrmTester
+
+---+ Getting help
+The first line of support is primarily provided by [[HelpProcedure#VO_Assistance][the VO]] and/or local computing support personnel. 
+
+In addition, OSG provides support via multiple channels including:
+   * The [[HelpProcedure#Emergency_Assistance][24x7 GOC Emergency assistance]] for urgent matters
+   * The [[Trash/Trash/SiteCoordination.ChatCalendar][Campfire Web chat]] for direct interactive support 
+   * The [[https://ticket.grid.iu.edu/goc/open][GOC ticketing system]] to better record and track a specific issue
+   * Its [[Documentation.ContactsMailingLists][mailing lists]] for community support
+
+Check HelpProcedure for a complete list of what is available, which channel is recommended for specific issues and  and where/how you can get help during the installation or maintenance of your site.
+
+---+ References
+   * Trash/Tier3.WebHome
+   * Trash/Trash/CampusGrids.WebHome
+
+---+ Comments
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = MarcoMambelli
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Navigation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = JamesWeichel
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->

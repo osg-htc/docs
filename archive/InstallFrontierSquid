@@ -1,0 +1,185 @@
+%DOC_STATUS_TABLE%
+
+---+!! Frontier Squid Caching Proxy Installation Guide
+
+%TOC{depth="3"}%
+
+---# About This Document
+
+This document is intended for System Administrators who are installing =frontier-squid=, the OSG distribution of the Frontier Squid software.
+
+---# Applicable Versions
+
+The applicable software versions for this document are %RED%OSG Version >= 3.4.0%ENDCOLOR%.  The version of frontier-squid installed should be %RED% >= 3.5.24-3.1%ENDCOLOR%.  When using an %RED%OSG Version < 3.4.0%ENDCOLOR% and a frontier-squid version in the %RED% 2.7STABLE9 %ENDCOLOR% series, refer to the [[https://twiki.cern.ch/twiki/bin/view/Frontier/OldInstallSquid][old upstream install documentation]] instead of the current links included below.  There are some incompatibilities between the two versions, so if you are upgrading from a 2.7STABLE9 version to a 3.5 version, see the [[https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Upgrading][upstream documentation on upgrading]].
+
+---# About Frontier Squid
+
+Frontier Squid is a distribution of the well-known [[http://squid-cache.org][squid HTTP caching proxy software]] that is optimized for use with applications on the Worldwide LHC Computing Grid (WLCG).  It has [[https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Why_use_frontier_squid_instead_o][many advantages]] over regular squid for common grid applications, especially Frontier and CVMFS.
+
+The OSG distribution of frontier-squid is a straight rebuild of the upstream frontier-squid package for the convenience of OSG users.
+
+---# Frontier Squid is Recommended
+
+OSG recommends that all sites run a caching proxy for HTTP and HTTPS to help reduce bandwidth and improve throughput. To that end, Compute Element (CE) installations include Frontier Squid automatically. We encourage all sites to configure and use this service, as described below.
+
+For large sites that expect heavy load on the proxy, it may be best to run the proxy on its own host. In that case, the Frontier Squid software still will be installed on the CE, but it need not be enabled. Instead, install your proxy service on the separate host and then configure the CE host to refer to the proxy on that host.
+
+The =osg-configure= configuration tool (version 1.0.45 and later) warns users who have not added the proxy location to their CE configuration. In the future, a proxy will be required and osg-configure will fail if the proxy location is not set.
+
+---# Engineering Considerations
+
+If you will be supporting the Frontier application at your site, review the [[https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Hardware][upstream documentation Hardware considerations section]] to determine how to size your equipment.
+
+---# Requirements
+
+---## Host and OS
+   * OS is %SUPPORTED_OS%. 
+   * Root access
+
+---## Users
+The frontier-squid installation will create one user account unless it already exists.
+
+| *User* | *Comment* |
+| =squid= | Reduced privilege user that the squid process runs under.  Set the default gid of the "squid" user to be a group that is also called "squid". |
+
+The package can instead use another user name of your choice if you create a configuration file before installation.  Details are in the [[https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Preparation][upstream documentation Preparation section]].
+
+---## Networking
+
+%STARTSECTION{"Firewalls"}%
+%INCLUDE{"Documentation/Release3.FirewallInformation" section="FirewallTable" lines="squid,squidmonitor"}% \
+%ENDSECTION{"Firewalls"}%
+
+The addresses of the WLCG monitoring servers for use in firewalls are listed in the [[https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring][upstream documentation Enabling monitoring section]].
+
+---# Install Instructions
+%INCLUDE{"YumRepositories" section="OSGRepoBrief" TOC_SHIFT="+"}%
+
+---## Installing Frontier Squid
+
+After meeting the requirements in the previous section, install frontier-squid with this command: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install frontier-squid </pre>
+
+Then enable it to start at boot time with this command: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% chkconfig frontier-squid on</pre>
+
+---# Configuring Frontier Squid
+
+---## Configuring the Frontier Squid Service
+
+To configure the Frontier Squid service itself:
+
+   1. Follow the [[https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid][upstream Frontier Squid documentation]], in [[https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Configuration][the Configuration section]]\
+       <p><strong>Note:</strong> An important difference between the standard Squid software and the Frontier Squid variant is that Frontier Squid changes are in =/etc/squid/customize.sh= instead of =/etc/squid/squid.conf=.</p>
+   1. Enable, start, and test the service (as described below)
+   1. Enable WLCG monitoring as described in the [[https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring][upstream documentation on enabling monitoring]] and [[https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#OIM][register the squid in OIM]].
+
+---## Configuring the OSG CE
+
+To configure the OSG Compute Element (CE) to know about your Frontier Squid service:
+
+   1. On your CE host, edit =/etc/osg/config.d/01-squid.ini=
+      * Make sure that =enabled= is set to =True=
+      * Set =location= to the hostname and port of your Frontier Squid service (e.g., =my.squid.host.edu:3128=)
+      * Leave the other settings at =DEFAULT= unless you have specific reasons to change them
+   1. <p>Run =osg-configure= to propagate the changes on your CE</p>\
+       <p><strong>Note:</strong> You may want to finish other CE configuration tasks before running =osg-configure=. Just be sure to run it once before starting CE services.</p>
+
+---# Starting and Stopping the Frontier Squid Service
+
+%STARTSECTION{"Starting"}%
+Starting frontier-squid:
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% service frontier-squid start
+</pre> 
+
+Stopping frontier-squid:
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% service frontier-squid stop
+</pre> 
+
+%ENDSECTION{"Starting"}%
+
+
+---# Testing Frontier Squid
+
+As any user on another computer, do the following (where %RED%yoursquid.your.domain%ENDCOLOR% is the fully qualified domain name of your squid server):
+<pre class="screen">
+%UCL_PROMPT% export http_proxy=http://%RED%yoursquid.your.domain%ENDCOLOR%:3128
+%UCL_PROMPT% wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
+X-Cache: MISS from %RED%yoursquid.your.domain%ENDCOLOR%
+%UCL_PROMPT% wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
+X-Cache: HIT from %RED%yoursquid.your.domain%ENDCOLOR%
+</pre>
+
+If the grep doesn't print anything, try removing it from the pipeline to see if errors are obvious.  If the second try says MISS again, something is probably wrong with the squid cache writes.  Look at the squid [[https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Log_file_contents][access.log file]] to try to see what's wrong.
+
+If your squid will be supporting the Frontier application, it is also good to do the test in the [[https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Testing_the_installation][upstream documentation Testing the installation section]].
+
+---# Frontier Squid Log Files
+
+Log file contents are explained in the [[https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Log_file_contents][upstream documentation Log file contents section]].
+
+---# Getting Help
+To get assistance please use [[HelpProcedure][Help Procedure]].
+
+---# *Comments*
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = DaveDykstra
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|General|Integration|Monitoring|Operations|Security|Storage|Tier3|User|VO)
+   * Local DOC_AREA       = General
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Developer|Documenter|Scientist|Student|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (HowTo|Installation|Knowledge|Navigation|Planning|Training|Troubleshooting)
+   * Local DOC_TYPE       = Installation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MarcoMambelli
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = MarkoSlyz
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

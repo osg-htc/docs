@@ -1,0 +1,1045 @@
+---+!! *<nop>%SPACEOUT{%TOPIC%}%*
+%DOC_STATUS_TABLE%
+%TOC{depth="2"}%
+
+---++ About this document
+
+SRM-client toolkit is a full implementation of SRM V2.2, developed by Lawrence Berkeley National Laboratory as generic SRM v2.2 clients.
+ 
+This document is intended for users who want to use LBNL SRM clients to do any of following
+   * list files at a storage location
+   * get files from a storage location
+   * put files in a storage location (in usual or space reserved area)
+   * transfer files from one storage location to another
+   * create/remove directory at a storage location
+   * make/update/release space reservation
+
+---++ Introduction
+!SRM-client toolkit is a full implementation of  [[https://sdm.lbl.gov/srm-wg/][SRM V2.2]], developed by [[http://www.lbl.gov][Lawrence Berkeley National Laboratory]] as generic SRM v2.2 clients. They have been tested for all current SRM v2.2 implementations such as [[https://sdm.lbl.gov/bestman/][BeStMan]], [[http://castor.web.cern.ch/castor/][CASTOR]], [[http://www.dcache.org][dCache]], [[https://twiki.cern.ch/twiki/bin/view/LCG/DataManagementTop?redirectedfrom=EGEE.DPM][DPM]], [[http://www2.twgrid.org/APTeam/index.php/SRM-SRB_Installation][SRM/SRB]] and [[http://storm.forge.cnaf.infn.it/documentation/storm_highview][StoRM]]. These commands get tested continuously for compatibility and interoperability. 
+
+---++ Engineering Consideration
+These clients do not work with SRM v1.1 server
+
+---++Requirements
+   * A valid grid proxy or voms proxy
+   * Permission to actually get/put/list the data 
+     (You should be allowed to actually retrieve/store the data on the storage element.)
+   * [[Documentation/Release3.InstallOSGClient][OSG Client]], [[Documentation/Release3.InstallComputeElement][CE]] or [[Documentation/Release3.InstallWNClient][WN]] software installed.  
+      * Note: the actual RPM needed is bestman2-client (with associated dependencies), which you can install with "yum install bestman2-client".  However, installing one of the above supported software packages is recommended.
+   * The url for the Storage Element you are trying to access
+
+---++ Procedure
+LBNL client toolkit is packaged in to VDT and should be available on any node that has the OSG Client, CE or WN software installed.
+To run the clients, you need to 
+   * login to proper node
+   * generate your voms credentials
+   * bestman2-client RPMs install the clients in the system path (/usr/bin), but you can verify they are in your path by running:
+<pre class="screen">
+which srm-copy
+</pre>
+*Notes* 
+   * Command line options available for each command can be listed by using %RED%-help%ENDCOLOR% 
+   * The url for Bestman based SE is of form - srm://[HOSTNAME]:[PORT]/srm/v2/server
+   * The url for dCache based SE is of form  srm://[HOSTNAME]:[PORT]/srm/managerv2 
+   * The output for the same command run against different type of SE may vary
+
+---++++srm-ping - Ping the SE to see if it is accepting client requests
+*Syntax*
+<pre class="screen">
+srm-ping sourceurl
+</pre>
+
+*Example* 
+<br></br>
+Ping the storage element 
+%TWISTY%
+<pre class="screen">
+-bash-3.00$ srm-ping srm://fndca1.fnal.gov:8443/srm/managerv2
+srm-ping   2.2.1.3.6   Mon Nov 30 09:10:48 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+SRM-CLIENT: Connecting to serviceurl httpg://fndca1.fnal.gov:8443/srm/managerv2
+
+SRM-PING: Mon Oct 11 11:19:50 CDT 2010  Calling SrmPing Request...
+versionInfo=v2.2
+
+Extra information (Key=Value)
+backend_type=dCache
+backend_version=production-1.9.5-16
+-bash-3.00$ 
+</pre>
+%ENDTWISTY%
+---++++ srm-mkdir - Create a new directory on remote storage element
+*Syntax*
+<pre class="screen">
+srm-mkdir sourceurl [command line options]
+srm-mkdir [command line options] -s sourceurl
+srm-mkdir [command line options] -s sourceurl -s sourceurl
+srm-mkdir [command line options] -f file
+</pre>	 
+where *file* is the path to the xml file containing the sourceurl information.
+For requests with more than one file %RED%-f%ENDCOLOR% option is used.
+
+*Example* <br></br>
+Create a new directory
+%TWISTY%
+<pre class="screen">
+-bash-3.00$ srm-mkdir srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/ns2010
+srm-mkdir   2.2.1.3.6   Mon Nov 30 09:10:48 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+SRM-CLIENT: Connecting to serviceurl httpg://fndca1.fnal.gov:8443/srm/managerv2
+
+SRM-DIR: Mon Oct 11 11:05:11 CDT 2010 Calling SrmMkdir
+SRM-DIR: DirectoryPath(0)=srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/ns2010
+	status=SRM_SUCCESS
+	explanation=success
+-bash-3.00$
+</pre>
+%ENDTWISTY%
+---++++ srm-copy - Perform data transfers to/from/between SE
+*Syntax*
+<pre class="screen">
+srm-copy sourceUrl targetUrl [command line options]
+srm-copy [command line options] -f file
+</pre>
+where *file* is the path to the xml file containing the sourceurl, targeturl information.
+For requests with more than one file %RED%-f%ENDCOLOR% option is used.
+</pre>
+
+*Example* <br></br>
+Copy a file from local filesystem to remote storage location 
+%TWISTY%
+<pre class="screen">
+-bash-3.00$ srm-copy file:////home/neha/a.out srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/a.out
+srm-copy   2.2.1.3.6   Mon Nov 30 09:10:48 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+SRM-CLIENT: Fri Oct 08 13:37:31 CDT 2010 Connecting to httpg://fndca1.fnal.gov:8443/srm/managerv2
+
+SRM-CLIENT: Fri Oct 08 13:37:32 CDT 2010 Calling SrmPrepareToPutRequest now ...
+request.token=-2139470372
+Request.status=SRM_REQUEST_QUEUED
+explanation= at Fri Oct 08 13:37:43 CDT 2010 state Pending : created
+SRM-CLIENT: Next status call in 4 seconds.
+SRM-CLIENT: Fri Oct 08 13:37:48 CDT 2010 Calling Status at Fri Oct 08 13:37:48 CDT 2010
+SRM-CLIENT: Result Status from SRM (srmStatusOfPutRequest)=SRM_SUCCESS
+	SRM-CLIENT: Check Status Explanation= at Fri Oct 08 13:37:43 CDT 2010 state Pending : created
+
+SRM-CLIENT: RemainingPinTime=14395
+SRM-CLIENT: received TURL=gsiftp://stkendca20a.fnal.gov:2811//a.out
+
+SRM-CLIENT: Fri Oct 08 13:37:49 CDT 2010 start file transfer
+SRM-CLIENT:Source=file:////home/neha/a.out
+SRM-CLIENT:Target=gsiftp://stkendca20a.fnal.gov:2811//a.out
+
+SRM-CLIENT: Fri Oct 08 13:37:51 CDT 2010 end file transfer for file:////home/neha/a.out
+
+SRM-CLIENT: Fri Oct 08 13:37:51 CDT 2010 Calling putDone for srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/a.out
+Result.status=SRM_SUCCESS
+Result.Explanation=success
+
+SRM-CLIENT: Request completed with success
+
+SRM-CLIENT: Printing text report now ...
+
+SRM-CLIENT*REQUESTTYPE=put
+SRM-CLIENT*TOTALFILES=1
+SRM-CLIENT*TOTAL_SUCCESS=1
+SRM-CLIENT*TOTAL_FAILED=0
+SRM-CLIENT*REQUEST_TOKEN=-2139470372
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*REQUEST_EXPLANATION= at Fri Oct 08 13:37:43 CDT 2010 state Pending : created
+SRM-CLIENT*SOURCEURL[0]=file:////home/neha/a.out
+SRM-CLIENT*TARGETURL[0]=srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/a.out
+SRM-CLIENT*TRANSFERURL[0]=gsiftp://stkendca20a.fnal.gov:2811//a.out
+SRM-CLIENT*ACTUALSIZE[0]=0
+SRM-CLIENT*FILE_STATUS[0]=SRM_SUCCESS
+SRM-CLIENT*EXPLANATION[0]=Done
+-bash-3.00$ 
+</pre>
+%ENDTWISTY%
+<br></br>
+Copy a file from remote storage location to local file system using srm protocol
+%TWISTY%
+<pre class="screen">
+-bash-3.00$ srm-copy srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/a.out file:////home/neha/a1.out
+srm-copy   2.2.1.3.6   Mon Nov 30 09:10:48 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+SRM-CLIENT: Fri Oct 08 13:41:09 CDT 2010 Connecting to httpg://fndca1.fnal.gov:8443/srm/managerv2
+
+SRM-CLIENT: Fri Oct 08 13:41:11 CDT 2010 Calling SrmPrepareToGet Request now ...
+request.token=-2139470368
+
+Request.status=SRM_REQUEST_QUEUED
+Request.explanation= at Fri Oct 08 13:41:24 CDT 2010 state Pending : created
+
+SRM-CLIENT: Next status call in 4 seconds.
+SRM-CLIENT: Fri Oct 08 13:41:29 CDT 2010 Calling Status at Fri Oct 08 13:41:29 CDT 2010
+
+Request.status=SRM_SUCCESS
+explanation= at Fri Oct 08 13:41:24 CDT 2010 state Pending : created
+
+SRM-CLIENT: RemainingPinTime=14395
+SRM-CLIENT: SURL=srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/a.out
+SRM-CLIENT: FileStatus code from server=SRM_FILE_PINNED
+SRM-CLIENT: Explanation from server=Ready
+SRM-CLIENT: received TURL=gsiftp://stkendca17a.fnal.gov:2811//a.out
+
+SRM-CLIENT: Fri Oct 08 13:41:29 CDT 2010 start file transfer
+SRM-CLIENT:Source=gsiftp://stkendca17a.fnal.gov:2811//a.out
+SRM-CLIENT:Target=file:////home/neha/a1.out
+
+SRM-CLIENT: Fri Oct 08 13:41:31 CDT 2010 end file transfer for srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/a.out
+
+SRM-CLIENT: Fri Oct 08 13:41:31 CDT 2010 Calling releaseFile
+
+SRM-CLIENT:  ...Calling srmReleaseFiles...
+	status=SRM_SUCCESS
+	explanation=null
+	status=SRM_SUCCESS
+	explanation=Done
+
+SRM-CLIENT: Request completed with success
+
+SRM-CLIENT: Printing text report now ...
+
+SRM-CLIENT*REQUESTTYPE=get
+SRM-CLIENT*TOTALFILES=1
+SRM-CLIENT*TOTAL_SUCCESS=1
+SRM-CLIENT*TOTAL_FAILED=0
+SRM-CLIENT*REQUEST_TOKEN=-2139470368
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*REQUEST_EXPLANATION= at Fri Oct 08 13:41:24 CDT 2010 state Pending : created
+SRM-CLIENT*SOURCEURL[0]=srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/a.out
+SRM-CLIENT*TARGETURL[0]=file:////home/neha/a1.out
+SRM-CLIENT*TRANSFERURL[0]=gsiftp://stkendca17a.fnal.gov:2811//a.out
+SRM-CLIENT*ACTUALSIZE[0]=5160
+SRM-CLIENT*FILE_STATUS[0]=SRM_FILE_PINNED
+SRM-CLIENT*EXPLANATION[0]=Ready
+-bash-3.00$ 
+</pre>
+%ENDTWISTY%
+<br></br>
+Copy a file into reserved space
+%TWISTY%
+<pre class="screen">
+srm-copy file:////tmp/test.data srm://osp4.lbl.gov:60443/srm/v2/server\?SFN=/srmcache/star/mytest -spacetoken V.3
+
+SRM-CLIENT: Thu May 15 17:14:51 PDT 2008 Connecting to httpg://osp4.lbl.gov:60443/srm/v2/server
+
+SRM-CLIENT: Thu May 15 17:14:52 PDT 2008 Calling SrmPrepareToPutRequest now ...
+request.token=star:22(PUT)
+status=SRM_REQUEST_INPROGRESS
+explanation=null
+SRM-CLIENT: Next status call in 30 seconds.
+SRM-CLIENT: Thu May 15 17:15:34 PDT 2008 Calling Status at Thu May 15 17:15:34 PDT 2008
+SRM-CLIENT: Result Status from SRM (srmStatusOfPutRequest)=SRM_SUCCESS
+
+SRM-CLIENT: RemainingPinTime=168
+
+SRM-CLIENT: RequestFileStatus for SURL=file:////tmp/test.data is Ready.
+SRM-CLIENT: received TURL=gsiftp://osp4.lbl.gov//export/srm/itb/cache/star/V.3-1805566576/mytest
+
+SRM-CLIENT: Thu May 15 17:15:36 PDT 2008 start file transfer.
+SRM-CLIENT:Source=file:////tmp/test.data
+SRM-CLIENT:Target=gsiftp://osp4.lbl.gov//export/srm/itb/cache/star/V.3-1805566576/mytest
+
+SRM-CLIENT: Thu May 15 17:15:39 PDT 2008 end file transfer.
+
+SRM-CLIENT: Thu May 15 17:15:39 PDT 2008 Calling putDone for srm://osp4.lbl.gov:60443/srm/v2/server?SFN=/srmcache/star/mytest
+
+SRM-CLIENT: Thu May 15 17:15:43 PDT 2008 end file transfer.
+
+SRM-CLIENT: Request completed with success
+
+SRM-CLIENT: Printing text report now ...
+
+SRM-CLIENT*REQUESTTYPE=put
+SRM-CLIENT*TOTALFILES=1
+SRM-CLIENT*TOTAL_SUCCESS=1
+SRM-CLIENT*TOTAL_FAILED=0
+SRM-CLIENT*REQUEST_TOKEN=star:22(PUT)
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*SOURCEURL[0]=file:////tmp/test.data
+SRM-CLIENT*TARGETURL[0]=srm://osp4.lbl.gov:60443/srm/v2/server?SFN=/srmcache/star/mytest
+SRM-CLIENT*TRANSFERURL[0]=gsiftp://osp4.lbl.gov//export/srm/itb/cache/star/V.3-1805566576/mytest
+SRM-CLIENT*ACTUALSIZE[0]=15
+SRM-CLIENT*FILE_STATUS[0]=SRM_SUCCESS
+SRM-CLIENT*EXPLANATION[0]=SRM-CLIENT: PutDone is called successfully
+</pre>
+%ENDTWISTY%
+
+---++++ srm-ls - List contents of a directory 
+*Syntax*
+<pre class="screen">
+srm-ls sourceurl [command line options]
+srm-ls -s sourceurl [command line options]
+srm-ls -s sourceurl -s sourceUrl [command line options]
+srm-ls [command line options] -f file
+</pre>	 
+where *file* is the path to the xml file containing the sourceurl information.
+For requests with more than one file %RED%-f%ENDCOLOR% option is used.
+
+*Example* <br></br>
+List the contents of a directory
+%TWISTY%
+<pre class="screen">
+-bash-3.00$ srm-ls srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2
+srm-ls   2.2.1.3.6   Mon Nov 30 09:10:48 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+SRM-CLIENT: Connecting to serviceurl httpg://fndca1.fnal.gov:8443/srm/managerv2
+
+SRM-DIR: Mon Oct 11 10:47:49 CDT 2010 Calling srmLsRequest
+
+SRM-DIR: ..........................
+	Status    : SRM_SUCCESS
+	Explanation : All ls file requests completed
+	Request token=null
+
+	SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2
+	Bytes=0
+	FileType=DIRECTORY
+	StorageType=PERMANENT
+	Status=SRM_SUCCESS
+	Explanation=null
+	OwnerPermission=13160
+	LifetimeLeft=-1
+	LifetimeAssigned=-1
+	CheckSumType=null
+	CheckSumValue=null
+	FileLocality=NONE
+	OwnerPermission.userId=13160
+	OwnerPermission.mode=RWX
+	GroupPermission.groupId=9767
+	GroupPermission.mode=RWX
+	OtherPermission=RX
+	ArrayOfSpaceTokens=null
+	RetentionPolicy=REPLICA
+	AccessLatency=ONLINE
+	LastModificationTime=Wed Oct 06 15:01:37 CDT 2010
+	CreatedAtTime=Wed Oct 06 14:33:46 CDT 2010
+
+	   SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6A3
+	   Bytes=617080
+	   FileType=FILE
+	   StorageType=PERMANENT
+	   Status=SRM_SUCCESS
+	   Explanation=null
+	   OwnerPermission=null
+	   LifetimeLeft=-1
+	   LifetimeAssigned=-1
+	   CheckSumType=null
+	   CheckSumValue=null
+	   FileLocality=null
+	   OwnerPermission=null
+	   GroupPermission=null
+	   OtherPermission=null
+	   ArrayOfSpaceTokens=null
+	   RetentionPolicyInfo=null
+	   LastModificationTime=Wed Oct 06 14:49:43 CDT 2010
+	   CreatedAtTime=Wed Oct 06 14:49:43 CDT 2010
+
+	   SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6B1
+	   Bytes=2036
+	   FileType=FILE
+	   StorageType=PERMANENT
+	   Status=SRM_SUCCESS
+	   Explanation=null
+	   OwnerPermission=null
+	   LifetimeLeft=-1
+	   LifetimeAssigned=-1
+	   CheckSumType=null
+	   CheckSumValue=null
+	   FileLocality=null
+	   OwnerPermission=null
+	   GroupPermission=null
+	   OtherPermission=null
+	   ArrayOfSpaceTokens=null
+	   RetentionPolicyInfo=null
+	   LastModificationTime=Wed Oct 06 15:01:37 CDT 2010
+	   CreatedAtTime=Wed Oct 06 15:01:37 CDT 2010
+
+	   SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6A2
+	   Bytes=617080
+	   FileType=FILE
+	   StorageType=PERMANENT
+	   Status=SRM_SUCCESS
+	   Explanation=null
+	   OwnerPermission=null
+	   LifetimeLeft=-1
+	   LifetimeAssigned=-1
+	   CheckSumType=null
+	   CheckSumValue=null
+	   FileLocality=null
+	   OwnerPermission=null
+	   GroupPermission=null
+	   OtherPermission=null
+	   ArrayOfSpaceTokens=null
+	   RetentionPolicyInfo=null
+	   LastModificationTime=Wed Oct 06 14:48:33 CDT 2010
+	   CreatedAtTime=Wed Oct 06 14:48:33 CDT 2010
+
+SRM-DIR: Printing text report now ...
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*REQUEST_EXPLANATION=All ls file requests completed
+SRM-CLIENT*SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2
+SRM-CLIENT*BYTES=0
+SRM-CLIENT*FILETYPE=DIRECTORY
+SRM-CLIENT*STORAGETYPE=PERMANENT
+SRM-CLIENT*FILE_STATUS=SRM_SUCCESS
+SRM-CLIENT*OWNERPERMISSION=13160
+SRM-CLIENT*LIFETIMELEFT=-1
+SRM-CLIENT*LIFETIMEASSIGNED=-1
+SRM-CLIENT*FILELOCALITY=NONE
+SRM-CLIENT*OWNERPERMISSION.USERID=13160
+SRM-CLIENT*OWNERPERMISSION.MODE=RWX
+SRM-CLIENT*GROUPPERMISSION.GROUPID=9767
+SRM-CLIENT*GROUPPERMISSION.MODE=RWX
+SRM-CLIENT*OTHERPERMISSION=RX
+SRM-CLIENT*RETENTIONPOLICY=REPLICA
+SRM-CLIENT*ACCESSLATENCY=ONLINE
+SRM-CLIENT*LASTACCESSED=Wed Oct 06 15:01:37 CDT 2010
+SRM-CLIENT*CREATEDATTIME=Wed Oct 06 14:33:46 CDT 2010
+SRM-CLIENT*SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6A3
+SRM-CLIENT*BYTES=617080
+SRM-CLIENT*FILETYPE=FILE
+SRM-CLIENT*STORAGETYPE=PERMANENT
+SRM-CLIENT*FILE_STATUS=SRM_SUCCESS
+SRM-CLIENT*LIFETIMELEFT=-1
+SRM-CLIENT*LIFETIMEASSIGNED=-1
+SRM-CLIENT*LASTACCESSED=Wed Oct 06 14:49:43 CDT 2010
+SRM-CLIENT*CREATEDATTIME=Wed Oct 06 14:49:43 CDT 2010
+SRM-CLIENT*SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6B1
+SRM-CLIENT*BYTES=2036
+SRM-CLIENT*FILETYPE=FILE
+SRM-CLIENT*STORAGETYPE=PERMANENT
+SRM-CLIENT*FILE_STATUS=SRM_SUCCESS
+SRM-CLIENT*LIFETIMELEFT=-1
+SRM-CLIENT*LIFETIMEASSIGNED=-1
+SRM-CLIENT*LASTACCESSED=Wed Oct 06 15:01:37 CDT 2010
+SRM-CLIENT*CREATEDATTIME=Wed Oct 06 15:01:37 CDT 2010
+SRM-CLIENT*SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6A2
+SRM-CLIENT*BYTES=617080
+SRM-CLIENT*FILETYPE=FILE
+SRM-CLIENT*STORAGETYPE=PERMANENT
+SRM-CLIENT*FILE_STATUS=SRM_SUCCESS
+SRM-CLIENT*LIFETIMELEFT=-1
+SRM-CLIENT*LIFETIMEASSIGNED=-1
+SRM-CLIENT*LASTACCESSED=Wed Oct 06 14:48:33 CDT 2010
+SRM-CLIENT*CREATEDATTIME=Wed Oct 06 14:48:33 CDT 2010
+-bash-3.00$ 
+</pre>
+%ENDTWISTY%
+<br></br>
+List the contents of a directory recursively
+%TWISTY%
+<pre class="screen">
+-bash-3.00$ srm-ls srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2
+srm-ls   2.2.1.3.6   Mon Nov 30 09:10:48 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+SRM-CLIENT: Connecting to serviceurl httpg://fndca1.fnal.gov:8443/srm/managerv2
+
+SRM-DIR: Mon Oct 11 10:47:49 CDT 2010 Calling srmLsRequest
+
+SRM-DIR: ..........................
+	Status    : SRM_SUCCESS
+	Explanation : All ls file requests completed
+	Request token=null
+
+	SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2
+	Bytes=0
+	FileType=DIRECTORY
+	StorageType=PERMANENT
+	Status=SRM_SUCCESS
+	Explanation=null
+	OwnerPermission=13160
+	LifetimeLeft=-1
+	LifetimeAssigned=-1
+	CheckSumType=null
+	CheckSumValue=null
+	FileLocality=NONE
+	OwnerPermission.userId=13160
+	OwnerPermission.mode=RWX
+	GroupPermission.groupId=9767
+	GroupPermission.mode=RWX
+	OtherPermission=RX
+	ArrayOfSpaceTokens=null
+	RetentionPolicy=REPLICA
+	AccessLatency=ONLINE
+	LastModificationTime=Wed Oct 06 15:01:37 CDT 2010
+	CreatedAtTime=Wed Oct 06 14:33:46 CDT 2010
+
+	   SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6A3
+	   Bytes=617080
+	   FileType=FILE
+	   StorageType=PERMANENT
+	   Status=SRM_SUCCESS
+	   Explanation=null
+	   OwnerPermission=null
+	   LifetimeLeft=-1
+	   LifetimeAssigned=-1
+	   CheckSumType=null
+	   CheckSumValue=null
+	   FileLocality=null
+	   OwnerPermission=null
+	   GroupPermission=null
+	   OtherPermission=null
+	   ArrayOfSpaceTokens=null
+	   RetentionPolicyInfo=null
+	   LastModificationTime=Wed Oct 06 14:49:43 CDT 2010
+	   CreatedAtTime=Wed Oct 06 14:49:43 CDT 2010
+
+	   SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6B1
+	   Bytes=2036
+	   FileType=FILE
+	   StorageType=PERMANENT
+	   Status=SRM_SUCCESS
+	   Explanation=null
+	   OwnerPermission=null
+	   LifetimeLeft=-1
+	   LifetimeAssigned=-1
+	   CheckSumType=null
+	   CheckSumValue=null
+	   FileLocality=null
+	   OwnerPermission=null
+	   GroupPermission=null
+	   OtherPermission=null
+	   ArrayOfSpaceTokens=null
+	   RetentionPolicyInfo=null
+	   LastModificationTime=Wed Oct 06 15:01:37 CDT 2010
+	   CreatedAtTime=Wed Oct 06 15:01:37 CDT 2010
+
+	   SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6A2
+	   Bytes=617080
+	   FileType=FILE
+	   StorageType=PERMANENT
+	   Status=SRM_SUCCESS
+	   Explanation=null
+	   OwnerPermission=null
+	   LifetimeLeft=-1
+	   LifetimeAssigned=-1
+	   CheckSumType=null
+	   CheckSumValue=null
+	   FileLocality=null
+	   OwnerPermission=null
+	   GroupPermission=null
+	   OtherPermission=null
+	   ArrayOfSpaceTokens=null
+	   RetentionPolicyInfo=null
+	   LastModificationTime=Wed Oct 06 14:48:33 CDT 2010
+	   CreatedAtTime=Wed Oct 06 14:48:33 CDT 2010
+
+SRM-DIR: Printing text report now ...
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*REQUEST_EXPLANATION=All ls file requests completed
+SRM-CLIENT*SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2
+SRM-CLIENT*BYTES=0
+SRM-CLIENT*FILETYPE=DIRECTORY
+SRM-CLIENT*STORAGETYPE=PERMANENT
+SRM-CLIENT*FILE_STATUS=SRM_SUCCESS
+SRM-CLIENT*OWNERPERMISSION=13160
+SRM-CLIENT*LIFETIMELEFT=-1
+SRM-CLIENT*LIFETIMEASSIGNED=-1
+SRM-CLIENT*FILELOCALITY=NONE
+SRM-CLIENT*OWNERPERMISSION.USERID=13160
+SRM-CLIENT*OWNERPERMISSION.MODE=RWX
+SRM-CLIENT*GROUPPERMISSION.GROUPID=9767
+SRM-CLIENT*GROUPPERMISSION.MODE=RWX
+SRM-CLIENT*OTHERPERMISSION=RX
+SRM-CLIENT*RETENTIONPOLICY=REPLICA
+SRM-CLIENT*ACCESSLATENCY=ONLINE
+SRM-CLIENT*LASTACCESSED=Wed Oct 06 15:01:37 CDT 2010
+SRM-CLIENT*CREATEDATTIME=Wed Oct 06 14:33:46 CDT 2010
+SRM-CLIENT*SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6A3
+SRM-CLIENT*BYTES=617080
+SRM-CLIENT*FILETYPE=FILE
+SRM-CLIENT*STORAGETYPE=PERMANENT
+SRM-CLIENT*FILE_STATUS=SRM_SUCCESS
+SRM-CLIENT*LIFETIMELEFT=-1
+SRM-CLIENT*LIFETIMEASSIGNED=-1
+SRM-CLIENT*LASTACCESSED=Wed Oct 06 14:49:43 CDT 2010
+SRM-CLIENT*CREATEDATTIME=Wed Oct 06 14:49:43 CDT 2010
+SRM-CLIENT*SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6B1
+SRM-CLIENT*BYTES=2036
+SRM-CLIENT*FILETYPE=FILE
+SRM-CLIENT*STORAGETYPE=PERMANENT
+SRM-CLIENT*FILE_STATUS=SRM_SUCCESS
+SRM-CLIENT*LIFETIMELEFT=-1
+SRM-CLIENT*LIFETIMEASSIGNED=-1
+SRM-CLIENT*LASTACCESSED=Wed Oct 06 15:01:37 CDT 2010
+SRM-CLIENT*CREATEDATTIME=Wed Oct 06 15:01:37 CDT 2010
+SRM-CLIENT*SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6A2
+SRM-CLIENT*BYTES=617080
+SRM-CLIENT*FILETYPE=FILE
+SRM-CLIENT*STORAGETYPE=PERMANENT
+SRM-CLIENT*FILE_STATUS=SRM_SUCCESS
+SRM-CLIENT*LIFETIMELEFT=-1
+SRM-CLIENT*LIFETIMEASSIGNED=-1
+SRM-CLIENT*LASTACCESSED=Wed Oct 06 14:48:33 CDT 2010
+SRM-CLIENT*CREATEDATTIME=Wed Oct 06 14:48:33 CDT 2010
+-bash-3.00$ 
+</pre>
+%ENDTWISTY%
+<br></br>
+List the contents of a directory in full detail
+%TWISTY%
+<pre class="screen">
+-bash-3.00$ srm-ls srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2 -fulldetailed
+srm-ls   2.2.1.3.6   Mon Nov 30 09:10:48 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+SRM-CLIENT: Connecting to serviceurl httpg://fndca1.fnal.gov:8443/srm/managerv2
+
+SRM-DIR: Mon Oct 11 10:51:05 CDT 2010 Calling srmLsRequest
+
+SRM-DIR: ..........................
+	Status    : SRM_SUCCESS
+	Explanation : All ls file requests completed
+	Request token=null
+
+	SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2
+	Bytes=0
+	FileType=DIRECTORY
+	StorageType=PERMANENT
+	Status=SRM_SUCCESS
+	Explanation=null
+	OwnerPermission=13160
+	LifetimeLeft=-1
+	LifetimeAssigned=-1
+	CheckSumType=null
+	CheckSumValue=null
+	FileLocality=NONE
+	OwnerPermission.userId=13160
+	OwnerPermission.mode=RWX
+	GroupPermission.groupId=9767
+	GroupPermission.mode=RWX
+	OtherPermission=RX
+	ArrayOfSpaceTokens=null
+	RetentionPolicy=REPLICA
+	AccessLatency=ONLINE
+	LastModificationTime=Wed Oct 06 15:01:37 CDT 2010
+	CreatedAtTime=Wed Oct 06 14:33:46 CDT 2010
+
+	   SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6A3
+	   Bytes=617080
+	   FileType=FILE
+	   StorageType=PERMANENT
+	   Status=SRM_SUCCESS
+	   Explanation=null
+	   OwnerPermission=13160
+	   LifetimeLeft=-1
+	   LifetimeAssigned=-1
+	   CheckSumType=adler32
+	   CheckSumValue=510765c2
+	   FileLocality=ONLINE
+	   OwnerPermission.userId=13160
+	   OwnerPermission.mode=RW
+	   GroupPermission.groupId=9767
+	   GroupPermission.mode=R
+	   OtherPermission=R
+	   ArrayOfSpaceTokens=null
+	   RetentionPolicy=REPLICA
+	   AccessLatency=ONLINE
+	   LastModificationTime=Wed Oct 06 14:49:43 CDT 2010
+	   CreatedAtTime=Wed Oct 06 14:49:43 CDT 2010
+
+	   SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6B1
+	   Bytes=2036
+	   FileType=FILE
+	   StorageType=PERMANENT
+	   Status=SRM_SUCCESS
+	   Explanation=null
+	   OwnerPermission=13160
+	   LifetimeLeft=-1
+	   LifetimeAssigned=-1
+	   CheckSumType=adler32
+	   CheckSumValue=607068a0
+	   FileLocality=ONLINE
+	   OwnerPermission.userId=13160
+	   OwnerPermission.mode=RW
+	   GroupPermission.groupId=9767
+	   GroupPermission.mode=R
+	   OtherPermission=R
+	   ArrayOfSpaceTokens=null
+	   RetentionPolicy=REPLICA
+	   AccessLatency=ONLINE
+	   LastModificationTime=Wed Oct 06 15:01:37 CDT 2010
+	   CreatedAtTime=Wed Oct 06 15:01:37 CDT 2010
+
+	   SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6A2
+	   Bytes=617080
+	   FileType=FILE
+	   StorageType=PERMANENT
+	   Status=SRM_SUCCESS
+	   Explanation=null
+	   OwnerPermission=13160
+	   LifetimeLeft=-1
+	   LifetimeAssigned=-1
+	   CheckSumType=adler32
+	   CheckSumValue=510765c2
+	   FileLocality=ONLINE
+	   OwnerPermission.userId=13160
+	   OwnerPermission.mode=RW
+	   GroupPermission.groupId=9767
+	   GroupPermission.mode=R
+	   OtherPermission=R
+	   ArrayOfSpaceTokens=null
+	   RetentionPolicy=REPLICA
+	   AccessLatency=ONLINE
+	   LastModificationTime=Wed Oct 06 14:48:33 CDT 2010
+	   CreatedAtTime=Wed Oct 06 14:48:33 CDT 2010
+
+SRM-DIR: Printing text report now ...
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*REQUEST_EXPLANATION=All ls file requests completed
+SRM-CLIENT*SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2
+SRM-CLIENT*BYTES=0
+SRM-CLIENT*FILETYPE=DIRECTORY
+SRM-CLIENT*STORAGETYPE=PERMANENT
+SRM-CLIENT*FILE_STATUS=SRM_SUCCESS
+SRM-CLIENT*OWNERPERMISSION=13160
+SRM-CLIENT*LIFETIMELEFT=-1
+SRM-CLIENT*LIFETIMEASSIGNED=-1
+SRM-CLIENT*FILELOCALITY=NONE
+SRM-CLIENT*OWNERPERMISSION.USERID=13160
+SRM-CLIENT*OWNERPERMISSION.MODE=RWX
+SRM-CLIENT*GROUPPERMISSION.GROUPID=9767
+SRM-CLIENT*GROUPPERMISSION.MODE=RWX
+SRM-CLIENT*OTHERPERMISSION=RX
+SRM-CLIENT*RETENTIONPOLICY=REPLICA
+SRM-CLIENT*ACCESSLATENCY=ONLINE
+SRM-CLIENT*LASTACCESSED=Wed Oct 06 15:01:37 CDT 2010
+SRM-CLIENT*CREATEDATTIME=Wed Oct 06 14:33:46 CDT 2010
+SRM-CLIENT*SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6A3
+SRM-CLIENT*BYTES=617080
+SRM-CLIENT*FILETYPE=FILE
+SRM-CLIENT*STORAGETYPE=PERMANENT
+SRM-CLIENT*FILE_STATUS=SRM_SUCCESS
+SRM-CLIENT*OWNERPERMISSION=13160
+SRM-CLIENT*LIFETIMELEFT=-1
+SRM-CLIENT*LIFETIMEASSIGNED=-1
+SRM-CLIENT*CHECKSUMTYPE=adler32
+SRM-CLIENT*CHECKSUMVALUE=510765c2
+SRM-CLIENT*FILELOCALITY=ONLINE
+SRM-CLIENT*OWNERPERMISSION.USERID=13160
+SRM-CLIENT*OWNERPERMISSION.MODE=RW
+SRM-CLIENT*GROUPPERMISSION.GROUPID=9767
+SRM-CLIENT*GROUPPERMISSION.MODE=R
+SRM-CLIENT*OTHERPERMISSION=R
+SRM-CLIENT*RETENTIONPOLICY=REPLICA
+SRM-CLIENT*ACCESSLATENCY=ONLINE
+SRM-CLIENT*LASTACCESSED=Wed Oct 06 14:49:43 CDT 2010
+SRM-CLIENT*CREATEDATTIME=Wed Oct 06 14:49:43 CDT 2010
+SRM-CLIENT*SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6B1
+SRM-CLIENT*BYTES=2036
+SRM-CLIENT*FILETYPE=FILE
+SRM-CLIENT*STORAGETYPE=PERMANENT
+SRM-CLIENT*FILE_STATUS=SRM_SUCCESS
+SRM-CLIENT*OWNERPERMISSION=13160
+SRM-CLIENT*LIFETIMELEFT=-1
+SRM-CLIENT*LIFETIMEASSIGNED=-1
+SRM-CLIENT*CHECKSUMTYPE=adler32
+SRM-CLIENT*CHECKSUMVALUE=607068a0
+SRM-CLIENT*FILELOCALITY=ONLINE
+SRM-CLIENT*OWNERPERMISSION.USERID=13160
+SRM-CLIENT*OWNERPERMISSION.MODE=RW
+SRM-CLIENT*GROUPPERMISSION.GROUPID=9767
+SRM-CLIENT*GROUPPERMISSION.MODE=R
+SRM-CLIENT*OTHERPERMISSION=R
+SRM-CLIENT*RETENTIONPOLICY=REPLICA
+SRM-CLIENT*ACCESSLATENCY=ONLINE
+SRM-CLIENT*LASTACCESSED=Wed Oct 06 15:01:37 CDT 2010
+SRM-CLIENT*CREATEDATTIME=Wed Oct 06 15:01:37 CDT 2010
+SRM-CLIENT*SURL=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/tdh2/test6A2
+SRM-CLIENT*BYTES=617080
+SRM-CLIENT*FILETYPE=FILE
+SRM-CLIENT*STORAGETYPE=PERMANENT
+SRM-CLIENT*FILE_STATUS=SRM_SUCCESS
+SRM-CLIENT*OWNERPERMISSION=13160
+SRM-CLIENT*LIFETIMELEFT=-1
+SRM-CLIENT*LIFETIMEASSIGNED=-1
+SRM-CLIENT*CHECKSUMTYPE=adler32
+SRM-CLIENT*CHECKSUMVALUE=510765c2
+SRM-CLIENT*FILELOCALITY=ONLINE
+SRM-CLIENT*OWNERPERMISSION.USERID=13160
+SRM-CLIENT*OWNERPERMISSION.MODE=RW
+SRM-CLIENT*GROUPPERMISSION.GROUPID=9767
+SRM-CLIENT*GROUPPERMISSION.MODE=R
+SRM-CLIENT*OTHERPERMISSION=R
+SRM-CLIENT*RETENTIONPOLICY=REPLICA
+SRM-CLIENT*ACCESSLATENCY=ONLINE
+SRM-CLIENT*LASTACCESSED=Wed Oct 06 14:48:33 CDT 2010
+SRM-CLIENT*CREATEDATTIME=Wed Oct 06 14:48:33 CDT 2010
+-bash-3.00$ 
+</pre>
+%ENDTWISTY%
+---++++ srm-sp-reserve - Make a space reservation
+*Syntax*
+<pre class="screen">
+srm-sp-reserve [command line options] 
+</pre>	 
+where *file* is the path to the xml file containing the sourceurl information.
+For requests with more than one file %RED%-f%ENDCOLOR% option is used.
+
+*Example* <br></br>
+make a space reservation
+%TWISTY%
+<pre class="screen">
+-bash-3.00$ srm-sp-reserve -serviceurl srm://fndca1.fnal.gov:8443/srm/managerv2 -accesslatency online -retentionpolicy replica -size 500 -gsize 500 -lifetime 600
+srm-sp-reserve   2.2.1.3.6   Mon Nov 30 09:10:48 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+
+SRM-CLIENT: Exception from client=Unable to locate a login configuration
+SRM-CLIENT: Connecting to serviceurl httpg://fndca1.fnal.gov:8443/srm/managerv2
+SRM-CLIENT: Mon Oct 11 11:56:27 CDT 2010 Calling SrmReserveSpace
+
+SRM-CLIENT: .......................
+	Status Code=SRM_REQUEST_INPROGRESS
+	Request token=-2139463487
+
+SRM-CLIENT: Next status call in 30 seconds.
+SRM-CLIENT: Mon Oct 11 11:57:09 CDT 2010 Calling Reserve space request
+SRM-CLIENT: Status Code for spaceStatusRequest SRM_SUCCESS
+	explanation= at Mon Oct 11 11:56:39 CDT 2010 state Done : space reservation succeeded
+	SpaceToken=0
+	TotalReservedSpaceSize=500
+	Guaranteed Space Size=500
+	Lifetime=600
+	Retention Policy=REPLICA
+	Access Latency=ONLINE
+
+Printing text report now...
+
+SRM-CLIENT*REQUEST_EXPLANATION= at Mon Oct 11 11:56:39 CDT 2010 state TQueued : put on the thread queue
+SRM-CLIENT*REQUEST-TOKEN=-2139463487
+SRM-CLIENT*REQUEST_STATUS=SRM_SUCCESS
+SRM-CLIENT*SPACE-TOKEN=0
+SRM-CLIENT*EXPLANATION= at Mon Oct 11 11:56:39 CDT 2010 state Done : space reservation succeeded
+SRM-CLIENT*TOTALRESERVEDSPACESIZE=500
+SRM-CLIENT*GUARANTEEDSPACESIZE=500
+SRM-CLIENT*LIFETIME=600
+SRM-CLIENT*RETENTIONPOLICY=REPLICA
+SRM-CLIENT*ACCESSLATENCY=ONLINE
+
+-bash-3.00$ 
+</pre>
+%ENDTWISTY%
+---++++srm-sp-update - Update a space reservation
+*Syntax*
+<pre class="screen">
+srm-sp-update -spacetoken space_token [command line options] 
+srm-sp-update service_url [command line options] 
+</pre>
+
+*Example* <br></br>
+update a space reservation
+%TWISTY%
+<pre class="screen">
+srm-sp-update -serviceurl srm://osp4.lbl.gov:60443/srm/v2/server -size 5000 -gsize 4000 -lifetime 300 -spacetoken V.3
+
+      SRM-SPACE: Thu May 15 17:13:20 PDT 2008 Calling updateSpace request
+      	status=SRM_SUCCESS
+      	Request token=null
+      	lifetime=299
+      	Min=5000
+      	Max=5000
+</pre>
+%ENDTWISTY%
+---++++ srm-sp-tokens - Retrieve space tokens
+*Syntax*
+<pre class="screen">
+srm-sp-tokens [command line options] 
+srm-sp-tokens service_url [command line options] 
+</pre>
+
+*Example* <br></br>
+retrieve space tokens
+%TWISTY%
+<pre class="screen">
+srm-sp-tokens -serviceurl srm://osp4.lbl.gov:60443/srm/v2/server 
+
+SRM-SPACE: Thu May 15 17:13:50 PDT 2008 Calling srmGetSpaceTokens ...
+SRM-SPACE: ...................................
+	Status=SRM_SUCCESS
+	Explanation=null
+SRM-SPACE (0)SpaceToken=V.3
+</pre>
+%ENDTWISTY%
+---++++ srm-sp-release - Release a space reservation
+*Syntax*
+<pre class="screen">
+srm-sp-release [command line options]
+srm-sp-release service_url [command line options]
+</pre>	 
+
+*Example* <br></br>
+release a space reservation
+%TWISTY%
+<pre class="screen">
+-bash-3.00$ srm-sp-release srm://fndca1.fnal.gov:8443/srm/managerv2 -spacetoken 0
+srm-sp-release   2.2.1.3.6   Mon Nov 30 09:10:48 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+SRM-CLIENT: Connecting to serviceurl httpg://fndca1.fnal.gov:8443/srm/managerv2
+SRM-CLIENT: Mon Oct 11 16:30:34 CDT 2010 Calling ReleaseSpace request ....
+SRM-CLIENT: Releasing space for token=0
+	status=SRM_SUCCESS
+	explanation=Space released
+-bash-3.00$ 
+</pre>
+%ENDTWISTY%
+---++++ srm-rm - Remove a file
+*Syntax*
+<pre class="screen">
+srm-rm source_url [command line options]
+srm-rm -s source_url [command line options]
+srm-rm -s source_url -s source_url [command line options]
+srm-rm [command line options] -f file
+</pre>
+where *file* is the path to the xml file containing the sourceurl information. For requests with more than one file %RED%-f%ENDCOLOR% option is used.
+
+*Example* <br></br>
+remove a file
+%TWISTY%
+<pre class="screen">
+-bash-3.00$ srm-rm srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/fermigrid202/try/file4.txt
+srm-rm   2.2.1.3.6   Mon Nov 30 09:10:48 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+SRM-CLIENT: Connecting to serviceurl httpg://fndca1.fnal.gov:8443/srm/managerv2
+
+SRM-DIR: Wed Oct 20 10:23:24 CDT 2010 Calling SrmRmFile
+SRM-DIR: Total files to remove: 1
+	status=SRM_SUCCESS
+	explanation=successfully removed files
+	surl=srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/fermigrid202/try/file4.txt
+	status=SRM_SUCCESS
+	explanation=null
+-bash-3.00$ 
+</pre>
+%ENDTWISTY%
+---++++ srm-rmdir - Remove a directory
+*Syntax*
+<pre class="screen">
+srm-rmdir [command line options] srmUrl
+</pre>	 
+*Note* 
+   * The %RED%-recursive%ENDCOLOR% option enables recursive empty directory deletion
+
+*Example* <br></br>
+remove a directory
+%TWISTY%
+<pre class="screen">
+-bash-3.00$ srm-rmdir srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/fermigrid202/try
+srm-rmdir   2.2.1.3.6   Mon Nov 30 09:10:48 PST 2009
+SRM-Clients and BeStMan Copyright(c) 2007-2009,
+Lawrence Berkeley National Laboratory. All rights reserved.
+Support at SRM@LBL.GOV and documents at http://datagrid.lbl.gov/bestman
+ 
+SRM-CLIENT: Connecting to serviceurl httpg://fndca1.fnal.gov:8443/srm/managerv2
+
+SRM-DIR: Wed Oct 20 10:24:28 CDT 2010 Calling SrmRmdir
+
+SRM-DIR: ........................
+	status=SRM_SUCCESS
+	explanation=success
+-bash-3.00$
+</pre>
+%ENDTWISTY%
+
+
+
+---++Problem Resolution And Help
+---+++ Support
+   * For any questions or help regarding the LBNL SRM Clients, please send email to srm@lbl.gov or osg-storage@opensciencegrid.org
+
+---+++ References
+   * [[http://datagrid.lbl.gov/bestman][Bestman homepage]]
+   * [[http://www.ci.uchicago.edu/osgedu/schools/2008/figs/data.html][SRM v2.2 client lab exercises from 2008 FIU Grid School]]
+   * [[Documentation/Release3.FermiSrmClientCommands][Fermi SRM Clients]]
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = DouglasStrain
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = Scientist
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = NehaSharma
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = NehaSharma
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+
+
+-- Main.DouglasStrain - 10 Oct 2011

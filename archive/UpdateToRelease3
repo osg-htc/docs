@@ -1,0 +1,87 @@
+%DOC_STATUS_TABLE%
+
+---+!! Updating to Release 3
+%TOC{depth="2"}%
+
+---+ About this Document
+This document is for System Administrators. It explains best practices on how to upgrade from OSG 1.2, Pacman based releases, to OSG 3.0, based on RPMs.
+
+---+ Differences between OSG 3 RPMs and OSG 1.2 Pacman installations
+Here we are listing some differences in RPM installations that you should pay attention to if you are used to Pacman installations:
+   * While Pacman installation are self contained (all files reside within the tree rooted in the installation directory), RPM installations spread files within the system path using FHS conventions. This means:
+      * You must always be =root= to install OSG 3 software
+      * Pacman installation are just using space until you source the setup file, RPM installations affect the system right away:
+         * binaries are in the PATH
+         * libraries may replace or upgrade installed ones and be used by other programs
+         * the installation may create users or modify files
+         * uninstalling the packages is more tricky
+         * it is not possible to install multiple versions at the same time
+      * Pacman installations could be easily shared by exporting the install directory. This is not possible for OSG 3 RPMs because files are sparse in different places in the file system.
+   * Read YumRpmBasics, YumRepositories and InstallBestPractices if you are not familiar with RPMs and Yum repositories.
+
+
+---+ List
+Follows a list of specific documents providing suggestions specific to a component, e.g. the Compute Element :
+   * UpdateComputeElement
+
+---+ References
+
+---+ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = MarcoMambelli
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = User
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Navigation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = AlainRoy 	
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = MarcoMambelli 	
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->
+
+
+-- Main.MarcoMambelli - 22 Mar 2012

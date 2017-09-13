@@ -1,0 +1,35 @@
+---++Globus Error: 136
+
+---+++Syntax:
+
+=Globus error 136: the scratch directory could not be created=
+
+---+++Known causes:
+
+Globus GRAM requires a scratch directory and it does not have read/write permissions for the directory it is attempting to use as scratch.
+
+---+++Recommendations:
+
+Ask the site admin to check scratchDirectory and be certain permissions are set correctly.
+
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   * Local OWNER          = MarcoMambelli
+   * Local DOC_AREA       = User
+   * Local DOC_ROLE       = EndUser
+   * Local DOC_TYPE       = Troubleshooting
+   
+   * Local INCLUDE_REVIEW = %YES%
+   * Local INCLUDE_TEST   = %YES%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %YES%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = 
+   * Local REVIEW_PASSED  = %YES%
+   * Local TESTER         = 
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

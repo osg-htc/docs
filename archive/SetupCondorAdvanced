@@ -1,0 +1,342 @@
+---+!! Useful and Unusual Condor Configurations
+%DOC_STATUS_TABLE%
+%TOC{depth="3"}%
+
+---+ How to setup Condor's Hawkeye monitoring
+
+This section describes how to setup a feature called Condor Startd Cron (sometime also called Hawkeye).
+The Condor Startd Cron allows to insert !ClassAds as result of the execution of a custom script.
+This can be used to monitor a host and cause conditional scheduling.
+You may find this useful if you are sharing the cluster with other users and want that to affect your scheduling.
+
+The following is is an example that you may modify for your need.
+
+For clarity we choose Proof as name of an heavy application. We want to avoid job scheduling when Proof is running.
+
+---++ Description
+This control is done completely on the worker node that decides whether to make the job slot available or not and whether a running job should be suspended or be allowed to complete.
+
+
+Condor / PROOF interaction information: 
+
+this goes into the local config file for the execute machine:
+<pre  class="file">
+================================================================
+# For more information check for STARTD_CRON in Condor manual 3.3.10 
+# invoke a module every 30 seconds
+STARTD_CRON_JOBLIST = PSPROOF
+STARTD_CRON_PSPROOF_EXECUTABLE = /export/share/condor-etc/modules/psproof
+STARTD_CRON_PSPROOF_PERIOD = 30s
+STARTD_CRON_PSPROOF_MODE = Periodic
+# In periodic mode the whole output is collected and processed at once, the last definition of each variable is the one added as machine attribute
+#   In wait for exit mode the monitoring of the output is live
+
+# use the output of that module to control policy
+# you could also use PREEMPT instead of SUSPEND if desired
+# PROOF_IS_RUNNING is the named attribute returned by the program below
+SUSPEND = (PROOF_IS_RUNNING =?= True)
+CONTINUE = (PROOF_IS_RUNNING =!= True)
+================================================================
+</pre>
+
+Everything coming out from stdout will be directly added as machine attribute.
+
+Here's a sample code for =/export/share/condor-etc/modules/psproof=.  
+You can have the script do whatever you want so long as it outputs the
+attribute=value pair to standard out:
+<pre class="file">
+#!/bin/sh
+
+ps auxwwww | grep %RED%myproof%ENDCOLOR% | grep -v grep > /dev/null
+foundproof=$?
+
+if [ $foundproof -eq 0 ]
+then
+  echo "PROOF_IS_RUNNING = True"
+else
+  echo "PROOF_IS_RUNNING = False"
+fi
+</pre>
+
+The cron information above causes Condor to periodically (every 30 seconds) invoke the module =/export/share/condor-etc/modules/psproof=.  
+This module must output to stdout an attribute=value pair that gets inserted into the machine ad.
+I used the attribute name "PROOF_IS_RUNNING" that is added when the script finds a process called %RED%<tt>myproof</tt>%ENDCOLOR% running on the machine where it is invoked.  
+Then, in the local config file, I set the SUSPEND/CONTINUE policy to use this attribute.
+
+---+ Setup for HTPC (whole machine) Jobs 
+The condor team is working in adding new mechanisms to handle easily HTPC jobs.
+
+The mechanism documented here works for Condor V7.4 and greater.
+
+To dedicate a host to run only whole machine jobs you can set in the Condor configuration file: <pre class="file">
+SLOT_TYPE_1 = cpus=100%
+NUM_SLOTS_TYPE_1 = 1
+</pre>
+
+A setup accepting both single core and whole machine jobs is more difficult.
+
+---++ Startd setup for mixed single core and whole machine jobs
+Put the following in your Condor configuration file on the nodes accepting jobs (startd configuration). Make sure it either comes after the attributes to which this policy appends (such as START) or that you merge the definitions together. <pre class="file">
+# we will double-allocate resources to overlapping slots
+NUM_CPUS = $(DETECTED_CORES)*2
+MEMORY = $(DETECTED_MEMORY)*2
+
+# single-core slots get 1 core each
+SLOT_TYPE_1 = cpus=1
+NUM_SLOTS_TYPE_1 = $(DETECTED_CORES)
+
+# whole-machine slot gets as many cores and RAM as the machine has
+SLOT_TYPE_2 = cpus=$(DETECTED_CORES), mem=$(DETECTED_MEMORY)
+NUM_SLOTS_TYPE_2 = 1
+
+# Macro specifying the slot id of the whole-machine slot
+# Example: on an 8-core machine, the whole-machine slot is 9.
+WHOLE_MACHINE_SLOT = ($(DETECTED_CORES)+1)
+
+# ClassAd attribute that is True/False depending on whether this slot is
+# the whole-machine slot
+CAN_RUN_WHOLE_MACHINE = SlotID == $(WHOLE_MACHINE_SLOT)
+STARTD_EXPRS = $(STARTD_EXPRS) CAN_RUN_WHOLE_MACHINE
+
+# advertise state of each slot as SlotX_State in ClassAds of all other slots
+STARTD_SLOT_EXPRS = $(STARTD_SLOT_EXPRS) State
+
+# Macro for referencing state of the whole-machine slot.
+# Relies on eval(), which was added in Condor 7.3.2.
+WHOLE_MACHINE_SLOT_STATE = \
+  eval(strcat("Slot",$(WHOLE_MACHINE_SLOT),"_State"))
+
+# Macro that is true if any single-core slots are claimed
+# WARNING: THERE MUST BE AN ENTRY FOR ALL SLOTS
+# IN THE EXPRESSION BELOW.  If you have more slots, you must
+# extend this expression to cover them.  If you have fewer
+# slots, extra entries are harmless.
+SINGLE_CORE_SLOTS_CLAIMED = \
+  ($(WHOLE_MACHINE_SLOT_STATE) =?= "Claimed") < \
+  (Slot1_State =?= "Claimed") + \
+  (Slot2_State =?= "Claimed") + \
+  (Slot3_State =?= "Claimed") + \
+  (Slot4_State =?= "Claimed") + \
+  (Slot5_State =?= "Claimed") + \
+  (Slot6_State =?= "Claimed") + \
+  (Slot7_State =?= "Claimed") + \
+  (Slot8_State =?= "Claimed") + \
+  (Slot9_State =?= "Claimed") + \
+  (Slot10_State =?= "Claimed") + \
+  (Slot11_State =?= "Claimed") + \
+  (Slot12_State =?= "Claimed") + \
+  (Slot13_State =?= "Claimed") + \
+  (Slot14_State =?= "Claimed") + \
+  (Slot15_State =?= "Claimed") + \
+  (Slot16_State =?= "Claimed") + \
+  (Slot17_State =?= "Claimed") + \
+  (Slot18_State =?= "Claimed") + \
+  (Slot19_State =?= "Claimed") + \
+  (Slot20_State =?= "Claimed") + \
+  (Slot21_State =?= "Claimed") + \
+  (Slot22_State =?= "Claimed") + \
+  (Slot23_State =?= "Claimed") + \
+  (Slot24_State =?= "Claimed") + \
+  (Slot25_State =?= "Claimed") + \
+  (Slot26_State =?= "Claimed") + \
+  (Slot27_State =?= "Claimed") + \
+  (Slot28_State =?= "Claimed") + \
+  (Slot29_State =?= "Claimed") + \
+  (Slot30_State =?= "Claimed") + \
+  (Slot31_State =?= "Claimed") + \
+  (Slot32_State =?= "Claimed") + \
+  (Slot33_State =?= "Claimed")
+
+# Single-core jobs must run on single-core slots
+START_SINGLE_CORE_JOB = \
+  TARGET.RequiresWholeMachine =!= True && MY.CAN_RUN_WHOLE_MACHINE == False && \
+  $(WHOLE_MACHINE_SLOT_STATE) =!= "Claimed"
+
+# Whole-machine jobs must run on the whole-machine slot
+START_WHOLE_MACHINE_JOB = \
+  TARGET.RequiresWholeMachine =?= True && MY.CAN_RUN_WHOLE_MACHINE
+
+START = ($(START)) && ( \
+  ($(START_SINGLE_CORE_JOB)) || \
+  ($(START_WHOLE_MACHINE_JOB)) )
+
+# Suspend the whole-machine job until single-core jobs finish.
+SUSPEND = ($(SUSPEND)) || ( \
+  MY.CAN_RUN_WHOLE_MACHINE && ($(SINGLE_CORE_SLOTS_CLAIMED)) )
+
+CONTINUE = ($(SUSPEND)) =!= True
+
+WANT_SUSPEND = ($(WANT_SUSPEND)) || ($(SUSPEND))
+
+# In case group-quotas are being used, trim down the size
+# of the "pie" to avoid double-counting.
+GROUP_DYNAMIC_MACH_CONSTRAINT = CAN_RUN_WHOLE_MACHINE == False
+</pre>
+
+Instead of suspending the whole-machine job until single-cpu jobs finish, we could instead suspend single-core jobs while whole-machine jobs run. Replacing the SUSPEND expression above with the following would achieve this policy. Beware that this could cause single-core jobs to be suspended indefinitely if there is a steady supply of whole-machine jobs. <pre class="file">
+# Suspend single-core jobs while the whole-machine job runs
+SUSPEND = ($(SUSPEND)) || ( \
+  MY.CAN_RUN_WHOLE_MACHINE =!= True && $(WHOLE_MACHINE_SLOT_STATE) =?= "Claimed" )
+</pre>
+
+Another possible policy is to suspend the whole machine job if there are any single core jobs but to kick the single-core jobs off if they take too long to finish. Starting with the original example policy, this can be achieved by adding the following to the configuration: <pre class="file">
+PREEMPT = ($(PREEMPT)) || ( \
+  MY.CAN_RUN_WHOLE_MACHINE =!= True && $(WHOLE_MACHINE_SLOT_STATE) =?= "Claimed" )
+
+# When a job is preempted, let it run for up to a day before killing it
+MaxJobRetirementTime = 24*3600
+</pre>
+
+---++ Whole machine jobs
+First, you would have whole-machine jobs advertise themselves as such with something like the following in the submit file:<pre class="file">
++RequiresWholeMachine = True
+</pre>
+
+Then the job should also require that it run on a whole-machine if this is a requirement. The following example to be put in the submit file should be merged together with whatever other requirements the job may have. <pre class="file">
+Requirements = CAN_RUN_WHOLE_MACHINE
+</pre>
+
+---+ Setup a Service Job Slot for Condor
+Condor is not a great way to run administrative tasks against loads of machines:
+   * You don't know what you hit and what you missed. Condor pools are dynamic
+   * Your jobs don't run as privileged accounts. Unless of changes that weaken the security of the system
+   * You cannot target a specific system like when connecting to the machine or using =condor_ssh_to_job=
+
+Anyway in limited case it can still be useful.
+The basic idea is to add an extra slot for each normal job execution slot. This extra slot will run commands from the user whose job is running on the corresponding execution slot. Typical commands would be things like 'ls' or 'top'.
+---++ Configuration 
+In the Condor configuration (startd):
+<pre class="file">
+# Enable multiple slots
+NUM_CPUS = $(DETECTED_CORES)+1
+SLOT_TYPE_1 = cpus=1, memory=1, swap=1, disk=1
+%SLOT_TYPE_1 = cpus=1, memory=0, swap=0, disk=0
+#SLOT_TYPE_1 = cpus=1, memory=1%, swap=1%, disk=1%
+NUM_SLOTS_TYPE_1 = 1
+SLOT_TYPE_2 = cpus=1
+NUM_SLOTS_TYPE_2 = $(DETECTED_CORES)
+
+# Enable cross_slot information flow
+STARTD_SLOT_EXPRS = $(STARTD_SLOT_EXPRS) State, RemoteUser
+
+# Config one slot for monitoring and one for jobs
+#SLOT1_SLOT2_MATCH = (slot2_State=?="Claimed")&&(slot2_RemoteUser=?=User)
+# WARNING: THERE MUST BE AN ENTRY FOR ALL SLOTS
+# IN THE EXPRESSION BELOW.  If you have more slots, you must
+# extend this expression to cover them.  If you have fewer
+# slots, extra entries are harmless.
+SLOT1_SLOT2_MATCH = \
+   (Slot2_State=?="Claimed")&&(Slot2_RemoteUser=?=User) || \
+   (Slot3_State=?="Claimed")&&(Slot3_RemoteUser=?=User) || \
+   (Slot4_State=?="Claimed")&&(Slot4_RemoteUser=?=User) || \
+   (Slot5_State=?="Claimed")&&(Slot5_RemoteUser=?=User) || \
+   (Slot6_State=?="Claimed")&&(Slot6_RemoteUser=?=User) || \
+   (Slot7_State=?="Claimed")&&(Slot7_RemoteUser=?=User) || \
+   (Slot8_State=?="Claimed")&&(Slot8_RemoteUser=?=User) || \
+   (Slot9_State=?="Claimed")&&(Slot9_RemoteUser=?=User) || \
+   (Slot10_State=?="Claimed")&&(Slot10_RemoteUser=?=User) || \
+   (Slot11_State=?="Claimed")&&(Slot11_RemoteUser=?=User) || \
+   (Slot12_State=?="Claimed")&&(Slot12_RemoteUser=?=User) || \
+   (Slot13_State=?="Claimed")&&(Slot13_RemoteUser=?=User) || \
+   (Slot14_State=?="Claimed")&&(Slot14_RemoteUser=?=User) || \
+   (Slot15_State=?="Claimed")&&(Slot15_RemoteUser=?=User) || \
+   (Slot16_State=?="Claimed")&&(Slot16_RemoteUser=?=User) || \
+   (Slot17_State=?="Claimed")&&(Slot17_RemoteUser=?=User) 
+
+SLOT1_START = $(SLOT1_SLOT2_MATCH) && (JOB_Is_Monitor)
+#SLOT2_START = &lt;your old START condition>
+#START = ((SlotID == 1) && ($(SLOT1_START))) || \
+#        ((SlotID == 2) && ($(SLOT2_START)))
+START = ((SlotID == 1) && ($(SLOT1_START))) || \
+        ((SlotID == 2) && ($(START)))
+
+SLOT1_IsMonitorSlot = True
+SLOT2_MyMonitorSlot = "slot1"
+HAS_MONITOR_SLOT = True
+STARTD_ATTRS = $(STARTD_ATTRS) IsMonitorSlot MyMonitorSlot HAS_MONITOR_SLOT
+</pre>
+
+---++ Use
+You could then use this [[http://home.fnal.gov/~sfiligoi/condor_monitoring/job_monitor.tgz][example job monitoring tool]] extracted from [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/index.html][glideinWMS]] to submit jobs to the monitoring slot. The basic idea is to figure out where the job is running (by using condor_q) and then submit a job with the following constraints in its submit file:
+<pre class="file">
++JOB_Is_Monitor=True
+Requirements=(Name=?=”slot1@&lt;node running job>”)
+</pre>
+
+As Igor notes, t
+The drawbacks of this method are:
+   * It takes a negotiation cycle to get back results. Depending on your pool this could be a few seconds to minutes.
+   * Cross slot information is only updated every few minutes, so it might take a few minutes after the job starts up before you can begin debugging it.
+   * The number of slots in your pool increases (+1 per node or doubles depending on the choices).
+
+One (untested) idea for how to speed things up a bit and avoid doubling the visible slots in the pool is to have the startds advertise to two central managers, one for normal jobs and one for monitoring jobs. (You can do that by simply listing both collectors in COLLECTOR_HOST.) You can use COLLECTOR_REQUIREMENTS to prune out all but the normal job execution slots in one collector and all but job monitoring slots in the other collector. A different idea is to have the job itself start up its own startd which joins a monitoring pool (private to the user?) and accepts monitoring jobs.
+
+
+
+
+---+ References
+   * InstallCondor
+   * https://condor-wiki.cs.wisc.edu/index.cgi/wiki?p=WholeMachineSlots
+   * https://condor-wiki.cs.wisc.edu/index.cgi/wiki?p=HowToConfigJobMonitoringandDebugging
+
+---+ Comments
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################ 
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = MarcoMambelli
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       =  Tier3
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   reviewed dring DOC workshop
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = AlainRoy
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################ 
+-->

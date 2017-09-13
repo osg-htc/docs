@@ -1,0 +1,2026 @@
+---+!! *<nop>%SPACEOUT{ "%TOPIC%" }%*
+%DOC_STATUS_TABLE%
+%TOC{depth="2"}%
+
+
+<!-- conventions used in this document
+   * Local UCL_CWD  = %URLPARAM{"INPUT_CWD" encode="quote" default="~"}%
+   * Local UCL_HOST = %URLPARAM{"INPUT_HOST" encode="quote" default="client"}%
+   * Local UCL_USER = %URLPARAM{"INPUT_USER" encode="quote" default="user"}%
+   * Local UCL_DOMAIN = %URLPARAM{"INPUT_DOMAIN" encode="quote" default="opensciencegrid.org"}%
+   * Local UCL_CE = %URLPARAM{"INPUT_CE" encode="quote" default="ce.opensciencegrid.org"}%
+   * Set TWISTY_OPTS_DETAILED = mode="div" showlink="Show Detailed Output" hidelink="Hide" showimgleft="/twiki/pub/TWiki/TWikiDocGraphics/toggleopen-small.gif" hideimgleft="/twiki/pub/TWiki/TWikiDocGraphics/toggleclose-small.gif" remember="on" start="hide" 
+
+-->
+
+
+---+About This Document
+This document is intended for users who want to use fermi srm clients to do any of following
+   * list/remove files at a storage location 
+   * get files from a storage location
+   * put files in a storage location (in usual or space reserved area)
+   * transfer files from one storage location to another
+   * create/remove directory at a storage location
+   * make/release space reservation against a storage element
+
+---+Requirements
+   * A valid grid proxy
+   * Permission to actually get/put/list the data 
+     (You should be allowed to actually retrieve/store the data on the storage element.)
+   * [[Documentation/Release3.InstallOSGClient][OSG Client]], [[Documentation/Release3.InstallComputeElement][CE]] or [[Documentation/Release3.InstallWNClient][WN]] software installed.  
+      * Note: the actual RPM needed is dcache-srmclient (with associated dependencies), which you can install with "yum install dcache-srmclient".  However, installing one of the above supported software packages is recommended.
+
+---+ Procedure
+SRM Fermi Clients are packaged in to VDT and should be available on any node that has the OSG Client, CE or WN software installed.
+To run the clients, you need to 
+   * login to proper node
+   * generate your voms credentials
+   * dcache-srmclient RPMs install the clients in the system path (/usr/bin), but you can verify they are in your path by running: 
+<pre class="screen">
+which srmcp
+</pre>
+*Note* - Options available for each command can be listed by using %RED%-help%ENDCOLOR% 
+
+A srm-url is of form  srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR%
+where 
+
+hostname - fully qualified hostname of srm server
+
+port - port on which srm server is listening  (usually 8443)
+
+webservicepath - srm/managerv2 (for dCache based SE) and srm/v2/server (for Bestman based SE)
+
+path - absolute path (beginning with a /) to location (on storage element) where you want to read/write/list data
+
+---+++srmping - Ping the SE to see if it is accepting client requests
+*Syntax*
+<pre class="screen">
+srmping -2 -debug [options] srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%</pre>
+
+*Example* 
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Show the example output"}%
+<pre class="screen">
+Example Output
+Storage Resource Manager (SRM) Client version 2.1.5-3
+Copyright (c) 2002-2009 Fermi National Accelerator Laboratory
+
+SRM Configuration:
+	default_port=8443
+	debug=true
+	srmcphome=/usr/local/vdt-2.0.0/srm-client-fermi
+	urlcopy=/usr/local/vdt-2.0.0/srm-client-fermi/sbin/url-copy.sh
+	gsiftpclient=globus-url-copy
+	help=false
+	h=false
+	gsissl=true
+	mapfile=/usr/local/vdt-2.0.0/srm-client-fermi/conf/SRMServerV1.map
+	webservice_path=null
+	webservice_protocol=https
+	use_proxy=true
+	x509_user_proxy=/tmp/x509up_u60158
+	x509_user_cert=
+	x509_user_key=
+	x509_user_trusted_certificates=/usr/local/vdt-2.0.0/globus/TRUSTED_CA
+	globus_tcp_port_range=null
+	gss_expected_name=null
+	protocols=gsiftp,dcap,http
+	pushmode=false
+	buffer_size=131072
+	tcp_buffer_size=0
+	streams_num=1
+	conf=/usr/local/vdt-2.0.0/srm-client-fermi/etc/config-2.xml
+	save_conf=null
+	do_remove=false
+	copy=false
+	bringOnline=false
+	ping=true
+	reserveSpace=false
+	array_of_client_networks=null
+	retention_policy=null
+	space_desc=null
+	access_latency=null
+	access_pattern=null
+	connection_type=null
+	desired_size=null
+	guaranteed_size=null
+	lifetime=null
+	releaseSpace=false
+	space_token=null
+	force=false
+	getSpaceMetaData=false
+	space_tokens=null
+	copyjobfile=null
+	wsdl_url=null
+	use_urlcopy_script=false
+	getFileMetaData=false
+	ls=false
+	getSpaceTokens=false
+	rm=false
+	rmdir=false
+	mv=false
+	mkdir=false
+	getPermissions=false
+	checkPermissions=false
+	setPermissions=false
+	getRequestSummary=false
+	getRequestTokens=false
+	abortFiles=false
+	releaseFiles=false
+	request_desc=null
+	type=null
+	owner=null
+	group=null
+	other=null
+	request_tokens=null
+	request_token=null
+	file_lifetime=null
+	pin_lifetime=null
+	extendFileLifetime=false
+	advisoryDelete=false
+	getRequestStatus=false
+	request_id=0
+	getStorageElementInfo=false
+	retry_timeout=10000
+	retry_num=20
+	connect_to_wsdl=false
+	delegate=true
+	full_delegation=true
+	version=false
+	report=null
+	server_mode=passive
+	storagetype=null
+	stage=false
+	l=false
+	recursive=false
+	offset=0
+	count=null
+	srm_protocol_version=2
+	request_lifetime=86400
+	priority=0
+	overwrite_mode=null
+	send_cksm=true
+	cksm_type=null
+	cksm_value=null
+	abortRequest=false
+	repeat=null
+	dryrun=false
+Thu Sep 09 10:23:10 CDT 2010: In SRMClient ExpectedName: host
+Thu Sep 09 10:23:10 CDT 2010: SRMClient(https,srm/managerv2,true)
+SRMClientV2 : user credentials are: /DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Neha Sharma/CN=UID:neha
+SRMClientV2 : connecting to srm at httpg://gwdca04.fnal.gov:8443/srm/managerv2
+SRMClientV2 : srmPing , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+Thu Sep 09 10:23:25 CDT 2010: received response
+%RED%VersionInfo : v2.2
+backend_type:dCache
+backend_version:production-1.9.5-21%ENDCOLOR%
+</pre>
+Note: The command is successful only if you see the SE version in debug output (shown above in red color)
+%ENDTWISTY%
+</br>
+
+---+++ srmcp - Perform data transfers to/from/between SE
+*Syntax*
+<pre class="screen">
+srmcp [options] %RED%source-srm-url destination-srm-url%ENDCOLOR%</pre>
+
+*Example* <br>
+Copy a file from local filesystem to remote storage location using srm protocol
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Show the example output"}%
+<pre class="screen">
+-bash-3.00$ srmcp -2 -debug file:////home/neha/test.c srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR%
+Example Output
+Storage Resource Manager (SRM) Client version 2.1.5-3
+Copyright (c) 2002-2009 Fermi National Accelerator Laboratory
+
+SRM Configuration:
+	default_port=8443
+	debug=true
+	srmcphome=/usr/local/vdt-2.0.0/srm-client-fermi
+	urlcopy=/usr/local/vdt-2.0.0/srm-client-fermi/sbin/url-copy.sh
+	gsiftpclient=globus-url-copy
+	help=false
+	h=false
+	gsissl=true
+	mapfile=/usr/local/vdt-2.0.0/srm-client-fermi/conf/SRMServerV1.map
+	webservice_path=null
+	webservice_protocol=https
+	use_proxy=true
+	x509_user_proxy=/tmp/x509up_u60158
+	x509_user_cert=
+	x509_user_key=
+	x509_user_trusted_certificates=/usr/local/vdt-2.0.0/globus/TRUSTED_CA
+	globus_tcp_port_range=null
+	gss_expected_name=null
+	protocols=gsiftp,dcap,http
+	pushmode=false
+	buffer_size=131072
+	tcp_buffer_size=0
+	streams_num=1
+	conf=/usr/local/vdt-2.0.0/srm-client-fermi/etc/config-2.xml
+	save_conf=null
+	do_remove=false
+	copy=true
+	bringOnline=false
+	ping=false
+	reserveSpace=false
+	array_of_client_networks=null
+	retention_policy=null
+	space_desc=null
+	access_latency=null
+	access_pattern=null
+	connection_type=null
+	desired_size=null
+	guaranteed_size=null
+	lifetime=null
+	releaseSpace=false
+	space_token=null
+	force=false
+	getSpaceMetaData=false
+	space_tokens=null
+	copyjobfile=null
+	wsdl_url=null
+	use_urlcopy_script=false
+	getFileMetaData=false
+	ls=false
+	getSpaceTokens=false
+	rm=false
+	rmdir=false
+	mv=false
+	mkdir=false
+	getPermissions=false
+	checkPermissions=false
+	setPermissions=false
+	getRequestSummary=false
+	getRequestTokens=false
+	abortFiles=false
+	releaseFiles=false
+	request_desc=null
+	type=null
+	owner=null
+	group=null
+	other=null
+	request_tokens=null
+	request_token=null
+	file_lifetime=null
+	pin_lifetime=null
+	extendFileLifetime=false
+	advisoryDelete=false
+	getRequestStatus=false
+	request_id=0
+	getStorageElementInfo=false
+	retry_timeout=10000
+	retry_num=20
+	connect_to_wsdl=false
+	delegate=true
+	full_delegation=true
+	version=false
+	report=null
+	server_mode=passive
+	storagetype=null
+	stage=false
+	l=false
+	recursive=false
+	offset=0
+	count=null
+	srm_protocol_version=2
+	request_lifetime=86400
+	priority=0
+	overwrite_mode=null
+	send_cksm=true
+	cksm_type=null
+	cksm_value=null
+	abortRequest=false
+	repeat=null
+	dryrun=false
+	from[0]=file:////home/neha/test.c
+	to=srm://gwdca04.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/data/fermilab/test.c
+
+Thu Sep 09 10:45:16 CDT 2010: In SRMClient ExpectedName: host
+Thu Sep 09 10:45:16 CDT 2010: SRMClient(https,srm/managerv2,true)
+SRMClientV2 : user credentials are: /DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Neha Sharma/CN=UID:neha
+SRMClientV2 : connecting to srm at httpg://gwdca04.fnal.gov:8443/srm/managerv2
+SRMClientV2 : srmPrepareToPut , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+copy_jobs is empty
+Thu Sep 09 10:45:30 CDT 2010:  srm returned requestToken = -2147477589
+Thu Sep 09 10:45:30 CDT 2010: sleeping 4 seconds ...
+SRMClientV2 : srmStatusOfPutRequest , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+Thu Sep 09 10:45:35 CDT 2010: no more pending transfers, breaking the loop
+copy_jobs is not empty
+copying CopyJob, source = file:////home/neha/test.c destination = gsiftp://gwdca03.fnal.gov:2811//test.c
+GridftpClient: memory buffer size is set to 131072
+GridftpClient: connecting to gwdca03.fnal.gov on port 2811
+GridftpClient: gridFTPClient tcp buffer size is set to 1048576
+GridftpClient: gridFTPWrite started, source file is java.io.RandomAccessFile@4a5c78 destination path is /test.c
+GridftpClient: gridFTPWrite started, destination path is /test.c
+GridftpClient: set local data channel authentication mode to None
+GridftpClient: stream mode transfer
+GridftpClient: adler32 for file java.io.RandomAccessFile@4a5c78 is 28463a3d
+GridftpClient: waiting for completion of transfer
+GridftpClient: starting a transfer to /test.c
+GridftpClient: DiskDataSink.close() called
+GridftpClient: gridFTPWrite() wrote 179bytes
+GridftpClient: closing client : org.dcache.srm.util.GridftpClient$FnalGridFTPClient@6545d2
+GridftpClient: closed client
+execution of CopyJob, source = file:////home/neha/test.c destination = gsiftp://gwdca03.fnal.gov:2811//test.c completed
+SRMClientV2 : srmPutDone , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+srmPutDone status code=SRM_SUCCESS
+copy_jobs is empty
+stopping copier
+-bash-3.00$
+</pre>
+%ENDTWISTY%
+<br>
+
+Copy a file from local filesystem to remote storage location using gsiftp protocol
+%TWISTY{%TWISTY_OPTS_DETAILED%}%
+<pre class="screen">
+-bash-3.00$ srmcp -2 -debug file:////home/neha/test.c gsiftp://yourgridftphost:2811/filelocation
+Example Output 
+Storage Resource Manager (SRM) Client version 2.1.5-3
+Copyright (c) 2002-2009 Fermi National Accelerator Laboratory
+
+SRM Configuration:
+	default_port=8443
+	debug=true
+	srmcphome=/usr/local/vdt-2.0.0/srm-client-fermi
+	urlcopy=/usr/local/vdt-2.0.0/srm-client-fermi/sbin/url-copy.sh
+	gsiftpclient=globus-url-copy
+	help=false
+	h=false
+	gsissl=true
+	mapfile=/usr/local/vdt-2.0.0/srm-client-fermi/conf/SRMServerV1.map
+	webservice_path=null
+	webservice_protocol=https
+	use_proxy=true
+	x509_user_proxy=/tmp/x509up_u60158
+	x509_user_cert=
+	x509_user_key=
+	x509_user_trusted_certificates=/usr/local/vdt-2.0.0/globus/TRUSTED_CA
+	globus_tcp_port_range=null
+	gss_expected_name=null
+	protocols=gsiftp,dcap,http
+	pushmode=false
+	buffer_size=131072
+	tcp_buffer_size=0
+	streams_num=1
+	conf=/usr/local/vdt-2.0.0/srm-client-fermi/etc/config-2.xml
+	save_conf=null
+	do_remove=false
+	copy=true
+	bringOnline=false
+	ping=false
+	reserveSpace=false
+	array_of_client_networks=null
+	retention_policy=null
+	space_desc=null
+	access_latency=null
+	access_pattern=null
+	connection_type=null
+	desired_size=null
+	guaranteed_size=null
+	lifetime=null
+	releaseSpace=false
+	space_token=null
+	force=false
+	getSpaceMetaData=false
+	space_tokens=null
+	copyjobfile=null
+	wsdl_url=null
+	use_urlcopy_script=false
+	getFileMetaData=false
+	ls=false
+	getSpaceTokens=false
+	rm=false
+	rmdir=false
+	mv=false
+	mkdir=false
+	getPermissions=false
+	checkPermissions=false
+	setPermissions=false
+	getRequestSummary=false
+	getRequestTokens=false
+	abortFiles=false
+	releaseFiles=false
+	request_desc=null
+	type=null
+	owner=null
+	group=null
+	other=null
+	request_tokens=null
+	request_token=null
+	file_lifetime=null
+	pin_lifetime=null
+	extendFileLifetime=false
+	advisoryDelete=false
+	getRequestStatus=false
+	request_id=0
+	getStorageElementInfo=false
+	retry_timeout=10000
+	retry_num=20
+	connect_to_wsdl=false
+	delegate=true
+	full_delegation=true
+	version=false
+	report=null
+	server_mode=passive
+	storagetype=null
+	stage=false
+	l=false
+	recursive=false
+	offset=0
+	count=null
+	srm_protocol_version=2
+	request_lifetime=86400
+	priority=0
+	overwrite_mode=null
+	send_cksm=true
+	cksm_type=null
+	cksm_value=null
+	abortRequest=false
+	repeat=null
+	dryrun=false
+	from[0]=file:////home/neha/test.c
+	to=gsiftp://gwdca03.fnal.gov:2811/test2.c
+
+Thu Sep 09 10:53:07 CDT 2010: In SRMClient ExpectedName: host
+Thu Sep 09 10:53:07 CDT 2010: SRMClient(https,srm/managerv2,true)
+copy_jobs is not empty
+copying CopyJob, source = file:////home/neha/test.c destination = gsiftp://gwdca03.fnal.gov:2811/test2.c
+GridftpClient: memory buffer size is set to 131072
+GridftpClient: connecting to gwdca03.fnal.gov on port 2811
+GridftpClient: gridFTPClient tcp buffer size is set to 1048576
+GridftpClient: gridFTPWrite started, source file is java.io.RandomAccessFile@18ce14a destination path is test2.c
+GridftpClient: gridFTPWrite started, destination path is test2.c
+GridftpClient: set local data channel authentication mode to None
+GridftpClient: stream mode transfer
+GridftpClient: adler32 for file java.io.RandomAccessFile@18ce14a is 28463a3d
+GridftpClient: waiting for completion of transfer
+GridftpClient: starting a transfer to test2.c
+GridftpClient: DiskDataSink.close() called
+GridftpClient: gridFTPWrite() wrote 179bytes
+GridftpClient: closing client : org.dcache.srm.util.GridftpClient$FnalGridFTPClient@eaf40c
+GridftpClient: closed client
+execution of CopyJob, source = file:////home/neha/test.c destination = gsiftp://gwdca03.fnal.gov:2811/test2.c completed
+copy_jobs is empty
+stopping copier
+-bash-3.00$
+</pre>
+%ENDTWISTY%
+<br>
+
+Copy a file from remote storage location to local filesystem using srm protocol
+%TWISTY{%TWISTY_OPTS_DETAILED%}%
+<pre class="screen">
+-bash-3.00$ srmcp -2 -debug srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR% file:////home/neha/testcopyback.c
+Example Output
+Storage Resource Manager (SRM) Client version 2.1.5-3
+Copyright (c) 2002-2009 Fermi National Accelerator Laboratory
+
+SRM Configuration:
+	default_port=8443
+	debug=true
+	srmcphome=/usr/local/vdt-2.0.0/srm-client-fermi
+	urlcopy=/usr/local/vdt-2.0.0/srm-client-fermi/sbin/url-copy.sh
+	gsiftpclient=globus-url-copy
+	help=false
+	h=false
+	gsissl=true
+	mapfile=/usr/local/vdt-2.0.0/srm-client-fermi/conf/SRMServerV1.map
+	webservice_path=null
+	webservice_protocol=https
+	use_proxy=true
+	x509_user_proxy=/tmp/x509up_u60158
+	x509_user_cert=
+	x509_user_key=
+	x509_user_trusted_certificates=/usr/local/vdt-2.0.0/globus/TRUSTED_CA
+	globus_tcp_port_range=null
+	gss_expected_name=null
+	protocols=gsiftp,dcap,http
+	pushmode=false
+	buffer_size=131072
+	tcp_buffer_size=0
+	streams_num=1
+	conf=/usr/local/vdt-2.0.0/srm-client-fermi/etc/config-2.xml
+	save_conf=null
+	do_remove=false
+	copy=true
+	bringOnline=false
+	ping=false
+	reserveSpace=false
+	array_of_client_networks=null
+	retention_policy=null
+	space_desc=null
+	access_latency=null
+	access_pattern=null
+	connection_type=null
+	desired_size=null
+	guaranteed_size=null
+	lifetime=null
+	releaseSpace=false
+	space_token=null
+	force=false
+	getSpaceMetaData=false
+	space_tokens=null
+	copyjobfile=null
+	wsdl_url=null
+	use_urlcopy_script=false
+	getFileMetaData=false
+	ls=false
+	getSpaceTokens=false
+	rm=false
+	rmdir=false
+	mv=false
+	mkdir=false
+	getPermissions=false
+	checkPermissions=false
+	setPermissions=false
+	getRequestSummary=false
+	getRequestTokens=false
+	abortFiles=false
+	releaseFiles=false
+	request_desc=null
+	type=null
+	owner=null
+	group=null
+	other=null
+	request_tokens=null
+	request_token=null
+	file_lifetime=null
+	pin_lifetime=null
+	extendFileLifetime=false
+	advisoryDelete=false
+	getRequestStatus=false
+	request_id=0
+	getStorageElementInfo=false
+	retry_timeout=10000
+	retry_num=20
+	connect_to_wsdl=false
+	delegate=true
+	full_delegation=true
+	version=false
+	report=null
+	server_mode=passive
+	storagetype=null
+	stage=false
+	l=false
+	recursive=false
+	offset=0
+	count=null
+	srm_protocol_version=2
+	request_lifetime=86400
+	priority=0
+	overwrite_mode=null
+	send_cksm=true
+	cksm_type=null
+	cksm_value=null
+	abortRequest=false
+	repeat=null
+	dryrun=false
+	from[0]=srm://gwdca04.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/data/fermilab/test.c
+	to=file:////home/neha/testcopyback.c
+
+Thu Sep 09 10:54:07 CDT 2010: starting SRMGetClient
+Thu Sep 09 10:54:07 CDT 2010: In SRMClient ExpectedName: host
+Thu Sep 09 10:54:07 CDT 2010: SRMClient(https,srm/managerv2,true)
+SRMClientV2 : user credentials are: /DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Neha Sharma/CN=UID:neha
+SRMClientV2 : connecting to srm at httpg://gwdca04.fnal.gov:8443/srm/managerv2
+Thu Sep 09 10:54:08 CDT 2010: calling srmPrepareToGet
+SRMClientV2 : srmPrepareToGet , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+copy_jobs is empty
+Thu Sep 09 10:54:10 CDT 2010: received response
+Thu Sep 09 10:54:10 CDT 2010:  srm returned requestToken = -2147477587
+Thu Sep 09 10:54:10 CDT 2010: sleeping 4 seconds ...
+SRMClientV2 : srmStatusOfGetRequest , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+Thu Sep 09 10:54:14 CDT 2010: no more pending transfers, breaking the loop
+copy_jobs is not empty
+copying CopyJob, source = gsiftp://gwdca03.fnal.gov:2811//test.c destination = file:////home/neha/testcopyback.c
+GridftpClient: memory buffer size is set to 131072
+GridftpClient: connecting to gwdca03.fnal.gov on port 2811
+GridftpClient: gridFTPClient tcp buffer size is set to 1048576
+GridftpClient: gridFTPRead started
+GridftpClient: set local data channel authentication mode to None
+GridftpClient: stream mode transfer
+GridftpClient: waiting for completion of transfer
+GridftpClient: starting a transfer from /test.c
+GridftpClient: DiskDataSink.close() called
+GridftpClient: gridFTPWrite() wrote 179bytes
+GridftpClient: closing client : org.dcache.srm.util.GridftpClient$FnalGridFTPClient@c1a0eb
+GridftpClient: closed client
+execution of CopyJob, source = gsiftp://gwdca03.fnal.gov:2811//test.c destination = file:////home/neha/testcopyback.c completed
+SRMClientV2 : srmReleaseFiles , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+srmReleaseFilesResponse status code=SRM_SUCCESS
+copy_jobs is empty
+stopping copier
+-bash-3.00$ 
+</pre>
+%ENDTWISTY%
+<br>
+
+Copy a file from remote storage location to local filesystem using gsiftp protocol
+%TWISTY{%TWISTY_OPTS_DETAILED%}%
+<pre class="screen"> 
+-bash-3.00$ srmcp -2 -debug gsiftp://yourgridftphost:2811/test2.c file:////home/neha/testg.c
+Example Output
+Storage Resource Manager (SRM) Client version 2.1.5-3
+Copyright (c) 2002-2009 Fermi National Accelerator Laboratory
+
+SRM Configuration:
+	default_port=8443
+	debug=true
+	srmcphome=/usr/local/vdt-2.0.0/srm-client-fermi
+	urlcopy=/usr/local/vdt-2.0.0/srm-client-fermi/sbin/url-copy.sh
+	gsiftpclient=globus-url-copy
+	help=false
+	h=false
+	gsissl=true
+	mapfile=/usr/local/vdt-2.0.0/srm-client-fermi/conf/SRMServerV1.map
+	webservice_path=null
+	webservice_protocol=https
+	use_proxy=true
+	x509_user_proxy=/tmp/x509up_u60158
+	x509_user_cert=
+	x509_user_key=
+	x509_user_trusted_certificates=/usr/local/vdt-2.0.0/globus/TRUSTED_CA
+	globus_tcp_port_range=null
+	gss_expected_name=null
+	protocols=gsiftp,dcap,http
+	pushmode=false
+	buffer_size=131072
+	tcp_buffer_size=0
+	streams_num=1
+	conf=/usr/local/vdt-2.0.0/srm-client-fermi/etc/config-2.xml
+	save_conf=null
+	do_remove=false
+	copy=true
+	bringOnline=false
+	ping=false
+	reserveSpace=false
+	array_of_client_networks=null
+	retention_policy=null
+	space_desc=null
+	access_latency=null
+	access_pattern=null
+	connection_type=null
+	desired_size=null
+	guaranteed_size=null
+	lifetime=null
+	releaseSpace=false
+	space_token=null
+	force=false
+	getSpaceMetaData=false
+	space_tokens=null
+	copyjobfile=null
+	wsdl_url=null
+	use_urlcopy_script=false
+	getFileMetaData=false
+	ls=false
+	getSpaceTokens=false
+	rm=false
+	rmdir=false
+	mv=false
+	mkdir=false
+	getPermissions=false
+	checkPermissions=false
+	setPermissions=false
+	getRequestSummary=false
+	getRequestTokens=false
+	abortFiles=false
+	releaseFiles=false
+	request_desc=null
+	type=null
+	owner=null
+	group=null
+	other=null
+	request_tokens=null
+	request_token=null
+	file_lifetime=null
+	pin_lifetime=null
+	extendFileLifetime=false
+	advisoryDelete=false
+	getRequestStatus=false
+	request_id=0
+	getStorageElementInfo=false
+	retry_timeout=10000
+	retry_num=20
+	connect_to_wsdl=false
+	delegate=true
+	full_delegation=true
+	version=false
+	report=null
+	server_mode=passive
+	storagetype=null
+	stage=false
+	l=false
+	recursive=false
+	offset=0
+	count=null
+	srm_protocol_version=2
+	request_lifetime=86400
+	priority=0
+	overwrite_mode=null
+	send_cksm=true
+	cksm_type=null
+	cksm_value=null
+	abortRequest=false
+	repeat=null
+	dryrun=false
+	from[0]=gsiftp://gwdca03.fnal.gov:2811/test2.c
+	to=file:////home/neha/testg.c
+
+Thu Sep 09 10:54:54 CDT 2010: In SRMClient ExpectedName: host
+Thu Sep 09 10:54:54 CDT 2010: SRMClient(https,srm/managerv2,true)
+copy_jobs is not empty
+copying CopyJob, source = gsiftp://gwdca03.fnal.gov:2811/test2.c destination = file:////home/neha/testg.c
+GridftpClient: memory buffer size is set to 131072
+GridftpClient: connecting to gwdca03.fnal.gov on port 2811
+GridftpClient: gridFTPClient tcp buffer size is set to 1048576
+GridftpClient: gridFTPRead started
+GridftpClient: set local data channel authentication mode to None
+GridftpClient: stream mode transfer
+GridftpClient: waiting for completion of transfer
+GridftpClient: starting a transfer from test2.c
+GridftpClient: DiskDataSink.close() called
+GridftpClient: gridFTPWrite() wrote 179bytes
+GridftpClient: closing client : org.dcache.srm.util.GridftpClient$FnalGridFTPClient@76e8a7
+GridftpClient: closed client
+execution of CopyJob, source = gsiftp://gwdca03.fnal.gov:2811/test2.c destination = file:////home/neha/testg.c completed
+copy_jobs is empty
+stopping copier
+-bash-3.00$
+</pre>
+%ENDTWISTY%
+<br></br>
+Copy file using the space token against dCache based SE(Note: This command should be run after you have run the srm-reserve-space command and obtained a space token.)
+%TWISTY{%TWISTY_OPTS_DETAILED%}%
+<pre class="screen">
+-bash-3.00$ srmcp -2 -debug %RED%-space_token=%ENDCOLOR%20147 %RED%-retention_policy=%ENDCOLOR%REPLICA %RED%-access_latency=%ENDCOLOR%ONLINE file:////home/neha/testg.c srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/srm/managerv2?SFN=%RED%path%ENDCOLOR%
+Example Output
+Storage Resource Manager (SRM) Client version 2.1.5-3
+Copyright (c) 2002-2009 Fermi National Accelerator Laboratory
+
+SRM Configuration:
+	default_port=8443
+	debug=true
+	srmcphome=/usr/local/vdt-2.0.0/srm-client-fermi
+	urlcopy=/usr/local/vdt-2.0.0/srm-client-fermi/sbin/url-copy.sh
+	gsiftpclient=globus-url-copy
+	help=false
+	h=false
+	gsissl=true
+	mapfile=/usr/local/vdt-2.0.0/srm-client-fermi/conf/SRMServerV1.map
+	webservice_path=null
+	webservice_protocol=https
+	use_proxy=true
+	x509_user_proxy=/tmp/x509up_u60158
+	x509_user_cert=
+	x509_user_key=
+	x509_user_trusted_certificates=/usr/local/vdt-2.0.0/globus/TRUSTED_CA
+	globus_tcp_port_range=null
+	gss_expected_name=null
+	protocols=gsiftp,dcap,http
+	pushmode=false
+	buffer_size=131072
+	tcp_buffer_size=0
+	streams_num=1
+	conf=/usr/local/vdt-2.0.0/srm-client-fermi/etc/config-2.xml
+	save_conf=null
+	do_remove=false
+	copy=true
+	bringOnline=false
+	ping=false
+	reserveSpace=false
+	array_of_client_networks=null
+	retention_policy=REPLICA
+	space_desc=null
+	access_latency=ONLINE
+	access_pattern=null
+	connection_type=null
+	desired_size=null
+	guaranteed_size=null
+	lifetime=null
+	releaseSpace=false
+	space_token=20147
+	force=false
+	getSpaceMetaData=false
+	space_tokens=null
+	copyjobfile=null
+	wsdl_url=null
+	use_urlcopy_script=false
+	getFileMetaData=false
+	ls=false
+	getSpaceTokens=false
+	rm=false
+	rmdir=false
+	mv=false
+	mkdir=false
+	getPermissions=false
+	checkPermissions=false
+	setPermissions=false
+	getRequestSummary=false
+	getRequestTokens=false
+	abortFiles=false
+	releaseFiles=false
+	request_desc=null
+	type=null
+	owner=null
+	group=null
+	other=null
+	request_tokens=null
+	request_token=null
+	file_lifetime=null
+	pin_lifetime=null
+	extendFileLifetime=false
+	advisoryDelete=false
+	getRequestStatus=false
+	request_id=0
+	getStorageElementInfo=false
+	retry_timeout=10000
+	retry_num=20
+	connect_to_wsdl=false
+	delegate=true
+	full_delegation=true
+	version=false
+	report=null
+	server_mode=passive
+	storagetype=null
+	stage=false
+	l=false
+	recursive=false
+	offset=0
+	count=null
+	srm_protocol_version=2
+	request_lifetime=86400
+	priority=0
+	overwrite_mode=null
+	send_cksm=true
+	cksm_type=null
+	cksm_value=null
+	abortRequest=false
+	repeat=null
+	dryrun=false
+	from[0]=file:////home/neha/testg.c
+	to=srm://gwdca04.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/data/fermilab/teststk1.c
+
+Thu Sep 09 11:04:38 CDT 2010: In SRMClient ExpectedName: host
+Thu Sep 09 11:04:38 CDT 2010: SRMClient(https,srm/managerv2,true)
+SRMClientV2 : user credentials are: /DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Neha Sharma/CN=UID:neha
+SRMClientV2 : connecting to srm at httpg://gwdca04.fnal.gov:8443/srm/managerv2
+copy_jobs is empty
+SRMClientV2 : srmPrepareToPut , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+Thu Sep 09 11:04:41 CDT 2010:  srm returned requestToken = -2147477582
+Thu Sep 09 11:04:41 CDT 2010: sleeping 4 seconds ...
+SRMClientV2 : srmStatusOfPutRequest , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+Thu Sep 09 11:04:45 CDT 2010: no more pending transfers, breaking the loop
+copy_jobs is not empty
+copying CopyJob, source = file:////home/neha/testg.c destination = gsiftp://gwdca03.fnal.gov:2811//teststk1.c
+GridftpClient: memory buffer size is set to 131072
+GridftpClient: connecting to gwdca03.fnal.gov on port 2811
+GridftpClient: gridFTPClient tcp buffer size is set to 1048576
+GridftpClient: gridFTPWrite started, source file is java.io.RandomAccessFile@e14d81 destination path is /teststk1.c
+GridftpClient: gridFTPWrite started, destination path is /teststk1.c
+GridftpClient: set local data channel authentication mode to None
+GridftpClient: stream mode transfer
+GridftpClient: adler32 for file java.io.RandomAccessFile@e14d81 is 28463a3d
+GridftpClient: waiting for completion of transfer
+GridftpClient: starting a transfer to /teststk1.c
+GridftpClient: DiskDataSink.close() called
+GridftpClient: gridFTPWrite() wrote 179bytes
+GridftpClient: closing client : org.dcache.srm.util.GridftpClient$FnalGridFTPClient@2bccb2
+GridftpClient: closed client
+execution of CopyJob, source = file:////home/neha/testg.c destination = gsiftp://gwdca03.fnal.gov:2811//teststk1.c completed
+SRMClientV2 : srmPutDone , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+srmPutDone status code=SRM_SUCCESS
+copy_jobs is empty
+stopping copier
+-bash-3.00$ 
+</pre>
+%ENDTWISTY%
+<br>
+
+Copy file using the static space token against Bestman based SE (Note: This command assumes you know the name of the static space token)
+<pre class="screen">
+srmcp -2   -send_cksm=false file:////tmp/test srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR% -space_token=%RED%spacetokenname%ENDCOLOR%
+</pre>
+Copy multiple files with one command
+%TWISTY{%TWISTY_OPTS_DETAILED%}%
+<pre class="screen">
+-bash-3.00$ cat datafile;srmcp -2 -debug %RED%-copyjobfile%ENDCOLOR% datafile 
+file:////home/neha/testg.c srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR%
+file:////home/neha/test.c srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR%
+Example Output
+Storage Resource Manager (SRM) Client version 2.1.5-3
+Copyright (c) 2002-2009 Fermi National Accelerator Laboratory
+
+SRM Configuration:
+	default_port=8443
+	debug=true
+	srmcphome=/usr/local/vdt-2.0.0/srm-client-fermi
+	urlcopy=/usr/local/vdt-2.0.0/srm-client-fermi/sbin/url-copy.sh
+	gsiftpclient=globus-url-copy
+	help=false
+	h=false
+	gsissl=true
+	mapfile=/usr/local/vdt-2.0.0/srm-client-fermi/conf/SRMServerV1.map
+	webservice_path=null
+	webservice_protocol=https
+	use_proxy=true
+	x509_user_proxy=/tmp/x509up_u60158
+	x509_user_cert=
+	x509_user_key=
+	x509_user_trusted_certificates=/usr/local/vdt-2.0.0/globus/TRUSTED_CA
+	globus_tcp_port_range=null
+	gss_expected_name=null
+	protocols=gsiftp,dcap,http
+	pushmode=false
+	buffer_size=131072
+	tcp_buffer_size=0
+	streams_num=1
+	conf=/usr/local/vdt-2.0.0/srm-client-fermi/etc/config-2.xml
+	save_conf=null
+	do_remove=false
+	copy=true
+	bringOnline=false
+	ping=false
+	reserveSpace=false
+	array_of_client_networks=null
+	retention_policy=null
+	space_desc=null
+	access_latency=null
+	access_pattern=null
+	connection_type=null
+	desired_size=null
+	guaranteed_size=null
+	lifetime=null
+	releaseSpace=false
+	space_token=null
+	force=false
+	getSpaceMetaData=false
+	space_tokens=null
+	copyjobfile=datafile
+	wsdl_url=null
+	use_urlcopy_script=false
+	getFileMetaData=false
+	ls=false
+	getSpaceTokens=false
+	rm=false
+	rmdir=false
+	mv=false
+	mkdir=false
+	getPermissions=false
+	checkPermissions=false
+	setPermissions=false
+	getRequestSummary=false
+	getRequestTokens=false
+	abortFiles=false
+	releaseFiles=false
+	request_desc=null
+	type=null
+	owner=null
+	group=null
+	other=null
+	request_tokens=null
+	request_token=null
+	file_lifetime=null
+	pin_lifetime=null
+	extendFileLifetime=false
+	advisoryDelete=false
+	getRequestStatus=false
+	request_id=0
+	getStorageElementInfo=false
+	retry_timeout=10000
+	retry_num=20
+	connect_to_wsdl=false
+	delegate=true
+	full_delegation=true
+	version=false
+	report=null
+	server_mode=passive
+	storagetype=null
+	stage=false
+	l=false
+	recursive=false
+	offset=0
+	count=null
+	srm_protocol_version=2
+	request_lifetime=86400
+	priority=0
+	overwrite_mode=null
+	send_cksm=true
+	cksm_type=null
+	cksm_value=null
+	abortRequest=false
+	repeat=null
+	dryrun=false
+Thu Sep 09 11:06:51 CDT 2010: In SRMClient ExpectedName: host
+Thu Sep 09 11:06:51 CDT 2010: SRMClient(https,srm/managerv2,true)
+SRMClientV2 : user credentials are: /DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Neha Sharma/CN=UID:neha
+SRMClientV2 : connecting to srm at httpg://gwdca04.fnal.gov:8443/srm/managerv2
+copy_jobs is empty
+SRMClientV2 : srmPrepareToPut , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+Thu Sep 09 11:07:02 CDT 2010:  srm returned requestToken = -2147477580
+Thu Sep 09 11:07:02 CDT 2010: sleeping 4 seconds ...
+SRMClientV2 : srmStatusOfPutRequest , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+copy_jobs is not empty
+copying CopyJob, source = file:////home/neha/testg.c destination = gsiftp://gwdca03.fnal.gov:2811//teststk2.c
+GridftpClient: memory buffer size is set to 131072
+GridftpClient: connecting to gwdca03.fnal.gov on port 2811
+Thu Sep 09 11:07:07 CDT 2010: no more pending transfers, breaking the loop
+GridftpClient: gridFTPClient tcp buffer size is set to 1048576
+GridftpClient: gridFTPWrite started, source file is java.io.RandomAccessFile@1dafb4e destination path is /teststk2.c
+GridftpClient: gridFTPWrite started, destination path is /teststk2.c
+GridftpClient: set local data channel authentication mode to None
+GridftpClient: stream mode transfer
+GridftpClient: adler32 for file java.io.RandomAccessFile@1dafb4e is 28463a3d
+GridftpClient: waiting for completion of transfer
+GridftpClient: starting a transfer to /teststk2.c
+GridftpClient: DiskDataSink.close() called
+GridftpClient: gridFTPWrite() wrote 179bytes
+GridftpClient: closing client : org.dcache.srm.util.GridftpClient$FnalGridFTPClient@76db09
+GridftpClient: closed client
+execution of CopyJob, source = file:////home/neha/testg.c destination = gsiftp://gwdca03.fnal.gov:2811//teststk2.c completed
+SRMClientV2 : srmPutDone , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+srmPutDone status code=SRM_REQUEST_INPROGRESS
+copy_jobs is not empty
+copying CopyJob, source = file:////home/neha/test.c destination = gsiftp://gwdca03.fnal.gov:2811//teststk3.c
+GridftpClient: memory buffer size is set to 131072
+GridftpClient: connecting to gwdca03.fnal.gov on port 2811
+GridftpClient: gridFTPClient tcp buffer size is set to 1048576
+GridftpClient: gridFTPWrite started, source file is java.io.RandomAccessFile@1c794cc destination path is /teststk3.c
+GridftpClient: gridFTPWrite started, destination path is /teststk3.c
+GridftpClient: set local data channel authentication mode to None
+GridftpClient: stream mode transfer
+GridftpClient: adler32 for file java.io.RandomAccessFile@1c794cc is 28463a3d
+GridftpClient: waiting for completion of transfer
+GridftpClient: starting a transfer to /teststk3.c
+GridftpClient: DiskDataSink.close() called
+GridftpClient: gridFTPWrite() wrote 179bytes
+GridftpClient: closing client : org.dcache.srm.util.GridftpClient$FnalGridFTPClient@13c550f
+GridftpClient: closed client
+execution of CopyJob, source = file:////home/neha/test.c destination = gsiftp://gwdca03.fnal.gov:2811//teststk3.c completed
+SRMClientV2 : srmPutDone , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+srmPutDone status code=SRM_REQUEST_INPROGRESS
+copy_jobs is empty
+stopping copier
+-bash-3.00$
+</pre>
+%ENDTWISTY%
+<br></br>
+Limit or extend the number of retry attempts
+%TWISTY{%TWISTY_OPTS_DETAILED% }%
+<pre class="screen">
+-bash-3.00$ srmcp -2 %RED%-retry_num=%ENDCOLOR%2 -debug file:////home/neha/test.c srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR%
+Example Output
+Storage Resource Manager (SRM) Client version 2.1.5-3
+Copyright (c) 2002-2009 Fermi National Accelerator Laboratory
+
+SRM Configuration:
+	default_port=8443
+	debug=true
+	srmcphome=/usr/local/vdt-2.0.0/srm-client-fermi
+	urlcopy=/usr/local/vdt-2.0.0/srm-client-fermi/sbin/url-copy.sh
+	gsiftpclient=globus-url-copy
+	help=false
+	h=false
+	gsissl=true
+	mapfile=/usr/local/vdt-2.0.0/srm-client-fermi/conf/SRMServerV1.map
+	webservice_path=null
+	webservice_protocol=https
+	use_proxy=true
+	x509_user_proxy=/tmp/x509up_u60158
+	x509_user_cert=
+	x509_user_key=
+	x509_user_trusted_certificates=/usr/local/vdt-2.0.0/globus/TRUSTED_CA
+	globus_tcp_port_range=null
+	gss_expected_name=null
+	protocols=gsiftp,dcap,http
+	pushmode=false
+	buffer_size=131072
+	tcp_buffer_size=0
+	streams_num=1
+	conf=/usr/local/vdt-2.0.0/srm-client-fermi/etc/config-2.xml
+	save_conf=null
+	do_remove=false
+	copy=true
+	bringOnline=false
+	ping=false
+	reserveSpace=false
+	array_of_client_networks=null
+	retention_policy=null
+	space_desc=null
+	access_latency=null
+	access_pattern=null
+	connection_type=null
+	desired_size=null
+	guaranteed_size=null
+	lifetime=null
+	releaseSpace=false
+	space_token=null
+	force=false
+	getSpaceMetaData=false
+	space_tokens=null
+	copyjobfile=null
+	wsdl_url=null
+	use_urlcopy_script=false
+	getFileMetaData=false
+	ls=false
+	getSpaceTokens=false
+	rm=false
+	rmdir=false
+	mv=false
+	mkdir=false
+	getPermissions=false
+	checkPermissions=false
+	setPermissions=false
+	getRequestSummary=false
+	getRequestTokens=false
+	abortFiles=false
+	releaseFiles=false
+	request_desc=null
+	type=null
+	owner=null
+	group=null
+	other=null
+	request_tokens=null
+	request_token=null
+	file_lifetime=null
+	pin_lifetime=null
+	extendFileLifetime=false
+	advisoryDelete=false
+	getRequestStatus=false
+	request_id=0
+	getStorageElementInfo=false
+	retry_timeout=10000
+	retry_num=2
+	connect_to_wsdl=false
+	delegate=true
+	full_delegation=true
+	version=false
+	report=null
+	server_mode=passive
+	storagetype=null
+	stage=false
+	l=false
+	recursive=false
+	offset=0
+	count=null
+	srm_protocol_version=2
+	request_lifetime=86400
+	priority=0
+	overwrite_mode=null
+	send_cksm=true
+	cksm_type=null
+	cksm_value=null
+	abortRequest=false
+	repeat=null
+	dryrun=false
+	from[0]=file:////home/neha/test.c
+	to=srm://gwdca04.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/data/fermilab/test4.c
+
+Thu Sep 09 11:08:49 CDT 2010: In SRMClient ExpectedName: host
+Thu Sep 09 11:08:49 CDT 2010: SRMClient(https,srm/managerv2,true)
+SRMClientV2 : user credentials are: /DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Neha Sharma/CN=UID:neha
+SRMClientV2 : connecting to srm at httpg://gwdca04.fnal.gov:8443/srm/managerv2
+SRMClientV2 : srmPrepareToPut , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+copy_jobs is empty
+Thu Sep 09 11:08:52 CDT 2010:  srm returned requestToken = -2147477577
+Thu Sep 09 11:08:52 CDT 2010: sleeping 4 seconds ...
+SRMClientV2 : srmStatusOfPutRequest , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+Thu Sep 09 11:08:56 CDT 2010: no more pending transfers, breaking the loop
+copy_jobs is not empty
+copying CopyJob, source = file:////home/neha/test.c destination = gsiftp://gwdca03.fnal.gov:2811//test4.c
+GridftpClient: memory buffer size is set to 131072
+GridftpClient: connecting to gwdca03.fnal.gov on port 2811
+GridftpClient: gridFTPClient tcp buffer size is set to 1048576
+GridftpClient: gridFTPWrite started, source file is java.io.RandomAccessFile@1cbfa42 destination path is /test4.c
+GridftpClient: gridFTPWrite started, destination path is /test4.c
+GridftpClient: set local data channel authentication mode to None
+GridftpClient: stream mode transfer
+GridftpClient: adler32 for file java.io.RandomAccessFile@1cbfa42 is 28463a3d
+GridftpClient: waiting for completion of transfer
+GridftpClient: starting a transfer to /test4.c
+GridftpClient: DiskDataSink.close() called
+GridftpClient: gridFTPWrite() wrote 179bytes
+GridftpClient: closing client : org.dcache.srm.util.GridftpClient$FnalGridFTPClient@1759d12
+GridftpClient: closed client
+execution of CopyJob, source = file:////home/neha/test.c destination = gsiftp://gwdca03.fnal.gov:2811//test4.c completed
+SRMClientV2 : srmPutDone , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+srmPutDone status code=SRM_SUCCESS
+copy_jobs is empty
+stopping copier
+-bash-3.00$
+</pre>
+%ENDTWISTY%
+<br>
+
+Perform a third-party copy using pushmode. Difference in Push/Pull mode is explained [[http://home.fnal.gov/~timur/pushpull.html][here]]
+
+%TWISTY{%TWISTY_OPTS_DETAILED%}%
+<pre class="screen">
+-bash-3.00$ srmcp -2 -retry_num=2 -debug %RED%-pushmode=true%ENDCOLOR% srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR% srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR%
+Example Output
+Storage Resource Manager (SRM) Client version 2.1.5-3
+Copyright (c) 2002-2009 Fermi National Accelerator Laboratory
+
+SRM Configuration:
+	default_port=8443
+	debug=true
+	srmcphome=/usr/local/vdt-2.0.0/srm-client-fermi
+	urlcopy=/usr/local/vdt-2.0.0/srm-client-fermi/sbin/url-copy.sh
+	gsiftpclient=globus-url-copy
+	help=false
+	h=false
+	gsissl=true
+	mapfile=/usr/local/vdt-2.0.0/srm-client-fermi/conf/SRMServerV1.map
+	webservice_path=null
+	webservice_protocol=https
+	use_proxy=true
+	x509_user_proxy=/tmp/x509up_u60158
+	x509_user_cert=
+	x509_user_key=
+	x509_user_trusted_certificates=/usr/local/vdt-2.0.0/globus/TRUSTED_CA
+	globus_tcp_port_range=null
+	gss_expected_name=null
+	protocols=gsiftp,dcap,http
+	pushmode=true
+	buffer_size=131072
+	tcp_buffer_size=0
+	streams_num=1
+	conf=/usr/local/vdt-2.0.0/srm-client-fermi/etc/config-2.xml
+	save_conf=null
+	do_remove=false
+	copy=true
+	bringOnline=false
+	ping=false
+	reserveSpace=false
+	array_of_client_networks=null
+	retention_policy=null
+	space_desc=null
+	access_latency=null
+	access_pattern=null
+	connection_type=null
+	desired_size=null
+	guaranteed_size=null
+	lifetime=null
+	releaseSpace=false
+	space_token=null
+	force=false
+	getSpaceMetaData=false
+	space_tokens=null
+	copyjobfile=null
+	wsdl_url=null
+	use_urlcopy_script=false
+	getFileMetaData=false
+	ls=false
+	getSpaceTokens=false
+	rm=false
+	rmdir=false
+	mv=false
+	mkdir=false
+	getPermissions=false
+	checkPermissions=false
+	setPermissions=false
+	getRequestSummary=false
+	getRequestTokens=false
+	abortFiles=false
+	releaseFiles=false
+	request_desc=null
+	type=null
+	owner=null
+	group=null
+	other=null
+	request_tokens=null
+	request_token=null
+	file_lifetime=null
+	pin_lifetime=null
+	extendFileLifetime=false
+	advisoryDelete=false
+	getRequestStatus=false
+	request_id=0
+	getStorageElementInfo=false
+	retry_timeout=10000
+	retry_num=2
+	connect_to_wsdl=false
+	delegate=true
+	full_delegation=true
+	version=false
+	report=null
+	server_mode=passive
+	storagetype=null
+	stage=false
+	l=false
+	recursive=false
+	offset=0
+	count=null
+	srm_protocol_version=2
+	request_lifetime=86400
+	priority=0
+	overwrite_mode=null
+	send_cksm=true
+	cksm_type=null
+	cksm_value=null
+	abortRequest=false
+	repeat=null
+	dryrun=false
+	from[0]=srm://gwdca04.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/data/fermilab/test4.c
+	to=srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/test1.c
+
+Thu Sep 09 12:37:04 CDT 2010: In SRMClient ExpectedName: host
+Thu Sep 09 12:37:04 CDT 2010: SRMClient(https,srm/managerv2,true)
+SRMClientV2 : user credentials are: /DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Neha Sharma/CN=UID:neha
+SRMClientV2 : connecting to srm at httpg://gwdca04.fnal.gov:8443/srm/managerv2
+SRMClientV2 : srmCopy , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+Thu Sep 09 12:37:06 CDT 2010:  srm returned requestToken = -2147477571
+Thu Sep 09 12:37:06 CDT 2010: sleeping 5 seconds ...
+SRMClientV2 : srmStatusOfCopyRequest , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+Thu Sep 09 12:37:11 CDT 2010: sleeping 5 seconds ...
+SRMClientV2 : srmStatusOfCopyRequest , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+Thu Sep 09 12:37:16 CDT 2010: sleeping 5 seconds ...
+SRMClientV2 : srmStatusOfCopyRequest , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+Thu Sep 09 12:37:22 CDT 2010:  copying of srm://gwdca04.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/data/fermilab/test4.c to srm://fndca1.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/usr/fermigrid/volatile/fermilab/test1.c succeeded
+Thu Sep 09 12:37:22 CDT 2010: no more pending transfers, breaking the loop
+-bash-3.00$
+</pre>
+%ENDTWISTY%
+
+---+++ srmls - List contents of a directory 
+*Syntax*
+<pre class="screen">
+srmls [options] srm-url
+</pre>
+
+*Example* <br>
+List the contents of a directory
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Show the example output"}%
+<pre class="screen">
+-bash-3.00$ srmls -2 srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR%
+Example Output
+
+  0 /pnfs/fnal.gov/data/fermilab/
+      512 /pnfs/fnal.gov/data/fermilab/neha/
+      512 /pnfs/fnal.gov/data/fermilab/srmtester/
+      10000000 /pnfs/fnal.gov/data/fermilab/testfile
+      6 /pnfs/fnal.gov/data/fermilab/t1
+      10000000 /pnfs/fnal.gov/data/fermilab/liveTestFile1
+      179 /pnfs/fnal.gov/data/fermilab/teststk.c
+      179 /pnfs/fnal.gov/data/fermilab/teststk3.c
+      179 /pnfs/fnal.gov/data/fermilab/test4.c
+      179 /pnfs/fnal.gov/data/fermilab/test2.c
+      512 /pnfs/fnal.gov/data/fermilab/tlevshin/
+      179 /pnfs/fnal.gov/data/fermilab/teststk1.c
+      179 /pnfs/fnal.gov/data/fermilab/test.c
+      179 /pnfs/fnal.gov/data/fermilab/teststk2.c
+
+-bash-3.00$
+</pre>
+%ENDTWISTY%
+<br>
+
+List detailed information (such as permissions, storage type, creation/modification time) for a file/directory
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Show the example output"}%
+<pre class="screen">
+-bash-3.00$ srmls -2 %RED%-l%ENDCOLOR% srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR%
+Example Output
+
+  10000000 /pnfs/fnal.gov/data/fermilab/liveTestFile1
+ space token(s) :none found
+  storage type:PERMANENT
+  retention policy:CUSTODIAL
+  access latency:NEARLINE
+  locality:ONLINE
+  - Checksum value:  9f680001
+  - Checksum type:  adler32
+   UserPermission: uid=13160 PermissionsRW
+   GroupPermission: gid=9767 PermissionsR
+  WorldPermission: R
+ created at:2010/08/04 11:26:38
+ modified at:2010/08/04 11:26:38
+   - Assigned lifetime (in seconds):  -1
+  - Lifetime left (in seconds):  -1
+  - Original SURL:  /pnfs/fnal.gov/data/fermilab/liveTestFile1
+ - Status:  null
+ - Type:  FILE
+</pre>
+%ENDTWISTY%
+
+---+++ srmmv - Move directory from one location to another
+*Syntax*
+<pre class="screen">
+srmmv [options] source-srm-url destination-srm-url</pre>
+
+*Example* <br>
+Move the directory from one location to another
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Show the example output"}%
+<pre class="screen">
+-bash-3.00$ srmmv -2 -debug srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR% srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR%
+Example Output
+ Client version 2.1.5-3
+Copyright (c) 2002-2009 Fermi National Accelerator Laboratory
+
+SRM Configuration:
+	default_port=8443
+	debug=true
+	srmcphome=/usr/local/vdt-2.0.0/srm-client-fermi
+	urlcopy=/usr/local/vdt-2.0.0/srm-client-fermi/sbin/url-copy.sh
+	gsiftpclient=globus-url-copy
+	help=false
+	h=false
+	gsissl=true
+	mapfile=/usr/local/vdt-2.0.0/srm-client-fermi/conf/SRMServerV1.map
+	webservice_path=null
+	webservice_protocol=https
+	use_proxy=true
+	x509_user_proxy=/tmp/x509up_u60158
+	x509_user_cert=
+	x509_user_key=
+	x509_user_trusted_certificates=/usr/local/vdt-2.0.0/globus/TRUSTED_CA
+	globus_tcp_port_range=null
+	gss_expected_name=null
+	protocols=gsiftp,dcap,http
+	pushmode=false
+	buffer_size=131072
+	tcp_buffer_size=0
+	streams_num=1
+	conf=/usr/local/vdt-2.0.0/srm-client-fermi/etc/config-2.xml
+	save_conf=null
+	do_remove=false
+	copy=false
+	bringOnline=false
+	ping=false
+	reserveSpace=false
+	array_of_client_networks=null
+	retention_policy=null
+	space_desc=null
+	access_latency=null
+	access_pattern=null
+	connection_type=null
+	desired_size=null
+	guaranteed_size=null
+	lifetime=null
+	releaseSpace=false
+	space_token=null
+	force=false
+	getSpaceMetaData=false
+	space_tokens=null
+	copyjobfile=null
+	wsdl_url=null
+	use_urlcopy_script=false
+	getFileMetaData=false
+	ls=false
+	getSpaceTokens=false
+	rm=false
+	rmdir=false
+	mv=true
+	mkdir=false
+	getPermissions=false
+	checkPermissions=false
+	setPermissions=false
+	getRequestSummary=false
+	getRequestTokens=false
+	abortFiles=false
+	releaseFiles=false
+	request_desc=null
+	type=null
+	owner=null
+	group=null
+	other=null
+	request_tokens=null
+	request_token=null
+	file_lifetime=null
+	pin_lifetime=null
+	extendFileLifetime=false
+	advisoryDelete=false
+	getRequestStatus=false
+	request_id=0
+	getStorageElementInfo=false
+	retry_timeout=10000
+	retry_num=20
+	connect_to_wsdl=false
+	delegate=true
+	full_delegation=true
+	version=false
+	report=null
+	server_mode=passive
+	storagetype=null
+	stage=false
+	l=false
+	recursive=false
+	offset=0
+	count=null
+	srm_protocol_version=2
+	request_lifetime=86400
+	priority=0
+	overwrite_mode=null
+	send_cksm=true
+	cksm_type=null
+	cksm_value=null
+	abortRequest=false
+	repeat=null
+	dryrun=false
+	from[0]=srm://gwdca04.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/data/fermilab/neha
+	to=srm://gwdca04.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/data/fermilab/srmtester/
+
+Thu Sep 09 12:47:56 CDT 2010: In SRMClient ExpectedName: host
+Thu Sep 09 12:47:56 CDT 2010: SRMClient(https,srm/managerv2,true)
+SRMClientV2 : user credentials are: /DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Neha Sharma/CN=UID:neha
+SRMClientV2 : connecting to srm at httpg://gwdca04.fnal.gov:8443/srm/managerv2
+SRMClientV2 : srmMv , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+-bash-3.00$ 
+</pre>
+%ENDTWISTY%
+
+---+++ srmrm - Remove an existing file 
+Note that this command can only be used to remove files, not directories.
+
+*Syntax*
+<pre class="screen">
+srmrm [options] srm-url 
+</pre>
+*Example* <br>
+Remove an existing file
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Show the example output"}%
+<pre class="screen">
+-bash-3.00$ srmrm -2 -debug srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR%
+Example Output
+Storage Resource Manager (SRM) Client version 2.1.5-3
+Copyright (c) 2002-2009 Fermi National Accelerator Laboratory
+
+SRM Configuration:
+	default_port=8443
+	debug=true
+	srmcphome=/usr/local/vdt-2.0.0/srm-client-fermi
+	urlcopy=/usr/local/vdt-2.0.0/srm-client-fermi/sbin/url-copy.sh
+	gsiftpclient=globus-url-copy
+	help=false
+	h=false
+	gsissl=true
+	mapfile=/usr/local/vdt-2.0.0/srm-client-fermi/conf/SRMServerV1.map
+	webservice_path=null
+	webservice_protocol=https
+	use_proxy=true
+	x509_user_proxy=/tmp/x509up_u60158
+	x509_user_cert=
+	x509_user_key=
+	x509_user_trusted_certificates=/usr/local/vdt-2.0.0/globus/TRUSTED_CA
+	globus_tcp_port_range=null
+	gss_expected_name=null
+	protocols=gsiftp,dcap,http
+	pushmode=false
+	buffer_size=131072
+	tcp_buffer_size=0
+	streams_num=1
+	conf=/usr/local/vdt-2.0.0/srm-client-fermi/etc/config-2.xml
+	save_conf=null
+	do_remove=false
+	copy=false
+	bringOnline=false
+	ping=false
+	reserveSpace=false
+	array_of_client_networks=null
+	retention_policy=null
+	space_desc=null
+	access_latency=null
+	access_pattern=null
+	connection_type=null
+	desired_size=null
+	guaranteed_size=null
+	lifetime=null
+	releaseSpace=false
+	space_token=null
+	force=false
+	getSpaceMetaData=false
+	space_tokens=null
+	copyjobfile=null
+	wsdl_url=null
+	use_urlcopy_script=false
+	getFileMetaData=false
+	ls=false
+	getSpaceTokens=false
+	rm=true
+	rmdir=false
+	mv=false
+	mkdir=false
+	getPermissions=false
+	checkPermissions=false
+	setPermissions=false
+	getRequestSummary=false
+	getRequestTokens=false
+	abortFiles=false
+	releaseFiles=false
+	request_desc=null
+	type=null
+	owner=null
+	group=null
+	other=null
+	request_tokens=null
+	request_token=null
+	file_lifetime=null
+	pin_lifetime=null
+	extendFileLifetime=false
+	advisoryDelete=false
+	getRequestStatus=false
+	request_id=0
+	getStorageElementInfo=false
+	retry_timeout=10000
+	retry_num=20
+	connect_to_wsdl=false
+	delegate=true
+	full_delegation=true
+	version=false
+	report=null
+	server_mode=passive
+	storagetype=null
+	stage=false
+	l=false
+	recursive=false
+	offset=0
+	count=null
+	srm_protocol_version=2
+	request_lifetime=86400
+	priority=0
+	overwrite_mode=null
+	send_cksm=true
+	cksm_type=null
+	cksm_value=null
+	abortRequest=false
+	repeat=null
+	dryrun=false
+	action is rm
+	surl[0]=srm://gwdca04.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/data/fermilab/teststk2.c
+Thu Sep 09 12:50:09 CDT 2010: In SRMClient ExpectedName: host
+Thu Sep 09 12:50:09 CDT 2010: SRMClient(https,srm/managerv2,true)
+SRMClientV2 : user credentials are: /DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Neha Sharma/CN=UID:neha
+SRMClientV2 : connecting to srm at httpg://gwdca04.fnal.gov:8443/srm/managerv2
+SRMClientV2 : srmRm , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+-bash-3.00$
+</pre>
+%ENDTWISTY%
+
+---+++ srmmkdir - Create a new directory 
+*Syntax*
+<pre class="screen">
+srmmkdir [options] srm-url
+</pre>
+*Example* <br>
+Create a new directory
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Show the example output"}%
+<pre class="screen">
+-bash-3.00$ srmmkdir -2 -debug srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR%
+Example Output
+Storage Resource Manager (SRM) Client version 2.1.5-3
+Copyright (c) 2002-2009 Fermi National Accelerator Laboratory
+
+SRM Configuration:
+	default_port=8443
+	debug=true
+	srmcphome=/usr/local/vdt-2.0.0/srm-client-fermi
+	urlcopy=/usr/local/vdt-2.0.0/srm-client-fermi/sbin/url-copy.sh
+	gsiftpclient=globus-url-copy
+	help=false
+	h=false
+	gsissl=true
+	mapfile=/usr/local/vdt-2.0.0/srm-client-fermi/conf/SRMServerV1.map
+	webservice_path=null
+	webservice_protocol=https
+	use_proxy=true
+	x509_user_proxy=/tmp/x509up_u60158
+	x509_user_cert=
+	x509_user_key=
+	x509_user_trusted_certificates=/usr/local/vdt-2.0.0/globus/TRUSTED_CA
+	globus_tcp_port_range=null
+	gss_expected_name=null
+	protocols=gsiftp,dcap,http
+	pushmode=false
+	buffer_size=131072
+	tcp_buffer_size=0
+	streams_num=1
+	conf=/usr/local/vdt-2.0.0/srm-client-fermi/etc/config-2.xml
+	save_conf=null
+	do_remove=false
+	copy=false
+	bringOnline=false
+	ping=false
+	reserveSpace=false
+	array_of_client_networks=null
+	retention_policy=null
+	space_desc=null
+	access_latency=null
+	access_pattern=null
+	connection_type=null
+	desired_size=null
+	guaranteed_size=null
+	lifetime=null
+	releaseSpace=false
+	space_token=null
+	force=false
+	getSpaceMetaData=false
+	space_tokens=null
+	copyjobfile=null
+	wsdl_url=null
+	use_urlcopy_script=false
+	getFileMetaData=false
+	ls=false
+	getSpaceTokens=false
+	rm=false
+	rmdir=false
+	mv=false
+	mkdir=true
+	getPermissions=false
+	checkPermissions=false
+	setPermissions=false
+	getRequestSummary=false
+	getRequestTokens=false
+	abortFiles=false
+	releaseFiles=false
+	request_desc=null
+	type=null
+	owner=null
+	group=null
+	other=null
+	request_tokens=null
+	request_token=null
+	file_lifetime=null
+	pin_lifetime=null
+	extendFileLifetime=false
+	advisoryDelete=false
+	getRequestStatus=false
+	request_id=0
+	getStorageElementInfo=false
+	retry_timeout=10000
+	retry_num=20
+	connect_to_wsdl=false
+	delegate=true
+	full_delegation=true
+	version=false
+	report=null
+	server_mode=passive
+	storagetype=null
+	stage=false
+	l=false
+	recursive=false
+	offset=0
+	count=null
+	srm_protocol_version=2
+	request_lifetime=86400
+	priority=0
+	overwrite_mode=null
+	send_cksm=true
+	cksm_type=null
+	cksm_value=null
+	abortRequest=false
+	repeat=null
+	dryrun=false
+	action is mkdir
+	surl[0]=srm://gwdca04.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/data/fermilab/testdir
+Thu Sep 09 12:51:10 CDT 2010: In SRMClient ExpectedName: host
+Thu Sep 09 12:51:10 CDT 2010: SRMClient(https,srm/managerv2,true)
+SRMClientV2 : user credentials are: /DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Neha Sharma/CN=UID:neha
+SRMClientV2 : connecting to srm at httpg://gwdca04.fnal.gov:8443/srm/managerv2
+SRMClientV2 : srmMkdir , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+-bash-3.00$
+</pre>
+%ENDTWISTY%
+
+---+++ srmrmdir - Delete an existing directory 
+*Syntax*
+<pre class="screen">
+srmrmdir [options] srm-url
+</pre>
+*Example* <br>
+Delete an existing directory
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Show the example output"}%
+<pre class="screen">
+-bash-3.00$ srmrmdir -2 -debug srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%?SFN=%RED%path%ENDCOLOR%
+Example Output
+Storage Resource Manager (SRM) Client version 2.1.5-3
+Copyright (c) 2002-2009 Fermi National Accelerator Laboratory
+
+SRM Configuration:
+	default_port=8443
+	debug=true
+	srmcphome=/usr/local/vdt-2.0.0/srm-client-fermi
+	urlcopy=/usr/local/vdt-2.0.0/srm-client-fermi/sbin/url-copy.sh
+	gsiftpclient=globus-url-copy
+	help=false
+	h=false
+	gsissl=true
+	mapfile=/usr/local/vdt-2.0.0/srm-client-fermi/conf/SRMServerV1.map
+	webservice_path=null
+	webservice_protocol=https
+	use_proxy=true
+	x509_user_proxy=/tmp/x509up_u60158
+	x509_user_cert=
+	x509_user_key=
+	x509_user_trusted_certificates=/usr/local/vdt-2.0.0/globus/TRUSTED_CA
+	globus_tcp_port_range=null
+	gss_expected_name=null
+	protocols=gsiftp,dcap,http
+	pushmode=false
+	buffer_size=131072
+	tcp_buffer_size=0
+	streams_num=1
+	conf=/usr/local/vdt-2.0.0/srm-client-fermi/etc/config-2.xml
+	save_conf=null
+	do_remove=false
+	copy=false
+	bringOnline=false
+	ping=false
+	reserveSpace=false
+	array_of_client_networks=null
+	retention_policy=null
+	space_desc=null
+	access_latency=null
+	access_pattern=null
+	connection_type=null
+	desired_size=null
+	guaranteed_size=null
+	lifetime=null
+	releaseSpace=false
+	space_token=null
+	force=false
+	getSpaceMetaData=false
+	space_tokens=null
+	copyjobfile=null
+	wsdl_url=null
+	use_urlcopy_script=false
+	getFileMetaData=false
+	ls=false
+	getSpaceTokens=false
+	rm=false
+	rmdir=true
+	mv=false
+	mkdir=false
+	getPermissions=false
+	checkPermissions=false
+	setPermissions=false
+	getRequestSummary=false
+	getRequestTokens=false
+	abortFiles=false
+	releaseFiles=false
+	request_desc=null
+	type=null
+	owner=null
+	group=null
+	other=null
+	request_tokens=null
+	request_token=null
+	file_lifetime=null
+	pin_lifetime=null
+	extendFileLifetime=false
+	advisoryDelete=false
+	getRequestStatus=false
+	request_id=0
+	getStorageElementInfo=false
+	retry_timeout=10000
+	retry_num=20
+	connect_to_wsdl=false
+	delegate=true
+	full_delegation=true
+	version=false
+	report=null
+	server_mode=passive
+	storagetype=null
+	stage=false
+	l=false
+	recursive=false
+	offset=0
+	count=null
+	srm_protocol_version=2
+	request_lifetime=86400
+	priority=0
+	overwrite_mode=null
+	send_cksm=true
+	cksm_type=null
+	cksm_value=null
+	abortRequest=false
+	repeat=null
+	dryrun=false
+	action is rmdir
+	surl[0]=srm://gwdca04.fnal.gov:8443/srm/managerv2?SFN=/pnfs/fnal.gov/data/fermilab/testdir
+Thu Sep 09 12:52:06 CDT 2010: In SRMClient ExpectedName: host
+Thu Sep 09 12:52:06 CDT 2010: SRMClient(https,srm/managerv2,true)
+SRMClientV2 : user credentials are: /DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Neha Sharma/CN=UID:neha
+SRMClientV2 : connecting to srm at httpg://gwdca04.fnal.gov:8443/srm/managerv2
+SRMClientV2 : srmRmdir , contacting service httpg://gwdca04.fnal.gov:8443/srm/managerv2
+-bash-3.00$ 
+</pre>
+%ENDTWISTY%
+
+---+++ srm-reserve-space - Reserve space in advance for the upcoming requests
+Note: This function will only work if Space Reservation is enabled, configured correctly and your VO is authorized to reserve space.<br></br>
+*Syntax*
+<pre class="screen">srm-reserve-space [options] srm-url</pre>
+<pre>
+Mandatory Options-
+-retention_policy=<REPLICA|CUSTODIAL|OUTPUT>
+-access_latency=<ONLINE|NEARLINE>
+-desired_size in Bytes (ignored at the moment)
+-guaranteed_size in Bytes 
+-lifetime in seconds
+
+Options “access_latency” and “retention_policy” require more explanation. 
+
+“Retention policy describes the quality of the storage service that will be provided for the data (files) stored in this space reservation. 
+Replica corresponds to the lowest quality of the service, usually associated with storing a single copy of each file on the disk. 
+Custodial is the highest quality service, usually interpreted as storage of the data on Tape. WLCG has decided not to use 
+Output retention policy in its data grid. Output is an intermediate retention policy is stronger than Replica and weaker than Custodial, 
+and in dCache Output retention policy will possibly be used for files managed by Resilient Manager, which will make several internal 
+copies of each file, distributed on distinct instances of hardware. Once a file is written into a given space reservation, it inherits the 
+reservation's retention policy.” 
+
+“Access latency describes how data will be stored in the reserved area. The two values allowed are Nearline and Online. Nearline 
+means that the data stored in this reservation are allowed to be stored in such a way that retrieving them might require storage system 
+to perform additional preparatory steps (staging data from tape to a disk cache for example). Online means that data is readily available 
+and it will not take long to start reading the data. In case of dCache, Online means that there will always be a copy of the file on disk, 
+while Nearline does not provide such guarantee. As with retention policy, once a file is written into a given space reservation, it inherits 
+the reservation's access latency.” 
+</pre>
+*Example* <br>
+Making a space reservation
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Show the example output"}%
+<pre class="screen">
+-bash-3.00$ srm-reserve-space -2 %RED%-retention_policy=%ENDCOLOR%REPLICA %RED%-access_latency=%ENDCOLOR%ONLINE %RED%-lifetime=%ENDCOLOR%7776000 %RED%-desired_size=%ENDCOLOR%500000000000 %RED%-guaranteed_size=%ENDCOLOR%500000000000 %RED%-space_desc=%ENDCOLOR%public-token srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%
+Example Output
+Space token =20147
+-bash-3.00$ 
+</pre>
+%ENDTWISTY%
+
+---+++ srm-release-space - Release an occupied space
+
+Note: This function will only work if you previously reserved space using srm-reserve-space command.<br></br>
+*Syntax*
+<pre class="screen">srm-release-space [options] srm-url
+</pre>
+*Example* <br>
+Release space
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Show the example output"}%
+<pre class="screen">srm-release-space %RED%-space_token=%ENDCOLOR%20147 srm://%RED%hostname%ENDCOLOR%:%RED%port%ENDCOLOR%/%RED%webservicepath%ENDCOLOR%</pre>
+where "20147" is the space token received upon successful execution of srm-reserve-space command(mentioned in the example above)
+%ENDTWISTY%
+
+---+Problem Resolution And Help
+---++How to get Help? 
+
+If you have a question or cannot resolve a problem, the best way to get help is by contacting osg-software@opensciencegrid.org. 
+
+---++References
+[[https://sdm.lbl.gov/bestman/docs/SRM-090824-copy-usecases.pdf][SRM Copy Use Cases]]
+
+%STOPINCLUDE%
+
+---+ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = NehaSharma
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = Scientist
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MarcoMambelli
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         =  DouglasStrain
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

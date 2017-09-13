@@ -1,0 +1,288 @@
+%DOC_STATUS_TABLE%
+
+---+!! Frequently Asked Questions
+%TOC{}%
+
+---+ About this Document
+<!-- useful variable definitions
+   * Local UCL_HOST = ce
+   * Local UCL_CWD  = /opt/osg-1.2
+-->
+
+%ICON{hand}% This document is for grid users. It provides answers to frequently asked questions regarding the submission of grid jobs on the %LINK_OSG%.
+
+%STARTINCLUDE%
+
+---+ Frequently Asked Questions
+
+---++ Condor-G: Log File Locations?
+
+   1 Check Condor job description file for the log file of the job.
+   1 Check Grid Manager log file on the submission host:<pre class="screen">
+%UCL_PROMPT_SHORT% cat $CONDOR_CONFIG | grep -P '^GRIDMANAGER_LOG'
+GRIDMANAGER_LOG = $(LOG)/GridmanagerLog.$(USERNAME)
+%UCL_PROMPT_SHORT% cat $CONDOR_CONFIG | grep -P '^LOG'
+LOG             = $(LOCAL_DIR)/log
+%UCL_PROMPT_SHORT% cat $CONDOR_CONFIG | grep -P '^LOCAL_DIR'
+LOCAL_DIR       = /var/condor
+</pre>
+   1 Check Condor log files on the submission host:<pre class="screen">
+%UCL_PROMPT_SHORT% cat $CONDOR_CONFIG  | grep -v MAX | grep -P '^\w+_LOG\s*\='
+COLLECTOR_LOG            = $(LOG)/CollectorLog
+KBDD_LOG                 = $(LOG)/KbdLog
+MASTER_LOG               = $(LOG)/MasterLog
+NEGOTIATOR_LOG           = $(LOG)/NegotiatorLog
+NEGOTIATOR_MATCH_LOG     = $(LOG)/MatchLog
+SCHEDD_LOG               = $(LOG)/SchedLog
+SHADOW_LOG               = $(LOG)/ShadowLog
+STARTD_LOG               = $(LOG)/StartLog
+STARTER_LOG              = $(LOG)/StarterLog
+JOB_ROUTER_LOG           = $(LOG)/JobRouterLog
+HAD_LOG                  = $(LOG)/HADLog
+REPLICATION_LOG          = $(LOG)/ReplicationLog
+TRANSFERER_LOG           = $(LOG)/TransfererLog
+GRIDMANAGER_LOG          = $(LOG)/GridmanagerLog.$(USERNAME)
+C_GAHP_LOG               = /tmp/CGAHPLog.$(USERNAME)
+C_GAHP_WORKER_THREAD_LOG = /tmp/CGAHPWorkerLog.$(USERNAME)
+AMAZON_GAHP_LOG          = /tmp/AmazonGahpLog.$(USERNAME)
+CREDD_LOG                = $(LOG)/CredLog
+STORK_LOG                = $(LOG)/StorkLog
+QUILL_LOG                = $(LOG)/QuillLog
+DBMSD_LOG                = $(LOG)/DbmsdLog
+VM_GAHP_LOG              = $(LOG)/VMGahpLog
+LeaseManager_LOG         = $(LOG)/LeaseManagerLog
+</pre>
+
+---++ Condor-G: How to find the 'hold' code?
+
+%STARTSECTION{"FAQCondorGHoldCode"}%
+   1 You can find the error code in the log file specified in the condor submit file. An error entry will look something like this:<pre class="file">
+        018 (035.000.000) 04/10 12:01:04 Globus job submission failed!
+            Reason: 5 the executable does not exist
+
+        012 (035.000.000) 04/10 12:01:04 Job was held.
+            Globus error 5: the executable does not exist
+            Code 2 Subcode 5
+</pre>
+   1 To find all jobs that are being _held_ by Condor use the =condor_q= command:<pre class="screen">
+%UCL_PROMPT% condor_q -hold
+-- Submitter: %UCL_HOST_FQDN% : &lt;IP:PORT&gt; : %UCL_HOST_FQDN%
+ ID      OWNER           HELD_SINCE HOLD_REASON                   
+%RED%4989741.0%ENDCOLOR%   %UCL_USER%          5/23 17:08 Globus error 47: the gatekeeper failed to r
+...
+</pre>Take note of the ID = %RED%4989741.0%ENDCOLOR% which can be used to retrieve more details on the problem:<pre class="screen">
+%UCL_PROMPT% condor_q -l %RED%4989741.0%ENDCOLOR% | grep HoldReason
+LastHoldReason = "Globus error 47: the gatekeeper failed to run the job manager"
+LastHoldReasonCode = 2
+LastHoldReasonSubCode = 47
+HoldReason = "Globus error 47: the gatekeeper failed to run the job manager"
+HoldReasonCode = 2
+HoldReasonSubCode = 47
+</pre>In the example above the <i>major error code %RED%2%ENDCOLOR%</i> refers to a Globus problem on the remote site. The <i>minor error code %RED%47%ENDCOLOR%</i> means that the <i>gatekeeper failed to run the job manager</i>.  For a list of Globus Errors, see [[GlobusErrors][Globus Errors]].  For a list of Condor hold codes by reason, see [[CondorErrors][Condor Errors]].
+%ENDSECTION{"FAQCondorGHoldCode"}%
+
+---++ Condor-G: How to find the GRAM !JobID?
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% condor_q -constraint "GridJobId=!=Undefined" -format "%d." ClusterId -format "%d " ProcId -format "%s\n" GridJobId
+5562298.0 gt2 %UCL_HOST_FQDN%/jobmanager-condor https://%UCL_HOST_FQDN%:54154/12656/1311926512/
+...
+</pre>
+
+---++ Condor-G: How to turn on full debugging?
+
+Make the following change to your =$CONDOR_CONFIG=:
+
+<pre class="file">
+GRIDMANAGER_LOG = D_FULLDEBUG
+</pre>
+
+and execute =condor_reconfig=:
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% condor_reconfig
+Sent "Reconfig" command to local master
+</pre>
+
+---++ Condor-G: How to run the Grid Manager manually?
+
+   1 Find the Condor location on the remote site:<pre class="screen">
+%UCL_PROMPT_SHORT% globus-job-run %UCL_HOST_FQDN%/jobmanager-fork /bin/bash -c "echo $CONDOR_CONFIG"
+%RED%/usr/local/condor-7.4.0%ENDCOLOR%/etc/condor_config
+</pre>
+   1 Start the =grid_monitor.sh= script on the remote site:<pre class="screen">
+%UCL_PROMPT_SHORT% globusrun -s -r %UCL_HOST_FQDN%/jobmanager-fork '&(executable= $(GLOBUSRUN_GASS_URL)%RED%/usr/local/condor-7.4.0%ENDCOLOR%/sbin/grid_monitor.sh) (arguments="--dest-url="#$(GLOBUSRUN_GASS_URL)#"/tmp/job_status")'
+2011-08-04 11:56:37 OK: 
+2011-08-04 11:56:37 INFO: Forced agent start
+2011-08-04 11:56:37 INFO: Starting grid_manager_monitor_agent
+2011-08-04 11:56:37 INFO: Started grid_manager_monitor_agent as /tmp/grid_manager_monitor_agent.ligo.29376.1000, pid 29377
+2011-08-04 11:56:37 INFO: grid_manager_monitor_agent already running.
+2011-08-04 11:57:37 OK: 
+</pre>
+   1 Check file =/tmp/job_status= as specified above:<pre class="screen">
+%UCL_PROMPT_SHORT% cat /tmp/job_status
+1312484320 1312484321
+https://%UCL_HOST_FQDN%:32780/23541/1311048510/          8
+https://%UCL_HOST_FQDN%:32809/13208/1310864843/          8
+...
+GRIDMONEOF
+</pre>The file content will be refreshed every minute. The first column on each line is the GRAM !JobID. The second column is the GRAM job status (1=<i>pending</i>, 2=<i>active</i>, 8=<i>done</i>).  All of the GRAM !JobIDs in the =condor_q= output associated with the resource (%UCL_HOST_FQDN%) should appear in =/tmp/job_status=. 
+
+---++ Condor-G: What are the firewall requirements?
+
+If you find that a Globus command succeeds while an equivalent condor-G job to the same site fails, it is likely that the problem is being caused by a firewall blocking the network ports. Condor-G needs more network port open since Globus on the remote site needs to contact Condor-G, and a firewall that blocks incoming connections prevents that connection from being made (It is possible, though unlikely, that the remote site is blocking the outgoing connection). Note that you need a port range with at least three ports per user (%LINK_GLOSSARY_DN%) per site for use by Condor-G. 
+
+   1 In the file =$CONDOR_CONFIG= set the following values:<pre class="file">
+HIGHPORT = &lt;high port&gt;
+LOWPORT  = &lt;low port&gt; 
+</pre>
+   1 Execute =condor_reconfig=:<pre class="rootscreen">
+%UCL_PROMPT_SHORT% condor_reconfig
+Sent "Reconfig" command to local master
+</pre> 
+   1 Allow UDP connections in the specified range.
+
+Further information on %LINK_GLOSSARY_CE% firewall requirements can be found [[FirewallInformation][Firewall Information]].
+
+---++ Condor-G: Why is the !GridManager not running?
+
+Running the Condor-G !GridMonitor is considered a best practices for running a large batch of jobs on the %LINK_OSG%. The easiest way to determine if the !GridMonitor is running from the client side is to check the !GridManager log file:
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% cat $CONDOR_CONFIG | grep -P '^GRIDMANAGER_LOG'
+GRIDMANAGER_LOG = $(LOG)/GridmanagerLog.$(USERNAME)
+%UCL_PROMPT_SHORT% cat $CONDOR_CONFIG | grep -P '^LOG'
+LOG             = $(LOCAL_DIR)/log
+%UCL_PROMPT_SHORT% cat $CONDOR_CONFIG | grep -P '^LOCAL_DIR'
+LOCAL_DIR       = /var/condor
+</pre>
+
+Jobs that stream _stdout_ and/or _stderr_ will not use the !GridManager. If streaming of _stdout_ and/or _stderr_ is not required, include the following lines in the Condor job description:
+
+<pre class="file">
+stream_output = false
+stream_error  = false
+</pre>
+
+Make sure that the Condor variables =GRID_MONITOR= and =ENABLE_GRID_MONITOR= are set correctly in =$CONDOR_CONFIG=:
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% cat $CONDOR_CONFIG | grep GRID_MONITOR
+GRID_MONITOR        = $(SBIN)/grid_monitor.sh
+ENABLE_GRID_MONITOR = TRUE
+</pre>
+
+Query the running Condor directly for the variables above:
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% condor_config_val grid_monitor
+/usr/local/condor-7.4.0/sbin/grid_monitor.sh
+%UCL_PROMPT_SHORT% condor_config_val enable_grid_monitor
+TRUE
+</pre>
+
+---++ GRAM: How to save the jobmanager logs?
+
+%LINK_GLOSSARY_GRAM% can be configured on the %LINK_GLOSSARY_CE% by editing =$GLOBUS_LOCATION/etc/globus-job-manager.conf= and changing the line =-save-logfile=:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% cat $GLOBUS_LOCATION/etc/globus-job-manager.conf
+	-home "/opt/osg-1.0.5/globus"
+	-globus-gatekeeper-host osg-ldg.ligo.caltech.edu
+	-globus-gatekeeper-port 2119
+	-globus-gatekeeper-subject "/DC=org/DC=doegrids/OU=Services/CN=osg-ldg.ligo.caltech.edu"
+	-globus-host-cputype x86_64
+	-globus-host-manufacturer unknown
+	-globus-host-osname Linux
+	-globus-host-osversion 2.6.18-128.7.1.el5xen
+	-globus-toolkit-version 4.0.8
+	-save-logfile %RED%always%ENDCOLOR%
+	-state-file-dir /opt/osg-1.0.5/globus/tmp/gram_job_state
+	-machine-type unknown
+</pre>
+
+---++ GRAM: 'Host key verification failed'?
+
+This error may occur when a job is submitted using =globus-job-run= to a %LINK_GLOSSARY_CE% that uses the Portable Batch System. The submission error may look like:
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% globus-job-run %UCL_HOST_FQDN%/jobmanager-pbs /bin/date
+Host key verification failed.
+/var/spool/torque/mom_priv/jobs/1073.everes.SC: line 87: [: too many arguments
+</pre>
+
+This problem often occurs if the %LINK_GLOSSARY_CE% has not been configured to use ssh key-pairs internally, which would allow all the parts of the multiple job to be launched by the gatekeeper. The RSL =jobtype= variable knows three different arguments: _single_, _multiple_ (default) and _MPI_. To fix this problem you need to add an RSL statement '(jobtype=single)' to your RSL job description:
+
+<pre class="screen">
+%UCL_PROMPT_SHORT% globus-job-run %UCL_HOST_FQDN%/jobmanager-pbs -x '(jobtype=single)' /bin/date
+</pre>
+
+See [[Trash.ReleaseDocumentationPbsBatchSystemHints][More PBS Batch System Hints]].
+
+---++ GRAM-WS: 'Certificate not yet valid'?
+
+The grid certificate used to submit the job is _likely_ valid. However Globus %LINK_GLOSSARY_GRAM_WS% is sensitive to clock-skew between the client and remote side. The solution is to synchronize the client clocks with NTP (This can also be caused from the clock skew on server side, though it is unlikely).
+
+---++ 'Can't find vomses'?
+
+When the =voms-proxy-init= command is run, the error 'Cannot find file or dir: =/home/condor/execute/dir_14135/userdir/glite/etc/vomses=' occurs.
+
+The error message does not really indicate an error. It is an artifact of the software build used in the %LINK_VDT%.  Refer to the release documentation for [[Documentation.Release3.TestOSGClient#Authentication_Test][more details]].
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = AnandPadmanabhan
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = User
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = Scientist
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Troubleshooting
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MarcoMambelli
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = MarcoMambelli
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+ 
+-->

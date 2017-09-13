@@ -13,15 +13,16 @@ pages:
   - 'CA Certificates': 'common/ca.md'
   - 'Yum Repos': 'common/yum.md'
 - Install Guides - Client:
-  - 'CVMFS': 'client/cvmfs.md'
   - 'Worker Node (RPM install)': 'client/wn.md'
   - 'Worker Node (tarball install)': 'client/wn-tarball.md'
   - 'Worker Node (OASIS install)': 'client/wn-oasis.md'
+  - 'CVMFS': 'client/cvmfs.md'
+  - 'Singularity': 'client/singularity.md'
 - Install Guides - Compute:
   - 'HTCondor-CE': 'compute-element/install-htcondor-ce.md'
 - Install Guides - Data:
   - 'GridFTP Server': 'data/gridftp.md'
-  - 'HTTP Cache': 'data/squid.md'
+  - 'HTTP Cache': 'data/frontier-squid.md'
 - Install Guides - Other:
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
@@ -29,6 +30,9 @@ pages:
 - Install Guides - Monitoring:
   - 'RSV': 'monitoring/rsv.md'
   - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
+- Install Guides - Other:
+  - 'GSI-enabled SSH': 'other/gsissh.md'
+  - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
 - Overviews:
   - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
 - Release Information:

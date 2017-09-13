@@ -1,0 +1,49 @@
+---++Globus Error: 24
+
+---+++Syntax:
+
+=GRAM Job failed because the job manager detected an invalid script response (error code 24)=
+
+GLOBUS_GRAM_PROTOCOL_ERROR_INVALID_SCRIPT_REPLY
+
+---+++Known causes:
+
+This is known to occur when the user does not have permission to run on a specific queue or must provide additional data like a project name, e.g. in SGE.
+
+Possible occurrences:
+   * conflicting MPI requirements
+   * the submit script returns a non 0 exit code or an output without the expected job number
+   * the jobmanager terminates in an inconsistent state
+
+---+++Recommendations:
+
+Contact site administrator and make sure that the user can submit correctly. 
+
+Contact the administrator to make sure that OSG/Globus is configured correctly to use the local queue
+
+E.g. in SGE the following files have to be consistent with the environment of an user able to submit files:
+   * =/etc/sysconfig/gridengine=
+   * =/etc/globus/globus-sge.conf=
+
+---+++See also:
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   * Local OWNER          = MarcoMambelli
+   * Local DOC_AREA       = User
+   * Local DOC_ROLE       = EndUser
+   * Local DOC_TYPE       = Troubleshooting
+   
+   * Local INCLUDE_REVIEW = %YES%
+   * Local INCLUDE_TEST   = %YES%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %YES%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = 
+   * Local REVIEW_PASSED  = %YES%
+   * Local TESTER         = 
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
