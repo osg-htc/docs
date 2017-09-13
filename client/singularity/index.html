@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Worker Node (OASIS install) - OSG Documentation</title>
+  <title>Singularity - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Worker Node (OASIS install)";
-    var mkdocs_page_input_path = "client/wn-oasis.md";
-    var mkdocs_page_url = "/client/wn-oasis/";
+    var mkdocs_page_name = "Singularity";
+    var mkdocs_page_input_path = "client/singularity.md";
+    var mkdocs_page_url = "/client/singularity/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -85,39 +85,39 @@
                     
     <a class="" href="../wn-tarball/">Worker Node (tarball install)</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">Worker Node (OASIS install)</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#configuring-a-site-to-use-the-worker-node-client-software-from-oasis">Configuring a Site to Use the Worker Node Client Software From OASIS</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#about-this-guide">About This Guide</a></li>
-        
-            <li><a class="toctree-l4" href="#before-starting">Before Starting</a></li>
-        
-            <li><a class="toctree-l4" href="#configuring-your-site-to-use-the-worker-node-client-from-oasis">Configuring Your Site to Use the Worker Node Client From OASIS</a></li>
-        
-            <li><a class="toctree-l4" href="#validating-the-worker-node-client">Validating the Worker Node Client</a></li>
-        
-            <li><a class="toctree-l4" href="#troubleshooting">Troubleshooting</a></li>
-        
-            <li><a class="toctree-l4" href="#how-to-get-help">How to get Help?</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../wn-oasis/">Worker Node (OASIS install)</a>
                 </li>
                 <li class="">
                     
     <a class="" href="../cvmfs/">CVMFS</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../singularity/">Singularity</a>
+    <a class="current" href="./">Singularity</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#install-singularity">Install Singularity</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#before-starting">Before Starting</a></li>
+        
+            <li><a class="toctree-l4" href="#using-singularity-via-cvmfs-el-74-only">Using Singularity via CVMFS (EL 7.4 only)</a></li>
+        
+            <li><a class="toctree-l4" href="#installing-singularity">Installing singularity</a></li>
+        
+            <li><a class="toctree-l4" href="#configuring-singularity">Configuring singularity</a></li>
+        
+            <li><a class="toctree-l4" href="#validating-singularity">Validating singularity</a></li>
+        
+            <li><a class="toctree-l4" href="#starting-and-stopping-services">Starting and Stopping services</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
     </ul>
 	    </li>
@@ -300,10 +300,10 @@
         
       
     
-    <li>Worker Node (OASIS install)</li>
+    <li>Singularity</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/client/wn-oasis.md"
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/client/singularity.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -313,105 +313,133 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="configuring-a-site-to-use-the-worker-node-client-software-from-oasis">Configuring a Site to Use the Worker Node Client Software From OASIS</h1>
-<h2 id="about-this-guide">About This Guide</h2>
-<p>The <em>OSG Worker Node Client</em> is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use.</p>
-<p>It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:</p>
-<ul>
-<li>Use the Worker Node Client software from OASIS (this guide) - useful when <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCvmfs">OASIS</a> is already mounted on your worker nodes</li>
-<li><a href="../wn/">Install using RPMs and Yum</a> - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs</li>
-<li><a href="../wn-tarball/">Install using a tarball</a> - useful when installing onto a shared filesystem for distribution to worker nodes</li>
-</ul>
-<p>This document is intended to guide system administrators through the process of configuring a site to make the Worker Node Client software available from OASIS.</p>
+                <h1 id="install-singularity">Install Singularity</h1>
+<p><a href="http://singularity.lbl.gov">Singularity</a> is a tool that creates
+docker-like process containers but without giving extra privileges to
+unprivileged users.  It is used by grid pilot jobs (which are
+submitted by per-VO grid workload management systems) to isolate user
+jobs from the pilot's files and processes and from other users' files
+and processes.  It also supplies a chroot environment in order to run
+user jobs in different operating system images under one Linux kernel.</p>
+<p>For operating systems older than Red Hat Enterprise Linux (RHEL) 7.4,
+singularity needs to use kernel capabilities that are only accessible
+to the root user, so it has to be installed with setuid-root
+executables.  Securing setuid-root programs is difficult, but singularity
+keeps that privileged code to a
+<a href="http://singularity.lbl.gov/docs-security">minimum</a> to keep the
+vulnerability low.  Beginning in RHEL 7.4, there is a new
+<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/7.4_Release_Notes/index.html#technology_previews_kernel">technology preview feature</a>
+to allow unprivileged bind mounts in user name spaces, which allows
+singularity to run as an unprivileged user.  The OSG has installed
+singularity in <a href="../cvmfs">cvmfs</a>, so if you have RHEL 7.4 or later you
+can avoid installing singularity at all and reduce vulnerability even
+further. </p>
+<p>The document is intended for system administrators who wish to either
+install singularity or enable it to be run as an unprivileged user.</p>
+<div class="admonition note">
+<p class="admonition-title">Applicable versions</p>
+<p>The applicable software versions for this document are OSG Version &gt;= 3.4.3.
+The version of singularity installed should be &gt;= 2.3.1</p>
+</div>
 <h2 id="before-starting">Before Starting</h2>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
 <ul>
-<li>Ensure the host has <a href="../../release/supported_platforms/">a supported operating system</a></li>
+<li>Ensure the host has <a href="../../release/supported_platforms">a supported operating system</a></li>
+<li>Obtain root access to the host</li>
+<li>If you're installing singularity, prepare the <a href="../../common/yum">required Yum repositories</a></li>
 </ul>
-<p>Also note that, once configured to use OASIS, each use of Worker Node Client software will cause that software and its associated files to be downloaded from a CVMFS server or your local cache thereof. This may result in extra network activity, especially if Worker Node Client tools are used heavily.</p>
-<h2 id="configuring-your-site-to-use-the-worker-node-client-from-oasis">Configuring Your Site to Use the Worker Node Client From OASIS</h2>
-<p>Below are the one-time steps that you must perform to configure your site to use the Worker Node Client software from OASIS.</p>
-<p>On every worker node, <a href="../cvmfs/">install and configure OASIS</a></p>
-<p>Determine the OASIS path to the Worker Node Client software for your worker nodes:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Worker Node OS</th>
-<th align="left">Use…</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">EL 6 (32-bit)</td>
-<td align="left"><code>/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.3/current/el6-i386</code></td>
-</tr>
-<tr>
-<td align="left">EL 6 (64-bit)</td>
-<td align="left"><code>/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.3/current/el6-x86_64</code></td>
-</tr>
-<tr>
-<td align="left">EL 7 (64-bit)</td>
-<td align="left"><code>/cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.3/current/el7-x86_64</code></td>
-</tr>
-</tbody>
-</table>
-<p>On the CE, in the <code>/etc/osg/config.d/10-storage.ini</code> file, set the <code>grid_dir</code> configuration setting to the path from the previous step.</p>
-<p>For more information, see the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/EnvironmentVariables">OSG environment variables reference page</a> and the <a href="../../other/configuration-with-osg-configure#storage">CE configuration instructions</a>.</p>
-<p>Once you finish making changes to configuration files on your CE, validate, fix, and apply the configuration:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-configure -v 
-<span class="gp">[root@client ~] #</span> osg-configure -c
+<h2 id="using-singularity-via-cvmfs-el-74-only">Using Singularity via CVMFS (EL 7.4 only)</h2>
+<p>If you are using a RHEL 7.4 variant OS, you can skip installation
+altogether and use singularity through CVMFS:</p>
+<ol>
+<li>Set the <code>namespace.unpriv_enable=1</code> boot option.  The easiest way
+    to do this is to add it in <code>/etc/sysconfig/grub</code> to the end of the
+    GRUB_CMDLINE_LINUX variable, before the ending double-quote.</li>
+<li>
+<p>Update the grub configuration:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> grub2-mkconfig -o /boot/grub2/grub.cfg
 </pre></div>
 
 
-<h2 id="validating-the-worker-node-client">Validating the Worker Node Client</h2>
-<p>To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.</p>
-<ol>
-<li>Submit a job that executes the <code>env</code> command (e.g. Run <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_ce_trace">condor_ce_trace</a> with the <code>-d</code> flag from your HTCondor CE)</li>
-<li>Verify that the value of <code>OSG_GRID</code> is set to the directory of your WN Client installation</li>
+</li>
+<li>
+<p>Set a sysctl option as follows:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> <span class="nb">echo</span> <span class="s2">&quot;user.max_user_namespaces = 15000&quot;</span> <span class="se">\</span>
+    &gt; /etc/sysctl.d/90-max_user_namespaces.conf
+</pre></div>
+
+
+</li>
+<li>
+<p>Reboot</p>
+</li>
+<li>If you haven't yet installed <a href="../cvmfs">cvmfs</a>, do so.</li>
+<li>Log in as an ordinary unprivileged user and verify that singularity
+    works:<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity <span class="se">\</span>
+        <span class="nb">exec</span> -C -H <span class="nv">$HOME</span>:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 <span class="se">\</span>
+        ps -ef
+<span class="go">WARNING: Container does not have an exec helper script, calling &#39;cat&#39; directly</span>
+<span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
+<span class="go">user         1     0  0 21:34 ?        00:00:00 ps -ef</span>
+</pre></div>
+
+
+</li>
 </ol>
-<h3 id="manually-using-the-worker-node-client-from-oasis">Manually Using the Worker Node Client From OASIS</h3>
-<p>If you must log onto a worker node and use the Worker Node Client software directly during your login session, consult the following table for the command to set up your environment:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Worker Node OS</th>
-<th align="left">Run the following command…</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">EL 6 (32-bit)</td>
-<td align="left"><code>source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.3/current/el6-i386/setup.sh</code></td>
-</tr>
-<tr>
-<td align="left">EL 6 (64-bit)</td>
-<td align="left"><code>source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.3/current/el6-x86_64/setup.sh</code></td>
-</tr>
-<tr>
-<td align="left">EL 7 (64-bit)</td>
-<td align="left"><code>source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.3/current/el7-x86_64/setup.sh</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="troubleshooting">Troubleshooting</h2>
-<p>Some possible issues that may come up:</p>
+<h2 id="installing-singularity">Installing singularity</h2>
+<p>To install singularity, make sure that your host is up to date before installing the required packages:</p>
+<ol>
+<li>
+<p>Clean yum cache:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> yum clean all --enablerepo<span class="o">=</span>*
+</pre></div>
+
+
+</li>
+<li>
+<p>Update software:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> yum update
+</pre></div>
+
+
+<p>This command will update <strong>all</strong> packages</p>
+</li>
+<li>
+<p>The singularity packages are split into two parts, choose the command that corresponds to your host:</p>
 <ul>
 <li>
-<p>A missing softlink to the CA certs directory. To check this, run:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> ls -l /cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/current/el6-x86_64/etc/grid-security/
+<p>If you are installing singularity on a worker node, where images do not need to be created of a manipulated, install just the smaller part to limit the amount of setuid-root code that is installed:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> yum install singularity-runtime
 </pre></div>
 
 
-<p>and check that <code>certificates</code> is linked to somewhere. The fix is to yum update the <code>oasis-config</code> package to version 4 or higher. A known workaround is to run:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> <span class="nb">export</span> <span class="nv">X509_CERT_DIR</span><span class="o">=</span>/cvmfs/oasis.opensciencegrid.org/mis/certificates
+</li>
+<li>
+<p>If you want a full singularity installation, run the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> yum install singularity
 </pre></div>
 
 
-<p>before any commands.</p>
 </li>
 </ul>
-<h2 id="how-to-get-help">How to get Help?</h2>
-<p>To get assistance please use this <a href="../../common/help/">Help Procedure</a>.</p>
+</li>
+</ol>
+<h2 id="configuring-singularity">Configuring singularity</h2>
+<p>The default configuration of singularity is sufficient.  If you want
+to see what options are available, see <code>/etc/singularity/singularity.conf</code>.</p>
+<h2 id="validating-singularity">Validating singularity</h2>
+<p>After singularity is installed, as an ordinary user run the following
+command to verify it:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> singlarity <span class="nb">exec</span> -C -H <span class="nv">$HOME</span>:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 ps -ef
+<span class="go">WARNING: Container does not have an exec helper script, calling &#39;cat&#39; directly</span>
+<span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
+<span class="go">user         1     0  0 21:34 ?        00:00:00 ps -ef</span>
+</pre></div>
+
+
+<p><br></p>
+<h2 id="starting-and-stopping-services">Starting and Stopping services</h2>
+<p>singularity has no services to start or stop.</p>
               
             </div>
           </div>
@@ -419,10 +447,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../cvmfs/" class="btn btn-neutral float-right" title="CVMFS">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../compute-element/install-htcondor-ce/" class="btn btn-neutral float-right" title="HTCondor-CE">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../wn-tarball/" class="btn btn-neutral" title="Worker Node (tarball install)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../cvmfs/" class="btn btn-neutral" title="CVMFS"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -450,10 +478,10 @@
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../wn-tarball/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../cvmfs/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../cvmfs/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../compute-element/install-htcondor-ce/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

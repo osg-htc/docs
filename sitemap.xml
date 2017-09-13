@@ -59,6 +59,12 @@
      <changefreq>daily</changefreq>
     </url>
         
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/client/singularity/</loc>
+     <lastmod>2017-09-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
     
