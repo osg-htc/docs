@@ -1,34 +1,35 @@
 
 # Install Singularity
 
-This document describes installation of the OSG distribution of
-[Singularity](http://singularity.lbl.gov).
-This document is intended for system administrators who wish to
-install this client or enable it to be run as an unprivileged user.
+[Singularity](http://singularity.lbl.gov) is a tool that creates
+docker-like process containers but without giving extra privileges to
+unprivileged users.  It is used by grid pilot jobs (which are
+submitted by per-VO grid workload management systems) to isolate user
+jobs from the pilot's files and processes and from other users' files
+and processes.  It also supplies a chroot environment in order to run
+user jobs in different operating system images under one Linux kernel.
+
+For operating systems older than Red Hat Enterprise Linux (RHEL) 7.4,
+singularity needs to use kernel capabilities that are only accessible
+to the root user, so it has to be installed with setuid-root
+executables.  Securing setuid-root programs is difficult, but singularity
+keeps that privileged code to a
+[minimum](http://singularity.lbl.gov/docs-security) to keep the
+vulnerability low.  Beginning in RHEL 7.4, there is a new
+[technology preview feature](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/7.4_Release_Notes/index.html#technology_previews_kernel)
+to allow unprivileged bind mounts in user name spaces, which allows
+singularity to run as an unprivileged user.  The OSG has installed
+singularity in [cvmfs](cvmfs), so if you have RHEL 7.4 or later you
+can avoid installing singularity at all and reduce vulnerability even
+further. 
+
+The document is intended for system administrators who wish to either
+install singularity or enable it to be run as an unprivileged user.
 
 !!! note "Applicable versions"
     The applicable software versions for this document are OSG Version >= 3.4.3.
     The version of singularity installed should be >= 2.3.1
 
-## About Singularity
-
-Singularity is a tool that creates docker-like process containers but
-without giving extra privileges to unprivileged users.  It is used by
-pilot jobs submitted by per-VO grid workload management systems to
-isolate the user jobs that they run from the pilot's files and
-processes and from other users' files and processes.
-
-Prior to Red Hat Enterprise Linux (RHEL) 7.4, singularity needs to use
-kernel capabilities that are only accessible to the root user, so it
-has to be installed with setuid-root executables.  Security setuid-root
-programs is difficult, but it keeps that privileged code to a
-[minimum](http://singularity.lbl.gov/docs-security) to keep the
-vulnerability low.  Beginning in RHEL 7.4, there is a new
-[technology preview feature](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/7.4_Release_Notes/index.html#technology_previews_kernel)
-to allow unprivileged access to name spaces, which allows singularity
-to run as an unprivileged user.  The OSG has installed singularity in
-[cvmfs](cvmfs), so if you have RHEL 7.4 or later you can avoid
-installing singularity at all and reduce vulnerability even further.
 
 Before Starting
 ---------------
@@ -37,11 +38,12 @@ As with all OSG software installations, there are some one-time (per host) steps
 
 - Ensure the host has [a supported operating system](../release/supported_platforms)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](../common/yum)
+- If you're installing singularity, prepare the [required Yum repositories](../common/yum)
 
-## Via CVMFS (EL 7.4 only)
+## Using Singularity via CVMFS (EL 7.4 only)
 
-If you are using a RHEL 7.4 variant OS, you can skip installation altogether and use singularity through OASIS:
+If you are using a RHEL 7.4 variant OS, you can skip installation
+altogether and use singularity through CVMFS:
 
 1. Set the `namespace.unpriv_enable=1` boot option.  The easiest way
     to do this is to add it in `/etc/sysconfig/grub` to the end of the
@@ -112,7 +114,7 @@ WARNING: Container does not have an exec helper script, calling 'cat' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
 user         1     0  0 21:34 ?        00:00:00 ps -ef
 ```
-
+<br>
 ## Starting and Stopping services
 
 singularity has no services to start or stop.
