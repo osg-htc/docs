@@ -17,6 +17,7 @@ pages:
   - 'Worker Node (tarball install)': 'client/wn-tarball.md'
   - 'Worker Node (OASIS install)': 'client/wn-oasis.md'
   - 'CVMFS': 'client/cvmfs.md'
+  - 'Singularity': 'client/singularity.md'
 - Install Guides - Compute:
   - 'HTCondor-CE': 'compute-element/install-htcondor-ce.md'
 - Install Guides - Data:
