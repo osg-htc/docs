@@ -42,7 +42,7 @@ Configuring GridFTP
 
 ### Configuring authentication
 
-In OSG 3.3, there are three methods to manage authentication for incoming jobs: the [LCMAPS VOMS plugin](../security/lcmaps-voms-authentication), [edg-mkgridmap](../security/edg-mkgridmap) and [GUMS](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallGums). Of these, GUMS has the most features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support "[pool accounts](https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html)", GUMS is the only option with that capability.
+In OSG 3.3, there are three methods to manage authentication for incoming jobs: the [LCMAPS VOMS plugin](../security/lcmaps-voms-authentication), [edg-mkgridmap](../security/edg-mkgridmap) and [GUMS](../security/install-gums). Of these, GUMS has the most features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support "[pool accounts](https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html)", GUMS is the only option with that capability.
 
 In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution.
 

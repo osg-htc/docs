@@ -89,7 +89,7 @@ RSV monitors systems by running probes, which can run on the RSV host itself (th
 In this case, remember to:
 
 - Add the RSV user `rsv` on all the systems where the probes may run, and
-- Map the RSV service certificate to the user you intend to use for RSV. This should be a local user used exclusively for RSV and not belonging to an institutional VO to avoid for the RSV probes to be accounted as regular VO jobs in Gratia. This can be done in [GUMS](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums) or [using a grid-mapfile-local](../security/edg-mkgridmap) (if you use a grid-mapfile). [MapServiceCertToRsvUser](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/MapServiceCertToRsvUser) explains how to configure GUMS or the grid-mapfile. Also see the [CE installation document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavAdminCompute) for more information.
+- Map the RSV service certificate to the user you intend to use for RSV. This should be a local user used exclusively for RSV and not belonging to an institutional VO to avoid for the RSV probes to be accounted as regular VO jobs in Gratia. This can be done in [GUMS](../security/install-gums) or [using a grid-mapfile-local](../security/edg-mkgridmap) (if you use a grid-mapfile). [MapServiceCertToRsvUser](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/MapServiceCertToRsvUser) explains how to configure GUMS or the grid-mapfile. Also see the [CE installation document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavAdminCompute) for more information.
 
 #### Configuring the RSV web server to use HTTPS instead of HTTP
 
