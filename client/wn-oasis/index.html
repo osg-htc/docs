@@ -318,7 +318,7 @@
 <p>The <em>OSG Worker Node Client</em> is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use.</p>
 <p>It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:</p>
 <ul>
-<li>Use the Worker Node Client software from OASIS (this guide) - useful when <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCvmfs">OASIS</a> is already mounted on your worker nodes</li>
+<li>Use the Worker Node Client software from OASIS (this guide) - useful when <a href="../cvmfs">CVMFS</a> is already mounted on your worker nodes</li>
 <li><a href="../wn/">Install using RPMs and Yum</a> - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs</li>
 <li><a href="../wn-tarball/">Install using a tarball</a> - useful when installing onto a shared filesystem for distribution to worker nodes</li>
 </ul>
@@ -331,7 +331,7 @@
 <p>Also note that, once configured to use OASIS, each use of Worker Node Client software will cause that software and its associated files to be downloaded from a CVMFS server or your local cache thereof. This may result in extra network activity, especially if Worker Node Client tools are used heavily.</p>
 <h2 id="configuring-your-site-to-use-the-worker-node-client-from-oasis">Configuring Your Site to Use the Worker Node Client From OASIS</h2>
 <p>Below are the one-time steps that you must perform to configure your site to use the Worker Node Client software from OASIS.</p>
-<p>On every worker node, <a href="../cvmfs/">install and configure OASIS</a></p>
+<p>On every worker node, <a href="../cvmfs/">install and configure CVMFS</a></p>
 <p>Determine the OASIS path to the Worker Node Client software for your worker nodes:</p>
 <table>
 <thead>

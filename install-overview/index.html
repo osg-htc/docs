@@ -364,15 +364,15 @@
 </ul>
 <h3 id="adding-osg-software-to-worker-nodes">Adding OSG Software to Worker Nodes</h3>
 <ul>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/UsingWorkerNodeClient">Worker Node (WN) Client Overview</a></li>
+<li><a href="../client/using-wn">Worker Node (WN) Client Overview</a></li>
 <li>Install the WN client software on every worker node – pick a method:<ul>
 <li><a href="../client/wn">Using RPMs</a> – useful when managing your worker nodes with a tool (e.g., Puppet, Chef)</li>
 <li><a href="../client/wn-tarball">Using a tarball</a> – useful for installation onto a shared filesystem (does not require root access)</li>
-<li><a href="../client/wn-oasis">Using OASIS</a> – useful when <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavTechOASIS">OASIS</a> is already mounted on your worker nodes</li>
+<li><a href="../client/wn-oasis">Using OASIS</a> – useful when <a href="../client/cvmfs">CVMFS</a> is already mounted on your worker nodes</li>
 </ul>
 </li>
-<li>(optional) <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCvmfs">Install the CernVM-FS client</a> to make it easy for user jobs to install needed software from OSG’s OASIS repositories</li>
-<li>(optional, advanced) <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallGlexec">Install gLExec on the OSG worker node</a>, if you know you need it</li>
+<li>(optional) <a href="../client/cvmfs">Install the CernVM-FS client</a> to make it easy for user jobs to use needed software from OSG's OASIS repositories</li>
+<li>(optional) <a href="../client/singularity">Install singularity on the OSG worker node</a>, to allow pilot jobs to isolate user jobs.</li>
 </ul>
 <h3 id="installing-and-configuring-the-compute-element">Installing and Configuring the Compute Element</h3>
 <ul>
@@ -388,9 +388,9 @@
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingOsgConfigure">Troubleshooting osg-configure</a></li>
 </ul>
 <h3 id="installing-and-configuring-other-nodes">Installing and Configuring Other Nodes</h3>
-<p>All of these node types and their services are optional, although OSG requires the Frontier Squid caching service if you have installed <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCvmfs">CVMFS</a> on your worker nodes.</p>
+<p>All of these node types and their services are optional, although OSG requires the Frontier Squid caching service if you have installed <a href="../client/cvmfs">CVMFS</a> on your worker nodes.</p>
 <ul>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallFrontierSquid">Install Frontier Squid, the HTTP caching proxy service</a></li>
+<li><a href="../data/frontier-squid">Install Frontier Squid, the HTTP caching proxy service</a></li>
 <li>RSV monitoring to monitor and report to OSG on the health of your site<ul>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvOverview">RSV Overview</a></li>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallRSV">Install RSV</a></li>
