@@ -73,7 +73,7 @@ This command will update **all** packages on your system.
 Migrating from edg-mkgridmap to LCMAPS VOMS Plugin
 --------------------------------------------------
 
-After following the update instructions above, perform the migration process documented [here](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallLcmapsVoms#EdgmkgridmapMigration).
+After following the update instructions above, perform the migration process documented [here](../security/lcmaps-voms-authentication#migrating-from-edg-mkgridmap).
 
 Updating from Frontier Squid 2.7 to Frontier Squid 3.5 (upgrading from OSG 3.3)
 -------------------------------------------------------------------------------
