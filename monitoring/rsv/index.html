@@ -293,14 +293,6 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../security/install-gums/">GUMS</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../security/gums-scalability/">GUMS Scalability Case Study</a>
-                </li>
-                <li class="">
-                    
     <a class="" href="../../client/glexec/">Worker node glexec Install</a>
                 </li>
     </ul>
@@ -434,7 +426,7 @@
 <p>In this case, remember to:</p>
 <ul>
 <li>Add the RSV user <code>rsv</code> on all the systems where the probes may run, and</li>
-<li>Map the RSV service certificate to the user you intend to use for RSV. This should be a local user used exclusively for RSV and not belonging to an institutional VO to avoid for the RSV probes to be accounted as regular VO jobs in Gratia. This can be done in <a href="../../security/install-gums">GUMS</a> or <a href="../../security/edg-mkgridmap">using a grid-mapfile-local</a> (if you use a grid-mapfile). <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/MapServiceCertToRsvUser">MapServiceCertToRsvUser</a> explains how to configure GUMS or the grid-mapfile. Also see the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavAdminCompute">CE installation document</a> for more information.</li>
+<li>Map the RSV service certificate to the user you intend to use for RSV. This should be a local user used exclusively for RSV and not belonging to an institutional VO to avoid for the RSV probes to be accounted as regular VO jobs in Gratia. This can be done in <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums">GUMS</a> or <a href="../../security/edg-mkgridmap">using a grid-mapfile-local</a> (if you use a grid-mapfile). <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/MapServiceCertToRsvUser">MapServiceCertToRsvUser</a> explains how to configure GUMS or the grid-mapfile. Also see the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavAdminCompute">CE installation document</a> for more information.</li>
 </ul>
 <h4 id="configuring-the-rsv-web-server-to-use-https-instead-of-http">Configuring the RSV web server to use HTTPS instead of HTTP</h4>
 <p>If you would like your local RSV web server to use HTTPS instead of the default HTTP (for compatibility or security reasons), complete the steps below. This procedure assumes that you already have an HTTP service certificate (or a copy of the host certificate) in <code>/etc/grid-security/http/</code>. If not, omit the <code>SSLCertificate*</code> modifications below, and your web server will start with its own, self-signed certificate.</p>
