@@ -1,0 +1,61 @@
+---+Authentication Issues
+---++ Proxy
+---+++Syntax:
+
+<verbatim>
+ERROR: Couldn't find a valid proxy. 
+Use -debug for further information.
+ERROR: proxy does not exists
+</verbatim>
+
+---+++Known causes:
+
+The gatekeeper cannot find a valid proxy for the user who is attempting to submit a job.  This generally indicates a proxy hasn't been obtained or has expired.
+
+---+++Recommendations:
+
+   * Obtain a proxy using:
+<pre class="screen">
+%UCL_PROMPT_SHORT% grid-proxy-init
+</pre>
+or
+<pre class="screen">
+%UCL_PROMPT_SHORT% voms-proxy-init
+</pre>
+
+   * Submit the job to the grid as the same user whose certificate was authenticated with grid-proxy-init
+
+i.e. %RED%*do not do*%ENDCOLOR%:
+<pre class="screen">
+%UCL_PROMPT_SHORT% grid-proxy-init
+%UCL_PROMPT_SHORT% su
+%UCL_PROMPT_SHORT% globus-job-run <site> <job>
+</pre>
+
+---++ GRAM Authentication to Job Manager
+---+++Syntax
+
+=GRAM Authentication test failure: connecting to the job manager failed.=
+
+---+++Known Causes
+
+The gatekeeper could not be contacted because of network problems or a mistake in the hostname.
+
+---+++Recommendation
+
+Try to ping the host to make sure you can reach it.  If you can it is possible that the gatekeeper is not running or is not on an expected port.  Contact the host administrator and ask them to make certain the gatekeeper is running and properly launched via inetd/xinetd.
+
+---++ GRAM Authentication with Remote Server
+---+++Syntax
+
+=GRAM Authentication test failure: authentication with the remote server failed=
+
+---+++Known Causes
+
+The gatekeeper did not accept your certificate.  You may be a member of a VO that the site does not support.
+
+---+++Recommendations
+
+Ask the site admin if your VO is supported or if they are willing to support your VO.
+
+-- Main.AnandPadmanabhan - 05 Dec 2006

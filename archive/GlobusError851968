@@ -1,0 +1,41 @@
+---++Globus Error: 851968
+
+---+++Syntax:
+
+This is a GSI error visible in the HTCondor log files. This specifically is from the !SchedLog, the address aaa.xxx.xxx.xxx belongs to the collector it tries to authenticate with:
+<pre>09/14/15 11:25:49 (pid:25708) ERROR: SECMAN:2004:Failed to create security session to <aaa.xxx.xxx.xxx:9618> with TCP.|AUTHENTICATE:1003:Failed to authenticate with any method|AUTHENTICATE:1004:Failed to authenticate using GSI|GSI:5003:Failed to authenticate.  Globus is reporting error (851968:64).  There is probably a problem with your credentials.  (Did you run grid-proxy-init?)|AUTHENTICATE:1004:Failed to authenticate using FS
+</pre>
+
+---+++Known causes:
+
+This error happened because the x509 files, =hostkey.pem= and =hostcert.pem=, were not owned by the user starting HTCondor (root) but by another regular user.
+
+
+---+++Recommendations:
+
+Check ownership and permissions of the x509 files, =/etc/grid-secutity/hostkey.pem= and =/etc/grid-secutity/hostcert.pem=.
+
+Fix ownership and permissions if needed. 
+
+
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   * Local OWNER          = MarcoMambelli
+   * Local DOC_AREA       = User
+   * Local DOC_ROLE       = EndUser
+   * Local DOC_TYPE       = Troubleshooting
+   
+   * Local INCLUDE_REVIEW = %YES%
+   * Local INCLUDE_TEST   = %YES%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %YES%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = 
+   * Local REVIEW_PASSED  = %YES%
+   * Local TESTER         = 
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

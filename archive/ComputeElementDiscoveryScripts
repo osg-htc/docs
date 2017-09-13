@@ -1,0 +1,188 @@
+
+%DOC_STATUS_TABLE%
+
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+The scripts described here provide for command line operation of the [[OsgStorageDiscoveryTool][OSG Discovery tool]]. 
+
+---++ Search Scripts
+
+---+++ get_mount_path
+
+Returns a Compute Element mount point for a Storage Element which authorizes the specified VO, labeled with the associated job manager.
+
+*Script Name*
+
+
+get_mount_path
+
+*Usage*
+<pre>
+get_mount_path --vo &lt;VO name&gt; [ --compute_element_id &lt;GlueCEUniqueID&gt;  ] [ --storage_element_id &lt;GlueSEUniqueID&gt;  ] 
+</pre>
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+|vo                     |Virtual Organization name |yes|
+|compute_element_id     |Compute Element ID. From dn attribute of !GlueCESEBind. |no|
+|storage_element_id     |Storage Element ID. Glue schema attribute is !GlueSEUniqueID.|no|
+
+*Example Output*
+<verbatim>
+[xquery]$ get_mount_path --vo ligo
+COMPUTE ELEMENT ID                                                    MOUNT POINT                   
+cit-gatekeeper2.ultralight.org:2119/jobmanager-condor-cms_monitor     /mnt/hadoop/osg/LIGO          
+cit-gatekeeper2.ultralight.org:2119/jobmanager-condor-cms_priority    /mnt/hadoop/osg/LIGO          
+cit-gatekeeper2.ultralight.org:2119/jobmanager-condor-cms_production  /mnt/hadoop/osg/LIGO          
+cit-gatekeeper2.ultralight.org:2119/jobmanager-condor-cms_user        /mnt/hadoop/osg/LIGO          
+cit-gatekeeper2.ultralight.org:2119/jobmanager-condor-default         /mnt/hadoop/osg/LIGO          
+cit-gatekeeper2.ultralight.org:2119/jobmanager-condor-osg_user        /mnt/hadoop/osg/LIGO          
+red.unl.edu:2119/jobmanager-condor-default                            /mnt/hadoop/public/ligo       
+red.unl.edu:2119/jobmanager-condor-group_cms_prio                     /mnt/hadoop/public/ligo       
+red.unl.edu:2119/jobmanager-condor-group_cms_prod                     /mnt/hadoop/public/ligo       
+red.unl.edu:2119/jobmanager-condor-group_cms_user                     /mnt/hadoop/public/ligo       
+red.unl.edu:2119/jobmanager-condor-group_lcgadmin                     /mnt/hadoop/public/ligo       
+red.unl.edu:2119/jobmanager-condor-group_other                        /mnt/hadoop/public/ligo       
+red.unl.edu:2119/jobmanager-condor-group_t3_user                      /mnt/hadoop/public/ligo       
+red.unl.edu:2119/jobmanager-condor-group_uscms_user                   /mnt/hadoop/public/ligo       
+ce.grid.unesp.br:2119/jobmanager-condor-default                       /store/ligo                   
+umiss001.hep.olemiss.edu:2119/jobmanager-condor-default               /storage005/osgremote/osg_data/ligo
+</verbatim>
+
+
+---+++ get_os_versions 
+
+Finds operating system versions for clusters and sites.
+
+*Script Name*
+
+get_os_versions
+
+*Usage*
+<pre>
+get_os_versions [ --vo &lt;VO name&gt; ] [ --match &lt;match string&gt; ] 
+</pre>
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+|vo             |Virtual Organization name or Fully Qualified Attribute Name. |no|
+|match          |string in the OS version attribute to match.|no|
+
+*Example Output*
+<verbatim>
+[xquery]$ get_os_versions --match 4.5
+Site Name Compute Element ID                                OS Version                                                            
+MWT2_IU   iut2-grid6.iu.edu:2119/jobmanager-pbs-iut2        Linux #1 SMP Tue Mar 16 18:44:51 EDT 2010 2.6.18-164.15.1.el5         
+MWT2_IU   iut2-grid6.iu.edu:2119/jobmanager-pbs-prod        Linux #1 SMP Tue Mar 16 18:44:51 EDT 2010 2.6.18-164.15.1.el5         
+MWT2_IU   iut2-grid6.iu.edu:2119/jobmanager-pbs-routeq      Linux #1 SMP Tue Mar 16 18:44:51 EDT 2010 2.6.18-164.15.1.el5         
+UCR-HEP   top.ucr.edu:2119/jobmanager-condor-default        ScientificSL Beryllium 4.5                                            
+UCR-HEP   top.ucr.edu:2119/jobmanager-condor-group_cms      ScientificSL Beryllium 4.5                                            
+UCR-HEP   top.ucr.edu:2119/jobmanager-condor-group_engage   ScientificSL Beryllium 4.5                                            
+UCR-HEP   top.ucr.edu:2119/jobmanager-condor-group_nysgrid  ScientificSL Beryllium 4.5                                            
+UCR-HEP   top.ucr.edu:2119/jobmanager-condor-group_sbgrid   ScientificSL Beryllium 4.5 
+</verbatim>
+
+
+---+++ get_runtime_versions 
+Finds runtime software versions for clusters and sites
+
+*Script Name*
+
+get_runtime_versions 
+
+
+*Usage*
+<pre>
+get_runtime_versions [ --vo &lt;VO name&gt; ] [ --match &lt;match string&gt; ] 
+
+</pre>
+
+*WARNING: Leaving "match" unspecified will result in very long fields in the response!*
+
+*Parameters*
+%TABLE{ headerbg="#eeeeee" headercolor="#000000" databg="#ffffff" tableborder="1" columnwidths="120," cellpadding="2" cellspacing="1" dataalign="left" valign="top" sort="off"}%
+| *name* | *definition* | *required* |
+|vo             |Virtual Organization name or Fully Qualified Attribute Name. |no|
+|match          |string in each runtime version attribute to match. |no|
+
+
+
+
+*Example Output*
+<verbatim>
+[xquery]$ get_runtime_versions --vo cms --match OSG
+Site Name                     Compute Element ID                                                    Software Version              
+RENCI-Engagement              belhaven-1.renci.org:2119/jobmanager-condor-default                   OSG 1.2.3                     
+BNL-ATLAS                     gridgk01.racf.bnl.gov:2119/jobmanager-condor-default                  OSG 1.2.9,OSG_VERSION         
+BNL-ATLAS                     gridgk02.racf.bnl.gov:2119/jobmanager-condor-default                  OSG 1.2.9,OSG_VERSION         
+CIT_CMS_T2                    cit-gatekeeper2.ultralight.org:2119/jobmanager-condor-cms_monitor     OSG 1.2.8,OSG_VERSION         
+CIT_CMS_T2                    cit-gatekeeper2.ultralight.org:2119/jobmanager-condor-cms_priority    OSG 1.2.8,OSG_VERSION         
+CIT_CMS_T2                    cit-gatekeeper2.ultralight.org:2119/jobmanager-condor-cms_production  OSG 1.2.8,OSG_VERSION         
+CIT_CMS_T2                    cit-gatekeeper2.ultralight.org:2119/jobmanager-condor-cms_user        OSG 1.2.8,OSG_VERSION         
+GridUNESP_CENTRAL             ce.grid.unesp.br:2119/jobmanager-condor-default                       OSG 1.2.9,OSG_VERSION         
+MIT_CMS                       ce01.cmsaf.mit.edu:2119/jobmanager-condor-group_cmshi                 OSG 1.2.3                     
+MIT_CMS                       ce01.cmsaf.mit.edu:2119/jobmanager-condor-group_cmsprod               OSG 1.2.3                     
+MIT_CMS                       ce01.cmsaf.mit.edu:2119/jobmanager-condor-group_cmsuser               OSG 1.2.3                     
+MIT_CMS                       ce01.cmsaf.mit.edu:2119/jobmanager-condor-group_monitor               OSG 1.2.3                     
+UCD                           cms.tier3.ucdavis.edu:2119/jobmanager-condor-default                  OSG 1.2.6,OSG_VERSION
+...
+</verbatim>
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = DouglasStrain
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = EndUser
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = NehaSharma
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = NehaSharma
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+-- Main.DouglasStrain - 11 Oct 2011

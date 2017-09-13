@@ -1,0 +1,935 @@
+l%DOC_STATUS_TABLE%
+
+---+!! Installing the Globus GRAM Compute Element
+
+%NOTE% If you are installing a new CE, we highly recommend installing an [[Documentation/Release3.InstallHTCondorCE][HTCondor CE]], which is the preferred CE solution for the OSG.
+
+%TOC{depth="2"}%
+
+---# About this Document
+This document is for System Administrators.  Here we describe how to install and configure a Compute Element on your Linux machine.   We also mention the need of a job manager but don't go into details about its installation.
+
+This document follows the general OSG documentation conventions: %TWISTY{%TWISTY_OPTS_OUTPUT% showlink="Click to expand document conventions..."}%
+%INCLUDE{"Trash/DocumentationTeam/DocConventions" section="Header"}%
+%INCLUDE{"Trash/DocumentationTeam/DocConventions" section="CommandLine"}%
+%ENDTWISTY%
+
+---# How to get Help?
+To get assistance please use [[HelpProcedure][Help Procedure]].
+
+
+---# Requirements and Preparation
+
+---## Host and OS
+   * A host to install the Compute Element (Pristine node)
+   * OS is %SUPPORTED_OS%. Currently most of our testing has been done on Scientific Linux 5.
+   * Root access
+
+---## Users
+
+The Compute Element installation will create the following users unless they are already created.
+
+%STARTSECTION{"Users"}%
+| *User* | *Default uid* | *Comment* |
+| =apache= | 48 | Runs httpd to provide the =osg-site-page= |
+| =condor= | none | Only if you use the Condor job manager or the managed-fork job manager |
+| =gratia= | none | Runs the Gratia probes to collect accounting data |
+| =tomcat= | 91 | Runs the Tomcat container for !CEMon; also used by OSG-Info-Services |
+
+Note that if uids 48 and 91 are already taken but not used for the appropriate users, you will experience errors. [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/KnownProblems#Reserved_user_ids_especially_for][Details...]]
+
+%ENDSECTION{"Users"}%
+
+---## Certificates
+| *Certificate* | *User that owns certificate* | *Path to certificate* |
+| Host certificate | =root= | =/etc/grid-security/hostcert.pem= <br> =/etc/grid-security/hostkey.pem= |
+
+[[Trash.ReleaseDocumentationGetHostServiceCertificates][Here]] are instructions to request a host certificate.
+
+---## Networking
+%STARTSECTION{"Firewalls"}%
+%INCLUDE{"FirewallInformation" section="FirewallTable" lines="gram,portrange,portsource,gridftp"}%
+
+For =GLOBUS_TCP_PORT_RANGE= is recommended to open <strike>8 ports*number of job slots</strike>. _Please note:_ This number is wrong and we will update is soon (July 2012). <br/>
+Allow inbound and outbound network connection _to all cluster servers, e.g. GUMS and job manager head-node_ <br/>
+Inbound and outbound network connection outside of the cluster can be limited _to any clients who may need to submit jobs_
+%ENDSECTION{"Firewalls"}%
+
+If you have a multi-homed host you may be interested in reading [[#ConfigMultiHomed][this section]].
+
+---## Additional Requirements
+To be part of OSG your CE must be registered in OIM. To register your resource:
+   * Use your user certificate.  [[CertificateUserGet][Here]] are instructions to request a user certificate.
+   * Register in OIM as described in Operations.OIMRegistrationInstructions
+
+If you use [[#GumsConfig][GUMS]], you must use GUMS 1.3 or later (note that GUMS 1.3 was available already in OSG 1.0)
+.
+Testing Requirements:
+   * To test a CE you need to submit jobs, e.g using your user certificate.
+
+%INCLUDE{"YumRepositories" section="OSGRepoBrief" TOC_SHIFT="+"}%
+%INCLUDE{"InstallCertAuth" section="OSGBriefCaCerts" TOC_SHIFT="+"}%
+
+#InstallBatch
+---# Install your batch system
+
+Before you install your CE, you almost certainly need to install the submission and monitoring tools for your batch system. Installation of your batch system is beyond the scope of the OSG documentation, but there are a few things to note.
+
+---## If you are using HTCondor
+
+Use this subsection to help guide an installation of HTCondor. For more information, see the [[CondorInformation][HTCondor information page]].
+
+You can install HTCondor from one of at least three places:
+
+   * <p><strong>From the OSG Yum repository.</strong> The OSG HTCondor RPMs are built from the same sources as the UW&ndash;Madison ones, but with build options and (when needed) patches that are selected for typical OSG usage. Assuming that you have the OSG Yum repository set up already, start an HTCondor install with:</p>\
+     <pre class="screen">yum install condor</pre>
+   * <p><strong>From the UW&ndash;Madison Yum repository.</strong> The UW&ndash;Madison HTCondor RPMs are the official developer&rsquo;s build. However, they are built with and include many of HTCondor&rsquo;s 3rd-party software dependencies, which is atypical for RPMs. There is [[http://research.cs.wisc.edu/htcondor/yum/][an HTCondor web page]] that describes the official RPMs and repository.</p>\
+     <p>If you use the UW HTCondor RPMs, you must configure Yum to avoid using the OSG HTCondor RPMs. To do so, edit =/etc/yum.repos.d/osg.repo= to add the following line:</p>\
+     <pre class="file">exclude=condor* empty-condor</pre>
+   * <p><strong>From a binary tarball from the official HTCondor site or elsewhere.</strong> This option requires a bit of effort upfront. The =osg-ce-condor= RPM (documented below) expects HTCondor to be installed as an RPM, using RPM&rsquo;s mechanism for tracking installed software and dependencies. To work around the fact that the RPM system will not know about your tarball-based HTCondor installation, complete these steps:</p>\
+     <ol>\
+       <li>Install an empty RPM with HTCondor metadata: <pre class="rootscreen">%UCL_PROMPT_ROOT% yum install --enablerepo=osg-empty empty-condor</pre></li>\
+       <li>Install =osg-ce-condor= and =GRAM= packages ([[#InstallCE][instructions below]])</li>\
+       <li>Configure Globus to use your version of HTCondor; see [[#ConfigCondor][the HTCondor configuration section]] below for details</li>\
+     </ol>
+
+%IMPORTANT% <!-- If you will use [[InstallGlexec][glexec]] on your worker nodes, be sure to disable Condor's GSI delegation, or glexec won't work. -->Be sure to disable Condor's GSI delegation, or [[NavTechGlideinWMS][Glidein WMS]] jobs won't work. Specifically, in your Condor configuration file set:
+
+<pre class="file">
+DELEGATE_JOB_GSI_CREDENTIALS = FALSE
+</pre>
+
+[[http://research.cs.wisc.edu/htcondor/manual/v8.4/3_3Configuration.html#28527][Condor 8.4 documentation on DELEGATE_JOB_GSI_CREDENTIALS]].
+
+%IMPORTANT% In the first two, RPM-based options, install HTCondor before installing the OSG CE RPMs, or else the =empty-condor= package will be installed with the OSG CE RPMs and will interfere with a regular HTCondor installation from RPM.
+
+---## If you are using Torque or PBSPro
+
+You can install Torque from at least two places:
+
+   1. Torque is in the EPEL repository.
+   1. You can download Torque from [[http://www.adaptivecomputing.com/resources/downloads/torque/][the software developer]] and install it in an arbitrary location on your CE.
+
+Option 2 works if you do a bit of upfront effort. The =osg-ce-pbs= RPM (documented below) depends on having Torque installed via the EPEL RPM and it uses RPM's dependency resolution mechanism. If you choose option 2, you need to do two things:
+
+   1. Install a "dummy RPM" called =empty-torque= that will convince RPM that Torque has been installed via RPM, but will not actually provide Torque: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install empty-torque</pre>
+   1. Configure Globus to use your version of Torque. See [[#ConfigPBS][Section 4.3]] below for details.
+
+
+---## If you are using !Gridengine
+
+You can install !Gridengine from at least two places:
+
+   1. !Gridengine is in the EPEL repository.
+   1. You can download !Gridengine from [[http://www.oracle.com/us/products/tools/oracle-grid-engine-075549.html][Oracle's Gridengine site]] and install it in an arbitrary location on your CE.  This option also applies if you've already installed SGE from another source as well.
+
+Option 2 works if you do a bit of upfront effort. The =osg-ce-sge= RPM (documented below) depends on having SGE installed via the EPEL RPM and it uses RPM's dependency resolution mechanism. If you choose option 2, you need to do two things:
+
+   1. Install a "dummy RPM" called =empty-gridengine= that will convince RPM that !Gridengine has been installed via RPM, but will not actually provide !Gridengine: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install empty-gridengine</pre>
+   1. Configure Globus to use your version of !Gridengine. See [[#ConfigGridengine][Section 7.4]] for details.
+
+
+
+%STARTSECTION{"InstallCeRpms"}%
+#InstallCE
+---# Install the CE
+
+Install the CE RPM and the required GRAM components. OSG support only CEs with a single batch system. Do only *ONE* of the following installation lines, depending on your batch system: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install osg-ce-condor globus-gatekeeper globus-gram-client-tools globus-gram-job-manager globus-gram-job-manager-fork globus-gram-job-manager-fork-setup-poll gratia-probe-gram globus-gram-job-manager-scripts globus-gram-job-manager-condor
+%UCL_PROMPT_ROOT% yum install osg-ce-pbs globus-gatekeeper globus-gram-client-tools globus-gram-job-manager globus-gram-job-manager-fork globus-gram-job-manager-fork-setup-poll gratia-probe-gram globus-gram-job-manager-scripts globus-gram-job-manager-pbs-setup-seg
+%UCL_PROMPT_ROOT% yum install osg-ce-lsf globus-gatekeeper globus-gram-client-tools globus-gram-job-manager globus-gram-job-manager-fork globus-gram-job-manager-fork-setup-poll gratia-probe-gram globus-gram-job-manager-scripts globus-gram-job-manager-lsf-setup-seg
+%UCL_PROMPT_ROOT% yum install osg-ce-sge globus-gatekeeper globus-gram-client-tools globus-gram-job-manager globus-gram-job-manager-fork globus-gram-job-manager-fork-setup-poll gratia-probe-gram globus-gram-job-manager-scripts globus-gram-job-manager-sge-setup-seg</pre>
+
+%NOTE% Starting in OSG 3.1.24 (released 24 September 2013), the CE installation includes Frontier Squid, a caching proxy for HTTP and related protocols. We encourage all sites to configure and use this service. For more information, see [[InstallFrontierSquid][the Frontier Squid installation page]].
+
+---## Install Managed Fork
+
+[[Documentation/GlossaryM#DefsManagedFork][Trash.ReleaseDocumentationManagedFork]] is recommended for service jobs on the gatekeeper instead of the default fork job manager. !Trash.ReleaseDocumentationManagedFork *requires Condor* and it will bring it in as dependency if it is not already installed. See [[CondorInformation][our Condor information]] for more information on different ways to install Condor.
+To install [[Documentation/GlossaryM#DefsManagedFork][Trash.ReleaseDocumentationManagedFork]], do the following:
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install globus-gram-job-manager-managedfork
+</pre>
+%NOTE% Managed Fork can use the same Condor installation used to run regular jobs on a Condor cluster. Both kinds of jobs will run in the same Condor installation without conflicts.
+
+%ENDSECTION{"InstallCeRpms"}%
+
+
+
+#ConfigureCE
+---# Configuration Instructions
+
+---## Set the default jobmanager
+
+Set the default jobmanager to =fork= by running the following command:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /usr/sbin/globus-gatekeeper-admin -e jobmanager-fork-poll -n jobmanager
+</pre>
+
+---## Run osg-configure
+
+You will configure your CE with a tool named =osg-configure= (previously known as =configure-osg=). First, you edit the files in =/etc/osg/config.d/= to describe your configuration. (In the old Pacman-based VDT, these were in a single =config.ini= file, but they have been separated into separate files.) There are many options in these files, and you should refer [[IniConfigurationOptions][the osg-configure options page]] for details:
+   1. IniConfigurationOptions describes the syntax, usage and the various options you can set in the _.ini_ files in =/etc/osg/config.d/=. This document describes all possible configuration files. Depending on what you installed you may have only some of them.
+
+Once you have edited the _.ini_ files in =/etc/osg/config.d/=, run =osg-configure= with the =-v= option to check that your configuration is valid without making any changes:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% osg-configure -v
+</pre>
+
+If you do not have any errors, run =osg-configure= with the =-c= option to configure your installation:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% osg-configure -c
+</pre>
+
+*If you are updating from a Pacman-based CE*, you can copy your old =config.ini= file to =/etc/osg/config.d/99-old-config.ini=. The options in this file will override the options in the other files. Adjust the configuration variables as needed. The [[UpdateComputeElement][document about updating a Compute Element]] will provide more details.
+
+#ConfigCondor
+---## Configuring your CE to use Condor
+
+---### Tell Condor about Gratia
+
+Condor needs to be configured to provide accounting information to Gratia. If you installed Condor from the OSG-provided RPMs, this is complete. If you installed Condor by any other method, you need to set =PER_JOB_HISTORY_DIR= in the Condor configuration. By default, Gratia will look in =/var/lib/gratia/data=, so you need the following to be in your Condor configuration:
+
+<pre class="file">
+PER_JOB_HISTORY_DIR = /var/lib/gratia/data
+</pre>
+
+You can verify it is correct with the =condor_config_val= command. Of course, the file name where the definition is will be different.
+
+<pre class="screen">
+%UCL_PROMPT% condor_config_val -v PER_JOB_HISTORY_DIR
+PER_JOB_HISTORY_DIR: /var/lib/gratia/data
+  Defined in '/etc/condor/config.d/99_gratia.conf', line 5.
+</pre>
+
+---### globus-condor.conf
+You can configure GRAM's use of Condor by editing =/etc/globus/globus-condor.conf=.
+
+%TWISTY{%TWISTY_OPTS_OUTPUT% showlink="Show an example globus-condor.conf"}%
+<pre class="file">
+# Condor classified ads contain requirements for processing jobs. Among these
+# is OpSys, which defines which operating system the job may be run on. Condor
+# has a reasonable default for this, the operating system of this machine. If
+# you want to use a different default, specify it here and uncomment it.
+# condor_os="LINUX"
+
+# Condor classified ads contain requirements for processing jobs. Among these
+# is Arch, which defines which computer architecure the job may be run on.
+# Condor has a reasonable default for this, the architecture of this machine.
+# If you want to use a different default, specifiy it here and uncomment it.
+# condor_arch="INTEL"
+
+# Path to the condor_submit executable. This is required to submit condor
+# jobs.
+condor_submit="/usr/bin/condor_submit"
+
+# Path to the condor_rm executable. This is required to cancel condor jobs.
+condor_rm="/usr/bin/condor_rm"
+
+# Value of the CONDOR_CONFIG environment variable. On systems where condor is
+# installed in non-default location, this variable helps condor find its
+# configuratino files. If you need to set CONDOR_CONFIG to run condor processes
+# uncomment the next line at set its value
+#condor_config=""
+
+# The GRAM condor module can perform tests on files used by a condor job
+# prior to submitting it to condor. These checks include tests on the
+# files named by the directory, executable, and stdin
+# RSL attributes to ensure they exist and have suitable permissions. These
+# checks are done in the condor standard universe always by the GRAM condor
+# module, but can also be done for "vanilla" universe jobs if desired,
+#check_vanilla_files="no"
+
+# Condor supports parallel universe jobs using mpi site-specific scripts which
+# invoke appropriate mpi commands to start the job. If you want to enable
+# mpi jobs on condor, you'll need to uncomment the following line and set
+# it to the path of your mpi script.
+#condor_mpi_script="no"
+
+# Enable Condor file transfer mode by default on the OSG
+isNFSLite=1
+</pre>
+%ENDTWISTY%
+
+Options of general use in this file include:
+
+| *Option* | *Meaning* | *Purpose* |
+| =condor_submit= | The full pathname for the =condor_submit= binary. | Edit this if you installed Condor into a different location |
+| =condor_rm= | The full pathname for the =condor_rm= binary. | Edit this if you installed Condor into a different location |
+| =condor_config= | The full pathname to Condor's =condor_config= file. | Edit this if you installed Condor into a different location |
+| =isNFSLite= | 1 enables NFSLite, 0 disables it. | Enable if you want to use Condor's file transfer mechanism, Disable if you want Condor to assume a shared filesystem |
+
+---### Condor accounting groups
+%STARTSECTION{"AccountingGroups"}%
+Condor accounting groups are a mechanism to provide fairshare on a group basis, as opposed to a Unix user basis.  They are independent of the Unix groups the user may already be in, and are [[http://research.cs.wisc.edu/condor/manual/v7.6/3_4User_Priorities.html#SECTION00447000000000000000][documented in the Condor manual]].  If you are using Condor accounting groups, you can map user jobs from GRAM into Condor accounting groups based on their numeric user id, their DN, or their VOMS attributes.
+%ENDSECTION{"AccountingGroups"}%
+
+---#### =/etc/osg/uid_table.txt=
+%STARTSECTION{"uid_table"}%
+The uid file is consulted first. It contains line of the form:
+
+<pre class="file">
+uid GroupName
+</pre>
+
+For example, you might have:
+<pre class="file">
+uscms02 TestGroup
+osg     other.osgedu
+</pre>
+%ENDSECTION{"uid_table"}%
+
+---#### =/etc/osg/extattr_table.txt=
+%STARTSECTION{"extattr_table"}%
+The extended attribute file is only consulted if the user is not found in the uid file. It contains lines of the form:
+
+<pre class="file">
+SubjectOrAttribute GroupName
+</pre>
+
+The _SubjectOrAttribute_ can be a Perl regular expression.
+
+For instance, you might put the cmsprio user (known by a portion of the DN) into one group, anyone with the production role (in the VOMS attribute) into a second group, and everyone else into a third group:
+
+<pre class="file">
+cmsprio cms.other.prio
+cms\/Role=production cms.prod
+.* other
+</pre>
+
+Whatever group is chosen, it will be put into the Condor submit file with:
+
+<pre class="file">
++AccountingGroup = "GroupName.<i>username</i>"
+</pre>
+%ENDSECTION{"extattr_table"}%
+
+#ConfigPBS
+---## PBS-specific notes
+
+Osg-configure 1.0.0 and later allow you to set most of the pbs specific gram options in your ini file so you will not need to make changes to the gram configuration files manually. *Please note that production sites should make changes to the =seg_enabled=, =log_directory=, and =pbs_server= settings in order to make sure your site will be able to handle reasonable job loads.* See the discussion on the SEG below for more details.
+
+If you are using a version of osg-configure prior to 1.0.0, you can configure GRAM's use of PBS by editing =/etc/globus/globus-pbs.conf=.
+
+%TWISTY{%TWISTY_OPTS_OUTPUT% showlink="Show an example globus-pbs.conf"}%
+<pre class="file">
+# The SEG will parse log messages from the PBS log files located in the
+# log_path directory
+log_path="/var/torque/server_logs"
+
+# Some sites run the PBS server on a different node than GRAM is running.
+# If so, they might need to set the pbs_default variable to the name of
+# the server so that GRAM will contact it
+pbs_default=""
+
+# For the mpi jobtype, the pbs LRM implementation supports both the
+# MPI 2-specified mpiexec command and the non-standard mpirun command common
+# in older mpi systems. If either of these is path to an executable, it will
+# be used to start the job processes (with mpiexec preferred over mpirun). Set
+# to "no" to not use mpiexec or mpirun
+mpiexec=no
+mpirun=no
+
+# The qsub command is used to submit jobs to the pbs server. It is required
+# for the PBS LRM to function
+qsub="/usr/bin/qsub-torque"
+# The qstat command is used to determine when PBS jobs complete. It is
+# required for the PBS LRM to function unless the SEG module is used.
+qstat="/usr/bin/qstat-torque"
+# The qdel command is used to cancel PBS jobs. It is required for the LRM
+# to function.
+qdel="/usr/bin/qdel-torque"
+
+# The PBS LRM supports using the PBS_NODEFILE environment variable to
+# point to a file containing a list of hosts on which to execcute the job.
+# If cluster is set to yes, then the LRM interface will submit a script
+# which attempts to use the remote_shell program to start the job on those
+# nodes. It will divide the job count by cpu_per_node to determine how many
+# processes to start on each node.
+cluster="1"
+remote_shell="no"
+cpu_per_node="1"
+
+# The GRAM pbs implementation supports softenv as a way to set up environment
+# variables for jobs via the softenv RSL attribute. For more information about
+# softenv, see
+#     http://www.mcs.anl.gov/hs/software/systems/softenv/softenv-intro.html
+softenv_dir=
+</pre>
+%ENDTWISTY%
+
+| *Option* | *Meaning* | *Purpose* |
+| =qsub= | The full pathname for the =qsub= binary. | Edit this if you installed PBS/Torque into a different location |
+| =qstat= | The full pathname for the =qstat= binary. | Edit this if you installed PBS/Torque into a different location |
+| =qdel= | The full pathname for the =qdel= binary. | Edit this if you installed PBS/Torque into a different location |
+| =logpath= | The full pathname for the PBS log files. | Edit this to point to your log files |
+
+Note, the default configuration for osg-configure is not to use the Globus SEG.  The SEG reads your pbs log files directly to monitor the status of jobs and significantly reduces the load on your CE avoiding the need to run qstat to monitor jobs. Without the SEG, GRAM will not be able to handle more than a few hundred jobs as multiple invocations of qstat per second will increase the load on the server to unmanageable levels as the number of jobs increase.  A production site should use the SEG, however this means that you might need to export your log files (via NFS or similar) to your CE and provide the location of these files using the =log_directory= option.  For more information on configuration of PBS, see [[Trash.ReleaseDocumentationPbsBatchSystemHints][PBS Batch System Hints]] and [[IniConfigurationOptions#PBS][ini options for the pbs jobmanager]].
+
+#ConfigGridengine
+---## !Gridengine-specific notes
+
+Osg-configure 1.0.0 and later allow you to set most of the Gridengine specific gram options in your ini file so you will not need to make changes to the gram configuration files manually.   *Please note that production sites should make changes to the =seg_enabled= and  =log_directory= settings in order to make sure your site will be able to handle reasonable job loads.* See the discussion on the SEG below for more details.
+
+If you are using a version of osg-configure prior to 1.0.0 or need to change a setting that isn't handled by osg-configure, you can configure GRAM's use of Gridengine by editing  =/etc/globus/globus-sge.conf=.
+
+%TWISTY{%TWISTY_OPTS_OUTPUT% showlink="Show an example globus-sge.conf"}%
+<pre class="file">
+# SGE_ROOT value which points to the local GridEngine installation. If this
+# is set to undefined, then it will be determined from the job manager's
+# environment, or if not there, from the contents of the SGE_CONFIG file
+# below
+sge_root=undefined
+
+# SGE_CELL value which points to the SGE Cell to interact with. If this
+# is set to undefined, then it will be determined from the job manager's
+# environment, or if not there, from the contents of the SGE_CONFIG file
+# below
+sge_cell=undefined
+
+# This points to a file which contains definitions of the SGE_CELL and SGE_ROOT
+# values for this machine. It may either be something like an EPEL
+# /etc/sysconfig/gridengine file or the settings.sh file in the SGE
+# installation directory
+sge_config="/etc/sysconfig/gridengine"
+
+# The Scheduler Event Generator module for SGE requires that the reporting
+# file be available for reading. This requires some configuration on the SGE
+# side to make it possible to use:
+# - SGE must be configured to write information to the reporting file
+# - SGE must not load that data inthe ARCo database
+# By default, if the Scheduler Event Generator is enabled, it will use
+# $SGE_ROOT/$SGE_CELL/common/reporting. To set a specific path, uncomment
+# the following line and set the log_path value to the path to the reporting
+# file
+# log_path="@SGE_REPORTING_FILE@"
+
+# Tools for managing GridEngine jobs:
+# - QSUB is used to submit jobs to the GridEngine LRM
+# - QSTAT is used to determine job status (unless the scheduler-event-generator
+#   interface is used)
+# - QDEL is used to cancel jobs
+qsub=/usr/bin/qsub
+qstat=/usr/bin/qstat
+qdel=/usr/bin/qdel
+qconf=/usr/bin/qconf
+
+# Programs to run MPI jobs. If SUN_MPRUN is set to anything besides "no", it
+# will be used to launch MPI jobs.  Failing that, if MPIRUN is set to
+# anything besides "no", it will be used to launch MPI jobs.
+sun_mprun=no
+mpirun=no
+
+# Parallel environment configuration.
+# GridEngine supports different environments to run parallel jobs. There are
+# three configuration items which may be used to control how and when these are
+# validated.
+# - default_pe=ENVIRONMENT
+#   If this is set, jobs with no parallel environment defined in the job
+#   request, will be submitted using the specified ENVIRONMENT. If this is not
+#   set, then parallel jobs will fail if an environment is not present in the
+#   RSL
+# - available_pes="PE1 PE2..."
+#   List of available parallel environments.  If
+#   this is not set, the set of parallel environments will be computed by
+#   the LRM adapter when it begins execution via the qconf command.
+#   If a parallel job is submitted and no parallel environment is
+#   specified (either explicitly in RSL or via the default_pe), then the
+#   error message will include this list of parallel environments.
+# - validate_pes=yes|no
+#   If this is set to yes, and the job RSL contains a parallel environment
+#   not in the available_pes list, then the LRM interface will reject the job
+#   with a message indicating the environment is not supported by GRAM.
+#
+# default_pe=""
+validate_pes=no
+# available_pes=""
+
+# Queue configuration
+#
+# GridEngine supports multiples queues for scheduling jobs. There are
+# three configuration items which may be used to control how and when these are
+# validated.
+# - default_queue=QUEUE
+#   If this is set, jobs with no queue defined in the job
+#   request will be submitted to the named QUEUE. If this is not
+#   set and there is no queue in the job RSL, then GRAM will not set one in
+#   the SGE submission script, which may use a site-specific default queue or
+#   fail.
+# - available_queues="QUEUE1 QUEUE2..."
+#   List of available queues. If this is not set, the GRAM SGE adaptor will
+#   generate a list of queues when it starts via qconf.
+# - validate_queues=yes|no
+#   If this is set to yes, then the LRM interface will reject jobs with an
+#   error message indicating that the queue is unknown, providing the
+#   available_queues values in the error.
+#
+# default_queue=""
+validate_queues=no
+# available_queues=""
+</pre>
+%ENDTWISTY%
+
+| *Option* | *Meaning* | *Purpose* |
+| =sge_config= | The full pathname for the !GridEngine configuration file. | Edit this if you installed !GridEngine into a different location |
+| =qsub= | The full pathname for the =qsub= binary. | Edit this if you installed !GridEngineinto a different location |
+| =qstat= | The full pathname for the =qstat= binary. | Edit this if you installed !GridEngine into a different location |
+| =qdel= | The full pathname for the =qdel= binary. | Edit this if you installed !GridEngine into a different location |
+| =qconf= | The full pathname for the =qconf= binary. | Edit this if you installed !GridEngine into a different location |
+| =logpath= | The full pathname for the !GridEngine log files. | Edit this to point to your log files |
+
+Note, the default configuration for osg-configure is not to use the Globus SEG.  The SEG reads your Gridengine log files directly to monitor the status of jobs and significantly reduces the load on your CE avoiding the need to run qstat to monitor jobs. Without the SEG, GRAM will not be able to handle more than a few hundred jobs as multiple invocations of qstat per second will increase the load on the server to unmanageable levels as the number of jobs increase.  A production site should use the SEG, however this means that you might need to export your log files (via NFS or similar) to your CE and provide the location of these files using the =log_directory= option.  For more information on configuration of Gridengine, see  [[IniConfigurationOptions#SGE][ini options for the Gridengine jobmanager]].
+
+Also, you'll need to insure that the following configuration options are set to the given values in your SGE configuration. Under =reporting_params= in the configuration, you must set =accounting= and =reporting= to =true= as well as setting =joblog= to =true= so that the job information is recorded in the logs so that the globus SEG can track job status.  In addition, you should set =flush_time= to =00:00:15= and =sharelog= to =00:00:00= to reduce the amount of memory the qmaster uses for buffering log entries.  Setting these values to lower time values also helps with log rotations.
+
+#ConfigSLURM
+---## !SLURM-specific notes
+Please note that in order to use SLURM with an OSG CE, the PBS emulation component of SLURM (the slurm-torque RPMs) will need to be used. Before starting, verify that the emulation works by running =qstat -Q=.  Next use =qsub= to submit a job through the PBS emulation and verify that it runs correctly.  Next install the =osg-configure-slurm= RPM, set =enabled= to =False= to =20-pbs.ini= and set the options in =20-slurm.ini= appropriately.
+
+Once this is done, run =osg-configure -c=  and test the gatekeeper functionality by submitting a job to the =gatekeeper.domain.name/jobmanager-pbs= .
+%NOTE% All jobs intended for the SLURM manager need to be submitted to the jobmanager-pbs.
+
+To configure the Gratia probe for the SLURM resource manager, make sure that the =gratia-probe-slurm= RPM is installed.  Then, set the options starting with =db_= and =slurm_cluster= in the =20-slurm.ini= file and run =osg-configure= as usual.
+
+#ConfigManagedFork
+---## !Trash.ReleaseDocumentationManagedFork-specific notes
+!Trash.ReleaseDocumentationManagedFork is configured using =osg-configure=, following [[IniConfigurationOptions#Managed_Fork][these instructions]].
+
+By default the !Trash.ReleaseDocumentationManagedFork job manager will behave just like the fork job manager. To adjust the behavior two steps are required:
+   1 Edit the Condor Configuration file (see [[InstallCondor#ImportantFiles][the Condor install document]] for the path). Here are two examples:
+      * _Allow only 20 local universe jobs to execute concurrently_:<pre class="file">
+   START_LOCAL_UNIVERSE = TotalLocalJobsRunning < 20</pre>
+      * _Set a hard limit on most jobs, but always let grid monitor jobs run ( *strongly recommended* )_:<pre class="file">
+   START_LOCAL_UNIVERSE = TotalLocalJobsRunning < 20 || GridMonitorJob =?= TRUE</pre>
+   1 Reconfigure Condor by using =condor_reconfig=:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% condor_reconfig</pre>
+
+#ConfigMultiHomed
+---## Configuring multi-homed CEs
+The Compute Element should work automatically but if you are having problems set the GLOBUS_HOSTNAME environment variable in the job manager environment to the hostname you'd like to use (FQDN).
+
+Hera a more detailed explanation and a workaround to run jobmanagers on different network interfaces. Two services run on the CE: gatekeeper and job manager.
+   * The gatekeeper is reached via TCP, but makes no outbound connections, and doesn't transmit any hostnames that it expects its client to connect to in its protocol. It binds to in6addr_any, so should be able to receive connections on any interface.
+   * The job manager also creates an ephemeral port and returns a contact string that points to it. It uses the value of the GLOBUS_HOSTNAME environment variable, falling back to invoking gethostname() followed by some reverse dns lookups if it looks like the host name is not qualified. So in order to choose a home address name you need to set the GLOBUS_HOSTNAME environment variable in the job manager environment, and it would be shared across all job managers. Using different interfaces for incoming connections is not supported. A workaround to have separate service names for internal and external job managers would consist in having some tricks in the jobmanager grid-services files which invoke /usr/bin/env and set GLOBUS_HOSTNAME to return separate service names.
+
+
+---# Authorization
+
+You have two options for configuring the set of users that can access your CE: GUMS or edg-mkgridmap.
+
+#GumsConfig
+---## Using GUMS for Authorization
+%STARTSECTION{"GumsAuth"}%
+GUMS is a separate service that knows the set of users that can access your site. It is convenient to use GUMS because when you have multiple services at a single site, each of them can use the same GUMS service. (This is particularly true if you use glexec on your worker nodes.)
+
+As of this writing (December, 2011), our only supported GUMS installation is provided with the old-style Pacman installation. [[InstallGums][Documentation on installing GUMS]].
+
+Historical note: The older Pacman-style VDT used the PRIMA software to communicate with GUMS. The RPM-based installation now uses lcmaps, which is the same software that supports glexec. This means that the way you do configuration has changed.
+
+%NOTE% The following steps are only needed if your are using a version of osg-configure prior to 1.0.0.  osg-configure 1.0.0 and later will automatically configure your =lcmaps.db=, =gums-client.properties= and your =gsi-authz.conf= files for you.
+
+To configure your CE to access gums, you need to make three changes:
+
+   * Edit =/etc/lcmaps.db= to modify the value passed to argument "--endpoint" to include the hostname of your GUMS server. For example:<pre class="file">
+gumsclient = "lcmaps_gums_client.mod"
+             "-resourcetype ce"
+             "-actiontype execute-now"
+             "-capath /etc/grid-security/certificates"
+             "-cert   /etc/grid-security/hostcert.pem"
+             "-key    /etc/grid-security/hostkey.pem"
+             "--cert-owner root"
+# Change this URL to your GUMS server
+             "--endpoint %RED%https://gums.example.com%ENDCOLOR%:8443/gums/services/GUMSXACMLAuthorizationServicePort"</pre>Please note that this is only a _portion_ of your =lcmaps.db= file. We did not include the whole file here for simplicity.
+   * Uncomment (remove the initial hash mark, #, in =/etc/grid-security/gsi-authz.conf= so that it looks like this:<pre class="file">
+globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout</pre>
+%ENDSECTION{"GumsAuth"}%
+   * Edit =/etc/gums/gums-client.properties= and change both gums.location and gums.authz entries to include the hostname your GUMS server. For example:<pre class="file">
+gums.location=https://%RED%gums.example.com%ENDCOLOR%:8443/gums/services/GUMSAdmin
+gums.authz=https://%RED%gums.example.com%ENDCOLOR%:8443/gums/services/GUMSXACMLAuthorizationServicePort</pre>
+
+
+Run =gums-host-cron= by hand once when you first do an installation:
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% gums-host-cron
+</pre>
+
+---### Tuning Syslog Daemon
+
+Give the amount of logging that can occur on the CE when it is logging all of the LCMAPS requests it might be helpful to set the syslog daemon to asynchronous IO instead of the default Synchronous IO.
+
+On RHEL and Centos this can be done by editing the /etc/syslog.conf and then reloading the syslog configuration file
+
+<pre class="file">
+*.info;mail.none;authpriv.none;cron.none                -/var/log/messages
+</pre>
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT%  service syslog reload
+</pre>
+
+#EdgMkgridmapConfig
+---## Using edg-mkgridmap for authorization
+%STARTSECTION{"GridmapAuth"}%
+=edg-mkgridmap= is a periodic process (run via =cron=) that contacts a list of VOMS servers that you specify. It assembles a ist of users from those servers and creates a _grid-mapfile_ on the CE. This grid-mapfile serves both as a list of authorized users and provides a mapping from user names to local user ids.
+
+To configure _edg-mkgridmap_, edit =/etc/edg-mkgridmap.conf=. We distribute a default version that lists all known OSG VOs and maps users to shared accounts. A portion of this configuration file looks like:
+
+<pre class="file">
+#### GROUP: group URI [lcluser]
+#
+#-------------------
+# USER-VO-MAP mis MIS -- 6 -- Rob Quick (rquick@iupui.edu)
+group vomss://voms.grid.iu.edu:8443/voms/mis mis
+#-------------------
+# USER-VO-MAP osgedu OSGEDU -- 24 -- Rob Quick (rquick@iupui.edu)
+group vomss://voms.grid.iu.edu:8443/voms/osgedu osgedu
+</pre>
+To disable access to a VO, simple add a hash mark (#) add the beginning of a line beginning with =group=. For instance, to disable the osgedu group, the final line in the above example would read:
+<pre class="file">
+%RED%#%ENDCOLOR%group vomss://voms.grid.iu.edu:8443/voms/osgedu osgedu
+</pre>
+
+To create an initial mapping you can invoke =edg-mkgridmap=. Then check the result in =/etc/grid-security/grid-mapfile=.
+
+For more information on edg-mkgridmap and the use of local accounts you can check the [[Edg-mkgridmap][local authentication page describing edg-mkgridmap]].
+%ENDSECTION{"GridmapAuth"}%
+
+---# Testing with RSV
+RSV is an useful testing tool to verify if your CE is running correctly. It is a software installed separately (it can be also on a different host), see InstallRSV.
+Anyway to test a CE it needs to be authorized via GUMS or edg-mkgridmap, depending on which one you use. MapServiceCertToRsvUser describes how to map the service or user certificate used for RSV to allow to run the tests.
+
+---# Information systems
+
+OSG sites report information about their site to OSG. This is particularly important for WLCG sites, which need to be present in the BDII information service so the WLCG can run jobs on these sites. However, this is important for all OSG sites because the information is used for site discovery.
+
+---## Generic Information Provider (GIP)
+
+The Generic Information Provider (GIP) is a program that discovers information about your site. It only discovers the information: other software propagates that software to OSG.
+
+Configuration of the GIP happens entirely via the =/etc/osg/config.d/*.ini= files. These are the same files that are used by =osg-configure=.
+
+[[Documentation.Release3.NavTechGIP][More information on configuring the GIP]].
+
+---## CEMon
+
+%NOTE% CEMon has been replaced by OSG Info Services in OSG 3.2.  Admins installing an OSG 3.2 CE should disregard this section.
+
+CEMon runs the GIP, then pushes its data to OSG. CEMon runs inside of =tomcat=, which runs as the =tomcat= user.
+
+For CEMon to run, you need to have a host or service certificate in =/etc/grid-security/http/httpcert.pem= and =/etc/grid-security/http/httpkey.pem=. These files need to be owned by the =tomcat= user. The simplest thing to do is to copy your host certificate.
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% mkdir /etc/grid-security/http
+%UCL_PROMPT_ROOT% cp /etc/grid-security/hostkey.pem /etc/grid-security/http/httpkey.pem
+%UCL_PROMPT_ROOT% cp /etc/grid-security/hostcert.pem /etc/grid-security/http/httpcert.pem
+%UCL_PROMPT_ROOT% chown -R tomcat /etc/grid-security/http
+%UCL_PROMPT_ROOT% chmod 0400 /etc/grid-security/http/httpkey.pem
+</pre>
+
+Note that you want to copy, not move, the hostcerts - Globus still expects them in the original location.
+Make sure =/etc/grid-security/grid-mapfile= exists, even if it is empty: <pre class="rootscreen">%UCL_PROMPT_ROOT% touch /etc/grid-security/grid-mapfile</pre>
+
+%WARNING% There is a minor problem in the GIP installation. For now, run the following commands to ensure the GIP will work properly:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% chown tomcat /var/log/gip
+%UCL_PROMPT_ROOT% chown tomcat /var/cache/gip
+</pre>
+
+---## OSG Info Services
+
+OSG Info Services is a drop-in replacement for !CEMon.
+It is replacing !CEMon in OSG Software 3.2.0.
+
+If you are upgrading an OSG Software 3.1.x install to a 3.2.x install, see the [[Documentation.Release3.OSGReleaseSeries#Migrating_from_CEMon_to_OSG_Info][instructions for migrating configuration]].
+
+Setup is similar to !CEMon: it runs as either the =tomcat= user or the user account specified by the =user= option in the =[GIP]= section of the osg-configure config files and so needs the =httpcert.pem= and =httpkey.pem= files set up to be owned by the specified user.
+
+In order to use the =osg-info-services= you'll need to setup the =[Info Services]= section in the configuration files and then you'll need to start the =osg-info-services= service.
+(If you are not using OSG Software 3.2.5 yet, the section is still called =[CEMon]=).
+
+You will need a =user-vo-map= file, which you can get from either GUMS or edg-mkgridmap.
+You can either start the gums-client-cron service, described below, run =gums-host-cron= (from the =gums-client= package) once, or run =edg-mkgridmap= once.
+
+You will need to have GIP configured to use =osg-info-services=.
+[[Documentation.Release3.NavTechGIP][More information on configuring the GIP]].
+
+To enable the service that runs osg-info-services periodically, run the following:
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% service osg-info-services start
+</pre>
+
+Finally, you'll need to enable the service on boot:
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% chkconfig osg-info-services on
+</pre>
+
+---# Services
+
+---## Starting and Enabling Services
+
+   1. %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlStart" TOC_SHIFT="+"}%
+   1. Start your batch system (choose the appropriate ones): <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service condor start
+%UCL_PROMPT_ROOT% /sbin/service pbs_server on
+%UCL_PROMPT_ROOT% /sbin/service gridengine on
+</pre>
+   1. If you have PBS or Gridengine and enabled SEG (see the [[#ConfigPBS][PBS]] and [[#ConfigGridengine][Gridengine]] configuration sections above), then you must start the Globus SEG (Scheduler Event Generator):<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service globus-scheduler-event-generator start
+</pre>
+   1. Depending on your authorization mechanism, choose one of these:
+      1. *GUMS:* If you use GUMS, you need to run a client that creates the =user-vo-map= file:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service gums-client-cron start
+</pre>
+      1. *edg-mkgridmap:* If you use edg-mkgridmap to make a grid-mapfile: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service edg-mkgridmap start
+</pre>
+   1. Start the Globus gatekeeper:  <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service globus-gatekeeper start
+</pre>
+   1. Start the Globus !GridFTP server:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service globus-gridftp-server start
+</pre>
+   1. Start Tomcat (if using !CEMon)<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service tomcat5 start %RED%# on EL5 only%ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/service tomcat6 start %RED%# on EL6 only%ENDCOLOR%
+</pre>
+   1. Start osg-info-services<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service osg-info-services start
+</pre>
+   1. Start the Gratia probes (for accounting)<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service gratia-probes-cron start
+</pre>
+   1. Start the [[InstallCleanupScripts][OSG cleanup scripts]]<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service osg-cleanup-cron start
+</pre>
+
+You should also enable the appropriate services so that they are automatically started when your system is powered on:<br/>
+%INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlEnable" TOC_SHIFT="+"}%
+<pre class="rootscreen">
+# Batch system:
+%UCL_PROMPT_ROOT% /sbin/chkconfig condor on
+%UCL_PROMPT_ROOT% /sbin/chkconfig pbs_server on
+%UCL_PROMPT_ROOT% /sbin/chkconfig gridengine on
+
+# Globus SEG:
+%UCL_PROMPT_ROOT% /sbin/chkconfig globus-scheduler-event-generator on
+
+# GUMS
+%UCL_PROMPT_ROOT% /sbin/chkconfig gums-client-cron on
+
+# edg-mkgridmap
+%UCL_PROMPT_ROOT% /sbin/chkconfig edg-mkgridmap on
+
+# Gatekeeper:
+%UCL_PROMPT_ROOT% /sbin/chkconfig globus-gatekeeper on
+
+# GridFTP server:
+%UCL_PROMPT_ROOT% /sbin/chkconfig globus-gridftp-server on
+
+# Tomcat:
+%UCL_PROMPT_ROOT% /sbin/chkconfig tomcat5 on
+
+# OSG-Info-Services:
+%UCL_PROMPT_ROOT% /sbin/chkconfig osg-info-services on
+
+# Gratia
+%UCL_PROMPT_ROOT% /sbin/chkconfig gratia-probes-cron on
+
+# OSG Cleanup
+%UCL_PROMPT_ROOT% /sbin/chkconfig osg-cleanup-cron on
+</pre>
+
+---## Stopping and Disabling Services
+
+Run following commands if you need to stop any services.
+
+   1. %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlStop" TOC_SHIFT="+"}%
+   1. Turn off the [[InstallCleanupScripts][OSG cleanup scripts]]<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service osg-cleanup-cron stop
+</pre>
+   1. Turn off the Gratia probes (for accounting)<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service gratia-probes-cron stop
+</pre>
+   1. Turn off the gatekeeper: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service globus-gatekeeper stop
+</pre>
+   1. Turn off the Globus !GridFTP Server:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service globus-gridftp-server stop
+</pre>
+   1. Turn off Tomcat: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service tomcat5 stop %RED%# on EL5 only%ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/service tomcat6 stop %RED%# on EL6 only%ENDCOLOR%
+</pre>
+   1. Turn off OSG-Info-Services: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service osg-info-services stop
+</pre>
+   1. Based on your authorization mechanism:
+      1. *GUMS*: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service gums-client-cron stop
+</pre>
+      1. *edg-mkgridmap*: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service edg-mkgridmap stop
+</pre>
+   1. If you have PBS or Gridengine and enabled SEG, then stop the Globus SEG:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service globus-scheduler-event-generator stop
+</pre>
+   1. Stop your batch system:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service condor stop
+%UCL_PROMPT_ROOT% /sbin/service torque-server stop
+%UCL_PROMPT_ROOT% /sbin/service gridengine stop
+</pre>
+
+In addition, you can disable services by running the following commands.  However, you don't need to do this normally.
+
+%INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlDisable"}%
+
+To disable the other services:
+
+<pre class="rootscreen">
+# OSG Cleanup
+%UCL_PROMPT_ROOT% /sbin/chkconfig osg-cleanup-cron off
+
+# Gratia
+%UCL_PROMPT_ROOT% /sbin/chkconfig gratia-probes-cron off
+
+# Gatekeeper:
+%UCL_PROMPT_ROOT% /sbin/chkconfig globus-gatekeeper off
+
+# GridFTP:
+%UCL_PROMPT_ROOT% /sbin/chkconfig globus-gridftp-server off
+
+# Tomcat:
+%UCL_PROMPT_ROOT% /sbin/chkconfig tomcat5 off
+
+# OSG-Info-Services
+%UCL_PROMPT_ROOT% /sbin/chkconfig osg-info-services off
+
+# GUMS
+%UCL_PROMPT_ROOT% /sbin/chkconfig gums-client-cron off
+
+# edg-mkgridmap
+%UCL_PROMPT_ROOT% /sbin/chkconfig edg-mkgridmap off
+
+# Globus SEG:
+%UCL_PROMPT_ROOT% /sbin/chkconfig globus-scheduler-event-generator off
+
+# Batch managers, choose one:
+%UCL_PROMPT_ROOT% /sbin/chkconfig condor off
+%UCL_PROMPT_ROOT% /sbin/chkconfig pbs_server off
+%UCL_PROMPT_ROOT% /sbin/chkconfig gridengine off
+</pre>
+
+---# Known problems
+---## Globus gatekeeper may fail to start with error - Address family not supported by protocol
+What to do if the Globus gatekeeper fails to start and in =/var/log/globus-gatekeeper.log= you see the error "Address family not supported by protocol".
+
+Globus 5.2.0 and 5.2.1 is not using !IPv6 but it is binding to an IPv6 address making IPv6 a requirement. This has been reported in  [[https://jira.opensciencegrid.org/browse/SOFTWARE-524][OSG BUG 524]] and [[http://jira.globus.org/browse/GRAM-309][Globus BUG 309]] and will be fixed.
+
+As a temporary workaround you must support IPv6. It is not important the configuration in =/etc/sysconfig/network= but the kernel module must be loaded (and as a consequence ipv6 enabled):
+   1. Check that the output of =/sbin/ifconfig | grep inet6= or =ip a| grep inet6=. !IPv6 is enabled if you get some output form the commands, e.g. <pre class="screen">
+         inet6 addr: fe80::221:9bff:fe89:6844/64 Scope:Link
+</pre>
+
+If there is no inet6 addr, then enable !IPv6:
+   1. Make sure that the module has been compiled in your kernel (recompile the kernel if it is not there): <pre class="rootscreen">
+%UCL_PROMPT_ROOT% modinfo ipv6
+filename:       /lib/modules/2.6.18-274.18.1.el5/kernel/net/ipv6/ipv6.ko
+alias:          net-pf-10
+license:        GPL
+description:    IPv6 protocol stack for Linux
+author:         Cast of dozens
+srcversion:     466D5C6385DA03483F12E68
+depends:        xfrm_nalgo
+vermagic:       2.6.18-274.18.1.el5 SMP mod_unload gcc-4.1
+parm:           disable:Disable IPv6 such that it is non-functional (int)
+module_sig:	883f3504f3458d6956577979a437cf112e5d909d1ad86b376a77549e7410db8273a64e142680f74409e3293080928a72c6ad3b5f6bd024a29822dfaa6b
+</pre>
+   1. Make sure that =/etc/modprobe.conf= and =/etc/modprobe.d/*= do not contain lines like the following (comment them if are there):<pre class="file">
+install ipv6 /bin/true
+options ipv6 disable=1
+</pre>
+   1. Check that the module is loaded:<pre class="rootscreen">%UCL_PROMPT_ROOT% lsmod |grep ipv6
+ipv6                  436449  0
+xfrm_nalgo             43333  1 ipv6
+</pre>
+   1. If it is not loaded try to load the module: <pre class="rootscreen">%UCL_PROMPT_ROOT% modprobe -v ipv6
+insmod /lib/modules/2.6.18-274.18.1.el5/kernel/net/ipv6/ipv6.ko
+</pre>
+
+Do not worry about the content of =/etc/sysconfig/network=. Also these lines that should disable !IPv6 will not cause problems (basic ipv6 functionality is not affected)<pre class="file">
+NETWORKING_IPV6=no
+IPV6INIT=no
+NOZEROCONF=yes
+</pre>
+Simply leave the file as it is.
+
+
+---# References
+Next steps:
+   * Trash.ReleaseDocumentationValidatingComputeElement contains few tests to validate your CE
+   * TestOSGClient has further commands that you can run against the CE
+   * The [[Trash.ReleaseDocumentationTroubleshootingComputeElement][Compute Element Troubleshooting Guide]] contains some suggestions to fix problems and a list of log files.
+   * Trash.Documentation_Release3TroubleshootingGuide (contains a list of Globus and HTCondor error codes)
+
+
+---# Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = AlainRoy
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = User
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MarcoMambelli
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = MarcoMambelli
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

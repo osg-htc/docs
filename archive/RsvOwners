@@ -1,0 +1,63 @@
+---++ !RSV Owners
+
+This page documents the list of !RSV metrics and who owns them. Last update: 26-Sep-2011.
+
+---+++ !RSV Core
+The infrastructure supporting the development and execution of probes is owned by the VDT Team. This includes Condor-Cron, the !RSV configuration scripts, rsv-control, and the like. 
+
+---+++ !RSV Consumers
+The scripts that publish !RSV results.
+
+| *Consumers* | *Owner* | *Notes* |
+| html-consumer | VDT | |
+| gratia-consumer | VDT | |
+| nagios-consumer | ? | Originally contributed by Sarah Williams? |
+
+---+++ !RSV Metrics
+
+Note: A metric is a single test performed by !RSV. A probe is a file that executes one or more metrics. In many cases there is one metric per probe, but not always. Historically, people have talked about "probes", but metrics are what users should be aware of, so please think and talk about metrics more than you think or talk about probes. :)
+
+| *Metric* | *Probe* | *Owner* | *Notes* |
+| N/A | !RSVMetric.pm | VDT Team | The common library used to support !RSV probes written in Perl. |
+| org.osg.batch.jobmanagers-available | jobmanagers-available-probe | GOC | |
+| org.osg.globus.gram-authentication | gram-authentication-probe | GOC | |
+| org.osg.general.osg-directories-CE-permissions | osg-directories-permissions-ce-probe | GOC | |
+| org.osg.general.osg-version | osg-version-probe | GOC | |
+| org.osg.general.ping-host | ping-host-probe | GOC | |
+| org.osg.general.vo-supported | vo-supported-probe | GOC | |
+| org.osg.local.hostcert-expiry | certificate-expiry-local-probe | GOC | |
+| org.osg.local.httpcert-expiry | certificate-expiry-local-probe | GOC | |
+| org.osg.certificates.cacert-expiry | cacert-verify-probe | Anand/Security Team | Developed by Marco Mambelli |
+| org.osg.certificates.crl-expiry | crl-freshness-probe | Anand/Security Team | Developed by Marco Mambelli |
+| org.osg.gratia.condor | gratia-config-probe | Chris Green/Gratia team | |
+| org.osg.gratia.gridftp-transfer | gratia-config-probe | Chris Green/Gratia team | |
+| org.osg.gratia.hadoop-transfer | gratia-config-probe | Chris Green/Gratia team | |
+| org.osg.gratia.lsf | gratia-config-probe | Chris Green/Gratia team | |
+| org.osg.gratia.metric | gratia-config-probe | Chris Green/Gratia team | |
+| org.osg.gratia.pbs | gratia-config-probe | Chris Green/Gratia team | |
+| org.osg.gratia.sge | gratia-config-probe | Chris Green/Gratia team | |
+| org.osg.srm.srmcp-readwrite | srmcp-srm-probe | Doug Strain/VDT Storage Team | |
+| org.osg.srm.srmping | srm-ping-probe | Doug Strain/VDT Storage team | | 
+| org.osg.globus.gridftp-simple | gridftp-simple-probe | Doug Strain/VDT Storage team | |
+| org.osg.xroot.ping | xroot-multi-probe | Marco Mambelli/OSG Software team | |
+| org.osg.xroot.grid-xrdcp-direct | xroot-multi-probe | Marco Mambelli/OSG Software team | |
+| org.osg.xroot.grid-xrdcp-fxr | xroot-multi-probe | Marco Mambelli/OSG Software team | |
+| org.osg.xroot.grid-xrdcp-compare | xroot-multi-probe | Marco Mambelli/OSG Software team | |
+
+The following probes have not yet been ported to work with OSG 3.
+
+| *Metric* | *Probe* | *Owner* | *Notes* |
+| org.osg.batch.jobmanager-default-status | jobmanagers-status-probe | GOC | |
+| org.osg.batch.jobmanager-fork-status | jobmanagers-status-probe | GOC | |
+| org.osg.batch.jobmanager-managedfork-status | jobmanagers-status-probe | GOC | |
+| org.osg.batch.jobmanager-condor-status | jobmanagers-status-probe | GOC | |
+| org.osg.batch.jobmanager-pbs-status | jobmanagers-status-probe | GOC | |
+| org.osg.batch.jobmanager-loadleveler-status | jobmanagers-status-probe | GOC | |
+| org.osg.batch.jobmanager-lsf-status | jobmanagers-status-probe | GOC | |
+| org.osg.ress.classad-valid | classad-valid-probe | Parag Mhashilkar/ReSS team | |
+| org.osg.ress.ress-classad-exists | ress-classad-exists-probe | Parag Mhashilkar/ReSS team | |
+| org.osg.ress.cemon-containerkeyfile-CE-permissions | cemon-containerkeyfile-ce-permissions-probe | Parag Mhashilkar/ReSS team | |
+| org.osg.gums.authorization-status | gums-authorization-validator-probe | Xin Zhao/GUMS team | |
+| org.osg.gip.consistency | info-services-probe | Brian Bockelman/GIP team | |
+| org.osg.gip.lastrun | info-services-probe | Brian Bockelman/GIP team | |
+| org.osg.gip.freshness | info-services-probe | Brian Bockelman/GIP team | |

@@ -1,0 +1,185 @@
+<pre class="rootscreen">
+<p style="font-size:20px">
+***This document is a rough draft and probably has
+missing or incorrect information.***
+</p>
+</pre>
+
+
+---+Setting Up an OSG Site
+
+An OSG [[Documentation.GlossaryOfTerms#DefsSite][site]] is usually a
+cluster of computers configured to accept OSG jobs. This document
+presents the information necessary to set up a site. There is an
+administrative part to this and a technical part. The steps are as
+follows.
+
+---++ Do Background Reading
+
+Please start with the links on the
+[[http://www.opensciencegrid.org/about][OSG About page]]. 
+
+The [[Documentation.UsingTheGrid][Using The Grid]] page has more details, mostly from the user's
+point of view, and is at least worth skimming now.
+
+---++ Identify VO(s) That Will Own the Site
+
+There may already be one that would own the site (you
+would most likely already know this), or it may be
+necessary to create a new VO. There is some
+documentation on the page about
+[[Documentation.Release3.NavOsgVO][virtual organizations]].
+
+---++ Get certificates
+
+X509 certificates are the main way to authenticate on
+the Open Science Grid, although the OSG is trying ways
+for grid users to run jobs without personal
+certificates.
+
+Obtaining certificates to identify yourself and your
+servers may take a few days.
+
+---+++ Get an X509 Personal Certificate
+
+A personal certificate is necessary to run jobs for
+testing, to access storage, and to authenticate with
+the OSG web sites. Please follow the
+[[Documentation.CertificateGetWeb][OSG instructions]]
+to obtain one.
+
+If you already have an X509 certificate for some other
+purpose then it may also be recognized on OSG. {The
+supported CAs are in the osg-ca-certs rpm. Is there a
+URL for this?} Some schools and labs also issue their
+own certificates.
+
+
+---+++ Become a Gridadmin
+
+Host and service certificates are required to set up
+the site. A gridadmin is a person designated by a site
+who can approve or deny OSG host and service
+certificate requests for your site. Basically this
+means verifying that each certificate request is
+allowed.  The gridadmin does not have to be the same
+person who acts as a sysadmin for the site.
+
+The gridadmin should
+[[Operations/OIMRegistrationInstructions#Registering_Yourself][register their personal certificate in OIM]].  Then they should
+click on the "Request for Griddmin Enrollment" button
+on the top left corner of and
+[[https://oim.grid.iu.edu/oim/gridadmin][fill out the form]].
+
+Once you are set up as a gridamin, you can approve host
+certificates that had been
+[[Documentation.Release3.GetHostServiceCertificates#Request_a_Host_Certificate][requested]]  (by anyone) 
+with a command like this
+
+<pre class="rootscreen">
+   $ osg-gridadmin-cert-request --hostname=gandalf.yoursite.edu
+</pre>
+
+The gridadmin would go to "My Requests" under
+
+<blockquote>
+    https://oim.grid.iu.edu/oim/certificatehost
+</blockquote>
+
+to approve these. The certificate should be issued in a
+couple minutes with no further action.
+
+We also have some general documentation about
+[[Security/PKIDocumentationIndex][OSG security]].
+    
+
+---++ Decide on the Site Architecture
+
+We have a  document for [[Documentation.Release3/SitePlanning][site planning]] 
+in general, and one for  [[Documentation.Release3/NavAdminSmallSites][small sites]]
+that describe the different components of a site.
+
+ 
+There are two steps which are mostly independent:
+getting the site to accept jobs from OSG users, and
+being able to submit jobs to OSG.
+
+---+++ Arranging for the Site to Accept Jobs
+
+All sites must have what is called a 'compute element'
+or CE, which coordinates the work on the site, so we
+suggest starting by
+[[Documentation.Release3/InstallComputeElement][installing, registering, and testing one]].
+   
+Likely you should also
+[[Documentation.Release3/InstallOSGClient][install an OSG-recommended set of software]] on each worker
+node.
+
+
+---+++ How Users May Submit Jobs to the Open Science Grid
+
+The easiest way for users to submit jobs to other OSG
+sites is by using resources maintained by OSG Staff:
+
+   * If there are just a few users, then OSG may be able
+     to make them accounts on some OSG-owned interactive
+     login machines. We typically direct individual users to [[http://osgconnect.net/][OSG Connect]]
+     and groups of users to a machine called xd-login.opensciencegrid.org.
+     
+   * If more usage is expected, then users may be able to
+     use [[http://bosco.opensciencegrid.org/][BOSCO]] or
+     [[Trash/Trash/Trash/Trash/CampusGrids/InstallCondorFlockSubmit][flocking]] to
+     submit jobs to OSG from your own site's [[Documentation/Release3/InstallOSGClient][submit host]],
+     which you'd have to install.
+     
+   * If lots of usage is expected, then installing a
+     [[Documentation.Release3.InstallGlideinWMSFrontend][glideinWMS front end]]
+     may be worthwhile.
+
+A site may also submit jobs entirely using its own
+resources, usually either through
+[[Documentation.Release3.InstallOSGClient][Condor-G]]
+or by installing a
+[[Documentation.Release3.InstallGlideinWMSFactory][glideinWMS factory]]. Running on multiple sites with Condor-G is
+awkward. !GlideinWMS works well for this but can be
+time-consuming to install and maintain.
+
+---++ Supporting Globally-Accessible Storage at a Site
+
+Many sites have [[Storage.WebHome][storage]] that is
+accessible from all of the worker nodes.
+
+One part of storage that has become important is a
+shared, read-only file system called
+[[Documentation.Release3/InstallCvmfs][CVMFS]]
+for distributing software.
+
+---++ Contact Information
+
+   * Please contact the user support team for help
+        at user-support@opensciencegrid.org .
+      Job submission and storage are especially evolving
+      and complicated topics on the OSG. We suggest
+      discussing them with Open Science Grid user support
+      team.
+
+   * Please subscribe to the
+     [[Documentation.Release3.ContactsMailingLists][OSG-General and OSG-Sites email lists]].
+     
+   * After the basic functionality of the site is working,
+     you should also attend [[Operations/WebHome][a meeting of the OSG-Operations team]] one Monday to introduce your site.
+
+---++ General References
+ 
+There is a list of
+[[Documentation.Release3][all the different documentation available]], most of it potentially
+useful to site administrators.  We recommend at least reading
+over the list of topics to start with.
+ 
+There is also a
+[[Documentation.GlossaryOfTerms][glossary of terms used in OSG]].
+
+
+
+
+

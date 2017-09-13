@@ -1,0 +1,47 @@
+---+ !!Grid Technology Documentation
+%DOC_STATUS_TABLE%
+%GRAY%
+This document should serve following purposes:
+   * list all technologies relevant to OSG
+   * list technologies developed by the OSG community
+   * briefly explain key technologies
+   * provide contact information for users/administrators to ask technology questions
+%ENDCOLOR%
+%TOC%
+
+---+ About this Document
+
+---+ Technologies
+
+---++ Condor
+   * ReleaseDocumentation.CondorBatchSystemHints
+
+---++ RSV
+   * [[ReleaseDocumentation/ValidateRSV-Probes][ReleaseDocumentation.ValidateRSVProbes]]
+
+
+---++ Glexec
+   * ReleaseDocumentation.ValidateGlexecAtSite
+
+---++ WLCG
+   * ReleaseDocumentation.ValidateWlcgInteroperability
+
+---++ !BeStMan
+   * Storage.BestmanAdler32Checksum
+   * Storage.BestmanGatewayXrootdUseCases
+   * Documentation.BestmanStorageElement
+
+---++ Hadoop
+   * [[ReleaseDocumentation/Hadoop][ReleaseDocumentation.HadoopInstall]]
+
+---++ Gratia
+   * ReleaseDocumentation.GratiaTransferProbe
+   * ReleaseDocumentation.ValidateGratia
+
+---++ GUMS
+   * Documentation.GumsConfiguration
+   * Documentation.AboutGums
+
+---++ OASIS
+   * ReleaseDocumentation.GsisshOasisRequirements
+   * ReleaseDocumentation.OasisUpdateMethod

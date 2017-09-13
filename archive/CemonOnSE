@@ -1,0 +1,442 @@
+---+!! *<nop>%SPACEOUT{%TOPIC%}%*
+%DOC_STATUS_TABLE%
+%TOC{depth="2"}%
+
+---+ 1.0 About this Document
+
+---+ 2.0 Conventions Used in this Document
+%INCLUDE{"Trash/DocumentationTeam/DocConventions" section="Header"}%
+%INCLUDE{"Trash/DocumentationTeam/DocConventions" section="CommandLine"}%
+
+---+ 3.0 Introduction
+
+This page describes the installation of the Open Science Grid (OSG) information provider system on a Storage Element only configuration.
+This will allow your storage element to report to BDII (and possibly !ReSS) to accurately portray itself as a grid resource to FTS and other 
+grid services that depend on BDII as an information provider.  This installation procedure is specifically guided towards an installation 
+separate from computing resources.  If you have a computing cluster, you should consider following the 
+[[Documentation/Release3/InstallComputeElement][Compute Element Installation]] instructions, which include a CEMon installation.
+
+---+ 4.0 Requirements
+
+---++ 4.1 Host and OS
+
+   * OS must be %SUPPORTED_OS%. 
+
+---++ 4.2 Users
+The installation will create following users unless they are already created
+| *User* | *Comment* |
+| =tomcat= | Runs the tomcat web application server where CEMon runs.|
+
+---++ 4.3 Certificates
+
+For CEMon to run, you need to have a host or service certificate in =/etc/grid-security/http/httpcert.pem= and =/etc/grid-security/http/httpkey.pem=. These files need to be owned by the =tomcat= user. The simplest thing to do is to copy your host certificate.
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% mkdir /etc/grid-security/http
+%UCL_PROMPT_ROOT% cp /etc/grid-security/hostkey.pem /etc/grid-security/http/httpkey.pem
+%UCL_PROMPT_ROOT% cp /etc/grid-security/hostcert.pem /etc/grid-security/http/httpcert.pem
+%UCL_PROMPT_ROOT% chown -R tomcat /etc/grid-security/http
+%UCL_PROMPT_ROOT% chmod 0400 /etc/grid-security/http/httpkey.pem
+</pre>
+
+Note that you want to copy, not move, the hostcerts - Globus still expects them in the original location.  
+
+---++ 4.4 Networking
+
+Tomcat will run on port 8080 by default.  However, it is common to also change this to a secure port 8443.
+
+---+ 5.0 Installation Procedure
+
+%INCLUDE{"YumRepositories" section="OSGRepoBrief" headingoffset="2"}%
+%INCLUDE{"InstallCertAuth" section="OSGBriefCaCerts" TOC_SHIFT="+"}%
+
+<!--
+
+!CEMon uses tomcat to run.  This is usually provided by your OS.  
+Depending on your operating system, you may run into java compatibility problems.
+In the Fermi distribution of Scientific Linux, java 1.6 is incompatible with tomcat5
+and gives InvalidJarIndexException due to java jar re-packaging problems.
+To get around this, install gcj-compat first:
+
+*Note: Actually, I am not sure this is correct.*
+<pre class="rootscreen">
+yum install java-1.4.2-gcj-compat-devel
+yum install xml-commons-apis
+</pre>
+
+Note: if you already have a newer java jdk, you may need to remove it first.  
+This part of the installation is very OS dependent, so your mileage may vary.
+
+*Note:* Help us expand this section for other OS by trying this procedure on other systems.
+-->
+
+---+ 5.1 Installing Storage Element
+
+If storage element is not installed already, at this point, you should install your storage element, by following one of the instructions
+on the [[Documentation/Release3.NavAdminStorage][Storage Overview]] page, such as
+a standalone [[Documentation/Release3.InstallOSGBestmanSE][BeStMan server]].
+
+---++ 5.2 Installing Information Providers
+
+To install the information service provider and CEMon, perform the following command.
+<pre class="rootscreen">
+yum install osg-se-cemon
+</pre>
+
+
+---+ 6.0 Information systems 
+
+OSG sites report information about their site to OSG. This is particularly important for WLCG sites, which need to be present in the BDII information service so the WLCG can run jobs on these sites. However, this is important for all OSG sites because the information is used for site discovery.
+
+---++ 6.1 Generic Information Provider (GIP)
+
+The Generic Information Provider (GIP) is a program that discovers information about your site. It only discovers the information: other software propagates that software to OSG.
+
+Configuration of the GIP happens entirely via the =/etc/osg/config.d/*.ini= files. These are the same files that are used by =osg-configure=.   
+Some information on each configuration file is listed below, but for more information, refer to the comments in each file or [[Documentation.Release3.NavTechGIP][More information on configuring the GIP]].  
+
+---+++ 30-gip.ini
+
+You will need to modify =/etc/osg/config.d/30-gip.ini=.  Enter appropriate information for SE entries and make sure there are no compute element and subcluster entries (subcluster is CE component, so, in case of an SE there is no subcluster).  
+
+Note that, in an SE-only install, the following are ignored:
+<pre class="file">
+batch = DEFAULT
+advertise_gums = FALSE
+</pre>
+
+Note that if you specify =advertise_gsiftp= as true, then you will need to specify =gsiftp_host=
+<pre class="file">
+advertise_gsiftp = TRUE
+gsiftp_host = gridftphost.domain.tld
+</pre>
+
+If "Subcluster" section exists, comment all such entries (ie. ";[Subcluster CHANGEME]").
+
+You will need to specify the SE options.  Two options follow for dCache or 
+!BeStMan (e.g. !BeStMan-Gateway on Hadoop).
+<pre class="file">
+; Here are working configs for BestMan and dCache
+; [SE dCache]
+; name = T2_Nebraska_Storage
+; srm_endpoint = srm://srm.unl.edu:8443/srm/managerv2
+; provider_implementation = static
+; implementation = dcache
+; version = 1.8.0-15p6
+; default_path = /pnfs/unl.edu/data4/VONAME
+
+; [SE Hadoop]
+; name = T2_Nebraska_Hadoop
+; srm_endpoint = srm://dcache07.unl.edu:8443/srm/v2/server
+; provider_implementation = bestman
+; implementation = bestman
+; version = 2.2.1.2.e1
+; default_path = /user/VONAME
+</pre>
+
+<!-- 
+
+This file is no longer necessary and is only provided in the comments for backwards compatibility.
+
+Lastly, you will need to add information to =/etc/gip/gip.conf=.  By default, this is an empty file for expert-only options.  You will need to add the following to configure a SE-only mode:
+
+<pre class="file">
+[gip]
+override = False
+check_osg = False
+osg_config = /etc/gip/config.ini
+
+[vo]
+user_vo_map = /var/lib/osg/user-vo-map
+</pre>
+For convenience, this is provided for you in =/etc/gip/gip.se_only.conf=, so you can copy that file into gip.conf if desired.
+
+-->
+
+---+++ 40-siteinfo.ini
+
+You will need to modify =/etc/osg/config.d/40-siteinfo.ini=.  The following highlights the changes needed.
+
+You will need to set "OSG" or "OSG-ITB" in the group to determine gip reporting.
+<pre class="file">
+group = OSG
+</pre>
+
+You will need to add the host name and the resource name and group
+(this should match the name given at OIM registration).
+Also, list your organization sponsor.  The sponsor should be a valid VO (virtual organization).
+<pre class="file">
+host_name = fermicloud019.fnal.gov
+resource = Fermicloud_ITB
+resource_group = Fermicloud
+sponsor = engage
+</pre>
+
+You will need to give a url as well as several contacts for the site:
+(admin and technical contacts).
+<pre class="file">
+site_policy = http://gw014k0.fnal.gov/
+contact = someone@fnal.gov
+email = dstrain@FNAL.GOV
+</pre>
+
+Lastly, you will need to add location details:
+<pre class="file">
+city = Batavia
+country = USA
+longitude = -88
+latitude = 41
+</pre>
+
+---+++ 10-storage.ini
+
+In the file =/etc/osg/config.d/10-storage.ini=, you will specify the
+configuration of your storage element to report to BDII.
+
+You will need to enable an SE and put the default SE node
+<pre class="file">
+se_available = TRUE
+default_se = fermicloud019.fnal.gov
+</pre>
+If you are also running a CE, you will need to specify the directories 
+for the various functions on a worker node.  Since this is a stand-alone SE,
+these can be set to "UNAVAILABLE".
+
+---++ 6.2 CEMon
+
+CEMon runs the GIP, then pushes its data to OSG. CEMon runs inside of =tomcat=, which runs as the =tomcat= user.
+
+For CEMon to run, you need to have a host or service certificate in =/etc/grid-security/http/httpcert.pem= and =/etc/grid-security/http/httpkey.pem=. These files need to be owned by the =tomcat= user. The simplest thing to do is to copy your host certificate (see requirements above).
+
+Make sure =/etc/grid-security/grid-mapfile= exists, even if it is empty: <pre class="rootscreen">%UCL_PROMPT_ROOT% touch /etc/grid-security/grid-mapfile</pre>
+
+You will need to modify =/etc/osg/config.d/30-cemon.ini= to configure cemon.  In particular, you will need to choose whether to use production or ITB servers for reporting, as shown below for the OSG production servers:
+<pre class="file">
+ress_servers = %(osg-ress-servers)s
+bdii_servers = %(osg-bdii-servers)s
+</pre>
+Note that the production and ITB BDII servers are the same as all resources should report to the same BDII.
+
+%WARNING% There is a minor problem in the GIP installation. For now, run the following commands to ensure the GIP will work properly:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% chown -R tomcat /var/log/gip
+%UCL_PROMPT_ROOT% chown -R tomcat /var/cache/gip
+</pre>
+
+---++ 6.3 Configure OSG
+
+Once you have finished editting the files, you will need to run osg-configure:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% osg-configure -v -d
+%UCL_PROMPT_ROOT% osg-configure -c
+</pre>
+
+---++ 6.4 User VO File
+
+The =gip= program needs VO information in order to report ACL information per VO and to give rough estimates of allocation per VO.  For this reason, the user VO map file is needed.  The =user-vo-map= file is a simple, space-separated format that contains 2 columns; the first is a unix username and the second is the VO which that username corresponds to.  In order to create it you need to configure the gums client.
+
+The primary configuration file for the gums-client utilities is located in =/etc/gums/gums-client.properties=.  The two properties that you must change are:
+
+| Attribute | Needs Editing | Value |
+| gums.location | Yes | This should be set to the admin URL for your gums server, usually of the form gums.location=https://GUMS_HOSTNAME:8443/gums/services/GUMSAdmin |
+| gums.authz | Yes | This should be set to the authorization interface URL for your gums server, usually of the form gums.authz=https://GUMS_HOSTNAME:8443/gums/services/GUMSXACMLAuthorizationServicePort |
+
+After the gums client is configured, generate the file by running the following once by hand:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% gums-host-cron
+</pre>
+
+=user-vo-map= should be created in the following location:
+
+<verbatim>/var/lib/osg/user-vo-map</verbatim>
+
+To have cron regularly update this file start the following service:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% service gums-client-cron start
+</pre>
+
+---+++ User VO Map file (no gums)
+
+If you do not have a GUMS server, you will not be able to use the above procedure to create the =/var/lib/osg/user-vo-map= file.
+There is currently no mechanism to create this file automatically without a GUMS server, and you will have to modify it by hand.
+
+The file is made up of user/vo pairs.  You will need to add one line for each user.  It will have the user name (should be the same as the
+UNIX user), followed by a space delimiter, followed by the vo name.  Any lines beginning with "#" are ignored.  
+Several examples are listed below.
+<pre class="file">
+#username voname
+cdfdev cdf
+cmssoft uscms
+cmsprod uscms
+enucsd02 engage
+</pre>
+
+---+ 7.0 Services
+!CEMon runs under Tomcat. So you need to start/stop tomcat and the auxiliary services. There is no service named explicitly after !CEMon.
+
+---++ 7.1 Starting and Enabling Services
+
+   1. %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlStart" TOC_SHIFT="+"}%
+   1. Depending on your authorization mechanism, choose one of these:
+      1. *GUMS:* You need to run a client that creates the =user-vo-map= file:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service gums-client-cron start
+</pre>
+      1. *edg-mkgridmap:* If you use edg-mkgridmap to make a grid-mapfile: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service edg-mkgridmap start
+</pre>
+   1. Start Tomcat <pre class="rootscreen">
+%RED% # For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/service tomcat5 start
+%RED% # For RHEL 6, CentOS 6, and SL6  %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/service tomcat6 start
+</pre>
+
+You should also enable the appropriate services so that they are automatically started when your system is powered on:<br/>
+%INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlEnable" TOC_SHIFT="+"}%
+<pre class="rootscreen">
+# GUMS
+%UCL_PROMPT_ROOT% /sbin/chkconfig gums-client-cron on
+
+# edg-mkgridmap
+%UCL_PROMPT_ROOT% /sbin/chkconfig edg-mkgridmap on
+
+# Tomcat: 
+%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/chkconfig tomcat5 on
+%RED%# For RHEL 6, CentOS 6, and SL6 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/chkconfig tomcat6 on
+</pre>
+
+---++ 7.2 Stopping and Disabling Services
+
+Run following commands if you need to stop any services.
+
+   1. %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlStop" TOC_SHIFT="+"}%
+   1. Turn off Tomcat: <pre class="rootscreen">
+%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/service tomcat5 stop
+%RED%# For RHEL 6, CentOS 6, and SL6 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/service tomcat6 stop
+</pre>
+   1. Based on your authorization mechanism:
+      1. *GUMS*: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service gums-client-cron stop
+</pre>
+      1. *edg-mkgridmap*: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service edg-mkgridmap stop
+</pre>
+In addition, you can disable services by running the following commands.  However, you don't need to do this normally.
+
+%INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlDisable"}%
+
+To disable the other services:
+
+<pre class="rootscreen">
+# Tomcat:
+%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/chkconfig tomcat5 off
+%RED%# For RHEL 6, CentOS 6, and SL6 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/chkconfig tomcat6 off
+
+# GUMS
+%UCL_PROMPT_ROOT% /sbin/chkconfig gums-client-cron off
+# edg-mkgridmap
+%UCL_PROMPT_ROOT% /sbin/chkconfig edg-mkgridmap off
+</pre>
+
+---+ 8.0 Useful Configuration and Log Files
+
+| *Service/Process* | *Configuration File* | *Description* |
+| !CEMon on (EL5) | /etc/tomcat5/Catalina/localhost/ce-monitor.xml | Configuration information for this service |
+| !CEMon on (EL6) | /etc/tomcat6/Catalina/localhost/ce-monitor.xml | Configuration information for this service |
+||/etc/glite-ce-monitor/| Configuration files for !CEMon |
+| tomcat (EL5) | =/etc/tomcat5/= | Tomcat configuration files |
+| tomcat (EL6) | =/etc/tomcat6/= | Tomcat configuration files |
+
+| *Service/Process* | *Log File* | *Description* |
+| !CEMon | /var/log/glite-ce-monitor/glite-ce-monitor.log | !CEMon log files |
+| tomcat (EL5) | =/var/log/tomcat5/catalina.out= | This is the Tomcat log file. Problems (and a lot of noise) are reported here. |
+| tomcat (EL6) | =/var/log/tomcat6/catalina.out= | This is the Tomcat log file. Problems (and a lot of noise) are reported here. |
+
+---+ 9.0 Validation
+In order to validate your installation
+   * Check that you are able to see information from your SE become available in BDII about ten minutes after starting all services.
+      * Look in http://is.grid.iu.edu/data/cemon_raw_incoming/ to see if the data made it
+      * Your hostname should show up.  If not, !CEMon is not working correctly,
+      * If so, !CEMon works but BDII does not trust your site.  Make sure that your site is trusted by BDII and in OIM
+   * Also, in file =/var/log/glite-ce-monitor/glite-ce-monitor.log= look for messages like
+<pre class="file">
+19 Feb 2012 23:02:27,017 org.glite.ce.monitor.holder.NotificationHolder - [name=subscription-http___is1_grid_iu_edu_14001-OSG_CE-RAW] - sending notification (containing 1 events) to http://is1.grid.iu.edu:14001 ...
+19 Feb 2012 23:02:27,083 org.glite.ce.monitor.holder.NotificationHolder - [name=subscription-http___is1_grid_iu_edu_14001-OSG_CE-RAW] - [done]
+19 Feb 2012 23:02:29,444 org.glite.ce.monitor.holder.NotificationHolder - [name=subscription-http___is2_grid_iu_edu_14001-OSG_CE-RAW] - sending notification (containing 1 events) to http://is2.grid.iu.edu:14001 ...
+19 Feb 2012 23:02:29,523 org.glite.ce.monitor.holder.NotificationHolder - [name=subscription-http___is2_grid_iu_edu_14001-OSG_CE-RAW] - [done]
+</pre>
+---+ 10.0 Troubleshooting
+
+   * Check the output of tomcat5 in =/var/log/tomcat5/catalina.out= or tomcat6 in =/var/log/tomcat6/catalina.out= 
+      * Note that you may get errors of the following form:
+       =sun.misc.InvalidJarIndexException: Invalid index=
+      These are due to the java version and problems with jdk packaging in Redhat. In most cases, you can safely ignore these.
+   * Check the output of !CEMon in =/var/log/glite-ce-monitor/glite-ce-monitor.log= for any error messages.
+   * Try to run gip_info manually to see if it runs.  If not, gip is not working.
+   
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = DouglasStrain
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       =  NehaSharma
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         =   	 NehaSharma
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+-- Main.DouglasStrain - 07 Feb 2012

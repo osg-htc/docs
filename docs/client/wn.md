@@ -10,7 +10,7 @@ It is possible to install the Worker Node Client software in a variety of ways, 
 
 -   Install using RPMs and Yum (this guide) - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs
 -   [Install using a tarball](wn-tarball.md) - useful when installing onto a shared filesystem for distribution to worker nodes
--   [Use from OASIS](wn-oasis.md) - useful when worker nodes already mount OASIS on your worker nodes
+-   [Use from OASIS](wn-oasis.md) - useful when worker nodes already mount [CVMFS](cvmfs)
 
 This document is intended to guide system administrators through the process of configuring a site to make the Worker Node Client software available from an RPM.
 

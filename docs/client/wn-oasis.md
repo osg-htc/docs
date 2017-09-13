@@ -9,7 +9,7 @@ The *OSG Worker Node Client* is a collection of software components that is expe
 
 It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:
 
--   Use the Worker Node Client software from OASIS (this guide) - useful when [OASIS](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCvmfs) is already mounted on your worker nodes
+-   Use the Worker Node Client software from OASIS (this guide) - useful when [CVMFS](cvmfs) is already mounted on your worker nodes
 -   [Install using RPMs and Yum](wn.md) - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs
 -   [Install using a tarball](wn-tarball.md) - useful when installing onto a shared filesystem for distribution to worker nodes
 
@@ -29,7 +29,7 @@ Configuring Your Site to Use the Worker Node Client From OASIS
 
 Below are the one-time steps that you must perform to configure your site to use the Worker Node Client software from OASIS.
 
-On every worker node, [install and configure OASIS](../client/cvmfs.md)
+On every worker node, [install and configure CVMFS](cvmfs.md)
 
 Determine the OASIS path to the Worker Node Client software for your worker nodes:
 
@@ -41,7 +41,7 @@ Determine the OASIS path to the Worker Node Client software for your worker node
 
 On the CE, in the `/etc/osg/config.d/10-storage.ini` file, set the `grid_dir` configuration setting to the path from the previous step.
 
-For more information, see the [OSG environment variables reference page](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/EnvironmentVariables) and the [CE configuration instructions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/IniConfigurationOptions#Storage).
+For more information, see the [OSG environment variables reference page](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/EnvironmentVariables) and the [CE configuration instructions](../other/configuration-with-osg-configure#storage).
 
 Once you finish making changes to configuration files on your CE, validate, fix, and apply the configuration:
 

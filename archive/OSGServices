@@ -1,0 +1,352 @@
+---+!! *%SPACEOUT{ "%TOPIC%" }%*
+%DOC_STATUS_TABLE%
+%TOC{depth="1"}%
+
+<!-- useful variable definions
+   * Local UCL_HOST = ce
+   * Local UCL_USER = root
+-->
+
+---+ About this Document
+
+%ICON{hand}% This document is for system administrators and users. It provides a list of the OSG services that the various OSG rpms provide and what services are installed on the various configurations.
+
+%NOTE% Instructions for installing a Compute Element can be found [[ReleaseDocumentation/ComputeElementInstall][here]].
+
+---+ Services
+
+The services installed by rpms by default place cron or startup scripts in the appropriate locations (e.g. =/etc/init.d=) but do not enable or start these services.  Admins can enable, start, and stop services using the =chkconfig= or =service= commands.  E.g. =chkconfig fetch-crl-cron on= or =service fetch-crl-cron start= or =service fetch-crl-cron stop= to enable, start, and stop the fetch-crl-cron service respectively.
+
+---+ Compute Element Services
+
+---++ Cron Services
+
+%STARTSECTION{"CECronServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+| | gums-client-cron | Created by the gums-client-cron init.d service |
+| gratia-probe-gridftp-transfer | gratia-probe-gridftp-transfer.cron | Transfers accounting information for gridftp transfers |
+| gratia-probe-pbs-lsf | gratia-probe-pbs-lsf.cron | Transfers accounting information from PBS or LSF job managers |
+| gratia-probe-condor | gratia-probe-condor.cron | Transfers accounting information from the condor job manager |
+| gratia-probe-sge | gratia-probe-sge.cron | Transfers accounting information from the SGE job manager |
+
+
+%ENDSECTION{"CECronServices"}%
+
+---++ Init Services
+
+%STARTSECTION{"CEInitServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+| condor | condor | |
+| condor-cron | condor-cron | |
+| edg-mkgridmap | edg-mkgridmap | Generates a gridmap file, only needed if resource is using gridmap files instead of GUMS |
+| osg-info-services | osg-info-services | Alternative to cemon. |
+| globus-gatekeeper | globus-gatekeeper | Provides the gatekeeper services for jobs |
+| globus-gatekeeper | globus-scheduler-event-generator | Only needed if the SEG is used (currently only the pbs and sge gatekeeper uses this) |
+| gsi-opensshd | gsisshd | Provides gsi sshd services |
+| gums-client | gums-client-cron | Generates the user-vo-map file, and needed if GUMS is being used |
+| tomcat5 | tomcat5 (2) | Hosts the cemon webapp and needed to report to the BDII |
+| globus-gridftp-server | globus-gridftp-server | Starts the gsiftp server |
+| fetch-crl | fetch-crl-cron (1) | Creates a cron job to keep the CRLs up to date |
+| fetch-crl | fetch-crl-boot (1) | Runs fetch-crl once to update the CRLs, intended to make sure CRLs are up to date when system is starting up |
+
+*Notes*
+   1. On OSG 3.1.15 and later on EL5 (Centos5 and SL5), =fetch-crl3= is installed instead of =fetch-crl= and the services are called =fetch-crl3-cron= and =fetch-crl3-boot=.
+   2. On EL6 systems =tomcat6= is used instead of =tomcat5=.
+
+%ENDSECTION{"CEInitServices"}%
+
+---++ Inetd and Xinetd Services
+
+%STARTSECTION{"CEInetdServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+| globus-gridftp-server | globus-gridftp-sshftp | |
+
+%ENDSECTION{"CEInetdServices"}%
+
+---+ Xrootd Services
+
+---++ Cron Services
+
+%STARTSECTION{"XrootdCronServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+
+%ENDSECTION{"XrootdCronServices"}%
+
+---++ Init Services
+
+%STARTSECTION{"XrootdInitServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+| bestman2 | bestman2 | Starts the bestman2 / srm services, needed to provide SRM gateways |
+| xrootd | xrootd | Starts the xrootd servces (including the CNS service), needed for all xrootd nodes |
+| xrootd | cmsd | Starts the cmsd daemon, needed for all xrootd nodes |
+| xrootd | frm_purged | Provides FRM services |
+| xrootd | frm_xfrd | Provides FRM services |
+| globus-gridftp-server | globus-gridftp-server | Starts the gsiftp server |
+| fetch-crl | fetch-crl-cron (1) | Creates a cron job to keep the CRLs up to date. |
+| fetch-crl | fetch-crl-boot (1) | Runs fetch-crl once to update the CRLs, intended to make sure CRLs are up to date when system is starting up |
+
+*Notes*
+   1. On OSG 3.1.15 and later on EL5 (Centos5 and SL5), =fetch-crl3= is installed instead of =fetch-crl= and the services are called =fetch-crl3-cron= and =fetch-crl3-boot=.
+
+%ENDSECTION{"XrootdInitServices"}%
+
+---++ Inetd and Xinetd Services
+
+%STARTSECTION{"XrootdInetdServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+
+%ENDSECTION{"XrootdInetdServices"}%
+
+---+ Hadoop Services
+
+---++ Cron Services
+
+%STARTSECTION{"HadoopCronServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+
+%ENDSECTION{"HadoopCronServices"}%
+
+---++ Init Services
+
+%STARTSECTION{"HadoopInitServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+| bestman2 | bestman2 | Starts the bestman2 / srm services, needed to provide SRM gateways |
+| hadoop-0.20-osg | hadoop | Starts the hadoop data or namenode services |
+| hadoop-0.20-osg | hadoop-firstboot | Configures hadoop services, needs to be run after any changes to the configuration files |
+| fetch-crl | fetch-crl-cron (1) | Creates a cron job to keep the CRLs up to date |
+| fetch-crl | fetch-crl-boot (1) | Runs fetch-crl once to update the CRLs, intended to make sure CRLs are up to date when system is starting up |
+| globus-gridftp-server | globus-gridftp-server | Starts the gsiftp server |
+
+*Notes*
+   1. On OSG 3.1.15 and later on EL5 (Centos5 and SL5), =fetch-crl3= is installed instead of =fetch-crl= and the services are called =fetch-crl3-cron= and =fetch-crl3-boot=.
+
+%ENDSECTION{"HadoopInitServices"}%
+
+---++ Inetd and Xinetd Services
+
+%STARTSECTION{"HadoopInetdServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+| gridftp-hdfs | gridftp-hdfs | |
+
+%ENDSECTION{"HadoopInetdServices"}%
+
+---+ OSG Client Services
+
+---++ Cron Services
+
+%STARTSECTION{"ClientCronServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+
+%ENDSECTION{"ClientCronServices"}%
+
+---++ Init Services
+
+%STARTSECTION{"ClientInitServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+| fetch-crl | fetch-crl-cron (1) | Creates a cron job to keep the CRLs up to date |
+| fetch-crl | fetch-crl-boot (1) | Runs fetch-crl once to update the CRLs, intended to make sure CRLs are up to date when system is starting up |
+
+*Notes*
+   1. On OSG 3.1.15 and later on EL5 (Centos5 and SL5), =fetch-crl3= is installed instead of =fetch-crl= and the services are called =fetch-crl3-cron= and =fetch-crl3-boot=.
+
+%ENDSECTION{"ClientInitServices"}%
+
+---++ Inetd and Xinetd Services
+
+%STARTSECTION{"ClientInetdServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+
+%ENDSECTION{"ClientInetdServices"}%
+
+---+ Worker Node Client Services
+
+---++ Cron Services
+
+%STARTSECTION{"WNClientCronServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+
+%ENDSECTION{"WNClientCronServices"}%
+
+---++ Init Services
+
+%STARTSECTION{"WNClientCronServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+| fetch-crl | fetch-crl-cron (1) | Creates a cron job to keep the CRLs up to date |
+| fetch-crl | fetch-crl-boot (1) | Runs fetch-crl once to update the CRLs, intended to make sure CRLs are up to date when system is starting up |
+
+*Notes*
+   1. On OSG 3.1.15 and later on EL5 (Centos5 and SL5), =fetch-crl3= is installed instead of =fetch-crl= and the services are called =fetch-crl3-cron= and =fetch-crl3-boot=.
+
+%STARTSECTION{"WNClientCronServices"}%
+
+
+---++ Inetd and Xinetd Services
+
+%STARTSECTION{"WNClientInetdServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+
+%ENDSECTION{"WNClientInetdServices"}%
+
+---+ Other Services
+
+---++ Cron Services
+
+%STARTSECTION{"OtherCronServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+
+%ENDSECTION{"OtherCronServices"}%
+
+---++ Init Services
+
+%STARTSECTION{"OtherInitServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+| lcgdm | lfc-mysql | |
+| lcgdm | lfc-dli | |
+| lcgdm | lfc-postgres | |
+| lcgdm | dpm-mysql | |
+| lcgdm | dpm-rfiod | |
+| lcgdm | dpm-postgres | |
+| lcgdm | dpm-mysql-nameserver | |
+| lcgdm | dpm-mysql-copyd | |
+| lcgdm | dpm-mysql-srmv1 | |
+| lcgdm | dpm-mysql-srmv2 | |
+| lcgdm | dpm-mysql-srmv22 | |
+| lcgdm | dpm-postgres-nameserver | |
+| lcgdm | dpm-postgres-copyd | |
+| lcgdm | dpm-postgres-srmv1 | |
+| lcgdm | dpm-postgres-srmv2 | |
+| lcgdm | dpm-postgres-srmv22 | |
+| myproxy | myproxy-server | |
+| rsv-core | rsv | Starts the rsv service |
+| voms | voms | Starts the VOMS service |
+| voms-admin-server | voms-admin | |
+| glideinwms-vofrontend | frontend_startup | |
+
+%ENDSECTION{"OtherInitServices"}%
+
+---++ Inetd and Xinetd Services
+
+%ENDSECTION{"OtherInetdServices"}%
+
+%TABLE{ sort="off" valign="top" }%
+%EDITTABLE{  header="| *Package* | *Service* | *Notes* |"  format="| text,15 | text,15 | textarea, 3x20" }%
+| *Package* | *Service* | *Notes* |
+
+%ENDSECTION{"OtherInetdServices"}%
+
+
+%BR%
+
+
+
+---+ Comments
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = SuchandraThapa
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MarcoMambelli
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = SuchandraThapa
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
