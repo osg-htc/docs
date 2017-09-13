@@ -1,15 +1,12 @@
 OSG Upcoming Software Repositories Installation Guide
 =====================================================
 
-About this Document
-===================
-
 Here we describe the OSG Upcoming Software Repositories, their purpose, and how to use them.
 
 This document is intended for site administrators.
 
 Overview and Purpose
-====================
+--------------------
 
 Certain sites have requested new versions of software that would be considered "disruptive" or "experimental" -- upgrading to them would likely require manual intervention before the site would come back up. We do not want sites to unwittingly upgrade to these versions. For the benefit of the sites that do want to upgrade, we want to provide the same assurance of quality and production-readiness that we provide to the software we currently ship now.
 
@@ -22,7 +19,7 @@ A full installation of our software stack is *not* be possible using only the `o
 Depending on test results from sites, some packages in `osg-upcoming` may eventually end up in the main `osg` branch. The rest of the packages will eventually form the nucleus of the next fork of the software stack (e.g. "OSG 3.5").
 
 Installation and Usage
-======================
+----------------------
 
 The following directions must be followed to install software from the Upcoming repositories.
 
