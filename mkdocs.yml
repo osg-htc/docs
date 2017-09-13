@@ -23,6 +23,10 @@ pages:
 - Install Guides - Data:
   - 'GridFTP Server': 'data/gridftp.md'
   - 'HTTP Cache': 'data/frontier-squid.md'
+- Install Guides - Other:
+  - 'GSI-enabled SSH': 'other/gsissh.md'
+  - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
+  - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
 - Install Guides - Monitoring:
   - 'RSV': 'monitoring/rsv.md'
   - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
