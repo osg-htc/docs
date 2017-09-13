@@ -72,7 +72,7 @@ Please answer following questions before you proceed with installation and confi
 
 Q. *What authorization mechanism should I use?*
 
-Decide between a [grid-mapfile](../security/edg-mkgridmap) or a [GUMS](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums) server for authorization.  Both mechanisms are deprecated with a planned removal by June 2018.  The replacement mechanism, however, does not work with `bestman2`.
+Decide between a [grid-mapfile](../security/edg-mkgridmap) or a [GUMS](../security/install-gums) server for authorization.  Both mechanisms are deprecated with a planned removal by June 2018.  The replacement mechanism, however, does not work with `bestman2`.
 
 Q. *How many GridFTP servers will I need?*
 

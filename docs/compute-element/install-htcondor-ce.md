@@ -128,7 +128,7 @@ blah_disable_limited_proxy=yes
 
 ### Configuring authentication
 
-In OSG 3.3, there are three methods to manage authentication for incoming jobs: the [LCMAPS VOMS plugin](../security/lcmaps-voms-authentication), [edg-mkgridmap](../security/edg-mkgridmap) and [GUMS](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums). edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support [pool accounts](https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html), GUMS is the only software with that capability.
+In OSG 3.3, there are three methods to manage authentication for incoming jobs: the [LCMAPS VOMS plugin](../security/lcmaps-voms-authentication), [edg-mkgridmap](../security/edg-mkgridmap) and [GUMS](../security/install-gums). edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support [pool accounts](https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html), GUMS is the only software with that capability.
 
 In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution.
 
@@ -162,7 +162,7 @@ To configure your CE to use edg-mkgridmap:
 !!! warning
     GUMS is unavailable in OSG 3.4
 
-1. Follow the instructions in [the GUMS installation and configuration document](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums) to prepare GUMS
+1. Follow the instructions in [the GUMS installation and configuration document](../security/install-gums) to prepare GUMS
 2. Set some critical GUMS attributes by editing the `/etc/osg/config.d/10-misc.ini` file on the HTCondor-CE host:
 
         authorization_method = xacml

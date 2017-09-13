@@ -52,6 +52,8 @@ pages:
   - 'BeStMan Overview': 'data/bestman-overview.md'
   - 'BeStMan Install': 'data/bestman-install.md'
   - 'EDG-Mkgridmap Install': 'security/edg-mkgridmap.md'
+  - 'GUMS': 'security/install-gums.md'
+  - 'GUMS Scalability Case Study': 'security/gums-scalability.md'
   - 'Worker node glexec Install': 'client/glexec.md'
 - 'Get Help': 'common/help.md'
 
