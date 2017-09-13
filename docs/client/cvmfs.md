@@ -26,7 +26,6 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Ensure the host has [a supported operating system](../release/supported_platforms)
 - Obtain root access to the host
 - Prepare the [required Yum repositories](../common/yum)
-- Install [CA certificates](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth)
 
 ## Installing CVMFS
 
@@ -60,7 +59,7 @@ FUSE and automount are required for CVMFS and the steps to configure them are di
 1. Create or edit `/etc/fuse.conf` so that it contains:
 
         user_allow_other
-    
+
 2. Create or edit `/etc/auto.master` to have the following contents to enable automounting:
 
         /cvmfs /etc/auto.cvmfs
@@ -69,7 +68,7 @@ FUSE and automount are required for CVMFS and the steps to configure them are di
 
         :::console
         [root@client ~] $ service autofs restart
-            
+
 ### For EL7 hosts
 
 1. Add the following to `/etc/auto.master.d/cvmfs.autofs`:
