@@ -10,7 +10,7 @@ GUMS Scalability
 About this Document
 ===================
 
-The purpose of this document is to put together various GUMS configuration and system level settings that may help optimize GUMS server performance. It assumes you are familiar with GUMS, its installation and configuration as covered in [the GUMS install documentation](../security/gums).
+The purpose of this document is to put together various GUMS configuration and system level settings that may help optimize GUMS server performance. It assumes you are familiar with GUMS, its installation and configuration as covered in [the GUMS install documentation](../security/install-gums).
 
 Background
 ==========
@@ -73,7 +73,7 @@ In file `/etc/sysctl.conf`, some settings may not present in the file and need t
 References
 ==========
 
--   [GUMS Installation guide](../security/gums)
+-   [GUMS Installation guide](../security/install-gums)
 -   [Official Tomcat 5 documentation](https://tomcat.apache.org/tomcat-5.5-doc)
 -   [Official Tomcat 6 documentation](https://tomcat.apache.org/tomcat-6.0-doc)
 -   <http://www.hibernate.org/docs> Official hibernate documentation
