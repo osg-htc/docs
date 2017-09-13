@@ -36,12 +36,6 @@
     
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/client/cvmfs/</loc>
-     <lastmod>2017-09-13</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
      <loc>https://opensciencegrid.github.io/docs/client/wn/</loc>
      <lastmod>2017-09-13</lastmod>
      <changefreq>daily</changefreq>
@@ -55,6 +49,12 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/client/wn-oasis/</loc>
+     <lastmod>2017-09-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/client/cvmfs/</loc>
      <lastmod>2017-09-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
