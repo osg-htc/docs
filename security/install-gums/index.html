@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>GUMS - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "GUMS";
+    var mkdocs_page_input_path = "security/install-gums.md";
+    var mkdocs_page_url = "/security/install-gums/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Common</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/yum/">Yum Repos</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Client</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../client/wn/">Worker Node (RPM install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn-tarball/">Worker Node (tarball install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn-oasis/">Worker Node (OASIS install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/singularity/">Singularity</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Compute</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/install-htcondor-ce/">HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/gridftp/">GridFTP Server</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/frontier-squid/">HTTP Cache</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Other</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/install-osg-upcoming-software/">OSG upcoming software</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Monitoring</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../monitoring/rsv/">RSV</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../monitoring/rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Other</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Overviews</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Usage Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/using-wn/">Worker Node Environment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">In-Progress Docs</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca_updater/">CA Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/cert_scripts/">Certificate Request Scripts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job_router/">Job Router Recipe</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deprecated Software</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../edg-mkgridmap/">EDG-Mkgridmap Install</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">GUMS</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#gums-install-guide">GUMS Install Guide</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#before-starting">Before Starting</a></li>
+        
+            <li><a class="toctree-l4" href="#installing-gums">Installing GUMS</a></li>
+        
+            <li><a class="toctree-l4" href="#configuring-gums">Configuring GUMS</a></li>
+        
+            <li><a class="toctree-l4" href="#services">Services</a></li>
+        
+            <li><a class="toctree-l4" href="#validating-gums">Validating GUMS</a></li>
+        
+            <li><a class="toctree-l4" href="#miscellaneous-procedures">Miscellaneous Procedures</a></li>
+        
+            <li><a class="toctree-l4" href="#troubleshooting">Troubleshooting</a></li>
+        
+            <li><a class="toctree-l4" href="#how-to-get-help">How to get Help?</a></li>
+        
+            <li><a class="toctree-l4" href="#references">References</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../gums-scalability/">GUMS Scalability Case Study</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/glexec/">Worker node glexec Install</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../common/help/">Get Help</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Deprecated Software &raquo;</li>
+        
+      
+    
+    <li>GUMS</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/security/install-gums.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>GUMS is no longer be supported in OSG 3.4. The <a href="../../security/lcmaps-voms-authentication">LCMAPS VOMS Plugin</a> is the preferred method for site authentication in the OSG and is available in both OSG 3.3 and OSG 3.4.</p>
+</div>
+<h1 id="gums-install-guide">GUMS Install Guide</h1>
+<p>This document is intended for site administrators who want to install and configure the GUMS service.</p>
+<p>GUMS is a service that authorizes and maps users from their global (X.509) identity to a local (Linux user) identity. It is not a required service (some sites use the simple <code>edg-mkgridmap</code> to construct a <code>grid-mapfile</code> instead), but it is commonly used. GUMS is useful when more than one resource (Compute Element, Storage Element, etc.) needs to authorize or map users, because it helps them share data. It is particularly helpful when using gLExec at a site, because gLExec runs on every worker node and needs authorization and mapping information. GUMS is a web application that runs in Tomcat.</p>
+<h2 id="before-starting">Before Starting</h2>
+<p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
+<ul>
+<li><strong>User IDs:</strong> If they do not exist already, the installation will create the Linux users <code>mysql</code> (UID 27) and <code>tomcat</code> (UID 91)</li>
+<li><strong>Service certificate:</strong> The GUMS service uses a host certificate at <code>/etc/grid-security/http/httpcert.pem</code> and an accompanying key at <code>/etc/grid-security/http/httpkey.pem</code></li>
+<li><strong>Network ports:</strong> Hosts using your GUMS server for authentication (e.g., HTCondor-CE, GridFTP) must be able to contact it on port 8443 (TCP)</li>
+</ul>
+<p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
+<ul>
+<li>Ensure the host has <a href="../../release/supported_platforms">a supported operating system</a></li>
+<li>Obtain root access to the host</li>
+<li>Prepare the <a href="../../common/yum">required Yum repositories</a></li>
+<li>Install <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth">CA certificates</a></li>
+</ul>
+<h2 id="installing-gums">Installing GUMS</h2>
+<ol>
+<li>Whether installing or upgrading GUMS, please make sure to follow <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7#InstallingJava">these instructions</a> for updating/installing Java to work correctly with GUMS</li>
+<li>If you have an existing GUMS installation on the same host, shut down Tomcat.
+    The service is named <code>tomcat6</code> on EL6 and <code>tomcat</code> on EL7</li>
+<li>
+<p>Install the GUMS Service:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> yum install osg-gums
+</pre></div>
+
+
+</li>
+<li>
+<p>Configure Tomcat to use GSI:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> /var/lib/trustmanager-tomcat/configure.sh
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This step will overwrite your <code>server.xml</code> file in your tomcat configuration directory (<code>/etc/tomcat6</code> on EL6, <code>/etc/tomcat</code> on EL7).
+If you are using Tomcat on this host for non-grid purposes, you may want to save the <code>server.xml</code> file first, run the script, then merge your own configuration back into the file</p>
+</div>
+</li>
+</ol>
+<h2 id="configuring-gums">Configuring GUMS</h2>
+<h3 id="configure-gums-database">Configure GUMS database</h3>
+<p>In this section, you will configure the GUMS MySQL database, either by creating a new database or by copying an existing GUMS database. Pick the appropriate subsection below for your environment.</p>
+<h4 id="new-installation">New Installation</h4>
+<ol>
+<li>
+<p>Start the database server</p>
+<ul>
+<li>
+<p>On EL6, this is MySQL:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> service mysqld start
+</pre></div>
+
+
+</li>
+<li>
+<p>On EL7, this is MariaDB:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> systemctl start mariadb
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+<li>
+<p>Create a new GUMS database:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> /usr/bin/gums-setup-mysql-database <span class="se">\</span>
+    --user gums --host localhost:3306 --password <span style="color:red">&lt;password&gt;</span> <span class="se">\</span>
+    --template /etc/gums/gums.config.template
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The password is saved in plaintext in the <code>/etc/gums/gums.config</code> file, so choose one that is not used elsewhere. The <code>gums.config</code> file should be readable only by the <code>tomcat</code> user, but this situation provides light security at best</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When specifying the database host with the <code>--host</code> option above, it is also possible to use <code>$HOSTNAME</code> instead of <code>localhost</code>, though <code>localhost</code> is recommended. This value corresponds to <code>@SERVER@</code> in a <code>gums.config.template</code> file, discussed below</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although it is possible to specify a different location for the <code>--template</code> or to omit the option and use the default GUMS template (at <code>/usr/lib/gums/config/gums.config.template</code>), neither option is typically useful for an OSG installation</p>
+</div>
+</li>
+<li>
+<p>Add yourself as a GUMS administrator:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> gums-add-mysql-admin <span class="s1">&#39;<span style="color:red">&lt;YOUR DN&gt;</span>&#39;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>[Optional but recommended:] Apply reasonable MySQL security settings:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> /usr/bin/mysql_secure_installation
+</pre></div>
+
+
+</li>
+</ol>
+<h4 id="upgrade-from-existing-gums-server-on-another-host">Upgrade from existing GUMS server on another host</h4>
+<p><strong>Note for GUMS 1.4+:</strong> Since the database schema has not changed between GUMS 1.3 and 1.4, the database name continues to be <code>GUMS_1_3</code>. <em>Do not</em> rename <code>GUMS_1_3</code> database references to <code>GUMS_1_4</code>. There was a schema change within the GUMS 1.4 series, but this happens automatically when GUMS is started - make sure the GUMS user has permission to perform schema changes. Nevertheless the database name remains <code>GUMS_1_3</code> in GUMS 1.4 and GUMS 1.5.</p>
+<ol>
+<li>
+<p>On the older host, dump the GUMS_1_3 database to a text file:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> mysqldump GUMS_1_3 &gt; gums_1_3.sql
+</pre></div>
+
+
+</li>
+<li>
+<p>Copy the <code>gums_1_3.sql</code> file from the old host to the new one</p>
+</li>
+<li>
+<p>Start MySQL:</p>
+<p>For EL 6:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> service mysqld start
+</pre></div>
+
+
+<p>For EL 7:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> systemctl start mariadb
+</pre></div>
+
+
+</li>
+<li>
+<p>Load the old GUMS data into the new MySQL database:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> <span class="nb">echo</span> <span class="s1">&#39;CREATE DATABASE IF NOT EXISTS GUMS_1_3;&#39;</span> <span class="p">|</span> mysql
+<span class="gp">[root@server]#</span> mysql GUMS_1_3 &lt; gums_1_3.sql
+</pre></div>
+
+
+</li>
+<li>
+<p>[Optional but recommended for new MySQL instances:] Apply reasonable MySQL security settings:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> /usr/bin/mysql_secure_installation
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="set-initial-gums-configuration">Set Initial GUMS Configuration</h3>
+<p>In this section, you will set up an initial GUMS configuration file, either by copying in an OSG template or by copying an existing configuration from an old installation. Pick the appropriate subsection below for your environment.</p>
+<h4 id="new-installation_1">New Installation</h4>
+<p>If you ran the <code>gums-setup-mysql-database</code> command above with the <code>--template</code> option, the OSG GUMS template will be used. This should have created a suitable <code>/etc/gums/gums.config</code> with the configuration values in this section already filled in. <em>In that case, you can skip this section.</em></p>
+<p>If you ran the <code>gums-setup-mysql-database</code> command above <em>without</em> a <code>--template</code> option, it created a default, pre-configured <code>/etc/gums/gums.config</code> file. It is almost certainly not what you want. Instead, it is recommended that you start with an OSG template for your configuration.</p>
+<ol>
+<li>
+<p>Copy the OSG template over the default configuration file:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> cp /etc/gums/gums.config.template /etc/gums/gums.config
+</pre></div>
+
+
+</li>
+<li>
+<p>Edit the new <code>/etc/gums/gums.config</code> file and change the following settings (note: each placeholder occurs exactly once in the file):</p>
+<table>
+<thead>
+<tr>
+<th>Search for</th>
+<th>Replace with</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@USER@</code></td>
+<td>The name of the MySQL GUMS user. If you followed the instructions above, this will be <code>gums</code></td>
+</tr>
+<tr>
+<td><code>@PASSWORD@</code></td>
+<td>The password for the MYSQL GUMS user (see above)</td>
+</tr>
+<tr>
+<td><code>@SERVER@</code></td>
+<td>The name of your computer and port (e.g. <code>localhost</code> or <code>my.computer:3306</code>). See note</td>
+</tr>
+<tr>
+<td><code>@DOMAINNAME@</code></td>
+<td>Your local domain (e.g. <code>wisc.edu</code>)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Normally MySQL is running on the same machine as GUMS (as in the instructions above).<br/>
+We <strong>highly recommend</strong> using <code>localhost</code> instead of the actual hostname; this will cause MySQL to use a local Unix socket instead of listening on the network, which is more secure.
+If you use <code>localhost</code>, there is no need to specify a port.
+In either case, the value for <code>@SERVER@</code> <em>must</em> match the value for <code>--host</code> used when setting up the GUMS database with the <code>gums-setup-mysql-database</code> command</p>
+</div>
+</li>
+</ol>
+<h3 id="configure-log-rotation">Configure Log Rotation</h3>
+<p>By default, certain output is written to files named <code>/var/log/tomcat*/catalina.YYYY-MM-DD.log</code> without automatic cleanup of old logs. To configure log rotation and cleanup of <code>catalina.log</code>, follow the steps below:</p>
+<ol>
+<li>
+<p>Choose the Tomcat directory name based on your operating system:</p>
+<table>
+<thead>
+<tr>
+<th align="left">If your operating system is...</th>
+<th align="left">Then your TOMCAT DIR NAME is...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">EL6</td>
+<td align="left"><code>tomcat6</code></td>
+</tr>
+<tr>
+<td align="left">EL7</td>
+<td align="left"><code>tomcat</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Edit <code>/etc/tomcat*/logging.properties</code> so that Tomcat only produces a single, undated log file:</p>
+<div class="codehilite"><pre><span></span><span class="gd">--- /etc/<span style="color:red">&lt;TOMCAT DIR NAME&gt;</span>/logging.properties.orig</span>
+<span class="gi">+++ /etc/<span style="color:red">&lt;TOMCAT DIR NAME&gt;</span>/logging.properties</span>
+<span class="gu">@@ -24,7 +24,8 @@</span>
+ catalina.org.apache.juli.FileHandler.level = FINE
+ catalina.org.apache.juli.FileHandler.directory = ${catalina.base}/logs
+<span class="gd">-catalina.org.apache.juli.FileHandler.prefix = catalina.</span>
+<span class="gi">+catalina.org.apache.juli.FileHandler.prefix = catalina</span>
+<span class="gi">+catalina.org.apache.juli.FileHandler.rotatable = false</span>
+
+ localhost.org.apache.juli.FileHandler.level = FINE
+ localhost.org.apache.juli.FileHandler.directory = ${catalina.base}/logs
+</pre></div>
+
+
+</li>
+<li>
+<p>Write <code>/etc/logrotate.d/tomcat_catalina_logs</code> to configure <code>logrotate</code>:</p>
+<div class="codehilite"><pre><span></span>/var/log/<span style="color:red">&lt;TOMCAT DIR NAME&gt;</span>/catalina.log
+{ copytruncate weekly rotate 52 compress missingok create 0644 tomcat tomcat }
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="services">Services</h2>
+<p>The GUMS service is actually a web application running within the Tomcat web application server. It also uses the MySQL database server for storage and the Fetch CRL service to maintain each CRL. Choose the list of services based on your host's operating system:</p>
+<ul>
+<li>
+<p>For EL6 hosts</p>
+<table>
+<thead>
+<tr>
+<th align="left">Software</th>
+<th align="left">Service name</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Fetch CRL</td>
+<td align="left"><code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
+<td align="left">See <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui">CA documentation</a> for more info</td>
+</tr>
+<tr>
+<td align="left">MySQL</td>
+<td align="left"><code>mysqld</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Tomcat</td>
+<td align="left"><code>tomcat6</code></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>For EL7 hosts</p>
+<table>
+<thead>
+<tr>
+<th align="left">Software</th>
+<th align="left">Service name</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Fetch CRL</td>
+<td align="left"><code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
+<td align="left">See <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui">CA documentation</a> for more info</td>
+</tr>
+<tr>
+<td align="left">MariaDB</td>
+<td align="left"><code>mariadb</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Tomcat</td>
+<td align="left"><code>tomcat</code></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p>Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as <code>root</code>):</p>
+<table>
+<thead>
+<tr>
+<th align="left">To...</th>
+<th align="left">On EL6, run the command...</th>
+<th align="left">On EL7, run the command...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Start a service</td>
+<td align="left"><code>service &lt;SERVICE-NAME&gt; start</code></td>
+<td align="left"><code>systemctl start &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Stop a  service</td>
+<td align="left"><code>service &lt;SERVICE-NAME&gt; stop</code></td>
+<td align="left"><code>systemctl stop &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Enable a service to start on boot</td>
+<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; on</code></td>
+<td align="left"><code>systemctl enable &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Disable a service from starting on boot</td>
+<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; off</code></td>
+<td align="left"><code>systemctl disable &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="validating-gums">Validating GUMS</h2>
+<p>This section is optional, but if you would like to verify that your GUMS installation and configuration are good, consider using some or all of the sections below.</p>
+<h3 id="connect-to-the-gums-web-page">Connect to the GUMS web page</h3>
+<p>Connect to <code>https://&lt;HOSTNAME&gt;:8443/gums/</code> to use your GUMS instance. You must have the certificate that you used for <code>gums-add-mysql-admin</code> above loaded in your browser. You should see the GUMS web page load.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Javascript must be enabled in order to make any configuration changes on the web interface.</p>
+</div>
+<p>If you do not see it load, check a few things:</p>
+<p>For EL 6:</p>
+<ul>
+<li>Look for errors in <code>/var/log/tomcat6/catalina.out</code> and <code>/var/log/tomcat6/catalina.err</code>.</li>
+<li>Look for errors in <code>/var/log/tomcat6/trustmanager.log</code>. There are likely to be CRL errors in this file, this can be ignored unless all your CA's get CRL errors in which case you should check to make sure that your CRL updates are running correctly.</li>
+</ul>
+<p>For EL 7:</p>
+<ul>
+<li>Look for errors in <code>/var/log/tomcat/catalina.*.log</code></li>
+<li>Look for errors in <code>/var/log/tomcat/trustmanager.log</code>. There are likely to be CRL errors in this file, this can be ignored unless all your CA's get CRL errors in which case you should check to make sure that your CRL updates are running correctly.</li>
+</ul>
+<p>For all systems:</p>
+<ul>
+<li>Ensure that you have an http certificate in <code>/etc/grid-security/http/httpcert.pem</code> and <code>/etc/grid-security/http/httpkey.pem</code>. Make sure it is readable by the <code>tomcat</code> user. Permissions should be as follows:</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> ls -l /etc/grid-security/http/
+<span class="go">total 8</span>
+<span class="go">-r--r--r-- 1 tomcat tomcat 1671 Jul 2 15:54 httpcert.pem</span>
+<span class="go">-r-------- 1 tomcat tomcat 1675 Jul 2 15:54 httpkey.pem</span>
+</pre></div>
+
+
+<p>If you change the permissions/ownership, make sure to restart tomcat so that your changes take effect.</p>
+<h3 id="check-accounts">Check accounts</h3>
+<p>After you connect to the GUMS web page, go to the Summary tab to check the configuration. You should see several dozen OSG VOs listed.</p>
+<p>In the Account column on the summary page, you will see the local Unix user accounts that these VO users will be mapped to. It is critical that these accounts exist on the gatekeeper and worker nodes at your site. If they do not, there will be errors when users attempt to access your site.</p>
+<h3 id="update-vo-members-list">Update VO members list</h3>
+<p>GUMS contacts each VOMS server to update its knowledge of VO membership every 6 hours. After installing or updating GUMS, you should trigger the update manually by going to the Update VO Members tab, and clicking update.</p>
+<p>You can track the progress of the update process by watching a log file.</p>
+<p>For EL 6:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> tail -f /var/log/tomcat6/gums-service-admin.log
+</pre></div>
+
+
+<p>For EL 7:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> tail -f /var/log/tomcat/gums-service-admin.log
+</pre></div>
+
+
+<p>With so many VOMS servers in the OSG config, several member updates may fail for various reasons (e.g., host down "connect timed out", bad or expired host certificates, etc.). Unfortunately, this situation is normal. Typically, you will see about 5 or 6 failed updates, with the rest succeeding. The update will take a while and then should display any errors that occurred during the updates. To get more details or track the update process in real time, look at <code>/var/log/gums-service-admin.log</code>.</p>
+<h3 id="map-a-known-good-user-dn">Map a known good user DN</h3>
+<ol>
+<li>Go to Map Grid Identity to Account tab: <code>https://&lt;HOSTNAME&gt;:8443/gums/map_grid_identity_form.jsp</code></li>
+<li>Fill in the required info. Service DN means the DN of the host certificate of your CE (see above). Use the DN of a user (probably yourself) who you know belongs to a particular VO. Fill in the VO name in the VOMS FQAN field.</li>
+<li>Click "map user". A failed mapping will display "null". A successful mapping will display a UNIX account name.</li>
+</ol>
+<h2 id="miscellaneous-procedures">Miscellaneous Procedures</h2>
+<h3 id="forcing-gums-to-update-the-set-of-users">Forcing GUMS to update the set of users</h3>
+<p>GUMS automatically contacts each VOMS server every 6 hours to update its knowledge of VO membership. To trigger a manual update:</p>
+<ol>
+<li>Access the “Update VO Members” tab</li>
+<li>Click "Update"</li>
+<li>
+<p>[Optional:] Monitor update progress via a log file:</p>
+<p>For EL 6:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> tail -f /var/log/tomcat6/gums-service-admin.log
+</pre></div>
+
+
+<p>For EL 7:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> tail -f /var/log/tomcat/gums-service-admin.log
+</pre></div>
+
+
+</li>
+</ol>
+<p>With so many VOMS servers in the OSG config, several member updates may fail for various reasons (e.g., host down "connect timed out", bad or expired host certificates, etc.). Unfortunately, this situation is normal.</p>
+<h3 id="updating-the-gums-configuration">Updating the GUMS configuration</h3>
+<p>Periodically, the OSG Grid Operations Center will release an updated template for the GUMS configuration that updates information about an existing VO or adds a new VO. You may get the update as part of a regular update process, or you can force an update by using yum:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> yum update osg-gums-config
+</pre></div>
+
+
+<p>This step does <strong>not</strong> update your GUMS configuration (<code>/etc/gums/gums.config</code>) but will update the template for your configuration (<code>/etc/gums/gums.config.template</code>), because RPM cannot merge configuration changes. Instead, use GUMS to merge in the new VO configuration information:</p>
+<ol>
+<li>Go to the Merge Configuration tab: <code>https://&lt;HOSTNAME&gt;:8443/gums/mergeConfiguration.jsp</code></li>
+<li>
+<p>Cut and paste the URL of the OSG template into the Configuration URI field</p>
+<p>For the template provided in the RPM, use: <code>file:///etc/gums/gums.config.template</code></p>
+<p>To fetch it directly from the GOC, use <code>http://repo.grid.iu.edu/pacman/tarballs/vo-version/gums.template</code></p>
+</li>
+<li>
+<p>Click Merge</p>
+<p>You should get a green success message if it has worked, along with a suggestion that you update the VO members</p>
+</li>
+<li>
+<p>Check the Summary tab to verify the set of VOs you have, as well as their accounts</p>
+</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="useful-configuration-and-log-files">Useful Configuration and Log Files</h3>
+<p>Configuration Files</p>
+<table>
+<thead>
+<tr>
+<th align="left">Service or Process</th>
+<th align="left">Configuration File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">MySQL</td>
+<td align="left"><code>/etc/my.cnf</code></td>
+<td align="left">MySQL configuration, e.g. server port</td>
+</tr>
+<tr>
+<td align="left">tomcat (EL6)</td>
+<td align="left"><code>/etc/tomcat6/</code></td>
+<td align="left">Tomcat configuration files</td>
+</tr>
+<tr>
+<td align="left">tomcat (EL7)</td>
+<td align="left"><code>/etc/tomcat/</code></td>
+<td align="left">Tomcat configuration files</td>
+</tr>
+</tbody>
+</table>
+<p>Log files</p>
+<table>
+<thead>
+<tr>
+<th align="left">Service or Process</th>
+<th align="left">Log File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">tomcat (EL6)</td>
+<td align="left"><code>/var/log/tomcat6/catalina.out</code></td>
+<td align="left">This is the Tomcat log file. Problems (and a lot of noise) are reported here.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/var/log/tomcat6/trustmanager.log</code></td>
+<td align="left">The trustmanager handles things related to authentication. Useful errors are sometimes here.</td>
+</tr>
+<tr>
+<td align="left">tomcat (EL6/EL7)</td>
+<td align="left"><code>/var/log/tomcat*/catalina.*.log</code></td>
+<td align="left">These are the Tomcat log files. Problems (and a lot of noise) are reported here.</td>
+</tr>
+<tr>
+<td align="left">tomcat (EL6/EL7)</td>
+<td align="left"><code>/var/log/tomcat*/catalina.log</code></td>
+<td align="left">Alternate non-rotated location for tomcat log file. Not the same as <code>catalina.out</code>. Problems (and a lot of noise) are reported here.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/var/log/tomcat/trustmanager.log</code></td>
+<td align="left">The trustmanager handles things related to authentication. Useful errors are sometimes here.</td>
+</tr>
+<tr>
+<td align="left"><strong>GUMS</strong> (EL6)</td>
+<td align="left"><code>/var/log/tomcat6/gums-service-admin.log</code></td>
+<td align="left">GUMS outputs error messages related to its operations here.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/var/log/tomcat6/gums-service-cybersecurity.log</code></td>
+<td align="left">GUMS outputs security related messages to this file.</td>
+</tr>
+<tr>
+<td align="left"><strong>GUMS</strong> (EL7)</td>
+<td align="left"><code>/var/log/tomcat/gums-service-admin.log</code></td>
+<td align="left">GUMS outputs error messages related to its operations here.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><code>/var/log/tomcat/gums-service-cybersecurity.log</code></td>
+<td align="left">GUMS outputs security related messages to this file.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GUMS</strong> (EL6/EL7)</td>
+<td><code>/var/log/gums/gums-developer.root.log</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>/var/log/gums/gums-egee-security.root.log</code></td>
+<td>GUMS may also output some security related messages to this file as well.</td>
+</tr>
+<tr>
+<td></td>
+<td><code>/var/log/gums/gums-privilege.root.log</code></td>
+<td>GUMS outputs mapping related errors to this file.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tuning-gums-for-a-big-site">Tuning GUMS for a big Site</h3>
+<p>The <a href="../../security/gums-scalability">GUMS scalability page</a> contains several performance tips built from the experience of running the service on FermiGrid, a big OSG Site.</p>
+<h2 id="how-to-get-help">How to get Help?</h2>
+<p>To get assistance please use the <a href="../../common/help">Help Procedure</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://tomcat.apache.org/tomcat-6.0-doc">Official Tomcat 6 documentation</a></li>
+<li><a href="https://tomcat.apache.org/tomcat-7.0-doc">Official Tomcat 7 documentation</a></li>
+<li><a href="http://hibernate.org/orm/documentation/">Official Hibernate documentation</a> (Hibernate is the GUMS database interface)</li>
+</ul>
+<h3 id="host">Host</h3>
+<p>For security reasons, it is recommended to install GUMS on a separate host from the CE,
+    but it is not necessary</p>
+<h3 id="users">Users</h3>
+<p>The GUMS installation will create two users unless they exist already:</p>
+<table>
+<thead>
+<tr>
+<th align="left">User</th>
+<th align="left">Default UID</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>mysql</code></td>
+<td align="left">27</td>
+<td align="left">Runs the MySQL database server, which GUMS uses</td>
+</tr>
+<tr>
+<td align="left"><code>tomcat</code></td>
+<td align="left">91</td>
+<td align="left">Runs the Tomcat web application server, which runs GUMS</td>
+</tr>
+</tbody>
+</table>
+<p>Note that if UIDs 27 and 91 are taken already but not used for the appropriate users, you will experience errors.</p>
+<h3 id="certificates">Certificates</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Certificate</th>
+<th align="left">Owner, Permissions</th>
+<th align="left">Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">HTTP service certificate</td>
+<td align="left"><code>tomcat:tomcat</code>, 0644</td>
+<td align="left"><code>/etc/grid-security/http/httpcert.pem</code></td>
+</tr>
+<tr>
+<td align="left">HTTP service key</td>
+<td align="left"><code>tomcat:tomcat</code>, 0600</td>
+<td align="left"><code>/etc/grid-security/http/httpkey.pem</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="networking">Networking</h3>
+<p>GUMS communicates on TCP port 8443; this port must be accessible to the Compute Element and any other hosts that need to authenticate via GUMS.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../gums-scalability/" class="btn btn-neutral float-right" title="GUMS Scalability Case Study">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../edg-mkgridmap/" class="btn btn-neutral" title="EDG-Mkgridmap Install"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../edg-mkgridmap/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../gums-scalability/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

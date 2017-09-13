@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Get Help - OSG Documentation</title>
+  <title>GUMS Scalability Case Study - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Get Help";
-    var mkdocs_page_input_path = "common/help.md";
-    var mkdocs_page_url = "/common/help/";
+    var mkdocs_page_name = "GUMS Scalability Case Study";
+    var mkdocs_page_input_path = "security/gums-scalability.md";
+    var mkdocs_page_url = "/security/gums-scalability/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -64,11 +64,11 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../ca/">CA Certificates</a>
+    <a class="" href="../../common/ca/">CA Certificates</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../yum/">Yum Repos</a>
+    <a class="" href="../../common/yum/">Yum Repos</a>
                 </li>
     </ul>
 	    </li>
@@ -136,7 +136,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+    <a class="" href="../lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
                 </li>
                 <li class="">
                     
@@ -170,7 +170,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+    <a class="" href="../lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
                 </li>
     </ul>
 	    </li>
@@ -215,7 +215,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../pki-cli/">Certificate Tools</a>
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
                 </li>
                 <li class="">
                     
@@ -234,11 +234,11 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../ca_updater/">CA Updater</a>
+    <a class="" href="../../common/ca_updater/">CA Updater</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../cert_scripts/">Certificate Request Scripts</a>
+    <a class="" href="../../common/cert_scripts/">Certificate Request Scripts</a>
                 </li>
                 <li class="">
                     
@@ -261,15 +261,44 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../security/edg-mkgridmap/">EDG-Mkgridmap Install</a>
+    <a class="" href="../edg-mkgridmap/">EDG-Mkgridmap Install</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../security/install-gums/">GUMS</a>
+    <a class="" href="../install-gums/">GUMS</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../../security/gums-scalability/">GUMS Scalability Case Study</a>
+    <a class="current" href="./">GUMS Scalability Case Study</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#gums-scalability">GUMS Scalability</a></li>
+    
+
+    <li class="toctree-l3"><a href="#about-this-document">About this Document</a></li>
+    
+
+    <li class="toctree-l3"><a href="#background">Background</a></li>
+    
+
+    <li class="toctree-l3"><a href="#settings">Settings</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#gums-configuration-settings">GUMS configuration settings</a></li>
+        
+            <li><a class="toctree-l4" href="#tomcat-settings">Tomcat settings</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#system-level-settings">System level settings</a></li>
+    
+
+    <li class="toctree-l3"><a href="#references">References</a></li>
+    
+
+    </ul>
                 </li>
                 <li class="">
                     
@@ -278,27 +307,9 @@
     </ul>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Get Help</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#how-to-get-help">How to Get Help</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#grid-operations-center">Grid Operations Center</a></li>
-        
-            <li><a class="toctree-l3" href="#security-incident">Security incident</a></li>
-        
-            <li><a class="toctree-l3" href="#information-required-to-help-you">Information Required to Help You</a></li>
-        
-            <li><a class="toctree-l3" href="#community-specific-resources">Community-specific Resources</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../../common/help/">Get Help</a>
 	    </li>
           
         </ul>
@@ -322,11 +333,15 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
+        
+          <li>Deprecated Software &raquo;</li>
+        
+      
     
-    <li>Get Help</li>
+    <li>GUMS Scalability Case Study</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/common/help.md"
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/security/gums-scalability.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -336,36 +351,112 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="how-to-get-help">How to Get Help</h1>
-<p>This page is aimed at OSG site administrators looking for support. Help for OSG users is found at <a href="https://support.opensciencegrid.org/support/home">our support desk</a>.</p>
-<h2 id="grid-operations-center">Grid Operations Center</h2>
-<p>The Grid Operations Center (GOC) is available to coordinate users, site admins, and developers around an issue.  Additionally, the GOC can provide basic monitoring and troubleshooting.  There are several ways to receive support:</p>
+                <div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>GUMS is no longer be supported in OSG 3.4. The <a href="../../security/lcmaps-voms-authentication">LCMAPS VOMS Plugin</a> is the preferred method for site authentication in the OSG and is available in both OSG 3.3 and OSG 3.4.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>These experiments were run on EL 5 machines. EL 5 is no longer supported as of OSG 3.3.</p>
+</div>
+<h1 id="gums-scalability">GUMS Scalability</h1>
+<h1 id="about-this-document">About this Document</h1>
+<p>The purpose of this document is to put together various GUMS configuration and system level settings that may help optimize GUMS server performance. It assumes you are familiar with GUMS, its installation and configuration as covered in <a href="../../security/install-gums">the GUMS install documentation</a>.</p>
+<h1 id="background">Background</h1>
+<p>In 2011, the FermiGrid Services group at Fermilab carried out various baseload/stress test runs against a locally deployed GUMS server.
+The purpose of these tests were to tune settings in order to achieve a 100% success rate for all calls (both baseload jobs and stress run jobs) made to the GUMS server.
+The GUMS server was named <code>gums1318.fnal.gov</code>.
+This machine was actually a front end to two back end SL5 64bit servers, <code>gums1318a.fnal.gov</code> and <code>gums1318b.fnal.gov</code>, running GUMS 1.3.18.009-15.2.</p>
+<p>Each baseload run involved 50 clients contacting the server in parallel.
+The stress run, which was run on top of the baseload jobs, involved 5000 clients contacting the server in parallel,
+each client making 100 calls in succession.
+(That load was chosen to simulate the case of an active production system when someone deletes a large batch of jobs;
+this would suddenly cause all jobs to run glExec to clean up.)
+In addition to calls from baseload jobs, the stress run jobs provided a total of 500,000 calls to the GUMS server.</p>
+<p>In 2015 the tests were repeated with GUMS 1.4.2-1.
+We tested first with 5000 and then 8000 parallel clients, each running 100 queries in series.
+The GUMS server was 16 cores, and the clients were running on 25 4-core FermiCloud VMs.
+The average rate of service was 350 queries per second.</p>
+<h1 id="settings">Settings</h1>
+<p>We tuned the configuration in order to make the tests above successful.</p>
+<h2 id="gums-configuration-settings">GUMS configuration settings</h2>
+<p>In file <code>/etc/gums/gums.config</code>:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Setting</strong></th>
+<th><strong>Value</strong></th>
+<th><strong>Comments</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hibernate.c3p0.timeout</code></td>
+<td>300</td>
+<td>number of seconds after which an idle connection is removed from connection pool</td>
+</tr>
+<tr>
+<td><code>hibernate.c3p0.max_size</code></td>
+<td>300</td>
+<td>max number of db connections to keep in the connection pool</td>
+</tr>
+<tr>
+<td><code>hibernate.c3p0.min_size</code></td>
+<td>25</td>
+<td>min number of ready db connections to keep in the connection pool</td>
+</tr>
+<tr>
+<td><code>hibernate.c3p0.numHelperThreads</code></td>
+<td>50</td>
+<td>see note below; this setting isn't in the original template file from rpm, so it may need to be added in the config file</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The c3p0 library is very asynchronous. Slow JDBC operations are generally performed by helper threads that don't hold contended locks. Spreading these operations over multiple threads can significantly improve performance by allowing multiple operations to be performed simultaneously.</p>
+</div>
+<h2 id="tomcat-settings">Tomcat settings</h2>
+<p>In file <code>/etc/tomcat5/server.xml</code> (<code>/etc/tomcat6/server.xml</code> on EL6), some of the following settings may not be in the original template file, just add them.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Setting</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>acceptCount</code></td>
+<td>4096</td>
+</tr>
+</tbody>
+</table>
+<h1 id="system-level-settings">System level settings</h1>
+<p>In file <code>/etc/sysctl.conf</code>, some settings may not present in the file and need to be added there. Then run <code>sysctl -p</code> to reload these new settings.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Setting</th>
+<th align="left">Value</th>
+<th align="left">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>net.core.somaxconn</code></td>
+<td align="left">4096</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<h1 id="references">References</h1>
 <ul>
-<li>You can <a href="https://ticket.grid.iu.edu">submit a trouble ticket</a> or send an email to <a href="mailto:goc@opensciencegrid.org">goc@opensciencegrid.org</a> (which also accept general inquiries not intended for tickets.)</li>
-<li>The <a href="https://ticket.grid.iu.edu/goc/list/open">trouble ticket system</a> is searchable.  Historical tickets may contain the solution for similar problems others have encountered.</li>
-<li>The <a href="http://osggoc.blogspot.com/">operations blog</a> contains information about recent software releases, and important outage and maintenance notifications of central OSG services.</li>
-<li>For emergencies, the OSG Grid Operation Center provides extended support. Operators are on hand 24x7 at the GOC and can be reached via phone at +1 317-278-9699.   Non-emergency issues can be opened 24x7 but will be handled during normal business hours.</li>
-</ul>
-<h2 id="security-incident">Security incident</h2>
-<p>Security incidents can be reported by following the instructions on the <a href="https://opensciencegrid.github.io/security/IncidentDiscoveryReporting/">Incident Discovery and Reporting</a> page.  Additional steps to aid in the incident handling process are also linked from that page.</p>
-<h2 id="information-required-to-help-you">Information Required to Help You</h2>
-<p>If you came to this page from an installation or other document in this website, then follow instructions in the <strong>Troubleshooting</strong> and <strong>Debugging</strong> sections of that document and include results in your support inquiry, no matter which channel you choose (email, trouble ticket, web chat, ...)</p>
-<p>For problems with installation of some software run <code>osg-system-profiler</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-system-profiler
-</pre></div>
-
-
-<p>Attach the generated <code>osg-profile.txt</code> to your support inquiry.</p>
-<h2 id="community-specific-resources">Community-specific Resources</h2>
-<p>Some OSG VOs have dedicated forums or mechanisms for community-specific support.  If your VO provides user support, that should be a user's first line of support because the VO is most familiar with your applications and requirements.</p>
-<ul>
-<li>The list of support contacts for OSG VOs can be found in the <a href="http://myosg.grid.iu.edu/scsummary/index?datasource=summary&amp;summary_attrs_showdesc=on&amp;summary_attrs_showcontact=on&amp;all_scs=on&amp;active=on&amp;active_value=1">Support Center Tab on MyOSG</a>.</li>
-<li>Resources for <strong>CMS</strong> sites:<ul>
-<li><a href="http://www.uscms.org/uscms_at_work/physics/computing/grid/index.shtml">http://www.uscms.org/uscms_at_work/physics/computing/grid/index.shtml</a></li>
-<li>CMS Hyper News: <a href="https://hypernews.cern.ch/HyperNews/CMS/get/osg-tier3.html">https://hypernews.cern.ch/HyperNews/CMS/get/osg-tier3.html</a></li>
-<li>CMS Twiki: <a href="https://twiki.cern.ch/twiki/bin/viewauth/CMS/USTier3Computing">https://twiki.cern.ch/twiki/bin/viewauth/CMS/USTier3Computing</a></li>
-</ul>
-</li>
+<li><a href="../../security/install-gums">GUMS Installation guide</a></li>
+<li><a href="https://tomcat.apache.org/tomcat-5.5-doc">Official Tomcat 5 documentation</a></li>
+<li><a href="https://tomcat.apache.org/tomcat-6.0-doc">Official Tomcat 6 documentation</a></li>
+<li><a href="http://www.hibernate.org/docs">http://www.hibernate.org/docs</a> Official hibernate documentation</li>
+<li><a href="http://www.mchange.com/projects/c3p0/">c3p0 documentation</a> and <a href="http://sourceforge.net/projects/c3p0/">code</a></li>
 </ul>
               
             </div>
@@ -374,8 +465,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../../client/glexec/" class="btn btn-neutral float-right" title="Worker node glexec Install">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-        <a href="../../client/glexec/" class="btn btn-neutral" title="Worker node glexec Install"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+        <a href="../install-gums/" class="btn btn-neutral" title="GUMS"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -403,8 +496,10 @@
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../client/glexec/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../install-gums/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../../client/glexec/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
