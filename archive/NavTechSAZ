@@ -1,0 +1,87 @@
+%DOC_STATUS_TABLE%
+
+---+!! Site !AuthoriZation Service (SAZ)
+%TOC%
+
+---+ Introduction
+
+SAZ enables a Grid site administrator to enforce a Grid job whitelist/blacklist capability at his/her site. It does so by providing the site administrator the capability to ban (disable) or enable identity attributes that are associated with the credential that the user uses to run Grid jobs.  These identity attributes are:
+   * =User= - A user can be authorized or disabled from running grid jobs based on his/her DN (%LINK_GLOSSARY_DN%), certificate serial number or proxy remaining lifetime. This is useful if you want to temporarally (or permanently) ban a user in response to a security incident or investigation (e.g. following a report that a certificate has been compromised).
+   * =Proxy Lifetime= - Enforce a limit on proxy (%LINK_GLOSSARY_VOMS_PROXY%) lifetime on your grid resource.
+   * =CA= (%LINK_GLOSSARY_CA%) based on its DN. This would ban a CA and thus all users using grid certificates issued by that CA from running grid jobs on your site.
+   * =VO= (%LINK_GLOSSARY_VO%) based on its name. This would ban a VO and thus all users belonging to that VO from running grid jobs on your site.
+   * =FQAN= (Fully Qualified Attribute Name) based on its name. This would disable any jobs coming in with voms credentials generated using this FQAN from running on your site.
+
+SAZ also enables an administrator to "trust" a user - which means user is allowed to run grid jobs on the site in question using a vanilla grid proxy (i.e. without a FQAN)
+
+---+ Why might I need SAZ ?
+As a site admin for multiple/single grid site, if you have wished for a centralized service to 
+
+   * ban/authorize users/CAs/VOs/Roles across all your sites 
+   * control maximum allowed lifetime for incoming user proxies
+
+then, SAZ is exactly what you need.
+
+---+ Is it an alternate to GUMS?
+
+SAZ is not an alternative to %LINK_GLOSSARY_GUMS%.
+GUMS primary purpose is to map incoming grid credentials to local user accounts that also provides a limited banning capability.
+SAZ is a banning tool that lets you ban credentials based on the attributes described above. 
+The grid authentication/authorization infrastructure setup at [[http://fermigrid.fnal.gov][FermiGrid]] has been successfully using both GUMS and SAZ for several years.
+
+---+ How Scalable is it?
+
+SAZ has been extensively stress tested by [[http://fermigrid.fnal.gov][FermiGrid]] against both legacy and XACML protocols. 
+Details on the stress tests and observed SAZ performance are available [[http://cd-docdb.fnal.gov/cgi-bin/ShowDocument?docid=3811][here]]
+
+---+ Documents
+   * [[InstallSAZ][Install SAZ]]
+   * [[http://saz.fnal.gov][SAZ Documentation home]] at Fermilab
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = NehaSharma
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = KeithChadwick
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+############################################################################################################
+-->
