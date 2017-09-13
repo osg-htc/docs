@@ -62,7 +62,7 @@ Install and Configure GUMS
 
 ### Install GUMS
 
-1.  Whether installing or upgrading GUMS, please make sure to follow [these instructions](Documentation/Release3.InstallSoftwareWithOpenJDK7#InstallingJava) for updating/installing Java to work correctly with GUMS
+1.  Whether installing or upgrading GUMS, please make sure to follow [these instructions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7#InstallingJava) for updating/installing Java to work correctly with GUMS
 2.  If you have an existing GUMS installation on the same host, shut down Tomcat.
     The service is named `tomcat6` on EL6 and `tomcat` on EL7
 3.  Install the GUMS Service:
