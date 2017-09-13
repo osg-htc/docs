@@ -17,9 +17,8 @@ Our most common software products include:
 * [CVMFS](client/cvmfs.md) The CernVM File System (CVMFS) is a global-scale, read-only,
   hierarchical filesystem.  CVMFS volumes distribute the majority of the scientific
   software used on OSG in addition to the OSG worker node client.
-* [Worker node client](client/wn.md) and [glexec](client/glexec.md): An RPM-based install
-  of the worker node software; this includes the `glexec` binary (not provided by the
-  CVMFS install) which allows pilots to securely isolate payload jobs.
+* [Worker node client](client/wn.md) and [singularity](client/singularity.md): An RPM-based install
+  of the worker node software; this includes the `singularity` binary which allows pilots to securely isolate payload user jobs.
 
 
 You can help!

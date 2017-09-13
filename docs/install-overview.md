@@ -48,13 +48,13 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 
 ### Adding OSG Software to Worker Nodes ###
 
--   [Worker Node (WN) Client Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/UsingWorkerNodeClient)
+-   [Worker Node (WN) Client Overview](client/using-wn)
 -   Install the WN client software on every worker node – pick a method:
     -   [Using RPMs](client/wn) – useful when managing your worker nodes with a tool (e.g., Puppet, Chef)
     -   [Using a tarball](client/wn-tarball) – useful for installation onto a shared filesystem (does not require root access)
-    -   [Using OASIS](client/wn-oasis) – useful when [OASIS](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavTechOASIS) is already mounted on your worker nodes
--   (optional) [Install the CernVM-FS client](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCvmfs) to make it easy for user jobs to install needed software from OSG’s OASIS repositories
--   (optional, advanced) [Install gLExec on the OSG worker node](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallGlexec), if you know you need it
+    -   [Using OASIS](client/wn-oasis) – useful when [CVMFS](client/cvmfs) is already mounted on your worker nodes
+-   (optional) [Install the CernVM-FS client](client/cvmfs) to make it easy for user jobs to use needed software from OSG's OASIS repositories
+-   (optional) [Install singularity on the OSG worker node](client/singularity), to allow pilot jobs to isolate user jobs.
 
 ### Installing and Configuring the Compute Element ###
 
@@ -69,9 +69,9 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 
 ### Installing and Configuring Other Nodes ###
 
-All of these node types and their services are optional, although OSG requires the Frontier Squid caching service if you have installed [CVMFS](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCvmfs) on your worker nodes.
+All of these node types and their services are optional, although OSG requires the Frontier Squid caching service if you have installed [CVMFS](client/cvmfs) on your worker nodes.
 
--   [Install Frontier Squid, the HTTP caching proxy service](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallFrontierSquid)
+-   [Install Frontier Squid, the HTTP caching proxy service](data/frontier-squid)
 -   RSV monitoring to monitor and report to OSG on the health of your site
     -   [RSV Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvOverview)
     -   [Install RSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallRSV)
