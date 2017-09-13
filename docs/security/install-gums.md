@@ -369,10 +369,6 @@ Log files
 |                    | `/var/log/gums/gums-egee-security.root.log` | GUMS may also output some security related messages to this file as well. |
 |                    | `/var/log/gums/gums-privilege.root.log`     | GUMS outputs mapping related errors to this file.                         |
 
-### Tuning GUMS for a big Site ###
-
-The [GUMS scalability page](../security/gums-scalability) contains several performance tips built from the experience of running the service on FermiGrid, a big OSG Site.
-
 
 How to get Help?
 ----------------
