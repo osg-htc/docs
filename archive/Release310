@@ -1,0 +1,608 @@
+%TOC%
+
+---+ OSG Software release 3.1.0
+
+*Release Date*: 24-Apr-2012
+
+---++ Summary of Changes
+
+   * EL6 is now fully supported for the Compute Element, VOMS, Client, and Storage Elements. (The Worker Node client support already existed.)
+   * The GUMS service is now included. [[InstallGums][Installation instructions]]
+   * The Gratia service is now included. For now, it is only available on EL5, not yet on EL6. [[InstallGratiaService][Installation instructions]]
+   * RSV updated to 3.7.0
+   * Updated glexec, lcmaps and associated packages to be based on the latest versions released for EMI
+   * Pegasus has been updated to version 4.0.0
+   * Various bugfixes
+
+See Detailed Changes below for more information.
+
+All of the documentation can be found in [[Documentation.Release3][the "Release3"]] area of the Twiki. 
+
+---++ Updating to the new release
+
+If you have an existing installation, you can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or regex]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, rpm does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed Changes 
+
+   * RSV 3.7.0 changes:
+      * Core:
+         * [[http://jira.opensciencegrid.org/browse/SOFTWARE-618][SOFTWARE-618]] - implemented support for using legacy Globus proxies
+         * [[http://jira.opensciencegrid.org/browse/SOFTWARE-530][SOFTWARE-530]] - added metric configuration knob to skip ping check
+      * Metrics:
+         * [[http://jira.opensciencegrid.org/browse/SOFTWARE-600][SOFTWARE-600]] - fixed a bug in the Gratia Condor probe that could not find condor_config_val when it was installed in a non-standard location outside the PATH
+         * [[http://jira.opensciencegrid.org/browse/SOFTWARE-595][SOFTWARE-595]] - changed the status of the local certificate checks to be a WARNING when the certificate's validity is 168>validity>24 hours.  The status will still be CRITICAL when it is valid for <24 hours.
+         * Removed org.osg.batch.* metrics.  They did not work with OSG 3.
+         * Removed some other old OSG 1.2 code from the packaging that was not used.
+      * Consumers:
+         * Implemented nagios-consumer for OSG 3.  Incorporated rsv2nagios.py and rsv2nsca.py in the new consumer.
+         * Rewrote html-consumer and gratia-consumer to share code with the new nagios-consumer
+         * [[http://jira.opensciencegrid.org/browse/SOFTWARE-519][SOFTWARE-519]] - fixed a bug where a consumer could crash if the timestamp field in a record was empty
+         * osg-configure now accepts the accounting_log_directory option for PBS.
+   * Glexec, lcmaps and associated packages changes
+      * Biggest changes:
+         * Syslog interface is much more consistent.  The number of default messages are reduced, and the levels match those defined by syslog.  The syslog facility can be changed so they can be redirected to a separate file by /etc/syslog.conf.
+         * Glexec, upgraded from version 0.8.10 to version 0.9.6, has major new optional functionality in epilog scripts, although there's currently no plans in OSG to use them.  Signal handling was implemented, and many bugs were fixed.  [[http://ndpfsvn.nikhef.nl/cgi-bin/viewvc.cgi/mwsec/trunk/glexec/NEWS?revision=16281][Detailed NEWS]].
+         * lcas-lcmaps-gt4-interface, the globus callout, upgraded from version 0.1.4 to 0.2.4, adds some configuration options, fixes memory leaks, and fixes a bug in parsing /etc/lcmaps.db that the OSG distribution was accidentally benefitting by.  The OSG distribution eliminates lcas as a dependency of this so lcas is no longer installed at all.  [[http://ndpfsvn.nikhef.nl/cgi-bin/viewvc.cgi/mwsec/trunk/lcas-lcmaps-gt4-interface/NEWS?revision=16151][Detailed NEWS]].
+         * lcmaps, upgraded from 1.4.28 to 1.5.4, fixed segmentation faults and other bugs in addition to the major logging rework.  The OSG distribution made lcmaps.db more clean and made the VOMS credential check possible to be enabled though off by default.  [[http://ndpfsvn.nikhef.nl/cgi-bin/viewvc.cgi/mwsec/trunk/lcmaps/NEWS?revision=16233][Detailed NEWS]].
+         * lcmaps-plugins-basic, upgraded from 1.4.5 to 1.5.0.  [[http://ndpfsvn.nikhef.nl/cgi-bin/viewvc.cgi/mwsec/trunk/lcmaps-plugins-basic/NEWS?revision=15547][Detailed NEWS]].
+         * lcmaps-plugins-scas-client, upgraded from 0.2.22 to 0.3.4, eliminates need for several OSG-specific patches, enables TCP keepalives on sockets, and adds new protocol messages for SAZ.  [[http://ndpfsvn.nikhef.nl/cgi-bin/viewvc.cgi/mwsec/trunk/lcmaps-plugins-scas-client/NEWS?revision=16103]][Detailed NEWS]].
+         * lcmaps-plugins-verify-proxy, upgraded from 1.4.9 to 1.5.2, improves certificate checking, adds some options including --require-limited-proxy.  [[http://ndpfsvn.nikhef.nl/cgi-bin/viewvc.cgi/mwsec/trunk/lcmaps-plugins-verify-proxy/NEWS?revision=16087][Detailed NEWS]].
+         * lcmaps-plugins-glexec-tracking (an OSG-exclusive package), upgraded from 0.1.1 to 0.1.4, matches logging changes, adds -log-facility and -loglevel options, and fixed a bug that prevented soft-killing processes that survive the main payload. [[http://cdcvs.fnal.gov/cgi-bin/public-cvs/cvsweb-public.cgi/privilege/lcmaps-plugins-glexec-tracking/RELEASE_NOTES.diff?r1=1.8&r2=1.11][Details]].
+         * xacml, replaces saml2-xacml2-c-lib, now only includes the xacml library and gets gsoap from EPEL.  [http://ndpfsvn.nikhef.nl/cgi-bin/viewvc.cgi/mwsec/trunk/saml2-xacml2-c-lib/xacml/NEWS?revision=15810][Detailed NEWS]].
+      * Resolved tickets:
+         * [[http://jira.opensciencegrid.org/browse/SOFTWARE-441][SOFTWARE-441]] - lcmaps-plugins-gums-client missing man page, and module needs to move to libdir/lcmaps
+         * [[http://jira.opensciencegrid.org/browse/SOFTWARE-284][SOFTWARE-284]] - The lcas-lcmaps-gt4-interface globus callout should avoid lcas
+         * [[http://jira.opensciencegrid.org/browse/SOFTWARE-315][SOFTWARE-315]] - Enhance osg-configure to assist with authorization configuration (including lcmaps.db)
+         * [[http://jira.opensciencegrid.org/browse/SOFTWARE-419][SOFTWARE-419]] - Make lcmaps-plugins-saz-client a subpackage of lcmaps-plugins-scas-client
+         * [[http://jira.opensciencegrid.org/browse/SOFTWARE-416][SOFTWARE-416]] - Reduce syslog output for globus-gatekeeper
+         * [[http://jira.opensciencegrid.org/browse/SOFTWARE-566][SOFTWARE-566]] - Reduce syslog output for globus-gridftp-server
+         * [[http://jira.opensciencegrid.org/browse/SOFTWARE-231][SOFTWARE-231]] - Default log levels in lcas-lcmaps-gt4-interface are too high
+         * [[http://jira.opensciencegrid.org/browse/SOFTWARE-629][SOFTWARE-629]] - i386 lcmaps upgrade failure
+         * [[http://jira.opensciencegrid.org/browse/SOFTWARE-635][SOFTWARE-635]] - lcmaps VOMS certificate check disabling at the app level is a support problem
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each 'package': you can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=OSG-Measurements-Metrics-Db-0.8-1][OSG-Measurements-Metrics-Db-0.8-1]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=OSG-Measurements-Metrics-Web-0.8-1][OSG-Measurements-Metrics-Web-0.8-1]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=OSG_Display_Data-1.0.3-2][OSG_Display_Data-1.0.3-2]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-7.6.6-4.osg.el5][condor-7.6.6-4.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-cron-1.0.8-1.osg.el5][condor-cron-1.0.8-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gfal-1.11.14-12.osg.el5][gfal-1.11.14-12.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gip-1.3.7-1.osg.el5][gip-1.3.7-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glexec-0.9.6-1.1.osg.el5][glexec-0.9.6-1.1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glexec-wrapper-scripts-0.0.6-1.2.osg.el5][glexec-wrapper-scripts-0.0.6-1.2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glideinwms-2.5.7-2.osg.el5][glideinwms-2.5.7-2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glite-ce-osg-ce-plugin-1.13.1-4.osg.el5][glite-ce-osg-ce-plugin-1.13.1-4.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gatekeeper-9.6-1.7.osg.el5][globus-gatekeeper-9.6-1.7.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-13.34-0.1.osg.el5][globus-gram-job-manager-13.34-0.1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gridftp-server-6.5-1.6.osg.el5][globus-gridftp-server-6.5-1.6.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.12-1.osg.el5][gratia-probe-1.12-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-service-1.12-2.osg.el5][gratia-service-1.12-2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gums-1.3.18.009-2.osg.el5][gums-1.3.18.009-2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=hadoop-0.20-osg-0.20.2+737-11.osg.el5][hadoop-0.20-osg-0.20.2+737-11.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=jdk-1.6.0_31-fcs.3.osg.el5][jdk-1.6.0_31-fcs.3.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcas-lcmaps-gt4-interface-0.2.4-1.3.osg.el5][lcas-lcmaps-gt4-interface-0.2.4-1.3.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcgdm-1.8.1.2-6.osg.el5][lcgdm-1.8.1.2-6.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcmaps-1.5.4-1.1.osg.el5][lcmaps-1.5.4-1.1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcmaps-plugins-basic-1.5.0-3.2.osg.el5][lcmaps-plugins-basic-1.5.0-3.2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcmaps-plugins-glexec-tracking-0.1.4-1.2.osg.el5][lcmaps-plugins-glexec-tracking-0.1.4-1.2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcmaps-plugins-scas-client-0.3.4-1.1.osg.el5][lcmaps-plugins-scas-client-0.3.4-1.1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcmaps-plugins-verify-proxy-1.5.2-1.2.osg.el5][lcmaps-plugins-verify-proxy-1.5.2-1.2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=llrun-0.1.3-1.3.osg.el5][llrun-0.1.3-1.3.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ce-3.0.0-30.osg.el5][osg-ce-3.0.0-30.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-configure-1.0.7-2.osg.el5][osg-configure-1.0.7-2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-discovery-1.0.7-5.osg.el5][osg-discovery-1.0.7-5.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-system-profiler-1.0.4-1.osg.el5][osg-system-profiler-1.0.4-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.1.0-1.osg.el5][osg-test-1.1.0-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-tested-internal-1-5.osg.el5][osg-tested-internal-1-5.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-tested-internal-1-6.osg.el5][osg-tested-internal-1-6.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.0-1.osg.el5][osg-version-3.1.0-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-wn-client-3.0.0-15.osg.el5][osg-wn-client-3.0.0-15.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=pegasus-4.0.0-2.osg.el5][pegasus-4.0.0-2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.7.0-1.osg.el5][rsv-3.7.0-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-consumers-3.7.0-1.osg.el5][rsv-consumers-3.7.0-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-core-3.7.0-1.osg.el5][rsv-core-3.7.0-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-metrics-3.7.0-1.osg.el5][rsv-metrics-3.7.0-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-41-3.osg.el5][vo-client-41-3.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-mysql-plugin-3.1.5.1-2.osg.el5][voms-mysql-plugin-3.1.5.1-2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=xacml-1.1.1-1.2.osg.el5][xacml-1.1.1-1.2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=xrootd-lcmaps-0.0.4-5.osg.el5][xrootd-lcmaps-0.0.4-5.osg.el5]]
+
+---++++ Enterprise Linux 6
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-7.6.6-4.osg.el6][condor-7.6.6-4.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-cron-1.0.8-1.osg.el6][condor-cron-1.0.8-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=edg-mkgridmap-4.0.0-5.osg.el6][edg-mkgridmap-4.0.0-5.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=emi-trustmanager-3.0.3-2.osg.el6][emi-trustmanager-3.0.3-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=emi-trustmanager-tomcat-3.0.0-4.osg.el6][emi-trustmanager-tomcat-3.0.0-4.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=empty-ca-certs-1.0-1.osg.el6][empty-ca-certs-1.0-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gfal-1.11.14-12.osg.el6][gfal-1.11.14-12.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gip-1.3.6-1.osg.el6][gip-1.3.6-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glexec-0.9.6-1.1.osg.el6][glexec-0.9.6-1.1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glexec-wrapper-scripts-0.0.6-1.2.osg.el6][glexec-wrapper-scripts-0.0.6-1.2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glideinwms-2.5.7-2.osg.el6][glideinwms-2.5.7-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glite-ce-monitor-1.13.1-18.osg.el6][glite-ce-monitor-1.13.1-18.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glite-ce-osg-ce-plugin-1.13.1-4.osg.el6][glite-ce-osg-ce-plugin-1.13.1-4.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-core-8.5-2.osg.el6][globus-core-8.5-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gass-cache-8.1-4.osg.el6][globus-gass-cache-8.1-4.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gass-cache-program-5.0-5.osg.el6][globus-gass-cache-program-5.0-5.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gass-server-ez-4.1-4.osg.el6][globus-gass-server-ez-4.1-4.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gatekeeper-9.6-1.7.osg.el6][globus-gatekeeper-9.6-1.7.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-audit-3.1-4.osg.el6][globus-gram-audit-3.1-4.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-client-12.3-3.osg.el6][globus-gram-client-12.3-3.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-client-tools-10.0-5.osg.el6][globus-gram-client-tools-10.0-5.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-13.34-0.1.osg.el6][globus-gram-job-manager-13.34-0.1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-callout-error-2.1-4.osg.el6][globus-gram-job-manager-callout-error-2.1-4.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-condor-1.0-11.osg.el6][globus-gram-job-manager-condor-1.0-11.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-fork-1.0-8.osg.el6][globus-gram-job-manager-fork-1.0-8.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-managedfork-0.1-1.osg.el6][globus-gram-job-manager-managedfork-0.1-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-pbs-1.1-4.1.osg.el6][globus-gram-job-manager-pbs-1.1-4.1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-scripts-4.1-3.1.osg.el6][globus-gram-job-manager-scripts-4.1-3.1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-sge-1.0-7.osg.el6][globus-gram-job-manager-sge-1.0-7.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-protocol-11.2-3.osg.el6][globus-gram-protocol-11.2-3.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gridftp-server-6.5-1.6.osg.el6][globus-gridftp-server-6.5-1.6.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gridmap-callout-error-1.2-2.osg.el6][globus-gridmap-callout-error-1.2-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-rsl-9.1-4.osg.el6][globus-rsl-9.1-4.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-scheduler-event-generator-4.4-1.osg.el6][globus-scheduler-event-generator-4.4-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-simple-ca-3.0-5.osg.el6][globus-simple-ca-3.0-5.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-xioperf-3.0-5.osg.el6][globus-xioperf-3.0-5.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.12-1.osg.el6][gratia-probe-1.12-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gridftp-hdfs-0.5.3-2.osg.el6][gridftp-hdfs-0.5.3-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gums-1.3.18.009-2.osg.el6][gums-1.3.18.009-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=hadoop-0.20-osg-0.20.2+737-11.osg.el6][hadoop-0.20-osg-0.20.2+737-11.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=jdk-1.6.0_31-fcs.3.osg.el6][jdk-1.6.0_31-fcs.3.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcas-lcmaps-gt4-interface-0.2.4-1.3.osg.el6][lcas-lcmaps-gt4-interface-0.2.4-1.3.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcgdm-1.8.1.2-6.osg.el6][lcgdm-1.8.1.2-6.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcmaps-1.5.4-1.1.osg.el6][lcmaps-1.5.4-1.1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcmaps-plugins-basic-1.5.0-3.2.osg.el6][lcmaps-plugins-basic-1.5.0-3.2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcmaps-plugins-glexec-tracking-0.1.4-1.2.osg.el6][lcmaps-plugins-glexec-tracking-0.1.4-1.2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcmaps-plugins-scas-client-0.3.4-1.1.osg.el6][lcmaps-plugins-scas-client-0.3.4-1.1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcmaps-plugins-verify-proxy-1.5.2-1.2.osg.el6][lcmaps-plugins-verify-proxy-1.5.2-1.2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=llrun-0.1.3-1.3.osg.el6][llrun-0.1.3-1.3.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ce-3.0.0-30.osg.el6][osg-ce-3.0.0-30.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-client-3.0.0-17.osg.el6][osg-client-3.0.0-17.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-configure-1.0.7-2.osg.el6][osg-configure-1.0.7-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-gridftp-3.0.0-7.osg.el6][osg-gridftp-3.0.0-7.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-gridftp-hdfs-3.0.0-2.osg.el6][osg-gridftp-hdfs-3.0.0-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-gridftp-xrootd-3.0.0-2.osg.el6][osg-gridftp-xrootd-3.0.0-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-info-services-0.10-2.osg.el6][osg-info-services-0.10-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-se-bestman-3.0.0-7.osg.el6][osg-se-bestman-3.0.0-7.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-se-bestman-xrootd-3.0.0-4.osg.el6][osg-se-bestman-xrootd-3.0.0-4.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-se-cemon-3.0.0-4.osg.el6][osg-se-cemon-3.0.0-4.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-site-verify-3.0.0-1.osg.el6][osg-site-verify-3.0.0-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-site-web-page-0.15-3.osg.el6][osg-site-web-page-0.15-3.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-system-profiler-1.0.4-1.osg.el6][osg-system-profiler-1.0.4-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.1.0-1.osg.el6][osg-test-1.1.0-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-tested-internal-1-5.osg.el6][osg-tested-internal-1-5.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-tested-internal-1-6.osg.el6][osg-tested-internal-1-6.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.0-1.osg.el6][osg-version-3.1.0-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-vo-map-0.0.1-1.osg.el6][osg-vo-map-0.0.1-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-voms-3.0.0-2.osg.el6][osg-voms-3.0.0-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-wn-client-3.0.0-15.osg.el6][osg-wn-client-3.0.0-15.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=pegasus-4.0.0-2.osg.el6][pegasus-4.0.0-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.7.0-1.osg.el6][rsv-3.7.0-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-consumers-3.7.0-1.osg.el6][rsv-consumers-3.7.0-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-core-3.7.0-1.osg.el6][rsv-core-3.7.0-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-metrics-3.7.0-1.osg.el6][rsv-metrics-3.7.0-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-41-3.osg.el6][vo-client-41-3.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-admin-client-2.0.16-2.osg.el6][voms-admin-client-2.0.16-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-admin-server-2.6.1-11.osg.el6][voms-admin-server-2.6.1-11.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-mysql-plugin-3.1.5.1-2.osg.el6][voms-mysql-plugin-3.1.5.1-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=xacml-1.1.1-1.2.osg.el6][xacml-1.1.1-1.2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=xrootd-dsi-3.0.4-7.osg.el6][xrootd-dsi-3.0.4-7.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=xrootd-hdfs-1.7.0-2.osg.el6][xrootd-hdfs-1.7.0-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=xrootd-lcmaps-0.0.4-3.osg.el6][xrootd-lcmaps-0.0.4-3.osg.el6]]
+
+
+---+++ RPMs
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+condor-7.6.6-4.osg.el5
+condor-classads-7.6.6-4.osg.el5
+condor-classads-devel-7.6.6-4.osg.el5
+condor-cron-1.0.8-1.osg.el5
+condor-debuginfo-7.6.6-4.osg.el5
+condor-kbdd-7.6.6-4.osg.el5
+condor-procd-7.6.6-4.osg.el5
+condor-vm-gahp-7.6.6-4.osg.el5
+dpm-1.8.1.2-6.osg.el5
+dpm-copy-server-mysql-1.8.1.2-6.osg.el5
+dpm-copy-server-postgres-1.8.1.2-6.osg.el5
+dpm-devel-1.8.1.2-6.osg.el5
+dpm-libs-1.8.1.2-6.osg.el5
+dpm-name-server-mysql-1.8.1.2-6.osg.el5
+dpm-name-server-postgres-1.8.1.2-6.osg.el5
+dpm-perl-1.8.1.2-6.osg.el5
+dpm-python-1.8.1.2-6.osg.el5
+dpm-python26-1.8.1.2-6.osg.el5
+dpm-rfio-server-1.8.1.2-6.osg.el5
+dpm-server-mysql-1.8.1.2-6.osg.el5
+dpm-server-postgres-1.8.1.2-6.osg.el5
+dpm-srm-server-mysql-1.8.1.2-6.osg.el5
+dpm-srm-server-postgres-1.8.1.2-6.osg.el5
+gfal-1.11.14-12.osg.el5
+gfal-debuginfo-1.11.14-12.osg.el5
+gip-1.3.7-1.osg.el5
+glexec-0.9.6-1.1.osg.el5
+glexec-debuginfo-0.9.6-1.1.osg.el5
+glexec-wrapper-scripts-0.0.6-1.2.osg.el5
+glideinwms-2.5.7-2.osg.el5
+glideinwms-factory-2.5.7-2.osg.el5
+glideinwms-factory-condor-2.5.7-2.osg.el5
+glideinwms-minimal-condor-2.5.7-2.osg.el5
+glideinwms-vofrontend-2.5.7-2.osg.el5
+glideinwms-vofrontend-condor-2.5.7-2.osg.el5
+glite-ce-osg-ce-plugin-1.13.1-4.osg.el5
+globus-gatekeeper-9.6-1.7.osg.el5
+globus-gatekeeper-debuginfo-9.6-1.7.osg.el5
+globus-gram-job-manager-13.34-0.1.osg.el5
+globus-gram-job-manager-debuginfo-13.34-0.1.osg.el5
+globus-gram-job-manager-doc-13.34-0.1.osg.el5
+globus-gridftp-server-6.5-1.6.osg.el5
+globus-gridftp-server-debuginfo-6.5-1.6.osg.el5
+globus-gridftp-server-devel-6.5-1.6.osg.el5
+globus-gridftp-server-progs-6.5-1.6.osg.el5
+gratia-probe-1.12-1.osg.el5
+gratia-probe-bdii-status-1.12-1.osg.el5
+gratia-probe-common-1.12-1.osg.el5
+gratia-probe-condor-1.12-1.osg.el5
+gratia-probe-condor-events-1.12-1.osg.el5
+gratia-probe-dcache-storage-1.12-1.osg.el5
+gratia-probe-dcache-transfer-1.12-1.osg.el5
+gratia-probe-debuginfo-1.12-1.osg.el5
+gratia-probe-glexec-1.12-1.osg.el5
+gratia-probe-gram-1.12-1.osg.el5
+gratia-probe-gridftp-transfer-1.12-1.osg.el5
+gratia-probe-hadoop-storage-1.12-1.osg.el5
+gratia-probe-metric-1.12-1.osg.el5
+gratia-probe-pbs-lsf-1.12-1.osg.el5
+gratia-probe-psacct-1.12-1.osg.el5
+gratia-probe-services-1.12-1.osg.el5
+gratia-probe-sge-1.12-1.osg.el5
+gratia-probe-xrootd-storage-1.12-1.osg.el5
+gratia-probe-xrootd-transfer-1.12-1.osg.el5
+gratia-service-1.12-2.osg.el5
+gums-1.3.18.009-2.osg.el5
+gums-client-1.3.18.009-2.osg.el5
+gums-service-1.3.18.009-2.osg.el5
+hadoop-0.20-osg-0.20.2+737-11.osg.el5
+jdk-1.6.0_31-fcs.3.osg.el5
+lcas-lcmaps-gt4-interface-0.2.4-1.3.osg.el5
+lcas-lcmaps-gt4-interface-debuginfo-0.2.4-1.3.osg.el5
+lcgdm-1.8.1.2-6.osg.el5
+lcgdm-debuginfo-1.8.1.2-6.osg.el5
+lcgdm-devel-1.8.1.2-6.osg.el5
+lcgdm-libs-1.8.1.2-6.osg.el5
+lcmaps-1.5.4-1.1.osg.el5
+lcmaps-basic-interface-1.5.4-1.1.osg.el5
+lcmaps-debuginfo-1.5.4-1.1.osg.el5
+lcmaps-devel-1.5.4-1.1.osg.el5
+lcmaps-globus-interface-1.5.4-1.1.osg.el5
+lcmaps-openssl-interface-1.5.4-1.1.osg.el5
+lcmaps-plugins-basic-1.5.0-3.2.osg.el5
+lcmaps-plugins-basic-debuginfo-1.5.0-3.2.osg.el5
+lcmaps-plugins-basic-ldap-1.5.0-3.2.osg.el5
+lcmaps-plugins-glexec-tracking-0.1.4-1.2.osg.el5
+lcmaps-plugins-glexec-tracking-debuginfo-0.1.4-1.2.osg.el5
+lcmaps-plugins-saz-client-0.3.4-1.1.osg.el5
+lcmaps-plugins-scas-client-0.3.4-1.1.osg.el5
+lcmaps-plugins-scas-client-debuginfo-0.3.4-1.1.osg.el5
+lcmaps-plugins-verify-proxy-1.5.2-1.2.osg.el5
+lcmaps-plugins-verify-proxy-debuginfo-1.5.2-1.2.osg.el5
+lfc-1.8.1.2-6.osg.el5
+lfc-devel-1.8.1.2-6.osg.el5
+lfc-dli-1.8.1.2-6.osg.el5
+lfc-libs-1.8.1.2-6.osg.el5
+lfc-perl-1.8.1.2-6.osg.el5
+lfc-python-1.8.1.2-6.osg.el5
+lfc-python26-1.8.1.2-6.osg.el5
+lfc-server-mysql-1.8.1.2-6.osg.el5
+lfc-server-postgres-1.8.1.2-6.osg.el5
+llrun-0.1.3-1.3.osg.el5
+llrun-debuginfo-0.1.3-1.3.osg.el5
+osg-ce-3.0.0-30.osg.el5
+osg-ce-condor-3.0.0-30.osg.el5
+osg-ce-lsf-3.0.0-30.osg.el5
+osg-ce-pbs-3.0.0-30.osg.el5
+osg-ce-sge-3.0.0-30.osg.el5
+osg-configure-1.0.7-2.osg.el5
+osg-configure-ce-1.0.7-2.osg.el5
+osg-configure-cemon-1.0.7-2.osg.el5
+osg-configure-condor-1.0.7-2.osg.el5
+osg-configure-gip-1.0.7-2.osg.el5
+osg-configure-gratia-1.0.7-2.osg.el5
+osg-configure-lsf-1.0.7-2.osg.el5
+osg-configure-managedfork-1.0.7-2.osg.el5
+osg-configure-misc-1.0.7-2.osg.el5
+osg-configure-monalisa-1.0.7-2.osg.el5
+osg-configure-network-1.0.7-2.osg.el5
+osg-configure-pbs-1.0.7-2.osg.el5
+osg-configure-rsv-1.0.7-2.osg.el5
+osg-configure-sge-1.0.7-2.osg.el5
+osg-configure-squid-1.0.7-2.osg.el5
+osg-discovery-1.0.7-5.osg.el5
+OSG_Display_Data-1.0.3-2
+osg-gums-config-41-3.osg.el5
+OSG-Measurements-Metrics-Db-0.8-1
+OSG-Measurements-Metrics-Web-0.8-1
+osg-system-profiler-1.0.4-1.osg.el5
+osg-test-1.1.0-1.osg.el5
+osg-tested-internal-1-5.osg.el5
+osg-tested-internal-1-6.osg.el5
+osg-version-3.1.0-1.osg.el5
+osg-wn-client-3.0.0-15.osg.el5
+osg-wn-client-glexec-3.0.0-15.osg.el5
+pegasus-4.0.0-2.osg.el5
+pegasus-debuginfo-4.0.0-2.osg.el5
+rsv-3.7.0-1.osg.el5
+rsv-consumers-3.7.0-1.osg.el5
+rsv-core-3.7.0-1.osg.el5
+rsv-metrics-3.7.0-1.osg.el5
+vo-client-41-3.osg.el5
+vo-client-edgmkgridmap-41-3.osg.el5
+voms-mysql-plugin-3.1.5.1-2.osg.el5
+voms-mysql-plugin-debuginfo-3.1.5.1-2.osg.el5
+xacml-1.1.1-1.2.osg.el5
+xacml-debuginfo-1.1.1-1.2.osg.el5
+xacml-devel-1.1.1-1.2.osg.el5
+xrootd-lcmaps-0.0.4-5.osg.el5
+xrootd-lcmaps-debuginfo-0.0.4-5.osg.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+condor-7.6.6-4.osg.el6
+condor-classads-7.6.6-4.osg.el6
+condor-classads-devel-7.6.6-4.osg.el6
+condor-cron-1.0.8-1.osg.el6
+condor-debuginfo-7.6.6-4.osg.el6
+condor-kbdd-7.6.6-4.osg.el6
+condor-procd-7.6.6-4.osg.el6
+condor-vm-gahp-7.6.6-4.osg.el6
+dpm-1.8.1.2-6.osg.el6
+dpm-copy-server-mysql-1.8.1.2-6.osg.el6
+dpm-copy-server-postgres-1.8.1.2-6.osg.el6
+dpm-devel-1.8.1.2-6.osg.el6
+dpm-libs-1.8.1.2-6.osg.el6
+dpm-name-server-mysql-1.8.1.2-6.osg.el6
+dpm-name-server-postgres-1.8.1.2-6.osg.el6
+dpm-perl-1.8.1.2-6.osg.el6
+dpm-python-1.8.1.2-6.osg.el6
+dpm-rfio-server-1.8.1.2-6.osg.el6
+dpm-server-mysql-1.8.1.2-6.osg.el6
+dpm-server-postgres-1.8.1.2-6.osg.el6
+dpm-srm-server-mysql-1.8.1.2-6.osg.el6
+dpm-srm-server-postgres-1.8.1.2-6.osg.el6
+edg-mkgridmap-4.0.0-5.osg.el6
+emi-trustmanager-3.0.3-2.osg.el6
+emi-trustmanager-tomcat-3.0.0-4.osg.el6
+empty-ca-certs-1.0-1.osg.el6
+gfal-1.11.14-12.osg.el6
+gfal-debuginfo-1.11.14-12.osg.el6
+gip-1.3.6-1.osg.el6
+glexec-0.9.6-1.1.osg.el6
+glexec-debuginfo-0.9.6-1.1.osg.el6
+glexec-wrapper-scripts-0.0.6-1.2.osg.el6
+glideinwms-2.5.7-2.osg.el6
+glideinwms-factory-2.5.7-2.osg.el6
+glideinwms-factory-condor-2.5.7-2.osg.el6
+glideinwms-minimal-condor-2.5.7-2.osg.el6
+glideinwms-vofrontend-2.5.7-2.osg.el6
+glideinwms-vofrontend-condor-2.5.7-2.osg.el6
+glite-ce-monitor-1.13.1-18.osg.el6
+glite-ce-osg-ce-plugin-1.13.1-4.osg.el6
+globus-core-8.5-2.osg.el6
+globus-gass-cache-8.1-4.osg.el6
+globus-gass-cache-debuginfo-8.1-4.osg.el6
+globus-gass-cache-devel-8.1-4.osg.el6
+globus-gass-cache-program-5.0-5.osg.el6
+globus-gass-cache-program-debuginfo-5.0-5.osg.el6
+globus-gass-server-ez-4.1-4.osg.el6
+globus-gass-server-ez-debuginfo-4.1-4.osg.el6
+globus-gass-server-ez-devel-4.1-4.osg.el6
+globus-gass-server-ez-progs-4.1-4.osg.el6
+globus-gatekeeper-9.6-1.7.osg.el6
+globus-gatekeeper-debuginfo-9.6-1.7.osg.el6
+globus-gram-audit-3.1-4.osg.el6
+globus-gram-client-12.3-3.osg.el6
+globus-gram-client-debuginfo-12.3-3.osg.el6
+globus-gram-client-devel-12.3-3.osg.el6
+globus-gram-client-doc-12.3-3.osg.el6
+globus-gram-client-tools-10.0-5.osg.el6
+globus-gram-client-tools-debuginfo-10.0-5.osg.el6
+globus-gram-job-manager-13.34-0.1.osg.el6
+globus-gram-job-manager-callout-error-2.1-4.osg.el6
+globus-gram-job-manager-callout-error-debuginfo-2.1-4.osg.el6
+globus-gram-job-manager-callout-error-devel-2.1-4.osg.el6
+globus-gram-job-manager-callout-error-doc-2.1-4.osg.el6
+globus-gram-job-manager-condor-1.0-11.osg.el6
+globus-gram-job-manager-debuginfo-13.34-0.1.osg.el6
+globus-gram-job-manager-doc-13.34-0.1.osg.el6
+globus-gram-job-manager-fork-1.0-8.osg.el6
+globus-gram-job-manager-fork-debuginfo-1.0-8.osg.el6
+globus-gram-job-manager-fork-doc-1.0-8.osg.el6
+globus-gram-job-manager-fork-setup-poll-1.0-8.osg.el6
+globus-gram-job-manager-fork-setup-seg-1.0-8.osg.el6
+globus-gram-job-manager-managedfork-0.1-1.osg.el6
+globus-gram-job-manager-pbs-1.1-4.1.osg.el6
+globus-gram-job-manager-pbs-debuginfo-1.1-4.1.osg.el6
+globus-gram-job-manager-pbs-doc-1.1-4.1.osg.el6
+globus-gram-job-manager-pbs-setup-poll-1.1-4.1.osg.el6
+globus-gram-job-manager-pbs-setup-seg-1.1-4.1.osg.el6
+globus-gram-job-manager-scripts-4.1-3.1.osg.el6
+globus-gram-job-manager-scripts-doc-4.1-3.1.osg.el6
+globus-gram-job-manager-sge-1.0-7.osg.el6
+globus-gram-job-manager-sge-debuginfo-1.0-7.osg.el6
+globus-gram-job-manager-sge-doc-1.0-7.osg.el6
+globus-gram-job-manager-sge-setup-poll-1.0-7.osg.el6
+globus-gram-job-manager-sge-setup-seg-1.0-7.osg.el6
+globus-gram-protocol-11.2-3.osg.el6
+globus-gram-protocol-debuginfo-11.2-3.osg.el6
+globus-gram-protocol-devel-11.2-3.osg.el6
+globus-gram-protocol-doc-11.2-3.osg.el6
+globus-gridftp-server-6.5-1.6.osg.el6
+globus-gridftp-server-debuginfo-6.5-1.6.osg.el6
+globus-gridftp-server-devel-6.5-1.6.osg.el6
+globus-gridftp-server-progs-6.5-1.6.osg.el6
+globus-gridmap-callout-error-1.2-2.osg.el6
+globus-gridmap-callout-error-debuginfo-1.2-2.osg.el6
+globus-gridmap-callout-error-devel-1.2-2.osg.el6
+globus-gridmap-callout-error-doc-1.2-2.osg.el6
+globus-rsl-9.1-4.osg.el6
+globus-rsl-debuginfo-9.1-4.osg.el6
+globus-rsl-devel-9.1-4.osg.el6
+globus-rsl-doc-9.1-4.osg.el6
+globus-scheduler-event-generator-4.4-1.osg.el6
+globus-scheduler-event-generator-debuginfo-4.4-1.osg.el6
+globus-scheduler-event-generator-devel-4.4-1.osg.el6
+globus-scheduler-event-generator-doc-4.4-1.osg.el6
+globus-scheduler-event-generator-progs-4.4-1.osg.el6
+globus-simple-ca-3.0-5.osg.el6
+globus-xioperf-3.0-5.osg.el6
+globus-xioperf-debuginfo-3.0-5.osg.el6
+gratia-probe-1.12-1.osg.el6
+gratia-probe-bdii-status-1.12-1.osg.el6
+gratia-probe-common-1.12-1.osg.el6
+gratia-probe-condor-1.12-1.osg.el6
+gratia-probe-condor-events-1.12-1.osg.el6
+gratia-probe-dcache-storage-1.12-1.osg.el6
+gratia-probe-dcache-transfer-1.12-1.osg.el6
+gratia-probe-debuginfo-1.12-1.osg.el6
+gratia-probe-glexec-1.12-1.osg.el6
+gratia-probe-gram-1.12-1.osg.el6
+gratia-probe-gridftp-transfer-1.12-1.osg.el6
+gratia-probe-hadoop-storage-1.12-1.osg.el6
+gratia-probe-metric-1.12-1.osg.el6
+gratia-probe-pbs-lsf-1.12-1.osg.el6
+gratia-probe-psacct-1.12-1.osg.el6
+gratia-probe-services-1.12-1.osg.el6
+gratia-probe-sge-1.12-1.osg.el6
+gratia-probe-xrootd-storage-1.12-1.osg.el6
+gratia-probe-xrootd-transfer-1.12-1.osg.el6
+gridftp-hdfs-0.5.3-2.osg.el6
+gridftp-hdfs-debuginfo-0.5.3-2.osg.el6
+gums-1.3.18.009-2.osg.el6
+gums-client-1.3.18.009-2.osg.el6
+gums-service-1.3.18.009-2.osg.el6
+hadoop-0.20-osg-0.20.2+737-11.osg.el6
+jdk-1.6.0_31-fcs.3.osg.el6
+lcas-lcmaps-gt4-interface-0.2.4-1.3.osg.el6
+lcas-lcmaps-gt4-interface-debuginfo-0.2.4-1.3.osg.el6
+lcgdm-1.8.1.2-6.osg.el6
+lcgdm-debuginfo-1.8.1.2-6.osg.el6
+lcgdm-devel-1.8.1.2-6.osg.el6
+lcgdm-libs-1.8.1.2-6.osg.el6
+lcmaps-1.5.4-1.1.osg.el6
+lcmaps-basic-interface-1.5.4-1.1.osg.el6
+lcmaps-debuginfo-1.5.4-1.1.osg.el6
+lcmaps-devel-1.5.4-1.1.osg.el6
+lcmaps-globus-interface-1.5.4-1.1.osg.el6
+lcmaps-openssl-interface-1.5.4-1.1.osg.el6
+lcmaps-plugins-basic-1.5.0-3.2.osg.el6
+lcmaps-plugins-basic-debuginfo-1.5.0-3.2.osg.el6
+lcmaps-plugins-basic-ldap-1.5.0-3.2.osg.el6
+lcmaps-plugins-glexec-tracking-0.1.4-1.2.osg.el6
+lcmaps-plugins-glexec-tracking-debuginfo-0.1.4-1.2.osg.el6
+lcmaps-plugins-saz-client-0.3.4-1.1.osg.el6
+lcmaps-plugins-scas-client-0.3.4-1.1.osg.el6
+lcmaps-plugins-scas-client-debuginfo-0.3.4-1.1.osg.el6
+lcmaps-plugins-verify-proxy-1.5.2-1.2.osg.el6
+lcmaps-plugins-verify-proxy-debuginfo-1.5.2-1.2.osg.el6
+lfc-1.8.1.2-6.osg.el6
+lfc-devel-1.8.1.2-6.osg.el6
+lfc-dli-1.8.1.2-6.osg.el6
+lfc-libs-1.8.1.2-6.osg.el6
+lfc-perl-1.8.1.2-6.osg.el6
+lfc-python-1.8.1.2-6.osg.el6
+lfc-server-mysql-1.8.1.2-6.osg.el6
+lfc-server-postgres-1.8.1.2-6.osg.el6
+llrun-0.1.3-1.3.osg.el6
+llrun-debuginfo-0.1.3-1.3.osg.el6
+osg-ce-3.0.0-30.osg.el6
+osg-ce-condor-3.0.0-30.osg.el6
+osg-ce-lsf-3.0.0-30.osg.el6
+osg-ce-pbs-3.0.0-30.osg.el6
+osg-ce-sge-3.0.0-30.osg.el6
+osg-client-3.0.0-17.osg.el6
+osg-client-condor-3.0.0-17.osg.el6
+osg-configure-1.0.7-2.osg.el6
+osg-configure-ce-1.0.7-2.osg.el6
+osg-configure-cemon-1.0.7-2.osg.el6
+osg-configure-condor-1.0.7-2.osg.el6
+osg-configure-gip-1.0.7-2.osg.el6
+osg-configure-gratia-1.0.7-2.osg.el6
+osg-configure-lsf-1.0.7-2.osg.el6
+osg-configure-managedfork-1.0.7-2.osg.el6
+osg-configure-misc-1.0.7-2.osg.el6
+osg-configure-monalisa-1.0.7-2.osg.el6
+osg-configure-network-1.0.7-2.osg.el6
+osg-configure-pbs-1.0.7-2.osg.el6
+osg-configure-rsv-1.0.7-2.osg.el6
+osg-configure-sge-1.0.7-2.osg.el6
+osg-configure-squid-1.0.7-2.osg.el6
+osg-gridftp-3.0.0-7.osg.el6
+osg-gridftp-hdfs-3.0.0-2.osg.el6
+osg-gridftp-xrootd-3.0.0-2.osg.el6
+osg-gums-config-41-3.osg.el6
+osg-info-services-0.10-2.osg.el6
+osg-se-bestman-3.0.0-7.osg.el6
+osg-se-bestman-xrootd-3.0.0-4.osg.el6
+osg-se-cemon-3.0.0-4.osg.el6
+osg-site-verify-3.0.0-1.osg.el6
+osg-site-web-page-0.15-3.osg.el6
+osg-system-profiler-1.0.4-1.osg.el6
+osg-test-1.1.0-1.osg.el6
+osg-tested-internal-1-5.osg.el6
+osg-tested-internal-1-6.osg.el6
+osg-version-3.1.0-1.osg.el6
+osg-vo-map-0.0.1-1.osg.el6
+osg-voms-3.0.0-2.osg.el6
+osg-wn-client-3.0.0-15.osg.el6
+osg-wn-client-glexec-3.0.0-15.osg.el6
+pegasus-4.0.0-2.osg.el6
+pegasus-debuginfo-4.0.0-2.osg.el6
+rsv-3.7.0-1.osg.el6
+rsv-consumers-3.7.0-1.osg.el6
+rsv-core-3.7.0-1.osg.el6
+rsv-metrics-3.7.0-1.osg.el6
+vo-client-41-3.osg.el6
+vo-client-edgmkgridmap-41-3.osg.el6
+voms-admin-client-2.0.16-2.osg.el6
+voms-admin-client-debuginfo-2.0.16-2.osg.el6
+voms-admin-server-2.6.1-11.osg.el6
+voms-mysql-plugin-3.1.5.1-2.osg.el6
+voms-mysql-plugin-debuginfo-3.1.5.1-2.osg.el6
+xacml-1.1.1-1.2.osg.el6
+xacml-debuginfo-1.1.1-1.2.osg.el6
+xacml-devel-1.1.1-1.2.osg.el6
+xrootd-dsi-3.0.4-7.osg.el6
+xrootd-dsi-debuginfo-3.0.4-7.osg.el6
+xrootd-hdfs-1.7.0-2.osg.el6
+xrootd-hdfs-debuginfo-1.7.0-2.osg.el6
+xrootd-lcmaps-0.0.4-3.osg.el6
+xrootd-lcmaps-debuginfo-0.0.4-3.osg.el6
+</pre>
+
+<!-- vim:ft=twiki
+-->
