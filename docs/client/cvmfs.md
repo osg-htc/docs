@@ -148,7 +148,7 @@ directory. But note that it will initially appear to be empty:
 [user@client ~] $ ls /cvmfs
 [user@client ~] $
 ```
-
+<br>
 Directories within `/cvmfs` will not be mounted until you examine them. For instance:
 
 ```console
@@ -212,7 +212,7 @@ Unmounting /cvmfs/oasis.opensciencegrid.org: OK
 Unmounting /cvmfs/glast.egi.eu: OK
 Unmounting /cvmfs/nova.osgstorage.org: OK
 ```
-
+<br>
 ## How to get Help?
 
 If you cannot resolve the problem, there are several ways to receive help:
