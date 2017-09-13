@@ -1,0 +1,17 @@
+---++ !ReSSClassadExistsProbe
+
+The !ReSSClassadExistsProbe contacts the !ReSS Collector to check if the given site is advertising to the !ReSS. The default collectors are osg-ress-1.fnal.gov for the production sites and osg-ress-4.fnal.gov for the ITB sites.
+
+OSG CE installation process configures the !CEMon on the CE node to advertise site's information to the !ReSS Collector and BDII. If the site is well configured, !CEMon will advertise it's information to the !ReSS. However, there are several things that can go wrong. If your site is not found in !ReSS, follow the troubleshooting instructions at https://twiki.grid.iu.edu/twiki/bin/view/Trash/Trash/Trash/Trash/ResourceSelection/CEMonTroubleshootingGuide. If you need expert help, please open a GOC ticket describing the issue.
+
+---+++ Metric org.osg.ress.ress-classad-exists
+
+   * *CRITICAL:*
+      * If the classad is not found in the !ReSS Collector, the probe will report CRITICAL error. Follow the instructions in the troubleshooting guide linked above to find out the potential cause of the problem.
+
+   * *UKNOWN:*
+      * Cannot find condor_cron_status command in path
+      * Cannot find condor_status command in path
+
+
+If you have questions, contact the !VDT.
