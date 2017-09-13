@@ -135,7 +135,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../data/squid/">HTTP Cache</a>
+    <a class="" href="../../data/frontier-squid/">HTTP Cache</a>
                 </li>
     </ul>
 	    </li>
@@ -362,7 +362,7 @@ The version of cvmfs installed should be &gt;= 2.1.20-1.osg or greater.</p>
 </tbody>
 </table>
 <h3 id="networking">Networking</h3>
-<p>You will need network access to a local squid server such as the <a href="../InstallFrontierSquid">squid distributed by OSG</a>. The squid will need out-bound access to cvmfs stratum 1 servers.</p>
+<p>You will need network access to a local squid server such as the <a href="../../data/frontier-squid/">squid distributed by OSG</a>. The squid will need out-bound access to cvmfs stratum 1 servers.</p>
 <h3 id="upgrading">Upgrading</h3>
 <p>When upgrading to cvmfs 2.1.20, delete the setting of <code>CVMFS_SERVER_URL</code> in <code>/etc/cvmfs/domain.d/cern.ch.local</code>. If that's the only thing in the file (which is likely) then delete the whole file.</p>
 <p>When upgrading from a cvmfs 2.0.X version, all <code>/cvmfs</code> repositories must be unmounted in order to upgrade. When upgrading between 2.1.X versions, repositories may be mounted.</p>
