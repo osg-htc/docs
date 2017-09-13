@@ -1,0 +1,34 @@
+---++Condor Hold Code 3
+
+---+++Known causes:
+
+Hold Code 3 indicates that periodic-hold (in in the Condor submit file) evaluated to true.
+
+---+++Recommendations:
+
+If the job has a periodic release expression than it should continue execution when periodic-release is true.
+
+Otherwise, you can release it manually using condor_release.
+
+
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   * Local OWNER          = MarcoMambelli
+   * Local DOC_AREA       = User
+   * Local DOC_ROLE       = EndUser
+   * Local DOC_TYPE       = Troubleshooting
+   
+   * Local INCLUDE_REVIEW = %YES%
+   * Local INCLUDE_TEST   = %YES%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %YES%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = 
+   * Local REVIEW_PASSED  = %YES%
+   * Local TESTER         = 
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

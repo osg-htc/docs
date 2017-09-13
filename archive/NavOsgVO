@@ -1,0 +1,109 @@
+---+!! Virtual Organizations
+%DOC_STATUS_TABLE%
+%TOC%
+
+---+ About this Document
+ 
+   This document is meant as a hub and starting point for groups who wish to create a new Virtual Organization(VO) in the Open Science Grid.
+
+---+ About Virtual Organizations
+   * [[Documentation.WhatIsVO][What is a VO]]
+   * [[Documentation.VOAdminInOsg][VO organization in OSG]]
+   * [[Documentation.HowToFormaVO][Basic steps to form a new VO]]
+
+---+ VO Service Installation
+
+   This section lists the documents related to the installation of the VOMS service. The VOMS service is what provides individual sites with the list of users for a particular VO. This information is downloaded by an OSG site with their GUMS service, or a cron script, if they are running their site with a grid mapfile. 
+
+   * [[Documentation/Release3.InstallVoms][Install VOMS]]
+   * [[Documentation/Release3.UpgradeVomsService][Upgrade VOMS Service]]
+   * Documentation.AppInstallConfig
+
+---+ GUMS Installation
+
+The Grid User Mapping Service runs usually on an individual OSG site. The GUMS server downloads periodically an updated list of user Distinguished Names (DN) from each VOs VOMS Service for which it is configured. GUMS then uses the downloaded DN in combination with a set of rules to map a specific user DN to a local account. 
+
+   * Trash.ReleaseDocumentationInstallConfigureAndManageGUMS Not currently part of Release 3
+   * ReleaseDocumentation.GumsClientInstall Not currently part of Release 3
+   * Documentation.GumsConfiguration Not currently part of Release 3
+   * Trash.ReleaseDocumentationGumsHostCron Local site configuration for Gums Host Cron creation of the grid-mapfile using a GUMS server as a source
+
+---+ Local VOMS Operation
+
+   * [[Documentation.Release3.InstallVoms#Configure][Configure VOMS]]
+   * [[Documentation.Release3.TestOSGClient][Test OSG Client]]: Includes verification of VOMS proxy services
+   * [[Documentation.SupportCenterDocHub][Running a Suppport Center]]: Forming, running, and expectations of a Support Center
+
+---+ Local Site Operation
+
+   * [[Trash.Documentation_Release3ValidateSupportedVos][Validate Supported VOs]]: OSG Site information for testing your support for VOs
+   * Operations.VOPackageReleases VO package update releases and changes
+   * Documentation.AboutResourceAllocation VO Resource Allocation to Other VOs
+   * Documentation.UserAuthAndPrivilege  User Authorization
+
+---+ References
+
+   * Documentation.VOHelpResources
+   * Documentation.VOAdminInOsg
+   * Documentation.AboutResourceAllocation
+
+---+ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = ChanderSehgal
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = VO
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Navigation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = JoseCaballero
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
+-- Main.TerrenceMartin - 29 Nov 2011

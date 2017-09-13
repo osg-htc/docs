@@ -13,11 +13,11 @@ pages:
   - 'CA Certificates': 'common/ca.md'
   - 'Yum Repos': 'common/yum.md'
 - Install Guides - Client:
-  - 'CVMFS': 'client/cvmfs.md'
-  - 'Singularity': 'client/singularity.md'
   - 'Worker Node (RPM install)': 'client/wn.md'
   - 'Worker Node (tarball install)': 'client/wn-tarball.md'
   - 'Worker Node (OASIS install)': 'client/wn-oasis.md'
+  - 'CVMFS': 'client/cvmfs.md'
+  - 'Singularity': 'client/singularity.md'
 - Install Guides - Compute:
   - 'HTCondor-CE': 'compute-element/install-htcondor-ce.md'
 - Install Guides - Data:

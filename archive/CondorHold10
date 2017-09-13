@@ -1,0 +1,13 @@
+---++Condor Hold Code 10
+
+---+++Syntax
+
+=Code 10 subcode &lt;unix_errno&gt;=
+
+---+++Known causes:
+
+Hold Code 10 indicates that condor could not open the standard input stream.
+
+---+++Recommendations:
+
+Check your firewall settings and see [[InstallCondor#NetworkingReq][Condor ports]].

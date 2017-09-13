@@ -1,0 +1,177 @@
+%DOC_STATUS_TABLE%
+
+---+!! OSG Cleanup Scripts 
+%TOC{}%
+
+---+ About this Document
+<!-- useful variable definitions
+   * Set TWISTY_OPTS_DETAILED = mode="div" showlink="Show Detailed Output" hidelink="Hide" showimgleft="/twiki/pub/TWiki/TWikiDocGraphics/toggleopen-small.gif" hideimgleft="/twiki/pub/TWiki/TWikiDocGraphics/toggleclose-small.gif" remember="on" start="hide" 
+-->
+
+Here we describe how to install and configure the OSG Cleanup Scripts on your Linux machine.
+This document is intended for site administrators who want to clean up Globus files that build up over time on a Compute Element.
+
+---+ About the Software
+
+The cleanup script located at =/usr/sbin/osg-cleanup= is run by the =cron= daemon on the user's behalf.
+The default scripts that ship with it will clean up various Globus files and directories that are left behind.
+It is possible to add custom scripts (see below) to do cleanup specific to your site.
+
+The following files and directories in users' home directories will be cleaned.
+Note that the locations of these can be overriden (see [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/RelocatingGlobusDirs][here]] for details):
+   * Globus state directory: =/var/lib/globus/gram_job_state=
+   * User gass cache =&lt;user home&gt;/.globus/.gass_cache=
+   * User Globus job directory (old) =&lt;user home&gt;/.globus/job=
+   * User Globus job directory (new) =&lt;user home&gt;/.globus/&lt;user name&gt;/.globus/job=
+   * User GRAM job manager logs =&lt;user home&gt;/gram_job_mgr_&lt;integer&gt;.log=
+   * User GRAM scratch directories =&lt;user home&gt;/gram_scratch_&lt;random string&gt;=
+   * Globus Scheduler Event Generator logs =/var/lib/globus/globus-seg-*/*=
+
+---+ Installation
+
+The cleanup scripts are provided by the =osg-cleanup= RPM and are installed as part of the [[InstallComputeElement][Compute Element Installation]].
+
+=osg-configure= can be used to customize the behavior of the cleanup scripts, if desired.
+The configuration settings that =osg-configure= uses for the cleanup scripts can be found in =/etc/osg/config.d/10-misc.ini=.
+It is not necessary to modify them unless you want to customize the behavior of the cleanup scripts.
+The defaults are reasonable for most sites, with the following caveat:
+%IMPORTANT%
+If your site expects to have jobs that run for longer than 14 days, you must customize the =cleanup_age_in_days= variable.
+A limitation of =osg-cleanup= is that it does not detect whether or not the Globus temporary files it cleans up are in use.
+If a temporary file used by a running job gets removed, that job might be killed.
+Set the value of the =cleanup_age_in_days= variable to a number of days higher than you expect your long running jobs to complete.
+If for some reason this is not possible (for example, if the maximum runtime of a job is unbounded), do not use the =osg-cleanup= script.
+
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Show the sample 10-misc.ini configuration"}% 
+
+<pre class="file">
+; The OSG cleanup scripts are provided to help remove Globus files that                         
+; build up over time on your system.  For more information see the Twiki:                       
+;  https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCleanupScripts              
+
+; The age in days after which files that have not been accessed should be                       
+; deleted. Jobs that run longer than this number of days may be killed because                  
+; necessary files may be removed.  If this is a problem for you do not run the                  
+; osg-cleanup scripts and email vdt-support@opensciencegrid.org                                 
+; Default = 14                                                                                  
+;cleanup_age_in_days = 14                                                                       
+
+; The user's home directories that should be cleaned up.  The default value                     
+; is @vo-file.  This will open osg-user-vo-map.txt and try to get the list                      
+; of users from this file.  Alternatively you can specify a whitespace                          
+; separated list of users.                                                                      
+;cleanup_users_list = @vo-file                                                                  
+
+; The cron time at which the cleanup script will run.  By default it will run                   
+; once a day during the night.                                                                  
+;cleanup_cron_time = 15 1 * * *                                    
+</pre>
+
+%ENDTWISTY%
+
+---+ Starting OSG Cleanup Scripts
+
+Run this command to enable the =osg-cleanup= cron job:
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service osg-cleanup-cron start
+</pre>
+Run this command to enable the =osg-cleanup= cron job on reboot:
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/chkconfig osg-cleanup-cron on
+</pre>
+
+---+ Stopping OSG Cleanup Scripts
+
+Run this command to stop the =osg-cleanup= cron job:
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service osg-cleanup-cron stop
+</pre>
+Run this command to disable the =osg-cleanup= cron job on reboot:
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/chkconfig osg-cleanup-cron off
+</pre>
+
+---+ Advanced Topic: Adding Custom Cleanup Scripts
+
+The cron job automatically executes all scripts found in =/usr/libexec/osg-cleanup= directory that are:
+
+   * owned by _root_
+   * permissions set to _0700_
+
+The following environment variables are available to all children cleanup scripts:
+
+| *Variable* | *Comment* |
+| $OSG_CLEANUP_AGE | Age in days after which files will be deleted. |
+| $OSG_CLEANUP_USER_FILE | Path to a file containing a list of user accounts and home directories to clean up.  The format is: &lt;user&gt; &lt;user home&gt; |
+
+---+ Validation of Service Operation
+
+   1 Verify that the log file =/var/log/osg/osg-cleanup.log= has been created and inspect its contents.
+   1 Run the cleanup script =/usr/sbin/osg-cleanup= with the =--dry-run= option and inspect the output
+<pre class="rootscreen">%UCL_PROMPT_ROOT% /usr/sbin/osg-cleanup --dry-run</pre>
+
+---+ Known Issues
+
+The =--dry-run= option causes the scripts in =/usr/libexec/osg-cleanup= to not be run, decreasing its ability to validate the operation.
+See the JIRA ticket [[https://jira.opensciencegrid.org/browse/SOFTWARE-829][SOFTWARE-829]] for details.
+
+The scripts do not clean up custom user directories listed in RVF files.
+See the JIRA ticket [[https://jira.opensciencegrid.org/browse/SOFTWARE-828][SOFTWARE-828]] for details.
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+DOCUMENT OWNER
+======================
+ 
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = MatyasSelmeci
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|General|Trash/Trash/Integration|Monitoring|Operations|Security|SmallSite|Storage|User|VO)
+   * Local DOC_AREA       = ComputeElement
+ 
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Any|Developer|Documenter|Scientist|Student|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+ 
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (HowTo|Installation|Knowledge|Navigation|Planning|Team|Training|Troubleshooting)
+   * Local DOC_TYPE       = Installation
+ 
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+ 
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+ 
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+ 
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+ 
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+ 
+ 
+DOCUMENT REVIEWER
+======================
+ 
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MarcoMambelli
+ 
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+ 
+ 
+DOCUMENT TESTER
+======================
+ 
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = MarcoMambelli
+ 
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+ -->

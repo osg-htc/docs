@@ -1,0 +1,100 @@
+---+ Updating CA Certificates
+
+[[Release3110][OSG release 3.1.10]], released on 9 October 2012, contains updates to the IGTF CA certifcates including replacements for expiring certificates.
+
+Most sites should update their certificates soon, and some must do it very soon:
+
+   * If you do not update, end users who use the expiring UK !eScience CA will not be able to use your resources; this affects a few members of the WLCG collaboration
+   * RSV reports warnings for out-of-date CA certificates (now) and will start reporting an error (on 11 or 17 October, see below for details)
+   * Your WLCG availability measure will start to decline if and when RSV reports an error
+   * More generally, CA certificates are the base of the OSG trust system and should be kept up to date
+
+*Critically,* some sites will have to apply this specific update manually, at least this one time. Read on to see if this means you!
+
+---++ Do I Need to Perform Manual Updates?
+
+For each resource with CA certificates (e.g., CE, SE, worker node), use the following decision process:
+
+   1. Does the resource use OSG 1.2 (the Pacman-based system)? If so, updates to the CA certificates should be applied automatically and you do not need to take any action.
+   1. Does the resource use OSG 3 (the RPM-based system)? If yes:
+      a. Does the resource use =osg-ca-manage= for CA certificates? If so, updates to the CA certificates should be applied automatically and you do not need to take any action.
+      a. Does the resource get CA certificates from a shared filesystem? If so, apply this whole decision process to the resource that installs the CA certificates on that shared filesystem, but take no further action on machines that merely read the CA certificates.
+      a. Otherwise, you must perform a manual update of your CA certificates. Read on!
+
+---++ How Important Is the Update to Me?
+
+   1. If you are member of WLCG, and if your CE’s CA certificates are used to measure your availability: RSV now reports warnings about out-of-date CA certificates, and will begin reporting errors on Thursday, 11 October (if you have OSG 3.1.7 or earlier), or Wednesday, 17 October (if you have OSG 3.1.8 or later). Errors will cause your availability measure to go down.
+   2. If you are member of WLCG or have other collaborations in Europe, then you may have end users with a certificate signed from the old UK !eScience CA that is expiring at the end of October (this is a small percentage of the users from the UK).
+
+If #1, #2, or both are true, then the upgrade is important and urgent (particularly if #1 is true). Otherwise, the updates are recommended but not urgent.
+
+---+++ Examples
+
+I have the following resources in my site:
+
+   1. A CE with OSG 1.2.30
+   2. A cluster with OSG 3 Worker Nodes that mount the CA certificates via NFS from the CE (1)
+   3. A new cluster registered with WLCG, with OSG 3.1.9 on one CE and its worker nodes
+   4. A second CE registered with WLCG, with OSG 3.1.7 
+   5. I have also a CE with OSG 3.1.9 used by my local OSG collaborators here in Chicago
+
+It is very important to update (3) and (4) because I want to be all green for WLCG. And it is urgent, because my CE (4) will turn <span style="color: red; font-weight: bold;">RED</span> on Thursday, 11 October, starting to lower my availability in the WLCG reports. It is still a good idea to update (5), which must be done manually, but it is not critical. The CA certificates on (1) and (2) will be updated automatically, and so there is no further action for them. 
+
+---++ How Do I Perform the Manual Update?
+
+If you ar here we suppose that you have already installed some OSG software, at leaset the CA certificates form the OSG repositories. If you need to enable the OSG repositories please check our [[YumRepositories#Enabling_repositories][Yum document]].
+
+You can update *only* the CA certificates, which is simple and sufficient, or update your whole system; pick one of the subsections below:
+
+---+++ To Update Only the CA Certificates
+
+This method takes care of the immediate update concern, leaving the rest of your installation unchanged:
+
+<pre class="rootscreen">%UCL_PROMPT_ROOT% yum update igtf-ca-certs igtf-ca-certs-compat osg-ca-certs osg-ca-certs-compat</pre>
+
+*Note:* You will have only one of those four packages installed and hence updated. For the other three packages that you do not have installed, yum prints messages about not updating them. For example, if =osg-ca-certs= is installed and being updated, yum prints:
+
+<pre class="file">Package(s) igtf-ca-certs available, but not installed.
+Package(s) igtf-ca-certs-compat available, but not installed.
+Package(s) osg-ca-certs-compat available, but not installed.</pre>
+
+This behavior is expected and OK.
+
+If the packages result not available, e.g =No Match for argument: igtf-ca-certs= check if you have to [[YumRepositories][enable the OSG repository explicitly]] during the installation or if you arrived here by mistake. Are you using OSG 1.2, the Pacman version instead of OSG 3?
+
+---+++ To Update the Entire System
+
+Doing a full update will bring your entire system up-to-date, including system packages, OSG packages, *and* the CA certificates. Be sure to understand the implications of updating all packages, prior to using the following command.
+
+<pre class="rootscreen">%UCL_PROMPT_ROOT% yum update</pre>
+
+---++ How Do I Know If I Have the New Certificates?
+
+After the update, or if you think you already have the new CA certificates, you can check the CA certificate version by using one of the following methods:
+
+---+++ Check the Index File
+
+Check the version numbers in the far right column of the =/etc/grid-security/certificates/INDEX.txt= file: Each one should be 1.50 (for IGTF-distributed certificates) or 1.31NEW (for OSG-added ones).
+
+---+++ Check the RSV Monitor
+
+If the RSV metric monitoring the CA certificates is green, then you have the latest version (at least in that resource monitored by RSV).
+
+---+++ Check the RPM Versions
+
+List the CA certificate RPMs you have installed:
+
+<pre class="rootscreen">%UCL_PROMPT_ROOT% rpm -qa | grep ca-certs</pre>
+
+Compare the *package and version* part of the output with the ones below; *note:* you will have only one of the packages below, which is correct: 
+
+<pre class="file">
+igtf-ca-certs-1.50-2
+igtf-ca-certs-compat-1.50-2
+osg-ca-certs-1.31-2
+osg-ca-certs-compat-1.31-2
+</pre>
+
+---++ Need help?
+
+Do you need help with this update? [[HelpProcedure][Contact us for help]].

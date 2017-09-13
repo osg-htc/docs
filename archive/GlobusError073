@@ -1,0 +1,56 @@
+---++Globus Error: 73
+
+---+++Syntax:
+
+=GRAM Job submission failed because the job manager failed to open stdout (error 73)=
+
+---+++Known cause:
+
+The job tried to write stdout in a location it does not have permission to do so.
+
+---+++Recommendation:
+
+Make sure that stdout is directed to a directory in which a file can be created and written to.
+
+---+++Known cause:
+
+The remote job manager could not connect to the client.  This could be caused by a bad hostname (your hostname is not a fully qualified domain name) or a firewall blocking the traffic.
+
+---+++Recommendations:
+
+Be certain that your hostname is set correctly.
+
+Example:
+<pre class="screen">
+%UCL_PROMPT_SHORT% globus-hostname
+<fully qualified domain name>
+</pre>
+
+If it is not, add &lt;fully qualified domain name&gt; to /etc/hosts or:
+<pre class="screen">
+%UCL_PROMPT_SHORT% export $GLOBUS_HOSTNAME = <fully qualified domain name>
+</pre>
+
+---+++See Also
+Check your firewall and make sure your globus-tcp-port-range is set properly: [[Documentation/Release3.GlobusError043][Error 43]]
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   * Local OWNER          = MarcoMambelli
+   * Local DOC_AREA       = User
+   * Local DOC_ROLE       = EndUser
+   * Local DOC_TYPE       = Troubleshooting
+   
+   * Local INCLUDE_REVIEW = %YES%
+   * Local INCLUDE_TEST   = %YES%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %YES%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = 
+   * Local REVIEW_PASSED  = %YES%
+   * Local TESTER         = 
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

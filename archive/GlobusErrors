@@ -1,0 +1,70 @@
+%STARTINCLUDE%
+
+---+! Deprecated, please see the list in Trash.Documentation_Release3TroubleshootingGuide
+
+---++Globus Troubleshooting
+
+---+++Common Globus Error Codes:
+[[Documentation/Release3.GlobusError003][3: an I/O operation failed]]
+
+[[Documentation/Release3.GlobusError005][5: GRAM Job failed because the executable does not exist]]
+
+[[Documentation/Release3.GlobusError007][7: GRAM Job submission failed because an authentication operation failed]]
+
+[[Documentation/Release3.GlobusError012][12: GRAM Job submission failed because the connection to the server failed (check host and port)]]
+
+[[Documentation/Release3.GlobusError017][17: GRAM Job failed because the job failed when the job manager attempted to run it]]
+
+[[Documentation/Release3.GlobusError022][22. GRAM Job submission failed because the job manager failed to create an internal script argument file]]
+
+[[Documentation/Release3.GlobusError039][39: GRAM Job submission failed because the provided RSL string includes variables that could not be identified]]
+
+[[Documentation/Release3.GlobusError043][43: the job manager failed to stage the executable]]
+
+[[Documentation/Release3.GlobusError044][44: GRAM Job failed because the job manager failed to stage the stdin file]]
+
+[[Documentation/Release3.GlobusError047][47: the gatekeeper failed to run the job manager]]
+
+[[Documentation/Release3.GlobusError073][73: GRAM Job submission failed because the job manager failed to open stdout]]
+
+[[Documentation/Release3.GlobusError074][74: GRAM Job submission failed because the job manager failed to open stderr]]
+
+[[Documentation/Release3.GlobusError093][93: GRAM Job submission failed because the gatekeeper failed to find the requested service]]
+
+[[Documentation/Release3.GlobusError122][122: could not read the job state file]]
+
+[[Documentation/Release3.GlobusError129][129: the standard output/error size is different]]
+
+[[Documentation/Release3.GlobusError131][131: the user proxy expired (job is still running)]]
+
+[[Documentation/Release3.GlobusError135][135: GRAM Job failed because the job manager could not stage in a file]]
+
+[[Documentation/Release3.GlobusError136][136: the scratch directory could not be created]]
+
+[[Documentation/Release3.GlobusError155][155: GRAM Job failed because the job manager could not stage out a file]]
+
+---+++Other Globus Issues:
+
+[[Documentation/Release3.GlobusAuthFailures][Authentication failures]]
+
+%STOPINCLUDE%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   * Local OWNER          = MarcoMambelli
+   * Local DOC_AREA       = User
+   * Local DOC_ROLE       = EndUser
+   * Local DOC_TYPE       = Troubleshooting
+   
+   * Local INCLUDE_REVIEW = %YES%
+   * Local INCLUDE_TEST   = %YES%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %YES%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = 
+   * Local REVIEW_PASSED  = %YES%
+   * Local TESTER         = 
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
