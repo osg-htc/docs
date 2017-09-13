@@ -30,32 +30,30 @@ to run as an unprivileged user.  The OSG has installed singularity in
 [cvmfs](cvmfs), so if you have RHEL 7.4 or later you can avoid
 installing singularity at all and reduce vulnerability even further.
 
-## Requirements
+Before Starting
+---------------
 
-### Host and OS
+As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
--  OS is Red Hat Enterprise Linux 6, 7 or variants
--  `root` access
+- Ensure the host has [a supported operating system](../release/supported_platforms)
+- Obtain root access to the host
+- Prepare the [required Yum repositories](../common/yum)
 
-### Users and Groups
+## Via CVMFS (EL 7.4 only)
 
-singularity runs as the original user so no extra users and groups
-are created.
-
-## Avoiding Installation
-
-If you are using a RHEL 7.4 variant OS, you can avoid installing
-singularity by doing the following steps:
+If you are using a RHEL 7.4 variant OS, you can skip installation altogether and use singularity through OASIS:
 
 1. Set the `namespace.unpriv_enable=1` boot option.  The easiest way
     to do this is to add it in `/etc/sysconfig/grub` to the end of the
     GRUB_CMDLINE_LINUX variable, before the ending double-quote.
 2. Update the grub configuration:
 
+        :::console
         [root@client ~] $ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 3. Set a sysctl option as follows:
 
+        :::console
         [root@client ~] $ echo "user.max_user_namespaces = 15000" \
             > /etc/sysctl.d/90-max_user_namespaces.conf
 
@@ -64,6 +62,7 @@ singularity by doing the following steps:
 6. Log in as an ordinary unprivileged user and verify that singularity
     works:
 
+        :::console
         [user@client ~] $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity \
                 exec -C -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
                 ps -ef
@@ -71,42 +70,49 @@ singularity by doing the following steps:
         UID        PID  PPID  C STIME TTY          TIME CMD
         user         1     0  0 21:34 ?        00:00:00 ps -ef
 
-<br>
-## Install Instructions
+## Installing singularity
 
-If you want to go ahead with installing singularity, first
-make sure the
-[yum repositories](../common/yum.md) are correctly configured for OSG.
+To install singularity, make sure that your host is up to date before installing the required packages:
 
-### Installing singularity
+1. Clean yum cache:
 
-The singularity packages are split into two parts.  If you are 
-installing it on a worker node, where images do not need to be created
-of a manipulated, install just the smaller part to limit the amount
-of setuid-root code that is installed:
+        ::console
+        [root@client ~ ] $ yum clean all --enablerepo=*
 
-        [root@client ~] $ yum install singularity-runtime
-<br>
-If instead you want a full singularity installation, do this command:
+2. Update software:
 
-        [root@client ~] $ yum install singularity
-<br>
-### Configuring singularity
+        :::console
+        [root@client ~ ] $ yum update
+    This command will update **all** packages
+
+3. The singularity packages are split into two parts, choose the command that corresponds to your host:
+    - If you are installing singularity on a worker node, where images do not need to be created of a manipulated, install just the smaller part to limit the amount of setuid-root code that is installed:
+
+            :::console
+            [root@client ~] $ yum install singularity-runtime
+
+    - If you want a full singularity installation, run the following command:
+
+            :::console
+            [root@client ~] $ yum install singularity
+
+## Configuring singularity
 
 The default configuration of singularity is sufficient.  If you want
 to see what options are available, see `/etc/singularity/singularity.conf`.
 
-## Verifying singularity
+## Validating singularity
 
 After singularity is installed, as an ordinary user run the following
 command to verify it:
 
-        [user@client ~] $ singlarity exec -C -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 ps -ef
-        WARNING: Container does not have an exec helper script, calling 'cat' directly
-        UID        PID  PPID  C STIME TTY          TIME CMD
-        user         1     0  0 21:34 ?        00:00:00 ps -ef
+```console
+[user@client ~] $ singlarity exec -C -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 ps -ef
+WARNING: Container does not have an exec helper script, calling 'cat' directly
+UID        PID  PPID  C STIME TTY          TIME CMD
+user         1     0  0 21:34 ?        00:00:00 ps -ef
+```
 
-<br>
 ## Starting and Stopping services
 
 singularity has no services to start or stop.
