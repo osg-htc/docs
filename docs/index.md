@@ -12,8 +12,8 @@ Our most common software products include:
 
 * [HTCondor CE Installation](compute-element/install-htcondor-ce.md): Provides a _gateway_
   between the grid and your batch system.
-* [HTTP Proxy](data/squid.md): Caches the most commonly-used files at your
-  site to preserve bandwidth (a custom packaging of the venerable `squid2` software).
+* [HTTP Proxy](data/frontier-squid.md): Caches the most commonly-used files at your
+  site to preserve bandwidth (a custom packaging of the venerable `squid` software).
 * [CVMFS](client/cvmfs.md) The CernVM File System (CVMFS) is a global-scale, read-only,
   hierarchical filesystem.  CVMFS volumes distribute the majority of the scientific
   software used on OSG in addition to the OSG worker node client.

@@ -21,7 +21,7 @@ pages:
   - 'HTCondor-CE': 'compute-element/install-htcondor-ce.md'
 - Install Guides - Data:
   - 'GridFTP Server': 'data/gridftp.md'
-  - 'HTTP Cache': 'data/squid.md'
+  - 'HTTP Cache': 'data/frontier-squid.md'
 - Install Guides - Monitoring:
   - 'RSV': 'monitoring/rsv.md'
   - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
