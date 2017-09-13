@@ -222,6 +222,12 @@
     </url>
         
     <url>
+     <loc>https://opensciencegrid.github.io/docs/security/edg-mkgridmap/</loc>
+     <lastmod>2017-09-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>https://opensciencegrid.github.io/docs/client/glexec/</loc>
      <lastmod>2017-09-13</lastmod>
      <changefreq>daily</changefreq>

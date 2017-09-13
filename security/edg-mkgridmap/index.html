@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>EDG-Mkgridmap Install - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "EDG-Mkgridmap Install";
+    var mkdocs_page_input_path = "security/edg-mkgridmap.md";
+    var mkdocs_page_url = "/security/edg-mkgridmap/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Common</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/yum/">Yum Repos</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Client</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../client/wn/">Worker Node (RPM install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn-tarball/">Worker Node (tarball install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/wn-oasis/">Worker Node (OASIS install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/singularity/">Singularity</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Compute</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/install-htcondor-ce/">HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/gridftp/">GridFTP Server</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/frontier-squid/">HTTP Cache</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Monitoring</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../monitoring/rsv/">RSV</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../monitoring/rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Other</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Overviews</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Usage Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/using-wn/">Worker Node Environment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">In-Progress Docs</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca_updater/">CA Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/cert_scripts/">Certificate Request Scripts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job_router/">Job Router Recipe</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deprecated Software</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">EDG-Mkgridmap Install</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#about-this-document">About this Document</a></li>
+    
+
+    <li class="toctree-l3"><a href="#requirements">Requirements</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#certificates">Certificates</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#configuration">Configuration</a></li>
+    
+
+    <li class="toctree-l3"><a href="#enabledisable">Enable/Disable</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#enable">Enable</a></li>
+        
+            <li><a class="toctree-l4" href="#disable">Disable</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#50-chkconfig-onoff">5.0 Chkconfig on/off</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#51-on">5.1 On</a></li>
+        
+            <li><a class="toctree-l4" href="#52-off">5.2 Off</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#what-happens-behind-the-scenes">What happens behind the scenes?</a></li>
+    
+
+    <li class="toctree-l3"><a href="#what-happens-when-you-perform-an-upgrade">What happens when you perform an upgrade?</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#you-do-not-have-a-custom-edg-mkgridmap-configuration">You do not have a custom edg-mkgridmap configuration</a></li>
+        
+            <li><a class="toctree-l4" href="#you-have-a-custom-edg-mkgridmap-configuration">You have a custom edg-mkgridmap configuration</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#files">Files</a></li>
+    
+
+    <li class="toctree-l3"><a href="#troubleshooting">Troubleshooting</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#common-problems">Common Problems</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#how-to-get-help">How to get Help?</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../client/glexec/">Worker node glexec Install</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../common/help/">Get Help</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Deprecated Software &raquo;</li>
+        
+      
+    
+    <li>EDG-Mkgridmap Install</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/security/edg-mkgridmap.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>EDG-Mkgridmap is no longer be supported in OSG 3.4. The <a href="../lcmaps-voms-authentication/">LCMAPS VOMS Plugin</a> is the preferred method for site authentication in the OSG and is available in both OSG 3.3 and OSG 3.4.</p>
+</div>
+<h1 id="about-this-document">About this Document</h1>
+<p>This document describes how you can use <code>edg-mkgridmap</code> to authorize users accessing the resources that you provide.</p>
+<h1 id="requirements">Requirements</h1>
+<ul>
+<li>The purpose of using <code>edg-mkgridmap</code> is to create a grid-mapfile that will contain users from all VOs that are supported on your site. For this to happen, make sure that <strong>before</strong> you run <code>edg-mkgridmap</code>, you have created user accounts for all such VOs.</li>
+<li>The RPM named <code>edg-mkgridmap</code> should be installed on your node</li>
+</ul>
+<h2 id="certificates">Certificates</h2>
+<p>Certificates</p>
+<table>
+<thead>
+<tr>
+<th align="left">Certificate</th>
+<th align="left">Ownership and permissions</th>
+<th align="left">Path to certificate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Host certificate</td>
+<td align="left"><code>root</code>, <code>0644</code></td>
+<td align="left"><code>/etc/grid-security/hostcert.pem</code></td>
+</tr>
+<tr>
+<td align="left">Host key</td>
+<td align="left"><code>root</code>, <code>0600</code></td>
+<td align="left"><code>/etc/grid-security/hostkey.pem</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="configuration">Configuration</h1>
+<p>If you claim to support a VO, make sure the following is true:</p>
+<ul>
+<li>The VO is enabled in <code>/etc/edg-mkgridmap.conf</code></li>
+<li>The local user account to which VO members are mapped to exists on the CE</li>
+<li>After you run <code>edg-mkgridmap</code>, the VO should exist in <code>/var/lib/osg/supported-vo-list</code></li>
+</ul>
+<p>Let's begin with configuration:</p>
+<p><strong>Step 1</strong> Make sure for all Virtual Organizations (VOs) that you want to support, you have created a local user account. After that, you need to tell <code>edg-mkgridmap</code>, which Virtual Organizations (VOs) you want to support. For this, edit <code>/etc/edg-mkgridmap.conf</code> such that all VOs that you want to support are uncommented and all VOs that you do not want to support are commented out. Here is an example <code>edg-mkgridmap.conf</code> in which <code>cdf</code> VO is disabled and <code>fermilab</code> VO is enabled:</p>
+<p><code>/etc/edg-mkgridmap.conf</code>:</p>
+<div class="codehilite"><pre><span></span>#### GROUP: group URI [lcluser]
+#
+#-------------------
+# USER-VO-MAP cdf CDF -- 1 -- Dennis Box (dbox@fnal.gov)
+#group vomss://voms.fnal.gov:8443/voms/cdf cdf
+#group vomss://voms.cnaf.infn.it:8443/voms/cdf cdf
+#-------------------
+# USER-VO-MAP fermilab FERMILAB -- 2 -- Fermilab Service Desk (servicedesk@fnal.gov)
+group vomss://voms.fnal.gov:8443/voms/fermilab fermilab
+[root@server]#
+</pre></div>
+
+
+<p><strong>Step 2</strong> For any additional DNs that you want to support (i.e. you want them to be present in the final <code>grid-mapfile</code> that gets created), you need to add their <code>&lt;DN&gt; &lt;username&gt;</code> mapping to a local grid-mapfile, for example <code>/etc/osg/local-user-vo-map</code>. Here is an example of how each line of this file should look like.</p>
+<p><code>/etc/grid-security/local-grid-mapfile</code>:</p>
+<div class="codehilite"><pre><span></span>&quot;/DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Neha Sharma/CN=UID:neha&quot; neha
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The local gridmap file is used also to add certificates of service accounts like the one used for RSV testing.</p>
+</div>
+<p><strong>Step 3</strong> You need to tell <code>edg-mkgridmap</code> about this local grid-mapfile. For this, you need to use the <a href="http://vdt.cs.wisc.edu/extras/edg-mkgridmap.conf.html#reference:_gmf_local">gmf_local</a> directive. And if the entry in the local gridmap introduces a new user you should add it to a VO by adding a line <code><span style="color:red">&lt;username&gt;</span> <span style="color:red">&lt;voname&gt;</span></code><strong> in the local vo-map file </strong>. And if you use a new VO you must add a VO naming line in <code>edg-mkgridmap.conf</code> as well (one starting with <code># USER-VO-MAP ...</code> ). Here is an example of how your <code>edg-mkgridmap.conf</code> would now look like:</p>
+<p><code>/etc/edg-mkgridmap.conf</code>:</p>
+<div class="codehilite"><pre><span></span><span class="c c-Singleline">#### GROUP: group URI [lcluser]</span>
+<span class="c c-Singleline">#</span>
+<span class="c c-Singleline">#-------------------</span>
+<span class="c c-Singleline"># USER-VO-MAP cdf CDF -- 1 -- Dennis Box (dbox@fnal.gov)     </span>
+<span class="c c-Singleline">#group vomss://voms.fnal.gov:8443/voms/cdf cdf</span>
+<span class="c c-Singleline">#group vomss://voms.cnaf.infn.it:8443/voms/cdf cdf</span>
+<span class="c c-Singleline">#-------------------</span>
+<span class="c c-Singleline"># USER-VO-MAP fermilab FERMILAB -- 2 -- Fermilab Service Desk (servicedesk@fnal.gov)  </span>
+<span class="n">group</span> <span class="n">vomss:</span>//<span class="n">voms</span>.<span class="n">fnal</span>.<span class="n">gov:8443</span><span class="o">/</span><span class="n">voms</span><span class="o">/</span><span class="n">fermilab</span> <span class="n">fermilab</span>
+<span class="c c-Singleline"># USER-VO-MAP rsv RSV -- 101 -- Your Name (your@email)</span>
+<span class="n">gmf_local</span> /<span class="n">etc</span><span class="o">/</span><span class="n">grid-security</span><span class="o">/</span><span class="n">local-grid-mapfile</span>
+</pre></div>
+
+
+<p><strong>Step 4</strong> If you have additional <code>useraccount vo</code> mappings that you want to be included in final <code>/var/lib/osg/user-vo-map</code> file, add those mappings to <code>/etc/osg/local-user-vo-map</code> file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>More information on <code>edg-mkgridmap.conf</code> file can be found <a href="http://vdt.cs.wisc.edu/extras/edg-mkgridmap.conf.html">here</a></p>
+</div>
+<h1 id="enabledisable">Enable/Disable</h1>
+<h2 id="enable">Enable</h2>
+<p>You need to configure <code>edg-mkgridmap</code> to run automatically via a cron job. To do this, you need to run the following command.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> service edg-mkgridmap start
+<span class="go">Enabling periodic edg-mkgridmap:                           [  OK  ]</span>
+</pre></div>
+
+
+<p>The entry in cron file (<code>/etc/cron.d/edg-mkgridmap-cron</code>) looks like</p>
+<p><code>/etc/cron.d/edg-mkgridmap-cron</code>:</p>
+<div class="codehilite"><pre><span></span># Cron job running by default every 6 hours.
+# The lock file can be enabled or disabled via a
+# service edg-mkgridmap start
+# chkconfig edg-mkgridmap on
+
+# Note the lock file not existing is success hence the the slightly odd logic
+# below.
+# run every 6 hours but sleep for random time every 5 hours
+
+0 */6 * * * root perl -e &#39;sleep rand 18000&#39;; [ ! -f /var/lock/subsys/edg-mkgridmap ] || /usr/sbin/edg-mkgridmap
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As you can see above, this cron will run every 6 hours. If you do not want to wait that long, you can execute the command <code>/usr/sbin/edg-mkgridmap</code> directly on command line</p>
+</div>
+<h2 id="disable">Disable</h2>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> service edg-mkgridmap stop
+<span class="go">Disabling periodic edg-mkgridmap:                          [  OK  ]</span>
+</pre></div>
+
+
+<h1 id="50-chkconfig-onoff">5.0 Chkconfig on/off</h1>
+<h2 id="51-on">5.1 On</h2>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> chkconfig edg-mkgridmap on
+<span class="gp">[root@server]#</span> chkconfig --list edg-mkgridmap
+<span class="go">edg-mkgridmap   0:off   1:off   2:on    3:on    4:on    5:on    6:off</span>
+</pre></div>
+
+
+<h2 id="52-off">5.2 Off</h2>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> chkconfig edg-mkgridmap off
+<span class="gp">[root@server]#</span> chkconfig --list edg-mkgridmap
+<span class="go">edg-mkgridmap   0:off   1:off   2:off   3:off   4:off   5:off   6:off</span>
+</pre></div>
+
+
+<h1 id="what-happens-behind-the-scenes">What happens behind the scenes?</h1>
+<p>Upon execution, <code>edg-mkgridmap</code> reads the configuration file at location <code>/etc/edg-mkgridmap.conf</code> and for all VOs for which a local user account exists, it contacts their VOMS server to retrieve list of all users that belong to that VO. Its output is the following files</p>
+<ul>
+<li><code>/var/lib/osg/supported-vo-list</code>. This file contains names of all VOs you want to support minus all VOs for whom you do not have a user account. In other words, this is list of VOs that will <strong>actually</strong> be supported.</li>
+<li><code>/var/lib/osg/user-vo-map</code> . This file contains mapping of form 'useraccount VO' for all VOs in <code>/var/lib/osg/supported-vo-list</code> and also mappings from <code>/etc/osg/local-user-vo-map</code> file.</li>
+<li><code>/var/lib/osg/undefined-accounts</code>. This file contains names of all VOs for which it <strong>could not</strong> find user account.</li>
+<li><code>/etc/grid-security/grid-mapfile</code>. This file contains 'DN username' mappings that are present in local grid-mapfile (if you have one) and mappings for <strong>all</strong> users from <strong>all</strong> VOs that are present in <code>/var/lib/osg/supported-vo-list</code>.</li>
+</ul>
+<h1 id="what-happens-when-you-perform-an-upgrade">What happens when you perform an upgrade?</h1>
+<p>There are two scenerios:</p>
+<h2 id="you-do-not-have-a-custom-edg-mkgridmap-configuration">You do not have a custom edg-mkgridmap configuration</h2>
+<p>This means you are using the same <code>edg-mkgridmap.conf</code> file that came with prior installation of vo-client-edgmkgridmap package. In this case, during upgrade, the newer <code>edg-mkgridmap.conf</code> file will replace the old one. It will probably have new VOs in it and if you want to support them, you need to satisfy conditions as mentioned in Configuration section above.</p>
+<h2 id="you-have-a-custom-edg-mkgridmap-configuration">You have a custom edg-mkgridmap configuration</h2>
+<p>This means you have modified the <code>edg-mkgridmap.conf</code> file. In this case, during upgrade, the existing file <code>/etc/edg-mkgridmap.conf</code> will remain untouched and new configuration file will be saved as <code>/etc/edg-mkgridmap.conf.rpmnew</code>. You can compare the two files and make changes as required.</p>
+<h1 id="files">Files</h1>
+<table>
+<thead>
+<tr>
+<th><strong>File Location</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/etc/edg-mkgridmap.conf</td>
+<td>Main Edg-mkgridmap configuration file</td>
+</tr>
+<tr>
+<td>/etc/cron.d/edg-mkgridmap-cron</td>
+<td>Edg-mkgridmap cron file</td>
+</tr>
+<tr>
+<td>/etc/rc.d/init.d/edg-mkgridmap</td>
+<td>Edg-mkgridmap init file</td>
+</tr>
+<tr>
+<td>/var/log/edg-mkgridmap.log</td>
+<td>Edg-mkgridmap log file</td>
+</tr>
+</tbody>
+</table>
+<h1 id="troubleshooting">Troubleshooting</h1>
+<h2 id="common-problems">Common Problems</h2>
+<ul>
+<li><a href="#grid-mapfile-was-not-created">grid-mapfile not created</a></li>
+<li><a href="#error-code-64">Error code 64</a></li>
+</ul>
+<h3 id="troubleshooting-procedure">Troubleshooting Procedure</h3>
+<p>In case of problems first of all check the service log file <code>/var/log/edg-mkgridmap.log</code>. This file lists:</p>
+<ul>
+<li>any errors accessing individual voms servers or any general errors</li>
+<li>any mappings eliminated from the <code>/var/lib/osg/user-vo-map</code> and <code>/var/lib/osg/supported-vo-list</code> files where the Unix account a user would be mapped to does not exist. There is an <code>/var/lib/osg/undefined-accounts</code> file created that lists these accounts.</li>
+<li>changes from the last time the script was run</li>
+</ul>
+<p>There is also a <code>last_checked</code> file in <code>/etc/grid-security</code> that tells you the last time the cron process was run successfully (the <code>grid-mapfile</code> only gets updated if there is a difference from the previous run).</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> ls -al /etc/grid-security
+<span class="go">-rw-r--r--  1 root     root     1162888 Jul 12 02:14 grid-mapfile</span>
+<span class="go">-rw-r--r--  1 root     root           0 Jul 12 08:14 grid-mapfile.last_checked</span>
+</pre></div>
+
+
+<h3 id="grid-mapfile-was-not-created">Grid-Mapfile was not created</h3>
+<p>First make sure that the <em>edg-mkgridmap</em> service is enabled:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> /sbin/service edg-mkgridmap status
+<span class="go">Periodic edg-mkgridmap is enabled.</span>
+</pre></div>
+
+
+<p>Next, make sure an entry for <em>edg-mkgridmap</em> is present:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> cat /etc/cron.d/edg-mkgridmap-cron
+<span class="gp">#</span> Cron job running by default every <span class="m">6</span> hours.
+<span class="gp">#</span> The lock file can be enabled or disabled via a
+<span class="gp">#</span> service edg-mkgridmap start
+<span class="gp">#</span> chkconfig edg-mkgridmap on
+
+<span class="gp">#</span> Note the lock file not existing is success hence the the slightly odd logic
+<span class="gp">#</span> below.
+<span class="gp">#</span> run every <span class="m">6</span> hours but sleep <span class="k">for</span> random <span class="nb">time</span> every <span class="m">5</span> hours
+
+<span class="go">0 */6 * * * root perl -e &#39;sleep rand 18000&#39;; [ ! -f /var/lock/subsys/edg-mkgridmap ] || /usr/sbin/edg-mkgridmap</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If no entry for <em>edg-mkgridmap</em> is present, activate the service.</p>
+</div>
+<p>Last, run the <code>edg-mkgridmap</code> script on the command line and check that <code>/etc/grid-security/grid-mapfile</code> gets created:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> edg-mkgridmap
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The script will not output to the command line. Check the log file at <code>/var/log/edg-mkgridmap.log</code> instead.</p>
+</div>
+<h3 id="error-code-64">Error Code 64</h3>
+<p>This type of error occurs when the script established contact with the VOMS server but the requested group or subgroup does not exist there. It is really a <em>'not found'</em> type error. It is usually caused by a bad entry in the <code>/etc/edg-mkgridmap.conf</code> file.</p>
+<p>In the example below the configuration file contains a request for the VOMS server to send a list of all members of the uscms VO belonging to a non-existent <code>/uscms/production</code> group.</p>
+<p>Configuration file <code>/etc/edg-mkgridmap.conf</code> entry:</p>
+<div class="codehilite"><pre><span></span> group vomss://voms.fnal.gov:8443/voms/uscms/production uscms01
+</pre></div>
+
+
+<p>Command run on CE node:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> edg-mkgridmap
+<span class="go">  voms search(https://voms.fnal.gov:8443/voms/uscms/production/services/VOMSAdmin?method=listMembers): /voms/uscms/production/services/VOMSAdmin</span>
+
+<span class="go">   Exit with error(s) (code=64)</span>
+</pre></div>
+
+
+<p>On the VOMS host you are attempting to access, the following error can be seen in the <code>/var/log/tomcat6/voms-admin-VO_NAME.log</code> or <code>/var/log/tomcat/voms-admin-VO_NAME.log</code></p>
+<div class="codehilite"><pre><span></span>2005-05-26 15:51:04,003 INFO  [Ajp13Processor[8892][1]]  Connection from &quot;131.225.82.73&quot; by
+        /DC=org/DC=doegrids/OU=Services/CN=ce_host (serial 4511) -  service.InitSecurityContext
+2005-05-26 15:51:04,004 INFO  [Ajp13Processor[8892][1]]  listMembers (&quot;/uscms/production&quot;) -  admin.VOMSAdminSoapBindingImpl
+2005-05-26 15:51:04,013 ERROR [Ajp13Processor[8892][1]]  org.edg.security.voms.service.NotInDatabase:
+       Not in database: group &quot;/uscms/production&quot; -  connection.Database
+</pre></div>
+
+
+<h3 id="useful-options-for-edg-mkgridmap-troubleshooting">Useful Options for edg-mkgridmap troubleshooting</h3>
+<ul>
+<li><code>--help</code></li>
+<li><code>--version</code></li>
+<li><code>--conf=&lt;config_file&gt;</code>
+    (Default configuration file is at <code>/etc/edg-mkgridmap.conf</code>)</li>
+<li><code>--output=&lt;output_file&gt;</code></li>
+<li><code>--verbose</code></li>
+</ul>
+<h1 id="how-to-get-help">How to get Help?</h1>
+<p>If you cannot resolve the problem or have general questions, there are several ways to receive help:</p>
+<ul>
+<li>For bug support and issues, submit a ticket to the <a href="https://ticket.grid.iu.edu/goc">Grid Operations Center</a>.</li>
+<li>For community support and best-effort software team support contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#115;&#103;&#45;&#115;&#111;&#102;&#116;&#119;&#97;&#114;&#101;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#111;&#115;&#103;&#45;&#115;&#111;&#102;&#116;&#119;&#97;&#114;&#101;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.</li>
+</ul>
+<p>For a full set of help options, see <a href="../../common/help">Help Procedure</a>.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../client/glexec/" class="btn btn-neutral float-right" title="Worker node glexec Install">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../data/bestman-install/" class="btn btn-neutral" title="BeStMan Install"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../data/bestman-install/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../client/glexec/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
