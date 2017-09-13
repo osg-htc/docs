@@ -4,63 +4,28 @@
 GUMS Install Guide
 ==================
 
-
-Introduction
-============
+This document is intended for site administrators who want to install and configure the GUMS service.
 
 GUMS is a service that authorizes and maps users from their global (X.509) identity to a local (Linux user) identity. It is not a required service (some sites use the simple `edg-mkgridmap` to construct a `grid-mapfile` instead), but it is commonly used. GUMS is useful when more than one resource (Compute Element, Storage Element, etc.) needs to authorize or map users, because it helps them share data. It is particularly helpful when using gLExec at a site, because gLExec runs on every worker node and needs authorization and mapping information. GUMS is a web application that runs in Tomcat.
 
+Before Starting
+---------------
 
-About This Document
-===================
+Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
-This document is intended for site administrators who want to install and configure the GUMS service.
+-   **User IDs:** If they do not exist already, the installation will create the Linux users `mysql` (UID 27) and `tomcat` (UID 91)
+-   **Service certificate:** The GUMS service uses a host certificate at `/etc/grid-security/http/httpcert.pem` and an accompanying key at `/etc/grid-security/http/httpkey.pem`
+-   **Network ports:** Hosts using your GUMS server for authentication (e.g., HTCondor-CE, GridFTP) must be able to contact it on port 8443 (TCP)
 
+As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-Requirements
-============
+- Ensure the host has [a supported operating system](../release/supported_platforms)
+- Obtain root access to the host
+- Prepare the [required Yum repositories](../common/yum)
+- Install [CA certificates](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth)
 
-Host
-----
-
--   For security reasons, it is recommended to install GUMS on a separate host from the CE,
-    but it is not necessary
-
-Users
------
-
-The GUMS installation will create two users unless they exist already:
-
-| User     | Default UID | Comment                                                 |
-|:---------|:------------|:--------------------------------------------------------|
-| `mysql`  | 27          | Runs the MySQL database server, which GUMS uses         |
-| `tomcat` | 91          | Runs the Tomcat web application server, which runs GUMS |
-
-Note that if UIDs 27 and 91 are taken already but not used for the appropriate users, you will experience errors.
-
-Certificates
-------------
-
-| Certificate              | Owner, Permissions        | Path                                   |
-|:-------------------------|:--------------------------|:---------------------------------------|
-| HTTP service certificate | `tomcat:tomcat`, 0644     | `/etc/grid-security/http/httpcert.pem` |
-| HTTP service key         | `tomcat:tomcat`, 0600     | `/etc/grid-security/http/httpkey.pem`  |
-
-Networking
-----------
-
-GUMS communicates on TCP port 8443; this port must be accessible to the Compute Element and any other hosts that need to authenticate via GUMS.
-
-
-Installation Procedure
-======================
-
-As with all OSG software, you need to install the YUM repositories (see [instructions](../common/yum)).
-
-Install and Configure GUMS
---------------------------
-
-### Install GUMS
+Installing GUMS
+---------------
 
 1.  Whether installing or upgrading GUMS, please make sure to follow [these instructions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7#InstallingJava) for updating/installing Java to work correctly with GUMS
 2.  If you have an existing GUMS installation on the same host, shut down Tomcat.
@@ -78,6 +43,9 @@ Install and Configure GUMS
     !!! note
         This step will overwrite your `server.xml` file in your tomcat configuration directory (`/etc/tomcat6` on EL6, `/etc/tomcat` on EL7).
         If you are using Tomcat on this host for non-grid purposes, you may want to save the `server.xml` file first, run the script, then merge your own configuration back into the file
+
+Configuring GUMS
+----------------
 
 ### Configure GUMS database
 
@@ -223,84 +191,41 @@ By default, certain output is written to files named `/var/log/tomcat*/catalina.
 
 
 Services
-========
+--------
 
-The GUMS service is actually a web application running within the Tomcat web application server. It uses the MySQL database server for storage and the Fetch CRL service to maintain each CRL.
+The GUMS service is actually a web application running within the Tomcat web application server. It also uses the MySQL database server for storage and the Fetch CRL service to maintain each CRL. Choose the list of services based on your host's operating system:
 
-Starting and Enabling Services
-------------------------------
+- For EL6 hosts
 
-To start GUMS and associated services:
+    | Software          | Service name                          | Notes                                                                                  |
+    |:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
+    | Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui) for more info |
+    | MySQL             | `mysqld`                              |                                                                                        |
+    | Tomcat            | `tomcat6`                             |                                                                                        |
 
-1.  Start the database server and GUMS:
+- For EL7 hosts
 
-    For EL 6:
+    | Software          | Service name                          | Notes                                                                                  |
+    |:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
+    | Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui) for more info |
+    | MariaDB           | `mariadb`                             |                                                                                        |
+    | Tomcat            | `tomcat`                              |                                                                                        |
 
-        :::console
-        [root@server]# service mysqld start
-        [root@server]# service tomcat6 start
+Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as `root`):
 
-    For EL 7:
-
-        :::console
-        [root@server]# systemctl start mariadb
-        [root@server]# systemctl start tomcat
-
-1.  [Optional but recommended:] Enable services so that they start automatically when your system is powered on
-
-    For EL 6:
-
-        :::console
-        [root@server]# chkconfig mysqld on
-        [root@server]# chkconfig tomcat6 on
-
-    For EL 7:
-
-        :::console
-        [root@server]# systemctl enable mariadb
-        [root@server]# systemctl enable tomcat
-
-Stopping and Disabling Services
--------------------------------
-
-To stop GUMS, stop it and associated services in the opposite order from which you started them:
-
-1.  Stop GUMS and the database server:
-
-    For EL 6:
-
-        :::console
-        [root@server]# service tomcat6 stop
-        [root@server]# service mysqld stop
-
-    For EL 7:
-
-        :::console
-        [root@server]# systemctl stop tomcat
-        [root@server]# systemctl stop mariadb
-
-2.  Disable GUMS and the database server:
-
-    For EL 6:
-
-        :::console
-        [root@server]# chkconfig tomcat6 off
-        [root@server]# chkconfig mysqld off
-
-    For EL 7:
-
-        :::console
-        [root@server]# systemctl disable tomcat
-        [root@server]# systemctl disable mariadb
-
+| To...                                   | On EL6, run the command...                  | On EL7, run the command...                      |
+| :-------------------------------------- | :----------------------------------------   | :--------------------------------------------   |
+| Start a service                         | `service <SERVICE-NAME> start` | `systemctl start <SERVICE-NAME>`   |
+| Stop a  service                         | `service <SERVICE-NAME> stop`  | `systemctl stop <SERVICE-NAME>`    |
+| Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`  | `systemctl enable <SERVICE-NAME>`  |
+| Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off` | `systemctl disable <SERVICE-NAME>` |
 
 Validating GUMS
-===============
+---------------
 
 This section is optional, but if you would like to verify that your GUMS installation and configuration are good, consider using some or all of the sections below.
 
-Connect to the GUMS web page
-----------------------------
+### Connect to the GUMS web page ###
 
 Connect to `https://<HOSTNAME>:8443/gums/` to use your GUMS instance. You must have the certificate that you used for `gums-add-mysql-admin` above loaded in your browser. You should see the GUMS web page load.
 
@@ -332,15 +257,13 @@ total 8
 
 If you change the permissions/ownership, make sure to restart tomcat so that your changes take effect.
 
-Check accounts
---------------
+### Check accounts ###
 
 After you connect to the GUMS web page, go to the Summary tab to check the configuration. You should see several dozen OSG VOs listed.
 
 In the Account column on the summary page, you will see the local Unix user accounts that these VO users will be mapped to. It is critical that these accounts exist on the gatekeeper and worker nodes at your site. If they do not, there will be errors when users attempt to access your site.
 
-Update VO members list
-----------------------
+### Update VO members list ###
 
 GUMS contacts each VOMS server to update its knowledge of VO membership every 6 hours. After installing or updating GUMS, you should trigger the update manually by going to the Update VO Members tab, and clicking update.
 
@@ -358,8 +281,7 @@ For EL 7:
 
 With so many VOMS servers in the OSG config, several member updates may fail for various reasons (e.g., host down "connect timed out", bad or expired host certificates, etc.). Unfortunately, this situation is normal. Typically, you will see about 5 or 6 failed updates, with the rest succeeding. The update will take a while and then should display any errors that occurred during the updates. To get more details or track the update process in real time, look at `/var/log/gums-service-admin.log`.
 
-Map a known good user DN
-------------------------
+### Map a known good user DN ###
 
 1.  Go to Map Grid Identity to Account tab: `https://<HOSTNAME>:8443/gums/map_grid_identity_form.jsp`
 2.  Fill in the required info. Service DN means the DN of the host certificate of your CE (see above). Use the DN of a user (probably yourself) who you know belongs to a particular VO. Fill in the VO name in the VOMS FQAN field.
@@ -367,10 +289,9 @@ Map a known good user DN
 
 
 Miscellaneous Procedures
-========================
+------------------------
 
-Forcing GUMS to update the set of users
----------------------------------------
+### Forcing GUMS to update the set of users ###
 
 GUMS automatically contacts each VOMS server every 6 hours to update its knowledge of VO membership. To trigger a manual update:
 
@@ -390,8 +311,7 @@ GUMS automatically contacts each VOMS server every 6 hours to update its knowled
 
 With so many VOMS servers in the OSG config, several member updates may fail for various reasons (e.g., host down "connect timed out", bad or expired host certificates, etc.). Unfortunately, this situation is normal.
 
-Updating the GUMS configuration
--------------------------------
+### Updating the GUMS configuration ###
 
 Periodically, the OSG Grid Operations Center will release an updated template for the GUMS configuration that updates information about an existing VO or adds a new VO. You may get the update as part of a regular update process, or you can force an update by using yum:
 
@@ -417,10 +337,9 @@ This step does **not** update your GUMS configuration (`/etc/gums/gums.config`) 
 
 
 Troubleshooting
-===============
+---------------
 
-Useful Configuration and Log Files
-----------------------------------
+### Useful Configuration and Log Files ###
 
 Configuration Files
 
@@ -450,8 +369,7 @@ Log files
 |                    | `/var/log/gums/gums-egee-security.root.log` | GUMS may also output some security related messages to this file as well. |
 |                    | `/var/log/gums/gums-privilege.root.log`     | GUMS outputs mapping related errors to this file.                         |
 
-Tuning GUMS for a big Site
---------------------------
+### Tuning GUMS for a big Site ###
 
 The [GUMS scalability page](../security/gums-scalability) contains several performance tips built from the experience of running the service on FermiGrid, a big OSG Site.
 
@@ -467,5 +385,30 @@ References
 
 -   [Official Tomcat 6 documentation](https://tomcat.apache.org/tomcat-6.0-doc)
 -   [Official Tomcat 7 documentation](https://tomcat.apache.org/tomcat-7.0-doc)
--   [Official Hibernate documentation](http://www.hibernate.org/docs) (Hibernate is the GUMS database interface)
+-   [Official Hibernate documentation](http://hibernate.org/orm/documentation/) (Hibernate is the GUMS database interface)
 
+### Host ###
+   For security reasons, it is recommended to install GUMS on a separate host from the CE,
+    but it is not necessary
+
+### Users ###
+
+The GUMS installation will create two users unless they exist already:
+
+| User     | Default UID | Comment                                                 |
+|:---------|:------------|:--------------------------------------------------------|
+| `mysql`  | 27          | Runs the MySQL database server, which GUMS uses         |
+| `tomcat` | 91          | Runs the Tomcat web application server, which runs GUMS |
+
+Note that if UIDs 27 and 91 are taken already but not used for the appropriate users, you will experience errors.
+
+### Certificates ###
+
+| Certificate              | Owner, Permissions        | Path                                   |
+|:-------------------------|:--------------------------|:---------------------------------------|
+| HTTP service certificate | `tomcat:tomcat`, 0644     | `/etc/grid-security/http/httpcert.pem` |
+| HTTP service key         | `tomcat:tomcat`, 0600     | `/etc/grid-security/http/httpkey.pem`  |
+
+### Networking ###
+
+GUMS communicates on TCP port 8443; this port must be accessible to the Compute Element and any other hosts that need to authenticate via GUMS.
