@@ -1,0 +1,44 @@
+---++Globus Error: 47
+
+---+++Syntax:
+
+=the gatekeeper failed to run the job manager (error code 47)=
+
+---+++Known causes:
+
+The gatekeeper could not run the job manager.
+ 
+Note: This has also been observed when the user's DN is in the gridmap file but their entry is not mapped to an account.
+
+Another possible reason is wrong permissions on /tmp meaning that the proxy cert is not copied onto the machine (in the case of EGEE job submission). This can easily happen in the case of virtual machine creation. 
+
+---+++Recommendations:
+
+Check the name of the job manager specified and be certain it is correct.  If you are sure it is correct, contact the site admin and let them know because the ownership on the job manager could be incorrect or it could be pointing to the wrong file.
+ 
+Also, ask the admin to check the gridmap file and see if your DN has a local account.
+
+Check if /tmp has correct permission. Fix: 
+<pre class="screen">
+%UCL_PROMPT_SHORT% chmod a+wxt /tmp
+</pre>
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   * Local OWNER          = MarcoMambelli
+   * Local DOC_AREA       = User
+   * Local DOC_ROLE       = EndUser
+   * Local DOC_TYPE       = Troubleshooting
+   
+   * Local INCLUDE_REVIEW = %YES%
+   * Local INCLUDE_TEST   = %YES%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %YES%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = 
+   * Local REVIEW_PASSED  = %YES%
+   * Local TESTER         = 
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

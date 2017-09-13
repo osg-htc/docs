@@ -1,0 +1,44 @@
+---++Globus Error: 93
+
+---+++Syntax:
+
+=GRAM Job submission failed because the gatekeeper failed to find the requested service (error code 93)=
+
+or
+
+=Globus error 93: the gatekeeper failed to find the requested service=
+
+---+++Known causes:
+
+This error occurs when the client attempts to use a jobmanager that does not exist on the server.
+
+---+++Recommendations:
+
+Check the spelling on the jobmanager's name and verify that it exists on the server at $GLOBUS_LOCATION/etc/grid-services.
+Examples of job managers would be fork, condor or pbs.
+
+Example of correct syntax: 
+<pre class="screen">
+%UCL_PROMPT_SHORT% globus-job-run $HOST/jobmanager-fork /bin/date
+Thu Oct  5 12:25:16 CDT 2006
+</pre>
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   * Local OWNER          = MarcoMambelli
+   * Local DOC_AREA       = User
+   * Local DOC_ROLE       = EndUser
+   * Local DOC_TYPE       = Troubleshooting
+   
+   * Local INCLUDE_REVIEW = %YES%
+   * Local INCLUDE_TEST   = %YES%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %YES%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = 
+   * Local REVIEW_PASSED  = %YES%
+   * Local TESTER         = 
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

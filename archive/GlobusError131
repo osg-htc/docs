@@ -1,0 +1,54 @@
+---++Globus Error: 131
+
+---+++Syntax:
+
+=Globus error 131: the user proxy expired (job is still running)=
+
+---+++Known causes:
+
+The job did not complete before the user's proxy (certificate authentication) with the grid expired.  Doing condor_q you will show you the held job.
+
+---+++Recommendations:
+
+   * Renew your grid proxy and release the held jobs using Condor:
+
+Example: 
+
+<verbatim>
+$ grid-proxy-init
+Enter GRID pass phrase for this identity: 
+Creating proxy ........................................ Done
+Your proxy is valid until: <date>
+</verbatim>
+<verbatim>
+$ condor_release <job id or -all>
+All jobs released.
+</verbatim>
+
+   * Prevention: The default grid proxy expires after 12 hours.  If a job is expected to run for longer than 12 hours, it is possible to specify the duration of a proxy using:
+
+<verbatim>
+$ grid-proxy-init -valid <hh:mm>
+</verbatim>
+
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   * Local OWNER          = MarcoMambelli
+   * Local DOC_AREA       = User
+   * Local DOC_ROLE       = EndUser
+   * Local DOC_TYPE       = Troubleshooting
+   
+   * Local INCLUDE_REVIEW = %YES%
+   * Local INCLUDE_TEST   = %YES%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %YES%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = 
+   * Local REVIEW_PASSED  = %YES%
+   * Local TESTER         = 
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

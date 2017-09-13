@@ -1,0 +1,38 @@
+---++Globus Error: 135
+
+---+++Syntax:
+
+<verbatim>
+GRAM Job failed because the job manager could not stage in a file (error code 135)
+</verbatim>
+
+---+++Known causes:
+
+This error usually occurs when the server cannot read the input file from local host.
+
+---+++Recommendations:
+
+Check permissions on the directory from which the input is supposed to be read and make sure that it is readable.
+
+
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   * Local OWNER          = MarcoMambelli
+   * Local DOC_AREA       = User
+   * Local DOC_ROLE       = EndUser
+   * Local DOC_TYPE       = Troubleshooting
+   
+   * Local INCLUDE_REVIEW = %YES%
+   * Local INCLUDE_TEST   = %YES%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %YES%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = 
+   * Local REVIEW_PASSED  = %YES%
+   * Local TESTER         = 
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

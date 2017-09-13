@@ -1,0 +1,37 @@
+---++Globus Error: 5
+
+---+++Syntax:
+
+=GRAM Job failed because the executable does not exist (error code 5)=
+
+---+++Known causes:
+
+This occurs when the client attempts to run an executable on the remote site and the remote site cannot locate that executable.
+
+---+++Recommendations:
+
+Check the spelling on the executable's name and verify that your program attempts to invoke the executable at the proper location on the remote site as well as the fact that you have permission to execute in that location.
+
+
+
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   * Local OWNER          = MarcoMambelli
+   * Local DOC_AREA       = User
+   * Local DOC_ROLE       = EndUser
+   * Local DOC_TYPE       = Troubleshooting
+   
+   * Local INCLUDE_REVIEW = %YES%
+   * Local INCLUDE_TEST   = %YES%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %YES%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = 
+   * Local REVIEW_PASSED  = %YES%
+   * Local TESTER         = 
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

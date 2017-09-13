@@ -1,0 +1,50 @@
+---++Globus Error: 129
+
+---+++Syntax:
+
+=Globus error 129: the standard output/error size is different=
+
+---+++Known causes:
+
+This error is seen when submitting jobs through Condor G.  After a job has completed, Condor checks to make certain that the stdout and stderr file sizes match those returned by the job.  If they do not, you receive error 129.  
+ 
+This error is usually a result of writing both the output and error of a job to the same file.  Each job must direct error and output to separate files.
+
+---+++Recommendations:
+
+In your submit file, specify different files for stdout and stderr:
+
+For a single job:
+<verbatim>
+output=my_job.output
+error=my_job.error
+</verbatim>
+
+for multiple jobs:
+<verbatim>
+arguments=Example.$(Cluster).$(Process)
+output=my_job.output.$(Process)
+error=my_job.error.$(Process)
+</verbatim>
+
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   * Local OWNER          = MarcoMambelli
+   * Local DOC_AREA       = User
+   * Local DOC_ROLE       = EndUser
+   * Local DOC_TYPE       = Troubleshooting
+   
+   * Local INCLUDE_REVIEW = %YES%
+   * Local INCLUDE_TEST   = %YES%
+   * Local REVIEW_READY   = %YES%
+   * Local TEST_READY     = %YES%
+   * Local RELEASE_READY  = %YES%
+
+   * Local REVIEWER       = 
+   * Local REVIEW_PASSED  = %YES%
+   * Local TESTER         = 
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
