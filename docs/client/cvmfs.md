@@ -1,102 +1,101 @@
-
 # Install CVMFS
 
 Here we describe how to install the
 [CVMFS](http://cernvm.cern.ch/portal/filesystem) (Cern-VM file system) client.
 This document is intended for system administrators who wish to
-install this client to have access to files distributed by cvmfs
+install this client to have access to files distributed by CVMFS
 servers via HTTP.
 
 !!! note "Applicable versions"
     The applicable software versions for this document are OSG Version >= 3.4.3.
-    The version of cvmfs installed should be >= 2.4.1
+    The version of CVMFS installed should be >= 2.4.1
 
-## Requirements
+Before Starting
+---------------
 
-### Host and OS
+Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
--  OS is Red Hat Enterprise Linux 6, 7 or variants
--  `root` access
--  Sufficient (~20GB+20%) cache space reserved, preferably in a
-   separate filesystem (details [below](#configuring-cvmfs))
+-   **User IDs:** If they do not exist already, the installation will create the `cvmfs` Linux user
+-   **Group IDs:** If they do not exist already, the installation will create the Linux users `cvmfs` and `fuse`
+-   **Network ports:** You will need network access to a local squid server such as the [squid distributed by OSG](../data/frontier-squid.md). The squid will need out-bound access to cvmfs stratum 1 servers.
+-   **Host choice:** -  Sufficient (~20GB+20%) cache space reserved, preferably in a separate filesystem (details [below](#configuring-cvmfs))
+-   **FUSE**: CVMFS requires FUSE
 
-### Users and Groups
+As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-This installation will create one user unless it already exists
+- Ensure the host has [a supported operating system](../release/supported_platforms)
+- Obtain root access to the host
+- Prepare the [required Yum repositories](../common/yum)
+- Install [CA certificates](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth)
 
-| User    | Comment                   |
-|:--------|:--------------------------|
-| `cvmfs` | CernVM-FS service account |
+## Installing CVMFS
 
-The installation will also create a cvmfs group and default the cvmfs
-user to that group. In addition, if the fuse rpm is not for some
-reason already installed, installing cvmfs will also install fuse and
-that will create another group:
+The following will install CVMFS from the OSG yum repository. It will also install fuse and autofs if you do not have them, and it will install the configuration for the OSG CVMFS distribution which is called OASIS. To simplify installation, OSG provides convenience RPMs that install all required software with a single command.
 
-| Group   | Comment                   | Group members |
-|:--------|:--------------------------|:--------------|
-| `cvmfs` | CernVM-FS service account | none          |
-| `fuse`  | FUSE service account      | `cvmfs`       |
+1. Clean yum cache:
 
-### Networking
+        ::console
+        [root@client ~ ] $ yum clean all --enablerepo=*
 
-You will need network access to a local squid server such as the
-[squid distributed by OSG](../data/frontier-squid.md). The squid will need
-out-bound access to cvmfs stratum 1 servers.
+2. Update software:
 
-### Upgrading
+        :::console
+        [root@client ~ ] $ yum update
+    This command will update **all** packages
 
-When upgrading, use the same `yum install osg-oasis` command as a fresh
-install in order to get the latest version of all dependent packages.
+3. Install CVMFS software:
 
-## Install Instructions
-
-Prior to installing CVMFS, make sure the
-[yum repositories](../common/yum.md) are correctly configured for OSG.
-
-### Installing cvmfs
-
-The following will install cvmfs from the OSG yum repository. It will
-also install fuse and autofs if you do not have them, and it will
-install the configuration for the OSG cvmfs distribution which is
-called OASIS.
-
+        :::console
         [root@client ~] $ yum install osg-oasis
-<br>
-### Setup of fuse and automount
 
-On EL6, create or edit `/etc/fuse.conf`. It should contain the
-following in order to allow fuse to do proper file ownership:
+## Setup of FUSE and automount
+
+FUSE and automount are required for CVMFS and the steps to configure them are different on EL6 vs EL7. Follow the section that is appropriate for your host's OS:
+
+* [For EL6 hosts](#for-el6-hosts)
+* [For EL7 hosts](#for-el7-hosts)
+
+### For EL6 hosts
+
+1. Create or edit `/etc/fuse.conf` so that it contains:
 
         user_allow_other
-
-That is the default on EL7 so you do not need to change it there.
-
-On EL6, also create or edit `/etc/auto.master` to have the following
-contents to enable automounting.  On EL7, instead put the same
-contents into `/etc/auto.master.d/cvmfs.autofs`:
+    
+2. Create or edit `/etc/auto.master` to have the following contents to enable automounting:
 
         /cvmfs /etc/auto.cvmfs
-<br>
-Restart autofs to make the change take effect.  On EL6 that's done with
 
+3. Restart autofs to make the change take effect:
+
+        :::console
         [root@client ~] $ service autofs restart
-<br>
-and on EL7 it is done with:
+            
+### For EL7 hosts
 
+1. Add the following to `/etc/auto.master.d/cvmfs.autofs`:
+
+        /cvmfs /etc/auto.cvmfs
+      
+2. Restart autofs to make the change take effect:
+
+        :::console
         [root@client ~] $ systemctl restart autofs
 <br>
-### Configuring cvmfs
+
+
+## Configuring CVMFS
 
 Create or edit `/etc/cvmfs/default.local`, a file that controls the
-cvmfs configuration. Below is a sample configuration, but please note
+CVMFS configuration. Below is a sample configuration, but please note
 that you will need to **edit the parts in %RED%red%ENDCOLOR%**. In
 particular, the `CVMFS_HTTP_PROXY` line below must be edited for your
 site.
 
-    CVMFS_REPOSITORIES="`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u)|tr ' ' ,`"
-    CVMFS_QUOTA_LIMIT=%RED%20000%ENDCOLOR%
-    CVMFS_HTTP_PROXY=%RED%"http://squid.example.com:3128"%ENDCOLOR%
+```
+CVMFS_REPOSITORIES="`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u)|tr ' ' ,`"
+CVMFS_QUOTA_LIMIT=%RED%20000%ENDCOLOR%
+CVMFS_HTTP_PROXY=%RED%"http://squid.example.com:3128"%ENDCOLOR%
+```
 <br>
 CVMFS by default allows any repository to be mounted, no matter what
 the setting of `CVMFS_REPOSITORIES` is; that variable is used by support
@@ -106,7 +105,7 @@ above is so that those tools will use two common repositories plus any
 additional that have been mounted.  You may want to choose a different
 set of always-known repositories.
 
-Set up a list of cvmfs HTTP proxies to retrieve from in
+Set up a list of CVMFS HTTP proxies to retrieve from in
 `CVMFS_HTTP_PROXY`. If you do not have any squid at your site follow
 the instructions to [install squid from OSG](InstallFrontierSquid).
 Vertical bars separating proxies means to load balance between them
@@ -125,8 +124,8 @@ will be stored in `/var/lib/cvmfs` by default; to override the
 location, set `CVMFS_CACHE_BASE` in `/etc/cvmfs/default.local`. Note
 that an additional 1000 MB is allocated for a separate osgstorage.org
 repositories cache in `$CVMFS_CACHE_BASE/osgstorage`. To be safe, make
-sure that at least 20% more than $CVMFS_QUOTA_LIMIT + 1000 MB of space
-stays available for cvmfs in that filesystem. This is very important,
+sure that at least 20% more than `$CVMFS_QUOTA_LIMIT` + 1000 MB of space
+stays available for CVMFS in that filesystem. This is very important,
 since if that space is not available it can cause many I/O errors and
 application crashes. Many system administrators choose to put the
 cache space in a separate filesystem, which is a good way to manage
@@ -137,36 +136,41 @@ it.
     new cache directory must be labelled with SELinux type
     `cvmfs_cache_t`. This can be done by executing the following command:
 
+        :::console
         [user@client ~] $ chcon -R -t cvmfs_cache_t %RED%$CVMFS_CACHE_BASE%ENDCOLOR%
-<br>
-## Verifying cvmfs
 
-After cvmfs is installed, you should be able to see the `/cvmfs`
+## Validating CVMFS
+
+After CVMFS is installed, you should be able to see the `/cvmfs`
 directory. But note that it will initially appear to be empty:
 
-        [user@client ~] $ ls /cvmfs
-        [user@client ~] $
-<br>
+```console
+[user@client ~] $ ls /cvmfs
+[user@client ~] $
+```
+
 Directories within `/cvmfs` will not be mounted until you examine them. For instance:
 
-        [user@client ~] $ ls /cvmfs
-        [user@client ~] $ ls -l /cvmfs/atlas.cern.ch
-        total 1
-        drwxr-xr-x 8 cvmfs cvmfs 3 Apr 13 14:50 repo
-        [user@client ~] $ ls -l /cvmfs/oasis.opensciencegrid.org/cmssoft
-        total 1
-        lrwxrwxrwx 1 cvmfs cvmfs 18 May 13  2015 cms -> /cvmfs/cms.cern.ch
-        [user@client ~] $ ls -l /cvmfs/glast.egi.eu
-        total 5
-        drwxr-xr-x 9 cvmfs cvmfs 4096 Feb  7  2014 glast
-        [user@client ~] $ ls -l /cvmfs/nova.osgstorage.org
-        total 6
-        lrwxrwxrwx 1 cvmfs cvmfs   43 Jun 14  2016 analysis -> pnfs/fnal.gov/usr/nova/persistent/analysis/
-        lrwxrwxrwx 1 cvmfs cvmfs   32 Jan 19 11:40 flux -> pnfs/fnal.gov/usr/nova/data/flux
-        drwxr-xr-x 3 cvmfs cvmfs 4096 Jan 19 11:39 pnfs
-        [user@client ~] $ ls /cvmfs
-        atlas.cern.ch                   glast.egi.eu         oasis.opensciencegrid.org
-        config-osg.opensciencegrid.org  nova.osgstorage.org
+```console
+[user@client ~] $ ls /cvmfs
+[user@client ~] $ ls -l /cvmfs/atlas.cern.ch
+total 1
+drwxr-xr-x 8 cvmfs cvmfs 3 Apr 13 14:50 repo
+[user@client ~] $ ls -l /cvmfs/oasis.opensciencegrid.org/cmssoft
+total 1
+lrwxrwxrwx 1 cvmfs cvmfs 18 May 13  2015 cms -> /cvmfs/cms.cern.ch
+[user@client ~] $ ls -l /cvmfs/glast.egi.eu
+total 5
+drwxr-xr-x 9 cvmfs cvmfs 4096 Feb  7  2014 glast
+[user@client ~] $ ls -l /cvmfs/nova.osgstorage.org
+total 6
+lrwxrwxrwx 1 cvmfs cvmfs   43 Jun 14  2016 analysis -> pnfs/fnal.gov/usr/nova/persistent/analysis/
+lrwxrwxrwx 1 cvmfs cvmfs   32 Jan 19 11:40 flux -> pnfs/fnal.gov/usr/nova/data/flux
+drwxr-xr-x 3 cvmfs cvmfs 4096 Jan 19 11:39 pnfs
+[user@client ~] $ ls /cvmfs
+atlas.cern.ch                   glast.egi.eu         oasis.opensciencegrid.org
+config-osg.opensciencegrid.org  nova.osgstorage.org
+```
 <br>
 ### Troubleshooting problems
 
@@ -177,7 +181,7 @@ steps to debug:
   `mount -t cvmfs REPOSITORYNAME /mnt/cvmfs` where REPOSITORYNAME is
   the repository, for example config-osg.opensciencegrid.org (which is
   the best one to try first because other repositories require it to
-  be mounted).  If this works, then cvmfs is working, but there is a
+  be mounted).  If this works, then CVMFS is working, but there is a
   problem with automount.
 -  If that doesn't work and doesn't give any explanatory errors, try
    `cvmfs_config chksetup` or `cvmfs_config showconfig REPOSITORYNAME`
@@ -195,24 +199,25 @@ steps to debug:
 
 ## Starting and Stopping services
 
-Once it is set up, cvmfs is always automatically started when one of
+Once it is set up, CVMFS is always automatically started when one of
 the repositories are accessed; there are no system services to start.
 
-cvmfs can be stopped via:
+CVMFS can be stopped via:
 
-        [root@client ~] $ cvmfs_config umount
-        Unmounting /cvmfs/config-osg.opensciencegrid.org: OK
-        Unmounting /cvmfs/atlas.cern.ch: OK
-        Unmounting /cvmfs/oasis.opensciencegrid.org: OK
-        Unmounting /cvmfs/glast.egi.eu: OK
-        Unmounting /cvmfs/nova.osgstorage.org: OK
-<br>
+```console
+[root@client ~] $ cvmfs_config umount
+Unmounting /cvmfs/config-osg.opensciencegrid.org: OK
+Unmounting /cvmfs/atlas.cern.ch: OK
+Unmounting /cvmfs/oasis.opensciencegrid.org: OK
+Unmounting /cvmfs/glast.egi.eu: OK
+Unmounting /cvmfs/nova.osgstorage.org: OK
+```
+
 ## How to get Help?
 
 If you cannot resolve the problem, there are several ways to receive help:
 
-- For bug reporting and OSG-specific issues, submit a ticket to the
-  [Grid Operations Center](https://ticket.grid.iu.edu/submit).
+- For bug reporting and OSG-specific issues, see our [help procedure](../common/help)
 - For community support and best-effort software team support contact
    <osg-cvmfs@opensciencegrid.org>.
 - For general CERN VM FileSystem support contact <cernvm.support@cern.ch>.
@@ -221,4 +226,22 @@ If you cannot resolve the problem, there are several ways to receive help:
 
 -  <http://cernvm.cern.ch/portal/filesystem/techinformation>
 -  <https://cvmfs.readthedocs.io/en/latest/>
+
+### Users and Groups
+
+This installation will create one user unless it already exists
+
+| User    | Comment                   |
+|:--------|:--------------------------|
+| `cvmfs` | CernVM-FS service account |
+
+The installation will also create a cvmfs group and default the cvmfs
+user to that group. In addition, if the fuse rpm is not for some
+reason already installed, installing cvmfs will also install fuse and
+that will create another group:
+
+| Group   | Comment                   | Group members |
+|:--------|:--------------------------|:--------------|
+| `cvmfs` | CernVM-FS service account | none          |
+| `fuse`  | FUSE service account      | `cvmfs`       |
 
