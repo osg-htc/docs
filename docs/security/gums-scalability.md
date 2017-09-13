@@ -1,3 +1,9 @@
+!!! warning
+    GUMS is no longer be supported in OSG 3.4. The [LCMAPS VOMS Plugin](../security/lcmaps-voms-authentication) is the preferred method for site authentication in the OSG and is available in both OSG 3.3 and OSG 3.4.
+
+!!! warning
+    These experiments were run on EL 5 machines. EL 5 is no longer supported as of OSG 3.3.
+
 GUMS Scalability
 ================
 
