@@ -96,6 +96,28 @@
     
         
     <url>
+     <loc>https://opensciencegrid.github.io/docs/other/gsissh/</loc>
+     <lastmod>2017-09-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/security/lcmaps-voms-authentication/</loc>
+     <lastmod>2017-09-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/other/install-osg-upcoming-software/</loc>
+     <lastmod>2017-09-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
      <loc>https://opensciencegrid.github.io/docs/monitoring/rsv/</loc>
      <lastmod>2017-09-13</lastmod>
      <changefreq>daily</changefreq>

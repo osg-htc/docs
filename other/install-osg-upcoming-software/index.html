@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Singularity - OSG Documentation</title>
+  <title>OSG upcoming software - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Singularity";
-    var mkdocs_page_input_path = "client/singularity.md";
-    var mkdocs_page_url = "/client/singularity/";
+    var mkdocs_page_name = "OSG upcoming software";
+    var mkdocs_page_input_path = "other/install-osg-upcoming-software.md";
+    var mkdocs_page_url = "/other/install-osg-upcoming-software/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -79,45 +79,23 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../wn/">Worker Node (RPM install)</a>
+    <a class="" href="../../client/wn/">Worker Node (RPM install)</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../wn-tarball/">Worker Node (tarball install)</a>
+    <a class="" href="../../client/wn-tarball/">Worker Node (tarball install)</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../wn-oasis/">Worker Node (OASIS install)</a>
+    <a class="" href="../../client/wn-oasis/">Worker Node (OASIS install)</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../cvmfs/">CVMFS</a>
+    <a class="" href="../../client/cvmfs/">CVMFS</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">Singularity</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#install-singularity">Install Singularity</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#before-starting">Before Starting</a></li>
-        
-            <li><a class="toctree-l4" href="#using-singularity-via-cvmfs-el-74-only">Using Singularity via CVMFS (EL 7.4 only)</a></li>
-        
-            <li><a class="toctree-l4" href="#installing-singularity">Installing singularity</a></li>
-        
-            <li><a class="toctree-l4" href="#configuring-singularity">Configuring singularity</a></li>
-        
-            <li><a class="toctree-l4" href="#validating-singularity">Validating singularity</a></li>
-        
-            <li><a class="toctree-l4" href="#starting-and-stopping-services">Starting and Stopping services</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../../client/singularity/">Singularity</a>
                 </li>
     </ul>
 	    </li>
@@ -154,15 +132,31 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+    <a class="" href="../gsissh/">GSI-enabled SSH</a>
                 </li>
                 <li class="">
                     
     <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../../other/install-osg-upcoming-software/">OSG upcoming software</a>
+    <a class="current" href="./">OSG upcoming software</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#osg-upcoming-software-repositories-installation-guide">OSG Upcoming Software Repositories Installation Guide</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#overview-and-purpose">Overview and Purpose</a></li>
+        
+            <li><a class="toctree-l4" href="#installation-and-usage">Installation and Usage</a></li>
+        
+            <li><a class="toctree-l4" href="#enabling-upcoming-repositories">Enabling Upcoming repositories</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
     </ul>
 	    </li>
@@ -188,7 +182,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+    <a class="" href="../gsissh/">GSI-enabled SSH</a>
                 </li>
                 <li class="">
                     
@@ -241,11 +235,11 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+    <a class="" href="../configuration-with-osg-configure/">Configuration with OSG-Configure</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../using-wn/">Worker Node Environment</a>
+    <a class="" href="../../client/using-wn/">Worker Node Environment</a>
                 </li>
     </ul>
 	    </li>
@@ -287,7 +281,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../glexec/">Worker node glexec Install</a>
+    <a class="" href="../../client/glexec/">Worker node glexec Install</a>
                 </li>
     </ul>
 	    </li>
@@ -319,14 +313,14 @@
     
       
         
-          <li>Install Guides - Client &raquo;</li>
+          <li>Install Guides - Other &raquo;</li>
         
       
     
-    <li>Singularity</li>
+    <li>OSG upcoming software</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/client/singularity.md"
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/other/install-osg-upcoming-software.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -336,133 +330,35 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="install-singularity">Install Singularity</h1>
-<p><a href="http://singularity.lbl.gov">Singularity</a> is a tool that creates
-docker-like process containers but without giving extra privileges to
-unprivileged users.  It is used by grid pilot jobs (which are
-submitted by per-VO grid workload management systems) to isolate user
-jobs from the pilot's files and processes and from other users' files
-and processes.  It also supplies a chroot environment in order to run
-user jobs in different operating system images under one Linux kernel.</p>
-<p>For operating systems older than Red Hat Enterprise Linux (RHEL) 7.4,
-singularity needs to use kernel capabilities that are only accessible
-to the root user, so it has to be installed with setuid-root
-executables.  Securing setuid-root programs is difficult, but singularity
-keeps that privileged code to a
-<a href="http://singularity.lbl.gov/docs-security">minimum</a> to keep the
-vulnerability low.  Beginning in RHEL 7.4, there is a new
-<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/7.4_Release_Notes/index.html#technology_previews_kernel">technology preview feature</a>
-to allow unprivileged bind mounts in user name spaces, which allows
-singularity to run as an unprivileged user.  The OSG has installed
-singularity in <a href="../cvmfs">cvmfs</a>, so if you have RHEL 7.4 or later you
-can avoid installing singularity at all and reduce vulnerability even
-further. </p>
-<p>The document is intended for system administrators who wish to either
-install singularity or enable it to be run as an unprivileged user.</p>
-<div class="admonition note">
-<p class="admonition-title">Applicable versions</p>
-<p>The applicable software versions for this document are OSG Version &gt;= 3.4.3.
-The version of singularity installed should be &gt;= 2.3.1</p>
-</div>
-<h2 id="before-starting">Before Starting</h2>
-<p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
-<ul>
-<li>Ensure the host has <a href="../../release/supported_platforms">a supported operating system</a></li>
-<li>Obtain root access to the host</li>
-<li>If you're installing singularity, prepare the <a href="../../common/yum">required Yum repositories</a></li>
-</ul>
-<h2 id="using-singularity-via-cvmfs-el-74-only">Using Singularity via CVMFS (EL 7.4 only)</h2>
-<p>If you are using a RHEL 7.4 variant OS, you can skip installation
-altogether and use singularity through CVMFS:</p>
-<ol>
-<li>Set the <code>namespace.unpriv_enable=1</code> boot option.  The easiest way
-    to do this is to add it in <code>/etc/sysconfig/grub</code> to the end of the
-    GRUB_CMDLINE_LINUX variable, before the ending double-quote.</li>
-<li>
-<p>Update the grub configuration:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> grub2-mkconfig -o /boot/grub2/grub.cfg
+                <h1 id="osg-upcoming-software-repositories-installation-guide">OSG Upcoming Software Repositories Installation Guide</h1>
+<p>Here we describe the OSG Upcoming Software Repositories, their purpose, and how to use them.</p>
+<p>This document is intended for site administrators.</p>
+<h2 id="overview-and-purpose">Overview and Purpose</h2>
+<p>Certain sites have requested new versions of software that would be considered "disruptive" or "experimental" -- upgrading to them would likely require manual intervention before the site would come back up. We do not want sites to unwittingly upgrade to these versions. For the benefit of the sites that do want to upgrade, we want to provide the same assurance of quality and production-readiness that we provide to the software we currently ship now.</p>
+<p>Due to the relatively small number of such packages, a full fork of the OSG 3 distribution was not warranted. Instead, we have created a separate set of repositories that contain only the "disruptive" versions of the software.</p>
+<p>These repositories have the same structure as our standard repositories. For example, there is an <code>osg-upcoming-testing</code> repository and an <code>osg-upcoming</code> repository.</p>
+<p>A full installation of our software stack is <em>not</em> be possible using only the <code>osg-upcoming</code> repositories, since they contain a small subset of the software we ship. Both the main <code>osg</code> and the <code>osg-upcoming</code> repositories will need to be enabled for the installation to work. Because of this, interoperability will be maintained between the main <code>osg</code> and <code>osg-upcoming</code>.</p>
+<p>Depending on test results from sites, some packages in <code>osg-upcoming</code> may eventually end up in the main <code>osg</code> branch. The rest of the packages will eventually form the nucleus of the next fork of the software stack (e.g. "OSG 3.5").</p>
+<h2 id="installation-and-usage">Installation and Usage</h2>
+<p>The following directions must be followed to install software from the Upcoming repositories.</p>
+<p>First, install the standard OSG YUM repositories as per <a href="../../common/yum">the YUM repositories guide</a>.</p>
+<h2 id="enabling-upcoming-repositories">Enabling Upcoming repositories</h2>
+<p>You should have a file called <code>osg-upcoming.repo</code> (el7) or <code>osg-el6-upcoming.repo</code> (el6) located in <code>/etc/yum.repos.d</code>. At the top, it should have a section looking like this (el7):</p>
+<div class="codehilite"><pre><span></span><span class="k">[osg-upcoming]</span>
+<span class="na">name</span><span class="o">=</span><span class="s">OSG Software for Enterprise Linux 7 - Upcoming - $basearch</span>
+<span class="c1">#baseurl=http://repo.grid.iu.edu/upcoming/el7/$basearch/release</span>
+<span class="na">mirrorlist</span><span class="o">=</span><span class="s">http://repo.grid.iu.edu/mirror/upcoming/el7/$basearch/release</span>
+<span class="na">failovermethod</span><span class="o">=</span><span class="s">priority</span>
+<span class="na">priority</span><span class="o">=</span><span class="s">98</span>
+<span class="na"><span style="color:red">enabled</span><span class="o">=</span><span class="s">0</span></span>
+<span class="na">gpgcheck</span><span class="o">=</span><span class="s">1</span>
+<span class="na">gpgkey</span><span class="o">=</span><span class="s">file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG</span>
+<span class="na">consider_as_osg</span><span class="o">=</span><span class="s">yes</span>
 </pre></div>
 
 
-</li>
-<li>
-<p>Set a sysctl option as follows:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> <span class="nb">echo</span> <span class="s2">&quot;user.max_user_namespaces = 15000&quot;</span> <span class="se">\</span>
-    &gt; /etc/sysctl.d/90-max_user_namespaces.conf
-</pre></div>
-
-
-</li>
-<li>
-<p>Reboot</p>
-</li>
-<li>If you haven't yet installed <a href="../cvmfs">cvmfs</a>, do so.</li>
-<li>Log in as an ordinary unprivileged user and verify that singularity
-    works:<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity <span class="se">\</span>
-        <span class="nb">exec</span> -C -H <span class="nv">$HOME</span>:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 <span class="se">\</span>
-        ps -ef
-<span class="go">WARNING: Container does not have an exec helper script, calling &#39;cat&#39; directly</span>
-<span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
-<span class="go">user         1     0  0 21:34 ?        00:00:00 ps -ef</span>
-</pre></div>
-
-
-</li>
-</ol>
-<h2 id="installing-singularity">Installing singularity</h2>
-<p>To install singularity, make sure that your host is up to date before installing the required packages:</p>
-<ol>
-<li>
-<p>Clean yum cache:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> yum clean all --enablerepo<span class="o">=</span>*
-</pre></div>
-
-
-</li>
-<li>
-<p>Update software:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> yum update
-</pre></div>
-
-
-<p>This command will update <strong>all</strong> packages</p>
-</li>
-<li>
-<p>The singularity packages are split into two parts, choose the command that corresponds to your host:</p>
-<ul>
-<li>
-<p>If you are installing singularity on a worker node, where images do not need to be created of a manipulated, install just the smaller part to limit the amount of setuid-root code that is installed:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> yum install singularity-runtime
-</pre></div>
-
-
-</li>
-<li>
-<p>If you want a full singularity installation, run the following command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> yum install singularity
-</pre></div>
-
-
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="configuring-singularity">Configuring singularity</h2>
-<p>The default configuration of singularity is sufficient.  If you want
-to see what options are available, see <code>/etc/singularity/singularity.conf</code>.</p>
-<h2 id="validating-singularity">Validating singularity</h2>
-<p>After singularity is installed, as an ordinary user run the following
-command to verify it:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> singlarity <span class="nb">exec</span> -C -H <span class="nv">$HOME</span>:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 ps -ef
-<span class="go">WARNING: Container does not have an exec helper script, calling &#39;cat&#39; directly</span>
-<span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
-<span class="go">user         1     0  0 21:34 ?        00:00:00 ps -ef</span>
-</pre></div>
-
-
-<p><br></p>
-<h2 id="starting-and-stopping-services">Starting and Stopping services</h2>
-<p>singularity has no services to start or stop.</p>
+<p>Edit this file, and under the section <code>[osg-upcoming]</code>, change <code>enabled=0</code> to <code>enabled=1</code>. This will enable the production upcoming software repositories. Future YUM installs will bring in software from the upcoming repositories.</p>
+<p>To get help, please use <a href="../../common/help">this page</a>.</p>
               
             </div>
           </div>
@@ -470,10 +366,10 @@ command to verify it:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../compute-element/install-htcondor-ce/" class="btn btn-neutral float-right" title="HTCondor-CE">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../monitoring/rsv/" class="btn btn-neutral float-right" title="RSV">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../cvmfs/" class="btn btn-neutral" title="CVMFS"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../security/lcmaps-voms-authentication/" class="btn btn-neutral" title="LCMAPS-VOMS authentication"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -501,10 +397,10 @@ command to verify it:</p>
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../cvmfs/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../security/lcmaps-voms-authentication/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../compute-element/install-htcondor-ce/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../monitoring/rsv/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
