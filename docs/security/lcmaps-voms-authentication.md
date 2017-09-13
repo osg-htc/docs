@@ -112,7 +112,7 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
 
 1.  Configure user DN mappings:
 
-    * If you have a local grid mapfile (see [this section](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/Edg-mkgridmap#3_0_Configuration)), replace the contents of `/etc/grid-security/grid-mapfile` with the contents of the local grid mapfile.
+    * If you have a local grid mapfile (see [the EDG-mkgridmap docs](../security/edg-mkgridmap)), replace the contents of `/etc/grid-security/grid-mapfile` with the contents of the local grid mapfile.
 
     * If you do not have a local grid mapfile, remove `/etc/grid-security/grid-mapfile`.
 

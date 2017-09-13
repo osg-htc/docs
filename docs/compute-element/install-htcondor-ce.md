@@ -128,7 +128,7 @@ blah_disable_limited_proxy=yes
 
 ### Configuring authentication
 
-In OSG 3.3, there are three methods to manage authentication for incoming jobs: the [LCMAPS VOMS plugin](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallLcmapsVoms), [edg-mkgridmap](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/Edg-mkgridmap) and [GUMS](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums). edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support [pool accounts](https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html), GUMS is the only software with that capability.
+In OSG 3.3, there are three methods to manage authentication for incoming jobs: the [LCMAPS VOMS plugin](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallLcmapsVoms), [edg-mkgridmap](../security/edg-mkgridmap) and [GUMS](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums). edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support [pool accounts](https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html), GUMS is the only software with that capability.
 
 In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution.
 
@@ -152,7 +152,7 @@ To configure your CE to use the LCMAPS VOMS plugin:
 
 To configure your CE to use edg-mkgridmap:
 
-1. Follow the configuration instructions in [the edg-mkgridmap document](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/Edg-mkgridmap) to define the VOs that your site accepts
+1. Follow the configuration instructions in [the edg-mkgridmap document](../security/edg-mkgridmap) to define the VOs that your site accepts
 2. Set some critical gridmap attributes by editing the `/etc/osg/config.d/10-misc.ini` file on the HTCondor-CE host:
 
         authorization_method = gridmap
