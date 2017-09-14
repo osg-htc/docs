@@ -514,16 +514,17 @@
 </ol>
 <h4 id="mapping-vos">Mapping VOs<a class="headerlink" href="#mapping-vos" title="Permanent link">&para;</a></h4>
 <p><code>/etc/grid-security/voms-mapfile</code> is used to map VOs, VO roles, or VO groups to Unix accounts based on their VOMS attributes. An example of the format of a <code>voms-mapfile</code> follows:</p>
-<div class="codehilite"><pre><span></span># map GLOW jobs to the &#39;glow&#39; Unix account.
-&quot;/GLOW/*&quot; glow
-# map GLOW jobs in the chtc group to the &#39;glow1&#39; Unix account.
+<div class="codehilite"><pre><span></span># map GLOW jobs in the chtc group to the &#39;glow1&#39; Unix account.
 &quot;/GLOW/chtc/*&quot; glow1
 # map GLOW jobs with the htpc role to the &#39;glow2&#39; Unix account.
 &quot;/GLOW/Role=htpc/*&quot; glow2
+# map other GLOW jobs to the &#39;glow&#39; Unix account.
+&quot;/GLOW/*&quot; glow
 </pre></div>
 
 
-<p>Each non-commented line is a shell-style pattern which is compared against the user's VOMS attributes, and a Unix account that the user will be mapped to if the pattern matches.</p>
+<p>Each non-commented line is a shell-style pattern which is compared against the user's VOMS attributes, and a Unix account that the user will be mapped to if the pattern matches.
+The patterns are compared in the order they are listed in. Therefore, more general patterns should be placed later in the file.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The Unix account must exist for the user to be mapped. If a VO's Unix account is missing, that VO will not be able to access your resources.</p>
