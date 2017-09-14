@@ -1,0 +1,250 @@
+---+ OSG Software Release 3.2.11
+
+*Release Date*: 2014-06-10
+
+---++ Summary of changes
+
+This release contains:
+   * Update to CVMFS 2.1.19 ([[http://cernvm.cern.ch/portal/filesystem/cvmfs-2.1.19][many enhancements and bug fixes]])
+   * Update to VOMS Server 2.0.11 ([[http://italiangrid.github.io/voms/2013/10/25/voms-server-2-0-11-released.html][bug fix]])
+   * Several osg-configure bug fixes
+      * SGE: configuration location, Gratia probe
+      * Support both CE types (HTCondor and Globus GRAM)
+      * Better warning/error messages
+   * Gratia probes updated: SGE probe, HDFS probe
+   * A new meta-package for HDFS secondary !NameNodes
+   * Updated CA certificates ([[https://dist.igtf.net/distribution/igtf/current/CHANGES][IGTF 1.57]])
+      * Removes discontinued CAs
+   * Other minor improvements
+
+[[https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%20%223.2.11%22][21 JIRA tickets]] were addressed in this release.
+
+Detailed changes are below. All of the documentation can be found in the [[Documentation.Release3][Release3]] area of the !TWiki.
+
+---++ Known Issues
+
+---++ Updating to the new release
+
+---+++ Update Repositories
+
+This is a release in a newer [[Documentation.Release3.OSGReleaseSeries][OSG Release Series]].
+To update to this new series, you need [[Documentation.Release3.YumRepositories#Install_OSG_Repositories][install the new OSG repositories]].
+
+---+++ Update Software
+
+Once the new repositories are installed, you can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or glob]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed changes in this release
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5   
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cvmfs-2.1.19-1.osg32.el5][cvmfs-2.1.19-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=edg-mkgridmap-4.0.0-7.osg32.el5][edg-mkgridmap-4.0.0-7.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.13.29-1.osg32.el5][gratia-probe-1.13.29-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gridftp-hdfs-0.5.4-17.osg32.el5][gridftp-hdfs-0.5.4-17.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.57-1.osg32.el5][igtf-ca-certs-1.57-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=oasis-config-6-1.osg32.el5][oasis-config-6-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.39-1.osg32.el5][osg-ca-certs-1.39-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-configure-1.0.55-2.osg32.el5][osg-configure-1.0.55-2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-oasis-4-1.osg32.el5][osg-oasis-4-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-se-hadoop-3.0.0-14.osg32.el5][osg-se-hadoop-3.0.0-14.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.4.15-1.osg32.el5][osg-test-1.4.15-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.11-1.osg32.el5][osg-version-3.2.11-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.7.16-2.osg32.el5][rsv-3.7.16-2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-2.0.11-2.3.osg32.el5][voms-2.0.11-2.3.osg32.el5]]
+
+---++++ Enterprise Linux 6
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cvmfs-2.1.19-1.osg32.el6][cvmfs-2.1.19-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=edg-mkgridmap-4.0.0-7.osg32.el6][edg-mkgridmap-4.0.0-7.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.13.29-1.osg32.el6][gratia-probe-1.13.29-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gridftp-hdfs-0.5.4-17.osg32.el6][gridftp-hdfs-0.5.4-17.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.57-1.osg32.el6][igtf-ca-certs-1.57-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=oasis-config-6-1.osg32.el6][oasis-config-6-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.39-1.osg32.el6][osg-ca-certs-1.39-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-configure-1.0.55-2.osg32.el6][osg-configure-1.0.55-2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-oasis-4-1.osg32.el6][osg-oasis-4-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-se-hadoop-3.0.0-14.osg32.el6][osg-se-hadoop-3.0.0-14.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.4.15-1.osg32.el6][osg-test-1.4.15-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.11-1.osg32.el6][osg-version-3.2.11-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.7.16-2.osg32.el6][rsv-3.7.16-2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-2.0.11-2.3.osg32.el6][voms-2.0.11-2.3.osg32.el6]]
+
+---+++ RPMs
+
+If you wish to manually update your system, you can run yum update against the following packages:
+
+<pre class="file">
+cvmfs cvmfs-devel cvmfs-server cvmfs-unittests edg-mkgridmap gratia-probe-bdii-status gratia-probe-common gratia-probe-condor gratia-probe-condor-events gratia-probe-dcache-storage gratia-probe-dcache-transfer gratia-probe-debuginfo gratia-probe-glexec gratia-probe-glideinwms gratia-probe-gram gratia-probe-gridftp-transfer gratia-probe-hadoop-storage gratia-probe-metric gratia-probe-onevm gratia-probe-pbs-lsf gratia-probe-psacct gratia-probe-services gratia-probe-sge gratia-probe-slurm gratia-probe-xrootd-storage gratia-probe-xrootd-transfer gridftp-hdfs gridftp-hdfs-debuginfo igtf-ca-certs oasis-config osg-ca-certs osg-configure osg-configure-ce osg-configure-cemon osg-configure-condor osg-configure-gateway osg-configure-gip osg-configure-gratia osg-configure-infoservices osg-configure-lsf osg-configure-managedfork osg-configure-misc osg-configure-monalisa osg-configure-network osg-configure-pbs osg-configure-rsv osg-configure-sge osg-configure-slurm osg-configure-squid osg-configure-tests osg-oasis osg-se-hadoop osg-se-hadoop-client osg-se-hadoop-datanode osg-se-hadoop-gridftp osg-se-hadoop-namenode osg-se-hadoop-secondarynamenode osg-se-hadoop-srm osg-test osg-version rsv rsv-consumers rsv-core rsv-metrics voms voms-clients voms-debuginfo voms-devel voms-doc voms-server
+</pre>
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+cvmfs-2.1.19-1.osg32.el5
+cvmfs-devel-2.1.19-1.osg32.el5
+cvmfs-server-2.1.19-1.osg32.el5
+cvmfs-unittests-2.1.19-1.osg32.el5
+edg-mkgridmap-4.0.0-7.osg32.el5
+gratia-probe-1.13.29-1.osg32.el5
+gratia-probe-bdii-status-1.13.29-1.osg32.el5
+gratia-probe-common-1.13.29-1.osg32.el5
+gratia-probe-condor-1.13.29-1.osg32.el5
+gratia-probe-condor-events-1.13.29-1.osg32.el5
+gratia-probe-dcache-storage-1.13.29-1.osg32.el5
+gratia-probe-dcache-transfer-1.13.29-1.osg32.el5
+gratia-probe-debuginfo-1.13.29-1.osg32.el5
+gratia-probe-glexec-1.13.29-1.osg32.el5
+gratia-probe-glideinwms-1.13.29-1.osg32.el5
+gratia-probe-gram-1.13.29-1.osg32.el5
+gratia-probe-gridftp-transfer-1.13.29-1.osg32.el5
+gratia-probe-hadoop-storage-1.13.29-1.osg32.el5
+gratia-probe-metric-1.13.29-1.osg32.el5
+gratia-probe-onevm-1.13.29-1.osg32.el5
+gratia-probe-pbs-lsf-1.13.29-1.osg32.el5
+gratia-probe-psacct-1.13.29-1.osg32.el5
+gratia-probe-services-1.13.29-1.osg32.el5
+gratia-probe-sge-1.13.29-1.osg32.el5
+gratia-probe-slurm-1.13.29-1.osg32.el5
+gratia-probe-xrootd-storage-1.13.29-1.osg32.el5
+gratia-probe-xrootd-transfer-1.13.29-1.osg32.el5
+gridftp-hdfs-0.5.4-17.osg32.el5
+gridftp-hdfs-debuginfo-0.5.4-17.osg32.el5
+igtf-ca-certs-1.57-1.osg32.el5
+oasis-config-6-1.osg32.el5
+osg-ca-certs-1.39-1.osg32.el5
+osg-configure-1.0.55-2.osg32.el5
+osg-configure-ce-1.0.55-2.osg32.el5
+osg-configure-cemon-1.0.55-2.osg32.el5
+osg-configure-condor-1.0.55-2.osg32.el5
+osg-configure-gateway-1.0.55-2.osg32.el5
+osg-configure-gip-1.0.55-2.osg32.el5
+osg-configure-gratia-1.0.55-2.osg32.el5
+osg-configure-infoservices-1.0.55-2.osg32.el5
+osg-configure-lsf-1.0.55-2.osg32.el5
+osg-configure-managedfork-1.0.55-2.osg32.el5
+osg-configure-misc-1.0.55-2.osg32.el5
+osg-configure-monalisa-1.0.55-2.osg32.el5
+osg-configure-network-1.0.55-2.osg32.el5
+osg-configure-pbs-1.0.55-2.osg32.el5
+osg-configure-rsv-1.0.55-2.osg32.el5
+osg-configure-sge-1.0.55-2.osg32.el5
+osg-configure-slurm-1.0.55-2.osg32.el5
+osg-configure-squid-1.0.55-2.osg32.el5
+osg-configure-tests-1.0.55-2.osg32.el5
+osg-oasis-4-1.osg32.el5
+osg-se-hadoop-3.0.0-14.osg32.el5
+osg-se-hadoop-client-3.0.0-14.osg32.el5
+osg-se-hadoop-datanode-3.0.0-14.osg32.el5
+osg-se-hadoop-gridftp-3.0.0-14.osg32.el5
+osg-se-hadoop-namenode-3.0.0-14.osg32.el5
+osg-se-hadoop-secondarynamenode-3.0.0-14.osg32.el5
+osg-se-hadoop-srm-3.0.0-14.osg32.el5
+osg-test-1.4.15-1.osg32.el5
+osg-version-3.2.11-1.osg32.el5
+rsv-3.7.16-2.osg32.el5
+rsv-consumers-3.7.16-2.osg32.el5
+rsv-core-3.7.16-2.osg32.el5
+rsv-metrics-3.7.16-2.osg32.el5
+voms-2.0.11-2.3.osg32.el5
+voms-clients-2.0.11-2.3.osg32.el5
+voms-debuginfo-2.0.11-2.3.osg32.el5
+voms-devel-2.0.11-2.3.osg32.el5
+voms-doc-2.0.11-2.3.osg32.el5
+voms-server-2.0.11-2.3.osg32.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+cvmfs-2.1.19-1.osg32.el6
+cvmfs-devel-2.1.19-1.osg32.el6
+cvmfs-server-2.1.19-1.osg32.el6
+cvmfs-unittests-2.1.19-1.osg32.el6
+edg-mkgridmap-4.0.0-7.osg32.el6
+gratia-probe-1.13.29-1.osg32.el6
+gratia-probe-bdii-status-1.13.29-1.osg32.el6
+gratia-probe-common-1.13.29-1.osg32.el6
+gratia-probe-condor-1.13.29-1.osg32.el6
+gratia-probe-condor-events-1.13.29-1.osg32.el6
+gratia-probe-dcache-storage-1.13.29-1.osg32.el6
+gratia-probe-dcache-transfer-1.13.29-1.osg32.el6
+gratia-probe-debuginfo-1.13.29-1.osg32.el6
+gratia-probe-glexec-1.13.29-1.osg32.el6
+gratia-probe-glideinwms-1.13.29-1.osg32.el6
+gratia-probe-gram-1.13.29-1.osg32.el6
+gratia-probe-gridftp-transfer-1.13.29-1.osg32.el6
+gratia-probe-hadoop-storage-1.13.29-1.osg32.el6
+gratia-probe-metric-1.13.29-1.osg32.el6
+gratia-probe-onevm-1.13.29-1.osg32.el6
+gratia-probe-pbs-lsf-1.13.29-1.osg32.el6
+gratia-probe-psacct-1.13.29-1.osg32.el6
+gratia-probe-services-1.13.29-1.osg32.el6
+gratia-probe-sge-1.13.29-1.osg32.el6
+gratia-probe-slurm-1.13.29-1.osg32.el6
+gratia-probe-xrootd-storage-1.13.29-1.osg32.el6
+gratia-probe-xrootd-transfer-1.13.29-1.osg32.el6
+gridftp-hdfs-0.5.4-17.osg32.el6
+gridftp-hdfs-debuginfo-0.5.4-17.osg32.el6
+igtf-ca-certs-1.57-1.osg32.el6
+oasis-config-6-1.osg32.el6
+osg-ca-certs-1.39-1.osg32.el6
+osg-configure-1.0.55-2.osg32.el6
+osg-configure-ce-1.0.55-2.osg32.el6
+osg-configure-cemon-1.0.55-2.osg32.el6
+osg-configure-condor-1.0.55-2.osg32.el6
+osg-configure-gateway-1.0.55-2.osg32.el6
+osg-configure-gip-1.0.55-2.osg32.el6
+osg-configure-gratia-1.0.55-2.osg32.el6
+osg-configure-infoservices-1.0.55-2.osg32.el6
+osg-configure-lsf-1.0.55-2.osg32.el6
+osg-configure-managedfork-1.0.55-2.osg32.el6
+osg-configure-misc-1.0.55-2.osg32.el6
+osg-configure-monalisa-1.0.55-2.osg32.el6
+osg-configure-network-1.0.55-2.osg32.el6
+osg-configure-pbs-1.0.55-2.osg32.el6
+osg-configure-rsv-1.0.55-2.osg32.el6
+osg-configure-sge-1.0.55-2.osg32.el6
+osg-configure-slurm-1.0.55-2.osg32.el6
+osg-configure-squid-1.0.55-2.osg32.el6
+osg-configure-tests-1.0.55-2.osg32.el6
+osg-oasis-4-1.osg32.el6
+osg-se-hadoop-3.0.0-14.osg32.el6
+osg-se-hadoop-client-3.0.0-14.osg32.el6
+osg-se-hadoop-datanode-3.0.0-14.osg32.el6
+osg-se-hadoop-gridftp-3.0.0-14.osg32.el6
+osg-se-hadoop-namenode-3.0.0-14.osg32.el6
+osg-se-hadoop-secondarynamenode-3.0.0-14.osg32.el6
+osg-se-hadoop-srm-3.0.0-14.osg32.el6
+osg-test-1.4.15-1.osg32.el6
+osg-version-3.2.11-1.osg32.el6
+rsv-3.7.16-2.osg32.el6
+rsv-consumers-3.7.16-2.osg32.el6
+rsv-core-3.7.16-2.osg32.el6
+rsv-metrics-3.7.16-2.osg32.el6
+voms-2.0.11-2.3.osg32.el6
+voms-clients-2.0.11-2.3.osg32.el6
+voms-debuginfo-2.0.11-2.3.osg32.el6
+voms-devel-2.0.11-2.3.osg32.el6
+voms-doc-2.0.11-2.3.osg32.el6
+voms-server-2.0.11-2.3.osg32.el6
+</pre>
