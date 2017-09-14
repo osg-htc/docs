@@ -346,11 +346,11 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="installing-configuring-using-and-troubleshooting-rsv">Installing, Configuring, Using, and Troubleshooting RSV</h1>
-<h2 id="about-this-guide">About This Guide</h2>
+                <h1 id="installing-configuring-using-and-troubleshooting-rsv">Installing, Configuring, Using, and Troubleshooting RSV<a class="headerlink" href="#installing-configuring-using-and-troubleshooting-rsv" title="Permanent link">&para;</a></h1>
+<h2 id="about-this-guide">About This Guide<a class="headerlink" href="#about-this-guide" title="Permanent link">&para;</a></h2>
 <p>The Resource and Service Validation (RSV) software helps a site administrator verify that certain site resources and services are working as expected. OSG recommends that sites install and run RSV, but it is optional; further, each site selects which specific tests (called <em>probes</em>) to run.</p>
 <p>Use this page to learn more about RSV in general, and how to install, configure, run, test, and troubleshoot RSV from the OSG software repositories. For documentation on specific probes or on how to write your own probes, please check the <a href="#reference">Reference section</a>.</p>
-<h2 id="introduction-to-rsv">Introduction to RSV</h2>
+<h2 id="introduction-to-rsv">Introduction to RSV<a class="headerlink" href="#introduction-to-rsv" title="Permanent link">&para;</a></h2>
 <p>The Resource and Service Validation (RSV) software provides OSG site administrators a scalable and easy-to-maintain resource and service monitoring infrastructure. The components of RSV are:</p>
 <ul>
 <li><strong>RSV Client.</strong> The client tools allow a site administrator to run tests against their site by providing a set of tests (which can run on the same or other hosts within a site), HTCondor-Cron for scheduling, and tools for collecting and storing the results (using Gratia). The client package is not installed by default and may be installed on a CE or other host. Generally, you configure the RSV client to run tests at scheduled time intervals and then it makes results available on a local website. Also, the client can upload test results to a central collector (see next item).</li>
@@ -359,7 +359,7 @@
 <li><strong>RSV-SAM Transport.</strong> The WLCG RSV-SAM Transport infrastructure pushes out RSV results, for resources that are flagged to be part of the WLCG Interoperability agreement, from the GOC collector to WLCG's Service Availability Monitoring (SAM) system. More information on viewing these results is <a href="https://twiki.grid.iu.edu/twiki/bin/view/Operations/RsvSAMGridView">available here</a>.</li>
 <li><strong>MyOSG and OIM Links.</strong> RSV picks up resource information, WLCG interoperability information, etc., from a MyOSG resource group summary listing, which is in turn based on the <a href="https://oim.grid.iu.edu">OSG Information Management (OIM) (topology) system</a> (Requires registration). Resource <a href="https://twiki.grid.iu.edu/twiki/bin/view/Operations/OIMMaintTool">maintenance scheduled on OIM</a> are forwarded to WLCG SAM, if applicable.</li>
 </ul>
-<h2 id="before-starting">Before Starting</h2>
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
 <ul>
 <li><strong>User IDs:</strong> If they do not exist already, the installation will create the Linux user IDs <code>rsv</code> and <code>cndrcron</code></li>
@@ -374,7 +374,7 @@
 <li>Prepare <a href="../../common/yum/">the required Yum repositories</a></li>
 <li>Install <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth">CA certificates</a></li>
 </ul>
-<h2 id="installing-rsv">Installing RSV</h2>
+<h2 id="installing-rsv">Installing RSV<a class="headerlink" href="#installing-rsv" title="Permanent link">&para;</a></h2>
 <p>An installation of RSV at a site consists of the RSV client software, the Apache web server, parts of HTCondor (for its cron-like scheduling capabilities), and various other small tools. To simplify installation, OSG provides a convenience RPM that installs all required software with a single command.</p>
 <ol>
 <li>
@@ -404,7 +404,7 @@
 
 </li>
 </ol>
-<h2 id="configuring-rsv">Configuring RSV</h2>
+<h2 id="configuring-rsv">Configuring RSV<a class="headerlink" href="#configuring-rsv" title="Permanent link">&para;</a></h2>
 <p>After installation, there are some one-time configuration steps to tell RSV how to operate at your site.</p>
 <ol>
 <li>
@@ -422,17 +422,17 @@
 
 </li>
 </ol>
-<h3 id="optional-configuration">Optional configuration</h3>
+<h3 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
 <p>The following configuration steps are optional and will likely not be required for setting up a small or typical site. If you do not need any of the following special configurations, skip to <a href="#using-rsv">the section on using RSV</a>.</p>
 <p>Generally speaking, read the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/ConfigureRsv">ConfigureRsv</a> page for more advanced configuration options.</p>
-<h4 id="configuring-rsv-to-run-probes-using-a-remote-server">Configuring RSV to run probes using a remote server</h4>
+<h4 id="configuring-rsv-to-run-probes-using-a-remote-server">Configuring RSV to run probes using a remote server<a class="headerlink" href="#configuring-rsv-to-run-probes-using-a-remote-server" title="Permanent link">&para;</a></h4>
 <p>RSV monitors systems by running probes, which can run on the RSV host itself (the default case), via a separate batch system like HTCondor, or via a remote batch system using a Globus gatekeeper and its job manager. The last two options both can count those jobs and report them to, for example, Gratia.</p>
 <p>In this case, remember to:</p>
 <ul>
 <li>Add the RSV user <code>rsv</code> on all the systems where the probes may run, and</li>
 <li>Map the RSV service certificate to the user you intend to use for RSV. This should be a local user used exclusively for RSV and not belonging to an institutional VO to avoid for the RSV probes to be accounted as regular VO jobs in Gratia. This can be done in <a href="../../security/install-gums">GUMS</a> or <a href="../../security/edg-mkgridmap">using a grid-mapfile-local</a> (if you use a grid-mapfile). <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/MapServiceCertToRsvUser">MapServiceCertToRsvUser</a> explains how to configure GUMS or the grid-mapfile. Also see the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavAdminCompute">CE installation document</a> for more information.</li>
 </ul>
-<h4 id="configuring-the-rsv-web-server-to-use-https-instead-of-http">Configuring the RSV web server to use HTTPS instead of HTTP</h4>
+<h4 id="configuring-the-rsv-web-server-to-use-https-instead-of-http">Configuring the RSV web server to use HTTPS instead of HTTP<a class="headerlink" href="#configuring-the-rsv-web-server-to-use-https-instead-of-http" title="Permanent link">&para;</a></h4>
 <p>If you would like your local RSV web server to use HTTPS instead of the default HTTP (for compatibility or security reasons), complete the steps below. This procedure assumes that you already have an HTTP service certificate (or a copy of the host certificate) in <code>/etc/grid-security/http/</code>. If not, omit the <code>SSLCertificate*</code> modifications below, and your web server will start with its own, self-signed certificate.</p>
 <ol>
 <li>
@@ -482,8 +482,8 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 </div>
 </li>
 </ol>
-<h2 id="using-rsv">Using RSV</h2>
-<h3 id="managing-rsv-and-associated-services">Managing RSV and associated services</h3>
+<h2 id="using-rsv">Using RSV<a class="headerlink" href="#using-rsv" title="Permanent link">&para;</a></h2>
+<h3 id="managing-rsv-and-associated-services">Managing RSV and associated services<a class="headerlink" href="#managing-rsv-and-associated-services" title="Permanent link">&para;</a></h3>
 <p>In addition to the RSV service itself, there are a number of supporting services in your installation. The specific services are:</p>
 <table>
 <thead>
@@ -543,7 +543,7 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 </tr>
 </tbody>
 </table>
-<h3 id="running-rsv-manually">Running RSV manually</h3>
+<h3 id="running-rsv-manually">Running RSV manually<a class="headerlink" href="#running-rsv-manually" title="Permanent link">&para;</a></h3>
 <p>Normally, the HTCondor-Cron scheduler runs RSV periodically. However, you can run RSV probes manually at any time:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> rsv-control --run --all-enabled
 </pre></div>
@@ -551,9 +551,9 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 
 <p>If successful, results will be available from your local RSV web server (e.g., <a href="http://localhost/rsv">http://localhost/rsv</a>) and, if enabled (which is the default) on <a href="http://myosg.grid.iu.edu/">MyOSG</a>.</p>
 <p>You can also run the metrics individually or pass special parameters as explained in the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvControl">rsv-control document</a>.</p>
-<h2 id="troubleshooting-rsv">Troubleshooting RSV</h2>
+<h2 id="troubleshooting-rsv">Troubleshooting RSV<a class="headerlink" href="#troubleshooting-rsv" title="Permanent link">&para;</a></h2>
 <p>You can find more information on troubleshooting RSV in the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvControl">rsv-control documentation</a> and in <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv">TroubleshootRSV</a>.</p>
-<h3 id="important-file-locations">Important file locations</h3>
+<h3 id="important-file-locations">Important file locations<a class="headerlink" href="#important-file-locations" title="Permanent link">&para;</a></h3>
 <p>Logs and configuration:</p>
 <table>
 <thead>
@@ -608,7 +608,7 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 </tbody>
 </table>
 <p>To find the metrics and the other files in RSV you can use also the RPM commands: <code>rpm -ql rsv-metrics</code> and <code>rpm -ql rsv</code>.</p>
-<h3 id="getting-more-information-from-rsv-control">Getting more information from rsv-control</h3>
+<h3 id="getting-more-information-from-rsv-control">Getting more information from rsv-control<a class="headerlink" href="#getting-more-information-from-rsv-control" title="Permanent link">&para;</a></h3>
 <p>The first step to getting more information is to run rsv-control with more verbosity. Use the <code>--verbose</code> (<code>-v</code>) flag. This flag can be used with any of rsv-control's abilities (run, enable, list, etc). The verbosity levels are:</p>
 <ul>
 <li>0 = print nothing</li>
@@ -674,7 +674,7 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 
 <p></p>
 </details></p>
-<h2 id="getting-help">Getting Help</h2>
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use <a href="../../common/help/">this page</a>.</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> rsv-control --profile
 <span class="go">Running the rsv-profiler...</span>
@@ -684,14 +684,14 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 </pre></div>
 
 
-<h2 id="reference">Reference</h2>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <p>Here are some other RSV documents that might be helpful:</p>
 <ul>
 <li>A longer <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvOverview">introduction to RSV</a></li>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvArchitecture">The RSV architecture</a></li>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RSVStorageProbes">RSV storage probes</a></li>
 </ul>
-<h3 id="users">Users</h3>
+<h3 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h3>
 <p>The RSV installation will create two users unless they are already created. The users are created when the <code>rsv</code> and <code>condor-cron</code> packages are installed.</p>
 <table>
 <thead>
@@ -724,7 +724,7 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 
 
 <p>where <em>UID</em> and <em>GID</em> are the UID and GID of the <code>cndrcron</code> user and group.</p>
-<h3 id="certificates">Certificates</h3>
+<h3 id="certificates">Certificates<a class="headerlink" href="#certificates" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -749,7 +749,7 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 <p>Ensure an RSV service certificate is installed in <code>/etc/grid-security/rsv/</code> and the certificate files are owned by the <code>rsv</code> user. Adjust the permissions if necessary (cert needs to be readable by all, key needs to be readable by nobody but owner).</p>
 <p>You may need another certificate owned by <code>apache</code> if you'd like an authenticated web server; see <a href="#configuring-the-rsv-web-server-to-use-https-instead-of-http">Configuring the RSV web server to use HTTPS instead of HTTP</a> above.</p>
 <p>See <a href="../../common/pki-cli/">instructions</a> to request a service certificate.</p>
-<h3 id="networking">Networking</h3>
+<h3 id="networking">Networking<a class="headerlink" href="#networking" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>

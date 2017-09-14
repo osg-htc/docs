@@ -342,7 +342,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="glexec-installation-guide">Glexec Installation Guide</h1>
+                <h1 id="glexec-installation-guide">Glexec Installation Guide<a class="headerlink" href="#glexec-installation-guide" title="Permanent link">&para;</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of June 2018.</p>
@@ -365,10 +365,10 @@
 <li><a href="http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.html">glideinWMS - The glidein based WMS</a></li>
 <li><a href="http://iopscience.iop.org/1742-6596/119/5/052029/pdf/jpconf8_119_052029.pdf">Addressing the pilot security problem with gLExec (pdf)</a></li>
 </ol>
-<h2 id="engineering-considerations">Engineering Considerations</h2>
+<h2 id="engineering-considerations">Engineering Considerations<a class="headerlink" href="#engineering-considerations" title="Permanent link">&para;</a></h2>
 <p>If glexec is to be used at a site, it should be installed and configured on every worker node.</p>
 <p>A large number of batch slots using glexec can occasionally put an enormous strain on GUMS servers and cause overloading and client timeouts. In order to survive peak loads, the sysctl parameter <code>net.core.somaxconn</code> on a GUMS server machine should be set at least as high as the maximum number of job slots that might attempt to contact the server at about the same time.  For example, Fermilab set the value to 4096 on each of two servers and tested with a continuous load from 5000 job slots.</p>
-<h2 id="requirements">Requirements</h2>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
 <p>These are the requirements that must be met to install glexec.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -406,7 +406,7 @@
 <li>They must be consecutive and in any range (default range is 65000-65049, configured in the <a href="#configuring-glexec">configuring glexec</a> section below).</li>
 <li>The same group IDs can be used on every worker node.</li>
 </ul>
-<h2 id="install-instructions">Install Instructions</h2>
+<h2 id="install-instructions">Install Instructions<a class="headerlink" href="#install-instructions" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The glexec tracking function requires a part of HTCondor. There are multiple ways to install HTCondor, for details see <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CondorInformation">these instructions</a>. If you want a minimal install, you can run just this command to install the needed piece from the OSG distribution:</p>
@@ -420,7 +420,7 @@
 </pre></div>
 
 
-<h2 id="configuring-glexec">Configuring glexec</h2>
+<h2 id="configuring-glexec">Configuring glexec<a class="headerlink" href="#configuring-glexec" title="Permanent link">&para;</a></h2>
 <p>The following steps need to be done after the glexec installation is complete.</p>
 <ol>
 <li>First, review the contents of <code>/etc/glexec.conf</code>. All of the defaults should be fine, but if you want to change the behavior, the parameters are described in <code>man glexec.conf</code>.</li>
@@ -466,7 +466,7 @@ gridmapfile -&gt; glexectracking
 </ul>
 </li>
 </ol>
-<h2 id="testing-the-installation-of-glexec">Testing the Installation of glexec</h2>
+<h2 id="testing-the-installation-of-glexec">Testing the Installation of glexec<a class="headerlink" href="#testing-the-installation-of-glexec" title="Permanent link">&para;</a></h2>
 <p>Now, <em>as a non-privileged user (not root)</em>, do the following (where <YOURVO> is your VO, and <UID> is your uid as reported by <code>/usr/bin/id</code>):</p>
 <div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> voms-proxy-init -voms &lt;YOURVO&gt;:/&lt;YOURVO&gt;
 <span class="gp">[user@client ~] $</span> <span class="nb">export</span> <span class="nv">GLEXEC_CLIENT_CERT</span><span class="o">=</span>/tmp/x509up_u&lt;UID&gt;
@@ -478,7 +478,7 @@ gridmapfile -&gt; glexectracking
 
 <p>If <code>glexec</code> is successful, it will print out the uid and gid that your proxy would normally be mapped to by your GUMS server, plus a supplementary tracking group. (The actual names and numbers will be different from what you see above.)</p>
 <p>If you have problems, please read about <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingGlexecLcmaps">troubleshooting glexec</a>.</p>
-<h2 id="glexec-log-files">Glexec log files</h2>
+<h2 id="glexec-log-files">Glexec log files<a class="headerlink" href="#glexec-log-files" title="Permanent link">&para;</a></h2>
 <p>Glexec sends all its log information by default to syslog. By default they go to <code>/var/log/messages</code>, but this may differ if you have customized your syslog setup. Here are some sample messages:</p>
 <div class="codehilite"><pre><span></span>Apr 25 16:36:16 fermicloud053 glexec[2867]: lcmaps: lcmaps.mod-PluginInit(): plugin glexectracking not found (arguments: )
 Apr 25 16:36:16 fermicloud053 glexec[2867]: lcmaps: lcmaps.mod-lcmaps_startPluginManager(): error initializing plugin: glexectracking
@@ -530,7 +530,7 @@ log { source(s_sys); filter(f_glexec); destination(d_glexec); };
 </pre></div>
 
 
-<h2 id="how-to-get-help">How to get Help?</h2>
+<h2 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance please use the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HelpProcedure">Help Procedure</a>.</p>
               
             </div>

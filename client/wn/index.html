@@ -342,8 +342,8 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="installing-and-using-the-worker-node-client-from-rpms">Installing and Using the Worker Node Client From RPMs</h1>
-<h2 id="about-this-guide">About This Guide</h2>
+                <h1 id="installing-and-using-the-worker-node-client-from-rpms">Installing and Using the Worker Node Client From RPMs<a class="headerlink" href="#installing-and-using-the-worker-node-client-from-rpms" title="Permanent link">&para;</a></h1>
+<h2 id="about-this-guide">About This Guide<a class="headerlink" href="#about-this-guide" title="Permanent link">&para;</a></h2>
 <p>The <strong>OSG Worker Node Client</strong> is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use. See the reference section below for contents of the Worker Node Client.</p>
 <p>It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:</p>
 <ul>
@@ -352,7 +352,7 @@
 <li><a href="../wn-oasis/">Use from OASIS</a> - useful when worker nodes already mount <a href="../cvmfs">CVMFS</a></li>
 </ul>
 <p>This document is intended to guide system administrators through the process of configuring a site to make the Worker Node Client software available from an RPM.</p>
-<h2 id="before-starting">Before Starting</h2>
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
 <ul>
 <li>Ensure the host has <a href="../../release/supported_platforms/">a supported operating system</a></li>
@@ -360,13 +360,13 @@
 <li>Prepare <a href="../../common/yum/">the required Yum repositories</a></li>
 <li>Install <a href="../../common/ca/">CA certificates</a></li>
 </ul>
-<h2 id="install-the-worker-node-client">Install the Worker Node Client</h2>
+<h2 id="install-the-worker-node-client">Install the Worker Node Client<a class="headerlink" href="#install-the-worker-node-client" title="Permanent link">&para;</a></h2>
 <p>Install the Worker Node Client RPM:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~]#</span> yum install osg-wn-client
 </pre></div>
 
 
-<h2 id="services">Services</h2>
+<h2 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h2>
 <p>Fetch-CRL is the only service required to support the WN Client.</p>
 <table>
 <thead>
@@ -419,17 +419,17 @@
 </tr>
 </tbody>
 </table>
-<h2 id="validating-the-worker-node-client">Validating the Worker Node Client</h2>
+<h2 id="validating-the-worker-node-client">Validating the Worker Node Client<a class="headerlink" href="#validating-the-worker-node-client" title="Permanent link">&para;</a></h2>
 <p>To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.</p>
 <ol>
 <li>Submit a job that executes the <code>env</code> command (e.g. Run <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE">condor_ce_trace</a> with the <code>-d</code> flag from your HTCondor CE)</li>
 <li>Verify that the value of <code>OSG_GRID</code> is set to <code>/etc/osg/wn-client</code></li>
 </ol>
-<h2 id="how-to-get-help">How to get Help?</h2>
+<h2 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance please use this <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HelpProcedure">Help Procedure</a>.</p>
-<h2 id="reference">Reference</h2>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <p>Please see the documentation on using <a href="../../release/yum-basics/">yum and RPM</a>, <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices">the best practices</a> for using yum to install software, and using <a href="../../common/yum/">yum repositories</a>.</p>
-<h3 id="worker-node-contents">Worker node contents</h3>
+<h3 id="worker-node-contents">Worker node contents<a class="headerlink" href="#worker-node-contents" title="Permanent link">&para;</a></h3>
 <p>The worker node may be updated from time to time. As of OSG 3.3.21 in February 2017, the OSG worker node client contains:</p>
 <ul>
 <li>OSG Certificates</li>

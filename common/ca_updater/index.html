@@ -359,22 +359,22 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="osg-ca-certificates-updater">OSG CA Certificates Updater</h1>
+                <h1 id="osg-ca-certificates-updater">OSG CA Certificates Updater<a class="headerlink" href="#osg-ca-certificates-updater" title="Permanent link">&para;</a></h1>
 <p>This document explains the installation and use of <code>osg-ca-certs-updater</code>, a package in the OSG Software 3.x distribution that provides automatic updates of CA certificates.</p>
-<h1 id="requirements">Requirements</h1>
+<h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
 <ul>
 <li>OS must be Red Hat Enterprise Linux 5 or 6 or variants.</li>
 <li>The OSG repositories must be installed and enabled. See the <a href="../yum/">Yum Repositories</a> page for instructions.</li>
 <li>One grid-certificates package from the OSG repositories must be installed as described <a href="../ca/#First_Set_up_the_yum_repositorie">here</a>. Currently, these are: <code>igtf-ca-certs</code>, <code>osg-ca-certs</code>.</li>
 </ul>
-<h1 id="install-instructions">Install instructions</h1>
+<h1 id="install-instructions">Install instructions<a class="headerlink" href="#install-instructions" title="Permanent link">&para;</a></h1>
 <p>Run the following command to install the latest version of the updater.</p>
 <div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT_ROOT% yum install osg-ca-certs-updater</span>
 </pre></div>
 
 
-<h1 id="services">Services</h1>
-<h2 id="starting-and-enabling-services">Starting and Enabling Services</h2>
+<h1 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h1>
+<h2 id="starting-and-enabling-services">Starting and Enabling Services<a class="headerlink" href="#starting-and-enabling-services" title="Permanent link">&para;</a></h2>
 <p>Run the following to enable the updater. This will persist until the machine is rebooted.</p>
 <div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT_ROOT% service osg-ca-certs-updater-cron start</span>
 </pre></div>
@@ -386,7 +386,7 @@
 
 
 <p>Run both commands if you wish for the service to activate immediately and remain active throughout reboots.</p>
-<h2 id="stopping-and-disabling-services">Stopping and Disabling Services</h2>
+<h2 id="stopping-and-disabling-services">Stopping and Disabling Services<a class="headerlink" href="#stopping-and-disabling-services" title="Permanent link">&para;</a></h2>
 <p>Enter the following to disable the updater. This will persist until the machine is rebooted.</p>
 <div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT_ROOT% service osg-ca-certs-updater-cron stop</span>
 </pre></div>
@@ -398,7 +398,7 @@
 
 
 <p>Run both commands if you wish for the service to deactivate immediately and not get reactivated during reboots.</p>
-<h1 id="configuration">Configuration</h1>
+<h1 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h1>
 <p>While there is no configuration file, the behavior of the updater can be adjusted by command-line arguments that are specified in the <code>cron</code> entry of the service. This entry is located in the file <code>/etc/cron.d/osg-ca-certs-updater</code>. Please see the Unix manual page for <code>crontab</code> in section 5 for an explanation of the format. The manual page can be accessed by the command <code>man 5 crontab</code>. The valid command-line arguments can be listed by running <code>osg-ca-certs-updater --help</code>. Reasonable defaults have been provided, namely:</p>
 <ul>
 <li>Attempt an update no more often than every 23 hours. Due to the random wait (see below), having a 24-hour minimum time between updates would cause the update time to slowly slide back every day.</li>
@@ -407,9 +407,9 @@
 <li>Do not warn the administrator about update failures that have happened less than 72 hours since the last successful update.</li>
 <li>Log errors only.</li>
 </ul>
-<h1 id="troubleshooting">Troubleshooting</h1>
-<h2 id="useful-configuration-and-log-files">Useful configuration and log files</h2>
-<h3 id="configuration-file">Configuration file</h3>
+<h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
+<h2 id="useful-configuration-and-log-files">Useful configuration and log files<a class="headerlink" href="#useful-configuration-and-log-files" title="Permanent link">&para;</a></h2>
+<h3 id="configuration-file">Configuration file<a class="headerlink" href="#configuration-file" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -434,13 +434,13 @@
 </tr>
 </tbody>
 </table>
-<h3 id="log-files">Log files</h3>
+<h3 id="log-files">Log files<a class="headerlink" href="#log-files" title="Permanent link">&para;</a></h3>
 <p>Logging is performed to the console by default. Please see the manual for your <code>cron</code> daemon to find out how it handles console output.</p>
 <p>A logfile can be specified via the <code>-l</code> / <code>--logfile</code> command-line option.</p>
 <p>If logging to syslog via the <code>-s</code> / <code>--log-to-syslog</code> option, the updater will write to the <code>user</code> section of the syslog. The file <code>/etc/syslog.conf</code> determines where syslog messages are saved.</p>
-<h1 id="how-to-get-help">How to get Help?</h1>
+<h1 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h1>
 <p>To get assistance please use <a href="../HelpProcedure">Help Procedure</a>.</p>
-<h1 id="references">References</h1>
+<h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
 <p>Some guides on X.509 certificates:</p>
 <ul>
 <li>Useful commands: <a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html</a></li>

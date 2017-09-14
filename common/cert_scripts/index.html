@@ -375,33 +375,33 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="certificate-scripts-package"><strong>Certificate Scripts package</strong></h1>
+                <h1 id="certificate-scripts-package"><strong>Certificate Scripts package</strong><a class="headerlink" href="#certificate-scripts-package" title="Permanent link">&para;</a></h1>
 <p><span class="twiki-macro DOC_STATUS_TABLE"></span> <span class="twiki-macro TOC"></span></p>
-<h1 id="about-this-document">About This Document</h1>
+<h1 id="about-this-document">About This Document<a class="headerlink" href="#about-this-document" title="Permanent link">&para;</a></h1>
 <p>This the home page for documenting the cert-scripts package that provides a command-line interface to the DOEGrids CA website and some additional utilities for dealing with X509 certificates. This package was developed originally by the PPDG project and is now maintained by the OSG RA.</p>
 <p>As an alternative to the web browser interface, these scripts are contributed to the DOEGrids PKI to allow a command-line interface to the certificate authority for submitting certificate requests, retrieving signed certificates, renewing certificates, directory lookup of existing certificates, and checking the remaining lifetime of certificates and certificate revocation lists. They work directly with the PEM format files used by Globus. These are perl scripts and bash shell scripts (some awk), depend upon openssl, ldapsearch and the perl LWP:: module with <a href="http://search.cpan.org/src/GAAS/libwww-perl-5.803/README.SSL">SSL support</a>. Click on the File link below for the usage description of the script, or to download the tar file package containing the scripts.</p>
-<h1 id="how-to-get-help">How to get Help?</h1>
+<h1 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h1>
 <p>To get assistance please use <a href="../HelpProcedure">Help Procedure</a>.</p>
-<h1 id="requirements">Requirements</h1>
+<h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
 <ul>
 <li>A host to install the Cert Scripts package. It is normally included in the CE.</li>
 <li>OS is <span class="twiki-macro SUPPORTED_OS"></span>. Currently most of our testing has been done on Scientific Linux 5.</li>
 <li>Root access</li>
 <li>Allow outbound network connection to the CA</li>
 </ul>
-<h1 id="installation-procedure-osgallinstallcertscripts">Installation Procedure <span class="twiki-macro STARTSECTION">OSGAllInstallCertScripts</span></h1>
+<h1 id="installation-procedure-osgallinstallcertscripts">Installation Procedure <span class="twiki-macro STARTSECTION">OSGAllInstallCertScripts</span><a class="headerlink" href="#installation-procedure-osgallinstallcertscripts" title="Permanent link">&para;</a></h1>
 <p><span class="twiki-macro INCLUDE" section="OSGRepoBrief" TOC_SHIFT="+">YumRepositories</span></p>
 <p><span class="twiki-macro INCLUDE" section="OSGBriefCaCerts" TOC_SHIFT="+">InstallCertAuth</span></p>
 <p><span class="twiki-macro STARTSECTION">OSGBriefInstallCertScripts</span></p>
-<h2 id="install-the-certificate-scripts-package-the-cert-scripts-package-can-be-installed-with-the-following-command">Install the certificate scripts package The Cert Scripts package can be installed with the following command:</h2>
+<h2 id="install-the-certificate-scripts-package-the-cert-scripts-package-can-be-installed-with-the-following-command">Install the certificate scripts package The Cert Scripts package can be installed with the following command:<a class="headerlink" href="#install-the-certificate-scripts-package-the-cert-scripts-package-can-be-installed-with-the-following-command" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT_ROOT% yum install osg-cert-scripts</span>
 </pre></div>
 
 
 <p><span class="twiki-macro ENDSECTION">OSGBriefInstallCertScripts</span> <span class="twiki-macro ENDSECTION">OSGAllInstallCertScripts</span></p>
-<h1 id="usage-of-certificate-scripts-package-this-package-is-mainly-used-to-request-certificates-via-the-command-line-either-host-and-service-certificates-or-user-certificates">Usage of certificate scripts package This package is mainly used to request certificates via the command line: either host and service certificates or user certificates.</h1>
-<h2 id="get-host-and-service-certificates-using-command-line"><a href="../Documentation/Release3.GetHostServiceCertificates">Get host and service certificates using command line</a></h2>
-<h2 id="example-usage-of-check-cert-time-the-cert-check-time-script-is-helpful-in-setting-up-and-monitoring-the-ca-certificates-and-crls-that-get-installed-in-your-trusted-certificates-directory-this-section-describes-using-these-scripts-to-check-the-ca-and-crl-status-checking-ca-certificates">Example usage of check-cert-time The cert-check-time script is helpful in setting up and monitoring the CA certificates and CRL’s that get installed in your trusted certificates directory. This section describes using these scripts to check the CA and CRL status. —+++! Checking CA certificates</h2>
+<h1 id="usage-of-certificate-scripts-package-this-package-is-mainly-used-to-request-certificates-via-the-command-line-either-host-and-service-certificates-or-user-certificates">Usage of certificate scripts package This package is mainly used to request certificates via the command line: either host and service certificates or user certificates.<a class="headerlink" href="#usage-of-certificate-scripts-package-this-package-is-mainly-used-to-request-certificates-via-the-command-line-either-host-and-service-certificates-or-user-certificates" title="Permanent link">&para;</a></h1>
+<h2 id="get-host-and-service-certificates-using-command-line"><a href="../Documentation/Release3.GetHostServiceCertificates">Get host and service certificates using command line</a><a class="headerlink" href="#get-host-and-service-certificates-using-command-line" title="Permanent link">&para;</a></h2>
+<h2 id="example-usage-of-check-cert-time-the-cert-check-time-script-is-helpful-in-setting-up-and-monitoring-the-ca-certificates-and-crls-that-get-installed-in-your-trusted-certificates-directory-this-section-describes-using-these-scripts-to-check-the-ca-and-crl-status-checking-ca-certificates">Example usage of check-cert-time The cert-check-time script is helpful in setting up and monitoring the CA certificates and CRL’s that get installed in your trusted certificates directory. This section describes using these scripts to check the CA and CRL status. —+++! Checking CA certificates<a class="headerlink" href="#example-usage-of-check-cert-time-the-cert-check-time-script-is-helpful-in-setting-up-and-monitoring-the-ca-certificates-and-crls-that-get-installed-in-your-trusted-certificates-directory-this-section-describes-using-these-scripts-to-check-the-ca-and-crl-status-checking-ca-certificates" title="Permanent link">&para;</a></h2>
 <p>There are numerous CA certificates installed with VDT and you may not want to allow all of them on your site. The <code>cert-check-time</code> is a helpful command for reviewing them. This must be run in a directory where you have write access even though it does not create any permanent files. You may want to redirect stdout to a file you can then review.</p>
 <div class="codehilite"><pre><span></span>%UCL_PROMPT% <span class="nt">&lt;b&gt;</span>cert-check-time -cR -s /usr/share/osg-cert-scripts/<span class="nt">&lt;/b&gt;</span>
 </pre></div>
@@ -511,7 +511,7 @@ nearest CA certificate expiration 134.984 days
 
 <p><span class="twiki-macro ENDTWISTY"></span></p>
 <p>In addition, at the bottom of the listing it points out which CA’s do not have a CRL. This is useful AFTER the edg-crl-upgraded daemon has run at least once because then it shows those CA’s which have not published a certificate revocation list. Note that two of the CAs, Kerberos CAs from PSC (85ca9edc.0) and FNAL (e1fce4e9.0) don’t really need CRLs since they only generate short lived certificates.</p>
-<h3 id="checking-crls">Checking CRL’s</h3>
+<h3 id="checking-crls">Checking CRL’s<a class="headerlink" href="#checking-crls" title="Permanent link">&para;</a></h3>
 <p>Certificate revocation lists contain the list of certificates (by serial number) that have been issued by a CA but were then revoked, meaning you should not accept them. CRL’s are updated frequently and typically have a lifetime limited to a month or less. When a CRL has expired, the CRL file will still exist in the trusted certificates directory, but Globus will fail <strong>all</strong> authentication attempts for <strong>all</strong> certificates issued by the corresponding CA.</p>
 <p>For this reason, and others, it is important that CRL files are current and not expired. Another variation of the cert-check-time script will list the remaining lifetime of CRL’s in the trusted certificates directory. This must be run in a directory where you have write access even though it does not create any files. You may want to redirect stdout to a file you can then review.</p>
 <div class="codehilite"><pre><span></span>%UCL_PROMPT% <span class="nt">&lt;b&gt;</span>cert-check-time -r -s /usr/share/osg-cert-scripts/ <span class="nt">&lt;/b&gt;</span>
@@ -593,7 +593,7 @@ nearest CRL expiration 0.951088 days
 
 <p><span class="twiki-macro ENDTWISTY"></span></p>
 <p>Site administrators may find it useful to run this command in a daily cron job following the edg-crl-upgraded daemon as a way to monitor the status of the CRL’s.</p>
-<h1 id="references">References</h1>
+<h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
 <p>For additional information on the functionality of a script execute it with the -help option.</p>
 <p>Files in the package:</p>
 <table>
@@ -642,27 +642,27 @@ nearest CRL expiration 0.951088 days
 </tr>
 </tbody>
 </table>
-<h1 id="faq">FAQ</h1>
+<h1 id="faq">FAQ<a class="headerlink" href="#faq" title="Permanent link">&para;</a></h1>
 <p>How to perform common tasks. In <span style="color:red">red<span class="twiki-macro ENDCOLOR"></span> the items you have to change.</p>
-<h2 id="request-a-certificate-for-myself-personal-certificate">Request a certificate for myself (personal certificate)</h2>
+<h2 id="request-a-certificate-for-myself-personal-certificate">Request a certificate for myself (personal certificate)<a class="headerlink" href="#request-a-certificate-for-myself-personal-certificate" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT% cert-request -ou p</span>
 </pre></div>
 
 
 <p>Full details in the <a href="../Documentation/Release3.CertificateGetCmd">command line document</a> or in the <a href="../Documentation.CertificateGetWeb">Web interface document</a> (for a browser based alt.).</p>
-<h2 id="request-a-certificate-for-my-computer-host-certificate">Request a certificate for my computer (host certificate)</h2>
+<h2 id="request-a-certificate-for-my-computer-host-certificate">Request a certificate for my computer (host certificate)<a class="headerlink" href="#request-a-certificate-for-my-computer-host-certificate" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT% cert-request -ou s</span>
 </pre></div>
 
 
 <p>Full details in the <a href="../Documentation/Release3.GetHostServiceCertificates">host and service certificates document</a>.</p>
-<h2 id="request-a-certificate-for-the-http-service-on-my-computer-service-certificate">Request a certificate for the http service on my computer (service certificate)</h2>
+<h2 id="request-a-certificate-for-the-http-service-on-my-computer-service-certificate">Request a certificate for the http service on my computer (service certificate)<a class="headerlink" href="#request-a-certificate-for-the-http-service-on-my-computer-service-certificate" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT% cert-request -ou s -service http -host <span style="color:red">my-computer.some.domain</span> -label <span style="color:red">http-my-computer</span></span>
 </pre></div>
 
 
 <p>Full details in the <a href="../Documentation/Release3.GetHostServiceCertificates">host and service certificates document</a>.</p>
-<h2 id="retrieve-a-certificate">Retrieve a certificate</h2>
+<h2 id="retrieve-a-certificate">Retrieve a certificate<a class="headerlink" href="#retrieve-a-certificate" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Check the email notice you got when the certificate was granted for the serial number (<em>0xNNNN</em>)</li>
 </ol>
@@ -671,11 +671,11 @@ nearest CRL expiration 0.951088 days
 
 
 <p>Use the <code>-p12</code> option to create the PKCS12 format file useful for importing your certificate into a web browser or email program.</p>
-<h2 id="if-you-need-to-get-lots-of-service-certificates">If you need to get lots of service certificates</h2>
+<h2 id="if-you-need-to-get-lots-of-service-certificates">If you need to get lots of service certificates<a class="headerlink" href="#if-you-need-to-get-lots-of-service-certificates" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Ask your RA to grant you the <a href="http://www.doegrids.org/Library/gridAdmin/gridAdminUser.html">gridadmin</a> privilege. 2. Use <code>cert-gridadmin</code> and you can get service certificates issued immediately without using the web interface.</li>
 </ol>
-<h2 id="my-personal-certificate-is-about-to-expire-how-do-i-get-another-with-the-same-dn">My personal certificate is about to expire, how do I get another with the same DN?</h2>
+<h2 id="my-personal-certificate-is-about-to-expire-how-do-i-get-another-with-the-same-dn">My personal certificate is about to expire, how do I get another with the same DN?<a class="headerlink" href="#my-personal-certificate-is-about-to-expire-how-do-i-get-another-with-the-same-dn" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Use <code>cert-renew</code></li>
 </ol>

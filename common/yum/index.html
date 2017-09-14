@@ -338,10 +338,10 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="yum-repositories">YUM Repositories</h1>
-<h2 id="about-this-document">About This Document</h2>
+                <h1 id="yum-repositories">YUM Repositories<a class="headerlink" href="#yum-repositories" title="Permanent link">&para;</a></h1>
+<h2 id="about-this-document">About This Document<a class="headerlink" href="#about-this-document" title="Permanent link">&para;</a></h2>
 <p>This document introduces YUM repositories and how OSG uses them.</p>
-<h2 id="repositories">Repositories</h2>
+<h2 id="repositories">Repositories<a class="headerlink" href="#repositories" title="Permanent link">&para;</a></h2>
 <p>OSG hosts four public-facing repositories at <a href="http://repo.grid.iu.edu/">repo.grid.iu.edu</a>:</p>
 <ul>
 <li><strong>release</strong>: This repository contains software that we are willing to support and can be used by the general community.</li>
@@ -360,13 +360,13 @@
 <p class="admonition-title">Warning</p>
 <p>We did not test other repositories. If you use packages from other repositories, like <code>jpackage</code>, <code>dag</code>, or <code>rpmforge</code>, you may encounter problems.</p>
 </div>
-<h2 id="enabling-repositories">Enabling Repositories</h2>
+<h2 id="enabling-repositories">Enabling Repositories<a class="headerlink" href="#enabling-repositories" title="Permanent link">&para;</a></h2>
 <p>In <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices">our advice on using yum</a> you will learn many tricks and tips on using yum.</p>
 <p>To use the packages in a repository without adding special options to the yum command the repository must be enabled.</p>
-<h3 id="install-the-yum-repositories-required-by-osg">Install the Yum Repositories required by OSG</h3>
+<h3 id="install-the-yum-repositories-required-by-osg">Install the Yum Repositories required by OSG<a class="headerlink" href="#install-the-yum-repositories-required-by-osg" title="Permanent link">&para;</a></h3>
 <p>The OSG RPMs currently support Red Hat Enterprise Linux 6, 7, and variants.</p>
 <p>OSG RPMs are distributed via the OSG yum repositories. Some packages depend on packages distributed via the <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a> repositories. So both repositories must be enabled.</p>
-<h3 id="install-epel">Install EPEL</h3>
+<h3 id="install-epel">Install EPEL<a class="headerlink" href="#install-epel" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Install the EPEL repository, if not already present. <strong>Note:</strong> This enables EPEL by default. Choose the right version to match your OS version.<div class="codehilite"><pre><span></span><span class="gp">#</span> EPEL <span class="m">6</span> <span class="o">(</span>For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL <span class="m">6</span><span class="o">)</span>
 <span class="gp">[root@client ~] #</span> rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
@@ -381,7 +381,7 @@
 <p class="admonition-title">Warning</p>
 <p>if you have your own mirror or configuration of the EPEL repository, you <strong>MUST</strong> verify that the OSG repository has a better yum priority than EPEL (<a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices#YumPriorities">details</a>). Otherwise, you will have strange dependency resolution (<em>depsolving</em>) issues.</p>
 </div>
-<h3 id="install-the-yum-priorities-package">Install the Yum priorities package</h3>
+<h3 id="install-the-yum-priorities-package">Install the Yum priorities package<a class="headerlink" href="#install-the-yum-priorities-package" title="Permanent link">&para;</a></h3>
 <p>For packages that exist in both OSG and EPEL repositories, it is important to prefer the OSG ones or else OSG software installs may fail. Installing the Yum priorities package enables the repository priority system to work.</p>
 <ol>
 <li>
@@ -403,7 +403,7 @@
 <p class="admonition-title">Note</p>
 <p>If you do not have a required key you can force the installation using <code>--nogpgcheck=</code>; e.g., <code>yum install --nogpgcheck yum-priorities</code>.</p>
 </div>
-<h3 id="install-osg-repositories">Install OSG Repositories</h3>
+<h3 id="install-osg-repositories">Install OSG Repositories<a class="headerlink" href="#install-osg-repositories" title="Permanent link">&para;</a></h3>
 <p>If you are upgrading from one OSG series to another, remove the old OSG repository definition files and clean the Yum cache:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~]$</span> yum clean all 
 <span class="gp">[root@client ~]$</span> rpm -e osg-release
@@ -438,7 +438,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="priorities">Priorities</h2>
+<h2 id="priorities">Priorities<a class="headerlink" href="#priorities" title="Permanent link">&para;</a></h2>
 <p><span class="twiki-macro NOTE"></span> Make sure you installed the Yum priorities plugin, as described above. Not doing so is a common mistake that causes failed installations.</p>
 <p>The only OSG repository enabled by default is the release one. If you want to enable another one, such as <code>osg-testing</code>, then edit its file (e.g. <code>/etc/yum.repos.d/osg-testing.repo</code>) and change the enabled option from 0 to 1:</p>
 <div class="codehilite"><pre><span></span><span class="k">[osg-testing]</span>
@@ -457,7 +457,7 @@
 <p class="admonition-title">Warning</p>
 <p>if you have your own mirror or configuration of the EPEL repository, you <strong>MUST</strong> verify that the OSG repository has a better yum priority than EPEL. Otherwise, you will have strange dependency resolution issues.</p>
 </div>
-<h2 id="reference">Reference</h2>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../../release/yum-basics/">Basic use of Yum</a></li>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices">Best practices in using Yum</a></li>

@@ -344,11 +344,11 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="installing-and-using-the-rsv-glideinwms-tester">Installing and Using the RSV GlideinWMS Tester</h1>
-<h2 id="about-this-guide">About This Guide</h2>
+                <h1 id="installing-and-using-the-rsv-glideinwms-tester">Installing and Using the RSV GlideinWMS Tester<a class="headerlink" href="#installing-and-using-the-rsv-glideinwms-tester" title="Permanent link">&para;</a></h1>
+<h2 id="about-this-guide">About This Guide<a class="headerlink" href="#about-this-guide" title="Permanent link">&para;</a></h2>
 <p>The RSV GlideinWMS Tester (or <em>Tester</em>, in this document) is a tool that a VO front-end administrator can use to test remote sites for the ability to run the VO’s jobs. It is particularly useful when setting up a VO for the first time or when changing the sites at which a VO’s jobs can run. For a site to pass the test, it must successfully run a simple test job via the normal GlideinWMS mechanisms, in much the same way as a real VO job.</p>
 <p>Use this page to learn how to install, configure, and use the Tester for your VO front-end.</p>
-<h2 id="before-starting">Before Starting</h2>
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points (consulting <a href="#ReferenceSection">the Reference section below</a> as needed):</p>
 <ul>
 <li><strong>Software:</strong> You must have <a href="../InstallGlideinWMSFrontend">a GlideinWMS Front-end</a> installed</li>
@@ -357,15 +357,15 @@
 <li><strong>Service certificate:</strong> The Tester requires a host certificate at <code>/etc/grid-security/hostcert.pem</code> and an accompanying key at <code>/etc/grid-security/hostkey.pem</code></li>
 <li><strong>Network ports:</strong> Test jobs must be able to contact the tester using the HTCondor Shared Port on port 9615 (TCP), and you must be able to contact a web server on port 80 (TCP) to view test results.</li>
 </ul>
-<h2 id="installing-the-tester">Installing the Tester</h2>
+<h2 id="installing-the-tester">Installing the Tester<a class="headerlink" href="#installing-the-tester" title="Permanent link">&para;</a></h2>
 <p>The Tester software takes advantage of several other OSG software components, so the installation will also include OSG’s site validation system (RSV), HTCondor, and the GlideinWMS pilot submission software.</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install rsv-gwms-tester
 </pre></div>
 
 
-<h2 id="configuring-the-tester">Configuring the Tester</h2>
+<h2 id="configuring-the-tester">Configuring the Tester<a class="headerlink" href="#configuring-the-tester" title="Permanent link">&para;</a></h2>
 <p>Before you use the Tester, there are some one-time configuration steps to complete, one set on your GlideinWMS Front-end Central Manager host and one set on the Tester host.</p>
-<h3 id="configuring-the-glideinwms-front-end-central-manager">Configuring the GlideinWMS Front-end Central Manager</h3>
+<h3 id="configuring-the-glideinwms-front-end-central-manager">Configuring the GlideinWMS Front-end Central Manager<a class="headerlink" href="#configuring-the-glideinwms-front-end-central-manager" title="Permanent link">&para;</a></h3>
 <p>Complete these steps <strong>on your GlideinWMS Front-end Central Manager host</strong>:</p>
 <ol>
 <li>
@@ -412,7 +412,7 @@
 
 </li>
 </ol>
-<h3 id="configuring-the-tester-host">Configuring the Tester host</h3>
+<h3 id="configuring-the-tester-host">Configuring the Tester host<a class="headerlink" href="#configuring-the-tester-host" title="Permanent link">&para;</a></h3>
 <p>Complete the following steps <strong>on your Tester host</strong>:</p>
 <ol>
 <li>
@@ -460,13 +460,13 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 
 </li>
 </ol>
-<h2 id="using-the-tester">Using the Tester</h2>
+<h2 id="using-the-tester">Using the Tester<a class="headerlink" href="#using-the-tester" title="Permanent link">&para;</a></h2>
 <p>There are at least two aspects of using the Tester:</p>
 <ul>
 <li>Managing the services that are associated with the Tester software</li>
 <li>Viewing results from the Tester</li>
 </ul>
-<h3 id="managing-tester-services">Managing Tester services</h3>
+<h3 id="managing-tester-services">Managing Tester services<a class="headerlink" href="#managing-tester-services" title="Permanent link">&para;</a></h3>
 <p>Because the Tester is built on other OSG software, there are a number of services in your installation. The specific services are:</p>
 <table>
 <thead>
@@ -494,14 +494,14 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 </tr>
 </tbody>
 </table>
-<h3 id="viewing-tester-results">Viewing Tester results</h3>
+<h3 id="viewing-tester-results">Viewing Tester results<a class="headerlink" href="#viewing-tester-results" title="Permanent link">&para;</a></h3>
 <p>Once the Tester RSV probe is enabled and active, and the services listed above have been started, there are two kinds of RSV probes that run periodically:</p>
 <ul>
 <li>One probe asks the GlideinWMS factory for the up-to-date list of sites supported by your VO(s) — runs every 30 minutes</li>
 <li>One probe submits and monitors one test job to each site supported by your VO(s) — run every 60 minutes</li>
 </ul>
 <p>You can view the latest results of both probe types on an RSV results web page, or you can manually run the first probe to see the full list of sites.</p>
-<h4 id="viewing-rsv-results-online">Viewing RSV results online</h4>
+<h4 id="viewing-rsv-results-online">Viewing RSV results online<a class="headerlink" href="#viewing-rsv-results-online" title="Permanent link">&para;</a></h4>
 <p>To see the latest results, access <code>https://<span style="color:red">&lt;HOSTNAME&gt;</span>/rsv/</code> (where <code>HOSTNAME</code> is the name of your Tester host).</p>
 <ul>
 <li>There should be one result row per site supported by your VO(s), using the “org.osg.general.dummy-vanilla-probe” probe (aka <em>metric</em>)</li>
@@ -511,7 +511,7 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 <p>Ideally, each site supported by your VO(s) should be shown with a green background, which indicates that a Tester job ran at that site recently and successfully. There may be transient failures but if you notice a site in the failed state over multiple days, contact OSG Factory Operations (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#115;&#103;&#45;&#103;&#102;&#97;&#99;&#116;&#111;&#114;&#121;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#112;&#104;&#121;&#115;&#105;&#99;&#115;&#46;&#117;&#99;&#115;&#100;&#46;&#101;&#100;&#117;">&#111;&#115;&#103;&#45;&#103;&#102;&#97;&#99;&#116;&#111;&#114;&#121;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#112;&#104;&#121;&#115;&#105;&#99;&#115;&#46;&#117;&#99;&#115;&#100;&#46;&#101;&#100;&#117;</a>) about the failing site, including a link to your Tester RSV results page.</p>
 <p>To see detailed information from each probe, click on the probe name in the Metric column.</p>
 <p>To see the list of sites that are supported by your VO(s) and are being tested, click the “org.osg.local-gfactory-site-querying-local” link at the bottom of the list of probes. You can also run the probe manually, as described next.</p>
-<h3 id="listing-supported-sites-manually">Listing supported sites manually</h3>
+<h3 id="listing-supported-sites-manually">Listing supported sites manually<a class="headerlink" href="#listing-supported-sites-manually" title="Permanent link">&para;</a></h3>
 <p>To manually run the probe that fetches the list of sites supported by your VO(s), run the following command on your Tester host:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> rsv-control --run org.osg.local-gfactory-site-querying-local --host localhost
 </pre></div>
@@ -523,7 +523,7 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 
 
 <p>The highlighted name is the site name, and there should be one such line per site supported by your VO(s).</p>
-<h2 id="troubleshooting-rsv-gwms-tester">Troubleshooting RSV-GWMS-Tester</h2>
+<h2 id="troubleshooting-rsv-gwms-tester">Troubleshooting RSV-GWMS-Tester<a class="headerlink" href="#troubleshooting-rsv-gwms-tester" title="Permanent link">&para;</a></h2>
 <p>You can find more information on troubleshooting in the <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallRSV#Troubleshooting_RSV">RSV troubleshooting section</a></p>
 <p>Logs and configuration:</p>
 <table>
@@ -558,10 +558,10 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 </tr>
 </tbody>
 </table>
-<h2 id="getting-help">Getting Help</h2>
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use the <a href="../../common/help/">this page</a>.</p>
-<h2 id="reference">Reference</h2>
-<h3 id="certificates">Certificates</h3>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
+<h3 id="certificates">Certificates<a class="headerlink" href="#certificates" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -579,7 +579,7 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 </tbody>
 </table>
 <p>Find instructions to request a host certificate <a href="../../common/pki-cli/">here</a>.</p>
-<h3 id="networking">Networking</h3>
+<h3 id="networking">Networking<a class="headerlink" href="#networking" title="Permanent link">&para;</a></h3>
 <p><a href="../common/firewall.md">Firewall Information</a></p>
               
             </div>

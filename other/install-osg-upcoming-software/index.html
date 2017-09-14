@@ -334,19 +334,19 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="osg-upcoming-software-repositories-installation-guide">OSG Upcoming Software Repositories Installation Guide</h1>
+                <h1 id="osg-upcoming-software-repositories-installation-guide">OSG Upcoming Software Repositories Installation Guide<a class="headerlink" href="#osg-upcoming-software-repositories-installation-guide" title="Permanent link">&para;</a></h1>
 <p>Here we describe the OSG Upcoming Software Repositories, their purpose, and how to use them.</p>
 <p>This document is intended for site administrators.</p>
-<h2 id="overview-and-purpose">Overview and Purpose</h2>
+<h2 id="overview-and-purpose">Overview and Purpose<a class="headerlink" href="#overview-and-purpose" title="Permanent link">&para;</a></h2>
 <p>Certain sites have requested new versions of software that would be considered "disruptive" or "experimental" -- upgrading to them would likely require manual intervention before the site would come back up. We do not want sites to unwittingly upgrade to these versions. For the benefit of the sites that do want to upgrade, we want to provide the same assurance of quality and production-readiness that we provide to the software we currently ship now.</p>
 <p>Due to the relatively small number of such packages, a full fork of the OSG 3 distribution was not warranted. Instead, we have created a separate set of repositories that contain only the "disruptive" versions of the software.</p>
 <p>These repositories have the same structure as our standard repositories. For example, there is an <code>osg-upcoming-testing</code> repository and an <code>osg-upcoming</code> repository.</p>
 <p>A full installation of our software stack is <em>not</em> be possible using only the <code>osg-upcoming</code> repositories, since they contain a small subset of the software we ship. Both the main <code>osg</code> and the <code>osg-upcoming</code> repositories will need to be enabled for the installation to work. Because of this, interoperability will be maintained between the main <code>osg</code> and <code>osg-upcoming</code>.</p>
 <p>Depending on test results from sites, some packages in <code>osg-upcoming</code> may eventually end up in the main <code>osg</code> branch. The rest of the packages will eventually form the nucleus of the next fork of the software stack (e.g. "OSG 3.5").</p>
-<h2 id="installation-and-usage">Installation and Usage</h2>
+<h2 id="installation-and-usage">Installation and Usage<a class="headerlink" href="#installation-and-usage" title="Permanent link">&para;</a></h2>
 <p>The following directions must be followed to install software from the Upcoming repositories.</p>
 <p>First, install the standard OSG YUM repositories as per <a href="../../common/yum">the YUM repositories guide</a>.</p>
-<h2 id="enabling-upcoming-repositories">Enabling Upcoming repositories</h2>
+<h2 id="enabling-upcoming-repositories">Enabling Upcoming repositories<a class="headerlink" href="#enabling-upcoming-repositories" title="Permanent link">&para;</a></h2>
 <p>You should have a file called <code>osg-upcoming.repo</code> (el7) or <code>osg-el6-upcoming.repo</code> (el6) located in <code>/etc/yum.repos.d</code>. At the top, it should have a section looking like this (el7):</p>
 <div class="codehilite"><pre><span></span><span class="k">[osg-upcoming]</span>
 <span class="na">name</span><span class="o">=</span><span class="s">OSG Software for Enterprise Linux 7 - Upcoming - $basearch</span>

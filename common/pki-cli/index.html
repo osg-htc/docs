@@ -340,20 +340,20 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="osg-pki-command-line-clients">OSG PKI Command Line Clients</h1>
-<h2 id="overview">Overview</h2>
+                <h1 id="osg-pki-command-line-clients">OSG PKI Command Line Clients<a class="headerlink" href="#osg-pki-command-line-clients" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>The OSG PKI Command Line Clients provide a command-line interface for requesting and issuing host certificates from the OSG PKI. They complement the <a href="https://oim.grid.iu.edu/oim/certificateuser">OIM Web Interface</a>.</p>
-<h2 id="prerequisites">Prerequisites</h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <p>If you have not already done so, you need to <a href="../yum/">configure the OSG software repositories</a>.</p>
-<h2 id="installation">Installation</h2>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>The command-line scripts have been packaged as an RPM and are available from the OSG repositories.</p>
 <p>To install the RPM, run:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install osg-pki-tools
 </pre></div>
 
 
-<h2 id="usage">Usage</h2>
-<h3 id="configuration-files">Configuration Files</h3>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="configuration-files">Configuration Files<a class="headerlink" href="#configuration-files" title="Permanent link">&para;</a></h3>
 <p>This configuration file contains information divided into two sections for testing and production.  Configuration variables include:</p>
 <ul>
 <li>Request URL</li>
@@ -367,7 +367,7 @@
 <li><code>./pki-clients.ini</code></li>
 <li><code>/etc/pki-clients.ini</code></li>
 </ul>
-<h3 id="osg-cert-request">osg-cert-request</h3>
+<h3 id="osg-cert-request">osg-cert-request<a class="headerlink" href="#osg-cert-request" title="Permanent link">&para;</a></h3>
 <p>Sends a request for a host certificate.</p>
 <p>This script generates a private key and submits a request for a certificate to the OSG PKI. The request will be approved by an appropriate Grid Admin. You will receive an email when this approval has been completed containing directions on how to run <code>osg-cert-retreive</code> to retrieve the certificate. It works in two modes:</p>
 <ul>
@@ -430,7 +430,7 @@
 </pre></div>
 
 
-<h4 id="examples">Examples.</h4>
+<h4 id="examples">Examples.<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h4>
 <p>OSG generates the key pair for the request.</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n <span class="s2">&quot;Your Name&quot;</span> -p <span class="m">9999999999</span> -y <span class="s2">&quot;xyz@domain.com,abc@domain.com&quot;</span> -m <span class="s2">&quot;This is my comment&quot;</span>
 </pre></div>
@@ -452,7 +452,7 @@
 </pre></div>
 
 
-<h3 id="osg-cert-retrieve">osg-cert-retrieve</h3>
+<h3 id="osg-cert-retrieve">osg-cert-retrieve<a class="headerlink" href="#osg-cert-retrieve" title="Permanent link">&para;</a></h3>
 <p>Retrieve a certificate (host or user) from OIM given a request Id. Typically you will run this script after submitting a request with <code>osg-cert-request</code> and receiving an email telling you your certificate has been approved.</p>
 <p>You can also use this script to retrieve other certificates that have been previously issued (assuming you know their request ID number).</p>
 <p>Since certificates are public, no authentication of the user is required.</p>
@@ -496,7 +496,7 @@
 </pre></div>
 
 
-<h3 id="osg-gridadmin-cert-request">osg-gridadmin-cert-request</h3>
+<h3 id="osg-gridadmin-cert-request">osg-gridadmin-cert-request<a class="headerlink" href="#osg-gridadmin-cert-request" title="Permanent link">&para;</a></h3>
 <p>Request and retrieve multliple host certificates from OIM. Authenticates to OIM and is only for use by Grid Admins for certificates they are authorized to approve. This script is only supported with all hosts being in the same domain (so we ensure they go to the same Grid Admin). The certificates are stored with the format of <code>hostname-requestid.pem</code> (i.e. the id generated from the request for the certificate). The key is stored as <code>hostname-serial-key.pem</code>.</p>
 <p>This script does the following in the process of acquiring certificates for the hostnames specified:</p>
 <ul>
@@ -583,7 +583,7 @@
 </pre></div>
 
 
-<h3 id="osg-user-cert-renew">osg-user-cert-renew</h3>
+<h3 id="osg-user-cert-renew">osg-user-cert-renew<a class="headerlink" href="#osg-user-cert-renew" title="Permanent link">&para;</a></h3>
 <p>Sends a request for renewing a user certificate and if the certificate can be renewed, fetches and writes the renewed certificate.</p>
 <p>The script generates request for renewing user certificate to the OIM, and if the certificate is renewed, it fetches the renewed user certificate. The user is authenticated before making such a request. If the user certificate is renewed, the user gets email notification regarding the same and the renewed certificate is saved by the name of the existing certificate suffixed by <code>-renewed.pem</code> (e.g. when we renew <code>my-cert.pem</code>, the renewed certificate is named <code>my-cert-renewed.pem</code>).</p>
 <p><strong>Inputs:</strong></p>
@@ -631,7 +631,7 @@
 </pre></div>
 
 
-<h3 id="osg-user-cert-revoke">osg-user-cert-revoke</h3>
+<h3 id="osg-user-cert-revoke">osg-user-cert-revoke<a class="headerlink" href="#osg-user-cert-revoke" title="Permanent link">&para;</a></h3>
 <p>Revoke a user certificate from OIM given a request ID or certificate ID. Usually the script is run when a user wants to revoke user certificate.</p>
 <p>For revoking user certificate, user authentication is done and if the user is authorized to revoke the user certificate, the certificate is immediately revoked and an email notification is sent informing the user that the user certificate is revoked.</p>
 <p><strong>The script:</strong></p>
@@ -686,7 +686,7 @@
 </pre></div>
 
 
-<h3 id="osg-cert-revoke">osg-cert-revoke</h3>
+<h3 id="osg-cert-revoke">osg-cert-revoke<a class="headerlink" href="#osg-cert-revoke" title="Permanent link">&para;</a></h3>
 <p>Revoke a host certificate from OIM given a request ID. Usually the script is run when a user wants to revoke host/service certificate.</p>
 <p>For revoking host certificate, user authentication is done and if the user is authorized to revoke the host certificate, the certificate is immediately revoked and an email notification is sent informing the user that the host certificate is revoked.</p>
 <p><strong>The script:</strong></p>
@@ -741,11 +741,11 @@
 </pre></div>
 
 
-<h2 id="test-mode">Test Mode</h2>
+<h2 id="test-mode">Test Mode<a class="headerlink" href="#test-mode" title="Permanent link">&para;</a></h2>
 <p>The scripts have two modes of execution.</p>
 <p>In the normal mode of execution, the script connects to the production server and generated certificates are from default OSG CA.</p>
 <p>If the user provides a <code>-T</code> parameter on the command-line, the scripts connect to the OIM-ITB server and any generated certificates are issued by the OSG test CAs. This mode is intended for testing and training. The resulting certificates are not usable in a production environment.</p>
-<h2 id="current-limitations-and-bugs">Current Limitations and Bugs</h2>
+<h2 id="current-limitations-and-bugs">Current Limitations and Bugs<a class="headerlink" href="#current-limitations-and-bugs" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Note that Common Names (CNs) are limited to 64 characters. This is a limitation of OpenSSL and the PKI standard. For details see <a href="https://jira.opensciencegrid.org/browse/OSGPKI-252">OSGPKI-252</a>.</li>
 </ul>

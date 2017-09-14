@@ -340,16 +340,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="installing-and-using-the-worker-node-client-from-tarballs">Installing and Using the Worker Node Client from Tarballs</h1>
-<h2 id="introduction">Introduction</h2>
+                <h1 id="installing-and-using-the-worker-node-client-from-tarballs">Installing and Using the Worker Node Client from Tarballs<a class="headerlink" href="#installing-and-using-the-worker-node-client-from-tarballs" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>This document is intended to guide users through the process of installing the worker node software and configuring the installed worker node software. Contents of the worker node client can be found <a href="../wn/#worker-node-contents">here</a>.  Although this document is oriented to system administrators, any unprivileged user may install and use the client.</p>
 <p>If you are installing the OSG worker node client following these instruction, remember to configure the <code>grid_dir</code> option on your CE - see <a href="#configure-the-ce">below</a>.</p>
-<h2 id="about-this-guide">About This Guide</h2>
+<h2 id="about-this-guide">About This Guide<a class="headerlink" href="#about-this-guide" title="Permanent link">&para;</a></h2>
 <p>The <em>OSG Worker Node Client</em> is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use.</p>
 <p>It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:  This guide is useful when installing onto a shared filesystem for distribution to worker nodes.  Other options include installing <a href="../wn/">via RPMs</a> or providing the client <a href="../wn-oasis">via OASIS (CVMFS)</a>.</p>
 <p>Before starting, ensure the host has <a href="../../release/supported_platforms/">a supported operating system</a>.</p>
-<h2 id="download-installation-and-configuration">Download, Installation and Configuration</h2>
-<h3 id="download-the-wn-client">Download the WN Client</h3>
+<h2 id="download-installation-and-configuration">Download, Installation and Configuration<a class="headerlink" href="#download-installation-and-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="download-the-wn-client">Download the WN Client<a class="headerlink" href="#download-the-wn-client" title="Permanent link">&para;</a></h3>
 <p>Please pick the <code>osg-wn-client</code> tarball that is appropriate for your distribution and architecture. You will find them in <a href="https://repo.grid.iu.edu/tarball-install/">https://repo.grid.iu.edu/tarball-install/</a> .</p>
 <p>The latest available the tarballs for OSG 3.3 are:</p>
 <ul>
@@ -362,7 +362,7 @@
 <li><a href="https://repo.grid.iu.edu/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz">Binaries for 64-bit RHEL6</a></li>
 <li><a href="https://repo.grid.iu.edu/tarball-install/3.4/osg-wn-client-latest.el7.x86_64.tar.gz">Binaries for RHEL7</a></li>
 </ul>
-<h3 id="install-the-wn-client">Install the WN Client</h3>
+<h3 id="install-the-wn-client">Install the WN Client<a class="headerlink" href="#install-the-wn-client" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Unpack the tarball.</li>
 <li>Move the directory that was created to where you want the tarball client to be.</li>
@@ -388,12 +388,12 @@
 </pre></div>
 
 
-<h4 id="configure-the-ce">Configure the CE</h4>
+<h4 id="configure-the-ce">Configure the CE<a class="headerlink" href="#configure-the-ce" title="Permanent link">&para;</a></h4>
 <p>Using the wn-client software installed from the tarball will require a few changes on the compute element so that the resource's configuration can be correctly reported.</p>
 <p>Set <code>grid_dir</code> in the <code>Storage</code> section of your OSG-Configure configs: <a href="../../other/configuration-with-osg-configure#storage">CE configuration instructions</a>. <code>grid_dir</code> is used as the <code>$OSG_GRID</code> environment variable in running jobs - see <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/EnvironmentVariables">the environment variables document</a>. Pilot jobs source <code>$OSG_GRID/setup.sh</code> before performing any work. The value set for <code>grid_dir</code> must be the path of the wn-client installation directory. This is the path returned by <strong><code>echo $OSG_LOCATION</code></strong> once you source the setup file created by this installation.</p>
-<h2 id="services">Services</h2>
+<h2 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h2>
 <p>The WN client is a collection of client programs that do not require service startup or shutdown. The only services are <code>osg-update-certs</code> that keeps the CA certificates up-to-date and <code>fetch-crl</code> that keeps the CRLs up-to-date. Following the instructions below you'll add the services to your crontab that will take care to run them periodically until you remove them.</p>
-<h3 id="auto-updating-certificates-and-crls">Auto-updating certificates and CRLs</h3>
+<h3 id="auto-updating-certificates-and-crls">Auto-updating certificates and CRLs<a class="headerlink" href="#auto-updating-certificates-and-crls" title="Permanent link">&para;</a></h3>
 <p>You must create cron jobs to run <code>fetch-crl</code> and <code>osg-update-certs</code> to update your CRLs and certificates automatically.</p>
 <p>Here is what they should look like. (Note: fill in <code>&lt;OSG_LOCATION&gt;</code> with the full path of your tarball install, including <code>osg-wn-client</code> that is created by the tarball).</p>
 <div class="codehilite"><pre><span></span># Cron job to update certs.
@@ -411,17 +411,17 @@
 
 
 <p>You might want to configure proxy settings in <code>$OSG_LOCATION/etc/fetch-crl.conf</code>.</p>
-<h3 id="starting-and-enabling-services">Starting and Enabling Services</h3>
+<h3 id="starting-and-enabling-services">Starting and Enabling Services<a class="headerlink" href="#starting-and-enabling-services" title="Permanent link">&para;</a></h3>
 <p>To start the services you must edit your cron with <strong><code>crontab -e</code></strong> and add the lines above.</p>
-<h3 id="stopping-and-disabling-services">Stopping and Disabling Services</h3>
+<h3 id="stopping-and-disabling-services">Stopping and Disabling Services<a class="headerlink" href="#stopping-and-disabling-services" title="Permanent link">&para;</a></h3>
 <p>To stop the services you must edit your cron with <strong><code>crontab -e</code></strong> and remove or comment the lines above.</p>
-<h2 id="validing-the-worker-node-client">Validing the Worker Node Client</h2>
+<h2 id="validing-the-worker-node-client">Validing the Worker Node Client<a class="headerlink" href="#validing-the-worker-node-client" title="Permanent link">&para;</a></h2>
 <p>To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.</p>
 <ol>
 <li>Submit a job that executes the <code>env</code> command (e.g. Run <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_ce_trace"><code>condor_ce_trace</code></a> with the <code>-d</code> flag from your HTCondor CE)</li>
 <li>Verify that the value of <code>$OSG_GRID</code> is set to the directory of your worker node client installation</li>
 </ol>
-<h2 id="how-to-get-help">How to get Help?</h2>
+<h2 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance please use this <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HelpProcedure">Help Procedure</a>.</p>
               
             </div>

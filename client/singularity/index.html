@@ -340,7 +340,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="install-singularity">Install Singularity</h1>
+                <h1 id="install-singularity">Install Singularity<a class="headerlink" href="#install-singularity" title="Permanent link">&para;</a></h1>
 <p><a href="http://singularity.lbl.gov">Singularity</a> is a tool that creates
 docker-like process containers but without giving extra privileges to
 unprivileged users.  It is used by grid pilot jobs (which are
@@ -368,14 +368,14 @@ install singularity or enable it to be run as an unprivileged user.</p>
 <p>The applicable software versions for this document are OSG Version &gt;= 3.4.3.
 The version of singularity installed should be &gt;= 2.3.1</p>
 </div>
-<h2 id="before-starting">Before Starting</h2>
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
 <ul>
 <li>Ensure the host has <a href="../../release/supported_platforms">a supported operating system</a></li>
 <li>Obtain root access to the host</li>
 <li>If you're installing singularity, prepare the <a href="../../common/yum">required Yum repositories</a></li>
 </ul>
-<h2 id="using-singularity-via-cvmfs-el-74-only">Using Singularity via CVMFS (EL 7.4 only)</h2>
+<h2 id="using-singularity-via-cvmfs-el-74-only">Using Singularity via CVMFS (EL 7.4 only)<a class="headerlink" href="#using-singularity-via-cvmfs-el-74-only" title="Permanent link">&para;</a></h2>
 <p>If you are using a RHEL 7.4 variant OS, you can skip installation
 altogether and use singularity through CVMFS:</p>
 <ol>
@@ -413,7 +413,7 @@ altogether and use singularity through CVMFS:</p>
 
 </li>
 </ol>
-<h2 id="installing-singularity">Installing singularity</h2>
+<h2 id="installing-singularity">Installing singularity<a class="headerlink" href="#installing-singularity" title="Permanent link">&para;</a></h2>
 <p>To install singularity, make sure that your host is up to date before installing the required packages:</p>
 <ol>
 <li>
@@ -451,10 +451,10 @@ altogether and use singularity through CVMFS:</p>
 </ul>
 </li>
 </ol>
-<h2 id="configuring-singularity">Configuring singularity</h2>
+<h2 id="configuring-singularity">Configuring singularity<a class="headerlink" href="#configuring-singularity" title="Permanent link">&para;</a></h2>
 <p>The default configuration of singularity is sufficient.  If you want
 to see what options are available, see <code>/etc/singularity/singularity.conf</code>.</p>
-<h2 id="validating-singularity">Validating singularity</h2>
+<h2 id="validating-singularity">Validating singularity<a class="headerlink" href="#validating-singularity" title="Permanent link">&para;</a></h2>
 <p>After singularity is installed, as an ordinary user run the following
 command to verify it:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> singlarity <span class="nb">exec</span> -C -H <span class="nv">$HOME</span>:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 ps -ef
@@ -465,7 +465,7 @@ command to verify it:</p>
 
 
 <p><br></p>
-<h2 id="starting-and-stopping-services">Starting and Stopping services</h2>
+<h2 id="starting-and-stopping-services">Starting and Stopping services<a class="headerlink" href="#starting-and-stopping-services" title="Permanent link">&para;</a></h2>
 <p>singularity has no services to start or stop.</p>
               
             </div>

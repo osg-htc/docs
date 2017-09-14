@@ -348,11 +348,11 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="installing-and-maintaining-htcondor-ce">Installing and Maintaining HTCondor-CE</h1>
-<h2 id="about-this-guide">About This Guide</h2>
+                <h1 id="installing-and-maintaining-htcondor-ce">Installing and Maintaining HTCondor-CE<a class="headerlink" href="#installing-and-maintaining-htcondor-ce" title="Permanent link">&para;</a></h1>
+<h2 id="about-this-guide">About This Guide<a class="headerlink" href="#about-this-guide" title="Permanent link">&para;</a></h2>
 <p>The <a href="../htcondor-ce-overview">HTCondor-CE</a> software is a <em>job gateway</em> for an OSG Compute Element (CE). As such, HTCondor-CE is the entry point for jobs coming from the OSG — it handles authorization and delegation of jobs to your local batch system. In OSG today, most CEs accept <em>pilot jobs</em> from a factory, which in turn are able to accept and run end-user jobs.  See the <a href="../htcondor-ce-overview">HTCondor-CE Overview</a> for a much more detailed introduction.</p>
 <p>Use this page to learn how to install, configure, run, test, and troubleshoot HTCondor-CE from the OSG software repositories.</p>
-<h2 id="before-starting">Before Starting</h2>
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
 <ul>
 <li><strong>User IDs:</strong> If they do not exist already, the installation will create the Linux users <code>condor</code> (UID 4716) and <code>gratia</code> (UID 42401)</li>
@@ -367,7 +367,7 @@
 <li>Prepare the <a href="../../common/yum">required Yum repositories</a></li>
 <li>Install <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth">CA certificates</a></li>
 </ul>
-<h2 id="installing-htcondor-ce">Installing HTCondor-CE</h2>
+<h2 id="installing-htcondor-ce">Installing HTCondor-CE<a class="headerlink" href="#installing-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>An HTCondor-CE installation consists of the job gateway (i.e., the HTCondor-CE job router) and other support software (e.g., GridFTP, a Gratia probe, authentication software). To simplify installation, OSG provides convenience RPMs that install all required software with a single command.</p>
 <ol>
 <li>
@@ -462,25 +462,25 @@
 
 </li>
 </ol>
-<h2 id="configuring-htcondor-ce">Configuring HTCondor-CE</h2>
+<h2 id="configuring-htcondor-ce">Configuring HTCondor-CE<a class="headerlink" href="#configuring-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>There are a few required configuration steps to connect HTCondor-CE with your batch system and authentication method. For more advanced configuration, see the section on <a href="#optional-configuration">optional configurations</a>.</p>
-<h3 id="enabling-htcondor-ce">Enabling HTCondor-CE</h3>
+<h3 id="enabling-htcondor-ce">Enabling HTCondor-CE<a class="headerlink" href="#enabling-htcondor-ce" title="Permanent link">&para;</a></h3>
 <p>If you are installing HTCondor-CE on a new host, the default configuration is correct and you can skip this step and continue onto <a href="#configuring-the-batch-system">Configuring the batch system</a>! However, if you are updating a host that used a Globus GRAM job gateway (aka the Globus gatekeeper), you must disable GRAM and enable the HTCondor job gateway. Edit the gateway configuration file <code>/etc/osg/config.d/10-gateway.ini</code> so that it reads:</p>
 <div class="codehilite"><pre><span></span>gram_gateway_enabled = False
 htcondor_gateway_enabled = True
 </pre></div>
 
 
-<h3 id="configuring-the-batch-system">Configuring the batch system</h3>
+<h3 id="configuring-the-batch-system">Configuring the batch system<a class="headerlink" href="#configuring-the-batch-system" title="Permanent link">&para;</a></h3>
 <p>Enable your batch system by editing the <code>enabled</code> field in the <code>/etc/osg/config.d/20-&lt;YOUR BATCH SYSTEM&gt;.ini</code></p>
 <div class="codehilite"><pre><span></span>enabled = <span style="color:red">True</span>
 </pre></div>
 
 
 <p>If you are using HTCondor as your <strong>local batch system</strong> (i.e., in addition to your HTCondor-CE), skip to the <a href="#configuring-authentication">configuring authentication</a> section. For other batch systems (e.g., PBS, LSF, SGE, SLURM), keep reading.</p>
-<h4 id="batch-systems-other-than-htcondor">Batch systems other than HTCondor</h4>
+<h4 id="batch-systems-other-than-htcondor">Batch systems other than HTCondor<a class="headerlink" href="#batch-systems-other-than-htcondor" title="Permanent link">&para;</a></h4>
 <p>Non-HTCondor batch systems require additional configuration to support file transfer to your site's worker nodes.</p>
-<h5 id="sharing-the-spool-directory">Sharing the spool directory</h5>
+<h5 id="sharing-the-spool-directory">Sharing the spool directory<a class="headerlink" href="#sharing-the-spool-directory" title="Permanent link">&para;</a></h5>
 <p>To transfer files between the CE and the batch system, HTCondor-CE requires a shared file system. The current recommendation is to run a dedicated NFS server (whose installation is beyond the scope of this document) on the <strong>CE host</strong>. In this setup, HTCondor-CE writes to the local spool directory and the NFS server shares the directory with all of the worker nodes.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -495,7 +495,7 @@ htcondor_gateway_enabled = True
 <p class="admonition-title">Note</p>
 <p>The shared spool directory must be readable and writeable by the <code>condor</code> user for HTCondor-CE to function correctly.</p>
 </div>
-<h5 id="disable-worker-node-proxy-renewal">Disable worker node proxy renewal</h5>
+<h5 id="disable-worker-node-proxy-renewal">Disable worker node proxy renewal<a class="headerlink" href="#disable-worker-node-proxy-renewal" title="Permanent link">&para;</a></h5>
 <p>Worker node proxy renewal is not used by HTCondor-CE and leaving it on will cause some jobs to be held. Edit <code>/etc/blah.config</code> on the HTCondor-CE host and set the following values:</p>
 <div class="codehilite"><pre><span></span>blah_disable_wn_proxy_renewal=yes
 blah_delegate_renewed_proxies=no
@@ -507,10 +507,10 @@ blah_disable_limited_proxy=yes
 <p class="admonition-title">Note</p>
 <p>There should be no whitespace around the <code>=</code>.</p>
 </div>
-<h3 id="configuring-authentication">Configuring authentication</h3>
+<h3 id="configuring-authentication">Configuring authentication<a class="headerlink" href="#configuring-authentication" title="Permanent link">&para;</a></h3>
 <p>In OSG 3.3, there are three methods to manage authentication for incoming jobs: the <a href="../../security/lcmaps-voms-authentication">LCMAPS VOMS plugin</a>, <a href="../../security/edg-mkgridmap">edg-mkgridmap</a> and <a href="../../security/install-gums">GUMS</a>. edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support <a href="https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html">pool accounts</a>, GUMS is the only software with that capability.</p>
 <p>In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution.</p>
-<h4 id="authentication-with-the-lcmaps-voms-plugin">Authentication with the LCMAPS VOMS plugin</h4>
+<h4 id="authentication-with-the-lcmaps-voms-plugin">Authentication with the LCMAPS VOMS plugin<a class="headerlink" href="#authentication-with-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h4>
 <p>To configure your CE to use the LCMAPS VOMS plugin:</p>
 <ol>
 <li>
@@ -528,7 +528,7 @@ blah_disable_limited_proxy=yes
 <p class="admonition-title">Note</p>
 <p>If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the <code>condor_mapfile</code>. If this is not the desired behavior, set <code>GSI_AUTHZ_CONF=/dev/null</code> in the local HTCondor configuration.</p>
 </div>
-<h4 id="authentication-with-edg-mkgridmap">Authentication with edg-mkgridmap</h4>
+<h4 id="authentication-with-edg-mkgridmap">Authentication with edg-mkgridmap<a class="headerlink" href="#authentication-with-edg-mkgridmap" title="Permanent link">&para;</a></h4>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>edg-mkgridmap is unavailable in OSG 3.4</p>
@@ -542,7 +542,7 @@ blah_disable_limited_proxy=yes
 
 </li>
 </ol>
-<h4 id="authentication-with-gums">Authentication with GUMS</h4>
+<h4 id="authentication-with-gums">Authentication with GUMS<a class="headerlink" href="#authentication-with-gums" title="Permanent link">&para;</a></h4>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>GUMS is unavailable in OSG 3.4</p>
@@ -560,10 +560,10 @@ gums_host = <span style="color:red">YOUR GUMS HOSTNAME</span>
 <p class="admonition-title">Note</p>
 <p>If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the <code>condor_mapfile</code>. If this is not the desired behavior, set <code>GSI_AUTHZ_CONF=/dev/null</code> in the local HTCondor configuration.</p>
 </div>
-<h3 id="configuring-ce-collector-advertising">Configuring CE collector advertising</h3>
+<h3 id="configuring-ce-collector-advertising">Configuring CE collector advertising<a class="headerlink" href="#configuring-ce-collector-advertising" title="Permanent link">&para;</a></h3>
 <p>To split jobs between the various sites of the OSG, information about each site's capabilities are uploaded to a central collector. The job factories then query the central collector for idle resources and submit pilot jobs to the available sites. To advertise your site, you will need to enter some information about the worker nodes of your clusters.</p>
 <p>Please see the <a href="../../other/configuration-with-osg-configure#subcluster-resource-entry">Subcluster / Resource Entry configuration document</a> about configuring the data that will be uploaded to the central collector.</p>
-<h3 id="applying-configuration-settings">Applying configuration settings</h3>
+<h3 id="applying-configuration-settings">Applying configuration settings<a class="headerlink" href="#applying-configuration-settings" title="Permanent link">&para;</a></h3>
 <p>Making changes to the OSG configuration files in the <code>/etc/osg/config.d</code> directory does not apply those settings to software automatically. Settings that are made outside of the OSG directory take effect immediately or at least when the relevant service is restarted. For the OSG settings, use the <a href="../../other/configuration-with-osg-configure">osg-configure</a> tool to validate (to a limited extent) and apply the settings to the relevant software components. The <code>osg-configure</code> software is included automatically in an HTCondor-CE installation.</p>
 <ol>
 <li>
@@ -610,7 +610,7 @@ gums_host = <span style="color:red">YOUR GUMS HOSTNAME</span>
 </ol>
 </li>
 </ol>
-<h3 id="optional-configuration">Optional configuration</h3>
+<h3 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
 <p>The following configuration steps are optional and will likely not be required for setting up a small site. If you do not need any of the following special configurations, skip to <a href="#using-htcondor-ce">the section on using HTCondor-CE</a>.</p>
 <ul>
 <li><a href="#transforming-and-filtering-jobs">Transforming and filtering jobs</a></li>
@@ -620,13 +620,13 @@ gums_host = <span style="color:red">YOUR GUMS HOSTNAME</span>
 <li><a href="#htcondor-accounting-groups">HTCondor accounting groups</a></li>
 <li><a href="#install-and-run-the-htcondor-ce-view">Installing the HTCondor-CE View</a></li>
 </ul>
-<h4 id="transforming-and-filtering-jobs">Transforming and filtering jobs</h4>
+<h4 id="transforming-and-filtering-jobs">Transforming and filtering jobs<a class="headerlink" href="#transforming-and-filtering-jobs" title="Permanent link">&para;</a></h4>
 <p>If you need to modify or filter jobs, more information can be found in the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/JobRouterRecipes">Job Router Recipes</a> document.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you need to assign jobs to HTCondor accounting groups, refer to <a href="#htcondor-accounting-groups">this</a> section.</p>
 </div>
-<h4 id="configuring-for-multiple-network-interfaces">Configuring for multiple network interfaces</h4>
+<h4 id="configuring-for-multiple-network-interfaces">Configuring for multiple network interfaces<a class="headerlink" href="#configuring-for-multiple-network-interfaces" title="Permanent link">&para;</a></h4>
 <p>If you have multiple network interfaces with different hostnames, the HTCondor-CE daemons need to know which hostname and interface to use when communicating to each other. Set <code>NETWORK_HOSTNAME</code> and <code>NETWORK_INTERFACE</code> to the hostname and IP address of your public interface, respectively, in <code>/etc/condor-ce/config.d/99-local.conf</code> directory with the line:</p>
 <div class="codehilite"><pre><span></span>NETWORK_HOSTNAME = <span style="color:red">condorce.example.com</span>
 NETWORK_INTERFACE = <span style="color:red">127.0.0.1</span>
@@ -634,7 +634,7 @@ NETWORK_INTERFACE = <span style="color:red">127.0.0.1</span>
 
 
 <p>Replacing <code>condorce.example.com</code> text with your public interface’s hostname and <code>127.0.0.1</code> with your public interface’s IP address.</p>
-<h4 id="limiting-or-disabling-locally-running-jobs-on-the-ce">Limiting or disabling locally running jobs on the CE</h4>
+<h4 id="limiting-or-disabling-locally-running-jobs-on-the-ce">Limiting or disabling locally running jobs on the CE<a class="headerlink" href="#limiting-or-disabling-locally-running-jobs-on-the-ce" title="Permanent link">&para;</a></h4>
 <p>If you want to limit or disable jobs running locally on your CE, you will need to configure HTCondor-CE's local and scheduler universes. Local and scheduler universes are HTCondor-CE’s analogue to GRAM’s managed fork: they allow jobs to be run on the CE itself, mainly for remote troubleshooting. Pilot jobs will not run as local/scheduler universe jobs so leaving them enabled does NOT turn your CE into another worker node.</p>
 <p>The two universes are effectively the same (scheduler universe launches a starter process for each job), so we will be configuring them in unison.</p>
 <ul>
@@ -667,7 +667,7 @@ NETWORK_INTERFACE = <span style="color:red">127.0.0.1</span>
 <p class="admonition-title">Note</p>
 <p>RSV requires the ability to start local universe jobs so if you are using RSV, you need to allow local universe jobs from the <code>rsv</code> user.</p>
 </div>
-<h4 id="accounting-with-multiple-ces-or-local-user-jobs">Accounting with multiple CEs or local user jobs</h4>
+<h4 id="accounting-with-multiple-ces-or-local-user-jobs">Accounting with multiple CEs or local user jobs<a class="headerlink" href="#accounting-with-multiple-ces-or-local-user-jobs" title="Permanent link">&para;</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For non-HTCondor batch systems only</p>
@@ -704,7 +704,7 @@ NETWORK_INTERFACE = <span style="color:red">127.0.0.1</span>
 </pre></div>
 
 
-<h4 id="htcondor-accounting-groups">HTCondor accounting groups</h4>
+<h4 id="htcondor-accounting-groups">HTCondor accounting groups<a class="headerlink" href="#htcondor-accounting-groups" title="Permanent link">&para;</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For HTCondor batch systems only</p>
@@ -744,7 +744,7 @@ cms\/Role=production cms.prod
 <p class="admonition-title">Note</p>
 <p>Entries in <code>/etc/osg/uid_table.txt</code> are honored over <code>/etc/osg/extattr_table.txt</code> if a job would match to lines in both files.</p>
 </div>
-<h4 id="install-and-run-the-htcondor-ce-view">Install and run the HTCondor-CE View</h4>
+<h4 id="install-and-run-the-htcondor-ce-view">Install and run the HTCondor-CE View<a class="headerlink" href="#install-and-run-the-htcondor-ce-view" title="Permanent link">&para;</a></h4>
 <p>The HTCondor-CE View is an optional web interface to the status of your CE. To run the View,</p>
 <ol>
 <li>
@@ -773,14 +773,14 @@ cms\/Role=production cms.prod
 </li>
 </ol>
 <p>The website is served on port 80 by default. To change this default, edit the value of <code>HTCONDORCE_VIEW_PORT</code> in <code>/etc/condor-ce/config.d/05-ce-view.conf</code>.</p>
-<h2 id="using-htcondor-ce">Using HTCondor-CE</h2>
+<h2 id="using-htcondor-ce">Using HTCondor-CE<a class="headerlink" href="#using-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>As a site administrator, there are a few ways in which you might use the HTCondor-CE:</p>
 <ul>
 <li>Managing the HTCondor-CE and associated services</li>
 <li>Using HTCondor-CE administrative tools to monitor and maintain the job gateway</li>
 <li>Using HTCondor-CE user tools to test gateway operations</li>
 </ul>
-<h3 id="managing-htcondor-ce-and-associated-services">Managing HTCondor-CE and associated services</h3>
+<h3 id="managing-htcondor-ce-and-associated-services">Managing HTCondor-CE and associated services<a class="headerlink" href="#managing-htcondor-ce-and-associated-services" title="Permanent link">&para;</a></h3>
 <p>In addition to the HTCondor-CE job gateway service itself, there are a number of supporting services in your installation. The specific services are:</p>
 <table>
 <thead>
@@ -845,9 +845,9 @@ cms\/Role=production cms.prod
 </tr>
 </tbody>
 </table>
-<h3 id="using-htcondor-ce-tools">Using HTCondor-CE tools</h3>
+<h3 id="using-htcondor-ce-tools">Using HTCondor-CE tools<a class="headerlink" href="#using-htcondor-ce-tools" title="Permanent link">&para;</a></h3>
 <p>Some of the HTCondor-CE administrative and user tools are documented in <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE">the HTCondor-CE troubleshooting guide</a>.</p>
-<h2 id="validating-htcondor-ce">Validating HTCondor-CE</h2>
+<h2 id="validating-htcondor-ce">Validating HTCondor-CE<a class="headerlink" href="#validating-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>There are different ways to make sure that your HTCondor-CE host is working well:</p>
 <ul>
 <li>Perform automated validation by running <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallRSV">RSV</a></li>
@@ -858,17 +858,17 @@ cms\/Role=production cms.prod
 </ul>
 </li>
 </ul>
-<h2 id="troubleshooting-htcondor-ce">Troubleshooting HTCondor-CE</h2>
+<h2 id="troubleshooting-htcondor-ce">Troubleshooting HTCondor-CE<a class="headerlink" href="#troubleshooting-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>For information on how to troubleshoot your HTCondor-CE, please refer to <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE">the HTCondor-CE troubleshooting guide</a>.</p>
-<h2 id="registering-the-ce">Registering the CE</h2>
+<h2 id="registering-the-ce">Registering the CE<a class="headerlink" href="#registering-the-ce" title="Permanent link">&para;</a></h2>
 <p>To be part of the OSG Production Grid, your CE must be registered in the <a href="https://oim.opensciencegrid.org">OSG Information Management System</a> (OIM). To register your resource:</p>
 <ol>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CertificateUserGet">Obtain, install, and verify your user certificate</a> (which you may have done already)</li>
 <li><a href="https://twiki.grid.iu.edu/bin/view/Operations/OIMRegistrationInstructions">Register your site and CE in OIM</a></li>
 </ol>
-<h2 id="getting-help">Getting Help</h2>
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use the <a href="../../common/help">this page</a>.</p>
-<h2 id="reference">Reference</h2>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <p>Here are some other HTCondor-CE documents that might be helpful:</p>
 <ul>
 <li><a href="../htcondor-ce-overview">HTCondor-CE overview and architecture</a></li>
@@ -877,7 +877,7 @@ cms\/Role=production cms.prod
 <li><a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE">The HTCondor-CE troubleshooting guide</a></li>
 <li><a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/SubmittingHTCondorCE">Submitting jobs to HTCondor-CE</a></li>
 </ul>
-<h3 id="configuration">Configuration</h3>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
 <p>The following directories contain the configuration for HTCondor-CE. The directories are parsed in the order presented and thus configuration within the final directory will override configuration specified in the previous directories.</p>
 <table>
 <thead>
@@ -902,7 +902,7 @@ cms\/Role=production cms.prod
 </pre></div>
 
 
-<h3 id="users">Users</h3>
+<h3 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h3>
 <p>The following users are needed by HTCondor-CE at all sites:</p>
 <table>
 <thead>
@@ -922,7 +922,7 @@ cms\/Role=production cms.prod
 </tr>
 </tbody>
 </table>
-<h3 id="certificates">Certificates</h3>
+<h3 id="certificates">Certificates<a class="headerlink" href="#certificates" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -945,7 +945,7 @@ cms\/Role=production cms.prod
 </tbody>
 </table>
 <p>Find instructions to request a host certificate <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/GetHostServiceCertificates">here</a>.</p>
-<h3 id="networking">Networking</h3>
+<h3 id="networking">Networking<a class="headerlink" href="#networking" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>

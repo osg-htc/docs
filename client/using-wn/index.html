@@ -330,11 +330,11 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="introduction">Introduction</h1>
+                <h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h1>
 <p>The Worker Node Client is a collection of useful software components that is expected to be on every OSG worker node. In addition, a job running on a worker node can access a handful of environment variables that can be used to locate resources..</p>
 <p>This page describes how to initialize the environment of your job to correctly access the execution and data areas from the worker node.</p>
 <p>The OSG provides no scientific software dependencies or software build tools on the worker node; you are expected to bring along all application-level dependencies yourself (preferred; most portable) or utilize CVMFS. Sites are not required to provide any specific tools (<code>gcc</code>, <code>lapack</code>, <code>blas</code>, etc.) beyond the ones in the OSG worker node client.</p>
-<h1 id="common-software-available-on-worker-nodes">Common software available on worker nodes.</h1>
+<h1 id="common-software-available-on-worker-nodes">Common software available on worker nodes.<a class="headerlink" href="#common-software-available-on-worker-nodes" title="Permanent link">&para;</a></h1>
 <p>The OSG worker node client (called the <code>osg-wn-client</code> package) contains the following software:</p>
 <ul>
 <li>The supported set of CA certificates (located in $X509_CERT_DIR after the environment is set up)</li>
@@ -358,7 +358,7 @@
 </li>
 <li>MyProxy client tools</li>
 </ul>
-<h1 id="the-worker-node-environment">The Worker Node Environment</h1>
+<h1 id="the-worker-node-environment">The Worker Node Environment<a class="headerlink" href="#the-worker-node-environment" title="Permanent link">&para;</a></h1>
 <p>The following table outlines the various important directories and information in the worker node environment. A job running on an OSG worker node can refer to each directory using the corresponding environment variable.</p>
 <table>
 <thead>

@@ -350,10 +350,10 @@
 <p class="admonition-title">Warning</p>
 <p>GUMS is no longer be supported in OSG 3.4. The <a href="../../security/lcmaps-voms-authentication">LCMAPS VOMS Plugin</a> is the preferred method for site authentication in the OSG and is available in both OSG 3.3 and OSG 3.4.</p>
 </div>
-<h1 id="gums-install-guide">GUMS Install Guide</h1>
+<h1 id="gums-install-guide">GUMS Install Guide<a class="headerlink" href="#gums-install-guide" title="Permanent link">&para;</a></h1>
 <p>This document is intended for site administrators who want to install and configure the GUMS service.</p>
 <p>GUMS is a service that authorizes and maps users from their global (X.509) identity to a local (Linux user) identity. It is not a required service (some sites use the simple <code>edg-mkgridmap</code> to construct a <code>grid-mapfile</code> instead), but it is commonly used. GUMS is useful when more than one resource (Compute Element, Storage Element, etc.) needs to authorize or map users, because it helps them share data. It is particularly helpful when using gLExec at a site, because gLExec runs on every worker node and needs authorization and mapping information. GUMS is a web application that runs in Tomcat.</p>
-<h2 id="before-starting">Before Starting</h2>
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
 <ul>
 <li><strong>User IDs:</strong> If they do not exist already, the installation will create the Linux users <code>mysql</code> (UID 27) and <code>tomcat</code> (UID 91)</li>
@@ -367,7 +367,7 @@
 <li>Prepare the <a href="../../common/yum">required Yum repositories</a></li>
 <li>Install <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth">CA certificates</a></li>
 </ul>
-<h2 id="installing-gums">Installing GUMS</h2>
+<h2 id="installing-gums">Installing GUMS<a class="headerlink" href="#installing-gums" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Whether installing or upgrading GUMS, please make sure to follow <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7#InstallingJava">these instructions</a> for updating/installing Java to work correctly with GUMS</li>
 <li>If you have an existing GUMS installation on the same host, shut down Tomcat.
@@ -392,10 +392,10 @@ If you are using Tomcat on this host for non-grid purposes, you may want to save
 </div>
 </li>
 </ol>
-<h2 id="configuring-gums">Configuring GUMS</h2>
-<h3 id="configure-gums-database">Configure GUMS database</h3>
+<h2 id="configuring-gums">Configuring GUMS<a class="headerlink" href="#configuring-gums" title="Permanent link">&para;</a></h2>
+<h3 id="configure-gums-database">Configure GUMS database<a class="headerlink" href="#configure-gums-database" title="Permanent link">&para;</a></h3>
 <p>In this section, you will configure the GUMS MySQL database, either by creating a new database or by copying an existing GUMS database. Pick the appropriate subsection below for your environment.</p>
-<h4 id="new-installation">New Installation</h4>
+<h4 id="new-installation">New Installation<a class="headerlink" href="#new-installation" title="Permanent link">&para;</a></h4>
 <ol>
 <li>
 <p>Start the database server</p>
@@ -452,7 +452,7 @@ If you are using Tomcat on this host for non-grid purposes, you may want to save
 
 </li>
 </ol>
-<h4 id="upgrade-from-existing-gums-server-on-another-host">Upgrade from existing GUMS server on another host</h4>
+<h4 id="upgrade-from-existing-gums-server-on-another-host">Upgrade from existing GUMS server on another host<a class="headerlink" href="#upgrade-from-existing-gums-server-on-another-host" title="Permanent link">&para;</a></h4>
 <p><strong>Note for GUMS 1.4+:</strong> Since the database schema has not changed between GUMS 1.3 and 1.4, the database name continues to be <code>GUMS_1_3</code>. <em>Do not</em> rename <code>GUMS_1_3</code> database references to <code>GUMS_1_4</code>. There was a schema change within the GUMS 1.4 series, but this happens automatically when GUMS is started - make sure the GUMS user has permission to perform schema changes. Nevertheless the database name remains <code>GUMS_1_3</code> in GUMS 1.4 and GUMS 1.5.</p>
 <ol>
 <li>
@@ -494,9 +494,9 @@ If you are using Tomcat on this host for non-grid purposes, you may want to save
 
 </li>
 </ol>
-<h3 id="set-initial-gums-configuration">Set Initial GUMS Configuration</h3>
+<h3 id="set-initial-gums-configuration">Set Initial GUMS Configuration<a class="headerlink" href="#set-initial-gums-configuration" title="Permanent link">&para;</a></h3>
 <p>In this section, you will set up an initial GUMS configuration file, either by copying in an OSG template or by copying an existing configuration from an old installation. Pick the appropriate subsection below for your environment.</p>
-<h4 id="new-installation_1">New Installation</h4>
+<h4 id="new-installation_1">New Installation<a class="headerlink" href="#new-installation_1" title="Permanent link">&para;</a></h4>
 <p>If you ran the <code>gums-setup-mysql-database</code> command above with the <code>--template</code> option, the OSG GUMS template will be used. This should have created a suitable <code>/etc/gums/gums.config</code> with the configuration values in this section already filled in. <em>In that case, you can skip this section.</em></p>
 <p>If you ran the <code>gums-setup-mysql-database</code> command above <em>without</em> a <code>--template</code> option, it created a default, pre-configured <code>/etc/gums/gums.config</code> file. It is almost certainly not what you want. Instead, it is recommended that you start with an OSG template for your configuration.</p>
 <ol>
@@ -544,7 +544,7 @@ In either case, the value for <code>@SERVER@</code> <em>must</em> match the valu
 </div>
 </li>
 </ol>
-<h3 id="configure-log-rotation">Configure Log Rotation</h3>
+<h3 id="configure-log-rotation">Configure Log Rotation<a class="headerlink" href="#configure-log-rotation" title="Permanent link">&para;</a></h3>
 <p>By default, certain output is written to files named <code>/var/log/tomcat*/catalina.YYYY-MM-DD.log</code> without automatic cleanup of old logs. To configure log rotation and cleanup of <code>catalina.log</code>, follow the steps below:</p>
 <ol>
 <li>
@@ -594,7 +594,7 @@ In either case, the value for <code>@SERVER@</code> <em>must</em> match the valu
 
 </li>
 </ol>
-<h2 id="services">Services</h2>
+<h2 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h2>
 <p>The GUMS service is actually a web application running within the Tomcat web application server. It also uses the MySQL database server for storage and the Fetch CRL service to maintain each CRL. Choose the list of services based on your host's operating system:</p>
 <ul>
 <li>
@@ -688,9 +688,9 @@ In either case, the value for <code>@SERVER@</code> <em>must</em> match the valu
 </tr>
 </tbody>
 </table>
-<h2 id="validating-gums">Validating GUMS</h2>
+<h2 id="validating-gums">Validating GUMS<a class="headerlink" href="#validating-gums" title="Permanent link">&para;</a></h2>
 <p>This section is optional, but if you would like to verify that your GUMS installation and configuration are good, consider using some or all of the sections below.</p>
-<h3 id="connect-to-the-gums-web-page">Connect to the GUMS web page</h3>
+<h3 id="connect-to-the-gums-web-page">Connect to the GUMS web page<a class="headerlink" href="#connect-to-the-gums-web-page" title="Permanent link">&para;</a></h3>
 <p>Connect to <code>https://&lt;HOSTNAME&gt;:8443/gums/</code> to use your GUMS instance. You must have the certificate that you used for <code>gums-add-mysql-admin</code> above loaded in your browser. You should see the GUMS web page load.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -719,10 +719,10 @@ In either case, the value for <code>@SERVER@</code> <em>must</em> match the valu
 
 
 <p>If you change the permissions/ownership, make sure to restart tomcat so that your changes take effect.</p>
-<h3 id="check-accounts">Check accounts</h3>
+<h3 id="check-accounts">Check accounts<a class="headerlink" href="#check-accounts" title="Permanent link">&para;</a></h3>
 <p>After you connect to the GUMS web page, go to the Summary tab to check the configuration. You should see several dozen OSG VOs listed.</p>
 <p>In the Account column on the summary page, you will see the local Unix user accounts that these VO users will be mapped to. It is critical that these accounts exist on the gatekeeper and worker nodes at your site. If they do not, there will be errors when users attempt to access your site.</p>
-<h3 id="update-vo-members-list">Update VO members list</h3>
+<h3 id="update-vo-members-list">Update VO members list<a class="headerlink" href="#update-vo-members-list" title="Permanent link">&para;</a></h3>
 <p>GUMS contacts each VOMS server to update its knowledge of VO membership every 6 hours. After installing or updating GUMS, you should trigger the update manually by going to the Update VO Members tab, and clicking update.</p>
 <p>You can track the progress of the update process by watching a log file.</p>
 <p>For EL 6:</p>
@@ -736,14 +736,14 @@ In either case, the value for <code>@SERVER@</code> <em>must</em> match the valu
 
 
 <p>With so many VOMS servers in the OSG config, several member updates may fail for various reasons (e.g., host down "connect timed out", bad or expired host certificates, etc.). Unfortunately, this situation is normal. Typically, you will see about 5 or 6 failed updates, with the rest succeeding. The update will take a while and then should display any errors that occurred during the updates. To get more details or track the update process in real time, look at <code>/var/log/gums-service-admin.log</code>.</p>
-<h3 id="map-a-known-good-user-dn">Map a known good user DN</h3>
+<h3 id="map-a-known-good-user-dn">Map a known good user DN<a class="headerlink" href="#map-a-known-good-user-dn" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Go to Map Grid Identity to Account tab: <code>https://&lt;HOSTNAME&gt;:8443/gums/map_grid_identity_form.jsp</code></li>
 <li>Fill in the required info. Service DN means the DN of the host certificate of your CE (see above). Use the DN of a user (probably yourself) who you know belongs to a particular VO. Fill in the VO name in the VOMS FQAN field.</li>
 <li>Click "map user". A failed mapping will display "null". A successful mapping will display a UNIX account name.</li>
 </ol>
-<h2 id="miscellaneous-procedures">Miscellaneous Procedures</h2>
-<h3 id="forcing-gums-to-update-the-set-of-users">Forcing GUMS to update the set of users</h3>
+<h2 id="miscellaneous-procedures">Miscellaneous Procedures<a class="headerlink" href="#miscellaneous-procedures" title="Permanent link">&para;</a></h2>
+<h3 id="forcing-gums-to-update-the-set-of-users">Forcing GUMS to update the set of users<a class="headerlink" href="#forcing-gums-to-update-the-set-of-users" title="Permanent link">&para;</a></h3>
 <p>GUMS automatically contacts each VOMS server every 6 hours to update its knowledge of VO membership. To trigger a manual update:</p>
 <ol>
 <li>Access the “Update VO Members” tab</li>
@@ -763,7 +763,7 @@ In either case, the value for <code>@SERVER@</code> <em>must</em> match the valu
 </li>
 </ol>
 <p>With so many VOMS servers in the OSG config, several member updates may fail for various reasons (e.g., host down "connect timed out", bad or expired host certificates, etc.). Unfortunately, this situation is normal.</p>
-<h3 id="updating-the-gums-configuration">Updating the GUMS configuration</h3>
+<h3 id="updating-the-gums-configuration">Updating the GUMS configuration<a class="headerlink" href="#updating-the-gums-configuration" title="Permanent link">&para;</a></h3>
 <p>Periodically, the OSG Grid Operations Center will release an updated template for the GUMS configuration that updates information about an existing VO or adds a new VO. You may get the update as part of a regular update process, or you can force an update by using yum:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> yum update osg-gums-config
 </pre></div>
@@ -785,8 +785,8 @@ In either case, the value for <code>@SERVER@</code> <em>must</em> match the valu
 <p>Check the Summary tab to verify the set of VOs you have, as well as their accounts</p>
 </li>
 </ol>
-<h2 id="troubleshooting">Troubleshooting</h2>
-<h3 id="useful-configuration-and-log-files">Useful Configuration and Log Files</h3>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="useful-configuration-and-log-files">Useful Configuration and Log Files<a class="headerlink" href="#useful-configuration-and-log-files" title="Permanent link">&para;</a></h3>
 <p>Configuration Files</p>
 <table>
 <thead>
@@ -897,18 +897,18 @@ In either case, the value for <code>@SERVER@</code> <em>must</em> match the valu
 </tr>
 </tbody>
 </table>
-<h2 id="how-to-get-help">How to get Help?</h2>
+<h2 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance please use the <a href="../../common/help">Help Procedure</a>.</p>
-<h2 id="references">References</h2>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://tomcat.apache.org/tomcat-6.0-doc">Official Tomcat 6 documentation</a></li>
 <li><a href="https://tomcat.apache.org/tomcat-7.0-doc">Official Tomcat 7 documentation</a></li>
 <li><a href="http://hibernate.org/orm/documentation/">Official Hibernate documentation</a> (Hibernate is the GUMS database interface)</li>
 </ul>
-<h3 id="host">Host</h3>
+<h3 id="host">Host<a class="headerlink" href="#host" title="Permanent link">&para;</a></h3>
 <p>For security reasons, it is recommended to install GUMS on a separate host from the CE,
     but it is not necessary</p>
-<h3 id="users">Users</h3>
+<h3 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h3>
 <p>The GUMS installation will create two users unless they exist already:</p>
 <table>
 <thead>
@@ -932,7 +932,7 @@ In either case, the value for <code>@SERVER@</code> <em>must</em> match the valu
 </tbody>
 </table>
 <p>Note that if UIDs 27 and 91 are taken already but not used for the appropriate users, you will experience errors.</p>
-<h3 id="certificates">Certificates</h3>
+<h3 id="certificates">Certificates<a class="headerlink" href="#certificates" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -954,7 +954,7 @@ In either case, the value for <code>@SERVER@</code> <em>must</em> match the valu
 </tr>
 </tbody>
 </table>
-<h3 id="networking">Networking</h3>
+<h3 id="networking">Networking<a class="headerlink" href="#networking" title="Permanent link">&para;</a></h3>
 <p>GUMS communicates on TCP port 8443; this port must be accessible to the Compute Element and any other hosts that need to authenticate via GUMS.</p>
               
             </div>

@@ -340,7 +340,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="install-the-frontier-squid-http-caching-proxy">Install the Frontier Squid HTTP Caching Proxy</h1>
+                <h1 id="install-the-frontier-squid-http-caching-proxy">Install the Frontier Squid HTTP Caching Proxy<a class="headerlink" href="#install-the-frontier-squid-http-caching-proxy" title="Permanent link">&para;</a></h1>
 <p>Frontier Squid is a distribution of the well-known <a href="http://squid-cache.org">squid HTTP caching
 proxy software</a> that is optimized for use with
 applications on the Worldwide LHC Computing Grid (WLCG). It has
@@ -362,7 +362,7 @@ incompatibilities between the two versions, so if you are upgrading
 from a 2.7STABLE9 version to a 3.5 version, see the
 <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Upgrading">upstream documentation on upgrading</a>.</p>
 </div>
-<h2 id="frontier-squid-is-recommended">Frontier Squid is Recommended</h2>
+<h2 id="frontier-squid-is-recommended">Frontier Squid is Recommended<a class="headerlink" href="#frontier-squid-is-recommended" title="Permanent link">&para;</a></h2>
 <p>OSG recommends that all sites run a caching proxy for HTTP and HTTPS
 to help reduce bandwidth and improve throughput. To that end, Compute
 Element (CE) installations include Frontier Squid automatically. We
@@ -377,7 +377,7 @@ then configure the CE host to refer to the proxy on that host.</p>
 warns users who have not added the proxy location to their CE
 configuration. In the future, a proxy will be required and
 osg-configure will fail if the proxy location is not set.</p>
-<h2 id="before-starting">Before Starting</h2>
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
 <ul>
 <li><strong>User IDs:</strong> If it does not exist already, the installation will create the <code>squid</code> Linux user</li>
@@ -391,7 +391,7 @@ osg-configure will fail if the proxy location is not set.</p>
 <li>Obtain root access to the host</li>
 <li>Prepare the <a href="../../common/yum">required Yum repositories</a></li>
 </ul>
-<h3 id="installing-frontier-squid">Installing Frontier Squid</h3>
+<h3 id="installing-frontier-squid">Installing Frontier Squid<a class="headerlink" href="#installing-frontier-squid" title="Permanent link">&para;</a></h3>
 <p>To install Frontier Squid, make sure that your host is up to date before installing the required packages:</p>
 <ol>
 <li>
@@ -417,8 +417,8 @@ osg-configure will fail if the proxy location is not set.</p>
 
 </li>
 </ol>
-<h2 id="configuring-frontier-squid">Configuring Frontier Squid</h2>
-<h3 id="configuring-the-frontier-squid-service">Configuring the Frontier Squid Service</h3>
+<h2 id="configuring-frontier-squid">Configuring Frontier Squid<a class="headerlink" href="#configuring-frontier-squid" title="Permanent link">&para;</a></h2>
+<h3 id="configuring-the-frontier-squid-service">Configuring the Frontier Squid Service<a class="headerlink" href="#configuring-the-frontier-squid-service" title="Permanent link">&para;</a></h3>
 <p>To configure the Frontier Squid service itself:</p>
 <ol>
 <li>Follow the
@@ -435,7 +435,7 @@ osg-configure will fail if the proxy location is not set.</p>
 the Frontier Squid variant is that Frontier Squid changes are in
 <code>/etc/squid/customize.sh</code> instead of <code>/etc/squid/squid.conf</code>.</p>
 </div>
-<h3 id="configuring-the-osg-ce">Configuring the OSG CE</h3>
+<h3 id="configuring-the-osg-ce">Configuring the OSG CE<a class="headerlink" href="#configuring-the-osg-ce" title="Permanent link">&para;</a></h3>
 <p>To configure the OSG Compute Element (CE) to know about your Frontier Squid service:</p>
 <ol>
 <li>
@@ -458,7 +458,7 @@ the Frontier Squid variant is that Frontier Squid changes are in
 <code>osg-configure</code>. Just be sure to run it once before starting CE
 services.</p>
 </div>
-<h2 id="using-frontier-squid">Using Frontier-Squid</h2>
+<h2 id="using-frontier-squid">Using Frontier-Squid<a class="headerlink" href="#using-frontier-squid" title="Permanent link">&para;</a></h2>
 <p>Start the frontier-squid service and enable it to start at boot time. As a reminder, here are common service commands (all run as <code>root</code>):</p>
 <table>
 <thead>
@@ -491,7 +491,7 @@ services.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="validating-frontier-squid">Validating Frontier Squid</h2>
+<h2 id="validating-frontier-squid">Validating Frontier Squid<a class="headerlink" href="#validating-frontier-squid" title="Permanent link">&para;</a></h2>
 <p>As any user on another computer, do the following (where
 <code>yoursquid.your.domain</code> is the fully qualified domain name of your
 squid server):</p>
@@ -511,8 +511,8 @@ to try to see what's wrong.</p>
 <p>If your squid will be supporting the Frontier application, it is also
 good to do the test in the
 <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Testing_the_installation">upstream documentation Testing the installation section</a>.</p>
-<h2 id="reference">Reference</h2>
-<h3 id="users">Users</h3>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
+<h3 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h3>
 <p>The frontier-squid installation will create one user account unless it
 already exists.</p>
 <table>
@@ -532,7 +532,7 @@ already exists.</p>
 <p>The package can instead use another user name of your choice if you
 create a configuration file before installation. Details are in the
 <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Preparation">upstream documentation Preparation section</a>.</p>
-<h3 id="networking">Networking</h3>
+<h3 id="networking">Networking<a class="headerlink" href="#networking" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -566,7 +566,7 @@ create a configuration file before installation. Details are in the
 <p>The addresses of the WLCG monitoring servers for use in firewalls are
 listed in the
 <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring">upstream documentation Enabling monitoring section</a>.</p>
-<h3 id="frontier-squid-log-files">Frontier Squid Log Files</h3>
+<h3 id="frontier-squid-log-files">Frontier Squid Log Files<a class="headerlink" href="#frontier-squid-log-files" title="Permanent link">&para;</a></h3>
 <p>Log file contents are explained in the
 <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Log_file_contents">upstream documentation Log file contents section</a>.</p>
               

@@ -353,11 +353,11 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="osg-release-series"><strong>OSG Release Series</strong></h1>
+                <h1 id="osg-release-series"><strong>OSG Release Series</strong><a class="headerlink" href="#osg-release-series" title="Permanent link">&para;</a></h1>
 <p>An OSG release series is a sequence of OSG software releases that are intended to provide a painless upgrade path. For example, the 3.2 release series contains OSG software 3.2.0, 3.2.1, 3.2.2, and so forth. A release series corresponds to a set of Yum software repositories, including ones for development, testing, and production use. The Yum repositories for one release series are completely distinct from the repositories for a different release series, even though they share many common packages.  A particular release within a series is a snapshot of packages and their exact versions at one point in time. When you install software from a release series, say 3.2, you get the most current versions of software packages within that series, regardless of the current release version.</p>
 <p>When a new series is released, it is an opportunity for the OSG Technology area to add major new software packages, make substantial updates to existing packages, and remove obsolete packages. When a new series is initially released, most packages are identical to the previous release, but two adjacent series will diverge over time.</p>
 <p>Our goal is, within a series, that one may upgrade their OSG services via <code>yum update</code> cleanly and without any necessary config file changes or excessive downtime.</p>
-<h1 id="osg-release-series_1">OSG Release Series</h1>
+<h1 id="osg-release-series_1">OSG Release Series<a class="headerlink" href="#osg-release-series_1" title="Permanent link">&para;</a></h1>
 <p>Since the start of the RPM-based OSG software stack, we have offered the following release series:</p>
 <ul>
 <li>
@@ -373,11 +373,11 @@
 <p><strong>OSG 3.4</strong> stared June 2017. The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server packages.</p>
 </li>
 </ul>
-<h1 id="osg-upcoming">OSG Upcoming</h1>
+<h1 id="osg-upcoming">OSG Upcoming<a class="headerlink" href="#osg-upcoming" title="Permanent link">&para;</a></h1>
 <p>There is one more OSG Series called "upcoming" which contains major updates planned for a future release series. The yum repositories for upcoming (<code>osg-upcoming</code> and <code>osg-upcoming-testing</code>) are available from all OSG 3.x series, and individual packages can be installed from Upcoming without needing to update entirely to a new series. Note, however, that packages in the "upcoming" repositories are tested against the most recent OSG series.  As of the time of writing, <code>osg-upcoming</code> is meant to work with OSG 3.4.</p>
-<h1 id="installing-an-osg-release-series">Installing an OSG Release Series</h1>
+<h1 id="installing-an-osg-release-series">Installing an OSG Release Series<a class="headerlink" href="#installing-an-osg-release-series" title="Permanent link">&para;</a></h1>
 <p>See the <a href="../../common/yum">yum repositories document</a> for instructions on installing the OSG repositories.</p>
-<h1 id="updating-from-osg-31-32-33-to-33-or-34">Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4</h1>
+<h1 id="updating-from-osg-31-32-33-to-33-or-34">Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4<a class="headerlink" href="#updating-from-osg-31-32-33-to-33-or-34" title="Permanent link">&para;</a></h1>
 <ol>
 <li>
 <p>If you have an existing installation based on OSG 3.1, 3.2, or 3.3 (which will be referred to as the <em>old series</em>), and want to upgrade to 3.3 or 3.4 (the <em>new series</em>), we recommend the following procedure:</p>
@@ -449,11 +449,11 @@
 </ol>
 <p>This command will update <strong>all</strong> packages on your system.</p>
 <p><strong>Troubleshooting</strong> If you are not having the expected result or having problems with Yum please see the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRpmBasics#Troubleshooting">Yum troubleshooting guide</a></p>
-<h2 id="migrating-from-edg-mkgridmap-to-lcmaps-voms-plugin">Migrating from edg-mkgridmap to LCMAPS VOMS Plugin</h2>
+<h2 id="migrating-from-edg-mkgridmap-to-lcmaps-voms-plugin">Migrating from edg-mkgridmap to LCMAPS VOMS Plugin<a class="headerlink" href="#migrating-from-edg-mkgridmap-to-lcmaps-voms-plugin" title="Permanent link">&para;</a></h2>
 <p>After following the update instructions above, perform the migration process documented <a href="../../security/lcmaps-voms-authentication#migrating-from-edg-mkgridmap">here</a>.</p>
-<h2 id="updating-from-frontier-squid-27-to-frontier-squid-35-upgrading-from-osg-33">Updating from Frontier Squid 2.7 to Frontier Squid 3.5 (upgrading from OSG 3.3)</h2>
+<h2 id="updating-from-frontier-squid-27-to-frontier-squid-35-upgrading-from-osg-33">Updating from Frontier Squid 2.7 to Frontier Squid 3.5 (upgrading from OSG 3.3)<a class="headerlink" href="#updating-from-frontier-squid-27-to-frontier-squid-35-upgrading-from-osg-33" title="Permanent link">&para;</a></h2>
 <p>The program <code>frontier-squid</code> received a major version upgrade (versions 2.7 to 3.5) between OSG 3.3 and OSG 3.4. Follow the <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Upgrading">upstream upgrade documentation</a> when transitioning your squid server to OSG 3.4.</p>
-<h2 id="uninstalling-bestman2-from-the-storage-element-upgrading-to-osg-34">Uninstalling BeStMan2 from the Storage Element (upgrading to OSG 3.4)</h2>
+<h2 id="uninstalling-bestman2-from-the-storage-element-upgrading-to-osg-34">Uninstalling BeStMan2 from the Storage Element (upgrading to OSG 3.4)<a class="headerlink" href="#uninstalling-bestman2-from-the-storage-element-upgrading-to-osg-34" title="Permanent link">&para;</a></h2>
 <p>The program BeStMan2 is no longer available in OSG 3.4 and its functionality has been replaced by <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/LoadBalancedGridFTP">load-balanced GridFTP</a>. To update your storage element to OSG 3.4, you must perform the following procedure:</p>
 <ol>
 <li>
@@ -486,7 +486,7 @@
 <p>In the output from this command, yum should <strong>not</strong> list other packages than those nine. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest OSG 3.3 versions, and try again.</p>
 </div>
 <p>After successfully removing BeStMan2, continue updating your host to OSG 3.4 by following the instructions above.</p>
-<h2 id="uninstalling-osg-info-services-from-the-compute-element-upgrading-from-osg-33-or-32">Uninstalling OSG Info Services from the Compute Element (upgrading from OSG 3.3 or 3.2)</h2>
+<h2 id="uninstalling-osg-info-services-from-the-compute-element-upgrading-from-osg-33-or-32">Uninstalling OSG Info Services from the Compute Element (upgrading from OSG 3.3 or 3.2)<a class="headerlink" href="#uninstalling-osg-info-services-from-the-compute-element-upgrading-from-osg-33-or-32" title="Permanent link">&para;</a></h2>
 <p>The program OSG Info Services is no longer required on OSG 3.3, and is no longer available starting in OSG 3.4. This is because the service that OSG Info Services reported to, named BDII, has been retired and is no longer functional.</p>
 <p>To cleanly uninstall OSG Info Services from your CE, perform the following procedure (after following the main update instructions above):</p>
 <ol>
@@ -521,7 +521,7 @@
 <p class="admonition-title">Note</p>
 <p>In the output from this command, yum should <strong>not</strong> list other packages than those two. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest OSG 3.3 (or 3.4) versions, and try again.</p>
 </div>
-<h2 id="uninstalling-cemon-from-the-compute-element-upgrading-from-osg-31">Uninstalling CEMon from the Compute Element (upgrading from OSG 3.1)</h2>
+<h2 id="uninstalling-cemon-from-the-compute-element-upgrading-from-osg-31">Uninstalling CEMon from the Compute Element (upgrading from OSG 3.1)<a class="headerlink" href="#uninstalling-cemon-from-the-compute-element-upgrading-from-osg-31" title="Permanent link">&para;</a></h2>
 <p>The program CEMon (found in the package <code>glite-ce-monitor</code>) is no longer available starting in OSG 3.2. Its functionality is no longer required because the service that CEMon reported to has been retired and is no longer functional.</p>
 <p>To cleanly uninstall CEMon from your CE, perform the following procedure (after following the main update instructions above):</p>
 <ol>
@@ -550,7 +550,7 @@
 <p class="admonition-title">Note</p>
 <p>In the output from this command, yum should <strong>not</strong> list other packages than those three. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their OSG 3.3 (or 3.4) versions (they should have <code>.osg33</code> or <code>.osg34</code> in their versions), and try again.</p>
 </div>
-<h1 id="references">References</h1>
+<h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
 <ul>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRepositories">YUM Repositories</a></li>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRpmBasics">Basic use of Yum</a></li>

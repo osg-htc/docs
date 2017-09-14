@@ -353,10 +353,10 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="basics-of-using-yum-and-rpm">Basics of using yum and RPM</h1>
-<h2 id="about-this-document">About This Document</h2>
+                <h1 id="basics-of-using-yum-and-rpm">Basics of using yum and RPM<a class="headerlink" href="#basics-of-using-yum-and-rpm" title="Permanent link">&para;</a></h1>
+<h2 id="about-this-document">About This Document<a class="headerlink" href="#about-this-document" title="Permanent link">&para;</a></h2>
 <p>This document introduces package management tools that help you install, update, and remove packages. OSG uses RPMs (the Red Hat Packaging Manager) to package its software. While RPM is the packaging format, <code>yum</code> is the command you will use to do the installation. For example, <code>yum</code> will resolve and download the dependencies for the package you want to install; <code>rpm</code> will simply complain if you want to install a package that does not have all its dependencies installed.</p>
-<h2 id="installation">Installation</h2>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>Installation is done with the <code>yum install</code> command. Each of the individual installation guide shows you the correct command to use to do an installation. Here is an example installation with all of the output from yum.</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> sudo yum install osg-ca-certs
 <span class="go">Loaded plugins: kernel-module, priorities</span>
@@ -415,7 +415,7 @@
 
 
 <p><strong>Please Note</strong>: When you first install a package from the OSG repository, you will be prompted to import the GPG key. We use this key to sign our RPMs as a security measure. You should double-check the key id (above it is 824B8603) with the <a href="../signing/">information on our signed RPMs</a>. If it doesn't match, there is a problem somewhere and you should report it to the OSG via goc@opensciencegrid.org.</p>
-<h2 id="verifying-packages-and-installations">Verifying Packages and Installations</h2>
+<h2 id="verifying-packages-and-installations">Verifying Packages and Installations<a class="headerlink" href="#verifying-packages-and-installations" title="Permanent link">&para;</a></h2>
 <p>You can check if an RPM has been modified. For instance, to check to see if any files have been modified in the <code>osg-ca-certs</code> RPM you just installed:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> rpm --verify osg-ca-certs
 </pre></div>
@@ -486,7 +486,7 @@
 </pre></div>
 
 
-<h2 id="understanding-a-package">Understanding a package</h2>
+<h2 id="understanding-a-package">Understanding a package<a class="headerlink" href="#understanding-a-package" title="Permanent link">&para;</a></h2>
 <p>If you want to know what package a file belongs to, you can ask rpm. For instance, if you're curious what package contains the <code>srm-ls</code> command, you can do:</p>
 <div class="codehilite"><pre><span></span><span class="gp">#</span> <span class="m">1</span>. Find the exact path
 <span class="gp">[user@client ~] $</span> which srm-ls
@@ -513,7 +513,7 @@
 </pre></div>
 
 
-<h2 id="what-else-does-a-package-install">What else does a package install?</h2>
+<h2 id="what-else-does-a-package-install">What else does a package install?<a class="headerlink" href="#what-else-does-a-package-install" title="Permanent link">&para;</a></h2>
 <p>Sometimes you need to understand what other software is installed by a package. This can be particularly useful for understanding <em>meta-packages</em>, which are packages such as the <code>osg-wn-client</code> (worker node client) that contain nothing by themselves but only depend on other RPMs. To do this, use the <code>--requires</code> option to rpm. For example, you can see that the worker node client (as of OSG 3.1.8 in early September, 2012) will install <code>curl</code>, <code>uberftp</code>, <code>lcg-utils</code>, and a dozen or so other packages.</p>
 <div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> rpm -q --requires osg-wn-client
 <span class="go">/usr/bin/curl  </span>
@@ -543,7 +543,7 @@
 </pre></div>
 
 
-<h2 id="finding-rpm-packages">Finding RPM Packages</h2>
+<h2 id="finding-rpm-packages">Finding RPM Packages<a class="headerlink" href="#finding-rpm-packages" title="Permanent link">&para;</a></h2>
 <p>It is normally best to read the OSG documentation to decide which packages to install because it may not be obvious what the correct packages to install are. That said, you can use yum to find out all sort of things. For instance, you can list packages that begin with "voms":</p>
 <div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> yum list <span class="s2">&quot;voms*&quot;</span>
 <span class="go">Loaded plugins: kernel-module, priorities</span>
@@ -592,7 +592,7 @@
 </pre></div>
 
 
-<h2 id="removing-packages">Removing Packages</h2>
+<h2 id="removing-packages">Removing Packages<a class="headerlink" href="#removing-packages" title="Permanent link">&para;</a></h2>
 <p>To remove a single RPM, you can use <code>yum remove</code>. Not only will it uninstall the RPM you requested, but it will uninstall anything that depends on it. For example, if I previously installed the <code>voms-clients</code> package, I also installed another package it depends on called <code>voms</code>. If I remove <code>voms</code>, yum will also remove <code>voms-clients</code>:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> sudo yum remove voms
 <span class="go">Loaded plugins: kernel-module, priorities</span>
@@ -644,7 +644,7 @@
 </pre></div>
 
 
-<h2 id="upgrading-packages">Upgrading Packages</h2>
+<h2 id="upgrading-packages">Upgrading Packages<a class="headerlink" href="#upgrading-packages" title="Permanent link">&para;</a></h2>
 <p>You can check for updates with <code>yum check-update</code>. For example:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum check-update
 <span class="go">Loaded plugins: kernel-module, priorities</span>
@@ -771,13 +771,13 @@
 </pre></div>
 
 
-<h2 id="advanced-topic-only-geting-osg-updates">Advanced topic: Only geting OSG updates</h2>
+<h2 id="advanced-topic-only-geting-osg-updates">Advanced topic: Only geting OSG updates<a class="headerlink" href="#advanced-topic-only-geting-osg-updates" title="Permanent link">&para;</a></h2>
 <p>If you only want to get updates from the OSG repository and <em>no other</em> repositories, you can tell yum to do that with the following command:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum --disablerepo<span class="o">=</span>* --enablerepo<span class="o">=</span>osg update
 </pre></div>
 
 
-<h2 id="advanced-topic-getting-debugging-information-for-installed-software">Advanced topic: Getting debugging information for installed software</h2>
+<h2 id="advanced-topic-getting-debugging-information-for-installed-software">Advanced topic: Getting debugging information for installed software<a class="headerlink" href="#advanced-topic-getting-debugging-information-for-installed-software" title="Permanent link">&para;</a></h2>
 <p>If you run into a problem with our software and have a hankering to debug it directly (or perhaps we need to ask you for some help), you can install so-called "debuginfo" packages. These packages will provide debugging symbols and source code so that you can do things like run <code>gdb</code> or <code>pstack</code> to get information about a program.</p>
 <p>Installing the debuginfo package requires three steps.</p>
 <ol>
@@ -831,8 +831,8 @@
 <p>This last step will select the right package name, then use <code>yum</code> to install it.</p>
 </li>
 </ol>
-<h2 id="troubleshooting">Troubleshooting</h2>
-<h3 id="yum-not-finding-packages">Yum not finding packages</h3>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="yum-not-finding-packages">Yum not finding packages<a class="headerlink" href="#yum-not-finding-packages" title="Permanent link">&para;</a></h3>
 <p>If you is not finding some packages, e.g.:</p>
 <div class="codehilite"><pre><span></span>Error Downloading Packages:
   packageXYZ: failure: packageXYZ.rpm from osg: [Errno 256] No more mirrors to try.
@@ -853,13 +853,13 @@
 <p class="admonition-title">Note</p>
 <p><code>yum clean</code> cleans only enabled repositories. If you want to also clean any (temporarily) disabled repositories you need to use <code>--enablerepo=’*’</code> option.</p>
 </div>
-<h3 id="yum-complaining-about-missing-keys">Yum complaining about missing keys</h3>
+<h3 id="yum-complaining-about-missing-keys">Yum complaining about missing keys<a class="headerlink" href="#yum-complaining-about-missing-keys" title="Permanent link">&para;</a></h3>
 <p>If yum is complaining you can re-import the keys in your distribution: </p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
 </pre></div>
 
 
-<h1 id="references">References</h1>
+<h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
 <ul>
 <li><a href="http://yum.baseurl.org/">The main yum web site</a></li>
 <li>A good description of the commands for RPM and yum can be found at <a href="http://www.ibm.com/developerworks/linux/library/l-lpic1-v3-102-5/?ca=drs-">Learn Linux 101: RPM and YUM Package Management</a>.</li>

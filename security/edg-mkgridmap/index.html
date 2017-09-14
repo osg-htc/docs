@@ -391,14 +391,14 @@
 <p class="admonition-title">Warning</p>
 <p>EDG-Mkgridmap is no longer be supported in OSG 3.4. The <a href="../lcmaps-voms-authentication/">LCMAPS VOMS Plugin</a> is the preferred method for site authentication in the OSG and is available in both OSG 3.3 and OSG 3.4.</p>
 </div>
-<h1 id="about-this-document">About this Document</h1>
+<h1 id="about-this-document">About this Document<a class="headerlink" href="#about-this-document" title="Permanent link">&para;</a></h1>
 <p>This document describes how you can use <code>edg-mkgridmap</code> to authorize users accessing the resources that you provide.</p>
-<h1 id="requirements">Requirements</h1>
+<h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
 <ul>
 <li>The purpose of using <code>edg-mkgridmap</code> is to create a grid-mapfile that will contain users from all VOs that are supported on your site. For this to happen, make sure that <strong>before</strong> you run <code>edg-mkgridmap</code>, you have created user accounts for all such VOs.</li>
 <li>The RPM named <code>edg-mkgridmap</code> should be installed on your node</li>
 </ul>
-<h2 id="certificates">Certificates</h2>
+<h2 id="certificates">Certificates<a class="headerlink" href="#certificates" title="Permanent link">&para;</a></h2>
 <p>Certificates</p>
 <table>
 <thead>
@@ -421,7 +421,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="configuration">Configuration</h1>
+<h1 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h1>
 <p>If you claim to support a VO, make sure the following is true:</p>
 <ul>
 <li>The VO is enabled in <code>/etc/edg-mkgridmap.conf</code></li>
@@ -475,8 +475,8 @@ group vomss://voms.fnal.gov:8443/voms/fermilab fermilab
 <p class="admonition-title">Note</p>
 <p>More information on <code>edg-mkgridmap.conf</code> file can be found <a href="http://vdt.cs.wisc.edu/extras/edg-mkgridmap.conf.html">here</a></p>
 </div>
-<h1 id="enabledisable">Enable/Disable</h1>
-<h2 id="enable">Enable</h2>
+<h1 id="enabledisable">Enable/Disable<a class="headerlink" href="#enabledisable" title="Permanent link">&para;</a></h1>
+<h2 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h2>
 <p>You need to configure <code>edg-mkgridmap</code> to run automatically via a cron job. To do this, you need to run the following command.</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> service edg-mkgridmap start
 <span class="go">Enabling periodic edg-mkgridmap:                           [  OK  ]</span>
@@ -502,28 +502,28 @@ group vomss://voms.fnal.gov:8443/voms/fermilab fermilab
 <p class="admonition-title">Note</p>
 <p>As you can see above, this cron will run every 6 hours. If you do not want to wait that long, you can execute the command <code>/usr/sbin/edg-mkgridmap</code> directly on command line</p>
 </div>
-<h2 id="disable">Disable</h2>
+<h2 id="disable">Disable<a class="headerlink" href="#disable" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> service edg-mkgridmap stop
 <span class="go">Disabling periodic edg-mkgridmap:                          [  OK  ]</span>
 </pre></div>
 
 
-<h1 id="50-chkconfig-onoff">5.0 Chkconfig on/off</h1>
-<h2 id="51-on">5.1 On</h2>
+<h1 id="50-chkconfig-onoff">5.0 Chkconfig on/off<a class="headerlink" href="#50-chkconfig-onoff" title="Permanent link">&para;</a></h1>
+<h2 id="51-on">5.1 On<a class="headerlink" href="#51-on" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> chkconfig edg-mkgridmap on
 <span class="gp">[root@server]#</span> chkconfig --list edg-mkgridmap
 <span class="go">edg-mkgridmap   0:off   1:off   2:on    3:on    4:on    5:on    6:off</span>
 </pre></div>
 
 
-<h2 id="52-off">5.2 Off</h2>
+<h2 id="52-off">5.2 Off<a class="headerlink" href="#52-off" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> chkconfig edg-mkgridmap off
 <span class="gp">[root@server]#</span> chkconfig --list edg-mkgridmap
 <span class="go">edg-mkgridmap   0:off   1:off   2:off   3:off   4:off   5:off   6:off</span>
 </pre></div>
 
 
-<h1 id="what-happens-behind-the-scenes">What happens behind the scenes?</h1>
+<h1 id="what-happens-behind-the-scenes">What happens behind the scenes?<a class="headerlink" href="#what-happens-behind-the-scenes" title="Permanent link">&para;</a></h1>
 <p>Upon execution, <code>edg-mkgridmap</code> reads the configuration file at location <code>/etc/edg-mkgridmap.conf</code> and for all VOs for which a local user account exists, it contacts their VOMS server to retrieve list of all users that belong to that VO. Its output is the following files</p>
 <ul>
 <li><code>/var/lib/osg/supported-vo-list</code>. This file contains names of all VOs you want to support minus all VOs for whom you do not have a user account. In other words, this is list of VOs that will <strong>actually</strong> be supported.</li>
@@ -531,13 +531,13 @@ group vomss://voms.fnal.gov:8443/voms/fermilab fermilab
 <li><code>/var/lib/osg/undefined-accounts</code>. This file contains names of all VOs for which it <strong>could not</strong> find user account.</li>
 <li><code>/etc/grid-security/grid-mapfile</code>. This file contains 'DN username' mappings that are present in local grid-mapfile (if you have one) and mappings for <strong>all</strong> users from <strong>all</strong> VOs that are present in <code>/var/lib/osg/supported-vo-list</code>.</li>
 </ul>
-<h1 id="what-happens-when-you-perform-an-upgrade">What happens when you perform an upgrade?</h1>
+<h1 id="what-happens-when-you-perform-an-upgrade">What happens when you perform an upgrade?<a class="headerlink" href="#what-happens-when-you-perform-an-upgrade" title="Permanent link">&para;</a></h1>
 <p>There are two scenerios:</p>
-<h2 id="you-do-not-have-a-custom-edg-mkgridmap-configuration">You do not have a custom edg-mkgridmap configuration</h2>
+<h2 id="you-do-not-have-a-custom-edg-mkgridmap-configuration">You do not have a custom edg-mkgridmap configuration<a class="headerlink" href="#you-do-not-have-a-custom-edg-mkgridmap-configuration" title="Permanent link">&para;</a></h2>
 <p>This means you are using the same <code>edg-mkgridmap.conf</code> file that came with prior installation of vo-client-edgmkgridmap package. In this case, during upgrade, the newer <code>edg-mkgridmap.conf</code> file will replace the old one. It will probably have new VOs in it and if you want to support them, you need to satisfy conditions as mentioned in Configuration section above.</p>
-<h2 id="you-have-a-custom-edg-mkgridmap-configuration">You have a custom edg-mkgridmap configuration</h2>
+<h2 id="you-have-a-custom-edg-mkgridmap-configuration">You have a custom edg-mkgridmap configuration<a class="headerlink" href="#you-have-a-custom-edg-mkgridmap-configuration" title="Permanent link">&para;</a></h2>
 <p>This means you have modified the <code>edg-mkgridmap.conf</code> file. In this case, during upgrade, the existing file <code>/etc/edg-mkgridmap.conf</code> will remain untouched and new configuration file will be saved as <code>/etc/edg-mkgridmap.conf.rpmnew</code>. You can compare the two files and make changes as required.</p>
-<h1 id="files">Files</h1>
+<h1 id="files">Files<a class="headerlink" href="#files" title="Permanent link">&para;</a></h1>
 <table>
 <thead>
 <tr>
@@ -564,13 +564,13 @@ group vomss://voms.fnal.gov:8443/voms/fermilab fermilab
 </tr>
 </tbody>
 </table>
-<h1 id="troubleshooting">Troubleshooting</h1>
-<h2 id="common-problems">Common Problems</h2>
+<h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
+<h2 id="common-problems">Common Problems<a class="headerlink" href="#common-problems" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="#grid-mapfile-was-not-created">grid-mapfile not created</a></li>
 <li><a href="#error-code-64">Error code 64</a></li>
 </ul>
-<h3 id="troubleshooting-procedure">Troubleshooting Procedure</h3>
+<h3 id="troubleshooting-procedure">Troubleshooting Procedure<a class="headerlink" href="#troubleshooting-procedure" title="Permanent link">&para;</a></h3>
 <p>In case of problems first of all check the service log file <code>/var/log/edg-mkgridmap.log</code>. This file lists:</p>
 <ul>
 <li>any errors accessing individual voms servers or any general errors</li>
@@ -584,7 +584,7 @@ group vomss://voms.fnal.gov:8443/voms/fermilab fermilab
 </pre></div>
 
 
-<h3 id="grid-mapfile-was-not-created">Grid-Mapfile was not created</h3>
+<h3 id="grid-mapfile-was-not-created">Grid-Mapfile was not created<a class="headerlink" href="#grid-mapfile-was-not-created" title="Permanent link">&para;</a></h3>
 <p>First make sure that the <em>edg-mkgridmap</em> service is enabled:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> /sbin/service edg-mkgridmap status
 <span class="go">Periodic edg-mkgridmap is enabled.</span>
@@ -619,7 +619,7 @@ group vomss://voms.fnal.gov:8443/voms/fermilab fermilab
 <p class="admonition-title">Note</p>
 <p>The script will not output to the command line. Check the log file at <code>/var/log/edg-mkgridmap.log</code> instead.</p>
 </div>
-<h3 id="error-code-64">Error Code 64</h3>
+<h3 id="error-code-64">Error Code 64<a class="headerlink" href="#error-code-64" title="Permanent link">&para;</a></h3>
 <p>This type of error occurs when the script established contact with the VOMS server but the requested group or subgroup does not exist there. It is really a <em>'not found'</em> type error. It is usually caused by a bad entry in the <code>/etc/edg-mkgridmap.conf</code> file.</p>
 <p>In the example below the configuration file contains a request for the VOMS server to send a list of all members of the uscms VO belonging to a non-existent <code>/uscms/production</code> group.</p>
 <p>Configuration file <code>/etc/edg-mkgridmap.conf</code> entry:</p>
@@ -644,7 +644,7 @@ group vomss://voms.fnal.gov:8443/voms/fermilab fermilab
 </pre></div>
 
 
-<h3 id="useful-options-for-edg-mkgridmap-troubleshooting">Useful Options for edg-mkgridmap troubleshooting</h3>
+<h3 id="useful-options-for-edg-mkgridmap-troubleshooting">Useful Options for edg-mkgridmap troubleshooting<a class="headerlink" href="#useful-options-for-edg-mkgridmap-troubleshooting" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>--help</code></li>
 <li><code>--version</code></li>
@@ -653,7 +653,7 @@ group vomss://voms.fnal.gov:8443/voms/fermilab fermilab
 <li><code>--output=&lt;output_file&gt;</code></li>
 <li><code>--verbose</code></li>
 </ul>
-<h1 id="how-to-get-help">How to get Help?</h1>
+<h1 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h1>
 <p>If you cannot resolve the problem or have general questions, there are several ways to receive help:</p>
 <ul>
 <li>For bug support and issues, submit a ticket to the <a href="https://ticket.grid.iu.edu/goc">Grid Operations Center</a>.</li>
