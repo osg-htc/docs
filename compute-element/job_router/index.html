@@ -369,11 +369,11 @@
 <p>#JobRouterDefaults</p>
 <h3 id="job95router95defaults">JOB_ROUTER_DEFAULTS</h3>
 <p><code>JOB_ROUTER_DEFAULTS</code> is a python-generated configuration variable that sets default job route values that are required for the HTCondor-CE’s functionality. To view its contents, run the following command:</p>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">UCL_PROMPT</span> condor_ce_config_val JOB_ROUTER_DEFAULTS | sed &#39;s/;/;\n/g&#39;</span>
+<div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT% condor_ce_config_val JOB_ROUTER_DEFAULTS | sed &#39;s/;/;\n/g&#39;</span>
 </pre></div>
 
 
-<p><span class="twiki-macro TWISTY"><span style="color:red">TWISTY_OPTS_OUTPUT</span> showlink="Show sample output"</span></p>
+<p><span class="twiki-macro TWISTY">%TWISTY_OPTS_OUTPUT% showlink="Show sample output"</span></p>
 <div class="codehilite"><pre><span></span><span class="cp">[</span> <span class="n">MaxIdleJobs</span><span class="o"> =</span> <span class="mi">2000</span><span class="p">;</span>
  <span class="n">MaxJobs</span><span class="o"> =</span> <span class="mi">10000</span><span class="p">;</span>
  <span class="cm">/* by default, accept all jobs */</span> <span class="n">Requirements</span><span class="o"> =</span> <span class="kc">True</span><span class="p">;</span>
@@ -777,7 +777,7 @@
 <li>There is a difference between <code>Requirements</code> and <code>set_requirements</code>. The <code>Requirements</code> attribute matches jobs to specific routes while the <code>set_requirements</code> sets the <code>Requirements</code> attribute on the <em>routed</em> job, which confines which machines that the routed job can land on.</li>
 </ul>
 <p>Source: <a href="https://www.aglt2.org/wiki/bin/view/AGLT2/CondorCE#The_JobRouter_configuration_file_content">https://www.aglt2.org/wiki/bin/view/AGLT2/CondorCE#The_JobRouter_configuration_file_content</a></p>
-<p><span class="twiki-macro TWISTY"><span style="color:red">TWISTY_OPTS_OUTPUT</span> showlink="Click to expand full job route…"</span></p>
+<p><span class="twiki-macro TWISTY">%TWISTY_OPTS_OUTPUT% showlink="Click to expand full job route…"</span></p>
 <div class="codehilite"><pre><span></span><span class="nv">JOB_ROUTER_ENTRIES</span> <span class="o">=</span> <span class="se">\</span>
 /* Still to <span class="k">do</span> on all routes, get job requirements and add them here */ <span class="se">\</span>
 /* ***** Route no <span class="m">1</span> ***** */ <span class="se">\</span>
@@ -965,7 +965,7 @@
 <li>There is a difference between <code>Requirements</code> and <code>set_requirements</code>. The <code>Requirements</code> attribute matches <em>incoming</em> jobs to specific routes while the <code>set_requirements</code> sets the <code>Requirements</code> attribute on the <em>routed</em> job, which confines which machines that the routed job can land on.</li>
 </ul>
 <p>Source: <a href="http://www.usatlas.bnl.gov/twiki/bin/view/Admins/HTCondorCE.html">http://www.usatlas.bnl.gov/twiki/bin/view/Admins/HTCondorCE.html</a></p>
-<p><span class="twiki-macro TWISTY"><span style="color:red">TWISTY_OPTS_OUTPUT</span> showlink="Click to expand full job route…"</span></p>
+<p><span class="twiki-macro TWISTY">%TWISTY_OPTS_OUTPUT% showlink="Click to expand full job route…"</span></p>
 <div class="codehilite"><pre><span></span><span class="c">###############################################################################</span>
 <span class="c">#</span>
 <span class="c"># HTCondor-CE HTCondor batch system configuration file.</span>

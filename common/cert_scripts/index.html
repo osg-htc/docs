@@ -394,7 +394,7 @@
 <p><span class="twiki-macro INCLUDE" section="OSGBriefCaCerts" TOC_SHIFT="+">InstallCertAuth</span></p>
 <p><span class="twiki-macro STARTSECTION">OSGBriefInstallCertScripts</span></p>
 <h2 id="install-the-certificate-scripts-package-the-cert-scripts-package-can-be-installed-with-the-following-command">Install the certificate scripts package The Cert Scripts package can be installed with the following command:</h2>
-<div class="codehilite"><pre><span></span><span class="c">[root@client ~]$ yum install osg-cert-scripts</span>
+<div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT_ROOT% yum install osg-cert-scripts</span>
 </pre></div>
 
 
@@ -403,7 +403,7 @@
 <h2 id="get-host-and-service-certificates-using-command-line"><a href="../Documentation/Release3.GetHostServiceCertificates">Get host and service certificates using command line</a></h2>
 <h2 id="example-usage-of-check-cert-time-the-cert-check-time-script-is-helpful-in-setting-up-and-monitoring-the-ca-certificates-and-crls-that-get-installed-in-your-trusted-certificates-directory-this-section-describes-using-these-scripts-to-check-the-ca-and-crl-status-checking-ca-certificates">Example usage of check-cert-time The cert-check-time script is helpful in setting up and monitoring the CA certificates and CRL’s that get installed in your trusted certificates directory. This section describes using these scripts to check the CA and CRL status. —+++! Checking CA certificates</h2>
 <p>There are numerous CA certificates installed with VDT and you may not want to allow all of them on your site. The <code>cert-check-time</code> is a helpful command for reviewing them. This must be run in a directory where you have write access even though it does not create any permanent files. You may want to redirect stdout to a file you can then review.</p>
-<div class="codehilite"><pre><span></span><span style="color:red">UCL_PROMPT</span> <span class="nt">&lt;b&gt;</span>cert-check-time -cR -s /usr/share/osg-cert-scripts/<span class="nt">&lt;/b&gt;</span>
+<div class="codehilite"><pre><span></span>%UCL_PROMPT% <span class="nt">&lt;b&gt;</span>cert-check-time -cR -s /usr/share/osg-cert-scripts/<span class="nt">&lt;/b&gt;</span>
 </pre></div>
 
 
@@ -413,7 +413,7 @@
 <li>the human readable name of the CA,</li>
 <li>and the location of the actual certificate file.</li>
 </ul>
-<p><span class="twiki-macro TWISTY"><span style="color:red">TWISTY_OPTS_OUTPUT</span></span></p>
+<p><span class="twiki-macro TWISTY">%TWISTY_OPTS_OUTPUT%</span></p>
 <div class="codehilite"><pre><span></span>         days  name       CA certificate file
        6712.9 subject= /DC=HK/DC=HKU/DC=GRID/CN=HKU Grid CA  cert:/ncsa/apps-local/itb-1.2/globus/TRUSTED_CA/4798da47.0
        6674.9 subject= /DC=cz/DC=cesnet-ca/O=CESNET CA/CN=CESNET CA Root  cert:/ncsa/apps-local/itb-1.2/globus/TRUSTED_CA/edca0fc0.0
@@ -514,7 +514,7 @@ nearest CA certificate expiration 134.984 days
 <h3 id="checking-crls">Checking CRL’s</h3>
 <p>Certificate revocation lists contain the list of certificates (by serial number) that have been issued by a CA but were then revoked, meaning you should not accept them. CRL’s are updated frequently and typically have a lifetime limited to a month or less. When a CRL has expired, the CRL file will still exist in the trusted certificates directory, but Globus will fail <strong>all</strong> authentication attempts for <strong>all</strong> certificates issued by the corresponding CA.</p>
 <p>For this reason, and others, it is important that CRL files are current and not expired. Another variation of the cert-check-time script will list the remaining lifetime of CRL’s in the trusted certificates directory. This must be run in a directory where you have write access even though it does not create any files. You may want to redirect stdout to a file you can then review.</p>
-<div class="codehilite"><pre><span></span><span style="color:red">UCL_PROMPT</span> <span class="nt">&lt;b&gt;</span>cert-check-time -r -s /usr/share/osg-cert-scripts/ <span class="nt">&lt;/b&gt;</span>
+<div class="codehilite"><pre><span></span>%UCL_PROMPT% <span class="nt">&lt;b&gt;</span>cert-check-time -r -s /usr/share/osg-cert-scripts/ <span class="nt">&lt;/b&gt;</span>
 </pre></div>
 
 
@@ -524,7 +524,7 @@ nearest CA certificate expiration 134.984 days
 <li>the name of the CA that issued the CRL</li>
 <li>and the actual CRL file.</li>
 </ul>
-<p><span class="twiki-macro TWISTY"><span style="color:red">TWISTY_OPTS_OUTPUT</span></span></p>
+<p><span class="twiki-macro TWISTY">%TWISTY_OPTS_OUTPUT%</span></p>
 <div class="codehilite"><pre><span></span>         days  name       CRL file
         365.1 issuer=/C=CA/O=Grid/CN=Grid Canada CA  crl:/opt/osg036/globus/TRUSTED_CA/5f54f417.r0
         340.8 issuer=/CN=SWITCH CA/emailAddress=switch.ca@switch.ch/O=Switch - Teleinformatikdienste fuer Lehre und Forschung/C=CH  crl:/opt/osg036/globus/TRUSTED_CA/c4435d12.r0
@@ -645,19 +645,19 @@ nearest CRL expiration 0.951088 days
 <h1 id="faq">FAQ</h1>
 <p>How to perform common tasks. In <span style="color:red">red<span class="twiki-macro ENDCOLOR"></span> the items you have to change.</p>
 <h2 id="request-a-certificate-for-myself-personal-certificate">Request a certificate for myself (personal certificate)</h2>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">UCL_PROMPT</span> cert-request -ou p</span>
+<div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT% cert-request -ou p</span>
 </pre></div>
 
 
 <p>Full details in the <a href="../Documentation/Release3.CertificateGetCmd">command line document</a> or in the <a href="../Documentation.CertificateGetWeb">Web interface document</a> (for a browser based alt.).</p>
 <h2 id="request-a-certificate-for-my-computer-host-certificate">Request a certificate for my computer (host certificate)</h2>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">UCL_PROMPT</span> cert-request -ou s</span>
+<div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT% cert-request -ou s</span>
 </pre></div>
 
 
 <p>Full details in the <a href="../Documentation/Release3.GetHostServiceCertificates">host and service certificates document</a>.</p>
 <h2 id="request-a-certificate-for-the-http-service-on-my-computer-service-certificate">Request a certificate for the http service on my computer (service certificate)</h2>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">UCL_PROMPT</span> cert-request -ou s -service http -host <span style="color:red">my-computer.some.domain</span> -label <span style="color:red">http-my-computer</span></span>
+<div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT% cert-request -ou s -service http -host <span style="color:red">my-computer.some.domain</span> -label <span style="color:red">http-my-computer</span></span>
 </pre></div>
 
 
@@ -666,7 +666,7 @@ nearest CRL expiration 0.951088 days
 <ol>
 <li>Check the email notice you got when the certificate was granted for the serial number (<em>0xNNNN</em>)</li>
 </ol>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">UCL_PROMPT</span> cert-retrieve -serial <span style="color:red">0xNNNN</span> [-label <span style="color:red">label-matching-cert-request</span>]</span>
+<div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT% cert-retrieve -serial <span style="color:red">0xNNNN</span> [-label <span style="color:red">label-matching-cert-request</span>]</span>
 </pre></div>
 
 

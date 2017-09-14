@@ -369,31 +369,31 @@
 </ul>
 <h1 id="install-instructions">Install instructions</h1>
 <p>Run the following command to install the latest version of the updater.</p>
-<div class="codehilite"><pre><span></span><span class="c">[root@client ~]$ yum install osg-ca-certs-updater</span>
+<div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT_ROOT% yum install osg-ca-certs-updater</span>
 </pre></div>
 
 
 <h1 id="services">Services</h1>
 <h2 id="starting-and-enabling-services">Starting and Enabling Services</h2>
 <p>Run the following to enable the updater. This will persist until the machine is rebooted.</p>
-<div class="codehilite"><pre><span></span><span class="c">[root@client ~]$ service osg-ca-certs-updater-cron start</span>
+<div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT_ROOT% service osg-ca-certs-updater-cron start</span>
 </pre></div>
 
 
 <p>Run the following to enable the updater when the machine is rebooted.</p>
-<div class="codehilite"><pre><span></span><span class="c">[root@client ~]$ chkconfig osg-ca-certs-updater-cron on</span>
+<div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT_ROOT% chkconfig osg-ca-certs-updater-cron on</span>
 </pre></div>
 
 
 <p>Run both commands if you wish for the service to activate immediately and remain active throughout reboots.</p>
 <h2 id="stopping-and-disabling-services">Stopping and Disabling Services</h2>
 <p>Enter the following to disable the updater. This will persist until the machine is rebooted.</p>
-<div class="codehilite"><pre><span></span><span class="c">[root@client ~]$ service osg-ca-certs-updater-cron stop</span>
+<div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT_ROOT% service osg-ca-certs-updater-cron stop</span>
 </pre></div>
 
 
 <p>Enter the following to disable the updater when the machine is rebooted.</p>
-<div class="codehilite"><pre><span></span><span class="c">[root@client ~]$ chkconfig osg-ca-certs-updater-cron off</span>
+<div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT_ROOT% chkconfig osg-ca-certs-updater-cron off</span>
 </pre></div>
 
 
