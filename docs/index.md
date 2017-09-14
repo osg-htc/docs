@@ -1,42 +1,13 @@
-Installation Guides
-===================
+Open Science Grid Site Documentation
+====================================
 
-The Open Science Grid consists primarily of a fabric of services at
-participating sites.
+!!! note
+    This is currently a work in progress as we migrate our TWiki documentation to GitHub, so please let us know of any issues that you encounter by [opening a ticket](https://ticket.opensciencegrid.org) or e-mailing [goc@opensciencegrid.org](goc@opensciencegrid.org) with a description of your issue.
 
-One of the most common ways of participating in the OSG is to install
-one of our software services at your site and provide computational
-power opportunistically to the grid.
+Welcome to the home page of the Open Science Grid (OSG) Site documentation! The documentation contained here is designed for system adminstrators that provide resources to the OSG. If you're a new resource provider, the [Installation Overview](install-overview) is a good place to get started. Otherwise, you can find a list of our documents via the navigation and search bars to the left.
 
-Our most common software products include:
+If you are not a site adminstrator...
 
-* [HTCondor CE Installation](compute-element/install-htcondor-ce.md): Provides a _gateway_
-  between the grid and your batch system.
-* [HTTP Proxy](data/frontier-squid.md): Caches the most commonly-used files at your
-  site to preserve bandwidth (a custom packaging of the venerable `squid` software).
-* [CVMFS](client/cvmfs.md) The CernVM File System (CVMFS) is a global-scale, read-only,
-  hierarchical filesystem.  CVMFS volumes distribute the majority of the scientific
-  software used on OSG in addition to the OSG worker node client.
-* [Worker node client](client/wn.md) and [singularity](client/singularity.md): An RPM-based install
-  of the worker node software; this includes the `singularity` binary which allows pilots to securely isolate payload user jobs.
-
-
-You can help!
-=============
-
-Documentation is a task that is never done!  Feel free to fork this on github and
-send us any updates or corrections.
-
-In particular, many documents are being converted from our old twiki to this site.
-We have used an automatic converter, but most documents need a human touch prior
-to being included in the table of contents.
-
-If you'd like to contribute, please consider trying to clean up one of these
-documents:
-
-* [CA Certificate Updater script](common/ca_updater.md)
-* [Host certificate management package](common/cert_scripts.md)
-* [Job Router Recipes](compute-element/job_router.md)
-* [Installing the Worker Node from OASIS](client/wn-oasis.md)
-* [Installing a GridFTP Server](data/gridftp.md)
+- If you are a researcher interested in using OSG resources, you can find user documentation [here](https://support.opensciencegrid.org/support/home). 
+- If you'd like to learn more about the OSG and our mission, visit our website [here](https://www.opensciencegrid.org/).
 
