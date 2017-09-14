@@ -17,14 +17,14 @@ This release contains:
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.1-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
-Detailed changes are below. All of the documentation can be found in the [Release3](Documentation.Release3) area of the TWiki.
+Detailed changes are below. All of the documentation can be found in the [Release3](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/) area of the TWiki.
 
 Updating to the new release
 ---------------------------
 
 ### Update Repositories
 
-To update to this series, you need [install the current OSG repositories](Documentation.Release3.YumRepositories#Install_OSG_Repositories).
+To update to this series, you need [install the current OSG repositories](../../common/yum#install-osg-repositories).
 
 ### Update Software
 
@@ -41,7 +41,7 @@ Once the repositories are installed, you can update to this new release with:
 Need help?
 ----------
 
-Do you need help with this release? [Contact us for help](HelpProcedure).
+Do you need help with this release? [Contact us for help](../../common/help).
 
 Detailed changes in this release
 --------------------------------
