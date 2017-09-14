@@ -150,15 +150,16 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
 `/etc/grid-security/voms-mapfile` is used to map VOs, VO roles, or VO groups to Unix accounts based on their VOMS attributes. An example of the format of a `voms-mapfile` follows:
 
 ```
-# map GLOW jobs to the 'glow' Unix account.
-"/GLOW/*" glow
 # map GLOW jobs in the chtc group to the 'glow1' Unix account.
 "/GLOW/chtc/*" glow1
 # map GLOW jobs with the htpc role to the 'glow2' Unix account.
 "/GLOW/Role=htpc/*" glow2
+# map other GLOW jobs to the 'glow' Unix account.
+"/GLOW/*" glow
 ```
 
 Each non-commented line is a shell-style pattern which is compared against the user's VOMS attributes, and a Unix account that the user will be mapped to if the pattern matches.
+The patterns are compared in the order they are listed in. Therefore, more general patterns should be placed later in the file.
 
 !!!note
     The Unix account must exist for the user to be mapped. If a VO's Unix account is missing, that VO will not be able to access your resources.
