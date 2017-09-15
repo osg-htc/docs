@@ -1,0 +1,99 @@
+%DOC_STATUS_TABLE%
+
+---+!! Hadoop
+%TOC%
+
+---+ About this Document
+
+The Hadoop Distributed File System (!HDFS) is a highly scalable, very reliable distributed file system developed by the Apache project as a part of the Hadoop data processing system.  The primary contributor (and largest user) is Yahoo.  !HDFS is based on the design of the Google File System.  !HDFS's strengths is in its ability to use commodity hard drives in worker nodes; it can turn a large amount of semi-reliable hardware into a system which is very reliable.
+
+To find out more information about HDFS, [[http://hadoop.apache.org/hdfs/][visit its home page]].  If you are thinking about installing Hadoop, we also recommend reading the [[http://hadoop.apache.org/common/docs/current/hdfs_design.html][HDFS architecture page]].
+
+This page covers the OSG's usage of Hadoop, and includes instructions for installing a grid-enabled HDFS system.
+
+
+---++ Planning
+
+   * Documentation.HadoopUnderstanding: This document explains the various components for Hadoop and the recommended specifications of size and deployment.
+
+---++ Installation
+
+   * [[Documentation.Release3.InstallHadoop200SE][Install Guide]]
+      * Change link https://twiki.grid.iu.edu/bin/view/Accounting/ProbeInstallation
+      * https://twiki.grid.iu.edu/bin/view/Trash/ReleaseDocumentationGratiaSiteCollector revisit this link
+
+*Upgrading:*  Please note that there are two upgrades that could be needed.  
+To upgrade if you are using 0.19 from the Caltech repository, follow the first guide to upgrade to 0.20 then use the second to convert to the newer OSG repository.
+
+   * Storage.HadoopUpgrade : Upgrade guide to upgrade from 0.19 to 0.20, both using the Caltech repo.
+   * Documentation/Release3.UpgradeHadoop: This guide covers upgrading from 0.20 Caltech repository to 0.20 using OSG repository.
+
+
+---++ Operation
+
+   * Storage.HadoopOperations: Information on how to run hadoop client commands, fscks, and other manual tips.
+   * Documentation/Release3.HadoopRecovery:  Notes and tips on how to recover corrupted or lost files.
+   * Documentation/Release3.HadoopDebug: Troubleshooting tips.  Always a work in progress.  Help us add solutions!
+
+---++ Additional Links
+
+   * Storage.HadoopXrootd : Special considerations when installing Xrootd on top of Hadoop
+   * Storage.HadoopPhedex: Special considerations when using Phedex file transfer service on top of Hadoop
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = DouglasStrain
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Navigation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = JamesWeichel
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
