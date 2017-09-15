@@ -16,31 +16,31 @@ This page covers the OSG's usage of Hadoop, and includes instructions for instal
 Planning
 --------
 
--   Documentation.HadoopUnderstanding: This document explains the various components for Hadoop and the recommended specifications of size and deployment.
+-   [HadoopUnderstanding](https://twiki.opensciencegrid.org/bin/view/Documentation/HadoopUnderstanding): This document explains the various components for Hadoop and the recommended specifications of size and deployment.
 
 Installation
 ------------
 
--   [Install Guide](Documentation.Release3.InstallHadoop200SE)
+-   [Install Guide](install-hadoop-2-0-0)
     -   Change link <https://twiki.grid.iu.edu/bin/view/Accounting/ProbeInstallation>
     -   <https://twiki.grid.iu.edu/bin/view/Trash/ReleaseDocumentationGratiaSiteCollector> revisit this link
 
 **Upgrading:** Please note that there are two upgrades that could be needed. To upgrade if you are using 0.19 from the Caltech repository, follow the first guide to upgrade to 0.20 then use the second to convert to the newer OSG repository.
 
--   Storage.HadoopUpgrade : Upgrade guide to upgrade from 0.19 to 0.20, both using the Caltech repo.
--   Documentation/Release3.UpgradeHadoop: This guide covers upgrading from 0.20 Caltech repository to 0.20 using OSG repository.
+-   [HadoopUpgrade](https://twiki.opensciencegrid.org/bin/view/Storage/HadoopUpgrade) : Upgrade guide to upgrade from 0.19 to 0.20, both using the Caltech repo.
+-   [UpgradeHadoop](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/UpgradeHadoop): This guide covers upgrading from 0.20 Caltech repository to 0.20 using OSG repository.
 
 Operation
 ---------
 
--   Storage.HadoopOperations: Information on how to run hadoop client commands, fscks, and other manual tips.
--   Documentation/Release3.HadoopRecovery: Notes and tips on how to recover corrupted or lost files.
--   Documentation/Release3.HadoopDebug: Troubleshooting tips. Always a work in progress. Help us add solutions!
+-   [HadoopOperations](https://twiki.opensciencegrid.org/bin/view/Storage/HadoopOperations): Information on how to run hadoop client commands, fscks, and other manual tips.
+-   [HadoopRecovery](hadoop-recovery): Notes and tips on how to recover corrupted or lost files.
+-   [HadoopDebug](troubleshooting-hadoop): Troubleshooting tips. Always a work in progress. Help us add solutions!
 
 Additional Links
 ----------------
 
--   Storage.HadoopXrootd : Special considerations when installing Xrootd on top of Hadoop
--   Storage.HadoopPhedex: Special considerations when using Phedex file transfer service on top of Hadoop
+-   [HadoopXrootd](https://twiki.opensciencegrid.org/bin/view/Storage/HadoopXrootd) : Special considerations when installing Xrootd on top of Hadoop
+-   [HadoopPhedex](https://twiki.opensciencegrid.org/bin/view/Storage/HadoopPhedex) : Special considerations when using Phedex file transfer service on top of Hadoop
 
 
