@@ -1,19 +1,8 @@
 Release Notes
 =============
 
-Requirements
-------------
-
--   **OS:** Scientific Linux 6 or 7, CentOS 6 or 7, or Red Hat Enterprise Linux 6 or 7
--   Make sure you don't have Globus pre-installed from EPEL.
-
 !!! note
-    Since August 9, 2016, release series 3.2.x are not supported anymore.
-
-Release Notes
--------------
-
-For release notes older than 3.3, please see https://github.com/opensciencegrid/docs/tree/master/archive/release-notes/
+    Since August 9, 2016, release series 3.2.x are not supported anymore. For release notes older than 3.3, please see the [archives](https://github.com/opensciencegrid/docs/tree/master/archive/release-notes/).
 
 ### OSG 3.4 ###
 
