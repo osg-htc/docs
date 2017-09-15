@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Supported Platforms - OSG Documentation</title>
+  <title>Contrib Software - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Supported Platforms";
-    var mkdocs_page_input_path = "release/supported_platforms.md";
-    var mkdocs_page_url = "/release/supported_platforms/";
+    var mkdocs_page_name = "Contrib Software";
+    var mkdocs_page_input_path = "release/contrib.md";
+    var mkdocs_page_url = "/release/contrib/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -198,15 +198,9 @@
                     
     <a class="" href="../release_series/">OSG Release Series</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">Supported Platforms</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#osg-software-supported-operating-systems">OSG Software Supported Operating Systems</a></li>
-    
-
-    </ul>
+    <a class="" href="../supported_platforms/">Supported Platforms</a>
                 </li>
                 <li class="">
                     
@@ -216,9 +210,29 @@
                     
     <a class="" href="../signing/">RPM Signing</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../contrib/">Contrib Software</a>
+    <a class="current" href="./">Contrib Software</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#contrib-software">Contrib software</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#what-is-the-contrib-software-repository">What is the contrib software repository?</a></li>
+        
+            <li><a class="toctree-l4" href="#caveats">Caveats</a></li>
+        
+            <li><a class="toctree-l4" href="#do-you-want-more-software-in-the-repository">Do you want more software in the repository?</a></li>
+        
+            <li><a class="toctree-l4" href="#what-software-is-in-the-contrib-repository">What software is in the contrib repository?</a></li>
+        
+            <li><a class="toctree-l4" href="#installing-from-the-contrib-repository">Installing from the contrib repository</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
     </ul>
 	    </li>
@@ -319,10 +333,10 @@
         
       
     
-    <li>Supported Platforms</li>
+    <li>Contrib Software</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/supported_platforms.md"
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/contrib.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -332,18 +346,35 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="osg-software-supported-operating-systems">OSG Software Supported Operating Systems<a class="headerlink" href="#osg-software-supported-operating-systems" title="Permanent link">&para;</a></h1>
-<p>The OSG Software 3.3 and 3.4 release series are supported on Red Hat Enterprise 6 and 7 for 64-bit (RHEL 6 and RHEL 7) and 32-bit (RHEL 6 only) Intel architectures.</p>
-<p>OSG also supports select rebuilds of RHEL.  Specifically:</p>
+                <h1 id="contrib-software">Contrib software<a class="headerlink" href="#contrib-software" title="Permanent link">&para;</a></h1>
+<h2 id="what-is-the-contrib-software-repository">What is the contrib software repository?<a class="headerlink" href="#what-is-the-contrib-software-repository" title="Permanent link">&para;</a></h2>
+<p>In addition to our regular software repository, we also have a <em>contrib</em> (short for "contributed") software repository. This is software that is does not go through the same software testing and release processes as the official OSG Software release, but may be useful to you.</p>
+<h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
+<p>You should be aware:</p>
 <ul>
-<li>CentOS 6</li>
-<li>CentOS 7</li>
-<li>Red Hat Enterprise Linux 6</li>
-<li>Red Hat Enterprise Linux 7</li>
-<li>Scientific Linux 6</li>
-<li>Scientific Linux 7</li>
+<li>The software in the contrib repository may have been more lightly tested than software in our official release. In particular, we do not test all of the software in the contrib repository together, and there is no guarantee all the software in compatible or even that it works.</li>
+<li>If you have problems with the software in the contrib repository, you can ask us for help, but you may be on your own. This software is not officially supported and we may not have time to help you with it.</li>
 </ul>
-<p>The OSG Software 3.1 and 3.2 release series also supported Red Hat Enterprise Linux 5, but neither 3.1 nor 3.2 are actively supported.</p>
+<h2 id="do-you-want-more-software-in-the-repository">Do you want more software in the repository?<a class="headerlink" href="#do-you-want-more-software-in-the-repository" title="Permanent link">&para;</a></h2>
+<p>We're happy to work with you to add more software to the contrib repository. If you provide the RPM packaging (preferably a spec file, so we can build it), it will get into the repository than if we have to do the packaging ourselves.</p>
+<h2 id="what-software-is-in-the-contrib-repository">What software is in the contrib repository?<a class="headerlink" href="#what-software-is-in-the-contrib-repository" title="Permanent link">&para;</a></h2>
+<p>The definitive list of software in the contrib repository is the repository itself. You can browse:</p>
+<ul>
+<li><a href="http://repo.grid.iu.edu/osg/3.4/el6/contrib/x86_64/">The OSG 3.4 EL6 contrib software repository</a></li>
+<li><a href="http://repo.grid.iu.edu/osg/3.4/el7/contrib/x86_64/">The OSG 3.4 EL7 contrib software repository</a></li>
+</ul>
+<p>The software includes:</p>
+<ul>
+<li><strong>gsh:</strong> Gsh is the "grid shell". It acts like a simple shell, something like bash, but with fewer features. All of the commands are run with globus-job-run against a remote Compute Element. This can be a very convenient way to debug a Compute Element.</li>
+<li><strong>glideinwms</strong>: The <code>osg-contrib</code> repository contains the development series for the GlideinWMS workload management system. This system submits condor-based pilots to grid sites to create a dynamic worker node pool for user jobs. Contained in the RPMs are packages for frontend and factory installations. This repository contains the development series that has newer features still in wider testing. At the time of writing, this series is the version 3 with new features for submission to clouds and to TeraGrid sites using corral frontends. For more stable installations, use the <code>osg-release</code> or <code>osg-testing</code> repositories.</li>
+<li><strong>xrootd-cmstfc</strong>: This package is for a plugin for xrootd storage system to provide a static rule-based logical to physical mapping. This is primarily used by the CMS experiment.</li>
+<li><strong>xrootd-status-probe</strong>: This package is a simple nagios probe for xrootd that verifies the first kilobyte of a multi-GB file.</li>
+<li><strong>cms-xrootd</strong>: Meta-packages containing sample configuration files for joining the CMS xrootd infrastructure.</li>
+</ul>
+<h2 id="installing-from-the-contrib-repository">Installing from the contrib repository<a class="headerlink" href="#installing-from-the-contrib-repository" title="Permanent link">&para;</a></h2>
+<p>To install software, you need to enable the osg-cotrib repository. The easiest way to do that is on case-by-case basis in the <code>yum</code> command-line. For example, to install <code>gsh</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> yum install --enablerepo<span class="o">=</span>osg-contrib gsh
+</pre></div>
               
             </div>
           </div>
@@ -351,10 +382,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../yum-basics/" class="btn btn-neutral float-right" title="Yum Basics">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../common/pki-cli/" class="btn btn-neutral float-right" title="Certificate Tools">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../release_series/" class="btn btn-neutral" title="OSG Release Series"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../signing/" class="btn btn-neutral" title="RPM Signing"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -382,10 +413,10 @@
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../release_series/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../signing/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../yum-basics/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../common/pki-cli/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
