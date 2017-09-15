@@ -214,7 +214,3 @@ Reference
 
 Find instructions to request a host certificate [here](../common/pki-cli.md).
 
-### Networking
-
-[Firewall Information](../common/firewall.md)
-
