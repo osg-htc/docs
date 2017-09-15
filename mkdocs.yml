@@ -29,7 +29,7 @@ pages:
 - Install Guides - Other:
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
-  - 'GlideinWMS Frontend': 'other/frontend.md'
+  - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
 - Overviews:
   - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
 - Release Information:
