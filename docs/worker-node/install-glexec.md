@@ -41,7 +41,7 @@ Requirements
 These are the requirements that must be met to install glexec.
 
 !!! note
-    Normally you will install the [OSG worker node](../worker-node/wn.md) first. Installing the `osg-wn-client-glexec` package will also install the worker node, but we do not duplicate instructions specific to the worker node here.
+    Normally you will install the [OSG worker node](../worker-node/install-wn.md) first. Installing the `osg-wn-client-glexec` package will also install the worker node, but we do not duplicate instructions specific to the worker node here.
 
 - Verify you are using one of the [supported platforms](../release/supported_platforms.md).
 - Prior to installing `glexec`, verify the [yum repositories](../common/yum.md) are correctly configured.

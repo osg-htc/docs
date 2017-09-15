@@ -51,10 +51,10 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 -   [Worker Node (WN) Client Overview](worker-node/using-wn)
 -   Install the WN client software on every worker node – pick a method:
     -   [Using RPMs](worker-node/wn) – useful when managing your worker nodes with a tool (e.g., Puppet, Chef)
-    -   [Using a tarball](worker-node/wn-tarball) – useful for installation onto a shared filesystem (does not require root access)
-    -   [Using OASIS](worker-node/wn-oasis) – useful when [CVMFS](worker-node/cvmfs) is already mounted on your worker nodes
--   (optional) [Install the CernVM-FS client](worker-node/cvmfs) to make it easy for user jobs to use needed software from OSG's OASIS repositories
--   (optional) [Install singularity on the OSG worker node](worker-node/singularity), to allow pilot jobs to isolate user jobs.
+    -   [Using a tarball](worker-node/install-wn-tarball) – useful for installation onto a shared filesystem (does not require root access)
+    -   [Using OASIS](worker-node/install-wn-oasis) – useful when [CVMFS](worker-node/install-cvmfs) is already mounted on your worker nodes
+-   (optional) [Install the CernVM-FS client](worker-node/install-cvmfs) to make it easy for user jobs to use needed software from OSG's OASIS repositories
+-   (optional) [Install singularity on the OSG worker node](worker-node/install-singularity), to allow pilot jobs to isolate user jobs.
 
 ### Installing and Configuring the Compute Element ###
 
@@ -69,7 +69,7 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 
 ### Installing and Configuring Other Nodes ###
 
-All of these node types and their services are optional, although OSG requires the Frontier Squid caching service if you have installed [CVMFS](worker-node/cvmfs) on your worker nodes.
+All of these node types and their services are optional, although OSG requires the Frontier Squid caching service if you have installed [CVMFS](worker-node/install-cvmfs) on your worker nodes.
 
 -   [Install Frontier Squid, the HTTP caching proxy service](data/frontier-squid)
 -   RSV monitoring to monitor and report to OSG on the health of your site

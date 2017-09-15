@@ -14,10 +14,10 @@ Our most common software products include:
   between the grid and your batch system.
 * [HTTP Proxy](data/frontier-squid.md): Caches the most commonly-used files at your
   site to preserve bandwidth (a custom packaging of the venerable `squid` software).
-* [CVMFS](worker-node/cvmfs.md) The CernVM File System (CVMFS) is a global-scale, read-only,
+* [CVMFS](worker-node/install-cvmfs.md) The CernVM File System (CVMFS) is a global-scale, read-only,
   hierarchical filesystem.  CVMFS volumes distribute the majority of the scientific
   software used on OSG in addition to the OSG worker node client.
-* [Worker node client](worker-node/wn.md) and [singularity](worker-node/singularity.md): An RPM-based install
+* [Worker node client](worker-node/install-wn.md) and [singularity](worker-node/install-singularity.md): An RPM-based install
   of the worker node software; this includes the `singularity` binary which allows pilots to securely isolate payload user jobs.
 
 
@@ -37,6 +37,6 @@ documents:
 * [CA Certificate Updater script](common/ca_updater.md)
 * [Host certificate management package](common/cert_scripts.md)
 * [Job Router Recipes](compute-element/job_router.md)
-* [Installing the Worker Node from OASIS](worker-node/wn-oasis.md)
+* [Installing the Worker Node from OASIS](worker-node/install-wn-oasis.md)
 * [Installing a GridFTP Server](data/gridftp.md)
 
