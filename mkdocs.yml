@@ -35,6 +35,7 @@ pages:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
 - Overviews:
   - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
+  - 'Hadoop Overview': 'data/hadoop-overview.md'
 - Release Information:
   - 'OSG Release Series': 'release/release_series.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
