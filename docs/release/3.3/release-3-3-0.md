@@ -28,36 +28,36 @@ Known Issues
 -   HTCondor CE does not work with HTCondor 8.3.6 (in upcoming) on EL 5 platforms. So, we are holding HTCondor at version 8.3.4 (in upcoming) for EL 5 platforms.
 -   StashCache packages need to be manually configured
     -   Manual configuration for origin server
-        -   Assuming that the origin server connects only to a redirector (not directly to cache server), minimal xrootd configuration is required. The configuration file, /etc/xrootd/xrootd-stashcache-origin-server.cfg, in this release is overkill. Here are recommended settings to use: \\
+        -   Assuming that the origin server connects only to a redirector (not directly to cache server), minimal xrootd configuration is required. The configuration file, /etc/xrootd/xrootd-stashcache-origin-server.cfg, in this release is overkill. Here are recommended settings to use:
 
-``` file
-xrd.port 1094
-all.role server
-all.manager stash-redirector.example.com 1213
-all.export / nostage
-xrootd.trace emsg login stall redirect
-ofs.trace none
-xrd.trace conn
-cms.trace all
-sec.protocol  host
-sec.protbind  * none
-all.adminpath /var/run/xrootd
-all.pidpath /var/run/xrootd
-```
+                :::file
+                xrd.port 1094
+                all.role server
+                all.manager stash-redirector.example.com 1213
+                all.export / nostage
+                xrootd.trace emsg login stall redirect
+                ofs.trace none
+                xrd.trace conn
+                cms.trace all
+                sec.protocol  host
+                sec.protbind  * none
+                all.adminpath /var/run/xrootd
+                all.pidpath /var/run/xrootd
 
 -   Manual configuration for cache server
     -   In contrast to the origin server configuration, one needs to declare `pss.origin <stash-redirector.example.com>` instead of configuring the cmsd or manager (only the xrootd daemon is required on the cache server). More detailed configuration of cache server for StashCache is [here](https://confluence.grid.iu.edu/pages/viewpage.action?title=Installing+an+XRootD+server+for+Stash+Cache&spaceKey=STAS).
--   In both cases, administrator needs to set the path of custom configuration file for its xrootd/cmds instance in /etc/sysconfig/xrootd, For example, change the cmds default from: \\
+-   In both cases, administrator needs to set the path of custom configuration file for its xrootd/cmds instance in /etc/sysconfig/xrootd, For example, change the cmds default from:
 
-``` file
-CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -k fifo"
-```
+        :::file
+        CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -k fifo"
+<br/>
 
-\\ to \\
+    to
 
-``` file
-CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-stashcache-origin-server.marian -k fifo" 
-```
+
+        :::file
+        CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-stashcache-origin-server.marian -k fifo" 
+
 
 Updating to the new release
 ---------------------------

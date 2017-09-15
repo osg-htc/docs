@@ -25,72 +25,67 @@ Detailed changes are below. All of the documentation can be found in the [Releas
 Known Issues
 ------------
 
--   CILogon CA certificate files have been reorganized between our various CA certificate packages.\\ To avoid file conflicts, you should upgrade your CA certificate RPMs at the same time, such as via the following command:\\ <pre class="rootscreen">[root@client ~] $ yum update '\*-ca-cert\*'</pre>
--   When using osg-configure to configure a CE host, it will fail because it tries to contact a ReSS server that has been shut down permanently. The ReSS service has been deprecated since early 2014, and support for it will be removed from osg-configure in an upcoming version. To work around this osg-configure failure now, edit /etc/osg/config.d/30-infoservices.ini and set the option: \\
+-   CILogon CA certificate files have been reorganized between our various CA certificate packages.  
+To avoid file conflicts, you should upgrade your CA certificate RPMs at the same time, such as via the following command:  
+<pre class="rootscreen">[root@client ~] $ yum update '\*-ca-cert\*'</pre>
+-   When using osg-configure to configure a CE host, it will fail because it tries to contact a ReSS server that has been shut down permanently. The ReSS service has been deprecated since early 2014, and support for it will be removed from osg-configure in an upcoming version. To work around this osg-configure failure now, edit /etc/osg/config.d/30-infoservices.ini and set the option:
 
-``` file
-ress_servers = https://localhost[RAW]
-```
+        :::file
+        ress_servers = https://localhost[RAW]
 
 -   There is a known memory leak in lcmaps-plugins-scas-client that HTCondor-CE triggers repeatedly. A special OSG release, coming soon, will fix the underlying memory leak, but in the meantime it is possible to make two small configuration changes to slow the rate at which memory leaks.
-    1.  In /etc/condor-ce/config.d/01-ce-auth.conf, make sure the following attribute is defined as follows (note the $(USERS) at the end): \\
+    1.  In /etc/condor-ce/config.d/01-ce-auth.conf, make sure the following attribute is defined as follows (note the $(USERS) at the end):
 
-``` file
-COLLECTOR.ALLOW_ADVERTISE_STARTD =  $(UNMAPPED_USERS), $(USERS)
-```
+            :::file
+            COLLECTOR.ALLOW_ADVERTISE_STARTD =  $(UNMAPPED_USERS), $(USERS)
 
-1.  Also in /etc/condor-ce/config.d/01-ce-auth.conf, add the following line to the end of the file: \\
+1.  Also in /etc/condor-ce/config.d/01-ce-auth.conf, add the following line to the end of the file:
 
-``` file
-GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION = 30*$(MINUTE)
-```
+        ::: file
+        GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION = 30*$(MINUTE)
 
-1.  Verify that the attributes are set properly by running the following command: \\
+1.  Verify that the attributes are set properly by running the following command:
 
-``` file
-$ condor_ce_config_val COLLECTOR.ALLOW_ADVERTISE_STARTD GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION
-*@unmapped.opensciencegrid.org, *@users.opensciencegrid.org
-30*60
-```
+        ::: file
+        $ condor_ce_config_val COLLECTOR.ALLOW_ADVERTISE_STARTD GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION
+        *@unmapped.opensciencegrid.org, *@users.opensciencegrid.org
+        30*60
 
--   HTCondor 8.4.0 has changed it's behavior in ways that cause the GlideinWMS frontend configuration to break. In order to correct this, the following setting needs to be added to the configuration file: \\
+-   HTCondor 8.4.0 has changed it's behavior in ways that cause the GlideinWMS frontend configuration to break. In order to correct this, the following setting needs to be added to the configuration file:
 
-``` file
-COLLECTOR_USES_SHARED_PORT = False
-```
+        :::file
+        COLLECTOR_USES_SHARED_PORT = False
 
 -   StashCache packages need to be manually configured
     -   Manual configuration for origin server
-        -   Assuming that the origin server connects only to a redirector (not directly to cache server), minimal xrootd configuration is required. The configuration file, /etc/xrootd/xrootd-stashcache-origin-server.cfg, in this release is overkill. Here are recommended settings to use: \\
+        -   Assuming that the origin server connects only to a redirector (not directly to cache server), minimal xrootd configuration is required. The configuration file, /etc/xrootd/xrootd-stashcache-origin-server.cfg, in this release is overkill. Here are recommended settings to use:
 
-``` file
-xrd.port 1094
-all.role server
-all.manager stash-redirector.example.com 1213
-all.export / nostage
-xrootd.trace emsg login stall redirect
-ofs.trace none
-xrd.trace conn
-cms.trace all
-sec.protocol  host
-sec.protbind  * none
-all.adminpath /var/run/xrootd
-all.pidpath /var/run/xrootd
-```
+                :::file
+                xrd.port 1094
+                all.role server
+                all.manager stash-redirector.example.com 1213
+                all.export / nostage
+                xrootd.trace emsg login stall redirect
+                ofs.trace none
+                xrd.trace conn
+                cms.trace all
+                sec.protocol  host
+                sec.protbind  * none
+                all.adminpath /var/run/xrootd
+                all.pidpath /var/run/xrootd
 
 -   Manual configuration for cache server
     -   In contrast to the origin server configuration, one needs to declare `pss.origin <stash-redirector.example.com>` instead of configuring the cmsd or manager (only the xrootd daemon is required on the cache server). More detailed configuration of cache server for StashCache is [here](https://confluence.grid.iu.edu/pages/viewpage.action?title=Installing+an+XRootD+server+for+Stash+Cache&spaceKey=STAS).
--   In both cases, administrator needs to set the path of custom configuration file for its xrootd/cmds instance in /etc/sysconfig/xrootd, For example, change the cmds default from: \\
+-   In both cases, administrator needs to set the path of custom configuration file for its xrootd/cmds instance in /etc/sysconfig/xrootd, For example, change the cmds default from:
 
-``` file
-CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -k fifo"
-```
+        :::file
+        CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -k fifo"
+<br/>
 
-\\ to \\
+    to
 
-``` file
-CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-stashcache-origin-server.marian -k fifo" 
-```
+        :::file
+        CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-stashcache-origin-server.marian -k fifo" 
 
 Updating to the new release
 ---------------------------

@@ -35,48 +35,45 @@ Known Issues
 -   The HTCondor shared port daemon can run out of file descriptors.
     -   This is a problem with HTCondor 8.3.7 and 8.3.8.
     -   The problem will be fixed in the HTCondor 8.4.0 release.
-    -   The glideInWMS factories (and possibly front-ends) using the following configuration model will cause the HTCondor shared port daemon to leak file descriptors. The relevant configuration fragment is similar to:\\
+    -   The glideInWMS factories (and possibly front-ends) using the following configuration model will cause the HTCondor shared port daemon to leak file descriptors. The relevant configuration fragment is similar to:
 
-``` file
-USE_SHARED_PORT = FALSE
-DAEMON_LIST = $(DAEMON_LIST) SHARED_PORT
-SCHEDD.USE_SHARED_PORT = TRUE
-SHADOW.USE_SHADED_PORT = TRUE
-```
+            :::file
+            USE_SHARED_PORT = FALSE
+            DAEMON_LIST = $(DAEMON_LIST) SHARED_PORT
+            SCHEDD.USE_SHARED_PORT = TRUE
+            SHADOW.USE_SHADED_PORT = TRUE
 
 -   This non-standard shared-port configuration is probably used to avoid dealing with shared-port collector trees.
 -   The work-around is to start the HTCondor master with CONDOR\_PRIVATE\_SHARED\_PORT\_COOKIE set in the environment, as it will propagate down to the target daemons. CONDOR\_PRIVATE\_SHARED\_PORT\_COOKIE should contain a 32-byte random number in hexadecimal format (64 characters). **Note:** care must be taken to ensure that this value is private. Upgrade to HTCondor 8.4.0 as soon as possible and stop using this workaround. \* Running osg-configure with the new version of HTCondor installed causes a deprecation warning to be emitted. The warning does not affect the services. \* StashCache packages need to be manually configured
 -   Manual configuration for origin server
-    -   Assuming that the origin server connects only to a redirector (not directly to cache server), minimal xrootd configuration is required. The configuration file, /etc/xrootd/xrootd-stashcache-origin-server.cfg, in this release is overkill. Here are recommended settings to use: \\
+    -   Assuming that the origin server connects only to a redirector (not directly to cache server), minimal xrootd configuration is required. The configuration file, /etc/xrootd/xrootd-stashcache-origin-server.cfg, in this release is overkill. Here are recommended settings to use:
 
-``` file
-xrd.port 1094
-all.role server
-all.manager stash-redirector.example.com 1213
-all.export / nostage
-xrootd.trace emsg login stall redirect
-ofs.trace none
-xrd.trace conn
-cms.trace all
-sec.protocol  host
-sec.protbind  * none
-all.adminpath /var/run/xrootd
-all.pidpath /var/run/xrootd
-```
+            :::file
+            xrd.port 1094
+            all.role server
+            all.manager stash-redirector.example.com 1213
+            all.export / nostage
+            xrootd.trace emsg login stall redirect
+            ofs.trace none
+            xrd.trace conn
+            cms.trace all
+            sec.protocol  host
+            sec.protbind  * none
+            all.adminpath /var/run/xrootd
+            all.pidpath /var/run/xrootd
 
 -   Manual configuration for cache server
     -   In contrast to the origin server configuration, one needs to declare `pss.origin <stash-redirector.example.com>` instead of configuring the cmsd or manager (only the xrootd daemon is required on the cache server). More detailed configuration of cache server for StashCache is [here](https://confluence.grid.iu.edu/pages/viewpage.action?title=Installing+an+XRootD+server+for+Stash+Cache&spaceKey=STAS).
--   In both cases, administrator needs to set the path of custom configuration file for its xrootd/cmds instance in /etc/sysconfig/xrootd, For example, change the cmds default from: \\
+-   In both cases, administrator needs to set the path of custom configuration file for its xrootd/cmds instance in /etc/sysconfig/xrootd, For example, change the cmds default from:
 
-``` file
-CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -k fifo"
-```
+        :::file
+        CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -k fifo"
+<br/>
 
-\\ to \\
+    to
 
-``` file
-CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-stashcache-origin-server.marian -k fifo" 
-```
+        :::file
+        CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-stashcache-origin-server.marian -k fifo" 
 
 Updating to the new release
 ---------------------------

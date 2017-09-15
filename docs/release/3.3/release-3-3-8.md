@@ -36,13 +36,13 @@ Detailed changes are below. All of the documentation can be found in the [Releas
 Known Issues
 ------------
 
--   HTCondor 8.4.0 has changed it's behavior in ways that cause the GlideinWMS frontend configuration to break. In order to correct this, the following setting needs to be added to the configuration file: \\
+-   HTCondor 8.4.0 has changed it's behavior in ways that cause the GlideinWMS frontend configuration to break. In order to correct this, the following setting needs to be added to the configuration file:
 
-``` file
-COLLECTOR_USES_SHARED_PORT = False
-```
+        :::file
+        COLLECTOR_USES_SHARED_PORT = False
 
--   The new HTCondor-CE View has a bug where some graphs show up blank. This may also manifest in errors like the following in `/var/log/condor-ce/GangliadLog`: \\ <pre class="file">
+-   The new HTCondor-CE View has a bug where some graphs show up blank. This may also manifest in errors like the following in `/var/log/condor-ce/GangliadLog`:  
+<pre class="file">
 
 1/11/16 15:05:54 Failed to execute /usr/share/condor-ce/condor\_ce\_metric --conf /etc/ganglia/gmond.conf --group HTCondor.Schedd --name SchedulerRecentDaemonCoreDutyCycle --value 1.04449 --type float --units % --slope both --spoof 192.170.227.226:itbv-ce-htcondor.mwt2.org --tmax 120 --dmax 86400: Usage: condor\_ce\_metric \[options\]
 
@@ -53,36 +53,34 @@ condor\_ce\_metric: error: no such option: --conf
 -   Since version 1.14, HTCondor-CE has required condor >= 8.3.7 but this was not reflected in the packaging. If your routed jobs do not have the proper environment set, your version of HTCondor-CE is newer than 1.14, and your version of condor is older than 8.3.7, consider upgrading your version of condor. This will be fixed in the next release.
 -   StashCache packages need to be manually configured
     -   Manual configuration for origin server
-        -   Assuming that the origin server connects only to a redirector (not directly to cache server), minimal xrootd configuration is required. The configuration file, /etc/xrootd/xrootd-stashcache-origin-server.cfg, in this release is overkill. Here are recommended settings to use: \\
+        -   Assuming that the origin server connects only to a redirector (not directly to cache server), minimal xrootd configuration is required. The configuration file, /etc/xrootd/xrootd-stashcache-origin-server.cfg, in this release is overkill. Here are recommended settings to use:
 
-``` file
-xrd.port 1094
-all.role server
-all.manager stash-redirector.example.com 1213
-all.export / nostage
-xrootd.trace emsg login stall redirect
-ofs.trace none
-xrd.trace conn
-cms.trace all
-sec.protocol  host
-sec.protbind  * none
-all.adminpath /var/run/xrootd
-all.pidpath /var/run/xrootd
-```
+                :::file
+                xrd.port 1094
+                all.role server
+                all.manager stash-redirector.example.com 1213
+                all.export / nostage
+                xrootd.trace emsg login stall redirect
+                ofs.trace none
+                xrd.trace conn
+                cms.trace all
+                sec.protocol  host
+                sec.protbind  * none
+                all.adminpath /var/run/xrootd
+                all.pidpath /var/run/xrootd
 
 -   Manual configuration for cache server
     -   In contrast to the origin server configuration, one needs to declare `pss.origin <stash-redirector.example.com>` instead of configuring the cmsd or manager (only the xrootd daemon is required on the cache server). More detailed configuration of cache server for StashCache is [here](https://confluence.grid.iu.edu/pages/viewpage.action?title=Installing+an+XRootD+server+for+Stash+Cache&spaceKey=STAS).
--   In both cases, administrator needs to set the path of custom configuration file for its xrootd/cmds instance in /etc/sysconfig/xrootd, For example, change the cmds default from: \\
+-   In both cases, administrator needs to set the path of custom configuration file for its xrootd/cmds instance in /etc/sysconfig/xrootd, For example, change the cmds default from:
 
-``` file
-CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -k fifo"
-```
+        :::file
+        CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -k fifo"
+<br/>
 
-\\ to \\
+    to
 
-``` file
-CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-stashcache-origin-server.marian -k fifo" 
-```
+        :::file
+        CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-stashcache-origin-server.marian -k fifo" 
 
 Updating to the new release
 ---------------------------
