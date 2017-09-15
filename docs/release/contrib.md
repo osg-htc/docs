@@ -24,8 +24,8 @@ What software is in the contrib repository?
 
 The definitive list of software in the contrib repository is the repository itself. You can browse:
 
--   [The EL5 contrib software repository](http://repo.grid.iu.edu/3.0/el5/osg-contrib/x86_64/)
--   [The EL6 contrib software repository](http://repo.grid.iu.edu/3.0/el6/osg-contrib/x86_64/)
+-   [The OSG 3.4 EL6 contrib software repository](http://repo.grid.iu.edu/osg/3.4/el6/contrib/x86_64/)
+-   [The OSG 3.4 EL7 contrib software repository](http://repo.grid.iu.edu/osg/3.4/el7/contrib/x86_64/)
 
 The software includes:
 
