@@ -4,7 +4,7 @@ Installing and Using the Worker Node Client from Tarballs
 Introduction
 ------------
 
-This document is intended to guide users through the process of installing the worker node software and configuring the installed worker node software. Contents of the worker node client can be found [here](wn.md#worker-node-contents).  Although this document is oriented to system administrators, any unprivileged user may install and use the client.
+This document is intended to guide users through the process of installing the worker node software and configuring the installed worker node software. Contents of the worker node client can be found [here](install-wn.md#worker-node-contents).  Although this document is oriented to system administrators, any unprivileged user may install and use the client.
 
 If you are installing the OSG worker node client following these instruction, remember to configure the `grid_dir` option on your CE - see [below](#configure-the-ce).
 
@@ -13,7 +13,7 @@ About This Guide
 
 The *OSG Worker Node Client* is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use.
 
-It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:  This guide is useful when installing onto a shared filesystem for distribution to worker nodes.  Other options include installing [via RPMs](wn.md) or providing the client [via OASIS (CVMFS)](wn-oasis).
+It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:  This guide is useful when installing onto a shared filesystem for distribution to worker nodes.  Other options include installing [via RPMs](install-wn.md) or providing the client [via OASIS (CVMFS)](install-wn-oasis).
 
 Before starting, ensure the host has [a supported operating system](../release/supported_platforms.md).
 
