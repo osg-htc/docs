@@ -19,7 +19,7 @@ vulnerability low.  Beginning in RHEL 7.4, there is a new
 [technology preview feature](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/7.4_Release_Notes/index.html#technology_previews_kernel)
 to allow unprivileged bind mounts in user name spaces, which allows
 singularity to run as an unprivileged user.  The OSG has installed
-singularity in [cvmfs](cvmfs), so if you have RHEL 7.4 or later you
+singularity in [cvmfs](install-cvmfs), so if you have RHEL 7.4 or later you
 can avoid installing singularity at all and reduce vulnerability even
 further. 
 
@@ -60,7 +60,7 @@ altogether and use singularity through CVMFS:
             > /etc/sysctl.d/90-max_user_namespaces.conf
 
 4. Reboot
-5. If you haven't yet installed [cvmfs](cvmfs), do so.
+5. If you haven't yet installed [cvmfs](install-cvmfs), do so.
 6. Log in as an ordinary unprivileged user and verify that singularity
     works:
 
