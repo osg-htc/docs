@@ -60,7 +60,7 @@ altogether and use singularity through CVMFS:
             > /etc/sysctl.d/90-max_user_namespaces.conf
 
 4. Reboot
-5. If you haven't yet installed [cvmfs](cvmfs), do so.
+5. If you haven't yet installed [cvmfs](install-cvmfs), do so.
 6. Log in as an ordinary unprivileged user and verify that singularity
     works:
 
