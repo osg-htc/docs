@@ -12,12 +12,12 @@ pages:
 - Install Guides - Common:
   - 'CA Certificates': 'common/ca.md'
   - 'Yum Repos': 'common/yum.md'
-- Install Guides - Client:
-  - 'Worker Node (RPM install)': 'client/wn.md'
-  - 'Worker Node (tarball install)': 'client/wn-tarball.md'
-  - 'Worker Node (OASIS install)': 'client/wn-oasis.md'
-  - 'CVMFS': 'client/cvmfs.md'
-  - 'Singularity': 'client/singularity.md'
+- Install Guides - Worker Node:
+  - 'Worker Node (RPM install)': 'worker-node/wn.md'
+  - 'Worker Node (tarball install)': 'worker-node/wn-tarball.md'
+  - 'Worker Node (OASIS install)': 'worker-node/wn-oasis.md'
+  - 'CVMFS': 'worker-node/cvmfs.md'
+  - 'Singularity': 'worker-node/singularity.md'
 - Install Guides - Compute:
   - 'HTCondor-CE': 'compute-element/install-htcondor-ce.md'
 - Install Guides - Data:
@@ -43,7 +43,7 @@ pages:
 - Usage Guides:
   - 'Certificate Tools': 'common/pki-cli.md'
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
-  - 'Worker Node Environment': 'client/using-wn.md'
+  - 'Worker Node Environment': 'worker-node/using-wn.md'
 - In-Progress Docs:
   - 'CA Updater': 'common/ca_updater.md'
   - 'Certificate Request Scripts': 'common/cert_scripts.md'
@@ -53,7 +53,7 @@ pages:
   - 'BeStMan Install': 'data/bestman-install.md'
   - 'EDG-Mkgridmap Install': 'security/edg-mkgridmap.md'
   - 'GUMS': 'security/install-gums.md'
-  - 'Worker node glexec Install': 'client/glexec.md'
+  - 'Worker node glexec Install': 'worker-node/glexec.md'
 - 'Get Help': 'common/help.md'
 
 markdown_extensions:

@@ -389,7 +389,7 @@ In the output, check that your `gumsIDMapped` is not `null`. It returns the `uid
 
 ### Verifying GridFTP
 
-Login on the node where your certificate and [OSG Client](../client/wn.md) is installed You will need to generate your proxy credentials using `grid-proxy-init` or `voms-proxy-init`.
+Login on the node where your certificate and [OSG Client](../worker-node/wn.md) is installed You will need to generate your proxy credentials using `grid-proxy-init` or `voms-proxy-init`.
 
 Then test GridFTP using `globus-url-copy`:
 
