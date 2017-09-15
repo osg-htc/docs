@@ -36,31 +36,31 @@
     
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/client/wn/</loc>
+     <loc>https://opensciencegrid.github.io/docs/worker-node/install-wn/</loc>
      <lastmod>2017-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/client/wn-tarball/</loc>
+     <loc>https://opensciencegrid.github.io/docs/worker-node/install-wn-tarball/</loc>
      <lastmod>2017-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/client/wn-oasis/</loc>
+     <loc>https://opensciencegrid.github.io/docs/worker-node/install-wn-oasis/</loc>
      <lastmod>2017-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/client/cvmfs/</loc>
+     <loc>https://opensciencegrid.github.io/docs/worker-node/install-cvmfs/</loc>
      <lastmod>2017-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/client/singularity/</loc>
+     <loc>https://opensciencegrid.github.io/docs/worker-node/install-singularity/</loc>
      <lastmod>2017-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -200,7 +200,7 @@
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/client/using-wn/</loc>
+     <loc>https://opensciencegrid.github.io/docs/worker-node/using-wn/</loc>
      <lastmod>2017-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -256,7 +256,7 @@
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/client/glexec/</loc>
+     <loc>https://opensciencegrid.github.io/docs/worker-node/install-glexec/</loc>
      <lastmod>2017-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>

@@ -75,27 +75,27 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Install Guides - Client</span>
+    <span class="caption-text">Install Guides - Worker Node</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../client/wn/">Worker Node (RPM install)</a>
+    <a class="" href="../../worker-node/install-wn/">Worker Node (RPM install)</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../client/wn-tarball/">Worker Node (tarball install)</a>
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../client/wn-oasis/">Worker Node (OASIS install)</a>
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../client/cvmfs/">CVMFS</a>
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../client/singularity/">Singularity</a>
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
                 </li>
     </ul>
 	    </li>
@@ -223,7 +223,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../client/using-wn/">Worker Node Environment</a>
+    <a class="" href="../../worker-node/using-wn/">Worker Node Environment</a>
                 </li>
     </ul>
 	    </li>
@@ -347,7 +347,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../client/glexec/">Worker node glexec Install</a>
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
                 </li>
     </ul>
 	    </li>
@@ -820,7 +820,7 @@ bestman   ALL=(SRM_USR) NOPASSWD: SRM_CMD
 
 <p>In the output, check that your <code>gumsIDMapped</code> is not <code>null</code>. It returns the <code>uid</code> that GUMS will map you to. This can be obtained from your GUMS administrator. Verify that this <code>uid</code> exists on BeStMan and GridFTP node.</p>
 <h3 id="verifying-gridftp">Verifying GridFTP<a class="headerlink" href="#verifying-gridftp" title="Permanent link">&para;</a></h3>
-<p>Login on the node where your certificate and <a href="../../client/wn/">OSG Client</a> is installed You will need to generate your proxy credentials using <code>grid-proxy-init</code> or <code>voms-proxy-init</code>.</p>
+<p>Login on the node where your certificate and <a href="../../worker-node/install-wn/">OSG Worker Node Client</a> is installed You will need to generate your proxy credentials using <code>grid-proxy-init</code> or <code>voms-proxy-init</code>.</p>
 <p>Then test GridFTP using <code>globus-url-copy</code>:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> <span class="nb">echo</span> <span class="s2">&quot;This is a test&quot;</span> &gt;/tmp/test 
 <span class="gp">[user@client ~] $</span> globus-url-copy -dbg file:///tmp/test gsiftp://&lt;GRIDFTP_HOST&gt;/tmp/test 
