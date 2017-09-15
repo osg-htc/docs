@@ -19,7 +19,7 @@ vulnerability low.  Beginning in RHEL 7.4, there is a new
 [technology preview feature](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/7.4_Release_Notes/index.html#technology_previews_kernel)
 to allow unprivileged bind mounts in user name spaces, which allows
 singularity to run as an unprivileged user.  The OSG has installed
-singularity in [cvmfs](cvmfs), so if you have RHEL 7.4 or later you
+singularity in [cvmfs](install-cvmfs), so if you have RHEL 7.4 or later you
 can avoid installing singularity at all and reduce vulnerability even
 further. 
 
