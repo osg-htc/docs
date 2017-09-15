@@ -16,9 +16,8 @@ This document covers three components of the GlideinWMS a VO needs to install:
 
 This guide covers installation of all three components on the same host: it is designed for small to medium VOs (see the Hardware Requirements below). Given a significant, large host, we have been able to scale the single-host install to 20,000 running jobs.
 
-![alt text][logo]
+![alt text](../images/simple_diagram.png)
 
-[logo]: https://twiki.opensciencegrid.org/twiki/pub/Documentation/Release3/InstallGlideinWMSFrontend/simple_diagram.png "GlideinWMS Simple Diagra"
 
 Release
 =======
@@ -60,7 +59,7 @@ The Glidein WMS Frontend installation will create the following users unless the
 | `apache`   | 48          | Runs httpd to provide the monitoring page (installed via dependencies).                                                        |
 | `condor`   | none        | Condor user (installed via dependencies).                                                                                      |
 | `frontend` | none        | This user runs the glideinWMS VO frontend. It also owns the credentials forwarded to the factory to use for the glideins.      |
-| `gratia`   | none        | Runs the Gratia probes to collect accounting data (optional see [the Gratia section below](#Adding_Gratia_Accounting_and_a_L)) |
+| `gratia`   | none        | Runs the Gratia probes to collect accounting data (optional see [the Gratia section below](#adding-gratia-accounting-and-a-local-monitoring-page-on-a-production-server)) |
 
 Note that if uid 48 is already taken but not used for the appropriate users, you will experience errors. [Details...](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/KnownProblems#Reserved_user_ids_especially_for)
 
@@ -76,7 +75,7 @@ The %GREEN%VO Frontend proxy%ENDCOLOR% and the %RED% pilot proxy%ENDCOLOR% can b
 
 ### VO Frontend proxy
 
-The use of a service certificate is recommended. Then you create a proxy from the certificate as explained in the [proxy configuration section](#Proxy_Configuration). This can be a plain grid proxy (from `grid-proxy-init`), no VO extensions are required.
+The use of a service certificate is recommended. Then you create a proxy from the certificate as explained in the [proxy configuration section](#proxy-configuration). This can be a plain grid proxy (from `grid-proxy-init`), no VO extensions are required.
 
 **You must notify the Factory operation of the DN of this proxy when you initially setup the frontend and each time the DN changes**.
 
@@ -88,7 +87,7 @@ To check the important information about a pem certificate you can use: `openssl
 
 ### Certificates/Proxies configuration example
 
-This document has a [proxy configuration section](#Proxy_Configuration) that uses the host certificate/key and a user certificate to generate the required proxies.
+This document has a [proxy configuration section](#proxy-configuration) that uses the host certificate/key and a user certificate to generate the required proxies.
 
 | Certificate      | User that owns certificate | Path to certificate                                                           |
 |:-----------------|:---------------------------|:------------------------------------------------------------------------------|
@@ -99,8 +98,6 @@ This document has a [proxy configuration section](#Proxy_Configuration) that use
 
 Networking
 ----------
-
-For more details on overall Firewall configuration, please see our [Firewall documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/FirewallInformation)
 
 | Service Name      | Protocol | Port Number      |Inbound|Outbound| Comment                 |
 |:------------------|:---------|:-----------------|:------|:-------|-------------------------|
@@ -117,7 +114,7 @@ Before the installation
 Once all requirements are satisfied you must take a couple of actions before installing the Frontend:
 
 -   you need all the data to connect to a GWMS Factory
--   \*Remember to install HTCondor BEFORE installing the Frontend ([instructions are below](#Install_HTCondor))\*
+-   **Remember to install HTCondor BEFORE installing the Frontend ([instructions are below](#install-htcondor))**
 
 OSG Factory access
 ------------------
@@ -132,7 +129,7 @@ To request access to the OSG Glidein Factory at UCSD you have to send an email t
 
 1. Your Name 
 2. The VO that is utilizing the VO Frontend
-3. The DN of the proxy you will use to communicate with the Factory (VO Frontend DN, e.g. the host certificate subject if you follow the [proxy configuration section](#Proxy_Configuration)) 
+3. The DN of the proxy you will use to communicate with the Factory (VO Frontend DN, e.g. the host certificate subject if you follow the [proxy configuration section](#proxy-configuration)) 
 4. You can propose a security name that will have to be confirmed/changed by the Factory managers (see below) 
 5. A list of sites where you want to run:
 
@@ -153,7 +150,7 @@ In the reply from the OSG Factory managers you will receive some information nee
 Installation Procedure
 ======================
 
-Refer to installtion of the [InstallCertAuth](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth)
+Refer to installtion of the [InstallCertAuth](../common/ca)
 
 Install HTCondor
 ----------------
@@ -225,7 +222,7 @@ If you have a working installation of glideinwms-frontend you can just upgrade t
 ```
 
 !!! note
-    The \\\* on the yum update is important.**
+    The \\\** on the yum update is important.**
 
 !!! warning
     When you do a generic yum update that will update also condor, the upgrade may restore the personal condor config file that you have to remove with `rm /etc/condor/config.d/00personal_condor.config`
@@ -415,12 +412,12 @@ If, like in the example above, the GlideinWMS configuration files are not the la
 2. Verify the alll the expected HTCondor daemons are running: 
 
         :::console
-        [root@client ~] # condor\_config\_val -verbose DAEMON\_LIST DAEMON\_LIST: MASTER, COLLECTOR, NEGOTIATOR, SCHEDD, SHARED\_PORT, COLLECTOR0 
+        [root@client ~] # condor_config_val -verbose DAEMON_LIST DAEMON_LIST: MASTER, COLLECTOR, NEGOTIATOR, SCHEDD, SHARED_PORT, COLLECTOR0 
         COLLECTOR1 COLLECTOR2 COLLECTOR3 COLLECTOR4 COLLECTOR5 COLLECTOR6 COLLECTOR7 COLLECTOR8 COLLECTOR9 COLLECTOR10 , COLLECTOR11, COLLECTOR12, 
         COLLECTOR13, COLLECTOR14, COLLECTOR15, COLLECTOR16, COLLECTOR17, COLLECTOR18, COLLECTOR19, COLLECTOR20, COLLECTOR21, COLLECTOR22, COLLECTOR23, 
         COLLECTOR24, COLLECTOR25, COLLECTOR26, COLLECTOR27, COLLECTOR28, COLLECTOR29, COLLECTOR30, COLLECTOR31, COLLECTOR32, COLLECTOR33, COLLECTOR34, 
         COLLECTOR35, COLLECTOR36, COLLECTOR37, COLLECTOR38, COLLECTOR39, COLLECTOR40
-        Defined in '/etc/condor/config.d/11\_gwms\_secondary\_collectors.config', line 193.
+        Defined in '/etc/condor/config.d/11_gwms_secondary_collectors.config', line 193.
 
 If you don't see all the collectors. shared port and the two schedd, then the configuration must be corrected. There should be ***no*** `startd` daemons listed.
 
@@ -428,7 +425,7 @@ If you don't see all the collectors. shared port and the two schedd, then the co
 
 The Condor grid mapfile (`/etc/condor/certs/condor_mapfile`) is used for authentication between the glideinWMS pilot running on a remote worker node, and the local collector. Condor uses the mapfile to map certificates to pseudo-users on the local machine. It is important that you map the DN's of:
 
-- %RED%Each schedd proxy%ENDCOLOR%: The =DN` of each schedd that the frontend talks to. Specified in the frontend.xml schedd element `DN` attribute:
+- %RED%Each schedd proxy%ENDCOLOR%: The `DN` of each schedd that the frontend talks to. Specified in the frontend.xml schedd element `DN` attribute:
 
         :::file
         <schedds>
@@ -436,12 +433,12 @@ The Condor grid mapfile (`/etc/condor/certs/condor_mapfile`) is used for authent
           <schedd DN="/DC=org/DC=doegrids/OU=Services/CN=YOUR_HOST" fullname="schedd_jobs2@YOUR_HOST"/>
         </schedds>
 
-- %GREEN%Frontend proxy%ENDCOLOR%: The DN of the proxy that the frontend uses to communicate with the other !glideinWMS services. Specified in the frontend.xml security element =proxy_DN` attribute:
+- %GREEN%Frontend proxy%ENDCOLOR%: The DN of the proxy that the frontend uses to communicate with the other glideinWMS services. Specified in the frontend.xml security element `proxy_DN` attribute:
 
         :::file
         <security classad_proxy="/tmp/vo_proxy" proxy_DN="DN of vo_proxy" ....        
 
-- %RED%Each pilot proxy%ENDCOLOR% The DN of __each__ proxy that the frontend forwards to the factory to use with the !glideinWMS pilots.  This allows the !glideinWMs pilot jobs to communicate with the User Collector. Specified in the frontend.xml proxy =absfname` attribute (you need to specify the `DN` of each of those proxies:
+- %RED%Each pilot proxy%ENDCOLOR% The DN of __each__ proxy that the frontend forwards to the factory to use with the glideinWMS pilots.  This allows the !glideinWMs pilot jobs to communicate with the User Collector. Specified in the frontend.xml proxy `absfname` attribute (you need to specify the `DN` of each of those proxies:
 
         :::file
         <security ....
@@ -459,7 +456,7 @@ Below is an example mapfile, by default found in `/etc/condor/certs/condor_mapfi
 GSI "%RED%DN of schedd proxy%ENDCOLOR%" schedd
 GSI "%GREEN%DN of frontend proxy%ENDCOLOR%" frontend
 GSI "%RED%DN of pilot proxy%ENDCOLOR%$" pilot_proxy
-GSI "^\/DC\=org\/DC\=doegrids\/OU\=Services\/CN\=personal\-submit\-host2\.mydomain\.edu$" <b>example_of_format</b>
+GSI "^\/DC\=org\/DC\=doegrids\/OU\=Services\/CN\=personal\-submit\-host2\.mydomain\.edu$" %RED%<example_of_format>%ENDCOLOR%
 GSI (.*) anonymous
 FS (.*) \1 
 ```
@@ -483,17 +480,17 @@ There are 2 types of (or purposes for) proxies required for the VO Frontend: 1 t
 The VO Frontend Proxy is used for communicating with the other glideinWMS services (Factory, User Collector and Schedd/Submit services). Create the proxy using the glidenWMS VO Frontend Host (or Service) cert and change ownership to the frontend user. 
 
     :::console
-    [root@client ~] # voms-proxy-init -valid &lt;hours\_valid&gt; \
+    [root@client ~] # voms-proxy-init-valid %RED%<hours_valid>%ENDCOLOR% \
     -cert /etc/grid-security/hostcert.pem \ 
     -key /etc/grid-security/hostkey.pem \ 
     -out %GREEN%/tmp/vofe_proxy%ENDCOLOR%
-    [root@client ~] # chown frontend %GREEN%/tmp/vofe\_proxy%ENDCOLOR%
+    [root@client ~] # chown frontend %GREEN%/tmp/vofe_proxy%ENDCOLOR%
 
 %RED%Pilot proxy%ENDCOLOR%
 The pilot proxy is used on the glideinWMS pilot jobs submitted to the CEs. Create the proxy using the %RED%pilot certificate%ENDCOLOR% and change ownership to the frontend user. 
 
     :::console
-    [root@client ~] # voms-proxy-init -valid &lt;hours\_valid&gt; \ 
+    [root@client ~] # voms-proxy-init -valid %RED%<hours_valid>%ENDCOLOR%\ 
     -voms <vo> 
     -cert <pilot_cert> \
     -key <pilot_key> \ 
@@ -503,13 +500,13 @@ The pilot proxy is used on the glideinWMS pilot jobs submitted to the CEs. Creat
 !!! warning
     **Proxies do expire.** You can extend the validity by using a longer time interval, e.g. `-valid 3000:0`. This sequence of commands will need to be renewed when the proxy expires or the machine reboots (if /tmp is used only).
 
-Make sure that this location is specified correctly in the `frontend.xml` described in the [Configuring the Frontend](#Configuring_the_Frontend) section.
+Make sure that this location is specified correctly in the `frontend.xml` described in the [Configuring the Frontend](#configuring-the-frontend) section.
 
 You may want to automate the procedure above (or part of it) by writing a script and adding it to crontab.
 
 ### Example of automatic proxy renewal
 
-This example (user provided) uses the script [make-proxy.sh](https://twiki.opensciencegrid.org/twiki/bin/viewfile/Documentation/Release3/InstallGlideinWMSFrontend/make-proxy.sh) attached to this document. You still need to do some prep-work but this can be done only once a year and the script will warn you with an email.
+This example (user provided) uses the script [make-proxy.sh](../other/make-proxy.sh) attached to this document. You still need to do some prep-work but this can be done only once a year and the script will warn you with an email.
 
 Preparation for the %GREEN%VO Frontend proxy%ENDCOLOR%. You'll have to redo this each time the Host (or Service) certificate and key are renewed:
 
@@ -530,7 +527,7 @@ Preparation for the %RED% pilot proxy%ENDCOLOR%. You'll have to redo this for ea
 1. Create the proxy using the pilot certificate/key (as the user/submitter) 
 
         :::console
-        [root@client ~] # grid-proxy-init -valid 8800:0 -out /tmp/tmp\_proxy
+        [root@client ~] # grid-proxy-init -valid 8800:0 -out /tmp/tmp_proxy
 
 2. Copy the proxy to the correct name and change ownership and permissions (as root):
 
@@ -542,7 +539,7 @@ Preparation for the %RED% pilot proxy%ENDCOLOR%. You'll have to redo this for ea
 
 Configure the script for the %GREEN%VO Frontend proxy%ENDCOLOR%
 
-1. Download the [attached script](https://twiki.opensciencegrid.org/twiki/bin/viewfile/Documentation/Release3/InstallGlideinWMSFrontend/make-proxy.sh) (the latest one is [Here on Github](https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy.sh)) and save it as `/var/lib/gwms-frontend/make-frontend-proxy.sh`, make sure that it is executable.
+1. Download the [attached script](../other/make-proxy.sh) (the latest one is [Here on Github](https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy.sh)) and save it as `/var/lib/gwms-frontend/make-frontend-proxy.sh`, make sure that it is executable.
 
 2. Edit the VARIABLES section to look something like (replace your email, host name and the paths that are different in your setup - the comments in the script will help): 
 
@@ -559,7 +556,7 @@ Configure the script for the %GREEN%VO Frontend proxy%ENDCOLOR%
 
 Configure the script for the %RED%pilot proxy%ENDCOLOR%:
 
-1.  Download the [attached script](https://twiki.opensciencegrid.org/twiki/bin/viewfile/Documentation/Release3/InstallGlideinWMSFrontend/make-proxy.sh) (the latest one is [Here on Github](https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy.sh)) and save it as `/var/lib/gwms-frontend/make-pilot-proxy.sh`, make sure that it is executable.
+1.  Download the [attached script](../other/make-proxy.sh) (the latest one is [Here on Github](https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy.sh)) and save it as `/var/lib/gwms-frontend/make-pilot-proxy.sh`, make sure that it is executable.
 
 2.  Edit the VARIABLES section to look something like (replace your email, host name and the paths that are different in your setup - the comments in the script will help): 
 
@@ -581,10 +578,10 @@ Before adding the scripts to the crontab I'd recommend to test them manually onc
 Add the scripts to the crontab of the user `frontend` with `crontab -e`: 
 
     :::file
-    10 \* \* \* \* /var/lib/gwms-frontend/make-frontend-proxy.sh --no-voms-proxy 
-    10 \* \* \* \* /var/lib/gwms-frontend/make-pilot-proxy.sh
+    10 * * * * /var/lib/gwms-frontend/make-frontend-proxy.sh --no-voms-proxy 
+    10 * * * * /var/lib/gwms-frontend/make-pilot-proxy.sh
 
-An additional script like [make-proxy-control.sh](https://twiki.opensciencegrid.org/twiki/pub/Documentation/Release3/InstallGlideinWMSFrontend/make-proxy-control.sh) (the latest one is [Here on Github](https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy-control.sh)) can be used for an independent verification of the proxies. If you like, download it, fix the variables and add it to the crontab like the other two.
+An additional script like [make-proxy-control.sh](../other/make-proxy-control.sh) (the latest one is [Here on Github](https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy-control.sh)) can be used for an independent verification of the proxies. If you like, download it, fix the variables and add it to the crontab like the other two.
 
 Reconfigure and verify installation
 -----------------------------------
@@ -618,10 +615,10 @@ You must report to Gratia if you are running on OSG more than a few test jobs.
 Optional Configuration
 ----------------------
 
-The following configuration steps are optional and will likely not be required for setting up a small site. If you do not need any of the following special configurations, skip to [the section on service activation/deactivation](#ServiceActivation).
+The following configuration steps are optional and will likely not be required for setting up a small site. If you do not need any of the following special configurations, skip to [the section on service activation/deactivation](#service-activation-and-deactivation).
 
-- [Allow users to specify where their jobs run](#Allow-users-to-specify-where-their-jobs-run)
-- [Creating a group to test configuration changes](#IsItb)
+- [Allow users to specify where their jobs run](#allow-users-to-specify-where-their-jobs-run)
+- [Creating a group to test configuration changes](#creating-a-group-for-testing-configuration-changes)
 
 ### Allow users to specify where their jobs run
 
@@ -630,12 +627,12 @@ In order to allow users to specify the sites at which their jobs want to run (or
 1. In the frontend's global `<match>` stanza, set the `match_expr`:
 
         :::file
-        '((job.get("DESIRED\_Sites","nosite")=="nosite") or (glidein\["attrs"\]\["GLIDEIN\_Site"\] in job.get("DESIRED\_Sites","nosite").split(",")))'
+        '((job.get("DESIRED_Sites","nosite")=="nosite") or (glidein["attrs"]["GLIDEIN_Site"] in job.get("DESIRED_Sites","nosite").split(",")))'
 
 2. In the same `<match>` stanza, set the `start_expr`:
 
         :::file
-        '(DESIRED_Sites`?=undefined || stringListMember(GLIDEIN\_Site,DESIRED\_Sites,","))
+        '(DESIRED_Sites=?=undefined || stringListMember(GLIDEIN_Site,DESIRED_Sites,","))
 
 3. Add the `DESIRED_Sites` attribute to the match attributes list:
 
@@ -854,7 +851,7 @@ Here a short list of files to check when you change the certificates. Note that 
 |:-----------------------------------------:|:-------------------------------------------------------------------------:|
 |             Configuration file            |                      /etc/gwms-frontend/frontend.xml                      |
 |         HTCondor certificates map         |                   /etc/condor/creds/condor\_mapfile (1)                   |
-|        Host certificate and key (2)       | /etc/grid-security/hostcert.pem&lt;br/&gt; /etc/grid-security/hostkey.pem |
+|        Host certificate and key (2)       | /etc/grid-security/hostcert.pem            /etc/grid-security/hostkey.pem |
 | VO Frontend proxy (from host certificate) |                            /tmp/vofe\_proxy (3)                           |
 |                Pilot proxy                |                            /tmp/vofe\_proxy (3)                           |
 
