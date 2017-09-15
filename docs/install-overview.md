@@ -50,7 +50,7 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 
 -   [Worker Node (WN) Client Overview](worker-node/using-wn)
 -   Install the WN client software on every worker node – pick a method:
-    -   [Using RPMs](worker-node/wn) – useful when managing your worker nodes with a tool (e.g., Puppet, Chef)
+    -   [Using RPMs](worker-node/install-wn) – useful when managing your worker nodes with a tool (e.g., Puppet, Chef)
     -   [Using a tarball](worker-node/install-wn-tarball) – useful for installation onto a shared filesystem (does not require root access)
     -   [Using OASIS](worker-node/install-wn-oasis) – useful when [CVMFS](worker-node/install-cvmfs) is already mounted on your worker nodes
 -   (optional) [Install the CernVM-FS client](worker-node/install-cvmfs) to make it easy for user jobs to use needed software from OSG's OASIS repositories
