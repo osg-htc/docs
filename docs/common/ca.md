@@ -33,7 +33,7 @@ If you want to install an RPM for one of our predefined CA certificates, you hav
 
 ### Which set of CAs?
 
-1.  (*recommended*) The OSG CA certificates. This is similar to the IGTF set, but may have a small number of additions or deletions. (See [here](InstallCertAuth#Contents_of_OSG_CA_package) for details)
+1.  (*recommended*) The OSG CA certificates. This is similar to the IGTF set, but may have a small number of additions or deletions. (See [here](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Contents_of_OSG_CA_package) for details)
 2.  The default [IGTF](http://www.igtf.net/) CA certificates.
 
 Depending on your choice, you select one of two RPMs:
@@ -93,7 +93,7 @@ You can enable the `cron` job that updates the CA certs with:
 Enabling periodic osg-update-certs:                        [  %GREEN%OK%ENDCOLOR%  ]
 ```
 
-A complete set of options available though `osg-ca-manage` command, including your interface to adding and removing CAs, could be found at [osg-ca-manage documentation](OsgCaManage)
+A complete set of options available though `osg-ca-manage` command, including your interface to adding and removing CAs, could be found at [osg-ca-manage documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaManage)
 
 Option 3: Install an RPM that installs no CAs
 ---------------------------------------------
@@ -308,8 +308,8 @@ Configuration files:
 | Package                       | File Description                        | Location                                                                                    | Comment                                                                                                         |
 |:------------------------------|:----------------------------------------|:--------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|
 | All CA Packages               | CA File Location                        | `/etc/grid-security/certificates`                                                           |                                                                                                                 |
-| All CA Packages               | Index files                             | `/etc/grid-security/certificates/INDEX.html` or `/etc/grid-security/certificates/INDEX.txt` | Latest version also available at <http://software.grid.iu.edu/pacman/cadist/>                                   |
-| All CA Packages               | Change Log                              | `/etc/grid-security/certificates/CHANGES`                                                   | Latest version also available at <http://software.grid.iu.edu/pacman/cadist/CHANGES>                            |
+| All CA Packages               | Index files                             | `/etc/grid-security/certificates/INDEX.html` or `/etc/grid-security/certificates/INDEX.txt` | Latest version also available at <http://repo.grid.iu.edu/pacman/cadist/>                                   |
+| All CA Packages               | Change Log                              | `/etc/grid-security/certificates/CHANGES`                                                   | Latest version also available at <http://repo.grid.iu.edu/pacman/cadist/CHANGES>                            |
 | osg-ca-certs or igtf-ca-certs | contain only CA files                   |                                                                                             |                                                                                                                 |
 | osg-ca-scripts                | Configuration File for osg-update-certs | `/etc/osg/osg-update-certs.conf`                                                            | This file may be edited by hand, though it is recommended to use osg-ca-manage to set configuration parameters. |
 | fetch-crl-2.x                 | Configuration file                      | `/etc/fetch-crl.conf`                                                                       |                                                                                                                 |
@@ -355,11 +355,11 @@ The OSG CA Distribution contains:
 -   [IGTF Distribution of Authority Root Certificates](http://dist.eugridpma.info/distribution/igtf/current/) (CAs accredited by the [International Grid Trust Federation](http://igtf.net/))
 -   [Purdue TeraGrid CA](http://tg-ca.purdue.teragrid.org:8080/ejbca/)
 
-Details of CAs in OSG distribution can be found [here](Documentation.CaDistribution#Contents). For additional details what is in the current release, see the [distribution site](http://software.grid.iu.edu/pacman/cadist/) and [change log](http://software.grid.iu.edu/pacman/cadist/CHANGES).
+Details of CAs in OSG distribution can be found [here](https://twiki.opensciencegrid.org/bin/view/Documentation/CaDistribution#Contents). For additional details what is in the current release, see the [distribution site](http://repo.grid.iu.edu/pacman/cadist/) and [change log](http://repo.grid.iu.edu/pacman/cadist/CHANGES).
 
 ### How can I add or remove a particular CA file?
 
-Add and remove of CA files are supported only if you CA files are being installed using `osg-update-certs`, which is included in the `osg-ca-scripts` package (option 2), for all other options no support for adding and removing a particular CA file is provided by OSG. The preferred approach to add or remove a CA is to use [osg-ca-manage](OsgCaManage). For adding a new CA `osg-ca-manage add [--dir <local_dir>] --hash <CA_hash>` may be used, while a CA is removed using `osg-ca-manage remove --hash <CA_hash>`.
+Add and remove of CA files are supported only if you CA files are being installed using `osg-update-certs`, which is included in the `osg-ca-scripts` package (option 2), for all other options no support for adding and removing a particular CA file is provided by OSG. The preferred approach to add or remove a CA is to use [osg-ca-manage](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaManage). For adding a new CA `osg-ca-manage add [--dir <local_dir>] --hash <CA_hash>` may be used, while a CA is removed using `osg-ca-manage remove --hash <CA_hash>`.
 
 ### Are there any log files or configuration files associated with CA certificate package?
 
@@ -416,7 +416,6 @@ Some examples about verifying the certificates:
 
 Related software:
 
--   Description, manual and examples of OsgCaManage
--   OsgCaCertsUpdater
--   [Upgrading Fetch-Crl 2 to Fetch-Crl 3 on EL5](UpgradeFetchCrl2to3)
+-   Description, manual and examples of [osg-ca-manage](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaManage)
+-   [osg-ca-certs-updater](ca_updater)
 
