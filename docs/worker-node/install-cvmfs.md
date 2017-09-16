@@ -106,7 +106,7 @@ set of always-known repositories.
 
 Set up a list of CVMFS HTTP proxies to retrieve from in
 `CVMFS_HTTP_PROXY`. If you do not have any squid at your site follow
-the instructions to [install squid from OSG](InstallFrontierSquid).
+the instructions to [install squid from OSG](../data/frontier-squid).
 Vertical bars separating proxies means to load balance between them
 and try them all before continuing. A semicolon between proxies means
 to try that one only after the previous ones have failed. A special
