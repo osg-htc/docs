@@ -8,9 +8,9 @@ This document explains the installation and use of `osg-ca-certs-updater`, a pac
 Requirements
 ============
 
--   OS must be Red Hat Enterprise Linux 5 or 6 or variants.
+-   OS must be Red Hat Enterprise Linux 6 or 7 or variants.
 -   The OSG repositories must be installed and enabled. See the [Yum Repositories](yum.md) page for instructions.
--   One grid-certificates package from the OSG repositories must be installed as described [here](ca.md#First_Set_up_the_yum_repositorie). Currently, these are: `igtf-ca-certs`, `osg-ca-certs`.
+-   One grid-certificates package from the OSG repositories must be installed as described [here](ca.md#install-ca-certificates-options). Currently, these are: `igtf-ca-certs`, `osg-ca-certs`.
 
 Install instructions
 ====================
@@ -93,7 +93,7 @@ If logging to syslog via the `-s` / `--log-to-syslog` option, the updater will w
 How to get Help?
 ================
 
-To get assistance please use [Help Procedure](HelpProcedure).
+To get assistance please use [Help Procedure](help).
 
 References
 ==========
@@ -112,7 +112,7 @@ Some examples about verifying the certificates:
 
 Related software:
 
--   [OSG CA certificates](InstallCertAuth)
+-   [OSG CA certificates](ca)
 -   Description, manual and examples of OsgCaManage
 -   OsgCaCertsUpdater
 
