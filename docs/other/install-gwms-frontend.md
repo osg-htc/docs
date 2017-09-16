@@ -155,7 +155,7 @@ Refer to installtion of the [InstallCertAuth](../common/ca)
 Install HTCondor
 ----------------
 
-Most required software is installed from the Frontend RPM installation. HTCondor is the only exception since there are [many different ways to install it](CondorInformation), using the RPM system or not. You need to have HTCondor installed before installing the Glidein WMS Frontend. If yum cannot find a HTCondor RPM, it will install the dummy `empty-condor` RPM, assuming that you installed HTCondor using a tarball distribution.
+Most required software is installed from the Frontend RPM installation. HTCondor is the only exception since there are [many different ways to install it](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CondorInformation), using the RPM system or not. You need to have HTCondor installed before installing the Glidein WMS Frontend. If yum cannot find a HTCondor RPM, it will install the dummy `empty-condor` RPM, assuming that you installed HTCondor using a tarball distribution.
 
 If you don't have HTCondor already installed, you can install the HTCondor RPM from the OSG repository:
 
@@ -974,7 +974,7 @@ Documents about the Glidein-WMS system and the VO frontend:
 
 -   <http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/>
 -   <http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/manual/>
--   [How to setup a Submit host flocking to the VO Frontend](GlideinWMSCampusGrid)
+-   [How to setup a Submit host flocking to the VO Frontend](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GlideinWMSCampusGrid)
 
 
 
