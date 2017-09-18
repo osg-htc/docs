@@ -99,7 +99,7 @@ In the OSG, security depends on a PKI infrastructure involving Certificate Autho
 
 Due to the OSG's distributed nature, a user's job may end up at any number of sites, potentially needing to re-authenticate at multiple points. Instead of sending the user's certificate with the job for this re-authentication, trust can be delegated to a proxy that is generated from the user certificate, which is then attached to the job and expires after some set time for added security.
 
-In its default configuration, HTCondor-CE uses GSI-based authentication and authorization (the same as Globus GRAM) to verify the certificate chain, which will work with existing GUMS servers or grid mapfiles. Additionally, it can be reconfigured to provide alternate authentication mechanisms such as Kerberos, SSL, shared secret, or even IP-based authentication. More information about authorization methods can be found [here](http://research.cs.wisc.edu/htcondor/manual/v8.2/3_6Security.html#SECTION00463000000000000000).
+In its default configuration, HTCondor-CE uses GSI-based authentication and authorization (the same as Globus GRAM) to verify the certificate chain, which will work with existing GUMS servers or grid mapfiles. Additionally, it can be reconfigured to provide alternate authentication mechanisms such as Kerberos, SSL, shared secret, or even IP-based authentication. More information about authorization methods can be found [here](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_8Security.html#SECTION00483000000000000000).
 
 Next steps
 ----------

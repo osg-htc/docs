@@ -31,12 +31,12 @@ How Job Routes are Constructed
 
 Each job route’s [ClassAd](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_1HTCondor_s_ClassAd.html) is constructed by combining each entry from the `JOB_ROUTER_ENTRIES` with the `JOB_ROUTER_DEFAULTS`. Attributes that are set in `JOB_ROUTER_ENTRIES` will override those set in `JOB_ROUTER_DEFAULTS`
 
-### JOB\_ROUTER\_ENTRIES
+### JOB_ROUTER_ENTRIES
 
 `JOB_ROUTER_ENTRIES` is a configuration variable whose default is set in `/etc/condor-ce/config.d/02-ce-*.conf` but may be overriden by the administrator in `/etc/condor-ce/config.d/99-local.conf`. This document outlines the many changes you can make to `JOB_ROUTER_ENTRIES` to fit your site’s needs.
 
 
-### JOB\_ROUTER\_DEFAULTS
+### JOB_ROUTER_DEFAULTS
 
 `JOB_ROUTER_DEFAULTS` is a python-generated configuration variable that sets default job route values that are required for the HTCondor-CE’s functionality. To view its contents, run the following command:
 
@@ -197,7 +197,7 @@ JOB_ROUTER_ENTRIES = [ \
 ] 
 ```
 
-This is because when evaluating the route requirement, the job route will compare its own `queue` attribute to “analy” and see that it does not match. You can read more about comparing two ClassAds in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_1HTCondor_s_ClassAd.html#43151).
+This is because when evaluating the route requirement, the job route will compare its own `queue` attribute to “analy” and see that it does not match. You can read more about comparing two ClassAds in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_1HTCondor_s_ClassAd.html#SECTION00513300000000000000).
 
 <span class="twiki-macro NOTE"></span> If you have an HTCondor batch system, note the difference with [set\_requirements](#setting-routed-job-requirements). <span class="twiki-macro NOTE"></span> The JobRouter matches jobs to routes in a round-robin fashion. This means that if a job can match to multiple routes, it can be routed by any of them! So when writing job routes, make sure that they are exclusive to each other and that your jobs can only match to a single route.
 
@@ -317,7 +317,7 @@ The following functions are operations that affect job attributes and are evalua
 
 After each job route’s ClassAd is [constructed](#how-job-routes-are-constructed), the above operations are evaluated in order. For example, if the attribute `foo` is set using `eval_set_foo` in the `JOB_ROUTER_DEFAULTS`, you‘ll be unable to use `delete_foo` to remote it from your jobs since the attribute is set using `eval_set_foo` after the deletion occurs according to the order of operations. To get around this, we can take advantage of the fact that operations defined in `JOB_ROUTER_DEFAULTS` get overriden by the same operation in `JOB_ROUTER_ENTRIES`. So to ’delete’ `foo`, we would add =eval\_set\_foo = “”= to the route in the `JOB_ROUTER_ENTRIES`, resulting in `foo` being absent from the routed job.
 
-More documentation can be found in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html#SECTION00644000000000000000).
+More documentation can be found in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html).
 
 #### Copying attributes
 
@@ -378,11 +378,11 @@ JOB_ROUTER_ENTRIES = [ \
 
 This section outlines how to limit the number of total or idle jobs in a specific route (i.e., if this limit is reached, jobs will no longer be placed in this route).
 
-<span class="twiki-macro NOTE"></span> If you are using an HTCondor batch system, limiting the number of jobs is not the preferred solution: HTCondor manages fair share on its own via [user priorities and group accounting](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_4User_Priorities.html).
+<span class="twiki-macro NOTE"></span> If you are using an HTCondor batch system, limiting the number of jobs is not the preferred solution: HTCondor manages fair share on its own via [user priorities and group accounting](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_6User_Priorities.html).
 
 #### Total jobs
 
-To set a limit on the number of jobs for a specific route, set the [MaxJobs](http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html#49135) attribute:
+To set a limit on the number of jobs for a specific route, set the [MaxJobs](http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html#SECTION00644000000000000000) attribute:
 
 ``` file
 JOB_ROUTER_ENTRIES = [ \
@@ -401,7 +401,7 @@ JOB_ROUTER_ENTRIES = [ \
 
 #### Idle jobs
 
-To set a limit on the number of idle jobs for a specific route, set the [MaxIdleJobs](http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html#49136) attribute:
+To set a limit on the number of idle jobs for a specific route, set the [MaxIdleJobs](http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html#SECTION00644000000000000000) attribute:
 
 ``` file
 JOB_ROUTER_ENTRIES = [ \
@@ -464,7 +464,7 @@ JOB_ROUTER_ENTRIES = [ \
 
 ### Setting routed job requirements
 
-If you need to set requirements on your routed job, you will need to use `set_Requirements` instead of `Requirements`. The `Requirements` attribute filters jobs coming into your CE into different job routes whereas `set_requirements` will set conditions on the routed job that must be met by the worker node it lands on. For more information on requirements, consult the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html#SECTION00352000000000000000).
+If you need to set requirements on your routed job, you will need to use `set_Requirements` instead of `Requirements`. The `Requirements` attribute filters jobs coming into your CE into different job routes whereas `set_requirements` will set conditions on the routed job that must be met by the worker node it lands on. For more information on requirements, consult the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html#SECTION00357000000000000000).
 
 To ensure that your job lands on a Linux machine in your pool:
 
