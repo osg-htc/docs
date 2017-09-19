@@ -359,8 +359,8 @@
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points (consulting <a href="#ReferenceSection">the Reference section below</a> as needed):</p>
 <ul>
-<li><strong>Software:</strong> You must have <a href="../InstallGlideinWMSFrontend">a GlideinWMS Front-end</a> installed</li>
-<li><strong>Configuration:</strong> The GlideinWMS Front-end must be configured (a) <a href="../InstallGlideinWMSFrontend#DesiredSites">to have at least one group that matches pilots to sites using DESIRED_SITES</a>, and (b) <a href="../InstallGlideinWMSFrontend#IsItb">to support the is_itb user job attribute</a></li>
+<li><strong>Software:</strong> You must have <a href="../../other/install-gwms-frontend">a GlideinWMS Front-end</a> installed</li>
+<li><strong>Configuration:</strong> The GlideinWMS Front-end must be configured (a) <a href="../../other/install-gwms-frontend#allow-users-to-specify-where-their-jobs-run">to have at least one group that matches pilots to sites using DESIRED_SITES</a>, and (b) <a href="../../other/install-gwms-frontend#creating-a-group-for-testing-configuration-changes">to support the is_itb user job attribute</a></li>
 <li><strong>Host choice:</strong> The Tester should be installed on its own host; a small Virtual Machine (VM) is ideal</li>
 <li><strong>Service certificate:</strong> The Tester requires a host certificate at <code>/etc/grid-security/hostcert.pem</code> and an accompanying key at <code>/etc/grid-security/hostkey.pem</code></li>
 <li><strong>Network ports:</strong> Test jobs must be able to contact the tester using the HTCondor Shared Port on port 9615 (TCP), and you must be able to contact a web server on port 80 (TCP) to view test results.</li>
@@ -532,7 +532,7 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 
 <p>The highlighted name is the site name, and there should be one such line per site supported by your VO(s).</p>
 <h2 id="troubleshooting-rsv-gwms-tester">Troubleshooting RSV-GWMS-Tester<a class="headerlink" href="#troubleshooting-rsv-gwms-tester" title="Permanent link">&para;</a></h2>
-<p>You can find more information on troubleshooting in the <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallRSV#Troubleshooting_RSV">RSV troubleshooting section</a></p>
+<p>You can find more information on troubleshooting in the <a href="../../monitoring/rsv#troubleshooting-rsv">RSV troubleshooting section</a></p>
 <p>Logs and configuration:</p>
 <table>
 <thead>
@@ -582,7 +582,12 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 <tr>
 <td align="left">Host certificate</td>
 <td align="left"><code>root</code></td>
-<td align="left"><code>/etc/grid-security/hostcert.pem</code> &lt;br&gt; <code>/etc/grid-security/hostkey.pem</code></td>
+<td align="left"><code>/etc/grid-security/hostcert.pem</code></td>
+</tr>
+<tr>
+<td align="left">Host key</td>
+<td align="left"><code>root</code></td>
+<td align="left"><code>/etc/grid-security/hostkey.pem</code></td>
 </tr>
 </tbody>
 </table>

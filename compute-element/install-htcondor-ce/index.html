@@ -373,7 +373,7 @@
 <li>Ensure the host has <a href="../../release/supported_platforms">a supported operating system</a></li>
 <li>Obtain root access to the host</li>
 <li>Prepare the <a href="../../common/yum">required Yum repositories</a></li>
-<li>Install <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth">CA certificates</a></li>
+<li>Install <a href="../../common/ca">CA certificates</a></li>
 </ul>
 <h2 id="installing-htcondor-ce">Installing HTCondor-CE<a class="headerlink" href="#installing-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>An HTCondor-CE installation consists of the job gateway (i.e., the HTCondor-CE job router) and other support software (e.g., GridFTP, a Gratia probe, authentication software). To simplify installation, OSG provides convenience RPMs that install all required software with a single command.</p>
@@ -647,7 +647,7 @@ NETWORK_INTERFACE = <span style="color:red">127.0.0.1</span>
 <p>The two universes are effectively the same (scheduler universe launches a starter process for each job), so we will be configuring them in unison.</p>
 <ul>
 <li>
-<p><strong>To change the default limit</strong> on the number of locally run jobs (the current default is 20), add the following to <code>/etc/condor-ce/config.d/99-local.conf</code>: </p>
+<p><strong>To change the default limit</strong> on the number of locally run jobs (the current default is 20), add the following to <code>/etc/condor-ce/config.d/99-local.conf</code>:</p>
 <div class="codehilite"><pre><span></span><span class="nv">START_LOCAL_UNIVERSE</span> <span class="o">=</span> TotalLocalJobsRunning + TotalSchedulerJobsRunning &lt; <span style="color:red">&lt;JOB-LIMIT&gt;</span>
 <span class="nv">START_SCHEDULER_UNIVERSE</span> <span class="o">=</span> <span class="k">$(</span>START_LOCAL_UNIVERSE<span class="k">)</span>
 </pre></div>
@@ -655,7 +655,7 @@ NETWORK_INTERFACE = <span style="color:red">127.0.0.1</span>
 
 </li>
 <li>
-<p><strong>To only allow a specific user</strong> to start locally run jobs, add the following to <code>/etc/condor-ce/config.d/99-local.conf</code>: </p>
+<p><strong>To only allow a specific user</strong> to start locally run jobs, add the following to <code>/etc/condor-ce/config.d/99-local.conf</code>:</p>
 <div class="codehilite"><pre><span></span><span class="nv">START_LOCAL_UNIVERSE</span> <span class="o">=</span> target.Owner <span class="o">=</span>?<span class="o">=</span> <span class="s2">&quot;<span style="color:red">&lt;USERNAME&gt;</span>&quot;</span>
 <span class="nv">START_SCHEDULER_UNIVERSE</span> <span class="o">=</span> <span class="k">$(</span>START_LOCAL_UNIVERSE<span class="k">)</span>
 </pre></div>
@@ -663,7 +663,7 @@ NETWORK_INTERFACE = <span style="color:red">127.0.0.1</span>
 
 </li>
 <li>
-<p><strong>To disable</strong> locally run jobs, add the following to <code>/etc/condor-ce/config.d/99-local.conf</code>: </p>
+<p><strong>To disable</strong> locally run jobs, add the following to <code>/etc/condor-ce/config.d/99-local.conf</code>:</p>
 <div class="codehilite"><pre><span></span><span class="nv">START_LOCAL_UNIVERSE</span> <span class="o">=</span> False
 <span class="nv">START_SCHEDULER_UNIVERSE</span> <span class="o">=</span> <span class="k">$(</span>START_LOCAL_UNIVERSE<span class="k">)</span>
 </pre></div>
@@ -717,7 +717,7 @@ NETWORK_INTERFACE = <span style="color:red">127.0.0.1</span>
 <p class="admonition-title">Note</p>
 <p>For HTCondor batch systems only</p>
 </div>
-<p>If you want to provide fairshare on a group basis, as opposed to a Unix user basis, you can use HTCondor accounting groups. They are independent of the Unix groups the user may already be in and are <a href="http://research.cs.wisc.edu/condor/manual/v8.2/3_4User_Priorities.html#SECTION00447000000000000000">documented in the HTCondor manual</a>. If you are using HTCondor accounting groups, you can map jobs from the CE into HTCondor accounting groups based on their UID, their DN, or their VOMS attributes.</p>
+<p>If you want to provide fairshare on a group basis, as opposed to a Unix user basis, you can use HTCondor accounting groups. They are independent of the Unix groups the user may already be in and are <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/3_6User_Priorities.html#SECTION00467000000000000000">documented in the HTCondor manual</a>. If you are using HTCondor accounting groups, you can map jobs from the CE into HTCondor accounting groups based on their UID, their DN, or their VOMS attributes.</p>
 <ul>
 <li>
 <p><strong>To map UIDs to an accounting group,</strong> add entries to <code>/etc/osg/uid_table.txt</code> with the following form:</p>
@@ -802,7 +802,7 @@ cms\/Role=production cms.prod
 <tr>
 <td align="left">Fetch CRL</td>
 <td align="left"><code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
-<td align="left">See <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui">CA documentation</a> for more info</td>
+<td align="left">See <a href="../../common/ca/#startstop-fetch-crl-a-quick-guide">CA documentation</a> for more info</td>
 </tr>
 <tr>
 <td align="left">Gratia</td>

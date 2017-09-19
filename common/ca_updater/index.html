@@ -371,9 +371,9 @@
 <p>This document explains the installation and use of <code>osg-ca-certs-updater</code>, a package in the OSG Software 3.x distribution that provides automatic updates of CA certificates.</p>
 <h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
 <ul>
-<li>OS must be Red Hat Enterprise Linux 5 or 6 or variants.</li>
+<li>OS must be Red Hat Enterprise Linux 6 or 7 or variants.</li>
 <li>The OSG repositories must be installed and enabled. See the <a href="../yum/">Yum Repositories</a> page for instructions.</li>
-<li>One grid-certificates package from the OSG repositories must be installed as described <a href="../ca/#First_Set_up_the_yum_repositorie">here</a>. Currently, these are: <code>igtf-ca-certs</code>, <code>osg-ca-certs</code>.</li>
+<li>One grid-certificates package from the OSG repositories must be installed as described <a href="../ca/#install-ca-certificates-options">here</a>. Currently, these are: <code>igtf-ca-certs</code>, <code>osg-ca-certs</code>.</li>
 </ul>
 <h1 id="install-instructions">Install instructions<a class="headerlink" href="#install-instructions" title="Permanent link">&para;</a></h1>
 <p>Run the following command to install the latest version of the updater.</p>
@@ -447,7 +447,7 @@
 <p>A logfile can be specified via the <code>-l</code> / <code>--logfile</code> command-line option.</p>
 <p>If logging to syslog via the <code>-s</code> / <code>--log-to-syslog</code> option, the updater will write to the <code>user</code> section of the syslog. The file <code>/etc/syslog.conf</code> determines where syslog messages are saved.</p>
 <h1 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h1>
-<p>To get assistance please use <a href="../HelpProcedure">Help Procedure</a>.</p>
+<p>To get assistance please use <a href="../help">Help Procedure</a>.</p>
 <h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
 <p>Some guides on X.509 certificates:</p>
 <ul>
@@ -463,7 +463,7 @@
 </ul>
 <p>Related software:</p>
 <ul>
-<li><a href="../InstallCertAuth">OSG CA certificates</a></li>
+<li><a href="../ca">OSG CA certificates</a></li>
 <li>Description, manual and examples of OsgCaManage</li>
 <li>OsgCaCertsUpdater</li>
 </ul>

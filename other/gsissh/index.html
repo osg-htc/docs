@@ -180,8 +180,6 @@
         
             <li><a class="toctree-l4" href="#users-and-groups">Users and Groups</a></li>
         
-            <li><a class="toctree-l4" href="#networking">Networking</a></li>
-        
         </ul>
     
 
@@ -201,8 +199,6 @@
             <li><a class="toctree-l4" href="#useful-configuration-and-log-files">Useful configuration and log files</a></li>
         
             <li><a class="toctree-l4" href="#configuration">Configuration</a></li>
-        
-            <li><a class="toctree-l4" href="#configuration_1">Configuration</a></li>
         
             <li><a class="toctree-l4" href="#using-a-gridmap-file-for-authorization">Using a gridmap file for authorization</a></li>
         
@@ -394,15 +390,13 @@
 <p>The GSI OpenSSH rpms will require an user account and group in order for the privilege separation to work.</p>
 <h2 id="users-and-groups">Users and Groups<a class="headerlink" href="#users-and-groups" title="Permanent link">&para;</a></h2>
 <p>The RPM installation will try to create the <code>gsisshd</code> user and group and the <code>/var/empty/gsisshd</code> directory with the correct ownership if they are not present. If you are using a configuration management system or ROCKS, you should make sure that these users and groups are created before installing the RPMs to avoid potential issues. The gsisshd user should have an empty home directory. By default, this is home directory set to <code>/var/empty/gsisshd</code> and belongs to the <code>gsisshd</code> user and group. You may change it if needed to something else as long as the ownerships remain the same.</p>
-<h2 id="networking">Networking<a class="headerlink" href="#networking" title="Permanent link">&para;</a></h2>
-<p>You'll find more client specific details also in the <a href="#Firewall_Considerations">Firewall section</a> of this document.</p>
 <h1 id="installation-procedure">Installation procedure<a class="headerlink" href="#installation-procedure" title="Permanent link">&para;</a></h1>
 <p>Prior to install, make sure you have:
 <em> <a href="../../common/yum/">Yum repositories correctly configured</a> for OSG.
 </em> <a href="../../common/ca/">CA certificates installed</a></p>
 <h2 id="gsi-openssh-installation">GSI OpenSSH Installation<a class="headerlink" href="#gsi-openssh-installation" title="Permanent link">&para;</a></h2>
 <p>Start with installing GSI OpenSSH from the repository</p>
-<div class="codehilite"><pre><span></span>yum install gsi-openssh-server gsi-openssh-clients
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> yum install gsi-openssh-server gsi-openssh-clients
 </pre></div>
 
 
@@ -470,8 +464,8 @@
 </tr>
 <tr>
 <td align="left">gsisshd</td>
-<td align="left"><code>/etc/grid-security/hostcert.pem</code></td>
-<td align="left">Key certificate</td>
+<td align="left"><code>/etc/grid-security/hostkey.pem</code></td>
+<td align="left">X.509 host key</td>
 </tr>
 <tr>
 <td align="left">gsisshd</td>
@@ -481,7 +475,6 @@
 </tbody>
 </table>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
-<h2 id="configuration_1">Configuration<a class="headerlink" href="#configuration_1" title="Permanent link">&para;</a></h2>
 <p>In order to get a running instance of the GSI OpenSSH server, you'll
 need to change the default configuration. However, before you go any
 further, you'll need to decide whether you want GSI OpenSSH to be your 
@@ -523,7 +516,7 @@ of the lines in the file are commented out using a <code>#</code> at the beginni
 
 
 <p>so that LCMAPS is used. Next, install the lcmaps rpms:</p>
-<div class="codehilite"><pre><span></span>yum install lcmaps lcas-lcmaps-gt4-interface
+<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> yum install lcmaps lcas-lcmaps-gt4-interface
 </pre></div>
 
 
@@ -582,7 +575,7 @@ $
 
 
 <h1 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h1>
-<p>To get assistance please use this <a href="../HelpProcedure">Help Procedure</a>.</p>
+<p>To get assistance please use this <a href="../../common/help">Help Procedure</a>.</p>
               
             </div>
           </div>

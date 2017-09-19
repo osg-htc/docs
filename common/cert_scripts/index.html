@@ -389,7 +389,7 @@
 <p>This the home page for documenting the cert-scripts package that provides a command-line interface to the DOEGrids CA website and some additional utilities for dealing with X509 certificates. This package was developed originally by the PPDG project and is now maintained by the OSG RA.</p>
 <p>As an alternative to the web browser interface, these scripts are contributed to the DOEGrids PKI to allow a command-line interface to the certificate authority for submitting certificate requests, retrieving signed certificates, renewing certificates, directory lookup of existing certificates, and checking the remaining lifetime of certificates and certificate revocation lists. They work directly with the PEM format files used by Globus. These are perl scripts and bash shell scripts (some awk), depend upon openssl, ldapsearch and the perl LWP:: module with <a href="http://search.cpan.org/src/GAAS/libwww-perl-5.803/README.SSL">SSL support</a>. Click on the File link below for the usage description of the script, or to download the tar file package containing the scripts.</p>
 <h1 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h1>
-<p>To get assistance please use <a href="../HelpProcedure">Help Procedure</a>.</p>
+<p>To get assistance please use <a href="../help">Help Procedure</a>.</p>
 <h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
 <ul>
 <li>A host to install the Cert Scripts package. It is normally included in the CE.</li>
@@ -408,7 +408,7 @@
 
 <p><span class="twiki-macro ENDSECTION">OSGBriefInstallCertScripts</span> <span class="twiki-macro ENDSECTION">OSGAllInstallCertScripts</span></p>
 <h1 id="usage-of-certificate-scripts-package-this-package-is-mainly-used-to-request-certificates-via-the-command-line-either-host-and-service-certificates-or-user-certificates">Usage of certificate scripts package This package is mainly used to request certificates via the command line: either host and service certificates or user certificates.<a class="headerlink" href="#usage-of-certificate-scripts-package-this-package-is-mainly-used-to-request-certificates-via-the-command-line-either-host-and-service-certificates-or-user-certificates" title="Permanent link">&para;</a></h1>
-<h2 id="get-host-and-service-certificates-using-command-line"><a href="../Documentation/Release3.GetHostServiceCertificates">Get host and service certificates using command line</a><a class="headerlink" href="#get-host-and-service-certificates-using-command-line" title="Permanent link">&para;</a></h2>
+<h2 id="get-host-and-service-certificates-using-command-line"><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GetHostServiceCertificates">Get host and service certificates using command line</a><a class="headerlink" href="#get-host-and-service-certificates-using-command-line" title="Permanent link">&para;</a></h2>
 <h2 id="example-usage-of-check-cert-time-the-cert-check-time-script-is-helpful-in-setting-up-and-monitoring-the-ca-certificates-and-crls-that-get-installed-in-your-trusted-certificates-directory-this-section-describes-using-these-scripts-to-check-the-ca-and-crl-status-checking-ca-certificates">Example usage of check-cert-time The cert-check-time script is helpful in setting up and monitoring the CA certificates and CRL’s that get installed in your trusted certificates directory. This section describes using these scripts to check the CA and CRL status. —+++! Checking CA certificates<a class="headerlink" href="#example-usage-of-check-cert-time-the-cert-check-time-script-is-helpful-in-setting-up-and-monitoring-the-ca-certificates-and-crls-that-get-installed-in-your-trusted-certificates-directory-this-section-describes-using-these-scripts-to-check-the-ca-and-crl-status-checking-ca-certificates" title="Permanent link">&para;</a></h2>
 <p>There are numerous CA certificates installed with VDT and you may not want to allow all of them on your site. The <code>cert-check-time</code> is a helpful command for reviewing them. This must be run in a directory where you have write access even though it does not create any permanent files. You may want to redirect stdout to a file you can then review.</p>
 <div class="codehilite"><pre><span></span>%UCL_PROMPT% <span class="nt">&lt;b&gt;</span>cert-check-time -cR -s /usr/share/osg-cert-scripts/<span class="nt">&lt;/b&gt;</span>
@@ -613,39 +613,39 @@ nearest CRL expiration 0.951088 days
 </thead>
 <tbody>
 <tr>
-<td align="left"><a href="../Security.CSReadMe">README</a></td>
+<td align="left"><a href="https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe">README</a></td>
 <td align="left">describes the package, includes release notes</td>
 </tr>
 <tr>
-<td align="left"><a href="../Security.CSReadMe#cert_check_time">cert-check-time</a></td>
+<td align="left"><a href="https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#cert_check_time">cert-check-time</a></td>
 <td align="left">checks lifetime of certificates and revocation lists</td>
 </tr>
 <tr>
-<td align="left"><a href="../Security.CSReadMe#cert_gridadmin">cert-gridadmin</a></td>
+<td align="left"><a href="https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#cert_gridadmin">cert-gridadmin</a></td>
 <td align="left">immediate issuance of service certificates for authorized requestors</td>
 </tr>
 <tr>
-<td align="left"><a href="../Security.CSReadMe#cert_lookup">cert-lookup</a></td>
+<td align="left"><a href="https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#cert_lookup">cert-lookup</a></td>
 <td align="left">queries directory based on DN of certificates</td>
 </tr>
 <tr>
-<td align="left"><a href="../Security.CSReadMe#cert_request">cert-request</a></td>
+<td align="left"><a href="https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#cert_request">cert-request</a></td>
 <td align="left">generates and submits a certificate signing request</td>
 </tr>
 <tr>
-<td align="left"><a href="../Security.CSReadMe#cert_retrieve">cert-retrieve</a></td>
+<td align="left"><a href="https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#cert_retrieve">cert-retrieve</a></td>
 <td align="left">retrieves signed certificate previously requested</td>
 </tr>
 <tr>
-<td align="left"><a href="../Security.CSReadMe#cert_renew">cert-renew</a></td>
+<td align="left"><a href="https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#cert_renew">cert-renew</a></td>
 <td align="left">renews existing person certificate (not host or service)</td>
 </tr>
 <tr>
-<td align="left"><a href="../Security.CSReadMe#multi_cert_gridadmin">multi-cert-gridadmin</a></td>
+<td align="left"><a href="https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#multi_cert_gridadmin">multi-cert-gridadmin</a></td>
 <td align="left">immediate issuance of multiple service certificates for authorized administrators (new with V2-3)</td>
 </tr>
 <tr>
-<td align="left"><a href="../Security.CSReadMe#InstallationNotes_txt">InstallationNotes.txt</a></td>
+<td align="left"><a href="https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#InstallationNotes_txt">InstallationNotes.txt</a></td>
 <td align="left">extra installation requirements for multi-cert-gridadmin (new with V2-3)</td>
 </tr>
 </tbody>
@@ -657,19 +657,19 @@ nearest CRL expiration 0.951088 days
 </pre></div>
 
 
-<p>Full details in the <a href="../Documentation/Release3.CertificateGetCmd">command line document</a> or in the <a href="../Documentation.CertificateGetWeb">Web interface document</a> (for a browser based alt.).</p>
+<p>Full details in the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CertificateGetCmd">command line document</a> or in the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/CertificateGetWeb">Web interface document</a> (for a browser based alt.).</p>
 <h2 id="request-a-certificate-for-my-computer-host-certificate">Request a certificate for my computer (host certificate)<a class="headerlink" href="#request-a-certificate-for-my-computer-host-certificate" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT% cert-request -ou s</span>
 </pre></div>
 
 
-<p>Full details in the <a href="../Documentation/Release3.GetHostServiceCertificates">host and service certificates document</a>.</p>
+<p>Full details in the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GetHostServiceCertificates">host and service certificates document</a>.</p>
 <h2 id="request-a-certificate-for-the-http-service-on-my-computer-service-certificate">Request a certificate for the http service on my computer (service certificate)<a class="headerlink" href="#request-a-certificate-for-the-http-service-on-my-computer-service-certificate" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="c">%UCL_PROMPT% cert-request -ou s -service http -host <span style="color:red">my-computer.some.domain</span> -label <span style="color:red">http-my-computer</span></span>
 </pre></div>
 
 
-<p>Full details in the <a href="../Documentation/Release3.GetHostServiceCertificates">host and service certificates document</a>.</p>
+<p>Full details in the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GetHostServiceCertificates">host and service certificates document</a>.</p>
 <h2 id="retrieve-a-certificate">Retrieve a certificate<a class="headerlink" href="#retrieve-a-certificate" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Check the email notice you got when the certificate was granted for the serial number (<em>0xNNNN</em>)</li>
@@ -687,7 +687,7 @@ nearest CRL expiration 0.951088 days
 <ol>
 <li>Use <code>cert-renew</code></li>
 </ol>
-<p>Full details in the <a href="../Documentation/Release3.CertificateGetCmd">command line document</a> or in the <a href="../Documentation.CertificateGetWeb">Web interface document</a> (for a browser based alt.).</p>
+<p>Full details in the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CertificateGetCmd">command line document</a> or in the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/CertificateGetWeb">Web interface document</a> (for a browser based alt.).</p>
               
             </div>
           </div>

@@ -464,8 +464,8 @@
 <h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
 <h2 id="host-and-os">Host and OS<a class="headerlink" href="#host-and-os" title="Permanent link">&para;</a></h2>
 <ol>
-<li>A host to install the GlideinWMS Frontend (pristine node). </li>
-<li>OS is Red Hat Enterprise Linux 6, 7, and variants (see <a href="../../common/yum/">details</a>). Currently most of our testing has been done on Scientific Linux 6. </li>
+<li>A host to install the GlideinWMS Frontend (pristine node).</li>
+<li>OS is Red Hat Enterprise Linux 6, 7, and variants (see <a href="../../common/yum/">details</a>). Currently most of our testing has been done on Scientific Linux 6.</li>
 <li>Root access</li>
 </ol>
 <p>The Glidein WMS VO Frontend has the following hardware requirements for a production host:</p>
@@ -509,9 +509,9 @@
 </table>
 <p>Note that if uid 48 is already taken but not used for the appropriate users, you will experience errors. <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/KnownProblems#Reserved_user_ids_especially_for">Details...</a></p>
 <h2 id="credentials-and-proxies">Credentials and Proxies<a class="headerlink" href="#credentials-and-proxies" title="Permanent link">&para;</a></h2>
-<p>The VO Frontend will use two credentials in its interactions with the the other glideinWMS services. At this time, these will be proxy files. </p>
+<p>The VO Frontend will use two credentials in its interactions with the the other glideinWMS services. At this time, these will be proxy files.</p>
 <ol>
-<li>the <span style="color:green">VO Frontend proxy</span> (used to authenticate with the other glideinWMS services). </li>
+<li>the <span style="color:green">VO Frontend proxy</span> (used to authenticate with the other glideinWMS services).</li>
 <li>one or more glideinWMS <span style="color:red">pilot proxies</span> (used/delegated to the factory services and submitted on the glideinWMS pilot jobs).</li>
 </ol>
 <p>The <span style="color:green">VO Frontend proxy</span> and the <span style="color:red"> pilot proxy</span> can be the same. By default, the VO Frontend will run as user <code>frontend</code> (UID is machine dependent) so these proxies must be owned by the user <code>frontend</code>.</p>
@@ -582,18 +582,18 @@
 <li><strong>Remember to install HTCondor BEFORE installing the Frontend (<a href="#install-htcondor">instructions are below</a>)</strong></li>
 </ul>
 <h2 id="osg-factory-access">OSG Factory access<a class="headerlink" href="#osg-factory-access" title="Permanent link">&para;</a></h2>
-<p>Before installing the Glidein WMS VO Frontend you need the information about a <a href="http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/factory/index.html">Glidein Factory</a> that you can access: </p>
+<p>Before installing the Glidein WMS VO Frontend you need the information about a <a href="http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/factory/index.html">Glidein Factory</a> that you can access:</p>
 <ol>
-<li>(recommended) OSG is managing a factory at UCSD and one at GOC and you can request access to them </li>
+<li>(recommended) OSG is managing a factory at UCSD and one at GOC and you can request access to them</li>
 <li>You have another Glidein Factory that you can access</li>
 <li>You <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallGlideinWMSFactory">install your own Glidein Factory</a></li>
 </ol>
-<p>To request access to the OSG Glidein Factory at UCSD you have to send an email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#115;&#103;&#45;&#103;&#102;&#97;&#99;&#116;&#111;&#114;&#121;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#112;&#104;&#121;&#115;&#105;&#99;&#115;&#46;&#117;&#99;&#115;&#100;&#46;&#101;&#100;&#117;">&#111;&#115;&#103;&#45;&#103;&#102;&#97;&#99;&#116;&#111;&#114;&#121;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#112;&#104;&#121;&#115;&#105;&#99;&#115;&#46;&#117;&#99;&#115;&#100;&#46;&#101;&#100;&#117;</a> providing: </p>
+<p>To request access to the OSG Glidein Factory at UCSD you have to send an email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#115;&#103;&#45;&#103;&#102;&#97;&#99;&#116;&#111;&#114;&#121;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#112;&#104;&#121;&#115;&#105;&#99;&#115;&#46;&#117;&#99;&#115;&#100;&#46;&#101;&#100;&#117;">&#111;&#115;&#103;&#45;&#103;&#102;&#97;&#99;&#116;&#111;&#114;&#121;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#112;&#104;&#121;&#115;&#105;&#99;&#115;&#46;&#117;&#99;&#115;&#100;&#46;&#101;&#100;&#117;</a> providing:</p>
 <ol>
-<li>Your Name </li>
+<li>Your Name</li>
 <li>The VO that is utilizing the VO Frontend</li>
-<li>The DN of the proxy you will use to communicate with the Factory (VO Frontend DN, e.g. the host certificate subject if you follow the <a href="#proxy-configuration">proxy configuration section</a>) </li>
-<li>You can propose a security name that will have to be confirmed/changed by the Factory managers (see below) </li>
+<li>The DN of the proxy you will use to communicate with the Factory (VO Frontend DN, e.g. the host certificate subject if you follow the <a href="#proxy-configuration">proxy configuration section</a>)</li>
+<li>You can propose a security name that will have to be confirmed/changed by the Factory managers (see below)</li>
 <li>
 <p>A list of sites where you want to run:</p>
 </li>
@@ -603,20 +603,20 @@
 <li>You can provide a list or piggy back on existing lists, e.g. all the sites supported for the VO. Check with the Factory managers</li>
 <li>You can start with one single site</li>
 </ol>
-<p>In the reply from the OSG Factory managers you will receive some information needed for the configuration of your VO Frontend </p>
+<p>In the reply from the OSG Factory managers you will receive some information needed for the configuration of your VO Frontend</p>
 <ol>
-<li>The exact spelling and capitalization of your VO name. Sometime is different from what is commonly used, e.g. OSG VO is "OSGVO". </li>
+<li>The exact spelling and capitalization of your VO name. Sometime is different from what is commonly used, e.g. OSG VO is "OSGVO".</li>
 <li>The host of the Factory Collector: <code>gfactory-1.t2.ucsd.edu</code></li>
-<li>The DN os the factory, e.g. <code>/DC=org/DC=doegrids/OU=Services/CN=gfactory-1.t2.ucsd.edu</code> </li>
-<li>The factory identity, e.g.: <code>gfactory@gfactory-1.t2.ucsd.edu</code> </li>
-<li>The identity on the factory you will be mapped to. Something like: <code>username@gfactory-1.t2.ucsd.edu</code> </li>
+<li>The DN os the factory, e.g. <code>/DC=org/DC=doegrids/OU=Services/CN=gfactory-1.t2.ucsd.edu</code></li>
+<li>The factory identity, e.g.: <code>gfactory@gfactory-1.t2.ucsd.edu</code></li>
+<li>The identity on the factory you will be mapped to. Something like: <code>username@gfactory-1.t2.ucsd.edu</code></li>
 <li>Your security name. A unique name, usually containing your VO name: <code>My_SecName</code></li>
 <li>A string to add in the main factory query_expr in the frontend configuration, e.g. <code>stringListMember("<span style="color:red">VO</span>",GLIDEIN_Supported_VOs)</code>. From there you get the correct name of the VO (above in this list).</li>
 </ol>
 <h1 id="installation-procedure">Installation Procedure<a class="headerlink" href="#installation-procedure" title="Permanent link">&para;</a></h1>
-<p>Refer to installtion of the <a href="../../common/ca">InstallCertAuth</a></p>
+<p>Refer to installation of the <a href="../../common/ca">CA certificates</a></p>
 <h2 id="install-htcondor">Install HTCondor<a class="headerlink" href="#install-htcondor" title="Permanent link">&para;</a></h2>
-<p>Most required software is installed from the Frontend RPM installation. HTCondor is the only exception since there are <a href="../CondorInformation">many different ways to install it</a>, using the RPM system or not. You need to have HTCondor installed before installing the Glidein WMS Frontend. If yum cannot find a HTCondor RPM, it will install the dummy <code>empty-condor</code> RPM, assuming that you installed HTCondor using a tarball distribution.</p>
+<p>Most required software is installed from the Frontend RPM installation. HTCondor is the only exception since there are <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CondorInformation">many different ways to install it</a>, using the RPM system or not. You need to have HTCondor installed before installing the Glidein WMS Frontend. If yum cannot find a HTCondor RPM, it will install the dummy <code>empty-condor</code> RPM, assuming that you installed HTCondor using a tarball distribution.</p>
 <p>If you don't have HTCondor already installed, you can install the HTCondor RPM from the OSG repository:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install condor.x86_64
 <span class="gp">#</span> If you have a <span class="m">32</span> bit host use instead:
@@ -678,7 +678,7 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>When upgrading to GlideinWMS 3.2.7 the second schedd is removed from the default configuration. For a smooth transition: </p>
+<p>When upgrading to GlideinWMS 3.2.7 the second schedd is removed from the default configuration. For a smooth transition:</p>
 <ol>
 <li>remove from <strong><code>/etc/gwms-frontend/frontend.xml</code></strong> the second schedd (the line containing <strong><code>schedd_jobs2@YOUR_HOST</code></strong>)</li>
 <li>reconfigure the frontend (<code>service gwms-frontend reconfig</code>)</li>
@@ -738,10 +738,10 @@
 </li>
 <li>
 <p>Factory collector information. The <code>username</code> that you are assigned by the factory (also called the identity you will be mapped to on the factory, see above) . Note that if you are using a factory different than the production factory, you will have to change also <code>DN</code>, <code>factory_identity</code> and <code>node</code> attributes. (refer to the information provided to you by the factory operator):</p>
-<div class="codehilite"><pre><span></span>&lt;collector DN=&quot;/DC=org/DC=doegrids/OU=Services/CN=gfactory-1.t2.ucsd.edu&quot; 
-           comment=&quot;Define factory collector globally for simplicity&quot; 
-           factory_identity=&quot;gfactory@gfactory-1.t2.ucsd.edu&quot; 
-           my_identity=&quot;username@gfactory-1.t2.ucsd.edu&quot; 
+<div class="codehilite"><pre><span></span>&lt;collector DN=&quot;/DC=org/DC=doegrids/OU=Services/CN=gfactory-1.t2.ucsd.edu&quot;
+           comment=&quot;Define factory collector globally for simplicity&quot;
+           factory_identity=&quot;gfactory@gfactory-1.t2.ucsd.edu&quot;
+           my_identity=&quot;username@gfactory-1.t2.ucsd.edu&quot;
            node=&quot;gfactory-1.t2.ucsd.edu&quot;/&gt;
 </pre></div>
 
@@ -755,12 +755,12 @@
 <li>The <code>security_name</code> identifies this VO Frontend to the the Factory, It is provided by the factory operator.</li>
 <li>The <code>absfname</code> in the credential (or proxy in v 2.x) entry is the location of the glideinWMS <span style="color:red"><code>pilot</code></span> proxy described in the requirements section <a href="#credentials-and-proxies">here</a>. There can be multiple pilot proxies, or even other kind of keys (e.g. if you use cloud resources). <strong><em>The type and trust_domain of the credential must match respectively auth_method and trust_domain used in the entry definition in the factory. If there is no match, between these two attributes in one of the credentials and some entry in one of the factories, then this frontend cannot trigger glideins.</em></strong>
 Both the <code>classad_proxy</code> and <code>absfname</code> files should be owned by <code>frontend</code> user.<div class="codehilite"><pre><span></span># These lines are from the configuration of v 3.x
-<span class="nt">&lt;security</span> <span class="na">classad_proxy=</span><span class="s">&quot;/tmp/vo_proxy&quot;</span> <span class="na">proxy_DN=</span><span class="s">&quot;DN of vo_proxy&quot;</span> 
-      <span class="na">proxy_selection_plugin=</span><span class="s">&quot;ProxyAll&quot;</span> 
-      <span class="na">security_name=</span><span class="s">&quot;The security name, this is used by factory&quot;</span> 
+<span class="nt">&lt;security</span> <span class="na">classad_proxy=</span><span class="s">&quot;/tmp/vo_proxy&quot;</span> <span class="na">proxy_DN=</span><span class="s">&quot;DN of vo_proxy&quot;</span>
+      <span class="na">proxy_selection_plugin=</span><span class="s">&quot;ProxyAll&quot;</span>
+      <span class="na">security_name=</span><span class="s">&quot;The security name, this is used by factory&quot;</span>
       <span class="na">sym_key=</span><span class="s">&quot;aes_256_cbc&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;credentials&gt;</span>
-        <span class="nt">&lt;credential</span> <span class="na">absfname=</span><span class="s">&quot;/tmp/pilot_proxy&quot;</span> <span class="na">security_class=</span><span class="s">&quot;frontend&quot;</span> 
+        <span class="nt">&lt;credential</span> <span class="na">absfname=</span><span class="s">&quot;/tmp/pilot_proxy&quot;</span> <span class="na">security_class=</span><span class="s">&quot;frontend&quot;</span>
         <span class="na">trust_domain=</span><span class="s">&quot;OSG&quot;</span> <span class="na">type=</span><span class="s">&quot;grid_proxy&quot;</span><span class="nt">/&gt;</span>
       <span class="nt">&lt;/credentials&gt;</span>
 <span class="nt">&lt;/security&gt;</span>
@@ -795,9 +795,9 @@ Both the <code>classad_proxy</code> and <code>absfname</code> files should be ow
 <li>The <code>secondary</code> attribute indicates whether the element is for the primary or secondary collectors (True/False).</li>
 </ul>
 <p>The default Condor configuration of the VO Frontend starts multiple Collector processes on the host (<code>/etc/condor/config.d/11_gwms_secondary_collectors.config</code>). The <code>DN</code> and <code>hostname</code> on the first line are the hostname and the host certificate of the VO Frontend. The <code>DN</code> and <code>hostname</code> on the second line are the same as the ones in the first one. The hostname (e.g. hostname.domain.tld) is filled automatically during the installation. The secondary collector ports can be defined as a range, e.g., 9620-9660).</p>
-<div class="codehilite"><pre><span></span>    &lt;collector DN=&quot;DN of main collector&quot; 
+<div class="codehilite"><pre><span></span>    &lt;collector DN=&quot;DN of main collector&quot;
            node=&quot;hostname.domain.tld:9618&quot; secondary=&quot;False&quot;/&gt;
-    &lt;collector DN=&quot;DN of secondary collectors (usually same as DN in line above)&quot; 
+    &lt;collector DN=&quot;DN of secondary collectors (usually same as DN in line above)&quot;
            node=&quot;hostname.domain.tld:9620-9660&quot; secondary=&quot;True&quot;/&gt;
 </pre></div>
 
@@ -806,7 +806,7 @@ Both the <code>classad_proxy</code> and <code>absfname</code> files should be ow
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The Frontend configuration includes many knobs, some of which are conflicting with a RPM installation where there is only one version of the Frontend installed and it uses well known paths.     Do not change the following in the Frontend configuration (you must leave the default values coming with the RPM installation):   </p>
+<p>The Frontend configuration includes many knobs, some of which are conflicting with a RPM installation where there is only one version of the Frontend installed and it uses well known paths.     Do not change the following in the Frontend configuration (you must leave the default values coming with the RPM installation):</p>
 <ul>
 <li>frontend_versioning='False' (in the first line of XML, versioning is useful to install multiple tarball versions)</li>
 <li>work base_dir must be /var/lib/gwms-frontend/vofrontend/ (other scripts like /etc/init.d/gwms-frontend count on that value)</li>
@@ -819,11 +819,11 @@ Both the <code>classad_proxy</code> and <code>absfname</code> files should be ow
 <li>make sure that the factory is advertising the attributes used in the factory query expression (<code>query_expr</code>).</li>
 </ol>
 <h2 id="configuring-condor">Configuring Condor<a class="headerlink" href="#configuring-condor" title="Permanent link">&para;</a></h2>
-<p>The condor configuration for the frontend is placed in <code>/etc/condor/config.d</code>. </p>
+<p>The condor configuration for the frontend is placed in <code>/etc/condor/config.d</code>.</p>
 <ul>
-<li>00_gwms_general.config </li>
-<li>01_gwms_collectors.config </li>
-<li>02_gwms_schedds.config </li>
+<li>00_gwms_general.config</li>
+<li>01_gwms_collectors.config</li>
+<li>02_gwms_schedds.config</li>
 <li>03_gwms_local.config</li>
 <li>11_gwms_secondary_collectors.config</li>
 <li>90_gwms_dns.config</li>
@@ -835,24 +835,24 @@ Both the <code>classad_proxy</code> and <code>absfname</code> files should be ow
 
 <p>For most installations create a new file named <code>/etc/condor/config.d/92_local_condor.config</code></p>
 <h3 id="using-other-condor-rpms-eg-uw-madison-htcondor-rpm">Using other Condor RPMs, e.g. UW Madison HTCondor RPM<a class="headerlink" href="#using-other-condor-rpms-eg-uw-madison-htcondor-rpm" title="Permanent link">&para;</a></h3>
-<p>The above procedure will work if you are using the OSG HTCondor RPMS. You can verify that you used the OSG HTCondor RPM by using <code>yum list condor</code>. The version name should include "osg", e.g. <code>7.8.6-3.osg.el5</code>. </p>
+<p>The above procedure will work if you are using the OSG HTCondor RPMS. You can verify that you used the OSG HTCondor RPM by using <code>yum list condor</code>. The version name should include "osg", e.g. <code>7.8.6-3.osg.el5</code>.</p>
 <p>If you are using the UW Madison Condor RPMS, be aware of the following changes:</p>
 <ul>
 <li>This Condor RPM uses a file <code>/etc/condor/condor_config.local</code> to add your local machine slot to the user pool.</li>
 <li>If you want to disable this behavior (recommended), you should blank out that file or comment out the line in <code>/etc/condor/condor_config</code> for LOCAL_CONFIG_FILE. (Make sure that LOCAL_CONFIG_DIR is set to <code>/etc/condor/config.d</code>)</li>
 <li>Note that the variable LOCAL_DIR is set differently in UW Madison and OSG RPMs. This should not cause any more problems in the glideinwms RPMs, but please take note if you use this variable in your job submissions or other customizations.</li>
 </ul>
-<p>In general if you are using a non OSG RPM or if you added custom configuration files for HTCondor please check the order of the configuration files: </p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> condor_config_val -config 
-<span class="go">Configuration source: </span>
-<span class="go">    /etc/condor/condor_config </span>
-<span class="go">Local configuration sources: </span>
+<p>In general if you are using a non OSG RPM or if you added custom configuration files for HTCondor please check the order of the configuration files:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> condor_config_val -config
+<span class="go">Configuration source:</span>
+<span class="go">    /etc/condor/condor_config</span>
+<span class="go">Local configuration sources:</span>
 <span class="go">    /etc/condor/config.d/00_gwms_general.config</span>
-<span class="go">    /etc/condor/config.d/01_gwms_collectors.config </span>
-<span class="go">    /etc/condor/config.d/02_gwms_schedds.config </span>
-<span class="go">    /etc/condor/config.d/03_gwms_local.config </span>
+<span class="go">    /etc/condor/config.d/01_gwms_collectors.config</span>
+<span class="go">    /etc/condor/config.d/02_gwms_schedds.config</span>
+<span class="go">    /etc/condor/config.d/03_gwms_local.config</span>
 <span class="go">    /etc/condor/config.d/11_gwms_secondary_collectors.config</span>
-<span class="go">    /etc/condor/config.d/90_gwms_dns.config </span>
+<span class="go">    /etc/condor/config.d/90_gwms_dns.config</span>
 <span class="gp">%</span>RED%/etc/condor/condor_config.local</span>
 </pre></div>
 
@@ -864,11 +864,11 @@ Both the <code>classad_proxy</code> and <code>absfname</code> files should be ow
 <p>The glideinWMS configuration files in <code>/etc/condor/config.d</code> should be the last ones in the list. If not, please verify that important configuration options have not been overridden by the other configuration files.</p>
 </li>
 <li>
-<p>Verify the alll the expected HTCondor daemons are running: </p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> condor_config_val -verbose DAEMON_LIST DAEMON_LIST: MASTER, COLLECTOR, NEGOTIATOR, SCHEDD, SHARED_PORT, COLLECTOR0 
-<span class="go">COLLECTOR1 COLLECTOR2 COLLECTOR3 COLLECTOR4 COLLECTOR5 COLLECTOR6 COLLECTOR7 COLLECTOR8 COLLECTOR9 COLLECTOR10 , COLLECTOR11, COLLECTOR12, </span>
-<span class="go">COLLECTOR13, COLLECTOR14, COLLECTOR15, COLLECTOR16, COLLECTOR17, COLLECTOR18, COLLECTOR19, COLLECTOR20, COLLECTOR21, COLLECTOR22, COLLECTOR23, </span>
-<span class="go">COLLECTOR24, COLLECTOR25, COLLECTOR26, COLLECTOR27, COLLECTOR28, COLLECTOR29, COLLECTOR30, COLLECTOR31, COLLECTOR32, COLLECTOR33, COLLECTOR34, </span>
+<p>Verify the alll the expected HTCondor daemons are running:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> condor_config_val -verbose DAEMON_LIST DAEMON_LIST: MASTER, COLLECTOR, NEGOTIATOR, SCHEDD, SHARED_PORT, COLLECTOR0
+<span class="go">COLLECTOR1 COLLECTOR2 COLLECTOR3 COLLECTOR4 COLLECTOR5 COLLECTOR6 COLLECTOR7 COLLECTOR8 COLLECTOR9 COLLECTOR10 , COLLECTOR11, COLLECTOR12,</span>
+<span class="go">COLLECTOR13, COLLECTOR14, COLLECTOR15, COLLECTOR16, COLLECTOR17, COLLECTOR18, COLLECTOR19, COLLECTOR20, COLLECTOR21, COLLECTOR22, COLLECTOR23,</span>
+<span class="go">COLLECTOR24, COLLECTOR25, COLLECTOR26, COLLECTOR27, COLLECTOR28, COLLECTOR29, COLLECTOR30, COLLECTOR31, COLLECTOR32, COLLECTOR33, COLLECTOR34,</span>
 <span class="go">COLLECTOR35, COLLECTOR36, COLLECTOR37, COLLECTOR38, COLLECTOR39, COLLECTOR40</span>
 <span class="go">Defined in &#39;/etc/condor/config.d/11_gwms_secondary_collectors.config&#39;, line 193.</span>
 </pre></div>
@@ -919,7 +919,7 @@ GSI &quot;<span style="color:green">DN of frontend proxy</span>&quot; frontend
 GSI &quot;<span style="color:red">DN of pilot proxy</span>$&quot; pilot_proxy
 GSI &quot;^\/DC\=org\/DC\=doegrids\/OU\=Services\/CN\=personal\-submit\-host2\.mydomain\.edu$&quot; <span style="color:red">&lt;example_of_format&gt;</span>
 GSI (.*) anonymous
-FS (.*) \1 
+FS (.*) \1
 </pre></div>
 
 
@@ -933,21 +933,21 @@ FS (.*) \1
 <p>There are 2 types of (or purposes for) proxies required for the VO Frontend: 1 the <span style="color:green">VO Frontend proxy</span> (used to authenticate with the other glideinWMS services) 1 one or more glideinWMS <span style="color:green">pilot proxies</span> (used/delegated to the factory services and submitted on the glideinWMS pilot jobs) The <span style="color:green">VO Frontend proxy</span> and the <span style="color:green">pilot proxy</span> can be the same. By default, the VO Frontend will run as user <code>frontend</code> (UID is machine dependent) so these proxies must be owned by the user <code>frontend</code>.</p>
 <h3 id="manual-proxy-renewal">Manual proxy renewal<a class="headerlink" href="#manual-proxy-renewal" title="Permanent link">&para;</a></h3>
 <p><span style="color:green">VO Frontend proxy</span>
-The VO Frontend Proxy is used for communicating with the other glideinWMS services (Factory, User Collector and Schedd/Submit services). Create the proxy using the glidenWMS VO Frontend Host (or Service) cert and change ownership to the frontend user. </p>
+The VO Frontend Proxy is used for communicating with the other glideinWMS services (Factory, User Collector and Schedd/Submit services). Create the proxy using the glidenWMS VO Frontend Host (or Service) cert and change ownership to the frontend user.</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> voms-proxy-init-valid <span style="color:red">&lt;hours_valid&gt;</span> <span class="se">\</span>
--cert /etc/grid-security/hostcert.pem <span class="se">\ </span>
-<span class="go">-key /etc/grid-security/hostkey.pem \ </span>
-<span class="go">-out <span style="color:green">/tmp/vofe_proxy</span></span>
+-cert /etc/grid-security/hostcert.pem <span class="se">\</span>
+-key /etc/grid-security/hostkey.pem <span class="se">\</span>
+-out <span style="color:green">/tmp/vofe_proxy</span>
 <span class="gp">[root@client ~] #</span> chown frontend <span style="color:green">/tmp/vofe_proxy</span>
 </pre></div>
 
 
 <p><span style="color:red">Pilot proxy</span>
-The pilot proxy is used on the glideinWMS pilot jobs submitted to the CEs. Create the proxy using the <span style="color:red">pilot certificate</span> and change ownership to the frontend user. </p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> voms-proxy-init -valid <span style="color:red">&lt;hours_valid&gt;</span><span class="se">\ </span>
-<span class="go">-voms &lt;vo&gt; </span>
+The pilot proxy is used on the glideinWMS pilot jobs submitted to the CEs. Create the proxy using the <span style="color:red">pilot certificate</span> and change ownership to the frontend user.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> voms-proxy-init -valid <span style="color:red">&lt;hours_valid&gt;</span><span class="se">\</span>
+-voms &lt;vo&gt;
 <span class="go">-cert &lt;pilot_cert&gt; \</span>
-<span class="go">-key &lt;pilot_key&gt; \ </span>
+<span class="go">-key &lt;pilot_key&gt; \</span>
 <span class="go">-out <span style="color:red">/tmp/pilot_proxy</span></span>
 <span class="gp">[root@client ~] #</span> chown frontend <span style="color:red">/tmp/pilot_proxy</span>
 </pre></div>
@@ -972,7 +972,7 @@ The pilot proxy is used on the glideinWMS pilot jobs submitted to the CEs. Creat
 </li>
 <li>
 <p>Change ownership and permission of the certificate and key</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> chown frontend: /var/lib/gwms-frontend/host**.pem 
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> chown frontend: /var/lib/gwms-frontend/host**.pem
 <span class="gp">[root@client ~] #</span> chmod <span class="m">0600</span> /var/lib/gwms-frontend/host**.pem
 </pre></div>
 
@@ -982,7 +982,7 @@ The pilot proxy is used on the glideinWMS pilot jobs submitted to the CEs. Creat
 <p>Preparation for the <span style="color:red"> pilot proxy</span>. You'll have to redo this for each new or renewed pilot cert.</p>
 <ol>
 <li>
-<p>Create the proxy using the pilot certificate/key (as the user/submitter) </p>
+<p>Create the proxy using the pilot certificate/key (as the user/submitter)</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> grid-proxy-init -valid <span class="m">8800</span>:0 -out /tmp/tmp_proxy
 </pre></div>
 
@@ -1005,7 +1005,7 @@ The pilot proxy is used on the glideinWMS pilot jobs submitted to the CEs. Creat
 <p>Download the <a href="../../other/make-proxy.sh">attached script</a> (the latest one is <a href="https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy.sh">Here on Github</a>) and save it as <code>/var/lib/gwms-frontend/make-frontend-proxy.sh</code>, make sure that it is executable.</p>
 </li>
 <li>
-<p>Edit the VARIABLES section to look something like (replace your email, host name and the paths that are different in your setup - the comments in the script will help): </p>
+<p>Edit the VARIABLES section to look something like (replace your email, host name and the paths that are different in your setup - the comments in the script will help):</p>
 <div class="codehilite"><pre><span></span>SETUP_FILE=&quot;&quot;
 CERT_FILE=&quot;/var/lib/gwms-frontend/hostcert.pem&quot;
 KEY_FILE=&quot;/var/lib/gwms-frontend/hostkey.pem&quot;
@@ -1025,7 +1025,7 @@ VOMS_OPTION=&quot;&quot;
 <p>Download the <a href="../../other/make-proxy.sh">attached script</a> (the latest one is <a href="https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy.sh">Here on Github</a>) and save it as <code>/var/lib/gwms-frontend/make-pilot-proxy.sh</code>, make sure that it is executable.</p>
 </li>
 <li>
-<p>Edit the VARIABLES section to look something like (replace your email, host name and the paths that are different in your setup - the comments in the script will help): </p>
+<p>Edit the VARIABLES section to look something like (replace your email, host name and the paths that are different in your setup - the comments in the script will help):</p>
 <div class="codehilite"><pre><span></span>SETUP_FILE=&quot;&quot;
 CERT_FILE=&quot;&quot;
 KEY_FILE=&quot;&quot;
@@ -1044,8 +1044,8 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 </pre></div>
 
 
-<p>Add the scripts to the crontab of the user <code>frontend</code> with <code>crontab -e</code>: </p>
-<div class="codehilite"><pre><span></span>10 * * * * /var/lib/gwms-frontend/make-frontend-proxy.sh --no-voms-proxy 
+<p>Add the scripts to the crontab of the user <code>frontend</code> with <code>crontab -e</code>:</p>
+<div class="codehilite"><pre><span></span>10 * * * * /var/lib/gwms-frontend/make-frontend-proxy.sh --no-voms-proxy
 10 * * * * /var/lib/gwms-frontend/make-pilot-proxy.sh
 </pre></div>
 
@@ -1068,7 +1068,7 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 </div>
 <p>After this initial reconfiguring/upgrading, you can start the frontend:</p>
 <div class="codehilite"><pre><span></span> <span class="c"><span style="color:red"># For RHEL 6, CentOS 6, and SL6</span></span>
- <span class="p">[</span><span class="n">root</span><span class="p">@</span><span class="n">client</span> <span class="o">~</span><span class="p">]</span> # <span class="n">service</span> <span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span> <span class="n">start</span> 
+ <span class="p">[</span><span class="n">root</span><span class="p">@</span><span class="n">client</span> <span class="o">~</span><span class="p">]</span> # <span class="n">service</span> <span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span> <span class="n">start</span>
  <span class="c"><span style="color:red"># For RHEL 7, CentOS 7, and SL7</span></span>
  <span class="p">[</span><span class="n">root</span><span class="p">@</span><span class="n">client</span> <span class="o">~</span><span class="p">]</span> # <span class="n">systemctl</span> <span class="n">start</span> <span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span>
 </pre></div>
@@ -1148,7 +1148,7 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 
 </li>
 <li>
-<p>Set the job <code>query_expr</code> so that only ITB jobs appear in <code>condor_q</code>: </p>
+<p>Set the job <code>query_expr</code> so that only ITB jobs appear in <code>condor_q</code>:</p>
 <div class="codehilite"><pre><span></span>&lt;job query_expr=&quot;(!isUndefined(is_itb) &amp;&amp; is_itb)&quot;&gt;
 </pre></div>
 
@@ -1168,11 +1168,11 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 <li>
 <p>You need to fetch the latest CA Certificate Revocation Lists (CRLs) and you should enable the fetch-crl service to keep the CRLs up to date:</p>
 <div class="codehilite"><pre><span></span><span class="gp">%</span>RED%# For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6, or OSG <span class="m">3</span> _older_ than <span class="m">3</span>.1.15</span>
-<span class="gp">[root@client ~]$</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs </span>
+<span class="gp">[root@client ~]$</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs</span>
 <span class="gp">[root@client ~]$</span> /sbin/service fetch-crl-boot start
 <span class="gp">[root@client ~]$</span> /sbin/service fetch-crl-cron start
 <span class="gp">%</span>RED% <span class="c1"># For RHEL 7, CentOS 7, and SL7 </span></span>
-<span class="gp">[root@client ~]$</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs </span>
+<span class="gp">[root@client ~]$</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs</span>
 <span class="gp">[root@client ~]$</span> systemctl start fetch-crl-boot
 <span class="gp">[root@client ~]$</span> systemctl start fetch-crl-cron
 </pre></div>
@@ -1183,10 +1183,10 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 <p>HTCondor, httpd, VO Frontend</p>
 <div class="codehilite"><pre><span></span><span class="gp">%</span>RED%# For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6</span>
 <span class="gp">[root@client ~] #</span> service condor start
-<span class="gp">[root@client ~] #</span> service httpd start 
+<span class="gp">[root@client ~] #</span> service httpd start
 <span class="gp">[root@client ~] #</span> service gwms-frontend start
 <span class="gp">%</span>RED%# For RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL7</span>
-<span class="gp">[root@client ~] #</span> systemctl start condor 
+<span class="gp">[root@client ~] #</span> systemctl start condor
 <span class="gp">[root@client ~] #</span> systemctl start gwms-frontend
 </pre></div>
 
@@ -1197,15 +1197,15 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 <p class="admonition-title">Note</p>
 <p>Once you successfully start using the frontend service, each time you change the configuration or want to upgrade, you run the following command</p>
 <div class="codehilite"><pre><span></span><span class="gp">%</span>RED%# For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6</span>
-<span class="gp">[root@client ~] #</span> service gwms-frontend reconfig 
-<span class="gp">%</span>RED%# And <span class="k">if</span> you change also some code</span> 
+<span class="gp">[root@client ~] #</span> service gwms-frontend reconfig
+<span class="gp">%</span>RED%# And <span class="k">if</span> you change also some code</span>
 <span class="gp">[root@client ~] #</span> service gwms-frontend upgrade
 
 <span class="gp">%</span>RED%# But the situation is a bit more complicated in RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL7 due to systemd restrictions</span>
 <span class="gp">%</span>GREEN%# For reconfig:</span>
 <span class="gp">%</span>RED%A. when the frontend is running</span>
 <span class="gp">%</span>RED%A.1 without any additional options</span>
-<span class="gp">[root@client ~] #</span> /usr/sbin/gwms-frontend reconfig</span> 
+<span class="gp">[root@client ~] #</span> /usr/sbin/gwms-frontend reconfig</span>
 <span class="go">or</span>
 <span class="gp">[root@client ~] #</span> systemctl reload gwms-frontend
 
@@ -1219,11 +1219,11 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 
 <span class="gp">%</span>GREEN%# For upgrade:</span>
 <span class="gp">%</span>RED%A. when the frontend is running </span>
-<span class="go">systemctl stop gwms-frontend </span>
+<span class="go">systemctl stop gwms-frontend</span>
 <span class="go">/usr/sbin/gwms-frontend upgrade (&quot;and your options if any&quot;)</span>
 <span class="go">systemctl start gwms-frontend</span>
 
-<span class="gp">%</span>RED%B. when the frontend is NOT running </span> 
+<span class="gp">%</span>RED%B. when the frontend is NOT running </span>
 <span class="go">/usr/sbin/gwms-frontend upgrade (&quot;and your options if any&quot;)</span>
 </pre></div>
 
@@ -1243,12 +1243,12 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 <ol>
 <li>
 <p>Verify all Condor daemons are started.</p>
-<div class="codehilite"><pre><span></span>[user@client ~]$ condor_config_val -verbose DAEMON_LIST 
-DAEMON_LIST: MASTER,  COLLECTOR, NEGOTIATOR,  SCHEDD, SHARED_PORT, SCHEDDJOBS2 COLLECTOR0 COLLECTOR1 COLLECTOR2 
-COLLECTOR3 COLLECTOR4 COLLECTOR5 COLLECTOR6 COLLECTOR7 COLLECTOR8 COLLECTOR9 COLLECTOR10 , COLLECTOR11, 
-COLLECTOR12, COLLECTOR13, COLLECTOR14, COLLECTOR15, COLLECTOR16, COLLECTOR17, COLLECTOR18, COLLECTOR19, COLLECTOR20, 
-COLLECTOR21, COLLECTOR22, COLLECTOR23, COLLECTOR24, COLLECTOR25, COLLECTOR26, COLLECTOR27, COLLECTOR28, COLLECTOR29, 
-COLLECTOR30, COLLECTOR31, COLLECTOR32, COLLECTOR33, COLLECTOR34, COLLECTOR35, COLLECTOR36, COLLECTOR37, COLLECTOR38, 
+<div class="codehilite"><pre><span></span>[user@client ~]$ condor_config_val -verbose DAEMON_LIST
+DAEMON_LIST: MASTER,  COLLECTOR, NEGOTIATOR,  SCHEDD, SHARED_PORT, SCHEDDJOBS2 COLLECTOR0 COLLECTOR1 COLLECTOR2
+COLLECTOR3 COLLECTOR4 COLLECTOR5 COLLECTOR6 COLLECTOR7 COLLECTOR8 COLLECTOR9 COLLECTOR10 , COLLECTOR11,
+COLLECTOR12, COLLECTOR13, COLLECTOR14, COLLECTOR15, COLLECTOR16, COLLECTOR17, COLLECTOR18, COLLECTOR19, COLLECTOR20,
+COLLECTOR21, COLLECTOR22, COLLECTOR23, COLLECTOR24, COLLECTOR25, COLLECTOR26, COLLECTOR27, COLLECTOR28, COLLECTOR29,
+COLLECTOR30, COLLECTOR31, COLLECTOR32, COLLECTOR33, COLLECTOR34, COLLECTOR35, COLLECTOR36, COLLECTOR37, COLLECTOR38,
 COLLECTOR39, COLLECTOR40
 Defined in &#39;/etc/condor/config.d/11_gwms_secondary_collectors.config&#39;, line 193.
 </pre></div>
@@ -1259,7 +1259,7 @@ Defined in &#39;/etc/condor/config.d/11_gwms_secondary_collectors.config&#39;, l
 <li>
 <p>Verify all VO Frontend Condor services are communicating.</p>
 <div class="codehilite"><pre><span></span>[user@client ~]$ condor_status -any
-MyType               TargetType           Name                          
+MyType               TargetType           Name
 glideresource        None                 MM_fermicloud026@gfactory_inst
 Scheduler            None                 fermicloud020.fnal.gov
 DaemonMaster         None                 fermicloud020.fnal.gov
@@ -1387,7 +1387,7 @@ queue
 </table>
 <ol>
 <li>
-<p>If using HTCondor RPM installation, e.g. the one coming from OSG. If you have separate/multiple HTCondor hosts (schedds, collectors, negotiators, ..) you may have to check this file on all of them to make sure that the HTCondor authentication works correctly. </p>
+<p>If using HTCondor RPM installation, e.g. the one coming from OSG. If you have separate/multiple HTCondor hosts (schedds, collectors, negotiators, ..) you may have to check this file on all of them to make sure that the HTCondor authentication works correctly.</p>
 </li>
 <li>
 <p>Used to create the VO Frontend proxy if following the <a href="#proxy-configuration">instructions above</a></p>
@@ -1488,7 +1488,7 @@ queue
 <ul>
 <li><a href="http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/">http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/</a></li>
 <li><a href="http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/manual/">http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/manual/</a></li>
-<li><a href="../GlideinWMSCampusGrid">How to setup a Submit host flocking to the VO Frontend</a></li>
+<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GlideinWMSCampusGrid">How to setup a Submit host flocking to the VO Frontend</a></li>
 </ul>
               
             </div>

@@ -380,7 +380,7 @@
 <li>Ensure the RSV host has <a href="../../common/yum/">a supported operating system</a></li>
 <li>Obtain root access to the host</li>
 <li>Prepare <a href="../../common/yum/">the required Yum repositories</a></li>
-<li>Install <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth">CA certificates</a></li>
+<li>Install <a href="../../common/ca">CA certificates</a></li>
 </ul>
 <h2 id="installing-rsv">Installing RSV<a class="headerlink" href="#installing-rsv" title="Permanent link">&para;</a></h2>
 <p>An installation of RSV at a site consists of the RSV client software, the Apache web server, parts of HTCondor (for its cron-like scheduling capabilities), and various other small tools. To simplify installation, OSG provides a convenience RPM that installs all required software with a single command.</p>
@@ -405,7 +405,7 @@
 
 </li>
 <li>
-<p>Install RSV and related software: </p>
+<p>Install RSV and related software:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install rsv
 </pre></div>
 
@@ -478,7 +478,7 @@
 <p>Set up HTTPS access by editing <code>/etc/httpd/conf.d/ssl.conf</code>:</p>
 <div class="codehilite"><pre><span></span>Listen 8443
 &lt;VirtualHost _default_:8443&gt;
-SSLCertificateFile /etc/grid-security/http/httpcert2.pem    
+SSLCertificateFile /etc/grid-security/http/httpcert2.pem
 SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 </pre></div>
 
@@ -505,7 +505,7 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 <tr>
 <td align="left">Fetch CRL</td>
 <td align="left"><code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
-<td>See <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui">CA documentation</a></td>
+<td>See <a href="../../common/ca/#startstop-fetch-crl-a-quick-guide">CA documentation</a></td>
 </tr>
 <tr>
 <td align="left">Apache</td>
@@ -624,11 +624,11 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 <li>2 = adds informational messages</li>
 <li>3 = full debugging output</li>
 </ul>
-<p>For example, here is the output when running a metric with -v2. </p>
-<p><details> 
+<p>For example, here is the output when running a metric with -v2.</p>
+<p><details>
   <summary>Show detailed ouput</summary>
    <p></p>
-<div class="codehilite"><pre><span></span><span class="go">   [root@fermicloud016 condor]# rsv-control -r org.osg.general.osg-version -v 2 -u osg-edu.cs.wisc.edu </span>
+<div class="codehilite"><pre><span></span><span class="go">   [root@fermicloud016 condor]# rsv-control -r org.osg.general.osg-version -v 2 -u osg-edu.cs.wisc.edu</span>
 <span class="go">   INFO: Reading configuration file /etc/rsv/rsv.conf</span>
 <span class="go">   INFO: Reading configuration file /etc/rsv/consumers.conf</span>
 <span class="go">   INFO: Validating configuration:</span>
