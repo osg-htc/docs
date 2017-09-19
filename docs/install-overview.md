@@ -63,8 +63,8 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
     -   [Overview and architecture](compute-element/htcondor-ce-overview)
     -   [Install HTCondor-CE](compute-element/install-htcondor-ce)
     -   [Configure the HTCondor-CE job router](compute-element/job-router-recipes), including common recipes
-    -   [Troubleshooting HTCondor-CE installations](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE)
-    -   [Submitting jobs to HTCondor-CE](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SubmittingHTCondorCE)
+    -   [Troubleshooting HTCondor-CE installations](compute-element/troubleshoot-htcondor-ce)
+    -   [Submitting jobs to HTCondor-CE](compute-element/submit-htcondor-ce)
 -   [Troubleshooting osg-configure](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingOsgConfigure)
 
 ### Installing and Configuring Other Nodes ###
@@ -98,7 +98,7 @@ Test OSG Software
 
 At very least, it is vital to test *manual* submission of jobs from inside and outside of your site through your CE to your batch system. If this process does not work manually, it will probably not work for the glideinWMS pilot factory either.
 
--   [Test job submission into an HTCondor-CE](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SubmittingHTCondorCE)
+-   [Test job submission into an HTCondor-CE](compute-element/submit-htcondor-ce)
 -   [OSG Troubleshooting guide](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingGuide)
 -   [Validating Supported VOs](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/ValidateSupportedVos)
 

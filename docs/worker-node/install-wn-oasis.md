@@ -46,7 +46,7 @@ For more information, see the [OSG environment variables reference page](https:/
 Once you finish making changes to configuration files on your CE, validate, fix, and apply the configuration:
 
 ```console
-[root@client ~] # osg-configure -v 
+[root@client ~] # osg-configure -v
 [root@client ~] # osg-configure -c
 ```
 
@@ -55,7 +55,7 @@ Validating the Worker Node Client
 
 To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.
 
-1.  Submit a job that executes the `env` command (e.g. Run [condor\_ce\_trace](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_ce_trace) with the `-d` flag from your HTCondor CE)
+1.  Submit a job that executes the `env` command (e.g. Run [condor\_ce\_trace](troubleshoot-htcondor-ce#condor95ce95trace) with the `-d` flag from your HTCondor CE)
 2.  Verify that the value of `OSG_GRID` is set to the directory of your WN Client installation
 
 ### Manually Using the Worker Node Client From OASIS
@@ -77,17 +77,15 @@ Some possible issues that may come up:
 
         :::console
         [user@client ~] $ ls -l /cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/current/el6-x86_64/etc/grid-security/
-    
+
     and check that `certificates` is linked to somewhere. The fix is to yum update the `oasis-config` package to version 4 or higher. A known workaround is to run:
 
         :::console
         [user@client ~] $ export X509_CERT_DIR=/cvmfs/oasis.opensciencegrid.org/mis/certificates
-    
+
     before any commands.
 
 How to get Help?
 ----------------
 
 To get assistance please use this [Help Procedure](../common/help.md).
-
-
