@@ -22,6 +22,7 @@ pages:
   - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
   - 'Install HTCondor-CE': 'compute-element/install-htcondor-ce.md'
   - 'Job Router Recipes': 'compute-element/job-router-recipes.md'
+  - 'Troubleshooting HTCondor-CE': 'compute-element/troubleshoot-htcondor-ce.md'
 - Install Guides - Data:
   - 'GridFTP Server': 'data/gridftp.md'
   - 'HTTP Cache': 'data/frontier-squid.md'
