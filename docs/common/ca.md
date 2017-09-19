@@ -53,7 +53,7 @@ Option 2: Install osg-update-certs
 Install this with:
 
 ```
-%UCL_PROMPT_ROOT% yum install osg-ca-scripts
+root@host # yum install osg-ca-scripts
 ```
 
 You have the same choices for CA certificates as above. In order to choose, you will run `osg-ca-manage`, which will install the CA certificates. Then (if desired) you need to enable periodic updating of the CA certificates.
@@ -66,7 +66,7 @@ You have the same choices for CA certificates as above. In order to choose, you 
 Here is an example:
 
 ```
-%UCL_PROMPT_ROOT% /usr/sbin/osg-ca-manage setupCA --location root --url osg
+root@host # /usr/sbin/osg-ca-manage setupCA --location root --url osg
 Setting up CA Certificates for OSG installation
 CA Certificates will be installed into /etc/grid-security/certificates
 osg-update-certs
@@ -82,14 +82,14 @@ Setup completed successfully.
 Initially the CA certificates will not be updated. You can tell by looking at:
 
 ```
-%UCL_PROMPT_ROOT% /sbin/service osg-update-certs-cron  status
+root@host # /sbin/service osg-update-certs-cron  status
 Periodic osg-update-certs is disabled.
 ```
 
 You can enable the `cron` job that updates the CA certs with:
 
 ```
-%UCL_PROMPT_ROOT% /sbin/service osg-update-certs-cron  start
+root@host # /sbin/service osg-update-certs-cron  start
 Enabling periodic osg-update-certs:                        [  %GREEN%OK%ENDCOLOR%  ]
 ```
 
@@ -140,9 +140,9 @@ to specifically install it. If you do wish to install it, you can install it as:
 
 ```
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-%UCL_PROMPT_ROOT% yum install fetch-crl3
+root@host # yum install fetch-crl3
 %RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
-%UCL_PROMPT_ROOT% yum install fetch-crl
+root@host # yum install fetch-crl
 ```
 
 ### Enable and Start `fetch-crl`
@@ -151,22 +151,22 @@ To enable fetch-crl (fetch Certificate Revocation Lists) services by default on 
 
 ```
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-boot on
-%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-cron on
+root@host # /sbin/chkconfig fetch-crl3-boot on
+root@host # /sbin/chkconfig fetch-crl3-cron on
 %RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
-%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-boot on
-%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-cron on
+root@host # /sbin/chkconfig fetch-crl-boot on
+root@host # /sbin/chkconfig fetch-crl-cron on
 ```
 
 To start fetch-crl:
 
 ```
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-%UCL_PROMPT_ROOT% /sbin/service fetch-crl3-boot start
-%UCL_PROMPT_ROOT% /sbin/service fetch-crl3-cron start
+root@host # /sbin/service fetch-crl3-boot start
+root@host # /sbin/service fetch-crl3-cron start
 %RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
-%UCL_PROMPT_ROOT% /sbin/service fetch-crl-boot start
-%UCL_PROMPT_ROOT% /sbin/service fetch-crl-cron start
+root@host # /sbin/service fetch-crl-boot start
+root@host # /sbin/service fetch-crl-cron start
 ```
 
 !!! note
@@ -229,46 +229,46 @@ You need to fetch the latest CA Certificate Revocation Lists (CRLs) and you shou
 
 ```
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-%UCL_PROMPT_ROOT% /usr/sbin/fetch-crl3 # This fetches the CRLs
-%UCL_PROMPT_ROOT% /sbin/service fetch-crl3-boot start
-%UCL_PROMPT_ROOT% /sbin/service fetch-crl3-cron start
+root@host # /usr/sbin/fetch-crl3 # This fetches the CRLs
+root@host # /sbin/service fetch-crl3-boot start
+root@host # /sbin/service fetch-crl3-cron start
 %RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7%ENDCOLOR%
-%UCL_PROMPT_ROOT% /usr/sbin/fetch-crl # This fetches the CRLs
-%UCL_PROMPT_ROOT% /sbin/service fetch-crl-boot start
-%UCL_PROMPT_ROOT% /sbin/service fetch-crl-cron start
+root@host # /usr/sbin/fetch-crl # This fetches the CRLs
+root@host # /sbin/service fetch-crl-boot start
+root@host # /sbin/service fetch-crl-cron start
 ```
 
 To enable the `fetch-crl` service to keep the CRLs up to date after reboots:
 
 ```
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-boot on
-%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-cron on
+root@host # /sbin/chkconfig fetch-crl3-boot on
+root@host # /sbin/chkconfig fetch-crl3-cron on
 %RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
-%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-boot on
-%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-cron on
+root@host # /sbin/chkconfig fetch-crl-boot on
+root@host # /sbin/chkconfig fetch-crl-cron on
 ```
 
 To stop `fetch-crl`:
 
 ```
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-%UCL_PROMPT_ROOT% /sbin/service fetch-crl3-boot stop
-%UCL_PROMPT_ROOT% /sbin/service fetch-crl3-cron stop
+root@host # /sbin/service fetch-crl3-boot stop
+root@host # /sbin/service fetch-crl3-cron stop
 %RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
-%UCL_PROMPT_ROOT% /sbin/service fetch-crl-boot stop
-%UCL_PROMPT_ROOT% /sbin/service fetch-crl-cron stop
+root@host # /sbin/service fetch-crl-boot stop
+root@host # /sbin/service fetch-crl-cron stop
 ```
 
 To disable the fetch-crl service:
 
 ```
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-boot off
-%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-cron off
+root@host # /sbin/chkconfig fetch-crl3-boot off
+root@host # /sbin/chkconfig fetch-crl3-cron off
 %RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
-%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-boot off
-%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-cron off
+root@host # /sbin/chkconfig fetch-crl-boot off
+root@host # /sbin/chkconfig fetch-crl-cron off
 ```
 
 Updating CAs/CRLs
@@ -286,14 +286,14 @@ How to ensure you are get up-to-date CA/CRL information
 2.  If you use Option 2 (i.e. `osg-update-certs`) then make sure that you have the corresponding service enabled.
 
    ```
-   %UCL_PROMPT_ROOT% /sbin/service osg-update-certs-cron  status
+   root@host # /sbin/service osg-update-certs-cron  status
    Periodic osg-update-certs is enabled.
    ```
 
 3.  Ensure that fetch-crl cron is enabled\\
 
   ```
-  %UCL_PROMPT_ROOT% /sbin/service fetch-crl-cron  status
+  root@host # /sbin/service fetch-crl-cron  status
   Periodic fetch-crl is enabled.
   ```
 
@@ -332,7 +332,7 @@ Tests
 To test the host certificate of a server `openssl s_client` can be used. Here is an example with the gatekeeper:
 
 ```
-%UCL_PROMPT% openssl s_client -showcerts -cert /etc/grid-security/hostcert.pem -key /etc/grid-security/hostkey.pem -CApath /etc/grid-security/certificates/ -debug -connect osg-gk.mwt2.org:2119
+user@host $ openssl s_client -showcerts -cert /etc/grid-security/hostcert.pem -key /etc/grid-security/hostkey.pem -CApath /etc/grid-security/certificates/ -debug -connect osg-gk.mwt2.org:2119
 ```
 
 Frequently Asked Questions
@@ -384,13 +384,13 @@ For Option 4: run `yum update osg-ca-certs`
 For Option 2: You do not need to do a manual update, make sure `osg-update-certs-cron` is enabled using
 
 ```
-%UCL_PROMPT_ROOT% /sbin/service osg-update-certs-cron  status
+root@host # /sbin/service osg-update-certs-cron  status
 ```
 
 If the service is disabled, enable it using
 
 ```
-%UCL_PROMPT_ROOT% /sbin/service osg-update-certs-cron  start
+root@host # /sbin/service osg-update-certs-cron  start
 ```
 
 If for some extraordinary reason you need to manually update the CA you could run `osg-ca-manage [--force] refreshCA`.
