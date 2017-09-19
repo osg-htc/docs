@@ -9,7 +9,7 @@ Quirks and Pitfalls
 -------------------
 
 -   The JobRouter matches jobs to routes in a round-robin fashion (for HTCondor versions < 8.7.1). This means that if a job can match to multiple routes, it can be routed by any of them! So when writing job routes, make sure that they are exclusive to each other and that your jobs can only match to a single route.
--   If a value is set in [JOB\_ROUTER\_DEFAULTS](#job59router59defaults) with `eval_set_<variable>`, override it by using `eval_set_<variable>` in the `JOB_ROUTER_ENTRIES`. Do this at your own risk as it may cause the CE to break.
+-   If a value is set in [JOB\_ROUTER\_DEFAULTS](#job_router_defaults) with `eval_set_<variable>`, override it by using `eval_set_<variable>` in the `JOB_ROUTER_ENTRIES`. Do this at your own risk as it may cause the CE to break.
 -   Make sure to run `condor_ce_reconfig` after changing your routes, otherwise they will not take effect.
 -   Before the last square bracket, make sure all lines end in a line continuation character (backslash). You can inspect the syntax of your routes with `condor_ce_config_val JOB_ROUTER_ENTRIES` to see if HTCondor-CE has ingested them properly.
 -   Do **not** set the job environment through the JobRouter. Instead, add any changes to the `[Local Settings]` section in `/etc/osg/config.d/40-localsettings.ini` and run osg-configure, as documented [here](../other/configuration-with-osg-configure).
@@ -20,11 +20,11 @@ How Job Routes are Constructed
 
 Each job route’s [ClassAd](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_1HTCondor_s_ClassAd.html) is constructed by combining each entry from the `JOB_ROUTER_ENTRIES` with the `JOB_ROUTER_DEFAULTS`. Attributes that are [set_](#setting-attributes) in `JOB_ROUTER_ENTRIES` will override those [set_](#setting-attributes) in `JOB_ROUTER_DEFAULTS`
 
-### JOB\_ROUTER\_ENTRIES
+### JOB_ROUTER_ENTRIES
 
 `JOB_ROUTER_ENTRIES` is a configuration variable whose default is set in `/etc/condor-ce/config.d/02-ce-*.conf` but may be overriden by the administrator in `/etc/condor-ce/config.d/99-local.conf`. This document outlines the many changes you can make to `JOB_ROUTER_ENTRIES` to fit your site’s needs.
 
-### JOB\_ROUTER\_DEFAULTS
+### JOB_ROUTER_DEFAULTS
 
 `JOB_ROUTER_DEFAULTS` is a python-generated configuration variable that sets default job route values that are required for the HTCondor-CE's functionality. To view its contents, run the following command:
 
@@ -33,7 +33,7 @@ user@host $ condor_ce_config_val JOB_ROUTER_DEFAULTS | sed 's/;/;\n/g'
 ```
 
 !!! warning
-    If a value is set in [JOB\_ROUTER\_DEFAULTS](#job59router59defaults) with `eval_set_<variable>`, override it by using `eval_set_<variable>` in the `JOB_ROUTER_ENTRIES`. Do this at your own risk as it may cause the CE to break.
+    If a value is set in [JOB\_ROUTER\_DEFAULTS](#job_router_defaults) with `eval_set_<variable>`, override it by using `eval_set_<variable>` in the `JOB_ROUTER_ENTRIES`. Do this at your own risk as it may cause the CE to break.
 
 !!! warning
     Do **not** set the `JOB_ROUTER_DEFAULTS` configuration variable yourself. This will cause the CE to stop functioning.
@@ -74,7 +74,7 @@ JOB_ROUTER_ENTRIES = [ \
 ]
 ```
 
-The name of the route will be useful in debugging since it shows up in the output of [condor\_ce\_job\_router\_info](troubleshoot-htcondor-ce#condor95ce95job95router95info), the [JobRouterLog](troubleshoot-htcondor-ce#jobrouterlog), and in the ClassAd of the routed job, which can be viewed with [condor\_ce\_q](troubleshoot-htcondor-ce#condor95ce95q) or [condor\_ce\_history](troubleshoot-htcondor-ce#condor95ce95history).
+The name of the route will be useful in debugging since it shows up in the output of [condor\_ce\_job\_router\_info](troubleshoot-htcondor-ce#condor_ce_job_router_info), the [JobRouterLog](troubleshoot-htcondor-ce#jobrouterlog), and in the ClassAd of the routed job, which can be viewed with [condor\_ce\_q](troubleshoot-htcondor-ce#condor_ce_q) or [condor\_ce\_history](troubleshoot-htcondor-ce#condor_ce_history).
 
 ### Writing multiple routes
 
@@ -121,7 +121,7 @@ JOB_ROUTER_ENTRIES = [ \
 
 ### Setting attributes for all routes
 
-To set an attribute that will be applied to all routes, you will need to ensure that `MERGE_JOB_ROUTER_DEFAULT_ADS` is set to `True` (check the value with [condor\_ce\_config\_val](troubleshoot-htcondor-ce#condor95ce95config95val)) and use the `[set_](#setting-attributes)` function in the `JOB_ROUTER_DEFAULTS`. The following configuration sets the `Periodic_Hold` attribute for all routes:
+To set an attribute that will be applied to all routes, you will need to ensure that `MERGE_JOB_ROUTER_DEFAULT_ADS` is set to `True` (check the value with [condor\_ce\_config\_val](troubleshoot-htcondor-ce#condor_ce_config_val)) and use the `[set_](#setting-attributes)` function in the `JOB_ROUTER_DEFAULTS`. The following configuration sets the `Periodic_Hold` attribute for all routes:
 
 ```
 # Use the defaults generated by the condor_ce_router_defaults script.  To add

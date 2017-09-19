@@ -6,7 +6,7 @@ In this document, you will find a collection of files and commands to help troub
 Known Issues
 ------------
 
-### SUBMIT\_EXPRS are not applied to jobs on the local HTCondor ###
+### SUBMIT_EXPRS are not applied to jobs on the local HTCondor ###
 
 If you are adding attributes to jobs submitted to your HTCondor pool with `SUBMIT_EXPRS`, these will *not* be applied to jobs that are entering your pool from the HTCondor-CE. To get around this, you will want to add the attributes to your [job routes](job-router-recipes). If the CE is the only entry point for jobs into your pool, you can get rid of `SUBMIT_EXPRS` on your backend. Otherwise, you will have to maintain your list of attributes both in your list of routes and in your `SUBMIT_EXPRS`.
 
@@ -60,7 +60,7 @@ This section contains common issues you may encounter using HTCondor-CE and next
 3.  Reproduce the issue
 
 !!! note
-    Before spending any time on troubleshooting, you should ensure that the state of configuration is as expected by running [condor\_ce\_reconfig](#condor95ce95reconfig).
+    Before spending any time on troubleshooting, you should ensure that the state of configuration is as expected by running [condor\_ce\_reconfig](#condor_ce_reconfig).
 
 ### Daemons fail to start
 
@@ -129,7 +129,7 @@ Jobs on the CE will be put on hold if they do not match any job routes after 30 
 
 **Next actions**
 
-Use [condor\_ce\_job\_router\_info](#condor95ce95job95router95info) to see why your idle job does not match any routes
+Use [condor\_ce\_job\_router\_info](#condor_ce_job_router_info) to see why your idle job does not match any routes
 
 #### Idle jobs on CE: Verify correct operation between the CE and your local batch system
 
@@ -141,7 +141,7 @@ HTCondor-CE submits jobs directly to an HTCondor batch system via the JobRouter,
 
 1.  Check the [JobRouterLog](#jobrouterlog) for failures.
 2.  Verify that the local HTCondor is functional.
-3.  Use [condor\_ce\_config\_val](#condor95ce95config95val) to verify that the `JOB_ROUTER_SCHEDD2_NAME`, `JOB_ROUTER_SCHEDD2_POOL`, and `JOB_ROUTER_SCHEDD2_SPOOL` configuration variables are set to the hostname of your CE, the hostname and port of your local HTCondor’s collector, and the location of your local HTCondor’s spool directory, respectively.
+3.  Use [condor\_ce\_config\_val](#condor_ce_config_val) to verify that the `JOB_ROUTER_SCHEDD2_NAME`, `JOB_ROUTER_SCHEDD2_POOL`, and `JOB_ROUTER_SCHEDD2_SPOOL` configuration variables are set to the hostname of your CE, the hostname and port of your local HTCondor’s collector, and the location of your local HTCondor’s spool directory, respectively.
 4.  Use `condor_config_val QUEUE_SUPER_USER_MAY_IMPERSONATE` and verify that it is set to `.*`.
 
 ##### For non-HTCondor batch systems
@@ -196,7 +196,7 @@ If you are submitting your job from a separate submit host to the CE, it stays i
 
 #### Remote idle jobs: Can you contact the CE?
 
-To check basic connectivity to a CE, use [condor\_ce\_ping](#condor95ce95ping):
+To check basic connectivity to a CE, use [condor\_ce\_ping](#condor_ce_ping):
 
 **Symptoms**
 
@@ -207,7 +207,7 @@ ERROR: couldn't locate condorce.example.com!
 
 **Next actions**
 
-1.  Make sure that the HTCondor-CE daemons are running with [condor\_ce\_status](#condor95ce95status).
+1.  Make sure that the HTCondor-CE daemons are running with [condor\_ce\_status](#condor_ce_status).
 2.  Verify that your CE is reachable from your submit host, replacing `condorce.example.com` with the hostname of your CE:
 
         :::console
@@ -215,7 +215,7 @@ ERROR: couldn't locate condorce.example.com!
 
 #### Remote idle jobs: Are you authorized to run jobs on the CE?
 
-The CE will only accept jobs from users that authenticate via LCMAPS, grid mapfile, or GUMS. You can use [condor\_ce\_ping](#condor95ce95ping) to check if you are authorized and what user your proxy is being mapped to.
+The CE will only accept jobs from users that authenticate via LCMAPS, grid mapfile, or GUMS. You can use [condor\_ce\_ping](#condor_ce_ping) to check if you are authorized and what user your proxy is being mapped to.
 
 **Symptoms**
 
@@ -243,7 +243,7 @@ Notice the failures in the above message: `Remote Mapping: gsi@unmapped` and `Au
 
 ### Jobs go on hold
 
-Jobs will be put on held with a `HoldReason` attribute that can be inspected with [condor\_ce\_q](#condor95ce95q):
+Jobs will be put on held with a `HoldReason` attribute that can be inspected with [condor\_ce\_q](#condor_ce_q):
 
 ``` console
 user@host $ condor_ce_q -l <JOB-ID> -attr HoldReason
@@ -276,13 +276,13 @@ The HTCondor-CE only accepts jobs that have `universe` in their submit files set
 
     replacing `condorce.example.com` with the hostname of the CE.
 
-#### Held jobs: Non-existent route or entry in JOB\_ROUTER\_ENTRIES
+#### Held jobs: Non-existent route or entry in JOB_ROUTER_ENTRIES
 
 Jobs on the CE will be put on hold if they do not match any job routes within 30 minutes.
 
 **Next actions**
 
-Use [condor\_ce\_job\_router\_info](#condor95ce95job95router95info) to see why your idle job does not match any routes.
+Use [condor\_ce\_job\_router\_info](#condor_ce_job_router_info) to see why your idle job does not match any routes.
 
 
 ### Identifying the corresponding job ID on the local batch system
@@ -291,7 +291,7 @@ When troubleshooting interactions between your CE and your local batch system, y
 
 #### HTCondor batch systems
 
-1.  To inspect the CE’s job ad, use [condor\_ce\_q](#condor95ce95q) or [condor\_ce\_history](#condor95ce95history):
+1.  To inspect the CE’s job ad, use [condor\_ce\_q](#condor_ce_q) or [condor\_ce\_history](#condor_ce_history):
 
     - Use `condor_ce_q` if the job is still in the CE’s queue:
 
@@ -313,7 +313,7 @@ When HTCondor-CE records the corresponding batch system job ID, it is written in
 lsf/20141206/482046
 ```
 
-1.  To inspect the CE’s job ad, use [condor\_ce\_q](#condor95ce95q):
+1.  To inspect the CE’s job ad, use [condor\_ce\_q](#condor_ce_q):
 
         :::console
         user@host $ condor_ce_q <JOB-ID> -af GridJobId
@@ -354,7 +354,7 @@ HTCondor-CE Troubleshooting Tools
 
 HTCondor-CE has its own separate set of of the HTCondor tools with **ce** in the name (i.e., `condor_ce_submit` vs `condor_submit`). Some of the the commands are only for the CE (e.g., `condor_ce_run` and `condor_ce_trace`) but many of them are just HTCondor commands configured to interact with the CE (e.g., `condor_ce_q`, `condor_ce_status`). It is important to differentiate the two: `condor_ce_config_val` will provide configuration values for your HTCondor-CE while `condor_config_val` will provide configuration values for your HTCondor batch system. If you are not running an HTCondor batch system, the non-CE commands will return errors.
 
-### condor\_ce\_trace
+### condor_ce_trace
 
 #### Usage
 
@@ -375,7 +375,7 @@ Replacing the `condorce.example.com` with the hostname of the CE. If you are fam
 2.  **If you see “gsi@unmapped” in the “Remote Mapping” line:** Either your credentials are not mapped on the CE or authentication is not set up at all. To set up authentication, refer to our [installation document](install-htcondor-ce#configuring-authentication).
 3.  **If the job submits but does not complete:** Look at the status of the job and perform the relevant [troubleshooting steps](#htcondor-ce-troubleshooting-items).
 
-### condor\_ce\_run
+### condor_ce_run
 
 #### Usage
 
@@ -398,14 +398,14 @@ Replacing the `condorce.example.com` text with the hostname of the CE. To disabl
 
 #### Troubleshooting
 
-1.  **If you do not see any results:** `condor_ce_run` does not display results until the job completes on the CE, which may take several minutes or longer if the CE is busy. In the meantime, can use [condor\_ce\_q](#condor95ce95q) in a separate terminal to track the job on the CE. If you never see any results, use [condor\_ce\_trace](#condor95ce95trace) to pinpoint errors.
-2.  **If you see an error message that begins with “Failed to…”:** Check connectivity to the CE with [condor\_ce\_trace](#condor95ce95trace) or [condor\_ce\_ping](#condor95ce95ping)
+1.  **If you do not see any results:** `condor_ce_run` does not display results until the job completes on the CE, which may take several minutes or longer if the CE is busy. In the meantime, can use [condor\_ce\_q](#condor_ce_q) in a separate terminal to track the job on the CE. If you never see any results, use [condor\_ce\_trace](#condor_ce_trace) to pinpoint errors.
+2.  **If you see an error message that begins with “Failed to…”:** Check connectivity to the CE with [condor\_ce\_trace](#condor_ce_trace) or [condor\_ce\_ping](#condor_ce_ping)
 
-### condor\_\ce_submit
+### condor_ce_submit
 
 See the [submitting to HTCondor-CE](submit-htcondor-ce) document for details.
 
-### condor\_ce\_ping
+### condor_ce_ping
 
 #### Usage
 
@@ -446,7 +446,7 @@ Authorized:                  TRUE
 2.  **If you see “gsi@unmapped” in the “Remote Mapping” line**, this means that either your credentials are not mapped on the CE or that authentication is not set up at all. To set up authentication, refer to our [installation document](InstallHTCondorCE#5_2_Setup_Authorization).
 
 
-### condor\_ce\_q
+### condor_ce_q
 
 #### Usage
 
@@ -501,10 +501,10 @@ If the jobs that you are submiting to a CE are not completing, `condor_ce_q` can
         :::console
         user@host $ condor_ce_q -name condorce.example.com -pool condorce.example.com:9619 -l <Job ID> | grep HoldReason
 
-3.  **If a job is idle:** The most common cause is that it is not matching any routes in the CE’s job router. To find out whether this is the case, use the [condor\_ce\_job\_router\_info](#condor95ce95job95router95info).
+3.  **If a job is idle:** The most common cause is that it is not matching any routes in the CE’s job router. To find out whether this is the case, use the [condor\_ce\_job\_router\_info](#condor_ce_job_router_info).
 
 
-### condor\_ce\_history
+### condor_ce_history
 
 #### Usage
 
@@ -524,11 +524,11 @@ user@host $ condor_ce_history -name condorce.example.com -pool condorce.example.
     If you run the `condor_ce_history` command on the CE that you are testing, omit the `-name` and `-pool` options. `condor_ce_history` takes the same arguments as `condor_history` and is documented in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/condor_history.html).
 
 
-### condor\_ce\_job\_router\_info
+### condor_ce_job_router_info
 
 #### Usage
 
-Use the `condor_ce_job_router_info` command to help troubleshoot your routes and how jobs will match to them. To see all of your routes (the output is long because it combines your routes with the [JOB\_ROUTER\_DEFAULTS](job-router-recipes#job95router95defaults) configuration variable):
+Use the `condor_ce_job_router_info` command to help troubleshoot your routes and how jobs will match to them. To see all of your routes (the output is long because it combines your routes with the [JOB\_ROUTER\_DEFAULTS](job-router-recipes#job_router_defaults) configuration variable):
 
 ``` console
 root@host # condor_ce_job_router_info -config
@@ -587,7 +587,7 @@ root@host # condor_ce_job_router_info -match-jobs -ignore-prior-routing -jobads 
 3.  **If it is unclear why jobs are matching a route:** wrap the route's requirements expression in [debug()](job-router-recipes#debugging-routes) and check the [JobRouterLog](#jobrouterlog) for more information.
 
 
-### condor\_ce\_router\_q
+### condor_ce_router_q
 
 #### Usage
 
@@ -600,7 +600,7 @@ user@host $ condor_ce_router_q
 `condor_ce_router_q` takes the same options as `condor_router_q` and `condor_q` and is documented in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/condor_router_q.html)
 
 
-### condor\_ce\_status
+### condor_ce_status
 
 #### Usage
 
@@ -628,7 +628,7 @@ DAEMON_LIST: MASTER COLLECTOR SCHEDD JOB_ROUTER, SHARED_PORT, SHARED_PORT
 If you do not see these daemons in the output of `condor_ce_status`, check the [Master log](#masterlog) for errors.
 
 
-### condor\_ce\_config\_val
+### condor_ce_config_val
 
 #### Usage
 
@@ -653,7 +653,7 @@ user@host $ condor_ce_config_val -config
 `condor_ce_config_val` takes the same arguments as `condor_config_val` and is documented in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/condor_config_val.html).
 
 
-### condor\_ce\_reconfig
+### condor_ce_reconfig
 
 #### Usage
 
@@ -663,7 +663,7 @@ To ensure that your configuration changes have taken effect, run `condor_ce_reco
 user@host $ condor_ce_reconfig
 ```
 
-### condor\_ce\_{on,off,restart}
+### condor_ce_{on,off,restart}
 
 #### Usage
 
@@ -783,13 +783,13 @@ The HTCondor-CE schedd log contains information on all jobs that are submitted t
 
 -   Corrupted `job_queue.log`:
 
-        02/07/17 10:55:49 WARNING: Encountered corrupt log record 95654 (byte offset 5046225)
+        02/07/17 10:55:49 WARNING: Encountered corrupt log record _654 (byte offset 5046225)
         02/07/17 10:55:49 103 1354325.0 PeriodicRemove ( StageInFinish > 0 ) 105
-        02/07/17 10:55:49 Lines following corrupt log record 95654 (up to 3):
+        02/07/17 10:55:49 Lines following corrupt log record _654 (up to 3):
         02/07/17 10:55:49 103 1346101.0 RemoteWallClockTime 116668.000000
         02/07/17 10:55:49 104 1346101.0 WallClockCheckpoint
         02/07/17 10:55:49 104 1346101.0 ShadowBday
-        02/07/17 10:55:49 ERROR "Error: corrupt log record 95654 (byte offset 5046225) occurred inside closed transaction,
+        02/07/17 10:55:49 ERROR "Error: corrupt log record _654 (byte offset 5046225) occurred inside closed transaction,
                           recovery failed" at line 1080 in file /builddir/build/BUILD/condor-8.4.8/src/condor_utils/classad_log.cpp
 
     This means `/var/lib/condor-ce/spool/job_queue.log` has been corrupted and you will need to hand-remove the offending record by searching for the text specified after the `Lines following corrupt log record...` line. The most common culprit of the corruption is that the disk containing the `job_queue.log` has filled up. To avoid this problem, you can change the location of `job_queue.log` by setting `JOB_QUEUE_LOG` in `/etc/condor-ce/config.d/` to a path, preferably one on a large SSD.
@@ -841,7 +841,7 @@ The HTCondor-CE job router log produced by the job router itself and thus contai
 
     In parentheses are the original HTCondor-CE job ID (e.g., `86.0`) and the resultant job ID on the HTCondor batch system (e.g., `205.0`)
 
--   If your job is not routed, there will not be any evidence of it within the log itself. To investigate why your jobs are not being considered for routing, use the [condor\_ce\_job\_router\_info](#condor95ce95job95router95info)
+-   If your job is not routed, there will not be any evidence of it within the log itself. To investigate why your jobs are not being considered for routing, use the [condor\_ce\_job\_router\_info](#condor_ce_job_router_info)
 -   **HTCondor batch systems only**: The following error occurs when the job router daemon cannot submit the routed job:
 
         :::text

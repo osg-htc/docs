@@ -239,17 +239,17 @@ If you want to limit or disable jobs running locally on your CE, you will need t
 
 The two universes are effectively the same (scheduler universe launches a starter process for each job), so we will be configuring them in unison.
 
-- **To change the default limit** on the number of locally run jobs (the current default is 20), add the following to `/etc/condor-ce/config.d/99-local.conf`: 
+- **To change the default limit** on the number of locally run jobs (the current default is 20), add the following to `/etc/condor-ce/config.d/99-local.conf`:
 
         START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning < %RED%<JOB-LIMIT>%ENDCOLOR%
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 
-- **To only allow a specific user** to start locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`: 
+- **To only allow a specific user** to start locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`:
 
         START_LOCAL_UNIVERSE = target.Owner =?= "%RED%<USERNAME>%ENDCOLOR%"
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 
-- **To disable** locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`: 
+- **To disable** locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`:
 
         START_LOCAL_UNIVERSE = False
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
@@ -369,9 +369,9 @@ There are different ways to make sure that your HTCondor-CE host is working well
 
 -   Perform automated validation by running [RSV](../monitoring/install-rsv)
 -   Manually verify your HTCondor-CE using [HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce); useful tools include:
-    -   [condor\_ce\_run](troubleshoot-htcondor-ce#condor59ce59run)
-    -   [condor\_ce\_trace](troubleshoot-htcondor-ce#condor59ce59trace)
-    -   [condor\_submit](troubleshoot-htcondor-ce#condor59submit)
+    -   [condor\_ce\_run](troubleshoot-htcondor-ce#condor_ce_run)
+    -   [condor\_ce\_trace](troubleshoot-htcondor-ce#condor_ce_trace)
+    -   [condor\_submit](troubleshoot-htcondor-ce#condor_submit)
 
 Troubleshooting HTCondor-CE
 ---------------------------
@@ -441,4 +441,3 @@ Find instructions to request a host certificate [here](https://twiki.grid.iu.edu
 | Htcondor-CE  | tcp      | 9619        | X       |          | HTCondor-CE shared port |
 
 Allow inbound and outbound network connection to all internal site servers, such as GUMS and the batch system head-node only ephemeral outgoing ports are necessary.
-
