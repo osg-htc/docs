@@ -22,7 +22,7 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Ensure the host has [a supported operating system](../release/supported_platforms)
 - Obtain root access to the host
 - Prepare the [required Yum repositories](../common/yum)
-- Install [CA certificates](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth)
+- Install [CA certificates](../common/ca)
 
 Installing GUMS
 ---------------
@@ -199,7 +199,7 @@ The GUMS service is actually a web application running within the Tomcat web app
 
     | Software          | Service name                          | Notes                                                                                  |
     |:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-    | Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui) for more info |
+    | Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca/#startstop-fetch-crl-a-quick-guide) for more info |
     | MySQL             | `mysqld`                              |                                                                                        |
     | Tomcat            | `tomcat6`                             |                                                                                        |
 
@@ -207,7 +207,7 @@ The GUMS service is actually a web application running within the Tomcat web app
 
     | Software          | Service name                          | Notes                                                                                  |
     |:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-    | Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui) for more info |
+    | Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca/#startstop-fetch-crl-a-quick-guide) for more info |
     | MariaDB           | `mariadb`                             |                                                                                        |
     | Tomcat            | `tomcat`                              |                                                                                        |
 

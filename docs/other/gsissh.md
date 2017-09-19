@@ -16,10 +16,6 @@ Users and Groups
 
 The RPM installation will try to create the `gsisshd` user and group and the `/var/empty/gsisshd` directory with the correct ownership if they are not present. If you are using a configuration management system or ROCKS, you should make sure that these users and groups are created before installing the RPMs to avoid potential issues. The gsisshd user should have an empty home directory. By default, this is home directory set to `/var/empty/gsisshd` and belongs to the `gsisshd` user and group. You may change it if needed to something else as long as the ownerships remain the same.
 
-Networking
-----------
-
-You'll find more client specific details also in the [Firewall section](#Firewall_Considerations) of this document.
 
 Installation procedure
 ======================
@@ -33,8 +29,8 @@ GSI OpenSSH Installation
 
 Start with installing GSI OpenSSH from the repository
 
-``` rootscreen
-yum install gsi-openssh-server gsi-openssh-clients
+``` console
+[root@server]# yum install gsi-openssh-server gsi-openssh-clients
 ```
 
 In addition, you'll need to install CA certificates in order for GSIOpenSSH to work. You can follow the instructions below in order to install them:
@@ -64,11 +60,9 @@ Other Files
 | Service or Process | File                              | Description      |
 |:-------------------|:----------------------------------|:-----------------|
 | gsisshd            | `/etc/grid-security/hostcert.pem` | Host certificate |
-| gsisshd            | `/etc/grid-security/hostcert.pem` | Key certificate  |
+| gsisshd            | `/etc/grid-security/hostkey.pem`  | X.509 host key   |
 | gsisshd            | `/etc/gsissh/ssh_host_rsa_key`    | RSA Host key     |
 
-Configuration
--------------
 Configuration
 -------------
 In order to get a running instance of the GSI OpenSSH server, you'll
@@ -104,7 +98,7 @@ of the lines in the file are commented out using a `#` at the beginning of the l
 
 An example of the `/etc/grid-security/grid-mapfile` follows:
 
-``` file
+```
 "/DC=org/DC=doegrids/OU=People/CN=USER NAME 123456" useraccount
 ```
 
@@ -113,14 +107,14 @@ Using LCMAPS and GUMS for authorization
 
 In order to use LCMAPS callouts with GSI OpenSSH, you'll first need to edit `/etc/grid-security/gsi-authz.conf` to indicate that Globus should do a GSI callout for authorization. The file should contain the following:
 
-``` file
+```
 globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout
 ```
 
 so that LCMAPS is used. Next, install the lcmaps rpms:
 
-``` rootscreen
-yum install lcmaps lcas-lcmaps-gt4-interface
+``` console
+[root@server]# yum install lcmaps lcas-lcmaps-gt4-interface
 ```
 
 Finally, you'll need to modify `/etc/lcmaps.db` so that the `gumsclient` entry has the correct endpoint for your gums server.
@@ -197,5 +191,5 @@ $
 How to get Help?
 ================
 
-To get assistance please use this [Help Procedure](HelpProcedure).
+To get assistance please use this [Help Procedure](../common/help).
 

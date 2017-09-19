@@ -156,7 +156,7 @@ In addition to the GridFTP service itself, there are a number of supporting serv
 
 | Software  | Service name                          | Notes                                                                                  |
 |:----------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui) for more info |
+| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca/#startstop-fetch-crl-a-quick-guide) for more info |
 | Gratia    | `gratia-probes-cron`                  | Accounting software                                                                    |
 | GridFTP   | `globus-gridftp-server`               |                                                                                        |
 
@@ -225,4 +225,3 @@ For more details on overall firewall configuration, please see our [firewall doc
 | GridFTP data channels   | tcp      | `GLOBUS_TCP_PORT_RANGE`   | X       |          | contiguous range of ports is necessary. |
 | GridFTP data channels   | tcp      | `GLOBUS_TCP_SOURCE_RANGE` |         | X        | contiguous range of ports is necessary. |
 | GridFTP control channel | tcp      | 2811                      | X       |          |                                         |
-
