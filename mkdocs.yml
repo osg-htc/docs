@@ -50,7 +50,6 @@ pages:
 - In-Progress Docs:
   - 'CA Updater': 'common/ca_updater.md'
   - 'Certificate Request Scripts': 'common/cert_scripts.md'
-  - 'Job Router Recipe': 'compute-element/job_router.md'
 - Deprecated Software:
   - 'BeStMan Overview': 'data/bestman-overview.md'
   - 'BeStMan Install': 'data/bestman-install.md'
@@ -64,4 +63,3 @@ markdown_extensions:
   - codehilite
   - toc(permalink=true)
   - osg_markdown.colors
-
