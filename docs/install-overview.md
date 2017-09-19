@@ -40,7 +40,7 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 
 ### Installing and Managing Certificates for Site Security ###
 
--   [Installing the grid certificate authorities (CAs)](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth)
+-   [Installing the grid certificate authorities (CAs)](common/ca)
 -   [How do I get PKI host and service X.509 certificates?](https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/GetHostServiceCertificates)
 -   [Automatically updating the grid certificate authorities (CAs)](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaCertsUpdater)
 -   [SHA-2 certificates and minimum required OSG software versions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SHA2Compliance)

@@ -5,7 +5,7 @@
 ---++ About This Guide
 The [[http://research.cs.wisc.edu/htcondor/manual/v8.2/5_4HTCondor_Job.html][JobRouter]] is at the heart of HTCondor-CE and allows admins to transform and direct jobs to specific batch systems. Customizations are made in the form of job routes where each route corresponds to a separate job transformation: If an incoming job matches a job route's requirements, the route creates a transformed job (referred to as the 'routed job') that is then submitted to the batch system. The CE package comes with default routes located in =/etc/condor-ce/config.d/02-ce-*.conf= that provide enough basic functionality for a small site.
 
-If you have needs beyond delegating all incoming jobs to your batch system as they are, this document provides examples of common job routes and job route problems. 
+If you have needs beyond delegating all incoming jobs to your batch system as they are, this document provides examples of common job routes and job route problems.
 
 %STARTSECTION{"RoutePitfalls"}%
 ---++ Quirks and Pitfalls
@@ -129,7 +129,7 @@ JOB_ROUTER_ENTRIES = [ \
      TargetUniverse = 5; \
      name = "C-style comments"; \
      <span style="background-color: #FFCCFF;"><b>/* This is a comment */ \</b></span>
-] 
+]
 </pre>
 
 For =condor_ce_version= 8.2.x or greater, you can also use =#= to comment out single lines:
@@ -138,8 +138,8 @@ For =condor_ce_version= 8.2.x or greater, you can also use =#= to comment out si
 JOB_ROUTER_ENTRIES = [ \
      TargetUniverse = 5; \
      name = "Hash comments"; \
-     <span style="background-color: #FFCCFF;"><b># BrokenAttribute = "commented out"; \</b></span> 
-] 
+     <span style="background-color: #FFCCFF;"><b># BrokenAttribute = "commented out"; \</b></span>
+]
 </pre>
 
 ---+++ Setting attributes for all routes
@@ -168,13 +168,13 @@ JOB_ROUTER_ENTRIES = [ \
      name = "Filtering by queue"; \
      queue = "not-analy"; \
      <span style="background-color: #FFCCFF;"><b>Requirements = (queue =?= "analy"); \</b></span>
-] 
+]
 </pre>
 
 This is because when evaluating the route requirement, the job route will compare its own =queue= attribute to "analy" and see that it does not match. You can read more about comparing two !ClassAds in the [[http://research.cs.wisc.edu/htcondor/manual/v8.2/4_1HTCondor_s_ClassAd.html#43151][HTCondor manual]].
 
 %NOTE% If you have an HTCondor batch system, note the difference with [[#RoutedReq][set_requirements]].
-%NOTE% The !JobRouter matches jobs to routes in a round-robin fashion. This means that if a job can match to multiple routes, it can be routed by any of them! So when writing job routes, make sure that they are exclusive to each other and that your jobs can only match to a single route. 
+%NOTE% The !JobRouter matches jobs to routes in a round-robin fashion. This means that if a job can match to multiple routes, it can be routed by any of them! So when writing job routes, make sure that they are exclusive to each other and that your jobs can only match to a single route.
 
 #GlideIn
 ---++++ Glidein queue
@@ -186,7 +186,7 @@ JOB_ROUTER_ENTRIES = [ \
      TargetUniverse = 5; \
      name = "Filtering by queue"; \
      <span style="background-color: #FFCCFF;"><b>Requirements = (TARGET.queue =?= "analy"); \</b></span>
-] 
+]
 </pre>
 
 ---++++ Job submitter
@@ -198,7 +198,7 @@ JOB_ROUTER_ENTRIES = [ \
      TargetUniverse = 5; \
      name = "Filtering by job submitter"; \
      <span style="background-color: #FFCCFF;"><b>Requirements = (TARGET.Owner =?= "usatlas2"); \</b></span>
-] 
+]
 </pre>
 
 Alternatively, you can match based on regular expression. The following entry routes jobs to the PBS batch system iff the submitter's name begins with =usatlas=:
@@ -209,7 +209,7 @@ JOB_ROUTER_ENTRIES = [ \
      TargetUniverse = 9; \
      name = "Filtering by job submitter (regular expression)"; \
      <span style="background-color: #FFCCFF;"><b>Requirements = regexp("^usatlas", TARGET.Owner); \</b></span>
-] 
+]
 </pre>
 
 ---++++ VOMS attribute
@@ -222,12 +222,12 @@ JOB_ROUTER_ENTRIES = [ \
      TargetUniverse = 9; \
      name = "Filtering by VOMS attribute (regex)"; \
      <span style="background-color: #FFCCFF;"><b>Requirements = regexp("\/cms\/Role\=pilot", TARGET.x509UserProxyFirstFQAN); \</b></span>
-] 
+]
 </pre>
 
 ---+++ Setting a default&hellip;
 
-This section outlines how to set default job limits, memory, cores, queue, and maximum walltime. For an example on how users can override these defaults, consult [[Documentation.Release3/SubmittingHTCondorCE#Route_defaults][this document]]. 
+This section outlines how to set default job limits, memory, cores, queue, and maximum walltime. For an example on how users can override these defaults, consult [[Documentation.Release3/SubmittingHTCondorCE#Route_defaults][this document]].
 
 ---++++ Maximum number of jobs
 
@@ -250,7 +250,7 @@ JOB_ROUTER_ENTRIES = [ \
      name = "Request memory"; \
      /* Set the requested memory to 1 GB */ \
      <span style="background-color: #FFCCFF;"><b>set_default_maxMemory = 1000; \</b></span>
-] 
+]
 </pre>
 
 ---++++ Number of cores to request
@@ -264,7 +264,7 @@ JOB_ROUTER_ENTRIES = [ \
      name = "Request CPU"; \
      /* Set the requested cores to 8 */ \
      <span style="background-color: #FFCCFF;"><b>set_default_xcount = 8; \</b></span>
-] 
+]
 </pre>
 
 ---++++ Maximum walltime
@@ -278,7 +278,7 @@ JOB_ROUTER_ENTRIES = [ \
      name = "Setting WallTime"; \
      /* Set the max walltime to 1 hr */ \
      <span style="background-color: #FFCCFF;"><b>set_default_maxWallTime = 60; \</b></span>
-] 
+]
 </pre>
 
 ---+++ Editing attributes&hellip;
@@ -304,7 +304,7 @@ JOB_ROUTER_ENTRIES = [ \
      TargetUniverse = 9; \
      name = "Copying attributes"; \
      <span style="background-color: #FFCCFF;"><b>copy_environment = "Original_Environment"; \</b></span>
-] 
+]
 </pre>
 
 ---++++ Removing attributes
@@ -317,7 +317,7 @@ JOB_ROUTER_ENTRIES = [ \
      TargetUniverse = 9; \
      name = "Copying attributes"; \
      <span style="background-color: #FFCCFF;"><b>delete_environment = True; \</b></span>
-] 
+]
 </pre>
 
 #SettingAttributes
@@ -331,7 +331,7 @@ JOB_ROUTER_ENTRIES = [ \
      TargetUniverse = 9; \
      name = "Setting an attribute"; \
      <span style="background-color: #FFCCFF;"><b>set_Rank = 5; \</b></span>
-] 
+]
 </pre>
 
 ---++++ Setting attributes with !ClassAd expressions
@@ -346,12 +346,12 @@ JOB_ROUTER_ENTRIES = [ \
      TargetUniverse = 9; \
      name = "Setting an attribute with a !ClassAd expression"; \
      <span style="background-color: #FFCCFF;"><b>eval_set_Experiment = strcat("atlas.", Owner); \</b></span>
-] 
+]
 </pre>
 
 ---+++ Limiting the number of...
 
-This section outlines how to limit the number of total or idle jobs in a specific route (i.e., if this limit is reached, jobs will no longer be placed in this route). 
+This section outlines how to limit the number of total or idle jobs in a specific route (i.e., if this limit is reached, jobs will no longer be placed in this route).
 
 %NOTE% If you are using an HTCondor batch system, limiting the number of jobs is not the preferred solution: HTCondor manages fair share on its own via [[http://research.cs.wisc.edu/htcondor/manual/v8.2/3_4User_Priorities.html][user priorities and group accounting]].
 
@@ -408,7 +408,7 @@ JOB_ROUTER_ENTRIES = [ \
      TargetUniverse = 9; \
      name = "Debugging a difficult !ClassAd expression"; \
      <span style="background-color: #FFCCFF;"><b>eval_set_Experiment = debug(strcat("atlas", Name)); \</b></span>
-] 
+]
 </pre>
 %ENDSECTION%
 
@@ -418,7 +418,7 @@ You will find the debugging output in =/var/log/condor-ce/JobRouterLog=.
 
 ---+++ Setting periodic hold, release or remove
 
-To release, remove or put a job on hold if it meets certain criteria, use the =PERIODIC_*= family of attributes. By default, periodic expressions are evaluated once every 300 seconds but this can be changed by setting PERIODIC_EXPR_INTERVAL in your CE's configuration. 
+To release, remove or put a job on hold if it meets certain criteria, use the =PERIODIC_*= family of attributes. By default, periodic expressions are evaluated once every 300 seconds but this can be changed by setting PERIODIC_EXPR_INTERVAL in your CE's configuration.
 
 <pre class="file">
 JOB_ROUTER_ENTRIES = [ \
@@ -430,7 +430,7 @@ JOB_ROUTER_ENTRIES = [ \
      <span style="background-color: #FFCCFF;"><b>set_Periodic_Remove = ( RemoteWallClockTime > (3*24*60*60 + 5*60) ); \</b></span>
      <span style="background-color: #FFCCFF;"><b>/* Release routed jobs if the condor_starter couldn't start the executable and 'VMGAHP_ERR_INTERNAL' is in the HoldReason */ \</b></span>
      <span style="background-color: #FFCCFF;"><b>set_Periodic_Release = HoldReasonCode == 6 && regexp("VMGAHP_ERR_INTERNAL", HoldReason); \</b></span>
-] 
+]
 </pre>
 
 #RoutedReq
@@ -449,7 +449,7 @@ JOB_ROUTER_ENTRIES = [ \
 
 ---+++ Setting accounting groups
 
-To assign jobs to an HTCondor accounting group to manage fair share on your local batch system, we recommend using [[Documentation/Release3.InstallHTCondorCE#AccountingGroups][UID and ExtAttr tables]]. 
+To assign jobs to an HTCondor accounting group to manage fair share on your local batch system, we recommend using [[Documentation/Release3.InstallHTCondorCE#AccountingGroups][UID and ExtAttr tables]].
 
 ---++ Routes for non-HTCondor Batch Systems
 
@@ -463,7 +463,7 @@ JOB_ROUTER_ENTRIES = [ \
      TargetUniverse = 9; \
      name = "Setting batch system queues"; \
      <span style="background-color: #FFCCFF;"><b>set_default_queue = "osg_queue"; \</b></span>
-] 
+]
 </pre>
 
 ---+++ Setting batch system directives
@@ -482,7 +482,7 @@ JOB_ROUTER_ENTRIES = [ \
      TargetUniverse = 9; \
      name = "Setting job submit variables"; \
      <span style="background-color: #FFCCFF;"><b>set_default_remote_cerequirements = strcat("Walltime == 3600 && AccountingGroup == \"", x509UserProxyFirstFQAN, "\""); \</b></span>
-] 
+]
 </pre>
 
 With =/etc/blahp/pbs_local_submit_attributes.sh= containing.
