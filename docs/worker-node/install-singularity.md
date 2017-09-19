@@ -9,19 +9,24 @@ jobs from the pilot's files and processes and from other users' files
 and processes.  It also supplies a chroot environment in order to run
 user jobs in different operating system images under one Linux kernel.
 
-For operating systems older than Red Hat Enterprise Linux (RHEL) 7.4,
+For operating system kernels older than the one released for
+Red Hat Enterprise Linux (RHEL) 7.4,
 singularity needs to use kernel capabilities that are only accessible
 to the root user, so it has to be installed with setuid-root
 executables.  Securing setuid-root programs is difficult, but singularity
 keeps that privileged code to a
 [minimum](http://singularity.lbl.gov/docs-security) to keep the
-vulnerability low.  Beginning in RHEL 7.4, there is a new
+vulnerability low.  Beginning with the kernel released with RHEL 7.4,
+there is a new
 [technology preview feature](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/7.4_Release_Notes/index.html#technology_previews_kernel)
 to allow unprivileged bind mounts in user name spaces, which allows
 singularity to run as an unprivileged user.  The OSG has installed
-singularity in [cvmfs](install-cvmfs), so if you have RHEL 7.4 or later you
+singularity in [cvmfs](install-cvmfs), so if you have a RHEL 7.4 kernel
+or later you
 can avoid installing singularity at all and reduce vulnerability even
-further. 
+further.  The RHEL 7.4 kernel (version 3.10.0-693) is available as a
+security update for all RHEL 7 based versions, even on systems that
+have not updated to RHEL 7.4.
 
 The document is intended for system administrators who wish to either
 install singularity or enable it to be run as an unprivileged user.
@@ -40,10 +45,11 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Obtain root access to the host
 - If you're installing singularity, prepare the [required Yum repositories](../common/yum)
 
-## Using Singularity via CVMFS (EL 7.4 only)
+## Using Singularity via CVMFS (EL 7 only)
 
-If you are using a RHEL 7.4 variant OS, you can skip installation
-altogether and use singularity through CVMFS:
+If the operating system is an EL 7 variant, and has been updated to EL
+7.4 or the 7.4 kernel (3.10.0-693 or greater), you can skip
+installation altogether and use singularity through CVMFS:
 
 1. Set the `namespace.unpriv_enable=1` boot option.  The easiest way
     to do this is to add it in `/etc/sysconfig/grub` to the end of the
