@@ -23,7 +23,7 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Ensure the host has [a supported operating system](../release/supported_platforms)
 - Obtain root access to the host
 - Prepare the [required Yum repositories](../common/yum)
-- Install [CA certificates](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth)
+- Install [CA certificates](../common/ca)
 
 Installing HTCondor-CE
 ----------------------
@@ -242,17 +242,17 @@ If you want to limit or disable jobs running locally on your CE, you will need t
 
 The two universes are effectively the same (scheduler universe launches a starter process for each job), so we will be configuring them in unison.
 
-- **To change the default limit** on the number of locally run jobs (the current default is 20), add the following to `/etc/condor-ce/config.d/99-local.conf`: 
+- **To change the default limit** on the number of locally run jobs (the current default is 20), add the following to `/etc/condor-ce/config.d/99-local.conf`:
 
         START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning < %RED%<JOB-LIMIT>%ENDCOLOR%
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 
-- **To only allow a specific user** to start locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`: 
+- **To only allow a specific user** to start locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`:
 
         START_LOCAL_UNIVERSE = target.Owner =?= "%RED%<USERNAME>%ENDCOLOR%"
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 
-- **To disable** locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`: 
+- **To disable** locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`:
 
         START_LOCAL_UNIVERSE = False
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
@@ -347,7 +347,7 @@ In addition to the HTCondor-CE job gateway service itself, there are a number of
 
 | Software          | Service name                          | Notes                                                                                  |
 |:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui) for more info |
+| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca/#startstop-fetch-crl-a-quick-guide) for more info |
 | Gratia            | `gratia-probes-cron`                  | Accounting software                                                                    |
 | Your batch system | `condor` or `pbs_server` or …         |                                                                                        |
 | HTCondor-CE       | `condor-ce`                           |                                                                                        |
@@ -445,4 +445,3 @@ Find instructions to request a host certificate [here](https://twiki.grid.iu.edu
 | Htcondor-CE  | tcp      | 9619        | X       |          | HTCondor-CE shared port |
 
 Allow inbound and outbound network connection to all internal site servers, such as GUMS and the batch system head-node only ephemeral outgoing ports are necessary.
-

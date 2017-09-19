@@ -33,7 +33,7 @@ If you want to install an RPM for one of our predefined CA certificates, you hav
 
 ### Which set of CAs?
 
-1.  (*recommended*) The OSG CA certificates. This is similar to the IGTF set, but may have a small number of additions or deletions. (See [here](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Contents_of_OSG_CA_package) for details)
+1.  (*recommended*) The OSG CA certificates. This is similar to the IGTF set, but may have a small number of additions or deletions. (See [here](#contents-of-osg-ca-package) for details)
 2.  The default [IGTF](http://www.igtf.net/) CA certificates.
 
 Depending on your choice, you select one of two RPMs:
@@ -66,7 +66,7 @@ You have the same choices for CA certificates as above. In order to choose, you 
 Here is an example:
 
 ```
-%UCL_PROMPT_ROOT% /usr/sbin/osg-ca-manage setupCA --location root --url osg 
+%UCL_PROMPT_ROOT% /usr/sbin/osg-ca-manage setupCA --location root --url osg
 Setting up CA Certificates for OSG installation
 CA Certificates will be installed into /etc/grid-security/certificates
 osg-update-certs
@@ -153,7 +153,7 @@ To enable fetch-crl (fetch Certificate Revocation Lists) services by default on 
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
 %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-boot on
 %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl3-cron on
-%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR% 
+%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
 %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-boot on
 %UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-cron on
 ```
@@ -164,7 +164,7 @@ To start fetch-crl:
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
 %UCL_PROMPT_ROOT% /sbin/service fetch-crl3-boot start
 %UCL_PROMPT_ROOT% /sbin/service fetch-crl3-cron start
-%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR% 
+%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
 %UCL_PROMPT_ROOT% /sbin/service fetch-crl-boot start
 %UCL_PROMPT_ROOT% /sbin/service fetch-crl-cron start
 ```
@@ -341,7 +341,7 @@ Frequently Asked Questions
 ### Location of Certificates?
 
 ```
- /etc/grid-security/certificates 
+ /etc/grid-security/certificates
 ```
 
 ### What is the version of OSG CA package I have installed and what are its contents?
@@ -418,4 +418,3 @@ Related software:
 
 -   Description, manual and examples of [osg-ca-manage](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaManage)
 -   [osg-ca-certs-updater](ca_updater)
-
