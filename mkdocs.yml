@@ -18,8 +18,10 @@ pages:
   - 'Worker Node (OASIS install)': 'worker-node/install-wn-oasis.md'
   - 'CVMFS': 'worker-node/install-cvmfs.md'
   - 'Singularity': 'worker-node/install-singularity.md'
-- Install Guides - Compute:
-  - 'HTCondor-CE': 'compute-element/install-htcondor-ce.md'
+- Compute Element:
+  - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
+  - 'Install HTCondor-CE': 'compute-element/install-htcondor-ce.md'
+  - 'Job Router Recipes': 'compute-element/job-router-recipes.md'
 - Install Guides - Data:
   - 'GridFTP Server': 'data/gridftp.md'
   - 'HTTP Cache': 'data/frontier-squid.md'
@@ -34,8 +36,6 @@ pages:
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
-- Overviews:
-  - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
 - Release Information:
   - 'OSG Release Series': 'release/release_series.md'
   - 'Supported Platforms': 'release/supported_platforms.md'

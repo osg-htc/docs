@@ -33,12 +33,12 @@ An HTCondor-CE installation consists of the job gateway (i.e., the HTCondor-CE j
 1. Clean yum cache:
 
         ::console
-        [root@client ~ ] $ yum clean all --enablerepo=*
+        root@host # yum clean all --enablerepo=*
 
 2. Update software:
 
         :::console
-        [root@client ~ ] $ yum update
+        root@host # yum update
     This command will update **all** packages
 
 3. If your batch system is already installed via non-RPM means and is in the following list, install the appropriate 'empty' RPM. Otherwise, skip to the next step.
@@ -189,23 +189,23 @@ Making changes to the OSG configuration files in the `/etc/osg/config.d` directo
 2. Validate the configuration settings
 
         :::console
-        [root@client ~ ] $ osg-configure -v
+        root@host # osg-configure -v
 
 3. Fix any errors (at least) that `osg-configure` reports.
 4. Once the validation command succeeds without errors, apply the configuration settings:
 
-        [root@client ~ ] $ osg-configure -c
+        root@host # osg-configure -c
 
 5. Generate a `user-vo-map` file with your authentication set up (skip this step if you're using the LCMAPS VOMS plugin):
     1. If you're using edg-mkgridmap, run the following:
 
             :::console
-            [root@client ~ ] $ edg-mkgridmap
+            root@host # edg-mkgridmap
 
     2. If you're using GUMS, run the following:
 
             :::console
-            [root@client ~ ] $ gums-host-cron
+            root@host # gums-host-cron
 
 ### Optional configuration
 
@@ -220,7 +220,7 @@ The following configuration steps are optional and will likely not be required f
 
 #### Transforming and filtering jobs
 
-If you need to modify or filter jobs, more information can be found in the [Job Router Recipes](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/JobRouterRecipes) document.
+If you need to modify or filter jobs, more information can be found in the [Job Router Recipes](job-router-recipes) document.
 
 !!! note
     If you need to assign jobs to HTCondor accounting groups, refer to [this](#htcondor-accounting-groups) section.
@@ -317,7 +317,7 @@ The HTCondor-CE View is an optional web interface to the status of your CE. To r
 1.  Begin by installing the package htcondor-ce-view:
 
         :::console
-        [root@client ~ ] $ yum install htcondor-ce-view
+        root@host # yum install htcondor-ce-view
 
 2.  Next, uncomment the `DAEMON_LIST` configuration located at `/etc/condor-ce/config.d/05-ce-view.conf`:
 
@@ -326,7 +326,7 @@ The HTCondor-CE View is an optional web interface to the status of your CE. To r
 3.  Restart the CE service:
 
         :::console
-        [root@client ~ ] $ service condor-ce restart
+        root@host # service condor-ce restart
 
 4.  Verify the service by entering your CE's hostname into your web browser
 
@@ -363,23 +363,23 @@ Start the services in the order listed and stop them in reverse order. As a remi
 
 ### Using HTCondor-CE tools
 
-Some of the HTCondor-CE administrative and user tools are documented in [the HTCondor-CE troubleshooting guide](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE).
+Some of the HTCondor-CE administrative and user tools are documented in [the HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce).
 
 Validating HTCondor-CE
 ----------------------
 
 There are different ways to make sure that your HTCondor-CE host is working well:
 
--   Perform automated validation by running [RSV](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallRSV)
--   Manually verify your HTCondor-CE using [HTCondor-CE troubleshooting guide](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE); useful tools include:
-    -   [condor\_ce\_run](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_ce_run)
-    -   [condor\_ce\_trace](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_ce_trace)
-    -   [condor\_submit](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_submit)
+-   Perform automated validation by running [RSV](../monitoring/install-rsv)
+-   Manually verify your HTCondor-CE using [HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce); useful tools include:
+    -   [condor\_ce\_run](troubleshoot-htcondor-ce#condor59ce59run)
+    -   [condor\_ce\_trace](troubleshoot-htcondor-ce#condor59ce59trace)
+    -   [condor\_submit](troubleshoot-htcondor-ce#condor59submit)
 
 Troubleshooting HTCondor-CE
 ---------------------------
 
-For information on how to troubleshoot your HTCondor-CE, please refer to [the HTCondor-CE troubleshooting guide](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE).
+For information on how to troubleshoot your HTCondor-CE, please refer to [the HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce).
 
 Registering the CE
 ------------------
@@ -400,10 +400,9 @@ Reference
 Here are some other HTCondor-CE documents that might be helpful:
 
 -   [HTCondor-CE overview and architecture](htcondor-ce-overview)
--   [Installing and maintaining HTCondor-CE-Bosco](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorBosco)
--   [Configuring HTCondor-CE job routes](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/JobRouterRecipes)
--   [The HTCondor-CE troubleshooting guide](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE)
--   [Submitting jobs to HTCondor-CE](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/SubmittingHTCondorCE)
+-   [Configuring HTCondor-CE job routes](job-router-recipes)
+-   [The HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce)
+-   [Submitting jobs to HTCondor-CE](submit-htcondor-ce)
 
 ### Configuration
 
@@ -417,7 +416,7 @@ The following directories contain the configuration for HTCondor-CE. The directo
 For a detailed order of the way configuration files are parsed, run the following command:
 
 ``` console
-[user@client ~ ] $ condor_ce_config_val -config
+user@host $ condor_ce_config_val -config
 ```
 
 ### Users
