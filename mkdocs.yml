@@ -31,6 +31,7 @@ pages:
   - 'RSV': 'monitoring/rsv.md'
   - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
 - Install Guides - Other:
+  - 'Install Best Practices': 'common/install-best-practices.md'
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
