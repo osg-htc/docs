@@ -74,10 +74,10 @@ All of these node types and their services are optional, although OSG requires t
 -   [Install Frontier Squid, the HTTP caching proxy service](data/frontier-squid)
 -   RSV monitoring to monitor and report to OSG on the health of your site
     -   [RSV Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvOverview)
-    -   [Install RSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallRSV)
+    -   [Install RSV](monitoring/install-rsv)
     -   [Troubleshooting RSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv)
 -   [Install the GlideinWMS VO Frontend](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallGlideinWMSFrontend) if your want your users’ jobs to run on the OSG
-    -   [Install the RSV GlideinWMS Tester](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallRsvGlideinwmsTester) if you want to test your front-end's ability to submit jobs to sites in the OSG
+    -   [Install the RSV GlideinWMS Tester](monitoring/install-rsv-gwms-tester) if you want to test your front-end's ability to submit jobs to sites in the OSG
 -   Storage element (pick one):
     -   GridFTP
         -   [Install standalone OSG GridFTP](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallOSGGridFTP): GridFTP server

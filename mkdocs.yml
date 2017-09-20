@@ -32,8 +32,8 @@ pages:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
 - Install Guides - Monitoring:
-  - 'RSV': 'monitoring/rsv.md'
-  - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
+  - 'RSV': 'monitoring/install-rsv.md'
+  - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
 - Install Guides - Other:
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
