@@ -108,5 +108,5 @@ As long as you use one of these two mechanisms, the OSG software will install su
 Certificate Revocation List (CRL) Installation/Update
 -----------------------------------------------------
 
-CRLs are not distributed via `yum`. Instead, we provide the `fetch-crl` tool that downloads CRLs to the CA directory.
+CRLs are not distributed via `yum`. Instead, we provide the `fetch-crl` [tool](../common/ca/#managing-certificate-revocation-lists) that downloads CRLs to the CA directory.
 
