@@ -9,8 +9,8 @@ The **OSG Worker Node Client** is a collection of software components that is ex
 It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:
 
 -   Install using RPMs and Yum (this guide) - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs
--   [Install using a tarball](wn-tarball.md) - useful when installing onto a shared filesystem for distribution to worker nodes
--   [Use from OASIS](wn-oasis.md) - useful when worker nodes already mount [CVMFS](cvmfs)
+-   [Install using a tarball](install-wn-tarball.md) - useful when installing onto a shared filesystem for distribution to worker nodes
+-   [Use from OASIS](install-wn-oasis.md) - useful when worker nodes already mount [CVMFS](install-cvmfs)
 
 This document is intended to guide system administrators through the process of configuring a site to make the Worker Node Client software available from an RPM.
 

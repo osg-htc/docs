@@ -1,0 +1,86 @@
+---+ OSG Software release 3.0.5
+
+*Release Date*: 13-Dec-2011
+
+---++ Summary of Changes
+
+This is the general release of the Compute Element, RSV, and Storage Element (Bestman, HDFS, and Xrootd). Specific changes in this release include:
+
+   * Updated the CA certificates to IGTF 1.43. 
+   * Added log rotation for the Globus gatekeeper log.
+   * Bug fixes for glexec (specifically the LCMAPS plugin that tracks processes)
+   * Other minor bug fixes
+
+All of the documentation can be found in [[Documentation.Release3][the "Release3"]] area of the Twiki. 
+
+---++ Updating to the new release
+
+If you have an existing installation, you can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or regex]= option for the =yum= command.
+
+%NOTE% If you have previously installed lcmaps or glexec, after you update you should edit =/etc/lcmaps.db= and ensure that the "path" line at the top of the file looks like:
+
+<pre class="file">
+path = lcmaps
+</pre>
+
+If you leave the previous value of _modules_ (instead of _lcmaps_), it will continue to work for now, but will break in a future release.
+
+---++ Detailed Changes 
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each 'package': you can click on any given package to see the set of RPMs or see the complete list below.
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=InstalledCapacityReport-1.0-9][InstalledCapacityReport-1.0-9]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gatekeeper-8.1-8.osg][globus-gatekeeper-8.1-8.osg]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-13.5-14.osg][globus-gram-job-manager-13.5-14.osg]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gridftp-hdfs-0.5.3-1][gridftp-hdfs-0.5.3-1]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=hadoop-0.20-osg-0.20.2+737-10][hadoop-0.20-osg-0.20.2+737-10]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.43-2][igtf-ca-certs-1.43-2]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-compat-1.43-2][igtf-ca-certs-compat-1.43-2]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcmaps-plugins-glexec-tracking-0.1.1-1.osg][lcmaps-plugins-glexec-tracking-0.1.1-1.osg]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.25-2][osg-ca-certs-1.25-2]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-compat-1.25-2][osg-ca-certs-compat-1.25-2]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-configure-0.7.1-1.osg][osg-configure-0.7.1-1.osg]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.0.5-1][osg-version-3.0.5-1]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-core-3.6.6-2.osg][rsv-core-3.6.6-2.osg]]
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+<pre class="file">
+globus-gatekeeper-8.1-8.osg
+globus-gatekeeper-debuginfo-8.1-8.osg
+globus-gram-job-manager-13.5-14.osg
+globus-gram-job-manager-debuginfo-13.5-14.osg
+globus-gram-job-manager-doc-13.5-14.osg
+gridftp-hdfs-0.5.3-1
+gridftp-hdfs-debuginfo-0.5.3-1
+hadoop-0.20-osg-0.20.2+737-10
+igtf-ca-certs-1.43-2
+igtf-ca-certs-compat-1.43-2
+InstalledCapacityReport-1.0-9
+lcmaps-plugins-glexec-tracking-0.1.1-1.osg
+lcmaps-plugins-glexec-tracking-debuginfo-0.1.1-1.osg
+osg-ca-certs-1.25-2
+osg-ca-certs-compat-1.25-2
+osg-configure-0.7.1-1.osg
+osg-configure-ce-0.7.1-1.osg
+osg-configure-cemon-0.7.1-1.osg
+osg-configure-condor-0.7.1-1.osg
+osg-configure-gip-0.7.1-1.osg
+osg-configure-gratia-0.7.1-1.osg
+osg-configure-lsf-0.7.1-1.osg
+osg-configure-managedfork-0.7.1-1.osg
+osg-configure-misc-0.7.1-1.osg
+osg-configure-monalisa-0.7.1-1.osg
+osg-configure-pbs-0.7.1-1.osg
+osg-configure-rsv-0.7.1-1.osg
+osg-configure-sge-0.7.1-1.osg
+osg-configure-squid-0.7.1-1.osg
+osg-version-3.0.5-1
+rsv-core-3.6.6-2.osg
+</pre>

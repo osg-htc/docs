@@ -1,0 +1,123 @@
+---+ OSG Software Release 3.2.29
+
+*Release Date*: 2015-11-03
+
+---++ Summary of changes
+
+This release contains:
+   * CA certificates based on [[https://dist.eugridpma.info/distribution/igtf/current/CHANGES][IGTF 1.69]]
+
+These [[https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.2.29%20ORDER%20BY%20priority%20DESC][JIRA tickets]] were addressed in this release.
+
+Detailed changes are below. All of the documentation can be found in the [[Documentation.Release3][Release3]] area of the !TWiki.
+
+---++ CA Certificate Update Information
+---+++What Is Changing
+A new IGTF Certificate Bundle (v1.69) has just been released.
+This release has a very important change and we would like our
+sites to install it as soon as they can.
+
+---+++Who Is Impacted By This Change:
+All OSG sites and users need to install the new CA bundle.
+Especially US-Atlas and US-CMS sites should install the bundle
+as soon as possible since their VOs will go under the transition
+in November/December timeframe.
+
+---+++Why This Change Is Happening:
+The OSG CA is changing its backend service support from Digicert
+to CILogon HSM. As a result, a new OSG CA is created and just
+recently been accredited by IGTF. The official name of the new
+OSG CA in the IGTF bundle is CILogon OSG CA. Starting in November
+we will transition our VOs to start using the new OSG CA (CMS and
+Atlas being first ones). If a site has not installed the CA bundle
+by then, they will have authentication failures.
+
+---+++What You Should Do:
+Install the new CA bundle as soon as possible. The latest CA bundle
+will NOT be distributed in OSG Software v 3.1 because OSG no longer
+supports it.
+
+For Linux servers (including worker nodes), ensure that the
+certificate bundle RPM is at version osg-ca-certs-1.50-1 or
+igtf-ca-certs-1.69-1 or greater.
+
+Instructions for installing server CA certificate bundles are at
+https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth
+
+We also highly recommend that you use the CA Cert automatic updater
+https://twiki.grid.iu.edu/bin/view/Documentation/Release3/OsgCaCertsUpdater
+but note that you need to be using a current OSG software distribution
+for that to work, that is, OSG 3.2 or 3.3.
+
+---+++Other Information:
+If you have the CA certificate bundle installed on a server with OSG 3.1,
+you need to upgrade to OSG 3.2 or greater. Follow these instructions:
+https://twiki.grid.iu.edu/bin/view/Documentation/Release3/OSGReleaseSeries#Updating_from_OSG_3_1_or_3_2_to
+
+Please email OSG Security Team with questions or comments
+
+---++ Known Issues
+
+---++ Updating to the new release
+
+---+++ Update Repositories
+
+To update to this series, you need [[Documentation.Release3.YumRepositories#Install_OSG_Repositories][install the current OSG repositories]].
+
+---+++ Update Software
+
+Once the repositories are installed, you can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or glob]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed changes in this release
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.69-1.osg32.el5][igtf-ca-certs-1.69-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.50-1.osg32.el5][osg-ca-certs-1.50-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.29-1.osg32.el5][osg-version-3.2.29-1.osg32.el5]]
+
+---++++ Enterprise Linux 6
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.69-1.osg32.el6][igtf-ca-certs-1.69-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.50-1.osg32.el6][osg-ca-certs-1.50-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.29-1.osg32.el6][osg-version-3.2.29-1.osg32.el6]]
+
+---+++ RPMs
+
+If you wish to manually update your system, you can run yum update against the following packages:
+
+<pre>
+igtf-ca-certs osg-ca-certs osg-version
+</pre>
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+igtf-ca-certs-1.69-1.osg32.el5
+osg-ca-certs-1.50-1.osg32.el5
+osg-version-3.2.29-1.osg32.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+igtf-ca-certs-1.69-1.osg32.el6
+osg-ca-certs-1.50-1.osg32.el6
+osg-version-3.2.29-1.osg32.el6
+</pre>

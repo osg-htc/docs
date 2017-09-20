@@ -1,0 +1,96 @@
+---+ OSG Software Release 3.1.46
+
+*Release Date*: 2015-04-14
+
+---++ Summary of changes
+
+This is the last regular release of the OSG 3.1 series. The 3.1 series will continue to be supported in a limited fashion until April 30th, 2015. Please update to the 3.2 series.
+
+This release contains:
+   * OSG VOMS RPMs updated to account for changes to EPEL VOMS RPMs (EPEL's reorganization of VOMS RPMs caused OSG installation and update failures) [[https://jira.opensciencegrid.org/browse/SOFTWARE-1866][SOFTWARE-1866]]
+   * CA Certificates updated to [[https://dist.eugridpma.info/distribution/igtf/current/CHANGES][IGTF 1.63]]
+
+These [[https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.1.46%20ORDER%20BY%20priority%20DESC][JIRA tickets]] were addressed in this release.
+
+Detailed changes are below. All of the documentation can be found in the [[Documentation.Release3][Release3]] area of the !TWiki.
+
+---++ Known issues
+
+---++ Updating to the new release
+
+You can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or glob]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed changes in this release
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.63-1.osg31.el5][igtf-ca-certs-1.63-1.osg31.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.45-1.osg31.el5][osg-ca-certs-1.45-1.osg31.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.4.24-1.osg31.el5][osg-test-1.4.24-1.osg31.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.46-1.osg31.el5][osg-version-3.1.46-1.osg31.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-2.0.11-2.5.osg31.el5][voms-2.0.11-2.5.osg31.el5]]
+
+---++++ Enterprise Linux 6
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.63-1.osg31.el6][igtf-ca-certs-1.63-1.osg31.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.45-1.osg31.el6][osg-ca-certs-1.45-1.osg31.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.4.24-1.osg31.el6][osg-test-1.4.24-1.osg31.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.46-1.osg31.el6][osg-version-3.1.46-1.osg31.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-2.0.11-2.5.osg31.el6][voms-2.0.11-2.5.osg31.el6]]
+
+---+++ RPMs
+
+If you wish to manually update your system, you can run yum update against the following packages:
+
+<pre>
+igtf-ca-certs osg-ca-certs osg-test osg-version voms voms-clients voms-clients-cpp voms-debuginfo voms-devel voms-doc voms-server
+</pre>
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+igtf-ca-certs-1.63-1.osg31.el5
+osg-ca-certs-1.45-1.osg31.el5
+osg-test-1.4.24-1.osg31.el5
+osg-version-3.1.46-1.osg31.el5
+voms-2.0.11-2.5.osg31.el5
+voms-clients-2.0.11-2.5.osg31.el5
+voms-clients-cpp-2.0.11-2.5.osg31.el5
+voms-debuginfo-2.0.11-2.5.osg31.el5
+voms-devel-2.0.11-2.5.osg31.el5
+voms-doc-2.0.11-2.5.osg31.el5
+voms-server-2.0.11-2.5.osg31.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+igtf-ca-certs-1.63-1.osg31.el6
+osg-ca-certs-1.45-1.osg31.el6
+osg-test-1.4.24-1.osg31.el6
+osg-version-3.1.46-1.osg31.el6
+voms-2.0.11-2.5.osg31.el6
+voms-clients-2.0.11-2.5.osg31.el6
+voms-clients-cpp-2.0.11-2.5.osg31.el6
+voms-debuginfo-2.0.11-2.5.osg31.el6
+voms-devel-2.0.11-2.5.osg31.el6
+voms-doc-2.0.11-2.5.osg31.el6
+voms-server-2.0.11-2.5.osg31.el6
+</pre>

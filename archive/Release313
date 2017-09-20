@@ -1,0 +1,98 @@
+%TOC%
+
+---+ OSG Software release 3.1.3
+
+*Release Date*: 22-May-2012
+
+---++ Summary of Changes
+
+   * We have updated to the latest version (1.47) of the IGTF-accredited CA certificates. 
+   * Bug fix for !GridFTP which acted as wrong user when an authorized user account doesn't exist. [[http://jira.globus.org/browse/GT-195][GT-195]]
+
+All of the documentation can be found in [[Documentation.Release3][the "Release3"]] area of the Twiki. 
+
+---++ Updating to the new release
+
+If you have an existing installation, you can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or regex]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, rpm does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed Changes 
+
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each 'package': you can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gridftp-server-6.5-1.7.osg.el5][globus-gridftp-server-6.5-1.7.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gridftp-server-control-2.3-1.1.osg.el5][globus-gridftp-server-control-2.3-1.1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.47-1.osg.el5][igtf-ca-certs-1.47-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-compat-1.47-1.osg.el5][igtf-ca-certs-compat-1.47-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.28-1.osg.el5][osg-ca-certs-1.28-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-compat-1.28-1.osg.el5][osg-ca-certs-compat-1.28-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-tested-internal-1-9.osg.el5][osg-tested-internal-1-9.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.3-1.osg.el5][osg-version-3.1.3-1.osg.el5]]
+
+---++++ Enterprise Linux 6
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gridftp-server-6.5-1.7.osg.el6][globus-gridftp-server-6.5-1.7.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gridftp-server-control-2.3-1.1.osg.el6][globus-gridftp-server-control-2.3-1.1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.47-1.osg.el6][igtf-ca-certs-1.47-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-compat-1.47-1.osg.el6][igtf-ca-certs-compat-1.47-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.28-1.osg.el6][osg-ca-certs-1.28-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-compat-1.28-1.osg.el6][osg-ca-certs-compat-1.28-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-tested-internal-1-9.osg.el6][osg-tested-internal-1-9.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.3-1.osg.el6][osg-version-3.1.3-1.osg.el6]]
+
+
+---+++ RPMs
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+globus-gridftp-server-6.5-1.7.osg.el5
+globus-gridftp-server-control-2.3-1.1.osg.el5
+globus-gridftp-server-control-debuginfo-2.3-1.1.osg.el5
+globus-gridftp-server-control-devel-2.3-1.1.osg.el5
+globus-gridftp-server-debuginfo-6.5-1.7.osg.el5
+globus-gridftp-server-devel-6.5-1.7.osg.el5
+globus-gridftp-server-progs-6.5-1.7.osg.el5
+igtf-ca-certs-1.47-1.osg.el5
+igtf-ca-certs-compat-1.47-1.osg.el5
+osg-ca-certs-1.28-1.osg.el5
+osg-ca-certs-compat-1.28-1.osg.el5
+osg-tested-internal-1-9.osg.el5
+osg-version-3.1.3-1.osg.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+globus-gridftp-server-6.5-1.7.osg.el6
+globus-gridftp-server-control-2.3-1.1.osg.el6
+globus-gridftp-server-control-debuginfo-2.3-1.1.osg.el6
+globus-gridftp-server-control-devel-2.3-1.1.osg.el6
+globus-gridftp-server-debuginfo-6.5-1.7.osg.el6
+globus-gridftp-server-devel-6.5-1.7.osg.el6
+globus-gridftp-server-progs-6.5-1.7.osg.el6
+igtf-ca-certs-1.47-1.osg.el6
+igtf-ca-certs-compat-1.47-1.osg.el6
+osg-ca-certs-1.28-1.osg.el6
+osg-ca-certs-compat-1.28-1.osg.el6
+osg-tested-internal-1-9.osg.el6
+osg-version-3.1.3-1.osg.el6
+</pre>

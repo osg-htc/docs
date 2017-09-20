@@ -1,0 +1,97 @@
+---+ OSG Software release 3.0.0u2
+
+*Release Date*: 31-Oct-2011
+
+---++ Summary of Changes
+
+   * The VOMS server (including VOMS Admin) is now a general release.
+   * Java has been updated to a new version (6.0.0u29) to address various security problems.
+   * The OSG client, OSG Worker Node Client, and glexec packages are now in limited production release. That is, they are released to production and will be supported, but we will only encourage early adopters to use them. 
+
+All of the documentation can be found in [[Documentation.Release3][the "Release3"]] area of the Twiki. For this release, you may want to take particular note of:
+
+   * [[Documentation.Release3.InstallVoms][Installing VOMS]]
+   * [[Documentation.Release3.UpgradeVomsService][Upgrading from the Pacman-based VOMS]]
+
+The early adopters among you may wish to read:
+
+   * [[Documentation.Release3.InstallWNClient][Installing the worker node client]]
+   * [[Documentation.Release3.InstallGlexec][Installing glexec]]
+   * [[Documentation.Release3.InstallOSGClient][Installing the client]]
+
+---++ Detailed Changes 
+
+We updated the following new packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs foe each 'package'.
+
+%TABLE{ sort="off" valign="top" }%
+| *Package* | *Replaces* |
+| osg-client-3.0.0-12 | N/A |
+| osg-wn-client-3.0.0-12 | N/A |
+| CGSI-gSOAP-1.3.4.0-2.osg | N/A |
+| I2util-1.1-1 | N/A |
+| bestman2-2.1.3-2.osg | N/A |
+| bwctl-1.3-5.osg | N/A |
+| condor-7.6.2-0.6.osg.2 | N/A |
+| dcache-srmclient-1.9.5.23-4 | N/A |
+| dcap-2.47.5-2.osg | N/A |
+| edg-gridftp-client-1.2.9.2-2.osg | N/A |
+| gfal-1.11.14-6 | N/A |
+| glexec-0.8.10-7.osg | N/A |
+| glite-data-delegation-api-c-2.0.0.7-3.osg | N/A |
+| glite-data-delegation-cli-2.0.1.3-2.osg | N/A |
+| glite-data-util-c-1.2.3-3.osg | N/A |
+| glite-fts-client-3.7.4-3.osg | N/A |
+| glite-service-discovery-api-c-2.2.3-1.sl5 | N/A |
+| globus-callout-2.0-2.osg | N/A |
+| globus-common-14.0-3.osg | N/A |
+| globus-ftp-client-7.0-2.osg | N/A |
+| globus-ftp-control-4.0-2.osg | N/A |
+| globus-gass-copy-8.0-2.osg | N/A |
+| globus-gass-server-ez-4.0-2.osg | N/A |
+| globus-gass-transfer-7.0-3.osg | N/A |
+| globus-gram-client-12.1-1.osg | N/A |
+| globus-gram-client-tools-10.0-2.osg | N/A |
+| globus-gram-protocol-11.0-2.osg | N/A |
+| globus-gsi-callback-4.0-2.osg | N/A |
+| globus-gsi-cert-utils-8.0-2.osg | N/A |
+| globus-gsi-credential-5.0-3.osg | N/A |
+| globus-gsi-openssl-error-2.0-2.osg | N/A |
+| globus-gsi-proxy-core-6.0-2.osg | N/A |
+| globus-gsi-proxy-ssl-4.0-2.osg | N/A |
+| globus-gsi-sysconfig-5.0-3.osg | N/A |
+| globus-gss-assist-8.0-2.osg | N/A |
+| globus-gssapi-error-4.0-2.osg | N/A |
+| globus-gssapi-gsi-10.0-1.osg | N/A |
+| globus-io-9.0-2.osg | N/A |
+| globus-openssl-module-3.0-2.osg | N/A |
+| globus-proxy-utils-5.0-2.osg | N/A |
+| globus-rsl-9.0-2.osg | N/A |
+| globus-usage-3.0-2.osg | N/A |
+| globus-xio-3.0-3.osg | N/A |
+| globus-xio-gsi-driver-2.0-2.osg | N/A |
+| globus-xio-popen-driver-2.0-2.osg | N/A |
+| gratia-probe-1.09-0.4.1.pre | N/A |
+| gridsite-1.7.15-3.osg.2 | N/A |
+| gsi-openssh-5.3-3.osg | N/A |
+| java-1.6.0-sun-compat-1.6.0.29-4.sl5.jpp | java-1.6.0-sun-compat-1.6.0.26-4.sl5.jpp |
+| jdk-1.6.0_29-fcs.1.osg | jdk-1.6.0_26-fcs.2.osg |
+| lcg-info-1.12.2-1.osg | N/A |
+| lcg-infosites-3.1.0-1.osg | N/A |
+| lcg-utils-1.11.14-7.osg | N/A |
+| lcgdm-1.8.0.1-4.osg | N/A |
+| lcmaps-1.4.28-16.osg | N/A |
+| lcmaps-plugins-basic-1.4.5-1.osg | N/A |
+| lcmaps-plugins-glexec-tracking-0.0.9-1.osg | N/A |
+| lcmaps-plugins-gums-client-0.0.2-2.osg | N/A |
+| lcmaps-plugins-saz-client-0.2.22-7.osg | N/A |
+| lcmaps-plugins-scas-client-0.2.22-7.osg | N/A |
+| lcmaps-plugins-verify-proxy-1.4.9-2.osg | N/A |
+| lcgdm-1.8.0.1-4.osg | N/A |
+| myproxy-5.5-3.osg | N/A |
+| ndt-3.6.4-1.osg | N/A |
+| osg-discovery-1.0.7-3 | N/A |
+| osg-system-profiler-0.0.4-1.osg | N/A |
+| owamp-3.2rc4-1 | N/A |
+| saml2-xacml2-c-lib-1.0.1-6.osg | N/A |
+| uberftp-2.6-2.osg | N/A |
+| vo-client-40-1.osg | N/A |

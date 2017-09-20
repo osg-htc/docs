@@ -13,7 +13,7 @@ As an alternative to the web browser interface, these scripts are contributed to
 How to get Help?
 ================
 
-To get assistance please use [Help Procedure](HelpProcedure).
+To get assistance please use [Help Procedure](help).
 
 Requirements
 ============
@@ -44,7 +44,7 @@ Install the certificate scripts package The Cert Scripts package can be installe
 Usage of certificate scripts package This package is mainly used to request certificates via the command line: either host and service certificates or user certificates.
 =========================================================================================================================================================================
 
-[Get host and service certificates using command line](Documentation/Release3.GetHostServiceCertificates)
+[Get host and service certificates using command line](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GetHostServiceCertificates)
 ---------------------------------------------------------------------------------------------------------
 
 Example usage of check-cert-time The cert-check-time script is helpful in setting up and monitoring the CA certificates and CRL’s that get installed in your trusted certificates directory. This section describes using these scripts to check the CA and CRL status. —+++! Checking CA certificates
@@ -258,17 +258,17 @@ For additional information on the functionality of a script execute it with the 
 
 Files in the package:
 
-| File                                                             | Description                                                                                       |
-|:-----------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|
-| [README](Security.CSReadMe)                                      | describes the package, includes release notes                                                     |
-| [cert-check-time](Security.CSReadMe#cert_check_time)             | checks lifetime of certificates and revocation lists                                              |
-| [cert-gridadmin](Security.CSReadMe#cert_gridadmin)               | immediate issuance of service certificates for authorized requestors                              |
-| [cert-lookup](Security.CSReadMe#cert_lookup)                     | queries directory based on DN of certificates                                                     |
-| [cert-request](Security.CSReadMe#cert_request)                   | generates and submits a certificate signing request                                               |
-| [cert-retrieve](Security.CSReadMe#cert_retrieve)                 | retrieves signed certificate previously requested                                                 |
-| [cert-renew](Security.CSReadMe#cert_renew)                       | renews existing person certificate (not host or service)                                          |
-| [multi-cert-gridadmin](Security.CSReadMe#multi_cert_gridadmin)   | immediate issuance of multiple service certificates for authorized administrators (new with V2-3) |
-| [InstallationNotes.txt](Security.CSReadMe#InstallationNotes_txt) | extra installation requirements for multi-cert-gridadmin (new with V2-3)                          |
+| File                                                                                                        | Description                                                                                       |
+|:------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|
+| [README](https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe)                                      | describes the package, includes release notes                                                     |
+| [cert-check-time](https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#cert_check_time)             | checks lifetime of certificates and revocation lists                                              |
+| [cert-gridadmin](https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#cert_gridadmin)               | immediate issuance of service certificates for authorized requestors                              |
+| [cert-lookup](https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#cert_lookup)                     | queries directory based on DN of certificates                                                     |
+| [cert-request](https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#cert_request)                   | generates and submits a certificate signing request                                               |
+| [cert-retrieve](https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#cert_retrieve)                 | retrieves signed certificate previously requested                                                 |
+| [cert-renew](https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#cert_renew)                       | renews existing person certificate (not host or service)                                          |
+| [multi-cert-gridadmin](https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#multi_cert_gridadmin)   | immediate issuance of multiple service certificates for authorized administrators (new with V2-3) |
+| [InstallationNotes.txt](https://twiki.opensciencegrid.org/bin/view/Security/CSReadMe#InstallationNotes_txt) | extra installation requirements for multi-cert-gridadmin (new with V2-3)                          |
 
 FAQ
 ===
@@ -282,7 +282,7 @@ Request a certificate for myself (personal certificate)
 %UCL_PROMPT% cert-request -ou p
 ```
 
-Full details in the [command line document](Documentation/Release3.CertificateGetCmd) or in the [Web interface document](Documentation.CertificateGetWeb) (for a browser based alt.).
+Full details in the [command line document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CertificateGetCmd) or in the [Web interface document](https://twiki.opensciencegrid.org/bin/view/Documentation/CertificateGetWeb) (for a browser based alt.).
 
 Request a certificate for my computer (host certificate)
 --------------------------------------------------------
@@ -291,7 +291,7 @@ Request a certificate for my computer (host certificate)
 %UCL_PROMPT% cert-request -ou s
 ```
 
-Full details in the [host and service certificates document](Documentation/Release3.GetHostServiceCertificates).
+Full details in the [host and service certificates document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GetHostServiceCertificates).
 
 Request a certificate for the http service on my computer (service certificate)
 -------------------------------------------------------------------------------
@@ -300,7 +300,7 @@ Request a certificate for the http service on my computer (service certificate)
 %UCL_PROMPT% cert-request -ou s -service http -host %RED%my-computer.some.domain%ENDCOLOR% -label %RED%http-my-computer%ENDCOLOR%
 ```
 
-Full details in the [host and service certificates document](Documentation/Release3.GetHostServiceCertificates).
+Full details in the [host and service certificates document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GetHostServiceCertificates).
 
 Retrieve a certificate
 ----------------------
@@ -323,5 +323,5 @@ My personal certificate is about to expire, how do I get another with the same D
 
 1.  Use `cert-renew`
 
-Full details in the [command line document](Documentation/Release3.CertificateGetCmd) or in the [Web interface document](Documentation.CertificateGetWeb) (for a browser based alt.).
+Full details in the [command line document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CertificateGetCmd) or in the [Web interface document](https://twiki.opensciencegrid.org/bin/view/Documentation/CertificateGetWeb) (for a browser based alt.).
 

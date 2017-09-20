@@ -1,0 +1,157 @@
+---+ OSG Software Release 3.2.10
+
+*Release Date*: 2014-05-27
+
+---++ Summary of changes
+
+This release contains:
+   * VO Package v54
+      * Updated information for 2 new CERN VOMS servers
+      * Now contains LSC files for those 2 new servers
+   * [[https://jira.opensciencegrid.org/browse/GRATIA-140][Updated Gratia probes]]
+      * Now removes certinfo files as appropriate
+      * Fixes this problem which was introduced in 3.2.6 / 3.1.31
+
+[[https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%20%223.2.10%22][3 JIRA tickets]] were addressed in this release.
+
+Detailed changes are below. All of the documentation can be found in the [[Documentation.Release3][Release3]] area of the !TWiki.
+
+---++ Known Issues
+
+---++ Updating to the new release
+
+---+++ Update Repositories
+
+This is a release in a newer [[Documentation.Release3.OSGReleaseSeries][OSG Release Series]].
+To update to this new series, you need [[Documentation.Release3.YumRepositories#Install_OSG_Repositories][install the new OSG repositories]].
+
+---+++ Update Software
+
+Once the new repositories are installed, you can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or glob]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed changes in this release
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5   
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.13.27-1.osg32.el5][gratia-probe-1.13.27-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.10-1.osg32.el5][osg-version-3.2.10-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-54-1.osg32.el5][vo-client-54-1.osg32.el5]]
+
+---++++ Enterprise Linux 6
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.13.27-1.osg32.el6][gratia-probe-1.13.27-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.10-1.osg32.el6][osg-version-3.2.10-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-54-1.osg32.el6][vo-client-54-1.osg32.el6]]
+
+---+++ RPMs
+
+If you wish to manually update your system, you can run yum update against the following packages:
+
+<pre class="file">
+gratia-probe-bdii-status gratia-probe-common gratia-probe-condor gratia-probe-condor-events gratia-probe-dcache-storage gratia-probe-dcache-transfer gratia-probe-debuginfo gratia-probe-glexec gratia-probe-glideinwms gratia-probe-gram gratia-probe-gridftp-transfer gratia-probe-hadoop-storage gratia-probe-metric gratia-probe-onevm gratia-probe-pbs-lsf gratia-probe-psacct gratia-probe-services gratia-probe-sge gratia-probe-slurm gratia-probe-xrootd-storage gratia-probe-xrootd-transfer osg-gums-config osg-version vo-client vo-client-edgmkgridmap
+</pre>
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+gratia-probe-1.13.27-1.osg32.el5
+gratia-probe-bdii-status-1.13.27-1.osg32.el5
+gratia-probe-common-1.13.27-1.osg32.el5
+gratia-probe-condor-1.13.27-1.osg32.el5
+gratia-probe-condor-events-1.13.27-1.osg32.el5
+gratia-probe-dcache-storage-1.13.27-1.osg32.el5
+gratia-probe-dcache-transfer-1.13.27-1.osg32.el5
+gratia-probe-debuginfo-1.13.27-1.osg32.el5
+gratia-probe-glexec-1.13.27-1.osg32.el5
+gratia-probe-glideinwms-1.13.27-1.osg32.el5
+gratia-probe-gram-1.13.27-1.osg32.el5
+gratia-probe-gridftp-transfer-1.13.27-1.osg32.el5
+gratia-probe-hadoop-storage-1.13.27-1.osg32.el5
+gratia-probe-metric-1.13.27-1.osg32.el5
+gratia-probe-onevm-1.13.27-1.osg32.el5
+gratia-probe-pbs-lsf-1.13.27-1.osg32.el5
+gratia-probe-psacct-1.13.27-1.osg32.el5
+gratia-probe-services-1.13.27-1.osg32.el5
+gratia-probe-sge-1.13.27-1.osg32.el5
+gratia-probe-slurm-1.13.27-1.osg32.el5
+gratia-probe-xrootd-storage-1.13.27-1.osg32.el5
+gratia-probe-xrootd-transfer-1.13.27-1.osg32.el5
+osg-gums-config-54-1.osg32.el5
+osg-version-3.2.10-1.osg32.el5
+vo-client-54-1.osg32.el5
+vo-client-edgmkgridmap-54-1.osg32.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+gratia-probe-1.13.27-1.osg32.el6
+gratia-probe-bdii-status-1.13.27-1.osg32.el6
+gratia-probe-common-1.13.27-1.osg32.el6
+gratia-probe-condor-1.13.27-1.osg32.el6
+gratia-probe-condor-events-1.13.27-1.osg32.el6
+gratia-probe-dcache-storage-1.13.27-1.osg32.el6
+gratia-probe-dcache-transfer-1.13.27-1.osg32.el6
+gratia-probe-debuginfo-1.13.27-1.osg32.el6
+gratia-probe-glexec-1.13.27-1.osg32.el6
+gratia-probe-glideinwms-1.13.27-1.osg32.el6
+gratia-probe-gram-1.13.27-1.osg32.el6
+gratia-probe-gridftp-transfer-1.13.27-1.osg32.el6
+gratia-probe-hadoop-storage-1.13.27-1.osg32.el6
+gratia-probe-metric-1.13.27-1.osg32.el6
+gratia-probe-onevm-1.13.27-1.osg32.el6
+gratia-probe-pbs-lsf-1.13.27-1.osg32.el6
+gratia-probe-psacct-1.13.27-1.osg32.el6
+gratia-probe-services-1.13.27-1.osg32.el6
+gratia-probe-sge-1.13.27-1.osg32.el6
+gratia-probe-slurm-1.13.27-1.osg32.el6
+gratia-probe-xrootd-storage-1.13.27-1.osg32.el6
+gratia-probe-xrootd-transfer-1.13.27-1.osg32.el6
+osg-gums-config-54-1.osg32.el6
+osg-version-3.2.10-1.osg32.el6
+vo-client-54-1.osg32.el6
+vo-client-edgmkgridmap-54-1.osg32.el6
+</pre>
+
+
+
+---+++ Upcoming Packages
+
+We added or updated the following packages to the *upcoming* OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5   
+
+---++++ Enterprise Linux 6
+
+
+
+---+++ Upcoming RPMs
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+</pre>

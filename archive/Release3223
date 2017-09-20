@@ -1,0 +1,292 @@
+---+ OSG Software Release 3.2.23
+
+*Release Date*: 2015-05-12
+
+---++ Summary of changes
+
+This release contains:
+   * HTCondor CE 1.13 (completing the inital product rollout)
+      * condor_ce_trace: Catch and report meaningful error messages for failure to retrieve socket information ([[https://jira.opensciencegrid.org/browse/SOFTWARE-1821][SOFTWARE-1821]])
+      * condor_ce_router_defaults: Support dynamic assignment of OSG environment variables, such as =OSG_WN_TMP= ([[https://jira.opensciencegrid.org/browse/SOFTWARE-1862][SOFTWARE-1862]])
+      * condor_ce_run: Ability to specify extra !ClassAd attributes in a file ([[https://jira.opensciencegrid.org/browse/SOFTWARE-1641][SOFTWARE-1641]])
+      * condor_ce_info_status: Add =--constrain= option to limit output by !ClassAd expression ([[https://jira.opensciencegrid.org/browse/SOFTWARE-1842][SOFTWARE-1842]])
+   * GUMS 1.4.3 (improvements and bug fixes, [[https://jira.opensciencegrid.org/browse/SOFTWARE-1891][SOFTWARE-1891]])
+   * osg-configure 1.0.17 (improvements and bug fixes, [[https://jira.opensciencegrid.org/browse/SOFTWARE-1896][SOFTWARE-1896]])
+   * Initial !StashCache meta packages (see below for manual configuration required)
+   * CILogon CA certificates for !OpenID and OSG
+   * [[https://www-auth.cs.wisc.edu/lists/htcondor-users/2015-April/msg00160.shtml][HTCondor 8.3.5]] in the upcoming repository for EL6 platforms
+
+These [[https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.2.23%20ORDER%20BY%20priority%20DESC][JIRA tickets]] were addressed in this release.
+
+Detailed changes are below. All of the documentation can be found in the [[Documentation.Release3][Release3]] area of the !TWiki.
+
+---++ Known Issues
+
+   * HTCondor CE does not work with HTCondor 8.3.5 (in upcoming) on EL 5 platforms. So, we are holding HTCondor at version 8.3.4 (in upcoming) for EL 5 platforms.
+   * !StashCache packages need to be manually configured
+      * Manual configuration for origin server
+         * Assuming that the origin server connects only to a redirector (not directly to cache server), minimal xrootd configuration is required. The configuration file, /etc/xrootd/xrootd-stashcache-origin-server.cfg, in this release is overkill. Here are recommended settings to use: \
+<pre class="file">
+xrd.port 1094
+all.role server
+all.manager stash-redirector.example.com 1213
+all.export / nostage
+xrootd.trace emsg login stall redirect
+ofs.trace none
+xrd.trace conn
+cms.trace all
+sec.protocol  host
+sec.protbind  * none
+all.adminpath /var/run/xrootd
+all.pidpath /var/run/xrootd
+</pre>
+      * Manual configuration for cache server
+         * In contrast to the origin server configuration, one needs to declare =pss.origin <stash-redirector.example.com>= instead of configuring the cmsd or manager (only the xrootd daemon is required on the cache server). More detailed configuration of cache server for !StashCache is [[https://confluence.grid.iu.edu/pages/viewpage.action?title=Installing+an+XRootD+server+for+Stash+Cache&spaceKey=STAS][here]].
+      * In both cases, administrator needs to set the path of custom configuration file for its xrootd/cmds instance in /etc/sysconfig/xrootd, For example, change the cmds default from: \
+<pre class="file">
+CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -k fifo"
+</pre> \
+to \
+<pre class="file">
+CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-stashcache-origin-server.marian -k fifo" 
+</pre>
+---++ Updating to the new release
+
+---+++ Update Repositories
+
+To update to this series, you need [[Documentation.Release3.YumRepositories#Install_OSG_Repositories][install the current OSG repositories]].
+
+---+++ Update Software
+
+Once the new repositories are installed, you can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or glob]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed changes in this release
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cilogon-openid-ca-cert-1.1-2.osg32.el5][cilogon-openid-ca-cert-1.1-2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cilogon-osg-ca-cert-1.0-1.osg32.el5][cilogon-osg-ca-cert-1.0-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-8.2.8-1.3.osg32.el5][condor-8.2.8-1.3.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=emi-trustmanager-tomcat-3.0.0-10.osg32.el5][emi-trustmanager-tomcat-3.0.0-10.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gip-1.3.11-6.osg32.el5][gip-1.3.11-6.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gums-1.4.3-1.osg32.el5][gums-1.4.3-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=htcondor-ce-1.13-1.osg32.el5][htcondor-ce-1.13-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-build-1.4.4-2.osg32.el5][osg-build-1.4.4-2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-configure-1.0.71-1.osg32.el5][osg-configure-1.0.71-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.23-1.osg32.el5][osg-version-3.2.23-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=stashcache-0.1-2.osg32.el5][stashcache-0.1-2.osg32.el5]]
+
+---++++ Enterprise Linux 6
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cilogon-openid-ca-cert-1.1-2.osg32.el6][cilogon-openid-ca-cert-1.1-2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cilogon-osg-ca-cert-1.0-1.osg32.el6][cilogon-osg-ca-cert-1.0-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-8.2.8-1.3.osg32.el6][condor-8.2.8-1.3.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=emi-trustmanager-tomcat-3.0.0-10.osg32.el6][emi-trustmanager-tomcat-3.0.0-10.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gip-1.3.11-6.osg32.el6][gip-1.3.11-6.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gums-1.4.3-1.osg32.el6][gums-1.4.3-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=htcondor-ce-1.13-1.osg32.el6][htcondor-ce-1.13-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-build-1.4.4-2.osg32.el6][osg-build-1.4.4-2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-configure-1.0.71-1.osg32.el6][osg-configure-1.0.71-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.23-1.osg32.el6][osg-version-3.2.23-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=stashcache-0.1-2.osg32.el6][stashcache-0.1-2.osg32.el6]]
+
+---+++ RPMs
+
+If you wish to manually update your system, you can run yum update against the following packages:
+
+<pre>cilogon-openid-ca-cert cilogon-osg-ca-cert condor condor-all condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-vm-gahp emi-trustmanager-tomcat gip gums gums-client gums-service htcondor-ce htcondor-ce-client htcondor-ce-collector htcondor-ce-condor htcondor-ce-debuginfo htcondor-ce-lsf htcondor-ce-pbs htcondor-ce-sge osg-build osg-configure osg-configure-ce osg-configure-cemon osg-configure-condor osg-configure-gateway osg-configure-gip osg-configure-gratia osg-configure-infoservices osg-configure-lsf osg-configure-managedfork osg-configure-misc osg-configure-monalisa osg-configure-network osg-configure-pbs osg-configure-rsv osg-configure-sge osg-configure-slurm osg-configure-squid osg-configure-tests osg-version stashcache-cache-server stashcache-origin-server</pre>
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+cilogon-openid-ca-cert-1.1-2.osg32.el5
+cilogon-osg-ca-cert-1.0-1.osg32.el5
+condor-8.2.8-1.3.osg32.el5
+condor-all-8.2.8-1.3.osg32.el5
+condor-bosco-8.2.8-1.3.osg32.el5
+condor-classads-8.2.8-1.3.osg32.el5
+condor-classads-devel-8.2.8-1.3.osg32.el5
+condor-cream-gahp-8.2.8-1.3.osg32.el5
+condor-debuginfo-8.2.8-1.3.osg32.el5
+condor-kbdd-8.2.8-1.3.osg32.el5
+condor-procd-8.2.8-1.3.osg32.el5
+condor-python-8.2.8-1.3.osg32.el5
+condor-std-universe-8.2.8-1.3.osg32.el5
+condor-vm-gahp-8.2.8-1.3.osg32.el5
+emi-trustmanager-tomcat-3.0.0-10.osg32.el5
+gip-1.3.11-6.osg32.el5
+gums-1.4.3-1.osg32.el5
+gums-client-1.4.3-1.osg32.el5
+gums-service-1.4.3-1.osg32.el5
+htcondor-ce-1.13-1.osg32.el5
+htcondor-ce-client-1.13-1.osg32.el5
+htcondor-ce-collector-1.13-1.osg32.el5
+htcondor-ce-condor-1.13-1.osg32.el5
+htcondor-ce-debuginfo-1.13-1.osg32.el5
+htcondor-ce-lsf-1.13-1.osg32.el5
+htcondor-ce-pbs-1.13-1.osg32.el5
+htcondor-ce-sge-1.13-1.osg32.el5
+osg-build-1.4.4-2.osg32.el5
+osg-configure-1.0.71-1.osg32.el5
+osg-configure-ce-1.0.71-1.osg32.el5
+osg-configure-cemon-1.0.71-1.osg32.el5
+osg-configure-condor-1.0.71-1.osg32.el5
+osg-configure-gateway-1.0.71-1.osg32.el5
+osg-configure-gip-1.0.71-1.osg32.el5
+osg-configure-gratia-1.0.71-1.osg32.el5
+osg-configure-infoservices-1.0.71-1.osg32.el5
+osg-configure-lsf-1.0.71-1.osg32.el5
+osg-configure-managedfork-1.0.71-1.osg32.el5
+osg-configure-misc-1.0.71-1.osg32.el5
+osg-configure-monalisa-1.0.71-1.osg32.el5
+osg-configure-network-1.0.71-1.osg32.el5
+osg-configure-pbs-1.0.71-1.osg32.el5
+osg-configure-rsv-1.0.71-1.osg32.el5
+osg-configure-sge-1.0.71-1.osg32.el5
+osg-configure-slurm-1.0.71-1.osg32.el5
+osg-configure-squid-1.0.71-1.osg32.el5
+osg-configure-tests-1.0.71-1.osg32.el5
+osg-version-3.2.23-1.osg32.el5
+stashcache-0.1-2.osg32.el5
+stashcache-cache-server-0.1-2.osg32.el5
+stashcache-origin-server-0.1-2.osg32.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+cilogon-openid-ca-cert-1.1-2.osg32.el6
+cilogon-osg-ca-cert-1.0-1.osg32.el6
+condor-8.2.8-1.3.osg32.el6
+condor-all-8.2.8-1.3.osg32.el6
+condor-bosco-8.2.8-1.3.osg32.el6
+condor-classads-8.2.8-1.3.osg32.el6
+condor-classads-devel-8.2.8-1.3.osg32.el6
+condor-cream-gahp-8.2.8-1.3.osg32.el6
+condor-debuginfo-8.2.8-1.3.osg32.el6
+condor-kbdd-8.2.8-1.3.osg32.el6
+condor-procd-8.2.8-1.3.osg32.el6
+condor-python-8.2.8-1.3.osg32.el6
+condor-std-universe-8.2.8-1.3.osg32.el6
+condor-vm-gahp-8.2.8-1.3.osg32.el6
+emi-trustmanager-tomcat-3.0.0-10.osg32.el6
+gip-1.3.11-6.osg32.el6
+gums-1.4.3-1.osg32.el6
+gums-client-1.4.3-1.osg32.el6
+gums-service-1.4.3-1.osg32.el6
+htcondor-ce-1.13-1.osg32.el6
+htcondor-ce-client-1.13-1.osg32.el6
+htcondor-ce-collector-1.13-1.osg32.el6
+htcondor-ce-condor-1.13-1.osg32.el6
+htcondor-ce-debuginfo-1.13-1.osg32.el6
+htcondor-ce-lsf-1.13-1.osg32.el6
+htcondor-ce-pbs-1.13-1.osg32.el6
+htcondor-ce-sge-1.13-1.osg32.el6
+osg-build-1.4.4-2.osg32.el6
+osg-configure-1.0.71-1.osg32.el6
+osg-configure-ce-1.0.71-1.osg32.el6
+osg-configure-cemon-1.0.71-1.osg32.el6
+osg-configure-condor-1.0.71-1.osg32.el6
+osg-configure-gateway-1.0.71-1.osg32.el6
+osg-configure-gip-1.0.71-1.osg32.el6
+osg-configure-gratia-1.0.71-1.osg32.el6
+osg-configure-infoservices-1.0.71-1.osg32.el6
+osg-configure-lsf-1.0.71-1.osg32.el6
+osg-configure-managedfork-1.0.71-1.osg32.el6
+osg-configure-misc-1.0.71-1.osg32.el6
+osg-configure-monalisa-1.0.71-1.osg32.el6
+osg-configure-network-1.0.71-1.osg32.el6
+osg-configure-pbs-1.0.71-1.osg32.el6
+osg-configure-rsv-1.0.71-1.osg32.el6
+osg-configure-sge-1.0.71-1.osg32.el6
+osg-configure-slurm-1.0.71-1.osg32.el6
+osg-configure-squid-1.0.71-1.osg32.el6
+osg-configure-tests-1.0.71-1.osg32.el6
+osg-version-3.2.23-1.osg32.el6
+stashcache-0.1-2.osg32.el6
+stashcache-cache-server-0.1-2.osg32.el6
+stashcache-origin-server-0.1-2.osg32.el6
+</pre>
+
+---+++ Upcoming Packages
+
+We added or updated the following packages to the *upcoming* OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=blahp-1.18.12.bosco-1.osgup.el5][blahp-1.18.12.bosco-1.osgup.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=htcondor-ce-1.13-2.osgup.el5][htcondor-ce-1.13-2.osgup.el5]]
+
+---++++ Enterprise Linux 6
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=blahp-1.18.12.bosco-2.osgup.el6][blahp-1.18.12.bosco-2.osgup.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-8.3.5-2.osgup.el6][condor-8.3.5-2.osgup.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=htcondor-ce-1.13-1.osgup.el6][htcondor-ce-1.13-1.osgup.el6]]
+
+---+++ Upcoming RPMs
+
+If you wish to manually update your system, you can run yum update against the following packages:
+
+<pre>blahp blahp-debuginfo condor condor-all condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-vm-gahp htcondor-ce htcondor-ce-client htcondor-ce-collector htcondor-ce-condor htcondor-ce-debuginfo htcondor-ce-lsf htcondor-ce-pbs htcondor-ce-sge</pre>
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+blahp-1.18.12.bosco-1.osgup.el5
+blahp-debuginfo-1.18.12.bosco-1.osgup.el5
+htcondor-ce-1.13-2.osgup.el5
+htcondor-ce-client-1.13-2.osgup.el5
+htcondor-ce-collector-1.13-2.osgup.el5
+htcondor-ce-condor-1.13-2.osgup.el5
+htcondor-ce-debuginfo-1.13-2.osgup.el5
+htcondor-ce-lsf-1.13-2.osgup.el5
+htcondor-ce-pbs-1.13-2.osgup.el5
+htcondor-ce-sge-1.13-2.osgup.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+blahp-1.18.12.bosco-2.osgup.el6
+blahp-debuginfo-1.18.12.bosco-2.osgup.el6
+condor-8.3.5-2.osgup.el6
+condor-all-8.3.5-2.osgup.el6
+condor-bosco-8.3.5-2.osgup.el6
+condor-classads-8.3.5-2.osgup.el6
+condor-classads-devel-8.3.5-2.osgup.el6
+condor-cream-gahp-8.3.5-2.osgup.el6
+condor-debuginfo-8.3.5-2.osgup.el6
+condor-kbdd-8.3.5-2.osgup.el6
+condor-procd-8.3.5-2.osgup.el6
+condor-python-8.3.5-2.osgup.el6
+condor-std-universe-8.3.5-2.osgup.el6
+condor-vm-gahp-8.3.5-2.osgup.el6
+htcondor-ce-1.13-1.osgup.el6
+htcondor-ce-client-1.13-1.osgup.el6
+htcondor-ce-collector-1.13-1.osgup.el6
+htcondor-ce-condor-1.13-1.osgup.el6
+htcondor-ce-debuginfo-1.13-1.osgup.el6
+htcondor-ce-lsf-1.13-1.osgup.el6
+htcondor-ce-pbs-1.13-1.osgup.el6
+htcondor-ce-sge-1.13-1.osgup.el6
+</pre>

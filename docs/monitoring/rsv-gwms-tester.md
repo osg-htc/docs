@@ -14,8 +14,8 @@ Before Starting
 
 Before starting the installation process, consider the following points (consulting [the Reference section below](#ReferenceSection) as needed):
 
-- **Software:** You must have [a GlideinWMS Front-end](InstallGlideinWMSFrontend) installed
-- **Configuration:** The GlideinWMS Front-end must be configured (a) [to have at least one group that matches pilots to sites using DESIRED_SITES](InstallGlideinWMSFrontend#DesiredSites), and (b) [to support the is_itb user job attribute](InstallGlideinWMSFrontend#IsItb)
+- **Software:** You must have [a GlideinWMS Front-end](../other/install-gwms-frontend) installed
+- **Configuration:** The GlideinWMS Front-end must be configured (a) [to have at least one group that matches pilots to sites using DESIRED_SITES](../other/install-gwms-frontend#allow-users-to-specify-where-their-jobs-run), and (b) [to support the is_itb user job attribute](../other/install-gwms-frontend#creating-a-group-for-testing-configuration-changes)
 - **Host choice:** The Tester should be installed on its own host; a small Virtual Machine (VM) is ideal
 - **Service certificate:** The Tester requires a host certificate at `/etc/grid-security/hostcert.pem` and an accompanying key at `/etc/grid-security/hostkey.pem`
 - **Network ports:** Test jobs must be able to contact the tester using the HTCondor Shared Port on port 9615 (TCP), and you must be able to contact a web server on port 80 (TCP) to view test results.
@@ -186,7 +186,7 @@ The highlighted name is the site name, and there should be one such line per sit
 Troubleshooting RSV-GWMS-Tester
 -------------------------------
 
-You can find more information on troubleshooting in the [RSV troubleshooting section](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallRSV#Troubleshooting_RSV)
+You can find more information on troubleshooting in the [RSV troubleshooting section](../monitoring/rsv#troubleshooting-rsv)
 
 Logs and configuration:
 
@@ -208,13 +208,10 @@ Reference
 
 ### Certificates
 
-| Certificate      | User that owns certificate | Path to certificate                                                           |
-|:-----------------|:---------------------------|:------------------------------------------------------------------------------|
-| Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` &lt;br&gt; `/etc/grid-security/hostkey.pem` |
+| Certificate      | User that owns certificate | Path to certificate               |
+|:-----------------|:---------------------------|:----------------------------------|
+| Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` |
+| Host key         | `root`                     | `/etc/grid-security/hostkey.pem`  |
 
 Find instructions to request a host certificate [here](../common/pki-cli.md).
-
-### Networking
-
-[Firewall Information](../common/firewall.md)
 

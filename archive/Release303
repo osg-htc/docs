@@ -1,0 +1,27 @@
+---+ OSG Software release 3.0.3
+
+*Release Date*: 29-Nov-2011<br>
+*Release Date*: 22-Nov-2011
+
+---++ Summary of Changes
+
+29-Nov-2011:<br>
+   * This is not a new release (no changes occurred in the software repository), but we are declaring that this release is the general release of the Client, Worker Node Client & glexec. 
+
+22-Nov-2011:<br>
+   * Xrootd is now in limited production release.
+
+All of the documentation can be found in [[Documentation.Release3][the "Release3"]] area of the Twiki. For this release, you may want to take particular note of:
+
+   * [[Documentation.Release3.InstallXrootd][Installing Xrootd]]
+
+---++ Detailed Changes 
+
+We updated the following new packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each 'package'.
+
+%TABLE{ sort="off" valign="top" }%
+| *Package* | *Replaces* |
+| xrootd-3.1.0-11.osg.xu | N/A |
+| xrootd-lcmaps-0.0.3-1 | N/A |
+| osg-version-3.0.3-1 | N/A |
+| osg-build-0.0.22-1.osg | N/A |

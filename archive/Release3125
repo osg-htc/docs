@@ -1,0 +1,271 @@
+---+ OSG Software Release 3.1.25
+
+*Release Date*: 2013-10-08
+
+---++ Summary of changes
+
+Changes include:
+   * gratia probes: now filters and logs unreasonably huge CPU time values
+   * GUMS now gets VOMS attributes from SSL connection to facilitate glidein authentication 
+   * Globus: Log rotation now performed by copy and truncate
+   * jGlobus 2.0.6: new version with many bug fixes
+      * !BeStMan recompiled with new jGlobus
+      * GUMS recompiled with new jGlobus
+   * glideinWMS 2.7.2
+   * Log XACML failures
+   * [[https://twiki.grid.iu.edu/bin/view/Operations/PackageV48][VO Package v48]]
+
+[[https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%20%223.1.25%22][12 JIRA tickets]] were addressed in this release.
+
+Also with this release, we changed the internal structure of the Yum repositories in preparation for a new OSG software release series (3.2.x, coming soon). The changes are backward compatible with the old layout and should be transparent to users. Further, the osg-release RPM, which contains the repository definitions, still works and will always be the preferred way of defining the OSG repositories. Thus, this change requires no action on your part. For more information about the preparations for OSG 3.2 and beyond, see: [[https://twiki.opensciencegrid.org/bin/view/SoftwareTeam/SP021_NewVersions][Project 21: Support New Versions of OSG Software (3.2 and Beyond)]]
+
+Detailed changes are below. All of the documentation can be found in the [[Documentation.Release3][Release3]] area of the !TWiki.
+
+---++ Known issues
+
+The update to log XACML failures can cause a failure when LCMAPS is logging to stdout/stderr. The happens when running the llrun tool. This problem will be fixed in 3.1.26.
+
+---++ Updating to the new release
+
+You can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or glob]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed changes in this release
+
+The OASIS install of the tarball client now uses the CVMFS variable =OASIS_CERTIFICATES= to choose the directory containing CA certificates and CRLs.
+The value for this directory is set in your CVMFS configuration files.
+Installing the latest version of =oasis-config=, included in this release, will provide a default value for =OASIS_CERTIFICATES= that points to a certificate directory on OASIS.
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5   
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=bestman2-2.3.0-16.osg.el5][bestman2-2.3.0-16.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glideinwms-2.7.2-1.1.0.osg.el5][glideinwms-2.7.2-1.1.0.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gatekeeper-9.6-1.11.osg.el5][globus-gatekeeper-9.6-1.11.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-13.45-1.6.osg.el5][globus-gram-job-manager-13.45-1.6.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gridftp-server-6.14-5.osg.el5][globus-gridftp-server-6.14-5.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.13.18-1.osg.el5][gratia-probe-1.13.18-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gums-1.3.18.009-20.osg.el5][gums-1.3.18.009-20.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=jglobus-2.0.6-3.osg.el5][jglobus-2.0.6-3.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcmaps-plugins-scas-client-0.3.4-1.3.osg.el5][lcmaps-plugins-scas-client-0.3.4-1.3.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.3.6-1.osg.el5][osg-test-1.3.6-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-tested-internal-1-17.osg.el5][osg-tested-internal-1-17.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.25-1.osg.el5][osg-version-3.1.25-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.7.10-1.osg.el5][rsv-3.7.10-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-consumers-3.7.10-1.osg.el5][rsv-consumers-3.7.10-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-core-3.7.10-1.osg.el5][rsv-core-3.7.10-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-metrics-3.7.10-1.osg.el5][rsv-metrics-3.7.10-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-48-1.osg.el5][vo-client-48-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=xacml-1.1.2-5.1.osg.el5][xacml-1.1.2-5.1.osg.el5]]
+
+---++++ Enterprise Linux 6
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=bestman2-2.3.0-16.osg.el6][bestman2-2.3.0-16.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glideinwms-2.7.2-1.1.0.osg.el6][glideinwms-2.7.2-1.1.0.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gatekeeper-9.6-1.11.osg.el6][globus-gatekeeper-9.6-1.11.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-13.45-1.6.osg.el6][globus-gram-job-manager-13.45-1.6.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gridftp-server-6.14-5.osg.el6][globus-gridftp-server-6.14-5.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.13.18-1.osg.el6][gratia-probe-1.13.18-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gums-1.3.18.009-20.osg.el6][gums-1.3.18.009-20.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=jglobus-2.0.6-3.osg.el6][jglobus-2.0.6-3.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=lcmaps-plugins-scas-client-0.3.4-1.3.osg.el6][lcmaps-plugins-scas-client-0.3.4-1.3.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.3.6-1.osg.el6][osg-test-1.3.6-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-tested-internal-1-17.osg.el6][osg-tested-internal-1-17.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.25-1.osg.el6][osg-version-3.1.25-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.7.10-1.osg.el6][rsv-3.7.10-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-consumers-3.7.10-1.osg.el6][rsv-consumers-3.7.10-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-core-3.7.10-1.osg.el6][rsv-core-3.7.10-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-metrics-3.7.10-1.osg.el6][rsv-metrics-3.7.10-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-48-1.osg.el6][vo-client-48-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=xacml-1.1.2-5.1.osg.el6][xacml-1.1.2-5.1.osg.el6]]
+
+---+++ RPMs
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+bestman2-2.3.0-16.osg.el5
+bestman2-client-2.3.0-16.osg.el5
+bestman2-client-libs-2.3.0-16.osg.el5
+bestman2-common-libs-2.3.0-16.osg.el5
+bestman2-server-2.3.0-16.osg.el5
+bestman2-server-dep-libs-2.3.0-16.osg.el5
+bestman2-server-libs-2.3.0-16.osg.el5
+bestman2-tester-2.3.0-16.osg.el5
+bestman2-tester-libs-2.3.0-16.osg.el5
+glideinwms-2.7.2-1.1.0.osg.el5
+glideinwms-factory-2.7.2-1.1.0.osg.el5
+glideinwms-factory-condor-2.7.2-1.1.0.osg.el5
+glideinwms-glidecondor-tools-2.7.2-1.1.0.osg.el5
+glideinwms-libs-2.7.2-1.1.0.osg.el5
+glideinwms-minimal-condor-2.7.2-1.1.0.osg.el5
+glideinwms-usercollector-2.7.2-1.1.0.osg.el5
+glideinwms-userschedd-2.7.2-1.1.0.osg.el5
+glideinwms-vofrontend-2.7.2-1.1.0.osg.el5
+glideinwms-vofrontend-standalone-2.7.2-1.1.0.osg.el5
+globus-gatekeeper-9.6-1.11.osg.el5
+globus-gatekeeper-debuginfo-9.6-1.11.osg.el5
+globus-gram-job-manager-13.45-1.6.osg.el5
+globus-gram-job-manager-debuginfo-13.45-1.6.osg.el5
+globus-gram-job-manager-doc-13.45-1.6.osg.el5
+globus-gridftp-server-6.14-5.osg.el5
+globus-gridftp-server-debuginfo-6.14-5.osg.el5
+globus-gridftp-server-devel-6.14-5.osg.el5
+globus-gridftp-server-progs-6.14-5.osg.el5
+gratia-probe-1.13.18-1.osg.el5
+gratia-probe-bdii-status-1.13.18-1.osg.el5
+gratia-probe-common-1.13.18-1.osg.el5
+gratia-probe-condor-1.13.18-1.osg.el5
+gratia-probe-condor-events-1.13.18-1.osg.el5
+gratia-probe-dcache-storage-1.13.18-1.osg.el5
+gratia-probe-dcache-transfer-1.13.18-1.osg.el5
+gratia-probe-debuginfo-1.13.18-1.osg.el5
+gratia-probe-glexec-1.13.18-1.osg.el5
+gratia-probe-glideinwms-1.13.18-1.osg.el5
+gratia-probe-gram-1.13.18-1.osg.el5
+gratia-probe-gridftp-transfer-1.13.18-1.osg.el5
+gratia-probe-hadoop-storage-1.13.18-1.osg.el5
+gratia-probe-metric-1.13.18-1.osg.el5
+gratia-probe-onevm-1.13.18-1.osg.el5
+gratia-probe-pbs-lsf-1.13.18-1.osg.el5
+gratia-probe-psacct-1.13.18-1.osg.el5
+gratia-probe-services-1.13.18-1.osg.el5
+gratia-probe-sge-1.13.18-1.osg.el5
+gratia-probe-slurm-1.13.18-1.osg.el5
+gratia-probe-xrootd-storage-1.13.18-1.osg.el5
+gratia-probe-xrootd-transfer-1.13.18-1.osg.el5
+gums-1.3.18.009-20.osg.el5
+gums-client-1.3.18.009-20.osg.el5
+gums-service-1.3.18.009-20.osg.el5
+jglobus-2.0.6-3.osg.el5
+lcmaps-plugins-saz-client-0.3.4-1.3.osg.el5
+lcmaps-plugins-scas-client-0.3.4-1.3.osg.el5
+lcmaps-plugins-scas-client-debuginfo-0.3.4-1.3.osg.el5
+osg-gums-config-48-1.osg.el5
+osg-test-1.3.6-1.osg.el5
+osg-tested-internal-1-17.osg.el5
+osg-version-3.1.25-1.osg.el5
+rsv-3.7.10-1.osg.el5
+rsv-consumers-3.7.10-1.osg.el5
+rsv-core-3.7.10-1.osg.el5
+rsv-metrics-3.7.10-1.osg.el5
+vo-client-48-1.osg.el5
+vo-client-edgmkgridmap-48-1.osg.el5
+xacml-1.1.2-5.1.osg.el5
+xacml-debuginfo-1.1.2-5.1.osg.el5
+xacml-devel-1.1.2-5.1.osg.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+bestman2-2.3.0-16.osg.el6
+bestman2-client-2.3.0-16.osg.el6
+bestman2-client-libs-2.3.0-16.osg.el6
+bestman2-common-libs-2.3.0-16.osg.el6
+bestman2-server-2.3.0-16.osg.el6
+bestman2-server-dep-libs-2.3.0-16.osg.el6
+bestman2-server-libs-2.3.0-16.osg.el6
+bestman2-tester-2.3.0-16.osg.el6
+bestman2-tester-libs-2.3.0-16.osg.el6
+glideinwms-2.7.2-1.1.0.osg.el6
+glideinwms-factory-2.7.2-1.1.0.osg.el6
+glideinwms-factory-condor-2.7.2-1.1.0.osg.el6
+glideinwms-glidecondor-tools-2.7.2-1.1.0.osg.el6
+glideinwms-libs-2.7.2-1.1.0.osg.el6
+glideinwms-minimal-condor-2.7.2-1.1.0.osg.el6
+glideinwms-usercollector-2.7.2-1.1.0.osg.el6
+glideinwms-userschedd-2.7.2-1.1.0.osg.el6
+glideinwms-vofrontend-2.7.2-1.1.0.osg.el6
+glideinwms-vofrontend-standalone-2.7.2-1.1.0.osg.el6
+globus-gatekeeper-9.6-1.11.osg.el6
+globus-gatekeeper-debuginfo-9.6-1.11.osg.el6
+globus-gram-job-manager-13.45-1.6.osg.el6
+globus-gram-job-manager-debuginfo-13.45-1.6.osg.el6
+globus-gram-job-manager-doc-13.45-1.6.osg.el6
+globus-gridftp-server-6.14-5.osg.el6
+globus-gridftp-server-debuginfo-6.14-5.osg.el6
+globus-gridftp-server-devel-6.14-5.osg.el6
+globus-gridftp-server-progs-6.14-5.osg.el6
+gratia-probe-1.13.18-1.osg.el6
+gratia-probe-bdii-status-1.13.18-1.osg.el6
+gratia-probe-common-1.13.18-1.osg.el6
+gratia-probe-condor-1.13.18-1.osg.el6
+gratia-probe-condor-events-1.13.18-1.osg.el6
+gratia-probe-dcache-storage-1.13.18-1.osg.el6
+gratia-probe-dcache-transfer-1.13.18-1.osg.el6
+gratia-probe-debuginfo-1.13.18-1.osg.el6
+gratia-probe-glexec-1.13.18-1.osg.el6
+gratia-probe-glideinwms-1.13.18-1.osg.el6
+gratia-probe-gram-1.13.18-1.osg.el6
+gratia-probe-gridftp-transfer-1.13.18-1.osg.el6
+gratia-probe-hadoop-storage-1.13.18-1.osg.el6
+gratia-probe-metric-1.13.18-1.osg.el6
+gratia-probe-onevm-1.13.18-1.osg.el6
+gratia-probe-pbs-lsf-1.13.18-1.osg.el6
+gratia-probe-psacct-1.13.18-1.osg.el6
+gratia-probe-services-1.13.18-1.osg.el6
+gratia-probe-sge-1.13.18-1.osg.el6
+gratia-probe-slurm-1.13.18-1.osg.el6
+gratia-probe-xrootd-storage-1.13.18-1.osg.el6
+gratia-probe-xrootd-transfer-1.13.18-1.osg.el6
+gums-1.3.18.009-20.osg.el6
+gums-client-1.3.18.009-20.osg.el6
+gums-service-1.3.18.009-20.osg.el6
+jglobus-2.0.6-3.osg.el6
+lcmaps-plugins-saz-client-0.3.4-1.3.osg.el6
+lcmaps-plugins-scas-client-0.3.4-1.3.osg.el6
+lcmaps-plugins-scas-client-debuginfo-0.3.4-1.3.osg.el6
+osg-gums-config-48-1.osg.el6
+osg-test-1.3.6-1.osg.el6
+osg-tested-internal-1-17.osg.el6
+osg-version-3.1.25-1.osg.el6
+rsv-3.7.10-1.osg.el6
+rsv-consumers-3.7.10-1.osg.el6
+rsv-core-3.7.10-1.osg.el6
+rsv-metrics-3.7.10-1.osg.el6
+vo-client-48-1.osg.el6
+vo-client-edgmkgridmap-48-1.osg.el6
+xacml-1.1.2-5.1.osg.el6
+xacml-debuginfo-1.1.2-5.1.osg.el6
+xacml-devel-1.1.2-5.1.osg.el6
+</pre>
+
+---+++ Upcoming Packages
+
+We added or updated the following packages to the *upcoming* OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5   
+   
+---++++ Enterprise Linux 6
+
+---+++ Upcoming RPMs
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+</pre>
+
+-- Main.TimTheisen - 08 Oct 2013

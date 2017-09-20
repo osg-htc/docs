@@ -1,0 +1,372 @@
+---+ OSG Software Release 3.2.24
+
+*Release Date*: 2015-06-09
+
+---++ Summary of changes
+
+This release contains:
+   * Update to [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/history.html][GlideinWMS 3.2.10]] (from version 3.2.8) 
+   * Update to [[https://github.com/xrootd/xrootd/blob/v4.2.1/docs/ReleaseNotes.txt][XRootD 4.2.1]] (from version 4.1.1)
+   * Added an RSV probe that checks job submission into the batch system ([[https://jira.opensciencegrid.org/browse/SOFTWARE-793][SOFTWARE-793]])
+   * Switch RSV SRM probe to use gfal2 client instead of !BeStMan 2  ([[https://jira.opensciencegrid.org/browse/SOFTWARE-1888][SOFTWARE-1888]])
+   * Updated Gratia probes to version 1.14.2 ([[https://jira.opensciencegrid.org/browse/SOFTWARE-1882][SOFTWARE-1882]]) including new probes for Active Archive Facility
+   * A bug fix for HTCondor jobs remaining idle in the GRAM gatekeeper ([[https://jira.opensciencegrid.org/browse/SOFTWARE-1922][SOFTWARE-1922]])
+   * [[http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt][frontier-squid 2.7.STABLE9-24]] has better support for multiple squid servers on a single machine 
+   * Updated to voms-admin-server 2.7.0-1.13 ([[https://jira.opensciencegrid.org/browse/SOFTWARE-1908][SOFTWARE-1908]])
+   * Updated to osg-configure 1.0.72 ([[https://jira.opensciencegrid.org/browse/SOFTWARE-1930][SOFTWARE-1930]])
+   * Updated to edg-mkgridmap 4.0.2 ([[https://jira.opensciencegrid.org/browse/SOFTWARE-1904][SOFTWARE-1904]])
+   * Updated to RSV 3.9.1 ([[https://jira.opensciencegrid.org/browse/SOFTWARE-1890][SOFTWARE-1890]])
+   * [[https://twiki.grid.iu.edu/bin/view/Operations/PackageV59][VO Package v59]]
+   * CA Certificates updated to [[https://dist.eugridpma.info/distribution/igtf/current/CHANGES][IGTF 1.64]]
+
+These [[https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.2.24%20ORDER%20BY%20priority%20DESC][JIRA tickets]] were addressed in this release.
+
+Detailed changes are below. All of the documentation can be found in the [[Documentation.Release3][Release3]] area of the !TWiki.
+
+---++ Known Issues
+
+   * A bug was introduced in gratia-probe-slurm 1.14.2-4.  It was fixed in 1.14.2-6, currently available from osg-development.  It can be fixed by upgrading or manually running: \
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% sed -i 's/END CASE/END/' /usr/share/gratia/slurm/SlurmProbe.py
+</pre> \
+See also https://ticket.opensciencegrid.org/25834
+   * HTCondor CE does not work with HTCondor 8.3.5 (in upcoming) on EL 5 platforms. So, we are holding HTCondor at version 8.3.4 (in upcoming) for EL 5 platforms.
+   * !StashCache packages need to be manually configured
+      * Manual configuration for origin server
+         * Assuming that the origin server connects only to a redirector (not directly to cache server), minimal xrootd configuration is required. The configuration file, /etc/xrootd/xrootd-stashcache-origin-server.cfg, in this release is overkill. Here are recommended settings to use: \
+<pre class="file">
+xrd.port 1094
+all.role server
+all.manager stash-redirector.example.com 1213
+all.export / nostage
+xrootd.trace emsg login stall redirect
+ofs.trace none
+xrd.trace conn
+cms.trace all
+sec.protocol  host
+sec.protbind  * none
+all.adminpath /var/run/xrootd
+all.pidpath /var/run/xrootd
+</pre>
+      * Manual configuration for cache server
+         * In contrast to the origin server configuration, one needs to declare =pss.origin <stash-redirector.example.com>= instead of configuring the cmsd or manager (only the xrootd daemon is required on the cache server). More detailed configuration of cache server for !StashCache is [[https://confluence.grid.iu.edu/pages/viewpage.action?title=Installing+an+XRootD+server+for+Stash+Cache&spaceKey=STAS][here]].
+      * In both cases, administrator needs to set the path of custom configuration file for its xrootd/cmds instance in /etc/sysconfig/xrootd, For example, change the cmds default from: \
+<pre class="file">
+CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -k fifo"
+</pre> \
+to \
+<pre class="file">
+CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-stashcache-origin-server.marian -k fifo" 
+</pre>
+
+---++ Updating to the new release
+
+---+++ Update Repositories
+
+To update to this series, you need [[Documentation.Release3.YumRepositories#Install_OSG_Repositories][install the current OSG repositories]].
+
+---+++ Update Software
+
+Once the new repositories are installed, you can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or glob]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed changes in this release
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=blahp-1.18.13.bosco-2.osg32.el5][blahp-1.18.13.bosco-2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cilogon-ca-certs-1.1-1.osg32.el5][cilogon-ca-certs-1.1-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cvmfs-config-osg-1.1-6.osg32.el5][cvmfs-config-osg-1.1-6.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=edg-mkgridmap-4.0.2-1.osg32.el5][edg-mkgridmap-4.0.2-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=frontier-squid-2.7.STABLE9-24.1.osg32.el5][frontier-squid-2.7.STABLE9-24.1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glideinwms-3.2.10-1.osg32.el5][glideinwms-3.2.10-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-14.25-1.2.osg32.el5][globus-gram-job-manager-14.25-1.2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.14.2-4.osg32.el5][gratia-probe-1.14.2-4.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gums-1.4.3-2.osg32.el5][gums-1.4.3-2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.64-1.osg32.el5][igtf-ca-certs-1.64-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.46-1.osg32.el5][osg-ca-certs-1.46-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-configure-1.0.72-1.osg32.el5][osg-configure-1.0.72-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.4.25-1.osg32.el5][osg-test-1.4.25-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.24-1.osg32.el5][osg-version-3.2.24-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.9.1-1.osg32.el5][rsv-3.9.1-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-59-1.osg32.el5][vo-client-59-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-admin-server-2.7.0-1.13.osg32.el5][voms-admin-server-2.7.0-1.13.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=xrootd-4.2.1-1.osg32.el5][xrootd-4.2.1-1.osg32.el5]]
+
+---++++ Enterprise Linux 6
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=blahp-1.18.13.bosco-2.osg32.el6][blahp-1.18.13.bosco-2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cilogon-ca-certs-1.1-1.osg32.el6][cilogon-ca-certs-1.1-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=cvmfs-config-osg-1.1-6.osg32.el6][cvmfs-config-osg-1.1-6.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=edg-mkgridmap-4.0.2-1.osg32.el6][edg-mkgridmap-4.0.2-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=frontier-squid-2.7.STABLE9-24.1.osg32.el6][frontier-squid-2.7.STABLE9-24.1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glideinwms-3.2.10-1.osg32.el6][glideinwms-3.2.10-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-14.25-1.2.osg32.el6][globus-gram-job-manager-14.25-1.2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gratia-probe-1.14.2-4.osg32.el6][gratia-probe-1.14.2-4.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gums-1.4.3-2.osg32.el6][gums-1.4.3-2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.64-1.osg32.el6][igtf-ca-certs-1.64-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.46-1.osg32.el6][osg-ca-certs-1.46-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-configure-1.0.72-1.osg32.el6][osg-configure-1.0.72-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.4.25-1.osg32.el6][osg-test-1.4.25-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.24-1.osg32.el6][osg-version-3.2.24-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.9.1-1.osg32.el6][rsv-3.9.1-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-59-1.osg32.el6][vo-client-59-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-admin-server-2.7.0-1.13.osg32.el6][voms-admin-server-2.7.0-1.13.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=xrootd-4.2.1-1.osg32.el6][xrootd-4.2.1-1.osg32.el6]]
+
+---+++ RPMs
+
+If you wish to manually update your system, you can run yum update against the following packages:
+
+<pre>
+blahp blahp-debuginfo cilogon-ca-certs cvmfs-config-osg edg-mkgridmap frontier-squid frontier-squid-debuginfo glideinwms-factory glideinwms-factory-condor glideinwms-glidecondor-tools glideinwms-libs glideinwms-minimal-condor glideinwms-usercollector glideinwms-userschedd glideinwms-vofrontend glideinwms-vofrontend-standalone globus-gram-job-manager globus-gram-job-manager-debuginfo gratia-probe-bdii-status gratia-probe-common gratia-probe-condor gratia-probe-condor-events gratia-probe-dcache-storage gratia-probe-dcache-storagegroup gratia-probe-dcache-transfer gratia-probe-debuginfo gratia-probe-enstore-storage gratia-probe-enstore-tapedrive gratia-probe-enstore-transfer gratia-probe-glexec gratia-probe-glideinwms gratia-probe-gram gratia-probe-gridftp-transfer gratia-probe-hadoop-storage gratia-probe-lsf gratia-probe-metric gratia-probe-onevm gratia-probe-pbs-lsf gratia-probe-psacct gratia-probe-services gratia-probe-sge gratia-probe-slurm gratia-probe-xrootd-storage gratia-probe-xrootd-transfer gums gums-client gums-service igtf-ca-certs osg-ca-certs osg-configure osg-configure-ce osg-configure-cemon osg-configure-condor osg-configure-gateway osg-configure-gip osg-configure-gratia osg-configure-infoservices osg-configure-lsf osg-configure-managedfork osg-configure-misc osg-configure-monalisa osg-configure-network osg-configure-pbs osg-configure-rsv osg-configure-sge osg-configure-slurm osg-configure-squid osg-configure-tests osg-gums-config osg-test osg-version rsv rsv-consumers rsv-core rsv-metrics vo-client vo-client-edgmkgridmap voms-admin-server xrootd xrootd-client xrootd-client-devel xrootd-client-libs xrootd-debuginfo xrootd-devel xrootd-doc xrootd-fuse xrootd-libs xrootd-private-devel xrootd-python xrootd-selinux xrootd-server xrootd-server-devel xrootd-server-libs
+</pre>
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+blahp-1.18.13.bosco-2.osg32.el5
+blahp-debuginfo-1.18.13.bosco-2.osg32.el5
+cilogon-ca-certs-1.1-1.osg32.el5
+cvmfs-config-osg-1.1-6.osg32.el5
+edg-mkgridmap-4.0.2-1.osg32.el5
+frontier-squid-2.7.STABLE9-24.1.osg32.el5
+frontier-squid-debuginfo-2.7.STABLE9-24.1.osg32.el5
+glideinwms-3.2.10-1.osg32.el5
+glideinwms-factory-3.2.10-1.osg32.el5
+glideinwms-factory-condor-3.2.10-1.osg32.el5
+glideinwms-glidecondor-tools-3.2.10-1.osg32.el5
+glideinwms-libs-3.2.10-1.osg32.el5
+glideinwms-minimal-condor-3.2.10-1.osg32.el5
+glideinwms-usercollector-3.2.10-1.osg32.el5
+glideinwms-userschedd-3.2.10-1.osg32.el5
+glideinwms-vofrontend-3.2.10-1.osg32.el5
+glideinwms-vofrontend-standalone-3.2.10-1.osg32.el5
+globus-gram-job-manager-14.25-1.2.osg32.el5
+globus-gram-job-manager-debuginfo-14.25-1.2.osg32.el5
+gratia-probe-1.14.2-4.osg32.el5
+gratia-probe-bdii-status-1.14.2-4.osg32.el5
+gratia-probe-common-1.14.2-4.osg32.el5
+gratia-probe-condor-1.14.2-4.osg32.el5
+gratia-probe-condor-events-1.14.2-4.osg32.el5
+gratia-probe-dcache-storage-1.14.2-4.osg32.el5
+gratia-probe-dcache-storagegroup-1.14.2-4.osg32.el5
+gratia-probe-dcache-transfer-1.14.2-4.osg32.el5
+gratia-probe-debuginfo-1.14.2-4.osg32.el5
+gratia-probe-enstore-storage-1.14.2-4.osg32.el5
+gratia-probe-enstore-tapedrive-1.14.2-4.osg32.el5
+gratia-probe-enstore-transfer-1.14.2-4.osg32.el5
+gratia-probe-glexec-1.14.2-4.osg32.el5
+gratia-probe-glideinwms-1.14.2-4.osg32.el5
+gratia-probe-gram-1.14.2-4.osg32.el5
+gratia-probe-gridftp-transfer-1.14.2-4.osg32.el5
+gratia-probe-hadoop-storage-1.14.2-4.osg32.el5
+gratia-probe-lsf-1.14.2-4.osg32.el5
+gratia-probe-metric-1.14.2-4.osg32.el5
+gratia-probe-onevm-1.14.2-4.osg32.el5
+gratia-probe-pbs-lsf-1.14.2-4.osg32.el5
+gratia-probe-psacct-1.14.2-4.osg32.el5
+gratia-probe-services-1.14.2-4.osg32.el5
+gratia-probe-sge-1.14.2-4.osg32.el5
+gratia-probe-slurm-1.14.2-4.osg32.el5
+gratia-probe-xrootd-storage-1.14.2-4.osg32.el5
+gratia-probe-xrootd-transfer-1.14.2-4.osg32.el5
+gums-1.4.3-2.osg32.el5
+gums-client-1.4.3-2.osg32.el5
+gums-service-1.4.3-2.osg32.el5
+igtf-ca-certs-1.64-1.osg32.el5
+osg-ca-certs-1.46-1.osg32.el5
+osg-configure-1.0.72-1.osg32.el5
+osg-configure-ce-1.0.72-1.osg32.el5
+osg-configure-cemon-1.0.72-1.osg32.el5
+osg-configure-condor-1.0.72-1.osg32.el5
+osg-configure-gateway-1.0.72-1.osg32.el5
+osg-configure-gip-1.0.72-1.osg32.el5
+osg-configure-gratia-1.0.72-1.osg32.el5
+osg-configure-infoservices-1.0.72-1.osg32.el5
+osg-configure-lsf-1.0.72-1.osg32.el5
+osg-configure-managedfork-1.0.72-1.osg32.el5
+osg-configure-misc-1.0.72-1.osg32.el5
+osg-configure-monalisa-1.0.72-1.osg32.el5
+osg-configure-network-1.0.72-1.osg32.el5
+osg-configure-pbs-1.0.72-1.osg32.el5
+osg-configure-rsv-1.0.72-1.osg32.el5
+osg-configure-sge-1.0.72-1.osg32.el5
+osg-configure-slurm-1.0.72-1.osg32.el5
+osg-configure-squid-1.0.72-1.osg32.el5
+osg-configure-tests-1.0.72-1.osg32.el5
+osg-gums-config-59-1.osg32.el5
+osg-test-1.4.25-1.osg32.el5
+osg-version-3.2.24-1.osg32.el5
+rsv-3.9.1-1.osg32.el5
+rsv-consumers-3.9.1-1.osg32.el5
+rsv-core-3.9.1-1.osg32.el5
+rsv-metrics-3.9.1-1.osg32.el5
+vo-client-59-1.osg32.el5
+vo-client-edgmkgridmap-59-1.osg32.el5
+voms-admin-server-2.7.0-1.13.osg32.el5
+xrootd-4.2.1-1.osg32.el5
+xrootd-client-4.2.1-1.osg32.el5
+xrootd-client-devel-4.2.1-1.osg32.el5
+xrootd-client-libs-4.2.1-1.osg32.el5
+xrootd-debuginfo-4.2.1-1.osg32.el5
+xrootd-devel-4.2.1-1.osg32.el5
+xrootd-doc-4.2.1-1.osg32.el5
+xrootd-fuse-4.2.1-1.osg32.el5
+xrootd-libs-4.2.1-1.osg32.el5
+xrootd-private-devel-4.2.1-1.osg32.el5
+xrootd-python-4.2.1-1.osg32.el5
+xrootd-selinux-4.2.1-1.osg32.el5
+xrootd-server-4.2.1-1.osg32.el5
+xrootd-server-devel-4.2.1-1.osg32.el5
+xrootd-server-libs-4.2.1-1.osg32.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+blahp-1.18.13.bosco-2.osg32.el6
+blahp-debuginfo-1.18.13.bosco-2.osg32.el6
+cilogon-ca-certs-1.1-1.osg32.el6
+cvmfs-config-osg-1.1-6.osg32.el6
+edg-mkgridmap-4.0.2-1.osg32.el6
+frontier-squid-2.7.STABLE9-24.1.osg32.el6
+frontier-squid-debuginfo-2.7.STABLE9-24.1.osg32.el6
+glideinwms-3.2.10-1.osg32.el6
+glideinwms-factory-3.2.10-1.osg32.el6
+glideinwms-factory-condor-3.2.10-1.osg32.el6
+glideinwms-glidecondor-tools-3.2.10-1.osg32.el6
+glideinwms-libs-3.2.10-1.osg32.el6
+glideinwms-minimal-condor-3.2.10-1.osg32.el6
+glideinwms-usercollector-3.2.10-1.osg32.el6
+glideinwms-userschedd-3.2.10-1.osg32.el6
+glideinwms-vofrontend-3.2.10-1.osg32.el6
+glideinwms-vofrontend-standalone-3.2.10-1.osg32.el6
+globus-gram-job-manager-14.25-1.2.osg32.el6
+globus-gram-job-manager-debuginfo-14.25-1.2.osg32.el6
+gratia-probe-1.14.2-4.osg32.el6
+gratia-probe-bdii-status-1.14.2-4.osg32.el6
+gratia-probe-common-1.14.2-4.osg32.el6
+gratia-probe-condor-1.14.2-4.osg32.el6
+gratia-probe-condor-events-1.14.2-4.osg32.el6
+gratia-probe-dcache-storage-1.14.2-4.osg32.el6
+gratia-probe-dcache-storagegroup-1.14.2-4.osg32.el6
+gratia-probe-dcache-transfer-1.14.2-4.osg32.el6
+gratia-probe-debuginfo-1.14.2-4.osg32.el6
+gratia-probe-enstore-storage-1.14.2-4.osg32.el6
+gratia-probe-enstore-tapedrive-1.14.2-4.osg32.el6
+gratia-probe-enstore-transfer-1.14.2-4.osg32.el6
+gratia-probe-glexec-1.14.2-4.osg32.el6
+gratia-probe-glideinwms-1.14.2-4.osg32.el6
+gratia-probe-gram-1.14.2-4.osg32.el6
+gratia-probe-gridftp-transfer-1.14.2-4.osg32.el6
+gratia-probe-hadoop-storage-1.14.2-4.osg32.el6
+gratia-probe-lsf-1.14.2-4.osg32.el6
+gratia-probe-metric-1.14.2-4.osg32.el6
+gratia-probe-onevm-1.14.2-4.osg32.el6
+gratia-probe-pbs-lsf-1.14.2-4.osg32.el6
+gratia-probe-psacct-1.14.2-4.osg32.el6
+gratia-probe-services-1.14.2-4.osg32.el6
+gratia-probe-sge-1.14.2-4.osg32.el6
+gratia-probe-slurm-1.14.2-4.osg32.el6
+gratia-probe-xrootd-storage-1.14.2-4.osg32.el6
+gratia-probe-xrootd-transfer-1.14.2-4.osg32.el6
+gums-1.4.3-2.osg32.el6
+gums-client-1.4.3-2.osg32.el6
+gums-service-1.4.3-2.osg32.el6
+igtf-ca-certs-1.64-1.osg32.el6
+osg-ca-certs-1.46-1.osg32.el6
+osg-configure-1.0.72-1.osg32.el6
+osg-configure-ce-1.0.72-1.osg32.el6
+osg-configure-cemon-1.0.72-1.osg32.el6
+osg-configure-condor-1.0.72-1.osg32.el6
+osg-configure-gateway-1.0.72-1.osg32.el6
+osg-configure-gip-1.0.72-1.osg32.el6
+osg-configure-gratia-1.0.72-1.osg32.el6
+osg-configure-infoservices-1.0.72-1.osg32.el6
+osg-configure-lsf-1.0.72-1.osg32.el6
+osg-configure-managedfork-1.0.72-1.osg32.el6
+osg-configure-misc-1.0.72-1.osg32.el6
+osg-configure-monalisa-1.0.72-1.osg32.el6
+osg-configure-network-1.0.72-1.osg32.el6
+osg-configure-pbs-1.0.72-1.osg32.el6
+osg-configure-rsv-1.0.72-1.osg32.el6
+osg-configure-sge-1.0.72-1.osg32.el6
+osg-configure-slurm-1.0.72-1.osg32.el6
+osg-configure-squid-1.0.72-1.osg32.el6
+osg-configure-tests-1.0.72-1.osg32.el6
+osg-gums-config-59-1.osg32.el6
+osg-test-1.4.25-1.osg32.el6
+osg-version-3.2.24-1.osg32.el6
+rsv-3.9.1-1.osg32.el6
+rsv-consumers-3.9.1-1.osg32.el6
+rsv-core-3.9.1-1.osg32.el6
+rsv-metrics-3.9.1-1.osg32.el6
+vo-client-59-1.osg32.el6
+vo-client-edgmkgridmap-59-1.osg32.el6
+voms-admin-server-2.7.0-1.13.osg32.el6
+xrootd-4.2.1-1.osg32.el6
+xrootd-client-4.2.1-1.osg32.el6
+xrootd-client-devel-4.2.1-1.osg32.el6
+xrootd-client-libs-4.2.1-1.osg32.el6
+xrootd-debuginfo-4.2.1-1.osg32.el6
+xrootd-devel-4.2.1-1.osg32.el6
+xrootd-doc-4.2.1-1.osg32.el6
+xrootd-fuse-4.2.1-1.osg32.el6
+xrootd-libs-4.2.1-1.osg32.el6
+xrootd-private-devel-4.2.1-1.osg32.el6
+xrootd-python-4.2.1-1.osg32.el6
+xrootd-selinux-4.2.1-1.osg32.el6
+xrootd-server-4.2.1-1.osg32.el6
+xrootd-server-devel-4.2.1-1.osg32.el6
+xrootd-server-libs-4.2.1-1.osg32.el6
+</pre>
+
+---+++ Upcoming Packages
+
+We added or updated the following packages to the *upcoming* OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=blahp-1.18.13.bosco-1.osgup.el5][blahp-1.18.13.bosco-1.osgup.el5]]
+---++++ Enterprise Linux 6
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=blahp-1.18.13.bosco-1.osgup.el6][blahp-1.18.13.bosco-1.osgup.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=stashcache-daemon-0.2-1.osgup.el6][stashcache-daemon-0.2-1.osgup.el6]]
+---+++ Upcoming RPMs
+
+If you wish to manually update your system, you can run yum update against the following packages:
+
+<pre>
+blahp blahp-debuginfo stashcache-daemon
+</pre>
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+blahp-1.18.13.bosco-1.osgup.el5
+blahp-debuginfo-1.18.13.bosco-1.osgup.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+blahp-1.18.13.bosco-1.osgup.el6
+blahp-debuginfo-1.18.13.bosco-1.osgup.el6
+stashcache-daemon-0.2-1.osgup.el6
+</pre>

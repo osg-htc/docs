@@ -35,7 +35,7 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Ensure the RSV host has [a supported operating system](../common/yum.md)
 - Obtain root access to the host
 - Prepare [the required Yum repositories](../common/yum.md)
-- Install [CA certificates](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth)
+- Install [CA certificates](../common/ca)
 
 Installing RSV
 --------------
@@ -53,19 +53,19 @@ An installation of RSV at a site consists of the RSV client software, the Apache
 
 2. If you have installed HTCondor already but not by RPM, install a special empty RPM to make RSV happy:
 
-        :::console   
+        :::console
         [root@client ~] # yum install empty-condor --enablerepo=osg-empty
 
-3. Install RSV and related software: 
+3. Install RSV and related software:
 
         :::console
-        [root@client ~] # yum install rsv  
-   
+        [root@client ~] # yum install rsv
+
 Configuring RSV
 ---------------
- 
+
 After installation, there are some one-time configuration steps to tell RSV how to operate at your site.
- 
+
 1. Edit `/etc/osg/config.d/30-rsv.ini` and follow the instructions in the file. There are detailed comments for each setting. In the simplest case — to monitor only your CE — set the `htcondor_ce_hosts` variable to the fully qualified hostname of your CE.
 
 2. If you have installed HTCondor already but not by RPM, specify the location of the Condor installation in `30-rsv.ini` in the `condor_location` setting. If an HTCondor RPM is installed, you do not need to set `condor_location`.
@@ -89,7 +89,7 @@ RSV monitors systems by running probes, which can run on the RSV host itself (th
 In this case, remember to:
 
 - Add the RSV user `rsv` on all the systems where the probes may run, and
-- Map the RSV service certificate to the user you intend to use for RSV. This should be a local user used exclusively for RSV and not belonging to an institutional VO to avoid for the RSV probes to be accounted as regular VO jobs in Gratia. This can be done in [GUMS](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums) or [using a grid-mapfile-local](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/Edg-mkgridmap) (if you use a grid-mapfile). [MapServiceCertToRsvUser](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/MapServiceCertToRsvUser) explains how to configure GUMS or the grid-mapfile. Also see the [CE installation document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavAdminCompute) for more information.
+- Map the RSV service certificate to the user you intend to use for RSV. This should be a local user used exclusively for RSV and not belonging to an institutional VO to avoid for the RSV probes to be accounted as regular VO jobs in Gratia. This can be done in [GUMS](../security/install-gums) or [using a grid-mapfile-local](../security/edg-mkgridmap) (if you use a grid-mapfile). [MapServiceCertToRsvUser](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/MapServiceCertToRsvUser) explains how to configure GUMS or the grid-mapfile. Also see the [CE installation document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavAdminCompute) for more information.
 
 #### Configuring the RSV web server to use HTTPS instead of HTTP
 
@@ -117,14 +117,14 @@ If you would like your local RSV web server to use HTTPS instead of the default 
 
         :::file
         Listen 8000
-        
+
 
 5. Set up HTTPS access by editing `/etc/httpd/conf.d/ssl.conf`:
 
         :::file
         Listen 8443
         <VirtualHost _default_:8443>
-        SSLCertificateFile /etc/grid-security/http/httpcert2.pem	
+        SSLCertificateFile /etc/grid-security/http/httpcert2.pem
         SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 
     After these changes, when you start the Apache service, it will listening on ports `8000` (for HTTP) and `8443` (for HTTPS), rather than the default port `80` (for HTTP only).
@@ -142,7 +142,7 @@ In addition to the RSV service itself, there are a number of supporting services
 
 | Software      | Service name                                   | Notes                   |
 |:--------------|:-----------------------------------------------|------------------------ |
-| Fetch CRL     | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui)|
+| Fetch CRL     | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca/#startstop-fetch-crl-a-quick-guide)|
 | Apache        | httpd                                          |                         |
 | HTCondor-Cron | condor-cron                                    |                         |
 | RSV           | rsv                                            |                         |
@@ -201,13 +201,13 @@ The first step to getting more information is to run rsv-control with more verbo
 - 2 = adds informational messages
 - 3 = full debugging output
 
-For example, here is the output when running a metric with -v2. 
+For example, here is the output when running a metric with -v2.
 
-<details> 
+<details>
   <summary>Show detailed ouput</summary>
    <p>
 ```console
-   [root@fermicloud016 condor]# rsv-control -r org.osg.general.osg-version -v 2 -u osg-edu.cs.wisc.edu 
+   [root@fermicloud016 condor]# rsv-control -r org.osg.general.osg-version -v 2 -u osg-edu.cs.wisc.edu
    INFO: Reading configuration file /etc/rsv/rsv.conf
    INFO: Reading configuration file /etc/rsv/consumers.conf
    INFO: Validating configuration:
@@ -298,7 +298,7 @@ The RSV installation will create two users unless they are already created. The 
 !!! warning
 
     If you manage your `/etc/passwd` file with configuration management software such as Puppet, CFEngine or 411, make sure the UID and GID in `/etc/condor-cron/config.d/condor_ids` matches the UID and GID of the `cndrcron` user and group in `/etc/passwd`. If it does not, create a file named `/etc/condor-cron/config.d/condor_ids_override` with the contents:
-   
+
 
 ```file
 CONDOR_IDS=UID.GID
@@ -323,7 +323,7 @@ See [instructions](../common/pki-cli.md) to request a service certificate.
 
 | Service Name  | Protocol    |Port Number | Inbound | Outbound | Comment |
 |:--------------|:------------|:-----------|:--------|:---------|:--------|
-| HTTP          | tcp         | 80         |   YES   |          | RSV runs an HTTP server (Apache) that publishes a page with the RSV testing results | 
+| HTTP          | tcp         | 80         |   YES   |          | RSV runs an HTTP server (Apache) that publishes a page with the RSV testing results |
 | HTTP          | tcp         | 80         |         | YES      | RSV pushes testing results to the OSG Gratia Collectors at opensciencegrid.org  |
 | various       | various     | various    |  	     | YES      | Allow outbound network connection to all services that you want to test        |
 

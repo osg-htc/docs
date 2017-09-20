@@ -1,0 +1,190 @@
+%TOC%
+
+---+ OSG Software Release 3.1.11
+
+*Release Date*: 6 November 2012
+
+---++ Summary of changes
+
+The highlights of this release include:
+   * CA cert updater: new package to update CA certificates
+   * VOMS admin update
+   * java security update
+   * condor update
+   * RSV updates for probe fixes
+   * New OSG PKI tools
+
+Detailed changes are below. All of the documentation can be found in [[Documentation.Release3][the "Release3"]] area of the !TWiki.
+
+---++ Updating to the new release
+
+If you have an existing installation, you can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or regex]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, rpm does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+
+---++ Detailed changes in this release
+
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each 'package': you can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=InstalledCapacityReport-1.0-12][InstalledCapacityReport-1.0-12]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-7.8.6-1.osg.el5][condor-7.8.6-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-client-tools-10.0-7.osg.el5][globus-gram-client-tools-10.0-7.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-condor-1.0-13.2.osg.el5][globus-gram-job-manager-condor-1.0-13.2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gsi-cert-utils-8.1-4.1.osg.el5][globus-gsi-cert-utils-8.1-4.1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=graphtool-0.6.6-13][graphtool-0.6.6-13]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=java-1.6.0-sun-compat-1.6.0.37-1.osg.el5][java-1.6.0-sun-compat-1.6.0.37-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=jdk-1.6.0_37-fcs.1.osg.el5][jdk-1.6.0_37-fcs.1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-updater-0.4-1.osg.el5][osg-ca-certs-updater-0.4-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-cleanup-1.6-1.osg.el5][osg-cleanup-1.6-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-pki-tools-1.0.3-1.osg.el5][osg-pki-tools-1.0.3-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.2.2-1.osg.el5][osg-test-1.2.2-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.11-1.osg.el5][osg-version-3.1.11-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.7.7-1.osg.el5][rsv-3.7.7-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-consumers-3.7.7-1.osg.el5][rsv-consumers-3.7.7-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-core-3.7.7-1.osg.el5][rsv-core-3.7.7-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-metrics-3.7.7-1.osg.el5][rsv-metrics-3.7.7-1.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-43-2.osg.el5][vo-client-43-2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-2.0.8-1.3.osg.el5][voms-2.0.8-1.3.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-admin-server-2.7.0-1.2.osg.el5][voms-admin-server-2.7.0-1.2.osg.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-mysql-plugin-3.1.6-1.1.osg.el5][voms-mysql-plugin-3.1.6-1.1.osg.el5]]
+
+
+---++++ Enterprise Linux 6
+
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=condor-7.8.6-1.osg.el6][condor-7.8.6-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-client-tools-10.0-7.osg.el6][globus-gram-client-tools-10.0-7.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gram-job-manager-condor-1.0-13.2.osg.el6][globus-gram-job-manager-condor-1.0-13.2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-gsi-cert-utils-8.1-4.1.osg.el6][globus-gsi-cert-utils-8.1-4.1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=java-1.6.0-sun-compat-1.6.0.37-1.osg.el6][java-1.6.0-sun-compat-1.6.0.37-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=jdk-1.6.0_37-fcs.1.osg.el6][jdk-1.6.0_37-fcs.1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-updater-0.4-1.osg.el6][osg-ca-certs-updater-0.4-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-cleanup-1.6-1.osg.el6][osg-cleanup-1.6-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-pki-tools-1.0.3-1.osg.el6][osg-pki-tools-1.0.3-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-test-1.2.2-1.osg.el6][osg-test-1.2.2-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.1.11-1.osg.el6][osg-version-3.1.11-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.7.7-1.osg.el6][rsv-3.7.7-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-consumers-3.7.7-1.osg.el6][rsv-consumers-3.7.7-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-core-3.7.7-1.osg.el6][rsv-core-3.7.7-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-metrics-3.7.7-1.osg.el6][rsv-metrics-3.7.7-1.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-43-2.osg.el6][vo-client-43-2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-2.0.8-1.3.osg.el6][voms-2.0.8-1.3.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-admin-server-2.7.0-1.2.osg.el6][voms-admin-server-2.7.0-1.2.osg.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=voms-mysql-plugin-3.1.6-1.1.osg.el6][voms-mysql-plugin-3.1.6-1.1.osg.el6]]
+
+
+---+++ RPMs
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+condor-7.8.6-1.osg.el5
+condor-classads-7.8.6-1.osg.el5
+condor-classads-devel-7.8.6-1.osg.el5
+condor-cream-gahp-7.8.6-1.osg.el5
+condor-debuginfo-7.8.6-1.osg.el5
+condor-kbdd-7.8.6-1.osg.el5
+condor-procd-7.8.6-1.osg.el5
+condor-vm-gahp-7.8.6-1.osg.el5
+globus-gram-client-tools-10.0-7.osg.el5
+globus-gram-client-tools-debuginfo-10.0-7.osg.el5
+globus-gram-job-manager-condor-1.0-13.2.osg.el5
+globus-gsi-cert-utils-8.1-4.1.osg.el5
+globus-gsi-cert-utils-debuginfo-8.1-4.1.osg.el5
+globus-gsi-cert-utils-devel-8.1-4.1.osg.el5
+globus-gsi-cert-utils-doc-8.1-4.1.osg.el5
+globus-gsi-cert-utils-progs-8.1-4.1.osg.el5
+graphtool-0.6.6-13
+InstalledCapacityReport-1.0-12
+java-1.6.0-sun-compat-1.6.0.37-1.osg.el5
+jdk-1.6.0_37-fcs.1.osg.el5
+osg-ca-certs-updater-0.4-1.osg.el5
+osg-cleanup-1.6-1.osg.el5
+osg-gums-config-43-2.osg.el5
+osg-pki-tools-1.0.3-1.osg.el5
+osg-pki-tools-tests-1.0.3-1.osg.el5
+osg-test-1.2.2-1.osg.el5
+osg-version-3.1.11-1.osg.el5
+rsv-3.7.7-1.osg.el5
+rsv-consumers-3.7.7-1.osg.el5
+rsv-core-3.7.7-1.osg.el5
+rsv-metrics-3.7.7-1.osg.el5
+vo-client-43-2.osg.el5
+vo-client-edgmkgridmap-43-2.osg.el5
+voms-2.0.8-1.3.osg.el5
+voms-admin-server-2.7.0-1.2.osg.el5
+voms-clients-2.0.8-1.3.osg.el5
+voms-compat-1.9.19.2-7.1.osg.el5
+voms-debuginfo-2.0.8-1.3.osg.el5
+voms-devel-2.0.8-1.3.osg.el5
+voms-doc-2.0.8-1.3.osg.el5
+voms-mysql-plugin-3.1.6-1.1.osg.el5
+voms-mysql-plugin-debuginfo-3.1.6-1.1.osg.el5
+voms-server-2.0.8-1.3.osg.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+condor-7.8.6-1.osg.el6
+condor-classads-7.8.6-1.osg.el6
+condor-classads-devel-7.8.6-1.osg.el6
+condor-cream-gahp-7.8.6-1.osg.el6
+condor-debuginfo-7.8.6-1.osg.el6
+condor-kbdd-7.8.6-1.osg.el6
+condor-procd-7.8.6-1.osg.el6
+condor-vm-gahp-7.8.6-1.osg.el6
+globus-gram-client-tools-10.0-7.osg.el6
+globus-gram-client-tools-debuginfo-10.0-7.osg.el6
+globus-gram-job-manager-condor-1.0-13.2.osg.el6
+globus-gsi-cert-utils-8.1-4.1.osg.el6
+globus-gsi-cert-utils-debuginfo-8.1-4.1.osg.el6
+globus-gsi-cert-utils-devel-8.1-4.1.osg.el6
+globus-gsi-cert-utils-doc-8.1-4.1.osg.el6
+globus-gsi-cert-utils-progs-8.1-4.1.osg.el6
+java-1.6.0-sun-compat-1.6.0.37-1.osg.el6
+jdk-1.6.0_37-fcs.1.osg.el6
+osg-ca-certs-updater-0.4-1.osg.el6
+osg-cleanup-1.6-1.osg.el6
+osg-gums-config-43-2.osg.el6
+osg-pki-tools-1.0.3-1.osg.el6
+osg-pki-tools-tests-1.0.3-1.osg.el6
+osg-test-1.2.2-1.osg.el6
+osg-version-3.1.11-1.osg.el6
+rsv-3.7.7-1.osg.el6
+rsv-consumers-3.7.7-1.osg.el6
+rsv-core-3.7.7-1.osg.el6
+rsv-metrics-3.7.7-1.osg.el6
+vo-client-43-2.osg.el6
+vo-client-edgmkgridmap-43-2.osg.el6
+voms-2.0.8-1.3.osg.el6
+voms-admin-server-2.7.0-1.2.osg.el6
+voms-clients-2.0.8-1.3.osg.el6
+voms-compat-1.9.19.2-7.1.osg.el6
+voms-debuginfo-2.0.8-1.3.osg.el6
+voms-devel-2.0.8-1.3.osg.el6
+voms-doc-2.0.8-1.3.osg.el6
+voms-mysql-plugin-3.1.6-1.1.osg.el6
+voms-mysql-plugin-debuginfo-3.1.6-1.1.osg.el6
+voms-server-2.0.8-1.3.osg.el6
+</pre>
+
+
+-- Main.DouglasStrain - 06 Nov 2012

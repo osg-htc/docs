@@ -12,23 +12,28 @@ pages:
 - Install Guides - Common:
   - 'CA Certificates': 'common/ca.md'
   - 'Yum Repos': 'common/yum.md'
-- Install Guides - Client:
-  - 'Worker Node (RPM install)': 'client/wn.md'
-  - 'Worker Node (tarball install)': 'client/wn-tarball.md'
-  - 'Worker Node (OASIS install)': 'client/wn-oasis.md'
-  - 'CVMFS': 'client/cvmfs.md'
-  - 'Singularity': 'client/singularity.md'
+- Install Guides - Worker Node:
+  - 'Worker Node (RPM install)': 'worker-node/install-wn.md'
+  - 'Worker Node (tarball install)': 'worker-node/install-wn-tarball.md'
+  - 'Worker Node (OASIS install)': 'worker-node/install-wn-oasis.md'
+  - 'CVMFS': 'worker-node/install-cvmfs.md'
+  - 'Singularity': 'worker-node/install-singularity.md'
 - Install Guides - Compute:
   - 'HTCondor-CE': 'compute-element/install-htcondor-ce.md'
 - Install Guides - Data:
   - 'GridFTP Server': 'data/gridftp.md'
   - 'HTTP Cache': 'data/frontier-squid.md'
+- Install Guides - Other:
+  - 'GSI-enabled SSH': 'other/gsissh.md'
+  - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
+  - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
 - Install Guides - Monitoring:
   - 'RSV': 'monitoring/rsv.md'
   - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
 - Install Guides - Other:
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
+  - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
 - Overviews:
   - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
 - Release Information:
@@ -36,10 +41,11 @@ pages:
   - 'Supported Platforms': 'release/supported_platforms.md'
   - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
+  - 'Contrib Software': 'release/contrib.md'
 - Usage Guides:
   - 'Certificate Tools': 'common/pki-cli.md'
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
-  - 'Worker Node Environment': 'client/using-wn.md'
+  - 'Worker Node Environment': 'worker-node/using-wn.md'
 - In-Progress Docs:
   - 'CA Updater': 'common/ca_updater.md'
   - 'Certificate Request Scripts': 'common/cert_scripts.md'
@@ -47,11 +53,14 @@ pages:
 - Deprecated Software:
   - 'BeStMan Overview': 'data/bestman-overview.md'
   - 'BeStMan Install': 'data/bestman-install.md'
-  - 'Worker node glexec Install': 'client/glexec.md'
+  - 'EDG-Mkgridmap Install': 'security/edg-mkgridmap.md'
+  - 'GUMS': 'security/install-gums.md'
+  - 'Worker node glexec Install': 'worker-node/install-glexec.md'
 - 'Get Help': 'common/help.md'
 
 markdown_extensions:
   - admonition
   - codehilite
+  - toc(permalink=true)
   - osg_markdown.colors
 

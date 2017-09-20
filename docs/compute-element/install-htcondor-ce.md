@@ -23,7 +23,7 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Ensure the host has [a supported operating system](../release/supported_platforms)
 - Obtain root access to the host
 - Prepare the [required Yum repositories](../common/yum)
-- Install [CA certificates](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth)
+- Install [CA certificates](../common/ca)
 
 Installing HTCondor-CE
 ----------------------
@@ -128,7 +128,7 @@ blah_disable_limited_proxy=yes
 
 ### Configuring authentication
 
-In OSG 3.3, there are three methods to manage authentication for incoming jobs: the [LCMAPS VOMS plugin](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallLcmapsVoms), [edg-mkgridmap](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/Edg-mkgridmap) and [GUMS](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums). edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support [pool accounts](https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html), GUMS is the only software with that capability.
+In OSG 3.3, there are three methods to manage authentication for incoming jobs: the [LCMAPS VOMS plugin](../security/lcmaps-voms-authentication), [edg-mkgridmap](../security/edg-mkgridmap) and [GUMS](../security/install-gums). edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support [pool accounts](https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html), GUMS is the only software with that capability.
 
 In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution.
 
@@ -140,7 +140,7 @@ To configure your CE to use the LCMAPS VOMS plugin:
 
         export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1
 
-2. Follow the instructions in [the LCMAPS VOMS plugin installation and configuration document](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallLcmapsVoms) to prepare the LCMAPS VOMS plugin
+2. Follow the instructions in [the LCMAPS VOMS plugin installation and configuration document](../security/lcmaps-voms-authentication) to prepare the LCMAPS VOMS plugin
 
 !!! note
     If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the `condor_mapfile`. If this is not the desired behavior, set `GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
@@ -152,7 +152,7 @@ To configure your CE to use the LCMAPS VOMS plugin:
 
 To configure your CE to use edg-mkgridmap:
 
-1. Follow the configuration instructions in [the edg-mkgridmap document](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/Edg-mkgridmap) to define the VOs that your site accepts
+1. Follow the configuration instructions in [the edg-mkgridmap document](../security/edg-mkgridmap) to define the VOs that your site accepts
 2. Set some critical gridmap attributes by editing the `/etc/osg/config.d/10-misc.ini` file on the HTCondor-CE host:
 
         authorization_method = gridmap
@@ -162,7 +162,7 @@ To configure your CE to use edg-mkgridmap:
 !!! warning
     GUMS is unavailable in OSG 3.4
 
-1. Follow the instructions in [the GUMS installation and configuration document](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallGums) to prepare GUMS
+1. Follow the instructions in [the GUMS installation and configuration document](../security/install-gums) to prepare GUMS
 2. Set some critical GUMS attributes by editing the `/etc/osg/config.d/10-misc.ini` file on the HTCondor-CE host:
 
         authorization_method = xacml
@@ -242,17 +242,17 @@ If you want to limit or disable jobs running locally on your CE, you will need t
 
 The two universes are effectively the same (scheduler universe launches a starter process for each job), so we will be configuring them in unison.
 
-- **To change the default limit** on the number of locally run jobs (the current default is 20), add the following to `/etc/condor-ce/config.d/99-local.conf`: 
+- **To change the default limit** on the number of locally run jobs (the current default is 20), add the following to `/etc/condor-ce/config.d/99-local.conf`:
 
         START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning < %RED%<JOB-LIMIT>%ENDCOLOR%
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 
-- **To only allow a specific user** to start locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`: 
+- **To only allow a specific user** to start locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`:
 
         START_LOCAL_UNIVERSE = target.Owner =?= "%RED%<USERNAME>%ENDCOLOR%"
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 
-- **To disable** locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`: 
+- **To disable** locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`:
 
         START_LOCAL_UNIVERSE = False
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
@@ -285,7 +285,7 @@ SuppressNoDNRecords="1"
 !!! note
     For HTCondor batch systems only
 
-If you want to provide fairshare on a group basis, as opposed to a Unix user basis, you can use HTCondor accounting groups. They are independent of the Unix groups the user may already be in and are [documented in the HTCondor manual](http://research.cs.wisc.edu/condor/manual/v8.2/3_4User_Priorities.html#SECTION00447000000000000000). If you are using HTCondor accounting groups, you can map jobs from the CE into HTCondor accounting groups based on their UID, their DN, or their VOMS attributes.
+If you want to provide fairshare on a group basis, as opposed to a Unix user basis, you can use HTCondor accounting groups. They are independent of the Unix groups the user may already be in and are [documented in the HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_6User_Priorities.html#SECTION00467000000000000000). If you are using HTCondor accounting groups, you can map jobs from the CE into HTCondor accounting groups based on their UID, their DN, or their VOMS attributes.
 
 -   **To map UIDs to an accounting group,** add entries to `/etc/osg/uid_table.txt` with the following form:
 
@@ -347,7 +347,7 @@ In addition to the HTCondor-CE job gateway service itself, there are a number of
 
 | Software          | Service name                          | Notes                                                                                  |
 |:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui) for more info |
+| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca/#startstop-fetch-crl-a-quick-guide) for more info |
 | Gratia            | `gratia-probes-cron`                  | Accounting software                                                                    |
 | Your batch system | `condor` or `pbs_server` or …         |                                                                                        |
 | HTCondor-CE       | `condor-ce`                           |                                                                                        |
@@ -445,4 +445,3 @@ Find instructions to request a host certificate [here](https://twiki.grid.iu.edu
 | Htcondor-CE  | tcp      | 9619        | X       |          | HTCondor-CE shared port |
 
 Allow inbound and outbound network connection to all internal site servers, such as GUMS and the batch system head-node only ephemeral outgoing ports are necessary.
-
