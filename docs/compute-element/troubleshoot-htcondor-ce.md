@@ -443,7 +443,7 @@ Authorized:                  TRUE
 
     Then look in the [MasterLog](#masterlog) and [SchedLog](#schedlog) for any errors.
 
-2.  **If you see “gsi@unmapped” in the “Remote Mapping” line**, this means that either your credentials are not mapped on the CE or that authentication is not set up at all. To set up authentication, refer to our [installation document](InstallHTCondorCE#5_2_Setup_Authorization).
+2.  **If you see “gsi@unmapped” in the “Remote Mapping” line**, this means that either your credentials are not mapped on the CE or that authentication is not set up at all. To set up authentication, refer to our [installation document](install-htcondor-ce#configuring-authentication).
 
 
 ### condor_ce_q

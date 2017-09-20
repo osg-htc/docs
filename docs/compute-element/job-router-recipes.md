@@ -430,7 +430,7 @@ JOB_ROUTER_ENTRIES = [ \
 
 ### Setting accounting groups
 
-To assign jobs to an HTCondor accounting group to manage fair share on your local batch system, we recommend using [UID and ExtAttr tables](install-compute-element#htcondor-accounting-groups).
+To assign jobs to an HTCondor accounting group to manage fair share on your local batch system, we recommend using [UID and ExtAttr tables](install-htcondor-ce#htcondor-accounting-groups).
 
 Routes for non-HTCondor Batch Systems
 -------------------------------------
