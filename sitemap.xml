@@ -228,28 +228,6 @@
     
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/common/ca_updater/</loc>
-     <lastmod>2017-09-21</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/common/cert_scripts/</loc>
-     <lastmod>2017-09-21</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/compute-element/job_router/</loc>
-     <lastmod>2017-09-21</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    
-
-    
-        
-    <url>
      <loc>https://opensciencegrid.github.io/docs/data/bestman-overview/</loc>
      <lastmod>2017-09-21</lastmod>
      <changefreq>daily</changefreq>
