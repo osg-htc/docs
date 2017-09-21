@@ -6,9 +6,6 @@ About this Document
 
 This page explains how to install the BeStMan Storage Element with underlying XRootD storage.
 
-!!! note
-    Starting on 11 February 2014, all OSG-issued Digicert certificates (host, service, and personal) use the SHA-2 algorithm. %RED%The BeStMan software must be on a recent version to support SHA-2 certificates%ENDCOLOR%. Please visit [our SHA-2 compliance page](https://opensciencegrid.github.io/technology/projects/sha2-support/) for more information about minimum required versions of software components.
-
 Requirements
 ============
 
@@ -57,7 +54,6 @@ Networking
 | Service Name            | Protocol    | Port Number                      | Inbound | Outbound |Commen                     |
 |:------------------------|:------------|:---------------------------------|:--------|:---------|:--------------------------|
 | GridFTP                 | tcp         |2811 and `GLOBUS_TCP_SOURCE_RANGE`| YES     |          | contiguous range of ports |
-| Storage Resource Manager| tcp         | 8080                             | YES     |          |                           |
 | Storage Resource Manager| tcp		|  8443                            | YES     |          |                           |
 
 
@@ -199,33 +195,6 @@ See [Bestman Instructions](../data/bestman-install/#modify-etcsudoers)
 
 See [Bestman Instructions](../data/bestman-install/#copying-certificates-to-an-alternate-location)
 
-
-Configure Xrootd Gratia Probes
-------------------------------
-
-XRootD gratia probes can push monitoring information to a central gratia collector. You may want to configure and enable Gratia xrootd transfer and storage probes in order to store this information. The packages `gratia-probe-xrootd-storage` and `gratia-probe-xrootd-transfer` are installed as part of the above installation, but you will need to configure them. In order to do so you have to modify configuration **`/etc/gratia/xrootd-transfer/ProbeConfig`** and **`/etc/gratia/xrootd-storage/ProbeConfig`**:
-
-
-    :::file
-    CollectorHost="gratia-osg-%RED%itb%ENDCOLOR%.opensciencegrid.org:80"
-    SSLHost="gratia-osg-%RED%itb%ENDCOLOR%.opensciencegrid.org:443" 
-    SSLRegistrationHost="gratia-osg-%RED%itb%ENDCOLOR%.opensciencegrid.org:80"
-
-    SiteName="%RED%YOUR SITE NAME%ENDCOLOR%" 
-    Grid="OSG-%RED%ITB%ENDCOLOR%"
-    EnableProbe="%RED%1%ENDCOLOR%"
-
-!!! note
-    In the above files, you will need to configure the correct gratia hosts. An example is given for ITB (Trash/Trash/Integration test bed) and test sites. For production sites, you can change `itb` to `prod`.
-
-You will also need to configure **`/etc/gums/gums-client.properties`** in order to accurately collect grid resource usage and metrics by VO for transfer submitted using grid proxies or where voms proxy information is not available.
-
-    :::file
-    gums.location=https://%RED%<GUMS_HOST>%ENDCOLOR%:8443/gums/services/GUMSAdmin
-    gums.authz=https://%RED%<GUMS_HOST>%ENDCOLOR%:8443/gums/services/GUMSXACMLAuthorizationServicePort
-
-!!! warning
-    if you are not using a default port (8443) you have to change it as well.
 
 Validation
 ==========
