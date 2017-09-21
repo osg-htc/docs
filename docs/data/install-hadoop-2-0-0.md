@@ -4,9 +4,8 @@
 <span class="twiki-macro DOC_STATUS_TABLE"></span> 
 **Purpose**: The purpose of this document is to provide Hadoop based SE administrators the information on how to prepare, install and validate the SE.
 
-<span class="twiki-macro INCLUDE" section="Header">Trash/DocumentationTeam/DocConventions</span> <span class="twiki-macro INCLUDE" section="CommandLine">Trash/DocumentationTeam/DocConventions</span>
-
-<span class="twiki-macro WARNING"></span> If you are installing Hadoop/Bestman from OSG 3.1, you will need to use [this](Documentation.Release3.InstallHadoopSE) guide instead. This guide details installing Hadoop 2.0 from the OSG 3.2 repositories.
+!!! warning
+    If you are installing Hadoop/Bestman from OSG 3.1, you will need to use [this](Documentation.Release3.InstallHadoopSE) guide instead. This guide details installing Hadoop 2.0 from the OSG 3.2 repositories.
 
 Preparation
 ===========
@@ -26,9 +25,15 @@ The OSG packaging and distribution of Hadoop is based on YUM. All components are
 Note on upgrading from Hadoop 0.20
 ----------------------------------
 
-<span class="twiki-macro NOTE"></span> If upgrading, make sure to follow these instructions %RED%BEFORE<span class="twiki-macro ENDCOLOR"></span> any other instructions in this document.
+!!! note
+    If upgrading, make sure to follow these instructions %RED%BEFORE%ENDCOLOR% any other instructions in this document.
 
-1 First, you must upgrade to the newest version of Hadoop-0.20. Older versions may have dependency and upgrade problems. Make sure that your version is at least `hadoop-0.20-0.20.2+737-26` (or newer) on all nodes. (The important number is the 26. Older release numbers may have upgrade problems). You may need to specify this version specifically to ensure that the correct version is installed. ie. `yum upgrade hadoop-0.20-0.20.2+737-26`. 1 Next, make sure all configuration and important files are backed up in case of catastrophic failure. In particular, backup a copy of `hdfs-site.xml`, `core-site.xml` and important namenode files. 1 Now, upgrade to hadoop-2.0.0 using `yum upgrade hadoop` 1 Also, make sure to bring in any new packages using the relevant meta-package, such as `yum install osg-se-hadoop-namenode`, `yum install osg-se-hadoop-datanode` or `yum install osg-se-hadoop-srm`. 1 On the namenode, run `hadoop namenode -upgrade` to upgrade the meta-data catalog. 1 Follow the configuration instructions below for each node. In particular, restore or modify `hdfs-site.xml` and `core-site.xml` then copy to all nodes. For any nodes using fuse mounts, note that "hdfs\#" should be changed to "hadoop-fuse-dfs\#" in `/etc/fstab`.
+1. First, you must upgrade to the newest version of Hadoop-0.20. Older versions may have dependency and upgrade problems. Make sure that your version is at least `hadoop-0.20-0.20.2+737-26` (or newer) on all nodes. (The important number is the 26. Older release numbers may have upgrade problems). You may need to specify this version specifically to ensure that the correct version is installed. ie. `yum upgrade hadoop-0.20-0.20.2+737-26`.
+1. Next, make sure all configuration and important files are backed up in case of catastrophic failure. In particular, backup a copy of `hdfs-site.xml`, `core-site.xml` and important namenode files.
+1. Now, upgrade to hadoop-2.0.0 using `yum upgrade hadoop`
+1. Also, make sure to bring in any new packages using the relevant meta-package, such as `yum install osg-se-hadoop-namenode`, `yum install osg-se-hadoop-datanode` or `yum install osg-se-hadoop-srm`.
+1. On the namenode, run `hadoop namenode -upgrade` to upgrade the meta-data catalog.
+1. Follow the configuration instructions below for each node. In particular, restore or modify `hdfs-site.xml` and `core-site.xml` then copy to all nodes. For any nodes using fuse mounts, note that "hdfs\#" should be changed to "hadoop-fuse-dfs\#" in `/etc/fstab`.
 
 Requirements
 ============
@@ -36,9 +41,10 @@ Requirements
 Architecture
 ------------
 
-<span class="twiki-macro NOTE"></span> There are several important components to a storage element installation. Throughout this document, it will be stated which node the relevant installation instructions apply to. It can apply to one of the following:
+!!! note
+    There are several important components to a storage element installation. Throughout this document, it will be stated which node the relevant installation instructions apply to. It can apply to one of the following:
 
--   **Namenode**: You will have at least one namenode. The name node functions as the directory server and coordinator of the hadoop cluster. It houses all the meta-data for the hadoop cluster. <span class="twiki-macro RED"></span> The namenode and secondary namenode need to have a directory that they can both access on a shared filesystem so that they can exchange filesystem checkpoints. <span class="twiki-macro ENDCOLOR"></span>
+-   **Namenode**: You will have at least one namenode. The name node functions as the directory server and coordinator of the hadoop cluster. It houses all the meta-data for the hadoop cluster. %RED%The namenode and secondary namenode need to have a directory that they can both access on a shared filesystem so that they can exchange filesystem checkpoints.%ENDCOLOR%
 -   **Secondary Namenode**: This is a secondary machine that periodically merges updates to the HDFS file system back into the fsimage. This dramatically improves startup and restart times.
 -   **Datanode**: You will have many datanodes. Each data node stores large blocks of files to be stored on the hadoop cluster.
 -   **Client**: This is a documentation shorthand that refers to any machine with the hadoop client commands and [FUSE](http://fuse.sourceforge.net/) mount. Any machine that needs a FUSE mount to access data in a POSIX-like fashion will need this.
@@ -47,14 +53,16 @@ Architecture
 
 Note that these components are not necessarily mutually exclusive. For instance, you may consider having your GridFTP server co-located on the SRM node. Alternatively, you can locate a client (or even a GridFTP node) co-located on each data node. That way, each data node also acts as an access point to the hadoop cluster.
 
-Please read the [planning document](Storage.HadoopUnderstanding) to understand different components of the system.
+Please read the [planning document](https://twiki.opensciencegrid.org/bin/view/Documentation/HadoopUnderstanding) to understand different components of the system.
 
-<span class="twiki-macro NOTE"></span> Total installation time, on an average, should not exceed 8 to 24 man-hours. If your site needs further assistance to help expedite, please email <osg-storage@opensciencegrid.org> and <osg-hadoop@opensciencegrid.org>.
+!!! note
+    Total installation time, on an average, should not exceed 8 to 24 man-hours. If your site needs further assistance to help expedite, please email <osg-storage@opensciencegrid.org> and <osg-hadoop@opensciencegrid.org>.
 
 Host and OS
 -----------
 
-Hadoop will run anywhere that Java is supported (including Solaris). However, these instructions are for RedHat derivants (including Scientific Linux) because of the RPM based installation. The current supported Operating Systems supported by the OSG are <span class="twiki-macro SUPPORTED_OS"></span>.
+Hadoop will run anywhere that Java is supported (including Solaris). However, these instructions are for RedHat derivants (including Scientific Linux) because of the RPM based installation. The current supported Operating Systems supported by the OSG are Red Hat Enterprise Linux 6, 7, and variants (see [details...](../release/supported_platforms)).
+
 
 The HDFS prerequisites are:
 
@@ -71,14 +79,10 @@ Users
 
 This installation will create following users unless they are already created.
 
-<span class="twiki-macro STARTSECTION">Users</span>
-
 | User      | Comment                                           |
 |:----------|:--------------------------------------------------|
 | `bestman` | Used by Bestman SRM server (needs sudo access).   |
 | `hdfs`    | Used by Hadoop to store data blocks and meta-data |
-
-<span class="twiki-macro ENDSECTION">Users</span>
 
 For this package to function correctly, you will have to create the users needed for grid operation. Any user that can be authenticated should be created.
 
@@ -100,16 +104,14 @@ Certificates
 
 <span class="twiki-macro ENDSECTION">Certificates</span>
 
-[Instructions](InstallCertScripts) to request a service certificate.
+[Instructions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertScripts) to request a service certificate.
 
 You will also need a copy of CA certificates (see below). Note that the `osg-se-hadoop-srm` and `osg-se-hadoop-gridftp` package will automatically install a certificate package but will not necessarily pick the cert package you expect. For instance, certain installs will prefer the `osg-ca-scripts` package to fulfill this requirement, which installs a set of scripts to automatically update the certificates, but does not initialize the CA certs by default (you have to run it first). For this reason, you may want to specifically install the cert package of your choice first, before installing Hadoop.
 
 Networking
 ----------
 
-<span class="twiki-macro STARTSECTION">Firewalls</span> <span class="twiki-macro INCLUDE" section="FirewallTable" lines="gridftp,srm2,portrange,portsource">Documentation/Release3.FirewallInformation</span> \\ <span class="twiki-macro ENDSECTION">Firewalls</span>
-
-<span class="twiki-macro INCLUDE" section="OSGRepoBrief" headingoffset="1">YumRepositories</span>
+For more details on overall Firewall configuration, please see our [Firewall documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/FirewallInformation).
 
 **NOTE:** The versions of Hadoop in OSG series 3.1 and 3.2 (ie, Hadoop 0.20 and 2.0.0) do not inter-operate. In order to use Hadoop 2.0.0, *all* nodes in the hadoop system (namenode, secondary namenode, datanodes, srm/gridftp nodes and all client nodes) must update to OSG 3.2 and Hadoop 2.0.0.
 
@@ -174,7 +176,8 @@ SRM Node Installation
 root# yum install osg-se-hadoop-srm
 ```
 
-<span class="twiki-macro NOTE"></span> If you are using a single system to host the SRM software and the gridftp node, you'll also need to install the `osg-se-hadoop-gridftp` rpm as well.
+!!! note
+    If you are using a single system to host the SRM software and the gridftp node, you'll also need to install the `osg-se-hadoop-gridftp` rpm as well.
 
 Configuration
 =============
@@ -182,7 +185,8 @@ Configuration
 Hadoop Configuration
 --------------------
 
-<span class="twiki-macro NOTE"></span> Needed by: Hadoop namenode, Hadoop datanodes, Hadoop client, GridFTP, SRM
+!!! note
+    Needed by: Hadoop namenode, Hadoop datanodes, Hadoop client, GridFTP, SRM
 
 Hadoop configuration is needed by every node in the hadoop cluster. However, in most cases, you can do the configuration once and copy it to all nodes in the cluster (possibly using your favorite configuration management tool). Special configuration for various special components is given in the below sections.
 
@@ -204,7 +208,8 @@ Hadoop configuration is stored in `/etc/hadoop/conf`. However, by default, these
 
 See <http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml> for more parameters to configure.
 
-<span class="twiki-macro NOTE"></span> Namenodes must have a `/etc/hosts_exclude` present
+!!! note
+    Namenodes must have a `/etc/hosts_exclude` present
 
 ### Special namenode instructions for brand new installs
 
@@ -219,7 +224,8 @@ This will initialize the storage directory on your namenode
 FUSE Client Configuration
 -------------------------
 
-<span class="twiki-macro NOTE"></span> Needed by: Hadoop client and SRM node. Recommended but not neccessary for GridFTP nodes.
+!!! note
+    Needed by: Hadoop client and SRM node. Recommended but not neccessary for GridFTP nodes.
 
 A FUSE mount is required on any node that you would like to use standard POSIX-like commands on the Hadoop filesystem. FUSE (or "file system in user space") is a way to access Hadoop using typical UNIX directory commands (ie POSIX-like access). Note that not all advanced functions of a full POSIX-compliant file system are necessarily available.
 
@@ -248,12 +254,13 @@ INFO fuse_options.c:162 Adding FUSE arg /mnt/hadoop
 INFO fuse_options.c:110 Ignoring option allow_other
 ```
 
-If you have troubles mounting FUSE refer to [Running FUSE in Debug Mode](#TroubFuseDeb) in the Troubleshooting section.
+If you have troubles mounting FUSE refer to [Running FUSE in Debug Mode](#running-fuse-in-debug-mode) in the Troubleshooting section.
 
 Creating VO and User Areas
 --------------------------
 
-<span class="twiki-macro NOTE"></span> Grid Users are needed by GridFTP and SRM nodes. VO areas are common to all nodes.
+!!! note
+    Grid Users are needed by GridFTP and SRM nodes. VO areas are common to all nodes.
 
 For this package to function correctly, you will have to create the users needed for grid operation. Any user that can be authenticated should be created.
 
@@ -265,7 +272,8 @@ Note that these users must be kept in sync with the authentication method. For i
 
 Prior to starting basic day-to-day operations, it is important to create dedicated areas for each VO and/or user. This is similar to user management in simple UNIX filesystems. Create (and maintain) usernames and groups with UIDs and GIDs on **all nodes**. These are maintained in basic system files such as `/etc/passwd` and `/etc/group`.
 
-<span class="twiki-macro NOTE"></span> In the examples below It is assumed a FUSE mount is set to `/mnt/hadoop`. As an alternative `hadoop fs` commands could have been used.
+!!! note
+    In the examples below It is assumed a FUSE mount is set to `/mnt/hadoop`. As an alternative `hadoop fs` commands could have been used.
 
 For clean HDFS operations and filesystem management:
 
@@ -325,12 +333,13 @@ Lastly, you will need to configure an authentication mechanism for GridFTP.
 
 ### Configuring authentication
 
-For information on how to configure authentication for your GridFTP installation, please refer to the [configuring authentication section of the GridFTP guide](InstallOSGGridFTP#ConfiguringAuthentication).
+For information on how to configure authentication for your GridFTP installation, please refer to the [configuring authentication section of the GridFTP guide](gridftp#configuring-authentication).
 
 GridFTP Gratia Transfer Probe Configuration
 -------------------------------------------
 
-<span class="twiki-macro NOTE"></span> Needed by GridFTP node only.
+!!! note
+    Needed by GridFTP node only.
 
 The Gratia probe requires the file `user-vo-map` to exist and be up to date. This file is created and updated by the `gums-client` package that comes in as a dependency of `osg-se-hadoop-gridftp` or `osg-gridftp-hdfs`. Assuming you installed GridFTP using the `osg-se-hadoop-gridftp` rpm, the Gratia Transfer Probe will already be installed.
 
@@ -364,7 +373,8 @@ BeStMan2 is preconfigured to look for the **host** certificate and key in `/etc/
 Hadoop Storage Probe Configuration
 ----------------------------------
 
-<span class="twiki-macro NOTE"></span> This is only needed by the Hadoop Namenode
+!!! note
+    This is only needed by the Hadoop Namenode
 
 Here are the most relevant file and directory locations:
 
@@ -628,13 +638,14 @@ total 935855
 GridFTP Validation
 ------------------
 
-<span class="twiki-macro NOTE"></span> The commands used to verify GridFTP below assume you have access to a node where you can first generate a valid proxy using `voms-proxy-init` or `grid-proxy-init`. Obtaining grid credentials is beyond the scope of this document.
+!!! note
+    The commands used to verify GridFTP below assume you have access to a node where you can first generate a valid proxy using `voms-proxy-init` or `grid-proxy-init`. Obtaining grid credentials is beyond the scope of this document.
 
 ``` console
 user$ globus-url-copy file:///home/users/jdost/test.txt gsiftp://devg-7.t2.ucsd.edu:2811/mnt/hadoop/engage/test.txt
 ```
 
-If you are having troubles running GridFTP refer to [Starting GridFTP in Standalone Mode](#GridFTPStand) in the Troubleshooting section.
+If you are having troubles running GridFTP refer to [Starting GridFTP in Standalone Mode](#starting-gridftp-in-standalone-mode) in the Troubleshooting section.
 
 BeStMan Validation
 ------------------
@@ -655,7 +666,8 @@ Installing Hadoop Storage Reports (Optional)
 
 \***NOTE the GratiaReporting rpm has not yet been migrated to the new osg repos and this section is subject to change. Please skip this section until this warning goes away or request Nebraska to host your reports**
 
-<span class="twiki-macro NOTE"></span> The Hadoop Storage Reports may be installed on any node that has access to a local Gratia Collector
+!!! note
+    The Hadoop Storage Reports may be installed on any node that has access to a local Gratia Collector
 
 The Hadoop storage reports provides a daily report on the status and usage of your SE. This serves as a handy tool for both site administrators and site executives. An example report is copied at the end of this guide.
 
@@ -665,7 +677,7 @@ Prerequisites
 -------------
 
 1.  A working HDFS installation
-2.  A local [Gratia Collector](Trash.ReleaseDocumentationGratiaSiteCollector) installed
+2.  A local [Gratia Collector](https://twiki.opensciencegrid.org/bin/oops/Trash/ReleaseDocumentationGratiaSiteCollector) installed
 3.  A Hadoop Storage Probe installed and configured to point to the local Gratia Collector
 
 Installation
@@ -702,7 +714,7 @@ Copy the file `/etc/gratia_reporting/reporting.cfg` to a new filename in `/etc/g
 |-----------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Attribute | Needs Editing | Value                                                                                                                                                                                                                                                                                                                                   |
 | SiteName  | Yes           | Set to the resource group name of your SE as registered in OIM.                                                                                                                                                                                                                                                                         |
-| database  | Maybe         | Set to the database section containing the login details for your Gratia Collector (a few, non-functioning examples sections are included). Installing a Gratia Collector is [covered here](Trash.ReleaseDocumentationGratiaSiteCollector), but ask around on osg-hadoop: Nebraska will usually run these reports for you if requested. |
+| database  | Maybe         | Set to the database section containing the login details for your Gratia Collector (a few, non-functioning examples sections are included). Installing a Gratia Collector is [covered here](https://twiki.opensciencegrid.org/bin/oops/Trash/ReleaseDocumentationGratiaSiteCollector), but ask around on osg-hadoop: Nebraska will usually run these reports for you if requested. |
 | toNames   | Yes           | Python list for the "to names" for the report email.                                                                                                                                                                                                                                                                                    |
 | toEmails  | Yes           | Python list for the "to emails" for the report email.                                                                                                                                                                                                                                                                                   |
 | smtphost  | Maybe         | Hostname of a SMTP server that accepts email from this host.                                                                                                                                                                                                                                                                            |
@@ -1176,13 +1188,13 @@ If you cannot resolve the problem, there are several ways to receive help:
 -   For community support and best-effort software team support contact <osg-software@opensciencegrid.org>.
 -   For additional community support, contact <osg-hadoop@opensciencegrid.org>. Note, this is only best-effort help from OSG Software team.
 
-For a full set of help options, see [Help Procedure](HelpProcedure).
+For a full set of help options, see [Help Procedure](../common/help).
 
 References
 ==========
 
 -   [Hadoop Hands On Tutorial](https://twiki.grid.iu.edu/bin/view/Trash/ReleaseDocumentationHadoopInstallationHandsOn).
--   [Instructions for Upgrading from Hadoop 0.19 to Hadoop 0.20](Storage.HadoopUpgrade)
+-   [Instructions for Upgrading from Hadoop 0.19 to Hadoop 0.20](https://twiki.opensciencegrid.org/bin/view/Storage/HadoopUpgrade)
     -   \***NOTE these instructions are subject to change and the upgrade doc linked is intended to upgrade from the caltech hosted 0.19 rpms in the caltech hosted 0.20 rpms, NOT the new rpms hosted in the new OSG repos.**
 
 **Benchmarking**
