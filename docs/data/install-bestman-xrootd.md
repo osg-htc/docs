@@ -252,6 +252,10 @@ As a reminder, here are common service commands (all run as `root`):
 | Disable a service from starting during boot | `chkconfig %RED%<SERVICE-NAME>%ENDCOLOR% off` |
 
 
+Notes on Upgrading Bestman
+=========================
+
+See [Upgrading Bestman](../data/bestman-install/#upgrading-bestman)
 
 How to get Help?
 ================
