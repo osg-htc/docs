@@ -45,7 +45,7 @@ Depending on your choice, you select one of two RPMs:
 
 ### How do I keep CAs updated?
 
-Please follow the [update instructions](ca_updater.md) to make sure that the CAs are kept updated.
+Please follow the [update instructions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaCertsUpdater) to make sure that the CAs are kept updated.
 
 Option 2: Install osg-update-certs
 ----------------------------------
@@ -282,7 +282,7 @@ The Trusted Certificate Authority (CA) certificates, and their associated Certif
 How to ensure you are get up-to-date CA/CRL information
 -------------------------------------------------------
 
-1.  If you installed CAs using rpm packages (`osg-ca-certs`,`igtf-ca-certs`) (Options 1, 4), you will need to install the software described in [the CA update document](ca_updater.md), and enable `osg-ca-certs-updater` service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.
+1.  If you installed CAs using rpm packages (`osg-ca-certs`,`igtf-ca-certs`) (Options 1, 4), you will need to install the software described in [the CA update document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaCertsUpdater), and enable `osg-ca-certs-updater` service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.
 2.  If you use Option 2 (i.e. `osg-update-certs`) then make sure that you have the corresponding service enabled.
 
    ```
