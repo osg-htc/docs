@@ -35,6 +35,7 @@ pages:
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
+  - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
 - Overviews:
   - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
 - Release Information:
