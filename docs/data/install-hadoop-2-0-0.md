@@ -518,9 +518,11 @@ http://%RED%namenode.hostname%ENDCOLOR%:50070/dfshealth.jsp
 
 Get familiar with Hadoop commands. Run hadoop with no arguments to see the list of commands.
 
+<details>
+  <summary>Show detailed ouput</summary>
+   <p>
 ``` console
 user$ hadoop
-%TWISTY{%TWISTY_OPTS_OUTPUT%}%
 Usage: hadoop [--config confdir] COMMAND
 where COMMAND is one of:
   namenode -format     format the DFS filesystem
@@ -549,14 +551,17 @@ where COMMAND is one of:
  or
   CLASSNAME            run the class named CLASSNAME
 Most commands print help when invoked w/o parameters.
-%ENDTWISTY%
 ```
+</p>
+</details>
 
 For a list of supported filesystem commands:
 
+<details>
+  <summary>Show 'hadoop fs' detailed ouput</summary>
+   <p>
 ``` console
 user$ hadoop fs
-%TWISTY{%TWISTY_OPTS_OUTPUT%}%
 Usage: java FsShell
            [-ls <path>]
            [-lsr <path>]
@@ -600,8 +605,9 @@ Generic options supported are
 
 The general command line syntax is
 bin/hadoop command [genericOptions] [commandOptions]
-%ENDTWISTY%
 ```
+</p>
+</details>
 
 An online guide is also available at [Apache Hadoop commands manual](http://hadoop.apache.org/common/docs/current/commands_manual.html). You can use Hadoop commands to perform filesystem operations with more consistency.
 
@@ -671,7 +677,8 @@ Installing Hadoop Storage Reports (Optional)
 
 The Hadoop storage reports provides a daily report on the status and usage of your SE. This serves as a handy tool for both site administrators and site executives. An example report is copied at the end of this guide.
 
-<span class="twiki-macro TWISTY" mode="div" showlink="Click here for Hadoop Storage Reports information" hidelink="Hide the example" showimgleft="%ICONURLPATH{toggleopen-small}%" hideimgleft="%ICONURLPATH{toggleclose-small}%"></span>
+<details>
+  <summary>Show Hadoop Storage Reports information</summary>
 
 Prerequisites
 -------------
@@ -725,9 +732,11 @@ Copy the file `/etc/gratia_reporting/reporting.cfg` to a new filename in `/etc/g
 
 Copy the file `/etc/gratia_reporting/gratia_reporting.cron` to `/etc/cron.d`. There is one line per report; comment out all except the hadoop report. It is the line containing `-n hadoop`. Update the line to point at your new configuration file.
 
-<span class="twiki-macro ENDTWISTY"></span>
+</details>
 
-<span class="twiki-macro TWISTY">%TWISTY\_OPTS\_OUTPUT%</span> This is a sample report from the Nebraska HDFS instance.
+<details>
+  <summary>Expand sample report from the Nebraska HDFS instance</summary>
+    <p>
 
 ``` file
 ============================================================
@@ -823,8 +832,8 @@ Copy the file `/etc/gratia_reporting/gratia_reporting.cron` to `/etc/cron.d`. Th
  Number of racks:       1
 The filesystem under path '/' is HEALTHY
 ```
-
-<span class="twiki-macro ENDTWISTY"></span>
+</p>
+</details>
 
 Troubleshooting
 ===============
@@ -840,7 +849,9 @@ http://%RED%namenode.hostname%ENDCOLOR%:50070/conf
 
 You will see the entire configuration in XML format, for example:
 
-<span class="twiki-macro TWISTY">%TWISTY\_OPTS\_OUTPUT%</span>
+<details>
+  <summary>Expand XML configuration</summary>
+    <p>
 
 ``` file
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><configuration>
@@ -1056,8 +1067,8 @@ You will see the entire configuration in XML format, for example:
 <property><!--Loaded from core-default.xml--><name>fs.checkpoint.size</name><value>67108864</value></property>
 </configuration>
 ```
-
-<span class="twiki-macro ENDTWISTY"></span>
+</p>
+</details>
 
 Please refer to [OSG Hadoop debug webpage](https://twiki.grid.iu.edu/bin/view/Storage/HadoopDebug) and [Apache Hadoop FAQ webpage](http://wiki.apache.org/hadoop/FAQ) for answers to common questions/concerns
 
@@ -1138,8 +1149,10 @@ export GRIDFTP_HDFS_REPLICAS=2
 
 When trying to copy a local file into Hadoop you may come across the following java exception:
 
+<details>
+  <summary>Show detailed java exception</summary>
+    <p>
 ``` console
-%TWISTY{%TWISTY_OPTS_OUTPUT%}%
 11/06/24 11:10:50 WARN hdfs.DFSClient: Error Recovery for block null bad datanode[0]
 nodes == null
 11/06/24 11:10:50 WARN hdfs.DFSClient: Could not get block locations. Source file
@@ -1165,8 +1178,9 @@ sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.jav
         at
 org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1063)
         at org.apache.hadoop.ipc.Server$Handler.run(Server.java:1313)
-%ENDTWISTY%
 ```
+</p>
+</details>
 
 This can occur if you try to install a Datanode on a machine with less than 10GB of disk space available. This can be changed by lowering the value of the following property in `/usr/lib/hadoop-0.20/conf/hdfs-site.xml`:
 
