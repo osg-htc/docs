@@ -5,7 +5,7 @@
 **Purpose**: The purpose of this document is to provide Hadoop based SE administrators the information on how to prepare, install and validate the SE.
 
 !!! warning
-    If you are installing Hadoop/Bestman from OSG 3.1, you will need to use [this](Documentation.Release3.InstallHadoopSE) guide instead. This guide details installing Hadoop 2.0 from the OSG 3.2 repositories.
+    If you are installing Hadoop/Bestman from OSG 3.1, you will need to use [this](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoopSE) guide instead. This guide details installing Hadoop 2.0 from the OSG 3.2 repositories.
 
 Preparation
 ===========
@@ -120,7 +120,65 @@ Initializing Certificate Authority
 
 This is needed by GridFTP and SRM nodes, but it is recommended for all nodes in the cluster.
 
-<span class="twiki-macro INCLUDE" section="FetchCRLConfig" TOC_SHIFT="+">InstallCertAuth</span>
+++ Enable and Start `fetch-crl` To enable fetch-crl (fetch Certificate Revocation Lists) services by default on the node:
+
+``` console
+%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
+root# /sbin/chkconfig fetch-crl3-boot on
+root# /sbin/chkconfig fetch-crl3-cron on
+%RED%# For RHEL 6, CentOS 6, and SL6, or OSG 3 _older_ than 3.1.15 %ENDCOLOR%
+root# /sbin/chkconfig fetch-crl-boot on
+root# /sbin/chkconfig fetch-crl-cron on
+%RED%# For RHEL 7, CentOS 7, and SL7 %ENDCOLOR%
+root# systemctl enable fetch-crl-boot
+root# systemctl enable fetch-crl-cron
+```
+
+To start fetch-crl:
+
+``` console
+%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
+root# /sbin/service fetch-crl3-boot start
+root# /sbin/service fetch-crl3-cron start
+%RED%# For RHEL 6, CentOS 6, and SL6, or OSG 3 _older_ than 3.1.15 %ENDCOLOR%
+root# /sbin/service fetch-crl-boot start
+root# /sbin/service fetch-crl-cron start
+%RED%# For RHEL 7, CentOS 7, and SL7 %ENDCOLOR%
+root# systemctl start fetch-crl-boot
+root# systemctl start fetch-crl-cron
+```
+
+**NOTE**: while it is necessary to start `fetch-crl-cron` in order to have it active, `fetch-crl-boot` is started automatically at boot time if enabled. The start command will run `fetch-crl-boot` at the moment when it is invoked and it may take some time to complete.
+
+---%SHIFT%++ Configure `fetch-crl` To modify the times that fetch-crl-cron runs, edit `/etc/cron.d/fetch-crl` (or `/etc/cron.d/fetch-crl3` depending on the version you have).
+
+By default, `fetch-crl` connects directly to the remote CA; this is inefficient and potentially harmful if done simultaneously by many nodes (e.g. all the worker nodes of a big cluster). We recommend you provide a HTTP proxy (such as squid) the worker nodes can connect to. [Here](InstallFrontierSquid) are instructions to install a squid proxy.
+
+To configure fetch-crl to use an HTTP proxy server:
+
+-   If using `fetch-crl` version 2 (the `fetch-crl` package on RHEL5 only), then create the file `/etc/sysconfig/fetch-crl` and add the following line: <pre class="file">
+
+export http\_proxy=%RED%http://your.squid.fqdn:port<span class="twiki-macro ENDCOLOR"></span> </pre> Adjust the URL appropriately for your proxy server.
+
+-   If using `fetch-crl` version 3 on RHEL5 via the `fetch-crl3` package or on RHEL6/RHEL7 via the `fetch-crl` package, then create or edit the file `/etc/fetch-crl3.conf` (RHEL5) or `/etc/fetch-crl.conf` (RHEL6/RHEL7) and add the following line: <pre class="file">
+
+http\_proxy=%RED%http://your.squid.fqdn:port<span class="twiki-macro ENDCOLOR"></span> </pre> Again, adjust the URL appropriately for your proxy server.
+
+Note that the **`nosymlinks`** option in the configuration files refers to ignoring links within the certificates directory (e.g. two different names for the same file). It is perfectly fine if the path of the CA certificates directory itself (`infodir`) is a link to a directory.
+
+Any modifications to the configuration file will be preserved during an RPM update.
+
+For more details, please see our [fetch-crl documentation](../common/ca).
+
+Current versions of fetch-crl and fetch-crl3 produce more output. It is possible to send the output to syslog instead of the default email system. To do so:
+
+1.  Change the configuration file to enable syslog: <pre class="file">
+
+logmode = syslog syslogfacility = daemon</pre>
+
+1.  Make sure the file `/var/log/daemon` exists, e.g. touching the file
+2.  Change `/etc/logrotate.d` files to rotate it
+
 
 Installation
 ============
@@ -343,16 +401,190 @@ GridFTP Gratia Transfer Probe Configuration
 
 The Gratia probe requires the file `user-vo-map` to exist and be up to date. This file is created and updated by the `gums-client` package that comes in as a dependency of `osg-se-hadoop-gridftp` or `osg-gridftp-hdfs`. Assuming you installed GridFTP using the `osg-se-hadoop-gridftp` rpm, the Gratia Transfer Probe will already be installed.
 
-<span class="twiki-macro INCLUDE" section="Configuration">GratiaTransferProbe</span>
+Here are the most relevant file and directory locations:
+
+|                     |                |                                          |
+|---------------------|----------------|------------------------------------------|
+| Purpose             | Needs Editing? | Location                                 |
+| Probe Configuration | Yes            | /etc/gratia/gridftp-transfer/ProbeConfig |
+| Probe Executables   | No             | /usr/share/gratia/gridftp-transfer       |
+| Log files           | No             | /var/log/gratia                          |
+| Temporary files     | No             | /var/lib/gratia/tmp                      |
+| Gums configuration  | Yes            | /etc/gums/gums-client.properties         |
+
+The RPM installs the Gratia probe into the system crontab, but does not configure it. The configuration of the probe is controlled by the file
+
+    /etc/gratia/gridftp-transfer/ProbeConfig
+
+This is usually one XML node spread over multiple lines. Note that comments (\#) have no effect on this file. You will need to edit the following:
+
+|                                 |                                                                                            |                                                                                                                                            |
+|---------------------------------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| Attribute                       | Needs Editing                                                                              | Value                                                                                                                                      |
+| ProbeName                       | Maybe                                                                                      | This should be set to "gridftp-transfer:<hostname>", where <hostname> is the fully-qualified domain name of your gridftp host. |
+| CollectorHost                   | Maybe                                                                                      | Set to the hostname and port of the central collector. By default it sends to the OSG collector. See below.                                |
+| SiteName                        | Yes                                                                                        | Set to the resource group name of your site as registered in OIM.                                                                          |
+| GridftpLogDir                   | Yes                                                                                        | Set to /var/log, or wherever your current gridftp logs are located                                                                         |
+| Grid                            | Maybe                                                                                      | Set to "ITB" if this is a test resource; otherwise, leave as OSG.                                                                          |
+| UserVOMapFile                   | No                                                                                         | This should be set to /var/lib/osg/user-vo-map; see below for information about this file.                                                 |
+| SuppressUnknownVORecords| Maybe | Set to 1 to suppress any records that can't be matched to a VO; 0 is strongly recommended. |
+| SuppressNoDNRecords             | Maybe                                                                                      | Set to 1 to suppress records that can't be matched to a DN; 0 is strongly recommended.                                                     |
+| EnableProbe                     | Yes                                                                                        | Set to 1 to enable the probe.                                                                                                              |
+
+### Selecting a collector host
+
+The collector is the central server which logs the GridFTP transfers into a database. There are usually three options:
+
+1. **OSG Transfer Collector**: This is the primary collector for transfers in the OSG. Use CollectorHost="gratia-osg-prod.opensciencegrid.org:80".
+1. **OSG-ITB Transfer Collector**: This is the test collector for transfers in the OSG. Use CollectorHost=" gratia-osg-itb.opensciencegrid.org:80".
+1. **Site local collector**: If your site has set up its own collector, then your admin will be able to give you an endpoint to use. Typically, this is along the lines of CollectorHost="collector.example.com:8880".
+
+**Note:** if you are installing on an itb site, use **gratia-osg-itb.opensciencegrid.org** instead of "gratia-osg-transfer.opensciencegrid.org\* above.
+
+### Using GUMS authorization mode
+
+The `user-vo-map` file is a simple, space-separated format that contains 2 columns; the first is a unix username and the second is the VO which that username correspond to. In order to create it you need to configure the gums client.
+
+The primary configuration file for the gums-client utilities is located in `/etc/gums/gums-client.properties`. The two properties that you must change are:
+
+|               |               |                                                                                                                                                                                         |
+|---------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Attribute     | Needs Editing | Value                                                                                                                                                                                   |
+| gums.location | Yes           | This should be set to the admin URL for your gums server, usually of the form gums.location=<https://GUMS_HOSTNAME:8443/gums/services/GUMSAdmin>                                        |
+| gums.authz    | Yes           | This should be set to the authorization interface URL for your gums server, usually of the form gums.authz=<https://GUMS_HOSTNAME:8443/gums/services/GUMSXACMLAuthorizationServicePort> |
+
+After the gums client is configured to generate the file run the following once by hand:
+
+``` console
+root# gums-host-cron
+```
+
+`user-vo-map` should be created in the following location:
+
+    /var/lib/osg/user-vo-map
+
+To have cron regularly update this file start the following service:
+
+``` console
+root# service gums-client-cron start
+```
+
+Make sure the **UserVOMapFile** field is set to this location in
+
+    /etc/gratia/gridftp-transfer/ProbeConfig
+
+Without `user-vo-map` , all gridftp transfers will show up as belonging to the VO "Unknown".
+
+### Using Gridmap based authorization mode
+
+Note: If you are using this mode for authorization, make sure the files /etc/grid-security/gsi-authz.conf and /etc/grid-security/prima-authz.conf do not exist.
+
+In order to enable generation of grid-mapfile and osg-user-vo-map.txt by using the edg-mkgridmap cron process to get information form VOMS servers do the following:
+
+``` console
+edg-mkgridmap 
+```
+
+If you have not installed this package, you will need to run `yum install edg-mkgridmap` first.
+
 
 ### Validation
 
-<span class="twiki-macro INCLUDE" section="Validation">GratiaTransferProbe</span>
+Run the Gratia probe once by hand to check for functionality:
+
+``` console
+root# /usr/share/gratia/gridftp-transfer/GridftpTransferProbeDriver
+```
+
+Look for any abnormal termination and report it if it is a non-trivial site issue. Look in the log files in `/var/log/gratia/<date>.log` and make sure there are no error messages printed.
 
 BeStMan Configuration
 ---------------------
 
-<span class="twiki-macro INCLUDE" section="Settings">InstallOSGBestmanSE</span>
+There are two authorization options:
+
+-   Gridmap file
+-   GUMS authentication server
+
+Please choose one of these and follow the instructions in one of the two following sections.
+
+### Configuring Gridmap Support
+
+By default, GridFTP uses a gridmap file, found in `/etc/grid-security/grid-mapfile`. This file is not generated by default. There are two ways you can generate this file. You can generate this file manually, by including DN/username combinations. This is most useful for debugging. Otherwise, you can use edg-mkgridmap, which will periodically contact a list of VOMS servers that you specify. It assembles a list of users from those servers and creates a grid-mapfile. This grid-mapfile serves both as a list of authorized users and provides a mapping from user dns to local user ids. edg-mkgridmap is already installed with OSG BeStMan SE packages.
+
+In order to use edg-mkgridmap, review `/etc/edg-mkgridmap.conf` to make sure that it has all VOs that you are interested in and also to comment out any VOs that you do not wish to support.
+
+``` console
+vi /etc/edg-mkgridmap.conf
+```
+
+This utility `edg-mkgridmap` runs as a cronjob `/etc/cron.d/edg-mkgridmap-cron` (by default every 6 hours). You can also run `edg-mkgridmap` manually to see that it generates `/etc/grid-security/grid-mapfile`.
+
+``` console
+edg-mkgridmap
+```
+
+Then, you can enable/start the service.
+
+``` console
+/sbin/service edg-mkgridmap start
+/sbin/chkconfig edg-mkgridmap on
+```
+
+Next, you will have to modify `/etc/bestman2/conf/bestman2.rc` and change GridMapFileName from `/etc/bestman2/conf/grid-mapfile.empty` to:
+
+``` file
+GridMapFileName=/etc/grid-security/grid-mapfile
+```
+
+In `/etc/sysconfig/bestman2`, change
+
+``` file
+BESTMAN_GUMS_ENABLED=no
+```
+
+### Configuring GUMS support
+
+By default, GridFTP uses a gridmap file, found in `/etc/grid-security/gridmap-file`. If you want to use GUMS security (recommended), you will need to enable it using the following steps:
+
+First, edit `/etc/grid-security/gsi-authz.conf` and uncomment the globus callout.
+
+``` file
+globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout
+```
+
+Note that this used to be the full path to the library (`/usr/lib64` or `/usr/lib`), but now we rely on the linker for proper resolution in this file.
+
+Next edit `/etc/lcmaps.db` to edit your gums information:
+
+``` file
+...
+gumsclient = "lcmaps_gums_client.mod"
+             "-resourcetype ce"
+             "-actiontype execute-now"
+             "-capath /etc/grid-security/certificates"
+             "-cert   /etc/grid-security/hostcert.pem"
+             "-key    /etc/grid-security/hostkey.pem"
+             "--cert-owner root"
+# Change this URL to your GUMS server
+             "--endpoint https://%RED%gums.fnal.gov:8443%ENDCOLOR%/gums/services/GUMSXACMLAuthorizationServicePort"
+```
+
+If you would like to run SAZ, you will need to enable the relevant lines in the above file as well (more documentation to be added later).
+
+You will need to modify the following settings in `/etc/sysconfig/bestman2`
+
+``` file
+BESTMAN_GUMSCERTPATH=/etc/grid-security/bestman/bestmancert.pem
+BESTMAN_GUMSKEYPATH=/etc/grid-security/bestman/bestmankey.pem
+...
+```
+
+You will need to modify the following settings in `/etc/bestman2/conf/bestman2.rc`
+
+``` file
+GUMSserviceURL=https://GUMS_HOST:8443/gums/services/GUMSXACMLAuthorizationServicePort
+```
 
 ### BeStManHadoop-specific configuration
 
@@ -362,13 +594,36 @@ Make sure that you modify `localPathListAllowed` to use the Hadoop mount in `/et
 
 ### Modify /etc/sudoers
 
-<span class="twiki-macro INCLUDE" section="Sudoers">InstallOSGBestmanSE</span>
+BeStman requires the "sudo" command in order to write information as the proper user. You will need to give the bestman user the proper permissions to run these commands.
+
+Modify `/etc/sudoers` and comment the following line.
+
+``` file
+#Defaults    requiretty
+```
+
+Then add the following lines at the end of the `/etc/sudoers` file.
+
+``` file
+Cmnd_Alias SRM_CMD = /bin/rm, /bin/mkdir, /bin/rmdir, /bin/mv, /bin/cp, /bin/ls
+Runas_Alias SRM_USR = ALL, !root
+bestman   ALL=(SRM_USR) NOPASSWD: SRM_CMD
+```
 
 ### Copy certificates to bestman location
 
 BeStMan2 is preconfigured to look for the **host** certificate and key in `/etc/grid-security/bestman/bestman*.pem`. Either, these files **must** exist and be **owned** by the **bestman** user, or you must change the settings in `bestman2.rc`. Note that you must use host certificates here or lcg-utils may experience issues.
 
-<span class="twiki-macro INCLUDE" section="Certificate">InstallOSGBestmanSE</span>
+BeStMan requires a certificate pair to function. In order to use lcg-utils, this must be a host certificate (rather than a service certificate). The following shows how to copy your certificates
+
+``` console
+cp /etc/grid-security/hostkey.pem /etc/grid-security/bestman/bestmankey.pem
+cp /etc/grid-security/hostcert.pem /etc/grid-security/bestman/bestmancert.pem
+chown -R bestman:bestman /etc/grid-security/bestman/
+```
+
+Then modify **CertFileName**, **KeyFileName** in `/etc/bestman2/conf/bestman2.rc`.
+
 
 Hadoop Storage Probe Configuration
 ----------------------------------
@@ -503,9 +758,15 @@ Stopping GridFTP:
 root# service globus-gridftp-server stop
 ```
 
-SRM (BeStMan): <span class="twiki-macro INCLUDE" section="Starting">InstallOSGBestmanSE</span>
+``` console
+root# service bestman2 start
+```
 
-\#HadoopValidation
+To start Bestman automatically at boot time
+
+``` console
+root# chkconfig bestman2 on
+```
 
 Validation
 ==========
@@ -1132,7 +1393,22 @@ File Locations
 | GridFTP| GUMS client (called by LCMAPS) configuration | `/etc/lcmaps.db`                                                      | Yes                                                 |
 | GridFTP| CA certificates                              | `/etc/grid-security/certificates/*`                                   | No                                                  |
 
-<span class="twiki-macro INCLUDE" section="Locations">InstallOSGBestmanSE</span>
+| Service/Process | Configuration File               | Description                                                                                     |
+|:----------------|:---------------------------------|:------------------------------------------------------------------------------------------------|
+| BeStMan2        | `/etc/bestman2/conf/bestman2.rc` | Main Configuration file                                                                         |
+|                 | `/etc/sysconfig/bestman2`        | Environment variables used by BeStMan2                                                          |
+|                 | `/etc/sysconfig/bestman2lib`     | Environment variables that store values of various client and server libraries used by BeStMan2 |
+|                 | `/etc/bestman2/conf/*`           | Other runtime configuration files                                                               |
+|                 | `/etc/init.d/bestman2`           | init.d startup script                                                                           |
+|                 | `/etc/gridftp.conf`              | Startup parameters                                                                              |
+
+| Service/Process | Log File                          | Description                                   |
+|:----------------|:----------------------------------|:----------------------------------------------|
+| BeStMan2        | `/var/log/bestman2/bestman2.log`  | BeStMan2 server log and errors                |
+|                 | `/var/log/bestman2/event.srm.log` | Records all SRM transactions                  |
+| GridFTP         | `/var/log/gridftp.log`            | Transfer log                                  |
+|                 | `/var/log/gridftp-auth.log`       | Authentication log                            |
+|                 | `/var/log/messages`               | Main system log (look here for LCMAPS errors) |
 
 Known Issues
 ============
