@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Install a CVMFS Stratum 1 - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Install a CVMFS Stratum 1";
+    var mkdocs_page_input_path = "other/install-cvmfs-stratum1.md";
+    var mkdocs_page_url = "/other/install-cvmfs-stratum1/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Common</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/install-best-practices/">Install Best Practices</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/yum/">Yum Repos</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Worker Node</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-wn/">Worker Node (RPM install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Compute Element</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/gridftp/">GridFTP Server</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/frontier-squid/">HTTP Cache</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Other</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../install-osg-upcoming-software/">OSG upcoming software</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../install-gwms-frontend/">GlideinWMS Frontend</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Install a CVMFS Stratum 1</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#install-a-cvmfs-stratum-1">Install a CVMFS Stratum 1</a></li>
+    
+
+    <li class="toctree-l3"><a href="#about-this-document">About this Document</a></li>
+    
+
+    <li class="toctree-l3"><a href="#applicable-versions">Applicable versions</a></li>
+    
+
+    <li class="toctree-l3"><a href="#requirements">Requirements</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#host-and-os">Host and OS</a></li>
+        
+            <li><a class="toctree-l4" href="#users-and-groups">Users and Groups</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#install-instructions">Install Instructions</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#installing-cvmfs-server-and-httpd">Installing cvmfs-server and httpd</a></li>
+        
+            <li><a class="toctree-l4" href="#installing-frontier-squid-and-frontier-awstats">Installing frontier-squid and frontier-awstats</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#configuring">Configuring</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#configuring-the-system">Configuring the system</a></li>
+        
+            <li><a class="toctree-l4" href="#configuring-cron">Configuring cron</a></li>
+        
+            <li><a class="toctree-l4" href="#configuring-apache">Configuring apache</a></li>
+        
+            <li><a class="toctree-l4" href="#configuring-frontier-squid">Configuring frontier-squid</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#verifying">Verifying</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#adding-an-example-repository">Adding an example repository</a></li>
+        
+            <li><a class="toctree-l4" href="#verifying-that-the-replica-is-being-served">Verifying that the replica is being served</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#setting-up-monitoring">Setting up monitoring</a></li>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Overviews</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Monitoring</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../monitoring/advanced-rsv-configuration/">Advanced RSV Configuration</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../monitoring/rsv-control/">Manage RSV via rsv-control</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/contrib/">Contrib Software</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Usage Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/using-wn/">Worker Node Environment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deprecated Software</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/install-bestman-xrootd/">BeStMan Xrootd SE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/edg-mkgridmap/">EDG-Mkgridmap Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/install-gums/">GUMS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../common/help/">Get Help</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Install Guides - Other &raquo;</li>
+        
+      
+    
+    <li>Install a CVMFS Stratum 1</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/other/install-cvmfs-stratum1.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="install-a-cvmfs-stratum-1">Install a CVMFS Stratum 1<a class="headerlink" href="#install-a-cvmfs-stratum-1" title="Permanent link">&para;</a></h1>
+<h1 id="about-this-document">About this Document<a class="headerlink" href="#about-this-document" title="Permanent link">&para;</a></h1>
+<p>This document describes how to install a CVMFS Stratum 1. There are many different variations on how to do that, but this document focuses on the configuration of the OSG GOC Stratum 1 oasis-replica.opensciencegrid.org. It is applicable to other Stratum 1s as well, very likely with modifications (some of which are suggested in the document below).</p>
+<h1 id="applicable-versions">Applicable versions<a class="headerlink" href="#applicable-versions" title="Permanent link">&para;</a></h1>
+<p>The applicable software versions for this document are cvmfs and cvmfs-server &gt;= 2.2.1.</p>
+<h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
+<h2 id="host-and-os">Host and OS<a class="headerlink" href="#host-and-os" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../release/supported_platforms">Supported operating system</a></li>
+<li>Root access</li>
+<li>SELinux disabled</li>
+<li>Adequate disk space for the repositories that will be served, at <code>/srv/cvmfs</code>. Do not use xfs as the filesystem type on operating systems older than RHEL7, because it has been demonstrated to perform poorly for CVMFS repositories; instead use ext3 or ext4. About 10GB should be reserved for apache and squid logs under /var/log on a production server, although they normally will not get that large. A Stratum 1 that is also a repository server should have at least 5GB available at <code>/var/cache</code>.</li>
+</ul>
+<h2 id="users-and-groups">Users and Groups<a class="headerlink" href="#users-and-groups" title="Permanent link">&para;</a></h2>
+<p>If your machine is also going to be a repository server like the OSG GOC, the installation will create one user unless it already exists:</p>
+<table>
+<thead>
+<tr>
+<th align="left">User</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>cvmfs</code></td>
+<td align="left">CernVM-FS service account</td>
+</tr>
+</tbody>
+</table>
+<p>A repository server installation will also create a cvmfs group and default the cvmfs user to that group.</p>
+<p>In addition, if the fuse rpm is not for some reason already installed, installing the repository server packages will also install fuse and that will create another group:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Group</th>
+<th align="left">Comment</th>
+<th align="left">Group members</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>cvmfs</code></td>
+<td align="left">CernVM-FS service account</td>
+<td align="left">none</td>
+</tr>
+<tr>
+<td align="left"><code>fuse</code></td>
+<td align="left">FUSE service account</td>
+<td align="left"><code>cvmfs</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="install-instructions">Install Instructions<a class="headerlink" href="#install-instructions" title="Permanent link">&para;</a></h1>
+<p>All CVMFS Stratum 1s require cvmfs-server software and apache (httpd). It is highly recommended to also install frontier-squid and frontier-awstats on the same machine to be able to easily join the WLCG <a href="http://wlcg-squid-monitor.cern.ch/snmpstats/indexcvmfs.html">MRTG</a> and <a href="http://wlcg-squid-monitor.cern.ch/awstats/cvmfs.html">awstats</a> monitoring systems. The recommended configuration for frontier-squid below does not do any caching, it is just for monitoring.</p>
+<h2 id="installing-cvmfs-server-and-httpd">Installing cvmfs-server and httpd<a class="headerlink" href="#installing-cvmfs-server-and-httpd" title="Permanent link">&para;</a></h2>
+<p>The OSG GOC Stratum 1 has to function as a repository server in addition to serving repository replications; most Stratum 1s serve only replications. Serving repositories is done quite differently on Redhat EL5 and EL6 systems. Instructions are also provided for how to install cvmfs-server on Stratum 1s that do not have to be repository servers, which is the same on both versions of operating systems. Choose one of the following three sections.</p>
+<h3 id="installing-a-cvmfs-repository-server">Installing a CVMFS repository server<a class="headerlink" href="#installing-a-cvmfs-repository-server" title="Permanent link">&para;</a></h3>
+<h4 id="installing-cvmfs-repository-server-on-rhel5">Installing CVMFS repository server on RHEL5<a class="headerlink" href="#installing-cvmfs-repository-server-on-rhel5" title="Permanent link">&para;</a></h4>
+<p>Redhat EL5-based systems that are not Scientific Linux-based should first build the <a href="http://ftp.scientificlinux.org/linux/scientific/5x/SRPMS/SL/aufs-0.20090202.cvs-6.sl5.src.rpm">SL5 aufs source rpm</a> and install the resulting rpm in their own yum repository.</p>
+<p>Follow these instructions to install:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -i http://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/EL/5/x86_64/cvmfs-release-2-4.el5.noarch.rpm
+<span class="gp">root@host #</span> rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
+<span class="gp">root@host #</span> yum -y install aufs cvmfs-server.x86_64 cvmfs.x86_64 mod_wsgi
+</pre></div>
+
+
+<h4 id="installing-cvmfs-repository-server-on-rhel6">Installing CVMFS repository server on RHEL6<a class="headerlink" href="#installing-cvmfs-repository-server-on-rhel6" title="Permanent link">&para;</a></h4>
+<p>Redhat EL6-based systems running a CVMFS repository server have to get their kernel from CERN: </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -i http://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm
+<span class="gp">root@host #</span> yum -y install --enablerepo<span class="o">=</span>cernvm-kernel kernel aufs2-util cvmfs-server.x86_64 cvmfs.x86_64 mod_wsgi
+<span class="gp">root@host #</span> reboot
+</pre></div>
+
+
+<h4 id="cvmfs-repository-server-and-rhel7">CVMFS repository server and RHEL7<a class="headerlink" href="#cvmfs-repository-server-and-rhel7" title="Permanent link">&para;</a></h4>
+<p>RHEL7.2 cannot be reliably used as a repository server, because of bugs in the union filesystem OverlayFS. The bugs are fixed in RHEL7.3.</p>
+<p>Redhat EL7.3-based systems running a CVMFS repository server is the simplest method: </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -i http://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm
+<span class="gp">root@host #</span> yum -y install cvmfs-server.x86_64 cvmfs.x86_64 mod_wsgi
+</pre></div>
+
+
+<h3 id="installing-cvmfs-stratum-1-code-without-repository-server-code">Installing CVMFS stratum 1 code without repository server code<a class="headerlink" href="#installing-cvmfs-stratum-1-code-without-repository-server-code" title="Permanent link">&para;</a></h3>
+<p>If you're not installing for the OSG GOC or otherwise want to support serving repositories on the same machine as a Stratum 1, use this section.</p>
+<p>On Redhat EL5, first do these commands:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> curl -O https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/EL/5/x86_64/cvmfs-release-2-4.el5.noarch.rpm
+<span class="gp">root@host #</span> rpm -i cvmfs-release-2-4.el5.noarch.rpm 
+<span class="gp">root@host #</span> curl -O https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm
+<span class="gp">root@host #</span> rpm -Uvh epel-release-latest-5.noarch.rpm
+</pre></div>
+
+
+<p>On Redhat EL6, first do these commands:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -i https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm
+</pre></div>
+
+
+<p>On Redhat EL7, first do these commands:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -i https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm
+</pre></div>
+
+
+<p>Then on any type of system do this command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum -y install cvmfs-server.x86_64 cvmfs-config mod_wsgi
+</pre></div>
+
+
+<h2 id="installing-frontier-squid-and-frontier-awstats">Installing frontier-squid and frontier-awstats<a class="headerlink" href="#installing-frontier-squid-and-frontier-awstats" title="Permanent link">&para;</a></h2>
+<p>Do these commands to install frontier-squid and frontier-awstats:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -i http://frontier.cern.ch/dist/rpms/RPMS/noarch/frontier-release-1.1-1.noarch.rpm
+<span class="gp">root@host #</span> yum -y install frontier-awstats
+</pre></div>
+
+
+<h1 id="configuring">Configuring<a class="headerlink" href="#configuring" title="Permanent link">&para;</a></h1>
+<h2 id="configuring-the-system">Configuring the system<a class="headerlink" href="#configuring-the-system" title="Permanent link">&para;</a></h2>
+<p>Increase the default number of open file descriptors:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> -e <span class="s2">&quot;\*\t\t-\tnofile\t\t16384&quot;</span> &gt;&gt;/etc/security/limits.conf 
+<span class="gp">root@host #</span> <span class="nb">ulimit</span> -n <span class="m">16384</span>
+</pre></div>
+
+
+<p>In order for this to apply also interactively when logging in over ssh, the option <code>UsePAM</code> has to be set to <code>yes</code> in <code>/etc/ssh/sshd_config</code>.</p>
+<h2 id="configuring-cron">Configuring cron<a class="headerlink" href="#configuring-cron" title="Permanent link">&para;</a></h2>
+<p>First, create the log directory: </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mkdir -p /var/log/cvmfs
+</pre></div>
+
+
+<p>Put the following in <code>/etc/cron.d/cvmfs</code>:</p>
+<div class="codehilite"><pre><span></span>0,15,30,45 * * * * root test -d /srv/cvmfs || exit;cvmfs_server snapshot -ai 
+0 9 * * * root find /srv/cvmfs/\*.**/data/txn -name &quot;**.*&quot; -mtime +2 2&gt;/dev/null|xargs rm -f
+</pre></div>
+
+
+<p>Also put the following in <code>/etc/logrotate.d/cvmfs</code>:</p>
+<div class="codehilite"><pre><span></span>/var/log/cvmfs/\*.log { weekly missingok notifempty }
+</pre></div>
+
+
+<h2 id="configuring-apache">Configuring apache<a class="headerlink" href="#configuring-apache" title="Permanent link">&para;</a></h2>
+<p>If you are installing frontier-squid, create <code>/etc/httpd/conf.d/cvmfs.conf</code> and put the following lines into it:</p>
+<div class="codehilite"><pre><span></span>Listen 8080 KeepAlive On
+</pre></div>
+
+
+<p>If you are not installing frontier-squid, instead put the following lines into that file:</p>
+<div class="codehilite"><pre><span></span>Listen 8000 KeepAlive On
+</pre></div>
+
+
+<p>If you will be serving opensciencegrid.org repositories, you have to allow for old client configurations that access repositories without the domain name added. For that reason, you will need to remove each <code>/etc/httpd/conf.d/cvmfs.&lt;repositoryname&gt;.conf</code> that adding a replica creates (this is included in the <a href="http://svn.usatlas.bnl.gov/svn/oasis/oasis-server/trunk/bin/add_osg_repository">add_osg_repository script</a>), and instead add the following to <code>/etc/httpd/conf.d/cvmfs.conf</code>:</p>
+<div class="codehilite"><pre><span></span>RewriteEngine On 
+RewriteRule ^/cvmfs/(\[^./\]**)/(.**)$ /cvmfs/$1.opensciencegrid.org/$2 
+RewriteRule ^/cvmfs/(\[^/\]+)/api/(.**)$ /cvmfs/$1/api/$2 \[PT\] 
+RewriteRule ^/cvmfs/(.**)$ /srv/cvmfs/$1 
+<span class="nt">&lt;Directory</span> <span class="err">&quot;/srv/cvmfs&quot;</span><span class="nt">&gt;</span> 
+  Options -MultiViews +FollowSymLinks -Indexes 
+  AllowOverride All 
+  Order allow,deny 
+  Allow from all
+
+  EnableMMAP Off EnableSendFile Off
+
+  <span class="nt">&lt;FilesMatch</span> <span class="err">&quot;^\.cvmfs&quot;</span><span class="nt">&gt;</span> ForceType application/x-cvmfs <span class="nt">&lt;/FilesMatch&gt;</span>
+
+  Header unset 
+  Last-Modified 
+  FileETag None
+
+  ExpiresActive On 
+  ExpiresDefault &quot;access plus 3 days&quot; 
+  ExpiresByType text/html &quot;access plus 15 minutes&quot; 
+  ExpiresByType application/x-cvmfs &quot;access plus 2 minutes&quot; 
+<span class="nt">&lt;/Directory&gt;</span>
+
+WSGIDaemonProcess cvmfs-api processes=2 display-name=%{GROUP} \\ python-path=/usr/share/cvmfs-server/webapi 
+WSGIProcessGroup cvmfs-api 
+WSGISocketPrefix /var/run/wsgi 
+WSGIScriptAliasMatch /cvmfs/(\[^/\]+)/api /var/www/wsgi-scripts/cvmfs-api.wsgi/$1 
+</pre></div>
+
+
+<p>On EL7-based systems (apache httpd 2.4 and later) replace the "Order allow, deny" and "Allow from all" to "Require all granted".</p>
+<p>If you will be serving cern.ch repositories, it has the same problem; replace opensciencegrid.org above with cern.ch. If you need to serve both opensciencegrid.org and cern.ch contact Dave Dykstra to discuss the options.</p>
+<p>Then enable apache:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chkconfig httpd on 
+<span class="gp">root@host #</span> service httpd start
+</pre></div>
+
+
+<h2 id="configuring-frontier-squid">Configuring frontier-squid<a class="headerlink" href="#configuring-frontier-squid" title="Permanent link">&para;</a></h2>
+<p>Put the following in <code>/etc/squid/customize.sh</code> after the existing comment header:</p>
+<div class="codehilite"><pre><span></span><span class="nx">awk</span> <span class="o">--</span><span class="nx">file</span> <span class="err">`</span><span class="nx">dirname</span> <span class="o">$</span><span class="mi">0</span><span class="err">`</span><span class="o">/</span><span class="nx">customhelps</span><span class="p">.</span><span class="nx">awk</span> <span class="o">--</span><span class="nx">source</span> <span class="s1">&#39;{</span>
+
+<span class="s1"># cache only api calls </span>
+<span class="s1">insertline(&quot;^http_access deny all&quot;, &quot;acl CVMFSAPI urlpath_regex ^/cvmfs/\[^/\]\*/api/&quot;) insertline(&quot;^http_access deny all&quot;, &quot;cache deny CVMFSAPI&quot;)</span>
+
+<span class="s1"># port 80 is also supported, through an iptables redirect </span>
+<span class="s1">setoption(&quot;http_port&quot;, &quot;8000 accel defaultsite=localhost:8080 no-vhost&quot;) setoption(&quot;cache_peer&quot;, &quot;localhost parent 8080 0 no-query originserver&quot;)</span>
+
+<span class="s1"># allow incoming http accesses from anywhere \# all requests will be forwarded to the originserver </span>
+<span class="s1">commentout(&quot;http_access allow NET_LOCAL&quot;) insertline(&quot;^http_access deny all&quot;, &quot;http_access allow all&quot;)</span>
+
+<span class="s1"># do not let squid cache DNS entries more than 5 minutes </span>
+<span class="s1">setoption(&quot;positive_dns_ttl&quot;, &quot;5 minutes&quot;)</span>
+
+<span class="s1"># set shutdown_lifetime to 0 to avoid giving new connections error \# codes, which get cached upstream </span>
+<span class="s1">setoption(&quot;shutdown_lifetime&quot;, &quot;0 seconds&quot;)</span>
+
+<span class="s1"># turn off collapsed_forwarding to prevent slow clients from slowing down faster ones</span>
+<span class="s1">setoption(&quot;collapsed_forwarding&quot;, &quot;off&quot;)</span>
+
+<span class="s1">print }&#39;</span>
+</pre></div>
+
+
+<p>On an RHEL7 system, make sure that iptables-services is installed and enabled:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum -y install iptables-services 
+<span class="gp">root@host #</span> systemctl <span class="nb">enable</span> iptables
+</pre></div>
+
+
+<p>Forward port 80 to port 8000 (first command is for external, second command for localhost):</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> iptables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span> 
+<span class="gp">root@host #</span> iptables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span> 
+<span class="gp">root@host #</span> service iptables save
+</pre></div>
+
+
+<p>On RHEL7 also set up the the same port forwarding for IPv6 (unfortunately it is not supported on RHEL6):</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span>
+<span class="gp">root@host #</span> ip6tables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span>
+<span class="gp">root@host #</span> service ip6tables save
+</pre></div>
+
+
+<p>Enable frontier-squid:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chkconfig frontier-squid on
+<span class="gp">root@host #</span> service frontier-squid start
+</pre></div>
+
+
+<p>Note: the above configuration is for a single squid thread, which is fine for 1Gbit/s and possibly 2Gbit/s, but if higher bandwidth is needed, see the <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Running_multiple_squid_workers">instructions for running multiple squid workers</a>.</p>
+<h1 id="verifying">Verifying<a class="headerlink" href="#verifying" title="Permanent link">&para;</a></h1>
+<p>In order to verify that everything is installed correctly, create a repository replica. The repository chosen for the instructions below is one from egi.eu because it is very small, but you can use another one if you prefer.</p>
+<h2 id="adding-an-example-repository">Adding an example repository<a class="headerlink" href="#adding-an-example-repository" title="Permanent link">&para;</a></h2>
+<p>The OSG GOC Stratum 1 should add a repository replica using the <code>add_osg_repository</code> script from the oasis-2 rpm. Instructions for installing that are elsewhere but you can also <a href="http://svn.usatlas.bnl.gov/svn/oasis/oasis-server/trunk/bin/add_osg_repository">download add_osg_repository</a>. This script assumes that the oasis.opensciencegrid.org replica repository was first created, so this instruction creates it but does not download the first snapshot because that would take a lot of space and time. Use these commands to create the oasis replica and to create and download the example replica:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cvmfs_server add-replica -o root http://oasis.opensciencegrid.org:8000/cvmfs/oasis.opensciencegrid.org&gt; /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub 
+<span class="gp">root@host #</span> add_osg_repository http://cvmfs-stratum0.gridpp.rl.ac.uk:8000/cvmfs/config-egi.egi.eu
+</pre></div>
+
+
+<p>It's a good idea for other Stratum 1s to make their own scripts for adding repository replicas, because there's always two or three commands to run, and it's easy to forget the commands after the first one. The first command is generically this:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cvmfs_server add-replica -o root http://cvmfs-stratum0.gridpp.rl.ac.uk:8000/cvmfs/config-egi.egi.eu&gt; /etc/cvmfs/keys/egi.eu/egi.eu.pub
+</pre></div>
+
+
+<p>However, non-GOC OSG Stratum 1s (that is, at BNL and FNAL), for the sake of fulfilling an OSG security requirement, need to instead read from the OSG GOC machine with this as their first command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cvmfs_server add-replica -o root http://oasis-replica.opensciencegrid.org:8000/cvmfs/config-egi.egi.eu /etc/cvmfs/keys/egi.eu/egi.eu.pub:/etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
+</pre></div>
+
+
+<p>The second command for Stratum 1s that have the httpd configuration as described above in the <a href="#Configuring_apache">Configuring apache section</a> is this:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rm -f /etc/httpd/conf.d/cvmfs.config-egi.egi.eu.conf
+</pre></div>
+
+
+<p>Then the next command is this:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cvmfs_server snapshot config-egi.egi.eu
+</pre></div>
+
+
+<p>With large repositories that can take a very long time, but with small repositories it should be very quick and not show any errors.</p>
+<h2 id="verifying-that-the-replica-is-being-served">Verifying that the replica is being served<a class="headerlink" href="#verifying-that-the-replica-is-being-served" title="Permanent link">&para;</a></h2>
+<p>Now to verify that the replication is working, do the following commands:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> wget -qdO- http://localhost:8000/cvmfs/config-egi.egi.eu/.cvmfspublished%7Ccat -v
+<span class="gp">root@host #</span> wget -qdO- http://localhost:80/cvmfs/config-egi.egi.eu/.cvmfspublished%7Ccat -v
+</pre></div>
+
+
+<p>Both commands should show a short file including gibberish at the end which is the signature.</p>
+<p>It is a good idea to familiarize yourself with the log entries at <code>/var/log/httpd/access_log</code> and also, if you have installed frontier-squid, at <code>/var/log/squid/access.log</code>. Also, at least 15 minutes after the snapshot is finished, check the log <code>/var/log/cvmfs</code> to see that it tried to get an update and got no errors.</p>
+<h1 id="setting-up-monitoring">Setting up monitoring<a class="headerlink" href="#setting-up-monitoring" title="Permanent link">&para;</a></h1>
+<p>If you installed frontier-squid and frontier-awstats, there is a little more to do to configure monitoring.</p>
+<p>First, make sure that your firewall accepts UDP queries from the monitoring server at CERN. Details are on <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring">the frontier-squid instructions</a>. Next, choose any random password and put it in <code>/etc/awstats/password-file</code>. Then tell Dave Dykstra the fully qualified domain name of your machine and the password you chose, and he'll set up the monitoring servers.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../compute-element/htcondor-ce-overview/" class="btn btn-neutral float-right" title="HTCondor-CE">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../install-gwms-frontend/" class="btn btn-neutral" title="GlideinWMS Frontend"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../install-gwms-frontend/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../compute-element/htcondor-ce-overview/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
