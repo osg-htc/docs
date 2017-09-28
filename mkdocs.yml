@@ -10,6 +10,7 @@ pages:
 - Home: 'index.md'
 - Installation Overview: 'install-overview.md'
 - Install Guides - Common:
+  - 'Install Best Practices': 'common/install-best-practices.md'
   - 'CA Certificates': 'common/ca.md'
   - 'OSG CA Certificates Updater': 'common/osg-ca-certs-updater.md'
   - 'Yum Repos': 'common/yum.md'
@@ -32,17 +33,13 @@ pages:
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
+  - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
 - Monitoring:
   - 'RSV Overview': 'monitoring/rsv-overview.md'
   - 'Install RSV': 'monitoring/install-rsv.md'
   - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
   - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
   - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
-- Install Guides - Other:
-  - 'Install Best Practices': 'common/install-best-practices.md'
-  - 'GSI-enabled SSH': 'other/gsissh.md'
-  - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
-  - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
 - Release Information:
   - 'OSG Release Series': 'release/release_series.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
