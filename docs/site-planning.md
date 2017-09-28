@@ -6,7 +6,7 @@ Site Planning
 
     * GRAM and the Globus Gatekeeper have been removed in favor of HTCondor-CE
     * Managed Fork has been removed along with GRAM
-    * GUMS is deprecated in favor of [LCMAPS-VOMS authentication](security/lcmaps-voms-authentication)
+    * GUMS and EDG-Mkgridmap are deprecated in favor of [LCMAPS-VOMS authentication](security/lcmaps-voms-authentication)
     * BeStMan is deprecated in favor of HDFS and load-balanced GridFTP
     * NFSLite has been removed
 
@@ -49,12 +49,10 @@ The OSG provides software and documentation to install and operate following ser
 
 Grid users will authorization with your site using their **grid or voms proxy**. The OSG provides two different services that let you control the authorization process:
 
-| **Service** | **Description** | **Advantages** | **Disadvantages** |
-
-|                                 |                                                                           |                              |                                            |
+| **Service**                     | **Description**                                                           | **Advantages**               | **Disadvantages**                          |
 |---------------------------------|---------------------------------------------------------------------------|------------------------------|--------------------------------------------|
 | edg-mkgridmap                   | a simple program that contacts VOMS servers and creates a gridmap file    | easy to install and maintain | does not support voms proxies              |
-| [GUMS](Documentation.AboutGums) | a web service providing sophisticated controls of how users authorization | supports voms proxies        | requires Tomcat to be run as a web service |
+| [GUMS](security/install-gums)   | a web service providing sophisticated controls of how users authorization | supports voms proxies        | requires Tomcat to be run as a web service |
 
 
 !!! warning
@@ -138,11 +136,13 @@ An SE must run correctly configured Grid Information Providers, Gratia accountin
 
 These services are supported by the OSG Storage group. Please email <osg-storage@opensciencegrid.org> for installation and support questions for these services.
 
-| **Storage Requirements** | **Min Hardware Requirements** | **OSG SE Solution** |
-
-|                                                 |                        |                   |                                                      |                               |                  |                                                                                              |                         |                        |                                                                        |                         |                       |                                                                                              |                          |        |
-|-------------------------------------------------|------------------------|-------------------|------------------------------------------------------|-------------------------------|------------------|----------------------------------------------------------------------------------------------|-------------------------|------------------------|------------------------------------------------------------------------|-------------------------|-----------------------|----------------------------------------------------------------------------------------------|--------------------------|--------|
-| SRM interface, Dynamic Space Management Support | Server with local disk | BeStMan-fullmode| | SRM interface, No or Static Space Management Support | Server with local disk or NFS | BeStMan-gateway| | SRM interface, No or Static Space Management Support, jobs need root protocol to access data | Multiple servers(&gt;3) | BeStMan-gateway/Xrood| | SRM interface, No or Static Space Management Support, file replication | Multiple servers(&gt;4) | BeStMan-gateway/HDFS| | SRM interface, Dynamic Space Management Support, file replication, interface to tape backend | Multiple servers (&gt;5) | dcache |
+| **Storage Requirements**                                                                     | **Min Hardware Requirements** | **OSG SE Solution**   |
+|----------------------------------------------------------------------------------------------|-------------------------------|-----------------------|
+| SRM interface, Dynamic Space Management Support                                              | Server with local disk        | BeStMan-fullmode      |
+| SRM interface, No or Static Space Management Support                                         | Server with local disk or NFS | BeStMan-gateway       |
+| SRM interface, No or Static Space Management Support, jobs need root protocol to access data | Multiple servers(&gt;3)       | BeStMan-gateway/Xrood |
+| SRM interface, No or Static Space Management Support, file replication                       | Multiple servers(&gt;4)       | BeStMan-gateway/HDFS  |
+| SRM interface, Dynamic Space Management Support, file replication, interface to tape backend | Multiple servers (&gt;5)      | dcache                |
 
 To learn more about storage technologies used in OSG, read the [Overview](Documentation.StorageInfrastructureSoftware) and the [Storage Site Administrator Guide](Documentation.StorageSiteAdministrator).
 
