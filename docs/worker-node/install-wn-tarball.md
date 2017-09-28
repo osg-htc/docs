@@ -107,11 +107,10 @@ Validing the Worker Node Client
 
 To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.
 
-1.  Submit a job that executes the `env` command (e.g. Run [`condor_ce_trace`](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_ce_trace) with the `-d` flag from your HTCondor CE)
+1.  Submit a job that executes the `env` command (e.g. Run [`condor_ce_trace`](../compute-element/troubleshoot-htcondor-ce#condor_ce_trace) with the `-d` flag from your HTCondor CE)
 2.  Verify that the value of `$OSG_GRID` is set to the directory of your worker node client installation
 
 How to get Help?
 ----------------
 
 To get assistance please use this [Help Procedure](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HelpProcedure).
-

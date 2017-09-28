@@ -44,7 +44,7 @@ Fetch-CRL is the only service required to support the WN Client.
 | Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md) for more info |
 
 !!! note
-    `fetch-crl-boot` will begin fetching CRLS, which can take a few minutes and fail on transient errors. You can add configuration to ignore these transient errors in `/etc/fetch-crl.conf`: 
+    `fetch-crl-boot` will begin fetching CRLS, which can take a few minutes and fail on transient errors. You can add configuration to ignore these transient errors in `/etc/fetch-crl.conf`:
 
         :::file
         noerrors
@@ -64,7 +64,7 @@ Validating the Worker Node Client
 
 To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.
 
-1.  Submit a job that executes the `env` command (e.g. Run [condor\_ce\_trace](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE) with the `-d` flag from your HTCondor CE)
+1.  Submit a job that executes the `env` command (e.g. Run [condor\_ce\_trace](../compute-element/troubleshoot-htcondor-ce#condor_ce_trace) with the `-d` flag from your HTCondor CE)
 2.  Verify that the value of `OSG_GRID` is set to `/etc/osg/wn-client`
 
 How to get Help?

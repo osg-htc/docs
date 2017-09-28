@@ -41,7 +41,7 @@ Before you use the Tester, there are some one-time configuration steps to comple
 Complete these steps **on your GlideinWMS Front-end Central Manager host**:
 
 1. Authorize the Tester host to connect to your Central Manager:
-     
+
         :::console
         [root@client ~] # glidecondor_addDN -allow-others -daemon %RED%<COMMENT> <TESTER_DN>%ENDCOLOR% condor
 
@@ -54,16 +54,16 @@ Complete these steps **on your GlideinWMS Front-end Central Manager host**:
 2. Restart HTCondor to apply the changes
 
     On **EL 6** systems:
-  
+
         :::console
         [root@client ~] # service condor restart
-    
+
     On **EL 7** systems:
 
         :::console
         [root@client ~] # systemctl restart condor
 
-3. Add the new Tester to your GlideinWMS front-end configuration. 
+3. Add the new Tester to your GlideinWMS front-end configuration.
    Edit the file `/etc/gwms-frontend/frontend.xml` and add a line as follows within the `<schedds>` element
 
         :::file
@@ -71,11 +71,11 @@ Complete these steps **on your GlideinWMS Front-end Central Manager host**:
 
      Where `TESTER_DN` is the Distinguished Name (DN) of the host certificate of your Tester host (as above), and `TESTER_HOSTNAME` is the fully qualified hostname of the Tester host. For example:
 
-        :::file 
+        :::file
         <schedd DN="/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=fermicloud357.fnal.gov" fullname="fermicloud357.fnal.gov">
-   
+
      Reconfigure your GlideinWMS front-end to apply the changes:
-      
+
         :::console
         [root@client ~] # service gwms-frontend reconfig
 
@@ -84,7 +84,7 @@ Complete these steps **on your GlideinWMS Front-end Central Manager host**:
 Complete the following steps **on your Tester host**:
 
 1. Configure the Tester for the VOs that your Front-end supports
-   
+
     Edit the file `/etc/rsv/metrics/org.osg.local-gfactory-site-querying-local.conf`. The `constraint` line is an HTCondor ClassAd expression containing one `stringListMember` function per VO that your Front-end supports. If there is more than one VO, the function invocations are joined by the “logical or” operator, `||`. Edit the `constraint` line for your Front-end.
 
     For example, for a single VO named `Foo`, the line would be:
@@ -110,7 +110,7 @@ Complete the following steps **on your Tester host**:
         [root@client ~] # glidecondor_addDN -allow-others -daemon 'UCSD central manager DN' '/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=osg-ligo-1.t2.ucsd.edu' condor
 
 3. Configure the special HTCondor-RSV instance with your host IP address.
-   
+
     Create the file `/etc/condor/config.d/98_public_interface.config` with this content:
 
         :::file
@@ -186,7 +186,7 @@ The highlighted name is the site name, and there should be one such line per sit
 Troubleshooting RSV-GWMS-Tester
 -------------------------------
 
-You can find more information on troubleshooting in the [RSV troubleshooting section](../monitoring/rsv#troubleshooting-rsv)
+You can find more information on troubleshooting in the [RSV troubleshooting section](../monitoring/install-rsv#troubleshooting-rsv)
 
 Logs and configuration:
 
@@ -214,4 +214,3 @@ Reference
 | Host key         | `root`                     | `/etc/grid-security/hostkey.pem`  |
 
 Find instructions to request a host certificate [here](../common/pki-cli.md).
-
