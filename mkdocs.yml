@@ -11,6 +11,7 @@ pages:
 - Installation Overview: 'install-overview.md'
 - Install Guides - Common:
   - 'CA Certificates': 'common/ca.md'
+  - 'OSG CA Certificates Updater': 'common/osg-ca-certs-updater.md'
   - 'Yum Repos': 'common/yum.md'
 - Install Guides - Worker Node:
   - 'Worker Node (RPM install)': 'worker-node/install-wn.md'

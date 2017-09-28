@@ -45,7 +45,7 @@ Depending on your choice, you select one of two RPMs:
 
 ### How do I keep CAs updated?
 
-Please follow the [update instructions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaCertsUpdater) to make sure that the CAs are kept updated.
+Please follow the [update instructions](osg-ca-certs-updater) to make sure that the CAs are kept updated.
 
 Option 2: Install osg-update-certs
 ----------------------------------
@@ -282,7 +282,7 @@ The Trusted Certificate Authority (CA) certificates, and their associated Certif
 How to ensure you are get up-to-date CA/CRL information
 -------------------------------------------------------
 
-1.  If you installed CAs using rpm packages (`osg-ca-certs`,`igtf-ca-certs`) (Options 1, 4), you will need to install the software described in [the CA update document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaCertsUpdater), and enable `osg-ca-certs-updater` service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.
+1.  If you installed CAs using rpm packages (`osg-ca-certs`,`igtf-ca-certs`) (Options 1, 4), you will need to install the software described in [the CA update document](osg-ca-certs-updater), and enable `osg-ca-certs-updater` service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.
 2.  If you use Option 2 (i.e. `osg-update-certs`) then make sure that you have the corresponding service enabled.
 
    ```
@@ -371,7 +371,7 @@ Config files: `/etc/osg/osg-update-certs.conf` Log files: `/var/log/osg-update-c
 
 ### Are CA packages automatically updated?
 
-If CA files are installed using `osg-ca-certs` or `igtf-ca-certs` rpms (i.e. options 1, 4), you will need to install the software described in OsgCaCertsUpdater, and enable osg-ca-certs-updater service to keep the CAs automatically updated.
+If CA files are installed using `osg-ca-certs` or `igtf-ca-certs` rpms (i.e. options 1, 4), you will need to install the software described in [OSG CA certs updater](osg-ca-certs-updater), and enable osg-ca-certs-updater service to keep the CAs automatically updated.
 
 If CA files are being installed using `osg-ca-scripts` rpm package (option 2), CA files are kept up-to-date as long as `osg-update-certs-cron` service the package provides has been started.
 
