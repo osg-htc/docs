@@ -2,16 +2,12 @@
 Install XRootd Client 
 =====================
 
-
-Introduction
-============
-
 XRootD is a high performance network storage system widely used in high energy physics experiments such as ATLAS and ALICE. The underlying XRootD data transfer protocol provides highly efficient access to ROOT based data files.
 
 This page provides instructions for using a XRootD client to connect to a XRootD storage system.
 
 Installing a XRootD Client
-==========================
+--------------------------
 
 As a user you have three different ways to interact with XRootd: a file system mounted with XRootDFS, the application `xrdcp`, LD\_PRELOAD.
 
@@ -21,14 +17,12 @@ To use `xrdcp` you need to have it in your path (e.g. `source $INSTALL_DIR/setup
 
 The use of LD\_PRELOAD is not recommended if you have any alternative available.
 
-Install Repositories
---------------------
+### Install Repositories 
 
 If you have not done so, you will need to install the [proper yum repositories](../common/yum):
 
 
-Installing XRootD Client
-------------------------
+### Installing XRootD Client
 
 The XRootD client is needed to access XRootD via `xrdcp` or via POSIX preload.
 
@@ -36,8 +30,7 @@ The XRootD client is needed to access XRootD via `xrdcp` or via POSIX preload.
 root@host # yum install xrootd-client
 ```
 
-Installing XRootD Fuse
-----------------------
+### Installing XRootD Fuse
 
 The XRootD fuse package is needed to access via XRootDFS.
 
@@ -46,10 +39,9 @@ root@host # yum install xrootd-fuse
 ```
 
 Using the XRootD Client Mechanisms
-==================================
+----------------------------------
 
-Using the xrdcp client
-----------------------
+### Using the xrdcp client
 
 From the redirector node, you can run this:
 
@@ -69,8 +61,7 @@ root@host # xrdcp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path
 
 Note that `xrdcp` creates missing directories.
 
-Tests using the libXrdPosixPreload library
-------------------------------------------
+### Tests using the libXrdPosixPreload library
 
 Using XRootD with the POSIX preload library (replace `/usr/lib64` with `/usr/lib` on 32-bit systems)
 
@@ -85,8 +76,7 @@ root@host # rm xroot://redirector.yourdomain.org:1094//storage/path/subdir/test
 root@host # rmdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
 ```
 
-Tests using XRootDFS
---------------------
+### Tests using XRootDFS
 
 The directory mounted using XRootDFS can be used as any other directory mounted on your file system. All the normal Unix commands should work. You don't need any special setup or library. Try using `cp`, `rm`, `mv`, `mkdir`, `rmdir`.
 
@@ -103,7 +93,7 @@ root@host # rm -r /mnt/xrootd/subdir
 ```
 
 How to get Help?
-================
+----------------
 
 If you cannot resolve the problem, the best way to get help is by contacting <osg-software@opensciencegrid.org>.
 For a full set of help options, see [Help Procedure](../common/help).
