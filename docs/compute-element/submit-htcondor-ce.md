@@ -291,7 +291,7 @@ If there are issues contacting the CE, you will see error messages about a 'Down
     GridResource: condor condorce.example.com condorce.example.com:9619
 ```
 
-This indicates a communication issue with your CE that can be diagnosed with [condor\_ce\_ping](#condor_ce_ping).
+This indicates a communication issue with your CE that can be diagnosed with `condor_ce_ping`.
 
 Reference
 ---------
