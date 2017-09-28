@@ -1,7 +1,17 @@
-**<span class="twiki-macro SPACEOUT">%TOPIC%</span>**
-=====================================================
+Site Planning
+=============
 
-<span class="twiki-macro DOC_STATUS_TABLE"></span> <span class="twiki-macro TOC"></span>
+!!! warning
+    This documentation is outdated and some of the listed technologies are no longer in use:
+
+    * GRAM and the Globus Gatekeeper have been removed in favor of HTCondor-CE
+    * Managed Fork has been removed along with GRAM
+    * GUMS is deprecated in favor of [LCMAPS-VOMS authentication](security/lcmaps-voms-authentication)
+    * BeStMan is deprecated in favor of HDFS and load-balanced GridFTP
+    * NFSLite has been removed
+
+    Please be patient while we update the document to reflect current procedures and technologies.
+
 
 About this Document
 ===================
