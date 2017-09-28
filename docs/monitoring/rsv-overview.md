@@ -18,8 +18,8 @@ The components of RSV are:
 Installing and configuring RSV
 ------------------------------
 
--   [Installing RSV](install-rsv) - For Typical Simple RSV Configuration
--   [Configuring RSV](configure-rsv) - Beginner and advanced configuration instructions
+-   [Installing RSV](install-rsv) - For installing RSV and simple configuration
+-   [Configuring RSV](advanced-rsv-configuration) - Advanced configuration instructions
 -   [Managing RSV via rsv-control](rsv-control) - rsv-control is a tool to manage RSV
 
 RSV Troubleshooting

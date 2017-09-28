@@ -34,7 +34,7 @@ pages:
 - Monitoring:
   - 'RSV Overview': 'monitoring/rsv-overview.md'
   - 'Install RSV': 'monitoring/install-rsv.md'
-  - 'Configure RSV': 'monitoring/configure-rsv.md'
+  - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
   - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
   - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
 - Install Guides - Other:
