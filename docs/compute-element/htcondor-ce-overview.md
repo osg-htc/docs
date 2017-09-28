@@ -36,7 +36,7 @@ The biggest difference you will see between an HTCondor-CE and a GRAM CE is in t
 Listed below are some other benefits to switching to HTCondor-CE:
 
 -   **Scalability:** HTCondor-CE is capable of supporting job workloads of large sites (see [scale testing results](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HTCondorCEScaleTests))
--   **Debugging tools:** HTCondor-CE offers [many tools to help troubleshoot](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE) issues with jobs
+-   **Debugging tools:** HTCondor-CE offers [many tools to help troubleshoot](troubleshoot-htcondor-ce) issues with jobs
 -   **Routing as configuration:** HTCondor-CE’s mechanism to transform and submit jobs is customized via configuration variables, which means that customizations will persist across upgrades and will not involve modification of software internals to route jobs
 
 How Jobs Run
@@ -56,7 +56,7 @@ For a site with an HTCondor **batch system**, the JobRouter can use HTCondor pro
 
 In an HTCondor-CE/HTCondor setup, files are transferred from HTCondor-CE’s spool directory to the batch system’s spool directory using internal HTCondor protocols.
 
-!!! note 
+!!! note
     The JobRouter copies the job directly into the batch system and does not make use of `condor_submit`. This means that if the HTCondor batch system is configured to add attributes to incoming jobs when they are submitted (i.e., `SUBMIT_EXPRS`), these attributes will not be added to the routed jobs.
 
 ### On other batch systems
@@ -108,9 +108,7 @@ If you're transitioning from a GRAM CE to HTCondor-CE, the process is the same a
 
 -   Install [HTCondor-CE](install-htcondor-ce) or [HTCondor-CE-Bosco](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorBosco)
 -   Setting up [job routes](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/JobRouterRecipes)
--   [Submitting](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/SubmittingHTCondorCE) jobs to HTCondor-CE
--   [Troubleshooting](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE) HTCondor-CE
+-   [Submitting](submit-htcondor-ce) jobs to HTCondor-CE
+-   [Troubleshooting](troubleshoot-htcondor-ce) HTCondor-CE
 -   Register the CE with OIM
 -   Register with the OSG GlideinWMS factories and/or the ATLAS AutoPyFactory
-
-
