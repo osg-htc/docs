@@ -106,5 +106,5 @@ How to get Help?
 ================
 
 If you cannot resolve the problem, the best way to get help is by contacting <osg-software@opensciencegrid.org>.
-For a full set of help options, see [Help Procedure](HelpProcedure).
+For a full set of help options, see [Help Procedure](../common/help).
 
