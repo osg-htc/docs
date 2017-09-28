@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Advanced RSV Configuration - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Advanced RSV Configuration";
+    var mkdocs_page_input_path = "monitoring/advanced-rsv-configuration.md";
+    var mkdocs_page_url = "/monitoring/advanced-rsv-configuration/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Common</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/yum/">Yum Repos</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Worker Node</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-wn/">Worker Node (RPM install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Compute Element</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/gridftp/">GridFTP Server</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/frontier-squid/">HTTP Cache</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Other</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/install-osg-upcoming-software/">OSG upcoming software</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Monitoring</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../rsv-overview/">RSV Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../install-rsv/">Install RSV</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Advanced RSV Configuration</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#advanced-rsv-configuration">Advanced RSV Configuration</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#about-this-document">About This Document</a></li>
+        
+            <li><a class="toctree-l4" href="#configuring-metrics">Configuring metrics</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#configure-consumers">Configure consumers</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#sending-rsv-records-to-nagios">Sending RSV records to Nagios</a></li>
+        
+            <li><a class="toctree-l4" href="#general-rsv-configuration-options">General RSV configuration options</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#troubleshooting">Troubleshooting</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#important-files-locations">Important files locations</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../rsv-control/">Manage RSV via rsv-control</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Other</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/install-best-practices/">Install Best Practices</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/contrib/">Contrib Software</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Usage Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/using-wn/">Worker Node Environment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deprecated Software</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/edg-mkgridmap/">EDG-Mkgridmap Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/install-gums/">GUMS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../common/help/">Get Help</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Monitoring &raquo;</li>
+        
+      
+    
+    <li>Advanced RSV Configuration</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/monitoring/advanced-rsv-configuration.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="advanced-rsv-configuration">Advanced RSV Configuration<a class="headerlink" href="#advanced-rsv-configuration" title="Permanent link">&para;</a></h1>
+<h2 id="about-this-document">About This Document<a class="headerlink" href="#about-this-document" title="Permanent link">&para;</a></h2>
+<p>Most site administrators will be able to configure RSV by editing <code>/etc/osg/config.d/30-rsv.ini</code> and running osg-configure as described in <a href="../install-rsv#configuring-rsv">the RSV installation document</a>.  This document provides instructions for configuration beyond what osg-configure is able to do.</p>
+<h2 id="configuring-metrics">Configuring metrics<a class="headerlink" href="#configuring-metrics" title="Permanent link">&para;</a></h2>
+<p>If you need to change the behavior of a metric you can edit the metric configuration files. These replace the spec files from previous versions of RSV.</p>
+<ul>
+<li><code>/etc/rsv/metrics</code> - changes made to conf file in this directory named after a metric will affect the metric when run against all hosts</li>
+<li><code>/etc/rsv/metrics/&lt;HOST&gt;</code> - changes made to conf files in this directory (named as the host FQDN) will affect the metric when run against the specific host</li>
+</ul>
+<p>The configuration files are in INI format and have two sections:</p>
+<ul>
+<li>a first one named after the metric with execution options</li>
+<li>a second one with the name including the "args" keyword, including parameters sent to the probe at invokation</li>
+</ul>
+<h3 id="changing-the-times-a-metric-runs">Changing the times a metric runs<a class="headerlink" href="#changing-the-times-a-metric-runs" title="Permanent link">&para;</a></h3>
+<p>To change the time a metric runs set the <code>cron-interval</code> setting in the metric's conf file. Use <code>man 5 crontab</code> for a description of the format. For example, to change the <code>org.osg.general.ping-host</code> to run at a different time:</p>
+<div class="codehilite"><pre><span></span><span class="k">[org.osg.general.ping-host]</span>
+<span class="na">cron-interval</span> <span class="o">=</span> <span class="s">45 * * * *</span>
+
+<span class="k">[org.osg.general.ping-host args]</span>
+<span class="c1">#ping-count =</span>
+<span class="c1">#ping-timeout =</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be sure to put the <code>cron-interval</code> setting in the <code>[org.osg.general.ping-host]</code> section, and not the <code>[org.osg.general.ping-host args]</code> section! The purpose of the "args" section is described in the "passing extra parameters to a metric" section below.</p>
+</div>
+<p>After modifying the cron time of a metric you must restart RSV for the change to take effect.</p>
+<p>To see what times each of the metrics is running you can use <code>rsv-control</code> as follows:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control -l --cron-times
+
+<span class="go">Metrics enabled for host: osg-edu.cs.wisc.edu:10443 | Cron times</span>
+<span class="go">----------------------------------------------------+--------------------</span>
+<span class="go">org.osg.srm.srmcp-readwrite                         | 28 * * * *</span>
+<span class="go">org.osg.srm.srmping                                 | 13,33,53 * * * *</span>
+<span class="go">...</span>
+</pre></div>
+
+
+<h3 id="passing-extra-parameters-to-a-metric">Passing extra parameters to a metric<a class="headerlink" href="#passing-extra-parameters-to-a-metric" title="Permanent link">&para;</a></h3>
+<p>Any <code>key=value</code> pairs in the "args" section of the metric's <em>conf</em> file will be turned into command line parameters to the probe. For example, for this file:</p>
+<div class="codehilite"><pre><span></span><span class="k">[org.osg.certificates.cacert-expiry args]</span>
+<span class="na">warning-hours</span> <span class="o">=</span> <span class="s">6</span>
+<span class="na">error-hours</span> <span class="o">=</span> <span class="s">12</span>
+</pre></div>
+
+
+<p>This would lead to the probe getting called with the command-line parameters <code>--warning-hours 6 --error-hours 12</code>.</p>
+<h1 id="configure-consumers">Configure consumers<a class="headerlink" href="#configure-consumers" title="Permanent link">&para;</a></h1>
+<p>There is a configuration file common to all consumers: <code>/etc/rsv/consumers.conf</code>. It is a file in INI format and possible entries are:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Setting</th>
+<th align="left">Values</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">enabled</td>
+<td align="left">&lt;consumers&gt;</td>
+<td align="left">Comma-separated list of consumers to be enabled</td>
+</tr>
+<tr>
+<td align="left">timestamp</td>
+<td align="left">local</td>
+<td align="left">If this is set to local, a record with a local timestamp will be supplied to the consumer. If this is set to any other value, or is not set, a record with the GMT will be created.</td>
+</tr>
+</tbody>
+</table>
+<p>Each consumer has a configuration file in <code>/etc/rsv/consumers</code> named after it. This allows to specify command lines and environment for the consumers. Some consumers may have also their own configuration file, usually in <code>/etc/rsv/</code>. Below is an example for the Nagios consumer.</p>
+<h3 id="sending-rsv-records-to-nagios">Sending RSV records to Nagios<a class="headerlink" href="#sending-rsv-records-to-nagios" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Edit your <code>/etc/rsv/rsv-nagios.conf</code> file and fill in the appropriate information. The path of the configuration file is specified in <code>/etc/rsv/consumers/nagios-consumer.conf</code>.</li>
+<li>
+<p>If your Nagios config file contains password information you will want to lock down the permissions. Here is a suggested way to do this (replace <span style="color:red">rsvuser</span> with the group of your RSV user (<code>rsvuser</code> by default)):</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> chown root:<span style="color:red">rsvuser</span> /etc/rsv/rsv-nagios.conf
+<span class="gp">root@host#</span> chmod <span class="m">0440</span> /etc/rsv/rsv-nagios.conf
+</pre></div>
+
+
+</li>
+<li>
+<p>In the configuration file at <code>/etc/rsv/consumers/nagios-consumer.conf</code>, check the following two settings:</p>
+<ul>
+<li>Make sure that the path to your config file is correct. It may be referencing a directory <code>config</code> instead of <code>etc</code></li>
+<li>If you want to use <code>rsv2nsca</code> add the string "--send-nsca" to the <code>args</code> line.</li>
+</ul>
+</li>
+<li>
+<p>Enable and start the Nagios consumer by editing <code>consumers.conf</code> or by using <code>rsv-control</code> as follows:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control --enable nagios-consumer
+</pre></div>
+
+
+<p>The Nagios consumer will be started the next time that you start RSV. If you are already running RSV you can turn on the Nagios consumer immediately by running:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control --on nagios-consumer
+</pre></div>
+
+
+</li>
+<li>
+<p>To verify that the Nagios consumer is running you can run <code>rsv-control -j</code>.</p>
+</li>
+<li>The log information for the Nagios consumer can be found in these files:<ul>
+<li><code>/var/log/rsv/consumers/nagios-consumer.log</code></li>
+<li><code>/var/log/rsv/consumers/nagios-consumer.out</code></li>
+<li><code>/var/log/rsv/consumers/nagios-consumer.err</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="general-rsv-configuration-options">General RSV configuration options<a class="headerlink" href="#general-rsv-configuration-options" title="Permanent link">&para;</a></h2>
+<p>You can configure the RSV framework using <code>/etc/rsv/rsv.conf</code>. It is a file in INI format and possible entries are:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Setting</th>
+<th align="left">Values</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">user</td>
+<td align="left">&lt;username&gt;</td>
+<td align="left">The UNIX username that owns RSV. This is mandatory</td>
+</tr>
+<tr class="even">
+<td align="left">service-cert</td>
+<td align="left">&lt;path&gt;</td>
+<td align="left">Absolute path to the service certificate file. If this is set service-key and service-proxy must also be set.</td>
+</tr>
+<tr class="odd">
+<td align="left">service-key</td>
+<td align="left">&lt;path&gt;</td>
+<td align="left">Absolute path to the service key file. This must be used with service-cert.</td>
+</tr>
+<tr class="even">
+<td align="left">service-proxy</td>
+<td align="left">&lt;path&gt;</td>
+<td align="left">Absolute path where the service proxy will be generated. This must be used with service-cert.</td>
+</tr>
+<tr class="odd">
+<td align="left">proxy-file</td>
+<td align="left">&lt;path&gt;</td>
+<td align="left">Alternative to service-cert. The absolute path where the user proxy file is located. This will not be auto-regenerated.</td>
+</tr>
+<tr class="even">
+<td align="left">details-data-trim-length</td>
+<td align="left">&lt;integer&gt;</td>
+<td align="left">The number of bytes to trim the detailsData section to. If set to 0 no trimming will occur.</td>
+</tr>
+<tr class="odd">
+<td align="left">job-timeout</td>
+<td align="left">&lt;integer&gt;</td>
+<td align="left">Time in seconds before a metric is killed. A metric that times out will return a CRITICAL status.</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
+<h2 id="important-files-locations">Important files locations<a class="headerlink" href="#important-files-locations" title="Permanent link">&para;</a></h2>
+<p>Configuration files:</p>
+<table>
+<thead>
+<tr>
+<th align="left">File Description</th>
+<th align="left">Location</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">RSV configuration directory</td>
+<td align="left"><code>/etc/rsv</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">RSV configuration</td>
+<td align="left"><code>/etc/rsv/rsv.conf</code></td>
+<td align="left">RSV framework configuration</td>
+</tr>
+<tr>
+<td align="left">Consumers configuration in RSV</td>
+<td align="left"><code>/etc/rsv/consumers.conf</code></td>
+<td align="left">Select the consumers and change generic options</td>
+</tr>
+<tr>
+<td align="left">Consumers configuration</td>
+<td align="left"><code>/etc/rsv/consumers/&lt;CONSUMERNAME&gt;</code></td>
+<td align="left">To change arguments and environment</td>
+</tr>
+<tr>
+<td align="left">Generic metrics configuration</td>
+<td align="left"><code>/etc/rsv/metrics/&lt;METRICNAME&gt;.conf</code></td>
+<td align="left">To change arguments and environment</td>
+</tr>
+<tr>
+<td align="left">Host specific metrics configuration</td>
+<td align="left"><code>/etc/rsv/metrics/&lt;HOSTNAME&gt;/&lt;METRICNAME&gt;.conf</code></td>
+<td align="left">To change arguments and environment when running on HOSTNAME</td>
+</tr>
+</tbody>
+</table>
+<p>Other files:</p>
+<table>
+<thead>
+<tr>
+<th align="left">File Description</th>
+<th align="left">Location</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Metric log files</td>
+<td align="left"><code>/var/log/rsv/metrics</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Consumer log files</td>
+<td align="left"><code>/var/log/rsv/consumers</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Initial configuration</td>
+<td align="left"><code>/etc/osg/config.d/30-rsv.ini</code></td>
+<td align="left">Read by <code>osg-configure</code></td>
+</tr>
+<tr>
+<td align="left">Web files output</td>
+<td align="left"><code>/usr/share/rsv/www/</code></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>To find the metrics and the other files in RSV you can use also the RPM commands: <code>rpm -ql rsv-metrics</code> and <code>rpm -ql rsv</code>.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../rsv-control/" class="btn btn-neutral float-right" title="Manage RSV via rsv-control">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../install-rsv/" class="btn btn-neutral" title="Install RSV"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../install-rsv/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../rsv-control/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

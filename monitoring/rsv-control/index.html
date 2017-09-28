@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Manage RSV via rsv-control - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Manage RSV via rsv-control";
+    var mkdocs_page_input_path = "monitoring/rsv-control.md";
+    var mkdocs_page_url = "/monitoring/rsv-control/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Common</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/yum/">Yum Repos</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Worker Node</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-wn/">Worker Node (RPM install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Compute Element</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/gridftp/">GridFTP Server</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/frontier-squid/">HTTP Cache</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Other</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/install-osg-upcoming-software/">OSG upcoming software</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Monitoring</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../rsv-overview/">RSV Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../install-rsv/">Install RSV</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../advanced-rsv-configuration/">Advanced RSV Configuration</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Manage RSV via rsv-control</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#using-rsv-control">Using rsv-control</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#overview">Overview</a></li>
+        
+            <li><a class="toctree-l4" href="#viewing-rsv-jobs">Viewing RSV jobs</a></li>
+        
+            <li><a class="toctree-l4" href="#running-a-metric">Running a metric</a></li>
+        
+            <li><a class="toctree-l4" href="#enabling-and-disabling-metrics-and-consumers">Enabling and disabling metrics and consumers</a></li>
+        
+            <li><a class="toctree-l4" href="#troubleshooting">Troubleshooting</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Other</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/install-best-practices/">Install Best Practices</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/contrib/">Contrib Software</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Usage Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/using-wn/">Worker Node Environment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deprecated Software</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/edg-mkgridmap/">EDG-Mkgridmap Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/install-gums/">GUMS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../common/help/">Get Help</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Monitoring &raquo;</li>
+        
+      
+    
+    <li>Manage RSV via rsv-control</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/monitoring/rsv-control.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="using-rsv-control">Using rsv-control<a class="headerlink" href="#using-rsv-control" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>This document is for System Administrators. It details the usage of the <code>rsv-control</code> command for enabling, disabling, testing and running RSV probes.</p>
+<p><code>rsv-control</code> provides an interface to many RSV tasks. <code>rsv-control</code> can view RSV jobs, run metrics, enable or disable metrics and consumers, and allow advanced configuration.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>rsv-control</code> can be used to configure RSV as described here and in <a href="../advanced-rsv-configuration">the advanced configuration document</a>. Most site admins will be able to configure RSV by editing <code>/etc/osg/config.d/30-rsv.ini</code> and running <code>osg-configure</code> as described in the <a href="../install-rsv#configuring-rsv">installation doc</a>.</p>
+</div>
+<p>Using <code>rsv-control</code> to configure is for advanced RSV use including enabling non-default metrics. Admins who don't use <code>rsv-control</code> for configuration can still use it to view their RSV jobs, run RSV tests, and help debug RSV problems. Anyone can view the jobs, but you must be root or the RSV user (<code>rsv</code> by default) to execute other commands, e.g. run, enable and disable probes, or to turn RSV on and off.</p>
+<h2 id="viewing-rsv-jobs">Viewing RSV jobs<a class="headerlink" href="#viewing-rsv-jobs" title="Permanent link">&para;</a></h2>
+<p>rsv-control provides two different views: viewing the <em>desired</em> state and viewing the current <em>actual</em> state.</p>
+<ul>
+<li>Desired = what metrics and consumers will start the next time RSV is started</li>
+<li>Actual = what metrics and consumers are currently running</li>
+</ul>
+<h3 id="desired-state">Desired state<a class="headerlink" href="#desired-state" title="Permanent link">&para;</a></h3>
+<p>To view the desired state, use the <code>--list</code> (<code>-l</code> for short) flag. This will create one table for each host showing the metrics that are enabled to run against that host.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control --list
+
+<span class="go">Metrics enabled for host: osgitb1.nhn.ou.edu              | Service</span>
+<span class="go">----------------------------------------------------------+--------------------</span>
+<span class="go">org.osg.batch.jobmanager-default-status                   | OSG-CE</span>
+<span class="go">org.osg.batch.jobmanagers-available                       | OSG-CE</span>
+<span class="go">org.osg.certificates.cacert-expiry                        | OSG-CE</span>
+<span class="go">org.osg.certificates.crl-expiry                           | OSG-CE</span>
+<span class="go">org.osg.general.osg-directories-CE-permissions            | OSG-CE</span>
+<span class="go">org.osg.general.osg-version                               | OSG-CE</span>
+<span class="go">org.osg.general.ping-host                                 | OSG-CE</span>
+<span class="go">org.osg.general.vdt-version                               | OSG-CE</span>
+<span class="go">org.osg.general.vo-supported                              | OSG-CE</span>
+<span class="go">org.osg.globus.gram-authentication                        | OSG-CE</span>
+<span class="go">org.osg.globus.gridftp-simple                             | OSG-GridFTP</span>
+<span class="go">org.osg.gratia.condor                                     | OSG-CE</span>
+<span class="go">org.osg.gratia.metric                                     | OSG-CE</span>
+
+
+<span class="go">Metrics enabled for host: osg-edu.cs.wisc.edu:10443       | Service</span>
+<span class="go">----------------------------------------------------------+--------------------</span>
+<span class="go">org.osg.srm.srmcp-readwrite                               | OSG-SRM</span>
+<span class="go">org.osg.srm.srmping                                       | OSG-SRM</span>
+</pre></div>
+
+
+<p>Other options:</p>
+<ul>
+<li>To view all installed metrics use the <code>--all</code> (<code>-a</code>) flag along with <code>--list</code>. This will print an extra table showing metrics that are disabled on all hosts.</li>
+<li>If you are having problems with the output being truncated, try the <code>--wide</code> (<code>-w</code>) flag.</li>
+</ul>
+<h3 id="actual-state">Actual state<a class="headerlink" href="#actual-state" title="Permanent link">&para;</a></h3>
+<p>To view the current, running state of RSV jobs, use the <code>--job-list</code> flag (<code>-j</code> for short). This will show all metrics and consumers running in RSV. (It queries the underlying Condor Cron system that we use to run the metrics).</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control --job-list
+
+<span class="go">Hostname: osg-edu.cs.wisc.edu</span>
+<span class="go">     ID OWNER      ST NEXT RUN TIME   METRIC</span>
+<span class="go">  154.0 rsvuser    I  11-19 12:15     org.osg.certificates.cacert-expiry</span>
+<span class="go">  155.0 rsvuser    R  11-19 11:23     org.osg.gratia.metric</span>
+<span class="go">  156.0 rsvuser    I  11-19 18:47     org.osg.general.vdt-version</span>
+<span class="go">  157.0 rsvuser    I  11-19 12:30     org.osg.certificates.crl-expiry</span>
+<span class="go">  158.0 rsvuser    I  11-19 11:31     org.osg.globus.gram-authentication</span>
+<span class="go">  159.0 rsvuser    I  11-19 11:41     org.osg.general.osg-version</span>
+<span class="go">  160.0 rsvuser    R  11-19 11:25     org.osg.batch.jobmanager-default-status</span>
+<span class="go">  161.0 rsvuser    I  11-20 04:59     org.osg.batch.jobmanagers-available</span>
+<span class="go">  162.0 rsvuser    I  11-19 11:37     org.osg.general.osg-directories-CE-permissions</span>
+<span class="go">  163.0 rsvuser    I  11-19 12:08     org.osg.globus.gridftp-simple</span>
+<span class="go">  164.0 rsvuser    I  11-19 12:09     org.osg.gratia.condor</span>
+<span class="go">  165.0 rsvuser    R  11-19 11:27     org.osg.general.ping-host</span>
+<span class="go">  166.0 rsvuser    I  11-19 18:47     org.osg.general.vo-supported</span>
+
+<span class="go">Hostname: osg-edu.cs.wisc.edu:10443</span>
+<span class="go">     ID OWNER      ST NEXT RUN TIME   METRIC</span>
+<span class="go">  113.0 rsvuser    I  11-19 11:33     org.osg.srm.srmping</span>
+<span class="go">  114.0 rsvuser    R  11-19 11:28     org.osg.srm.srmcp-readwrite</span>
+
+<span class="go">     ID OWNER      ST CONSUMER</span>
+<span class="go">  198.0 rsvuser    R  html-consumer</span>
+<span class="go">  199.0 rsvuser    R  gratia-consumer</span>
+</pre></div>
+
+
+<p>The ST field indicates the current job status:</p>
+<ul>
+<li>R = the metric is currently running</li>
+<li>I = the metric is idle and will be run at the next scheduled interval</li>
+<li>Any other letter may indicate a problem</li>
+<li>Consumers will always appear to be running even though they will only run once every five minutes.</li>
+</ul>
+<h2 id="running-a-metric">Running a metric<a class="headerlink" href="#running-a-metric" title="Permanent link">&para;</a></h2>
+<p><code>rsv-control</code> can be used to run metrics one time against a host. This can be useful for:</p>
+<ul>
+<li>updating the status of a metric that had a problem instead of waiting until the next scheduled run time</li>
+<li>testing a metric against a host before deciding whether to enable it</li>
+</ul>
+<p>Note that <strong>the record for each run will be published to all active consumers</strong>. That is, it will be published to Gratia or will show up on your local web page, if you have those enabled.</p>
+<h3 id="simplest-test">Simplest test<a class="headerlink" href="#simplest-test" title="Permanent link">&para;</a></h3>
+<p>Use the <code>--run</code> (<code>-r</code>) flag. You must also provide the <code>--host</code> flag. The syntax is:</p>
+<p><code>rsv-control --run --host &lt;HOST&gt; &lt;METRIC&gt; [ &lt;METRIC2&gt; ...]</code></p>
+<p>where &lt;METRIC&gt; is the full metric name (e.g. <code>org.osg.general.osg-version</code>). You can get the metric names from the <code>--list</code> output.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control --run <span class="se">\</span>
+    --host osg-edu.cs.wisc.edu org.osg.general.osg-version
+
+<span class="go">Running metric org.osg.general.osg-version:</span>
+
+<span class="go">metricName: org.osg.general.osg-version</span>
+<span class="go">metricType: status</span>
+<span class="go">timestamp: 2010-11-19 11:40:19 CST</span>
+<span class="go">metricStatus: OK</span>
+<span class="go">serviceType: OSG-CE</span>
+<span class="go">serviceURI: osg-edu.cs.wisc.edu</span>
+<span class="go">gatheredAt: vdt-itb.cs.wisc.edu</span>
+<span class="go">summaryData: OK</span>
+<span class="go">detailsData: OSG 1.2.15</span>
+<span class="go">EOT</span>
+</pre></div>
+
+
+<p>Note the <em>metricStatus</em> in the example above: that's where you can see if it was successful or not. In this case, it was successful, because it printed OK.</p>
+<p>You may run multiple metrics against a single host by specifying multiple metrics to <code>rsv-control</code>.</p>
+<p>In order to run metrics against multiple hosts you must run <code>rsv-control</code> multiple times, once for each host.</p>
+<h3 id="running-all-enabled-metrics">Running all enabled metrics<a class="headerlink" href="#running-all-enabled-metrics" title="Permanent link">&para;</a></h3>
+<p>When RSV is first installed it can take up to a day for each enabled metric to run once. A new option is provided to force each metric to run immediately, for all hosts. Use the <code>--all-enabled</code> flag along with <code>--run</code>. With this option it is not necessary to specify a host - all enabled metrics for all configured hosts will be run (in fact, if you do specify a host it will be ignored).</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control -r --all-enabled
+
+<span class="go">Running metric org.osg.certificates.cacert-expiry (1 of 15)</span>
+
+<span class="go">metricName: org.osg.certificates.cacert-expiry</span>
+<span class="go">metricType: status</span>
+<span class="go">timestamp: 2010-11-19 13:44:08 CST</span>
+<span class="go">metricStatus: OK</span>
+<span class="go">serviceType: OSG-CE</span>
+<span class="go">serviceURI: osg-edu.cs.wisc.edu</span>
+<span class="go">gatheredAt: vdt-itb.cs.wisc.edu</span>
+<span class="go">summaryData: OK</span>
+<span class="go">detailsData: Security Probe Version: 1.1</span>
+<span class="go">OK: CAs are in sync with OSG distribution</span>
+<span class="go">EOT</span>
+
+
+<span class="go">...</span>
+</pre></div>
+
+
+<h3 id="passing-extra-configuration">Passing extra configuration<a class="headerlink" href="#passing-extra-configuration" title="Permanent link">&para;</a></h3>
+<p>If you want to pass extra configuration when running a metric without editing its configuration file you can make an INI-formatted file and pass it on the command line. For example, you can make a file like this for the <code>org.osg.srm.srmclient-ping</code> metric (tmp-srm.ini):</p>
+<div class="codehilite"><pre><span></span><span class="k">[org.osg.srm.srmclient-ping args]</span>
+<span class="na">srm-destination-dir</span><span class="o">=</span><span class="s">/srmcache/~</span>
+<span class="na">srm-webservice-path</span><span class="o">=</span><span class="s">srm/v2/server</span>
+</pre></div>
+
+
+<p>Then use the <code>--extra-config-file</code> parameter and pass the path to the INI file:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control -r --extra-config-file tmp-srm.ini <span class="se">\</span>
+    --host osg-edu.cs.wisc.edu:10443 org.osg.srm.srmclient-ping
+
+<span class="go">Running metric org.osg.srm.srmclient-ping:</span>
+
+<span class="go">metricName: org.osg.srm.srmclient-ping</span>
+<span class="go">metricType: status</span>
+<span class="go">timestamp: 2010-11-19 14:12:35 CST</span>
+<span class="go">metricStatus: OK</span>
+<span class="go">serviceType: OSG-SRM</span>
+<span class="go">serviceURI: osg-edu.cs.wisc.edu:10443</span>
+<span class="go">gatheredAt: vdt-itb.cs.wisc.edu</span>
+<span class="go">summaryData: OK</span>
+<span class="go">detailsData: SRM server running on osg-edu.cs.wisc.edu is alive and responding to the srmping command.</span>
+<span class="go">.  Details: Storage Resource Manager (SRM) Client version 2.1.5-16</span>
+<span class="go">Copyright (c) 2002-2009 Fermi National Accelerator Laboratory</span>
+
+<span class="go">...</span>
+</pre></div>
+
+
+<h2 id="enabling-and-disabling-metrics-and-consumers">Enabling and disabling metrics and consumers<a class="headerlink" href="#enabling-and-disabling-metrics-and-consumers" title="Permanent link">&para;</a></h2>
+<p>Metrics and consumers can be enabled or disabled by <code>rsv-control</code> using the <code>--enable</code> and <code>--disable</code> flags. Note that "enable" and "disable" are desired states (this is similar to <code>osg-control</code>). After enabling a metric you should turn it on if you want it to be running immediately. After disabling a metric that is running, you should still turn it off (a message will print after each of these actions to remind you of this behavior).</p>
+<h3 id="enabling">Enabling<a class="headerlink" href="#enabling" title="Permanent link">&para;</a></h3>
+<p>The syntax for enabling metrics looks similar to the syntax for running metrics:</p>
+<p><code>rsv-control --enable --host &lt;HOST&gt; &lt;METRIC&gt; [ &lt;METRIC2&gt; ...]</code></p>
+<p>You must provide a host to enable the metric against (in order to enable a metric on multiple hosts you must run <code>rsv-control</code> once per host).</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control --enable <span class="se">\</span>
+    --host osg-edu.cs.wisc.edu org.osg.gip.consistency
+<span class="go">Enabling metric &#39;org.osg.gip.consistency&#39; for host &#39;osg-edu.cs.wisc.edu&#39;</span>
+
+<span class="go">One or more metrics have been enabled and will be started the next time RSV is started.  To turn them on immediately run &#39;rsv-control --on&#39;.</span>
+</pre></div>
+
+
+<p>Consumers do not run against a specific host, they process records for all hosts. When enabling consumers a host is not required (if a host is passed it will be ignored).</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control --enable nagios-consumer
+<span class="go">Enabling consumer nagios-consumer</span>
+</pre></div>
+
+
+<h3 id="disabling">Disabling<a class="headerlink" href="#disabling" title="Permanent link">&para;</a></h3>
+<p>The syntax for disabling metrics looks similar to the syntax for running metrics:</p>
+<p><code>rsv-control --disable --host &lt;HOST&gt; &lt;METRIC&gt; [ &lt;METRIC2&gt; ...]</code></p>
+<p>You must provide a host to disable the metric against (in order to disable a metric on multiple hosts you must run <code>rsv-control</code> once per host).</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control --disable <span class="se">\</span>
+    --host vdt-itb.cs.wisc.edu org.osg.local.containercert-expiry
+<span class="go">Disabling metric &#39;org.osg.local.containercert-expiry&#39; for host &#39;vdt-itb.cs.wisc.edu&#39;</span>
+
+<span class="go">One or more metrics have been disabled and will not start the next time RSV is started.  You may still need to turn them off if they are currently running.</span>
+</pre></div>
+
+
+<p>Consumers do not run against a specific host, they process records for all hosts. When disabling consumers a host is not required (if a host is passed it will be ignored).</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control --disable html-consumer gratia-consumer
+<span class="go">Disabling consumer html-consumer</span>
+<span class="go">Disabling consumer gratia-consumer</span>
+<span class="go">   Consumer already disabled</span>
+</pre></div>
+
+
+<p>Metrics and consumers can both be listed in the same disable command.</p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="getting-more-information-from-rsv-control">Getting more information from rsv-control<a class="headerlink" href="#getting-more-information-from-rsv-control" title="Permanent link">&para;</a></h3>
+<p>The first step to getting more information is to run <code>rsv-control</code> with more verbosity. Use the <code>--verbose</code> (<code>-v</code>) flag. This flag can be used with any of rsv-control's abilities (run, enable, list, etc). The verbosity levels are:</p>
+<ul>
+<li>0 = print nothing</li>
+<li>1 = print warnings and errors along with usual output of command being run (1 is the default level)</li>
+<li>2 = adds informational messages</li>
+<li>3 = full debugging output</li>
+</ul>
+<h3 id="using-the-rsv-verify-tool">Using the RSV verify tool<a class="headerlink" href="#using-the-rsv-verify-tool" title="Permanent link">&para;</a></h3>
+<p>The <code>--verify</code> flag will run some basic checks for your RSV installation:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control --verify
+<span class="go">Testing if Condor-Cron is running...</span>
+<span class="go">OK</span>
+
+<span class="go">Testing if metrics are running...</span>
+<span class="go">OK (98 running metrics)</span>
+
+<span class="go">Testing if consumers are running...</span>
+<span class="go">OK (1 running consumers)</span>
+
+<span class="go">Checking which consumers are configured...</span>
+<span class="go">The following consumers are enabled: html-consumer</span>
+<span class="go">WARNING: The gratia-consumer is not enabled.  This indicates that your</span>
+<span class="go">         resource is not reporting to OSG.</span>
+</pre></div>
+
+
+<p>This tool is still under development and it does only basic checks, but it is a good first step when debugging issues.</p>
+<h3 id="running-the-rsv-profiler">Running the RSV profiler<a class="headerlink" href="#running-the-rsv-profiler" title="Permanent link">&para;</a></h3>
+<p>RSV has a tool to collect information useful for troubleshooting into a tarball that can be shared with the developers and support staff.
+To use it:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control --profile
+<span class="go">Running the rsv-profiler...</span>
+<span class="go">OSG-RSV Profiler</span>
+<span class="go">Analyzing...</span>
+<span class="go">Making tarball (rsv-profiler.tar.gz)</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are getting assistance via the trouble ticket system, you must add a <code>.txt</code> extension to the tarball so it can be uploaded.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> mv rsv-profiler.tar.gz rsv-profiler.tar.gz.txt
+</pre></div>
+
+
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../install-rsv-gwms-tester/" class="btn btn-neutral float-right" title="RSV GlideinWMS Tester">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../advanced-rsv-configuration/" class="btn btn-neutral" title="Advanced RSV Configuration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../advanced-rsv-configuration/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../install-rsv-gwms-tester/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

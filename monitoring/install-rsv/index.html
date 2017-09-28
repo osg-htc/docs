@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>RSV - OSG Documentation</title>
+  <title>Install RSV - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "RSV";
+    var mkdocs_page_name = "Install RSV";
     var mkdocs_page_input_path = "monitoring/install-rsv.md";
     var mkdocs_page_url = "/monitoring/install-rsv/";
   </script>
@@ -167,11 +167,15 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Install Guides - Monitoring</span>
+    <span class="caption-text">Monitoring</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../rsv-overview/">RSV Overview</a>
+                </li>
                 <li class=" current">
                     
-    <a class="current" href="./">RSV</a>
+    <a class="current" href="./">Install RSV</a>
     <ul class="subnav">
             
     <li class="toctree-l3"><a href="#installing-configuring-using-and-troubleshooting-rsv">Installing, Configuring, Using, and Troubleshooting RSV</a></li>
@@ -200,6 +204,14 @@
     
 
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../advanced-rsv-configuration/">Advanced RSV Configuration</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../rsv-control/">Manage RSV via rsv-control</a>
                 </li>
                 <li class="">
                     
@@ -331,11 +343,11 @@
     
       
         
-          <li>Install Guides - Monitoring &raquo;</li>
+          <li>Monitoring &raquo;</li>
         
       
     
-    <li>RSV</li>
+    <li>Install RSV</li>
     <li class="wy-breadcrumbs-aside">
       
         <a href="https://github.com/opensciencegrid/docs/edit/master/docs/monitoring/install-rsv.md"
@@ -426,7 +438,7 @@
 </ol>
 <h3 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
 <p>The following configuration steps are optional and will likely not be required for setting up a small or typical site. If you do not need any of the following special configurations, skip to <a href="#using-rsv">the section on using RSV</a>.</p>
-<p>Generally speaking, read the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/ConfigureRsv">ConfigureRsv</a> page for more advanced configuration options.</p>
+<p>Generally speaking, read the <a href="../advanced-rsv-configuration">ConfigureRsv</a> page for more advanced configuration options.</p>
 <h4 id="configuring-rsv-to-run-probes-using-a-remote-server">Configuring RSV to run probes using a remote server<a class="headerlink" href="#configuring-rsv-to-run-probes-using-a-remote-server" title="Permanent link">&para;</a></h4>
 <p>RSV monitors systems by running probes, which can run on the RSV host itself (the default case), via a separate batch system like HTCondor, or via a remote batch system using a Globus gatekeeper and its job manager. The last two options both can count those jobs and report them to, for example, Gratia.</p>
 <p>In this case, remember to:</p>
@@ -552,9 +564,9 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 
 
 <p>If successful, results will be available from your local RSV web server (e.g., <a href="http://localhost/rsv">http://localhost/rsv</a>) and, if enabled (which is the default) on <a href="http://myosg.grid.iu.edu/">MyOSG</a>.</p>
-<p>You can also run the metrics individually or pass special parameters as explained in the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvControl">rsv-control document</a>.</p>
+<p>You can also run the metrics individually or pass special parameters as explained in the <a href="../rsv-control">rsv-control document</a>.</p>
 <h2 id="troubleshooting-rsv">Troubleshooting RSV<a class="headerlink" href="#troubleshooting-rsv" title="Permanent link">&para;</a></h2>
-<p>You can find more information on troubleshooting RSV in the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvControl">rsv-control documentation</a> and in <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv">TroubleshootRSV</a>.</p>
+<p>You can find more information on troubleshooting RSV in the <a href="../rsv-control">rsv-control documentation</a> and in <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv">TroubleshootRSV</a>.</p>
 <h3 id="important-file-locations">Important file locations<a class="headerlink" href="#important-file-locations" title="Permanent link">&para;</a></h3>
 <p>Logs and configuration:</p>
 <table>
@@ -689,7 +701,7 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <p>Here are some other RSV documents that might be helpful:</p>
 <ul>
-<li>A longer <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvOverview">introduction to RSV</a></li>
+<li>A longer <a href="../rsv-overview">introduction to RSV</a></li>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvArchitecture">The RSV architecture</a></li>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RSVStorageProbes">RSV storage probes</a></li>
 </ul>
@@ -798,10 +810,10 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../install-rsv-gwms-tester/" class="btn btn-neutral float-right" title="RSV GlideinWMS Tester">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../advanced-rsv-configuration/" class="btn btn-neutral float-right" title="Advanced RSV Configuration">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../other/install-osg-upcoming-software/" class="btn btn-neutral" title="OSG upcoming software"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../rsv-overview/" class="btn btn-neutral" title="RSV Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -829,10 +841,10 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../other/install-osg-upcoming-software/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../rsv-overview/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../install-rsv-gwms-tester/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../advanced-rsv-configuration/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
