@@ -12,7 +12,7 @@ The applicable software versions for this document are cvmfs and cvmfs-server >=
 
 ## Host and OS
 
--   OS is a 64-bit <span class="twiki-macro SUPPORTED_OS"></span>.
+-   [Supported operating system](../release/supported_platforms)
 -   Root access
 -   SELinux disabled
 -   Adequate disk space for the repositories that will be served, at `/srv/cvmfs`. Do not use xfs as the filesystem type on operating systems older than RHEL7, because it has been demonstrated to perform poorly for CVMFS repositories; instead use ext3 or ext4. About 10GB should be reserved for apache and squid logs under /var/log on a production server, although they normally will not get that large. A Stratum 1 that is also a repository server should have at least 5GB available at `/var/cache`.
@@ -21,26 +21,22 @@ The applicable software versions for this document are cvmfs and cvmfs-server >=
 
 If your machine is also going to be a repository server like the OSG GOC, the installation will create one user unless it already exists:
 
-<span class="twiki-macro STARTSECTION">Users</span>
-
 | User    | Comment                   |
 |:--------|:--------------------------|
 | `cvmfs` | CernVM-FS service account |
 
-<span class="twiki-macro ENDSECTION">Users</span>
 
 A repository server installation will also create a cvmfs group and default the cvmfs user to that group.
 
 In addition, if the fuse rpm is not for some reason already installed, installing the repository server packages will also install fuse and that will create another group:
 
-<span class="twiki-macro STARTSECTION">Groups</span>
 
 | Group   | Comment                   | Group members |
 |:--------|:--------------------------|:--------------|
 | `cvmfs` | CernVM-FS service account | none          |
 | `fuse`  | FUSE service account      | `cvmfs`       |
 
-<span class="twiki-macro ENDSECTION">Groups</span>
+
 
 # Install Instructions
 
@@ -58,20 +54,20 @@ Redhat EL5-based systems that are not Scientific Linux-based should first build 
 
 Follow these instructions to install:
 
-```
-[root@client ~] $ rpm -i http://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/EL/5/x86_64/cvmfs-release-2-4.el5.noarch.rpm
-[root@client ~] $ rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
-[root@client ~] $ yum -y install aufs cvmfs-server.x86_64 cvmfs.x86_64 mod_wsgi
+```console
+root@host # rpm -i http://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/EL/5/x86_64/cvmfs-release-2-4.el5.noarch.rpm
+root@host # rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
+root@host # yum -y install aufs cvmfs-server.x86_64 cvmfs.x86_64 mod_wsgi
 ```
 
 #### Installing CVMFS repository server on RHEL6
 
 Redhat EL6-based systems running a CVMFS repository server have to get their kernel from CERN: 
 
-```
-[root@client ~] $ rpm -i http://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm
-[root@client ~] $ yum -y install --enablerepo=cernvm-kernel kernel aufs2-util cvmfs-server.x86_64 cvmfs.x86_64 mod_wsgi
-[root@client ~] $ reboot
+```console
+root@host # rpm -i http://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm
+root@host # yum -y install --enablerepo=cernvm-kernel kernel aufs2-util cvmfs-server.x86_64 cvmfs.x86_64 mod_wsgi
+root@host # reboot
 ```
 
 #### CVMFS repository server and RHEL7 
@@ -79,9 +75,9 @@ RHEL7.2 cannot be reliably used as a repository server, because of bugs in the u
 
 Redhat EL7.3-based systems running a CVMFS repository server is the simplest method: 
 
-```
-[root@client ~] $ rpm -i http://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm
-[root@client ~] $ yum -y install cvmfs-server.x86_64 cvmfs.x86_64 mod_wsgi
+```console
+root@host # rpm -i http://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm
+root@host # yum -y install cvmfs-server.x86_64 cvmfs.x86_64 mod_wsgi
 ```
 
 ### Installing CVMFS stratum 1 code without repository server code 
@@ -89,39 +85,39 @@ If you're not installing for the OSG GOC or otherwise want to support serving re
 
 On Redhat EL5, first do these commands:
 
-```
-[root@client ~] $ curl -O https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/EL/5/x86_64/cvmfs-release-2-4.el5.noarch.rpm
-[root@client ~] $ rpm -i cvmfs-release-2-4.el5.noarch.rpm 
-[root@client ~] $ curl -O https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm
-[root@client ~] $ rpm -Uvh epel-release-latest-5.noarch.rpm
+```console
+root@host # curl -O https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/EL/5/x86_64/cvmfs-release-2-4.el5.noarch.rpm
+root@host # rpm -i cvmfs-release-2-4.el5.noarch.rpm 
+root@host # curl -O https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm
+root@host # rpm -Uvh epel-release-latest-5.noarch.rpm
 ```
 
 On Redhat EL6, first do these commands:
 
-```
-[root@client ~] $ rpm -i https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm
+```console
+root@host # rpm -i https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm
 ```
 
 
 On Redhat EL7, first do these commands:
 
-```
-[root@client ~] $ rpm -i https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm
+```console
+root@host # rpm -i https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm
 ```
 
 Then on any type of system do this command:
 
-```
-[root@client ~] $ yum -y install cvmfs-server.x86_64 cvmfs-config mod_wsgi
+```console
+root@host # yum -y install cvmfs-server.x86_64 cvmfs-config mod_wsgi
 ```
 
 ## Installing frontier-squid and frontier-awstats
 
 Do these commands to install frontier-squid and frontier-awstats:
 
-```
-[root@client ~] $ rpm -i http://frontier.cern.ch/dist/rpms/RPMS/noarch/frontier-release-1.1-1.noarch.rpm
-[root@client ~] $ yum -y install frontier-awstats
+```console
+root@host # rpm -i http://frontier.cern.ch/dist/rpms/RPMS/noarch/frontier-release-1.1-1.noarch.rpm
+root@host # yum -y install frontier-awstats
 ```
 
 # Configuring
@@ -130,9 +126,9 @@ Do these commands to install frontier-squid and frontier-awstats:
 
 Increase the default number of open file descriptors:
 
-```
-[root@client ~] $ echo -e "\*\t\t-\tnofile\t\t16384" >>/etc/security/limits.conf 
-[root@client ~] $ ulimit -n 16384
+```console
+root@host # echo -e "\*\t\t-\tnofile\t\t16384" >>/etc/security/limits.conf 
+root@host # ulimit -n 16384
 ```
 
 In order for this to apply also interactively when logging in over ssh, the option `UsePAM` has to be set to `yes` in `/etc/ssh/sshd_config`.
@@ -140,8 +136,8 @@ In order for this to apply also interactively when logging in over ssh, the opti
 ## Configuring cron 
 First, create the log directory: 
 
-```
-[root@client ~] $ mkdir -p /var/log/cvmfs
+```console
+root@host # mkdir -p /var/log/cvmfs
 ```
 
 Put the following in `/etc/cron.d/cvmfs`:
@@ -211,16 +207,16 @@ If you will be serving cern.ch repositories, it has the same problem; replace op
 
 Then enable apache:
 
-```
-[root@client ~] $ chkconfig httpd on 
-[root@client ~] $ service httpd start
+```console
+root@host # chkconfig httpd on 
+root@host # service httpd start
 ```
 
 ## Configuring frontier-squid
 
 Put the following in `/etc/squid/customize.sh` after the existing comment header:
 
-```
+```awk
 awk --file `dirname $0`/customhelps.awk --source '{
 
 # cache only api calls 
@@ -247,33 +243,33 @@ print }'
 
 On an RHEL7 system, make sure that iptables-services is installed and enabled:
 
-```
-[root@client ~] $ yum -y install iptables-services 
-[root@client ~] $ systemctl enable iptables
+```console
+root@host # yum -y install iptables-services 
+root@host # systemctl enable iptables
 ```
 
 Forward port 80 to port 8000 (first command is for external, second command for localhost):
 
-```
-[root@client ~] $ iptables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000 
-[root@client ~] $ iptables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000 
-[root@client ~] $ service iptables save
+```console
+root@host # iptables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000 
+root@host # iptables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000 
+root@host # service iptables save
 ```
 
 On RHEL7 also set up the the same port forwarding for IPv6 (unfortunately it is not supported on RHEL6):
 
-```
-[root@client ~] $ ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000
-[root@client ~] $ ip6tables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000
-[root@client ~] $ service ip6tables save
+```console
+root@host # ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000
+root@host # ip6tables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000
+root@host # service ip6tables save
 ```
 
 
 Enable frontier-squid:
 
-```
-[root@client ~] $ chkconfig frontier-squid on
-[root@client ~] $ service frontier-squid start
+```console
+root@host # chkconfig frontier-squid on
+root@host # service frontier-squid start
 ```
 
 Note: the above configuration is for a single squid thread, which is fine for 1Gbit/s and possibly 2Gbit/s, but if higher bandwidth is needed, see the [instructions for running multiple squid workers](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Running_multiple_squid_workers).
@@ -286,33 +282,33 @@ In order to verify that everything is installed correctly, create a repository r
 
 The OSG GOC Stratum 1 should add a repository replica using the `add_osg_repository` script from the oasis-2 rpm. Instructions for installing that are elsewhere but you can also [download add_osg_repository](http://svn.usatlas.bnl.gov/svn/oasis/oasis-server/trunk/bin/add_osg_repository). This script assumes that the oasis.opensciencegrid.org replica repository was first created, so this instruction creates it but does not download the first snapshot because that would take a lot of space and time. Use these commands to create the oasis replica and to create and download the example replica:
 
-```
-[root@client ~] $ cvmfs_server add-replica -o root http://oasis.opensciencegrid.org:8000/cvmfs/oasis.opensciencegrid.org> /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub 
-[root@client ~] $ add_osg_repository http://cvmfs-stratum0.gridpp.rl.ac.uk:8000/cvmfs/config-egi.egi.eu
+```console
+root@host # cvmfs_server add-replica -o root http://oasis.opensciencegrid.org:8000/cvmfs/oasis.opensciencegrid.org> /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub 
+root@host # add_osg_repository http://cvmfs-stratum0.gridpp.rl.ac.uk:8000/cvmfs/config-egi.egi.eu
 ```
 
 It's a good idea for other Stratum 1s to make their own scripts for adding repository replicas, because there's always two or three commands to run, and it's easy to forget the commands after the first one. The first command is generically this:
 
-```
-[root@client ~] $ cvmfs_server add-replica -o root http://cvmfs-stratum0.gridpp.rl.ac.uk:8000/cvmfs/config-egi.egi.eu> /etc/cvmfs/keys/egi.eu/egi.eu.pub
+```console
+root@host # cvmfs_server add-replica -o root http://cvmfs-stratum0.gridpp.rl.ac.uk:8000/cvmfs/config-egi.egi.eu> /etc/cvmfs/keys/egi.eu/egi.eu.pub
 ```
 
 However, non-GOC OSG Stratum 1s (that is, at BNL and FNAL), for the sake of fulfilling an OSG security requirement, need to instead read from the OSG GOC machine with this as their first command:
 
-```
-[root@client ~] $ cvmfs_server add-replica -o root http://oasis-replica.opensciencegrid.org:8000/cvmfs/config-egi.egi.eu /etc/cvmfs/keys/egi.eu/egi.eu.pub:/etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
+```console
+root@host # cvmfs_server add-replica -o root http://oasis-replica.opensciencegrid.org:8000/cvmfs/config-egi.egi.eu /etc/cvmfs/keys/egi.eu/egi.eu.pub:/etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
 ```
 
 The second command for Stratum 1s that have the httpd configuration as described above in the [Configuring apache section](#Configuring_apache) is this:
 
-```
-[root@client ~] $ rm -f /etc/httpd/conf.d/cvmfs.config-egi.egi.eu.conf
+```console
+root@host # rm -f /etc/httpd/conf.d/cvmfs.config-egi.egi.eu.conf
 ```
 
 Then the next command is this:
 
-```
-[root@client ~] $ cvmfs_server snapshot config-egi.egi.eu
+```console
+root@host # cvmfs_server snapshot config-egi.egi.eu
 ```
 
 With large repositories that can take a very long time, but with small repositories it should be very quick and not show any errors.
@@ -321,9 +317,9 @@ With large repositories that can take a very long time, but with small repositor
 
 Now to verify that the replication is working, do the following commands:
 
-```
-[user@client ~] $ wget -qdO- http://localhost:8000/cvmfs/config-egi.egi.eu/.cvmfspublished%7Ccat -v
-[user@client ~] $ wget -qdO- http://localhost:80/cvmfs/config-egi.egi.eu/.cvmfspublished%7Ccat -v
+```console
+root@host # wget -qdO- http://localhost:8000/cvmfs/config-egi.egi.eu/.cvmfspublished%7Ccat -v
+root@host # wget -qdO- http://localhost:80/cvmfs/config-egi.egi.eu/.cvmfspublished%7Ccat -v
 ```
 
 Both commands should show a short file including gibberish at the end which is the signature.
