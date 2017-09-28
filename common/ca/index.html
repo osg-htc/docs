@@ -127,6 +127,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../yum/">Yum Repos</a>
                 </li>
     </ul>
@@ -427,7 +431,7 @@
 </tbody>
 </table>
 <h3 id="how-do-i-keep-cas-updated">How do I keep CAs updated?<a class="headerlink" href="#how-do-i-keep-cas-updated" title="Permanent link">&para;</a></h3>
-<p>Please follow the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaCertsUpdater">update instructions</a> to make sure that the CAs are kept updated.</p>
+<p>Please follow the <a href="../osg-ca-certs-updater">update instructions</a> to make sure that the CAs are kept updated.</p>
 <h2 id="option-2-install-osg-update-certs">Option 2: Install osg-update-certs<a class="headerlink" href="#option-2-install-osg-update-certs" title="Permanent link">&para;</a></h2>
 <p>Install this with:</p>
 <div class="codehilite"><pre><span></span>root@host # yum install osg-ca-scripts
@@ -650,7 +654,7 @@ It is possible to send the output to syslog instead of the default email system.
 <p>The Trusted Certificate Authority (CA) certificates, and their associated Certificate Revocation Lists (CRLs), are used for every transaction on a resource that establishes an authenticated network connection based on end user’s certificate. In order for the authentication to succeed, the user’s certificate must have been issued by one of the CAs in the Trusted CA directory, and the user’s certificate must not be listed in the CRL for that CA. CRLs can be thought of as a black list of certificates. CAs are the trust authorities, similar to DMV that issues you the driving license. (Another way of thinking CRLs is the do-not-fly lists at the airports. if your certificate shows up in CRLs, you are not allowed access.) This is handled at the certificate validation stage even before the authorization check (which will provide the mapping of an authenticated user to a local account UID/GID). So you do not need to do worry about it; the grid software will do this for you. However, you should make sure that your site has the most up-to-date list of Trusted CAs. There are multiple trust authorities in OSG (think of it as a different DMV for each state). If you do not have an up-to-date list of CAs it is possible that some of your users transactions at your site will start to fail. A current CRL list for each CA is also necessary, since without one transactions for users of that CA will fail.</p>
 <h2 id="how-to-ensure-you-are-get-up-to-date-cacrl-information">How to ensure you are get up-to-date CA/CRL information<a class="headerlink" href="#how-to-ensure-you-are-get-up-to-date-cacrl-information" title="Permanent link">&para;</a></h2>
 <ol>
-<li>If you installed CAs using rpm packages (<code>osg-ca-certs</code>,<code>igtf-ca-certs</code>) (Options 1, 4), you will need to install the software described in <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaCertsUpdater">the CA update document</a>, and enable <code>osg-ca-certs-updater</code> service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.</li>
+<li>If you installed CAs using rpm packages (<code>osg-ca-certs</code>,<code>igtf-ca-certs</code>) (Options 1, 4), you will need to install the software described in <a href="../osg-ca-certs-updater">the CA update document</a>, and enable <code>osg-ca-certs-updater</code> service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.</li>
 <li>If you use Option 2 (i.e. <code>osg-update-certs</code>) then make sure that you have the corresponding service enabled.</li>
 </ol>
 <p><code>root@host # /sbin/service osg-update-certs-cron  status
@@ -778,7 +782,7 @@ It is possible to send the output to syslog instead of the default email system.
 <p>Log and configuration files are however present for <code>osg-ca-scripts</code> rpm package (option 2).</p>
 <p>Config files: <code>/etc/osg/osg-update-certs.conf</code> Log files: <code>/var/log/osg-update-certs.log</code>, <code>/var/log/osg-ca-certs-status.system.out</code>, <code>/var/log/osg-ca-manage.system.out</code>, <code>/var/log/osg-setup-ca-certificates.system.out</code></p>
 <h3 id="are-ca-packages-automatically-updated">Are CA packages automatically updated?<a class="headerlink" href="#are-ca-packages-automatically-updated" title="Permanent link">&para;</a></h3>
-<p>If CA files are installed using <code>osg-ca-certs</code> or <code>igtf-ca-certs</code> rpms (i.e. options 1, 4), you will need to install the software described in OsgCaCertsUpdater, and enable osg-ca-certs-updater service to keep the CAs automatically updated.</p>
+<p>If CA files are installed using <code>osg-ca-certs</code> or <code>igtf-ca-certs</code> rpms (i.e. options 1, 4), you will need to install the software described in <a href="../osg-ca-certs-updater">OSG CA certs updater</a>, and enable osg-ca-certs-updater service to keep the CAs automatically updated.</p>
 <p>If CA files are being installed using <code>osg-ca-scripts</code> rpm package (option 2), CA files are kept up-to-date as long as <code>osg-update-certs-cron</code> service the package provides has been started.</p>
 <h3 id="how-do-i-manually-update-my-ca-package">How do I manually update my CA package?<a class="headerlink" href="#how-do-i-manually-update-my-ca-package" title="Permanent link">&para;</a></h3>
 <p>For Option 1: run one of the following <code>yum update osg-ca-certs</code> or <code>yum update igtf-ca-certs</code> depending on the rpm package you installed.</p>
@@ -821,7 +825,7 @@ It is possible to send the output to syslog instead of the default email system.
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../yum/" class="btn btn-neutral float-right" title="Yum Repos">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../osg-ca-certs-updater/" class="btn btn-neutral float-right" title="OSG CA Certificates Updater">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../../install-overview/" class="btn btn-neutral" title="Installation Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -855,7 +859,7 @@ It is possible to send the output to syslog instead of the default email system.
         <span><a href="../../install-overview/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../yum/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../osg-ca-certs-updater/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

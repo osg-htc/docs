@@ -26,6 +26,12 @@
     </url>
         
     <url>
+     <loc>https://opensciencegrid.github.io/docs/common/osg-ca-certs-updater/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>https://opensciencegrid.github.io/docs/common/yum/</loc>
      <lastmod>2017-09-28</lastmod>
      <changefreq>daily</changefreq>

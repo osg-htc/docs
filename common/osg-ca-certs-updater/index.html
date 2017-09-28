@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Singularity - OSG Documentation</title>
+  <title>OSG CA Certificates Updater - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Singularity";
-    var mkdocs_page_input_path = "worker-node/install-singularity.md";
-    var mkdocs_page_url = "/worker-node/install-singularity/";
+    var mkdocs_page_name = "OSG CA Certificates Updater";
+    var mkdocs_page_input_path = "common/osg-ca-certs-updater.md";
+    var mkdocs_page_url = "/common/osg-ca-certs-updater/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -64,15 +64,41 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../common/ca/">CA Certificates</a>
+    <a class="" href="../ca/">CA Certificates</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">OSG CA Certificates Updater</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#osg-ca-certificates-updater">OSG CA Certificates Updater</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#about-this-document">About this Document</a></li>
+        
+            <li><a class="toctree-l4" href="#requirements">Requirements</a></li>
+        
+            <li><a class="toctree-l4" href="#install-instructions">Install instructions</a></li>
+        
+            <li><a class="toctree-l4" href="#services">Services</a></li>
+        
+            <li><a class="toctree-l4" href="#configuration">Configuration</a></li>
+        
+            <li><a class="toctree-l4" href="#troubleshooting">Troubleshooting</a></li>
+        
+            <li><a class="toctree-l4" href="#how-to-get-help">How to get Help?</a></li>
+        
+            <li><a class="toctree-l4" href="#references">References</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../common/yum/">Yum Repos</a>
+    <a class="" href="../yum/">Yum Repos</a>
                 </li>
     </ul>
 	    </li>
@@ -83,45 +109,23 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../install-wn/">Worker Node (RPM install)</a>
+    <a class="" href="../../worker-node/install-wn/">Worker Node (RPM install)</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../install-wn-tarball/">Worker Node (tarball install)</a>
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../install-wn-oasis/">Worker Node (OASIS install)</a>
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../install-cvmfs/">CVMFS</a>
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">Singularity</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#install-singularity">Install Singularity</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#before-starting">Before Starting</a></li>
-        
-            <li><a class="toctree-l4" href="#using-singularity-via-cvmfs-el-7-only">Using Singularity via CVMFS (EL 7 only)</a></li>
-        
-            <li><a class="toctree-l4" href="#installing-singularity">Installing singularity</a></li>
-        
-            <li><a class="toctree-l4" href="#configuring-singularity">Configuring singularity</a></li>
-        
-            <li><a class="toctree-l4" href="#validating-singularity">Validating singularity</a></li>
-        
-            <li><a class="toctree-l4" href="#starting-and-stopping-services">Starting and Stopping services</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
                 </li>
     </ul>
 	    </li>
@@ -208,7 +212,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../common/install-best-practices/">Install Best Practices</a>
+    <a class="" href="../install-best-practices/">Install Best Practices</a>
                 </li>
                 <li class="">
                     
@@ -258,7 +262,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+    <a class="" href="../pki-cli/">Certificate Tools</a>
                 </li>
                 <li class="">
                     
@@ -266,7 +270,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../using-wn/">Worker Node Environment</a>
+    <a class="" href="../../worker-node/using-wn/">Worker Node Environment</a>
                 </li>
     </ul>
 	    </li>
@@ -293,14 +297,14 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../install-glexec/">Worker node glexec Install</a>
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../../common/help/">Get Help</a>
+    <a class="" href="../help/">Get Help</a>
 	    </li>
           
         </ul>
@@ -325,14 +329,14 @@
     
       
         
-          <li>Install Guides - Worker Node &raquo;</li>
+          <li>Install Guides - Common &raquo;</li>
         
       
     
-    <li>Singularity</li>
+    <li>OSG CA Certificates Updater</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/worker-node/install-singularity.md"
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/common/osg-ca-certs-updater.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -342,139 +346,103 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="install-singularity">Install Singularity<a class="headerlink" href="#install-singularity" title="Permanent link">&para;</a></h1>
-<p><a href="http://singularity.lbl.gov">Singularity</a> is a tool that creates
-docker-like process containers but without giving extra privileges to
-unprivileged users.  It is used by grid pilot jobs (which are
-submitted by per-VO grid workload management systems) to isolate user
-jobs from the pilot's files and processes and from other users' files
-and processes.  It also supplies a chroot environment in order to run
-user jobs in different operating system images under one Linux kernel.</p>
-<p>For operating system kernels older than the one released for
-Red Hat Enterprise Linux (RHEL) 7.4,
-singularity needs to use kernel capabilities that are only accessible
-to the root user, so it has to be installed with setuid-root
-executables.  Securing setuid-root programs is difficult, but singularity
-keeps that privileged code to a
-<a href="http://singularity.lbl.gov/docs-security">minimum</a> to keep the
-vulnerability low.  Beginning with the kernel released with RHEL 7.4,
-there is a new
-<a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/7.4_Release_Notes/index.html#technology_previews_kernel">technology preview feature</a>
-to allow unprivileged bind mounts in user name spaces, which allows
-singularity to run as an unprivileged user.  The OSG has installed
-singularity in <a href="../install-cvmfs">cvmfs</a>, so if you have a RHEL 7.4 kernel
-or later you
-can avoid installing singularity at all and reduce vulnerability even
-further.  The RHEL 7.4 kernel (version 3.10.0-693) is available as a
-security update for all RHEL 7 based versions, even on systems that
-have not updated to RHEL 7.4.</p>
-<p>The document is intended for system administrators who wish to either
-install singularity or enable it to be run as an unprivileged user.</p>
-<div class="admonition note">
-<p class="admonition-title">Applicable versions</p>
-<p>The applicable software versions for this document are OSG Version &gt;= 3.4.3.
-The version of singularity installed should be &gt;= 2.3.1</p>
-</div>
-<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
+                <h1 id="osg-ca-certificates-updater">OSG CA Certificates Updater<a class="headerlink" href="#osg-ca-certificates-updater" title="Permanent link">&para;</a></h1>
+<h2 id="about-this-document">About this Document<a class="headerlink" href="#about-this-document" title="Permanent link">&para;</a></h2>
+<p>This document explains the installation and use of <code>osg-ca-certs-updater</code>, a package that provides automatic updates of CA certificates.</p>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
 <ul>
 <li>Ensure the host has <a href="../../release/supported_platforms">a supported operating system</a></li>
 <li>Obtain root access to the host</li>
-<li>If you're installing singularity, prepare the <a href="../../common/yum">required Yum repositories</a></li>
+<li>Prepare the <a href="../../common/yum">required Yum repositories</a></li>
+<li>Install <a href="../../common/ca">CA certificates</a></li>
 </ul>
-<h2 id="using-singularity-via-cvmfs-el-7-only">Using Singularity via CVMFS (EL 7 only)<a class="headerlink" href="#using-singularity-via-cvmfs-el-7-only" title="Permanent link">&para;</a></h2>
-<p>If the operating system is an EL 7 variant, and has been updated to EL
-7.4 or the 7.4 kernel (3.10.0-693 or greater), you can skip
-installation altogether and use singularity through CVMFS:</p>
-<ol>
-<li>Set the <code>namespace.unpriv_enable=1</code> boot option.  The easiest way
-    to do this is to add it in <code>/etc/sysconfig/grub</code> to the end of the
-    GRUB_CMDLINE_LINUX variable, before the ending double-quote.</li>
-<li>
-<p>Update the grub configuration:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> grub2-mkconfig -o /boot/grub2/grub.cfg
+<h2 id="install-instructions">Install instructions<a class="headerlink" href="#install-instructions" title="Permanent link">&para;</a></h2>
+<p>Run the following command to install the latest version of the updater.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> yum install osg-ca-certs-updater
 </pre></div>
 
 
-</li>
-<li>
-<p>Set a sysctl option as follows:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> <span class="nb">echo</span> <span class="s2">&quot;user.max_user_namespaces = 15000&quot;</span> <span class="se">\</span>
-    &gt; /etc/sysctl.d/90-max_user_namespaces.conf
+<h2 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h2>
+<h3 id="starting-and-enabling-services">Starting and Enabling Services<a class="headerlink" href="#starting-and-enabling-services" title="Permanent link">&para;</a></h3>
+<p>Run the following to enable the updater. This will persist until the machine is rebooted.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> service osg-ca-certs-updater-cron start
 </pre></div>
 
 
-</li>
-<li>
-<p>Reboot</p>
-</li>
-<li>If you haven't yet installed <a href="../install-cvmfs">cvmfs</a>, do so.</li>
-<li>Log in as an ordinary unprivileged user and verify that singularity
-    works:<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity <span class="se">\</span>
-        <span class="nb">exec</span> -C -H <span class="nv">$HOME</span>:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 <span class="se">\</span>
-        ps -ef
-<span class="go">WARNING: Container does not have an exec helper script, calling &#39;cat&#39; directly</span>
-<span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
-<span class="go">user         1     0  0 21:34 ?        00:00:00 ps -ef</span>
+<p>Run the following to enable the updater when the machine is rebooted.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> chkconfig osg-ca-certs-updater-cron on
 </pre></div>
 
 
-</li>
-</ol>
-<h2 id="installing-singularity">Installing singularity<a class="headerlink" href="#installing-singularity" title="Permanent link">&para;</a></h2>
-<p>To install singularity, make sure that your host is up to date before installing the required packages:</p>
-<ol>
-<li>
-<p>Clean yum cache:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> yum clean all --enablerepo<span class="o">=</span>*
+<p>Run both commands if you wish for the service to activate immediately and remain active throughout reboots.</p>
+<h3 id="stopping-and-disabling-services">Stopping and Disabling Services<a class="headerlink" href="#stopping-and-disabling-services" title="Permanent link">&para;</a></h3>
+<p>Enter the following to disable the updater. This will persist until the machine is rebooted.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> service osg-ca-certs-updater-cron stop
 </pre></div>
 
 
-</li>
-<li>
-<p>Update software:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> yum update
+<p>Enter the following to disable the updater when the machine is rebooted.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> chkconfig osg-ca-certs-updater-cron off
 </pre></div>
 
 
-<p>This command will update <strong>all</strong> packages</p>
-</li>
-<li>
-<p>The singularity packages are split into two parts, choose the command that corresponds to your host:</p>
+<p>Run both commands if you wish for the service to deactivate immediately and not get reactivated during reboots.</p>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<p>While there is no configuration file, the behavior of the updater can be adjusted by command-line arguments that are specified in the <code>cron</code> entry of the service. This entry is located in the file <code>/etc/cron.d/osg-ca-certs-updater</code>. Please see the Unix manual page for <code>crontab</code> in section 5 for an explanation of the format. The manual page can be accessed by the command <code>man 5 crontab</code>. The valid command-line arguments can be listed by running <code>osg-ca-certs-updater --help</code>. Reasonable defaults have been provided, namely:</p>
 <ul>
-<li>
-<p>If you are installing singularity on a worker node, where images do not need to be created of a manipulated, install just the smaller part to limit the amount of setuid-root code that is installed:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> yum install singularity-runtime
-</pre></div>
-
-
-</li>
-<li>
-<p>If you want a full singularity installation, run the following command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> yum install singularity
-</pre></div>
-
-
-</li>
+<li>Attempt an update no more often than every 23 hours. Due to the random wait (see below), having a 24-hour minimum time between updates would cause the update time to slowly slide back every day.</li>
+<li>Run the script every 6 hours. We run the script more often than we update so that downtime at the wrong moment does not cause the update to be delayed for a full day.</li>
+<li>Delay for a random amount of time up to 30 minutes before updating, to reduce load spikes on OSG repositories.</li>
+<li>Do not warn the administrator about update failures that have happened less than 72 hours since the last successful update.</li>
+<li>Log errors only.</li>
 </ul>
-</li>
-</ol>
-<h2 id="configuring-singularity">Configuring singularity<a class="headerlink" href="#configuring-singularity" title="Permanent link">&para;</a></h2>
-<p>The default configuration of singularity is sufficient.  If you want
-to see what options are available, see <code>/etc/singularity/singularity.conf</code>.</p>
-<h2 id="validating-singularity">Validating singularity<a class="headerlink" href="#validating-singularity" title="Permanent link">&para;</a></h2>
-<p>After singularity is installed, as an ordinary user run the following
-command to verify it:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> singlarity <span class="nb">exec</span> -C -H <span class="nv">$HOME</span>:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 ps -ef
-<span class="go">WARNING: Container does not have an exec helper script, calling &#39;cat&#39; directly</span>
-<span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
-<span class="go">user         1     0  0 21:34 ?        00:00:00 ps -ef</span>
-</pre></div>
-
-
-<p><br></p>
-<h2 id="starting-and-stopping-services">Starting and Stopping services<a class="headerlink" href="#starting-and-stopping-services" title="Permanent link">&para;</a></h2>
-<p>singularity has no services to start or stop.</p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="useful-configuration-and-log-files">Useful configuration and log files<a class="headerlink" href="#useful-configuration-and-log-files" title="Permanent link">&para;</a></h3>
+<h4 id="configuration-file">Configuration file<a class="headerlink" href="#configuration-file" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th align="left">Package</th>
+<th align="left">File Description</th>
+<th align="left">Location</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">osg-ca-certs-updater</td>
+<td align="left">Cron entry for periodically launching the updater</td>
+<td align="left"><code>/etc/cron.d/osg-ca-certs-updater</code></td>
+<td align="left">Command-line arguments to the updater can be specified here</td>
+</tr>
+<tr>
+<td align="left">osg-release</td>
+<td align="left">Repo definition files for production OSG repositories</td>
+<td align="left"><code>/etc/yum.repos.d/osg.repo</code> or <code>/etc/yum.repos.d/osg-el6.repo</code></td>
+<td align="left">Make sure these repositories are enabled and reachable from the host you are trying to update</td>
+</tr>
+</tbody>
+</table>
+<h4 id="log-files">Log files<a class="headerlink" href="#log-files" title="Permanent link">&para;</a></h4>
+<p>Logging is performed to the console by default. Please see the manual for your <code>cron</code> daemon to find out how it handles console output.</p>
+<p>A logfile can be specified via the <code>-l</code> / <code>--logfile</code> command-line option.</p>
+<p>If logging to syslog via the <code>-s</code> / <code>--log-to-syslog</code> option, the updater will write to the <code>user</code> section of the syslog. The file <code>/etc/syslog.conf</code> determines where syslog messages are saved.</p>
+<h2 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h2>
+<p>To get assistance please use <a href="../../common/help">Help Procedure</a>.</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<p>Some guides on X.509 certificates:</p>
+<ul>
+<li>Useful commands: <a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html</a></li>
+<li>Install GSI authentication on a server: <a href="http://security.ncsa.illinois.edu/research/wssec/gsihttps/">http://security.ncsa.illinois.edu/research/wssec/gsihttps/</a></li>
+<li>Certificates how-to: <a href="http://www.nordugrid.org/documents/certificate_howto.html">http://www.nordugrid.org/documents/certificate_howto.html</a></li>
+</ul>
+<p>Some examples about verifying the certificates:</p>
+<ul>
+<li><a href="http://gagravarr.org/writing/openssl-certs/others.shtml">http://gagravarr.org/writing/openssl-certs/others.shtml</a></li>
+<li><a href="http://www.cyberciti.biz/faq/test-ssl-certificates-diagnosis-ssl-certificate/">http://www.cyberciti.biz/faq/test-ssl-certificates-diagnosis-ssl-certificate/</a></li>
+<li><a href="http://www.cyberciti.biz/tips/debugging-ssl-communications-from-unix-shell-prompt.html">http://www.cyberciti.biz/tips/debugging-ssl-communications-from-unix-shell-prompt.html</a></li>
+</ul>
               
             </div>
           </div>
@@ -482,10 +450,10 @@ command to verify it:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../compute-element/htcondor-ce-overview/" class="btn btn-neutral float-right" title="HTCondor-CE Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../yum/" class="btn btn-neutral float-right" title="Yum Repos">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../install-cvmfs/" class="btn btn-neutral" title="CVMFS"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ca/" class="btn btn-neutral" title="CA Certificates"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -513,10 +481,10 @@ command to verify it:</p>
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../install-cvmfs/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../ca/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../compute-element/htcondor-ce-overview/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../yum/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
