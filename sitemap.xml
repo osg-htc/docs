@@ -262,6 +262,12 @@
     </url>
         
     <url>
+     <loc>https://opensciencegrid.github.io/docs/data/install-bestman-xrootd/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>https://opensciencegrid.github.io/docs/security/edg-mkgridmap/</loc>
      <lastmod>2017-09-28</lastmod>
      <changefreq>daily</changefreq>

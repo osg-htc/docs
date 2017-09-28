@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>BeStMan Xrootd SE - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "BeStMan Xrootd SE";
+    var mkdocs_page_input_path = "data/install-bestman-xrootd.md";
+    var mkdocs_page_url = "/data/install-bestman-xrootd/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install-overview/">Installation Overview</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Common</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/install-best-practices/">Install Best Practices</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/ca/">CA Certificates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../common/yum/">Yum Repos</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Worker Node</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-wn/">Worker Node (RPM install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Compute Element</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../gridftp/">GridFTP Server</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../frontier-squid/">HTTP Cache</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Install Guides - Other</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/install-osg-upcoming-software/">OSG upcoming software</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Monitoring</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../monitoring/advanced-rsv-configuration/">Advanced RSV Configuration</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../monitoring/rsv-control/">Manage RSV via rsv-control</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Release Information</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/contrib/">Contrib Software</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Usage Guides</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/using-wn/">Worker Node Environment</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Deprecated Software</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../bestman-overview/">BeStMan Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../bestman-install/">BeStMan Install</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">BeStMan Xrootd SE</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#install-bestman-xrootd-se">Install Bestman Xrootd SE</a></li>
+    
+
+    <li class="toctree-l3"><a href="#about-this-document">About this Document</a></li>
+    
+
+    <li class="toctree-l3"><a href="#requirements">Requirements</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#host-and-os">Host and OS</a></li>
+        
+            <li><a class="toctree-l4" href="#users">Users</a></li>
+        
+            <li><a class="toctree-l4" href="#certificates">Certificates</a></li>
+        
+            <li><a class="toctree-l4" href="#networking">Networking</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#install-instructions">Install Instructions</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#certificates_1">Certificates</a></li>
+        
+            <li><a class="toctree-l4" href="#package-installation-instructions">Package installation instructions</a></li>
+        
+            <li><a class="toctree-l4" href="#configuring-gridftp-authentication">Configuring GridFTP authentication</a></li>
+        
+            <li><a class="toctree-l4" href="#configuring-gridftp-xrootd-support">Configuring GridFTP XRootD support</a></li>
+        
+            <li><a class="toctree-l4" href="#configuring-xrootdfs">Configuring xrootdfs</a></li>
+        
+            <li><a class="toctree-l4" href="#edit-bestman-settings">Edit Bestman Settings</a></li>
+        
+            <li><a class="toctree-l4" href="#modify-etcsudoers">Modify /etc/sudoers</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#validation">Validation</a></li>
+    
+
+    <li class="toctree-l3"><a href="#services">Services</a></li>
+    
+
+    <li class="toctree-l3"><a href="#notes-on-upgrading-bestman">Notes on Upgrading Bestman</a></li>
+    
+
+    <li class="toctree-l3"><a href="#how-to-get-help">How to get Help?</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/edg-mkgridmap/">EDG-Mkgridmap Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/install-gums/">GUMS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../common/help/">Get Help</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Deprecated Software &raquo;</li>
+        
+      
+    
+    <li>BeStMan Xrootd SE</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/install-bestman-xrootd.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="install-bestman-xrootd-se">Install Bestman Xrootd SE<a class="headerlink" href="#install-bestman-xrootd-se" title="Permanent link">&para;</a></h1>
+<h1 id="about-this-document">About this Document<a class="headerlink" href="#about-this-document" title="Permanent link">&para;</a></h1>
+<p>This page explains how to install the BeStMan Storage Element with underlying XRootD storage.</p>
+<h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
+<h2 id="host-and-os">Host and OS<a class="headerlink" href="#host-and-os" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OS is Red Hat Enterprise Linux 6, 7, and variants (see <a href="../../common/yum/">details...</a>)</li>
+<li><a href="http://fedoraproject.org/wiki/EPEL">EPEL</a> repos enabled.</li>
+<li>A working XRootD Server. See <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd">InstallXrootd</a> for details.</li>
+<li>Root access</li>
+</ul>
+<h2 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h2>
+<p>This installation will create several users unless they are already created.</p>
+<table>
+<thead>
+<tr>
+<th align="left">User</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>bestman</code></td>
+<td align="left">Used by Bestman SRM server (needs sudo access).</td>
+</tr>
+<tr>
+<td align="left"><code>daemon</code></td>
+<td align="left">Used by globus-gridftp-server.</td>
+</tr>
+<tr>
+<td align="left"><code>xrootd</code></td>
+<td align="left">Used by the xrootd client to contact xrootd redirector.</td>
+</tr>
+</tbody>
+</table>
+<p>For this package to function correctly, you will have to create the users needed for grid operation. Any user that can be authenticated should be created.</p>
+<p>For grid-mapfile users, each line of the grid-mapfile is a certificate/user pair. Each user in this file should be created on the server.</p>
+<p>For gums users, this means that each user that can be authenticated by gums should be created on the server.</p>
+<p>Note that these users must be kept in sync with the authentication method. For instance, if new users or rules are added in gums, then new users should also be added here.</p>
+<h2 id="certificates">Certificates<a class="headerlink" href="#certificates" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th align="left">Certificate</th>
+<th align="left">User that owns certificate</th>
+<th align="left">Path to certificate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Host certificate</td>
+<td align="left"><code>root</code></td>
+<td align="left"><code>/etc/grid-security/hostcert.pem</code> <code>/etc/grid-security/hostkey.pem</code></td>
+</tr>
+<tr>
+<td align="left">Bestman service certificate</td>
+<td align="left"><code>bestman</code></td>
+<td align="left"><code>/etc/grid-security/bestman/bestmancert.pem</code> <code>/etc/grid-security/bestman/bestmankey.pem</code></td>
+</tr>
+</tbody>
+</table>
+<p><a href="../../common/pki-cli/">Instructions</a> to request a service certificate.</p>
+<p>You will also need a copy of CA certificates (see below).</p>
+<h2 id="networking">Networking<a class="headerlink" href="#networking" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th align="left">Service Name</th>
+<th align="left">Protocol</th>
+<th align="left">Port Number</th>
+<th align="left">Inbound</th>
+<th align="left">Outbound</th>
+<th align="left">Commen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">GridFTP</td>
+<td align="left">tcp</td>
+<td align="left">2811 and <code>GLOBUS_TCP_SOURCE_RANGE</code></td>
+<td align="left">YES</td>
+<td align="left"></td>
+<td align="left">contiguous range of ports</td>
+</tr>
+<tr>
+<td align="left">Storage Resource Manager</td>
+<td align="left">tcp</td>
+<td align="left">8443</td>
+<td align="left">YES</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<h1 id="install-instructions">Install Instructions<a class="headerlink" href="#install-instructions" title="Permanent link">&para;</a></h1>
+<p>Note that this package is primarily intended for Bestman-Gateway acting as an endpoint for XRootD server. If you have not installed an XRootD server yet, follow the instructions in <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd">InstallXrootd</a>.</p>
+<h2 id="certificates_1">Certificates<a class="headerlink" href="#certificates_1" title="Permanent link">&para;</a></h2>
+<p>GridFTP, which is a part of this meta-package, requires a certificate package to run. If you require a specific certificate package, follow the <a href="../../common/ca/">InstallCertAuth</a> instructions to install it. If you do not install a grid certificate package first, the install procedure will install one for you as part of its dependencies. (usually osg-ca-certs).</p>
+<h2 id="package-installation-instructions">Package installation instructions<a class="headerlink" href="#package-installation-instructions" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Install Java using <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7#InstallingJava">these instructions</a></li>
+<li>Install the BeStMan Gateway XRootD Storage element meta-package:<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-se-bestman-xrootd
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="configuring-gridftp-authentication">Configuring GridFTP authentication<a class="headerlink" href="#configuring-gridftp-authentication" title="Permanent link">&para;</a></h2>
+<p>For information on how to configure authentication for your GridFTP installation, please refer to the <a href="../../data/gridftp/#configuring-gridftp">configuring authentication section of the GridFTP guide</a>.</p>
+<h2 id="configuring-gridftp-xrootd-support">Configuring GridFTP XRootD support<a class="headerlink" href="#configuring-gridftp-xrootd-support" title="Permanent link">&para;</a></h2>
+<p>In order to configure GridFTP to work with XRootD, you will need to configure the Data Storage Interface (DSI) module with Xrootd pre-load libraries. This module is used to access Xrootd and POSIX file systems.</p>
+<p>Edit <code>/etc/sysconfig/xrootd-dsi</code> (create it if it is missing) and set XROOTD_VMP (XRootD Virtual Mount Point) to use your Xrootd redirector.</p>
+<div class="codehilite"><pre><span></span>export XROOTD_VMP=&quot;<span style="color:red">redirector:1094:/local_path=/remote_path</span>&quot;
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The syntax of the above environment variable is a little confusing, so make sure that you adhere to the following directions for XROOTD_VMP (Virtual Mount Point):</p>
+<div class="codehilite"><pre><span></span>- Redirector: This is the hostname and domain of the local XRootD redirector server.
+- local_path: This is the path used to access the GridFTP server (ie this server).
+- remote_path: This is the path used to access the XRootD redirector.
+</pre></div>
+
+
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The xrootd-dsi module overloads the <code>gridftp.conf</code> file and uses the alternate file <code>/etc/xrootd-dsi/gridftp-xrootd.conf</code>. If you have made local changes to your <code>gridftp.conf</code> file, then you will need to carry them over to <code>/etc/xrootd-dsi/gridftp-xrootd.conf</code>.</p>
+</div>
+<h2 id="configuring-xrootdfs">Configuring xrootdfs<a class="headerlink" href="#configuring-xrootdfs" title="Permanent link">&para;</a></h2>
+<p>Though the DSI module will work for GridFTP, you will need a FUSE mount in order for BeStMan to work correctly with XRootD. Configure it using the following steps.</p>
+<p>Modify <strong><code>/etc/fstab</code></strong> by adding the following entries:</p>
+<div class="codehilite"><pre><span></span>....
+xrootdfs                <span style="color:red">/mnt/xrootd</span>              fuse    rdr=xroot://<span style="color:red">redirector1.domain.com</span>:1094/<span style="color:red">/path/</span>,uid=xrootd 0 0
+</pre></div>
+
+
+<p>Replace <code>/mnt/xrootd</code> with the path that you would like to access with BeStMan. This should also match the GridFTP settings for the <code>XROOTD_VMP</code> local path. Create <strong><code>/mnt/xrootd</code></strong> directory. Once you are finished, you can mount it:</p>
+<div class="codehilite"><pre><span></span>mount /mnt/xrootd
+</pre></div>
+
+
+<p>You should now be able to run UNIX commands such as <code>ls /mnt/xrootd</code> to see the contents of the XRootD server.</p>
+<h3 id="optional-configuring-secured-xrootdfs">(Optional) Configuring secured xrootdfs<a class="headerlink" href="#optional-configuring-secured-xrootdfs" title="Permanent link">&para;</a></h3>
+<p>If you want to enable security for access to xrootd via xrootdfs you will need to modify xrootd configuration and perform several steps to make xrootdfs secured.</p>
+<ol>
+<li>
+<p>On the xrootd redirector node, execute the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdsssadmin -k <span style="color:red">&lt;my_key_name&gt;</span> -u anybody -g usrgroup add <span style="color:red">&lt;keyfile&gt;</span>
+
+<span class="go">eg:</span>
+
+<span class="gp">root@host #</span> xrdsssadmin -k top_secret -u anybody -g usrgroup add /etc/xrootd/xrootd.key
+</pre></div>
+
+
+</li>
+<li>
+<p>Set ownership</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chown xrootd.xrootd /etc/xrootd/xrootd.key
+</pre></div>
+
+
+</li>
+<li>
+<p>On the node where xrootdfs is installed modify <strong><code>/etc/fstab</code></strong> add security information:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrootdfs <span style="color:red">/mnt/xrootd %ENDCOLOR<span class="s2">&quot; fuse rdr=xroot://<span style="color:red">redirector1.domain.com</span>:1094/<span style="color:red">/path/redirector1</span>,uid=xrootd,sss=<span style="color:red">keyfile</span> 0 0</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>On all xrootd data servers and redirector node, modify xrootd configuration (<strong><code>/etc/xrootd/xrootd-clustered.cfg</code></strong>) by adding the following segment: </p>
+<div class="codehilite"><pre><span></span># ENABLE_SECURITY_BEGIN 
+   xrootd.seclib /usr/lib64/libXrdSec.so 
+   #the line below should be before &quot;sec.protocol ... unix&quot;
+   <span style="color:red">sec.protocol /usr/lib64 sss -s keyfile </span>
+   sec.protocol /usr/lib64 unix 
+   # this specify that we use the &#39;unix&#39; authentication module, additional one can be specified. 
+   # this is the authorization file
+   acc.authdb /etc/xrootd/auth_file
+   ofs.authorize 
+   # ENABLE_SECURITY_END
+</pre></div>
+
+
+</li>
+<li>
+<p>On all xrootd data server nodes, edit /etc/xrootd/auth_file to add authorized users of the form <code>u <span style="color:red">username</span> <span style="color:red">/directoryname</span> lr</code> where "lr" is the permission set.</p>
+</li>
+<li>
+<p>Copy <span style="color:red">keyfile<span class="twiki-macro ENDCOLOR"></span> from redirector node to every data server node and the xrootdfs node. Make sure that this file is owned by the <code>xrootd</code> user.</p>
+</li>
+<li>
+<p>Restart xrootd cluster by following <a href="https://twiki.grid.iu.edu/bin/view/SoftwareTeam/HowToInstallXrootd">these instructions</a></p>
+</li>
+<li>
+<p>On xroodfs node execute mount:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mount <span style="color:red">/mnt/xrootd</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Verify that you can access the mount point (df,ls) and can not write into unauthorized path, e.g:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp /bin/sh /mnt/xrootd/tlevshin/test1 cp: 
+<span class="go">cannot create regular file \`/mnt/xrootd/tlevshin/test1&#39;: Permission denied</span>
+</pre></div>
+
+
+<p>Login as yourself and try:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> su - tlevshin 
+<span class="gp">user@host $</span> cp /bin/sh /mnt/xrootd/tlevshin/test1
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="edit-bestman-settings">Edit Bestman Settings<a class="headerlink" href="#edit-bestman-settings" title="Permanent link">&para;</a></h2>
+<p>See <a href="../../data/bestman-install/#edit-bestman-settings">Edit Bestman Settings</a></p>
+<h2 id="modify-etcsudoers">Modify <code>/etc/sudoers</code><a class="headerlink" href="#modify-etcsudoers" title="Permanent link">&para;</a></h2>
+<p>See <a href="../../data/bestman-install/#modify-etcsudoers">Bestman Instructions</a></p>
+<h3 id="optional-copying-certificates-to-a-bestman-location">(Optional) Copying certificates to a bestman location<a class="headerlink" href="#optional-copying-certificates-to-a-bestman-location" title="Permanent link">&para;</a></h3>
+<p>See <a href="../../data/bestman-install/#copying-certificates-to-an-alternate-location">Bestman Instructions</a></p>
+<h1 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h1>
+<p>Validation can be done similar to a stand-alone BeStMan or GridFTP server. For more information, see <a href="../../data/bestman-install/#validation-of-service-operation">BeStMan Validation</a> and <a href="../../data/gridftp/#validating-gridftp">GridFTP Validation</a>.</p>
+<h1 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th align="left">Software</th>
+<th align="left">Service name</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">fetch-crl</td>
+<td align="left"><code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
+<td align="left">See  <a href="../../common/ca/#startstop-fetch-crl-a-quick-guide">CA documentation</a></td>
+</tr>
+<tr>
+<td align="left">Gridftp</td>
+<td align="left"><code>globus-gridftp-server</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">BestMan</td>
+<td align="left"><code>bestman2</code></td>
+<td align="left">See <a href="../../data/bestman-install/#starting-services">Bestman Services</a></td>
+</tr>
+<tr>
+<td align="left">Gratia probes</td>
+<td align="left"><code>gratia-xrootd-transfer</code> and <code>gratia-xrootd-storage</code></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>As a reminder, here are common service commands (all run as <code>root</code>):</p>
+<table>
+<thead>
+<tr>
+<th align="left">To …</th>
+<th align="left">Run the command …</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Start a service</td>
+<td align="left"><code>service <span style="color:red">&lt;SERVICE-NAME&gt;</span> start</code></td>
+</tr>
+<tr>
+<td align="left">Stop a service</td>
+<td align="left"><code>service <span style="color:red">&lt;SERVICE-NAME&gt;</span> stop</code></td>
+</tr>
+<tr>
+<td align="left">Enable a service to start during boot</td>
+<td align="left"><code>chkconfig <span style="color:red">&lt;SERVICE-NAME&gt;</span> on</code></td>
+</tr>
+<tr>
+<td align="left">Disable a service from starting during boot</td>
+<td align="left"><code>chkconfig <span style="color:red">&lt;SERVICE-NAME&gt;</span> off</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="notes-on-upgrading-bestman">Notes on Upgrading Bestman<a class="headerlink" href="#notes-on-upgrading-bestman" title="Permanent link">&para;</a></h1>
+<p>See <a href="../../data/bestman-install/#upgrading-bestman">Upgrading Bestman</a></p>
+<h1 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h1>
+<p>If you cannot resolve the problem, there are several ways to receive help:</p>
+<ul>
+<li>For bug support and issues, submit a ticket to the <a href="https://ticket.grid.iu.edu/goc">Grid Operations Center</a>.</li>
+</ul>
+<p>For a full set of help options, see <a href="../../common/help/">Help Procedure</a>.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../security/edg-mkgridmap/" class="btn btn-neutral float-right" title="EDG-Mkgridmap Install">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../bestman-install/" class="btn btn-neutral" title="BeStMan Install"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../bestman-install/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../security/edg-mkgridmap/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
