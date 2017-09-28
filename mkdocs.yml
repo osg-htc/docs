@@ -35,8 +35,6 @@ pages:
   - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
   - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
   - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
-- Overviews:
-  - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
 - Monitoring:
   - 'RSV Overview': 'monitoring/rsv-overview.md'
   - 'Install RSV': 'monitoring/install-rsv.md'
