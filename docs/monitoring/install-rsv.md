@@ -80,7 +80,7 @@ After installation, there are some one-time configuration steps to tell RSV how 
 
 The following configuration steps are optional and will likely not be required for setting up a small or typical site. If you do not need any of the following special configurations, skip to [the section on using RSV](#using-rsv).
 
-Generally speaking, read the [ConfigureRsv](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/ConfigureRsv) page for more advanced configuration options.
+Generally speaking, read the [ConfigureRsv](advanced-rsv-configuration) page for more advanced configuration options.
 
 #### Configuring RSV to run probes using a remote server
 
@@ -167,12 +167,12 @@ Normally, the HTCondor-Cron scheduler runs RSV periodically. However, you can ru
 
 If successful, results will be available from your local RSV web server (e.g., <http://localhost/rsv>) and, if enabled (which is the default) on [MyOSG](http://myosg.grid.iu.edu/).
 
-You can also run the metrics individually or pass special parameters as explained in the [rsv-control document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvControl).
+You can also run the metrics individually or pass special parameters as explained in the [rsv-control document](rsv-control).
 
 Troubleshooting RSV
 -------------------
 
-You can find more information on troubleshooting RSV in the [rsv-control documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvControl) and in [TroubleshootRSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv).
+You can find more information on troubleshooting RSV in the [rsv-control documentation](rsv-control) and in [TroubleshootRSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv).
 
 ### Important file locations
 
@@ -278,7 +278,7 @@ Reference
 
 Here are some other RSV documents that might be helpful:
 
-- A longer [introduction to RSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvOverview)
+- A longer [introduction to RSV](rsv-overview)
 -  [The RSV architecture](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvArchitecture)
 -  [RSV storage probes](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RSVStorageProbes)
 

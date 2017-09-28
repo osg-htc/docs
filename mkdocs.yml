@@ -32,8 +32,11 @@ pages:
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
-- Install Guides - Monitoring:
-  - 'RSV': 'monitoring/install-rsv.md'
+- Monitoring:
+  - 'RSV Overview': 'monitoring/rsv-overview.md'
+  - 'Install RSV': 'monitoring/install-rsv.md'
+  - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
+  - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
   - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
 - Install Guides - Other:
   - 'Install Best Practices': 'common/install-best-practices.md'
