@@ -35,7 +35,6 @@ OSG expects you to clearly specify your site's policies regarding resource acces
 
 The OSG provides software and documentation to install and operate following services:
 
-&lt;div style="margin: 1em 2em 2em 2em; width: 90%"&gt;
 
 | Element               | Description                                                                                |
 |:----------------------|:-------------------------------------------------------------------------------------------|
@@ -45,22 +44,21 @@ The OSG provides software and documentation to install and operate following ser
 | Storage Element       | enables grid users to store large amounts of data at your site                             |
 | VO Management Service | provides functionality for VO Managers to manage the membership information of their users |
 
-&lt;/div&gt;
 
 ### Authorization Service
 
 Grid users will authorization with your site using their **grid or voms proxy**. The OSG provides two different services that let you control the authorization process:
 
-&lt;div style="margin: 1em 2em 2em 2em; width: 90%"&gt; | **Service** | **Description** | **Advantages** | **Disadvantages** |
+| **Service** | **Description** | **Advantages** | **Disadvantages** |
 
 |                                 |                                                                           |                              |                                            |
 |---------------------------------|---------------------------------------------------------------------------|------------------------------|--------------------------------------------|
 | edg-mkgridmap                   | a simple program that contacts VOMS servers and creates a gridmap file    | easy to install and maintain | does not support voms proxies              |
 | [GUMS](Documentation.AboutGums) | a web service providing sophisticated controls of how users authorization | supports voms proxies        | requires Tomcat to be run as a web service |
 
-&lt;/div&gt;
 
-<span class="twiki-macro ICON">warning</span> A **VOMS Server** is not an element of your site. Each **Virtual Organization** operates a central VOMS Server to manage membership information of its grid users. Please contact the **VO Manager** for your virtual organization to obtain more details.
+!!! warning
+    A **VOMS Server** is not an element of your site. Each **Virtual Organization** operates a central VOMS Server to manage membership information of its grid users. Please contact the **VO Manager** for your virtual organization to obtain more details.
 
 ### Compute Element
 
@@ -72,7 +70,6 @@ You must choose the OS (Red Hat Enterprise Linux derivative), the batch system (
 
 The CE hosts information provider(s) and monitoring services, most of which are configured correctly by default. We require all OSG sites to deploy Gratia, the OSG accounting system. Your site thus sends accounting records to OSG about jobs run on your site and data transfers involving your site. Aggregated summaries of this information can be viewed via the [Gratia displays](http://gratia-osg.fnal.gov:8880/gratia-reporting/).
 
-&lt;div style="margin: 1em 2em 2em 2em; width: 90%"&gt;
 
 <table>
 <thead>
@@ -107,11 +104,9 @@ It also allows grid users to <strong>fork</strong> jobs on your gatekeeper by de
 </tbody>
 </table>
 
-&lt;/div&gt;
 
 Additionally two shared file systems are for grid users to install applications **OSG\_APP** (required) and to save data **OSG\_DATA** (optional). If available, both must be mounted on the gatekeeper and all worker nodes:
 
-&lt;div style="margin: 1em 2em 2em 2em; width: 90%;"&gt;
 
 | Shared Filesystem | Description                                  | Recommended Size                 | Typical Size\[TB\] | Comments                                                                    |
 |:------------------|:---------------------------------------------|:---------------------------------|:------------------:|:----------------------------------------------------------------------------|
@@ -119,13 +114,12 @@ Additionally two shared file systems are for grid users to install applications 
 | OSG\_APP          | space for grid users to install applications | 10GB for each VO                 |      0.1 to 1      | required, no auto-cleanup                                                   |
 | OSG\_DATA         | space for grid users to stage data           | 10GB for each VO and worker node |      0.1 to 10     | optional, no quota, auto-cleanup                                            |
 | OSG\_WN\_TMP      | tmp space for users on worker nodes          | 2GB for each cpu core            |         0.1        | required, auto-cleanup                                                      |
-| OSG\_GRID         | location of the worker node client           | 10GB                             |         0.1        | optional/required (see %RED%NOTE<span class="twiki-macro ENDCOLOR"></span>) |
+| OSG\_GRID         | location of the worker node client           | 10GB                             |         0.1        | optional/required (see %RED%NOTE%ENDCOLOR%) |
 
-&lt;/div&gt;
 
-<span class="twiki-macro NOTE"></span> If you install wn-client on each node via RPM all the client software is available in the default path. There is no need for OSG\_GRID. The RPM installation creates `/etc/osg/wn-client/` with dummy setup files for compatibility with old jobs looking for a OSG\_GRID. New jobs should source the setup file in OSG\_GRID if this is defined; if not, they should expect all the client binaries in the default PATH.
+!!! note
+    If you install wn-client on each node via RPM all the client software is available in the default path. There is no need for OSG\_GRID. The RPM installation creates `/etc/osg/wn-client/` with dummy setup files for compatibility with old jobs looking for a OSG\_GRID. New jobs should source the setup file in OSG\_GRID if this is defined; if not, they should expect all the client binaries in the default PATH.
 
-More details can be found in [Local Storage Configuration](Trash.ReleaseDocumentationLocalStorageConfiguration).
 
 ### Worker Node Client
 
@@ -144,13 +138,13 @@ An SE must run correctly configured Grid Information Providers, Gratia accountin
 
 These services are supported by the OSG Storage group. Please email <osg-storage@opensciencegrid.org> for installation and support questions for these services.
 
-&lt;div style="margin: 1em 2em 2em 2em; width: 90%"&gt; | **Storage Requirements** | **Min Hardware Requirements** | **OSG SE Solution** |
+| **Storage Requirements** | **Min Hardware Requirements** | **OSG SE Solution** |
 
 |                                                 |                        |                   |                                                      |                               |                  |                                                                                              |                         |                        |                                                                        |                         |                       |                                                                                              |                          |        |
 |-------------------------------------------------|------------------------|-------------------|------------------------------------------------------|-------------------------------|------------------|----------------------------------------------------------------------------------------------|-------------------------|------------------------|------------------------------------------------------------------------|-------------------------|-----------------------|----------------------------------------------------------------------------------------------|--------------------------|--------|
 | SRM interface, Dynamic Space Management Support | Server with local disk | BeStMan-fullmode| | SRM interface, No or Static Space Management Support | Server with local disk or NFS | BeStMan-gateway| | SRM interface, No or Static Space Management Support, jobs need root protocol to access data | Multiple servers(&gt;3) | BeStMan-gateway/Xrood| | SRM interface, No or Static Space Management Support, file replication | Multiple servers(&gt;4) | BeStMan-gateway/HDFS| | SRM interface, Dynamic Space Management Support, file replication, interface to tape backend | Multiple servers (&gt;5) | dcache |
 
-&lt;/div&gt; To learn more about storage technologies used in OSG, read the [Overview](Documentation.StorageInfrastructureSoftware) and the [Storage Site Administrator Guide](Documentation.StorageSiteAdministrator).
+To learn more about storage technologies used in OSG, read the [Overview](Documentation.StorageInfrastructureSoftware) and the [Storage Site Administrator Guide](Documentation.StorageSiteAdministrator).
 
 ### VO Management Service
 
@@ -158,7 +152,7 @@ A **V**irtual **O**ganization **M**anagement **S**ervice (VOMS) controls who is 
 
 ## Recommendations
 
-<span class="twiki-macro ICON">hand</span> In this section we outline %RED%important<span class="twiki-macro ENDCOLOR"></span> recommendations for setting up an OSG site. The recommendations are based on the knowledge of experienced system administrators and will help you avoid typical problems operating an OSG site from the beginning.
+In this section we outline %RED%important%ENDCOLOR% recommendations for setting up an OSG site. The recommendations are based on the knowledge of experienced system administrators and will help you avoid typical problems operating an OSG site from the beginning.
 
 ### Shared File Systems
 
@@ -171,7 +165,7 @@ We recommend to use a dedicated server for hosting the shared file system. The e
 
 #### NFS Warning
 
-NFS is known to be an *easy* but never the less %RED%inadequate<span class="twiki-macro ENDCOLOR"></span> choice for all but the smallest sites! If you want to use NFS you should read the chapter *"Optimizing NFS Performance"* in the [http://nfs.sourceforge.net/nfs-howto/ Linux NFS HowTo](http://nfs.sourceforge.net/nfs-howto/ Linux NFS HowTo). Software partitions that can be locally installed, such as OSG\_GRID, should be locally installed and not shared unless you have an enterprise-class NFS server.
+NFS is known to be an *easy* but never the less %RED%inadequate%ENDCOLOR% choice for all but the smallest sites! If you want to use NFS you should read the chapter *"Optimizing NFS Performance"* in the [http://nfs.sourceforge.net/nfs-howto/ Linux NFS HowTo](http://nfs.sourceforge.net/nfs-howto/ Linux NFS HowTo). Software partitions that can be locally installed, such as OSG\_GRID, should be locally installed and not shared unless you have an enterprise-class NFS server.
 
 Condor provides mechanisms which can be used to greatly minimize NFS usage [NFSLite](http://vdt.cs.wisc.edu/releases/2.0.0/notes/Globus-CondorNFSLite-Setup.html). This package makes it unnecessary to have NFS-mounted **HOME** directories on all the worker nodes. Security is also improved because user proxies will not be sent across NFS in the clear. The running job will only have access to grid or voms proxies running at the same time on the same worker node as the job itself avoiding identity theft.
 
@@ -184,47 +178,61 @@ Condor provides mechanisms which can be used to greatly minimize NFS usage [NFSL
 
 ### Use Job Manager managedfork instead of fork
 
-*GRAM* provides several jobmanagers that control how jobs will be executed on the gatekeeper and the worker nodes. By %RED%default jobmanager fork<span class="twiki-macro ENDCOLOR"></span> will be used to allow grid users to run maintenance jobs on the gatekeeper. Unfortunately fork doesn't provide a way to restrict the number of jobs that may be run simultaneously.
+*GRAM* provides several jobmanagers that control how jobs will be executed on the gatekeeper and the worker nodes. By %RED%default jobmanager fork%ENDCOLOR% will be used to allow grid users to run maintenance jobs on the gatekeeper. Unfortunately fork doesn't provide a way to restrict the number of jobs that may be run simultaneously.
 
-By choosing %RED%managedfork instead of fork<span class="twiki-macro ENDCOLOR"></span> during the setup process, you will be able to restrict the number of simultaneous running jobs on the gatekeeper. We strongly recommend to choose managedfork as the default jobmanager when configuring the Compute Element.
+By choosing %RED%managedfork instead of fork%ENDCOLOR% during the setup process, you will be able to restrict the number of simultaneous running jobs on the gatekeeper. We strongly recommend to choose managedfork as the default jobmanager when configuring the Compute Element.
 
 ### Role based Authentication using VOMS Proxies
 
 *VOMS proxies* allow role based authentication. If your site will support VOMS proxies for authentication you will be able to restrict write access to shared file systems for grid users while providing write permissions to VO Administrators only. In this case we recommend to export **OSG\_APP** read-only to the gatekeeper and all worker nodes for grid users and read-write for VO Managers only.
 
 ## Example Configurations
-======================
 
-This section contains a few example that illustrate how the different elements contributing to an OSG site can be combined. Each %GRAY%gray<span class="twiki-macro ENDCOLOR"></span> box represents a physical resource or virtual machine that is required in the example.
+This section contains a few example that illustrate how the different elements contributing to an OSG site can be combined. Each %GRAY%gray%ENDCOLOR% box represents a physical resource or virtual machine that is required in the example.
 
 ### OSG Resource with Compute Element
 
-&lt;div style="%STYLE\_CAP\_FRAME%"&gt; &lt;div style="float: left;"&gt; &lt;img style="%STYLE\_IMG\_FRAME%" width="%IMG\_WIDTH%" height="%IMG\_HEIGHT%" alt="CE-EDG.png" src="%ATTACHURLPATH%/CE-EDG.png"/&gt;&lt;/a&gt; &lt;/div&gt; &lt;div style="%STYLE\_CAP\_BOX%"&gt; &lt;p&gt; The image to the left shows all elements of a compute element. &lt;/p&gt; &lt;p&gt; *edg-mkgridmap* is used to create the *grid-mapfile* and to keep it current. &lt;/p&gt; &lt;p&gt; The *shared filesystem* is mounted on the compute element providing access to *OSG\_APP*, *OSG\_DATA* and *HOME*. &lt;/p&gt; &lt;p&gt; *GRAM* and *GridFTP* use the *grid-mapfile* to authenticate requests to run jobs and to transfer data. &lt;/p&gt; &lt;/div&gt; &lt;/div&gt;
+![CE-EDG.png](images/site-planning/CE-EDG.png)
 
-&lt;div style="%STYLE\_CAP\_FRAME%"&gt; &lt;div style="float: left;"&gt; &lt;img style="%STYLE\_IMG\_FRAME%" width="%IMG\_WIDTH%" height="%IMG\_HEIGHT%" alt="WN.png" src="%ATTACHURLPATH%/WN.png"/&gt;&lt;/a&gt; &lt;/div&gt; &lt;div style="%STYLE\_CAP\_BOX%"&gt; &lt;p&gt; The image to the left shows a *Worker Node* that is connected to the *Compute Element* above by a network. &lt;/p&gt; &lt;p&gt; The *Worker Node Client* has to be installed on each worker node. &lt;/p&gt; &lt;p&gt; The *shared filesystem* is mounted on the worker node providing access to *OSG\_APP*, *OSG\_DATA* and *HOME*. &lt;/p&gt; &lt;p&gt; *Node Local Storage* is used for *OSG\_WN\_TMP* and *OSG\_GRID*. *OSG\_GRID* points to the installation of the *Worker Node Client*. &lt;/p&gt; &lt;/div&gt; &lt;/div&gt;
+The image above shows all elements of a compute element. *edg-mkgridmap* is used to create the *grid-mapfile* and to keep it current. The *shared filesystem* is mounted on the compute element providing access to *OSG\_APP*, *OSG\_DATA* and *HOME*. *GRAM* and *GridFTP* use the *grid-mapfile* to authenticate requests to run jobs and to transfer data.
+
+![WN.png](images/site-planning/WN.png)
+
+The image above shows a *Worker Node* that is connected to the *Compute Element* above by a network.  The *Worker Node Client* has to be installed on each worker node.  The *shared filesystem* is mounted on the worker node providing access to *OSG\_APP*, *OSG\_DATA* and *HOME*.  *Node Local Storage* is used for *OSG\_WN\_TMP* and *OSG\_GRID*. *OSG\_GRID* points to the installation of the *Worker Node Client*.
 
 ### OSG Resource with joined Compute and Storage Element
-----------------------------------------------------
 
-&lt;div style="%STYLE\_CAP\_FRAME%"&gt; &lt;div style="float: left;"&gt; &lt;a href="%ATTACHURLPATH%/CE-SE-EDG.png"&gt;&lt;img style="%STYLE\_IMG\_FRAME%" width="%IMG\_WIDTH%" height="%IMG\_HEIGHT%" alt="CE-SE-EDG.png" src="%ATTACHURLPATH%/CE-SE-EDG.png"/&gt;&lt;/a&gt; &lt;/div&gt; &lt;div style="%STYLE\_CAP\_BOX%"&gt; &lt;p&gt; The left side shows elements of a joined Compute and Storage Element. &lt;/p&gt; &lt;p&gt; The shared file system is mounted on the compute and storage element. &lt;/p&gt; &lt;p&gt; The *BeStMan* storage solution provides the *SRM Service* allowing grid users to remotely access the shared file system. &lt;/p&gt; &lt;/div&gt; &lt;/div&gt;
+![CE-SE-EDG.png](images/site-planning/CE-SE-EDG.png)
 
-&lt;div style="%STYLE\_CAP\_FRAME%"&gt; &lt;div style="float: left;"&gt; &lt;img style="%STYLE\_IMG\_FRAME%" width="%IMG\_WIDTH%" height="%IMG\_HEIGHT%" alt="WN.png" src="%ATTACHURLPATH%/WN.png"/&gt;&lt;/a&gt; &lt;/div&gt; &lt;div style="%STYLE\_CAP\_BOX%"&gt; &lt;p&gt; The image to the left shows a *Worker Node* that is connected to the *Compute Element* above by a network. &lt;/p&gt; &lt;p&gt; The *Worker Node Client* has to be installed on each worker node. &lt;/p&gt; &lt;p&gt; The *shared filesystem* is mounted on the worker node providing access to *OSG\_APP*, *OSG\_DATA* and *HOME*. &lt;/p&gt; &lt;p&gt; *Node Local Storage* is used for *OSG\_WN\_TMP* and *OSG\_GRID*. *OSG\_GRID* points to the installation of the *Worker Node Client*. &lt;/p&gt; &lt;/div&gt; &lt;/div&gt;
+The left side shows elements of a joined Compute and Storage Element.  The shared file system is mounted on the compute and storage element. The *BeStMan* storage solution provides the *SRM Service* allowing grid users to remotely access the shared file system.
+
+![WN.png](images/site-planning/WN.png)
+
+The image above shows a *Worker Node* that is connected to the *Compute Element* above by a network. The *Worker Node Client* has to be installed on each worker node. The *shared filesystem* is mounted on the worker node providing access to *OSG\_APP*, *OSG\_DATA* and *HOME*. *Node Local Storage* is used for *OSG\_WN\_TMP* and *OSG\_GRID*. *OSG\_GRID* points to the installation of the *Worker Node Client*.
 
 ### OSG Resource with separate Compute and Storage Element
 
-&lt;div style="%STYLE\_CAP\_FRAME%"&gt; &lt;div style="float: left;"&gt; &lt;img style="%STYLE\_IMG\_FRAME%" width="%IMG\_WIDTH%" height="%IMG\_HEIGHT%" alt="GUMS.png" src="%ATTACHURLPATH%/GUMS.png"/&gt;&lt;/a&gt; &lt;/div&gt; &lt;div style="%STYLE\_CAP\_BOX%"&gt; &lt;p&gt; The image to the left shows the elements of an authorization host. &lt;/p&gt; &lt;p&gt; *GUMS* provides a central web service for grid authorization requests from storage and compute elements. &lt;/p&gt; &lt;p&gt; It is not required but recommended to run GUMS outside of the compute and and storage element which are shown below. &lt;/p&gt; &lt;/div&gt; &lt;/div&gt;
+![GUMS.png](images/site-planning/GUMS.png)
 
-&lt;div style="%STYLE\_CAP\_FRAME%"&gt; &lt;div style="float: left;"&gt; &lt;img style="%STYLE\_IMG\_FRAME%" width="%IMG\_WIDTH%" height="%IMG\_HEIGHT%" alt="CE-GUMS.png" src="%ATTACHURLPATH%/CE-GUMS.png"/&gt;&lt;/a&gt; &lt;/div&gt; &lt;div style="%STYLE\_CAP\_BOX%"&gt; &lt;p&gt; The image to the left shows all elements of a compute element. &lt;/p&gt; &lt;p&gt; *GRAM* and *GridFTP* query *GUMS* to authenticate requests from grid users to run jobs or transfer data. &lt;/p&gt; &lt;p&gt; The *shared filesystem* is mounted on the compute element providing access to *OSG\_APP*, *OSG\_DATA* and *HOME*. &lt;/p&gt; &lt;/div&gt; &lt;/div&gt;
+The image above shows the elements of an authorization host. *GUMS* provides a central web service for grid authorization requests from storage and compute elements.  It is not required but recommended to run GUMS outside of the compute and and storage element which are shown below.
 
-&lt;div style="%STYLE\_CAP\_FRAME%"&gt; &lt;div style="float: left;"&gt; &lt;img style="%STYLE\_IMG\_FRAME%" width="%IMG\_WIDTH%" height="%IMG\_HEIGHT%" alt="SE-GUMS.png" src="%ATTACHURLPATH%/SE-GUMS.png"/&gt;&lt;/a&gt; &lt;/div&gt; &lt;div style="%STYLE\_CAP\_BOX%"&gt; &lt;p&gt; The image to the left shows all elements of a storage element. &lt;/p&gt; &lt;p&gt; *SRM* and *GridFTP* query *GUMS* to authenticate requests from grid users to transfer data. &lt;/p&gt; &lt;p&gt; The *shared filesystem* is mounted on the compute element providing access to *OSG\_APP*, *OSG\_DATA* and *HOME*. &lt;/p&gt; &lt;p&gt; The *BeStMan* storage solution provides the *SRM Service* allowing grid users to remotely access the shared file system. &lt;/p&gt; &lt;/div&gt; &lt;/div&gt;
+![CE-GUMS.png](images/site-planning/CE-GUMS.png)
 
-&lt;div style="%STYLE\_CAP\_FRAME%"&gt; &lt;div style="float: left;"&gt; &lt;img style="%STYLE\_IMG\_FRAME%" width="%IMG\_WIDTH%" height="%IMG\_HEIGHT%" alt="WN.png" src="%ATTACHURLPATH%/WN.png"/&gt;&lt;/a&gt; &lt;/div&gt; &lt;div style="%STYLE\_CAP\_BOX%"&gt; &lt;p&gt; The image to the left shows a *Worker Node* that is connected to the *Compute Element* above by a network. &lt;/p&gt; &lt;p&gt; The *Worker Node Client* has to be installed on each worker node. &lt;/p&gt; &lt;p&gt; The *shared filesystem* is mounted on the worker node providing access to *OSG\_APP*, *OSG\_DATA* and *HOME*. &lt;/p&gt; &lt;p&gt; *Node Local Storage* is used for *OSG\_WN\_TMP* and *OSG\_GRID*. *OSG\_GRID* points to the installation of the *Worker Node Client*. &lt;/p&gt; &lt;/div&gt; &lt;/div&gt;
+The image above shows all elements of a compute element. *GRAM* and *GridFTP* query *GUMS* to authenticate requests from grid users to run jobs or transfer data. The *shared filesystem* is mounted on the compute element providing access to *OSG\_APP*, *OSG\_DATA* and *HOME*.
+
+![SE-GUMS.png](images/site-planning/SE-GUMS.png)
+
+The image above shows all elements of a storage element. *SRM* and *GridFTP* query *GUMS* to authenticate requests from grid users to transfer data. The *shared filesystem* is mounted on the compute element providing access to *OSG\_APP*, *OSG\_DATA* and *HOME*. The *BeStMan* storage solution provides the *SRM Service* allowing grid users to remotely access the shared file system.
+
+![WN.png](images/site-planning/WN.png)
+
+The image above shows a *Worker Node* that is connected to the *Compute Element* above by a network. The *Worker Node Client* has to be installed on each worker node. The *shared filesystem* is mounted on the worker node providing access to *OSG\_APP*, *OSG\_DATA* and *HOME*. *Node Local Storage* is used for *OSG\_WN\_TMP* and *OSG\_GRID*. *OSG\_GRID* points to the installation of the *Worker Node Client*.
 
 ### OSG Resource with Compute Element and dCache Storage Element
 
-&lt;div style="%STYLE\_CAP\_FRAME%"&gt; &lt;div style="float: left;"&gt; &lt;a href="%ATTACHURLPATH%/LargeSite.gif"&gt;&lt;img style="%STYLE\_IMG\_FRAME%" width="%IMG\_WIDTH%" height="%IMG\_HEIGHT%" alt="%LargeSite.gif" src="%ATTACHURLPATH%/LargeSite.gif"/&gt;&lt;/a&gt; &lt;/div&gt; &lt;div style="%STYLE\_CAP\_BOX%"&gt; *OSG Compute and dCache Storage Element using GUMS* &lt;p style="text-indent: 2em;"&gt; The left side shows all elements of a compute and a *dCache* storage element. On the right side a set of worker node are drawn which are distinct from *dCache Pool Nodes*. &lt;/p&gt; &lt;p&gt; The worker nodes and dCache pool nodes are connected to the compute and storage element by a network. &lt;/p&gt; &lt;p&gt; *GRAM* and *GridFTP* use *GUMS* to authenticate requests to run jobs and to transfer data. &lt;/p&gt; &lt;/div&gt; &lt;/div&gt;
+![LargeSite.gif](images/site-planning/LargeSite.gif)
 
-### Plan your own Site
+*OSG Compute and dCache Storage Element using GUMS*
 
-<span class="twiki-macro ICON">hand</span> We recommend that you draw your site configuration on paper before you proceed. You can also use the attached &lt;a href="%ATTACHURLPATH%/GraphicsTemplate.svg"&gt;Graphics Template&lt;/a&gt; for this purpose.
+The left side shows all elements of a compute and a *dCache* storage element. On the right side a set of worker node are drawn which are distinct from *dCache Pool Nodes*. The worker nodes and dCache pool nodes are connected to the compute and storage element by a network. *GRAM* and *GridFTP* use *GUMS* to authenticate requests to run jobs and to transfer data.
 
