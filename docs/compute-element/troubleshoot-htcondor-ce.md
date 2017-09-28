@@ -264,7 +264,7 @@ Ensure that the owner of the job generates their proxy with `voms-proxy-init`.
 
 #### Held jobs: Invalid job universe
 
-The HTCondor-CE only accepts jobs that have `universe` in their submit files set to `vanilla`, `standard`, `local`, or `scheduler`. These universes also have corresponding integer values that can be found in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/12_Appendix_A.html#91174).
+The HTCondor-CE only accepts jobs that have `universe` in their submit files set to `vanilla`, `standard`, `local`, or `scheduler`. These universes also have corresponding integer values that can be found in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/12_Appendix_A.html#104736).
 
 **Next actions**
 
