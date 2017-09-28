@@ -19,8 +19,8 @@
   <script>
     // Current page data
     var mkdocs_page_name = "RSV GlideinWMS Tester";
-    var mkdocs_page_input_path = "monitoring/rsv-gwms-tester.md";
-    var mkdocs_page_url = "/monitoring/rsv-gwms-tester/";
+    var mkdocs_page_input_path = "monitoring/install-rsv-gwms-tester.md";
+    var mkdocs_page_url = "/monitoring/install-rsv-gwms-tester/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -102,11 +102,27 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Install Guides - Compute</span>
+    <span class="caption-text">Compute Element</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../compute-element/install-htcondor-ce/">HTCondor-CE</a>
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
                 </li>
     </ul>
 	    </li>
@@ -151,7 +167,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../rsv/">RSV</a>
+    <a class="" href="../install-rsv/">RSV</a>
                 </li>
                 <li class=" current">
                     
@@ -205,17 +221,6 @@
                 <li class="">
                     
     <a class="" href="../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Overviews</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE</a>
                 </li>
     </ul>
 	    </li>
@@ -327,7 +332,7 @@
     <li>RSV GlideinWMS Tester</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/monitoring/rsv-gwms-tester.md"
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/monitoring/install-rsv-gwms-tester.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -387,7 +392,7 @@
 
 </li>
 <li>
-<p>Add the new Tester to your GlideinWMS front-end configuration. 
+<p>Add the new Tester to your GlideinWMS front-end configuration.
    Edit the file <code>/etc/gwms-frontend/frontend.xml</code> and add a line as follows within the <code>&lt;schedds&gt;</code> element</p>
 <div class="codehilite"><pre><span></span>&lt;schedd DN=&quot;<span style="color:red">&lt;TESTER_DN&gt;</span>&quot; fullname=&quot;<span style="color:red">&lt;TESTER_HOSTNAME&gt;</span>&quot;&gt;
 </pre></div>
@@ -517,7 +522,7 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 
 <p>The highlighted name is the site name, and there should be one such line per site supported by your VO(s).</p>
 <h2 id="troubleshooting-rsv-gwms-tester">Troubleshooting RSV-GWMS-Tester<a class="headerlink" href="#troubleshooting-rsv-gwms-tester" title="Permanent link">&para;</a></h2>
-<p>You can find more information on troubleshooting in the <a href="../../monitoring/rsv#troubleshooting-rsv">RSV troubleshooting section</a></p>
+<p>You can find more information on troubleshooting in the <a href="../../monitoring/install-rsv#troubleshooting-rsv">RSV troubleshooting section</a></p>
 <p>Logs and configuration:</p>
 <table>
 <thead>
@@ -587,7 +592,7 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
         <a href="../../common/install-best-practices/" class="btn btn-neutral float-right" title="Install Best Practices">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../rsv/" class="btn btn-neutral" title="RSV"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../install-rsv/" class="btn btn-neutral" title="RSV"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -615,7 +620,7 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../rsv/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../install-rsv/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../../common/install-best-practices/" style="color: #fcfcfc">Next &raquo;</a></span>

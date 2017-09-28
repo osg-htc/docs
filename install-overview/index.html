@@ -126,11 +126,27 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Install Guides - Compute</span>
+    <span class="caption-text">Compute Element</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../compute-element/install-htcondor-ce/">HTCondor-CE</a>
+    <a class="" href="../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../compute-element/job-router-recipes/">Job Router Recipes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
                 </li>
     </ul>
 	    </li>
@@ -175,11 +191,11 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../monitoring/rsv/">RSV</a>
+    <a class="" href="../monitoring/install-rsv/">RSV</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../monitoring/rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+    <a class="" href="../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
                 </li>
     </ul>
 	    </li>
@@ -203,17 +219,6 @@
                 <li class="">
                     
     <a class="" href="../other/install-gwms-frontend/">GlideinWMS Frontend</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Overviews</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../compute-element/htcondor-ce-overview/">HTCondor-CE</a>
                 </li>
     </ul>
 	    </li>
@@ -400,9 +405,9 @@
 <li>Install the compute element (HTCondor-CE and other software):<ul>
 <li><a href="../compute-element/htcondor-ce-overview">Overview and architecture</a></li>
 <li><a href="../compute-element/install-htcondor-ce">Install HTCondor-CE</a></li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/JobRouterRecipes">Configure the HTCondor-CE job router</a>, including common recipes</li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE">Troubleshooting HTCondor-CE installations</a></li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SubmittingHTCondorCE">Submitting jobs to HTCondor-CE</a></li>
+<li><a href="../compute-element/job-router-recipes">Configure the HTCondor-CE job router</a>, including common recipes</li>
+<li><a href="../compute-element/troubleshoot-htcondor-ce">Troubleshooting HTCondor-CE installations</a></li>
+<li><a href="../compute-element/submit-htcondor-ce">Submitting jobs to HTCondor-CE</a></li>
 </ul>
 </li>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingOsgConfigure">Troubleshooting osg-configure</a></li>
@@ -413,12 +418,12 @@
 <li><a href="../data/frontier-squid">Install Frontier Squid, the HTTP caching proxy service</a></li>
 <li>RSV monitoring to monitor and report to OSG on the health of your site<ul>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvOverview">RSV Overview</a></li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallRSV">Install RSV</a></li>
+<li><a href="../monitoring/install-rsv">Install RSV</a></li>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv">Troubleshooting RSV</a></li>
 </ul>
 </li>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallGlideinWMSFrontend">Install the GlideinWMS VO Frontend</a> if your want your users’ jobs to run on the OSG<ul>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallRsvGlideinwmsTester">Install the RSV GlideinWMS Tester</a> if you want to test your front-end's ability to submit jobs to sites in the OSG</li>
+<li><a href="../monitoring/install-rsv-gwms-tester">Install the RSV GlideinWMS Tester</a> if you want to test your front-end's ability to submit jobs to sites in the OSG</li>
 </ul>
 </li>
 <li>Storage element (pick one):<ul>
@@ -449,7 +454,7 @@
 <h2 id="test-osg-software">Test OSG Software<a class="headerlink" href="#test-osg-software" title="Permanent link">&para;</a></h2>
 <p>At very least, it is vital to test <em>manual</em> submission of jobs from inside and outside of your site through your CE to your batch system. If this process does not work manually, it will probably not work for the glideinWMS pilot factory either.</p>
 <ul>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SubmittingHTCondorCE">Test job submission into an HTCondor-CE</a></li>
+<li><a href="../compute-element/submit-htcondor-ce">Test job submission into an HTCondor-CE</a></li>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingGuide">OSG Troubleshooting guide</a></li>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/ValidateSupportedVos">Validating Supported VOs</a></li>
 </ul>

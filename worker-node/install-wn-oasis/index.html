@@ -124,11 +124,27 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Install Guides - Compute</span>
+    <span class="caption-text">Compute Element</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../compute-element/install-htcondor-ce/">HTCondor-CE</a>
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
                 </li>
     </ul>
 	    </li>
@@ -173,11 +189,11 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../monitoring/rsv/">RSV</a>
+    <a class="" href="../../monitoring/install-rsv/">RSV</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../monitoring/rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+    <a class="" href="../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
                 </li>
     </ul>
 	    </li>
@@ -201,17 +217,6 @@
                 <li class="">
                     
     <a class="" href="../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Overviews</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE</a>
                 </li>
     </ul>
 	    </li>
@@ -378,7 +383,7 @@
 <p>On the CE, in the <code>/etc/osg/config.d/10-storage.ini</code> file, set the <code>grid_dir</code> configuration setting to the path from the previous step.</p>
 <p>For more information, see the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/EnvironmentVariables">OSG environment variables reference page</a> and the <a href="../../other/configuration-with-osg-configure#storage">CE configuration instructions</a>.</p>
 <p>Once you finish making changes to configuration files on your CE, validate, fix, and apply the configuration:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-configure -v 
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-configure -v
 <span class="gp">[root@client ~] #</span> osg-configure -c
 </pre></div>
 
@@ -386,7 +391,7 @@
 <h2 id="validating-the-worker-node-client">Validating the Worker Node Client<a class="headerlink" href="#validating-the-worker-node-client" title="Permanent link">&para;</a></h2>
 <p>To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.</p>
 <ol>
-<li>Submit a job that executes the <code>env</code> command (e.g. Run <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_ce_trace">condor_ce_trace</a> with the <code>-d</code> flag from your HTCondor CE)</li>
+<li>Submit a job that executes the <code>env</code> command (e.g. Run <a href="../../compute-element/troubleshoot-htcondor-ce#condor_ce_trace">condor_ce_trace</a> with the <code>-d</code> flag from your HTCondor CE)</li>
 <li>Verify that the value of <code>OSG_GRID</code> is set to the directory of your WN Client installation</li>
 </ol>
 <h3 id="manually-using-the-worker-node-client-from-oasis">Manually Using the Worker Node Client From OASIS<a class="headerlink" href="#manually-using-the-worker-node-client-from-oasis" title="Permanent link">&para;</a></h3>

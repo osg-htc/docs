@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>HTCondor-CE - OSG Documentation</title>
+  <title>Install HTCondor-CE - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "HTCondor-CE";
+    var mkdocs_page_name = "Install HTCondor-CE";
     var mkdocs_page_input_path = "compute-element/install-htcondor-ce.md";
     var mkdocs_page_url = "/compute-element/install-htcondor-ce/";
   </script>
@@ -102,18 +102,20 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Install Guides - Compute</span>
+    <span class="caption-text">Compute Element</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../htcondor-ce-overview/">HTCondor-CE Overview</a>
+                </li>
                 <li class=" current">
                     
-    <a class="current" href="./">HTCondor-CE</a>
+    <a class="current" href="./">Install HTCondor-CE</a>
     <ul class="subnav">
             
     <li class="toctree-l3"><a href="#installing-and-maintaining-htcondor-ce">Installing and Maintaining HTCondor-CE</a></li>
     
         <ul>
-        
-            <li><a class="toctree-l4" href="#about-this-guide">About This Guide</a></li>
         
             <li><a class="toctree-l4" href="#before-starting">Before Starting</a></li>
         
@@ -137,6 +139,18 @@
     
 
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../job-router-recipes/">Job Router Recipes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../submit-htcondor-ce/">Submitting to HTCondor-CE</a>
                 </li>
     </ul>
 	    </li>
@@ -181,11 +195,11 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../monitoring/rsv/">RSV</a>
+    <a class="" href="../../monitoring/install-rsv/">RSV</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../monitoring/rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+    <a class="" href="../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
                 </li>
     </ul>
 	    </li>
@@ -209,17 +223,6 @@
                 <li class="">
                     
     <a class="" href="../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Overviews</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../htcondor-ce-overview/">HTCondor-CE</a>
                 </li>
     </ul>
 	    </li>
@@ -324,11 +327,11 @@
     
       
         
-          <li>Install Guides - Compute &raquo;</li>
+          <li>Compute Element &raquo;</li>
         
       
     
-    <li>HTCondor-CE</li>
+    <li>Install HTCondor-CE</li>
     <li class="wy-breadcrumbs-aside">
       
         <a href="https://github.com/opensciencegrid/docs/edit/master/docs/compute-element/install-htcondor-ce.md"
@@ -342,7 +345,6 @@
             <div class="section">
               
                 <h1 id="installing-and-maintaining-htcondor-ce">Installing and Maintaining HTCondor-CE<a class="headerlink" href="#installing-and-maintaining-htcondor-ce" title="Permanent link">&para;</a></h1>
-<h2 id="about-this-guide">About This Guide<a class="headerlink" href="#about-this-guide" title="Permanent link">&para;</a></h2>
 <p>The <a href="../htcondor-ce-overview">HTCondor-CE</a> software is a <em>job gateway</em> for an OSG Compute Element (CE). As such, HTCondor-CE is the entry point for jobs coming from the OSG — it handles authorization and delegation of jobs to your local batch system. In OSG today, most CEs accept <em>pilot jobs</em> from a factory, which in turn are able to accept and run end-user jobs.  See the <a href="../htcondor-ce-overview">HTCondor-CE Overview</a> for a much more detailed introduction.</p>
 <p>Use this page to learn how to install, configure, run, test, and troubleshoot HTCondor-CE from the OSG software repositories.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
@@ -365,14 +367,14 @@
 <ol>
 <li>
 <p>Clean yum cache:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> yum clean all --enablerepo<span class="o">=</span>*
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum clean all --enablerepo<span class="o">=</span>*
 </pre></div>
 
 
 </li>
 <li>
 <p>Update software:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> yum update
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum update
 </pre></div>
 
 
@@ -560,7 +562,7 @@ gums_host = <span style="color:red">YOUR GUMS HOSTNAME</span>
 </li>
 <li>
 <p>Validate the configuration settings</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> osg-configure -v
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-configure -v
 </pre></div>
 
 
@@ -570,7 +572,7 @@ gums_host = <span style="color:red">YOUR GUMS HOSTNAME</span>
 </li>
 <li>
 <p>Once the validation command succeeds without errors, apply the configuration settings:</p>
-<div class="codehilite"><pre><span></span>[root@client ~ ] $ osg-configure -c
+<div class="codehilite"><pre><span></span>root@host # osg-configure -c
 </pre></div>
 
 
@@ -580,14 +582,14 @@ gums_host = <span style="color:red">YOUR GUMS HOSTNAME</span>
 <ol>
 <li>
 <p>If you're using edg-mkgridmap, run the following:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> edg-mkgridmap
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> edg-mkgridmap
 </pre></div>
 
 
 </li>
 <li>
 <p>If you're using GUMS, run the following:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> gums-host-cron
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> gums-host-cron
 </pre></div>
 
 
@@ -606,7 +608,7 @@ gums_host = <span style="color:red">YOUR GUMS HOSTNAME</span>
 <li><a href="#install-and-run-the-htcondor-ce-view">Installing the HTCondor-CE View</a></li>
 </ul>
 <h4 id="transforming-and-filtering-jobs">Transforming and filtering jobs<a class="headerlink" href="#transforming-and-filtering-jobs" title="Permanent link">&para;</a></h4>
-<p>If you need to modify or filter jobs, more information can be found in the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/JobRouterRecipes">Job Router Recipes</a> document.</p>
+<p>If you need to modify or filter jobs, more information can be found in the <a href="../job-router-recipes">Job Router Recipes</a> document.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you need to assign jobs to HTCondor accounting groups, refer to <a href="#htcondor-accounting-groups">this</a> section.</p>
@@ -734,7 +736,7 @@ cms\/Role=production cms.prod
 <ol>
 <li>
 <p>Begin by installing the package htcondor-ce-view:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> yum install htcondor-ce-view
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install htcondor-ce-view
 </pre></div>
 
 
@@ -748,7 +750,7 @@ cms\/Role=production cms.prod
 </li>
 <li>
 <p>Restart the CE service:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~ ] $</span> service condor-ce restart
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service condor-ce restart
 </pre></div>
 
 
@@ -831,20 +833,20 @@ cms\/Role=production cms.prod
 </tbody>
 </table>
 <h3 id="using-htcondor-ce-tools">Using HTCondor-CE tools<a class="headerlink" href="#using-htcondor-ce-tools" title="Permanent link">&para;</a></h3>
-<p>Some of the HTCondor-CE administrative and user tools are documented in <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE">the HTCondor-CE troubleshooting guide</a>.</p>
+<p>Some of the HTCondor-CE administrative and user tools are documented in <a href="../troubleshoot-htcondor-ce">the HTCondor-CE troubleshooting guide</a>.</p>
 <h2 id="validating-htcondor-ce">Validating HTCondor-CE<a class="headerlink" href="#validating-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>There are different ways to make sure that your HTCondor-CE host is working well:</p>
 <ul>
-<li>Perform automated validation by running <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallRSV">RSV</a></li>
-<li>Manually verify your HTCondor-CE using <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE">HTCondor-CE troubleshooting guide</a>; useful tools include:<ul>
-<li><a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_ce_run">condor_ce_run</a></li>
-<li><a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_ce_trace">condor_ce_trace</a></li>
-<li><a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_submit">condor_submit</a></li>
+<li>Perform automated validation by running <a href="../../monitoring/install-rsv">RSV</a></li>
+<li>Manually verify your HTCondor-CE using <a href="../troubleshoot-htcondor-ce">HTCondor-CE troubleshooting guide</a>; useful tools include:<ul>
+<li><a href="../troubleshoot-htcondor-ce#condor_ce_run">condor_ce_run</a></li>
+<li><a href="../troubleshoot-htcondor-ce#condor_ce_trace">condor_ce_trace</a></li>
+<li><a href="../troubleshoot-htcondor-ce#condor_submit">condor_submit</a></li>
 </ul>
 </li>
 </ul>
 <h2 id="troubleshooting-htcondor-ce">Troubleshooting HTCondor-CE<a class="headerlink" href="#troubleshooting-htcondor-ce" title="Permanent link">&para;</a></h2>
-<p>For information on how to troubleshoot your HTCondor-CE, please refer to <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE">the HTCondor-CE troubleshooting guide</a>.</p>
+<p>For information on how to troubleshoot your HTCondor-CE, please refer to <a href="../troubleshoot-htcondor-ce">the HTCondor-CE troubleshooting guide</a>.</p>
 <h2 id="registering-the-ce">Registering the CE<a class="headerlink" href="#registering-the-ce" title="Permanent link">&para;</a></h2>
 <p>To be part of the OSG Production Grid, your CE must be registered in the <a href="https://oim.opensciencegrid.org">OSG Information Management System</a> (OIM). To register your resource:</p>
 <ol>
@@ -857,10 +859,9 @@ cms\/Role=production cms.prod
 <p>Here are some other HTCondor-CE documents that might be helpful:</p>
 <ul>
 <li><a href="../htcondor-ce-overview">HTCondor-CE overview and architecture</a></li>
-<li><a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorBosco">Installing and maintaining HTCondor-CE-Bosco</a></li>
-<li><a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/JobRouterRecipes">Configuring HTCondor-CE job routes</a></li>
-<li><a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TroubleshootingHTCondorCE">The HTCondor-CE troubleshooting guide</a></li>
-<li><a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/SubmittingHTCondorCE">Submitting jobs to HTCondor-CE</a></li>
+<li><a href="../job-router-recipes">Configuring HTCondor-CE job routes</a></li>
+<li><a href="../troubleshoot-htcondor-ce">The HTCondor-CE troubleshooting guide</a></li>
+<li><a href="../submit-htcondor-ce">Submitting jobs to HTCondor-CE</a></li>
 </ul>
 <h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
 <p>The following directories contain the configuration for HTCondor-CE. The directories are parsed in the order presented and thus configuration within the final directory will override configuration specified in the previous directories.</p>
@@ -883,7 +884,7 @@ cms\/Role=production cms.prod
 </tbody>
 </table>
 <p>For a detailed order of the way configuration files are parsed, run the following command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[user@client ~ ] $</span> condor_ce_config_val -config
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_ce_config_val -config
 </pre></div>
 
 
@@ -961,10 +962,10 @@ cms\/Role=production cms.prod
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../data/gridftp/" class="btn btn-neutral float-right" title="GridFTP Server">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../job-router-recipes/" class="btn btn-neutral float-right" title="Job Router Recipes">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../worker-node/install-singularity/" class="btn btn-neutral" title="Singularity"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../htcondor-ce-overview/" class="btn btn-neutral" title="HTCondor-CE Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -992,10 +993,10 @@ cms\/Role=production cms.prod
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../worker-node/install-singularity/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../htcondor-ce-overview/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../data/gridftp/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../job-router-recipes/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
