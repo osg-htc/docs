@@ -121,7 +121,7 @@ Additionally two shared file systems are for grid users to install applications 
 
 ### Worker Node Client
 
-The [Worker Node Client](InstallWNClient) is software installed on each worker node to give programs running on the worker nodes access to grid utilities. While it is technically optional, it is **strongly recommended** that you install it on the gatekeeper and all worker nodes. This can be done as a local installation, in which the software is installed individually on every worker node, or as a shared installation in which the software is installed on one machine that shares it via a global file system to all the worker nodes. All the site configurations below are showing a local installation of the worker node client.
+The [Worker Node Client](worker-node/install-wn) is software installed on each worker node to give programs running on the worker nodes access to grid utilities. While it is technically optional, it is **strongly recommended** that you install it on the gatekeeper and all worker nodes. This can be done as a local installation, in which the software is installed individually on every worker node, or as a shared installation in which the software is installed on one machine that shares it via a global file system to all the worker nodes. All the site configurations below are showing a local installation of the worker node client.
 
 ### Storage Element
 
@@ -129,8 +129,8 @@ A **Storage Element** provides grid users the possibility to read and write larg
 
 There are two types of storage element services provided by OSG which implement SRM v2. See pointers to instructions for these services:
 
--   [BeStMan](BestmanOverview) - Sits in front of any POSIX filesystem. There is also a version which supports xrootd filesystems.
--   [Hadoop](HadoopOverview) - Map-reduce based solution to aggregate off-the-shelf disks into a scalable reliable system.
+-   [BeStMan](data/bestman-overview) - Sits in front of any POSIX filesystem. There is also a version which supports xrootd filesystems.
+-   [Hadoop](data/install-hadoop-2-0-0) - Map-reduce based solution to aggregate off-the-shelf disks into a scalable reliable system.
 
 An SE must run correctly configured Grid Information Providers, Gratia accounting and RSV probes.
 
@@ -144,7 +144,6 @@ These services are supported by the OSG Storage group. Please email <osg-storage
 | SRM interface, No or Static Space Management Support, file replication                       | Multiple servers(&gt;4)       | BeStMan-gateway/HDFS  |
 | SRM interface, Dynamic Space Management Support, file replication, interface to tape backend | Multiple servers (&gt;5)      | dcache                |
 
-To learn more about storage technologies used in OSG, read the [Overview](Documentation.StorageInfrastructureSoftware) and the [Storage Site Administrator Guide](Documentation.StorageSiteAdministrator).
 
 ### VO Management Service
 
