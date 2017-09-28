@@ -20,6 +20,12 @@
     
         
     <url>
+     <loc>https://opensciencegrid.github.io/docs/common/install-best-practices/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>https://opensciencegrid.github.io/docs/common/ca/</loc>
      <lastmod>2017-09-28</lastmod>
      <changefreq>daily</changefreq>
@@ -143,6 +149,12 @@
      <changefreq>daily</changefreq>
     </url>
         
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/other/install-gwms-frontend/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
     
@@ -173,34 +185,6 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/monitoring/install-rsv-gwms-tester/</loc>
-     <lastmod>2017-09-28</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    
-
-    
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/common/install-best-practices/</loc>
-     <lastmod>2017-09-28</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/other/gsissh/</loc>
-     <lastmod>2017-09-28</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/security/lcmaps-voms-authentication/</loc>
-     <lastmod>2017-09-28</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/other/install-gwms-frontend/</loc>
      <lastmod>2017-09-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
