@@ -91,7 +91,7 @@ All of these node types and their services are optional, although OSG requires t
     -   XRootD
         -   [XRootd Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/XrootdOverview): XRootD information, planning, and guides
         -   [Install Xrootd Server](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd): XRootD redirector installation
-        -   [Install BeStMan-Gateway XRootD](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestmanXrootdSE): BeStMan2 SRM server + GridFTP server + XRootD fuse
+        -   [Install BeStMan-Gateway XRootD](data/install-bestman-xrootd): BeStMan2 SRM server + GridFTP server + XRootD fuse
 
 Test OSG Software
 -----------------
