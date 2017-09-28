@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>RPM Signing - OSG Documentation</title>
+  <title>XRootD Client - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "RPM Signing";
-    var mkdocs_page_input_path = "release/signing.md";
-    var mkdocs_page_url = "/release/signing/";
+    var mkdocs_page_name = "XRootD Client";
+    var mkdocs_page_input_path = "data/install-xroot-client.md";
+    var mkdocs_page_url = "/data/install-xroot-client/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -141,15 +141,53 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../data/gridftp/">GridFTP Server</a>
+    <a class="" href="../gridftp/">GridFTP Server</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../data/frontier-squid/">HTTP Cache</a>
+    <a class="" href="../frontier-squid/">HTTP Cache</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../../data/install-xroot-client/">XRootD Client</a>
+    <a class="current" href="./">XRootD Client</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#install-xrootd-client">Install XRootd Client</a></li>
+    
+
+    <li class="toctree-l3"><a href="#introduction">Introduction</a></li>
+    
+
+    <li class="toctree-l3"><a href="#installing-a-xrootd-client">Installing a XRootD Client</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#install-repositories">Install Repositories</a></li>
+        
+            <li><a class="toctree-l4" href="#installing-xrootd-client">Installing XRootD Client</a></li>
+        
+            <li><a class="toctree-l4" href="#installing-xrootd-fuse">Installing XRootD Fuse</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#using-the-xrootd-client-mechanisms">Using the XRootD Client Mechanisms</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#using-the-xrdcp-client">Using the xrdcp client</a></li>
+        
+            <li><a class="toctree-l4" href="#tests-using-the-libxrdposixpreload-library">Tests using the libXrdPosixPreload library</a></li>
+        
+            <li><a class="toctree-l4" href="#tests-using-xrootdfs">Tests using XRootDFS</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#how-to-get-help">How to get Help?</a></li>
+    
+
+    </ul>
                 </li>
     </ul>
 	    </li>
@@ -214,37 +252,23 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../release_series/">OSG Release Series</a>
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../supported_platforms/">Supported Platforms</a>
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../yum-basics/">Yum Basics</a>
-                </li>
-                <li class=" current">
-                    
-    <a class="current" href="./">RPM Signing</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#osg-release-signing-information">OSG Release Signing Information</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#verifying-osgs-rpms">Verifying OSG's RPMs</a></li>
-        
-            <li><a class="toctree-l4" href="#the-osg-packaging-signing-key">The OSG Packaging Signing Key</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../contrib/">Contrib Software</a>
+    <a class="" href="../../release/signing/">RPM Signing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../release/contrib/">Contrib Software</a>
                 </li>
     </ul>
 	    </li>
@@ -274,15 +298,15 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+    <a class="" href="../bestman-overview/">BeStMan Overview</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+    <a class="" href="../bestman-install/">BeStMan Install</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../data/install-bestman-xrootd/">BeStMan Xrootd SE</a>
+    <a class="" href="../install-bestman-xrootd/">BeStMan Xrootd SE</a>
                 </li>
                 <li class="">
                     
@@ -326,14 +350,14 @@
     
       
         
-          <li>Release Information &raquo;</li>
+          <li>Install Guides - Data &raquo;</li>
         
       
     
-    <li>RPM Signing</li>
+    <li>XRootD Client</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/signing.md"
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/install-xroot-client.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -343,61 +367,75 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="osg-release-signing-information">OSG Release Signing Information<a class="headerlink" href="#osg-release-signing-information" title="Permanent link">&para;</a></h1>
-<h2 id="verifying-osgs-rpms">Verifying OSG's RPMs<a class="headerlink" href="#verifying-osgs-rpms" title="Permanent link">&para;</a></h2>
-<p>We use a GPG key to sign our software packages. Normally <code>yum</code> and <code>rpm</code> transparently use the GPG signatures to verify the packages have not been corrupted and were created by us. You get our GPG public key when you install the <code>osg-release</code> RPM.</p>
-<p>If you wish to verify one of our RPMs manually, you can run:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$</span> rpm --checksig -v &lt;NAME.RPM&gt;
+                <h1 id="install-xrootd-client">Install XRootd Client<a class="headerlink" href="#install-xrootd-client" title="Permanent link">&para;</a></h1>
+<h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h1>
+<p>XRootD is a high performance network storage system widely used in high energy physics experiments such as ATLAS and ALICE. The underlying XRootD data transfer protocol provides highly efficient access to ROOT based data files.</p>
+<p>This page provides instructions for using a XRootD client to connect to a XRootD storage system.</p>
+<h1 id="installing-a-xrootd-client">Installing a XRootD Client<a class="headerlink" href="#installing-a-xrootd-client" title="Permanent link">&para;</a></h1>
+<p>As a user you have three different ways to interact with XRootd: a file system mounted with XRootDFS, the application <code>xrdcp</code>, LD_PRELOAD.</p>
+<p>To use a XRootD file system mounted with XRootDFS you don't need any special setup, you will need the XRootD FUSE module.</p>
+<p>To use <code>xrdcp</code> you need to have it in your path (e.g. <code>source $INSTALL_DIR/setup.sh</code>, where <code>$INSTALL_DIR</code> is the XRootD installation directory)</p>
+<p>The use of LD_PRELOAD is not recommended if you have any alternative available.</p>
+<h2 id="install-repositories">Install Repositories<a class="headerlink" href="#install-repositories" title="Permanent link">&para;</a></h2>
+<p>If you have not done so, you will need to install the <a href="../../common/yum">proper yum repositories</a>:</p>
+<h2 id="installing-xrootd-client">Installing XRootD Client<a class="headerlink" href="#installing-xrootd-client" title="Permanent link">&para;</a></h2>
+<p>The XRootD client is needed to access XRootD via <code>xrdcp</code> or via POSIX preload.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-client
 </pre></div>
 
 
-<p>For example:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$</span> rpm --checksig -v globus-core-8.0-2.osg.x86_64.rpm 
-<span class="go">globus-core-8.0-2.osg.x86_64.rpm:</span>
-<span class="go">    Header V3 DSA signature: OK, key ID 824b8603</span>
-<span class="go">    Header SHA1 digest: OK (2b5af4348c548c27f10e2e47e1ec80500c4f85d7)</span>
-<span class="go">    MD5 digest: OK (d11503a229a1a0e02262034efe0f7e46)</span>
-<span class="go">    V3 DSA signature: OK, key ID 824b8603</span>
+<h2 id="installing-xrootd-fuse">Installing XRootD Fuse<a class="headerlink" href="#installing-xrootd-fuse" title="Permanent link">&para;</a></h2>
+<p>The XRootD fuse package is needed to access via XRootDFS.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-fuse
 </pre></div>
 
 
-<h2 id="the-osg-packaging-signing-key">The OSG Packaging Signing Key<a class="headerlink" href="#the-osg-packaging-signing-key" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Location</td>
-<td><code>/etc/pki/rpm-gpg/RPM-GPG-KEY-OSG</code></td>
-</tr>
-<tr>
-<td>Download</td>
-<td><a href="../RPM-GPG-KEY-OSG">GitHub</a></td>
-</tr>
-<tr>
-<td>Download</td>
-<td><a href="https://vdt.cs.wisc.edu/RPM-GPG-KEY-OSG">UW-Madison</a></td>
-</tr>
-<tr>
-<td>Fingerprint</td>
-<td><code>6459 !D9D2 AAA9 AB67 A251  FB44 2110 !B1C8 824B 8603</code></td>
-</tr>
-<tr>
-<td>Key ID</td>
-<td><code>824b8603</code></td>
-</tr>
-</tbody>
-</table>
-<p>You can see the fingerprint for yourself:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$</span> gpg --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
-<span class="go">pub  1024D/824B8603 2011-09-15 OSG Software Team (RPM Signing Key for Koji Packages) &lt;vdt-support@opensciencegrid.org&gt;</span>
-<span class="go">      Key fingerprint = 6459 D9D2 AAA9 AB67 A251  FB44 2110 B1C8 824B 8603</span>
-<span class="go">sub  2048g/28E5857C 2011-09-15</span>
+<h1 id="using-the-xrootd-client-mechanisms">Using the XRootD Client Mechanisms<a class="headerlink" href="#using-the-xrootd-client-mechanisms" title="Permanent link">&para;</a></h1>
+<h2 id="using-the-xrdcp-client">Using the xrdcp client<a class="headerlink" href="#using-the-xrdcp-client" title="Permanent link">&para;</a></h2>
+<p>From the redirector node, you can run this:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;This is a test&quot;</span> &gt;/tmp/test 
+<span class="gp">root@host #</span> xrdcp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/test 
+<span class="gp">root@host #</span> xrdcp xroot://redirector.yourdomain.org:1094//storage/path/test /tmp/test1 
+<span class="gp">root@host #</span> diff /tmp/test1 /tmp/test 
 </pre></div>
+
+
+<p>Users can write in their own space. E.g. a user with Unix account name <code>myuser</code> (the account must exist, eg. in <code>/etc/passwd</code>, etc, on the redirector and on all the data servers) could save a file in XRootD:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;This is a user test&quot;</span> &gt;/tmp/test 
+<span class="gp">root@host #</span> xrdcp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/myuser/test 
+</pre></div>
+
+
+<p>Note that <code>xrdcp</code> creates missing directories.</p>
+<h2 id="tests-using-the-libxrdposixpreload-library">Tests using the libXrdPosixPreload library<a class="headerlink" href="#tests-using-the-libxrdposixpreload-library" title="Permanent link">&para;</a></h2>
+<p>Using XRootD with the POSIX preload library (replace <code>/usr/lib64</code> with <code>/usr/lib</code> on 32-bit systems)</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">export</span> <span class="nv">LD_PRELOAD</span><span class="o">=</span>/usr/lib64/libXrdPosixPreload.so 
+<span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;This is a new test&quot;</span> &gt;/tmp/test 
+<span class="gp">root@host #</span> mkdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
+<span class="gp">root@host #</span> cp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
+<span class="gp">root@host #</span> cp xroot://redirector.yourdomain.org:1094//storage/path/subdir/test /tmp/test1 
+<span class="gp">root@host #</span> diff /tmp/test1 /tmp/test 
+<span class="gp">root@host #</span> rm xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
+<span class="gp">root@host #</span> rmdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
+</pre></div>
+
+
+<h2 id="tests-using-xrootdfs">Tests using XRootDFS<a class="headerlink" href="#tests-using-xrootdfs" title="Permanent link">&para;</a></h2>
+<p>The directory mounted using XRootDFS can be used as any other directory mounted on your file system. All the normal Unix commands should work. You don't need any special setup or library. Try using <code>cp</code>, <code>rm</code>, <code>mv</code>, <code>mkdir</code>, <code>rmdir</code>.</p>
+<p>Assuming your mount is <code>/mnt/xrootd</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;This is a new test&quot;</span> &gt;/tmp/test 
+<span class="gp">root@host #</span> mkdir -p /mnt/xrootd/subdir/sub2
+<span class="gp">root@host #</span> cp /tmp/test /mnt/xrootd/subdir/sub2/test 
+<span class="gp">root@host #</span> cp /mnt/xrootd/subdir/sub2/test /mnt/xrootd/subdir/sub2/test1 
+<span class="gp">root@host #</span> cp /mnt/xrootd/subdir/sub2/test1 /tmp/test1 
+<span class="gp">root@host #</span> diff /tmp/test1 /tmp/test 
+<span class="gp">root@host #</span> rm -r /mnt/xrootd/subdir
+</pre></div>
+
+
+<h1 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h1>
+<p>If you cannot resolve the problem, the best way to get help is by contacting <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#115;&#103;&#45;&#115;&#111;&#102;&#116;&#119;&#97;&#114;&#101;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#111;&#115;&#103;&#45;&#115;&#111;&#102;&#116;&#119;&#97;&#114;&#101;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.
+For a full set of help options, see <a href="../../common/help">Help Procedure</a>.</p>
               
             </div>
           </div>
@@ -405,10 +443,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../contrib/" class="btn btn-neutral float-right" title="Contrib Software">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../other/gsissh/" class="btn btn-neutral float-right" title="GSI-enabled SSH">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../yum-basics/" class="btn btn-neutral" title="Yum Basics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../frontier-squid/" class="btn btn-neutral" title="HTTP Cache"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -436,10 +474,10 @@
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../yum-basics/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../frontier-squid/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../contrib/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../other/gsissh/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
