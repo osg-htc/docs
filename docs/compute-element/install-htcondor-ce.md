@@ -43,8 +43,6 @@ An HTCondor-CE installation consists of the job gateway (i.e., the HTCondor-CE j
     | If your batch system is… | Then run the following command…                       |
     |:-------------------------|:------------------------------------------------------|
     | HTCondor                 | `yum install empty-condor --enablerepo=osg-empty`     |
-    | PBS                      | `yum install empty-torque --enablerepo=osg-empty`     |
-    | SGE                      | `yum install empty-gridengine --enablerepo=osg-empty` |
     | SLURM                    | `yum install empty-slurm --enablerepo=osg-empty`      |
 
 4. If your HTCondor batch system is already installed via non-OSG RPM means, add the line below to `/etc/yum.repos.d/osg.repo`. Otherwise, skip to the next step.

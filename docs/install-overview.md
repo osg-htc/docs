@@ -32,9 +32,9 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 
 
 -   [Security information for OSG signed RPMs](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SignedRPMS)
--   [Using Yum and RPM](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRpmBasics)
--   [Install the OSG repositories](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRepositories)
--   [OSG Software release series](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OSGReleaseSeries) - look here to upgrade from OSG 3.1 to OSG 3.2 or from OSG 3.2 to OSG 3.3
+-   [Using Yum and RPM](release/yum-basics)
+-   [Install the OSG repositories](common/yum)
+-   [OSG Software release series](release/release_series) - look here to upgrade from OSG 3.1 to OSG 3.2 or from OSG 3.2 to OSG 3.3
 -   [Installation best practices](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices)
 -   [Firewalls the complete guide](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/FirewallInformation)
 

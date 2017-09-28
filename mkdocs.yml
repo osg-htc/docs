@@ -35,6 +35,7 @@ pages:
   - 'RSV': 'monitoring/install-rsv.md'
   - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
 - Install Guides - Other:
+  - 'Install Best Practices': 'common/install-best-practices.md'
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
@@ -48,9 +49,6 @@ pages:
   - 'Certificate Tools': 'common/pki-cli.md'
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
   - 'Worker Node Environment': 'worker-node/using-wn.md'
-- In-Progress Docs:
-  - 'CA Updater': 'common/ca_updater.md'
-  - 'Certificate Request Scripts': 'common/cert_scripts.md'
 - Deprecated Software:
   - 'BeStMan Overview': 'data/bestman-overview.md'
   - 'BeStMan Install': 'data/bestman-install.md'
