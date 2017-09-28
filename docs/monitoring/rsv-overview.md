@@ -18,14 +18,47 @@ The components of RSV are:
 Installing and configuring RSV
 ------------------------------
 
--   [InstallRSV](install-rsv) - For Typical Simple RSV Configuration
--   [rsv-control documentation](rsv-control) - rsv-control is a tool to manage RSV
--   [How to configure RSV](configure-rsv) - Beginner and advanced configuration instructions
+-   [Installing RSV](install-rsv) - For Typical Simple RSV Configuration
+-   [Configuring RSV](configure-rsv) - Beginner and advanced configuration instructions
+-   [Managing RSV via rsv-control](rsv-control) - rsv-control is a tool to manage RSV
 
 RSV Troubleshooting
 -------------------
 
-These documents list known issues, and are meant to help admins and GOC staff troubleshoot RSV issues:&lt;br /&gt;
+To get assistance, use the [help procedure](../common/help).
 
--   [RSV v4 - OSG 3 troubleshooting](TroubleshootRsv)
+RSV has a tool to collect information useful for troubleshooting into a tarball that can be shared with the developers and support staff.
+To use it:
+
+``` console
+root@host# rsv-control --profile
+Running the rsv-profiler...
+OSG-RSV Profiler
+Analyzing...
+Making tarball (rsv-profiler.tar.gz)
+```
+
+!!! note
+    If you are getting assistance via the trouble ticket system, you must add a `.txt` extension to the tarball so it can be uploaded:
+
+        :::console
+        root@host# mv rsv-profiler.tar.gz rsv-profiler.tar.gz.txt
+
+### Resending failed Gratia records
+
+If RSV fails to send Gratia records, it will save a copy of the output into `/var/spool/rsv/failed-gratia-scripts`.
+You will be notified if files are in this directory on your HTML status page.
+
+If files appear here, you can attempt to determine why by looking at this log file: `/var/log/rsv/consumers/gratia-consumer.output`.
+(This file is rotated, so the error message may no longer be present.)
+
+Usually this error is spurious - there may have been a problem with the central collector being unavailable, or there may have been a network problem.
+The first step to fix this problem is to try to resend these files.
+To do so, move them back into the `gratia` directory and they will be resent the next time the gratia-script-consumer runs (about every 5 minutes):
+
+``` console
+root@host# mv /var/spool/rsv/failed-gratia-records/* /var/spool/rsv/gratia-consumer/
+```
+
+If that does not solve your problem, follow the [help procedure](../common/help).
 
