@@ -18,8 +18,12 @@ pages:
   - 'Worker Node (OASIS install)': 'worker-node/install-wn-oasis.md'
   - 'CVMFS': 'worker-node/install-cvmfs.md'
   - 'Singularity': 'worker-node/install-singularity.md'
-- Install Guides - Compute:
-  - 'HTCondor-CE': 'compute-element/install-htcondor-ce.md'
+- Compute Element:
+  - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
+  - 'Install HTCondor-CE': 'compute-element/install-htcondor-ce.md'
+  - 'Job Router Recipes': 'compute-element/job-router-recipes.md'
+  - 'Troubleshooting HTCondor-CE': 'compute-element/troubleshoot-htcondor-ce.md'
+  - 'Submitting to HTCondor-CE': 'compute-element/submit-htcondor-ce.md'
 - Install Guides - Data:
   - 'GridFTP Server': 'data/gridftp.md'
   - 'HTTP Cache': 'data/frontier-squid.md'
@@ -28,15 +32,13 @@ pages:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
 - Install Guides - Monitoring:
-  - 'RSV': 'monitoring/rsv.md'
-  - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
+  - 'RSV': 'monitoring/install-rsv.md'
+  - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
 - Install Guides - Other:
   - 'Install Best Practices': 'common/install-best-practices.md'
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
-- Overviews:
-  - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
 - Release Information:
   - 'OSG Release Series': 'release/release_series.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
@@ -60,4 +62,3 @@ markdown_extensions:
   - codehilite
   - toc(permalink=true)
   - osg_markdown.colors
-

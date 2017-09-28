@@ -62,9 +62,9 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 -   Install the compute element (HTCondor-CE and other software):
     -   [Overview and architecture](compute-element/htcondor-ce-overview)
     -   [Install HTCondor-CE](compute-element/install-htcondor-ce)
-    -   [Configure the HTCondor-CE job router](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/JobRouterRecipes), including common recipes
-    -   [Troubleshooting HTCondor-CE installations](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE)
-    -   [Submitting jobs to HTCondor-CE](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SubmittingHTCondorCE)
+    -   [Configure the HTCondor-CE job router](compute-element/job-router-recipes), including common recipes
+    -   [Troubleshooting HTCondor-CE installations](compute-element/troubleshoot-htcondor-ce)
+    -   [Submitting jobs to HTCondor-CE](compute-element/submit-htcondor-ce)
 -   [Troubleshooting osg-configure](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingOsgConfigure)
 
 ### Installing and Configuring Other Nodes ###
@@ -74,10 +74,10 @@ All of these node types and their services are optional, although OSG requires t
 -   [Install Frontier Squid, the HTTP caching proxy service](data/frontier-squid)
 -   RSV monitoring to monitor and report to OSG on the health of your site
     -   [RSV Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvOverview)
-    -   [Install RSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallRSV)
+    -   [Install RSV](monitoring/install-rsv)
     -   [Troubleshooting RSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv)
 -   [Install the GlideinWMS VO Frontend](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallGlideinWMSFrontend) if your want your users’ jobs to run on the OSG
-    -   [Install the RSV GlideinWMS Tester](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallRsvGlideinwmsTester) if you want to test your front-end's ability to submit jobs to sites in the OSG
+    -   [Install the RSV GlideinWMS Tester](monitoring/install-rsv-gwms-tester) if you want to test your front-end's ability to submit jobs to sites in the OSG
 -   Storage element (pick one):
     -   GridFTP
         -   [Install standalone OSG GridFTP](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallOSGGridFTP): GridFTP server
@@ -98,7 +98,7 @@ Test OSG Software
 
 At very least, it is vital to test *manual* submission of jobs from inside and outside of your site through your CE to your batch system. If this process does not work manually, it will probably not work for the glideinWMS pilot factory either.
 
--   [Test job submission into an HTCondor-CE](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SubmittingHTCondorCE)
+-   [Test job submission into an HTCondor-CE](compute-element/submit-htcondor-ce)
 -   [OSG Troubleshooting guide](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingGuide)
 -   [Validating Supported VOs](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/ValidateSupportedVos)
 
