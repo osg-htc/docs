@@ -29,6 +29,7 @@ pages:
 - Install Guides - Data:
   - 'GridFTP Server': 'data/gridftp.md'
   - 'HTTP Cache': 'data/frontier-squid.md'
+  - 'XRootD Client': 'data/install-xroot-client.md'
 - Install Guides - Other:
   - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
