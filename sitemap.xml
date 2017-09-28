@@ -214,6 +214,12 @@
     
         
     <url>
+     <loc>https://opensciencegrid.github.io/docs/release/notes/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>https://opensciencegrid.github.io/docs/release/release_series/</loc>
      <lastmod>2017-09-28</lastmod>
      <changefreq>daily</changefreq>
@@ -310,6 +316,350 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs/common/help/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-3/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-28/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-2-2/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-2/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-1-2/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-1/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-0-2/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.4/release-3-4-0/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-27/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-26/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-25/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-24-2/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-24/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-23/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-22-3/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-22-2/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-22/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-21-3/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-21-2/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-21/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-20-2/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-20/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-19/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-18/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-17-2/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-17/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-16/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-15/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-14/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-13/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-12/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-11/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-10/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-9/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-8/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-7/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-6/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-5/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-4/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-3/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-2/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-1/</loc>
+     <lastmod>2017-09-28</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/3.3/release-3-3-0/</loc>
      <lastmod>2017-09-28</lastmod>
      <changefreq>daily</changefreq>
     </url>

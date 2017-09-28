@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>OSG Release 3.3.27 - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/highlight.css">
+  <link href="../../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "OSG Release 3.3.27";
+    var mkdocs_page_input_path = "release/3.3/release-3-3-27.md";
+    var mkdocs_page_url = "/release/3.3/release-3-3-27/";
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../..">Home</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../../install-overview/">Installation Overview</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../../site-planning/">Site Planning</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Common</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../../common/install-best-practices/">Install Best Practices</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../common/ca/">CA Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../common/yum/">Yum Repos</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Worker Node</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../../worker-node/install-wn/">Worker Node (RPM install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../worker-node/install-cvmfs/">CVMFS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../worker-node/install-singularity/">Singularity</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Compute Element</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../compute-element/job-router-recipes/">Job Router Recipes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Data</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../../data/gridftp/">GridFTP Server</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../data/frontier-squid/">HTTP Cache</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../data/install-xroot-client/">XRootD Client</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Other</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../../other/gsissh/">GSI-enabled SSH</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../other/install-osg-upcoming-software/">OSG upcoming software</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../other/install-cvmfs-stratum1/">Install a CVMFS Stratum 1</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Monitoring</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../../monitoring/rsv-overview/">RSV Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../monitoring/install-rsv/">Install RSV</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../monitoring/advanced-rsv-configuration/">Advanced RSV Configuration</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../monitoring/rsv-control/">Manage RSV via rsv-control</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Release Information</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../notes/">Release Notes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release_series/">OSG Release Series</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../supported_platforms/">Supported Platforms</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../yum-basics/">Yum Basics</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../signing/">RPM Signing</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../contrib/">Contrib Software</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Usage Guides</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../../common/pki-cli/">Certificate Tools</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../worker-node/using-wn/">Worker Node Environment</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Deprecated Software</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../../data/bestman-overview/">BeStMan Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../data/bestman-install/">BeStMan Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../data/install-bestman-xrootd/">BeStMan Xrootd SE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../security/edg-mkgridmap/">EDG-Mkgridmap Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../security/install-gums/">GUMS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../../worker-node/install-glexec/">Worker node glexec Install</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../../common/help/">Get Help</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+  
+    <a class="current" href="./">OSG Release 3.3.27</a>
+  
+  <ul class="subnav">
+      
+    <li class="toctree-l2"><a href="#osg-software-release-3327">OSG Software Release 3.3.27</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#summary-of-changes">Summary of changes</a></li>
+        
+            <li><a class="toctree-l3" href="#known-issues">Known Issues</a></li>
+        
+            <li><a class="toctree-l3" href="#updating-to-the-new-release">Updating to the new release</a></li>
+        
+            <li><a class="toctree-l3" href="#need-help">Need help?</a></li>
+        
+            <li><a class="toctree-l3" href="#detailed-changes-in-this-release">Detailed changes in this release</a></li>
+        
+        </ul>
+    
+
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>OSG Release 3.3.27</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.3/release-3-3-27.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="osg-software-release-3327">OSG Software Release 3.3.27<a class="headerlink" href="#osg-software-release-3327" title="Permanent link">&para;</a></h1>
+<p><strong>Release Date</strong>: 2017-08-08</p>
+<h2 id="summary-of-changes">Summary of changes<a class="headerlink" href="#summary-of-changes" title="Permanent link">&para;</a></h2>
+<p>This release contains:</p>
+<ul>
+<li>HTCondor 8.4.12<ul>
+<li>Updated SELinux profile which is required on Red Hat 7.4</li>
+</ul>
+</li>
+<li>HTCondor-CE<ul>
+<li>Do not hold running jobs with an expired proxy</li>
+<li>Initialize <code>$SPOOL/ceview/vos</code> directory at installation time so that the VO tab functions in CEView before any pilots are received</li>
+<li>Don't warn about not running osg-configure, if osg-configure is not installed</li>
+</ul>
+</li>
+<li>Default configuration improvements for condor-cron<ul>
+<li>Clarified how to override the <code>CONDOR_IDS</code></li>
+<li>Disable the unused GSI authentication that was producing spurious log messages.</li>
+</ul>
+</li>
+<li>Several improvements to osg-configure<ul>
+<li>Ensure that GUMS is configured before trying to query the GUMS server</li>
+<li>Progress updates (such as informing when an operation is expected to take a while) during the user VO file validation are presented to the user rather than being sent to the log file.</li>
+<li>osg-configure will issue same warnings and errors with -v option as it does with the -c option.</li>
+</ul>
+</li>
+<li>Added blahp configuration option for PBS Pro. This option must be used when the disambiguation code does not correctly determine which PBS is in use.</li>
+<li>Relaxed proxy validation in jGlobus to be RFC-3820 compliant in order for proxies to work properly with BeStMan</li>
+</ul>
+<p>These <a href="https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.27%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a> were addressed in this release.</p>
+<p><span class="twiki-macro NOTE"></span> StashCache is supported on EL7 only. <span class="twiki-macro NOTE"></span> xrootd-lcmaps will remain at 1.2.1-1 on EL6.</p>
+<p>Detailed changes are below. All of the documentation can be found in the <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/">Release3</a> area of the TWiki.</p>
+<h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Because the Gratia system has been turned off, RSV emits the following warning: <code>WARNING: Gratia server gratia-osg-prod.opensciencegrid.org:80 not responding to obtain last contact details.</code>. This warning can safely be ignored.</li>
+<li>Using the LCMAPS VOMS will result in a failing "supported VO" RSV test (<a href="https://jira.opensciencegrid.org/browse/SOFTWARE-2763">SOFTWARE-2763</a>). This can be ignored and a fix is targeted for the September release.</li>
+<li>Updates to VOMS admin server require the updated emi-trustmanager-tomcat and re-running the configure script:\ <pre class=rootscreen>[root@client ~] $ /var/lib/trustmanager-tomcat/configure.sh</pre></li>
+<li>VOMS admin server shows an error when modifying/adding/signing AUPs, but all the actions still work.</li>
+<li>After updating OSG-CE to version 3.3-12, please disable and remove OSG Info Services via the following procedure:</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> service osg-info-services stop
+<span class="gp">[root@client ~] $</span> yum erase gip osg-info-services
+</pre></div>
+
+
+<ul>
+<li>The Koji client config has changed in the new version of Koji: `pkgurl<code>http://koji.chtc.wisc.edu/packages` has been replaced by `topurl=http://koji.chtc.wisc.edu` and the Koji client will give a harmless but annoying warning when it finds `pkgurl`. To get rid of the warning, update to osg-build &gt;</code> 1.8.0, rerun `osg-koji setup`, and say 'yes' when asked to replace the Koji configuration file; or, you may make the above change manually.</li>
+<li>A previous version (<code>1.17.0-2.5</code>) of the Gratia probes required changes in the HTCondor configuration to operate properly. Now, these changes need to be reverted to use verison <code>1.17.0-2.6</code> and later of the probes. The lines below are likely to be found in <code>condor_config.local</code> or a new file in <code>/etc/condor/config.d</code> directory. Delete these lines and run <code>condor_reconfig</code>.</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="c"># GlideinWMS Gratia commands</span>
+<span class="nv">PER_JOB_HISTORY_DIR</span> <span class="o">=</span> /var/lib/gratia/data
+<span class="nv">JOBGLIDEIN_ResourceName</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$$</span><span class="s2">([IfThenElse(IsUndefined(TARGET.GLIDEIN_ResourceName), IfThenElse(IsUndefined(TARGET.GLIDEIN_Site), IfThenElse(IsUndefined(TARGET.FileSystemDomain), \&quot;Local Job\&quot;, TARGET.FileSystemDomain), TARGET.GLIDEIN_Site), TARGET.GLIDEIN_ResourceName)])&quot;</span>
+<span class="nv">SUBMIT_EXPRS</span> <span class="o">=</span> <span class="k">$(</span>SUBMIT_EXPRS<span class="k">)</span> JOBGLIDEIN_ResourceName   
+</pre></div>
+
+
+<ul>
+<li>On EL7, your version of voms-proxy-init may come from the voms-clients-java package; this version will continue to make legacy proxies by default. If you want the new behavior, install the voms-clients-cpp package and uninstall the voms-clients-java package.</li>
+</ul>
+<h2 id="updating-to-the-new-release">Updating to the new release<a class="headerlink" href="#updating-to-the-new-release" title="Permanent link">&para;</a></h2>
+<h3 id="update-repositories">Update Repositories<a class="headerlink" href="#update-repositories" title="Permanent link">&para;</a></h3>
+<p>To update to this series, you need <a href="../../../common/yum#install-osg-repositories">install the current OSG repositories</a>.</p>
+<h3 id="update-software">Update Software<a class="headerlink" href="#update-software" title="Permanent link">&para;</a></h3>
+<p>Once the new repositories are installed, you can update to this new release with:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> yum update
+</pre></div>
+
+
+<p><span class="twiki-macro NOTE"></span> Please be aware that running <code>yum update</code> may also update other RPMs. You can exclude packages from being updated using the <code>--exclude=[package-name or glob]</code> option for the <code>yum</code> command.</p>
+<p><span class="twiki-macro NOTE"></span> Watch the yum update carefully for any messages about a <code>.rpmnew</code> file being created. That means that a configuration file had been editted, and a new default version was to be installed. In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a <code>.rpmnew</code> extension. You will need to merge any edits that have made into the <code>.rpmnew</code> file and then move the merged version into place (that is, without the <code>.rpmnew</code> extension). Watch especially for <code>/etc/lcmaps.db</code>, which every site is expected to edit.</p>
+<h2 id="need-help">Need help?<a class="headerlink" href="#need-help" title="Permanent link">&para;</a></h2>
+<p>Do you need help with this release? <a href="../../../common/help">Contact us for help</a>.</p>
+<h2 id="detailed-changes-in-this-release">Detailed changes in this release<a class="headerlink" href="#detailed-changes-in-this-release" title="Permanent link">&para;</a></h2>
+<h3 id="packages">Packages<a class="headerlink" href="#packages" title="Permanent link">&para;</a></h3>
+<p>We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.</p>
+<h4 id="enterprise-linux-6">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=blahp-1.18.32.bosco-1.osg33.el6">blahp-1.18.32.bosco-1.osg33.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.4.12-2.1.osg33.el6">condor-8.4.12-2.1.osg33.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-cron-1.1.3-1.osg33.el6">condor-cron-1.1.3-1.osg33.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=htcondor-ce-2.2.2-1.osg33.el6">htcondor-ce-2.2.2-1.osg33.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=jglobus-2.1.0-9.osg33.el6">jglobus-2.1.0-9.osg33.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-configure-1.9.1-1.osg33.el6">osg-configure-1.9.1-1.osg33.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-test-1.11.1-1.osg33.el6">osg-test-1.11.1-1.osg33.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-tested-internal-3.3-18.osg33.el6">osg-tested-internal-3.3-18.osg33.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-version-3.3.27-1.osg33.el6">osg-version-3.3.27-1.osg33.el6</a></li>
+</ul>
+<h4 id="enterprise-linux-7">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=blahp-1.18.32.bosco-1.osg33.el7">blahp-1.18.32.bosco-1.osg33.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.4.12-2.1.osg33.el7">condor-8.4.12-2.1.osg33.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-cron-1.1.3-1.osg33.el7">condor-cron-1.1.3-1.osg33.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=htcondor-ce-2.2.2-1.osg33.el7">htcondor-ce-2.2.2-1.osg33.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=jglobus-2.1.0-9.osg33.el7">jglobus-2.1.0-9.osg33.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-configure-1.9.1-1.osg33.el7">osg-configure-1.9.1-1.osg33.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-test-1.11.1-1.osg33.el7">osg-test-1.11.1-1.osg33.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-tested-internal-3.3-18.osg33.el7">osg-tested-internal-3.3-18.osg33.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-version-3.3.27-1.osg33.el7">osg-version-3.3.27-1.osg33.el7</a></li>
+</ul>
+<h3 id="rpms">RPMs<a class="headerlink" href="#rpms" title="Permanent link">&para;</a></h3>
+<p>If you wish to manually update your system, you can run yum update against the following packages:</p>
+<div class="codehilite"><pre><span></span>blahp blahp-debuginfo condor condor-all condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-cron condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-test condor-vm-gahp htcondor-ce htcondor-ce-bosco htcondor-ce-client htcondor-ce-collector htcondor-ce-condor htcondor-ce-lsf htcondor-ce-pbs htcondor-ce-sge htcondor-ce-slurm htcondor-ce-view igtf-ca-certs jglobus osg-ca-certs osg-configure osg-configure-bosco osg-configure-ce osg-configure-cemon osg-configure-condor osg-configure-gateway osg-configure-gip osg-configure-gratia osg-configure-infoservices osg-configure-lsf osg-configure-managedfork osg-configure-misc osg-configure-monalisa osg-configure-network osg-configure-pbs osg-configure-rsv osg-configure-sge osg-configure-slurm osg-configure-squid osg-configure-tests osg-test osg-tested-internal osg-tested-internal-gram osg-test-log-viewer osg-version
+</pre></div>
+
+
+<p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
+<h4 id="enterprise-linux-6_1">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span>blahp-1.18.32.bosco-1.osg33.el6
+blahp-debuginfo-1.18.32.bosco-1.osg33.el6
+condor-8.4.12-2.1.osg33.el6
+condor-all-8.4.12-2.1.osg33.el6
+condor-bosco-8.4.12-2.1.osg33.el6
+condor-classads-8.4.12-2.1.osg33.el6
+condor-classads-devel-8.4.12-2.1.osg33.el6
+condor-cream-gahp-8.4.12-2.1.osg33.el6
+condor-cron-1.1.3-1.osg33.el6
+condor-debuginfo-8.4.12-2.1.osg33.el6
+condor-kbdd-8.4.12-2.1.osg33.el6
+condor-procd-8.4.12-2.1.osg33.el6
+condor-python-8.4.12-2.1.osg33.el6
+condor-std-universe-8.4.12-2.1.osg33.el6
+condor-test-8.4.12-2.1.osg33.el6
+condor-vm-gahp-8.4.12-2.1.osg33.el6
+htcondor-ce-2.2.2-1.osg33.el6
+htcondor-ce-bosco-2.2.2-1.osg33.el6
+htcondor-ce-client-2.2.2-1.osg33.el6
+htcondor-ce-collector-2.2.2-1.osg33.el6
+htcondor-ce-condor-2.2.2-1.osg33.el6
+htcondor-ce-lsf-2.2.2-1.osg33.el6
+htcondor-ce-pbs-2.2.2-1.osg33.el6
+htcondor-ce-sge-2.2.2-1.osg33.el6
+htcondor-ce-slurm-2.2.2-1.osg33.el6
+htcondor-ce-view-2.2.2-1.osg33.el6
+jglobus-2.1.0-9.osg33.el6
+osg-configure-1.9.1-1.osg33.el6
+osg-configure-bosco-1.9.1-1.osg33.el6
+osg-configure-ce-1.9.1-1.osg33.el6
+osg-configure-cemon-1.9.1-1.osg33.el6
+osg-configure-condor-1.9.1-1.osg33.el6
+osg-configure-gateway-1.9.1-1.osg33.el6
+osg-configure-gip-1.9.1-1.osg33.el6
+osg-configure-gratia-1.9.1-1.osg33.el6
+osg-configure-infoservices-1.9.1-1.osg33.el6
+osg-configure-lsf-1.9.1-1.osg33.el6
+osg-configure-managedfork-1.9.1-1.osg33.el6
+osg-configure-misc-1.9.1-1.osg33.el6
+osg-configure-monalisa-1.9.1-1.osg33.el6
+osg-configure-network-1.9.1-1.osg33.el6
+osg-configure-pbs-1.9.1-1.osg33.el6
+osg-configure-rsv-1.9.1-1.osg33.el6
+osg-configure-sge-1.9.1-1.osg33.el6
+osg-configure-slurm-1.9.1-1.osg33.el6
+osg-configure-squid-1.9.1-1.osg33.el6
+osg-configure-tests-1.9.1-1.osg33.el6
+osg-test-1.11.1-1.osg33.el6
+osg-tested-internal-3.3-18.osg33.el6
+osg-tested-internal-gram-3.3-18.osg33.el6
+osg-test-log-viewer-1.11.1-1.osg33.el6
+osg-version-3.3.27-1.osg33.el6
+</pre></div>
+
+
+<h4 id="enterprise-linux-7_1">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span>blahp-1.18.32.bosco-1.osg33.el7
+blahp-debuginfo-1.18.32.bosco-1.osg33.el7
+condor-8.4.12-2.1.osg33.el7
+condor-all-8.4.12-2.1.osg33.el7
+condor-bosco-8.4.12-2.1.osg33.el7
+condor-classads-8.4.12-2.1.osg33.el7
+condor-classads-devel-8.4.12-2.1.osg33.el7
+condor-cream-gahp-8.4.12-2.1.osg33.el7
+condor-cron-1.1.3-1.osg33.el7
+condor-debuginfo-8.4.12-2.1.osg33.el7
+condor-kbdd-8.4.12-2.1.osg33.el7
+condor-procd-8.4.12-2.1.osg33.el7
+condor-python-8.4.12-2.1.osg33.el7
+condor-test-8.4.12-2.1.osg33.el7
+condor-vm-gahp-8.4.12-2.1.osg33.el7
+htcondor-ce-2.2.2-1.osg33.el7
+htcondor-ce-bosco-2.2.2-1.osg33.el7
+htcondor-ce-client-2.2.2-1.osg33.el7
+htcondor-ce-collector-2.2.2-1.osg33.el7
+htcondor-ce-condor-2.2.2-1.osg33.el7
+htcondor-ce-lsf-2.2.2-1.osg33.el7
+htcondor-ce-pbs-2.2.2-1.osg33.el7
+htcondor-ce-sge-2.2.2-1.osg33.el7
+htcondor-ce-slurm-2.2.2-1.osg33.el7
+htcondor-ce-view-2.2.2-1.osg33.el7
+jglobus-2.1.0-9.osg33.el7
+osg-configure-1.9.1-1.osg33.el7
+osg-configure-bosco-1.9.1-1.osg33.el7
+osg-configure-ce-1.9.1-1.osg33.el7
+osg-configure-cemon-1.9.1-1.osg33.el7
+osg-configure-condor-1.9.1-1.osg33.el7
+osg-configure-gateway-1.9.1-1.osg33.el7
+osg-configure-gip-1.9.1-1.osg33.el7
+osg-configure-gratia-1.9.1-1.osg33.el7
+osg-configure-infoservices-1.9.1-1.osg33.el7
+osg-configure-lsf-1.9.1-1.osg33.el7
+osg-configure-managedfork-1.9.1-1.osg33.el7
+osg-configure-misc-1.9.1-1.osg33.el7
+osg-configure-monalisa-1.9.1-1.osg33.el7
+osg-configure-network-1.9.1-1.osg33.el7
+osg-configure-pbs-1.9.1-1.osg33.el7
+osg-configure-rsv-1.9.1-1.osg33.el7
+osg-configure-sge-1.9.1-1.osg33.el7
+osg-configure-slurm-1.9.1-1.osg33.el7
+osg-configure-squid-1.9.1-1.osg33.el7
+osg-configure-tests-1.9.1-1.osg33.el7
+osg-test-1.11.1-1.osg33.el7
+osg-tested-internal-3.3-18.osg33.el7
+osg-tested-internal-gram-3.3-18.osg33.el7
+osg-test-log-viewer-1.11.1-1.osg33.el7
+osg-version-3.3.27-1.osg33.el7
+</pre></div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../release-3-3-26/" class="btn btn-neutral float-right" title="OSG Release 3.3.26">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../3.4/release-3-4-0/" class="btn btn-neutral" title="OSG Release 3.4.0"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../3.4/release-3-4-0/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../release-3-3-26/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../../js/theme.js"></script>
+
+</body>
+</html>

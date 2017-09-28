@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Release Notes - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Release Notes";
+    var mkdocs_page_input_path = "release/notes.md";
+    var mkdocs_page_url = "/release/notes/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../..">Home</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../install-overview/">Installation Overview</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../site-planning/">Site Planning</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Common</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/install-best-practices/">Install Best Practices</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/ca/">CA Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/yum/">Yum Repos</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Worker Node</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn/">Worker Node (RPM install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Compute Element</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Data</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/gridftp/">GridFTP Server</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/frontier-squid/">HTTP Cache</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-xroot-client/">XRootD Client</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Other</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-osg-upcoming-software/">OSG upcoming software</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-cvmfs-stratum1/">Install a CVMFS Stratum 1</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Monitoring</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/advanced-rsv-configuration/">Advanced RSV Configuration</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-control/">Manage RSV via rsv-control</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Release Information</span>
+  <ul class="subnav">
+        <li class=" current">
+          
+  
+    <a class="current" href="./">Release Notes</a>
+  
+  <ul class="subnav">
+      
+    <li class="toctree-l3"><a href="#release-notes">Release Notes</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#osg-34">OSG 3.4</a></li>
+        
+            <li><a class="toctree-l4" href="#osg-33">OSG 3.3</a></li>
+        
+        </ul>
+    
+
+  </ul>
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../release_series/">OSG Release Series</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../supported_platforms/">Supported Platforms</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../yum-basics/">Yum Basics</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../signing/">RPM Signing</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../contrib/">Contrib Software</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Usage Guides</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/using-wn/">Worker Node Environment</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Deprecated Software</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-bestman-xrootd/">BeStMan Xrootd SE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/edg-mkgridmap/">EDG-Mkgridmap Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/install-gums/">GUMS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../common/help/">Get Help</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Release Information &raquo;</li>
+        
+      
+    
+    <li>Release Notes</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/notes.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="release-notes">Release Notes<a class="headerlink" href="#release-notes" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since August 9, 2016, release series 3.2.x are not supported anymore. For release notes older than 3.3, please see the <a href="https://github.com/opensciencegrid/docs/tree/master/archive/release-notes/">archives</a>.</p>
+</div>
+<h3 id="osg-34">OSG 3.4<a class="headerlink" href="#osg-34" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Version</th>
+<th align="left">Date</th>
+<th align="left">Details</th>
+<th align="left">Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">3.4.3</td>
+<td align="left">12-Sep-2017</td>
+<td align="left"><a href="../3.4/release-3-4-3">Detailed Notes</a></td>
+<td align="left">TBA</td>
+</tr>
+<tr>
+<td align="left">3.3.28</td>
+<td align="left">12-Sep-2017</td>
+<td align="left"><a href="../3.3/release-3-3-28">Detailed Notes</a></td>
+<td align="left">TBA</td>
+</tr>
+<tr>
+<td align="left">3.4.2-2</td>
+<td align="left">14-Aug-2017</td>
+<td align="left"><a href="../3.4/release-3-4-2-2">Detailed Notes</a></td>
+<td align="left">igtf-ca-certs-1.85, osg-ca-certs-1.65</td>
+</tr>
+<tr>
+<td align="left">3.4.2</td>
+<td align="left">08-Aug-2017</td>
+<td align="left"><a href="../3.4/release-3-4-2">Detailed Notes</a></td>
+<td align="left">TBA</td>
+</tr>
+<tr>
+<td align="left">3.4.1-2</td>
+<td align="left">13-Jul-2017</td>
+<td align="left"><a href="../3.4/release-3-4-1-2">Detailed Notes</a></td>
+<td align="left">igtf-ca-certs-1.84, osg-ca-certs-1.64</td>
+</tr>
+<tr>
+<td align="left">3.4.1</td>
+<td align="left">12-Jul-2017</td>
+<td align="left"><a href="../3.4/release-3-4-1">Detailed Notes</a></td>
+<td align="left">blahp-1.18.30.bosco condor-8.6.4 condor-cron-1.1.2 cvmfs-2.3.5-1.1 globus-gridftp-server-11.8-1.3 gratia-probe-1.18.1 gridftp-dsi-posix-1.4-2 htcondor-ce-2.2.1 lcmaps-plugins-verify-proxy-1.5.9-1.2 osg-build-1.10.1 osg-configure-2.1.0-2 osg-gridftp-3.4-3 osg-test-1.11.0 osg-version-3.4.1 rsv-3.14.2, Upcoming: blahp-1.18.30.bosco condor-8.7.2 glite-ce-cream-client-api-c-1.15.4-2.4</td>
+</tr>
+<tr>
+<td align="left">3.4.0-2</td>
+<td align="left">15-Jun-2017</td>
+<td align="left"><a href="../3.4/release-3-4-0-2">Detailed Notes</a></td>
+<td align="left">IGTF 1.83, VO Package v74</td>
+</tr>
+<tr>
+<td align="left">3.4.0</td>
+<td align="left">14-Jun-2017</td>
+<td align="left"><a href="../3.4/release-3-4-0">Detailed Notes</a></td>
+<td align="left">autopyfactory-2.4.6-4 blahp-1.18.29.bosco-3 bwctl-1.4-7 cctools-4.4.3 condor-8.6.3-1.1 condor-cron-1.1.1-2 cvmfs-2.3.5 cvmfs-config-osg-2.0-2 cvmfs-x509-helper-1.0 frontier-squid-3.5.24-3.1 glideinwms-3.2.19-2 glite-build-common-cpp-3.3.0.2 glite-ce-cream-client-api-c-1.15.4-2.3 glite-ce-wsdl-1.15.1-1.1 glite-lbjp-common-gsoap-plugin-3.2.12-1.1 globus-ftp-client-8.29-1.1 globus-gridftp-osg-extensions-0.3-2 globus-gridftp-server-11.8-1.1 globus-gridftp-server-control-4.1-1.3 gratia-probe-1.17.5 gsi-openssh-7.1p2f-1.2 htcondor-ce-2.2.0 igtf-ca-certs-1.82 javascriptrrd-1.1.1 koji-1.11.0-1.5 lcas-lcmaps-gt4-interface-0.3.1-1.2 lcmaps-1.6.6-1.6 lcmaps-plugins-basic-1.7.0-2 lcmaps-plugins-scas-client-0.5.6 lcmaps-plugins-verify-proxy-1.5.9-1.1 lcmaps-plugins-voms-1.7.1-1.4 llrun-0.1.3-1.3 mash-0.5.22-3 myproxy-6.1.18-1.4 nuttcp-6.1.2 osg-build-1.10.0 osg-ca-certs-1.62 osg-ca-certs-updater-1.4 osg-ca-generator-1.2.0 osg-ca-scripts-1.1.6 osg-ce-3.4-2 osg-configure-2.0.0-3 osg-control-1.1.0 osg-gridftp-3.4-2 osg-gridftp-xrootd-3.4 osg-oasis-7-9 osg-pki-tools-1.2.20 osg-system-profiler-1.4.0 osg-test-1.10.1 osg-tested-internal-3.4-2 osg-update-vos-1.4.0 osg-version-3.4.0 osg-vo-map-0.0.2 osg-wn-client-3.4 owamp-3.2rc4-2 pegasus-4.7.4-1.1 rsv-3.14.0-2 rsv-gwms-tester-1.1.2 stashcache-0.7-2 uberftp-2.8-2.1 vo-client-73 voms-2.0.14-1.3 xacml-1.5.0 xrootd-4.6.1 xrootd-dsi-3.0.4-22 xrootd-lcmaps-1.3.3-3 xrootd-voms-plugin-0.4.0, Upcoming: glideinwms-3.3.2-2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="osg-33">OSG 3.3<a class="headerlink" href="#osg-33" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Version</th>
+<th align="left">Date</th>
+<th align="left">Details</th>
+<th align="left">Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">3.3.28</td>
+<td align="left">12-Sep-2017</td>
+<td align="left"><a href="../3.3/release-3-3-28">Detailed Notes</a></td>
+<td align="left">TBA</td>
+</tr>
+<tr>
+<td align="left">3.3.27</td>
+<td align="left">08-AUg-2017</td>
+<td align="left"><a href="../3.3/release-3-3-27">Detailed Notes</a></td>
+<td align="left">TBA</td>
+</tr>
+<tr>
+<td align="left">3.4.1-2, 3.3.26-2</td>
+<td align="left">13-Jul-2017</td>
+<td align="left"><a href="../3.4/release-3-4-1-2">Detailed Notes</a></td>
+<td align="left">igtf-ca-certs-1.84, osg-ca-certs-1.64</td>
+</tr>
+<tr>
+<td align="left">3.3.26</td>
+<td align="left">12-Jul-2017</td>
+<td align="left"><a href="../3.3/release-3-3-26">Detailed Notes</a></td>
+<td align="left">blahp-1.18.30.bosco condor-cron-1.1.2 cvmfs-2.3.5-1.1 globus-gridftp-server-11.8-1.2 gratia-probe-1.18.1 gridftp-dsi-posix-1.4-2 hadoop-2.0.0+1612-1.cdh4.7.1.p0.12.7 htcondor-ce-2.2.1 lcmaps-plugins-verify-proxy-1.5.9-1.2 osg-build-1.10.1 osg-configure-1.9.0 osg-gridftp-3.3-5 osg-test-1.11.0 osg-version-3.3.26 rsv-3.14.2</td>
+</tr>
+<tr>
+<td align="left">3.3.25</td>
+<td align="left">14-Jun-2017</td>
+<td align="left"><a href="../3.3/release-3-3-25">Detailed Notes</a></td>
+<td align="left">emi-trustmanager-tomcat-3.0.0-15 glideinwms-3.2.19 globus-xio-5.12-1.2 htcondor-ce-2.2.0 lcmaps-plugins-voms-1.7.1-1.4 osg-build-1.10.0 osg-ca-scripts-1.1.6 osg-ce-3.3-13 osg-configure-1.8.1-2 osg-gridftp-3.3-4 osg-update-vos-1.4.0 stashcache-0.7-2 xrootd-4.6.1 xrootd-lcmaps-1.3.3-3</td>
+</tr>
+<tr>
+<td align="left">3.3.24-2</td>
+<td align="left">16-May-2017</td>
+<td align="left"><a href="../3.3/release-3-3-24-2">Detailed Notes</a></td>
+<td align="left">VO Package v73</td>
+</tr>
+<tr>
+<td align="left">3.3.24</td>
+<td align="left">09-May-2017</td>
+<td align="left"><a href="../3.3/release-3-3-24">Detailed Notes</a></td>
+<td align="left">cvmfs-x509-helper 1.0, gratia-probe 1.17.5, lcmaps 1.6.6-1.3, osg-build 1.9.0, osg-configure 1.7.0, osg-wn-client 3.3-7; Upcoming: HTCondor 8.6.2, GlideinWMS 3.3.2</td>
+</tr>
+<tr>
+<td align="left">3.3.23</td>
+<td align="left">11-Apr-2017</td>
+<td align="left"><a href="../3.3/release-3-3-23">Detailed Notes</a></td>
+<td align="left">lcmaps 1.6.6-1.2, HTCondor-CE 2.1.5, CVMFS 2.3.5, Pegasus 4.7.4, OSG-CE 3.3-12; Upcoming: Frontier squid 3.5.24-3.1</td>
+</tr>
+<tr>
+<td align="left">3.3.22-3</td>
+<td align="left">10-Apr-2017</td>
+<td align="left"><a href="../3.3/release-3-3-22-3">Detailed Notes</a></td>
+<td align="left">IGTF 1.82</td>
+</tr>
+<tr>
+<td align="left">3.3.22-2</td>
+<td align="left">28-Mar-2017</td>
+<td align="left"><a href="../3.3/release-3-3-22-2">Detailed Notes</a></td>
+<td align="left">VO Package v72</td>
+</tr>
+<tr>
+<td align="left">3.3.22</td>
+<td align="left">14-Mar-2017</td>
+<td align="left"><a href="../3.3/release-3-3-22">Detailed Notes</a></td>
+<td align="left">BLAHP 1.18.29, CVMFS 2.3.3, emi-trustmanager 3.0.3-14, GlideinWMS 3.2.18, gratia-probe 1.17.4, HTCondor 8.6.1, HTCondor-CE 2.1.4, VOMS 2.0.14-1.3, <strike>XRootD 4.6.0</strike>; Upcoming: frontier-squid 3.5.24, HTCondor 8.6.1</td>
+</tr>
+<tr>
+<td align="left">3.3.21-3</td>
+<td align="left">02-Mar-2017</td>
+<td align="left"><a href="../3.3/release-3-3-21-3">Detailed Notes</a></td>
+<td align="left">IGTF 1.81, VO Package v71</td>
+</tr>
+<tr>
+<td align="left">3.3.21-2</td>
+<td align="left">16-Feb-2017</td>
+<td align="left"><a href="../3.3/release-3-3-21-2">Detailed Notes</a></td>
+<td align="left">IGTF 1.80</td>
+</tr>
+<tr>
+<td align="left">3.3.21</td>
+<td align="left">14-Feb-2017</td>
+<td align="left"><a href="../3.3/release-3-3-21">Detailed Notes</a></td>
+<td align="left">CVMFS 2.3.2 patched, GlideinWMS 3.2.17, HTCondor 8.4.11, HTCondor-CE 2.1.2, osg-configure 1.6.1, osg-update-vos 1.3.0, RSV-PerfSONAR 1.2.1; Upcoming: Singularity 2.2.1</td>
+</tr>
+<tr>
+<td align="left">3.3.20-2</td>
+<td align="left">26-Jan-2017</td>
+<td align="left"><a href="../3.3/release-3-3-20-2">Detailed Notes</a></td>
+<td align="left">IGTF 1.79, VO Package v70</td>
+</tr>
+<tr>
+<td align="left">3.3.20</td>
+<td align="left">10-Jan-2017</td>
+<td align="left"><a href="../3.3/release-3-3-20">Detailed Notes</a></td>
+<td align="left">HTCondor 8.4.10, gratia-probe 1.17.2, XRootD 4.5.0, osg-configure 1.5.4, VOMS 2.0.14; Upcoming: HTCondor 8.5.8, Singularity 2.2, frontier-squid 3.5.23-3.1</td>
+</tr>
+<tr>
+<td align="left">3.3.19</td>
+<td align="left">13-Dec-2016</td>
+<td align="left"><a href="../3.3/release-3-3-19">Detailed Notes</a></td>
+<td align="left">HTCondor-CE 2.1.1, osg-configure 1.5.2, gratia-probe 1.17.0-2.6, Upcoming: frontier-squid 3.5.22-2.1</td>
+</tr>
+<tr>
+<td align="left">3.3.18</td>
+<td align="left">08-Nov-2016</td>
+<td align="left"><a href="../3.3/release-3-3-18">Detailed Notes</a></td>
+<td align="left">GlideinWMS 3.2.16, edg-mkgridmap 4.0.4, osg-pki-tools 1.2.20, BLAHP 1.18.28, HTCondor-CE 2.0.11, gratia-probe 1.17.0-2.5</td>
+</tr>
+<tr>
+<td align="left">3.3.17-2</td>
+<td align="left">19-Oct-2016</td>
+<td align="left"><a href="../3.3/release-3-3-17-2">Detailed Notes</a></td>
+<td align="left">IGTF 1.78</td>
+</tr>
+<tr>
+<td align="left">3.3.17</td>
+<td align="left">13-Oct-2016</td>
+<td align="left"><a href="../3.3/release-3-3-17">Detailed Notes</a></td>
+<td align="left">HTCondor 8.4.9, HTCondor-CE 2.0.10, CVMFS 2.3.2, XRootD 4.4.0, frontier-squid 2.7.STABLE9-27, gratia-probe 1.17.0, osg-control 1.1.0, VO Package v69, HTCondor 8.5.7 in upcoming</td>
+</tr>
+<tr>
+<td align="left">3.3.16</td>
+<td align="left">13-Sep-2016</td>
+<td align="left"><a href="../3.3/release-3-3-16">Detailed Notes</a></td>
+<td align="left">Globus update, BLAHP 1.18.25, GlideinWMS 3.2.15, HTCondor-CE 2.0.8, EL7 support complete, RSV GlideinWMS Tester, VO Package v68, osg-pki-tools 1.2.19, lcas-lcmaps-gt4-interface 0.3.1</td>
+</tr>
+<tr>
+<td align="left">3.3.15</td>
+<td align="left">09-Aug-2016</td>
+<td align="left"><a href="../3.3/release-3-3-15">Detailed Notes</a></td>
+<td align="left">IGTF 1.76, VO Package v67, BLAHP 1.18.23, XRootD-HDFS 1.8.8, gridFTP 7.30-1.3, gums 1.5.2-4, RSV 3.13.1, GSI-OpenSSH 7.1p2f, VOMS 2.0.12-3.3, XRootD-DSI 3.0.4-20, EL7: voms-admin-client 2.0.17-1.1, Upcoming: HTCondor 8.5.6</td>
+</tr>
+<tr>
+<td align="left">3.3.14</td>
+<td align="left">12-Jul-2016</td>
+<td align="left"><a href="../3.3/release-3-3-14">Detailed Notes</a></td>
+<td align="left">IGTF 1.75, HTCondor 8.4.8, GlideinWMS 3.2.14.1, HTCondor-CE 2.0.7, BLAHP 1.18.21, gridFTP 7.30-1.2, osg-configure 1.4.1, xrootd-voms-plugin 0.4.0, osg-system-profiler 1.4.0, gridFTP-HDFS 0.5.4, cvmfs-config-osg 1.2.5, bigtop-utils, osg-voms 3.3-3</td>
+</tr>
+<tr>
+<td align="left">3.3.13</td>
+<td align="left">14-Jun-2016</td>
+<td align="left"><a href="../3.3/release-3-3-13">Detailed Notes</a></td>
+<td align="left">IGTF 1.74, CVMFS 2.2.3, HTCondor 8.4.7, blahp 1.18.20, RSV 3.13.0-3, GUMS on EL7, BeStMan2 2.3.0, Upcoming: HTCondor 8.5.5, CVMFS 2.3.0</td>
+</tr>
+<tr>
+<td align="left">3.3.12</td>
+<td align="left">10-May-2016</td>
+<td align="left"><a href="../3.3/release-3-3-12">Detailed Notes</a></td>
+<td align="left">VO Package v66, BeStMan 2.3.0 on EL7, CVMFS 2.2.2, Pegasus 4.6.1, HTCondor 8.4.6, HTCondor CE 2.0.5, HTCondor CE BOSCO Support, osg-configure 1.4.0, blahp 1.18.19, Dropped GRAM packages from OSG CE, Upcoming: HTCondor 8.5.4</td>
+</tr>
+<tr>
+<td align="left">3.3.11</td>
+<td align="left">12-Apr-2016</td>
+<td align="left"><a href="../3.3/release-3-3-11">Detailed Notes</a></td>
+<td align="left">VO Package v65, IGTF 1.73, XRootD 4.3.0, HDFS 2.0.0+1612, GlideinWMS 3.2.13, HTCondor CE 2.0.4, BLAHP 1.18.18, osg-pki-tools 1.2.15, HTCondor 8.4.5, Upcoming: HTCondor 8.5.3</td>
+</tr>
+<tr>
+<td align="left">3.3.10</td>
+<td align="left">08-Mar-2016</td>
+<td align="left"><a href="../3.3/release-3-3-10">Detailed Notes</a></td>
+<td align="left">VO Package v64, IGTF 1.72, osg-ca-certs-updater 1.4, BLAHP 1.18.17, osg-configure 1.2.6, HTCondor 8.4.4, GUMS 1.5.2, Gratia probes 1.15.0, StashCache 0.6, AutoPyFactory 2.4.6, XRootD-HDFS 1.8.7, GridFTP-HDFS 3.3, HTCondor CE 2.0.2, Upcoming: HTCondor 8.5.2</td>
+</tr>
+<tr>
+<td align="left">3.3.9</td>
+<td align="left">09-Feb-2016</td>
+<td align="left"><a href="../3.3/release-3-3-9">Detailed Notes</a></td>
+<td align="left">GSI-OpenSSH 5.7, glideinWMS 3.2.12, XRootD LCMAPS 1.2.1, XRootD HDFS plugin 1.8.6, lcmaps-plugins-scas-client 0.5.6, IGTF 1.71, VO Package v63, VOMS admin 2.7.0, RSV-perfsonar 1.1.2; Upcoming: CVMFS 2.2.0, CVMFS over StashCache</td>
+</tr>
+<tr>
+<td align="left">3.3.8</td>
+<td align="left">12-Jan-2016</td>
+<td align="left"><a href="../3.3/release-3-3-8">Detailed Notes</a></td>
+<td align="left">HTCondor CE 2.0, HTCondor 8.4.3, cctools 4.4.3, VO Package v62, MyProxy 6.1.15, gratia 1.16.2, osg-pki-tools 1.2.14, condor-cron 1.0.11, HTCondor 8.5.1 in upcoming</td>
+</tr>
+<tr>
+<td align="left">3.3.7</td>
+<td align="left">15-Dec-2015</td>
+<td align="left"><a href="../3.3/release-3-3-7">Detailed Notes</a></td>
+<td align="left">osg-pki-tools-1.2.13</td>
+</tr>
+<tr>
+<td align="left">3.3.6</td>
+<td align="left">08-Dec-2015</td>
+<td align="left"><a href="../3.3/release-3-3-6">Detailed Notes</a></td>
+<td align="left">IGTF 1.70, voms-admin-server-2.7.0-1.17, condor-8.4.2-1.2</td>
+</tr>
+<tr>
+<td align="left">3.3.5</td>
+<td align="left">19-Nov-2015</td>
+<td align="left"><a href="../3.3/release-3-3-5">Detailed Notes</a></td>
+<td align="left">HTCondor CE 1.20, HTCondor 8.4.2, lcmaps-plugins-scas-client 0.5.5, osg-configure 1.2.4, RSV 3.12.5</td>
+</tr>
+<tr>
+<td align="left">3.3.4</td>
+<td align="left">10-Nov-2015</td>
+<td align="left"><a href="../3.3/release-3-3-4">Detailed Notes</a></td>
+<td align="left">CILogon CA certs, CVMFS support approved repos, lcmaps process tracking, osg-ca-cert-updater 1.3, RSV perfSONAR probe, RSV 3.12.0, EL7: Frontier Squid and MyProxy</td>
+</tr>
+<tr>
+<td align="left">3.3.3</td>
+<td align="left">03-Nov-2015</td>
+<td align="left"><a href="../3.3/release-3-3-3">Detailed Notes</a></td>
+<td align="left">IGTF 1.69</td>
+</tr>
+<tr>
+<td align="left">3.3.2</td>
+<td align="left">13-Oct-2015</td>
+<td align="left"><a href="../3.3/release-3-3-2">Detailed Notes</a></td>
+<td align="left">GlideinWMS 3.2.11.2, XRootD 4.2.3, HTCondor 8.4.0, StashCache 0.6, GUMS 1.5.1, HTCondor-CE 1.16, GIP 1.3.11, osg-configure 1.2.2, RSV 3.10.4, lcmaps-plugins-mount-under-scratch, edg-mkgridmap 4.0.3, IGTF 1.68</td>
+</tr>
+<tr>
+<td align="left">3.3.1</td>
+<td align="left">08-Sep-2015</td>
+<td align="left"><a href="../3.3/release-3-3-1">Detailed Notes</a></td>
+<td align="left">GUMS 1.5.0, HTCondor 8.3.8, HTCondor CE 1.15, gridFTP-HDFS checksum verification, IGTF 1.67, StashCache 0.4</td>
+</tr>
+<tr>
+<td align="left">3.3.0</td>
+<td align="left">11-Aug-2015</td>
+<td align="left"><a href="../3.3/release-3-3-0">Detailed Notes</a></td>
+<td align="left">EL7 support for worker nodes, XRootD 4.2.2, 2 patches to HTCondor 8.3.6, lcmaps-plugins-verify-proxy 1.5.7, lcmaps-plugins-scas-client 0.5.5, VO Package v61</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../release_series/" class="btn btn-neutral float-right" title="OSG Release Series">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../monitoring/install-rsv-gwms-tester/" class="btn btn-neutral" title="RSV GlideinWMS Tester"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../monitoring/install-rsv-gwms-tester/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../release_series/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
