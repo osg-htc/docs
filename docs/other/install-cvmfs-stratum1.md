@@ -60,7 +60,7 @@ root@host # yum -y install frontier-awstats
 Increase the default number of open file descriptors:
 
 ```console
-root@host # echo -e "\*\t\t-\tnofile\t\t16384" >>/etc/security/limits.conf 
+root@host # echo -e "*\t\t-\tnofile\t\t16384" >>/etc/security/limits.conf 
 root@host # ulimit -n 16384
 ```
 <br>
@@ -78,7 +78,7 @@ Put the following in `/etc/cron.d/cvmfs`:
 ```
 0,15,30,45 * * * * root test -d /srv/cvmfs || exit;cvmfs_server snapshot -ai 
 6 1 * * * root cvmfs_server gc -af 2>/dev/null || true
-0 9 * * * root find /srv/cvmfs/\*.**/data/txn -name "**.*" -mtime +2 2>/dev/null|xargs rm -f
+0 9 * * * root find /srv/cvmfs/*.*/data/txn -name "*.*" -mtime +2 2>/dev/null|xargs rm -f
 ```
 <br>
 Also, put the following in `/etc/logrotate.d/cvmfs`:
@@ -109,9 +109,9 @@ If you will be serving opensciencegrid.org repositories, you have to allow for o
 
 ```
 RewriteEngine On 
-RewriteRule ^/cvmfs/([^./]**)/(.**)$ /cvmfs/$1.opensciencegrid.org/$2 
-RewriteRule ^/cvmfs/([^/]+)/api/(.**)$ /cvmfs/$1/api/$2 [PT] 
-RewriteRule ^/cvmfs/(.**)$ /srv/cvmfs/$1 
+RewriteRule ^/cvmfs/([^./]*)/(.*)$ /cvmfs/$1.opensciencegrid.org/$2 
+RewriteRule ^/cvmfs/([^/]+)/api/(.*)$ /cvmfs/$1/api/$2 [PT] 
+RewriteRule ^/cvmfs/(.*)$ /srv/cvmfs/$1 
 <Directory "/srv/cvmfs"> 
   Options -MultiViews +FollowSymLinks -Indexes 
   AllowOverride All 
