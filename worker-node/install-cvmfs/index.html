@@ -685,8 +685,8 @@ The version of CVMFS installed should be &gt;= 2.4.1</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
 <ul>
-<li><strong>User IDs:</strong> If they do not exist already, the installation will create the <code>cvmfs</code> Linux user</li>
-<li><strong>Group IDs:</strong> If they do not exist already, the installation will create the Linux users <code>cvmfs</code> and <code>fuse</code></li>
+<li><strong>User IDs:</strong> If it does not exist already, the installation will create the <code>cvmfs</code> Linux user</li>
+<li><strong>Group IDs:</strong> If they do not exist already, the installation will create the Linux groups <code>cvmfs</code> and <code>fuse</code></li>
 <li><strong>Network ports:</strong> You will need network access to a local squid server such as the <a href="../../data/frontier-squid/">squid distributed by OSG</a>. The squid will need out-bound access to cvmfs stratum 1 servers.</li>
 <li><strong>Host choice:</strong> -  Sufficient (~20GB+20%) cache space reserved, preferably in a separate filesystem (details <a href="#configuring-cvmfs">below</a>)</li>
 <li><strong>FUSE</strong>: CVMFS requires FUSE</li>
