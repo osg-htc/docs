@@ -15,8 +15,8 @@ Before Starting
 
 Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
--   **User IDs:** If they do not exist already, the installation will create the `cvmfs` Linux user
--   **Group IDs:** If they do not exist already, the installation will create the Linux users `cvmfs` and `fuse`
+-   **User IDs:** If it does not exist already, the installation will create the `cvmfs` Linux user
+-   **Group IDs:** If they do not exist already, the installation will create the Linux groups `cvmfs` and `fuse`
 -   **Network ports:** You will need network access to a local squid server such as the [squid distributed by OSG](../data/frontier-squid.md). The squid will need out-bound access to cvmfs stratum 1 servers.
 -   **Host choice:** -  Sufficient (~20GB+20%) cache space reserved, preferably in a separate filesystem (details [below](#configuring-cvmfs))
 -   **FUSE**: CVMFS requires FUSE
