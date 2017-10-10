@@ -177,7 +177,7 @@ Run the validation as an unprivileged user; when invoked as root, `globus-url-co
 Getting Help
 ------------
 
-For assistance, please use [this page](https://twiki.opensciencegrid.org/bin/view/Documentation/HelpProcedure).
+For assistance, please use [this page](../common/help).
 
 Reference
 ---------

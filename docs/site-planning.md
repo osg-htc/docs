@@ -66,7 +66,7 @@ You must determine your security policy with regard to Unix ID management on the
 
 You must choose the OS (Red Hat Enterprise Linux derivative), the batch system (Condor, PBS, LSF, SGE, and Slurm are presently supported), and the network architecture of your cluster. The default network assumption is public/private with NAT so you will need to advertise your architecture by changing some settings by hand if yours isn't like this. In addition, there are some configuration choices, including one that avoids all NFS exports from the CE to the compute cluster (NFS-lite).
 
-The CE hosts information provider(s) and monitoring services, most of which are configured correctly by default. We require all OSG sites to deploy Gratia, the OSG accounting system. Your site thus sends accounting records to OSG about jobs run on your site and data transfers involving your site. Aggregated summaries of this information can be viewed via the [Gratia displays](http://gratia-osg.fnal.gov:8880/gratia-reporting/).
+The CE hosts information provider(s) and monitoring services, most of which are configured correctly by default. We require all OSG sites to deploy Gratia, the OSG accounting system. Your site thus sends accounting records to OSG about jobs run on your site and data transfers involving your site. Aggregated summaries of this information can be viewed via the [GRACC](https://gracc.opensciencegrid.org).
 
 
 <table>
@@ -164,9 +164,7 @@ We recommend to use a dedicated server for hosting the shared file system. The e
 
 #### NFS Warning
 
-NFS is known to be an *easy* but never the less %RED%inadequate%ENDCOLOR% choice for all but the smallest sites! If you want to use NFS you should read the chapter *"Optimizing NFS Performance"* in the [http://nfs.sourceforge.net/nfs-howto/ Linux NFS HowTo](http://nfs.sourceforge.net/nfs-howto/ Linux NFS HowTo). Software partitions that can be locally installed, such as OSG\_GRID, should be locally installed and not shared unless you have an enterprise-class NFS server.
-
-Condor provides mechanisms which can be used to greatly minimize NFS usage [NFSLite](http://vdt.cs.wisc.edu/releases/2.0.0/notes/Globus-CondorNFSLite-Setup.html). This package makes it unnecessary to have NFS-mounted **HOME** directories on all the worker nodes. Security is also improved because user proxies will not be sent across NFS in the clear. The running job will only have access to grid or voms proxies running at the same time on the same worker node as the job itself avoiding identity theft.
+NFS is known to be an *easy* but never the less %RED%inadequate%ENDCOLOR% choice for all but the smallest sites! If you want to use NFS you should read the chapter *"Optimizing NFS Performance"* in the <http://nfs.sourceforge.net/nfs-howto/>. Software partitions that can be locally installed, such as OSG\_GRID, should be locally installed and not shared unless you have an enterprise-class NFS server.
 
 ### Compute and Storage Element
 

@@ -353,7 +353,6 @@ The version of the CA package ca be found at `/etc/grid-security/certificates/IN
 The OSG CA Distribution contains:
 
 -   [IGTF Distribution of Authority Root Certificates](http://dist.eugridpma.info/distribution/igtf/current/) (CAs accredited by the [International Grid Trust Federation](http://igtf.net/))
--   [Purdue TeraGrid CA](http://tg-ca.purdue.teragrid.org:8080/ejbca/)
 
 Details of CAs in OSG distribution can be found [here](https://twiki.opensciencegrid.org/bin/view/Documentation/CaDistribution#Contents). For additional details what is in the current release, see the [distribution site](http://repo.grid.iu.edu/pacman/cadist/) and [change log](http://repo.grid.iu.edu/pacman/cadist/CHANGES).
 
@@ -417,4 +416,4 @@ Some examples about verifying the certificates:
 Related software:
 
 -   Description, manual and examples of [osg-ca-manage](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaManage)
--   [osg-ca-certs-updater](ca_updater)
+-   [osg-ca-certs-updater](osg-ca-certs-updater)
