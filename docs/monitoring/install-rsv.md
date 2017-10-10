@@ -165,7 +165,7 @@ Normally, the HTCondor-Cron scheduler runs RSV periodically. However, you can ru
 [root@client ~] # rsv-control --run --all-enabled
 ```
 
-If successful, results will be available from your local RSV web server (e.g., <http://localhost/rsv>) and, if enabled (which is the default) on [MyOSG](http://myosg.grid.iu.edu/).
+If successful, results will be available from your local RSV web server (e.g., `http://localhost/rsv`) and, if enabled (which is the default) on [MyOSG](http://myosg.grid.iu.edu/).
 
 You can also run the metrics individually or pass special parameters as explained in the [rsv-control document](rsv-control).
 
@@ -182,7 +182,7 @@ Logs and configuration:
 |:-------------------|:-------------------------|:------------------------------------------------|
 | Metric log files   | `/var/log/rsv/metrics`   |                                                 |
 | Consumer log files | `/var/log/rsv/consumers` |                                                 |
-| HTML files         | `/usr/share/rsv/www/`    | Available at <http://your.host.example.com/rsv> |
+| HTML files         | `/usr/share/rsv/www/`    | Available at `http://your.host.example.com/rsv` |
 
 | File Description      | Location                                    | Comment                                                                                       |
 |:----------------------|:--------------------------------------------|:----------------------------------------------------------------------------------------------|

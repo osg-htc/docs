@@ -1,22 +1,19 @@
 env:
   global:
   - GIT_NAME="'Markdown autodeploy'"
-  - GIT_EMAIL="djw8605@gmail.com"
+  - GIT_EMAIL="goc@opensciencegrid.org"
   - GH_REF="git@github.com:opensciencegrid/docs.git"
 language: python
 before_script:
 - pip install mkdocs
 - pip install MarkdownHighlight
 - pip install pygments
+- pip install linkchecker
+- pip install requests==2.9.2 # https://github.com/wummel/linkchecker/issues/649
 script:
-- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then openssl aes-256-cbc -K $encrypted_75e9e0f098a4_key -iv $encrypted_75e9e0f098a4_iv -in deploy-key.enc -out deploy_key -d; chmod 600 deploy_key; eval `ssh-agent -s`; ssh-add deploy_key; fi
-- git config user.name "Automatic Publish"
-- git config user.email "djw8605@gmail.com"
-- git remote add gh-token "${GH_REF}";
-- if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then PYTHONPATH=src/ mkdocs -v build; fi
-- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then git fetch gh-token && git fetch gh-token gh-pages:gh-pages; fi
-- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then echo "Pushing to github"; PYTHONPATH=src/ mkdocs gh-deploy -v --clean --remote-name gh-token; git push gh-token gh-pages; fi;
-
+- if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "${TRAVIS_BRANCH}" == "master" ]; then \
+  openssl aes-256-cbc -K $encrypted_75e9e0f098a4_key -iv $encrypted_75e9e0f098a4_iv -in deploy-key.enc -out deploy_key -d \
+  && ./travis/run_on_non_pull_requests.sh; else ./travis/run_on_pull_requests.sh; fi
 
 notifications:
   slack:

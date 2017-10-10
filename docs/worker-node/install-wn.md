@@ -70,7 +70,7 @@ To verify functionality of the worker node client, you will need to submit a tes
 How to get Help?
 ----------------
 
-To get assistance please use this [Help Procedure](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HelpProcedure).
+To get assistance please use this [Help Procedure](../common/help).
 
 
 Reference
