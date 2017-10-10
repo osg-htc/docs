@@ -75,31 +75,31 @@ We added or updated the following packages to the production OSG yum repository.
 
 #### Enterprise Linux 6
 
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.6.6-1.osg34.el6](condor-8.6.6-1.osg34.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=globus-gridftp-server-control-5.2-1.1.osg34.el6](globus-gridftp-server-control-5.2-1.1.osg34.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=gsi-openssh-7.3p1c-1.1.osg34.el6](gsi-openssh-7.3p1c-1.1.osg34.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-build-1.10.2-1.osg34.el6](osg-build-1.10.2-1.osg34.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-scripts-1.1.7-2.osg34.el6](osg-ca-scripts-1.1.7-2.osg34.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-configure-2.2.1-1.osg34.el6](osg-configure-2.2.1-1.osg34.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-3.4-2.osg34.el6](osg-release-3.4-2.osg34.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-itb-3.4-2.osg34.el6](osg-release-itb-3.4-2.osg34.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-tested-internal-3.4-5.osg34.el6](osg-tested-internal-3.4-5.osg34.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-version-3.4.4-1.osg34.el6](osg-version-3.4.4-1.osg34.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=singularity-2.3.2-0.1.1.osg34.el6](singularity-2.3.2-0.1.1.osg34.el6)
+   * [condor-8.6.6-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.6.6-1.osg34.el6)
+   * [globus-gridftp-server-control-5.2-1.1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=globus-gridftp-server-control-5.2-1.1.osg34.el6)
+   * [gsi-openssh-7.3p1c-1.1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=gsi-openssh-7.3p1c-1.1.osg34.el6)
+   * [osg-build-1.10.2-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-build-1.10.2-1.osg34.el6)
+   * [osg-ca-scripts-1.1.7-2.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-scripts-1.1.7-2.osg34.el6)
+   * [osg-configure-2.2.1-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-configure-2.2.1-1.osg34.el6)
+   * [osg-release-3.4-2.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-3.4-2.osg34.el6)
+   * [osg-release-itb-3.4-2.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-itb-3.4-2.osg34.el6)
+   * [osg-tested-internal-3.4-5.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-tested-internal-3.4-5.osg34.el6)
+   * [osg-version-3.4.4-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-version-3.4.4-1.osg34.el6)
+   * [singularity-2.3.2-0.1.1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=singularity-2.3.2-0.1.1.osg34.el6)
 
 #### Enterprise Linux 7
 
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.6.6-1.osg34.el7](condor-8.6.6-1.osg34.el7)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=globus-gridftp-server-control-5.2-1.1.osg34.el7](globus-gridftp-server-control-5.2-1.1.osg34.el7)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=gsi-openssh-7.3p1c-1.1.osg34.el7](gsi-openssh-7.3p1c-1.1.osg34.el7)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-build-1.10.2-1.osg34.el7](osg-build-1.10.2-1.osg34.el7)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-scripts-1.1.7-2.osg34.el7](osg-ca-scripts-1.1.7-2.osg34.el7)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-configure-2.2.1-1.osg34.el7](osg-configure-2.2.1-1.osg34.el7)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-3.4-2.osg34.el7](osg-release-3.4-2.osg34.el7)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-itb-3.4-2.osg34.el7](osg-release-itb-3.4-2.osg34.el7)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-tested-internal-3.4-5.osg34.el7](osg-tested-internal-3.4-5.osg34.el7)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-version-3.4.4-1.osg34.el7](osg-version-3.4.4-1.osg34.el7)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=singularity-2.3.2-0.1.1.osg34.el7](singularity-2.3.2-0.1.1.osg34.el7)
+   * [condor-8.6.6-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.6.6-1.osg34.el7)
+   * [globus-gridftp-server-control-5.2-1.1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=globus-gridftp-server-control-5.2-1.1.osg34.el7)
+   * [gsi-openssh-7.3p1c-1.1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=gsi-openssh-7.3p1c-1.1.osg34.el7)
+   * [osg-build-1.10.2-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-build-1.10.2-1.osg34.el7)
+   * [osg-ca-scripts-1.1.7-2.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-scripts-1.1.7-2.osg34.el7)
+   * [osg-configure-2.2.1-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-configure-2.2.1-1.osg34.el7)
+   * [osg-release-3.4-2.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-3.4-2.osg34.el7)
+   * [osg-release-itb-3.4-2.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-itb-3.4-2.osg34.el7)
+   * [osg-tested-internal-3.4-5.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-tested-internal-3.4-5.osg34.el7)
+   * [osg-version-3.4.4-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-version-3.4.4-1.osg34.el7)
+   * [singularity-2.3.2-0.1.1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=singularity-2.3.2-0.1.1.osg34.el7)
 
 ### RPMs
 
@@ -230,11 +230,11 @@ We added or updated the following packages to the **upcoming** OSG yum repositor
 
 #### Enterprise Linux 6
 
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.7.3-1.osgup.el6](condor-8.7.3-1.osgup.el6)
+   * [condor-8.7.3-1.osgup.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.7.3-1.osgup.el6)
 
 #### Enterprise Linux 7
 
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.7.3-1.osgup.el7](condor-8.7.3-1.osgup.el7)
+   * [condor-8.7.3-1.osgup.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.7.3-1.osgup.el7)
 
 ### Upcoming RPMs
 

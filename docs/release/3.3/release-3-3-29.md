@@ -86,27 +86,27 @@ We added or updated the following packages to the production OSG yum repository.
 
 #### Enterprise Linux 6
 
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=globus-gridftp-server-control-5.2-1.1.osg33.el6](globus-gridftp-server-control-5.2-1.1.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=gsi-openssh-7.3p1c-1.1.osg33.el6](gsi-openssh-7.3p1c-1.1.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-build-1.10.2-1.osg33.el6](osg-build-1.10.2-1.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-scripts-1.1.7-2.osg33.el6](osg-ca-scripts-1.1.7-2.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-configure-1.10.1-1.osg33.el6](osg-configure-1.10.1-1.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-3.3-6.osg33.el6](osg-release-3.3-6.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-itb-3.3-6.osg33.el6](osg-release-itb-3.3-6.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-version-3.3.29-1.osg33.el6](osg-version-3.3.29-1.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=voms-admin-server-2.7.0-1.23.osg33.el6](voms-admin-server-2.7.0-1.23.osg33.el6)
+   * [globus-gridftp-server-control-5.2-1.1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=globus-gridftp-server-control-5.2-1.1.osg33.el6)
+   * [gsi-openssh-7.3p1c-1.1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=gsi-openssh-7.3p1c-1.1.osg33.el6)
+   * [osg-build-1.10.2-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-build-1.10.2-1.osg33.el6)
+   * [osg-ca-scripts-1.1.7-2.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-scripts-1.1.7-2.osg33.el6)
+   * [osg-configure-1.10.1-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-configure-1.10.1-1.osg33.el6)
+   * [osg-release-3.3-6.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-3.3-6.osg33.el6)
+   * [osg-release-itb-3.3-6.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-itb-3.3-6.osg33.el6)
+   * [osg-version-3.3.29-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-version-3.3.29-1.osg33.el6)
+   * [voms-admin-server-2.7.0-1.23.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=voms-admin-server-2.7.0-1.23.osg33.el6)
 
 #### Enterprise Linux 7
 
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=globus-gridftp-server-control-5.2-1.1.osg33.el6](globus-gridftp-server-control-5.2-1.1.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=gsi-openssh-7.3p1c-1.1.osg33.el6](gsi-openssh-7.3p1c-1.1.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-build-1.10.2-1.osg33.el6](osg-build-1.10.2-1.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-scripts-1.1.7-2.osg33.el6](osg-ca-scripts-1.1.7-2.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-configure-1.10.1-1.osg33.el6](osg-configure-1.10.1-1.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-3.3-6.osg33.el6](osg-release-3.3-6.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-itb-3.3-6.osg33.el6](osg-release-itb-3.3-6.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-version-3.3.29-1.osg33.el6](osg-version-3.3.29-1.osg33.el6)
-   * [https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=voms-admin-server-2.7.0-1.23.osg33.el6](voms-admin-server-2.7.0-1.23.osg33.el6)
+   * [globus-gridftp-server-control-5.2-1.1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=globus-gridftp-server-control-5.2-1.1.osg33.el6)
+   * [gsi-openssh-7.3p1c-1.1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=gsi-openssh-7.3p1c-1.1.osg33.el6)
+   * [osg-build-1.10.2-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-build-1.10.2-1.osg33.el6)
+   * [osg-ca-scripts-1.1.7-2.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-scripts-1.1.7-2.osg33.el6)
+   * [osg-configure-1.10.1-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-configure-1.10.1-1.osg33.el6)
+   * [osg-release-3.3-6.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-3.3-6.osg33.el6)
+   * [osg-release-itb-3.3-6.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-itb-3.3-6.osg33.el6)
+   * [osg-version-3.3.29-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-version-3.3.29-1.osg33.el6)
+   * [voms-admin-server-2.7.0-1.23.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=voms-admin-server-2.7.0-1.23.osg33.el6)
 
 ### RPMs
 
