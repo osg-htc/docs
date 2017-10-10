@@ -46,7 +46,7 @@ root@host # yum -y install cvmfs-server cvmfs-config mod_wsgi
 <br>
 ### Installing frontier-squid and frontier-awstats
 
-[frontier-awstats](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallAwstats)is not distributed by OSG so these instructions get it from its original source.  Do these commands to install frontier-squid and frontier-awstats:
+[frontier-awstats](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallAwstats) is not distributed by OSG so these instructions get it from its original source.  Do these commands to install frontier-squid and frontier-awstats:
 
 ```console
 root@host # rpm -i http://frontier.cern.ch/dist/rpms/RPMS/noarch/frontier-release-1.1-1.noarch.rpm
@@ -229,8 +229,9 @@ or on EL7 do:
 root@host # systemctl enable frontier-squid
 root@host # systemctl start frontier-squid
 ```
-<br>
-Note: the above configuration is for a single squid thread, which is fine for 1Gbit/s and possibly 2Gbit/s, but if higher bandwidth is needed, see the [instructions for running multiple squid workers](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Running_multiple_squid_workers).
+
+!!! note
+    The above configuration is for a single squid thread, which is fine for 1Gbit/s and possibly 2Gbit/s, but if higher bandwidth is needed, see the [instructions for running multiple squid workers](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Running_multiple_squid_workers).
 
 ## Verifying
 
@@ -257,7 +258,7 @@ However, non-GOC OSG Stratum 1s (that is, at BNL and FNAL), for the sake of fulf
 root@host # cvmfs_server add-replica -o root http://oasis-replica.opensciencegrid.org:8000/cvmfs/config-egi.egi.eu /etc/cvmfs/keys/egi.eu/egi.eu.pub:/etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
 ```
 <br>
-The second command for Stratum 1s that have the httpd configuration as described above in the [Configuring apache section](#Configuring_apache) is this:
+The second command for Stratum 1s that have the httpd configuration as described above in the [Configuring apache section](#configuring-apache) is this:
 
 ```console
 root@host # rm -f /etc/httpd/conf.d/cvmfs.config-egi.egi.eu.conf
