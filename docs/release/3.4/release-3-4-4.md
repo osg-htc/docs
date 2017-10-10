@@ -29,7 +29,7 @@ These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%
 !!! note
     xrootd-lcmaps will remain at 1.2.1-2 on EL6.
 
-Detailed changes are below. All of the documentation can be found in the [Release3](Documentation.Release3) area of the TWiki.
+Detailed changes are below. All of the documentation can be found [here](../../).
 
 Known Issues
 ------------
@@ -43,11 +43,11 @@ Known Issues
 Updating to the new release
 ---------------------------
 
-To update to the OSG 3.4 series, please consult the page on [updating between release series](Documentation/Release3/OSGReleaseSeries).
+To update to the OSG 3.4 series, please consult the page on [updating between release series](../release_series).
 
 ### Update Repositories
 
-To update to this series, you need to [install the current OSG repositories](Documentation.Release3.YumRepositories#Install_OSG_Repositories).
+To update to this series, you need [install the current OSG repositories](../../common/yum#install-osg-repositories).
 
 ### Update Software
 
@@ -64,7 +64,7 @@ root@host # yum update
 Need help?
 ----------
 
-Do you need help with this release? [Contact us for help](HelpProcedure).
+Do you need help with this release? [Contact us for help](../../common/help).
 
 Detailed changes in this release
 --------------------------------
