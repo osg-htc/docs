@@ -194,5 +194,5 @@ log { source(s_sys); filter(f_filter1); filter(f_notglexec); destination(d_mesg)
 How to get Help?
 ----------------
 
-To get assistance please use the [Help Procedure](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HelpProcedure).
+To get assistance please use the [Help Procedure](../common/help).
 

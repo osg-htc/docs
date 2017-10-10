@@ -51,7 +51,7 @@ COLLECTOR.USE_SHARED_PORT=False
 Updating to the new release
 ---------------------------
 
-To update to the OSG 3.4 series, please consult the page on [updating between release series](Documentation/Release3/OSGReleaseSeries).
+To update to the OSG 3.4 series, please consult the page on [updating between release series](../release_series).
 
 ### Update Repositories
 

@@ -954,7 +954,7 @@ Common causes of problems could be:
     -   missing or expired or too short-lived proxy
     -   incorrect ownership or permission on the certificate/proxy file
     -   missing certificates
-- If the frontend http server is down in the factory there will be errors like "Failed to load file 'description.dbceCN.cfg' from '<http://FRONTEND_HOST/vofrontend/stage>'."
+- If the frontend http server is down in the factory there will be errors like "Failed to load file 'description.dbceCN.cfg' from `http://FRONTEND_HOST/vofrontend/stage`."
     - check that the http server is running and you can reach the URL (`http://FRONTEND_HOST/vofrontend/stage/description.dbceCN.cfg`)
 
 Advanced Configurations
@@ -967,7 +967,7 @@ References
 
 Definitions:
 
--   What is a [Virtual Organisation](http://www.opensciencegrid.org/About/Learn_About_Us/OSG_Organization/VOs)
+-   What is a [Virtual Organisation](https://www.opensciencegrid.org/about/organization/)
 -   [Introduction to the Grid for users/scientists](http://twiki.grid.iu.edu/bin/view/Documentation/UsingTheGrid)
 
 Documents about the Glidein-WMS system and the VO frontend:

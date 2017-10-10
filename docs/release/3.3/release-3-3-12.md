@@ -13,7 +13,6 @@ This release contains:
     -   The HTCondor-CE-Bosco is designed to make it easier to contribute opportunistic resources to the OSG. With the HTCondor-CE-Bosco, an organization can setup a CE with only SSH access to the cluster, rather than the long list of requirements for a regular HTCondor-CE.
     -   [HTCondor-CE-Bosco talk at OSG All Hands Meeting 2016](https://indico.fnal.gov/getFile.py/access?contribId=32&sessionId=7&resId=0&materialId=slides&confId=10571)
     -   [Author’s Blog post](https://djw8605.github.io/2016/04/26/2016-04-25-htcondor-ce-bosco-release/)
-    -   [Installation instructions](InstallHTCondorBosco)
 -   [HTCondor 8.4.6](https://lists.cs.wisc.edu/archive/htcondor-users/2016-April/msg00069.shtml): Fixes serious regression in HTCondor 8.4.5
 -   [CVMFS 2.2.2](http://cvmfs.readthedocs.io/en/2.2/cpt-releasenotes.html)
     -   The update to CVMFS 2.2.1 includes a major overhaul to the default OSG configuration. Sites who have performed extensive changes to the default configuration are advised to verify their configurations before deploying.
