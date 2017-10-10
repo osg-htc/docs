@@ -8,9 +8,9 @@ What's New in OSG 3.4
 
 The OSG 3.4.0 software stack features a more streamlined and consolidated package list. Specifically, the varied authentication solutions proved to be good candidates for consolidation and a new piece of software, the LCMAPS VOMS plugin, has been designed to replace both edg-mkgridmap and GUMS.
 
-See [install the LCMAPS VOMS plugin](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallLcmapsVoms) to replace GUMS + edg-mkgridmap.
+See [install the LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication) to replace GUMS + edg-mkgridmap.
 
-See [migrating from edg-mkgridmap to lcmaps VOMS plugin](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OSGReleaseSeries#Migrating_from_edg_mkgridmap_to) to transistion from edg-mkgridmap.
+See [migrating from edg-mkgridmap to lcmaps VOMS plugin](../../security/lcmaps-voms-authentication#migrating-from-edg-mkgridmap) to transistion from edg-mkgridmap.
 
 In 3.4.0, we dropped HDFS 2.x with the intention of adding HDFS 3.x in a subsequent OSG 3.4 release when it becomes available upstream.
 
@@ -87,7 +87,7 @@ COLLECTOR.USE_SHARED_PORT=False
 Updating to the new release
 ---------------------------
 
-To update to the OSG 3.4 series, please consult the page on [updating between release series](Documentation/Release3/OSGReleaseSeries).
+To update to the OSG 3.4 series, please consult the page on [updating between release series](../release_series).
 
 ### Update Repositories
 

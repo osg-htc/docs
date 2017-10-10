@@ -459,7 +459,7 @@ If you cannot resolve the problem, there are several ways to receive help:
 -   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.grid.iu.edu/goc).
 -   For community support and best-effort software team support contact <osg-software@opensciencegrid.org>.
 
-For a full set of help options, see the [Help Procedure](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HelpProcedure).
+For a full set of help options, see the [Help Procedure](../common/help).
 
 References
 ==========
