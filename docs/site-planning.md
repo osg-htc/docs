@@ -164,7 +164,7 @@ We recommend to use a dedicated server for hosting the shared file system. The e
 
 #### NFS Warning
 
-NFS is known to be an *easy* but never the less %RED%inadequate%ENDCOLOR% choice for all but the smallest sites! If you want to use NFS you should read the chapter *"Optimizing NFS Performance"* in the <http://nfs.sourceforge.net/nfs-howto/>. Software partitions that can be locally installed, such as OSG\_GRID, should be locally installed and not shared unless you have an enterprise-class NFS server.
+NFS is known to be an *easy* but less adequate for large sites. If you want to use NFS you should read the chapter *"Optimizing NFS Performance"* in the <http://nfs.sourceforge.net/nfs-howto/>. Software partitions that can be locally installed, such as OSG\_GRID, should be locally installed and not shared unless you have an enterprise-class NFS server.
 
 ### Compute and Storage Element
 
