@@ -726,8 +726,8 @@
 <ol>
 <li>
 <p>Consider updating your local cache of Yum repository data and your existing RPM packages:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum clean all --enablerepo<span class="o">=</span><span class="se">\*</span>
-<span class="gp">[root@client ~] #</span> yum update
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum clean all --enablerepo<span class="o">=</span><span class="se">\*</span>
+<span class="gp">root@host #</span> yum update
 </pre></div>
 
 
@@ -738,14 +738,14 @@
 </li>
 <li>
 <p>If you have installed HTCondor already but not by RPM, install a special empty RPM to make RSV happy:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install empty-condor --enablerepo<span class="o">=</span>osg-empty
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install empty-condor --enablerepo<span class="o">=</span>osg-empty
 </pre></div>
 
 
 </li>
 <li>
 <p>Install RSV and related software:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install rsv
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install rsv
 </pre></div>
 
 
@@ -762,8 +762,8 @@
 </li>
 <li>
 <p>Complete the configuration using the <code>osg-configure</code> tool:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-configure -v
-<span class="gp">[root@client ~] #</span> osg-configure -c
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-configure -v
+<span class="gp">root@host #</span> osg-configure -c
 </pre></div>
 
 
@@ -784,24 +784,24 @@
 <ol>
 <li>
 <p>Install <code>mod_ssl</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install mod_ssl
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install mod_ssl
 </pre></div>
 
 
 </li>
 <li>
 <p>Make an alternate set of HTTP service certificate files:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> cp -p /etc/grid-security/http/httpcert.pem /etc/grid-security/http/httpcert2.pem
-<span class="gp">[root@client ~] #</span> cp -p /etc/grid-security/http/httpkey.pem /etc/grid-security/http/httpkey2.pem
-<span class="gp">[root@client ~] #</span> chown apache:apache /etc/grid-security/http/http*2.pem
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp -p /etc/grid-security/http/httpcert.pem /etc/grid-security/http/httpcert2.pem
+<span class="gp">root@host #</span> cp -p /etc/grid-security/http/httpkey.pem /etc/grid-security/http/httpkey2.pem
+<span class="gp">root@host #</span> chown apache:apache /etc/grid-security/http/http*2.pem
 </pre></div>
 
 
 </li>
 <li>
 <p>Back up existing Apache configuration files:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> cp -p /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.orig
-<span class="gp">[root@client ~] #</span> cp -p /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.orig
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp -p /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.orig
+<span class="gp">root@host #</span> cp -p /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.orig
 </pre></div>
 
 
@@ -892,7 +892,7 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 </table>
 <h3 id="running-rsv-manually">Running RSV manually<a class="headerlink" href="#running-rsv-manually" title="Permanent link">&para;</a></h3>
 <p>Normally, the HTCondor-Cron scheduler runs RSV periodically. However, you can run RSV probes manually at any time:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> rsv-control --run --all-enabled
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rsv-control --run --all-enabled
 </pre></div>
 
 
@@ -1023,7 +1023,7 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 </details></p>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use <a href="../../common/help/">this page</a>.</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> rsv-control --profile
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rsv-control --profile
 <span class="go">Running the rsv-profiler...</span>
 <span class="go">OSG-RSV Profiler</span>
 <span class="go">Analyzing...</span>

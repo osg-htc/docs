@@ -879,7 +879,7 @@ The Gratia gridftp-transfer probes provide OSG storage statistics for accounting
 <li>Install Java using <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7#InstallingJava">these instructions</a>.</li>
 <li>Install the BeStMan Storage element meta-package:</li>
 </ol>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install osg-se-bestman
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-se-bestman
 </pre></div>
 
 
@@ -978,9 +978,9 @@ bestman   ALL=(SRM_USR) NOPASSWD: SRM_CMD
 
 <h2 id="copying-certificates-to-an-alternate-location">Copying certificates to an alternate location<a class="headerlink" href="#copying-certificates-to-an-alternate-location" title="Permanent link">&para;</a></h2>
 <p>BeStMan requires a certificate pair to function; this must be readable by the <code>bestman</code> user.</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> cp /etc/grid-security/hostkey.pem /etc/grid-security/bestman/bestmankey.pem
-<span class="gp">[root@client ~] #</span> cp /etc/grid-security/hostcert.pem /etc/grid-security/bestman/bestmancert.pem
-<span class="gp">[root@client ~] #</span> chown -R bestman:bestman /etc/grid-security/bestman/
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp /etc/grid-security/hostkey.pem /etc/grid-security/bestman/bestmankey.pem
+<span class="gp">root@host #</span> cp /etc/grid-security/hostcert.pem /etc/grid-security/bestman/bestmancert.pem
+<span class="gp">root@host #</span> chown -R bestman:bestman /etc/grid-security/bestman/
 </pre></div>
 
 
@@ -1025,42 +1025,42 @@ bestman   ALL=(SRM_USR) NOPASSWD: SRM_CMD
 <li>
 <p><code>fetch-crl</code></p>
 <p>For RHEL 6:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs </span>
-<span class="gp">[root@client ~] #</span> /sbin/service fetch-crl-boot start
-<span class="gp">[root@client ~] #</span> /sbin/service fetch-crl-cron start
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs </span>
+<span class="gp">root@host #</span> /sbin/service fetch-crl-boot start
+<span class="gp">root@host #</span> /sbin/service fetch-crl-cron start
 </pre></div>
 
 
 <p>For RHEL 7:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs </span>
-<span class="gp">[root@client ~] #</span> systemctl start fetch-crl-boot
-<span class="gp">[root@client ~] #</span> systemctl start fetch-crl-cron
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs </span>
+<span class="gp">root@host #</span> systemctl start fetch-crl-boot
+<span class="gp">root@host #</span> systemctl start fetch-crl-cron
 </pre></div>
 
 
 </li>
 <li>
 <p>GridFTP</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service globus-gridftp-server start
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service globus-gridftp-server start
 </pre></div>
 
 
 </li>
 <li>
 <p>Bestman</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service bestman2 start
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service bestman2 start
 </pre></div>
 
 
 <p>To start Bestman automatically at boot time</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> chkconfig bestman2 on
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chkconfig bestman2 on
 </pre></div>
 
 
 </li>
 <li>
 <p>Gratia transfer probe:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service gratia-gridftp-transfer start
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service gratia-gridftp-transfer start
 </pre></div>
 
 
@@ -1071,37 +1071,37 @@ bestman   ALL=(SRM_USR) NOPASSWD: SRM_CMD
 <li>
 <p>fetch-crl</p>
 <p>For RHEL 6:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs</span>
-<span class="gp">[root@client ~] #</span> /sbin/service fetch-crl-boot stop
-<span class="gp">[root@client ~] #</span> /sbin/service fetch-crl-cron stop
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs</span>
+<span class="gp">root@host #</span> /sbin/service fetch-crl-boot stop
+<span class="gp">root@host #</span> /sbin/service fetch-crl-cron stop
 </pre></div>
 
 
 <p>For RHEL 7:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs</span>
-<span class="gp">[root@client ~] #</span> systemctl stop fetch-crl-boot
-<span class="gp">[root@client ~] #</span> systemctl stop fetch-crl-cron
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs</span>
+<span class="gp">root@host #</span> systemctl stop fetch-crl-boot
+<span class="gp">root@host #</span> systemctl stop fetch-crl-cron
 </pre></div>
 
 
 </li>
 <li>
 <p>GridFTP</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service globus-gridftp-server stop
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service globus-gridftp-server stop
 </pre></div>
 
 
 </li>
 <li>
 <p>Bestman</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service bestman2 stop
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service bestman2 stop
 </pre></div>
 
 
 </li>
 <li>
 <p>Gratia transfer probe</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service gratia-gridftp-transfer stop
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service gratia-gridftp-transfer stop
 </pre></div>
 
 
@@ -1161,7 +1161,7 @@ bestman   ALL=(SRM_USR) NOPASSWD: SRM_CMD
 <h3 id="verifying-gums">Verifying GUMS<a class="headerlink" href="#verifying-gums" title="Permanent link">&para;</a></h3>
 <p>Make sure that the service certificate you specified for BeStMan configuration with <code>GUMSHOSTCERT</code>, <code>GUMSHOSTKEY</code> options and GridFTP service certificate are accepted by GUMS.</p>
 <p>Test GUMS by running:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> srm-ping srm://&lt;BESTMAN_HOST&gt;:8443/srm/v2/server
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> srm-ping srm://&lt;BESTMAN_HOST&gt;:8443/srm/v2/server
 </pre></div>
 
 
@@ -1169,15 +1169,15 @@ bestman   ALL=(SRM_USR) NOPASSWD: SRM_CMD
 <h3 id="verifying-gridftp">Verifying GridFTP<a class="headerlink" href="#verifying-gridftp" title="Permanent link">&para;</a></h3>
 <p>Login on the node where your certificate and <a href="../../worker-node/install-wn/">OSG Worker Node Client</a> is installed You will need to generate your proxy credentials using <code>grid-proxy-init</code> or <code>voms-proxy-init</code>.</p>
 <p>Then test GridFTP using <code>globus-url-copy</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> <span class="nb">echo</span> <span class="s2">&quot;This is a test&quot;</span> &gt;/tmp/test 
-<span class="gp">[user@client ~] $</span> globus-url-copy -dbg file:///tmp/test gsiftp://&lt;GRIDFTP_HOST&gt;/tmp/test 
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> <span class="nb">echo</span> <span class="s2">&quot;This is a test&quot;</span> &gt;/tmp/test 
+<span class="gp">user@host $</span> globus-url-copy -dbg file:///tmp/test gsiftp://&lt;GRIDFTP_HOST&gt;/tmp/test 
 </pre></div>
 
 
 <p>Check the GridFTP logs to see if you have encountered any errors.</p>
 <h3 id="verifying-bestman">Verifying BeStMan<a class="headerlink" href="#verifying-bestman" title="Permanent link">&para;</a></h3>
 <p>Make sure that the BeStMan process is running</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> ps -ef <span class="p">|</span> grep bestman
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> ps -ef <span class="p">|</span> grep bestman
 <span class="go">bestman   5121     1 99 19:59 ?        00:00:01 /usr/java/latest/bin/java -server -Xmx1024m -XX:MaxDirectMemorySize=1024m -DX509_CERT_DIR=/etc/grid-security/certificates -DCADIR=/etc/grid-security/certificates -Daxis.socketSecureFactory=org.glite.security.trustmanager.axis.AXISSocketFactory -DsslCAFiles=/etc/grid-security/certificates/*.0 -DsslCertfile=/etc/grid-security/bestman/bestmancert.pem -DsslKey=/etc/grid-security/bestman/bestmankey.pem -DJettyConfiguration=/etc/bestman2/conf/WEB-INF/jetty.xml -DJettyDescriptor=/etc/bestman2/conf/WEB-INF/web.xml -DJettyResource=/etc/bestman2/conf/ -Dorg.eclipse.jetty.util.log.IGNORE=true gov.lbl.srm.server.Server /etc/bestman2/conf/bestman2.rc</span>
 </pre></div>
 
@@ -1283,7 +1283,7 @@ bestman   ALL=(SRM_USR) NOPASSWD: SRM_CMD
 </table>
 <h1 id="upgrading-bestman">Upgrading BeStMan<a class="headerlink" href="#upgrading-bestman" title="Permanent link">&para;</a></h1>
 <p>Upgrading BeStMan can be done by</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum upgrade bestman2-server
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum upgrade bestman2-server
 </pre></div>
 
 
@@ -1324,7 +1324,7 @@ bestman   ALL=(SRM_USR) NOPASSWD: SRM_CMD
 <h1 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h1>
 <h2 id="requesting-host-certificates-in-rhel6">Requesting host certificates in RHEL6<a class="headerlink" href="#requesting-host-certificates-in-rhel6" title="Permanent link">&para;</a></h2>
 <p>Bestman may not start if the certificates were requested on slc6. This is be caused by a bug in JGlobus (see <a href="https://github.com/jglobus/JGlobus/issues/118">JGlobusIssue118</a>), a <code>bestman2</code> dependency. A known workaround is to run this command</p>
-<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> openssl rsa -in mykey.pem -out mykey.pem.old
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> openssl rsa -in mykey.pem -out mykey.pem.old
 </pre></div>
 
 

@@ -732,8 +732,8 @@
 <p>On the CE, in the <code>/etc/osg/config.d/10-storage.ini</code> file, set the <code>grid_dir</code> configuration setting to the path from the previous step.</p>
 <p>For more information, see the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/EnvironmentVariables">OSG environment variables reference page</a> and the <a href="../../other/configuration-with-osg-configure#storage">CE configuration instructions</a>.</p>
 <p>Once you finish making changes to configuration files on your CE, validate, fix, and apply the configuration:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-configure -v
-<span class="gp">[root@client ~] #</span> osg-configure -c
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-configure -v
+<span class="gp">root@host #</span> osg-configure -c
 </pre></div>
 
 
@@ -772,12 +772,12 @@
 <ul>
 <li>
 <p>A missing softlink to the CA certs directory. To check this, run:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> ls -l /cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/current/el6-x86_64/etc/grid-security/
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> ls -l /cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/current/el6-x86_64/etc/grid-security/
 </pre></div>
 
 
 <p>and check that <code>certificates</code> is linked to somewhere. The fix is to yum update the <code>oasis-config</code> package to version 4 or higher. A known workaround is to run:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> <span class="nb">export</span> <span class="nv">X509_CERT_DIR</span><span class="o">=</span>/cvmfs/oasis.opensciencegrid.org/mis/certificates
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> <span class="nb">export</span> <span class="nv">X509_CERT_DIR</span><span class="o">=</span>/cvmfs/oasis.opensciencegrid.org/mis/certificates
 </pre></div>
 
 

@@ -695,7 +695,7 @@
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>The command-line scripts have been packaged as an RPM and are available from the OSG repositories.</p>
 <p>To install the RPM, run:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install osg-pki-tools
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-pki-tools
 </pre></div>
 
 
@@ -743,7 +743,7 @@
 <li>Private key, to filename specified by <code>-o</code> or <code>./hostkey.pem</code> by default.</li>
 <li>Request Id, to <code>stdout</code>.</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-request --help
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-cert-request --help
 <span class="go">Usage: osg-cert-request [options]</span>
 
 <span class="go">Options:</span>
@@ -779,23 +779,23 @@
 
 <h4 id="examples">Examples.<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h4>
 <p>OSG generates the key pair for the request.</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n <span class="s2">&quot;Your Name&quot;</span> -p <span class="m">9999999999</span> -y <span class="s2">&quot;xyz@domain.com,abc@domain.com&quot;</span> -m <span class="s2">&quot;This is my comment&quot;</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n <span class="s2">&quot;Your Name&quot;</span> -p <span class="m">9999999999</span> -y <span class="s2">&quot;xyz@domain.com,abc@domain.com&quot;</span> -m <span class="s2">&quot;This is my comment&quot;</span>
 </pre></div>
 
 
 <p>If you want to request a service certificate, you need to escape backslash for service name inside CN like following.</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n <span class="s2">&quot;Your Name&quot;</span> -p <span class="m">9999999999</span> -y <span class="s2">&quot;rsv\/xyz@domain.com&quot;</span> -m <span class="s2">&quot;This is my comment&quot;</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n <span class="s2">&quot;Your Name&quot;</span> -p <span class="m">9999999999</span> -y <span class="s2">&quot;rsv\/xyz@domain.com&quot;</span> -m <span class="s2">&quot;This is my comment&quot;</span>
 </pre></div>
 
 
 <p>You can create your CSR on your target hosts using tools such as <code>openssl</code>.</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> <span class="nb">umask</span> <span class="m">077</span><span class="p">;</span> openssl req -new -newkey rsa:2048 -nodes -keyout hostkey.pem -subj <span class="s2">&quot;/CN=osg-ce.example.edu&quot;</span> -out csr.pem
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">umask</span> <span class="m">077</span><span class="p">;</span> openssl req -new -newkey rsa:2048 -nodes -keyout hostkey.pem -subj <span class="s2">&quot;/CN=osg-ce.example.edu&quot;</span> -out csr.pem
 </pre></div>
 
 
 <p>Note that the DN will be overriden by the OSG PKI except for the CN component.</p>
 <p>Submitting the request:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n <span class="s2">&quot;Your Name&quot;</span> -p <span class="m">9999999999</span> -y <span class="s2">&quot;xyz@domain.com,abc@domain.com&quot;</span> -m <span class="s2">&quot;This is my comment&quot;</span> --csr csr.pem
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n <span class="s2">&quot;Your Name&quot;</span> -p <span class="m">9999999999</span> -y <span class="s2">&quot;xyz@domain.com,abc@domain.com&quot;</span> -m <span class="s2">&quot;This is my comment&quot;</span> --csr csr.pem
 </pre></div>
 
 
@@ -818,7 +818,7 @@
 <ul>
 <li>Host certificate as PEM, to filename specified or <code>./hostcert.pem</code>.</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-retrieve --help
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-cert-retrieve --help
 <span class="go">Usage: osg-cert-retrieve [options] &lt;Request ID&gt;</span>
 <span class="go">Usage: osg-cert-retrieve -h/--help [for detailed explanations of options]</span>
 
@@ -839,7 +839,7 @@
 
 
 <p>Example:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-retrieve -i <span class="m">555</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-cert-retrieve -i <span class="m">555</span>
 </pre></div>
 
 
@@ -877,7 +877,7 @@
 <li><code>N</code> host certificates in PEM format.</li>
 <li><code>N</code> private keys in PEM format.</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-gridadmin-cert-request --help
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-gridadmin-cert-request --help
 <span class="go">Usage: osg-gridadmin-cert-request [options] arg</span>
 <span class="go">Usage: osg-gridadmin-cert-request -h/--help [for detailed explanations of options]</span>
 
@@ -922,11 +922,11 @@
 
 
 <p>Examples:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-gridadmin-cert-request -f filename -k privatekeyfile -c certificatefile
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-gridadmin-cert-request -f filename -k privatekeyfile -c certificatefile
 </pre></div>
 
 
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-gridadmin-cert-request -H hostname.domain.com -k privatekeyfile -c certificatefile
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-gridadmin-cert-request -H hostname.domain.com -k privatekeyfile -c certificatefile
 </pre></div>
 
 
@@ -952,7 +952,7 @@
 
 
 </div>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-user-cert-renew --help
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-user-cert-renew --help
 <span class="go">Usage: osg-user-cert-renew [options]</span>
 
 <span class="go">Options:</span>
@@ -974,7 +974,7 @@
 
 
 <p><strong>Example</strong></p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-user-cert-renew -k userkey.pem -c usercert.pem
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-user-cert-renew -k userkey.pem -c usercert.pem
 </pre></div>
 
 
@@ -999,7 +999,7 @@
 <li>Error message if the revocation was unsuccessful on <code>stdout</code>.</li>
 </ul>
 <p>If the user's private key and certificate are not provided, the script takes the private key and user certificate from the <code>~/.globus</code> folder using the default names (<code>userkey.pem</code> and <code>usercert.pem</code>, respectively)</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-user-cert-revoke --help
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-user-cert-revoke --help
 <span class="go">Usage: osg-user-cert-revoke [options] &lt;Request ID&gt; &lt;message&gt;</span>
 <span class="go">Usage: osg-user-cert-revoke -h/--help [for detailed explanations of options]</span>
 
@@ -1029,7 +1029,7 @@
 
 
 <p><strong>Example:</strong></p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-user-cert-revoke -i <span class="m">999</span> -m <span class="s2">&quot;Testing user cert revocation&quot;</span> -k privatekeyfile -c usercertfile
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-user-cert-revoke -i <span class="m">999</span> -m <span class="s2">&quot;Testing user cert revocation&quot;</span> -k privatekeyfile -c usercertfile
 </pre></div>
 
 
@@ -1054,7 +1054,7 @@
 <li>Error message if the revocation was unsuccessful on <code>stdout</code>.</li>
 </ul>
 <p>If the user's private key and certificate are not provided, the script takes the private key and user certificate from the <code>~/.globus</code> folder using the default names (<code>userkey.pem</code> and <code>usercert.pem</code>, respectively).</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-user-cert-revoke --help
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-user-cert-revoke --help
 <span class="go">Usage: osg-cert-revoke [options] &lt;Request ID&gt; &lt;message&gt;</span>
 <span class="go">Usage: osg-cert-revoke -h/--help [for detailed explanations of options]</span>
 
@@ -1084,7 +1084,7 @@
 
 
 <p><strong>Example:</strong></p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> osg-cert-revoke -i <span class="m">999</span> -m <span class="s2">&quot;Testing host cert revocation&quot;</span> -k privatekeyfile -c usercertfile
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-cert-revoke -i <span class="m">999</span> -m <span class="s2">&quot;Testing host cert revocation&quot;</span> -k privatekeyfile -c usercertfile
 </pre></div>
 
 

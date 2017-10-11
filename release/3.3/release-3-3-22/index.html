@@ -714,7 +714,7 @@
 <li><span class="twiki-macro RED"></span> On Friday, March 17th, <a href="https://github.com/xrootd/xrootd/blob/v4.6.0/docs/ReleaseNotes.txt">XRootD 4.6.0</a> was pulled from the release repository. <span class="twiki-macro ENDCOLOR"></span> Most of the issues origin from improper CRL verification bug introduced in the recent code. Criticality of the issue:<ul>
 <li>high criticality running XRootD in a <strong>server</strong> mode you may have issues since reading the final file usually does require authentication (mostly GSI auth which relates to CRL verification code)</li>
 <li>low criticality running XRootD in a <strong>manager</strong> mode you may NOT experience any issues assuming your redirector does not require authentication</li>
-<li>to check if you have the affected components installed, run <pre class="rootscreen">root@host # rpm -qa | grep xrootd</pre> to display the versions of your xrootd packages. If any of them are version 4.6.0, run <pre class="rootscreen">[root@client ~] $ yum downgrade <package></pre> on those packages.</li>
+<li>to check if you have the affected components installed, run <pre class="rootscreen">root@host # rpm -qa | grep xrootd</pre> to display the versions of your xrootd packages. If any of them are version 4.6.0, run <pre class="rootscreen">root@host # yum downgrade <package></pre> on those packages.</li>
 <li>as pre-caution to avoid this bug <a href="https://github.com/xrootd/xrootd/blob/v4.6.0/docs/ReleaseNotes.txt">XRootD 4.6.0</a> was pulled from the release repository and we do not recommend using it until further notice</li>
 <li>given the number of recent improvements and fixes 4.6.1 is available in EPEL testing repo and once it gets to production release we push it into OSG release as well</li>
 </ul>

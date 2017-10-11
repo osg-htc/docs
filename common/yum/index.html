@@ -716,9 +716,9 @@
 <h3 id="install-epel">Install EPEL<a class="headerlink" href="#install-epel" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Install the EPEL repository, if not already present. <strong>Note:</strong> This enables EPEL by default. Choose the right version to match your OS version.<div class="codehilite"><pre><span></span><span class="gp">#</span> EPEL <span class="m">6</span> <span class="o">(</span>For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL <span class="m">6</span><span class="o">)</span>
-<span class="gp">[root@client ~] #</span> rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+<span class="gp">root@host #</span> rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
 <span class="gp">#</span> EPEL <span class="m">7</span> <span class="o">(</span>For RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL <span class="m">7</span><span class="o">)</span> 
-<span class="gp">[root@client ~] #</span> rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+<span class="gp">root@host #</span> rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 </pre></div>
 
 
@@ -733,7 +733,7 @@
 <ol>
 <li>
 <p>Install the Yum priorities package:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~]#</span> yum install yum-plugin-priorities
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install yum-plugin-priorities
 </pre></div>
 
 
@@ -752,14 +752,14 @@
 </div>
 <h3 id="install-osg-repositories">Install OSG Repositories<a class="headerlink" href="#install-osg-repositories" title="Permanent link">&para;</a></h3>
 <p>If you are upgrading from one OSG series to another, remove the old OSG repository definition files and clean the Yum cache:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~]$</span> yum clean all 
-<span class="gp">[root@client ~]$</span> rpm -e osg-release
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum clean all 
+<span class="gp">root@host #</span> rpm -e osg-release
 </pre></div>
 
 
 <p>This step ensures that local changes to <code>*.repo</code> files will not block the installation of the new OSG repositories. After this step, <code>*.repo</code> files that have been changed will exist in <code>/etc/yum.repos.d/</code> with the <code>*.rpmsave</code> extension. After installing the new OSG repositories (the next step) you may want to apply any changes made in the <code>*.rpmsave</code> files to the new <code>*.repo</code> files.</p>
 <p>Install the OSG repositories:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~]$</span> rpm -Uvh &lt;URL&gt;
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -Uvh &lt;URL&gt;
 </pre></div>
 
 

@@ -716,7 +716,7 @@
 </ul>
 <h2 id="installing-gridftp">Installing GridFTP<a class="headerlink" href="#installing-gridftp" title="Permanent link">&para;</a></h2>
 <p>First, you will need to install the GridFTP meta-package:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install osg-gridftp
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-gridftp
 </pre></div>
 
 
@@ -850,8 +850,8 @@ ipc_interface IP-TO-USE
 </table>
 <h2 id="validating-gridftp">Validating GridFTP<a class="headerlink" href="#validating-gridftp" title="Permanent link">&para;</a></h2>
 <p>The GridFTP service can be validated by using globus-url-copy. You will need to run <code>grid-proxy-init</code> or <code>voms-proxy-init</code> in order to get a valid user proxy in order to communicate with the GridFTP server.</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> globus-url-copy file:///tmp/zero.source gsiftp://yourhost.yourdomain/tmp/zero
-<span class="gp">[root@client ~] #</span> <span class="nb">echo</span> <span class="nv">$?</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> globus-url-copy file:///tmp/zero.source gsiftp://yourhost.yourdomain/tmp/zero
+<span class="gp">root@host #</span> <span class="nb">echo</span> <span class="nv">$?</span>
 <span class="go">0</span>
 </pre></div>
 

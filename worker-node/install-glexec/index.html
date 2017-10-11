@@ -757,13 +757,13 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The glexec tracking function requires a part of HTCondor. There are multiple ways to install HTCondor, for details see <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CondorInformation">these instructions</a>. If you want a minimal install, you can run just this command to install the needed piece from the OSG distribution:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install condor-procd
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install condor-procd
 </pre></div>
 
 
 </div>
 <p>After meeting all the requirements in the previous section, install glexec with this command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install osg-wn-client-glexec
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-wn-client-glexec
 </pre></div>
 
 
@@ -815,11 +815,11 @@ gridmapfile -&gt; glexectracking
 </ol>
 <h2 id="testing-the-installation-of-glexec">Testing the Installation of glexec<a class="headerlink" href="#testing-the-installation-of-glexec" title="Permanent link">&para;</a></h2>
 <p>Now, <em>as a non-privileged user (not root)</em>, do the following (where <YOURVO> is your VO, and <UID> is your uid as reported by <code>/usr/bin/id</code>):</p>
-<div class="codehilite"><pre><span></span><span class="gp">[user@client ~] $</span> voms-proxy-init -voms &lt;YOURVO&gt;:/&lt;YOURVO&gt;
-<span class="gp">[user@client ~] $</span> <span class="nb">export</span> <span class="nv">GLEXEC_CLIENT_CERT</span><span class="o">=</span>/tmp/x509up_u&lt;UID&gt;
-<span class="gp">[user@client ~] $</span> <span class="nb">export</span> <span class="nv">X509_USER_PROXY</span><span class="o">=</span>/tmp/x509up_u&lt;UID&gt;
-<span class="gp">[user@client ~] $</span> /usr/sbin/glexec /usr/bin/id
-<span class="gp">[user@client ~] $</span> <span class="nv">uid</span><span class="o">=</span><span class="m">13160</span><span class="o">(</span>fnalgrid<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">9767</span><span class="o">(</span>fnalgrid<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span><span class="m">65000</span><span class="o">(</span>glexec00<span class="o">)</span>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> voms-proxy-init -voms &lt;YOURVO&gt;:/&lt;YOURVO&gt;
+<span class="gp">user@host $</span> <span class="nb">export</span> <span class="nv">GLEXEC_CLIENT_CERT</span><span class="o">=</span>/tmp/x509up_u&lt;UID&gt;
+<span class="gp">user@host $</span> <span class="nb">export</span> <span class="nv">X509_USER_PROXY</span><span class="o">=</span>/tmp/x509up_u&lt;UID&gt;
+<span class="gp">user@host $</span> /usr/sbin/glexec /usr/bin/id
+<span class="gp">user@host $</span> <span class="nv">uid</span><span class="o">=</span><span class="m">13160</span><span class="o">(</span>fnalgrid<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span><span class="m">9767</span><span class="o">(</span>fnalgrid<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span><span class="m">65000</span><span class="o">(</span>glexec00<span class="o">)</span>
 </pre></div>
 
 

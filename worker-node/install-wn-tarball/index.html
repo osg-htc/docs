@@ -723,15 +723,15 @@
 <p>Once <code>osg-post-install</code> is run to relocate the install, it cannot be run again.  You will need to unpack a fresh copy.</p>
 </div>
 <p>Example installation (in <code>/home/user/test-install</code>, the <strong><code>&lt;PATH_TO_CLIENT&gt;/</code></strong> is <code>/home/user/test-install/osg-wn-client</code> ):</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> mkdir /home/user/test-install
-<span class="gp">[root@client ~] #</span> <span class="nb">cd</span> /home/user/test-install
-<span class="gp">[root@client ~] #</span> wget http://repo.grid.iu.edu/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz
-<span class="gp">[root@client ~] #</span> tar xzf osg-wn-client-latest.el6.x86_64.tar.gz
-<span class="gp">[root@client ~] #</span> <span class="nb">cd</span> osg-wn-client
-<span class="gp">[root@client ~] #</span> ./osg/osg-post-install
-<span class="gp">[root@client ~] #</span> <span class="nb">source</span> setup.sh
-<span class="gp">[root@client ~] #</span> osg-ca-manage setupCA --url osg
-<span class="gp">[root@client ~] #</span> fetch-crl
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mkdir /home/user/test-install
+<span class="gp">root@host #</span> <span class="nb">cd</span> /home/user/test-install
+<span class="gp">root@host #</span> wget http://repo.grid.iu.edu/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz
+<span class="gp">root@host #</span> tar xzf osg-wn-client-latest.el6.x86_64.tar.gz
+<span class="gp">root@host #</span> <span class="nb">cd</span> osg-wn-client
+<span class="gp">root@host #</span> ./osg/osg-post-install
+<span class="gp">root@host #</span> <span class="nb">source</span> setup.sh
+<span class="gp">root@host #</span> osg-ca-manage setupCA --url osg
+<span class="gp">root@host #</span> fetch-crl
 </pre></div>
 
 

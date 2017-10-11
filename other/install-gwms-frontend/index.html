@@ -957,9 +957,9 @@
 <h2 id="install-htcondor">Install HTCondor<a class="headerlink" href="#install-htcondor" title="Permanent link">&para;</a></h2>
 <p>Most required software is installed from the Frontend RPM installation. HTCondor is the only exception since there are <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CondorInformation">many different ways to install it</a>, using the RPM system or not. You need to have HTCondor installed before installing the Glidein WMS Frontend. If yum cannot find a HTCondor RPM, it will install the dummy <code>empty-condor</code> RPM, assuming that you installed HTCondor using a tarball distribution.</p>
 <p>If you don't have HTCondor already installed, you can install the HTCondor RPM from the OSG repository:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install condor.x86_64
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install condor.x86_64
 <span class="gp">#</span> If you have a <span class="m">32</span> bit host use instead:
-<span class="gp">[root@client ~] #</span> yum install condor.i386
+<span class="gp">root@host #</span> yum install condor.i386
 </pre></div>
 
 
@@ -967,7 +967,7 @@
 <h2 id="download-and-install-the-vo-frontend-rpm">Download and install the VO Frontend RPM<a class="headerlink" href="#download-and-install-the-vo-frontend-rpm" title="Permanent link">&para;</a></h2>
 <p>The RPM is available in the OSG repository:</p>
 <p>Install the RPM and dependencies (be prepared for a lot of dependencies).</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install glideinwms-vofrontend
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install glideinwms-vofrontend
 </pre></div>
 
 
@@ -981,9 +981,9 @@
 <h3 id="advanced-multi-node-installation">Advanced: Multi-node Installation<a class="headerlink" href="#advanced-multi-node-installation" title="Permanent link">&para;</a></h3>
 <p>For advanced users requiring heavy usage on their submit node, you may want to consider splitting the usercollector, user submit, and vo frontend services.</p>
 <p>This can be doing using the following three commands (on different machines):</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install glideinwms-vofrontend-standalone
-<span class="gp">[root@client ~] #</span> yum install glideinwms-usercollector
-<span class="gp">[root@client ~] #</span> yum install glideinwms-userschedd
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install glideinwms-vofrontend-standalone
+<span class="gp">root@host #</span> yum install glideinwms-usercollector
+<span class="gp">root@host #</span> yum install glideinwms-userschedd
 </pre></div>
 
 
@@ -996,14 +996,14 @@
 <h3 id="upgrade-procedure">Upgrade Procedure<a class="headerlink" href="#upgrade-procedure" title="Permanent link">&para;</a></h3>
 <p>If you have a working installation of glideinwms-frontend you can just upgrade the frontend rpms and skip the most of the configuration procedure below. These general upgrade instructions apply when upgrading the glideinwms-frontend rpm within same major versions.</p>
 <div class="codehilite"><pre><span></span><span class="gp">%</span>RED%# Update the glideinwms-vofrontend packages</span>
-<span class="gp">[root@client ~] #</span> yum update glideinwms<span class="se">\*</span>
+<span class="gp">root@host #</span> yum update glideinwms<span class="se">\*</span>
 <span class="gp">%</span>RED%# Update the scripts in the working directory to the latest one</span>
 <span class="gp">%</span>RED%# For RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL7</span>
-<span class="gp">[root@client ~] #</span> /usr/sbin/gwms-frontend upgrade
+<span class="gp">root@host #</span> /usr/sbin/gwms-frontend upgrade
 <span class="gp">%</span>RED%# For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6</span>
-<span class="gp">[root@client ~] #</span> service gwms-frontend upgrade
+<span class="gp">root@host #</span> service gwms-frontend upgrade
 <span class="gp">%</span>RED%# Restart HTCondor because the configuration may be different</span>
-<span class="gp">[root@client ~] #</span> service condor restart
+<span class="gp">root@host #</span> service condor restart
 </pre></div>
 
 
@@ -1030,22 +1030,22 @@
 <li>Update the RPMs and backup configuration files</li>
 </ul>
 <div class="codehilite"><pre><span></span><span class="gp">%</span>RED%# Stop the glideinwms-vofrontend service</span>
-<span class="gp">[root@client ~] #</span> service gwms-frontend stop
+<span class="gp">root@host #</span> service gwms-frontend stop
 
 <span class="gp">%</span>RED%# Backup the v2.7.x configuration</span>
-<span class="gp">[root@client ~] #</span> cp /var/lib/gwms-frontend/vofrontend/frontend.xml /var/lib/gwms-frontend/vofrontend/frontend-2.xml
-<span class="gp">[root@client ~] #</span> cp /etc/gwms-frontend/frontend.xml /etc/gwms-frontend/frontend-2.xml
+<span class="gp">root@host #</span> cp /var/lib/gwms-frontend/vofrontend/frontend.xml /var/lib/gwms-frontend/vofrontend/frontend-2.xml
+<span class="gp">root@host #</span> cp /etc/gwms-frontend/frontend.xml /etc/gwms-frontend/frontend-2.xml
 
 <span class="gp">%</span>RED%# Update the glideinwms-vofrontend packages from v2.7.x to v3.2.x</span>
-<span class="gp">[root@client ~] #</span> yum update glideinwms<span class="se">\*</span>
+<span class="gp">root@host #</span> yum update glideinwms<span class="se">\*</span>
 </pre></div>
 
 
 <ul>
 <li>Convert v2.7.x configuration to v3.2.x configuration (only for RHEL 6, CentOS 6, and SL6. RHEL5 and drivative are not supported by v3.2.x, RHEL7 and derivative were not supported by v2.7.x)</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span>  /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /var/lib/gwms-frontend/vofrontend/frontend-2.xml -o /var/lib/gwms-frontend/vofrontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
-<span class="gp">[root@client ~] #</span>  /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /etc/gwms-frontend/frontend-2.xml -o /etc/gwms-frontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span>  /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /var/lib/gwms-frontend/vofrontend/frontend-2.xml -o /var/lib/gwms-frontend/vofrontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
+<span class="gp">root@host #</span>  /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /etc/gwms-frontend/frontend-2.xml -o /etc/gwms-frontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
 </pre></div>
 
 
@@ -1053,7 +1053,7 @@
 <li>Update the scripts in the working directory</li>
 </ul>
 <div class="codehilite"><pre><span></span><span class="gp">%</span>RED%# Update the scripts in the working directory to the latest one</span>
-<span class="gp">[root@client ~] #</span>  service gwms-frontend upgrade
+<span class="gp">root@host #</span>  service gwms-frontend upgrade
 </pre></div>
 
 
@@ -1168,7 +1168,7 @@ Both the <code>classad_proxy</code> and <code>absfname</code> files should be ow
 <li>90_gwms_dns.config</li>
 </ul>
 <p>Get rid of the pre-loaded condor default to avoid conflicts in the configuration.</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> rm /etc/condor/config.d/00personal_condor.config
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rm /etc/condor/config.d/00personal_condor.config
 </pre></div>
 
 
@@ -1182,7 +1182,7 @@ Both the <code>classad_proxy</code> and <code>absfname</code> files should be ow
 <li>Note that the variable LOCAL_DIR is set differently in UW Madison and OSG RPMs. This should not cause any more problems in the glideinwms RPMs, but please take note if you use this variable in your job submissions or other customizations.</li>
 </ul>
 <p>In general if you are using a non OSG RPM or if you added custom configuration files for HTCondor please check the order of the configuration files:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> condor_config_val -config
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> condor_config_val -config
 <span class="go">Configuration source:</span>
 <span class="go">    /etc/condor/condor_config</span>
 <span class="go">Local configuration sources:</span>
@@ -1204,7 +1204,7 @@ Both the <code>classad_proxy</code> and <code>absfname</code> files should be ow
 </li>
 <li>
 <p>Verify the alll the expected HTCondor daemons are running:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> condor_config_val -verbose DAEMON_LIST DAEMON_LIST: MASTER, COLLECTOR, NEGOTIATOR, SCHEDD, SHARED_PORT, COLLECTOR0
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> condor_config_val -verbose DAEMON_LIST DAEMON_LIST: MASTER, COLLECTOR, NEGOTIATOR, SCHEDD, SHARED_PORT, COLLECTOR0
 <span class="go">COLLECTOR1 COLLECTOR2 COLLECTOR3 COLLECTOR4 COLLECTOR5 COLLECTOR6 COLLECTOR7 COLLECTOR8 COLLECTOR9 COLLECTOR10 , COLLECTOR11, COLLECTOR12,</span>
 <span class="go">COLLECTOR13, COLLECTOR14, COLLECTOR15, COLLECTOR16, COLLECTOR17, COLLECTOR18, COLLECTOR19, COLLECTOR20, COLLECTOR21, COLLECTOR22, COLLECTOR23,</span>
 <span class="go">COLLECTOR24, COLLECTOR25, COLLECTOR26, COLLECTOR27, COLLECTOR28, COLLECTOR29, COLLECTOR30, COLLECTOR31, COLLECTOR32, COLLECTOR33, COLLECTOR34,</span>
@@ -1264,7 +1264,7 @@ FS (.*) \1
 
 <h3 id="restart-condor">Restart Condor<a class="headerlink" href="#restart-condor" title="Permanent link">&para;</a></h3>
 <p>After configuring condor, be sure to restart condor:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service condor restart
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service condor restart
 </pre></div>
 
 
@@ -1273,22 +1273,22 @@ FS (.*) \1
 <h3 id="manual-proxy-renewal">Manual proxy renewal<a class="headerlink" href="#manual-proxy-renewal" title="Permanent link">&para;</a></h3>
 <p><span style="color:green">VO Frontend proxy</span>
 The VO Frontend Proxy is used for communicating with the other glideinWMS services (Factory, User Collector and Schedd/Submit services). Create the proxy using the glidenWMS VO Frontend Host (or Service) cert and change ownership to the frontend user.</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> voms-proxy-init-valid <span style="color:red">&lt;hours_valid&gt;</span> <span class="se">\</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> voms-proxy-init-valid <span style="color:red">&lt;hours_valid&gt;</span> <span class="se">\</span>
 -cert /etc/grid-security/hostcert.pem <span class="se">\</span>
 -key /etc/grid-security/hostkey.pem <span class="se">\</span>
 -out <span style="color:green">/tmp/vofe_proxy</span>
-<span class="gp">[root@client ~] #</span> chown frontend <span style="color:green">/tmp/vofe_proxy</span>
+<span class="gp">root@host #</span> chown frontend <span style="color:green">/tmp/vofe_proxy</span>
 </pre></div>
 
 
 <p><span style="color:red">Pilot proxy</span>
 The pilot proxy is used on the glideinWMS pilot jobs submitted to the CEs. Create the proxy using the <span style="color:red">pilot certificate</span> and change ownership to the frontend user.</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> voms-proxy-init -valid <span style="color:red">&lt;hours_valid&gt;</span><span class="se">\</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> voms-proxy-init -valid <span style="color:red">&lt;hours_valid&gt;</span><span class="se">\</span>
 -voms &lt;vo&gt;
 <span class="go">-cert &lt;pilot_cert&gt; \</span>
 <span class="go">-key &lt;pilot_key&gt; \</span>
 <span class="go">-out <span style="color:red">/tmp/pilot_proxy</span></span>
-<span class="gp">[root@client ~] #</span> chown frontend <span style="color:red">/tmp/pilot_proxy</span>
+<span class="gp">root@host #</span> chown frontend <span style="color:red">/tmp/pilot_proxy</span>
 </pre></div>
 
 
@@ -1304,15 +1304,15 @@ The pilot proxy is used on the glideinWMS pilot jobs submitted to the CEs. Creat
 <ol>
 <li>
 <p>Copy the Host (or Service) certificate and key</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> cp /etc/grid-security/hostcert.pem /etc/grid-security/hostkey.pem /var/lib/gwms-frontend/
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp /etc/grid-security/hostcert.pem /etc/grid-security/hostkey.pem /var/lib/gwms-frontend/
 </pre></div>
 
 
 </li>
 <li>
 <p>Change ownership and permission of the certificate and key</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> chown frontend: /var/lib/gwms-frontend/host**.pem
-<span class="gp">[root@client ~] #</span> chmod <span class="m">0600</span> /var/lib/gwms-frontend/host**.pem
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chown frontend: /var/lib/gwms-frontend/host**.pem
+<span class="gp">root@host #</span> chmod <span class="m">0600</span> /var/lib/gwms-frontend/host**.pem
 </pre></div>
 
 
@@ -1322,17 +1322,17 @@ The pilot proxy is used on the glideinWMS pilot jobs submitted to the CEs. Creat
 <ol>
 <li>
 <p>Create the proxy using the pilot certificate/key (as the user/submitter)</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> grid-proxy-init -valid <span class="m">8800</span>:0 -out /tmp/tmp_proxy
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> grid-proxy-init -valid <span class="m">8800</span>:0 -out /tmp/tmp_proxy
 </pre></div>
 
 
 </li>
 <li>
 <p>Copy the proxy to the correct name and change ownership and permissions (as root):</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> cp /tmp/tmp_proxy /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
-<span class="gp">[root@client ~] #</span> chown frontend: /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
-<span class="gp">[root@client ~] #</span> chmod <span class="m">0600</span> /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
-<span class="gp">[root@client ~] #</span> rm /tmp/tmp_proxy
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp /tmp/tmp_proxy /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
+<span class="gp">root@host #</span> chown frontend: /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
+<span class="gp">root@host #</span> chmod <span class="m">0600</span> /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
+<span class="gp">root@host #</span> rm /tmp/tmp_proxy
 </pre></div>
 
 
@@ -1395,21 +1395,21 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 <p class="admonition-title">Warning</p>
 <p>In order to use the frontend, first you must reconfigure and upgrade it.</p>
 <div class="codehilite"><pre><span></span><span class="c"><span style="color:red"># For RHEL 6, CentOS 6, and SL6</span></span>
-<span class="p">[</span><span class="n">root</span><span class="p">@</span><span class="n">client</span> <span class="o">~</span><span class="p">]</span> # <span class="n">service</span> <span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span> <span class="n">reconfig</span>
-<span class="p">[</span><span class="n">root</span><span class="p">@</span><span class="n">client</span> <span class="o">~</span><span class="p">]</span> # <span class="n">service</span> <span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span> <span class="n">upgrade</span>
+<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="n">service</span> <span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span> <span class="n">reconfig</span>
+<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="n">service</span> <span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span> <span class="n">upgrade</span>
 
 <span class="c"><span style="color:red"># For RHEL 7, CentOS 7, and SL7</span></span>
-<span class="p">[</span><span class="n">root</span><span class="p">@</span><span class="n">client</span> <span class="o">~</span><span class="p">]</span> # <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span> <span class="n">reconfig</span>
-<span class="p">[</span><span class="n">root</span><span class="p">@</span><span class="n">client</span> <span class="o">~</span><span class="p">]</span> # <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span> <span class="n">upgrade</span>
+<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span> <span class="n">reconfig</span>
+<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span> <span class="n">upgrade</span>
 </pre></div>
 
 
 </div>
 <p>After this initial reconfiguring/upgrading, you can start the frontend:</p>
 <div class="codehilite"><pre><span></span> <span class="c"><span style="color:red"># For RHEL 6, CentOS 6, and SL6</span></span>
- <span class="p">[</span><span class="n">root</span><span class="p">@</span><span class="n">client</span> <span class="o">~</span><span class="p">]</span> # <span class="n">service</span> <span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span> <span class="n">start</span>
+ <span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="n">service</span> <span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span> <span class="n">start</span>
  <span class="c"><span style="color:red"># For RHEL 7, CentOS 7, and SL7</span></span>
- <span class="p">[</span><span class="n">root</span><span class="p">@</span><span class="n">client</span> <span class="o">~</span><span class="p">]</span> # <span class="n">systemctl</span> <span class="n">start</span> <span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span>
+ <span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="n">systemctl</span> <span class="n">start</span> <span class="n">gwms</span><span class="o">-</span><span class="n">frontend</span>
 </pre></div>
 
 
@@ -1450,7 +1450,7 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 </li>
 <li>
 <p>Reconfigure the Frontend:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> /etc/init.d/gwms-frontend reconfig
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /etc/init.d/gwms-frontend reconfig
 </pre></div>
 
 
@@ -1507,13 +1507,13 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 <li>
 <p>You need to fetch the latest CA Certificate Revocation Lists (CRLs) and you should enable the fetch-crl service to keep the CRLs up to date:</p>
 <div class="codehilite"><pre><span></span><span class="gp">%</span>RED%# For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6, or OSG <span class="m">3</span> _older_ than <span class="m">3</span>.1.15</span>
-<span class="gp">[root@client ~]$</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs</span>
-<span class="gp">[root@client ~]$</span> /sbin/service fetch-crl-boot start
-<span class="gp">[root@client ~]$</span> /sbin/service fetch-crl-cron start
+<span class="gp">root@host #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs</span>
+<span class="gp">root@host #</span> /sbin/service fetch-crl-boot start
+<span class="gp">root@host #</span> /sbin/service fetch-crl-cron start
 <span class="gp">%</span>RED% <span class="c1"># For RHEL 7, CentOS 7, and SL7 </span></span>
-<span class="gp">[root@client ~]$</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs</span>
-<span class="gp">[root@client ~]$</span> systemctl start fetch-crl-boot
-<span class="gp">[root@client ~]$</span> systemctl start fetch-crl-cron
+<span class="gp">root@host #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs</span>
+<span class="gp">root@host #</span> systemctl start fetch-crl-boot
+<span class="gp">root@host #</span> systemctl start fetch-crl-cron
 </pre></div>
 
 
@@ -1521,12 +1521,12 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 <li>
 <p>HTCondor, httpd, VO Frontend</p>
 <div class="codehilite"><pre><span></span><span class="gp">%</span>RED%# For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6</span>
-<span class="gp">[root@client ~] #</span> service condor start
-<span class="gp">[root@client ~] #</span> service httpd start
-<span class="gp">[root@client ~] #</span> service gwms-frontend start
+<span class="gp">root@host #</span> service condor start
+<span class="gp">root@host #</span> service httpd start
+<span class="gp">root@host #</span> service gwms-frontend start
 <span class="gp">%</span>RED%# For RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL7</span>
-<span class="gp">[root@client ~] #</span> systemctl start condor
-<span class="gp">[root@client ~] #</span> systemctl start gwms-frontend
+<span class="gp">root@host #</span> systemctl start condor
+<span class="gp">root@host #</span> systemctl start gwms-frontend
 </pre></div>
 
 
@@ -1536,17 +1536,17 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 <p class="admonition-title">Note</p>
 <p>Once you successfully start using the frontend service, each time you change the configuration or want to upgrade, you run the following command</p>
 <div class="codehilite"><pre><span></span><span class="gp">%</span>RED%# For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6</span>
-<span class="gp">[root@client ~] #</span> service gwms-frontend reconfig
+<span class="gp">root@host #</span> service gwms-frontend reconfig
 <span class="gp">%</span>RED%# And <span class="k">if</span> you change also some code</span>
-<span class="gp">[root@client ~] #</span> service gwms-frontend upgrade
+<span class="gp">root@host #</span> service gwms-frontend upgrade
 
 <span class="gp">%</span>RED%# But the situation is a bit more complicated in RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL7 due to systemd restrictions</span>
 <span class="gp">%</span>GREEN%# For reconfig:</span>
 <span class="gp">%</span>RED%A. when the frontend is running</span>
 <span class="gp">%</span>RED%A.1 without any additional options</span>
-<span class="gp">[root@client ~] #</span> /usr/sbin/gwms-frontend reconfig</span>
+<span class="gp">root@host #</span> /usr/sbin/gwms-frontend reconfig</span>
 <span class="go">or</span>
-<span class="gp">[root@client ~] #</span> systemctl reload gwms-frontend
+<span class="gp">root@host #</span> systemctl reload gwms-frontend
 
 <span class="gp">%</span>RED%A.2 <span class="k">if</span> you want to give additional options </span>
 <span class="go">systemctl stop gwms-frontend</span>
@@ -1554,7 +1554,7 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 <span class="go">systemctl start gwms-frontend</span>
 
 <span class="gp">%</span>RED%B. when the frontend is NOT running </span>
-<span class="gp">[root@client ~] #</span> /usr/sbin/gwms-frontend reconfig <span class="o">(</span><span class="s2">&quot;and your options&quot;</span><span class="o">)</span>
+<span class="gp">root@host #</span> /usr/sbin/gwms-frontend reconfig <span class="o">(</span><span class="s2">&quot;and your options&quot;</span><span class="o">)</span>
 
 <span class="gp">%</span>GREEN%# For upgrade:</span>
 <span class="gp">%</span>RED%A. when the frontend is running </span>
@@ -1570,9 +1570,9 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 </div>
 <p>To stop the frontend:</p>
 <div class="codehilite"><pre><span></span><span class="gp">%</span>RED%# For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6</span>
-<span class="gp">[root@client ~] #</span> service gwms-frontend stop
+<span class="gp">root@host #</span> service gwms-frontend stop
 <span class="gp">%</span>RED%# For RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL7</span>
-<span class="gp">[root@client ~] #</span> systemctl stop gwms-frontend
+<span class="gp">root@host #</span> systemctl stop gwms-frontend
 </pre></div>
 
 
@@ -1582,7 +1582,7 @@ VOMS_OPTION=&quot;osg:/osg&quot;
 <ol>
 <li>
 <p>Verify all Condor daemons are started.</p>
-<div class="codehilite"><pre><span></span>[user@client ~]$ condor_config_val -verbose DAEMON_LIST
+<div class="codehilite"><pre><span></span>user@host $ condor_config_val -verbose DAEMON_LIST
 DAEMON_LIST: MASTER,  COLLECTOR, NEGOTIATOR,  SCHEDD, SHARED_PORT, SCHEDDJOBS2 COLLECTOR0 COLLECTOR1 COLLECTOR2
 COLLECTOR3 COLLECTOR4 COLLECTOR5 COLLECTOR6 COLLECTOR7 COLLECTOR8 COLLECTOR9 COLLECTOR10 , COLLECTOR11,
 COLLECTOR12, COLLECTOR13, COLLECTOR14, COLLECTOR15, COLLECTOR16, COLLECTOR17, COLLECTOR18, COLLECTOR19, COLLECTOR20,
@@ -1597,7 +1597,7 @@ Defined in &#39;/etc/condor/config.d/11_gwms_secondary_collectors.config&#39;, l
 </li>
 <li>
 <p>Verify all VO Frontend Condor services are communicating.</p>
-<div class="codehilite"><pre><span></span>[user@client ~]$ condor_status -any
+<div class="codehilite"><pre><span></span>user@host $ condor_status -any
 MyType               TargetType           Name
 glideresource        None                 MM_fermicloud026@gfactory_inst
 Scheduler            None                 fermicloud020.fnal.gov
@@ -1633,7 +1633,7 @@ queue
 
 
 <p>To submit the job:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> condor_submit glidein-job.sub
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> condor_submit glidein-job.sub
 </pre></div>
 
 

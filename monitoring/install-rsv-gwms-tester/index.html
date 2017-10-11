@@ -706,7 +706,7 @@
 </ul>
 <h2 id="installing-the-tester">Installing the Tester<a class="headerlink" href="#installing-the-tester" title="Permanent link">&para;</a></h2>
 <p>The Tester software takes advantage of several other OSG software components, so the installation will also include OSG’s site validation system (RSV), HTCondor, and the GlideinWMS pilot submission software.</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> yum install rsv-gwms-tester
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install rsv-gwms-tester
 </pre></div>
 
 
@@ -717,12 +717,12 @@
 <ol>
 <li>
 <p>Authorize the Tester host to connect to your Central Manager:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> glidecondor_addDN -allow-others -daemon <span style="color:red">&lt;COMMENT&gt; &lt;TESTER_DN&gt;</span> condor
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> glidecondor_addDN -allow-others -daemon <span style="color:red">&lt;COMMENT&gt; &lt;TESTER_DN&gt;</span> condor
 </pre></div>
 
 
 <p>Where <code>COMMENT</code> is a human-readable label for the Tester host (e.g., “RSV GWMS Tester at myhost”), and <code>TESTER_DN</code> is the Distinguished Name (DN) of the host certificate of your Tester host. Most likely, you will need to quote both of these values to protect them from the shell. For example:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> glidecondor_addDN -allow-others -daemon <span class="s1">&#39;RSV GWMS Tester on Fermicloud&#39;</span> <span class="s1">&#39;/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=fermicloud357.fnal.gov&#39;</span> condor
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> glidecondor_addDN -allow-others -daemon <span class="s1">&#39;RSV GWMS Tester on Fermicloud&#39;</span> <span class="s1">&#39;/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=fermicloud357.fnal.gov&#39;</span> condor
 </pre></div>
 
 
@@ -730,12 +730,12 @@
 <li>
 <p>Restart HTCondor to apply the changes</p>
 <p>On <strong>EL 6</strong> systems:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service condor restart
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service condor restart
 </pre></div>
 
 
 <p>On <strong>EL 7</strong> systems:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> systemctl restart condor
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl restart condor
 </pre></div>
 
 
@@ -753,7 +753,7 @@
 
 
 <p>Reconfigure your GlideinWMS front-end to apply the changes:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> service gwms-frontend reconfig
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service gwms-frontend reconfig
 </pre></div>
 
 
@@ -779,12 +779,12 @@
 </li>
 <li>
 <p>Authorize the central manager of your Front-end to connect to the tester host:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> glidecondor_addDN -allow-others -daemon <span style="color:red">&lt;COMMENT&gt; &lt;CENTRAL_MGR&gt;</span> condor
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> glidecondor_addDN -allow-others -daemon <span style="color:red">&lt;COMMENT&gt; &lt;CENTRAL_MGR&gt;</span> condor
 </pre></div>
 
 
 <p>Where <code>COMMENT</code> is a human-readable identifier for the Central Manager, and <code>CENTRAL_MGR</code> is the Distinguished Name (DN) of the host certificate of your GlideinWMS Front-end’s Central Manager host. Most likely, you will need to quote both of these values to protect them from the shell. For example:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> glidecondor_addDN -allow-others -daemon <span class="s1">&#39;UCSD central manager DN&#39;</span> <span class="s1">&#39;/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=osg-ligo-1.t2.ucsd.edu&#39;</span> condor
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> glidecondor_addDN -allow-others -daemon <span class="s1">&#39;UCSD central manager DN&#39;</span> <span class="s1">&#39;/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=osg-ligo-1.t2.ucsd.edu&#39;</span> condor
 </pre></div>
 
 
@@ -801,7 +801,7 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 </li>
 <li>
 <p>Enable the Tester’s RSV probe:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> rsv-control --enable org.osg.local-gfactory-site-querying-local --host localhost
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rsv-control --enable org.osg.local-gfactory-site-querying-local --host localhost
 </pre></div>
 
 
@@ -860,7 +860,7 @@ CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 <p>To see the list of sites that are supported by your VO(s) and are being tested, click the “org.osg.local-gfactory-site-querying-local” link at the bottom of the list of probes. You can also run the probe manually, as described next.</p>
 <h3 id="listing-supported-sites-manually">Listing supported sites manually<a class="headerlink" href="#listing-supported-sites-manually" title="Permanent link">&para;</a></h3>
 <p>To manually run the probe that fetches the list of sites supported by your VO(s), run the following command on your Tester host:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] #</span> rsv-control --run org.osg.local-gfactory-site-querying-local --host localhost
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rsv-control --run org.osg.local-gfactory-site-querying-local --host localhost
 </pre></div>
 
 
