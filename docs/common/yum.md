@@ -47,9 +47,9 @@ OSG RPMs are distributed via the OSG yum repositories. Some packages depend on p
 
         :::console
         # EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
-        [root@client ~] # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+        root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
         # EPEL 7 (For RHEL 7, CentOS 7, and SL 7) 
-        [root@client ~] # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 
 !!! warning

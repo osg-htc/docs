@@ -45,7 +45,7 @@ The following will install CVMFS from the OSG yum repository. It will also insta
 3. Install CVMFS software:
 
         :::console
-        [root@client ~] $ yum install osg-oasis
+        root@host # yum install osg-oasis
 
 ## Setup of FUSE and automount
 
@@ -67,7 +67,7 @@ FUSE and automount are required for CVMFS and the steps to configure them are di
 3. Restart autofs to make the change take effect:
 
         :::console
-        [root@client ~] $ service autofs restart
+        root@host # service autofs restart
 
 ### For EL7 hosts
 
@@ -78,7 +78,7 @@ FUSE and automount are required for CVMFS and the steps to configure them are di
 2. Restart autofs to make the change take effect:
 
         :::console
-        [root@client ~] $ systemctl restart autofs
+        root@host # systemctl restart autofs
 <br>
 
 
@@ -204,7 +204,7 @@ the repositories are accessed; there are no system services to start.
 CVMFS can be stopped via:
 
 ```console
-[root@client ~] $ cvmfs_config umount
+root@host # cvmfs_config umount
 Unmounting /cvmfs/config-osg.opensciencegrid.org: OK
 Unmounting /cvmfs/atlas.cern.ch: OK
 Unmounting /cvmfs/oasis.opensciencegrid.org: OK
