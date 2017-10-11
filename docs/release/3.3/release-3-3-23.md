@@ -23,8 +23,8 @@ These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%
 <span class="twiki-macro NOTE"></span> After updating OSG-CE to version 3.3-12, please disable and remove OSG Info Services via the following procedure:
 
 ``` console
-[root@client ~] $ service osg-info-services stop
-[root@client ~] $ yum erase gip osg-info-services
+root@host # service osg-info-services stop
+root@host # yum erase gip osg-info-services
 ```
 
 Detailed changes are below. All of the documentation can be found in the [Release3](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/) area of the TWiki.
@@ -56,7 +56,7 @@ To update to this series, you need [install the current OSG repositories](../../
 Once the new repositories are installed, you can update to this new release with:
 
 ``` console
-[root@client ~] $ yum update
+root@host # yum update
 ```
 
 <span class="twiki-macro NOTE"></span> Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
