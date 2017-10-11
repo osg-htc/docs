@@ -28,7 +28,7 @@ Installing the Tester
 The Tester software takes advantage of several other OSG software components, so the installation will also include OSG’s site validation system (RSV), HTCondor, and the GlideinWMS pilot submission software.
 
 ```console
-[root@client ~] # yum install rsv-gwms-tester
+root@host # yum install rsv-gwms-tester
 ```
 
 Configuring the Tester
@@ -43,25 +43,25 @@ Complete these steps **on your GlideinWMS Front-end Central Manager host**:
 1. Authorize the Tester host to connect to your Central Manager:
 
         :::console
-        [root@client ~] # glidecondor_addDN -allow-others -daemon %RED%<COMMENT> <TESTER_DN>%ENDCOLOR% condor
+        root@host # glidecondor_addDN -allow-others -daemon %RED%<COMMENT> <TESTER_DN>%ENDCOLOR% condor
 
 
      Where `COMMENT` is a human-readable label for the Tester host (e.g., “RSV GWMS Tester at myhost”), and `TESTER_DN` is the Distinguished Name (DN) of the host certificate of your Tester host. Most likely, you will need to quote both of these values to protect them from the shell. For example:
 
         :::console
-        [root@client ~] # glidecondor_addDN -allow-others -daemon 'RSV GWMS Tester on Fermicloud' '/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=fermicloud357.fnal.gov' condor
+        root@host # glidecondor_addDN -allow-others -daemon 'RSV GWMS Tester on Fermicloud' '/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=fermicloud357.fnal.gov' condor
 
 2. Restart HTCondor to apply the changes
 
     On **EL 6** systems:
 
         :::console
-        [root@client ~] # service condor restart
+        root@host # service condor restart
 
     On **EL 7** systems:
 
         :::console
-        [root@client ~] # systemctl restart condor
+        root@host # systemctl restart condor
 
 3. Add the new Tester to your GlideinWMS front-end configuration.
    Edit the file `/etc/gwms-frontend/frontend.xml` and add a line as follows within the `<schedds>` element
@@ -77,7 +77,7 @@ Complete these steps **on your GlideinWMS Front-end Central Manager host**:
      Reconfigure your GlideinWMS front-end to apply the changes:
 
         :::console
-        [root@client ~] # service gwms-frontend reconfig
+        root@host # service gwms-frontend reconfig
 
 ### Configuring the Tester host
 
@@ -102,12 +102,12 @@ Complete the following steps **on your Tester host**:
 2. Authorize the central manager of your Front-end to connect to the tester host:
 
         :::console
-        [root@client ~] # glidecondor_addDN -allow-others -daemon %RED%<COMMENT> <CENTRAL_MGR>%ENDCOLOR% condor
+        root@host # glidecondor_addDN -allow-others -daemon %RED%<COMMENT> <CENTRAL_MGR>%ENDCOLOR% condor
 
     Where `COMMENT` is a human-readable identifier for the Central Manager, and `CENTRAL_MGR` is the Distinguished Name (DN) of the host certificate of your GlideinWMS Front-end’s Central Manager host. Most likely, you will need to quote both of these values to protect them from the shell. For example:
 
         :::console
-        [root@client ~] # glidecondor_addDN -allow-others -daemon 'UCSD central manager DN' '/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=osg-ligo-1.t2.ucsd.edu' condor
+        root@host # glidecondor_addDN -allow-others -daemon 'UCSD central manager DN' '/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=osg-ligo-1.t2.ucsd.edu' condor
 
 3. Configure the special HTCondor-RSV instance with your host IP address.
 
@@ -122,7 +122,7 @@ Complete the following steps **on your Tester host**:
 4. Enable the Tester’s RSV probe:
 
         :::console
-        [root@client ~] # rsv-control --enable org.osg.local-gfactory-site-querying-local --host localhost
+        root@host # rsv-control --enable org.osg.local-gfactory-site-querying-local --host localhost
 
 Using the Tester
 ----------------
@@ -172,7 +172,7 @@ To see the list of sites that are supported by your VO(s) and are being tested, 
 To manually run the probe that fetches the list of sites supported by your VO(s), run the following command on your Tester host:
 
 ```console
-[root@client ~] # rsv-control --run org.osg.local-gfactory-site-querying-local --host localhost
+root@host # rsv-control --run org.osg.local-gfactory-site-querying-local --host localhost
 ```
 
 The probe produces many lines of output, some of which are just about the probe execution itself. But look for lines like this:

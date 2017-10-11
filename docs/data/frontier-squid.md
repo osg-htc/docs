@@ -63,18 +63,18 @@ To install Frontier Squid, make sure that your host is up to date before install
 1. Clean yum cache:
 
         ::console
-        [root@client ~ ] $ yum clean all --enablerepo=*
+        root@host # yum clean all --enablerepo=*
 
 2. Update software:
 
         :::console
-        [root@client ~ ] $ yum update
+        root@host # yum update
     This command will update **all** packages
 
 3. Install Frontier Squid:
 
         :::console
-        [root@client ~ ] $ yum install frontier-squid
+        root@host # yum install frontier-squid
         
 ## Configuring Frontier Squid
 
@@ -131,10 +131,10 @@ As any user on another computer, do the following (where
 squid server):
 
 ``` console
-[user@client ~] $ export http_proxy=http://%RED%yoursquid.your.domain%ENDCOLOR%:3128
-[user@client ~] $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
+user@host $ export http_proxy=http://%RED%yoursquid.your.domain%ENDCOLOR%:3128
+user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
 X-Cache: MISS from %RED%yoursquid.your.domain%ENDCOLOR%
-[user@client ~] $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
+user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
 X-Cache: HIT from %RED%yoursquid.your.domain%ENDCOLOR%
 ```
 
