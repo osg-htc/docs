@@ -34,12 +34,12 @@ The following will install CVMFS from the OSG yum repository. It will also insta
 1. Clean yum cache:
 
         ::console
-        [root@client ~ ] $ yum clean all --enablerepo=*
+        root@host # yum clean all --enablerepo=*
 
 2. Update software:
 
         :::console
-        [root@client ~ ] $ yum update
+        root@host # yum update
     This command will update **all** packages
 
 3. Install CVMFS software:
@@ -136,7 +136,7 @@ it.
     `cvmfs_cache_t`. This can be done by executing the following command:
 
         :::console
-        [user@client ~] $ chcon -R -t cvmfs_cache_t %RED%$CVMFS_CACHE_BASE%ENDCOLOR%
+        user@host $ chcon -R -t cvmfs_cache_t %RED%$CVMFS_CACHE_BASE%ENDCOLOR%
 
 ## Validating CVMFS
 
@@ -144,29 +144,29 @@ After CVMFS is installed, you should be able to see the `/cvmfs`
 directory. But note that it will initially appear to be empty:
 
 ```console
-[user@client ~] $ ls /cvmfs
-[user@client ~] $
+user@host $ ls /cvmfs
+user@host $
 ```
 <br>
 Directories within `/cvmfs` will not be mounted until you examine them. For instance:
 
 ```console
-[user@client ~] $ ls /cvmfs
-[user@client ~] $ ls -l /cvmfs/atlas.cern.ch
+user@host $ ls /cvmfs
+user@host $ ls -l /cvmfs/atlas.cern.ch
 total 1
 drwxr-xr-x 8 cvmfs cvmfs 3 Apr 13 14:50 repo
-[user@client ~] $ ls -l /cvmfs/oasis.opensciencegrid.org/cmssoft
+user@host $ ls -l /cvmfs/oasis.opensciencegrid.org/cmssoft
 total 1
 lrwxrwxrwx 1 cvmfs cvmfs 18 May 13  2015 cms -> /cvmfs/cms.cern.ch
-[user@client ~] $ ls -l /cvmfs/glast.egi.eu
+user@host $ ls -l /cvmfs/glast.egi.eu
 total 5
 drwxr-xr-x 9 cvmfs cvmfs 4096 Feb  7  2014 glast
-[user@client ~] $ ls -l /cvmfs/nova.osgstorage.org
+user@host $ ls -l /cvmfs/nova.osgstorage.org
 total 6
 lrwxrwxrwx 1 cvmfs cvmfs   43 Jun 14  2016 analysis -> pnfs/fnal.gov/usr/nova/persistent/analysis/
 lrwxrwxrwx 1 cvmfs cvmfs   32 Jan 19 11:40 flux -> pnfs/fnal.gov/usr/nova/data/flux
 drwxr-xr-x 3 cvmfs cvmfs 4096 Jan 19 11:39 pnfs
-[user@client ~] $ ls /cvmfs
+user@host $ ls /cvmfs
 atlas.cern.ch                   glast.egi.eu         oasis.opensciencegrid.org
 config-osg.opensciencegrid.org  nova.osgstorage.org
 ```

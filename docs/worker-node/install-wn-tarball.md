@@ -50,15 +50,15 @@ For OSG 3.4:
 Example installation (in `/home/user/test-install`, the **`<PATH_TO_CLIENT>/`** is `/home/user/test-install/osg-wn-client` ):
 
 ```console
-[root@client ~] # mkdir /home/user/test-install
-[root@client ~] # cd /home/user/test-install
-[root@client ~] # wget http://repo.grid.iu.edu/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz
-[root@client ~] # tar xzf osg-wn-client-latest.el6.x86_64.tar.gz
-[root@client ~] # cd osg-wn-client
-[root@client ~] # ./osg/osg-post-install
-[root@client ~] # source setup.sh
-[root@client ~] # osg-ca-manage setupCA --url osg
-[root@client ~] # fetch-crl
+root@host # mkdir /home/user/test-install
+root@host # cd /home/user/test-install
+root@host # wget http://repo.grid.iu.edu/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz
+root@host # tar xzf osg-wn-client-latest.el6.x86_64.tar.gz
+root@host # cd osg-wn-client
+root@host # ./osg/osg-post-install
+root@host # source setup.sh
+root@host # osg-ca-manage setupCA --url osg
+root@host # fetch-crl
 ```
 
 #### Configure the CE

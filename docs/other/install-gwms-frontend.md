@@ -160,9 +160,9 @@ Most required software is installed from the Frontend RPM installation. HTCondor
 If you don't have HTCondor already installed, you can install the HTCondor RPM from the OSG repository:
 
 ``` console
-[root@client ~] # yum install condor.x86_64
+root@host # yum install condor.x86_64
 # If you have a 32 bit host use instead:
-[root@client ~] # yum install condor.i386
+root@host # yum install condor.i386
 ```
 
 See [this HTCondor document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CondorInformation) for more information on the different options.
@@ -175,7 +175,7 @@ The RPM is available in the OSG repository:
 Install the RPM and dependencies (be prepared for a lot of dependencies).
 
 ``` console
-[root@client ~] # yum install glideinwms-vofrontend
+root@host # yum install glideinwms-vofrontend
 ```
 
 This will install the current production release verified and tested by OSG with default condor configuration. This command will install the glideinwms vofrontend, condor, the OSG client, and all the required dependencies all on one node.
@@ -194,9 +194,9 @@ For advanced users requiring heavy usage on their submit node, you may want to c
 This can be doing using the following three commands (on different machines):
 
 ``` console
-[root@client ~] # yum install glideinwms-vofrontend-standalone
-[root@client ~] # yum install glideinwms-usercollector
-[root@client ~] # yum install glideinwms-userschedd
+root@host # yum install glideinwms-vofrontend-standalone
+root@host # yum install glideinwms-usercollector
+root@host # yum install glideinwms-userschedd
 ```
 
 In addition, you will need to perform the following steps:
@@ -211,14 +211,14 @@ If you have a working installation of glideinwms-frontend you can just upgrade t
 
 ``` console
 %RED%# Update the glideinwms-vofrontend packages%ENDCOLOR%
-[root@client ~] # yum update glideinwms\*
+root@host # yum update glideinwms\*
 %RED%# Update the scripts in the working directory to the latest one%ENDCOLOR%
 %RED%# For RHEL 7, CentOS 7, and SL7%ENDCOLOR%
-[root@client ~] # /usr/sbin/gwms-frontend upgrade
+root@host # /usr/sbin/gwms-frontend upgrade
 %RED%# For RHEL 6, CentOS 6, and SL6%ENDCOLOR%
-[root@client ~] # service gwms-frontend upgrade
+root@host # service gwms-frontend upgrade
 %RED%# Restart HTCondor because the configuration may be different%ENDCOLOR%
-[root@client ~] # service condor restart
+root@host # service condor restart
 ```
 
 !!! note
@@ -242,28 +242,28 @@ Due to incompatibilities between the major versions, upgrade process involves ce
 
 ``` console
 %RED%# Stop the glideinwms-vofrontend service%ENDCOLOR%
-[root@client ~] # service gwms-frontend stop
+root@host # service gwms-frontend stop
 
 %RED%# Backup the v2.7.x configuration%ENDCOLOR%
-[root@client ~] # cp /var/lib/gwms-frontend/vofrontend/frontend.xml /var/lib/gwms-frontend/vofrontend/frontend-2.xml
-[root@client ~] # cp /etc/gwms-frontend/frontend.xml /etc/gwms-frontend/frontend-2.xml
+root@host # cp /var/lib/gwms-frontend/vofrontend/frontend.xml /var/lib/gwms-frontend/vofrontend/frontend-2.xml
+root@host # cp /etc/gwms-frontend/frontend.xml /etc/gwms-frontend/frontend-2.xml
 
 %RED%# Update the glideinwms-vofrontend packages from v2.7.x to v3.2.x%ENDCOLOR%
-[root@client ~] # yum update glideinwms\*
+root@host # yum update glideinwms\*
 ```
 
 - Convert v2.7.x configuration to v3.2.x configuration (only for RHEL 6, CentOS 6, and SL6. RHEL5 and drivative are not supported by v3.2.x, RHEL7 and derivative were not supported by v2.7.x)
 
 ``` console
-[root@client ~] #  /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /var/lib/gwms-frontend/vofrontend/frontend-2.xml -o /var/lib/gwms-frontend/vofrontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
-[root@client ~] #  /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /etc/gwms-frontend/frontend-2.xml -o /etc/gwms-frontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
+root@host #  /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /var/lib/gwms-frontend/vofrontend/frontend-2.xml -o /var/lib/gwms-frontend/vofrontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
+root@host #  /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /etc/gwms-frontend/frontend-2.xml -o /etc/gwms-frontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
 ```
 
 -   Update the scripts in the working directory
 
 ``` console
 %RED%# Update the scripts in the working directory to the latest one%ENDCOLOR%
-[root@client ~] #  service gwms-frontend upgrade
+root@host #  service gwms-frontend upgrade
 ```
 
 Configuration Procedure
@@ -373,7 +373,7 @@ The condor configuration for the frontend is placed in `/etc/condor/config.d`.
 Get rid of the pre-loaded condor default to avoid conflicts in the configuration.
 
     :::console
-    [root@client ~] # rm /etc/condor/config.d/00personal_condor.config
+    root@host # rm /etc/condor/config.d/00personal_condor.config
 
 
 For most installations create a new file named `/etc/condor/config.d/92_local_condor.config`
@@ -391,7 +391,7 @@ If you are using the UW Madison Condor RPMS, be aware of the following changes:
 In general if you are using a non OSG RPM or if you added custom configuration files for HTCondor please check the order of the configuration files:
 
     :::console
-    [root@client ~] # condor_config_val -config
+    root@host # condor_config_val -config
     Configuration source:
         /etc/condor/condor_config
     Local configuration sources:
@@ -412,7 +412,7 @@ If, like in the example above, the GlideinWMS configuration files are not the la
 2. Verify the alll the expected HTCondor daemons are running:
 
         :::console
-        [root@client ~] # condor_config_val -verbose DAEMON_LIST DAEMON_LIST: MASTER, COLLECTOR, NEGOTIATOR, SCHEDD, SHARED_PORT, COLLECTOR0
+        root@host # condor_config_val -verbose DAEMON_LIST DAEMON_LIST: MASTER, COLLECTOR, NEGOTIATOR, SCHEDD, SHARED_PORT, COLLECTOR0
         COLLECTOR1 COLLECTOR2 COLLECTOR3 COLLECTOR4 COLLECTOR5 COLLECTOR6 COLLECTOR7 COLLECTOR8 COLLECTOR9 COLLECTOR10 , COLLECTOR11, COLLECTOR12,
         COLLECTOR13, COLLECTOR14, COLLECTOR15, COLLECTOR16, COLLECTOR17, COLLECTOR18, COLLECTOR19, COLLECTOR20, COLLECTOR21, COLLECTOR22, COLLECTOR23,
         COLLECTOR24, COLLECTOR25, COLLECTOR26, COLLECTOR27, COLLECTOR28, COLLECTOR29, COLLECTOR30, COLLECTOR31, COLLECTOR32, COLLECTOR33, COLLECTOR34,
@@ -466,7 +466,7 @@ FS (.*) \1
 After configuring condor, be sure to restart condor:
 
     :::console
-    [root@client ~] # service condor restart
+    root@host # service condor restart
 
 
 Proxy Configuration
@@ -480,22 +480,22 @@ There are 2 types of (or purposes for) proxies required for the VO Frontend: 1 t
 The VO Frontend Proxy is used for communicating with the other glideinWMS services (Factory, User Collector and Schedd/Submit services). Create the proxy using the glidenWMS VO Frontend Host (or Service) cert and change ownership to the frontend user.
 
     :::console
-    [root@client ~] # voms-proxy-init-valid %RED%<hours_valid>%ENDCOLOR% \
+    root@host # voms-proxy-init-valid %RED%<hours_valid>%ENDCOLOR% \
     -cert /etc/grid-security/hostcert.pem \
     -key /etc/grid-security/hostkey.pem \
     -out %GREEN%/tmp/vofe_proxy%ENDCOLOR%
-    [root@client ~] # chown frontend %GREEN%/tmp/vofe_proxy%ENDCOLOR%
+    root@host # chown frontend %GREEN%/tmp/vofe_proxy%ENDCOLOR%
 
 %RED%Pilot proxy%ENDCOLOR%
 The pilot proxy is used on the glideinWMS pilot jobs submitted to the CEs. Create the proxy using the %RED%pilot certificate%ENDCOLOR% and change ownership to the frontend user.
 
     :::console
-    [root@client ~] # voms-proxy-init -valid %RED%<hours_valid>%ENDCOLOR%\
+    root@host # voms-proxy-init -valid %RED%<hours_valid>%ENDCOLOR%\
     -voms <vo>
     -cert <pilot_cert> \
     -key <pilot_key> \
     -out %RED%/tmp/pilot_proxy%ENDCOLOR%
-    [root@client ~] # chown frontend %RED%/tmp/pilot_proxy%ENDCOLOR%
+    root@host # chown frontend %RED%/tmp/pilot_proxy%ENDCOLOR%
 
 !!! warning
     **Proxies do expire.** You can extend the validity by using a longer time interval, e.g. `-valid 3000:0`. This sequence of commands will need to be renewed when the proxy expires or the machine reboots (if /tmp is used only).
@@ -513,13 +513,13 @@ Preparation for the %GREEN%VO Frontend proxy%ENDCOLOR%. You'll have to redo this
 1. Copy the Host (or Service) certificate and key
 
         :::console
-        [root@client ~] # cp /etc/grid-security/hostcert.pem /etc/grid-security/hostkey.pem /var/lib/gwms-frontend/
+        root@host # cp /etc/grid-security/hostcert.pem /etc/grid-security/hostkey.pem /var/lib/gwms-frontend/
 
 2. Change ownership and permission of the certificate and key
 
         :::console
-        [root@client ~] # chown frontend: /var/lib/gwms-frontend/host**.pem
-        [root@client ~] # chmod 0600 /var/lib/gwms-frontend/host**.pem
+        root@host # chown frontend: /var/lib/gwms-frontend/host**.pem
+        root@host # chmod 0600 /var/lib/gwms-frontend/host**.pem
 
 
 Preparation for the %RED% pilot proxy%ENDCOLOR%. You'll have to redo this for each new or renewed pilot cert.
@@ -527,15 +527,15 @@ Preparation for the %RED% pilot proxy%ENDCOLOR%. You'll have to redo this for ea
 1. Create the proxy using the pilot certificate/key (as the user/submitter)
 
         :::console
-        [root@client ~] # grid-proxy-init -valid 8800:0 -out /tmp/tmp_proxy
+        root@host # grid-proxy-init -valid 8800:0 -out /tmp/tmp_proxy
 
 2. Copy the proxy to the correct name and change ownership and permissions (as root):
 
         :::console
-        [root@client ~] # cp /tmp/tmp_proxy /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
-        [root@client ~] # chown frontend: /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
-        [root@client ~] # chmod 0600 /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
-        [root@client ~] # rm /tmp/tmp_proxy
+        root@host # cp /tmp/tmp_proxy /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
+        root@host # chown frontend: /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
+        root@host # chmod 0600 /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
+        root@host # rm /tmp/tmp_proxy
 
 Configure the script for the %GREEN%VO Frontend proxy%ENDCOLOR%
 
@@ -590,19 +590,19 @@ Reconfigure and verify installation
     In order to use the frontend, first you must reconfigure and upgrade it.
 
         %RED%# For RHEL 6, CentOS 6, and SL6%ENDCOLOR%
-        [root@client ~] # service gwms-frontend reconfig
-        [root@client ~] # service gwms-frontend upgrade
+        root@host # service gwms-frontend reconfig
+        root@host # service gwms-frontend upgrade
 
         %RED%# For RHEL 7, CentOS 7, and SL7%ENDCOLOR%
-        [root@client ~] # /usr/sbin/gwms-frontend reconfig
-        [root@client ~] # /usr/sbin/gwms-frontend upgrade
+        root@host # /usr/sbin/gwms-frontend reconfig
+        root@host # /usr/sbin/gwms-frontend upgrade
 
 After this initial reconfiguring/upgrading, you can start the frontend:
 
      %RED%# For RHEL 6, CentOS 6, and SL6%ENDCOLOR%
-     [root@client ~] # service gwms-frontend start
+     root@host # service gwms-frontend start
      %RED%# For RHEL 7, CentOS 7, and SL7%ENDCOLOR%
-     [root@client ~] # systemctl start gwms-frontend
+     root@host # systemctl start gwms-frontend
 
 
 Adding Gratia Accounting and a Local Monitoring Page on a Production Server
@@ -644,7 +644,7 @@ In order to allow users to specify the sites at which their jobs want to run (or
 4. Reconfigure the Frontend:
 
         :::console
-        [root@client ~] # /etc/init.d/gwms-frontend reconfig
+        root@host # /etc/init.d/gwms-frontend reconfig
 
 ### Creating a group for testing configuration changes
 
@@ -691,41 +691,41 @@ The scripts updating your CA and CRLs plus three frontend services need to be ru
 
         :::console
         %RED%# For RHEL 6, CentOS 6, and SL6, or OSG 3 _older_ than 3.1.15%ENDCOLOR%
-        [root@client ~]$ /usr/sbin/fetch-crl   # This fetches the CRLs
-        [root@client ~]$ /sbin/service fetch-crl-boot start
-        [root@client ~]$ /sbin/service fetch-crl-cron start
+        root@host # /usr/sbin/fetch-crl   # This fetches the CRLs
+        root@host # /sbin/service fetch-crl-boot start
+        root@host # /sbin/service fetch-crl-cron start
         %RED% # For RHEL 7, CentOS 7, and SL7 %ENDCOLOR%
-        [root@client ~]$ /usr/sbin/fetch-crl   # This fetches the CRLs
-        [root@client ~]$ systemctl start fetch-crl-boot
-        [root@client ~]$ systemctl start fetch-crl-cron
+        root@host # /usr/sbin/fetch-crl   # This fetches the CRLs
+        root@host # systemctl start fetch-crl-boot
+        root@host # systemctl start fetch-crl-cron
 
 2.  HTCondor, httpd, VO Frontend
 
         :::console
         %RED%# For RHEL 6, CentOS 6, and SL6%ENDCOLOR%
-        [root@client ~] # service condor start
-        [root@client ~] # service httpd start
-        [root@client ~] # service gwms-frontend start
+        root@host # service condor start
+        root@host # service httpd start
+        root@host # service gwms-frontend start
         %RED%# For RHEL 7, CentOS 7, and SL7%ENDCOLOR%
-        [root@client ~]	# systemctl start condor
-        [root@client ~] # systemctl start gwms-frontend
+        root@host # systemctl start condor
+        root@host # systemctl start gwms-frontend
 
 !!! note
     Once you successfully start using the frontend service, each time you change the configuration or want to upgrade, you run the following command
 
         :::console
         %RED%# For RHEL 6, CentOS 6, and SL6%ENDCOLOR%
-        [root@client ~] # service gwms-frontend reconfig
+        root@host # service gwms-frontend reconfig
         %RED%# And if you change also some code%ENDCOLOR%
-        [root@client ~] # service gwms-frontend upgrade
+        root@host # service gwms-frontend upgrade
 
         %RED%# But the situation is a bit more complicated in RHEL 7, CentOS 7, and SL7 due to systemd restrictions%ENDCOLOR%
         %GREEN%# For reconfig:%ENDCOLOR%
         %RED%A. when the frontend is running%ENDCOLOR%
         %RED%A.1 without any additional options%ENDCOLOR%
-        [root@client ~] # /usr/sbin/gwms-frontend reconfig%ENDCOLOR%
+        root@host # /usr/sbin/gwms-frontend reconfig%ENDCOLOR%
         or
-        [root@client ~] # systemctl reload gwms-frontend
+        root@host # systemctl reload gwms-frontend
 
         %RED%A.2 if you want to give additional options %ENDCOLOR%
         systemctl stop gwms-frontend
@@ -733,7 +733,7 @@ The scripts updating your CA and CRLs plus three frontend services need to be ru
         systemctl start gwms-frontend
 
         %RED%B. when the frontend is NOT running %ENDCOLOR%
-        [root@client ~] # /usr/sbin/gwms-frontend reconfig ("and your options")
+        root@host # /usr/sbin/gwms-frontend reconfig ("and your options")
 
         %GREEN%# For upgrade:%ENDCOLOR%
         %RED%A. when the frontend is running %ENDCOLOR%
@@ -748,9 +748,9 @@ To stop the frontend:
 
     :::console
     %RED%# For RHEL 6, CentOS 6, and SL6%ENDCOLOR%
-    [root@client ~] # service gwms-frontend stop
+    root@host # service gwms-frontend stop
     %RED%# For RHEL 7, CentOS 7, and SL7%ENDCOLOR%
-    [root@client ~] # systemctl stop gwms-frontend
+    root@host # systemctl stop gwms-frontend
 
 And you can stop also the other services if you are not using them independently form the frontend.
 
@@ -762,7 +762,7 @@ The complete validation of the frontend is the submission of actual jobs. Howeve
 1. Verify all Condor daemons are started.
 
         :::file
-        [user@client ~]$ condor_config_val -verbose DAEMON_LIST
+        user@host $ condor_config_val -verbose DAEMON_LIST
         DAEMON_LIST: MASTER,  COLLECTOR, NEGOTIATOR,  SCHEDD, SHARED_PORT, SCHEDDJOBS2 COLLECTOR0 COLLECTOR1 COLLECTOR2
         COLLECTOR3 COLLECTOR4 COLLECTOR5 COLLECTOR6 COLLECTOR7 COLLECTOR8 COLLECTOR9 COLLECTOR10 , COLLECTOR11,
         COLLECTOR12, COLLECTOR13, COLLECTOR14, COLLECTOR15, COLLECTOR16, COLLECTOR17, COLLECTOR18, COLLECTOR19, COLLECTOR20,
@@ -776,7 +776,7 @@ The complete validation of the frontend is the submission of actual jobs. Howeve
 2. Verify all VO Frontend Condor services are communicating.
 
         :::file
-        [user@client ~]$ condor_status -any
+        user@host $ condor_status -any
         MyType               TargetType           Name
         glideresource        None                 MM_fermicloud026@gfactory_inst
         Scheduler            None                 fermicloud020.fnal.gov
@@ -811,7 +811,7 @@ queue
 To submit the job:
 
     :::console
-    [root@client ~] # condor_submit glidein-job.sub
+    root@host # condor_submit glidein-job.sub
 
 Then you can control the job like a normal condor job, e.g. to check the status of the job use `condor_q`.
 
