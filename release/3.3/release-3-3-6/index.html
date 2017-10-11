@@ -581,6 +581,16 @@
   
 	    </li>
           
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
             <li class="toctree-l1 current">
 		
   
@@ -705,11 +715,11 @@
 <li><code>cd</code> into the appropriate folder:<br />
 <pre class="rootscreen"># For EL5 hosts:</li>
 </ol>
-<p>[root@client ~] $ cd /usr/lib/python2.4/site-packages/osgpkitools/ # For EL6 hosts: [root@client ~] $ cd /usr/lib/python2.6/site-packages/osgpkitools/</pre></p>
+<p>root@host # cd /usr/lib/python2.4/site-packages/osgpkitools/ # For EL6 hosts: [root@client ~] $ cd /usr/lib/python2.6/site-packages/osgpkitools/</pre></p>
 <ol>
 <li>
 <p>Apply the patch:<br />
-<pre class="rootscreen">[root@client ~] $ patch &lt; ~/osgpkitools.patch</pre> * HTCondor 8.4.0 has changed it's behavior in ways that cause the GlideinWMS frontend configuration to break. In order to correct this, the following setting needs to be added to the configuration file:</p>
+<pre class="rootscreen">root@host # patch &lt; ~/osgpkitools.patch</pre> * HTCondor 8.4.0 has changed it's behavior in ways that cause the GlideinWMS frontend configuration to break. In order to correct this, the following setting needs to be added to the configuration file:</p>
 <div class="codehilite"><pre><span></span>COLLECTOR_USES_SHARED_PORT = False
 </pre></div>
 
@@ -763,7 +773,7 @@ all.pidpath /var/run/xrootd
 <p>To update to this series, you need <a href="../../../common/yum#install-osg-repositories">install the current OSG repositories</a>.</p>
 <h3 id="update-software">Update Software<a class="headerlink" href="#update-software" title="Permanent link">&para;</a></h3>
 <p>Once the new repositories are installed, you can update to this new release with:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> yum update
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum update
 </pre></div>
 
 

@@ -461,6 +461,16 @@
   
 	    </li>
           
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
             <li class="toctree-l1 current">
 		
   
@@ -716,8 +726,8 @@
 <ul>
 <li>After updating OSG-CE to version 3.3-12, please disable and remove OSG Info Services via the following procedure:</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> service osg-info-services stop
-<span class="gp">[root@client ~] $</span> yum erase gip osg-info-services
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service osg-info-services stop
+<span class="gp">root@host #</span> yum erase gip osg-info-services
 </pre></div>
 
 
@@ -740,7 +750,7 @@
 <p>To update to this series, you need <a href="../../../common/yum#install-osg-repositories">install the current OSG repositories</a>.</p>
 <h3 id="update-software">Update Software<a class="headerlink" href="#update-software" title="Permanent link">&para;</a></h3>
 <p>Once the new repositories are installed, you can update to this new release with:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> yum update
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum update
 </pre></div>
 
 

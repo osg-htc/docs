@@ -466,6 +466,16 @@
   
 	    </li>
           
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
             <li class="toctree-l1 current">
 		
   
@@ -694,8 +704,8 @@
 </ul>
 <p>These <a href="https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.23%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a> were addressed in this release.</p>
 <p><span class="twiki-macro NOTE"></span> After updating OSG-CE to version 3.3-12, please disable and remove OSG Info Services via the following procedure:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> service osg-info-services stop
-<span class="gp">[root@client ~] $</span> yum erase gip osg-info-services
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service osg-info-services stop
+<span class="gp">root@host #</span> yum erase gip osg-info-services
 </pre></div>
 
 
@@ -720,7 +730,7 @@
 <p>To update to this series, you need <a href="../../../common/yum#install-osg-repositories">install the current OSG repositories</a>.</p>
 <h3 id="update-software">Update Software<a class="headerlink" href="#update-software" title="Permanent link">&para;</a></h3>
 <p>Once the new repositories are installed, you can update to this new release with:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> yum update
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum update
 </pre></div>
 
 

@@ -591,6 +591,16 @@
   
 	    </li>
           
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
             <li class="toctree-l1 current">
 		
   
@@ -693,7 +703,7 @@
 <ul>
 <li>CILogon CA certificate files have been reorganized between our various CA certificate packages.<br />
 To avoid file conflicts, you should upgrade your CA certificate RPMs at the same time, such as via the following command:<br />
-<pre class="rootscreen">[root@client ~] $ yum update '*-ca-cert*'</pre></li>
+<pre class="rootscreen">root@host # yum update '*-ca-cert*'</pre></li>
 <li>
 <p>When using osg-configure to configure a CE host, it will fail because it tries to contact a ReSS server that has been shut down permanently. The ReSS service has been deprecated since early 2014, and support for it will be removed from osg-configure in an upcoming version. To work around this osg-configure failure now, edit /etc/osg/config.d/30-infoservices.ini and set the option:</p>
 <div class="codehilite"><pre><span></span>ress_servers = https://localhost[RAW]
@@ -785,7 +795,7 @@ all.pidpath /var/run/xrootd
 <p>To update to this series, you need <a href="../../../common/yum#install-osg-repositories">install the current OSG repositories</a>.</p>
 <h3 id="update-software">Update Software<a class="headerlink" href="#update-software" title="Permanent link">&para;</a></h3>
 <p>Once the new repositories are installed, you can update to this new release with:</p>
-<div class="codehilite"><pre><span></span><span class="gp">[root@client ~] $</span> yum update
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum update
 </pre></div>
 
 
