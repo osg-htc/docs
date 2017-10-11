@@ -13,7 +13,7 @@ Installation
 Installation is done with the `yum install` command. Each of the individual installation guide shows you the correct command to use to do an installation. Here is an example installation with all of the output from yum.
 
 ```console
-[root@client ~] # sudo yum install osg-ca-certs
+root@host # sudo yum install osg-ca-certs
 Loaded plugins: kernel-module, priorities
 epel                                                                                         | 3.7 kB     00:00     
 epel/primary_db                                                                              | 3.8 MB     00:00     
@@ -292,7 +292,7 @@ Upgrading Packages
 You can check for updates with `yum check-update`. For example:
 
 ``` console
-[root@client ~] # yum check-update
+root@host # yum check-update
 Loaded plugins: kernel-module, priorities
 957 packages excluded due to repository priority protections
 
@@ -305,7 +305,7 @@ ocsinventory-agent.noarch                                1.1.2.1-1.el5          
 You can do the update with `yum update`. Note that in this case we got more than was listed due to dependencies that needed to be resolved:
 
 ``` console
-[root@client ~] # yum update
+root@host # yum update
 957 packages excluded due to repository priority protections
 Setting up Update Process
 Resolving Dependencies
@@ -423,7 +423,7 @@ Advanced topic: Only geting OSG updates
 If you only want to get updates from the OSG repository and *no other* repositories, you can tell yum to do that with the following command:
 
 ```console
-[root@client ~] # yum --disablerepo=* --enablerepo=osg update
+root@host # yum --disablerepo=* --enablerepo=osg update
 ```
 
 Advanced topic: Getting debugging information for installed software
@@ -456,7 +456,7 @@ Installing the debuginfo package requires three steps.
 3.  Install the debugging information for that package. Continuing this example: 
 
         :::console
-        [root@client ~] # debuginfo-install globus-proxy-utils
+        root@host # debuginfo-install globus-proxy-utils
         ...
         =================================================================================================================================
          Package                                      Arch                   Version                     Repository                 Size
@@ -492,13 +492,13 @@ Error Downloading Packages:
 then you can try cleaning up Yum's cache: 
 
 ```console
-[root@client ~] # yum clean all --enablerpeo=*
+root@host # yum clean all --enablerpeo=*
 ```
 
 to make an even more thorough job you can follow also add:
 
 ```console
-[root@client ~] # yum clean expire-cache --enablerepo=*
+root@host # yum clean expire-cache --enablerepo=*
 ```
 
 !!! note 
@@ -509,7 +509,7 @@ to make an even more thorough job you can follow also add:
 If yum is complaining you can re-import the keys in your distribution: 
 
 ```console
-[root@client ~] # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
+root@host # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
 ```
 
 References
