@@ -63,7 +63,7 @@ For packages that exist in both OSG and EPEL repositories, it is important to pr
 1.  Install the Yum priorities package:
 
         :::console
-        [root@client ~]# yum install yum-plugin-priorities
+        root@host # yum install yum-plugin-priorities
 
 2.  Ensure that `/etc/yum.conf` has the following line in the `[main]` section (particularly when using ROCKS), thereby enabling Yum plugins, including the priorities one:
     
@@ -78,15 +78,15 @@ For packages that exist in both OSG and EPEL repositories, it is important to pr
 If you are upgrading from one OSG series to another, remove the old OSG repository definition files and clean the Yum cache:
 
     :::console
-    [root@client ~]$ yum clean all 
-    [root@client ~]$ rpm -e osg-release
+    root@host # yum clean all 
+    root@host # rpm -e osg-release
     
 This step ensures that local changes to `*.repo` files will not block the installation of the new OSG repositories. After this step, `*.repo` files that have been changed will exist in `/etc/yum.repos.d/` with the `*.rpmsave` extension. After installing the new OSG repositories (the next step) you may want to apply any changes made in the `*.rpmsave` files to the new `*.repo` files.
 
 Install the OSG repositories:
 
     :::console
-    [root@client ~]$ rpm -Uvh <URL>
+    root@host # rpm -Uvh <URL>
     
 Where `<URL>` is one of the following:
 

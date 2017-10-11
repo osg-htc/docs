@@ -394,8 +394,8 @@ Login on the node where your certificate and [OSG Worker Node Client](../worker-
 Then test GridFTP using `globus-url-copy`:
 
 ```console
-[user@client ~] $ echo "This is a test" >/tmp/test 
-[user@client ~] $ globus-url-copy -dbg file:///tmp/test gsiftp://<GRIDFTP_HOST>/tmp/test 
+user@host $ echo "This is a test" >/tmp/test 
+user@host $ globus-url-copy -dbg file:///tmp/test gsiftp://<GRIDFTP_HOST>/tmp/test 
 ```
 Check the GridFTP logs to see if you have encountered any errors.
 
@@ -489,7 +489,7 @@ Requesting host certificates in RHEL6
 Bestman may not start if the certificates were requested on slc6. This is be caused by a bug in JGlobus (see [JGlobusIssue118](https://github.com/jglobus/JGlobus/issues/118)), a `bestman2` dependency. A known workaround is to run this command
 
 ```console
-[user@client ~] $ openssl rsa -in mykey.pem -out mykey.pem.old
+user@host $ openssl rsa -in mykey.pem -out mykey.pem.old
 ```
 
 This command on converts `mykey.pem` to `mykey.pem.old`; the latter format is supported.
