@@ -1,0 +1,228 @@
+---+ OSG Software Release 3.2.14
+
+*Release Date*: 2014-08-12
+
+---++ Summary of changes
+
+This release contains:
+   * HTCondor CE 1.4
+      * osg-configure mprovements to better support HTCondor CE 1.4
+      * RSV improvements to better support HTCondor CE 1.4
+   * [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/history.html][GlideinWMS 3.2.5.1]] (updating from version 3.2.3)
+   * [[https://twiki.grid.iu.edu/bin/view/Operations/PackageV56][VO Package v56]]
+   * Other osg-configure improvements
+      * Better error message for missing environment variables
+      * Set PATH in job environment
+   * GIP reads user customized RVF files
+   * !GridFTP address logging
+   * Other minor improvements
+
+These [[https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%20%223.2.14%22][JIRA tickets]] were addressed in this release.
+
+Detailed changes are below. All of the documentation can be found in the [[Documentation.Release3][Release3]] area of the !TWiki.
+
+---++ Known Issues
+
+---++ Updating to the new release
+
+---+++ Update Repositories
+
+This is a release in a newer [[Documentation.Release3.OSGReleaseSeries][OSG Release Series]].
+To update to this new series, you need [[Documentation.Release3.YumRepositories#Install_OSG_Repositories][install the new OSG repositories]].
+
+---+++ Update Software
+
+Once the new repositories are installed, you can update to this new release with:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum update
+</pre>
+
+
+%NOTE% Please be aware that running =yum update= may also update other RPMs. You can exclude packages from being updated using the =--exclude&#61;[package-name or glob]= option for the =yum= command.
+
+%NOTE% Watch the yum update carefully for any messages about a =.rpmnew= file being created.  That means that a configuration file had been editted, and a new default version was to be installed.  In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a =.rpmnew= extension. You will need to merge any edits that have made into the =.rpmnew= file and then move the merged version into place (that is, without the =.rpmnew= extension).  Watch especially for =/etc/lcmaps.db=, which every site is expected to edit.
+
+---++ Need help?
+
+Do you need help with this release? [[HelpProcedure][Contact us for help]].
+
+---++ Detailed changes in this release
+
+---+++ Packages
+
+We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
+
+---++++ Enterprise Linux 5   
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gip-1.3.10-8.osg32.el5][gip-1.3.10-8.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glideinwms-3.2.5.1-2.osg32.el5][glideinwms-3.2.5.1-2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-ftp-control-4.7-1.2.osg32.el5][globus-ftp-control-4.7-1.2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=htcondor-ce-1.4-1.osg32.el5][htcondor-ce-1.4-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-build-1.4.0-1.osg32.el5][osg-build-1.4.0-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ce-3.2-5.osg32.el5][osg-ce-3.2-5.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-configure-1.0.58-3.osg32.el5][osg-configure-1.0.58-3.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.14-1.osg32.el5][osg-version-3.2.14-1.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.7.18-2.osg32.el5][rsv-3.7.18-2.osg32.el5]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-56-1.osg32.el5][vo-client-56-1.osg32.el5]]
+
+---++++ Enterprise Linux 6
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=gip-1.3.10-8.osg32.el6][gip-1.3.10-8.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=glideinwms-3.2.5.1-2.osg32.el6][glideinwms-3.2.5.1-2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=globus-ftp-control-4.7-1.2.osg32.el6][globus-ftp-control-4.7-1.2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=htcondor-ce-1.4-1.osg32.el6][htcondor-ce-1.4-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-build-1.4.0-1.osg32.el6][osg-build-1.4.0-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ce-3.2-5.osg32.el6][osg-ce-3.2-5.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-configure-1.0.58-3.osg32.el6][osg-configure-1.0.58-3.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-version-3.2.14-1.osg32.el6][osg-version-3.2.14-1.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=rsv-3.7.18-2.osg32.el6][rsv-3.7.18-2.osg32.el6]]
+   * [[https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-56-1.osg32.el6][vo-client-56-1.osg32.el6]]
+
+---+++ RPMs
+
+If you wish to manually update your system, you can run yum update against the following packages:
+
+<pre class="file">
+gip glideinwms-factory glideinwms-factory-condor glideinwms-glidecondor-tools glideinwms-libs glideinwms-minimal-condor glideinwms-usercollector glideinwms-userschedd glideinwms-vofrontend glideinwms-vofrontend-standalone globus-ftp-control globus-ftp-control-debuginfo globus-ftp-control-devel globus-ftp-control-doc htcondor-ce htcondor-ce-client htcondor-ce-condor htcondor-ce-debuginfo htcondor-ce-lsf htcondor-ce-pbs htcondor-ce-sge osg-base-ce osg-base-ce-condor osg-base-ce-lsf osg-base-ce-pbs osg-base-ce-sge osg-build osg-ce osg-ce-condor osg-ce-lsf osg-ce-pbs osg-ce-sge osg-configure osg-configure-ce osg-configure-cemon osg-configure-condor osg-configure-gateway osg-configure-gip osg-configure-gratia osg-configure-infoservices osg-configure-lsf osg-configure-managedfork osg-configure-misc osg-configure-monalisa osg-configure-network osg-configure-pbs osg-configure-rsv osg-configure-sge osg-configure-slurm osg-configure-squid osg-configure-tests osg-gums-config osg-htcondor-ce osg-htcondor-ce-condor osg-htcondor-ce-lsf osg-htcondor-ce-pbs osg-htcondor-ce-sge osg-version rsv rsv-consumers rsv-core rsv-metrics vo-client vo-client-edgmkgridmap
+</pre>
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
+
+---++++ Enterprise Linux 5
+
+<pre class="file">
+gip-1.3.10-8.osg32.el5
+glideinwms-3.2.5.1-2.osg32.el5
+glideinwms-factory-3.2.5.1-2.osg32.el5
+glideinwms-factory-condor-3.2.5.1-2.osg32.el5
+glideinwms-glidecondor-tools-3.2.5.1-2.osg32.el5
+glideinwms-libs-3.2.5.1-2.osg32.el5
+glideinwms-minimal-condor-3.2.5.1-2.osg32.el5
+glideinwms-usercollector-3.2.5.1-2.osg32.el5
+glideinwms-userschedd-3.2.5.1-2.osg32.el5
+glideinwms-vofrontend-3.2.5.1-2.osg32.el5
+glideinwms-vofrontend-standalone-3.2.5.1-2.osg32.el5
+globus-ftp-control-4.7-1.2.osg32.el5
+globus-ftp-control-debuginfo-4.7-1.2.osg32.el5
+globus-ftp-control-devel-4.7-1.2.osg32.el5
+globus-ftp-control-doc-4.7-1.2.osg32.el5
+htcondor-ce-1.4-1.osg32.el5
+htcondor-ce-client-1.4-1.osg32.el5
+htcondor-ce-condor-1.4-1.osg32.el5
+htcondor-ce-debuginfo-1.4-1.osg32.el5
+htcondor-ce-lsf-1.4-1.osg32.el5
+htcondor-ce-pbs-1.4-1.osg32.el5
+htcondor-ce-sge-1.4-1.osg32.el5
+osg-base-ce-3.2-5.osg32.el5
+osg-base-ce-condor-3.2-5.osg32.el5
+osg-base-ce-lsf-3.2-5.osg32.el5
+osg-base-ce-pbs-3.2-5.osg32.el5
+osg-base-ce-sge-3.2-5.osg32.el5
+osg-build-1.4.0-1.osg32.el5
+osg-ce-3.2-5.osg32.el5
+osg-ce-condor-3.2-5.osg32.el5
+osg-ce-lsf-3.2-5.osg32.el5
+osg-ce-pbs-3.2-5.osg32.el5
+osg-ce-sge-3.2-5.osg32.el5
+osg-configure-1.0.58-3.osg32.el5
+osg-configure-ce-1.0.58-3.osg32.el5
+osg-configure-cemon-1.0.58-3.osg32.el5
+osg-configure-condor-1.0.58-3.osg32.el5
+osg-configure-gateway-1.0.58-3.osg32.el5
+osg-configure-gip-1.0.58-3.osg32.el5
+osg-configure-gratia-1.0.58-3.osg32.el5
+osg-configure-infoservices-1.0.58-3.osg32.el5
+osg-configure-lsf-1.0.58-3.osg32.el5
+osg-configure-managedfork-1.0.58-3.osg32.el5
+osg-configure-misc-1.0.58-3.osg32.el5
+osg-configure-monalisa-1.0.58-3.osg32.el5
+osg-configure-network-1.0.58-3.osg32.el5
+osg-configure-pbs-1.0.58-3.osg32.el5
+osg-configure-rsv-1.0.58-3.osg32.el5
+osg-configure-sge-1.0.58-3.osg32.el5
+osg-configure-slurm-1.0.58-3.osg32.el5
+osg-configure-squid-1.0.58-3.osg32.el5
+osg-configure-tests-1.0.58-3.osg32.el5
+osg-gums-config-56-1.osg32.el5
+osg-htcondor-ce-3.2-5.osg32.el5
+osg-htcondor-ce-condor-3.2-5.osg32.el5
+osg-htcondor-ce-lsf-3.2-5.osg32.el5
+osg-htcondor-ce-pbs-3.2-5.osg32.el5
+osg-htcondor-ce-sge-3.2-5.osg32.el5
+osg-version-3.2.14-1.osg32.el5
+rsv-3.7.18-2.osg32.el5
+rsv-consumers-3.7.18-2.osg32.el5
+rsv-core-3.7.18-2.osg32.el5
+rsv-metrics-3.7.18-2.osg32.el5
+vo-client-56-1.osg32.el5
+vo-client-edgmkgridmap-56-1.osg32.el5
+</pre>
+
+---++++ Enterprise Linux 6
+
+<pre class="file">
+gip-1.3.10-8.osg32.el6
+glideinwms-3.2.5.1-2.osg32.el6
+glideinwms-factory-3.2.5.1-2.osg32.el6
+glideinwms-factory-condor-3.2.5.1-2.osg32.el6
+glideinwms-glidecondor-tools-3.2.5.1-2.osg32.el6
+glideinwms-libs-3.2.5.1-2.osg32.el6
+glideinwms-minimal-condor-3.2.5.1-2.osg32.el6
+glideinwms-usercollector-3.2.5.1-2.osg32.el6
+glideinwms-userschedd-3.2.5.1-2.osg32.el6
+glideinwms-vofrontend-3.2.5.1-2.osg32.el6
+glideinwms-vofrontend-standalone-3.2.5.1-2.osg32.el6
+globus-ftp-control-4.7-1.2.osg32.el6
+globus-ftp-control-debuginfo-4.7-1.2.osg32.el6
+globus-ftp-control-devel-4.7-1.2.osg32.el6
+globus-ftp-control-doc-4.7-1.2.osg32.el6
+htcondor-ce-1.4-1.osg32.el6
+htcondor-ce-client-1.4-1.osg32.el6
+htcondor-ce-condor-1.4-1.osg32.el6
+htcondor-ce-debuginfo-1.4-1.osg32.el6
+htcondor-ce-lsf-1.4-1.osg32.el6
+htcondor-ce-pbs-1.4-1.osg32.el6
+htcondor-ce-sge-1.4-1.osg32.el6
+osg-base-ce-3.2-5.osg32.el6
+osg-base-ce-condor-3.2-5.osg32.el6
+osg-base-ce-lsf-3.2-5.osg32.el6
+osg-base-ce-pbs-3.2-5.osg32.el6
+osg-base-ce-sge-3.2-5.osg32.el6
+osg-build-1.4.0-1.osg32.el6
+osg-ce-3.2-5.osg32.el6
+osg-ce-condor-3.2-5.osg32.el6
+osg-ce-lsf-3.2-5.osg32.el6
+osg-ce-pbs-3.2-5.osg32.el6
+osg-ce-sge-3.2-5.osg32.el6
+osg-configure-1.0.58-3.osg32.el6
+osg-configure-ce-1.0.58-3.osg32.el6
+osg-configure-cemon-1.0.58-3.osg32.el6
+osg-configure-condor-1.0.58-3.osg32.el6
+osg-configure-gateway-1.0.58-3.osg32.el6
+osg-configure-gip-1.0.58-3.osg32.el6
+osg-configure-gratia-1.0.58-3.osg32.el6
+osg-configure-infoservices-1.0.58-3.osg32.el6
+osg-configure-lsf-1.0.58-3.osg32.el6
+osg-configure-managedfork-1.0.58-3.osg32.el6
+osg-configure-misc-1.0.58-3.osg32.el6
+osg-configure-monalisa-1.0.58-3.osg32.el6
+osg-configure-network-1.0.58-3.osg32.el6
+osg-configure-pbs-1.0.58-3.osg32.el6
+osg-configure-rsv-1.0.58-3.osg32.el6
+osg-configure-sge-1.0.58-3.osg32.el6
+osg-configure-slurm-1.0.58-3.osg32.el6
+osg-configure-squid-1.0.58-3.osg32.el6
+osg-configure-tests-1.0.58-3.osg32.el6
+osg-gums-config-56-1.osg32.el6
+osg-htcondor-ce-3.2-5.osg32.el6
+osg-htcondor-ce-condor-3.2-5.osg32.el6
+osg-htcondor-ce-lsf-3.2-5.osg32.el6
+osg-htcondor-ce-pbs-3.2-5.osg32.el6
+osg-htcondor-ce-sge-3.2-5.osg32.el6
+osg-version-3.2.14-1.osg32.el6
+rsv-3.7.18-2.osg32.el6
+rsv-consumers-3.7.18-2.osg32.el6
+rsv-core-3.7.18-2.osg32.el6
+rsv-metrics-3.7.18-2.osg32.el6
+vo-client-56-1.osg32.el6
+vo-client-edgmkgridmap-56-1.osg32.el6
+</pre>

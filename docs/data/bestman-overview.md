@@ -15,7 +15,7 @@ Installation
 ------------
 
 -   [Install Bestman SE](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallOSGBestmanSE): BeStMan installation interfacing with local disk
--   [Install Bestman Gateway Xrootd](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestmanXrootdSE): BeStMan gateway mode on top of XRootD
+-   [Install Bestman Gateway Xrootd](install-bestman-xrootd): BeStMan gateway mode on top of XRootD
 -   [Install Bestman Gateway Hadoop](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoop200SE): BeStMan gateway mode on top of Hadoop
 -   [LBNL Configuration Reference](https://sdm.lbl.gov/twiki/bin/view/Software/BeStMan/BeStManGuide/Configuration)
 

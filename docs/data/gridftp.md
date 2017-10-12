@@ -34,7 +34,7 @@ Installing GridFTP
 First, you will need to install the GridFTP meta-package:
 
 ```console
-[root@client ~] # yum install osg-gridftp
+root@host # yum install osg-gridftp
 ```
 
 Configuring GridFTP
@@ -156,7 +156,7 @@ In addition to the GridFTP service itself, there are a number of supporting serv
 
 | Software  | Service name                          | Notes                                                                                  |
 |:----------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui) for more info |
+| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca/#startstop-fetch-crl-a-quick-guide) for more info |
 | Gratia    | `gratia-probes-cron`                  | Accounting software                                                                    |
 | GridFTP   | `globus-gridftp-server`               |                                                                                        |
 
@@ -167,8 +167,8 @@ Validating GridFTP
 The GridFTP service can be validated by using globus-url-copy. You will need to run `grid-proxy-init` or `voms-proxy-init` in order to get a valid user proxy in order to communicate with the GridFTP server.
 
 ```console
-[root@client ~] # globus-url-copy file:///tmp/zero.source gsiftp://yourhost.yourdomain/tmp/zero
-[root@client ~] # echo $?
+root@host # globus-url-copy file:///tmp/zero.source gsiftp://yourhost.yourdomain/tmp/zero
+root@host # echo $?
 0
 ```
 
@@ -177,7 +177,7 @@ Run the validation as an unprivileged user; when invoked as root, `globus-url-co
 Getting Help
 ------------
 
-For assistance, please use [this page](https://twiki.opensciencegrid.org/bin/view/Documentation/HelpProcedure).
+For assistance, please use [this page](../common/help).
 
 Reference
 ---------
@@ -225,4 +225,3 @@ For more details on overall firewall configuration, please see our [firewall doc
 | GridFTP data channels   | tcp      | `GLOBUS_TCP_PORT_RANGE`   | X       |          | contiguous range of ports is necessary. |
 | GridFTP data channels   | tcp      | `GLOBUS_TCP_SOURCE_RANGE` |         | X        | contiguous range of ports is necessary. |
 | GridFTP control channel | tcp      | 2811                      | X       |          |                                         |
-

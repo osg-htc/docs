@@ -19,12 +19,12 @@ To install the LCMAPS VOMS plugin, make sure that your host is up to date before
 1. Clean yum cache:
 
         ::console
-        [root@client ~ ] $ yum clean all --enablerepo=*
+        root@host # yum clean all --enablerepo=*
 
 2. Update software:
 
         :::console
-        [root@client ~ ] $ yum update
+        root@host # yum update
     This command will update **all** packages
 
 3. Install `lcmaps`, the default mapfile, and the configuration tools:
@@ -36,7 +36,7 @@ To install the LCMAPS VOMS plugin, make sure that your host is up to date before
 Configuring the LCMAPS VOMS Plugin
 ----------------------------------
 
-The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication. If you are using OSG 3.3 packages, there are software-specific instructions that must be followed for [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../storage/gridftp), and [XRootD](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd). To check if you are running OSG 3.3, run the following command:
+The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication. If you are using OSG 3.3 packages, there are software-specific instructions that must be followed for [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../data/gridftp), and [XRootD](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd). To check if you are running OSG 3.3, run the following command:
 
 ``` console
 [root@server]# rpm -q --queryformat="%{VERSION}\n" osg-release
@@ -150,15 +150,16 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
 `/etc/grid-security/voms-mapfile` is used to map VOs, VO roles, or VO groups to Unix accounts based on their VOMS attributes. An example of the format of a `voms-mapfile` follows:
 
 ```
-# map GLOW jobs to the 'glow' Unix account.
-"/GLOW/*" glow
 # map GLOW jobs in the chtc group to the 'glow1' Unix account.
 "/GLOW/chtc/*" glow1
 # map GLOW jobs with the htpc role to the 'glow2' Unix account.
 "/GLOW/Role=htpc/*" glow2
+# map other GLOW jobs to the 'glow' Unix account.
+"/GLOW/*" glow
 ```
 
 Each non-commented line is a shell-style pattern which is compared against the user's VOMS attributes, and a Unix account that the user will be mapped to if the pattern matches.
+The patterns are compared in the order they are listed in. Therefore, more general patterns should be placed later in the file.
 
 !!!note
     The Unix account must exist for the user to be mapped. If a VO's Unix account is missing, that VO will not be able to access your resources.
