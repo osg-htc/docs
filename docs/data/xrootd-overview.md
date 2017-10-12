@@ -20,8 +20,8 @@ Installation
 Operations
 ----------
 
--   InstallXrootdClient: Installing and using XRootD clients
--   [Xrootd bug reporting](https://savannah.cern.ch/bugs/?group=xrootd)
--   [Source code browsable repo](http://xrootd.cern.ch/cgi-bin/cgit.cgi/xrootd/)
+-   [Install XRootD client](install-xroot-client): Installing and using XRootD clients
+-   [Xrootd bug reporting](https://github.com/xrootd/xrootd/issues)
+-   [Source code](https://github.com/xrootd/xrootd/)
 
 
