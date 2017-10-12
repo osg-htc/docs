@@ -34,7 +34,7 @@ Installing GridFTP
 First, you will need to install the GridFTP meta-package:
 
 ```console
-[root@client ~] # yum install osg-gridftp
+root@host # yum install osg-gridftp
 ```
 
 Configuring GridFTP
@@ -167,8 +167,8 @@ Validating GridFTP
 The GridFTP service can be validated by using globus-url-copy. You will need to run `grid-proxy-init` or `voms-proxy-init` in order to get a valid user proxy in order to communicate with the GridFTP server.
 
 ```console
-[root@client ~] # globus-url-copy file:///tmp/zero.source gsiftp://yourhost.yourdomain/tmp/zero
-[root@client ~] # echo $?
+root@host # globus-url-copy file:///tmp/zero.source gsiftp://yourhost.yourdomain/tmp/zero
+root@host # echo $?
 0
 ```
 

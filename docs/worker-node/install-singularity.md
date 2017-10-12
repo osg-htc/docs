@@ -57,12 +57,12 @@ installation altogether and use singularity through CVMFS:
 2. Update the grub configuration:
 
         :::console
-        [root@client ~] $ grub2-mkconfig -o /boot/grub2/grub.cfg
+        root@host # grub2-mkconfig -o /boot/grub2/grub.cfg
 
 3. Set a sysctl option as follows:
 
         :::console
-        [root@client ~] $ echo "user.max_user_namespaces = 15000" \
+        root@host # echo "user.max_user_namespaces = 15000" \
             > /etc/sysctl.d/90-max_user_namespaces.conf
 
 4. Reboot
@@ -71,7 +71,7 @@ installation altogether and use singularity through CVMFS:
     works:
 
         :::console
-        [user@client ~] $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity \
+        user@host $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity \
                 exec -C -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
                 ps -ef
         WARNING: Container does not have an exec helper script, calling 'cat' directly
@@ -85,24 +85,24 @@ To install singularity, make sure that your host is up to date before installing
 1. Clean yum cache:
 
         ::console
-        [root@client ~ ] $ yum clean all --enablerepo=*
+        root@host # yum clean all --enablerepo=*
 
 2. Update software:
 
         :::console
-        [root@client ~ ] $ yum update
+        root@host # yum update
     This command will update **all** packages
 
 3. The singularity packages are split into two parts, choose the command that corresponds to your host:
     - If you are installing singularity on a worker node, where images do not need to be created of a manipulated, install just the smaller part to limit the amount of setuid-root code that is installed:
 
             :::console
-            [root@client ~] $ yum install singularity-runtime
+            root@host # yum install singularity-runtime
 
     - If you want a full singularity installation, run the following command:
 
             :::console
-            [root@client ~] $ yum install singularity
+            root@host # yum install singularity
 
 ## Configuring singularity
 
@@ -115,7 +115,7 @@ After singularity is installed, as an ordinary user run the following
 command to verify it:
 
 ```console
-[user@client ~] $ singlarity exec -C -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 ps -ef
+user@host $ singlarity exec -C -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 ps -ef
 WARNING: Container does not have an exec helper script, calling 'cat' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
 user         1     0  0 21:34 ?        00:00:00 ps -ef
