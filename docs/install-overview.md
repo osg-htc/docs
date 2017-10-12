@@ -88,7 +88,7 @@ All of these node types and their services are optional, although OSG requires t
     -   Hadoop Distributed File System (HDFS)
         -   [Hadoop Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HadoopOverview): HDFS information, planning, and guides
     -   XRootD
-        -   [XRootd Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/XrootdOverview): XRootD information, planning, and guides
+        -   [XRootd Overview](data/xrootd-overview): XRootD information, planning, and guides
         -   [Install Xrootd Server](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd): XRootD redirector installation
         -   [Install BeStMan-Gateway XRootD](data/install-bestman-xrootd): BeStMan2 SRM server + GridFTP server + XRootD fuse
 
