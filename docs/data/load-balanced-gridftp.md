@@ -5,7 +5,7 @@ GridFTP is designed for high throughput data transfers and in many cases can han
 
 One general-purpose technology for implementing a load balancer on Linux is [Linux Virtual Server](http://www.linuxvirtualserver.org/whatis.html) (LVS). To use it with GridFTP, a single load balancer listens on a virtual IP address, monitors the health of the set of real GridFTP servers, and forwards requests to available ones. Optionally, there can be one or more inactive, backup load balancers that can activate and take over the virtual IP address in case the primary load balancer fails, resulting in a system that is more resilient to failure. LVS is implemented by the [IP Virtual Server](http://www.linuxvirtualserver.org/software/ipvs.html) kernel module, which can be managed by userspace services on the load balancers such as [keepalived](http://www.keepalived.org).
 
-This guide explains how to install, configure, run, test, and troubleshoot the `keepalived` service on a load balancing host for a set of [GridFTP](Documentation.Release3/InstallOSGGridFTP) servers.
+This guide explains how to install, configure, run, test, and troubleshoot the `keepalived` service on a load balancing host for a set of [GridFTP](gridftp) servers.
 
 ---------------
 
@@ -31,10 +31,10 @@ The number of GridFTP servers that you should run is determined first and foremo
 
 #### Shared file system
 
-The number of GridFTP servers can also be determined by your hardware needs, which are determined by your choice of shared file system. If you choose a POSIX-based shared file system, plan for machines with more cores, or more GridFTP hosts to distribute the CPU load. If you are running [GridFTP with Hadoop](Documentation.Release3.InstallHadoop200SE#Standalone_Gridftp_Node_Installa), plan for machines with more memory, or more GridFTP hosts to distribute the memory load.
+The number of GridFTP servers can also be determined by your hardware needs, which are determined by your choice of shared file system. If you choose a POSIX-based shared file system, plan for machines with more cores, or more GridFTP hosts to distribute the CPU load. If you are running [GridFTP with Hadoop](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoop200SE#Standalone_Gridftp_Node_Installa), plan for machines with more memory, or more GridFTP hosts to distribute the memory load.
 
 !!! note
-    If you determine that you need only a single GridFTP host, you do not need load balancing. Instead, follow the [standalone-GridFTP installation guide](Documentation.Release3.InstallOSGGridFTP).
+    If you determine that you need only a single GridFTP host, you do not need load balancing. Instead, follow the [standalone-GridFTP installation guide](gridftp).
 
 ### Load balancer(s)
 
@@ -47,7 +47,7 @@ Before adding your GridFTP hosts to the load-balanced system, each host requires
 
 ### Acquiring service certificate(s)
 
-When authenticating with a GridFTP server, clients verify that the server's host certificate matches the hostname of the server. In the case of a load-balanced GridFTP system, clients contact the GridFTP server through the virtual hostname, so the GridFTP server will have to present a certificate containing the virtual hostname as well as the GridFTP server's hostname. Use the [OSG PKI tools](Documentation/Release3/GetHostServiceCertificates#Install_the_OSG_PKI_Command_Line) to request these types of certificates.
+When authenticating with a GridFTP server, clients verify that the server's host certificate matches the hostname of the server. In the case of a load-balanced GridFTP system, clients contact the GridFTP server through the virtual hostname, so the GridFTP server will have to present a certificate containing the virtual hostname as well as the GridFTP server's hostname. Use the [OSG PKI tools](../common/pki-cli) to request these types of certificates.
 
 If your GridFTP servers are also running XRootD, you will need unique certificates for each GridFTP server. Otherwise, you can request a single certificate that can be shared among the GridFTP servers.
 
@@ -122,7 +122,7 @@ Use the virtual IP address of your load balancer(s) as the secondary IPs of each
 
 #### Disabling ARP
 
-If your GridFTP servers and load balancer(s) are on the same network segment, you will have to disable ARP on the GridFTP servers to avoid [ARP race conditions](http://kb.linuxvirtualserver.org/wiki/ARP_Issues_in_LVS/DR_and_LVS/TUN_Clusters). Otherwise, skip to [the section on preparing keepalived](#PreparingKeepalived).
+If your GridFTP servers and load balancer(s) are on the same network segment, you will have to disable ARP on the GridFTP servers to avoid [ARP race conditions](http://kb.linuxvirtualserver.org/wiki/ARP_Issues_in_LVS/DR_and_LVS/TUN_Clusters). Otherwise, skip to [the section on preparing keepalived](#preparing-keepalived-load-balancers).
 
 1. Select the appropriate RPM:
 
@@ -224,10 +224,10 @@ virtual_server <VIRTUAL-IP-ADDRESS> 2811 {
 
 ### Optional configuration
 
-The following configuration steps are optional and will likely not be required for setting up a small cluster of GridFTP hosts. If you do not need any of the following special configurations, skip to [the section on using keepalived](#UsingKeepalived).
+The following configuration steps are optional and will likely not be required for setting up a small cluster of GridFTP hosts. If you do not need any of the following special configurations, skip to [the section on using keepalived](#using-keepalived).
 
--   [Adding backup load balancers](#BackupLoadBalancers)
--   [Enabling e-mail notifications](#EmailNotifications)
+-   [Adding backup load balancers](#adding-backup-load-balancers)
+-   [Enabling e-mail notifications](#enabling-e-mail-notifications)
 
 #### Adding backup load balancers
 
@@ -287,7 +287,7 @@ On the GridFTP real servers, arptables is the only additional service required f
     | Enable a service to start during boot | `chkconfig SERVICE-NAME on` | `systemctl enable SERVICE-NAME` | 
     | Disable a service from starting during boot | `chkconfig SERVICE-NAME off` | `systemctl disable SERVICE-NAME` |
 
-For information on how to use your individual GridFTP servers, please refer to the [Starting GridFTP section](Documentation.Release3.InstallOSGGridFTP#5_Starting_GridFTP) of the GridFTP installation guide.
+For information on how to use your individual GridFTP servers, please refer to the [Managing GridFTP section](gridftp#managing-gridftp) of the GridFTP installation guide.
 
 ### Using Keepalived
 
@@ -303,7 +303,7 @@ On the load balancer nodes, `keepalived` is the only additional service required
 Getting Help
 ------------
 
-To get assistance with `keepalived` in front of OSG Software services, please use the [this page](Documentation.HelpProcedure).
+To get assistance with `keepalived` in front of OSG Software services, please use the [this page](../common/help).
 
 ---------
 
