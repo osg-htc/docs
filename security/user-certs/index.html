@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>User Certificates - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "User Certificates";
+    var mkdocs_page_input_path = "security/user-certs.md";
+    var mkdocs_page_url = "/security/user-certs/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../..">Home</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../install-overview/">Installation Overview</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../site-planning/">Site Planning</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Common</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/install-best-practices/">Install Best Practices</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/ca/">CA Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/yum/">Yum Repos</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Worker Node</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn/">Worker Node (RPM install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/env-vars/">Environment</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Compute Element</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/gridftp/">Install GridFTP Server</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-gridftp-xrootd/">Install GridFtp XRootD</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/frontier-squid/">HTTP Cache</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-xroot-client/">XRootD Client</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Security</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../host-certs/">Host Certificates</a>
+  
+        </li>
+        <li class=" current">
+          
+  
+    <a class="current" href="./">User Certificates</a>
+  
+  <ul class="subnav">
+      
+    <li class="toctree-l3"><a href="#how-do-i-get-a-pkix509-personal-certificate">How do I get a PKI/X509 Personal Certificate?</a></li>
+    
+
+    <li class="toctree-l3"><a href="#know-your-responsibilities">Know your Responsibilities</a></li>
+    
+
+    <li class="toctree-l3"><a href="#getting-your-certificate">Getting your Certificate</a></li>
+    
+
+    <li class="toctree-l3"><a href="#pkcs12-p12-vs-pem-format">PKCS12 (.p12) vs PEM format</a></li>
+    
+
+    <li class="toctree-l3"><a href="#revoke-your-certificate-if-compromised">Revoke your Certificate if Compromised</a></li>
+    
+
+    <li class="toctree-l3"><a href="#references">References</a></li>
+    
+
+  </ul>
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Release Information</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../release/notes/">Release Notes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/signing/">RPM Signing</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/contrib/">Contrib Software</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Other</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-osg-upcoming-software/">OSG upcoming software</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-cvmfs-stratum1/">Install a CVMFS Stratum 1</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/network-performance-toolkit/">Network Performance Toolkit</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Monitoring</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/advanced-rsv-configuration/">Advanced RSV Configuration</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-control/">Manage RSV via rsv-control</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Usage Guides</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/using-wn/">Worker Node Environment</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Deprecated Software</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-bestman-xrootd/">BeStMan Xrootd SE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../edg-mkgridmap/">EDG-Mkgridmap Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-gums/">GUMS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-voms/">Install VOMS</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../common/help/">Get Help</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Security &raquo;</li>
+        
+      
+    
+    <li>User Certificates</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/security/user-certs.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="how-do-i-get-a-pkix509-personal-certificate"><strong>How do I get a PKI/X509 Personal Certificate?</strong><a class="headerlink" href="#how-do-i-get-a-pkix509-personal-certificate" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For instructions on getting <strong>service</strong> and <strong>host</strong> certificates, <strong>you're in the wrong place</strong>. See <a href="../host-certs/">Get Host and Service Certificates</a>.</p>
+</div>
+<p>This document describes how to get and set up a <strong>personal</strong> certificate (also called a grid user certificate), from the OSG Certificate Authority (OSG CA). The OSG CA is recognized by all OSG resources. Other CAs may be used; if your virtual organization (VO) requires that you get a certificate from a different CA, <a href="http://www.opensciencegrid.org/?pid=1000187">contact your VO Support Center</a> for instructions.</p>
+<h1 id="know-your-responsibilities">Know your Responsibilities<a class="headerlink" href="#know-your-responsibilities" title="Permanent link">&para;</a></h1>
+<p>When you request a certificate your provide some public personal information about yourself; <em>name, email address, phone number</em>, and which <em>VO</em> (virtual organization) you belong to. If any of this information changes after you have your certificate you should notify OSG (and probably VO) of the changes. For the OSG RA send email to osg-ra at opensciencegrid dot org.</p>
+<p>Your <strong>name</strong> and <strong>email</strong> address are encoded into the signed certificate and <strong>if either of those change</strong> (usually email address) then you should <strong>request a new certificate</strong> with the correct information and <strong>revoke the old certificate</strong>.</p>
+<h1 id="getting-your-certificate">Getting your Certificate<a class="headerlink" href="#getting-your-certificate" title="Permanent link">&para;</a></h1>
+<p>There are two different ways to obtain your certificate, either via a command line interface, or through a web browser. The links below will guide you through whichever method you choose. The command line method is generally simpler and less prone to errors than using a web browser but it may require extra setup and package installation the first time you do it. Most people end up needing their certificate for both command line grid use and web browser use and it is generally easier to import your certificate into your browser (and email client) from the command line certificate files than to export your certificate from your web browser to use on the command line. This is because of the large variety of web browsers each with it's own way to deal with certificates. If you will use the certificate ONLY in your web browser then requesting it from your browser is probably the easiest method.</p>
+<p><a href="../../common/pki-cli">Get or renew a certificate with command line interface.</a></p>
+<h1 id="pkcs12-p12-vs-pem-format">PKCS12 (.p12) vs PEM format<a class="headerlink" href="#pkcs12-p12-vs-pem-format" title="Permanent link">&para;</a></h1>
+<p>Your certificate and key pair can be stored as separate files, by default named <code>~/.globus/usercert.pem</code> and <code>~/.globus/userkey.pem</code>, or they can be bundled in a single file in PKCS12 (Public Key Cryptography Standard #12), by default named <code>~/.globus/usercred.p12</code>. All OSG user tools works with both formats. Unless you specify a name in the command, they look first for the certificate/key pair default names, then for the PKCS12 default name and use the first one they find. PKCS 12 is a single file, convenient to move and used by many softwares, e.g. the Web browsers (so you don't need conversions).</p>
+<p>Anyway note that the PKCS12 bundle includes normally the certificate, the key and also the CA certificate (or a certificate chain) validating your certificate. In the rare (but possible) case where the CA certificate expires before your certificate this may lead to the creation of a proxy without VOMS attributes and confusing error messages where it is not clear if the problem is with the host, remote server or the certificate, e.g. "Error: Error during SSL handshake:Either proxy or user certificate are expired." or "error:80066423:lib(128):verify_callback:remote certificate has expired:sslutils.c:1963 remote certificate has expired".</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span>  voms-proxy-init -debug
+<span class="go">Detected Globus version: 2.2</span>
+<span class="go">Unspecified proxy version, settling on Globus version: 2</span>
+<span class="go">Number of bits in key :1024</span>
+<span class="go">Files being used:</span>
+<span class="go"> CA certificate file: none</span>
+<span class="go"> Trusted certificates directory : /etc/grid-security/certificates</span>
+<span class="go"> Proxy certificate file : /tmp/x509up_u20003</span>
+<span class="go"> User certificate file: /home/user/.globus/usercred.p12</span>
+<span class="go"> User key file: /home/user/.globus/usercred.p12</span>
+<span class="go">Output to /tmp/x509up_u20003</span>
+<span class="go">Enter GRID pass phrase for this identity:</span>
+<span class="go">Your identity: /DC=org/DC=doegrids/OU=People/CN=First Lastname 12345</span>
+<span class="go">Creating proxy to /tmp/x509up_u20003 .............++++++</span>
+<span class="go">.....................++++++</span>
+<span class="go"> Done</span>
+
+<span class="go">Your proxy is valid until Fri Aug  9 00:18:07 2013</span>
+<span class="go">Error: Certificate verify failed.</span>
+<span class="go">error:80066423:lib(128):verify_callback:remote certificate has expired:sslutils.c:1963</span>
+<span class="go">remote certificate has expired</span>
+<span class="go">Function: verify_callback</span>
+<span class="go">error:80066412:lib(128):verify_callback:certificate::sslutils.c:2283</span>
+<span class="go">        subject=/DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1</span>
+<span class="go">        issuer =/DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1</span>
+<span class="go">certificate:</span>
+<span class="go">        subject=/DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1</span>
+<span class="go">        issuer =/DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1</span>
+<span class="go">Function: verify_callback</span>
+<span class="gp">user@host $</span> voms-proxy-init -debug -voms osg
+<span class="go">Detected Globus version: 2.2</span>
+<span class="go">Unspecified proxy version, settling on Globus version: 2</span>
+<span class="go">Number of bits in key :1024</span>
+<span class="go">Files being used:</span>
+<span class="go"> CA certificate file: none</span>
+<span class="go"> Trusted certificates directory : /etc/grid-security/certificates</span>
+<span class="go"> Proxy certificate file : /tmp/x509up_u20003</span>
+<span class="go"> User certificate file: /home/user/.globus/usercred.p12</span>
+<span class="go"> User key file: /home/user/.globus/usercred.p12</span>
+<span class="go">Output to /tmp/x509up_u20003</span>
+<span class="go">Enter GRID pass phrase for this identity:</span>
+<span class="go">Your identity: /DC=org/DC=doegrids/OU=People/CN=First Lastname 12345</span>
+<span class="go">Using configuration file /home/marco/.glite/vomses</span>
+<span class="go">Using configuration file /etc/vomses</span>
+<span class="go">Creating temporary proxy to /tmp/tmp_x509up_u20003_17448 ..........................++++++</span>
+<span class="go">...................++++++</span>
+<span class="go"> Done</span>
+<span class="go">Contacting  voms.opensciencegrid.org:15027 [/DC=org/DC=doegrids/OU=Services/CN=host/voms.opensciencegrid.org] &quot;osg&quot; Failed</span>
+
+<span class="go">Error: Error during SSL handshake:Either proxy or user certificate are expired.</span>
+
+<span class="go">None of the contacted servers for osg were capable</span>
+<span class="go">of returning a valid AC for the user.</span>
+</pre></div>
+
+
+<p>To solve the problem split the bundle in the two PEM files as documented in the <a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">referenced document</a>, so that the embedded CA chain is not used.</p>
+<h1 id="revoke-your-certificate-if-compromised">Revoke your Certificate if Compromised<a class="headerlink" href="#revoke-your-certificate-if-compromised" title="Permanent link">&para;</a></h1>
+<p>If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate. You can follow the steps <a href="../../common/pki-cli#osg-user-cert-revoke">here</a> to revoke your certificate. The same instructions apply if you need to revoke a certificate because your email address changed or your name has changed.</p>
+<h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">Useful Documentation.OpenSSL commands (from NCSA)</a> - e.g. how to convert the format of your certificate.</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../release/notes/" class="btn btn-neutral float-right" title="Release Notes">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../host-certs/" class="btn btn-neutral" title="Host Certificates"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../host-certs/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../release/notes/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

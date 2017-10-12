@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Environment - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Environment";
+    var mkdocs_page_input_path = "worker-node/env-vars.md";
+    var mkdocs_page_url = "/worker-node/env-vars/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../..">Home</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../install-overview/">Installation Overview</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../site-planning/">Site Planning</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Common</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/install-best-practices/">Install Best Practices</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/ca/">CA Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/yum/">Yum Repos</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Worker Node</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../install-wn/">Worker Node (RPM install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-wn-tarball/">Worker Node (tarball install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-wn-oasis/">Worker Node (OASIS install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-cvmfs/">CVMFS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-singularity/">Singularity</a>
+  
+        </li>
+        <li class=" current">
+          
+  
+    <a class="current" href="./">Environment</a>
+  
+  <ul class="subnav">
+      
+    <li class="toctree-l3"><a href="#grid-job-environment">Grid Job Environment</a></li>
+    
+
+    <li class="toctree-l3"><a href="#conventions-used-in-this-document">Conventions used in this Document</a></li>
+    
+
+    <li class="toctree-l3"><a href="#site-related-variables">Site Related Variables</a></li>
+    
+
+    <li class="toctree-l3"><a href="#storage-related-variables">Storage Related Variables</a></li>
+    
+
+    <li class="toctree-l3"><a href="#squid-service-variables">Squid Service Variables</a></li>
+    
+
+    <li class="toctree-l3"><a href="#other-service-variables">Other Service Variables</a></li>
+    
+
+  </ul>
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Compute Element</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/gridftp/">Install GridFTP Server</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-gridftp-xrootd/">Install GridFtp XRootD</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/frontier-squid/">HTTP Cache</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-xroot-client/">XRootD Client</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Security</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/host-certs/">Host Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/user-certs/">User Certificates</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Release Information</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../release/notes/">Release Notes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/signing/">RPM Signing</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/contrib/">Contrib Software</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Other</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-osg-upcoming-software/">OSG upcoming software</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-cvmfs-stratum1/">Install a CVMFS Stratum 1</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/network-performance-toolkit/">Network Performance Toolkit</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Monitoring</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/advanced-rsv-configuration/">Advanced RSV Configuration</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-control/">Manage RSV via rsv-control</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Usage Guides</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../using-wn/">Worker Node Environment</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Deprecated Software</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-bestman-xrootd/">BeStMan Xrootd SE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/edg-mkgridmap/">EDG-Mkgridmap Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/install-gums/">GUMS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-glexec/">Worker node glexec Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-voms/">Install VOMS</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../common/help/">Get Help</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Worker Node &raquo;</li>
+        
+      
+    
+    <li>Environment</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/worker-node/env-vars.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="grid-job-environment">Grid Job Environment<a class="headerlink" href="#grid-job-environment" title="Permanent link">&para;</a></h1>
+<p>This document is for grid users. It lists environment variables present in a job's environment while it is being executed on a Worker Node.</p>
+<h1 id="conventions-used-in-this-document">Conventions used in this Document<a class="headerlink" href="#conventions-used-in-this-document" title="Permanent link">&para;</a></h1>
+<p>For variables that are of string type, a value of <code>UNAVAILABLE</code> indicates that the variable is not defined or not applicable.</p>
+<h1 id="site-related-variables">Site Related Variables<a class="headerlink" href="#site-related-variables" title="Permanent link">&para;</a></h1>
+<p>These are variables that contain information about the site:</p>
+<table>
+<thead>
+<tr>
+<th>Variable Name</th>
+<th>Type</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSG_GROUP</td>
+<td>Enumerated String [OSG,OSG-ITB]</td>
+<td>Group that the site belongs to, should be OSG unless the site is being used for validation or integration testing only</td>
+</tr>
+<tr>
+<td>OSG_HOSTNAME</td>
+<td>String</td>
+<td>Hostname for the CE (e.g. ce01.university.edu)</td>
+</tr>
+<tr>
+<td>OSG_SITE_NAME</td>
+<td>String</td>
+<td>Identifier for the site. This is will be used for displaying the site by monitoring tools. Valid characters are letters, numbers, underscore, dot, and dash ( A-Z,a-z,0-9,_,.,- )</td>
+</tr>
+<tr>
+<td>OSG_SPONSOR</td>
+<td>Enumerated String</td>
+<td>Valid VO(s) that sponsors the site. Multiple VOs can be specified with the percent sponsorship by each sponsor, e.g. "usatlas:50 uscms:50"</td>
+</tr>
+<tr>
+<td>OSG_SITE_INFO</td>
+<td>String (URL)</td>
+<td>Valid url that gives the site policy for OSG usage.</td>
+</tr>
+<tr>
+<td>OSG_CONTACT_NAME</td>
+<td>String</td>
+<td>The name of the administrative contact for the site</td>
+</tr>
+<tr>
+<td>OSG_CONTACT_EMAIL</td>
+<td>String</td>
+<td>Valid email address for the administrative contact. Notifications from scripts will be sent to this email address</td>
+</tr>
+<tr>
+<td>OSG_SITE_CITY</td>
+<td>String</td>
+<td>Name of the city where the OSG site is located</td>
+</tr>
+<tr>
+<td>OSG_SITE_COUNTRY</td>
+<td>String</td>
+<td>Name of the country where the OSG site is located</td>
+</tr>
+<tr>
+<td>OSG_SITE_LONGITUDE</td>
+<td>Float</td>
+<td>The site's longitude (will be negative for locations west of Greenwich)</td>
+</tr>
+<tr>
+<td>OSG_SITE_LATITUDE</td>
+<td>Float</td>
+<td>The site's latitude (will be negative for locations south of the equator)</td>
+</tr>
+<tr>
+<td>GLOBUS_LOCATION</td>
+<td>String</td>
+<td>Path to the directory where the Globus software is installed (usually /usr)</td>
+</tr>
+<tr>
+<td>OSG_USER_VO_MAP</td>
+<td>String</td>
+<td>Path to the location of the osg-user-vo-map.txt file, typically <code>/var/lib/osg/user-vo-map</code></td>
+</tr>
+<tr>
+<td>OSG_GRIDFTP_LOG</td>
+<td>String</td>
+<td>Path to the location of the grid ftp log created by gridftp server , typically <code>/var/log/gridftp.log</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="storage-related-variables">Storage Related Variables<a class="headerlink" href="#storage-related-variables" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th>Variable Name</th>
+<th>Type</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSG_STORAGE_ELEMENT</td>
+<td>Enumerated String [y,n]</td>
+<td>Indicates whether a storage element is available for CEs in the site.</td>
+</tr>
+<tr>
+<td>OSG_DEFAULT_SE</td>
+<td>String</td>
+<td>Full url to the default storage element that can be used by worker nodes within the cluster</td>
+</tr>
+<tr>
+<td>OSG_GRID</td>
+<td>String</td>
+<td>Directory where the worker node client (wn-client) or packages to use the grid are installed</td>
+</tr>
+<tr>
+<td>OSG_APP</td>
+<td>String</td>
+<td>Directory available to install job specific applications and binaries. This also requires a sub-directory, $OSG_APP/etc, with 1777 permissions.</td>
+</tr>
+<tr>
+<td>OSG_DATA</td>
+<td>String</td>
+<td>Directory available for jobs to store data and to stage data in and out, this directory is shared across the cluster</td>
+</tr>
+<tr>
+<td>OSG_WN_TMP</td>
+<td>String</td>
+<td>Directory available for scratch space for worker nodes. This directory is local to each node and provides POSIX semantics for file operations</td>
+</tr>
+</tbody>
+</table>
+<h1 id="squid-service-variables">Squid Service Variables<a class="headerlink" href="#squid-service-variables" title="Permanent link">&para;</a></h1>
+<p>These variables provide information about the squid proxy that site may make available.</p>
+<table>
+<thead>
+<tr>
+<th>Variable Name</th>
+<th>Type</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSG_SQUID_LOCATION</td>
+<td>String</td>
+<td>The hostname (and optionally port) of the machine that is providing squid proxy services for the site. This should be set to <code>UNAVAILABLE</code> if squid is not provided. E.g. squid.host.name:3128</td>
+</tr>
+<tr>
+<td>OSG_SQUID_POLICY</td>
+<td>Enumerated String [LRU,LFUDA,GDSF]</td>
+<td>The caching policy squid should use for evicting elements from the cache. <strong>Not currently used</strong> GDSF maximizes the bytes that the proxy caches (i.e. the cache favors large elements over multiple smaller elements) , LFUDA maximizes the number of objects that the proxy caches (i.e. the cache favors multiple smaller elements over large elements), LRU just evicts the least recently used element</td>
+</tr>
+<tr>
+<td>OSG_SQUID_CACHE_SIZE</td>
+<td>integer with optional MB or GB postfixes</td>
+<td>The size of the squid disk cache. The size is assumed to be in megabytes unless a postfix is given.</td>
+</tr>
+<tr>
+<td>OSG_SQUID_MEM_CACHE</td>
+<td>integer with optional MB or GB postfixes</td>
+<td>The size of the squid memory cache. The size is assumed to be in megabytes unless a postfix is given.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="other-service-variables">Other Service Variables<a class="headerlink" href="#other-service-variables" title="Permanent link">&para;</a></h1>
+<p>These variables provide information about other services that may be available on the site.</p>
+<table>
+<thead>
+<tr>
+<th>Variable Name</th>
+<th>Type</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSG_GLEXEC_LOCATION</td>
+<td>String</td>
+<td>The path to the GLEXEC binaries on the worker nodes. This is set to <code>UNAVAILABLE</code> if GLEXEC is not installed.</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../compute-element/htcondor-ce-overview/" class="btn btn-neutral float-right" title="HTCondor-CE Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../install-singularity/" class="btn btn-neutral" title="Singularity"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../install-singularity/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../compute-element/htcondor-ce-overview/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

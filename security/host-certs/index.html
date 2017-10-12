@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Host Certificates - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Host Certificates";
+    var mkdocs_page_input_path = "security/host-certs.md";
+    var mkdocs_page_url = "/security/host-certs/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../..">Home</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../install-overview/">Installation Overview</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../site-planning/">Site Planning</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Common</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/install-best-practices/">Install Best Practices</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/ca/">CA Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/yum/">Yum Repos</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Worker Node</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn/">Worker Node (RPM install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/env-vars/">Environment</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Compute Element</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/gridftp/">Install GridFTP Server</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-gridftp-xrootd/">Install GridFtp XRootD</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/frontier-squid/">HTTP Cache</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-xroot-client/">XRootD Client</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Security</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+  
+        </li>
+        <li class=" current">
+          
+  
+    <a class="current" href="./">Host Certificates</a>
+  
+  <ul class="subnav">
+      
+    <li class="toctree-l3"><a href="#how-to-get-host-and-service-certificates">How to Get Host and Service Certificates</a></li>
+    
+
+    <li class="toctree-l3"><a href="#requirements">Requirements</a></li>
+    
+
+    <li class="toctree-l3"><a href="#requesting-hostservice-certificate-using-oim">Requesting host/service certificate using OIM</a></li>
+    
+
+    <li class="toctree-l3"><a href="#installation">Installation</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#install-the-osg-pki-command-line-clients">Install the OSG PKI Command Line Clients</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#validate-authentication">Validate authentication</a></li>
+    
+
+    <li class="toctree-l3"><a href="#request-a-host-certificate">Request a Host Certificate</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#send-the-request">Send the request</a></li>
+        
+            <li><a class="toctree-l4" href="#retrieve-and-install-the-host-certificate">Retrieve and Install the Host Certificate</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#request-a-service-certificate">Request a Service Certificate</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#install-the-service-certificate">Install the Service Certificate</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#information-for-grid-admins">Information for Grid Admins</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#detailed-description-of-the-osg-gridadmin-cert-request-usage">Detailed description of the osg-gridadmin-cert-request usage</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#can-i-use-any-host-to-request-a-certificate-for-a-different-host">Can I use any host to request a certificate for a different host?</a></li>
+        
+            <li><a class="toctree-l4" href="#may-i-reuse-my-host-certificate-as-a-service-certificate">May I reuse my host certificate as a service certificate?</a></li>
+        
+            <li><a class="toctree-l4" href="#how-do-i-renew-a-hostservice-certificate">How do I renew a host/service certificate?</a></li>
+        
+            <li><a class="toctree-l4" href="#i-get-a-gss-authentication-failure-when-users-try-to-authenticate-with-my-site">I get a "GSS authentication failure" when users try to authenticate with my site?</a></li>
+        
+            <li><a class="toctree-l4" href="#how-can-i-check-if-i-have-a-host-certificate-installed-already">How can I check if I have a host certificate installed already?</a></li>
+        
+            <li><a class="toctree-l4" href="#how-can-i-check-the-expiration-time-of-my-installed-host-certificate">How can I check the expiration time of my installed host certificate?</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#references">References</a></li>
+    
+
+  </ul>
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../user-certs/">User Certificates</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Release Information</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../release/notes/">Release Notes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/signing/">RPM Signing</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/contrib/">Contrib Software</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Other</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-osg-upcoming-software/">OSG upcoming software</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-cvmfs-stratum1/">Install a CVMFS Stratum 1</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/network-performance-toolkit/">Network Performance Toolkit</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Monitoring</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/advanced-rsv-configuration/">Advanced RSV Configuration</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-control/">Manage RSV via rsv-control</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Usage Guides</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/using-wn/">Worker Node Environment</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Deprecated Software</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-bestman-xrootd/">BeStMan Xrootd SE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../edg-mkgridmap/">EDG-Mkgridmap Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-gums/">GUMS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-voms/">Install VOMS</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../common/help/">Get Help</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Security &raquo;</li>
+        
+      
+    
+    <li>Host Certificates</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/security/host-certs.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="how-to-get-host-and-service-certificates">How to Get Host and Service Certificates<a class="headerlink" href="#how-to-get-host-and-service-certificates" title="Permanent link">&para;</a></h1>
+<p>This document is for system administrators. After reading this document you should be able to apply for and install a grid certificate on a grid resource. This document does not explain how to apply for a grid user certificate. To apply for a grid user certificate click <a href="../user-certs/">here</a> instead!</p>
+<h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h1>
+<p>Before requesting a new host or service certificate, you should check if a certificate is not installed already using <strong>openssl</strong>. In this case you may safely skip this document:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@host ~]$</span> openssl x509 -in /etc/grid-security/hostcert.pem -subject -issuer -dates -noout
+<span class="go">subject= /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=host.opensciencegrid.org</span>
+<span class="go">issuer=/DC=org/DC=cilogon/C=US/O=CILogon/CN=CILogon OSG CA 1</span>
+<span class="go">notBefore=Jan  4 21:08:09 2010 GMT</span>
+<span class="go">notAfter=Jan  4 21:08:09 2011 GMT</span>
+</pre></div>
+
+
+<p>The OSG PKI Command Line Clients are tested to work on Python version 2.4+. They have not been tested on Python version 3. In order to proceed you will also need:</p>
+<ul>
+<li>the <strong>fully qualified domain name</strong> of the host you need a grid certificate for</li>
+<li>the <strong>purpose</strong> of the certificate that explains your request to the Certificate Authority</li>
+<li>the full <strong>name of the administrator</strong> responsible for the host</li>
+<li>the <strong>e-mail address of the administrator</strong></li>
+<li>the <strong>telephone number of the administrator</strong></li>
+<li>the name of the <strong>Certificate Authority</strong> your project is affiliated with</li>
+<li>the name of the <strong>Virtual Organization</strong> affiliated with the Certificate Authority</li>
+</ul>
+<h1 id="requesting-hostservice-certificate-using-oim">Requesting host/service certificate using OIM<a class="headerlink" href="#requesting-hostservice-certificate-using-oim" title="Permanent link">&para;</a></h1>
+<p>The OSG PKI Certificate Request &amp; Management System can be found at: <a href="https://oim.grid.iu.edu/oim/certificate">https://oim.grid.iu.edu/oim/certificate</a>.</p>
+<p>For instructions on how to request a host or service certificate using the Web interface please see the <a href="https://confluence.grid.iu.edu/pages/viewpage.action?pageId=3244064">user guide maintained by GOC</a>.</p>
+<h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h1>
+<h2 id="install-the-osg-pki-command-line-clients">Install the OSG PKI Command Line Clients<a class="headerlink" href="#install-the-osg-pki-command-line-clients" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><span class="gp">[root@host /]$</span> yum install osg-pki-tools
+</pre></div>
+
+
+<h3 id="configuration-file-pki-clientsini">Configuration file pki-clients.ini<a class="headerlink" href="#configuration-file-pki-clientsini" title="Permanent link">&para;</a></h3>
+<p>This configuration is correctly set by default and you will not need to change them. The information is provided in case you need it for debugging purposes.</p>
+<p>The client checks for pki-clients.ini file at three location in order:</p>
+<ul>
+<li>$HOME/.osg-pki/OSG_PKI.ini</li>
+<li>./pki-clients.ini</li>
+<li>/etc/osg/pki-clients.ini (default location)</li>
+</ul>
+<p>The INI file contains the following information:</p>
+<ul>
+<li>Request URL</li>
+<li>Approve URL</li>
+<li>Retrieve URL</li>
+<li>Host URL</li>
+</ul>
+<h1 id="validate-authentication">Validate authentication<a class="headerlink" href="#validate-authentication" title="Permanent link">&para;</a></h1>
+<p>Make sure you can create a valid grid proxy. To do so, please follow instructions:</p>
+<ol>
+<li>Double-check your configuration to make sure that you are allowed (specifically, your credentials are allowed) to access your CE. You can be either member of a VO allowed to run at the site or you can add your personal certificate locally. This will either be in your GUMS server or in your <code>edg-mkgridmap</code> configuration.</li>
+<li>
+<p>Create a proxy with <code>voms-proxy-init</code> or <code>grid-proxy-init</code>. For example:</p>
+<p>``` console
+[user@host /]$ voms-proxy-init -voms GLOW
+Enter GRID pass phrase for this identity:
+Your identity: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services=People/CN=Alain Roy 424511
+Creating temporary proxy ................................................................................. Done
+Contacting  glow-voms.cs.wisc.edu:15001 [/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=glow-voms.cs.wisc.edu] "GLOW" Done
+Creating proxy ..................................................................... Done</p>
+<p>Your proxy is valid until Fri Dec  2 01:32:47 2011
+```</p>
+<p>You'll substitute your own VO, of course.</p>
+</li>
+</ol>
+<h1 id="request-a-host-certificate">Request a Host Certificate<a class="headerlink" href="#request-a-host-certificate" title="Permanent link">&para;</a></h1>
+<p>Every resource or service contributing to the grid needs a certificate issued by one of the trusted <strong>Certificate Authorities</strong>. To proceed you will need following information at hand:</p>
+<ul>
+<li>the <strong>fully qualified domain</strong> name of the host you need a grid certificate for</li>
+<li>the <strong>purpose</strong> of the certificate that explains your request to the Certificate Authority</li>
+<li>the full <strong>name of the administrator</strong> responsible for the host</li>
+<li>the <strong>e-mail address of the administrator</strong></li>
+<li>the <strong>telephone number of the administrator</strong></li>
+<li>the name of the <strong>Certificate Authority</strong> your project is affiliated with</li>
+<li>the name of the <strong>Virtual Organization</strong> affiliated with the Certificate Authority</li>
+</ul>
+<h2 id="send-the-request">Send the request<a class="headerlink" href="#send-the-request" title="Permanent link">&para;</a></h2>
+<p>This command line client generates a private key and submits a request for a certificate to the OSG PKI. The request will be approved by an appropriate Grid Admin. You will receive an email when this approval has been completed containing directions on how to run 'osg-cert-retreive' to retrieve the certificate. It works in two modes:</p>
+<ul>
+<li>CSR is provided by the user: Here the csr provided is just trimmed for begin and end certificate lines and the request is sent to the OIM</li>
+<li>CSR is not provided by the user: Here the script generates a private key for the user. Writes it to default key file name or the one specified by -o. Then generates a new csr and sends it to OIM.</li>
+</ul>
+<p>The second mode will commonly be used by most OSG site admins</p>
+<p>Use <strong>osg-cert-request</strong> to generate a request which will be sent to the Certificate Authority you specified. Change "host.opensciencegrid.org" to be the host name for the computer for which you need a certificate and provide your contact details for the grid admin to approve your request.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@host /]$</span> osg-cert-request -H host.opensciencegrid.org -e emailaddress@domain.com -n <span class="s2">&quot;Your Name&quot;</span> -p <span class="m">9999999999</span> <span class="o">(</span>Ph No<span class="o">)</span> -v <span class="s2">&quot;Your VO&quot;</span> -y <span class="s2">&quot;xyz@domain.com,abc@domain.com&quot;</span> <span class="o">(</span>CC list<span class="o">)</span> -m <span class="s2">&quot;This is my comment&quot;</span> -o hostkey.pem
+</pre></div>
+
+
+<p>Example:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@host /]$</span> osg-cert-request -H sectest.cigi.illinois.edu -e apadmana@domain.edu -n <span class="s2">&quot;Anand&quot;</span> -p <span class="m">9999999999</span> -m <span class="s2">&quot;Testing for developing security documentation&quot;</span> -o hostkey.pem
+
+<span class="go">Writing key to hostkey.pem</span>
+
+<span class="go">Connecting to server...</span>
+<span class="go">Succesfully submitted</span>
+<span class="go">Request Id#: 570</span>
+</pre></div>
+
+
+<p>At this point <strong>osg-cert-request</strong> has created some files in the directory you specified and an e-mail has been sent to the Certificate Authority containing your request. The files will be needed again once you receive a reply from the Certificate Authority asking you to retrieve the certificate. Please note down the Request Id. You will need it for retrieving the signed certificate.</p>
+<h3 id="detailed-description-of-the-osg-cert-request-usage">Detailed description of the osg-cert-request usage<a class="headerlink" href="#detailed-description-of-the-osg-cert-request-usage" title="Permanent link">&para;</a></h3>
+<p>This script:
+-   Generates a new host private key and CSR
+-   Only important part of CSR is CN= component
+-   Saves the host private key to disk (as specified by the user)
+-   Authenticates to OIM and posts the CSR as a request to OIM
+-   Returns the request ID to the user
+-   If the user provides the CSR, then this script would just send the same CSR to OIM</p>
+<p><strong>Inputs:</strong>
+-   fully-qualified hostname
+-   filename to store private key [Optional, default is ./hostkey.pem]
+-   path to user's certificate [Optional, default is path specified by $X509_USER_CERT environment variable, ~/.globus/usercert.pem]
+-   path to user's private key [Optional, default is path specified by $X509_USER_KEY environment variable, ~/.globus/userkey.pem]
+-   Passphrase for user's private key via non-echoing prompt.
+-   User needs to provide VO name if the requested hostname has multiple VO's assigned</p>
+<p><strong>Outputs:</strong>
+-   Private key, to filename specified by '-o' or ./hostkey.pem by default
+-   Request Id, to stdout</p>
+<p><strong>Usage</strong>: osg-cert-request [options]
+    <em>Options</em>:</p>
+<div class="codehilite"><pre><span></span>  -h, --help            show this help message and exit
+  -c CSR, --csr=CSR     Specify CSR name (default = gennew.csr)
+  -o Output Keyfile, --outkeyfile=Output Keyfile
+                        Specify the output filename for the retrieved user
+                        certificate.  Default is ./hostkey.pem
+  -y CC List, --cc=CC List
+                        Specify the CC list(the email id&#39;s to be CCed). Separate values by &#39;,&#39;
+  -m Comment, --comment=Comment
+                        The comment to be added to the request
+  -H CN, --hostname=CN  Specify hostname for CSR (FQDN)
+  -e EMAIL, --email=EMAIL
+                        Email address to receive certificate
+  -n NAME, --name=NAME  Name of user receiving certificate
+  -p PHONE, --phone=PHONE
+                        Phone number of user receiving certificate
+  -v VO, --vo=VO
+                        VO name of requested hostname
+  -T, --test            Run in test mode
+  -q, --quiet           don&#39;t print status messages to stdout
+  -V, --version         Print the script version number and exit.
+</pre></div>
+
+
+<h2 id="retrieve-and-install-the-host-certificate">Retrieve and Install the Host Certificate<a class="headerlink" href="#retrieve-and-install-the-host-certificate" title="Permanent link">&para;</a></h2>
+<p>Once the certificate has been approved by the Certificate Authority you will receive an e-mail for the GOC. Then to retrieve the host certificate we will execute <strong>osg-cert-retrieve</strong>: and use the request ID we recorded earlier. Since certificates are public, no authentication of the user is required to retrieve them.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@host /]$</span>  osg-cert-retrieve <span class="m">570</span> -o hostcert.pem
+<span class="go">Using timeout of 5 minutes</span>
+<span class="go">Running in test mode</span>
+<span class="go">Connecting server to retrieve certificate...</span>
+<span class="go">Certificate written to hostcert.pem</span>
+</pre></div>
+
+
+<h3 id="detailed-description-of-the-osg-cert-retrive-usage">Detailed description of the osg-cert-retrive usage<a class="headerlink" href="#detailed-description-of-the-osg-cert-retrive-usage" title="Permanent link">&para;</a></h3>
+<p>This osg-cert-retrive script:
+-   Accepts a request Id from the user
+-   Connects to OIM and requests the certificate identified by the request ID
+-   Writes the certificate to disk (as specified by the user)</p>
+<p><strong>Inputs:</strong>
+-   Request ID
+-   Filename to store certificate [Optional, default is ./hostcert.pem]</p>
+<p><strong>Outputs:</strong>
+-   Host certificate as PEM, to filename specified or ./hostcert.pem</p>
+<p><strong>Usage</strong>:osg-cert-retrieve -h/--help [for detailed explanations of options]</p>
+<div class="codehilite"><pre><span></span>Options:
+  -h, --help            show this help message and exit
+  -i ID, --id=ID        Specify ID# of certificate to retrieve[Required]
+  -o ID, --certfile=ID  Specify the output filename for the retrieved user
+                        certificate . Default is ./hostcert.pem
+  -T, --test            Run in test mode
+  -q, --quiet           don&#39;t print status messages to stdout
+  -V, --version         Print the script version number and exit.
+</pre></div>
+
+
+<p>The certificate consists of two files (default hostcert.pem and hostkey.pem) which have been placed into the current directory. Note, If you did not use the <code>--o</code> option the filenames will be what you provided.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please note that these files represent a public and a private and should be treated accordingly!</p>
+</div>
+<p>Please take a moment to verify that the <strong>certificate matches the hostname</strong> of the resource where you intend to install it before you proceed:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@host /]$</span> grid-cert-info -file ./hostcert.pem -subject
+<span class="go">/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=host.opensciencegrid.org</span>
+
+<span class="gp">[user@host /]$</span> hostname -f
+<span class="go">host.opensciencegrid.org</span>
+</pre></div>
+
+
+<p>Finally, install the certificate in the default location <strong>/etc/grid-security/</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@host /]$</span> cp ./host.opensciencegrid.orgcert.pem /etc/grid-security/hostcert.pem
+<span class="gp">[root@host /]$</span> chmod <span class="m">444</span> /etc/grid-security/hostcert.pem
+<span class="gp">[root@host /]$</span> cp ./host.opensciencegrid.orgkey.pem /etc/grid-security/hostkey.pem
+<span class="gp">[root@host /]$</span> chmod <span class="m">400</span> /etc/grid-security/hostkey.pem
+</pre></div>
+
+
+<h1 id="request-a-service-certificate">Request a Service Certificate<a class="headerlink" href="#request-a-service-certificate" title="Permanent link">&para;</a></h1>
+<p>You can use the same <strong>osg-cert-request</strong> and <strong>osg-cert-retrieve</strong> commands to request and service certificates just like any host certificate. Just use service/hostname for the -t parameter.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@host /]$</span> osg-cert-request -H http/host.opensciencegrid.org -e emailaddress@domain.com -n <span class="s2">&quot;Your Name&quot;</span> -p <span class="m">9999999999</span> <span class="o">(</span>Ph No<span class="o">)</span> -v <span class="s2">&quot;Your VO&quot;</span> -y <span class="s2">&quot;xyz@domain.com,abc@domain.com&quot;</span> <span class="o">(</span>CC list<span class="o">)</span> -m <span class="s2">&quot;This is my comment&quot;</span> -o hostkey.pem
+<span class="go">Writing key to ./hostkey.pem</span>
+
+<span class="go">Connecting to server...</span>
+<span class="go">Succesfully submitted</span>
+<span class="go">Request Id#: 571</span>
+</pre></div>
+
+
+<p>Please note down the request ID.</p>
+<p>Once the certificate has been approved by the Certificate Authority you will receive an e-mail for the GOC. Then to retrieve the host certificate we will execute <strong>osg-cert-retrieve</strong>: and use the request ID we recorded earlier. Since certificates are public, no authentication of the user is required to retrieve them.</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@host /]$</span>  osg-cert-retrieve <span class="m">571</span> -o hostcert.pem
+<span class="go">Using timeout of 5 minutes</span>
+<span class="go">Running in test mode</span>
+<span class="go">Connecting server to retrieve certificate...</span>
+<span class="go">Certificate written to hostcert.pem</span>
+</pre></div>
+
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please note that these files represent a public and a private and should be treated accordingly!</p>
+</div>
+<h2 id="install-the-service-certificate">Install the Service Certificate<a class="headerlink" href="#install-the-service-certificate" title="Permanent link">&para;</a></h2>
+<p>The <strong>Service Certificate</strong> should be installed under a subdirectory in <strong>/etc/grid-security</strong> indicating the name of the service. The next step will install the service certificate in the default location <strong>/etc/grid-security/http</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@host /]$</span> cp ./host.opensciencegrid.org-httpcert.pem /etc/grid-security/http/httpcert.pem
+<span class="gp">[root@host /]$</span> chmod <span class="m">444</span> /etc/grid-security/http/httpcert.pem
+<span class="gp">[root@host /]$</span> cp ./host.opensciencegrid.org-httpkey.pem /etc/grid-security/http/httpkey.pem
+<span class="gp">[root@host /]$</span> chmod <span class="m">400</span> /etc/grid-security/http/httpkey.pem
+</pre></div>
+
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please note that the service certificate must also be owned by the unix user who runs the service. For <strong>Apache/Tomcat</strong> this is the tomcat user:</p>
+</div>
+<div class="codehilite"><pre><span></span><span class="gp">[root@host /]$</span> chown tomcat.tomcat /etc/grid-security/http/httpcert.pem
+<span class="gp">[root@host /]$</span> chown tomcat.tomcat /etc/grid-security/http/httpkey.pem
+</pre></div>
+
+
+<p>Please refer to <a href="../../common/pki-cli/">Operations/OSGPKICommandlineClients</a> for full documentation of the Client package</p>
+<h1 id="information-for-grid-admins">Information for Grid Admins<a class="headerlink" href="#information-for-grid-admins" title="Permanent link">&para;</a></h1>
+<p>If you are a grid admin then you can use a single command to request and retrieve a certificate immediately. For getting grid admin privileges, request enrollment <a href="https://oim.opensciencegrid.org/oim/gridadmin">here</a> after obtaining your <a href="../user-certs">user certificate</a>.</p>
+<p>Request and retrieve multliple host certificates from OIM. Authenticates to OIM and is only for use by Grid Admins for certificates they are authorized to approve. This script is only supported with all hosts being in the same domain (so we ensure they go to the same Grid Admin). The certificates are stored with the format of 'hostname-requestid.pem' (i.e. the id generated from the request for the certificate). The key is stored as 'hostname-serial-key.pem'.</p>
+<p>Examples:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@host /]$</span> osg-gridadmin-cert-request -H host.opensciencegrid.org
+</pre></div>
+
+
+<p>If you want to request more then one certificate you can list them in a file (one host per line) and use the following command</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@host /]$</span> osg-gridadmin-cert-request -f hostfile
+</pre></div>
+
+
+<h3 id="detailed-description-of-the-osg-gridadmin-cert-request-usage">Detailed description of the osg-gridadmin-cert-request usage<a class="headerlink" href="#detailed-description-of-the-osg-gridadmin-cert-request-usage" title="Permanent link">&para;</a></h3>
+<p>This osg-gridadmin-cert-request script does the following in the process of acquiring certificates for the hostnames specified:</p>
+<p>Reads a list of fully-qualified hostnames from a file specified by the user. For reach hostname: Generates a new private key and CSR Only important part of CSR is CN= component Writes the private key to a file with filename: /-key.pem Prompts the user for their private key pass phrase Pass phrase is cached so user is not re-prompted Authenticates to OIM and posts the CSRs as a single request to OIM Request id is returned and subsequently used Authenticates to OIM and approves the request Waits one minute for request to be processed by OIM Connects to OIM and attempts to retrieve certificates Writes out any certificates it retrieves with filename of /-<red-id>.pem if all certificates have been retrieved, exits loop Wait 5 seconds and repeat.</p>
+<p>Inputs:</p>
+<p>filename of list of hostnames prefix path in which to write private keys and certificares [default: .] path to user's certificate [Optional, default is path specified by $X509_USER_CERT environment variable, ~/.globus/usercert.pem] path to user's private key [Optional, default is path specified by $X509_USER_KEY environment variable, ~/.globus/userkey.pem] Passphrase for user's private key via non-echoing prompt.</p>
+<p>Outputs:</p>
+<p>N host certificates in PEM format N private keys in PEM format</p>
+<p>Usage:osg-gridadmin-cert-request -h/--help [for detailed explanations of options]</p>
+<p><strong>Options</strong>: -h, --help show this help message and exit -k PKEY, --pkey=PKEY Specify Requestor's private key (PEM Format). If not specified will take the value of X509_USER_KEY or $HOME/.globus/userkey.pem -c CERT, --cert=CERT Specify Requestor's certificate (PEM Format). If not specified will take the value of X509_USER_CERT or $HOME/.globus/usercert.pem -T, --test Run in test mode -q, --quiet don't print status messages to stdout -V, --version Print the script version number and exit.</p>
+<p><strong>Hostname Options</strong>: Use either of these options. Specify hostname as a single hostname using -H/--hostname or specify from a file using -f/--hostfile.</p>
+<p>-H HOSTNAME, --hostname=HOSTNAME Specify the hostname or service/hostname for which you want to request the certificate for. If specified -f/--hostfile will be ignored -f HOSTFILE, --hostfile=HOSTFILE Filename with one hostname or service/hostname per line</p>
+<h1 id="frequently-asked-questions">Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permanent link">&para;</a></h1>
+<h2 id="can-i-use-any-host-to-request-a-certificate-for-a-different-host">Can I use any host to request a certificate for a different host?<a class="headerlink" href="#can-i-use-any-host-to-request-a-certificate-for-a-different-host" title="Permanent link">&para;</a></h2>
+<p>YES, you can use any host to create a certificate request as long as the hostname for the certificate is a fully qualified domain name.</p>
+<h2 id="may-i-reuse-my-host-certificate-as-a-service-certificate">May I reuse my host certificate as a service certificate?<a class="headerlink" href="#may-i-reuse-my-host-certificate-as-a-service-certificate" title="Permanent link">&para;</a></h2>
+<p>NO! For security reasons, please do not use clones of your host certificate for additional certificates even though it's technically possible.</p>
+<h2 id="how-do-i-renew-a-hostservice-certificate">How do I renew a host/service certificate?<a class="headerlink" href="#how-do-i-renew-a-hostservice-certificate" title="Permanent link">&para;</a></h2>
+<p>There is no separate procedure. Simply ask for a new certificate the same way you asked for it the previous time.</p>
+<h2 id="i-get-a-gss-authentication-failure-when-users-try-to-authenticate-with-my-site">I get a "GSS authentication failure" when users try to authenticate with my site?<a class="headerlink" href="#i-get-a-gss-authentication-failure-when-users-try-to-authenticate-with-my-site" title="Permanent link">&para;</a></h2>
+<p>You likely used an <strong>alias</strong> for the host instead of the fully qualified domain name when you generated the certificate request. This can cause the GSS authentication failures similar to the following when a user tries to authenticate to the host after your certificate is installed:</p>
+<div class="codehilite"><pre><span></span><span class="go">GSS authentication failure </span>
+<span class="go">GSS Major Status: General failure </span>
+<span class="go">GSS Minor Status Error Chain: </span>
+<span class="go">accept_sec_context.c:gss_accept_sec_context:403: </span>
+<span class="go">Error during delegation: Delegation protocol violation </span>
+<span class="go">Failure: GSS failed Major:000d0000 Minor:00000001 Token:00000000 </span>
+</pre></div>
+
+
+<h2 id="how-can-i-check-if-i-have-a-host-certificate-installed-already">How can I check if I have a host certificate installed already?<a class="headerlink" href="#how-can-i-check-if-i-have-a-host-certificate-installed-already" title="Permanent link">&para;</a></h2>
+<p>By default the host certificate key pair will be installed in <code>/etc/grid-security/hostcert.pem</code> and <code>/etc/grid-security/hostkey.pem</code>. You can use <strong>openssl</strong> to access basic information about the certificate:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@osg-se robert]#</span> openssl x509 -in /etc/grid-security/hostcert.pem -subject -issuer -dates -noout
+<span class="go">subject= /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=host.opensciencegrid.org</span>
+<span class="go">issuer= /DC=org/DC=cilogon/C=US/O=CILogon/CN=CILogon OSG CA 1</span>
+<span class="go">notBefore=Apr  8 00:00:00 2013 GMT</span>
+<span class="go">notAfter=May 17 12:00:00 2014 GMT</span>
+</pre></div>
+
+
+<h2 id="how-can-i-check-the-expiration-time-of-my-installed-host-certificate">How can I check the expiration time of my installed host certificate?<a class="headerlink" href="#how-can-i-check-the-expiration-time-of-my-installed-host-certificate" title="Permanent link">&para;</a></h2>
+<p>If you installed the Certificates Script Package you can use <strong>grid-cert-info</strong> to retrieve information about the certificate:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@osg-se robert]#</span> grid-cert-info -file /etc/grid-security/hostcert.pem -startdate -enddate
+<span class="go">Jan  4 21:08:41 2010 GMT</span>
+<span class="go">Jan  4 21:08:41 2011 GMT</span>
+</pre></div>
+
+
+<p>Alternatively you can use <strong>openssl</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[root@osg-se robert]#</span> openssl x509 -in /etc/grid-security/hostcert.pem -dates -noout
+<span class="go">notBefore=Jan  4 21:08:41 2010 GMT</span>
+<span class="go">notAfter=Jan  4 21:08:41 2011 GMT</span>
+</pre></div>
+
+
+<h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">Useful OpenSSL commands (from NCSA)</a> - e.g. how to convert the format of your certificate.</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../user-certs/" class="btn btn-neutral float-right" title="User Certificates">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../lcmaps-voms-authentication/" class="btn btn-neutral" title="LCMAPS-VOMS authentication"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../lcmaps-voms-authentication/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../user-certs/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

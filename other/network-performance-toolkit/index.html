@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Network Performance Toolkit - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Network Performance Toolkit";
+    var mkdocs_page_input_path = "other/network-performance-toolkit.md";
+    var mkdocs_page_url = "/other/network-performance-toolkit/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../..">Home</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../install-overview/">Installation Overview</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../site-planning/">Site Planning</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Common</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/install-best-practices/">Install Best Practices</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/ca/">CA Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/yum/">Yum Repos</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Worker Node</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn/">Worker Node (RPM install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/env-vars/">Environment</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Compute Element</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/gridftp/">Install GridFTP Server</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-gridftp-xrootd/">Install GridFtp XRootD</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/frontier-squid/">HTTP Cache</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-xroot-client/">XRootD Client</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Security</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/host-certs/">Host Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/user-certs/">User Certificates</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Release Information</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../release/notes/">Release Notes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/signing/">RPM Signing</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/contrib/">Contrib Software</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Other</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../gsissh/">GSI-enabled SSH</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-osg-upcoming-software/">OSG upcoming software</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-gwms-frontend/">GlideinWMS Frontend</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-cvmfs-stratum1/">Install a CVMFS Stratum 1</a>
+  
+        </li>
+        <li class=" current">
+          
+  
+    <a class="current" href="./">Network Performance Toolkit</a>
+  
+  <ul class="subnav">
+      
+    <li class="toctree-l3"><a href="#network-performance-toolkit">Network Performance Toolkit</a></li>
+    
+
+    <li class="toctree-l3"><a href="#introduction">Introduction</a></li>
+    
+
+    <li class="toctree-l3"><a href="#installation">Installation</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#client-site-installation">Client Site Installation</a></li>
+        
+            <li><a class="toctree-l4" href="#server-site-installation">Server Site Installation</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#finding-target-servers">Finding Target Servers</a></li>
+    
+
+    <li class="toctree-l3"><a href="#using-the-client-tools">Using the Client Tools</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#network-diagnostic-tool-ndt">Network Diagnostic Tool (NDT)</a></li>
+        
+            <li><a class="toctree-l4" href="#one-way-active-measurement-protocol-owamp">One Way Active Measurement Protocol (OWAMP)</a></li>
+        
+            <li><a class="toctree-l4" href="#bandwidth-control-tool-bwctl">Bandwidth Control tool (BWCTL)</a></li>
+        
+            <li><a class="toctree-l4" href="#network-path-and-application-diagnosis-npad">Network Path and Application Diagnosis (NPAD)</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#advanced-topic-scheduled-monitoring">Advanced Topic: Scheduled Monitoring</a></li>
+    
+
+    <li class="toctree-l3"><a href="#references">References</a></li>
+    
+
+  </ul>
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Monitoring</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/advanced-rsv-configuration/">Advanced RSV Configuration</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-control/">Manage RSV via rsv-control</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Usage Guides</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/using-wn/">Worker Node Environment</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Deprecated Software</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-bestman-xrootd/">BeStMan Xrootd SE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/edg-mkgridmap/">EDG-Mkgridmap Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/install-gums/">GUMS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-voms/">Install VOMS</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../common/help/">Get Help</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Other &raquo;</li>
+        
+      
+    
+    <li>Network Performance Toolkit</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/other/network-performance-toolkit.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="network-performance-toolkit">Network Performance Toolkit<a class="headerlink" href="#network-performance-toolkit" title="Permanent link">&para;</a></h1>
+<p>This document is for System Administrators and advanced Grid Users. It describes the usage of tools provided by the <a href="http://vdt.cs.wisc.edu">Virtual Data Toolkit</a> to evaluate the network performance between resources.</p>
+<h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h1>
+<p>The Network Performance Toolkit is a collection of applications provided by the <a href="http://www.perfsonar.net/">perfSONAR project</a> and distributed by the <a href="http://www.opensciencegrid.org">Open Science Grid</a>. The <em>server</em> components of the Network Performance Toolkit have been installed on dedicated resources of the <a href="http://www.opensciencegrid.org">Open Science Grid</a>. Following <em>client</em> tools are described in this document:</p>
+<ul>
+<li>Network Diagnostic Tool (NDT)</li>
+<li>One Way Active Measurement Protocol (OWAMP)</li>
+<li>Bandwidth Control tool (BWCTL)</li>
+<li>Network Path and Application Diagnosis (NPAD)</li>
+</ul>
+<h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h1>
+<h2 id="client-site-installation">Client Site Installation<a class="headerlink" href="#client-site-installation" title="Permanent link">&para;</a></h2>
+<p>The Network Performance Toolkit is installed with the OSG Client. Specifically, the tools included are: BWCTL, NDT and OWAMP (bwctl-client, bwctl-server, bwctl, ndt, owamp-client). NPAD is currently not in OSG client.</p>
+<p>If you just want to install the OSG command line clients you can do the following::</p>
+<div class="codehilite"><pre><span></span><span class="go">yum install bwctl-client</span>
+<span class="go">yum install owamp-client</span>
+<span class="go">yum install ndt-client</span>
+<span class="go">yum install npad-client</span>
+</pre></div>
+
+
+<p>You may install these utilities separately as RPM using yum by following the <a href="http://www.perfsonar.net/about">perfSONAR</a> instructions. The packages are in the OSG repository, some of them with a separate client or server version, available for the OSG supported platforms:</p>
+<ul>
+<li>NDT: ndt</li>
+<li>OWAMP: owamp, owamp-client, owamp-server</li>
+<li>BWCTL: bwctl, bwctl-client, bwctl-server</li>
+<li>NPAD: npad</li>
+</ul>
+<h2 id="server-site-installation">Server Site Installation<a class="headerlink" href="#server-site-installation" title="Permanent link">&para;</a></h2>
+<p>The <a href="http://www.perfsonar.net/about">perfSONAR</a>-based tools and services support the following tasks for OSG VO's:</p>
+<ol>
+<li>monitor site-to-site network paths and ensure that these paths remain operational</li>
+<li>troubleshoot performance problems quickly and efficiently</li>
+</ol>
+<p>The <em>server site components</em> can be brought-up <em>on demand</em> using the netinstall provided by <a href="http://docs.perfsonar.net/install_getting.html#downloads">perfSONAR project downloads</a>. Source packages are provided on the <a href="http://docs.perfsonar.net/">perfSONAR home page</a>.</p>
+<p>Once the Toolkit server has booted you may begin on-demand testing. The server tools will use a generic set of configuration files. The intent is to make it easy to stand up a temporary server when and where it is needed. However, it is expected that a permanently installed server will be customized/configured, allowing it to support both on-demand testing and regularly scheduled monitoring. See the <a href="http://docs.perfsonar.net/">perfSONAR home page</a> for step-by-step instructions on how to complete this customization process.</p>
+<h1 id="finding-target-servers">Finding Target Servers<a class="headerlink" href="#finding-target-servers" title="Permanent link">&para;</a></h1>
+<p>Finding servers against which to run on-demand tests can be a major impediment to effectively using these tools. The <a href="http://www.perfsonar.net/about">perfSONAR</a> project tackles this problem by running a registration service for participating tools. The Performance Node ISO automatically uses this Lookup Service to advertise the tools' existence. You can also create custom views by making web-service calls to retrieve the data of interest. </p>
+<p>We also have requested ALL OSG sites register their perfSONAR Toolkit installations in OIM (See <a href="https://www.opensciencegrid.org/bin/view/Documentation/RegisterPSinOIM">https://www.opensciencegrid.org/bin/view/Documentation/RegisterPSinOIM</a> ). You can use the MyOSG -&gt; Resource Group -&gt; Resource Group Summary page to see a list of perfSONAR Toolkit hosts that are installed at <a href="http://tinyurl.com/mxfmutg">http://tinyurl.com/mxfmutg</a>. Using this list you can select a "closest" relevant instance to use for running on-demand tests. Alternately if you have a perfSONAR toolkit install, the web interface has a "Global Services" link you can visit to see ALL perfSONAR instances that have updated the perfSONAR lookup service.</p>
+<h1 id="using-the-client-tools">Using the Client Tools<a class="headerlink" href="#using-the-client-tools" title="Permanent link">&para;</a></h1>
+<p>These tools support delay measurements (OWAMP), throughput measurements (BWCTL), and advanced diagnostics (NDT and NPAD). The command syntax for each tool is described in the following sub-sections. Each of the client tools listed above communicates with a companion server process to perform a measurement/test.</p>
+<h2 id="network-diagnostic-tool-ndt">Network Diagnostic Tool (NDT)<a class="headerlink" href="#network-diagnostic-tool-ndt" title="Permanent link">&para;</a></h2>
+<p>The Network Diagnostic Tool (NDT) runs a series of short tests to determine what the current performance is and what, if anything, is limiting that performance. It can distinguish between host configuration and network infrastructure problems. To diagnose the CE/SE configuration and network connection run the <code>web100clt</code> command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client /opt/npt]$</span> web100clt –n &lt;Target Server <span class="k">for</span> Measurement&gt;
+</pre></div>
+
+
+<p>More details can be obtained by using the <code>-l</code> command line option to <code>web100ctl</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client /opt/npt]$</span> web100clt –n &lt;Target Server <span class="k">for</span> Measurement&gt; -l
+</pre></div>
+
+
+<p>To increase the output further use:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client /opt/npt]$</span> web100clt –n &lt;Target Server <span class="k">for</span> Measurement&gt; -ll
+</pre></div>
+
+
+<h2 id="one-way-active-measurement-protocol-owamp">One Way Active Measurement Protocol (OWAMP)<a class="headerlink" href="#one-way-active-measurement-protocol-owamp" title="Permanent link">&para;</a></h2>
+<p>The One Way Active Measurement Protocol (OWAMP) is an advanced version of the common <code>ping</code> program. The OWAMP client <code>owping</code> communicates with an OWAMP server and measures the delay in each direction using NTP based time stamps. OWAMP can be used to identify delay, loss, and packet reordering problems inside the network. To measure the delay between the CE/SE and the remote server use the <code>owping</code> command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client /opt/npt]$</span> owping &lt;Target Server <span class="k">for</span> Measurement&gt;
+</pre></div>
+
+
+<h2 id="bandwidth-control-tool-bwctl">Bandwidth Control tool (BWCTL)<a class="headerlink" href="#bandwidth-control-tool-bwctl" title="Permanent link">&para;</a></h2>
+<p>The Bandwidth Control tool (BWCTL) is a wrapper for the <code>iperf</code> command, its policy and a daemon. BWCTL improves the usability of <code>iperf</code> by avoiding following problems:</p>
+<ol>
+<li>need for remote access to the target host used for measurement</li>
+<li>security concerns about leaving an <code>iperf</code> daemon running on the target host</li>
+</ol>
+<p>BWCTL supports testing in either direction, or between 2 remote BWCTL servers from a third location. To measure the current throughput from your SE/CE to the remote server use the <code>bwctl</code> command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client /opt/npt]$</span> bwctl –s &lt;Target Server <span class="k">for</span> Measurement&gt;
+</pre></div>
+
+
+<p>Third party tests, between 2 remote BWCTL servers, will let you measure various sections of the end-2-end path, running</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client /opt/npt]$</span> bwctl –c &lt;1st Server <span class="k">for</span> Measurement&gt; –s &lt;2nd Server <span class="k">for</span> Measurement&gt;
+</pre></div>
+
+
+<p>Other useful options are <code>-f</code>, format, <code>-t</code>, length of test, and <code>-i</code>, test interval.</p>
+<h2 id="network-path-and-application-diagnosis-npad">Network Path and Application Diagnosis (NPAD)<a class="headerlink" href="#network-path-and-application-diagnosis-npad" title="Permanent link">&para;</a></h2>
+<p><strong>NOTE: Network Path and Application Diagnosis (NPAD) is deprecated and won't be in future versions of the OSG distribution</strong></p>
+<p>The Network Path and Application Diagnosis (NPAD) tool examines a host and its local network infrastructure to determine what problems, if any, would hinder wide area performance. Issues such as small TCP buffers in switches and routers are detected as well as common host configuration errors. To determine if the CE/SE will achieve maximum performance over a WAN path run the command <code>diag-client</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@client /opt/npt]$</span> diag-client &lt;Target Server <span class="k">for</span> Measurement&gt; <span class="m">8001</span> <span class="m">10</span> <span class="m">50</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The last 2 numeric parameters, after host and port, are the rtt time (in ms) and speed/rate values (in Mbps) you need to achieve. The reason it works this way is that its meant to 'test' local infrastructure. The idea is that if you were testing to an NPAD server that was 5ms away on a 1G network, you would get close to that speed even with network flaws. If you were to supply 80ms and 1G to the server and there truly was a flaw, the NPAD test would tell you it wasn't possible, thus enabling you to fix the problem</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>diag-client</code> commands return a partial URL, enabling easy sharing of results between users and site administrators. To view the results, prepend the Toolkit servers name/port to the returned string. The example above would result in this URL: <code>http://server.this.osg.domain:8002/ServerData/Reports-2011-07/vtbv-ce.uchicago.edu:2011-07-12-18:50:07.html</code>.</p>
+</div>
+<h1 id="advanced-topic-scheduled-monitoring"><a href="http://docs.perfsonar.net/manage_regular_tests.html">Advanced Topic: Scheduled Monitoring</a><a class="headerlink" href="#advanced-topic-scheduled-monitoring" title="Permanent link">&para;</a></h1>
+<p>(See <a href="http://docs.perfsonar.net/install_quick_start.html">http://docs.perfsonar.net/install_quick_start.html</a> for more details.)</p>
+<p>In addition to the above on-demand tests, the Performance Toolkit server can be configured to continuously monitor the throughput or delay between your site and peer sites of interest. To begin this monitoring, enter the GUI and ensure that your server is a member of the community or communities of interest. Once that is complete, continue on by selecting either the <strong>perfSONAR-BUOY</strong> throughput or delay configuration menu item.</p>
+<p>pSB-throughput: This utility will run regularly scheduled BWCTL tests between your Toolkit server and the selected peer servers. Results are stored in a database and displayed on the server's web page. You may also use standard web-service calls to retrieve this data for display on remote web servers. This would allow monitoring of a common core infrastructure at a central site, while each site could keep local/customized views.</p>
+<p>pSB-delay: This utility will run regularly scheduled OWAMP tests between your Toolkit server and the selected peers. Results are stored in a database and displayed on the server’s web page. You may also use standard web-service calls to retrieve this data for display on remote web servers. This would allow monitoring of a common core infrastructure at a central site, while each site could keep local/customized views as required.</p>
+<h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="http://docs.perfsonar.net/config_owamp.html">One Way Active Measurement Protocol (OWAMP)</a></li>
+<li><a href="http://docs.perfsonar.net/config_bwctl.html">Bandwidth Control tool (BWCTL)</a></li>
+</ul>
+<p>See also the OSG/WLCG pages on perfSONAR at <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/DeployperfSONAR">https://twiki.opensciencegrid.org/bin/view/Documentation/DeployperfSONAR</a></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../monitoring/rsv-overview/" class="btn btn-neutral float-right" title="RSV Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../install-cvmfs-stratum1/" class="btn btn-neutral" title="Install a CVMFS Stratum 1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../install-cvmfs-stratum1/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../monitoring/rsv-overview/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
