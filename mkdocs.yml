@@ -22,7 +22,6 @@ pages:
   - 'Worker Node (OASIS install)': 'worker-node/install-wn-oasis.md'
   - 'CVMFS': 'worker-node/install-cvmfs.md'
   - 'Singularity': 'worker-node/install-singularity.md'
-  - 'Environment': 'worker-node/env-vars.md'
 - Compute Element:
   - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
   - 'Install HTCondor-CE': 'compute-element/install-htcondor-ce.md'
