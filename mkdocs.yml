@@ -39,6 +39,7 @@ pages:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host Certificates': 'security/host-certs.md'
   - 'User Certificates': 'security/user-certs.md'
+  - 'Managing CAs': 'security/osg-ca-manage.md'
 - Release Information:
   - 'Release Notes': 'release/notes.md'
   - 'OSG Release Series': 'release/release_series.md'

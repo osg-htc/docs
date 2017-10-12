@@ -39,12 +39,12 @@ Syntax
 
 Zero or more of these options may be used during an execution of ca\_manage.
 
-1.  <verbatim>--verbose</verbatim> Provides you with more information depending on the command context.
-2.   <verbatim>--force</verbatim> Forces the command to run ignoring any checks/warnings. The actual effect is context dependent, and this behavior is noted in the command details below.
-3.   <verbatim>--cert-dir <location></verbatim> This location specifies the path CA directory. If this option is not specified then the command will look for $X509\_CERT\_DIR, and $VDT\_LOCATION/globus/TRUSTED\_CA respectively. If none of these directories can be found, the command will exit with an error.
-4.  <verbatim>--auto-refresh </verbatim> This option will indicate if this permissible to fetch CAs and CRLs as deemed necessary by this tool. For example at the end of an addCA/removeCA it would be advisable to refresh the CA list and the corresponding CRLs. Default is **not** to refresh, unless the admin requests it by specifying this option.
-5.  <verbatim>--version</verbatim> Prints the version of the vdt-ca-certs-manager tool.
-6.  <verbatim>--help | --usage</verbatim> Print usage information. Show a brief explanatory text for using osg-ca-manage.
+1.  `--verbose` Provides you with more information depending on the command context.
+2.   `--force` Forces the command to run ignoring any checks/warnings. The actual effect is context dependent, and this behavior is noted in the command details below.
+3.   `--cert-dir <location>` This location specifies the path CA directory. If this option is not specified then the command will look for `$X509_CERT_DIR`, and `$VDT_LOCATION/globus/TRUSTED_CA` respectively. If none of these directories can be found, the command will exit with an error.
+4.  `--auto-refresh ` This option will indicate if this permissible to fetch CAs and CRLs as deemed necessary by this tool. For example at the end of an addCA/removeCA it would be advisable to refresh the CA list and the corresponding CRLs. Default is **not** to refresh, unless the admin requests it by specifying this option.
+5.  `--version` Prints the version of the vdt-ca-certs-manager tool.
+6.  `--help | --usage` Print usage information. Show a brief explanatory text for using osg-ca-manage.
 
 ### Explanation of commands ###
 
@@ -52,17 +52,20 @@ Exactly one command is to be specified during an execution of osg-ca-manage
 
 #### Status commands ####
 
-1.   <verbatim>showCAURL</verbatim> This will print out the distribution location specified in the config file. This command will read osg-update-certs.conf and output cacerts\_url.
-2.   <verbatim>listCA \[--pattern <pattern>\]</verbatim> This command will use openssl x509 command on the files in the --dir to provide hash, the subject and whether a CA is IGTF or TeraGrid accredited and distribution package which was used to download CAs into the directory. --verbose option will provide additional information like issuer (of CA) and all associated dates (CA cert issuance date, and CRL issuance date, and expiry dates). The command will look for CA files in the -certDir. The \\<pattern\\> specified in the option will be matched, using perl regex, against the subject field of the certificate (but we might also expand it include issuer if needed) and all CAs are listed if no pattern is given.
-3.   <verbatim>verify \[--hash <CA\_hash> | --pattern <pattern>\]</verbatim> The verify command will check all CAs (or if specified only the \\<CA\_hash\\>) in the \\<certDir\\> directory, to see if any CA/CRL have expired or are about to do so. If any expired CA/CRL are found, an error is issued along with the hash, date when CA cert/CRL expired. A warning is issued if either the CA cert or CRL is about the expire within the next 24 Hrs. The --verbose option provides the CA Name, date the CA certs and CRL files are created (by the CA), and when they will expire. In addition to hash value we will also consider providing an option of verify using \\<pattern\\> 4. <verbatim>diffCAPackage</verbatim> This command will compare the hash of certificates included in the certificate directory against the latest VDT/OSG distribution (based on your cacerts\_url) and outputs the difference. 5. <verbatim>show \[--certfile <cert\_file> | --hash <CA\_hash>\]</verbatim> This command will essentially provide a condensed output of openssl x509 command. --verbose option will provide the full output. If --hash option is used we will look for the \\<CA\_hash\\>.o file in the \\<certDir\\>. The --certfile option can also take in a user proxy. 6. <verbatim>showChain \[--certfile <cert\_file> | --hash <CA\_hash>\]</verbatim> This command will output the trust chain of the certificate. \\<certDir\\> will be used as the directory in which search for ancestor certs will be conducted. This command can also be used to trace the trust chain of a user proxy.
+1.   `showCAURL` This will print out the distribution location specified in the config file. This command will read osg-update-certs.conf and output cacerts\_url.
+2.   `listCA [--pattern <pattern>]` This command will use openssl x509 command on the files in the --dir to provide hash, the subject and whether a CA is IGTF or TeraGrid accredited and distribution package which was used to download CAs into the directory. --verbose option will provide additional information like issuer (of CA) and all associated dates (CA cert issuance date, and CRL issuance date, and expiry dates). The command will look for CA files in the -certDir. The `<pattern>` specified in the option will be matched, using perl regex, against the subject field of the certificate (but we might also expand it include issuer if needed) and all CAs are listed if no pattern is given.
+3.   `verify [--hash <CA_hash> | --pattern <pattern>]` The verify command will check all CAs (or if specified only the `<CA_hash>`) in the `<certDir>` directory, to see if any CA/CRL have expired or are about to do so. If any expired CA/CRL are found, an error is issued along with the hash, date when CA cert/CRL expired. A warning is issued if either the CA cert or CRL is about the expire within the next 24 Hrs. The --verbose option provides the CA Name, date the CA certs and CRL files are created (by the CA), and when they will expire. In addition to hash value we will also consider providing an option of verify using `<pattern>` 
+4. `diffCAPackage` This command will compare the hash of certificates included in the certificate directory against the latest VDT/OSG distribution (based on your cacerts\_url) and outputs the difference. 
+5. `show [--certfile <cert_file> | --hash <CA_hash>]` This command will essentially provide a condensed output of openssl x509 command. --verbose option will provide the full output. If --hash option is used we will look for the `<CA_hash>.o` file in the `<certDir>`. The --certfile option can also take in a user proxy. 
+6. `showChain [--certfile <cert_file> | --hash <CA_hash>]` This command will output the trust chain of the certificate. `<certDir>` will be used as the directory in which search for ancestor certs will be conducted. This command can also be used to trace the trust chain of a user proxy.
 
 #### Manage commands ####
 
-1.  <verbatim>setupCA --location <root|PATH> \[--url <osg|igtf|URL> --no-update --force\]</verbatim> This command is used for the inital setup of the CA package. The CA package can be setup to download CAs from any URL. Keywords are provided for various distributions. For the location to specify, keywords are provided to install into 'root' (/etc/grid-security). A --no-update option is available. Setting this flag instructs just setup the symlinks only and not to run configure osg-update-certs to be run automatically. This option is for installations that will not manage their own certificates, but will rely on updates through another method (such as RPM, or using osg-update-certs from a different OSG installation). A common use case for this is to have worker-node installations rely on the CA certificates being available on an NFS share, and the updating will happen on a single node.
-2.   <verbatim>refreshCA</verbatim> This command run osg-update-certs to check for a new version of the CA distribution. If you already have the latest version, but wish to force an update anyways, use the --force option. 1.<verbatim>fetchCRL</verbatim> It retrieves CRLs for all CAs within the directory. This will involve invoking fetch-crl, with appropriate arguments. NOTE: If vdt's fetch-crl service has not been enabled (i.e. no fetch-crl entry in crontab), then this command will not execute. This is a safety mechanism to prevent crls from being downloaded using this tool if they are not scheduled to be updated.
-3.   <verbatim>setCAURL \[--url <osg|igtf|URL>\]</verbatim> This command sets the location from where the CA files. This command will modify vdt-update-certs.conf and set the cacerts\_url as <URL\_location>. Only if --auto-refresh is specified both CA and CRLs are refreshed once the URL change has been made. The distribution \\<URL\_location\\> will be required to conform to the VDT CA distribution format (e.g. similar to <http://vdt.cs.wisc.edu/software/certificates/ca-certs-version>). If the \\<URL\_location\\> cannot be reached or if it is valid syntactically (i.e. does not conform to the format requirements) a warning will be issues and no changes will be made. The --force option can be used to force a change ignoring the warning. If URL location is left unspecified the \\<URL\_location\\> will be set to OSG default. We define keywords for OSG, IGTF as shortcuts for OSG wide well-known CA URL\_locations.
-4.   <verbatim>add \[--cadir <localdir> | --caname <CA>\]</verbatim> The --hash argument is required. If --dir is not specified we will assume that the user wants to include a CA he has previously excluded and will remove the corresponding exclude lines from the config. If \\<CA\_hash\\> is not known to us or it is already included we will provide appropriate error/warning information. In the common case this command will add include lines for \\<local\_dir\\>/\\<CA\_hash\\>.\*, into the vdt-update-certs.conf file. Lastly the command will invoke functions refresh the CAs and fetch CRLs. This command will also do some preliminary error checks, e.g. make sure that “.0”, “.crl\_url”, “.signing\_policy” files exist and that --dir is different than --certDir.
-5.   <verbatim>remove \[--cadir <localdir> | --caname <CA>\]</verbatim> This command will be complementary to add and would either add an exclude or remove an include depending on the scenario. This command will also refresh CA and CRLs. vdt-update-certs do the job of removing cert files, we will still do the preliminary error checks to make sure that the certs that are being removed are included in the first place. For both addCA and removeCA, new CAs will be included/removed and CRLs will be refreshed only if --auto-refresh is set.
+1.  `setupCA --location <root|PATH> [--url <osg|igtf|URL> --no-update --force]` This command is used for the inital setup of the CA package. The CA package can be setup to download CAs from any URL. Keywords are provided for various distributions. For the location to specify, keywords are provided to install into 'root' (/etc/grid-security). A --no-update option is available. Setting this flag instructs just setup the symlinks only and not to run configure osg-update-certs to be run automatically. This option is for installations that will not manage their own certificates, but will rely on updates through another method (such as RPM, or using osg-update-certs from a different OSG installation). A common use case for this is to have worker-node installations rely on the CA certificates being available on an NFS share, and the updating will happen on a single node.
+2.   `refreshCA` This command run osg-update-certs to check for a new version of the CA distribution. If you already have the latest version, but wish to force an update anyways, use the --force option. 1.`fetchCRL` It retrieves CRLs for all CAs within the directory. This will involve invoking fetch-crl, with appropriate arguments. NOTE: If vdt's fetch-crl service has not been enabled (i.e. no fetch-crl entry in crontab), then this command will not execute. This is a safety mechanism to prevent crls from being downloaded using this tool if they are not scheduled to be updated.
+3.   `setCAURL [--url <osg|igtf|URL>]` This command sets the location from where the CA files. This command will modify vdt-update-certs.conf and set the cacerts\_url as `<URL_location>`. Only if --auto-refresh is specified both CA and CRLs are refreshed once the URL change has been made. The distribution `<URL_location>` will be required to conform to the VDT CA distribution format (e.g. similar to <http://vdt.cs.wisc.edu/software/certificates/ca-certs-version>). If the `<URL_location>` cannot be reached or if it is valid syntactically (i.e. does not conform to the format requirements) a warning will be issues and no changes will be made. The --force option can be used to force a change ignoring the warning. If URL location is left unspecified the `<URL_location>` will be set to OSG default. We define keywords for OSG, IGTF as shortcuts for OSG wide well-known CA URL\_locations.
+4.   `add [--cadir <localdir> | --caname <CA>]` The --hash argument is required. If --dir is not specified we will assume that the user wants to include a CA he has previously excluded and will remove the corresponding exclude lines from the config. If `<CA_hash>` is not known to us or it is already included we will provide appropriate error/warning information. In the common case this command will add include lines for `<local_dir>`/`<CA_hash>`.*, into the vdt-update-certs.conf file. Lastly the command will invoke functions refresh the CAs and fetch CRLs. This command will also do some preliminary error checks, e.g. make sure that “.0”, “.crl\_url”, “.signing\_policy” files exist and that --dir is different than --certDir.
+5.   `remove [--cadir <localdir> | --caname <CA>]` This command will be complementary to add and would either add an exclude or remove an include depending on the scenario. This command will also refresh CA and CRLs. vdt-update-certs do the job of removing cert files, we will still do the preliminary error checks to make sure that the certs that are being removed are included in the first place. For both addCA and removeCA, new CAs will be included/removed and CRLs will be refreshed only if --auto-refresh is set.
 
 ### Usage Examples ###
 
@@ -73,12 +76,12 @@ Exactly one command is to be specified during an execution of osg-ca-manage
 
 Before you proceed to install a Certificate Authority Package you should decide which of the available packages to install.
 
-\* `osg`, the package recommended to be used by production resources on the <span class="twiki-macro LINK_OSG"></span>. It is based on the CA distribution from the <span class="twiki-macro LINK_IGTF"></span>, but it may differ slightly as decided by the [Security Team](Security/WebHome). \* `igtf`, the package is a redistribution of the unchanged CA distribution from the <span class="twiki-macro LINK_IGTF"></span>,
-
--   `url` a package provided at a given URL
+- `osg`, the package recommended to be used by production resources on the OSG. It is based on the CA distribution from the IGTF, but it may differ slightly as decided by the [Security Team](https://opensciencegrid.github.io/security). 
+- `igtf`, the package is a redistribution of the unchanged CA distribution from the IGTF
+- `url` a package provided at a given URL
 
 !!! note
-    If in doubt, please consult the policies of your home institution and get in contact with the [Security Team](Security/WebHome).
+    If in doubt, please consult the policies of your home institution and get in contact with the [Security Team](https://opensciencegrid.github.io/security).
 
 Next decide at what location to install the Certificate Authority Package:
 
@@ -224,7 +227,8 @@ You can inspect the list of CA Certificates that have been installed:
 user@host $ osg-ca-manage listCA
 ```
 
-<details>``` %UCL_SCREEN%
+<details>
+```
 user@host $ osg-ca-manage listCA
 Hash=09ff08b7; Subject= /C=FR/O=CNRS/CN=CNRS2-Projets; Issuer= /C=FR/O=CNRS/CN=CNRS2; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
 Hash=0a12b607; Subject= /DC=org/DC=ugrid/CN=UGRID CA; Issuer= /DC=org/DC=ugrid/CN=UGRID CA; Accreditation=Unknown; Status=http://software.grid.iu.edu/pacman/cadist/ca-certs-version
@@ -318,7 +322,7 @@ Hash=ff94d436; Subject= /C=HR/O=edu/OU=srce/CN=SRCE CA; Issuer= /C=HR/O=edu/OU=s
 
 </details>
 
-Any certificate issued by any of the Certificate Authorities listed will be trusted. If in doubt please contact the [OSG Security Team](Security/WebHome) and review the policies of your home institution.
+Any certificate issued by any of the Certificate Authorities listed will be trusted. If in doubt please contact the [OSG Security Team](https://opensciencegrid.github.io/security) and review the policies of your home institution.
 
 Troubleshooting
 ---------------
@@ -338,6 +342,6 @@ Logs and configuration:
 References
 ----------
 
--   [Installing the Certificate Authorities Certificates and the related RPMs](InstallCertAuth)
+-   [Installing the Certificate Authorities Certificates and the related RPMs](../common/ca)
 
 
