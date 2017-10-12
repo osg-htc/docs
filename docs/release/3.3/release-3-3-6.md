@@ -35,7 +35,7 @@ self.X509Request.set\_pubkey(pkey=self.PKey) + self.X509Request.set\_version(0) 
 1.  `cd` into the appropriate folder:  
 <pre class="rootscreen">\# For EL5 hosts:
 
-root@host # cd /usr/lib/python2.4/site-packages/osgpkitools/ \# For EL6 hosts: [root@client ~] $ cd /usr/lib/python2.6/site-packages/osgpkitools/</pre>
+root@host # cd /usr/lib/python2.4/site-packages/osgpkitools/ \# For EL6 hosts: root@host # cd /usr/lib/python2.6/site-packages/osgpkitools/</pre>
 
 1.  Apply the patch:  
 <pre class="rootscreen">root@host # patch < ~/osgpkitools.patch</pre> \* HTCondor 8.4.0 has changed it's behavior in ways that cause the GlideinWMS frontend configuration to break. In order to correct this, the following setting needs to be added to the configuration file:
