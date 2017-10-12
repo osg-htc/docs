@@ -172,7 +172,7 @@ You can also run the metrics individually or pass special parameters as explaine
 Troubleshooting RSV
 -------------------
 
-You can find more information on troubleshooting RSV in the [rsv-control documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvControl) and in [TroubleshootRSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv).
+You can find more information on troubleshooting RSV in the [rsv-control documentation](rsv-control).
 
 ### Important file locations
 
@@ -263,7 +263,7 @@ EOT
 Getting Help
 ------------
 
-To get assistance, please use [this page](../common/help.md).
+To get assistance, please use [this page](../common/help.md) and attach the output of `rsv-control --profile`:
 
 ```console
 [root@client ~] # rsv-control --profile
