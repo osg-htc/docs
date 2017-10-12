@@ -9,7 +9,7 @@ We also describe how to remove a VO from VOMS if the need arises.
 
 The installation section will give you a bare-bones installation. In order to use VOMS you need to go through the configuration: run `configure_voms` to create your VO, probably enable read-only access to your VO and probably set a VO-admin to add/remove users. The other sections help in troubleshooting and knowing what is running.
 
-This is not a complete reference. If you need to administer a VO, please check the [VOMS User guide](https://twiki.cern.ch/twiki/bin/view/EMI/EMIVomsAdminUserGuide261) linked also in the <a href="/bin/view/Documentation/Release3/InstallVoms#Reference" class="twikiCurrentTopicLink twikiAnchorLink">reference</a> section.
+This is not a complete reference. If you need to administer a VO, please check the [VOMS User guide](https://twiki.cern.ch/twiki/bin/view/EMI/EMIVomsAdminUserGuide261) linked also in the [reference](#reference) section.
 
 Introduction
 =================
@@ -28,7 +28,7 @@ Host and OS
 
 -   A host to install the VOMS Service (Pristine node)
 -   OS is Red Hat Enterprise Linux 6, 7, and variants (see [details...](../release/supported_platforms.md)). Currently most of our testing has been done on Scientific Linux 5.
--   Time must be synchronized. You can find more in the <a href="/bin/view/Documentation/Release3/HostTimeSetup" class="twikiLink">time synchronization document</a>.
+-   Time must be synchronized (e.g. `ntpd`). 
 -   Root access
 
 Users 
@@ -36,7 +36,7 @@ Users
 
 The VOMS and voms-admin installation will create two users unless they are already created.
 
-| [User](/bin/view/Documentation/Release3/InstallVoms?sortcol=0;table=1;up=0#sorted_table "Sort by this column") | [Default uid](/bin/view/Documentation/Release3/InstallVoms?sortcol=1;table=1;up=0#sorted_table "Sort by this column") | [Comment](/bin/view/Documentation/Release3/InstallVoms?sortcol=2;table=1;up=0#sorted_table "Sort by this column") |
+| User | Default uid | Comment |
 |----------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | `voms`                                                                                                         | none                                                                                                                  | Runs the VOMS daemons, one per VO.                                                                                |
 | `tomcat`                                                                                                       | 91                                                                                                                    | Runs tomcat6 and owns voms-admin configuration and certificates.                                                  |
@@ -46,9 +46,9 @@ Note that if uid 91ise already taken but not used for the tomcat user, you will 
 Certificates 
 ------------------------------------------------------
 
-You will need two service certificates. <span class="twikiNewLink">Here[?](/bin/edit/Trash/ReleaseDocumentationGetHostServiceCertificates?topicparent=Documentation/Release3.InstallVoms "Here (this topic does not yet exist; you can create it)") are instructions to request a host certificate. Optional, you can use the host certificate instead as explained in the <a href="/bin/view/Documentation/Release3/InstallVoms#Setup_the_Service_Certificates" class="twikiCurrentTopicLink twikiAnchorLink">section below</a>.
+You will need two service certificates. [Here](../security/host-certs) are instructions to request a host certificate. 
 
-| [Certificate](/bin/view/Documentation/Release3/InstallVoms?sortcol=0;table=2;up=0#sorted_table "Sort by this column") | [User that owns certificate](/bin/view/Documentation/Release3/InstallVoms?sortcol=1;table=2;up=0#sorted_table "Sort by this column") | [Path to certificate](/bin/view/Documentation/Release3/InstallVoms?sortcol=2;table=2;up=0#sorted_table "Sort by this column") |
+| Certificate | User that owns certificate | Path to certificate |
 |-----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | VOMS service certificate                                                                                              | `voms`                                                                                                                               | `/etc/grid-security/voms/vomscert.pem`                                                                                        
                                                                                                                                                                                                                                                                 `/etc/grid-security/voms/vomskey.pem`                                                                                          |
@@ -58,15 +58,13 @@ You will need two service certificates. <span class="twikiNewLink">Here[?](/bin/
 Networking 
 ----------------------------------------------------
 
-For more details on overall Firewall configuration, please see our <a href="/bin/view/Documentation/Release3/FirewallInformation" class="twikiLink">Firewall documentation</a>.
-
-| [Service Name](/bin/view/Documentation/Release3/InstallVoms?sortcol=0;table=3;up=0#sorted_table "Sort by this column") | [Protocol](/bin/view/Documentation/Release3/InstallVoms?sortcol=1;table=3;up=0#sorted_table "Sort by this column") | [Port Number](/bin/view/Documentation/Release3/InstallVoms?sortcol=2;table=3;up=0#sorted_table "Sort by this column") | [Inbound](/bin/view/Documentation/Release3/InstallVoms?sortcol=3;table=3;up=0#sorted_table "Sort by this column") | [Outbound](/bin/view/Documentation/Release3/InstallVoms?sortcol=4;table=3;up=0#sorted_table "Sort by this column") | [Comment](/bin/view/Documentation/Release3/InstallVoms?sortcol=5;table=3;up=0#sorted_table "Sort by this column")           |
+| Service Name | Protocol | Port Number | Inbound | Outbound | Comment |
 |------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| <a href="/bin/view/Documentation/GlossaryV#DefsVoms" class="twikiAnchorLink">VOMS</a>                                  | tcp                                                                                                                | 15001+                                                                                                                | <img src="/twiki/pub/TWiki/TWikiDocGraphics/choice-yes.gif" title="Y" alt="Y" width="16" height="16" />           |                                                                                                                    | range of ports, increment by 1 for each VO supported                                                                        |
-| <a href="/bin/view/Documentation/GlossaryV#DefsVomsAdmin" class="twikiAnchorLink">VOMS Admin</a>                       | tcp                                                                                                                | 8443                                                                                                                  | <img src="/twiki/pub/TWiki/TWikiDocGraphics/choice-yes.gif" title="Y" alt="Y" width="16" height="16" />           |                                                                                                                    | VOMS Admin (which runs within Tomcat) web interface, it must be available to VO administrators and users registering online |
+| VOMS                                  | tcp                                                                                                                | 15001+                                                                                                                | Y           |                                                                                                                    | range of ports, increment by 1 for each VO supported                                                                        |
+| VOMS Admin                       | tcp                                                                                                                | 8443                                                                                                                  | Y           |                                                                                                                    | VOMS Admin (which runs within Tomcat) web interface, it must be available to VO administrators and users registering online |
 
 !!! note
-    \* 15001 is the port specified in the <a href="/bin/view/Documentation/Release3/InstallVoms#Configure_VOMS" class="twikiCurrentTopicLink twikiAnchorLink">configuration command</a>. You can choose a different one or have multiple ones if you support multiple VOs.
+    \* 15001 is the port specified in the [configuration command](#configure). You can choose a different one or have multiple ones if you support multiple VOs.
 
 Additional Requirements 
 -----------------------------------------------------------------
@@ -77,18 +75,7 @@ Additional Requirements
     -   Your certificate uploaded into a browser if you want to test voms-admin WEB UI
 
 !!! note
-    The configuration and testing require some familiarity with openssl commands, e.g. to extract the subject (DN) and the issuer of a certificate. If you are not familiar please check the guides in the <a href="/bin/view/Documentation/Release3/InstallVoms#References" class="twikiCurrentTopicLink twikiAnchorLink">reference section</a>:
-
-<span id="twistyIdDocumentation/Release3InstallVoms1show" class="twistyRememberSetting twistyStartHide twistyTrigger twikiUnvisited twistyInited0">[![](/twiki/pub/TWiki/TWikiDocGraphics/toggleopen-small.gif)<span class="twikiLinkLabel twikiUnvisited">click to show an example](#)  <span id="twistyIdDocumentation/Release3InstallVoms1hide" class="twistyRememberSetting twistyStartHide twistyTrigger twikiUnvisited twistyHidden twistyInited0">[![](/twiki/pub/TWiki/TWikiDocGraphics/toggleclose-small.gif)<span class="twikiLinkLabel twikiUnvisited">Hide](#) 
-
-``` console
-# to whom was it issued (subject/DN)
-[user@voms ~]$ openssl x509 -noout -in /etc/grid-security/hostcert.pem -subject
-subject= /DC=org/DC=doegrids/OU=Services/CN=fermicloud002.fnal.gov
-# issuer
-[user@voms ~]$ openssl x509 -noout -in /etc/grid-security/hostcert.pem -issuer
-issuer= /DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1
-```
+    The configuration and testing require some familiarity with openssl commands, e.g. to extract the subject (DN) and the issuer of a certificate. If you are not familiar please check the guides in the [reference section](#reference):
 
 Installation Procedure
 ===========================
@@ -96,7 +83,7 @@ Installation Procedure
 Install VOMS 
 ------------------------------------------------------
 
-1.  Install Java using <a href="/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7#InstallingJava" class="twikiAnchorLink">these instructions</a>
+1.  Install Java using [these instructions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7#Installing_Java)
 2.  Install OSG-VOMS:
 
     ``` console
@@ -132,7 +119,7 @@ It is wise to set a password for the `root` user. Run the following command to s
 Setup the Service Certificates 
 ------------------------------------------------------------------------
 
-Make sure that you have the host, VOMS and Tomcat service certificates/keys in the right directories and with the correct owners and permissions (`600` for key and `644` the certificate). <span class="twikiNewLink">Host certificate[?](/bin/edit/Trash/ReleaseDocumentationGetHostServiceCertificates?topicparent=Documentation/Release3.InstallVoms "Host certificate (this topic does not yet exist; you can create it)") is required and must be in `/etc/grid-security/hostcert.pem` and `hostkey.pem`. It is recommended to provide also service certificates for VOMS and Tomcat. If you don't, here are the instructions to copy the host certificate/key and set the correct owner (permissions are preserved). Note that if you did not previously have a voms or tomcat user on your system, they were added during the RPM install:
+Make sure that you have the host, VOMS and Tomcat service certificates/keys in the right directories and with the correct owners and permissions (`600` for key and `644` the certificate). [Host certificate](../security/host-certs.md) is required and must be in `/etc/grid-security/hostcert.pem` and `hostkey.pem`. It is recommended to provide also service certificates for VOMS and Tomcat. If you don't, here are the instructions to copy the host certificate/key and set the correct owner (permissions are preserved). Note that if you did not previously have a voms or tomcat user on your system, they were added during the RPM install:
 
 1.  VOMS-core daemon is running as user `voms` and requires its service certificate and key in `/etc/grid-security/voms`. To copy the host certificate/key for this service, you need to do the following:
 
@@ -463,7 +450,7 @@ To stop VOMS you need to stop voms and voms-admin, and also the services they us
 Advertise your VOMS server
 ===============================
 
-A working VOMS server can be contacted to sign certificates extensions (e.g., by `voms-proxy-init`) or to verify VO memberships (e.g., by <a href="/bin/view/Documentation/GlossaryG#DefsGridUserManagementSystem" class="twikiAnchorLink">GUMS</a>) only if it is on the list of valid VOMS servers (`/etc/vomses`) and if there is an LSC file for that VO. Some grid services (glite-FTS and glite-WMS) even require a copy of the VOMS server certificate.
+A working VOMS server can be contacted to sign certificates extensions (e.g., by `voms-proxy-init`) or to verify VO memberships only if it is on the list of valid VOMS servers (`/etc/vomses`) and if there is an LSC file for that VO. Some grid services (glite-FTS and glite-WMS) even require a copy of the VOMS server certificate.
 
 The file `/etc/vomses` contains a list of VOs and their VOMS servers. A VOMS server may appear on multiple lines if it is serving multiple VOs on different ports. All lines contain:
 
@@ -499,7 +486,7 @@ Test
 =========
 
 !!! note
-    Before performing any of the tests you must start all the services as <a href="/bin/view/Documentation/Release3/InstallVoms#VomsStart" class="twikiCurrentTopicLink twikiAnchorLink">described above</a>.
+    Before performing any of the tests you must start all the services as [described above](#starting-and-enabling-services)
 
 To test VOMS you can add a member (her/his certificate) to a VO using voms-admin, login in the Web UI and then:
 
@@ -546,7 +533,7 @@ Check the Web UI by accessing `https://hostname:8443/voms/voname`. If you have y
 Voms-core test: 
 ---------------------------------------------------------
 
-To perform this test you need the `voms-client` RPM that is normally installed with <a href="/bin/view/Documentation/Release3/InstallOSGClient" class="twikiLink">OSG client</a>.
+To perform this test you need the `voms-client` RPM.
 
 To use your VOMS you need to add a line with its description (similar to the following) to `/etc/vomses`, a file containing a list of all valid voms servers:
 
@@ -568,12 +555,10 @@ Use `voms-proxy-init` to generate proxy. Login as user, create `vomses` file (e.
 [user@voms ~]$ voms-proxy-init -voms VO_NAME -vomses ~/vomses
 ```
 
-<a href="/bin/view/Documentation/Release3/TestOSGClient#Authentication_using_a_VOMS_Prox" class="twikiAnchorLink">Click here</a> for a more detailed example on using and verifying a VOMS proxy.
-
 Testing edg-mkgridmap 
 ---------------------------------------------------------------
 
-The `edg-mkgridmap` command is run on a site's <a href="/bin/view/Documentation/GlossaryC#DefsComputeElement" class="twikiAnchorLink">Compute Element</a> node to generate a `grid-mapfile` file. This script is not provided as a part of the VOMS installation, so you will have to go on a CE node to test this. You do not have to be the `root` user on the CE node, but you will need to have a personal certificate available.
+The `edg-mkgridmap` command is run on a site's Compute Element node to generate a `grid-mapfile` file. This script is not provided as a part of the VOMS installation, so you will have to go on a CE node to test this. You do not have to be the `root` user on the CE node, but you will need to have a personal certificate available.
 
 The `mkgridmap` file syntax/values for each VO you create, can be viewed on the WEB UI for your VO by selecting `Configuration information` on the left hand menu of the main page. You will get a line like:
 
@@ -607,7 +592,7 @@ To test, you will need to do this on a CE node where the authorization mode is "
       "/DC=org/DC=doegrids/OU=Services/CN=cms-xen3.fnal.gov"  vdt
     ```
 
-You can find more in the <a href="/bin/view/Documentation/Release3/InstallComputeElement#CeEdgMkgridmap" class="twikiAnchorLink">Compute Element install document</a>.
+You can find more in the [compute element install document](../compute-element/install-htcondor-ce).
 
 Testing the GUMS interface 
 --------------------------------------------------------------------
@@ -616,7 +601,7 @@ The GUMS authorization server periodically 'pulls' the VO membership data for it
 
 Unfortunately, there is no way of testing this except with an installed GUMS server which this document does not address.
 
-See <a href="/bin/view/Trash/ReleaseDocumentationInstallConfigureAndManageGUMS" class="twikiLink">Install Configure and Manage GUMS</a> for more information.
+See the [GUMS install guide](../security/install-gums) for more information.
 
 Removing a VO 
 -------------------------------------------------------
@@ -647,7 +632,7 @@ Useful configuration and log files
 
 Configuration Files
 
-| [Service or Process](/bin/view/Documentation/Release3/InstallVoms?sortcol=0;table=4;up=0#sorted_table "Sort by this column") | [Configuration File](/bin/view/Documentation/Release3/InstallVoms?sortcol=1;table=4;up=0#sorted_table "Sort by this column") | [Description](/bin/view/Documentation/Release3/InstallVoms?sortcol=2;table=4;up=0#sorted_table "Sort by this column")                                                        |
+| Service or Process | Configuration File | Description |
 |------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | voms                                                                                                                         | `/etc/voms/VO_NAME/voms.conf`                                                                                                
                                                                                                                                 `/etc/voms/VO_NAME/voms.pass`                                                                                                 | VOMS server configuration and password for the VO database                                                                                                                   |
@@ -657,7 +642,7 @@ Configuration Files
 |                                                                                                                              | `/etc/voms-admin/VO_NAME/voms-admin-VO_NAME.xml`                                                                             
                                                                                                                                 `/etc/voms-admin/VO_NAME/voms.service.properties`                                                                             | VOMS Admin configuration                                                                                                                                                     |
 |                                                                                                                              | `/etc/voms-admin/VO_NAME/voms.database.properties`                                                                           | VO database handler configuration                                                                                                                                            |
-|                                                                                                                              | `/etc/voms-admin/VO_NAME/vomses`                                                                                             | vomses line, see <a href="/bin/view/Documentation/Release3/InstallVoms#Advertise_your_VOMS_server" class="twikiCurrentTopicLink twikiAnchorLink">the advertising section</a> |
+|                                                                                                                              | `/etc/voms-admin/VO_NAME/vomses`                                                                                             | vomses line |
 | mysql                                                                                                                        | `/var/lib/mysql/VO_NAME`                                                                                                     | VOMS database for the VO                                                                                                                                                     |
 |                                                                                                                              | `/etc/my.cnf`                                                                                                                | MySQL configuration, e.g. server port                                                                                                                                        |
 | tomcat                                                                                                                       | `/etc/tomcat6/`                                                                                                              | Tomcat configuration files                                                                                                                                                   |
@@ -665,7 +650,7 @@ Configuration Files
 
 Log files
 
-| [Service or Process](/bin/view/Documentation/Release3/InstallVoms?sortcol=0;table=5;up=0#sorted_table "Sort by this column") | [Log File](/bin/view/Documentation/Release3/InstallVoms?sortcol=1;table=5;up=0#sorted_table "Sort by this column") | [Description](/bin/view/Documentation/Release3/InstallVoms?sortcol=2;table=5;up=0#sorted_table "Sort by this column") |
+| Service or Process | Log File | Description |
 |------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 |                                                                                                                              | `/var/log/tomcat5/voms-admin-VO_NAME.log`                                                                          | This is the vo-by-vo log for voms-admin Web UI                                                                        |
 |                                                                                                                              | `/var/log/tomcat5/trustmanager.log`                                                                                | The trustmanager handles things related to authentication. Useful errors are sometimes here.                          |
@@ -698,7 +683,7 @@ Verify if voms-admin was configured and started correctly:
 
 If you can reach the first page but all the links are failing, check the URL in the links. Tomcat by default constructs the absolute URLs in the web pages using the hostname/IP and port used for the request. If the server resides behind a Firewall or NAT that enforces port redirection, these may be the server IP or the port on the private network, that likely are not reachable by your Web browser. To fix the problem you must use [Tomcat's proxy support](http://tomcat.apache.org/tomcat-5.5-doc/config/http.html#Proxy_Support) by setting `proxyName` and/or `proxyPort` in Tomcat's configuration file (`/etc/tomcat5/server.xml`).
 
-After changing `server.xml` <a href="/bin/view/Documentation/Release3/InstallVoms#Services" class="twikiCurrentTopicLink twikiAnchorLink">stop and restart</a> Tomcat in order for the changes to take effect.
+After changing `server.xml` [stop and restart](#services) Tomcat in order for the changes to take effect.
 
 How to get Help?
 =====================
@@ -717,5 +702,4 @@ EMI documentation:
 
 Openssl commands:
 
--   brief: <http://www.switch.ch/grid/certificates/openssl/index.html>
--   more comprehensive: <http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html>
+<http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html>

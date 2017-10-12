@@ -16,9 +16,7 @@ notBefore=Jan  4 21:08:09 2010 GMT
 notAfter=Jan  4 21:08:09 2011 GMT
 ```
 
-The OSG PKI Command Line Clients are tested to work on Python version 2.4+. They have not been tested on Python version 3.
-
-We recommend to read background information on grid certificates which can be found <a href="/bin/view/Documentation/CertificateWhatIs" class="twikiLink">here</a>. In order to proceed you will also need:
+The OSG PKI Command Line Clients are tested to work on Python version 2.4+. They have not been tested on Python version 3. In order to proceed you will also need:
 
 -   the **fully qualified domain name** of the host you need a grid certificate for
 -   the **purpose** of the certificate that explains your request to the Certificate Authority
@@ -126,8 +124,6 @@ Request Id#: 570
 
 At this point **osg-cert-request** has created some files in the directory you specified and an e-mail has been sent to the Certificate Authority containing your request. The files will be needed again once you receive a reply from the Certificate Authority asking you to retrieve the certificate. Please note down the Request Id. You will need it for retrieving the signed certificate.
 
-<span id="twistyIdDocumentation/Release3GetHostServiceCertificates1show" class="twistyRememberSetting twistyStartHide twistyTrigger twikiUnvisited twistyInited0">[![](/twiki/pub/TWiki/TWikiDocGraphics/toggleopen-small.gif)<span class="twikiLinkLabel twikiUnvisited">Show Full Output](#)  <span id="twistyIdDocumentation/Release3GetHostServiceCertificates1hide" class="twistyRememberSetting twistyStartHide twistyTrigger twikiUnvisited twistyHidden twistyInited0">[![](/twiki/pub/TWiki/TWikiDocGraphics/toggleclose-small.gif)<span class="twikiLinkLabel twikiUnvisited">Hide Full Output](#) 
-
 ### Detailed description of the osg-cert-request usage
 
 This script:
@@ -187,8 +183,6 @@ Connecting server to retrieve certificate...
 Certificate written to hostcert.pem
 ```
 
-<span id="twistyIdDocumentation/Release3GetHostServiceCertificates2show" class="twistyRememberSetting twistyStartHide twistyTrigger twikiUnvisited twistyInited0">[![](/twiki/pub/TWiki/TWikiDocGraphics/toggleopen-small.gif)<span class="twikiLinkLabel twikiUnvisited">Show Full Output](#)  <span id="twistyIdDocumentation/Release3GetHostServiceCertificates2hide" class="twistyRememberSetting twistyStartHide twistyTrigger twikiUnvisited twistyHidden twistyInited0">[![](/twiki/pub/TWiki/TWikiDocGraphics/toggleclose-small.gif)<span class="twikiLinkLabel twikiUnvisited">Hide Full Output](#) 
-
 ### Detailed description of the osg-cert-retrive usage
 
 This osg-cert-retrive script:
@@ -216,7 +210,8 @@ This osg-cert-retrive script:
 
 The certificate consists of two files (default hostcert.pem and hostkey.pem) which have been placed into the current directory. Note, If you did not use the `--o` option the filenames will be what you provided.
 
-<img src="/twiki/pub/TWiki/TWikiDocGraphics/warning.gif" alt="warning" width="16" height="16" /> Please note that these files represent a public and a private and should be treated accordingly!
+!!! warning
+    Please note that these files represent a public and a private and should be treated accordingly!
 
 Please take a moment to verify that the **certificate matches the hostname** of the resource where you intend to install it before you proceed:
 
@@ -263,7 +258,8 @@ Connecting server to retrieve certificate...
 Certificate written to hostcert.pem
 ```
 
-<img src="/twiki/pub/TWiki/TWikiDocGraphics/warning.gif" alt="warning" width="16" height="16" /> Please note that these files represent a public and a private and should be treated accordingly!
+!!! warning
+    Please note that these files represent a public and a private and should be treated accordingly!
 
 Install the Service Certificate 
 -------------------------------------------------------------------------
@@ -277,7 +273,8 @@ The **Service Certificate** should be installed under a subdirectory in **/etc/g
 [root@host /]$ chmod 400 /etc/grid-security/http/httpkey.pem
 ```
 
-<img src="/twiki/pub/TWiki/TWikiDocGraphics/warning.gif" alt="warning" width="16" height="16" /> Please note that the service certificate must also be owned by the unix user who runs the service. For **Apache/Tomcat** this is the tomcat user:
+!!! warning
+    Please note that the service certificate must also be owned by the unix user who runs the service. For **Apache/Tomcat** this is the tomcat user:
 
 ``` console
 [root@host /]$ chown tomcat.tomcat /etc/grid-security/http/httpcert.pem
@@ -289,7 +286,7 @@ Please refer to [Operations/OSGPKICommandlineClients](../common/pki-cli.md) for 
 Information for Grid Admins
 ================================
 
-If you are a grid admin then you can use a single command to request and retrieve a certificate immediately. For getting grid admin privileges please refer <a href="/bin/view/Operations/OSGPKITrustedAgent" class="twikiLink">here</a>.
+If you are a grid admin then you can use a single command to request and retrieve a certificate immediately. For getting grid admin privileges, request enrollment [here](https://oim.opensciencegrid.org/oim/gridadmin) after obtaining your [user certificate](user-certs).
 
 Request and retrieve multliple host certificates from OIM. Authenticates to OIM and is only for use by Grid Admins for certificates they are authorized to approve. This script is only supported with all hosts being in the same domain (so we ensure they go to the same Grid Admin). The certificates are stored with the format of 'hostname-requestid.pem' (i.e. the id generated from the request for the certificate). The key is stored as 'hostname-serial-key.pem'.
 
@@ -304,8 +301,6 @@ If you want to request more then one certificate you can list them in a file (on
 ``` console
 [user@host /]$ osg-gridadmin-cert-request -f hostfile
 ```
-
-<span id="twistyIdDocumentation/Release3GetHostServiceCertificates3show" class="twistyRememberSetting twistyStartHide twistyTrigger twikiUnvisited twistyInited0">[![](/twiki/pub/TWiki/TWikiDocGraphics/toggleopen-small.gif)<span class="twikiLinkLabel twikiUnvisited">Show Full Output](#)  <span id="twistyIdDocumentation/Release3GetHostServiceCertificates3hide" class="twistyRememberSetting twistyStartHide twistyTrigger twikiUnvisited twistyHidden twistyInited0">[![](/twiki/pub/TWiki/TWikiDocGraphics/toggleclose-small.gif)<span class="twikiLinkLabel twikiUnvisited">Hide Full Output](#) 
 
 ### Detailed description of the osg-gridadmin-cert-request usage
 
@@ -377,7 +372,7 @@ notAfter=May 17 12:00:00 2014 GMT
 How can I check the expiration time of my installed host certificate? 
 ---------------------------------------------------------------------------------------------------------------
 
-If you installed the <a href="/bin/view/Documentation/Release3/InstallCertScripts" class="twikiLink">Certificates Script Package</a> you can use **grid-cert-info** to retrieve information about the certificate:
+If you installed the Certificates Script Package you can use **grid-cert-info** to retrieve information about the certificate:
 
 ``` console
 [root@osg-se robert]# grid-cert-info -file /etc/grid-security/hostcert.pem -startdate -enddate

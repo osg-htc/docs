@@ -4,8 +4,6 @@
 !!! note
     For instructions on getting **service** and **host** certificates, **you're in the wrong place**. See [Get Host and Service Certificates](host-certs.md).
 
-If you don't know what a X509 certificate is or what it is used for, see <a href="/bin/view/Documentation/CertificateWhatIs" class="twikiLink">What is a certificate?</a>.
-
 This document describes how to get and set up a **personal** certificate (also called a grid user certificate), from the OSG Certificate Authority (OSG CA). The OSG CA is recognized by all OSG resources. Other CAs may be used; if your virtual organization (VO) requires that you get a certificate from a different CA, [contact your VO Support Center](http://www.opensciencegrid.org/?pid=1000187) for instructions.
 
 Know your Responsibilities
@@ -20,8 +18,7 @@ Getting your Certificate
 
 There are two different ways to obtain your certificate, either via a command line interface, or through a web browser. The links below will guide you through whichever method you choose. The command line method is generally simpler and less prone to errors than using a web browser but it may require extra setup and package installation the first time you do it. Most people end up needing their certificate for both command line grid use and web browser use and it is generally easier to import your certificate into your browser (and email client) from the command line certificate files than to export your certificate from your web browser to use on the command line. This is because of the large variety of web browsers each with it's own way to deal with certificates. If you will use the certificate ONLY in your web browser then requesting it from your browser is probably the easiest method.
 
-[Get or renew a certificate with command line interface.](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/OSGPKICommandlineClients)
-<a href="/bin/view/Documentation/CertificateGetWeb" class="twikiLink">Get or renew a certificate using web browser.</a>
+[Get or renew a certificate with command line interface.](../common/pki-cli)
 
 PKCS12 (.p12) vs PEM format
 ================================
@@ -29,8 +26,6 @@ PKCS12 (.p12) vs PEM format
 Your certificate and key pair can be stored as separate files, by default named `~/.globus/usercert.pem` and `~/.globus/userkey.pem`, or they can be bundled in a single file in PKCS12 (Public Key Cryptography Standard \#12), by default named `~/.globus/usercred.p12`. All OSG user tools works with both formats. Unless you specify a name in the command, they look first for the certificate/key pair default names, then for the PKCS12 default name and use the first one they find. PKCS 12 is a single file, convenient to move and used by many softwares, e.g. the Web browsers (so you don't need conversions).
 
 Anyway note that the PKCS12 bundle includes normally the certificate, the key and also the CA certificate (or a certificate chain) validating your certificate. In the rare (but possible) case where the CA certificate expires before your certificate this may lead to the creation of a proxy without VOMS attributes and confusing error messages where it is not clear if the problem is with the host, remote server or the certificate, e.g. "Error: Error during SSL handshake:Either proxy or user certificate are expired." or "error:80066423:lib(128):verify\_callback:remote certificate has expired:sslutils.c:1963 remote certificate has expired".
-
-<span id="twistyIdDocumentationCertificateUserGet1show" class="twistyRememberSetting twistyStartHide twistyTrigger twikiUnvisited twistyInited0">[![](/twiki/pub/TWiki/TWikiDocGraphics/toggleopen-small.gif)<span class="twikiLinkLabel twikiUnvisited">Click to see the detailed error messages](#)  <span id="twistyIdDocumentationCertificateUserGet1hide" class="twistyRememberSetting twistyStartHide twistyTrigger twikiUnvisited twistyHidden twistyInited0">[![](/twiki/pub/TWiki/TWikiDocGraphics/toggleclose-small.gif)<span class="twikiLinkLabel twikiUnvisited">Hide Full Output](#) 
 
 ``` console
 user@host $  voms-proxy-init -debug
@@ -93,7 +88,7 @@ To solve the problem split the bundle in the two PEM files as documented in the 
 Revoke your Certificate if Compromised
 ===========================================
 
-If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate. You can follow the steps at the <a href="/bin/view/Documentation/CertificateRevoke" class="twikiLink">Revoking a Certificate</a> page to revoke your certificate. The same instructions apply if you need to revoke a certificate because your email address changed or your name has changed.
+If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate. You can follow the steps [here](../common/pki-cli#osg-user-cert-revoke) to revoke your certificate. The same instructions apply if you need to revoke a certificate because your email address changed or your name has changed.
 
 References
 ===============

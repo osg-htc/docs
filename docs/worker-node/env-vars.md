@@ -33,8 +33,6 @@ These are variables that contain information about the site:
 Storage Related Variables
 ==============================
 
-The storage related variables are defined in more detail within the <a href="/bin/view/Trash/ReleaseDocumentationLocalStorageConfiguration" class="twikiLink">local storage configuration</a> document. The following is a summary, but the Twiki page should be consulted for a definitive view as well as for an explanation for the use cases and which variables must be defined for each use case.
-
 | Variable Name | Type | Definition |
 |---------------|------|------------|
 | OSG\_STORAGE\_ELEMENT | Enumerated String \[y,n\] | Indicates whether a storage element is available for CEs in the site. |
