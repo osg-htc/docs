@@ -83,7 +83,7 @@ The program `frontier-squid` received a major version upgrade (versions 2.7 to 3
 Uninstalling BeStMan2 from the Storage Element (upgrading to OSG 3.4)
 ---------------------------------------------------------------------
 
-The program BeStMan2 is no longer available in OSG 3.4 and its functionality has been replaced by [load-balanced GridFTP](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/LoadBalancedGridFTP). To update your storage element to OSG 3.4, you must perform the following procedure:
+The program BeStMan2 is no longer available in OSG 3.4 and its functionality has been replaced by [load-balanced GridFTP](../data/load-balanced-gridftp). To update your storage element to OSG 3.4, you must perform the following procedure:
 
 1.  Ensure that OSG BeStMan packages are installed:
 
