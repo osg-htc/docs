@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Managing CAs - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Managing CAs";
+    var mkdocs_page_input_path = "security/osg-ca-manage.md";
+    var mkdocs_page_url = "/security/osg-ca-manage/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../..">Home</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../install-overview/">Installation Overview</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../site-planning/">Site Planning</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Common</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/install-best-practices/">Install Best Practices</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/ca/">CA Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/yum/">Yum Repos</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Worker Node</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn/">Worker Node (RPM install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/env-vars/">Environment</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Compute Element</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/gridftp/">Install GridFTP Server</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/load-balanced-gridftp/">Install Load Balanced GridFTP</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-gridftp-xrootd/">Install GridFtp XRootD</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/frontier-squid/">HTTP Cache</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/xrootd-overview/">XRootD Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-xroot-client/">XRootD Client</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Security</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../host-certs/">Host Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../user-certs/">User Certificates</a>
+  
+        </li>
+        <li class=" current">
+          
+  
+    <a class="current" href="./">Managing CAs</a>
+  
+  <ul class="subnav">
+      
+    <li class="toctree-l3"><a href="#managing-cas">Managing CAs</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#syntax">Syntax</a></li>
+        
+            <li><a class="toctree-l4" href="#troubleshooting">Troubleshooting</a></li>
+        
+            <li><a class="toctree-l4" href="#references">References</a></li>
+        
+        </ul>
+    
+
+  </ul>
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Release Information</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../release/notes/">Release Notes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/signing/">RPM Signing</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/contrib/">Contrib Software</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Other</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-osg-upcoming-software/">OSG upcoming software</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-cvmfs-stratum1/">Install a CVMFS Stratum 1</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/network-performance-toolkit/">Network Performance Toolkit</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Monitoring</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/advanced-rsv-configuration/">Advanced RSV Configuration</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-control/">Manage RSV via rsv-control</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Usage Guides</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/using-wn/">Worker Node Environment</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Deprecated Software</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-bestman-xrootd/">BeStMan Xrootd SE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../edg-mkgridmap/">EDG-Mkgridmap Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-gums/">GUMS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-voms/">Install VOMS</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../common/help/">Get Help</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Security &raquo;</li>
+        
+      
+    
+    <li>Managing CAs</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/security/osg-ca-manage.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="managing-cas">Managing CAs<a class="headerlink" href="#managing-cas" title="Permanent link">&para;</a></h1>
+<p>The osg-ca-manage tool provides a unified interface to manage the CA Certificate installations. This page provides the instructions on using this command. It provides status commands that allows you to list the CAs and the validity of the CAs and CRLs included in the installation. The manage commands allow you to fetch CAs and CRLs, change the distribution URL, as well as add and remove CAs from your local installation.</p>
+<h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span>   osg-ca-manage [global_options] command 
+    global_options =
+        [--verbose]
+        [--force]
+        [--cert-dir &lt;location&gt;]
+        [--help | --usage]
+        [--version]
+        [--auto-refresh]
+
+    command = [manage_command | status_command]
+
+    status_command = [
+        showCAURL |
+        listCA [--pattern &lt;pattern&gt;] |
+        verify [--hash &lt;CA hash&gt;  | --pattern &lt;pattern&gt;] |
+        diffCAPackage |
+        show [--certfile &lt;cert_file&gt; | --hash &lt;CA hash&gt;] |
+        showChain [--certfile &lt;cert_file&gt; | --hash &lt;CA hash&gt;]
+    ]
+
+    manage_command = [
+        setupCA --location &lt;root|PATH&gt; [--url &lt;osg|igtf|URL&gt; --no-update --force] |
+        refreshCA |
+        fetchCRL |
+        setCAURL [--url &lt;osg|igtf|URL&gt;] |
+        add [--cadir &lt;localdir&gt; | --caname &lt;CA&gt;]
+        remove [--cadir &lt;localdir&gt; | --caname &lt;CA&gt;]
+    ]
+</pre></div>
+
+
+<h3 id="explanation-of-global-options">Explanation of global options<a class="headerlink" href="#explanation-of-global-options" title="Permanent link">&para;</a></h3>
+<p>Zero or more of these options may be used during an execution of ca_manage.</p>
+<ol>
+<li><code>--verbose</code> Provides you with more information depending on the command context.</li>
+<li><code>--force</code> Forces the command to run ignoring any checks/warnings. The actual effect is context dependent, and this behavior is noted in the command details below.</li>
+<li><code>--cert-dir &lt;location&gt;</code> This location specifies the path CA directory. If this option is not specified then the command will look for <code>$X509_CERT_DIR</code>, and <code>$VDT_LOCATION/globus/TRUSTED_CA</code> respectively. If none of these directories can be found, the command will exit with an error.</li>
+<li><code>--auto-refresh</code> This option will indicate if this permissible to fetch CAs and CRLs as deemed necessary by this tool. For example at the end of an addCA/removeCA it would be advisable to refresh the CA list and the corresponding CRLs. Default is <strong>not</strong> to refresh, unless the admin requests it by specifying this option.</li>
+<li><code>--version</code> Prints the version of the vdt-ca-certs-manager tool.</li>
+<li><code>--help | --usage</code> Print usage information. Show a brief explanatory text for using osg-ca-manage.</li>
+</ol>
+<h3 id="explanation-of-commands">Explanation of commands<a class="headerlink" href="#explanation-of-commands" title="Permanent link">&para;</a></h3>
+<p>Exactly one command is to be specified during an execution of osg-ca-manage</p>
+<h4 id="status-commands">Status commands<a class="headerlink" href="#status-commands" title="Permanent link">&para;</a></h4>
+<ol>
+<li><code>showCAURL</code> This will print out the distribution location specified in the config file. This command will read osg-update-certs.conf and output cacerts_url.</li>
+<li><code>listCA [--pattern &lt;pattern&gt;]</code> This command will use openssl x509 command on the files in the --dir to provide hash, the subject and whether a CA is IGTF or TeraGrid accredited and distribution package which was used to download CAs into the directory. --verbose option will provide additional information like issuer (of CA) and all associated dates (CA cert issuance date, and CRL issuance date, and expiry dates). The command will look for CA files in the -certDir. The <code>&lt;pattern&gt;</code> specified in the option will be matched, using perl regex, against the subject field of the certificate (but we might also expand it include issuer if needed) and all CAs are listed if no pattern is given.</li>
+<li><code>verify [--hash &lt;CA_hash&gt; | --pattern &lt;pattern&gt;]</code> The verify command will check all CAs (or if specified only the <code>&lt;CA_hash&gt;</code>) in the <code>&lt;certDir&gt;</code> directory, to see if any CA/CRL have expired or are about to do so. If any expired CA/CRL are found, an error is issued along with the hash, date when CA cert/CRL expired. A warning is issued if either the CA cert or CRL is about the expire within the next 24 Hrs. The --verbose option provides the CA Name, date the CA certs and CRL files are created (by the CA), and when they will expire. In addition to hash value we will also consider providing an option of verify using <code>&lt;pattern&gt;</code> </li>
+<li><code>diffCAPackage</code> This command will compare the hash of certificates included in the certificate directory against the latest VDT/OSG distribution (based on your cacerts_url) and outputs the difference. </li>
+<li><code>show [--certfile &lt;cert_file&gt; | --hash &lt;CA_hash&gt;]</code> This command will essentially provide a condensed output of openssl x509 command. --verbose option will provide the full output. If --hash option is used we will look for the <code>&lt;CA_hash&gt;.o</code> file in the <code>&lt;certDir&gt;</code>. The --certfile option can also take in a user proxy. </li>
+<li><code>showChain [--certfile &lt;cert_file&gt; | --hash &lt;CA_hash&gt;]</code> This command will output the trust chain of the certificate. <code>&lt;certDir&gt;</code> will be used as the directory in which search for ancestor certs will be conducted. This command can also be used to trace the trust chain of a user proxy.</li>
+</ol>
+<h4 id="manage-commands">Manage commands<a class="headerlink" href="#manage-commands" title="Permanent link">&para;</a></h4>
+<ol>
+<li><code>setupCA --location &lt;root|PATH&gt; [--url &lt;osg|igtf|URL&gt; --no-update --force]</code> This command is used for the inital setup of the CA package. The CA package can be setup to download CAs from any URL. Keywords are provided for various distributions. For the location to specify, keywords are provided to install into 'root' (/etc/grid-security). A --no-update option is available. Setting this flag instructs just setup the symlinks only and not to run configure osg-update-certs to be run automatically. This option is for installations that will not manage their own certificates, but will rely on updates through another method (such as RPM, or using osg-update-certs from a different OSG installation). A common use case for this is to have worker-node installations rely on the CA certificates being available on an NFS share, and the updating will happen on a single node.</li>
+<li><code>refreshCA</code> This command run osg-update-certs to check for a new version of the CA distribution. If you already have the latest version, but wish to force an update anyways, use the --force option. 1.<code>fetchCRL</code> It retrieves CRLs for all CAs within the directory. This will involve invoking fetch-crl, with appropriate arguments. NOTE: If vdt's fetch-crl service has not been enabled (i.e. no fetch-crl entry in crontab), then this command will not execute. This is a safety mechanism to prevent crls from being downloaded using this tool if they are not scheduled to be updated.</li>
+<li><code>setCAURL [--url &lt;osg|igtf|URL&gt;]</code> This command sets the location from where the CA files. This command will modify vdt-update-certs.conf and set the cacerts_url as <code>&lt;URL_location&gt;</code>. Only if --auto-refresh is specified both CA and CRLs are refreshed once the URL change has been made. The distribution <code>&lt;URL_location&gt;</code> will be required to conform to the VDT CA distribution format (e.g. similar to <a href="http://vdt.cs.wisc.edu/software/certificates/ca-certs-version">http://vdt.cs.wisc.edu/software/certificates/ca-certs-version</a>). If the <code>&lt;URL_location&gt;</code> cannot be reached or if it is valid syntactically (i.e. does not conform to the format requirements) a warning will be issues and no changes will be made. The --force option can be used to force a change ignoring the warning. If URL location is left unspecified the <code>&lt;URL_location&gt;</code> will be set to OSG default. We define keywords for OSG, IGTF as shortcuts for OSG wide well-known CA URL_locations.</li>
+<li><code>add [--cadir &lt;localdir&gt; | --caname &lt;CA&gt;]</code> The --hash argument is required. If --dir is not specified we will assume that the user wants to include a CA he has previously excluded and will remove the corresponding exclude lines from the config. If <code>&lt;CA_hash&gt;</code> is not known to us or it is already included we will provide appropriate error/warning information. In the common case this command will add include lines for <code>&lt;local_dir&gt;</code>/<code>&lt;CA_hash&gt;</code>.*, into the vdt-update-certs.conf file. Lastly the command will invoke functions refresh the CAs and fetch CRLs. This command will also do some preliminary error checks, e.g. make sure that “.0”, “.crl_url”, “.signing_policy” files exist and that --dir is different than --certDir.</li>
+<li><code>remove [--cadir &lt;localdir&gt; | --caname &lt;CA&gt;]</code> This command will be complementary to add and would either add an exclude or remove an include depending on the scenario. This command will also refresh CA and CRLs. vdt-update-certs do the job of removing cert files, we will still do the preliminary error checks to make sure that the certs that are being removed are included in the first place. For both addCA and removeCA, new CAs will be included/removed and CRLs will be refreshed only if --auto-refresh is set.</li>
+</ol>
+<h3 id="usage-examples">Usage Examples<a class="headerlink" href="#usage-examples" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These commands will not work if of the osg-ca-certs (or igtf-ca-certs) RPM packages are installed.</p>
+</div>
+<h4 id="install-a-certificate-authority-package">Install a Certificate Authority Package<a class="headerlink" href="#install-a-certificate-authority-package" title="Permanent link">&para;</a></h4>
+<p>Before you proceed to install a Certificate Authority Package you should decide which of the available packages to install.</p>
+<ul>
+<li><code>osg</code>, the package recommended to be used by production resources on the OSG. It is based on the CA distribution from the IGTF, but it may differ slightly as decided by the <a href="https://opensciencegrid.github.io/security">Security Team</a>. </li>
+<li><code>igtf</code>, the package is a redistribution of the unchanged CA distribution from the IGTF</li>
+<li><code>url</code> a package provided at a given URL</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If in doubt, please consult the policies of your home institution and get in contact with the <a href="https://opensciencegrid.github.io/security">Security Team</a>.</p>
+</div>
+<p>Next decide at what location to install the Certificate Authority Package:</p>
+<ol>
+<li>on the <code>root</code> file system in a system directory <code>/etc/grid-security/certificates</code></li>
+<li>in a <code>custom</code> directory that can also be shared</li>
+</ol>
+<h5 id="setup-the-ca-certificates">Setup the CA Certificates<a class="headerlink" href="#setup-the-ca-certificates" title="Permanent link">&para;</a></h5>
+<p>The Certificate Authority Package is preferably be used by grid users without root privileges <em>or</em> if the CA certificates will not be shared by other installations on the same host.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-ca-manage setupca --location <span style="color:red">root</span> --url osg
+<span class="go">Setting CA Certificates for at &#39;/etc/grid-security/certificates&#39;</span>
+
+<span class="go">Setup completed successfully.</span>
+</pre></div>
+
+
+<p>After a successful installation the certificates will be installed in (<code>/etc/grid-security/certificates</code> in this example). Typically to write into this default location you will need root privileges.</p>
+<p>If you need to need to install it with out root privileges use</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-ca-manage setupca --location <span style="color:red"><span class="nv">$HOME</span>/certificates</span> --url osg
+<span class="go">Setting CA Certificates for at &#39;$HOME/certificates&#39;</span>
+
+<span class="go">Setup completed successfully.</span>
+</pre></div>
+
+
+<h4 id="addingremoving-a-directory-of-local-cas">Adding/Removing a directory of local CAs<a class="headerlink" href="#addingremoving-a-directory-of-local-cas" title="Permanent link">&para;</a></h4>
+<h5 id="adding">Adding<a class="headerlink" href="#adding" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span>osg-ca-manage add --cadir /etc/grid-security/localca
+<span class="go">NOTE:</span>
+<span class="go">    You did not specify the --auto-refresh flag.</span>
+<span class="go">    So the changes made to the configuration will not be reflected till the next time</span>
+<span class="go">    when CAs and CRLs are updated respectively by osg-update-certs and fetch-crl running from cron.</span>
+<span class="go">    Run `osg-ca-manage refreshCA` and `osg-ca-manage fetchCRL` to commit your changes immediately.</span>
+</pre></div>
+
+
+<p>Here is the resulting file after add</p>
+<div class="codehilite"><pre><span></span>##cat /etc/osg/osg-update-certs.conf
+# Configuration file for osg-update-certs
+
+# This file has been regenerated by osg-ca-manage, which removes most
+# comments.  You can still manually modify it, any manual change will
+# be preserved if osg-ca-manage is used again.
+
+## The parent location certificates will be installed at.
+install_dir = /etc/grid-security
+
+## cacerts_url is the URL of your certificate distribution
+cacerts_url = http://software.grid.iu.edu/pacman/cadist/ca-certs-version-igtf-new
+
+## log specifies where logging output will go
+log = /var/log/osg-update-certs.log
+
+## include specifies files (full pathnames) that should be copied
+## into the certificates installation after an update has occured.
+include=/etc/grid-security/localca/*
+
+## exclude_ca specifies a CA (not full pathnames, but just the hash
+## of the CA you want to exclude) that should be removed from the
+## certificates installation after an update has occured.
+
+debug = 0
+</pre></div>
+
+
+<h5 id="removing">Removing<a class="headerlink" href="#removing" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span>osg-ca-manage remove --cadir /etc/grid-security/localca
+<span class="go">NOTE:</span>
+<span class="go">    You did not specify the --auto-refresh flag.</span>
+<span class="go">    So the changes made to the configuration will not be reflected till the next time</span>
+<span class="go">    when CAs and CRLs are updated respectively by osg-update-certs and fetch-crl running from cron.</span>
+<span class="go">    Run `osg-ca-manage refreshCA` and `osg-ca-manage fetchCRL` to commit your changes immediately.</span>
+</pre></div>
+
+
+<h4 id="removingadding-a-particular-ca-included-in-osg-ca-package">Removing/Adding a particular CA included in OSG CA package<a class="headerlink" href="#removingadding-a-particular-ca-included-in-osg-ca-package" title="Permanent link">&para;</a></h4>
+<h5 id="removing_1">Removing<a class="headerlink" href="#removing_1" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span>osg-ca-manage remove --caname ce33db76
+<span class="go">Symlink detected for hash: We have determided that the hash value you entered belong to the CA &#39;IRAN-GRID.pem&#39;. If you wish to add this CA back you will have to use this name is the parameter.</span>
+<span class="go">NOTE:</span>
+<span class="go">    You did not specify the --auto-refresh flag.</span>
+<span class="go">    So the changes made to the configuration will not be reflected till the next time</span>
+<span class="go">    when CAs and CRLs are updated respectively by osg-update-certs and fetch-crl running from cron.</span>
+<span class="go">    Run `osg-ca-manage refreshCA` and `osg-ca-manage fetchCRL` to commit your changes immediately.</span>
+</pre></div>
+
+
+<p>The resulting config file after the remove is as follows</p>
+<div class="codehilite"><pre><span></span>##cat /etc/osg/osg-update-certs.conf
+# Configuration file for osg-update-certs
+
+# This file has been regenerated by osg-ca-manage, which removes most
+# comments.  You can still manually modify it, any manual change will
+# be preserved if osg-ca-manage is used again.
+
+## The parent location certificates will be installed at.
+install_dir = /etc/grid-security
+
+## cacerts_url is the URL of your certificate distribution
+cacerts_url = http://software.grid.iu.edu/pacman/cadist/ca-certs-version-igtf-new
+
+## log specifies where logging output will go
+log = /var/log/osg-update-certs.log
+
+## include specifies files (full pathnames) that should be copied
+## into the certificates installation after an update has occured.
+
+## exclude_ca specifies a CA (not full pathnames, but just the hash
+## of the CA you want to exclude) that should be removed from the
+## certificates installation after an update has occured.
+exclude_ca = IRAN-GRID
+
+debug = 0
+</pre></div>
+
+
+<h5 id="adding-back-the-removed-ca">Adding back the removed CA<a class="headerlink" href="#adding-back-the-removed-ca" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span>osg-ca-manage add --caname IRAN-GRID
+<span class="go">NOTE:</span>
+<span class="go">    You did not specify the --auto-refresh flag.</span>
+<span class="go">    So the changes made to the configuration will not be reflected till the next time</span>
+<span class="go">    when CAs and CRLs are updated respectively by osg-update-certs and fetch-crl running from cron.</span>
+<span class="go">    Run `osg-ca-manage refreshCA` and `osg-ca-manage fetchCRL` to commit your changes immediately.</span>
+</pre></div>
+
+
+<h4 id="inspect-installed-ca-certificates">Inspect Installed CA Certificates<a class="headerlink" href="#inspect-installed-ca-certificates" title="Permanent link">&para;</a></h4>
+<p>You can inspect the list of CA Certificates that have been installed:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-ca-manage listCA
+</pre></div>
+
+
+<p><details></p>
+<div class="codehilite"><pre><span></span><span class="nt">user</span><span class="p">@</span><span class="k">host</span> <span class="o">$</span> <span class="nt">osg-ca-manage</span> <span class="nt">listCA</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">09ff08b7</span><span class="p">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">FR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">CNRS</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CNRS2-Projets</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">FR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">CNRS</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CNRS2</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">0a12b607</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">org</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ugrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">UGRID</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">org</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ugrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">UGRID</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">0a2bac92</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">BR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">ICPEDU</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">UFF</span> <span class="nt">BrGrid</span> <span class="nt">CA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">UFF</span> <span class="nt">Brazilian</span> <span class="nt">Grid</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">BR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">ICPEDU</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">UFF</span> <span class="nt">BrGrid</span> <span class="nt">CA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">UFF</span> <span class="nt">Brazilian</span> <span class="nt">Grid</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">1149214e</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">DE</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">DFN-Verein</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">DFN-PKI</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">DFN-Verein</span> <span class="nt">PCA</span> <span class="nt">Grid</span> <span class="nt">-</span> <span class="nt">G01</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">DE</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">DFN-Verein</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">DFN-PKI</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">DFN-Verein</span> <span class="nt">PCA</span> <span class="nt">Grid</span> <span class="nt">-</span> <span class="nt">G01</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">11b4a5a2</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">PT</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">LIPCA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">LIP</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">PT</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">LIPCA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">LIP</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">163af95c</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">FR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">CNRS</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CNRS2</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">FR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">CNRS</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CNRS2</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">1691b9ba</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">TR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">TRGrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">TR-Grid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">TR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">TRGrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">TR-Grid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">169d7f9c</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">NL</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">TERENA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">TERENA</span> <span class="nt">eScience</span> <span class="nt">Personal</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">US</span><span class="o">/</span><span class="nt">ST</span><span class="o">=</span><span class="nt">UT</span><span class="o">/</span><span class="nt">L</span><span class="o">=</span><span class="nt">Salt</span> <span class="nt">Lake</span> <span class="nt">City</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">The</span> <span class="nt">USERTRUST</span> <span class="nt">Network</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">www</span><span class="p">.</span><span class="nc">usertrust</span><span class="p">.</span><span class="nc">com</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">UTN-USERFirst-Client</span> <span class="nt">Authentication</span> <span class="nt">and</span> <span class="nt">Email</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">16da7552</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">NL</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">NIKHEF</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">NIKHEF</span> <span class="nt">medium-security</span> <span class="nt">certification</span> <span class="nt">auth</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">NL</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">NIKHEF</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">NIKHEF</span> <span class="nt">medium-security</span> <span class="nt">certification</span> <span class="nt">auth</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">1c3f2ca8</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">org</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">DOEGrids</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">DOEGrids</span> <span class="nt">CA</span> <span class="nt">1</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">net</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ES</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">ESnet</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">ESnet</span> <span class="nt">Root</span> <span class="nt">CA</span> <span class="nt">1</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">1d879c6c</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ch</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cern</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CERN</span> <span class="nt">Trusted</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ch</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cern</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CERN</span> <span class="nt">Root</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">1e12d831</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">AU</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">APACGrid</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">CA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">APACGrid</span><span class="o">/</span><span class="nt">emailAddress</span><span class="o">=</span><span class="nt">camanager</span><span class="p">@</span><span class="k">vpac</span><span class="p">.</span><span class="nc">org</span><span class="p">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">AU</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">APACGrid</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">CA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">APACGrid</span><span class="o">/</span><span class="nt">emailAddress</span><span class="o">=</span><span class="nt">camanager</span><span class="p">@</span><span class="k">vpac</span><span class="p">.</span><span class="nc">org</span><span class="p">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">1e43b9cc</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">IE</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Grid-Ireland</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Grid-Ireland</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">IE</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Grid-Ireland</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Grid-Ireland</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">1f0e8352</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Grid</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">NorduGrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">NorduGrid</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Grid</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">NorduGrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">NorduGrid</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">1f3834d0</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">RO</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">RomanianGRID</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">ROSA</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">RomanianGRID</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">RO</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">RomanianGRID</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">ROSA</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">RomanianGRID</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">2418a3f3</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">bg</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">acad</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">BG</span><span class="p">.</span><span class="nc">ACAD</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">bg</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">acad</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">BG</span><span class="p">.</span><span class="nc">ACAD</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">24c3ccde</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">MX</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">UNAMgrid</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">UNAM</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">MX</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">UNAMgrid</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">UNAM</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">28a58577</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">GR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">HellasGrid</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certification</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">HellasGrid</span> <span class="nt">Root</span> <span class="nt">CA</span> <span class="nt">2006</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">GR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">HellasGrid</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certification</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">HellasGrid</span> <span class="nt">Root</span> <span class="nt">CA</span> <span class="nt">2006</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">295adc19</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">CL</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">REUNACA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">REUNA</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">CL</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">REUNACA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">REUNA</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">2a237f16</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">org</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">balticgrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Baltic</span> <span class="nt">Grid</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">org</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">balticgrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Baltic</span> <span class="nt">Grid</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">2ac09305</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">EDU</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">UTEXAS</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">TACC</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">UT-AUSTIN</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">TACC</span> <span class="nt">MICS</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">EDU</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">UTEXAS</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">TACC</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">UT-AUSTIN</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">TACC</span> <span class="nt">Root</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">2f3fadf6</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">IT</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">INFN</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">INFN</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">IT</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">INFN</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">INFN</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">304cf809</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">CH</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Switch</span> <span class="nt">-</span> <span class="nt">Teleinformatikdienste</span> <span class="nt">fuer</span> <span class="nt">Lehre</span> <span class="nt">und</span> <span class="nt">Forschung</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">SWITCHslcs</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">CH</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Switch</span> <span class="nt">-</span> <span class="nt">Teleinformatikdienste</span> <span class="nt">fuer</span> <span class="nt">Lehre</span> <span class="nt">und</span> <span class="nt">Forschung</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">SWITCHgrid</span> <span class="nt">Root</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">3232b9bc</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">me</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ac</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">MREN</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">MREN-CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">me</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ac</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">MREN</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">MREN-CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">367b75c3</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">UK</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">eScienceCA</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Authority</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">UK</span> <span class="nt">e-Science</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">UK</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">eScienceRoot</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Authority</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">UK</span> <span class="nt">e-Science</span> <span class="nt">Root</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">393f7863</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">RS</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">AEGIS</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">AEGIS-CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">RS</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">AEGIS</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">AEGIS-CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">3d5be7bc</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">SI</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">SiGNET</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">SiGNET</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">SI</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">SiGNET</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">SiGNET</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">3f0f4285</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">VE</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Grid</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Universidad</span> <span class="nt">de</span> <span class="nt">Los</span> <span class="nt">Andes</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">CeCalCULA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">ULAGrid</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">VE</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Grid</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Universidad</span> <span class="nt">de</span> <span class="nt">Los</span> <span class="nt">Andes</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">CeCalCULA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">ULAGrid</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">468d15b3</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ORG</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">SEE-GRID</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">SEE-GRID</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ORG</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">SEE-GRID</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">SEE-GRID</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">4798da47</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">HK</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">HKU</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">GRID</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">HKU</span> <span class="nt">Grid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">HK</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">HKU</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">GRID</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">HKU</span> <span class="nt">Grid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">55994d72</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">RU</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">RDIG</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Russian</span> <span class="nt">Data-Intensive</span> <span class="nt">Grid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">RU</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">RDIG</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Russian</span> <span class="nt">Data-Intensive</span> <span class="nt">Grid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">5cf9d536</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">BM</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">QuoVadis</span> <span class="nt">Limited</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Root</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">QuoVadis</span> <span class="nt">Root</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">BM</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">QuoVadis</span> <span class="nt">Limited</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Root</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">QuoVadis</span> <span class="nt">Root</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">617ff41b</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">JP</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">KEK</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">CRC</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">KEK</span> <span class="nt">GRID</span> <span class="nt">Certificate</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">JP</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">KEK</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">CRC</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">KEK</span> <span class="nt">GRID</span> <span class="nt">Certificate</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">67e8acfa</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Purdue</span> <span class="nt">TeraGrid</span> <span class="nt">RA</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Purdue</span> <span class="nt">TeraGrid</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Purdue</span> <span class="nt">University</span><span class="o">/</span><span class="nt">ST</span><span class="o">=</span><span class="nt">Indiana</span><span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">US</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">PurdueCA</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Purdue</span> <span class="nt">University</span><span class="o">/</span><span class="nt">ST</span><span class="o">=</span><span class="nt">Indiana</span><span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">US</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">684261aa</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">EDU</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">UTEXAS</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">TACC</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">UT-AUSTIN</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">TACC</span> <span class="nt">Root</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">EDU</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">UTEXAS</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">TACC</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">UT-AUSTIN</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">TACC</span> <span class="nt">Root</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">6e3b436b</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">AT</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">AustrianGrid</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Issuer</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">AT</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">AustrianGrid</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Issuer</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">6fee79b0</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">IL</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">IUCC</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">IUCC</span><span class="o">/</span><span class="nt">emailAddress</span><span class="o">=</span><span class="nt">ca</span><span class="p">@</span><span class="k">mail</span><span class="p">.</span><span class="nc">iucc</span><span class="p">.</span><span class="nc">ac</span><span class="p">.</span><span class="nc">il</span><span class="p">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">IL</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">IUCC</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">IUCC</span><span class="o">/</span><span class="nt">emailAddress</span><span class="o">=</span><span class="nt">ca</span><span class="p">@</span><span class="k">mail</span><span class="p">.</span><span class="nc">iucc</span><span class="p">.</span><span class="nc">ac</span><span class="p">.</span><span class="nc">il</span><span class="p">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">709bed08</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">by</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">grid</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">uiip</span><span class="p">.</span><span class="nc">bas-net</span><span class="p">.</span><span class="nc">by</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Belarusian</span> <span class="nt">Grid</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">by</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">grid</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">uiip</span><span class="p">.</span><span class="nc">bas-net</span><span class="p">.</span><span class="nc">by</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Belarusian</span> <span class="nt">Grid</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">712ae4cc</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cz</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cesnet-ca</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">CESNET</span> <span class="nt">CA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CESNET</span> <span class="nt">CA</span> <span class="nt">3</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cz</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cesnet-ca</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">CESNET</span> <span class="nt">CA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CESNET</span> <span class="nt">CA</span> <span class="nt">Root</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">71a89a47</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">TW</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ORG</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">NCHC</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">NCHC</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">TW</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ORG</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">NCHC</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">NCHC</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">722e5071</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">KR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">KISTI</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">GRID</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">KISTI</span> <span class="nt">Grid</span> <span class="nt">Certificate</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">KR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">KISTI</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">GRID</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">KISTI</span> <span class="nt">Grid</span> <span class="nt">Certificate</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">742edd45</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">LV</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">latgrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Certification</span> <span class="nt">Authority</span> <span class="nt">for</span> <span class="nt">Latvian</span> <span class="nt">Grid</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">LV</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">latgrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Certification</span> <span class="nt">Authority</span> <span class="nt">for</span> <span class="nt">Latvian</span> <span class="nt">Grid</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">75680d2e</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">GB</span><span class="o">/</span><span class="nt">ST</span><span class="o">=</span><span class="nt">Greater</span> <span class="nt">Manchester</span><span class="o">/</span><span class="nt">L</span><span class="o">=</span><span class="nt">Salford</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Comodo</span> <span class="nt">CA</span> <span class="nt">Limited</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">AAA</span> <span class="nt">Certificate</span> <span class="nt">Services</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">GB</span><span class="o">/</span><span class="nt">ST</span><span class="o">=</span><span class="nt">Greater</span> <span class="nt">Manchester</span><span class="o">/</span><span class="nt">L</span><span class="o">=</span><span class="nt">Salford</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Comodo</span> <span class="nt">CA</span> <span class="nt">Limited</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">AAA</span> <span class="nt">Certificate</span> <span class="nt">Services</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">7721d4d3</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">NET</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">PRAGMA-GRID</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">PRAGMA-UCSD</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">NET</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">PRAGMA-GRID</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">PRAGMA-UCSD</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">7b54708e</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">MA</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">MaGrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">MaGrid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">MA</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">MaGrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">MaGrid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">7d0d064a</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">MK</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">MARGI</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">MARGI-CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">MK</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">MARGI</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">MARGI-CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">82b36fca</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">GR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">HellasGrid</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certification</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">HellasGrid</span> <span class="nt">CA</span> <span class="nt">2006</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">GR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">HellasGrid</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certification</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">HellasGrid</span> <span class="nt">Root</span> <span class="nt">CA</span> <span class="nt">2006</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">8a047de1</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">TH</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">NECTEC</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">GOC</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">NECTEC</span> <span class="nt">GOC</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">TH</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">NECTEC</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">GOC</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">NECTEC</span> <span class="nt">GOC</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">8a661490</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">PL</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">GRID</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Polish</span> <span class="nt">Grid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">PL</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">GRID</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Polish</span> <span class="nt">Grid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">95009ddc</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">PurdueCA</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Purdue</span> <span class="nt">University</span><span class="o">/</span><span class="nt">ST</span><span class="o">=</span><span class="nt">Indiana</span><span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">US</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">PurdueCA</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Purdue</span> <span class="nt">University</span><span class="o">/</span><span class="nt">ST</span><span class="o">=</span><span class="nt">Indiana</span><span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">US</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">98ef0ee5</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">UK</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">eScienceRoot</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Authority</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">UK</span> <span class="nt">e-Science</span> <span class="nt">Root</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">UK</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">eScienceRoot</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Authority</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">UK</span> <span class="nt">e-Science</span> <span class="nt">Root</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">99f9f5a3</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">gov</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">fnal</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Fermilab</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Kerberized</span> <span class="nt">CA</span> <span class="nt">HSM</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">gov</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">fnal</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Fermilab</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Kerberized</span> <span class="nt">CA</span> <span class="nt">HSM</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">9b59ecad</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cz</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cesnet-ca</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CESNET</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cz</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cesnet-ca</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CESNET</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">9b95bbf2</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">US</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">National</span> <span class="nt">Center</span> <span class="nt">for</span> <span class="nt">Supercomputing</span> <span class="nt">Applications</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CACL</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">US</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">National</span> <span class="nt">Center</span> <span class="nt">for</span> <span class="nt">Supercomputing</span> <span class="nt">Applications</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CACL</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">9cd75e87</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">TW</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">AS</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Academia</span> <span class="nt">Sinica</span> <span class="nt">Grid</span> <span class="nt">Computing</span> <span class="nt">Certification</span> <span class="nt">Authority</span> <span class="nt">Mercury</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">TW</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">AS</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Academia</span> <span class="nt">Sinica</span> <span class="nt">Grid</span> <span class="nt">Computing</span> <span class="nt">Certification</span> <span class="nt">Authority</span> <span class="nt">Mercury</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">9dd23746</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">es</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">irisgrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">IRISGridCA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">es</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">irisgrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">IRISGridCA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">9ec3a561</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">US</span><span class="o">/</span><span class="nt">ST</span><span class="o">=</span><span class="nt">UT</span><span class="o">/</span><span class="nt">L</span><span class="o">=</span><span class="nt">Salt</span> <span class="nt">Lake</span> <span class="nt">City</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">The</span> <span class="nt">USERTRUST</span> <span class="nt">Network</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">www</span><span class="p">.</span><span class="nc">usertrust</span><span class="p">.</span><span class="nc">com</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">UTN-USERFirst-Client</span> <span class="nt">Authentication</span> <span class="nt">and</span> <span class="nt">Email</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">GB</span><span class="o">/</span><span class="nt">ST</span><span class="o">=</span><span class="nt">Greater</span> <span class="nt">Manchester</span><span class="o">/</span><span class="nt">L</span><span class="o">=</span><span class="nt">Salford</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Comodo</span> <span class="nt">CA</span> <span class="nt">Limited</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">AAA</span> <span class="nt">Certificate</span> <span class="nt">Services</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">9ff26ea4</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">MD</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">MD-Grid</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">RENAM</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">MD-Grid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">MD</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">MD-Grid</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">RENAM</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">MD-Grid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">a02131f7</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">DE</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">DFN-Verein</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">DFN-PKI</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">DFN</span> <span class="nt">SLCS-CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">DE</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">DFN-Verein</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">DFN-PKI</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">DFN</span> <span class="nt">SLCS-CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">a317c467</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">JP</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">AIST</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">GRID</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">JP</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">AIST</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">GRID</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">a87d9192</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">JP</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">National</span> <span class="nt">Research</span> <span class="nt">Grid</span> <span class="nt">Initiative</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">CGRD</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">NAREGI</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">JP</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">National</span> <span class="nt">Research</span> <span class="nt">Grid</span> <span class="nt">Initiative</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">CGRD</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">NAREGI</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">a9082267</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">BR</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">UFF</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">IC</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">UFF</span> <span class="nt">LACGrid</span> <span class="nt">CA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">UFF</span> <span class="nt">Latin</span> <span class="nt">American</span> <span class="nt">and</span> <span class="nt">Caribbean</span> <span class="nt">Catch-all</span> <span class="nt">Grid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">BR</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">UFF</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">IC</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">UFF</span> <span class="nt">LACGrid</span> <span class="nt">CA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">UFF</span> <span class="nt">Latin</span> <span class="nt">American</span> <span class="nt">and</span> <span class="nt">Caribbean</span> <span class="nt">Catch-all</span> <span class="nt">Grid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">afe55e66</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">CY</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">CyGrid</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">HPCL</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CyGridCA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">CY</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">CyGrid</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">HPCL</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CyGridCA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">b2771d44</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">CN</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">Grid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Root</span> <span class="nt">Certificate</span> <span class="nt">Authority</span> <span class="nt">at</span> <span class="nt">CNIC</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">CN</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">Grid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Root</span> <span class="nt">Certificate</span> <span class="nt">Authority</span> <span class="nt">at</span> <span class="nt">CNIC</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">b7bcb7b2</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">AR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">e-Ciencia</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">UNLP</span><span class="o">/</span><span class="nt">L</span><span class="o">=</span><span class="nt">CeSPI</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">PKIGrid</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">AR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">e-Ciencia</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">UNLP</span><span class="o">/</span><span class="nt">L</span><span class="o">=</span><span class="nt">CeSPI</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">PKIGrid</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">b93d6240</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">net</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ES</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">NERSC</span> <span class="nt">Online</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">net</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ES</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">ESnet</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">ESnet</span> <span class="nt">Root</span> <span class="nt">CA</span> <span class="nt">1</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">ba2f39ca</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">CN</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">HEP</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">gridca-cn</span><span class="o">/</span><span class="nt">emailAddress</span><span class="o">=</span><span class="nt">gridca</span><span class="p">@</span><span class="k">ihep</span><span class="p">.</span><span class="nc">ac</span><span class="p">.</span><span class="nc">cn</span><span class="p">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">CN</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">HEP</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">gridca-cn</span><span class="o">/</span><span class="nt">emailAddress</span><span class="o">=</span><span class="nt">gridca</span><span class="p">@</span><span class="k">ihep</span><span class="p">.</span><span class="nc">ac</span><span class="p">.</span><span class="nc">cn</span><span class="p">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">bffbd7d0</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">CA</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Grid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Grid</span> <span class="nt">Canada</span> <span class="nt">Certificate</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">CA</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Grid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Grid</span> <span class="nt">Canada</span> <span class="nt">Certificate</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">c48c63f3</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">CN</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">Grid</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">SDG</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Scientific</span> <span class="nt">Data</span> <span class="nt">Grid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">CN</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">Grid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Root</span> <span class="nt">Certificate</span> <span class="nt">Authority</span> <span class="nt">at</span> <span class="nt">CNIC</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">cc800af0</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">HU</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">NIIF</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">NIIF</span> <span class="nt">Root</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">HU</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">NIIF</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">NIIF</span> <span class="nt">Root</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">ce33db76</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">IR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">IPM</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">IRAN-GRID</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">IRAN-GRID</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">IR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">IPM</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">IRAN-GRID</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">IRAN-GRID</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">d0b701c0</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">CH</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Switch</span> <span class="nt">-</span> <span class="nt">Teleinformatikdienste</span> <span class="nt">fuer</span> <span class="nt">Lehre</span> <span class="nt">und</span> <span class="nt">Forschung</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">SWITCHgrid</span> <span class="nt">Root</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">CH</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Switch</span> <span class="nt">-</span> <span class="nt">Teleinformatikdienste</span> <span class="nt">fuer</span> <span class="nt">Lehre</span> <span class="nt">und</span> <span class="nt">Forschung</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">SWITCHgrid</span> <span class="nt">Root</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">d0c2a341</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">AM</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">ArmeSFo</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">ArmeSFo</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">AM</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">ArmeSFo</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">ArmeSFo</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">d11f973e</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">FR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">CNRS</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">GRID2-FR</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">FR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">CNRS</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CNRS2-Projets</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">d1737728</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">SG</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Netrust</span> <span class="nt">Certificate</span> <span class="nt">Authority</span> <span class="nt">1</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Netrust</span> <span class="nt">CA1</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">SG</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Netrust</span> <span class="nt">Certificate</span> <span class="nt">Authority</span> <span class="nt">1</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Netrust</span> <span class="nt">CA1</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">d1b603c3</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">net</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ES</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">ESnet</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">ESnet</span> <span class="nt">Root</span> <span class="nt">CA</span> <span class="nt">1</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">net</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ES</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">ESnet</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">ESnet</span> <span class="nt">Root</span> <span class="nt">CA</span> <span class="nt">1</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">d254cc30</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ch</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cern</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CERN</span> <span class="nt">Root</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">ch</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cern</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CERN</span> <span class="nt">Root</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">da75f6a8</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">IN</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">GARUDAINDIA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Indian</span> <span class="nt">Grid</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">IN</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">GARUDAINDIA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Indian</span> <span class="nt">Grid</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">dd4b34ea</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">DE</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">GermanGrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">GridKa-CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">DE</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">GermanGrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">GridKa-CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">e13e0fcf</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">SK</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">SlovakGrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">SlovakGrid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">SK</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">SlovakGrid</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">SlovakGrid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">e5cc84c2</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">EDU</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">UTEXAS</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">TACC</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">UT-AUSTIN</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">TACC</span> <span class="nt">Classic</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">EDU</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">UTEXAS</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">TACC</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">UT-AUSTIN</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">TACC</span> <span class="nt">Root</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">e72045ce</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">BM</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">QuoVadis</span> <span class="nt">Limited</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Issuing</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">QuoVadis</span> <span class="nt">Grid</span> <span class="nt">ICA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">BM</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">QuoVadis</span> <span class="nt">Limited</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Root</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">QuoVadis</span> <span class="nt">Root</span> <span class="nt">Certification</span> <span class="nt">Authority</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">e8ac4b61</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">US</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">National</span> <span class="nt">Center</span> <span class="nt">for</span> <span class="nt">Supercomputing</span> <span class="nt">Applications</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">GridShib</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">US</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">National</span> <span class="nt">Center</span> <span class="nt">for</span> <span class="nt">Supercomputing</span> <span class="nt">Applications</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">GridShib</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">e8d818e6</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">BE</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">BEGRID</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">BELNET</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">BEgrid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">BE</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">BEGRID</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">BELNET</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">BEgrid</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">edca0fc0</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cz</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cesnet-ca</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">CESNET</span> <span class="nt">CA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CESNET</span> <span class="nt">CA</span> <span class="nt">Root</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cz</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">cesnet-ca</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">CESNET</span> <span class="nt">CA</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">CESNET</span> <span class="nt">CA</span> <span class="nt">Root</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">f2e89fe3</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">US</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">National</span> <span class="nt">Center</span> <span class="nt">for</span> <span class="nt">Supercomputing</span> <span class="nt">Applications</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">MyProxy</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">US</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">National</span> <span class="nt">Center</span> <span class="nt">for</span> <span class="nt">Supercomputing</span> <span class="nt">Applications</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">Certificate</span> <span class="nt">Authorities</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">MyProxy</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">f5ead794</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">PK</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">NCP</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">PK-GRID-CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">PK</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">NCP</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">PK-GRID-CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+<span class="nt">Hash</span><span class="o">=</span><span class="nt">ff94d436</span><span class="o">;</span> <span class="nt">Subject</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">HR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">edu</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">srce</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">SRCE</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Issuer</span><span class="o">=</span> <span class="o">/</span><span class="nt">C</span><span class="o">=</span><span class="nt">HR</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">edu</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">srce</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">SRCE</span> <span class="nt">CA</span><span class="o">;</span> <span class="nt">Accreditation</span><span class="o">=</span><span class="nt">Unknown</span><span class="o">;</span> <span class="nt">Status</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">software</span><span class="p">.</span><span class="nc">grid</span><span class="p">.</span><span class="nc">iu</span><span class="p">.</span><span class="nc">edu</span><span class="o">/</span><span class="nt">pacman</span><span class="o">/</span><span class="nt">cadist</span><span class="o">/</span><span class="nt">ca-certs-version</span>
+</pre></div>
+
+
+<p></details></p>
+<p>Any certificate issued by any of the Certificate Authorities listed will be trusted. If in doubt please contact the <a href="https://opensciencegrid.github.io/security">OSG Security Team</a> and review the policies of your home institution.</p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="useful-configuration-and-log-files">Useful configuration and log files<a class="headerlink" href="#useful-configuration-and-log-files" title="Permanent link">&para;</a></h3>
+<p>Logs and configuration:</p>
+<table>
+<thead>
+<tr>
+<th align="left">File Description</th>
+<th align="left">Location</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Configuration File for osg-update-certs</td>
+<td align="left"><code>/etc/osg/osg-update-certs.conf</code></td>
+<td align="left">This file may be edited by hand, though it is recommended to use osg-ca-manage to set configuration parameters.</td>
+</tr>
+<tr>
+<td align="left">Log file of osg-update-certs</td>
+<td align="left"><code>/var/log/osg-update-certs.log</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Stdout of osg-update-certs</td>
+<td align="left"><code>/var/log/osg-ca-certs-status.system.out</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Stdout of osg-ca-manage</td>
+<td align="left"><code>/var/log/osg-ca-manage.system.out</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Stdout of initial CA setup</td>
+<td align="left"><code>/var/log/osg-setup-ca-certificates.system.out</code></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../common/ca">Installing the Certificate Authorities Certificates and the related RPMs</a></li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../release/notes/" class="btn btn-neutral float-right" title="Release Notes">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../user-certs/" class="btn btn-neutral" title="User Certificates"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../user-certs/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../release/notes/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
