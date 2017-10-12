@@ -13,7 +13,7 @@ Host and OS
 
 -   OS is Red Hat Enterprise Linux 6, 7, and variants (see [details...](../release/supported_platforms.md)).
 -   [EPEL](http://fedoraproject.org/wiki/EPEL) repos enabled.
--   A working XRootD Server. See [InstallXrootd](install-xrootd) for details.
+-   A working XRootD Server. See [InstallXrootd](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd) for details.
 -   Root access
 
 Users 
@@ -38,13 +38,11 @@ Certificates
 Networking 
 ----------------------------------------------------
 
-For more details on overall Firewall configuration, please see our <a href="/bin/view/Documentation/Release3/FirewallInformation" class="twikiLink">Firewall documentation</a>.
-
 | Service Name | Protocol | Port Number | Inbound | Outbound | Comment |
 |--------------|----------|-------------|---------|----------|---------|
-| GRAM callback | tcp | `GLOBUS_TCP_PORT_RANGE` | <img src="/twiki/pub/TWiki/TWikiDocGraphics/choice-yes.gif" title="Y" alt="Y" width="16" height="16" /> |   | contiguous range of ports |
-| GRAM callback | tcp | `GLOBUS_TCP_SOURCE_RANGE` |   | <img src="/twiki/pub/TWiki/TWikiDocGraphics/choice-yes.gif" title="Y" alt="Y" width="16" height="16" /> | contiguous range of ports |
-| GridFTP | tcp | 2811 and `GLOBUS_TCP_SOURCE_RANGE` | <img src="/twiki/pub/TWiki/TWikiDocGraphics/choice-yes.gif" title="Y" alt="Y" width="16" height="16" /> |   | contiguous range of ports |
+| GRAM callback | tcp | `GLOBUS_TCP_PORT_RANGE` | Y |   | contiguous range of ports |
+| GRAM callback | tcp | `GLOBUS_TCP_SOURCE_RANGE` |   | Y | contiguous range of ports |
+| GridFTP | tcp | 2811 and `GLOBUS_TCP_SOURCE_RANGE` | Y |   | contiguous range of ports |
 
 Engineering Considerations 
 --------------------------------------------------------------------
@@ -58,7 +56,7 @@ The GridFTP server provides high-performance, secure and reliable data transfer.
 Install Instructions
 =========================
 
-Note that this package is primarily intended for GridFTP acting as an interface for XRootD server, usually part of a bigger storage element installation. If you have not installed an XRootD server yet, follow the instructions in [InstallXrootd](install-xrootd).
+Note that this package is primarily intended for GridFTP acting as an interface for XRootD server, usually part of a bigger storage element installation. If you have not installed an XRootD server yet, follow the instructions in [InstallXrootd](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd).
 
 Certificates 
 ------------------------------------------------------
@@ -77,7 +75,7 @@ root@host # yum install osg-gridftp-xrootd
 Configuring GridFTP authentication support 
 ------------------------------------------------------------------------------------
 
-For information on how to configure authentication for your GridFTP installation, please refer to the <a href="/bin/view/Documentation/Release3/InstallOSGGridFTP#ConfiguringAuthentication" class="twikiAnchorLink">configuring authentication section of the GridFTP guide</a>.
+For information on how to configure authentication for your GridFTP installation, please refer to the [configuring authentication section of the GridFTP guide](gridftp#configuring-authentication).
 
 Configuring GridFTP XRootD support 
 ----------------------------------------------------------------------------
@@ -101,7 +99,7 @@ Configuring xrootdfs
 Configure Xrootd Gratia Probes 
 ------------------------------------------------------------------------
 
-Note that you can also enable the GridFTP gratia probe. However, the XRootD probes are likely sufficient. More information on the GridFTP probe can be found here: <a href="/bin/view/Documentation/Release3/InstallOSGGridFTP#6_0_Gratia_GridFTP_Transfer_Prob" class="twikiAnchorLink">InstallOSGGridFTP#6_0_Gratia_GridFTP_Transfer_Prob</a>
+Note that you can also enable the GridFTP gratia probe. However, the XRootD probes are likely sufficient. More information on the GridFTP probe can be found [here](gridftp#enabling-gratia-gridftp-transfer-probe).
 
 Starting Services 
 -----------------------------------------------------------
@@ -153,32 +151,12 @@ File Locations
 | Gratia Probe | /etc/gratia/xrootd-storage/ProbeConfig | GridFTP Xrootd Storage Probe configuration |
 | | /etc/gratia/xrootd-transfer/ProbeConfig | GridFTP Xrootd Transfer Probe configuration |
 
-[Service/Process](/bin/view/Documentation/Release3/InstallGridFtpXrootd?sortcol=0;table=5;up=0#sorted_table "Sort by this column")
-
-[Log File](/bin/view/Documentation/Release3/InstallGridFtpXrootd?sortcol=1;table=5;up=0#sorted_table "Sort by this column")
-
-[Description](/bin/view/Documentation/Release3/InstallGridFtpXrootd?sortcol=2;table=5;up=0#sorted_table "Sort by this column")
-
-GridFTP
-
-/var/log/gridftp.log
-
-GridFTP transfer log
-
-/var/log/gridftp-auth.log
-
-GridFTP authorization log
-
-Gratia probe
-
-/var/logs/gratia
+| Service/Process | Log File | Description |
+| GridFTP | /var/log/gridftp.log | GridFTP transfer log |
+| | /var/log/gridftp-auth.log | GridFTP authorization log |
+| Gratia probe | /var/logs/gratia | |
 
 How to get Help?
 =====================
-
-If you cannot resolve the problem, there are several ways to receive help:
-
--   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.grid.iu.edu/goc).
--   For community support and best-effort software team support contact <osg-software@opensciencegrid.org.>
 
 For a full set of help options, see [Help Procedure](../common/help.md).
