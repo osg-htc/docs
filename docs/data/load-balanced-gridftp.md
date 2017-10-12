@@ -17,7 +17,7 @@ Before starting the installation process, consider the following requirements:
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
--   Ensure the host has [a supported operating system](SupportedOperatingSystems)
+-   Ensure the host has [a supported operating system](../release/supported_platforms)
 -   Obtain root access to each host
 
 Designing Your Load-Balanced GridFTP System
@@ -96,7 +96,7 @@ XRootD requires that the certificate's [common name](https://en.wikipedia.org/wi
 
 ### Installing GridFTP
 
-Whether you are starting from scratch or adding more GridFTP servers to your load-balanced GridFTP system, follow the documentation for [installing a standalone GridFTP server](Documentation.Release3.InstallOSGGridFTP) for each of your intended GridFTP servers (skip section 2.2, requesting a certificate). For hosts with GridFTP already installed, skip this section.
+Whether you are starting from scratch or adding more GridFTP servers to your load-balanced GridFTP system, follow the documentation for [installing a standalone GridFTP server](gridftp) for each of your intended GridFTP servers (skip section 2.2, requesting a certificate). For hosts with GridFTP already installed, skip this section.
 
 ### Configuring your GridFTP servers
 

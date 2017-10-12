@@ -40,7 +40,7 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 ### Installing and Managing Certificates for Site Security ###
 
 -   [Installing the grid certificate authorities (CAs)](common/ca)
--   [How do I get PKI host and service X.509 certificates?](data/host-certs)
+-   [How do I get PKI host and service X.509 certificates?](security/host-certs)
 -   [Automatically updating the grid certificate authorities (CAs)](common/osg-ca-certs-updater)
 -   [SHA-2 certificates and minimum required OSG software versions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SHA2Compliance)
 -   [OSG PKI command line client reference](common/pki-cli)
@@ -83,7 +83,7 @@ All of these node types and their services are optional, although OSG requires t
         -   (optional) [Install load-balanced OSG GridFTP](data/load-balanced-gridftp): when a single GridFTP server isn't enough
     -   BeStMan
         -   [BeStMan Overview](data/bestman-overview): Bestman-related information, planning, and guides
-        -   [Install Bestman SE](data/bestman-se): BeStMan2 SRM server + GridFTP server
+        -   [Install Bestman SE](data/bestman-install): BeStMan2 SRM server + GridFTP server
         -   [Install Bestman Gateway Hadoop](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoop200SE): BeStMan2 SRM server + GridFTP server + Hadoop
     -   Hadoop Distributed File System (HDFS)
         -   [Hadoop Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HadoopOverview): HDFS information, planning, and guides
