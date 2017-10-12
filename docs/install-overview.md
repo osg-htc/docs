@@ -98,8 +98,6 @@ Test OSG Software
 At very least, it is vital to test *manual* submission of jobs from inside and outside of your site through your CE to your batch system. If this process does not work manually, it will probably not work for the glideinWMS pilot factory either.
 
 -   [Test job submission into an HTCondor-CE](compute-element/submit-htcondor-ce)
--   [OSG Troubleshooting guide](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingGuide)
--   [Validating Supported VOs](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/ValidateSupportedVos)
 
 Start GlideinWMS Pilot Submissions
 ----------------------------------
