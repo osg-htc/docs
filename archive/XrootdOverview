@@ -1,0 +1,89 @@
+%DOC_STATUS_TABLE%
+
+---+!! !XRootD Resources
+%TOC%
+
+---+ About !XRootD
+
+The !XRootD project aims at giving high performance, scalable fault tolerant access to data repositories of many kinds. The typical usage is to give access to file-based ones. It is based on a scalable architecture, a communication protocol, and a set of plugins and tools based on those. The freedom to configure it and to make it scale (for size and performance) allows the deployment of data access clusters of virtually any size, which can include sophisticated features, like authentication/authorization, integrations with other systems, WAN data distribution, etc.
+
+!XRootD software framework is a fully generic suite for fast, low latency and scalable data access, which can serve natively any kind of data, organized as a hierarchical filesystem-like namespace, based on the concept of directory. As a general rule, particular emphasis has been put in the quality of the core software parts. 
+
+---+++ Planning
+
+   * [[http://xrootd.slac.stanford.edu/][Xrootd Homepage]]
+
+---+++ Installation
+
+   * [[Documentation/Release3.InstallXrootd][Install Xrootd Server]]: This page explains how to install an !XRootD redirector and data nodes
+   * [[Documentation/Release3.InstallBestmanXrootdSE][Install Bestman Gateway Xrootd]]: Installing a SRM frontend wit !GridFTP for !XRootD redirector
+   * [[Documentation/Release3.InstallGridFtpXrootd][Install GridFTP on Xrootd]]: For sites with multiple !GridFTP servers, this page explains how to install a !GridFTP server.
+   * [[Storage.HadoopXrootd][Hadoop on Xrootd]]: Example configuration of Xrootd on top of Hadoop.
+
+---+++ Operations
+
+   * InstallXrootdClient: Installing and using !XRootD clients
+   * [[https://savannah.cern.ch/bugs/?group=xrootd][Xrootd bug reporting]]
+   * [[http://xrootd.cern.ch/cgi-bin/cgit.cgi/xrootd/][Source code browsable repo]]
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = DouglasStrain
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Navigation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = JamesWeichel
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
+
+
+
+-- Main.DouglasStrain - 27 Oct 2011

@@ -88,7 +88,7 @@ All of these node types and their services are optional, although OSG requires t
     -   Hadoop Distributed File System (HDFS)
         -   [Hadoop Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HadoopOverview): HDFS information, planning, and guides
     -   XRootD
-        -   [XRootd Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/XrootdOverview): XRootD information, planning, and guides
+        -   [XRootd Overview](data/xrootd-overview): XRootD information, planning, and guides
         -   [Install Xrootd Server](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd): XRootD redirector installation
         -   [Install BeStMan-Gateway XRootD](data/install-bestman-xrootd): BeStMan2 SRM server + GridFTP server + XRootD fuse
 
@@ -98,8 +98,6 @@ Test OSG Software
 At very least, it is vital to test *manual* submission of jobs from inside and outside of your site through your CE to your batch system. If this process does not work manually, it will probably not work for the glideinWMS pilot factory either.
 
 -   [Test job submission into an HTCondor-CE](compute-element/submit-htcondor-ce)
--   [OSG Troubleshooting guide](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingGuide)
--   [Validating Supported VOs](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/ValidateSupportedVos)
 
 Start GlideinWMS Pilot Submissions
 ----------------------------------
