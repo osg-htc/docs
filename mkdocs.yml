@@ -31,6 +31,7 @@ pages:
   - 'Submitting to HTCondor-CE': 'compute-element/submit-htcondor-ce.md'
 - Data:
   - 'Install GridFTP Server': 'data/gridftp.md'
+  - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'    
   - 'Install GridFtp XRootD': 'data/install-gridftp-xrootd.md'
   - 'HTTP Cache': 'data/frontier-squid.md'
   - 'XRootD Client': 'data/install-xroot-client.md'
