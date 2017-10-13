@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>XRootD Client - OSG Documentation</title>
+  <title>Hadoop Overview - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "XRootD Client";
-    var mkdocs_page_input_path = "data/install-xroot-client.md";
-    var mkdocs_page_url = "/data/install-xroot-client/";
+    var mkdocs_page_name = "Hadoop Overview";
+    var mkdocs_page_input_path = "data/hadoop-overview.md";
+    var mkdocs_page_url = "/data/hadoop-overview/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -208,33 +208,39 @@
     <a class="" href="../xrootd-overview/">XRootD Overview</a>
   
         </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-xroot-client/">XRootD Client</a>
+  
+        </li>
         <li class=" current">
           
   
-    <a class="current" href="./">XRootD Client</a>
+    <a class="current" href="./">Hadoop Overview</a>
   
   <ul class="subnav">
       
-    <li class="toctree-l3"><a href="#install-xrootd-client">Install XRootd Client</a></li>
+    <li class="toctree-l3"><a href="#hadoop-overview">Hadoop Overview</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#installing-a-xrootd-client">Installing a XRootD Client</a></li>
+            <li><a class="toctree-l4" href="#hadoop-introduction">Hadoop Introduction</a></li>
         
-            <li><a class="toctree-l4" href="#using-the-xrootd-client-mechanisms">Using the XRootD Client Mechanisms</a></li>
+            <li><a class="toctree-l4" href="#hadoop-se-components">Hadoop SE Components</a></li>
         
-            <li><a class="toctree-l4" href="#how-to-get-help">How to get Help?</a></li>
+            <li><a class="toctree-l4" href="#minimal-installation-0-50tb-wan-transfers-up-to-1gbps">Minimal Installation (0-50TB, WAN transfers up to 1Gbps)</a></li>
+        
+            <li><a class="toctree-l4" href="#medium-installation-50-150tb-wan-transfers-up-to-2-gbps">Medium Installation (50-150TB, WAN transfers up to 2 Gbps)</a></li>
+        
+            <li><a class="toctree-l4" href="#large-installation-150tb-wan-transfers-over-2-gbps">Large Installation (&gt;150TB, WAN transfers over 2 Gbps)</a></li>
+        
+            <li><a class="toctree-l4" href="#hadoop-security">Hadoop Security</a></li>
         
         </ul>
     
 
   </ul>
-        </li>
-        <li class="">
-          
-  
-    <a class="" href="../hadoop-overview/">Hadoop Overview</a>
-  
         </li>
         <li class="">
           
@@ -735,10 +741,10 @@
         
       
     
-    <li>XRootD Client</li>
+    <li>Hadoop Overview</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/install-xroot-client.md"
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/hadoop-overview.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -748,74 +754,73 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="install-xrootd-client">Install XRootd Client<a class="headerlink" href="#install-xrootd-client" title="Permanent link">&para;</a></h1>
-<p>XRootD is a high performance network storage system widely used in high energy physics experiments such as ATLAS and ALICE. The underlying XRootD data transfer protocol provides highly efficient access to ROOT based data files.</p>
-<p>This page provides instructions for using a XRootD client to connect to a XRootD storage system.</p>
-<h2 id="installing-a-xrootd-client">Installing a XRootD Client<a class="headerlink" href="#installing-a-xrootd-client" title="Permanent link">&para;</a></h2>
-<p>As a user you have three different ways to interact with XRootd: a file system mounted with XRootDFS, the application <code>xrdcp</code>, LD_PRELOAD.</p>
-<p>To use a XRootD file system mounted with XRootDFS you don't need any special setup, you will need the XRootD FUSE module.</p>
-<p>To use <code>xrdcp</code> you need to have it in your path (e.g. <code>source $INSTALL_DIR/setup.sh</code>, where <code>$INSTALL_DIR</code> is the XRootD installation directory)</p>
-<p>The use of LD_PRELOAD is not recommended if you have any alternative available.</p>
-<h3 id="install-repositories">Install Repositories<a class="headerlink" href="#install-repositories" title="Permanent link">&para;</a></h3>
-<p>If you have not done so, you will need to install the <a href="../../common/yum">proper yum repositories</a>:</p>
-<h3 id="installing-xrootd-client">Installing XRootD Client<a class="headerlink" href="#installing-xrootd-client" title="Permanent link">&para;</a></h3>
-<p>The XRootD client is needed to access XRootD via <code>xrdcp</code> or via POSIX preload.</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-client
-</pre></div>
-
-
-<h3 id="installing-xrootd-fuse">Installing XRootD Fuse<a class="headerlink" href="#installing-xrootd-fuse" title="Permanent link">&para;</a></h3>
-<p>The XRootD fuse package is needed to access via XRootDFS.</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-fuse
-</pre></div>
-
-
-<h2 id="using-the-xrootd-client-mechanisms">Using the XRootD Client Mechanisms<a class="headerlink" href="#using-the-xrootd-client-mechanisms" title="Permanent link">&para;</a></h2>
-<h3 id="using-the-xrdcp-client">Using the xrdcp client<a class="headerlink" href="#using-the-xrdcp-client" title="Permanent link">&para;</a></h3>
-<p>From the redirector node, you can run this:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;This is a test&quot;</span> &gt;/tmp/test 
-<span class="gp">root@host #</span> xrdcp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/test 
-<span class="gp">root@host #</span> xrdcp xroot://redirector.yourdomain.org:1094//storage/path/test /tmp/test1 
-<span class="gp">root@host #</span> diff /tmp/test1 /tmp/test 
-</pre></div>
-
-
-<p>Users can write in their own space. E.g. a user with Unix account name <code>myuser</code> (the account must exist, eg. in <code>/etc/passwd</code>, etc, on the redirector and on all the data servers) could save a file in XRootD:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;This is a user test&quot;</span> &gt;/tmp/test 
-<span class="gp">root@host #</span> xrdcp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/myuser/test 
-</pre></div>
-
-
-<p>Note that <code>xrdcp</code> creates missing directories.</p>
-<h3 id="tests-using-the-libxrdposixpreload-library">Tests using the libXrdPosixPreload library<a class="headerlink" href="#tests-using-the-libxrdposixpreload-library" title="Permanent link">&para;</a></h3>
-<p>Using XRootD with the POSIX preload library (replace <code>/usr/lib64</code> with <code>/usr/lib</code> on 32-bit systems)</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">export</span> <span class="nv">LD_PRELOAD</span><span class="o">=</span>/usr/lib64/libXrdPosixPreload.so 
-<span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;This is a new test&quot;</span> &gt;/tmp/test 
-<span class="gp">root@host #</span> mkdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
-<span class="gp">root@host #</span> cp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
-<span class="gp">root@host #</span> cp xroot://redirector.yourdomain.org:1094//storage/path/subdir/test /tmp/test1 
-<span class="gp">root@host #</span> diff /tmp/test1 /tmp/test 
-<span class="gp">root@host #</span> rm xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
-<span class="gp">root@host #</span> rmdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
-</pre></div>
-
-
-<h3 id="tests-using-xrootdfs">Tests using XRootDFS<a class="headerlink" href="#tests-using-xrootdfs" title="Permanent link">&para;</a></h3>
-<p>The directory mounted using XRootDFS can be used as any other directory mounted on your file system. All the normal Unix commands should work. You don't need any special setup or library. Try using <code>cp</code>, <code>rm</code>, <code>mv</code>, <code>mkdir</code>, <code>rmdir</code>.</p>
-<p>Assuming your mount is <code>/mnt/xrootd</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;This is a new test&quot;</span> &gt;/tmp/test 
-<span class="gp">root@host #</span> mkdir -p /mnt/xrootd/subdir/sub2
-<span class="gp">root@host #</span> cp /tmp/test /mnt/xrootd/subdir/sub2/test 
-<span class="gp">root@host #</span> cp /mnt/xrootd/subdir/sub2/test /mnt/xrootd/subdir/sub2/test1 
-<span class="gp">root@host #</span> cp /mnt/xrootd/subdir/sub2/test1 /tmp/test1 
-<span class="gp">root@host #</span> diff /tmp/test1 /tmp/test 
-<span class="gp">root@host #</span> rm -r /mnt/xrootd/subdir
-</pre></div>
-
-
-<h2 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h2>
-<p>If you cannot resolve the problem, the best way to get help is by contacting <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#115;&#103;&#45;&#115;&#111;&#102;&#116;&#119;&#97;&#114;&#101;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#111;&#115;&#103;&#45;&#115;&#111;&#102;&#116;&#119;&#97;&#114;&#101;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.
-For a full set of help options, see <a href="../../common/help">Help Procedure</a>.</p>
+                <h1 id="hadoop-overview">Hadoop Overview<a class="headerlink" href="#hadoop-overview" title="Permanent link">&para;</a></h1>
+<h2 id="hadoop-introduction">Hadoop Introduction<a class="headerlink" href="#hadoop-introduction" title="Permanent link">&para;</a></h2>
+<p>Hadoop is a data processing framework. It is an open-source Apache Foundation project, and the main contributor is Yahoo! The framework has two main parts - job scheduling and a distributed file system, the Hadoop Distributed File System (HDFS). We currently utilize HDFS as a general-purpose file system. For this document, we'll use the words "Hadoop" and "HDFS" interchangeably, but it's nice to know the distinction.</p>
+<p>We recommend starting with <a href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html">HDFS architecture document</a>.</p>
+<p>Please do read through this. We will assume you have read this, or at least the important architectural portions. The file system is block-oriented; each file is broken up into 64 MB or 128 MB chunks (user configurable). These chunks are stored on data nodes and served up from there; the central namenode keeps track of the block locations, the namespace information, and block placement policies. HDFS provides POSIX-like semantics; it provides fully random-access reads and non-random-access writes. Currently, fsync and appends (after the file has been initially closed) are experimental and not available to OSG-based installs.</p>
+<h2 id="hadoop-se-components">Hadoop SE Components<a class="headerlink" href="#hadoop-se-components" title="Permanent link">&para;</a></h2>
+<p>We broadly break down the server components of the Hadoop SE into three categories: HDFS core, Grid extensions, and HDFS auxiliary. The components in each of these categories are outlined below:</p>
+<ul>
+<li>HDFS Core:<ul>
+<li>Namenode: The core metadata server of Hadoop. This is the most critical piece of the system, and there can only be one of these. This stores both the file system image and the file system journal. The namenode keeps all of the filesystem layout information (files, blocks, directories, permissions, etc) and the block locations. The filesystem layout is persisted on disk and the block locations are kept solely in memory. When a client opens a file, the namenode tells the client the locations of all the blocks in the file; the client then no longer needs to communicate with the namenode for data transfer.</li>
+<li>Datanode: This node stores copies of the blocks in HDFS. They communicate with the namenode to perform "housekeeping" such as creating new replicas, transferring blocks between datanodes, and deleting excess blocks. They also communicate with the clients to transfer data. To reach the best scalability, there should be as many datanodes as possible.</li>
+</ul>
+</li>
+<li>Grid extensions<ul>
+<li>BeStMan SRM: A generic SRM server that can be run on top of any POSIX-like filesystem. This is run in "gateway" mode, which limits the amount of the SRM protocol implemented. To date, this has been sufficient to LHC VOs.</li>
+<li>Globus GridFTP: The standard GridFTP from Globus. We use a plug-in module (using the Globus Direct Storage Interface) that allows the GridFTP process to use the HDFS C-bindings directly.</li>
+<li>Gratia probe: Gratia is an accounting system that records batch system and transfer records to a database. The records are collected by a client program called a "probe" which runs on the GridFTP server. It parses the GridFTP server's log files and creates transfer records.</li>
+<li>Xrootd server plugin: Xrootd is an extremely flexible and powerful data server popular in the high energy physics community. There exists a HDFS plugin for Xrootd; integrating with Xrootd provides a means to export HDFS securely outside the local cluster, as another Xrootd plugin provides GSI-based authentication and authorization.</li>
+</ul>
+</li>
+<li>HDFS auxiliary:<ul>
+<li>"Secondary Namenode": Perhaps more aptly called a "checkpoint server". This server downloads the file system image and journal from the namenode, merges the two together, and uploads the new file system image up to the namenode. This is done on a different server in order to reduce the memory footprint of the namenode.</li>
+<li>Hadoop Balancer: This is a script (unlike the others, which are daemons) that runs on the namenode. It requests transfers of random blocks between the datanodes. This works until all datanodes have approximately the same percentage of free space. Well-balanced datanodes are necessary for having a healthy cluster.</li>
+</ul>
+</li>
+</ul>
+<p>In addition to the server components, there are two client components:</p>
+<ul>
+<li>FUSE: This allows HDFS to be mounted as a filesystem on the worker nodes. FUSE is a Linux kernel module that allows kernel I/O calls to be translated into a call to a userspace program. In this case, a program called fuse_dfs translates the POSIX calls into HDFS C-binding calls.</li>
+<li>Hadoop Command Line Client: This command line client exposes a lot of the Unix-like calls without mounting FUSE, plus access to the non-POSIX calls (such as setting quotas and file replication levels). For example, "hadoop fs -ls /" is equivalent to "ls /mnt/hadoop" if /mnt/hadoop is the mount point of HDFS.</li>
+</ul>
+<hr />
+<ul>
+<li>Namenode: We recommend at least 8GB of RAM (minimum is 2GB RAM), preferably 16GB or more. A rough rule of thumb is 1GB per 100TB of raw disk space; the actual requirements is around 1GB per million objects (files, directories, and blocks). The CPU requirements are any modern multi-core server CPU. Typically, the namenode will only use 2-5% of your CPU.<ul>
+<li>As this is a single point of failure, the <strong>most important</strong> requirement is reliable hardware rather than high performance hardware. We suggest a node with redundant power supplies and at least 2 hard drives.</li>
+</ul>
+</li>
+<li>Secondary namenode: This node needs the same amount of RAM as the namenode for merging namespaces. It does not need to be high performance or high reliability.</li>
+<li>Datanode: Each datanode should plan to dedicate 200-500MB of RAM to HDFS. A general rule of thumb is to dedicate 1 CPU to HDFS per 5TB of disk capacity under heavily load; clusters with moderate load (i.e., mostly sequential workflows) will need less. At idle, HDFS will consume almost no CPU.</li>
+</ul>
+<h2 id="minimal-installation-0-50tb-wan-transfers-up-to-1gbps">Minimal Installation (0-50TB, WAN transfers up to 1Gbps)<a class="headerlink" href="#minimal-installation-0-50tb-wan-transfers-up-to-1gbps" title="Permanent link">&para;</a></h2>
+<p>The minimal installation would involve 5 nodes:</p>
+<p>1 hadoop-name: The namenode for the Hadoop system. Must be on private NAT. 1 hadoop-name2: This will run the HDFS secondary namenode. Must also be on private NAT. 1 hadoop-data1, hadoop-data2: Two HDFS datanodes. They will hold data for the system, so they should have sizable hard drives. These must be on the private NAT. As the Hadoop installation grows to many terabytes, this will be the only class of nodes one adds. 1 hadoop-grid: Runs the BeStMan SRM and Globus GridFTP server. Must have a public interface and a private interface.</p>
+<p>If desired, hadoop-name and hadoop-name2 may be virtualized. Prior to installation, DNS / host name resolution <strong>must</strong> work. That is, you should be able to resolve all the hadoop servers either through DNS or /etc/hosts. Because of the grid software, hadoop-grid <strong>must</strong> have reverse DNS working.</p>
+<h2 id="medium-installation-50-150tb-wan-transfers-up-to-2-gbps">Medium Installation (50-150TB, WAN transfers up to 2 Gbps)<a class="headerlink" href="#medium-installation-50-150tb-wan-transfers-up-to-2-gbps" title="Permanent link">&para;</a></h2>
+<p>For a medium install, make the following changes over the minimal install: 1 Run BeStMan on a separate machine, hadoop-srm. This host may be virtualized. 1 Run multiple GridFTP servers (2 should be fine); if possible, use 10 Gbps cards for these hosts. 1 Add many more HDFS datanodes. This usually means starting to add 1 or 2 TB hard drives to some worker nodes.</p>
+<h2 id="large-installation-150tb-wan-transfers-over-2-gbps">Large Installation (&gt;150TB, WAN transfers over 2 Gbps)<a class="headerlink" href="#large-installation-150tb-wan-transfers-over-2-gbps" title="Permanent link">&para;</a></h2>
+<p>For a large installation, make the following changes: 1 Run more GridFTP servers; plan for 800 Mbps per host with 1 Gbps card in order to have excess capacity. 1 Purchase machines suitable for HDFS datanodes. It is possible to get a 2U box with 8-12 hard drives; for many projects, this will provide a more suitable CPU to disk ratio than the 1U boxes with 2 hard drives.</p>
+<h2 id="hadoop-security">Hadoop Security<a class="headerlink" href="#hadoop-security" title="Permanent link">&para;</a></h2>
+<p>HDFS has unix-like user/group authorization, but no strict authentication. HDFS should only be exposed to a secure internal network which only non-malicious users are able to access. For users with access to the local cluster, it is not difficult at all to bypass authentication.</p>
+<p><a href="http://www.cloudera.com/blog/2009/08/14/hadoop-default-ports-quick-reference/">The default ports are listed here</a>.</p>
+<p>There are some ways to improve security of your cluster:</p>
+<ul>
+<li>Keep the namenode behind a firewall. One possibility is to run hadoop entirely on the private subnet of a cluster.</li>
+<li>Use firewalls to protect the HDFS ports (default for the datanode is 50010 and 50075; for the namenode, 50070 and 9000).</li>
+<li>For clusters utilizing FUSE, one can block outgoing connections to the HDFS ports except for user root. This means that only root-owned processes (such as FUSE-DFS) will be able to access Hadoop.<ul>
+<li>This is sufficient for grid environments, but does not protect one in the case where the attacker has physical access to the network switch.</li>
+</ul>
+</li>
+<li>There exists another option, currently untested. It is possible to limit all HDFS socket connections to SSL-based sockets. Using this to only allow known hosts to connect to HDFS and only allowing FUSE-DFS to connect on those known hosts, one might be able to satisfy even fairly stringent security folks (but not paranoid ones).</li>
+</ul>
+<p>There are three options to export your data outside your cluster:</p>
+<ul>
+<li>Globus GridFTP / SRM. This is covered in these web pages.</li>
+<li>Xrootd. Documentation is nascent.</li>
+<li>Apache HTTP (authenticated via HTTPS). This is in use at Caltech, but there isn't any documentation available.</li>
+</ul>
               
             </div>
           </div>
@@ -823,10 +828,10 @@ For a full set of help options, see <a href="../../common/help">Help Procedure</
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../hadoop-overview/" class="btn btn-neutral float-right" title="Hadoop Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../install-hadoop-2-0-0/" class="btn btn-neutral float-right" title="Hadoop">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../xrootd-overview/" class="btn btn-neutral" title="XRootD Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../install-xroot-client/" class="btn btn-neutral" title="XRootD Client"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -854,10 +859,10 @@ For a full set of help options, see <a href="../../common/help">Help Procedure</
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../xrootd-overview/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../install-xroot-client/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../hadoop-overview/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../install-hadoop-2-0-0/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
