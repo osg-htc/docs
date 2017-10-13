@@ -35,7 +35,7 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Ensure the RSV host has [a supported operating system](../common/yum.md)
 - Obtain root access to the host
 - Prepare [the required Yum repositories](../common/yum.md)
-- Install [CA certificates](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth)
+- Install [CA certificates](../common/ca)
 
 Installing RSV
 --------------
@@ -45,27 +45,27 @@ An installation of RSV at a site consists of the RSV client software, the Apache
 1. Consider updating your local cache of Yum repository data and your existing RPM packages:
 
         :::console
-        [root@client ~] # yum clean all --enablerepo=\*
-        [root@client ~] # yum update
+        root@host # yum clean all --enablerepo=\*
+        root@host # yum update
 
     !!! note
         The `update` command will update **all** packages on your system.
 
 2. If you have installed HTCondor already but not by RPM, install a special empty RPM to make RSV happy:
 
-        :::console   
-        [root@client ~] # yum install empty-condor --enablerepo=osg-empty
+        :::console
+        root@host # yum install empty-condor --enablerepo=osg-empty
 
-3. Install RSV and related software: 
+3. Install RSV and related software:
 
         :::console
-        [root@client ~] # yum install rsv  
-   
+        root@host # yum install rsv
+
 Configuring RSV
 ---------------
- 
+
 After installation, there are some one-time configuration steps to tell RSV how to operate at your site.
- 
+
 1. Edit `/etc/osg/config.d/30-rsv.ini` and follow the instructions in the file. There are detailed comments for each setting. In the simplest case — to monitor only your CE — set the `htcondor_ce_hosts` variable to the fully qualified hostname of your CE.
 
 2. If you have installed HTCondor already but not by RPM, specify the location of the Condor installation in `30-rsv.ini` in the `condor_location` setting. If an HTCondor RPM is installed, you do not need to set `condor_location`.
@@ -73,14 +73,14 @@ After installation, there are some one-time configuration steps to tell RSV how 
 3. Complete the configuration using the `osg-configure` tool:
 
         :::console
-        [root@client ~] # osg-configure -v
-        [root@client ~] # osg-configure -c
+        root@host # osg-configure -v
+        root@host # osg-configure -c
 
 ### Optional configuration
 
 The following configuration steps are optional and will likely not be required for setting up a small or typical site. If you do not need any of the following special configurations, skip to [the section on using RSV](#using-rsv).
 
-Generally speaking, read the [ConfigureRsv](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/ConfigureRsv) page for more advanced configuration options.
+Generally speaking, read the [ConfigureRsv](advanced-rsv-configuration) page for more advanced configuration options.
 
 #### Configuring RSV to run probes using a remote server
 
@@ -98,33 +98,33 @@ If you would like your local RSV web server to use HTTPS instead of the default 
 1. Install `mod_ssl`:
 
         :::console
-        [root@client ~] # yum install mod_ssl
+        root@host # yum install mod_ssl
 
 2. Make an alternate set of HTTP service certificate files:
 
         :::console
-        [root@client ~] # cp -p /etc/grid-security/http/httpcert.pem /etc/grid-security/http/httpcert2.pem
-        [root@client ~] # cp -p /etc/grid-security/http/httpkey.pem /etc/grid-security/http/httpkey2.pem
-        [root@client ~] # chown apache:apache /etc/grid-security/http/http*2.pem
+        root@host # cp -p /etc/grid-security/http/httpcert.pem /etc/grid-security/http/httpcert2.pem
+        root@host # cp -p /etc/grid-security/http/httpkey.pem /etc/grid-security/http/httpkey2.pem
+        root@host # chown apache:apache /etc/grid-security/http/http*2.pem
 
 3. Back up existing Apache configuration files:
 
         :::console
-        [root@client ~] # cp -p /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.orig
-        [root@client ~] # cp -p /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.orig
+        root@host # cp -p /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.orig
+        root@host # cp -p /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.orig
 
 4. Change the default port for HTTP connections to 8000 by editing `/etc/httpd/conf/httpd.conf`
 
         :::file
         Listen 8000
-        
+
 
 5. Set up HTTPS access by editing `/etc/httpd/conf.d/ssl.conf`:
 
         :::file
         Listen 8443
         <VirtualHost _default_:8443>
-        SSLCertificateFile /etc/grid-security/http/httpcert2.pem	
+        SSLCertificateFile /etc/grid-security/http/httpcert2.pem
         SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 
     After these changes, when you start the Apache service, it will listening on ports `8000` (for HTTP) and `8443` (for HTTPS), rather than the default port `80` (for HTTP only).
@@ -142,7 +142,7 @@ In addition to the RSV service itself, there are a number of supporting services
 
 | Software      | Service name                                   | Notes                   |
 |:--------------|:-----------------------------------------------|------------------------ |
-| Fetch CRL     | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth#Start_Stop_fetch_crl_A_quick_gui)|
+| Fetch CRL     | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca/#startstop-fetch-crl-a-quick-guide)|
 | Apache        | httpd                                          |                         |
 | HTCondor-Cron | condor-cron                                    |                         |
 | RSV           | rsv                                            |                         |
@@ -162,17 +162,17 @@ Start the services in the order listed and stop them in reverse order. As a remi
 Normally, the HTCondor-Cron scheduler runs RSV periodically. However, you can run RSV probes manually at any time:
 
 ``` console
-[root@client ~] # rsv-control --run --all-enabled
+root@host # rsv-control --run --all-enabled
 ```
 
-If successful, results will be available from your local RSV web server (e.g., <http://localhost/rsv>) and, if enabled (which is the default) on [MyOSG](http://myosg.grid.iu.edu/).
+If successful, results will be available from your local RSV web server (e.g., `http://localhost/rsv`) and, if enabled (which is the default) on [MyOSG](http://myosg.grid.iu.edu/).
 
-You can also run the metrics individually or pass special parameters as explained in the [rsv-control document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvControl).
+You can also run the metrics individually or pass special parameters as explained in the [rsv-control document](rsv-control).
 
 Troubleshooting RSV
 -------------------
 
-You can find more information on troubleshooting RSV in the [rsv-control documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvControl) and in [TroubleshootRSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv).
+You can find more information on troubleshooting RSV in the [rsv-control documentation](rsv-control).
 
 ### Important file locations
 
@@ -182,7 +182,7 @@ Logs and configuration:
 |:-------------------|:-------------------------|:------------------------------------------------|
 | Metric log files   | `/var/log/rsv/metrics`   |                                                 |
 | Consumer log files | `/var/log/rsv/consumers` |                                                 |
-| HTML files         | `/usr/share/rsv/www/`    | Available at <http://your.host.example.com/rsv> |
+| HTML files         | `/usr/share/rsv/www/`    | Available at `http://your.host.example.com/rsv` |
 
 | File Description      | Location                                    | Comment                                                                                       |
 |:----------------------|:--------------------------------------------|:----------------------------------------------------------------------------------------------|
@@ -201,13 +201,13 @@ The first step to getting more information is to run rsv-control with more verbo
 - 2 = adds informational messages
 - 3 = full debugging output
 
-For example, here is the output when running a metric with -v2. 
+For example, here is the output when running a metric with -v2.
 
-<details> 
+<details>
   <summary>Show detailed ouput</summary>
    <p>
 ```console
-   [root@fermicloud016 condor]# rsv-control -r org.osg.general.osg-version -v 2 -u osg-edu.cs.wisc.edu 
+   [root@fermicloud016 condor]# rsv-control -r org.osg.general.osg-version -v 2 -u osg-edu.cs.wisc.edu
    INFO: Reading configuration file /etc/rsv/rsv.conf
    INFO: Reading configuration file /etc/rsv/consumers.conf
    INFO: Validating configuration:
@@ -263,10 +263,10 @@ EOT
 Getting Help
 ------------
 
-To get assistance, please use [this page](../common/help.md).
+To get assistance, please use [this page](../common/help.md) and attach the output of `rsv-control --profile`:
 
 ```console
-[root@client ~] # rsv-control --profile
+root@host # rsv-control --profile
 Running the rsv-profiler...
 OSG-RSV Profiler
 Analyzing...
@@ -278,7 +278,7 @@ Reference
 
 Here are some other RSV documents that might be helpful:
 
-- A longer [introduction to RSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvOverview)
+- A longer [introduction to RSV](rsv-overview)
 -  [The RSV architecture](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvArchitecture)
 -  [RSV storage probes](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RSVStorageProbes)
 
@@ -298,7 +298,7 @@ The RSV installation will create two users unless they are already created. The 
 !!! warning
 
     If you manage your `/etc/passwd` file with configuration management software such as Puppet, CFEngine or 411, make sure the UID and GID in `/etc/condor-cron/config.d/condor_ids` matches the UID and GID of the `cndrcron` user and group in `/etc/passwd`. If it does not, create a file named `/etc/condor-cron/config.d/condor_ids_override` with the contents:
-   
+
 
 ```file
 CONDOR_IDS=UID.GID
@@ -323,7 +323,7 @@ See [instructions](../common/pki-cli.md) to request a service certificate.
 
 | Service Name  | Protocol    |Port Number | Inbound | Outbound | Comment |
 |:--------------|:------------|:-----------|:--------|:---------|:--------|
-| HTTP          | tcp         | 80         |   YES   |          | RSV runs an HTTP server (Apache) that publishes a page with the RSV testing results | 
+| HTTP          | tcp         | 80         |   YES   |          | RSV runs an HTTP server (Apache) that publishes a page with the RSV testing results |
 | HTTP          | tcp         | 80         |         | YES      | RSV pushes testing results to the OSG Gratia Collectors at opensciencegrid.org  |
 | various       | various     | various    |  	     | YES      | Allow outbound network connection to all services that you want to test        |
 

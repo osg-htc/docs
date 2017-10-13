@@ -15,8 +15,8 @@ Before Starting
 
 Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
--   **User IDs:** If they do not exist already, the installation will create the `cvmfs` Linux user
--   **Group IDs:** If they do not exist already, the installation will create the Linux users `cvmfs` and `fuse`
+-   **User IDs:** If it does not exist already, the installation will create the `cvmfs` Linux user
+-   **Group IDs:** If they do not exist already, the installation will create the Linux groups `cvmfs` and `fuse`
 -   **Network ports:** You will need network access to a local squid server such as the [squid distributed by OSG](../data/frontier-squid.md). The squid will need out-bound access to cvmfs stratum 1 servers.
 -   **Host choice:** -  Sufficient (~20GB+20%) cache space reserved, preferably in a separate filesystem (details [below](#configuring-cvmfs))
 -   **FUSE**: CVMFS requires FUSE
@@ -34,18 +34,18 @@ The following will install CVMFS from the OSG yum repository. It will also insta
 1. Clean yum cache:
 
         ::console
-        [root@client ~ ] $ yum clean all --enablerepo=*
+        root@host # yum clean all --enablerepo=*
 
 2. Update software:
 
         :::console
-        [root@client ~ ] $ yum update
+        root@host # yum update
     This command will update **all** packages
 
 3. Install CVMFS software:
 
         :::console
-        [root@client ~] $ yum install osg-oasis
+        root@host # yum install osg-oasis
 
 ## Setup of FUSE and automount
 
@@ -67,7 +67,7 @@ FUSE and automount are required for CVMFS and the steps to configure them are di
 3. Restart autofs to make the change take effect:
 
         :::console
-        [root@client ~] $ service autofs restart
+        root@host # service autofs restart
 
 ### For EL7 hosts
 
@@ -78,7 +78,7 @@ FUSE and automount are required for CVMFS and the steps to configure them are di
 2. Restart autofs to make the change take effect:
 
         :::console
-        [root@client ~] $ systemctl restart autofs
+        root@host # systemctl restart autofs
 <br>
 
 
@@ -106,7 +106,7 @@ set of always-known repositories.
 
 Set up a list of CVMFS HTTP proxies to retrieve from in
 `CVMFS_HTTP_PROXY`. If you do not have any squid at your site follow
-the instructions to [install squid from OSG](InstallFrontierSquid).
+the instructions to [install squid from OSG](../data/frontier-squid).
 Vertical bars separating proxies means to load balance between them
 and try them all before continuing. A semicolon between proxies means
 to try that one only after the previous ones have failed. A special
@@ -136,7 +136,7 @@ it.
     `cvmfs_cache_t`. This can be done by executing the following command:
 
         :::console
-        [user@client ~] $ chcon -R -t cvmfs_cache_t %RED%$CVMFS_CACHE_BASE%ENDCOLOR%
+        user@host $ chcon -R -t cvmfs_cache_t %RED%$CVMFS_CACHE_BASE%ENDCOLOR%
 
 ## Validating CVMFS
 
@@ -144,29 +144,29 @@ After CVMFS is installed, you should be able to see the `/cvmfs`
 directory. But note that it will initially appear to be empty:
 
 ```console
-[user@client ~] $ ls /cvmfs
-[user@client ~] $
+user@host $ ls /cvmfs
+user@host $
 ```
 <br>
 Directories within `/cvmfs` will not be mounted until you examine them. For instance:
 
 ```console
-[user@client ~] $ ls /cvmfs
-[user@client ~] $ ls -l /cvmfs/atlas.cern.ch
+user@host $ ls /cvmfs
+user@host $ ls -l /cvmfs/atlas.cern.ch
 total 1
 drwxr-xr-x 8 cvmfs cvmfs 3 Apr 13 14:50 repo
-[user@client ~] $ ls -l /cvmfs/oasis.opensciencegrid.org/cmssoft
+user@host $ ls -l /cvmfs/oasis.opensciencegrid.org/cmssoft
 total 1
 lrwxrwxrwx 1 cvmfs cvmfs 18 May 13  2015 cms -> /cvmfs/cms.cern.ch
-[user@client ~] $ ls -l /cvmfs/glast.egi.eu
+user@host $ ls -l /cvmfs/glast.egi.eu
 total 5
 drwxr-xr-x 9 cvmfs cvmfs 4096 Feb  7  2014 glast
-[user@client ~] $ ls -l /cvmfs/nova.osgstorage.org
+user@host $ ls -l /cvmfs/nova.osgstorage.org
 total 6
 lrwxrwxrwx 1 cvmfs cvmfs   43 Jun 14  2016 analysis -> pnfs/fnal.gov/usr/nova/persistent/analysis/
 lrwxrwxrwx 1 cvmfs cvmfs   32 Jan 19 11:40 flux -> pnfs/fnal.gov/usr/nova/data/flux
 drwxr-xr-x 3 cvmfs cvmfs 4096 Jan 19 11:39 pnfs
-[user@client ~] $ ls /cvmfs
+user@host $ ls /cvmfs
 atlas.cern.ch                   glast.egi.eu         oasis.opensciencegrid.org
 config-osg.opensciencegrid.org  nova.osgstorage.org
 ```
@@ -204,7 +204,7 @@ the repositories are accessed; there are no system services to start.
 CVMFS can be stopped via:
 
 ```console
-[root@client ~] $ cvmfs_config umount
+root@host # cvmfs_config umount
 Unmounting /cvmfs/config-osg.opensciencegrid.org: OK
 Unmounting /cvmfs/atlas.cern.ch: OK
 Unmounting /cvmfs/oasis.opensciencegrid.org: OK

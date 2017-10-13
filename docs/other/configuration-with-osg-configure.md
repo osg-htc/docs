@@ -498,9 +498,8 @@ Storage
 This section gives information about the options in the Storage section of the configuration file.
 Several of these values are constrained and need to be set in a way that is consistent with one of the OSG storage models.
 Please review the Storage Related Parameters section of the
-[Environment Variables](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/EnvironmentVariables)
-description and [Site Planning](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SitePlanning)
-discussions for explanations of the various storage models and the requirements for them.
+[Environment Variables](../worker-node/using-wn.md)
+description and [Site Planning](../site-planning) discussions for explanations of the various storage models and the requirements for them.
 
 This section is contained in `/etc/osg/config.d/10-storage.ini` which is provided by the `osg-configure-ce` RPM.
 

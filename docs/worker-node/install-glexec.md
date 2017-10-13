@@ -69,12 +69,12 @@ Install Instructions
     The glexec tracking function requires a part of HTCondor. There are multiple ways to install HTCondor, for details see [these instructions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CondorInformation). If you want a minimal install, you can run just this command to install the needed piece from the OSG distribution:
 
         :::console
-        [root@client ~] # yum install condor-procd
+        root@host # yum install condor-procd
 
 After meeting all the requirements in the previous section, install glexec with this command:
 
 ```console
-[root@client ~] # yum install osg-wn-client-glexec
+root@host # yum install osg-wn-client-glexec
 ```
 
 Configuring glexec
@@ -115,11 +115,11 @@ Testing the Installation of glexec
 Now, _as a non-privileged user (not root)_, do the following (where <YOURVO> is your VO, and <UID> is your uid as reported by `/usr/bin/id`):
 
 ```console
-[user@client ~] $ voms-proxy-init -voms <YOURVO>:/<YOURVO>
-[user@client ~] $ export GLEXEC_CLIENT_CERT=/tmp/x509up_u<UID>
-[user@client ~] $ export X509_USER_PROXY=/tmp/x509up_u<UID>
-[user@client ~] $ /usr/sbin/glexec /usr/bin/id
-[user@client ~] $ uid=13160(fnalgrid) gid=9767(fnalgrid) groups=65000(glexec00)
+user@host $ voms-proxy-init -voms <YOURVO>:/<YOURVO>
+user@host $ export GLEXEC_CLIENT_CERT=/tmp/x509up_u<UID>
+user@host $ export X509_USER_PROXY=/tmp/x509up_u<UID>
+user@host $ /usr/sbin/glexec /usr/bin/id
+user@host $ uid=13160(fnalgrid) gid=9767(fnalgrid) groups=65000(glexec00)
 ```
 
 If `glexec` is successful, it will print out the uid and gid that your proxy would normally be mapped to by your GUMS server, plus a supplementary tracking group. (The actual names and numbers will be different from what you see above.)
@@ -194,5 +194,5 @@ log { source(s_sys); filter(f_filter1); filter(f_notglexec); destination(d_mesg)
 How to get Help?
 ----------------
 
-To get assistance please use the [Help Procedure](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HelpProcedure).
+To get assistance please use the [Help Procedure](../common/help).
 

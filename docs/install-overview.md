@@ -6,7 +6,7 @@ This document outlines the overall installation process for an OSG site and prov
 Plan the Site
 -------------
 
-If you have not done so already, [plan the overall architecture of your OSG site](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SitePlanning). It is recommended that your plan be sufficiently detailed to include the OSG hosts that are needed and the main software components for each host. Be sure to consider [the operating systems that OSG supports](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SupportedOperatingSystems). A simple way to organize this information is in a table; for example, a basic site might include:
+If you have not done so already, [plan the overall architecture of your OSG site](site-planning). It is recommended that your plan be sufficiently detailed to include the OSG hosts that are needed and the main software components for each host. Be sure to consider [the operating systems that OSG supports](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SupportedOperatingSystems). A simple way to organize this information is in a table; for example, a basic site might include:
 
 | Purpose              | Host                                | Major Software                                           |
 |:---------------------|:------------------------------------|:---------------------------------------------------------|
@@ -31,20 +31,19 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 ### General Installation Instructions ###
 
 
--   [Security information for OSG signed RPMs](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SignedRPMS)
--   [Using Yum and RPM](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRpmBasics)
--   [Install the OSG repositories](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRepositories)
--   [OSG Software release series](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OSGReleaseSeries) - look here to upgrade from OSG 3.1 to OSG 3.2 or from OSG 3.2 to OSG 3.3
--   [Installation best practices](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices)
--   [Firewalls the complete guide](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/FirewallInformation)
+-   [Security information for OSG signed RPMs](release/signing)
+-   [Using Yum and RPM](release/yum-basics)
+-   [Install the OSG repositories](common/yum)
+-   [OSG Software release series](release/release_series) - look here to upgrade from OSG 3.1 to OSG 3.2 or from OSG 3.2 to OSG 3.3
+-   [Installation best practices](common/install-best-practices)
 
 ### Installing and Managing Certificates for Site Security ###
 
--   [Installing the grid certificate authorities (CAs)](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertAuth)
--   [How do I get PKI host and service X.509 certificates?](https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/GetHostServiceCertificates)
--   [Automatically updating the grid certificate authorities (CAs)](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaCertsUpdater)
+-   [Installing the grid certificate authorities (CAs)](common/ca)
+-   [How do I get PKI host and service X.509 certificates?](security/host-certs)
+-   [Automatically updating the grid certificate authorities (CAs)](common/osg-ca-certs-updater)
 -   [SHA-2 certificates and minimum required OSG software versions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SHA2Compliance)
--   [OSG PKI command line client reference](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OSGPKICommandlineClients)
+-   [OSG PKI command line client reference](common/pki-cli)
 
 ### Adding OSG Software to Worker Nodes ###
 
@@ -62,9 +61,9 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 -   Install the compute element (HTCondor-CE and other software):
     -   [Overview and architecture](compute-element/htcondor-ce-overview)
     -   [Install HTCondor-CE](compute-element/install-htcondor-ce)
-    -   [Configure the HTCondor-CE job router](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/JobRouterRecipes), including common recipes
-    -   [Troubleshooting HTCondor-CE installations](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE)
-    -   [Submitting jobs to HTCondor-CE](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SubmittingHTCondorCE)
+    -   [Configure the HTCondor-CE job router](compute-element/job-router-recipes), including common recipes
+    -   [Troubleshooting HTCondor-CE installations](compute-element/troubleshoot-htcondor-ce)
+    -   [Submitting jobs to HTCondor-CE](compute-element/submit-htcondor-ce)
 -   [Troubleshooting osg-configure](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingOsgConfigure)
 
 ### Installing and Configuring Other Nodes ###
@@ -73,34 +72,32 @@ All of these node types and their services are optional, although OSG requires t
 
 -   [Install Frontier Squid, the HTTP caching proxy service](data/frontier-squid)
 -   RSV monitoring to monitor and report to OSG on the health of your site
-    -   [RSV Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvOverview)
-    -   [Install RSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallRSV)
+    -   [RSV Overview](monitoring/rsv-overview)
+    -   [Install RSV](monitoring/install-rsv)
     -   [Troubleshooting RSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv)
--   [Install the GlideinWMS VO Frontend](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallGlideinWMSFrontend) if your want your users’ jobs to run on the OSG
-    -   [Install the RSV GlideinWMS Tester](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallRsvGlideinwmsTester) if you want to test your front-end's ability to submit jobs to sites in the OSG
+-   [Install the GlideinWMS VO Frontend](other/install-gwms-frontend) if your want your users’ jobs to run on the OSG
+    -   [Install the RSV GlideinWMS Tester](monitoring/install-rsv-gwms-tester) if you want to test your front-end's ability to submit jobs to sites in the OSG
 -   Storage element (pick one):
     -   GridFTP
-        -   [Install standalone OSG GridFTP](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallOSGGridFTP): GridFTP server
-        -   (optional) [Install load-balanced OSG GridFTP](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/LoadBalancedGridFTP): when a single GridFTP server isn't enough
+        -   [Install standalone OSG GridFTP](data/gridftp): GridFTP server
+        -   (optional) [Install load-balanced OSG GridFTP](data/load-balanced-gridftp): when a single GridFTP server isn't enough
     -   BeStMan
-        -   [BeStMan Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/BestmanOverview): Bestman-related information, planning, and guides
-        -   [Install Bestman SE](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallOSGBestmanSE): BeStMan2 SRM server + GridFTP server
+        -   [BeStMan Overview](data/bestman-overview): Bestman-related information, planning, and guides
+        -   [Install Bestman SE](data/bestman-install): BeStMan2 SRM server + GridFTP server
         -   [Install Bestman Gateway Hadoop](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoop200SE): BeStMan2 SRM server + GridFTP server + Hadoop
     -   Hadoop Distributed File System (HDFS)
         -   [Hadoop Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HadoopOverview): HDFS information, planning, and guides
     -   XRootD
-        -   [XRootd Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/XrootdOverview): XRootD information, planning, and guides
+        -   [XRootd Overview](data/xrootd-overview): XRootD information, planning, and guides
         -   [Install Xrootd Server](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd): XRootD redirector installation
-        -   [Install BeStMan-Gateway XRootD](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestmanXrootdSE): BeStMan2 SRM server + GridFTP server + XRootD fuse
+        -   [Install BeStMan-Gateway XRootD](data/install-bestman-xrootd): BeStMan2 SRM server + GridFTP server + XRootD fuse
 
 Test OSG Software
 -----------------
 
 At very least, it is vital to test *manual* submission of jobs from inside and outside of your site through your CE to your batch system. If this process does not work manually, it will probably not work for the glideinWMS pilot factory either.
 
--   [Test job submission into an HTCondor-CE](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SubmittingHTCondorCE)
--   [OSG Troubleshooting guide](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingGuide)
--   [Validating Supported VOs](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/ValidateSupportedVos)
+-   [Test job submission into an HTCondor-CE](compute-element/submit-htcondor-ce)
 
 Start GlideinWMS Pilot Submissions
 ----------------------------------

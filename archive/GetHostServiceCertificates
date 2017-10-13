@@ -1,0 +1,498 @@
+%DOC_STATUS_TABLE%
+
+---+!! How to Get Host and Service Certificates
+%TOC%
+
+%STARTINCLUDE%
+%EDITTHIS%
+
+
+---+ About this Document
+
+<!-- some useful definitions
+   * Local UCL_HOST = host
+   * Local UCL_USER = user
+   * Local UCL_CWD  = /
+-->
+
+%ICON{hand}% This document is for system administrators. After reading this document you should be able to apply for and install a grid certificate on a grid resource. This document does not explain how to apply for a grid user certificate. To apply for a grid user certificate click [[CertificateUserGet][here]] instead!
+
+---+ Requirements
+
+Before requesting a %RED%new%ENDCOLOR% host or service certificate, you should check if a certificate is not installed already using *openssl*. In this case you may safely skip this document:
+
+<pre class="screen">
+[%UCL_USER%@%UCL_HOST% ~]$ openssl x509 -in %RED%/etc/grid-security/hostcert.pem%ENDCOLOR% -subject -issuer -dates -noout
+subject= /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=%UCL_HOST_FQDN%
+issuer=/DC=org/DC=cilogon/C=US/O=CILogon/CN=CILogon OSG CA 1
+notBefore=Jan  4 21:08:09 2010 GMT
+notAfter=Jan  4 21:08:09 2011 GMT
+</pre>
+
+The OSG PKI Command Line Clients are tested to work on Python version 2.4+. They have not been tested on Python version 3. 
+
+We recommend to read background information on grid certificates which can be found [[Documentation.CertificateWhatIs][here]]. In order to proceed you will also need:
+
+   * the *fully qualified domain name* of the host you need a grid certificate for
+   * the *purpose* of the certificate that explains your request to the Certificate Authority
+   * the full *name of the administrator* responsible for the host
+   * the *e-mail address of the administrator*
+   * the *telephone number of the administrator*
+   * the name of the *Certificate Authority* your project is affiliated with
+   * the name of the *Virtual Organization* affiliated with the Certificate Authority
+
+
+---+ Installation
+
+%INCLUDE{"Documentation/Release3.YumRepositories" section="OSGRepoBrief" TOC_SHIFT="+"}%
+
+%INCLUDE{"Documentation/Release3.InstallCertAuth" section="OSGBriefCaCerts" TOC_SHIFT="+"}%
+
+---++ Install the OSG PKI Command Line Clients
+<pre class="screen">
+%UCL_PROMPT_ROOT% yum install osg-pki-tools
+</pre>
+---+++ Configuration file  pki-clients.ini 
+
+This configuration is correctly set by default and you will not need to change them. The information is provided in case you need it for debugging purposes.
+
+The client checks for pki-clients.ini file at three location in order:
+   * $HOME/.osg-pki/OSG_PKI.ini
+   * ./pki-clients.ini
+   * /etc/osg/pki-clients.ini (default location)
+
+The INI file contains the following information:
+   * Request URL
+   * Approve URL
+   * Retrieve URL
+   * Host URL
+
+---+ Validate authentication
+
+Make sure you can create a valid grid proxy.  To do so, please follow instructions: 
+
+   1. Double-check your configuration to make sure that you are allowed (specifically, your credentials are allowed) to access your CE. You can be either member of a VO allowed to run at the site or you can add your personal certificate locally. This will either be in your GUMS server or in your =edg-mkgridmap= configuration. 
+   1. Create a proxy with =voms-proxy-init= or =grid-proxy-init=. For example: <pre class="screen">
+%UCL_PROMPT% voms-proxy-init -voms %RED%GLOW%ENDCOLOR%
+Enter GRID pass phrase for this identity:
+Your identity: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services=People/CN=Alain Roy 424511
+Creating temporary proxy ................................................................................. Done
+Contacting  glow-voms.cs.wisc.edu:15001 [/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=glow-voms.cs.wisc.edu] "GLOW" Done
+Creating proxy ..................................................................... Done
+
+Your proxy is valid until Fri Dec  2 01:32:47 2011
+</pre>You'll substitute your own VO, of course.
+
+---+ Request a Host Certificate
+
+Every resource or service contributing to the grid needs a certificate issued by one of the trusted *Certificate Authorities*. To proceed you will need following information at hand:
+
+   * the *fully qualified domain* name of the host you need a grid certificate for
+   * the *purpose* of the certificate that explains your request to the Certificate Authority
+   * the full *name of the administrator* responsible for the host
+   * the *e-mail address of the administrator*
+   * the *telephone number of the administrator*
+   * the name of the *Certificate Authority* your project is affiliated with
+   * the name of the *Virtual Organization* affiliated with the Certificate Authority
+
+---++ Send the request
+
+This command line client generates a private key and submits a request for a certificate to the OSG PKI. The request will be approved by an appropriate Grid Admin. You will receive an email when this approval has been completed containing directions on how to run 'osg-cert-retreive' to retrieve the certificate. It works in two modes:
+   * CSR is provided by the user: Here the csr provided is just trimmed for begin and end certificate lines and the request is sent to the OIM
+   * CSR is not provided by the user: Here the script generates a private key for the user. Writes it to default key file name or the one specified by -o. Then generates a new csr and sends it to OIM.
+
+The second mode will commonly be used by most OSG site admins 
+
+Use *osg-cert-request* to generate a request which will be sent to the Certificate Authority you specified. Change "%RED%%UCL_HOST_FQDN%%ENDCOLOR%" to be the host name for the computer for which you need a certificate and provide your contact details for the grid admin to approve your request.
+
+<pre class="screen">
+%UCL_PROMPT% osg-cert-request -H %RED%%UCL_HOST_FQDN%%ENDCOLOR% -e %RED%emailaddress@domain.com%ENDCOLOR% -n %RED%"Your Name"%ENDCOLOR% -p %RED%9999999999 (Ph No)%ENDCOLOR% -v %RED%"Your VO"%ENDCOLOR% -y %RED%"xyz@domain.com,abc@domain.com" (CC list)%ENDCOLOR% -m %RED%"This is my comment"%ENDCOLOR% -o %RED%hostkey.pem%ENDCOLOR%
+</pre>
+
+Example:
+<pre class="screen">
+%UCL_PROMPT% osg-cert-request -H sectest.cigi.illinois.edu -e apadmana@domain.edu -n "Anand" -p 9999999999 -m "Testing for developing security documentation" -o hostkey.pem
+
+Writing key to hostkey.pem
+
+Connecting to server...
+Succesfully submitted
+Request Id#: 570
+</pre>
+
+At this point *osg-cert-request* has created some files in the directory you specified and an e-mail has been sent to the Certificate Authority containing your request. The files will be needed again once you receive a reply from the Certificate Authority asking you to retrieve the certificate. Please note down the Request Id. You will need it for retrieving the signed certificate. 
+
+%TWISTY{%TWISTY_OPTS_OUTPUT%}%
+---+++ Detailed description of the osg-cert-request usage
+This script:
+   * Generates a new host private key and CSR
+   * Only important part of CSR is CN=<hostname> component
+   * Saves the host private key to disk (as specified by the user)
+   * Authenticates to OIM and posts the CSR as a request to OIM
+   * Returns the request ID to the user
+   * If the user provides the CSR, then this script would just send the same CSR to OIM
+
+*Inputs:*
+   * fully-qualified hostname
+   * filename to store private key [Optional, default is ./hostkey.pem]
+   * path to user's certificate [Optional, default is path specified by
+    $X509_USER_CERT environment variable, ~/.globus/usercert.pem]
+   * path to user's private key [Optional, default is path specified by
+    $X509_USER_KEY environment variable, ~/.globus/userkey.pem]
+   * Passphrase for user's private key via non-echoing prompt.
+   * User needs to provide VO name if the requested hostname has
+    multiple VO's assigned
+
+*Outputs:*
+   * Private key, to filename specified by '-o' or ./hostkey.pem by default
+   * Request Id, to stdout
+
+*Usage*: osg-cert-request [options]
+<verbatim>
+*Options*:
+
+  -h, --help            show this help message and exit
+  -c CSR, --csr=CSR     Specify CSR name (default = gennew.csr)
+  -o Output Keyfile, --outkeyfile=Output Keyfile
+                        Specify the output filename for the retrieved user
+                        certificate.  Default is ./hostkey.pem
+  -y CC List, --cc=CC List
+                        Specify the CC list(the email id's to be CCed). Separate values by ','
+  -m Comment, --comment=Comment
+                        The comment to be added to the request
+  -H CN, --hostname=CN  Specify hostname for CSR (FQDN)
+  -e EMAIL, --email=EMAIL
+                        Email address to receive certificate
+  -n NAME, --name=NAME  Name of user receiving certificate
+  -p PHONE, --phone=PHONE
+                        Phone number of user receiving certificate
+  -v VO, --vo=VO
+                        VO name of requested hostname
+  -T, --test            Run in test mode
+  -q, --quiet           don't print status messages to stdout
+  -V, --version         Print the script version number and exit. 
+
+</verbatim>
+
+%ENDTWISTY%
+
+---++ Retrieve and Install the Host Certificate
+
+Once the certificate has been approved by the Certificate Authority you will receive an e-mail for the GOC. Then to retrieve the host certificate we will execute *osg-cert-retrieve*: and use the %RED%request ID%ENDCOLOR% we recorded earlier. Since certificates are public, no authentication of the user is required to retrieve them.
+
+<pre class="screen">
+%UCL_PROMPT%  osg-cert-retrieve %RED%570%ENDCOLOR% -o %RED%hostcert.pem%ENDCOLOR%
+Using timeout of 5 minutes
+Running in test mode
+Connecting server to retrieve certificate...
+Certificate written to hostcert.pem
+</pre>
+
+%TWISTY{%TWISTY_OPTS_OUTPUT%}%
+---+++ Detailed description of the osg-cert-retrive usage
+
+This osg-cert-retrive script:
+   * Accepts a request Id from the user
+   * Connects to OIM and requests the certificate identified by the request ID
+   * Writes the certificate to disk (as specified by the user)
+
+*Inputs:*
+   * Request ID
+   * Filename to store certificate [Optional, default is ./hostcert.pem]
+
+*Outputs:*
+   * Host certificate as PEM, to filename specified or ./hostcert.pem
+
+*Usage*:osg-cert-retrieve -h/--help [for detailed explanations of options]
+
+<verbatim>
+Options:
+  -h, --help            show this help message and exit
+  -i ID, --id=ID        Specify ID# of certificate to retrieve[Required]
+  -o ID, --certfile=ID  Specify the output filename for the retrieved user
+                        certificate . Default is ./hostcert.pem
+  -T, --test            Run in test mode
+  -q, --quiet           don't print status messages to stdout
+  -V, --version         Print the script version number and exit. 
+</verbatim>
+
+%ENDTWISTY%
+The certificate consists of two files (default hostcert.pem and hostkey.pem) which have been placed into the current directory. Note, If you did not use the =--o= option the filenames will be what you provided.
+
+%ICON{warning}% Please note that these files represent a %RED%public%ENDCOLOR% and a %RED%private%ENDCOLOR% and should be treated accordingly!
+
+Please take a moment to verify that the *certificate matches the hostname* of the resource where you intend to install it before you proceed:
+
+<pre class="screen">
+%UCL_PROMPT% grid-cert-info -file ./hostcert.pem -subject
+/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=%RED%%UCL_HOST_FQDN%%ENDCOLOR%
+
+%UCL_PROMPT% hostname -f
+%RED%%UCL_HOST_FQDN%%ENDCOLOR%
+</pre>
+
+Finally, install the certificate in the default location */etc/grid-security/*:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% cp ./%UCL_HOST_FQDN%cert.pem /etc/grid-security/hostcert.pem
+%UCL_PROMPT_ROOT% chmod 444 /etc/grid-security/hostcert.pem
+%UCL_PROMPT_ROOT% cp ./%UCL_HOST_FQDN%key.pem /etc/grid-security/hostkey.pem
+%UCL_PROMPT_ROOT% chmod 400 /etc/grid-security/hostkey.pem
+</pre>
+
+---+ Request a Service Certificate
+
+You can use the same *osg-cert-request* and *osg-cert-retrieve* commands  to request and service certificates just like any host certificate. Just use service/hostname for the -t parameter.
+
+<pre class="screen">
+%UCL_PROMPT% osg-cert-request -H %RED%http/%UCL_HOST_FQDN%%ENDCOLOR% -e %RED%emailaddress@domain.com%ENDCOLOR% -n %RED%"Your Name"%ENDCOLOR% -p %RED%9999999999 (Ph No)%ENDCOLOR% -v %RED%"Your VO"%ENDCOLOR% -y %RED%"xyz@domain.com,abc@domain.com" (CC list)%ENDCOLOR% -m %RED%"This is my comment"%ENDCOLOR% -o hostkey.pem
+Writing key to ./hostkey.pem
+
+Connecting to server...
+Succesfully submitted
+Request Id#: 571
+
+</pre>
+
+Please note down the request ID.
+
+Once the certificate has been approved by the Certificate Authority you will receive an e-mail for the GOC. Then to retrieve the host certificate we will execute *osg-cert-retrieve*: and use the %RED%request ID%ENDCOLOR% we recorded earlier. Since certificates are public, no authentication of the user is required to retrieve them.
+
+<pre class="screen">
+%UCL_PROMPT%  osg-cert-retrieve %RED%571%ENDCOLOR% -o %RED%hostcert.pem%ENDCOLOR%
+Using timeout of 5 minutes
+Running in test mode
+Connecting server to retrieve certificate...
+Certificate written to hostcert.pem
+</pre>
+
+%ICON{warning}% Please note that these files represent a %RED%public%ENDCOLOR% and a %RED%private%ENDCOLOR% and should be treated accordingly!
+
+---++ Install the Service Certificate
+
+The *Service Certificate* should be installed under a subdirectory in */etc/grid-security* indicating the name of the service. The next step will install the service certificate in the default location */etc/grid-security/http*:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% cp ./%UCL_HOST_FQDN%-httpcert.pem /etc/grid-security/http/httpcert.pem
+%UCL_PROMPT_ROOT% chmod 444 /etc/grid-security/http/httpcert.pem
+%UCL_PROMPT_ROOT% cp ./%UCL_HOST_FQDN%-httpkey.pem /etc/grid-security/http/httpkey.pem
+%UCL_PROMPT_ROOT% chmod 400 /etc/grid-security/http/httpkey.pem
+</pre>
+
+%ICON{warning}% Please note that the service certificate must also be owned by the unix user who runs the service. For *Apache/Tomcat* this is the %RED%tomcat%ENDCOLOR% user:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% chown tomcat.tomcat /etc/grid-security/http/httpcert.pem
+%UCL_PROMPT_ROOT% chown tomcat.tomcat /etc/grid-security/http/httpkey.pem
+</pre>
+
+
+Please refer to [[Operations/OSGPKICommandlineClients]] for full documentation of the Client package
+
+---+ Information for Grid Admins
+If you are a grid admin then you can use a single command to request and retrieve a certificate immediately. For getting grid admin privileges please refer [[Operations/OSGPKITrustedAgent][here]].
+
+Request and retrieve multliple host certificates from OIM. Authenticates to OIM and is only for use by Grid Admins for certificates they are authorized to approve. This script is only supported with all hosts being in the same domain (so we ensure they go to the same Grid Admin). The certificates are stored with the format of 'hostname-requestid.pem' (i.e. the id generated from the request for the certificate). The key is stored as 'hostname-serial-key.pem'.
+
+Examples:
+<pre class="rootscreen">
+%UCL_PROMPT% osg-gridadmin-cert-request -H %UCL_HOST_FQDN%
+</pre>
+
+If you want to request more then one certificate you can list them in a file (one host per line) and use the following command
+<pre class="rootscreen">
+%UCL_PROMPT% osg-gridadmin-cert-request -f %RED%hostfile%ENDCOLOR%
+</pre>
+
+%TWISTY{%TWISTY_OPTS_OUTPUT%}%
+---+++ Detailed description of the osg-gridadmin-cert-request usage
+
+This  osg-gridadmin-cert-request script does the following in the process of acquiring certificates for the hostnames specified:
+
+    Reads a list of fully-qualified hostnames from a file specified by the user.
+    For reach hostname:
+    Generates a new private key and CSR
+    Only important part of CSR is CN= component
+    Writes the private key to a file with filename: /-key.pem
+    Prompts the user for their private key pass phrase
+    Pass phrase is cached so user is not re-prompted
+    Authenticates to OIM and posts the CSRs as a single request to OIM
+    Request id is returned and subsequently used
+    Authenticates to OIM and approves the request
+    Waits one minute for request to be processed by OIM
+    Connects to OIM and attempts to retrieve certificates
+    Writes out any certificates it retrieves with filename of /-<red-id>.pem
+    if all certificates have been retrieved, exits loop
+    Wait 5 seconds and repeat. 
+
+Inputs:
+
+    filename of list of hostnames
+    prefix path in which to write private keys and certificares [default: .]
+    path to user's certificate [Optional, default is path specified by $X509_USER_CERT environment variable, ~/.globus/usercert.pem]
+    path to user's private key [Optional, default is path specified by $X509_USER_KEY environment variable, ~/.globus/userkey.pem]
+    Passphrase for user's private key via non-echoing prompt. 
+
+Outputs:
+
+    N host certificates in PEM format
+    N private keys in PEM format 
+
+Usage:osg-gridadmin-cert-request -h/--help [for detailed explanations of options]
+
+
+*Options*:
+  -h, --help            show this help message and exit
+  -k PKEY, --pkey=PKEY  Specify Requestor's private key (PEM Format).  If not
+                        specified will take the value of X509_USER_KEY or
+                        $HOME/.globus/userkey.pem
+  -c CERT, --cert=CERT  Specify Requestor's certificate (PEM Format).  If not
+                        specified will take the value of X509_USER_CERT or
+                        $HOME/.globus/usercert.pem
+  -T, --test            Run in test mode
+  -q, --quiet           don't print status messages to stdout
+  -V, --version         Print the script version number and exit. 
+
+*Hostname Options*:
+    Use either of these options.     Specify hostname as a single hostname
+    using -H/--hostname     or specify from a file using -f/--hostfile.
+
+    -H HOSTNAME, --hostname=HOSTNAME
+                        Specify the hostname or service/hostname for which you
+                        want to request the certificate for.  If specified
+                        -f/--hostfile will be ignored
+    -f HOSTFILE, --hostfile=HOSTFILE
+                        Filename with one hostname or service/hostname per
+                        line
+%ENDTWISTY%
+
+---+ Frequently Asked Questions
+
+---++ Can I use any host to request a certificate for a different host?
+
+%GREEN%YES%ENDCOLOR%, you can use any host to create a certificate request as long as the hostname for the certificate is a fully qualified domain name.
+
+---++ May I reuse my host certificate as a service certificate?
+
+%RED%NO!%ENDCOLOR% For security reasons, please do not use clones of your host certificate for additional certificates even though it's technically possible.
+
+<!-- No more GRAM WS
+---++!! May I reuse my host certificate for the web service implementation of GRAM?
+
+%GREEN%YES%ENDCOLOR%, this is the only exception to reuse your host certificate for another service. In this case the OSG configuration software will copy your host certificate to =/etc/grid-security/container(cert|key).pem= and change the owner to the *globus* or *daemon* user. Choose the username that executes the globus container.
+-->
+
+---++ How do I renew a host/service certificate?
+
+There is no separate procedure. Simply ask for a new certificate the same way you asked for it the previous time.
+
+---++ I get a "GSS authentication failure" when users try to authenticate with my site?
+
+You likely used an *alias* for the host instead of the fully qualified domain name when you generated the certificate request. This can cause the GSS authentication failures similar to the following when a user tries to authenticate to the host after your certificate is installed:
+
+<pre class="screen">
+GSS authentication failure 
+GSS Major Status: General failure 
+GSS Minor Status Error Chain: 
+accept_sec_context.c:gss_accept_sec_context:403: 
+Error during delegation: Delegation protocol violation 
+Failure: GSS failed Major:000d0000 Minor:00000001 Token:00000000 
+</pre>
+
+---++ How can I check if I have a host certificate installed already?
+
+By default the host certificate key pair will be installed in =/etc/grid-security/hostcert.pem= and =/etc/grid-security/hostkey.pem=.  You can use *openssl* to access basic information about the certificate:
+
+<pre class="screen">
+[root@osg-se robert]# openssl x509 -in /etc/grid-security/hostcert.pem -subject -issuer -dates -noout
+subject= /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=%UCL_HOST_FQDN%
+issuer= /DC=org/DC=cilogon/C=US/O=CILogon/CN=CILogon OSG CA 1
+notBefore=Apr  8 00:00:00 2013 GMT
+notAfter=May 17 12:00:00 2014 GMT
+</pre>
+
+---++ How can I check the expiration time of my installed host certificate?
+
+If you installed the [[InstallCertScripts][Certificates Script Package]] you can use *grid-cert-info* to retrieve information about the certificate:
+
+<pre class="screen">
+[root@osg-se robert]# grid-cert-info -file /etc/grid-security/hostcert.pem -startdate -enddate
+Jan  4 21:08:41 2010 GMT
+Jan  4 21:08:41 2011 GMT
+</pre>
+
+Alternatively you can use *openssl*:
+
+<pre class="screen">
+[root@osg-se robert]# openssl x509 -in /etc/grid-security/hostcert.pem -dates -noout
+notBefore=Jan  4 21:08:41 2010 GMT
+notAfter=Jan  4 21:08:41 2011 GMT
+</pre>
+
+---+ References
+   * [[http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html][Useful OpenSSL commands (from NCSA)]] - e.g. how to convert the format of your certificate.
+
+%STOPINCLUDE%
+
+---+ Comments
+
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = AnandPadmanabhan
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MarcoMambelli
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = MarcoMambelli
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
+-- Main.AnandPadmanabhan - 8 Apr 2013

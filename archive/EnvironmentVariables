@@ -1,0 +1,195 @@
+%DOC_STATUS_TABLE%
+
+---+!! Grid Job Environment
+%TOC{}%
+
+---+ About this Document
+
+%ICON{hand}% This document is for grid users. It lists environment variables present in a job's environment while it is being executed on a %LINK_GLOSSARY_WN%.
+
+---+ Conventions used in this Document
+
+For variables that are of string type, a  value of =UNAVAILABLE= indicates that the variable is not defined or not applicable. 
+
+---+ Site Related Variables
+
+These are variables that contain information about the site:
+
+%EDITTABLE{  header="|*Variable Name*| *Type*|*Definition*|" format="| text, 20 | text, 15 | textarea, 3x40 |"  changerows="on" quietsave="on" editbutton="Edit table" }%
+| *Variable Name* | *Type* | *Definition* |
+| OSG_GROUP | Enumerated String [OSG,OSG-ITB] | Group that the site belongs to, should be OSG unless the site is being used for validation or integration testing only |
+| OSG_HOSTNAME | String | Hostname for the CE (e.g. ce01.university.edu) |
+| OSG_SITE_NAME | String | Identifier for the site.  This is will be used for displaying the site by monitoring tools.  Valid characters are letters, numbers, underscore, dot, and dash ( A-Z,a-z,0-9,_,.,-  ) |
+| OSG_SPONSOR | Enumerated String | Valid VO(s) that sponsors the site.  Multiple VOs can be specified with the percent sponsorship by each sponsor, e.g. "usatlas:50 uscms:50" |
+| OSG_SITE_INFO | String (URL) | Valid url that gives the site policy for OSG usage. |
+| OSG_CONTACT_NAME | String | The name of the administrative contact for the site |
+| OSG_CONTACT_EMAIL | String | Valid email address for the administrative contact.  Notifications from scripts will be sent to this email address |
+| OSG_SITE_CITY | String | Name of the city where the OSG site is located |
+| OSG_SITE_COUNTRY | String | Name of the country where the OSG site is located |
+| OSG_SITE_LONGITUDE | Float | The site's longitude (will be negative for locations west of Greenwich) |
+| OSG_SITE_LATITUDE | Float | The site's latitude (will be negative for locations south of the equator) |
+| GLOBUS_LOCATION | String | Path to the directory where the Globus software is installed (usually /usr) |
+| OSG_USER_VO_MAP | String | Path to the location of the osg-user-vo-map.txt file, typically =/var/lib/osg/user-vo-map= |
+| OSG_GRIDFTP_LOG | String | Path to the location of the grid ftp log created by gridftp server , typically =/var/log/gridftp.log= |
+
+---+ Storage Related Variables
+
+The storage related variables are defined in more detail within the [[Trash.ReleaseDocumentationLocalStorageConfiguration][local storage configuration]] document.  The following is a summary, but the Twiki page should be consulted for a definitive view as well as for an explanation for the use cases and which variables must be defined for each use case.
+
+%EDITTABLE{  header="|*Variable Name*| *Type*|*Definition*|" format="| text, 20 | text, 15 | textarea, 3x40 |"  changerows="on" quietsave="on" editbutton="Edit table" }%
+| *Variable Name* | *Type* | *Definition* |
+| OSG_STORAGE_ELEMENT | Enumerated String [y,n] | Indicates whether a storage element is available for CEs in the site. |
+| OSG_DEFAULT_SE | String | Full url to the default storage element that can be used by worker nodes within the cluster |
+| OSG_GRID | String | Directory where the worker node client (wn-client) or packages to use the grid are installed |
+| OSG_APP | String | Directory available to install job specific applications and binaries. This also requires a sub-directory, $OSG_APP/etc, with 1777 permissions. |
+| OSG_DATA | String | Directory available for jobs to store data and to stage data in and out, this directory is shared across the cluster |
+| OSG_WN_TMP | String | Directory available for scratch space for worker nodes.  This directory is local to each node and provides POSIX semantics for file operations |
+
+<!--
+| OSG_SITE_READ | String | Directory available for staging in of files.  Must be readable  by all worker nodes. |
+| OSG_SITE_WRITE | String | Directory available for staging out of files.  Must be writable by all worker nodes. |
+-->
+
+---+ Job Manager Variables
+
+These variables are a subset of the site variables that relate to the batch job manager used by the site. Several of the variables will be empty for all sites since a site typically only uses a single job manager to manage jobs.
+
+%EDITTABLE{  header="|*Variable Name*| *Type*|*Definition*|" format="| text, 20 | text, 15 | textarea, 3x40 |"  changerows="on" quietsave="on" editbutton="Edit table" }%
+|*Variable Name*|*Type*|*Definition*|
+| OSG_JOB_MANAGER | Enumerated String [condor,pbs,lsf,fbs,sge] | The job manager that is being used to schedule and manage jobs for the OSG site |
+| OSG_JOB_MANAGER_HOME | String | Directory where the job manager is installed |
+| OSG_CONDOR_LOCATION | String | Installation directory for Condor (typically =OSG_JOB_MANAGER_HOME=) |
+| OSG_CONDOR_CONFIG | String | Path of the condor configuration file (typically =OSG_CONDOR_LOCATION/etc/condor_config=) |
+| OSG_PBS_LOCATION | String | Installation directory for PBS (typically =OSG_JOB_MANAGER_HOME=) |
+| OSG_FBS_LOCATION | String | Installation directory for FBS (typically =OSG_JOB_MANAGER_HOME=) |
+| OSG_SGE_LOCATION | String | Installation directory for SGE (typically =OSG_JOB_MANAGER_HOME=) |
+| OSG_SGE_ROOT | String | Directory that serves as the SGE root location |
+| OSG_LSF_LOCATION | String | Installation directory for LSF (typically =OSG_JOB_MANAGER_HOME=) |
+| OSG_JOB_CONTACT | String | String specifying the endpoint to use within the job submission for reaching the site (e.g. manager.mycluster.edu/jobmanager-pbs ) |
+| OSG_UTIL_CONTACT | String | String specifying the endpoint to use to test whether the site is available for debugging or monitoring purposes (e.g. manager.mycluster.edu/jobmanager ) |
+| OSG_MANAGEDFORK | Enumerated String [y,n] | Indicates whether Trash.ReleaseDocumentationManagedFork is being used.  If this is the case then =OSG_CONDOR_LOCATION= and =OSG_CONDOR_CONFIG= must be set as well regardless of the value of OSG_JOB_MANAGER |
+
+---+ Monitoring Service Variables
+
+---++ !! !Trash.ReleaseDocumentationMonALISA
+
+These variables are related to the !Trash.ReleaseDocumentationMonALISA service and the services that it queries.  These are all deprecated and will not work at most sites
+
+%EDITTABLE{  header="|*Variable Name*| *Type*|*Definition*|" format="| text, 20 | text, 15 | textarea, 3x40 |"  changerows="on" quietsave="on" editbutton="Edit table" }%
+| *Variable Name* | *Type* | *Definition* |
+| OSG_MONALISA_SERVICE | Enumerated String [y,n] | Indicates whether !Trash.ReleaseDocumentationMonALISA is running on the CE  |
+| OSG_VO_MODULES | Enumerated String [y,n] | Indicates whether !Trash.ReleaseDocumentationMonALISA should run OSG VO modules |
+| OSG_GANGLIA_SUPPORT | Enumerated String [y,n] | Indicates whether !Trash.ReleaseDocumentationMonALISA will use ganglia |
+| OSG_GANGLIA_HOST | String | The hostname of the machine where ganglia for the site is running |
+| OSG_GANGLIA_PORT | Integer | The port that ganglia is available at on =OSG_GANGLIA_HOST=  |
+
+---+ Squid Service Variables
+
+These variables provide information about the squid proxy that site may make available.
+
+%EDITTABLE{  header="|*Variable Name*| *Type*|*Definition*|" format="| text, 20 | text, 15 | textarea, 3x40 |"  changerows="on" quietsave="on" editbutton="Edit table" }%
+| *Variable Name* | *Type* | *Definition* |
+| OSG_SQUID_LOCATION | String | The hostname (and optionally port) of the machine that is providing squid proxy services for the site.  This should be set to =UNAVAILABLE= if squid is not provided. E.g. squid.host.name:3128 |
+| OSG_SQUID_POLICY | Enumerated String [LRU,LFUDA,GDSF] | The caching policy squid should use for evicting elements from the cache.   *Not currently used* GDSF maximizes the bytes that the proxy caches (i.e. the cache favors large elements over multiple smaller elements) , LFUDA maximizes the number of objects that the proxy caches (i.e. the cache favors multiple smaller elements over large elements), LRU just evicts the least recently used element |
+| OSG_SQUID_CACHE_SIZE | integer with optional MB or GB postfixes | The size of the squid disk cache.  The size is assumed to be in megabytes unless a postfix is given. |
+| OSG_SQUID_MEM_CACHE | integer with optional MB or GB postfixes | The size of the squid memory cache.  The size is assumed to be in megabytes unless a postfix is given. |
+
+---+ Other Service Variables
+
+These variables provide information about other services that may be available on the site.
+
+%EDITTABLE{  header="|*Variable Name*| *Type*|*Definition*|" format="| text, 20 | text, 15 | textarea, 3x40 |"  changerows="on" quietsave="on" editbutton="Edit table" }%
+|*Variable Name*|*Type*|*Definition*|
+| OSG_GLEXEC_LOCATION | String | The path to the GLEXEC binaries on the worker nodes.  This is set to =UNAVAILABLE= if GLEXEC is not installed. |
+
+
+---+ Example Environment
+
+The following is an example configuration from Nebraska.
+
+<pre class="screen">
+%UCL_PROMPT% globus-job-run red.unl.edu/jobmanager-condor /usr/bin/printenv | sort
+CHANGED_X509=/grid_home/uscmsPool018/.globus/job/red.unl.edu/29143.1266376483/x509_up
+GLOBUS_GRAM_JOB_CONTACT=https://red.unl.edu:60056/29143/1266376483/
+GLOBUS_GRAM_MYJOB_CONTACT=URLx-nexus://red.unl.edu:54740/
+GLOBUS_LOCATION=/opt/osg/osg-wn-source/globus
+HOME=/grid_home/uscmsPool018
+LD_LIBRARY_PATH=/opt/osg/osg-1.2/subversion/lib:/opt/osg/osg-1.2/apache/lib:/opt/osg/osg-1.2/MonaLisa/Service/VDTFarm/pgsql/lib:/opt/osg/osg-1.2/glite/lib64:/opt/osg/osg-1.2/glite/lib:/opt/osg/osg-1.2/prima/lib:/opt/osg/osg-1.2/mysql5/lib/mysql:/opt/osg/osg-1.2/berkeley-db/lib:/opt/osg/osg-1.2/expat/lib:/opt/osg/osg-1.2/globus/lib:/opt/osg/osg-1.2/subversion/lib:/opt/osg/osg-1.2/apache/lib:/opt/osg/osg-1.2/MonaLisa/Service/VDTFarm/pgsql/lib:/opt/osg/osg-1.2/glite/lib64:/opt/osg/osg-1.2/glite/lib:/opt/osg/osg-1.2/prima/lib:/opt/osg/osg-1.2/mysql5/lib/mysql:/opt/osg/osg-1.2/berkeley-db/lib:/opt/osg/osg-1.2/expat/lib:/opt/osg/osg-1.2/subversion/lib:/opt/osg/osg-1.2/apache/lib:/opt/osg/osg-1.2/MonaLisa/Service/VDTFarm/pgsql/lib:/opt/osg/osg-1.2/glite/lib64:/opt/osg/osg-1.2/glite/lib:/opt/osg/osg-1.2/prima/lib:/opt/osg/osg-1.2/mysql5/lib/mysql:/opt/osg/osg-1.2/berkeley-db/lib:/opt/osg/osg-1.2/expat/lib:
+LOGNAME=uscmsPool018
+MY_INITIAL_DIR=$_CONDOR_SCRATCH_DIR
+OLDPWD=/scratch/condor/execute/dir_28733
+OSG_APP=/opt/osg/app
+OSG_DATA=/opt/osg/data
+OSG_DEFAULT_SE=srm.unl.edu
+OSG_GLEXEC_LOCATION=/usr/sbin/glexec
+OSG_GRID=/opt/osg/osg-wn-source
+OSG_HOSTNAME=red.unl.edu
+OSG_JOB_CONTACT=red.unl.edu/jobmanager-condor
+OSG_LOCATION=/opt/osg/osg-1.2
+OSG_SITE_NAME=Nebraska
+OSG_SITE_READ=dcap://srm.unl.edu/pnfs/unl.edu/data4
+OSG_SITE_WRITE=srm://srm.unl.edu:8443/pnfs/unl.edu/data4
+OSG_SQUID_LOCATION=UNAVAILABLE
+OSG_STORAGE_ELEMENT=True
+OSG_WN_TMP=/scratch/condor//execute/dir_28733
+PWD=/scratch/condor/execute/dir_28733
+SHLVL=0
+X509_USER_PROXY=/scratch/condor//execute/dir_28733/x509_up
+_CONDOR_ANCESTOR_28733=28762:1266377001:901651072
+_CONDOR_ANCESTOR_4050=4052:1264817903:268239585
+_CONDOR_ANCESTOR_4052=28733:1266376923:2174697708
+_CONDOR_SCRATCH_DIR=/scratch/condor//execute/dir_28733
+_CONDOR_SLOT=2
+</pre>
+
+---+ Comments
+
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = AlainRoy
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = Scientist
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MarcoMambelli
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+############################################################################################################
+-->
