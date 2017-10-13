@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>BeStMan Overview - OSG Documentation</title>
+  <title>Update OASIS - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "BeStMan Overview";
-    var mkdocs_page_input_path = "data/bestman-overview.md";
-    var mkdocs_page_url = "/data/bestman-overview/";
+    var mkdocs_page_name = "Update OASIS";
+    var mkdocs_page_input_path = "data/update-oasis.md";
+    var mkdocs_page_url = "/data/update-oasis/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -208,11 +208,27 @@
     <a class="" href="../frontier-squid/">HTTP Cache</a>
   
         </li>
-        <li class="">
+        <li class=" current">
           
   
-    <a class="" href="../update-oasis/">Update OASIS</a>
+    <a class="current" href="./">Update OASIS</a>
   
+  <ul class="subnav">
+      
+    <li class="toctree-l3"><a href="#updating-software-on-oasis">Updating Software on OASIS</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#requirements">Requirements</a></li>
+        
+            <li><a class="toctree-l4" href="#how-to-use-oasis">How to use OASIS</a></li>
+        
+            <li><a class="toctree-l4" href="#references">References</a></li>
+        
+        </ul>
+    
+
+  </ul>
         </li>
         <li class="">
           
@@ -418,27 +434,11 @@
 		
   <span class="caption-text">Deprecated Software</span>
   <ul class="subnav">
-        <li class=" current">
+        <li class="">
           
   
-    <a class="current" href="./">BeStMan Overview</a>
+    <a class="" href="../bestman-overview/">BeStMan Overview</a>
   
-  <ul class="subnav">
-      
-    <li class="toctree-l3"><a href="#berkeley-storage-manager">Berkeley Storage Manager</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#planning">Planning</a></li>
-        
-            <li><a class="toctree-l4" href="#installation">Installation</a></li>
-        
-            <li><a class="toctree-l4" href="#operation">Operation</a></li>
-        
-        </ul>
-    
-
-  </ul>
         </li>
         <li class="">
           
@@ -743,14 +743,14 @@
     
       
         
-          <li>Deprecated Software &raquo;</li>
+          <li>Data &raquo;</li>
         
       
     
-    <li>BeStMan Overview</li>
+    <li>Update OASIS</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/bestman-overview.md"
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/update-oasis.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -760,27 +760,71 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="berkeley-storage-manager">Berkeley Storage Manager<a class="headerlink" href="#berkeley-storage-manager" title="Permanent link">&para;</a></h1>
-<p>BeStMan, or Berkeley Storage Manager, is a full implementation of SRM v2.2, developed by Lawrence Berkeley National Laboratory, for a disk based storage and mass storage systems. End users may have their own personal BeStMan that manages and gives an SRM interface to their own local disks. It works on top of existing disk-based unix file systems, and has been reported so far to work on file systems such as NFS, GPFS, PVFS, GFS, Ibrix, HFS+, Hadoop, XrootdFS and Lustre. It also works with any existing file transfer service, such as gsiftp, http, https, bbftp and ftp. It requires minimal administrative efforts on the deployment and updates. BeStMan2 is a Jetty based implementation of SRM v2.2.</p>
-<p>As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of June 2018.</p>
-<h2 id="planning">Planning<a class="headerlink" href="#planning" title="Permanent link">&para;</a></h2>
+                <h1 id="updating-software-on-oasis">Updating Software on OASIS<a class="headerlink" href="#updating-software-on-oasis" title="Permanent link">&para;</a></h1>
+<p>OASIS is the OSG Application Software Installation Service. It is the recommended method to install software on the Open Science Grid. It is implemented using CernVM FileSystem (CVMFS) technology.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The applicable software versions for this document are <strong>osg-version 3.1.13</strong> (or higher)</p>
+</div>
+<p>This document is a step by step explanation of how a Virtual Organization (VO) Software Adminstrator can enable the OASIS service and use it to publish and update software on OSG Worker Nodes under /cvmfs/oasis.opensciencegrid.org. For information on how to configure a client for OASIS see the <a href="../../worker-node/install-cvmfs">OSG CVMFS Installation documentation</a>. For information on hosting your own opensciencegrid.org repository see OasisExternalRepositories.</p>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
+<p>To begin the process to distribute software on OASIS using the service hosted at the OSG GOC, you must:</p>
 <ul>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/BestmanStorageElement">Information on various BeStMan architectures</a></li>
-<li><a href="https://sdm.lbl.gov/bestman/">Bestman home page</a>: Bestman project home</li>
+<li>have a personal grid certificate. The process for getting one is detailed <a href="https://www.opensciencegrid.org/bin/view/Documentation/Release3/CertificateUserGet">here</a>.</li>
+<li>register that certificate in <a href="http://oim.opensciencegrid.org/oim/home">OIM</a>. In order to register, the certificate has to be installed in your browser. If you are then not registered, clicking "Login" on the page will prompt you to register.</li>
+<li>be associated with a VO that is registered in OIM. The list of registered VOs appears <a href="http://oim.opensciencegrid.org/oim/vo">here</a>.</li>
+<li>register your certificate in the VOMS for your Virtual Organization. Click on the VO name that you're associated with in the above list and in the VO page click on the <em>"Membership Services URL"</em> to register with that VO VOMS.</li>
 </ul>
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallOSGBestmanSE">Install Bestman SE</a>: BeStMan installation interfacing with local disk</li>
-<li><a href="../install-bestman-xrootd">Install Bestman Gateway Xrootd</a>: BeStMan gateway mode on top of XRootD</li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoop200SE">Install Bestman Gateway Hadoop</a>: BeStMan gateway mode on top of Hadoop</li>
-<li><a href="https://sdm.lbl.gov/twiki/bin/view/Software/BeStMan/BeStManGuide/Configuration">LBNL Configuration Reference</a></li>
-</ul>
-<h2 id="operation">Operation<a class="headerlink" href="#operation" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/LbnlSrmClient">LBNL SRM Client</a>: SRM client provided with BeStMan.  This is deprecated; use of <code>gfal-utils</code> is strongly encouraged instead.</li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SrmTester">BeStMan SRMTester</a>: Tester for BeStMan SRM instances</li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Storage/BestmanAdler32Checksum">Using Adler checksums with BeStMan</a></li>
-</ul>
+<h2 id="how-to-use-oasis">How to use OASIS<a class="headerlink" href="#how-to-use-oasis" title="Permanent link">&para;</a></h2>
+<h3 id="enable-oasis">Enable OASIS<a class="headerlink" href="#enable-oasis" title="Permanent link">&para;</a></h3>
+<p>When you are ready to distribute your software with OASIS, submit a <a href="https://ticket.opensciencegrid.org/goc/submit">GOC ticket</a> with a request to enable OASIS for your VO. In your request, please specify your VO and provide a list of people who will install and administer the VO software in OASIS.</p>
+<p>The GOC will enable OASIS for your VO in <a href="https://oim.opensciencegrid.org/oim/home">OIM</a> and add your list of administrators to the "OASIS Managers" list (which is near the bottom of the page of information about each VO in OIM). oasis-login will then grant access to the people who are listed as OASIS managers. Any time the list is to be modified, submit another GOC ticket.</p>
+<h3 id="log-in-with-gsissh">Log in with GSISSH<a class="headerlink" href="#log-in-with-gsissh" title="Permanent link">&para;</a></h3>
+<p>The next step is to generate a proxy and log into <code>oasis-login.opensciencegrid.org</code> with <code>gsissh</code>. These commands should be run on a computer that has the <a href="../../worker-node/install-wn">OSG worker node client</a> software. First make sure that your grid certificate is installed in <code>~/.globus/usercred.p12</code> on that computer and that it is mode 600, then run these commands:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> voms-proxy-init -voms <span style="color:red">VO</span>
+<span class="gp">user@host $</span> gsissh -o <span class="nv">GSSAPIDelegateCredentials</span><span class="o">=</span>yes oasis-login.opensciencegrid.org
+</pre></div>
+
+
+<p>In case the user can be mapped to more than one account, specify it explicitly in a command like this</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> gsissh -o <span class="nv">GSSAPIDelegateCredentials</span><span class="o">=</span>yes ouser.<span style="color:red">VO</span>@oasis-login.opensciencegrid.org
+</pre></div>
+
+
+<p>Instead of putting <verbatim>-o GSSAPIDelegateCredentials<code>yes&lt;/verbatim&gt; on the command line, you can put it in your =~/.ssh/config</code> like this:</p>
+<div class="codehilite"><pre><span></span><span class="go">Host oasis-login.opensciencegrid.org</span>
+<span class="go">    GSSAPIDelegateCredentials yes</span>
+</pre></div>
+
+
+<h3 id="install-and-update-software">Install and update software<a class="headerlink" href="#install-and-update-software" title="Permanent link">&para;</a></h3>
+<p>Once you log in, you can add/modify/remove content on a staging area at <code>/stage/oasis/$VO</code> where $VO is the name of the VO represented by the manager.</p>
+<p>Files here are visible to both <code>oasis-login</code> and the Stratum 0 server (oasis.opensciencegrid.org)</p>
+<p>NOTE that <code>/stage/oasis/$VO</code> is not your home directory, which you can use for staging purposes but is not visible in OASIS.</p>
+<p>As OASIS manager for the VO requests an oasis update with:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-oasis-update
+</pre></div>
+
+
+<p>This command queues a process to sync the content of OASIS with the content of <code>/stage/oasis/$VO</code></p>
+<p><code>osg-oasis-update</code> returns immediately, but only one update can run at a time (across all VOs); your request may be queued behind a different VO. If you encounter severe delays before the update is finished being published (more than 4 hours), please file a GOC ticket.</p>
+<h3 id="limitations-on-repository-content">Limitations on repository content<a class="headerlink" href="#limitations-on-repository-content" title="Permanent link">&para;</a></h3>
+<p>Although CVMFS provides a POSIX filesystem, it does not work well with all types of content. Content in OASIS is expected to adhere to the <a href="http://cernvm.cern.ch/portal/filesystem/repository-limits">CVMFS repository content limitations</a> so please review those guidelines carefully.</p>
+<h3 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h3>
+<p>After <code>osg-oasis-update</code> completes and the changes have been propagated to the CVMFS stratum 1 servers (typically between 0 and 60 minutes, but possibly longer if the servers are busy with updates of other repositories) then the changes can be visible under <code>/cvmfs/oasis.opensciencegrid.org</code> on a computer that has the <a href="../../worker-node/install-cvmfs">CVMFS client installed</a>. A client normally only checks for updates if at least an hour has passed since it last checked, but people who have superuser access on the client machine can force it to check again with</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cvmfs_talk -i oasis.opensciencegrid.org remount
+</pre></div>
+
+
+<p>This can be done while the filesystem is mounted (despite what the name sounds like it does not do umount/mount). If the filesystem is not mounted, it will automatically check for new updates the next time it is mounted.</p>
+<p>In order to find out if an update has reached the CVMFS stratum 1 server, you can find out the latest <code>osg-oasis-update</code> time seen by the stratum 1 most favored by your CVMFS client with the following long command on your client machine:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> date -d <span class="s2">&quot;1970-1-1 GMT + </span><span class="k">$(</span>wget -qO- <span class="k">$(</span>attr -qg host /cvmfs/oasis.opensciencegrid.org<span class="k">)</span>/.cvmfspublished <span class="p">|</span> <span class="se">\</span>
+                                                            cat -v<span class="p">|</span>sed -n <span class="s1">&#39;/^T/{s/^T//p;q;}&#39;</span><span class="k">)</span><span class="s2"> sec&quot;</span>
+</pre></div>
+
+
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<p><a href="https://twiki.cern.ch/twiki/bin/view/CvmFS">CERN CVMFS home page</a></p>
               
             </div>
           </div>
@@ -788,10 +832,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../bestman-install/" class="btn btn-neutral float-right" title="BeStMan Install">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../xrootd-overview/" class="btn btn-neutral float-right" title="XRootD Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../worker-node/using-wn/" class="btn btn-neutral" title="Worker Node Environment"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../frontier-squid/" class="btn btn-neutral" title="HTTP Cache"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -819,10 +863,10 @@
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../worker-node/using-wn/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../frontier-squid/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../bestman-install/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../xrootd-overview/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
