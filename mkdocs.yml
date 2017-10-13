@@ -16,6 +16,7 @@ pages:
   - 'CA Certificates': 'common/ca.md'
   - 'OSG CA Certificates Updater': 'common/osg-ca-certs-updater.md'
   - 'Yum Repos': 'common/yum.md'
+  - 'Java 7': 'common/openjdk7.md'
 - Worker Node:
   - 'Worker Node (RPM install)': 'worker-node/install-wn.md'
   - 'Worker Node (tarball install)': 'worker-node/install-wn-tarball.md'

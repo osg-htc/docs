@@ -72,7 +72,7 @@ GridFTP, which is a part of this meta-package, requires a certificate package to
 Package installation instructions
 ---------------------------------
 
-1.  Install Java using [these instructions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7#InstallingJava)
+1.  Install Java using [these instructions](../common/openjdk7#installing-java)
 2.  Install the BeStMan Gateway XRootD Storage element meta-package:
 
         :::console

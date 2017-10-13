@@ -83,7 +83,7 @@ Installation Procedure
 Install VOMS 
 ------------------------------------------------------
 
-1.  Install Java using [these instructions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7#Installing_Java)
+1.  Install Java using [these instructions](../common/openjdk7#installing-java)
 2.  Install OSG-VOMS:
 
     ``` console

@@ -97,7 +97,7 @@ Install Instructions
 Installing BeStMan2
 -------------------
 
-1.  Install Java using [these instructions](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7#InstallingJava).
+1.  Install Java using [these instructions](../common/openjdk7#installing-java).
 2.  Install the BeStMan Storage element meta-package:
 
 ```console
