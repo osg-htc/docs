@@ -50,22 +50,22 @@ For OSG 3.4:
 Example installation (in `/home/user/test-install`, the **`<PATH_TO_CLIENT>/`** is `/home/user/test-install/osg-wn-client` ):
 
 ```console
-[root@client ~] # mkdir /home/user/test-install
-[root@client ~] # cd /home/user/test-install
-[root@client ~] # wget http://repo.grid.iu.edu/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz
-[root@client ~] # tar xzf osg-wn-client-latest.el6.x86_64.tar.gz
-[root@client ~] # cd osg-wn-client
-[root@client ~] # ./osg/osg-post-install
-[root@client ~] # source setup.sh
-[root@client ~] # osg-ca-manage setupCA --url osg
-[root@client ~] # fetch-crl
+root@host # mkdir /home/user/test-install
+root@host # cd /home/user/test-install
+root@host # wget http://repo.grid.iu.edu/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz
+root@host # tar xzf osg-wn-client-latest.el6.x86_64.tar.gz
+root@host # cd osg-wn-client
+root@host # ./osg/osg-post-install
+root@host # source setup.sh
+root@host # osg-ca-manage setupCA --url osg
+root@host # fetch-crl
 ```
 
 #### Configure the CE
 
 Using the wn-client software installed from the tarball will require a few changes on the compute element so that the resource's configuration can be correctly reported.
 
-Set `grid_dir` in the `Storage` section of your OSG-Configure configs: [CE configuration instructions](../other/configuration-with-osg-configure#storage). `grid_dir` is used as the `$OSG_GRID` environment variable in running jobs - see [the environment variables document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/EnvironmentVariables). Pilot jobs source `$OSG_GRID/setup.sh` before performing any work. The value set for `grid_dir` must be the path of the wn-client installation directory. This is the path returned by **`echo $OSG_LOCATION`** once you source the setup file created by this installation.
+Set `grid_dir` in the `Storage` section of your OSG-Configure configs: [CE configuration instructions](../other/configuration-with-osg-configure#storage). `grid_dir` is used as the `$OSG_GRID` environment variable in running jobs - see the [worker node environment document](../worker-node/using-wn.md). Pilot jobs source `$OSG_GRID/setup.sh` before performing any work. The value set for `grid_dir` must be the path of the wn-client installation directory. This is the path returned by **`echo $OSG_LOCATION`** once you source the setup file created by this installation.
 
 Services
 --------

@@ -37,14 +37,14 @@ Detailed changes are below. All of the documentation can be found in the [Releas
 Known Issues
 ------------
 
--   Updates to VOMS admin server require the updated emi-trustmanager-tomcat and re-running the configure script:\\ <pre class=rootscreen>[root@client ~] $ /var/lib/trustmanager-tomcat/configure.sh</pre>
+-   Updates to VOMS admin server require the updated emi-trustmanager-tomcat and re-running the configure script:\\ <pre class=rootscreen>root@host # /var/lib/trustmanager-tomcat/configure.sh</pre>
 -   Using the LCMAPS VOMS will result in a failing "supported VO" RSV test ([SOFTWARE-2763](https://jira.opensciencegrid.org/browse/SOFTWARE-2763)). This can be ignored and a fix is targeted for the July release.
 -   VOMS admin server shows an error when modifying/adding/signing AUPs, but all the actions still work.
 -   After updating OSG-CE to version 3.3-12, please disable and remove OSG Info Services via the following procedure:
 
 ``` console
-[root@client ~] $ service osg-info-services stop
-[root@client ~] $ yum erase gip osg-info-services
+root@host # service osg-info-services stop
+root@host # yum erase gip osg-info-services
 ```
 
 -   The Koji client config has changed in the new version of Koji: \`pkgurl`` http://koji.chtc.wisc.edu/packages` has been replaced by `topurl=http://koji.chtc.wisc.edu` and the Koji client will give a harmless but annoying warning when it finds `pkgurl`. To get rid of the warning, update to osg-build > `` 1.8.0, rerun \`osg-koji setup\`, and say 'yes' when asked to replace the Koji configuration file; or, you may make the above change manually.
@@ -71,7 +71,7 @@ To update to this series, you need [install the current OSG repositories](../../
 Once the new repositories are installed, you can update to this new release with:
 
 ``` console
-[root@client ~] $ yum update
+root@host # yum update
 ```
 
 <span class="twiki-macro NOTE"></span> Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
