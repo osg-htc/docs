@@ -19,12 +19,12 @@ To install the LCMAPS VOMS plugin, make sure that your host is up to date before
 1. Clean yum cache:
 
         ::console
-        [root@client ~ ] $ yum clean all --enablerepo=*
+        root@host # yum clean all --enablerepo=*
 
 2. Update software:
 
         :::console
-        [root@client ~ ] $ yum update
+        root@host # yum update
     This command will update **all** packages
 
 3. Install `lcmaps`, the default mapfile, and the configuration tools:

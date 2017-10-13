@@ -45,8 +45,8 @@ An installation of RSV at a site consists of the RSV client software, the Apache
 1. Consider updating your local cache of Yum repository data and your existing RPM packages:
 
         :::console
-        [root@client ~] # yum clean all --enablerepo=\*
-        [root@client ~] # yum update
+        root@host # yum clean all --enablerepo=\*
+        root@host # yum update
 
     !!! note
         The `update` command will update **all** packages on your system.
@@ -54,12 +54,12 @@ An installation of RSV at a site consists of the RSV client software, the Apache
 2. If you have installed HTCondor already but not by RPM, install a special empty RPM to make RSV happy:
 
         :::console
-        [root@client ~] # yum install empty-condor --enablerepo=osg-empty
+        root@host # yum install empty-condor --enablerepo=osg-empty
 
 3. Install RSV and related software:
 
         :::console
-        [root@client ~] # yum install rsv
+        root@host # yum install rsv
 
 Configuring RSV
 ---------------
@@ -73,8 +73,8 @@ After installation, there are some one-time configuration steps to tell RSV how 
 3. Complete the configuration using the `osg-configure` tool:
 
         :::console
-        [root@client ~] # osg-configure -v
-        [root@client ~] # osg-configure -c
+        root@host # osg-configure -v
+        root@host # osg-configure -c
 
 ### Optional configuration
 
@@ -98,20 +98,20 @@ If you would like your local RSV web server to use HTTPS instead of the default 
 1. Install `mod_ssl`:
 
         :::console
-        [root@client ~] # yum install mod_ssl
+        root@host # yum install mod_ssl
 
 2. Make an alternate set of HTTP service certificate files:
 
         :::console
-        [root@client ~] # cp -p /etc/grid-security/http/httpcert.pem /etc/grid-security/http/httpcert2.pem
-        [root@client ~] # cp -p /etc/grid-security/http/httpkey.pem /etc/grid-security/http/httpkey2.pem
-        [root@client ~] # chown apache:apache /etc/grid-security/http/http*2.pem
+        root@host # cp -p /etc/grid-security/http/httpcert.pem /etc/grid-security/http/httpcert2.pem
+        root@host # cp -p /etc/grid-security/http/httpkey.pem /etc/grid-security/http/httpkey2.pem
+        root@host # chown apache:apache /etc/grid-security/http/http*2.pem
 
 3. Back up existing Apache configuration files:
 
         :::console
-        [root@client ~] # cp -p /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.orig
-        [root@client ~] # cp -p /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.orig
+        root@host # cp -p /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.orig
+        root@host # cp -p /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.orig
 
 4. Change the default port for HTTP connections to 8000 by editing `/etc/httpd/conf/httpd.conf`
 
@@ -162,7 +162,7 @@ Start the services in the order listed and stop them in reverse order. As a remi
 Normally, the HTCondor-Cron scheduler runs RSV periodically. However, you can run RSV probes manually at any time:
 
 ``` console
-[root@client ~] # rsv-control --run --all-enabled
+root@host # rsv-control --run --all-enabled
 ```
 
 If successful, results will be available from your local RSV web server (e.g., `http://localhost/rsv`) and, if enabled (which is the default) on [MyOSG](http://myosg.grid.iu.edu/).
@@ -172,7 +172,7 @@ You can also run the metrics individually or pass special parameters as explaine
 Troubleshooting RSV
 -------------------
 
-You can find more information on troubleshooting RSV in the [rsv-control documentation](rsv-control) and in [TroubleshootRSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv).
+You can find more information on troubleshooting RSV in the [rsv-control documentation](rsv-control).
 
 ### Important file locations
 
@@ -263,10 +263,10 @@ EOT
 Getting Help
 ------------
 
-To get assistance, please use [this page](../common/help.md).
+To get assistance, please use [this page](../common/help.md) and attach the output of `rsv-control --profile`:
 
 ```console
-[root@client ~] # rsv-control --profile
+root@host # rsv-control --profile
 Running the rsv-profiler...
 OSG-RSV Profiler
 Analyzing...
