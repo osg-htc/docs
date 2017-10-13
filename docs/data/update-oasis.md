@@ -35,34 +35,32 @@ The next step is to generate a proxy and log into `oasis-login.opensciencegrid.o
 user@host $ voms-proxy-init -voms %RED%VO%ENDCOLOR%
 user@host $ gsissh -o GSSAPIDelegateCredentials=yes oasis-login.opensciencegrid.org
 ```
-
+<br/>
 In case the user can be mapped to more than one account, specify it explicitly in a command like this
 
 ``` console
 user@host $ gsissh -o GSSAPIDelegateCredentials=yes ouser.%RED%VO%ENDCOLOR%@oasis-login.opensciencegrid.org
 ```
-
+<br/>
 Instead of putting <verbatim>-o GSSAPIDelegateCredentials`yes</verbatim> on the command line, you can put it in your =~/.ssh/config` like this:
 
 ``` console
 Host oasis-login.opensciencegrid.org
     GSSAPIDelegateCredentials yes
 ```
-
+<br/>
 ### Install and update software ###
 
 Once you log in, you can add/modify/remove content on a staging area at `/stage/oasis/$VO` where $VO is the name of the VO represented by the manager.
 
-Files here are visible to both `oasis-login` and the Stratum 0 server (oasis.opensciencegrid.org)
+Files here are visible to both `oasis-login` and the Stratum 0 server (oasis.opensciencegrid.org).  There is a symbolic link at `/cvmfs/oasis.opensciencegrid.org/$VO` that points to the same staging area.  
 
-NOTE that `/stage/oasis/$VO` is not your home directory, which you can use for staging purposes but is not visible in OASIS.
-
-As OASIS manager for the VO requests an oasis update with:
+Request an oasis publish with this command:
 
 ``` console
 user@host $ osg-oasis-update
 ```
-
+<br/>
 This command queues a process to sync the content of OASIS with the content of `/stage/oasis/$VO`
 
 `osg-oasis-update` returns immediately, but only one update can run at a time (across all VOs); your request may be queued behind a different VO. If you encounter severe delays before the update is finished being published (more than 4 hours), please file a GOC ticket.
@@ -78,7 +76,7 @@ After `osg-oasis-update` completes and the changes have been propagated to the C
 ``` console
 root@host # cvmfs_talk -i oasis.opensciencegrid.org remount
 ```
-
+<br/>
 This can be done while the filesystem is mounted (despite what the name sounds like it does not do umount/mount). If the filesystem is not mounted, it will automatically check for new updates the next time it is mounted.
 
 In order to find out if an update has reached the CVMFS stratum 1 server, you can find out the latest `osg-oasis-update` time seen by the stratum 1 most favored by your CVMFS client with the following long command on your client machine:
@@ -87,6 +85,7 @@ In order to find out if an update has reached the CVMFS stratum 1 server, you ca
 user@host $ date -d "1970-1-1 GMT + $(wget -qO- $(attr -qg host /cvmfs/oasis.opensciencegrid.org)/.cvmfspublished | \
                                                             cat -v|sed -n '/^T/{s/^T//p;q;}') sec"
 ```
+<br/>
 
 References
 ----------
