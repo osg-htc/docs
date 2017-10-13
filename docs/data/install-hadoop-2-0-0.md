@@ -6,7 +6,7 @@ The purpose of this document is to provide Hadoop based SE administrators the in
 Introduction
 ------------
 
-[Hadoop Distributed File System](http://hadoop.apache.org/hdfs/) (HDFS) is a scalable reliable distributed file system developed in the Apache project. It is based on map-reduce framework and design of the Google file system. The VDT distribution of Hadoop includes all components needed to operate a multi-terabyte storage site. Included are:
+[Hadoop Distributed File System](http://hadoop.apache.org/) (HDFS) is a scalable reliable distributed file system developed in the Apache project. It is based on map-reduce framework and design of the Google file system. The VDT distribution of Hadoop includes all components needed to operate a multi-terabyte storage site. Included are:
 
 -   An [SRM interface](https://sdm.lbl.gov/srm-wg/doc/SRM.v2.2.html) for grid access;
 -   GridFTP-HDFS as transport layer; and
@@ -361,8 +361,8 @@ The primary configuration file for the gums-client utilities is located in `/etc
 |               |               |                                                                                                                                                                                         |
 |---------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Attribute     | Needs Editing | Value                                                                                                                                                                                   |
-| gums.location | Yes           | This should be set to the admin URL for your gums server, usually of the form gums.location=<https://GUMS_HOSTNAME:8443/gums/services/GUMSAdmin>                                        |
-| gums.authz    | Yes           | This should be set to the authorization interface URL for your gums server, usually of the form gums.authz=<https://GUMS_HOSTNAME:8443/gums/services/GUMSXACMLAuthorizationServicePort> |
+| gums.location | Yes           | This should be set to the admin URL for your gums server, usually of the form gums.location=https://GUMS_HOSTNAME:8443/gums/services/GUMSAdmin                                        |
+| gums.authz    | Yes           | This should be set to the authorization interface URL for your gums server, usually of the form gums.authz=https://GUMS_HOSTNAME:8443/gums/services/GUMSXACMLAuthorizationServicePort |
 
 After the gums client is configured to generate the file run the following once by hand:
 
@@ -698,7 +698,7 @@ bin/hadoop command [genericOptions] [commandOptions]
 </p>
 </details>
 
-An online guide is also available at [Apache Hadoop commands manual](http://hadoop.apache.org/common/docs/current/commands_manual.html). You can use Hadoop commands to perform filesystem operations with more consistency.
+An online guide is also available at [Apache Hadoop commands manual](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/CommandsManual.html). You can use Hadoop commands to perform filesystem operations with more consistency.
 
 Example, to look into the internal hadoop namespace:
 
@@ -1164,15 +1164,9 @@ Please refer to [OSG Hadoop debug webpage](https://twiki.grid.iu.edu/bin/view/St
 FUSE
 ----
 
-\#TroubFuseMod
-
 ### Notes on Building a FUSE Module
 
 If you are running a custom kernel, then be sure to enable the `fuse` module with `CONFIG_FUSE_FS=m` in your kernel config. Building and installing a `fuse` kernel module for your custom kernel is beyond the scope of this document.
-
-**Note:** If you cannot find a `fuse` kernel module to match your kernel, ATRPMs has a [guide for using their RPM spec files](http://people.atrpms.net/~pcavalcanti/LCG_kernel_modules.html) in order to generate a module. That page mostly works, although sections are a bit out dated. Contact the <osg-hadoop@opensciencegrid.org> list if you need help.
-
-\#TroubFuseDeb
 
 ### Running FUSE in Debug Mode
 
