@@ -51,6 +51,12 @@
      <changefreq>daily</changefreq>
     </url>
         
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/common/openjdk7/</loc>
+     <lastmod>2017-10-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
     

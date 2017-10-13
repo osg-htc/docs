@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Java 7 - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Java 7";
+    var mkdocs_page_input_path = "common/openjdk7.md";
+    var mkdocs_page_url = "/common/openjdk7/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../..">Home</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../install-overview/">Installation Overview</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../site-planning/">Site Planning</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Common</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../install-best-practices/">Install Best Practices</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../ca/">CA Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../yum/">Yum Repos</a>
+  
+        </li>
+        <li class=" current">
+          
+  
+    <a class="current" href="./">Java 7</a>
+  
+  <ul class="subnav">
+      
+    <li class="toctree-l3"><a href="#java-installation-guide-for-osg-software">Java Installation Guide for OSG Software</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#installing-java">Installing Java</a></li>
+        
+            <li><a class="toctree-l4" href="#fixing-openjdk-after-installing-other-software">Fixing OpenJDK After Installing Other Software</a></li>
+        
+            <li><a class="toctree-l4" href="#fixing-tomcat">Fixing Tomcat</a></li>
+        
+            <li><a class="toctree-l4" href="#fixing-bestman">Fixing BeStMan</a></li>
+        
+            <li><a class="toctree-l4" href="#fixing-ssl-problems-disabling-sslv3">Fixing SSL problems / Disabling SSLv3</a></li>
+        
+            <li><a class="toctree-l4" href="#optional-preventing-oracle-jdk-from-being-installed">Optional: Preventing Oracle JDK From Being Installed</a></li>
+        
+            <li><a class="toctree-l4" href="#getting-help-with-java-and-osg-software">Getting Help with Java and OSG Software</a></li>
+        
+        </ul>
+    
+
+  </ul>
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Worker Node</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn/">Worker Node (RPM install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Compute Element</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/gridftp/">Install GridFTP Server</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/load-balanced-gridftp/">Install Load Balanced GridFTP</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-gridftp-xrootd/">Install GridFtp XRootD</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/frontier-squid/">HTTP Cache</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/xrootd-overview/">XRootD Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-xroot-client/">XRootD Client</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/hadoop-overview/">Hadoop Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-hadoop-2-0-0/">Hadoop</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Security</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/host-certs/">Host Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/user-certs/">User Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/osg-ca-manage/">Managing CAs</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Release Information</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../release/notes/">Release Notes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/signing/">RPM Signing</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/contrib/">Contrib Software</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Other</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-osg-upcoming-software/">OSG upcoming software</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-cvmfs-stratum1/">Install a CVMFS Stratum 1</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/network-performance-toolkit/">Network Performance Toolkit</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Monitoring</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/advanced-rsv-configuration/">Advanced RSV Configuration</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-control/">Manage RSV via rsv-control</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Usage Guides</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../pki-cli/">Certificate Tools</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/using-wn/">Worker Node Environment</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Deprecated Software</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-bestman-xrootd/">BeStMan Xrootd SE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/edg-mkgridmap/">EDG-Mkgridmap Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/install-gums/">GUMS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-voms/">Install VOMS</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../help/">Get Help</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Install Guides - Common &raquo;</li>
+        
+      
+    
+    <li>Java 7</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/common/openjdk7.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="java-installation-guide-for-osg-software">Java Installation Guide for OSG Software<a class="headerlink" href="#java-installation-guide-for-osg-software" title="Permanent link">&para;</a></h1>
+<p>Several OSG software components (e.g., <a href="../../data/bestman-overview">BeStMan</a>, <a href="../../security/install-gums">GUMS</a>, <a href="../../other/install-voms">VOMS Admin</a>, and their dependencies) are written in the <a href="http://en.wikipedia.org/wiki/Java_(programming_language)">Java programming language</a> and therefore need a Java Virtual Machine (JVM) implementation in which to run. Currently, OSG software is supported under the OpenJDK 7 implementation. Other implementations (such as the Oracle JDK) may also work, but there is considerable risk in using one; for instance, the IBM implementation is known to cause failures in most OSG Java software.</p>
+<p>This document explains how to install Java for OSG software components in a way that allows other Java implementations to be present on a system. If you want to remove all other Java implementations besides the supported OpenJDK 7, there are optional instructions for doing so. This document is only about installing Java as a preliminary step for other OSG software installations; other OSG install guides refer to this document when necessary.</p>
+<h2 id="installing-java">Installing Java<a class="headerlink" href="#installing-java" title="Permanent link">&para;</a></h2>
+<p>OSG strongly recommends installing OpenJDK 7 as the primary Java implementation on each OSG host that needs Java. Instructions for doing so are below. If you have specific technical reasons to install or use an alternate, unsupported Java implementation, there are separate instructions for doing so. Choose one of the following subsections based on your needs.</p>
+<h3 id="installing-openjdk-7-for-osg-software">Installing OpenJDK 7 for OSG software<a class="headerlink" href="#installing-openjdk-7-for-osg-software" title="Permanent link">&para;</a></h3>
+<p>To install OpenJDK 7 as the primary Java implementation on an OSG host:</p>
+<ol>
+<li>
+<p>Remove any conflicting symbolic links from an Oracle JDK installation (will not break Oracle JDK) </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rm -f /usr/bin/java /usr/bin/javac /usr/bin/javadoc /usr/bin/jar
+</pre></div>
+
+
+</li>
+<li>
+<p>Install OpenJDK 7 and OSG Java 7 package compatability layer </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install java-1.7.0-openjdk java-1.7.0-openjdk-devel osg-java7-compat osg-java7-devel-compat
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If yum claims that java-1.7.0-openjdk is not available, you likely need to upgrade your operating system. The package <em>is</em> available on both EL 5 and EL 6 systems, although only the latest releases of EL 5 systems contain it.</p>
+</div>
+</li>
+<li>
+<p>Make OpenJDK the preferred Java runtime environment (JRE) </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> alternatives --config java Select <span class="sb">`</span>jre-1.7.0-openjdk<span class="sb">`</span>.
+</pre></div>
+
+
+</li>
+<li>
+<p>Verify that OpenJDK is the preferred JRE </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> java -version The version number should start with <span class="sb">`</span><span class="m">1</span>.7<span class="sb">`</span>.
+</pre></div>
+
+
+</li>
+<li>
+<p>Make OpenJDK the preferred Java development kit (JDK) </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> alternatives --config javac Select <span class="sb">`</span>java-1.7.0-openjdk<span class="sb">`</span>.
+</pre></div>
+
+
+</li>
+<li>
+<p>Verify that OpenJDK is the preferred JDK </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> javac -version The version number should start with <span class="sb">`</span><span class="m">1</span>.7<span class="sb">`</span>.
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="installing-another-java-implementation-for-osg-software">Installing another Java implementation for OSG software<a class="headerlink" href="#installing-another-java-implementation-for-osg-software" title="Permanent link">&para;</a></h3>
+<p>Unless you have specific technical reasons otherwise, you should use OpenJDK 7 for OSG Software; see the installation instructions above and skip this section. To install an alternate Java implementation as the primary Java implementation on an OSG host, use this section.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The IBM Java implementation (<code>java-1.7.0-ibm</code> or <code>java-1.7.1-ibm</code>) is known to cause severe failures in BeStMan 2 and GUMS (at least).</p>
+</div>
+<ol>
+<li>Install the Java implementation of your choice</li>
+<li>Install the OSG Java 7 package compatability layer <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-java7-compat osg-java7-devel-compat
+</pre></div>
+
+
+<ol>
+<li>
+<p>Make your Java implementation the preferred Java runtime environment (JRE) </p>
+<p>:::console
+root@host # alternatives --config java
+4.  Verify that your Java implementation is the preferred JRE </p>
+<p>:::console
+root@host # java -version The version number should start with <code>1.7</code>.
+5.  Make your Java implementation the preferred Java development kit (JDK) </p>
+<p>:::console
+root@host # alternatives --config javac
+6.  Verify that your Java implementation is the preferred JDK </p>
+<p>:::console
+root@host # javac -version The version number should start with <code>1.7</code>.</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="fixing-openjdk-after-installing-other-software">Fixing OpenJDK After Installing Other Software<a class="headerlink" href="#fixing-openjdk-after-installing-other-software" title="Permanent link">&para;</a></h2>
+<p>If you happened to install OSG or other Java-dependent software <strong>before</strong> installing OpenJDK, there may be issues with some stale symbolic links to the Oracle Java implementation. To see whether the issue exists:</p>
+<ol>
+<li>
+<p>Check for an Oracle Java installation </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -q jdk
+</pre></div>
+
+
+<p>If this command outputs a specific RPM name and version (e.g., <code>jdk-1.7.0</code>), then Oracle Java is installed and you should continue with the next step. Otherwise, there are no issues and you are done</p>
+</li>
+<li>
+<p>Check for stale symbolic links </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> **file /usr/bin/java**
+</pre></div>
+
+
+</li>
+</ol>
+<p>/usr/bin/java: symbolic link to `/etc/alternatives/java' If the output of the <code>file</code> command above differs from the sample output — if <code>/usr/bin/java</code> does not exist, if it is not a symbolic link, or if it is a symbolic link to a different path — then your OpenJDK installation has issues and must be fixed; continue with the next repair procedure below. Otherwise, there are no issues and you are done</p>
+<p>To fix the OpenJDK installation:</p>
+<ol>
+<li>
+<p>Remove incorrect symbolic links: </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rm -f /usr/bin/java /usr/bin/javac /usr/bin/javadoc /usr/bin/jar
+</pre></div>
+
+
+</li>
+<li>
+<p>Reinstall OpenJDK to create the symbolic links: </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum reinstall java-1.7.0-openjdk java-1.7.0-openjdk-devel
+</pre></div>
+
+
+</li>
+<li>
+<p>Make OpenJDK the preferred Java runtime environment (JRE): </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> alternatives --config java Select <span class="sb">`</span>jre-1.7.0-openjdk<span class="sb">`</span>.
+</pre></div>
+
+
+</li>
+<li>
+<p>Verify that OpenJDK is the preferred JRE: </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> java -version The version number should start with <span class="sb">`</span><span class="m">1</span>.7<span class="sb">`</span>.
+</pre></div>
+
+
+</li>
+<li>
+<p>Make OpenJDK the preferred Java development kit (JDK): </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> alternatives --config javac Select <span class="sb">`</span>java-1.7.0-openjdk<span class="sb">`</span>.
+</pre></div>
+
+
+</li>
+<li>
+<p>Verify that OpenJDK is the preferred JDK: </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> javac -version The version number should start with <span class="sb">`</span><span class="m">1</span>.7<span class="sb">`</span>.
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="fixing-tomcat">Fixing Tomcat<a class="headerlink" href="#fixing-tomcat" title="Permanent link">&para;</a></h2>
+<p>If you have a pre-existing Tomcat installation, you must ensure that that it is using your preferred Java implementation.</p>
+<h3 id="fixing-tomcat-on-an-el6-system">Fixing Tomcat on an EL6 system<a class="headerlink" href="#fixing-tomcat-on-an-el6-system" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Check if tomcat6 is installed: </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -q tomcat6
+</pre></div>
+
+
+<p>If the RPM is installed, the command will output the specific RPM name and version. If there is no output: Tomcat is not installed, there is no issue, and you are done</p>
+</li>
+<li>
+<p>Open <code>/etc/sysconfig/tomcat6</code>.</p>
+</li>
+<li>Check if there is a line setting <code>JAVA_HOME</code> and that line is uncommented. If so, change that line to: <pre class="file">JAVA_HOME="/etc/alternatives/jre" If not, then you do not need to do anything.</li>
+<li>Do the same check for <code>/etc/tomcat6/tomcat6.conf</code>.</li>
+<li>Restart the Tomcat service: <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service tomcat6 restart
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="fixing-tomcat-on-an-el5-system">Fixing Tomcat on an EL5 system<a class="headerlink" href="#fixing-tomcat-on-an-el5-system" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Check if tomcat5 is installed: </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -q tomcat5
+</pre></div>
+
+
+<p>If the RPM is installed, the command will output the specific RPM name and version. If there is no output: Tomcat is not installed, there is no issue, and you are done</p>
+</li>
+<li>
+<p>Open <code>/etc/sysconfig/tomcat5</code>.</p>
+</li>
+<li>Check if there is a line setting <code>JAVA_HOME</code> and that line is uncommented. If so, change that line to: <pre class="file">JAVA_HOME="/etc/alternatives/jre" If not, then you do not need to do anything.</li>
+<li>Do the same check for <code>/etc/tomcat5/tomcat5.conf</code>.</li>
+<li>Restart the Tomcat service: <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service tomcat5 restart
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="fixing-bestman">Fixing BeStMan<a class="headerlink" href="#fixing-bestman" title="Permanent link">&para;</a></h2>
+<p>If you have a pre-existing BeStMan installation, you must ensure that it is using your preferred Java implementation.</p>
+<ol>
+<li>
+<p>Check if any bestman2 packages are installed: </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -qa <span class="p">|</span> grep ^bestman2
+</pre></div>
+
+
+<p>If any bestman2 RPMs are installed, the command will output the specific names and versions. If there is no output: BeStMan is not installed, there is no issue, and you are done
+2.  Open <code>/etc/sysconfig/bestman2</code>.
+3.  Check if there is a line setting <code>JAVA_HOME</code> and that line is uncommented. If so, change that line to: <pre class="file">JAVA_HOME=/etc/alternatives/java_sdk If not, then you do not need to do anything.
+4.  Restart the BeStMan service: </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service bestman2 restart
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="fixing-ssl-problems-disabling-sslv3">Fixing SSL problems / Disabling SSLv3<a class="headerlink" href="#fixing-ssl-problems-disabling-sslv3" title="Permanent link">&para;</a></h2>
+<p>We have received reports that the latest version of Firefox (39.0) keeps users from being able to access the web UIs of GUMS, Gratia, or VOMS-Admin. Attempts to access will result in this error: </p>
+<div class="codehilite"><pre><span></span>      SSL received a weak ephemeral Diffie-Hellman key in Server Key Exchange handshake message.
+      (Error code: ssl_error_weak_server_ephemeral_dh_key)
+</pre></div>
+
+
+<p>This affects all known versions of OpenJDK 1.7.0.   The recommended workaround for this is server-side:</p>
+<ol>
+<li>Find the file: <code>/usr/lib/jvm/java-1.7.0-openjdk-1.7.0-*/jre/lib/security/java.security</code></li>
+<li>Find the setting called <code>jdk.tls.disabledAlgorithms</code> (or add it if missing)</li>
+<li>If not already present, add <code>SSLv3</code> and <code>DHE</code> to the list</li>
+<li>If using EL6, run <code>service tomcat6 restart</code>. If using EL7, run <code>service tomcat restart</code></li>
+</ol>
+<p>This will cause the webapp to use a different algorithm, which Firefox will not complain about.   We do not have an ETA for when a future version of OpenJDK 1.7.0 will contain a fix. OpenJDK 1.8.0 does not have this problem, but since we have not verified that it works with OSG software, we do not recommend switching to that yet. </p>
+<h2 id="optional-preventing-oracle-jdk-from-being-installed">Optional: Preventing Oracle JDK From Being Installed<a class="headerlink" href="#optional-preventing-oracle-jdk-from-being-installed" title="Permanent link">&para;</a></h2>
+<p>To prevent Oracle's java implementation from being installed, you can configure yum to exclude it from all future installs: Edit <code>/etc/yum.conf</code> and add the line <code>exclude=jdk java-1.6.0-sun-compat</code> to the end of the file. If a line starting with <code>exclude=</code> already exists in <code>/etc/yum.conf</code>, then add <code>jdk</code> and <code>java-1.6.0-sun-compat</code> to the end of that line, separated by spaces.</p>
+<h2 id="getting-help-with-java-and-osg-software">Getting Help with Java and OSG Software<a class="headerlink" href="#getting-help-with-java-and-osg-software" title="Permanent link">&para;</a></h2>
+<p>For further assistance please use <a href="../../common/help">this page</a>.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../worker-node/install-wn/" class="btn btn-neutral float-right" title="Worker Node (RPM install)">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../yum/" class="btn btn-neutral" title="Yum Repos"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../yum/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../worker-node/install-wn/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
