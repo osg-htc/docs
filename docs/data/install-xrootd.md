@@ -5,9 +5,16 @@ Installing and Maintaining XRootD
 About This Guide
 ----------------
 
-[XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in a variety of ways to access data, typically distributed among actual storage resources. One way to use XRootD is to have it refer to many data resources at a single site, and another way to use it is to refer to many storage systems, most likely distributed among sites. An XRootD system includes a *redirector*, which accepts requests for data and finds a storage repository — locally or otherwise — that can provide the data to the requestor.
+[XRootD](http://xrootd.org/) is a hierarchical storage system that can be used
+in a variety of ways to access data, typically distributed among actual storage
+resources. One way to use XRootD is to have it refer to many data resources at a
+single site, and another way to use it is to refer to many storage systems, most
+likely distributed among sites. An XRootD system includes a *redirector*, which
+accepts requests for data and finds a storage repository — locally or
+otherwise — that can provide the data to the requestor.
 
-Use this page to learn how to install, configure, and use an XRootD redirector as part of a Storage Element (SE) or as part of a global namespace.
+Use this page to learn how to install, configure, and use an XRootD redirector
+as part of a Storage Element (SE) or as part of a global namespace.
 
 Before Starting
 ---------------
@@ -28,7 +35,8 @@ As with all OSG software installations, there are some one-time (per host) steps
 Installing an XRootD Server
 ---------------------------
 
-An installation of the XRootD server consists of the server itself and its dependencies. Install these with Yum:
+An installation of the XRootD server consists of the server itself and its
+dependencies. Install these with Yum:
 
 ``` console
 root@host # yum install xrootd
@@ -39,9 +47,14 @@ Configuring an XRootD Server
 
 ### Minimal configuration
 
-A new installation of XRootD is already configured to run a standalone server that serves files from `/tmp` on the local file system. This configuration is useful to verify basic connectivity between your clients and your server. To do this, start the `xrootd` service with standalone config as described in the [managing services section](#ManagingServices).
+A new installation of XRootD is already configured to run a standalone server
+that serves files from `/tmp` on the local file system. This configuration is
+useful to verify basic connectivity between your clients and your server. To do
+this, start the `xrootd` service with standalone config as described in the
+[managing services section](#ManagingServices).
 
-You should be able now to copy a file such as `/bin/sh` using `xrdcp` command into `/tmp`. To test, do:
+You should be able now to copy a file such as `/bin/sh` using `xrdcp` command
+into `/tmp`. To test, do:
 
 ``` console
 root@host # yum install xrootd-client
@@ -51,17 +64,25 @@ root@host # ls -l /tmp/first_test
 -rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
 ```
 
-Other than for testing, a standalone server is useful when you want to serve files off of a single host with lots of large disks. If your storage capacity is spread out over multiple hosts, you will need to set up an XRootD cluster.
+Other than for testing, a standalone server is useful when you want to serve
+files off of a single host with lots of large disks. If your storage capacity is
+spread out over multiple hosts, you will need to set up an XRootD cluster.
 
 ### Advanced configuration
 
-An advanced XRootD setup has multiple components; it is important to validate that each additional component that you set up is working before moving on to the next component. We have included validation instructions after each component below.
+An advanced XRootD setup has multiple components; it is important to validate
+that each additional component that you set up is working before moving on to
+the next component. We have included validation instructions after each
+component below.
 
 ### Creating an XRootD cluster
 
 <img src="%ATTACHURLPATH%/rdr.jpg" alt="rdr.jpg" width="736" height="318"/>
 
-If your storage is spread out over multiple hosts, you will need to set up an XRootD *cluster*. The cluster uses one "redirector" node as a frontend for user accesses, and multiple data nodes that have the data that users request. Two daemons will run on each node:
+If your storage is spread out over multiple hosts, you will need to set up an
+XRootD *cluster*. The cluster uses one "redirector" node as a frontend for user
+accesses, and multiple data nodes that have the data that users request. Two
+daemons will run on each node:
 
 `xrootd`  
 The eXtended Root Daemon controls file access and storage.
@@ -69,13 +90,20 @@ The eXtended Root Daemon controls file access and storage.
 `cmsd`  
 The Cluster Management Services Daemon controls communication between nodes.
 
-Note that for large virtual organizations, a site-level redirector may actually also communicate upwards to a regional or global redirector that handles access to a multi-level hierarchy. This section will only cover handling one level of XRootD hierarchy.
+Note that for large virtual organizations, a site-level redirector may actually
+also communicate upwards to a regional or global redirector that handles access
+to a multi-level hierarchy. This section will only cover handling one level of
+XRootD hierarchy.
 
-In the instructions below, %RED%RDRNODE<span class="twiki-macro ENDCOLOR"></span> will refer to the redirector host and %RED%DATANODE<span class="twiki-macro ENDCOLOR"></span> will refer to the data node host. These should be replaced with the fully-qualified domain name of the host in question.
+In the instructions below, %RED%RDRNODE%ENDCOLOR% will refer to the redirector host
+and %RED%DATANODE%ENDCOLOR% will refer to the data node host. These should be
+replaced with the fully-qualified domain name of the host in question.
 
 #### Modify /etc/xrootd/xrootd-clustered.cfg
 
-You will need to modify the `xrootd-clustered.cfg` on the redirector node and each data node. The following example should serve as a base configuration for clustering. Further customizations are detailed below.
+You will need to modify the `xrootd-clustered.cfg` on the redirector node and
+each data node. The following example should serve as a base configuration for
+clustering. Further customizations are detailed below.
 
 ``` file
 all.export %RED%/tmp%ENDCOLOR% stage
@@ -104,20 +132,24 @@ Further information can be found at <http://xrootd.slac.stanford.edu/doc>
 
 #### Verifying the clustered config
 
-Start both `xrootd` and `cmsd` on all nodes according to the instructions in the [managing services section](#ManagingServices).
+Start both `xrootd` and `cmsd` on all nodes according to the instructions in the
+[managing services section](#ManagingServices).
 
-Verify that you can copy a file such as `/bin/sh` to `/tmp` on the server data via the redirector:
+Verify that you can copy a file such as `/bin/sh` to `/tmp` on the server data
+via the redirector:
 
 ``` console
 root@host # xrdcp /bin/sh  root://%RED%RDRNODE%ENDCOLOR%:1094///tmp/second_test
 [xrootd] Total 0.76 MB  |====================| 100.00 % [inf MB/s]
 ```
 
-Check that the `/tmp/second_test` is located on data server %RED%DATANODE<span class="twiki-macro ENDCOLOR"></span>.
+Check that the `/tmp/second_test` is located on data server %RED%DATANODE%ENDCOLOR%.
 
 ### (Optional) Adding Simple Server Inventory to your cluster
 
-The Simple Server Inventory (SSI) provide means to have an inventory for each data server (See details in [XRootD CMS config](http://xrootd.org/doc/prod/cms_config.htm)). SSI requires:
+The Simple Server Inventory (SSI) provide means to have an inventory for each
+data server (See details in [XRootD CMS config](http://xrootd.org/doc/prod/cms_config.htm)). 
+SSI requires:
 
 -   A second instance of the `xrootd` daemon on the redirector
 -   A "composite name space daemon" (`XrdCnsd`) on each data server; this daemon handles the inventory
@@ -150,7 +182,9 @@ root@host # mkdir -p  /local/xrootd
 root@host # chown xrootd:xrootd /local/xrootd
 ```
 
-We will be running two instances of XRootD on %RED%hostA<span class="twiki-macro ENDCOLOR"></span>. Modify `/etc/xrootd/xrootd-clustered.cfg` to give the two instances different behavior, as such:
+We will be running two instances of XRootD on %RED%hostA%ENDCOLOR%. Modify
+`/etc/xrootd/xrootd-clustered.cfg` to give the two instances different behavior,
+as such:
 
 ``` file
 all.export /data/xrootdfs
@@ -174,56 +208,132 @@ fi
 
 #### Starting a second instance of XRootD on EL 6
 
-The procedure for starting a second instance differs between EL 6 and EL 7. This section is the procedure for EL 6.
+The procedure for starting a second instance differs between EL 6 and EL 7. This
+section is the procedure for EL 6.
 
-Now, we have to change **`/etc/sysconfig/xrootd`** on the redirector node (%RED%hostA<span class="twiki-macro ENDCOLOR"></span>) to run multiple instances of xrootd. The second instance of xrootd will be named "cns" and will be used for SSI.<pre class="file"> XROOTD\_USER=xrootd XROOTD\_GROUP=xrootd XROOTD\_DEFAULT\_OPTIONS="%RED%-k 7<span class="twiki-macro ENDCOLOR"></span> -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg" %RED%XROOTD\_CNS\_OPTIONS="-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"<span class="twiki-macro ENDCOLOR"></span> CMSD\_DEFAULT\_OPTIONS="%RED%-k 7<span class="twiki-macro ENDCOLOR"></span> -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg" FRMD\_DEFAULT\_OPTIONS="%RED%-k 7<span class="twiki-macro ENDCOLOR"></span> -l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg" %RED%XROOTD\_INSTANCES="default cns"<span class="twiki-macro ENDCOLOR"></span> CMSD\_INSTANCES="default" FRMD\_INSTANCES="default" </pre>
+Now, we have to change **`/etc/sysconfig/xrootd`** on the redirector node (%RED%hostA%ENDCOLOR%) to run multiple instances of xrootd. The second instance of xrootd will be named "cns" and will be used for SSI.
 
-Now, we can start xrootd cluster executing the following commands. On redirector you will see:<pre class="rootscreen"> [root@client ~] $ service xrootd start Starting xrootd (xrootd, default): %GREEN%\[ OK \]<span class="twiki-macro ENDCOLOR"></span> Starting xrootd (xrootd, cns): %GREEN%\[ OK \]<span class="twiki-macro ENDCOLOR"></span> [root@client ~] $ service cmsd start Starting xrootd (cmsd, default): %GREEN%\[ OK \]<span class="twiki-macro ENDCOLOR"></span> </pre>
+```file
+XROOTD\_USER=xrootd 
+XROOTD\_GROUP=xrootd 
+XROOTD\_DEFAULT\_OPTIONS="%RED%-k 7%ENDCOLOR% -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"
+%RED%XROOTD\_CNS\_OPTIONS="-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"%ENDCOLOR% 
+CMSD\_DEFAULT\_OPTIONS="%RED%-k 7%ENDCOLOR% -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg" 
+FRMD\_DEFAULT\_OPTIONS="%RED%-k 7%ENDCOLOR% -l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg" 
+%RED%XROOTD\_INSTANCES="default cns"%ENDCOLOR% 
+CMSD\_INSTANCES="default" 
+FRMD\_INSTANCES="default" 
+```
 
-On redirector node you should see two instances of xrootd running:<pre class="rootscreen"> [root@client ~] $ ps auxww|grep xrootd xrootd 29036 0.0 0.0 44008 3172 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default xrootd 29108 0.0 0.0 43868 3016 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-cns.pid -n cns xrootd 29196 0.0 0.0 51420 3692 ? Sl Apr11 0:00 /usr/bin/cmsd -k 7 -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default </pre><span class="twiki-macro ICON">warning</span> the log file for second named instance of xrootd with be placed in /var/log/xrootd/cns/xrootd.log
+Now, we can start xrootd cluster executing the following commands. On redirector you will see:
 
-On data server node you should that XrdCnsd process has been started:<pre class="rootscreen"> [root@client ~] $ ps auxww|grep xrootd xrootd 19156 0.0 0.0 48096 3256 ? Sl 07:37 0:00 /usr/bin/cmsd -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default xrootd 19880 0.0 0.0 46124 2916 ? Sl 08:33 0:00 /usr/bin/xrootd -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default xrootd 19894 0.0 0.1 71164 6960 ? Sl 08:33 0:00 /usr/bin/XrdCnsd -d -D 2 -i 90 -b fermicloud053.fnal.gov:1095:/data/inventory </pre>
+```console
+root@host # service xrootd start 
+Starting xrootd (xrootd, default): %GREEN%\[ OK \]%ENDCOLOR% 
+Starting xrootd (xrootd, cns): %GREEN%\[ OK \]%ENDCOLOR% 
+root@host # service cmsd start 
+Starting xrootd (cmsd, default): %GREEN%\[ OK \]%ENDCOLOR% 
+```
+
+On redirector node you should see two instances of xrootd running:
+
+```console
+root@host # ps auxww|grep xrootd 
+xrootd 29036 0.0 0.0 44008 3172 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default 
+xrootd 29108 0.0 0.0 43868 3016 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-cns.pid -n cns 
+xrootd 29196 0.0 0.0 51420 3692 ? Sl Apr11 0:00 /usr/bin/cmsd -k 7 -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default 
+```
+%RED%warning%ENDCOLOR% the log file for second named instance of xrootd with be placed in `/var/log/xrootd/cns/xrootd.log`
+
+On data server node you should that XrdCnsd process has been started:
+
+```console
+root@host # ps auxww|grep xrootd 
+xrootd 19156 0.0 0.0 48096 3256 ? Sl 07:37 0:00 /usr/bin/cmsd -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default 
+xrootd 19880 0.0 0.0 46124 2916 ? Sl 08:33 0:00 /usr/bin/xrootd -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default 
+xrootd 19894 0.0 0.1 71164 6960 ? Sl 08:33 0:00 /usr/bin/XrdCnsd -d -D 2 -i 90 -b fermicloud053.fnal.gov:1095:/data/inventory 
+```
 
 #### Starting a second instance of XRootD on EL 7
 
 The procedure for starting a second instance differs between EL 6 and EL 7. This section is the procedure for EL 7.
 
-1.  Create a symlink pointing to `/etc/xrootd/xrootd-clustered.cfg` at `/etc/xrootd/xrootd-cns.cfg`:<pre class="rootscreen">
+1.  Create a symlink pointing to `/etc/xrootd/xrootd-clustered.cfg` at `/etc/xrootd/xrootd-cns.cfg`:
 
-[root@client ~] $ ln -s /etc/xrootd/xrootd-clustered.cfg /etc/xrootd/xrootd-cns.cfg </pre>
+```console
+root@host # ln -s /etc/xrootd/xrootd-clustered.cfg /etc/xrootd/xrootd-cns.cfg 
+```
 
-1.  Start an instance of the `xrootd` service named `cns` using the syntax in the [managing services section](#ManagingServices):<pre class="rootscreen">
+1.  Start an instance of the `xrootd` service named `cns` using the syntax in the [managing services section](#ManagingServices):
 
-[root@client ~] $ systemctl start <xrootd@cns> </pre>
+```console
+root@host # systemctl start <xrootd@cns>
+```
 
 #### Testing an XRootD cluster with SSI
 
-1.  Copy file to redirector node specifying storage path (/data/xrootdfs instead of /tmp): <pre class="rootscreen">
+1.  Copy file to redirector node specifying storage path (/data/xrootdfs instead of /tmp): 
 
-[root@client ~] $ xrdcp /bin/sh root://localhost:1094//data/xrootdfs/test1 \[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\] </pre>
+```console
+root@host # xrdcp /bin/sh root://localhost:1094//data/xrootdfs/test1 
+\[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\] 
+```
 
-1.  To verify that SSI is working execute cns\_ssi command on the redirector node: <pre class="rootscreen">
+1.  To verify that SSI is working execute cns\_ssi command on the redirector node: 
 
-[root@client ~] $ cns\_ssi list /data/inventory fermicloud054.fnal.gov incomplete inventory as of Mon Apr 11 17:28:11 2011 [root@client ~] $ cns\_ssi updt /data/inventory cns\_ssi: fermicloud054.fnal.gov inventory with 1 directory and 1 file updated with 0 errors. [root@client ~] $ cns\_ssi list /data/inventory fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/xrootdfs/test1 </pre> **Note**: In this example, `fermicloud53.fnal.gov` is a redirector node and `fermicloud054.fnal.gov` is a data node.
+```console
+root@host # cns\_ssi list /data/inventory 
+fermicloud054.fnal.gov incomplete inventory as of Mon Apr 11 17:28:11 2011 
+root@host # cns\_ssi updt /data/inventory 
+cns\_ssi: fermicloud054.fnal.gov inventory with 1 directory and 1 file updated with 0 errors. 
+root@host # cns\_ssi list /data/inventory 
+fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/xrootdfs/test1 
+```
+
+**Note**: In this example, `fermicloud53.fnal.gov` is a redirector node and `fermicloud054.fnal.gov` is a data node.
 
 ### (Optional) Authorization
 
-There are several authorization options in XRootD available through the security plugins. In this document, we will cover two options for security:
+There are several authorization options in XRootD available through the security
+plugins. In this document, we will cover two options for security:
 
 -   Simple Unix Security: Based on user accounts that the client is logged in as.
 -   xrootd-lcmaps: Using the lcmaps callout to use GUMS authorization
 
-Note: On the data nodes, the files will actually be owned by unix user `xrootd` (or other daemon user), not as the user authenticated to, under most circumstances. xrootd will verify the permissions and authorization based on the user that the security plugin authenticates you to (for instance, your unix user for option 1 or your gums id for option 2), but, internally, the data node files will be owned by the `xrootd` user.
+Note: On the data nodes, the files will actually be owned by unix user `xrootd`
+(or other daemon user), not as the user authenticated to, under most
+circumstances. xrootd will verify the permissions and authorization based on the
+user that the security plugin authenticates you to (for instance, your unix user
+for option 1 or your gums id for option 2), but, internally, the data node files
+will be owned by the `xrootd` user.
 
 #### Authorization file
 
-In order to add security to your cluster you will need to add "auth\_file" on the your data server node. Create `/etc/xrootd/auth_file` :<pre class="file"> \# This means that all the users have read access to the datasets u \* %RED%/data/xrootdfs<span class="twiki-macro ENDCOLOR"></span> lr
+In order to add security to your cluster you will need to add "auth\_file" on
+the your data server node. Create `/etc/xrootd/auth_file` :
 
-\# This means that all the users have full access to their private dirs u = %RED%/data/xrootdfs/%ENDCOLOR%@=/ a
+```file
+\# This means that all the users have read access to the datasets 
+u \* %RED%/data/xrootdfs%ENDCOLOR% lr
 
-\# This means that this privileged user can do everything \# You need at least one user like that, in order to create the \# private dir for each user willing to store his data in the facility u xrootd %RED%/data/xrootdfs<span class="twiki-macro ENDCOLOR"></span> a </pre> Here we assume that your storage path is "/data/xrootdfs" (same as in the previous example).
+\# This means that all the users have full access to their private dirs 
+u = %RED%/data/xrootdfs/%ENDCOLOR%@=/ a
 
-Change file ownership (if you have created file as root):<pre class="rootscreen"> $ chown xrootd:xrootd /etc/xrootd/auth\_file </pre>
+\# This means that this privileged user can do everything 
+\# You need at least one user like that, in order to create the 
+\# private dir for each user willing to store his data in the facility 
+u xrootd %RED%/data/xrootdfs%ENDCOLOR% a 
+```
+
+Here we assume that your storage path is `/data/xrootdfs` (same as in the
+previous example).
+
+Change file ownership (if you have created file as root):
+
+```console
+root@host # chown xrootd:xrootd /etc/xrootd/auth\_file
+```
+
 
 This file is a flat file of the following form:
 
@@ -231,7 +341,9 @@ This file is a flat file of the following form:
 idtype id path privs
 ```
 
-Some examples of each option. For more details or examples on how to use templated user options, see [XRootd Authorization Database File](http://xrootd.org/doc/dev/sec_config.htm#_Toc317706960).
+Some examples of each option. For more details or examples on how to use
+templated user options, see [XRootd Authorization Database
+File](http://xrootd.org/doc/dev/sec_config.htm#_Toc317706960).
 
 |        |                                                                                                                                                            |
 |--------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -242,39 +354,94 @@ Some examples of each option. For more details or examples on how to use templat
 
 #### Security option 1: adding simple (Unix) security
 
-The first step in adding simple Unix security to validate based on username is to create the `auth_file` as in the previous section.
+The first step in adding simple Unix security to validate based on username is
+to create the `auth_file` as in the previous section.
 
-The next step is to modify **`/etc/xrootd/xrootd-clustered.cfg`** on both nodes:<pre class="file"> all.export /data/xrootdfs set xrdr=%RED%hostA<span class="twiki-macro ENDCOLOR"></span> all.manager $(xrdr):3121 if $(xrdr) && named cns all.export /data/inventory xrd.port 1095 else if $(xrdr) all.role manager xrd.port 1094 else all.role server oss.localroot /local/xrootd ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory cms.space min 2g 5g <span class="twiki-macro RED"></span> \# ENABLE\_SECURITY\_BEGIN xrootd.seclib /usr/lib64/libXrdSec.so \# this specify that we use the 'unix' authentication module, additional one can be specified. sec.protocol /usr/lib64 unix \# this is the authorization file acc.authdb /etc/xrootd/auth\_file ofs.authorize \# ENABLE\_SECURITY\_END <span class="twiki-macro ENDCOLOR"></span> fi </pre>
+The next step is to modify **`/etc/xrootd/xrootd-clustered.cfg`** on both nodes:
 
-Note that, to access users directories, you will have to create them in oss.localroot (For instance, `/local/xrootd/data/xrootdfs/username`) and make sure they are writable by `xrootd` user (or the daemon user, if you have changed it). Files in localroot on the data nodes are normally owned by `xrootd` not by the authenticated username.
+```file
+all.export /data/xrootdfs 
+set xrdr=%RED%hostA%ENDCOLOR% 
+all.manager $(xrdr):3121 
+if $(xrdr) && named cns 
+    all.export /data/inventory 
+    xrd.port 1095 
+else if $(xrdr) 
+    all.role manager 
+    xrd.port 1094 
+else 
+    all.role server 
+    oss.localroot /local/xrootd 
+    ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory 
+    cms.space min 2g 5g 
+    
+    %RED% \# ENABLE\_SECURITY\_BEGIN 
+    xrootd.seclib /usr/lib64/libXrdSec.so 
+    \# this specify that we use the 'unix' authentication module, additional one can be specified. 
+    sec.protocol /usr/lib64 unix 
+    \# this is the authorization file 
+    acc.authdb /etc/xrootd/auth\_file 
+    ofs.authorize 
+    \# ENABLE\_SECURITY\_END %ENDCOLOR% 
+fi 
+```
+
+Note that, to access users directories, you will have to create them in
+oss.localroot (For instance, `/local/xrootd/data/xrootdfs/username`) and make
+sure they are writable by `xrootd` user (or the daemon user, if you have changed
+it). Files in localroot on the data nodes are normally owned by `xrootd` not by
+the authenticated username.
 
 After making all the changes, please, restart xrootd and cmsd daemons on all nodes.
 
 #### Testing an XRootD cluster with simple security enabled
 
 1.  Login on redirector node as root
-2.  Check that user "root" still can read files: <pre class="rootscreen">
+2.  Check that user "root" still can read files: 
 
-[root@client ~] $ xrdcp root://localhost:1094//data/xrootdfs/test1 /tmp/b \[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\] </pre>
+```console
+root@host # xrdcp root://localhost:1094//data/xrootdfs/test1 /tmp/b 
+\[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\]
+```
 
-1.  Check that user "root" can not write files under /data/xrootdfs:<pre class="rootscreen">
+1.  Check that user "root" can not write files under /data/xrootdfs:
 
-[root@client ~] $ xrdcp /tmp/b root://localhost:1094//data/xrootdfs/test2 Last server error 3010 ('Unable to create /data/xrootdfs/test2; Permission denied') Error accessing path/file for root://localhost:1094//data/xrootdfs/test3 </pre> or you may get this error:<pre class="rootscreen"> [root@client ~] $ xrdcp /tmp/b root://localhost:1094//data/xrootdfs/test2 Last server error 3011 ('No servers are available to write the file.') Error accessing path/file for root://localhost:1094//data/xrootdfs/test2 </pre>
+```console
+root@host # xrdcp /tmp/b root://localhost:1094//data/xrootdfs/test2 
+Last server error 3010 ('Unable to create /data/xrootdfs/test2; Permission denied') 
+Error accessing path/file for root://localhost:1094//data/xrootdfs/test3 
+```
 
-1.  Check that user can copy/retrieve files to/from /data/xrootdfs/~/...<pre class="rootscreen">
+or you may get this error:
 
-[root@client ~] $ su - %RED%user<span class="twiki-macro ENDCOLOR"></span> -bash-3.2$ xrdcp /tmp/a root://localhost:1094//data/xrootdfs/%RED%user%ENDCOLOR%/test1 \[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\] -bash-3.2$ xrdcp root://localhost:1094//data/xrootdfs/%RED%user%ENDCOLOR%/test1 /tmp/c \[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\] </pre>
+```console
+root@host # xrdcp /tmp/b root://localhost:1094//data/xrootdfs/test2 
+Last server error 3011 ('No servers are available to write the file.') 
+Error accessing path/file for root://localhost:1094//data/xrootdfs/test2
+```
+
+1.  Check that user can copy/retrieve files to/from /data/xrootdfs/~/...
+
+```console
+root@host # su - %RED%user%ENDCOLOR% 
+-bash-3.2$ xrdcp /tmp/a root://localhost:1094//data/xrootdfs/%RED%user%ENDCOLOR%/test1
+\[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\] 
+-bash-3.2$ xrdcp root://localhost:1094//data/xrootdfs/%RED%user%ENDCOLOR%/test1 /tmp/c 
+\[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\]
+```
 
 #### Security option 2: xrootd-lcmaps authorization
 
-The xrootd-lcmaps security plugin uses the `lcmaps` package to access the `GUMS` server to authenticate and authorize users based on X509 certificates.
+The xrootd-lcmaps security plugin uses the `lcmaps` package to access the `GUMS`
+server to authenticate and authorize users based on X509 certificates.
 
 **Certificate Installation**
 
-In order to use lcmaps, you will need CA certificates and certificate revocation lists. See the following documents for instructions:
+In order to use lcmaps, you will need CA certificates and certificate revocation
+lists. See the following documents for instructions:
 
--   [Install CA certificates](Documentation.Release3.InstallCertAuth#Install_CA_certificates_Options)
--   [Managing Certificate Revocation Lists](Documentation.Release3.InstallCertAuth#Managing_Certificate_Revocation)
+-   [Install CA certificates](../common/ca/)
+-   [Managing Certificate Revocation Lists](../common/ca/)
 
 **Install xrootd-lcmaps**
 
@@ -282,11 +449,15 @@ In order to use lcmaps, you will need CA certificates and certificate revocation
 yum install xrootd-lcmaps
 ```
 
-Note that the xrootd-lcmaps is usually coupled to a specific version of xrootd, so make sure that you install xrootd-lcmaps from the same repository that you install xrootd from. Otherwise, you may have dependency issues due to differing versions of shared libraries.
+Note that the xrootd-lcmaps is usually coupled to a specific version of xrootd,
+so make sure that you install xrootd-lcmaps from the same repository that you
+install xrootd from. Otherwise, you may have dependency issues due to differing
+versions of shared libraries.
 
 **Create host certificates**
 
-You will need to have a X509 certificate to talk to GUMS. If you already have a host certificate, you can use a copy of that:
+You will need to have a X509 certificate to talk to GUMS. If you already have a
+host certificate, you can use a copy of that:
 
 ``` console
  mkdir /etc/grid-security/xrd
@@ -304,7 +475,8 @@ Next, create `/etc/xrootd/auth_file` using the example in the above section.
 
 **Modify /etc/xrootd/lcmaps.cfg**
 
-Edit `/etc/xrootd/lcmaps.cfg` to point to your authorization server (replace the hostname in red):
+Edit `/etc/xrootd/lcmaps.cfg` to point to your authorization server (replace the
+hostname in red):
 
 ``` file
 scasclient = "lcmaps_scas_client.mod"
@@ -337,8 +509,8 @@ ofs.authorize
 **Restart xrootd and cmsd**
 
 ``` console
-service xrootd restart
-service cmsd restart
+root@host # service xrootd restart
+root@host # service cmsd restart
 ```
 
 **lcmaps notes**
@@ -348,7 +520,7 @@ For recent versions of lcmaps (1.5+), VOMS signature verification is enabled by 
 Installing vo-client:
 
 ``` console
-yum install vo-client
+root@host # yum install vo-client
 ```
 
 Disabling vo verification can be done by adding a line to `/etc/sysconfig/xrootd`:
@@ -391,17 +563,21 @@ user@host $ xrdcp /bin/bash root://fermicloud121.fnal.gov//tmp/lcmaps_test
 [xrootd] Total 0.73 MB  |====================| 100.00 % [inf MB/s]
 ```
 
-In the above examples, make sure to change "/tmp" to a directory allowed by the `/etc/xrootd/auth_file` created in a previous section.
+In the above examples, make sure to change "/tmp" to a directory allowed by the
+`/etc/xrootd/auth_file` created in a previous section.
 
 ### (Optional) Adding CMS TFC support to XRootD (CMS sites only)
 
-For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file. If you are not setting up a CMS site, you can skip this section.
+For CMS users, there is a package available to integrate rule-based name lookup
+using a `storage.xml` file. If you are not setting up a CMS site, you can skip
+this section.
 
 ``` console
 yum install --enablerepo=osg-contrib xrootd-cmstfc
 ```
 
-You will need to add your `storage.xml` to `/etc/xrootd/storage.xml` and then add the following line to your xrootd configuration:
+You will need to add your `storage.xml` to `/etc/xrootd/storage.xml` and then
+add the following line to your xrootd configuration:
 
 ``` file
 # Integrate with CMS TFC, placed in /etc/xrootd/storage.xml
@@ -420,13 +596,15 @@ See the CMS TWiki for more information:
 !!! note
     3.3 only
 
-Users with Hadoop-based storage under their XRootD installation have extra steps to configure more efficient access to Hadoop Stroage
+Users with Hadoop-based storage under their XRootD installation have extra steps
+to configure more efficient access to Hadoop Stroage
 
 ``` console
 root@host # yum install xrootd-hdfs
 ```
 
-You will then need to add the following lines to your `/etc/xrootd/xrootd-clustered.cfg`:
+You will then need to add the following lines to your
+`/etc/xrootd/xrootd-clustered.cfg`:
 
 ``` file
 xrootd.fslib /usr/lib64/libXrdOfs.so
@@ -437,36 +615,62 @@ For more information, see [Storage.HadoopXrootd](Storage.HadoopXrootd).
 
 ### (Optional) Adding File Residency Manager (FRM) to an XRootd cluster
 
-If you have a multi-tiered storage system (e.g. some data is stored on SSDs and some on disks or tapes), then install the File Residency Manager (FRM), so you can move data between tiers more easily. If you do not have a multi-tiered storage system, then you do not need FRM and you can skip this section.
+If you have a multi-tiered storage system (e.g. some data is stored on SSDs and
+some on disks or tapes), then install the File Residency Manager (FRM), so you
+can move data between tiers more easily. If you do not have a multi-tiered
+storage system, then you do not need FRM and you can skip this section.
 
 The FRM deals with two major mechanisms:
 
 -   local disk
 -   remote servers
 
-The description of fully functional multiple xrootd clusters is beyond the scope of this document. In order to have this fully functional system you will need a global redirector and at least one remote xrootd cluster from where files could be moved to the local cluster.
+The description of fully functional multiple xrootd clusters is beyond the scope
+of this document. In order to have this fully functional system you will need a
+global redirector and at least one remote xrootd cluster from where files could
+be moved to the local cluster.
 
-Below are the modifications you should make in order to enable FRM on your local cluster:
+Below are the modifications you should make in order to enable FRM on your local
+cluster:
 
-1.  Make sure that FRM is enabled in `/etc/sysconfig/xrootd` on your data sever:<pre class="file">
+1.  Make sure that FRM is enabled in `/etc/sysconfig/xrootd` on your data sever:
 
-ROOTD\_USER=xrootd XROOTD\_GROUP=xrootd XROOTD\_DEFAULT\_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg" CMSD\_DEFAULT\_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg" FRMD\_DEFAULT\_OPTIONS="-l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg" XROOTD\_INSTANCES="default" CMSD\_INSTANCES="default" FRMD\_INSTANCES="default" </pre>
+```file
+ROOTD\_USER=xrootd 
+XROOTD\_GROUP=xrootd 
+XROOTD\_DEFAULT\_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg" 
+CMSD\_DEFAULT\_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg" 
+FRMD\_DEFAULT\_OPTIONS="-l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg" 
+XROOTD\_INSTANCES="default" 
+CMSD\_INSTANCES="default" 
+FRMD\_INSTANCES="default"
+```
 
 1.  Modify `/etc/xrootd/xrootd-clustered.cfg` on both nodes to specify options for `frm_xfrd` (File Transfer Daemon) and `frm_purged` (File Purging Daemon). For more information, you can visit the [FRM Documentation](http://xrootd.org/doc/prod/frm_config.htm) in the [frm\_xfrd section](http://xrootd.org/doc/prod/frm_config.htm#_Toc298165607) and the [frm\_purged section](http://xrootd.org/doc/prod/frm_config.htm#_Toc298165601)
-2.  Start frm daemons on data server: <pre class="rootscreen">
+2.  Start frm daemons on data server: 
 
-[root@client ~] $ service frm\_xfrd start [root@client ~] $ service frm\_purged start </pre>
+```console
+root@host # service frm\_xfrd start
+root@host # service frm\_purged start
+```
 
 Using XRootD
 ------------
 
 ### Managing XRootD services
 
-Start services on the redirector node before starting any services on the data nodes. If you installed only XRootD itself, you will only need to start the `xrootd` service. However, if you installed cluster management services, you will need to start `cmsd` as well.
+Start services on the redirector node before starting any services on the data
+nodes. If you installed only XRootD itself, you will only need to start the
+`xrootd` service. However, if you installed cluster management services, you
+will need to start `cmsd` as well.
 
-The instructions for starting and stopping an XRootD service depend on whether the service is installed on an EL 6 or EL 7 machine, and whether you are using a standalone or clustered configuration.
+The instructions for starting and stopping an XRootD service depend on whether
+the service is installed on an EL 6 or EL 7 machine, and whether you are using a
+standalone or clustered configuration.
 
-On EL 6, which config to use is set in the file `/etc/sysconfig/xrootd`. For example, to have `xrootd` use the clustered config, you would have a line such as this:
+On EL 6, which config to use is set in the file `/etc/sysconfig/xrootd`. For
+example, to have `xrootd` use the clustered config, you would have a line such
+as this:
 
 ``` file
 XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-%RED%clustered%ENDCOLOR%.cfg -k fifo"
@@ -478,7 +682,9 @@ To use the standalone config instead, you would use:
 XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-%RED%standalone%ENDCOLOR%.cfg -k fifo"
 ```
 
-On EL 7, which config to use is determined by the service name given to `systemctl`. For example, to have `xrootd` use the clustered config, you would start up `xrootd` with this line:
+On EL 7, which config to use is determined by the service name given to
+`systemctl`. For example, to have `xrootd` use the clustered config, you would
+start up `xrootd` with this line:
 
 ``` console
 root@host # systemctl start xrootd@%RED%clustered%ENDCOLOR%
@@ -492,7 +698,6 @@ root@host # systemctl start xrootd@%RED%standalone%ENDCOLOR%
 
 The services are:
 
-<span class="twiki-macro TABLE" sort="off"></span>
 
 | Service                    | EL 6 service name | EL 7 service name   |
 |:---------------------------|:------------------|:--------------------|
@@ -502,7 +707,6 @@ The services are:
 
 As a reminder, here are common service commands (all run as `root`):
 
-<span class="twiki-macro TABLE" sort="off"></span>
 
 | To …                                        | On EL 6, run the command…             | On EL 7, run the command…                 |
 |:--------------------------------------------|:--------------------------------------|:------------------------------------------|
@@ -514,7 +718,7 @@ As a reminder, here are common service commands (all run as `root`):
 Getting Help
 ------------
 
-To get assistance. please use the [Help Procedure](Documentation.Release3.HelpProcedure) page.
+To get assistance. please use the [Help Procedure](../common/help/) page.
 
 Reference
 ---------
