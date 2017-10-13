@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>External OASIS repositories - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "External OASIS repositories";
+    var mkdocs_page_input_path = "data/external-oasis-repos.md";
+    var mkdocs_page_url = "/data/external-oasis-repos/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../..">Home</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../install-overview/">Installation Overview</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../site-planning/">Site Planning</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Common</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/install-best-practices/">Install Best Practices</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/ca/">CA Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/yum/">Yum Repos</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/openjdk7/">Java 7</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Worker Node</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn/">Worker Node (RPM install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Compute Element</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../gridftp/">Install GridFTP Server</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../load-balanced-gridftp/">Install Load Balanced GridFTP</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-gridftp-xrootd/">Install GridFtp XRootD</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../frontier-squid/">HTTP Cache</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../update-oasis/">Update OASIS</a>
+  
+        </li>
+        <li class=" current">
+          
+  
+    <a class="current" href="./">External OASIS repositories</a>
+  
+  <ul class="subnav">
+      
+    <li class="toctree-l3"><a href="#procedures-for-handling-oasis-externally-hosted-cvmfs-repositories">Procedures for handling OASIS externally-hosted CVMFS repositories</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#about-oasis">About OASIS</a></li>
+        
+            <li><a class="toctree-l4" href="#about-this-document">About this Document</a></li>
+        
+            <li><a class="toctree-l4" href="#policies">Policies</a></li>
+        
+            <li><a class="toctree-l4" href="#requirements-setting-up-a-cvmfs-repository-server">Requirements: setting up a CVMFS repository server</a></li>
+        
+            <li><a class="toctree-l4" href="#procedure-to-add-an-externally-hosted-repository-to-oasis">Procedure to add an externally-hosted repository to OASIS</a></li>
+        
+            <li><a class="toctree-l4" href="#emergency-procedure-to-blank-an-externally-hosted-repository-to-oasis">Emergency procedure to blank an externally-hosted repository to OASIS</a></li>
+        
+            <li><a class="toctree-l4" href="#procedure-to-change-the-url-of-an-external-repository">Procedure to change the URL of an external repository</a></li>
+        
+            <li><a class="toctree-l4" href="#procedure-to-shut-down-and-remove-an-external-repository">Procedure to shut down and remove an external repository</a></li>
+        
+        </ul>
+    
+
+  </ul>
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../xrootd-overview/">XRootD Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-xroot-client/">XRootD Client</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../hadoop-overview/">Hadoop Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-hadoop-2-0-0/">Hadoop</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Security</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/host-certs/">Host Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/user-certs/">User Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/osg-ca-manage/">Managing CAs</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Release Information</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../release/notes/">Release Notes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/signing/">RPM Signing</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/contrib/">Contrib Software</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Other</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-osg-upcoming-software/">OSG upcoming software</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-cvmfs-stratum1/">Install a CVMFS Stratum 1</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/network-performance-toolkit/">Network Performance Toolkit</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Monitoring</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/advanced-rsv-configuration/">Advanced RSV Configuration</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-control/">Manage RSV via rsv-control</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Usage Guides</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/using-wn/">Worker Node Environment</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Deprecated Software</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../bestman-overview/">BeStMan Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../bestman-install/">BeStMan Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-bestman-xrootd/">BeStMan Xrootd SE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/edg-mkgridmap/">EDG-Mkgridmap Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/install-gums/">GUMS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-voms/">Install VOMS</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../common/help/">Get Help</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Data &raquo;</li>
+        
+      
+    
+    <li>External OASIS repositories</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/external-oasis-repos.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="procedures-for-handling-oasis-externally-hosted-cvmfs-repositories">Procedures for handling OASIS externally-hosted CVMFS repositories<a class="headerlink" href="#procedures-for-handling-oasis-externally-hosted-cvmfs-repositories" title="Permanent link">&para;</a></h1>
+<p><strong>Technical information contained here is believed to be reliable but administrative procedures, particularly as concerns organizational entities outside the OSG, should be considered unapproved proposals.</strong></p>
+<h2 id="about-oasis">About OASIS<a class="headerlink" href="#about-oasis" title="Permanent link">&para;</a></h2>
+<p>OASIS is the OSG Application Software Installation Service. It is the recommended method to install software on the Open Science Grid. It is implemented using CernVM FileSystem (CVMFS) technology.</p>
+<h2 id="about-this-document">About this Document<a class="headerlink" href="#about-this-document" title="Permanent link">&para;</a></h2>
+<p>This document describes the detailed procedures for dealing with CVMFS repositories that are part of the OASIS system but are not hosted at the OSG Global Operations Center (GOC). Rather, they are hosted at the home institution of a Virtual Organization (VO). The procedures include the steps performed by both the GOC and by the repository service administrator. If you are only interested in using an OASIS repository that is hosted at the GOC, see <a href="../update-oasis">this document</a> instead.</p>
+<h2 id="policies">Policies<a class="headerlink" href="#policies" title="Permanent link">&para;</a></h2>
+<p>These are the policies regarding OSG CVMFS repositories:</p>
+<ol>
+<li>The GOC will not host VO-specific CVMFS repositories. This means it will not use its machines to publish files to a repository that is dedicated to a VO. The GOC hosts one and only one repository and that is oasis.opensciencegrid.org.</li>
+<li>The GOC will replicate an external repository of a VO or provide access to use oasis.opensciencegrid.org per the existing mechanisms but not both for a given VO.</li>
+<li>Quotas on size of repos may be implemented at the discretion of the GOC. A minimum of 100 GB per VO/repo is guaranteed, larger limits may be requested.</li>
+<li>The fully qualified repository names of CVMFS repositories distributed to the OSG may be in any domain, but only those in the opensciencegrid.org domain may be requested to be exported to the European grid EGI at this time. There must be one secured master key for all the repositories in a domain. (Although note that the OSG OASIS servers replace that key with their own when distributing non-opensciencegrid.org repositories to OSG sites.)</li>
+</ol>
+<h2 id="requirements-setting-up-a-cvmfs-repository-server">Requirements: setting up a CVMFS repository server<a class="headerlink" href="#requirements-setting-up-a-cvmfs-repository-server" title="Permanent link">&para;</a></h2>
+<p>This document doesn't cover requirements for the GOC computers since those are already set up. The requirements for a CVMFS repository server are that it have installed cvmfs-server and cvmfs client, both version 2.2.2 or greater; version 2.3.3 or greater is recommended on EL6 and required on EL7. This requires using aufs or OverlayFS: aufs requires a modified kernel from CERN for Redhat EL6-based systems, and OverlayFS requires at least EL7.3; the latter uses a standard kernel so it is highly recommended. Also an apache httpd server needs to be enabled. NOTE: multiple cvmfs repositories can be hosted on the same machine.</p>
+<p><code>/srv/cvmfs</code> will hold all the published data, so make sure it is large enough to hold all the repositories hosted on the machine. <code>/var/spool/cvmfs</code> will hold files during publish, so it should be large enough to hold the most amount of data that might be attempted to be published at once. In addition, on EL7.3 and cvmfs-server-2.3.3 or 2.3.5, <code>/var/spool/cvmfs</code> needs to be of filesystem type 'ext4' or the <code>cvmfs_server</code> command will not allow it. There is a variable to override the filesystem type check, but other filesystem types are not guaranteed to work (ext3 and xfs created with <code>ftype=1</code> should work with <code>CVMFS_DONT_CHECK_OVERLAYFS_VERSION=yes</code>).</p>
+<p>This is a procedure for installing it on a Redhat EL6-based system:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -i https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm 
+<span class="gp">root@host #</span> rpm -i https://repo.grid.iu.edu/osg/3.3/osg-3.3-el6-release-latest.rpm 
+<span class="gp">root@host #</span> yum install --enablerepo<span class="o">=</span>cernvm-kernel --disablerepo<span class="o">=</span>cernvm kernel aufs2-util cvmfs-server.x86_64 cvmfs.x86_64 cvmfs-config-osg 
+<span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;cvmfs_server mount -a&quot;</span> &gt;&gt;/etc/rc.local 
+<span class="gp">root@host #</span> reboot&lt;/pre&gt;
+</pre></div>
+
+
+<p>This is the procedure for installing on a Redhat EL7.3-based system:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -i https://repo.grid.iu.edu/osg/3.3/osg-3.3-el7-release-latest.rpm 
+<span class="gp">root@host #</span> yum install cvmfs-server.x86_64 osg-oasis 
+<span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;cvmfs_server mount -a&quot;</span> &gt;&gt;/etc/rc.local&lt;/pre&gt;
+</pre></div>
+
+
+<p>In addition, apache should listen on port 8000, have KeepAlive enabled, and be started. Use commands like these:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> Listen <span class="m">8000</span> &gt;&gt;/etc/httpd/conf.d/cvmfs.conf 
+<span class="gp">root@host #</span> <span class="nb">echo</span> KeepAlive on &gt;&gt;/etc/httpd/conf.d/cvmfs.conf 
+<span class="gp">root@host #</span> chkconfig httpd on 
+<span class="gp">root@host #</span> service httpd start
+</pre></div>
+
+
+<p>Make sure that port 8000 is available to the internet through any firewalls.</p>
+<h2 id="procedure-to-add-an-externally-hosted-repository-to-oasis">Procedure to add an externally-hosted repository to OASIS<a class="headerlink" href="#procedure-to-add-an-externally-hosted-repository-to-oasis" title="Permanent link">&para;</a></h2>
+<ol>
+<li>A VO representative who will have responsibility for the contents of the repository chooses a name for the repository. This name should be the name of the VO or be derived from it (or a project in the VO for the case of the OSG VO), and in a domain that has a secured master key. The recommended domain name for a new repository that originates at an OSG site is opensciencegrid.org. The full name used as an example in this document is <strong>repo.domain.name</strong>. Note: the VO representative's name will be registered in OIM as an OASIS manager for the VO, and names can be added or changed later with GOC tickets. If there is more than one repository for the VO, all the OASIS managers are assumed to be contacts for all the repositories.</li>
+<li>Using whatever mechanism is appropriate at their institution, the VO representative requests the local CVMFS repository service administrator to create this repository called <code>repo.domain.name</code>.</li>
+<li>
+<p>The repository service administrator creates the repository with these command like these, where ownerid is the user id that will have write access:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> -e <span class="s2">&quot;\*\\t\\t-\\tnofile\\t\\t16384&quot;</span> &gt;&gt;/etc/security/limits.conf 
+<span class="gp">root@host #</span> <span class="nb">ulimit</span> -n <span class="m">16384</span> 
+<span class="gp">root@host #</span> cvmfs_server mkfs -o ownerid repo.domain.name 
+<span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;CVMFS_AUTO_TAG=false&quot;</span> &gt;&gt;/etc/cvmfs/repositories.d/repo.domain.name/server.conf 
+<span class="gp">root@host #</span> <span class="o">(</span><span class="nb">echo</span> Order deny,allow<span class="p">;</span><span class="nb">echo</span> Deny from all<span class="p">;</span><span class="nb">echo</span> Allow from <span class="m">127</span>.0.0.1<span class="p">;</span><span class="nb">echo</span> Allow from ::1<span class="p">;</span><span class="nb">echo</span> Allow from <span class="m">129</span>.79.53.0/24<span class="p">;</span><span class="nb">echo</span> Allow from <span class="m">2001</span>:18e8:2:6::/56<span class="o">)</span> &gt;/srv/cvmfs/repo.domain.name/.htaccess
+</pre></div>
+
+
+<p>If you might be hosting any hardlinks that span directories (e.g. the git package) and are using aufs (that is, EL6), also do the following:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;CVMFS_IGNORE_XDIR_HARDLINKS=true&quot;</span> &gt;&gt;/etc/cvmfs/repositories.d/repo.domain.name/server.conf
+</pre></div>
+
+
+<p>Verify that the repository is readable over http with the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> wget -qO- http://localhost:8000/cvmfs/repo.domain.name/.cvmfswhitelist<span class="p">|</span>cat -v
+</pre></div>
+
+
+<p>That should print several lines including some gibberish at the end.</p>
+</li>
+<li>
+<p>The repository service administrator next creates a <a href="https://ticket.opensciencegrid.org/goc/submit">GOC ticket</a> using the following format:</p>
+<div class="codehilite"><pre><span></span>Please add a new CVMFS repository to OASIS for VO voname using the URL 
+    http://fully.qualified.domain:8000/cvmfs/repo.domain.name 
+by doing step #5 at
+    https://opensciencegrid.github.io/docs/data/external-oasis-repos
+The VO responsible manager will be Vorep Name.
+</pre></div>
+
+
+<p>replacing "voname" with the VO's name, "fully.qualified.domain" with the full name of the repository server, "repo.domain.name" with the full name of the repository, and "Vorep Name" with the name of the VO representative.</p>
+</li>
+<li>
+<p>The GOC representative next ensures that the repository service administrator is a valid representative of a host site for the VO. This can be done by (a) the GOC representative already having a relationship with the person or (b) the GOC representative contacting the VO manager to find out. The GOC representative makes sure that the repo.domain.name in the URL is derived from the VO name. Next, on the oasis machine the GOC representative temporarily installs the oasis signing key and runs <a href="http://svn.usatlas.bnl.gov/svn/oasis/oasis-server/trunk/bin/add_osg_repository">add_osg_repository</a>, giving it as a parameter the given URL. This will download the <code>.cvmfswhitelist</code> file from the repository, sign it, publish it back on the oasis http server, and set it to be re-signed every time repository keys are signed (which is about every 20 days). The ticket should remain open because there's another step to do after the next step.</p>
+</li>
+<li>
+<p>If the repository name matches <code>*.opensciencegrid.org</code> or <code>*.osgstorage.org</code>, the GOC representative responds in the ticket to ask that step #6 be done; all other repositories (such as <code>*.egi.eu</code>) skip this step. The repository service administrator next executes the following commands (replacing repo.opensciencegrid.org with repo.osgstorage.org when needed):</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> wget -O /srv/cvmfs/repo.opensciencegrid.org/.cvmfswhitelist http://oasis.opensciencegrid.org/cvmfs/repo.opensciencegrid.org/.cvmfswhitelist 
+<span class="gp">root@host #</span> /bin/cp /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub /etc/cvmfs/keys/repo.opensciencegrid.org.pub
+</pre></div>
+
+
+<p>Next the administrator verifies that a publish operation using the owner's privileges succeeds by making sure there's no errors from the following commands replacing "ownerid" with the owner's username:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> su ownerid -c <span class="s2">&quot;cvmfs\_server transaction repo.opensciencegrid.org&quot;</span> 
+<span class="gp">root@host #</span> su ownerid -c <span class="s2">&quot;cvmfs\_server publish repo.opensciencegrid.org&quot;</span>
+</pre></div>
+
+
+<p>If that works then add the wget command to a daily cron:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;5 4 \* \* \* ownerid cd /srv/cvmfs/repo.opensciencgrid.org &amp;&amp; wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/repo.opensciencgrid.org/.cvmfswhitelist &amp;&amp; mv .cvmfswhitelist.new .cvmfswhitelist&quot;</span> &gt;&gt;/etc/cron.d/fetch-cvmfs-whitelist
+</pre></div>
+
+
+<p>Note that this eliminates the need for the repository service administrator to periodically use "cvmfs_server resign" to update .cvmfswhitelist. Then the repository service administrator goes back to the open GOC ticket and asks to proceed to step #7.</p>
+</li>
+<li>
+<p>If domain.name is a new domain that has not been distributed before, the GOC representative next places a copy of the domain.name.pub public key from domain.name into /srv/etc/keys on both oasis-replica and oasis-replica-itb. If the GOC representative does not have that key, he or she can ask the repository service representative in the ticket how to get it. In addition, in order to support cvmfs client versions 2.2.X (both older and newer clients do not need it), a symbolic link of <code>domain.name</code>.conf has to be made in /cvmfs/config-osg.opensciencegrid.org/etc/cvmfs/domain.d pointing to default.conf. This symbolic link has to be created on the oasis-itb machine's copy of the config-osg.opensciencegrid.org repository and then copied to production with the copy_config_osg command on the oasis machine.</p>
+</li>
+<li>The GOC representative then adds the URL in OIM under OASIS Repo URLs for the VO. The repository will then be added to the GOC stratum 1 and the FNAL stratum 1 within an hour.</li>
+<li>The GOC representative then asks the administrators of the BNL stratum 1 to also add the new repository. He should set up his stratum 1s to read from <code>http://oasis-replica.opensciencegrid.org:8000/cvmfs/repo.domain.name</code>. When he has reported back that the replication is ready, the GOC representative reports in the ticket that the repository is ready on the OSG and closes the ticket.</li>
+<li>The repository service administrator then gives the VO representative access to the repository under the "ownerid" login, informs them of the <a href="http://cernvm.cern.ch/portal/filesystem/maintain-repositories">CVMFS documentation on maintaining repositories</a> and requests that they adhere to the <a href="http://cernvm.cern.ch/portal/filesystem/repository-limits">CVMFS documentation on repository content limitations</a>. If the domain.name is opensciencegrid.org, the repository service administrator should also inform the VO representative that if they want the repository to be accessed outside of the U.S. they should open a ggus ticket following the EGI's [PROC20](https://wiki.egi.eu/wiki/PROC2). (Note: EGI does not have a concept of sub-VOs like OSG does; to EGI, all sub-VOs under fermilab are the fermilab VO).</li>
+</ol>
+<h2 id="emergency-procedure-to-blank-an-externally-hosted-repository-to-oasis">Emergency procedure to blank an externally-hosted repository to OASIS<a class="headerlink" href="#emergency-procedure-to-blank-an-externally-hosted-repository-to-oasis" title="Permanent link">&para;</a></h2>
+<ol>
+<li>If there is an emergency request from OSG security to shut down the distribution of a repository, the GOC representative just needs to run <a href="http://svn.usatlas.bnl.gov/svn/oasis/oasis-server/trunk/bin/blank_osg_repository">blank_osg_repository</a> on oasis-replica and give it the full name of the repository. This will rename the repository directories to a name with the current timestamp and replace it with a blank repository. It includes a step to run on the oasis machine, and attempts to do it with ssh, but if that fails it prints instructions on how to finish by logging in to the oasis machine manually. That step on the oasis machine requires the signing key to be temporarily installed there.</li>
+<li>When it is time to put the repository back into production, the GOC representative runs <a href="http://svn.usatlas.bnl.gov/svn/oasis/oasis-server/trunk/bin/unblank_osg_repository">unblank_osg_repository</a> on oasis-replica and gives it the full name of the repository again. This will find the directory with the old timestamp and put it back into service. This step also attempts to ssh to the oasis machine.</li>
+</ol>
+<h2 id="procedure-to-change-the-url-of-an-external-repository">Procedure to change the URL of an external repository<a class="headerlink" href="#procedure-to-change-the-url-of-an-external-repository" title="Permanent link">&para;</a></h2>
+<ol>
+<li>The repository service administrator opens a GOC ticket with the value of the new URL.</li>
+<li>The GOC representative then changes the registered value in OIM for the VO in OASIS Repo URLs. The GOC stratum 1 will then be updated within an hour.</li>
+</ol>
+<h2 id="procedure-to-shut-down-and-remove-an-external-repository">Procedure to shut down and remove an external repository<a class="headerlink" href="#procedure-to-shut-down-and-remove-an-external-repository" title="Permanent link">&para;</a></h2>
+<ol>
+<li>First, if the repository has been replicated outside of the U.S., the repository service administrator should open a GGUS ticket asking that the replication be removed from EGI stratum 1s. Wait until they say they are finished before going to the next step. </li>
+<li>Next, the repository service administrator opens a GOC ticket asking to shut down the repository, giving the repository name, for example <code>repo.domain.name</code>, and the VO it belongs to. </li>
+<li>After validating that the ticket submitter is authorized by a registered OASIS manager, the GOC representative next deletes the registered value for <code>repo.domain.name</code> in OIM for the VO in OASIS Repo URLs. </li>
+<li>Next, the GOC representative adds the FNAL and BNL stratum 1 administrators to the ticket to asks them to remove the repository. </li>
+<li>When the FNAL and BNL stratum 1 administrators say they have finished, the GOC representative then runs <code>cvmfs_server rmfs -f repo.domain.name</code> and <code>rm -r /oasissrv/cvmfs/repo.domain.name</code> on oasis-replica-itb and oasis-replica. </li>
+<li>Finally, the GOC representative does <code>rm -r /srv/cvmfs/repo.domain.name</code> on oasis-itb and oasis.</li>
+</ol>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../xrootd-overview/" class="btn btn-neutral float-right" title="XRootD Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../update-oasis/" class="btn btn-neutral" title="Update OASIS"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../update-oasis/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../xrootd-overview/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
