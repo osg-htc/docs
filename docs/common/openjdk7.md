@@ -1,14 +1,11 @@
 Java Installation Guide for OSG Software
 ========================================
 
-
-About This Document
--------------------
-
-Several OSG software components (e.g., [BeStMan](BestmanOverview), [GUMS](InstallGums), [VOMS Admin](InstallVoms), and their dependencies) are written in the [Java programming language](http://en.wikipedia.org/wiki/Java_(programming_language)) and therefore need a Java Virtual Machine (JVM) implementation in which to run. Currently, OSG software is supported under the OpenJDK 7 implementation. Other implementations (such as the Oracle JDK) may also work, but there is considerable risk in using one; for instance, the IBM implementation is known to cause failures in most OSG Java software.
+Several OSG software components (e.g., [BeStMan](../data/bestman-overview), [GUMS](../security/install-gums), [VOMS Admin](../other/install-voms), and their dependencies) are written in the [Java programming language](http://en.wikipedia.org/wiki/Java_(programming_language)) and therefore need a Java Virtual Machine (JVM) implementation in which to run. Currently, OSG software is supported under the OpenJDK 7 implementation. Other implementations (such as the Oracle JDK) may also work, but there is considerable risk in using one; for instance, the IBM implementation is known to cause failures in most OSG Java software.
 
 This document explains how to install Java for OSG software components in a way that allows other Java implementations to be present on a system. If you want to remove all other Java implementations besides the supported OpenJDK 7, there are optional instructions for doing so. This document is only about installing Java as a preliminary step for other OSG software installations; other OSG install guides refer to this document when necessary.
 
+Installing Java
 ---------------
 
 OSG strongly recommends installing OpenJDK 7 as the primary Java implementation on each OSG host that needs Java. Instructions for doing so are below. If you have specific technical reasons to install or use an alternate, unsupported Java implementation, there are separate instructions for doing so. Choose one of the following subsections based on your needs.
@@ -220,5 +217,5 @@ To prevent Oracle's java implementation from being installed, you can configure 
 Getting Help with Java and OSG Software
 ---------------------------------------
 
-For further assistance please use [this page](Documentation/Release3.HelpProcedure).
+For further assistance please use [this page](../common/help).
 
