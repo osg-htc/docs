@@ -76,13 +76,13 @@ Verifying Packages and Installations
 You can check if an RPM has been modified. For instance, to check to see if any files have been modified in the `osg-ca-certs` RPM you just installed:
 
     :::console
-    [user@client ~] $ rpm --verify osg-ca-certs
+    user@host $ rpm --verify osg-ca-certs
 
 
 The lack of any output means there were no problems. If you would like to see all the files for which there are no problems, you can do:
 
     :::console
-    [user@client ~] $ rpm --verify -v osg-ca-certs
+    user@host $ rpm --verify -v osg-ca-certs
     ........    /etc/grid-security/certificates
     ........    /etc/grid-security/certificates/0119347c.0
     ........    /etc/grid-security/certificates/0119347c.namespaces
@@ -93,7 +93,7 @@ The lack of any output means there were no problems. If you would like to see al
 Each dot indicates a specific check that was made and passed. If someone had modified a file, you might see this:
 
     :::console
-    [user@client ~] $ rpm --verify osg-ca-certs
+    user@host $ rpm --verify osg-ca-certs
     ..5....T    /etc/grid-security/certificates/ffc3d59b.0
 
 
@@ -113,7 +113,7 @@ This means the files MD5 checksum has changed (so the contents have changed) and
 If you don't care about some of those changes, you can tell rpm to ignore them. For instance, to ignore changes in the modification time:
 
     :::console
-    [user@client ~] $ rpm --verify --nomtime osg-ca-certs
+    user@host $ rpm --verify --nomtime osg-ca-certs
     ..5.....    /etc/grid-security/certificates/ffc3d59b.0
 
 
@@ -124,18 +124,18 @@ If you want to know what package a file belongs to, you can ask rpm. For instanc
 
     :::console
     # 1. Find the exact path
-    [user@client ~] $ which srm-ls
+    user@host $ which srm-ls
     /usr/bin/srm-ls
 
     # 2. Ask rpm what package it is part of:
-    [user@client ~] $ rpm -q --file /usr/bin/srm-ls
+    user@host $ rpm -q --file /usr/bin/srm-ls
     bestman2-client-2.2.0-14.osg.el5.noarch
 
 
 If you want to know what other things are in a package--perhaps the other available tools or configuration files--you can do that as well:
 
     :::console
-    [user@client ~] $ rpm -ql bestman2-client
+    user@host $ rpm -ql bestman2-client
     /etc/bestman2/conf/bestman2.rc
     /etc/bestman2/conf/bestman2.rc.samples
     /etc/bestman2/conf/srmclient.conf
@@ -154,7 +154,7 @@ What else does a package install?
 Sometimes you need to understand what other software is installed by a package. This can be particularly useful for understanding *meta-packages*, which are packages such as the `osg-wn-client` (worker node client) that contain nothing by themselves but only depend on other RPMs. To do this, use the `--requires` option to rpm. For example, you can see that the worker node client (as of OSG 3.1.8 in early September, 2012) will install `curl`, `uberftp`, `lcg-utils`, and a dozen or so other packages.
 
     :::console
-    [user@client ~] $ rpm -q --requires osg-wn-client
+    user@host $ rpm -q --requires osg-wn-client
     /usr/bin/curl  
     /usr/bin/dccp  
     /usr/bin/ldapsearch  
@@ -186,7 +186,7 @@ Finding RPM Packages
 It is normally best to read the OSG documentation to decide which packages to install because it may not be obvious what the correct packages to install are. That said, you can use yum to find out all sort of things. For instance, you can list packages that begin with "voms":
 
     :::console
-    [user@client ~] $ yum list "voms*"
+    user@host $ yum list "voms*"
     Loaded plugins: kernel-module, priorities
     957 packages excluded due to repository priority protections
     Available Packages
@@ -208,7 +208,7 @@ It is normally best to read the OSG documentation to decide which packages to in
 If you want to search for packages that contain VOMS anywhere in the name or description, you can use `yum search`:
 
     :::console
-    [user@client ~] $ yum search voms
+    user@host $ yum search voms
     Loaded plugins: kernel-module, priorities
     957 packages excluded due to repository priority protections
     ================================================== Matched: voms ===================================================
@@ -223,7 +223,7 @@ If you want to search for packages that contain VOMS anywhere in the name or des
 One last example, if you want to know what RPM would give you the `voms-proxy-init` command, you can ask `yum`. The **`*`** indicates that you don't know the full pathname of `voms-proxy-init`.
 
     :::console
-    [user@client ~] $ yum whatprovides "*voms-proxy-init"
+    user@host $ yum whatprovides "*voms-proxy-init"
     Loaded plugins: kernel-module, priorities
     957 packages excluded due to repository priority protections
     voms-clients-2.0.6-3.osg.x86_64 : Virtual Organization Membership Service Clients
@@ -237,7 +237,7 @@ Removing Packages
 To remove a single RPM, you can use `yum remove`. Not only will it uninstall the RPM you requested, but it will uninstall anything that depends on it. For example, if I previously installed the `voms-clients` package, I also installed another package it depends on called `voms`. If I remove `voms`, yum will also remove `voms-clients`:
 
 ``` console
-[user@client ~] $ sudo yum remove voms
+user@host $ sudo yum remove voms
 Loaded plugins: kernel-module, priorities
 Setting up Remove Process
 Resolving Dependencies
@@ -450,7 +450,7 @@ Installing the debuginfo package requires three steps.
 2.  Figure out which package installed the program you want to debug. One way to figure it out is to ask RPM. For example, if you want to debug grid-proxy-init:
 
         :::console
-        [user@client ~] $ rpm -qf `which grid-proxy-init`
+        user@host $ rpm -qf `which grid-proxy-init`
         globus-proxy-utils-5.0-5.osg.x86_64
 
 3.  Install the debugging information for that package. Continuing this example: 

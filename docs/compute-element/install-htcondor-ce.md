@@ -61,7 +61,7 @@ An HTCondor-CE installation consists of the job gateway (i.e., the HTCondor-CE j
 
 6. Install the CE software:
 
-        [root@client ~] $ yum install *PACKAGE(S)*
+        root@host # yum install *PACKAGE(S)*
 
 
 Configuring HTCondor-CE

@@ -17,7 +17,7 @@ In 3.4.0, we dropped HDFS 2.x with the intention of adding HDFS 3.x in a subsequ
 In addition to GUMS, edg-mkgridmap, and HDFS 2.x, we dropped packages related to the following software:
 
 -   VOMS Admin Server − [Retirement Policy](https://opensciencegrid.github.io/technology/policy/voms-admin-retire/)
--   BeStMan − replaced by [Load Balanced GridFTP](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/LoadBalancedGridFTP)
+-   BeStMan − replaced by [Load Balanced GridFTP](../../data/load-balanced-gridftp)
 -   GLExec − replaced by [Singularty](http://singularity.lbl.gov/)
 -   Globus GRAM − available from EPEL
 -   GIP and OSG Info Services − BDII servers retired
@@ -98,7 +98,7 @@ To update to this series, you need to [install the current OSG repositories](../
 Once the new repositories are installed, you can update to this new release with:
 
 ``` console
-[root@client ~] $ yum update
+root@host # yum update
 ```
 
 <span class="twiki-macro NOTE"></span> Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
