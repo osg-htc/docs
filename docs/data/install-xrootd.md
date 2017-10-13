@@ -611,7 +611,7 @@ xrootd.fslib /usr/lib64/libXrdOfs.so
 ofs.osslib /usr/lib64/libXrdHdfs.so
 ```
 
-For more information, see [Storage.HadoopXrootd](Storage.HadoopXrootd).
+For more information, see [Storage.HadoopXrootd](https://twiki.opensciencegrid.org/bin/view/Storage/HadoopXrootd).
 
 ### (Optional) Adding File Residency Manager (FRM) to an XRootd cluster
 
