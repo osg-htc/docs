@@ -6,7 +6,7 @@ Hadoop Introduction
 
 Hadoop is a data processing framework. It is an open-source Apache Foundation project, and the main contributor is Yahoo! The framework has two main parts - job scheduling and a distributed file system, the Hadoop Distributed File System (HDFS). We currently utilize HDFS as a general-purpose file system. For this document, we'll use the words "Hadoop" and "HDFS" interchangeably, but it's nice to know the distinction.
 
-We recommend starting with [HDFS architecture document](http://hadoop.apache.org/hdfs/docs/current/hdfs_design.html).
+We recommend starting with [HDFS architecture document](http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html).
 
 Please do read through this. We will assume you have read this, or at least the important architectural portions. The file system is block-oriented; each file is broken up into 64 MB or 128 MB chunks (user configurable). These chunks are stored on data nodes and served up from there; the central namenode keeps track of the block locations, the namespace information, and block placement policies. HDFS provides POSIX-like semantics; it provides fully random-access reads and non-random-access writes. Currently, fsync and appends (after the file has been initially closed) are experimental and not available to OSG-based installs.
 
@@ -21,7 +21,7 @@ We broadly break down the server components of the Hadoop SE into three categori
 -   Grid extensions
     -   BeStMan SRM: A generic SRM server that can be run on top of any POSIX-like filesystem. This is run in "gateway" mode, which limits the amount of the SRM protocol implemented. To date, this has been sufficient to LHC VOs.
     -   Globus GridFTP: The standard GridFTP from Globus. We use a plug-in module (using the Globus Direct Storage Interface) that allows the GridFTP process to use the HDFS C-bindings directly.
-    -   Gratia probe: [Gratia](Accounting.WebHome) is an accounting system that records batch system and transfer records to a database. The records are collected by a client program called a "probe" which runs on the GridFTP server. It parses the GridFTP server's log files and creates transfer records.
+    -   Gratia probe: Gratia is an accounting system that records batch system and transfer records to a database. The records are collected by a client program called a "probe" which runs on the GridFTP server. It parses the GridFTP server's log files and creates transfer records.
     -   Xrootd server plugin: Xrootd is an extremely flexible and powerful data server popular in the high energy physics community. There exists a HDFS plugin for Xrootd; integrating with Xrootd provides a means to export HDFS securely outside the local cluster, as another Xrootd plugin provides GSI-based authentication and authorization.
 -   HDFS auxiliary:
     -   "Secondary Namenode": Perhaps more aptly called a "checkpoint server". This server downloads the file system image and journal from the namenode, merges the two together, and uploads the new file system image up to the namenode. This is done on a different server in order to reduce the memory footprint of the namenode.
