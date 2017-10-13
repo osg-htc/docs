@@ -35,6 +35,7 @@ pages:
   - 'Install GridFtp XRootD': 'data/install-gridftp-xrootd.md'
   - 'HTTP Cache': 'data/frontier-squid.md'
   - 'Update OASIS': 'data/update-oasis.md'
+  - 'External OASIS repositories': 'data/external-oasis-repos.md'
   - 'XRootD Overview': 'data/xrootd-overview.md'
   - 'XRootD Client': 'data/install-xroot-client.md'
   - 'Hadoop Overview': 'data/hadoop-overview.md'

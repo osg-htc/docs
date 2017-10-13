@@ -6,7 +6,7 @@ OASIS is the OSG Application Software Installation Service. It is the recommende
 !!! note
     The applicable software versions for this document are **osg-version 3.1.13** (or higher)
 
-This document is a step by step explanation of how a Virtual Organization (VO) Software Adminstrator can enable the OASIS service and use it to publish and update software on OSG Worker Nodes under /cvmfs/oasis.opensciencegrid.org. For information on how to configure a client for OASIS see the [OSG CVMFS Installation documentation](../worker-node/install-cvmfs). For information on hosting your own opensciencegrid.org repository see OasisExternalRepositories.
+This document is a step by step explanation of how a Virtual Organization (VO) Software Adminstrator can enable the OASIS service and use it to publish and update software on OSG Worker Nodes under /cvmfs/oasis.opensciencegrid.org. For information on how to configure a client for OASIS see the [OSG CVMFS Installation documentation](../worker-node/install-cvmfs). For information on hosting your own opensciencegrid.org repository see [this document](external-oasis-repos).
 
 Requirements
 ------------
