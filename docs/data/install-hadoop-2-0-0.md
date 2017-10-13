@@ -1,14 +1,7 @@
-**Hadoop 2.0.0 (CDH4)**
-=======================
+Hadoop 2.0.0 (CDH4)
+===================
 
-<span class="twiki-macro DOC_STATUS_TABLE"></span> 
-**Purpose**: The purpose of this document is to provide Hadoop based SE administrators the information on how to prepare, install and validate the SE.
-
-!!! warning
-    If you are installing Hadoop/Bestman from OSG 3.1, you will need to use [this](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoopSE) guide instead. This guide details installing Hadoop 2.0 from the OSG 3.2 repositories.
-
-Preparation
-===========
+The purpose of this document is to provide Hadoop based SE administrators the information on how to prepare, install and validate the SE.
 
 Introduction
 ------------
@@ -21,19 +14,6 @@ Introduction
 -   [Apache Hadoop](http://hadoop.apache.org/)
 
 The OSG packaging and distribution of Hadoop is based on YUM. All components are packaged as RPMs and are available from the OSG repositories. It is also recommended that you enable [EPEL](http://fedoraproject.org/wiki/EPEL) repos.
-
-Note on upgrading from Hadoop 0.20
-----------------------------------
-
-!!! note
-    If upgrading, make sure to follow these instructions %RED%BEFORE%ENDCOLOR% any other instructions in this document.
-
-1. First, you must upgrade to the newest version of Hadoop-0.20. Older versions may have dependency and upgrade problems. Make sure that your version is at least `hadoop-0.20-0.20.2+737-26` (or newer) on all nodes. (The important number is the 26. Older release numbers may have upgrade problems). You may need to specify this version specifically to ensure that the correct version is installed. ie. `yum upgrade hadoop-0.20-0.20.2+737-26`.
-1. Next, make sure all configuration and important files are backed up in case of catastrophic failure. In particular, backup a copy of `hdfs-site.xml`, `core-site.xml` and important namenode files.
-1. Now, upgrade to hadoop-2.0.0 using `yum upgrade hadoop`
-1. Also, make sure to bring in any new packages using the relevant meta-package, such as `yum install osg-se-hadoop-namenode`, `yum install osg-se-hadoop-datanode` or `yum install osg-se-hadoop-srm`.
-1. On the namenode, run `hadoop namenode -upgrade` to upgrade the meta-data catalog.
-1. Follow the configuration instructions below for each node. In particular, restore or modify `hdfs-site.xml` and `core-site.xml` then copy to all nodes. For any nodes using fuse mounts, note that "hdfs\#" should be changed to "hadoop-fuse-dfs\#" in `/etc/fstab`.
 
 Requirements
 ============
@@ -48,15 +28,13 @@ Architecture
 -   **Secondary Namenode**: This is a secondary machine that periodically merges updates to the HDFS file system back into the fsimage. This dramatically improves startup and restart times.
 -   **Datanode**: You will have many datanodes. Each data node stores large blocks of files to be stored on the hadoop cluster.
 -   **Client**: This is a documentation shorthand that refers to any machine with the hadoop client commands and [FUSE](http://fuse.sourceforge.net/) mount. Any machine that needs a FUSE mount to access data in a POSIX-like fashion will need this.
--   **GridFTP node**: This is a node with [Globus GridFTP](http://dev.globus.org/wiki/GridFTP). The GridFTP server for Hadoop can be very memory-hungry, up to 500MB/transfer in the default configuration. You should plan accordingly to provision enough GridFTP servers to handle the bandwidth that your site can support.
+-   **GridFTP node**: This is a node with [Globus GridFTP](gridftp). The GridFTP server for Hadoop can be very memory-hungry, up to 500MB/transfer in the default configuration. You should plan accordingly to provision enough GridFTP servers to handle the bandwidth that your site can support.
 -    **SRM node**: This node will contain the BeStMan SRM frontend for accessing the Hadoop cluster via the SRM protocol. [BeStMan2 SRM](https://sdm.lbl.gov/bestman/)
 
 Note that these components are not necessarily mutually exclusive. For instance, you may consider having your GridFTP server co-located on the SRM node. Alternatively, you can locate a client (or even a GridFTP node) co-located on each data node. That way, each data node also acts as an access point to the hadoop cluster.
 
-Please read the [planning document](https://twiki.opensciencegrid.org/bin/view/Documentation/HadoopUnderstanding) to understand different components of the system.
-
 !!! note
-    Total installation time, on an average, should not exceed 8 to 24 man-hours. If your site needs further assistance to help expedite, please email <osg-storage@opensciencegrid.org> and <osg-hadoop@opensciencegrid.org>.
+    Total installation time, on an average, should not exceed 8 to 24 man-hours. If your site needs further assistance to help expedite, please email <mailto:goc@opensciencegrid.org>.
 
 Host and OS
 -----------
@@ -72,7 +50,8 @@ The HDFS prerequisites are:
 -   `fuse` kernel module and `fuse-libs`.
 -   Java RPM. If java isn't already installed we supply the Oracle jdk 1.6.0 rpm and it will come in as a dependency. Oracle jdk is currently the only jdk supported by OSG so we highly recommend you use the version supplied.
 
-**Compatibility Note** Note that versions of OpenAFS less than 1.4.7 and greater than 1.4.1 create nameless groups on Linux; these groups confuse Hadoop and prevent its components from starting up successfully. If you plan to install Hadoop on a Linux OpenAFS client, make sure you're running at least OpenAFS 1.4.7.
+!!! note
+    Versions of OpenAFS less than 1.4.7 and greater than 1.4.1 create nameless groups on Linux; these groups confuse Hadoop and prevent its components from starting up successfully. If you plan to install Hadoop on a Linux OpenAFS client, make sure you're running at least OpenAFS 1.4.7.
 
 Users
 -----
@@ -95,90 +74,22 @@ Note that these users must be kept in sync with the authentication method. For i
 Certificates
 ------------
 
-<span class="twiki-macro STARTSECTION">Certificates</span>
-
 | Certificate                 | User that owns certificate | Path to certificate                                                                                 |
 |:----------------------------|:---------------------------|:----------------------------------------------------------------------------------------------------|
 | Host certificate            | `root`                     | `/etc/grid-security/hostcert.pem` <br> `/etc/grid-security/hostkey.pem`                       |
 | Bestman service certificate | `bestman`                  | `/etc/grid-security/bestman/bestmancert.pem` <br> `/etc/grid-security/bestman/bestmankey.pem` |
 
-<span class="twiki-macro ENDSECTION">Certificates</span>
-
-[Instructions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallCertScripts) to request a service certificate.
+[Instructions](../security/host-certs) to request a service certificate.
 
 You will also need a copy of CA certificates (see below). Note that the `osg-se-hadoop-srm` and `osg-se-hadoop-gridftp` package will automatically install a certificate package but will not necessarily pick the cert package you expect. For instance, certain installs will prefer the `osg-ca-scripts` package to fulfill this requirement, which installs a set of scripts to automatically update the certificates, but does not initialize the CA certs by default (you have to run it first). For this reason, you may want to specifically install the cert package of your choice first, before installing Hadoop.
 
 Networking
 ----------
 
-For more details on overall Firewall configuration, please see our [Firewall documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/FirewallInformation).
-
-**NOTE:** The versions of Hadoop in OSG series 3.1 and 3.2 (ie, Hadoop 0.20 and 2.0.0) do not inter-operate. In order to use Hadoop 2.0.0, *all* nodes in the hadoop system (namenode, secondary namenode, datanodes, srm/gridftp nodes and all client nodes) must update to OSG 3.2 and Hadoop 2.0.0.
-
 Initializing Certificate Authority
 ==================================
 
-This is needed by GridFTP and SRM nodes, but it is recommended for all nodes in the cluster.
-
-++ Enable and Start `fetch-crl` To enable fetch-crl (fetch Certificate Revocation Lists) services by default on the node:
-
-``` console
-%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-root# /sbin/chkconfig fetch-crl3-boot on
-root# /sbin/chkconfig fetch-crl3-cron on
-%RED%# For RHEL 6, CentOS 6, and SL6, or OSG 3 _older_ than 3.1.15 %ENDCOLOR%
-root# /sbin/chkconfig fetch-crl-boot on
-root# /sbin/chkconfig fetch-crl-cron on
-%RED%# For RHEL 7, CentOS 7, and SL7 %ENDCOLOR%
-root# systemctl enable fetch-crl-boot
-root# systemctl enable fetch-crl-cron
-```
-
-To start fetch-crl:
-
-``` console
-%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-root# /sbin/service fetch-crl3-boot start
-root# /sbin/service fetch-crl3-cron start
-%RED%# For RHEL 6, CentOS 6, and SL6, or OSG 3 _older_ than 3.1.15 %ENDCOLOR%
-root# /sbin/service fetch-crl-boot start
-root# /sbin/service fetch-crl-cron start
-%RED%# For RHEL 7, CentOS 7, and SL7 %ENDCOLOR%
-root# systemctl start fetch-crl-boot
-root# systemctl start fetch-crl-cron
-```
-
-**NOTE**: while it is necessary to start `fetch-crl-cron` in order to have it active, `fetch-crl-boot` is started automatically at boot time if enabled. The start command will run `fetch-crl-boot` at the moment when it is invoked and it may take some time to complete.
-
----%SHIFT%++ Configure `fetch-crl` To modify the times that fetch-crl-cron runs, edit `/etc/cron.d/fetch-crl` (or `/etc/cron.d/fetch-crl3` depending on the version you have).
-
-By default, `fetch-crl` connects directly to the remote CA; this is inefficient and potentially harmful if done simultaneously by many nodes (e.g. all the worker nodes of a big cluster). We recommend you provide a HTTP proxy (such as squid) the worker nodes can connect to. [Here](InstallFrontierSquid) are instructions to install a squid proxy.
-
-To configure fetch-crl to use an HTTP proxy server:
-
--   If using `fetch-crl` version 2 (the `fetch-crl` package on RHEL5 only), then create the file `/etc/sysconfig/fetch-crl` and add the following line: <pre class="file">
-
-export http\_proxy=%RED%http://your.squid.fqdn:port<span class="twiki-macro ENDCOLOR"></span> </pre> Adjust the URL appropriately for your proxy server.
-
--   If using `fetch-crl` version 3 on RHEL5 via the `fetch-crl3` package or on RHEL6/RHEL7 via the `fetch-crl` package, then create or edit the file `/etc/fetch-crl3.conf` (RHEL5) or `/etc/fetch-crl.conf` (RHEL6/RHEL7) and add the following line: <pre class="file">
-
-http\_proxy=%RED%http://your.squid.fqdn:port<span class="twiki-macro ENDCOLOR"></span> </pre> Again, adjust the URL appropriately for your proxy server.
-
-Note that the **`nosymlinks`** option in the configuration files refers to ignoring links within the certificates directory (e.g. two different names for the same file). It is perfectly fine if the path of the CA certificates directory itself (`infodir`) is a link to a directory.
-
-Any modifications to the configuration file will be preserved during an RPM update.
-
-For more details, please see our [fetch-crl documentation](../common/ca).
-
-Current versions of fetch-crl and fetch-crl3 produce more output. It is possible to send the output to syslog instead of the default email system. To do so:
-
-1.  Change the configuration file to enable syslog: <pre class="file">
-
-logmode = syslog syslogfacility = daemon</pre>
-
-1.  Make sure the file `/var/log/daemon` exists, e.g. touching the file
-2.  Change `/etc/logrotate.d` files to rotate it
-
+This is needed by GridFTP and SRM nodes, but it is recommended for all nodes in the cluster. Enable [fetch-crl](../common/ca#install-fetch-crl)
 
 Installation
 ============
@@ -189,49 +100,49 @@ Namenode Installation
 ---------------------
 
 ``` console
-root# yum install osg-se-hadoop-namenode
+root@host # yum install osg-se-hadoop-namenode
 ```
 
 Secondary Namenode Installation
 -------------------------------
 
 ``` console
-root# yum install osg-se-hadoop-secondarynamenode
+root@host # yum install osg-se-hadoop-secondarynamenode
 ```
 
 Datanode Installation
 ---------------------
 
 ``` console
-root# yum install osg-se-hadoop-datanode
+root@host # yum install osg-se-hadoop-datanode
 ```
 
 Client/FUSE Installation
 ------------------------
 
 ``` console
-root# yum install osg-se-hadoop-client
+root@host # yum install osg-se-hadoop-client
 ```
 
 Standalone Gridftp Node Installation
 ------------------------------------
 
 ``` console
-root# yum install osg-se-hadoop-gridftp
+root@host # yum install osg-se-hadoop-gridftp
 ```
 
 If you are using GUMS authorization, the follow rpms need to be installed as well:
 
 ``` console
-root# yum install lcmaps-plugins-gums-client
-root# yum install lcmaps-plugins-basic
+root@host # yum install lcmaps-plugins-gums-client
+root@host # yum install lcmaps-plugins-basic
 ```
 
 SRM Node Installation
 ---------------------
 
 ``` console
-root# yum install osg-se-hadoop-srm
+root@host # yum install osg-se-hadoop-srm
 ```
 
 !!! note
@@ -300,8 +211,8 @@ Be sure to change the `/mnt/hadoop` mount point and `namenode.host` to match you
 Once your `/etc/fstab` is updated, to mount FUSE run:
 
 ``` console
-root# mkdir /mnt/hadoop
-root# mount /mnt/hadoop
+root@host # mkdir /mnt/hadoop
+root@host # mount /mnt/hadoop
 ```
 
 When mounting the HDFS FUSE mount, you will see the following harmless warnings printed to the screen:
@@ -340,31 +251,31 @@ For clean HDFS operations and filesystem management:
 Example:
 
 ``` console
-root# mkdir /mnt/hadoop/cms
-root# mkdir /mnt/hadoop/dzero
-root# mkdir /mnt/hadoop/sbgrid
-root# mkdir /mnt/hadoop/fermigrid
-root# mkdir /mnt/hadoop/cmstest
-root# mkdir /mnt/hadoop/osg
+root@host # mkdir /mnt/hadoop/cms
+root@host # mkdir /mnt/hadoop/dzero
+root@host # mkdir /mnt/hadoop/sbgrid
+root@host # mkdir /mnt/hadoop/fermigrid
+root@host # mkdir /mnt/hadoop/cmstest
+root@host # mkdir /mnt/hadoop/osg
 ```
 
 (b) Create individual top-level user areas, under each VO area, as needed.
 
 ``` console
-root# mkdir -p /mnt/hadoop/cms/store/user/tanyalevshina
-root# mkdir -p /mnt/hadoop/cms/store/user/michaelthomas
-root# mkdir -p /mnt/hadoop/cms/store/user/brianbockelman
-root# mkdir -p /mnt/hadoop/cms/store/user/douglasstrain
-root# mkdir -p /mnt/hadoop/cms/store/user/abhisheksinghrana
+root@host # mkdir -p /mnt/hadoop/cms/store/user/tanyalevshina
+root@host # mkdir -p /mnt/hadoop/cms/store/user/michaelthomas
+root@host # mkdir -p /mnt/hadoop/cms/store/user/brianbockelman
+root@host # mkdir -p /mnt/hadoop/cms/store/user/douglasstrain
+root@host # mkdir -p /mnt/hadoop/cms/store/user/abhisheksinghrana
 ```
 
 (c) Adjust username:group ownership of each area.
 
 ``` console
-root# chown -R cms:cms /mnt/hadoop/cms
-root# chown -R sam:sam /mnt/hadoop/dzero
+root@host # chown -R cms:cms /mnt/hadoop/cms
+root@host # chown -R sam:sam /mnt/hadoop/dzero
 
-root# chown -R michaelthomas:cms /mnt/hadoop/cms/store/user/michaelthomas
+root@host # chown -R michaelthomas:cms /mnt/hadoop/cms/store/user/michaelthomas
 ```
 
 GridFTP Configuration
@@ -456,7 +367,7 @@ The primary configuration file for the gums-client utilities is located in `/etc
 After the gums client is configured to generate the file run the following once by hand:
 
 ``` console
-root# gums-host-cron
+root@host # gums-host-cron
 ```
 
 `user-vo-map` should be created in the following location:
@@ -466,7 +377,7 @@ root# gums-host-cron
 To have cron regularly update this file start the following service:
 
 ``` console
-root# service gums-client-cron start
+root@host # service gums-client-cron start
 ```
 
 Make sure the **UserVOMapFile** field is set to this location in
@@ -493,7 +404,7 @@ If you have not installed this package, you will need to run `yum install edg-mk
 Run the Gratia probe once by hand to check for functionality:
 
 ``` console
-root# /usr/share/gratia/gridftp-transfer/GridftpTransferProbeDriver
+root@host # /usr/share/gratia/gridftp-transfer/GridftpTransferProbeDriver
 ```
 
 Look for any abnormal termination and report it if it is a non-trivial site issue. Look in the log files in `/var/log/gratia/<date>.log` and make sure there are no error messages printed.
@@ -501,90 +412,7 @@ Look for any abnormal termination and report it if it is a non-trivial site issu
 BeStMan Configuration
 ---------------------
 
-There are two authorization options:
-
--   Gridmap file
--   GUMS authentication server
-
-Please choose one of these and follow the instructions in one of the two following sections.
-
-### Configuring Gridmap Support
-
-By default, GridFTP uses a gridmap file, found in `/etc/grid-security/grid-mapfile`. This file is not generated by default. There are two ways you can generate this file. You can generate this file manually, by including DN/username combinations. This is most useful for debugging. Otherwise, you can use edg-mkgridmap, which will periodically contact a list of VOMS servers that you specify. It assembles a list of users from those servers and creates a grid-mapfile. This grid-mapfile serves both as a list of authorized users and provides a mapping from user dns to local user ids. edg-mkgridmap is already installed with OSG BeStMan SE packages.
-
-In order to use edg-mkgridmap, review `/etc/edg-mkgridmap.conf` to make sure that it has all VOs that you are interested in and also to comment out any VOs that you do not wish to support.
-
-``` console
-vi /etc/edg-mkgridmap.conf
-```
-
-This utility `edg-mkgridmap` runs as a cronjob `/etc/cron.d/edg-mkgridmap-cron` (by default every 6 hours). You can also run `edg-mkgridmap` manually to see that it generates `/etc/grid-security/grid-mapfile`.
-
-``` console
-edg-mkgridmap
-```
-
-Then, you can enable/start the service.
-
-``` console
-/sbin/service edg-mkgridmap start
-/sbin/chkconfig edg-mkgridmap on
-```
-
-Next, you will have to modify `/etc/bestman2/conf/bestman2.rc` and change GridMapFileName from `/etc/bestman2/conf/grid-mapfile.empty` to:
-
-``` file
-GridMapFileName=/etc/grid-security/grid-mapfile
-```
-
-In `/etc/sysconfig/bestman2`, change
-
-``` file
-BESTMAN_GUMS_ENABLED=no
-```
-
-### Configuring GUMS support
-
-By default, GridFTP uses a gridmap file, found in `/etc/grid-security/gridmap-file`. If you want to use GUMS security (recommended), you will need to enable it using the following steps:
-
-First, edit `/etc/grid-security/gsi-authz.conf` and uncomment the globus callout.
-
-``` file
-globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout
-```
-
-Note that this used to be the full path to the library (`/usr/lib64` or `/usr/lib`), but now we rely on the linker for proper resolution in this file.
-
-Next edit `/etc/lcmaps.db` to edit your gums information:
-
-``` file
-...
-gumsclient = "lcmaps_gums_client.mod"
-             "-resourcetype ce"
-             "-actiontype execute-now"
-             "-capath /etc/grid-security/certificates"
-             "-cert   /etc/grid-security/hostcert.pem"
-             "-key    /etc/grid-security/hostkey.pem"
-             "--cert-owner root"
-# Change this URL to your GUMS server
-             "--endpoint https://%RED%gums.fnal.gov:8443%ENDCOLOR%/gums/services/GUMSXACMLAuthorizationServicePort"
-```
-
-If you would like to run SAZ, you will need to enable the relevant lines in the above file as well (more documentation to be added later).
-
-You will need to modify the following settings in `/etc/sysconfig/bestman2`
-
-``` file
-BESTMAN_GUMSCERTPATH=/etc/grid-security/bestman/bestmancert.pem
-BESTMAN_GUMSKEYPATH=/etc/grid-security/bestman/bestmankey.pem
-...
-```
-
-You will need to modify the following settings in `/etc/bestman2/conf/bestman2.rc`
-
-``` file
-GUMSserviceURL=https://GUMS_HOST:8443/gums/services/GUMSXACMLAuthorizationServicePort
-```
+See the [BeStMaN documentation](bestman-install#authorization) for details.
 
 ### BeStManHadoop-specific configuration
 
@@ -743,29 +571,29 @@ service hadoop-hdfs-datanode stop
 GridFTP:
 
 ``` console
-root# service globus-gridftp-server start
+root@host # service globus-gridftp-server start
 ```
 
 To start Gridftp automatically at boot time
 
 ``` console
-root# chkconfig globus-gridftp-server on
+root@host # chkconfig globus-gridftp-server on
 ```
 
 Stopping GridFTP:
 
 ``` console
-root# service globus-gridftp-server stop
+root@host # service globus-gridftp-server stop
 ```
 
 ``` console
-root# service bestman2 start
+root@host # service bestman2 start
 ```
 
 To start Bestman automatically at boot time
 
 ``` console
-root# chkconfig bestman2 on
+root@host # chkconfig bestman2 on
 ```
 
 Validation
@@ -883,7 +711,7 @@ drwxrwxr-x   - engage engage          0 2011-07-25 06:32 /engage
 Example, to adjust ownership of filesystem areas (there is usually no need to specify the mount itself `/mnt/hadoop` in Hadoop commands):
 
 ``` console
-root# hadoop fs -chown -R engage:engage /engage
+root@host # hadoop fs -chown -R engage:engage /engage
 ```
 
 Example, compare `hadoop fs` command vs. using FUSE mount:
@@ -1351,7 +1179,7 @@ If you are running a custom kernel, then be sure to enable the `fuse` module wit
 To start the FUSE mount in debug mode, you can run the FUSE mount command by hand:
 
 ``` console
-root#  /usr/bin/hadoop-fuse-dfs  /mnt/hadoop -o rw,server=%RED%namenode.host%ENDCOLOR%,port=9000,rdbuffer=131072,allow_other -d
+root@host #  /usr/bin/hadoop-fuse-dfs  /mnt/hadoop -o rw,server=%RED%namenode.host%ENDCOLOR%,port=9000,rdbuffer=131072,allow_other -d
 ```
 
 Debug output will be printed to stderr, which you will probably want to redirect to a file. Most FUSE-related problems can be tackled by reading through the stderr and looking for error messages.
@@ -1366,7 +1194,7 @@ GridFTP
 If you would like to test the gridftp-hdfs server in a debug standalone mode, you can run the command:
 
 ``` console
-root# gridftp-hdfs-standalone
+root@host # gridftp-hdfs-standalone
 ```
 
 The standalone server runs on port 5002, handles a single GridFTP request, and will log output to stdout/stderr.
@@ -1491,9 +1319,3 @@ References
 
 -   [Using Hadoop as a Grid Storage Element](http://www.iop.org/EJ/article/1742-6596/180/1/012047/jpconf9_180_012047.pdf), *Journal of Physics Conference Series, 2009*.
 -   [Hadoop Distributed File System for the Grid](http://osg-docdb.opensciencegrid.org/0009/000911/001/Hadoop.pdf), *IEEE Nuclear Science Symposium, 2009*.
-
-**Comments**
-============
-
-<span class="twiki-macro COMMENT" type="tableappend"></span>
-
