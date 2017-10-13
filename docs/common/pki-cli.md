@@ -19,7 +19,7 @@ The command-line scripts have been packaged as an RPM and are available from the
 To install the RPM, run:
 
 ```console
-[root@client ~] # yum install osg-pki-tools
+root@host # yum install osg-pki-tools
 ```
 
 Usage
@@ -73,7 +73,7 @@ If the user provides the CSR, then this script would just send the same CSR to O
 -   Request Id, to `stdout`.
 
 ```console
-[root@client ~] # osg-cert-request --help
+root@host # osg-cert-request --help
 Usage: osg-cert-request [options]
 
 Options:
@@ -111,19 +111,19 @@ Options:
 OSG generates the key pair for the request.
 
 ```console
-[root@client ~] # osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n "Your Name" -p 9999999999 -y "xyz@domain.com,abc@domain.com" -m "This is my comment"
+root@host # osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n "Your Name" -p 9999999999 -y "xyz@domain.com,abc@domain.com" -m "This is my comment"
 ```
 
 If you want to request a service certificate, you need to escape backslash for service name inside CN like following.
 
 ```console
-[root@client ~] # osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n "Your Name" -p 9999999999 -y "rsv\/xyz@domain.com" -m "This is my comment"
+root@host # osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n "Your Name" -p 9999999999 -y "rsv\/xyz@domain.com" -m "This is my comment"
 ```
 
 You can create your CSR on your target hosts using tools such as `openssl`.
 
 ```console
-[root@client ~] # umask 077; openssl req -new -newkey rsa:2048 -nodes -keyout hostkey.pem -subj "/CN=osg-ce.example.edu" -out csr.pem
+root@host # umask 077; openssl req -new -newkey rsa:2048 -nodes -keyout hostkey.pem -subj "/CN=osg-ce.example.edu" -out csr.pem
 ```
 
 Note that the DN will be overriden by the OSG PKI except for the CN component.
@@ -131,7 +131,7 @@ Note that the DN will be overriden by the OSG PKI except for the CN component.
 Submitting the request:
 
 ```console
-[root@client ~] # osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n "Your Name" -p 9999999999 -y "xyz@domain.com,abc@domain.com" -m "This is my comment" --csr csr.pem
+root@host # osg-cert-request -t hostname.domain.com -e emailaddress@domain.com -n "Your Name" -p 9999999999 -y "xyz@domain.com,abc@domain.com" -m "This is my comment" --csr csr.pem
 ```
 
 ### osg-cert-retrieve
@@ -158,7 +158,7 @@ This script:
 -   Host certificate as PEM, to filename specified or `./hostcert.pem`.
 
 ```console
-[root@client ~] # osg-cert-retrieve --help
+root@host # osg-cert-retrieve --help
 Usage: osg-cert-retrieve [options] <Request ID>
 Usage: osg-cert-retrieve -h/--help [for detailed explanations of options]
 
@@ -180,7 +180,7 @@ Options:
 Example:
 
 ```console
-[root@client ~] # osg-cert-retrieve -i 555
+root@host # osg-cert-retrieve -i 555
 ```
 
 ### osg-gridadmin-cert-request
@@ -218,7 +218,7 @@ This script does the following in the process of acquiring certificates for the 
 -   `N` private keys in PEM format.
 
 ```console
-[root@client ~] # osg-gridadmin-cert-request --help
+root@host # osg-gridadmin-cert-request --help
 Usage: osg-gridadmin-cert-request [options] arg
 Usage: osg-gridadmin-cert-request -h/--help [for detailed explanations of options]
 
@@ -264,11 +264,11 @@ Options:
 Examples:
 
 ```console
-[root@client ~] # osg-gridadmin-cert-request -f filename -k privatekeyfile -c certificatefile
+root@host # osg-gridadmin-cert-request -f filename -k privatekeyfile -c certificatefile
 ```
 
 ```console
-[root@client ~] # osg-gridadmin-cert-request -H hostname.domain.com -k privatekeyfile -c certificatefile
+root@host # osg-gridadmin-cert-request -H hostname.domain.com -k privatekeyfile -c certificatefile
 ```
 
 ### osg-user-cert-renew
@@ -294,7 +294,7 @@ The script generates request for renewing user certificate to the OIM, and if th
         https://oim.opensciencegrid.org/oim/certificateuser?id=<REQID>
 
 ```console
-[root@client ~] # osg-user-cert-renew --help
+root@host # osg-user-cert-renew --help
 Usage: osg-user-cert-renew [options]
 
 Options:
@@ -317,7 +317,7 @@ Options:
 **Example**
 
 ```console
-[root@client ~] # osg-user-cert-renew -k userkey.pem -c usercert.pem
+root@host # osg-user-cert-renew -k userkey.pem -c usercert.pem
 ```
 
 ### osg-user-cert-revoke
@@ -346,7 +346,7 @@ For revoking user certificate, user authentication is done and if the user is au
 If the user's private key and certificate are not provided, the script takes the private key and user certificate from the `~/.globus` folder using the default names (`userkey.pem` and `usercert.pem`, respectively)
 
 ```console
-[root@client ~] # osg-user-cert-revoke --help
+root@host # osg-user-cert-revoke --help
 Usage: osg-user-cert-revoke [options] <Request ID> <message>
 Usage: osg-user-cert-revoke -h/--help [for detailed explanations of options]
 
@@ -377,7 +377,7 @@ Options:
 **Example:**
 
 ```console
-[root@client ~] # osg-user-cert-revoke -i 999 -m "Testing user cert revocation" -k privatekeyfile -c usercertfile
+root@host # osg-user-cert-revoke -i 999 -m "Testing user cert revocation" -k privatekeyfile -c usercertfile
 ```
 
 ### osg-cert-revoke
@@ -406,7 +406,7 @@ For revoking host certificate, user authentication is done and if the user is au
 If the user's private key and certificate are not provided, the script takes the private key and user certificate from the `~/.globus` folder using the default names (`userkey.pem` and `usercert.pem`, respectively).
 
 ```console
-[root@client ~] # osg-user-cert-revoke --help
+root@host # osg-user-cert-revoke --help
 Usage: osg-cert-revoke [options] <Request ID> <message>
 Usage: osg-cert-revoke -h/--help [for detailed explanations of options]
 
@@ -437,7 +437,7 @@ Options:
 **Example:**
 
 ```console
-[root@client ~] # osg-cert-revoke -i 999 -m "Testing host cert revocation" -k privatekeyfile -c usercertfile
+root@host # osg-cert-revoke -i 999 -m "Testing host cert revocation" -k privatekeyfile -c usercertfile
 ```
 
 Test Mode

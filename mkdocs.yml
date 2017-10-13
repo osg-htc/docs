@@ -16,7 +16,7 @@ pages:
   - 'CA Certificates': 'common/ca.md'
   - 'OSG CA Certificates Updater': 'common/osg-ca-certs-updater.md'
   - 'Yum Repos': 'common/yum.md'
-- Install Guides - Worker Node:
+- Worker Node:
   - 'Worker Node (RPM install)': 'worker-node/install-wn.md'
   - 'Worker Node (tarball install)': 'worker-node/install-wn-tarball.md'
   - 'Worker Node (OASIS install)': 'worker-node/install-wn-oasis.md'
@@ -28,22 +28,19 @@ pages:
   - 'Job Router Recipes': 'compute-element/job-router-recipes.md'
   - 'Troubleshooting HTCondor-CE': 'compute-element/troubleshoot-htcondor-ce.md'
   - 'Submitting to HTCondor-CE': 'compute-element/submit-htcondor-ce.md'
-- Install Guides - Data:
-  - 'GridFTP Server': 'data/gridftp.md'
+- Data:
+  - 'Install GridFTP Server': 'data/gridftp.md'
+  - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
+  - 'Install GridFtp XRootD': 'data/install-gridftp-xrootd.md'
   - 'HTTP Cache': 'data/frontier-squid.md'
+  - 'XRootD Overview': 'data/xrootd-overview.md'
   - 'XRootD Client': 'data/install-xroot-client.md'
-- Install Guides - Other:
-  - 'GSI-enabled SSH': 'other/gsissh.md'
+  - 'Hadoop': 'data/install-hadoop-2-0-0.md'
+- Security:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
-  - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
-  - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
-  - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
-- Monitoring:
-  - 'RSV Overview': 'monitoring/rsv-overview.md'
-  - 'Install RSV': 'monitoring/install-rsv.md'
-  - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
-  - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
-  - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
+  - 'Host Certificates': 'security/host-certs.md'
+  - 'User Certificates': 'security/user-certs.md'
+  - 'Managing CAs': 'security/osg-ca-manage.md'
 - Release Information:
   - 'Release Notes': 'release/notes.md'
   - 'OSG Release Series': 'release/release_series.md'
@@ -51,6 +48,18 @@ pages:
   - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
   - 'Contrib Software': 'release/contrib.md'
+- Other:
+  - 'GSI-enabled SSH': 'other/gsissh.md'
+  - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
+  - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
+  - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
+  - 'Network Performance Toolkit': 'other/network-performance-toolkit.md'
+- Monitoring:
+  - 'RSV Overview': 'monitoring/rsv-overview.md'
+  - 'Install RSV': 'monitoring/install-rsv.md'
+  - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
+  - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
+  - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
 - Usage Guides:
   - 'Certificate Tools': 'common/pki-cli.md'
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
@@ -62,7 +71,10 @@ pages:
   - 'EDG-Mkgridmap Install': 'security/edg-mkgridmap.md'
   - 'GUMS': 'security/install-gums.md'
   - 'Worker node glexec Install': 'worker-node/install-glexec.md'
+  - 'Install VOMS': 'other/install-voms.md'
 - 'Get Help': 'common/help.md'
+- 'OSG Release 3.4.4-2': 'release/3.4/release-3-4-4-2.md'
+- 'OSG Release 3.3.29-2': 'release/3.3/release-3-3-29-2.md'
 - 'OSG Release 3.4.4': 'release/3.4/release-3-4-4.md'
 - 'OSG Release 3.3.29': 'release/3.3/release-3-3-29.md'
 - 'OSG Release 3.4.3': 'release/3.4/release-3-4-3.md'

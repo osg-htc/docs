@@ -1,0 +1,112 @@
+%DOC_STATUS_TABLE%
+
+---+!! Prepare the Compute Element Installation
+%TOC%
+
+---+ About this Document
+
+%ICON{hand}% This document is for system administrators. It contains requirements that must be met and procedures completed before beginning the [[Documentation/Release3.InstallComputeElement][Compute Element Installation]]. 
+
+---+ Before you Begin
+
+   1. Read the [[Documentation.Release3.SitePlanning][Site Planning Guide]] and plan your site on paper.
+   1. Make sure you are using a supported operating system: %SUPPORTED_OS%
+   1. Verify the operation of your local batch system.
+   1. Decide if your site will join the _Production Grid_ or the _Integration Testbed_ of the OSG.
+   1. Know your CE's _resource name_ and _resource group_.  These are values that you filled out when you registered the site in [[https://oim.grid.iu.edu][OIM]]. If the CE is not registered yet, check the [[Operations.OIMRegistrationInstructions][OIM registration instructions]].
+   1. Determine your site sponsors. These are the Virtual Organizations that own the computing resources behind the CE.
+
+---+ Operating System and Networking Requirements
+
+   * A working network connection
+   * A fully qualified domain name for the gatekeeper
+   * A working forward and reverse DNS lookup for the IP address of the gatekeeper
+   * A valid host and several service certificates issued for the fully qualified domain name of the gatekeeper
+   * Synchronized clocks using NTP for all resources constituting the Compute Element 
+   * Outbound network connections, please review the [[Documentation/Release3.FirewallInformation][Firewall Document]]
+
+---+ Required Service Accounts
+
+| *Service Name*  | *Account*  | *Comment* |
+| CEMon  | =tomcat=  | | 
+| condor | =condor= | Only if you install Condor RPM |
+
+---+ Required User Accounts
+
+Unix user accounts need to be created for each %LINK_GLOSSARY_VO%. The =uid= and =name= of the account can be locally determined. You will be asked to provide a mapping from local accounts to VOs later during the [[InstallComputeElement#ConfigureCE][CE configuration process]].  Since VO's are frequently added to the OSG, you should access the current list of registered VO's at [[http://myosg.grid.iu.edu/vosummary?datasource=summary&all_vos=on&active_value=1][MyOSG's Virtual Organization menu item]]. Any new VO's will also appear in on the CE in the file =/etc//etc/osg/osg-user-vo-map.txt=.
+
+---+ Required Host and Service Certificates
+
+The following table lists OSG services that require a service certificate for their operation. Please [[Documentation/Release3.GetHostServiceCertificates][request and install]] the certificates before you proceed with the installation.
+
+| *Purpose*  | *Default Location*  | *User that should own the certificate*  |
+| !GridFTP/host  | =/etc/grid-security/hostcert.pem= %BR% =/etc/grid-security/hostkey.pem=  | =root=   |
+| CEMon  | =/etc/grid-security/http/httpcert.pem= %BR% =/etc/grid-security/http/httpkey.pem= | =tomcat=  |
+
+Note: Please do not create the "tomcat" user yourself. This user will be created automatically when tomcat is installed as part of CE Installation procedure.
+
+---+ Do you have a Grid User Certificate?
+
+As the system administrator you are required to test the functionality provided by the Compute Element. This requires a [[CertificateUserGet][grid user certificate]] issued for you.
+
+---+ References
+
+---+ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = AlainRoy
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = ComputeElement
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager|Documenter)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = SuchandraThapa
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = SuchandraThapa
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->

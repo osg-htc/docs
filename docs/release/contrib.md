@@ -41,6 +41,6 @@ Installing from the contrib repository
 To install software, you need to enable the osg-cotrib repository. The easiest way to do that is on case-by-case basis in the `yum` command-line. For example, to install `gsh`:
 
 ``` console
-[root@client ~] $ yum install --enablerepo=osg-contrib gsh
+root@host # yum install --enablerepo=osg-contrib gsh
 ```
 

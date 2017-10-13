@@ -27,7 +27,7 @@ If you came to this page from an installation or other document in this website,
 For problems with installation of some software run `osg-system-profiler`:
 
 ```console
-[root@client ~] # osg-system-profiler
+root@host # osg-system-profiler
 ```
 
 Attach the generated `osg-profile.txt` to your support inquiry.

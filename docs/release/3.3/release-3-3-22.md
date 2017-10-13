@@ -33,7 +33,7 @@ Known Issues
 -   <span class="twiki-macro RED"></span> On Friday, March 17th, [XRootD 4.6.0](https://github.com/xrootd/xrootd/blob/v4.6.0/docs/ReleaseNotes.txt) was pulled from the release repository. <span class="twiki-macro ENDCOLOR"></span> Most of the issues origin from improper CRL verification bug introduced in the recent code. Criticality of the issue:
     -   high criticality running XRootD in a **server** mode you may have issues since reading the final file usually does require authentication (mostly GSI auth which relates to CRL verification code)
     -   low criticality running XRootD in a **manager** mode you may NOT experience any issues assuming your redirector does not require authentication
-    -   to check if you have the affected components installed, run <pre class="rootscreen">[root@client ~] $ rpm -qa | grep xrootd</pre> to display the versions of your xrootd packages. If any of them are version 4.6.0, run <pre class="rootscreen">[root@client ~] $ yum downgrade <package></pre> on those packages.
+    -   to check if you have the affected components installed, run <pre class="rootscreen">root@host # rpm -qa | grep xrootd</pre> to display the versions of your xrootd packages. If any of them are version 4.6.0, run <pre class="rootscreen">root@host # yum downgrade <package></pre> on those packages.
     -   as pre-caution to avoid this bug [XRootD 4.6.0](https://github.com/xrootd/xrootd/blob/v4.6.0/docs/ReleaseNotes.txt) was pulled from the release repository and we do not recommend using it until further notice
     -   given the number of recent improvements and fixes 4.6.1 is available in EPEL testing repo and once it gets to production release we push it into OSG release as well
 -   The Koji client config has changed in the new version of Koji: \`pkgurl`` http://koji.chtc.wisc.edu/packages` has been replaced by `topurl=http://koji.chtc.wisc.edu` and the Koji client will give a harmless but annoying warning when it finds `pkgurl`. To get rid of the warning, update to osg-build > `` 1.8.0, rerun \`osg-koji setup\`, and say 'yes' when asked to replace the Koji configuration file; or, you may make the above change manually.
@@ -60,7 +60,7 @@ To update to this series, you need [install the current OSG repositories](../../
 Once the new repositories are installed, you can update to this new release with:
 
 ``` console
-[root@client ~] $ yum update
+root@host # yum update
 ```
 
 <span class="twiki-macro NOTE"></span> Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
