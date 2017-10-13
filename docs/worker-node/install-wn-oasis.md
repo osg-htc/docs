@@ -41,7 +41,7 @@ Determine the OASIS path to the Worker Node Client software for your worker node
 
 On the CE, in the `/etc/osg/config.d/10-storage.ini` file, set the `grid_dir` configuration setting to the path from the previous step.
 
-For more information, see the [OSG environment variables reference page](../worker-node/using-wn.md) and the [CE configuration instructions](../other/configuration-with-osg-configure#storage).
+For more information, see the [OSG worker node environment documentation](../worker-node/using-wn.md) and the [CE configuration instructions](../other/configuration-with-osg-configure#storage).
 
 Once you finish making changes to configuration files on your CE, validate, fix, and apply the configuration:
 

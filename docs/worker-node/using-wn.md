@@ -33,7 +33,7 @@ At some sites, these tools may not be available at the pilot launch.  To setup t
     :::console
     user@host $ source $OSG_GRID/setup.sh
 
-This should be done by a pilot job, not a the end-user payload.
+This should be done by a pilot job, not by the end-user payload.
 
 The Worker Node Environment
 ===========================
