@@ -35,6 +35,7 @@ pages:
   - 'HTTP Cache': 'data/frontier-squid.md'
   - 'XRootD Overview': 'data/xrootd-overview.md'
   - 'XRootD Client': 'data/install-xroot-client.md'
+  - 'Hadoop Overview': 'data/hadoop-overview.md'
   - 'Hadoop': 'data/install-hadoop-2-0-0.md'
 - Security:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
