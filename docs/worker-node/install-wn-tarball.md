@@ -65,7 +65,7 @@ root@host # fetch-crl
 
 Using the wn-client software installed from the tarball will require a few changes on the compute element so that the resource's configuration can be correctly reported.
 
-Set `grid_dir` in the `Storage` section of your OSG-Configure configs: [CE configuration instructions](../other/configuration-with-osg-configure#storage). `grid_dir` is used as the `$OSG_GRID` environment variable in running jobs - see [the environment variables document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/EnvironmentVariables). Pilot jobs source `$OSG_GRID/setup.sh` before performing any work. The value set for `grid_dir` must be the path of the wn-client installation directory. This is the path returned by **`echo $OSG_LOCATION`** once you source the setup file created by this installation.
+Set `grid_dir` in the `Storage` section of your OSG-Configure configs: [CE configuration instructions](../other/configuration-with-osg-configure#storage). `grid_dir` is used as the `$OSG_GRID` environment variable in running jobs - see the [worker node environment document](../worker-node/using-wn.md). Pilot jobs source `$OSG_GRID/setup.sh` before performing any work. The value set for `grid_dir` must be the path of the wn-client installation directory. This is the path returned by **`echo $OSG_LOCATION`** once you source the setup file created by this installation.
 
 Services
 --------
