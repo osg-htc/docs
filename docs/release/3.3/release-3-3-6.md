@@ -35,10 +35,10 @@ self.X509Request.set\_pubkey(pkey=self.PKey) + self.X509Request.set\_version(0) 
 1.  `cd` into the appropriate folder:  
 <pre class="rootscreen">\# For EL5 hosts:
 
-[root@client ~] $ cd /usr/lib/python2.4/site-packages/osgpkitools/ \# For EL6 hosts: [root@client ~] $ cd /usr/lib/python2.6/site-packages/osgpkitools/</pre>
+root@host # cd /usr/lib/python2.4/site-packages/osgpkitools/ \# For EL6 hosts: root@host # cd /usr/lib/python2.6/site-packages/osgpkitools/</pre>
 
 1.  Apply the patch:  
-<pre class="rootscreen">[root@client ~] $ patch < ~/osgpkitools.patch</pre> \* HTCondor 8.4.0 has changed it's behavior in ways that cause the GlideinWMS frontend configuration to break. In order to correct this, the following setting needs to be added to the configuration file:
+<pre class="rootscreen">root@host # patch < ~/osgpkitools.patch</pre> \* HTCondor 8.4.0 has changed it's behavior in ways that cause the GlideinWMS frontend configuration to break. In order to correct this, the following setting needs to be added to the configuration file:
 
         :::file
         COLLECTOR_USES_SHARED_PORT = False
@@ -86,7 +86,7 @@ To update to this series, you need [install the current OSG repositories](../../
 Once the new repositories are installed, you can update to this new release with:
 
 ``` console
-[root@client ~] $ yum update
+root@host # yum update
 ```
 
 <span class="twiki-macro NOTE"></span> Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
