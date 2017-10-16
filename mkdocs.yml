@@ -38,6 +38,9 @@ pages:
   - 'External OASIS repositories': 'data/external-oasis-repos.md'
   - 'XRootD Overview': 'data/xrootd-overview.md'
   - 'XRootD Client': 'data/install-xroot-client.md'
+  - 'XRootD': 'data/install-xrootd.md'
+- Install Guides - Other:
+  - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'Hadoop Overview': 'data/hadoop-overview.md'
   - 'Hadoop': 'data/install-hadoop-2-0-0.md'
 - Security:
