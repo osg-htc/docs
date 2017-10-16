@@ -122,7 +122,7 @@ Procedure to add an externally-hosted repository to OASIS
     If that works then add the wget command to a daily cron:
         
         :::console
-        root@host # echo "5 4 \* \* \* ownerid cd /srv/cvmfs/repo.opensciencgrid.org && wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/repo.opensciencgrid.org/.cvmfswhitelist && mv .cvmfswhitelist.new .cvmfswhitelist" >>/etc/cron.d/fetch-cvmfs-whitelist
+        root@host # echo "5 4 \* \* \* ownerid cd /srv/cvmfs/repo.opensciencegrid.org && wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/repo.opensciencegrid.org/.cvmfswhitelist && mv .cvmfswhitelist.new .cvmfswhitelist" >>/etc/cron.d/fetch-cvmfs-whitelist
 
     Note that this eliminates the need for the repository service administrator to periodically use `cvmfs_server resign` to update `.cvmfswhitelist`. Then the repository service administrator goes back to the open GOC ticket and asks to proceed to step \#9.
 
