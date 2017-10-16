@@ -116,15 +116,15 @@ Procedure to add an externally-hosted repository to OASIS
     Next the administrator verifies that a publish operation using the owner's privileges succeeds by making sure there's no errors from the following commands replacing "ownerid" with the owner's username:
 
         :::console
-        root@host # su ownerid -c "cvmfs\_server transaction repo.opensciencegrid.org" 
-        root@host # su ownerid -c "cvmfs\_server publish repo.opensciencegrid.org"
+        root@host # su ownerid -c "cvmfs_server transaction repo.opensciencegrid.org" 
+        root@host # su ownerid -c "cvmfs_server publish repo.opensciencegrid.org"
 
     If that works then add the wget command to a daily cron:
         
         :::console
         root@host # echo "5 4 \* \* \* ownerid cd /srv/cvmfs/repo.opensciencgrid.org && wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/repo.opensciencgrid.org/.cvmfswhitelist && mv .cvmfswhitelist.new .cvmfswhitelist" >>/etc/cron.d/fetch-cvmfs-whitelist
 
-    Note that this eliminates the need for the repository service administrator to periodically use "cvmfs\_server resign" to update .cvmfswhitelist. Then the repository service administrator goes back to the open GOC ticket and asks to proceed to step \#9.
+    Note that this eliminates the need for the repository service administrator to periodically use `cvmfs_server resign` to update `.cvmfswhitelist`. Then the repository service administrator goes back to the open GOC ticket and asks to proceed to step \#9.
 
 9.  The GOC representative then asks the administrator of the BNL stratum 1 to also add the new repository. He should set up his stratum 1s to read from `http://oasis-replica.opensciencegrid.org:8000/cvmfs/repo.domain.name`. When he has reported back that the replication is ready, the GOC representative reports in the ticket that the repository is ready on the OSG and closes the ticket.
 
