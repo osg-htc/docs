@@ -1,10 +1,6 @@
 Installing and Maintaining XRootD
 =================================
 
-
-About This Guide
-----------------
-
 [XRootD](http://xrootd.org/) is a hierarchical storage system that can be used
 in a variety of ways to access data, typically distributed among actual storage
 resources. One way to use XRootD is to have it refer to many data resources at a
@@ -23,14 +19,14 @@ Before starting the installation process, consider the following points:
 
 -   **User IDs:** If it does not exist already, the installation will create the Linux user ID `xrootd`
 -   **Service certificate:** The XRootD service uses a host certificate at `/etc/grid-security/host*.pem`
--   **Networking:** The XRootD service uses port 1094 by default; for more information, see the [firewall information](FirewallInformation) page
+-   **Networking:** The XRootD service uses port 1094 by default
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
--   Ensure the host has [a supported operating system](SupportedOperatingSystems)
+-   Ensure the host has [a supported operating system](../release/supported_platforms)
 -   Obtain root access to the host
--   Prepare [the required Yum repositories](YumRepositories)
--   Install [CA certificates](InstallCertAuth)
+-   Prepare [the required Yum repositories](../common/yum)
+-   Install [CA certificates](../common/ca)
 
 Installing an XRootD Server
 ---------------------------
@@ -77,7 +73,7 @@ component below.
 
 ### Creating an XRootD cluster
 
-<img src="%ATTACHURLPATH%/rdr.jpg" alt="rdr.jpg" width="736" height="318"/>
+![XRootD cluster](../images/xrootd.jpg)
 
 If your storage is spread out over multiple hosts, you will need to set up an
 XRootD *cluster*. The cluster uses one "redirector" node as a frontend for user
@@ -148,8 +144,7 @@ Check that the `/tmp/second_test` is located on data server %RED%DATANODE%ENDCOL
 ### (Optional) Adding Simple Server Inventory to your cluster
 
 The Simple Server Inventory (SSI) provide means to have an inventory for each
-data server (See details in [XRootD CMS config](http://xrootd.org/doc/prod/cms_config.htm)). 
-SSI requires:
+data server. SSI requires:
 
 -   A second instance of the `xrootd` daemon on the redirector
 -   A "composite name space daemon" (`XrdCnsd`) on each data server; this daemon handles the inventory
@@ -343,7 +338,7 @@ idtype id path privs
 
 Some examples of each option. For more details or examples on how to use
 templated user options, see [XRootd Authorization Database
-File](http://xrootd.org/doc/dev/sec_config.htm#_Toc317706960).
+File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
 
 |        |                                                                                                                                                            |
 |--------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -646,7 +641,7 @@ CMSD\_INSTANCES="default"
 FRMD\_INSTANCES="default"
 ```
 
-1.  Modify `/etc/xrootd/xrootd-clustered.cfg` on both nodes to specify options for `frm_xfrd` (File Transfer Daemon) and `frm_purged` (File Purging Daemon). For more information, you can visit the [FRM Documentation](http://xrootd.org/doc/prod/frm_config.htm) in the [frm\_xfrd section](http://xrootd.org/doc/prod/frm_config.htm#_Toc298165607) and the [frm\_purged section](http://xrootd.org/doc/prod/frm_config.htm#_Toc298165601)
+1.  Modify `/etc/xrootd/xrootd-clustered.cfg` on both nodes to specify options for `frm_xfrd` (File Transfer Daemon) and `frm_purged` (File Purging Daemon). For more information, you can visit the [FRM Documentation](http://xrootd.org/doc/dev4/frm_config.htm)
 2.  Start frm daemons on data server: 
 
 ```console
