@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>XRootD - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "XRootD";
+    var mkdocs_page_input_path = "data/install-xrootd.md";
+    var mkdocs_page_url = "/data/install-xrootd/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../..">Home</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../install-overview/">Installation Overview</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../site-planning/">Site Planning</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Common</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/install-best-practices/">Install Best Practices</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/ca/">CA Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/yum/">Yum Repos</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/openjdk7/">Java 7</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Worker Node</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn/">Worker Node (RPM install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node (tarball install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node (OASIS install)</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Compute Element</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../gridftp/">Install GridFTP Server</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../load-balanced-gridftp/">Install Load Balanced GridFTP</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-gridftp-xrootd/">Install GridFtp XRootD</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../frontier-squid/">HTTP Cache</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../update-oasis/">Update OASIS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../external-oasis-repos/">External OASIS repositories</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../xrootd-overview/">XRootD Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-xroot-client/">XRootD Client</a>
+  
+        </li>
+        <li class=" current">
+          
+  
+    <a class="current" href="./">XRootD</a>
+  
+  <ul class="subnav">
+      
+    <li class="toctree-l3"><a href="#installing-and-maintaining-xrootd">Installing and Maintaining XRootD</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#before-starting">Before Starting</a></li>
+        
+            <li><a class="toctree-l4" href="#installing-an-xrootd-server">Installing an XRootD Server</a></li>
+        
+            <li><a class="toctree-l4" href="#configuring-an-xrootd-server">Configuring an XRootD Server</a></li>
+        
+            <li><a class="toctree-l4" href="#using-xrootd">Using XRootD</a></li>
+        
+            <li><a class="toctree-l4" href="#getting-help">Getting Help</a></li>
+        
+            <li><a class="toctree-l4" href="#reference">Reference</a></li>
+        
+            <li><a class="toctree-l4" href="#links">Links</a></li>
+        
+        </ul>
+    
+
+  </ul>
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Install Guides - Other</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../hadoop-overview/">Hadoop Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-hadoop-2-0-0/">Hadoop</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Security</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/host-certs/">Host Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/user-certs/">User Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/osg-ca-manage/">Managing CAs</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Release Information</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../release/notes/">Release Notes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/signing/">RPM Signing</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/contrib/">Contrib Software</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Other</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../other/gsissh/">GSI-enabled SSH</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-osg-upcoming-software/">OSG upcoming software</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-gwms-frontend/">GlideinWMS Frontend</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-cvmfs-stratum1/">Install a CVMFS Stratum 1</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/network-performance-toolkit/">Network Performance Toolkit</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Monitoring</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/advanced-rsv-configuration/">Advanced RSV Configuration</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-control/">Manage RSV via rsv-control</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Usage Guides</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/using-wn/">Worker Node Environment</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Deprecated Software</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../bestman-overview/">BeStMan Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../bestman-install/">BeStMan Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-bestman-xrootd/">BeStMan Xrootd SE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/edg-mkgridmap/">EDG-Mkgridmap Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/install-gums/">GUMS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../other/install-voms/">Install VOMS</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../common/help/">Get Help</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Data &raquo;</li>
+        
+      
+    
+    <li>XRootD</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/install-xrootd.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="installing-and-maintaining-xrootd">Installing and Maintaining XRootD<a class="headerlink" href="#installing-and-maintaining-xrootd" title="Permanent link">&para;</a></h1>
+<p><a href="http://xrootd.org/">XRootD</a> is a hierarchical storage system that can be used
+in a variety of ways to access data, typically distributed among actual storage
+resources. One way to use XRootD is to have it refer to many data resources at a
+single site, and another way to use it is to refer to many storage systems, most
+likely distributed among sites. An XRootD system includes a <em>redirector</em>, which
+accepts requests for data and finds a storage repository — locally or
+otherwise — that can provide the data to the requestor.</p>
+<p>Use this page to learn how to install, configure, and use an XRootD redirector
+as part of a Storage Element (SE) or as part of a global namespace.</p>
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
+<p>Before starting the installation process, consider the following points:</p>
+<ul>
+<li><strong>User IDs:</strong> If it does not exist already, the installation will create the Linux user ID <code>xrootd</code></li>
+<li><strong>Service certificate:</strong> The XRootD service uses a host certificate at <code>/etc/grid-security/host*.pem</code></li>
+<li><strong>Networking:</strong> The XRootD service uses port 1094 by default</li>
+</ul>
+<p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
+<ul>
+<li>Ensure the host has <a href="../../release/supported_platforms">a supported operating system</a></li>
+<li>Obtain root access to the host</li>
+<li>Prepare <a href="../../common/yum">the required Yum repositories</a></li>
+<li>Install <a href="../../common/ca">CA certificates</a></li>
+</ul>
+<h2 id="installing-an-xrootd-server">Installing an XRootD Server<a class="headerlink" href="#installing-an-xrootd-server" title="Permanent link">&para;</a></h2>
+<p>An installation of the XRootD server consists of the server itself and its
+dependencies. Install these with Yum:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd
+</pre></div>
+
+
+<h2 id="configuring-an-xrootd-server">Configuring an XRootD Server<a class="headerlink" href="#configuring-an-xrootd-server" title="Permanent link">&para;</a></h2>
+<h3 id="minimal-configuration">Minimal configuration<a class="headerlink" href="#minimal-configuration" title="Permanent link">&para;</a></h3>
+<p>A new installation of XRootD is already configured to run a standalone server
+that serves files from <code>/tmp</code> on the local file system. This configuration is
+useful to verify basic connectivity between your clients and your server. To do
+this, start the <code>xrootd</code> service with standalone config as described in the
+<a href="#ManagingServices">managing services section</a>.</p>
+<p>You should be able now to copy a file such as <code>/bin/sh</code> using <code>xrdcp</code> command
+into <code>/tmp</code>. To test, do:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-client
+<span class="gp">root@host #</span> xrdcp /bin/sh root://localhost:1094//tmp/first_test
+<span class="go">[xrootd] Total 0.76 MB  |====================| 100.00 % [inf MB/s]</span>
+<span class="gp">root@host #</span> ls -l /tmp/first_test
+<span class="go">-rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test</span>
+</pre></div>
+
+
+<p>Other than for testing, a standalone server is useful when you want to serve
+files off of a single host with lots of large disks. If your storage capacity is
+spread out over multiple hosts, you will need to set up an XRootD cluster.</p>
+<h3 id="advanced-configuration">Advanced configuration<a class="headerlink" href="#advanced-configuration" title="Permanent link">&para;</a></h3>
+<p>An advanced XRootD setup has multiple components; it is important to validate
+that each additional component that you set up is working before moving on to
+the next component. We have included validation instructions after each
+component below.</p>
+<h3 id="creating-an-xrootd-cluster">Creating an XRootD cluster<a class="headerlink" href="#creating-an-xrootd-cluster" title="Permanent link">&para;</a></h3>
+<p><img alt="XRootD cluster" src="../../images/xrootd.jpg" /></p>
+<p>If your storage is spread out over multiple hosts, you will need to set up an
+XRootD <em>cluster</em>. The cluster uses one "redirector" node as a frontend for user
+accesses, and multiple data nodes that have the data that users request. Two
+daemons will run on each node:</p>
+<p><code>xrootd</code><br />
+The eXtended Root Daemon controls file access and storage.</p>
+<p><code>cmsd</code><br />
+The Cluster Management Services Daemon controls communication between nodes.</p>
+<p>Note that for large virtual organizations, a site-level redirector may actually
+also communicate upwards to a regional or global redirector that handles access
+to a multi-level hierarchy. This section will only cover handling one level of
+XRootD hierarchy.</p>
+<p>In the instructions below, <span style="color:red">RDRNODE</span> will refer to the redirector host
+and <span style="color:red">DATANODE</span> will refer to the data node host. These should be
+replaced with the fully-qualified domain name of the host in question.</p>
+<h4 id="modify-etcxrootdxrootd-clusteredcfg">Modify /etc/xrootd/xrootd-clustered.cfg<a class="headerlink" href="#modify-etcxrootdxrootd-clusteredcfg" title="Permanent link">&para;</a></h4>
+<p>You will need to modify the <code>xrootd-clustered.cfg</code> on the redirector node and
+each data node. The following example should serve as a base configuration for
+clustering. Further customizations are detailed below.</p>
+<div class="codehilite"><pre><span></span>all.export <span style="color:red">/tmp</span> stage
+set xrdr = <span style="color:red">RDRNODE</span>
+all.manager $(xrdr):3121
+
+if $(xrdr)
+  # Lines in this block are only executed on the redirector node
+  all.role manager
+else
+  # Lines in this block are executed on all nodes but the redirector node
+  all.role server
+  cms.space min <span style="color:red">2g 5g</span>
+fi
+</pre></div>
+
+
+<p>You will need to customize the following lines:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Configuration Line</th>
+<th align="left">Changes Needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>all.export <span style="color:red">/tmp</span> stage</code></td>
+<td align="left">Change <code>/tmp</code> to the directory to allow XRootD access to</td>
+</tr>
+<tr>
+<td align="left"><code>set xrdr=<span style="color:red">RDRNODE</span></code></td>
+<td align="left">Change to the hostname of the redirector</td>
+</tr>
+<tr>
+<td align="left"><code>cms.space min <span style="color:red">2g 5g</span></code></td>
+<td align="left">Reserve this amount of free space on the node. For this example, if space falls below 2GB, xrootd will not store further files on this node until space climbs above 5GB. You can use <code>k</code>, <code>m</code>, <code>g</code>, or <code>t</code> to indicate kilobyte, megabytes, gigabytes, or terabytes, respectively.</td>
+</tr>
+</tbody>
+</table>
+<p>Further information can be found at <a href="http://xrootd.slac.stanford.edu/doc">http://xrootd.slac.stanford.edu/doc</a></p>
+<h4 id="verifying-the-clustered-config">Verifying the clustered config<a class="headerlink" href="#verifying-the-clustered-config" title="Permanent link">&para;</a></h4>
+<p>Start both <code>xrootd</code> and <code>cmsd</code> on all nodes according to the instructions in the
+<a href="#ManagingServices">managing services section</a>.</p>
+<p>Verify that you can copy a file such as <code>/bin/sh</code> to <code>/tmp</code> on the server data
+via the redirector:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp /bin/sh  root://<span style="color:red">RDRNODE</span>:1094///tmp/second_test
+<span class="go">[xrootd] Total 0.76 MB  |====================| 100.00 % [inf MB/s]</span>
+</pre></div>
+
+
+<p>Check that the <code>/tmp/second_test</code> is located on data server <span style="color:red">DATANODE</span>.</p>
+<h3 id="optional-adding-simple-server-inventory-to-your-cluster">(Optional) Adding Simple Server Inventory to your cluster<a class="headerlink" href="#optional-adding-simple-server-inventory-to-your-cluster" title="Permanent link">&para;</a></h3>
+<p>The Simple Server Inventory (SSI) provide means to have an inventory for each
+data server. SSI requires:</p>
+<ul>
+<li>A second instance of the <code>xrootd</code> daemon on the redirector</li>
+<li>A "composite name space daemon" (<code>XrdCnsd</code>) on each data server; this daemon handles the inventory</li>
+</ul>
+<p>As an example, we will set up a two-node XRootD cluster with SSI.</p>
+<p>Host A is a redirector node that is running the following daemons:</p>
+<ol>
+<li>xrootd redirector</li>
+<li>cmsd</li>
+<li>xrootd - second instance that required for SSI</li>
+</ol>
+<p>Host B is a data server that is running the following daemons:</p>
+<ol>
+<li>xrootd data server</li>
+<li>cmsd</li>
+<li>XrdCnsd - started automatically by xrootd</li>
+</ol>
+<p>We will need to create a directory on the redirector node for Inventory files.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mkdir -p /data/inventory
+<span class="gp">root@host #</span> chown xrootd:xrootd /data/inventory
+</pre></div>
+
+
+<p>On the data server (host B) let's create the storage cache that will be different from <strong><code>/tmp</code></strong>.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mkdir -p  /local/xrootd
+<span class="gp">root@host #</span> chown xrootd:xrootd /local/xrootd
+</pre></div>
+
+
+<p>We will be running two instances of XRootD on <span style="color:red">hostA</span>. Modify
+<code>/etc/xrootd/xrootd-clustered.cfg</code> to give the two instances different behavior,
+as such:</p>
+<div class="codehilite"><pre><span></span>all.export /data/xrootdfs
+set xrdr=<span style="color:red">hostA</span>
+all.manager $(xrdr):3121
+if $(xrdr) &amp;amp;&amp;amp; named cns
+      all.export /data/inventory
+      xrd.port 1095
+else if $(xrdr)
+      all.role manager
+      xrd.port 1094
+else
+      all.role server
+      oss.localroot /local/xrootd
+      ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory
+      #add cms.space if you have less the 11GB
+      # cms.space options http://xrootd.slac.stanford.edu/doc/dev/cms_config.htm
+      cms.space min 2g 5g
+fi
+</pre></div>
+
+
+<h4 id="starting-a-second-instance-of-xrootd-on-el-6">Starting a second instance of XRootD on EL 6<a class="headerlink" href="#starting-a-second-instance-of-xrootd-on-el-6" title="Permanent link">&para;</a></h4>
+<p>The procedure for starting a second instance differs between EL 6 and EL 7. This
+section is the procedure for EL 6.</p>
+<p>Now, we have to change <strong><code>/etc/sysconfig/xrootd</code></strong> on the redirector node (<span style="color:red">hostA</span>) to run multiple instances of xrootd. The second instance of xrootd will be named "cns" and will be used for SSI.</p>
+<div class="codehilite"><pre><span></span>XROOTD\_USER=xrootd 
+XROOTD\_GROUP=xrootd 
+XROOTD\_DEFAULT\_OPTIONS=&quot;<span style="color:red">-k 7</span> -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;
+<span style="color:red">XROOTD\_CNS\_OPTIONS=&quot;-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;</span> 
+CMSD\_DEFAULT\_OPTIONS=&quot;<span style="color:red">-k 7</span> -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
+FRMD\_DEFAULT\_OPTIONS=&quot;<span style="color:red">-k 7</span> -l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
+<span style="color:red">XROOTD\_INSTANCES=&quot;default cns&quot;</span> 
+CMSD\_INSTANCES=&quot;default&quot; 
+FRMD\_INSTANCES=&quot;default&quot; 
+</pre></div>
+
+
+<p>Now, we can start xrootd cluster executing the following commands. On redirector you will see:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service xrootd start 
+<span class="go">Starting xrootd (xrootd, default): <span style="color:green">\[ OK \]</span> </span>
+<span class="go">Starting xrootd (xrootd, cns): <span style="color:green">\[ OK \]</span> </span>
+<span class="gp">root@host #</span> service cmsd start 
+<span class="go">Starting xrootd (cmsd, default): <span style="color:green">\[ OK \]</span> </span>
+</pre></div>
+
+
+<p>On redirector node you should see two instances of xrootd running:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> ps auxww<span class="p">|</span>grep xrootd 
+<span class="go">xrootd 29036 0.0 0.0 44008 3172 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default </span>
+<span class="go">xrootd 29108 0.0 0.0 43868 3016 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-cns.pid -n cns </span>
+<span class="go">xrootd 29196 0.0 0.0 51420 3692 ? Sl Apr11 0:00 /usr/bin/cmsd -k 7 -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default </span>
+</pre></div>
+
+
+<p><span style="color:red">warning</span> the log file for second named instance of xrootd with be placed in <code>/var/log/xrootd/cns/xrootd.log</code></p>
+<p>On data server node you should that XrdCnsd process has been started:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> ps auxww<span class="p">|</span>grep xrootd 
+<span class="go">xrootd 19156 0.0 0.0 48096 3256 ? Sl 07:37 0:00 /usr/bin/cmsd -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default </span>
+<span class="go">xrootd 19880 0.0 0.0 46124 2916 ? Sl 08:33 0:00 /usr/bin/xrootd -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default </span>
+<span class="go">xrootd 19894 0.0 0.1 71164 6960 ? Sl 08:33 0:00 /usr/bin/XrdCnsd -d -D 2 -i 90 -b fermicloud053.fnal.gov:1095:/data/inventory </span>
+</pre></div>
+
+
+<h4 id="starting-a-second-instance-of-xrootd-on-el-7">Starting a second instance of XRootD on EL 7<a class="headerlink" href="#starting-a-second-instance-of-xrootd-on-el-7" title="Permanent link">&para;</a></h4>
+<p>The procedure for starting a second instance differs between EL 6 and EL 7. This section is the procedure for EL 7.</p>
+<ol>
+<li>Create a symlink pointing to <code>/etc/xrootd/xrootd-clustered.cfg</code> at <code>/etc/xrootd/xrootd-cns.cfg</code>:</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> ln -s /etc/xrootd/xrootd-clustered.cfg /etc/xrootd/xrootd-cns.cfg 
+</pre></div>
+
+
+<ol>
+<li>Start an instance of the <code>xrootd</code> service named <code>cns</code> using the syntax in the <a href="#ManagingServices">managing services section</a>:</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl start &lt;xrootd@cns&gt;
+</pre></div>
+
+
+<h4 id="testing-an-xrootd-cluster-with-ssi">Testing an XRootD cluster with SSI<a class="headerlink" href="#testing-an-xrootd-cluster-with-ssi" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Copy file to redirector node specifying storage path (/data/xrootdfs instead of /tmp): </li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp /bin/sh root://localhost:1094//data/xrootdfs/test1 
+<span class="go">\[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\] </span>
+</pre></div>
+
+
+<ol>
+<li>To verify that SSI is working execute cns_ssi command on the redirector node: </li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cns<span class="se">\_</span>ssi list /data/inventory 
+<span class="go">fermicloud054.fnal.gov incomplete inventory as of Mon Apr 11 17:28:11 2011 </span>
+<span class="gp">root@host #</span> cns<span class="se">\_</span>ssi updt /data/inventory 
+<span class="go">cns\_ssi: fermicloud054.fnal.gov inventory with 1 directory and 1 file updated with 0 errors. </span>
+<span class="gp">root@host #</span> cns<span class="se">\_</span>ssi list /data/inventory 
+<span class="go">fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/xrootdfs/test1 </span>
+</pre></div>
+
+
+<p><strong>Note</strong>: In this example, <code>fermicloud53.fnal.gov</code> is a redirector node and <code>fermicloud054.fnal.gov</code> is a data node.</p>
+<h3 id="optional-authorization">(Optional) Authorization<a class="headerlink" href="#optional-authorization" title="Permanent link">&para;</a></h3>
+<p>There are several authorization options in XRootD available through the security
+plugins. In this document, we will cover two options for security:</p>
+<ul>
+<li>Simple Unix Security: Based on user accounts that the client is logged in as.</li>
+<li>xrootd-lcmaps: Using the lcmaps callout to use GUMS authorization</li>
+</ul>
+<p>Note: On the data nodes, the files will actually be owned by unix user <code>xrootd</code>
+(or other daemon user), not as the user authenticated to, under most
+circumstances. xrootd will verify the permissions and authorization based on the
+user that the security plugin authenticates you to (for instance, your unix user
+for option 1 or your gums id for option 2), but, internally, the data node files
+will be owned by the <code>xrootd</code> user.</p>
+<h4 id="authorization-file">Authorization file<a class="headerlink" href="#authorization-file" title="Permanent link">&para;</a></h4>
+<p>In order to add security to your cluster you will need to add "auth_file" on
+the your data server node. Create <code>/etc/xrootd/auth_file</code> :</p>
+<div class="codehilite"><pre><span></span>\# This means that all the users have read access to the datasets 
+u \* <span style="color:red">/data/xrootdfs</span> lr
+
+\# This means that all the users have full access to their private dirs 
+u = <span style="color:red">/data/xrootdfs/</span>@=/ a
+
+\# This means that this privileged user can do everything 
+\# You need at least one user like that, in order to create the 
+\# private dir for each user willing to store his data in the facility 
+u xrootd <span style="color:red">/data/xrootdfs</span> a 
+</pre></div>
+
+
+<p>Here we assume that your storage path is <code>/data/xrootdfs</code> (same as in the
+previous example).</p>
+<p>Change file ownership (if you have created file as root):</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chown xrootd:xrootd /etc/xrootd/auth<span class="se">\_</span>file
+</pre></div>
+
+
+<p>This file is a flat file of the following form:</p>
+<div class="codehilite"><pre><span></span>idtype id path privs
+</pre></div>
+
+
+<p>Some examples of each option. For more details or examples on how to use
+templated user options, see <a href="http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599">XRootd Authorization Database
+File</a>.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>idtype</td>
+<td>Type of id - u for username, g for group, etc</td>
+</tr>
+<tr>
+<td>id</td>
+<td>Username (or groupname). Use <noop>*</noop> for all users or <noop>=</noop> for user-specific capabilities, like home directories</td>
+</tr>
+<tr>
+<td>path</td>
+<td>The path prefix to be used for matching purposes.</td>
+</tr>
+<tr>
+<td>privs</td>
+<td>Letter list of privileges: <code>a - all ; l - lookup ; d - delete ; n - rename ; i - insert ; r - read ; k - lock (not used) ; w - write</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="security-option-1-adding-simple-unix-security">Security option 1: adding simple (Unix) security<a class="headerlink" href="#security-option-1-adding-simple-unix-security" title="Permanent link">&para;</a></h4>
+<p>The first step in adding simple Unix security to validate based on username is
+to create the <code>auth_file</code> as in the previous section.</p>
+<p>The next step is to modify <strong><code>/etc/xrootd/xrootd-clustered.cfg</code></strong> on both nodes:</p>
+<div class="codehilite"><pre><span></span>all.export /data/xrootdfs 
+set xrdr=<span style="color:red">hostA</span> 
+all.manager $(xrdr):3121 
+if $(xrdr) &amp;&amp; named cns 
+    all.export /data/inventory 
+    xrd.port 1095 
+else if $(xrdr) 
+    all.role manager 
+    xrd.port 1094 
+else 
+    all.role server 
+    oss.localroot /local/xrootd 
+    ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory 
+    cms.space min 2g 5g 
+
+    <span style="color:red"> \# ENABLE\_SECURITY\_BEGIN 
+    xrootd.seclib /usr/lib64/libXrdSec.so 
+    \# this specify that we use the &#39;unix&#39; authentication module, additional one can be specified. 
+    sec.protocol /usr/lib64 unix 
+    \# this is the authorization file 
+    acc.authdb /etc/xrootd/auth\_file 
+    ofs.authorize 
+    \# ENABLE\_SECURITY\_END </span> 
+fi 
+</pre></div>
+
+
+<p>Note that, to access users directories, you will have to create them in
+oss.localroot (For instance, <code>/local/xrootd/data/xrootdfs/username</code>) and make
+sure they are writable by <code>xrootd</code> user (or the daemon user, if you have changed
+it). Files in localroot on the data nodes are normally owned by <code>xrootd</code> not by
+the authenticated username.</p>
+<p>After making all the changes, please, restart xrootd and cmsd daemons on all nodes.</p>
+<h4 id="testing-an-xrootd-cluster-with-simple-security-enabled">Testing an XRootD cluster with simple security enabled<a class="headerlink" href="#testing-an-xrootd-cluster-with-simple-security-enabled" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Login on redirector node as root</li>
+<li>Check that user "root" still can read files: </li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp root://localhost:1094//data/xrootdfs/test1 /tmp/b 
+<span class="go">\[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\]</span>
+</pre></div>
+
+
+<ol>
+<li>Check that user "root" can not write files under /data/xrootdfs:</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp /tmp/b root://localhost:1094//data/xrootdfs/test2 
+<span class="go">Last server error 3010 (&#39;Unable to create /data/xrootdfs/test2; Permission denied&#39;) </span>
+<span class="go">Error accessing path/file for root://localhost:1094//data/xrootdfs/test3 </span>
+</pre></div>
+
+
+<p>or you may get this error:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp /tmp/b root://localhost:1094//data/xrootdfs/test2 
+<span class="go">Last server error 3011 (&#39;No servers are available to write the file.&#39;) </span>
+<span class="go">Error accessing path/file for root://localhost:1094//data/xrootdfs/test2</span>
+</pre></div>
+
+
+<ol>
+<li>Check that user can copy/retrieve files to/from /data/xrootdfs/~/...</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> su - <span style="color:red">user</span> 
+<span class="go">-bash-3.2$ xrdcp /tmp/a root://localhost:1094//data/xrootdfs/<span style="color:red">user</span>/test1</span>
+<span class="go">\[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\] </span>
+<span class="go">-bash-3.2$ xrdcp root://localhost:1094//data/xrootdfs/<span style="color:red">user</span>/test1 /tmp/c </span>
+<span class="go">\[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\]</span>
+</pre></div>
+
+
+<h4 id="security-option-2-xrootd-lcmaps-authorization">Security option 2: xrootd-lcmaps authorization<a class="headerlink" href="#security-option-2-xrootd-lcmaps-authorization" title="Permanent link">&para;</a></h4>
+<p>The xrootd-lcmaps security plugin uses the <code>lcmaps</code> package to access the <code>GUMS</code>
+server to authenticate and authorize users based on X509 certificates.</p>
+<p><strong>Certificate Installation</strong></p>
+<p>In order to use lcmaps, you will need CA certificates and certificate revocation
+lists. See the following documents for instructions:</p>
+<ul>
+<li><a href="../../common/ca/">Install CA certificates</a></li>
+<li><a href="../../common/ca/">Managing Certificate Revocation Lists</a></li>
+</ul>
+<p><strong>Install xrootd-lcmaps</strong></p>
+<div class="codehilite"><pre><span></span><span class="go">yum install xrootd-lcmaps</span>
+</pre></div>
+
+
+<p>Note that the xrootd-lcmaps is usually coupled to a specific version of xrootd,
+so make sure that you install xrootd-lcmaps from the same repository that you
+install xrootd from. Otherwise, you may have dependency issues due to differing
+versions of shared libraries.</p>
+<p><strong>Create host certificates</strong></p>
+<p>You will need to have a X509 certificate to talk to GUMS. If you already have a
+host certificate, you can use a copy of that:</p>
+<div class="codehilite"><pre><span></span><span class="go"> mkdir /etc/grid-security/xrd</span>
+<span class="go"> cp /etc/grid-security/hostkey.pem /etc/grid-security/xrd/xrdkey.pem</span>
+<span class="go"> cp /etc/grid-security/hostcert.pem /etc/grid-security/xrd/xrdcert.pem</span>
+<span class="go"> chown -R xrootd:xrootd /etc/grid-security/xrd/</span>
+<span class="go"> chmod 400 /etc/grid-security/xrd/xrdkey.pem</span>
+</pre></div>
+
+
+<p>This certificate should be owned by xrootd and located in <code>/etc/grid-security/xrd</code>.</p>
+<p><strong>Authorization File</strong></p>
+<p>Next, create <code>/etc/xrootd/auth_file</code> using the example in the above section.</p>
+<p><strong>Modify /etc/xrootd/lcmaps.cfg</strong></p>
+<p>Edit <code>/etc/xrootd/lcmaps.cfg</code> to point to your authorization server (replace the
+hostname in red):</p>
+<div class="codehilite"><pre><span></span>scasclient = &quot;lcmaps_scas_client.mod&quot;
+             &quot;-resourcetype wn&quot;
+             &quot;-actiontype execute-now&quot;
+             &quot;-capath /etc/grid-security/certificates&quot;
+             &quot;-cert   /etc/grid-security/xrd/xrdcert.pem&quot;
+             &quot;-key    /etc/grid-security/xrd/xrdkey.pem&quot;
+             &quot;--endpoint https://<span style="color:red">gums.fnal.gov</span>:8443/gums/services/GUMSXACMLAuthorizationServicePort&quot;
+</pre></div>
+
+
+<p><strong>Modify /etc/xrootd/xrootd-clustered.cfg</strong></p>
+<p>You will need to add the security plugins to <code>/etc/xrootd/xrootd-clustered.cfg</code>. Add the following lines to the <code>/etc/xrootd/xrootd-clustered.cfg</code>. This will need to be added to all data nodes in the section relevant to the data node server. (For instance, in the above example(s), this should be placed in the last "else" clause after "all.role server". See the section above on Unix security for an example of where the security commands should go).</p>
+<div class="codehilite"><pre><span></span><span class="s s-Atom">xrootd</span><span class="p">.</span><span class="s s-Atom">seclib</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span><span class="o">/</span><span class="s s-Atom">libXrdSec</span><span class="p">.</span><span class="s s-Atom">so</span>
+
+<span class="s s-Atom">set</span> <span class="nv">CERTDIR</span><span class="s s-Atom">=-</span><span class="nn">certdir</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">certificates</span>
+<span class="s s-Atom">set</span> <span class="nv">CERT</span><span class="s s-Atom">=-</span><span class="nn">cert</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrd</span><span class="o">/</span><span class="s s-Atom">xrdcert</span><span class="p">.</span><span class="s s-Atom">pem</span>
+<span class="s s-Atom">set</span> <span class="nv">KEY</span><span class="s s-Atom">=-</span><span class="nn">key</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrd</span><span class="o">/</span><span class="s s-Atom">xrdkey</span><span class="p">.</span><span class="s s-Atom">pem</span>
+<span class="s s-Atom">set</span> <span class="nv">AUTHZFUN</span><span class="s s-Atom">=-</span><span class="nn">authzfun</span><span class="p">:</span><span class="s s-Atom">libXrdLcmaps</span><span class="p">.</span><span class="s s-Atom">so</span>
+<span class="s s-Atom">set</span> <span class="nv">AUTHZFUNPARMS</span><span class="s s-Atom">=-</span><span class="nn">authzfunparms</span><span class="p">:</span><span class="s s-Atom">--osg</span><span class="p">,</span><span class="s s-Atom">--lcmapscfg</span><span class="p">,</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">lcmaps</span><span class="p">.</span><span class="s s-Atom">cfg</span><span class="p">,</span><span class="s s-Atom">--loglevel</span><span class="p">,</span><span class="mi">0</span><span class="p">|</span><span class="s s-Atom">useglobals</span>
+
+<span class="s s-Atom">sec</span><span class="p">.</span><span class="s s-Atom">protocol</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span> <span class="s s-Atom">gsi</span> <span class="err">$</span><span class="nv">CERTDIR</span> <span class="err">$</span><span class="nv">CERT</span> <span class="err">$</span><span class="nv">KEY</span> <span class="o">-</span><span class="nn">crl</span><span class="p">:</span><span class="mi">3</span> <span class="err">$</span><span class="nv">AUTHZFUN</span> <span class="err">$</span><span class="nv">AUTHZFUNPARMS</span> <span class="s s-Atom">--</span><span class="nn">gmapopt</span><span class="p">:</span><span class="mi">2</span> <span class="s s-Atom">--</span><span class="nn">gmapto</span><span class="p">:</span><span class="mi">0</span>
+<span class="s s-Atom">acc</span><span class="p">.</span><span class="s s-Atom">authdb</span> <span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">auth_file</span>
+<span class="s s-Atom">ofs</span><span class="p">.</span><span class="s s-Atom">authorize</span>
+</pre></div>
+
+
+<p><strong>Restart xrootd and cmsd</strong></p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service xrootd restart
+<span class="gp">root@host #</span> service cmsd restart
+</pre></div>
+
+
+<p><strong>lcmaps notes</strong></p>
+<p>For recent versions of lcmaps (1.5+), VOMS signature verification is enabled by default. You may need to either disable it or install the <code>vo-client</code>.</p>
+<p>Installing vo-client:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install vo-client
+</pre></div>
+
+
+<p>Disabling vo verification can be done by adding a line to <code>/etc/sysconfig/xrootd</code>:</p>
+<div class="codehilite"><pre><span></span>export LLGT_VOMS_DISABLE_CREDENTIAL_CHECK=1
+</pre></div>
+
+
+<p>This feature is evolving, so stay tuned for updates.</p>
+<h4 id="testing-an-xrootd-cluster-with-lcmaps-security-enabled">Testing an XRootd Cluster with LCMAPS security enabled<a class="headerlink" href="#testing-an-xrootd-cluster-with-lcmaps-security-enabled" title="Permanent link">&para;</a></h4>
+<p>From any machine with the <code>xrootd-client</code> installed, you can test with xrdcp. With a user that has no grid certificate installed, you should get an error:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> xrdcp /bin/bash root://HOSTNAME/tmp/lcmaps_test
+<span class="go">120327 14:31:52 10509 secgsi_InitProxy: cannot access private key file: /home/dstrain/.globus/userkey.pem</span>
+<span class="go">XrdSec: No authentication protocols are available.</span>
+<span class="go">Last server error 3010 (&#39;cannot obtain credentials for protocol: Secgsi: ErrParseBuffer: error getting user proxies: kXGS_init: unable to get protocol object.&#39;)</span>
+<span class="go">Error accessing path/file for root://fermicloud121.fnal.gov/tmp/test2</span>
+</pre></div>
+
+
+<p>After running <code>voms-proxy-init</code> or <code>grid-proxy-init</code> to initialize your x509 certificate (usually found in <code>/tmp/x509up_uUID</code>), the <code>xrdcp</code> command should execute cleanly. For instance, the following shows an example of a user creating a voms certificate and copying to the xrootd client and then re-executing the xrdcp command.</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> voms-proxy-init -voms Engage -valid <span class="m">999</span>:0
+<span class="go">Your identity: /DC=org/DC=doegrids/OU=People/CN=Doug Strain 834323</span>
+<span class="go">Creating temporary proxy ..................................................... Done</span>
+<span class="go">Contacting  osg-engage.renci.org:15001 [/DC=org/DC=doegrids/OU=Services/CN=osg-engage.renci.org] &quot;Engage&quot; Done</span>
+<span class="go">Creating proxy .......................... Done</span>
+
+<span class="go">Your proxy is valid until Tue May  8 05:34:40 2012</span>
+<span class="gp">user@host $</span> scp /tmp/x509up_u44678 CLIENT_HOSTNAME:/tmp/x509up_u44678
+</pre></div>
+
+
+<p>On the <code>xrootd-client</code> node,</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> xrdcp /bin/bash root://fermicloud121.fnal.gov//tmp/lcmaps_test
+<span class="go">[xrootd] Total 0.73 MB  |====================| 100.00 % [inf MB/s]</span>
+</pre></div>
+
+
+<p>In the above examples, make sure to change "/tmp" to a directory allowed by the
+<code>/etc/xrootd/auth_file</code> created in a previous section.</p>
+<h3 id="optional-adding-cms-tfc-support-to-xrootd-cms-sites-only">(Optional) Adding CMS TFC support to XRootD (CMS sites only)<a class="headerlink" href="#optional-adding-cms-tfc-support-to-xrootd-cms-sites-only" title="Permanent link">&para;</a></h3>
+<p>For CMS users, there is a package available to integrate rule-based name lookup
+using a <code>storage.xml</code> file. If you are not setting up a CMS site, you can skip
+this section.</p>
+<div class="codehilite"><pre><span></span><span class="go">yum install --enablerepo=osg-contrib xrootd-cmstfc</span>
+</pre></div>
+
+
+<p>You will need to add your <code>storage.xml</code> to <code>/etc/xrootd/storage.xml</code> and then
+add the following line to your xrootd configuration:</p>
+<div class="codehilite"><pre><span></span># Integrate with CMS TFC, placed in /etc/xrootd/storage.xml
+oss.namelib /usr/lib64/libXrdCmsTfc.so file:/etc/xrootd/storage.xml%ORANGE%?protocol=hadoop</span>
+</pre></div>
+
+
+<p>Add the orange text only if you are running hadoop (see below).</p>
+<p>See the CMS TWiki for more information:</p>
+<ul>
+<li><a href="https://twiki.cern.ch/twiki/bin/view/Main/XrootdTfcChanges">https://twiki.cern.ch/twiki/bin/view/Main/XrootdTfcChanges</a></li>
+<li><a href="https://twiki.cern.ch/twiki/bin/view/Main/HdfsXrootdInstall">https://twiki.cern.ch/twiki/bin/view/Main/HdfsXrootdInstall</a></li>
+</ul>
+<h3 id="optional-adding-hadoop-support-to-xrootd">(Optional) Adding Hadoop support to XRootD<a class="headerlink" href="#optional-adding-hadoop-support-to-xrootd" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>3.3 only</p>
+</div>
+<p>Users with Hadoop-based storage under their XRootD installation have extra steps
+to configure more efficient access to Hadoop Stroage</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-hdfs
+</pre></div>
+
+
+<p>You will then need to add the following lines to your
+<code>/etc/xrootd/xrootd-clustered.cfg</code>:</p>
+<div class="codehilite"><pre><span></span>xrootd.fslib /usr/lib64/libXrdOfs.so
+ofs.osslib /usr/lib64/libXrdHdfs.so
+</pre></div>
+
+
+<p>For more information, see <a href="https://twiki.opensciencegrid.org/bin/view/Storage/HadoopXrootd">Storage.HadoopXrootd</a>.</p>
+<h3 id="optional-adding-file-residency-manager-frm-to-an-xrootd-cluster">(Optional) Adding File Residency Manager (FRM) to an XRootd cluster<a class="headerlink" href="#optional-adding-file-residency-manager-frm-to-an-xrootd-cluster" title="Permanent link">&para;</a></h3>
+<p>If you have a multi-tiered storage system (e.g. some data is stored on SSDs and
+some on disks or tapes), then install the File Residency Manager (FRM), so you
+can move data between tiers more easily. If you do not have a multi-tiered
+storage system, then you do not need FRM and you can skip this section.</p>
+<p>The FRM deals with two major mechanisms:</p>
+<ul>
+<li>local disk</li>
+<li>remote servers</li>
+</ul>
+<p>The description of fully functional multiple xrootd clusters is beyond the scope
+of this document. In order to have this fully functional system you will need a
+global redirector and at least one remote xrootd cluster from where files could
+be moved to the local cluster.</p>
+<p>Below are the modifications you should make in order to enable FRM on your local
+cluster:</p>
+<ol>
+<li>Make sure that FRM is enabled in <code>/etc/sysconfig/xrootd</code> on your data sever:</li>
+</ol>
+<div class="codehilite"><pre><span></span>ROOTD\_USER=xrootd 
+XROOTD\_GROUP=xrootd 
+XROOTD\_DEFAULT\_OPTIONS=&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
+CMSD\_DEFAULT\_OPTIONS=&quot;-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
+FRMD\_DEFAULT\_OPTIONS=&quot;-l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
+XROOTD\_INSTANCES=&quot;default&quot; 
+CMSD\_INSTANCES=&quot;default&quot; 
+FRMD\_INSTANCES=&quot;default&quot;
+</pre></div>
+
+
+<ol>
+<li>Modify <code>/etc/xrootd/xrootd-clustered.cfg</code> on both nodes to specify options for <code>frm_xfrd</code> (File Transfer Daemon) and <code>frm_purged</code> (File Purging Daemon). For more information, you can visit the <a href="http://xrootd.org/doc/dev4/frm_config.htm">FRM Documentation</a></li>
+<li>Start frm daemons on data server: </li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service frm<span class="se">\_</span>xfrd start
+<span class="gp">root@host #</span> service frm<span class="se">\_</span>purged start
+</pre></div>
+
+
+<h2 id="using-xrootd">Using XRootD<a class="headerlink" href="#using-xrootd" title="Permanent link">&para;</a></h2>
+<h3 id="managing-xrootd-services">Managing XRootD services<a class="headerlink" href="#managing-xrootd-services" title="Permanent link">&para;</a></h3>
+<p>Start services on the redirector node before starting any services on the data
+nodes. If you installed only XRootD itself, you will only need to start the
+<code>xrootd</code> service. However, if you installed cluster management services, you
+will need to start <code>cmsd</code> as well.</p>
+<p>The instructions for starting and stopping an XRootD service depend on whether
+the service is installed on an EL 6 or EL 7 machine, and whether you are using a
+standalone or clustered configuration.</p>
+<p>On EL 6, which config to use is set in the file <code>/etc/sysconfig/xrootd</code>. For
+example, to have <code>xrootd</code> use the clustered config, you would have a line such
+as this:</p>
+<div class="codehilite"><pre><span></span>XROOTD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-<span style="color:red">clustered</span>.cfg -k fifo&quot;
+</pre></div>
+
+
+<p>To use the standalone config instead, you would use:</p>
+<div class="codehilite"><pre><span></span>XROOTD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-<span style="color:red">standalone</span>.cfg -k fifo&quot;
+</pre></div>
+
+
+<p>On EL 7, which config to use is determined by the service name given to
+<code>systemctl</code>. For example, to have <code>xrootd</code> use the clustered config, you would
+start up <code>xrootd</code> with this line:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl start xrootd@<span style="color:red">clustered</span>
+</pre></div>
+
+
+<p>To use the standalone config instead, you would use:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl start xrootd@<span style="color:red">standalone</span>
+</pre></div>
+
+
+<p>The services are:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Service</th>
+<th align="left">EL 6 service name</th>
+<th align="left">EL 7 service name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">XRootD (standalone config)</td>
+<td align="left"><code>xrootd</code></td>
+<td align="left"><code>xrootd@standalone</code></td>
+</tr>
+<tr>
+<td align="left">XRootD (clustered config)</td>
+<td align="left"><code>xrootd</code></td>
+<td align="left"><code>xrootd@clustered</code></td>
+</tr>
+<tr>
+<td align="left">CMSD (clustered config)</td>
+<td align="left"><code>cmsd</code></td>
+<td align="left"><code>cmsd@clustered</code></td>
+</tr>
+</tbody>
+</table>
+<p>As a reminder, here are common service commands (all run as <code>root</code>):</p>
+<table>
+<thead>
+<tr>
+<th align="left">To …</th>
+<th align="left">On EL 6, run the command…</th>
+<th align="left">On EL 7, run the command…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Start a service</td>
+<td align="left"><code>service &lt;em&gt;SERVICE-NAME&lt;/em&gt; start</code></td>
+<td align="left"><code>systemctl start &lt;em&gt;SERVICE-NAME&lt;/em&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Stop a service</td>
+<td align="left"><code>service &lt;em&gt;SERVICE-NAME&lt;/em&gt; stop</code></td>
+<td align="left"><code>systemctl start &lt;em&gt;SERVICE-NAME&lt;/em&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Enable a service to start during boot</td>
+<td align="left"><code>chkconfig &lt;em&gt;SERVICE-NAME&lt;/em&gt; on</code></td>
+<td align="left"><code>systemctl enable &lt;em&gt;SERVICE-NAME&lt;/em&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Disable a service from starting during boot</td>
+<td align="left"><code>chkconfig &lt;em&gt;SERVICE-NAME&lt;/em&gt; off</code></td>
+<td align="left"><code>systemctl disable &lt;em&gt;SERVICE-NAME&lt;/em&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
+<p>To get assistance. please use the <a href="../../common/help/">Help Procedure</a> page.</p>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
+<h3 id="file-locations">File locations<a class="headerlink" href="#file-locations" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Service/Process</th>
+<th align="left">Configuration File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>xrootd</code></td>
+<td align="left"><code>/etc/xrootd/xrootd-clustered.cfg</code></td>
+<td align="left">Main clustered mode XRootD configuration</td>
+</tr>
+<tr>
+<td align="left">^</td>
+<td align="left"><code>/etc/xrootd/auth_file</code></td>
+<td align="left">Authorized users file</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">Service/Process</th>
+<th align="left">Log File</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>xrootd</code></td>
+<td align="left"><code>/var/log/xrootd/xrootd.log</code></td>
+<td align="left">XRootD server daemon log</td>
+</tr>
+<tr>
+<td align="left"><code>cmsd</code></td>
+<td align="left"><code>/var/log/xrootd/cmsd.log</code></td>
+<td align="left">Cluster management log</td>
+</tr>
+<tr>
+<td align="left"><code>cns</code></td>
+<td align="left"><code>/var/log/xrootd/cns/xrootd.log</code></td>
+<td align="left">Server inventory (composite name space) log</td>
+</tr>
+<tr>
+<td align="left"><code>frm_xfrd</code>, <code>frm_purged</code></td>
+<td align="left"><code>/var/log/xrootd/frmd.log</code></td>
+<td align="left">File Residency Manager log</td>
+</tr>
+</tbody>
+</table>
+<h2 id="links">Links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="http://xrootd.slac.stanford.edu/doc">XRootD documentation</a></li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../other/gsissh/" class="btn btn-neutral float-right" title="GSI-enabled SSH">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../install-xroot-client/" class="btn btn-neutral" title="XRootD Client"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../install-xroot-client/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../other/gsissh/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
