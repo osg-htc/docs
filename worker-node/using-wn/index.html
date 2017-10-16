@@ -836,7 +836,7 @@ A job running on an OSG worker node can refer to each directory using the corres
 <tr>
 <td align="left"><code>$OSG_WN_TMP</code></td>
 <td align="left">Temporary storage area in which your job(s) run</td>
-<td align="left">Local to each worker node. Create a directory under this as your work area.</td>
+<td align="left">Local to each worker node (recommended size: 10 GB/job). Create a directory under this as your work area. Site administrators should use common batch-system capabilities to create a temporary, per-job directory that is clearned up after each job is run. Alternatively, administrators should ensure that this directory is purged periodically.</td>
 </tr>
 <tr>
 <td align="left"><code>$_CONDOR_SCRATCH_DIR</code></td>
