@@ -120,7 +120,7 @@ WARNING: Container does not have an exec helper script, calling 'cat' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
 user         1     0  0 21:34 ?        00:00:00 ps -ef
 ```
-<br>
+
 ## Starting and Stopping services
 
 singularity has no services to start or stop.

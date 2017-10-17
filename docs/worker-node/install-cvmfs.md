@@ -79,7 +79,6 @@ FUSE and automount are required for CVMFS and the steps to configure them are di
 
         :::console
         root@host # systemctl restart autofs
-<br>
 
 
 ## Configuring CVMFS
@@ -95,7 +94,7 @@ CVMFS_REPOSITORIES="`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls 
 CVMFS_QUOTA_LIMIT=%RED%20000%ENDCOLOR%
 CVMFS_HTTP_PROXY=%RED%"http://squid.example.com:3128"%ENDCOLOR%
 ```
-<br>
+
 CVMFS by default allows any repository to be mounted, no matter what
 the setting of `CVMFS_REPOSITORIES` is; that variable is used by support
 tools such as `cvmfs_config` and `cvmfs_talk` when they need to know a
@@ -147,7 +146,7 @@ directory. But note that it will initially appear to be empty:
 user@host $ ls /cvmfs
 user@host $
 ```
-<br>
+
 Directories within `/cvmfs` will not be mounted until you examine them. For instance:
 
 ```console
@@ -170,7 +169,7 @@ user@host $ ls /cvmfs
 atlas.cern.ch                   glast.egi.eu         oasis.opensciencegrid.org
 config-osg.opensciencegrid.org  nova.osgstorage.org
 ```
-<br>
+
 ### Troubleshooting problems
 
 If no directories exist under `/cvmfs/`, you can try the following
@@ -211,7 +210,7 @@ Unmounting /cvmfs/oasis.opensciencegrid.org: OK
 Unmounting /cvmfs/glast.egi.eu: OK
 Unmounting /cvmfs/nova.osgstorage.org: OK
 ```
-<br>
+
 ## How to get Help?
 
 If you cannot resolve the problem, there are several ways to receive help:
