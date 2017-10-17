@@ -52,7 +52,7 @@ Option 2: Install osg-update-certs
 
 Install this with:
 
-```
+``` console
 root@host # yum install osg-ca-scripts
 ```
 
@@ -65,7 +65,7 @@ You have the same choices for CA certificates as above. In order to choose, you 
 
 Here is an example:
 
-```
+``` console
 root@host # /usr/sbin/osg-ca-manage setupCA --location root --url osg
 Setting up CA Certificates for OSG installation
 CA Certificates will be installed into /etc/grid-security/certificates
@@ -81,14 +81,14 @@ Setup completed successfully.
 
 Initially the CA certificates will not be updated. You can tell by looking at:
 
-```
+``` console
 root@host # /sbin/service osg-update-certs-cron  status
 Periodic osg-update-certs is disabled.
 ```
 
 You can enable the `cron` job that updates the CA certs with:
 
-```
+``` console
 root@host # /sbin/service osg-update-certs-cron  start
 Enabling periodic osg-update-certs:                        [  %GREEN%OK%ENDCOLOR%  ]
 ```
@@ -100,7 +100,7 @@ Option 3: Install an RPM that installs no CAs
 
 Install this with:
 
-```
+``` console
 yum install empty-ca-certs –-enablerepo=osg-empty
 ```
 
@@ -124,7 +124,9 @@ In addition to the above CAs, you can install other CAs via RPM. These only work
 Managing Certificate Revocation Lists
 =====================================
 
-In addition to CA certificates, you normally need to have updated Certificate Revocation Lists (CRLs) which are are lists of certificates that have been revoked for any reason. Software in the OSG Software Stack use these to ensure that you are talking to valid clients or servers. We use a tool named `fetch-crl` that periodically updates the CRLs. Fetch CRL is a utility that updates Certificate Authority (CA) Certificate Revocation Lists (CRLs). These are lists of certificates that were granted by the CA, but have since been revoked. It is good practice to regularly update the CRL list for each CA to ensure that you do not authenticate any certificate that has been revoked.
+In addition to CA certificates, you normally need to have updated Certificate Revocation Lists (CRLs) which are are lists of certificates that have been revoked for any reason. Software in the OSG Software Stack uses these to ensure that you are talking to valid clients or servers.
+
+We use a tool named `fetch-crl` that periodically updates the CRLs. Fetch CRL is a utility that updates Certificate Authority (CA) Certificate Revocation Lists (CRLs). These are lists of certificates that were granted by the CA, but have since been revoked. It is good practice to regularly update the CRL list for each CA to ensure that you do not authenticate any certificate that has been revoked.
 
 `fetch-crl` is installed as two different system services. The fetch-crl-boot service runs only
 at boot time. The `fetch-crl-cron` service runs `fetch-crl` every 6 hours (with a random sleep
@@ -138,7 +140,7 @@ Install `fetch-crl`
 Normally `fetch-crl` is installed when you install the rest of the software and you do not need
 to specifically install it. If you do wish to install it, you can install it as:
 
-```
+``` console
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
 root@host # yum install fetch-crl3
 %RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
@@ -149,7 +151,7 @@ root@host # yum install fetch-crl
 
 To enable fetch-crl (fetch Certificate Revocation Lists) services by default on the node:
 
-```
+``` console
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
 root@host # /sbin/chkconfig fetch-crl3-boot on
 root@host # /sbin/chkconfig fetch-crl3-cron on
@@ -160,7 +162,7 @@ root@host # /sbin/chkconfig fetch-crl-cron on
 
 To start fetch-crl:
 
-```
+``` console
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
 root@host # /sbin/service fetch-crl3-boot start
 root@host # /sbin/service fetch-crl3-cron start
@@ -186,9 +188,8 @@ To configure fetch-crl to use an HTTP proxy server:
 
 -   If using `fetch-crl` version 2 (the `fetch-crl` package on RHEL5 only), then create the file `/etc/sysconfig/fetch-crl` and add the following line:
 
-      ```
-      export http_proxy=%RED%http://your.squid.fqdn:port%ENDCOLOR%
-      ```
+        :::bash
+        export http_proxy=%RED%http://your.squid.fqdn:port%ENDCOLOR%
 
     Adjust the URL appropriately for your proxy server.
 
@@ -197,9 +198,8 @@ To configure fetch-crl to use an HTTP proxy server:
     file `/etc/fetch-crl3.conf` (RHEL5) or `/etc/fetch-crl.conf`
     (RHEL6/RHEL7) and add the following line:
 
-      ```
-      http_proxy=%RED%http://your.squid.fqdn:port%ENDCOLOR%
-      ```
+        :::bash
+        http_proxy=%RED%http://your.squid.fqdn:port%ENDCOLOR%
 
     Again, adjust the URL appropriately for your proxy server.
 
@@ -225,7 +225,7 @@ It is possible to send the output to syslog instead of the default email system.
 
 You need to fetch the latest CA Certificate Revocation Lists (CRLs) and you should enable the fetch-crl service to keep the CRLs up to date:
 
-```
+``` console
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
 root@host # /usr/sbin/fetch-crl3 # This fetches the CRLs
 root@host # /sbin/service fetch-crl3-boot start
@@ -238,7 +238,7 @@ root@host # /sbin/service fetch-crl-cron start
 
 To enable the `fetch-crl` service to keep the CRLs up to date after reboots:
 
-```
+``` console
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
 root@host # /sbin/chkconfig fetch-crl3-boot on
 root@host # /sbin/chkconfig fetch-crl3-cron on
@@ -249,7 +249,7 @@ root@host # /sbin/chkconfig fetch-crl-cron on
 
 To stop `fetch-crl`:
 
-```
+``` console
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
 root@host # /sbin/service fetch-crl3-boot stop
 root@host # /sbin/service fetch-crl3-cron stop
@@ -260,7 +260,7 @@ root@host # /sbin/service fetch-crl-cron stop
 
 To disable the fetch-crl service:
 
-```
+``` console
 %RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
 root@host # /sbin/chkconfig fetch-crl3-boot off
 root@host # /sbin/chkconfig fetch-crl3-cron off
@@ -275,7 +275,13 @@ Updating CAs/CRLs
 Why maintain up-to-date Trusted CA /CRL information
 ---------------------------------------------------
 
-The Trusted Certificate Authority (CA) certificates, and their associated Certificate Revocation Lists (CRLs), are used for every transaction on a resource that establishes an authenticated network connection based on end user’s certificate. In order for the authentication to succeed, the user’s certificate must have been issued by one of the CAs in the Trusted CA directory, and the user’s certificate must not be listed in the CRL for that CA. CRLs can be thought of as a black list of certificates. CAs are the trust authorities, similar to DMV that issues you the driving license. (Another way of thinking CRLs is the do-not-fly lists at the airports. if your certificate shows up in CRLs, you are not allowed access.) This is handled at the certificate validation stage even before the authorization check (which will provide the mapping of an authenticated user to a local account UID/GID). So you do not need to do worry about it; the grid software will do this for you. However, you should make sure that your site has the most up-to-date list of Trusted CAs. There are multiple trust authorities in OSG (think of it as a different DMV for each state). If you do not have an up-to-date list of CAs it is possible that some of your users transactions at your site will start to fail. A current CRL list for each CA is also necessary, since without one transactions for users of that CA will fail.
+The Trusted Certificate Authority (CA) certificates, and their associated Certificate Revocation Lists (CRLs), are used for every transaction on a resource that establishes an authenticated network connection based on end user’s certificate. In order for the authentication to succeed, the user’s certificate must have been issued by one of the CAs in the Trusted CA directory, and the user’s certificate must not be listed in the CRL for that CA.
+
+CRLs can be thought of as a black list of certificates. CAs are the trust authorities, similar to DMV that issues you the driving license. (Another way of thinking CRLs is the do-not-fly lists at the airports. if your certificate shows up in CRLs, you are not allowed access.)
+
+This is handled at the certificate validation stage even before the authorization check (which will provide the mapping of an authenticated user to a local account UID/GID). So you do not need to do worry about it; the grid software will do this for you.
+
+However, you should make sure that your site has the most up-to-date list of Trusted CAs. There are multiple trust authorities in OSG (think of it as a different DMV for each state). If you do not have an up-to-date list of CAs it is possible that some of your users transactions at your site will start to fail. A current CRL list for each CA is also necessary, since without one transactions for users of that CA will fail.
 
 How to ensure you are get up-to-date CA/CRL information
 -------------------------------------------------------
@@ -283,17 +289,15 @@ How to ensure you are get up-to-date CA/CRL information
 1.  If you installed CAs using rpm packages (`osg-ca-certs`,`igtf-ca-certs`) (Options 1, 4), you will need to install the software described in [the CA update document](osg-ca-certs-updater), and enable `osg-ca-certs-updater` service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.
 2.  If you use Option 2 (i.e. `osg-update-certs`) then make sure that you have the corresponding service enabled.
 
-   ```
-   root@host # /sbin/service osg-update-certs-cron  status
-   Periodic osg-update-certs is enabled.
-   ```
+        :::console
+        root@host # /sbin/service osg-update-certs-cron  status
+        Periodic osg-update-certs is enabled.
 
-3.  Ensure that fetch-crl cron is enabled\\
+3.  Ensure that fetch-crl cron is enabled
 
-  ```
-  root@host # /sbin/service fetch-crl-cron  status
-  Periodic fetch-crl is enabled.
-  ```
+        :::console
+        root@host # /sbin/service fetch-crl-cron  status
+        Periodic fetch-crl is enabled.
 
 Troubleshooting
 ===============
@@ -329,7 +333,7 @@ Tests
 
 To test the host certificate of a server `openssl s_client` can be used. Here is an example with the gatekeeper:
 
-```
+``` console
 user@host $ openssl s_client -showcerts -cert /etc/grid-security/hostcert.pem -key /etc/grid-security/hostkey.pem -CApath /etc/grid-security/certificates/ -debug -connect osg-gk.mwt2.org:2119
 ```
 
@@ -380,13 +384,13 @@ For Option 4: run `yum update osg-ca-certs`
 
 For Option 2: You do not need to do a manual update, make sure `osg-update-certs-cron` is enabled using
 
-```
+``` console
 root@host # /sbin/service osg-update-certs-cron  status
 ```
 
 If the service is disabled, enable it using
 
-```
+``` console
 root@host # /sbin/service osg-update-certs-cron  start
 ```
 
