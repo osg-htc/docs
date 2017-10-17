@@ -817,9 +817,8 @@
 
 <h3 id="install-and-update-software">Install and update software<a class="headerlink" href="#install-and-update-software" title="Permanent link">&para;</a></h3>
 <p>Once you log in, you can add/modify/remove content on a staging area at <code>/stage/oasis/$VO</code> where $VO is the name of the VO represented by the manager.</p>
-<p>Files here are visible to both <code>oasis-login</code> and the Stratum 0 server (oasis.opensciencegrid.org)</p>
-<p>NOTE that <code>/stage/oasis/$VO</code> is not your home directory, which you can use for staging purposes but is not visible in OASIS.</p>
-<p>As OASIS manager for the VO requests an oasis update with:</p>
+<p>Files here are visible to both <code>oasis-login</code> and the Stratum 0 server (oasis.opensciencegrid.org).  There is a symbolic link at <code>/cvmfs/oasis.opensciencegrid.org/$VO</code> that points to the same staging area.  </p>
+<p>Request an oasis publish with this command:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-oasis-update
 </pre></div>
 
