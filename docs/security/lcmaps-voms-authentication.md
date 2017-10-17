@@ -1,10 +1,7 @@
 Installing and Maintaining the LCMAPS VOMS Plugin
 =================================================
 
-About This Guide
-----------------
-
-LCMAPS is a software library for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., `/cms/Role=production/Capability=NULL`. Starting in OSG 3.4, the LCMAPS VOMS plugin will replace GUMS and edg-mkgridmap as the authentication method at OSG sites.
+LCMAPS is a software library used on [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../data/gridftp), or [XRootD](../data/install-xrootd) hosts for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., `/cms/Role=production/Capability=NULL`. Starting in OSG 3.4, the LCMAPS VOMS plugin will replace GUMS and edg-mkgridmap as the authentication method at OSG sites.
 
 The OSG provides a default set of mappings from VOMS attributes to Unix accounts. By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to, banning based on VOMS attributes, banning a specific user, or adding a VO, VO group, VO role, and/or user that is not in the OSG's set of mappings.
 
@@ -50,7 +47,6 @@ Additionally, there is [optional configuration](#optional-configuration) if you 
 To configure your host to use LCMAPS VOMS plugin authentication, edit `/etc/osg/config.d/10-misc.ini` and set the following options:
 
 ``` ini
-glexec_location = UNAVAILABLE
 edit_lcmaps_db = True
 authorization_method = vomsmap
 ```
@@ -123,20 +119,20 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
     | HTCondor-CE                 | `/etc/sysconfig/condor-ce`             | `condor-ce`                     |
     | GridFTP server              | `/etc/sysconfig/globus-gridftp-server` | `globus-gridftp-server`         |
 
-3.  If you are converting an HTCondor-CE host, remove the HTCondor-CE `GRIDMAP` configuration. Otherwise, skip to the next step.
+3.  If you are converting an HTCondor-CE host, remove the HTCondor-CE `GRIDMAP` configuration (`osg-configure` may have already done this for you). Otherwise, skip to the next step.
 
-    1. Find the location of this configuration using the following command:
+    1. Find the location of this configuration using the following command. :
 
             :::console
             [root@ce]# condor_ce_config_val -v GRIDMAP
 
-    2. Delete the line that sets the `GRIDMAP` configuration variable
+    2. If the above command returns `Not defined: GRIDMAP`, skip to step 4. Otherwise, delete the line that sets the `GRIDMAP` configuration variable
     3. Reconfigure HTCondor-CE:
 
             :::console
             [root@ce]# condor_ce_reconfig
 
-5. Remove edg-mkgridmap and related packages:
+4. Remove edg-mkgridmap and related packages:
 
         :::console
         [root@ce]# yum erase edg-mkgridmap
