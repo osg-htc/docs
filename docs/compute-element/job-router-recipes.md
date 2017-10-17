@@ -148,7 +148,7 @@ JOB_ROUTER_ENTRIES = [ \
 ]
 ```
 
-This is because when evaluating the route requirement, the job route will compare its own `queue` attribute to "analy" and see that it does not match. You can read more about comparing two ClassAds in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_1HTCondor_s_ClassAd.html#43151).
+This is because when evaluating the route requirement, the job route will compare its own `queue` attribute to "analy" and see that it does not match. You can read more about comparing two ClassAds in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_1HTCondor_s_ClassAd.html#SECTION00513300000000000000).
 
 !!! note
     If you have an HTCondor batch system, note the difference with [set\_requirements](#setting-routed-job-requirements).
