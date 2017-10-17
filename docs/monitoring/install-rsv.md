@@ -14,10 +14,10 @@ Introduction to RSV
 The Resource and Service Validation (RSV) software provides OSG site administrators a scalable and easy-to-maintain resource and service monitoring infrastructure. The components of RSV are:
 
 - **RSV Client.** The client tools allow a site administrator to run tests against their site by providing a set of tests (which can run on the same or other hosts within a site), HTCondor-Cron for scheduling, and tools for collecting and storing the results (using Gratia). The client package is not installed by default and may be installed on a CE or other host. Generally, you configure the RSV client to run tests at scheduled time intervals and then it makes results available on a local website. Also, the client can upload test results to a central collector (see next item).
-- **RSV Collector/Server.** The central OSG RSV Collector accepts and stores results from RSV clients throughout OSG, which can be viewed in [MyOSG](http://myosg.grid.iu.edu/), on the “Current RSV Status” page and under the “Resource Group” menu.
-- **Periodic Availability Reports.** The availability of all active registered OSG resources and the services running on each of those resources is calculated using the results received for [critical metrics](https://twiki.grid.iu.edu/bin/view/Operations/RsvEquivalency#Critical_Tests_for_OSG_Resources>). Once a day, these availability numbers are [published online](http://rsv.grid.iu.edu/daily-reports) (More information: [Outline of reports](https://twiki.grid.iu.edu/bin/view/Operations/RSVPeriodicReporting)).
-- **RSV-SAM Transport.** The WLCG RSV-SAM Transport infrastructure pushes out RSV results, for resources that are flagged to be part of the WLCG Interoperability agreement, from the GOC collector to WLCG's Service Availability Monitoring (SAM) system. More information on viewing these results is [available here](https://twiki.grid.iu.edu/twiki/bin/view/Operations/RsvSAMGridView).
-- **MyOSG and OIM Links.** RSV picks up resource information, WLCG interoperability information, etc., from a MyOSG resource group summary listing, which is in turn based on the [OSG Information Management (OIM) (topology) system](https://oim.grid.iu.edu) (Requires registration). Resource [maintenance scheduled on OIM](https://twiki.grid.iu.edu/twiki/bin/view/Operations/OIMMaintTool) are forwarded to WLCG SAM, if applicable.
+- **RSV Collector/Server.** The central OSG RSV Collector accepts and stores results from RSV clients throughout OSG, which can be viewed in [MyOSG](http://my.opensciencegrid.org/), on the “Current RSV Status” page and under the “Resource Group” menu.
+- **Periodic Availability Reports.** The availability of all active registered OSG resources and the services running on each of those resources is calculated using the results received for [critical metrics](https://twiki.opensciencegrid.org/bin/view/Operations/RsvEquivalency#Critical_Tests_for_OSG_Resources>). Once a day, these availability numbers are [published online](http://rsv.opensciencegrid.org/daily-reports) (More information: [Outline of reports](https://twiki.opensciencegrid.org/bin/view/Operations/RSVPeriodicReporting)).
+- **RSV-SAM Transport.** The WLCG RSV-SAM Transport infrastructure pushes out RSV results, for resources that are flagged to be part of the WLCG Interoperability agreement, from the GOC collector to WLCG's Service Availability Monitoring (SAM) system. More information on viewing these results is [available here](https://twiki.opensciencegrid.org/twiki/bin/view/Operations/RsvSAMGridView).
+- **MyOSG and OIM Links.** RSV picks up resource information, WLCG interoperability information, etc., from a MyOSG resource group summary listing, which is in turn based on the [OSG Information Management (OIM) (topology) system](https://oim.opensciencegrid.org) (Requires registration). Resource [maintenance scheduled on OIM](https://twiki.opensciencegrid.org/twiki/bin/view/Operations/OIMMaintTool) are forwarded to WLCG SAM, if applicable.
 
 
 Before Starting
@@ -165,14 +165,46 @@ Normally, the HTCondor-Cron scheduler runs RSV periodically. However, you can ru
 root@host # rsv-control --run --all-enabled
 ```
 
-If successful, results will be available from your local RSV web server (e.g., `http://localhost/rsv`) and, if enabled (which is the default) on [MyOSG](http://myosg.grid.iu.edu/).
+If successful, results will be available from your local RSV web server (e.g., `http://localhost/rsv`) and, if enabled (which is the default) on [MyOSG](http://my.opensciencegrid.org/).
 
 You can also run the metrics individually or pass special parameters as explained in the [rsv-control document](rsv-control).
 
 Troubleshooting RSV
 -------------------
 
+To get assistance, use the [help procedure](../common/help).
+
+RSV has a tool to collect information useful for troubleshooting into a tarball that can be shared with the developers and support staff.
+To use it:
+
+``` console
+root@host# rsv-control --profile
+Running the rsv-profiler...
+OSG-RSV Profiler
+Analyzing...
+Making tarball (rsv-profiler.tar.gz)
+```
+
 You can find more information on troubleshooting RSV in the [rsv-control documentation](rsv-control).
+
+!!! note
+    If you are getting assistance via the trouble ticket system, you must add a `.txt` extension to the tarball so it can be uploaded:
+
+### Resending failed Gratia records
+
+If RSV fails to send Gratia records, it will save a copy of the output into `/var/spool/rsv/failed-gratia-scripts`.
+You will be notified if files are in this directory on your HTML status page.
+
+If files appear here, you can attempt to determine why by looking at this log file: `/var/log/rsv/consumers/gratia-consumer.output`.
+(This file is rotated, so the error message may no longer be present.)
+
+Usually this error is spurious - there may have been a problem with the central collector being unavailable, or there may have been a network problem.
+The first step to fix this problem is to try to resend these files.
+To do so, move them back into the `gratia` directory and they will be resent the next time the gratia-script-consumer runs (about every 5 minutes):
+
+``` console
+root@host# mv /var/spool/rsv/failed-gratia-records/* /var/spool/rsv/gratia-consumer/
+```
 
 ### Important file locations
 
@@ -205,7 +237,6 @@ For example, here is the output when running a metric with -v2.
 
 <details>
   <summary>Show detailed ouput</summary>
-   <p>
 ```console
    [root@fermicloud016 condor]# rsv-control -r org.osg.general.osg-version -v 2 -u osg-edu.cs.wisc.edu
    INFO: Reading configuration file /etc/rsv/rsv.conf
@@ -257,7 +288,6 @@ detailsData: OSG 1.2.26
 
 EOT
 ```
-</p>
 </details>
 
 Getting Help
@@ -278,7 +308,6 @@ Reference
 
 Here are some other RSV documents that might be helpful:
 
-- A longer [introduction to RSV](rsv-overview)
 -  [The RSV architecture](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvArchitecture)
 -  [RSV storage probes](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RSVStorageProbes)
 
@@ -304,7 +333,7 @@ The RSV installation will create two users unless they are already created. The 
 CONDOR_IDS=UID.GID
 ```
 
-where <em>UID</em> and <em>GID</em> are the UID and GID of the `cndrcron` user and group.
+where `UID` and `GID` are the UID and GID of the `cndrcron` user and group.
 
 ### Certificates
 

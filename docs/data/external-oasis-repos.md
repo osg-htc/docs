@@ -35,7 +35,7 @@ This is a procedure for installing it on a Redhat EL6-based system:
 
 ``` console
 root@host # rpm -i https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm 
-root@host # rpm -i https://repo.grid.iu.edu/osg/3.4/osg-3.4-el6-release-latest.rpm 
+root@host # rpm -i https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm 
 root@host # yum install --enablerepo=cernvm-kernel --disablerepo=cernvm kernel aufs2-util cvmfs-server.x86_64 cvmfs.x86_64 cvmfs-config-osg 
 root@host # echo "cvmfs_server mount -a" >>/etc/rc.local 
 root@host # reboot
@@ -44,7 +44,7 @@ root@host # reboot
 This is the procedure for installing on a Redhat EL7-based system:
 
 ``` console
-root@host # rpm -i https://repo.grid.iu.edu/osg/3.4/osg-3.4-el7-release-latest.rpm 
+root@host # rpm -i https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm 
 root@host # yum install cvmfs-server.x86_64 osg-oasis 
 root@host # echo "cvmfs_server mount -a" >>/etc/rc.local
 root@host # chmod +x /etc/rc.local

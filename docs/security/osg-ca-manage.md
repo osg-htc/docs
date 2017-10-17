@@ -225,102 +225,10 @@ You can inspect the list of CA Certificates that have been installed:
 
 ``` console
 user@host $ osg-ca-manage listCA
-```
-
-<details>
-```
-user@host $ osg-ca-manage listCA
 Hash=09ff08b7; Subject= /C=FR/O=CNRS/CN=CNRS2-Projets; Issuer= /C=FR/O=CNRS/CN=CNRS2; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
 Hash=0a12b607; Subject= /DC=org/DC=ugrid/CN=UGRID CA; Issuer= /DC=org/DC=ugrid/CN=UGRID CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=0a2bac92; Subject= /C=BR/O=ICPEDU/O=UFF BrGrid CA/CN=UFF Brazilian Grid Certification Authority; Issuer= /C=BR/O=ICPEDU/O=UFF BrGrid CA/CN=UFF Brazilian Grid Certification Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=1149214e; Subject= /C=DE/O=DFN-Verein/OU=DFN-PKI/CN=DFN-Verein PCA Grid - G01; Issuer= /C=DE/O=DFN-Verein/OU=DFN-PKI/CN=DFN-Verein PCA Grid - G01; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=11b4a5a2; Subject= /C=PT/O=LIPCA/CN=LIP Certification Authority; Issuer= /C=PT/O=LIPCA/CN=LIP Certification Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=163af95c; Subject= /C=FR/O=CNRS/CN=CNRS2; Issuer= /C=FR/O=CNRS/CN=CNRS2; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=1691b9ba; Subject= /C=TR/O=TRGrid/CN=TR-Grid CA; Issuer= /C=TR/O=TRGrid/CN=TR-Grid CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=169d7f9c; Subject= /C=NL/O=TERENA/CN=TERENA eScience Personal CA; Issuer= /C=US/ST=UT/L=Salt Lake City/O=The USERTRUST Network/OU=http://www.usertrust.com/CN=UTN-USERFirst-Client Authentication and Email; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=16da7552; Subject= /C=NL/O=NIKHEF/CN=NIKHEF medium-security certification auth; Issuer= /C=NL/O=NIKHEF/CN=NIKHEF medium-security certification auth; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=1c3f2ca8; Subject= /DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1; Issuer= /DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=1d879c6c; Subject= /DC=ch/DC=cern/CN=CERN Trusted Certification Authority; Issuer= /DC=ch/DC=cern/CN=CERN Root CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=1e12d831; Subject= /C=AU/O=APACGrid/OU=CA/CN=APACGrid/emailAddress=camanager@vpac.org; Issuer= /C=AU/O=APACGrid/OU=CA/CN=APACGrid/emailAddress=camanager@vpac.org; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=1e43b9cc; Subject= /C=IE/O=Grid-Ireland/CN=Grid-Ireland Certification Authority; Issuer= /C=IE/O=Grid-Ireland/CN=Grid-Ireland Certification Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=1f0e8352; Subject= /O=Grid/O=NorduGrid/CN=NorduGrid Certification Authority; Issuer= /O=Grid/O=NorduGrid/CN=NorduGrid Certification Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=1f3834d0; Subject= /DC=RO/DC=RomanianGRID/O=ROSA/OU=Certification Authority/CN=RomanianGRID CA; Issuer= /DC=RO/DC=RomanianGRID/O=ROSA/OU=Certification Authority/CN=RomanianGRID CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=2418a3f3; Subject= /DC=bg/DC=acad/CN=BG.ACAD CA; Issuer= /DC=bg/DC=acad/CN=BG.ACAD CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=24c3ccde; Subject= /C=MX/O=UNAMgrid/OU=UNAM/CN=CA; Issuer= /C=MX/O=UNAMgrid/OU=UNAM/CN=CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=28a58577; Subject= /C=GR/O=HellasGrid/OU=Certification Authorities/CN=HellasGrid Root CA 2006; Issuer= /C=GR/O=HellasGrid/OU=Certification Authorities/CN=HellasGrid Root CA 2006; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=295adc19; Subject= /C=CL/O=REUNACA/CN=REUNA Certification Authority; Issuer= /C=CL/O=REUNACA/CN=REUNA Certification Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=2a237f16; Subject= /DC=org/DC=balticgrid/CN=Baltic Grid Certification Authority; Issuer= /DC=org/DC=balticgrid/CN=Baltic Grid Certification Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=2ac09305; Subject= /DC=EDU/DC=UTEXAS/DC=TACC/O=UT-AUSTIN/CN=TACC MICS CA; Issuer= /DC=EDU/DC=UTEXAS/DC=TACC/O=UT-AUSTIN/CN=TACC Root CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=2f3fadf6; Subject= /C=IT/O=INFN/CN=INFN CA; Issuer= /C=IT/O=INFN/CN=INFN CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=304cf809; Subject= /C=CH/O=Switch - Teleinformatikdienste fuer Lehre und Forschung/CN=SWITCHslcs CA; Issuer= /C=CH/O=Switch - Teleinformatikdienste fuer Lehre und Forschung/CN=SWITCHgrid Root CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=3232b9bc; Subject= /DC=me/DC=ac/DC=MREN/CN=MREN-CA; Issuer= /DC=me/DC=ac/DC=MREN/CN=MREN-CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=367b75c3; Subject= /C=UK/O=eScienceCA/OU=Authority/CN=UK e-Science CA; Issuer= /C=UK/O=eScienceRoot/OU=Authority/CN=UK e-Science Root; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=393f7863; Subject= /C=RS/O=AEGIS/CN=AEGIS-CA; Issuer= /C=RS/O=AEGIS/CN=AEGIS-CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=3d5be7bc; Subject= /C=SI/O=SiGNET/CN=SiGNET CA; Issuer= /C=SI/O=SiGNET/CN=SiGNET CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=3f0f4285; Subject= /C=VE/O=Grid/O=Universidad de Los Andes/OU=CeCalCULA/CN=ULAGrid Certification Authority; Issuer= /C=VE/O=Grid/O=Universidad de Los Andes/OU=CeCalCULA/CN=ULAGrid Certification Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=468d15b3; Subject= /DC=ORG/DC=SEE-GRID/CN=SEE-GRID CA; Issuer= /DC=ORG/DC=SEE-GRID/CN=SEE-GRID CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=4798da47; Subject= /DC=HK/DC=HKU/DC=GRID/CN=HKU Grid CA; Issuer= /DC=HK/DC=HKU/DC=GRID/CN=HKU Grid CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=55994d72; Subject= /C=RU/O=RDIG/CN=Russian Data-Intensive Grid CA; Issuer= /C=RU/O=RDIG/CN=Russian Data-Intensive Grid CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=5cf9d536; Subject= /C=BM/O=QuoVadis Limited/OU=Root Certification Authority/CN=QuoVadis Root Certification Authority; Issuer= /C=BM/O=QuoVadis Limited/OU=Root Certification Authority/CN=QuoVadis Root Certification Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=617ff41b; Subject= /C=JP/O=KEK/OU=CRC/CN=KEK GRID Certificate Authority; Issuer= /C=JP/O=KEK/OU=CRC/CN=KEK GRID Certificate Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=67e8acfa; Subject= /CN=Purdue TeraGrid RA/OU=Purdue TeraGrid/O=Purdue University/ST=Indiana/C=US; Issuer= /CN=PurdueCA/O=Purdue University/ST=Indiana/C=US; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=684261aa; Subject= /DC=EDU/DC=UTEXAS/DC=TACC/O=UT-AUSTIN/CN=TACC Root CA; Issuer= /DC=EDU/DC=UTEXAS/DC=TACC/O=UT-AUSTIN/CN=TACC Root CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=6e3b436b; Subject= /C=AT/O=AustrianGrid/OU=Certification Authority/CN=Certificate Issuer; Issuer= /C=AT/O=AustrianGrid/OU=Certification Authority/CN=Certificate Issuer; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=6fee79b0; Subject= /C=IL/O=IUCC/CN=IUCC/emailAddress=ca@mail.iucc.ac.il; Issuer= /C=IL/O=IUCC/CN=IUCC/emailAddress=ca@mail.iucc.ac.il; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=709bed08; Subject= /DC=by/DC=grid/O=uiip.bas-net.by/CN=Belarusian Grid Certification Authority; Issuer= /DC=by/DC=grid/O=uiip.bas-net.by/CN=Belarusian Grid Certification Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=712ae4cc; Subject= /DC=cz/DC=cesnet-ca/O=CESNET CA/CN=CESNET CA 3; Issuer= /DC=cz/DC=cesnet-ca/O=CESNET CA/CN=CESNET CA Root; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=71a89a47; Subject= /DC=TW/DC=ORG/DC=NCHC/CN=NCHC CA; Issuer= /DC=TW/DC=ORG/DC=NCHC/CN=NCHC CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=722e5071; Subject= /C=KR/O=KISTI/O=GRID/CN=KISTI Grid Certificate Authority; Issuer= /C=KR/O=KISTI/O=GRID/CN=KISTI Grid Certificate Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=742edd45; Subject= /DC=LV/DC=latgrid/CN=Certification Authority for Latvian Grid; Issuer= /DC=LV/DC=latgrid/CN=Certification Authority for Latvian Grid; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=75680d2e; Subject= /C=GB/ST=Greater Manchester/L=Salford/O=Comodo CA Limited/CN=AAA Certificate Services; Issuer= /C=GB/ST=Greater Manchester/L=Salford/O=Comodo CA Limited/CN=AAA Certificate Services; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=7721d4d3; Subject= /DC=NET/DC=PRAGMA-GRID/CN=PRAGMA-UCSD CA; Issuer= /DC=NET/DC=PRAGMA-GRID/CN=PRAGMA-UCSD CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=7b54708e; Subject= /C=MA/O=MaGrid/CN=MaGrid CA; Issuer= /C=MA/O=MaGrid/CN=MaGrid CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=7d0d064a; Subject= /C=MK/O=MARGI/CN=MARGI-CA; Issuer= /C=MK/O=MARGI/CN=MARGI-CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=82b36fca; Subject= /C=GR/O=HellasGrid/OU=Certification Authorities/CN=HellasGrid CA 2006; Issuer= /C=GR/O=HellasGrid/OU=Certification Authorities/CN=HellasGrid Root CA 2006; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=8a047de1; Subject= /C=TH/O=NECTEC/OU=GOC/CN=NECTEC GOC CA; Issuer= /C=TH/O=NECTEC/OU=GOC/CN=NECTEC GOC CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=8a661490; Subject= /C=PL/O=GRID/CN=Polish Grid CA; Issuer= /C=PL/O=GRID/CN=Polish Grid CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=95009ddc; Subject= /CN=PurdueCA/O=Purdue University/ST=Indiana/C=US; Issuer= /CN=PurdueCA/O=Purdue University/ST=Indiana/C=US; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=98ef0ee5; Subject= /C=UK/O=eScienceRoot/OU=Authority/CN=UK e-Science Root; Issuer= /C=UK/O=eScienceRoot/OU=Authority/CN=UK e-Science Root; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=99f9f5a3; Subject= /DC=gov/DC=fnal/O=Fermilab/OU=Certificate Authorities/CN=Kerberized CA HSM; Issuer= /DC=gov/DC=fnal/O=Fermilab/OU=Certificate Authorities/CN=Kerberized CA HSM; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=9b59ecad; Subject= /DC=cz/DC=cesnet-ca/CN=CESNET CA; Issuer= /DC=cz/DC=cesnet-ca/CN=CESNET CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=9b95bbf2; Subject= /C=US/O=National Center for Supercomputing Applications/OU=Certificate Authorities/CN=CACL; Issuer= /C=US/O=National Center for Supercomputing Applications/OU=Certificate Authorities/CN=CACL; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=9cd75e87; Subject= /C=TW/O=AS/CN=Academia Sinica Grid Computing Certification Authority Mercury; Issuer= /C=TW/O=AS/CN=Academia Sinica Grid Computing Certification Authority Mercury; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=9dd23746; Subject= /DC=es/DC=irisgrid/CN=IRISGridCA; Issuer= /DC=es/DC=irisgrid/CN=IRISGridCA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=9ec3a561; Subject= /C=US/ST=UT/L=Salt Lake City/O=The USERTRUST Network/OU=http://www.usertrust.com/CN=UTN-USERFirst-Client Authentication and Email; Issuer= /C=GB/ST=Greater Manchester/L=Salford/O=Comodo CA Limited/CN=AAA Certificate Services; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=9ff26ea4; Subject= /DC=MD/DC=MD-Grid/O=RENAM/OU=Certification Authority/CN=MD-Grid CA; Issuer= /DC=MD/DC=MD-Grid/O=RENAM/OU=Certification Authority/CN=MD-Grid CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=a02131f7; Subject= /C=DE/O=DFN-Verein/OU=DFN-PKI/CN=DFN SLCS-CA; Issuer= /C=DE/O=DFN-Verein/OU=DFN-PKI/CN=DFN SLCS-CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=a317c467; Subject= /C=JP/O=AIST/OU=GRID/CN=Certificate Authority; Issuer= /C=JP/O=AIST/OU=GRID/CN=Certificate Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=a87d9192; Subject= /C=JP/O=National Research Grid Initiative/OU=CGRD/CN=NAREGI CA; Issuer= /C=JP/O=National Research Grid Initiative/OU=CGRD/CN=NAREGI CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=a9082267; Subject= /DC=BR/DC=UFF/DC=IC/O=UFF LACGrid CA/CN=UFF Latin American and Caribbean Catch-all Grid CA; Issuer= /DC=BR/DC=UFF/DC=IC/O=UFF LACGrid CA/CN=UFF Latin American and Caribbean Catch-all Grid CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=afe55e66; Subject= /C=CY/O=CyGrid/O=HPCL/CN=CyGridCA; Issuer= /C=CY/O=CyGrid/O=HPCL/CN=CyGridCA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=b2771d44; Subject= /DC=CN/DC=Grid/CN=Root Certificate Authority at CNIC; Issuer= /DC=CN/DC=Grid/CN=Root Certificate Authority at CNIC; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=b7bcb7b2; Subject= /C=AR/O=e-Ciencia/OU=UNLP/L=CeSPI/CN=PKIGrid; Issuer= /C=AR/O=e-Ciencia/OU=UNLP/L=CeSPI/CN=PKIGrid; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=b93d6240; Subject= /DC=net/DC=ES/OU=Certificate Authorities/CN=NERSC Online CA; Issuer= /DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=ba2f39ca; Subject= /C=CN/O=HEP/CN=gridca-cn/emailAddress=gridca@ihep.ac.cn; Issuer= /C=CN/O=HEP/CN=gridca-cn/emailAddress=gridca@ihep.ac.cn; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=bffbd7d0; Subject= /C=CA/O=Grid/CN=Grid Canada Certificate Authority; Issuer= /C=CA/O=Grid/CN=Grid Canada Certificate Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=c48c63f3; Subject= /DC=CN/DC=Grid/DC=SDG/CN=Scientific Data Grid CA; Issuer= /DC=CN/DC=Grid/CN=Root Certificate Authority at CNIC; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=cc800af0; Subject= /C=HU/O=NIIF/OU=Certificate Authorities/CN=NIIF Root CA; Issuer= /C=HU/O=NIIF/OU=Certificate Authorities/CN=NIIF Root CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=ce33db76; Subject= /C=IR/O=IPM/O=IRAN-GRID/CN=IRAN-GRID CA; Issuer= /C=IR/O=IPM/O=IRAN-GRID/CN=IRAN-GRID CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=d0b701c0; Subject= /C=CH/O=Switch - Teleinformatikdienste fuer Lehre und Forschung/CN=SWITCHgrid Root CA; Issuer= /C=CH/O=Switch - Teleinformatikdienste fuer Lehre und Forschung/CN=SWITCHgrid Root CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=d0c2a341; Subject= /C=AM/O=ArmeSFo/CN=ArmeSFo CA; Issuer= /C=AM/O=ArmeSFo/CN=ArmeSFo CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=d11f973e; Subject= /C=FR/O=CNRS/CN=GRID2-FR; Issuer= /C=FR/O=CNRS/CN=CNRS2-Projets; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=d1737728; Subject= /C=SG/O=Netrust Certificate Authority 1/OU=Netrust CA1; Issuer= /C=SG/O=Netrust Certificate Authority 1/OU=Netrust CA1; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=d1b603c3; Subject= /DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1; Issuer= /DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=d254cc30; Subject= /DC=ch/DC=cern/CN=CERN Root CA; Issuer= /DC=ch/DC=cern/CN=CERN Root CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=da75f6a8; Subject= /DC=IN/DC=GARUDAINDIA/CN=Indian Grid Certification Authority; Issuer= /DC=IN/DC=GARUDAINDIA/CN=Indian Grid Certification Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=dd4b34ea; Subject= /C=DE/O=GermanGrid/CN=GridKa-CA; Issuer= /C=DE/O=GermanGrid/CN=GridKa-CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=e13e0fcf; Subject= /C=SK/O=SlovakGrid/CN=SlovakGrid CA; Issuer= /C=SK/O=SlovakGrid/CN=SlovakGrid CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=e5cc84c2; Subject= /DC=EDU/DC=UTEXAS/DC=TACC/O=UT-AUSTIN/CN=TACC Classic CA; Issuer= /DC=EDU/DC=UTEXAS/DC=TACC/O=UT-AUSTIN/CN=TACC Root CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=e72045ce; Subject= /C=BM/O=QuoVadis Limited/OU=Issuing Certification Authority/CN=QuoVadis Grid ICA; Issuer= /C=BM/O=QuoVadis Limited/OU=Root Certification Authority/CN=QuoVadis Root Certification Authority; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=e8ac4b61; Subject= /C=US/O=National Center for Supercomputing Applications/OU=Certificate Authorities/CN=GridShib CA; Issuer= /C=US/O=National Center for Supercomputing Applications/OU=Certificate Authorities/CN=GridShib CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=e8d818e6; Subject= /C=BE/OU=BEGRID/O=BELNET/CN=BEgrid CA; Issuer= /C=BE/OU=BEGRID/O=BELNET/CN=BEgrid CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=edca0fc0; Subject= /DC=cz/DC=cesnet-ca/O=CESNET CA/CN=CESNET CA Root; Issuer= /DC=cz/DC=cesnet-ca/O=CESNET CA/CN=CESNET CA Root; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=f2e89fe3; Subject= /C=US/O=National Center for Supercomputing Applications/OU=Certificate Authorities/CN=MyProxy; Issuer= /C=US/O=National Center for Supercomputing Applications/OU=Certificate Authorities/CN=MyProxy; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=f5ead794; Subject= /C=PK/O=NCP/CN=PK-GRID-CA; Issuer= /C=PK/O=NCP/CN=PK-GRID-CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
-Hash=ff94d436; Subject= /C=HR/O=edu/OU=srce/CN=SRCE CA; Issuer= /C=HR/O=edu/OU=srce/CN=SRCE CA; Accreditation=Unknown; Status=https://repo.grid.iu.edu/pacman/cadist/ca-certs-version
+[...]
 ```
-
-</details>
 
 Any certificate issued by any of the Certificate Authorities listed will be trusted. If in doubt please contact the [OSG Security Team](https://opensciencegrid.github.io/security) and review the policies of your home institution.
 
