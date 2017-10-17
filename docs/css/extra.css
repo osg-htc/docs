@@ -2,6 +2,7 @@
           width:100%;
           height: auto;
           overflow: auto;
+          margin-bottom: 24px;
         }
 
 .codehilite .hll { background-color: #ffffcc }
