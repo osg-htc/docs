@@ -383,5 +383,5 @@ Some examples about verifying the certificates:
 
 Related software:
 
--   Description, manual and examples of [osg-ca-manage](..security/osg-ca-manage)
+-   Description, manual and examples of [osg-ca-manage](../security/osg-ca-manage)
 -   [osg-ca-certs-updater](osg-ca-certs-updater)
