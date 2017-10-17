@@ -9,7 +9,6 @@ extra_css:
 
 pages:
 - Home: 'index.md'
-- Installation Overview: 'install-overview.md'
 - Site Planning: 'site-planning.md'
 - Install Guides - Common:
   - 'Install Best Practices': 'common/install-best-practices.md'
@@ -62,7 +61,6 @@ pages:
   - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
   - 'Network Performance Toolkit': 'other/network-performance-toolkit.md'
 - Monitoring:
-  - 'RSV Overview': 'monitoring/rsv-overview.md'
   - 'Install RSV': 'monitoring/install-rsv.md'
   - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
   - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'

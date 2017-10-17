@@ -288,7 +288,7 @@ How to get Help?
 
 If you cannot resolve the problem or have general questions, there are several ways to receive help:
 
--   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.grid.iu.edu/goc).
+-   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.opensciencegrid.org/goc).
 -   For community support and best-effort software team support contact <osg-software@opensciencegrid.org>.
 
 For a full set of help options, see [Help Procedure](../common/help).

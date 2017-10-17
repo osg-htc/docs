@@ -29,7 +29,7 @@ The OSG PKI Command Line Clients are tested to work on Python version 2.4+. They
 Requesting host/service certificate using OIM
 ==================================================
 
-The OSG PKI Certificate Request & Management System can be found at: <https://oim.grid.iu.edu/oim/certificate>.
+The OSG PKI Certificate Request & Management System can be found at: <https://oim.opensciencegrid.org/oim/certificate>.
 
 For instructions on how to request a host or service certificate using the Web interface please see the [user guide maintained by GOC](https://confluence.grid.iu.edu/pages/viewpage.action?pageId=3244064).
 

@@ -61,7 +61,7 @@ The Glidein WMS Frontend installation will create the following users unless the
 | `frontend` | none        | This user runs the glideinWMS VO frontend. It also owns the credentials forwarded to the factory to use for the glideins.      |
 | `gratia`   | none        | Runs the Gratia probes to collect accounting data (optional see [the Gratia section below](#adding-gratia-accounting-and-a-local-monitoring-page-on-a-production-server)) |
 
-Note that if uid 48 is already taken but not used for the appropriate users, you will experience errors. [Details...](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/KnownProblems#Reserved_user_ids_especially_for)
+Note that if uid 48 is already taken but not used for the appropriate users, you will experience errors. [Details...](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/KnownProblems#Reserved_user_ids_especially_for)
 
 Credentials and Proxies
 -----------------------
@@ -968,7 +968,7 @@ References
 Definitions:
 
 -   What is a [Virtual Organisation](https://www.opensciencegrid.org/about/organization/)
--   [Introduction to the Grid for users/scientists](http://twiki.grid.iu.edu/bin/view/Documentation/UsingTheGrid)
+-   [Introduction to the Grid for users/scientists](http://twiki.opensciencegrid.org/bin/view/Documentation/UsingTheGrid)
 
 Documents about the Glidein-WMS system and the VO frontend:
 

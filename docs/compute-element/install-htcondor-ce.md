@@ -381,8 +381,8 @@ Registering the CE
 
 To be part of the OSG Production Grid, your CE must be registered in the [OSG Information Management System](https://oim.opensciencegrid.org) (OIM). To register your resource:
 
-1.  [Obtain, install, and verify your user certificate](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CertificateUserGet) (which you may have done already)
-2.  [Register your site and CE in OIM](https://twiki.grid.iu.edu/bin/view/Operations/OIMRegistrationInstructions)
+1.  [Obtain, install, and verify your user certificate](../security/user-certs) (which you may have done already)
+2.  [Register your site and CE in OIM](https://twiki.opensciencegrid.org/bin/view/Operations/OIMRegistrationInstructions)
 
 Getting Help
 ------------
@@ -430,7 +430,7 @@ The following users are needed by HTCondor-CE at all sites:
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` |
 | Host key         | `root`                     | `/etc/grid-security/hostkey.pem`  |
 
-Find instructions to request a host certificate [here](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/GetHostServiceCertificates).
+Find instructions to request a host certificate [here](../security/host-certs).
 
 ### Networking
 

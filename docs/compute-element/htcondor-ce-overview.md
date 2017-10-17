@@ -15,7 +15,7 @@ Before continuing with this document, make sure that you are familiar with the f
 -   An OSG site plan
     -   What is a batch system and which one will you use ([HTCondor](http://htcondor.org/), PBS, LSF, SGE, or SLURM)?
     -   Security in the OSG via [GSI](http://toolkit.globus.org/toolkit/docs/3.2/security.html) (i.e., [Certificate authorities](https://en.wikipedia.org/wiki/Certificate_authority), user and host [certificates](https://en.wikipedia.org/wiki/Public_key_certificate), proxies)
--   Pilot jobs, frontends, and factories (i.e., [GlideinWMS](http://glideinwms.fnal.gov/doc.prd/index.html), [AutoPyFactory](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/AutoPyFactory))
+-   Pilot jobs, frontends, and factories (i.e., [GlideinWMS](http://glideinwms.fnal.gov/doc.prd/index.html), AutoPyFactory)
 
 What is a Compute Element?
 --------------------------
@@ -75,7 +75,7 @@ With non-HTCondor batch systems, HTCondor-CE cannot use internal HTCondor protoc
 
 ### Over SSH
 
-[HTCondor-CE-Bosco](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorBosco) is a special configuration of HTCondor-CE that can submit jobs to a remote cluster over SSH. The HTCondor-CE-Bosco provides a simple starting point for opportunistic resource owners that want to start contributing to the OSG with minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a submit node in their cluster.
+HTCondor-CE-Bosco is a special configuration of HTCondor-CE that can submit jobs to a remote cluster over SSH. The HTCondor-CE-Bosco provides a simple starting point for opportunistic resource owners that want to start contributing to the OSG with minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a submit node in their cluster.
 
 ![HTCondor-CE-Bosco](../images/HTCondorCEBosco.png)
 
@@ -87,7 +87,7 @@ How the CE is Customized
 Aside from the [basic configuration](install-htcondor-ce#configuring-htcondor-ce) required in the CE installation, there are two main ways to customize your CE (if you decide any customization is required at all):
 
 -   **Deciding which VOs are allowed to run at your site:** The method of limiting the VOs that are allowed to run on your site has not changed between GRAM and HTCondor-CE’s: select an authorization system, GUMS or edg-mkgridmap, and configure it accordingly.
--   **How to filter and transform the grid jobs to be run on your batch system:** Filtering and transforming grid jobs (i.e., setting site-specific attributes or resource limits), requires configuration of your site’s job routes. For examples of common job routes, consult the [JobRouter recipes](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/JobRouterRecipes) page.
+-   **How to filter and transform the grid jobs to be run on your batch system:** Filtering and transforming grid jobs (i.e., setting site-specific attributes or resource limits), requires configuration of your site’s job routes. For examples of common job routes, consult the [JobRouter recipes](job-router-recipes) page.
 
 !!! note
     If you are running HTCondor as your batch system, you will have two HTCondor configurations side-by-side (one residing in `/etc/condor/` and the other in `/etc/condor-ce`) and will need to make sure to differentiate the two when editing any configuration.
@@ -106,8 +106,7 @@ Next steps
 
 If you're transitioning from a GRAM CE to HTCondor-CE, the process is the same as if you were setting up a completely new CE, whether you're installing it on a new machine or alongside your GRAM CE.
 
--   Install [HTCondor-CE](install-htcondor-ce) or [HTCondor-CE-Bosco](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallHTCondorBosco)
--   Setting up [job routes](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/JobRouterRecipes)
+-   Setting up [job routes](job-router-recipes)
 -   [Submitting](submit-htcondor-ce) jobs to HTCondor-CE
 -   [Troubleshooting](troubleshoot-htcondor-ce) HTCondor-CE
 -   Register the CE with OIM
