@@ -141,9 +141,6 @@ Normally `fetch-crl` is installed when you install the rest of the software and 
 to specifically install it. If you do wish to install it, you can install it as:
 
 ``` console
-%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-root@host # yum install fetch-crl3
-%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
 root@host # yum install fetch-crl
 ```
 
@@ -152,10 +149,6 @@ root@host # yum install fetch-crl
 To enable fetch-crl (fetch Certificate Revocation Lists) services by default on the node:
 
 ``` console
-%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-root@host # /sbin/chkconfig fetch-crl3-boot on
-root@host # /sbin/chkconfig fetch-crl3-cron on
-%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
 root@host # /sbin/chkconfig fetch-crl-boot on
 root@host # /sbin/chkconfig fetch-crl-cron on
 ```
@@ -163,10 +156,6 @@ root@host # /sbin/chkconfig fetch-crl-cron on
 To start fetch-crl:
 
 ``` console
-%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-root@host # /sbin/service fetch-crl3-boot start
-root@host # /sbin/service fetch-crl3-cron start
-%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
 root@host # /sbin/service fetch-crl-boot start
 root@host # /sbin/service fetch-crl-cron start
 ```
@@ -176,7 +165,7 @@ root@host # /sbin/service fetch-crl-cron start
 
 ### Configure `fetch-crl`
 
-To modify the times that fetch-crl-cron runs, edit `/etc/cron.d/fetch-crl` (or `/etc/cron.d/fetch-crl3` depending on the version you have).
+To modify the times that fetch-crl-cron runs, edit `/etc/cron.d/fetch-crl`.
 
 By default, `fetch-crl` connects directly to the remote CA; this is
 inefficient and potentially harmful if done simultaneously by many nodes
@@ -186,22 +175,13 @@ HTTP proxy (such as `squid`) the worker nodes can utilize; OSG provides
 
 To configure fetch-crl to use an HTTP proxy server:
 
--   If using `fetch-crl` version 2 (the `fetch-crl` package on RHEL5 only), then create the file `/etc/sysconfig/fetch-crl` and add the following line:
+Create or edit the file `/etc/fetch-crl.conf` and add the following line:
 
-        :::bash
-        export http_proxy=%RED%http://your.squid.fqdn:port%ENDCOLOR%
+``` bash
+http_proxy=%RED%http://your.squid.fqdn:port%ENDCOLOR%
+```
 
-    Adjust the URL appropriately for your proxy server.
-
--   If using `fetch-crl` version 3 on RHEL5 via the `fetch-crl3` package
-    or on RHEL6/RHEL7 via the `fetch-crl` package, then create or edit the
-    file `/etc/fetch-crl3.conf` (RHEL5) or `/etc/fetch-crl.conf`
-    (RHEL6/RHEL7) and add the following line:
-
-        :::bash
-        http_proxy=%RED%http://your.squid.fqdn:port%ENDCOLOR%
-
-    Again, adjust the URL appropriately for your proxy server.
+Again, adjust the URL appropriately for your proxy server.
 
 Note that the **`nosymlinks`** option in the configuration files refers
 to ignoring links within the certificates directory (e.g. two different
@@ -210,7 +190,7 @@ certificates directory itself (`infodir`) is a link to a directory.
 
 Any modifications to the configuration file will be preserved during an RPM update.
 
-Current versions of `fetch-crl` and `fetch-crl3` produce more output.
+Current versions of `fetch-crl` produce more output.
 It is possible to send the output to syslog instead of the default email system. To do so:
 
 1.  Change the configuration file to enable syslog:
@@ -226,11 +206,6 @@ It is possible to send the output to syslog instead of the default email system.
 You need to fetch the latest CA Certificate Revocation Lists (CRLs) and you should enable the fetch-crl service to keep the CRLs up to date:
 
 ``` console
-%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-root@host # /usr/sbin/fetch-crl3 # This fetches the CRLs
-root@host # /sbin/service fetch-crl3-boot start
-root@host # /sbin/service fetch-crl3-cron start
-%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7%ENDCOLOR%
 root@host # /usr/sbin/fetch-crl # This fetches the CRLs
 root@host # /sbin/service fetch-crl-boot start
 root@host # /sbin/service fetch-crl-cron start
@@ -239,10 +214,6 @@ root@host # /sbin/service fetch-crl-cron start
 To enable the `fetch-crl` service to keep the CRLs up to date after reboots:
 
 ``` console
-%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-root@host # /sbin/chkconfig fetch-crl3-boot on
-root@host # /sbin/chkconfig fetch-crl3-cron on
-%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
 root@host # /sbin/chkconfig fetch-crl-boot on
 root@host # /sbin/chkconfig fetch-crl-cron on
 ```
@@ -250,10 +221,6 @@ root@host # /sbin/chkconfig fetch-crl-cron on
 To stop `fetch-crl`:
 
 ``` console
-%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-root@host # /sbin/service fetch-crl3-boot stop
-root@host # /sbin/service fetch-crl3-cron stop
-%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
 root@host # /sbin/service fetch-crl-boot stop
 root@host # /sbin/service fetch-crl-cron stop
 ```
@@ -261,10 +228,6 @@ root@host # /sbin/service fetch-crl-cron stop
 To disable the fetch-crl service:
 
 ``` console
-%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
-root@host # /sbin/chkconfig fetch-crl3-boot off
-root@host # /sbin/chkconfig fetch-crl3-cron off
-%RED%# For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 %ENDCOLOR%
 root@host # /sbin/chkconfig fetch-crl-boot off
 root@host # /sbin/chkconfig fetch-crl-cron off
 ```
@@ -310,12 +273,11 @@ Configuration files:
 | Package                       | File Description                        | Location                                                                                    | Comment                                                                                                         |
 |:------------------------------|:----------------------------------------|:--------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|
 | All CA Packages               | CA File Location                        | `/etc/grid-security/certificates`                                                           |                                                                                                                 |
-| All CA Packages               | Index files                             | `/etc/grid-security/certificates/INDEX.html` or `/etc/grid-security/certificates/INDEX.txt` | Latest version also available at <http://repo.grid.iu.edu/pacman/cadist/>                                   |
-| All CA Packages               | Change Log                              | `/etc/grid-security/certificates/CHANGES`                                                   | Latest version also available at <http://repo.grid.iu.edu/pacman/cadist/CHANGES>                            |
+| All CA Packages               | Index files                             | `/etc/grid-security/certificates/INDEX.html` or `/etc/grid-security/certificates/INDEX.txt` | Latest version also available at <http://repo.grid.iu.edu/pacman/cadist/>                                       |
+| All CA Packages               | Change Log                              | `/etc/grid-security/certificates/CHANGES`                                                   | Latest version also available at <http://repo.grid.iu.edu/pacman/cadist/CHANGES>                                |
 | osg-ca-certs or igtf-ca-certs | contain only CA files                   |                                                                                             |                                                                                                                 |
 | osg-ca-scripts                | Configuration File for osg-update-certs | `/etc/osg/osg-update-certs.conf`                                                            | This file may be edited by hand, though it is recommended to use osg-ca-manage to set configuration parameters. |
-| fetch-crl-2.x                 | Configuration file                      | `/etc/fetch-crl.conf`                                                                       |                                                                                                                 |
-| fetch-crl-3.x                 | Configuration file                      | `/etc/fetch-crl3.conf`                                                                      |                                                                                                                 |
+| fetch-crl-3.x                 | Configuration file                      | `/etc/fetch-crl.conf`                                                                      |                                                                                                                  |
 
 The index and change log files contain a summary of all the CA distributed and their version.
 
@@ -334,7 +296,11 @@ Tests
 To test the host certificate of a server `openssl s_client` can be used. Here is an example with the gatekeeper:
 
 ``` console
-user@host $ openssl s_client -showcerts -cert /etc/grid-security/hostcert.pem -key /etc/grid-security/hostkey.pem -CApath /etc/grid-security/certificates/ -debug -connect osg-gk.mwt2.org:2119
+user@host $ openssl s_client -showcerts \
+    -cert /etc/grid-security/hostcert.pem \
+    -key /etc/grid-security/hostkey.pem \
+    -CApath /etc/grid-security/certificates/ \
+    -debug -connect osg-gk.mwt2.org:2119
 ```
 
 Frequently Asked Questions
@@ -398,7 +364,7 @@ If for some extraordinary reason you need to manually update the CA you could ru
 
 ### Where are the configuration files for fetch-crl?
 
-`/etc/fetch-crl.conf` or `/etc/fetch-crl3.conf` for fetch-crl 2.x or 3.x respectively
+`/etc/fetch-crl.conf`
 
 References
 ==========
@@ -417,5 +383,5 @@ Some examples about verifying the certificates:
 
 Related software:
 
--   Description, manual and examples of [osg-ca-manage](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaManage)
+-   Description, manual and examples of [osg-ca-manage](..security/osg-ca-manage)
 -   [osg-ca-certs-updater](osg-ca-certs-updater)
