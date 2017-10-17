@@ -9,7 +9,6 @@ extra_css:
 
 pages:
 - Home: 'index.md'
-- Installation Overview: 'install-overview.md'
 - Site Planning: 'site-planning.md'
 - Install Guides - Common:
   - 'Install Best Practices': 'common/install-best-practices.md'
