@@ -38,7 +38,7 @@ root@host # rpm -i https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.
 root@host # rpm -i https://repo.grid.iu.edu/osg/3.4/osg-3.4-el6-release-latest.rpm 
 root@host # yum install --enablerepo=cernvm-kernel --disablerepo=cernvm kernel aufs2-util cvmfs-server.x86_64 cvmfs.x86_64 cvmfs-config-osg 
 root@host # echo "cvmfs_server mount -a" >>/etc/rc.local 
-root@host # reboot</pre>
+root@host # reboot
 ```
 <br/>
 This is the procedure for installing on a Redhat EL7-based system:
@@ -47,7 +47,7 @@ This is the procedure for installing on a Redhat EL7-based system:
 root@host # rpm -i https://repo.grid.iu.edu/osg/3.4/osg-3.4-el7-release-latest.rpm 
 root@host # yum install cvmfs-server.x86_64 osg-oasis 
 root@host # echo "cvmfs_server mount -a" >>/etc/rc.local
-root@host # chmod +x /etc/rc.local</pre>
+root@host # chmod +x /etc/rc.local
 ```
 <br/>
 In addition, apache should listen on port 8000, have KeepAlive enabled, and be started. Use commands like these:
