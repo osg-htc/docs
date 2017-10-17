@@ -215,10 +215,8 @@ It is possible to send the output to syslog instead of the default email system.
 
 1.  Change the configuration file to enable syslog:
 
-      ```
-      logmode = syslog
-      syslogfacility = daemon\</pre\>
-      ```
+        logmode = syslog
+        syslogfacility = daemon
 
 1.  Make sure the file `/var/log/daemon` exists, e.g. touching the file
 2.  Change `/etc/logrotate.d` files to rotate it
