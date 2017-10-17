@@ -397,12 +397,6 @@
         <li class="">
           
   
-    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
-  
-        </li>
-        <li class="">
-          
-  
     <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
   
         </li>
@@ -786,7 +780,7 @@
 <h2 id="about-this-document">About This Document<a class="headerlink" href="#about-this-document" title="Permanent link">&para;</a></h2>
 <p>This document introduces YUM repositories and how OSG uses them.</p>
 <h2 id="repositories">Repositories<a class="headerlink" href="#repositories" title="Permanent link">&para;</a></h2>
-<p>OSG hosts four public-facing repositories at <a href="http://repo.grid.iu.edu/">repo.grid.iu.edu</a>:</p>
+<p>OSG hosts four public-facing repositories at <a href="http://repo.opensciencegrid.org/">repo.opensciencegrid.org</a>:</p>
 <ul>
 <li><strong>release</strong>: This repository contains software that we are willing to support and can be used by the general community.</li>
 <li><strong>contrib</strong>: RPMs contributed from outside the OSG.</li>
@@ -872,18 +866,21 @@
 <tbody>
 <tr>
 <td align="left"><strong>OSG 3.3</strong></td>
-<td align="center"><code>https://repo.grid.iu.edu/osg/3.3/osg-3.3-el6-release-latest.rpm</code></td>
-<td align="center"><code>https://repo.grid.iu.edu/osg/3.3/osg-3.3-el7-release-latest.rpm</code></td>
+<td align="center"><code>https://repo.opensciencegrid.org/osg/3.3/osg-3.3-el6-release-latest.rpm</code></td>
+<td align="center"><code>https://repo.opensciencegrid.org/osg/3.3/osg-3.3-el7-release-latest.rpm</code></td>
 </tr>
 <tr>
 <td align="left"><strong>OSG 3.4</strong></td>
-<td align="center"><code>https://repo.grid.iu.edu/osg/3.4/osg-3.4-el6-release-latest.rpm</code></td>
-<td align="center"><code>https://repo.grid.iu.edu/osg/3.4/osg-3.4-el7-release-latest.rpm</code></td>
+<td align="center"><code>https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm</code></td>
+<td align="center"><code>https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="priorities">Priorities<a class="headerlink" href="#priorities" title="Permanent link">&para;</a></h2>
-<p><span class="twiki-macro NOTE"></span> Make sure you installed the Yum priorities plugin, as described above. Not doing so is a common mistake that causes failed installations.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure you installed the Yum priorities plugin, as described above. Not doing so is a common mistake that causes failed installations.</p>
+</div>
 <p>The only OSG repository enabled by default is the release one. If you want to enable another one, such as <code>osg-testing</code>, then edit its file (e.g. <code>/etc/yum.repos.d/osg-testing.repo</code>) and change the enabled option from 0 to 1:</p>
 <div class="codehilite"><pre><span></span><span class="k">[osg-testing]</span>
 <span class="na">name</span><span class="o">=</span><span class="s">OSG Software for Enterprise Linux 5 - Testing - $basearch</span>

@@ -403,12 +403,6 @@
         <li class="">
           
   
-    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
-  
-        </li>
-        <li class="">
-          
-  
     <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
   
         </li>
@@ -807,7 +801,7 @@
 <p><code>/srv/cvmfs</code> will hold all the published data, so make sure it is large enough to hold all the repositories hosted on the machine. <code>/var/spool/cvmfs</code> will hold files during publish, so it should be large enough to hold the most amount of data that might be attempted to be published at once. In addition, on EL7 and cvmfs-server-2.4.1, <code>/var/spool/cvmfs</code> needs to be of filesystem type 'ext3' or 'ext4', or the <code>cvmfs_server</code> command will not allow it. There is a variable to override the filesystem type check, but other filesystem types are not guaranteed to work (xfs created with <code>ftype=1</code> should work with <code>CVMFS_DONT_CHECK_OVERLAYFS_VERSION=yes</code>).</p>
 <p>This is a procedure for installing it on a Redhat EL6-based system:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -i https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm 
-<span class="gp">root@host #</span> rpm -i https://repo.grid.iu.edu/osg/3.4/osg-3.4-el6-release-latest.rpm 
+<span class="gp">root@host #</span> rpm -i https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm 
 <span class="gp">root@host #</span> yum install --enablerepo<span class="o">=</span>cernvm-kernel --disablerepo<span class="o">=</span>cernvm kernel aufs2-util cvmfs-server.x86_64 cvmfs.x86_64 cvmfs-config-osg 
 <span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;cvmfs_server mount -a&quot;</span> &gt;&gt;/etc/rc.local 
 <span class="gp">root@host #</span> reboot
@@ -815,7 +809,7 @@
 
 
 <p>This is the procedure for installing on a Redhat EL7-based system:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -i https://repo.grid.iu.edu/osg/3.4/osg-3.4-el7-release-latest.rpm 
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -i https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm 
 <span class="gp">root@host #</span> yum install cvmfs-server.x86_64 osg-oasis 
 <span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;cvmfs_server mount -a&quot;</span> &gt;&gt;/etc/rc.local
 <span class="gp">root@host #</span> chmod +x /etc/rc.local

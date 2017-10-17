@@ -436,12 +436,6 @@
         <li class="">
           
   
-    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
-  
-        </li>
-        <li class="">
-          
-  
     <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
   
         </li>
@@ -911,7 +905,7 @@
 <span class="go">CA Certificates will be installed into /etc/grid-security/certificates</span>
 <span class="go">osg-update-certs</span>
 <span class="go">  Log file: /var/log/osg-update-certs.log</span>
-<span class="go">  Updates from: https://repo.grid.iu.edu/pacman/cadist/ca-certs-version-new</span>
+<span class="go">  Updates from: https://repo.opensciencegrid.org/pacman/cadist/ca-certs-version-new</span>
 
 <span class="go">Will update CA certificates from version unknown to version 1.21NEW.</span>
 <span class="go">Update successful.</span>
@@ -932,7 +926,7 @@
 </pre></div>
 
 
-<p>A complete set of options available though <code>osg-ca-manage</code> command, including your interface to adding and removing CAs, could be found at <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaManage">osg-ca-manage documentation</a></p>
+<p>A complete set of options available though <code>osg-ca-manage</code> command, including your interface to adding and removing CAs, could be found at <a href="../../security/osg-ca-manage">osg-ca-manage documentation</a></p>
 <h2 id="option-3-install-an-rpm-that-installs-no-cas">Option 3: Install an RPM that installs no CAs<a class="headerlink" href="#option-3-install-an-rpm-that-installs-no-cas" title="Permanent link">&para;</a></h2>
 <p>Install this with:</p>
 <div class="codehilite"><pre><span></span><span class="go">yum install empty-ca-certs –-enablerepo=osg-empty</span>
@@ -1107,13 +1101,13 @@ syslogfacility = daemon
 <td align="left">All CA Packages</td>
 <td align="left">Index files</td>
 <td align="left"><code>/etc/grid-security/certificates/INDEX.html</code> or <code>/etc/grid-security/certificates/INDEX.txt</code></td>
-<td align="left">Latest version also available at <a href="http://repo.grid.iu.edu/pacman/cadist/">http://repo.grid.iu.edu/pacman/cadist/</a></td>
+<td align="left">Latest version also available at <a href="http://repo.opensciencegrid.org/pacman/cadist/">http://repo.opensciencegrid.org/pacman/cadist/</a></td>
 </tr>
 <tr>
 <td align="left">All CA Packages</td>
 <td align="left">Change Log</td>
 <td align="left"><code>/etc/grid-security/certificates/CHANGES</code></td>
-<td align="left">Latest version also available at <a href="http://repo.grid.iu.edu/pacman/cadist/CHANGES">http://repo.grid.iu.edu/pacman/cadist/CHANGES</a></td>
+<td align="left">Latest version also available at <a href="http://repo.opensciencegrid.org/pacman/cadist/CHANGES">http://repo.opensciencegrid.org/pacman/cadist/CHANGES</a></td>
 </tr>
 <tr>
 <td align="left">osg-ca-certs or igtf-ca-certs</td>
@@ -1191,9 +1185,9 @@ syslogfacility = daemon
 <ul>
 <li><a href="http://dist.eugridpma.info/distribution/igtf/current/">IGTF Distribution of Authority Root Certificates</a> (CAs accredited by the <a href="http://igtf.net/">International Grid Trust Federation</a>)</li>
 </ul>
-<p>Details of CAs in OSG distribution can be found <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/CaDistribution#Contents">here</a>. For additional details what is in the current release, see the <a href="http://repo.grid.iu.edu/pacman/cadist/">distribution site</a> and <a href="http://repo.grid.iu.edu/pacman/cadist/CHANGES">change log</a>.</p>
+<p>Details of CAs in OSG distribution can be found <a href="#contents-of-osg-ca-package">here</a>. For additional details what is in the current release, see the <a href="http://repo.opensciencegrid.org/pacman/cadist/">distribution site</a> and <a href="http://repo.opensciencegrid.org/pacman/cadist/CHANGES">change log</a>.</p>
 <h3 id="how-can-i-add-or-remove-a-particular-ca-file">How can I add or remove a particular CA file?<a class="headerlink" href="#how-can-i-add-or-remove-a-particular-ca-file" title="Permanent link">&para;</a></h3>
-<p>Add and remove of CA files are supported only if you CA files are being installed using <code>osg-update-certs</code>, which is included in the <code>osg-ca-scripts</code> package (option 2), for all other options no support for adding and removing a particular CA file is provided by OSG. The preferred approach to add or remove a CA is to use <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaManage">osg-ca-manage</a>. For adding a new CA <code>osg-ca-manage add [--dir &lt;local_dir&gt;] --hash &lt;CA_hash&gt;</code> may be used, while a CA is removed using <code>osg-ca-manage remove --hash &lt;CA_hash&gt;</code>.</p>
+<p>Add and remove of CA files are supported only if you CA files are being installed using <code>osg-update-certs</code>, which is included in the <code>osg-ca-scripts</code> package (option 2), for all other options no support for adding and removing a particular CA file is provided by OSG. The preferred approach to add or remove a CA is to use <a href="../../security/osg-ca-manage">osg-ca-manage</a>. For adding a new CA <code>osg-ca-manage add [--dir &lt;local_dir&gt;] --hash &lt;CA_hash&gt;</code> may be used, while a CA is removed using <code>osg-ca-manage remove --hash &lt;CA_hash&gt;</code>.</p>
 <h3 id="are-there-any-log-files-or-configuration-files-associated-with-ca-certificate-package">Are there any log files or configuration files associated with CA certificate package?<a class="headerlink" href="#are-there-any-log-files-or-configuration-files-associated-with-ca-certificate-package" title="Permanent link">&para;</a></h3>
 <p>If CA files are installed using <code>osg-ca-certs</code> or <code>igtf-ca-certs</code> rpms (i.e. options 1, 4) no log or configuration files are present.</p>
 <p>Log and configuration files are however present for <code>osg-ca-scripts</code> rpm package (option 2).</p>

@@ -403,12 +403,6 @@
         <li class="">
           
   
-    <a class="" href="../../monitoring/rsv-overview/">RSV Overview</a>
-  
-        </li>
-        <li class="">
-          
-  
     <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
   
         </li>
@@ -839,19 +833,19 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 <h2 id="repository-mirrors">Repository Mirrors<a class="headerlink" href="#repository-mirrors" title="Permanent link">&para;</a></h2>
 <p>A local yum mirror allows you to reduce the amount of external bandwidth used when updating or installing packages.</p>
 <p>Add the following to a file in <code>/etc/cron.d</code>:</p>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">RANDOM</span> * * * * root rsync -aH rsync://repo.grid.iu.edu/osg/ /var/www/html/osg/</span>
+<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">RANDOM</span> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/ /var/www/html/osg/</span>
 </pre></div>
 
 
 <p>Or, to mirror only a single repository:</p>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">RANDOM</span> * * * * root rsync -aH rsync://repo.grid.iu.edu/osg/<span style="color:red">OSG_RELEASE</span>/el6/development /var/www/html/osg/<span style="color:red">OSG_RELEASE</span>/el6</span>
+<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">RANDOM</span> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/<span style="color:red">OSG_RELEASE</span>/el6/development /var/www/html/osg/<span style="color:red">OSG_RELEASE</span>/el6</span>
 </pre></div>
 
 
 <p>Replace <span style="color:red">RANDOM</span> with a number between 0 and 59.</p>
 <p>Replace <span style="color:red">OSG_RELEASE</span> with the OSG release you want to use (e.g. '3.3', or '3.4').</p>
 <p>On your worker node, you can replace the <code>baseurl</code> line of <code>/etc/yum.repos.d/osg.repo</code> with the appropriate URL for your mirror.</p>
-<p>If you are interested in having your mirror be part of the OSG's default set of mirrors, <a href="https://ticket.grid.iu.edu/">please file a GOC ticket</a>.</p>
+<p>If you are interested in having your mirror be part of the OSG's default set of mirrors, <a href="https://ticket.opensciencegrid.org/">please file a GOC ticket</a>.</p>
 <h2 id="ca-certificate-installation-considerations">CA Certificate Installation Considerations<a class="headerlink" href="#ca-certificate-installation-considerations" title="Permanent link">&para;</a></h2>
 <p>CAs are distributed in two ways:</p>
 <ul>

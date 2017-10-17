@@ -374,12 +374,6 @@
 		
   <span class="caption-text">Monitoring</span>
   <ul class="subnav">
-        <li class="">
-          
-  
-    <a class="" href="../rsv-overview/">RSV Overview</a>
-  
-        </li>
         <li class=" current">
           
   
@@ -798,10 +792,10 @@
 <p>The Resource and Service Validation (RSV) software provides OSG site administrators a scalable and easy-to-maintain resource and service monitoring infrastructure. The components of RSV are:</p>
 <ul>
 <li><strong>RSV Client.</strong> The client tools allow a site administrator to run tests against their site by providing a set of tests (which can run on the same or other hosts within a site), HTCondor-Cron for scheduling, and tools for collecting and storing the results (using Gratia). The client package is not installed by default and may be installed on a CE or other host. Generally, you configure the RSV client to run tests at scheduled time intervals and then it makes results available on a local website. Also, the client can upload test results to a central collector (see next item).</li>
-<li><strong>RSV Collector/Server.</strong> The central OSG RSV Collector accepts and stores results from RSV clients throughout OSG, which can be viewed in <a href="http://myosg.grid.iu.edu/">MyOSG</a>, on the “Current RSV Status” page and under the “Resource Group” menu.</li>
-<li><strong>Periodic Availability Reports.</strong> The availability of all active registered OSG resources and the services running on each of those resources is calculated using the results received for <a href="https://twiki.grid.iu.edu/bin/view/Operations/RsvEquivalency#Critical_Tests_for_OSG_Resources&gt;">critical metrics</a>. Once a day, these availability numbers are <a href="http://rsv.grid.iu.edu/daily-reports">published online</a> (More information: <a href="https://twiki.grid.iu.edu/bin/view/Operations/RSVPeriodicReporting">Outline of reports</a>).</li>
-<li><strong>RSV-SAM Transport.</strong> The WLCG RSV-SAM Transport infrastructure pushes out RSV results, for resources that are flagged to be part of the WLCG Interoperability agreement, from the GOC collector to WLCG's Service Availability Monitoring (SAM) system. More information on viewing these results is <a href="https://twiki.grid.iu.edu/twiki/bin/view/Operations/RsvSAMGridView">available here</a>.</li>
-<li><strong>MyOSG and OIM Links.</strong> RSV picks up resource information, WLCG interoperability information, etc., from a MyOSG resource group summary listing, which is in turn based on the <a href="https://oim.grid.iu.edu">OSG Information Management (OIM) (topology) system</a> (Requires registration). Resource <a href="https://twiki.grid.iu.edu/twiki/bin/view/Operations/OIMMaintTool">maintenance scheduled on OIM</a> are forwarded to WLCG SAM, if applicable.</li>
+<li><strong>RSV Collector/Server.</strong> The central OSG RSV Collector accepts and stores results from RSV clients throughout OSG, which can be viewed in <a href="http://my.opensciencegrid.org/">MyOSG</a>, on the “Current RSV Status” page and under the “Resource Group” menu.</li>
+<li><strong>Periodic Availability Reports.</strong> The availability of all active registered OSG resources and the services running on each of those resources is calculated using the results received for <a href="https://twiki.opensciencegrid.org/bin/view/Operations/RsvEquivalency#Critical_Tests_for_OSG_Resources&gt;">critical metrics</a>. Once a day, these availability numbers are <a href="http://rsv.opensciencegrid.org/daily-reports">published online</a> (More information: <a href="https://twiki.opensciencegrid.org/bin/view/Operations/RSVPeriodicReporting">Outline of reports</a>).</li>
+<li><strong>RSV-SAM Transport.</strong> The WLCG RSV-SAM Transport infrastructure pushes out RSV results, for resources that are flagged to be part of the WLCG Interoperability agreement, from the GOC collector to WLCG's Service Availability Monitoring (SAM) system. More information on viewing these results is <a href="https://twiki.opensciencegrid.org/twiki/bin/view/Operations/RsvSAMGridView">available here</a>.</li>
+<li><strong>MyOSG and OIM Links.</strong> RSV picks up resource information, WLCG interoperability information, etc., from a MyOSG resource group summary listing, which is in turn based on the <a href="https://oim.opensciencegrid.org">OSG Information Management (OIM) (topology) system</a> (Requires registration). Resource <a href="https://twiki.opensciencegrid.org/twiki/bin/view/Operations/OIMMaintTool">maintenance scheduled on OIM</a> are forwarded to WLCG SAM, if applicable.</li>
 </ul>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
@@ -993,10 +987,37 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 </pre></div>
 
 
-<p>If successful, results will be available from your local RSV web server (e.g., <code>http://localhost/rsv</code>) and, if enabled (which is the default) on <a href="http://myosg.grid.iu.edu/">MyOSG</a>.</p>
+<p>If successful, results will be available from your local RSV web server (e.g., <code>http://localhost/rsv</code>) and, if enabled (which is the default) on <a href="http://my.opensciencegrid.org/">MyOSG</a>.</p>
 <p>You can also run the metrics individually or pass special parameters as explained in the <a href="../rsv-control">rsv-control document</a>.</p>
 <h2 id="troubleshooting-rsv">Troubleshooting RSV<a class="headerlink" href="#troubleshooting-rsv" title="Permanent link">&para;</a></h2>
+<p>To get assistance, use the <a href="../../common/help">help procedure</a>.</p>
+<p>RSV has a tool to collect information useful for troubleshooting into a tarball that can be shared with the developers and support staff.
+To use it:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> rsv-control --profile
+<span class="go">Running the rsv-profiler...</span>
+<span class="go">OSG-RSV Profiler</span>
+<span class="go">Analyzing...</span>
+<span class="go">Making tarball (rsv-profiler.tar.gz)</span>
+</pre></div>
+
+
 <p>You can find more information on troubleshooting RSV in the <a href="../rsv-control">rsv-control documentation</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are getting assistance via the trouble ticket system, you must add a <code>.txt</code> extension to the tarball so it can be uploaded:</p>
+</div>
+<h3 id="resending-failed-gratia-records">Resending failed Gratia records<a class="headerlink" href="#resending-failed-gratia-records" title="Permanent link">&para;</a></h3>
+<p>If RSV fails to send Gratia records, it will save a copy of the output into <code>/var/spool/rsv/failed-gratia-scripts</code>.
+You will be notified if files are in this directory on your HTML status page.</p>
+<p>If files appear here, you can attempt to determine why by looking at this log file: <code>/var/log/rsv/consumers/gratia-consumer.output</code>.
+(This file is rotated, so the error message may no longer be present.)</p>
+<p>Usually this error is spurious - there may have been a problem with the central collector being unavailable, or there may have been a network problem.
+The first step to fix this problem is to try to resend these files.
+To do so, move them back into the <code>gratia</code> directory and they will be resent the next time the gratia-script-consumer runs (about every 5 minutes):</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> mv /var/spool/rsv/failed-gratia-records/* /var/spool/rsv/gratia-consumer/
+</pre></div>
+
+
 <h3 id="important-file-locations">Important file locations<a class="headerlink" href="#important-file-locations" title="Permanent link">&para;</a></h3>
 <p>Logs and configuration:</p>
 <table>
@@ -1062,8 +1083,7 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 </ul>
 <p>For example, here is the output when running a metric with -v2.</p>
 <p><details>
-  <summary>Show detailed ouput</summary>
-   <p></p>
+  <summary>Show detailed ouput</summary></p>
 <div class="codehilite"><pre><span></span><span class="go">   [root@fermicloud016 condor]# rsv-control -r org.osg.general.osg-version -v 2 -u osg-edu.cs.wisc.edu</span>
 <span class="go">   INFO: Reading configuration file /etc/rsv/rsv.conf</span>
 <span class="go">   INFO: Reading configuration file /etc/rsv/consumers.conf</span>
@@ -1116,8 +1136,7 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 </pre></div>
 
 
-<p></p>
-</details></p>
+<p></details></p>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use <a href="../../common/help/">this page</a> and attach the output of <code>rsv-control --profile</code>:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rsv-control --profile
@@ -1131,7 +1150,6 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <p>Here are some other RSV documents that might be helpful:</p>
 <ul>
-<li>A longer <a href="../rsv-overview">introduction to RSV</a></li>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvArchitecture">The RSV architecture</a></li>
 <li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RSVStorageProbes">RSV storage probes</a></li>
 </ul>
@@ -1167,7 +1185,7 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
 </pre></div>
 
 
-<p>where <em>UID</em> and <em>GID</em> are the UID and GID of the <code>cndrcron</code> user and group.</p>
+<p>where <code>UID</code> and <code>GID</code> are the UID and GID of the <code>cndrcron</code> user and group.</p>
 <h3 id="certificates">Certificates<a class="headerlink" href="#certificates" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1243,7 +1261,7 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
         <a href="../advanced-rsv-configuration/" class="btn btn-neutral float-right" title="Advanced RSV Configuration">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../rsv-overview/" class="btn btn-neutral" title="RSV Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../other/network-performance-toolkit/" class="btn btn-neutral" title="Network Performance Toolkit"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -1271,7 +1289,7 @@ SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
           <a href="https://github.com/opensciencegrid/docs" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../rsv-overview/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../other/network-performance-toolkit/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../advanced-rsv-configuration/" style="color: #fcfcfc">Next &raquo;</a></span>

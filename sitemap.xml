@@ -304,12 +304,6 @@
     
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/monitoring/rsv-overview/</loc>
-     <lastmod>2017-10-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
      <loc>https://opensciencegrid.github.io/docs/monitoring/install-rsv/</loc>
      <lastmod>2017-10-17</lastmod>
      <changefreq>daily</changefreq>
