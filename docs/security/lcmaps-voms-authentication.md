@@ -164,7 +164,7 @@ The patterns are compared in the order they are listed in. Therefore, more gener
 !!!note
     The Unix account must exist for the user to be mapped. If a VO's Unix account is missing, that VO will not be able to access your resources.
 
-    In addition, if you map VOMS attribs to a non-existent user in `/etc/grid-security/voms-mapfile`, `/usr/share/osg/voms-mapfile-default` will be considered next to find a mapping. The best way to ban a VO is edit `/etc/grid-security/ban-voms-mapfile` as described in [Banning VOs](#banning-vos) below. Do not edit `voms-mapfile-default`.
+    Additionally, if you map VOMS attributes to a non-existent user in `/etc/grid-security/voms-mapfile`, `/usr/share/osg/voms-mapfile-default` will be considered next to find a mapping. The best way to ban a VO is edit `/etc/grid-security/ban-voms-mapfile` as described in [Banning VOs](#banning-vos) below. Do not edit `voms-mapfile-default` as your changes will be overwritten upon updates.
 
 
 #### Mapping users
