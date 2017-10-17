@@ -14,10 +14,10 @@ Introduction to RSV
 The Resource and Service Validation (RSV) software provides OSG site administrators a scalable and easy-to-maintain resource and service monitoring infrastructure. The components of RSV are:
 
 - **RSV Client.** The client tools allow a site administrator to run tests against their site by providing a set of tests (which can run on the same or other hosts within a site), HTCondor-Cron for scheduling, and tools for collecting and storing the results (using Gratia). The client package is not installed by default and may be installed on a CE or other host. Generally, you configure the RSV client to run tests at scheduled time intervals and then it makes results available on a local website. Also, the client can upload test results to a central collector (see next item).
-- **RSV Collector/Server.** The central OSG RSV Collector accepts and stores results from RSV clients throughout OSG, which can be viewed in [MyOSG](http://myosg.grid.iu.edu/), on the “Current RSV Status” page and under the “Resource Group” menu.
-- **Periodic Availability Reports.** The availability of all active registered OSG resources and the services running on each of those resources is calculated using the results received for [critical metrics](https://twiki.grid.iu.edu/bin/view/Operations/RsvEquivalency#Critical_Tests_for_OSG_Resources>). Once a day, these availability numbers are [published online](http://rsv.grid.iu.edu/daily-reports) (More information: [Outline of reports](https://twiki.grid.iu.edu/bin/view/Operations/RSVPeriodicReporting)).
-- **RSV-SAM Transport.** The WLCG RSV-SAM Transport infrastructure pushes out RSV results, for resources that are flagged to be part of the WLCG Interoperability agreement, from the GOC collector to WLCG's Service Availability Monitoring (SAM) system. More information on viewing these results is [available here](https://twiki.grid.iu.edu/twiki/bin/view/Operations/RsvSAMGridView).
-- **MyOSG and OIM Links.** RSV picks up resource information, WLCG interoperability information, etc., from a MyOSG resource group summary listing, which is in turn based on the [OSG Information Management (OIM) (topology) system](https://oim.grid.iu.edu) (Requires registration). Resource [maintenance scheduled on OIM](https://twiki.grid.iu.edu/twiki/bin/view/Operations/OIMMaintTool) are forwarded to WLCG SAM, if applicable.
+- **RSV Collector/Server.** The central OSG RSV Collector accepts and stores results from RSV clients throughout OSG, which can be viewed in [MyOSG](http://myosg.opensciencegrid.org/), on the “Current RSV Status” page and under the “Resource Group” menu.
+- **Periodic Availability Reports.** The availability of all active registered OSG resources and the services running on each of those resources is calculated using the results received for [critical metrics](https://twiki.opensciencegrid.org/bin/view/Operations/RsvEquivalency#Critical_Tests_for_OSG_Resources>). Once a day, these availability numbers are [published online](http://rsv.opensciencegrid.org/daily-reports) (More information: [Outline of reports](https://twiki.opensciencegrid.org/bin/view/Operations/RSVPeriodicReporting)).
+- **RSV-SAM Transport.** The WLCG RSV-SAM Transport infrastructure pushes out RSV results, for resources that are flagged to be part of the WLCG Interoperability agreement, from the GOC collector to WLCG's Service Availability Monitoring (SAM) system. More information on viewing these results is [available here](https://twiki.opensciencegrid.org/twiki/bin/view/Operations/RsvSAMGridView).
+- **MyOSG and OIM Links.** RSV picks up resource information, WLCG interoperability information, etc., from a MyOSG resource group summary listing, which is in turn based on the [OSG Information Management (OIM) (topology) system](https://oim.opensciencegrid.org) (Requires registration). Resource [maintenance scheduled on OIM](https://twiki.opensciencegrid.org/twiki/bin/view/Operations/OIMMaintTool) are forwarded to WLCG SAM, if applicable.
 
 
 Before Starting
@@ -165,7 +165,7 @@ Normally, the HTCondor-Cron scheduler runs RSV periodically. However, you can ru
 root@host # rsv-control --run --all-enabled
 ```
 
-If successful, results will be available from your local RSV web server (e.g., `http://localhost/rsv`) and, if enabled (which is the default) on [MyOSG](http://myosg.grid.iu.edu/).
+If successful, results will be available from your local RSV web server (e.g., `http://localhost/rsv`) and, if enabled (which is the default) on [MyOSG](http://myosg.opensciencegrid.org/).
 
 You can also run the metrics individually or pass special parameters as explained in the [rsv-control document](rsv-control).
 

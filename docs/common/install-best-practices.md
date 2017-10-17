@@ -79,12 +79,12 @@ A local yum mirror allows you to reduce the amount of external bandwidth used wh
 Add the following to a file in `/etc/cron.d`:
 
     :::file
-    %RED%RANDOM%ENDCOLOR% * * * * root rsync -aH rsync://repo.grid.iu.edu/osg/ /var/www/html/osg/
+    %RED%RANDOM%ENDCOLOR% * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/ /var/www/html/osg/
 
 Or, to mirror only a single repository:
 
     :::file
-    %RED%RANDOM%ENDCOLOR% * * * * root rsync -aH rsync://repo.grid.iu.edu/osg/%RED%OSG_RELEASE%ENDCOLOR%/el6/development /var/www/html/osg/%RED%OSG_RELEASE%ENDCOLOR%/el6
+    %RED%RANDOM%ENDCOLOR% * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/%RED%OSG_RELEASE%ENDCOLOR%/el6/development /var/www/html/osg/%RED%OSG_RELEASE%ENDCOLOR%/el6
 
 
 Replace %RED%RANDOM%ENDCOLOR% with a number between 0 and 59.
@@ -93,7 +93,7 @@ Replace %RED%OSG_RELEASE%ENDCOLOR% with the OSG release you want to use (e.g. '3
 
 On your worker node, you can replace the `baseurl` line of `/etc/yum.repos.d/osg.repo` with the appropriate URL for your mirror.
 
-If you are interested in having your mirror be part of the OSG's default set of mirrors, [please file a GOC ticket](https://ticket.grid.iu.edu/).
+If you are interested in having your mirror be part of the OSG's default set of mirrors, [please file a GOC ticket](https://ticket.opensciencegrid.org/).
 
 CA Certificate Installation Considerations
 ------------------------------------------
