@@ -806,14 +806,12 @@
 </pre></div>
 
 
-<p><br/></p>
 <h4 id="installing-cvmfs-stratum-1-that-is-not-a-repository-server">Installing CVMFS stratum 1 that is not a repository server<a class="headerlink" href="#installing-cvmfs-stratum-1-that-is-not-a-repository-server" title="Permanent link">&para;</a></h4>
 <p>If you're not installing for the OSG GOC or otherwise want to support serving repositories on the same machine as a Stratum 1, use this command on either EL6 or EL7:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum -y install cvmfs-server cvmfs-config mod_wsgi
 </pre></div>
 
 
-<p><br/></p>
 <h3 id="installing-frontier-squid-and-frontier-awstats">Installing frontier-squid and frontier-awstats<a class="headerlink" href="#installing-frontier-squid-and-frontier-awstats" title="Permanent link">&para;</a></h3>
 <p><a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallAwstats">frontier-awstats</a> is not distributed by OSG so these instructions get it from its original source.  Do these commands to install frontier-squid and frontier-awstats:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -i http://frontier.cern.ch/dist/rpms/RPMS/noarch/frontier-release-1.1-1.noarch.rpm
@@ -821,7 +819,6 @@
 </pre></div>
 
 
-<p><br/></p>
 <h2 id="configuring">Configuring<a class="headerlink" href="#configuring" title="Permanent link">&para;</a></h2>
 <h3 id="configuring-the-system">Configuring the system<a class="headerlink" href="#configuring-the-system" title="Permanent link">&para;</a></h3>
 <p>Increase the default number of open file descriptors:</p>
@@ -830,24 +827,21 @@
 </pre></div>
 
 
-<p><br/>
-In order for this to apply also interactively when logging in over ssh, the option <code>UsePAM</code> has to be set to <code>yes</code> in <code>/etc/ssh/sshd_config</code>.</p>
+<p>In order for this to apply also interactively when logging in over ssh, the option <code>UsePAM</code> has to be set to <code>yes</code> in <code>/etc/ssh/sshd_config</code>.</p>
 <h3 id="configuring-cron">Configuring cron<a class="headerlink" href="#configuring-cron" title="Permanent link">&para;</a></h3>
 <p>First, create the log directory: </p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mkdir -p /var/log/cvmfs
 </pre></div>
 
 
-<p><br/>
-Put the following in <code>/etc/cron.d/cvmfs</code>:</p>
+<p>Put the following in <code>/etc/cron.d/cvmfs</code>:</p>
 <div class="codehilite"><pre><span></span>0,15,30,45 * * * * root test -d /srv/cvmfs || exit;cvmfs_server snapshot -ai 
 6 1 * * * root cvmfs_server gc -af 2&gt;/dev/null || true
 0 9 * * * root find /srv/cvmfs/*.*/data/txn -name &quot;*.*&quot; -mtime +2 2&gt;/dev/null|xargs rm -f
 </pre></div>
 
 
-<p><br/>
-Also, put the following in <code>/etc/logrotate.d/cvmfs</code>:</p>
+<p>Also, put the following in <code>/etc/logrotate.d/cvmfs</code>:</p>
 <div class="codehilite"><pre><span></span>/var/log/cvmfs/*.log {
     weekly
     missingok
@@ -856,21 +850,18 @@ Also, put the following in <code>/etc/logrotate.d/cvmfs</code>:</p>
 </pre></div>
 
 
-<p><br/></p>
 <h3 id="configuring-apache">Configuring apache<a class="headerlink" href="#configuring-apache" title="Permanent link">&para;</a></h3>
 <p>If you are installing frontier-squid, create <code>/etc/httpd/conf.d/cvmfs.conf</code> and put the following lines into it:</p>
 <div class="codehilite"><pre><span></span>Listen 8080 KeepAlive On
 </pre></div>
 
 
-<p><br/>
-If you are not installing frontier-squid, instead put the following lines into that file:</p>
+<p>If you are not installing frontier-squid, instead put the following lines into that file:</p>
 <div class="codehilite"><pre><span></span>Listen 8000 KeepAlive On
 </pre></div>
 
 
-<p><br/>
-If you will be serving opensciencegrid.org repositories, you have to allow for old client configurations that access repositories without the domain name added. For that reason, you will need to remove each <code>/etc/httpd/conf.d/cvmfs.&lt;repositoryname&gt;.conf</code> that adding a replica creates (this is included in the <a href="https://github.com/opensciencegrid/oasis-server/blob/master/goc/bin/add_osg_repository">add_osg_repository script</a>), and instead add the following to <code>/etc/httpd/conf.d/cvmfs.conf</code>:</p>
+<p>If you will be serving opensciencegrid.org repositories, you have to allow for old client configurations that access repositories without the domain name added. For that reason, you will need to remove each <code>/etc/httpd/conf.d/cvmfs.&lt;repositoryname&gt;.conf</code> that adding a replica creates (this is included in the <a href="https://github.com/opensciencegrid/oasis-server/blob/master/goc/bin/add_osg_repository">add_osg_repository script</a>), and instead add the following to <code>/etc/httpd/conf.d/cvmfs.conf</code>:</p>
 <div class="codehilite"><pre><span></span>RewriteEngine On 
 RewriteRule ^/cvmfs/([^./]*)/(.*)$ /cvmfs/$1.opensciencegrid.org/$2 
 RewriteRule ^/cvmfs/([^/]+)/api/(.*)$ /cvmfs/$1/api/$2 [PT] 
@@ -912,14 +903,12 @@ WSGIScriptAliasMatch /cvmfs/([^/]+)/api /var/www/wsgi-scripts/cvmfs-api.wsgi/$1
 </pre></div>
 
 
-<p><br/>
-or on EL7 do</p>
+<p>or on EL7 do</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> httpd
 <span class="gp">root@host #</span> systemctl start httpd
 </pre></div>
 
 
-<p><br/></p>
 <h3 id="configuring-frontier-squid">Configuring frontier-squid<a class="headerlink" href="#configuring-frontier-squid" title="Permanent link">&para;</a></h3>
 <p>Put the following in <code>/etc/squid/customize.sh</code> after the existing comment header:</p>
 <div class="codehilite"><pre><span></span><span class="nx">awk</span> <span class="o">--</span><span class="nx">file</span> <span class="err">`</span><span class="nx">dirname</span> <span class="o">$</span><span class="mi">0</span><span class="err">`</span><span class="o">/</span><span class="nx">customhelps</span><span class="p">.</span><span class="nx">awk</span> <span class="o">--</span><span class="nx">source</span> <span class="s1">&#39;{</span>
@@ -953,38 +942,33 @@ or on EL7 do</p>
 </pre></div>
 
 
-<p><br/>
-On an EL7 system, make sure that iptables-services is installed and enabled:</p>
+<p>On an EL7 system, make sure that iptables-services is installed and enabled:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum -y install iptables-services 
 <span class="gp">root@host #</span> systemctl <span class="nb">enable</span> iptables
 </pre></div>
 
 
-<p><br/>
-Forward port 80 to port 8000 (first command is for external, second command for localhost):</p>
+<p>Forward port 80 to port 8000 (first command is for external, second command for localhost):</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> iptables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span> 
 <span class="gp">root@host #</span> iptables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span> 
 <span class="gp">root@host #</span> service iptables save
 </pre></div>
 
 
-<p><br/>
-On EL7 also set up the the same port forwarding for IPv6 (unfortunately it is not supported on EL6):</p>
+<p>On EL7 also set up the the same port forwarding for IPv6 (unfortunately it is not supported on EL6):</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span>
 <span class="gp">root@host #</span> ip6tables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span>
 <span class="gp">root@host #</span> service ip6tables save
 </pre></div>
 
 
-<p><br/>
-Enable frontier-squid.  On EL6 do:</p>
+<p>Enable frontier-squid.  On EL6 do:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chkconfig frontier-squid on
 <span class="gp">root@host #</span> service frontier-squid start
 </pre></div>
 
 
-<p><br/>
-or on EL7 do:</p>
+<p>or on EL7 do:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> frontier-squid
 <span class="gp">root@host #</span> systemctl start frontier-squid
 </pre></div>
@@ -1003,32 +987,27 @@ or on EL7 do:</p>
 </pre></div>
 
 
-<p><br/>
-It's a good idea for other Stratum 1s to make their own scripts for adding repository replicas, because there's always two or three commands to run, and it's easy to forget the commands after the first one. The first command is this:</p>
+<p>It's a good idea for other Stratum 1s to make their own scripts for adding repository replicas, because there's always two or three commands to run, and it's easy to forget the commands after the first one. The first command is this:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cvmfs_server add-replica -o root http://cvmfs-stratum0.gridpp.rl.ac.uk:8000/cvmfs/config-egi.egi.eu /etc/cvmfs/keys/egi.eu/egi.eu.pub
 </pre></div>
 
 
-<p><br/>
-However, non-GOC OSG Stratum 1s (that is, at BNL and FNAL), for the sake of fulfilling an OSG security requirement, need to instead read from the OSG GOC machine with this as their first command:</p>
+<p>However, non-GOC OSG Stratum 1s (that is, at BNL and FNAL), for the sake of fulfilling an OSG security requirement, need to instead read from the OSG GOC machine with this as their first command:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cvmfs_server add-replica -o root http://oasis-replica.opensciencegrid.org:8000/cvmfs/config-egi.egi.eu /etc/cvmfs/keys/egi.eu/egi.eu.pub:/etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
 </pre></div>
 
 
-<p><br>
-The second command for Stratum 1s that have the httpd configuration as described above in the <a href="#configuring-apache">Configuring apache section</a> is this:</p>
+<p>The second command for Stratum 1s that have the httpd configuration as described above in the <a href="#configuring-apache">Configuring apache section</a> is this:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rm -f /etc/httpd/conf.d/cvmfs.config-egi.egi.eu.conf
 </pre></div>
 
 
-<p><br/>
-Then the next command is this:</p>
+<p>Then the next command is this:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cvmfs_server snapshot config-egi.egi.eu
 </pre></div>
 
 
-<p><br/>
-With large repositories that can take a very long time, but with small repositories it should be very quick and not show any errors.</p>
+<p>With large repositories that can take a very long time, but with small repositories it should be very quick and not show any errors.</p>
 <h3 id="verifying-that-the-replica-is-being-served">Verifying that the replica is being served<a class="headerlink" href="#verifying-that-the-replica-is-being-served" title="Permanent link">&para;</a></h3>
 <p>Now to verify that the replication is working, do the following commands:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> wget -qdO- http://localhost:8000/cvmfs/config-egi.egi.eu/.cvmfspublished <span class="p">|</span> cat -v
@@ -1036,8 +1015,7 @@ With large repositories that can take a very long time, but with small repositor
 </pre></div>
 
 
-<p><br/>
-Both commands should show a short file including gibberish at the end which is the signature.</p>
+<p>Both commands should show a short file including gibberish at the end which is the signature.</p>
 <p>It is a good idea to familiarize yourself with the log entries at <code>/var/log/httpd/access_log</code> and also, if you have installed frontier-squid, at <code>/var/log/squid/access.log</code>. Also, at least 15 minutes after the snapshot is finished, check the log <code>/var/log/cvmfs/snapshots.log</code> to see that it tried to get an update and got no errors.</p>
 <h2 id="setting-up-monitoring">Setting up monitoring<a class="headerlink" href="#setting-up-monitoring" title="Permanent link">&para;</a></h2>
 <p>If you installed frontier-squid and frontier-awstats, there is a little more to do to configure monitoring.</p>

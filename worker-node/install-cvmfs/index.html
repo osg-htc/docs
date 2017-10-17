@@ -879,7 +879,6 @@ The version of CVMFS installed should be &gt;= 2.4.1</p>
 </pre></div>
 
 
-<p><br></p>
 </li>
 </ol>
 <h2 id="configuring-cvmfs">Configuring CVMFS<a class="headerlink" href="#configuring-cvmfs" title="Permanent link">&para;</a></h2>
@@ -894,8 +893,7 @@ CVMFS_HTTP_PROXY=<span style="color:red">&quot;http://squid.example.com:3128&quo
 </pre></div>
 
 
-<p><br>
-CVMFS by default allows any repository to be mounted, no matter what
+<p>CVMFS by default allows any repository to be mounted, no matter what
 the setting of <code>CVMFS_REPOSITORIES</code> is; that variable is used by support
 tools such as <code>cvmfs_config</code> and <code>cvmfs_talk</code> when they need to know a
 list of repositories.  The recommended <code>CVMFS_REPOSITORIES</code> setting
@@ -944,8 +942,7 @@ directory. But note that it will initially appear to be empty:</p>
 </pre></div>
 
 
-<p><br>
-Directories within <code>/cvmfs</code> will not be mounted until you examine them. For instance:</p>
+<p>Directories within <code>/cvmfs</code> will not be mounted until you examine them. For instance:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> ls /cvmfs
 <span class="gp">user@host $</span> ls -l /cvmfs/atlas.cern.ch
 <span class="go">total 1</span>
@@ -967,7 +964,6 @@ Directories within <code>/cvmfs</code> will not be mounted until you examine the
 </pre></div>
 
 
-<p><br></p>
 <h3 id="troubleshooting-problems">Troubleshooting problems<a class="headerlink" href="#troubleshooting-problems" title="Permanent link">&para;</a></h3>
 <p>If no directories exist under <code>/cvmfs/</code>, you can try the following
 steps to debug:</p>
@@ -1005,7 +1001,6 @@ the repositories are accessed; there are no system services to start.</p>
 </pre></div>
 
 
-<p><br></p>
 <h2 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h2>
 <p>If you cannot resolve the problem, there are several ways to receive help:</p>
 <ul>
