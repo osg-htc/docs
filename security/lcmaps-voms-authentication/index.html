@@ -972,6 +972,7 @@ The patterns are compared in the order they are listed in. Therefore, more gener
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The Unix account must exist for the user to be mapped. If a VO's Unix account is missing, that VO will not be able to access your resources.</p>
+<p>Additionally, if you map VOMS attributes to a non-existent user in <code>/etc/grid-security/voms-mapfile</code>, <code>/usr/share/osg/voms-mapfile-default</code> will be considered next to find a mapping. The best way to ban a VO is edit <code>/etc/grid-security/ban-voms-mapfile</code> as described in <a href="#banning-vos">Banning VOs</a> below. Do not edit <code>voms-mapfile-default</code> as your changes will be overwritten upon updates.</p>
 </div>
 <h4 id="mapping-users">Mapping users<a class="headerlink" href="#mapping-users" title="Permanent link">&para;</a></h4>
 <p><code>/etc/grid-security/grid-mapfile</code> is used to map specific users to Unix accounts based on their certificates' DNs. An example of the format of a <code>grid-mapfile</code> follows:</p>
@@ -1144,6 +1145,11 @@ The patterns are compared in the order they are listed in. Therefore, more gener
 </tr>
 </tbody>
 </table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>/usr/share/osg/voms-mapfile-default</code> is not meant to be edited and will be overwritten on upgrades.
+All VO mappings can be overridden by editing the above files in <code>/etc/grid-security</code>.</p>
+</div>
 <h3 id="manual-configuration">Manual Configuration<a class="headerlink" href="#manual-configuration" title="Permanent link">&para;</a></h3>
 <p>This section is intended for use as reference if you choose to forego configuring the LCMAPS VOMS plugin via osg-configure (i.e., if you prefer a configuration management system like <a href="https://www.ansible.com/">Ansible</a> or <a href="https://puppet.com/">Puppet</a>). Therefore, the following instructions serve as a replacement for <a href="#applying-configuration-settings">this section</a> above.</p>
 <p>LCMAPS is configured in <code>/etc/lcmaps.db</code>. and since the VOMS plugin is a newer component, configuration for it may not be present in your existing <code>/etc/lcmaps.db</code> file.</p>
