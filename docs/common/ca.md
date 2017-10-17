@@ -71,7 +71,7 @@ Setting up CA Certificates for OSG installation
 CA Certificates will be installed into /etc/grid-security/certificates
 osg-update-certs
   Log file: /var/log/osg-update-certs.log
-  Updates from: http://software.grid.iu.edu/pacman/cadist/ca-certs-version-new
+  Updates from: https://repo.grid.iu.edu/pacman/cadist/ca-certs-version-new
 
 Will update CA certificates from version unknown to version 1.21NEW.
 Update successful.
