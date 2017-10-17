@@ -126,36 +126,32 @@ To start the services:
 
 1.  To start GSI OpenSSH you can use the service command, e.g.:
 
-     ```
-     service gsisshd start
-     ```
+        :::console
+        [root@server]# service gsisshd start
 
 You should also enable the appropriate services so that they are automatically started when your system is powered on:
 
 -   To enable OpenSSH by default on the node:
 
-    ```
-    chkconfig gsisshd on
-    ```
+        :::console
+        [root@server]# chkconfig gsisshd on
 
 Stopping and Disabling Services
 -------------------------------
 
 To stop the services:
 
-1.  To stop OpenSSH you can use: \<pre class=“rootscreen”\>
+1.  To stop OpenSSH you can use:
 
-    ```
-    service gsisshd stop
-    ```
+        :::console
+        [root@server]# service gsisshd stop
 
 In addition, you can disable services by running the following commands. However, you don't need to do this normally.
 
 -   Optionally, to disable OpenSSH:
 
-    ```
-    chkconfig gsisshd off
-    ```
+        :::console
+        [root@server]# chkconfig gsisshd off
 
 Troubleshooting
 ===============
@@ -164,7 +160,7 @@ You can get information on troubleshooting errors on the [NCSA page](http://grid
 
 To troubleshoot LCMAPS authorization, you can add the following to `/etc/sysconfig/gsisshd` and choose a higher debug level:
 
-``` file
+``` bash
 # level 0: no messages, 1: errors, 2: also warnings, 3: also notices,
 #  4: also info, 5: maximum debug
 LCMAPS_DEBUG_LEVEL=2
@@ -177,7 +173,7 @@ Test GSI OpenSSH
 
 After starting the `gsisshd` service you can check if it is running correctly
 
-``` screen
+``` console
 $ grid-proxy-init
 Your identity: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=User Name
 Enter GRID pass phrase for this identity:
