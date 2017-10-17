@@ -40,7 +40,7 @@ root@host # yum install --enablerepo=cernvm-kernel --disablerepo=cernvm kernel a
 root@host # echo "cvmfs_server mount -a" >>/etc/rc.local 
 root@host # reboot
 ```
-<br/>
+
 This is the procedure for installing on a Redhat EL7-based system:
 
 ``` console
@@ -49,7 +49,7 @@ root@host # yum install cvmfs-server.x86_64 osg-oasis
 root@host # echo "cvmfs_server mount -a" >>/etc/rc.local
 root@host # chmod +x /etc/rc.local
 ```
-<br/>
+
 In addition, apache should listen on port 8000, have KeepAlive enabled, and be started. Use commands like these:
 
 ``` console
@@ -58,7 +58,7 @@ root@host # echo KeepAlive on >>/etc/httpd/conf.d/cvmfs.conf
 root@host # chkconfig httpd on 
 root@host # service httpd start
 ```
-<br/>
+
 Make sure that port 8000 is available to the internet through any firewalls.
 
 Procedure to add an externally-hosted repository to OASIS
@@ -77,13 +77,11 @@ Procedure to add an externally-hosted repository to OASIS
         root@host # echo "CVMFS_AUTO_TAG=false" >>/etc/cvmfs/repositories.d/repo.domain.name/server.conf 
         root@host # (echo Order deny,allow;echo Deny from all;echo Allow from 127.0.0.1;echo Allow from ::1;echo Allow from 129.79.53.0/24;echo Allow from 2001:18e8:2:6::/56) >/srv/cvmfs/repo.domain.name/.htaccess
 
-    <br/>
     If you might be hosting any hardlinks that span directories (e.g. the git package) and are using aufs (that is, EL6), also do the following:
 
         :::console
         root@host # echo "CVMFS_IGNORE_XDIR_HARDLINKS=true" >>/etc/cvmfs/repositories.d/repo.domain.name/server.conf
 
-    <br/>
     Verify that the repository is readable over http with the following command:
 
         :::console
@@ -113,7 +111,6 @@ Procedure to add an externally-hosted repository to OASIS
         root@host # wget -O /srv/cvmfs/repo.opensciencegrid.org/.cvmfswhitelist http://oasis.opensciencegrid.org/cvmfs/repo.opensciencegrid.org/.cvmfswhitelist 
         root@host # /bin/cp /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub /etc/cvmfs/keys/repo.opensciencegrid.org.pub
 
-    <br/>
     Next the administrator verifies that a publish operation using the owner's privileges succeeds by making sure there's no errors from the following commands replacing "ownerid" with the owner's username:
 
         :::console
