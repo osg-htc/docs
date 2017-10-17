@@ -876,7 +876,7 @@
 <p>Please follow the <a href="../osg-ca-certs-updater">update instructions</a> to make sure that the CAs are kept updated.</p>
 <h2 id="option-2-install-osg-update-certs">Option 2: Install osg-update-certs<a class="headerlink" href="#option-2-install-osg-update-certs" title="Permanent link">&para;</a></h2>
 <p>Install this with:</p>
-<div class="codehilite"><pre><span></span>root@host # yum install osg-ca-scripts
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-ca-scripts
 </pre></div>
 
 
@@ -906,36 +906,36 @@
 </tbody>
 </table>
 <p>Here is an example:</p>
-<div class="codehilite"><pre><span></span>root@host # /usr/sbin/osg-ca-manage setupCA --location root --url osg
-Setting up CA Certificates for OSG installation
-CA Certificates will be installed into /etc/grid-security/certificates
-osg-update-certs
-  Log file: /var/log/osg-update-certs.log
-  Updates from: http://software.grid.iu.edu/pacman/cadist/ca-certs-version-new
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /usr/sbin/osg-ca-manage setupCA --location root --url osg
+<span class="go">Setting up CA Certificates for OSG installation</span>
+<span class="go">CA Certificates will be installed into /etc/grid-security/certificates</span>
+<span class="go">osg-update-certs</span>
+<span class="go">  Log file: /var/log/osg-update-certs.log</span>
+<span class="go">  Updates from: http://software.grid.iu.edu/pacman/cadist/ca-certs-version-new</span>
 
-Will update CA certificates from version unknown to version 1.21NEW.
-Update successful.
+<span class="go">Will update CA certificates from version unknown to version 1.21NEW.</span>
+<span class="go">Update successful.</span>
 
-Setup completed successfully.
+<span class="go">Setup completed successfully.</span>
 </pre></div>
 
 
 <p>Initially the CA certificates will not be updated. You can tell by looking at:</p>
-<div class="codehilite"><pre><span></span>root@host # /sbin/service osg-update-certs-cron  status
-Periodic osg-update-certs is disabled.
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /sbin/service osg-update-certs-cron  status
+<span class="go">Periodic osg-update-certs is disabled.</span>
 </pre></div>
 
 
 <p>You can enable the <code>cron</code> job that updates the CA certs with:</p>
-<div class="codehilite"><pre><span></span>root@host # /sbin/service osg-update-certs-cron  start
-Enabling periodic osg-update-certs:                        [  <span style="color:green">OK</span>  ]
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /sbin/service osg-update-certs-cron  start
+<span class="go">Enabling periodic osg-update-certs:                        [  <span style="color:green">OK</span>  ]</span>
 </pre></div>
 
 
 <p>A complete set of options available though <code>osg-ca-manage</code> command, including your interface to adding and removing CAs, could be found at <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaManage">osg-ca-manage documentation</a></p>
 <h2 id="option-3-install-an-rpm-that-installs-no-cas">Option 3: Install an RPM that installs no CAs<a class="headerlink" href="#option-3-install-an-rpm-that-installs-no-cas" title="Permanent link">&para;</a></h2>
 <p>Install this with:</p>
-<div class="codehilite"><pre><span></span>yum install empty-ca-certs –-enablerepo=osg-empty
+<div class="codehilite"><pre><span></span><span class="go">yum install empty-ca-certs –-enablerepo=osg-empty</span>
 </pre></div>
 
 
@@ -966,7 +966,8 @@ Enabling periodic osg-update-certs:                        [  <span style="color
 </tbody>
 </table>
 <h1 id="managing-certificate-revocation-lists">Managing Certificate Revocation Lists<a class="headerlink" href="#managing-certificate-revocation-lists" title="Permanent link">&para;</a></h1>
-<p>In addition to CA certificates, you normally need to have updated Certificate Revocation Lists (CRLs) which are are lists of certificates that have been revoked for any reason. Software in the OSG Software Stack use these to ensure that you are talking to valid clients or servers. We use a tool named <code>fetch-crl</code> that periodically updates the CRLs. Fetch CRL is a utility that updates Certificate Authority (CA) Certificate Revocation Lists (CRLs). These are lists of certificates that were granted by the CA, but have since been revoked. It is good practice to regularly update the CRL list for each CA to ensure that you do not authenticate any certificate that has been revoked.</p>
+<p>In addition to CA certificates, you normally need to have updated Certificate Revocation Lists (CRLs) which are are lists of certificates that have been revoked for any reason. Software in the OSG Software Stack uses these to ensure that you are talking to valid clients or servers.</p>
+<p>We use a tool named <code>fetch-crl</code> that periodically updates the CRLs. Fetch CRL is a utility that updates Certificate Authority (CA) Certificate Revocation Lists (CRLs). These are lists of certificates that were granted by the CA, but have since been revoked. It is good practice to regularly update the CRL list for each CA to ensure that you do not authenticate any certificate that has been revoked.</p>
 <p><code>fetch-crl</code> is installed as two different system services. The fetch-crl-boot service runs only
 at boot time. The <code>fetch-crl-cron</code> service runs <code>fetch-crl</code> every 6 hours (with a random sleep
 time included) by default. Both services are disabled by default. At the very minimum, the
@@ -975,31 +976,20 @@ existing CRLs expire.</p>
 <h2 id="install-fetch-crl">Install <code>fetch-crl</code><a class="headerlink" href="#install-fetch-crl" title="Permanent link">&para;</a></h2>
 <p>Normally <code>fetch-crl</code> is installed when you install the rest of the software and you do not need
 to specifically install it. If you do wish to install it, you can install it as:</p>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span></span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="n">yum</span> <span class="n">install</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl3</span>
-<span class="c"><span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span></span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="n">yum</span> <span class="n">install</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install fetch-crl
 </pre></div>
 
 
 <h3 id="enable-and-start-fetch-crl">Enable and Start <code>fetch-crl</code><a class="headerlink" href="#enable-and-start-fetch-crl" title="Permanent link">&para;</a></h3>
 <p>To enable fetch-crl (fetch Certificate Revocation Lists) services by default on the node:</p>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span></span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">chkconfig</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl3</span><span class="o">-</span><span class="n">boot</span> <span class="n">on</span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">chkconfig</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl3</span><span class="o">-</span><span class="n">cron</span> <span class="n">on</span>
-<span class="c"><span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span></span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">chkconfig</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl</span><span class="o">-</span><span class="n">boot</span> <span class="n">on</span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">chkconfig</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl</span><span class="o">-</span><span class="n">cron</span> <span class="n">on</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /sbin/chkconfig fetch-crl-boot on
+<span class="gp">root@host #</span> /sbin/chkconfig fetch-crl-cron on
 </pre></div>
 
 
 <p>To start fetch-crl:</p>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span></span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">service</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl3</span><span class="o">-</span><span class="n">boot</span> <span class="n">start</span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">service</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl3</span><span class="o">-</span><span class="n">cron</span> <span class="n">start</span>
-<span class="c"><span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span></span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">service</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl</span><span class="o">-</span><span class="n">boot</span> <span class="n">start</span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">service</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl</span><span class="o">-</span><span class="n">cron</span> <span class="n">start</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /sbin/service fetch-crl-boot start
+<span class="gp">root@host #</span> /sbin/service fetch-crl-cron start
 </pre></div>
 
 
@@ -1008,40 +998,34 @@ to specifically install it. If you do wish to install it, you can install it as:
 <p>While it is necessary to start <code>fetch-crl-cron</code> in order to have it active, <code>fetch-crl-boot</code> is started automatically at boot time if enabled. The start command will run <code>fetch-crl-boot</code> at the moment when it is invoked and it may take some time to complete.</p>
 </div>
 <h3 id="configure-fetch-crl">Configure <code>fetch-crl</code><a class="headerlink" href="#configure-fetch-crl" title="Permanent link">&para;</a></h3>
-<p>To modify the times that fetch-crl-cron runs, edit <code>/etc/cron.d/fetch-crl</code> (or <code>/etc/cron.d/fetch-crl3</code> depending on the version you have).</p>
+<p>To modify the times that fetch-crl-cron runs, edit <code>/etc/cron.d/fetch-crl</code>.</p>
 <p>By default, <code>fetch-crl</code> connects directly to the remote CA; this is
 inefficient and potentially harmful if done simultaneously by many nodes
 (e.g. all the worker nodes of a big cluster). We recommend you provide a
 HTTP proxy (such as <code>squid</code>) the worker nodes can utilize; OSG provides
 <a href="../../data/frontier-squid/">packaging of squid</a>.</p>
 <p>To configure fetch-crl to use an HTTP proxy server:</p>
-<ul>
-<li>
-<p>If using <code>fetch-crl</code> version 2 (the <code>fetch-crl</code> package on RHEL5 only), then create the file <code>/etc/sysconfig/fetch-crl</code> and add the following line:</p>
-<p><code>export http_proxy=<span style="color:red">http://your.squid.fqdn:port</span></code></p>
-<p>Adjust the URL appropriately for your proxy server.</p>
-</li>
-<li>
-<p>If using <code>fetch-crl</code> version 3 on RHEL5 via the <code>fetch-crl3</code> package
-    or on RHEL6/RHEL7 via the <code>fetch-crl</code> package, then create or edit the
-    file <code>/etc/fetch-crl3.conf</code> (RHEL5) or <code>/etc/fetch-crl.conf</code>
-    (RHEL6/RHEL7) and add the following line:</p>
-<p><code>http_proxy=<span style="color:red">http://your.squid.fqdn:port</span></code></p>
+<p>Create or edit the file <code>/etc/fetch-crl.conf</code> and add the following line:</p>
+<div class="codehilite"><pre><span></span><span class="nv">http_proxy</span><span class="o">=</span><span style="color:red">http://your.squid.fqdn:port</span>
+</pre></div>
+
+
 <p>Again, adjust the URL appropriately for your proxy server.</p>
-</li>
-</ul>
 <p>Note that the <strong><code>nosymlinks</code></strong> option in the configuration files refers
 to ignoring links within the certificates directory (e.g. two different
 names for the same file). It is perfectly fine if the path of the CA
 certificates directory itself (<code>infodir</code>) is a link to a directory.</p>
 <p>Any modifications to the configuration file will be preserved during an RPM update.</p>
-<p>Current versions of <code>fetch-crl</code> and <code>fetch-crl3</code> produce more output.
+<p>Current versions of <code>fetch-crl</code> produce more output.
 It is possible to send the output to syslog instead of the default email system. To do so:</p>
 <ol>
 <li>
 <p>Change the configuration file to enable syslog:</p>
-<p><code>logmode = syslog
-  syslogfacility = daemon\&lt;/pre\&gt;</code></p>
+<div class="codehilite"><pre><span></span>logmode = syslog
+syslogfacility = daemon
+</pre></div>
+
+
 </li>
 <li>
 <p>Make sure the file <code>/var/log/daemon</code> exists, e.g. touching the file</p>
@@ -1050,62 +1034,56 @@ It is possible to send the output to syslog instead of the default email system.
 </ol>
 <h3 id="startstop-fetch-crl-a-quick-guide">Start/Stop fetch-crl: A quick guide<a class="headerlink" href="#startstop-fetch-crl-a-quick-guide" title="Permanent link">&para;</a></h3>
 <p>You need to fetch the latest CA Certificate Revocation Lists (CRLs) and you should enable the fetch-crl service to keep the CRLs up to date:</p>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span></span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">fetch</span><span class="o">-</span><span class="n">crl3</span> # <span class="n">This</span> <span class="n">fetches</span> <span class="n">the</span> <span class="n">CRLs</span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">service</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl3</span><span class="o">-</span><span class="n">boot</span> <span class="n">start</span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">service</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl3</span><span class="o">-</span><span class="n">cron</span> <span class="n">start</span>
-<span class="c"><span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7</span></span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">fetch</span><span class="o">-</span><span class="n">crl</span> # <span class="n">This</span> <span class="n">fetches</span> <span class="n">the</span> <span class="n">CRLs</span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">service</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl</span><span class="o">-</span><span class="n">boot</span> <span class="n">start</span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">service</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl</span><span class="o">-</span><span class="n">cron</span> <span class="n">start</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /usr/sbin/fetch-crl <span class="c1"># This fetches the CRLs</span>
+<span class="gp">root@host #</span> /sbin/service fetch-crl-boot start
+<span class="gp">root@host #</span> /sbin/service fetch-crl-cron start
 </pre></div>
 
 
 <p>To enable the <code>fetch-crl</code> service to keep the CRLs up to date after reboots:</p>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span></span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">chkconfig</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl3</span><span class="o">-</span><span class="n">boot</span> <span class="n">on</span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">chkconfig</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl3</span><span class="o">-</span><span class="n">cron</span> <span class="n">on</span>
-<span class="c"><span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span></span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">chkconfig</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl</span><span class="o">-</span><span class="n">boot</span> <span class="n">on</span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">chkconfig</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl</span><span class="o">-</span><span class="n">cron</span> <span class="n">on</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /sbin/chkconfig fetch-crl-boot on
+<span class="gp">root@host #</span> /sbin/chkconfig fetch-crl-cron on
 </pre></div>
 
 
 <p>To stop <code>fetch-crl</code>:</p>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span></span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">service</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl3</span><span class="o">-</span><span class="n">boot</span> <span class="n">stop</span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">service</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl3</span><span class="o">-</span><span class="n">cron</span> <span class="n">stop</span>
-<span class="c"><span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span></span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">service</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl</span><span class="o">-</span><span class="n">boot</span> <span class="n">stop</span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">service</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl</span><span class="o">-</span><span class="n">cron</span> <span class="n">stop</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /sbin/service fetch-crl-boot stop
+<span class="gp">root@host #</span> /sbin/service fetch-crl-cron stop
 </pre></div>
 
 
 <p>To disable the fetch-crl service:</p>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red"># For RHEL 5, CentOS 5, and SL5 </span></span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">chkconfig</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl3</span><span class="o">-</span><span class="n">boot</span> <span class="n">off</span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">chkconfig</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl3</span><span class="o">-</span><span class="n">cron</span> <span class="n">off</span>
-<span class="c"><span style="color:red"># For RHEL 6 or 7, CentOS 6 or 7, and SL6 or SL7 </span></span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">chkconfig</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl</span><span class="o">-</span><span class="n">boot</span> <span class="n">off</span>
-<span class="n">root</span><span class="p">@</span><span class="n">host</span> # <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">chkconfig</span> <span class="n">fetch</span><span class="o">-</span><span class="n">crl</span><span class="o">-</span><span class="n">cron</span> <span class="n">off</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /sbin/chkconfig fetch-crl-boot off
+<span class="gp">root@host #</span> /sbin/chkconfig fetch-crl-cron off
 </pre></div>
 
 
 <h1 id="updating-cascrls">Updating CAs/CRLs<a class="headerlink" href="#updating-cascrls" title="Permanent link">&para;</a></h1>
 <h2 id="why-maintain-up-to-date-trusted-ca-crl-information">Why maintain up-to-date Trusted CA /CRL information<a class="headerlink" href="#why-maintain-up-to-date-trusted-ca-crl-information" title="Permanent link">&para;</a></h2>
-<p>The Trusted Certificate Authority (CA) certificates, and their associated Certificate Revocation Lists (CRLs), are used for every transaction on a resource that establishes an authenticated network connection based on end user’s certificate. In order for the authentication to succeed, the user’s certificate must have been issued by one of the CAs in the Trusted CA directory, and the user’s certificate must not be listed in the CRL for that CA. CRLs can be thought of as a black list of certificates. CAs are the trust authorities, similar to DMV that issues you the driving license. (Another way of thinking CRLs is the do-not-fly lists at the airports. if your certificate shows up in CRLs, you are not allowed access.) This is handled at the certificate validation stage even before the authorization check (which will provide the mapping of an authenticated user to a local account UID/GID). So you do not need to do worry about it; the grid software will do this for you. However, you should make sure that your site has the most up-to-date list of Trusted CAs. There are multiple trust authorities in OSG (think of it as a different DMV for each state). If you do not have an up-to-date list of CAs it is possible that some of your users transactions at your site will start to fail. A current CRL list for each CA is also necessary, since without one transactions for users of that CA will fail.</p>
+<p>The Trusted Certificate Authority (CA) certificates, and their associated Certificate Revocation Lists (CRLs), are used for every transaction on a resource that establishes an authenticated network connection based on end user’s certificate. In order for the authentication to succeed, the user’s certificate must have been issued by one of the CAs in the Trusted CA directory, and the user’s certificate must not be listed in the CRL for that CA.</p>
+<p>CRLs can be thought of as a black list of certificates. CAs are the trust authorities, similar to DMV that issues you the driving license. (Another way of thinking CRLs is the do-not-fly lists at the airports. if your certificate shows up in CRLs, you are not allowed access.)</p>
+<p>This is handled at the certificate validation stage even before the authorization check (which will provide the mapping of an authenticated user to a local account UID/GID). So you do not need to do worry about it; the grid software will do this for you.</p>
+<p>However, you should make sure that your site has the most up-to-date list of Trusted CAs. There are multiple trust authorities in OSG (think of it as a different DMV for each state). If you do not have an up-to-date list of CAs it is possible that some of your users transactions at your site will start to fail. A current CRL list for each CA is also necessary, since without one transactions for users of that CA will fail.</p>
 <h2 id="how-to-ensure-you-are-get-up-to-date-cacrl-information">How to ensure you are get up-to-date CA/CRL information<a class="headerlink" href="#how-to-ensure-you-are-get-up-to-date-cacrl-information" title="Permanent link">&para;</a></h2>
 <ol>
 <li>If you installed CAs using rpm packages (<code>osg-ca-certs</code>,<code>igtf-ca-certs</code>) (Options 1, 4), you will need to install the software described in <a href="../osg-ca-certs-updater">the CA update document</a>, and enable <code>osg-ca-certs-updater</code> service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.</li>
-<li>If you use Option 2 (i.e. <code>osg-update-certs</code>) then make sure that you have the corresponding service enabled.</li>
+<li>
+<p>If you use Option 2 (i.e. <code>osg-update-certs</code>) then make sure that you have the corresponding service enabled.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /sbin/service osg-update-certs-cron  status
+<span class="go">Periodic osg-update-certs is enabled.</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Ensure that fetch-crl cron is enabled</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /sbin/service fetch-crl-cron  status
+<span class="go">Periodic fetch-crl is enabled.</span>
+</pre></div>
+
+
+</li>
 </ol>
-<p><code>root@host # /sbin/service osg-update-certs-cron  status
-   Periodic osg-update-certs is enabled.</code></p>
-<ol>
-<li>Ensure that fetch-crl cron is enabled\</li>
-</ol>
-<p><code>root@host # /sbin/service fetch-crl-cron  status
-  Periodic fetch-crl is enabled.</code></p>
 <h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
 <h2 id="useful-configuration-and-log-files">Useful configuration and log files<a class="headerlink" href="#useful-configuration-and-log-files" title="Permanent link">&para;</a></h2>
 <p>Configuration files:</p>
@@ -1150,15 +1128,9 @@ It is possible to send the output to syslog instead of the default email system.
 <td align="left">This file may be edited by hand, though it is recommended to use osg-ca-manage to set configuration parameters.</td>
 </tr>
 <tr>
-<td align="left">fetch-crl-2.x</td>
-<td align="left">Configuration file</td>
-<td align="left"><code>/etc/fetch-crl.conf</code></td>
-<td align="left"></td>
-</tr>
-<tr>
 <td align="left">fetch-crl-3.x</td>
 <td align="left">Configuration file</td>
-<td align="left"><code>/etc/fetch-crl3.conf</code></td>
+<td align="left"><code>/etc/fetch-crl.conf</code></td>
 <td align="left"></td>
 </tr>
 </tbody>
@@ -1198,7 +1170,11 @@ It is possible to send the output to syslog instead of the default email system.
 </table>
 <h2 id="tests">Tests<a class="headerlink" href="#tests" title="Permanent link">&para;</a></h2>
 <p>To test the host certificate of a server <code>openssl s_client</code> can be used. Here is an example with the gatekeeper:</p>
-<div class="codehilite"><pre><span></span>user@host $ openssl s_client -showcerts -cert /etc/grid-security/hostcert.pem -key /etc/grid-security/hostkey.pem -CApath /etc/grid-security/certificates/ -debug -connect osg-gk.mwt2.org:2119
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> openssl s_client -showcerts <span class="se">\</span>
+    -cert /etc/grid-security/hostcert.pem <span class="se">\</span>
+    -key /etc/grid-security/hostkey.pem <span class="se">\</span>
+    -CApath /etc/grid-security/certificates/ <span class="se">\</span>
+    -debug -connect osg-gk.mwt2.org:2119
 </pre></div>
 
 
@@ -1229,18 +1205,18 @@ It is possible to send the output to syslog instead of the default email system.
 <p>For Option 1: run one of the following <code>yum update osg-ca-certs</code> or <code>yum update igtf-ca-certs</code> depending on the rpm package you installed.</p>
 <p>For Option 4: run <code>yum update osg-ca-certs</code></p>
 <p>For Option 2: You do not need to do a manual update, make sure <code>osg-update-certs-cron</code> is enabled using</p>
-<div class="codehilite"><pre><span></span>root@host # /sbin/service osg-update-certs-cron  status
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /sbin/service osg-update-certs-cron  status
 </pre></div>
 
 
 <p>If the service is disabled, enable it using</p>
-<div class="codehilite"><pre><span></span>root@host # /sbin/service osg-update-certs-cron  start
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /sbin/service osg-update-certs-cron  start
 </pre></div>
 
 
 <p>If for some extraordinary reason you need to manually update the CA you could run <code>osg-ca-manage [--force] refreshCA</code>.</p>
 <h3 id="where-are-the-configuration-files-for-fetch-crl">Where are the configuration files for fetch-crl?<a class="headerlink" href="#where-are-the-configuration-files-for-fetch-crl" title="Permanent link">&para;</a></h3>
-<p><code>/etc/fetch-crl.conf</code> or <code>/etc/fetch-crl3.conf</code> for fetch-crl 2.x or 3.x respectively</p>
+<p><code>/etc/fetch-crl.conf</code></p>
 <h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
 <p>Some guides on x509 certificates:</p>
 <ul>
@@ -1256,7 +1232,7 @@ It is possible to send the output to syslog instead of the default email system.
 </ul>
 <p>Related software:</p>
 <ul>
-<li>Description, manual and examples of <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OsgCaManage">osg-ca-manage</a></li>
+<li>Description, manual and examples of <a href="../../security/osg-ca-manage">osg-ca-manage</a></li>
 <li><a href="../osg-ca-certs-updater">osg-ca-certs-updater</a></li>
 </ul>
               

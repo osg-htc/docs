@@ -960,53 +960,57 @@ of the lines in the file are commented out using a <code>#</code> at the beginni
 <h2 id="starting-and-enabling-services">Starting and Enabling Services<a class="headerlink" href="#starting-and-enabling-services" title="Permanent link">&para;</a></h2>
 <p>To start the services:</p>
 <ol>
-<li>
-<p>To start GSI OpenSSH you can use the service command, e.g.:</p>
-<p><code>service gsisshd start</code></p>
+<li>To start GSI OpenSSH you can use the service command, e.g.:<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> service gsisshd start
+</pre></div>
+
+
 </li>
 </ol>
 <p>You should also enable the appropriate services so that they are automatically started when your system is powered on:</p>
 <ul>
-<li>
-<p>To enable OpenSSH by default on the node:</p>
-<p><code>chkconfig gsisshd on</code></p>
+<li>To enable OpenSSH by default on the node:<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> chkconfig gsisshd on
+</pre></div>
+
+
 </li>
 </ul>
 <h2 id="stopping-and-disabling-services">Stopping and Disabling Services<a class="headerlink" href="#stopping-and-disabling-services" title="Permanent link">&para;</a></h2>
 <p>To stop the services:</p>
 <ol>
-<li>
-<p>To stop OpenSSH you can use: \&lt;pre class=“rootscreen”></p>
-<p><code>service gsisshd stop</code></p>
+<li>To stop OpenSSH you can use:<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> service gsisshd stop
+</pre></div>
+
+
 </li>
 </ol>
 <p>In addition, you can disable services by running the following commands. However, you don't need to do this normally.</p>
 <ul>
-<li>
-<p>Optionally, to disable OpenSSH:</p>
-<p><code>chkconfig gsisshd off</code></p>
+<li>Optionally, to disable OpenSSH:<div class="codehilite"><pre><span></span><span class="gp">[root@server]#</span> chkconfig gsisshd off
+</pre></div>
+
+
 </li>
 </ul>
 <h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
 <p>You can get information on troubleshooting errors on the <a href="http://grid.ncsa.illinois.edu/ssh/ts_server.html">NCSA page</a>.</p>
 <p>To troubleshoot LCMAPS authorization, you can add the following to <code>/etc/sysconfig/gsisshd</code> and choose a higher debug level:</p>
-<div class="codehilite"><pre><span></span># level 0: no messages, 1: errors, 2: also warnings, 3: also notices,
-#  4: also info, 5: maximum debug
-LCMAPS_DEBUG_LEVEL=2
+<div class="codehilite"><pre><span></span><span class="c1"># level 0: no messages, 1: errors, 2: also warnings, 3: also notices,</span>
+<span class="c1">#  4: also info, 5: maximum debug</span>
+<span class="nv">LCMAPS_DEBUG_LEVEL</span><span class="o">=</span><span class="m">2</span>
 </pre></div>
 
 
 <p>Output goes to <code>/var/log/messages</code> by default.</p>
 <h2 id="test-gsi-openssh">Test GSI OpenSSH<a class="headerlink" href="#test-gsi-openssh" title="Permanent link">&para;</a></h2>
 <p>After starting the <code>gsisshd</code> service you can check if it is running correctly</p>
-<div class="codehilite"><pre><span></span>$ grid-proxy-init
-Your identity: /DC<span class="o">=</span>ch/DC<span class="o">=</span>cern/OU<span class="o">=</span>Organic Units/OU<span class="o">=</span>Users/CN<span class="o">=</span>User Name
-Enter GRID pass phrase <span class="k">for</span> this identity:
-Creating proxy ............................................................................................... Done
-Your proxy is valid <span class="k">until</span>: Sat Apr <span class="m">23</span> <span class="m">08</span>:18:27 <span class="m">2016</span>
-$ gsissh localhost -p <span class="m">2222</span>
-Last login: Tue Sep <span class="m">18</span> <span class="m">16</span>:08:03 <span class="m">2012</span> from itb4.uchicago.edu
-$
+<div class="codehilite"><pre><span></span><span class="gp">$</span> grid-proxy-init
+<span class="go">Your identity: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=User Name</span>
+<span class="go">Enter GRID pass phrase for this identity:</span>
+<span class="go">Creating proxy ............................................................................................... Done</span>
+<span class="go">Your proxy is valid until: Sat Apr 23 08:18:27 2016</span>
+<span class="gp">$</span> gsissh localhost -p <span class="m">2222</span>
+<span class="go">Last login: Tue Sep 18 16:08:03 2012 from itb4.uchicago.edu</span>
+<span class="gp">$</span>
 </pre></div>
 
 
