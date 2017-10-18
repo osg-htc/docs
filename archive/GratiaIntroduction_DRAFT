@@ -1,0 +1,56 @@
+---+ Introduction to Gratia Accounting
+
+%TOC{depth="3"}%
+
+---++ About this Document
+
+This document serves as an introduction to the Gratia accounting system: where the accounting takes place, where the accounting data is uploaded, and how the accounting data is displayed.
+
+---++ What is Accounting?
+
+In the OSG, job statistics and data transfers are recorded to determine computing and storage usage trends. The process by which this data is recorded and collected is called _accounting_.
+
+---++ What is Gratia?
+
+Gratia is used for accounting of jobs and data transfers in the OSG. Individual =Gratia probes= running on site resources (e.g. Compute Element, Storage Element, !GlideinWMS Frontend, etc.) collect data in the form of accounting records. In turn, these records are sent to a =Gratia Collector= (by default, the central OSG Gratia Collector), which can be accessed to visualize the records by =Gratia Reporters=.
+
+<img src="%ATTACHURLPATH%/gratia-basics.png" alt="gratia-basics.png" />    
+
+These are the definitions of the major elements in the above figure.
+
+   * *Gratia probe:* A piece of software that runs on a site's resource, generates accounting records, and uploads the accounting records to a =Gratia server=.
+   * *Gratia server:* A host that receives Gratia accounting records from the =Gratia probes= and can display aggregate records via =Reporter= (see below)
+   * *Collector:* A web service running on the =Gratia server= that collects data from one or more =Gratia probes=. Users do not directly interact with the =Collector=.
+   * *Reporter:* A web service running on the =Gratia server= that can be accessed using web clients such as [[http://display.grid.iu.edu/][OSG Display]] or [[http://gratiaweb.grid.iu.edu/][Gratia-Webtool]] as well as regular e-mail reports (subscribe [[Accounting.ReportsDescription][here]]).
+
+---+++ Gratia probes
+
+Currently, there are over a dozen probes that can report to a =Gratia collector= and can be divided into the following four categories.
+
+   * *Local Batch System probes:* A probe specific to to the type of site's batch system is running at each grid site. It collects information about finished jobs. Condor, Torque (PBS), LSF, SGE and Slurm Batch Systems are supported. The probes are installed with installation of a Compute Element or !GlideinWMS Frontend.
+   * *Transfer probes:* A probe collects information about the file transfers from/to Storage installed at each grid site. !GridFTP, !dCache, xrootd, hadoop transfer probes are supported. A probe is installed with installation of a Storage Element.
+   * *Storage probes:* A probe gathers information about physical and logical pools utilization of a Storage installed at each grid site.   dCache, xrootd, hadoop storage probe are supported. A probe is installed with installation of a Storage Element.
+   * *Worker Node probes:* The probes that  may be installed on a worker node are ps-accounting probe and glexec probes. ps-accounting probe collects unix accounting information about finished processes ran by user. Glexec probe reports information about identity  of the user running jobs via glidein pilot. More information about glexec could be found [[InstallGlexec][here]].
+
+---+++ Gratia probe lifecycle 
+
+The following outlines how Gratia probes collect and upload accounting records to a Gratia collector:
+
+   1. The probe is invoked with the configuration located in =/etc/gratia/%RED%PROBE-NAME%ENDCOLOR%/ProbeConfig=.
+   1. It collects the accounting information from the underlying system. For example, the Condor probe will read job history files from =PER_JOB_HISTORY_DIR= (default: =/var/lib/gratia/data=).
+   1. The collected data is transformed into Gratia records and the records are saved into =/var/lib/gratia/tmp/gratiafiles/=.
+   1. When there are a sufficient number of Gratia records, or when enough time has passed, Gratia uploads sets of records in batches to the Gratia server and removes records that have been successfully uploaded.
+   1. If there are failures in uploading the files to the Gratia server:
+      1. Files are not removed from =gratiafiles= until they are successfully uploaded.
+      1. Errors are logged to log files in =/var/log/gratia=.
+      1. The uploads will be tried again later.
+      1. %RED% TO DO: In some cases, failed transfers get moved somewhere else. No details, [todo] ask Brian%ENDCOLOR%
+
+#ReferenceSection
+---++ Details
+
+   * [[Documentation.Release3/InstallGratia_DRAFT][Installing and Maintaining Gratia Probes]]
+   * [[Documentation.Release3/TroubleshootingGratia_DRAFT][Troubleshooting Gratia Probes]]
+   * [[Documentation.Release3/GratiaReference_DRAFT][Gratia Probe Reference]]
+   * [[http://gratiaweb.opensciencegrid.org][Gratia reports by OSG site or VO]]
+   * [[http://display.opensciencegrid.org][Gratia aggregate reports]]

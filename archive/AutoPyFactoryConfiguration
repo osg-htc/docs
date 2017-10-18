@@ -1,0 +1,167 @@
+*WARNING: THIS DOCUMENTATION IS WORK IN PROGRESS!!*
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;width:100%}
+.tg td{font-family:Arial, sans-serif;font-size:12px;padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:12px;font-weight:normal;padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-raw1{font-weight:bold;color:#0055ff;text-align:left}
+.tg .tg-header{font-weight:bold;background-color:#c0c0c0;text-align:center}
+.tg .tg-splitheader{font-weight:bold;background-color:#e0e0e0;text-align:center}
+</style>
+
+
+<!-- some useful definitions  (need 3 white spaces before * to enable it)
+   * Set UCL_PROMPT_ROOT = [root@factory ~]$
+   * Set VERSION = 2.4.6
+-->
+
+---+!! Configuration of !AutoPyFactory
+<!--
+%DOC_STATUS_TABLE%
+-->
+%TOC{depth="3"}%
+
+---# About this Document
+
+This document describes all configuration variables in AutoPyFactory
+
+%INCLUDE{"Documentation/DocumentationTeam/DocConventions" section="Header"}%
+%INCLUDE{"Documentation/DocumentationTeam/DocConventions" section="CommandLine"}%
+
+%INCLUDE{"Documentation/Release3/AutoPyFactory" section="Version"}%
+
+---# Format of the configuration files
+
+The format of the configuration files is similar to the Microsoft INI files. The configuration file consists of sections, led by a =[section]= header and followed by =name: value= entries, with continuations in the style of [[http://tools.ietf.org/html/rfc822.html][RFC 822]] (see section 3.1.1, “LONG HEADER FIELDS”); =name=value= is also accepted. Note that leading whitespace is removed from values. Additional defaults can be provided on initialization and retrieval. Lines beginning with '#' or ';' are ignored and may be used to provide comments.
+
+It accepts interpolation. This means values can contain format strings which refer to other values in the same section, or values in a special =[DEFAULT]= section.
+
+Configuration files may include comments, prefixed by specific characters (# and ;). Comments may appear on their own in an otherwise empty line, or may be entered in lines holding values or section names. In the latter case, they need to be preceded by a whitespace character to be recognized as a comment. (For backwards compatibility, only ; starts an inline comment, while # does not.)
+
+As the python package !ConfigParser is being used to digest the configuration files, a wider explanation and examples can be found in the [[https://docs.python.org/2/library/configparser.html][python documentation page]]. 
+
+---# Reference Manual
+
+A detailed description of all configuration variables used in !AutoPyFactory can be found [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/AutoPyFactoryReferenceManual][here]]
+
+---# Configuration files
+
+---## sysconfig/autopyfactory
+
+The first set of configuration for the factory is done via the =/etc/sysconfig/autopyfactory= config file. 
+This is the configuration file used by the daemon service to decide how to run the factory. 
+It set the following variables:
+   * log level: *WARNING*, *INFO* or *DEBUG*
+   * time to sleep between internal cycles
+   * the username to switch into to. Note the factory will not run as root, but as a non priviledged account
+   * the log file
+Also, any other modifications to the environment needed by the factory can be set in this file.
+Example
+
+<pre class="file">
+OPTIONS="--debug --sleep=60 --runas=autopyfactory --log=/var/log/autopyfactory/autopyfactory.log"
+CONSOLE_LOG=/var/log/autopyfactory/console.log
+env | sort >> $CONSOLE_LOG
+</pre>
+
+---## logrotation
+
+The default location of the log files, as they are in the =/etc/sysconfig/autopyfactory= config file, are 
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% ls /var/log/autopyfactory/
+/var/log/autopyfactory/autopyfactory.log
+/var/log/autopyfactory/console.log (when used)
+</pre>
+
+However, if the location of the files is different and the =/etc/sysconfig/autopyfactory= file has been modified, 
+then the logrotation file =/etc/logrotate.d/autopyfactory= needs to be adjusted accordingly.
+ 
+<pre class="file">
+/var/log/autopyfactory/autopyfactory.log {   <b><-- CHANGE THIS IF NEEDED. </b>
+  missingok
+  notifempty
+  sharedscripts
+  size 100M
+  rotate 10
+  prerotate
+    [ -e /etc/init.d/autopyfactory ] && /etc/init.d/autopyfactory stop >/dev/null 2>&1 || true
+    sleep 5
+  endscript
+  postrotate
+    sleep 5
+    [ -e /etc/profile ] && . /etc/profile >/dev/null 2>&1 || true
+    [ -e /etc/init.d/autopyfactory ] && /etc/init.d/autopyfactory start >/dev/null 2>&1 || true
+  endscript
+}
+/var/log/autopyfactory/console.log {    <b><-- CHANGE THIS IF NEEDED. </b>
+  missingok
+  notifempty
+  sharedscripts
+  size 50M
+  rotate 2
+  prerotate
+    [ -e /etc/init.d/autopyfactory ] && /etc/init.d/autopyfactory stop >/dev/null 2>&1 || true
+    sleep 5
+  endscript
+  postrotate
+    sleep 5
+    [ -e /etc/profile ] && . /etc/profile >/dev/null 2>&1 || true
+    [ -e /etc/init.d/autopyfactory ] && /etc/init.d/autopyfactory start >/dev/null 2>&1 || true
+  endscript
+}
+
+</pre>
+
+
+/var/log/autopyfactory/autopy=
+
+---## autopyfactory.conf
+
+It is the configuration file where the generic parameters for the whole factory are set. 
+Its location and name, =/etc/autopyfactory/autopyfactory.conf=, is set in the daemon init script, =/etc/init.d/autopyfactory=, and therefore cannot be changed. 
+
+A detailed description of this file variables can be found in the [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/AutoPyFactoryReferenceManual#5_autopyfactory_conf][Reference Manual]]
+
+---## queues.conf
+
+It is the file where each !APFQueue is defined. 
+!AutoPyFactory is built around the concept of !APFQueues. An !APFQueue can be seen as the unique combination of these concepts:
+   * a wms system queue: where the payload jobs are waiting. The concept of wms queue is an abstraction, and it will depend on what WMS System is being used each case. Whe the WMS System is =PanDA=, the wms queue is the panda queue. When the WMS System is a condor pool, a wms queue is each different value of the classad =+MATCH_APF_QUEUE= that jobs in that condor pool carry.
+   * a batch system queue: where the pilots will be submitted. It could be a CE based on globus GT5, or GT2. It could be a CE based on CREAM. A CE based on HTCondor-CE. It could be an Amazon EC2 workflow managed by condor. It can be a remote condor pool. For all possibilities, chech the [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/AutoPyFactoryReferenceManual][Reference Manual]]
+
+That, plus an algorithm to decide how many pilots to submit each cycle.
+
+Therefore, each !APFQueue in !AutoPyFactory needs to set, at least, these elements:
+   * the plugin to query the wms service being used
+   * the name of the queue in that wms service (wmsqueue)
+   * the plugin to query the status of previous pilots in the batch system
+   * the plugin to submit new pilots to the batch system
+   * the plugin(s) to decide how many new pilots to submit each cycle 
+
+The complete list of configuration parameters can be found [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/AutoPyFactoryReferenceManual#6_queues_conf][Reference Manual]]
+
+For each !APFQueue, a section is set in this file. All !APFQueues sections become threads running asynchronously. 
+
+---## proxy.conf
+
+It is the file where the x509 proxy files are set, when needed. 
+The complete list of configuration parameters can be found [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/AutoPyFactoryReferenceManual#7_proxy_conf][Reference Manual]]
+
+---## monitor.conf
+
+It is the file to setup, if needed, where the factory will send information periodically for web monitor. 
+The complete list of configuration parameters can be found [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/AutoPyFactoryReferenceManual#8_monitor_conf][Reference Manual]]
+
+---## mappings.conf
+
+This file is being used internally by the factory to translate external tools information into internal nomenclature. 
+It defines completely the behavior of the factory. Unless you are an expert on the factory, *DO NOT TOUCH IT*.
+
+---# Workflows
+
+   * Configuration for WMS being !PanDA [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/AutoPyFactoryWorkflowPanda][here]]
+   * glideins based workflows. Some details on how to configure the factory to work in a glidein style are [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/AutoPyFactoryWorkflowGlidein][here]]
+   * Submission to CREAM CE [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/AutoPyFactoryWorkflowCream][here]]
+   * Submission to !NorduGrid CE [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/AutoPyFactoryWorkflowNorduGrid][here]]
+   * Submission to EC2 [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/AutoPyFactoryWorkflowEC2][here]]
+

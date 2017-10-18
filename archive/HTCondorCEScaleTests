@@ -1,0 +1,102 @@
+---+ HTCondor CE Scaling Tests
+%TOC% 
+---++ Introduction
+
+In the spring of 2010 GRAM5 [[http://www.t2.ucsd.edu/twiki2/bin/view/UCSDTier2/GRAM5Test1][scale tests]] were conducted. In 2014 a new CE technology arises: [[https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHTCondorCE][HTCondorCE]] thus a new round of scaling tests are needed. This document's objective is to gather all the results out of the HTCondor CE scaling tests that were performed in the Fall of 2014 by the OSG Scalability group and as an example test on the more general [[https://twiki.opensciencegrid.org/bin/view/SoftwareTeam/CETestScaling][CETestScaling]].
+
+---++ Metrics
+
+The metrics in which we were interested were two:
+
+   * Number of jobs per minute that went from CE idle to CE running per minute. Ramp up, speed.
+   * Total number of running jobs the CE could handle.
+
+---++ Results
+
+---+++ Total Number of Running jobs
+
+We reached ~16k running parallel jobs. For more than 24 hours:
+
+|*Total Running Jobs Batch*|
+|<img src="%ATTACHURLPATH%/16k.gif" alt="16k.gif" width='497' height='274' />  |
+
+---+++ Ramp Up Time:
+
+|*Bracket*| *Jobs/min*| *Plot*|
+|0-900| 60|<img src="%ATTACHURLPATH%/0-900.gif" alt="0-900.gif" width='397' height='174' />|
+|900-2k|90| <img src="%ATTACHURLPATH%/900-2000.gif" alt="900-2000.gif" width='397' height='174' />|
+|2k-12k| 54 |  <img src="%ATTACHURLPATH%/2k-12k.gif" alt="2k-12k.gif" width='397' height='174' /> |
+
+
+
+---++ Methodology
+
+To make the tests jobs were submitted from a submitter machine to a CE in UNL using, UNL's sleeper pool and production batch system.
+
+---+++ Test Pieces
+
+| *System* | *Host* | *Condor_version* |
+| CE | red.unl.edu | ? |
+| Batch System | red-condor.unl.edu | ? |
+| Submitter | test-002.t2.ucsd.edu | v8.3.1 |
+
+---+++ Procedure
+
+Jobs were submitted using through one of the [[http://sourceforge.net/projects/osgscal/][OSG Scalablity]] tools: loadtest_condor. Basically a bash script that creates a simulated (sleep) condor_g job load for many HTCondor universes and flavors (in this case HTCondor CE).
+
+---+++ Load Test Parameters
+
+| *Name* | *Value* |
+| *loadtest_condor version* | 1.1.0 + patches for HTCondor CE support |
+| *cluster (aka queue #)* | 10 |
+| *Job Length*  | randomized. Average of 8 hours |
+| *Input Trash/Sandbox Size*  | 50Kb |
+| *Output Sandbox* | None |
+| *Max Idle Jobs Schedd* | 1000 |
+| *Total Jobs submitter per test* | 40000 |
+
+---+++ Submitter Config Knobs
+
+<verbatim>
+ENABLE_USERLOG_FSYNC = False                                                                                                                    
+UPDATE_COLLECTOR_WITH_TCP = True
+LOCAL_DIR_STRING="$(LOCAL_DIR)"
+SCHEDD_EXPRS = $(SCHEDD_EXPRS) LOCAL_DIR_STRING                                                                                                                                   
+GRIDMANAGER_MAX_SUBMITTED_JOBS_PER_RESOURCE=40000
+GRIDMANAGER_MAX_PENDING_SUBMITS_PER_RESOURCE=40000
+GRIDMANAGER_MAX_PENDING_REQUESTS=2000
+# keep proxies valid at least 1 week, if avaialble                                                                                                            
+GRIDMANAGER_PROXY_REFRESH_TIME = 604800
+# CREAM specific                                                                                                                                              
+GRIDMANAGER_EMPTY_RESOURCE_DELAY=5
+GSI_SKIP_HOST_CHECK = False
+C_GAHP_WORKER_THREAD.GSI_DAEMON_NAME=
+C_GAHP_WORKER_THREAD.DENY_CLIENT=
+# condor CE setting to prevent proxies from being shortened to 24h (default) -- Jeff 2014-08-19                                                               
+DELEGATE_JOB_GSI_CREDENTIALS_LIFETIME = 345600   
+GRIDMANAGER_SELECTION_EXPR = regexps("([^ ]*) .*",GridResource,"\1")
+# Allow condor collector to fork several workers, so that condor_status doesn't hang it up -- Jeff 2014-08-19                                                 
+COLLECTOR_QUERY_WORKERS = 128
+MAX_JOBS_RUNNING=50000                                                                          
+GRIDMANAGER_MAX_JOBMANAGERS_PER_RESOURCE=100                                                                                                                        
+DELEGATE_JOB_GSI_CREDENTIALS_REFRESH = 0.75                                                                                                                                   
+GRIDMANAGER_PROXY_REFRESH_INTERVAL = 3600*6
+CONDOR_VIEW_CLASSAD_TYPES = Collector                                                                                                                             
+GRIDMANAGER_MAX_PENDING_REQUESTS=2000
+</verbatim>
+
+-- Main.EdgarMauricioFajardoHernandez2 - 22 Dec 2014
+
+ 
+
+   * 0-900.gif: <br />
+     <img src="%ATTACHURLPATH%/0-900.gif" alt="0-900.gif" width='897' height='674' />    
+
+   * 900-2000.gif: <br />
+     <img src="%ATTACHURLPATH%/900-2000.gif" alt="900-2000.gif" width='897' height='674' />    
+
+   * 16k.gif: <br />
+     <img src="%ATTACHURLPATH%/16k.gif" alt="16k.gif" width='897' height='674' />    
+
+   * 2k-12k.gif: <br />
+     <img src="%ATTACHURLPATH%/2k-12k.gif" alt="2k-12k.gif" width='897' height='674' />    
