@@ -1,0 +1,258 @@
+%DOC_STATUS_TABLE%
+
+---+!! SAZ Install Guide
+%TOC{depth="3"}%
+
+---# Introduction
+
+SAZ enables a Grid site administrator to enforce a Grid job whitelist/blacklist capability at his/her site. It does so by providing the site administrator the capability to ban (disable) or enable identity attributes that are associated with the credential that the user uses to run Grid jobs.  These identity attributes are:
+   * =User= - A user can be authorized or disabled from running grid jobs based on his/her DN (Distinguished Name), certificate serial number or proxy remaining lifetime. This is useful if you want to temporarally (or permanently) ban a user in response to a security incident or investigation (e.g. following a report that a certificate has been compromised).
+   * =Proxy Lifetime= - Enforce a limit on proxy lifetime on your grid resource.
+   * =CA= (Certificate Authority) based on its DN. This would ban a CA and thus all users using grid certificates issued by that CA from running grid jobs on your site.
+   * =VO= (Virtual Organization) based on its name. This would ban a VO and thus all users belonging to that VO from running grid jobs on your site.
+   * =FQAN= (Fully Qualified Attribute Name) based on its name. This would disable any jobs coming in with voms credentials generated using this FQAN from running on your site.
+
+SAZ also enables an administrator to "trust" a user - which means user is allowed to run grid jobs on the site in question using a vanilla grid proxy (i.e. without a FQAN)
+
+---# About This Document
+
+This document is intended for site administrators who want to install and configure the %LINK_GLOSSARY_SAZ% service.
+
+%INCLUDE{"Trash/DocumentationTeam/DocConventions" section="Header"}%
+%INCLUDE{"Trash/DocumentationTeam/DocConventions" section="CommandLine"}%
+
+
+---# Requirements
+
+---## Host and OS
+
+   * A host for the SAZ service<p>It is strongly recommended that SAZ be installed on a separate computer from the %LINK_GLOSSARY_CE%, although it is possible to install both on the same computer. But for security reasons, it is best to run the authorization service separately from any resource that can run user jobs.</p>
+   * OS is %SUPPORTED_OS%
+   * Root access
+
+---## Users
+
+The SAZ installation will create two users unless they exist already:
+
+%STARTSECTION{"Users"}%
+| *User* | *Default UID* | *Comment* |
+| =mysql= |  27  | Runs the !MySQL database server, which SAZ uses |
+| =tomcat= |  91  | Runs the Tomcat web application server, which runs SAZ |
+
+Note that if UIDs 27 and 91 are taken already but not used for the appropriate users, you will experience errors. [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/KnownProblems#Reserved_user_ids_especially_for][Details...]]
+%ENDSECTION{"Users"}%
+
+---## Certificates
+
+| *Certificate* | *Certificate Owner* | *Path to Certificate* |
+| HTTP service certificate | =tomcat= | =/etc/grid-security/http/httpcert.pem= <br> =/etc/grid-security/http/httpkey.pem= |
+
+Note: This doesn't need to be a http based service certificate, it can be a copy of host certificate
+
+---## Networking
+
+%STARTSECTION{"Firewalls"}%
+%INCLUDE{"Documentation/Release3.FirewallInformation" section="FirewallTable" lines="saz"}%
+%ENDSECTION{"Firewalls"}%
+
+---# Installation Procedure
+
+%INCLUDE{"YumRepositories" section="OSGRepoBrief" TOC_SHIFT="+"}%
+%INCLUDE{"InstallCertAuth" section="OSGBriefCaCerts" TOC_SHIFT="+"}%
+
+---## Install and Configure SAZ
+
+---### Install SAZ
+
+   1. Install the SAZ Service <pre class="rootscreen">%UCL_PROMPT_ROOT% yum install saz-service --enablerepo=osg-development</pre>
+   1. Install Fetch CRL %INCLUDE{"InstallCertAuth" section="FetchCRLInstallShort"}% 
+   1. Configure Tomcat to use GSI <pre class="rootscreen">%UCL_PROMPT_ROOT% /var/lib/trustmanager-tomcat/configure.sh</pre><p><strong>Note:</strong> This step will overwrite your =/etc/tomcat5/server.xml= file (For OSG 3.x (RPM) installs on EL5 systems) and =/etc/tomcat6/server.xml= file (For OSG 3.x (RPM) installs on EL6 systems) ; if you are using Tomcat on this host for non-grid purposes, you may want to save the =server.xml= file first, run the script, then merge your own configuration back into the file.</p>
+   1. Modify ownership of http cert/key<pre class="rootscreen">%UCL_PROMPT_ROOT%chown -R tomcat:tomcat /etc/grid-security/http </pre>
+
+---### Configure SAZ database
+
+In this section, you will configure the SAZ !MySQL database by creating a new database. Pick the appropriate subsection below for your environment.
+
+---#### New Installation
+
+   1. Start !MySQL<pre class="rootscreen">%UCL_PROMPT_ROOT% service mysqld start</pre>
+   1. Create a new SAZ database<pre class="rootscreen">%UCL_PROMPT_ROOT% /usr/bin/saz-db-conf-setup --user sazdbuser --host localhost:3306 --password <em>PASSWORD</em> --sazserver FQDN-SAZ-SERVER --userproxy-lifetime 10000 --def-user-enabled Y --def-user-trusted N --def-ca-enabled Y --def-ca-trusted N --def-vo-enabled Y --def-vo-trusted N --def-role-enabled Y --def-role-trusted N --ban-usercert-serial-num N --ban-userproxy-lifetime N --req-host-dn N</pre><p><strong>Note:</strong> This password will be in plaintext in the =/etc/saz/hibernate.cfg.xml= file, so choose one that is not used anywhere else. The =hibernate.cfg.xml= file should be readable only by the =tomcat= user, but this situation provides light security at best.</p>
+   1. Add yourself as a SAZ administrator<pre class="rootscreen">%UCL_PROMPT_ROOT% /usr/bin/saz-add-mysql-admin '<em>Admin DN</em>' '<em>Admin Name</em>' </pre>
+   1. [Optional but recommended:] Apply reasonable !MySQL security settings<pre class="rootscreen">%UCL_PROMPT_ROOT% /usr/bin/mysql_secure_installation</pre>
+
+---### Post installation
+
+Create symlink to configuration file (Ugly but needs to be done for now)
+<pre>
+ln -s /etc/saz/sazserver.conf /usr/share/tomcat5/sazserver.conf
+</pre>
+or
+<pre>
+ln -s /etc/saz/sazserver.conf /usr/share/tomcat6/sazserver.conf
+</pre>
+
+---# Services
+
+The SAZ service is a web application running within the Tomcat web application server. It uses the !MySQL database server for storage and the Fetch CRL service to maintain each %LINK_GLOSSARY_CRL%.
+
+---## Starting and Enabling Services
+
+To start SAZ and associated services:
+
+   1. Start SAZ and associated services
+      * %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlStart"}%
+      * Start other services<pre class="rootscreen">%UCL_PROMPT_ROOT% /sbin/service mysqld start
+%RED% # For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/service tomcat5 start
+%RED% # For RHEL 6, CentOS 6, and SL6  %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/service tomcat6 start
+</pre>
+   1. [Optional but recommended:] Enable services so that they start automatically when your system is powered on
+      * %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlEnable"}%
+      * Enable other services <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/chkconfig mysqld on
+%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/chkconfig tomcat5 on
+%RED%# For RHEL 6, CentOS 6, and SL6 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/chkconfig tomcat6 on
+</pre>
+---## Stopping and Disabling Services
+
+To stop SAZ and associated servies, stop it and associated services in the opposite order from which you started them:
+
+   1. Stop the SAZ and associated services:
+      * Stop main services <pre class="rootscreen">
+%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/service tomcat5 stop
+%RED%# For RHEL 6, CentOS 6, and SL6 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/service tomcat6 stop
+%RED%# For RHEL 5/6, CentOS 5/6, and SL5/6%ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/service mysqld stop
+</pre>
+      * (other grid service running on the machine may still use it) %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlStop"}%
+   1. Stop services from starting when the system is powered on
+      * Disable the main services <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/chkconfig mysqld off
+%RED%# For RHEL 5, CentOS 5, and SL5 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/chkconfig tomcat5 off
+%RED%# For RHEL 6, CentOS 6, and SL6 %ENDCOLOR%
+%UCL_PROMPT_ROOT% /sbin/chkconfig tomcat6 off
+</pre>
+      * (other grid service running on the machine may still use it) %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlDisable"}%
+
+---# Validating SAZ
+
+This section is optional, but if you would like to verify that your SAZ installation and configuration are good, consider using some or all of the sections below.
+
+---## Connect to the SAZ web page
+
+Connect to =https://<em>HOSTNAME</em>:8443/saz/services/SAZXACMLAuthorizationServicePort= .
+
+If you do not see it load, check a few things:
+
+%RED%#For OSG 3.x (RPM) installs on EL5 systems%ENDCOLOR% 
+   * Look for errors in =/var/log/tomcat5/catalina.out= and =/var/log/tomcat5/catalina.err=.
+   * Look for errors in =/var/log/tomcat5/trustmanager.log=. There are likely to be CRL errors in this file, this can be ignored unless all your CA's get CRL errors in which case you should check to make sure that your CRL updates are running correctly.
+
+%RED%#For OSG 3.x (RPM) installs on EL6 systems%ENDCOLOR%
+   * Look for errors in =/var/log/tomcat6/catalina.out= and =/var/log/tomcat6/catalina.err=.
+   * Look for errors in =/var/log/tomcat6/trustmanager.log=. There are likely to be CRL errors in this file, this can be ignored unless all your CA's get CRL errors in which case you should check to make sure that your CRL updates are running correctly.
+
+%RED%#For both EL5/EL6 systems%ENDCOLOR%
+   * Ensure that you have an http certificate in =/etc/grid-security/http/httpcert.pem= and =/etc/grid-security/http/httpkey.pem=. Make sure it is readable by the =tomcat= user. Permissions should be as follows:<pre class="screen">
+# ls -l /etc/grid-security/http/
+total 8
+-r--r--r-- 1 tomcat tomcat 1671 Jul  2 15:54 httpcert.pem
+-r-------- 1 tomcat tomcat 1675 Jul  2 15:54 httpkey.pem</pre>
+---# Troubleshooting
+
+---## Useful Configuration and Log Files
+
+Configuration Files
+| *Service or Process* | *Configuration File* | *Description* |
+| !MySQL | =/etc/my.cnf= | !MySQL configuration, e.g. server port |
+| tomcat (EL5) | =/etc/tomcat5/= | Tomcat configuration files |
+| tomcat (EL6) | =/etc/tomcat6/= | Tomcat configuration files |
+| SAZ | =/etc/saz/sazserver.conf= | SAZ configuration files |
+| SAZ | =/etc/saz/hibernate.cfg.xml= | |
+| SAZ | =/etc/saz/log4j.properties= | |
+
+Log files
+| *Service or Process* | *Log File* | *Description* |
+| tomcat (EL5) | =/var/log/tomcat5/catalina.out= | This is the Tomcat log file. Problems (and a lot of noise) are reported here. |
+| | =/var/log/tomcat5/trustmanager.log= | The trustmanager handles things related to authentication. Useful errors are sometimes here. |
+| tomcat (EL6) | =/var/log/tomcat6/catalina.out= | This is the Tomcat log file. Problems (and a lot of noise) are reported here. |
+| | =/var/log/tomcat6/trustmanager.log= | The trustmanager handles things related to authentication. Useful errors are sometimes here. |
+| *SAZ* | =/var/log/saz/sazserver.log= | SAZ server logs and error messages |
+
+---# How to get Help?
+
+To get assistance please use the [[HelpProcedure][Help Procedure]].
+
+---# References
+   * [[http://tomcat.apache.org/tomcat-5.5-doc/]] Official tomcat5 documentation
+   * [[http://tomcat.apache.org/tomcat-6.0-doc/]] Official tomcat6 documentation
+   * [[http://www.hibernate.org/docs]] Official hibernate documentation
+
+
+---# Comments
+
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = NehaSharma
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Security
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = StevenTimm 	
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %NO%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = StevenTimm 	
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %NO%
+############################################################################################################
+-->
+
+
+
+-- Main.NehaSharma - 28 May 2013

@@ -1,0 +1,113 @@
+---+ Installing and Maintaining Gratia Accounting
+
+%TOC{depth="3"}%
+
+---++ About This Guide
+
+---++ Installing Gratia
+
+Installation, setup and troubleshooting of the Gratia probes
+   * The [[Documentation/Release3.InstallComputeElement][Compute Element install document]] will tell you also how to install its Gratia probes (for HTCondor, PBS, LSF, RSV, ...), mostly using =osg-configure= that simplifies the configuration.
+   * Similarly install documents of Storage Elements describe also probes installation and configuration.
+   * [[Accounting.ProbeConfigGlideinWMS][Gratia probe for HTCondor]]. Pay attention to [[Accounting.ProbeConfigGlideinWMS#Users_without_Certificates][this section]] if you are in a Campus Grid or any setup where x509 authentication (Grid certificates for users) is NOT used.
+   * [[Documentation/Release3.InstallGlideinWMSFrontend#GratiaAccounting][Installing the HTCondor probe on a VO Frontend]]
+   * [[Documentation/Release3.GlideinWMSCampusGrid#GratiaAccounting][HCCondor probe in a Campus Grid]]
+   * InstallAwsVmGratiaProbe
+<!--
+   * [[Documentation/Release3.InstallGratiaLrmsProbe][Install and Configure Gratia LRMS Probes]] (HTCondor, PBS, LSF, SGE, GE, ...)
+-->   
+
+   * [[TroubleshootingGratia][Troubleshooting Gratia]]
+
+---++ Configuring Gratia
+
+In normal cases, =osg-configure= does the editing of the probe configuration files, at least on the CE. The configuration is found in =/etc/osg/config.d/30-gratia.ini= and [[IniConfigurationOptions#Gratia][documented elsewhere]]. 
+
+If there are problems or special configuration, you might need to edit the Gratia configuration files yourself. Each probe has a separate configuration file found in =/etc/gratia/%RED%PROBE-NAME%ENDCOLOR%/ProbeConfig=. 
+
+The !ProbeConfig files have many details. A few options that you might need to edit are shown before. This is *not* a complete file, but only shows a subset of the options.
+
+<pre class="file">
+&lt;ProbeConfiguration 
+
+    CollectorHost="gratia-osg-itb.opensciencegrid.org:80"
+    SSLHost="gratia-osg-itb.opensciencegrid.org:80"
+    SSLRegistrationHost="gratia-osg-itb.opensciencegrid.org:80"
+
+    ProbeName="condor:fermicloud084.fnal.gov"
+    SiteName="WISC_OSG_EDU"
+    EnableProbe="1"
+/>
+</pre>
+
+The options you see here are:
+
+| *Option* | *Comments* |
+| !CollectorHost | The Gratia server this probe reports to |
+| !SSLHost | The Gratia server this probe reports to |
+| !SSLRegistrationHost | The Gratia server this probe reports to |
+| !ProbeName | The unique name for this probe. Note that it includes the probe type and the host name |
+| !SiteName | The name of your site, as registered in OIM. If your site must be registered in OIM |
+| !EnableProbe | The probe will only run if this is "1" |
+
+Again, there are many more options in this file. Most of the time you won't need to touch them.
+
+---+++ Optional Configuration
+
+If you have an OSG Compute Element all the pieces should be present and you should report correctly to Gratia. But sometimes you may require special configurations: some of the jobs have no VO association and risk not to be reported to the OSG accounting (Gratia)
+
+%NOTE% Before modifying your local configuration check if those are jobs you should count or if someone else should count them. Avoid double counting and choose the most appropriate place to report the jobs. E.g. If you are receiving jobs from a Compute Element that is forwarding them to you (e.g. via HTCondor flocking), the CE first accepting them should report those jobs. The same applies if you have a gateway accepting jobs and resubmitting them via BOSCO.
+
+---++++ All your jobs belong to a VO 
+If you have no CE or have a mix of Grid submitted and local jobs running on your cluster and you want to report them all as running for a specific VO, then set !VOOverride in the probe configuration. Further, if you want to keep track also of the original local group, add also !MapGroupToRole.  In the below example, replace the %RED%osg%ENDCOLOR% with a registered VO that you would like to report as.  If you don't have a VO that you are affiliated with, you may use "osg".
+
+<pre class="file">
+...
+    %RED%MapGroupToRole="1"%ENDCOLOR%
+    %RED%VOOverride="OSG"%ENDCOLOR%
+...
+</pre>
+
+---++++ You are running a Campus Grid and have no Compute Element 
+If you have a HTCondor cluster connected to a [[https://twiki.grid.iu.edu/bin/view/Accounting/ProbeConfigGlideinWMS#Users_without_Certificates][campus grid]] you can use 3 different ways to associate your jobs to a VO. The last 2 reported below, especially the 3rd, allow you to map only some of the jobs, e.g. if you do not want to report some jobs to OSG accounting:
+   * If all your users belong to one VO you can use the example above.
+   * Otherwise you can use the local Group Names as VO names (you'd have to have control of the unix groups) <pre class="file">
+    ...
+    SuppressGridLocalRecords="0"
+    %RED%MapUnknownToGroup="1"%ENDCOLOR%
+    ...
+</pre>
+   * As 3rd alternative you can use =user-vo-map= as explained below
+
+---++++ You have some local users that you want to report to OSG accounting
+If some users are already associated to a VO, e.g. via one of the mechanisms described in the previous chapter, and some users are not part of any VO and you don't want to report them at all: a flexible mechanism is the use of the [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/Edg-mkgridmap#3_0_Configuration][user-vo-map file]]. If you are already an OSG site you may also use GUMS.
+
+=/var/lib/osg/user-vo-map= is a file generated automatically on a CE via [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/Edg-mkgridmap][edg-mkgridmap]] or GUMS. In it there is a list of valid VO names and all users are mapped to a VO. See [[http://vdt.cs.wisc.edu/extras/edg-mkgridmap.conf.html][user-vo-map file]] for more information. 
+
+---+++++ In GUMS
+You can define [[https://www.racf.bnl.gov/Facility/GUMS/1.2/use_configuration.html][groupToAccountMappings]] and [[https://www.racf.bnl.gov/Facility/GUMS/1.2/use_users.html][add Manual Users Group Members]].
+
+---+++++ Using Edg-mkgridmap
+If you want to add some local user and map it to an existing VO, then edit =/etc/osg/local-user-vo-map= mapping the users, e.g.:
+<pre class="file">
+# file /etc/osg/local-user-vo-map
+newuser1 voname
+newuser2 voname
+newuser3 voname2
+</pre>
+
+If you want to add some local user and map it to a new VO, then edit =/etc/osg/local-user-vo-map= mapping the users as before, and also add the VO lines to =/etc/edg-mkgridmap.conf=, e.g. if =voname2= used above is new:
+<pre class="file">
+# file /etc/edg-mkgridmap.conf
+# USER-VO-MAP voname2 REPORTABLE_VONAME2 -- 13 -- This is my local VO (admin@mydomain.edu)
+</pre>
+After USER-VO-MAP there are the VOName and !ReportableVOName for the accounting record and then some arbitrary comments.
+
+%NOTE% All the files above are part of the OSG Compute Element installation but you can still edit by hand a =/var/lib/osg/user-vo-map= with the mappings you are interested in and the Gratia probes will use it even if you have no OSG CE installed.
+
+#ReferenceSection
+---++ Reference
+
+   * [[Documentation.Release3/GratiaIntroduction_DRAFT][Gratia Probe Introduction]]
+   * [[Documentation.Release3/TroubleshootingGratia_DRAFT][Troubleshooting Gratia Probes]]
+   * [[Documentation.Release3/GratiaReference_DRAFT][Gratia Probe Reference]]

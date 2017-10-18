@@ -1,0 +1,146 @@
+---+ *Enabling VOMS Admin*
+%DOC_STATUS_TABLE%
+%TOC{depth="2"}%
+
+---++ About This Document
+This document is included in the larger document [[Trash.ReleaseDocumentationVomsInstallGuide][VOMS Install Guide]].  This document is meant to be read in combination with the install guide.
+
+%STARTINCLUDE% 
+%BR%
+
+%EDITTHIS% 
+%BR% Several things have to be done to actually enable your VO to begin accepting membership, process voms proxy requests, and used to retrieve membership lists for the various [[Trash.ReleaseDocumentationAboutAuthorizationForCE][authorization modes]] used on the compute (CE) and storage (SE) element nodes.
+
+The following sub-sections will reference the default %RED%VDT%ENDCOLOR% in the text and examples. When enabling your 'real' VO, the same steps are required and, where different, it will be noted.
+
+*Note:* If you are using VOMRS to manage your VO membership, there is no need for a VOMS administrator. The only item that must be performed is to enable read-only access to your VO for the GUMS service and/or =edg-mkgridmap= services. For more information on VOMRS, refer to the [[Trash.ReleaseDocumentationIntroducingVOMRS][Introducing VOMRS]] topic.
+
+---++ Enabling read-only access to your VO
+ An ACL needs to be created with ="CONTAINER_READ,MEMBERSHIP_READ"= capabilities for anyone that presents a certificate issued by a known VO. The purpose for this is two-fold: 
+   * Those sites using [[Trash.ReleaseDocumentationInstallConfigureAndManageGUMS][GUMS servers]] will be able to access your VO without the VO-Admin having to individually provide this =ACL= capability on a case by case basis. 
+   * It allows VO members or (those that think they are VO members) to query the VOMS to troubleshoot problems in getting voms proxies and verify their membership in various groups and role assignments. 
+
+*Note:* - this *is required* even if you are using VOMRS.
+
+To enable read-only access, execute the following command:
+<pre class="screen">
+%UCL_PROMPT_ROOT% voms-admin --nousercert --vo %RED%VDT%ENDCOLOR% add-ACL-entry      /%RED%VDT%ENDCOLOR%     ANYONE VOMS_CA     "CONTAINER_READ,MEMBERSHIP_READ"     true 
+</pre> 
+The =ANYONE= and =VOMS_CA= arguments are keywords used in VOMS to denote " =anyone with a valid certificate= ".
+
+*Note:* - If you are *NOT* using VOMRS , then you must continue with the remaining configuration steps.
+
+---++ Establishing a VO-Admin
+ A person (or persons) can be designated as the VO-Admin for the VOMS VO created. This person(s) has administrative capability within VOMS that the normal VO member will not have.
+
+*Note:* - this is *not* required if you are using VOMRS.
+
+If you are doing this for the first time as the =root= user, you may have to set a couple variables. Try it without setting them, but if you get an =access denied= message, this should resolve the problem.
+<pre>
+%UCL_PROMPT_ROOT% export X509_USER_CERT=/etc/grid-security/http/httpcert.pem
+%UCL_PROMPT_ROOT% export X509_USER_KEY=/etc/grid-security/http/httpkey.pem </pre>
+
+There are 2 options for adding this capability to an individual:
+   1 The individual *is not* a member of the VO.%BR% An ACL for that individual with _full rights_ permissions allows a person to administer the VO's VOMS from the command line and WEB UI. 
+      * If the individual's certificate file is available: <pre class="screen">
+%UCL_PROMPT_ROOT% voms-admin --vo %RED%VDT%ENDCOLOR% add-ACL-entry /%RED%VDT%ENDCOLOR% __usercert.pem__ ALL true
+</pre> 
+      * Individual's certificate file is *not* available: <pre class="screen">
+%UCL_PROMPT_ROOT% voms-admin --nousercert --vo %RED%VDT%ENDCOLOR% add-ACL-entry /%RED%VDT%ENDCOLOR% " __USER DN__ " " __USER CA__ " ALL true </pre> 
+   1 The individual <u>is</u> a member of the VO. This can be accomplished by giving the individual the =ACL= capability above or by first adding them to the VO as a member (described in the next section) and then assigning them the =VO-Admin= role with the following command: 
+      * Individual's certificate file is available: <pre class="screen">%UCL_PROMPT_ROOT% voms-admin --usercert __usercert.pem__ --vo %RED%VDT%ENDCOLOR% assign-role /%RED%VDT%ENDCOLOR% VO-Admin </pre> 
+      * Individual's certificate file is <u>not</u> available: <pre class="screen">%UCL_PROMPT_ROOT% voms-admin --nousercert --vo %RED%VDT%ENDCOLOR% assign-role /%RED%VDT%ENDCOLOR% VO-Admin " __USER DN__ " " __USER CA__ " </pre> 
+
+---++ Adding a user to the VO
+ Individuals with the =VO-Admin= role or the =ALL= ACL are referred to as VO Managers in VOMS and are the only ones who can add new members via the web UI.
+
+*Note:* - this is *not* required if you are using VOMRS.
+
+In normal practice, users will request VO membership by accessing the =New user registration= menu item on the main VOMS web page. This document will not go into the details of that process here, nor will it address the basic usage and navigation of the VOMS web ui.
+
+The purpose of this section is to show you how to add a user for the purposes of assigning the =VO-Admin= role as a part of the initial setup.
+
+Four data items are required for each user:
+   * DN 
+   * CA 
+   * Common Name (CN part of the DN or just 1st and last name so you can be easily identified) 
+   * email address 
+
+If you have the user's certificate file available, then these 4 items are derived from that.
+   * Individual's certificate file is available: <pre class="screen">%UCL_PROMPT_ROOT% voms-admin --vo %RED%VDT%ENDCOLOR% create-user __usercert.pem__ </pre> 
+   * Individual's certificate file is *not* available: <pre class="screen">%UCL_PROMPT_ROOT% voms-admin --nousercert --vo %RED%VDT%ENDCOLOR% create-user " __USER DN__ " " __USER CA__ " " __USER CN__ " " __USER EMAIL__ " </pre> This adds the individual to the top level group or VO, e.g. =VDT= in this case. 
+
+If you have added the user for the purpose of assigning the =VO-Admin= role, you will want to re-visit [[Trash.ReleaseDocumentationVomsInstallGuide#Establishing_a_VO_Admin][Establishing a VO-Admin]] to assign the role.
+
+---++ Verifying you are a VO-Admin
+ If you've established yourself with the =VO-Admin= role or with the =ALL= ACL, you can now go back the VOMS WEB UI in a browser with your certificate: 
+   1 You will be on a =Welcome to ...= page showing your VO membership information. 
+   1 Select =VO management= in the top menu 
+   1 Then under the =Manage= menu, select =Groups= 
+   1 Then, select the =root= group which is your the VO name ( =VDT= in this example) 
+   1 You should then see the =Access control list (ACL)= that the above steps have defined. 
+
+The VOMS Admin User's Guide can be accessed at https://twiki.cnaf.infn.it/cgi-bin/twiki/view/VOMS/WebDocumentation .
+
+*Note:* - this is *not* required if you are using VOMRS.
+
+<!--
+Main.JohnWeigand - 27 Feb 2007
+-->
+
+%STOPINCLUDE% 
+
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = StevenTimm
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = VO
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = VOManager
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = HowTo
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+   * Local TEST_READY   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = DerekWeitzel
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = MarcoMambelli
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

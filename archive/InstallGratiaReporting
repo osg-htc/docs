@@ -1,0 +1,538 @@
+%DOC_STATUS_TABLE%
+
+---+!! Install Gratia Reporting
+%TOC%
+
+<!-- conventions used in this document
+   * Local UCL_HOST = %URLPARAM{"INPUT_HOST" encode="quote" default="gratia"}%
+   * Local UCL_USER = %URLPARAM{"INPUT_USER" encode="quote" default="user"}%
+   * Local UCL_DOMAIN = %URLPARAM{"INPUT_DOMAIN" encode="quote" default="opensciencegrid.org"}%
+   * Set TWISTY_OPTS_DETAILED = mode="div" showlink="Show Detailed Output" hidelink="Hide" showimgleft="/twiki/pub/TWiki/TWikiDocGraphics/toggleopen-small.gif" hideimgleft="/twiki/pub/TWiki/TWikiDocGraphics/toggleclose-small.gif" remember="on" start="hide" 
+-->
+%STARTINCLUDE%
+%EDITTHIS%
+
+---+ About this Document
+This document is for Site System Administrators who are running local [[InstallGratiaService][Gratia Service Collector]] and want to get various reports about resource usage and jobs via emails. 
+
+---+ Introduction
+%STARTSECTION{"GratiaReportingDefinition"}%
+Gratia accounting collects data from various grid resources and populates them into a database. This data is then used to generate reports that are sent to end users, site admins, management and stakeholders. These reports form an important part of the gratia accounting mechanism in the sense it provides a quick summary of the big picture of Grid Accounting. These reports have a significant impact in terms of understanding the accountability of resources, how efficiently these resources are being utilized, by whom, when and much more.  See the detailed information [[https://twiki.grid.iu.edu/bin/view/Accounting/ReportsDescription][here]].
+
+---++ Overview of how it works
+   1. Install the package using yum with additional rpm (see below for detail).
+   1. Modify several configuration files to tailor your reports.
+   1. There are perl or python scripts that actually generate reports and send them as emails to the subscribers.  These scripts are executed as the cron job. The configuration of the cron file defines the subset of reports the service will generate.
+%ENDSECTION{"GratiaReportingDefinition"}%
+
+
+---+ Requirements
+---++ Host and OS
+   * A host to install the Gratia Reporting. Could be installed on the same node as [[InstallGratiaService]Gratia Service]]
+   * OS is %SUPPORTED_OS%. Currently most of our testing has been done on Scientific Linux 5.
+   * Time must be synchronized. You can find more in the [[HostTimeSetup][time synchronization document]].
+   * Root access
+
+
+---+ Installation Procedure
+
+%INCLUDE{"YumRepositories" section="OSGRepoBrief" TOC_SHIFT="+"}%
+
+
+
+%STARTSECTION{"InstallOSGGratiaReportingRPMs"}%
+
+---++ Install Gratia Reporting
+
+%WARNING% Pay attention that an extra RPM repository is required (DAG/RPMforge). Without the =--enablerepo= option the installation below will fail. The repositories should be available even though disabled by default, so the lines below should work. If you get a "repository not found" error, then you need to add the repo. Please look at the [[http://wiki.centos.org/AdditionalResources/Repositories/RPMForge][RPMForge page]] to do so.
+
+<pre class="rootscreen">
+# EPEL 5 (For RHEL 5, CentOS 5, and SL5) 
+%UCL_PROMPT_ROOT% yum install --enablerepo dag gratia-reporting
+# EPEL 6 (For RHEL 6, CentOS 6, and SL6) 
+%UCL_PROMPT_ROOT% yum install --enablerepo rpmforge gratia-reporting
+</pre> 
+
+%TWISTY{%TWISTY_OPTS_DETAILED%}%   
+
+<pre class="rootscreen">
+
+%UCL_PROMPT_ROOT% yum install --enablerepo dag gratia-reporting
+Loaded plugins: kernel-module, priorities
+dag                                                                                                 | 1.9 kB     00:00     
+dag/primary_db                                                                                      | 6.9 MB     00:00     
+Excluding Packages from SLF 5 base
+Finished
+Reducing SLF 5 base jdk to included packages only
+Finished
+Excluding Packages from SLF 5 security updates
+Finished
+Reducing SLF 5 security updates jdk only to included packages only
+Finished
+Excluding Packages from SL 5 base
+Finished
+Reducing SL 5 base jdk to included packages only
+Finished
+2963 packages excluded due to repository priority protections
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package gratia-reporting.noarch 0:1.12-6.pre.osg.el5 set to be updated
+--> Processing Dependency: perl-libxml-perl for package: gratia-reporting
+--> Processing Dependency: perl(XML::LibXML) for package: gratia-reporting
+--> Processing Dependency: perl-DBD-MySQL for package: gratia-reporting
+--> Processing Dependency: perl-XML-LibXML for package: gratia-reporting
+--> Processing Dependency: perl(DBI) for package: gratia-reporting
+--> Processing Dependency: perl-Text-Table for package: gratia-reporting
+--> Processing Dependency: perl(Text::Table) for package: gratia-reporting
+--> Processing Dependency: libxml2-devel for package: gratia-reporting
+--> Processing Dependency: mutt for package: gratia-reporting
+--> Processing Dependency: perl(Date::Calc) for package: gratia-reporting
+--> Processing Dependency: perl-Date-Calc for package: gratia-reporting
+--> Processing Dependency: perl(IPC::Run) for package: gratia-reporting
+--> Processing Dependency: mysql for package: gratia-reporting
+--> Processing Dependency: perl-IPC-Run for package: gratia-reporting
+--> Running transaction check
+---> Package libxml2-devel.x86_64 0:2.6.26-2.1.15.el5_8.2 set to be updated
+--> Processing Dependency: pkgconfig for package: libxml2-devel
+--> Processing Dependency: zlib-devel for package: libxml2-devel
+---> Package mutt.x86_64 5:1.4.2.2-3.0.2.el5 set to be updated
+---> Package mysql.x86_64 0:5.0.95-1.el5_7.1 set to be updated
+---> Package perl-DBD-MySQL.x86_64 0:3.0007-2.el5 set to be updated
+---> Package perl-DBI.x86_64 0:1.52-2.el5 set to be updated
+---> Package perl-Date-Calc.x86_64 0:5.4-1.2.2.1 set to be updated
+--> Processing Dependency: perl-Bit-Vector >= 6.4 for package: perl-Date-Calc
+--> Processing Dependency: perl(Bit::Vector) for package: perl-Date-Calc
+--> Processing Dependency: perl(Carp::Clan) for package: perl-Date-Calc
+---> Package perl-IPC-Run.noarch 0:0.84-2.el5.rf set to be updated
+---> Package perl-Text-Table.noarch 0:1.114-1.el5.rf set to be updated
+--> Processing Dependency: perl(Text::Aligner) for package: perl-Text-Table
+---> Package perl-XML-LibXML.x86_64 0:1.58-6 set to be updated
+--> Processing Dependency: perl-XML-NamespaceSupport for package: perl-XML-LibXML
+--> Processing Dependency: perl(XML::SAX::Exception) for package: perl-XML-LibXML
+--> Processing Dependency: perl(XML::LibXML::Common) for package: perl-XML-LibXML
+--> Processing Dependency: perl-XML-SAX for package: perl-XML-LibXML
+--> Processing Dependency: perl-XML-LibXML-Common for package: perl-XML-LibXML
+--> Processing Dependency: perl(XML::SAX::DocumentLocator) for package: perl-XML-LibXML
+--> Processing Dependency: perl(XML::SAX::Base) for package: perl-XML-LibXML
+--> Processing Dependency: perl(XML::NamespaceSupport) for package: perl-XML-LibXML
+---> Package perl-libxml-perl.noarch 0:0.08-1.2.1 set to be updated
+--> Running transaction check
+---> Package perl-Bit-Vector.x86_64 0:6.4-2.2.2.1 set to be updated
+---> Package perl-Carp-Clan.noarch 0:5.3-1.2.1 set to be updated
+---> Package perl-Text-Aligner.noarch 0:0.03-1.el5.rf set to be updated
+---> Package perl-XML-LibXML-Common.x86_64 0:0.13-8.2.2 set to be updated
+---> Package perl-XML-NamespaceSupport.noarch 0:1.09-1.2.1 set to be updated
+---> Package perl-XML-SAX.noarch 0:0.14-11 set to be updated
+---> Package pkgconfig.x86_64 1:0.21-2.el5 set to be updated
+---> Package zlib-devel.x86_64 0:1.2.3-4.el5 set to be updated
+--> Finished Dependency Resolution
+Beginning Kernel Module Plugin
+Finished Kernel Module Plugin
+
+Dependencies Resolved
+
+===========================================================================================================================
+ Package                              Arch              Version                            Repository                 Size
+===========================================================================================================================
+Installing:
+ gratia-reporting                     noarch            1.12-6.pre.osg.el5                 osg-minefield             157 k
+Installing for dependencies:
+ libxml2-devel                        x86_64            2.6.26-2.1.15.el5_8.2              fermi-security            2.1 M
+ mutt                                 x86_64            5:1.4.2.2-3.0.2.el5                sl-base                   1.2 M
+ mysql                                x86_64            5.0.95-1.el5_7.1                   fermi-security            4.9 M
+ perl-Bit-Vector                      x86_64            6.4-2.2.2.1                        sl-base                   182 k
+ perl-Carp-Clan                       noarch            5.3-1.2.1                          sl-base                    22 k
+ perl-DBD-MySQL                       x86_64            3.0007-2.el5                       sl-base                   147 k
+ perl-DBI                             x86_64            1.52-2.el5                         sl-base                   605 k
+ perl-Date-Calc                       x86_64            5.4-1.2.2.1                        sl-base                   271 k
+ perl-IPC-Run                         noarch            0.84-2.el5.rf                      dag                       109 k
+ perl-Text-Aligner                    noarch            0.03-1.el5.rf                      dag                        21 k
+ perl-Text-Table                      noarch            1.114-1.el5.rf                     dag                        39 k
+ perl-XML-LibXML                      x86_64            1.58-6                             sl-base                   229 k
+ perl-XML-LibXML-Common               x86_64            0.13-8.2.2                         sl-base                    16 k
+ perl-XML-NamespaceSupport            noarch            1.09-1.2.1                         sl-base                    15 k
+ perl-XML-SAX                         noarch            0.14-11                            fermi-base                 77 k
+ perl-libxml-perl                     noarch            0.08-1.2.1                         sl-base                    90 k
+ pkgconfig                            x86_64            1:0.21-2.el5                       sl-base                    61 k
+ zlib-devel                           x86_64            1.2.3-4.el5                        sl-base                   103 k
+
+Transaction Summary
+===========================================================================================================================
+Install      19 Package(s)
+Upgrade       0 Package(s)
+
+Total download size: 10 M
+Is this ok [y/N]: y
+Downloading Packages:
+(1/19): perl-XML-NamespaceSupport-1.09-1.2.1.noarch.rpm                                             |  15 kB     00:00     
+(2/19): perl-XML-LibXML-Common-0.13-8.2.2.x86_64.rpm                                                |  16 kB     00:00     
+(3/19): perl-Text-Aligner-0.03-1.el5.rf.noarch.rpm                                                  |  21 kB     00:00     
+(4/19): perl-Carp-Clan-5.3-1.2.1.noarch.rpm                                                         |  22 kB     00:00     
+(5/19): perl-Text-Table-1.114-1.el5.rf.noarch.rpm                                                   |  39 kB     00:00     
+(6/19): pkgconfig-0.21-2.el5.x86_64.rpm                                                             |  61 kB     00:00     
+(7/19): perl-XML-SAX-0.14-11.noarch.rpm                                                             |  77 kB     00:00     
+(8/19): perl-libxml-perl-0.08-1.2.1.noarch.rpm                                                      |  90 kB     00:00     
+(9/19): zlib-devel-1.2.3-4.el5.x86_64.rpm                                                           | 103 kB     00:00     
+(10/19): perl-IPC-Run-0.84-2.el5.rf.noarch.rpm                                                      | 109 kB     00:00     
+(11/19): perl-DBD-MySQL-3.0007-2.el5.x86_64.rpm                                                     | 147 kB     00:00     
+(12/19): gratia-reporting-1.12-6.pre.osg.el5.noarch.rpm                                             | 157 kB     00:00     
+(13/19): perl-Bit-Vector-6.4-2.2.2.1.x86_64.rpm                                                     | 182 kB     00:00     
+(14/19): perl-XML-LibXML-1.58-6.x86_64.rpm                                                          | 229 kB     00:00     
+(15/19): perl-Date-Calc-5.4-1.2.2.1.x86_64.rpm                                                      | 271 kB     00:00     
+(16/19): perl-DBI-1.52-2.el5.x86_64.rpm                                                             | 605 kB     00:00     
+(17/19): mutt-1.4.2.2-3.0.2.el5.x86_64.rpm                                                          | 1.2 MB     00:00     
+(18/19): libxml2-devel-2.6.26-2.1.15.el5_8.2.x86_64.rpm                                             | 2.1 MB     00:00     
+(19/19): mysql-5.0.95-1.el5_7.1.x86_64.rpm                                                          | 4.9 MB     00:00     
+---------------------------------------------------------------------------------------------------------------------------
+Total                                                                                      6.3 MB/s |  10 MB     00:01     
+warning: rpmts_HdrFromFdno: Header V3 DSA signature: NOKEY, key ID 6b8d79e6
+dag/gpgkey                                                                                          | 1.6 kB     00:00     
+Importing GPG key 0x6B8D79E6 "Dag Wieers (Dag Apt Repository v1.0) <dag@wieers.com>" from /etc/pki/rpm-gpg/RPM-GPG-KEY-dag
+Is this ok [y/N]: y
+Running rpm_check_debug
+Running Transaction Test
+Finished Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing     : perl-DBI                                                                                           1/19 
+  Installing     : mysql                                                                                              2/19 
+  Installing     : perl-XML-NamespaceSupport                                                                          3/19 
+  Installing     : perl-Carp-Clan                                                                                     4/19 
+  Installing     : perl-Bit-Vector                                                                                    5/19 
+  Installing     : perl-Date-Calc                                                                                     6/19 
+  Installing     : perl-DBD-MySQL                                                                                     7/19 
+  Installing     : perl-XML-LibXML-Common                                                                             8/19 
+  Installing     : mutt                                                                                               9/19 
+  Installing     : pkgconfig                                                                                         10/19 
+  Installing     : perl-XML-SAX                                                                                      11/19 
+  Installing     : perl-XML-LibXML                                                                                   12/19 
+  Installing     : perl-libxml-perl                                                                                  13/19 
+  Installing     : perl-Text-Aligner                                                                                 14/19 
+  Installing     : perl-Text-Table                                                                                   15/19 
+  Installing     : zlib-devel                                                                                        16/19 
+  Installing     : libxml2-devel                                                                                     17/19 
+  Installing     : perl-IPC-Run                                                                                      18/19 
+  Installing     : gratia-reporting                                                                                  19/19 
+
+Installed:
+  gratia-reporting.noarch 0:1.12-6.pre.osg.el5                                                                             
+
+Dependency Installed:
+  libxml2-devel.x86_64 0:2.6.26-2.1.15.el5_8.2                mutt.x86_64 5:1.4.2.2-3.0.2.el5                             
+  mysql.x86_64 0:5.0.95-1.el5_7.1                             perl-Bit-Vector.x86_64 0:6.4-2.2.2.1                        
+  perl-Carp-Clan.noarch 0:5.3-1.2.1                           perl-DBD-MySQL.x86_64 0:3.0007-2.el5                        
+  perl-DBI.x86_64 0:1.52-2.el5                                perl-Date-Calc.x86_64 0:5.4-1.2.2.1                         
+  perl-IPC-Run.noarch 0:0.84-2.el5.rf                         perl-Text-Aligner.noarch 0:0.03-1.el5.rf                    
+  perl-Text-Table.noarch 0:1.114-1.el5.rf                     perl-XML-LibXML.x86_64 0:1.58-6                             
+  perl-XML-LibXML-Common.x86_64 0:0.13-8.2.2                  perl-XML-NamespaceSupport.noarch 0:1.09-1.2.1               
+  perl-XML-SAX.noarch 0:0.14-11                               perl-libxml-perl.noarch 0:0.08-1.2.1                        
+  pkgconfig.x86_64 1:0.21-2.el5                               zlib-devel.x86_64 0:1.2.3-4.el5                             
+
+Complete!
+
+</pre> %ENDTWISTY%
+%ENDSECTION{"InstallOSGGratiaReportingRPMs"}%
+
+
+
+---+ Configuration Procedure
+The configuration requires some initial steps.
+
+%STARTSECTION{"ConfigureGratiaReporing"}%
+Gratia reporting is using several configuration file located in /etc/gratia/gratia-reporting.
+   1. gratiareports.conf : This file is the configuration template for the gratia emailed reports. It contains comprehensive comments how configuration should be tailored for the specfic needs. It is used by all the reporting scripts to get database configuration and also to generate daily reports about finished jobs and their success rate  on all OSG Sites, for all the VOs, file transfers statistics and changes since previous reports. All the user that want access to this information should be added in the email section of this template.<pre class="rootscreen">
+%UCL_PROMPT_ROOT% edit /etc/gratia/gratia-reporting/gratiareports.conf
+
+%TWISTY{%TWISTY_OPTS_DETAILED%}%
+
+<pre class="file">
+; Default values. Don't alter these!!!
+
+[DEFAULT]
+enable= True
+disable=False
+
+;====================================================================================
+; Email
+;====================================================================================
+; Set the email related values under this section
+
+[email]
+
+realname = Gratia Operation Test
+; This is the real name from which the report appears to be emailed from
+
+from = 
+; This is the email from which the reports appears to be emailed from
+
+to = 
+; Email to which all the reports (except for the user site report which needs to be set below)
+; need to be sent to.
+; If you want the reports to be emailed, this value needs to be set
+; Also if the report cron is enabled then this value needs to be set
+; If the cron is disabled and you don't set this value, then the report
+; will be print to screen
+; Example value: myEmail@myDomain.com
+
+userTo = 
+; Email to which the user site report needs to be sent to
+; If not set then the value will default to the value set
+; in the "to" variable above.
+; If empty, then the usersitereport is print to screen
+; Example value: userEmail@userDomain.com
+
+voEmailList =
+; Set the vo specific email recipients here for vo reports.
+; vo name followed by space separated email addresses.
+; Multiple such lists could be included each in its own line.
+;------------------------------------
+
+additionalReportRecipients =
+; Here you could provide additional recipients for specific reports run at specific frequency.
+; You can have multiple entries of the following format here, each on its own separate line:
+; ReportType/script followed by frequency (all, daily, weekly or monthly)
+; followed by space-separated list of recipients.
+; Keyword "default" as an email address is expanded to the existing
+; default-configured destination (eg osg-reporting-info@fnal.gov).
+;----------------------------
+; Look at the example below:
+;----------------------------
+; additionalReportRecipients = reporting daily email1 default
+;                              longjobs weekly email2 email3 default
+;                              efficienty monthly email5 email20 default
+;----------
+; Corresponding meaning of the above entries
+;----------
+;       daily reports generated by the script "reporting" will be emailed to email1 in addition to the default
+;       weekly reports generated by the script "longjobs" will be emailed to email1 and email3 in addition to the default
+;       monthly reports generated by the script "efficiency" will be emailed to email5 and email20 in addition to the default
+
+smtphost = smtp.fnal.gov
+; This is the FQDN of the mail server, which gratia will use to send the email
+; Example value: yourSmtpServer.yourDomain.com
+
+;====================================================================================
+; Report
+;====================================================================================
+; Set the general reporting related values under this section.
+
+[report]
+
+installDir = /usr/share/gratia-reporting
+; Absolute path to the reports installation directory. This value needs to be set.
+
+cron = %(enable)s
+; By default the cronjob for running and emailing the reports periodically is enabled.
+; If enabled, cron entries will be created for *all* the python reports and perl reports.
+; If you choose you could remove individual cron entries by editing your crontab.
+; The details about the reports are available at
+; https://twiki.grid.iu.edu/bin/view/Accounting/ReportsDescription
+; If you don't want gratia report cron entries to be created or if you want to remove
+; the existing gratia reporting cron entries, then set the above value to %(disable)s
+
+
+;====================================================================================
+; Databases
+;====================================================================================
+
+; The next four sections are used to set the different database options for gratia
+; from which the data for the reports will be extracted and summarized. The variables
+; are self-explanatory. You should set these to the values corresponding to the databases
+; from which you want to generate the gratia reports
+
+[main_db]
+hostname=
+port=
+username=
+password=
+schema=
+
+[psacct_db]
+hostname=
+port=
+username=
+password=
+schema=
+
+[daily_db]
+hostname=
+port=
+username=
+password=
+schema=
+
+[transfer_db]
+hostname=
+port=
+username=
+password=
+schema=
+
+</pre>
+%ENDTWISTY%
+</pre> 
+   1. ==muttrc== : Is used by The Mutt Mail User Agent for some of the reports (see [[http://linux.die.net/man/5/muttrc][this]] for details), e.g:<pre class="file">
+#This variable specifies what "real" or "personal" name should be used when sending messages. 
+set realname = "%RED%Gratia Test%ENDCOLOR%"
+#Type: e-mail address. Default: "" When set, this variable contains a default from address.
+set from = "%RED%NAME@DOMAIN%ENDCOLOR%"
+</pre>
+   1. ==user-reports.dat== and ==all-vos.dat== : is used to generate reports specfic to sites and VOs. There are various ways to configure these files. Look below at 3 simple examples:
+      * If you want to send weekly detailed report for a particular VO to all  people associated with this VO, you will need to modify ==all-vos.dat== as  following: <pre class="file">
+(
+  CMS    => { "alt-vos" => [ 'uscms' ],   mail => ['person1@email1.com', 'person2@email2.com'] },
+  ATLAS  => { "alt-vos" => [ 'usatlas' ], mail => ['person3@email3.com', 'person4@email4.com'] },
+)
+</pre> and leave ==user-reports.dat== empty. In this case  person1 and person2 will receive reports regarding  CMS VO and person3 and person4 will receive reports for ATLAS.
+      * If you want to add a subscriber who is only interested in resource usage of a particular VO on several sites you can add this person to ==user-reports.dat==, e.g:  <pre class="file">(
+ people =>
+ {
+  'yourName@email.com' =>
+  {
+   site_vos   => { ATLAS => [ 'Site1', 'Site2' ],
+                   CMS   => [ 'Site3', 'Site4' ] }
+  }
+ }
+)</pre>
+      * If you want you want to add a subscriber who is only interested in resource usage n several sites you can add this person to ==user-reports.dat==, e.g:  <pre class="file">(
+ people =>
+ {
+  'yourName@email.com' =>
+  {
+   sites   => [ 'Site1', 'Site2' , 'Site3', 'Site4' ] }
+  }
+ }
+)</pre>
+   1. Run configuration script ==/usr/share/gratia-reporting/configReport.py==. <pre class="rootscreen">
+%UCL_PROMPT_ROOT% python  /usr/share/gratia-reporting/configReport.py
+ALERT!!! In another terminal window, please edit /etc/gratia/gratia-reporting/user-reports.dat
+ and set/change the VO names, site names and recipient emails for the perl reports (all-vos-oim & all-sites-oim) to the ones of your choice. 
+
+When done type "yes" to continue.
+
+Are you done editing the report recipient emails in /etc/gratia/gratia-reporting/user-reports.dat? (Type yes to continue): yes
+Configuration completed successfully.
+Please note that you have to run this script everytime you make changes to your /etc/gratia/gratia-reporting/gratiareports.conf config file.
+</pre>
+
+---+ Configuration Procedure (Production Admins version: Preliminary)
+   1. How to edit /etc/gratia/gratia-reporting/gratiareports.conf
+   1. You need special version of user-reports.dat and all-vos.dat in /etc/gratia/gratia-reporting/
+   1. Run /usr/share/gratia-reporting/configReport.py but you need a bit different cron /etc/cron.d/gratia-reporting.cron
+---+ Types of Report(Production Admins version: Preliminary)
+   1. daily_mutt.sh : you can manually run this script to receive daily emails
+   1. range_mutt.sh: you can manually run this script with --weekly option to receive weekly emails
+   1. perl all-vos-oim or all-sites-oim with proper options to receive other format emails
+   1. Note that all these three types are included in the cron script
+
+
+---+ Types of Report
+---++ Regular Reporting : A cron job
+Running /usr/share/gratia-reporting/configReport.py creates the an entry ==gratia-reporting.cron== under ==/etc/cron.d/== that looks like the following:
+<pre class="file">
+00 07 * * * cd /usr/share/gratia-reporting; sh daily_mutt.sh; 
+00 07 * * 1 cd /usr/share/gratia-reporting; sh range_mutt.sh --weekly
+01 07 * * 1 cd /usr/share/gratia-reporting;  perl all-vos-oim --production -D /etc/gratia/gratia-reporting/user-reports.dat > /dev/null 
+01 07 * * 1 cd /usr/share/gratia-reporting;  perl all-sites-oim --production -D /etc/gratia/gratia-reporting/user-reports.dat > /dev/null
+02 07 1 * * cd /usr/share/gratia-reporting;  perl all-vos-oim --production -M -D /etc/gratia/gratia-reporting/user-reports.dat > /dev/null 
+02 07 1 * * cd /usr/share/gratia-reporting;  perl all-sites-oim --production -M -D /etc/gratia/gratia-reporting/user-reports.dat > /dev/null 
+03 07 1 1 * cd /usr/share/gratia-reporting;  perl all-vos-oim --production -Y -D /etc/gratia/gratia-reporting/user-reports.dat > /dev/null 
+</pre>
+---++ Daily reports
+The following 6 reports are produced daily by ==daily_mutt.sh== script:<pre class="file">
+1. Report from the job level Gratia db for dd month 20YY
+2. New users on OSG (dd month 20YY)
+3. Job Success Rate by Site for dd month 20YY(from the job level Gratia db)
+4. Job Success Rate by VO for dd month 20YY (from the job level Gratia db) 
+5. Job Success Rate by Site and VO for dd month 20YY (from the job level Gratia db) 
+6. Data transfer report summary by site for dd month 20YY
+</pre>
+---++ Weekly reports
+   * The following reports are produced weekly by ==range_mutt.sh== script:<pre class="file">
+&#65279;&#65279;1. Weekly Report from the job level Gratia db for  20YY-mm-DD to 20YY-mm-DD
+2. Weekly Report by user by site for 20YY-mm-DD to 20YY-mm-DD
+3. Weekly OSG Efficiency by VO for 20YY-mm-DD to 20YY-mm-DD
+4. Weekly OSG Efficiency by Site and VO for 20YY-mm-DD to 20YY-mm-DD
+5. Weekly Summary on how sites are reporting to Gratia for 20YY-mm-DD to 20YY-mm-DD
+6. Weekly Report of jobs longer than 7 days for 20YY-mm-DD to 20YY-mm-DD
+7. Weekly Data transfer summary report by site for 20YY-mm-DD to 20YY-mm-DD
+8. Weekly VOs discrepancy report 20YY-mm-DD to 20YY-mm-DD
+9. Weekly Report by user for  20YY-mm-DD to 20YY-mm-DD
+</pre>
+   * ==all-vos-oim==  generates reports related to OSG usage for a particular VO for a specific time period. Data are only included for jobs that completed in the period in question. Deltas for the report are calculated and provided with respect to the previous time period. If you subscribed to get information about VO cms you will recieve the following report:<pre class="file">
+OSG metrics for VO cms for week 20YY-mm-DD to 20YY-mm-DD
+</pre>
+   * ==all-sites-oim== generates reports of site-oriented statistics for OSG usage for a given time period. It also compares the statistics for the current time period with the previous time period. Data are only included for jobs that completed in the period in question. <pre class="file">
+OSG  site metrics report for week 20YY-mm-DD to 20YY-mm-DD
+</pre>
+%ENDSECTION{"ConfigureGratiaReporing"}%
+
+---+ References
+   1.  Accounting.ReportsDescription
+
+Gratia Documents
+   * [[Accounting/WebHome][Accounting Web/The Gratia project]]
+   * [[InstallGratiaService][Gratia Service (Collector)]] 
+
+---+ Comments
+
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = TanyaLevshina
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local TEST_READY   = %NO%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = StevenTimm
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %NO%
+
+
+DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = Hyun Woo Kim
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %NO%
+############################################################################################################
+-->
+
+
+
+-- Main.TanyaLevshina - 15 Jun 2012

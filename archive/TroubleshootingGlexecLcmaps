@@ -1,0 +1,343 @@
+%DOC_STATUS_TABLE%
+
+---+!! Troubleshooting glexec and lcmaps
+
+%TOC%
+
+---# About this document
+This document will help you troubleshoot problems glexec. We assume that glexec has [[InstallGlexec][already been installed]]. See also other documents recommended in the Reference section below.
+
+This document follows the general OSG documentation conventions: %TWISTY{%TWISTY_OPTS_OUTPUT% showlink="Click to expand document conventions..."}%
+%INCLUDE{"Trash/DocumentationTeam/DocConventions" section="Header"}%
+%INCLUDE{"Trash/DocumentationTeam/DocConventions" section="CommandLine"}%
+%ENDTWISTY%
+
+---# How to get Help?
+To get assistance please use our [[HelpProcedure][Help Procedure]]. 
+
+
+---# Glexec: The big picture
+
+---## What software is used?
+
+While we casually refer to glexec, you need to be aware of three different pieces:
+
+   1. *glexec:* Glexec is a program that you can think of a "[[http://www.globus.org/security/overview.html][GSI]] sudo". It will run a program as another user, but first it will authenticate and authorize the submitting user based on their X.509 credential. 
+   1. *lcmaps*: lcmaps is a framework for authorizing a user and mapping their X.509 credential to a local user name. Glexec doesn't perform authorization itself, but instead uses lcmaps.
+   1. *lcmaps plugins*: By itself, lcmaps does very little. Instead it relies on a set of plugins to do all of the work. You need to be aware of these plugins because they show up in the lcmaps configuration. When people refer to "lcmaps", they really mean "lcmaps plus plugins". 
+
+---## Configuring policies
+
+Lcmaps can be used by different pieces of software. In OSG, we currently (mid 2012) use lcmaps not only for glexec but also for [[http://www.globus.org/grid_software/computation/gram.php][Globus GRAM]] (for a Compute Element Gatekeeper) and !GridFTP (for a Storage Element) when we use GUMS. (Normally GRAM and !GridFTP don't bother with lcmaps when using a grid-mapfile, though they could.) Because lcmaps can be used in different contexts, the =/etc/lcmaps.db= file describes how to use lcmaps in each of those contexts. On a single machine, you probably only use it one way, but our default configuration file is set up for all our possible uses. 
+
+The =/etc/lcmaps.db= file is broken into two sections:
+
+   1. Information about each of the plugins. Normally you don't need to edit these except to set the GUMS hostname and to enable the glexectracking plugin. (It's disabled by default because it won't be installed when using lcmaps with just Globus and not glexec)
+   1. Policies. Our default configuration ships with two policies:
+      1. authorize_only: Used by Globus-based services.
+      1. glexec: Used by glexec. The details of the policy are uncommented because you have to make choices when you install it.
+
+---# Common Glexec problems
+
+You can try out glexec with something like the following:
+
+<pre class="screen">
+%UCL_PROMPT% voms-proxy-init -voms %RED%yourvo%ENDCOLOR%:/%RED%yourvo%ENDCOLOR%
+%UCL_PROMPT% export GLEXEC_CLIENT_CERT=/tmp/x509up_u%RED%NNN%ENDCOLOR%
+%UCL_PROMPT% /usr/sbin/glexec /usr/bin/id
+</pre>
+
+If your lcmaps.db is set up to not use a host certificate as described in GlexecPilotCert, you should also set
+<pre class="screen">
+%UCL_PROMPT% export X509_USER_PROXY=tmp/x509up_u%RED%NNN%ENDCOLOR%
+</pre>
+before running glexec.
+
+---## Didn't enable glexec policy
+
+<pre class="screen">
+%UCL_PROMPT% /usr/sbin/glexec /usr/bin/id
+[gLExec]:  LCMAPS failed.
+           The reason can be found in the syslog.
+%UCL_PROMPT% echo $?
+203
+</pre>
+
+The lcmaps error in =/var/log/messages= indicates a configuration problem:
+
+<pre class="file">
+May 23 08:20:09 fermicloud037 glexec[2823]: Trying to read /etc/glexec.conf as 13975(glexec)/9815(glexec) 
+May 23 08:20:09 fermicloud037 glexec[2823]: lcmaps: /etc/lcmaps.db:158: [warning] expecting rule definitions. 
+May 23 08:20:09 fermicloud037 glexec[2823]: %RED%lcmaps: /etc/lcmaps.db:158: [warning] no rules specified for policy: 'glexec' at line 141.%ENDCOLOR%
+May 23 08:20:09 fermicloud037 glexec[2823]: lcmaps: LCMAPS failed to do mapping and return account information 
+May 23 08:20:09 fermicloud037 glexec[2823]:   LCMAPS failed. 
+</pre>
+
+This probably indicates the you didn't edit =/etc/lcmaps.db= after installing. By default, that file does not have a policy enabled: you have to select one by uncommenting it in the file. The glexec policy portion of the =lcmaps.db= file looks like this when it's installed: note that all the lines begin with a #, indicating that they are commented out:
+
+<pre class="file">
+# Mapping policy: glexec
+# Purpose:        Used for glexec on the worker nodes.
+#
+glexec:
+
+## If you use glexec, pick an appropriate policy from the ones below.
+## Make sure that only one policy is uncommented.
+
+## Policy 1: GUMS but not SAZ (most common)
+#verifyproxy -> gumsclient
+#gumsclient -> glexectracking
+
+## Policy 2: GUMS & SAZ
+#verifyproxy -> sazclient
+#sazclient -> gumsclient
+#gumsclient -> glexectracking
+
+## Policy 3: grid-mapfile
+#verifyproxy -> gridmapfile
+#gridmapfile -> glexectracking
+</pre>
+
+Most people will select the first policy. If you do, it will look like this:
+
+<pre class="file">
+# Mapping policy: glexec
+# Purpose:        Used for glexec on the worker nodes.
+#
+glexec:
+verifyproxy -> gumsclient
+gumsclient -> glexectracking
+</pre>
+
+---## Didn't enable glexectracking
+
+<pre class="screen">
+%UCL_PROMPT% /usr/sbin/glexec /usr/bin/id
+%RED%NO OUTPUT%ENDCOLOR%
+%UCL_PROMPT%  echo $?
+202
+</pre>
+
+The lcmaps error in =/var/log/messages= indicates a configuration problem:
+
+<pre class="file">
+May 23 08:21:40 fermicloud037 glexec[2844]: Trying to read /etc/glexec.conf as 13975(glexec)/9815(glexec) 
+May 23 08:21:40 fermicloud037 glexec[2844]: %RED%lcmaps: lcmaps.mod-PluginInit(): plugin glexectracking not found (arguments: )%ENDCOLOR%
+May 23 08:21:40 fermicloud037 glexec[2844]: lcmaps: lcmaps.mod-lcmaps_startPluginManager(): error initializing plugin: glexectracking 
+May 23 08:21:40 fermicloud037 glexec[2844]: lcmaps: lcmaps_init() error: could not start plugin manager 
+May 23 08:21:40 fermicloud037 glexec[2844]:   Initialisation of LCMAPS failed. 
+</pre>
+
+You probably requested the use of the glexec tracking plugin in =/etc/lcmaps.db=, since that's what we recommend:
+
+<pre class="file">
+glexec:
+verifyproxy -> gumsclient
+gumsclient -> %RED%glexectracking%ENDCOLOR%
+</pre>
+
+But you probably didn't uncomment glexectracking in =/etc/lcmaps.db= to tell lcmaps where to find it. 
+<pre class="file">
+# Uncomment the first two lines in order to enable glexec tracking
+%RED%#%ENDCOLOR%glexectracking = "lcmaps_glexec_tracking.mod"
+%RED%#%ENDCOLOR%         "-exec /usr/sbin/glexec_monitor"
+</pre>
+
+Just remove those hash marks to enable glexectracking:
+<pre class="file">
+# Uncomment the first two lines in order to enable glexec tracking
+glexectracking = "lcmaps_glexec_tracking.mod"
+         "-exec /usr/sbin/glexec_monitor"
+</pre>
+
+---## User doesn't exist
+
+<pre class="screen">
+%UCL_PROMPT% /usr/sbin/glexec /usr/bin/id
+[gLExec]:  LCMAPS failed.
+           The reason can be found in the syslog.
+%UCL_PROMPT% echo $?
+203
+</pre>
+
+The lcmaps error in =/var/log/messages= indicates the user doesn't exist:
+
+<pre class="file">
+May 23 08:22:46 fermicloud037 glexec[2860]: Trying to read /etc/glexec.conf as 13975(glexec)/9815(glexec) 
+May 23 08:22:46 fermicloud037 glexec[2860]: %RED%lcmaps: Username_handler: Error: Couldn't find the username 'engage' in the password file.%ENDCOLOR%
+</pre>
+
+Make the user account to fix this problem.
+
+---## The user doesn't have a proxy
+
+<pre class="screen">
+%UCL_PROMPT% /usr/sbin/glexec /usr/bin/id
+[gLExec]:  Failed to open $GLEXEC_CLIENT_CERT=/tmp/x509up_u11500 or $GLEXEC_SOURCE_PROXY=(NULL).
+%UCL_PROMPT% echo $?
+201
+</pre>
+
+Make a proxy with =voms-proxy-init= to solve this problem.
+
+---## User isn't authorized
+
+<pre class="screen">
+%UCL_PROMPT% /usr/sbin/glexec /usr/bin/id
+[gLExec]:  LCMAPS failed.
+           The reason can be found in the syslog.
+</pre>
+
+The lcmaps error in =/var/log/messages= indicates the user isn't authorized by your GUMS server:
+
+<pre class="file">
+May 23 08:55:05 fermicloud037 glexec[5981]: %RED%lcmaps: LCMAPS failed to do mapping and return account information%ENDCOLOR%
+</pre>
+
+---## Missing hostkey
+
+glexec requires a host certificate on each worker node in order to talk to GUMS. When you don't have a hostcert, you get an error message like this in =/var/log/messages=
+
+(output was word-wrapped for clarity)
+
+<pre class="file">
+May 23 08:36:55 fermicloud037 glexec[3097]: Syslog has been reopened with new facility 'LOG_LOCAL1' 
+May 23 08:36:55 fermicloud037 glexec[3097]: %RED%lcmaps: setup_client_ctx: Error loading private key from file: '/etc/grid-security/hostkey.pem'. 
+    OpenSSL reason: No such file or directory.%ENDCOLOR%
+May 23 08:36:55 fermicloud037 glexec[3097]: lcmaps: SSL_client_connect: Error: can't create SSL handle out of CTX structure 
+May 23 08:36:55 fermicloud037 glexec[3097]: lcmaps: ssl_io_connect(): Failure in SSL layer setup and connection! 
+</pre>
+
+---## Can't connect to GUMS server
+
+Here's an example error from =/var/log/messages= when you can't connect to the GUMS server. Make sure that you've used the proper hostname for the GUMS server in =/etc/lcmaps.db= and the GUMS server is running. 
+
+(output was word-wrapped for clarity)
+
+<pre class="file">
+May 23 08:38:22 fermicloud037 glexec[3121]: lcmaps: post_connection_check: Error: found one or more DNS entries in the subjectAltName but none match the host 'cloudgums1.fnal.gov'. 
+May 23 08:38:22 fermicloud037 glexec[3121]: lcmaps: ssl_io_connect(): Error with peer certificate after the full handshake: application verification failure 
+May 23 08:38:22 fermicloud037 glexec[3121]: %RED%lcmaps: xacmlqueryscas(): XACML: 
+    Interaction failed: TCP/IP, SSL or SOAP Error with endpoint: 
+    "https://cloudgums1.fnal.gov:8443/gums/services/GUMSXACMLAuthorizationServicePort" %ENDCOLOR%
+</pre>
+
+
+---## A successful authorization
+
+When glexec works, it will look something like this:
+
+(output was word-wrapped for clarity)
+
+<pre class="file">
+May 23 08:24:38 fermicloud037 glexec[2913]: Trying to read /etc/glexec.conf as 13975(glexec)/9815(glexec) 
+May 23 08:24:38 fermicloud037 glexec[2913]: lcmaps: lcmaps_plugin_scas_client-plugin_run(): 
+    User "/DC=org/DC=doegrids/OU=People/CN=Alain Roy 424511" 
+    with first FQAN "/Engage/Role=NULL/Capability=NULL" 
+    Permitted at endpoint "https://cloudgums.fnal.gov:8443/gums/services/GUMSXACMLAuthorizationServicePort" 
+May 23 08:24:38 fermicloud037 glexec.mon[2914#2913]: Started, target uid 46661
+May 23 08:24:38 fermicloud037 glexec.mon[2914#2913]: Used DN: "/DC=org/DC=doegrids/OU=People/CN=Alain Roy 424511"
+May 23 08:24:38 fermicloud037 glexec.mon[2914#2913]: Used VO: "Engage" Issuer: "/DC=org/DC=doegrids/OU=Services/CN=osg-engage.renci.org"
+May 23 08:24:38 fermicloud037 glexec.mon[2914#2913]: Used FQAN: "/Engage/Role=NULL/Capability=NULL"
+May 23 08:24:39 fermicloud037 glexec[2913]: lcmaps: LCMAPS CRED FINAL: DN:"/DC=org/DC=doegrids/OU=People/CN=Alain Roy 424511"
+    ->mapped uid:'46661',pgid:'46661',sgid:'46661',sgid:'65000' 
+May 23 08:24:39 fermicloud037 glexec[2913]: Ignoring SIGCHLD from unknown finished child 2914. 
+May 23 08:24:39 fermicloud037 glexec[2913]: real_user(alainroy),real_group(cdf)
+    ->mapped_user(engage),mapped_group(engage) cwd: "/home/engage" cmd: "/usr/bin/id" (="/usr/bin/id")</pre>
+
+---## Other possible problems. 
+
+If you have upgraded glexec with yum, you might need to merge changes from your old configuration file into the new configuration file. 
+
+| Existing, old configuration file: | =/etc/glexec.conf= |
+| New configuration file template: | =/etc/glexec.conf.rpmnew= |
+
+Similarly, if you have upgraded lcmaps with yum, you might need to merge changes from your old configuration file into the new configuration file. 
+
+| Existing, old configuration file: | =/etc/lcmaps.db= |
+| New configuration file template: | =/etc/lcmaps.db.rpmnew= |
+
+Check to make sure that you are running a recent version of glexec and lcmaps. 
+
+---# Appendix: Important glexec files
+
+This document cannot cover all the errors you might experience. If you need to look for more data, you can look at log files for the various services on your CE. 
+
+| *File* | *Purpose* |
+| =/usr/sbin/glexec= | The glexec program |
+| =/etc/glexec.conf= | The glexec configuration |
+| =/etc/lcmaps.db= | The lcmaps configuration |
+
+The most common RPMs you will see are:
+
+| *RPM* | *Purpose* |
+| =glexec= | The glexec RPM |
+| =lcmaps= | The base lcmaps RPM |
+| =lcmaps-plugins-gums-client= | The lcmaps plugin that communicates with GUMS |
+| =lcmaps-plugins-verify-proxy= | The lcmaps plugin that verifies the user's proxy is good |
+| =lcmaps-plugins-glexec-tracking= | The lcmaps plugin that kills processes started by glexec |
+
+---# References
+
+   * [[InstallGlexec][Installing glexec]]
+   * [[https://wiki.nikhef.nl/grid/GLExec][glexec web site]]
+   * [[https://wiki.nikhef.nl/grid/Man_pages_of_gLExec][glexec man pages]] (including glexec.conf)
+   * [[https://wiki.nikhef.nl/grid/Exit_codes_of_gLExec][glexec exit codes]] If you get an exit code from glexec, check this page to learn what it means.
+
+---# Comments
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = AlainRoy
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = User
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = DaveDykstra 	
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = DaveDykstra 	
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

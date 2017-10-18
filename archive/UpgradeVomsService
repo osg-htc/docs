@@ -1,0 +1,219 @@
+%LINKCSS%
+
+---+!! %SPACEOUT{ "%TOPIC%" }%
+%DOC_STATUS_TABLE%
+%TOC%
+
+<!-- conventions used in this document
+   * Local UCL_HOST = %URLPARAM{"INPUT_HOST" encode="quote" default="voms"}%
+   * Local UCL_USER = %URLPARAM{"INPUT_USER" encode="quote" default="user"}%
+   * Local UCL_DOMAIN = %URLPARAM{"INPUT_DOMAIN" encode="quote" default="opensciencegrid.org"}%
+   * Set TWISTY_OPTS_DETAILED = mode="div" showlink="Show Detailed Output" hidelink="Hide" showimgleft="/twiki/pub/TWiki/TWikiDocGraphics/toggleopen-small.gif" hideimgleft="/twiki/pub/TWiki/TWikiDocGraphics/toggleclose-small.gif" remember="on" start="hide" 
+-->
+
+---+ Introduction
+
+This document describes how to upgrade from VOMS-Admin installed from osg-1.2 (pacman chache) to new osg-voms package (installed via yum):
+We assume that you are currently running:
+   * VOMS Admin 2.0.15-1                                
+   * VOMS Server 1.8.8-2p1  
+The new version of VOMS-Admin and VOMS-Server, the OSG 3 VOMS, will be installed during the upgrade procedure. You will install:
+   * VOMS-Admin 2.6.1
+   * VOMS-Server 2.0.0
+
+If you want to do a fresh installation please consult [[InstallVoms][VOMS Installation Guide]] instead.
+
+%NOTE% You can install the OSG 3 VOMS-Admin and VOMS-Server on the same node where your OSG 1.2 servers are running or on a new node. Either ways OSG 3 is installed using yum, so you need root access on the node. 
+
+---+ Preparing For Upgrade
+
+%ICON{warning}% *WARNING*: VOMS-Admin assumes =hostname= resolves to the fully-qualified domain name; if it does not, the upgrade will fail in mysterious ways.  Type =hostname= and verify it is of the form _voms.example.com_ and not _voms_.  If your pacman-based install was installed with the wrong hostname, you may have to contact osg-software for expert help if the upgrade fails.
+
+In order to prepare for upgrade you will need to stop all the services and create complete myslqdump of your voms databases.  You have to perform the following steps:
+   1. Login on the node where voms is install
+   1. setup VDT_LOCATION<pre class="rootscreen">
+%UCL_PROMPT_ROOT% cd %RED%VDT_LOCATION%ENDCOLOR%
+%UCL_PROMPT_ROOT%. setup.sh
+</pre>
+   1. Stop all the services:<pre class="rootscreen">
+%UCL_PROMPT_ROOT%vdt-control -off
+</pre>
+   1. Restart !MySql server:<pre class="rootscreen">
+%UCL_PROMPT_ROOT%vdt-control -on mysql5
+</pre>
+   1. Create database dump:<pre class="rootscreen">
+%UCL_PROMPT_ROOT%  mysqldump --all-databases --flush-privileges >  ~/voms_database_dump.sql
+</pre>
+   1. Stop !MySql server<pre class="rootscreen">
+%UCL_PROMPT_ROOT%vdt-control -off mysql5
+</pre>
+   1. The VDT pollutes the environment of your shell.  Log out of this one.
+
+For the remainder of this document, *all pacman-based services should remain off*.
+
+---+ Requirements for the OSG 3 VOMS server
+Wether you install on the same node or on a new one, you must make sure that the node wehre you install the OSG 3 VOMS server satisfies all the following requirements.
+
+If you are using the same node you can re-use the service certificates. If not you have to get new ones. In doubt, get new ones (see below).
+
+%INCLUDE{"InstallVoms" section="VomsRequirements"}%
+
+---+ OSG 3 VOMS Installation
+
+%WARNING%Open a new window on the node you are doing upgrade to make sure that you start with a clean environment! 
+
+%INCLUDE{"InstallVoms" section="VomsInstall" }%
+
+
+---+ Upgrade and Configuration
+The configuration requires some initial steps plus the import or addition of one or more VO. You will not be able to start voms-admin if you don't import or add at least one VO.
+
+%INCLUDE{"InstallVoms" section="ConfigureMysqlServer" }%
+
+%INCLUDE{"InstallVoms" section="PrepareServiceCertificates" }%
+
+%INCLUDE{"InstallVoms" section="ConfigureTomcatAndTrustManager" }%
+
+
+---++ Restore The Old Database
+
+If you did not already, please start !MySQL with ==/sbin/service mysqld start== .
+
+Restore database for the database dump:<pre class="rootscreen">
+%UCL_PROMPT_ROOT%  mysql -p < ~/voms_database_dump.sql
+</pre>
+When asked at the prompt, you must enter the %RED%top_secret%ENDCOLOR% password that you choose above.
+If =mysql= has no root password (we highly recommend a root password), you will have to drop the =-p= option.
+
+---++ Configure VOMS and VOMS-Admin
+In order to configure database you will need to figure out the password and admin name of the database you have used before.  Gather information from the following files:
+   * ==%RED%VDT_LOCATION%ENDCOLOR%/glite/etc/voms/%RED%VO_NAME%ENDCOLOR%/voms.conf== 
+      * OLD_USER_NAME: Search for *--username* attribute (e.g *--username=test1_adm*)
+      * OLD_VOMS_PORT: Seach for *--port* (e.g *--port=15000*)
+   * ==%RED%VDT_LOCATION%ENDCOLOR%/glite/etc/voms/%RED%VO_NAME%ENDCOLOR%/voms.pass== 
+      * OLD_USER_PASSWORD: This file contains the previous !MySQL user password (e.g *secret*).
+   * ==/etc/my.conf==
+      * MYSQL_PORT: Look for "port"; if it is not set in this file, it is 3306.
+
+Run ==voms-admin-configure== script:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% voms-admin-configure install --dbtype mysql --vo %RED%VO_NAME%ENDCOLOR% \
+    --dbauser root  --dbapwd %RED%MYSQL_ROOT_PASSD%ENDCOLOR% --dbport %RED%MYSQL_PORT%ENDCOLOR% \
+    --dbusername  %RED%OLD_USER_NAME%ENDCOLOR% --dbpassword %RED%OLD_USER_PASSWORD%ENDCOLOR% \
+    --port %RED%OLD_VOMS_PORT%ENDCOLOR%  --mail-from %RED%email%ENDCOLOR% --smtp-host %RED%smtp.domain%ENDCOLOR% \
+    --sqlloc /usr/lib%RED%64%ENDCOLOR%/voms/libvomsmysql.so --cert /etc/grid-security/voms/vomscert.pem \
+    --key  /etc/grid-security/voms/vomskey.pem --read-access-for-authenticated-clients 
+</pre> For example:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% voms-admin-configure install --dbtype mysql --vo test1 \
+     --dbauser root --dbapwd  top_secret --dbport 3306 \
+     --dbusername test1_adm --dbpassword secret
+     --port 15000 --mail-from tlevshin@fnal.gov --smtp-host smtp.fnal.gov \
+     --sqlloc /usr/lib64/voms/libvomsmysql.so --cert /etc/grid-security/voms/vomscert.pem \
+     --key  /etc/grid-security/voms/vomskey.pem --read-access-for-authenticated-clients 
+</pre>
+ 
+If your VO:
+   * Has Custom-made scripts for managing voms-admin, or
+   * Uses VOMRS,
+These items might be broken due to new CSRF security checks (Cross Site Request Forgery).  Affected VOs may chose to disable these security checks.  To do this, edit ==/etc/voms-admin/%RED%VO_NAME%ENDCOLOR%/voms.service.properties== and include the following line:<pre class=file>
+#### Add other options after this line
+voms.csrf.log_only = true
+</pre>
+
+We recommend that unaffected VOs *do not* make this change.
+
+---++ Upgrade The Database Schema
+
+For each VO that you imported form the old VOMS server you must run the upgrade command: <pre class="rootscreen">
+%UCL_PROMPT_ROOT%voms-admin-configure upgrade --vo %RED%VO_NAME%ENDCOLOR%
+</pre> For example: <pre class="rootscreen">
+%UCL_PROMPT_ROOT%voms-admin-configure upgrade --vo test1
+</pre>
+
+Remember that before using VOMS or VOMS-Admin you must [[#VomsStart][start VOMS, VOMS-Admin and all the other required services]]. 
+
+---++ Add and configure additional VOs
+%NOTE% You can add additional VOs if you like. If you *migrated at least one pre-existing VO and do not desire to add additional VOs*, then you can *skip this section*.
+
+%INCLUDE{"InstallVoms" section="ConfigureVoms"}%
+
+
+%INCLUDE{"InstallVoms" section="VomsServices"}%
+
+---+ Advertise your VOMS server
+%NOTE% If you are installing VOMS on the same node or are replacing the old server with a new node that has the *same hostname*, then you can *skip this section*. Otherwise you need to notify everyone using your VOMS server about the new IP address as described in the remaining of this section.
+
+%INCLUDE{"InstallVoms" section="AdvertiseVOMS"}%
+
+
+%INCLUDE{"InstallVoms" section="VomsTest"}%
+
+%INCLUDE{"InstallVoms" section="VomsTroubleshooting"}%
+
+
+---+ How to get Help?
+To get assistance please use [[HelpProcedure][Help Procedure]].
+
+
+%INCLUDE{"InstallVoms" section="VomsReferences"}%
+
+%STOPINCLUDE%
+
+---+ Comments
+
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = MarcoMambelli
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = VO
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local TEST_READY   = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = XinZhao
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = XinZhao
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+
+############################################################################################################
+-->

@@ -1,0 +1,311 @@
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%DOC_STATUS_TABLE%
+%TOC%
+
+This page is a collected source of troubleshooting procedures and tips.
+Note that some of these may not apply to your version.  Your mileage may vary.
+
+---++ Debugging your Hadoop Instance
+
+This twiki is setup to help diagnose and solve some typical Hadoop issues. 
+
+---++ Running the FUSE mount in Debug mode
+
+It is often useful to run the FUSE mount in debug mode to identify specific errors and problems with the FUSE mount.
+
+<verbatim>
+/usr/bin/hdfs -o server=namenode.fqdn,port=9000,rdbuffer=131072,allow_other -d /mnt/hadoop/
+</verbatim>
+ 
+Note the use of the -d switch to put the mount in debug mode. CTRL-C to quit the mount after testing. 
+
+---++ Running the Gridftp server in standalone mode
+
+Sometimes diagnosing gridftp server or hadoop errors require you to run the standalone gridftp server which runs in a debug mode. 
+
+*On the Server* 
+
+<verbatim>
+gridftp-hdfs-standalone
+</verbatim>
+
+This will start a new server in the terminal's foreground; it should also include Hadoop-level errors.
+
+*On the Client, note the use of port 5002*
+
+<verbatim>
+source  $VDT_LOCATION/setup.sh
+dd if=/dev/zero of=testfile.zero count=10000 bs=1024
+globus-url-copy file://localhost/`pwd`/testfile.zero gsiftp://gridftpserver.fqdn:5002/your/path/testfile.zero
+</verbatim>
+
+After running the command on the client check the console on the server for any error messages in the transfer that could help diagnose your gridftp server problem. 
+
+gridftp-hdfs buffers log messages before writing them to the log file.  If the server crashes, important log messages indicating the cause of the crash may get lost.  To disable the buffering, set the following in */etc/gridftp-hdfs/gridftp-inetd.conf*
+<verbatim>
+log_module stdio:buffer=0
+</verbatim>
+
+To debug authorization errors, it is also sometimes useful to add the following to */etc/sysconfig/gridftp-hdfs* to send extra messages to syslog:
+
+<verbatim>
+LCMAPS_DEBUG_LEVEL=4
+</verbatim>
+
+
+---++ Errors and Their Solutions
+
+---+++ Error message: "Superuser privilege is required"
+
+If you encounter this message while administrating your cluster (i.e., executing "hadoop fsck" or "hadoop dfsadmin"), then check the following:
+   * You are running the command from the namenode
+   * Your current user is the same user that the Hadoop daemons are running as.  If you run the daemons as "root", then you must run administrative commands as "root".  If you run it as "daemon", you must perform these commands as "daemon".
+
+---+++ Incompatible Versions between the Datanode and Namenode
+
+---++++ Problem
+
+Hadoop is very sensitive about the versions and build tags between the different parts of the system. When upgrading hadoop you may get errors of the form.
+
+<verbatim>
+2009-03-23 14:06:50,120 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: STARTUP_MSG:
+/************************************************************
+STARTUP_MSG: Starting DataNode
+STARTUP_MSG:   host = cabinet-7-7-28.t2.ucsd.edu/169.228.130.190
+STARTUP_MSG:   args = []
+STARTUP_MSG:   version = 0.19.2-dev
+STARTUP_MSG:   build =  -r ; compiled by 'mockbuild' on Mon Mar 23 15:50:31 EDT 2009
+************************************************************/
+2009-03-23 14:06:50,263 FATAL org.apache.hadoop.hdfs.server.datanode.DataNode: Incompatible build versions: namenode BV = 748415; datanode BV =
+2009-03-23 14:06:50,370 ERROR org.apache.hadoop.hdfs.server.datanode.DataNode: java.io.IOException: Incompatible build versions: namenode BV = 748415; datanode BV=
+        at org.apache.hadoop.hdfs.server.datanode.DataNode.handshake(DataNode.java:416)
+        at org.apache.hadoop.hdfs.server.datanode.DataNode.startDataNode(DataNode.java:265)
+        at org.apache.hadoop.hdfs.server.datanode.DataNode.<init>(DataNode.java:206)
+        at org.apache.hadoop.hdfs.server.datanode.DataNode.makeInstance(DataNode.java:1239)
+        at org.apache.hadoop.hdfs.server.datanode.DataNode.instantiateDataNode(DataNode.java:1194)
+        at org.apache.hadoop.hdfs.server.datanode.DataNode.createDataNode(DataNode.java:1202)
+        at org.apache.hadoop.hdfs.server.datanode.DataNode.main(DataNode.java:1324)
+
+2009-03-23 14:06:50,370 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: SHUTDOWN_MSG:
+</verbatim>
+
+---++++ Solution
+
+Generally you want to upgrade the name node and data nodes at the same time to limit these kinds of version problems. Check the versions of your namenode and datanode to make sure you are running the same build tag of hadoop. 
+
+---+++ Incompatible Storage IDs on the Data Node
+
+---++++ Problem
+When you start up the data node, it immediately shuts down with the following error:
+<verbatim>
+/************************************************************
+STARTUP_MSG: Starting DataNode
+STARTUP_MSG:   host = cdfsrv6.mit.edu/18.77.0.180
+STARTUP_MSG:   args = []
+STARTUP_MSG:   version = 0.19.2-dev
+STARTUP_MSG:   build = http://svn.apache.org/repos/asf/hadoop/core/tags/release-0.19.1 -r 748415; compiled by 'wart' on Mon Mar 23 15:21:37 PDT 2009
+************************************************************/
+2010-03-30 16:46:18,456 ERROR datanode.DataNode (DataNode.java:main(1331)) - org.apache.hadoop.hdfs.server.common.InconsistentFSStateException: Directory /export/06a/hadoop/data is in an inconsistent state: has incompatible storage Id.
+        at org.apache.hadoop.hdfs.server.datanode.DataStorage.getFields(DataStorage.java:183)
+        at org.apache.hadoop.hdfs.server.common.Storage$StorageDirectory.read(Storage.java:227)
+        at org.apache.hadoop.hdfs.server.common.Storage$StorageDirectory.read(Storage.java:216)
+        at org.apache.hadoop.hdfs.server.datanode.DataStorage.doTransition(DataStorage.java:228)
+        at org.apache.hadoop.hdfs.server.datanode.DataStorage.recoverTransitionRead(DataStorage.java:148)
+        at org.apache.hadoop.hdfs.server.datanode.DataNode.startDataNode(DataNode.java:291)
+        at org.apache.hadoop.hdfs.server.datanode.DataNode.<init>(DataNode.java:209)
+        at org.apache.hadoop.hdfs.server.datanode.DataNode.makeInstance(DataNode.java:1242)
+        at org.apache.hadoop.hdfs.server.datanode.DataNode.instantiateDataNode(DataNode.java:1197)
+        at org.apache.hadoop.hdfs.server.datanode.DataNode.createDataNode(DataNode.java:1205)
+        at org.apache.hadoop.hdfs.server.datanode.DataNode.main(DataNode.java:1327)
+</verbatim>
+
+This is caused if one of the data directories gets reformatted.  This causes the VERSION file (i.e., /path/to/hadoop/data/current/VERSION) to get regenerated.  If there are multiple data directories, and at least one has a different VERSION file, you will get this message.
+
+---++++ Solution
+
+Take the following actions:
+   1 Verify there is no datanode java process on the node currently running.
+   1 Create a backup of all the VERSION files.
+   1 Copy one of the VERSION files into all the data directories in the correct place ($PREFIX/current/VERSION).
+   1 Start the data node.  If the error does not go away, contact osg-hadoop support.
+
+---+++ Resource Issues
+
+---++++ File descriptor exhaustion
+
+Many of the components of a HDFS cluster require many open files.  With the default limit, datanodes may report =java.io.IOException= errors like =Bad connect ack with firstBadLink= and fail to stage files.  In order to prevent this error, increase the limits in one of the shell scripts sourced by HDFS (for example, =hadoop-env.sh=) by adding a line like =ulimit -n 2048=.
+
+---+++ FUSE Issues
+
+---++++ Strange filenames with random characters in the FUSE mount
+
+This happens when fs.default.name in your hadoop-site.xml uses the default port (i.e., says hdfs://hostname/ instead of hdfs://hostname:9000/).  This can also happen if you use the hostname in hadoop-site.xml but use the namenode ip address for fuse_dfs (such as in the /etc/fstab  entry).  Be consistent with the hostname/ip address usage for the namenode.  Add the port explicitly to the hadoop-site.xml entry and remount FUSE.
+
+---++++ Group permissions issues
+
+Generally, group permission issues fall into one of two categories:
+   * Non-existent group name.  If you don't have a group name in /etc/groups or have a system that adds the user to random groups (Condor can do this if you have some rare options turned on, as well as OpenAFS) that aren't mapped to group names.  You can check for this by typing "groups <username>" and verifying it has an exit code 0. Try updating your /etc/groups and/or turn off the software that injects extra group IDs.  It is possible to do this in OpenAFS and Condor and still have a functional install.
+   * FUSE/HDFS only looks up a user's group membership the first time you use the file system.  If you're running into group permission issues and you just recently added that user to a group, try remounting the FUSE filesystem
+
+---+++ Gftp Client Errors 
+
+---++++ 500-Failed to open file in HDFS.
+
+<verbatim>
+Source URL for copy: file:/data/sam2/.same/SRMv2/testFile.txt
+Destination URL:
+gsiftp://cithep250.ultralight.org:5000//mnt/hadoop/store/user/test/SAM-cit-itb-se.ultralight.org/lcg-util/testfile-user-20090325-222131.txt
+# streams: 1
+# set timeout to  0 (seconds)
+            0 bytes      0.00 KB/sec avg      0.00 KB/sec
+instglobus_ftp_client: the server responded with an error
+500 500-Command failed. :
+globus_gridftp_server_hdfs.c:globus_l_gfs_hdfs_recv:916:
+500-Failed to open file in HDFS.
+500 End.
+</verbatim>
+
+*Solution:* These errors can be a bit vague, more information may be available however in the gridftp log itself. For example the above may be a permissions problem that can be verified in the Gridftp log. 
+
+If the log is not helpful it might be necessary to run the gridftp server on standalone mode on port 5002. 
+
+---++++ 500-Failed to close file in HDFS.
+
+<verbatim>
+      41472 bytes      8.21 KB/sec avg      8.21 KB/sec instglobus_ftp_client: the server responded with an error
+500 500-Command failed. : globus_gridftp_server_hdfs.c:globus_l_gfs_hdfs_write_to_storage_cb:926:
+500-Failed to close file in HDFS.
+500 End.
+</verbatim>
+
+*Solution:* Check to make sure the HDFS file system is not full as a full HDFS can cause this issue.
+
+---++++ 530 Login incorrect. : an unknown error occurred
+
+Sometimes a client error is really a problem on the server side.  If globus-url-copy works against another known-working gridftp server, then you should try starting the gridftp server in standalone mode to find the real cause of the problem.
+
+---++++ Solution(s)
+
+Some possibilities that you may find in the output of the standalone gridftp server are:  The gridftp server does not have CLASSPATH set to point to the Hadoop jar files, or the gridftp server is using a jvm version that is incompatible with the Hadoop jars.
+
+---+++ GFTP Server Errors
+
+---++++  500-Allocated all 200 memory buffers; aborting transfer.
+
+This error which may appear in the gftp/srmcp client or the server is caused by clients that use multiple streams consuming all of the 200 available GFTP server buffers. The default is 200 which is a bit low. To help alleviate this problem you can add the following environment variable to the gridftp server. 
+
+In file */etc/gridftp-hdfs/gridftp-hdfs-local.conf*
+
+add the following line
+
+<verbatim>
+export VDT_GRIDFTP_BUFFER_COUNT=500
+</verbatim>
+
+This increases the available buffers to 500 which should allow more flexibility in how many streams the gftp server will support before it drops the connection to save memory. 
+
+Note: In more recent versions of Hadoop a disk cache is also used to help deal with long transfers
+
+---++++  an end-of-file was reached globus_xio: An end of file occurred (possibly the destination disk is full)
+
+This often shows up in the phedex error logs with the full message as:
+
+<verbatim>
+SOURCE error during TRANSFER phase: [GRIDFTP_ERROR] an end-of-file was reached globus_xio: An end of file occurred (possibly the destination disk is full)
+</verbatim>
+
+Contrary to the error message, this most often occurs when there is plenty of disk space in Hadoop.  This is likely caused by xinetd refusing incoming gridftp connections due to various throttles that can be set in the xinetd configuration, or a crash in the gridftp-hdfs process.  Some settings in =/etc/xinetd.conf= and =/etc/xinetd.d/gridftp-hdfs= that you will want to check for are:
+
+<verbatim>
+instances = UNLIMITED
+per_source = UNLIMITED
+</verbatim>
+
+If these two settings are set to small integers (on the order of 20), then it's likely that you're reaching these limits and xinetd is refusing to allow any more incoming connections.  The recommendation is to set these to =UNLIMITED=, or to a larger value that your gridftp server can handle.
+
+This error can also be caused by a crash of the gridftp-hdfs process.  To ensure that log messages immediately before the crash get flushed, set the following in */etc/gridftp-hdfs/gridftp-inetd.conf*
+<verbatim>
+log_module stdio:buffer=0
+</verbatim>
+
+---++++ Mkdirs failed to create
+
+<verbatim>
+Exception in thread "main" java.io.IOException: Mkdirs failed to create /cms/store/user/tmartin                        
+        at org.apache.hadoop.fs.ChecksumFileSystem.create(ChecksumFileSystem.java:358)                                 
+        at org.apache.hadoop.fs.FileSystem.create(FileSystem.java:487)                                                 
+        at org.apache.hadoop.fs.FileSystem.create(FileSystem.java:468)                                                 
+Call to org.apache.hadoop.conf.FileSystem::
+create((Lorg/apache/hadoop/fs/Path;ZISJ)Lorg/apache/hadoop/fs/FSDataOutputStream;) failed!                 
+</verbatim>
+
+Check to make sure the hadoop-site.xml is properly configured, or the CLASSPATH is set correctly.
+
+---++++ Internal error
+
+<verbatim>
+[3429] Wed May 27 14
+:10:18 2009 :: uaf-4.t2.ucsd.edu:41449: [SERVER]: 500-Command failed. : globus_gridftp_server_hdfs.c:globus_l_gfs_hdfs_recv:1085:
+500-System error in Failed to open file /cms/store/user/tmartin/testfile-5035.zero in HDFS for user tmartin due to an internal error in HDFS on server cabinet-7-7-14.t2.ucsd.edu; could be a misconfiguration or bad installation at the site: Unknown error 255
+500-A system call failed: Unknown error 255
+500 End.
+</verbatim>
+
+
+Check to make sure the hadoop-site.xml is properly configured, or the CLASSPATH is set correctly.
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = DouglasStrain
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Troubleshooting
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = NehaSharma
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = NehaSharma
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %NO%
+############################################################################################################
+-->
+
+-- Main.DouglasStrain - 25 Oct 2011

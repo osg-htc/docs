@@ -1,0 +1,94 @@
+---+ Glexec With Pilot Certificate
+
+The current glexec installation instructions default to having one certificate per node; sites have traditionally used either a host certificate for the worker node or a proxy certificate.  The two basic tradeoffs are:
+   * *Proxy certificate*: Copy a short-lived proxy from a central host (such as the CE) to the worker nodes.  The downside here is that an outage of this automated process will cause a cluster-wide outage of glexec.
+   * *Host certificate*: Create a host certificate for each host.  The downside here is the host certificate needs to be renewed once a year and the sheer number of certificates necessary for this model.
+
+This page documents a third model - using the pilot proxy certificate.
+
+---++ Security considerations
+
+glexec uses the certificate as a mechanism to authenticate the SSL session between the worker node and GUMS.  GUMS decides who is authorized to lookup mappings based on the client certificate.  By making these changes, you'll be allowing all pilots to *lookup* any DN to Unix user mapping.
+
+For example, this would allow any pilot to know that "/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=People/CN=Brian Bockelman" maps to "uscmsPool018" at Nebraska.
+
+This does *not* allow the pilots to map to an arbitrary user, nor does it change how the mapping works.
+
+Each site should consider this security ramification; OSG Security believes this is an acceptable change to the security model.
+
+---++ Engineering considerations
+
+   * To complete this document, you will need change configuration files on all worker nodes and edit the GUMS configuration.  This can be done on a live site with no outage on either worker nodes or GUMS.  However, this requires a bit more coordination. This document is written assuming you make this change during a downtime.
+   * *gums-1.3.18.009-15.2* or later is required.
+
+---++  Changes to lcmaps
+
+*On the worker nodes running glexec*, you need to remove the following lines from =/etc/lcmaps.db= for the GUMS module:
+
+<verbatim>
+            "-cert   /etc/grid-security/hostcert.pem"
+            "-key    /etc/grid-security/hostkey.pem"
+            "--cert-owner root"
+</verbatim>
+
+This should not be done on a CE.
+
+---++ Changes to gums.config
+
+The necessary GUMS configuration changes are more straightforward if you edit =/etc/gums/gums.config= instead of using the web interface.  Before you make any changes, create a backup of this file.
+
+For each vomsUserGroup, change the access level from "read self" to "read all".  For example, this stanza:
+
+<verbatim>
+		<vomsUserGroup
+			name='sbgrid'
+			access='read self'
+			description=''
+			vomsServer='sbgrid'
+			matchFQAN='vo'
+			acceptProxyWithoutFQAN='false'
+			voGroup='/SBGrid'/>
+</verbatim>
+
+Should become:
+
+<verbatim>
+		<vomsUserGroup
+			name='sbgrid'
+			access='read all'
+			description=''
+			vomsServer='sbgrid'
+			matchFQAN='vo'
+			acceptProxyWithoutFQAN='false'
+			voGroup='/SBGrid'/>
+</verbatim>
+
+Next, add a new =hostToGroupMapping= stanza by duplicating your current one.  Change the =cn= attribute to =dn= and set the value of the attribute to match the worker node host names.  For example, the following =hostToGroupMapping=:
+
+<verbatim>
+		<hostToGroupMapping
+			groupToAccountMappings='banned, Localgroup Mapping, CMSIntegration, cmslcgadminMapping, CMShiproduction, CMSProdPool, CMST1Production'
+			description=''
+			cn='*/?*.unl.edu'/>
+</verbatim>
+
+should become *two* stanzas:
+
+<verbatim>
+		<hostToGroupMapping
+			groupToAccountMappings='banned, Localgroup Mapping, CMSIntegration, cmslcgadminMapping, CMShiproduction, CMSProdPool, CMST1Production'
+			description=''
+			dn='*.unl.edu'/>
+</verbatim>
+
+Recall that the '*' character in this mapping matches only *one* DNS hostname component.  So, =*.unl.edu= matches =node1.unl.edu= but not =node1.red.unl.edu=.
+
+---++ Testing
+
+On a worker node, try the following (assuming you have a valid proxy in place):
+
+<verbatim>
+X509_USER_PROXY=/tmp/x509up_u`id -u` GLEXEC_CLIENT_CERT=/tmp/x509up_u`id -u` /usr/sbin/glexec `which whoami`
+</verbatim>
+
+This command should succeed and print out the same mapping as it did before the changes.  Note that in production use the two variables will not be set to the same value; X509_USER_PROXY will point to the pilot's certificate and GLEXEC_CLIENT_CERT will point to the user's certificate.
