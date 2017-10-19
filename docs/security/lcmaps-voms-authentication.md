@@ -219,6 +219,9 @@ By default, the LCMAPS VOMS plugin only considers for mapping the first FQAN of 
 
 -   If you are configuring `lcmaps.db` manually (see [manual configuration](#manual-configuration) below), add `"-all-fqans"` to the module definitions for `vomsmapfile` and `defaultmapfile`
 
+!!! note
+    If you are using OSG 3.3, osg-configure should be at least version 1.10.2.  If you are using OSG 3.4, osg-configure should be at least version 2.2.2.
+
 
 
 Validating the LCMAPS VOMS plugin VO mappings
