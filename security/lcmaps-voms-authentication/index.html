@@ -820,12 +820,13 @@
 <p>Additionally, there is <a href="#optional-configuration">optional configuration</a> if you need to make changes to the default mappings.</p>
 <h3 id="enabling-the-lcmaps-voms-plugin">Enabling the LCMAPS VOMS plugin<a class="headerlink" href="#enabling-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h3>
 <p>To configure your host to use LCMAPS VOMS plugin authentication, edit <code>/etc/osg/config.d/10-misc.ini</code> and set the following options:</p>
-<div class="codehilite"><pre><span></span><span class="na">glexec_location</span> <span class="o">=</span> <span class="s">UNAVAILABLE</span>
-<span class="na">edit_lcmaps_db</span> <span class="o">=</span> <span class="s">True</span>
+<div class="codehilite"><pre><span></span><span class="na">edit_lcmaps_db</span> <span class="o">=</span> <span class="s">True</span>
 <span class="na">authorization_method</span> <span class="o">=</span> <span class="s">vomsmap</span>
 </pre></div>
 
 
+<p>If the <code>glexec_location</code> option is present, you must comment it out or set it to <code>UNAVAILABLE</code>.
+The LCMAPS VOMS plugin does not work with glExec.</p>
 <h3 id="supporting-mapped-vos-and-users">Supporting mapped VOs and users<a class="headerlink" href="#supporting-mapped-vos-and-users" title="Permanent link">&para;</a></h3>
 <p>Unix accounts must exist for each VO, VO role, VO group, or user you choose to support in the <a href="#configuration-files">mapfiles</a>:</p>
 <ol>
