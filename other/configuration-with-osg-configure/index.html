@@ -1573,6 +1573,11 @@ SE.</p>
 <td>(Optional, default True) If true, osg-configure will overwrite <code>/etc/lcmaps.db</code> to set your authorization method. The previous version will be backed up to <code>/etc/lcmaps.db.pre-configure</code></td>
 </tr>
 <tr>
+<td>all_fqans</td>
+<td><code>True</code>, <code>False</code></td>
+<td>(Optional, default False) If true, vomsmap auth will use all VOMS FQANs of a proxy for mapping -- see <a href="../../security/lcmaps-voms-authentication#mapping-using-all-fqans">documentation</a></td>
+</tr>
+<tr>
 <td>copy_host_cert_for_service_certs</td>
 <td><code>True</code>, <code>False</code></td>
 <td>(Optional, default False) If true, osg-configure will create a copy or copies of your host cert and key as service certs for RSV and (on OSG 3.3) GUMS</td>
