@@ -877,6 +877,7 @@ The LCMAPS VOMS plugin does not work with gLExec.</p>
 <li><a href="#mapping-users">Mapping users</a></li>
 <li><a href="#banning-vos">Banning VOs</a></li>
 <li><a href="#banning-users">Banning users</a></li>
+<li><a href="#mapping-using-all-fqans">Mapping using all FQANs</a></li>
 </ul>
 <h4 id="migrating-from-edg-mkgridmap">Migrating from edg-mkgridmap<a class="headerlink" href="#migrating-from-edg-mkgridmap" title="Permanent link">&para;</a></h4>
 <p>The program edg-mkgridmap (found in the package <code>edg-mkgridmap</code>), used for authentication on HTCondor-CE, GridFTP, and XRootD hosts, is no longer available starting in OSG 3.4. The LCMAPS VOMS plugin (package <code>lcmaps-plugins-voms</code>) now provides the same functionality. To migrate from edg-mkgridmap to the LCMAPS VOMS plugin, perform the following procedure:</p>
@@ -1000,6 +1001,20 @@ The patterns are compared in the order they are listed in. Therefore, more gener
 <p class="admonition-title">Warning</p>
 <p><code>/etc/grid-security/ban-mapfile</code> <em>must</em> exist, even if you are not banning any users. In that case, the file should be blank. If the file does not exist, LCMAPS will ban every user.</p>
 </div>
+<h3 id="mapping-using-all-fqans">Mapping using all FQANs<a class="headerlink" href="#mapping-using-all-fqans" title="Permanent link">&para;</a></h3>
+<p>By default, the LCMAPS VOMS plugin only considers the first FQAN of a VOMS proxy for mapping. This matches the behavior of GUMS. If you want to consider all FQANs, you must set the appropriate option.</p>
+<ul>
+<li>
+<p>If you are using osg-configure, set <code>all_fqans = True</code> in <code>10-misc.ini</code>, then run <code>osg-configure -c</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are using OSG 3.3, osg-configure should be at least version 1.10.2.  If you are using OSG 3.4, osg-configure should be at least version 2.2.2.</p>
+</div>
+</li>
+<li>
+<p>If you are configuring <code>lcmaps.db</code> manually (see <a href="#manual-configuration">manual configuration</a> below), add <code>"-all-fqans"</code> to the module definitions for <code>vomsmapfile</code> and <code>defaultmapfile</code></p>
+</li>
+</ul>
 <h2 id="validating-the-lcmaps-voms-plugin-vo-mappings">Validating the LCMAPS VOMS plugin VO mappings<a class="headerlink" href="#validating-the-lcmaps-voms-plugin-vo-mappings" title="Permanent link">&para;</a></h2>
 <p>To validate the LCMAPS VOMS plugin by itself, use the following procedure to test mapping your own cert to a user:</p>
 <ol>
