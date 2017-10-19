@@ -1,0 +1,1132 @@
+%DOC_STATUS_TABLE%
+
+<!-- Local variables
+   * Set CONDORREL = 8.2.6
+   * Set AS_OF_DATE = Jun 24, 2014
+   * Set TWISTY_OPTS_DETAILED = mode="div" showlink="Show Detailed Output" hidelink="Hide" showimgleft="/twiki/pub/TWiki/TWikiDocGraphics/toggleopen-small.gif" hideimgleft="/twiki/pub/TWiki/TWikiDocGraphics/toggleclose-small.gif" remember="on" start="hide" 
+-->
+
+---+!! !GlideinWMS VO Frontend Installation
+%TOC{depth="3"}%
+
+---+ About This Document
+This document describes how to install the Glidein Workflow Managment System (!GlideinWMS) VO Frontend for use with the OSG glidein factory.  This software is the minimum requirement for a VO to use glideinWMS.
+
+This document assumes expertise with Condor and familiarity with the glideinWMS software.  It *does not* cover anything but the simplest possible install.   Please consult the [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/install.html][Glidein WMS reference documentation]] for advanced topics, including non-=root=, non-RPM-based installation.
+
+This document covers three components of the !GlideinWMS a !VO needs to install:
+   * *User Pool Collectors*: A set of =condor_collector= processes.  Pilots submitted by the factory will join to one of these collectors to form a Condor pool.
+   * *User Pool Schedd*: A =condor_schedd=.  Users may submit Condor vanilla universe jobs to this schedd; it will run jobs in the Condor pool formed by the *User Pool Collectors*.
+   * *Glidein Frontend*: The frontend will periodically query the *User Pool Schedd* to determine the desired number of running job slots.   If necessary, it will request the factory to launch additional pilots.
+
+This guide covers installation of all three components on the same host: it is designed for small to medium VOs (see the Hardware Requirements below).  Given a significant, large host, we have been able to scale the single-host install to 10,000 running jobs.
+
+%ATTACHURL%/simple_diagram.png
+
+This document follows the general OSG documentation conventions: %TWISTY{%TWISTY_OPTS_OUTPUT% showlink="Click to expand document conventions..."}%
+%INCLUDE{"Trash/DocumentationTeam/DocConventions" section="Header"}%
+%INCLUDE{"Trash/DocumentationTeam/DocConventions" section="CommandLine"}%
+%ENDTWISTY%
+
+---+ Release
+This document reflects glideinWMS v3.2.11.
+
+---+ How to get Help?
+
+To get assistance about the OSG software please use [[HelpProcedure][this page]]. 
+
+For specific questions about the Frontend configuration (and how to add it in your HTCondor infrastructure) you can email the !glideinWMS support glideinwms-support@fnal.gov
+
+To request access the OSG Glidein Factory (e.g. the UCSD factory) you have to send an email to osg-gfactory-support@physics.ucsd.edu (see below).
+
+
+---+ Requirements
+ 
+---++ Host and OS
+   1 A host to install the !GlideinWMS Frontend (pristine node). 
+   1 OS is %SUPPORTED_OS%.  Currently most of our testing has been done on Scientific Linux 6.
+   1 Root access
+
+The Glidein WMS VO Frontend has the following hardware requirements for a production host:
+   * *CPU*: Four cores, preferably no more than 2 years old.
+   * *RAM*: 3GB plus 2MB per running job.  For example, to sustain 2000 running jobs, a host with 5GB is needed.
+   * *Disk*:  30GB will be plenty sufficient for all the binaries, config and log files related to glideinWMS.  As this will be an interactive submit host, plan enough disk space for your users' jobs.  Depending on your workflow, this might require 2MB to 2GB per job in a workflow.
+
+---++ Users
+The Glidein WMS Frontend installation will create the following users unless they are already created.
+
+%STARTSECTION{"Users"}%
+| *User* | *Default uid* | *Comment* |
+| =apache= | 48 | Runs httpd to provide the monitoring page (installed via dependencies). |
+| =condor= | none | Condor user (installed via dependencies). |
+| =frontend= | none | This user runs the !glideinWMS VO frontend.  It also owns the credentials forwarded to the factory to use for the glideins.|
+| =gratia= | none | Runs the Gratia probes to collect accounting data (optional see [[#Adding_Gratia_Accounting_and_a_L][the Gratia section below]]) |
+
+Note that if uid 48 is already taken but not used for the appropriate users, you will experience errors. [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/KnownProblems#Reserved_user_ids_especially_for][Details...]]
+%ENDSECTION{"Users"}%
+
+---++ Credentials and Proxies
+
+The VO Frontend will use two credentials in its interactions with the the other !glideinWMS services.  At this time, these will be proxy files.
+   1 the %GREEN%VO Frontend proxy%ENDCOLOR% (used to authenticate with the other !glideinWMS services).
+   1 one or more glideinWMS %BLUE%pilot proxies%ENDCOLOR% (used/delegated to the factory services and submitted on the !glideinWMS pilot jobs).
+
+The %GREEN%VO Frontend proxy%ENDCOLOR% and the %BLUE%pilot proxy%ENDCOLOR% can be the same.
+By default, the VO Frontend will run as user =frontend= (UID is machine dependent) so these proxies must be owned by the user =frontend=. 
+
+---+++ VO Frontend proxy
+The use of a service certificate is recommended.  Then you create a proxy from the certificate as explained in the [[#Proxy_Configuration][proxy configuration section]]. This can be a plain grid proxy (from =grid-proxy-init=), no VO extensions are required.
+
+*You must notify the Factory operation of the DN of this proxy when you initially setup the frontend and each time the DN changes*.
+
+
+---+++ Pilot proxies
+This proxy is used by the factory to submit the glideinWMS pilot jobs. Therefore, they  must be authorized to access to the CEs (factory entry points) where jobs are submitted.  There is no need to notify the Factory operation about the DN of this proxy (neither at the initial registration nor for subsequent changes). This second proxy has no special requirement or controls added by the factory but will probably require VO attributes because of the CEs: if you are able to use this proxy to submit jobs to the CEs where the Factory runs glideinWMS pilots for you, then the proxy is OK. You can test your proxy using =globusrun= or HTCondor-G
+
+To check the important information about a pem certificate you can use: =openssl x509 -in /etc/grid-security/hostcert.pem -subject -issuer -dates -noout=. You will need that to find out information for the configuration files and the request to the !GlideinWMS factory.
+
+---+++ Certificates/Proxies configuration example
+This document has a [[#Proxy_Configuration][proxy configuration section]] that uses the host certificate/key and a user certificate to generate the required proxies.
+
+| *Certificate* | *User that owns certificate* | *Path to certificate* |
+| Host certificate | =root= | =/etc/grid-security/hostcert.pem= <br> =/etc/grid-security/hostkey.pem= |
+
+[[Trash.ReleaseDocumentationGetHostServiceCertificates][Here]] are instructions to request a host certificate.
+
+[[Documentation.CertificateUserGet][Here]] are instructions to request a grid user certificate like the ones normally used to generate pilot proxies.
+
+---++ Networking
+%STARTSECTION{"Firewalls"}%
+%INCLUDE{"FirewallInformation" section="FirewallTable" lines="gwmsfrontend,condor"}%
+
+The VO frontend must have reliable network connectivity, be on the public internet (no NAT), and preferably with no firewalls.  Each running pilot requires 5 outgoing TCP ports.  Incoming TCP ports 9618 to 9660 must be open.
+      * For example, 2000 running jobs require about 10,100 TCP connections.  This will overwhelm many firewalls; if you are unfamiliar with your network topology, you may want to warn your network administrator.
+
+
+%ENDSECTION{"Firewalls"}%
+
+
+
+---+ Before the installation
+Once all requirements are satisfied you must take a couple of actions before installing the Frontend:
+   * you need all the data to connect to a GWMS Factory
+   * *Remember to install HTCondor BEFORE installing the Frontend ([[#Install_HTCondor][instructions are below]])!*
+
+---++ OSG Factory access
+Before installing the Glidein WMS VO Frontend you need the information about a [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/factory/index.html][Glidein Factory]] that you can access:
+   1 (recommended) OSG is managing a factory at UCSD and one at GOC and you can request access to them
+   1 You have another Glidein Factory that you can access
+   1 You [[InstallGlideinWMSFactory][install your own Glidein Factory]]
+
+To request access to the OSG Glidein Factory at UCSD you have to send an email to osg-gfactory-support@physics.ucsd.edu providing:
+   1 Your Name
+   1 The VO that is utilizing the VO Frontend
+   1 The DN of the proxy you will use to communicate with the Factory (VO Frontend DN, e.g. the host certificate subject if you follow the [[#Proxy_Configuration][proxy configuration section]])
+   1 You can propose a security name that will have to be confirmed/changed by the Factory managers (see below)
+   1 A list of sites where you want to run:
+      * Your VO must be supported on those sites
+      * You can provide a list or piggy back on existing lists, e.g. all the sites supported for the VO. Check with the Factory managers
+      * You can start with one single site 
+In the reply from the OSG Factory managers you will receive some information needed for the configuration of your VO Frontend
+   1 The exact spelling and capitalization of your VO name. Sometime is different from what is commonly used, e.g. OSG VO is "OSGVO".
+   1 The host of the Factory Collector: =gfactory-1.t2.ucsd.edu=
+   1 The DN os the factory, e.g. =/DC=org/DC=doegrids/OU=Services/CN=gfactory-1.t2.ucsd.edu=
+   1 The factory identity, e.g.: =gfactory@gfactory-1.t2.ucsd.edu=
+   1 The identity on the factory you will be mapped to. Something like: =username@gfactory-1.t2.ucsd.edu=
+   1 Your security name. A unique name, usually containing your VO name: =My_SecName=
+   1 A string to add in the main factory query_expr in the frontend configuration, e.g. =stringListMember("%RED%VO%ENDCOLOR%",GLIDEIN_Supported_VOs)=. From there you get the correct name of the VO (above in this list).
+
+
+
+---+ Installation Procedure
+
+%INCLUDE{"YumRepositories" section="OSGRepoBrief" TOC_SHIFT="+"}%
+
+%INCLUDE{"InstallCertAuth" section="OSGBriefCaCerts" TOC_SHIFT="+"}%
+
+---++ Install HTCondor
+Most required software is installed from the Frontend RPM installation. HTCondor is the only exception since there are [[CondorInformation][many different ways to install it]], using the RPM system or not. 
+You need to have HTCondor installed before installing the Glidein WMS Frontend. If yum cannot find a HTCondor RPM, it will install the dummy =empty-condor= RPM, assuming that you installed HTCondor using a tarball distribution.
+
+If you don't have HTCondor already installed, you can install the HTCondor RPM from the OSG repository:
+<pre class="rootscreen">%UCL_PROMPT_ROOT% yum install condor.x86_64
+# If you have a 32 bit host use instead:
+%UCL_PROMPT_ROOT% yum install condor.i386</pre>
+
+See [[CondorInformation][this HTCondor document]] for more information on the different options.
+
+%STARTSECTION{"InstallGWMSFrontend"}%
+---++ Download and install the VO Frontend RPM
+
+The RPM is available in the OSG repository:
+
+Install the RPM and dependencies (be prepared for a lot of dependencies).
+
+   <pre class="rootscreen">%UCL_PROMPT_ROOT% yum install glideinwms-vofrontend</pre>
+
+This will install the current production release verified and tested by OSG with default condor configuration.
+This command will install the glideinwms vofrontend, condor, the OSG client, and all the required dependencies all on one node.
+
+If you wish to install a different version of !GlideinWMS, add the "--enablerepo" argument to the command as follows:
+
+   * =yum install --enablerepo=osg-testing glideinwms-vofrontend=: The most recent production release, still in testing phase.  This will usually match the current tarball version on the !GlideinWMS home page.  (The osg-release production version may lag behind the tarball release by a few weeks as it is verified and packaged by OSG).  Note that this will also take the osg-testing versions of all dependencies as well.
+   * =yum install --enablerepo=osg-contrib glideinwms-vofrontend=:  The most recent development series release, ie version 3 release.  This has newer features such as cloud submission support, but is less tested.
+
+Note that these commands will install default condor configurations with all services on one node.
+
+%ENDSECTION{"InstallGWMSFrontend"}%
+
+---+++ Advanced: Multi-node Installation 
+
+For advanced users requiring heavy usage on their submit node, you may want to consider splitting the usercollector, user submit, and vo frontend services.
+
+This can be doing using the following three commands (on different machines):
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install glideinwms-vofrontend-standalone
+%UCL_PROMPT_ROOT% yum install glideinwms-usercollector
+%UCL_PROMPT_ROOT% yum install glideinwms-userschedd
+</pre>
+
+In addition, you will need to perform the following steps:
+
+   * On the vofrontend and userschedd, modify CONDOR_HOST to point to your usercollector.  This is in =/etc/condor/config.d/00_gwms_general.config=.  You can also override this value by placing it in a new config file.  (For instance, =/etc/condor/config.d/99_local_custom.config= to avoid rpmsave/rpmnew conflicts on upgrades).
+   * In =/etc/condor/certs/condor_mapfile=, you will need to all DNs for each machine (userschedd, usercollector, vofrontend).  Take great care to escape all special characters.  Alternatively, you can use the =glidecondor_addDN= to add these values.
+   * In the =/etc/gwms-frontend/frontend.xml= file, change the schedd locations to match the correct server.  Also change the collectors tags at the bottom of the file.  More details on frontend xml are in the following sections.
+
+---+++ Upgrade Procedure
+
+If you have a working installation of glideinwms-frontend you can just upgrade the frontend rpms and skip the most of the configuration procedure below. These general upgrade instructions apply when upgrading the glideinwms-frontend rpm within same major versions.
+
+<pre class="rootscreen">
+%RED%# Update the glideinwms-vofrontend packages%ENDCOLOR%
+%UCL_PROMPT_ROOT% yum update glideinwms\*
+%RED%# Update the scripts in the working directory to the latest one%ENDCOLOR%
+%UCL_PROMPT_ROOT% service gwms-frontend upgrade
+%RED%# Restart HTCondor because the configuration may be different%ENDCOLOR%
+%UCL_PROMPT_ROOT% service condor restart
+</pre>
+<b>Note:  The \* on the yum update is important.</b>
+
+%WARNING% When you do a generic yum update that will update also condor, the upgrade may restore the personal condor config file that you have to remove with =rm /etc/condor/config.d/00personal_condor.config=
+
+%NOTE% When upgrading to !GlideinWMS 3.2.7 the second schedd is removed from the default configuration. For a smooth transition: 1. remove from ==/etc/gwms-frontend/frontend.xml== the second schedd (the line containing ==schedd_jobs2@YOUR_HOST==); 2. reconfigure the frontend (=service gwms-frontend reconfig=); 3. restart HTCondor (=service condor restart=)
+
+---++++ Upgrading glideinwms-frontend from v2 series to v3 series
+
+Due to incompatibilities between the major versions, upgrade process involves certain steps. Following instructions apply when upgrading glideinwms-frontend from a v2 series (example: v2.7.x) to a v3 series (v3.2.x)
+
+   * Update the RPMs and backup configuration files
+<pre class="rootscreen">
+%RED%# Stop the glideinwms-vofrontend service%ENDCOLOR%
+%UCL_PROMPT_ROOT% service gwms-frontend stop
+
+%RED%# Backup the v2.7.x configuration%ENDCOLOR%
+%UCL_PROMPT_ROOT% cp /var/lib/gwms-frontend/vofrontend/frontend.xml /var/lib/gwms-frontend/vofrontend/frontend-2.xml
+%UCL_PROMPT_ROOT% cp /etc/gwms-frontend/frontend.xml /etc/gwms-frontend/frontend-2.xml
+
+%RED%# Update the glideinwms-vofrontend packages from v2.7.x to v3.2.x%ENDCOLOR%
+%UCL_PROMPT_ROOT% yum update glideinwms\*
+</pre>
+
+   * Convert v2.7.x configuration to v3.2.x configuration
+<pre class="rootscreen">
+%RED%# For RHEL 5, CentOS 5, and SL5%ENDCOLOR%
+%UCL_PROMPT_ROOT% /usr/lib/python2.4/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /var/lib/gwms-frontend/vofrontend/frontend-2.xml -o /var/lib/gwms-frontend/vofrontend/frontend.xml -s /usr/lib/python2.4/site-packages/glideinwms
+%UCL_PROMPT_ROOT% /usr/lib/python2.4/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /etc/gwms-frontend/frontend-2.xml -o /etc/gwms-frontend/frontend.xml -s /usr/lib/python2.4/site-packages/glideinwms
+
+%RED%# For RHEL 6, CentOS 6, and SL6%ENDCOLOR%
+%UCL_PROMPT_ROOT% /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /var/lib/gwms-frontend/vofrontend/frontend-2.xml -o /var/lib/gwms-frontend/vofrontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
+%UCL_PROMPT_ROOT% /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /etc/gwms-frontend/frontend-2.xml -o /etc/gwms-frontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
+</pre>
+
+   * Update the scripts in the working directory
+<pre class="rootscreen">
+%RED%# Update the scripts in the working directory to the latest one%ENDCOLOR%
+%UCL_PROMPT_ROOT% service gwms-frontend upgrade
+</pre>
+
+---+ Configuration Procedure 
+
+After installing the RPM, you need to configure the components of the glideinWMS VO Frontend:
+   1. Edit Frontend configuration options
+   1. Edit Condor configuration options
+   1. Create a Condor grid map file
+   1. Reconfigure and Start frontend
+
+---++ Configuring the Frontend
+
+The VO Frontend configuration file is =/etc/gwms-frontend/frontend.xml=.  The next steps will describe each line that you will need to edit if you are using the OSG Factory at UCSD.  The portions to edit are highlighted in red font. If you are using a different Factory more changes are necessary, please check [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/frontend/configuration.html][the VO Frontend configuration reference]].
+
+   1. The VO you are affiliated with. This will identify those CEs that the glideinWMS pilot will be authorized to run on using the %BLUE%pilot proxy%ENDCOLOR% described previously in the [[InstallGlideinWMSFrontend#Pilot_proxies][this section]]. Sometimes the whole =query_expr= is provided to you by the factory (see Factory access above):
+   <pre class="file">
+&lt;factory query_expr='((stringListMember("%RED%VO%ENDCOLOR%", GLIDEIN_Supported_VOs)))'></pre>
+   1.  Factory collector information.%BR%
+ The =username= that you are assigned by the factory (also called the identity you will be mapped to on the factory, see above) .  Note that if you are using a factory different than the production factory, you will have to change also =DN=, =factory_identity= and =node= attributes. (refer to the information provided to you by the factory operator):   <pre class="file">
+&lt;collector DN="/DC=org/DC=doegrids/OU=Services/CN=gfactory-1.t2.ucsd.edu" 
+                   comment="Define factory collector globally for simplicity" 
+                   factory_identity="gfactory@gfactory-1.t2.ucsd.edu" 
+                   my_identity="%RED%username%ENDCOLOR%@gfactory-1.t2.ucsd.edu" 
+                   node="gfactory-1.t2.ucsd.edu"/>
+</pre>
+   1. Frontend security information.%BR%- The =classad_proxy= in the _security_ entry is the location of the %GREEN%VO Frontend proxy%ENDCOLOR%  described previously [[#VO_Frontend_proxy][here]].%BR%- The =proxy_DN= is the DN of the =classad_proxy= above.%BR%- The =security_name= identifies this VO Frontend to the the Factory, It is provided by the factory operator.%BR%- The =absfname= in the _credential_ (or _proxy_ in v 2.x) entry is the location of the !glideinWMS %BLUE%pilot proxy%ENDCOLOR% described in the requirements section [[#Pilot_proxies][here]]. There can be multiple %BLUE%pilot proxies%ENDCOLOR%, or even other kind of keys (e.g. if you use cloud resources). *The type and trust_domain of the credential must match respectively auth_method and trust_domain used in the entry definition in the factory. If there is no match, between these two attributes in one of the credentials and some entry in one of the factories, then this frontend cannot trigger glideins.* %BR%Both the =classad_proxy= and =absfname= files should be owned by =frontend= user.  <pre class="file">
+# These lines are form the configuration of v 3.x
+&lt;security classad_proxy="%RED%/tmp/vo_proxy%ENDCOLOR%" proxy_DN="%RED%DN of vo_proxy%ENDCOLOR%" 
+                  proxy_selection_plugin="ProxyAll" 
+                  security_name="%RED%The security name, this is used by factory%ENDCOLOR%" 
+                  sym_key="aes_256_cbc">
+      &lt;credentials>
+         &lt;credential absfname="%RED%/tmp/pilot_proxy%ENDCOLOR%" security_class="frontend" 
+         trust_domain="OSG" type="grid_proxy"/>
+      &lt;/credentials>
+   &lt;/security>
+# These lines are the same section form the configuration of v 2.x
+&lt;security classad_proxy="%RED%/tmp/vo_proxy%ENDCOLOR%" proxy_DN="%RED%DN of vo_proxy%ENDCOLOR%" 
+                   proxy_selection_plugin="ProxyAll" 
+                   security_name="%RED%The security name, this is used by factory%ENDCOLOR%" 
+                   sym_key="aes_256_cbc"> 
+    &lt;proxies>
+        &lt;proxy absfname="%RED%/tmp/pilot_proxy%ENDCOLOR%" security_class="frontend"/>
+    &lt;/proxies> 
+&lt;/security>
+</pre>
+   1. The schedd information.%BR%- The =DN= of the %GREEN%VO Frontend Proxy%ENDCOLOR% described previously [[#VO_Frontend_proxy][here]].%BR%- The =fullname= attribute is the fully qualified domain name of the host where you installed the VO Frontend (=hostname --fqdn=).%BR%A secondary schedd is optional.  You will need to delete the secondary schedd line if you are not using it. Multiple schedds allow the frontend to service requests from multiple submit hosts.   <pre class="file">
+&lt;schedds>
+   &lt;schedd DN="%RED%Cert DN used by the schedd at fullname:%ENDCOLOR%" 
+                    fullname="%RED%Hostname of the schedd%ENDCOLOR%"/>
+   &lt;schedd DN="%RED%Cert DN used by the second Schedd at fullname:%ENDCOLOR%" 
+                    fullname="%RED%schedd name%ENDCOLOR%@%RED%Hostname of second schedd%ENDCOLOR%"/>
+&lt;/schedds></pre>
+   1. The User Collector information.%BR%- The =DN= of the %GREEN%VO Frontend Proxy%ENDCOLOR% described previously [[#VO_Frontend_proxy][here]].%BR%- The =node= attribute is the full hostname of the collectors (=hostname --fqdn=) and port%BR%- The =secondary= attribute indicates whether the element is for the primary or secondary collectors (True/False).%BR%The default Condor configuration of the VO Frontend starts multiple Collector processes on the host (=/etc/condor/config.d/11_gwms_secondary_collectors.config=). The =DN= and  =hostname=  on the first line are the hostname and the host certificate of the VO Frontend. The =DN= and  =hostname=  on the second line are the same as the ones in the first one. The hostname (e.g. hostname.domain.tld) is filled automatically during the installation. The secondary collector ports can be defined as a range, e.g., 9620-9660).     <pre class="file">
+&lt;collector DN="%RED%DN of main collector%ENDCOLOR%" 
+                   node="hostname.domain.tld:9618" secondary="False"/>
+&lt;collector DN="%RED%DN of secondary collectors (usually same as DN in line above)%ENDCOLOR%" 
+                   node="hostname.domain.tld:9620-9660" secondary="True"/>
+</pre>
+
+%WARNING% The Frontend configuration includes many knobs, some of which are conflicting with a RPM installation where there is only one version of the Frontend installed and it uses well known paths. Do not change the following in the Frontend configuration (you must leave the default values coming with the RPM installation):
+   * frontend_versioning='False' (in the first line of XML, versioning is useful to install multiple tarball versions)
+   * work base_dir must be /var/lib/gwms-frontend/vofrontend/ (other scripts like /etc/init.d/gwms-frontend count on that value)
+
+---+++ If you have a different Factory
+The configuration above points to the OSG production Factory.
+If you are using a different Factory, then you have to:
+   1. replace =gfactory@gfactory-1.t2.ucsd.edu= and =gfactory-1.t2.ucsd.edu= with the correct values for your factory. And control also that the name used for the frontend () matches.
+   1. make sure that the factory is advertising the attributes used in the factory query expression (=query_expr=).
+
+
+---++ Configuring Condor
+The condor configuration for the frontend is placed in =/etc/condor/config.d=.
+   * 00_gwms_general.config
+   * <strike>00personal_condor.config</strike>  (remove this if there)
+   * 01_gwms_collectors.config
+   * 02_gwms_schedds.config
+   * 03_gwms_local.config
+   * 11_gwms_secondary_collectors.config
+   * 90_gwms_dns.config
+ 
+Get rid of the pre-loaded condor default to avoid conflicts in the configuration. 
+<pre class="rootscreen">
+  rm /etc/condor/config.d/00personal_condor.config
+</pre>
+
+<!--
+In versions of Condor 7.4.4 and above, this configuration is read automatically.
+ if there is also a =/etc/condor/condor_config.local= file from the condor installation, please move it to =/etc/condor/config.d/00_condor_config.local= to make sure that it is read before the frontend configuration.  
+
+If you have a version lower than 7.4.4, the local condor configuration file which is located at =/etc/condor/condor_config.local= must be edited.  Adding the following line to the bottom of =condor_config.local= will pick up the !GlideinWMS condor configuration.
+<pre class="file">
+LOCAL_CONFIG_DIR = /etc/condor/config.d</pre>
+-->
+
+For most installations, the items you need to modify are in =03_gwms_local.config=.  
+%TWISTY{%TWISTY_OPTS_OUTPUT% showlink="Show example 03_gwms_local.config."}%<pre class="file">
+#
+# Reminder: You may want to define these in later files
+#
+
+#-- Condor user: enter uid condor in form xxuid.xxgid e.g. 4716.4716
+#CONDOR_IDS = 
+#--  Contact (via email) when problems occur
+#CONDOR_ADMIN = 
+
+############################
+# GSI Security config
+############################
+#-- Grid Certificate directory
+GSI_DAEMON_TRUSTED_CA_DIR= /etc/grid-security/certificates
+
+#-- Credentials
+GSI_DAEMON_CERT =  /etc/grid-security/hostcert.pem
+GSI_DAEMON_KEY  =  /etc/grid-security/hostkey.pem
+
+#-- Condor mapfile
+CERTIFICATE_MAPFILE= /etc/condor/certs/condor_mapfile
+
+###################################
+# Whitelist of condor daemon DNs
+###################################
+</pre>
+%ENDTWISTY% %BR%
+
+The lines you will have to edit are:
+   1. Credentials of the machine.%BR%You can either run using a proxy, or a service certificate.  It is recommended to use a host certificate and specify it's location in the variables =GSI_DAEMON_CERT= and =GSI_DAEMON_KEY=.  The host certificate and key should be owned by =root= and have the correct permissions (644 and 600 respectively).%BR%*NOTE* that this configuration is for HTCondor, not for the frontend that requires a proxy as specified in other parts of this document.
+   2. Verify the =GSI_DAEMON_TRUSTED_CA_DIR= is correct and that your CRLs are up-to-date.
+   3. Verify the =CERTIFICATE_MAPFILE= is correct.
+   4. Uncomment and update the =CONDOR_IDS= and =CONDOR_ADMIN= attributes
+
+
+
+---+++ Using other Condor RPMs, e.g. UW Madison HTCondor RPM
+
+The above procedure will work if you are using the OSG HTCondor RPMS.
+You can verify that you used the OSG HTCondor RPM by using =yum list condor=. The version name should include "osg", e.g. =7.8.6-3.osg.el5=.
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Click here to show an example" }% <pre class="screen">%UCL_PROMPT% yum list condor
+Loaded plugins: kernel-module, priorities
+Excluding Packages from SLF 5 base
+Finished
+Reducing SLF 5 base jdk to included packages only
+Finished
+Excluding Packages from SLF 5 security updates
+Finished
+Reducing SLF 5 security updates jdk only to included packages only
+Finished
+Excluding Packages from SL 5 base
+Finished
+Reducing SL 5 base jdk to included packages only
+Finished
+1106 packages excluded due to repository priority protections
+Installed Packages
+condor.x86_64                                                         7.8.6-3.osg.el5                                                          installed
+</pre>
+%ENDTWISTY%
+
+If you are using the UW Madison Condor RPMS, be aware of the following changes:
+   * This Condor RPM uses a file =/etc/condor/condor_config.local= to add your local machine slot to the user pool.
+   * If you want to disable this behavior (recommended), you should blank out that file or comment out the line in =/etc/condor/condor_config= for LOCAL_CONFIG_FILE.  (Make sure that LOCAL_CONFIG_DIR is set to =/etc/condor/config.d=)
+   * Note that the variable LOCAL_DIR is set differently in UW Madison and OSG RPMs.  This should not cause any more problems in the glideinwms RPMs, but please take note if you use this variable in your job submissions or other customizations.
+
+In general if you are using a non OSG RPM or if you added custom configuration files for HTCondor please check the order of the configuration files: <pre class="screen">%UCL_PROMPT% condor_config_val -config
+Configuration source:
+	/etc/condor/condor_config
+Local configuration sources:
+        /etc/condor/config.d/00_gwms_general.config
+        /etc/condor/config.d/01_gwms_collectors.config
+        /etc/condor/config.d/02_gwms_schedds.config
+        /etc/condor/config.d/03_gwms_local.config
+        /etc/condor/config.d/11_gwms_secondary_collectors.config
+        /etc/condor/config.d/90_gwms_dns.config
+	<b><font color="blue">/etc/condor/condor_config.local</font></b>
+</pre>
+If, like in the example above, the !GlideinWMS configuration files are not the last ones in the list please verify that important configuration options have not been overridden by the other configuration files.
+
+---+++ Verify your Condor configuration
+1. The !glideinWMS configuration files in =/etc/condor/config.d= should be the last ones in the list.  If not, please verify that important configuration options have not been overridden by the other configuration files.
+
+2. Verify the alll the expected HTCondor daemons are running: <pre class="screen">
+%UCL_PROMPT% condor_config_val -verbose DAEMON_LIST
+DAEMON_LIST: MASTER,  COLLECTOR, NEGOTIATOR,  SCHEDD, SHARED_PORT, SCHEDDJOBS2 COLLECTOR0 COLLECTOR1 
+COLLECTOR2 COLLECTOR3 COLLECTOR4 COLLECTOR5 COLLECTOR6 COLLECTOR7 COLLECTOR8 COLLECTOR9 
+COLLECTOR10 , COLLECTOR11, COLLECTOR12, COLLECTOR13, COLLECTOR14, COLLECTOR15, COLLECTOR16, COLLECTOR17, 
+COLLECTOR18, COLLECTOR19, COLLECTOR20, COLLECTOR21, COLLECTOR22, COLLECTOR23, COLLECTOR24, COLLECTOR25, 
+COLLECTOR26, COLLECTOR27, COLLECTOR28, COLLECTOR29, COLLECTOR30, COLLECTOR31, COLLECTOR32, COLLECTOR33, 
+COLLECTOR34, COLLECTOR35, COLLECTOR36, COLLECTOR37, COLLECTOR38, COLLECTOR39, COLLECTOR40
+  Defined in '/etc/condor/config.d/11_gwms_secondary_collectors.config', line 193.
+</pre>
+If you don't see all the collectors. shared port and the two schedd, then the configuration must be corrected.  There should be  __no__  =startd= daemons listed.
+
+
+---+++ Create a Condor grid mapfile.
+
+The Condor grid mapfile (=/etc/condor/certs/condor_mapfile=) is used for authentication between the !glideinWMS pilot running on a remote worker node, and the local collector.  Condor uses the mapfile to map certificates to pseudo-users on the local machine.  It is important that you map the DN's of:
+   * <font color="red">Each schedd proxy</font>: The =DN= of each schedd that the frontend talks to. Specified in the frontend.xml schedd element =DN= attribute:<pre class="file">
+&lt;schedds>
+    &lt;schedd DN="/DC=org/DC=doegrids/OU=Services/CN=YOUR_HOST" fullname="YOUR_HOST"/>
+    &lt;schedd DN="/DC=org/DC=doegrids/OU=Services/CN=YOUR_HOST" fullname="schedd_jobs2@YOUR_HOST"/>
+ &lt;/schedds>
+</pre>
+   * <font color="green">Frontend proxy</font>: The DN of the proxy that the frontend uses to communicate with the other !glideinWMS services. Specified in the frontend.xml security element =proxy_DN= attribute:<pre class="file">
+&lt;security classad_proxy="/tmp/vo_proxy" proxy_DN="DN of vo_proxy" ....
+</pre>
+   * <font color="blue">Each pilot proxy</font> The DN of __each__ proxy that the frontend forwards to the factory to use with the !glideinWMS pilots.  This allows the !glideinWMs pilot jobs to communicate with the User Collector. Specified in the frontend.xml proxy =absfname= attribute (you need to specify the =DN= of each of those proxies:<pre class="file">
+&lt;security ....
+   &lt;proxies&gt;
+         &lt; proxy absfname="/tmp/vo_proxy" ....
+         :
+   &lt;/proxies&gt;
+</pre>
+
+
+Below is an example mapfile, by default found in =/etc/condor/certs/condor_mapfile=. In this example there are lines for each of services mentioned above.  <b>Note:</b> The =example_of_format= entry as each DN should use this format for security purposes.
+<pre class="file">
+GSI "%RED%DN of schedd proxy%ENDCOLOR%" schedd
+GSI "%GREEN%DN of frontend proxy%ENDCOLOR%" frontend
+GSI "%BLUE%DN of pilot proxy%ENDCOLOR%$" pilot_proxy
+GSI "^\/DC\=org\/DC\=doegrids\/OU\=Services\/CN\=personal\-submit\-host2\.mydomain\.edu$" <b>example_of_format</b>
+GSI (.*) anonymous
+FS (.*) \1 </pre>
+
+---+++ Restart Condor
+After configuring condor, be sure to restart condor:
+<pre class="rootscreen">
+service condor restart</pre>
+
+
+---++ Proxy Configuration
+There are 2 types of (or purposes for)  proxies required for the VO Frontend:
+   1 the %GREEN%VO Frontend proxy%ENDCOLOR% (used to authenticate with the other !glideinWMS services)
+   1 one or more glideinWMS %BLUE%pilot proxies%ENDCOLOR% (used/delegated to the factory services and submitted on the !glideinWMS pilot jobs)
+The %GREEN%VO Frontend proxy%ENDCOLOR% and the %BLUE%pilot proxy%ENDCOLOR% can be the same.
+By default, the VO Frontend will run as user =frontend= (UID is machine dependent) so these proxies must be owned by the user =frontend=. 
+
+---+++ Manual proxy renewal
+%GREEN%VO Frontend proxy%ENDCOLOR%%BR%
+The VO Frontend Proxy is used for communicating with the other !glideinWMS services (Factory, User Collector and Schedd/Submit services).
+Create the proxy using the !glidenWMS VO Frontend Host (or Service) cert and change ownership to the frontend user.
+   <pre class="rootscreen">
+%UCL_PROMPT_ROOT% voms-proxy-init -valid &lt;hours_valid> \
+             -cert /etc/grid-security/hostcert.pem \
+             -key /etc/grid-security/hostkey.pem \
+             -out %GREEN%/tmp/vofe_proxy%ENDCOLOR%
+%UCL_PROMPT_ROOT% chown frontend %GREEN%/tmp/vofe_proxy%ENDCOLOR% </pre>
+
+%BLUE%Pilot proxy%ENDCOLOR%%BR%
+The pilot proxy is used on the !glideinWMS pilot jobs submitted to the CEs. 
+Create the proxy using the %BLUE%pilot certificate%ENDCOLOR% and change ownership to the frontend user.
+   <pre class="screen">
+%UCL_PROMPT% voms-proxy-init -valid &lt;hours_valid> \
+             -voms &lt;vo>
+             -cert &lt;pilot_cert> \
+             -key &lt;pilot_key>  \
+             -out %BLUE%/tmp/pilot_proxy%ENDCOLOR%
+%UCL_PROMPT_ROOT% chown frontend %BLUE%/tmp/pilot_proxy%ENDCOLOR% </pre>
+
+%WARNING% *Proxies do expire.* You can extend the validity by using a longer time interval, e.g. =-valid 3000:0=.   This sequence of commands will need to be renewed when the proxy expires or the machine reboots (if /tmp is used only).  
+
+Make sure that this location is specified correctly in the =frontend.xml= described in the [[#Configuring_the_Frontend][Configuring the Frontend]] section.
+
+You may want to automate the procedure above (or part of it) by writing a script and adding it to crontab.
+
+---+++ Example of automatic proxy renewal
+This example (user provided) uses the script [[%ATTACHURL%/make-proxy.sh][make-proxy.sh]] attached to this document.
+You still need to do some prep-work but this can be done only once a year and the script will warn you with an email.
+
+Preparation for the %GREEN%VO Frontend proxy%ENDCOLOR%. You'll have to redo this each time the Host (or Service) certificate and key are renewed:
+   1. Copy the Host (or Service) certificate and key <pre class="rootscreen">
+%UCL_PROMPT_ROOT% cp /etc/grid-security/hostcert.pem /etc/grid-security/hostkey.pem /var/lib/gwms-frontend/ </pre>
+   1. Change ownership and permission of the certificate and key <pre class="rootscreen">
+%UCL_PROMPT_ROOT% chown frontend: /var/lib/gwms-frontend/host*.pem
+%UCL_PROMPT_ROOT% chmod 0600 /var/lib/gwms-frontend/host*.pem </pre>
+
+Preparation for the %BLUE% pilot proxy.%ENDCOLOR%.  You'll have to redo this for each new or renewed pilot cert.
+   1. Create the proxy using the pilot certificate/key (as the user/submitter) <pre class="screen">%UCL_PROMPT% grid-proxy-init -valid 8800:0 -out /tmp/tmp_proxy -old</pre>
+   1. Copy the proxy to the correct name and change ownership and permissions (as root)   <pre class="rootscreen">
+%UCL_PROMPT_ROOT% cp /tmp/tmp_proxy /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
+%UCL_PROMPT_ROOT% chown frontend: /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
+%UCL_PROMPT_ROOT% chmod 0600 /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
+%UCL_PROMPT_ROOT% rm /tmp/tmp_proxy </pre>
+
+Configure the script for the %GREEN%VO Frontend proxy%ENDCOLOR%:
+   1. Download the [[%ATTACHURL%/make-proxy.sh][attached script]] (the latest one is [[https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy.sh][Here on Github]]) and save it as =/var/lib/gwms-frontend/make-frontend-proxy.sh=, make sure that it is executable.
+   1. Edit the VARIABLES section to look something like (replace your email, host name and the paths that are different in your setup - the comments in the script will help): <pre class="file">SETUP_FILE=""
+CERT_FILE="/var/lib/gwms-frontend/hostcert.pem"
+KEY_FILE="/var/lib/gwms-frontend/hostkey.pem"
+IN_NAME="/var/lib/gwms-frontend/frontend_base_proxy"
+OUT_NAME="/tmp/vofe_proxy"
+OWNER_EMAIL="%RED%your@email_here%ENDCOLOR%"
+PROXY_DESCRIPTION="VO Fronted on %RED%hostname%ENDCOLOR%"
+VOMS_OPTION=""</pre>
+
+Configure the script for the  %BLUE%pilot proxy%ENDCOLOR%:
+   1. Download the [[%ATTACHURL%/make-proxy.sh][attached script]] (the latest one is [[https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy.sh][Here on Github]]) and save it as =/var/lib/gwms-frontend/make-pilot-proxy.sh=, make sure that it is executable.
+   1. Edit the VARIABLES section to look something like  (replace your email, host name and the paths that are different in your setup - the comments in the script will help): <pre class="file">SETUP_FILE=""
+CERT_FILE=""
+KEY_FILE=""
+IN_NAME="/var/lib/gwms-frontend/vofe_base_gi_delegated_proxy"
+OUT_NAME="/tmp/vofe_gi_delegated_proxy"
+OWNER_EMAIL="%RED%your@email_here%ENDCOLOR%"
+PROXY_DESCRIPTION="VO Fronted glidein delegated on %RED%hostname%ENDCOLOR%"
+VOMS_OPTION="osg:/osg"</pre>
+
+Before adding the scripts to the crontab I'd recommend to test them manually once to make sure that there are no errors. As user =frontend= run the scripts (you can also use ==sh -x== to debug them): <pre class="screen">
+/var/lib/gwms-frontend/make-frontend-proxy.sh  --no-voms-proxy
+/var/lib/gwms-frontend/make-pilot-proxy.sh
+</pre>
+
+Add the scripts to the crontab of the user =frontend= with =crontab -e=:  <pre class="file">
+10 * * * * /var/lib/gwms-frontend/make-frontend-proxy.sh  --no-voms-proxy
+10 * * * * /var/lib/gwms-frontend/make-pilot-proxy.sh
+</pre>
+
+An additional script like [[%ATTACHURL%/make-proxy-control.sh][make-proxy-control.sh]] (the latest one is [[https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy-control.sh][Here on Github]]) can be used for an independent verification of the proxies. If you like, download it, fix the variables and add it to the crontab like the other two.
+
+<!--
+Depending on the previous choices it may be used to authenticate with the factory or not. 
+If you are using a separate certificate to authenticate with the Factory (Glidein Frontend Condor cert) then create the proxy. This is a simple x509 proxy without VO extensions, so you are not limited in the lifetime and it is recommended to use long lived proxies (170:00 hours will give you a week, 750:00 a month) and to use a cron job if you used a service certificate (doesn't need a password to refresh the proxy).
+   1. Create the proxy using the Glidein Frontend Condor cert
+   <pre class="rootscreen">
+%UCL_PROMPT_ROOT% grid-proxy-init -valid &lt;hours_valid> -cert /etc/grid-security/gwms/vofe-glidein-fe-condor-cert.pem -key /etc/grid-security/gwms/vofe-glidein-fe-condor-key.pem </pre>
+   1. Copy the proxy to the correct name
+   <pre class="rootscreen">
+%UCL_PROMPT_ROOT% cp /tmp/x509up_u`id -u` /tmp/x509up_vofe </pre>
+   1. Change ownership of the proxy
+   <pre class="rootscreen">
+%UCL_PROMPT_ROOT% chown frontend: /tmp/x509up_vofe </pre>
+-->
+
+---++ Reconfigure and verify installation
+In order to use the frontend, first you must reconfigure it.
+Each time you change the configuration you must reconfigure it.
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% service gwms-frontend reconfig </pre>
+
+After reconfiguring, you can start the frontend:
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% service gwms-frontend start </pre>
+
+#GratiaAccounting
+---++ Adding Gratia Accounting and a Local Monitoring Page on a Production Server
+You must report to Gratia if you are running on OSG more than a few test jobs.
+
+Accounting.ProbeConfigGlideinWMS explains how to instal and configure the HTCondor Gratia probe. If you are on a Campus Grid without x509 certificates pay attention to the [[Accounting/ProbeConfigGlideinWMS#Users_without_Certificates][Users without Certificates part]] in the Unusual Use Cases section.
+
+In gratia you can see your jobs but if you are running only few it may be easier to run have a display with more targeted queries like the [[http://osg-xsede.grid.iu.edu/gratia-summary/][one on OSG-XSEDE]].
+
+Attached to this document you can find the script for the monitoring page:
+   * Download the script [[%ATTACHURL%/download-gratia-graphs][download-gratia-graphs]] (the latest one is [[https://raw.githubusercontent.com/DHTC-Tools/OSG-Connect/520ee73863022e449452859d02c77a1988d1db52/download-gratia-graphs][Here on Github]])
+   * Create the "data" directory (e.g. =/var/www/html/gratia-summary/data= on the GWMS Frontend itself)
+   * Make it available on your Web Server (e.g. the directory above should be visible by default as =http://gwms-frontend-host.domain/gratia-summary/=)
+   * Configure and run the script
+   * Run the script regularly (e.g. via =crontab=) to update the content
+To verify that works open the page in a web browser (e.g. =http://gwms-frontend-host.domain/gratia-summary/=).
+
+---++ Optional Configuration
+
+The following configuration steps are optional and will likely not be required for setting up a small site. If you do not need any of the following special configurations, skip to [[#ServiceActivation][the section on service activation/deactivation]].
+
+   * [[#DesiredSites][Allow users to specify where their jobs run]]
+   * [[#IsItb][Creating a group to test configuration changes]]
+
+#DesiredSites
+---+++ Allow users to specify where their jobs run
+
+In order to allow users to specify the sites at which their jobs want to run (or to test a specific site), a frontend can be configured to match on =DESIRED_Sites= or ignore it if not specified. Modify =/etc/gwms-frontend/frontend.xml= using the following instructions:
+
+   1. In the frontend's global =&lt;match&gt;= stanza, set the =match_expr=:\
+   <pre class="file">match_expr=<span style="background-color: #FFCCFF;">'((job.get("DESIRED_Sites","nosite")=="nosite") or (glidein["attrs"]["GLIDEIN_Site"] in job.get("DESIRED_Sites","nosite").split(",")))'</span></pre>
+   1. In the same =&lt;match&gt;= stanza, set the =start_expr=:\
+   <pre class="file">start_expr=<span style="background-color: #FFCCFF;">'(DESIRED_Sites=?=undefined || stringListMember(GLIDEIN_Site,DESIRED_Sites,","))'</span></pre>
+   1. Add the =DESIRED_Sites= attribute to the match attributes list:\
+   <pre class="file">&lt;match_attrs&gt;
+   <span style="background-color: #FFCCFF;">&lt;match_attr name="DESIRED_Sites" type="string"/&gt;</span>
+&lt;/match_attrs&gt;</pre>
+   1. Reconfigure the Frontend:\
+   <pre class="rootscreen">/etc/init.d/gwms-frontend reconfig</pre>
+
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Click here to show an example configuration" }%<pre class="file">
+<b>&lt;match match_expr='((job.get("DESIRED_Sites","nosite")=="nosite") or (glidein["attrs"]["GLIDEIN_Site"] in job.get("DESIRED_Sites","nosite").split(",")))' \
+start_expr='(DESIRED_Sites=?=undefined || stringListMember(GLIDEIN_Site,DESIRED_Sites,","))'&gt;</b>
+      &lt;factory query_expr="True"&gt;
+         &lt;match_attrs&gt;
+            &lt;match_attr name="GLIDEIN_MaxMemMBs" type="int"/&gt;
+         &lt;/match_attrs&gt;
+         &lt;collectors&gt;
+         &lt;/collectors&gt;
+      &lt;/factory&gt;
+      &lt;job comment="Define job constraint and schedds globally for simplicity" query_expr="(JobUniverse==5)&amp;&amp;(GLIDEIN_Is_Monitor =!= TRUE)&amp;&amp;(JOB_Is_Monitor =!= TRUE) "&gt;
+         &lt;match_attrs&gt;
+            <b>&lt;match_attr name="DESIRED_Sites" type="string"/&gt;</b>
+         &lt;/match_attrs&gt;
+</pre>
+%ENDTWISTY%
+
+#IsItb
+---+++ Creating a group for testing configuration changes
+
+To perform configuration changes without impacting production the recommended way is to create an ITB group in =/etc/gwms-frontend/frontend.xml=. This group would only match jobs that have the =+is_itb=True= !ClassAd.
+
+   1. Create a [[http://glideinwms.fnal.gov/doc.prd/frontend/configuration.html#management][group]] named =itb=
+   1. Set the group's =start_expr= so that the group's glideins will only match user jobs with =+is_itb=True=:\
+   <pre class="file">&lt;match match_expr="True" <span style="background-color: #FFCCFF;">start_expr="(is_itb)"</span>&gt;</pre>
+   1. Set the =factory_query_expr= so that this group only communicates with ITB factories:\
+   <pre class="file">&lt;factory <span style="background-color: #FFCCFF;">query_expr='FactoryType=?="itb"'</span>&gt;</b></pre>
+   1. Set the group's =collector= stanza to reference the ITB factory, replacing <span style="background-color: #FFCCFF;">username@gfactory-1.t2.ucsd.edu</span> with your factory identity:\
+   <pre class="file">&lt;collector DN="/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=glidein-itb.grid.iu.edu" \
+                  factory_identity="gfactory@glidein-itb.grid.iu.edu" \
+                  my_identity="<span style="background-color: #FFCCFF;">username@gfactory-1.t2.ucsd.edu</span>" \
+                  node="glidein-itb.grid.iu.edu"/&gt;</pre>
+   1. Set the =job query_expr= so that only ITB jobs appear in =condor_q=:\
+   <pre class="file">&lt;job <span style="background-color: #FFCCFF;">query_expr="(!isUndefined(is_itb) &amp;&amp; is_itb)"</span>&gt;</pre>
+   1. Reconfigure the Frontend:\
+   <pre class="rootscreen">/etc/init.d/gwms-frontend reconfig</pre>
+
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Click here to show an example configuration" }%<pre class="file">
+<b>&lt;group name="itb" enabled="True"&gt</b>;
+         &lt;config&gt;
+            &lt;idle_glideins_per_entry max="100" reserve="5"/&gt;
+            &lt;idle_vms_per_entry curb="5" max="100"/&gt;
+            &lt;idle_vms_total curb="200" max="1000"/&gt;
+            &lt;processing_workers matchmakers="3"/&gt;
+            &lt;running_glideins_per_entry max="10000" relative_to_queue="1.15"/&gt;
+            &lt;running_glideins_total curb="90000" max="100000"/&gt;
+         &lt;/config&gt;
+         <b>&lt;match match_expr="True" start_expr="(is_itb)"&gt;
+            &lt;factory query_expr='FactoryType=?="itb"'&gt;</b>
+               &lt;match_attrs&gt;
+               &lt;/match_attrs&gt;
+               &lt;collectors&gt;
+                  <b>&lt;collector DN="/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=glidein-itb.grid.iu.edu" \
+                  factory_identity="gfactory@glidein-itb.grid.iu.edu" \
+                  my_identity="feligo@glidein-itb.grid.iu.edu" \
+                  node="glidein-itb.grid.iu.edu"/&gt;</b>
+               &lt;/collectors&gt;
+            &lt;/factory&gt;
+            <b>&lt;job query_expr="(!isUndefined(is_itb) &amp;&amp; is_itb)"&gt;</b>
+               &lt;match_attrs&gt;
+               &lt;/match_attrs&gt;
+               &lt;schedds&gt;
+               &lt;/schedds&gt;
+            &lt;/job&gt;
+         &lt;/match&gt;
+         &lt;security&gt;
+            &lt;credentials&gt;
+               &lt;credential absfname="/tmp/pilot_proxy" security_class="frontend" trust_domain="grid" type="grid_proxy"/&gt;
+            &lt;/credentials&gt;
+         &lt;/security&gt;
+         &lt;attrs&gt;
+         &lt;/attrs&gt;
+</pre>
+%ENDTWISTY%
+
+#ServiceActivation
+---+ Service Activation and Deactivation
+
+
+The scripts updating your CA and CRLs plus three frontend services need to be running:
+   1. %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlStart" TOC_SHIFT="+"}%
+   1. Condor <pre class="rootscreen">
+%UCL_PROMPT_ROOT% service condor start </pre>
+   1. Httpd <pre class="rootscreen">
+%UCL_PROMPT_ROOT% service httpd start</pre>
+   1. VO Frontend <pre class="rootscreen">
+%UCL_PROMPT_ROOT% service gwms-frontend start </pre>
+
+
+To stop the frontend:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% service gwms-frontend stop </pre>
+And you can stop also the other services if you are not using them independently form the frontend.
+
+
+---++ Service Activation
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-cron on 
+%UCL_PROMPT_ROOT% /sbin/chkconfig fetch-crl-boot on 
+%UCL_PROMPT_ROOT% /sbin/chkconfig condor on 
+%UCL_PROMPT_ROOT% /sbin/chkconfig httpd on 
+%UCL_PROMPT_ROOT% /sbin/chkconfig gwms-frontend on</pre>
+
+
+---+ Validation of Service Operation
+The complete validation of the frontend is the submission of actual jobs.  However, there are a few things that can be checked prior to submitting user jobs to Condor.
+
+   1 Verify all Condor daemons are started.  <pre class="screen"> %UCL_PROMPT% condor_config_val -verbose DAEMON_LIST 
+DAEMON_LIST: MASTER,  COLLECTOR, NEGOTIATOR,  SCHEDD, SHARED_PORT, SCHEDDJOBS2 COLLECTOR0 COLLECTOR1 COLLECTOR2 
+COLLECTOR3 COLLECTOR4 COLLECTOR5 COLLECTOR6 COLLECTOR7 COLLECTOR8 COLLECTOR9 COLLECTOR10 , COLLECTOR11, 
+COLLECTOR12, COLLECTOR13, COLLECTOR14, COLLECTOR15, COLLECTOR16, COLLECTOR17, COLLECTOR18, COLLECTOR19, COLLECTOR20, 
+COLLECTOR21, COLLECTOR22, COLLECTOR23, COLLECTOR24, COLLECTOR25, COLLECTOR26, COLLECTOR27, COLLECTOR28, COLLECTOR29, 
+COLLECTOR30, COLLECTOR31, COLLECTOR32, COLLECTOR33, COLLECTOR34, COLLECTOR35, COLLECTOR36, COLLECTOR37, COLLECTOR38, 
+COLLECTOR39, COLLECTOR40
+  Defined in '/etc/condor/config.d/11_gwms_secondary_collectors.config', line 193.
+</pre> If you don't see all the collectors and the two schedd, then the configuration must be corrected. There should be  __no__  =startd= daemons listed
+   1 Verify all VO Frontend Condor services are communicating.<pre class="screen"> %UCL_PROMPT% condor_status -any
+MyType               TargetType           Name                          
+glideresource        None                 MM_fermicloud026@gfactory_inst
+Scheduler            None                 fermicloud020.fnal.gov
+DaemonMaster         None                 fermicloud020.fnal.gov
+Negotiator           None                 fermicloud020.fnal.gov
+Collector            None                 frontend_service@fermicloud020
+Scheduler            None                 schedd_jobs2@fermicloud020.fna
+</pre>
+   1 To see the details of the glidein resource use =condor_status -subsystem glideresource -l=, including the !GlideFactoryName.  %TWISTY{%TWISTY_OPTS_OUTPUT% showlink="Click to see an output example..."}% <pre class="screen">%UCL_PROMPT% condor_status -subsystem glideresource -l
+GlideClientMonitorGlideinsTotal = 0
+GLIDEIN_GlobusRSL = "(queue=default)(jobtype=single)"
+GLEXEC_BIN = "NONE"
+GlideClientMatchingInternalPythonExpr = "(((stringListMember(\"OSG\", GLIDEIN_Supported_VOs)))) && (True)"
+UpdatesLost = 0
+CurrentTime = time()
+GlideinWMSVersion = "glideinWMS UNKNOWN"
+UpdatesHistory = "0x00000000000000000000000000000000"
+UpdatesSequenced = 0
+GlideFactoryName = "MM_fermicloud026@gfactory_instance@gfactory_service"
+GlideClientMonitorGlideinsRequestIdle = 0
+UpdateSequenceNumber = 4171
+GlideFactoryMonitorStatusPending = 0
+GlideClientConstraintFactoryCondorExpr = "True"
+GlideFactoryMonitorStatusStageOut = 0
+GLIDEIN_GridType = "gt2"
+UpdatesTotal = 4173
+GlideClientMonitorGlideinsRunning = 0
+GLEXEC_JOB = "True"
+GlideFactoryMonitorStatusHeld = 0
+GLIDEIN_In_Downtime = "False"
+GlideFactoryMonitorStatusIdle = 0
+GlideClientMonitorGlideinsRequestMaxRun = 0
+Name = "MM_fermicloud026@gfactory_instance@gfactory_service@fermicloud020-fnal-gov_OSG_gWMSFrontend.main"
+GlideClientMonitorJobsIdleOld = 0
+GLIDEIN_REQUIRE_GLEXEC_USE = "False"
+GlideClientName = "fermicloud020-fnal-gov_OSG_gWMSFrontend.main"
+GlideClientConstraintJobCondorExpr = "((JobUniverse==5)&&(GLIDEIN_Is_Monitor =!= TRUE)&&(JOB_Is_Monitor =!= TRUE)) && (True)"
+GlideClientMatchingGlideinCondorExpr = "(True) and (True)"
+GLIDEIN_SlotsLayout = "fixed"
+GlideClientMonitorGlideinsIdle = 0
+GLIDEIN_Site = "MMTEST-FC1-CE"
+GlideFactoryMonitorRequestedIdle = 0
+GlideClientMonitorJobsIdleUnique = 0
+GlideFactoryMonitorStatusStageIn = 0
+GlideClientMonitorJobsIdleEffective = 0
+GlideFactoryMonitorStatusWait = 0
+AuthenticatedIdentity = "schedd@fermicloud020.fnal.gov"
+GlideinMyType = "glideresource"
+MyAddress = "<131.225.154.153:0>"
+GlideClientMonitorJobsIdle = 0
+GlideinRequireGlideinProxy = "False"
+GLIDEIN_TrustDomain = "OSG"
+GLIDEIN_Supported_VOs = "OSG"
+GlideinAllowx509_Proxy = "True"
+MyType = "glideresource"
+LastHeardFrom = 1384802844
+GlideFactoryMonitorRequestedMaxGlideins = 0
+GlideFactoryMonitorStatusRunning = 0
+GLIDEIN_SupportedAuthenticationMethod = "grid_proxy"
+GLIDEIN_Gatekeeper = "fermicloud026.fnal.gov/jobmanager-condor"
+GLIDEIN_REQUIRE_VOMS = "False"
+GlideFactoryMonitorStatusIdleOther = 0
+GlideClientMonitorJobsRunningHere = 0
+GlideClientMonitorJobsRunning = 0
+GLIDEIN_Downtime_Comment = ""
+GlideinRequirex509_Proxy = "True"
+GlideClientMonitorJobsIdleMatching = 0
+GlideClientMonitorJobsRunningMax = 10000
+</pre> %ENDTWISTY%
+   1 Verify that the Factory is seeing correctly the Frontend using =condor_status -pool "%RED%FACTORY_HOST%ENDCOLOR%" -any -constraint 'FrontendName=="%RED%FRONTEND_NAME_FROM_CONFIG%ENDCOLOR%"' -l=, including the !GlideFactoryName.  %TWISTY{%TWISTY_OPTS_OUTPUT% showlink="Click to see an output example..."}% <pre class="screen">%UCL_PROMPT% condor_status -pool "fermicloud023.fnal.gov" -constraint 'FrontendName=="fermicloud020-fnal-gov_OSG_gWMSFrontend"' -any -l
+GlideinEncParamSubmitProxy = "4a78d0e27a146ab4831ebb87ac4c3ccc"
+GlideinMonitorRunningHere = 0
+UpdatesLost = 0
+GlideinMonitorRunning = 0
+GlideinParamGLIDEIN_Collector = "fermicloud020.fnal.gov:9620-9660"
+GlideinMonitorGlideinsRunning = 0
+GlideinEncParamSecurityName = "4faf577e41820358288e1098bec9135e3ab81f9c92e47c1f4e059200ec64c029"
+CurrentTime = time()
+GlideinWMSVersion = "glideinWMS UNKNOWN"
+UpdatesHistory = "0x00000000000000000000000000000000"
+ReqRemoveExcess = "ALL"
+UpdatesSequenced = 0
+WebMonitoringURL = "http://fermicloud020.fnal.gov/vofrontend/monitor"
+GlideinMonitorProxyIdle = 0
+UpdateSequenceNumber = 4330
+WebGroupDescriptFile = "description.dbceCN.cfg"
+GlideinMonitorVomsIdle = 0
+GlideinMonitorGlideinsIdle = 0
+GlideinMonitorGlideinsTotal = 0
+WebDescriptFile = "description.dbceCN.cfg"
+UpdatesTotal = 4333
+GlideinMonitorIdle = 0
+GlideinParamUSE_MATCH_AUTH = "True"
+GlideinEncParamSecurityClass = "7aa870ffef84056e806a4784517ab98f"
+Name = "554904_MM_fermicloud026@gfactory_instance@gfactory_service@fermicloud020-fnal-gov_OSG_gWMSFrontend.main"
+ReqEncKeyCode = "468eaa556f557e7c41aaf56315027f6a275c93e7a0f683f0a5e9653a6afb4173569af1df5a842d0915a9d1203aeacb018da6b8058079666cd988ea52aa6c9260966aab729b01ab5a5f00f9ba489fc0caa9ecc44254daf5825cd05e283dd86fb2b789b37a092324b36cf61c98dc233279870c9385c292aa073d7a9e27bcd2d74e0af558f85f95749e7f14f6d8e82452136919ab755d0a6ede7e729adf2e58fa40fb4bfb7eb313bb807c603288c3f8b9d988fa6cbd0cfba87eb86b72c45ca7dd20ce1ff4110e41c15b705c7f9d77fecbf75a15760d4acb52e9ffe1f2467430ce5a3eff9b76e310381b3466d307d3ec7cc8efc93da20836b3294df330a4f9862540"
+WebGroupURL = "http://fermicloud020.fnal.gov/vofrontend/stage/group_main"
+ClientName = "fermicloud020-fnal-gov_OSG_gWMSFrontend.main"
+GlideinMonitorOldIdle = 0
+GlideinParamGLIDECLIENT_ReqNode = "fermicloud023.fnal.gov"
+AuthenticatedIdentity = "vofrontend_service@fermicloud023.fnal.gov"
+GlideinMyType = "glideclient"
+MyAddress = "<131.225.154.153:0>"
+ReqEncIdentity = "b14e8a74523f54e2500866e9fa35f2f74d63168d18c0a5dc07edf43a2f04b4777136a83368290c1227a3dc4d64889b8c"
+MyType = "glideclient"
+LastHeardFrom = 1384812460
+GlideinParamGLIDECLIENT_Rank = "1"
+ReqName = "MM_fermicloud026@gfactory_instance@gfactory_service"
+ReqPubKeyID = "fbc19a1fa4a7935dba55f6673543d5c3"
+WebGroupDescriptSign = "6d1f6250d9a012b1b5ed22e9297e43821a3cef0e"
+FrontendName = "fermicloud020-fnal-gov_OSG_gWMSFrontend"
+ReqIdleGlideins = 0
+WebDescriptSign = "b5c84d33cdea6bdcaf5caf83a72e43184f50c51e"
+GroupName = "main"
+ReqMaxGlideins = 0
+WebSignType = "sha1"
+WebURL = "http://fermicloud020.fnal.gov/vofrontend/stage"
+ReqGlidein = "MM_fermicloud026@gfactory_instance@gfactory_service"
+
+FrontendName = "fermicloud020-fnal-gov_OSG_gWMSFrontend"
+GroupName = "main"
+LastHeardFrom = 1384812460
+GlideinEncParamSecurityName = "4faf577e41820358288e1098bec9135e3ab81f9c92e47c1f4e059200ec64c029"
+UpdatesTotal = 4333
+GlideinWMSVersion = "glideinWMS UNKNOWN"
+Name = "gfactory_instance@gfactory_service@fermicloud020-fnal-gov_OSG_gWMSFrontend.main"
+ClientName = "fermicloud020-fnal-gov_OSG_gWMSFrontend.main"
+ReqPubKeyID = "fbc19a1fa4a7935dba55f6673543d5c3"
+UpdatesHistory = "0x00000000000000000000000000000000"
+UpdatesLost = 0
+UpdateSequenceNumber = 4330
+GlideinEncParam450567 = "203029fb8b7b5890630fc62c4debf56e637a13a7456e98a2d1e50202528458de6504a09daa1329b0e8b8f1f5fa3bd417dd469c715f32c8d3470a45c18ba4d281d443cdea40af26375ae74ac99dbd60df924b47ca0f5a135f059f7f820570d44e6bf8d44d77d4f6524b8ee8cc283ed17bbcfc00c5dced5f6af99f90443d8b80e6552ebcac09ab8f2c359316bd163538522f3926bfb8b806efb6439e7e2885a1e7d602fdf79ea1f524cc2779cbe43796166fad811f6d85d264caceb45eb70b15b6e232ab96c0ea42db9fda40aa3dc8a7f2a31250bba448241031a931c1c4ce2bf5af153cc3e2dba0d4e30ab1b1f072b5e90c43f8db4ad660a5c6ef23859bbe578e01af8496247cdef6c713adf02df7f2ad10560ae41938352cfbfbeca644cd23dd1745db89e6371d62715fd5dff61fe5e4d950380713cf3dafe412c837ff66ce457030cf60f46210345f8abe69085ca5c36867bd8184dbe6ea737a9ae71e98ebab167568d25260cdf3f8b164f2321d356df7f33cf0f4430ce8132698176a4df62d67d1876ec84868659eb2a1af28b3f363810aca02c5ad4239126312459b0402d980887b7a464fa8c25e10ebcd914c2046506d611b5ec0a9f305bd05ea373a5ec672a097c2e80fa9578c5119686c9d287997171a61e27e0f8ee8a2a53e453ea2d8c2d12b43d3284120ac9c6a683238c8fb6c6f0de58256e330112b03380a4dfaea801c68020ffd79c7058b85f23c4f3af8a28dd88980595dfc8c3447f8ebf77b315890a2b1606f422c703efceea3be0859963044f51e89bfbb150f9de9d91ebe6c3715783ed12266e932fc9b99ca40c08db8ead9bd6628982260a43aaaec587df30bc223e38466f3c4ec9715534be4cff9234a6ff226fdc5c08dd02670747bce51892cdab5993b4c7a12a4ab93192bcd20290ff1fda770d0b758b00120723fdbaa05d3b1e61aa4eb9bcde6202b1b68dfdc14b15d73a2d1fe16cf6fadabad2a792fc1af97103f6df139d60db58b893bacf846d73a6d5dc01e04b4a37eb03928c4af9315b5e91975e9fa3da5daf7e4648c2d52c84a4db1feb765d43c83a342207278df3cd91e6e2e707fd368fea5f3a0cac9be41c5a6e70c5797c263b1f9a2394fc73758cf1ef525b96335ae179475df68ace6871c7d5faf5a5dcd3ee51909450bb1b97584b4e1d39067148d6d2d1cf32f5b7755cf615432295545eef4ade3522decc12bdcf9d71d599dd4a92b735a087ad14956d721acd6c4d9e5dae8cb9f2526bb3d691c5acfccad21a9135b253dfebf1238f84717a0999c30bd28741dbfb48412fec268c8e917e1a78d1c7574968fa0b9f055a9e3fd383e466f5d3df447110978822cb48ebd6ad87edab69ab68f4e219c1de0de13482bdd2f833fe8d974349c2f6f30b3fe02a99981c002063c066277de75185837505a93303f972989d42203dba3f73bf3b8ee86a2484ca2693a84548cc31433ba59c75dc388b94c6cd59366a929189413efca20e8ccf38a19a6198e4e8f8c67ab3248758d98cddc1325accebc6bf0ea320948af6b63daef05c4293542a1651e8b6efb5944a50dfcd6d8878c52c1db93c8fd3afdea9a1e3e49c90876668c0ca01c2ef92f64c4b9ffb2958b9095aab1dff57a1b740163f0165e8a210ddbfe21bb5ebb58af667d65751067ad406586fb733a5469a847a2e62c3fc1d1d638c3e5ab6e6ad29d491fabea9dc5f073a895ad8f4d41b7c44d0f816ad60902ca0eb92b52f43e219989698d7bd5a855cf3777ce1d6d3416f17d2b8168ca4cab6ab2a0b6970bbe14968a506aad6e6f76bfbf85ce47c7389bd68cd487b27e0354abf2297582e4354061a9b11c3619f8dc948010e881606c738f088d40c1e19092d1ee15546b29bba5cc2750d603ed0a2e439467be4879f5dc1175d6121befe7b117493e9745407032834227fd4f0d97b2cf02024e4b7fdecde3d0e14679920b4563e8c97fdd559c24da108d52b9e9f81cab09617556b2387cd76218c2efca7021d4fd2041bf8066b84210b9e79324b90db7ab9b4710b830b36a08d312094d7f9aeb76ce9ffa59b3ce07339ff256e336a5b3a45b1bf3c0e96e3a12f0b8763d3da739a9106febb781a4dc30152dcd41485f8130a72352681e0d2fdcc36aad3b5d17218e68e38eea11b7473af7267d43f87a022b29d0f6e954a144f0d76000676e9cc902c565fd4bedd3dac5892d940b9716c1cbef3c4b53823fd43b68320bac8a47adde386aafa6ebc195a888aa790700359c14f6c7a6d1cbad68b5491c9f269216493c0cd186a47cc4f25deb1cc8546bf25313dbb438417c4ea5344baf6d91801fedd26bef90fd30b782d08a402062e6e8f993c35515aa1c183c2a5aaafd0c581304b97648cf957c4efe87f234bdf4354308e8556803e5a733bbc206ddeb9f18d198bf2221ab2c9a7d2dc117df9457b41fd66c224fa7c9a4344fc957c6b5bf04dc57a6b3f1a29d01cdb76c7a072eaf124950d1ed23eb4159b5cd5ed04e9f773dae2096f3c0415572d0b965b31be358b416da19fbbdb3a8cb90163949d406bbd683774e5f6b3dcd139f84c3671ad3256fc84a67d014594f0c97b804142a0b7bac3342ebec8ff52a38117c4f026b997cb413ff88f12b8dbb7cc12c7a58a0978f2cc92df7e5c4fd234d68a463b62ea35c1e6d64625bcd55ffd49b3041548cb9b5aa8768ec0710e50ee796efa2abac4c8b31771b22e4bcc015c6d5bd65cd40c4641db004881d7d0dddaf1e2e3529d73226efbc256e70ae485c2a35b106453c7e83eee807ccf6b2ce897621d1fb172699c28165abc0e6ad2b5a09fed05b19d67d10164028f438649db28d1f712d283107088d9f800df78f1037c0aeb04b2e29bb398893aafb7b89c67341160bd12d79ef9f7249f4770fe41cbf7265ace3ffff690a47b5d22776bd38838e28de4c56890ebf7224a2a47f7a7e3912f7f09846d77ddac369a7f9f77c0dac6c4f369c117ad60f83476bcd4feaab3f050aef9457bbdefad9d84b13a74e2ced5bf9648ce929978363cbd16d07a2d38869db4d7dd1898bb300ef1f12b5ed1c058d8a4ba5e9b8d2dde088c72ad4b52c336687dad71355c6686d58b98f64c00c6d7321a07e9b2dd4dca68b46562292105a2168a3e7b422cfbec589570861ebfb57bad6ba0a83b15f69f0afb90c252626a4c5b24981a90630e28b5f6b11cebc2262498d1dfd550b29cc6db4e489f7ed181b1d7f89ac50166f0d349b0f167e6ef8a394647778d607a830da3d4111bf6a58bc020ff5a0712536f24e75cee90632833ff53bbab946bddd86150004ea7d093f398ffff4fb7c9598efca1d2566d94447c7e43dca8d17a75d352ee92f65a59d9f3ff4f7ca55b6f08bbf68c8bd718a607dae82c266c2344c672a755257ce24bfde11b3d823a9cc6b4b95aa68202595309d6fa7d41089ba9df472bfdbde9744504908f994ed07e08a6480059cc41a816b0246d0418cf143722dd30470f3a905658d0f4b371882fe7feee05af2cc7c1e5381cafe48b76e98c51de41646be3fa64503f1044bff31316f951669789d92f15737bf79f10f95e075f1de94354b8a413664c935cb99999c9bcd748355a43d449b85554aff25cd06db27ec189f6b5a241d438dc2888d84906a189e838ca1aef5cb3be397d98ad67dc798d33a4c40ac2f0a98ad755fdbf2d8c94ba9090866aaf2988e4c9b4075462db69d36cd034c9f7317fa4a686913b9faa4b05090f113bcd483acee96bc9f19d61c1c9e1c09c7aaec774f7d771cdbd8ea1aa410b56599dced085c1a105128dc1edca4a2aa302504f44d893fee1e4908fc729bb2a44d70c0eb35a22e0e665d4ae014659f5d4d08d6f79b50bc9dc702dde969e9417d43c3bff7767d21487c633e1fbfab117f5f85ba6269c6f92ae02544eb49548b1ccd16e21121db25826da65cd650a3d4cc8bbc6c0a544a72b2c14e73726b580cfcb5645452a051136d75396fd2a182b0e0014d70595dae356662a670b2db7bea49c0737eddf46017e4eccfd6d9c71b5961cc5cb5000ecc43ae0b44daa6fafaeb8f091a5af5f3e7c08ae7143eb6ecb6b5331c3e91a373fd75f4a3773b4f9141eb993291c9520cb97a402b9fa2b9680711ffb1256210d8a1b07a1350504618fe557ef391b8a4975cb1b93c6d8ff0c14566d038a6345680320deaa6da21789ae0af488fe52b5f19803d21e9ebffba68ba43dd64273d9a70c550ff49a4d785b7e4ac56b35d5203c98b0bb8a2b1f8db0f2ad9b043eef9658853d9916e123bf8f5caef0ee432e9b6d0db1f08ea1d1a0b85dbcb79ddc03e0e51dffb2c7cb29396ee0b0f3006b518348e33360bcfde3d66f8c847dd94ac58103f0a005d929437ecccc5a1d6555194635eea7d7a79b738a73507354ff935374439fa708d6c5f8e3de44aa0a9b5e4f5c6ed3300131aa728f78aa3fcb0c9a2c6793f96dfd1bdf3f9b05359e8e3f2e9e6db7d3de6a944a256ec3160dc0003bc1f9676a88b24a0fc015278751ca8ab6fd6faf5bec1feb03145a00b8e1593e11fc848f04072eb051694d604485dd7e3630f618ec1e3252e71b6f5324bae638de548e43bd56a35e9f3fbe97447376ca5883582ffd92d0e501bc9fb6982e243b119793bbada7ced3847bda7864c58c79e9d8e35c027450f7f54aa237fc3f0e6304b8690d16d04b2c086d3c5bc20c6ee2e3344c6d6b5d5567538cae458a05d3507db9bca4eaf5cc4b8f39a9d7a1dc41c75d25d46828b96d04a99077376c4ce2fc377950068bf28bd65fd03ef9302a4851ee0df18ee77c076dfff1be61ede9e52fe088ab9bc091b734688cd8400fde2dc92b8b350b341dc2990b623e02fb5b2d7890527fc4a96a4c5883dcc23beb1ac95cc6ef8a0f930c4c077190f68754cc78abd136a2661ef53a98f884c72227404a184a38d75f6555a44c1886efba2aa9a39630d7a0fda602cad2d913634e44453d97baae2f41f2f25f35db7589cb7caea2b4530423afa8f0c9d9ca098e43068172cdbfd4a333f04d57adace61c1916ae5ccb9aff0b57ecfef0a4e4684c7d48475501705df8c2c0eb10ac4868e1ac1e8bd7b369a21d0050da41dc4b6697f8003e1f111be903bbcb55ef37287b55cb5f8835a1683812dd89fa57a96217324c1926eb1e8feedef62119c9a708d871279766284005886617557ea46874d485a3cb72c002739c0fa35c832400cd1b82bf5606c376346aa3235564219f81a560882ad5397acf47ddba6c9c5cd14ffbf4cc3cb808012cf3244927a266c71554fcc66b9aebca8ef1eb83e9460922e3051d4051bcdadf09808f73493f622c548f53d66178fec9f336a83041de2ad004b448ea9fc2fa23a6a739d4704dd4a1a1558a4d0ef6a3ccc483d75b59ca3dd9c1838456775dc8a0cb8b85d29717b76b36f738b4c376fc9e2f4dc11b364eb7e91359aa6f9eacefdabf191b248a0d8faef68935c08c08416c6bff28739662f3665d2d6e398ba843b8833ca5bd3624f59b658f432b477e9f9ac9f22a3536381a073141948e6b27d14b1c2ceb073706ba72a4263001c261fe10726d65cb9d16d753bd3c15b1f00e421d5cd6d190a3efc35dab3c8023b82f35a3fa1b3a674b50d0318f3359281ec3e33c71eb25dfd22a714f6b3c01a0157b49fd01d7b89fe96b549607c49acc469b4c519a09f2b31acf29d9114fd1bcf5e366d2294b462e4fb385f8938014a895ca60931600485c38526369f82f567caf9da3f43adf6c0f2c9bb82333b3aae11c6a30304ef483a967c65611d680cc2ffa7534aff89d2ae5fb0d8eafe0c4a2da841f8a20dcfc096ed94238f38864331a57aeb3e26ca07a0fc1e2d765b98ca4f66f4073ef5cb67856797c159c232cb3caae3ef52e8caafa5bb8b0bd323a107bd05939c0144581af579b8763faec1b0b3ae2bc24fa55c3ebd9ab9251051c3a4b7315f14afbbf9e8babfc0a69b916706eb310675e9db3883d29b207a934f31c6f7382043b7ff77669fbb330570045c7a2170c5c090b90a7ebcb9d61cd997431cc428981fd9b9f0bd2464f8f40bf77c88e5f00b4cd05240ed6d5731f78a0dbc336625c9f631a5b5985016ee416624a97fe6ad1db5ffe4655069242e4f8c69b35f6c70e6599d171ea2d641746ec78be2af2640ab482fe8186ca9ecfe6dac0ca6cbe8318f7ed65dd086e2fdf8432ab6be6e5ea7b103df2c5038e6b7a40b9a36c198be9215d06d4b0caa87f73b614d326f40685a1e8dfa7f3e4f46790e17be785c0f7894ec9c58e3585f79d98715fcac7bfa429f1e404a74ee04f40c0cc0ec805b6d6775d34149e9798b42b29657a7e2fa3422e195b8bee0a221d3d30b6fc52d69683f9a1173019c5bde2221b384561df8f5a84c27ebaa28543ce3ed8dbbfab9cfa8a238b1aa436ea7e043ff84be7cda558636fa40b91d8c9962df386087743f512cb33b5fc1e980d49555488da469f0761c7ae3c74f065a34b9892244ee169284198bcdcc9078370d2678599fc055eaded1f5cc5da974b7c459bf95b7b4177d3a11b7d16ffaf18eea9b952df891064a6a2dbe62579a7d82f06a0da831bce5dde3e9254f965515a04002ec90df5d2afa742324b034045af60821b2b3af4ff06c104df3899ebc6a03480be58f9e73b2f9befc8c0cdf77691721d97839feafc4952031d189c35cc2c76e01b426f23d297e6d116c11af9af80659cc58635c3ba431acc82c4cfeede69da53413c924406d6a8a5df28db3c32db2763f0b1b3789c1204910d6c326409241eccee701155f6c8ca8d350e6cd57ef824c6997f6a30907b4da0160b897e88f3923977b3d705ec9b22446c4817a5b807e98383c8c237f24e987b27700c3651981bf010e0fafaa92a98efc2bf9d2ca886a1b31f8cdd78509618b2115f67d5b1f26b2d989c18b8832bad3b7be1cd03d1bc56dc3ad1d0d0372420057e84b16357e267a034a2c1910ac675471f2849bcadecc03eaa8f57ed669f8cbfe19c75910af654e255548b2af14adcec1b80c76f020cce93d5ac5e966b9bab52fedcab01153c84daa54d11949cf5d76fe936193df63d8a0e89e38da384c9c6870954bbfd6b29fe3dc90dcc7408fc08d787e1bb90a71a718245be420f3cd60126803167a3eee353fb54272b248195a765af35b52f59cf87c7138c105b15b8f8f9d7c1781cc945b3ee845e6d4b198bd0d53671f64a7d53da10104ac27a1260eedc4e1afb9c081f42a9005bdfd19462484973499bdec13478cd4abdbf81c2dedac2d2ae6651193d2fadbfcfb6802ea38e86ff0c0d9b2999d67608d63eb91b81d1e827d57f44df789886fb5c9cfef342f57520fcd47a297cc6bfc7699cddba9438c7cd436d9c312c663f4a38153e903bac73db088cc7c41042dbaade8c0a36b672b5e68c40c857e52eecd08d3112dbfb19ecbb908b1aa67725d9170420030b6fd78b2a56ab9a3075c70b676489076a1b9ae96f73e5d8aafccae83e7adea9ce9acccba741fa06ff06d440b44a53c01f993884ad8a455c0492e0bd3d2a683ce29e1aa7cb826bae2bf0cd42e6b0afac69660959d77aed220d7f80e386bddcdd04421f4c93cf328278ffdc5f772e06bf33f65be2627b69fcaf369c87c64fe84ef024c20f6f36e58a7ede375d9a5504ecec159c7fb3fd5f67b51019d782c1941f1bc9bd191e6bc1fdd4ec0f3aaf12b1fe881b1518d3183110d67c56b7dab1e5b77b383d9fbf57d3889acaafee528cd4f98e7534c4286a0b48fcdadf52a0d8f0163f1c3dccc0101aaa543150fec02b4a3bd35b030507ee7651c710d67147053120c4281aedc2df980afd65a0e2d99e9f98447a48676077c6fdd1db7637135c8d4bd769fe61b000028a8e530b7b468ee5710a4ec0b8b415872f50f6f68750acb4af6956c33538be38b4845bcc40af2aa6de35ce9c751ca15cf3fe2288064877cda3a3632398403f332ac058e31e6ff84b5df3ce7edd9b0f194d8251c08088def267d95da56c5b39c80da71be7e611d20e9f00ef5db0b5f2aebaeab3a8a625668f6969be6616845dcb900a2f82381dd9f08c2bdfa00bbf5c056fbf24bfbcf38ae9b769eec0e827ba23caeea1bdb9c6ee1c8dc993ef8e7e92122dae19e4eec114e218d1b3bdba990fc83f5c787ef492c9b739a05243b6b6812b9d2a13efab735a876a84bb0bb5d82bd3ca12b08c67654e0103ab72d2bcf4b9cca0309e85ade9a2b3e04c55eaaed64c74d0b7850ac0277428821a4c00d1c7db96c40a26b8a49b516c56bc831be9f19694f604d44513069ab4f8a914481bd1c3f972051c216715b51ca6c10e6854db9086cc1bde2db81a69cb5884210112542e8987b0decf88f5124f45d1e91b96b2c9c95738945c81553267ae0fcff4db4c6d81585420b5e3fb9e4f7fa0546c56c850109f1d7bd8fc5714fd36d9c930cd4f2e72d3ee494291f0c5eff594df38ec20a157eeb0acf99ef7306c20a90a204daef812444a99440a78c8d0a39f118c736611f228d36e320db9030242ace07691820df6071df1bf4f2145b99601d9ada5a6c7fab29ca155921a29a6a2733e73e7da5059c4021f5d907f3d96e4e1601c50cc8790b4f628294202cdf889d2f5a892b42498db59fcc9d2e0d2e8dc07fd6ab4c0ee524e0982785f8ed74135b2a04c168af058a86aa7dcb4e3303859814fc5aace918a13a6bfc8799a4d5d0785c7ca632eaf2257ecfb8e77a46e8361df96d9c179a549448be7289c5489515926f9c44b72e36fb2bc5ccd6a4ae06bc7a6c2867a84114d2f9434ec61e7193e9b92e91f8eada8714d77541f01af55249758f21f0d4c64c6a59354b63a530556ec0a8e30cc5746b603733b0d683aa21cd662811a531fcf53084b4dfdce7756c978ff6a527743fde35889e498cc0b62cca5863c8d9e4e07d55a6429ae77a0bbb2d8d50c3d3c054b41eb71cc47e43607f00548191f065aa17528e538bd86385d03e7c89d6af76561ee16556405cda4310bc72c05945f0c2a6c125bd34c945edc7cb5e98ee8edf6d99996f500e16e4b759a867c0a1401952be3b18950bc059df4ce27e321ca763c9d7ff4d1ef9028cf63ce4aa83ef63efbd1a8781803b1521cc40c214aff82e5510ee0d919874750fbc6c4cce500d2b47271330dc72347b93930f2bbf945e68f941b41d2ef8776bd10f41e9e74b125c446a7044efa081395500f36a8a0429322aae65ceac9ac64a90f60a982ce7b459e91f0118f5cec54418cf0b786164a0f852caf0dd6bd8a11c3469ec4e3f52074cd51e22b4138d706c0da31373e7bdd84fc836c28e1a32b24eba00f6ce130fe9a324c377bb025019e1fde45913277722ef8fd7c062e9df091963d6357f94a7ab31aacc3f8e9c9f5d2ff49230476194a0499cc086425095ad2fe3236e417e90f62ccd18bf6f807f1bd877c3cef5ad61c9bcc603ce620227b7a696ffc44dfd361818fa0be028a85bd9291ad85183c4aef06aa25fed27c7c7fccc6dfcdcdbfcb4ae44e850a5042a2c710acfc4433d883fca7653ea3f300cc0126a0fb58df44673f5470ddd47e5cd01031d002229d0261897361d0b71b72ea9167578103959c73b1dd229584797bef3ffa5d985cbb7aea68477223e77e2f81dc91fdfb42b2feef6eb825cd76bdbb78bb984762188b0928e29d90413a54d904985faf848edfa757c942a001b3ec1dcfc50183fc61c5170733ef346a95de21cffa53642ec1231ff45676e3ffe8b4109fe2dd90ca3898aae581c5234a802989331b494165ff9dee651a49f42d2dd85917a0af5bd7ca3a4265274e696b8fa33674f05f0ed2b194decfc53327a724e25a45dfed6d9"
+GlideinMyType = "glideclientglobal"
+GlideinEncParamNumberOfCredentials = "9a5a6a0af6c2c5f974b4e07dd2ee3af1"
+MyType = "glideclientglobal"
+ReqEncIdentity = "b14e8a74523f54e2500866e9fa35f2f74d63168d18c0a5dc07edf43a2f04b4777136a83368290c1227a3dc4d64889b8c"
+UpdatesSequenced = 0
+MyAddress = "<131.225.154.153:0>"
+AuthenticatedIdentity = "vofrontend_service@fermicloud023.fnal.gov"
+CurrentTime = time()
+ReqEncKeyCode = "46ddeb4ee4118bf19d9427054d946a74e6784d8d6c75b8e4e50a94b47f95c7e81e1388b69b22b070d884d5f45be73553bd43e9747a307c284fa23d0c8bedef33f5f0fa5b605940389b2d2bd674c65e42dc943ed9a0176519f22ae753fc55893d108db28eb89c0659992042e7329c443db03123069bae86df485df4d92f7f21ce771ef13a9e4e1458c439d51093ce922769c8efa067dc0eb4ce0ba0af88747fd3693fffc94cf64e259d298465ed85b2fd7a10857208034c875bbc1fd9a834184643eeedadf7684191e39a539b4716171c2237baaf0b04ff884bf391c9b49aa121f6a1c042b9f16483df1fba9341a7d75b7538ae84d0c89b79da7867a33930e5d3"
+GlideinEncParamSecurityClass450567 = "7aa870ffef84056e806a4784517ab98f"
+</pre> %ENDTWISTY%
+   
+
+---++ Glidein WMS Job submission
+Condor submit file =glidein-job.sub=. This is a simple job printing the hostname of the host where the job is running:
+<pre class="file">
+#file glidein-job.sub
+universe = vanilla
+executable = /bin/hostname
+output = glidein/test.out
+error = glidein/test.err
+requirements = IS_GLIDEIN == True
+log = glidein/test.log
+ShouldTransferFiles = YES
+
+when_to_transfer_output = ON_EXIT
+queue
+</pre>
+
+To submit the job: <pre class="screen">
+condor_submit glidein-job.sub
+</pre>
+
+Then you can control the job like a normal condor job, e.g. 
+to check the status of the job use =condor_q=.
+
+---++ Monitoring Web pages
+You should be able to see the jobs also in the GWMS monitoring pages that are made available on the Web:
+==http://gwms-frontend-host.domain/vofrontend/monitor/==
+
+---+ Troubleshooting
+
+---++ File Locations
+
+|  *File Description*  |  *File Location*  |
+|Configuration file | /etc/gwms-frontend/frontend.xml |
+|Logs | /var/log/gwms-frontend/ |
+|Startup script | /etc/init.d/gwms-frontend |
+|Web Directory | /var/lib/gwms-frontend/web-area |
+|Web Base| /var/lib/gwms-frontend/web-base |
+|Web configuration| /etc/httpd/conf.d/gwms-frontend.conf |
+|Working Directory | /var/lib/gwms-frontend/vofrontend/ |
+|Lock files | /etc/init.d/gwms-frontend/vofrontend/lock/frontend.lock  <br> /etc/init.d/gwms-frontend/vofrontend/group_*/lock/frontend.lock  |
+|Status files | /var/lib/gwms-frontend/vofrontend/monitor/group_*/frontend_status.xml |
+
+%NOTE% =/var/lib/gwms-frontend= is also the home directory of the =frontend= user
+
+---++ Certificates brief
+Here a short list of files to check when you change the certificates. Note that if you renew a proxy or certificate and the DN remains the same no configuration file needs to change, just put the renewed certificate/proxy in place.
+
+|  *File Description*  |  *File Location*  |
+|Configuration file | /etc/gwms-frontend/frontend.xml |
+|HTCondor certificates map | /etc/condor/creds/condor_mapfile (1) |
+|Host certificate and key (2) | /etc/grid-security/hostcert.pem<br/>  /etc/grid-security/hostkey.pem |
+|VO Frontend proxy (from host certificate) | /tmp/vofe_proxy (3) |
+|Pilot proxy | /tmp/vofe_proxy (3) |
+
+   1 If using HTCondor RPM installation, e.g. the one coming from OSG. If you have separate/multiple HTCondor hosts (schedds, collectors, negotiators, ..) you may have to check this file on all of them to make sure that the HTCondor authentication works correctly.
+   2 Used to create the VO Frontend proxy if following the  [[#Proxy_Configuration][instructions above]]
+   3 If using the scripts described [[#Proxy_Configuration][above in this document]]
+
+Remember also that when you change DN:
+   * The VO Frontend certificate DN must be communicated to the GWMS Factory ([[#OSG_Factory_access][see above]])
+   * The pilot proxy must be able to run jobs at the sites you are using, e.g. by being added to the correct VO in OSG (the Factory forwards the proxy and does not care about the DN)
+
+
+---++ Increase the log level and change rotation policies
+You can increase the log level of the frontend. To add a log file with all the log information add the following line with all the message types in the =process_log= section of =/etc/gwms-frontend/frontend.xml=:
+<pre class="file">&lt;log_retention>
+   &lt;process_logs>
+       &lt;process_log extension="all" max_days="7.0" max_mbytes="100.0" min_days="3.0" msg_types="DEBUG,EXCEPTION,INFO,ERROR,ERR"/>
+</pre>
+You can also change the rotation policy and choose whether compress the rotated files, all in the same section of the config files:
+   * max_bytes is the max size of the log files
+   * max_days it will be rotated.
+   * compression specifies if rotated files are compressed
+   * backup_count is the number of rotated log files kept 
+Further details are in the [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/frontend/configuration.html#process_logs][reference documentation]].
+
+---++ Frontend reconfig failing
+If =service gwms-frontend reconfig= fails at the end with an error like "Writing back config file failed, Reconfiguring the frontend [FAILED]", make sure that =/etc/gwms-frontend/= belongs to the =frontend= user. It must be able to write to update the configuration file.
+
+---++ Frontend failing to start
+If the startup script of the frontend is failing, check the log file for errors (probably =/var/log/gwms-frontend/frontend/frontend.%RED%TODAY%ENDCOLOR%.err.log=  and =.debug.log=). 
+
+If you find errors like _"Exception occurred: ... 'ExpatError: no element found: line 1, column 0\n']"_ and _"IOError: [Errno 9] Bad file descriptor"_ you may have  an empty status file (=/var/lib/gwms-frontend/vofrontend/monitor/group_*/frontend_status.xml=) that causes Glidein WMS Frontend not to start. The !glideinFrontend crashes after a XML parsing exception visible in the log file ("Exception occurred: ... 'ExpatError: no element found: line 1, column 0\n']").
+
+Remove the status file.
+Then start the frontend. The fronten will be fixed in future versions to handle this automatically.
+
+---++ Certificates not there
+The scripts should send an email warning if there are problems and they fail to generate the proxies. Anyway something could go wrong and you want to check manually. If you are using the scripts to generate automatically the proxies but the proxies are not there (in =/tmp= or wherever you expect them):
+   * make sure that the scripts are there and configured with the correct values
+   * make sure that the scripts are executable 
+   * make sure that the scripts are in =frontend='s crontab
+   * make sure that the certificates (or master proxy) used to generate the proxies is not expired
+
+---++ Failed authentication
+If you get a failed authentication error (e.g. "Failed to talk to factory_pool gfactory-1.t2.ucsd.edu...) then:
+   * check that you have the right x509 certificates mentioned in the security section of =/etc/gwms-frontend/frontend.xml=
+      * the owner must be =frontend= (user running the frontend)
+      * the permission must be 600
+      * they must be valid for more than one hour (2/300 hours), at least the non VO part
+   * check that the clock is synchronized (see HostTimeSetup)
+
+---++ Frontend doesn't trust factory
+If your frontend complains in the debug log:
+<pre class="file">
+code 256:['Error: communication error\n', 'AUTHENTICATE:1003:Failed to authenticate with any method\n', 'AUTHENTICATE:1004:Failed to authenticate using GSI\n', "GSI:5006:Failed to authenticate because the subject '/DC=org/DC=doegrids/OU=Services/CN=devg-3.t2.ucsd.edu' is not currently trusted by you.  If it should be, add it to GSI_DAEMON_NAME in the condor_config, or use the environment variable override (check the manual).\n", 'GSI:5004:Failed to gss_assist_gridmap /DC=org/DC=doegrids/OU=Services/CN=devg-3.t2.ucsd.edu to a local user.
+</pre>
+
+A possible solution is to comment/remove the LOCAL_CONFIG_DIR in the file =/var/lib/gwms-frontend/vofrontend/frontend.condor_config=.
+
+---++ No security credentials match for factory pool ..., not advertising request
+You may see a warning like "No security credentials match for factory pool ..., not advertising request", if the =trust_domain= and =auth_method= of an entry in the Factory configuration is not matching any of the =trust_domain=, =type= couples in the credentials in the Frontend configuration.
+This causes the Frontend not to use some Factory entries (the ones not matching)  and may end up without entries to send glideins to. 
+
+To fix the problem make sure that those attributes match as desired.
+
+---++ Jobs not running
+If your jobs remain Idle
+   * Check the frontend log files (see above)
+   * Check the condor log files (=condor_config_val LOG= will give you the correct log directory):
+      * Specifically look the !CollectorXXXLog files
+
+Common causes of problems could be:
+   * x509 certificates
+      * missing or expired or too short-lived proxy 
+      * incorrect ownership or permission on the certificate/proxy file
+      * missing certificates
+   * If the frontend http server is down in the factory there will be errors like "Failed to load file 'description.dbceCN.cfg' from 'http://FRONTEND_HOST/vofrontend/stage'."
+      * check that the http server is running and you can reach the URL (=http://FRONTEND_HOST/vofrontend/stage/description.dbceCN.cfg=)
+
+
+<!--
+---++!! &lt;How can I resolve this Problem?&gt;
+%GRAY%
+Use sub-sections for each problem you want to address in particular. Link to HelpProcedure at the end if the problem could not be resolved.
+%ENDCOLOR%
+-->
+
+<!-- ---++!! Known problem
+
+---+++!! Frontend failing to start
+An empty status file (=/var/lib/gwms-frontend/vofrontend/monitor/group_main/frontend_status.xml=) causes Glidein WMS Frontend not to start.
+It crashes after a XML parsing exception visible in the log file ("Exception occurred: ... 'ExpatError: no element found: line 1, column 0\n']").
+Remove the file.
+-->
+
+
+---+ Advanced Configurations
+
+   * [[GlideinWMSCampusGrid][GlideinWMS Frontend on a Campus Grid]]
+
+
+---+ References
+Definitions:
+   * What is a [[http://www.opensciencegrid.org/About/Learn_About_Us/OSG_Organization/VOs][Virtual Organisation]]
+   * [[http://twiki.grid.iu.edu/bin/view/Documentation/UsingTheGrid][Introduction to the Grid for users/scientists]]
+   * [[http://twiki.grid.iu.edu/bin/view/Documentation/CondorGToGlidein][How to switch to Glideins if you are using already Condor-G]]
+   * You can [[http://twiki.grid.iu.edu/bin/view/Trash/Trash/Engagement/EngageNewUserGuide][get started with the support of the Engage VO]]
+
+Documents about the Glidein-WMS system and the VO frontend:
+   * http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/
+   * http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/manual/
+   * [[GlideinWMSCampusGrid][How to setup a Submit host flocking to the VO Frontend]]
+   * [[Trash/Trash/CampusGrids.InstallCondorFlockSubmit][Install a Submit host flocking to OSG run frontends]]
+
+<!--
+Other examples:
+   * http://home.fnal.gov/~weigand/weigand/www/glideinWMS_rpm/index.shtml
+
+!M2Crypto:
+   * http://www.heikkitoivonen.net/blog/2008/10/14/ssl-in-python-26/
+   * http://chandlerproject.org/bin/view/Projects/MeTooCrypto
+   * http://freshmeat.net/projects/m2crypto
+RRDTools:
+   * http://packages.sw.be/rrdtool/
+javascriptRRD:
+   * http://sourceforge.net/projects/javascriptrrd/
+
+Other documents
+   * RRD tools: http://segfault.in/2010/03/python-rrdtool-tutorial/
+   * RRD tools: http://sourceforge.net/projects/py-rrdtool/
+   * http://oss.oetiker.ch/rrdtool/download.en.html
+   * http://www.express.org/~wrl/rrdtool/
+   * Downloads from Nebraska: http://t2.unl.edu/store/repos/nebraska/5/nebraska/x86_64/
+-->
+
+---+ Comments
+| The DN for the collector has changed as DOEGrids certs are no longer used, it should use the DigiCert DN, like this:&#60;br /&#62;&#60;br /&#62;/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=gfactory-1.t2.ucsd.edu&#60;br /&#62;&#60;br /&#62; | Main.MickTimony | 06 May 2015 - 19:44 |
+%COMMENT{type="tableappend"}%
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = MarcoMambelli
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|General|Trash/Trash/Integration|Monitoring|Operations|Security|Storage|Trash/Tier3|User|VO)
+   * Local DOC_AREA       = General
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (Developer|Documenter|Scientist|Student|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (HowTo|Installation|Knowledge|Navigation|Planning|Training|Troubleshooting)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = ParagMhashilkar
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = ParagMhashilkar
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

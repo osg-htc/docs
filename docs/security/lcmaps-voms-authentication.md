@@ -51,6 +51,8 @@ edit_lcmaps_db = True
 authorization_method = vomsmap
 ```
 
+If the `glexec_location` option is present, you must comment it out or set it to `UNAVAILABLE`.
+The LCMAPS VOMS plugin does not work with glExec.
 
 ### Supporting mapped VOs and users
 

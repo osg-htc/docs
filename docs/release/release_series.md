@@ -51,10 +51,10 @@ Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4
 
     | Series                    | EL5 URL (for RHEL5, CentOS5, or SL5)                             | EL6 URL (for RHEL6, CentOS6, or SL6)                             | EL7 URL (for RHEL7, CentOS7, or SL7)                             |
     |:--------------------------|:-----------------------------------------------------------------|:-----------------------------------------------------------------|:-----------------------------------------------------------------|
-    | **OSG 3.1** (unsupported) | `http://repo.grid.iu.edu/osg/3.1/osg-3.1-el5-release-latest.rpm` | `http://repo.grid.iu.edu/osg/3.1/osg-3.1-el6-release-latest.rpm` | N/A                                                              |
-    | **OSG 3.2** (unsupported) | `http://repo.grid.iu.edu/osg/3.2/osg-3.2-el5-release-latest.rpm` | `http://repo.grid.iu.edu/osg/3.2/osg-3.2-el6-release-latest.rpm` | N/A                                                              |
-    | **OSG 3.3**               | N/A                                                              | `http://repo.grid.iu.edu/osg/3.3/osg-3.3-el6-release-latest.rpm` | `http://repo.grid.iu.edu/osg/3.3/osg-3.3-el7-release-latest.rpm` |
-    | **OSG 3.4**               | N/A                                                              | `http://repo.grid.iu.edu/osg/3.4/osg-3.4-el6-release-latest.rpm` | `http://repo.grid.iu.edu/osg/3.4/osg-3.4-el7-release-latest.rpm` |
+    | **OSG 3.1** (unsupported) | `http://repo.opensciencegrid.org/osg/3.1/osg-3.1-el5-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.1/osg-3.1-el6-release-latest.rpm` | N/A                                                              |
+    | **OSG 3.2** (unsupported) | `http://repo.opensciencegrid.org/osg/3.2/osg-3.2-el5-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.2/osg-3.2-el6-release-latest.rpm` | N/A                                                              |
+    | **OSG 3.3**               | N/A                                                              | `http://repo.opensciencegrid.org/osg/3.3/osg-3.3-el6-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.3/osg-3.3-el7-release-latest.rpm` |
+    | **OSG 3.4**               | N/A                                                              | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm` |
 
 3.  Clean yum cache:
 

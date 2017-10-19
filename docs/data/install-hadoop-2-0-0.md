@@ -1159,7 +1159,7 @@ You will see the entire configuration in XML format, for example:
 </p>
 </details>
 
-Please refer to [OSG Hadoop debug webpage](https://twiki.grid.iu.edu/bin/view/Storage/HadoopDebug) and [Apache Hadoop FAQ webpage](http://wiki.apache.org/hadoop/FAQ) for answers to common questions/concerns
+Please refer to [OSG Hadoop debug webpage](https://twiki.opensciencegrid.org/bin/view/Storage/HadoopDebug) and [Apache Hadoop FAQ webpage](http://wiki.apache.org/hadoop/FAQ) for answers to common questions/concerns
 
 FUSE
 ----
@@ -1296,7 +1296,7 @@ How to get Help?
 
 If you cannot resolve the problem, there are several ways to receive help:
 
--   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.grid.iu.edu/goc).
+-   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.opensciencegrid.org/goc).
 -   For community support and best-effort software team support contact <osg-software@opensciencegrid.org>.
 -   For additional community support, contact <osg-hadoop@opensciencegrid.org>. Note, this is only best-effort help from OSG Software team.
 
@@ -1305,7 +1305,6 @@ For a full set of help options, see [Help Procedure](../common/help).
 References
 ==========
 
--   [Hadoop Hands On Tutorial](https://twiki.grid.iu.edu/bin/view/Trash/ReleaseDocumentationHadoopInstallationHandsOn).
 -   [Instructions for Upgrading from Hadoop 0.19 to Hadoop 0.20](https://twiki.opensciencegrid.org/bin/view/Storage/HadoopUpgrade)
     -   \***NOTE these instructions are subject to change and the upgrade doc linked is intended to upgrade from the caltech hosted 0.19 rpms in the caltech hosted 0.20 rpms, NOT the new rpms hosted in the new OSG repos.**
 
