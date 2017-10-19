@@ -1,10 +1,7 @@
 Installing and Maintaining the LCMAPS VOMS Plugin
 =================================================
 
-About This Guide
-----------------
-
-LCMAPS is a software library for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., `/cms/Role=production/Capability=NULL`. Starting in OSG 3.4, the LCMAPS VOMS plugin will replace GUMS and edg-mkgridmap as the authentication method at OSG sites.
+LCMAPS is a software library used on [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../data/gridftp), or [XRootD](../data/install-xrootd) hosts for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., `/cms/Role=production/Capability=NULL`. Starting in OSG 3.4, the LCMAPS VOMS plugin will replace GUMS and edg-mkgridmap as the authentication method at OSG sites.
 
 The OSG provides a default set of mappings from VOMS attributes to Unix accounts. By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to, banning based on VOMS attributes, banning a specific user, or adding a VO, VO group, VO role, and/or user that is not in the OSG's set of mappings.
 
@@ -27,7 +24,7 @@ To install the LCMAPS VOMS plugin, make sure that your host is up to date before
         root@host # yum update
     This command will update **all** packages
 
-3. Install `lcmaps`, the default mapfile, and the configuration tools:
+1. Install `lcmaps`, the default mapfile, and the configuration tools:
 
         :::console
         [root@server]# yum install lcmaps vo-client-lcmaps-voms osg-configure-misc
@@ -55,7 +52,7 @@ authorization_method = vomsmap
 ```
 
 If the `glexec_location` option is present, you must comment it out or set it to `UNAVAILABLE`.
-The LCMAPS VOMS plugin does not work with glExec.
+The LCMAPS VOMS plugin does not work with gLExec.
 
 ### Supporting mapped VOs and users
 
@@ -66,8 +63,8 @@ Unix accounts must exist for each VO, VO role, VO group, or user you choose to s
         "%RED%<VO, VO role, VO group or user>%ENDCOLOR%" %RED%<Unix account>%ENDCOLOR%
 
 
-2.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support
-3.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](../other/configuration-with-osg-configure#subcluster-resource-entry):
+1.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support
+1.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](../other/configuration-with-osg-configure#subcluster-resource-entry):
 
 ``` ini
 allowed_vos="VO1,VO2..."
@@ -82,12 +79,12 @@ Making changes to the OSG configuration files in the `/etc/osg/config.d` directo
     !!!note
         This document only describes the critical settings for the LCMAPS VOMS plugin and related software. You may need to configure other software that is installed on your host, too.
 
-2.  Validate the configuration settings:
+1.  Validate the configuration settings:
 
         :::console
         [root@server]# osg-configure -v
 
-3.  Once the validation command succeeds without errors, apply the configuration settings:
+1.  Once the validation command succeeds without errors, apply the configuration settings:
 
         :::console
         [root@server]# osg-configure -c
@@ -117,27 +114,27 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
 
     * If you do not have a local grid mapfile, remove `/etc/grid-security/grid-mapfile`.
 
-2.  If you are remaining on OSG 3.3, ensure that the you have set `export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1` in the appropriate file and restart the service. If you have updated your host to OSG 3.4, skip to the next step.
+1.  If you are remaining on OSG 3.3, ensure that the you have set `export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1` in the appropriate file and restart the service. If you have updated your host to OSG 3.4, skip to the next step.
 
     | **If your host is a(n)...** | **Add the aforementioned line to...**  | **And restart this service...** |
     |:----------------------------|:---------------------------------------| :------------------------------ |
     | HTCondor-CE                 | `/etc/sysconfig/condor-ce`             | `condor-ce`                     |
     | GridFTP server              | `/etc/sysconfig/globus-gridftp-server` | `globus-gridftp-server`         |
 
-3.  If you are converting an HTCondor-CE host, remove the HTCondor-CE `GRIDMAP` configuration. Otherwise, skip to the next step.
+1.  If you are converting an HTCondor-CE host, remove the HTCondor-CE `GRIDMAP` configuration. Otherwise, skip to the next step.
 
-    1. Find the location of this configuration using the following command:
+    1. Find where `GRIDMAP` is set:
 
             :::console
             [root@ce]# condor_ce_config_val -v GRIDMAP
 
-    2. Delete the line that sets the `GRIDMAP` configuration variable
-    3. Reconfigure HTCondor-CE:
+    1. If the above command returns `Not defined: GRIDMAP`, skip to step 4. Otherwise, delete the line that sets the `GRIDMAP` configuration variable
+    1. Reconfigure HTCondor-CE:
 
             :::console
             [root@ce]# condor_ce_reconfig
 
-5. Remove edg-mkgridmap and related packages:
+1. Remove edg-mkgridmap and related packages:
 
         :::console
         [root@ce]# yum erase edg-mkgridmap
@@ -214,18 +211,18 @@ Validating the LCMAPS VOMS plugin VO mappings
 To validate the LCMAPS VOMS plugin by itself, use the following procedure to test mapping your own cert to a user:
 
 1.  Verify your DN is *not* in `/etc/grid-security/grid-mapfile`, or else it will generate a false positive
-2.  Verify your DN is *not* in `/etc/grid-security/ban-mapfile`, or else it will generate a false negative
-3.  Install the `llrun` and `voms-clients` packages:
+1.  Verify your DN is *not* in `/etc/grid-security/ban-mapfile`, or else it will generate a false negative
+1.  Install the `llrun` and `voms-clients` packages:
 
         :::console
         [root@host]# yum install llrun voms-clients
 
-4.  As an unprivileged user, create a VOMS proxy (filling in `<YOUR_VO>` with a VO you are a member of):
+1.  As an unprivileged user, create a VOMS proxy (filling in `<YOUR_VO>` with a VO you are a member of):
 
         :::console
         [you@client]$ voms-proxy-init -voms %RED%<YOUR_VO>%ENDCOLOR%
 
-5.  Verify that your credentials are mapped as expected:
+1.  Verify that your credentials are mapped as expected:
 
         :::console
         [you@client]$ llrun -s -l mode=pem,policy=authorize_only,db=/etc/lcmaps.db \
@@ -257,7 +254,7 @@ LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity
         # export LCMAPS_LOG_FILE=/tmp/lcmaps.log
 
 
-2.  Use the table below to choose the appropriate service to restart:
+1.  Use the table below to choose the appropriate service to restart:
 
     | If your host is a(n)... | Restart the following service... |
     |:------------------------|:---------------------------------|
@@ -327,7 +324,7 @@ LCMAPS is configured in `/etc/lcmaps.db`. and since the VOMS plugin is a newer c
                   "--discard_private_key_absence"
                   " -certdir /etc/grid-security/certificates"
 
-2.  Edit the `authorize_only` section so that it contains only the following uncommented lines:
+1.  Edit the `authorize_only` section so that it contains only the following uncommented lines:
 
         verifyproxynokey -> banfile
         banfile -> banvomsfile | bad
@@ -336,7 +333,7 @@ LCMAPS is configured in `/etc/lcmaps.db`. and since the VOMS plugin is a newer c
         vomsmapfile -> good | defaultmapfile
         defaultmapfile -> good | bad
 
-3.  Edit `/etc/grid-security/gsi-authz.conf` and ensure that it contains the following line with a newline at the end:
+1.  Edit `/etc/grid-security/gsi-authz.conf` and ensure that it contains the following line with a newline at the end:
 
         globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout
 
