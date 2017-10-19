@@ -908,13 +908,13 @@ htcondor_gateway_enabled = True
 <h4 id="batch-systems-other-than-htcondor">Batch systems other than HTCondor<a class="headerlink" href="#batch-systems-other-than-htcondor" title="Permanent link">&para;</a></h4>
 <p>Non-HTCondor batch systems require additional configuration to support file transfer to your site's worker nodes.</p>
 <h5 id="sharing-the-spool-directory">Sharing the spool directory<a class="headerlink" href="#sharing-the-spool-directory" title="Permanent link">&para;</a></h5>
-<p>To transfer files between the CE and the batch system, HTCondor-CE requires a shared file system. The current recommendation is to run a dedicated NFS server (whose installation is beyond the scope of this document) on the <strong>CE host</strong>. In this setup, HTCondor-CE writes to the local spool directory and the NFS server shares the directory with all of the worker nodes.</p>
+<p>To transfer files between the CE and the batch system, HTCondor-CE requires a shared file system. The current recommendation is to run a dedicated NFS server (whose installation is beyond the scope of this document) on the <strong>CE host</strong>. In this setup, HTCondor-CE writes to the local spool directory, the NFS server shares the directory, and each worker node mounts the directory in the same location as on the CE. For example, if your spool directory is <code>/var/lib/condor-ce</code> (the default), you must mount the shared directory to <code>/var/lib/condor-ce</code> on the worker nodes.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you choose not to host the NFS server on your CE, you will need to turn off root squash so that the HTCondor-CE daemons can write to the spool directory.</p>
 </div>
-<p>By default, the spool directory is <code>/var/lib/condor-ce</code> but you can control this by setting <code>SPOOL</code> in <code>/etc/condor-ce/config.d/99-local.conf</code> (create this file if it doesn't exist). For example, the following sets the <code>SPOOL</code> directory to <code>/home/condor</code>:</p>
-<div class="codehilite"><pre><span></span>SPOOL=/home/condor
+<p>You can control the value of the spool directory by setting <code>SPOOL</code> in <code>/etc/condor-ce/config.d/99-local.conf</code> (create this file if it doesn't exist). For example, the following sets the <code>SPOOL</code> directory to <code>/home/condor</code>:</p>
+<div class="codehilite"><pre><span></span>SPOOL = /home/condor
 </pre></div>
 
 
