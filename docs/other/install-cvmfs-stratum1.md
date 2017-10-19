@@ -35,7 +35,7 @@ EL6 does not support a CVMFS repository server with the standard kernel, so use 
 ```console
 root@host # yum -y install cvmfs-server cvmfs mod_wsgi
 ```
-<br/>
+
 #### Installing CVMFS stratum 1 that is not a repository server
 
 If you're not installing for the OSG GOC or otherwise want to support serving repositories on the same machine as a Stratum 1, use this command on either EL6 or EL7:
@@ -43,7 +43,7 @@ If you're not installing for the OSG GOC or otherwise want to support serving re
 ```console
 root@host # yum -y install cvmfs-server cvmfs-config mod_wsgi
 ```
-<br/>
+
 ### Installing frontier-squid and frontier-awstats
 
 [frontier-awstats](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallAwstats) is not distributed by OSG so these instructions get it from its original source.  Do these commands to install frontier-squid and frontier-awstats:
@@ -52,7 +52,7 @@ root@host # yum -y install cvmfs-server cvmfs-config mod_wsgi
 root@host # rpm -i http://frontier.cern.ch/dist/rpms/RPMS/noarch/frontier-release-1.1-1.noarch.rpm
 root@host # yum -y install frontier-awstats
 ```
-<br/>
+
 ## Configuring
 
 ### Configuring the system
@@ -63,7 +63,7 @@ Increase the default number of open file descriptors:
 root@host # echo -e "*\t\t-\tnofile\t\t16384" >>/etc/security/limits.conf 
 root@host # ulimit -n 16384
 ```
-<br/>
+
 In order for this to apply also interactively when logging in over ssh, the option `UsePAM` has to be set to `yes` in `/etc/ssh/sshd_config`.
 
 ### Configuring cron 
@@ -72,7 +72,7 @@ First, create the log directory:
 ```console
 root@host # mkdir -p /var/log/cvmfs
 ```
-<br/>
+
 Put the following in `/etc/cron.d/cvmfs`:
 
 ```
@@ -80,7 +80,7 @@ Put the following in `/etc/cron.d/cvmfs`:
 6 1 * * * root cvmfs_server gc -af 2>/dev/null || true
 0 9 * * * root find /srv/cvmfs/*.*/data/txn -name "*.*" -mtime +2 2>/dev/null|xargs rm -f
 ```
-<br/>
+
 Also, put the following in `/etc/logrotate.d/cvmfs`:
 
 ```
@@ -90,7 +90,7 @@ Also, put the following in `/etc/logrotate.d/cvmfs`:
     notifempty
 }
 ```
-<br/>
+
 ### Configuring apache
 
 If you are installing frontier-squid, create `/etc/httpd/conf.d/cvmfs.conf` and put the following lines into it:
@@ -98,13 +98,13 @@ If you are installing frontier-squid, create `/etc/httpd/conf.d/cvmfs.conf` and 
 ```
 Listen 8080 KeepAlive On
 ```
-<br/>
+
 If you are not installing frontier-squid, instead put the following lines into that file:
 
 ```
 Listen 8000 KeepAlive On
 ```
-<br/>
+
 If you will be serving opensciencegrid.org repositories, you have to allow for old client configurations that access repositories without the domain name added. For that reason, you will need to remove each `/etc/httpd/conf.d/cvmfs.<repositoryname>.conf` that adding a replica creates (this is included in the [add_osg_repository script](https://github.com/opensciencegrid/oasis-server/blob/master/goc/bin/add_osg_repository)), and instead add the following to `/etc/httpd/conf.d/cvmfs.conf`:
 
 ```
@@ -150,13 +150,13 @@ Then enable apache.  On EL6 do
 root@host # chkconfig httpd on 
 root@host # service httpd start
 ```
-<br/>
+
 or on EL7 do
 ```console
 root@host # systemctl enable httpd
 root@host # systemctl start httpd
 ```
-<br/>
+
 
 ### Configuring frontier-squid
 
@@ -192,14 +192,14 @@ setoption("collapsed_forwarding", "off")
 print
 }'
 ```
-<br/>
+
 On an EL7 system, make sure that iptables-services is installed and enabled:
 
 ```console
 root@host # yum -y install iptables-services 
 root@host # systemctl enable iptables
 ```
-<br/>
+
 Forward port 80 to port 8000 (first command is for external, second command for localhost):
 
 ```console
@@ -207,7 +207,7 @@ root@host # iptables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT -
 root@host # iptables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000 
 root@host # service iptables save
 ```
-<br/>
+
 On EL7 also set up the the same port forwarding for IPv6 (unfortunately it is not supported on EL6):
 
 ```console
@@ -215,14 +215,14 @@ root@host # ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT 
 root@host # ip6tables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8000
 root@host # service ip6tables save
 ```
-<br/>
+
 Enable frontier-squid.  On EL6 do:
 
 ```console
 root@host # chkconfig frontier-squid on
 root@host # service frontier-squid start
 ```
-<br/>
+
 or on EL7 do:
 
 ```console
@@ -245,31 +245,31 @@ The OSG GOC Stratum 1 should add a repository replica using the `add_osg_reposit
 root@host # cvmfs_server add-replica -o root http://oasis.opensciencegrid.org:8000/cvmfs/oasis.opensciencegrid.org /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub 
 root@host # add_osg_repository http://cvmfs-stratum0.gridpp.rl.ac.uk:8000/cvmfs/config-egi.egi.eu
 ```
-<br/>
+
 It's a good idea for other Stratum 1s to make their own scripts for adding repository replicas, because there's always two or three commands to run, and it's easy to forget the commands after the first one. The first command is this:
 
 ```console
 root@host # cvmfs_server add-replica -o root http://cvmfs-stratum0.gridpp.rl.ac.uk:8000/cvmfs/config-egi.egi.eu /etc/cvmfs/keys/egi.eu/egi.eu.pub
 ```
-<br/>
+
 However, non-GOC OSG Stratum 1s (that is, at BNL and FNAL), for the sake of fulfilling an OSG security requirement, need to instead read from the OSG GOC machine with this as their first command:
 
 ```console
 root@host # cvmfs_server add-replica -o root http://oasis-replica.opensciencegrid.org:8000/cvmfs/config-egi.egi.eu /etc/cvmfs/keys/egi.eu/egi.eu.pub:/etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
 ```
-<br>
+
 The second command for Stratum 1s that have the httpd configuration as described above in the [Configuring apache section](#configuring-apache) is this:
 
 ```console
 root@host # rm -f /etc/httpd/conf.d/cvmfs.config-egi.egi.eu.conf
 ```
-<br/>
+
 Then the next command is this:
 
 ```console
 root@host # cvmfs_server snapshot config-egi.egi.eu
 ```
-<br/>
+
 With large repositories that can take a very long time, but with small repositories it should be very quick and not show any errors.
 
 ### Verifying that the replica is being served
@@ -280,7 +280,7 @@ Now to verify that the replication is working, do the following commands:
 root@host # wget -qdO- http://localhost:8000/cvmfs/config-egi.egi.eu/.cvmfspublished | cat -v
 root@host # wget -qdO- http://localhost:80/cvmfs/config-egi.egi.eu/.cvmfspublished | cat -v
 ```
-<br/>
+
 Both commands should show a short file including gibberish at the end which is the signature.
 
 It is a good idea to familiarize yourself with the log entries at `/var/log/httpd/access_log` and also, if you have installed frontier-squid, at `/var/log/squid/access.log`. Also, at least 15 minutes after the snapshot is finished, check the log `/var/log/cvmfs/snapshots.log` to see that it tried to get an update and got no errors.

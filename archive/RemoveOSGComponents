@@ -1,0 +1,42 @@
+---+ Removing OSG Software
+
+While =yum= is excellent at installing software, it's not very good at removing unused software.  As most OSG functional units are spread across many RPMs, it is difficult to remove each RPM individually.
+
+OSG provides a plugin, =yum-remove-osg=, to assist sysadmins in removing our software.  It has two design goals:
+
+   * Remove as many unnecessary RPM packages as possible when one of the top-level packages are removed.
+   * Provide strong guarantees that removing OSG software will not damage the rest of the system.
+
+The =yum-remove-osg= plugin is a fork of the standard =remove-leaves= plugins, except it will only remove packages if they are only available from a repository considered as part of OSG.
+
+---++ Pitfalls / Gotchas
+
+Please read this section before first using this plugin!
+
+   * The plugin will only remove packages if the corresponding =.repo= file in =/etc/yum.repos.d= contains =consider_as_osg=yes=.
+      * All OSG repos have this by default.
+      * Packages from EPEL will *not* be removed by default.  OSG uses quite a few packages from EPEL.  If you want to remove EPEL packages that got brought in by OSG, add =consider_as_osg=yes= to the [epel] section in =/etc/yum.repos.d/epel.repo=.
+   * The plugin will only remove packages if they are from an "OSG" repo, *and that repo is enabled*.  If the OSG repo isn't enabled by default, you'll want to add =--enablerepo=osg= to your =yum remove= command line.
+   * If you remove a package =foo=, yum will first try to remove all packages that depend on =foo=, then remove all unused packages.
+      * Suppose you have package =bar= depending on =foo= and =foo= depends on =baz= (and nothing else on the system needs =baz=).  Then, =yum remove --osg foo= will first remove =bar=, then =foo=, then =baz=.
+   * =osg-ce= depends on =osg-client=, which depends on =osg-wn-client=.  Hence, if you remove =osg-client= or =osg-wn-client= on a CE, *then this will remove the CE* also.
+   * Even with this plugin, =yum remove= is not the perfect reversal of a =yum install= command.  If you need a perfect reversal, restore from backup.  This plugin will be acceptable for many, but not all, sites.
+      * For example, if an RPM package installed a Unix user named =glexec=, the user will remain on the system after the package removal. 
+
+Before any action happens, =yum= will print out the list of packages it will remove.  *Please review this* list before you confirm!
+
+---++ Installing and Using
+
+To install the plugin, do the following with the appropriate =osg= repo enabled:
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install yum-remove-osg
+</pre>
+
+Then, to remove a package (such as =osg-ce=):
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum remove --osg osg-ce
+</pre>
+
+The two prompts above assume that the =osg= repo is enabled (=osg-testing= if you are an ITB site).

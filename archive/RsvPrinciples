@@ -1,0 +1,101 @@
+---+ !RSV Principles
+%DOC_STATUS_TABLE%
+
+!RSV was designed with two main principles in mind. Inasmuch as you think !RSV doesn't live up to these principles, you should report it as a bug--they are the goals underlying the !RSV implementation. 
+
+---++ Principle 1: No central monitoring: sites monitor themselves
+
+!RSV is a tool for sites to be able to monitor themselves. We do not run !RSV tests from a central location (such as the GOC) on behalf of the sites. It sure would be convenient for sites if we did so--why don't we?
+
+We believe that a site should be able to fully operate independently, without relying on centralized services. It's okay to have centralized services, but if they go down, a site should still be able to operate. A site should be able to accept new jobs from user, continue running existing jobs, transfer data, etc. Similarly, if the grid services at a site go down, a site should still be able to support local users. We don't want a single point of failure, not even a highly available, robust single point of failure. 
+
+This implies that a good, well-run site should be able to monitor itself. A site should be able to be aware of problems before remote users or the GOC. Therefore we strongly believe that a site should run its own monitoring, and this includes !RSV. 
+
+---++ Principle 2: !RSV monitoring should be managed and not affect the resources it runs on.
+
+!RSV is a monitoring system. It should in no way affect the system that it is monitoring. If !RSV generates a large load, consumes a lot of memory, or uses too much network bandwidth, it's a problem. !RSV should limit itself to avoid these problem. 
+
+This manifests itself in a couple of ways:
+
+   * The disk space consumed by the results of metrics should be limited to a single record. (Note that the !RSV consumer keeps a small amount of history, but it's carefully limited.)
+   * The total number of running metrics should be small.
+   * The load created by !RSV should be negligible. 
+
+---++ Implementation note: Cron vs. Condor Cron
+
+Some people are surprised that !RSV isn't implemented with cron, but instead uses "Condor Cron". !RSV runs monitoring jobs periodically; cron can run processes periodically; why doesn't !RSV use cron?
+
+Our goal is that !RSV should be able to ensure that it does not interfere with the operation of the system it is testing. We think that it's much harder to do that with cron than with Condor Cron.
+
+In some sense, cron and Condor can be thought of as two examples of batch job systems. All the details are different, but they both have a mechanism to specify and run jobs.
+
+Cron does very little management of jobs. Other than controlling when a process is started, all policy decisions are left to the processes themselves. Cron doesn't attempt to do anything to control them. It does not:
+
+   * Ensure there aren't too many processes running<br>You can put as many cron jobs on a system as you like, and cron will happily start all of them.
+   * Ensure that a recurring job doesn't overlap itself<br>For example, if one cron job hangs while running a test, cron is perfectly happy to start up that cron job again and again when the schedule indicates it is time.
+   * Attempt to control the impact of the processes on the system load<br>Cron is "fire and forget". If a process consumes too much of the system's CPU time or memory or network bandwidth, cron doesn't care. It was only responsible for starting the process.
+
+If you want any of those management features, it is up to the individual cron jobs to implement them. 
+
+With Condor's cron implementation we can handle all of those things without pushing the management logic into the tests themselves. Condor cron can:
+
+   * Control the number of !RSV processes running
+   * Ensure !RSV jobs don't overlap
+   * Kill !RSV processes that take too many system resources
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = AlainRoy
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Monitoring
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MarcoMambelli
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->

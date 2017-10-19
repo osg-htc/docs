@@ -1,0 +1,799 @@
+%DOC_STATUS_TABLE%
+
+---+!! Install Gratia Service
+%TOC%
+
+<!-- conventions used in this document
+   * Local UCL_HOST = %URLPARAM{"INPUT_HOST" encode="quote" default="gratia"}%
+   * Local UCL_USER = %URLPARAM{"INPUT_USER" encode="quote" default="user"}%
+   * Local UCL_DOMAIN = %URLPARAM{"INPUT_DOMAIN" encode="quote" default="opensciencegrid.org"}%
+   * Set TWISTY_OPTS_DETAILED = mode="div" showlink="Show Detailed Output" hidelink="Hide" showimgleft="/twiki/pub/TWiki/TWikiDocGraphics/toggleopen-small.gif" hideimgleft="/twiki/pub/TWiki/TWikiDocGraphics/toggleclose-small.gif" remember="on" start="hide" 
+-->
+%STARTINCLUDE%
+%EDITTHIS%
+
+---+ About this Document
+This document is for Site System Administrators. 
+Here we describe how to install and configure Gratia Service on your Linux machine. When you install Gratia Service as described here, you get all parts: [[http://tomcat.apache.org/][Apache Tomcat]] and Gratia webservice. 
+In order to run, the Gratia Service requires also a [[http://www.mysql.com/][MySQL]] database. Versions older than 1.16 were installing on the same host also the !MySQL server as dependency of the Gratia Service. Version 1.16 and newer will let the administrator install and configure the !MySQL database. This can be running on the same machine as the Gratia Service or on a different one.
+
+The installation section will give you a bare-bones installation. In order to use Gratia Service you need to go through the configuration: run install-database to create gratia database and configure_tomcat to configure Tomcat  and Gratia. The other sections help in troubleshooting and knowing what is running.
+
+This is not a complete reference. If you need to administer a Gratia Service, please check the Gratia Admin guide coming with the software (these are Web pages served by the Gratia Service itself, e.g. ==/gratia-administration/replication-howto.jsp==).
+
+In this document, EL5 will refer to Red Hat Enterprise Linux 5-based OSes, including !CentOS 5 and Scientific Linux 5; EL6 will refer to Red Hat Enterprise Linux 6-based OSes, including !CentOS 6 and Scientific Linux 6. 
+
+
+---+ Introduction
+%STARTSECTION{"GratiaDefinition"}%
+The [[https://twiki.grid.iu.edu/bin/view/Accounting/WebHome][Grid Accounting Services]] collects information from the various probes and write to the database.These data could be regarding batch jobs, grid transfers, storage allocation, site availability tests or process accounting (at current survey).
+
+The Gratia Service installation has two main parts: 
+   * !MySQL database which is a persistent repository for Gratia data, 
+   * Gratia Web UI/services to collect and display accounting information. This requires Apache Tomcat.
+%ENDSECTION{"GratiaDefinition"}%
+
+
+%STARTSECTION{"GratiaRequirements"}%
+---+ Requirements
+
+---++ Host and OS
+   * A host to install the Gratia Service (Pristine node)
+   * OS is %SUPPORTED_OS%. Currently most of our testing has been done on Scientific Linux 6.
+   * Time must be synchronized. You can find more in the [[HostTimeSetup][time synchronization document]].
+   * Root access
+   * A !MySQL database. This can be on the same host of Gratia Service or on a separate host
+
+---++ Users
+The Gratia service installation will create a new tomcat user unless it is already created.
+
+%STARTSECTION{"Users"}%
+| *User* | *Default uid* | *Comment* |
+| =tomcat= | 91 | Runs tomcat5 (EL5)/tomcat6 (EL6) and owns gratia configurations files and certificates. |
+
+Note that if uids 91 is already taken but not used for the tomcat user, you will experience errors. [[https://twiki.grid.iu.edu/bin/view/Documentation/Release3/KnownProblems#Reserved_user_ids_especially_for][Details...]]
+
+Note that the following database users (defined in the !MySQL database, not in Unix) are used below:
+   * DB_ROOT_USERNAME: user with admin privileges on the Gratia databases (by default =root=)
+   * DB_USER_USERNAME: user that can read and write to the Gratia databases
+   * reporting user: user with read only access to the Gratia databases (set to =reader= in the configuration suggested)
+
+%ENDSECTION{"Users"}%
+
+
+---++ Certificates
+You will need one service certificate. [[Trash.ReleaseDocumentationGetHostServiceCertificates][Here]] are instructions to request a host certificate. Optional, you can use the host certificate instead as explained in the [[#Configure_Tomcat_options][section below]].
+
+| *Certificate* | *User that owns certificate* | *Path to certificate* |
+| Tomcat service certificate | =tomcat= | =/etc/grid-security/http/httpcert.pem= <br> =/etc/grid-security/http/httpkey.pem= |
+
+---++ Networking
+#FirewallReq
+%STARTSECTION{"Firewalls"}%
+---+++!! Gratia Service
+These firewall requirements are for the host running the Gratia Service using Apache Tomcat. 
+
+%INCLUDE{"Documentation/Release3.FirewallInformation" section="FirewallTable" lines="gratia"}% 
+
+---+++!! !MySQL Database
+The firewall requirement for the database:
+
+%INCLUDE{"Documentation/Release3.FirewallInformation" section="FirewallTable" lines="mysql"}% 
+
+%NOTE% The port of the database can change as long as the database and the Gratia Service use the same port and it may also be avoided if service and database are on the same host and use a named pipe to communicate.
+%ENDSECTION{"Firewalls"}%
+
+<!-- ---++!! Additional Requirements 
+-->
+
+%ENDSECTION{"GratiaRequirements"}%
+
+
+%STARTSECTION{"GratiaInstall"}%
+---+ Installation Procedure
+
+%INCLUDE{"YumRepositories" section="OSGRepoBrief" TOC_SHIFT="+"}%
+%INCLUDE{"InstallCertAuth" section="OSGBriefCaCerts" TOC_SHIFT="+"}%
+
+<!-- fetch-crl should be installed automatically as dependency -->
+
+
+%STARTSECTION{"InstallOSGGratiaServiceRPMs"}%
+---++ Install the Gratia Service
+Install Gratia Service:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install gratia-service
+</pre>  %TWISTY{%TWISTY_OPTS_DETAILED%}%   <pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install gratia-service
+Loaded plugins: kernel-module, priorities
+osg                                                                                                                                 | 1.9 kB     00:00     
+osg/primary_db                                                                                                                      | 1.0 MB     00:00     
+1290 packages excluded due to repository priority protections
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package gratia-service.noarch 0:1.12-2.osg.el5 set to be updated
+epel/filelists_db                                                                                                                   | 5.4 MB     00:01     
+fermi-base/filelists                                                                                                                |  21 kB     00:00     
+fermi-security/filelists_db                                                                                                         | 9.4 MB     00:00     
+osg/filelists_db                                                                                                                    | 566 kB     00:00     
+sl-base/filelists_db                                                                                                                | 3.6 MB     00:00     
+--> Processing Dependency: /usr/share/java/xml-commons-apis.jar for package: gratia-service
+--> Processing Dependency: emi-trustmanager-tomcat for package: gratia-service
+--> Processing Dependency: grid-certificates for package: gratia-service
+--> Processing Dependency: mysql-server for package: gratia-service
+--> Processing Dependency: vo-client-edgmkgridmap for package: gratia-service
+--> Running transaction check
+---> Package emi-trustmanager-tomcat.noarch 0:3.0.0-3 set to be updated
+--> Processing Dependency: emi-trustmanager for package: emi-trustmanager-tomcat
+--> Processing Dependency: bouncycastle for package: emi-trustmanager-tomcat
+---> Package mysql-server.x86_64 0:5.0.95-1.el5_7.1 set to be updated
+--> Processing Dependency: mysql = 5.0.95-1.el5_7.1 for package: mysql-server
+--> Processing Dependency: libmysqlclient.so.15(libmysqlclient_15)(64bit) for package: mysql-server
+--> Processing Dependency: perl-DBD-MySQL for package: mysql-server
+--> Processing Dependency: perl(DBI) for package: mysql-server
+--> Processing Dependency: perl-DBI for package: mysql-server
+--> Processing Dependency: libmysqlclient_r.so.15(libmysqlclient_15)(64bit) for package: mysql-server
+--> Processing Dependency: libmysqlclient_r.so.15()(64bit) for package: mysql-server
+--> Processing Dependency: libmysqlclient.so.15()(64bit) for package: mysql-server
+---> Package osg-ca-certs.noarch 0:1.27-2.osg.el5 set to be updated
+---> Package vo-client-edgmkgridmap.noarch 0:41-3.osg.el5 set to be updated
+---> Package xml-commons-apis.x86_64 0:1.3.02-0.b2.7jpp.10 set to be updated
+--> Running transaction check
+---> Package bouncycastle.x86_64 0:1.45-6.el5 set to be updated
+--> Processing Dependency: java >= 1:1.6 for package: bouncycastle
+---> Package emi-trustmanager.noarch 0:3.0.3-1.sl5 set to be updated
+---> Package mysql.x86_64 0:5.0.95-1.el5_7.1 set to be updated
+---> Package perl-DBD-MySQL.x86_64 0:3.0007-2.el5 set to be updated
+---> Package perl-DBI.x86_64 0:1.52-2.el5 set to be updated
+--> Running transaction check
+---> Package java-1.6.0-openjdk.x86_64 1:1.6.0.0-1.25.1.10.6.el5_8 set to be updated
+--> Processing Dependency: tzdata-java for package: java-1.6.0-openjdk
+--> Processing Dependency: libgif.so.4()(64bit) for package: java-1.6.0-openjdk
+--> Running transaction check
+---> Package giflib.x86_64 0:4.1.3-7.1.el5_3.1 set to be updated
+---> Package tzdata-java.x86_64 0:2012b-3.el5 set to be updated
+--> Finished Dependency Resolution
+Beginning Kernel Module Plugin
+Finished Kernel Module Plugin
+
+Dependencies Resolved
+
+===========================================================================================================================================================
+ Package                                   Arch                     Version                                         Repository                        Size
+===========================================================================================================================================================
+Installing:
+ gratia-service                            noarch                   1.12-2.osg.el5                                  osg                               75 M
+Installing for dependencies:
+ bouncycastle                              x86_64                   1.45-6.el5                                      epel                             4.0 M
+ emi-trustmanager                          noarch                   3.0.3-1.sl5                                     osg                              271 k
+ emi-trustmanager-tomcat                   noarch                   3.0.0-3                                         osg                               30 k
+ giflib                                    x86_64                   4.1.3-7.1.el5_3.1                               sl-base                           39 k
+ java-1.6.0-openjdk                        x86_64                   1:1.6.0.0-1.25.1.10.6.el5_8                     fermi-security                    36 M
+ mysql                                     x86_64                   5.0.95-1.el5_7.1                                fermi-security                   4.9 M
+ mysql-server                              x86_64                   5.0.95-1.el5_7.1                                fermi-security                   9.9 M
+ osg-ca-certs                              noarch                   1.27-2.osg.el5                                  osg                              281 k
+ perl-DBD-MySQL                            x86_64                   3.0007-2.el5                                    sl-base                          147 k
+ perl-DBI                                  x86_64                   1.52-2.el5                                      sl-base                          605 k
+ tzdata-java                               x86_64                   2012b-3.el5                                     fermi-security                   181 k
+ vo-client-edgmkgridmap                    noarch                   41-3.osg.el5                                    osg                              5.6 k
+ xml-commons-apis                          x86_64                   1.3.02-0.b2.7jpp.10                             sl-base                          387 k
+
+Transaction Summary
+===========================================================================================================================================================
+Install      14 Package(s)
+Upgrade       0 Package(s)
+
+Total download size: 132 M
+Is this ok [y/N]: y
+Downloading Packages:
+(1/14): vo-client-edgmkgridmap-41-3.osg.el5.noarch.rpm                                                                              | 5.6 kB     00:00     
+(2/14): emi-trustmanager-tomcat-3.0.0-3.noarch.rpm                                                                                  |  30 kB     00:00     
+(3/14): giflib-4.1.3-7.1.el5_3.1.x86_64.rpm                                                                                         |  39 kB     00:00     
+(4/14): perl-DBD-MySQL-3.0007-2.el5.x86_64.rpm                                                                                      | 147 kB     00:00     
+(5/14): tzdata-java-2012b-3.el5.x86_64.rpm                                                                                          | 181 kB     00:00     
+(6/14): emi-trustmanager-3.0.3-1.sl5.noarch.rpm                                                                                     | 271 kB     00:00     
+(7/14): osg-ca-certs-1.27-2.osg.el5.noarch.rpm                                                                                      | 281 kB     00:00     
+(8/14): xml-commons-apis-1.3.02-0.b2.7jpp.10.x86_64.rpm                                                                             | 387 kB     00:00     
+(9/14): perl-DBI-1.52-2.el5.x86_64.rpm                                                                                              | 605 kB     00:00     
+(10/14): bouncycastle-1.45-6.el5.x86_64.rpm                                                                                         | 4.0 MB     00:00     
+(11/14): mysql-5.0.95-1.el5_7.1.x86_64.rpm                                                                                          | 4.9 MB     00:00     
+(12/14): mysql-server-5.0.95-1.el5_7.1.x86_64.rpm                                                                                   | 9.9 MB     00:00     
+(13/14): java-1.6.0-openjdk-1.6.0.0-1.25.1.10.6.el5_8.x86_64.rpm                                                                    |  36 MB     00:02     
+(14/14): gratia-service-1.12-2.osg.el5.noarch.rpm                                                                                   |  75 MB     00:07     
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                       11 MB/s | 132 MB     00:11     
+warning: rpmts_HdrFromFdno: Header V3 DSA signature: NOKEY, key ID 217521f6
+epel/gpgkey                                                                                                                         | 1.7 kB     00:00     
+Importing GPG key 0x217521F6 "Fedora EPEL <epel@fedoraproject.org>" from /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL
+Is this ok [y/N]: y
+warning: rpmts_HdrFromFdno: Header V3 DSA signature: NOKEY, key ID 824b8603
+osg/gpgkey                                                                                                                          | 1.7 kB     00:00     
+Importing GPG key 0x824B8603 "OSG Software Team (RPM Signing Key for Koji Packages) <vdt-support@opensciencegrid.org>" from /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
+Is this ok [y/N]: y
+Running rpm_check_debug
+Running Transaction Test
+Finished Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing     : perl-DBI                                                                                                                           1/14 
+  Installing     : mysql                                                                                                                              2/14 
+  Installing     : perl-DBD-MySQL                                                                                                                     3/14 
+  Installing     : mysql-server                                                                                                                       4/14 
+  Installing     : giflib                                                                                                                             5/14 
+  Installing     : xml-commons-apis                                                                                                                   6/14 
+  Installing     : emi-trustmanager                                                                                                                   7/14 
+  Installing     : vo-client-edgmkgridmap                                                                                                             8/14 
+  Installing     : tzdata-java                                                                                                                        9/14 
+  Installing     : java-1.6.0-openjdk                                                                                                                10/14 
+  Installing     : bouncycastle                                                                                                                      11/14 
+  Installing     : emi-trustmanager-tomcat                                                                                                           12/14 
+  Installing     : osg-ca-certs                                                                                                                      13/14 
+  Installing     : gratia-service                                                                                                                    14/14 
+
+Installed:
+  gratia-service.noarch 0:1.12-2.osg.el5                                                                                                                   
+
+Dependency Installed:
+  bouncycastle.x86_64 0:1.45-6.el5                 emi-trustmanager.noarch 0:3.0.3-1.sl5                    emi-trustmanager-tomcat.noarch 0:3.0.0-3       
+  giflib.x86_64 0:4.1.3-7.1.el5_3.1                java-1.6.0-openjdk.x86_64 1:1.6.0.0-1.25.1.10.6.el5_8    mysql.x86_64 0:5.0.95-1.el5_7.1                
+  mysql-server.x86_64 0:5.0.95-1.el5_7.1           osg-ca-certs.noarch 0:1.27-2.osg.el5                     perl-DBD-MySQL.x86_64 0:3.0007-2.el5           
+  perl-DBI.x86_64 0:1.52-2.el5                     tzdata-java.x86_64 0:2012b-3.el5                         vo-client-edgmkgridmap.noarch 0:41-3.osg.el5   
+  xml-commons-apis.x86_64 0:1.3.02-0.b2.7jpp.10   
+
+Complete!
+</pre> %ENDTWISTY%
+%ENDSECTION{"InstallOSGGratiaServiceRPMs"}%
+
+
+%STARTSECTION{"MysqlInstall"}%
+---++ Install !MySQL
+*This is not needed for Gratia 1.15 or earlier versions.*
+
+The Gratia service uses a !MySQL database.
+With Gratia 1.16 (or later) the database can reside on a different host and/or be managed separately.
+
+You have the following three options:
+   1. If you want the !MySQL server on the same host you have to install it explicitly (it is no more a RPM dependency of Gratia).  You can have your favorite instructions to install !MySQL or use a database running on a different host.  Here are some simple instructions to Install a !MySQL server database (it will install automatically also the client):<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install mysql-server
+</pre>  %TWISTY{%TWISTY_OPTS_DETAILED%}%   <pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install mysql-server
+Loaded plugins: priorities, security
+323 packages excluded due to repository priority protections
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package mysql-server.x86_64 0:5.1.73-3.el6_5 will be installed
+--> Processing Dependency: mysql = 5.1.73-3.el6_5 for package: mysql-server-5.1.73-3.el6_5.x86_64
+--> Processing Dependency: perl-DBI for package: mysql-server-5.1.73-3.el6_5.x86_64
+--> Processing Dependency: perl-DBD-MySQL for package: mysql-server-5.1.73-3.el6_5.x86_64
+--> Processing Dependency: perl(DBI) for package: mysql-server-5.1.73-3.el6_5.x86_64
+--> Running transaction check
+---> Package mysql.x86_64 0:5.1.73-3.el6_5 will be installed
+---> Package perl-DBD-MySQL.x86_64 0:4.013-3.el6 will be installed
+---> Package perl-DBI.x86_64 0:1.609-4.el6 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+====================================================================================================================================================================================================
+ Package                                          Arch                                     Version                                             Repository                                      Size
+====================================================================================================================================================================================================
+Installing:
+ mysql-server                                     x86_64                                   5.1.73-3.el6_5                                      slf-security                                   8.6 M
+Installing for dependencies:
+ mysql                                            x86_64                                   5.1.73-3.el6_5                                      slf-security                                   893 k
+ perl-DBD-MySQL                                   x86_64                                   4.013-3.el6                                         slf                                            133 k
+ perl-DBI                                         x86_64                                   1.609-4.el6                                         slf                                            704 k
+
+Transaction Summary
+====================================================================================================================================================================================================
+Install       4 Package(s)
+
+Total download size: 10 M
+Installed size: 29 M
+Is this ok [y/N]: y
+Downloading Packages:
+(1/4): mysql-5.1.73-3.el6_5.x86_64.rpm                                                                                                                                       | 893 kB     00:00
+(2/4): mysql-server-5.1.73-3.el6_5.x86_64.rpm                                                                                                                                | 8.6 MB     00:00
+(3/4): perl-DBD-MySQL-4.013-3.el6.x86_64.rpm                                                                                                                                 | 133 kB     00:00
+(4/4): perl-DBI-1.609-4.el6.x86_64.rpm                                                                                                                                       | 704 kB     00:00
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                                                36 MB/s |  10 MB     00:00
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : perl-DBI-1.609-4.el6.x86_64                                                                                                                                                      1/4
+  Installing : perl-DBD-MySQL-4.013-3.el6.x86_64                                                                                                                                                2/4
+  Installing : mysql-5.1.73-3.el6_5.x86_64                                                                                                                                                      3/4
+  Installing : mysql-server-5.1.73-3.el6_5.x86_64                                                                                                                                               4/4
+  Verifying  : perl-DBD-MySQL-4.013-3.el6.x86_64                                                                                                                                                1/4
+  Verifying  : mysql-server-5.1.73-3.el6_5.x86_64                                                                                                                                               2/4
+  Verifying  : mysql-5.1.73-3.el6_5.x86_64                                                                                                                                                      3/4
+  Verifying  : perl-DBI-1.609-4.el6.x86_64                                                                                                                                                      4/4
+
+Installed:
+  mysql-server.x86_64 0:5.1.73-3.el6_5
+
+Dependency Installed:
+  mysql.x86_64 0:5.1.73-3.el6_5                                  perl-DBD-MySQL.x86_64 0:4.013-3.el6                                  perl-DBI.x86_64 0:1.609-4.el6
+
+Complete!
+</pre> %ENDTWISTY%
+   1. If the !MySQL server is on a different host you can install it on that host using the command above. And if you want to run the =install-database= script to setup the database for you (it can run also remotely - see below for how), then:
+      * You need admin access on the !MySQL server to create users and the database
+      * Install the !MySQL client on this Gratia service host:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install mysql
+</pre>  %TWISTY{%TWISTY_OPTS_DETAILED%}%   <pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install mysql
+Loaded plugins: priorities, security
+324 packages excluded due to repository priority protections
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package mysql.x86_64 0:5.1.73-3.el6_5 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================================
+ Package                               Arch                                   Version                                        Repository                                    Size
+================================================================================================================================================================================
+Installing:
+ mysql                                 x86_64                                 5.1.73-3.el6_5                                 slf-security                                 893 k
+
+Transaction Summary
+================================================================================================================================================================================
+Install       1 Package(s)
+
+Total download size: 893 k
+Installed size: 2.4 M
+Is this ok [y/N]: y
+Downloading Packages:
+mysql-5.1.73-3.el6_5.x86_64.rpm                                                                                                                          | 893 kB     00:00
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : mysql-5.1.73-3.el6_5.x86_64                                                                                                                                  1/1
+  Verifying  : mysql-5.1.73-3.el6_5.x86_64                                                                                                                                  1/1
+
+Installed:
+  mysql.x86_64 0:5.1.73-3.el6_5
+
+Complete!
+</pre> %ENDTWISTY%
+   1. If the !MySQL server is administered independently, then no !MySQL installation is needed. Remember to run =install-database -p= to print the commands to setup the Gratia database and users. And give the commands to the database administrators. 
+
+%ENDSECTION{"MysqlInstall"}%
+
+
+%ENDSECTION{"GratiaInstall"}%
+
+
+
+---+ Configure
+The Gratia Service is a webservice running inside Tomcat and using a !MySQL database.
+Starting with v1.16, the =gratia-service= RPM Package no longer has =mysql-server= package as a dependency and the database may be installed on another machine. This should work also with earlier versions but is not officially supported. 
+You have to configure all the Gratia Service, the !MySQL database and Tomcat.
+Your actions depend on the access to the database (full admin or limited), are almost the same if the database is on the same host or a different one.
+
+To authenticate Gratia with the database we define some users and passwords (in %RED%RED%ENDCOLOR% in the examples below). These must be consistent between Gratia and the database:
+   *  %RED%DB_ROOT_USERNAME%ENDCOLOR% : e.g. =root= , user with admin privileges on the Gratia databases. This is used only during the initial setup to create the other users and the Gratia database. It is not used during normal operation.
+   *  %RED%DB_ROOT_PASSWORD%ENDCOLOR% : This is the password necessary to connect to !MySQL as DB_ROOT_USERNAME, e.g. some_secret_password1. 
+   *  %RED%DB_USER_USERNAME%ENDCOLOR% : e.g. =gratia= , user with update (read and write) capability on the Gratia database, used by the Gratia Service for its normal operation.  
+   *  %RED%DB_USER_PASSWORD%ENDCOLOR% : This is the password necessary to connect to !MySQL as DB_USER_USERNAME, e.g. some_secret_password2
+   * There is also a user with read only access. We recommend not to change the default name (=reader=) and password for this user, because services like ==gratia-reporting== use a user/password for read-only access to the database and count on the default values. If you change ==service.reporting.user== and ==service.reporting.password== pay attention in being consistent between the configuration, the database and the services using it.
+
+*If you have full administrative access* to the database, then you can define the usernames and passwords in the Gratia configuration (see below) and and the script =install-database= will setup !MySQL accordingly (including the passwords).
+And *if Gratia Service and !MySQL are on the same host*  and you set DB_ROOT_PASSWORD in the Gratia configuration but there is no password set for the !MySQL installation, then the script will also set the password for the admin account.
+
+*If you have no administrative access* to the database, then you must agree and coordinate these values with the database administrators. The script =install-database= can suggest the lines to pass to the database administrators.
+
+Gratia pre 1.16 was installing a dedicated !MySQL and had full admin privileges on it. *If you have Gratia 1.15 or earlier, set up the values in Gratia (next section) and do not worry about the different !MySQL options*.
+
+%STARTSECTION{"ConfigureGratiaService"}%
+---++ Configure the Gratia Service 
+Now configure in Gratia usernames/passwords and other options.
+
+---+++ Authentication to the !MySQL database
+Gratia uses three different users when interacting with !MySQL: the root or admin user, used only for the initial database setup and creation of the other users; the database user, to create tables and add and update data during operation; a reader user, able only to read the content, used also by Gratia reporting.
+
+To authenticate with the database you need to enter the correct values in =/etc/gratia/services/service-authorization.properties=: <pre class="file">
+service.mysql.rootuser=%RED%DB_ROOT_USERNAME%ENDCOLOR%
+service.mysql.rootpassword=%RED%DB_ROOT_PASSWORD%ENDCOLOR%
+service.mysql.user=%RED%DB_USER_USERNAME%ENDCOLOR%
+service.mysql.password=%RED%DB_USER_PASSWORD%ENDCOLOR%
+# Do not modify the following two lines:
+service.reporting.user=reader
+service.reporting.password=reader
+</pre>
+
+These values are used by gratia during its operation and for the initial setup via =install-database=.
+See above for consistency requirements depending on the access to the database.
+
+---+++ Connection to the !MySQL database and other properties
+ 
+The file =etc/gratia/services/service-configuration.properties= contains the Gratia services related properties. You can leave most as they are. To connect to !MySQL and to reach the Gratia Service you need to change the ones in %RED%RED%ENDCOLOR% (and maybe the ones in BLUE) in the following snippet: <pre class="file">
+service.mysql.url=jdbc:mysql://%RED%DBHOSTNAME%ENDCOLOR%:%RED%DBPORT%ENDCOLOR%/gratia
+....
+service.open.connection=http://%RED%HOSTNAME%ENDCOLOR%:%BLUE%8880%ENDCOLOR%
+service.secure.connection=https://%RED%HOSTNAME%ENDCOLOR%:%BLUE%8443%ENDCOLOR%
+</pre>
+
+The ==service.mysql.url== property specifies the access point to the !MySql database for Gratia services.
+   * The %RED%DBHOSTNAME%ENDCOLOR% this is the host name (FQDN) where the database is running. It can be specified also as the short name or as ==localhost== if Gratia Service and !MySQL are on the same node.
+   * The %RED%DBPORT%ENDCOLOR% normally ==3306== (default !MySql port) or the port used by the database, if changed in the ==/etc/my.cnf== modified earlier.
+
+The ==service.open.connection== and ==service.secure.connection== should be modified by replacing  %RED%HOSTNAME%ENDCOLOR% with the fully qualified host name (FQDN) where the Gratia service is installed. These URLs are used by the probes and for data replication. You can modify open (8880) and secure (8443) ports as well. Keep in mind that if these are changed,  any Gratia probe will have to be configured accordingly so the information that is gathered by the probe could be sent  to the Gratia service.
+
+You should also configure the *administrative login to the Gratia Service* at this time. 
+The file to edit is ==/etc/gratia/services/service-configuration.properties== and the instructions are typed as comment in the file itself.
+Please read the detailed instructions in ==/etc/gratia/services/service-configuration.properties== under the " ==# ##########  Administrative login== " section.
+
+%ENDSECTION{"ConfigureGratiaService"}%
+
+
+%STARTSECTION{"ConfigureMysqlServer"}%
+---++ Configure the !MySQL Database 
+Depending on the installation you may have different steps in the !MySQL configuration:
+   1. If you have a new dedicated installation you need the Initial !MySQL configuration
+   1. You can grant admin access to the !MySQL installation (to run =install-database= against it)
+   1. If you received or had already admin access to !MySQL you can run =install-database= to create the users and install the gratia database
+   1. If you have only regular access then skip the previous 3 steps. You can use =install-database= to print the instructions to pass on to the database administrators to create the users and install the gratia database
+
+---+++ Initial !MySQL configuration
+If you installed !MySQL (on the same host or on a different one) or installed Gratia Service v1.15 or earlier (that installed !MySQL for you) then you need some initial configuration. By default it will be using port 3306 and will not have password for ==root==. We recommend to:
+   1. Change the initial configuration
+   1. Set a root password
+
+It is recommended to replace  a default configuration file that is installed with mysqld server (==/etc/my.cnf==)  with ==/usr/share/gratia/my-cnf.template==:
+%TWISTY{%TWISTY_OPTS_DETAILED% showlink="Show the template file"}%   <pre class="file">
+[mysqld]
+datadir = /var/lib/mysql
+socket =  /var/lib/mysql/mysql.sock
+user = mysql
+port = 3306
+
+log_bin = /var/lib/mysql/mysql-bin
+log =     /var/log/mysqld.log
+log_bin_trust_function_creators = 1
+expire_logs_days = 7
+sync_binlog=1
+
+innodb_file_per_table
+innodb_data_home_dir = /var/lib/mysql
+innodb_data_file_path = ibdata1:500M;ibdata2:10M:autoextend
+innodb_log_group_home_dir = /var/lib/mysql
+innodb_flush_log_at_trx_commit = 1
+innodb_buffer_pool_size = 256M
+innodb_additional_mem_pool_size = 20M
+innodb_log_file_size = 64M
+innodb_log_files_in_group = 2
+innodb_log_buffer_size = 8M
+innodb_lock_wait_timeout = 50
+innodb_thread_concurrency = 2
+# To prevent too large of innodb history list which affects inserts
+innodb_max_purge_lag=50000
+
+
+
+# Uncomment the following line for debugging purposes.
+#log-warnings=2
+
+# Default to using old password format for compatibility with mysql 3.x
+# clients (those using the mysqlclient10 compatibility package).
+old_passwords=1
+
+# Disabling symbolic-links is recommended to prevent assorted security risks;
+# to do so, uncomment this line:
+# symbolic-links=0
+</pre> %ENDTWISTY%
+
+If you are planning to collect data from a very large number of probes you can use ==/usr/share/gratia/my-cnf.large-site.template==. This configuration is used at Fermilab for the OSG collector that gathers data from all OSG sites.
+
+In order to replace mysql configuration just copy the template selected to ==/etc/my.cnf== (do a remote copy if Gratia service and the !MySQL server are on different hosts): <pre class="rootscreen">
+%UCL_PROMPT_ROOT% cp /usr/share/gratia/my-cnf.template /etc/my.cnf
+</pre>
+*Note* The default mysqld port (3306) is used in this configuration file. If you prefer to use some other port you have to change it here before proceeding with any other actions and remember to use the same database port number in the Gratia Service configuration below.
+
+You will need to start mysqld at this time: <pre class="rootscreen">
+%UCL_PROMPT_ROOT%service mysqld start
+</pre>
+%NOTE%  If you use ==my-cnf.large-site.template== , you may experience a false failure on the initial startup of the ==mysqld server== .  This is because it takes a significant amount of time to allocate all the space required for a large database. The ==mysqld== initd service does not know that and will think the startup has failed when it just hasn't finished.
+
+Now you can set the root password: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% mysqladmin -u root password %RED%DB_ROOT_PASSWORD%ENDCOLOR%
+</pre>
+%RED%DB_ROOT_PASSWORD%ENDCOLOR% will be used below in the Gratia Service configuration.
+
+---+++ Grant admin access to an existing !MySQL installation
+*This is officially supported for Gratia Service 1.16 or newer (it may work also with earlier versions).*
+
+You can skip this section if DB_ROOT_USERNAME is "root" (the !MySQL root user) and the database is local (on the same host as the Gratia service). 
+
+Gratia Service can use an existing !MySQL database, even running on a separate host and administered by some other people. You don't need root access to the database to run Gratia but you need admin access to create the database and the users used by Gratia.
+If you can get admin access, the =install-database= script will do all the setup for you, otherwise you'll need the help of a database administrator (see item 4).
+
+!MySQL by default has a user "root" with admin privileges. If you can use the user "root" use its password as %RED%DB_ROOT_PASSWORD%ENDCOLOR% in the Gratia configuration (see above). Remember to set DB_ROOT_USERNAME as root or to comment that line in the Gratia configuration.
+If the database is on the same host as the Gratia server then you can skip this section because "root" connecting locally has already all privileges.
+
+If you are using two different hosts or the admin user name is different, be consistent with DB_ROOT_USERNAME and DB_ROOT_PASSWORD used in the Gratia configuration and make sure that its privileges are set correctly. Someone with already admin privileges, e.g. a database administrator, someone connecting as root must run the following:
+<pre class="rootscreen">
+mysql> use mysql;
+mysql> grant all privileges on      *.* to %RED%DB_ROOT_USERNAME%ENDCOLOR%@%RED%GS_NODENAME%ENDCOLOR% identified by %RED%DB_ROOT_PASSWORD%ENDCOLOR%;
+mysql> update user set Grant_priv="Y" where Host=%RED%GS_NODENAME%ENDCOLOR% and User=%RED%DB_ROOT_USERNAME%ENDCOLOR%;
+mysql> flush privileges;
+</pre>
+Here:
+   * %RED%GS_NODENAME%ENDCOLOR% is the host where the Gratia Service is running.
+   * %RED%DB_ROOT_USERNAME%ENDCOLOR% is the user with admin privileges on the Gratia databases. Can be and arbitrary name agreed between DBAs and you (the Gratia service administrator, normally =root=).
+   * %RED%DB_ROOT_PASSWORD%ENDCOLOR% : is the password of the user with admin privileges on the Gratia databases. Can be and arbitrary password agreed between DBAs and you.
+%RED%DB_ROOT_USERNAME%ENDCOLOR% and %RED%DB_ROOT_PASSWORD%ENDCOLOR% will be used also below in the Gratia Service configuration, be consistent!
+
+*Remember to quote* all the strings in the commands above, e.g. ==grant all privileges on *.* to 'myuser'@'myhost' identified by 'mypassword';==
+
+%WARNING% An empty password is an empty string but still must be mentioned on the line, as a quoted empty string, do not skip the "identified by..." part (==grant all privileges on *.* to 'myuser'@'myhost'== is an error). 
+
+
+---+++ Creating the database users and installing the Gratia database (running ==install-database==)
+To complete the !MySQL configuration, you will need to run the ==/usr/share/gratia/install-database== script that performs the following steps using the Gratia configuration modified above:
+<!--   1. set ==root== user password in the !MySql database -->
+   1. create the ==gratia== database
+   1. create the Gratia users (for update and read access) in the !MySql database and grant appropriate privileges for those users users
+    
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /usr/share/gratia/install-database
+
+Creating Gratia database based on the properties you updated in these files:
+  /etc/gratia/services/service-configuration.properties
+  /etc/gratia/services/service-authorization.properties
+... validating MySql port being used
+... port: 3306
+... root password has not been set yet.
+... creating the root password specified
+... creating gratia database and updating privileges
+
+Gratia database installation complete.
+</pre>
+
+---+++ Asking database administrators to create the database users and install the Gratia database (using ==install-database -p==)
+If you are using a database where you have no administrative access, run ==/usr/share/gratia/install-database -p== to print the commands to give to the database administrators (it will use your Gratia configuration to print the right commands, with the corrects host name, user names and passwords). Running those commands will 
+complete the Gratia database setup: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /usr/share/gratia/install-database -p
+# Create the database and grant access from the Gratia Server host
+CREATE database gratia CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+GRANT ALL PRIVILEGES ON gratia.* TO 'gratia'@'fermicloud000.fnal.gov'       IDENTIFIED BY '%RED%DB_USER_PASSWORD%ENDCOLOR%';
+GRANT SELECT,EXECUTE ON gratia.* TO 'reader'@'fermicloud000.fnal.gov'     IDENTIFIED BY '%RED%DB_READER_PASSWORD%ENDCOLOR%';
+</pre>
+ 
+---++ Special note for !MySQL 5.6 users
+We have tested Gratia-Service against !MySQL 5.0, 5.1 and 5.6.
+The gratia database uses the =latin1= character set. 
+=UTF-8=, default character set in !MySQL 5.6, would cause a "Key length too large" error in Gratia.
+If you are migrating an existing database created with an older !MySQL you may loose the character set information for the  !BacklogStatisticsHouly and !TableStatisticsHouly tables that may be recreated as UTF-8 tables. If this happens here is a recipe to solve the problem:
+   1. Make sure your !MySQL 5.6 is configured to use latin1 for Database, Server and System. Connection can use UTF-8, it will be converted automatically.
+   1. Stop the Gratia service
+   1. Run: =drop table {Backlog,Table}Statistics{Houly,Daily,Snapshots}=, to drop these 8 temporary tables
+   1. Restart the Gratia service: it will recreate these 8 tables
+%ENDSECTION{"ConfigureMysqlServer"}%
+
+
+%STARTSECTION{"ConfigureTomcatService"}%
+---++ Configure Tomcat options
+Make sure that you have the host,  and Tomcat service certificates/keys in the right directories and with the correct owners and permissions (=600= for key and =644= the certificate). [[Trash.ReleaseDocumentationGetHostServiceCertificates][Host certificate]] is required and must be in =/etc/grid-security/hostcert.pem= and =hostkey.pem=. It is recommended to provide also service certificates for Tomcat. If you don't, here are the instructions to copy the host certificate/key and set the correct owner (permissions are preserved).  Note that if you did not previously have a  tomcat user on your system, they were added during the RPM install:
+   1. Tomcat service is running as user ==tomcat== and requires its service certificate and key in ==/etc/grid-security/http==. To copy the host certificate/key for this service, you need to do the following:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% cd /etc/grid-security
+%UCL_PROMPT_ROOT% mkdir /etc/grid-security/http
+%UCL_PROMPT_ROOT% cp hostcert.pem http/httpcert.pem
+%UCL_PROMPT_ROOT% cp hostkey.pem http/httpkey.pem
+%UCL_PROMPT_ROOT% chown -R tomcat:tomcat http
+</pre>
+   1. Next, you will have to configure tomcat to enable gratia webservice and EMI trustmanager. You will have to run ==/usr/share/gratia/configure_tomcat== script:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /usr/share/gratia/configure_tomcat
+</pre> %TWISTY{%TWISTY_OPTS_DETAILED%}%   <pre class="rootscreen">
+%UCL_PROMPT_ROOT%  /usr/share/gratia/configure_tomcat
+====== Configuring Tomcat for gratia ====
+--- Configuring Tomcat and server.xml ---
+... executing: /var/lib/trustmanager-tomcat/configure.sh
+Info: using default install root: /
+Info: using default configuration file: //var/lib/trustmanager-tomcat/config.properties
+Info: using default configuration directory: //var/lib/trustmanager-tomcat
+Info: you can clean up using the following commands
+      mv -f /etc/tomcat5/server.xml.old-trustmanager /etc/tomcat5/server.xml
+      rm -f /usr/share/tomcat5/server/lib/bcprov*.jar
+      rm -f /usr/share/tomcat5/server/lib/log4j*.jar
+      rm -f /usr/share/tomcat5/server/lib/trustmanager-*.jar
+      rm -f /etc/tomcat5/log4j-trustmanager.properties
+      rm -f //var/lib/trustmanager-tomcat/server.xml
+
+--- Creating log4j links ---
+... executing: ln -s /usr/share/java/log4j.jar /usr/share/tomcat5/webapps/gratia-administration/WEB-INF/lib/log4j.jar
+lrwxrwxrwx 1 root root 25 May  3 14:17 /usr/share/tomcat5/webapps/gratia-administration/WEB-INF/lib/log4j.jar -> /usr/share/java/log4j.jar
+
+... executing: ln -s /usr/share/java/log4j.jar /usr/share/tomcat5/webapps/gratia-registration/WEB-INF/lib/log4j.jar
+lrwxrwxrwx 1 root root 25 May  3 14:17 /usr/share/tomcat5/webapps/gratia-registration/WEB-INF/lib/log4j.jar -> /usr/share/java/log4j.jar
+
+... executing: ln -s /usr/share/java/log4j.jar /usr/share/tomcat5/webapps/gratia-reporting/WEB-INF/lib/log4j.jar
+lrwxrwxrwx 1 root root 25 May  3 14:17 /usr/share/tomcat5/webapps/gratia-reporting/WEB-INF/lib/log4j.jar -> /usr/share/java/log4j.jar
+
+... executing: ln -s /usr/share/java/log4j.jar /usr/share/tomcat5/webapps/gratia-reports/WEB-INF/lib/log4j.jar
+lrwxrwxrwx 1 root root 25 May  3 14:17 /usr/share/tomcat5/webapps/gratia-reports/WEB-INF/lib/log4j.jar -> /usr/share/java/log4j.jar
+
+... executing: ln -s /usr/share/java/log4j.jar /usr/share/tomcat5/webapps/gratia-services/WEB-INF/lib/log4j.jar
+lrwxrwxrwx 1 root root 25 May  3 14:17 /usr/share/tomcat5/webapps/gratia-services/WEB-INF/lib/log4j.jar -> /usr/share/java/log4j.jar
+
+... executing: ln -s /usr/share/java/log4j.jar /usr/share/tomcat5/webapps/gratia-servlets/WEB-INF/lib/log4j.jar
+lrwxrwxrwx 1 root root 25 May  3 14:17 /usr/share/tomcat5/webapps/gratia-servlets/WEB-INF/lib/log4j.jar -> /usr/share/java/log4j.jar
+
+... executing: ln -s /usr/share/java/log4j.jar /usr/share/tomcat5/webapps/gratia-soap/WEB-INF/lib/log4j.jar
+lrwxrwxrwx 1 root root 25 May  3 14:17 /usr/share/tomcat5/webapps/gratia-soap/WEB-INF/lib/log4j.jar -> /usr/share/java/log4j.jar
+
+
+--- Updating tomcat5.conf ---
+... executing: cp -p /usr/share/tomcat5/conf/tomcat5.conf /usr/share/tomcat5/conf/tomcat5.conf.20120503-1417
+
+--- Updating server.xml ---
+Replacing Tomcat server.xml file: /usr/share/tomcat5/conf/server.xml
+... executing: cp -p /usr/share/tomcat5/conf/server.xml /usr/share/tomcat5/conf/server.xml.20120503-1417
+... executing: cp -p /usr/share/gratia/server.xml.template /usr/share/tomcat5/conf/server.xml
+... executing: chmod 644         /usr/share/tomcat5/conf/server.xml
+... executing: chown tomcat.root /usr/share/tomcat5/conf/server.xml
+
+====== Completed Tomcat configuration for Gratia ===
+
+</pre> %ENDTWISTY%
+(the output may look different on EL6)
+%ENDSECTION{"ConfigureTomcatService"}%
+---+ Services 
+---++ Starting and Enabling Services
+%STARTSECTION{"StartGratiaServices"}%
+To start Gratia you need to start several services:
+   1. %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlStart"}%
+   1. !MySQL server needs to be running if it is not already:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service mysqld start
+</pre>
+   1. Start Tomcat, required by  gratia service:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% service tomcat5 start # on EL5 only
+%UCL_PROMPT_ROOT% service tomcat6 start # on EL6 only
+</pre>
+You should also enable the appropriate services so that they are automatically started when your system is powered on: 
+   * %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlEnable"}%
+   * To enable the other services: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/chkconfig mysqld on
+%UCL_PROMPT_ROOT% /sbin/chkconfig tomcat5 on # on EL5 only
+%UCL_PROMPT_ROOT% /sbin/chkconfig tomcat6 on # on EL6 only
+</pre>
+
+*Note*: You do _not_ need to run chkconfig on the gratia service. This service is started with Tomcat.
+%ENDSECTION{"StartGratiaServices"}%
+
+---++ Stopping and Disabling Services
+%STARTSECTION{"StopGratiaServices"}%
+To stop Gratia you need to stop the services it uses if nothing else is using them:
+   1. Stop Tomcat, if no other application is using it:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% service tomcat5 stop # on EL5 only
+%UCL_PROMPT_ROOT% service tomcat6 stop # on EL6 only
+</pre>
+   1. Stop !MySQL server if no other application is using it:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% service mysqld stop
+</pre>
+   1. %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlStop"}%
+%ENDSECTION{"StopGratiaServices"}%
+
+In addition, you can disable services by running the following commands.  However, you don't need to do this normally.
+   * %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlDisable"}%
+   * To disable the other services: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/chkconfig mysqld off
+%UCL_PROMPT_ROOT% /sbin/chkconfig tomcat5 off # on EL5 only
+%UCL_PROMPT_ROOT% /sbin/chkconfig tomcat6 off # on EL6 only
+</pre>
+
+*Note*: You do not need to run chkconfig on the gratia service. See above for more details.
+%ENDSECTION{"StopGratiaServices"}%
+---+ Test
+To test Gratia service you can login in the Web UI and then:
+   * see the administration page
+
+Check the Web UI by accessing ==http://%RED%hostname%ENDCOLOR%:8443/gratia-administration/==.  You should see the following screenshot:
+<img src="%ATTACHURLPATH%/gratia-admin.png" alt="gratia screenshot" width=''555"  height='345' /> 
+
+---+ Upgrade
+To upgrade Gratia services you must:
+   1. stop tomcat and possibly also mysqld
+   1. run yum update
+   1. compare the configuration files (=/etc/gratia/services/service-authorization.properties= and =/etc/gratia/services/service-configuration.properties=) to the =.rpmnew= version added by the RPM update and merge when needed
+   1. restart mysql and tomcat
+
+---+ Troubleshooting
+
+---++ Useful configuration and log files
+
+Configuration Files
+| *Service or Process* | *Configuration File* | *Description* |
+|gratia|=/etc/gratia/services/service-configuration.properies=|gratia service configuration|
+||=/etc/gratia/services/service-authorization.properies=|gratia service mysql passwords|
+||=/etc/gratia/services/log4j.properies=|gratia service logs configuration|
+|mysqld| =/var/lib/mysql/%RED%gratia%ENDCOLOR%= | gratia database |
+| | =/etc/my.cnf= | !MySQL configuration, e.g. server port |
+| tomcat | =/etc/tomcat5/= | Tomcat configuration files (EL5) |
+| | =/etc/tomcat6/= | Tomcat configuration files (EL6) |
+| | =/etc/tomcat5/Catalina/localhost/*=| gratia related tomcat configuration (EL5) |
+| | =/etc/tomcat6/Catalina/localhost/*=| gratia related tomcat configuration (EL6) |
+
+Log files
+| *Service or Process* | *Log File* | *Description* |
+| tomcat (EL5) | =/var/log/tomcat5/catalina.out= | This is the Tomcat log file. Problems (and a lot of noise) are reported here. |
+| | =/var/log/tomcat5/trustmanager.log= | The trustmanager handles things related to authentication. Useful errors are sometimes here. |
+| tomcat (EL6) | =/var/log/tomcat6/catalina.out= | This is the Tomcat log file. Problems (and a lot of noise) are reported here. |
+|tomcat (EL5 & EL6) | =/var/log/tomcat6/glite-security-trustmanager.log= | The trustmanager handles things related to authentication. Useful errors are sometimes here. |
+|gratia|=/var/log/gratia=| All gratia related logs are here.|
+|mysqld|=/var/log/mysqld.log=|!MySQL log is here.|
+---+ How to get Help?
+To get assistance please use [[HelpProcedure][Help Procedure]].
+
+---+ References
+Gratia Documents
+   * [[Accounting.WebHome][Accounting Web/The Gratia project]]
+[[InstallGratiaService][Gratia Service (Collector)]] addons:
+   * InstallGratiaReporting to get various reports about resource usage and jobs via emails
+Gratia Probes:
+   * Accounting.ProbeInstallation
+
+---+ Comments
+
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = TanyaLevshina
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local TEST_READY   = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MarcoMambelli
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = KevinRetzke
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->

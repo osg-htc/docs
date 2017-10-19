@@ -1,0 +1,332 @@
+%DOC_STATUS_TABLE%
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%TOC%
+
+---++ About this Document
+This document describes how to configure the OSG attributes, including ones referencing "CE storage", during the installation and afterwards (if the [[https://twiki.grid.iu.edu/bin/view/Documentation/GlossaryOfTerms#DefsComputeElement][CE]] layout needs to change). 
+
+---++Configuring local storage attributes
+You must make these attributes known to %LINK_OSG%.  They will be published as part of the [[https://twiki.grid.iu.edu/bin/view/Documentation/GlossaryG#DefsGridLaboratoryUniformEnvironment][GLUE schema]] using the [[https://twiki.grid.iu.edu/bin/view/Documentation/GlossaryG#DefsGenericInformationProvider][GIP]] and used directly or indirectly by other OSG applications and users submitting jobs.  The configuration is set in =/var/lib/osg/osg-attributes.conf=. This is a standard configuration file that you can edit or review directly. The configuration script =osg-configure=  automates much of the configuration. (Note: if you have not run =osg-configure= yet, then the attributes file may not yet exist.  The meaning and purpose of the various elements of the configuration attributes are documented further below, and in the [[http://glueschema.forge.cnaf.infn.it/][GLUE documentation]].  New resource administrators may want to read that information carefully and determine how to map those elements onto their Resource before proceeding.  Guidance on the basic elements and common defaults is provided below. 
+
+---+++!! Gather configuration information
+OSG strives to make resources available with minimal requirements; however, the grid requires certain information about files and filesystem mount points to provide a basic execution environment.  For applications to be installed and to be executed correctly, filesystem sharing and the filesystem mount points available for a cluster must be specifically coordinated. For this purpose, administrators must define special directory hierarchies (mount points) and allocate them in the OSG environment. Many of these mount points should be available on the head / gatekeeper node and, using the exact path, on each of the worker nodes. Generally, they do _not_ have to be made available in the form of a shared filesystem across the whole cluster.  Read-only spaces can generally be provisioned with or without a shared filesystem as long as you provide consistent paths.
+
+%STARTSECTION{ "parameters" }%
+---+++ $OSG_LOCATION
+This points to the OSG software installation location on the CE. It must be writable by root.  This attribute is automatically setup by the =osg-configure= script.  The $OSG_LOCATION directory should not be exported to the worker nodes.
+
+#OsgGrid
+---+++ $OSG_GRID
+
+The OSG_GRID directory is read-only storage area where CE administrators install the [[InstallWNClient][OSG-WN-Client package]].  This is where the worker node software is installed.
+
+%NOTE% *If you install wn-client on each node via RPM* all the client software is available in the default path. *There is no need for OSG_GRID*. The RPM installation creates /etc/osg/wn-client/ with dummy setup files for compatibility with old jobs looking for a OSG_GRID. New jobs should source the setup file in OSG_GRID if this is defined; if not, they should expect all the client binaries in the default PATH. *All the remaining of this section refers to a system where the wn-client is installed as a TAR-ball or Pacman package*.
+
+OSG_GRID includes client utilities for Grid middleware, such as Pegasus and srmcp.  It should be writable by root and readable by all users. It must be accessible by both gatekeeper and worker nodes via a shared filesystem, or different installations on local disks using a consistent pathname.
+
+Relative paths and content must be consistent between the gatekeeper and worker nodes, even if the base OSG_GRID directory is different. If OSG_GRID differs between the CE/gatekeeper and worker nodes, create softlinks on the worker node that will recreate the gatekeeper's base path for OSG_GRID.
+
+
+Site administrators must provide a shared directory or locally install it on each machine.   If this is locally installed on each worker node, you need to take additional steps to make sure that the certifcates used by the worker node client tools are updated correctly.  Please review the [[InstallWNClient][OSG-WN-Client package page]].
+
+OSG_GRID may be included directly into the PATH defined for jobs running at the CE.
+
+The typical use is to provide a common set of OSG client software (=globus-job-run=, =globus-url-copy=, =srmcp=, etc.).
+
+
+#OsgApp
+---+++ $OSG_APP
+Base location for VO-specific application software. VOs are recommended to store their software in a sub-directory named after the VO.
+
+The gatekeeper and all worker nodes in the cluster must be able to read $OSG_APP.  
+Relative paths must resolve consistently between gatekeeper and worker nodes.
+
+$OSG_APP can be read-only mounted on the worker nodes in the cluster.  
+Clusters can allow installation jobs on all nodes, only on the gatekeeper, in a special queue, or not at all.
+Some clusters allow installation jobs on all nodes, some only on the gatekeeper,
+Only users with software installation privileges in their VO
+should have write privileges to these directories. At least 10 GB of space
+should be allocated per VO.
+
+The $OSG_APP directory also requires an ./etc sub-directory with 1777
+permissions. This sub-directory contains the file grid3-locations.txt,
+also with 1777 permissions, used to advertise on the information system
+the software installed.
+
+
+---+++ !!Data Directories
+The data directories are intended as the spaces for applications to write input and output data files with persistence that must exceed the lifetime of the job which created it. 
+   * These directories should be writable by all users.  
+   * Users will be able to create sub-directories which are private, as provided by the filesystem. 
+   * At least 10 GB of space should be allocated per worker node; some VOs require much larger allocations.
+
+The following different options are possible: 
+   * $OSG_SITE_READ: shared directory with read-only access for all users (data may be prestaged by the administrator or using a SE pointing to the same space)
+   * $OSG_SITE_WRITE: shared directory with write-only access for all users (data may be staged out by the administrator or using a SE pointing to the same space)
+   * $OSG_DATA: shared directory with read-write access for all users
+
+A CE can provide $OSG_DATA, both $OSG_SITE_READ and $OSG_SITE_WRITE, or none of them if it has a local SE specified in $OSG_DEFAULT_SE.   If a particular hierarchy is not available on your CE, provide the keyword =UNAVAILABLE=. 
+
+%IMPORTANT% The $OSG_DATA, $OSG_SITE_READ and $OSG_SITE_WRITE directories must be accessible from the head node as well as each of the worker nodes. 
+
+See the below sections for more information on each variable.
+
+#OsgData
+---+++ $OSG_DATA
+
+
+OSG_DATA is a storage area for transient / volatile files that are shared between jobs that are executing on the worker nodes. It provides similar functionality to the comibination of [[Trash.ReleaseDocumentationLocalStorageConfiguration#OsgSiteRead][OSG_SITE_READ]] and [[Trash.ReleaseDocumentationLocalStorageConfiguration#OsgSiteWrite][OSG_SITE_WRITE]] and may be easier for small sites to deploy. However, [[Trash.ReleaseDocumentationLocalStorageConfiguration#OsgSiteRead][OSG_SITE_READ]] and [[Trash.ReleaseDocumentationLocalStorageConfiguration#OsgSiteWrite][OSG_SITE_WRITE]] are usually efficient for big production sites with specialized hardware, because it forces the separation between input and output.
+
+Currently, we discourage both users from using OSG_DATA and site administrators from removing it. Users may need time to ween themselves from using OSG_DATA.
+
+Relative paths must resolve consistently between gatekeeper and worker nodes.  
+
+This area is intended to hold:
+   * data shared among different jobs running on different worker nodes
+   * data that has to outlive the execution of the jobs on the worker nodes
+
+Regular programs should have open/read/write permissions on OSG_DATA, because they may use it transparently as a local disk space (NFS, <!-- dcap, drm, --> AFS, CIFS are OK). This is a subset of a POSIX-compatible filesystem that excludes features such as creating special files (e.g., pipes, sockets, locks, links) and modifying file metadata.
+
+Gridftp or "SE-like" access from outside of the cluster is required to allow an efficient use of OSG_DATA as a staging area.
+
+Since the allocation of this space is transient, it is important that users remove unused data and/or that a simple mechanism to allow cleanups is added.
+
+The use of OSG_DATA as a writable area from compute nodes is one of the most significant performance bottlenecks in an OSG cluster. Use of OSG_DATA as the "hold all read/write area" (working area for the jobs) is discouraged.  This bottleneck can be reduced by staging the job, copying it to OSG_WN_TMP, or scheduling reads to take advantage of distributed resources.  
+
+Typical uses are for input datasets for jobs executing on the worker nodes, datasets produced by the jobs executing on the worker nodes, shared data for MPI applications, or for data staged in or waiting to be staged out.
+
+#OsgSiteRead
+---+++ $OSG_SITE_READ
+
+OSG_SITE_READ is a transient storage area visible from all worker nodes and optimized for high-performance read operations that holds input data shared among different applications running on different worker nodes.
+
+Relative paths must resolve consistently between gatekeeper and worker nodes.
+
+OSG_SITE_READ allows open, seek, read, and close by regular programs, which may use it transparently as a local disk space. It is provided through a grid file access library, and the users do not have to know the storage location and its underlying implementation. The usage is uniform across OSG.
+
+Users have no write access to this area from the worker node. Users can write from the grid side of the Storage Element. However, site administrators can write files to the area.  This parameter should be filled in using a dcap url (e.g. =dcap://mydcapnode.athome.edu:22136//pnfs/athome.edu=).
+ 
+Typical uses are for input datasets for jobs executing on the worker nodes or for data that has been staged in.
+
+#OsgSiteWrite
+---+++ $OSG_SITE_WRITE
+
+OSG_SITE_WRITE is a write-only (or "mostly write") transient / volatile storage area that is visible from all worker nodes and optimized for high-performance write operations and holds the output from jobs running on the CE that is required to persist beyond the originating job's lifetime.  
+
+OSG_SITE_WRITE allows open, set flags, write (sequential, with multiple write operations), and close, although it may not be possible to modify a file once it is closed.  OSG_SITE_WRITE is provided through a grid file access library specific for the underlying storage, and programs may use it transparently as a local disk space.  This field should have a srm protocol url (e.g. =srm://mysrmnode.athome.edu:8443/= ).  
+
+%NOTE% Limitations should be avoided when possible, and be clearly stated.
+
+Users shall not have read access to this area. In cases where read access is necessary, the site administrator must facilitate access, or provide mechanisms external to the CE, such as supporting Storage Element reading that area.
+
+Typical uses are for storage of datasets produced by the jobs executing on the worker nodes or for data waiting to be staged out.
+
+#OsgWnTmp
+---+++ $OSG_WN_TMP
+
+
+OSG_WN_TMP is a temporary storage area, local to the worker node and specific to a single job, used as temporary working directory that may be purged when the job completes. Two jobs running on a cluster cannot (generally) read from or write to each other's OSG_WN_TMP areas. The OSG_WN_TMP area is thus fundamentally different from the others in that it is job-specific.
+
+   * At least 10 GB per virtual CPU should be available in this directory (e.g. a !WorkerNode with 2 hyperthreaded CPUs that can run up to 4 jobs, should have 40GB). 
+   * Files placed in this area by a job may be deleted upon completion of the job.
+
+OSG_WN_TMP must point to a POSIX-compliant filesystem that supports links, sockets, locks, pipes and other special files as required. It requires good I/O job performance, so we recommend a local filesystem. Ideally, OSG_WN_TMP should be a temporary directory (or partition) assigned empty for the job, with a well-defined amount of space (many jobs require at least 1-2 GB of disk space), that is purged when the job completes. The space provided should be dedicated and isolated: jobs reusing their own OSG_WN_TMP areas should not affect each other or affect the OS.
+
+In most cases, OSG_WN_TMP points to a space shared among all jobs that are currently executing at the worker node. Therefore, we recommend each job create a unique subdirectory of OSG_WN_TMP (e.g., =OSG_WN_TMP/somestring$JOBSLOT=) that becomes its working area. The job should then remove this subdirectory before it completes,
+
+Sites using _Condor_ as their batch system typically implement this by letting Condor create the jobs directory prior to launching the job. In those cases, OSG_WN_TMP may be defined in the GIP implicitly by pointing to another environment variable, rather than explicitly by pointing to a full path.  
+Other job managers, such as PBS, can implement temporary directories using similar methods.
+
+The typical use is for a working directory for jobs running on the worker nodes.
+
+
+#OsgDefaultSe
+---+++ $OSG_DEFAULT_SE
+A storage element that is close and visible from all the nodes of the CE, both worker and head node. <!-- Usually, it is local to the CE and accessible from outside with the same or a different URL. --> 
+
+The value to be specfied in $OSG_DEFAULT_SE is the full URL, including method, host/port and path of the base dir. This full URL must be reachable from inside as well as outside the cluster. The $OSG_DEFAULT_SE generally supports only put and get, rather than open/read/write/close. 
+
+If the CE has no default SE it can use the value =UNAVAILABLE= for $OSG_DEFAULT_SE. 
+
+%NOTE% The current release supports SRM and gftp for $OSG_DEFAULT_SE.
+
+%ENDSECTION{ "parameters"}%
+
+---++ Execute the configuration script
+Run the following script as root to execute the configuration script.
+
+<pre class="rootscreen">
+> <b>osg-configure</b>
+</pre>
+
+The =osg-configure= script creates the =/var/lib/osg/osg-attributes.conf= file.  The script also creates =/var/lib/osg/osg-job-environment.conf= which duplicates some of the attributes from =/var/lib/osg/osg-attributes.conf= so that they can be placed in the job environment as well as =/var/lib/osg/osg-local-job-environment.conf=. The =/var/lib/osg/osg-local-job-environment.conf= file is to allow site admins to set site specific environment variables that should be present for jobs that are running on the cluster. These files is used by several monitoring services and applications to obtain basic resource configuration information. This file is *required* to be readable from that location for OSG CEs.
+
+
+---++Reconfiguring an Existing OSG Site
+An already installed OSG site can be reconfigured by editing =osg-attributes.conf=, or by rerunning the =osg-configure= script.
+
+<!--From here on down, this is what is left of !UsingLocalStorage wikiword which has been deleted now-->
+
+---++ Storage Types Supported at OSG Sites
+All OSG sites should support the following storage:
+
+%EDITTABLE{ header="| *Name* | *What you can do* | *Notes* |" format="| text | textarea, 2x30 | textarea, 2x30 |" changerows="on" }%
+|*Name*|*Purpose*|*Notes*|
+| =$OSG_APP= | Install application software  | Exported to compute nodes |
+| =$OSG_DATA=  | Stage output files from worker nodes, for later retrieval using Gridftp |  |
+| =$OSG_GRID= | Set of "client tools" that are part of the OSG software stack. | Available from the compute node |
+| =$OSG_WN_TMP<sup>[[#FootOsgWnTmpImplementedPoorly][1]]</sup>= | Temporary storage area in which your job runs  | Local to each worker node |
+
+#FootOsgWnTmpImplementedPoorly
+   1. The standard is to start your job(s) in a dedicated directory on one of the worker node's local disks and configure $OSG_WN_TMP to point to that directory.  However, many OSG sites simply place your jobs on some shared filesystem and expect you to do the following before starting the job: %BR% =export mydir=$OSG_WN_TMP/myWorkDir$RANDOM ; mkdir $mydir ; cd $mydir= %BR% . This is particularly important if your job has significant I/O.
+
+
+---+++ !!Input and Output Files Specified via Condor-G JDL
+Condor-G allows specification of the following:
+
+| =executable= | one file |
+| =output= | one file - stdout | 
+| =error= | one file - stderr |
+| =transfer_input_Files= <sup>[[#ThirdNote][1]]</sup> | comma seperated list of files |
+| =transfer_output_files= <sup>[[#FourthNote][2]]</sup> | comma seperated list of files |
+
+%WARNING% <a name="ThirdNote"></a>Do not use to transfer more than a few megabytes: these files are transfered via the CE headnode and can cause serious loads, which can bring down the cluster. 
+%WARNING% <a name="FourthNote"></a>Do not spool gigabyte-sized files via the CE headnode by Condor file transfer. Space on the headnode tends to be limited, and some sites severely quota the gram scratch area via which these files are spooled. Instead, store them in the dedicated stage-out spaces and pull them from the outside as part of a DAG. 
+
+In the remainder of this NOTE% document we describe how to find your way around these various storage areas both from outside the site before you submit your job, as well as from inside the site after your job starts inside a batch slot.
+
+---+++ !!Finding your way around
+A definition of the concepts used in this document can be found in [[Documentation.StorageOverview][Storage Models]].  This page also indicates which elements each storage model requires.
+
+Here we describe how to find the various storage locations. We start by describing how to find things after your job starts, and then complete the discussion by describing what you can determine from the outside, before you submit a job to the site. We deliberately do not describe what these various storage implementations are.
+
+
+---++ Requirements for Configuring Local Storage
+
+This topic describes how site administrators can define CE local storage paths so that their site will be configured in a way that OSG users expect.
+
+
+Local storage definitions define the paths to the disk spaces or Storage Elements (SEs) that are accessible to jobs from within a OSG Compute Element (CE). <!-- (the same from each jobmanager of that CE: jobs on the headnode using _fork_, jobs on the worker nodes usong _pbs/condor/lsf/..._, multiple gatekeeper added to the same CE for reliability or scalability reasons will have to have the same values). --> These can be set in a variety of ways depending on what you need for your CE and your site configuration. 
+
+This section also covers how these environment variables correspond to external schemas (e.g. GLUE, OSG).
+
+Provide the keyword =UNAVAILABLE= (instead of a path) if your CE does not support a particular CE storage area. This distinguishes CEs that provide support for only certain CE storages from those that simply are not configured.
+
+%NOTE% These values do not refer to any storage space as viewed from outside (e.g., through a Storage Element or !GridFTP server).
+
+<!-- In this document there are some suggestions on how to encourage proper use and deployment (how to make this information available), but in general this is the responsibility of other groups in OSG. -->
+
+
+---+++ !!OSG - LDAP - Glue table
+The following table shows the OSG storage variable name, its associated attribute name in the GLUE Schema 1.2, and a description. 
+
+%NOTE% The same attribute may appear in more than one place in the GLUE Schema.
+
+%EDITTABLE{ format="| text, 25, | text, 50, | text, 30, | textarea, 2x50 |" header="| *OSG variable* | *GLUE attribute* | *Description* |" }% 
+|*OSG variable*|*GLUE attribute*|*Description*|
+| =[[#OSG_GRID][$OSG_GRID]]=  | Location.Path <sup>[[#Foot2Table1][(2)]]</sup> | Read-only area for OSG worker node's client software |
+| =[[#OSG_APP][$OSG_APP]]= | <nop>CE.Info.ApplicationDir (!CE.Info.ApplicationDir) <sup>[[#Foot1Table1][(1)]]</sup> | VO-wide software installations |
+| =[[#OSG_DATA][$OSG_DATA]]= | <nop>CE.Info.DataDir (!CE.VOView.DataDir) <sup>[[#Foot1Table1][(1)]]</sup> | Transient storage shared between jobs executing on the worker nodes |
+| =[[#OSG_SITE_READ][$OSG_SITE_READ]]=  | Location.Path <sup>[[#Foot2Table1][(2)]]</sup> | Transient storage visible from all worker nodes and optimized for high-performance read operations |
+| =[[#OSG_SITE_WRITE][$OSG_SITE_WRITE]]= | Location.Path <sup>[[#Foot2Table1][(2)]]</sup> | Transient storage visible from all worker nodes and optimized for high-performance write operations |
+| =[[#OSG_WN_TMP][$OSG_WN_TMP]]= | CE.Cluster.<nop>WNTmpDir (!CE.SubCluster.WNTmpDir) | Temporary work area that may be purged when the job completes |
+| =[[#OSG_DEFAULT_SE][$OSG_DEFAULT_SE]]= | CE.Info.<nop>DefaultSE (!CE.VOView.DefaultSE) | Storage Element closely related to the CE, only accessible using SE access methods |
+
+   1. <a name="Foot1Table1"></a>GLUE provides the possibility to have multiple values for some of the CE storage, depending on the VO and the Role (VOMS FQAN). These are currently sitewide information within OSG.<br>
+   1. <a name="Foot2Table1"></a>The GLUE Schema does not have an specific attribute for SITE_WRITE or SITE_READ, but it provides the location entity (Name/Version/Path sets) to accommodate additional CE local storage. In order to accommodate that, locations will have to be defined through the GIP:
+      1. !LocalID: GRID+OSG, Name:GRID, Version: OSG, Path: <value of GRID>
+      1. !LocalID: SITE_WRITE+OSG, Name:SITE_WRITE, Version: OSG, Path: <value of SITE_WRITE>
+      1. !LocalID: SITE_READ+OSG, Name:SITE_READ, Version: OSG, Path: <value of SITE_READ>
+
+
+
+#MandatorySetOptions
+---+++ !!Local Storage Configuration Models
+
+Although you are not required to provide all of the OSG storage area definitions, you *must* implement at least one of the [[Documentation.StorageOverview][OSG storage models]]. Providing a wider selection of CE storage areas allows users to select the one that best fits their jobs. It can also allow users to define jobs with inefficient execution models that could reduce the performance of the whole cluster. It's a trade-off.
+
+However, unless there is a very good reason not to, you should provide $OSG_DATA for users since many VOs depend on this being present for their applications to use.
+
+---++++ !!Methods of Deploying CE Storage Definitions
+
+Declaring a storage area to be local to the CE can be done in a variety of ways, including (but not limited to):
+   * Defining environment variables that resolve to the correct path or URL for the storage areas.
+   * Making paths or URLs consistent across the CE (headnodes and WNs), and publishing this using an information provider (e.g. GIP/BDII). Users would  have to do a lookup before submitting the job, so that it can carry the information necessary to use this CE.
+  
+Each CE administrator must ensure the client software will function correctly (i.e., for %LINK_GLOBUS_TOOLKIT%  and %LINK_GLOSSARY_SRM% , access to the user's proxy, gass_cache mechanism) for all jobs running on the CE.  Common practice is to use a shared $HOME directory, but you can use other mechanisms as long as they are transparent to the users, who should not have any assumptions about the CE that differ from what is stated here. It is unsafe to make assumptions about the existence and characteristics (size, being shared, etc.) of the =$HOME= directory. In particular, site administrators are free to deploy configurations that do not include any NFS exports from the CE, such as those described in [[http://osg-docdb.opensciencegrid.org/cgi-bin/ShowDocument?docid=382][OSG document 382]].
+
+
+%BR%
+
+<!--
+ Main.MarcoMambelli - 11 Nov 2005 %BR%
+ Main.FkW - 25 Apr 2006 %BR%
+ Main.RobQ - 01 May 2006 %BR%
+ Main.ForrestChristian - 06 Nov 2006 (editing only) %BR%
+ Main.ForrestChristian - 10 Nov 2006  %BR%
+ Main.StevenTimm - 19 Oct 2007  Merged !LocalStorageRequirements and !UsingLocalStorage in%BR%
+-->
+
+
+
+---++ *Comments*
+%COMMENT{type="tableappend"}%
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = DouglasStrain
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = HorstSeverini
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+############################################################################################################
+-->
+
+
+
+
+-- Main.DouglasStrain - 11 Oct 2011

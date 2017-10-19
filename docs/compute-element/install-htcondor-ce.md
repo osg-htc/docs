@@ -94,15 +94,15 @@ Non-HTCondor batch systems require additional configuration to support file tran
 
 ##### Sharing the spool directory
 
-To transfer files between the CE and the batch system, HTCondor-CE requires a shared file system. The current recommendation is to run a dedicated NFS server (whose installation is beyond the scope of this document) on the **CE host**. In this setup, HTCondor-CE writes to the local spool directory and the NFS server shares the directory with all of the worker nodes.
+To transfer files between the CE and the batch system, HTCondor-CE requires a shared file system. The current recommendation is to run a dedicated NFS server (whose installation is beyond the scope of this document) on the **CE host**. In this setup, HTCondor-CE writes to the local spool directory, the NFS server shares the directory, and each worker node mounts the directory in the same location as on the CE. For example, if your spool directory is `/var/lib/condor-ce` (the default), you must mount the shared directory to `/var/lib/condor-ce` on the worker nodes.
 
 !!! note
     If you choose not to host the NFS server on your CE, you will need to turn off root squash so that the HTCondor-CE daemons can write to the spool directory.
 
-By default, the spool directory is `/var/lib/condor-ce` but you can control this by setting `SPOOL` in `/etc/condor-ce/config.d/99-local.conf` (create this file if it doesn't exist). For example, the following sets the `SPOOL` directory to `/home/condor`:
+You can control the value of the spool directory by setting `SPOOL` in `/etc/condor-ce/config.d/99-local.conf` (create this file if it doesn't exist). For example, the following sets the `SPOOL` directory to `/home/condor`:
 
 ``` file
-SPOOL=/home/condor
+SPOOL = /home/condor
 ```
 
 !!! note
