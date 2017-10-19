@@ -31,11 +31,16 @@ This document doesn't cover requirements for the GOC computers since those are a
 
 `/srv/cvmfs` will hold all the published data, so make sure it is large enough to hold all the repositories hosted on the machine. `/var/spool/cvmfs` will hold files during publish, so it should be large enough to hold the most amount of data that might be attempted to be published at once. In addition, on EL7 and cvmfs-server-2.4.1, `/var/spool/cvmfs` needs to be of filesystem type 'ext3' or 'ext4', or the `cvmfs_server` command will not allow it. There is a variable to override the filesystem type check, but other filesystem types are not guaranteed to work (xfs created with `ftype=1` should work with `CVMFS_DONT_CHECK_OVERLAYFS_VERSION=yes`).
 
-This is a procedure for installing it on a Redhat EL6-based system:
+As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
+
+- Ensure the host has [a supported operating system](../release/supported_platforms)
+- Obtain root access to the host
+- Prepare the [required Yum repositories](../common/yum)
+
+This is the procedure for installing on a Redhat EL6-based system:
 
 ``` console
 root@host # rpm -i https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm 
-root@host # rpm -i https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm 
 root@host # yum install --enablerepo=cernvm-kernel --disablerepo=cernvm kernel aufs2-util cvmfs-server.x86_64 cvmfs.x86_64 cvmfs-config-osg 
 root@host # echo "cvmfs_server mount -a" >>/etc/rc.local 
 root@host # reboot
@@ -44,7 +49,6 @@ root@host # reboot
 This is the procedure for installing on a Redhat EL7-based system:
 
 ``` console
-root@host # rpm -i https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm 
 root@host # yum install cvmfs-server.x86_64 osg-oasis 
 root@host # echo "cvmfs_server mount -a" >>/etc/rc.local
 root@host # chmod +x /etc/rc.local
