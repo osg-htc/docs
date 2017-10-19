@@ -49,7 +49,7 @@ root@host # reboot
 This is the procedure for installing on a Redhat EL7-based system:
 
 ``` console
-root@host # yum install cvmfs-server.x86_64 osg-oasis 
+root@host # yum install cvmfs-server osg-oasis 
 root@host # echo "cvmfs_server mount -a" >>/etc/rc.local
 root@host # chmod +x /etc/rc.local
 ```
