@@ -274,8 +274,6 @@
     
         <ul>
         
-            <li><a class="toctree-l4" href="#about-this-guide">About This Guide</a></li>
-        
             <li><a class="toctree-l4" href="#installing-the-lcmaps-voms-plugin">Installing the LCMAPS VOMS Plugin</a></li>
         
             <li><a class="toctree-l4" href="#configuring-the-lcmaps-voms-plugin">Configuring the LCMAPS VOMS Plugin</a></li>
@@ -781,8 +779,7 @@
             <div class="section">
               
                 <h1 id="installing-and-maintaining-the-lcmaps-voms-plugin">Installing and Maintaining the LCMAPS VOMS Plugin<a class="headerlink" href="#installing-and-maintaining-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h1>
-<h2 id="about-this-guide">About This Guide<a class="headerlink" href="#about-this-guide" title="Permanent link">&para;</a></h2>
-<p>LCMAPS is a software library for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., <code>/cms/Role=production/Capability=NULL</code>. Starting in OSG 3.4, the LCMAPS VOMS plugin will replace GUMS and edg-mkgridmap as the authentication method at OSG sites.</p>
+<p>LCMAPS is a software library used on <a href="../../compute-element/install-htcondor-ce">HTCondor-CE</a>, <a href="../../data/gridftp">GridFTP</a>, or <a href="../../data/install-xrootd">XRootD</a> hosts for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., <code>/cms/Role=production/Capability=NULL</code>. Starting in OSG 3.4, the LCMAPS VOMS plugin will replace GUMS and edg-mkgridmap as the authentication method at OSG sites.</p>
 <p>The OSG provides a default set of mappings from VOMS attributes to Unix accounts. By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to, banning based on VOMS attributes, banning a specific user, or adding a VO, VO group, VO role, and/or user that is not in the OSG's set of mappings.</p>
 <p>Use this page to learn how to install and configure the LCMAPS VOMS plugin to authenticate users to access your resources on a per-VO basis.</p>
 <h2 id="installing-the-lcmaps-voms-plugin">Installing the LCMAPS VOMS Plugin<a class="headerlink" href="#installing-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h2>
@@ -826,7 +823,7 @@
 
 
 <p>If the <code>glexec_location</code> option is present, you must comment it out or set it to <code>UNAVAILABLE</code>.
-The LCMAPS VOMS plugin does not work with glExec.</p>
+The LCMAPS VOMS plugin does not work with gLExec.</p>
 <h3 id="supporting-mapped-vos-and-users">Supporting mapped VOs and users<a class="headerlink" href="#supporting-mapped-vos-and-users" title="Permanent link">&para;</a></h3>
 <p>Unix accounts must exist for each VO, VO role, VO group, or user you choose to support in the <a href="#configuration-files">mapfiles</a>:</p>
 <ol>
@@ -923,14 +920,14 @@ The LCMAPS VOMS plugin does not work with glExec.</p>
 <p>If you are converting an HTCondor-CE host, remove the HTCondor-CE <code>GRIDMAP</code> configuration. Otherwise, skip to the next step.</p>
 <ol>
 <li>
-<p>Find the location of this configuration using the following command:</p>
+<p>Find where <code>GRIDMAP</code> is set:</p>
 <div class="codehilite"><pre><span></span><span class="gp">[root@ce]#</span> condor_ce_config_val -v GRIDMAP
 </pre></div>
 
 
 </li>
 <li>
-<p>Delete the line that sets the <code>GRIDMAP</code> configuration variable</p>
+<p>If the above command returns <code>Not defined: GRIDMAP</code>, skip to step 4. Otherwise, delete the line that sets the <code>GRIDMAP</code> configuration variable</p>
 </li>
 <li>Reconfigure HTCondor-CE:<div class="codehilite"><pre><span></span><span class="gp">[root@ce]#</span> condor_ce_reconfig
 </pre></div>
