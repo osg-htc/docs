@@ -213,14 +213,15 @@ Each non-commented line is a shell-style pattern which is compared against a use
 
 ### Mapping using all FQANs
 
-By default, the LCMAPS VOMS plugin only considers for mapping the first FQAN of a VOMS proxy. This behavior matches what GUMS does. If you want to consider all FQANs, you must set the appropriate option.
+By default, the LCMAPS VOMS plugin only considers the first FQAN of a VOMS proxy for mapping. This matches the behavior of GUMS. If you want to consider all FQANs, you must set the appropriate option.
 
 -   If you are using osg-configure, set `all_fqans = True` in `10-misc.ini`, then run `osg-configure -c`
 
+    !!! note
+        If you are using OSG 3.3, osg-configure should be at least version 1.10.2.  If you are using OSG 3.4, osg-configure should be at least version 2.2.2.
+
 -   If you are configuring `lcmaps.db` manually (see [manual configuration](#manual-configuration) below), add `"-all-fqans"` to the module definitions for `vomsmapfile` and `defaultmapfile`
 
-!!! note
-    If you are using OSG 3.3, osg-configure should be at least version 1.10.2.  If you are using OSG 3.4, osg-configure should be at least version 2.2.2.
 
 
 
