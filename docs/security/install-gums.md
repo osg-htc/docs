@@ -327,7 +327,7 @@ This step does **not** update your GUMS configuration (`/etc/gums/gums.config`) 
 
     For the template provided in the RPM, use: `file:///etc/gums/gums.config.template`
 
-    To fetch it directly from the GOC, use `http://repo.grid.iu.edu/pacman/tarballs/vo-version/gums.template`
+    To fetch it directly from the GOC, use `http://repo.opensciencegrid.org/pacman/tarballs/vo-version/gums.template`
 
 3.  Click Merge
 

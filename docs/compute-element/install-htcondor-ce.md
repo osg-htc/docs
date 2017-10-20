@@ -94,15 +94,15 @@ Non-HTCondor batch systems require additional configuration to support file tran
 
 ##### Sharing the spool directory
 
-To transfer files between the CE and the batch system, HTCondor-CE requires a shared file system. The current recommendation is to run a dedicated NFS server (whose installation is beyond the scope of this document) on the **CE host**. In this setup, HTCondor-CE writes to the local spool directory and the NFS server shares the directory with all of the worker nodes.
+To transfer files between the CE and the batch system, HTCondor-CE requires a shared file system. The current recommendation is to run a dedicated NFS server (whose installation is beyond the scope of this document) on the **CE host**. In this setup, HTCondor-CE writes to the local spool directory, the NFS server shares the directory, and each worker node mounts the directory in the same location as on the CE. For example, if your spool directory is `/var/lib/condor-ce` (the default), you must mount the shared directory to `/var/lib/condor-ce` on the worker nodes.
 
 !!! note
     If you choose not to host the NFS server on your CE, you will need to turn off root squash so that the HTCondor-CE daemons can write to the spool directory.
 
-By default, the spool directory is `/var/lib/condor-ce` but you can control this by setting `SPOOL` in `/etc/condor-ce/config.d/99-local.conf` (create this file if it doesn't exist). For example, the following sets the `SPOOL` directory to `/home/condor`:
+You can control the value of the spool directory by setting `SPOOL` in `/etc/condor-ce/config.d/99-local.conf` (create this file if it doesn't exist). For example, the following sets the `SPOOL` directory to `/home/condor`:
 
 ``` file
-SPOOL=/home/condor
+SPOOL = /home/condor
 ```
 
 !!! note
@@ -381,8 +381,8 @@ Registering the CE
 
 To be part of the OSG Production Grid, your CE must be registered in the [OSG Information Management System](https://oim.opensciencegrid.org) (OIM). To register your resource:
 
-1.  [Obtain, install, and verify your user certificate](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CertificateUserGet) (which you may have done already)
-2.  [Register your site and CE in OIM](https://twiki.grid.iu.edu/bin/view/Operations/OIMRegistrationInstructions)
+1.  [Obtain, install, and verify your user certificate](../security/user-certs) (which you may have done already)
+2.  [Register your site and CE in OIM](https://twiki.opensciencegrid.org/bin/view/Operations/OIMRegistrationInstructions)
 
 Getting Help
 ------------
@@ -430,7 +430,7 @@ The following users are needed by HTCondor-CE at all sites:
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` |
 | Host key         | `root`                     | `/etc/grid-security/hostkey.pem`  |
 
-Find instructions to request a host certificate [here](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/GetHostServiceCertificates).
+Find instructions to request a host certificate [here](../security/host-certs).
 
 ### Networking
 

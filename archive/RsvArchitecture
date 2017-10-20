@@ -1,0 +1,97 @@
+---+ !RSV Architecture
+%DOC_STATUS_TABLE%
+The !RSV architecture can be divided into two portions: the site, and the GOC. Both are illustrated in the picture below.
+
+<center><img src="%ATTACHURLPATH%/rsv-architecture.png" alt="rsv-architecture.png"/></center>
+
+---++ !RSV at the site
+
+!RSV runs on a single computer at a site. People commonly run it on their CE, but it can be a separate computer. 
+
+At the site, !RSV can be conceptually divided into three pieces:
+
+   1. A set of _metrics_, each of which tests some functionality at the site. For example, a single metric might verify that a file can be transferred via !GridFTP, or that a single fork job can be run. In general, !RSV can query anything at your site, but most of the metrics focus on the CE or SE. 
+   1. A set of _consumers_, which take the test results and publish them in some way--perhaps to a web site, to the GOC, or to another monitoring system like Nagios.
+   1. A mechanism to run the metrics periodically. You can think of this being like cron, but we use _Condor Cron_. [[RsvPrinciples][Why do we use Condor Cron?]]
+
+The individual metrics are what you'll see most. If you look at the !RSV results at a site, you'll usually look at a web page (created by the _HTML consumer_), which lists each metric and what happened after it ran. Metrics on the HTML page will be in one of six states:
+
+   1. _Success_: The metric ran successfully
+   1. _Warning_: The metric produced one or more some warnings
+   1. _Critical_: The metric failed
+   1. _Unknown_: The metric produced an unknown result. This usually means that the metric can't determine what happened.
+   1. _Old_: The metric is enabled, but it has not run for more than 24 hours
+   1. _No data_: The metric is enabled, but there is no data available yet. It probably has never run.
+
+You can also see details of what happened when the metric ran, error messages and the like. 
+
+You might sometimes hear the term _probe_. Historically it has been used interchangeably with the term _metric_, but it has a slightly different meaning. A probe is an executable file that contains one or more metrics. We prefer the term _metric_ when it's appropriate.
+
+One of the consumers is called the _Gratia consumer_. This is the consumer that collects the !RSV results and sends them to the GOC. It happens to use the same underlying transport mechanism as the Gratia accounting system, hence the name. However, the accounting data is entirely distinct from the !RSV data. 
+
+---++ !RSV at the GOC
+
+At the GOC, there is a Gratia collector which consumes the !RSV results from OSG sites. The information is then processed in a couple of ways. 
+
+   1. For sites that participate in the WLCG, site availability is calculated and shared with the rest of WLCG.
+   1. The !RSV results are made available to the [[http://myosg.grid.iu.edu][MyOSG]] web site, which lets users query information about the sites.  
+
+The GOC also runs some !RSV metrics (not shown in the diagram above), to monitor services that are not at sites. For example, some CA certificates, CA CRLs, and VOMS servers are monitored.
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = AlainRoy
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Monitoring
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Knowledge
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = MarcoMambelli
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->
+

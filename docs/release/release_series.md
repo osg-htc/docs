@@ -16,7 +16,7 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
 
 -   **OSG 3.2** started in November 2013, and was end-of-lifed in August 2016. While the files have not been removed, it is strongly recommended that it not be installed anymore. The main differences between it and 3.1 were the introduction of glideinWMS 3.2, HTCondor 8.0, and Hadoop/HDFS 2.0; also the gLite CE Monitor system was dropped in favor of osg-info-services.
 
--   **OSG 3.3** started in August 2015 and is still supported today.  End-of-support is scheduled for June 2018; sites are encouraged to investigate the upgrade to OSG 3.4. The main differences between 3.3 and 3.2 are the dropping of EL5 support, the addition of EL7 support, and the dropping of Globus GRAM support.
+-   **OSG 3.3** started in August 2015 and is still supported today.  End-of-support is scheduled for May 2018; sites are encouraged to investigate the upgrade to OSG 3.4. The main differences between 3.3 and 3.2 are the dropping of EL5 support, the addition of EL7 support, and the dropping of Globus GRAM support.
 
 -   **OSG 3.4** stared June 2017. The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server packages.
 
@@ -51,10 +51,10 @@ Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4
 
     | Series                    | EL5 URL (for RHEL5, CentOS5, or SL5)                             | EL6 URL (for RHEL6, CentOS6, or SL6)                             | EL7 URL (for RHEL7, CentOS7, or SL7)                             |
     |:--------------------------|:-----------------------------------------------------------------|:-----------------------------------------------------------------|:-----------------------------------------------------------------|
-    | **OSG 3.1** (unsupported) | `http://repo.grid.iu.edu/osg/3.1/osg-3.1-el5-release-latest.rpm` | `http://repo.grid.iu.edu/osg/3.1/osg-3.1-el6-release-latest.rpm` | N/A                                                              |
-    | **OSG 3.2** (unsupported) | `http://repo.grid.iu.edu/osg/3.2/osg-3.2-el5-release-latest.rpm` | `http://repo.grid.iu.edu/osg/3.2/osg-3.2-el6-release-latest.rpm` | N/A                                                              |
-    | **OSG 3.3**               | N/A                                                              | `http://repo.grid.iu.edu/osg/3.3/osg-3.3-el6-release-latest.rpm` | `http://repo.grid.iu.edu/osg/3.3/osg-3.3-el7-release-latest.rpm` |
-    | **OSG 3.4**               | N/A                                                              | `http://repo.grid.iu.edu/osg/3.4/osg-3.4-el6-release-latest.rpm` | `http://repo.grid.iu.edu/osg/3.4/osg-3.4-el7-release-latest.rpm` |
+    | **OSG 3.1** (unsupported) | `http://repo.opensciencegrid.org/osg/3.1/osg-3.1-el5-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.1/osg-3.1-el6-release-latest.rpm` | N/A                                                              |
+    | **OSG 3.2** (unsupported) | `http://repo.opensciencegrid.org/osg/3.2/osg-3.2-el5-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.2/osg-3.2-el6-release-latest.rpm` | N/A                                                              |
+    | **OSG 3.3**               | N/A                                                              | `http://repo.opensciencegrid.org/osg/3.3/osg-3.3-el6-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.3/osg-3.3-el7-release-latest.rpm` |
+    | **OSG 3.4**               | N/A                                                              | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm` |
 
 3.  Clean yum cache:
 

@@ -1,6 +1,9 @@
 Install VOMS
 =================
 
+!!! warning
+    As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of May 2018.
+
 This document is for VO System Administrators.
 
 Here we describe how to install and configure VOMS on your Linux machine. When you install VOMS as described here, you get all three parts: MySQL database, VOMS admin and VOMS server. Instructions for creating your VO are also on this page, in the configuration section.
@@ -41,7 +44,7 @@ The VOMS and voms-admin installation will create two users unless they are alrea
 | `voms`                                                                                                         | none                                                                                                                  | Runs the VOMS daemons, one per VO.                                                                                |
 | `tomcat`                                                                                                       | 91                                                                                                                    | Runs tomcat6 and owns voms-admin configuration and certificates.                                                  |
 
-Note that if uid 91ise already taken but not used for the tomcat user, you will experience errors. [Details...](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/KnownProblems#Reserved_user_ids_especially_for)
+Note that if uid 91 is already taken but not used for the tomcat user, you will experience errors. [Details...](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/KnownProblems#Reserved_user_ids_especially_for)
 
 Certificates 
 ------------------------------------------------------
@@ -480,7 +483,7 @@ For example, for the VO named `test1` hosted on `fermicloud002`, the LSC file na
 
 The VOMS server manager must distribute the line for `/etc/vomses` and the LSC file to all hosts that will contact the VOMS server. OSG distributes with all its client and server installations a default list of VOMS servers (`/etc/vomses`) and a default set of LSC files. These are part of the `vo-client` RPM.
 
-To be included, use the VO Registration function at [OIM VO Registration](https://oim.grid.iu.edu/oim/vo). Even if you are already registered as a VO you need to notify the Grid Operations Center if the information in the vomses file or the LSC file has changed.
+To be included, use the VO Registration function at [OIM VO Registration](https://oim.opensciencegrid.org/oim/vo). Even if you are already registered as a VO you need to notify the Grid Operations Center if the information in the vomses file or the LSC file has changed.
 
 Test
 =========

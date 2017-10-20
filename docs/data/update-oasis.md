@@ -53,11 +53,9 @@ Host oasis-login.opensciencegrid.org
 
 Once you log in, you can add/modify/remove content on a staging area at `/stage/oasis/$VO` where $VO is the name of the VO represented by the manager.
 
-Files here are visible to both `oasis-login` and the Stratum 0 server (oasis.opensciencegrid.org)
+Files here are visible to both `oasis-login` and the Stratum 0 server (oasis.opensciencegrid.org).  There is a symbolic link at `/cvmfs/oasis.opensciencegrid.org/$VO` that points to the same staging area.  
 
-NOTE that `/stage/oasis/$VO` is not your home directory, which you can use for staging purposes but is not visible in OASIS.
-
-As OASIS manager for the VO requests an oasis update with:
+Request an oasis publish with this command:
 
 ``` console
 user@host $ osg-oasis-update

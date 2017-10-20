@@ -1,15 +1,15 @@
 site_name: OSG Documentation
 site_url: https://opensciencegrid.github.io/docs
 repo_url: https://github.com/opensciencegrid/docs
-theme: readthedocs
-theme_dir: osgthedocs
+theme:
+  name: readthedocs
+  custom_dir: osgthedocs
 
 extra_css:
   - css/extra.css
 
 pages:
 - Home: 'index.md'
-- Installation Overview: 'install-overview.md'
 - Site Planning: 'site-planning.md'
 - Install Guides - Common:
   - 'Install Best Practices': 'common/install-best-practices.md'
@@ -62,7 +62,6 @@ pages:
   - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
   - 'Network Performance Toolkit': 'other/network-performance-toolkit.md'
 - Monitoring:
-  - 'RSV Overview': 'monitoring/rsv-overview.md'
   - 'Install RSV': 'monitoring/install-rsv.md'
   - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
   - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
@@ -72,7 +71,6 @@ pages:
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
   - 'Worker Node Environment': 'worker-node/using-wn.md'
 - Deprecated Software:
-  - 'BeStMan Overview': 'data/bestman-overview.md'
   - 'BeStMan Install': 'data/bestman-install.md'
   - 'BeStMan Xrootd SE': 'data/install-bestman-xrootd.md'
   - 'EDG-Mkgridmap Install': 'security/edg-mkgridmap.md'

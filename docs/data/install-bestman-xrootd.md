@@ -1,6 +1,9 @@
 Install Bestman Xrootd SE
 =========================
 
+!!! warning
+    As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of May 2018.
+
 About this Document
 ===================
 
@@ -163,7 +166,7 @@ If you want to enable security for access to xrootd via xrootdfs you will need t
 
 6. Copy %RED%keyfile<span class="twiki-macro ENDCOLOR"></span> from redirector node to every data server node and the xrootdfs node. Make sure that this file is owned by the `xrootd` user.
 
-7. Restart xrootd cluster by following [these instructions](https://twiki.grid.iu.edu/bin/view/SoftwareTeam/HowToInstallXrootd)
+7. Restart xrootd cluster by following [these instructions](https://twiki.opensciencegrid.org/bin/view/SoftwareTeam/HowToInstallXrootd)
 8. On xroodfs node execute mount:
 
         :::console
@@ -231,7 +234,7 @@ How to get Help?
 
 If you cannot resolve the problem, there are several ways to receive help:
 
--   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.grid.iu.edu/goc).
+-   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.opensciencegrid.org/goc).
 
 For a full set of help options, see [Help Procedure](../common/help.md).
 

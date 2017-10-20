@@ -9,7 +9,7 @@ This document introduces YUM repositories and how OSG uses them.
 Repositories
 ------------
 
-OSG hosts four public-facing repositories at [repo.grid.iu.edu](http://repo.grid.iu.edu/):
+OSG hosts four public-facing repositories at [repo.opensciencegrid.org](http://repo.opensciencegrid.org/):
 
 -   **release**: This repository contains software that we are willing to support and can be used by the general community.
 -   **contrib**: RPMs contributed from outside the OSG.
@@ -92,21 +92,22 @@ Where `<URL>` is one of the following:
 
 | Series      |              EL6 URL (for RHEL 6, CentOS 6, or SL 6)              |              EL7 URL (for RHEL 7, CentOS 7, or SL 7)              |
 |:------------|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|
-| **OSG 3.3** | `https://repo.grid.iu.edu/osg/3.3/osg-3.3-el6-release-latest.rpm` | `https://repo.grid.iu.edu/osg/3.3/osg-3.3-el7-release-latest.rpm` |
-| **OSG 3.4** | `https://repo.grid.iu.edu/osg/3.4/osg-3.4-el6-release-latest.rpm` | `https://repo.grid.iu.edu/osg/3.4/osg-3.4-el7-release-latest.rpm` |
+| **OSG 3.3** | `https://repo.opensciencegrid.org/osg/3.3/osg-3.3-el6-release-latest.rpm` | `https://repo.opensciencegrid.org/osg/3.3/osg-3.3-el7-release-latest.rpm` |
+| **OSG 3.4** | `https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm` | `https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm` |
 
 Priorities
 ----------
 
-<span class="twiki-macro NOTE"></span> Make sure you installed the Yum priorities plugin, as described above. Not doing so is a common mistake that causes failed installations.
+!!! note
+    Make sure you installed the Yum priorities plugin, as described above. Not doing so is a common mistake that causes failed installations.
 
 The only OSG repository enabled by default is the release one. If you want to enable another one, such as `osg-testing`, then edit its file (e.g. `/etc/yum.repos.d/osg-testing.repo`) and change the enabled option from 0 to 1:
 
 ``` file
 [osg-testing]
-name=OSG Software for Enterprise Linux 5 - Testing - $basearch
-#baseurl=http://repo.grid.iu.edu/osg/3.2/el5/testing/$basearch
-mirrorlist=http://repo.grid.iu.edu/mirror/osg/3.2/el5/testing/$basearch
+name=OSG Software for Enterprise Linux 7 - Testing - $basearch
+#baseurl=http://repo.grid.iu.edu/osg/3.4/el7/testing/$basearch
+mirrorlist=http://repo.grid.iu.edu/mirror/osg/3.4/el7/testing/$basearch
 failovermethod=priority
 priority=98
 enabled=%RED%1%ENDCOLOR%

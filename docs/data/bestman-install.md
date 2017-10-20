@@ -2,7 +2,7 @@ Installing BeStMan
 ==================
 
 !!! warning
-    As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of June 2018.
+    As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of May 2018.
 
 About this Document
 ====================
@@ -72,7 +72,7 @@ Please answer following questions before you proceed with installation and confi
 
 Q. *What authorization mechanism should I use?*
 
-Decide between a [grid-mapfile](../security/edg-mkgridmap) or a [GUMS](../security/install-gums) server for authorization.  Both mechanisms are deprecated with a planned removal by June 2018.  The replacement mechanism, however, does not work with `bestman2`.
+Decide between a [grid-mapfile](../security/edg-mkgridmap) or a [GUMS](../security/install-gums) server for authorization.  Both mechanisms are deprecated with a planned removal by May 2018.  The replacement mechanism, however, does not work with `bestman2`.
 
 Q. *How many GridFTP servers will I need?*
 
@@ -86,7 +86,7 @@ We recommend approximately one GridFTP server for each 8Gbps of desired utilized
 
 Q. *Do I need to change default configuration of Gridftp server?*
 
-Yes, you may want to do this if the node on which GridFTP server will be installed has multiple network interfaces. Read [this section](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallOSGGridFTP#ConfigMultiHomed) for more details.
+Yes, you may want to do this if the node on which GridFTP server will be installed has multiple network interfaces. Read [this section](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallOSGGridFTP#ConfigMultiHomed) for more details.
 
 Q. *Do you need to enable Gratia gridftp-transfer probes?*   
 The Gratia gridftp-transfer probes provide OSG storage statistics for accounting purposes. The reports include the source and destination of transfers, certificate subject of transfer initiator, as well as the size and status of the transferred file. The probe needs to be installed on every GridFTP server.
@@ -456,7 +456,7 @@ How to get Help?
 
 If you cannot resolve the problem, there are several ways to receive help:
 
--   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.grid.iu.edu/goc).
+-   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.opensciencegrid.org/goc).
 -   For community support and best-effort software team support contact <osg-software@opensciencegrid.org>.
 
 For a full set of help options, see the [Help Procedure](../common/help).
@@ -464,9 +464,9 @@ For a full set of help options, see the [Help Procedure](../common/help).
 References
 ==========
 
-* [Storage infrastructure software](https://twiki.grid.iu.edu/bin/view/Documentation/StorageInfrastructureSoftware)
-* [Information on planning, installing and validating storage software](https://twiki.grid.iu.edu/bin/view/Documentation/StorageSiteAdministrator)
-* [Tips and FAQ](https://twiki.grid.iu.edu/bin/view/Storage/SEToolsTipsFAQs)
+* [Storage infrastructure software](https://twiki.opensciencegrid.org/bin/view/Documentation/StorageInfrastructureSoftware)
+* [Information on planning, installing and validating storage software](https://twiki.opensciencegrid.org/bin/view/Documentation/StorageSiteAdministrator)
+* [Tips and FAQ](https://twiki.opensciencegrid.org/bin/view/Storage/SEToolsTipsFAQs)
 * [OSG Gratia Transfer Probe page](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GratiaTransferProbe)
 * [SRM v2.2 LBNL client command line examples](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/LbnlSrmClient)
 * [SRM-Tester](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SrmTester)

@@ -61,7 +61,7 @@ The Glidein WMS Frontend installation will create the following users unless the
 | `frontend` | none        | This user runs the glideinWMS VO frontend. It also owns the credentials forwarded to the factory to use for the glideins.      |
 | `gratia`   | none        | Runs the Gratia probes to collect accounting data (optional see [the Gratia section below](#adding-gratia-accounting-and-a-local-monitoring-page-on-a-production-server)) |
 
-Note that if uid 48 is already taken but not used for the appropriate users, you will experience errors. [Details...](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/KnownProblems#Reserved_user_ids_especially_for)
+Note that if uid 48 is already taken but not used for the appropriate users, you will experience errors. [Details...](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/KnownProblems#Reserved_user_ids_especially_for)
 
 Credentials and Proxies
 -----------------------
@@ -233,38 +233,6 @@ root@host # service condor restart
     1. remove from **`/etc/gwms-frontend/frontend.xml`** the second schedd (the line containing **`schedd_jobs2@YOUR_HOST`**)
     2. reconfigure the frontend (`service gwms-frontend reconfig`)
     3. restart HTCondor (`service condor restart`)
-
-#### Upgrading glideinwms-frontend from v2 series to v3 series
-
-Due to incompatibilities between the major versions, upgrade process involves certain steps. Following instructions apply when upgrading glideinwms-frontend from a v2 series (example: v2.7.x) to a v3 series (v3.2.x)
-
-- Update the RPMs and backup configuration files
-
-``` console
-%RED%# Stop the glideinwms-vofrontend service%ENDCOLOR%
-root@host # service gwms-frontend stop
-
-%RED%# Backup the v2.7.x configuration%ENDCOLOR%
-root@host # cp /var/lib/gwms-frontend/vofrontend/frontend.xml /var/lib/gwms-frontend/vofrontend/frontend-2.xml
-root@host # cp /etc/gwms-frontend/frontend.xml /etc/gwms-frontend/frontend-2.xml
-
-%RED%# Update the glideinwms-vofrontend packages from v2.7.x to v3.2.x%ENDCOLOR%
-root@host # yum update glideinwms\*
-```
-
-- Convert v2.7.x configuration to v3.2.x configuration (only for RHEL 6, CentOS 6, and SL6. RHEL5 and drivative are not supported by v3.2.x, RHEL7 and derivative were not supported by v2.7.x)
-
-``` console
-root@host #  /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /var/lib/gwms-frontend/vofrontend/frontend-2.xml -o /var/lib/gwms-frontend/vofrontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
-root@host #  /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /etc/gwms-frontend/frontend-2.xml -o /etc/gwms-frontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
-```
-
--   Update the scripts in the working directory
-
-``` console
-%RED%# Update the scripts in the working directory to the latest one%ENDCOLOR%
-root@host #  service gwms-frontend upgrade
-```
 
 Configuration Procedure
 =======================
@@ -968,7 +936,7 @@ References
 Definitions:
 
 -   What is a [Virtual Organisation](https://www.opensciencegrid.org/about/organization/)
--   [Introduction to the Grid for users/scientists](http://twiki.grid.iu.edu/bin/view/Documentation/UsingTheGrid)
+-   [Introduction to the Grid for users/scientists](http://twiki.opensciencegrid.org/bin/view/Documentation/UsingTheGrid)
 
 Documents about the Glidein-WMS system and the VO frontend:
 
