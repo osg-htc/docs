@@ -129,7 +129,7 @@ A **Storage Element** provides grid users the possibility to read and write larg
 
 There are two types of storage element services provided by OSG which implement SRM v2. See pointers to instructions for these services:
 
--   [BeStMan](data/bestman-overview) - Sits in front of any POSIX filesystem. There is also a version which supports xrootd filesystems.
+-   [BeStMan](data/bestman-install) - Sits in front of any POSIX filesystem. There is also a version which supports xrootd filesystems.
 -   [Hadoop](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoop200SE) - Map-reduce based solution to aggregate off-the-shelf disks into a scalable reliable system.
 
 An SE must run correctly configured Grid Information Providers, Gratia accounting and RSV probes.
