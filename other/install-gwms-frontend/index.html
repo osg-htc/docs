@@ -550,12 +550,6 @@
         <li class="">
           
   
-    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
-  
-        </li>
-        <li class="">
-          
-  
     <a class="" href="../../data/bestman-install/">BeStMan Install</a>
   
         </li>
@@ -1115,39 +1109,6 @@
 <li>restart HTCondor (<code>service condor restart</code>)</li>
 </ol>
 </div>
-<h4 id="upgrading-glideinwms-frontend-from-v2-series-to-v3-series">Upgrading glideinwms-frontend from v2 series to v3 series<a class="headerlink" href="#upgrading-glideinwms-frontend-from-v2-series-to-v3-series" title="Permanent link">&para;</a></h4>
-<p>Due to incompatibilities between the major versions, upgrade process involves certain steps. Following instructions apply when upgrading glideinwms-frontend from a v2 series (example: v2.7.x) to a v3 series (v3.2.x)</p>
-<ul>
-<li>Update the RPMs and backup configuration files</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="gp">%</span>RED%# Stop the glideinwms-vofrontend service</span>
-<span class="gp">root@host #</span> service gwms-frontend stop
-
-<span class="gp">%</span>RED%# Backup the v2.7.x configuration</span>
-<span class="gp">root@host #</span> cp /var/lib/gwms-frontend/vofrontend/frontend.xml /var/lib/gwms-frontend/vofrontend/frontend-2.xml
-<span class="gp">root@host #</span> cp /etc/gwms-frontend/frontend.xml /etc/gwms-frontend/frontend-2.xml
-
-<span class="gp">%</span>RED%# Update the glideinwms-vofrontend packages from v2.7.x to v3.2.x</span>
-<span class="gp">root@host #</span> yum update glideinwms<span class="se">\*</span>
-</pre></div>
-
-
-<ul>
-<li>Convert v2.7.x configuration to v3.2.x configuration (only for RHEL 6, CentOS 6, and SL6. RHEL5 and drivative are not supported by v3.2.x, RHEL7 and derivative were not supported by v2.7.x)</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span>  /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /var/lib/gwms-frontend/vofrontend/frontend-2.xml -o /var/lib/gwms-frontend/vofrontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
-<span class="gp">root@host #</span>  /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /etc/gwms-frontend/frontend-2.xml -o /etc/gwms-frontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
-</pre></div>
-
-
-<ul>
-<li>Update the scripts in the working directory</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="gp">%</span>RED%# Update the scripts in the working directory to the latest one</span>
-<span class="gp">root@host #</span>  service gwms-frontend upgrade
-</pre></div>
-
-
 <h1 id="configuration-procedure">Configuration Procedure<a class="headerlink" href="#configuration-procedure" title="Permanent link">&para;</a></h1>
 <p>After installing the RPM, you need to configure the components of the glideinWMS VO Frontend:</p>
 <ol>

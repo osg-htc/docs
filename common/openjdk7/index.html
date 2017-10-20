@@ -457,12 +457,6 @@
         <li class="">
           
   
-    <a class="" href="../../data/bestman-overview/">BeStMan Overview</a>
-  
-        </li>
-        <li class="">
-          
-  
     <a class="" href="../../data/bestman-install/">BeStMan Install</a>
   
         </li>
@@ -781,7 +775,7 @@
             <div class="section">
               
                 <h1 id="java-installation-guide-for-osg-software">Java Installation Guide for OSG Software<a class="headerlink" href="#java-installation-guide-for-osg-software" title="Permanent link">&para;</a></h1>
-<p>Several OSG software components (e.g., <a href="../../data/bestman-overview">BeStMan</a>, <a href="../../security/install-gums">GUMS</a>, <a href="../../other/install-voms">VOMS Admin</a>, and their dependencies) are written in the <a href="http://en.wikipedia.org/wiki/Java_(programming_language)">Java programming language</a> and therefore need a Java Virtual Machine (JVM) implementation in which to run. Currently, OSG software is supported under the OpenJDK 7 implementation. Other implementations (such as the Oracle JDK) may also work, but there is considerable risk in using one; for instance, the IBM implementation is known to cause failures in most OSG Java software.</p>
+<p>Several OSG software components (e.g., <a href="../../data/bestman-install">BeStMan</a>, <a href="../../security/install-gums">GUMS</a>, <a href="../../other/install-voms">VOMS Admin</a>, and their dependencies) are written in the <a href="http://en.wikipedia.org/wiki/Java_(programming_language)">Java programming language</a> and therefore need a Java Virtual Machine (JVM) implementation in which to run. Currently, OSG software is supported under the OpenJDK 7 implementation. Other implementations (such as the Oracle JDK) may also work, but there is considerable risk in using one; for instance, the IBM implementation is known to cause failures in most OSG Java software.</p>
 <p>This document explains how to install Java for OSG software components in a way that allows other Java implementations to be present on a system. If you want to remove all other Java implementations besides the supported OpenJDK 7, there are optional instructions for doing so. This document is only about installing Java as a preliminary step for other OSG software installations; other OSG install guides refer to this document when necessary.</p>
 <h2 id="installing-java">Installing Java<a class="headerlink" href="#installing-java" title="Permanent link">&para;</a></h2>
 <p>OSG strongly recommends installing OpenJDK 7 as the primary Java implementation on each OSG host that needs Java. Instructions for doing so are below. If you have specific technical reasons to install or use an alternate, unsupported Java implementation, there are separate instructions for doing so. Choose one of the following subsections based on your needs.</p>
@@ -801,10 +795,6 @@
 </pre></div>
 
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If yum claims that java-1.7.0-openjdk is not available, you likely need to upgrade your operating system. The package <em>is</em> available on both EL 5 and EL 6 systems, although only the latest releases of EL 5 systems contain it.</p>
-</div>
 </li>
 <li>
 <p>Make OpenJDK the preferred Java runtime environment (JRE) </p>
@@ -932,7 +922,6 @@ root@host # javac -version The version number should start with <code>1.7</code>
 </ol>
 <h2 id="fixing-tomcat">Fixing Tomcat<a class="headerlink" href="#fixing-tomcat" title="Permanent link">&para;</a></h2>
 <p>If you have a pre-existing Tomcat installation, you must ensure that that it is using your preferred Java implementation.</p>
-<h3 id="fixing-tomcat-on-an-el6-system">Fixing Tomcat on an EL6 system<a class="headerlink" href="#fixing-tomcat-on-an-el6-system" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p>Check if tomcat6 is installed: </p>
@@ -948,27 +937,6 @@ root@host # javac -version The version number should start with <code>1.7</code>
 <li>Check if there is a line setting <code>JAVA_HOME</code> and that line is uncommented. If so, change that line to: <pre class="file">JAVA_HOME="/etc/alternatives/jre" If not, then you do not need to do anything.</li>
 <li>Do the same check for <code>/etc/tomcat6/tomcat6.conf</code>.</li>
 <li>Restart the Tomcat service: <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service tomcat6 restart
-</pre></div>
-
-
-</li>
-</ol>
-<h3 id="fixing-tomcat-on-an-el5-system">Fixing Tomcat on an EL5 system<a class="headerlink" href="#fixing-tomcat-on-an-el5-system" title="Permanent link">&para;</a></h3>
-<ol>
-<li>
-<p>Check if tomcat5 is installed: </p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -q tomcat5
-</pre></div>
-
-
-<p>If the RPM is installed, the command will output the specific RPM name and version. If there is no output: Tomcat is not installed, there is no issue, and you are done</p>
-</li>
-<li>
-<p>Open <code>/etc/sysconfig/tomcat5</code>.</p>
-</li>
-<li>Check if there is a line setting <code>JAVA_HOME</code> and that line is uncommented. If so, change that line to: <pre class="file">JAVA_HOME="/etc/alternatives/jre" If not, then you do not need to do anything.</li>
-<li>Do the same check for <code>/etc/tomcat5/tomcat5.conf</code>.</li>
-<li>Restart the Tomcat service: <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service tomcat5 restart
 </pre></div>
 
 

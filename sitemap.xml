@@ -354,12 +354,6 @@
     
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/data/bestman-overview/</loc>
-     <lastmod>2017-10-20</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
      <loc>https://opensciencegrid.github.io/docs/data/bestman-install/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
