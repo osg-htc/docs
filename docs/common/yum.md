@@ -105,9 +105,9 @@ The only OSG repository enabled by default is the release one. If you want to en
 
 ``` file
 [osg-testing]
-name=OSG Software for Enterprise Linux 5 - Testing - $basearch
-#baseurl=http://repo.grid.iu.edu/osg/3.2/el5/testing/$basearch
-mirrorlist=http://repo.grid.iu.edu/mirror/osg/3.2/el5/testing/$basearch
+name=OSG Software for Enterprise Linux 7 - Testing - $basearch
+#baseurl=http://repo.grid.iu.edu/osg/3.4/el7/testing/$basearch
+mirrorlist=http://repo.grid.iu.edu/mirror/osg/3.4/el7/testing/$basearch
 failovermethod=priority
 priority=98
 enabled=%RED%1%ENDCOLOR%

@@ -234,38 +234,6 @@ root@host # service condor restart
     2. reconfigure the frontend (`service gwms-frontend reconfig`)
     3. restart HTCondor (`service condor restart`)
 
-#### Upgrading glideinwms-frontend from v2 series to v3 series
-
-Due to incompatibilities between the major versions, upgrade process involves certain steps. Following instructions apply when upgrading glideinwms-frontend from a v2 series (example: v2.7.x) to a v3 series (v3.2.x)
-
-- Update the RPMs and backup configuration files
-
-``` console
-%RED%# Stop the glideinwms-vofrontend service%ENDCOLOR%
-root@host # service gwms-frontend stop
-
-%RED%# Backup the v2.7.x configuration%ENDCOLOR%
-root@host # cp /var/lib/gwms-frontend/vofrontend/frontend.xml /var/lib/gwms-frontend/vofrontend/frontend-2.xml
-root@host # cp /etc/gwms-frontend/frontend.xml /etc/gwms-frontend/frontend-2.xml
-
-%RED%# Update the glideinwms-vofrontend packages from v2.7.x to v3.2.x%ENDCOLOR%
-root@host # yum update glideinwms\*
-```
-
-- Convert v2.7.x configuration to v3.2.x configuration (only for RHEL 6, CentOS 6, and SL6. RHEL5 and drivative are not supported by v3.2.x, RHEL7 and derivative were not supported by v2.7.x)
-
-``` console
-root@host #  /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /var/lib/gwms-frontend/vofrontend/frontend-2.xml -o /var/lib/gwms-frontend/vofrontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
-root@host #  /usr/lib/python2.6/site-packages/glideinwms/frontend/tools/convert_frontend_2to3.sh -i /etc/gwms-frontend/frontend-2.xml -o /etc/gwms-frontend/frontend.xml -s /usr/lib/python2.6/site-packages/glideinwms
-```
-
--   Update the scripts in the working directory
-
-``` console
-%RED%# Update the scripts in the working directory to the latest one%ENDCOLOR%
-root@host #  service gwms-frontend upgrade
-```
-
 Configuration Procedure
 =======================
 
