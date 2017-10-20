@@ -1,6 +1,9 @@
 Install VOMS
 =================
 
+!!! warning
+    As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of June 2018.
+
 This document is for VO System Administrators.
 
 Here we describe how to install and configure VOMS on your Linux machine. When you install VOMS as described here, you get all three parts: MySQL database, VOMS admin and VOMS server. Instructions for creating your VO are also on this page, in the configuration section.

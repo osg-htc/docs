@@ -71,7 +71,6 @@ pages:
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
   - 'Worker Node Environment': 'worker-node/using-wn.md'
 - Deprecated Software:
-  - 'BeStMan Overview': 'data/bestman-overview.md'
   - 'BeStMan Install': 'data/bestman-install.md'
   - 'BeStMan Xrootd SE': 'data/install-bestman-xrootd.md'
   - 'EDG-Mkgridmap Install': 'security/edg-mkgridmap.md'
