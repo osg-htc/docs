@@ -20,31 +20,31 @@
     
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/common/install-best-practices/</loc>
+     <loc>https://opensciencegrid.github.io/docs/compute-element/htcondor-ce-overview/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/common/ca/</loc>
+     <loc>https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/common/osg-ca-certs-updater/</loc>
+     <loc>https://opensciencegrid.github.io/docs/compute-element/job-router-recipes/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/common/yum/</loc>
+     <loc>https://opensciencegrid.github.io/docs/compute-element/troubleshoot-htcondor-ce/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/common/openjdk7/</loc>
+     <loc>https://opensciencegrid.github.io/docs/compute-element/submit-htcondor-ce/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -52,6 +52,12 @@
     
 
     
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/worker-node/using-wn/</loc>
+     <lastmod>2017-10-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/worker-node/install-wn/</loc>
@@ -88,38 +94,22 @@
     
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/compute-element/htcondor-ce-overview/</loc>
+     <loc>https://opensciencegrid.github.io/docs/data/frontier-squid/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/</loc>
+     <loc>https://opensciencegrid.github.io/docs/data/update-oasis/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/compute-element/job-router-recipes/</loc>
+     <loc>https://opensciencegrid.github.io/docs/data/external-oasis-repos/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/compute-element/troubleshoot-htcondor-ce/</loc>
-     <lastmod>2017-10-20</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/compute-element/submit-htcondor-ce/</loc>
-     <lastmod>2017-10-20</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    
-
-    
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/gridftp/</loc>
@@ -140,19 +130,13 @@
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/data/frontier-squid/</loc>
+     <loc>https://opensciencegrid.github.io/docs/data/hadoop-overview/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/data/update-oasis/</loc>
-     <lastmod>2017-10-20</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/data/external-oasis-repos/</loc>
+     <loc>https://opensciencegrid.github.io/docs/data/install-hadoop-2-0-0/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -171,28 +155,6 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/data/install-xrootd/</loc>
-     <lastmod>2017-10-20</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    
-
-    
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/other/gsissh/</loc>
-     <lastmod>2017-10-20</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/data/hadoop-overview/</loc>
-     <lastmod>2017-10-20</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/data/install-hadoop-2-0-0/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -230,37 +192,47 @@
     
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/release/notes/</loc>
+     <loc>https://opensciencegrid.github.io/docs/common/install-best-practices/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/release/release_series/</loc>
+     <loc>https://opensciencegrid.github.io/docs/common/ca/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/release/supported_platforms/</loc>
+     <loc>https://opensciencegrid.github.io/docs/common/osg-ca-certs-updater/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/release/yum-basics/</loc>
+     <loc>https://opensciencegrid.github.io/docs/common/yum/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/release/signing/</loc>
+     <loc>https://opensciencegrid.github.io/docs/common/openjdk7/</loc>
+     <lastmod>2017-10-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/common/pki-cli/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/release/contrib/</loc>
+     <loc>https://opensciencegrid.github.io/docs/other/configuration-with-osg-configure/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -271,12 +243,6 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/other/gsissh/</loc>
-     <lastmod>2017-10-20</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/other/install-osg-upcoming-software/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -295,6 +261,52 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/other/network-performance-toolkit/</loc>
+     <lastmod>2017-10-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/notes/</loc>
+     <lastmod>2017-10-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/release_series/</loc>
+     <lastmod>2017-10-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/supported_platforms/</loc>
+     <lastmod>2017-10-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/other/install-osg-upcoming-software/</loc>
+     <lastmod>2017-10-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/yum-basics/</loc>
+     <lastmod>2017-10-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/signing/</loc>
+     <lastmod>2017-10-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://opensciencegrid.github.io/docs/release/contrib/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -323,28 +335,6 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs/monitoring/install-rsv-gwms-tester/</loc>
-     <lastmod>2017-10-20</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    
-
-    
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/common/pki-cli/</loc>
-     <lastmod>2017-10-20</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/other/configuration-with-osg-configure/</loc>
-     <lastmod>2017-10-20</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/worker-node/using-wn/</loc>
      <lastmod>2017-10-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
