@@ -11,12 +11,12 @@ extra_css:
 pages:
 - Home: 'index.md'
 - Site Planning: 'site-planning.md'
-- Common:
-  - 'Install Best Practices': 'common/install-best-practices.md'
-  - 'CA Certificates': 'common/ca.md'
-  - 'OSG CA Certificates Updater': 'common/osg-ca-certs-updater.md'
-  - 'Yum Repos': 'common/yum.md'
-  - 'Java 7': 'common/openjdk7.md'
+- Compute Element:
+  - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
+  - 'Install HTCondor-CE': 'compute-element/install-htcondor-ce.md'
+  - 'Job Router Recipes': 'compute-element/job-router-recipes.md'
+  - 'Troubleshooting HTCondor-CE': 'compute-element/troubleshoot-htcondor-ce.md'
+  - 'Submitting to HTCondor-CE': 'compute-element/submit-htcondor-ce.md'
 - Worker Node:
   - 'Worker Node Overview': 'worker-node/using-wn.md'
   - 'Worker Node (RPM install)': 'worker-node/install-wn.md'
@@ -24,12 +24,6 @@ pages:
   - 'Worker Node (OASIS install)': 'worker-node/install-wn-oasis.md'
   - 'CVMFS': 'worker-node/install-cvmfs.md'
   - 'Singularity': 'worker-node/install-singularity.md'
-- Compute Element:
-  - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
-  - 'Install HTCondor-CE': 'compute-element/install-htcondor-ce.md'
-  - 'Job Router Recipes': 'compute-element/job-router-recipes.md'
-  - 'Troubleshooting HTCondor-CE': 'compute-element/troubleshoot-htcondor-ce.md'
-  - 'Submitting to HTCondor-CE': 'compute-element/submit-htcondor-ce.md'
 - Data:
   - 'Install HTTP Cache': 'data/frontier-squid.md'
   - 'Update OASIS': 'data/update-oasis.md'
@@ -47,6 +41,12 @@ pages:
   - 'Host Certificates': 'security/host-certs.md'
   - 'User Certificates': 'security/user-certs.md'
   - 'Managing CAs': 'security/osg-ca-manage.md'
+- Common:
+  - 'Install Best Practices': 'common/install-best-practices.md'
+  - 'CA Certificates': 'common/ca.md'
+  - 'OSG CA Certificates Updater': 'common/osg-ca-certs-updater.md'
+  - 'Yum Repos': 'common/yum.md'
+  - 'Java 7': 'common/openjdk7.md'
 - Usage Guides:
   - 'Certificate Tools': 'common/pki-cli.md'
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
