@@ -1,0 +1,113 @@
+%DOC_STATUS_TABLE%
+---+!! Resource and Service Validation (!RSV) Service
+%TOC%
+
+---+ About this document
+This is documentation for !RSV for !OSG 3.  !RSV documentation for OSG 1.0 and 1.2 is available [[Trash/Trash/MonitoringInformation/RSV][here]].
+
+---+ RSV Description
+---++ RSV Concepts
+The Resource and Service Validation (!RSV) software provides a scalable and easy to maintain resource/service monitoring infrastructure for an OSG site admin. 
+   * [[RsvPrinciples][RSV Principles]]
+   * [[RsvArchitecture][RSV Architecture]]
+
+---++ RSV Service Components
+The components of !RSV are:
+   * <strong>RSV Client:</strong> The client allows OSG site administrators to run tests against their CEs/SEs.  This provides a set of metrics to test the resource, Condor-Cron for scheduling,  and a Gratia infrastructure for collecting and storing the results.
+      * The !RSV Client runs metrics at scheduled time intervals.  It produces a simple webpage of local !RSV results for a site administrator's viewing.  It also has the capability to upload those probe results to a central collector (addressed next).
+   * <strong>RSV Collector/Server:</strong> The server collects results from any number of !RSV clients and stores them in a database. You can view these central results on [[http://myosg.grid.iu.edu/rgcurrentstatus/index?datasource=currentstatus&summary_attrs_showservice=on&summary_attrs_showrsvstatus=on&summary_attrs_showfqdn=on&gip_status_attrs_showtestresults=on&downtime_attrs_showpast=&account_type=cumulative_hours&ce_account_type=gip_vo&se_account_type=vo_transfer_volume&start_type=7daysago&start_date=12/25/2009&end_type=now&end_date=12/25/2009&all_resources=on&gridtype=on&gridtype_1=on&service_central_value=0&service_hidden_value=0&active=on&active_value=1&disable_value=1][the !MyOSG-based !RSV current status page]].  Other !RSV-based choices are available in the <em>Resource Group menu</em> within !MyOSG.
+   * <strong>Periodic Availability Reports:</strong> The availability of all active registered OSG resources and the services running on each of those resources is calculated using the results received for [[Operations.RsvEquivalency#Critical_Tests_for_OSG_Resources][critical metrics]]. Once a day, these availability numbers are <a href="http://rsv.grid.iu.edu/daily-reports">published online</a> and via email [[Trash/Trash/MeasurementsAndMetrics.RsvReportsOverview][as explained here]].  (More information: [[Operations.RSVPeriodicReporting][Outline of reports]],     [[Trash/Trash/MeasurementsAndMetrics.RsvReports][Installation guide for GOC staff]]).
+   * <strong>RSV-SAM Transport:</strong> The WLCG !RSV-SAM Transport infrastructure pushes out !RSV results (for resources that are flagged to be part of the WLCG Interoperability agreement) from the GOC collector to WLCG's Service Availability Monitoring (SAM) system. More information on [[Operations.RsvSAMGridView][viewing these results is available here]].
+      * <strong>MyOSG and OIM Links: </strong> RSV picks up resource information, WLCG interoperability information, etc. from a !MyOSG resource group summary listing, which is in turn based on the [[https://oim.grid.iu.edu][OSG Information Management (OIM) (topology) system]] (Requires registration).  Resource [[Operations.OIMMaintTool][maintenance scheduled on OIM]], are forwarded to WLCG SAM, if applicable. 
+
+---+ For site administrators
+
+---++ Installing and configuring !RSV
+   * [[InstallRSV]] - For Typical Simple !RSV Configuration
+   * [[RSVStorageProbes][RSV Storage probes]] - Information on monitoring SEs with !RSV
+   * [[RsvControl][rsv-control documentation]] - rsv-control is a tool to manage !RSV
+   * [[ConfigureRsv][How to configure RSV]] - Beginner and advanced configuration instructions
+
+---++ !RSV Troubleshooting
+ These documents list known issues, and are meant to help admins and !GOC staff troubleshoot !RSV issues:<br /> 
+   * [[TroubleshootRsv][RSV v4 - OSG 3 troubleshooting]]
+
+---++ Contact !RSV Developers
+See [[RSVContactInfo][the contact Information page]].
+
+
+---+ For Developers
+
+   * [[RsvDeveloperGuide][The RSV guide for developers]]  %RED% START HERE! %ENDCOLOR%  This should be your starting point for learning about how to develop new !RSV probes or maintain existing probes. 
+   * [[RsvOwners][List of !RSV Metrics and their owners]]
+   * [[WriteYourOwnRSVProbe][How to write, install, and test a new !RSV probe]]
+   * [[RsvRepoAccess][How to access the !RSV source code repository]]
+   * [[ReleaseMethodology][How the source code repository and release process are managed]]
+   * [[RsvSupport][How !RSV support works, and your role in it]]
+
+---+ RSV Probes
+   * [[RsvProbeXrootMultiProbe][Xrootd probe]]
+   * [[RSVStorageProbes][RSV Storage probes]] - Information on monitoring SEs with !RSV
+   * RsvProbeCacertVerifyProbe
+   * RsvProbeCrlFreshnessProbe
+   * JavaVersionSSHProbe
+
+---+ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+
+   DEAR DOCUMENT OWNER
+   ===================
+
+   Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER          = MarcoMambelli
+
+   Please define the document area, choose one of the defined areas from the next line
+   DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Monitoring
+
+   define the primary role the document serves, choose one of the defined roles from the next line
+   DOC_ROLE = (Scientist|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+   Please define the document type, choose one of the defined types from the next line
+   DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Navigation
+   
+   Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+   Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+   change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+   change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+   change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+   DEAR DOCUMENT REVIEWER
+   ======================
+
+   Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = JamesWeichel
+  
+   Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+   DEAR DOCUMENT TESTER
+   ====================
+
+   Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = 
+  
+   Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %IN_PROGRESS%
+ 
+-->

@@ -2,7 +2,7 @@ Installing BeStMan
 ==================
 
 !!! warning
-    As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of June 2018.
+    As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of May 2018.
 
 About this Document
 ====================
@@ -72,7 +72,7 @@ Please answer following questions before you proceed with installation and confi
 
 Q. *What authorization mechanism should I use?*
 
-Decide between a [grid-mapfile](../security/edg-mkgridmap) or a [GUMS](../security/install-gums) server for authorization.  Both mechanisms are deprecated with a planned removal by June 2018.  The replacement mechanism, however, does not work with `bestman2`.
+Decide between a [grid-mapfile](../security/edg-mkgridmap) or a [GUMS](../security/install-gums) server for authorization.  Both mechanisms are deprecated with a planned removal by May 2018.  The replacement mechanism, however, does not work with `bestman2`.
 
 Q. *How many GridFTP servers will I need?*
 
@@ -86,7 +86,7 @@ We recommend approximately one GridFTP server for each 8Gbps of desired utilized
 
 Q. *Do I need to change default configuration of Gridftp server?*
 
-Yes, you may want to do this if the node on which GridFTP server will be installed has multiple network interfaces. Read [this section](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallOSGGridFTP#ConfigMultiHomed) for more details.
+Yes, you may want to do this if the node on which GridFTP server will be installed has multiple network interfaces. Read [this section](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallOSGGridFTP#ConfigMultiHomed) for more details.
 
 Q. *Do you need to enable Gratia gridftp-transfer probes?*   
 The Gratia gridftp-transfer probes provide OSG storage statistics for accounting purposes. The reports include the source and destination of transfers, certificate subject of transfer initiator, as well as the size and status of the transferred file. The probe needs to be installed on every GridFTP server.
@@ -97,11 +97,11 @@ Install Instructions
 Installing BeStMan2
 -------------------
 
-1.  Install Java using [these instructions](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7#InstallingJava).
+1.  Install Java using [these instructions](../common/openjdk7#installing-java).
 2.  Install the BeStMan Storage element meta-package:
 
 ```console
-[root@client ~] # yum install osg-se-bestman
+root@host # yum install osg-se-bestman
 ```
 
 Authorization
@@ -225,9 +225,9 @@ Copying certificates to an alternate location
 BeStMan requires a certificate pair to function; this must be readable by the `bestman` user.
 
 ```console
-[root@client ~] # cp /etc/grid-security/hostkey.pem /etc/grid-security/bestman/bestmankey.pem
-[root@client ~] # cp /etc/grid-security/hostcert.pem /etc/grid-security/bestman/bestmancert.pem
-[root@client ~] # chown -R bestman:bestman /etc/grid-security/bestman/
+root@host # cp /etc/grid-security/hostkey.pem /etc/grid-security/bestman/bestmankey.pem
+root@host # cp /etc/grid-security/hostcert.pem /etc/grid-security/bestman/bestmancert.pem
+root@host # chown -R bestman:bestman /etc/grid-security/bestman/
 ```
 
 Verify `CertFileName` and `KeyFileName` in `/etc/bestman2/conf/bestman2.rc` are set appropriately.
@@ -279,36 +279,36 @@ Starting Services
     For RHEL 6:
 
         :::console
-        [root@client ~] # /usr/sbin/fetch-crl   # This fetches the CRLs 
-        [root@client ~] # /sbin/service fetch-crl-boot start
-        [root@client ~] # /sbin/service fetch-crl-cron start
+        root@host # /usr/sbin/fetch-crl   # This fetches the CRLs 
+        root@host # /sbin/service fetch-crl-boot start
+        root@host # /sbin/service fetch-crl-cron start
 
     For RHEL 7:
 
         :::console
-        [root@client ~] # /usr/sbin/fetch-crl   # This fetches the CRLs 
-        [root@client ~] # systemctl start fetch-crl-boot
-        [root@client ~] # systemctl start fetch-crl-cron
+        root@host # /usr/sbin/fetch-crl   # This fetches the CRLs 
+        root@host # systemctl start fetch-crl-boot
+        root@host # systemctl start fetch-crl-cron
 
 2. GridFTP
 
         :::console
-        [root@client ~] # service globus-gridftp-server start
+        root@host # service globus-gridftp-server start
 
 3. Bestman
 
         :::console
-        [root@client ~] # service bestman2 start
+        root@host # service bestman2 start
 
     To start Bestman automatically at boot time
 
         :::console
-        [root@client ~] # chkconfig bestman2 on
+        root@host # chkconfig bestman2 on
 
 4. Gratia transfer probe:
 
         :::console
-        [root@client ~] # service gratia-gridftp-transfer start
+        root@host # service gratia-gridftp-transfer start
 
 Stopping Services
 =================
@@ -318,31 +318,31 @@ Stopping Services
     For RHEL 6:
 
         :::console
-        [root@client ~] # /usr/sbin/fetch-crl   # This fetches the CRLs
-        [root@client ~] # /sbin/service fetch-crl-boot stop
-        [root@client ~] # /sbin/service fetch-crl-cron stop
+        root@host # /usr/sbin/fetch-crl   # This fetches the CRLs
+        root@host # /sbin/service fetch-crl-boot stop
+        root@host # /sbin/service fetch-crl-cron stop
 
     For RHEL 7:
 
         :::console
-        [root@client ~] # /usr/sbin/fetch-crl   # This fetches the CRLs
-        [root@client ~] # systemctl stop fetch-crl-boot
-        [root@client ~] # systemctl stop fetch-crl-cron
+        root@host # /usr/sbin/fetch-crl   # This fetches the CRLs
+        root@host # systemctl stop fetch-crl-boot
+        root@host # systemctl stop fetch-crl-cron
 
 2. GridFTP
 
         :::console
-        [root@client ~] # service globus-gridftp-server stop
+        root@host # service globus-gridftp-server stop
 
 3. Bestman
 
         :::console
-        [root@client ~] # service bestman2 stop
+        root@host # service bestman2 stop
 
 4. Gratia transfer probe
 
         :::console
-        [root@client ~] # service gratia-gridftp-transfer stop
+        root@host # service gratia-gridftp-transfer stop
 
 
 Validation of Service Operation
@@ -382,7 +382,7 @@ Make sure that the service certificate you specified for BeStMan configuration w
 Test GUMS by running:
 
 ```console
-[root@client ~] # srm-ping srm://<BESTMAN_HOST>:8443/srm/v2/server
+root@host # srm-ping srm://<BESTMAN_HOST>:8443/srm/v2/server
 ```
 
 In the output, check that your `gumsIDMapped` is not `null`. It returns the `uid` that GUMS will map you to. This can be obtained from your GUMS administrator. Verify that this `uid` exists on BeStMan and GridFTP node.
@@ -394,8 +394,8 @@ Login on the node where your certificate and [OSG Worker Node Client](../worker-
 Then test GridFTP using `globus-url-copy`:
 
 ```console
-[user@client ~] $ echo "This is a test" >/tmp/test 
-[user@client ~] $ globus-url-copy -dbg file:///tmp/test gsiftp://<GRIDFTP_HOST>/tmp/test 
+user@host $ echo "This is a test" >/tmp/test 
+user@host $ globus-url-copy -dbg file:///tmp/test gsiftp://<GRIDFTP_HOST>/tmp/test 
 ```
 Check the GridFTP logs to see if you have encountered any errors.
 
@@ -404,7 +404,7 @@ Check the GridFTP logs to see if you have encountered any errors.
 Make sure that the BeStMan process is running
 
 ```console
-[root@client ~] # ps -ef | grep bestman
+root@host # ps -ef | grep bestman
 bestman   5121     1 99 19:59 ?        00:00:01 /usr/java/latest/bin/java -server -Xmx1024m -XX:MaxDirectMemorySize=1024m -DX509_CERT_DIR=/etc/grid-security/certificates -DCADIR=/etc/grid-security/certificates -Daxis.socketSecureFactory=org.glite.security.trustmanager.axis.AXISSocketFactory -DsslCAFiles=/etc/grid-security/certificates/*.0 -DsslCertfile=/etc/grid-security/bestman/bestmancert.pem -DsslKey=/etc/grid-security/bestman/bestmankey.pem -DJettyConfiguration=/etc/bestman2/conf/WEB-INF/jetty.xml -DJettyDescriptor=/etc/bestman2/conf/WEB-INF/web.xml -DJettyResource=/etc/bestman2/conf/ -Dorg.eclipse.jetty.util.log.IGNORE=true gov.lbl.srm.server.Server /etc/bestman2/conf/bestman2.rc
 ```
 
@@ -440,7 +440,7 @@ Upgrading BeStMan
 Upgrading BeStMan can be done by
 
 ```console
-[root@client ~] # yum upgrade bestman2-server
+root@host # yum upgrade bestman2-server
 ```
 
 There are a few notes to be aware of when upgrading BeStMan.
@@ -456,17 +456,17 @@ How to get Help?
 
 If you cannot resolve the problem, there are several ways to receive help:
 
--   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.grid.iu.edu/goc).
+-   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.opensciencegrid.org/goc).
 -   For community support and best-effort software team support contact <osg-software@opensciencegrid.org>.
 
-For a full set of help options, see the [Help Procedure](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HelpProcedure).
+For a full set of help options, see the [Help Procedure](../common/help).
 
 References
 ==========
 
-* [Storage infrastructure software](https://twiki.grid.iu.edu/bin/view/Documentation/StorageInfrastructureSoftware)
-* [Information on planning, installing and validating storage software](https://twiki.grid.iu.edu/bin/view/Documentation/StorageSiteAdministrator)
-* [Tips and FAQ](https://twiki.grid.iu.edu/bin/view/Storage/SEToolsTipsFAQs)
+* [Storage infrastructure software](https://twiki.opensciencegrid.org/bin/view/Documentation/StorageInfrastructureSoftware)
+* [Information on planning, installing and validating storage software](https://twiki.opensciencegrid.org/bin/view/Documentation/StorageSiteAdministrator)
+* [Tips and FAQ](https://twiki.opensciencegrid.org/bin/view/Storage/SEToolsTipsFAQs)
 * [OSG Gratia Transfer Probe page](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GratiaTransferProbe)
 * [SRM v2.2 LBNL client command line examples](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/LbnlSrmClient)
 * [SRM-Tester](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SrmTester)
@@ -489,7 +489,7 @@ Requesting host certificates in RHEL6
 Bestman may not start if the certificates were requested on slc6. This is be caused by a bug in JGlobus (see [JGlobusIssue118](https://github.com/jglobus/JGlobus/issues/118)), a `bestman2` dependency. A known workaround is to run this command
 
 ```console
-[user@client ~] $ openssl rsa -in mykey.pem -out mykey.pem.old
+user@host $ openssl rsa -in mykey.pem -out mykey.pem.old
 ```
 
 This command on converts `mykey.pem` to `mykey.pem.old`; the latter format is supported.

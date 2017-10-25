@@ -1,67 +1,131 @@
 site_name: OSG Documentation
-site_url: https://opensciencegrid.github.io/docs
-repo_url: https://github.com/opensciencegrid/docs
-theme: readthedocs
+site_url: https://opensciencegrid.github.io/docs/
+repo_url: https://github.com/opensciencegrid/docs/
+theme:
+  name: readthedocs
+  custom_dir: osgthedocs
 
 extra_css:
   - css/extra.css
 
 pages:
 - Home: 'index.md'
-- Installation Overview: 'install-overview.md'
-- Install Guides - Common:
-  - 'CA Certificates': 'common/ca.md'
-  - 'Yum Repos': 'common/yum.md'
-- Install Guides - Worker Node:
+- Site Planning: 'site-planning.md'
+- Compute Element:
+  - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
+  - 'Install HTCondor-CE': 'compute-element/install-htcondor-ce.md'
+  - 'Job Router Recipes': 'compute-element/job-router-recipes.md'
+  - 'Troubleshooting HTCondor-CE': 'compute-element/troubleshoot-htcondor-ce.md'
+  - 'Submitting to HTCondor-CE': 'compute-element/submit-htcondor-ce.md'
+- Worker Node:
+  - 'Worker Node Overview': 'worker-node/using-wn.md'
   - 'Worker Node (RPM install)': 'worker-node/install-wn.md'
   - 'Worker Node (tarball install)': 'worker-node/install-wn-tarball.md'
   - 'Worker Node (OASIS install)': 'worker-node/install-wn-oasis.md'
   - 'CVMFS': 'worker-node/install-cvmfs.md'
   - 'Singularity': 'worker-node/install-singularity.md'
-- Install Guides - Compute:
-  - 'HTCondor-CE': 'compute-element/install-htcondor-ce.md'
-- Install Guides - Data:
-  - 'GridFTP Server': 'data/gridftp.md'
-  - 'HTTP Cache': 'data/frontier-squid.md'
-- Install Guides - Other:
-  - 'GSI-enabled SSH': 'other/gsissh.md'
+- Data:
+  - 'Install HTTP Cache': 'data/frontier-squid.md'
+  - 'Update OASIS': 'data/update-oasis.md'
+  - 'External OASIS repositories': 'data/external-oasis-repos.md'
+  - 'Install GridFTP Server': 'data/gridftp.md'
+  - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
+  - 'Install GridFtp XRootD': 'data/install-gridftp-xrootd.md'
+  - 'Hadoop Overview': 'data/hadoop-overview.md'
+  - 'Hadoop': 'data/install-hadoop-2-0-0.md'
+  - 'XRootD Overview': 'data/xrootd-overview.md'
+  - 'Install XRootD Client': 'data/install-xroot-client.md'
+  - 'Install XRootD': 'data/install-xrootd.md'
+- Security:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
-  - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
-- Install Guides - Monitoring:
-  - 'RSV': 'monitoring/rsv.md'
-  - 'RSV GlideinWMS Tester': 'monitoring/rsv-gwms-tester.md'
-- Install Guides - Other:
+  - 'Host Certificates': 'security/host-certs.md'
+  - 'User Certificates': 'security/user-certs.md'
+  - 'Managing CAs': 'security/osg-ca-manage.md'
+- Common:
   - 'Install Best Practices': 'common/install-best-practices.md'
-  - 'GSI-enabled SSH': 'other/gsissh.md'
-  - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
-  - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
-- Overviews:
-  - 'HTCondor-CE': 'compute-element/htcondor-ce-overview.md'
-- Release Information:
-  - 'OSG Release Series': 'release/release_series.md'
-  - 'Supported Platforms': 'release/supported_platforms.md'
-  - 'Yum Basics': 'release/yum-basics.md'
-  - 'RPM Signing': 'release/signing.md'
-  - 'Contrib Software': 'release/contrib.md'
+  - 'CA Certificates': 'common/ca.md'
+  - 'OSG CA Certificates Updater': 'common/osg-ca-certs-updater.md'
+  - 'Yum Repos': 'common/yum.md'
+  - 'Java 7': 'common/openjdk7.md'
 - Usage Guides:
   - 'Certificate Tools': 'common/pki-cli.md'
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
-  - 'Worker Node Environment': 'worker-node/using-wn.md'
-- In-Progress Docs:
-  - 'CA Updater': 'common/ca_updater.md'
-  - 'Certificate Request Scripts': 'common/cert_scripts.md'
-  - 'Job Router Recipe': 'compute-element/job_router.md'
+- Other:
+  - 'GSI-enabled SSH': 'other/gsissh.md'
+  - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
+  - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
+  - 'Network Performance Toolkit': 'other/network-performance-toolkit.md'
+- Release Information:
+  - 'Release Notes': 'release/notes.md'
+  - 'OSG Release Series': 'release/release_series.md'
+  - 'Supported Platforms': 'release/supported_platforms.md'
+  - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
+  - 'Yum Basics': 'release/yum-basics.md'
+  - 'RPM Signing': 'release/signing.md'
+  - 'Contrib Software': 'release/contrib.md'
+- Monitoring:
+  - 'Install RSV': 'monitoring/install-rsv.md'
+  - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
+  - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
+  - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
 - Deprecated Software:
-  - 'BeStMan Overview': 'data/bestman-overview.md'
   - 'BeStMan Install': 'data/bestman-install.md'
+  - 'BeStMan Xrootd SE': 'data/install-bestman-xrootd.md'
   - 'EDG-Mkgridmap Install': 'security/edg-mkgridmap.md'
   - 'GUMS': 'security/install-gums.md'
   - 'Worker node glexec Install': 'worker-node/install-glexec.md'
+  - 'Install VOMS': 'other/install-voms.md'
 - 'Get Help': 'common/help.md'
+- 'OSG Release 3.4.4-2': 'release/3.4/release-3-4-4-2.md'
+- 'OSG Release 3.3.29-2': 'release/3.3/release-3-3-29-2.md'
+- 'OSG Release 3.4.4': 'release/3.4/release-3-4-4.md'
+- 'OSG Release 3.3.29': 'release/3.3/release-3-3-29.md'
+- 'OSG Release 3.4.3': 'release/3.4/release-3-4-3.md'
+- 'OSG Release 3.3.28': 'release/3.3/release-3-3-28.md'
+- 'OSG Release 3.4.2-2': 'release/3.4/release-3-4-2-2.md'
+- 'OSG Release 3.4.2': 'release/3.4/release-3-4-2.md'
+- 'OSG Release 3.4.1-2': 'release/3.4/release-3-4-1-2.md'
+- 'OSG Release 3.4.1': 'release/3.4/release-3-4-1.md'
+- 'OSG Release 3.4.0-2': 'release/3.4/release-3-4-0-2.md'
+- 'OSG Release 3.4.0': 'release/3.4/release-3-4-0.md'
+- 'OSG Release 3.3.27': 'release/3.3/release-3-3-27.md'
+- 'OSG Release 3.3.26': 'release/3.3/release-3-3-26.md'
+- 'OSG Release 3.3.25': 'release/3.3/release-3-3-25.md'
+- 'OSG Release 3.3.24-2': 'release/3.3/release-3-3-24-2.md'
+- 'OSG Release 3.3.24': 'release/3.3/release-3-3-24.md'
+- 'OSG Release 3.3.23': 'release/3.3/release-3-3-23.md'
+- 'OSG Release 3.3.22-3': 'release/3.3/release-3-3-22-3.md'
+- 'OSG Release 3.3.22-2': 'release/3.3/release-3-3-22-2.md'
+- 'OSG Release 3.3.22': 'release/3.3/release-3-3-22.md'
+- 'OSG Release 3.3.21-3': 'release/3.3/release-3-3-21-3.md'
+- 'OSG Release 3.3.21-2': 'release/3.3/release-3-3-21-2.md'
+- 'OSG Release 3.3.21': 'release/3.3/release-3-3-21.md'
+- 'OSG Release 3.3.20-2': 'release/3.3/release-3-3-20-2.md'
+- 'OSG Release 3.3.20': 'release/3.3/release-3-3-20.md'
+- 'OSG Release 3.3.19': 'release/3.3/release-3-3-19.md'
+- 'OSG Release 3.3.18': 'release/3.3/release-3-3-18.md'
+- 'OSG Release 3.3.17-2': 'release/3.3/release-3-3-17-2.md'
+- 'OSG Release 3.3.17': 'release/3.3/release-3-3-17.md'
+- 'OSG Release 3.3.16': 'release/3.3/release-3-3-16.md'
+- 'OSG Release 3.3.15': 'release/3.3/release-3-3-15.md'
+- 'OSG Release 3.3.14': 'release/3.3/release-3-3-14.md'
+- 'OSG Release 3.3.13': 'release/3.3/release-3-3-13.md'
+- 'OSG Release 3.3.12': 'release/3.3/release-3-3-12.md'
+- 'OSG Release 3.3.11': 'release/3.3/release-3-3-11.md'
+- 'OSG Release 3.3.10': 'release/3.3/release-3-3-10.md'
+- 'OSG Release 3.3.9': 'release/3.3/release-3-3-9.md'
+- 'OSG Release 3.3.8': 'release/3.3/release-3-3-8.md'
+- 'OSG Release 3.3.7': 'release/3.3/release-3-3-7.md'
+- 'OSG Release 3.3.6': 'release/3.3/release-3-3-6.md'
+- 'OSG Release 3.3.5': 'release/3.3/release-3-3-5.md'
+- 'OSG Release 3.3.4': 'release/3.3/release-3-3-4.md'
+- 'OSG Release 3.3.3': 'release/3.3/release-3-3-3.md'
+- 'OSG Release 3.3.2': 'release/3.3/release-3-3-2.md'
+- 'OSG Release 3.3.1': 'release/3.3/release-3-3-1.md'
+- 'OSG Release 3.3.0': 'release/3.3/release-3-3-0.md'
 
 markdown_extensions:
   - admonition
   - codehilite
   - toc(permalink=true)
   - osg_markdown.colors
-

@@ -1,0 +1,577 @@
+%DOC_STATUS_TABLE%
+
+---+!! Install Open Nebula gratia probe
+%TOC%
+
+<!-- conventions used in this document
+   * Local UCL_HOST = %URLPARAM{"INPUT_HOST" encode="quote" default="gratia"}%
+   * Local UCL_USER = %URLPARAM{"INPUT_USER" encode="quote" default="user"}%
+   * Local UCL_DOMAIN = %URLPARAM{"INPUT_DOMAIN" encode="quote" default="opensciencegrid.org"}%
+   * Set TWISTY_OPTS_DETAILED = mode="div" showlink="Show Detailed Output" hidelink="Hide" showimgleft="/twiki/pub/TWiki/TWikiDocGraphics/toggleopen-small.gif" hideimgleft="/twiki/pub/TWiki/TWikiDocGraphics/toggleclose-small.gif" remember="on" start="hide" 
+-->
+%STARTINCLUDE%
+%EDITTHIS%
+---+ About this Document
+This document is for Site System Administrators. This document describes how you can install/configure/use the Gratia cloud accounting probe for sites that are using [[http://opennebula.org/][OpenNebula] as a Cloud Infrastructure Managing Service. 
+---+ Requirements
+
+---++  Host and OS
+
+   * OS is %SUPPORTED_OS%. 
+   * [[http://fedoraproject.org/wiki/EPEL][EPEL]] repos enabled.
+   * Root access
+   * The probe should be installed on the !OpenNebula Admin node.
+
+---++ Users
+The Gratia !OneVM probe installation will NOT create a new user. It assumes that "oneadmin" user  already exists.
+
+---++ Additional Requirements 	
+   * !OpenNebula is already installed and configured on the node
+   * The probe is tested for !OpenNebula 2.0 and 3.2
+%INCLUDE{"YumRepositories" section="OSGRepoBrief" TOC_SHIFT="+"}%
+
+%INCLUDE{"InstallCertAuth" section="OSGBriefCaCerts" TOC_SHIFT="+"}%
+
+%STARTSECTION{"InstallGratiaOneVMProbeRPMs"}%
+
+---+ Install Gratia onevm probe
+To install gratia onevm probe do:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install gratia-probe-onevm
+</pre>  %TWISTY{%TWISTY_OPTS_DETAILED%}%   <pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install gratia-probe-onevm
+Loaded plugins: priorities, refresh-packagekit, security
+osg-development                                                                                                             | 1.9 kB     00:00     
+osg-development/primary_db                                                                                                  | 425 kB     00:00     
+322 packages excluded due to repository priority protections
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package gratia-probe-onevm.noarch 0:1.12-9.osg.el6 will be installed
+--> Processing Dependency: gratia-probe-common >= 1.12-9.osg.el6 for package: gratia-probe-onevm-1.12-9.osg.el6.noarch
+--> Processing Dependency: ruby for package: gratia-probe-onevm-1.12-9.osg.el6.noarch
+--> Running transaction check
+---> Package gratia-probe-common.noarch 0:1.12-1.osg.el6 will be updated
+---> Package gratia-probe-common.noarch 0:1.12-9.osg.el6 will be an update
+---> Package ruby.x86_64 0:1.8.7.352-7.el6_2 will be installed
+--> Processing Dependency: ruby-libs = 1.8.7.352-7.el6_2 for package: ruby-1.8.7.352-7.el6_2.x86_64
+--> Processing Dependency: libruby.so.1.8()(64bit) for package: ruby-1.8.7.352-7.el6_2.x86_64
+--> Running transaction check
+---> Package ruby-libs.x86_64 0:1.8.7.352-7.el6_2 will be installed
+--> Processing Dependency: libreadline.so.5()(64bit) for package: ruby-libs-1.8.7.352-7.el6_2.x86_64
+--> Running transaction check
+---> Package compat-readline5.x86_64 0:5.2-17.1.el6 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+===================================================================================================================================================
+ Package                                Arch                      Version                                 Repository                          Size
+===================================================================================================================================================
+Installing:
+ gratia-probe-onevm                     noarch                    1.12-9.osg.el6                          osg-development                     38 k
+Installing for dependencies:
+ compat-readline5                       x86_64                    5.2-17.1.el6                            slf                                129 k
+ ruby                                   x86_64                    1.8.7.352-7.el6_2                       slf                                531 k
+ ruby-libs                              x86_64                    1.8.7.352-7.el6_2                       slf                                1.6 M
+Updating for dependencies:
+ gratia-probe-common                    noarch                    1.12-9.osg.el6                          osg-development                    112 k
+
+Transaction Summary
+===================================================================================================================================================
+Install       4 Package(s)
+Upgrade       1 Package(s)
+
+Total download size: 2.4 M
+Is this ok [y/N]: 
+Downloading Packages:
+(1/5): compat-readline5-5.2-17.1.el6.x86_64.rpm                                                                             | 129 kB     00:00     
+(2/5): gratia-probe-common-1.12-9.osg.el6.noarch.rpm                                                                        | 112 kB     00:00     
+(3/5): gratia-probe-onevm-1.12-9.osg.el6.noarch.rpm                                                                         |  38 kB     00:00     
+(4/5): ruby-1.8.7.352-7.el6_2.x86_64.rpm                                                                                    | 531 kB     00:00     
+(5/5): ruby-libs-1.8.7.352-7.el6_2.x86_64.rpm                                                                               | 1.6 MB     00:00     
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                              9.4 MB/s | 2.4 MB     00:00     
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : compat-readline5-5.2-17.1.el6.x86_64                                                                                            1/6 
+  Installing : ruby-libs-1.8.7.352-7.el6_2.x86_64                                                                                              2/6 
+  Installing : ruby-1.8.7.352-7.el6_2.x86_64                                                                                                   3/6 
+  Updating   : gratia-probe-common-1.12-9.osg.el6.noarch                                                                                       4/6 
+  Installing : gratia-probe-onevm-1.12-9.osg.el6.noarch                                                                                        5/6 
+  Cleanup    : gratia-probe-common-1.12-1.osg.el6.noarch                                                                                       6/6 
+  Verifying  : ruby-libs-1.8.7.352-7.el6_2.x86_64                                                                                              1/6 
+  Verifying  : gratia-probe-onevm-1.12-9.osg.el6.noarch                                                                                        2/6 
+  Verifying  : gratia-probe-common-1.12-9.osg.el6.noarch                                                                                       3/6 
+  Verifying  : compat-readline5-5.2-17.1.el6.x86_64                                                                                            4/6 
+  Verifying  : ruby-1.8.7.352-7.el6_2.x86_64                                                                                                   5/6 
+  Verifying  : gratia-probe-common-1.12-1.osg.el6.noarch                                                                                       6/6 
+
+Installed:
+  gratia-probe-onevm.noarch 0:1.12-9.osg.el6                                                                                                       
+
+Dependency Installed:
+  compat-readline5.x86_64 0:5.2-17.1.el6             ruby.x86_64 0:1.8.7.352-7.el6_2             ruby-libs.x86_64 0:1.8.7.352-7.el6_2            
+
+Dependency Updated:
+  gratia-probe-common.noarch 0:1.12-9.osg.el6                                                                                                      
+
+Complete!
+</pre> %ENDTWISTY%
+You will need to generate the ==user-vo-map== file that maps each user account to a VO  associated with that account. It is a critical for Grtaia Service in order to accurately collect grid resource usage and metrics by VO for jobs submitted using grid proxies or where voms proxy information is not available. More information is availbale [[https://twiki.grid.iu.edu/bin/view/Trash/Documentation_Release3ValidateSupportedVos#VO_to_User_Account_Map_user_vo_m][here]]. In order to generate  the ==user-vo-map== file  you need to install and configure gums-client if your site is using GUMS service for authorization or edg-mkgridmap  if your site doesn't use GUMS. 
+
+   * To install gums-client do:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install gums-client
+</pre>  %TWISTY{%TWISTY_OPTS_DETAILED%}%   <pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install gums-client
+Loaded plugins: priorities, refresh-packagekit, security
+epel/metalink                                                                                                               |  13 kB     00:00     
+epel                                                                                                                        | 4.3 kB     00:00     
+http://download-i2.fedoraproject.org/pub/epel/6/x86_64/repodata/repomd.xml: [Errno -1] repomd.xml does not match metalink for epel
+Trying other mirror.
+epel                                                                                                                        | 4.3 kB     00:00     
+epel/primary_db                                                                                                             | 4.7 MB     00:00     
+osg                                                                                                                         | 1.9 kB     00:00     
+osg/primary_db                                                                                                              | 801 kB     00:00     
+slf                                                                                                                         | 3.2 kB     00:00     
+slf/primary_db                                                                                                              | 4.1 MB     00:00     
+slf-security                                                                                                                | 1.9 kB     00:00     
+slf-security/primary_db                                                                                                     | 1.4 MB     00:00     
+294 packages excluded due to repository priority protections
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package gums-client.noarch 0:1.3.18.009-5.osg.el6 will be installed
+--> Processing Dependency: gums = 1.3.18.009 for package: gums-client-1.3.18.009-5.osg.el6.noarch
+--> Processing Dependency: osg-vo-map for package: gums-client-1.3.18.009-5.osg.el6.noarch
+--> Running transaction check
+---> Package gums.noarch 0:1.3.18.009-5.osg.el6 will be installed
+epel/filelists_db                                                                                                           | 6.2 MB     00:00     
+osg/filelists_db                                                                                                            | 453 kB     00:00     
+slf/filelists_db                                                                                                            | 5.0 MB     00:00     
+slf-security/filelists_db                                                                                                   | 1.0 MB     00:00     
+--> Processing Dependency: /usr/share/java/cog-jglobus/cog-jglobus-1.8.0.jar for package: gums-1.3.18.009-5.osg.el6.noarch
+--> Processing Dependency: /usr/share/java/cog-jglobus/cog-url-1.8.0.jar for package: gums-1.3.18.009-5.osg.el6.noarch
+--> Processing Dependency: /usr/share/java/cog-jglobus/cog-jobmanager-1.8.0.jar for package: gums-1.3.18.009-5.osg.el6.noarch
+---> Package osg-vo-map.noarch 0:0.0.1-1.osg.el6 will be installed
+--> Running transaction check
+---> Package cog-jglobus.noarch 0:1.8.0-1.osg.el6 will be installed
+--> Processing Dependency: jakarta-commons-logging for package: cog-jglobus-1.8.0-1.osg.el6.noarch
+--> Processing Dependency: log4j for package: cog-jglobus-1.8.0-1.osg.el6.noarch
+--> Processing Dependency: bouncycastle13 for package: cog-jglobus-1.8.0-1.osg.el6.noarch
+--> Processing Dependency: puretls for package: cog-jglobus-1.8.0-1.osg.el6.noarch
+--> Running transaction check
+---> Package bouncycastle13.noarch 0:1.33-4.osg.el6 will be installed
+---> Package jakarta-commons-logging.noarch 0:1.0.4-10.el6 will be installed
+---> Package log4j.x86_64 0:1.2.14-6.4.el6 will be installed
+--> Processing Dependency: java-gcj-compat for package: log4j-1.2.14-6.4.el6.x86_64
+--> Processing Dependency: xml-commons-apis for package: log4j-1.2.14-6.4.el6.x86_64
+--> Processing Dependency: jaxp_parser_impl for package: log4j-1.2.14-6.4.el6.x86_64
+--> Processing Dependency: java-gcj-compat for package: log4j-1.2.14-6.4.el6.x86_64
+---> Package puretls.noarch 0:0.9b4-1.osg.el6 will be installed
+--> Processing Dependency: cryptix >= 3.2 for package: puretls-0.9b4-1.osg.el6.noarch
+--> Processing Dependency: cryptix-asn1 for package: puretls-0.9b4-1.osg.el6.noarch
+--> Running transaction check
+---> Package cryptix.noarch 0:3.2.0-2.osg.el6 will be installed
+---> Package cryptix-asn1.noarch 0:20011119-2.osg.el6 will be installed
+---> Package java-1.5.0-gcj.x86_64 0:1.5.0.0-29.1.el6 will be installed
+--> Processing Dependency: sinjdoc for package: java-1.5.0-gcj-1.5.0.0-29.1.el6.x86_64
+---> Package jdk.x86_64 2000:1.6.0_35-fcs.1.osg.el6 will be installed
+--> Running transaction check
+---> Package sinjdoc.x86_64 0:0.5-9.1.el6 will be installed
+--> Processing Dependency: java_cup >= 0.10 for package: sinjdoc-0.5-9.1.el6.x86_64
+--> Running transaction check
+---> Package java_cup.x86_64 1:0.10k-5.el6 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+===================================================================================================================================================
+ Package                                    Arch                      Version                                         Repository              Size
+===================================================================================================================================================
+Installing:
+ gums-client                                noarch                    1.3.18.009-5.osg.el6                            osg                     16 k
+Installing for dependencies:
+ bouncycastle13                             noarch                    1.33-4.osg.el6                                  osg                    1.1 M
+ cog-jglobus                                noarch                    1.8.0-1.osg.el6                                 osg                    737 k
+ cryptix                                    noarch                    3.2.0-2.osg.el6                                 osg                    376 k
+ cryptix-asn1                               noarch                    20011119-2.osg.el6                              osg                     55 k
+ gums                                       noarch                    1.3.18.009-5.osg.el6                            osg                     24 M
+ jakarta-commons-logging                    noarch                    1.0.4-10.el6                                    slf                     51 k
+ java-1.5.0-gcj                             x86_64                    1.5.0.0-29.1.el6                                slf                    138 k
+ java_cup                                   x86_64                    1:0.10k-5.el6                                   slf                    196 k
+ jdk                                        x86_64                    2000:1.6.0_35-fcs.1.osg.el6                     osg                     49 M
+ log4j                                      x86_64                    1.2.14-6.4.el6                                  slf                    678 k
+ osg-vo-map                                 noarch                    0.0.1-1.osg.el6                                 osg                    7.6 k
+ puretls                                    noarch                    0.9b4-1.osg.el6                                 osg                    136 k
+ sinjdoc                                    x86_64                    0.5-9.1.el6                                     slf                    704 k
+
+Transaction Summary
+===================================================================================================================================================
+Install      14 Package(s)
+
+Total download size: 78 M
+Installed size: 157 M
+Downloading Packages:
+(1/14): bouncycastle13-1.33-4.osg.el6.noarch.rpm                                                                            | 1.1 MB     00:00     
+(2/14): cog-jglobus-1.8.0-1.osg.el6.noarch.rpm                                                                              | 737 kB     00:00     
+(3/14): cryptix-3.2.0-2.osg.el6.noarch.rpm                                                                                  | 376 kB     00:00     
+(4/14): cryptix-asn1-20011119-2.osg.el6.noarch.rpm                                                                          |  55 kB     00:00     
+(5/14): gums-1.3.18.009-5.osg.el6.noarch.rpm                                                                                |  24 MB     00:01     
+(6/14): gums-client-1.3.18.009-5.osg.el6.noarch.rpm                                                                         |  16 kB     00:00     
+(7/14): jakarta-commons-logging-1.0.4-10.el6.noarch.rpm                                                                     |  51 kB     00:00     
+(8/14): java-1.5.0-gcj-1.5.0.0-29.1.el6.x86_64.rpm                                                                          | 138 kB     00:00     
+(9/14): java_cup-0.10k-5.el6.x86_64.rpm                                                                                     | 196 kB     00:00     
+(10/14): jdk-1.6.0_35-fcs.1.osg.el6.x86_64.rpm                                                                              |  49 MB     00:03     
+(11/14): log4j-1.2.14-6.4.el6.x86_64.rpm                                                                                    | 678 kB     00:00     
+(12/14): osg-vo-map-0.0.1-1.osg.el6.noarch.rpm                                                                              | 7.6 kB     00:00     
+(13/14): puretls-0.9b4-1.osg.el6.noarch.rpm                                                                                 | 136 kB     00:00     
+(14/14): sinjdoc-0.5-9.1.el6.x86_64.rpm                                                                                     | 704 kB     00:00     
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                               13 MB/s |  78 MB     00:06     
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : java-1.5.0-gcj-1.5.0.0-29.1.el6.x86_64                                                                                         1/14 
+  Installing : 1:java_cup-0.10k-5.el6.x86_64                                                                                                  2/14 
+  Installing : sinjdoc-0.5-9.1.el6.x86_64                                                                                                     3/14 
+  Installing : cryptix-3.2.0-2.osg.el6.noarch                                                                                                 4/14 
+  Installing : cryptix-asn1-20011119-2.osg.el6.noarch                                                                                         5/14 
+  Installing : puretls-0.9b4-1.osg.el6.noarch                                                                                                 6/14 
+  Installing : bouncycastle13-1.33-4.osg.el6.noarch                                                                                           7/14 
+  Installing : 2000:jdk-1.6.0_35-fcs.1.osg.el6.x86_64                                                                                         8/14 
+Unpacking JAR files...
+	rt.jar...
+	jsse.jar...
+	charsets.jar...
+	tools.jar...
+	localedata.jar...
+	plugin.jar...
+	javaws.jar...
+	deploy.jar...
+  Installing : log4j-1.2.14-6.4.el6.x86_64                                                                                                    9/14 
+  Installing : jakarta-commons-logging-1.0.4-10.el6.noarch                                                                                   10/14 
+  Installing : cog-jglobus-1.8.0-1.osg.el6.noarch                                                                                            11/14 
+  Installing : gums-1.3.18.009-5.osg.el6.noarch                                                                                              12/14 
+  Installing : osg-vo-map-0.0.1-1.osg.el6.noarch                                                                                             13/14 
+  Installing : gums-client-1.3.18.009-5.osg.el6.noarch                                                                                       14/14 
+  Verifying  : gums-1.3.18.009-5.osg.el6.noarch                                                                                               1/14 
+  Verifying  : cog-jglobus-1.8.0-1.osg.el6.noarch                                                                                             2/14 
+  Verifying  : bouncycastle13-1.33-4.osg.el6.noarch                                                                                           3/14 
+  Verifying  : osg-vo-map-0.0.1-1.osg.el6.noarch                                                                                              4/14 
+  Verifying  : puretls-0.9b4-1.osg.el6.noarch                                                                                                 5/14 
+  Verifying  : cryptix-asn1-20011119-2.osg.el6.noarch                                                                                         6/14 
+  Verifying  : jakarta-commons-logging-1.0.4-10.el6.noarch                                                                                    7/14 
+  Verifying  : 1:java_cup-0.10k-5.el6.x86_64                                                                                                  8/14 
+  Verifying  : log4j-1.2.14-6.4.el6.x86_64                                                                                                    9/14 
+  Verifying  : 2000:jdk-1.6.0_35-fcs.1.osg.el6.x86_64                                                                                        10/14 
+  Verifying  : cryptix-3.2.0-2.osg.el6.noarch                                                                                                11/14 
+  Verifying  : sinjdoc-0.5-9.1.el6.x86_64                                                                                                    12/14 
+  Verifying  : gums-client-1.3.18.009-5.osg.el6.noarch                                                                                       13/14 
+  Verifying  : java-1.5.0-gcj-1.5.0.0-29.1.el6.x86_64                                                                                        14/14 
+
+Installed:
+  gums-client.noarch 0:1.3.18.009-5.osg.el6                                                                                                        
+
+Dependency Installed:
+  bouncycastle13.noarch 0:1.33-4.osg.el6          cog-jglobus.noarch 0:1.8.0-1.osg.el6        cryptix.noarch 0:3.2.0-2.osg.el6                    
+  cryptix-asn1.noarch 0:20011119-2.osg.el6        gums.noarch 0:1.3.18.009-5.osg.el6          jakarta-commons-logging.noarch 0:1.0.4-10.el6       
+  java-1.5.0-gcj.x86_64 0:1.5.0.0-29.1.el6        java_cup.x86_64 1:0.10k-5.el6               jdk.x86_64 2000:1.6.0_35-fcs.1.osg.el6              
+  log4j.x86_64 0:1.2.14-6.4.el6                   osg-vo-map.noarch 0:0.0.1-1.osg.el6         puretls.noarch 0:0.9b4-1.osg.el6                    
+  sinjdoc.x86_64 0:0.5-9.1.el6                   
+
+Complete!
+</pre> %ENDTWISTY%
+
+   * =edg-mkgridmap= is a periodic process (run via =cron=) that contacts a list of VOMS servers that you specify. To install edg-mkgridmap do: <pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install edg-mkgridmap
+</pre>  %TWISTY{%TWISTY_OPTS_DETAILED%}%   <pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install edg-mkgridmap 
+Loaded plugins: priorities, refresh-packagekit, security
+294 packages excluded due to repository priority protections
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package edg-mkgridmap.noarch 0:4.0.0-5.osg.el6 will be installed
+--> Processing Dependency: perl(Net::LDAPS) for package: edg-mkgridmap-4.0.0-5.osg.el6.noarch
+--> Processing Dependency: osg-edg-mkgridmap-config for package: edg-mkgridmap-4.0.0-5.osg.el6.noarch
+--> Processing Dependency: perl-Net-SSLeay for package: edg-mkgridmap-4.0.0-5.osg.el6.noarch
+--> Processing Dependency: perl(Net::LDAP::Util) for package: edg-mkgridmap-4.0.0-5.osg.el6.noarch
+--> Processing Dependency: perl(Net::LDAP) for package: edg-mkgridmap-4.0.0-5.osg.el6.noarch
+--> Processing Dependency: perl(Term::ReadKey) for package: edg-mkgridmap-4.0.0-5.osg.el6.noarch
+--> Processing Dependency: perl(XML::DOM) for package: edg-mkgridmap-4.0.0-5.osg.el6.noarch
+--> Processing Dependency: perl-Crypt-SSLeay for package: edg-mkgridmap-4.0.0-5.osg.el6.noarch
+--> Running transaction check
+---> Package perl-Crypt-SSLeay.x86_64 0:0.57-16.el6 will be installed
+---> Package perl-LDAP.noarch 1:0.40-1.el6 will be installed
+--> Processing Dependency: perl(Authen::SASL) for package: 1:perl-LDAP-0.40-1.el6.noarch
+--> Processing Dependency: perl(XML::SAX::Writer) for package: 1:perl-LDAP-0.40-1.el6.noarch
+--> Processing Dependency: perl(XML::SAX::Base) for package: 1:perl-LDAP-0.40-1.el6.noarch
+--> Processing Dependency: perl(Convert::ASN1) for package: 1:perl-LDAP-0.40-1.el6.noarch
+--> Processing Dependency: perl(IO::Socket::SSL) for package: 1:perl-LDAP-0.40-1.el6.noarch
+---> Package perl-Net-SSLeay.x86_64 0:1.35-9.el6 will be installed
+---> Package perl-TermReadKey.x86_64 0:2.30-13.el6 will be installed
+---> Package perl-XML-DOM.noarch 0:1.44-7.el6 will be installed
+--> Processing Dependency: perl(XML::RegExp) for package: perl-XML-DOM-1.44-7.el6.noarch
+---> Package vo-client-edgmkgridmap.noarch 0:42-2.osg.el6 will be installed
+--> Running transaction check
+---> Package perl-Authen-SASL.noarch 0:2.13-2.el6 will be installed
+--> Processing Dependency: perl(Digest::HMAC_MD5) for package: perl-Authen-SASL-2.13-2.el6.noarch
+--> Processing Dependency: perl(GSSAPI) for package: perl-Authen-SASL-2.13-2.el6.noarch
+---> Package perl-Convert-ASN1.noarch 0:0.22-1.el6 will be installed
+---> Package perl-IO-Socket-SSL.noarch 0:1.31-2.el6 will be installed
+--> Processing Dependency: perl(Net::LibIDN) for package: perl-IO-Socket-SSL-1.31-2.el6.noarch
+---> Package perl-XML-RegExp.noarch 0:0.03-7.el6 will be installed
+---> Package perl-XML-SAX.noarch 0:0.96-7.el6 will be installed
+--> Processing Dependency: perl(XML::LibXML::Common) for package: perl-XML-SAX-0.96-7.el6.noarch
+--> Processing Dependency: perl(XML::LibXML) for package: perl-XML-SAX-0.96-7.el6.noarch
+--> Processing Dependency: perl(XML::NamespaceSupport) for package: perl-XML-SAX-0.96-7.el6.noarch
+---> Package perl-XML-SAX-Writer.noarch 0:0.50-8.el6 will be installed
+--> Processing Dependency: perl(Text::Iconv) for package: perl-XML-SAX-Writer-0.50-8.el6.noarch
+--> Processing Dependency: perl(XML::Filter::BufferText) for package: perl-XML-SAX-Writer-0.50-8.el6.noarch
+--> Running transaction check
+---> Package perl-Digest-HMAC.noarch 0:1.01-22.el6 will be installed
+--> Processing Dependency: perl(Digest::SHA1) for package: perl-Digest-HMAC-1.01-22.el6.noarch
+---> Package perl-GSSAPI.x86_64 0:0.26-5.el6 will be installed
+---> Package perl-Net-LibIDN.x86_64 0:0.12-3.el6 will be installed
+---> Package perl-Text-Iconv.x86_64 0:1.7-6.el6 will be installed
+---> Package perl-XML-Filter-BufferText.noarch 0:1.01-8.el6 will be installed
+---> Package perl-XML-LibXML.x86_64 1:1.70-5.el6 will be installed
+---> Package perl-XML-NamespaceSupport.noarch 0:1.10-3.el6 will be installed
+--> Running transaction check
+---> Package perl-Digest-SHA1.x86_64 0:2.12-2.el6 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+===================================================================================================================================================
+ Package                                         Arch                        Version                                Repository                Size
+===================================================================================================================================================
+Installing:
+ edg-mkgridmap                                   noarch                      4.0.0-5.osg.el6                        osg                       21 k
+Installing for dependencies:
+ perl-Authen-SASL                                noarch                      2.13-2.el6                             slf                       50 k
+ perl-Convert-ASN1                               noarch                      0.22-1.el6                             slf                       42 k
+ perl-Crypt-SSLeay                               x86_64                      0.57-16.el6                            slf                      138 k
+ perl-Digest-HMAC                                noarch                      1.01-22.el6                            slf                       21 k
+ perl-Digest-SHA1                                x86_64                      2.12-2.el6                             slf                       48 k
+ perl-GSSAPI                                     x86_64                      0.26-5.el6                             slf                       63 k
+ perl-IO-Socket-SSL                              noarch                      1.31-2.el6                             slf                       68 k
+ perl-LDAP                                       noarch                      1:0.40-1.el6                           slf                      353 k
+ perl-Net-LibIDN                                 x86_64                      0.12-3.el6                             slf                       34 k
+ perl-Net-SSLeay                                 x86_64                      1.35-9.el6                             slf                      172 k
+ perl-TermReadKey                                x86_64                      2.30-13.el6                            slf                       30 k
+ perl-Text-Iconv                                 x86_64                      1.7-6.el6                              slf                       21 k
+ perl-XML-DOM                                    noarch                      1.44-7.el6                             slf                      135 k
+ perl-XML-Filter-BufferText                      noarch                      1.01-8.el6                             slf                      8.5 k
+ perl-XML-LibXML                                 x86_64                      1:1.70-5.el6                           slf                      363 k
+ perl-XML-NamespaceSupport                       noarch                      1.10-3.el6                             slf                       16 k
+ perl-XML-RegExp                                 noarch                      0.03-7.el6                             slf                      8.8 k
+ perl-XML-SAX                                    noarch                      0.96-7.el6                             slf                       77 k
+ perl-XML-SAX-Writer                             noarch                      0.50-8.el6                             slf                       23 k
+ vo-client-edgmkgridmap                          noarch                      42-2.osg.el6                           osg                      6.1 k
+
+Transaction Summary
+===================================================================================================================================================
+Install      21 Package(s)
+
+Total download size: 1.7 M
+Installed size: 4.1 M
+Downloading Packages:
+(1/21): edg-mkgridmap-4.0.0-5.osg.el6.noarch.rpm                                                                            |  21 kB     00:00     
+(2/21): perl-Authen-SASL-2.13-2.el6.noarch.rpm                                                                              |  50 kB     00:00     
+(3/21): perl-Convert-ASN1-0.22-1.el6.noarch.rpm                                                                             |  42 kB     00:00     
+(4/21): perl-Crypt-SSLeay-0.57-16.el6.x86_64.rpm                                                                            | 138 kB     00:00     
+(5/21): perl-Digest-HMAC-1.01-22.el6.noarch.rpm                                                                             |  21 kB     00:00     
+(6/21): perl-Digest-SHA1-2.12-2.el6.x86_64.rpm                                                                              |  48 kB     00:00     
+(7/21): perl-GSSAPI-0.26-5.el6.x86_64.rpm                                                                                   |  63 kB     00:00     
+(8/21): perl-IO-Socket-SSL-1.31-2.el6.noarch.rpm                                                                            |  68 kB     00:00     
+(9/21): perl-LDAP-0.40-1.el6.noarch.rpm                                                                                     | 353 kB     00:00     
+(10/21): perl-Net-LibIDN-0.12-3.el6.x86_64.rpm                                                                              |  34 kB     00:00     
+(11/21): perl-Net-SSLeay-1.35-9.el6.x86_64.rpm                                                                              | 172 kB     00:00     
+(12/21): perl-TermReadKey-2.30-13.el6.x86_64.rpm                                                                            |  30 kB     00:00     
+(13/21): perl-Text-Iconv-1.7-6.el6.x86_64.rpm                                                                               |  21 kB     00:00     
+(14/21): perl-XML-DOM-1.44-7.el6.noarch.rpm                                                                                 | 135 kB     00:00     
+(15/21): perl-XML-Filter-BufferText-1.01-8.el6.noarch.rpm                                                                   | 8.5 kB     00:00     
+(16/21): perl-XML-LibXML-1.70-5.el6.x86_64.rpm                                                                              | 363 kB     00:00     
+(17/21): perl-XML-NamespaceSupport-1.10-3.el6.noarch.rpm                                                                    |  16 kB     00:00     
+(18/21): perl-XML-RegExp-0.03-7.el6.noarch.rpm                                                                              | 8.8 kB     00:00     
+(19/21): perl-XML-SAX-0.96-7.el6.noarch.rpm                                                                                 |  77 kB     00:00     
+(20/21): perl-XML-SAX-Writer-0.50-8.el6.noarch.rpm                                                                          |  23 kB     00:00     
+(21/21): vo-client-edgmkgridmap-42-2.osg.el6.noarch.rpm                                                                     | 6.1 kB     00:00     
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                              4.4 MB/s | 1.7 MB     00:00     
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing : perl-XML-NamespaceSupport-1.10-3.el6.noarch                                                                                    1/21 
+  Installing : perl-Net-SSLeay-1.35-9.el6.x86_64                                                                                              2/21 
+  Installing : perl-XML-SAX-0.96-7.el6.noarch                                                                                                 3/21 
+  Installing : 1:perl-XML-LibXML-1.70-5.el6.x86_64                                                                                            4/21 
+  Installing : perl-XML-Filter-BufferText-1.01-8.el6.noarch                                                                                   5/21 
+  Installing : perl-Convert-ASN1-0.22-1.el6.noarch                                                                                            6/21 
+  Installing : perl-Digest-SHA1-2.12-2.el6.x86_64                                                                                             7/21 
+  Installing : perl-Digest-HMAC-1.01-22.el6.noarch                                                                                            8/21 
+  Installing : vo-client-edgmkgridmap-42-2.osg.el6.noarch                                                                                     9/21 
+  Installing : perl-XML-RegExp-0.03-7.el6.noarch                                                                                             10/21 
+  Installing : perl-XML-DOM-1.44-7.el6.noarch                                                                                                11/21 
+  Installing : perl-GSSAPI-0.26-5.el6.x86_64                                                                                                 12/21 
+  Installing : perl-Authen-SASL-2.13-2.el6.noarch                                                                                            13/21 
+  Installing : perl-Crypt-SSLeay-0.57-16.el6.x86_64                                                                                          14/21 
+  Installing : perl-TermReadKey-2.30-13.el6.x86_64                                                                                           15/21 
+  Installing : perl-Net-LibIDN-0.12-3.el6.x86_64                                                                                             16/21 
+  Installing : perl-IO-Socket-SSL-1.31-2.el6.noarch                                                                                          17/21 
+  Installing : perl-Text-Iconv-1.7-6.el6.x86_64                                                                                              18/21 
+  Installing : perl-XML-SAX-Writer-0.50-8.el6.noarch                                                                                         19/21 
+  Installing : 1:perl-LDAP-0.40-1.el6.noarch                                                                                                 20/21 
+  Installing : edg-mkgridmap-4.0.0-5.osg.el6.noarch                                                                                          21/21 
+  Verifying  : perl-Text-Iconv-1.7-6.el6.x86_64                                                                                               1/21 
+  Verifying  : perl-Net-LibIDN-0.12-3.el6.x86_64                                                                                              2/21 
+  Verifying  : perl-IO-Socket-SSL-1.31-2.el6.noarch                                                                                           3/21 
+  Verifying  : 1:perl-XML-LibXML-1.70-5.el6.x86_64                                                                                            4/21 
+  Verifying  : perl-XML-DOM-1.44-7.el6.noarch                                                                                                 5/21 
+  Verifying  : perl-XML-SAX-Writer-0.50-8.el6.noarch                                                                                          6/21 
+  Verifying  : 1:perl-LDAP-0.40-1.el6.noarch                                                                                                  7/21 
+  Verifying  : perl-Digest-HMAC-1.01-22.el6.noarch                                                                                            8/21 
+  Verifying  : perl-Authen-SASL-2.13-2.el6.noarch                                                                                             9/21 
+  Verifying  : perl-XML-NamespaceSupport-1.10-3.el6.noarch                                                                                   10/21 
+  Verifying  : perl-TermReadKey-2.30-13.el6.x86_64                                                                                           11/21 
+  Verifying  : perl-Crypt-SSLeay-0.57-16.el6.x86_64                                                                                          12/21 
+  Verifying  : perl-XML-Filter-BufferText-1.01-8.el6.noarch                                                                                  13/21 
+  Verifying  : perl-GSSAPI-0.26-5.el6.x86_64                                                                                                 14/21 
+  Verifying  : perl-XML-RegExp-0.03-7.el6.noarch                                                                                             15/21 
+  Verifying  : vo-client-edgmkgridmap-42-2.osg.el6.noarch                                                                                    16/21 
+  Verifying  : perl-Net-SSLeay-1.35-9.el6.x86_64                                                                                             17/21 
+  Verifying  : perl-Digest-SHA1-2.12-2.el6.x86_64                                                                                            18/21 
+  Verifying  : perl-Convert-ASN1-0.22-1.el6.noarch                                                                                           19/21 
+  Verifying  : edg-mkgridmap-4.0.0-5.osg.el6.noarch                                                                                          20/21 
+  Verifying  : perl-XML-SAX-0.96-7.el6.noarch                                                                                                21/21 
+
+Installed:
+  edg-mkgridmap.noarch 0:4.0.0-5.osg.el6                                                                                                           
+
+Dependency Installed:
+  perl-Authen-SASL.noarch 0:2.13-2.el6              perl-Convert-ASN1.noarch 0:0.22-1.el6              perl-Crypt-SSLeay.x86_64 0:0.57-16.el6    
+  perl-Digest-HMAC.noarch 0:1.01-22.el6             perl-Digest-SHA1.x86_64 0:2.12-2.el6               perl-GSSAPI.x86_64 0:0.26-5.el6           
+  perl-IO-Socket-SSL.noarch 0:1.31-2.el6            perl-LDAP.noarch 1:0.40-1.el6                      perl-Net-LibIDN.x86_64 0:0.12-3.el6       
+  perl-Net-SSLeay.x86_64 0:1.35-9.el6               perl-TermReadKey.x86_64 0:2.30-13.el6              perl-Text-Iconv.x86_64 0:1.7-6.el6        
+  perl-XML-DOM.noarch 0:1.44-7.el6                  perl-XML-Filter-BufferText.noarch 0:1.01-8.el6     perl-XML-LibXML.x86_64 1:1.70-5.el6       
+  perl-XML-NamespaceSupport.noarch 0:1.10-3.el6     perl-XML-RegExp.noarch 0:0.03-7.el6                perl-XML-SAX.noarch 0:0.96-7.el6          
+  perl-XML-SAX-Writer.noarch 0:0.50-8.el6           vo-client-edgmkgridmap.noarch 0:42-2.osg.el6      
+
+Complete!
+</pre>%ENDTWISTY%
+%ENDSECTION{"InstallGratiaOneVMProbeRPMs"}%
+---+ Configure Gratia onevm probe
+In order to configure gratia onevm probe you will need to modify ==/etc/gratia/onevm/ProbeConfig== file: <pre class="file">
+    CollectorHost="%RED%gratia-osg-prod.opensciencegrid.org:80%ENDCOLOR%"
+    SSLHost="%RED%gratia-osg-prod.opensciencegrid.org:443%ENDCOLOR%"
+    SSLRegistrationHost="%RED%gratia-osg-prod.opensciencegrid.org:80%ENDCOLOR%"
+    SiteName="%RED%Generic site%ENDCOLOR%"
+    EnableProbe="%RED%0%ENDCOLOR%"
+</pre>
+You will need to replace gratia service host and port, the name of your site and set attribute ==EnableProbe== to 1.
+
+Now, you will need to configure gums client or edg-mkgridmap.
+   * In order to generate ==user-vo-map== from GUMS server you will need to edit ==/etc/gums/gums-client.properties== and change both gums.location and gums.authz entries to include the hostname your GUMS server. For example:<pre class="file">
+gums.location=https://%RED%gums.example.com:8443%ENDCOLOR%/gums/services/GUMSAdmin
+gums.authz=https://%RED%gums.example.com:8443%ENDCOLOR%/gums/services/GUMSXACMLAuthorizationServicePort</pre>
+   * In order to generate ==user-vo-map== from VOMS server you will need to edit =/etc/edg-mkgridmap.conf=. We distribute a default version that lists all known OSG VOs and maps users to shared accounts. A portion of this configuration file looks like:<pre class="file">
+#### GROUP: group URI [lcluser]
+#
+#-------------------
+# USER-VO-MAP mis MIS -- 6 -- Rob Quick (rquick@iupui.edu)    
+group vomss://voms.grid.iu.edu:8443/voms/mis mis
+#-------------------
+# USER-VO-MAP osgedu OSGEDU -- 24 -- Rob Quick (rquick@iupui.edu)    
+group vomss://voms.grid.iu.edu:8443/voms/osgedu osgedu
+</pre>To disable access to a VO, simple add a hash mark (#) add the beginning of a line beginning with =group=. For instance, to disable the osgedu group, the final line in the above example would read:<pre class="file">
+%RED%#%ENDCOLOR%group vomss://voms.grid.iu.edu:8443/voms/osgedu osgedu</pre>
+To create an initial mapping you can invoke =edg-mkgridmap=. Then check the result in =/etc/grid-security/grid-mapfile=.For more information on edg-mkgridmap and the use of local accounts you can check the [[Edg-mkgridmap][local authentication page describing edg-mkgridmap]].
+---+ Starting Gratia !OneVM Probe
+Depending on your authorization mechanism, choose one of these:
+
+   * GUMS: If you use GUMS, you need to run a client that creates the user-vo-map file:<pre class="rootscreen">
+%UCL_PROMPT_ROOT%/sbin/service gums-client-cron start
+</pre>
+   * edg-mkgridmap: If you use edg-mkgridmap to make a ==user-vo-map==:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service edg-mkgridmap start
+</pre>
+   * Start the Gratia probes<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service gratia-probes-cron start
+</pre>
+---+ Stopping Gratia !OneVM Probe
+   * GUMS: If you use GUMS, do <pre class="rootscreen">
+%UCL_PROMPT_ROOT%/sbin/service gums-client-cron stop
+</pre>
+   * edg-mkgridmap: If you use edg-mkgridmap, do:<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service edg-mkgridmap stop
+</pre>
+   * Stop the Gratia probes<pre class="rootscreen">
+%UCL_PROMPT_ROOT% /sbin/service gratia-probes-cron start
+</pre>
+---+ How to get Help?
+To get assistance please use [[HelpProcedure][Help Procedure]].
+
+---+ References
+---+ Comments
+
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = TanyaLevshina
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = General
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local TEST_READY   = %NO%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %NO%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = StevenTimm
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %NO%
+
+
+DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = Hyun Woo Kim
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %NO%
+############################################################################################################
+-->
+-- Main.TanyaLevshina - 01 Oct 2012

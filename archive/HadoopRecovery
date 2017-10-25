@@ -1,0 +1,170 @@
+---+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
+%DOC_STATUS_TABLE%
+%TOC%
+
+---++ Detecting filesystem corruption
+
+Hadoop's fsck utility will show Status: CORRUPT in its output whenever a file is corrupt. The following command will display the status for your entire filesystem namespace.
+
+=# hadoop fsck /=
+
+
+---++ Causes of corruption
+
+When one or more blocks of a file become corrupt or missing and there are no more 'good' replicas of that block the filesystem is considered CORRUPT. It is often possible to recover from this depending on the cause. Take for example the following scenarios:
+
+* Two or more datanodes crash on your normally 2x replicated filesystem. Files with blocks replicated on those two nodes will become corrupt as there are no replicas available for some of blocks and you cannot retrieve the file in full.
+
+* A datanode crashes, and during replication a hard drive in another datanode starts showing errors and is unable to provide certain blocks. Those blocks now have no 'good' replicas and the filesystem is CORRUPT.
+
+* ... etc. Site admins know there are many other 'unlikely' scenarios that will inevitably occur resulting in blocks being lost.
+
+_The key thing to remember_ is that if you can recover the blocks which make up a file, you can recover the file. Blocks and their associated metadata are simply files on some underlying filesystem (ext3, xfs, reiser, etc...) and you can treat them as such. You can go to great extents to recover the blocks if you need, such as using undelete tools or copying blocks from a bad datanode to another working datanode. So long as you can get the problematic blocks to a working datanode, which in turn can report them to the namenode, you can recover the file.
+
+
+---++ Locating and repairing corruptions
+When you encounter corruptions, use Hadoop's fsck utility to obtain a list of affected files *[should we suggest a parser like my hfscker.py here?]*
+
+Using the =-files=, =-locations=, and =-blocks= parameters you can use fsck to find out which blocks are missing and where they are supposed to be. Sometimes you will find a block simply marked as =MISSING= with no locations given, and other times you will find a single replica with location listed where there should in fact be more.
+
+<verbatim># hadoop fsck /user/gattebury/test.iso -files -locations -blocks
+/user/gattebury/test.iso 4613701632 bytes, 35 block(s):  OK
+0. blk_-6574099661639162407_21831 len=134217728 repl=3 [172.16.1.115:50010, 172.16.1.128:50010, 129.93.239.178:50010]
+1. blk_-8603098634897134795_21831 len=134217728 repl=3 MISSING!
+2. ...</verbatim>
+
+In the first case, all possible sources of the second block are gone and the namenode has no knowledge of any host with it. This can happen when nodes are completely off or have no network connection to the namenode. In this case, the easiest solution is to =grep= for the block ID "8603098634897134795" in the namenode logs in hopes of seeing the last place that block lived. Providing you keep namenode logs around and the logging level is set high enough *[what is high enough anyway?]* you will hopefully find a datanode containing the block. If you are able to bring the datanode back up and the blocks are readable from the hard drive(s) the namenode will replicate it back to the appropriate amount and the file corruption will be gone.
+
+
+<verbatim># hadoop fsck /user/gattebury/test.iso -files -locations -blocks
+/user/gattebury/test.iso 4613701632 bytes, 35 block(s):  OK
+0. blk_-6574099661639162407_21831 len=134217728 repl=3 [172.16.1.115:50010, 172.16.1.128:50010, 129.93.239.178:50010]
+1. blk_-8603098634897134795_21831 len=134217728 repl=3 [172.16.1.83:50010]
+2. ...</verbatim>
+
+In the second case you may see a single replica listed for the block where you know there should be more. Under normal operation, this block would eventually (within a few minutes) be replicated back to the replication level of 3. In very rare cases the replication may never happen. This has occurred at Nebraska a few times when a datanode is 'alive' but unable to send the block due to hard drive errors (especially in the cases where the ext3 journal drops and the host enters a rather unpredictable state). This also happens with stuck / under replicated blocks (see Fixing Stuck and Under Replicated Files in HadoopOperations). You should first try to recover the host with the single block listed. If that is possible, the namenode will replicate as needed and the corruption will be gone. If you are unable to recover that host, you can again try greping through the namenode logs (or datanode logs in desparation) to find another replica of that block and recover that host instead. If you find another host with a good copy of the block and bring it up, make sure to disable/decommission the 'stuck' one until you can fix that host as well.
+
+---++ Recovering a working drive
+
+One special case scenerio is when a datanode that contains multiple data disks becomes unbootable, but one or more of the disks are still good.  In this situation, it is possible to remount the working drives on another datanode in order to recover the blocks.  If you have space on the second datanode, you can simply attach the disk to the second datanode then copy the contents of the /data1/hadoop/data/current directory (omitting the VERSION file) from the working disk into the equivalent directory on the second datanode.
+
+If you don't have enough space on the second datanode, then you can temporarily attach the disk to the second datanode and decommission the second datanode to ensure the blocks are all copied elsewhere in the cluster.  The step by step procedure for doing this is:
+
+   1. Shut down the datanode process with =service hadoop stop=
+   1. Attach the disk to the working datanode using a spare SATA port or convenient SATA -> USB converter device
+   1. Mount the disk in a temporary location, such as =/mnt/tmp=
+   1. Copy the =VERSION= file from another datanode partition, such as =/data1/hadoop/data/current/VERSION= and overwrite the one on the temporarily mounted datanode partition at =/mnt/tmp/hadoop/data/current/VERSION=.  This is necessary because each datanode service tags the directory as its own by creating this VERSION file.  By overwriting the VERSION file we can trick the datanode into thinking that this directory belongs to it.
+   1. Update =/etc/sysconfig/hadoop= and add the temporary directory to the list of datanode partitions in HADOOP_DATA
+   1. Run =service hadoop-firstboot start= to regenerate the hadoop configuration files in =/etc/hadoop=
+   1. Start the datanode process again with =service hadoop start=
+   1. Decommission the datanode according to the procedure in https://twiki.grid.iu.edu/bin/view/Storage/HadoopOperations#Decommissioning_Data_Nodes
+   1. After the decommission process has finished, stop the hadoop service with =service hadoop stop=
+   1. Remove the temporary directory from =/etc/sysconfig/hadoop= and re-run =service hadoop-firstboot stop=
+   1. De-decommission the datanode by removing its entry from =hosts_exclude= and running =hadoop dfsadmin -refreshNodes=
+   1. Detach the disk from the datanode and restart the datanode service with =service hadoop start=
+
+An important point here is that the =VERSION= file contains a unique id for the datanode that created this directory.  You want to make sure that the =VERSION= file on a working datanode does not get removed, and the =VERSION= file on a working disk is updated before adding it to a new physical datanode host.
+
+---++ Unrecoverable files
+If you are unable to recover at least one datanode containing the missing/corrupt blocks the file is lost as there is no way to retrieve the full file anymore. You can use the =-move= parameter to fsck to move the remaining parts of a file to /lost+found/. *[Not 100% sure, but I believe the missing sections will be zeros leaving the filesize correct]*. 
+
+=# hadoop fsck -move=
+
+
+_Reminder: having more replicas of 'critical' files such as user data greatly reduces the chance of you losing all replicas of that file's blocks. Nothing prevents you from having 10 replicas on critical files but only one replica of data that is recoverable by another means to save space._
+
+
+---++ Namenode Recovery
+
+The FsImage (=fsimage=) and EditLog (=edits=) are the two critical elements of the namenode. Ideally you will have set up your =fs.checkpoint.dir= to point at both local disk on your namenode as well as another physical disk or network mounted server (NFS for instance). This is where checkpoints will be stored. You should also have set =dfs.name.dir= which is where the namenode will keep the current running FsIimage and EditLog. In addition, you should have a secondarynamenode specified with =dfs.secondary.http.address= which will receive and store a copy of the these on its local disk. The secondarynamenode will also periodically merge the EditLog and FsImage and return that to the namenode. In the end you should be aware of the following important files:
+
+<verbatim>
+namenode: (dfs.name.dir = ${hadoop.tmp.dir}/dfs/name by default)
+   ./dfs/name/current/edits   --- the EditLog
+   ./dfs/name/current/fsimage   --- the FsImage
+   ./dfs/name/current/fstime
+   ./dfs/name/current/VERSION
+   ./dfs/name/image/fsimage
+
+secondarynamenode:
+   ./dfs/current/edits   --- the EditLog
+   ./dfs/current/fsimage   --- the FsImage
+   ./dfs/current/fstime
+   ./dfs/current/VERSION
+   ./dfs/image/fsimage
+   ./dfs/previous.checkpoint/   --- the previous copy of ./dfs/current/
+</verbatim>
+
+You will also have these /current/ data structures on the additional locations you specify in =fs.checkpoint.dir=
+ 
+
+In the event of a namenode failure you have a few options:
+
+* If the namenode simply crashed, you may be able to recover and simply restart the namenode service. If the FsImage =dfs.name.dir= is not corrupt in any way, the namenode will start and after all your datanodes report in your filesystem will be functioning normally.
+
+* If the FsImage is corrupt, or your namenode's physical hardware is unrecoverable, you will need to start a new namenode with the last good FsImage you have. It may be the case that only the copy on your original namenode's local disk is corrupt, but the copy on the network mounted server is fine. The appropriate way to recover from the checkpoint copies is to do the following:
+
+   1. Create =dfs.name.dir= on your new namenode (it must be empty)
+   1. Make sure =fs.checkpoint.dir= is pointed at your last known good copy
+   1. Start the namenode with the =-importCheckpoint= option
+
+The namenode will verify that the files in =fs.checkpoint.dir= are consistent and create a new copy of the FsImage and EditLog in =dfs.name.dir.= Your namenode should start functioning again and will exit safemode once the appropriate number of blocks have been reported. *[does -importCheckpoint only do the import, or does it continue to run afterwards???]* The namenode will not alter the files in =fs.checkpoint.dir=. 
+
+For more information on the secondarynamenode functions see: http://hadoop.apache.org/common/docs/current/hdfs_user_guide.html#Secondary+NameNode
+
+---++ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = DouglasStrain
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Troubleshooting
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %NO%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %NO%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = NehaSharma
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %IN_PROGRESS%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = NehaSharma
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %NO%
+############################################################################################################
+-->

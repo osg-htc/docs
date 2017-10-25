@@ -9,7 +9,7 @@ This document introduces YUM repositories and how OSG uses them.
 Repositories
 ------------
 
-OSG hosts four public-facing repositories at [repo.grid.iu.edu](http://repo.grid.iu.edu/):
+OSG hosts four public-facing repositories at [repo.opensciencegrid.org](http://repo.opensciencegrid.org/):
 
 -   **release**: This repository contains software that we are willing to support and can be used by the general community.
 -   **contrib**: RPMs contributed from outside the OSG.
@@ -47,9 +47,9 @@ OSG RPMs are distributed via the OSG yum repositories. Some packages depend on p
 
         :::console
         # EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
-        [root@client ~] # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+        root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
         # EPEL 7 (For RHEL 7, CentOS 7, and SL 7) 
-        [root@client ~] # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 
 !!! warning
@@ -63,7 +63,7 @@ For packages that exist in both OSG and EPEL repositories, it is important to pr
 1.  Install the Yum priorities package:
 
         :::console
-        [root@client ~]# yum install yum-plugin-priorities
+        root@host # yum install yum-plugin-priorities
 
 2.  Ensure that `/etc/yum.conf` has the following line in the `[main]` section (particularly when using ROCKS), thereby enabling Yum plugins, including the priorities one:
     
@@ -78,35 +78,36 @@ For packages that exist in both OSG and EPEL repositories, it is important to pr
 If you are upgrading from one OSG series to another, remove the old OSG repository definition files and clean the Yum cache:
 
     :::console
-    [root@client ~]$ yum clean all 
-    [root@client ~]$ rpm -e osg-release
+    root@host # yum clean all 
+    root@host # rpm -e osg-release
     
 This step ensures that local changes to `*.repo` files will not block the installation of the new OSG repositories. After this step, `*.repo` files that have been changed will exist in `/etc/yum.repos.d/` with the `*.rpmsave` extension. After installing the new OSG repositories (the next step) you may want to apply any changes made in the `*.rpmsave` files to the new `*.repo` files.
 
 Install the OSG repositories:
 
     :::console
-    [root@client ~]$ rpm -Uvh <URL>
+    root@host # rpm -Uvh <URL>
     
 Where `<URL>` is one of the following:
 
 | Series      |              EL6 URL (for RHEL 6, CentOS 6, or SL 6)              |              EL7 URL (for RHEL 7, CentOS 7, or SL 7)              |
 |:------------|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|
-| **OSG 3.3** | `https://repo.grid.iu.edu/osg/3.3/osg-3.3-el6-release-latest.rpm` | `https://repo.grid.iu.edu/osg/3.3/osg-3.3-el7-release-latest.rpm` |
-| **OSG 3.4** | `https://repo.grid.iu.edu/osg/3.4/osg-3.4-el6-release-latest.rpm` | `https://repo.grid.iu.edu/osg/3.4/osg-3.4-el7-release-latest.rpm` |
+| **OSG 3.3** | `https://repo.opensciencegrid.org/osg/3.3/osg-3.3-el6-release-latest.rpm` | `https://repo.opensciencegrid.org/osg/3.3/osg-3.3-el7-release-latest.rpm` |
+| **OSG 3.4** | `https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm` | `https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm` |
 
 Priorities
 ----------
 
-<span class="twiki-macro NOTE"></span> Make sure you installed the Yum priorities plugin, as described above. Not doing so is a common mistake that causes failed installations.
+!!! note
+    Make sure you installed the Yum priorities plugin, as described above. Not doing so is a common mistake that causes failed installations.
 
 The only OSG repository enabled by default is the release one. If you want to enable another one, such as `osg-testing`, then edit its file (e.g. `/etc/yum.repos.d/osg-testing.repo`) and change the enabled option from 0 to 1:
 
 ``` file
 [osg-testing]
-name=OSG Software for Enterprise Linux 5 - Testing - $basearch
-#baseurl=http://repo.grid.iu.edu/osg/3.2/el5/testing/$basearch
-mirrorlist=http://repo.grid.iu.edu/mirror/osg/3.2/el5/testing/$basearch
+name=OSG Software for Enterprise Linux 7 - Testing - $basearch
+#baseurl=http://repo.grid.iu.edu/osg/3.4/el7/testing/$basearch
+mirrorlist=http://repo.grid.iu.edu/mirror/osg/3.4/el7/testing/$basearch
 failovermethod=priority
 priority=98
 enabled=%RED%1%ENDCOLOR%

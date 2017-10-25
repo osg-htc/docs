@@ -1,0 +1,29 @@
+---+!! Testing new !RSV probes
+
+This page contains information for how !RSV probe developers can test their new probes into the RSV framework.
+
+This page assumes you've already [[WriteProbe][written]] and [[InstallProbe][installed]] an !RSV probe.  See [[WriteYourOwnRSVProbe][the overall process info]].
+
+%TOC{depth="4"}%
+
+---++ Testing the !RSV probe
+
+Try your new metric out using the rsv-control tool.
+
+<pre class="screen">
+rsv-control --run --host <em>foo.example.com</em> <em>org.osg.your.metric</em>
+</pre>
+
+---+++ Common problems
+
+---++++ ERROR: Metric does not exist at /opt/itb/osg-rsv/bin/metrics/org.osg.your.metric
+
+This means that you have not created a symlink in the =VDT_LOCATION/osg-rsv/bin/metrics= directory.  Create a symlink named after your metric in this directory.  It should point at your probe.  See the other symlinks in this directory for an example.
+
+---++++ ERROR: Mandatory config file '/opt/itb/osg-rsv/meta/metrics/org.osg.your.metric.meta' does not exist
+
+You need to create a meta file at the location specified.
+
+---++++ ERROR: Metric configuration is missing 'service-type' or 'execute' declaration
+
+You did not specify either 'service-type' or 'execute' in the meta file.  See the [[InstallProbe][install probe section]] for info on this.

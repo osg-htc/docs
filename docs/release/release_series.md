@@ -16,7 +16,7 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
 
 -   **OSG 3.2** started in November 2013, and was end-of-lifed in August 2016. While the files have not been removed, it is strongly recommended that it not be installed anymore. The main differences between it and 3.1 were the introduction of glideinWMS 3.2, HTCondor 8.0, and Hadoop/HDFS 2.0; also the gLite CE Monitor system was dropped in favor of osg-info-services.
 
--   **OSG 3.3** started in August 2015 and is still supported today.  End-of-support is scheduled for June 2018; sites are encouraged to investigate the upgrade to OSG 3.4. The main differences between 3.3 and 3.2 are the dropping of EL5 support, the addition of EL7 support, and the dropping of Globus GRAM support.
+-   **OSG 3.3** started in August 2015 and is still supported today.  End-of-support is scheduled for May 2018; sites are encouraged to investigate the upgrade to OSG 3.4. The main differences between 3.3 and 3.2 are the dropping of EL5 support, the addition of EL7 support, and the dropping of Globus GRAM support.
 
 -   **OSG 3.4** stared June 2017. The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server packages.
 
@@ -38,33 +38,33 @@ Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4
     First, remove the old series yum repositories:
 
         :::console
-        [root@client ~] # rpm -e osg-release
+        root@host # rpm -e osg-release
 
     This step ensures that any local modifications to `*.repo` files will not prevent installing the new series repos. Any modified `*.repo` files should appear under `/etc/yum.repos.d/` with the `*.rpmsave` extension. After installing the new OSG repositories (the next step) you may want to apply any changes made in the `*.rpmsave` files to the new `*.repo` files.
 
 2.  Install the OSG repositories:
 
         :::console
-        [root@client ~] # rpm -Uvh <URL>
+        root@host # rpm -Uvh <URL>
 
     where `<URL>` is one of the following:
 
     | Series                    | EL5 URL (for RHEL5, CentOS5, or SL5)                             | EL6 URL (for RHEL6, CentOS6, or SL6)                             | EL7 URL (for RHEL7, CentOS7, or SL7)                             |
     |:--------------------------|:-----------------------------------------------------------------|:-----------------------------------------------------------------|:-----------------------------------------------------------------|
-    | **OSG 3.1** (unsupported) | `http://repo.grid.iu.edu/osg/3.1/osg-3.1-el5-release-latest.rpm` | `http://repo.grid.iu.edu/osg/3.1/osg-3.1-el6-release-latest.rpm` | N/A                                                              |
-    | **OSG 3.2** (unsupported) | `http://repo.grid.iu.edu/osg/3.2/osg-3.2-el5-release-latest.rpm` | `http://repo.grid.iu.edu/osg/3.2/osg-3.2-el6-release-latest.rpm` | N/A                                                              |
-    | **OSG 3.3**               | N/A                                                              | `http://repo.grid.iu.edu/osg/3.3/osg-3.3-el6-release-latest.rpm` | `http://repo.grid.iu.edu/osg/3.3/osg-3.3-el7-release-latest.rpm` |
-    | **OSG 3.4**               | N/A                                                              | `http://repo.grid.iu.edu/osg/3.4/osg-3.4-el6-release-latest.rpm` | `http://repo.grid.iu.edu/osg/3.4/osg-3.4-el7-release-latest.rpm` |
+    | **OSG 3.1** (unsupported) | `http://repo.opensciencegrid.org/osg/3.1/osg-3.1-el5-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.1/osg-3.1-el6-release-latest.rpm` | N/A                                                              |
+    | **OSG 3.2** (unsupported) | `http://repo.opensciencegrid.org/osg/3.2/osg-3.2-el5-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.2/osg-3.2-el6-release-latest.rpm` | N/A                                                              |
+    | **OSG 3.3**               | N/A                                                              | `http://repo.opensciencegrid.org/osg/3.3/osg-3.3-el6-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.3/osg-3.3-el7-release-latest.rpm` |
+    | **OSG 3.4**               | N/A                                                              | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm` |
 
 3.  Clean yum cache:
 
         :::console
-        [root@client ~] # yum clean all --enablerepo=*
+        root@host # yum clean all --enablerepo=*
 
 4. Update software:
 
         :::console
-        [root@client ~] # yum update
+        root@host # yum update
 
 This command will update **all** packages on your system.
 
@@ -83,22 +83,22 @@ The program `frontier-squid` received a major version upgrade (versions 2.7 to 3
 Uninstalling BeStMan2 from the Storage Element (upgrading to OSG 3.4)
 ---------------------------------------------------------------------
 
-The program BeStMan2 is no longer available in OSG 3.4 and its functionality has been replaced by [load-balanced GridFTP](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/LoadBalancedGridFTP). To update your storage element to OSG 3.4, you must perform the following procedure:
+The program BeStMan2 is no longer available in OSG 3.4 and its functionality has been replaced by [load-balanced GridFTP](../data/load-balanced-gridftp). To update your storage element to OSG 3.4, you must perform the following procedure:
 
 1.  Ensure that OSG BeStMan packages are installed:
 
         :::console
-        [root@client ~] # rpm -q osg-se-bestman
+        root@host # rpm -q osg-se-bestman
 
 2.  Stop the `bestman2` service:
 
         :::console
-        [root@client ~] # service bestman2 stop
+        root@host # service bestman2 stop
 
 3.  Uninstall the software:
 
         :::console
-        [root@client ~] # yum erase bestman2-tester-libs bestman2-common-libs \
+        root@host # yum erase bestman2-tester-libs bestman2-common-libs \
                                     bestman2-server-libs bestman2-server-dep-libs \
                                     bestman2-client-libs bestman2-tester bestman2-client \
                                     bestman2-server osg-se-bestman
@@ -118,22 +118,22 @@ To cleanly uninstall OSG Info Services from your CE, perform the following proce
 1.  Ensure that you are using a sufficiently new version of the `osg-ce` metapackages:
 
         :::console
-        [root@client ~] # rpm -q osg-ce
+        root@host # rpm -q osg-ce
 
     should be at least 3.3-12 (OSG 3.3) or 3.4-1 (OSG 3.4).  If not, update them:
 
         :::console
-        [root@client ~] # yum update osg-ce
+        root@host # yum update osg-ce
 
 2.  Stop the `osg-info-services` service:
 
         :::console
-        [root@client ~] # service osg-info-services stop
+        root@host # service osg-info-services stop
 
 3.  Uninstall the software:
 
         :::console
-        [root@client ~] # yum erase gip osg-info-services
+        root@host # yum erase gip osg-info-services
 
 !!! note
     In the output from this command, yum should **not** list other packages than those two. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest OSG 3.3 (or 3.4) versions, and try again.
@@ -148,18 +148,18 @@ To cleanly uninstall CEMon from your CE, perform the following procedure (after 
 1.  Ensure that you are using a sufficiently new version of the `osg-ce` metapackages:
 
         :::console
-        [root@client ~] # rpm -q osg-ce
+        root@host # rpm -q osg-ce
 
     should be at least 3.3-12 (OSG 3.3) or 3.4-1 (OSG 3.4). If not, update them:
 
         :::console
-        [root@client ~] # yum update osg-ce
+        root@host # yum update osg-ce
 
 2.  If there is a CEMon configuration file at `/etc/osg/config.d/30-cemon.ini`, remove it.
 3.  Remove CEMon and related packages:
 
         :::console
-        [root@client ~] # yum erase glite-ce-monitor glite-ce-osg-ce-plugin osg-configure-cemon
+        root@host # yum erase glite-ce-monitor glite-ce-osg-ce-plugin osg-configure-cemon
 
 !!! note
     In the output from this command, yum should **not** list other packages than those three. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their OSG 3.3 (or 3.4) versions (they should have `.osg33` or `.osg34` in their versions), and try again.

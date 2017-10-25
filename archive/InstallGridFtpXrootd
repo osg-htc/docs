@@ -1,0 +1,861 @@
+%LINKCSS%
+---+!! %SPACEOUT{ "Install !Xrootd !GridFTP" }%
+%DOC_STATUS_TABLE%
+%TOC%
+
+---+ About this Document
+
+For a full storage element, visit Documentation/Release3.InstallBestmanXrootdSE.  However, bigger sites (tier-2, etc) may require multiple !GridFTP to be load balanced under a single !BeStMan Gateway SRM interface.  This page aims to explain how to install such a !GridFTP server.  
+
+This package could also be used to install a stand-alone !GridFTP server on top of !XRootD servers, but most installations use this 
+
+---+ Requirements
+
+---++ Host and OS
+
+   * OS is %SUPPORTED_OS%. 
+   * [[http://fedoraproject.org/wiki/EPEL][EPEL]] repos enabled.
+   * A working !XRootD Server.  See Documentation/Release3.InstallXrootd for details.
+   * Root access
+
+---++ Users
+
+This installation will create several users unless they are already created.
+
+%STARTSECTION{"Users"}%
+| *User* | *Comment* |
+| =daemon= | Used by globus-gridftp-server. |
+| =xrootd= | Used by the xrootd client to contact xrootd redirector. |
+%ENDSECTION{"Users"}%
+
+---++ Certificates
+
+%STARTSECTION{"Certificates"}%
+| *Certificate* | *User that owns certificate* | *Path to certificate* |
+| Host certificate | =root= | =/etc/grid-security/hostcert.pem= <br> =/etc/grid-security/hostkey.pem= |
+%ENDSECTION{"Certificates"}%
+
+[[InstallCertScripts][Instructions]] to request a service certificate.
+
+You will also need a copy of CA certificates (see below).
+
+---++ Networking
+
+%STARTSECTION{"Firewalls"}%
+%INCLUDE{"Documentation/Release3.FirewallInformation" section="FirewallTable" lines="gridftp,portrange,portsource"}% \
+%ENDSECTION{"Firewalls"}%
+
+
+---++ Engineering Considerations
+The !GridFTP server  provides high-performance, secure and reliable data transfer. This guide is primarily intended for installations that require one [[InstallBestmanXrootdSE][BeStMan]] endpoint but multiple !GridFTP servers for scalability.  Multiple !GridFTP instances on different servers are recommended if:
+   * You have a !BeStMan-gateway/Xrootd SE (Storage Element) serving data to more than 250 cores for VOs that use storage heavily (e.g. CMS, ATLAS, CDF, and D0)
+   * Your storage will be managing more than 50 TB of disk space
+   * You have a !BeStMan-gateway/Xrootd SE with more than 1Gbps bandwidth: plan on at least one !GridFTP server for each 4Gbps of available bandwidth (assuming you have 10Gbps interfaces on the server) if you want to maximize throughput. 
+
+---+ Install Instructions
+
+Note that this package is primarily intended for !GridFTP acting as an interface for !XRootD server, usually part of a bigger storage element installation.  If you have not installed an !XRootD server yet, follow the instructions in Documentation/Release3.InstallXrootd.
+
+%INCLUDE{"YumRepositories" section="OSGRepoBrief" headingoffset="1"}%
+
+---++ Certificates 
+
+!GridFTP, which is a part of this meta-package, requires a certificate package to run.  If you require a specific certificate package, follow the Documentation/Release3.InstallCertAuth instructions to install it.   If you do not install a grid certificate package first, the install procedure will install one for you as part of its dependencies.  (usually osg-ca-certs).
+
+---++ Package installation instructions
+
+First, you will need to install the !XRootD !GridFTP meta-package.
+
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% yum install osg-gridftp-xrootd
+</pre> 
+
+
+---++ Configuring !GridFTP authentication support
+
+For information on how to configure authentication for your !GridFTP installation, please refer to the [[InstallOSGGridFTP#ConfiguringAuthentication][configuring authentication section of the GridFTP guide]].
+
+---++ Configuring !GridFTP !XRootD support
+
+%INCLUDE{"InstallBestmanXrootdSE" section="dsi" }%
+
+---+++ (Optional) Enabling !GridFTP server for a !BeStMan SE 
+
+If this installation is part of a greater SE deployment, you will probably want to add this server to your existing !BeStMan installation.  
+
+In =/etc/bestman2/conf/bestman2.rc=, you will need to modify the =supportedProtocolList= line, such as
+<pre class="file">
+supportedProtocolList=gsiftp://%RED%gridftp.server.tld%ENDCOLOR%;gsiftp://%RED%gridftp2.server.tld%ENDCOLOR%;gsiftp://%RED%gridftp3.server.tld%ENDCOLOR%
+</pre>
+
+---++ Configuring xrootdfs
+
+%INCLUDE{"InstallBestmanXrootdSE" section="mount" }%
+
+---++ (Optional) Configuring secured xrootdfs
+
+%INCLUDE{"InstallBestmanXrootdSE" section="secured" }%
+
+---++ Configure Xrootd Gratia Probes
+
+%INCLUDE{"InstallBestmanXrootdSE" section="gratia" }%
+
+Note that you can also enable the !GridFTP gratia probe.
+However, the !XRootD probes are likely sufficient.  More information on the !GridFTP probe can be found
+here: [[InstallOSGGridFTP#6_0_Gratia_GridFTP_Transfer_Prob]]
+
+---++ Starting Services
+1. fetch-crl
+
+%INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlStart"}%
+
+%INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlEnable"}%
+
+2. !GridFTP
+
+Starting !GridFTP:
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% service globus-gridftp-server start
+</pre> 
+%ENDSECTION{"Starting"}%
+To start !Gridftp automatically at boot time
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% chkconfig globus-gridftp-server on
+</pre>
+
+3. Gratia transfer and storage probes
+
+%INCLUDE{"InstallBestmanXrootdSE" section="gratia2start" }%
+
+---++ Stopping Services
+1. fetch-crl
+
+* (other grid service running on the machine may still use it) %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlStop"}%
+
+* (other grid service running on the machine may still use it) %INCLUDE{"InstallCertAuth" section="OSGBriefFetchCrlDisable"}%
+
+2. !GridFTP
+
+Stopping !GridFTP:
+<pre class="rootscreen">
+%UCL_PROMPT_ROOT% service globus-gridftp-server stop
+</pre> 
+
+3. Gratia transfer and storage probes
+
+%INCLUDE{"InstallBestmanXrootdSE" section="gratia2stop" }%
+
+---+ File Locations
+
+| *Service/Process* | *Configuration File* | *Description* |
+| !GridFTP | /etc/sysconfig/globus-gridftp-server | Environment variables for !GridFTP and LCMAPS |
+|| /usr/share/osg/sysconfig/globus-gridftp-server-plugin | Where environment variables for !GridFTP plugin are included |
+| Gratia Probe | /etc/gratia/xrootd-storage/ProbeConfig | !GridFTP Xrootd Storage Probe configuration |
+|  | /etc/gratia/xrootd-transfer/ProbeConfig | !GridFTP Xrootd Transfer Probe configuration |
+
+| *Service/Process* | *Log File* | *Description* |
+| !GridFTP | /var/log/gridftp.log | !GridFTP transfer log |
+|| /var/log/gridftp-auth.log | !GridFTP authorization log |
+| Gratia probe | /var/logs/gratia ||
+
+---+ Screen Dump of Install Procedure 
+
+%TWISTY{
+mode="div"
+showlink="Click here for a full installation example."
+hidelink="Hide the example"
+showimgleft="%ICONURLPATH{toggleopen-small}%"
+hideimgleft="%ICONURLPATH{toggleclose-small}%"
+}%
+<pre class="screen">
+[root@fermicloud054 ~]# wget http://download.fedoraproject.org/pub/epel/5/i386/e
+pel-release-5-4.noarch.rpm
+--2011-10-21 13:53:36--  http://download.fedoraproject.org/pub/epel/5/i386/epel-
+release-5-4.noarch.rpm
+Resolving download.fedoraproject.org... 140.211.169.197, 152.19.134.146, 209.132
+.181.16, ...
+Connecting to download.fedoraproject.org|140.211.169.197|:80... connected.
+HTTP request sent, awaiting response... 302 FOUND
+Location: http://mirrors.usu.edu/epel/5/i386/epel-release-5-4.noarch.rpm [follow
+ing]
+--2011-10-21 13:53:36--  http://mirrors.usu.edu/epel/5/i386/epel-release-5-4.noa
+rch.rpm
+Resolving mirrors.usu.edu... 129.123.104.64
+Connecting to mirrors.usu.edu|129.123.104.64|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 12232 (12K) [application/x-redhat-package-manager]
+Saving to: `epel-release-5-4.noarch.rpm'
+
+100%[======================================>] 12,232      --.-K/s   in 0.07s
+
+2011-10-21 13:53:37 (163 KB/s) - `epel-release-5-4.noarch.rpm' saved [12232/1223
+2]
+
+[root@fermicloud054 ~]# rpm -i epel-release-5-4.noarch.rpm
+warning: epel-release-5-4.noarch.rpm: Header V3 DSA signature: NOKEY, key ID 217
+521f6
+[root@fermicloud054 ~]# yum -y install yum-priorities
+Loaded plugins: kernel-module
+epel                                                     | 3.7 kB     00:00
+epel/primary_db                                          | 3.8 MB     00:02
+fermi-base                                               | 2.1 kB     00:00
+fermi-security                                           | 1.9 kB     00:00
+fermi-security/primary_db                                | 1.7 MB     00:00
+sl-base                                                  | 2.1 kB     00:00
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package yum-priorities.noarch 0:1.1.16-14.el5 set to be updated
+--> Finished Dependency Resolution
+Beginning Kernel Module Plugin
+Finished Kernel Module Plugin
+
+Dependencies Resolved
+
+================================================================================
+ Package               Arch          Version               Repository      Size
+================================================================================
+Installing:
+ yum-priorities        noarch        1.1.16-14.el5         sl-base         14 k
+
+Transaction Summary
+================================================================================
+Install       1 Package(s)
+Upgrade       0 Package(s)
+
+Total download size: 14 k
+Downloading Packages:
+yum-priorities-1.1.16-14.el5.noarch.rpm                  |  14 kB     00:00
+Running rpm_check_debug
+Running Transaction Test
+Finished Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing     : yum-priorities                                           1/1
+
+Installed:
+  yum-priorities.noarch 0:1.1.16-14.el5
+
+Complete!
+[root@fermicloud054 ~]# rpm -Uvh http://repo.grid.iu.edu/osg-release-latest.rpm
+Retrieving http://repo.grid.iu.edu/osg-release-latest.rpm
+warning: /var/tmp/rpm-xfer.5JdHlQ: Header V3 DSA signature: NOKEY, key ID 824b86                                                                                                                                                            03
+Preparing...                ########################################### [100%]
+   1:osg-release            ########################################### [100%]
+[root@fermicloud054 ~]# yum install --enablerepo=osg-development osg-gridftp-xrootd
+Loaded plugins: kernel-module, priorities
+osg                                                                                                                                                                                                                  | 1.9 kB     00:00
+osg/primary_db                                                                                                                                                                                                       |  66 kB     00:00
+osg-development                                                                                                                                                                                                      | 1.9 kB     00:00
+osg-development/primary_db                                                                                                                                                                                           | 328 kB     00:00
+1233 packages excluded due to repository priority protections
+Setting up Install Process
+Resolving Dependencies
+--> Running transaction check
+---> Package osg-gridftp-xrootd.x86_64 0:3.0.0-1 set to be updated
+--> Processing Dependency: fetch-crl for package: osg-gridftp-xrootd
+--> Processing Dependency: xrootd-fuse for package: osg-gridftp-xrootd
+--> Processing Dependency: java-1.6.0-sun-compat for package: osg-gridftp-xrootd
+--> Processing Dependency: edg-mkgridmap for package: osg-gridftp-xrootd
+--> Processing Dependency: globus-gridftp-server-progs for package: osg-gridftp-xrootd
+--> Processing Dependency: gratia-probe-gridftp-transfer for package: osg-gridftp-xrootd
+--> Processing Dependency: vo-client for package: osg-gridftp-xrootd
+--> Processing Dependency: grid-certificates for package: osg-gridftp-xrootd
+--> Processing Dependency: gratia-probe-xrootd-storage for package: osg-gridftp-xrootd
+--> Processing Dependency: gums-client for package: osg-gridftp-xrootd
+--> Processing Dependency: xrootd-dsi for package: osg-gridftp-xrootd
+--> Processing Dependency: gratia-probe-xrootd-transfer for package: osg-gridftp-xrootd
+--> Processing Dependency: liblcas_lcmaps_gt4_mapping.so.0()(64bit) for package: osg-gridftp-xrootd
+--> Running transaction check
+---> Package edg-mkgridmap.noarch 0:4.0.0-3.osg set to be updated
+--> Processing Dependency: perl(Net::LDAPS) for package: edg-mkgridmap
+--> Processing Dependency: vo-client-edgmkgridmap for package: edg-mkgridmap
+--> Processing Dependency: perl-Net-SSLeay for package: edg-mkgridmap
+--> Processing Dependency: perl(Net::LDAP::Util) for package: edg-mkgridmap
+--> Processing Dependency: perl(Net::LDAP) for package: edg-mkgridmap
+--> Processing Dependency: osg-vo-map for package: edg-mkgridmap
+--> Processing Dependency: perl(Term::ReadKey) for package: edg-mkgridmap
+--> Processing Dependency: perl(XML::DOM) for package: edg-mkgridmap
+--> Processing Dependency: perl-Crypt-SSLeay for package: edg-mkgridmap
+---> Package fetch-crl.noarch 0:2.8.4-2.el5 set to be updated
+---> Package globus-gridftp-server-progs.x86_64 0:6.1-5.osg set to be updated
+--> Processing Dependency: globus-gridftp-server = 6.1-5.osg for package: globus-gridftp-server-progs
+--> Processing Dependency: globus-xio-gsi-driver >= 2 for package: globus-gridftp-server-progs
+--> Processing Dependency: perl(Globus::Core::Paths) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_gssapi_gsi.so.9(globus_gssapi_gsi)(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_gsi_credential.so.5()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_gssapi_error.so.4()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_io.so.8()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_gsi_cert_utils.so.8()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_callout.so.2()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_openssl.so.3()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_authz.so.2()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_gsi_authz_callout_error.so.2()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_common.so.14()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_proxy_ssl.so.4()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_xio.so.3()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_gsi_proxy_core.so.6()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_gfork.so.3()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_gridftp_server_control.so.2()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_ftp_control.so.4()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_gss_assist.so.8()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_openssl_error.so.2()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_gridftp_server.so.6()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_gsi_sysconfig.so.5()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_usage.so.3()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_gsi_callback.so.4()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_gssapi_gsi.so.9()(64bit) for package: globus-gridftp-server-progs
+--> Processing Dependency: libglobus_oldgaa.so.4()(64bit) for package: globus-gridftp-server-progs
+---> Package gratia-probe-gridftp-transfer.noarch 0:1.09-0.4.1.pre set to be updated
+--> Processing Dependency: gratia-probe-common >= 1.09-0.4.1.pre for package: gratia-probe-gridftp-transfer
+--> Processing Dependency: netlogger for package: gratia-probe-gridftp-transfer
+---> Package gratia-probe-xrootd-storage.noarch 0:1.09-0.4.1.pre set to be updated
+--> Processing Dependency: gratia-probe-services = 1.09-0.4.1.pre for package: gratia-probe-xrootd-storage
+---> Package gratia-probe-xrootd-transfer.noarch 0:1.09-0.4.1.pre set to be updated
+---> Package gums-client.noarch 0:1.3.18.002-4 set to be updated
+--> Processing Dependency: gums = 1.3.18.002 for package: gums-client
+---> Package java-1.6.0-sun-compat.x86_64 0:1.6.0.26-3.sl5.jpp set to be updated
+--> Processing Dependency: jdk = 2000:1.6.0_26-fcs for package: java-1.6.0-sun-compat
+--> Processing Dependency: jpackage-utils >= 1.7.3 for package: java-1.6.0-sun-compat
+--> Processing Dependency: /usr/bin/xsltproc for package: java-1.6.0-sun-compat
+--> Processing Dependency: /usr/bin/xsltproc for package: java-1.6.0-sun-compat
+---> Package lcas-lcmaps-gt4-interface.x86_64 0:0.1.4-6.osg set to be updated
+--> Processing Dependency: liblcas.so.0()(64bit) for package: lcas-lcmaps-gt4-interface
+--> Processing Dependency: liblcmaps.so.0()(64bit) for package: lcas-lcmaps-gt4-interface
+--> Processing Dependency: libglobus_gridmap_callout_error.so.1()(64bit) for package: lcas-lcmaps-gt4-interface
+---> Package osg-ca-certs.noarch 0:1.24-1 set to be updated
+---> Package vo-client.noarch 0:38-9.osg set to be updated
+---> Package xrootd-dsi.x86_64 0:3.0.4-7 set to be updated
+--> Processing Dependency: xrootd-client for package: xrootd-dsi
+--> Processing Dependency: xrootd-libs for package: xrootd-dsi
+---> Package xrootd-fuse.x86_64 1:3.1.0-10.osg.xu set to be updated
+--> Processing Dependency: libfuse.so.2(FUSE_2.6)(64bit) for package: xrootd-fuse
+--> Processing Dependency: libfuse.so.2(FUSE_2.2)(64bit) for package: xrootd-fuse
+--> Processing Dependency: libfuse.so.2(FUSE_2.5)(64bit) for package: xrootd-fuse
+--> Processing Dependency: fuse for package: xrootd-fuse
+--> Processing Dependency: libfuse.so.2()(64bit) for package: xrootd-fuse
+--> Running transaction check
+---> Package fuse.x86_64 0:2.7.4-8.el5 set to be updated
+---> Package fuse-libs.x86_64 0:2.7.4-8.el5 set to be updated
+---> Package globus-authz.x86_64 0:2.0-2.osg set to be updated
+---> Package globus-authz-callout-error.x86_64 0:2.0-2.osg set to be updated
+---> Package globus-callout.x86_64 0:2.0-2.osg set to be updated
+--> Processing Dependency: libltdl.so.3()(64bit) for package: globus-callout
+---> Package globus-common.x86_64 0:14.0-3.osg set to be updated
+---> Package globus-ftp-control.x86_64 0:4.0-2.osg set to be updated
+---> Package globus-gfork.x86_64 0:3.0-2.osg set to be updated
+---> Package globus-gridftp-server.x86_64 0:6.1-5.osg set to be updated
+---> Package globus-gridftp-server-control.x86_64 0:2.0-3.osg set to be updated
+--> Processing Dependency: globus-xio-pipe-driver >= 2 for package: globus-gridftp-server-control
+---> Package globus-gridmap-callout-error.x86_64 0:1.1-1.osg set to be updated
+---> Package globus-gsi-callback.x86_64 0:4.0-2.osg set to be updated
+---> Package globus-gsi-cert-utils.x86_64 0:8.0-2.osg set to be updated
+---> Package globus-gsi-credential.x86_64 0:5.0-3.osg set to be updated
+---> Package globus-gsi-openssl-error.x86_64 0:2.0-2.osg set to be updated
+---> Package globus-gsi-proxy-core.x86_64 0:6.0-2.osg set to be updated
+---> Package globus-gsi-proxy-ssl.x86_64 0:4.0-2.osg set to be updated
+---> Package globus-gsi-sysconfig.x86_64 0:5.0-3.osg set to be updated
+---> Package globus-gss-assist.x86_64 0:8.0-2.osg set to be updated
+---> Package globus-gssapi-error.x86_64 0:4.0-2.osg set to be updated
+---> Package globus-gssapi-gsi.x86_64 0:10.0-1.osg set to be updated
+---> Package globus-io.x86_64 0:9.0-2.osg set to be updated
+---> Package globus-openssl-module.x86_64 0:3.0-2.osg set to be updated
+---> Package globus-usage.x86_64 0:3.0-2.osg set to be updated
+---> Package globus-xio.x86_64 0:3.0-3.osg set to be updated
+---> Package globus-xio-gsi-driver.x86_64 0:2.0-2.osg set to be updated
+---> Package gratia-probe-common.noarch 0:1.09-0.4.1.pre set to be updated
+--> Processing Dependency: pyOpenSSL for package: gratia-probe-common
+---> Package gratia-probe-services.noarch 0:1.09-0.4.1.pre set to be updated
+---> Package gums.noarch 0:1.3.18.002-4 set to be updated
+---> Package jdk.x86_64 2000:1.6.0_26-fcs set to be updated
+---> Package jpackage-utils.noarch 0:1.7.3-1jpp.2.el5 set to be updated
+---> Package lcas.x86_64 0:1.3.13-8.osg set to be updated
+--> Processing Dependency: liblcas_userban.so()(64bit) for package: lcas
+---> Package lcmaps.x86_64 0:1.4.28-14.osg set to be updated
+--> Processing Dependency: lcmaps-plugins-saz-client for package: lcmaps
+--> Processing Dependency: lcmaps-plugins-gums-client for package: lcmaps
+--> Processing Dependency: liblcmaps_scas_client.so.0()(64bit) for package: lcmaps
+--> Processing Dependency: liblcmaps_verify_proxy.so.0()(64bit) for package: lcmaps
+--> Processing Dependency: libvomsapi.so.1()(64bit) for package: lcmaps
+--> Processing Dependency: liblcmaps_posix_enf.so.0()(64bit) for package: lcmaps
+---> Package libxslt.x86_64 0:1.1.17-2.el5_2.2 set to be updated
+---> Package netlogger.noarch 0:4.2.0-1 set to be updated
+---> Package osg-vo-map.noarch 0:0.0.1-1.osg set to be updated
+---> Package perl-Crypt-SSLeay.x86_64 0:0.51-11.el5 set to be updated
+---> Package perl-LDAP.noarch 1:0.33-3.fc6 set to be updated
+--> Processing Dependency: perl(Convert::ASN1) for package: perl-LDAP
+--> Processing Dependency: perl(XML::SAX::Base) for package: perl-LDAP
+--> Processing Dependency: perl(IO::Socket::SSL) for package: perl-LDAP
+---> Package perl-Net-SSLeay.x86_64 0:1.30-4.fc6 set to be updated
+---> Package perl-TermReadKey.x86_64 0:2.30-5.el5 set to be updated
+---> Package perl-XML-DOM.noarch 0:1.44-2.el5 set to be updated
+--> Processing Dependency: perl(XML::RegExp) for package: perl-XML-DOM
+---> Package vo-client-edgmkgridmap.noarch 0:38-9.osg set to be updated
+---> Package xrootd-client.x86_64 1:3.1.0-10.osg.xu set to be updated
+---> Package xrootd-libs.x86_64 1:3.1.0-10.osg.xu set to be updated
+--> Running transaction check
+---> Package globus-xio-pipe-driver.x86_64 0:2.0-2.osg set to be updated
+---> Package lcas-plugins-basic.x86_64 0:1.3.5-5.osg set to be updated
+---> Package lcmaps-plugins-basic.x86_64 0:1.4.5-1.osg set to be updated
+---> Package lcmaps-plugins-gums-client.x86_64 0:0.0.2-2.osg set to be updated
+--> Processing Dependency: lcmaps-plugins-scas-client for package: lcmaps-plugins-gums-client
+---> Package lcmaps-plugins-saz-client.x86_64 0:0.2.22-7.osg set to be updated
+--> Processing Dependency: saml2-xacml2-c-lib for package: lcmaps-plugins-saz-client
+--> Processing Dependency: libxacml.so.0()(64bit) for package: lcmaps-plugins-saz-client
+---> Package lcmaps-plugins-verify-proxy.x86_64 0:1.4.9-2.osg set to be updated
+---> Package libtool-ltdl.x86_64 0:1.5.22-7.el5_4 set to be updated
+---> Package perl-Convert-ASN1.noarch 0:0.20-1.1 set to be updated
+---> Package perl-IO-Socket-SSL.noarch 0:1.01-1.fc6 set to be updated
+---> Package perl-XML-RegExp.noarch 0:0.03-2.el5 set to be updated
+---> Package perl-XML-SAX.noarch 0:0.14-8 set to be updated
+--> Processing Dependency: perl(XML::NamespaceSupport) for package: perl-XML-SAX
+---> Package pyOpenSSL.x86_64 0:0.6-1.p24.7.2.2 set to be updated
+---> Package voms.x86_64 0:2.0.6-3.osg set to be updated
+--> Running transaction check
+---> Package lcmaps-plugins-scas-client.x86_64 0:0.2.22-7.osg set to be updated
+---> Package perl-XML-NamespaceSupport.noarch 0:1.09-1.2.1 set to be updated
+---> Package saml2-xacml2-c-lib.x86_64 0:1.0.1-6.osg set to be updated
+--> Finished Dependency Resolution
+Beginning Kernel Module Plugin
+Finished Kernel Module Plugin
+
+Dependencies Resolved
+
+============================================================================================================================================================================================================================================
+ Package                                                              Arch                                          Version                                                    Repository                                              Size
+============================================================================================================================================================================================================================================
+Installing:
+ osg-gridftp-xrootd                                                   x86_64                                        3.0.0-1                                                    osg-development                                        2.2 k
+Installing for dependencies:
+ edg-mkgridmap                                                        noarch                                        4.0.0-3.osg                                                osg-development                                         21 k
+ fetch-crl                                                            noarch                                        2.8.4-2.el5                                                epel                                                    24 k
+ fuse                                                                 x86_64                                        2.7.4-8.el5                                                sl-base                                                 83 k
+ fuse-libs                                                            x86_64                                        2.7.4-8.el5                                                sl-base                                                 71 k
+ globus-authz                                                         x86_64                                        2.0-2.osg                                                  osg-development                                         14 k
+ globus-authz-callout-error                                           x86_64                                        2.0-2.osg                                                  osg-development                                        9.9 k
+ globus-callout                                                       x86_64                                        2.0-2.osg                                                  osg-development                                         16 k
+ globus-common                                                        x86_64                                        14.0-3.osg                                                 osg-development                                        128 k
+ globus-ftp-control                                                   x86_64                                        4.0-2.osg                                                  osg-development                                         73 k
+ globus-gfork                                                         x86_64                                        3.0-2.osg                                                  osg-development                                         19 k
+ globus-gridftp-server                                                x86_64                                        6.1-5.osg                                                  osg-development                                        163 k
+ globus-gridftp-server-control                                        x86_64                                        2.0-3.osg                                                  osg-development                                         77 k
+ globus-gridftp-server-progs                                          x86_64                                        6.1-5.osg                                                  osg-development                                         40 k
+ globus-gridmap-callout-error                                         x86_64                                        1.1-1.osg                                                  osg-development                                        6.7 k
+ globus-gsi-callback                                                  x86_64                                        4.0-2.osg                                                  osg-development                                         41 k
+ globus-gsi-cert-utils                                                x86_64                                        8.0-2.osg                                                  osg-development                                         18 k
+ globus-gsi-credential                                                x86_64                                        5.0-3.osg                                                  osg-development                                         35 k
+ globus-gsi-openssl-error                                             x86_64                                        2.0-2.osg                                                  osg-development                                         16 k
+ globus-gsi-proxy-core                                                x86_64                                        6.0-2.osg                                                  osg-development                                         36 k
+ globus-gsi-proxy-ssl                                                 x86_64                                        4.0-2.osg                                                  osg-development                                         17 k
+ globus-gsi-sysconfig                                                 x86_64                                        5.0-3.osg                                                  osg-development                                         29 k
+ globus-gss-assist                                                    x86_64                                        8.0-2.osg                                                  osg-development                                         34 k
+ globus-gssapi-error                                                  x86_64                                        4.0-2.osg                                                  osg-development                                         13 k
+ globus-gssapi-gsi                                                    x86_64                                        10.0-1.osg                                                 osg-development                                         60 k
+ globus-io                                                            x86_64                                        9.0-2.osg                                                  osg-development                                         44 k
+ globus-openssl-module                                                x86_64                                        3.0-2.osg                                                  osg-development                                         14 k
+ globus-usage                                                         x86_64                                        3.0-2.osg                                                  osg-development                                         16 k
+ globus-xio                                                           x86_64                                        3.0-3.osg                                                  osg-development                                        178 k
+ globus-xio-gsi-driver                                                x86_64                                        2.0-2.osg                                                  osg-development                                         37 k
+ globus-xio-pipe-driver                                               x86_64                                        2.0-2.osg                                                  osg-development                                         16 k
+ gratia-probe-common                                                  noarch                                        1.09-0.4.1.pre                                             osg-development                                        132 k
+ gratia-probe-gridftp-transfer                                        noarch                                        1.09-0.4.1.pre                                             osg-development                                         22 k
+ gratia-probe-services                                                noarch                                        1.09-0.4.1.pre                                             osg-development                                         17 k
+ gratia-probe-xrootd-storage                                          noarch                                        1.09-0.4.1.pre                                             osg-development                                         11 k
+ gratia-probe-xrootd-transfer                                         noarch                                        1.09-0.4.1.pre                                             osg-development                                         12 k
+ gums                                                                 noarch                                        1.3.18.002-4                                               osg-development                                         25 M
+ gums-client                                                          noarch                                        1.3.18.002-4                                               osg-development                                         13 k
+ java-1.6.0-sun-compat                                                x86_64                                        1.6.0.26-3.sl5.jpp                                         fermi-security                                          65 k
+ jdk                                                                  x86_64                                        2000:1.6.0_26-fcs                                          fermi-security                                          68 M
+ jpackage-utils                                                       noarch                                        1.7.3-1jpp.2.el5                                           sl-base                                                 61 k
+ lcas                                                                 x86_64                                        1.3.13-8.osg                                               osg-development                                         28 k
+ lcas-lcmaps-gt4-interface                                            x86_64                                        0.1.4-6.osg                                                osg-development                                         17 k
+ lcas-plugins-basic                                                   x86_64                                        1.3.5-5.osg                                                osg-development                                         23 k
+ lcmaps                                                               x86_64                                        1.4.28-14.osg                                              osg-development                                         89 k
+ lcmaps-plugins-basic                                                 x86_64                                        1.4.5-1.osg                                                osg-development                                         38 k
+ lcmaps-plugins-gums-client                                           x86_64                                        0.0.2-2.osg                                                osg-development                                        2.6 k
+ lcmaps-plugins-saz-client                                            x86_64                                        0.2.22-7.osg                                               osg-development                                         32 k
+ lcmaps-plugins-scas-client                                           x86_64                                        0.2.22-7.osg                                               osg-development                                         39 k
+ lcmaps-plugins-verify-proxy                                          x86_64                                        1.4.9-2.osg                                                osg-development                                         23 k
+ libtool-ltdl                                                         x86_64                                        1.5.22-7.el5_4                                             fermi-security                                          38 k
+ libxslt                                                              x86_64                                        1.1.17-2.el5_2.2                                           sl-base                                                488 k
+ netlogger                                                            noarch                                        4.2.0-1                                                    osg-development                                        624 k
+ osg-ca-certs                                                         noarch                                        1.24-1                                                     osg-development                                        450 k
+ osg-vo-map                                                           noarch                                        0.0.1-1.osg                                                osg-development                                        7.3 k
+ perl-Convert-ASN1                                                    noarch                                        0.20-1.1                                                   sl-base                                                 41 k
+ perl-Crypt-SSLeay                                                    x86_64                                        0.51-11.el5                                                sl-base                                                 45 k
+ perl-IO-Socket-SSL                                                   noarch                                        1.01-1.fc6                                                 sl-base                                                 49 k
+ perl-LDAP                                                            noarch                                        1:0.33-3.fc6                                               sl-base                                                316 k
+ perl-Net-SSLeay                                                      x86_64                                        1.30-4.fc6                                                 sl-base                                                192 k
+ perl-TermReadKey                                                     x86_64                                        2.30-5.el5                                                 sl-base                                                 32 k
+ perl-XML-DOM                                                         noarch                                        1.44-2.el5                                                 epel                                                   138 k
+ perl-XML-NamespaceSupport                                            noarch                                        1.09-1.2.1                                                 sl-base                                                 15 k
+ perl-XML-RegExp                                                      noarch                                        0.03-2.el5                                                 epel                                                   8.2 k
+ perl-XML-SAX                                                         noarch                                        0.14-8                                                     sl-base                                                 77 k
+ pyOpenSSL                                                            x86_64                                        0.6-1.p24.7.2.2                                            sl-base                                                120 k
+ saml2-xacml2-c-lib                                                   x86_64                                        1.0.1-6.osg                                                osg-development                                        581 k
+ vo-client                                                            noarch                                        38-9.osg                                                   osg-development                                         15 k
+ vo-client-edgmkgridmap                                               noarch                                        38-9.osg                                                   osg-development                                        4.8 k
+ voms                                                                 x86_64                                        2.0.6-3.osg                                                osg-development                                        171 k
+ xrootd-client                                                        x86_64                                        1:3.1.0-10.osg.xu                                          osg-development                                        369 k
+ xrootd-dsi                                                           x86_64                                        3.0.4-7                                                    osg-development                                         13 k
+ xrootd-fuse                                                          x86_64                                        1:3.1.0-10.osg.xu                                          osg-development                                         15 k
+ xrootd-libs                                                          x86_64                                        1:3.1.0-10.osg.xu                                          osg-development                                        486 k
+
+Transaction Summary
+============================================================================================================================================================================================================================================
+Install      74 Package(s)
+Upgrade       0 Package(s)
+
+Total download size: 99 M
+Is this ok [y/N]: y
+Downloading Packages:
+(1/74): osg-gridftp-xrootd-3.0.0-1.x86_64.rpm                                                                                                                                                                        | 2.2 kB     00:00
+(2/74): lcmaps-plugins-gums-client0.0.2-2.osg.x86_64.rpm                                                                                                                                                            | 2.6 kB     00:00
+(3/74): vo-client-edgmkgridmap-38-9.osg.noarch.rpm                                                                                                                                                                   | 4.8 kB     00:00
+(4/74): globus-gridmap-callout-error-1.1-1.osg.x86_64.rpm                                                                                                                                                            | 6.7 kB     00:00
+(5/74): osg-vo-map-0.0.1-1.osg.noarch.rpm                                                                                                                                                                            | 7.3 kB     00:00
+(6/74): perl-XML-RegExp-0.03-2.el5.noarch.rpm                                                                                                                                                                        | 8.2 kB     00:00
+(7/74): globus-authz-callout-error-2.0-2.osg.x86_64.rpm                                                                                                                                                              | 9.9 kB     00:00
+(8/74): gratia-probe-xrootd-storage-1.09-0.4.1.pre.noarch.rpm                                                                                                                                                        |  11 kB     00:00
+(9/74): gratia-probe-xrootd-transfer-1.09-0.4.1.pre.noarch.rpm                                                                                                                                                       |  12 kB     00:00
+(10/74): xrootd-dsi-3.0.4-7.x86_64.rpm                                                                                                                                                                               |  13 kB     00:00
+(11/74): gums-client-1.3.18.002-4.noarch.rpm                                                                                                                                                                         |  13 kB     00:00
+(12/74): globus-gssapi-error-4.0-2.osg.x86_64.rpm                                                                                                                                                                    |  13 kB     00:00
+(13/74): globus-authz-2.0-2.osg.x86_64.rpm                                                                                                                                                                           |  14 kB     00:00
+(14/74): globus-openssl-module-3.0-2.osg.x86_64.rpm                                                                                                                                                                  |  14 kB     00:00
+(15/74): xrootd-fuse-3.1.0-10.osg.xu.x86_64.rpm                                                                                                                                                                      |  15 kB     00:00
+(16/74): vo-client-38-9.osg.noarch.rpm                                                                                                                                                                               |  15 kB     00:00
+(17/74): perl-XML-NamespaceSupport-1.09-1.2.1.noarch.rpm                                                                                                                                                             |  15 kB     00:00
+(18/74): globus-gsi-openssl-error-2.0-2.osg.x86_64.rpm                                                                                                                                                               |  16 kB     00:00
+(19/74): globus-usage-3.0-2.osg.x86_64.rpm                                                                                                                                                                           |  16 kB     00:00
+(20/74): globus-callout-2.0-2.osg.x86_64.rpm                                                                                                                                                                         |  16 kB     00:00
+(21/74): globus-xio-pipe-driver-2.0-2.osg.x86_64.rpm                                                                                                                                                                 |  16 kB     00:00
+(22/74): gratia-probe-services-1.09-0.4.1.pre.noarch.rpm                                                                                                                                                             |  17 kB     00:00
+(23/74): globus-gsi-proxy-ssl-4.0-2.osg.x86_64.rpm
+(24/74): lcas-lcmaps-gt4-interface-0.1.4-6.osg.x86_64.rpm
+(25/74): globus-gsi-cert-utils-8.0-2.osg.x86_64.rpm
+(26/74): globus-gfork-3.0-2.osg.x86_64.rpm
+(27/74): edg-mkgridmap-4.0.0-3.osg.noarch.rpm
+(28/74): gratia-probe-gridftp-transfer-1.09-0.4.1.pre.noarch.rpm
+(29/74): lcas-plugins-basic-1.3.5-5.osg.x86_64.rpm
+(30/74): lcmaps-plugins-verify-proxy-1.4.9-2.osg.x86_64.rpm
+(31/74): fetch-crl-2.8.4-2.el5.noarch.rpm
+(32/74): lcas-1.3.13-8.osg.x86_64.rpm
+(33/74): globus-gsi-sysconfig-5.0-3.osg.x86_64.rpm
+(34/74): perl-TermReadKey-2.30-5.el5.x86_64.rpm
+(35/74): lcmaps-plugins-saz-client-0.2.22-7.osg.x86_64.rpm
+(36/74): globus-gss-assist-8.0-2.osg.x86_64.rpm
+(37/74): globus-gsi-credential-5.0-3.osg.x86_64.rpm
+(38/74): globus-gsi-proxy-core-6.0-2.osg.x86_64.rpm
+(39/74): globus-xio-gsi-driver-2.0-2.osg.x86_64.rpm
+(40/74): libtool-ltdl-1.5.22-7.el5_4.x86_64.rpm
+(41/74): lcmaps-plugins-basic-1.4.5-1.osg.x86_64.rpm
+(42/74): lcmaps-plugins-scas-client-0.2.22-7.osg.x86_64.rpm
+(43/74): globus-gridftp-server-progs-6.1-5.osg.x86_64.rpm
+(44/74): globus-gsi-callback-4.0-2.osg.x86_64.rpm
+(45/74): perl-Convert-ASN1-0.20-1.1.noarch.rpm
+(46/74): globus-io-9.0-2.osg.x86_64.rpm                  |  44 kB     00:00
+(47/74): perl-Crypt-SSLeay-0.51-11.el5.x86_64.rpm        |  45 kB     00:00
+(48/74): perl-IO-Socket-SSL-1.01-1.fc6.noarch.rpm        |  49 kB     00:00
+(49/74): globus-gssapi-gsi-10.0-1.osg.x86_64.rpm         |  60 kB     00:00
+(50/74): jpackage-utils-1.7.3-1jpp.2.el5.noarch.rpm      |  61 kB     00:00
+(51/74): java-1.6.0-sun-compat-1.6.0.26-3.sl5.jpp.x86_64 |  65 kB     00:00
+(52/74): fuse-libs-2.7.4-8.el5.x86_64.rpm                |  71 kB     00:00
+(53/74): globus-ftp-control-4.0-2.osg.x86_64.rpm         |  73 kB     00:00
+(54/74): globus-gridftp-server-control-2.0-3.osg.x86_64. |  77 kB     00:00
+(55/74): perl-XML-SAX-0.14-8.noarch.rpm                  |  77 kB     00:00
+(56/74): fuse-2.7.4-8.el5.x86_64.rpm                     |  83 kB     00:00
+(57/74): lcmaps-1.4.28-14.osg.x86_64.rpm                 |  89 kB     00:00
+(58/74): pyOpenSSL-0.6-1.p24.7.2.2.x86_64.rpm            | 120 kB     00:00
+(59/74): globus-common-14.0-3.osg.x86_64.rpm             | 128 kB     00:00
+(60/74): gratia-probe-common-1.09-0.4.1.pre.noarch.rpm   | 132 kB     00:00
+(61/74): perl-XML-DOM-1.44-2.el5.noarch.rpm              | 138 kB     00:00
+(62/74): globus-gridftp-server-6.1-5.osg.x86_64.rpm      | 163 kB     00:00
+(63/74): voms-2.0.6-3.osg.x86_64.rpm                     | 171 kB     00:00
+(64/74): globus-xio-3.0-3.osg.x86_64.rpm                 | 178 kB     00:00
+(65/74): perl-Net-SSLeay-1.30-4.fc6.x86_64.rpm           | 192 kB     00:00
+(66/74): perl-LDAP-0.33-3.fc6.noarch.rpm                 | 316 kB     00:00
+(67/74): xrootd-client-3.1.0-10.osg.xu.x86_64.rpm        | 369 kB     00:00
+(68/74): osg-ca-certs-1.24-1.noarch.rpm                  | 450 kB     00:00
+(69/74): xrootd-libs-3.1.0-10.osg.xu.x86_64.rpm          | 486 kB     00:00
+(70/74): libxslt-1.1.17-2.el5_2.2.x86_64.rpm             | 488 kB     00:00
+(71/74): saml2-xacml2-c-lib-1.0.1-6.osg.x86_64.rpm       | 581 kB     00:00
+(72/74): netlogger-4.2.0-1.noarch.rpm                    | 624 kB     00:00
+(73/74): gums-1.3.18.002-4.noarch.rpm                    |  25 MB     00:02
+(74/74): jdk-1.6.0_26-fcs.x86_64.rpm                     |  68 MB     00:01
+--------------------------------------------------------------------------------
+Total                                           4.6 MB/s |  99 MB     00:21
+warning: rpmts_HdrFromFdno: Header V3 DSA signature: NOKEY, key ID 824b8603
+osg-development/gpgkey                                   | 1.7 kB     00:00
+Importing GPG key 0x824B8603 "OSG Software Team (RPM Signing Key for Koji Packag
+es) <vdt-support@opensciencegrid.org>" from /etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
+Is this ok [y/N]: y
+warning: rpmts_HdrFromFdno: Header V3 DSA signature: NOKEY, key ID 217521f6
+epel/gpgkey                                              | 1.7 kB     00:00
+Importing GPG key 0x217521F6 "Fedora EPEL <epel@fedoraproject.org>" from /etc/pk
+i/rpm-gpg/RPM-GPG-KEY-EPEL
+Is this ok [y/N]: y
+Running rpm_check_debug
+Running Transaction Test
+Finished Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing     : globus-gsi-proxy-ssl                                    1/74
+  Installing     : xrootd-libs                                             2/74
+  Installing     : xrootd-client                                           3/74
+  Installing     : saml2-xacml2-c-lib                                      4/74
+  Installing     : lcmaps-plugins-saz-client                               5/74
+  Installing     : libtool-ltdl                                            6/74
+  Installing     : globus-common                                           7/74
+  Installing     : globus-gsi-openssl-error                                8/74
+  Installing     : globus-openssl-module                                   9/74
+  Installing     : globus-gsi-sysconfig                                   10/74
+  Installing     : globus-gsi-cert-utils                                  11/74
+  Installing     : globus-gsi-callback                                    12/74
+  Installing     : globus-gsi-credential                                  13/74
+  Installing     : globus-gsi-proxy-core                                  14/74
+  Installing     : globus-gssapi-gsi                                      15/74
+  Installing     : globus-callout                                         16/74
+  Installing     : globus-gss-assist                                      17/74
+  Installing     : globus-xio                                             18/74
+  Installing     : globus-gssapi-error                                    19/74
+  Installing     : globus-xio-gsi-driver                                  20/74
+  Installing     : globus-io                                              21/74
+  Installing     : globus-authz-callout-error                             22/74
+  Installing     : globus-authz                                           23/74
+  Installing     : globus-ftp-control                                     24/74
+  Installing     : globus-usage                                           25/74
+  Installing     : globus-gfork                                           26/74
+  Installing     : perl-Net-SSLeay                                        27/74
+  Installing     : globus-gridmap-callout-error                           28/74
+  Installing     : globus-xio-pipe-driver                                 29/74
+  Installing     : globus-gridftp-server-control                          30/74
+  Installing     : globus-gridftp-server                                  31/74
+  Installing     : globus-gridftp-server-progs                            32/74
+  Installing     : lcmaps-plugins-scas-client                             33/74
+  Installing     : xrootd-dsi                                             34/74
+  Installing     : lcmaps-plugins-verify-proxy                            35/74
+  Installing     : voms                                                   36/74
+  Installing     : perl-Crypt-SSLeay                                      37/74
+  Installing     : fuse                                                   38/74
+  Installing     : lcmaps-plugins-basic                                   39/74
+  Installing     : perl-TermReadKey                                       40/74
+  Installing     : fuse-libs                                              41/74
+  Installing     : xrootd-fuse                                            42/74
+  Installing     : pyOpenSSL                                              43/74
+  Installing     : libxslt                                                44/74
+  Installing     : gratia-probe-common                                    45/74
+  Installing     : osg-ca-certs                                           46/74
+  Installing     : vo-client                                              47/74
+  Installing     : osg-vo-map                                             48/74
+  Installing     : vo-client-edgmkgridmap                                 49/74
+  Installing     : gratia-probe-services                                  50/74
+  Installing     : gratia-probe-xrootd-storage                            51/74
+  Installing     : gratia-probe-xrootd-transfer                           52/74
+  Installing     : lcmaps-plugins-gums-client                             53/74
+  Installing     : lcmaps                                                 54/74
+  Installing     : perl-IO-Socket-SSL                                     55/74
+  Installing     : perl-XML-RegExp                                        56/74
+  Installing     : perl-XML-DOM                                           57/74
+  Installing     : perl-XML-NamespaceSupport                              58/74
+  Installing     : perl-XML-SAX                                           59/74
+  Installing     : jdk                                                    60/74
+Unpacking JAR files...
+        rt.jar...
+        jsse.jar...
+        charsets.jar...
+        tools.jar...
+        localedata.jar...
+        plugin.jar...
+        javaws.jar...
+        deploy.jar...
+  Installing     : jpackage-utils                                         61/74
+  Installing     : java-1.6.0-sun-compat                                  62/74
+  Installing     : gums                                                   63/74
+  Installing     : gums-client                                            64/74
+  Installing     : netlogger                                              65/74
+  Installing     : gratia-probe-gridftp-transfer                          66/74
+  Installing     : perl-Convert-ASN1                                      67/74
+  Installing     : perl-LDAP                                              68/74
+  Installing     : edg-mkgridmap                                          69/74
+  Installing     : fetch-crl                                              70/74
+  Installing     : lcas                                                   71/74
+  Installing     : lcas-lcmaps-gt4-interface                              72/74
+  Installing     : lcas-plugins-basic                                     73/74
+  Installing     : osg-gridftp-xrootd                                     74/74
+
+Installed:
+  osg-gridftp-xrootd.x86_64 0:3.0.0-1
+
+Dependency Installed:
+  edg-mkgridmap.noarch 0:4.0.0-3.osg
+  fetch-crl.noarch 0:2.8.4-2.el5
+  fuse.x86_64 0:2.7.4-8.el5
+  fuse-libs.x86_64 0:2.7.4-8.el5
+  globus-authz.x86_64 0:2.0-2.osg
+  globus-authz-callout-error.x86_64 0:2.0-2.osg
+  globus-callout.x86_64 0:2.0-2.osg
+  globus-common.x86_64 0:14.0-3.osg
+  globus-ftp-control.x86_64 0:4.0-2.osg
+  globus-gfork.x86_64 0:3.0-2.osg
+  globus-gridftp-server.x86_64 0:6.1-5.osg
+  globus-gridftp-server-control.x86_64 0:2.0-3.osg
+  globus-gridftp-server-progs.x86_64 0:6.1-5.osg
+  globus-gridmap-callout-error.x86_64 0:1.1-1.osg
+  globus-gsi-callback.x86_64 0:4.0-2.osg
+  globus-gsi-cert-utils.x86_64 0:8.0-2.osg
+  globus-gsi-credential.x86_64 0:5.0-3.osg
+  globus-gsi-openssl-error.x86_64 0:2.0-2.osg
+  globus-gsi-proxy-core.x86_64 0:6.0-2.osg
+  globus-gsi-proxy-ssl.x86_64 0:4.0-2.osg
+  globus-gsi-sysconfig.x86_64 0:5.0-3.osg
+  globus-gss-assist.x86_64 0:8.0-2.osg
+  globus-gssapi-error.x86_64 0:4.0-2.osg
+  globus-gssapi-gsi.x86_64 0:10.0-1.osg
+  globus-io.x86_64 0:9.0-2.osg
+  globus-openssl-module.x86_64 0:3.0-2.osg
+  globus-usage.x86_64 0:3.0-2.osg
+  globus-xio.x86_64 0:3.0-3.osg
+  globus-xio-gsi-driver.x86_64 0:2.0-2.osg
+  globus-xio-pipe-driver.x86_64 0:2.0-2.osg
+  gratia-probe-common.noarch 0:1.09-0.4.1.pre
+  gratia-probe-gridftp-transfer.noarch 0:1.09-0.4.1.pre
+  gratia-probe-services.noarch 0:1.09-0.4.1.pre
+  gratia-probe-xrootd-storage.noarch 0:1.09-0.4.1.pre
+  gratia-probe-xrootd-transfer.noarch 0:1.09-0.4.1.pre
+  gums.noarch 0:1.3.18.002-4
+  gums-client.noarch 0:1.3.18.002-4
+  java-1.6.0-sun-compat.x86_64 0:1.6.0.26-3.sl5.jpp
+  jdk.x86_64 2000:1.6.0_26-fcs
+  jpackage-utils.noarch 0:1.7.3-1jpp.2.el5
+  lcas.x86_64 0:1.3.13-8.osg
+  lcas-lcmaps-gt4-interface.x86_64 0:0.1.4-6.osg
+  lcas-plugins-basic.x86_64 0:1.3.5-5.osg
+  lcmaps.x86_64 0:1.4.28-14.osg
+  lcmaps-plugins-basic.x86_64 0:1.4.5-1.osg
+  lcmaps-plugins-gums-client.x86_64 0:0.0.2-2.osg
+  lcmaps-plugins-saz-client.x86_64 0:0.2.22-7.osg
+  lcmaps-plugins-scas-client.x86_64 0:0.2.22-7.osg
+  lcmaps-plugins-verify-proxy.x86_64 0:1.4.9-2.osg
+  libtool-ltdl.x86_64 0:1.5.22-7.el5_4
+  libxslt.x86_64 0:1.1.17-2.el5_2.2
+  netlogger.noarch 0:4.2.0-1
+  osg-ca-certs.noarch 0:1.24-1
+  osg-vo-map.noarch 0:0.0.1-1.osg
+  perl-Convert-ASN1.noarch 0:0.20-1.1
+  perl-Crypt-SSLeay.x86_64 0:0.51-11.el5
+  perl-IO-Socket-SSL.noarch 0:1.01-1.fc6
+  perl-LDAP.noarch 1:0.33-3.fc6
+  perl-Net-SSLeay.x86_64 0:1.30-4.fc6
+  perl-TermReadKey.x86_64 0:2.30-5.el5
+  perl-XML-DOM.noarch 0:1.44-2.el5
+  perl-XML-NamespaceSupport.noarch 0:1.09-1.2.1
+  perl-XML-RegExp.noarch 0:0.03-2.el5
+  perl-XML-SAX.noarch 0:0.14-8
+  pyOpenSSL.x86_64 0:0.6-1.p24.7.2.2
+  saml2-xacml2-c-lib.x86_64 0:1.0.1-6.osg
+  vo-client.noarch 0:38-9.osg
+  vo-client-edgmkgridmap.noarch 0:38-9.osg
+  voms.x86_64 0:2.0.6-3.osg
+  xrootd-client.x86_64 1:3.1.0-10.osg.xu
+  xrootd-dsi.x86_64 0:3.0.4-7
+  xrootd-fuse.x86_64 1:3.1.0-10.osg.xu
+  xrootd-libs.x86_64 1:3.1.0-10.osg.xu
+
+Complete!
+[root@fermicloud054 ~]#         sed -i 's/\#globus_mapping/globus_mapping/' /etc/grid-security/gsi-authz.conf
+[root@fermicloud054 ~]#         sed -i 's/yourgums.yourdomain/gums.fnal.gov/' /etc/lcmaps.db
+[root@fermicloud054 ~]# echo 'export XROOTD_VMP=\"fermicloud126:1094:/mnt/xrootd=/tmp\"' >> /etc/sysconfig/xrootd-dsi
+[root@fermicloud054 ~]# echo "xrootdfs                /mnt/xrootd              fuse    rdr=xroot://fermicloud042:1094//tmp/,uid=xrootd 0 0" >> /etc/fstab
+[root@fermicloud054 ~]# mkdir /mnt/xrootd
+[root@fermicloud054 ~]# mount /mnt/xrootd/
+[root@fermicloud054 ~]# ls -la /mnt/xrootd/
+total 809
+-rw-rw-rw- 1 xrootd xrootd    460 Oct 21 12:21 fermi.krb5.config.xinetd
+-rw-rw-rw- 1 xrootd xrootd 801512 Oct 21 11:37 first_test
+drwxrwxrwx 1 xrootd xrootd   4096 Oct 21 11:15 .ICE-unix
+-rw-rw-rw- 1 xrootd xrootd    244 Oct 21 11:15 ifcfg-eth0
+-rw-rw-rw- 1 xrootd xrootd    411 Oct 21 11:35 krb5cc_0_IyBOhQ2238
+-rw-rw-rw- 1 xrootd xrootd    200 Oct 21 11:15 network
+-rw-rw-rw- 1 xrootd xrootd  17881 Oct 21 11:42 stuff_srm42.tar.gz
+-rw-rw-rw- 1 xrootd xrootd    118 Oct 21 11:35 tkt0_cciGUD
+-rw-rw-rw- 1 xrootd xrootd     19 Oct 21 12:20 yum.conf.addons
+-rw-rw-rw- 1 xrootd xrootd    413 Oct 21 12:20 yum.conf.security
+[root@fermicloud054 ~]# service globus-gridftp-server start
+Started GridFTP Server                                     [  OK  ]
+
+---
+Validation
+[dstrain@gw014k0 ~]$ globus-url-copy file:///home/dstrain/fusesrm-0.1.tar.gz
+gsiftp://fermicloud054/mnt/xrootd/test_globus.tar.gz
+</pre>
+%ENDTWISTY% 
+
+---+ How to get Help?
+
+If you cannot resolve the problem, there are several ways to receive help:
+
+   * For bug support and issues, submit a ticket to the [[https://ticket.grid.iu.edu/goc][Grid Operations Center]].
+   * For community support and best-effort software team support contact osg-software@opensciencegrid.org.
+
+For a full set of help options, see [[HelpProcedure][Help Procedure]].
+
+---+ Comments
+%COMMENT{type="tableappend"}%
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = DouglasStrain
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|Storage|VO|Security|User|Monitoring|General|Trash/Trash/Integration|Operations|Tier3)
+   * Local DOC_AREA       = Storage
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (EndUser|Student|Developer|SysAdmin|VOManager)
+   * Local DOC_ROLE       = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (Troubleshooting|Training|Installation|HowTo|Planning|Navigation|Knowledge)
+   * Local DOC_TYPE       = Installation
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST   = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY   = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY     = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY  = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER       = NehaSharma
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED  = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER         = NehaSharma
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED    = %YES%
+############################################################################################################
+-->
+
+
+-- Main.DouglasStrain - 29 Aug 2011

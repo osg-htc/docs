@@ -27,7 +27,7 @@ As with all OSG software installations, there are some one-time (per host) steps
 Installing GUMS
 ---------------
 
-1.  Whether installing or upgrading GUMS, please make sure to follow [these instructions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallSoftwareWithOpenJDK7#InstallingJava) for updating/installing Java to work correctly with GUMS
+1.  Whether installing or upgrading GUMS, please make sure to follow [these instructions](../common/openjdk7#installing-java) for updating/installing Java to work correctly with GUMS
 2.  If you have an existing GUMS installation on the same host, shut down Tomcat.
     The service is named `tomcat6` on EL6 and `tomcat` on EL7
 3.  Install the GUMS Service:
@@ -327,7 +327,7 @@ This step does **not** update your GUMS configuration (`/etc/gums/gums.config`) 
 
     For the template provided in the RPM, use: `file:///etc/gums/gums.config.template`
 
-    To fetch it directly from the GOC, use `http://repo.grid.iu.edu/pacman/tarballs/vo-version/gums.template`
+    To fetch it directly from the GOC, use `http://repo.opensciencegrid.org/pacman/tarballs/vo-version/gums.template`
 
 3.  Click Merge
 

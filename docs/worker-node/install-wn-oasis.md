@@ -41,13 +41,13 @@ Determine the OASIS path to the Worker Node Client software for your worker node
 
 On the CE, in the `/etc/osg/config.d/10-storage.ini` file, set the `grid_dir` configuration setting to the path from the previous step.
 
-For more information, see the [OSG environment variables reference page](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/EnvironmentVariables) and the [CE configuration instructions](../other/configuration-with-osg-configure#storage).
+For more information, see the [OSG worker node environment documentation](../worker-node/using-wn.md) and the [CE configuration instructions](../other/configuration-with-osg-configure#storage).
 
 Once you finish making changes to configuration files on your CE, validate, fix, and apply the configuration:
 
 ```console
-[root@client ~] # osg-configure -v 
-[root@client ~] # osg-configure -c
+root@host # osg-configure -v
+root@host # osg-configure -c
 ```
 
 Validating the Worker Node Client
@@ -55,7 +55,7 @@ Validating the Worker Node Client
 
 To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.
 
-1.  Submit a job that executes the `env` command (e.g. Run [condor\_ce\_trace](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingHTCondorCE#condor_ce_trace) with the `-d` flag from your HTCondor CE)
+1.  Submit a job that executes the `env` command (e.g. Run [condor\_ce\_trace](../compute-element/troubleshoot-htcondor-ce#condor_ce_trace) with the `-d` flag from your HTCondor CE)
 2.  Verify that the value of `OSG_GRID` is set to the directory of your WN Client installation
 
 ### Manually Using the Worker Node Client From OASIS
@@ -76,18 +76,16 @@ Some possible issues that may come up:
 - A missing softlink to the CA certs directory. To check this, run:
 
         :::console
-        [user@client ~] $ ls -l /cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/current/el6-x86_64/etc/grid-security/
-    
+        user@host $ ls -l /cvmfs/oasis.opensciencegrid.org/mis/osg-wn-client/3.3/current/el6-x86_64/etc/grid-security/
+
     and check that `certificates` is linked to somewhere. The fix is to yum update the `oasis-config` package to version 4 or higher. A known workaround is to run:
 
         :::console
-        [user@client ~] $ export X509_CERT_DIR=/cvmfs/oasis.opensciencegrid.org/mis/certificates
-    
+        user@host $ export X509_CERT_DIR=/cvmfs/oasis.opensciencegrid.org/mis/certificates
+
     before any commands.
 
 How to get Help?
 ----------------
 
 To get assistance please use this [Help Procedure](../common/help.md).
-
-

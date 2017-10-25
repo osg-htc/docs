@@ -1,0 +1,235 @@
+%DOC_STATUS_TABLE%
+
+---+ Java Installation Guide for OSG Software
+
+%TOC{depth="3"}%
+
+---++ About This Document
+
+Several OSG software components (e.g., [[BestmanOverview][BeStMan]], [[InstallGums][GUMS]], [[InstallVoms][VOMS Admin]], and their dependencies) are written in the [[http://en.wikipedia.org/wiki/Java_(programming_language)][Java programming language]] and therefore need a Java Virtual Machine (JVM) implementation in which to run. Currently, OSG software is supported under the !OpenJDK&nbsp;7 implementation. Other implementations (such as the Oracle JDK) may also work, but there is considerable risk in using one; for instance, the IBM implementation is known to cause failures in most OSG Java software.
+
+This document explains how to install Java for OSG software components in a way that allows other Java implementations to be present on a system. If you want to remove all other Java implementations besides the supported !OpenJDK&nbsp;7, there are optional instructions for doing so. This document is only about installing Java as a preliminary step for other OSG software installations; other OSG install guides refer to this document when necessary.
+
+#InstallingJava
+---++ Installing Java
+
+OSG strongly recommends installing !OpenJDK&nbsp;7 as the primary Java implementation on each OSG host that needs Java. Instructions for doing so are below. If you have specific technical reasons to install or use an alternate, unsupported Java implementation, there are separate instructions for doing so. Choose one of the following subsections based on your needs.
+
+---+++ Installing !OpenJDK 7 for OSG software
+
+To install !OpenJDK&nbsp;7 as the primary Java implementation on an OSG host:
+
+   1. <p>Remove any conflicting symbolic links from an Oracle JDK installation (will not break Oracle JDK)</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% rm -f /usr/bin/java /usr/bin/javac /usr/bin/javadoc /usr/bin/jar</pre>
+   1. <p>Install !OpenJDK&nbsp;7 and OSG Java&nbsp;7 package compatability layer</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% yum install java-1.7.0-openjdk java-1.7.0-openjdk-devel osg-java7-compat osg-java7-devel-compat</pre>\
+      <p><strong>Note:</strong> If yum claims that java-1.7.0-openjdk is not available, you likely need to upgrade your operating system. The package _is_ available on both EL&nbsp;5 and EL&nbsp;6 systems, although only the latest releases of EL&nbsp;5 systems contain it.</p>
+   1. <p>Make !OpenJDK the preferred Java runtime environment (JRE)</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% alternatives --config java</pre>\
+      <p>Select =jre-1.7.0-openjdk=.</p>
+   1. <p>Verify that !OpenJDK is the preferred JRE</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% java -version</pre>\
+      <p>The version number should start with =1.7=.</p>
+   1. <p>Make !OpenJDK the preferred Java development kit (JDK)</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% alternatives --config javac</pre>\
+      <p>Select =java-1.7.0-openjdk=.</p>
+   1. <p>Verify that !OpenJDK is the preferred JDK</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% javac -version</pre>\
+      <p>The version number should start with =1.7=.</p>
+
+---+++ Installing another Java implementation for OSG software
+
+Unless you have specific technical reasons otherwise, you should use !OpenJDK&nbsp;7 for OSG Software; see the installation instructions above and skip this section. To install an alternate Java implementation as the primary Java implementation on an OSG host, use this section.
+
+%NOTE% %RED%The IBM Java implementation (=java-1.7.0-ibm= or =java-1.7.1-ibm=) is known to cause severe failures in !BeStMan 2 and GUMS (at least).%ENDCOLOR%
+
+   1. <p>Install the Java implementation of your choice</p>
+   1. <p>Install the OSG Java&nbsp;7 package compatability layer</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% yum install osg-java7-compat osg-java7-devel-compat</pre>
+   1. <p>Make your Java implementation the preferred Java runtime environment (JRE)</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% alternatives --config java</pre>
+   1. <p>Verify that your Java implementation is the preferred JRE</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% java -version</pre>\
+      <p>The version number should start with =1.7=.</p>
+   1. <p>Make your Java implementation the preferred Java development kit (JDK)</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% alternatives --config javac</pre>
+   1. <p>Verify that your Java implementation is the preferred JDK</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% javac -version</pre>\
+      <p>The version number should start with =1.7=.</p>
+
+
+---++ Fixing !OpenJDK After Installing Other Software
+
+If you happened to install OSG or other Java-dependent software *before* installing !OpenJDK, there may be issues with some stale symbolic links to the Oracle Java implementation. To see whether the issue exists:
+
+   1. <p>Check for an Oracle Java installation</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% rpm -q jdk</pre>\
+      <p>If this command outputs a specific RPM name and version (e.g., =jdk-1.7.0=), then Oracle Java is installed and you should continue with the next step. Otherwise, there are no issues and you are done!</p>
+   1. <p>Check for stale symbolic links</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% <strong>file /usr/bin/java</strong>
+/usr/bin/java: symbolic link to `/etc/alternatives/java'</pre>\
+      <p>If the output of the =file= command above differs from the sample output &mdash; if =/usr/bin/java= does not exist, if it is not a symbolic link, or if it is a symbolic link to a different path &mdash; then your !OpenJDK installation has issues and must be fixed; continue with the next repair procedure below. Otherwise, there are no issues and you are done!</p>
+
+To fix the !OpenJDK installation:
+
+   1. <p>Remove incorrect symbolic links:</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% rm -f /usr/bin/java /usr/bin/javac /usr/bin/javadoc /usr/bin/jar</pre>
+   1. <p>Reinstall !OpenJDK to create the symbolic links:</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% yum reinstall java-1.7.0-openjdk java-1.7.0-openjdk-devel</pre>
+   1. <p>Make !OpenJDK the preferred Java runtime environment (JRE):</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% alternatives --config java</pre>\
+      <p>Select =jre-1.7.0-openjdk=.</p>
+   1. <p>Verify that !OpenJDK is the preferred JRE:</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% java -version</pre>\
+      <p>The version number should start with =1.7=.</p>
+   1. <p>Make !OpenJDK the preferred Java development kit (JDK):</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% alternatives --config javac</pre>\
+      <p>Select =java-1.7.0-openjdk=.</p>
+   1. <p>Verify that !OpenJDK is the preferred JDK:</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% javac -version</pre>\
+      <p>The version number should start with =1.7=.</p>
+
+---++ Fixing Tomcat
+
+If you have a pre-existing Tomcat installation, you must ensure that that it is using your preferred Java implementation.
+
+---+++ Fixing Tomcat on an EL&nbsp;6 system
+
+   1. <p>Check if tomcat6 is installed:</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% rpm -q tomcat6</pre>\
+      <p>If the RPM is installed, the command will output the specific RPM name and version. If there is no output: Tomcat is not installed, there is no issue, and you are done!</p>
+   1. <p>Open =/etc/sysconfig/tomcat6=.</p>
+   1. <p>Check if there is a line setting =JAVA_HOME= and that line is uncommented.</p>\
+      <p>If so, change that line to:\
+      <pre class="file">JAVA_HOME="/etc/alternatives/jre"</pre></p>\
+      <p>If not, then you do not need to do anything.</p>
+   1. <p>Do the same check for =/etc/tomcat6/tomcat6.conf=.</p>
+   1. <p>Restart the Tomcat service:</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% service tomcat6 restart</pre>
+
+---+++ Fixing Tomcat on an EL&nbsp;5 system
+
+   1. <p>Check if tomcat5 is installed:</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% rpm -q tomcat5</pre>\
+      <p>If the RPM is installed, the command will output the specific RPM name and version. If there is no output: Tomcat is not installed, there is no issue, and you are done!</p>
+   1. <p>Open =/etc/sysconfig/tomcat5=.</p>
+   1. <p>Check if there is a line setting =JAVA_HOME= and that line is uncommented.</p>\
+      <p>If so, change that line to:\
+      <pre class="file">JAVA_HOME="/etc/alternatives/jre"</pre></p>\
+      <p>If not, then you do not need to do anything.</p>
+   1. <p>Do the same check for =/etc/tomcat5/tomcat5.conf=.</p>
+   1. <p>Restart the Tomcat service:</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% service tomcat5 restart</pre>
+
+---++ Fixing !BeStMan
+
+If you have a pre-existing !BeStMan installation, you must ensure that it is using your preferred Java implementation.
+
+   1. <p>Check if any bestman2 packages are installed:</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% rpm -qa | grep \^bestman2</pre>\
+      <p>If any bestman2 !RPMs are installed, the command will output the specific names and versions. If there is no output: !BeStMan is not installed, there is no issue, and you are done!</p>
+   1. <p>Open =/etc/sysconfig/bestman2=.</p>
+   1. <p>Check if there is a line setting =JAVA_HOME= and that line is uncommented.</p>\
+      <p>If so, change that line to:\
+      <pre class="file">JAVA_HOME=/etc/alternatives/java_sdk</pre></p>\
+      <p>If not, then you do not need to do anything.</p>
+   1. <p>Restart the !BeStMan service:</p>\
+      <pre class="rootscreen">%UCL_PROMPT_ROOT% service bestman2 restart</pre>
+
+---++ Fixing SSL problems / Disabling !SSLv3
+<p>
+      We have received reports that the latest version of Firefox (39.0) keeps
+      users from being able to access the web UIs of GUMS, Gratia, or
+      VOMS-Admin.  Attempts to access will result in this error:
+</p>
+<pre>
+      SSL received a weak ephemeral Diffie-Hellman key in Server Key Exchange handshake message.
+      (Error code: ssl_error_weak_server_ephemeral_dh_key)
+</pre>
+<p>
+      This affects all known versions of !OpenJDK 1.7.0.
+</p>
+<p>
+      The recommended workaround for this is server-side:
+</p>
+<p>
+   1. Find the file: `/usr/lib/jvm/java-1.7.0-openjdk-1.7.0-*/jre/lib/security/java.security`
+   1. Find the setting called `jdk.tls.disabledAlgorithms` (or add it if missing)
+   1. If not already present, add `SSLv3` and `DHE` to the list
+   1. If using EL5, run `service tomcat5 restart`<br/>
+      If using EL6, run `service tomcat6 restart`
+</p>
+<p>
+      This will cause the webapp to use a different algorithm, which Firefox
+      will not complain about.
+</p>
+<p>
+      We do not have an ETA for when a future version of !OpenJDK 1.7.0 will
+      contain a fix.  !OpenJDK 1.8.0 does not have this problem, but since we
+      have not verified that it works with OSG software, we do not recommend
+      switching to that yet.
+</p>
+
+---++ Optional: Preventing Oracle JDK From Being Installed
+
+To prevent Oracle's java implementation from being installed, you can configure yum to exclude it from all future installs: Edit =/etc/yum.conf= and add the line <code>exclude=jdk java-1.6.0-sun-compat</code> to the end of the file. If a line starting with <code>exclude=</code> already exists in =/etc/yum.conf=, then add =jdk= and =java-1.6.0-sun-compat= to the end of that line, separated by spaces.
+
+---++ Getting Help with Java and OSG Software
+
+For further assistance please use [[Documentation/Release3.HelpProcedure][this page]]. 
+
+
+<!-- CONTENT MANAGEMENT PROJECT
+############################################################################################################
+ DEAR DOCUMENT OWNER
+ ===================
+
+ Thank you for claiming ownership for this document! Please fill in your FirstLast name here:
+   * Local OWNER = BrianLin
+
+ Please define the document area, choose one of the defined areas from the next line
+ DOC_AREA = (ComputeElement|General|Trash/Trash/Integration|Monitoring|Operations|Security|Storage|Trash/Tier3|User|VO)
+   * Local DOC_AREA = General
+
+ define the primary role the document serves, choose one of the defined roles from the next line
+ DOC_ROLE = (Developer|Documenter|Scientist|Student|SysAdmin|VOManager)
+   * Local DOC_ROLE = SysAdmin
+
+ Please define the document type, choose one of the defined types from the next line
+ DOC_TYPE = (HowTo|Installation|Knowledge|Navigation|Planning|Training|Troubleshooting)
+   * Local DOC_TYPE = Installation
+
+  Please define if this document in general needs to be reviewed before release ( %YES% | %NO% )
+   * Local INCLUDE_REVIEW = %YES%
+
+ Please define if this document in general needs to be tested before release ( %YES% | %NO% )
+   * Local INCLUDE_TEST = %YES%
+
+ change to %YES% once the document is ready to be reviewed and back to %NO% if that is not the case
+   * Local REVIEW_READY = %YES%
+
+ change to %YES% once the document is ready to be tested and back to %NO% if that is not the case
+   * Local TEST_READY = %YES%
+
+ change to %YES% only if the document has passed the review and the test (if applicable) and is ready for release
+   * Local RELEASE_READY = %YES%
+
+
+ DEAR DOCUMENT REVIEWER
+ ======================
+
+ Thank for reviewing this document! Please fill in your FirstLast name here:
+   * Local REVIEWER = TimCartwright
+ Please define the review status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local REVIEW_PASSED = %YES%
+
+
+ DEAR DOCUMENT TESTER
+ ====================
+
+ Thank for testing this document! Please fill in your FirstLast name here:
+   * Local TESTER = HorstSeverini
+ Please define the test status for this document to be in progress ( %IN_PROGRESS% ), failed ( %NO% ) or passed ( %YES% )
+   * Local TEST_PASSED = %YES%
+############################################################################################################
+-->
