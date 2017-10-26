@@ -217,15 +217,10 @@
         
             <li><a class="toctree-l4" href="#configuring-xrootdfs">Configuring xrootdfs</a></li>
         
-            <li><a class="toctree-l4" href="#optional-configuring-secured-xrootdfs">(Optional) Configuring secured xrootdfs</a></li>
-        
-            <li><a class="toctree-l4" href="#configure-xrootd-gratia-probes">Configure Xrootd Gratia Probes</a></li>
-        
-            <li><a class="toctree-l4" href="#starting-services">Starting Services</a></li>
-        
-            <li><a class="toctree-l4" href="#stopping-services">Stopping Services</a></li>
-        
         </ul>
+    
+
+    <li class="toctree-l3"><a href="#services">Services</a></li>
     
 
     <li class="toctree-l3"><a href="#file-locations">File Locations</a></li>
@@ -907,48 +902,143 @@
 
 
 <h2 id="configuring-xrootdfs">Configuring xrootdfs<a class="headerlink" href="#configuring-xrootdfs" title="Permanent link">&para;</a></h2>
-<h2 id="optional-configuring-secured-xrootdfs">(Optional) Configuring secured xrootdfs<a class="headerlink" href="#optional-configuring-secured-xrootdfs" title="Permanent link">&para;</a></h2>
-<h2 id="configure-xrootd-gratia-probes">Configure Xrootd Gratia Probes<a class="headerlink" href="#configure-xrootd-gratia-probes" title="Permanent link">&para;</a></h2>
-<p>Note that you can also enable the GridFTP gratia probe. However, the XRootD probes are likely sufficient. More information on the GridFTP probe can be found <a href="../gridftp#enabling-gratia-gridftp-transfer-probe">here</a>.</p>
-<h2 id="starting-services">Starting Services<a class="headerlink" href="#starting-services" title="Permanent link">&para;</a></h2>
+<p>You can use a FUSE mount in order to test POSIX access to xrootd in the GridFTP server. Configure it using the following steps.</p>
+<p>Modify <strong><code>/etc/fstab</code></strong> by adding the following entries:</p>
+<div class="codehilite"><pre><span></span>....
+xrootdfs                <span style="color:red">/mnt/xrootd</span>              fuse    rdr=xroot://<span style="color:red">redirector1.domain.com</span>:1094/<span style="color:red">/path/</span>,uid=xrootd 0 0
+</pre></div>
+
+
+<p>Replace <code>/mnt/xrootd</code> with the path that you would like to access with. This should also match the GridFTP settings for the <code>XROOTD_VMP</code> local path. Create <strong><code>/mnt/xrootd</code></strong> directory. Once you are finished, you can mount it:</p>
+<div class="codehilite"><pre><span></span>mount /mnt/xrootd
+</pre></div>
+
+
+<p>You should now be able to run UNIX commands such as <code>ls /mnt/xrootd</code> to see the contents of the XRootD server.</p>
+<h3 id="optional-configuring-secured-xrootdfs">(Optional) Configuring secured xrootdfs<a class="headerlink" href="#optional-configuring-secured-xrootdfs" title="Permanent link">&para;</a></h3>
+<p>If you want to enable security for access to xrootd via xrootdfs you will need to modify xrootd configuration and perform several steps to make xrootdfs secured.</p>
 <ol>
 <li>
-<p>fetch-crl</p>
+<p>On the xrootd redirector node, execute the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdsssadmin -k <span style="color:red">&lt;my_key_name&gt;</span> -u anybody -g usrgroup add <span style="color:red">&lt;keyfile&gt;</span>
+
+<span class="go">eg:</span>
+
+<span class="gp">root@host #</span> xrdsssadmin -k top_secret -u anybody -g usrgroup add /etc/xrootd/xrootd.key
+</pre></div>
+
+
 </li>
 <li>
-<p>GridFTP</p>
+<p>Set ownership</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chown xrootd.xrootd /etc/xrootd/xrootd.key
+</pre></div>
+
+
+</li>
+<li>
+<p>On the node where xrootdfs is installed modify <strong><code>/etc/fstab</code></strong> add security information:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrootdfs <span style="color:red">/mnt/xrootd %ENDCOLOR<span class="s2">&quot; fuse rdr=xroot://<span style="color:red">redirector1.domain.com</span>:1094/<span style="color:red">/path/redirector1</span>,uid=xrootd,sss=<span style="color:red">keyfile</span>0 0</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>On all xrootd data servers and redirector node, modify xrootd configuration (<strong><code>/etc/xrootd/xrootd-clustered.cfg</code></strong>) by adding the following segment:</p>
+<div class="codehilite"><pre><span></span># ENABLE_SECURITY_BEGIN
+   xrootd.seclib /usr/lib64/libXrdSec.so
+   #the line below should be before &quot;sec.protocol ... unix&quot;
+   <span style="color:red">sec.protocol /usr/lib64 sss -s keyfile </span>
+   sec.protocol /usr/lib64 unix
+   # this specify that we use the &#39;unix&#39; authentication module, additional one can be specified.
+   # this is the authorization file
+   acc.authdb /etc/xrootd/auth_file
+   ofs.authorize
+   # ENABLE_SECURITY_END
+</pre></div>
+
+
+</li>
+<li>
+<p>On all xrootd data server nodes, edit /etc/xrootd/auth_file to add authorized users of the form <code>u <span style="color:red">username</span> <span style="color:red">/directoryname</span> lr</code> where "lr" is the permission set.</p>
+</li>
+<li>
+<p>Copy <span style="color:red">keyfile<span class="twiki-macro ENDCOLOR"></span> from redirector node to every data server node and the xrootdfs node. Make sure that this file is owned by the <code>xrootd</code> user.</p>
+</li>
+<li>
+<p>Restart xrootd cluster by following <a href="https://twiki.opensciencegrid.org/bin/view/SoftwareTeam/HowToInstallXrootd">these instructions</a></p>
+</li>
+<li>
+<p>On xroodfs node execute mount:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mount <span style="color:red">/mnt/xrootd</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Verify that you can access the mount point (df,ls) and can not write into unauthorized path, e.g:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp /bin/sh /mnt/xrootd/tlevshin/test1 cp:
+<span class="go">cannot create regular file \`/mnt/xrootd/tlevshin/test1&#39;: Permission denied</span>
+</pre></div>
+
+
+<p>Login as yourself and try:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> su - tlevshin
+<span class="gp">user@host $</span> cp /bin/sh /mnt/xrootd/tlevshin/test1
+</pre></div>
+
+
 </li>
 </ol>
-<p>Starting GridFTP:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service globus-gridftp-server start
-</pre></div>
-
-
-<p>To start Gridftp automatically at boot time</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chkconfig globus-gridftp-server on
-</pre></div>
-
-
-<ol>
-<li>Gratia transfer and storage probes</li>
-</ol>
-<h2 id="stopping-services">Stopping Services<a class="headerlink" href="#stopping-services" title="Permanent link">&para;</a></h2>
-<ol>
-<li>fetch-crl</li>
-</ol>
-<p>* (other grid service running on the machine may still use it)</p>
-<p>* (other grid service running on the machine may still use it)</p>
-<ol>
-<li>GridFTP</li>
-</ol>
-<p>Stopping GridFTP:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service globus-gridftp-server stop
-</pre></div>
-
-
-<ol>
-<li>Gratia transfer and storage probes</li>
-</ol>
+<h1 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th align="left">Software</th>
+<th align="left">Service name</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">fetch-crl</td>
+<td align="left"><code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
+<td align="left">See  <a href="../../common/ca/#startstop-fetch-crl-a-quick-guide">CA documentation</a></td>
+</tr>
+<tr>
+<td align="left">Gridftp</td>
+<td align="left"><code>globus-gridftp-server</code></td>
+<td align="left">See <a href="../../data/gridftp/#managing-gridftp">gridftp documentation</a></td>
+</tr>
+</tbody>
+</table>
+<p>As a reminder, here are common service commands (all run as <code>root</code>):</p>
+<table>
+<thead>
+<tr>
+<th align="left">To …</th>
+<th align="left">Run the command …</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Start a service</td>
+<td align="left"><code>service <span style="color:red">&lt;SERVICE-NAME&gt;</span> start</code></td>
+</tr>
+<tr>
+<td align="left">Stop a service</td>
+<td align="left"><code>service <span style="color:red">&lt;SERVICE-NAME&gt;</span> stop</code></td>
+</tr>
+<tr>
+<td align="left">Enable a service to start during boot</td>
+<td align="left"><code>chkconfig <span style="color:red">&lt;SERVICE-NAME&gt;</span> on</code></td>
+</tr>
+<tr>
+<td align="left">Disable a service from starting during boot</td>
+<td align="left"><code>chkconfig <span style="color:red">&lt;SERVICE-NAME&gt;</span> off</code></td>
+</tr>
+</tbody>
+</table>
 <h1 id="file-locations">File Locations<a class="headerlink" href="#file-locations" title="Permanent link">&para;</a></h1>
 <table>
 <thead>
@@ -981,10 +1071,32 @@
 </tr>
 </tbody>
 </table>
-<p>| Service/Process | Log File | Description |
-| GridFTP | /var/log/gridftp.log | GridFTP transfer log |
-| | /var/log/gridftp-auth.log | GridFTP authorization log |
-| Gratia probe | /var/logs/gratia | |</p>
+<table>
+<thead>
+<tr>
+<th>Service/Process</th>
+<th>Log File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GridFTP</td>
+<td>/var/log/gridftp.log</td>
+<td>GridFTP transfer log</td>
+</tr>
+<tr>
+<td></td>
+<td>/var/log/gridftp-auth.log</td>
+<td>GridFTP authorization log</td>
+</tr>
+<tr>
+<td>Gratia probe</td>
+<td>/var/logs/gratia</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h1 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h1>
 <p>For a full set of help options, see <a href="../../common/help/">Help Procedure</a>.</p>
               
