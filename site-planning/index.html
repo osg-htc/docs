@@ -66,17 +66,15 @@
     
         <ul>
         
-            <li><a class="toctree-l3" href="#about-this-document">About this Document</a></li>
-        
             <li><a class="toctree-l3" href="#background">Background</a></li>
         
             <li><a class="toctree-l3" href="#site-policies">Site Policies</a></li>
         
-            <li><a class="toctree-l3" href="#osg-site-elements">OSG Site Elements</a></li>
+            <li><a class="toctree-l3" href="#compute-element">Compute Element</a></li>
         
-            <li><a class="toctree-l3" href="#recommendations">Recommendations</a></li>
+            <li><a class="toctree-l3" href="#worker-node-client">Worker Node Client</a></li>
         
-            <li><a class="toctree-l3" href="#example-configurations">Example Configurations</a></li>
+            <li><a class="toctree-l3" href="#data-service">Data Service</a></li>
         
         </ul>
     
@@ -756,278 +754,103 @@
             <div class="section">
               
                 <h1 id="site-planning">Site Planning<a class="headerlink" href="#site-planning" title="Permanent link">&para;</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This documentation is outdated and some of the listed technologies are no longer in use:</p>
-<ul>
-<li>GRAM and the Globus Gatekeeper have been removed in favor of HTCondor-CE</li>
-<li>Managed Fork has been removed along with GRAM</li>
-<li>GUMS and EDG-Mkgridmap are deprecated in favor of <a href="../security/lcmaps-voms-authentication">LCMAPS-VOMS authentication</a></li>
-<li>BeStMan is deprecated in favor of HDFS and load-balanced GridFTP</li>
-<li>NFSLite has been removed</li>
-</ul>
-<p>Please be patient while we update the document to reflect current procedures and technologies.</p>
-</div>
-<h2 id="about-this-document">About this Document<a class="headerlink" href="#about-this-document" title="Permanent link">&para;</a></h2>
 <p>This document is for <strong>System Administrators</strong>. The purpose of the document is to provide an overview about the different ways to setup an OSG site and to encourage you to plan your site before you continue to install the OSG software on your site.</p>
 <p>After reading this document you should be able to identify the site elements needed to setup your OSG site and choose among different technology choices presented.</p>
 <h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h2>
-<p>The goal for the Open Science Grid software stack is to provide a uniform computing and storage interface across many independently managed computing and storage clusters. Scientists, researchers, and students, organized as virtual organizations (VOs), are the consumers of the CPU cycles and storage.</p>
-<p>Your site is encouraged to support as many OSG-registered VOs as possible, but you are not required to support all of them.</p>
-<p>As the administrator responsible for deployment of the OSG software stack, your task is to make your existing computing and storage cluster available to and reliable for the VOs that you support. The OSG expects you to set up a gatekeeper node called a Compute Element (CE) on which the bulk of the OSG software gets installed. The end-user sends jobs into your cluster's batch system, your CE receives them and passes them out to Worker Nodes (WN) for execution. Some VOs and end-users require non-negligible amounts of data as input, or generate non-negligible amounts of data as output. They will need to store that data in a Storage Element (SE). A site is not required to provide both a CE and an SE.</p>
-<h2 id="site-policies">Site Policies<a class="headerlink" href="#site-policies" title="Permanent link">&para;</a></h2>
-<p>OSG expects you to clearly specify your site's policies regarding resource access. Please write them on a web page, make this page part of your site registration, and make it available via the GOC publishing tool <a href="http://my.opensciencegrid.org">MyOSG</a> and the OSG information management system, OIM. We encourage you to allow all virtual organizations registered with the OSG at least "opportunistic use" of your resources. You may need to preempt those jobs when higher priority jobs come around. The end-users using the OSG generally prefer having access to your site subject to preemption over having no access at all.</p>
-<h2 id="osg-site-elements">OSG Site Elements<a class="headerlink" href="#osg-site-elements" title="Permanent link">&para;</a></h2>
-<p>The OSG provides software and documentation to install and operate following services:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Element</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Authorization Service</td>
-<td align="left">enables grid users to authorize with your site using their grid or voms proxies</td>
-</tr>
-<tr>
-<td align="left">Compute Element</td>
-<td align="left">enables grid users to run jobs on your site</td>
-</tr>
-<tr>
-<td align="left">Worker Node Client</td>
-<td align="left">enables grid jobs running on worker nodes to access grid tools</td>
-</tr>
-<tr>
-<td align="left">Storage Element</td>
-<td align="left">enables grid users to store large amounts of data at your site</td>
-</tr>
-<tr>
-<td align="left">VO Management Service</td>
-<td align="left">provides functionality for VO Managers to manage the membership information of their users</td>
-</tr>
-</tbody>
-</table>
-<h3 id="authorization-service">Authorization Service<a class="headerlink" href="#authorization-service" title="Permanent link">&para;</a></h3>
-<p>Grid users will authorization with your site using their <strong>grid or voms proxy</strong>. The OSG provides two different services that let you control the authorization process:</p>
-<table>
-<thead>
-<tr>
-<th><strong>Service</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Advantages</strong></th>
-<th><strong>Disadvantages</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>edg-mkgridmap</td>
-<td>a simple program that contacts VOMS servers and creates a gridmap file</td>
-<td>easy to install and maintain</td>
-<td>does not support voms proxies</td>
-</tr>
-<tr>
-<td><a href="../security/install-gums">GUMS</a></td>
-<td>a web service providing sophisticated controls of how users authorization</td>
-<td>supports voms proxies</td>
-<td>requires Tomcat to be run as a web service</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>A <strong>VOMS Server</strong> is not an element of your site. Each <strong>Virtual Organization</strong> operates a central VOMS Server to manage membership information of its grid users. Please contact the <strong>VO Manager</strong> for your virtual organization to obtain more details.</p>
-</div>
-<h3 id="compute-element">Compute Element<a class="headerlink" href="#compute-element" title="Permanent link">&para;</a></h3>
-<p>A <strong>Compute Element</strong> allows grid users to run jobs on your site. It is software that provides following services when run on your <strong>gatekeeper</strong>: The standard installation is based on HTCondor-CE with RSV for monitoring.</p>
-<p>You must determine your security policy with regard to Unix ID management on the cluster. You may choose group accounts and/or dynamic accounts for all users.</p>
-<p>You must choose the OS (Red Hat Enterprise Linux derivative), the batch system (Condor, PBS, LSF, SGE, and Slurm are presently supported), and the network architecture of your cluster. The default network assumption is public/private with NAT so you will need to advertise your architecture by changing some settings by hand if yours isn't like this. In addition, there are some configuration choices, including one that avoids all NFS exports from the CE to the compute cluster (NFS-lite).</p>
-<p>The CE hosts information provider(s) and monitoring services, most of which are configured correctly by default. We require all OSG sites to deploy Gratia, the OSG accounting system. Your site thus sends accounting records to OSG about jobs run on your site and data transfers involving your site. Aggregated summaries of this information can be viewed via the <a href="https://gracc.opensciencegrid.org">GRACC</a>.</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Service</th>
-<th align="left">Description</th>
-<th align="left">Comments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">HTCondor-CE</td>
-<td align="left">HTCondor-CE, based on the HTCondor batch system, provide a public entry point to your local batch system.<br />
-It also allows grid users to <strong>fork</strong> jobs on your gatekeeper by default.</td>
-<td align="left">Required</td>
-</tr>
-<tr class="even">
-<td align="left">RSV</td>
-<td align="left"><strong>R</strong>esource <strong>S</strong>ervice <strong>V</strong>alidation system which schedules execution of local &quot;probes&quot; of your CE (and SE), and reports the results up to the GOC. This is important for service availablity monitoring of OSG sites.</td>
-<td align="left">Required</td>
-</tr>
-<tr class="odd">
-<td align="left">Squid</td>
-<td align="left">Squid is a caching proxy for the Web that enables restricted access of worker nodes to the web.</td>
-<td align="left">Optional</td>
-</tr>
-<tr class="even">
-<td align="left">Syslog-ng</td>
-<td align="left">A logging service that can be used to forward CE logfiles to the GOC for troubleshooting purposes.</td>
-<td align="left">Optional</td>
-</tr>
-</tbody>
-</table>
-
-<p>Additionally two shared file systems are for grid users to install applications <strong>OSG_APP</strong> (required) and to save data <strong>OSG_DATA</strong> (optional). If available, both must be mounted on the gatekeeper and all worker nodes:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Shared Filesystem</th>
-<th align="left">Description</th>
-<th align="left">Recommended Size</th>
-<th align="center">Typical Size[TB]</th>
-<th align="left">Comments</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">HOME</td>
-<td align="left">space for grid user home directories</td>
-<td align="left">10GB for each VO</td>
-<td align="center">0.1 to 1</td>
-<td align="left">required, auto-cleanup</td>
-</tr>
-<tr>
-<td align="left">OSG_APP</td>
-<td align="left">space for grid users to install applications</td>
-<td align="left">10GB for each VO</td>
-<td align="center">0.1 to 1</td>
-<td align="left">required, no auto-cleanup</td>
-</tr>
-<tr>
-<td align="left">OSG_DATA</td>
-<td align="left">space for grid users to stage data</td>
-<td align="left">10GB for each VO and worker node</td>
-<td align="center">0.1 to 10</td>
-<td align="left">optional, no quota, auto-cleanup</td>
-</tr>
-<tr>
-<td align="left">OSG_WN_TMP</td>
-<td align="left">tmp space for users on worker nodes</td>
-<td align="left">2GB for each cpu core</td>
-<td align="center">0.1</td>
-<td align="left">required, auto-cleanup</td>
-</tr>
-<tr>
-<td align="left">OSG_GRID</td>
-<td align="left">location of the worker node client</td>
-<td align="left">10GB</td>
-<td align="center">0.1</td>
-<td align="left">optional/required (see <span style="color:red">NOTE</span>)</td>
-</tr>
-</tbody>
-</table>
+<p>The goal for the OSG Software stack is to provide a uniform computing and storage fabric across many
+independently-managed computing and storage resources. These individual services will be accessed by virtual
+organizations (VOs), which will delegate the resources to scientists, researchers, and students.</p>
+<p><em>Sharing</em> is a fundamental principle for the OSG: your site is encouraged to support as many OSG-registered VOs as
+local conditions allow.  <em>Autonomy</em> is another principle: you are not required to support any you do not want.</p>
+<p>As the administrator responsible for deployment of the OSG software stack, your task is to make your existing computing
+and storage resources available to and reliable for your supported VOs. Fundamentally, there are three components:</p>
+<ul>
+<li><em>Compute Element</em> (CE): This provides remote access for VOs to submit "pilot jobs" to your local batch system.</li>
+<li><em>Worker node</em> (WN): A standardized runtime environment for pilot jobs, managed and allocated by the batch system.</li>
+<li><em>Data</em>: Various services that provide access to the data and storage resources at your site.</li>
+</ul>
+<p>Depending on the VOs you want to support, data services may not be necessary.  Even a compute element is not strictly
+necessary: OSG offers a "hosted CE" service where OSG will run the software provided only with a SSH connection to the
+batch submit host.  Contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#111;&#99;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#103;&#111;&#99;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> for more information on the hosted CE.</p>
+<ul>
+<li>The simplest way to support OSG is to only provide SSH logins for the hosted CE and install the worker node
+  environment.</li>
+<li>Larger or more complex sites will elect to run their own CE in addition to the WN environment and the simplest
+  data service (HTTP proxy cache).</li>
+<li>The largest sites will additionally run large-scale data services such as a "storage element".  This is often required
+  for sites that want to support more complex organizations such as ATLAS or CMS.</li>
+</ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you install wn-client on each node via RPM all the client software is available in the default path. There is no need for OSG_GRID. The RPM installation creates <code>/etc/osg/wn-client/</code> with dummy setup files for compatibility with old jobs looking for a OSG_GRID. New jobs should source the setup file in OSG_GRID if this is defined; if not, they should expect all the client binaries in the default PATH.</p>
+<p>An essential concept on the OSG is the "pilot job".  The pilot, which arrives at your batch system, is sent by the
+VO and gets a resource allocation.  However, it <em>does not</em> contain any scientific payload.  Once started, it will
+connect back to a resource pool and pull down individuals' scientific "payload jobs".  Hence, we do not think about
+submitting "jobs" to sites but rather "resource requests".</p>
 </div>
-<h3 id="worker-node-client">Worker Node Client<a class="headerlink" href="#worker-node-client" title="Permanent link">&para;</a></h3>
-<p>The <a href="../worker-node/install-wn">Worker Node Client</a> is software installed on each worker node to give programs running on the worker nodes access to grid utilities. While it is technically optional, it is <strong>strongly recommended</strong> that you install it on the gatekeeper and all worker nodes. This can be done as a local installation, in which the software is installed individually on every worker node, or as a shared installation in which the software is installed on one machine that shares it via a global file system to all the worker nodes. All the site configurations below are showing a local installation of the worker node client.</p>
-<h3 id="storage-element">Storage Element<a class="headerlink" href="#storage-element" title="Permanent link">&para;</a></h3>
-<p>A <strong>Storage Element</strong> provides grid users the possibility to read and write large amounts of data on your site using the <strong>S</strong>torage <strong>R</strong>esource <strong>M</strong>anager (<strong>SRM</strong>). All Storage Element implementations in the OSG support the gsiftp protocol and full or partial SRM specification. The selection of storage suitable for your site varies on anticipated usage patterns, available hardware, the choice of underlying distributed storage, support for a tape-archival backend etc.</p>
-<p>There are two types of storage element services provided by OSG which implement SRM v2. See pointers to instructions for these services:</p>
+<h2 id="site-policies">Site Policies<a class="headerlink" href="#site-policies" title="Permanent link">&para;</a></h2>
+<p>Sites are encouraged to clearly specify and communicate their local policies regarding resource access. One common
+mechanism to do this is post them on a web page and make this page part of your site registration in
+<a href="http://my.opensciencegrid.org">MyOSG</a>.  Written policies help external entities understand what your site wants to
+accomplish with the OSG -- and are often internally clarifying.</p>
+<p>In line of our principle of <em>sharing</em>, we encourage you to allow virtual organizations registered with the OSG
+"opportunistic use" of your resources. You may need to preempt those jobs when higher priority jobs come around.
+The end-users using the OSG generally prefer having access to your site subject to preemption over having no access
+at all.</p>
+<h2 id="compute-element">Compute Element<a class="headerlink" href="#compute-element" title="Permanent link">&para;</a></h2>
+<p>A <strong>Compute Element</strong> allows VOs to access the resources at your site via external submission to a batch system.  To
+provide this service, the OSG provides a vertically-integrated set of software centered around the "HTCondor-CE".</p>
+<p>As part of the CE deploy, you must make a few site design choices:</p>
 <ul>
-<li><a href="../data/bestman-install">BeStMan</a> - Sits in front of any POSIX filesystem. There is also a version which supports xrootd filesystems.</li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoop200SE">Hadoop</a> - Map-reduce based solution to aggregate off-the-shelf disks into a scalable reliable system.</li>
+<li>Host operating system: Red Hat Enterprise Linux 6 or 7 are supported, as well as derivative distributions (CentOS,
+  ScientificLinux),</li>
+<li>The batch system:  HTCondor, PBS, LSF, SGE, and Slurm are presently supported.  About 70% of OSG sites select
+  HTCondor.  Non-HTCondor sites will need a shared filesystem between the CE and worker nodes that is <em>writable by
+  root</em> from the CE.</li>
+<li>The network architecture of your cluster: Most VOs require unrestricted outbound network access from the worker nodes;
+  this is typically done through a NAT.  For sites where this is difficult to provide, some VOs are be able to provide
+  a whitelist of IP addresses they will need outbound access to; contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#111;&#99;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#103;&#111;&#99;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> for support.</li>
 </ul>
-<p>An SE must run correctly configured Grid Information Providers, Gratia accounting and RSV probes.</p>
-<p>These services are supported by the OSG Storage group. Please email <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#115;&#103;&#45;&#115;&#116;&#111;&#114;&#97;&#103;&#101;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#111;&#115;&#103;&#45;&#115;&#116;&#111;&#114;&#97;&#103;&#101;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> for installation and support questions for these services.</p>
-<table>
-<thead>
-<tr>
-<th><strong>Storage Requirements</strong></th>
-<th><strong>Min Hardware Requirements</strong></th>
-<th><strong>OSG SE Solution</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SRM interface, Dynamic Space Management Support</td>
-<td>Server with local disk</td>
-<td>BeStMan-fullmode</td>
-</tr>
-<tr>
-<td>SRM interface, No or Static Space Management Support</td>
-<td>Server with local disk or NFS</td>
-<td>BeStMan-gateway</td>
-</tr>
-<tr>
-<td>SRM interface, No or Static Space Management Support, jobs need root protocol to access data</td>
-<td>Multiple servers(&gt;3)</td>
-<td>BeStMan-gateway/Xrood</td>
-</tr>
-<tr>
-<td>SRM interface, No or Static Space Management Support, file replication</td>
-<td>Multiple servers(&gt;4)</td>
-<td>BeStMan-gateway/HDFS</td>
-</tr>
-<tr>
-<td>SRM interface, Dynamic Space Management Support, file replication, interface to tape backend</td>
-<td>Multiple servers (&gt;5)</td>
-<td>dcache</td>
-</tr>
-</tbody>
-</table>
-<h3 id="vo-management-service">VO Management Service<a class="headerlink" href="#vo-management-service" title="Permanent link">&para;</a></h3>
-<p>A <strong>V</strong>irtual <strong>O</strong>ganization <strong>M</strong>anagement <strong>S</strong>ervice (VOMS) controls who is a member of your VO. Each VO needs to provide one VOMS. Please contact the VO Manager of VO to find out about the VOMS of your VO.</p>
-<h2 id="recommendations">Recommendations<a class="headerlink" href="#recommendations" title="Permanent link">&para;</a></h2>
-<p>In this section we outline <span style="color:red">important</span> recommendations for setting up an OSG site. The recommendations are based on the knowledge of experienced system administrators and will help you avoid typical problems operating an OSG site from the beginning.</p>
-<h3 id="shared-file-systems">Shared File Systems<a class="headerlink" href="#shared-file-systems" title="Permanent link">&para;</a></h3>
-<p>We recommend to use a dedicated server for hosting the shared file system. The expected load on the file server could be distributed further by providing a dedicated file server for <strong>HOME</strong> and <strong>OSG_DATA</strong> if possible. You should also consider to:</p>
+<p>The CE will map each VO to one Unix user accont at the site (due to historic concerns, a handful may map to 2-3
+accounts).  Except in the case of HTCondor, the CE and the worker nodes need to have uniform username-to-UID mappings.</p>
+<p>In addition to the basic remote submission service, the CE providers accounting and monitoring services, which will
+run by default when the CE is enabled and started. The OSG central accounting system, GRACC, recieves individual
+records for each job run by the OSG on your CE. Aggregated summaries of this information can be viewed via the
+<a href="https://gracc.opensciencegrid.org">GRACC</a> web interface.</p>
+<h2 id="worker-node-client">Worker Node Client<a class="headerlink" href="#worker-node-client" title="Permanent link">&para;</a></h2>
+<p>The Worker Node Client is software installed on each worker node to provide a minimal runtime environment for pilot
+jobs.  We strive to keep this as lightweight as possible; it includes basic grid utilities, not scientific libraries.</p>
+<p>There is a wide range of worker node management practices; accordingly, we provide the worker node client in three
+forms:</p>
 <ul>
-<li>use a consistent mounting scheme for shared partitions when mounted on the gatekeeper with respect to all worker nodes</li>
-<li>use a reasonable automatic cleanup procedure for <strong>HOME</strong>, <strong>OSG_DATA</strong> and <strong>OSG_WN_TMP</strong></li>
-<li>not use an automatic cleanup procedures for <strong>OSG_APP</strong></li>
-<li>not use quota for <strong>OSG_DATA</strong></li>
+<li><a href="../worker-node/install-wn/"><em>RPM packaging</em></a>: Grid utilities are deployed at the system level using <code>yum</code>.</li>
+<li><a href="../worker-node/install-wn-tarball/"><em>Tarball installation</em></a>: Utilities are deployed onto a sitewide shared
+  filesystem by unpacking a tarball and running a configuration script.</li>
+<li><a href="../worker-node/install-wn-oasis"><em>CVMFS</em></a>: CVMFS, a heavily-used global read-only filesystem, provides a copy of the grid utilities.</li>
 </ul>
-<h4 id="nfs-warning">NFS Warning<a class="headerlink" href="#nfs-warning" title="Permanent link">&para;</a></h4>
-<p>NFS is known to be an <em>easy</em> but less adequate for large sites. If you want to use NFS you should read the chapter <em>"Optimizing NFS Performance"</em> in the <a href="http://nfs.sourceforge.net/nfs-howto/">http://nfs.sourceforge.net/nfs-howto/</a>. Software partitions that can be locally installed, such as OSG_GRID, should be locally installed and not shared unless you have an enterprise-class NFS server.</p>
-<h3 id="compute-and-storage-element">Compute and Storage Element<a class="headerlink" href="#compute-and-storage-element" title="Permanent link">&para;</a></h3>
+<p>Additionally, OSG packages a global read-only filesystem called <a href="../worker-node/install-cvmfs">CVMFS</a> for distribution of
+software and data.  Many VOs either completely rely on CVMFS for software (LIGO, CMS, ATLAS) or rely on CVMFS for a
+majority of jobs (OSG VO).  Some jobs can utilize worker nodes without CVMFS.  You will be able to share your
+resources regardless, but installing CVMFS is a primary mechanism to attract more jobs.</p>
+<h2 id="data-service">Data Service<a class="headerlink" href="#data-service" title="Permanent link">&para;</a></h2>
+<p>There are two types of data services on the OSG:</p>
 <ul>
-<li>provide dedicated hardware for the Compute and the Storage Element</li>
-<li>use as many cpu cores and main memory as possible</li>
-<li>avoid running other grid services such as GUMS on the Compute and the Storage Element</li>
-<li>avoid running a file server on the Compute and the Storage Element</li>
+<li>A <em>cache</em> pulls in data on read-demand, keeping it locally for further use.  We provide support for the
+  <a href="../data/frontier-squid">Squid HTTP</a> cache for smaller working set sizes and software called <a href="http://xrootd.org">Xrootd</a>
+  for larger datasets.  Almost every site on the OSG installs a Squid cache.</li>
+<li>A <strong>Storage Element</strong> provides remote, POSIX-like access to your site storage service for reading and writing of data.
+  All Storage Element implementations in the OSG support the GridFTP, Xrootd, and HTTPs protocols.</li>
 </ul>
-<h3 id="use-job-manager-managedfork-instead-of-fork">Use Job Manager managedfork instead of fork<a class="headerlink" href="#use-job-manager-managedfork-instead-of-fork" title="Permanent link">&para;</a></h3>
-<p><em>GRAM</em> provides several jobmanagers that control how jobs will be executed on the gatekeeper and the worker nodes. By <span style="color:red">default jobmanager fork</span> will be used to allow grid users to run maintenance jobs on the gatekeeper. Unfortunately fork doesn't provide a way to restrict the number of jobs that may be run simultaneously.</p>
-<p>By choosing <span style="color:red">managedfork instead of fork</span> during the setup process, you will be able to restrict the number of simultaneous running jobs on the gatekeeper. We strongly recommend to choose managedfork as the default jobmanager when configuring the Compute Element.</p>
-<h3 id="role-based-authentication-using-voms-proxies">Role based Authentication using VOMS Proxies<a class="headerlink" href="#role-based-authentication-using-voms-proxies" title="Permanent link">&para;</a></h3>
-<p><em>VOMS proxies</em> allow role based authentication. If your site will support VOMS proxies for authentication you will be able to restrict write access to shared file systems for grid users while providing write permissions to VO Administrators only. In this case we recommend to export <strong>OSG_APP</strong> read-only to the gatekeeper and all worker nodes for grid users and read-write for VO Managers only.</p>
-<h2 id="example-configurations">Example Configurations<a class="headerlink" href="#example-configurations" title="Permanent link">&para;</a></h2>
-<p>This section contains a few example that illustrate how the different elements contributing to an OSG site can be combined. Each <span style="color:gray">gray</span> box represents a physical resource or virtual machine that is required in the example.</p>
-<h3 id="osg-resource-with-compute-element">OSG Resource with Compute Element<a class="headerlink" href="#osg-resource-with-compute-element" title="Permanent link">&para;</a></h3>
-<p><img alt="CE-EDG.png" src="../images/site-planning/CE-EDG.png" /></p>
-<p>The image above shows all elements of a compute element. <em>edg-mkgridmap</em> is used to create the <em>grid-mapfile</em> and to keep it current. The <em>shared filesystem</em> is mounted on the compute element providing access to <em>OSG_APP</em>, <em>OSG_DATA</em> and <em>HOME</em>. <em>GRAM</em> and <em>GridFTP</em> use the <em>grid-mapfile</em> to authenticate requests to run jobs and to transfer data.</p>
-<p><img alt="WN.png" src="../images/site-planning/WN.png" /></p>
-<p>The image above shows a <em>Worker Node</em> that is connected to the <em>Compute Element</em> above by a network.  The <em>Worker Node Client</em> has to be installed on each worker node.  The <em>shared filesystem</em> is mounted on the worker node providing access to <em>OSG_APP</em>, <em>OSG_DATA</em> and <em>HOME</em>.  <em>Node Local Storage</em> is used for <em>OSG_WN_TMP</em> and <em>OSG_GRID</em>. <em>OSG_GRID</em> points to the installation of the <em>Worker Node Client</em>.</p>
-<h3 id="osg-resource-with-joined-compute-and-storage-element">OSG Resource with joined Compute and Storage Element<a class="headerlink" href="#osg-resource-with-joined-compute-and-storage-element" title="Permanent link">&para;</a></h3>
-<p><img alt="CE-SE-EDG.png" src="../images/site-planning/CE-SE-EDG.png" /></p>
-<p>The left side shows elements of a joined Compute and Storage Element.  The shared file system is mounted on the compute and storage element. The <em>BeStMan</em> storage solution provides the <em>SRM Service</em> allowing grid users to remotely access the shared file system.</p>
-<p><img alt="WN.png" src="../images/site-planning/WN.png" /></p>
-<p>The image above shows a <em>Worker Node</em> that is connected to the <em>Compute Element</em> above by a network. The <em>Worker Node Client</em> has to be installed on each worker node. The <em>shared filesystem</em> is mounted on the worker node providing access to <em>OSG_APP</em>, <em>OSG_DATA</em> and <em>HOME</em>. <em>Node Local Storage</em> is used for <em>OSG_WN_TMP</em> and <em>OSG_GRID</em>. <em>OSG_GRID</em> points to the installation of the <em>Worker Node Client</em>.</p>
-<h3 id="osg-resource-with-separate-compute-and-storage-element">OSG Resource with separate Compute and Storage Element<a class="headerlink" href="#osg-resource-with-separate-compute-and-storage-element" title="Permanent link">&para;</a></h3>
-<p><img alt="GUMS.png" src="../images/site-planning/GUMS.png" /></p>
-<p>The image above shows the elements of an authorization host. <em>GUMS</em> provides a central web service for grid authorization requests from storage and compute elements.  It is not required but recommended to run GUMS outside of the compute and and storage element which are shown below.</p>
-<p><img alt="CE-GUMS.png" src="../images/site-planning/CE-GUMS.png" /></p>
-<p>The image above shows all elements of a compute element. <em>GRAM</em> and <em>GridFTP</em> query <em>GUMS</em> to authenticate requests from grid users to run jobs or transfer data. The <em>shared filesystem</em> is mounted on the compute element providing access to <em>OSG_APP</em>, <em>OSG_DATA</em> and <em>HOME</em>.</p>
-<p><img alt="SE-GUMS.png" src="../images/site-planning/SE-GUMS.png" /></p>
-<p>The image above shows all elements of a storage element. <em>SRM</em> and <em>GridFTP</em> query <em>GUMS</em> to authenticate requests from grid users to transfer data. The <em>shared filesystem</em> is mounted on the compute element providing access to <em>OSG_APP</em>, <em>OSG_DATA</em> and <em>HOME</em>. The <em>BeStMan</em> storage solution provides the <em>SRM Service</em> allowing grid users to remotely access the shared file system.</p>
-<p><img alt="WN.png" src="../images/site-planning/WN.png" /></p>
-<p>The image above shows a <em>Worker Node</em> that is connected to the <em>Compute Element</em> above by a network. The <em>Worker Node Client</em> has to be installed on each worker node. The <em>shared filesystem</em> is mounted on the worker node providing access to <em>OSG_APP</em>, <em>OSG_DATA</em> and <em>HOME</em>. <em>Node Local Storage</em> is used for <em>OSG_WN_TMP</em> and <em>OSG_GRID</em>. <em>OSG_GRID</em> points to the installation of the <em>Worker Node Client</em>.</p>
-<h3 id="osg-resource-with-compute-element-and-dcache-storage-element">OSG Resource with Compute Element and dCache Storage Element<a class="headerlink" href="#osg-resource-with-compute-element-and-dcache-storage-element" title="Permanent link">&para;</a></h3>
-<p><img alt="LargeSite.gif" src="../images/site-planning/LargeSite.gif" /></p>
-<p><em>OSG Compute and dCache Storage Element using GUMS</em></p>
-<p>The left side shows all elements of a compute and a <em>dCache</em> storage element. On the right side a set of worker node are drawn which are distinct from <em>dCache Pool Nodes</em>. The worker nodes and dCache pool nodes are connected to the compute and storage element by a network. <em>GRAM</em> and <em>GridFTP</em> use <em>GUMS</em> to authenticate requests to run jobs and to transfer data.</p>
+<p>The storage element model is chosen mostly by sites that support either ATLAS or CMS VOs; otherwise, only caches are
+typically provided.  Sites that need a SE which have existing POSIX-like storage (e.g., Lustre, GPFS) layer remote
+access services (such as <a href="../data/gridftp">GridFTP</a>) on top of the existing storage.  For sites wanting petascale storage -
+but without an existing install - we provide support for <a href="../data/hadoop-overview">HDFS</a> and
+<a href="../data/xrootd-overview">Xrootd</a>.</p>
+<!-- TODO: these figures were all garbage.  Redraw
+## Example Configurations
+This section contains a few example that illustrate how the different elements contributing to an OSG site can be
+combined. Each <span style="color:gray">gray</span> box represents a physical resource or virtual machine that is required in the
+example.
+-->
               
             </div>
           </div>
