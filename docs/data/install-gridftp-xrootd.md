@@ -196,7 +196,8 @@ File Locations
 | Gratia Probe | /etc/gratia/xrootd-storage/ProbeConfig | GridFTP Xrootd Storage Probe configuration |
 | | /etc/gratia/xrootd-transfer/ProbeConfig | GridFTP Xrootd Transfer Probe configuration |
 
-| Service/Process | Log File | Description |
+| Service/Process | Log File | Description              |
+|-----------------|----------|--------------------------|
 | GridFTP | /var/log/gridftp.log | GridFTP transfer log |
 | | /var/log/gridftp-auth.log | GridFTP authorization log |
 | Gratia probe | /var/logs/gratia | |
