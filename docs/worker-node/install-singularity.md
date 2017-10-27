@@ -19,14 +19,18 @@ keeps that privileged code to a
 vulnerability low.  Beginning with the kernel released with RHEL 7.4,
 there is a new
 [technology preview feature](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/7.4_Release_Notes/index.html#technology_previews_kernel)
-to allow unprivileged bind mounts in user name spaces, which allows
+to allow unprivileged bind mounts in user namespaces, which allows
 singularity to run as an unprivileged user.  The OSG has installed
 singularity in [cvmfs](install-cvmfs), so if you have a RHEL 7.4 kernel
 or later you
 can avoid installing singularity at all and reduce vulnerability even
 further.  The RHEL 7.4 kernel (version 3.10.0-693) is available as a
 security update for all RHEL 7 based versions, even on systems that
-have not updated to RHEL 7.4.
+have not updated to RHEL 7.4.  Enabling unprivileged user namespaces
+increases the risk to the kernel, but the kernel is much more widely
+reviewed and the capability is more limited in scope, so the risk of
+enabling the kernel feature is considered by OSG security to be lower
+than installing singularity with setuid-root.
 
 The document is intended for system administrators who wish to either
 install singularity or enable it to be run as an unprivileged user.
@@ -49,7 +53,10 @@ As with all OSG software installations, there are some one-time (per host) steps
 
 If the operating system is an EL 7 variant, and has been updated to EL
 7.4 or the 7.4 kernel (3.10.0-693 or greater), you can skip
-installation altogether and use singularity through CVMFS:
+installation altogether and instead do these steps to enable
+singularity to be run as an unprivileged user via CVMFS (although note
+that VO pilot jobs that use singularity may not yet be ready to use it
+that way so you may want both this and an rpm for a transition period):
 
 1. Set the `namespace.unpriv_enable=1` boot option.  The easiest way
     to do this is to add it in `/etc/sysconfig/grub` to the end of the
