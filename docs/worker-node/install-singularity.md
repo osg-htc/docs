@@ -26,11 +26,14 @@ or later you
 can avoid installing singularity at all and reduce vulnerability even
 further.  The RHEL 7.4 kernel (version 3.10.0-693) is available as a
 security update for all RHEL 7 based versions, even on systems that
-have not updated to RHEL 7.4.  Enabling unprivileged user namespaces
-increases the risk to the kernel, but the kernel is much more widely
-reviewed and the capability is more limited in scope, so the risk of
-enabling the kernel feature is considered by OSG security to be lower
-than installing singularity with setuid-root.
+have not updated to RHEL 7.4.  
+
+!!! note "Kernel security vs. Singularity security"
+    Enabling unprivileged user namespaces increases the risk to the
+    kernel, but the kernel is much more widely reviewed than Singularity,
+    and the additional capability given to users is more limited in scope.
+    Therefore, we consider the non-setuid, kernel method to have a
+    lower security risk.
 
 The document is intended for system administrators who wish to either
 install singularity or enable it to be run as an unprivileged user.
@@ -51,12 +54,19 @@ As with all OSG software installations, there are some one-time (per host) steps
 
 ## Using Singularity via CVMFS (EL 7 only)
 
+!!! note
+    As of October 2017, no VO in the OSG is ready to use non-setuid
+    Singularity in production.  Only testing sites will need to follow
+    these instructions; contact the VOs you support for more
+    information.
+
+    Most sites will want to follow the RPM install instructions until
+    there is wider VO support.
+
 If the operating system is an EL 7 variant, and has been updated to EL
 7.4 or the 7.4 kernel (3.10.0-693 or greater), you can skip
 installation altogether and instead do these steps to enable
-singularity to be run as an unprivileged user via CVMFS (although note
-that VO pilot jobs that use singularity may not yet be ready to use it
-that way so you may want both this and an rpm for a transition period):
+singularity to be run as an unprivileged user via CVMFS:
 
 1. Set the `namespace.unpriv_enable=1` boot option.  The easiest way
     to do this is to add it in `/etc/sysconfig/grub` to the end of the
