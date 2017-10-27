@@ -86,7 +86,6 @@ All of these node types and their services are optional, although OSG requires t
         -   [Install standalone OSG GridFTP](data/gridftp): GridFTP server
         -   (optional) [Install load-balanced OSG GridFTP](data/load-balanced-gridftp): when a single GridFTP server isn't enough
     -   BeStMan
-        -   [BeStMan Overview](data/bestman-overview): Bestman-related information, planning, and guides
         -   [Install Bestman SE](data/bestman-install): BeStMan2 SRM server + GridFTP server
         -   [Install Bestman Gateway Hadoop](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoop200SE): BeStMan2 SRM server + GridFTP server + Hadoop
     -   Hadoop Distributed File System (HDFS)

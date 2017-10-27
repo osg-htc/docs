@@ -2,7 +2,7 @@ Glexec Installation Guide
 =========================
 
 !!! warning
-    As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of June 2018.
+    As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of May 2018.
 
 This document is intended for System Administrators that are installing the OSG version of glexec.
 

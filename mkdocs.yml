@@ -1,8 +1,10 @@
 site_name: OSG Documentation
-site_url: https://opensciencegrid.github.io/docs
-repo_url: https://github.com/opensciencegrid/docs
-theme: readthedocs
-theme_dir: osgthedocs
+site_url: https://opensciencegrid.github.io/docs/
+repo_url: https://github.com/opensciencegrid/docs/
+google_analytics: ['UA-69012-29', 'opensciencegrid.github.io']
+theme:
+  name: readthedocs
+  custom_dir: osgthedocs
 
 extra_css:
   - css/extra.css
@@ -10,67 +12,64 @@ extra_css:
 pages:
 - Home: 'index.md'
 - Site Planning: 'site-planning.md'
-- Install Guides - Common:
-  - 'Install Best Practices': 'common/install-best-practices.md'
-  - 'CA Certificates': 'common/ca.md'
-  - 'OSG CA Certificates Updater': 'common/osg-ca-certs-updater.md'
-  - 'Yum Repos': 'common/yum.md'
-  - 'Java 7': 'common/openjdk7.md'
-- Worker Node:
-  - 'Worker Node (RPM install)': 'worker-node/install-wn.md'
-  - 'Worker Node (tarball install)': 'worker-node/install-wn-tarball.md'
-  - 'Worker Node (OASIS install)': 'worker-node/install-wn-oasis.md'
-  - 'CVMFS': 'worker-node/install-cvmfs.md'
-  - 'Singularity': 'worker-node/install-singularity.md'
 - Compute Element:
   - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
   - 'Install HTCondor-CE': 'compute-element/install-htcondor-ce.md'
   - 'Job Router Recipes': 'compute-element/job-router-recipes.md'
   - 'Troubleshooting HTCondor-CE': 'compute-element/troubleshoot-htcondor-ce.md'
   - 'Submitting to HTCondor-CE': 'compute-element/submit-htcondor-ce.md'
+- Worker Node:
+  - 'Worker Node Overview': 'worker-node/using-wn.md'
+  - 'Worker Node (RPM install)': 'worker-node/install-wn.md'
+  - 'Worker Node (tarball install)': 'worker-node/install-wn-tarball.md'
+  - 'Worker Node (OASIS install)': 'worker-node/install-wn-oasis.md'
+  - 'CVMFS': 'worker-node/install-cvmfs.md'
+  - 'Singularity': 'worker-node/install-singularity.md'
 - Data:
+  - 'Install HTTP Cache': 'data/frontier-squid.md'
+  - 'Update OASIS': 'data/update-oasis.md'
+  - 'External OASIS repositories': 'data/external-oasis-repos.md'
   - 'Install GridFTP Server': 'data/gridftp.md'
   - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
   - 'Install GridFtp XRootD': 'data/install-gridftp-xrootd.md'
-  - 'HTTP Cache': 'data/frontier-squid.md'
-  - 'Update OASIS': 'data/update-oasis.md'
-  - 'External OASIS repositories': 'data/external-oasis-repos.md'
-  - 'XRootD Overview': 'data/xrootd-overview.md'
-  - 'XRootD Client': 'data/install-xroot-client.md'
-  - 'XRootD': 'data/install-xrootd.md'
-- Install Guides - Other:
-  - 'GSI-enabled SSH': 'other/gsissh.md'
   - 'Hadoop Overview': 'data/hadoop-overview.md'
   - 'Hadoop': 'data/install-hadoop-2-0-0.md'
+  - 'XRootD Overview': 'data/xrootd-overview.md'
+  - 'Install XRootD Client': 'data/install-xroot-client.md'
+  - 'Install XRootD': 'data/install-xrootd.md'
 - Security:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host Certificates': 'security/host-certs.md'
   - 'User Certificates': 'security/user-certs.md'
   - 'Managing CAs': 'security/osg-ca-manage.md'
+- Common:
+  - 'Install Best Practices': 'common/install-best-practices.md'
+  - 'CA Certificates': 'common/ca.md'
+  - 'OSG CA Certificates Updater': 'common/osg-ca-certs-updater.md'
+  - 'Yum Repos': 'common/yum.md'
+  - 'Java 7': 'common/openjdk7.md'
+- Usage Guides:
+  - 'Certificate Tools': 'common/pki-cli.md'
+  - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
+- Other:
+  - 'GSI-enabled SSH': 'other/gsissh.md'
+  - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
+  - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
+  - 'Network Performance Toolkit': 'other/network-performance-toolkit.md'
 - Release Information:
   - 'Release Notes': 'release/notes.md'
   - 'OSG Release Series': 'release/release_series.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
+  - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
   - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
   - 'Contrib Software': 'release/contrib.md'
-- Other:
-  - 'GSI-enabled SSH': 'other/gsissh.md'
-  - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
-  - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
-  - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
-  - 'Network Performance Toolkit': 'other/network-performance-toolkit.md'
 - Monitoring:
   - 'Install RSV': 'monitoring/install-rsv.md'
   - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
   - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
   - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
-- Usage Guides:
-  - 'Certificate Tools': 'common/pki-cli.md'
-  - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
-  - 'Worker Node Environment': 'worker-node/using-wn.md'
 - Deprecated Software:
-  - 'BeStMan Overview': 'data/bestman-overview.md'
   - 'BeStMan Install': 'data/bestman-install.md'
   - 'BeStMan Xrootd SE': 'data/install-bestman-xrootd.md'
   - 'EDG-Mkgridmap Install': 'security/edg-mkgridmap.md'

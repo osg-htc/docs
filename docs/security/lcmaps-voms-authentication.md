@@ -102,6 +102,7 @@ For a table of the configuration files and their order of evaluation, consult th
 -   [Mapping users](#mapping-users)
 -   [Banning VOs](#banning-vos)
 -   [Banning users](#banning-users)
+-   [Mapping using all FQANs](#mapping-using-all-fqans)
 
 
 #### Migrating from edg-mkgridmap
@@ -204,6 +205,22 @@ Each non-commented line is a shell-style pattern which is compared against a use
 
 !!!warning
     `/etc/grid-security/ban-mapfile` *must* exist, even if you are not banning any users. In that case, the file should be blank. If the file does not exist, LCMAPS will ban every user.
+
+
+
+### Mapping using all FQANs
+
+By default, the LCMAPS VOMS plugin only considers the first FQAN of a VOMS proxy for mapping. This matches the behavior of GUMS. If you want to consider all FQANs, you must set the appropriate option.
+
+-   If you are using osg-configure, set `all_fqans = True` in `10-misc.ini`, then run `osg-configure -c`
+
+    !!! note
+        If you are using OSG 3.3, osg-configure should be at least version 1.10.2.  If you are using OSG 3.4, osg-configure should be at least version 2.2.2.
+
+-   If you are configuring `lcmaps.db` manually (see [manual configuration](#manual-configuration) below), add `"-all-fqans"` to the module definitions for `vomsmapfile` and `defaultmapfile`
+
+
+
 
 Validating the LCMAPS VOMS plugin VO mappings
 ---------------------------------------------

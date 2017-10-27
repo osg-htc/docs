@@ -1,7 +1,7 @@
 Java Installation Guide for OSG Software
 ========================================
 
-Several OSG software components (e.g., [BeStMan](../data/bestman-overview), [GUMS](../security/install-gums), [VOMS Admin](../other/install-voms), and their dependencies) are written in the [Java programming language](http://en.wikipedia.org/wiki/Java_(programming_language)) and therefore need a Java Virtual Machine (JVM) implementation in which to run. Currently, OSG software is supported under the OpenJDK 7 implementation. Other implementations (such as the Oracle JDK) may also work, but there is considerable risk in using one; for instance, the IBM implementation is known to cause failures in most OSG Java software.
+Several OSG software components (e.g., [BeStMan](../data/bestman-install), [GUMS](../security/install-gums), [VOMS Admin](../other/install-voms), and their dependencies) are written in the [Java programming language](http://en.wikipedia.org/wiki/Java_(programming_language)) and therefore need a Java Virtual Machine (JVM) implementation in which to run. Currently, OSG software is supported under the OpenJDK 7 implementation. Other implementations (such as the Oracle JDK) may also work, but there is considerable risk in using one; for instance, the IBM implementation is known to cause failures in most OSG Java software.
 
 This document explains how to install Java for OSG software components in a way that allows other Java implementations to be present on a system. If you want to remove all other Java implementations besides the supported OpenJDK 7, there are optional instructions for doing so. This document is only about installing Java as a preliminary step for other OSG software installations; other OSG install guides refer to this document when necessary.
 
@@ -24,9 +24,6 @@ To install OpenJDK 7 as the primary Java implementation on an OSG host:
         :::console
         root@host # yum install java-1.7.0-openjdk java-1.7.0-openjdk-devel osg-java7-compat osg-java7-devel-compat 
         
-    !!! note
-        If yum claims that java-1.7.0-openjdk is not available, you likely need to upgrade your operating system. The package *is* available on both EL 5 and EL 6 systems, although only the latest releases of EL 5 systems contain it.
-
 3.  Make OpenJDK the preferred Java runtime environment (JRE) 
 
         :::console
@@ -139,8 +136,6 @@ Fixing Tomcat
 
 If you have a pre-existing Tomcat installation, you must ensure that that it is using your preferred Java implementation.
 
-### Fixing Tomcat on an EL6 system
-
 1.  Check if tomcat6 is installed: 
 
         :::console
@@ -156,23 +151,6 @@ If you have a pre-existing Tomcat installation, you must ensure that that it is 
 
         :::console
         root@host # service tomcat6 restart
-
-### Fixing Tomcat on an EL5 system
-
-1.  Check if tomcat5 is installed: 
-
-        :::console
-        root@host # rpm -q tomcat5 
-        
-    If the RPM is installed, the command will output the specific RPM name and version. If there is no output: Tomcat is not installed, there is no issue, and you are done
-
-2.  Open `/etc/sysconfig/tomcat5`.
-3.  Check if there is a line setting `JAVA_HOME` and that line is uncommented. If so, change that line to: <pre class="file">JAVA\_HOME="/etc/alternatives/jre" If not, then you do not need to do anything.
-4.  Do the same check for `/etc/tomcat5/tomcat5.conf`.
-5.  Restart the Tomcat service: 
-
-        :::console
-        root@host # service tomcat5 restart
 
 Fixing BeStMan
 --------------

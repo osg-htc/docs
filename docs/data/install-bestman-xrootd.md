@@ -1,6 +1,9 @@
 Install Bestman Xrootd SE
 =========================
 
+!!! warning
+    As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of May 2018.
+
 About this Document
 ===================
 

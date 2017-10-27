@@ -2,7 +2,7 @@ Installing BeStMan
 ==================
 
 !!! warning
-    As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of June 2018.
+    As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of May 2018.
 
 About this Document
 ====================
@@ -72,7 +72,7 @@ Please answer following questions before you proceed with installation and confi
 
 Q. *What authorization mechanism should I use?*
 
-Decide between a [grid-mapfile](../security/edg-mkgridmap) or a [GUMS](../security/install-gums) server for authorization.  Both mechanisms are deprecated with a planned removal by June 2018.  The replacement mechanism, however, does not work with `bestman2`.
+Decide between a [grid-mapfile](../security/edg-mkgridmap) or a [GUMS](../security/install-gums) server for authorization.  Both mechanisms are deprecated with a planned removal by May 2018.  The replacement mechanism, however, does not work with `bestman2`.
 
 Q. *How many GridFTP servers will I need?*
 
