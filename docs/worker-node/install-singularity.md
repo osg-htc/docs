@@ -120,7 +120,7 @@ To install singularity as `setuid`, make sure that your host is up to date befor
     This command will update **all** packages
 
 3. The singularity packages are split into two parts, choose the command that corresponds to your host:
-    - If you are installing singularity on a worker node, where images do not need to be created of a manipulated, install just the smaller part to limit the amount of setuid-root code that is installed:
+    - If you are installing singularity on a worker node, where images do not need to be created or manipulated, install just the smaller part to limit the amount of setuid-root code that is installed:
 
             :::console
             root@host # yum install singularity-runtime
