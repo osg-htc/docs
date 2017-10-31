@@ -325,7 +325,7 @@
         <li class="">
           
   
-    <a class="" href="../osg-ca-manage/">Managing CAs</a>
+    <a class="" href="../certificate-management/">Certificate Management Reference</a>
   
         </li>
   </ul>
@@ -350,12 +350,6 @@
         <li class="">
           
   
-    <a class="" href="../../common/osg-ca-certs-updater/">OSG CA Certificates Updater</a>
-  
-        </li>
-        <li class="">
-          
-  
     <a class="" href="../../common/yum/">Yum Repos</a>
   
         </li>
@@ -363,19 +357,6 @@
           
   
     <a class="" href="../../common/openjdk7/">Java 7</a>
-  
-        </li>
-  </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  <span class="caption-text">Usage Guides</span>
-  <ul class="subnav">
-        <li class="">
-          
-  
-    <a class="" href="../../common/pki-cli/">Certificate Tools</a>
   
         </li>
         <li class="">
@@ -1061,7 +1042,7 @@ Creating proxy .................................................................
 </pre></div>
 
 
-<p>Please refer to <a href="../../common/pki-cli/">Operations/OSGPKICommandlineClients</a> for full documentation of the Client package</p>
+<p>Please refer to <a href="../certificate-management/">Operations/OSGPKICommandlineClients</a> for full documentation of the Client package</p>
 <h1 id="information-for-grid-admins">Information for Grid Admins<a class="headerlink" href="#information-for-grid-admins" title="Permanent link">&para;</a></h1>
 <p>If you are a grid admin then you can use a single command to request and retrieve a certificate immediately. For getting grid admin privileges, request enrollment <a href="https://oim.opensciencegrid.org/oim/gridadmin">here</a> after obtaining your <a href="../user-certs">user certificate</a>.</p>
 <p>Request and retrieve multliple host certificates from OIM. Authenticates to OIM and is only for use by Grid Admins for certificates they are authorized to approve. This script is only supported with all hosts being in the same domain (so we ensure they go to the same Grid Admin). The certificates are stored with the format of 'hostname-requestid.pem' (i.e. the id generated from the request for the certificate). The key is stored as 'hostname-serial-key.pem'.</p>

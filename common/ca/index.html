@@ -250,7 +250,7 @@
         <li class="">
           
   
-    <a class="" href="../../security/osg-ca-manage/">Managing CAs</a>
+    <a class="" href="../../security/certificate-management/">Certificate Management Reference</a>
   
         </li>
   </ul>
@@ -273,7 +273,7 @@
   
   <ul class="subnav">
       
-    <li class="toctree-l3"><a href="#installing-certificate-authorities-certificates-and-related-rpms">Installing Certificate Authorities Certificates and related RPMs</a></li>
+    <li class="toctree-l3"><a href="#installing-certificate-authorities-cas">Installing Certificate Authorities (CAs)</a></li>
     
 
     <li class="toctree-l3"><a href="#install-ca-certificates-options">Install CA certificates: Options</a></li>
@@ -284,7 +284,7 @@
         
             <li><a class="toctree-l4" href="#option-2-install-osg-update-certs">Option 2: Install osg-update-certs</a></li>
         
-            <li><a class="toctree-l4" href="#option-3-install-an-rpm-that-installs-no-cas">Option 3: Install an RPM that installs no CAs</a></li>
+            <li><a class="toctree-l4" href="#option-3-completely-site-managed-cas">Option 3: Completely site-managed CAs</a></li>
         
             <li><a class="toctree-l4" href="#option-4-make-no-choice-let-yum-decide-for-you">Option 4: Make no choice, let yum decide for you</a></li>
         
@@ -334,12 +334,6 @@
         <li class="">
           
   
-    <a class="" href="../osg-ca-certs-updater/">OSG CA Certificates Updater</a>
-  
-        </li>
-        <li class="">
-          
-  
     <a class="" href="../yum/">Yum Repos</a>
   
         </li>
@@ -347,19 +341,6 @@
           
   
     <a class="" href="../openjdk7/">Java 7</a>
-  
-        </li>
-  </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  <span class="caption-text">Usage Guides</span>
-  <ul class="subnav">
-        <li class="">
-          
-  
-    <a class="" href="../pki-cli/">Certificate Tools</a>
   
         </li>
         <li class="">
@@ -806,11 +787,16 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="installing-certificate-authorities-certificates-and-related-rpms">Installing Certificate Authorities Certificates and related RPMs<a class="headerlink" href="#installing-certificate-authorities-certificates-and-related-rpms" title="Permanent link">&para;</a></h1>
-<p>This document provides you with details of various options to install the Certificate Authority (CA) certificates and have up-to-date certificate revocation list (CRL).</p>
-<p>When installing software with RPMs, you need to decide how you want to install the Certificate Authority (CA) certificates. You might ask "why do I care? Can’t you just give them to me?" We can, but you have a few things to consider:</p>
+                <h1 id="installing-certificate-authorities-cas">Installing Certificate Authorities (CAs)<a class="headerlink" href="#installing-certificate-authorities-cas" title="Permanent link">&para;</a></h1>
+<p>The <a href="https://en.wikipedia.org/wiki/Certificate_authority">certificate authorities</a> (CAs) provide the trust roots for the
+<a href="https://en.wikipedia.org/wiki/Public_key_infrastructure">public key infrastructure</a> OSG uses to maintain integrity of its sites and services.
+This document provides you with details of various options to install the Certificate Authority (CA) certificates and have up-to-date
+<a href="https://en.wikipedia.org/wiki/Certificate_revocation_list">certificate revocation lists</a> (CRLs).</p>
+<p>When installing software the CAs, we provide a few mechanisms in order to allow you to make informed decisions.
+You might ask "why do I care? Can’t you just give them to me?"  A few reasons why you may want to be involved:</p>
 <ul>
-<li>What set of CA certificates do you want? How much control do you want over the set of CA certificates? (Some sites might not want to install specific CAs for policy or security reasons.)</li>
+<li>What set of CA certificates do you want? How much control do you want over the set of CA certificates?
+    Some sites might not want to install specific CAs for policy or security reasons.</li>
 <li>How do you want to update them?</li>
 <li>Do you want to centrally manage the CA certificates or install them on each computer at your site?</li>
 </ul>
@@ -837,7 +823,6 @@
 <thead>
 <tr>
 <th><strong>Set of CAs</strong></th>
-<th><strong>Format</strong> --</th>
 <th><strong>RPM name</strong></th>
 <th><strong>Installation command (as root)</strong></th>
 </tr>
@@ -845,20 +830,18 @@
 <tbody>
 <tr>
 <td>OSG</td>
-<td>OpenSSL-both</td>
 <td>osg-ca-certs</td>
 <td><code>yum install osg-ca-certs</code></td>
 </tr>
 <tr>
 <td>IGTF</td>
-<td>OpenSSL-both</td>
 <td>igtf-ca-certs</td>
 <td><code>yum install igtf-ca-certs</code></td>
 </tr>
 </tbody>
 </table>
 <h3 id="how-do-i-keep-cas-updated">How do I keep CAs updated?<a class="headerlink" href="#how-do-i-keep-cas-updated" title="Permanent link">&para;</a></h3>
-<p>Please follow the <a href="../osg-ca-certs-updater">update instructions</a> to make sure that the CAs are kept updated.</p>
+<p>Please follow the <a href="../../security/certificate-management">update instructions</a> to make sure that the CAs are kept updated.</p>
 <h2 id="option-2-install-osg-update-certs">Option 2: Install osg-update-certs<a class="headerlink" href="#option-2-install-osg-update-certs" title="Permanent link">&para;</a></h2>
 <p>Install this with:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-ca-scripts
@@ -870,7 +853,6 @@
 <thead>
 <tr>
 <th><strong>Set of CAs</strong></th>
-<th><strong>Format</strong></th>
 <th><strong>CA certs name</strong></th>
 <th><em>Installation command (as root)</em></th>
 </tr>
@@ -878,13 +860,11 @@
 <tbody>
 <tr>
 <td>OSG</td>
-<td>OpenSSL-both</td>
 <td>osg</td>
 <td><code>/usr/sbin/osg-ca-manage setupCA --location root --url osg</code></td>
 </tr>
 <tr>
 <td>IGTF</td>
-<td>OpenSSL-both</td>
 <td>igtf</td>
 <td><code>/usr/sbin/osg-ca-manage setupCA --location root --url igtf</code></td>
 </tr>
@@ -917,8 +897,10 @@
 </pre></div>
 
 
-<p>A complete set of options available though <code>osg-ca-manage</code> command, including your interface to adding and removing CAs, could be found at <a href="../../security/osg-ca-manage">osg-ca-manage documentation</a></p>
-<h2 id="option-3-install-an-rpm-that-installs-no-cas">Option 3: Install an RPM that installs no CAs<a class="headerlink" href="#option-3-install-an-rpm-that-installs-no-cas" title="Permanent link">&para;</a></h2>
+<p>A complete set of options available though <code>osg-ca-manage</code> command, including your interface to adding and removing CAs, could be found at <a href="../../security/certificate-management">osg-ca-manage documentation</a></p>
+<h2 id="option-3-completely-site-managed-cas">Option 3: Completely site-managed CAs<a class="headerlink" href="#option-3-completely-site-managed-cas" title="Permanent link">&para;</a></h2>
+<p>If you want to handle the list of CAs completely internally to the site, you can utilize the <code>empty-ca-certs</code> RPM to satisfy
+RPM dependencies - but not actually install any CAs.</p>
 <p>Install this with:</p>
 <div class="codehilite"><pre><span></span><span class="go">yum install empty-ca-certs –-enablerepo=osg-empty</span>
 </pre></div>
@@ -931,25 +913,14 @@
 <h2 id="option-4-make-no-choice-let-yum-decide-for-you">Option 4: Make no choice, let yum decide for you<a class="headerlink" href="#option-4-make-no-choice-let-yum-decide-for-you" title="Permanent link">&para;</a></h2>
 <p>If you use <code>yum</code> to install software that requires CA certificates but you haven’t made one of these choices, yum will choose a default. Right now, it is Option #1 from above (<em>Install an RPM for a specific set of CA certificates</em>), and the osg-ca-certs RPM is chosen.</p>
 <h2 id="install-other-cas">Install other CAs<a class="headerlink" href="#install-other-cas" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code>cilogon-openid</code> CA is only distributed in OSG 3.3.  Support will be removed by March 2018.</p>
+</div>
 <p>In addition to the above CAs, you can install other CAs via RPM. These only work with the RPMs that provide CAs (that is, <code>osg-ca-certs</code> and the like, but not <code>osg-ca-scripts</code>.) They are in addition to the above RPMs, so do not only install these extra CAs.</p>
-<table>
-<thead>
-<tr>
-<th><strong>Set of CAs</strong></th>
-<th><strong>Format</strong></th>
-<th><strong>RPM name</strong></th>
-<th><strong>Installation command (as root)</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>cilogon-basic &amp; cilogon-openid</td>
-<td>OpenSSL-both</td>
-<td>cilogon-ca-certs</td>
-<td><code>yum install cilogon-ca-certs</code></td>
-</tr>
-</tbody>
-</table>
+<p>| <strong>Set of CAs</strong> | <strong>RPM name</strong>     | <strong>Installation command (as root)</strong> |
+|----------------|------------------|------------------|------------------------------------|
+| cilogon-openid | cilogon-ca-certs | <code>yum install cilogon-ca-certs</code>     |</p>
 <h1 id="managing-certificate-revocation-lists">Managing Certificate Revocation Lists<a class="headerlink" href="#managing-certificate-revocation-lists" title="Permanent link">&para;</a></h1>
 <p>In addition to CA certificates, you normally need to have updated Certificate Revocation Lists (CRLs) which are are lists of certificates that have been revoked for any reason. Software in the OSG Software Stack uses these to ensure that you are talking to valid clients or servers.</p>
 <p>We use a tool named <code>fetch-crl</code> that periodically updates the CRLs. Fetch CRL is a utility that updates Certificate Authority (CA) Certificate Revocation Lists (CRLs). These are lists of certificates that were granted by the CA, but have since been revoked. It is good practice to regularly update the CRL list for each CA to ensure that you do not authenticate any certificate that has been revoked.</p>
@@ -1051,7 +1022,7 @@ syslogfacility = daemon
 <p>However, you should make sure that your site has the most up-to-date list of Trusted CAs. There are multiple trust authorities in OSG (think of it as a different DMV for each state). If you do not have an up-to-date list of CAs it is possible that some of your users transactions at your site will start to fail. A current CRL list for each CA is also necessary, since without one transactions for users of that CA will fail.</p>
 <h2 id="how-to-ensure-you-are-get-up-to-date-cacrl-information">How to ensure you are get up-to-date CA/CRL information<a class="headerlink" href="#how-to-ensure-you-are-get-up-to-date-cacrl-information" title="Permanent link">&para;</a></h2>
 <ol>
-<li>If you installed CAs using rpm packages (<code>osg-ca-certs</code>,<code>igtf-ca-certs</code>) (Options 1, 4), you will need to install the software described in <a href="../osg-ca-certs-updater">the CA update document</a>, and enable <code>osg-ca-certs-updater</code> service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.</li>
+<li>If you installed CAs using rpm packages (<code>osg-ca-certs</code>,<code>igtf-ca-certs</code>) (Options 1, 4), you will need to install the software described in <a href="../../security/certificate-management">the CA update document</a>, and enable <code>osg-ca-certs-updater</code> service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.</li>
 <li>
 <p>If you use Option 2 (i.e. <code>osg-update-certs</code>) then make sure that you have the corresponding service enabled.</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /sbin/service osg-update-certs-cron  status
@@ -1178,13 +1149,13 @@ syslogfacility = daemon
 </ul>
 <p>Details of CAs in OSG distribution can be found <a href="#contents-of-osg-ca-package">here</a>. For additional details what is in the current release, see the <a href="http://repo.opensciencegrid.org/pacman/cadist/">distribution site</a> and <a href="http://repo.opensciencegrid.org/pacman/cadist/CHANGES">change log</a>.</p>
 <h3 id="how-can-i-add-or-remove-a-particular-ca-file">How can I add or remove a particular CA file?<a class="headerlink" href="#how-can-i-add-or-remove-a-particular-ca-file" title="Permanent link">&para;</a></h3>
-<p>Add and remove of CA files are supported only if you CA files are being installed using <code>osg-update-certs</code>, which is included in the <code>osg-ca-scripts</code> package (option 2), for all other options no support for adding and removing a particular CA file is provided by OSG. The preferred approach to add or remove a CA is to use <a href="../../security/osg-ca-manage">osg-ca-manage</a>. For adding a new CA <code>osg-ca-manage add [--dir &lt;local_dir&gt;] --hash &lt;CA_hash&gt;</code> may be used, while a CA is removed using <code>osg-ca-manage remove --hash &lt;CA_hash&gt;</code>.</p>
+<p>Add and remove of CA files are supported only if you CA files are being installed using <code>osg-update-certs</code>, which is included in the <code>osg-ca-scripts</code> package (option 2), for all other options no support for adding and removing a particular CA file is provided by OSG. The preferred approach to add or remove a CA is to use <a href="../../security/certificate-management">osg-ca-manage</a>. For adding a new CA <code>osg-ca-manage add [--dir &lt;local_dir&gt;] --hash &lt;CA_hash&gt;</code> may be used, while a CA is removed using <code>osg-ca-manage remove --hash &lt;CA_hash&gt;</code>.</p>
 <h3 id="are-there-any-log-files-or-configuration-files-associated-with-ca-certificate-package">Are there any log files or configuration files associated with CA certificate package?<a class="headerlink" href="#are-there-any-log-files-or-configuration-files-associated-with-ca-certificate-package" title="Permanent link">&para;</a></h3>
 <p>If CA files are installed using <code>osg-ca-certs</code> or <code>igtf-ca-certs</code> rpms (i.e. options 1, 4) no log or configuration files are present.</p>
 <p>Log and configuration files are however present for <code>osg-ca-scripts</code> rpm package (option 2).</p>
 <p>Config files: <code>/etc/osg/osg-update-certs.conf</code> Log files: <code>/var/log/osg-update-certs.log</code>, <code>/var/log/osg-ca-certs-status.system.out</code>, <code>/var/log/osg-ca-manage.system.out</code>, <code>/var/log/osg-setup-ca-certificates.system.out</code></p>
 <h3 id="are-ca-packages-automatically-updated">Are CA packages automatically updated?<a class="headerlink" href="#are-ca-packages-automatically-updated" title="Permanent link">&para;</a></h3>
-<p>If CA files are installed using <code>osg-ca-certs</code> or <code>igtf-ca-certs</code> rpms (i.e. options 1, 4), you will need to install the software described in <a href="../osg-ca-certs-updater">OSG CA certs updater</a>, and enable osg-ca-certs-updater service to keep the CAs automatically updated.</p>
+<p>If CA files are installed using <code>osg-ca-certs</code> or <code>igtf-ca-certs</code> rpms (i.e. options 1, 4), you will need to install the software described in <a href="../../security/certificate-management">OSG CA certs updater</a>, and enable <code>osg-ca-certs-updater</code> service to keep the CAs automatically updated.</p>
 <p>If CA files are being installed using <code>osg-ca-scripts</code> rpm package (option 2), CA files are kept up-to-date as long as <code>osg-update-certs-cron</code> service the package provides has been started.</p>
 <h3 id="how-do-i-manually-update-my-ca-package">How do I manually update my CA package?<a class="headerlink" href="#how-do-i-manually-update-my-ca-package" title="Permanent link">&para;</a></h3>
 <p>For Option 1: run one of the following <code>yum update osg-ca-certs</code> or <code>yum update igtf-ca-certs</code> depending on the rpm package you installed.</p>
@@ -1217,8 +1188,8 @@ syslogfacility = daemon
 </ul>
 <p>Related software:</p>
 <ul>
-<li>Description, manual and examples of <a href="../../security/osg-ca-manage">osg-ca-manage</a></li>
-<li><a href="../osg-ca-certs-updater">osg-ca-certs-updater</a></li>
+<li>Description, manual and examples of <a href="../../security/certificate-management">osg-ca-manage</a></li>
+<li><a href="../../security/certificate-management">osg-ca-certs-updater</a></li>
 </ul>
               
             </div>
@@ -1227,7 +1198,7 @@ syslogfacility = daemon
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../osg-ca-certs-updater/" class="btn btn-neutral float-right" title="OSG CA Certificates Updater">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../yum/" class="btn btn-neutral float-right" title="Yum Repos">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../install-best-practices/" class="btn btn-neutral" title="Install Best Practices"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -1261,7 +1232,7 @@ syslogfacility = daemon
         <span><a href="../install-best-practices/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../osg-ca-certs-updater/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../yum/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
