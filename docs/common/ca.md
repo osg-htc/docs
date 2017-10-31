@@ -50,7 +50,7 @@ Depending on your choice, you select one of two RPMs:
 
 ### How do I keep CAs updated?
 
-Please follow the [update instructions](osg-ca-certs-updater) to make sure that the CAs are kept updated.
+Please follow the [update instructions](../security/certificate-management) to make sure that the CAs are kept updated.
 
 Option 2: Install osg-update-certs
 ----------------------------------
@@ -98,7 +98,7 @@ root@host # /sbin/service osg-update-certs-cron  start
 Enabling periodic osg-update-certs:                        [  %GREEN%OK%ENDCOLOR%  ]
 ```
 
-A complete set of options available though `osg-ca-manage` command, including your interface to adding and removing CAs, could be found at [osg-ca-manage documentation](../security/osg-ca-manage)
+A complete set of options available though `osg-ca-manage` command, including your interface to adding and removing CAs, could be found at [osg-ca-manage documentation](../security/certificate-management)
 
 Option 3: Completely site-managed CAs
 ---------------------------------------------
@@ -260,7 +260,7 @@ However, you should make sure that your site has the most up-to-date list of Tru
 How to ensure you are get up-to-date CA/CRL information
 -------------------------------------------------------
 
-1.  If you installed CAs using rpm packages (`osg-ca-certs`,`igtf-ca-certs`) (Options 1, 4), you will need to install the software described in [the CA update document](osg-ca-certs-updater), and enable `osg-ca-certs-updater` service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.
+1.  If you installed CAs using rpm packages (`osg-ca-certs`,`igtf-ca-certs`) (Options 1, 4), you will need to install the software described in [the CA update document](../security/certificate-management), and enable `osg-ca-certs-updater` service to keep the CAs automatically updated. If you do not install the updater, you will have to regularly run yum update to keep the CAs updated.
 2.  If you use Option 2 (i.e. `osg-update-certs`) then make sure that you have the corresponding service enabled.
 
         :::console
@@ -337,7 +337,7 @@ Details of CAs in OSG distribution can be found [here](#contents-of-osg-ca-packa
 
 ### How can I add or remove a particular CA file?
 
-Add and remove of CA files are supported only if you CA files are being installed using `osg-update-certs`, which is included in the `osg-ca-scripts` package (option 2), for all other options no support for adding and removing a particular CA file is provided by OSG. The preferred approach to add or remove a CA is to use [osg-ca-manage](../security/osg-ca-manage). For adding a new CA `osg-ca-manage add [--dir <local_dir>] --hash <CA_hash>` may be used, while a CA is removed using `osg-ca-manage remove --hash <CA_hash>`.
+Add and remove of CA files are supported only if you CA files are being installed using `osg-update-certs`, which is included in the `osg-ca-scripts` package (option 2), for all other options no support for adding and removing a particular CA file is provided by OSG. The preferred approach to add or remove a CA is to use [osg-ca-manage](../security/certificate-management). For adding a new CA `osg-ca-manage add [--dir <local_dir>] --hash <CA_hash>` may be used, while a CA is removed using `osg-ca-manage remove --hash <CA_hash>`.
 
 ### Are there any log files or configuration files associated with CA certificate package?
 
@@ -349,7 +349,7 @@ Config files: `/etc/osg/osg-update-certs.conf` Log files: `/var/log/osg-update-c
 
 ### Are CA packages automatically updated?
 
-If CA files are installed using `osg-ca-certs` or `igtf-ca-certs` rpms (i.e. options 1, 4), you will need to install the software described in [OSG CA certs updater](osg-ca-certs-updater), and enable osg-ca-certs-updater service to keep the CAs automatically updated.
+If CA files are installed using `osg-ca-certs` or `igtf-ca-certs` rpms (i.e. options 1, 4), you will need to install the software described in [OSG CA certs updater](../security/certificate-management), and enable `osg-ca-certs-updater` service to keep the CAs automatically updated.
 
 If CA files are being installed using `osg-ca-scripts` rpm package (option 2), CA files are kept up-to-date as long as `osg-update-certs-cron` service the package provides has been started.
 
@@ -394,5 +394,5 @@ Some examples about verifying the certificates:
 
 Related software:
 
--   Description, manual and examples of [osg-ca-manage](../security/osg-ca-manage)
--   [osg-ca-certs-updater](osg-ca-certs-updater)
+-   Description, manual and examples of [osg-ca-manage](../security/certificate-management)
+-   [osg-ca-certs-updater](../security/certificate-management)

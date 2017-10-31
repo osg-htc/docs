@@ -93,7 +93,7 @@ This document has a [proxy configuration section](#proxy-configuration) that use
 |:-----------------|:---------------------------|:------------------------------------------------------------------------------|
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem`            `/etc/grid-security/hostkey.pem` |
 
-[Here](../common/pki-cli.md) are instructions to request a host certificate.
+[Here](../security/host-certs.md) are instructions to request a host certificate.
 
 
 Networking

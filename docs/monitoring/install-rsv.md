@@ -346,7 +346,7 @@ Ensure an RSV service certificate is installed in `/etc/grid-security/rsv/` and 
 
 You may need another certificate owned by `apache` if you'd like an authenticated web server; see [Configuring the RSV web server to use HTTPS instead of HTTP](#configuring-the-rsv-web-server-to-use-https-instead-of-http) above.
 
-See [instructions](../common/pki-cli.md) to request a service certificate.
+See [instructions](../security/host-certs.md) to request a service certificate.
 
 ### Networking
 

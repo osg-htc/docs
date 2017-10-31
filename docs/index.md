@@ -46,9 +46,9 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 
 -   [Installing the grid certificate authorities (CAs)](common/ca)
 -   [How do I get PKI host and service X.509 certificates?](security/host-certs)
--   [Automatically updating the grid certificate authorities (CAs)](common/osg-ca-certs-updater)
+-   [Automatically updating the grid certificate authorities (CAs)](security/certificate-management)
 -   [SHA-2 certificates and minimum required OSG software versions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SHA2Compliance)
--   [OSG PKI command line client reference](common/pki-cli)
+-   [OSG PKI command line client reference](security/certificate-management)
 
 ### Adding OSG Software to Worker Nodes ###
 

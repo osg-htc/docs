@@ -47,7 +47,7 @@ Certificates
 | Host certificate            | `root`                     | `/etc/grid-security/hostcert.pem` `/etc/grid-security/hostkey.pem`                       |
 | Bestman service certificate | `bestman`                  | `/etc/grid-security/bestman/bestmancert.pem` `/etc/grid-security/bestman/bestmankey.pem` |
 
-[Instructions](../common/pki-cli.md) to request a service certificate.
+[Instructions](../security/host-certs.md) to request a service certificate.
 
 You will also need a copy of CA certificates (see below).
 
