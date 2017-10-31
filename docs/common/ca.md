@@ -1,12 +1,17 @@
 
-Installing Certificate Authorities Certificates and related RPMs
-================================================================
+Installing Certificate Authorities (CAs)
+========================================
 
-This document provides you with details of various options to install the Certificate Authority (CA) certificates and have up-to-date certificate revocation list (CRL).
+The [certificate authorities](https://en.wikipedia.org/wiki/Certificate_authority) (CAs) provide the trust roots for the
+[public key infrastructure](https://en.wikipedia.org/wiki/Public_key_infrastructure) OSG uses to maintain integrity of its sites and services.
+This document provides you with details of various options to install the Certificate Authority (CA) certificates and have up-to-date
+[certificate revocation lists](https://en.wikipedia.org/wiki/Certificate_revocation_list) (CRLs).
 
-When installing software with RPMs, you need to decide how you want to install the Certificate Authority (CA) certificates. You might ask "why do I care? Can’t you just give them to me?" We can, but you have a few things to consider:
+When installing software the CAs, we provide a few mechanisms in order to allow you to make informed decisions.
+You might ask "why do I care? Can’t you just give them to me?"  A few reasons why you may want to be involved:
 
--   What set of CA certificates do you want? How much control do you want over the set of CA certificates? (Some sites might not want to install specific CAs for policy or security reasons.)
+-   What set of CA certificates do you want? How much control do you want over the set of CA certificates?
+    Some sites might not want to install specific CAs for policy or security reasons.
 -   How do you want to update them?
 -   Do you want to centrally manage the CA certificates or install them on each computer at your site?
 
@@ -38,10 +43,10 @@ If you want to install an RPM for one of our predefined CA certificates, you hav
 
 Depending on your choice, you select one of two RPMs:
 
-| **Set of CAs** | **Format** --| **RPM name**  | **Installation command (as root)** |
-|----------------|--------------|---------------|------------------------------------|
-| OSG            | OpenSSL-both | osg-ca-certs  | `yum install osg-ca-certs`         |
-| IGTF           | OpenSSL-both | igtf-ca-certs | `yum install igtf-ca-certs`        |
+| **Set of CAs** | **RPM name**  | **Installation command (as root)** |
+|----------------|---------------|------------------------------------|
+| OSG            | osg-ca-certs  | `yum install osg-ca-certs`         |
+| IGTF           | igtf-ca-certs | `yum install igtf-ca-certs`        |
 
 ### How do I keep CAs updated?
 
@@ -58,10 +63,10 @@ root@host # yum install osg-ca-scripts
 
 You have the same choices for CA certificates as above. In order to choose, you will run `osg-ca-manage`, which will install the CA certificates. Then (if desired) you need to enable periodic updating of the CA certificates.
 
-| **Set of CAs** | **Format**   | **CA certs name** | *Installation command (as root)*                             |
-|----------------|--------------|-------------------|--------------------------------------------------------------|
-| OSG            | OpenSSL-both | osg               | `/usr/sbin/osg-ca-manage setupCA --location root --url osg`  |
-| IGTF           | OpenSSL-both | igtf              | `/usr/sbin/osg-ca-manage setupCA --location root --url igtf` |
+| **Set of CAs** | **CA certs name** | *Installation command (as root)*                             |
+|----------------|-------------------|--------------------------------------------------------------|
+| OSG            | osg               | `/usr/sbin/osg-ca-manage setupCA --location root --url osg`  |
+| IGTF           | igtf              | `/usr/sbin/osg-ca-manage setupCA --location root --url igtf` |
 
 Here is an example:
 
@@ -95,8 +100,11 @@ Enabling periodic osg-update-certs:                        [  %GREEN%OK%ENDCOLOR
 
 A complete set of options available though `osg-ca-manage` command, including your interface to adding and removing CAs, could be found at [osg-ca-manage documentation](../security/osg-ca-manage)
 
-Option 3: Install an RPM that installs no CAs
+Option 3: Completely site-managed CAs
 ---------------------------------------------
+
+If you want to handle the list of CAs completely internally to the site, you can utilize the `empty-ca-certs` RPM to satisfy
+RPM dependencies - but not actually install any CAs.
 
 Install this with:
 
@@ -115,11 +123,14 @@ If you use `yum` to install software that requires CA certificates but you haven
 Install other CAs
 -----------------
 
+!!! warning
+    The `cilogon-openid` CA is only distributed in OSG 3.3.  Support will be removed by March 2018.
+
 In addition to the above CAs, you can install other CAs via RPM. These only work with the RPMs that provide CAs (that is, `osg-ca-certs` and the like, but not `osg-ca-scripts`.) They are in addition to the above RPMs, so do not only install these extra CAs.
 
-| **Set of CAs**                 | **Format**   | **RPM name**     | **Installation command (as root)** |
-|--------------------------------|--------------|------------------|------------------------------------|
-| cilogon-basic & cilogon-openid | OpenSSL-both | cilogon-ca-certs | `yum install cilogon-ca-certs`     |
+| **Set of CAs** | **RPM name**     | **Installation command (as root)** |
+|----------------|------------------|------------------|------------------------------------|
+| cilogon-openid | cilogon-ca-certs | `yum install cilogon-ca-certs`     |
 
 Managing Certificate Revocation Lists
 =====================================
