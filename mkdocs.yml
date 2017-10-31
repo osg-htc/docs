@@ -41,15 +41,12 @@ pages:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host Certificates': 'security/host-certs.md'
   - 'User Certificates': 'security/user-certs.md'
-  - 'Managing CAs': 'security/osg-ca-manage.md'
+  - 'Certificate Management Reference': 'security/certificate-management.md'
 - Common:
   - 'Install Best Practices': 'common/install-best-practices.md'
   - 'CA Certificates': 'common/ca.md'
-  - 'OSG CA Certificates Updater': 'common/osg-ca-certs-updater.md'
   - 'Yum Repos': 'common/yum.md'
   - 'Java 7': 'common/openjdk7.md'
-- Usage Guides:
-  - 'Certificate Tools': 'common/pki-cli.md'
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
 - Other:
   - 'GSI-enabled SSH': 'other/gsissh.md'
