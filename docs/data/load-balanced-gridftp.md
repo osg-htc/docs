@@ -47,7 +47,7 @@ Before adding your GridFTP hosts to the load-balanced system, each host requires
 
 ### Acquiring service certificate(s)
 
-When authenticating with a GridFTP server, clients verify that the server's host certificate matches the hostname of the server. In the case of a load-balanced GridFTP system, clients contact the GridFTP server through the virtual hostname, so the GridFTP server will have to present a certificate containing the virtual hostname as well as the GridFTP server's hostname. Use the [OSG PKI tools](../common/pki-cli) to request these types of certificates.
+When authenticating with a GridFTP server, clients verify that the server's host certificate matches the hostname of the server. In the case of a load-balanced GridFTP system, clients contact the GridFTP server through the virtual hostname, so the GridFTP server will have to present a certificate containing the virtual hostname as well as the GridFTP server's hostname. Use the [OSG PKI tools reference](../security/certificate-management.md) for more information on how to request these types of certificates.
 
 If your GridFTP servers are also running XRootD, you will need unique certificates for each GridFTP server. Otherwise, you can request a single certificate that can be shared among the GridFTP servers.
 

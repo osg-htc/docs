@@ -206,7 +206,7 @@ Reference
 |:-----------------|:---------------------------|:------------------------------------------------------------------------------|
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` and `/etc/grid-security/hostkey.pem` |
 
-[Instructions](../common/pki-cli.md) to request a service certificate.
+[Instructions](../security/host-certs.md) to request a service certificate.
 
 You will also need a copy of CA certificates.
 

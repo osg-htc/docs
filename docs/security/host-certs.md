@@ -281,7 +281,7 @@ The **Service Certificate** should be installed under a subdirectory in **/etc/g
 [root@host /]$ chown tomcat.tomcat /etc/grid-security/http/httpkey.pem
 ```
 
-Please refer to [Operations/OSGPKICommandlineClients](../common/pki-cli.md) for full documentation of the Client package
+Please refer to [Operations/OSGPKICommandlineClients](../security/certificate-management.md) for full documentation of the Client package
 
 Information for Grid Admins
 ================================
