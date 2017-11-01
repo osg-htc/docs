@@ -74,6 +74,8 @@ pages:
   - 'Worker node glexec Install': 'worker-node/install-glexec.md'
   - 'Install VOMS': 'other/install-voms.md'
 - 'Get Help': 'common/help.md'
+- 'OSG Release 3.4.4-3': 'release/3.4/release-3-4-4-3.md'
+- 'OSG Release 3.3.29-3': 'release/3.3/release-3-3-29-3.md'
 - 'OSG Release 3.4.4-2': 'release/3.4/release-3-4-4-2.md'
 - 'OSG Release 3.3.29-2': 'release/3.3/release-3-3-29-2.md'
 - 'OSG Release 3.4.4': 'release/3.4/release-3-4-4.md'
