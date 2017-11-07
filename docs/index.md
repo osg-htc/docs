@@ -6,7 +6,7 @@ Welcome to the home page of the Open Science Grid (OSG) Site Administrator docum
 - If you are a researcher interested in using OSG resources, you can find user documentation [here](https://support.opensciencegrid.org/support/home). 
 - If you'd like to learn more about the OSG and our mission, visit our website [here](https://www.opensciencegrid.org/).
 
-This document outlines the overall installation process for an OSG site and provides many links into detailed installation, configuration, troubleshooting, and similar pages. If you do not see software-related technical documentation listed here, try the search bar to the left or contacting us at [goc@opensciencegrid.org](mailto:goc@opensciencegrid.org).
+This document outlines the overall installation process for an OSG site and provides many links into detailed installation, configuration, troubleshooting, and similar pages. If you do not see software-related technical documentation listed here, try the search bar to the left or contacting us at [help@opensciencegrid.org](mailto:help@opensciencegrid.org).
 
 Plan the Site
 -------------
@@ -23,7 +23,7 @@ Prepare the Batch System
 
 The assumption is that you have an existing batch system at your site. Currently, we support [HTCondor](http://research.cs.wisc.edu/htcondor/), [LSF](http://www-03.ibm.com/systems/platformcomputing/products/lsf/), [PBS](http://www.pbsworks.com) and [TORQUE](http://www.adaptivecomputing.com/products/open-source/torque/), [SGE](http://en.wikipedia.org/wiki/Oracle_Grid_Engine), and [Slurm](http://slurm.schedmd.com) batch systems.
 
-For smaller sites (less than 50 worker nodes), the most common way to add a site to OSG is to install the OSG Compute Element (CE) on the central host of your batch system.  At such a site - especially if you have minimal time to maintain a CE - you may want to contact <mailto:goc@opensciencegrid.org> to ask about using an OSG-hosted CE instead of running your own.  Before proceeding with an install, be sure that you can submit and successfully run a job from your OSG CE host into your batch system.
+For smaller sites (less than 50 worker nodes), the most common way to add a site to OSG is to install the OSG Compute Element (CE) on the central host of your batch system.  At such a site - especially if you have minimal time to maintain a CE - you may want to contact <mailto:help@opensciencegrid.org> to ask about using an OSG-hosted CE instead of running your own.  Before proceeding with an install, be sure that you can submit and successfully run a job from your OSG CE host into your batch system.
 
 Add OSG Software
 ----------------

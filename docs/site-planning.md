@@ -24,7 +24,7 @@ and storage resources available to and reliable for your supported VOs. Fundamen
 
 Depending on the VOs you want to support, data services may not be necessary.  Even a compute element is not strictly
 necessary: OSG offers a "hosted CE" service where OSG will run the software provided only with a SSH connection to the
-batch submit host.  Contact <mailto:goc@opensciencegrid.org> for more information on the hosted CE.
+batch submit host.  Contact <mailto:help@opensciencegrid.org> for more information on the hosted CE.
 
 - The simplest way to support OSG is to only provide SSH logins for the hosted CE and install the worker node
   environment.
@@ -67,7 +67,7 @@ As part of the CE deploy, you must make a few site design choices:
   root_ from the CE.
 - The network architecture of your cluster: Most VOs require unrestricted outbound network access from the worker nodes;
   this is typically done through a NAT.  For sites where this is difficult to provide, some VOs are be able to provide
-  a whitelist of IP addresses they will need outbound access to; contact <mailto:goc@opensciencegrid.org> for support.
+  a whitelist of IP addresses they will need outbound access to; contact <mailto:help@opensciencegrid.org> for support.
 
 The CE will map each VO to one Unix user accont at the site (due to historic concerns, a handful may map to 2-3
 accounts).  Except in the case of HTCondor, the CE and the worker nodes need to have uniform username-to-UID mappings.

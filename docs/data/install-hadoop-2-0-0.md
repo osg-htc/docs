@@ -34,7 +34,7 @@ Architecture
 Note that these components are not necessarily mutually exclusive. For instance, you may consider having your GridFTP server co-located on the SRM node. Alternatively, you can locate a client (or even a GridFTP node) co-located on each data node. That way, each data node also acts as an access point to the hadoop cluster.
 
 !!! note
-    Total installation time, on an average, should not exceed 8 to 24 man-hours. If your site needs further assistance to help expedite, please email <mailto:goc@opensciencegrid.org>.
+    Total installation time, on an average, should not exceed 8 to 24 man-hours. If your site needs further assistance to help expedite, please email <mailto:help@opensciencegrid.org>.
 
 Host and OS
 -----------
