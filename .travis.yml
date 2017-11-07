@@ -2,7 +2,7 @@ language: python
 install: pip install -r ci/pip-requirements.txt
 script:
 - ./ci/verify
-- if [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then ./ci/deploy; fi
+- ./ci/deploy
 
 notifications:
   slack:
