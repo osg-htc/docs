@@ -66,7 +66,7 @@ Install Instructions
 --------------------
 
 !!! note
-    The glexec tracking function requires a part of HTCondor. There are multiple ways to install HTCondor, for details see [these instructions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CondorInformation). If you want a minimal install, you can run just this command to install the needed piece from the OSG distribution:
+    The glexec tracking function requires a part of HTCondor. There are multiple ways to install HTCondor; if you want a minimal install, you can run just this command to install the needed piece from the OSG distribution:
 
         :::console
         root@host # yum install condor-procd
@@ -123,8 +123,6 @@ user@host $ uid=13160(fnalgrid) gid=9767(fnalgrid) groups=65000(glexec00)
 ```
 
 If `glexec` is successful, it will print out the uid and gid that your proxy would normally be mapped to by your GUMS server, plus a supplementary tracking group. (The actual names and numbers will be different from what you see above.)
-
-If you have problems, please read about [troubleshooting glexec](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingGlexecLcmaps).
 
 Glexec log files
 ----------------

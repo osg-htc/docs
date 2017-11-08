@@ -33,7 +33,7 @@ To install the LCMAPS VOMS plugin, make sure that your host is up to date before
 Configuring the LCMAPS VOMS Plugin
 ----------------------------------
 
-The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication. If you are using OSG 3.3 packages, there are software-specific instructions that must be followed for [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../data/gridftp), and [XRootD](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd). To check if you are running OSG 3.3, run the following command:
+The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication. If you are using OSG 3.3 packages, there are software-specific instructions that must be followed for [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../data/gridftp), and [XRootD](../data/install-xrootd). To check if you are running OSG 3.3, run the following command:
 
 ``` console
 [root@server]# rpm -q --queryformat="%{VERSION}\n" osg-release
