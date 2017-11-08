@@ -167,7 +167,6 @@ To cleanly uninstall CEMon from your CE, perform the following procedure (after 
 References
 ==========
 
--   [OSG release series](../release/relesase_series)
 -   [Yum repositories](../common/yum)
 -   [Basic use of Yum](../release/yum-basics)
 -   [Yum best practices](../common/install-best-practices)
