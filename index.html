@@ -766,7 +766,7 @@
 </ul>
 <p>This document outlines the overall installation process for an OSG site and provides many links into detailed installation, configuration, troubleshooting, and similar pages. If you do not see software-related technical documentation listed here, try the search bar to the left or contacting us at <a href="mailto:help@opensciencegrid.org">help@opensciencegrid.org</a>.</p>
 <h2 id="plan-the-site">Plan the Site<a class="headerlink" href="#plan-the-site" title="Permanent link">&para;</a></h2>
-<p>If you have not done so already, <a href="./site-planning">plan the overall architecture of your OSG site</a>. It is recommended that your plan be sufficiently detailed to include the OSG hosts that are needed and the main software components for each host. Be sure to consider <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SupportedOperatingSystems">the operating systems that OSG supports</a>. For example, a basic site might include:</p>
+<p>If you have not done so already, <a href="./site-planning">plan the overall architecture of your OSG site</a>. It is recommended that your plan be sufficiently detailed to include the OSG hosts that are needed and the main software components for each host. Be sure to consider <a href="./release/supported_platforms">the operating systems that OSG supports</a>. For example, a basic site might include:</p>
 <table>
 <thead>
 <tr>
@@ -810,7 +810,6 @@
 <li><a href="./common/ca">Installing the grid certificate authorities (CAs)</a></li>
 <li><a href="./security/host-certs">How do I get PKI host and service X.509 certificates?</a></li>
 <li><a href="./security/certificate-management">Automatically updating the grid certificate authorities (CAs)</a></li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SHA2Compliance">SHA-2 certificates and minimum required OSG software versions</a></li>
 <li><a href="./security/certificate-management">OSG PKI command line client reference</a></li>
 </ul>
 <h3 id="adding-osg-software-to-worker-nodes">Adding OSG Software to Worker Nodes<a class="headerlink" href="#adding-osg-software-to-worker-nodes" title="Permanent link">&para;</a></h3>
@@ -827,7 +826,6 @@
 </ul>
 <h3 id="installing-and-configuring-the-compute-element">Installing and Configuring the Compute Element<a class="headerlink" href="#installing-and-configuring-the-compute-element" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/PreparingComputeElement">Preparing to install the compute element</a></li>
 <li>Install the compute element (HTCondor-CE and other software):<ul>
 <li><a href="./compute-element/htcondor-ce-overview">Overview and architecture</a></li>
 <li><a href="./compute-element/install-htcondor-ce">Install HTCondor-CE</a></li>
@@ -836,7 +834,7 @@
 <li><a href="./compute-element/submit-htcondor-ce">Submitting jobs to HTCondor-CE</a></li>
 </ul>
 </li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingOsgConfigure">Troubleshooting osg-configure</a></li>
+<li><a href="./other/configuration-with-osg-configure"><code>osg-configure</code> Reference</a></li>
 </ul>
 <h3 id="installing-and-configuring-other-nodes">Installing and Configuring Other Nodes<a class="headerlink" href="#installing-and-configuring-other-nodes" title="Permanent link">&para;</a></h3>
 <p>All of these node types and their services are optional, although OSG requires the Frontier Squid caching service if you have installed <a href="./worker-node/install-cvmfs">CVMFS</a> on your worker nodes.</p>
@@ -844,7 +842,6 @@
 <li><a href="./data/frontier-squid">Install Frontier Squid, the HTTP caching proxy service</a></li>
 <li>RSV monitoring to monitor and report to OSG on the health of your site<ul>
 <li><a href="./monitoring/install-rsv">Install RSV</a></li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv">Troubleshooting RSV</a></li>
 </ul>
 </li>
 <li><a href="./other/install-gwms-frontend">Install the GlideinWMS VO Frontend</a> if your want your users’ jobs to run on the OSG<ul>
@@ -858,17 +855,17 @@
 </ul>
 </li>
 <li>BeStMan<ul>
-<li><a href="./data/bestman-install">Install Bestman SE</a>: BeStMan2 SRM server + GridFTP server</li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoop200SE">Install Bestman Gateway Hadoop</a>: BeStMan2 SRM server + GridFTP server + Hadoop</li>
+<li><a href="./data/bestman-install">Install Bestman on POSIX</a>: BeStMan2 SRM server + GridFTP server</li>
+<li><a href="./data/install-hadoop-2-0-0">Install Bestman on Hadoop</a>: BeStMan2 SRM and GridFTP servers on the Hadoop Distributed File System</li>
 </ul>
 </li>
 <li>Hadoop Distributed File System (HDFS)<ul>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HadoopOverview">Hadoop Overview</a>: HDFS information, planning, and guides</li>
+<li><a href="./data/hadoop-overview">Hadoop Overview</a>: HDFS information, planning, and guides</li>
 </ul>
 </li>
 <li>XRootD<ul>
 <li><a href="./data/xrootd-overview">XRootd Overview</a>: XRootD information, planning, and guides</li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd">Install Xrootd Server</a>: XRootD redirector installation</li>
+<li><a href="./data/install-xrootd">Install Xrootd Server</a>: XRootD redirector installation</li>
 <li><a href="./data/install-bestman-xrootd">Install BeStMan-Gateway XRootD</a>: BeStMan2 SRM server + GridFTP server + XRootD fuse</li>
 </ul>
 </li>
@@ -947,5 +944,5 @@
 
 <!--
 MkDocs version : 0.17.1
-Build Date UTC : 2017-11-08 19:24:12
+Build Date UTC : 2017-11-08 21:06:12
 -->

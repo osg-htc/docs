@@ -880,10 +880,9 @@
 </tr>
 </tbody>
 </table>
-<p>Following the <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OSGPKICommandlineClients">instructions</a> to request a service certificate.</p>
+<p>Following the <a href="../../security/host-certs">instructions</a> to request a service certificate.</p>
 <p>You will also need a copy of CA certificates. Note that the <code>osg-se-bestman</code> package will automatically install a certificate package but will not necessarily pick the cert package you expect; see <a href="../../common/ca/">the CA certificates</a> documentation for more information.</p>
 <h3 id="networking">Networking<a class="headerlink" href="#networking" title="Permanent link">&para;</a></h3>
-<p>For more details on overall firewall configuration, please see our <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/FirewallInformation">firewall documentation</a>.</p>
 <table>
 <thead>
 <tr>
@@ -943,7 +942,7 @@
 </ul>
 <p>We recommend approximately one GridFTP server for each 8Gbps of desired utilized bandwidth.</p>
 <p>Q. <em>Do I need to change default configuration of Gridftp server?</em></p>
-<p>Yes, you may want to do this if the node on which GridFTP server will be installed has multiple network interfaces. Read <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallOSGGridFTP#ConfigMultiHomed">this section</a> for more details.</p>
+<p>Yes, you may want to do this if the node on which GridFTP server will be installed has multiple network interfaces. Read <a href="../gridftp#configuring-a-multi-homed-server">this section</a> for more details.</p>
 <p>Q. <em>Do you need to enable Gratia gridftp-transfer probes?</em> <br />
 The Gratia gridftp-transfer probes provide OSG storage statistics for accounting purposes. The reports include the source and destination of transfers, certificate subject of transfer initiator, as well as the size and status of the transferred file. The probe needs to be installed on every GridFTP server.</p>
 <h1 id="install-instructions">Install Instructions<a class="headerlink" href="#install-instructions" title="Permanent link">&para;</a></h1>
@@ -1183,8 +1182,7 @@ bestman   ALL=(SRM_USR) NOPASSWD: SRM_CMD
 <h1 id="validation-of-service-operation">Validation of Service Operation<a class="headerlink" href="#validation-of-service-operation" title="Permanent link">&para;</a></h1>
 <p>Once you have your SE setup and configured, there are several ways to monitor your installation. Refer to the following pages for more information:</p>
 <ul>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SrmTester">BeStMan SRM Tester</a>.</li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallRSV">RSV</a> which includes SRM probes as well.</li>
+<li><a href="../../monitoring/install-rsv">RSV</a> which includes SRM probes as well.</li>
 </ul>
 <p>You can also self-test to verify your installation with an SRM client such as <code>gfal-copy</code>.</p>
 <h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
@@ -1376,12 +1374,6 @@ bestman   ALL=(SRM_USR) NOPASSWD: SRM_CMD
 <p>For a full set of help options, see the <a href="../../common/help">Help Procedure</a>.</p>
 <h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
 <ul>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/StorageInfrastructureSoftware">Storage infrastructure software</a></li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/StorageSiteAdministrator">Information on planning, installing and validating storage software</a></li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Storage/SEToolsTipsFAQs">Tips and FAQ</a></li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GratiaTransferProbe">OSG Gratia Transfer Probe page</a></li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/LbnlSrmClient">SRM v2.2 LBNL client command line examples</a></li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SrmTester">SRM-Tester</a></li>
 <li><a href="http://sdm.lbl.gov/bestman">BeStMan official website</a><ul>
 <li><a href="http://sdm.lbl.gov/bestman/docs/bestman-guide.html">BeStMan User guides</a></li>
 <li><a href="http://sdm.lbl.gov/bestman/docs/bestman-faq.html">BeStMan FAQ</a></li>

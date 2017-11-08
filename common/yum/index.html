@@ -781,7 +781,7 @@
 <p>We did not test other repositories. If you use packages from other repositories, like <code>jpackage</code>, <code>dag</code>, or <code>rpmforge</code>, you may encounter problems.</p>
 </div>
 <h2 id="enabling-repositories">Enabling Repositories<a class="headerlink" href="#enabling-repositories" title="Permanent link">&para;</a></h2>
-<p>In <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices">our advice on using yum</a> you will learn many tricks and tips on using yum.</p>
+<p>In <a href="../install-best-practices">our advice on using yum</a> you will learn many tricks and tips on using yum.</p>
 <p>To use the packages in a repository without adding special options to the yum command the repository must be enabled.</p>
 <h3 id="install-the-yum-repositories-required-by-osg">Install the Yum Repositories required by OSG<a class="headerlink" href="#install-the-yum-repositories-required-by-osg" title="Permanent link">&para;</a></h3>
 <p>The OSG RPMs currently support Red Hat Enterprise Linux 6, 7, and variants.</p>
@@ -799,7 +799,7 @@
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>if you have your own mirror or configuration of the EPEL repository, you <strong>MUST</strong> verify that the OSG repository has a better yum priority than EPEL (<a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices#YumPriorities">details</a>). Otherwise, you will have strange dependency resolution (<em>depsolving</em>) issues.</p>
+<p>if you have your own mirror or configuration of the EPEL repository, you <strong>MUST</strong> verify that the OSG repository has a better yum priority than EPEL (<a href="../install-best-practices#YumPriorities">details</a>). Otherwise, you will have strange dependency resolution (<em>depsolving</em>) issues.</p>
 </div>
 <h3 id="install-the-yum-priorities-package">Install the Yum priorities package<a class="headerlink" href="#install-the-yum-priorities-package" title="Permanent link">&para;</a></h3>
 <p>For packages that exist in both OSG and EPEL repositories, it is important to prefer the OSG ones or else OSG software installs may fail. Installing the Yum priorities package enables the repository priority system to work.</p>
@@ -883,7 +883,7 @@
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../../release/yum-basics/">Basic use of Yum</a></li>
-<li><a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices">Best practices in using Yum</a></li>
+<li><a href="../install-best-practices">Best practices in using Yum</a></li>
 </ul>
               
             </div>

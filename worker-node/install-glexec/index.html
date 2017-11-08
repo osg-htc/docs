@@ -829,7 +829,7 @@
 <h2 id="install-instructions">Install Instructions<a class="headerlink" href="#install-instructions" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The glexec tracking function requires a part of HTCondor. There are multiple ways to install HTCondor, for details see <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CondorInformation">these instructions</a>. If you want a minimal install, you can run just this command to install the needed piece from the OSG distribution:</p>
+<p>The glexec tracking function requires a part of HTCondor. There are multiple ways to install HTCondor; if you want a minimal install, you can run just this command to install the needed piece from the OSG distribution:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install condor-procd
 </pre></div>
 
@@ -897,7 +897,6 @@ gridmapfile -&gt; glexectracking
 
 
 <p>If <code>glexec</code> is successful, it will print out the uid and gid that your proxy would normally be mapped to by your GUMS server, plus a supplementary tracking group. (The actual names and numbers will be different from what you see above.)</p>
-<p>If you have problems, please read about <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingGlexecLcmaps">troubleshooting glexec</a>.</p>
 <h2 id="glexec-log-files">Glexec log files<a class="headerlink" href="#glexec-log-files" title="Permanent link">&para;</a></h2>
 <p>Glexec sends all its log information by default to syslog. By default they go to <code>/var/log/messages</code>, but this may differ if you have customized your syslog setup. Here are some sample messages:</p>
 <div class="codehilite"><pre><span></span>Apr 25 16:36:16 fermicloud053 glexec[2867]: lcmaps: lcmaps.mod-PluginInit(): plugin glexectracking not found (arguments: )

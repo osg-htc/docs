@@ -807,7 +807,7 @@
 <ul>
 <li>OS is Red Hat Enterprise Linux 6, 7, and variants (see <a href="../../common/yum/">details...</a>)</li>
 <li><a href="http://fedoraproject.org/wiki/EPEL">EPEL</a> repos enabled.</li>
-<li>A working XRootD Server. See <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd">InstallXrootd</a> for details.</li>
+<li>A working XRootD Server. See <a href="../install-xrootd">the xrootd install documentation</a> for details.</li>
 <li>Root access</li>
 </ul>
 <h2 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h2>
@@ -894,7 +894,7 @@
 </tbody>
 </table>
 <h1 id="install-instructions">Install Instructions<a class="headerlink" href="#install-instructions" title="Permanent link">&para;</a></h1>
-<p>Note that this package is primarily intended for Bestman-Gateway acting as an endpoint for XRootD server. If you have not installed an XRootD server yet, follow the instructions in <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd">InstallXrootd</a>.</p>
+<p>Note that this package is primarily intended for Bestman-Gateway acting as an endpoint for XRootD server. If you have not installed an XRootD server yet, follow the instructions in <a href="../install-xrootd">the xrootd install documentation</a>.</p>
 <h2 id="certificates_1">Certificates<a class="headerlink" href="#certificates_1" title="Permanent link">&para;</a></h2>
 <p>GridFTP, which is a part of this meta-package, requires a certificate package to run. If you require a specific certificate package, follow the <a href="../../common/ca/">InstallCertAuth</a> instructions to install it. If you do not install a grid certificate package first, the install procedure will install one for you as part of its dependencies. (usually osg-ca-certs).</p>
 <h2 id="package-installation-instructions">Package installation instructions<a class="headerlink" href="#package-installation-instructions" title="Permanent link">&para;</a></h2>
@@ -994,7 +994,7 @@ xrootdfs                <span style="color:red">/mnt/xrootd</span>              
 <p>Copy <span style="color:red">keyfile<span class="twiki-macro ENDCOLOR"></span> from redirector node to every data server node and the xrootdfs node. Make sure that this file is owned by the <code>xrootd</code> user.</p>
 </li>
 <li>
-<p>Restart xrootd cluster by following <a href="https://twiki.opensciencegrid.org/bin/view/SoftwareTeam/HowToInstallXrootd">these instructions</a></p>
+<p>Restart xrootd cluster by following <a href="../install-xrootd">these instructions</a></p>
 </li>
 <li>
 <p>On xroodfs node execute mount:</p>
