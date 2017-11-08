@@ -1,50 +1,52 @@
-Procedures for handling OASIS externally-hosted CVMFS repositories
-==================================================================
-
-**Technical information contained here is believed to be reliable but administrative procedures, particularly as concerns organizational entities outside the OSG, should be considered unapproved proposals.**
-
+Setting up a Software Repository
+================================
 
 About OASIS
 -----------
 
-OASIS is the OSG Application Software Installation Service. It is the recommended method to install software on the Open Science Grid. It is implemented using CernVM FileSystem (CVMFS) technology.
+OASIS (the **OSG** **A**pplication **S**oftware **I**nstallation **S**ervice) is an infrastructure, based on
+[CVMFS](https://cvmfs.readthedocs.io), for distributing software throughout the OSG.  Once software is installed into
+an OASIS repository, it should be available across about 90% of the OSG within an hour or two.
 
-About this Document
--------------------
+OASIS consists of keysigning infrastructure, a content distribution network (CDN), and a shared CVMFS repository that
+is hosted by the OSG.  Many use cases will be covered by utilizing the [shared repository](update-oasis); this documen
+covers how to setup and host your own CVMFS _repository server_.  This server will  distribute softwarevia OASIS, but
+be hosted and operated externally from the OSG project.
 
-This document describes the detailed procedures for dealing with CVMFS repositories that are part of the OASIS system but are not hosted at the OSG Global Operations Center (GOC). Rather, they are hosted at the home institution of a Virtual Organization (VO). The procedures include the steps performed by both the GOC and by the repository service administrator. If you are only interested in using an OASIS repository that is hosted at the GOC, see [this document](update-oasis) instead.
+OASIS-based distribution and key signing is available to OSG VOs or repositories affiliated with an OSG VO.
+See the [policy page](https://opensciencegrid.github.io/technology/policy/external-oasis-repos/) for more information
+on what repositories OSG is willing to distribute.
 
-Policies
---------
+Before Starting
+---------------
 
-These are the policies regarding OSG CVMFS repositories:
+CVMFS repositories work at the kernel filesystem layer, which adds more stringent host requirements than a typical
+OSG install.  The host OS must meet ONE of the following:
 
-1.  The GOC will not host VO-specific CVMFS repositories. This means it will not use its machines to publish files to a repository that is dedicated to a VO. The GOC hosts one and only one repository and that is oasis.opensciencegrid.org.
-2.  The GOC will replicate an external repository of a VO or provide access to use oasis.opensciencegrid.org per the existing mechanisms but not both for a given VO.
-3.  Quotas on size of repos may be implemented at the discretion of the GOC. A minimum of 100 GB per VO/repo is guaranteed, larger limits may be requested.
-4.  The fully qualified repository names of CVMFS repositories distributed to the OSG may be in any domain, but only those in the opensciencegrid.org domain may be requested to be exported to the European grid EGI at this time. There must be one secured master key for all the repositories in a domain. (Although note that the OSG OASIS servers replace that key with their own when distributing non-opensciencegrid.org repositories to OSG sites.)
+-   RHEL 7.3 (or equivalent) or later.  **This option is recommended**.
+-   RHEL 6 with the aufs kernel module.
 
-Requirements: setting up a CVMFS repository server
---------------------------------------------------
+Additionally,
 
-This document doesn't cover requirements for the GOC computers since those are already set up. The requirements for a CVMFS repository server are that it have installed cvmfs-server and cvmfs client, both version 2.2.2 or greater; version 2.3.3 or greater is recommended on EL6 and required on EL7. This requires using aufs or OverlayFS: aufs requires a modified kernel from CERN for Redhat EL6-based systems, and OverlayFS requires at least EL7.3; the latter uses a standard kernel so it is highly recommended. Also an apache httpd server needs to be enabled. NOTE: multiple cvmfs repositories can be hosted on the same machine.
+-   **User IDs:** If it does not exist already, the installation will create the `cvmfs` Linux user
+-   **Group IDs:** If they do not exist already, the installation will create the Linux groups `cvmfs` and `fuse`
+-   **Network ports:** This page will configure the repository to distribute using Apache HTTPD on port 8000.  At the
+    minimum, the repository needs in-bound access from the OASIS CDN.
+-   **Disk space:** This host will need enough free disk space to host _two_ copies of the software: one compressed
+    and one uncompressed. `/srv/cvmfs` will hold all the published data, while `/var/spool/cvmfs` will contain all
+    the data in the current transaction.
+-   **Root access** will be needed to install.  Software install will be done as an unprivileged user.
+-   **Yum** will need to be [configured to use the OSG repositories](../common/yum).
 
-`/srv/cvmfs` will hold all the published data, so make sure it is large enough to hold all the repositories hosted on the machine. `/var/spool/cvmfs` will hold files during publish, so it should be large enough to hold the most amount of data that might be attempted to be published at once. In addition, on EL7 and cvmfs-server-2.4.1, `/var/spool/cvmfs` needs to be of filesystem type 'ext3' or 'ext4', or the `cvmfs_server` command will not allow it. There is a variable to override the filesystem type check, but other filesystem types are not guaranteed to work (xfs created with `ftype=1` should work with `CVMFS_DONT_CHECK_OVERLAYFS_VERSION=yes`).
+!!! warning
+    RHEL7 only supports Overlay-FS if the underlying filesystem is `ext3` or `ext4`; make sure `/var/spool/cvmfs`
+    is one of these filesystem types.
 
-As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
+    If this is not possible, add `CVMFS_DONT_CHECK_OVERLAYFS_VERSION=yes` to your CVMFS configuration.  It is believed
+    `xfs` will work if it was created with `ftype=1`
 
-- Ensure the host has [a supported operating system](../release/supported_platforms)
-- Obtain root access to the host
-- Prepare the [required Yum repositories](../common/yum)
-
-This is the procedure for installing on a Redhat EL6-based system:
-
-``` console
-root@host # rpm -i https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm 
-root@host # yum install --enablerepo=cernvm-kernel --disablerepo=cernvm kernel aufs2-util cvmfs-server.x86_64 cvmfs.x86_64 cvmfs-config-osg 
-root@host # echo "cvmfs_server mount -a" >>/etc/rc.local 
-root@host # reboot
-```
+Installation
+------------
 
 This is the procedure for installing on a Redhat EL7-based system:
 
@@ -54,7 +56,17 @@ root@host # echo "cvmfs_server mount -a" >>/etc/rc.local
 root@host # chmod +x /etc/rc.local
 ```
 
-In addition, apache should listen on port 8000, have KeepAlive enabled, and be started. Use commands like these:
+For a RedHat EL6-based system:
+
+``` console
+root@host # rpm -i https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm 
+root@host # yum install --enablerepo=cernvm-kernel --disablerepo=cernvm kernel aufs2-util cvmfs-server.x86_64 cvmfs.x86_64 cvmfs-config-osg 
+root@host # echo "cvmfs_server mount -a" >>/etc/rc.local 
+root@host # reboot
+```
+
+Once installed, Apache HTTPD should be configured to listen on port 8000, have the `KeepAlive` option enabled, and be
+started:
 
 ``` console
 root@host # echo Listen 8000 >>/etc/httpd/conf.d/cvmfs.conf 
@@ -63,94 +75,186 @@ root@host # chkconfig httpd on
 root@host # service httpd start
 ```
 
-Make sure that port 8000 is available to the internet through any firewalls.
+!!! note
+    Make sure that port 8000 is available to the Internet.  Check the setting of the host- and site-level firewalls.
+    The next steps will fail if the web server is not accessible.
 
-Procedure to add an externally-hosted repository to OASIS
----------------------------------------------------------
+Create a Repository
+-------------------
 
-1.  A VO representative who will have responsibility for the contents of the repository chooses a name for the repository. This name should be the name of the VO or be derived from it (or a project in the VO for the case of the OSG VO), and in a domain that has a secured master key. The recommended domain name for a new repository that originates at an OSG site is opensciencegrid.org. The full name used as an example in this document is **repo.domain.name**. Note: the VO representative's name will be registered in OIM as an OASIS manager for the VO, and names can be added or changed later with GOC tickets. If there is more than one repository for the VO, all the OASIS managers are assumed to be contacts for all the repositories.
+Prior to creation, the repository administrator will need to make two decisions:
 
-2.  Using whatever mechanism is appropriate at their institution, the VO representative requests the local CVMFS repository service administrator to create this repository called `repo.domain.name`.
+-   **Select a repository name**; typically, this is derived from the VO or project's name and ends in
+    `opensciencegrid.org`.  For example, the NoVA VO runs the repository `nova.opensciencegrid.org`.  For this section,
+    we will use %RED%example.opensciencegrid.org%ENDCOLOR%.
+-   **Select a repository owner**: Software publication will need to run by a non-`root` Unix user account; for this
+    document, we will use %BLUE%LIBRARIAN%ENDCOLOR% as the account name of the repository owner.
 
-3.  The repository service administrator creates the repository with these command like these, where ownerid is the user id that will have write access:
+The initial repository creation must be run as `root`:
 
-        :::console
-        root@host # echo -e "\*\\t\\t-\\tnofile\\t\\t16384" >>/etc/security/limits.conf 
-        root@host # ulimit -n 16384 
-        root@host # cvmfs_server mkfs -o ownerid repo.domain.name 
-        root@host # echo "CVMFS_AUTO_TAG=false" >>/etc/cvmfs/repositories.d/repo.domain.name/server.conf 
-        root@host # (echo Order deny,allow;echo Deny from all;echo Allow from 127.0.0.1;echo Allow from ::1;echo Allow from 129.79.53.0/24;echo Allow from 2001:18e8:2:6::/56) >/srv/cvmfs/repo.domain.name/.htaccess
+    :::console
+    root@host # echo -e "\*\\t\\t-\\tnofile\\t\\t16384" >>/etc/security/limits.conf
+    root@host # ulimit -n 16384
+    root@host # cvmfs_server mkfs -o %BLUE%LIBRARIAN%ENDCOLOR% %RED%example.opensciencegrid.org%ENDCOLOR%
+    root@host # echo "CVMFS_AUTO_TAG=false" >>/etc/cvmfs/repositories.d/%RED%example.opensciencegrid.org%ENDCOLOR%/server.conf
+    root@host # (echo Order deny,allow;echo Deny from all;echo Allow from 127.0.0.1;echo Allow from ::1;echo Allow from 129.79.53.0/24;echo Allow from 2001:18e8:2:6::/56) >/srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.htaccess
 
-    If you might be hosting any hardlinks that span directories (e.g. the git package) and are using aufs (that is, EL6), also do the following:
+Here, we increase the number of open files, create the repository using the `mkfs` command, adjust the configuration,
+and then limit the hosts that are allowed to access the repo to the OSG CDN.
+
+!!! note
+    If you might be hosting any hardlinks that span directories (e.g. publishing a `git` repository) and are using
+    EL6 with aufs, make the following configuration change:
 
         :::console
         root@host # echo "CVMFS_IGNORE_XDIR_HARDLINKS=true" >>/etc/cvmfs/repositories.d/repo.domain.name/server.conf
 
-    Verify that the repository is readable over http with the following command:
+Verify that the repository is readable over HTTP:
 
-        :::console
-        root@host # wget -qO- http://localhost:8000/cvmfs/repo.domain.name/.cvmfswhitelist|cat -v
+    :::console
+    root@host # wget -qO- http://localhost:8000/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.cvmfswhitelist | cat -v
 
-    That should print several lines including some gibberish at the end.
+That should print several lines including some gibberish at the end.
 
-4.  The repository service administrator next creates a [GOC ticket](https://ticket.opensciencegrid.org/goc/submit) using the following format:
+Host a Repository on OASIS
+------------------------
 
-        Please add a new CVMFS repository to OASIS for VO voname using the URL 
-            http://fully.qualified.domain:8000/cvmfs/repo.domain.name 
-        by doing step #5 at
+1.  **Verify your VO's OIM registration is up-to-date**.  All repositories need to be associated with a VO; the VO needs
+    to make sure an appropriate individual has the _OASIS manager_ role in OIM.  This individual will be responsible
+    for the contents of any of the VO's repositories and will be contacted in case of issues.
+
+2.  The repository administrator should **create a [support ticket](https://ticket.opensciencegrid.org/goc/submit)**
+    using the following template:
+
+        Please add a new CVMFS repository to OASIS for VO %RED%voname%ENDCOLOR% using the URL 
+            http://%RED%fully.qualified.domain%ENDCOLOR%:8000/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%
+        by doing step #3 at
             https://opensciencegrid.github.io/docs/data/external-oasis-repos
-        The VO responsible manager will be Vorep Name.
+        The VO responsible manager will be %RED%OASIS Manager Name%ENDCOLOR%.
 
-    replacing "voname" with the VO's name, "fully.qualified.domain" with the full name of the repository server, "repo.domain.name" with the full name of the repository, and "Vorep Name" with the name of the VO representative.
+    Replace the %RED%red%ENDCOLOR% items with the appropriate values.
 
-5.  The GOC representative next ensures that the repository service administrator is a valid representative of a host site for the VO. This can be done by (a) the GOC representative already having a relationship with the person or (b) the GOC representative contacting the VO manager to find out. The GOC representative makes sure that the repo.domain.name in the URL is derived from the VO name. 
+3.  (**OSG internal step**)
+    OSG Operations ensures that the repository administrator is valid for the VO. This can be done by (a) OSG
+    already having a relationship with the person or (b) the GOC representative contacting the VO manager to find out.
+    OSG Operations should review the URL to verify it is appropriate for the VO.  This typically takes one business day.
 
-6.  The GOC representative then adds the URL in OIM under OASIS Repo URLs for the VO. The repository will then be added to the GOC stratum 0 within 15 minutes.  Within an hour after step 8 is completed, the repository should also be automatically added to the GOC and FNAL stratum 1s.
+4.  (**OSG internal step**)
+    The OSG representative adds the repository URL in OIM under the VO's OASIS repository URLs. This should cause
+    the repository's configuration to be added to the GOC Stratum-0 within 15 minutes.  Within an hour step 8 is
+    completed, the repository should also be automatically added to the GOC and FNAL stratum 1s.
 
-7.  If domain.name is a new domain that has not been distributed before, the GOC representative next places a copy of the domain.name.pub public key from domain.name into /srv/etc/keys on both oasis-replica and oasis-replica-itb. If the GOC representative does not have that key, he or she can ask the repository service representative in the ticket how to get it. In addition, in order to support cvmfs client versions 2.2.X (both older and newer clients do not need it), a symbolic link of `domain.name`.conf has to be made in /cvmfs/config-osg.opensciencegrid.org/etc/cvmfs/domain.d pointing to default.conf. This symbolic link has to be created on the oasis-itb machine's copy of the config-osg.opensciencegrid.org repository and then copied to production with the `copy_config_osg` command on the oasis machine.
+5.  (**OSG internal step**): If the respository ends in a new
+    domain name that has not been distributed before, the OSG representative next places a copy of the `domain.name.pub`
+    public key from `domain.name` into `/srv/etc/keys` on both `oasis-replica` and `oasis-replica-itb`. If the OSG
+    representative does not have that key, he or she will ask the repository service representative how to obtain it.
+    In order to support CVMFS client versions 2.2.X, a symbolic link of `domain.name.conf` has to be made in
+    `/cvmfs/config-osg.opensciencegrid.org/etc/cvmfs/domain.d` pointing to `default.conf`. This symbolic link has to be
+    created on the `oasis-itb` machine's copy of the `config-osg.opensciencegrid.org` repository and then copied to
+    production with the `copy_config_osg` command on the oasis machine.
 
-8.  If the repository name matches `*.opensciencegrid.org` or `*.osgstorage.org`, the GOC representative responds in the ticket to ask that step \#8 be done; all other repositories (such as `*.egi.eu`) skip this step. The repository service administrator next executes the following commands (replacing repo.opensciencegrid.org with repo.osgstorage.org when needed):
+6.  If the repository name matches `*.opensciencegrid.org` or `*.osgstorage.org`, the OSG representative responds in
+    the ticket to ask that step \#6 be done; all other repositories (such as `*.egi.eu`) skip this step.
+
+    The repository administrator should **execute the following commands**:
 
         :::console
-        root@host # wget -O /srv/cvmfs/repo.opensciencegrid.org/.cvmfswhitelist http://oasis.opensciencegrid.org/cvmfs/repo.opensciencegrid.org/.cvmfswhitelist 
-        root@host # /bin/cp /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub /etc/cvmfs/keys/repo.opensciencegrid.org.pub
+        root@host # wget -O /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.cvmfswhitelist \
+                    http://oasis.opensciencegrid.org/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.cvmfswhitelist 
+        root@host # /bin/cp /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub \
+                    /etc/cvmfs/keys/%RED%example.opensciencegrid.org%ENDCOLOR%.pub
 
-    Next the administrator verifies that a publish operation using the owner's privileges succeeds by making sure there's no errors from the following commands replacing "ownerid" with the owner's username:
+    Replace %RED%example.opensciencegrid.org%ENDCOLOR% as appropriate.  Next, the repository administrator should
+    verify that publishing operation succeed:
 
         :::console
-        root@host # su ownerid -c "cvmfs_server transaction repo.opensciencegrid.org" 
-        root@host # su ownerid -c "cvmfs_server publish repo.opensciencegrid.org"
+        root@host # su %BLUE%LIBRARIAN%ENDCOLOR% -c "cvmfs_server transaction %RED%example.opensciencegrid.org%ENDCOLOR%"
+        root@host # su %BLUE%LIBRARIAN%ENDCOLOR% -c "cvmfs_server publish %RED%example.opensciencegrid.org%ENDCOLOR%"
 
-    If that works then add the wget command to a daily cron:
+    Within an hour, the repository updates should appear at the GOC and FNAL Stratum-1 servers.
+
+    On success, make sure the whitelist update happens daily by creating `/etc/cron.d/fetch-cvmfs-whitelist` with the
+    following contents:
         
-        :::console
-        root@host # echo "5 4 \* \* \* ownerid cd /srv/cvmfs/repo.opensciencegrid.org && wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/repo.opensciencegrid.org/.cvmfswhitelist && mv .cvmfswhitelist.new .cvmfswhitelist" >>/etc/cron.d/fetch-cvmfs-whitelist
+        :::
+        5 4 * * * %BLUE%LIBRARIAN%ENDCOLOR% cd /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR% && wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.cvmfswhitelist && mv .cvmfswhitelist.new .cvmfswhitelist
 
-    Note that this eliminates the need for the repository service administrator to periodically use `cvmfs_server resign` to update `.cvmfswhitelist`. Then the repository service administrator goes back to the open GOC ticket and asks to proceed to step \#9.
+    !!! note
+        This cronjob eliminates the need for the repository service administrator to periodically use
+        `cvmfs_server resign` to update `.cvmfswhitelist` as described in the upstream CVMFS documentation.
 
-9.  The GOC representative then asks the administrator of the BNL stratum 1 to also add the new repository. He should set up his stratum 1s to read from `http://oasis-replica.opensciencegrid.org:8000/cvmfs/repo.domain.name`. When he has reported back that the replication is ready, the GOC representative reports in the ticket that the repository is ready on the OSG and closes the ticket.
+    The repository administrator should update the open support ticket and ask to proceed to step \#7.
 
-10.  The repository service administrator then gives the VO representative access to the repository under the "ownerid" login, informs them of the [CVMFS documentation on maintaining repositories](http://cernvm.cern.ch/portal/filesystem/maintain-repositories) and requests that they adhere to the [CVMFS documentation on repository content limitations](http://cernvm.cern.ch/portal/filesystem/repository-limits). If the domain.name is opensciencegrid.org, the repository service administrator should also inform the VO representative that if they want the repository to be accessed outside of the U.S. they should open a ggus ticket following the EGI's [PROC20](https://wiki.egi.eu/wiki/PROC2\). (Note: EGI does not have a concept of sub-VOs like OSG does; to EGI, all sub-VOs under fermilab are the fermilab VO).
 
-Emergency procedure to blank an externally-hosted repository to OASIS
----------------------------------------------------------------------
+7.  (**OSG internal step**)
+    The OSG representative then asks the administrator of the BNL stratum 1 to also add the new repository.
+    He should set up his Stratum-1 to read from
+    `http://oasis-replica.opensciencegrid.org:8000/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%`.
+    When the BNL Stratum-1 operator has reported back that the replication is ready, the OSG representative reports in
+    the ticket that the repository is fully replicated on the OSG and closes the ticket.
 
-1.  If there is an emergency request from OSG security to shut down the distribution of a repository, the GOC representative just needs to run `blank_osg_repository` on oasis-replica and give it the full name of the repository. This will rename the repository directories to a name with the current timestamp and replace it with a blank repository. It includes a step to run on the oasis machine, and attempts to do it with ssh, but if that fails it prints instructions on how to finish by logging in to the oasis machine manually.
-2.  When it is time to put the repository back into production, the GOC representative runs `unblank_osg_repository` on oasis-replica and gives it the full name of the repository again. This will find the directory with the old timestamp and put it back into service. This step also attempts to ssh to the oasis machine.
+Once the repository is fully replicated on the OSG, the VO may proceed in publishing into CVMFS using the
+%BLUE%LIBRARIAN%ENDCOLOR% account on the repository server.
 
-Procedure to change the URL of an external repository
------------------------------------------------------
+!!! tip
+    We strongly recommend the repository maintainer read through the upstream documentation on
+    [maintaining repositories](http://cernvm.cern.ch/portal/filesystem/maintain-repositories) and
+    [content limitations](http://cernvm.cern.ch/portal/filesystem/repository-limits).
 
-1.  The repository service administrator opens a GOC ticket with the value of the new URL.
-2.  The GOC representative then changes the registered value in OIM for the VO in OASIS Repo URLs. The GOC stratum 1 will then be updated within an hour.
+If the repository ends in `.opensciencegrid.org`, the VO may ask for it to be replicated outside the US.  The
+VO should open a GGUS ticket following EGI's [PROC20](https://wiki.egi.eu/wiki/PROC20).
 
-Procedure to shut down and remove an external repository
---------------------------------------------------------
+Change the URL of an external repository
+----------------------------------------
 
-1. First, if the repository has been replicated outside of the U.S., the repository service administrator should open a GGUS ticket asking that the replication be removed from EGI stratum 1s. Wait until they say they are finished before going to the next step. 
-1. Next, the repository service administrator opens a GOC ticket asking to shut down the repository, giving the repository name, for example `repo.domain.name`, and the VO it belongs to. 
-1. After validating that the ticket submitter is authorized by a registered OASIS manager, the GOC representative next deletes the registered value for `repo.domain.name` in OIM for the VO in OASIS Repo URLs. 
-1. Next, the GOC representative adds the FNAL and BNL stratum 1 administrators to the ticket to asks them to remove the repository. 
-1. When the FNAL and BNL stratum 1 administrators say they have finished, the GOC representative then runs `cvmfs_server rmfs -f repo.domain.name` and `rm -r /oasissrv/cvmfs/repo.domain.name` on oasis-replica-itb and oasis-replica. 
-1. Finally, the GOC representative does `rm -r /srv/cvmfs/repo.domain.name` on oasis-itb and oasis.
+If necessary, it is possible to change the URL of the repository server:
+
+1.  The repository administrator opens a support ticket with the value of the new URL.
+2.  The OSG representative then changes the registered value in OIM for the VO in OASIS Repo URLs.
+
+The GOC Stratum-1 will then be updated within an hour.
+
+Remove an external repository
+-----------------------------
+
+1.  If the repository has been replicated outside of the U.S., the repository service administrator should open a GGUS
+    ticket asking that the replication be removed from EGI Stratum-1s. Wait until this is done before proceeding 
+2.  The repository administrator opens an OSG support ticket asking to shut down the repository, giving the repository
+    name (e.g., %RED%example.opensciencegrid.org%ENDCOLOR%) and the corresponding VO.
+3.  After validating the ticket submitter is authorized by the VO's OASIS manager, the OSG representative next deletes
+    the registered value for %RED%example.opensciencegrid.org%ENDCOLOR% in OIM for the VO in OASIS Repo URLs. 
+4.  The OSG representative adds the FNAL and BNL Stratum-1 operators to the ticket to asks them to remove the
+    repository.  Wait for the Stratum-1 operators to finish before proceeding.
+5.  The OSG representative then runs `cvmfs_server rmfs -f %RED%example.opensciencegrid.org%ENDCOLOR%`
+    and `rm -r /oasissrv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%` on `oasis-replica-itb` and `oasis-replica`
+6.  The OSG representative does `rm -r /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%` on `oasis-itb` and
+    `oasis`.
+
+Procedure to blank an externally-hosted repository
+--------------------------------------------------
+
+!!! note
+    This is an OSG-internal procedure
+
+1.  If there is a request from OSG Security to shut down the distribution of a repository, the OSG representative
+    needs to run `blank_osg_repository` on `oasis-replica` and give it the full name of the repository. This will
+    rename the repository directories to a name with the current timestamp and replace it with a blank repository.
+    It includes a step to run on the `oasis` machine, and attempts to do it with `ssh`, but if that fails it prints
+    instructions on how to finish by logging in to the `oasis` machine manually.
+2.  When it is time to put the repository back into production, the GOC representative runs `unblank_osg_repository`
+    on `oasis-replica` and gives it the full name of the repository again. This will find the directory with the old
+    timestamp and put it back into service. This step also attempts to `ssh` to the `oasis` machine.
+
+Policies
+--------
+
+To help us provide the best operational setup possible, we have a few replication policies worth mentioning here:
+
+1.  OSG Operations only hosts the shared `oasis.opensciencegrid.org` repository; VO-dedicated software respositories
+    (such as `nova.opensciencegrid.org` for the NoVA VO) should be operated by the VO.
+2.  VOs are asked to either run their own repository or utilize the shared repository, but not both.
+3.  There is a finite amount of high-performance storage on the CDN.   A minimum of 100 GB per repository is guaranteed.
+    Larger limits may be requested.
+4.  VOs may ask the OSG to replicate their repositories to the European Grid Infrastructure (EGI); however, this can
+    only be done if the repository name ends in `.opensciencegrid.org`.
 
