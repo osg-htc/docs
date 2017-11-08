@@ -13,7 +13,7 @@ Planning
 Installation
 ------------
 
--   [Install Xrootd Server](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd): This page explains how to install an XRootD redirector and data nodes
+-   [Install Xrootd Server](install-xrootd): This page explains how to install an XRootD redirector and data nodes
 -   [Install Bestman Gateway Xrootd](install-bestman-xrootd): Installing a SRM frontend wit GridFTP for XRootD redirector
 -   [Install GridFTP on Xrootd](install-gridftp-xrootd): For sites with multiple GridFTP servers, this page explains how to install a GridFTP server.
 
