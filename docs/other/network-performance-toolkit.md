@@ -147,5 +147,4 @@ References
 
 * [One Way Active Measurement Protocol (OWAMP)](http://docs.perfsonar.net/config_owamp.html)
 * [Bandwidth Control tool (BWCTL)](http://docs.perfsonar.net/config_bwctl.html)
-
-See also the OSG/WLCG pages on perfSONAR at <https://twiki.opensciencegrid.org/bin/view/Documentation/DeployperfSONAR>
+* [OSG/WLCG pages on perfSONAR](https://opensciencegrid.github.io/networking/perfsonar/installation/).

@@ -13,7 +13,7 @@ Host and OS
 
 -   OS is Red Hat Enterprise Linux 6, 7, and variants (see [details...](../release/supported_platforms.md)).
 -   [EPEL](http://fedoraproject.org/wiki/EPEL) repos enabled.
--   A working XRootD Server. See [InstallXrootd](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd) for details.
+-   [A working XRootD Server](install-xrootd).
 -   Root access
 
 Users 
@@ -56,7 +56,7 @@ The GridFTP server provides high-performance, secure and reliable data transfer.
 Install Instructions
 =========================
 
-Note that this package is primarily intended for GridFTP acting as an interface for XRootD server, usually part of a bigger storage element installation. If you have not installed an XRootD server yet, follow the instructions in [InstallXrootd](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd).
+Note that this package is primarily intended for GridFTP acting as an interface for XRootD server, usually part of a bigger storage element installation. If you have not installed an XRootD server yet, [please do so](install-xrootd).
 
 Certificates 
 ------------------------------------------------------
@@ -150,7 +150,7 @@ If you want to enable security for access to xrootd via xrootdfs you will need t
 
 6. Copy %RED%keyfile<span class="twiki-macro ENDCOLOR"></span> from redirector node to every data server node and the xrootdfs node. Make sure that this file is owned by the `xrootd` user.
 
-7. Restart xrootd cluster by following [these instructions](https://twiki.opensciencegrid.org/bin/view/SoftwareTeam/HowToInstallXrootd)
+7. Restart xrootd cluster by following [these instructions](install-xrootd)
 8. On xroodfs node execute mount:
 
         :::console
