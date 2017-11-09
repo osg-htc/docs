@@ -1,4 +1,4 @@
-Updating Software on OASIS
+Updating Software in OASIS
 ==========================
 
 OASIS is the OSG Application Software Installation Service. It is the recommended method to install software on the Open Science Grid. It is implemented using CernVM FileSystem (CVMFS) technology.
