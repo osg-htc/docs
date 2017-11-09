@@ -51,13 +51,11 @@ Two certificates are needed for operation of this service.
 | Host certificate            | `root`                     | `/etc/grid-security/hostcert.pem` and `/etc/grid-security/hostkey.pem`                       |
 | Bestman service certificate | `bestman`                  | `/etc/grid-security/bestman/bestmancert.pem` and `/etc/grid-security/bestman/bestmankey.pem` |
 
-Following the [instructions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/OSGPKICommandlineClients) to request a service certificate.
+Following the [instructions](../security/host-certs) to request a service certificate.
 
 You will also need a copy of CA certificates. Note that the `osg-se-bestman` package will automatically install a certificate package but will not necessarily pick the cert package you expect; see [the CA certificates](../common/ca.md) documentation for more information.
 
 ### Networking
-
-For more details on overall firewall configuration, please see our [firewall documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/FirewallInformation).
 
 | Service Name            | Protocol | Port Number               | Inbound | Outbound | Comment                                 |
 |:------------------------|:---------|:--------------------------|:--------|:---------|:----------------------------------------|
@@ -86,7 +84,7 @@ We recommend approximately one GridFTP server for each 8Gbps of desired utilized
 
 Q. *Do I need to change default configuration of Gridftp server?*
 
-Yes, you may want to do this if the node on which GridFTP server will be installed has multiple network interfaces. Read [this section](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallOSGGridFTP#ConfigMultiHomed) for more details.
+Yes, you may want to do this if the node on which GridFTP server will be installed has multiple network interfaces. Read [this section](gridftp#configuring-a-multi-homed-server) for more details.
 
 Q. *Do you need to enable Gratia gridftp-transfer probes?*   
 The Gratia gridftp-transfer probes provide OSG storage statistics for accounting purposes. The reports include the source and destination of transfers, certificate subject of transfer initiator, as well as the size and status of the transferred file. The probe needs to be installed on every GridFTP server.
@@ -350,8 +348,7 @@ Validation of Service Operation
 
 Once you have your SE setup and configured, there are several ways to monitor your installation. Refer to the following pages for more information:
 
-* [BeStMan SRM Tester](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SrmTester).
-* [RSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallRSV) which includes SRM probes as well.
+* [RSV](../monitoring/install-rsv) which includes SRM probes as well.
 
 You can also self-test to verify your installation with an SRM client such as `gfal-copy`.
 
@@ -464,12 +461,6 @@ For a full set of help options, see the [Help Procedure](../common/help).
 References
 ==========
 
-* [Storage infrastructure software](https://twiki.opensciencegrid.org/bin/view/Documentation/StorageInfrastructureSoftware)
-* [Information on planning, installing and validating storage software](https://twiki.opensciencegrid.org/bin/view/Documentation/StorageSiteAdministrator)
-* [Tips and FAQ](https://twiki.opensciencegrid.org/bin/view/Storage/SEToolsTipsFAQs)
-* [OSG Gratia Transfer Probe page](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GratiaTransferProbe)
-* [SRM v2.2 LBNL client command line examples](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/LbnlSrmClient)
-* [SRM-Tester](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SrmTester)
 * [BeStMan official website](http://sdm.lbl.gov/bestman)
     * [BeStMan User guides](http://sdm.lbl.gov/bestman/docs/bestman-guide.html)
     * [BeStMan FAQ](http://sdm.lbl.gov/bestman/docs/bestman-faq.html)

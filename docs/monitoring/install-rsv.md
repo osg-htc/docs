@@ -15,8 +15,7 @@ The Resource and Service Validation (RSV) software provides OSG site administrat
 
 - **RSV Client.** The client tools allow a site administrator to run tests against their site by providing a set of tests (which can run on the same or other hosts within a site), HTCondor-Cron for scheduling, and tools for collecting and storing the results (using Gratia). The client package is not installed by default and may be installed on a CE or other host. Generally, you configure the RSV client to run tests at scheduled time intervals and then it makes results available on a local website. Also, the client can upload test results to a central collector (see next item).
 - **RSV Collector/Server.** The central OSG RSV Collector accepts and stores results from RSV clients throughout OSG, which can be viewed in [MyOSG](http://my.opensciencegrid.org/), on the “Current RSV Status” page and under the “Resource Group” menu.
-- **Periodic Availability Reports.** The availability of all active registered OSG resources and the services running on each of those resources is calculated using the results received for [critical metrics](https://twiki.opensciencegrid.org/bin/view/Operations/RsvEquivalency#Critical_Tests_for_OSG_Resources>). Once a day, these availability numbers are [published online](http://rsv.opensciencegrid.org/daily-reports) (More information: [Outline of reports](https://twiki.opensciencegrid.org/bin/view/Operations/RSVPeriodicReporting)).
-- **RSV-SAM Transport.** The WLCG RSV-SAM Transport infrastructure pushes out RSV results, for resources that are flagged to be part of the WLCG Interoperability agreement, from the GOC collector to WLCG's Service Availability Monitoring (SAM) system. More information on viewing these results is [available here](https://twiki.opensciencegrid.org/twiki/bin/view/Operations/RsvSAMGridView).
+- **Periodic Availability Reports.** The availability of all active registered OSG resources and the services running on each of those resources is calculated using the results received for critical metrics. Once a day, these availability numbers are [published online](http://rsv.opensciencegrid.org/daily-reports).
 - **MyOSG and OIM Links.** RSV picks up resource information, WLCG interoperability information, etc., from a MyOSG resource group summary listing, which is in turn based on the [OSG Information Management (OIM) (topology) system](https://oim.opensciencegrid.org) (Requires registration). Resource [maintenance scheduled on OIM](https://twiki.opensciencegrid.org/twiki/bin/view/Operations/OIMMaintTool) are forwarded to WLCG SAM, if applicable.
 
 
@@ -89,7 +88,7 @@ RSV monitors systems by running probes, which can run on the RSV host itself (th
 In this case, remember to:
 
 - Add the RSV user `rsv` on all the systems where the probes may run, and
-- Map the RSV service certificate to the user you intend to use for RSV. This should be a local user used exclusively for RSV and not belonging to an institutional VO to avoid for the RSV probes to be accounted as regular VO jobs in Gratia. This can be done in [GUMS](../security/install-gums) or [using a grid-mapfile-local](../security/edg-mkgridmap) (if you use a grid-mapfile). [MapServiceCertToRsvUser](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/MapServiceCertToRsvUser) explains how to configure GUMS or the grid-mapfile. Also see the [CE installation document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/NavAdminCompute) for more information.
+- Map the RSV service certificate to the user you intend to use for RSV. This should be a local user used exclusively for RSV and not belonging to an institutional VO to avoid for the RSV probes to be accounted as regular VO jobs in Gratia. This can be done in [GUMS](../security/install-gums) or [using a grid-mapfile-local](../security/edg-mkgridmap) (if you use a grid-mapfile). [MapServiceCertToRsvUser](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/MapServiceCertToRsvUser) explains how to configure GUMS or the grid-mapfile. Also see the [CE installation document](../compute-element/install-htcondor-ce) for more information.
 
 #### Configuring the RSV web server to use HTTPS instead of HTTP
 
@@ -302,14 +301,6 @@ OSG-RSV Profiler
 Analyzing...
 Making tarball (rsv-profiler.tar.gz)
 ```
-
-Reference
----------
-
-Here are some other RSV documents that might be helpful:
-
--  [The RSV architecture](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RsvArchitecture)
--  [RSV storage probes](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/RSVStorageProbes)
 
 ### Users
 

@@ -30,7 +30,7 @@ If one of these repositories is missing you may have missing dependencies.
 Enabling Repositories
 ---------------------
 
-In [our advice on using yum](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices) you will learn many tricks and tips on using yum.
+In [our advice on using yum](install-best-practices) you will learn many tricks and tips on using yum.
 
 To use the packages in a repository without adding special options to the yum command the repository must be enabled.
 
@@ -53,7 +53,7 @@ OSG RPMs are distributed via the OSG yum repositories. Some packages depend on p
 
 
 !!! warning
-    if you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the OSG repository has a better yum priority than EPEL ([details](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices#YumPriorities)). Otherwise, you will have strange dependency resolution (*depsolving*) issues.
+    if you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the OSG repository has a better yum priority than EPEL ([details](install-best-practices#YumPriorities)). Otherwise, you will have strange dependency resolution (*depsolving*) issues.
 
 
 ### Install the Yum priorities package
@@ -122,5 +122,5 @@ Reference
 ---------
 
 -   [Basic use of Yum](../release/yum-basics.md)
--   [Best practices in using Yum](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices)
+-   [Best practices in using Yum](install-best-practices)
 
