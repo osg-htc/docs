@@ -287,13 +287,32 @@ fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/x
 
 **Note**: In this example, `fermicloud53.fnal.gov` is a redirector node and `fermicloud054.fnal.gov` is a data node.
 
+### (Optional) Enabling a FUSE mount
+
+You can use a FUSE mount in order to test POSIX access to xrootd in the GridFTP server. Configure it using the following steps.
+
+Modify **`/etc/fstab`** by adding the following entries:
+
+    :::file
+    ....
+    xrootdfs                %RED%/mnt/xrootd%ENDCOLOR%              fuse    rdr=xroot://%RED%redirector1.domain.com%ENDCOLOR%:1094/%RED%/path/%ENDCOLOR%,uid=xrootd 0 0
+
+
+Replace `/mnt/xrootd` with the path that you would like to access with. This should also match the GridFTP settings for the `XROOTD_VMP` local path. Create **`/mnt/xrootd`** directory. Once you are finished, you can mount it:
+
+    :::file
+    mount /mnt/xrootd
+
+You should now be able to run UNIX commands such as `ls /mnt/xrootd` to see the contents of the XRootD server.
+
 ### (Optional) Authorization
 
 There are several authorization options in XRootD available through the security
 plugins. In this document, we will cover two options for security:
 
 -   Simple Unix Security: Based on user accounts that the client is logged in as.
--   xrootd-lcmaps: Using the lcmaps callout to use GUMS authorization
+-   Shared-key based authentication.
+-   `xrootd-lcmaps`: Using the LCMAPS callout to use X509-based authentication
 
 Note: On the data nodes, the files will actually be owned by unix user `xrootd`
 (or other daemon user), not as the user authenticated to, under most
@@ -425,7 +444,69 @@ root@host # su - %RED%user%ENDCOLOR%
 \[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\]
 ```
 
-#### Security option 2: xrootd-lcmaps authorization
+#### Security option 2: Shared keys
+
+If you want to enable security for access to xrootd via xrootdfs you will need to modify xrootd configuration and perform several steps to make xrootdfs secured.
+
+1. On the xrootd redirector node, execute the following command:
+
+        :::console
+        root@host # xrdsssadmin -k %RED%<my_key_name>%ENDCOLOR% -u anybody -g usrgroup add %RED%<keyfile>%ENDCOLOR%
+
+    eg:
+
+        root@host # xrdsssadmin -k top_secret -u anybody -g usrgroup add /etc/xrootd/xrootd.key
+
+2. Set ownership
+
+        :::console
+        root@host # chown xrootd.xrootd /etc/xrootd/xrootd.key
+
+3. On the node where xrootdfs is installed modify **`/etc/fstab`** add security information:
+
+        :::console
+        root@host # xrootdfs %RED%/mnt/xrootd %ENDCOLOR% fuse rdr=xroot://%RED%redirector1.domain.com%ENDCOLOR%:1094/%RED%/path/redirector1%ENDCOLOR%,uid=xrootd,sss=%RED%keyfile%ENDCOLOR%0 0
+
+4. On all xrootd data servers and redirector nodes, modify xrootd configuration (**`/etc/xrootd/xrootd-clustered.cfg`**) by adding the following segment:
+
+        :::file
+        # ENABLE_SECURITY_BEGIN
+           xrootd.seclib /usr/lib64/libXrdSec.so
+           #the line below should be before "sec.protocol ... unix"
+           %RED%sec.protocol /usr/lib64 sss -s keyfile %ENDCOLOR%
+           sec.protocol /usr/lib64 unix
+           # this specify that we use the 'unix' authentication module, additional one can be specified.
+           # this is the authorization file
+           acc.authdb /etc/xrootd/auth_file
+           ofs.authorize
+           # ENABLE_SECURITY_END
+
+5. On all xrootd data server nodes, edit `/etc/xrootd/auth_file` to add authorized users of the form `u %RED%username%ENDCOLOR% %RED%/directoryname%ENDCOLOR% lr` where "lr" is the permission set.
+
+6. Copy %RED%keyfile<span class="twiki-macro ENDCOLOR"></span> from redirector node to every data server node and the xrootdfs node. Make sure that this file is owned by the `xrootd` user.
+
+7. Restart xrootd cluster by following [these instructions](https://twiki.opensciencegrid.org/bin/view/SoftwareTeam/HowToInstallXrootd)
+
+8. On xroodfs node execute mount:
+
+        :::console
+        root@host # mount %RED%/mnt/xrootd%ENDCOLOR%
+
+9. Verify that you can access the mount point (df,ls) and can not write into unauthorized path, e.g:
+
+        :::console
+        root@host # cp /bin/sh /mnt/xrootd/tlevshin/test1 cp:
+        cannot create regular file \`/mnt/xrootd/tlevshin/test1': Permission denied
+
+    Login as yourself and try:
+
+        :::console
+        root@host # su - tlevshin
+        user@host $ cp /bin/sh /mnt/xrootd/tlevshin/test1
+
+
+
+#### Security option 3: xrootd-lcmaps authorization
 
 The xrootd-lcmaps security plugin uses the `lcmaps` package to access the `GUMS`
 server to authenticate and authorize users based on X509 certificates.
@@ -487,7 +568,7 @@ scasclient = "lcmaps_scas_client.mod"
 
 You will need to add the security plugins to `/etc/xrootd/xrootd-clustered.cfg`. Add the following lines to the `/etc/xrootd/xrootd-clustered.cfg`. This will need to be added to all data nodes in the section relevant to the data node server. (For instance, in the above example(s), this should be placed in the last "else" clause after "all.role server". See the section above on Unix security for an example of where the security commands should go).
 
-``` file
+```text
 xrootd.seclib /usr/lib64/libXrdSec.so
 
 set CERTDIR=-certdir:/etc/grid-security/certificates
@@ -507,24 +588,6 @@ ofs.authorize
 root@host # service xrootd restart
 root@host # service cmsd restart
 ```
-
-**lcmaps notes**
-
-For recent versions of lcmaps (1.5+), VOMS signature verification is enabled by default. You may need to either disable it or install the `vo-client`.
-
-Installing vo-client:
-
-``` console
-root@host # yum install vo-client
-```
-
-Disabling vo verification can be done by adding a line to `/etc/sysconfig/xrootd`:
-
-``` file
-export LLGT_VOMS_DISABLE_CREDENTIAL_CHECK=1
-```
-
-This feature is evolving, so stay tuned for updates.
 
 #### Testing an XRootd Cluster with LCMAPS security enabled
 
@@ -588,11 +651,8 @@ See the CMS TWiki for more information:
 
 ### (Optional) Adding Hadoop support to XRootD
 
-!!! note
-    3.3 only
-
-Users with Hadoop-based storage under their XRootD installation have extra steps
-to configure more efficient access to Hadoop Stroage
+HDFS-based sites should utilize the `xrootd-hdfs` plugin to allow XRootD to access
+their storage.
 
 ``` console
 root@host # yum install xrootd-hdfs
@@ -648,6 +708,87 @@ FRMD\_INSTANCES="default"
 root@host # service frm\_xfrd start
 root@host # service frm\_purged start
 ```
+
+Installing a GridFTP Server
+---------------------------
+
+The Globus GridFTP server can be installed alongside an XRootD storage element to provide
+GridFTP-based access to the storage.
+
+!!! note "See Also"
+    OSG has extensive documentation on setting up a GridFTP server; this section is an
+    abbreviated version documenting the special steps needed for XRootD integration.
+    You may also find the following useful:
+
+    -   [Basic GridFTP Install](gridftp).  Additionally covers service planning topics.
+    -   [Load-balanced GridFTP Install](load-balanced-gridftp).  Covers the creation of
+        a load-balanced GridFTP service using multiple servers.
+
+### Engineering Considerations
+
+GridFTP utilizes the host certificate in `/etc/grid-security/hostcert.pem` and
+the key in `/etc/grid-security/hostkey.pem`.  See the [host certificate](../security/host-certs)
+documentation for information about generating these files.
+
+Additionally, GridFTP will use the following network ports:
+
+| Service Name | Protocol | Port Number | Inbound | Outbound | Comment |
+|--------------|----------|-------------|---------|----------|---------|
+| GridFTP data inbound | tcp | `GLOBUS_TCP_PORT_RANGE` | Y |   | contiguous range of ports |
+| GridFTP data outbound | tcp | `GLOBUS_TCP_SOURCE_RANGE` |   | Y | contiguous range of ports |
+| GridFTP control port | tcp | 2811 and `GLOBUS_TCP_SOURCE_RANGE` | Y |   | contiguous range of ports |
+
+### Installation
+
+GridFTP support for XRootD-based storage is provided by the `osg-gridftp-xrootd` meta-package:
+
+``` console
+root@host # yum install osg-gridftp-xrootd
+```
+
+### Configuration
+
+For information on how to configure authentication for your GridFTP installation, please refer to
+the [configuring authentication section of the GridFTP guide](gridftp#configuring-authentication).
+
+Edit `/etc/sysconfig/xrootd-dsi` to set `XROOTD_VMP` to use your Xrootd redirector.
+
+    :::bash
+    export XROOTD_VMP="%RED%redirector:1094:/local_path=/remote_path%ENDCOLOR%"
+
+!!! warning
+    The syntax of `XROOTD_VMP` is tricky; make sure to use the following guidance:
+
+    - **Redirector**: The hostname and domain of the local XRootD redirector server.
+    - **local\_path**: The path exported by the GridFTP server.
+    - **remote\_path**: The XRootD path that will be mounted at **local\_path**.
+
+When `xrootd-dsi` is enabled, GridFTP configuration changes should go into
+`/etc/xrootd-dsi/gridftp-xrootd.conf`, not `/etc/gridftp.conf`.  Sites should review any
+customizations made in the latter and copy them as necessary.
+
+You can use the FUSE mount in order to test POSIX access to xrootd in the GridFTP server.
+You should be able to run Unix commands such as `ls /mnt/xrootd` and see the contents of the
+XRootD server.
+
+### File Locations
+
+| Service/Process | Configuration File | Description |
+|-----------------|--------------------|-------------|
+| GridFTP | /etc/sysconfig/globus-gridftp-server | Environment variables for GridFTP and LCMAPS |
+| | /usr/share/osg/sysconfig/globus-gridftp-server-plugin | Where environment variables for GridFTP plugin are included.  **Do not edit** |
+| | /var/log/gridftp.log | GridFTP transfer log |
+| | /var/log/gridftp-auth.log | GridFTP authorization log |
+| Gratia Probe | /etc/gratia/xrootd-transfer/ProbeConfig | GridFTP Xrootd Transfer Probe configuration |
+| | /var/logs/gratia | Gratia logs |
+
+### Services
+
+| Software    | Service name                           | Notes                                                                 |
+|:------------|:--------------------------------------|:----------------------------------------------------------------------|
+| fetch-crl   | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca/#startstop-fetch-crl-a-quick-guide) |
+| Gridftp     | `globus-gridftp-server`               | See [GridFTP service start/stop](../data/gridftp/#managing-gridftp) documentation |
+
 
 Using XRootD
 ------------
