@@ -17,7 +17,7 @@ Host and OS
 
 -   OS is Red Hat Enterprise Linux 6, 7, and variants (see [details...](../common/yum.md))
 -   [EPEL](http://fedoraproject.org/wiki/EPEL) repos enabled.
--   A working XRootD Server. See [InstallXrootd](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd) for details.
+-   A working XRootD Server. See [the xrootd install documentation](install-xrootd) for details.
 -   Root access
 
 Users
@@ -47,7 +47,7 @@ Certificates
 | Host certificate            | `root`                     | `/etc/grid-security/hostcert.pem` `/etc/grid-security/hostkey.pem`                       |
 | Bestman service certificate | `bestman`                  | `/etc/grid-security/bestman/bestmancert.pem` `/etc/grid-security/bestman/bestmankey.pem` |
 
-[Instructions](../common/pki-cli.md) to request a service certificate.
+[Instructions](../security/host-certs.md) to request a service certificate.
 
 You will also need a copy of CA certificates (see below).
 
@@ -63,7 +63,7 @@ Networking
 Install Instructions
 =-===================
 
-Note that this package is primarily intended for Bestman-Gateway acting as an endpoint for XRootD server. If you have not installed an XRootD server yet, follow the instructions in [InstallXrootd](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd).
+Note that this package is primarily intended for Bestman-Gateway acting as an endpoint for XRootD server. If you have not installed an XRootD server yet, follow the instructions in [the xrootd install documentation](install-xrootd).
 
 
 
@@ -166,7 +166,7 @@ If you want to enable security for access to xrootd via xrootdfs you will need t
 
 6. Copy %RED%keyfile<span class="twiki-macro ENDCOLOR"></span> from redirector node to every data server node and the xrootdfs node. Make sure that this file is owned by the `xrootd` user.
 
-7. Restart xrootd cluster by following [these instructions](https://twiki.opensciencegrid.org/bin/view/SoftwareTeam/HowToInstallXrootd)
+7. Restart xrootd cluster by following [these instructions](install-xrootd)
 8. On xroodfs node execute mount:
 
         :::console

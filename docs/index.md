@@ -6,12 +6,12 @@ Welcome to the home page of the Open Science Grid (OSG) Site Administrator docum
 - If you are a researcher interested in using OSG resources, you can find user documentation [here](https://support.opensciencegrid.org/support/home). 
 - If you'd like to learn more about the OSG and our mission, visit our website [here](https://www.opensciencegrid.org/).
 
-This document outlines the overall installation process for an OSG site and provides many links into detailed installation, configuration, troubleshooting, and similar pages. If you do not see software-related technical documentation listed here, try the search bar to the left or contacting us at [goc@opensciencegrid.org](mailto:goc@opensciencegrid.org).
+This document outlines the overall installation process for an OSG site and provides many links into detailed installation, configuration, troubleshooting, and similar pages. If you do not see software-related technical documentation listed here, try the search bar to the left or contacting us at [help@opensciencegrid.org](mailto:help@opensciencegrid.org).
 
 Plan the Site
 -------------
 
-If you have not done so already, [plan the overall architecture of your OSG site](site-planning). It is recommended that your plan be sufficiently detailed to include the OSG hosts that are needed and the main software components for each host. Be sure to consider [the operating systems that OSG supports](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SupportedOperatingSystems). For example, a basic site might include:
+If you have not done so already, [plan the overall architecture of your OSG site](site-planning). It is recommended that your plan be sufficiently detailed to include the OSG hosts that are needed and the main software components for each host. Be sure to consider [the operating systems that OSG supports](release/supported_platforms). For example, a basic site might include:
 
 | Purpose              | Host                                | Major Software                                           |
 |:---------------------|:------------------------------------|:---------------------------------------------------------|
@@ -23,7 +23,7 @@ Prepare the Batch System
 
 The assumption is that you have an existing batch system at your site. Currently, we support [HTCondor](http://research.cs.wisc.edu/htcondor/), [LSF](http://www-03.ibm.com/systems/platformcomputing/products/lsf/), [PBS](http://www.pbsworks.com) and [TORQUE](http://www.adaptivecomputing.com/products/open-source/torque/), [SGE](http://en.wikipedia.org/wiki/Oracle_Grid_Engine), and [Slurm](http://slurm.schedmd.com) batch systems.
 
-For smaller sites (less than 50 worker nodes), the most common way to add a site to OSG is to install the OSG Compute Element (CE) on the central host of your batch system.  At such a site - especially if you have minimal time to maintain a CE - you may want to contact <mailto:goc@opensciencegrid.org> to ask about using an OSG-hosted CE instead of running your own.  Before proceeding with an install, be sure that you can submit and successfully run a job from your OSG CE host into your batch system.
+For smaller sites (less than 50 worker nodes), the most common way to add a site to OSG is to install the OSG Compute Element (CE) on the central host of your batch system.  At such a site - especially if you have minimal time to maintain a CE - you may want to contact <mailto:help@opensciencegrid.org> to ask about using an OSG-hosted CE instead of running your own.  Before proceeding with an install, be sure that you can submit and successfully run a job from your OSG CE host into your batch system.
 
 Add OSG Software
 ----------------
@@ -46,9 +46,8 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 
 -   [Installing the grid certificate authorities (CAs)](common/ca)
 -   [How do I get PKI host and service X.509 certificates?](security/host-certs)
--   [Automatically updating the grid certificate authorities (CAs)](common/osg-ca-certs-updater)
--   [SHA-2 certificates and minimum required OSG software versions](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/SHA2Compliance)
--   [OSG PKI command line client reference](common/pki-cli)
+-   [Automatically updating the grid certificate authorities (CAs)](security/certificate-management)
+-   [OSG PKI command line client reference](security/certificate-management)
 
 ### Adding OSG Software to Worker Nodes ###
 
@@ -62,14 +61,13 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 
 ### Installing and Configuring the Compute Element ###
 
--   [Preparing to install the compute element](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/PreparingComputeElement)
 -   Install the compute element (HTCondor-CE and other software):
     -   [Overview and architecture](compute-element/htcondor-ce-overview)
     -   [Install HTCondor-CE](compute-element/install-htcondor-ce)
     -   [Configure the HTCondor-CE job router](compute-element/job-router-recipes), including common recipes
     -   [Troubleshooting HTCondor-CE installations](compute-element/troubleshoot-htcondor-ce)
     -   [Submitting jobs to HTCondor-CE](compute-element/submit-htcondor-ce)
--   [Troubleshooting osg-configure](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootingOsgConfigure)
+-   [`osg-configure` Reference](other/configuration-with-osg-configure)
 
 ### Installing and Configuring Other Nodes ###
 
@@ -78,7 +76,6 @@ All of these node types and their services are optional, although OSG requires t
 -   [Install Frontier Squid, the HTTP caching proxy service](data/frontier-squid)
 -   RSV monitoring to monitor and report to OSG on the health of your site
     -   [Install RSV](monitoring/install-rsv)
-    -   [Troubleshooting RSV](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/TroubleshootRsv)
 -   [Install the GlideinWMS VO Frontend](other/install-gwms-frontend) if your want your users’ jobs to run on the OSG
     -   [Install the RSV GlideinWMS Tester](monitoring/install-rsv-gwms-tester) if you want to test your front-end's ability to submit jobs to sites in the OSG
 -   Storage element (pick one):
@@ -86,13 +83,13 @@ All of these node types and their services are optional, although OSG requires t
         -   [Install standalone OSG GridFTP](data/gridftp): GridFTP server
         -   (optional) [Install load-balanced OSG GridFTP](data/load-balanced-gridftp): when a single GridFTP server isn't enough
     -   BeStMan
-        -   [Install Bestman SE](data/bestman-install): BeStMan2 SRM server + GridFTP server
-        -   [Install Bestman Gateway Hadoop](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoop200SE): BeStMan2 SRM server + GridFTP server + Hadoop
+        -   [Install Bestman on POSIX](data/bestman-install): BeStMan2 SRM server + GridFTP server
+        -   [Install Bestman on Hadoop](data/install-hadoop-2-0-0): BeStMan2 SRM and GridFTP servers on the Hadoop Distributed File System
     -   Hadoop Distributed File System (HDFS)
-        -   [Hadoop Overview](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HadoopOverview): HDFS information, planning, and guides
+        -   [Hadoop Overview](data/hadoop-overview): HDFS information, planning, and guides
     -   XRootD
         -   [XRootd Overview](data/xrootd-overview): XRootD information, planning, and guides
-        -   [Install Xrootd Server](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallXrootd): XRootD redirector installation
+        -   [Install Xrootd Server](data/install-xrootd): XRootD redirector installation
         -   [Install BeStMan-Gateway XRootD](data/install-bestman-xrootd): BeStMan2 SRM server + GridFTP server + XRootD fuse
 
 Test OSG Software

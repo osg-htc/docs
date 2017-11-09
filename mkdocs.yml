@@ -1,6 +1,7 @@
 site_name: OSG Documentation
 site_url: https://opensciencegrid.github.io/docs/
 repo_url: https://github.com/opensciencegrid/docs/
+google_analytics: ['UA-69012-29', 'opensciencegrid.github.io']
 theme:
   name: readthedocs
   custom_dir: osgthedocs
@@ -40,15 +41,12 @@ pages:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host Certificates': 'security/host-certs.md'
   - 'User Certificates': 'security/user-certs.md'
-  - 'Managing CAs': 'security/osg-ca-manage.md'
+  - 'Certificate Management Reference': 'security/certificate-management.md'
 - Common:
   - 'Install Best Practices': 'common/install-best-practices.md'
   - 'CA Certificates': 'common/ca.md'
-  - 'OSG CA Certificates Updater': 'common/osg-ca-certs-updater.md'
   - 'Yum Repos': 'common/yum.md'
   - 'Java 7': 'common/openjdk7.md'
-- Usage Guides:
-  - 'Certificate Tools': 'common/pki-cli.md'
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
 - Other:
   - 'GSI-enabled SSH': 'other/gsissh.md'
@@ -76,6 +74,8 @@ pages:
   - 'Worker node glexec Install': 'worker-node/install-glexec.md'
   - 'Install VOMS': 'other/install-voms.md'
 - 'Get Help': 'common/help.md'
+- 'OSG Release 3.4.4-3': 'release/3.4/release-3-4-4-3.md'
+- 'OSG Release 3.3.29-3': 'release/3.3/release-3-3-29-3.md'
 - 'OSG Release 3.4.4-2': 'release/3.4/release-3-4-4-2.md'
 - 'OSG Release 3.3.29-2': 'release/3.3/release-3-3-29-2.md'
 - 'OSG Release 3.4.4': 'release/3.4/release-3-4-4.md'

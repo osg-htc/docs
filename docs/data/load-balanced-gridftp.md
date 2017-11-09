@@ -31,7 +31,7 @@ The number of GridFTP servers that you should run is determined first and foremo
 
 #### Shared file system
 
-The number of GridFTP servers can also be determined by your hardware needs, which are determined by your choice of shared file system. If you choose a POSIX-based shared file system, plan for machines with more cores, or more GridFTP hosts to distribute the CPU load. If you are running [GridFTP with Hadoop](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoop200SE#Standalone_Gridftp_Node_Installa), plan for machines with more memory, or more GridFTP hosts to distribute the memory load.
+The number of GridFTP servers can also be determined by your hardware needs, which are determined by your choice of shared file system. If you choose a POSIX-based shared file system, plan for machines with more cores, or more GridFTP hosts to distribute the CPU load. If you are running [GridFTP with Hadoop](install-hadoop-2-0-0#standalone-gridftp-node-installation), plan for machines with more memory, or more GridFTP hosts to distribute the memory load.
 
 !!! note
     If you determine that you need only a single GridFTP host, you do not need load balancing. Instead, follow the [standalone-GridFTP installation guide](gridftp).
@@ -47,7 +47,7 @@ Before adding your GridFTP hosts to the load-balanced system, each host requires
 
 ### Acquiring service certificate(s)
 
-When authenticating with a GridFTP server, clients verify that the server's host certificate matches the hostname of the server. In the case of a load-balanced GridFTP system, clients contact the GridFTP server through the virtual hostname, so the GridFTP server will have to present a certificate containing the virtual hostname as well as the GridFTP server's hostname. Use the [OSG PKI tools](../common/pki-cli) to request these types of certificates.
+When authenticating with a GridFTP server, clients verify that the server's host certificate matches the hostname of the server. In the case of a load-balanced GridFTP system, clients contact the GridFTP server through the virtual hostname, so the GridFTP server will have to present a certificate containing the virtual hostname as well as the GridFTP server's hostname. Use the [OSG PKI tools reference](../security/certificate-management.md) for more information on how to request these types of certificates.
 
 If your GridFTP servers are also running XRootD, you will need unique certificates for each GridFTP server. Otherwise, you can request a single certificate that can be shared among the GridFTP servers.
 

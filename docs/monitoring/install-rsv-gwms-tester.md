@@ -213,4 +213,4 @@ Reference
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` |
 | Host key         | `root`                     | `/etc/grid-security/hostkey.pem`  |
 
-Find instructions to request a host certificate [here](../common/pki-cli.md).
+Find instructions to request a host certificate [here](../security/host-certs.md).

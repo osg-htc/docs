@@ -13,7 +13,7 @@ The GridFTP package contains components necessary to set up a stand-alone gsiftp
 -   A simple front-end to a filesystem allowing access over WAN - for example NFS.
 
 !!! note
-    This document is for a standalone GridFTP server on top of POSIX storage.  [See this page](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallHadoop200SE) for installation and configuration of a GridFTP server on top of the Hadoop Distributed File System.
+    This document is for a standalone GridFTP server on top of POSIX storage.  [See this page](install-hadoop-2-0-0) for installation and configuration of a GridFTP server on top of the Hadoop Distributed File System.
 
 Before Starting
 ---------------
@@ -206,7 +206,7 @@ Reference
 |:-----------------|:---------------------------|:------------------------------------------------------------------------------|
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` and `/etc/grid-security/hostkey.pem` |
 
-[Instructions](../common/pki-cli.md) to request a service certificate.
+[Instructions](../security/host-certs.md) to request a service certificate.
 
 You will also need a copy of CA certificates.
 
@@ -217,8 +217,6 @@ For this package to function correctly, you will have to create the users needed
 For example, VOs newly-added to the LCMAPS VOMS configuration will not be able to transfer files until the corresponding Unix user account is created.
 
 ### Networking
-
-For more details on overall firewall configuration, please see our [firewall documentation](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/FirewallInformation).
 
 | Service Name            | Protocol | Port Number               | Inbound | Outbound | Comment                                 |
 |:------------------------|:---------|:--------------------------|:--------|:---------|:----------------------------------------|

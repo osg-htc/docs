@@ -34,7 +34,7 @@ Architecture
 Note that these components are not necessarily mutually exclusive. For instance, you may consider having your GridFTP server co-located on the SRM node. Alternatively, you can locate a client (or even a GridFTP node) co-located on each data node. That way, each data node also acts as an access point to the hadoop cluster.
 
 !!! note
-    Total installation time, on an average, should not exceed 8 to 24 man-hours. If your site needs further assistance to help expedite, please email <mailto:goc@opensciencegrid.org>.
+    Total installation time, on an average, should not exceed 8 to 24 man-hours. If your site needs further assistance to help expedite, please email <mailto:help@opensciencegrid.org>.
 
 Host and OS
 -----------
@@ -756,174 +756,6 @@ srm-copy file:////tmp/test1  srm://BeStMan_host:secured_http_port/srm/v2/server\
 
 The `srm-ping` tool should return a valid mapping `gumsIDMapped` that is not null
 
-Installing Hadoop Storage Reports (Optional)
-============================================
-
-\***NOTE the GratiaReporting rpm has not yet been migrated to the new osg repos and this section is subject to change. Please skip this section until this warning goes away or request Nebraska to host your reports**
-
-!!! note
-    The Hadoop Storage Reports may be installed on any node that has access to a local Gratia Collector
-
-The Hadoop storage reports provides a daily report on the status and usage of your SE. This serves as a handy tool for both site administrators and site executives. An example report is copied at the end of this guide.
-
-<details>
-  <summary>Show Hadoop Storage Reports information</summary>
-
-Prerequisites
--------------
-
-1.  A working HDFS installation
-2.  A local [Gratia Collector](https://twiki.opensciencegrid.org/bin/oops/Trash/ReleaseDocumentationGratiaSiteCollector) installed
-3.  A Hadoop Storage Probe installed and configured to point to the local Gratia Collector
-
-Installation
-------------
-
-``` console
-[root@client ~]$ yum install GratiaReporting
-```
-
-Updates can be installed with:
-
-``` console
-[root@client ~]$ yum upgrade GratiaReporting
-```
-
-Configuration
--------------
-
-This RPM uses Linux-standard file locations. Here are the most relevant file and directory locations:
-
-|                       |                |                                                                                       |
-|-----------------------|----------------|---------------------------------------------------------------------------------------|
-| Purpose               | Needs Editing? | Location                                                                              |
-| Report Configuration  | Yes            | /etc/gratia\_reporting                                                                |
-| Cron template         | Yes            | /etc/gratia\_reporting/gratia\_reporting/gratia\_reporting.cron (move to /etc/cron.d) |
-| Logging Configuration | No             | /etc/gratia\_reporting/logging.cfg                                                    |
-| Log files             | No             | /var/log/gratia\_reporting.log                                                        |
-
-### Configuration file
-
-Copy the file `/etc/gratia_reporting/reporting.cfg` to a new filename in `/etc/gratia_reporting` (for example, `/etc/gratia_reporting/reporting_cms.cfg`). You will do this once for every report you want to send out.
-
-|           |               |                                                                                                                                                                                                                                                                                                                                         |
-|-----------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Attribute | Needs Editing | Value                                                                                                                                                                                                                                                                                                                                   |
-| SiteName  | Yes           | Set to the resource group name of your SE as registered in OIM.                                                                                                                                                                                                                                                                         |
-| database  | Maybe         | Set to the database section containing the login details for your Gratia Collector (a few, non-functioning examples sections are included). Installing a Gratia Collector is [covered here](https://twiki.opensciencegrid.org/bin/oops/Trash/ReleaseDocumentationGratiaSiteCollector), but ask around on osg-hadoop: Nebraska will usually run these reports for you if requested. |
-| toNames   | Yes           | Python list for the "to names" for the report email.                                                                                                                                                                                                                                                                                    |
-| toEmails  | Yes           | Python list for the "to emails" for the report email.                                                                                                                                                                                                                                                                                   |
-| smtphost  | Maybe         | Hostname of a SMTP server that accepts email from this host.                                                                                                                                                                                                                                                                            |
-| fromName  | Maybe         | Set to the "from name" for the report email.                                                                                                                                                                                                                                                                                            |
-| fromEmail | Maybe         | Set to the "from email" for the report email.                                                                                                                                                                                                                                                                                           |
-
-### Cron
-
-Copy the file `/etc/gratia_reporting/gratia_reporting.cron` to `/etc/cron.d`. There is one line per report; comment out all except the hadoop report. It is the line containing `-n hadoop`. Update the line to point at your new configuration file.
-
-</details>
-
-<details>
-  <summary>Expand sample report from the Nebraska HDFS instance</summary>
-    <p>
-
-``` file
-============================================================
-  The Hadoop Chronicle | 85 % | 2009-09-25
-============================================================
-
---------------------
-| Global Storage   |
------------------------------------------------------
-|                  |  Today  | Yesterday | One Week |
------------------------------------------------------
-| Total Space (GB) | 311,470 |   357,818 |  368,711 |
-| Free Space (GB)  |  47,304 |    93,719 |  128,391 |
-| Used Space (GB)  | 264,166 |   264,100 |  240,320 |
-| Used Percentage  |     85% |       74% |      65% |
------------------------------------------------------
---------------
-| CMS /store |
--------------------------------------------------------------------------------------------------------------------------------------
-|           Path           | Size(GB) | 1 Day Change | 7 Day Change | Remaining | # Files | 1 Day Change | 7 Day Change | Remaining |
--------------------------------------------------------------------------------------------------------------------------------------
-| /store/user              |      771 |            0 | UNKNOWN      | NO QUOTA  |   4,859 |            0 | UNKNOWN      | NO QUOTA  |
-| /store/mc                |   95,865 |         -353 | UNKNOWN      | NO QUOTA  |  86,830 |         -171 | UNKNOWN      | NO QUOTA  |
-| /store/test              |        0 |            0 | UNKNOWN      | NO QUOTA  |     569 |           25 | UNKNOWN      | NO QUOTA  |
-| /store/results           |      237 |            0 | UNKNOWN      | NO QUOTA  |     198 |            0 | UNKNOWN      | NO QUOTA  |
-| /store/phedex_monarctest |      729 |            0 | UNKNOWN      | NO QUOTA  |     257 |            0 | UNKNOWN      | NO QUOTA  |
-| /store/unmerged          |    3,681 |            3 | UNKNOWN      | NO QUOTA  |  35,687 |           23 | UNKNOWN      | NO QUOTA  |
-| /store/CSA07             |        0 |            0 | UNKNOWN      | NO QUOTA  |       0 |            0 | UNKNOWN      | NO QUOTA  |
-| /store/data              |        0 |            0 | UNKNOWN      | NO QUOTA  |       0 |            0 | UNKNOWN      | NO QUOTA  |
-| /store/PhEDEx_LoadTest07 |        0 |          -21 | UNKNOWN      | NO QUOTA  |       1 |          -22 | UNKNOWN      | NO QUOTA  |
--------------------------------------------------------------------------------------------------------------------------------------
-
--------------------
-| CMS /store/user |
-----------------------------------------------------------------------------------------------------------------------------------
-|          Path         | Size(GB) | 1 Day Change | 7 Day Change | Remaining | # Files | 1 Day Change | 7 Day Change | Remaining |
-----------------------------------------------------------------------------------------------------------------------------------
-| /store/user/hpi       |        0 |            0 | UNKNOWN      |     1,099 |      15 |            0 | UNKNOWN      |     9,985 |
-| /store/user/gattebury |        0 |            0 | UNKNOWN      |     1,100 |       1 |            0 | UNKNOWN      |     9,999 |
-| /store/user/mkirn     |        0 |            0 | UNKNOWN      |     1,100 |       3 |            0 | UNKNOWN      |     9,997 |
-| /store/user/spadhi    |       12 |            0 | UNKNOWN      |     1,062 |   1,114 |            0 | UNKNOWN      |     8,886 |
-| /store/user/creed     |        0 |            0 | UNKNOWN      |     1,100 |       0 |            0 | UNKNOWN      |    10,000 |
-| /store/user/rossman   |        0 |            0 | UNKNOWN      |     1,099 |       5 |            0 | UNKNOWN      |     9,995 |
-| /store/user/eluiggi   |        0 |            0 | UNKNOWN      |     1,099 |       6 |            0 | UNKNOWN      |     9,994 |
-| /store/user/ewv       |        7 |            0 | UNKNOWN      |     1,081 |     284 |            0 | UNKNOWN      |     9,716 |
-| /store/user/test      |        0 |            0 | UNKNOWN      | NO QUOTA  |     167 |            0 | UNKNOWN      |     9,833 |
-| /store/user/schiefer  |      751 |            0 | UNKNOWN      |     1,044 |   3,264 |            0 | UNKNOWN      |     6,736 |
-----------------------------------------------------------------------------------------------------------------------------------
-
-----------------
-| Hadoop /user |
-----------------------------------------------------------------------------------------------------------------------------------
-|       Path      | Size(GB) | 1 Day Change | 7 Day Change | Remaining | # Files | 1 Day Change | 7 Day Change |    Remaining    |
-----------------------------------------------------------------------------------------------------------------------------------
-| /user/djbender  |        0 |            0 | UNKNOWN      | NO QUOTA  |       1 |            0 | UNKNOWN      | NO QUOTA        |
-| /user/lhcb      |        0 |            0 | UNKNOWN      |        54 |       0 |            0 | UNKNOWN      | NO QUOTA        |
-| /user/dzero     |      897 |            0 | UNKNOWN      |       347 |  89,376 |            0 | UNKNOWN      |         410,624 |
-| /user/bloom     |      454 |            0 | UNKNOWN      | NO QUOTA  |   1,410 |            0 | UNKNOWN      | NO QUOTA        |
-| /user/uscms01   |  101,384 |         -362 | UNKNOWN      | NO QUOTA  | 129,739 |         -141 | UNKNOWN      | NO QUOTA        |
-| /user/cdf       |        0 |            0 | UNKNOWN      | NO QUOTA  |       6 |            0 | UNKNOWN      | 536,870,911,994 |
-| /user/osg       |        1 |            0 | UNKNOWN      | NO QUOTA  |       3 |            0 | UNKNOWN      |   5,368,709,117 |
-| /user/dweitzel  |       20 |            0 | UNKNOWN      | NO QUOTA  |   2,282 |            0 | UNKNOWN      | NO QUOTA        |
-| /user/gattebury |        5 |            0 | UNKNOWN      | NO QUOTA  |  10,002 |            0 | UNKNOWN      | NO QUOTA        |
-| /user/brian     |       72 |            0 | UNKNOWN      | NO QUOTA  |   2,697 |            0 | UNKNOWN      | NO QUOTA        |
-| /user/usatlas   |        0 |            0 | UNKNOWN      | NO QUOTA  |       0 |            0 | UNKNOWN      | NO QUOTA        |
-| /user/powers    |        1 |            1 | UNKNOWN      | NO QUOTA  |     211 |          211 | UNKNOWN      | NO QUOTA        |
-| /user/ifisk     |        0 |            0 | UNKNOWN      | NO QUOTA  |       1 |            0 | UNKNOWN      | NO QUOTA        |
-| /user/gpn       |      261 |           -5 | UNKNOWN      |     1,360 |   3,805 |            1 | UNKNOWN      |         996,195 |
-| /user/engage    |      461 |          367 | UNKNOWN      | NO QUOTA  |      16 |           13 | UNKNOWN      |         999,984 |
-| /user/clundst   |        0 |            0 | UNKNOWN      | NO QUOTA  |       6 |            0 | UNKNOWN      | NO QUOTA        |
-| /user/che       |        0 |            0 | UNKNOWN      | NO QUOTA  |      13 |            0 | UNKNOWN      | NO QUOTA        |
-| /user/store     |        0 |            0 | UNKNOWN      | NO QUOTA  |       0 |            0 | UNKNOWN      | NO QUOTA        |
-| /user/dteam     |        0 |            0 | UNKNOWN      |        53 |      18 |            0 | UNKNOWN      | NO QUOTA        |
-| /user/root      |        0 |            0 | UNKNOWN      | NO QUOTA  |       1 |            0 | UNKNOWN      | NO QUOTA        |
-----------------------------------------------------------------------------------------------------------------------------------
-
--------------
-| FSCK Data |
--------------
- Total size:    114592906796932 B (Total open files size: 38923141120 B)
- Total dirs:    41293
- Total files:   295431 (Files currently being written: 38)
- Total blocks (validated):  1356788 (avg. block size 84458962 B) (Total open file blocks (not validated): 297)
- Minimally replicated blocks:   1356788 (100.0 %)
- Over-replicated blocks:    1 (7.370348E-5 %)
- Under-replicated blocks:   0 (0.0 %)
- Mis-replicated blocks:     0 (0.0 %)
- Default replication factor:    3
- Average block replication: 2.2943976
- Corrupt blocks:        0
- Missing replicas:      0 (0.0 %)
- Number of data-nodes:      101
- Number of racks:       1
-The filesystem under path '/' is HEALTHY
-```
-</p>
-</details>
-
 Troubleshooting
 ===============
 
@@ -1159,7 +991,7 @@ You will see the entire configuration in XML format, for example:
 </p>
 </details>
 
-Please refer to [OSG Hadoop debug webpage](https://twiki.opensciencegrid.org/bin/view/Storage/HadoopDebug) and [Apache Hadoop FAQ webpage](http://wiki.apache.org/hadoop/FAQ) for answers to common questions/concerns
+Please refer to the [Apache Hadoop FAQ webpage](http://wiki.apache.org/hadoop/FAQ) for answers to common questions/concerns
 
 FUSE
 ----
@@ -1304,11 +1136,6 @@ For a full set of help options, see [Help Procedure](../common/help).
 
 References
 ==========
-
--   [Instructions for Upgrading from Hadoop 0.19 to Hadoop 0.20](https://twiki.opensciencegrid.org/bin/view/Storage/HadoopUpgrade)
-    -   \***NOTE these instructions are subject to change and the upgrade doc linked is intended to upgrade from the caltech hosted 0.19 rpms in the caltech hosted 0.20 rpms, NOT the new rpms hosted in the new OSG repos.**
-
-**Benchmarking**
 
 -   [Using Hadoop as a Grid Storage Element](http://www.iop.org/EJ/article/1742-6596/180/1/012047/jpconf9_180_012047.pdf), *Journal of Physics Conference Series, 2009*.
 -   [Hadoop Distributed File System for the Grid](http://osg-docdb.opensciencegrid.org/0009/000911/001/Hadoop.pdf), *IEEE Nuclear Science Symposium, 2009*.

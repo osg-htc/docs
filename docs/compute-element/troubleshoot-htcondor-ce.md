@@ -964,7 +964,7 @@ If you are still experiencing issues after using this document, please let us kn
 
         root@host # osg-system-profiler
 
-3.  Start a support request using [a web interface](https://ticket.opensciencegrid.org/submit) or by email to <goc@opensciencegrid.org>
+3.  Start a support request using [a web interface](https://ticket.opensciencegrid.org/submit) or by email to <help@opensciencegrid.org>
     -   Describe issue and expected or desired behavior
     -   Include basic HTCondor-CE and related information
     -   Attach the osg-system-profiler output

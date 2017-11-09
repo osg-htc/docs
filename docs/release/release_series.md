@@ -68,7 +68,7 @@ Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4
 
 This command will update **all** packages on your system.
 
-**Troubleshooting** If you are not having the expected result or having problems with Yum please see the [Yum troubleshooting guide](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRpmBasics#Troubleshooting)
+**Troubleshooting** If you are not having the expected result or having problems with Yum please see the [Yum troubleshooting guide](../release/yum-basics#troubleshooting)
 
 Migrating from edg-mkgridmap to LCMAPS VOMS Plugin
 --------------------------------------------------
@@ -167,7 +167,7 @@ To cleanly uninstall CEMon from your CE, perform the following procedure (after 
 References
 ==========
 
--   [YUM Repositories](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRepositories)
--   [Basic use of Yum](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/YumRpmBasics)
--   [Best practices in using Yum](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallBestPractices)
+-   [Yum repositories](../common/yum)
+-   [Basic use of Yum](../release/yum-basics)
+-   [Yum best practices](../common/install-best-practices)
 

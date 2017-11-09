@@ -61,7 +61,8 @@ The Glidein WMS Frontend installation will create the following users unless the
 | `frontend` | none        | This user runs the glideinWMS VO frontend. It also owns the credentials forwarded to the factory to use for the glideins.      |
 | `gratia`   | none        | Runs the Gratia probes to collect accounting data (optional see [the Gratia section below](#adding-gratia-accounting-and-a-local-monitoring-page-on-a-production-server)) |
 
-Note that if uid 48 is already taken but not used for the appropriate users, you will experience errors. [Details...](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/KnownProblems#Reserved_user_ids_especially_for)
+!!! warning
+    UID 48 is reserved by RedHat for user `apache`.  If it is already taken by a different username, you will experience errors.
 
 Credentials and Proxies
 -----------------------
@@ -93,7 +94,7 @@ This document has a [proxy configuration section](#proxy-configuration) that use
 |:-----------------|:---------------------------|:------------------------------------------------------------------------------|
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem`            `/etc/grid-security/hostkey.pem` |
 
-[Here](../common/pki-cli.md) are instructions to request a host certificate.
+[Here](../security/host-certs.md) are instructions to request a host certificate.
 
 
 Networking
@@ -155,7 +156,7 @@ Refer to installation of the [CA certificates](../common/ca)
 Install HTCondor
 ----------------
 
-Most required software is installed from the Frontend RPM installation. HTCondor is the only exception since there are [many different ways to install it](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CondorInformation), using the RPM system or not. You need to have HTCondor installed before installing the Glidein WMS Frontend. If yum cannot find a HTCondor RPM, it will install the dummy `empty-condor` RPM, assuming that you installed HTCondor using a tarball distribution.
+Most required software is installed from the Frontend RPM installation. You need to have HTCondor installed before installing the Glidein WMS Frontend. If yum cannot find a HTCondor RPM, it will install the dummy `empty-condor` RPM, assuming that you installed HTCondor using a tarball distribution.
 
 If you don't have HTCondor already installed, you can install the HTCondor RPM from the OSG repository:
 
@@ -164,8 +165,6 @@ root@host # yum install condor.x86_64
 # If you have a 32 bit host use instead:
 root@host # yum install condor.i386
 ```
-
-See [this HTCondor document](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/CondorInformation) for more information on the different options.
 
 Download and install the VO Frontend RPM
 ----------------------------------------
@@ -936,10 +935,8 @@ References
 Definitions:
 
 -   What is a [Virtual Organisation](https://www.opensciencegrid.org/about/organization/)
--   [Introduction to the Grid for users/scientists](http://twiki.opensciencegrid.org/bin/view/Documentation/UsingTheGrid)
 
 Documents about the Glidein-WMS system and the VO frontend:
 
 -   <http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/>
 -   <http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/manual/>
--   [How to setup a Submit host flocking to the VO Frontend](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GlideinWMSCampusGrid)
