@@ -1,17 +1,14 @@
-Setting up a Software Repository
-================================
-
-About OASIS
------------
+Install an OASIS Repository
+===========================
 
 OASIS (the **OSG** **A**pplication **S**oftware **I**nstallation **S**ervice) is an infrastructure, based on
 [CVMFS](https://cvmfs.readthedocs.io), for distributing software throughout the OSG.  Once software is installed into
-an OASIS repository, it should be available across about 90% of the OSG within an hour or two.
+an OASIS repository, the goal is to make it available across about 90% of the OSG within an hour.
 
 OASIS consists of keysigning infrastructure, a content distribution network (CDN), and a shared CVMFS repository that
-is hosted by the OSG.  Many use cases will be covered by utilizing the [shared repository](update-oasis); this documen
-covers how to setup and host your own CVMFS _repository server_.  This server will  distribute softwarevia OASIS, but
-be hosted and operated externally from the OSG project.
+is hosted by the OSG.  Many use cases will be covered by utilizing the [shared repository](update-oasis); this document
+covers how to install, configure, and host your own CVMFS _repository server_.  This server will distribute software
+via OASIS, but be hosted and operated externally from the OSG project.
 
 OASIS-based distribution and key signing is available to OSG VOs or repositories affiliated with an OSG VO.
 See the [policy page](https://opensciencegrid.github.io/technology/policy/external-oasis-repos/) for more information
@@ -42,30 +39,40 @@ Additionally,
     RHEL7 only supports Overlay-FS if the underlying filesystem is `ext3` or `ext4`; make sure `/var/spool/cvmfs`
     is one of these filesystem types.
 
-    If this is not possible, add `CVMFS_DONT_CHECK_OVERLAYFS_VERSION=yes` to your CVMFS configuration.  It is believed
+    If this is not possible, add `CVMFS_DONT_CHECK_OVERLAYFS_VERSION=yes` to your CVMFS configuration.  Using
     `xfs` will work if it was created with `ftype=1`
 
 Installation
 ------------
 
-This is the procedure for installing on a Redhat EL7-based system:
+### RHEL7-based Systems
+
+For a RHEL7-based system, installation is a straightforward install via `yum`:
 
 ``` console
 root@host # yum install cvmfs-server osg-oasis 
+```
+
+### RHEL6-based Systems
+
+A RHEL6 host needs additional steps in order to add the AUFS2 kernel module.
+
+``` console
+root@host # rpm -i https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm
+root@host # yum install --enablerepo=cernvm-kernel --disablerepo=cernvm kernel aufs2-util cvmfs-server.x86_64 cvmfs.x86_64 cvmfs-config-osg
+root@host # reboot
+```
+
+### Apache and Repository Mounts
+
+For all installs, we recommend mounting all the local repositories on startup:
+
+```console
 root@host # echo "cvmfs_server mount -a" >>/etc/rc.local
 root@host # chmod +x /etc/rc.local
 ```
 
-For a RedHat EL6-based system:
-
-``` console
-root@host # rpm -i https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm 
-root@host # yum install --enablerepo=cernvm-kernel --disablerepo=cernvm kernel aufs2-util cvmfs-server.x86_64 cvmfs.x86_64 cvmfs-config-osg 
-root@host # echo "cvmfs_server mount -a" >>/etc/rc.local 
-root@host # reboot
-```
-
-Once installed, Apache HTTPD should be configured to listen on port 8000, have the `KeepAlive` option enabled, and be
+The Apache HTTPD service should be configured to listen on port 8000, have the `KeepAlive` option enabled, and be
 started:
 
 ``` console
@@ -119,9 +126,10 @@ That should print several lines including some gibberish at the end.
 Host a Repository on OASIS
 ------------------------
 
-1.  **Verify your VO's OIM registration is up-to-date**.  All repositories need to be associated with a VO; the VO needs
-    to make sure an appropriate individual has the _OASIS manager_ role in OIM.  This individual will be responsible
-    for the contents of any of the VO's repositories and will be contacted in case of issues.
+1.  **Verify your VO's OIM registration is up-to-date**.  All repositories need to be associated with a VO; the VO
+    needs to assign an _OASIS manager_ in OIM who would be responsible for the contents of any of the VO's repositories
+    and will be contacted in case of issues. To designate an OASIS manager, have the VO manager update the
+    [OIM registration](https://oim.grid.iu.edu).
 
 2.  The repository administrator should **create a [support ticket](https://ticket.opensciencegrid.org/goc/submit)**
     using the following template:
@@ -188,7 +196,7 @@ Host a Repository on OASIS
 
 7.  (**OSG internal step**)
     The OSG representative then asks the administrator of the BNL stratum 1 to also add the new repository.
-    He should set up his Stratum-1 to read from
+    The BNL Stratum-1 operator should set the service to read from
     `http://oasis-replica.opensciencegrid.org:8000/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%`.
     When the BNL Stratum-1 operator has reported back that the replication is ready, the OSG representative reports in
     the ticket that the repository is fully replicated on the OSG and closes the ticket.
@@ -207,18 +215,16 @@ VO should open a GGUS ticket following EGI's [PROC20](https://wiki.egi.eu/wiki/P
 Change the URL of an external repository
 ----------------------------------------
 
-If necessary, it is possible to change the URL of the repository server:
-
-1.  The repository administrator opens a support ticket with the value of the new URL.
-2.  The OSG representative then changes the registered value in OIM for the VO in OASIS Repo URLs.
-
+If necessary, it is possible to change the URL of the repository server; simply have the repository administrator
+open a support ticket with the new value, and OSG operations will update OIM's OASIS repository URL for the VO.
 The GOC Stratum-1 will then be updated within an hour.
 
 Remove an external repository
 -----------------------------
 
 1.  If the repository has been replicated outside of the U.S., the repository service administrator should open a GGUS
-    ticket asking that the replication be removed from EGI Stratum-1s. Wait until this is done before proceeding 
+    ticket asking that the replication be removed from EGI Stratum-1s. Wait until this ticket is resolved before
+    proceeding.
 2.  The repository administrator opens an OSG support ticket asking to shut down the repository, giving the repository
     name (e.g., %RED%example.opensciencegrid.org%ENDCOLOR%) and the corresponding VO.
 3.  After validating the ticket submitter is authorized by the VO's OASIS manager, the OSG representative next deletes
@@ -244,17 +250,3 @@ Procedure to blank an externally-hosted repository
 2.  When it is time to put the repository back into production, the GOC representative runs `unblank_osg_repository`
     on `oasis-replica` and gives it the full name of the repository again. This will find the directory with the old
     timestamp and put it back into service. This step also attempts to `ssh` to the `oasis` machine.
-
-Policies
---------
-
-To help us provide the best operational setup possible, we have a few replication policies worth mentioning here:
-
-1.  OSG Operations only hosts the shared `oasis.opensciencegrid.org` repository; VO-dedicated software respositories
-    (such as `nova.opensciencegrid.org` for the NoVA VO) should be operated by the VO.
-2.  VOs are asked to either run their own repository or utilize the shared repository, but not both.
-3.  There is a finite amount of high-performance storage on the CDN.   A minimum of 100 GB per repository is guaranteed.
-    Larger limits may be requested.
-4.  VOs may ask the OSG to replicate their repositories to the European Grid Infrastructure (EGI); however, this can
-    only be done if the repository name ends in `.opensciencegrid.org`.
-
