@@ -27,8 +27,8 @@ pages:
   - 'Singularity': 'worker-node/install-singularity.md'
 - Data - HTTP & CVMFS:
   - 'Install HTTP Cache': 'data/frontier-squid.md'
-  - 'Update OASIS': 'data/update-oasis.md'
-  - 'External OASIS repositories': 'data/external-oasis-repos.md'
+  - 'Update OASIS Shared Repo': 'data/update-oasis.md'
+  - 'Install an OASIS Repo': 'data/external-oasis-repos.md'
 - Data - POSIX Storage:
   - 'Install GridFTP Server': 'data/gridftp.md'
   - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
