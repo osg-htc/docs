@@ -8,7 +8,7 @@ an OASIS repository, the goal is to make it available across about 90% of the OS
 OASIS consists of keysigning infrastructure, a content distribution network (CDN), and a shared CVMFS repository that
 is hosted by the OSG.  Many use cases will be covered by utilizing the [shared repository](update-oasis); this document
 covers how to install, configure, and host your own CVMFS _repository server_.  This server will distribute software
-via OASIS, but be hosted and operated externally from the OSG project.
+via OASIS, but will be hosted and operated externally from the OSG project.
 
 OASIS-based distribution and key signing is available to OSG VOs or repositories affiliated with an OSG VO.
 See the [policy page](https://opensciencegrid.github.io/technology/policy/external-oasis-repos/) for more information
@@ -30,14 +30,14 @@ Additionally,
 -   **Network ports:** This page will configure the repository to distribute using Apache HTTPD on port 8000.  At the
     minimum, the repository needs in-bound access from the OASIS CDN.
 -   **Disk space:** This host will need enough free disk space to host _two_ copies of the software: one compressed
-    and one uncompressed. `/srv/cvmfs` will hold all the published data, while `/var/spool/cvmfs` will contain all
-    the data in the current transaction.
+    and one uncompressed. `/srv/cvmfs` will hold all the published data (compressed and de-deuplicated).  The
+    `/var/spool/cvmfs` directory will contain all the data in all current transactions (uncompressed).
 -   **Root access** will be needed to install.  Software install will be done as an unprivileged user.
 -   **Yum** will need to be [configured to use the OSG repositories](../common/yum).
 
-!!! warning
-    RHEL7 only supports Overlay-FS if the underlying filesystem is `ext3` or `ext4`; make sure `/var/spool/cvmfs`
-    is one of these filesystem types.
+!!! warning "Overlay-FS limitations"
+    CVMFS on RHEL7 only supports Overlay-FS if the underlying filesystem is `ext3` or `ext4`; make sure
+    `/var/spool/cvmfs` is one of these filesystem types.
 
     If this is not possible, add `CVMFS_DONT_CHECK_OVERLAYFS_VERSION=yes` to your CVMFS configuration.  Using
     `xfs` will work if it was created with `ftype=1`
@@ -59,7 +59,7 @@ A RHEL6 host needs additional steps in order to add the AUFS2 kernel module.
 
 ``` console
 root@host # rpm -i https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm
-root@host # yum install --enablerepo=cernvm-kernel --disablerepo=cernvm kernel aufs2-util cvmfs-server.x86_64 cvmfs.x86_64 cvmfs-config-osg
+root@host # yum install --enablerepo=cernvm-kernel --disablerepo=cernvm kernel aufs2-util cvmfs-server.x86_64 osg-oasis
 root@host # reboot
 ```
 
@@ -82,7 +82,7 @@ root@host # chkconfig httpd on
 root@host # service httpd start
 ```
 
-!!! note
+!!! note "Check Firewalls"
     Make sure that port 8000 is available to the Internet.  Check the setting of the host- and site-level firewalls.
     The next steps will fail if the web server is not accessible.
 
@@ -109,7 +109,7 @@ The initial repository creation must be run as `root`:
 Here, we increase the number of open files, create the repository using the `mkfs` command, adjust the configuration,
 and then limit the hosts that are allowed to access the repo to the OSG CDN.
 
-!!! note
+!!! warning "Hardlink Limitations on EL6"
     If you might be hosting any hardlinks that span directories (e.g. publishing a `git` repository) and are using
     EL6 with aufs, make the following configuration change:
 
@@ -149,10 +149,9 @@ Host a Repository on OASIS
 
 4.  (**OSG internal step**)
     The OSG representative adds the repository URL in OIM under the VO's OASIS repository URLs. This should cause
-    the repository's configuration to be added to the GOC Stratum-0 within 15 minutes.  Within an hour step 8 is
-    completed, the repository should also be automatically added to the GOC and FNAL stratum 1s.
+    the repository's configuration to be added to the GOC Stratum-0 within 15 minutes.
 
-5.  (**OSG internal step**): If the respository ends in a new
+5.  (**OSG internal step**) If the respository ends in a new
     domain name that has not been distributed before, the OSG representative next places a copy of the `domain.name.pub`
     public key from `domain.name` into `/srv/etc/keys` on both `oasis-replica` and `oasis-replica-itb`. If the OSG
     representative does not have that key, he or she will ask the repository service representative how to obtain it.
@@ -227,13 +226,17 @@ Remove an external repository
     proceeding.
 2.  The repository administrator opens an OSG support ticket asking to shut down the repository, giving the repository
     name (e.g., %RED%example.opensciencegrid.org%ENDCOLOR%) and the corresponding VO.
-3.  After validating the ticket submitter is authorized by the VO's OASIS manager, the OSG representative next deletes
+3.  (**OSG internal step**)
+    After validating the ticket submitter is authorized by the VO's OASIS manager, the OSG representative next deletes
     the registered value for %RED%example.opensciencegrid.org%ENDCOLOR% in OIM for the VO in OASIS Repo URLs. 
-4.  The OSG representative adds the FNAL and BNL Stratum-1 operators to the ticket to asks them to remove the
+4.  (**OSG internal step**)
+    The OSG representative adds the FNAL and BNL Stratum-1 operators to the ticket to asks them to remove the
     repository.  Wait for the Stratum-1 operators to finish before proceeding.
-5.  The OSG representative then runs `cvmfs_server rmfs -f %RED%example.opensciencegrid.org%ENDCOLOR%`
+5.  (**OSG internal step**)
+    The OSG representative then runs `cvmfs_server rmfs -f %RED%example.opensciencegrid.org%ENDCOLOR%`
     and `rm -r /oasissrv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%` on `oasis-replica-itb` and `oasis-replica`
-6.  The OSG representative does `rm -r /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%` on `oasis-itb` and
+6.  (**OSG internal step**)
+    The OSG representative does `rm -r /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%` on `oasis-itb` and
     `oasis`.
 
 Procedure to blank an externally-hosted repository
