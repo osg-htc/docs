@@ -18,8 +18,6 @@ To begin the process to distribute software on OASIS using the service hosted at
 -   Register yourself in [OIM](http://oim.opensciencegrid.org/oim/home). To register, your certificate must be
     installed in your browser.  Clicking "Login" in OIM will prompt you to register if you are not already.
 -   Be associated with a [VO registered in OIM](http://oim.opensciencegrid.org/oim/vo).
--   Register your certificate in the VOMS for your Virtual Organization. Click on the VO name that you're associated
-    with in the above list and in the VO page click on the *"Membership Services URL"* to register with that VO VOMS.
 
 How to use OASIS
 ----------------
@@ -35,7 +33,7 @@ The GOC will enable OASIS for your VO in [OIM](https://oim.opensciencegrid.org/o
 The next step is to generate a proxy and log into `oasis-login.opensciencegrid.org` with `gsissh`. These commands should be run on a computer that has the [OSG worker node client](../worker-node/install-wn) software. First make sure that your grid certificate is installed in `~/.globus/usercred.p12` on that computer and that it is mode 600, then run these commands:
 
 ``` console
-user@host $ voms-proxy-init -voms %RED%VO%ENDCOLOR%
+user@host $ voms-proxy-init
 user@host $ gsissh -o GSSAPIDelegateCredentials=yes oasis-login.opensciencegrid.org
 ```
 
@@ -92,6 +90,4 @@ user@host $ date -d "1970-1-1 GMT + $(wget -qO- $(attr -qg host /cvmfs/oasis.ope
 References
 ----------
 
-[CERN CVMFS home page](https://twiki.cern.ch/twiki/bin/view/CvmFS)
-
-
+[CVMFS Documentation](https://cvmfs.readthedocs.io/en/stable/)
