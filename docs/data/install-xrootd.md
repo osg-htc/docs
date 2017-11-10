@@ -289,7 +289,7 @@ fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/x
 
 ### (Optional) Enabling a FUSE mount
 
-You can use a FUSE mount in order to test POSIX access to xrootd in the GridFTP server. Configure it using the following steps.
+XRootD storage can be mounted as a standard POSIX filesystem via FUSE, providing users with a more familiar interface..
 
 Modify **`/etc/fstab`** by adding the following entries:
 
