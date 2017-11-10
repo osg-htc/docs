@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Update OASIS - OSG Documentation</title>
+  <title>Update OASIS Shared Repo - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Update OASIS";
+    var mkdocs_page_name = "Update OASIS Shared Repo";
     var mkdocs_page_input_path = "data/update-oasis.md";
     var mkdocs_page_url = "/data/update-oasis/";
   </script>
@@ -165,11 +165,11 @@
         <li class=" current">
           
   
-    <a class="current" href="./">Update OASIS</a>
+    <a class="current" href="./">Update OASIS Shared Repo</a>
   
   <ul class="subnav">
       
-    <li class="toctree-l3"><a href="#updating-software-on-oasis">Updating Software on OASIS</a></li>
+    <li class="toctree-l3"><a href="#updating-software-in-oasis">Updating Software in OASIS</a></li>
     
         <ul>
         
@@ -187,7 +187,7 @@
         <li class="">
           
   
-    <a class="" href="../external-oasis-repos/">External OASIS repositories</a>
+    <a class="" href="../external-oasis-repos/">Install an OASIS Repo</a>
   
         </li>
         <li class="">
@@ -741,7 +741,7 @@
         
       
     
-    <li>Update OASIS</li>
+    <li>Update OASIS Shared Repo</li>
     <li class="wy-breadcrumbs-aside">
       
         <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/update-oasis.md"
@@ -754,20 +754,23 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="updating-software-on-oasis">Updating Software on OASIS<a class="headerlink" href="#updating-software-on-oasis" title="Permanent link">&para;</a></h1>
+                <h1 id="updating-software-in-oasis">Updating Software in OASIS<a class="headerlink" href="#updating-software-in-oasis" title="Permanent link">&para;</a></h1>
 <p>OASIS is the OSG Application Software Installation Service. It is the recommended method to install software on the Open Science Grid. It is implemented using CernVM FileSystem (CVMFS) technology.</p>
+<p>This document is a step by step explanation of how a Virtual Organization (VO) Software Adminstrator can enable the OASIS service and use it to publish and update software on OSG Worker Nodes under <code>/cvmfs/oasis.opensciencegrid.org</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The applicable software versions for this document are <strong>osg-version 3.1.13</strong> (or higher)</p>
+<ul>
+<li>For information on how to configure a client for OASIS see the <a href="../../worker-node/install-cvmfs">CVMFS installation documentation</a>.</li>
+<li>For information on hosting your own repository see the <a href="../external-oasis-repos">OASIS repository installation</a>.</li>
+</ul>
 </div>
-<p>This document is a step by step explanation of how a Virtual Organization (VO) Software Adminstrator can enable the OASIS service and use it to publish and update software on OSG Worker Nodes under /cvmfs/oasis.opensciencegrid.org. For information on how to configure a client for OASIS see the <a href="../../worker-node/install-cvmfs">OSG CVMFS Installation documentation</a>. For information on hosting your own opensciencegrid.org repository see <a href="../external-oasis-repos">this document</a>.</p>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
 <p>To begin the process to distribute software on OASIS using the service hosted at the OSG GOC, you must:</p>
 <ul>
-<li>have a personal grid certificate. The process for getting one is detailed <a href="https://www.opensciencegrid.org/bin/view/Documentation/Release3/CertificateUserGet">here</a>.</li>
-<li>register that certificate in <a href="http://oim.opensciencegrid.org/oim/home">OIM</a>. In order to register, the certificate has to be installed in your browser. If you are then not registered, clicking "Login" on the page will prompt you to register.</li>
-<li>be associated with a VO that is registered in OIM. The list of registered VOs appears <a href="http://oim.opensciencegrid.org/oim/vo">here</a>.</li>
-<li>register your certificate in the VOMS for your Virtual Organization. Click on the VO name that you're associated with in the above list and in the VO page click on the <em>"Membership Services URL"</em> to register with that VO VOMS.</li>
+<li><a href="../../security/user-certs">Obtain a personal grid certificate</a>, if you don't have one already.</li>
+<li>Register yourself in <a href="http://oim.opensciencegrid.org/oim/home">OIM</a>. To register, your certificate must be
+    installed in your browser.  Clicking "Login" in OIM will prompt you to register if you are not already.</li>
+<li>Be associated with a <a href="http://oim.opensciencegrid.org/oim/vo">VO registered in OIM</a>.</li>
 </ul>
 <h2 id="how-to-use-oasis">How to use OASIS<a class="headerlink" href="#how-to-use-oasis" title="Permanent link">&para;</a></h2>
 <h3 id="enable-oasis">Enable OASIS<a class="headerlink" href="#enable-oasis" title="Permanent link">&para;</a></h3>
@@ -775,7 +778,7 @@
 <p>The GOC will enable OASIS for your VO in <a href="https://oim.opensciencegrid.org/oim/home">OIM</a> and add your list of administrators to the "OASIS Managers" list (which is near the bottom of the page of information about each VO in OIM). oasis-login will then grant access to the people who are listed as OASIS managers. Any time the list is to be modified, submit another GOC ticket.</p>
 <h3 id="log-in-with-gsissh">Log in with GSISSH<a class="headerlink" href="#log-in-with-gsissh" title="Permanent link">&para;</a></h3>
 <p>The next step is to generate a proxy and log into <code>oasis-login.opensciencegrid.org</code> with <code>gsissh</code>. These commands should be run on a computer that has the <a href="../../worker-node/install-wn">OSG worker node client</a> software. First make sure that your grid certificate is installed in <code>~/.globus/usercred.p12</code> on that computer and that it is mode 600, then run these commands:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> voms-proxy-init -voms <span style="color:red">VO</span>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> voms-proxy-init
 <span class="gp">user@host $</span> gsissh -o <span class="nv">GSSAPIDelegateCredentials</span><span class="o">=</span>yes oasis-login.opensciencegrid.org
 </pre></div>
 
@@ -817,7 +820,7 @@
 
 
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
-<p><a href="https://twiki.cern.ch/twiki/bin/view/CvmFS">CERN CVMFS home page</a></p>
+<p><a href="https://cvmfs.readthedocs.io/en/stable/">CVMFS Documentation</a></p>
               
             </div>
           </div>
@@ -825,7 +828,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../external-oasis-repos/" class="btn btn-neutral float-right" title="External OASIS repositories">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../external-oasis-repos/" class="btn btn-neutral float-right" title="Install an OASIS Repo">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../frontier-squid/" class="btn btn-neutral" title="Install HTTP Cache"><span class="icon icon-circle-arrow-left"></span> Previous</a>
