@@ -154,7 +154,7 @@
           
             <li class="toctree-l1">
 		
-  <span class="caption-text">Data</span>
+  <span class="caption-text">Data - HTTP & CVMFS</span>
   <ul class="subnav">
         <li class="">
           
@@ -174,6 +174,13 @@
     <a class="" href="../external-oasis-repos/">Install an OASIS Repo</a>
   
         </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data - POSIX Storage</span>
+  <ul class="subnav">
         <li class="">
           
   
@@ -186,34 +193,36 @@
     <a class="" href="../load-balanced-gridftp/">Install Load Balanced GridFTP</a>
   
         </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data - HDFS</span>
+  <ul class="subnav">
         <li class="">
           
   
-    <a class="" href="../install-gridftp-xrootd/">Install GridFtp XRootD</a>
+    <a class="" href="../hadoop-overview/">HDFS Overview</a>
   
         </li>
         <li class="">
           
   
-    <a class="" href="../hadoop-overview/">Hadoop Overview</a>
+    <a class="" href="../install-hadoop-2-0-0/">Install HDFS</a>
   
         </li>
-        <li class="">
+  </ul>
+	    </li>
           
-  
-    <a class="" href="../install-hadoop-2-0-0/">Hadoop</a>
-  
-        </li>
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data - XRootD</span>
+  <ul class="subnav">
         <li class="">
           
   
     <a class="" href="../xrootd-overview/">XRootD Overview</a>
-  
-        </li>
-        <li class="">
-          
-  
-    <a class="" href="../install-xroot-client/">Install XRootD Client</a>
   
         </li>
         <li class=" current">
@@ -233,6 +242,8 @@
         
             <li><a class="toctree-l4" href="#configuring-an-xrootd-server">Configuring an XRootD Server</a></li>
         
+            <li><a class="toctree-l4" href="#optional-installing-a-gridftp-server">(Optional) Installing a GridFTP Server</a></li>
+        
             <li><a class="toctree-l4" href="#using-xrootd">Using XRootD</a></li>
         
             <li><a class="toctree-l4" href="#getting-help">Getting Help</a></li>
@@ -245,6 +256,12 @@
     
 
   </ul>
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-xroot-client/">Install XRootD Client</a>
+  
         </li>
   </ul>
 	    </li>
@@ -745,7 +762,7 @@
     
       
         
-          <li>Data &raquo;</li>
+          <li>Data - XRootD &raquo;</li>
         
       
     
@@ -1024,12 +1041,29 @@ FRMD\_INSTANCES=&quot;default&quot;
 
 
 <p><strong>Note</strong>: In this example, <code>fermicloud53.fnal.gov</code> is a redirector node and <code>fermicloud054.fnal.gov</code> is a data node.</p>
+<h3 id="optional-enabling-a-fuse-mount">(Optional) Enabling a FUSE mount<a class="headerlink" href="#optional-enabling-a-fuse-mount" title="Permanent link">&para;</a></h3>
+<p>XRootD storage can be mounted as a standard POSIX filesystem via FUSE, providing users with a more familiar interface..</p>
+<p>Modify <strong><code>/etc/fstab</code></strong> by adding the following entries:</p>
+<div class="codehilite"><pre><span></span>....
+xrootdfs                <span style="color:red">/mnt/xrootd</span>              fuse    rdr=xroot://<span style="color:red">redirector1.domain.com</span>:1094/<span style="color:red">/path/</span>,uid=xrootd 0 0
+</pre></div>
+
+
+<p>Replace <code>/mnt/xrootd</code> with the path that you would like to access with. This should also match the GridFTP settings for the <code>XROOTD_VMP</code> local path. Create <strong><code>/mnt/xrootd</code></strong> directory. Once you are finished, you can mount it:</p>
+<div class="codehilite"><pre><span></span>mount /mnt/xrootd
+</pre></div>
+
+
+<p>You should now be able to run UNIX commands such as <code>ls /mnt/xrootd</code> to see the contents of the XRootD server.</p>
 <h3 id="optional-authorization">(Optional) Authorization<a class="headerlink" href="#optional-authorization" title="Permanent link">&para;</a></h3>
 <p>There are several authorization options in XRootD available through the security
 plugins. In this document, we will cover two options for security:</p>
 <ul>
-<li>Simple Unix Security: Based on user accounts that the client is logged in as.</li>
-<li>xrootd-lcmaps: Using the lcmaps callout to use GUMS authorization</li>
+<li><a href="#security-option-1-adding-simple-unix-security">Simple Unix Security</a>: Based on user accounts that the client is
+    logged in as.</li>
+<li><a href="#security-option-2-shared-keys">Shared-key based authentication</a>.</li>
+<li><a href="#security-option-3-xrootd-lcmaps-authorization"><code>xrootd-lcmaps</code></a>: Using the LCMAPS callout to use X509-based
+    authentication</li>
 </ul>
 <p>Note: On the data nodes, the files will actually be owned by unix user <code>xrootd</code>
 (or other daemon user), not as the user authenticated to, under most
@@ -1168,7 +1202,83 @@ the authenticated username.</p>
 </pre></div>
 
 
-<h4 id="security-option-2-xrootd-lcmaps-authorization">Security option 2: xrootd-lcmaps authorization<a class="headerlink" href="#security-option-2-xrootd-lcmaps-authorization" title="Permanent link">&para;</a></h4>
+<h4 id="security-option-2-shared-keys">Security option 2: Shared keys<a class="headerlink" href="#security-option-2-shared-keys" title="Permanent link">&para;</a></h4>
+<p>If you want to enable security for access to xrootd via xrootdfs you will need to modify xrootd configuration and perform several steps to make xrootdfs secured.</p>
+<ol>
+<li>
+<p>On the xrootd redirector node, execute the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdsssadmin -k <span style="color:red">&lt;my_key_name&gt;</span> -u anybody -g usrgroup add <span style="color:red">&lt;keyfile&gt;</span>
+</pre></div>
+
+
+<p>eg:</p>
+<div class="codehilite"><pre><span></span>root@host # xrdsssadmin -k top_secret -u anybody -g usrgroup add /etc/xrootd/xrootd.key
+</pre></div>
+
+
+</li>
+<li>
+<p>Set ownership</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chown xrootd.xrootd /etc/xrootd/xrootd.key
+</pre></div>
+
+
+</li>
+<li>
+<p>On the node where xrootdfs is installed modify <strong><code>/etc/fstab</code></strong> add security information:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrootdfs <span style="color:red">/mnt/xrootd </span> fuse <span class="nv">rdr</span><span class="o">=</span>xroot://<span style="color:red">redirector1.domain.com</span>:1094/<span style="color:red">/path/redirector1</span>,uid<span class="o">=</span>xrootd,sss<span class="o">=</span><span style="color:red">keyfile</span>0 <span class="m">0</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>On all xrootd data servers and redirector nodes, modify xrootd configuration (<strong><code>/etc/xrootd/xrootd-clustered.cfg</code></strong>) by adding the following segment:</p>
+<div class="codehilite"><pre><span></span># ENABLE_SECURITY_BEGIN
+   xrootd.seclib /usr/lib64/libXrdSec.so
+   #the line below should be before &quot;sec.protocol ... unix&quot;
+   <span style="color:red">sec.protocol /usr/lib64 sss -s keyfile </span>
+   sec.protocol /usr/lib64 unix
+   # this specify that we use the &#39;unix&#39; authentication module, additional one can be specified.
+   # this is the authorization file
+   acc.authdb /etc/xrootd/auth_file
+   ofs.authorize
+   # ENABLE_SECURITY_END
+</pre></div>
+
+
+</li>
+<li>
+<p>On all xrootd data server nodes, edit <code>/etc/xrootd/auth_file</code> to add authorized users of the form <code>u <span style="color:red">username</span> <span style="color:red">/directoryname</span> lr</code> where "lr" is the permission set.</p>
+</li>
+<li>
+<p>Copy <span style="color:red">keyfile</span> from redirector node to every data server node and the xrootdfs node. Make sure that this file is owned by the <code>xrootd</code> user.</p>
+</li>
+<li>
+<p>Restart xrootd cluster by restarting all the relevant daemons.</p>
+</li>
+<li>
+<p>On xroodfs node execute mount:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mount <span style="color:red">/mnt/xrootd</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Verify that you can access the mount point (df,ls) and can not write into unauthorized path, e.g:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp /bin/sh /mnt/xrootd/tlevshin/test1 cp:
+<span class="go">cannot create regular file \`/mnt/xrootd/tlevshin/test1&#39;: Permission denied</span>
+</pre></div>
+
+
+<p>Login as yourself and try:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> su - tlevshin
+<span class="gp">user@host $</span> cp /bin/sh /mnt/xrootd/tlevshin/test1
+</pre></div>
+
+
+</li>
+</ol>
+<h4 id="security-option-3-xrootd-lcmaps-authorization">Security option 3: xrootd-lcmaps authorization<a class="headerlink" href="#security-option-3-xrootd-lcmaps-authorization" title="Permanent link">&para;</a></h4>
 <p>The xrootd-lcmaps security plugin uses the <code>lcmaps</code> package to access the <code>GUMS</code>
 server to authenticate and authorize users based on X509 certificates.</p>
 <p><strong>Certificate Installation</strong></p>
@@ -1216,17 +1326,17 @@ hostname in red):</p>
 
 <p><strong>Modify /etc/xrootd/xrootd-clustered.cfg</strong></p>
 <p>You will need to add the security plugins to <code>/etc/xrootd/xrootd-clustered.cfg</code>. Add the following lines to the <code>/etc/xrootd/xrootd-clustered.cfg</code>. This will need to be added to all data nodes in the section relevant to the data node server. (For instance, in the above example(s), this should be placed in the last "else" clause after "all.role server". See the section above on Unix security for an example of where the security commands should go).</p>
-<div class="codehilite"><pre><span></span><span class="s s-Atom">xrootd</span><span class="p">.</span><span class="s s-Atom">seclib</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span><span class="o">/</span><span class="s s-Atom">libXrdSec</span><span class="p">.</span><span class="s s-Atom">so</span>
+<div class="codehilite"><pre><span></span>xrootd.seclib /usr/lib64/libXrdSec.so
 
-<span class="s s-Atom">set</span> <span class="nv">CERTDIR</span><span class="s s-Atom">=-</span><span class="nn">certdir</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">certificates</span>
-<span class="s s-Atom">set</span> <span class="nv">CERT</span><span class="s s-Atom">=-</span><span class="nn">cert</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrd</span><span class="o">/</span><span class="s s-Atom">xrdcert</span><span class="p">.</span><span class="s s-Atom">pem</span>
-<span class="s s-Atom">set</span> <span class="nv">KEY</span><span class="s s-Atom">=-</span><span class="nn">key</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrd</span><span class="o">/</span><span class="s s-Atom">xrdkey</span><span class="p">.</span><span class="s s-Atom">pem</span>
-<span class="s s-Atom">set</span> <span class="nv">AUTHZFUN</span><span class="s s-Atom">=-</span><span class="nn">authzfun</span><span class="p">:</span><span class="s s-Atom">libXrdLcmaps</span><span class="p">.</span><span class="s s-Atom">so</span>
-<span class="s s-Atom">set</span> <span class="nv">AUTHZFUNPARMS</span><span class="s s-Atom">=-</span><span class="nn">authzfunparms</span><span class="p">:</span><span class="s s-Atom">--osg</span><span class="p">,</span><span class="s s-Atom">--lcmapscfg</span><span class="p">,</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">lcmaps</span><span class="p">.</span><span class="s s-Atom">cfg</span><span class="p">,</span><span class="s s-Atom">--loglevel</span><span class="p">,</span><span class="mi">0</span><span class="p">|</span><span class="s s-Atom">useglobals</span>
+set CERTDIR=-certdir:/etc/grid-security/certificates
+set CERT=-cert:/etc/grid-security/xrd/xrdcert.pem
+set KEY=-key:/etc/grid-security/xrd/xrdkey.pem
+set AUTHZFUN=-authzfun:libXrdLcmaps.so
+set AUTHZFUNPARMS=-authzfunparms:--osg,--lcmapscfg,/etc/xrootd/lcmaps.cfg,--loglevel,0|useglobals
 
-<span class="s s-Atom">sec</span><span class="p">.</span><span class="s s-Atom">protocol</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span> <span class="s s-Atom">gsi</span> <span class="err">$</span><span class="nv">CERTDIR</span> <span class="err">$</span><span class="nv">CERT</span> <span class="err">$</span><span class="nv">KEY</span> <span class="o">-</span><span class="nn">crl</span><span class="p">:</span><span class="mi">3</span> <span class="err">$</span><span class="nv">AUTHZFUN</span> <span class="err">$</span><span class="nv">AUTHZFUNPARMS</span> <span class="s s-Atom">--</span><span class="nn">gmapopt</span><span class="p">:</span><span class="mi">2</span> <span class="s s-Atom">--</span><span class="nn">gmapto</span><span class="p">:</span><span class="mi">0</span>
-<span class="s s-Atom">acc</span><span class="p">.</span><span class="s s-Atom">authdb</span> <span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">auth_file</span>
-<span class="s s-Atom">ofs</span><span class="p">.</span><span class="s s-Atom">authorize</span>
+sec.protocol /usr/lib64 gsi $CERTDIR $CERT $KEY -crl:3 $AUTHZFUN $AUTHZFUNPARMS --gmapopt:2 --gmapto:0
+acc.authdb /etc/xrootd/auth_file
+ofs.authorize
 </pre></div>
 
 
@@ -1236,19 +1346,6 @@ hostname in red):</p>
 </pre></div>
 
 
-<p><strong>lcmaps notes</strong></p>
-<p>For recent versions of lcmaps (1.5+), VOMS signature verification is enabled by default. You may need to either disable it or install the <code>vo-client</code>.</p>
-<p>Installing vo-client:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install vo-client
-</pre></div>
-
-
-<p>Disabling vo verification can be done by adding a line to <code>/etc/sysconfig/xrootd</code>:</p>
-<div class="codehilite"><pre><span></span>export LLGT_VOMS_DISABLE_CREDENTIAL_CHECK=1
-</pre></div>
-
-
-<p>This feature is evolving, so stay tuned for updates.</p>
 <h4 id="testing-an-xrootd-cluster-with-lcmaps-security-enabled">Testing an XRootd Cluster with LCMAPS security enabled<a class="headerlink" href="#testing-an-xrootd-cluster-with-lcmaps-security-enabled" title="Permanent link">&para;</a></h4>
 <p>From any machine with the <code>xrootd-client</code> installed, you can test with xrdcp. With a user that has no grid certificate installed, you should get an error:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> xrdcp /bin/bash root://HOSTNAME/tmp/lcmaps_test
@@ -1301,12 +1398,8 @@ oss.namelib /usr/lib64/libXrdCmsTfc.so file:/etc/xrootd/storage.xml%ORANGE%?prot
 <li><a href="https://twiki.cern.ch/twiki/bin/view/Main/HdfsXrootdInstall">https://twiki.cern.ch/twiki/bin/view/Main/HdfsXrootdInstall</a></li>
 </ul>
 <h3 id="optional-adding-hadoop-support-to-xrootd">(Optional) Adding Hadoop support to XRootD<a class="headerlink" href="#optional-adding-hadoop-support-to-xrootd" title="Permanent link">&para;</a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>3.3 only</p>
-</div>
-<p>Users with Hadoop-based storage under their XRootD installation have extra steps
-to configure more efficient access to Hadoop Stroage</p>
+<p>HDFS-based sites should utilize the <code>xrootd-hdfs</code> plugin to allow XRootD to access
+their storage.</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-hdfs
 </pre></div>
 
@@ -1358,6 +1451,52 @@ FRMD\_INSTANCES=&quot;default&quot;
 </pre></div>
 
 
+<h2 id="optional-installing-a-gridftp-server">(Optional) Installing a GridFTP Server<a class="headerlink" href="#optional-installing-a-gridftp-server" title="Permanent link">&para;</a></h2>
+<p>The Globus GridFTP server can be installed alongside an XRootD storage element to provide
+GridFTP-based access to the storage.</p>
+<div class="admonition note">
+<p class="admonition-title">See Also</p>
+<p>OSG has extensive documentation on setting up a GridFTP server; this section is an
+abbreviated version documenting the special steps needed for XRootD integration.
+You may also find the following useful:</p>
+<ul>
+<li><a href="../gridftp">Basic GridFTP Install</a>.  Additionally covers service planning topics.</li>
+<li><a href="../load-balanced-gridftp">Load-balanced GridFTP Install</a>.  Covers the creation of
+    a load-balanced GridFTP service using multiple servers.</li>
+</ul>
+</div>
+<p>Prior to following this installation guide, verify the host certificates and networking is
+configured correctly as in the <a href="../gridftp">basic GridFTP install</a>.</p>
+<h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
+<p>GridFTP support for XRootD-based storage is provided by the <code>osg-gridftp-xrootd</code> meta-package:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-gridftp-xrootd
+</pre></div>
+
+
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<p>For information on how to configure authentication for your GridFTP installation, please refer to
+the <a href="../gridftp#configuring-authentication">configuring authentication section of the GridFTP guide</a>.</p>
+<p>Edit <code>/etc/sysconfig/xrootd-dsi</code> to set <code>XROOTD_VMP</code> to use your Xrootd redirector.</p>
+<div class="codehilite"><pre><span></span><span class="nb">export</span> <span class="nv">XROOTD_VMP</span><span class="o">=</span><span class="s2">&quot;<span style="color:red">redirector:1094:/local_path=/remote_path</span>&quot;</span>
+</pre></div>
+
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The syntax of <code>XROOTD_VMP</code> is tricky; make sure to use the following guidance:</p>
+<ul>
+<li><strong>Redirector</strong>: The hostname and domain of the local XRootD redirector server.</li>
+<li><strong>local_path</strong>: The path exported by the GridFTP server.</li>
+<li><strong>remote_path</strong>: The XRootD path that will be mounted at <strong>local_path</strong>.</li>
+</ul>
+</div>
+<p>When <code>xrootd-dsi</code> is enabled, GridFTP configuration changes should go into
+<code>/etc/xrootd-dsi/gridftp-xrootd.conf</code>, not <code>/etc/gridftp.conf</code>.  Sites should review any
+customizations made in the latter and copy them as necessary.</p>
+<p>You can use the FUSE mount in order to test POSIX access to xrootd in the GridFTP server.
+You should be able to run Unix commands such as <code>ls /mnt/xrootd</code> and see the contents of the
+XRootD server.</p>
+<p>For log / config file locations and system services to run, see the <a href="../gridftp">basic GridFTP install</a>.</p>
 <h2 id="using-xrootd">Using XRootD<a class="headerlink" href="#using-xrootd" title="Permanent link">&para;</a></h2>
 <h3 id="managing-xrootd-services">Managing XRootD services<a class="headerlink" href="#managing-xrootd-services" title="Permanent link">&para;</a></h3>
 <p>Start services on the redirector node before starting any services on the data
@@ -1517,10 +1656,10 @@ start up <code>xrootd</code> with this line:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../security/lcmaps-voms-authentication/" class="btn btn-neutral float-right" title="LCMAPS-VOMS authentication">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../install-xroot-client/" class="btn btn-neutral float-right" title="Install XRootD Client">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../install-xroot-client/" class="btn btn-neutral" title="Install XRootD Client"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../xrootd-overview/" class="btn btn-neutral" title="XRootD Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -1548,10 +1687,10 @@ start up <code>xrootd</code> with this line:</p>
           <a href="https://github.com/opensciencegrid/docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../install-xroot-client/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../xrootd-overview/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../security/lcmaps-voms-authentication/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../install-xroot-client/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
