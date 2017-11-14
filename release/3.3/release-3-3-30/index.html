@@ -785,6 +785,22 @@
 <p><strong>Release Date</strong>: 2017-11-14</p>
 <h2 id="summary-of-changes">Summary of changes<a class="headerlink" href="#summary-of-changes" title="Permanent link">&para;</a></h2>
 <p>This release contains:</p>
+<ul>
+<li>OSG PKI: Certificate requests and retrievals are authenticated by default</li>
+<li>BLAHP 1.18.34<ul>
+<li>Fixed bug in Slurm memory-use parsing that caused jobs to be held</li>
+<li>Fixed Unicode decode error when reading blah.config</li>
+</ul>
+</li>
+<li>HTCondor: Fixed issue validating VOMS proxies</li>
+<li><a href="https://github.com/xrootd/xrootd/blob/v4.7.1/docs/ReleaseNotes.txt">XRootD 4.7.1</a>: Fixed occasional crash when LCMAPS callout to GUMS fails</li>
+<li><a href="http://cvmfs.readthedocs.io/en/2.4/cpt-releasenotes.html">CVMFS 2.4.2</a>: Server side bug fixes</li>
+<li>GridFTP-HDFS: Added support for CMVFS checksums</li>
+<li>Globus GridFTP server: Fixed IPv6 redirection and IPv4 passive mode (EPSV) response</li>
+<li>LCMAPS VOMS Plugin: Documented how to map using all FQANs</li>
+<li>RSV: Fixed CRL freshness probe, removed unused probes</li>
+<li>osg-system-profiler: Dropped check for osg-version, stopped checking for deprecated software, updated instructions</li>
+</ul>
 <p>These <a href="https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.30%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a> were addressed in this release.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
