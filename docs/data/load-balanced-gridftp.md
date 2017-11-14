@@ -58,7 +58,7 @@ The single shared certificate must have the hostname associated with the load-ba
 1.  Request and generate the shared certificate:
 
         :::console
-        user@host $ osg-gridadmin-cert-request -H <VIRTUAL-HOSTNAME> -a <GRIDFTP-SERVER-#1-HOSTNAME> [&hellip;]
+        user@host $ osg-gridadmin-cert-request -H <VIRTUAL-HOSTNAME> -a <GRIDFTP-SERVER-#1-HOSTNAME> [...]
 
 1.  Copy the resulting certificate-key pair to each GridFTP server
 2.  Create a directory to contain the shared service certificate:
@@ -85,7 +85,7 @@ XRootD requires that the certificate's [common name](https://en.wikipedia.org/wi
 
         <GRIDFTP-SERVER-#1-HOSTNAME> <VIRTUAL-HOSTNAME>
         <GRIDFTP-SERVER-#2-HOSTNAME> <VIRTUAL-HOSTNAME>
-        [&hellip;]
+        [...]
 
 1.  Submit a batch request for the per-GridFTP server certificates:
 
@@ -212,7 +212,7 @@ virtual_server <VIRTUAL-IP-ADDRESS> 2811 {
             connect_port 2811
         }
     }
-    <[&hellip;]>
+    [...]
 }
 ```
 
