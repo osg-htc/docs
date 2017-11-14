@@ -107,8 +107,6 @@ If you wish to manually update your system, you can run yum update against the f
 
     condor condor-all condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-test condor-vm-gahp globus-gridftp-server-control globus-gridftp-server-control-debuginfo globus-gridftp-server-control-devel gsi-openssh gsi-openssh-clients gsi-openssh-debuginfo gsi-openssh-server osg-build osg-build-base osg-build-koji osg-build-mock osg-build-tests osg-ca-scripts osg-configure osg-configure-bosco osg-configure-ce osg-configure-condor osg-configure-gateway osg-configure-gip osg-configure-gratia osg-configure-infoservices osg-configure-lsf osg-configure-managedfork osg-configure-misc osg-configure-network osg-configure-pbs osg-configure-rsv osg-configure-sge osg-configure-slurm osg-configure-squid osg-configure-tests osg-release osg-release-itb osg-tested-internal osg-version singularity singularity-debuginfo singularity-devel singularity-runtime
 
-</pre>
-
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 6
