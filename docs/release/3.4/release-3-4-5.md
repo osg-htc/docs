@@ -14,7 +14,7 @@ This release contains:
     -   Fixed Unicode decode error when reading blah.config
 -   HTCondor: Update from version 8.6.6
     -   [HTCondor 8.6.7](https://www-auth.cs.wisc.edu/lists/htcondor-world/2017/msg00025.shtml)
-    -   [HTCondor 8.6.8]()
+    -   HTCondor 8.6.8
 -   [XRootD 4.7.1](https://github.com/xrootd/xrootd/blob/v4.7.1/docs/ReleaseNotes.txt): Fixed occasional crash when LCMAPS callout to GUMS fails
 -   [CVMFS 2.4.2](http://cvmfs.readthedocs.io/en/2.4/cpt-releasenotes.html): Server side bug fixes
 -   GridFTP-HDFS: Added support for CMVFS checksums
@@ -23,9 +23,9 @@ This release contains:
 -   RSV: Fixed CRL freshness probe, removed unused probes
 -   osg-system-profiler: Dropped check for osg-version, stopped checking for deprecated software, updated instructions
 -   Upcoming
-    -   HTCondor Update from version 8.7.3
+    -   HTCondor: Update from version 8.7.3
         - [HTCondor 8.7.4](https://www-auth.cs.wisc.edu/lists/htcondor-world/2017/msg00026.shtml)
-        - [HTCondor 8.7.5]()
+        - HTCondor 8.7.5
     -   BLAHP 1.18.34 (See above)
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.5%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
