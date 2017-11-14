@@ -821,7 +821,7 @@
 <ol>
 <li>
 <p>Request and generate the shared certificate:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-gridadmin-cert-request -H &lt;VIRTUAL-HOSTNAME&gt; -a &lt;GRIDFTP-SERVER-#1-HOSTNAME&gt; <span class="o">[</span><span class="p">&amp;</span>hellip<span class="p">;</span><span class="o">]</span>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-gridadmin-cert-request -H &lt;VIRTUAL-HOSTNAME&gt; -a &lt;GRIDFTP-SERVER-#1-HOSTNAME&gt; <span class="o">[</span>...<span class="o">]</span>
 </pre></div>
 
 
@@ -860,7 +860,7 @@ export X509_USER_KEY=/etc/grid-security/gridftp/gridftp-hostkey.pem
 <p>Create a list of GridFTP server hostnames in <code>load-balanced-hosts.txt</code>:</p>
 <div class="codehilite"><pre><span></span>&lt;GRIDFTP-SERVER-#1-HOSTNAME&gt; &lt;VIRTUAL-HOSTNAME&gt;
 &lt;GRIDFTP-SERVER-#2-HOSTNAME&gt; &lt;VIRTUAL-HOSTNAME&gt;
-[&amp;hellip;]
+[...]
 </pre></div>
 
 
@@ -1018,7 +1018,7 @@ virtual_server &lt;VIRTUAL-IP-ADDRESS&gt; 2811 {
             connect_port 2811
         }
     }
-    &lt;[&amp;hellip;]&gt;
+    [...]
 }
 </pre></div>
 
