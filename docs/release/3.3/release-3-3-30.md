@@ -57,7 +57,7 @@ To update to this series, you need [install the current OSG repositories](../../
 Once the new repositories are installed, you can update to this new release with:
 
 ``` console
-root@host # yum 
+root@host # yum update
 ```
 
 !!! note
