@@ -120,7 +120,7 @@
   
   <ul class="subnav">
       
-    <li class="toctree-l3"><a href="#introduction">Introduction</a></li>
+    <li class="toctree-l3"><a href="#worker-node-overview">Worker Node Overview</a></li>
     
 
     <li class="toctree-l3"><a href="#common-software-available-on-worker-nodes">Common software available on worker nodes.</a></li>
@@ -134,19 +134,19 @@
         <li class="">
           
   
-    <a class="" href="../install-wn/">Worker Node (RPM install)</a>
+    <a class="" href="../install-wn/">Worker Node via RPM</a>
   
         </li>
         <li class="">
           
   
-    <a class="" href="../install-wn-tarball/">Worker Node (tarball install)</a>
+    <a class="" href="../install-wn-tarball/">Worker Node via Tarball</a>
   
         </li>
         <li class="">
           
   
-    <a class="" href="../install-wn-oasis/">Worker Node (OASIS install)</a>
+    <a class="" href="../install-wn-oasis/">Worker Node via OASIS</a>
   
         </li>
         <li class="">
@@ -775,7 +775,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h1>
+                <h1 id="worker-node-overview">Worker Node Overview<a class="headerlink" href="#worker-node-overview" title="Permanent link">&para;</a></h1>
 <p>The Worker Node Client is a collection of useful software components that is expected to be on every OSG worker node. In addition, a job running on a worker node can access a handful of environment variables that can be used to locate resources.</p>
 <p>This page describes how to initialize the environment of your job to correctly access the execution and data areas from the worker node.</p>
 <p>The OSG provides no scientific software dependencies or software build tools on the worker node; you are expected to bring along all application-level dependencies yourself (preferred; most portable) or utilize CVMFS. Sites are not required to provide any specific tools (<code>gcc</code>, <code>lapack</code>, <code>blas</code>, etc.) beyond the ones in the OSG worker node client and the base OS.</p>
@@ -879,7 +879,7 @@ The pilot should utilize <code>$TMPDIR</code> to communicate the location of tem
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../install-wn/" class="btn btn-neutral float-right" title="Worker Node (RPM install)">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../install-wn/" class="btn btn-neutral float-right" title="Worker Node via RPM">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../../compute-element/submit-htcondor-ce/" class="btn btn-neutral" title="Submitting to HTCondor-CE"><span class="icon icon-circle-arrow-left"></span> Previous</a>

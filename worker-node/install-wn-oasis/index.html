@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Worker Node (OASIS install) - OSG Documentation</title>
+  <title>Worker Node via OASIS - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Worker Node (OASIS install)";
+    var mkdocs_page_name = "Worker Node via OASIS";
     var mkdocs_page_input_path = "worker-node/install-wn-oasis.md";
     var mkdocs_page_url = "/worker-node/install-wn-oasis/";
   </script>
@@ -122,31 +122,29 @@
         <li class="">
           
   
-    <a class="" href="../install-wn/">Worker Node (RPM install)</a>
+    <a class="" href="../install-wn/">Worker Node via RPM</a>
   
         </li>
         <li class="">
           
   
-    <a class="" href="../install-wn-tarball/">Worker Node (tarball install)</a>
+    <a class="" href="../install-wn-tarball/">Worker Node via Tarball</a>
   
         </li>
         <li class=" current">
           
   
-    <a class="current" href="./">Worker Node (OASIS install)</a>
+    <a class="current" href="./">Worker Node via OASIS</a>
   
   <ul class="subnav">
       
-    <li class="toctree-l3"><a href="#configuring-a-site-to-use-the-worker-node-client-software-from-oasis">Configuring a Site to Use the Worker Node Client Software From OASIS</a></li>
+    <li class="toctree-l3"><a href="#installing-the-worker-node-client-via-oasis">Installing the Worker Node Client via OASIS</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#about-this-guide">About This Guide</a></li>
-        
             <li><a class="toctree-l4" href="#before-starting">Before Starting</a></li>
         
-            <li><a class="toctree-l4" href="#configuring-your-site-to-use-the-worker-node-client-from-oasis">Configuring Your Site to Use the Worker Node Client From OASIS</a></li>
+            <li><a class="toctree-l4" href="#configure-the-ce">Configure the CE</a></li>
         
             <li><a class="toctree-l4" href="#validating-the-worker-node-client">Validating the Worker Node Client</a></li>
         
@@ -772,7 +770,7 @@
         
       
     
-    <li>Worker Node (OASIS install)</li>
+    <li>Worker Node via OASIS</li>
     <li class="wy-breadcrumbs-aside">
       
         <a href="https://github.com/opensciencegrid/docs/edit/master/docs/worker-node/install-wn-oasis.md"
@@ -785,25 +783,29 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="configuring-a-site-to-use-the-worker-node-client-software-from-oasis">Configuring a Site to Use the Worker Node Client Software From OASIS<a class="headerlink" href="#configuring-a-site-to-use-the-worker-node-client-software-from-oasis" title="Permanent link">&para;</a></h1>
-<h2 id="about-this-guide">About This Guide<a class="headerlink" href="#about-this-guide" title="Permanent link">&para;</a></h2>
-<p>The <em>OSG Worker Node Client</em> is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use.</p>
-<p>It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:</p>
+                <h1 id="installing-the-worker-node-client-via-oasis">Installing the Worker Node Client via OASIS<a class="headerlink" href="#installing-the-worker-node-client-via-oasis" title="Permanent link">&para;</a></h1>
+<p>The <strong>OSG Worker Node Client</strong> is a collection of software components that is expected to be added to every worker node
+that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect
+to use. Contents of the worker node client can be found <a href="../install-wn/#worker-node-contents">here</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is possible to install the Worker Node Client software in a variety of ways, depending on your local site:</p>
 <ul>
-<li>Use the Worker Node Client software from OASIS (this guide) - useful when <a href="../install-cvmfs">CVMFS</a> is already mounted on your worker nodes</li>
-<li><a href="../install-wn/">Install using RPMs and Yum</a> - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs</li>
+<li>Use from OASIS (this guide) - useful when <a href="../install-cvmfs">CVMFS</a> is already mounted on your worker nodes</li>
 <li><a href="../install-wn-tarball/">Install using a tarball</a> - useful when installing onto a shared filesystem for distribution to worker nodes</li>
+<li><a href="../install-wn/">Install using RPMs and Yum</a> - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs</li>
 </ul>
+</div>
 <p>This document is intended to guide system administrators through the process of configuring a site to make the Worker Node Client software available from OASIS.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
 <ul>
 <li>Ensure the host has <a href="../../release/supported_platforms/">a supported operating system</a></li>
+<li>On every worker node, <a href="../install-cvmfs/">install and configure CVMFS</a></li>
 </ul>
-<p>Also note that, once configured to use OASIS, each use of Worker Node Client software will cause that software and its associated files to be downloaded from a CVMFS server or your local cache thereof. This may result in extra network activity, especially if Worker Node Client tools are used heavily.</p>
-<h2 id="configuring-your-site-to-use-the-worker-node-client-from-oasis">Configuring Your Site to Use the Worker Node Client From OASIS<a class="headerlink" href="#configuring-your-site-to-use-the-worker-node-client-from-oasis" title="Permanent link">&para;</a></h2>
-<p>Below are the one-time steps that you must perform to configure your site to use the Worker Node Client software from OASIS.</p>
-<p>On every worker node, <a href="../install-cvmfs/">install and configure CVMFS</a></p>
+<p>Once configured to use OASIS, grid jobs will download the worker-node software on demand (into the local disk cache).
+This may result in extra network activity, especially on first use of the client tools.</p>
+<h2 id="configure-the-ce">Configure the CE<a class="headerlink" href="#configure-the-ce" title="Permanent link">&para;</a></h2>
 <p>Determine the OASIS path to the Worker Node Client software for your worker nodes:</p>
 <table>
 <thead>
@@ -828,13 +830,14 @@
 </tbody>
 </table>
 <p>On the CE, in the <code>/etc/osg/config.d/10-storage.ini</code> file, set the <code>grid_dir</code> configuration setting to the path from the previous step.</p>
-<p>For more information, see the <a href="../using-wn/">OSG worker node environment documentation</a> and the <a href="../../other/configuration-with-osg-configure#storage">CE configuration instructions</a>.</p>
 <p>Once you finish making changes to configuration files on your CE, validate, fix, and apply the configuration:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-configure -v
 <span class="gp">root@host #</span> osg-configure -c
 </pre></div>
 
 
+<p>For more information, see the <a href="../using-wn/">OSG worker node environment documentation</a> and the
+<a href="../../other/configuration-with-osg-configure#storage">CE configuration instructions</a>.</p>
 <h2 id="validating-the-worker-node-client">Validating the Worker Node Client<a class="headerlink" href="#validating-the-worker-node-client" title="Permanent link">&para;</a></h2>
 <p>To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.</p>
 <ol>
@@ -894,7 +897,7 @@
         <a href="../install-cvmfs/" class="btn btn-neutral float-right" title="CVMFS">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../install-wn-tarball/" class="btn btn-neutral" title="Worker Node (tarball install)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../install-wn-tarball/" class="btn btn-neutral" title="Worker Node via Tarball"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   

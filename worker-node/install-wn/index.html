@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Worker Node (RPM install) - OSG Documentation</title>
+  <title>Worker Node via RPM - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Worker Node (RPM install)";
+    var mkdocs_page_name = "Worker Node via RPM";
     var mkdocs_page_input_path = "worker-node/install-wn.md";
     var mkdocs_page_url = "/worker-node/install-wn/";
   </script>
@@ -122,15 +122,13 @@
         <li class=" current">
           
   
-    <a class="current" href="./">Worker Node (RPM install)</a>
+    <a class="current" href="./">Worker Node via RPM</a>
   
   <ul class="subnav">
       
-    <li class="toctree-l3"><a href="#installing-and-using-the-worker-node-client-from-rpms">Installing and Using the Worker Node Client From RPMs</a></li>
+    <li class="toctree-l3"><a href="#installing-the-worker-node-client-from-rpms">Installing the Worker Node Client From RPMs</a></li>
     
         <ul>
-        
-            <li><a class="toctree-l4" href="#about-this-guide">About This Guide</a></li>
         
             <li><a class="toctree-l4" href="#before-starting">Before Starting</a></li>
         
@@ -152,13 +150,13 @@
         <li class="">
           
   
-    <a class="" href="../install-wn-tarball/">Worker Node (tarball install)</a>
+    <a class="" href="../install-wn-tarball/">Worker Node via Tarball</a>
   
         </li>
         <li class="">
           
   
-    <a class="" href="../install-wn-oasis/">Worker Node (OASIS install)</a>
+    <a class="" href="../install-wn-oasis/">Worker Node via OASIS</a>
   
         </li>
         <li class="">
@@ -774,7 +772,7 @@
         
       
     
-    <li>Worker Node (RPM install)</li>
+    <li>Worker Node via RPM</li>
     <li class="wy-breadcrumbs-aside">
       
         <a href="https://github.com/opensciencegrid/docs/edit/master/docs/worker-node/install-wn.md"
@@ -787,16 +785,21 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="installing-and-using-the-worker-node-client-from-rpms">Installing and Using the Worker Node Client From RPMs<a class="headerlink" href="#installing-and-using-the-worker-node-client-from-rpms" title="Permanent link">&para;</a></h1>
-<h2 id="about-this-guide">About This Guide<a class="headerlink" href="#about-this-guide" title="Permanent link">&para;</a></h2>
-<p>The <strong>OSG Worker Node Client</strong> is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use. See the reference section below for contents of the Worker Node Client.</p>
-<p>It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:</p>
+                <h1 id="installing-the-worker-node-client-from-rpms">Installing the Worker Node Client From RPMs<a class="headerlink" href="#installing-the-worker-node-client-from-rpms" title="Permanent link">&para;</a></h1>
+<p>The <strong>OSG Worker Node Client</strong> is a collection of software components that is expected to be added to every worker node
+that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect
+to use. Contents of the worker node client can be found <a href="./#worker-node-contents">here</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is possible to install the Worker Node Client software in a variety of ways, depending on your local site:</p>
 <ul>
 <li>Install using RPMs and Yum (this guide) - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs</li>
-<li><a href="../install-wn-tarball/">Install using a tarball</a> - useful when installing onto a shared filesystem for distribution to worker nodes</li>
 <li><a href="../install-wn-oasis/">Use from OASIS</a> - useful when worker nodes already mount <a href="../install-cvmfs">CVMFS</a></li>
+<li><a href="../install-wn-tarball/">Install using a tarball</a> - useful when installing onto a shared filesystem for distribution to worker nodes</li>
 </ul>
-<p>This document is intended to guide system administrators through the process of configuring a site to make the Worker Node Client software available from an RPM.</p>
+</div>
+<p>This document is intended to guide system administrators through the process of configuring a site to make the Worker
+Node Client software available from an RPM.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
 <ul>
@@ -907,7 +910,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../install-wn-tarball/" class="btn btn-neutral float-right" title="Worker Node (tarball install)">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../install-wn-tarball/" class="btn btn-neutral float-right" title="Worker Node via Tarball">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../using-wn/" class="btn btn-neutral" title="Worker Node Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
