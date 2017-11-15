@@ -1,6 +1,6 @@
 
-Introduction
-============
+Worker Node Overview
+====================
 
 The Worker Node Client is a collection of useful software components that is expected to be on every OSG worker node. In addition, a job running on a worker node can access a handful of environment variables that can be used to locate resources.
 
