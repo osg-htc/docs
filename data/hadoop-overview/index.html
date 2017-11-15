@@ -834,7 +834,7 @@
 <h2 id="large-installation-150tb-wan-transfers-over-2-gbps">Large Installation (&gt;150TB, WAN transfers over 2 Gbps)<a class="headerlink" href="#large-installation-150tb-wan-transfers-over-2-gbps" title="Permanent link">&para;</a></h2>
 <p>For a large installation, make the following changes: 1 Run more GridFTP servers; plan for 800 Mbps per host with 1 Gbps card in order to have excess capacity. 1 Purchase machines suitable for HDFS datanodes. It is possible to get a 2U box with 8-12 hard drives; for many projects, this will provide a more suitable CPU to disk ratio than the 1U boxes with 2 hard drives.</p>
 <h2 id="hadoop-security">Hadoop Security<a class="headerlink" href="#hadoop-security" title="Permanent link">&para;</a></h2>
-<p>HDFS has unix-like user/group authorization, but no strict authentication. HDFS should only be exposed to a secure internal network which only non-malicious users are able to access. For users with access to the local cluster, it is not difficult at all to bypass authentication.</p>
+<p>HDFS has Unix-like user/group authorization, but no strict authentication. <strong>HDFS should only be exposed to a secure internal network which only non-malicious users are able to access</strong>. For users with access to the local cluster, it is not difficult to bypass authentication.</p>
 <p><a href="http://www.cloudera.com/blog/2009/08/14/hadoop-default-ports-quick-reference/">The default ports are listed here</a>.</p>
 <p>There are some ways to improve security of your cluster:</p>
 <ul>
@@ -848,9 +848,9 @@
 </ul>
 <p>There are three options to export your data outside your cluster:</p>
 <ul>
-<li>Globus GridFTP / SRM. This is covered in these web pages.</li>
-<li>Xrootd. Documentation is nascent.</li>
-<li>Apache HTTP (authenticated via HTTPS). This is in use at Caltech, but there isn't any documentation available.</li>
+<li>Globus GridFTP.</li>
+<li>Xrootd.</li>
+<li>HTTP and HTTPS.  OSG utilizes the HTTP(S) protocol implementation built into the XRootD server.</li>
 </ul>
               
             </div>
