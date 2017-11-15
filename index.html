@@ -784,12 +784,18 @@
             <div class="section">
               
                 <h1 id="osg-site-administrator-documentation">OSG Site Administrator Documentation<a class="headerlink" href="#osg-site-administrator-documentation" title="Permanent link">&para;</a></h1>
-<p>Welcome to the home page of the Open Science Grid (OSG) Site Administrator documentation! If you are not a site adminstrator...</p>
+<p>Welcome to the home of the Open Science Grid (OSG) Site Administrator documentation!  This documentation aims to
+provide OSG site admins with the necessary information to install, configure, and operate site services.</p>
+<p>If you are not a site adminstrator:</p>
 <ul>
-<li>If you are a researcher interested in using OSG resources, you can find user documentation <a href="https://support.opensciencegrid.org/support/home">here</a>. </li>
-<li>If you'd like to learn more about the OSG and our mission, visit our website <a href="https://www.opensciencegrid.org/">here</a>.</li>
+<li>If you are a <strong>researcher</strong> interested in using OSG resources, you may want to view our
+  <a href="https://support.opensciencegrid.org/support/home">user documentation</a>.</li>
+<li>If you'd like to learn more about the OSG and our mission, visit the OSG consortium's <a href="https://www.opensciencegrid.org/">homepage</a>.</li>
 </ul>
-<p>This document outlines the overall installation process for an OSG site and provides many links into detailed installation, configuration, troubleshooting, and similar pages. If you do not see software-related technical documentation listed here, try the search bar to the left or contacting us at <a href="mailto:help@opensciencegrid.org">help@opensciencegrid.org</a>.</p>
+<p>This document outlines the overall installation process for an OSG site and provides many links into detailed
+installation, configuration, troubleshooting, and similar pages. If you do not see software-related technical
+documentation listed here, try the search bar to the left or contacting us at
+<a href="mailto:help@opensciencegrid.org">help@opensciencegrid.org</a>.</p>
 <h2 id="plan-the-site">Plan the Site<a class="headerlink" href="#plan-the-site" title="Permanent link">&para;</a></h2>
 <p>If you have not done so already, <a href="./site-planning">plan the overall architecture of your OSG site</a>. It is recommended that your plan be sufficiently detailed to include the OSG hosts that are needed and the main software components for each host. Be sure to consider <a href="./release/supported_platforms">the operating systems that OSG supports</a>. For example, a basic site might include:</p>
 <table>
@@ -861,55 +867,50 @@
 </li>
 <li><a href="./other/configuration-with-osg-configure"><code>osg-configure</code> Reference</a></li>
 </ul>
-<h3 id="installing-and-configuring-other-nodes">Installing and Configuring Other Nodes<a class="headerlink" href="#installing-and-configuring-other-nodes" title="Permanent link">&para;</a></h3>
-<p>All of these node types and their services are optional, although OSG requires the Frontier Squid caching service if you have installed <a href="./worker-node/install-cvmfs">CVMFS</a> on your worker nodes.</p>
+<h3 id="installing-and-configuring-other-services">Installing and Configuring Other Services<a class="headerlink" href="#installing-and-configuring-other-services" title="Permanent link">&para;</a></h3>
+<p>All of these node types and their services are optional, although OSG requires an HTTP caching service if you have
+installed <a href="./worker-node/install-cvmfs">CVMFS</a> on your worker nodes.</p>
 <ul>
-<li><a href="./data/frontier-squid">Install Frontier Squid, the HTTP caching proxy service</a></li>
+<li><a href="./data/frontier-squid">Install Frontier Squid</a>, an HTTP caching proxy service.</li>
+<li>Storage element:<ul>
+<li>Existing POSIX-based systems (such as NFS, Lustre, or GPFS):<ul>
+<li><a href="./data/gridftp">Install standalone OSG GridFTP</a>: GridFTP server</li>
+<li>(optional) <a href="./data/load-balanced-gridftp">Install load-balanced OSG GridFTP</a>: when a single GridFTP server isn't enough</li>
+</ul>
+</li>
+<li>Hadoop Distributed File System (HDFS):<ul>
+<li><a href="./data/hadoop-overview">Hadoop Overview</a>: HDFS information, planning, and guides</li>
+</ul>
+</li>
+<li>XRootD:<ul>
+<li><a href="./data/xrootd-overview">XRootd Overview</a>: XRootD information, planning, and guides</li>
+<li><a href="./data/install-xrootd">Install Xrootd Server</a>: XRootD redirector installation</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>RSV monitoring to monitor and report to OSG on the health of your site<ul>
 <li><a href="./monitoring/install-rsv">Install RSV</a></li>
 </ul>
 </li>
 <li><a href="./other/install-gwms-frontend">Install the GlideinWMS VO Frontend</a> if your want your users’ jobs to run on the OSG<ul>
-<li><a href="./monitoring/install-rsv-gwms-tester">Install the RSV GlideinWMS Tester</a> if you want to test your front-end's ability to submit jobs to sites in the OSG</li>
-</ul>
-</li>
-<li>Storage element (pick one):<ul>
-<li>GridFTP<ul>
-<li><a href="./data/gridftp">Install standalone OSG GridFTP</a>: GridFTP server</li>
-<li>(optional) <a href="./data/load-balanced-gridftp">Install load-balanced OSG GridFTP</a>: when a single GridFTP server isn't enough</li>
-</ul>
-</li>
-<li>BeStMan<ul>
-<li><a href="./data/bestman-install">Install Bestman on POSIX</a>: BeStMan2 SRM server + GridFTP server</li>
-<li><a href="./data/install-hadoop-2-0-0">Install Bestman on Hadoop</a>: BeStMan2 SRM and GridFTP servers on the Hadoop Distributed File System</li>
-</ul>
-</li>
-<li>Hadoop Distributed File System (HDFS)<ul>
-<li><a href="./data/hadoop-overview">Hadoop Overview</a>: HDFS information, planning, and guides</li>
-</ul>
-</li>
-<li>XRootD<ul>
-<li><a href="./data/xrootd-overview">XRootd Overview</a>: XRootD information, planning, and guides</li>
-<li><a href="./data/install-xrootd">Install Xrootd Server</a>: XRootD redirector installation</li>
-<li><a href="./data/install-bestman-xrootd">Install BeStMan-Gateway XRootD</a>: BeStMan2 SRM server + GridFTP server + XRootD fuse</li>
-</ul>
-</li>
+<li><a href="./monitoring/install-rsv-gwms-tester">Install the RSV GlideinWMS Tester</a> if you want to test your front-end's
+    ability to submit jobs to sites in the OSG</li>
 </ul>
 </li>
 </ul>
 <h2 id="test-osg-software">Test OSG Software<a class="headerlink" href="#test-osg-software" title="Permanent link">&para;</a></h2>
-<p>At very least, it is vital to test <em>manual</em> submission of jobs from inside and outside of your site through your CE to your batch system. If this process does not work manually, it will probably not work for the glideinWMS pilot factory either.</p>
+<p>It is useful to test <em>manual</em> submission of jobs from inside and outside of your site through your CE to your batch system. If this process does not work manually, it will probably not work for the glideinWMS pilot factory either.</p>
 <ul>
 <li><a href="./compute-element/submit-htcondor-ce">Test job submission into an HTCondor-CE</a></li>
 </ul>
 <h2 id="start-glideinwms-pilot-submissions">Start GlideinWMS Pilot Submissions<a class="headerlink" href="#start-glideinwms-pilot-submissions" title="Permanent link">&para;</a></h2>
 <p>To begin running <a href="http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/">GlideinWMS</a> pilot jobs at your site, e-mail <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#115;&#103;&#45;&#103;&#102;&#97;&#99;&#116;&#111;&#114;&#121;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#112;&#104;&#121;&#115;&#105;&#99;&#115;&#46;&#117;&#99;&#115;&#100;&#46;&#101;&#100;&#117;">&#111;&#115;&#103;&#45;&#103;&#102;&#97;&#99;&#116;&#111;&#114;&#121;&#45;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#112;&#104;&#121;&#115;&#105;&#99;&#115;&#46;&#117;&#99;&#115;&#100;&#46;&#101;&#100;&#117;</a> and tell them that you want to start accepting Glideins. Please provide them with the following information:</p>
 <ul>
-<li>The type of CE (HTCondor-CE or the now-unsupported GRAM-CE)</li>
 <li>The fully qualified hostname of the CE</li>
 <li>Resource/WLCG name</li>
-<li>OS major version of your worker nodes — EL 6, EL 7, or a mix of both?</li>
-<li>Do you accept multicore jobs?</li>
+<li>Supported OS version of your worker nodes (e.g., EL6, EL7, or both)</li>
+<li>Support for multicore jobs</li>
 <li>Maximum job walltime</li>
 <li>Maximum job memory usage</li>
 </ul>
@@ -969,5 +970,5 @@
 
 <!--
 MkDocs version : 0.17.1
-Build Date UTC : 2017-11-15 22:51:38
+Build Date UTC : 2017-11-15 22:53:46
 -->

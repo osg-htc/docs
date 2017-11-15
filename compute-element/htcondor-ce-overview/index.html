@@ -87,10 +87,6 @@
     
         <ul>
         
-            <li><a class="toctree-l4" href="#about-this-document">About this Document</a></li>
-        
-            <li><a class="toctree-l4" href="#document-requirements">Document Requirements</a></li>
-        
             <li><a class="toctree-l4" href="#what-is-a-compute-element">What is a Compute Element?</a></li>
         
             <li><a class="toctree-l4" href="#what-is-htcondor-ce">What is HTCondor-CE?</a></li>
@@ -790,10 +786,8 @@
             <div class="section">
               
                 <h1 id="htcondor-ce-overview">HTCondor-CE Overview<a class="headerlink" href="#htcondor-ce-overview" title="Permanent link">&para;</a></h1>
-<h2 id="about-this-document">About this Document<a class="headerlink" href="#about-this-document" title="Permanent link">&para;</a></h2>
-<p>This document serves as an introduction to HTCondor-CE, how it works, and how it differs from a GRAM CE.</p>
-<h2 id="document-requirements">Document Requirements<a class="headerlink" href="#document-requirements" title="Permanent link">&para;</a></h2>
-<p>Before continuing with this document, make sure that you are familiar with the following concepts:</p>
+<p>This document serves as an introduction to HTCondor-CE and how it works.
+Before continuing with the overview, make sure that you are familiar with the following concepts:</p>
 <ul>
 <li>An OSG site plan<ul>
 <li>What is a batch system and which one will you use (<a href="http://htcondor.org/">HTCondor</a>, PBS, LSF, SGE, or SLURM)?</li>
@@ -803,13 +797,11 @@
 <li>Pilot jobs, frontends, and factories (i.e., <a href="http://glideinwms.fnal.gov/doc.prd/index.html">GlideinWMS</a>, AutoPyFactory)</li>
 </ul>
 <h2 id="what-is-a-compute-element">What is a Compute Element?<a class="headerlink" href="#what-is-a-compute-element" title="Permanent link">&para;</a></h2>
-<p>An OSG Compute Element (CE) is the entry point for the OSG to your local resources: a layer of software that you install on a machine that can submit jobs into your local batch system. At the heart of the CE is the <em>job gateway</em> software, which is responsible for handling incoming jobs, authorizing them, and delegating them to your batch system for execution. Historically, the OSG only had one option for a job gateway solution, Globus Toolkit’s GRAM-based gatekeeper, but now offers the HTCondor-CE as an alternative.</p>
+<p>An OSG Compute Element (CE) is the entry point for the OSG to your local resources: a layer of software that you install on a machine that can submit jobs into your local batch system. At the heart of the CE is the <em>job gateway</em> software, which is responsible for handling incoming jobs, authorizing them, and delegating them to your batch system for execution.</p>
 <p>Today in OSG, most jobs that arrive at a CE (called <em>grid jobs</em>) are <strong>not</strong> end-user jobs, but rather pilot jobs submitted from factories. Successful pilot jobs create and make available an environment for actual end-user jobs to match and ultimately run within the pilot job container. Eventually pilot jobs remove themselves, typically after a period of inactivity.</p>
 <h2 id="what-is-htcondor-ce">What is HTCondor-CE?<a class="headerlink" href="#what-is-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>HTCondor-CE is a special configuration of the HTCondor software designed to be a job gateway solution for the OSG. It is configured to use the <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html">JobRouter daemon</a> to delegate jobs by transforming and submitting them to the site’s batch system.</p>
-<h3 id="how-is-htcondor-ce-different-from-a-gram-ce">How is HTCondor-CE different from a GRAM CE?<a class="headerlink" href="#how-is-htcondor-ce-different-from-a-gram-ce" title="Permanent link">&para;</a></h3>
-<p>The biggest difference you will see between an HTCondor-CE and a GRAM CE is in the way that jobs are submitted to your batch system; HTCondor-CE uses the built-in JobRouter daemon whereas GRAM CE uses jobmanager scripts written in Perl. Customizing your site’s CE now requires editing configuration files instead of editing jobmanager scripts.</p>
-<p>Listed below are some other benefits to switching to HTCondor-CE:</p>
+<p>Benefits of running the HTCondor-CE:</p>
 <ul>
 <li><strong>Scalability:</strong> HTCondor-CE is capable of supporting job workloads of large sites (see <a href="https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HTCondorCEScaleTests">scale testing results</a>)</li>
 <li><strong>Debugging tools:</strong> HTCondor-CE offers <a href="../troubleshoot-htcondor-ce">many tools to help troubleshoot</a> issues with jobs</li>
@@ -847,7 +839,9 @@
 <h2 id="how-the-ce-is-customized">How the CE is Customized<a class="headerlink" href="#how-the-ce-is-customized" title="Permanent link">&para;</a></h2>
 <p>Aside from the <a href="../install-htcondor-ce#configuring-htcondor-ce">basic configuration</a> required in the CE installation, there are two main ways to customize your CE (if you decide any customization is required at all):</p>
 <ul>
-<li><strong>Deciding which VOs are allowed to run at your site:</strong> The method of limiting the VOs that are allowed to run on your site has not changed between GRAM and HTCondor-CE’s: select an authorization system, GUMS or edg-mkgridmap, and configure it accordingly.</li>
+<li><strong>Deciding which VOs are allowed to run at your site:</strong> The recommended method of authorizing VOs at your site is
+    based on the <a href="../../security/lcmaps-voms-authentication">LCMAPS framework</a>; we plan to support the prior mechanisms,
+    <a href="../../security/install-gums">GUMS</a> and <a href="../../security/edg-mkgridmap">edg-mkgridmap</a> until May 2018.</li>
 <li><strong>How to filter and transform the grid jobs to be run on your batch system:</strong> Filtering and transforming grid jobs (i.e., setting site-specific attributes or resource limits), requires configuration of your site’s job routes. For examples of common job routes, consult the <a href="../job-router-recipes">JobRouter recipes</a> page.</li>
 </ul>
 <div class="admonition note">
@@ -857,11 +851,11 @@
 <h2 id="how-security-works">How Security Works<a class="headerlink" href="#how-security-works" title="Permanent link">&para;</a></h2>
 <p>In the OSG, security depends on a PKI infrastructure involving Certificate Authorities (CAs) where CAs sign and issue certifcates to users and hosts. When these users and hosts wish to communicate with each other, the identities of each party is confirmed by cross-checking their certificates with the signing CA and establishing trust.</p>
 <p>Due to the OSG's distributed nature, a user's job may end up at any number of sites, potentially needing to re-authenticate at multiple points. Instead of sending the user's certificate with the job for this re-authentication, trust can be delegated to a proxy that is generated from the user certificate, which is then attached to the job and expires after some set time for added security.</p>
-<p>In its default configuration, HTCondor-CE uses GSI-based authentication and authorization (the same as Globus GRAM) to verify the certificate chain, which will work with existing GUMS servers or grid mapfiles. Additionally, it can be reconfigured to provide alternate authentication mechanisms such as Kerberos, SSL, shared secret, or even IP-based authentication. More information about authorization methods can be found <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/3_8Security.html#SECTION00483000000000000000">here</a>.</p>
+<p>In its default configuration, HTCondor-CE uses GSI-based authentication and authorization to verify the certificate chain, which will work with existing GUMS servers or grid mapfiles. Additionally, it can be reconfigured to provide alternate authentication mechanisms such as Kerberos, SSL, shared secret, or even IP-based authentication. More information about authorization methods can be found <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/3_8Security.html#SECTION00483000000000000000">here</a>.</p>
 <h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
-<p>If you're transitioning from a GRAM CE to HTCondor-CE, the process is the same as if you were setting up a completely new CE, whether you're installing it on a new machine or alongside your GRAM CE.</p>
+<p>Once the basic installation is done, additional activities include:</p>
 <ul>
-<li>Setting up <a href="../job-router-recipes">job routes</a></li>
+<li>Setting up <a href="../job-router-recipes">job routes</a> to customize incoming jobs</li>
 <li><a href="../submit-htcondor-ce">Submitting</a> jobs to HTCondor-CE</li>
 <li><a href="../troubleshoot-htcondor-ce">Troubleshooting</a> HTCondor-CE</li>
 <li>Register the CE with OIM</li>

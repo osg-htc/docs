@@ -899,7 +899,7 @@
 <h2 id="configuring-htcondor-ce">Configuring HTCondor-CE<a class="headerlink" href="#configuring-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>There are a few required configuration steps to connect HTCondor-CE with your batch system and authentication method. For more advanced configuration, see the section on <a href="#optional-configuration">optional configurations</a>.</p>
 <h3 id="enabling-htcondor-ce">Enabling HTCondor-CE<a class="headerlink" href="#enabling-htcondor-ce" title="Permanent link">&para;</a></h3>
-<p>If you are installing HTCondor-CE on a new host, the default configuration is correct and you can skip this step and continue onto <a href="#configuring-the-batch-system">Configuring the batch system</a>! However, if you are updating a host that used a Globus GRAM job gateway (aka the Globus gatekeeper), you must disable GRAM and enable the HTCondor job gateway. Edit the gateway configuration file <code>/etc/osg/config.d/10-gateway.ini</code> so that it reads:</p>
+<p>If you are installing HTCondor-CE on a new host, the default configuration is correct and you can skip this step and continue onto <a href="#configuring-the-batch-system">Configuring the batch system</a>! However, if you are updating a host that used a Globus GRAM job gateway ("Globus gatekeeper"), you must disable GRAM and enable the HTCondor job gateway. Edit the gateway configuration file <code>/etc/osg/config.d/10-gateway.ini</code> so that it reads:</p>
 <div class="codehilite"><pre><span></span>gram_gateway_enabled = False
 htcondor_gateway_enabled = True
 </pre></div>
@@ -1069,7 +1069,7 @@ NETWORK_INTERFACE = <span style="color:red">127.0.0.1</span>
 
 <p>Replacing <code>condorce.example.com</code> text with your public interface’s hostname and <code>127.0.0.1</code> with your public interface’s IP address.</p>
 <h4 id="limiting-or-disabling-locally-running-jobs-on-the-ce">Limiting or disabling locally running jobs on the CE<a class="headerlink" href="#limiting-or-disabling-locally-running-jobs-on-the-ce" title="Permanent link">&para;</a></h4>
-<p>If you want to limit or disable jobs running locally on your CE, you will need to configure HTCondor-CE's local and scheduler universes. Local and scheduler universes are HTCondor-CE’s analogue to GRAM’s managed fork: they allow jobs to be run on the CE itself, mainly for remote troubleshooting. Pilot jobs will not run as local/scheduler universe jobs so leaving them enabled does NOT turn your CE into another worker node.</p>
+<p>If you want to limit or disable jobs running locally on your CE, you will need to configure HTCondor-CE's local and scheduler universes. Local and scheduler universes allow jobs to be run on the CE itself, mainly for remote troubleshooting. Pilot jobs will not run as local/scheduler universe jobs so leaving them enabled does NOT turn your CE into another worker node.</p>
 <p>The two universes are effectively the same (scheduler universe launches a starter process for each job), so we will be configuring them in unison.</p>
 <ul>
 <li>
