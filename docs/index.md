@@ -77,17 +77,17 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 
 ### Installing and Configuring Other Services ###
 
-All of these node types and their services are optional, although OSG requires a HTTP caching service if you have
+All of these node types and their services are optional, although OSG requires an HTTP caching service if you have
 installed [CVMFS](worker-node/install-cvmfs) on your worker nodes.
 
--   [Install Frontier Squid](data/frontier-squid), a HTTP caching proxy service.
+-   [Install Frontier Squid](data/frontier-squid), an HTTP caching proxy service.
 -   Storage element:
     -   Existing POSIX-based systems (such as NFS, Lustre, or GPFS):
         -   [Install standalone OSG GridFTP](data/gridftp): GridFTP server
         -   (optional) [Install load-balanced OSG GridFTP](data/load-balanced-gridftp): when a single GridFTP server isn't enough
     -   Hadoop Distributed File System (HDFS):
         -   [Hadoop Overview](data/hadoop-overview): HDFS information, planning, and guides
-    -   XRootD-based storage:
+    -   XRootD:
         -   [XRootd Overview](data/xrootd-overview): XRootD information, planning, and guides
         -   [Install Xrootd Server](data/install-xrootd): XRootD redirector installation
 -   RSV monitoring to monitor and report to OSG on the health of your site
@@ -110,8 +110,8 @@ To begin running [GlideinWMS](http://www.uscms.org/SoftwareComputing/Grid/WMS/gl
 
 -   The fully qualified hostname of the CE
 -   Resource/WLCG name
--   OS major version of your worker nodes — EL 6, EL 7, or a mix of both?
--   Do you accept multicore jobs?
+-   Supported OS version of your worker nodes (e.g., EL6, EL7, or both)
+-   Support for multicore jobs
 -   Maximum job walltime
 -   Maximum job memory usage
 
