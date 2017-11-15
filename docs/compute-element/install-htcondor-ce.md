@@ -71,7 +71,7 @@ There are a few required configuration steps to connect HTCondor-CE with your ba
 
 ### Enabling HTCondor-CE
 
-If you are installing HTCondor-CE on a new host, the default configuration is correct and you can skip this step and continue onto [Configuring the batch system](#configuring-the-batch-system)! However, if you are updating a host that used a Globus GRAM job gateway (aka the Globus gatekeeper), you must disable GRAM and enable the HTCondor job gateway. Edit the gateway configuration file `/etc/osg/config.d/10-gateway.ini` so that it reads:
+If you are installing HTCondor-CE on a new host, the default configuration is correct and you can skip this step and continue onto [Configuring the batch system](#configuring-the-batch-system)! However, if you are updating a host that used a Globus GRAM job gateway ("Globus gatekeeper"), you must disable GRAM and enable the HTCondor job gateway. Edit the gateway configuration file `/etc/osg/config.d/10-gateway.ini` so that it reads:
 
 ```
 gram_gateway_enabled = False
@@ -233,7 +233,7 @@ Replacing `condorce.example.com` text with your public interface’s hostname an
 
 #### Limiting or disabling locally running jobs on the CE
 
-If you want to limit or disable jobs running locally on your CE, you will need to configure HTCondor-CE's local and scheduler universes. Local and scheduler universes are HTCondor-CE’s analogue to GRAM’s managed fork: they allow jobs to be run on the CE itself, mainly for remote troubleshooting. Pilot jobs will not run as local/scheduler universe jobs so leaving them enabled does NOT turn your CE into another worker node.
+If you want to limit or disable jobs running locally on your CE, you will need to configure HTCondor-CE's local and scheduler universes. Local and scheduler universes allow jobs to be run on the CE itself, mainly for remote troubleshooting. Pilot jobs will not run as local/scheduler universe jobs so leaving them enabled does NOT turn your CE into another worker node.
 
 The two universes are effectively the same (scheduler universe launches a starter process for each job), so we will be configuring them in unison.
 
