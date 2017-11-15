@@ -26,7 +26,11 @@ This release contains:
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.27%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
-<span class="twiki-macro NOTE"></span> StashCache is supported on EL7 only. <span class="twiki-macro NOTE"></span> xrootd-lcmaps will remain at 1.2.1-1 on EL6.
+!!! note
+    StashCache is supported on EL7 only.
+
+!!! note
+    xrootd-lcmaps will remain at 1.2.1-1 on EL6.
 
 Detailed changes are below. All of the documentation can be found in the [Release3](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/) area of the TWiki.
 
@@ -71,9 +75,11 @@ Once the new repositories are installed, you can update to this new release with
 root@host # yum update
 ```
 
-<span class="twiki-macro NOTE"></span> Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
+!!! note
+    Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
 
-<span class="twiki-macro NOTE"></span> Watch the yum update carefully for any messages about a `.rpmnew` file being created. That means that a configuration file had been editted, and a new default version was to be installed. In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a `.rpmnew` extension. You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version into place (that is, without the `.rpmnew` extension). Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
+!!! note
+    Watch the yum update carefully for any messages about a `.rpmnew` file being created. That means that a configuration file had been editted, and a new default version was to be installed. In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a `.rpmnew` extension. You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version into place (that is, without the `.rpmnew` extension). Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
 
 Need help?
 ----------

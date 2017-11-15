@@ -30,7 +30,7 @@ Detailed changes are below. All of the documentation can be found in the [Releas
 Known Issues
 ------------
 
--   <span class="twiki-macro RED"></span> On Friday, March 17th, [XRootD 4.6.0](https://github.com/xrootd/xrootd/blob/v4.6.0/docs/ReleaseNotes.txt) was pulled from the release repository. <span class="twiki-macro ENDCOLOR"></span> Most of the issues origin from improper CRL verification bug introduced in the recent code. Criticality of the issue:
+-   %RED%On Friday, March 17th, [XRootD 4.6.0](https://github.com/xrootd/xrootd/blob/v4.6.0/docs/ReleaseNotes.txt) was pulled from the release repository. %ENDCOLOR%Most of the issues origin from improper CRL verification bug introduced in the recent code. Criticality of the issue:
     -   high criticality running XRootD in a **server** mode you may have issues since reading the final file usually does require authentication (mostly GSI auth which relates to CRL verification code)
     -   low criticality running XRootD in a **manager** mode you may NOT experience any issues assuming your redirector does not require authentication
     -   to check if you have the affected components installed, run <pre class="rootscreen">root@host # rpm -qa | grep xrootd</pre> to display the versions of your xrootd packages. If any of them are version 4.6.0, run <pre class="rootscreen">root@host # yum downgrade <package></pre> on those packages.
@@ -63,9 +63,11 @@ Once the new repositories are installed, you can update to this new release with
 root@host # yum update
 ```
 
-<span class="twiki-macro NOTE"></span> Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
+!!! note
+    Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
 
-<span class="twiki-macro NOTE"></span> Watch the yum update carefully for any messages about a `.rpmnew` file being created. That means that a configuration file had been editted, and a new default version was to be installed. In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a `.rpmnew` extension. You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version into place (that is, without the `.rpmnew` extension). Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
+!!! note
+    Watch the yum update carefully for any messages about a `.rpmnew` file being created. That means that a configuration file had been editted, and a new default version was to be installed. In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a `.rpmnew` extension. You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version into place (that is, without the `.rpmnew` extension). Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
 
 Need help?
 ----------
