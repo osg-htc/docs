@@ -1,12 +1,19 @@
 OSG Site Administrator Documentation
 ====================================
 
-Welcome to the home page of the Open Science Grid (OSG) Site Administrator documentation! If you are not a site adminstrator...
+Welcome to the home of the Open Science Grid (OSG) Site Administrator documentation!  This documentation aims to
+provide OSG site admins with the necessary information to install, configure, and operate site services.
 
-- If you are a researcher interested in using OSG resources, you can find user documentation [here](https://support.opensciencegrid.org/support/home). 
-- If you'd like to learn more about the OSG and our mission, visit our website [here](https://www.opensciencegrid.org/).
+If you are not a site adminstrator:
 
-This document outlines the overall installation process for an OSG site and provides many links into detailed installation, configuration, troubleshooting, and similar pages. If you do not see software-related technical documentation listed here, try the search bar to the left or contacting us at [help@opensciencegrid.org](mailto:help@opensciencegrid.org).
+- If you are a **researcher** interested in using OSG resources, you may want to view our
+  [user documentation](https://support.opensciencegrid.org/support/home).
+- If you'd like to learn more about the OSG and our mission, visit the OSG consortium's [homepage](https://www.opensciencegrid.org/).
+
+This document outlines the overall installation process for an OSG site and provides many links into detailed
+installation, configuration, troubleshooting, and similar pages. If you do not see software-related technical
+documentation listed here, try the search bar to the left or contacting us at
+[help@opensciencegrid.org](mailto:help@opensciencegrid.org).
 
 Plan the Site
 -------------
@@ -34,7 +41,6 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
     For sites with more than a handful of worker nodes, it is recommended to use some sort of configuration management tool to install, configure, and maintain your site. While beyond the scope of OSG’s documentation to explain how to select and use such a system, some popular configuration management tools are [Puppet](http://puppetlabs.com), [Chef](https://www.chef.io), [Ansible](https://www.ansible.com), and [CFEngine](http://cfengine.com).
 
 ### General Installation Instructions ###
-
 
 -   [Security information for OSG signed RPMs](release/signing)
 -   [Using Yum and RPM](release/yum-basics)
@@ -69,33 +75,31 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
     -   [Submitting jobs to HTCondor-CE](compute-element/submit-htcondor-ce)
 -   [`osg-configure` Reference](other/configuration-with-osg-configure)
 
-### Installing and Configuring Other Nodes ###
+### Installing and Configuring Other Services ###
 
-All of these node types and their services are optional, although OSG requires the Frontier Squid caching service if you have installed [CVMFS](worker-node/install-cvmfs) on your worker nodes.
+All of these node types and their services are optional, although OSG requires a HTTP caching service if you have
+installed [CVMFS](worker-node/install-cvmfs) on your worker nodes.
 
--   [Install Frontier Squid, the HTTP caching proxy service](data/frontier-squid)
+-   [Install Frontier Squid](data/frontier-squid), a HTTP caching proxy service.
+-   Storage element:
+    -   Existing POSIX-based systems (such as NFS, Lustre, or GPFS):
+        -   [Install standalone OSG GridFTP](data/gridftp): GridFTP server
+        -   (optional) [Install load-balanced OSG GridFTP](data/load-balanced-gridftp): when a single GridFTP server isn't enough
+    -   Hadoop Distributed File System (HDFS):
+        -   [Hadoop Overview](data/hadoop-overview): HDFS information, planning, and guides
+    -   XRootD-based storage:
+        -   [XRootd Overview](data/xrootd-overview): XRootD information, planning, and guides
+        -   [Install Xrootd Server](data/install-xrootd): XRootD redirector installation
 -   RSV monitoring to monitor and report to OSG on the health of your site
     -   [Install RSV](monitoring/install-rsv)
 -   [Install the GlideinWMS VO Frontend](other/install-gwms-frontend) if your want your users’ jobs to run on the OSG
-    -   [Install the RSV GlideinWMS Tester](monitoring/install-rsv-gwms-tester) if you want to test your front-end's ability to submit jobs to sites in the OSG
--   Storage element (pick one):
-    -   GridFTP
-        -   [Install standalone OSG GridFTP](data/gridftp): GridFTP server
-        -   (optional) [Install load-balanced OSG GridFTP](data/load-balanced-gridftp): when a single GridFTP server isn't enough
-    -   BeStMan
-        -   [Install Bestman on POSIX](data/bestman-install): BeStMan2 SRM server + GridFTP server
-        -   [Install Bestman on Hadoop](data/install-hadoop-2-0-0): BeStMan2 SRM and GridFTP servers on the Hadoop Distributed File System
-    -   Hadoop Distributed File System (HDFS)
-        -   [Hadoop Overview](data/hadoop-overview): HDFS information, planning, and guides
-    -   XRootD
-        -   [XRootd Overview](data/xrootd-overview): XRootD information, planning, and guides
-        -   [Install Xrootd Server](data/install-xrootd): XRootD redirector installation
-        -   [Install BeStMan-Gateway XRootD](data/install-bestman-xrootd): BeStMan2 SRM server + GridFTP server + XRootD fuse
+    -   [Install the RSV GlideinWMS Tester](monitoring/install-rsv-gwms-tester) if you want to test your front-end's
+        ability to submit jobs to sites in the OSG
 
 Test OSG Software
 -----------------
 
-At very least, it is vital to test *manual* submission of jobs from inside and outside of your site through your CE to your batch system. If this process does not work manually, it will probably not work for the glideinWMS pilot factory either.
+It is useful to test *manual* submission of jobs from inside and outside of your site through your CE to your batch system. If this process does not work manually, it will probably not work for the glideinWMS pilot factory either.
 
 -   [Test job submission into an HTCondor-CE](compute-element/submit-htcondor-ce)
 
@@ -104,7 +108,6 @@ Start GlideinWMS Pilot Submissions
 
 To begin running [GlideinWMS](http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/) pilot jobs at your site, e-mail <osg-gfactory-support@physics.ucsd.edu> and tell them that you want to start accepting Glideins. Please provide them with the following information:
 
--   The type of CE (HTCondor-CE or the now-unsupported GRAM-CE)
 -   The fully qualified hostname of the CE
 -   Resource/WLCG name
 -   OS major version of your worker nodes — EL 6, EL 7, or a mix of both?
