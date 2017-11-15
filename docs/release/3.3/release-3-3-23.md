@@ -20,7 +20,8 @@ This release contains:
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.23%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
-<span class="twiki-macro NOTE"></span> After updating OSG-CE to version 3.3-12, please disable and remove OSG Info Services via the following procedure:
+!!! note
+    After updating OSG-CE to version 3.3-12, please disable and remove OSG Info Services via the following procedure:
 
 ``` console
 root@host # service osg-info-services stop
@@ -59,9 +60,11 @@ Once the new repositories are installed, you can update to this new release with
 root@host # yum update
 ```
 
-<span class="twiki-macro NOTE"></span> Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
+!!! note
+    Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
 
-<span class="twiki-macro NOTE"></span> Watch the yum update carefully for any messages about a `.rpmnew` file being created. That means that a configuration file had been editted, and a new default version was to be installed. In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a `.rpmnew` extension. You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version into place (that is, without the `.rpmnew` extension). Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
+!!! note
+    Watch the yum update carefully for any messages about a `.rpmnew` file being created. That means that a configuration file had been editted, and a new default version was to be installed. In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a `.rpmnew` extension. You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version into place (that is, without the `.rpmnew` extension). Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
 
 Need help?
 ----------
