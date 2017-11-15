@@ -1,19 +1,25 @@
 Hadoop 2.0.0 (CDH4)
 ===================
 
-The purpose of this document is to provide Hadoop based SE administrators the information on how to prepare, install and validate the SE.
+The purpose of this document is to provide Hadoop based SE administrators the information on how to prepare, install
+and validate OSG storage based on the Hadoop Distributed File System (HDFS).  Currently, OSG supports a patched version
+of the CDH4 distribution of HDFS.
 
 Introduction
 ------------
 
 [Hadoop Distributed File System](http://hadoop.apache.org/) (HDFS) is a scalable reliable distributed file system developed in the Apache project. It is based on map-reduce framework and design of the Google file system. The VDT distribution of Hadoop includes all components needed to operate a multi-terabyte storage site. Included are:
 
--   An [SRM interface](https://sdm.lbl.gov/srm-wg/doc/SRM.v2.2.html) for grid access;
--   GridFTP-HDFS as transport layer; and
--   A [FUSE interface](http://fuse.sourceforge.net/) for localized POSIX access.
 -   [Apache Hadoop](http://hadoop.apache.org/)
+-   A [FUSE interface](http://fuse.sourceforge.net/) for localized POSIX access.
+-   GridFTP and XRootD for offsite transfers
 
-The OSG packaging and distribution of Hadoop is based on YUM. All components are packaged as RPMs and are available from the OSG repositories. It is also recommended that you enable [EPEL](http://fedoraproject.org/wiki/EPEL) repos.
+The OSG packaging and distribution of Hadoop is based on YUM. All components are packaged as RPMs and are available
+from the OSG repositories. It is also recommended that you enable [EPEL](http://fedoraproject.org/wiki/EPEL) repos.
+
+!!! warning "Deprecation Notice"
+    This installation page additionally includes integration with both the BestMan SRM server and GUMS authorization
+    service.  Both of these are deprecated as of June 2017 and support will end May 2018.
 
 Requirements
 ============
@@ -29,18 +35,17 @@ Architecture
 -   **Datanode**: You will have many datanodes. Each data node stores large blocks of files to be stored on the hadoop cluster.
 -   **Client**: This is a documentation shorthand that refers to any machine with the hadoop client commands and [FUSE](http://fuse.sourceforge.net/) mount. Any machine that needs a FUSE mount to access data in a POSIX-like fashion will need this.
 -   **GridFTP node**: This is a node with [Globus GridFTP](gridftp). The GridFTP server for Hadoop can be very memory-hungry, up to 500MB/transfer in the default configuration. You should plan accordingly to provision enough GridFTP servers to handle the bandwidth that your site can support.
--    **SRM node**: This node will contain the BeStMan SRM frontend for accessing the Hadoop cluster via the SRM protocol. [BeStMan2 SRM](https://sdm.lbl.gov/bestman/)
 
 Note that these components are not necessarily mutually exclusive. For instance, you may consider having your GridFTP server co-located on the SRM node. Alternatively, you can locate a client (or even a GridFTP node) co-located on each data node. That way, each data node also acts as an access point to the hadoop cluster.
 
 !!! note
-    Total installation time, on an average, should not exceed 8 to 24 man-hours. If your site needs further assistance to help expedite, please email <mailto:help@opensciencegrid.org>.
+    Total installation time, on an average, should not exceed 8 to 24 man-hours. If your site needs further assistance
+    to help expedite, please email <mailto:help@opensciencegrid.org>.
 
 Host and OS
 -----------
 
 Hadoop will run anywhere that Java is supported (including Solaris). However, these instructions are for RedHat derivants (including Scientific Linux) because of the RPM based installation. The current supported Operating Systems supported by the OSG are Red Hat Enterprise Linux 6, 7, and variants (see [details...](../release/supported_platforms)).
-
 
 The HDFS prerequisites are:
 
@@ -50,9 +55,6 @@ The HDFS prerequisites are:
 -   `fuse` kernel module and `fuse-libs`.
 -   Java RPM. If java isn't already installed we supply the Oracle jdk 1.6.0 rpm and it will come in as a dependency. Oracle jdk is currently the only jdk supported by OSG so we highly recommend you use the version supplied.
 
-!!! note
-    Versions of OpenAFS less than 1.4.7 and greater than 1.4.1 create nameless groups on Linux; these groups confuse Hadoop and prevent its components from starting up successfully. If you plan to install Hadoop on a Linux OpenAFS client, make sure you're running at least OpenAFS 1.4.7.
-
 Users
 -----
 
@@ -60,7 +62,6 @@ This installation will create following users unless they are already created.
 
 | User      | Comment                                           |
 |:----------|:--------------------------------------------------|
-| `bestman` | Used by Bestman SRM server (needs sudo access).   |
 | `hdfs`    | Used by Hadoop to store data blocks and meta-data |
 
 For this package to function correctly, you will have to create the users needed for grid operation. Any user that can be authenticated should be created.
@@ -77,19 +78,15 @@ Certificates
 | Certificate                 | User that owns certificate | Path to certificate                                                                                 |
 |:----------------------------|:---------------------------|:----------------------------------------------------------------------------------------------------|
 | Host certificate            | `root`                     | `/etc/grid-security/hostcert.pem` <br> `/etc/grid-security/hostkey.pem`                       |
-| Bestman service certificate | `bestman`                  | `/etc/grid-security/bestman/bestmancert.pem` <br> `/etc/grid-security/bestman/bestmankey.pem` |
 
 [Instructions](../security/host-certs) to request a service certificate.
 
-You will also need a copy of CA certificates (see below). Note that the `osg-se-hadoop-srm` and `osg-se-hadoop-gridftp` package will automatically install a certificate package but will not necessarily pick the cert package you expect. For instance, certain installs will prefer the `osg-ca-scripts` package to fulfill this requirement, which installs a set of scripts to automatically update the certificates, but does not initialize the CA certs by default (you have to run it first). For this reason, you may want to specifically install the cert package of your choice first, before installing Hadoop.
+You will also need a copy of CA certificates; see the [CA certificate installation document](../common/ca) if you are
+unfamiliar with this procedure.  This is needed by GridFTP and SRM nodes, but it is recommended for all nodes in the
+cluster.
 
-Networking
-----------
-
-Initializing Certificate Authority
-==================================
-
-This is needed by GridFTP and SRM nodes, but it is recommended for all nodes in the cluster. Enable [fetch-crl](../common/ca#install-fetch-crl)
+!!! tip
+    Make sure you enable [fetch-crl](../common/ca#install-fetch-crl)
 
 Installation
 ============
@@ -346,58 +343,8 @@ This is usually one XML node spread over multiple lines. Note that comments (\#)
 
 The collector is the central server which logs the GridFTP transfers into a database. There are usually three options:
 
-1. **OSG Transfer Collector**: This is the primary collector for transfers in the OSG. Use CollectorHost="gratia-osg-prod.opensciencegrid.org:80".
-1. **OSG-ITB Transfer Collector**: This is the test collector for transfers in the OSG. Use CollectorHost=" gratia-osg-itb.opensciencegrid.org:80".
-1. **Site local collector**: If your site has set up its own collector, then your admin will be able to give you an endpoint to use. Typically, this is along the lines of CollectorHost="collector.example.com:8880".
-
-**Note:** if you are installing on an itb site, use **gratia-osg-itb.opensciencegrid.org** instead of "gratia-osg-transfer.opensciencegrid.org\* above.
-
-### Using GUMS authorization mode
-
-The `user-vo-map` file is a simple, space-separated format that contains 2 columns; the first is a unix username and the second is the VO which that username correspond to. In order to create it you need to configure the gums client.
-
-The primary configuration file for the gums-client utilities is located in `/etc/gums/gums-client.properties`. The two properties that you must change are:
-
-|               |               |                                                                                                                                                                                         |
-|---------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Attribute     | Needs Editing | Value                                                                                                                                                                                   |
-| gums.location | Yes           | This should be set to the admin URL for your gums server, usually of the form gums.location=https://GUMS_HOSTNAME:8443/gums/services/GUMSAdmin                                        |
-| gums.authz    | Yes           | This should be set to the authorization interface URL for your gums server, usually of the form gums.authz=https://GUMS_HOSTNAME:8443/gums/services/GUMSXACMLAuthorizationServicePort |
-
-After the gums client is configured to generate the file run the following once by hand:
-
-``` console
-root@host # gums-host-cron
-```
-
-`user-vo-map` should be created in the following location:
-
-    /var/lib/osg/user-vo-map
-
-To have cron regularly update this file start the following service:
-
-``` console
-root@host # service gums-client-cron start
-```
-
-Make sure the **UserVOMapFile** field is set to this location in
-
-    /etc/gratia/gridftp-transfer/ProbeConfig
-
-Without `user-vo-map` , all gridftp transfers will show up as belonging to the VO "Unknown".
-
-### Using Gridmap based authorization mode
-
-Note: If you are using this mode for authorization, make sure the files /etc/grid-security/gsi-authz.conf and /etc/grid-security/prima-authz.conf do not exist.
-
-In order to enable generation of grid-mapfile and osg-user-vo-map.txt by using the edg-mkgridmap cron process to get information form VOMS servers do the following:
-
-``` console
-edg-mkgridmap 
-```
-
-If you have not installed this package, you will need to run `yum install edg-mkgridmap` first.
-
+1. **OSG Transfer Collector**: This is the primary collector for transfers in the OSG. Use `CollectorHost="gratia-osg-prod.opensciencegrid.org:80"`.
+1. **OSG-ITB Transfer Collector**: This is the test collector for transfers in the OSG. Use `CollectorHost=" gratia-osg-itb.opensciencegrid.org:80"`.
 
 ### Validation
 
@@ -412,45 +359,16 @@ Look for any abnormal termination and report it if it is a non-trivial site issu
 BeStMan Configuration
 ---------------------
 
-See the [BeStMaN documentation](bestman-install#authorization) for details.
+!!! warning "Deprecation Warning"
+    As of June 2017, support for the `bestman2` software has been deprecated.  Support will end in May 2018
 
-### BeStManHadoop-specific configuration
+See the [bestman2 documentation](bestman-install#authorization) for instructions on how to install and configure
+`bestman2`.
 
-BeStMan2 SRM uses the Hadoop FUSE mount to perform namespace operations, such as mkdir, rm, and ls. As per the Hadoop install instructions, edit `/etc/sysconfig/hadoop` and run `service hadoop-firstboot start`. It is **not** necessary (or even recommended) to start any hadoop services with `service hadoop start`.
+BeStMan2 SRM uses the Hadoop FUSE mount to perform namespace operations via common POSIX tools, such as `mkdir`, `rm`,
+and `ls`.  It is **not** necessary (or even recommended) to start any HDFS services on the `bestman2` host.
 
 Make sure that you modify `localPathListAllowed` to use the Hadoop mount in `/etc/bestman2/conf/bestman2.rc`.
-
-### Modify /etc/sudoers
-
-BeStman requires the "sudo" command in order to write information as the proper user. You will need to give the bestman user the proper permissions to run these commands.
-
-Modify `/etc/sudoers` and comment the following line.
-
-``` file
-#Defaults    requiretty
-```
-
-Then add the following lines at the end of the `/etc/sudoers` file.
-
-``` file
-Cmnd_Alias SRM_CMD = /bin/rm, /bin/mkdir, /bin/rmdir, /bin/mv, /bin/cp, /bin/ls
-Runas_Alias SRM_USR = ALL, !root
-bestman   ALL=(SRM_USR) NOPASSWD: SRM_CMD
-```
-
-### Copy certificates to bestman location
-
-BeStMan2 is preconfigured to look for the **host** certificate and key in `/etc/grid-security/bestman/bestman*.pem`. Either, these files **must** exist and be **owned** by the **bestman** user, or you must change the settings in `bestman2.rc`. Note that you must use host certificates here or lcg-utils may experience issues.
-
-BeStMan requires a certificate pair to function. In order to use lcg-utils, this must be a host certificate (rather than a service certificate). The following shows how to copy your certificates
-
-``` console
-cp /etc/grid-security/hostkey.pem /etc/grid-security/bestman/bestmankey.pem
-cp /etc/grid-security/hostcert.pem /etc/grid-security/bestman/bestmancert.pem
-chown -R bestman:bestman /etc/grid-security/bestman/
-```
-
-Then modify **CertFileName**, **KeyFileName** in `/etc/bestman2/conf/bestman2.rc`.
 
 
 Hadoop Storage Probe Configuration

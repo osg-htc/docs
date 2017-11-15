@@ -61,7 +61,7 @@ For a large installation, make the following changes: 1 Run more GridFTP servers
 Hadoop Security
 ---------------
 
-HDFS has unix-like user/group authorization, but no strict authentication. HDFS should only be exposed to a secure internal network which only non-malicious users are able to access. For users with access to the local cluster, it is not difficult at all to bypass authentication.
+HDFS has Unix-like user/group authorization, but no strict authentication. **HDFS should only be exposed to a secure internal network which only non-malicious users are able to access**. For users with access to the local cluster, it is not difficult to bypass authentication.
 
 [The default ports are listed here](http://www.cloudera.com/blog/2009/08/14/hadoop-default-ports-quick-reference/).
 
@@ -75,6 +75,6 @@ There are some ways to improve security of your cluster:
 
 There are three options to export your data outside your cluster:
 
--   Globus GridFTP / SRM. This is covered in these web pages.
--   Xrootd. Documentation is nascent.
--   Apache HTTP (authenticated via HTTPS). This is in use at Caltech, but there isn't any documentation available.
+-   Globus GridFTP.
+-   Xrootd.
+-   HTTP and HTTPS.  OSG utilizes the HTTP(S) protocol implementation built into the XRootD server.
