@@ -8,7 +8,7 @@ Summary of changes
 
 This release contains:
 
--   OSG PKI: Certificate requests and retrievals are authenticated by default
+-   OSG PKI: Host certificate requests and retrievals are authenticated by default
 -   BLAHP 1.18.34
     -   Fixed bug in Slurm memory-use parsing that caused jobs to be held
     -   Fixed Unicode decode error when reading blah.config
