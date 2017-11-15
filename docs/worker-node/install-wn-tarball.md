@@ -1,26 +1,25 @@
-Installing and Using the Worker Node Client from Tarballs
-=========================================================
+Installing the Worker Node Client via Tarball
+=============================================
 
-Introduction
-------------
+The **OSG Worker Node Client** is a collection of software components that is expected to be added to every worker node
+that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect
+to use. Contents of the worker node client can be found [here](install-wn.md#worker-node-contents).
 
-This document is intended to guide users through the process of installing the worker node software and configuring the installed worker node software. Contents of the worker node client can be found [here](install-wn.md#worker-node-contents).  Although this document is oriented to system administrators, any unprivileged user may install and use the client.
+!!! note
+    It is possible to install the Worker Node Client software in a variety of ways, depending on your local site:
 
-If you are installing the OSG worker node client following these instruction, remember to configure the `grid_dir` option on your CE - see [below](#configure-the-ce).
+    -   Install using a tarball (this guide) - useful when installing onto a shared filesystem for distribution to worker nodes
+    -   [Use from OASIS](install-wn-oasis.md) - useful when worker nodes already mount [CVMFS](install-cvmfs)
+    -   [Install using RPMs and Yum](install-wn.md) - useful when managing your worker nodes with a tool (e.g., Puppet, Chef) that can automate RPM installs
 
-About This Guide
-----------------
-
-The *OSG Worker Node Client* is a collection of software components that is expected to be added to every worker node that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect to use.
-
-It is possible to install the Worker Node Client software in a variety of ways, depending on what works best for distributing and managing software at your site:  This guide is useful when installing onto a shared filesystem for distribution to worker nodes.  Other options include installing [via RPMs](install-wn.md) or providing the client [via OASIS (CVMFS)](install-wn-oasis).
+This document is intended to guide users through the process of installing the worker node software and configuring the
+installed worker node software.  Although this document is oriented to system administrators, any unprivileged user
+may install and use the client.
 
 Before starting, ensure the host has [a supported operating system](../release/supported_platforms.md).
 
-Download, Installation and Configuration
-----------------------------------------
-
-### Download the WN Client
+Download the WN Client
+----------------------
 
 Please pick the `osg-wn-client` tarball that is appropriate for your distribution and architecture. You will find them in <https://repo.opensciencegrid.org/tarball-install/> .
 
@@ -35,7 +34,8 @@ For OSG 3.4:
 -   [Binaries for 64-bit RHEL6](https://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz)
 -   [Binaries for RHEL7](https://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el7.x86_64.tar.gz)
 
-### Install the WN Client
+Install the WN Client
+---------------------
 
 1.  Unpack the tarball.
 2.  Move the directory that was created to where you want the tarball client to be.
@@ -61,7 +61,8 @@ root@host # osg-ca-manage setupCA --url osg
 root@host # fetch-crl
 ```
 
-#### Configure the CE
+Configure the CE
+----------------
 
 Using the wn-client software installed from the tarball will require a few changes on the compute element so that the resource's configuration can be correctly reported.
 
@@ -94,13 +95,10 @@ Here is what they should look like. (Note: fill in `<OSG_LOCATION>` with the ful
 
 You might want to configure proxy settings in `$OSG_LOCATION/etc/fetch-crl.conf`.
 
-### Starting and Enabling Services
+### Enabling and Disabling Services
 
-To start the services you must edit your cron with **`crontab -e`** and add the lines above.
-
-### Stopping and Disabling Services
-
-To stop the services you must edit your cron with **`crontab -e`** and remove or comment the lines above.
+To enable the CRL updates, you must edit your cron with **`crontab -e`** and add the lines above.  To disable, remove
+the lines from the `crontab`.
 
 Validing the Worker Node Client
 -------------------------------
