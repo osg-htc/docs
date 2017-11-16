@@ -45,7 +45,6 @@ This release contains:
         -   Update to xrootd-lcmaps 1.3.3 for EL7
     -   Update StashCache meta-packages to require XRootD 4.6.1
     -   Update to [GlideinWMS 3.2.19](http://glideinwms.fnal.gov/doc.v3_2_19/history.html)
-    -   [Frontier squid 3.5.24-3.1](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt): See [Upgrading from 2.x to 3.x](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Upgrading) for additional information
     -   Make the LCMAPS VOMS plugin consider only the first FQAN to be consistent with GUMS
     -   HTCondor-CE: Add WholeNodeWanted ClassAd expression so jobs can request a whole node from the batch system
     -   [HTCondor 8.6.3](https://lists.cs.wisc.edu/archive/htcondor-world/2017/msg00017.shtml): See [Upgrading from 8.4](http://research.cs.wisc.edu/htcondor//manual/v8.6.3/10_2Upgrading_from.html) for additional information

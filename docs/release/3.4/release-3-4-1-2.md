@@ -1,5 +1,5 @@
-OSG Software Stack -- Data Release -- 3.4.1-2 and 3.3.26-2
-==========================================================
+OSG Software Stack -- Data Release -- 3.4.1-2
+=============================================
 
 **Release Date**: 2017-07-13
 
@@ -52,26 +52,12 @@ Detailed changes in this release
 
 We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.
 
-#### OSG 3.3
-
-##### Enterprise Linux 6
-
--   [igtf-ca-certs-1.84-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.84-1.osg33.el6)
--   [osg-ca-certs-1.64-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.64-1.osg33.el6)
-
-##### Enterprise Linux 7
-
--   [igtf-ca-certs-1.84-1.osg33.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.84-1.osg33.el7)
--   [osg-ca-certs-1.64-1.osg33.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.64-1.osg33.el7)
-
-#### OSG 3.4
-
-##### Enterprise Linux 6
+#### Enterprise Linux 6
 
 -   [igtf-ca-certs-1.84-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.84-1.osg34.el6)
 -   [osg-ca-certs-1.64-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.64-1.osg34.el6)
 
-##### Enterprise Linux 7
+#### Enterprise Linux 7
 
 -   [igtf-ca-certs-1.84-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.84-1.osg34.el7)
 -   [osg-ca-certs-1.64-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.64-1.osg34.el7)
@@ -84,32 +70,14 @@ If you wish to manually update your system, you can run yum update against the f
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
-#### OSG 3.3
-
-##### Enterprise Linux 6
-
-``` file
-igtf-ca-certs-1.84-1.osg33.el6
-osg-ca-certs-1.64-1.osg33.el6
-```
-
-##### Enterprise Linux 7
-
-``` file
-igtf-ca-certs-1.84-1.osg33.el7
-osg-ca-certs-1.64-1.osg33.el7
-```
-
-#### OSG 3.4
-
-##### Enterprise Linux 6
+#### Enterprise Linux 6
 
 ``` file
 igtf-ca-certs-1.84-1.osg34.el6
 osg-ca-certs-1.64-1.osg34.el6
 ```
 
-##### Enterprise Linux 7
+#### Enterprise Linux 7
 
 ``` file
 igtf-ca-certs-1.84-1.osg34.el7
