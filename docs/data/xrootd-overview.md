@@ -14,7 +14,6 @@ Installation
 ------------
 
 -   [Install Xrootd Server](install-xrootd): This page explains how to install an XRootD redirector and data nodes
--   [Install Bestman Gateway Xrootd](install-bestman-xrootd): Installing a SRM frontend with GridFTP for XRootD redirector (**Deprecated**).
 
 Operations
 ----------
