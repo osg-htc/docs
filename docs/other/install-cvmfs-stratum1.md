@@ -76,7 +76,7 @@ root@host # mkdir -p /var/log/cvmfs
 Put the following in `/etc/cron.d/cvmfs`:
 
 ```
-0,15,30,45 * * * * root test -d /srv/cvmfs || exit;cvmfs_server snapshot -ai 
+*/5 * * * * root test -d /srv/cvmfs || exit;cvmfs_server snapshot -ai 
 6 1 * * * root cvmfs_server gc -af 2>/dev/null || true
 0 9 * * * root find /srv/cvmfs/*.*/data/txn -name "*.*" -mtime +2 2>/dev/null|xargs rm -f
 ```
@@ -110,7 +110,7 @@ If you will be serving opensciencegrid.org repositories, you have to allow for o
 ```
 RewriteEngine On 
 RewriteRule ^/cvmfs/([^./]*)/(.*)$ /cvmfs/$1.opensciencegrid.org/$2 
-RewriteRule ^/cvmfs/([^/]+)/api/(.*)$ /cvmfs/$1/api/$2 [PT] 
+RewriteRule ^/cvmfs/([^/]+)/api/(.*)$ /var/www/wsgi-scripts/cvmfs-server/cvmfs-api.wsgi/$1/$2
 RewriteRule ^/cvmfs/(.*)$ /srv/cvmfs/$1 
 <Directory "/srv/cvmfs"> 
   Options -MultiViews +FollowSymLinks -Indexes 
@@ -133,14 +133,19 @@ RewriteRule ^/cvmfs/(.*)$ /srv/cvmfs/$1
   ExpiresByType application/json "access plus 61 seconds" 
 </Directory>
 
-WSGIDaemonProcess cvmfs-api processes=2 display-name=%{GROUP} \
+WSGIDaemonProcess cvmfs-api threads=64 display-name=%{GROUP} \
     python-path=/usr/share/cvmfs-server/webapi
-WSGIProcessGroup cvmfs-api 
+<Directory /var/www/wsgi-scripts/cvmfs-server>
+  WSGIProcessGroup cvmfs-api
+  WSGIApplicationGroup cvmfs-api
+  Options ExecCGI
+  SetHandler wsgi-script
+  Require all granted
+</Directory>
 WSGISocketPrefix /var/run/wsgi 
-WSGIScriptAliasMatch /cvmfs/([^/]+)/api /var/www/wsgi-scripts/cvmfs-api.wsgi/$1 
 ```
 
-On EL6-based systems (apache httpd 2.2) replace the "Require all granted" with "Order allow, deny" and "Allow from all".
+On EL6-based systems (apache httpd 2.2) replace the "Require all granted" lines with "Order allow, deny" and "Allow from all".
 
 If you will be serving cern.ch repositories, it has the same problem; replace opensciencegrid.org above with cern.ch. If you need to serve both opensciencegrid.org and cern.ch contact Dave Dykstra to discuss the options.
 
