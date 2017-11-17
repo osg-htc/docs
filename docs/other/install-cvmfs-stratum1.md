@@ -145,7 +145,11 @@ WSGIDaemonProcess cvmfs-api threads=64 display-name=%{GROUP} \
 WSGISocketPrefix /var/run/wsgi 
 ```
 
-On EL6-based systems (apache httpd 2.2) replace both of the "Require all granted" lines with the two lines "Order allow, deny" and "Allow from all".
+!!! note
+    On EL6-based systems (Apache httpd 2.2) replace both instances of `Require all granted` above with the following:
+
+        Order allow, deny
+        Allow from all
 
 If you will be serving cern.ch repositories, it has the same problem; replace opensciencegrid.org above with cern.ch. If you need to serve both opensciencegrid.org and cern.ch contact Dave Dykstra to discuss the options.
 
