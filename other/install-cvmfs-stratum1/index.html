@@ -857,7 +857,7 @@
 
 
 <p>Put the following in <code>/etc/cron.d/cvmfs</code>:</p>
-<div class="codehilite"><pre><span></span>0,15,30,45 * * * * root test -d /srv/cvmfs || exit;cvmfs_server snapshot -ai 
+<div class="codehilite"><pre><span></span>*/5 * * * * root test -d /srv/cvmfs || exit;cvmfs_server snapshot -ai 
 6 1 * * * root cvmfs_server gc -af 2&gt;/dev/null || true
 0 9 * * * root find /srv/cvmfs/*.*/data/txn -name &quot;*.*&quot; -mtime +2 2&gt;/dev/null|xargs rm -f
 </pre></div>
@@ -886,7 +886,7 @@
 <p>If you will be serving opensciencegrid.org repositories, you have to allow for old client configurations that access repositories without the domain name added. For that reason, you will need to remove each <code>/etc/httpd/conf.d/cvmfs.&lt;repositoryname&gt;.conf</code> that adding a replica creates (this is included in the <a href="https://github.com/opensciencegrid/oasis-server/blob/master/goc/bin/add_osg_repository">add_osg_repository script</a>), and instead add the following to <code>/etc/httpd/conf.d/cvmfs.conf</code>:</p>
 <div class="codehilite"><pre><span></span>RewriteEngine On 
 RewriteRule ^/cvmfs/([^./]*)/(.*)$ /cvmfs/$1.opensciencegrid.org/$2 
-RewriteRule ^/cvmfs/([^/]+)/api/(.*)$ /cvmfs/$1/api/$2 [PT] 
+RewriteRule ^/cvmfs/([^/]+)/api/(.*)$ /var/www/wsgi-scripts/cvmfs-server/cvmfs-api.wsgi/$1/$2
 RewriteRule ^/cvmfs/(.*)$ /srv/cvmfs/$1 
 <span class="nt">&lt;Directory</span> <span class="err">&quot;/srv/cvmfs&quot;</span><span class="nt">&gt;</span> 
   Options -MultiViews +FollowSymLinks -Indexes 
@@ -909,15 +909,28 @@ RewriteRule ^/cvmfs/(.*)$ /srv/cvmfs/$1
   ExpiresByType application/json &quot;access plus 61 seconds&quot; 
 <span class="nt">&lt;/Directory&gt;</span>
 
-WSGIDaemonProcess cvmfs-api processes=2 display-name=%{GROUP} \
+WSGIDaemonProcess cvmfs-api threads=64 display-name=%{GROUP} \
     python-path=/usr/share/cvmfs-server/webapi
-WSGIProcessGroup cvmfs-api 
+<span class="nt">&lt;Directory</span> <span class="err">/var/www/wsgi-scripts/cvmfs-server</span><span class="nt">&gt;</span>
+  WSGIProcessGroup cvmfs-api
+  WSGIApplicationGroup cvmfs-api
+  Options ExecCGI
+  SetHandler wsgi-script
+  Require all granted
+<span class="nt">&lt;/Directory&gt;</span>
 WSGISocketPrefix /var/run/wsgi 
-WSGIScriptAliasMatch /cvmfs/([^/]+)/api /var/www/wsgi-scripts/cvmfs-api.wsgi/$1 
 </pre></div>
 
 
-<p>On EL6-based systems (apache httpd 2.2) replace the "Require all granted" with "Order allow, deny" and "Allow from all".</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On EL6-based systems (Apache httpd 2.2) replace both instances of <code>Require all granted</code> above with the following:</p>
+<div class="codehilite"><pre><span></span>Order allow, deny
+Allow from all
+</pre></div>
+
+
+</div>
 <p>If you will be serving cern.ch repositories, it has the same problem; replace opensciencegrid.org above with cern.ch. If you need to serve both opensciencegrid.org and cern.ch contact Dave Dykstra to discuss the options.</p>
 <p>Then enable apache.  On EL6 do</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chkconfig httpd on 
