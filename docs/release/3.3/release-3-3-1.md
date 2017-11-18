@@ -27,7 +27,7 @@ This release contains:
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.1%20ORDER%20BY%20priority%20DESC) were addressed in this release.
 
-Detailed changes are below. All of the documentation can be found in the [Release3](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/) area of the TWiki.
+Detailed changes are below. All of the documentation can be found [here](../../)
 
 Known Issues
 ------------

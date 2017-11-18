@@ -31,7 +31,7 @@ These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%
 !!! note
     xrootd-lcmaps will remain at 1.2.1-1 on EL6.
 
-Detailed changes are below. All of the documentation can be found [here](../../).
+Detailed changes are below. All of the documentation can be found [here](../../)
 
 Known Issues
 ------------

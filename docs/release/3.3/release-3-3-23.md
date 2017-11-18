@@ -28,7 +28,7 @@ root@host # service osg-info-services stop
 root@host # yum erase gip osg-info-services
 ```
 
-Detailed changes are below. All of the documentation can be found in the [Release3](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/) area of the TWiki.
+Detailed changes are below. All of the documentation can be found [here](../../)
 
 Known Issues
 ------------

@@ -15,7 +15,7 @@ This release contains:
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.5-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
-Detailed changes are below. All of the documentation can be found in the [Release3](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/) area of the TWiki.
+Detailed changes are below. All of the documentation can be found [here](../../)
 
 Updating to the new release
 ---------------------------
@@ -52,11 +52,11 @@ We added or updated the following packages to the production OSG yum repository.
 
 #### Enterprise Linux 6
 
--   [vo-client-76-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=vo-client-76-1.osg33.el6)
+-   [vo-client-76-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=vo-client-76-1.osg34.el6)
 
 #### Enterprise Linux 7
 
--   [vo-client-76-1.osg33.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=vo-client-76-1.osg33.el7)
+-   [vo-client-76-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=vo-client-76-1.osg34.el7)
 
 ### RPMs
 
@@ -69,18 +69,18 @@ If you wish to only update the RPMs that changed, the set of RPMs is:
 #### Enterprise Linux 6
 
 ``` file
-osg-gums-config-76-1.osg33.el6
-vo-client-76-1.osg33.el6
-vo-client-edgmkgridmap-76-1.osg33.el6
-vo-client-lcmaps-voms-76-1.osg33.el6
+osg-gums-config-76-1.osg34.el6
+vo-client-76-1.osg34.el6
+vo-client-edgmkgridmap-76-1.osg34.el6
+vo-client-lcmaps-voms-76-1.osg34.el6
 ```
 
 #### Enterprise Linux 7
 
 ``` file
-osg-gums-config-76-1.osg33.el7
-vo-client-76-1.osg33.el7
-vo-client-edgmkgridmap-76-1.osg33.el7
-vo-client-lcmaps-voms-76-1.osg33.el7
+osg-gums-config-76-1.osg34.el7
+vo-client-76-1.osg34.el7
+vo-client-edgmkgridmap-76-1.osg34.el7
+vo-client-lcmaps-voms-76-1.osg34.el7
 ```
 
