@@ -1,23 +1,19 @@
-OSG Software Stack -- Data Release -- 3.3.20-2
+OSG Software Stack -- Data Release -- 3.3.30-2
 ==============================================
 
-**Release Date**: 2017-01-26
+**Release Date**: 2017-11-20
 
 Summary of changes
 ------------------
 
 This release contains:
 
--   CA Certificates based on [IGTF 1.79](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
-    -   Updated UNLPGrid CA with extended validity period (AR)
-    -   Fixed regular expressions in CILogon and NCSA CA namespaces files (US)
-    -   Included rollover CA IRAN-GRID-CGC-G2 (IR)
-    -   Corrected an incorrect line in selected info files for DigiCert (US)
-    -   Discontinued expiring NECTEC CA (TH)
--   [VO Package v70](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-70)
-    -   Deleted MCDRD VO
+-   [VO Package v76](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-76)
+    -   Drop redundant geant4-lcgadmin objects
+    -   Add missing SNO+ VOMS servers
+    -   Add notice to voms-mapfile-default
 
-These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.20-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
+These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.30-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
 Detailed changes are below. All of the documentation can be found [here](../../)
 
@@ -56,41 +52,35 @@ We added or updated the following packages to the production OSG yum repository.
 
 #### Enterprise Linux 6
 
--   [igtf-ca-certs-1.79-1.osg33.el6](https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.79-1.osg33.el6)
--   [osg-ca-certs-1.59-1.osg33.el6](https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.59-1.osg33.el6)
--   [vo-client-70-1.osg33.el6](https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-70-1.osg33.el6)
+-   [vo-client-76-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=vo-client-76-1.osg33.el6)
 
 #### Enterprise Linux 7
 
--   [igtf-ca-certs-1.79-1.osg33.el7](https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.79-1.osg33.el7)
--   [osg-ca-certs-1.59-1.osg33.el7](https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=osg-ca-certs-1.59-1.osg33.el7)
--   [vo-client-70-1.osg33.el7](https://koji-hub.batlab.org/koji/search?match=glob&type=build&terms=vo-client-70-1.osg33.el7)
+-   [vo-client-76-1.osg33.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=vo-client-76-1.osg33.el7)
 
 ### RPMs
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-    igtf-ca-certs osg-ca-certs osg-gums-config vo-client vo-client-edgmkgridmap
+    osg-gums-config vo-client vo-client-edgmkgridmap vo-client-lcmaps-voms
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 6
 
 ``` file
-igtf-ca-certs-1.79-1.osg33.el6
-osg-ca-certs-1.59-1.osg33.el6
-osg-gums-config-70-1.osg33.el6
-vo-client-70-1.osg33.el6
-vo-client-edgmkgridmap-70-1.osg33.el6
+osg-gums-config-76-1.osg33.el6
+vo-client-76-1.osg33.el6
+vo-client-edgmkgridmap-76-1.osg33.el6
+vo-client-lcmaps-voms-76-1.osg33.el6
 ```
 
 #### Enterprise Linux 7
 
 ``` file
-igtf-ca-certs-1.79-1.osg33.el7
-osg-ca-certs-1.59-1.osg33.el7
-osg-gums-config-70-1.osg33.el7
-vo-client-70-1.osg33.el7
-vo-client-edgmkgridmap-70-1.osg33.el7
+osg-gums-config-76-1.osg33.el7
+vo-client-76-1.osg33.el7
+vo-client-edgmkgridmap-76-1.osg33.el7
+vo-client-lcmaps-voms-76-1.osg33.el7
 ```
 

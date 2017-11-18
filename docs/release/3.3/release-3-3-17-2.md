@@ -17,7 +17,7 @@ This release contains:
 
 This JIRA ticket ([SOFTWARE-2469](https://jira.opensciencegrid.org/browse/SOFTWARE-2469)) was addressed in this release.
 
-Detailed changes are below. All of the documentation can be found in the [Release3](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/) area of the TWiki.
+Detailed changes are below. All of the documentation can be found [here](../../)
 
 Updating to the new release
 ---------------------------
