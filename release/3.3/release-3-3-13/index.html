@@ -669,6 +669,16 @@
   
 	    </li>
           
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
             <li class="toctree-l1 current">
 		
   
@@ -827,7 +837,7 @@
 <li>CVMFS 2.3.0 in the upcoming repository</li>
 </ul>
 <p>These <a href="https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.13%20ORDER%20BY%20priority%20DESC">JIRA tickets</a> were addressed in this release.</p>
-<p>Detailed changes are below. All of the documentation can be found in the <a href="https://twiki.grid.iu.edu/bin/view/Documentation/Release3/">Release3</a> area of the TWiki.</p>
+<p>Detailed changes are below. All of the documentation can be found <a href="../../../">here</a></p>
 <h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The configuration file for GlideinWMS depends on a bug that was fixed in HTCondor version 8.4.7 (and 8.5.5 in upcoming). Unfortunately, this incompatibility was not discovered before HTCondor was released. This affects all GlideinWMS submit hosts running HTCondor 8.4.7 or 8.5.5. It does not affect the factory, it will affect the fronted only if it is used also to submit jobs. In the configuration file <code>/etc/condor/config.d/02_gwms_schedds.config</code>, the following lines:\</li>

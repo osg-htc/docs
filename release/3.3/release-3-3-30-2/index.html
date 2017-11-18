@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../../img/favicon.ico">
-  <title>OSG Release 3.4.2 - OSG Documentation</title>
+  <title>OSG Release 3.3.30-2 - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "OSG Release 3.4.2";
-    var mkdocs_page_input_path = "release/3.4/release-3-4-2.md";
-    var mkdocs_page_url = "/release/3.4/release-3-4-2/";
+    var mkdocs_page_name = "OSG Release 3.3.30-2";
+    var mkdocs_page_input_path = "release/3.3/release-3-3-30-2.md";
+    var mkdocs_page_url = "/release/3.3/release-3-3-30-2/";
   </script>
   
   <script src="../../../js/jquery-2.1.1.min.js"></script>
@@ -474,80 +474,18 @@
   
 	    </li>
           
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
             <li class="toctree-l1 current">
 		
   
-    <a class="current" href="./">OSG Release 3.4.2</a>
+    <a class="current" href="./">OSG Release 3.3.30-2</a>
   
   <ul class="subnav">
       
-    <li class="toctree-l2"><a href="#osg-software-release-342">OSG Software Release 3.4.2</a></li>
+    <li class="toctree-l2"><a href="#osg-software-stack-data-release-3330-2">OSG Software Stack -- Data Release -- 3.3.30-2</a></li>
     
         <ul>
         
             <li><a class="toctree-l3" href="#summary-of-changes">Summary of changes</a></li>
-        
-            <li><a class="toctree-l3" href="#known-issues">Known Issues</a></li>
         
             <li><a class="toctree-l3" href="#updating-to-the-new-release">Updating to the new release</a></li>
         
@@ -559,6 +497,66 @@
     
 
   </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
 	    </li>
           
             <li class="toctree-l1">
@@ -793,10 +791,10 @@
     
       
     
-    <li>OSG Release 3.4.2</li>
+    <li>OSG Release 3.3.30-2</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.4/release-3-4-2.md"
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.3/release-3-3-30-2.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -806,74 +804,25 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="osg-software-release-342">OSG Software Release 3.4.2<a class="headerlink" href="#osg-software-release-342" title="Permanent link">&para;</a></h1>
-<p><strong>Release Date</strong>: 2017-08-08</p>
+                <h1 id="osg-software-stack-data-release-3330-2">OSG Software Stack -- Data Release -- 3.3.30-2<a class="headerlink" href="#osg-software-stack-data-release-3330-2" title="Permanent link">&para;</a></h1>
+<p><strong>Release Date</strong>: 2017-11-20</p>
 <h2 id="summary-of-changes">Summary of changes<a class="headerlink" href="#summary-of-changes" title="Permanent link">&para;</a></h2>
 <p>This release contains:</p>
 <ul>
-<li><a href="https://www-auth.cs.wisc.edu/lists/htcondor-world/2017/msg00021.shtml">HTCondor 8.6.5</a><ul>
-<li>Updated SELinux profile which is required on Red Hat 7.4</li>
-<li>Fixed a memory leak that would cause the condor_collector to slowly grow</li>
-<li>Fixed several issues that occur when IPv6 is in use</li>
-<li>Fixed a bug where condor_rm rarely removed another one of the user's jobs</li>
-<li>Fixed a bug with parallel universe jobs starting on partitionable slots</li>
-</ul>
-</li>
-<li>HTCondor-CE<ul>
-<li>Added pilot payload auditing</li>
-<li>Do not hold running jobs with an expired proxy</li>
-<li>Initialize <code>$SPOOL/ceview/vos</code> directory at installation time so that the VO tab functions in CEView before any pilots are received</li>
-<li>Don't warn about not running osg-configure, if osg-configure is not installed</li>
-</ul>
-</li>
-<li>Default configuration improvements for condor-cron<ul>
-<li>Clarified how to override the <code>CONDOR_IDS</code></li>
-<li>Disable the unused GSI authentication that was producing spurious log messages.</li>
-</ul>
-</li>
-<li>Several improvements to osg-configure<ul>
-<li>Ensure that GUMS is configured before trying to query the GUMS server</li>
-<li>Progress updates (such as informing when an operation is expected to take a while) during the user VO file validation are presented to the user rather than being sent to the log file.</li>
-<li>osg-configure will issue same warnings and errors with -v option as it does with the -c option.</li>
-</ul>
-</li>
-<li>Added blahp configuration option for PBS Pro. This option must be used when the disambiguation code does not correctly determine which PBS is in use.</li>
-<li>Reorganize the osg-ce packages <a href="https://jira.opensciencegrid.org/browse/SOFTWARE-2768">SOFTWARE-2768</a></li>
-<li>Upcoming: patched HTCondor 8.7.2<ul>
-<li>Updated SELinux profile which is required on Red Hat 7.4</li>
+<li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-76">VO Package v76</a><ul>
+<li>Drop redundant geant4-lcgadmin objects</li>
+<li>Add missing SNO+ VOMS servers</li>
+<li>Add notice to voms-mapfile-default</li>
 </ul>
 </li>
 </ul>
-<p>These <a href="https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a> were addressed in this release.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>OSG 3.4 contains only 64-bit components.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>StashCache is supported on EL7 only.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>xrootd-lcmaps will remain at 1.2.1-2 on EL6.</p>
-</div>
+<p>These <a href="https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.30-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a> were addressed in this release.</p>
 <p>Detailed changes are below. All of the documentation can be found <a href="../../../">here</a></p>
-<h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Because the Gratia system has been turned off, RSV emits the following warning: <code>WARNING: Gratia server gratia-osg-prod.opensciencegrid.org:80 not responding to obtain last contact details.</code>. This warning can safely be ignored.</li>
-<li>Using the LCMAPS VOMS will result in a failing "supported VO" RSV test (<a href="https://jira.opensciencegrid.org/browse/SOFTWARE-2763">SOFTWARE-2763</a>). This can be ignored and a fix is targeted for the August release.</li>
-<li>In GlideinWMS, a small configuration change must be added to account for changes in HTCondor 8.6. Add the following line to the HTCondor configuration.</li>
-</ul>
-<div class="codehilite"><pre><span></span>COLLECTOR.USE_SHARED_PORT=False
-</pre></div>
-
-
 <h2 id="updating-to-the-new-release">Updating to the new release<a class="headerlink" href="#updating-to-the-new-release" title="Permanent link">&para;</a></h2>
-<p>To update to the OSG 3.4 series, please consult the page on <a href="../../release_series">updating between release series</a>.</p>
 <h3 id="update-repositories">Update Repositories<a class="headerlink" href="#update-repositories" title="Permanent link">&para;</a></h3>
-<p>To update to this series, you need to <a href="../../../common/yum#install-osg-repositories">install the current OSG repositories</a>.</p>
+<p>To update to this series, you need <a href="../../../common/yum#install-osg-repositories">install the current OSG repositories</a>.</p>
 <h3 id="update-software">Update Software<a class="headerlink" href="#update-software" title="Permanent link">&para;</a></h3>
-<p>Once the new repositories are installed, you can update to this new release with:</p>
+<p>Once the repositories are installed, you can update to this new release with:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum update
 </pre></div>
 
@@ -893,207 +842,32 @@
 <p>We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.</p>
 <h4 id="enterprise-linux-6">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=blahp-1.18.32.bosco-1.osg34.el6">blahp-1.18.32.bosco-1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.6.5-2.osg34.el6">condor-8.6.5-2.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-cron-1.1.3-1.osg34.el6">condor-cron-1.1.3-1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=htcondor-ce-3.0.1-1.osg34.el6">htcondor-ce-3.0.1-1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ce-3.4-3.osg34.el6">osg-ce-3.4-3.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-configure-2.1.1-1.osg34.el6">osg-configure-2.1.1-1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-test-1.11.1-1.osg34.el6">osg-test-1.11.1-1.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-tested-internal-3.4-4.osg34.el6">osg-tested-internal-3.4-4.osg34.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-version-3.4.2-1.osg34.el6">osg-version-3.4.2-1.osg34.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vo-client-76-1.osg33.el6">vo-client-76-1.osg33.el6</a></li>
 </ul>
 <h4 id="enterprise-linux-7">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=blahp-1.18.32.bosco-1.osg34.el7">blahp-1.18.32.bosco-1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.6.5-2.osg34.el7">condor-8.6.5-2.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-cron-1.1.3-1.osg34.el7">condor-cron-1.1.3-1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=htcondor-ce-3.0.1-1.osg34.el7">htcondor-ce-3.0.1-1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ce-3.4-3.osg34.el7">osg-ce-3.4-3.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-configure-2.1.1-1.osg34.el7">osg-configure-2.1.1-1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-test-1.11.1-1.osg34.el7">osg-test-1.11.1-1.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-tested-internal-3.4-4.osg34.el7">osg-tested-internal-3.4-4.osg34.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-version-3.4.2-1.osg34.el7">osg-version-3.4.2-1.osg34.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vo-client-76-1.osg33.el7">vo-client-76-1.osg33.el7</a></li>
 </ul>
 <h3 id="rpms">RPMs<a class="headerlink" href="#rpms" title="Permanent link">&para;</a></h3>
 <p>If you wish to manually update your system, you can run yum update against the following packages:</p>
-<div class="codehilite"><pre><span></span>blahp blahp-debuginfo condor condor-all condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-cron condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-test condor-vm-gahp htcondor-ce htcondor-ce-bosco htcondor-ce-client htcondor-ce-collector htcondor-ce-condor htcondor-ce-lsf htcondor-ce-pbs htcondor-ce-sge htcondor-ce-slurm htcondor-ce-view igtf-ca-certs osg-ca-certs osg-ce osg-ce-bosco osg-ce-condor osg-ce-lsf osg-ce-pbs osg-ce-sge osg-ce-slurm osg-configure osg-configure-bosco osg-configure-ce osg-configure-condor osg-configure-gateway osg-configure-gip osg-configure-gratia osg-configure-infoservices osg-configure-lsf osg-configure-managedfork osg-configure-misc osg-configure-network osg-configure-pbs osg-configure-rsv osg-configure-sge osg-configure-slurm osg-configure-squid osg-configure-tests osg-test osg-tested-internal osg-test-log-viewer osg-version
+<div class="codehilite"><pre><span></span>osg-gums-config vo-client vo-client-edgmkgridmap vo-client-lcmaps-voms
 </pre></div>
 
 
 <p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
 <h4 id="enterprise-linux-6_1">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>blahp-1.18.32.bosco-1.osg34.el6
-blahp-debuginfo-1.18.32.bosco-1.osg34.el6
-condor-8.6.5-2.osg34.el6
-condor-all-8.6.5-2.osg34.el6
-condor-bosco-8.6.5-2.osg34.el6
-condor-classads-8.6.5-2.osg34.el6
-condor-classads-devel-8.6.5-2.osg34.el6
-condor-cream-gahp-8.6.5-2.osg34.el6
-condor-cron-1.1.3-1.osg34.el6
-condor-debuginfo-8.6.5-2.osg34.el6
-condor-kbdd-8.6.5-2.osg34.el6
-condor-procd-8.6.5-2.osg34.el6
-condor-python-8.6.5-2.osg34.el6
-condor-std-universe-8.6.5-2.osg34.el6
-condor-test-8.6.5-2.osg34.el6
-condor-vm-gahp-8.6.5-2.osg34.el6
-htcondor-ce-3.0.1-1.osg34.el6
-htcondor-ce-bosco-3.0.1-1.osg34.el6
-htcondor-ce-client-3.0.1-1.osg34.el6
-htcondor-ce-collector-3.0.1-1.osg34.el6
-htcondor-ce-condor-3.0.1-1.osg34.el6
-htcondor-ce-lsf-3.0.1-1.osg34.el6
-htcondor-ce-pbs-3.0.1-1.osg34.el6
-htcondor-ce-sge-3.0.1-1.osg34.el6
-htcondor-ce-slurm-3.0.1-1.osg34.el6
-htcondor-ce-view-3.0.1-1.osg34.el6
-osg-ce-3.4-3.osg34.el6
-osg-ce-bosco-3.4-3.osg34.el6
-osg-ce-condor-3.4-3.osg34.el6
-osg-ce-lsf-3.4-3.osg34.el6
-osg-ce-pbs-3.4-3.osg34.el6
-osg-ce-sge-3.4-3.osg34.el6
-osg-ce-slurm-3.4-3.osg34.el6
-osg-configure-2.1.1-1.osg34.el6
-osg-configure-bosco-2.1.1-1.osg34.el6
-osg-configure-ce-2.1.1-1.osg34.el6
-osg-configure-condor-2.1.1-1.osg34.el6
-osg-configure-gateway-2.1.1-1.osg34.el6
-osg-configure-gip-2.1.1-1.osg34.el6
-osg-configure-gratia-2.1.1-1.osg34.el6
-osg-configure-infoservices-2.1.1-1.osg34.el6
-osg-configure-lsf-2.1.1-1.osg34.el6
-osg-configure-managedfork-2.1.1-1.osg34.el6
-osg-configure-misc-2.1.1-1.osg34.el6
-osg-configure-network-2.1.1-1.osg34.el6
-osg-configure-pbs-2.1.1-1.osg34.el6
-osg-configure-rsv-2.1.1-1.osg34.el6
-osg-configure-sge-2.1.1-1.osg34.el6
-osg-configure-slurm-2.1.1-1.osg34.el6
-osg-configure-squid-2.1.1-1.osg34.el6
-osg-configure-tests-2.1.1-1.osg34.el6
-osg-test-1.11.1-1.osg34.el6
-osg-tested-internal-3.4-4.osg34.el6
-osg-test-log-viewer-1.11.1-1.osg34.el6
-osg-version-3.4.2-1.osg34.el6
+<div class="codehilite"><pre><span></span>osg-gums-config-76-1.osg33.el6
+vo-client-76-1.osg33.el6
+vo-client-edgmkgridmap-76-1.osg33.el6
+vo-client-lcmaps-voms-76-1.osg33.el6
 </pre></div>
 
 
 <h4 id="enterprise-linux-7_1">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>blahp-1.18.32.bosco-1.osg34.el7
-blahp-debuginfo-1.18.32.bosco-1.osg34.el7
-condor-8.6.5-2.osg34.el7
-condor-all-8.6.5-2.osg34.el7
-condor-bosco-8.6.5-2.osg34.el7
-condor-classads-8.6.5-2.osg34.el7
-condor-classads-devel-8.6.5-2.osg34.el7
-condor-cream-gahp-8.6.5-2.osg34.el7
-condor-cron-1.1.3-1.osg34.el7
-condor-debuginfo-8.6.5-2.osg34.el7
-condor-kbdd-8.6.5-2.osg34.el7
-condor-procd-8.6.5-2.osg34.el7
-condor-python-8.6.5-2.osg34.el7
-condor-test-8.6.5-2.osg34.el7
-condor-vm-gahp-8.6.5-2.osg34.el7
-htcondor-ce-3.0.1-1.osg34.el7
-htcondor-ce-bosco-3.0.1-1.osg34.el7
-htcondor-ce-client-3.0.1-1.osg34.el7
-htcondor-ce-collector-3.0.1-1.osg34.el7
-htcondor-ce-condor-3.0.1-1.osg34.el7
-htcondor-ce-lsf-3.0.1-1.osg34.el7
-htcondor-ce-pbs-3.0.1-1.osg34.el7
-htcondor-ce-sge-3.0.1-1.osg34.el7
-htcondor-ce-slurm-3.0.1-1.osg34.el7
-htcondor-ce-view-3.0.1-1.osg34.el7
-osg-ce-3.4-3.osg34.el7
-osg-ce-bosco-3.4-3.osg34.el7
-osg-ce-condor-3.4-3.osg34.el7
-osg-ce-lsf-3.4-3.osg34.el7
-osg-ce-pbs-3.4-3.osg34.el7
-osg-ce-sge-3.4-3.osg34.el7
-osg-ce-slurm-3.4-3.osg34.el7
-osg-configure-2.1.1-1.osg34.el7
-osg-configure-bosco-2.1.1-1.osg34.el7
-osg-configure-ce-2.1.1-1.osg34.el7
-osg-configure-condor-2.1.1-1.osg34.el7
-osg-configure-gateway-2.1.1-1.osg34.el7
-osg-configure-gip-2.1.1-1.osg34.el7
-osg-configure-gratia-2.1.1-1.osg34.el7
-osg-configure-infoservices-2.1.1-1.osg34.el7
-osg-configure-lsf-2.1.1-1.osg34.el7
-osg-configure-managedfork-2.1.1-1.osg34.el7
-osg-configure-misc-2.1.1-1.osg34.el7
-osg-configure-network-2.1.1-1.osg34.el7
-osg-configure-pbs-2.1.1-1.osg34.el7
-osg-configure-rsv-2.1.1-1.osg34.el7
-osg-configure-sge-2.1.1-1.osg34.el7
-osg-configure-slurm-2.1.1-1.osg34.el7
-osg-configure-squid-2.1.1-1.osg34.el7
-osg-configure-tests-2.1.1-1.osg34.el7
-osg-test-1.11.1-1.osg34.el7
-osg-tested-internal-3.4-4.osg34.el7
-osg-test-log-viewer-1.11.1-1.osg34.el7
-osg-version-3.4.2-1.osg34.el7
-</pre></div>
-
-
-<h3 id="upcoming-packages">Upcoming Packages<a class="headerlink" href="#upcoming-packages" title="Permanent link">&para;</a></h3>
-<p>We added or updated the following packages to the <strong>upcoming</strong> OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.</p>
-<h4 id="enterprise-linux-6_2">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6_2" title="Permanent link">&para;</a></h4>
-<ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=blahp-1.18.32.bosco-1.osgup.el6">blahp-1.18.32.bosco-1.osgup.el6</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.7.2-2.1.osgup.el6">condor-8.7.2-2.1.osgup.el6</a></li>
-</ul>
-<h4 id="enterprise-linux-7_2">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_2" title="Permanent link">&para;</a></h4>
-<ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=blahp-1.18.32.bosco-1.osgup.el7">blahp-1.18.32.bosco-1.osgup.el7</a></li>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=condor-8.7.2-2.1.osgup.el7">condor-8.7.2-2.1.osgup.el7</a></li>
-</ul>
-<h3 id="upcoming-rpms">Upcoming RPMs<a class="headerlink" href="#upcoming-rpms" title="Permanent link">&para;</a></h3>
-<p>If you wish to manually update your system, you can run yum update against the following packages:</p>
-<div class="codehilite"><pre><span></span>blahp blahp-debuginfo condor condor-all condor-annex-ec2 condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-test condor-vm-gahp
-</pre></div>
-
-
-<p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
-<h4 id="enterprise-linux-6_3">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6_3" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>blahp-1.18.32.bosco-1.osgup.el6
-blahp-debuginfo-1.18.32.bosco-1.osgup.el6
-condor-8.7.2-2.1.osgup.el6
-condor-all-8.7.2-2.1.osgup.el6
-condor-annex-ec2-8.7.2-2.1.osgup.el6
-condor-bosco-8.7.2-2.1.osgup.el6
-condor-classads-8.7.2-2.1.osgup.el6
-condor-classads-devel-8.7.2-2.1.osgup.el6
-condor-cream-gahp-8.7.2-2.1.osgup.el6
-condor-debuginfo-8.7.2-2.1.osgup.el6
-condor-kbdd-8.7.2-2.1.osgup.el6
-condor-procd-8.7.2-2.1.osgup.el6
-condor-python-8.7.2-2.1.osgup.el6
-condor-std-universe-8.7.2-2.1.osgup.el6
-condor-test-8.7.2-2.1.osgup.el6
-condor-vm-gahp-8.7.2-2.1.osgup.el6
-</pre></div>
-
-
-<h4 id="enterprise-linux-7_3">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_3" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>blahp-1.18.32.bosco-1.osgup.el7
-blahp-debuginfo-1.18.32.bosco-1.osgup.el7
-condor-8.7.2-2.1.osgup.el7
-condor-all-8.7.2-2.1.osgup.el7
-condor-annex-ec2-8.7.2-2.1.osgup.el7
-condor-bosco-8.7.2-2.1.osgup.el7
-condor-classads-8.7.2-2.1.osgup.el7
-condor-classads-devel-8.7.2-2.1.osgup.el7
-condor-cream-gahp-8.7.2-2.1.osgup.el7
-condor-debuginfo-8.7.2-2.1.osgup.el7
-condor-kbdd-8.7.2-2.1.osgup.el7
-condor-procd-8.7.2-2.1.osgup.el7
-condor-python-8.7.2-2.1.osgup.el7
-condor-test-8.7.2-2.1.osgup.el7
-condor-vm-gahp-8.7.2-2.1.osgup.el7
+<div class="codehilite"><pre><span></span>osg-gums-config-76-1.osg33.el7
+vo-client-76-1.osg33.el7
+vo-client-edgmkgridmap-76-1.osg33.el7
+vo-client-lcmaps-voms-76-1.osg33.el7
 </pre></div>
               
             </div>
@@ -1102,10 +876,10 @@ condor-vm-gahp-8.7.2-2.1.osgup.el7
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../release-3-4-1-2/" class="btn btn-neutral float-right" title="OSG Release 3.4.1-2">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../3.4/release-3-4-5/" class="btn btn-neutral float-right" title="OSG Release 3.4.5">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../release-3-4-2-2/" class="btn btn-neutral" title="OSG Release 3.4.2-2"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../3.4/release-3-4-5-2/" class="btn btn-neutral" title="OSG Release 3.4.5-2"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -1133,10 +907,10 @@ condor-vm-gahp-8.7.2-2.1.osgup.el7
           <a href="https://github.com/opensciencegrid/docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../release-3-4-2-2/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../3.4/release-3-4-5-2/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../release-3-4-1-2/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../3.4/release-3-4-5/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
