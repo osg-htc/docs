@@ -141,7 +141,7 @@ After singularity is installed, as an ordinary user run the following
 command to verify it:
 
 ```console
-user@host $ singlarity exec -C -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
+user@host $ singularity exec -C -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
                 ps -ef
 WARNING: Container does not have an exec helper script, calling 'cat' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
