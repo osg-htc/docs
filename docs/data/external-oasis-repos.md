@@ -126,6 +126,8 @@ That should print several lines including some gibberish at the end.
 Hosting a Repository on OASIS
 -----------------------------
 
+In order to host a repository on OASIS, perform the following steps:
+
 1.  **Verify your VO's OIM registration is up-to-date**.  All repositories need to be associated with a VO; the VO
     needs to assign an _OASIS manager_ in OIM who would be responsible for the contents of any of the VO's repositories
     and will be contacted in case of issues. To designate an OASIS manager, have the VO manager update the
@@ -135,8 +137,6 @@ Hosting a Repository on OASIS
 
         Please add a new CVMFS repository to OASIS for VO %RED%voname%ENDCOLOR% using the URL 
             http://%RED%fully.qualified.domain%ENDCOLOR%:8000/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%
-        by doing step #3 at
-            https://opensciencegrid.github.io/docs/data/external-oasis-repos
         The VO responsible manager will be %RED%OASIS Manager Name%ENDCOLOR%.
 
     Replace the %RED%red%ENDCOLOR% items with the appropriate values.
@@ -145,7 +145,7 @@ Hosting a Repository on OASIS
     representative before continuing with the remaining instructions; for all other repositories (such as `*.egi.eu`),
     you are done.
 
-1. Execute the following commands:
+1. One you are told in the ticket to proceed to the next step, execute the following commands:
 
         :::console
         root@host # wget -O /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.cvmfswhitelist \
@@ -195,6 +195,8 @@ The GOC Stratum-1 will then be updated within an hour.
 
 Removing a Repository from OASIS
 --------------------------------
+
+In order to remove a repository that is being hosted on OASIS, perform the following steps:
 
 1.  If the repository has been replicated outside of the U.S., open a GGUS ticket asking that the replication be removed
     from EGI Stratum-1s. Wait until this ticket is resolved before proceeding.
