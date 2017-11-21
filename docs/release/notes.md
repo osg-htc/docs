@@ -8,6 +8,7 @@ Release Notes
 
 | Version                          | Date       | Summary                                                                          |
 |:---------------------------------|:-----------|:---------------------------------------------------------------------------------|
+| [3.4.5-2](3.4/release-3-4-5-2)   | 2017-11-20 | VO Package v76                                                                   |
 | [3.4.5](3.4/release-3-4-5)       | 2017-11-14 | osg-pki-tools 2.0.0, BLAHP 1.18.34, HTCondor 8.6.8, XRootD 4.7.1, CMVFS 2.4.2 globus-gridftp-server 12.2-1.2, globus-gridftp-server-control 6.0, RSV 3.16.0; Upcoming: HTCondor 8.7.5 |
 | [3.4.4-3](3.4/release-3-4-4-3)   | 2017-11-01 | IGTF 1.87                                                                        |
 | [3.4.4-2](3.4/release-3-4-4-2)   | 2017-10-11 | IGTF 1.86, VO Package v75                                                        |
@@ -24,6 +25,7 @@ Release Notes
 
 | Version                          | Date       | Summary                                                                          |
 |:---------------------------------|:-----------|:---------------------------------------------------------------------------------|
+| [3.3.30-2](3.3/release-3-3-30-2) | 2017-11-20 | VO Package v76                                                                   |
 | [3.3.30](3.3/release-3-3-30)     | 2017-11-14 | osg-pki-tools 2.0.0, BLAHP 1.18.34, XRootD 4.7.1, CMVFS 2.4.2, gridftp-hdfs 1.1, globus-gridftp-server 12.2-1.2, globus-gridftp-server-control 6.0, RSV 3.16.0 |
 | [3.3.29-3](3.3/release-3-3-29-3) | 2017-11-01 | IGTF 1.87                                                                        |
 | [3.3.29-2](3.3/release-3-3-29-2) | 2017-10-11 | IGTF 1.86, VO Package v75                                                        |
