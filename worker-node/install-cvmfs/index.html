@@ -152,7 +152,7 @@
         
             <li><a class="toctree-l4" href="#installing-cvmfs">Installing CVMFS</a></li>
         
-            <li><a class="toctree-l4" href="#setup-of-fuse-and-automount">Setup of FUSE and automount</a></li>
+            <li><a class="toctree-l4" href="#automount-setup">Automount setup</a></li>
         
             <li><a class="toctree-l4" href="#configuring-cvmfs">Configuring CVMFS</a></li>
         
@@ -866,8 +866,8 @@ The version of CVMFS installed should be &gt;= 2.4.1</p>
 
 </li>
 </ol>
-<h2 id="setup-of-fuse-and-automount">Setup of FUSE and automount<a class="headerlink" href="#setup-of-fuse-and-automount" title="Permanent link">&para;</a></h2>
-<p>FUSE and automount are required for CVMFS and the steps to configure them are different on EL6 vs EL7. Follow the section that is appropriate for your host's OS:</p>
+<h2 id="automount-setup">Automount setup<a class="headerlink" href="#automount-setup" title="Permanent link">&para;</a></h2>
+<p>CVMFS uses automount, and the steps to configure it are different on EL6 vs EL7. Follow the section that is appropriate for your host's OS:</p>
 <ul>
 <li><a href="#for-el6-hosts">For EL6 hosts</a></li>
 <li><a href="#for-el7-hosts">For EL7 hosts</a></li>
@@ -875,14 +875,15 @@ The version of CVMFS installed should be &gt;= 2.4.1</p>
 <h3 id="for-el6-hosts">For EL6 hosts<a class="headerlink" href="#for-el6-hosts" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p>Create or edit <code>/etc/fuse.conf</code> so that it contains:</p>
-<div class="codehilite"><pre><span></span>user_allow_other
+<p>If automount is not yet in use on the system, do the following:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chkconfig autofs on
+<span class="gp">root@host #</span> service autofs start
 </pre></div>
 
 
 </li>
 <li>
-<p>Create or edit <code>/etc/auto.master</code> to have the following contents to enable automounting:</p>
+<p>Create or edit <code>/etc/auto.master</code> to have the following contents:</p>
 <div class="codehilite"><pre><span></span>/cvmfs /etc/auto.cvmfs
 </pre></div>
 
@@ -899,7 +900,15 @@ The version of CVMFS installed should be &gt;= 2.4.1</p>
 <h3 id="for-el7-hosts">For EL7 hosts<a class="headerlink" href="#for-el7-hosts" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p>Add the following to <code>/etc/auto.master.d/cvmfs.autofs</code>:</p>
+<p>If automount is not yet in use on the system, do the following:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> autofs
+<span class="gp">root@host #</span> systemctl start autofs
+</pre></div>
+
+
+</li>
+<li>
+<p>Put the following in <code>/etc/auto.master.d/cvmfs.autofs</code>:</p>
 <div class="codehilite"><pre><span></span>/cvmfs /etc/auto.cvmfs
 </pre></div>
 
