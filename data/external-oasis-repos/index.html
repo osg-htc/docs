@@ -183,15 +183,13 @@
         
             <li><a class="toctree-l4" href="#installation">Installation</a></li>
         
-            <li><a class="toctree-l4" href="#create-a-repository">Create a Repository</a></li>
+            <li><a class="toctree-l4" href="#creating-a-repository">Creating a Repository</a></li>
         
-            <li><a class="toctree-l4" href="#host-a-repository-on-oasis">Host a Repository on OASIS</a></li>
+            <li><a class="toctree-l4" href="#hosting-a-repository-on-oasis">Hosting a Repository on OASIS</a></li>
         
-            <li><a class="toctree-l4" href="#change-the-url-of-an-external-repository">Change the URL of an external repository</a></li>
+            <li><a class="toctree-l4" href="#changing-the-url-of-a-repository-on-oasis">Changing the URL of a Repository on OASIS</a></li>
         
-            <li><a class="toctree-l4" href="#remove-an-external-repository">Remove an external repository</a></li>
-        
-            <li><a class="toctree-l4" href="#procedure-to-blank-an-externally-hosted-repository">Procedure to blank an externally-hosted repository</a></li>
+            <li><a class="toctree-l4" href="#removing-a-repository-from-oasis">Removing a Repository from OASIS</a></li>
         
         </ul>
     
@@ -885,7 +883,7 @@ started:</p>
 <p>Make sure that port 8000 is available to the Internet.  Check the setting of the host- and site-level firewalls.
 The next steps will fail if the web server is not accessible.</p>
 </div>
-<h2 id="create-a-repository">Create a Repository<a class="headerlink" href="#create-a-repository" title="Permanent link">&para;</a></h2>
+<h2 id="creating-a-repository">Creating a Repository<a class="headerlink" href="#creating-a-repository" title="Permanent link">&para;</a></h2>
 <p>Prior to creation, the repository administrator will need to make two decisions:</p>
 <ul>
 <li><strong>Select a repository name</strong>; typically, this is derived from the VO or project's name and ends in
@@ -920,7 +918,8 @@ EL6 with aufs, make the following configuration change:</p>
 
 
 <p>That should print several lines including some gibberish at the end.</p>
-<h2 id="host-a-repository-on-oasis">Host a Repository on OASIS<a class="headerlink" href="#host-a-repository-on-oasis" title="Permanent link">&para;</a></h2>
+<h2 id="hosting-a-repository-on-oasis">Hosting a Repository on OASIS<a class="headerlink" href="#hosting-a-repository-on-oasis" title="Permanent link">&para;</a></h2>
+<p>In order to host a repository on OASIS, perform the following steps:</p>
 <ol>
 <li>
 <p><strong>Verify your VO's OIM registration is up-to-date</strong>.  All repositories need to be associated with a VO; the VO
@@ -929,12 +928,9 @@ EL6 with aufs, make the following configuration change:</p>
     <a href="https://oim.grid.iu.edu">OIM registration</a>.</p>
 </li>
 <li>
-<p>The repository administrator should <strong>create a <a href="https://ticket.opensciencegrid.org/goc/submit">support ticket</a></strong>
-    using the following template:</p>
+<p>Create a <a href="https://ticket.opensciencegrid.org/goc/submit">support ticket</a> using the following template:</p>
 <div class="codehilite"><pre><span></span>Please add a new CVMFS repository to OASIS for VO <span style="color:red">voname</span> using the URL 
     http://<span style="color:red">fully.qualified.domain</span>:8000/cvmfs/<span style="color:red">example.opensciencegrid.org</span>
-by doing step #3 at
-    https://opensciencegrid.github.io/docs/data/external-oasis-repos
 The VO responsible manager will be <span style="color:red">OASIS Manager Name</span>.
 </pre></div>
 
@@ -942,30 +938,12 @@ The VO responsible manager will be <span style="color:red">OASIS Manager Name</s
 <p>Replace the <span style="color:red">red</span> items with the appropriate values.</p>
 </li>
 <li>
-<p>(<strong>OSG internal step</strong>)
-    OSG Operations ensures that the repository administrator is valid for the VO. This can be done by (a) OSG
-    already having a relationship with the person or (b) the GOC representative contacting the VO manager to find out.
-    OSG Operations should review the URL to verify it is appropriate for the VO.  This typically takes one business day.</p>
+<p>If the repository name matches <code>*.opensciencegrid.org</code> or <code>*.osgstorage.org</code>, wait for the go-ahead from the OSG
+    representative before continuing with the remaining instructions; for all other repositories (such as <code>*.egi.eu</code>),
+    you are done.</p>
 </li>
 <li>
-<p>(<strong>OSG internal step</strong>)
-    The OSG representative adds the repository URL in OIM under the VO's OASIS repository URLs. This should cause
-    the repository's configuration to be added to the GOC Stratum-0 within 15 minutes.</p>
-</li>
-<li>
-<p>(<strong>OSG internal step</strong>) If the respository ends in a new
-    domain name that has not been distributed before, the OSG representative next places a copy of the <code>domain.name.pub</code>
-    public key from <code>domain.name</code> into <code>/srv/etc/keys</code> on both <code>oasis-replica</code> and <code>oasis-replica-itb</code>. If the OSG
-    representative does not have that key, he or she will ask the repository service representative how to obtain it.
-    In order to support CVMFS client versions 2.2.X, a symbolic link of <code>domain.name.conf</code> has to be made in
-    <code>/cvmfs/config-osg.opensciencegrid.org/etc/cvmfs/domain.d</code> pointing to <code>default.conf</code>. This symbolic link has to be
-    created on the <code>oasis-itb</code> machine's copy of the <code>config-osg.opensciencegrid.org</code> repository and then copied to
-    production with the <code>copy_config_osg</code> command on the oasis machine.</p>
-</li>
-<li>
-<p>If the repository name matches <code>*.opensciencegrid.org</code> or <code>*.osgstorage.org</code>, the OSG representative responds in
-    the ticket to ask that step #6 be done; all other repositories (such as <code>*.egi.eu</code>) skip this step.</p>
-<p>The repository administrator should <strong>execute the following commands</strong>:</p>
+<p>One you are told in the ticket to proceed to the next step, execute the following commands:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> wget -O /srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.cvmfswhitelist <span class="se">\</span>
             http://oasis.opensciencegrid.org/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.cvmfswhitelist 
 <span class="gp">root@host #</span> /bin/cp /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub <span class="se">\</span>
@@ -973,8 +951,10 @@ The VO responsible manager will be <span style="color:red">OASIS Manager Name</s
 </pre></div>
 
 
-<p>Replace <span style="color:red">example.opensciencegrid.org</span> as appropriate.  Next, the repository administrator should
-verify that publishing operation succeed:</p>
+<p>Replace <span style="color:red">example.opensciencegrid.org</span> as appropriate.</p>
+</li>
+<li>
+<p>Verify that publishing operation succeeds:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> su <span style="color:blue">LIBRARIAN</span> -c <span class="s2">&quot;cvmfs_server transaction <span style="color:red">example.opensciencegrid.org</span>&quot;</span>
 <span class="gp">root@host #</span> su <span style="color:blue">LIBRARIAN</span> -c <span class="s2">&quot;cvmfs_server publish <span style="color:red">example.opensciencegrid.org</span>&quot;</span>
 </pre></div>
@@ -992,15 +972,9 @@ following contents:</p>
 <p>This cronjob eliminates the need for the repository service administrator to periodically use
 <code>cvmfs_server resign</code> to update <code>.cvmfswhitelist</code> as described in the upstream CVMFS documentation.</p>
 </div>
-<p>The repository administrator should update the open support ticket and ask to proceed to step #7.</p>
 </li>
 <li>
-<p>(<strong>OSG internal step</strong>)
-    The OSG representative then asks the administrator of the BNL stratum 1 to also add the new repository.
-    The BNL Stratum-1 operator should set the service to read from
-    <code>http://oasis-replica.opensciencegrid.org:8000/cvmfs/<span style="color:red">example.opensciencegrid.org</span></code>.
-    When the BNL Stratum-1 operator has reported back that the replication is ready, the OSG representative reports in
-    the ticket that the repository is fully replicated on the OSG and closes the ticket.</p>
+<p>Update the open support ticket to indicate that the previous steps have been completed</p>
 </li>
 </ol>
 <p>Once the repository is fully replicated on the OSG, the VO may proceed in publishing into CVMFS using the
@@ -1013,44 +987,17 @@ following contents:</p>
 </div>
 <p>If the repository ends in <code>.opensciencegrid.org</code>, the VO may ask for it to be replicated outside the US.  The
 VO should open a GGUS ticket following EGI's <a href="https://wiki.egi.eu/wiki/PROC20">PROC20</a>.</p>
-<h2 id="change-the-url-of-an-external-repository">Change the URL of an external repository<a class="headerlink" href="#change-the-url-of-an-external-repository" title="Permanent link">&para;</a></h2>
+<h2 id="changing-the-url-of-a-repository-on-oasis">Changing the URL of a Repository on OASIS<a class="headerlink" href="#changing-the-url-of-a-repository-on-oasis" title="Permanent link">&para;</a></h2>
 <p>If necessary, it is possible to change the URL of the repository server; simply have the repository administrator
 open a support ticket with the new value, and OSG operations will update OIM's OASIS repository URL for the VO.
 The GOC Stratum-1 will then be updated within an hour.</p>
-<h2 id="remove-an-external-repository">Remove an external repository<a class="headerlink" href="#remove-an-external-repository" title="Permanent link">&para;</a></h2>
+<h2 id="removing-a-repository-from-oasis">Removing a Repository from OASIS<a class="headerlink" href="#removing-a-repository-from-oasis" title="Permanent link">&para;</a></h2>
+<p>In order to remove a repository that is being hosted on OASIS, perform the following steps:</p>
 <ol>
-<li>If the repository has been replicated outside of the U.S., the repository service administrator should open a GGUS
-    ticket asking that the replication be removed from EGI Stratum-1s. Wait until this ticket is resolved before
-    proceeding.</li>
-<li>The repository administrator opens an OSG support ticket asking to shut down the repository, giving the repository
-    name (e.g., <span style="color:red">example.opensciencegrid.org</span>) and the corresponding VO.</li>
-<li>(<strong>OSG internal step</strong>)
-    After validating the ticket submitter is authorized by the VO's OASIS manager, the OSG representative next deletes
-    the registered value for <span style="color:red">example.opensciencegrid.org</span> in OIM for the VO in OASIS Repo URLs. </li>
-<li>(<strong>OSG internal step</strong>)
-    The OSG representative adds the FNAL and BNL Stratum-1 operators to the ticket to asks them to remove the
-    repository.  Wait for the Stratum-1 operators to finish before proceeding.</li>
-<li>(<strong>OSG internal step</strong>)
-    The OSG representative then runs <code>cvmfs_server rmfs -f <span style="color:red">example.opensciencegrid.org</span></code>
-    and <code>rm -r /oasissrv/cvmfs/<span style="color:red">example.opensciencegrid.org</span></code> on <code>oasis-replica-itb</code> and <code>oasis-replica</code></li>
-<li>(<strong>OSG internal step</strong>)
-    The OSG representative does <code>rm -r /srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span></code> on <code>oasis-itb</code> and
-    <code>oasis</code>.</li>
-</ol>
-<h2 id="procedure-to-blank-an-externally-hosted-repository">Procedure to blank an externally-hosted repository<a class="headerlink" href="#procedure-to-blank-an-externally-hosted-repository" title="Permanent link">&para;</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is an OSG-internal procedure</p>
-</div>
-<ol>
-<li>If there is a request from OSG Security to shut down the distribution of a repository, the OSG representative
-    needs to run <code>blank_osg_repository</code> on <code>oasis-replica</code> and give it the full name of the repository. This will
-    rename the repository directories to a name with the current timestamp and replace it with a blank repository.
-    It includes a step to run on the <code>oasis</code> machine, and attempts to do it with <code>ssh</code>, but if that fails it prints
-    instructions on how to finish by logging in to the <code>oasis</code> machine manually.</li>
-<li>When it is time to put the repository back into production, the GOC representative runs <code>unblank_osg_repository</code>
-    on <code>oasis-replica</code> and gives it the full name of the repository again. This will find the directory with the old
-    timestamp and put it back into service. This step also attempts to <code>ssh</code> to the <code>oasis</code> machine.</li>
+<li>If the repository has been replicated outside of the U.S., open a GGUS ticket asking that the replication be removed
+    from EGI Stratum-1s. Wait until this ticket is resolved before proceeding.</li>
+<li>Open a <a href="https://ticket.opensciencegrid.org/goc/submit">support ticket</a> asking to shut down the repository, giving the repository
+    name (e.g., <span style="color:red">example.opensciencegrid.org</span>), and the corresponding VO.</li>
 </ol>
               
             </div>
