@@ -86,8 +86,8 @@ root@host # service httpd start
     Make sure that port 8000 is available to the Internet.  Check the setting of the host- and site-level firewalls.
     The next steps will fail if the web server is not accessible.
 
-Create a Repository
--------------------
+Creating a Repository
+---------------------
 
 Prior to creation, the repository administrator will need to make two decisions:
 
@@ -123,47 +123,29 @@ Verify that the repository is readable over HTTP:
 
 That should print several lines including some gibberish at the end.
 
-Host a Repository on OASIS
-------------------------
+Hosting a Repository on OASIS
+-----------------------------
+
+In order to host a repository on OASIS, perform the following steps:
 
 1.  **Verify your VO's OIM registration is up-to-date**.  All repositories need to be associated with a VO; the VO
     needs to assign an _OASIS manager_ in OIM who would be responsible for the contents of any of the VO's repositories
     and will be contacted in case of issues. To designate an OASIS manager, have the VO manager update the
     [OIM registration](https://oim.grid.iu.edu).
 
-2.  The repository administrator should **create a [support ticket](https://ticket.opensciencegrid.org/goc/submit)**
-    using the following template:
+1.  Create a [support ticket](https://ticket.opensciencegrid.org/goc/submit) using the following template:
 
         Please add a new CVMFS repository to OASIS for VO %RED%voname%ENDCOLOR% using the URL 
             http://%RED%fully.qualified.domain%ENDCOLOR%:8000/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%
-        by doing step #3 at
-            https://opensciencegrid.github.io/docs/data/external-oasis-repos
         The VO responsible manager will be %RED%OASIS Manager Name%ENDCOLOR%.
 
     Replace the %RED%red%ENDCOLOR% items with the appropriate values.
 
-3.  (**OSG internal step**)
-    OSG Operations ensures that the repository administrator is valid for the VO. This can be done by (a) OSG
-    already having a relationship with the person or (b) the GOC representative contacting the VO manager to find out.
-    OSG Operations should review the URL to verify it is appropriate for the VO.  This typically takes one business day.
+1.  If the repository name matches `*.opensciencegrid.org` or `*.osgstorage.org`, wait for the go-ahead from the OSG
+    representative before continuing with the remaining instructions; for all other repositories (such as `*.egi.eu`),
+    you are done.
 
-4.  (**OSG internal step**)
-    The OSG representative adds the repository URL in OIM under the VO's OASIS repository URLs. This should cause
-    the repository's configuration to be added to the GOC Stratum-0 within 15 minutes.
-
-5.  (**OSG internal step**) If the respository ends in a new
-    domain name that has not been distributed before, the OSG representative next places a copy of the `domain.name.pub`
-    public key from `domain.name` into `/srv/etc/keys` on both `oasis-replica` and `oasis-replica-itb`. If the OSG
-    representative does not have that key, he or she will ask the repository service representative how to obtain it.
-    In order to support CVMFS client versions 2.2.X, a symbolic link of `domain.name.conf` has to be made in
-    `/cvmfs/config-osg.opensciencegrid.org/etc/cvmfs/domain.d` pointing to `default.conf`. This symbolic link has to be
-    created on the `oasis-itb` machine's copy of the `config-osg.opensciencegrid.org` repository and then copied to
-    production with the `copy_config_osg` command on the oasis machine.
-
-6.  If the repository name matches `*.opensciencegrid.org` or `*.osgstorage.org`, the OSG representative responds in
-    the ticket to ask that step \#6 be done; all other repositories (such as `*.egi.eu`) skip this step.
-
-    The repository administrator should **execute the following commands**:
+1. One you are told in the ticket to proceed to the next step, execute the following commands:
 
         :::console
         root@host # wget -O /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.cvmfswhitelist \
@@ -171,8 +153,9 @@ Host a Repository on OASIS
         root@host # /bin/cp /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub \
                     /etc/cvmfs/keys/%RED%example.opensciencegrid.org%ENDCOLOR%.pub
 
-    Replace %RED%example.opensciencegrid.org%ENDCOLOR% as appropriate.  Next, the repository administrator should
-    verify that publishing operation succeed:
+    Replace %RED%example.opensciencegrid.org%ENDCOLOR% as appropriate.
+    
+1. Verify that publishing operation succeeds:
 
         :::console
         root@host # su %BLUE%LIBRARIAN%ENDCOLOR% -c "cvmfs_server transaction %RED%example.opensciencegrid.org%ENDCOLOR%"
@@ -190,15 +173,7 @@ Host a Repository on OASIS
         This cronjob eliminates the need for the repository service administrator to periodically use
         `cvmfs_server resign` to update `.cvmfswhitelist` as described in the upstream CVMFS documentation.
 
-    The repository administrator should update the open support ticket and ask to proceed to step \#7.
-
-
-7.  (**OSG internal step**)
-    The OSG representative then asks the administrator of the BNL stratum 1 to also add the new repository.
-    The BNL Stratum-1 operator should set the service to read from
-    `http://oasis-replica.opensciencegrid.org:8000/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%`.
-    When the BNL Stratum-1 operator has reported back that the replication is ready, the OSG representative reports in
-    the ticket that the repository is fully replicated on the OSG and closes the ticket.
+1. Update the open support ticket to indicate that the previous steps have been completed
 
 Once the repository is fully replicated on the OSG, the VO may proceed in publishing into CVMFS using the
 %BLUE%LIBRARIAN%ENDCOLOR% account on the repository server.
@@ -211,45 +186,20 @@ Once the repository is fully replicated on the OSG, the VO may proceed in publis
 If the repository ends in `.opensciencegrid.org`, the VO may ask for it to be replicated outside the US.  The
 VO should open a GGUS ticket following EGI's [PROC20](https://wiki.egi.eu/wiki/PROC20).
 
-Change the URL of an external repository
-----------------------------------------
+Changing the URL of a Repository on OASIS
+-----------------------------------------
 
 If necessary, it is possible to change the URL of the repository server; simply have the repository administrator
 open a support ticket with the new value, and OSG operations will update OIM's OASIS repository URL for the VO.
 The GOC Stratum-1 will then be updated within an hour.
 
-Remove an external repository
------------------------------
+Removing a Repository from OASIS
+--------------------------------
 
-1.  If the repository has been replicated outside of the U.S., the repository service administrator should open a GGUS
-    ticket asking that the replication be removed from EGI Stratum-1s. Wait until this ticket is resolved before
-    proceeding.
-2.  The repository administrator opens an OSG support ticket asking to shut down the repository, giving the repository
-    name (e.g., %RED%example.opensciencegrid.org%ENDCOLOR%) and the corresponding VO.
-3.  (**OSG internal step**)
-    After validating the ticket submitter is authorized by the VO's OASIS manager, the OSG representative next deletes
-    the registered value for %RED%example.opensciencegrid.org%ENDCOLOR% in OIM for the VO in OASIS Repo URLs. 
-4.  (**OSG internal step**)
-    The OSG representative adds the FNAL and BNL Stratum-1 operators to the ticket to asks them to remove the
-    repository.  Wait for the Stratum-1 operators to finish before proceeding.
-5.  (**OSG internal step**)
-    The OSG representative then runs `cvmfs_server rmfs -f %RED%example.opensciencegrid.org%ENDCOLOR%`
-    and `rm -r /oasissrv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%` on `oasis-replica-itb` and `oasis-replica`
-6.  (**OSG internal step**)
-    The OSG representative does `rm -r /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%` on `oasis-itb` and
-    `oasis`.
+In order to remove a repository that is being hosted on OASIS, perform the following steps:
 
-Procedure to blank an externally-hosted repository
---------------------------------------------------
+1.  If the repository has been replicated outside of the U.S., open a GGUS ticket asking that the replication be removed
+    from EGI Stratum-1s. Wait until this ticket is resolved before proceeding.
+2.  Open a [support ticket](https://ticket.opensciencegrid.org/goc/submit) asking to shut down the repository, giving the repository
+    name (e.g., %RED%example.opensciencegrid.org%ENDCOLOR%), and the corresponding VO.
 
-!!! note
-    This is an OSG-internal procedure
-
-1.  If there is a request from OSG Security to shut down the distribution of a repository, the OSG representative
-    needs to run `blank_osg_repository` on `oasis-replica` and give it the full name of the repository. This will
-    rename the repository directories to a name with the current timestamp and replace it with a blank repository.
-    It includes a step to run on the `oasis` machine, and attempts to do it with `ssh`, but if that fails it prints
-    instructions on how to finish by logging in to the `oasis` machine manually.
-2.  When it is time to put the repository back into production, the GOC representative runs `unblank_osg_repository`
-    on `oasis-replica` and gives it the full name of the repository again. This will find the directory with the old
-    timestamp and put it back into service. This step also attempts to `ssh` to the `oasis` machine.
