@@ -64,7 +64,7 @@ We added or updated the following packages to the production OSG yum repository.
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-    igtf-ca-certs osg-ca-certs osg-gums-config vo-client vo-client-edgmkgridmap vo-client-lcmaps-voms
+    igtf-ca-certs osg-ca-certs osg-gums-config
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
