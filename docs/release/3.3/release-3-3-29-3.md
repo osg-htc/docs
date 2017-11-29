@@ -64,7 +64,7 @@ We added or updated the following packages to the production OSG yum repository.
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-    igtf-ca-certs osg-ca-certs osg-gums-config
+    igtf-ca-certs osg-ca-certs
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
