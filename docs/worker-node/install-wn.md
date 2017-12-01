@@ -102,7 +102,7 @@ The worker node may be updated from time to time. As of OSG 3.3.21 in February 2
 
 To see the currently installed version of the worker node package, run the following command:
 
-``` screen
+``` console
 root@host # rpm -q --requires osg-wn-client
 ```
 
