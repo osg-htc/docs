@@ -23,7 +23,7 @@ HTCondor-CE is a special configuration of the HTCondor software designed to be a
 
 Benefits of running the HTCondor-CE:
 
--   **Scalability:** HTCondor-CE is capable of supporting job workloads of large sites (see [scale testing results](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/HTCondorCEScaleTests))
+-   **Scalability:** HTCondor-CE is capable of supporting job workloads of large sites
 -   **Debugging tools:** HTCondor-CE offers [many tools to help troubleshoot](troubleshoot-htcondor-ce) issues with jobs
 -   **Routing as configuration:** HTCondor-CE’s mechanism to transform and submit jobs is customized via configuration variables, which means that customizations will persist across upgrades and will not involve modification of software internals to route jobs
 
