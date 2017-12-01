@@ -54,26 +54,22 @@ Unless you have specific technical reasons otherwise, you should use OpenJDK 7 
 1.  Install the Java implementation of your choice
 2.  Install the OSG Java 7 package compatability layer 
 
-
         :::console
         root@host # yum install osg-java7-compat osg-java7-devel-compat
-3.  Make your Java implementation the preferred Java runtime environment (JRE) 
 
+3.  Make your Java implementation the preferred Java runtime environment (JRE) 
 
         :::console
         root@host # alternatives --config java
 4.  Verify that your Java implementation is the preferred JRE 
 
-
         :::console
         root@host # java -version The version number should start with `1.7`.
 5.  Make your Java implementation the preferred Java development kit (JDK) 
 
-
         :::console
         root@host # alternatives --config javac
 6.  Verify that your Java implementation is the preferred JDK 
-
 
         :::console
         root@host # javac -version The version number should start with `1.7`.
@@ -85,7 +81,6 @@ If you happened to install OSG or other Java-dependent software **before** insta
 
 1.  Check for an Oracle Java installation 
 
-
         :::console
         root@host # rpm -q jdk 
         
@@ -93,11 +88,11 @@ If you happened to install OSG or other Java-dependent software **before** insta
 
 2.  Check for stale symbolic links 
 
-
         :::console
-        root@host # **file /usr/bin/java**
+        root@host # file /usr/bin/java
+        /usr/bin/java: symbolic link to \`/etc/alternatives/java'
 
-/usr/bin/java: symbolic link to \`/etc/alternatives/java' If the output of the `file` command above differs from the sample output — if `/usr/bin/java` does not exist, if it is not a symbolic link, or if it is a symbolic link to a different path — then your OpenJDK installation has issues and must be fixed; continue with the next repair procedure below. Otherwise, there are no issues and you are done
+    If the output of the `file` command above differs from the sample output — if `/usr/bin/java` does not exist, if it is not a symbolic link, or if it is a symbolic link to a different path — then your OpenJDK installation has issues and must be fixed; continue with the next repair procedure below. Otherwise, there are no issues and you are done
 
 To fix the OpenJDK installation:
 
