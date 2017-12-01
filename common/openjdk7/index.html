@@ -881,16 +881,22 @@
 </div>
 <ol>
 <li>Install the Java implementation of your choice</li>
-<li>Install the OSG Java 7 package compatability layer <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-java7-compat osg-java7-devel-compat
+<li>
+<p>Install the OSG Java 7 package compatability layer </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-java7-compat osg-java7-devel-compat
+</pre></div>
+
+
+</li>
+<li>
+<p>Make your Java implementation the preferred Java runtime environment (JRE) </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> alternatives --config java
 </pre></div>
 
 
 <ol>
 <li>
-<p>Make your Java implementation the preferred Java runtime environment (JRE) </p>
-<p>:::console
-root@host # alternatives --config java
-4.  Verify that your Java implementation is the preferred JRE </p>
+<p>Verify that your Java implementation is the preferred JRE </p>
 <p>:::console
 root@host # java -version The version number should start with <code>1.7</code>.
 5.  Make your Java implementation the preferred Java development kit (JDK) </p>
@@ -916,13 +922,14 @@ root@host # javac -version The version number should start with <code>1.7</code>
 </li>
 <li>
 <p>Check for stale symbolic links </p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> **file /usr/bin/java**
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> file /usr/bin/java
+<span class="go">/usr/bin/java: symbolic link to \`/etc/alternatives/java&#39;</span>
 </pre></div>
 
 
+<p>If the output of the <code>file</code> command above differs from the sample output — if <code>/usr/bin/java</code> does not exist, if it is not a symbolic link, or if it is a symbolic link to a different path — then your OpenJDK installation has issues and must be fixed; continue with the next repair procedure below. Otherwise, there are no issues and you are done</p>
 </li>
 </ol>
-<p>/usr/bin/java: symbolic link to `/etc/alternatives/java' If the output of the <code>file</code> command above differs from the sample output — if <code>/usr/bin/java</code> does not exist, if it is not a symbolic link, or if it is a symbolic link to a different path — then your OpenJDK installation has issues and must be fixed; continue with the next repair procedure below. Otherwise, there are no issues and you are done</p>
 <p>To fix the OpenJDK installation:</p>
 <ol>
 <li>
