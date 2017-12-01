@@ -52,24 +52,27 @@ Unless you have specific technical reasons otherwise, you should use OpenJDK 7 
     The IBM Java implementation (`java-1.7.0-ibm` or `java-1.7.1-ibm`) is known to cause severe failures in BeStMan 2 and GUMS (at least).
 
 1.  Install the Java implementation of your choice
-2.  Install the OSG Java 7 package compatability layer 
+1.  Install the OSG Java 7 package compatability layer 
 
         :::console
         root@host # yum install osg-java7-compat osg-java7-devel-compat
 
-3.  Make your Java implementation the preferred Java runtime environment (JRE) 
+1.  Make your Java implementation the preferred Java runtime environment (JRE) 
 
         :::console
         root@host # alternatives --config java
-4.  Verify that your Java implementation is the preferred JRE 
+
+1.  Verify that your Java implementation is the preferred JRE 
 
         :::console
         root@host # java -version The version number should start with `1.7`.
-5.  Make your Java implementation the preferred Java development kit (JDK) 
+
+1.  Make your Java implementation the preferred Java development kit (JDK) 
 
         :::console
         root@host # alternatives --config javac
-6.  Verify that your Java implementation is the preferred JDK 
+
+1.  Verify that your Java implementation is the preferred JDK 
 
         :::console
         root@host # javac -version The version number should start with `1.7`.
@@ -158,8 +161,15 @@ If you have a pre-existing BeStMan installation, you must ensure that it is usin
         root@host # rpm -qa | grep ^bestman2 
 
     If any bestman2 RPMs are installed, the command will output the specific names and versions. If there is no output: BeStMan is not installed, there is no issue, and you are done
+
 2.  Open `/etc/sysconfig/bestman2`.
-3.  Check if there is a line setting `JAVA_HOME` and that line is uncommented. If so, change that line to: <pre class="file">JAVA\_HOME=/etc/alternatives/java\_sdk If not, then you do not need to do anything.
+
+3.  Check if there is a line setting `JAVA_HOME` and that line is uncommented. If so, change that line to: 
+
+        JAVA_HOME=/etc/alternatives/java_sdk 
+
+    If not, then you do not need to do anything.
+
 4.  Restart the BeStMan service: 
 
         :::console
@@ -170,8 +180,8 @@ Fixing SSL problems / Disabling SSLv3
 
 We have received reports that the latest version of Firefox (39.0) keeps users from being able to access the web UIs of GUMS, Gratia, or VOMS-Admin. Attempts to access will result in this error: 
 
-          SSL received a weak ephemeral Diffie-Hellman key in Server Key Exchange handshake message.
-          (Error code: ssl_error_weak_server_ephemeral_dh_key)
+    SSL received a weak ephemeral Diffie-Hellman key in Server Key Exchange handshake message.
+    (Error code: ssl_error_weak_server_ephemeral_dh_key)
 
 This affects all known versions of OpenJDK 1.7.0.   The recommended workaround for this is server-side:
 
