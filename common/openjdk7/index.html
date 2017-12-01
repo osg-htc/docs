@@ -894,19 +894,27 @@
 </pre></div>
 
 
-<ol>
+</li>
 <li>
 <p>Verify that your Java implementation is the preferred JRE </p>
-<p>:::console
-root@host # java -version The version number should start with <code>1.7</code>.
-5.  Make your Java implementation the preferred Java development kit (JDK) </p>
-<p>:::console
-root@host # alternatives --config javac
-6.  Verify that your Java implementation is the preferred JDK </p>
-<p>:::console
-root@host # javac -version The version number should start with <code>1.7</code>.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> java -version The version number should start with <span class="sb">`</span><span class="m">1</span>.7<span class="sb">`</span>.
+</pre></div>
+
+
 </li>
-</ol>
+<li>
+<p>Make your Java implementation the preferred Java development kit (JDK) </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> alternatives --config javac
+</pre></div>
+
+
+</li>
+<li>
+<p>Verify that your Java implementation is the preferred JDK </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> javac -version The version number should start with <span class="sb">`</span><span class="m">1</span>.7<span class="sb">`</span>.
+</pre></div>
+
+
 </li>
 </ol>
 <h2 id="fixing-openjdk-after-installing-other-software">Fixing OpenJDK After Installing Other Software<a class="headerlink" href="#fixing-openjdk-after-installing-other-software" title="Permanent link">&para;</a></h2>
@@ -1006,10 +1014,21 @@ root@host # javac -version The version number should start with <code>1.7</code>
 </pre></div>
 
 
-<p>If any bestman2 RPMs are installed, the command will output the specific names and versions. If there is no output: BeStMan is not installed, there is no issue, and you are done
-2.  Open <code>/etc/sysconfig/bestman2</code>.
-3.  Check if there is a line setting <code>JAVA_HOME</code> and that line is uncommented. If so, change that line to: <pre class="file">JAVA_HOME=/etc/alternatives/java_sdk If not, then you do not need to do anything.
-4.  Restart the BeStMan service: </p>
+<p>If any bestman2 RPMs are installed, the command will output the specific names and versions. If there is no output: BeStMan is not installed, there is no issue, and you are done</p>
+</li>
+<li>
+<p>Open <code>/etc/sysconfig/bestman2</code>.</p>
+</li>
+<li>
+<p>Check if there is a line setting <code>JAVA_HOME</code> and that line is uncommented. If so, change that line to: </p>
+<div class="codehilite"><pre><span></span>JAVA_HOME=/etc/alternatives/java_sdk
+</pre></div>
+
+
+<p>If not, then you do not need to do anything.</p>
+</li>
+<li>
+<p>Restart the BeStMan service: </p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service bestman2 restart
 </pre></div>
 
@@ -1018,8 +1037,8 @@ root@host # javac -version The version number should start with <code>1.7</code>
 </ol>
 <h2 id="fixing-ssl-problems-disabling-sslv3">Fixing SSL problems / Disabling SSLv3<a class="headerlink" href="#fixing-ssl-problems-disabling-sslv3" title="Permanent link">&para;</a></h2>
 <p>We have received reports that the latest version of Firefox (39.0) keeps users from being able to access the web UIs of GUMS, Gratia, or VOMS-Admin. Attempts to access will result in this error: </p>
-<div class="codehilite"><pre><span></span>      SSL received a weak ephemeral Diffie-Hellman key in Server Key Exchange handshake message.
-      (Error code: ssl_error_weak_server_ephemeral_dh_key)
+<div class="codehilite"><pre><span></span>SSL received a weak ephemeral Diffie-Hellman key in Server Key Exchange handshake message.
+(Error code: ssl_error_weak_server_ephemeral_dh_key)
 </pre></div>
 
 
