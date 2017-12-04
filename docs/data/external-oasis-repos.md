@@ -103,20 +103,24 @@ The initial repository creation must be run as `root`:
     root@host # echo -e "\*\\t\\t-\\tnofile\\t\\t16384" >>/etc/security/limits.conf
     root@host # ulimit -n 16384
     root@host # cvmfs_server mkfs -o %BLUE%LIBRARIAN%ENDCOLOR% %RED%example.opensciencegrid.org%ENDCOLOR%
-    root@host # echo "CVMFS_AUTO_TAG=false" >>/etc/cvmfs/repositories.d/%RED%example.opensciencegrid.org%ENDCOLOR%/server.conf
     root@host # (echo Order deny,allow;echo Deny from all;echo Allow from 127.0.0.1;echo Allow from ::1;echo Allow from 129.79.53.0/24;echo Allow from 2001:18e8:2:6::/56) >/srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.htaccess
 
-Here, we increase the number of open files, create the repository using the `mkfs` command, adjust the configuration,
-and then limit the hosts that are allowed to access the repo to the OSG CDN.
+Here, we increase the number of open files allowed, create the repository using the `mkfs` command, and then limit the hosts that are allowed to access the repo to the OSG CDN.
 
-!!! warning "Hardlink Limitations on EL6"
-    If you might be hosting any hardlinks that span directories (e.g. publishing a `git` repository) and are using
-    EL6 with aufs, make the following configuration change:
+Next, adjust the configuration in the repository as follows.  Also, check the [cvmfs documentation](http://cvmfs.readthedocs.io/en/latest/cpt-repo.html#configuration-recommendation-by-use-case) for additional recommendations for special purpose repositories.
 
-        :::console
-        root@host # echo "CVMFS_IGNORE_XDIR_HARDLINKS=true" >>/etc/cvmfs/repositories.d/repo.domain.name/server.conf
+    :::console
+    root@host # cat >>/etc/cvmfs/repositories.d/%RED%example.opensciencegrid.org%ENDCOLOR%/server.conf <<xEOFx
+    CVMFS_AUTO_TAG_TIMESPAN="2 weeks ago"
+    CVMFS_IGNORE_XDIR_HARDLINKS=true
+    CVMFS_GENERATE_LEGACY_BULK_CHUNKS=false
+    CVMFS_HASH_ALGORITHM=shake128
+    CVMFS_AUTOCATALOGS=true
+    CVMFS_ENFORCE_LIMITS=true
+    CVMFS_FORCE_REMOUNT_WARNING=false
+    xEOFx
 
-Verify that the repository is readable over HTTP:
+Now verify that the repository is readable over HTTP:
 
     :::console
     root@host # wget -qO- http://localhost:8000/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.cvmfswhitelist | cat -v
