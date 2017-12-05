@@ -107,7 +107,7 @@ The initial repository creation must be run as `root`:
 
 Here, we increase the number of open files allowed, create the repository using the `mkfs` command, and then limit the hosts that are allowed to access the repo to the OSG CDN.
 
-Next, adjust the configuration in the repository as follows.  Also, check the [cvmfs documentation](http://cvmfs.readthedocs.io/en/latest/cpt-repo.html#configuration-recommendation-by-use-case) for additional recommendations for special purpose repositories.
+Next, adjust the configuration in the repository as follows.  
 
     :::console
     root@host # cat >>/etc/cvmfs/repositories.d/%RED%example.opensciencegrid.org%ENDCOLOR%/server.conf <<xEOFx
@@ -119,6 +119,8 @@ Next, adjust the configuration in the repository as follows.  Also, check the [c
     CVMFS_ENFORCE_LIMITS=true
     CVMFS_FORCE_REMOUNT_WARNING=false
     xEOFx
+
+Also, check the [cvmfs documentation](http://cvmfs.readthedocs.io/en/latest/cpt-repo.html#configuration-recommendation-by-use-case) for additional recommendations for special purpose repositories.
 
 Now verify that the repository is readable over HTTP:
 
