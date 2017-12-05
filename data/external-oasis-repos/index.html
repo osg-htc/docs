@@ -906,23 +906,26 @@ The next steps will fail if the web server is not accessible.</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> -e <span class="s2">&quot;\*\\t\\t-\\tnofile\\t\\t16384&quot;</span> &gt;&gt;/etc/security/limits.conf
 <span class="gp">root@host #</span> <span class="nb">ulimit</span> -n <span class="m">16384</span>
 <span class="gp">root@host #</span> cvmfs_server mkfs -o <span style="color:blue">LIBRARIAN</span> <span style="color:red">example.opensciencegrid.org</span>
-<span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;CVMFS_AUTO_TAG=false&quot;</span> &gt;&gt;/etc/cvmfs/repositories.d/<span style="color:red">example.opensciencegrid.org</span>/server.conf
 <span class="gp">root@host #</span> <span class="o">(</span><span class="nb">echo</span> Order deny,allow<span class="p">;</span><span class="nb">echo</span> Deny from all<span class="p">;</span><span class="nb">echo</span> Allow from <span class="m">127</span>.0.0.1<span class="p">;</span><span class="nb">echo</span> Allow from ::1<span class="p">;</span><span class="nb">echo</span> Allow from <span class="m">129</span>.79.53.0/24<span class="p">;</span><span class="nb">echo</span> Allow from <span class="m">2001</span>:18e8:2:6::/56<span class="o">)</span> &gt;/srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.htaccess
 </pre></div>
 
 
-<p>Here, we increase the number of open files, create the repository using the <code>mkfs</code> command, adjust the configuration,
-and then limit the hosts that are allowed to access the repo to the OSG CDN.</p>
-<div class="admonition warning">
-<p class="admonition-title">Hardlink Limitations on EL6</p>
-<p>If you might be hosting any hardlinks that span directories (e.g. publishing a <code>git</code> repository) and are using
-EL6 with aufs, make the following configuration change:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;CVMFS_IGNORE_XDIR_HARDLINKS=true&quot;</span> &gt;&gt;/etc/cvmfs/repositories.d/repo.domain.name/server.conf
+<p>Here, we increase the number of open files allowed, create the repository using the <code>mkfs</code> command, and then limit the hosts that are allowed to access the repo to the OSG CDN.</p>
+<p>Next, adjust the configuration in the repository as follows.  </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat &gt;&gt;/etc/cvmfs/repositories.d/<span style="color:red">example.opensciencegrid.org</span>/server.conf <span class="s">&lt;&lt;xEOFx</span>
+<span class="go">CVMFS_AUTO_TAG_TIMESPAN=&quot;2 weeks ago&quot;</span>
+<span class="go">CVMFS_IGNORE_XDIR_HARDLINKS=true</span>
+<span class="go">CVMFS_GENERATE_LEGACY_BULK_CHUNKS=false</span>
+<span class="go">CVMFS_HASH_ALGORITHM=shake128</span>
+<span class="go">CVMFS_AUTOCATALOGS=true</span>
+<span class="go">CVMFS_ENFORCE_LIMITS=true</span>
+<span class="go">CVMFS_FORCE_REMOUNT_WARNING=false</span>
+<span class="go">xEOFx</span>
 </pre></div>
 
 
-</div>
-<p>Verify that the repository is readable over HTTP:</p>
+<p>Also, check the <a href="http://cvmfs.readthedocs.io/en/latest/cpt-repo.html#configuration-recommendation-by-use-case">cvmfs documentation</a> for additional recommendations for special purpose repositories.</p>
+<p>Now verify that the repository is readable over HTTP:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> wget -qO- http://localhost:8000/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.cvmfswhitelist <span class="p">|</span> cat -v
 </pre></div>
 
