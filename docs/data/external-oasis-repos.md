@@ -114,7 +114,6 @@ Next, adjust the configuration in the repository as follows.
     CVMFS_AUTO_TAG_TIMESPAN="2 weeks ago"
     CVMFS_IGNORE_XDIR_HARDLINKS=true
     CVMFS_GENERATE_LEGACY_BULK_CHUNKS=false
-    CVMFS_HASH_ALGORITHM=shake128
     CVMFS_AUTOCATALOGS=true
     CVMFS_ENFORCE_LIMITS=true
     CVMFS_FORCE_REMOUNT_WARNING=false
