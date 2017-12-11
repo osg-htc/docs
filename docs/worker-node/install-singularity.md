@@ -151,3 +151,7 @@ user         1     0  0 21:34 ?        00:00:00 ps -ef
 ## Starting and Stopping services
 
 singularity has no services to start or stop.
+
+# References
+
+- [Additional guidance for CMS sites](https://twiki.cern.ch/twiki/bin/view/Main/CmsSingularity)
