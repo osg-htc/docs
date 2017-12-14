@@ -100,11 +100,7 @@ user         1     0  0 21:34 ?        00:00:00 ps -ef
 
 !!! tip
     The remainder of this document pertains to the privileged
-    (`setuid`) mode of singularity.  If you want to limit your risk
-    exposure as much as possible on worker nodes and the VOs you
-    support don't disagree, install only the `singularity-runtime`
-    package and disable mounting of arbitrary image files as shown
-    below.
+    (`setuid`) mode of singularity.
 
 # Installing Singularity as Privileged
 
@@ -132,32 +128,45 @@ To install singularity as `setuid`, make sure that your host is up to date befor
             :::console
             root@host # yum install singularity
 
+!!! tip
+    In most cases, only `singularity-runtime` is needed on the worker node;
+    installing only this smaller package reduces risk of potential security
+    exploits.
+
 ## Configuring singularity
 
 There are no required changes to the default configuration.  If you want
 to see what options are available, see `/etc/singularity/singularity.conf`.
 
-If you want to limit your vulnerabity as much as possible, note that there
-is a concern (based on a [discussion](https://lwn.net/Articles/652468/)
-on why the Linux kernel does not allow unprivileged users to mount
-arbitrary filesystem image files) with privileged singularity's
-default ability to mount image files.  To disable this ability, set
+### Limiting Image Types
+
+Images based on loopback devices carry an inherently higher exposure to
+unknown kernel exploits compared to directory-based images distributed via
+CVMFS.  See [this article](https://lwn.net/Articles/652468/) for further
+discussion.
+
+The loopback-based images are the default image type produced by Singularity
+users and are common at sites with direct user logins.  However (as of December
+2017) we are only aware of directory-based images being used by OSG VOs.  Hence,
+it is a reasonable measure to disable the loopback-based images by setting
 the following option in `/etc/singularity/singularity.conf`:
 
         max loop devices = 0
 
-This is not required because there are currently no public exploits,
-and when exploits are discovered the kernel gets patched.  However,
-normally image files are not used on the OSG because operating system
-images are distributed as directory trees in CVMFS, so for most worker
-nodes this feature is not needed and it is OK to disable it.  Confirm
-it with the VOs you support if you are not sure.
+While reasonable for some sites, this is not required as there are currently
+no public kernel exploits for this issue; any exploits are patched by
+RedHat when they are discovered.
 
-!!! tip
-    As always when modifying configuration files under `/etc`, and
-    particularly for singularity because its configuration file
-    changes frequently, whenever you upgrade an rpm watch for
-    `.rpmnew` files and merge in any changes to the defaults.
+!!! warning "Warning: No Free Lunches"
+    If you modify `/etc/singularity/singularity.conf`, carefully test any
+    upgrade procedures.
+    RPM will not automatically merge your changes with new upstream
+    configuration keys, which may cause a broken install or inadvertently
+    change the site configuration.  Singularity renames configuration keys
+    more frequently than typical OSG software.
+
+    Look for `.rpmnew` files after upgrades and merge in any changes to the
+    defaults.
 
 ## Validating singularity
 
