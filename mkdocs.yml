@@ -3,8 +3,7 @@ site_url: https://opensciencegrid.github.io/docs/
 repo_url: https://github.com/opensciencegrid/docs/
 google_analytics: ['UA-69012-29', 'opensciencegrid.github.io']
 theme:
-  name: readthedocs
-  custom_dir: osgthedocs
+  name: material
 
 extra_css:
   - css/extra.css
