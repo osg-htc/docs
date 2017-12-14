@@ -32,15 +32,15 @@ How Jobs Run
 
 Once an incoming grid job is authorized, it is placed into HTCondor-CE’s scheduler where the JobRouter creates a transformed copy (called the *routed job*) and submits the copy to the batch system (called the *batch system job*). After submission, HTCondor-CE monitors the batch system job and communicates its status to the original grid job, which in turn notifies the original submitter (e.g., job factory) of any updates. When the job completes, files are transferred along the same chain: from the batch system to the CE, then from the CE to the original submitter.
 
-### Over SSH
+### Hosted HTCondor-CE over SSH
 
-HTCondor-CE-Bosco is a special configuration of HTCondor-CE that can submit jobs to a remote cluster over SSH. The HTCondor-CE-Bosco provides a simple starting point for opportunistic resource owners that want to start contributing to the OSG with minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a submit node in their cluster.
+The hosted HTCondor-CE is intended for small sites or as an introduction to the OSG. The OSG configures and maintains the HTCondor-CE on behalf of the site.  The hosted HTCondor-CE is a special configuration of HTCondor-CE that can submit jobs to a remote cluster over SSH. It provides a simple starting point for opportunistic resource owners that want to start contributing to the OSG with minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a submit node in their cluster.
 
-![HTCondor-CE-Bosco](../images/HTCondorCEBosco.png)
-
-HTCondor-CE-Bosco is intended for small sites or as an introduction to the OSG. If your site intends to run thousands of OSG jobs, you will need to host a standard [HTCondor-CE](install-htcondor-ce) because HTCondor-CE-Bosco has not yet been optimized for such loads.
+If your site intends to run thousands of OSG jobs, you will need to host a standard [HTCondor-CE](install-htcondor-ce) because the hosted HTCondor-CE has not yet been optimized for such loads.
 
 To discuss using a hosted SSH HTCondor-CE, contact OSG User Support at [user-support@opensciencegrid.org](mailto:user-support@opensciencegrid.org)
+
+![HTCondor-CE-Bosco](../images/HTCondorCEBosco.png)
 
 ### On HTCondor batch systems
 
