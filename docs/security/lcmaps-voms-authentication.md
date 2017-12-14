@@ -70,6 +70,20 @@ Unix accounts must exist for each VO, VO role, VO group, or user you choose to s
 allowed_vos="VO1,VO2..."
 ```
 
+The full list of VOs is located on [OIM](https://oim.opensciencegrid.org/oim/vo). You are not expected to support all the VOs; recommended VOs are:
+
+| **VO name**                                             | **Unix account(s)**                                                    |
+|---------------------------------------------------------|------------------------------------------------------------------------|
+| [GLOW](https://oim.opensciencegrid.org/oim/vo?id=13)    | `glow`                                                                 |
+| [OSG](https://oim.opensciencegrid.org/oim/vo?id=30)     | `osg`                                                                  |
+| [ATLAS](https://oim.opensciencegrid.org/oim/vo?id=35)   | `usatlas1`, `usatlas2`, `usatlas3`, `usatlas4`                         |
+| [CMS](https://oim.opensciencegrid.org/oim/vo?id=3)      | `cmspilot`, `uscmslocal`, `cmslocal`, `cmsprod`, `lcgadmin`, `cmsuser` |
+| [Fermilab](https://oim.opensciencegrid.org/oim/vo?id=9) | `fermigli`, `fermilab`                                                 |
+| [HCC](https://oim.opensciencegrid.org/oim/vo?id=67)     | `hcc`                                                                  |
+| [Gluex](https://oim.opensciencegrid.org/oim/vo?id=62)   | `gluex`                                                                |
+
+These VOs make good use of opportunistic resources.
+
 ### Applying configuration settings
 
 Making changes to the OSG configuration files in the `/etc/osg/config.d` directory does not apply those settings to software automatically. For the OSG settings, use the [osg-configure](../other/configuration-with-osg-configure) tool to validate (to a limited extent) and apply the settings to the relevant software components. If instead you wish to manage the LCMAPS VOMS plugin configuration yourself, skip to the [manual configuration section](#manual-configuration).
