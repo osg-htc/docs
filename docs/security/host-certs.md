@@ -58,7 +58,7 @@ If you do not have grid admin privileges, you can request them
 [here](https://oim.opensciencegrid.org/oim/gridadmin) after obtaining
 your [user certificate](user-certs).
 
-### Install the OSG PKI Command Line Clients 
+### Installing the OSG PKI Command Line Clients 
 
 The scripts needed to request host or service certificates are contained in the
 osg-pki-tools rpm.  Install it by running the following:
@@ -67,7 +67,7 @@ osg-pki-tools rpm.  Install it by running the following:
 root@host # yum install osg-pki-tools
 ```
 
-#### Validating Your X.509 User Certificate
+### Validating Your X.509 User Certificate
 
 Make sure you can create a valid grid proxy. To do so, please follow
 instructions:
