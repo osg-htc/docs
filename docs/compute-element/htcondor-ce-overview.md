@@ -5,16 +5,16 @@ This document serves as an introduction to HTCondor-CE and how it works.
 Before continuing with the overview, make sure that you are familiar with the following concepts:
 
 -   An OSG site plan
-    -   What is a batch system and which one will you use ([HTCondor](http://htcondor.org/), PBS, LSF, SGE, or SLURM)?
+    -   What is a batch system and which one will you use ([HTCondor](http://htcondor.org/), PBS, LSF, SGE, or [SLURM](https://slurm.schedmd.com/))?
     -   Security in the OSG via [GSI](http://toolkit.globus.org/toolkit/docs/3.2/security.html) (i.e., [Certificate authorities](https://en.wikipedia.org/wiki/Certificate_authority), user and host [certificates](https://en.wikipedia.org/wiki/Public_key_certificate), proxies)
 -   Pilot jobs, frontends, and factories (i.e., [GlideinWMS](http://glideinwms.fnal.gov/doc.prd/index.html), AutoPyFactory)
 
 What is a Compute Element?
 --------------------------
 
-An OSG Compute Element (CE) is the entry point for the OSG to your local resources: a layer of software that you install on a machine that can submit jobs into your local batch system. At the heart of the CE is the *job gateway* software, which is responsible for handling incoming jobs, authorizing them, and delegating them to your batch system for execution.
+An OSG Compute Element (CE) is the entry point for the OSG to your local resources: a layer of software that you install on a machine that can submit jobs into your local batch system. At the heart of the CE is the *job gateway* software, which is responsible for handling incoming jobs, authenticating and authorizing them, and delegating them to your batch system for execution.
 
-Today in OSG, most jobs that arrive at a CE (called *grid jobs*) are **not** end-user jobs, but rather pilot jobs submitted from factories. Successful pilot jobs create and make available an environment for actual end-user jobs to match and ultimately run within the pilot job container. Eventually pilot jobs remove themselves, typically after a period of inactivity.
+Today in the OSG, most jobs that arrive at a CE (called *grid jobs*) are **not** end-user jobs, but rather pilot jobs submitted from factories. Successful pilot jobs create and make available an environment for actual end-user jobs to match and ultimately run within the pilot job container. Eventually pilot jobs remove themselves, typically after a period of inactivity.
 
 What is HTCondor-CE?
 --------------------
@@ -32,12 +32,20 @@ How Jobs Run
 
 Once an incoming grid job is authorized, it is placed into HTCondor-CE’s scheduler where the JobRouter creates a transformed copy (called the *routed job*) and submits the copy to the batch system (called the *batch system job*). After submission, HTCondor-CE monitors the batch system job and communicates its status to the original grid job, which in turn notifies the original submitter (e.g., job factory) of any updates. When the job completes, files are transferred along the same chain: from the batch system to the CE, then from the CE to the original submitter.
 
+### Over SSH
+
+HTCondor-CE-Bosco is a special configuration of HTCondor-CE that can submit jobs to a remote cluster over SSH. The HTCondor-CE-Bosco provides a simple starting point for opportunistic resource owners that want to start contributing to the OSG with minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a submit node in their cluster.
+
+![HTCondor-CE-Bosco](../images/HTCondorCEBosco.png)
+
+HTCondor-CE-Bosco is intended for small sites or as an introduction to the OSG. If your site intends to run thousands of OSG jobs, you will need to host a standard [HTCondor-CE](install-htcondor-ce) because HTCondor-CE-Bosco has not yet been optimized for such loads.
+
 ### On HTCondor batch systems
 
 For a site with an HTCondor **batch system**, the JobRouter can use HTCondor protocols to place a transformed copy of the grid job directly into the batch system’s scheduler, meaning that the routed and batch system jobs are one and the same. Thus, there are three representations of your job, each with its own ID (see diagram below):
 
 -   Submit host: the HTCondor job ID in the original queue
--   HTCondor-CE: the grid job’s ID
+-   HTCondor-CE: the incoming grid job’s ID
 -   HTCondor batch system: the routed job’s ID
 
 ![HTCondor-CE with an HTCondor batch system](../images/ce_condorbatchsystem.png)
@@ -52,7 +60,7 @@ In an HTCondor-CE/HTCondor setup, files are transferred from HTCondor-CE’s spo
 For non-HTCondor batch systems, the JobRouter transforms the grid job into a routed job on the CE and the routed job submits a job into the batch system via a process called the BLAHP. Thus, there are four representations of your job, each with its own ID (see diagram below):
 
 -   Submit host: the HTCondor job ID in the original queue
--   HTCondor-CE: the grid job’s ID and the routed job’s ID
+-   HTCondor-CE: the incoming grid job’s ID and the routed job’s ID
 -   HTCondor batch system: the batch system’s job ID
 
 Although the following figure specifies the PBS case, it applies to all non-HTCondor batch systems:
@@ -61,13 +69,7 @@ Although the following figure specifies the PBS case, it applies to all non-HTCo
 
 With non-HTCondor batch systems, HTCondor-CE cannot use internal HTCondor protocols to transfer files so its spool directory must be exported to a shared file system that is mounted on the batch system’s worker nodes.
 
-### Over SSH
 
-HTCondor-CE-Bosco is a special configuration of HTCondor-CE that can submit jobs to a remote cluster over SSH. The HTCondor-CE-Bosco provides a simple starting point for opportunistic resource owners that want to start contributing to the OSG with minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a submit node in their cluster.
-
-![HTCondor-CE-Bosco](../images/HTCondorCEBosco.png)
-
-HTCondor-CE-Bosco is intended for small sites or as an introduction to the OSG. If your site intends to run thousands of OSG jobs, you will need to host a standard [HTCondor-CE](install-htcondor-ce) because HTCondor-CE-Bosco has not yet been optimized for such loads.
 
 How the CE is Customized
 ------------------------
@@ -85,19 +87,17 @@ Aside from the [basic configuration](install-htcondor-ce#configuring-htcondor-ce
 How Security Works
 ------------------
 
-In the OSG, security depends on a PKI infrastructure involving Certificate Authorities (CAs) where CAs sign and issue certifcates to users and hosts. When these users and hosts wish to communicate with each other, the identities of each party is confirmed by cross-checking their certificates with the signing CA and establishing trust.
+In the OSG, security depends on a PKI infrastructure involving Certificate Authorities (CAs) where CAs sign and issue certificates. When these clients and hosts wish to communicate with each other, the identities of each party is confirmed by cross-checking their certificates with the signing CA and establishing trust.
 
-Due to the OSG's distributed nature, a user's job may end up at any number of sites, potentially needing to re-authenticate at multiple points. Instead of sending the user's certificate with the job for this re-authentication, trust can be delegated to a proxy that is generated from the user certificate, which is then attached to the job and expires after some set time for added security.
-
-In its default configuration, HTCondor-CE uses GSI-based authentication and authorization to verify the certificate chain, which will work with existing GUMS servers or grid mapfiles. Additionally, it can be reconfigured to provide alternate authentication mechanisms such as Kerberos, SSL, shared secret, or even IP-based authentication. More information about authorization methods can be found [here](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_8Security.html#SECTION00483000000000000000).
+In its default configuration, HTCondor-CE uses GSI-based authentication and authorization to verify the certificate chain, which will work with existing GUMS servers, grid mapfiles, or lcmaps voms authentication. Additionally, it can be reconfigured to provide alternate authentication mechanisms such as Kerberos, SSL, shared secret, or even IP-based authentication. More information about authorization methods can be found [here](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_8Security.html#SECTION00483000000000000000).
 
 Next steps
 ----------
 
 Once the basic installation is done, additional activities include:
 
--   Setting up [job routes](job-router-recipes) to customize incoming jobs
--   [Submitting](submit-htcondor-ce) jobs to HTCondor-CE
--   [Troubleshooting](troubleshoot-htcondor-ce) HTCondor-CE
+-   [Setting up job routes to customize incoming jobs]((job-router-recipes)
+-   [Submitting jobs to a HTCondor-CE](submit-htcondor-ce) 
+-   [Troubleshooting the HTCondor-CE](troubleshoot-htcondor-ce) 
 -   Register the CE with OIM
 -   Register with the OSG GlideinWMS factories and/or the ATLAS AutoPyFactory
