@@ -185,7 +185,7 @@ as such:
 all.export /data/xrootdfs
 set xrdr=%RED%hostA%ENDCOLOR%
 all.manager $(xrdr):3121
-if $(xrdr) &amp;&amp; named cns
+if $(xrdr) && named cns
       all.export /data/inventory
       xrd.port 1095
 else if $(xrdr)
@@ -271,7 +271,7 @@ root@host # systemctl start <xrootd@cns>
 
 ```console
 root@host # xrdcp /bin/sh root://localhost:1094//data/xrootdfs/test1
-[xrootd] Total 0.00 MB |**`================`**| 100.00 % [inf MB/s]
+[xrootd] Total 0.00 MB |================| 100.00 % [inf MB/s]
 ```
 
 1.  To verify that SSI is working execute `cns_ssi` command on the redirector node:
@@ -361,12 +361,12 @@ Some examples of each option. For more details or examples on how to use
 templated user options, see [XRootd Authorization Database
 File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
 
-|        |                                                                                                                                                            |
-|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| idtype | Type of id - u for username, g for group, etc                                                                                                              |
-| id     | Username (or groupname). Use <noop>\*</noop> for all users or <noop>=</noop> for user-specific capabilities, like home directories |
-| path   | The path prefix to be used for matching purposes.                                                                                                          |
-| privs  | Letter list of privileges: `a - all ; l - lookup ; d - delete ; n - rename ; i - insert ; r - read ; k - lock (not used) ; w - write`                      |
+|        |                                                                                                                                       |
+|--------|---------------------------------------------------------------------------------------------------------------------------------------|
+| idtype | Type of id. Use `u` for username, `g` for group, etc.                                                                                 |
+| id     | Username (or groupname). Use `*` for all users or `=` for user-specific capabilities, like home directories                           |
+| path   | The path prefix to be used for matching purposes                                                                                      |
+| privs  | Letter list of privileges: `a - all ; l - lookup ; d - delete ; n - rename ; i - insert ; r - read ; k - lock (not used) ; w - write` |
 
 #### Security option 1: adding simple (Unix) security
 
@@ -391,7 +391,7 @@ else
     ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory
     cms.space min 2g 5g
 
-    %RED% \# ENABLE_SECURITY_BEGIN
+    %RED% # ENABLE_SECURITY_BEGIN
     xrootd.seclib /usr/lib64/libXrdSec.so
     # this specify that we use the 'unix' authentication module, additional one can be specified.
     sec.protocol /usr/lib64 unix
@@ -417,7 +417,7 @@ After making all the changes, please, restart XRootD and cmsd daemons on all nod
 
 ```console
 root@host # xrdcp root://localhost:1094//data/xrootdfs/test1 /tmp/b
-[xrootd] Total 0.00 MB |**`================`**| 100.00 % [inf MB/s]
+[xrootd] Total 0.00 MB |================| 100.00 % [inf MB/s]
 ```
 
 1.  Check that user "root" can not write files under /data/xrootdfs:
@@ -441,9 +441,9 @@ Error accessing path/file for root://localhost:1094//data/xrootdfs/test2
 ```console
 root@host # su - %RED%user%ENDCOLOR%
 -bash-3.2$ xrdcp /tmp/a root://localhost:1094//data/xrootdfs/%RED%user%ENDCOLOR%/test1
-[xrootd] Total 0.00 MB |**`================`**| 100.00 % [inf MB/s]
+[xrootd] Total 0.00 MB |================| 100.00 % [inf MB/s]
 -bash-3.2$ xrdcp root://localhost:1094//data/xrootdfs/%RED%user%ENDCOLOR%/test1 /tmp/c
-[xrootd] Total 0.00 MB |**`================`**| 100.00 % [inf MB/s]
+[xrootd] Total 0.00 MB |================| 100.00 % [inf MB/s]
 ```
 
 #### Security option 2: Shared keys
@@ -818,12 +818,12 @@ The services are:
 As a reminder, here are common service commands (all run as `root`):
 
 
-| To …                                        | On EL 6, run the command…             | On EL 7, run the command…                 |
-|:--------------------------------------------|:--------------------------------------|:------------------------------------------|
-| Start a service                             | `service <em>SERVICE-NAME</em> start` | `systemctl start <em>SERVICE-NAME</em>`   |
-| Stop a service                              | `service <em>SERVICE-NAME</em> stop`  | `systemctl start <em>SERVICE-NAME</em>`   |
-| Enable a service to start during boot       | `chkconfig <em>SERVICE-NAME</em> on`  | `systemctl enable <em>SERVICE-NAME</em>`  |
-| Disable a service from starting during boot | `chkconfig <em>SERVICE-NAME</em> off` | `systemctl disable <em>SERVICE-NAME</em>` |
+| To …                                        | On EL 6, run the command…    | On EL 7, run the command…        |
+|:--------------------------------------------|:-----------------------------|:---------------------------------|
+| Start a service                             | `service SERVICE-NAME start` | `systemctl start SERVICE-NAME`   |
+| Stop a service                              | `service SERVICE-NAME stop`  | `systemctl start SERVICE-NAME`   |
+| Enable a service to start during boot       | `chkconfig SERVICE-NAME on`  | `systemctl enable SERVICE-NAME`  |
+| Disable a service from starting during boot | `chkconfig SERVICE-NAME off` | `systemctl disable SERVICE-NAME` |
 
 Getting Help
 ------------
@@ -840,7 +840,7 @@ Reference
 | Service/Process | Configuration File                 | Description                              |
 |:----------------|:-----------------------------------|:-----------------------------------------|
 | `xrootd`        | `/etc/xrootd/xrootd-clustered.cfg` | Main clustered mode XRootD configuration |
-| ^               | `/etc/xrootd/auth_file`            | Authorized users file                    |
+|                 | `/etc/xrootd/auth_file`            | Authorized users file                    |
 
 | Service/Process          | Log File                         | Description                                 |
 |:-------------------------|:---------------------------------|:--------------------------------------------|
