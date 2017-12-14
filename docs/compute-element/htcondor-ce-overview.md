@@ -91,14 +91,14 @@ How Security Works
 
 In the OSG, security depends on a PKI infrastructure involving Certificate Authorities (CAs) where CAs sign and issue certificates. When these clients and hosts wish to communicate with each other, the identities of each party is confirmed by cross-checking their certificates with the signing CA and establishing trust.
 
-In its default configuration, HTCondor-CE uses GSI-based authentication and authorization to verify the certificate chain, which will work with existing GUMS servers, grid mapfiles, or lcmaps voms authentication. Additionally, it can be reconfigured to provide alternate authentication mechanisms such as Kerberos, SSL, shared secret, or even IP-based authentication. More information about authorization methods can be found [here](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_8Security.html#SECTION00483000000000000000).
+In its default configuration, HTCondor-CE uses GSI-based authentication and authorization to verify the certificate chain, which will work with [lcmaps voms authentication](../security/lcmaps-voms-authentication), existing GUMS servers, or grid mapfiles. Additionally, it can be reconfigured to provide alternate authentication mechanisms such as Kerberos, SSL, shared secret, or even IP-based authentication. More information about authorization methods can be found [here](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_8Security.html#SECTION00483000000000000000).
 
 Next steps
 ----------
 
 Once the basic installation is done, additional activities include:
 
--   [Setting up job routes to customize incoming jobs]((job-router-recipes)
+-   [Setting up job routes to customize incoming jobs](job-router-recipes)
 -   [Submitting jobs to a HTCondor-CE](submit-htcondor-ce) 
 -   [Troubleshooting the HTCondor-CE](troubleshoot-htcondor-ce) 
 -   Register the CE with OIM
