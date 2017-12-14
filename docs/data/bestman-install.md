@@ -16,7 +16,7 @@ This procedure explains how to install the stand-alone BeStMan Storage Element s
 
 -   BeStMan - provides load-balancing across GridFTP servers.
 -   GridFTP server - provides file transfer services using the GridFTP protocol.
--   [Gratia gridftp transfer probe](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GratiaTransferProbe) (optional) - provides transfer accounting information to the OSG.
+-   [Gratia gridftp transfer probe](https://github.com/opensciencegrid/docs/blob/master/archive/GratiaTransferProbe) (optional) - provides transfer accounting information to the OSG.
 
 Requirements
 ------------
