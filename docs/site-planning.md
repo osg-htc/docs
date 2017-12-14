@@ -1,43 +1,85 @@
-Site Planning
-=============
+Introduction
+--------
 
-This document is for **System Administrators**. The purpose of the document is to provide an overview about the different ways to setup an OSG site and to encourage you to plan your site before you continue to install the OSG software on your site.
+The OSG vision is to integrate computing across different resource types and business models to allow campus IT to offer
+a maximally flexible _high throughput computing_ (HTC) environment for their researchers.
 
-After reading this document you should be able to identify the site elements needed to setup your OSG site and choose among different technology choices presented.
+This document is for **System Administrators** and aims to provide an overview of the different options to consider when
+planning to share resources via the OSG.
 
-Background
-----------
+After reading, you should be able to understand what software or services you want to provide to support your
+researchers
 
-The goal for the OSG Software stack is to provide a uniform computing and storage fabric across many
-independently-managed computing and storage resources. These individual services will be accessed by virtual
-organizations (VOs), which will delegate the resources to scientists, researchers, and students.
+!!! note
+    This document covers the most common options.  OSG is a diverse infrastructure: depending on what groups you want to
+    support, you may need to install additional services.  Coordinate with your local researchers.
+
+OSG Site Services
+-----------------
+
+The OSG Software stack tries to provide a uniform computing and storage fabric across many independently-managed
+computing and storage resources. These individual services will be accessed by virtual organizations (VOs), which will
+delegate the resources to scientists, researchers, and students.
 
 _Sharing_ is a fundamental principle for the OSG: your site is encouraged to support as many OSG-registered VOs as
-local conditions allow.  _Autonomy_ is another principle: you are not required to support any you do not want.
+local conditions allow.  _Autonomy_ is another principle: you are not required to support any you do not want.  As the
+administrator, your task is to make your existing computing and storage resources available to and reliable for your
+supported VOs.
 
-As the administrator responsible for deployment of the OSG software stack, your task is to make your existing computing
-and storage resources available to and reliable for your supported VOs. Fundamentally, there are three components:
+We break this down into three tasks:
 
-- *Compute Element* (CE): This provides remote access for VOs to submit "pilot jobs" to your local batch system.
-- *Worker node* (WN): A standardized runtime environment for pilot jobs, managed and allocated by the batch system.
-- *Data*: Various services that provide access to the data and storage resources at your site.
+- Getting "pilot jobs" submitted to your site batch system.
+- Establishing a OSG runtime environment for running jobs.
+- Delivering data to payload applications to be processed.
 
-Depending on the VOs you want to support, data services may not be necessary.  Even a compute element is not strictly
-necessary: OSG offers a "hosted CE" service where OSG will run the software provided only with a SSH connection to the
-batch submit host.  Contact <mailto:help@opensciencegrid.org> for more information on the hosted CE.
-
-- The simplest way to support OSG is to only provide SSH logins for the hosted CE and install the worker node
-  environment.
-- Larger or more complex sites will elect to run their own CE in addition to the WN environment and the simplest
-  data service (HTTP proxy cache).
-- The largest sites will additionally run large-scale data services such as a "storage element".  This is often required
-  for sites that want to support more complex organizations such as ATLAS or CMS.
+There are multiple approaches for each item, depending on the VOs you support and time you have to invest on the OSG.
 
 !!! note
     An essential concept on the OSG is the "pilot job".  The pilot, which arrives at your batch system, is sent by the
     VO and gets a resource allocation.  However, it _does not_ contain any scientific payload.  Once started, it will
     connect back to a resource pool and pull down individuals' scientific "payload jobs".  Hence, we do not think about
     submitting "jobs" to sites but rather "resource requests".
+
+### Pilot Jobs
+
+Traditionally, an OSG *Compute Element* (CE) provides remote access for VOs to submit pilot jobs to your local batch
+system.  However, today, there are two options for accepting pilot jobs at your site:
+
+- **Hosted CE**: OSG will run and operate the CE services; the site only needs to provide a SSH pubkey-based
+   authentication access to the central OSG host.  OSG will interface with the VO and submit pilots directly to your
+   batch system via SSH.  By far, this is the _simplest option_: however, it is less-scalable and the site delegates
+   many of the scheduling decisions to the OSG.  Contact <mailto:help@opensciencegrid.org> for more information on the
+   hosted CE.
+- **OSG CE**: The traditional option where the site installs and operates a HTCondor-based CE on a dedicated host.
+   This provides the best scalability and flexibility, but may require an ongoing time investment from the site.  The
+   OSG CE install and operation is covered in this documentation page.
+
+### Runtime environment
+
+The OSG provides a very minimal runtime environment that can be deployed via tarball, RPM, or through a global
+filesystem.
+
+We believe that all scientific applications should be portable and self-contained, with no OS dependencies.  This
+provides access to the most resources and minimizes the presence at sites.  However, this purist position is often
+difficult to achieve in practice.  For sites that want to support a uniform runtime environment, we provide a global
+filesystem called CVMFS that VOs can use to distribute their own software dependencies.
+
+Finally, many researchers use applications that require a specific OS environment - not just individual dependencies -
+that is distributed as a container.  OSG supports the use of the [Singularity](http://singularity.lbl.gov/) container
+runtime with [Docker-based](https://hub.docker.com) image distribution.
+
+### Data Services
+
+Whether accessed through CVMFS or command-line software like `curl`, the majority of software is moved via HTTP in
+cache-friendly patterns.  All sites are highly encouraged to use a HTTP proxy (such as the Squid software) to reduce
+the load on the WAN from the cluster.
+
+Depending on the VOs you want to support, additional data services may not be necessary:
+
+- Some VOs elect to stream their larger input data from offsite using OSG's "StashCache" service.  This requires no
+  services to be run by the site
+- The largest sites will additionally run large-scale data services such as a "storage element".  This is often required
+  for sites that want to support more complex organizations such as ATLAS or CMS.
 
 Site Policies
 -------------
@@ -96,7 +138,7 @@ software and data.  Many VOs either completely rely on CVMFS for software (LIGO,
 majority of jobs (OSG VO).  Some jobs can utilize worker nodes without CVMFS.  You will be able to share your
 resources regardless, but installing CVMFS is a primary mechanism to attract more jobs.
 
-Data Service
+Caches and Storage Elements
 ------
 
 There are two types of data services on the OSG:
