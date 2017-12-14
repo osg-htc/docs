@@ -40,7 +40,7 @@ If your site intends to run thousands of OSG jobs, you will need to host a stand
 
 To discuss using a hosted SSH HTCondor-CE, contact OSG User Support at [user-support@opensciencegrid.org](mailto:user-support@opensciencegrid.org)
 
-![HTCondor-CE-Bosco](../images/HTCondorCEBosco.png)
+![HTCondor-CE-Bosco](/images/HTCondorCEBosco.png)
 
 ### On HTCondor batch systems
 
@@ -50,7 +50,7 @@ For a site with an HTCondor **batch system**, the JobRouter can use HTCondor pro
 -   HTCondor-CE: the incoming grid job’s ID
 -   HTCondor batch system: the routed job’s ID
 
-![HTCondor-CE with an HTCondor batch system](../images/ce_condorbatchsystem.png)
+![HTCondor-CE with an HTCondor batch system](/images/ce_condorbatchsystem.png)
 
 In an HTCondor-CE/HTCondor setup, files are transferred from HTCondor-CE’s spool directory to the batch system’s spool directory using internal HTCondor protocols.
 
@@ -67,7 +67,7 @@ For non-HTCondor batch systems, the JobRouter transforms the grid job into a rou
 
 Although the following figure specifies the PBS case, it applies to all non-HTCondor batch systems:
 
-![HTCondor-CE with other batch systems](../images/ce_otherbatchsystem.png)
+![HTCondor-CE with other batch systems](/images/ce_otherbatchsystem.png)
 
 With non-HTCondor batch systems, HTCondor-CE cannot use internal HTCondor protocols to transfer files so its spool directory must be exported to a shared file system that is mounted on the batch system’s worker nodes.
 
@@ -79,8 +79,8 @@ How the CE is Customized
 Aside from the [basic configuration](install-htcondor-ce#configuring-htcondor-ce) required in the CE installation, there are two main ways to customize your CE (if you decide any customization is required at all):
 
 -   **Deciding which VOs are allowed to run at your site:** The recommended method of authorizing VOs at your site is
-    based on the [LCMAPS framework](../security/lcmaps-voms-authentication); we plan to support the prior mechanisms,
-    [GUMS](../security/install-gums) and [edg-mkgridmap](../security/edg-mkgridmap) until May 2018.
+    based on the [LCMAPS framework](/security/lcmaps-voms-authentication); we plan to support the prior mechanisms,
+    [GUMS](/security/install-gums) and [edg-mkgridmap](/security/edg-mkgridmap) until May 2018.
 -   **How to filter and transform the grid jobs to be run on your batch system:** Filtering and transforming grid jobs (i.e., setting site-specific attributes or resource limits), requires configuration of your site’s job routes. For examples of common job routes, consult the [JobRouter recipes](job-router-recipes) page.
 
 !!! note
@@ -91,7 +91,7 @@ How Security Works
 
 In the OSG, security depends on a PKI infrastructure involving Certificate Authorities (CAs) where CAs sign and issue certificates. When these clients and hosts wish to communicate with each other, the identities of each party is confirmed by cross-checking their certificates with the signing CA and establishing trust.
 
-In its default configuration, HTCondor-CE uses GSI-based authentication and authorization to verify the certificate chain, which will work with [LCMAPS VOMS authentication](../security/lcmaps-voms-authentication), existing GUMS servers, or grid mapfiles. Additionally, it can be reconfigured to provide alternate authentication mechanisms such as Kerberos, SSL, shared secret, or even IP-based authentication. More information about authorization methods can be found [here](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_8Security.html#SECTION00483000000000000000).
+In its default configuration, HTCondor-CE uses GSI-based authentication and authorization to verify the certificate chain, which will work with [LCMAPS VOMS authentication](/security/lcmaps-voms-authentication), existing GUMS servers, or grid mapfiles. Additionally, it can be reconfigured to provide alternate authentication mechanisms such as Kerberos, SSL, shared secret, or even IP-based authentication. More information about authorization methods can be found [here](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_8Security.html#SECTION00483000000000000000).
 
 Next steps
 ----------
