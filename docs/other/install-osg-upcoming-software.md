@@ -33,8 +33,8 @@ You should have a file called `osg-upcoming.repo` (el7) or `osg-el6-upcoming.rep
 ```
 [osg-upcoming]
 name=OSG Software for Enterprise Linux 7 - Upcoming - $basearch
-#baseurl=http://repo.grid.iu.edu/upcoming/el7/$basearch/release
-mirrorlist=http://repo.grid.iu.edu/mirror/upcoming/el7/$basearch/release
+#baseurl=http://repo.opensciencegrid.org/upcoming/el7/$basearch/release
+mirrorlist=http://repo.opensciencegrid.org/mirror/upcoming/el7/$basearch/release
 failovermethod=priority
 priority=98
 %RED%enabled=0%ENDCOLOR%
