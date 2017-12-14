@@ -35,9 +35,6 @@ available as at least a security update for all RHEL7-based releases.
 
 The document is intended for system administrators who wish to either
 install singularity or enable it to be run as an unprivileged user.
-*Note that no VO currently uses unprivileged mode in production*; however, several
-have this in testing.  Sites that want to support production jobs with singularity
-will need to choose the RPM method.
 
 !!! note "Applicable versions"
     The applicable software versions for this document are OSG version 3.4.2 or later.
@@ -56,13 +53,13 @@ As with all OSG software installations, there are some one-time (per host) steps
 # Enabling Unprivileged Mode for Singularity
 
 !!! note
-    As of October 2017, no VO in the OSG is ready to use non-setuid
+    As of December 2017, no VO in the OSG is ready to use non-setuid
     Singularity in production.  Only testing sites will need to follow
     these instructions; contact the VOs you support for more
     information.
 
-    Most sites will want to follow the RPM install instructions until
-    there is wider VO support.
+    Most sites will want to follow the privileged RPM install instructions
+    until there is wider VO support.
 
 If the operating system is an EL 7 variant and has been updated to the EL
 7.4 kernel (3.10.0-693 or greater), you can skip
@@ -89,8 +86,8 @@ singularity to be run as an unprivileged user via CVMFS:
 
 ## Validating singularity
 
-Once you have the host configured properly, log in as an ordinary unprivileged user and
-verify that singularity works:
+Once you have the host configured properly, log in as an ordinary
+unprivileged user and verify that singularity works:
 
 ```console
 user@host $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity \
@@ -102,7 +99,8 @@ user         1     0  0 21:34 ?        00:00:00 ps -ef
 ```
 
 !!! tip
-    The remainder of this document pertains to the privileged (`setuid`) mode of singularity.
+    The remainder of this document pertains to the privileged
+    (`setuid`) mode of singularity.
 
 # Installing Singularity as Privileged
 
@@ -119,7 +117,7 @@ To install singularity as `setuid`, make sure that your host is up to date befor
         root@host # yum update
     This command will update **all** packages
 
-3. The singularity packages are split into two parts, choose the command that corresponds to your host:
+3. The singularity packages are split into two parts, choose the command that corresponds to your situation:
     - If you are installing singularity on a worker node, where images do not need to be created or manipulated, install just the smaller part to limit the amount of setuid-root code that is installed:
 
             :::console
@@ -130,10 +128,45 @@ To install singularity as `setuid`, make sure that your host is up to date befor
             :::console
             root@host # yum install singularity
 
+!!! tip
+    In most cases, only `singularity-runtime` is needed on the worker node;
+    installing only this smaller package reduces risk of potential security
+    exploits.
+
 ## Configuring singularity
 
-The default configuration of singularity is sufficient.  If you want
+There are no required changes to the default configuration.  If you want
 to see what options are available, see `/etc/singularity/singularity.conf`.
+
+### Limiting Image Types
+
+Images based on loopback devices carry an inherently higher exposure to
+unknown kernel exploits compared to directory-based images distributed via
+CVMFS.  See [this article](https://lwn.net/Articles/652468/) for further
+discussion.
+
+The loopback-based images are the default image type produced by Singularity
+users and are common at sites with direct user logins.  However (as of December
+2017) we are only aware of directory-based images being used by OSG VOs.  Hence,
+it is a reasonable measure to disable the loopback-based images by setting
+the following option in `/etc/singularity/singularity.conf`:
+
+        max loop devices = 0
+
+While reasonable for some sites, this is not required as there are currently
+no public kernel exploits for this issue; any exploits are patched by
+RedHat when they are discovered.
+
+!!! warning "Warning: No Free Lunches"
+    If you modify `/etc/singularity/singularity.conf`, carefully test any
+    upgrade procedures.
+    RPM will not automatically merge your changes with new upstream
+    configuration keys, which may cause a broken install or inadvertently
+    change the site configuration.  Singularity renames configuration keys
+    more frequently than typical OSG software.
+
+    Look for `.rpmnew` files after upgrades and merge in any changes to the
+    defaults.
 
 ## Validating singularity
 
