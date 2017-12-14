@@ -40,6 +40,8 @@ HTCondor-CE-Bosco is a special configuration of HTCondor-CE that can submit jobs
 
 HTCondor-CE-Bosco is intended for small sites or as an introduction to the OSG. If your site intends to run thousands of OSG jobs, you will need to host a standard [HTCondor-CE](install-htcondor-ce) because HTCondor-CE-Bosco has not yet been optimized for such loads.
 
+To discuss using a hosted SSH HTCondor-CE, contact OSG User Support at [user-support@opensciencegrid.org](mailto:user-support@opensciencegrid.org)
+
 ### On HTCondor batch systems
 
 For a site with an HTCondor **batch system**, the JobRouter can use HTCondor protocols to place a transformed copy of the grid job directly into the batch system’s scheduler, meaning that the routed and batch system jobs are one and the same. Thus, there are three representations of your job, each with its own ID (see diagram below):
