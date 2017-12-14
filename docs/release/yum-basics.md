@@ -438,7 +438,7 @@ Installing the debuginfo package requires three steps.
         [osg-debug]
 
         name=OSG Software for Enterprise Linux 5 - $basearch - Debug
-        baseurl=http://repo.grid.iu.edu/osg-release/$basearch/debu
+        baseurl=http://repo.opensciencegrid.org/osg-release/$basearch/debu
         failovermethod=priority 
         priority=98 
         enabled=1
