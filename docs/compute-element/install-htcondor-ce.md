@@ -189,6 +189,7 @@ Making changes to the OSG configuration files in the `/etc/osg/config.d` directo
 3. Fix any errors (at least) that `osg-configure` reports.
 4. Once the validation command succeeds without errors, apply the configuration settings:
 
+        :::console
         root@host # osg-configure -c
 
 5. Generate a `user-vo-map` file with your authentication set up (skip this step if you're using the LCMAPS VOMS plugin):
