@@ -532,24 +532,23 @@ so make sure that you install xrootd-lcmaps from the same repository that you
 install XRootD from. Otherwise, you may have dependency issues due to differing
 versions of shared libraries.
 
-**Create host certificates**
+**Create service certificate**
 
-You will need to have a X509 certificate to talk to GUMS. If you already have a
-host certificate, you can use a copy of that:
+You will need to have an X.509 certificate/key pair for xrootd. If you already have one for the host, you can use a copy of that:
 
 ``` console
- mkdir /etc/grid-security/xrd
- cp /etc/grid-security/hostkey.pem /etc/grid-security/xrd/xrdkey.pem
- cp /etc/grid-security/hostcert.pem /etc/grid-security/xrd/xrdcert.pem
- chown -R xrootd:xrootd /etc/grid-security/xrd/
- chmod 400 /etc/grid-security/xrd/xrdkey.pem
+root@host # mkdir /etc/grid-security/xrd
+root@host # cp /etc/grid-security/hostkey.pem /etc/grid-security/xrd/xrdkey.pem
+root@host # cp /etc/grid-security/hostcert.pem /etc/grid-security/xrd/xrdcert.pem
+root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
+root@host # chmod 400 /etc/grid-security/xrd/xrdkey.pem
 ```
 
-This certificate should be owned by `xrootd` and located in `/etc/grid-security/xrd`.
+This certificate and key should be owned by `xrootd` and located in `/etc/grid-security/xrd`.
 
 **Authorization File**
 
-Next, create `/etc/xrootd/auth_file` using the example in the above section.
+Next, create `/etc/xrootd/auth_file` using the example in the [above section](#authorization-file).
 
 **Modify /etc/xrootd/lcmaps.cfg**
 
