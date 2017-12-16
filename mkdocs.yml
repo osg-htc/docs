@@ -25,20 +25,21 @@ pages:
   - 'Worker Node via OASIS': 'worker-node/install-wn-oasis.md'
   - 'CVMFS': 'worker-node/install-cvmfs.md'
   - 'Singularity': 'worker-node/install-singularity.md'
-- Data - HTTP & CVMFS:
-  - 'Install HTTP Cache': 'data/frontier-squid.md'
-  - 'Update OASIS Shared Repo': 'data/update-oasis.md'
-  - 'Install an OASIS Repo': 'data/external-oasis-repos.md'
-- Data - POSIX Storage:
-  - 'Install GridFTP Server': 'data/gridftp.md'
-  - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
-- Data - HDFS:
-  - 'HDFS Overview': 'data/hadoop-overview.md'
-  - 'Install HDFS': 'data/install-hadoop-2-0-0.md'
-- Data - XRootD:
-  - 'XRootD Overview': 'data/xrootd-overview.md'
-  - 'Install XRootD': 'data/install-xrootd.md'
-  - 'Install XRootD Client': 'data/install-xroot-client.md'
+- Data:
+  - HTTP & CVMFS:
+    - 'Install HTTP Cache': 'data/frontier-squid.md'
+    - 'Update OASIS Shared Repo': 'data/update-oasis.md'
+    - 'Install an OASIS Repo': 'data/external-oasis-repos.md'
+  - POSIX Storage:
+    - 'Install GridFTP Server': 'data/gridftp.md'
+    - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
+  - HDFS:
+    - 'HDFS Overview': 'data/hadoop-overview.md'
+    - 'Install HDFS': 'data/install-hadoop-2-0-0.md'
+  - XRootD:
+    - 'XRootD Overview': 'data/xrootd-overview.md'
+    - 'Install XRootD': 'data/install-xrootd.md'
+    - 'Install XRootD Client': 'data/install-xroot-client.md'
 - Security:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host Certificates': 'security/host-certs.md'
