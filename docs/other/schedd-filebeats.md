@@ -84,12 +84,12 @@ For the configuration of the HTCondor submit host to use the TransferLog follow 
         SHADOW_STATS_LOG = $(LOG)/XferStatsLog
         STARTER_STATS_LOG = $(LOG)/XferStatsLog
 
-2. Reconfigure condor:
+1. Reconfigure condor:
 
         :::console
         root@host #condor_reconfig
 
-3. Make sure that after a while the new log `/var/log/XferStatsLog` is present.
+1. Make sure that after a while the new log `/var/log/XferStatsLog` is present.
 
 
 
