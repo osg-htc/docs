@@ -74,21 +74,24 @@ singularity to be run as an unprivileged user via CVMFS:
         :::console
         root@host # grub2-mkconfig -o /boot/grub2/grub.cfg
 
-3. Set sysctl options as follows:
+3. Enable user namespaces via `sysctl`:
 
         :::console
         root@host # echo "user.max_user_namespaces = 15000" \
             > /etc/sysctl.d/90-max_user_namespaces.conf
+            
+4. (Optional) Consider disabling network namespaces:
+
+        :::console
         root@host # echo "user.max_net_namespaces = 0" \
             > /etc/sysctl.d/90-max_net_namespaces.conf
 
-    The first option enables all types of unprivileged user
-    namespaces, and in order to reduce vulnerability the second option
-    disables network namespaces; OSG VOs do not need network
-    namespaces with singularity.  Network namespaces are, however,
-    used by docker by default, so if docker is used on the same
-    machine, docker containers can share the host network with the
-    `docker --net=host` option.
+    OSG VOs do not need network namespaces with singularity; disabling
+    them reduces the risk profile of enabling user namespaces.  Network
+    namespaces are, however, heavily utilized by other container runtimes,
+    such as Docker.  Disabling them may break other container solutions,
+    or limit their capabilities (such as requiring the `--net=host` option
+    in Docker).
 
 4. Reboot
 5. If you haven't yet installed [cvmfs](install-cvmfs), do so.
