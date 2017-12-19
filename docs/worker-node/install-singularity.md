@@ -93,6 +93,15 @@ singularity to be run as an unprivileged user via CVMFS:
     may break other container solutions, or limit their capabilities
     (such as requiring the `--net=host` option in Docker).
 
+    !!! warning "Warning: current public exploit"
+        As of this writing there is no patch from Redhat for a
+        [public exploit](https://access.redhat.com/security/cve/CVE-2017-16939)
+        of a vulnerability with unprivileged network namespaces that
+        can crash a kernel and potentially lead to privilege
+        escalation, so for now at least do not leave network
+        namespaces enabled at the same time as unprivileged user
+        namespaces.
+
 4. Reboot
 5. If you haven't yet installed [cvmfs](install-cvmfs), do so.
 
