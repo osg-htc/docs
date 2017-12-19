@@ -24,7 +24,7 @@ Configuration of Filebeats
 
 The configuration of filebeats revovles around this file `/etc/filebeat/filebeat.yml`. Bellow are the steps to modify the different sections of this file
 
-1. The input section should look like this:
+1. The `Filebeat Prospectors` section, the input should look like this:
 
         :::file
         - input_type: log
@@ -71,6 +71,21 @@ The configuration of filebeats revovles around this file `/etc/filebeat/filebeat
 
         :::console
         root@host # service filebeat start
+
+1. The general section should look like this:
+
+        :::file
+        #================================ General =====================================
+
+        name: %RED%<hostname>%ENDCOLOR%
+        tags: ["xfer-log"]
+
+        # Optional fields that you can specify to add additional information to the
+        # output.
+        #fields:
+        #  env: staging
+
+
 
 Configuration of HTCondor
 -----------------------------------------
