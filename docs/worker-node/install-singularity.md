@@ -94,7 +94,7 @@ singularity to be run as an unprivileged user via CVMFS:
     (such as requiring the `--net=host` option in Docker).
 
     !!! danger "Danger: current public exploit"
-        As December 19, 2018 there is no patch from Redhat for a
+        As of December 19, 2018 there is no patch from Redhat for a
         [public exploit](https://access.redhat.com/security/cve/CVE-2017-16939)
         of a vulnerability due to the combination of network namespaces
         and user namespaces.  This vulnerability can crash a kernel and
