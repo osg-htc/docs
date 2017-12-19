@@ -1,7 +1,7 @@
 Installation of FileBeats for Submit nodes
 ==========================================
 
-This document is for frontend administrators. It describes the installation of [Filebeats](https://www.elastic.co/products/beats/filebeat) to continusly upload the HTCondor submit hosts transfer log to Elastic Search.
+This document is for frontend administrators. It describes the installation of [Filebeats](https://www.elastic.co/products/beats/filebeat) to continusly upload the HTCondor submit host transfer log to Elastic Search.
 
 
 Introduction
@@ -26,55 +26,70 @@ The configuration of filebeats revovles around this file `/etc/filebeat/filebeat
 
 1. The input section should look like this:
 
-     ::: file
-     - input_type: log
-     paths:
-     - /var/log/condor/XferStatsLog
+        :::file
+        - input_type: log
+        paths:
+        - /var/log/condor/XferStatsLog
 
 1. The output logstash section should look like:
 
-   ```file
-      #----------------------------- Logstash output --------------------------------
-      output.logstash:
-      # The Logstash hosts
-      hosts: ["gracc.opensciencegrid.org:6938"]
+        :::file
+        #----------------------------- Logstash output --------------------------------
+        output.logstash:
+        # The Logstash hosts
+        hosts: ["gracc.opensciencegrid.org:6938"]
+ 
+        # Optional SSL. By default is off. 
+        # List of root certificates for HTTPS server verifications
+        ssl.certificate_authorities: ["/etc/grid-security/certificates/cilogon-osg.pem"]
 
-      # Optional SSL. By default is off. 
-      # List of root certificates for HTTPS server verifications
-      ssl.certificate_authorities: ["/etc/grid-security/certificates/cilogon-osg.pem"]
+        #  Certificate for SSL client authentication
+        ssl.certificate: "/etc/grid-security/hostcert.pem"
+ 
+        # Client Certificate Key
+        ssl.key: "/etc/grid-security/hostkey.pem"
 
-      # Certificate for SSL client authentication
-      ssl.certificate: "/etc/grid-security/hostcert.pem"
+1. Comment out all of the `Elasticsearch output` since we are using LogStash
 
-      # Client Certificate Key
-      ssl.key: "/etc/grid-security/hostkey.pem"
-   ```
+        :::file
+        #-------------------------- Elasticsearch output ------------------------------
+        #output.elasticsearch:
+        # Array of hosts to connect to.
+        #hosts: ["localhost:9200"]
+
+        # Optional protocol and basic auth credentials.
+        #protocol: "https"
+        #username: "elastic"
+        #password: "changeme"
+
+1. Test configuration is correct by running:
+ 
+        :::console
+        root@host # filebeat.sh -configtest -e
+
+1. Start the filebeats services
+
+        :::console
+        root@host # service filebeat start
 
 Configuration of HTCondor
 -----------------------------------------
 
+For the configuration of the HTCondor submit host to use the TransferLog follow the next instructions:
 
-Client Site Installation 
-------------------------------------------------------------------
+1. Create a file named `/etc/condor/config.d/50-transferLog.config` with the following contnets
+    
+        :::file
+        SHADOW_DEBUG = D_STATS
+        SHADOW_STATS_LOG = $(LOG)/XferStatsLog
+        STARTER_STATS_LOG = $(LOG)/XferStatsLog
 
-The Network Performance Toolkit is installed with the OSG Client. Specifically, the tools included are: BWCTL, NDT and OWAMP (bwctl-client, bwctl-server, bwctl, ndt, owamp-client). NPAD is currently not in OSG client.
+2. Reconfigure condor:
 
-If you just want to install the OSG command line clients you can do the following::
+        :::console
+        root@host #condor_reconfig
 
-``` console
-yum install bwctl-client
-yum install owamp-client
-yum install ndt-client
-yum install npad-client
-```
+3. Make sure that after a while the new log `/var/log/XferStatsLog` is present.
 
-You may install these utilities separately as RPM using yum by following the [perfSONAR](http://www.perfsonar.net/about) instructions. The packages are in the OSG repository, some of them with a separate client or server version, available for the OSG supported platforms:
 
--   NDT: ndt
--   OWAMP: owamp, owamp-client, owamp-server
--   BWCTL: bwctl, bwctl-client, bwctl-server
--   NPAD: npad
-
-Server Site Installation 
-------------------------------------------------------------------
 
