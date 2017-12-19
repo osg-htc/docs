@@ -80,18 +80,18 @@ singularity to be run as an unprivileged user via CVMFS:
         root@host # echo "user.max_user_namespaces = 15000" \
             > /etc/sysctl.d/90-max_user_namespaces.conf
             
-4. (Optional) Consider disabling network namespaces:
+4. (Optional) Disable network namespaces:
 
         :::console
         root@host # echo "user.max_net_namespaces = 0" \
             > /etc/sysctl.d/90-max_net_namespaces.conf
 
-    OSG VOs do not need network namespaces with singularity; disabling
-    them reduces the risk profile of enabling user namespaces.  Network
-    namespaces are, however, heavily utilized by other container runtimes,
-    such as Docker.  Disabling them may break other container solutions,
-    or limit their capabilities (such as requiring the `--net=host` option
-    in Docker).
+    OSG VOs do not need network namespaces with singularity, and
+    disabling them reduces the risk profile of enabling user
+    namespaces.  Network namespaces are, however, utilized by other
+    container systems, such as Docker.  Disabling network namespaces
+    may break other container solutions, or limit their capabilities
+    (such as requiring the `--net=host` option in Docker).
 
 4. Reboot
 5. If you haven't yet installed [cvmfs](install-cvmfs), do so.
