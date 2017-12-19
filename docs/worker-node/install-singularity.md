@@ -80,7 +80,7 @@ singularity to be run as an unprivileged user via CVMFS:
         root@host # echo "user.max_user_namespaces = 15000" \
             > /etc/sysctl.d/90-max_user_namespaces.conf
             
-4. (Optional) Disable network namespaces:
+4. Disable network namespaces:
 
         :::console
         root@host # echo "user.max_net_namespaces = 0" \
@@ -92,6 +92,15 @@ singularity to be run as an unprivileged user via CVMFS:
     container systems, such as Docker.  Disabling network namespaces
     may break other container solutions, or limit their capabilities
     (such as requiring the `--net=host` option in Docker).
+
+    !!! danger "Danger: current public exploit"
+        As of December 19, 2018 there is no patch from Redhat for a
+        [public exploit](https://access.redhat.com/security/cve/CVE-2017-16939)
+        of a vulnerability due to the combination of network namespaces
+        and user namespaces.  This vulnerability can crash a kernel and
+        potentially lead to privilege escalation.  Do not leave network
+        namespaces enabled at the same time as unprivileged user
+        namespaces until this is resolved.
 
 4. Reboot
 5. If you haven't yet installed [cvmfs](install-cvmfs), do so.
