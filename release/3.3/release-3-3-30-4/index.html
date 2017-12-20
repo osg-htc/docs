@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../../img/favicon.ico">
-  <title>OSG Release 3.4.5-2 - OSG Documentation</title>
+  <title>OSG Release 3.3.30-4 - OSG Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "OSG Release 3.4.5-2";
-    var mkdocs_page_input_path = "release/3.4/release-3-4-5-2.md";
-    var mkdocs_page_url = "/release/3.4/release-3-4-5-2/";
+    var mkdocs_page_name = "OSG Release 3.3.30-4";
+    var mkdocs_page_input_path = "release/3.3/release-3-3-30-4.md";
+    var mkdocs_page_url = "/release/3.3/release-3-3-30-4/";
   </script>
   
   <script src="../../../js/jquery-2.1.1.min.js"></script>
@@ -474,29 +474,14 @@
   
 	    </li>
           
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
-            <li class="toctree-l1">
-		
-  
-	    </li>
-          
             <li class="toctree-l1 current">
 		
   
-    <a class="current" href="./">OSG Release 3.4.5-2</a>
+    <a class="current" href="./">OSG Release 3.3.30-4</a>
   
   <ul class="subnav">
       
-    <li class="toctree-l2"><a href="#osg-software-stack-data-release-345-2">OSG Software Stack -- Data Release -- 3.4.5-2</a></li>
+    <li class="toctree-l2"><a href="#osg-software-stack-data-release-3330-4">OSG Software Stack -- Data Release -- 3.3.30-4</a></li>
     
         <ul>
         
@@ -512,6 +497,21 @@
     
 
   </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
 	    </li>
           
             <li class="toctree-l1">
@@ -811,10 +811,10 @@
     
       
     
-    <li>OSG Release 3.4.5-2</li>
+    <li>OSG Release 3.3.30-4</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.4/release-3-4-5-2.md"
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.3/release-3-3-30-4.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -824,19 +824,17 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="osg-software-stack-data-release-345-2">OSG Software Stack -- Data Release -- 3.4.5-2<a class="headerlink" href="#osg-software-stack-data-release-345-2" title="Permanent link">&para;</a></h1>
-<p><strong>Release Date</strong>: 2017-11-20</p>
+                <h1 id="osg-software-stack-data-release-3330-4">OSG Software Stack -- Data Release -- 3.3.30-4<a class="headerlink" href="#osg-software-stack-data-release-3330-4" title="Permanent link">&para;</a></h1>
+<p><strong>Release Date</strong>: 2017-12-20</p>
 <h2 id="summary-of-changes">Summary of changes<a class="headerlink" href="#summary-of-changes" title="Permanent link">&para;</a></h2>
 <p>This release contains:</p>
 <ul>
-<li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-76">VO Package v76</a><ul>
-<li>Drop redundant geant4-lcgadmin objects</li>
-<li>Add missing SNO+ VOMS servers</li>
-<li>Add notice to voms-mapfile-default</li>
+<li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-77">VO Package v77</a><ul>
+<li>Remove voms1.egee.cesnet.cz VOMS server (auger VO)</li>
 </ul>
 </li>
 </ul>
-<p>These <a href="https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.5-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a> were addressed in this release.</p>
+<p>These <a href="https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.30-4%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a> were addressed in this release.</p>
 <p>Detailed changes are below. All of the documentation can be found <a href="../../../">here</a></p>
 <h2 id="updating-to-the-new-release">Updating to the new release<a class="headerlink" href="#updating-to-the-new-release" title="Permanent link">&para;</a></h2>
 <h3 id="update-repositories">Update Repositories<a class="headerlink" href="#update-repositories" title="Permanent link">&para;</a></h3>
@@ -862,11 +860,11 @@
 <p>We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.</p>
 <h4 id="enterprise-linux-6">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vo-client-76-1.osg34.el6">vo-client-76-1.osg34.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vo-client-77-1.osg33.el6">vo-client-77-1.osg33.el6</a></li>
 </ul>
 <h4 id="enterprise-linux-7">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vo-client-76-1.osg34.el7">vo-client-76-1.osg34.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vo-client-77-1.osg33.el7">vo-client-77-1.osg33.el7</a></li>
 </ul>
 <h3 id="rpms">RPMs<a class="headerlink" href="#rpms" title="Permanent link">&para;</a></h3>
 <p>If you wish to manually update your system, you can run yum update against the following packages:</p>
@@ -876,18 +874,18 @@
 
 <p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
 <h4 id="enterprise-linux-6_1">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>osg-gums-config-76-1.osg34.el6
-vo-client-76-1.osg34.el6
-vo-client-edgmkgridmap-76-1.osg34.el6
-vo-client-lcmaps-voms-76-1.osg34.el6
+<div class="codehilite"><pre><span></span>osg-gums-config-77-1.osg33.el6
+vo-client-77-1.osg33.el6
+vo-client-edgmkgridmap-77-1.osg33.el6
+vo-client-lcmaps-voms-77-1.osg33.el6
 </pre></div>
 
 
 <h4 id="enterprise-linux-7_1">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>osg-gums-config-76-1.osg34.el7
-vo-client-76-1.osg34.el7
-vo-client-edgmkgridmap-76-1.osg34.el7
-vo-client-lcmaps-voms-76-1.osg34.el7
+<div class="codehilite"><pre><span></span>osg-gums-config-77-1.osg33.el7
+vo-client-77-1.osg33.el7
+vo-client-edgmkgridmap-77-1.osg33.el7
+vo-client-lcmaps-voms-77-1.osg33.el7
 </pre></div>
               
             </div>
@@ -896,10 +894,10 @@ vo-client-lcmaps-voms-76-1.osg34.el7
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../3.3/release-3-3-30-2/" class="btn btn-neutral float-right" title="OSG Release 3.3.30-2">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../3.4/release-3-4-5-3/" class="btn btn-neutral float-right" title="OSG Release 3.4.5-3">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../3.3/release-3-3-30-3/" class="btn btn-neutral" title="OSG Release 3.3.30-3"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../3.4/release-3-4-5-4/" class="btn btn-neutral" title="OSG Release 3.4.5-4"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -927,10 +925,10 @@ vo-client-lcmaps-voms-76-1.osg34.el7
           <a href="https://github.com/opensciencegrid/docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../3.3/release-3-3-30-3/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../3.4/release-3-4-5-4/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../3.3/release-3-3-30-2/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../3.4/release-3-4-5-3/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
