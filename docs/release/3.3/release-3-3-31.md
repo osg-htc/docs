@@ -14,6 +14,8 @@ This release contains:
 -   [GlideinWMS 3.2.20](http://glideinwms.fnal.gov/doc.v3_2_20/history.html): improved factory performance, Singularity support
 -   [osg-pki-tools 2.1.2](https://github.com/opensciencegrid/osg-pki-tools/releases): use HTTPS for all OIM connections, service certificate fix (Update from 2.0.0)
 -   osg-wn-client: add gfal2-http plugin
+-   lcmaps: enable VOMS signature checking by default
+-   GridFTP-HDFS: fix potential crash related to CVMFS checksums
 -   [HTCondor-CE 2.2.4](https://github.com/opensciencegrid/htcondor-ce/releases/tag/v2.2.4): bug fixes
 -   osg-gridftp: add osg-configure-gratia
 -   [osg-configure 1.10.3](https://github.com/opensciencegrid/osg-configure/releases/tag/v1.10.3): minor bug fixes
