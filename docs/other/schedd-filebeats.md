@@ -1,13 +1,13 @@
 Installation of FileBeats for Submit nodes
 ==========================================
 
-This document is for frontend administrators. It describes the installation of [Filebeats](https://www.elastic.co/products/beats/filebeat) to continusly upload the HTCondor submit host transfer log to Elastic Search.
+This document is for frontend administrators. It describes the installation of [Filebeats](https://www.elastic.co/products/beats/filebeat) to continuously upload the HTCondor submit host transfer log to Elastic Search.
 
 
 Introduction
 =================
 
-A submit host (HTCondor schedd) is a login node where users submit jobs to the Grid. One interesting log that it produces is the TransferLog. The TransferLogs report all the transfers of files between compute node sand submit nodes. In this guide we describe the installation of Filebeats to upload this log to Elastic Search.
+A submit host (HTCondor schedd) is a login node where users submit jobs to the Grid. One interesting log that it produces is the TransferLog. The TransferLogs report all the transfers of files between compute node and submit nodes. In this guide we describe the installation of Filebeats to upload this log to Elastic Search.
 
 Installation
 =================
@@ -22,7 +22,7 @@ Configuration
 Configuration of Filebeats
 -----------------------------------------
 
-The configuration of filebeats revovles around this file `/etc/filebeat/filebeat.yml`. Bellow are the steps to modify the different sections of this file
+The configuration of filebeats revolves around this file `/etc/filebeat/filebeat.yml`. Bellow are the steps to modify the different sections of this file
 
 1. The `Filebeat Prospectors` section, the input should look like this:
 
@@ -92,7 +92,7 @@ Configuration of HTCondor
 
 For the configuration of the HTCondor submit host to use the TransferLog follow the next instructions:
 
-1. Create a file named `/etc/condor/config.d/50-transferLog.config` with the following contnets
+1. Create a file named `/etc/condor/config.d/50-transferLog.config` with the following contents:
     
         :::file
         SHADOW_DEBUG = D_STATS
