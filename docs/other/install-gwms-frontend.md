@@ -32,10 +32,10 @@ Before starting the following things are required.
 
 ### Host and OS Requirements
 
-1. Ensure the host has a [supported operating system](/docs/release/supported_platforms)
+1. Ensure the host has a [supported operating system](/release/supported_platforms)
 2. Obtain root access to the host
-3. Prepare the [required Yum repositories](/docs/common/yum)
-4. Install [CA certificates](/docs/common/ca)
+3. Prepare the [required Yum repositories](/common/yum)
+4. Install [CA certificates](/common/ca)
 
 
 The Glidein WMS VO Frontend has the following hardware requirements for a production host:
@@ -1016,7 +1016,7 @@ Advanced Configurations
 Getting Help
 ------------
 
-To get assistance about the OSG software please use [this page](/docs/common/help.md).
+To get assistance about the OSG software please use [this page](/common/help).
 
 For specific questions about the Frontend configuration (and how to add it in your HTCondor infrastructure) you can email the glideinWMS support <glideinwms-support@fnal.gov>
 
