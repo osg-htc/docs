@@ -28,35 +28,21 @@ significant, large host, we have been able to scale the single-host install to
 Before Starting
 ---------------
 
-Before starting the following things are required.
+Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
-### Host and OS Requirements
+-   **User IDs:** If they do not exist already, the installation will create the Linux users `apache` (UID 48), `condor`, `frontend`, and `gratia`
+-   **Network:** The VO frontend must have reliable network connectivity, be on the public internet (no NAT), and preferably with no firewalls. Each running pilot requires 5 outgoing TCP ports. Incoming TCP ports 9618 to 9660 must be open.
+-   **Host choice**: The Glidein WMS VO Frontend has the following hardware requirements for a production host:
+    -   **CPU**: Four cores, preferably no more than 2 years old.
+    -   **RAM**: 3GB plus 2MB per running job. For example, to sustain 2000 running jobs, a host with 5GB is needed.
+    -   **Disk**: 30GB will be sufficient for all the binaries, config and log files related to glideinWMS. As this will be an interactive submit host, have enough disk space for your users' jobs. 
 
-1. Ensure the host has a [supported operating system](/release/supported_platforms)
-2. Obtain root access to the host
-3. Prepare the [required Yum repositories](/common/yum)
-4. Install [CA certificates](/common/ca)
+As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-
-The Glidein WMS VO Frontend has the following hardware requirements for a production host:
-
-- **CPU**: Four cores, preferably no more than 2 years old.
-- **RAM**: 3GB plus 2MB per running job. For example, to sustain 2000 running jobs, a host with 5GB is needed.
-- **Disk**: 30GB will be sufficient for all the binaries, config and log files related to glideinWMS. As this will be an interactive submit host, have enough disk space for your users' jobs. 
-
-### Users
-
-The Glidein WMS Frontend installation will create the following users unless they are already created.
-
-| User       | Default uid | Comment                                                                                                                        |
-|:-----------|:------------|:-------------------------------------------------------------------------------------------------------------------------------|
-| `apache`   | 48          | Runs httpd to provide the monitoring page (installed via dependencies).                                                        |
-| `condor`   | none        | Condor user (installed via dependencies).                                                                                      |
-| `frontend` | none        | This user runs the glideinWMS VO frontend. It also owns the credentials forwarded to the factory to use for the glideins.      |
-| `gratia`   | none        | Runs the Gratia probes to collect accounting data (optional see [the Gratia section below](#adding-gratia-accounting-and-a-local-monitoring-page-on-a-production-server)) |
-
-!!! warning
-    UID 48 is reserved by RedHat for user `apache`.  If it is already taken by a different username, you will experience errors.
+- Ensure the host has a [supported operating system](/release/supported_platforms)
+- Obtain root access to the host
+- Prepare the [required Yum repositories](/common/yum)
+- Install [CA certificates](/common/ca)
 
 ### Credentials and Proxies
 
@@ -97,33 +83,6 @@ x509 -in /etc/grid-security/hostcert.pem -subject -issuer -dates -noout`. You
 will need that to find out information for the configuration files and the
 request to the GlideinWMS factory.
 
-#### Certificates/Proxies configuration example
-
-This document has a [proxy configuration section](#proxy-configuration) that
-uses the host certificate/key and a user certificate to generate the required
-proxies.
-
-| Certificate      | User that owns certificate | Path to certificate                                                           |
-|:-----------------|:---------------------------|:------------------------------------------------------------------------------|
-| Host certificate | `root`                     | `/etc/grid-security/hostcert.pem`            `/etc/grid-security/hostkey.pem` |
-
-[Here](../security/host-certs.md) are instructions to request a host certificate.
-
-
-### Networking
-
-| Service Name      | Protocol | Port Number      |Inbound|Outbound| Comment                 |
-|:------------------|:---------|:-----------------|:------|:-------|-------------------------|
-|HTCondor port range| tcp      |`LOWPORT, HIGHPORT`|`YES` |        |contiguous range of ports|
-|GlideinWMS Frontend| tcp      | 9618 to 9660     |`YES`  |        |HTCondor Collectors for the GlideinWMS Frontend (received ClassAds from resources and jobs)|
-
-The VO frontend must have reliable network connectivity, be on the public
-internet (no NAT), and preferably with no firewalls. Each running pilot requires
-5 outgoing TCP ports. Incoming TCP ports 9618 to 9660 must be open.
-
--   For example, 2000 running jobs require about 10,100 TCP connections. This will overwhelm many firewalls; if you are unfamiliar with your network topology, you may want to warn your network administrator.
-
-
 ### OSG Factory access
 
 Before installing the Glidein WMS VO Frontend you need the information about a [Glidein Factory](http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/factory/index.html) that you can access:
@@ -156,7 +115,6 @@ In the reply from the OSG Factory managers you will receive some information nee
 
 Installing GlideinWMS Frontend
 ------------------------------
-
 
 ### Installing HTCondor
 
@@ -1027,9 +985,48 @@ References
 
 Definitions:
 
--   What is a [Virtual Organisation](https://www.opensciencegrid.org/about/organization/)
+-   What is a [Virtual Organization](https://www.opensciencegrid.org/about/organization/)
 
 Documents about the Glidein-WMS system and the VO frontend:
 
 -   <http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/>
 -   <http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/manual/>
+
+### Users
+
+The Glidein WMS Frontend installation will create the following users unless they are already created.
+
+| User       | Default uid | Comment                                                                                                                        |
+|:-----------|:------------|:-------------------------------------------------------------------------------------------------------------------------------|
+| `apache`   | 48          | Runs httpd to provide the monitoring page (installed via dependencies).                                                        |
+| `condor`   | none        | Condor user (installed via dependencies).                                                                                      |
+| `frontend` | none        | This user runs the glideinWMS VO frontend. It also owns the credentials forwarded to the factory to use for the glideins.      |
+| `gratia`   | none        | Runs the Gratia probes to collect accounting data (optional see [the Gratia section below](#adding-gratia-accounting-and-a-local-monitoring-page-on-a-production-server)) |
+
+!!! warning
+    UID 48 is reserved by RedHat for user `apache`.  If it is already taken by a different username, you will experience errors.
+
+### Certificates
+
+This document has a [proxy configuration section](#proxy-configuration) that
+uses the host certificate/key and a user certificate to generate the required
+proxies.
+
+| Certificate      | User that owns certificate | Path to certificate               |
+|:-----------------|:---------------------------|:----------------------------------|
+| Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` |
+| Host key         | `root`                     | `/etc/grid-security/hostkey.pem`  |
+
+[Here](/security/host-certs.md) are instructions to request a host certificate.
+
+### Networking
+
+| Service Name      | Protocol | Port Number      |Inbound|Outbound| Comment                 |
+|:------------------|:---------|:-----------------|:------|:-------|-------------------------|
+|HTCondor port range| tcp      |`LOWPORT, HIGHPORT`|`YES` |        |contiguous range of ports|
+|GlideinWMS Frontend| tcp      | 9618 to 9660     |`YES`  |        |HTCondor Collectors for the GlideinWMS Frontend (received ClassAds from resources and jobs)|
+
+The VO frontend must have reliable network connectivity, be on the public
+internet (no NAT), and preferably with no firewalls. Incoming TCP ports 9618 to 9660 must be open.
+
+Each running pilot requires 5 outgoing TCP connections. For example, 2000 running jobs require about 10,100 TCP connections. This will overwhelm many firewalls; if you are unfamiliar with your network topology, you may want to warn your network administrator.
