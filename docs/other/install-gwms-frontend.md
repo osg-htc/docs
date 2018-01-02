@@ -193,9 +193,6 @@ root@host # service gwms-frontend upgrade
 root@host # service condor restart
 ```
 
-!!! warning
-    When you do a generic yum update that will update also condor, the upgrade may restore the personal condor config file that you have to remove with `rm /etc/condor/config.d/00personal_condor.config`
-
 !!! note
     When upgrading to GlideinWMS 3.2.7 the second schedd is removed from the default configuration. For a smooth transition:
 
@@ -305,11 +302,6 @@ The HTCondor configuration for the frontend is placed in `/etc/condor/config.d`.
 - 03_gwms_local.config
 - 11_gwms_secondary_collectors.config
 - 90_gwms_dns.config
-
-Get rid of the pre-loaded HTCondor default to avoid conflicts in the configuration.
-
-    :::console
-    root@host # rm /etc/condor/config.d/00personal_condor.config
 
 
 For most installations create a new file named `/etc/condor/config.d/92_local_condor.config`
