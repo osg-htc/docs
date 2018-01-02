@@ -150,7 +150,7 @@ If you wish to install a different version of GlideinWMS, add the "--enablerepo"
 argument to the command as follows:
 
 -   `yum install --enablerepo=osg-testing glideinwms-vofrontend`: The most recent production release, still in testing phase. This will usually match the current tarball version on the GlideinWMS home page. (The osg-release production version may lag behind the tarball release by a few weeks as it is verified and packaged by OSG). Note that this will also take the osg-testing versions of all dependencies as well.
--   `yum install --enablerepo=osg-contrib glideinwms-vofrontend`: The most recent development series release, ie version 3 release. This has newer features such as cloud submission support, but is less tested.
+-   `yum install --enablerepo=osg-upcoming glideinwms-vofrontend`: The most recent development series release, i.e. version 3.3 release. This has newer features such as cloud submission support, but is less tested.
 
 Note that these commands will install default condor configurations with all
 services on one node.
