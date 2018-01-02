@@ -158,9 +158,9 @@ services on one node.
 ### Installing GlideinWMS Frontend on Multiple Nodes (Advanced) 
 
 For advanced users expecting heavy usage on their submit node, you may want to
-consider splitting the user collector, user submit, and vo frontend services.
-
-This can be doing using the following three commands (on different machines):
+consider splitting the user collector, user submit, and vo frontend
+services. This can be doing using the following three commands (on different
+machines):
 
 ``` console
 root@host # yum install glideinwms-vofrontend-standalone
@@ -170,7 +170,7 @@ root@host # yum install glideinwms-userschedd
 
 In addition, you will need to perform the following steps:
 
-- On the vofrontend and userschedd, modify CONDOR\_HOST to point to your usercollector. This is in `/etc/condor/config.d/00_gwms_general.config`. You can also override this value by placing it in a new config file. (For instance, `/etc/condor/config.d/99_local_custom.config` to avoid rpmsave/rpmnew conflicts on upgrades).
+- On the vofrontend and userschedd, modify `CONDOR_HOST` to point to your usercollector. This is in `/etc/condor/config.d/00_gwms_general.config`. You can also override this value by placing it in a new config file. (For instance, `/etc/condor/config.d/99_local_custom.config` to avoid rpmsave/rpmnew conflicts on upgrades).
 - In `/etc/condor/certs/condor_mapfile`, you will need to all DNs for each machine (userschedd, usercollector, vofrontend). Take great care to escape all special characters. Alternatively, you can use the `glidecondor_addDN` to add these values.
 - In the `/etc/gwms-frontend/frontend.xml` file, change the schedd locations to match the correct server. Also change the collectors tags at the bottom of the file. More details on frontend xml are in the following sections.
 
@@ -192,9 +192,6 @@ root@host # service gwms-frontend upgrade
 # %RED% Restart HTCondor because the configuration may be different%ENDCOLOR%
 root@host # service condor restart
 ```
-
-!!! note
-    The \\\** on the yum update is important.**
 
 !!! warning
     When you do a generic yum update that will update also condor, the upgrade may restore the personal condor config file that you have to remove with `rm /etc/condor/config.d/00personal_condor.config`
