@@ -10,8 +10,8 @@ The OSG provides no scientific software dependencies or software build tools on 
 
 If you would like to test the minimal OS environment that jobs can expect, you can test out your scientific software in [the OSG Docker image](https://hub.docker.com/r/opensciencegrid/osg-wn/).
 
-Common software available on worker nodes.
-==========================================
+Common Software Available on Worker Nodes
+-----------------------------------------
 
 The OSG worker node environment contains the following software:
 
@@ -36,7 +36,7 @@ At some sites, these tools may not be available at the pilot launch.  To setup t
 This should be done by a pilot job, not by the end-user payload.
 
 The Worker Node Environment
-===========================
+---------------------------
 
 The following table outlines the various important directories and information in the worker node environment.
 A job running on an OSG worker node can refer to each directory using the corresponding environment variable.
