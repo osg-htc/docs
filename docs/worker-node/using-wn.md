@@ -45,13 +45,13 @@ Custom variables and those that aren't listed may be defined in the [Local Setti
 
 | Environment Variable   | Configure section/option      | Purpose                                                    | Notes                                                                                                                         |
 |:-----------------------|:------------------------------|:-----------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------|
-| `$X509_CERT_DIR`       |                               | Location of the CA certificates                            | If not defined, defaults to `/etc/grid-security/certificates`.                                                                |
-| `$OSG_WN_TMP`          | `Storage`/`worker_node_temp`  | Temporary storage area in which your job(s) run            | Local to each worker node. See note below.                                                                                    |
-| `$_CONDOR_SCRATCH_DIR` |                               | Suggested temporary storage for glideinWMS-based payloads. | Users should prefer this environment variable over `$OSG_WN_TMP` if running inside glideinWMS.                                |
-| `$OSG_SQUID_LOCATION`, | `Squid`/`location`            | Location of a HTTP caching proxy server                    | Utilize this service for downloading files via HTTP for cache-friendly workflows.                                             |
 | `$OSG_GRID`            | `Storage`/`grid_dir`          | Location of additional environment variables.              | Pilots should source `$OSG_GRID/setup.sh` in order to guarantee the environment contains the worker node binaries in `$PATH`. |
-| `$OSG_SITE_NAME`       | `Site Attributes`/`site_name` | Name of the OSG resource where the worker node is located. |                                                                                                                               |
 | `$OSG_HOSTNAME`        | `Site Attributes`/`host_name` | Hostname of the CE where this pilot was launched.          |                                                                                                                               |
+| `$OSG_SITE_NAME`       | `Site Attributes`/`site_name` | Name of the OSG resource where the worker node is located. |                                                                                                                               |
+| `$OSG_SQUID_LOCATION`, | `Squid`/`location`            | Location of a HTTP caching proxy server                    | Utilize this service for downloading files via HTTP for cache-friendly workflows.                                             |
+| `$OSG_WN_TMP`          | `Storage`/`worker_node_temp`  | Temporary storage area in which your job(s) run            | Local to each worker node. See note below.                                                                                    |
+| `$X509_CERT_DIR`       |                               | Location of the CA certificates                            | If not defined, defaults to `/etc/grid-security/certificates`.                                                                |
+| `$_CONDOR_SCRATCH_DIR` |                               | Suggested temporary storage for glideinWMS-based payloads. | Users should prefer this environment variable over `$OSG_WN_TMP` if running inside glideinWMS.                                |
 
 !!!note
     The recommended size for `$OSG_WN_TMP` is 10 GB/job). Create a directory under this as your work area.
