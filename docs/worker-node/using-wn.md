@@ -40,10 +40,10 @@ The Worker Node Environment
 
 The following table outlines the various important directories and information in the worker node environment.
 A job running on an OSG worker node can refer to each directory using the corresponding environment variable.
-Several of them are defined as options in your OSG-Configure configs in `/etc/osg/config.d`.
+Several of them are defined as options in your OSG-Configure `.ini` files in `/etc/osg/config.d`.
 Custom variables and those that aren't listed may be defined in the [Local Settings section](/other/configuration-with-osg-configure/#local-settings).
 
-| Environment Variable   | Configure section/option      | Purpose                                                    | Notes                                                                                                                         |
+| Environment Variable   | OSG-Configure section/option      | Purpose                                                    | Notes                                                                                                                         |
 |:-----------------------|:------------------------------|:-----------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------|
 | `$OSG_GRID`            | `Storage`/`grid_dir`          | Location of additional environment variables.              | Pilots should source `$OSG_GRID/setup.sh` in order to guarantee the environment contains the worker node binaries in `$PATH`. |
 | `$OSG_HOSTNAME`        | `Site Attributes`/`host_name` | Hostname of the CE where this pilot was launched.          |                                                                                                                               |
