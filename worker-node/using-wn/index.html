@@ -122,11 +122,13 @@
       
     <li class="toctree-l3"><a href="#worker-node-overview">Worker Node Overview</a></li>
     
-
-    <li class="toctree-l3"><a href="#common-software-available-on-worker-nodes">Common software available on worker nodes.</a></li>
-    
-
-    <li class="toctree-l3"><a href="#the-worker-node-environment">The Worker Node Environment</a></li>
+        <ul>
+        
+            <li><a class="toctree-l4" href="#common-software-available-on-worker-nodes">Common Software Available on Worker Nodes</a></li>
+        
+            <li><a class="toctree-l4" href="#the-worker-node-environment">The Worker Node Environment</a></li>
+        
+        </ul>
     
 
   </ul>
@@ -841,7 +843,7 @@
 <p>This page describes how to initialize the environment of your job to correctly access the execution and data areas from the worker node.</p>
 <p>The OSG provides no scientific software dependencies or software build tools on the worker node; you are expected to bring along all application-level dependencies yourself (preferred; most portable) or utilize CVMFS. Sites are not required to provide any specific tools (<code>gcc</code>, <code>lapack</code>, <code>blas</code>, etc.) beyond the ones in the OSG worker node client and the base OS.</p>
 <p>If you would like to test the minimal OS environment that jobs can expect, you can test out your scientific software in <a href="https://hub.docker.com/r/opensciencegrid/osg-wn/">the OSG Docker image</a>.</p>
-<h1 id="common-software-available-on-worker-nodes">Common software available on worker nodes.<a class="headerlink" href="#common-software-available-on-worker-nodes" title="Permanent link">&para;</a></h1>
+<h2 id="common-software-available-on-worker-nodes">Common Software Available on Worker Nodes<a class="headerlink" href="#common-software-available-on-worker-nodes" title="Permanent link">&para;</a></h2>
 <p>The OSG worker node environment contains the following software:</p>
 <ul>
 <li>The supported set of CA certificates (located in <code>$X509_CERT_DIR</code> after the environment is set up)</li>
@@ -871,55 +873,77 @@
 
 
 <p>This should be done by a pilot job, not by the end-user payload.</p>
-<h1 id="the-worker-node-environment">The Worker Node Environment<a class="headerlink" href="#the-worker-node-environment" title="Permanent link">&para;</a></h1>
+<h2 id="the-worker-node-environment">The Worker Node Environment<a class="headerlink" href="#the-worker-node-environment" title="Permanent link">&para;</a></h2>
 <p>The following table outlines the various important directories and information in the worker node environment.
-A job running on an OSG worker node can refer to each directory using the corresponding environment variable.</p>
+A job running on an OSG worker node can refer to each directory using the corresponding environment variable.
+Several of them are defined as options in your OSG-Configure <code>.ini</code> files in <code>/etc/osg/config.d</code>.
+Custom variables and those that aren't listed may be defined in the <a href="../../other/configuration-with-osg-configure/#local-settings">Local Settings section</a>.</p>
 <table>
 <thead>
 <tr>
 <th align="left">Environment Variable</th>
+<th align="left">OSG-Configure section/option</th>
 <th align="left">Purpose</th>
 <th align="left">Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>$X509_CERT_DIR</code></td>
-<td align="left">Location of the CA certificates</td>
-<td align="left">If not defined, defaults to <code>/etc/grid-security/certificates</code>.</td>
-</tr>
-<tr>
-<td align="left"><code>$OSG_WN_TMP</code></td>
-<td align="left">Temporary storage area in which your job(s) run</td>
-<td align="left">Local to each worker node (recommended size: 10 GB/job). Create a directory under this as your work area. Site administrators should use common batch-system capabilities to create a temporary, per-job directory that is clearned up after each job is run. Alternatively, administrators should ensure that this directory is purged periodically.</td>
-</tr>
-<tr>
-<td align="left"><code>$_CONDOR_SCRATCH_DIR</code></td>
-<td align="left">Suggested temporary storage for glideinWMS-based payloads.</td>
-<td align="left">Users should prefer this environment variable over <code>$OSG_WN_TMP</code> if running inside glideinWMS.</td>
-</tr>
-<tr>
-<td align="left"><code>$OSG_SQUID_LOCATION</code>, <code>http_proxy</code></td>
-<td align="left">Location of a HTTP caching proxy server</td>
-<td align="left">Utilize this service for downloading files via HTTP for cache-friendly workflows.</td>
-</tr>
-<tr>
 <td align="left"><code>$OSG_GRID</code></td>
+<td align="left"><code>Storage</code>/<code>grid_dir</code></td>
 <td align="left">Location of additional environment variables.</td>
 <td align="left">Pilots should source <code>$OSG_GRID/setup.sh</code> in order to guarantee the environment contains the worker node binaries in <code>$PATH</code>.</td>
 </tr>
 <tr>
+<td align="left"><code>$OSG_HOSTNAME</code></td>
+<td align="left"><code>Site Attributes</code>/<code>host_name</code></td>
+<td align="left">Hostname of the CE where this pilot was launched.</td>
+<td align="left"></td>
+</tr>
+<tr>
 <td align="left"><code>$OSG_SITE_NAME</code></td>
+<td align="left"><code>Site Attributes</code>/<code>site_name</code></td>
 <td align="left">Name of the OSG resource where the worker node is located.</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left"><code>$OSG_HOSTNAME</code></td>
-<td align="left">Hostname of the CE where this pilot was launched.</td>
+<td align="left"><code>$OSG_SQUID_LOCATION</code>,</td>
+<td align="left"><code>Squid</code>/<code>location</code></td>
+<td align="left">Location of a HTTP caching proxy server</td>
+<td align="left">Utilize this service for downloading files via HTTP for cache-friendly workflows.</td>
+</tr>
+<tr>
+<td align="left"><code>$OSG_WN_TMP</code></td>
+<td align="left"><code>Storage</code>/<code>worker_node_temp</code></td>
+<td align="left">Temporary storage area in which your job(s) run</td>
+<td align="left">Local to each worker node (recommended size: 10 GB/job). See <a href="#osg_wn_tmp">this section</a> below for details.</td>
+</tr>
+<tr>
+<td align="left"><code>$X509_CERT_DIR</code></td>
 <td align="left"></td>
+<td align="left">Location of the CA certificates</td>
+<td align="left">If not defined, defaults to <code>/etc/grid-security/certificates</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>$_CONDOR_SCRATCH_DIR</code></td>
+<td align="left"></td>
+<td align="left">Suggested temporary storage for glideinWMS-based payloads.</td>
+<td align="left">Users should prefer this environment variable over <code>$OSG_WN_TMP</code> if running inside glideinWMS.</td>
 </tr>
 </tbody>
 </table>
+<h3 id="osg_wn_tmp">OSG_WN_TMP<a class="headerlink" href="#osg_wn_tmp" title="Permanent link">&para;</a></h3>
+<p>Site administrators are responsible for ensuring that <code>$OSG_WN_TMP</code> is cleaned up. We recommend one of the following solutions:</p>
+<ul>
+<li>Use common batch-system capabilities to create a temporary, per-job directory that is cleaned up after each job is run.</li>
+<li>Periodically purge the directory (e.g. <code>tmpwatch</code>).</li>
+</ul>
+<h4 id="for-vo-managers">For VO managers<a class="headerlink" href="#for-vo-managers" title="Permanent link">&para;</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following advice applies to VO managers or maintainers of <em>pilot</em> software; end-users should contact their VO
+for the proper locations to stage temporary work (often, this will be either <code>$TMPDIR</code> or <code>$_CONDOR_SCRATCH_DIR</code>).</p>
+</div>
 <p>Be careful with using <code>$OSG_WN_TMP</code>; at some sites, this directory might be shared with other VOs. We recommend creating a new sub-directory as a precaution:</p>
 <div class="codehilite"><pre><span></span>mkdir -p <span class="nv">$OSG_WN_TMP</span>/MYVO
 <span class="nb">export</span> <span class="nv">mydir</span><span class="o">=</span><span class="sb">`</span>mktemp -d -t MYVO<span class="sb">`</span>
@@ -929,8 +953,7 @@ rm -rf <span class="nv">$mydir</span>
 </pre></div>
 
 
-<p>This advice applies to maintainers of <em>pilot</em> software; end-users should contact their VO for advice (often, this will be either <code>$TMPDIR</code> or <code>$_CONDOR_SCRATCH_DIR</code>).
-The pilot should utilize <code>$TMPDIR</code> to communicate the location of temporary storage to payloads.</p>
+<p>The pilot should utilize <code>$TMPDIR</code> to communicate the location of temporary storage to payloads.</p>
 <p>A significant number of sites use the batch system to make an independent directory for each user job, and change <code>$OSG_WN_TMP</code> on the fly to point to this directory.</p>
 <p>There is no way to know in advance how much scratch disk space any given worker node has available; recall, what disk space is available may be shared among a number of job slots.</p>
               
