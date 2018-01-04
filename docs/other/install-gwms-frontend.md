@@ -580,14 +580,84 @@ root@host # systemctl start gwms-frontend
 
 ### Adding Gratia Accounting and a Local Monitoring Page on a Production Server
 
-You must report to Gratia if you are running on OSG more than a few test jobs.
+You must report accounting information if you are running more than a few test jobs on the OSG .
 
-[ProbeConfigGlideinWMS](https://twiki.opensciencegrid.org/bin/view/Accounting/ProbeConfigGlideinWMS)
-explains how to instal and configure the HTCondor Gratia probe. If you are on a
-Campus Grid without x509 certificates pay attention to the [Users without
-Certificates
-part](https://twiki.opensciencegrid.org/bin/view/Accounting/ProbeConfigGlideinWMS#Users_without_Certificates)
-in the Unusual Use Cases section.
+1.  Install the GlideinWMS Gratia Probe on each of your submit hosts in your GlideinWMS installation:
+
+        :::console
+        root@host # yum install gratia-probe-glideinwms
+
+2.  Edit the ProbeConfig located in `/etc/gratia/condor/ProbeConfig`. First, edit the `SiteName` and `ProbeName` to be a unique identifier for your GlideinWMS Submit host. There can be multiple probes (with different names) per site. If you haven't already, you should register your GlideinWMS submit host in [OIM](https://oim.grid.iu.edu/oim/home). Then you can use the name you used to register the resource.
+
+        ProbeName="condor:<hostname>"
+        SiteName="HCC-GlideinWMW-Frontend"
+
+    Next, turn the probe on by setting `EnableProbe`:
+
+        EnableProbe="1"
+
+3.  Reconfigure HTCondor:
+
+        :::console
+        root@host # condor_reconfig
+
+4.  Start the services, and add them to be started automatically when the system reboots:
+
+        :::console
+        root@host # service gratia-probes-cron start
+        root@host # chkconfig --level 345 gratia-probes-cron on
+
+#### Optional Accounting Configuration
+
+The following sections contain additional configuration that may be required depending on the customizations you've made to your GlideinWMS frontend installation.
+
+##### Users without Certificates #####
+
+If you have users that submit jobs without a certificate explicitly declared in the submit file, you will need to add `MapUnknownToGroup` to the ProbeConfig. In the file `/etc/gratia/condor/ProbeConfig`, add the value after the `EnableProbe`.
+
+``` file
+    ...
+    SuppressGridLocalRecords="0"
+    EnableProbe="1"
+    %RED%MapUnknownToGroup="1"%ENDCOLOR%
+
+    Title3="Tuning parameter"
+    ...
+```
+
+Further, if you want to record all usage as coming from a single VO, you can configure the probe to override the 'guessed' VO. In the below example, replace the %RED%Engage<span class="twiki-macro ENDCOLOR"></span> with a registered VO that you would like to report as. If you don't have a VO that you are affiliated with, you may use Engage.
+
+``` file
+...
+    MapUnknownToGroup="1"
+    %RED%MapGroupToRole="1"%ENDCOLOR%
+    %RED%VOOverride="Engage"%ENDCOLOR%
+...
+```
+
+##### Non-Standard Condor Install #####
+
+If Condor is installed in a non-standard location (i.e., not RPMs, or relocated RPM outside `/usr/bin`), then you need to tell the probe where to find the Condor binaries. This can be done with a script with a special attribute in `/etc/gratia/condor/ProbeConfig`, `CondorLocation`. Point it to the location of the Condor install, such that `CondorLocation/bin/condor_version` exists.
+
+##### New Data Directory #####
+
+If your `PER_JOB_HISTORY_DIR` condor configuration variable is different from the default value, you must update the value of `DataFolder` in `/etc/gratia/condor/ProbeConfig`. To check the value of `PER_JOB_HISTORY_DIR` run the following command:
+
+``` console
+user@host $ condor_config_val PER_JOB_HISTORY_DIR
+```
+
+##### Different collector and other customizations #####
+
+By default the probe reports to the OSG  GRACC. To change that you must edit the configuration file, `/etc/gratia/condor/ProbeConfig`, and replace the OSG production host with your desired one:
+
+``` file
+...
+    CollectorHost="gratia-osg-prod.opensciencegrid.org:80"
+    SSLHost="gratia-osg-prod.opensciencegrid.org:443"
+    SSLRegistrationHost="gratia-osg-prod.opensciencegrid.org:80"
+...
+```
 
 ### Optional Configuration
 
