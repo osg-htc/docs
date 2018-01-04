@@ -26,7 +26,7 @@ This release contains:
 -   Fixed load-balancing in Globus GridFTP when using IPv6 addresses
 -   Added the HTCondor CREAM GAHP for EL7 platforms
 -   Completed porting components of OSG Software Stack to EL7
--   Added [RSV GlideinWMS Tester](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallRsvGlideinwmsTester) for VO Front-ends to test site support
+-   Added [RSV GlideinWMS Tester](/monitoring/install-rsv-gwms-tester) for VO Front-ends to test site support
 -   Updated to [VO Package v68](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-68-3): Added project8 VO
 -   [osg-pki-tools 1.2.19](https://github.com/opensciencegrid/osg-pki-tools/releases/tag/1.2.19)
     -   Reword 'bad VO info' error from osg-\*cert-request

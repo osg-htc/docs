@@ -189,6 +189,7 @@ Making changes to the OSG configuration files in the `/etc/osg/config.d` directo
 3. Fix any errors (at least) that `osg-configure` reports.
 4. Once the validation command succeeds without errors, apply the configuration settings:
 
+        :::console
         root@host # osg-configure -c
 
 5. Generate a `user-vo-map` file with your authentication set up (skip this step if you're using the LCMAPS VOMS plugin):
@@ -382,7 +383,7 @@ Registering the CE
 To be part of the OSG Production Grid, your CE must be registered in the [OSG Information Management System](https://oim.opensciencegrid.org) (OIM). To register your resource:
 
 1.  [Obtain, install, and verify your user certificate](../security/user-certs) (which you may have done already)
-2.  [Register your site and CE in OIM](https://twiki.opensciencegrid.org/bin/view/Operations/OIMRegistrationInstructions)
+2.  [Register your site and CE in OIM](https://oim.opensciencegrid.org/oim/oimregistration)
 
 Getting Help
 ------------

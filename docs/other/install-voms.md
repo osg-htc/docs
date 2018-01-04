@@ -44,7 +44,7 @@ The VOMS and voms-admin installation will create two users unless they are alrea
 | `voms`                                                                                                         | none                                                                                                                  | Runs the VOMS daemons, one per VO.                                                                                |
 | `tomcat`                                                                                                       | 91                                                                                                                    | Runs tomcat6 and owns voms-admin configuration and certificates.                                                  |
 
-Note that if uid 91 is already taken but not used for the tomcat user, you will experience errors. [Details...](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/KnownProblems#Reserved_user_ids_especially_for)
+Note that if uid 91 is already taken but not used for the tomcat user, you will experience errors. [Details...](https://github.com/opensciencegrid/docs/blob/master/archive/KnownProblems)
 
 Certificates 
 ------------------------------------------------------

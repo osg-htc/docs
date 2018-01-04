@@ -8,6 +8,8 @@ Release Notes
 
 | Version                          | Date       | Summary                                                                          |
 |:---------------------------------|:-----------|:---------------------------------------------------------------------------------|
+| [3.4.6](3.4/release-3-4-6)       | 2017-12-21 | XRootD 4.8.0, CernVM-FS 2.4.4, GlideinWMS 3.2.20, osg-pki-tools 2.1.2, HTCondor-CE 3.0.4, osg-configure 2.2.3 |
+| [3.4.5-4](3.4/release-3-4-5-4)   | 2017-12-20 | VO Package v77                                                                   |
 | [3.4.5-3](3.4/release-3-4-5-3)   | 2017-11-29 | IGTF 1.88                                                                        |
 | [3.4.5-2](3.4/release-3-4-5-2)   | 2017-11-20 | VO Package v76                                                                   |
 | [3.4.5](3.4/release-3-4-5)       | 2017-11-14 | osg-pki-tools 2.0.0, BLAHP 1.18.34, HTCondor 8.6.8, XRootD 4.7.1, CMVFS 2.4.2 globus-gridftp-server 12.2-1.2, globus-gridftp-server-control 6.0, RSV 3.16.0; Upcoming: HTCondor 8.7.5 |
@@ -26,6 +28,8 @@ Release Notes
 
 | Version                          | Date       | Summary                                                                          |
 |:---------------------------------|:-----------|:---------------------------------------------------------------------------------|
+| [3.3.31](3.3/release-3-3-31)     | 2017-12-21 | XRootD 4.8.0, CernVM-FS 2.4.4, GlideinWMS 3.2.20, osg-pki-tools 2.1.2, lcmaps 1.6.6-1.9, GridFTP-HDFS 1.1.1, HTCondor-CE 2.2.4, osg-configure 1.10.3 |
+| [3.3.30-4](3.3/release-3-3-30-4) | 2017-12-20 | VO Package v77                                                                   |
 | [3.3.30-3](3.3/release-3-3-30-3) | 2017-11-29 | IGTF 1.88                                                                        |
 | [3.3.30-2](3.3/release-3-3-30-2) | 2017-11-20 | VO Package v76                                                                   |
 | [3.3.30](3.3/release-3-3-30)     | 2017-11-14 | osg-pki-tools 2.0.0, BLAHP 1.18.34, XRootD 4.7.1, CMVFS 2.4.2, gridftp-hdfs 1.1, globus-gridftp-server 12.2-1.2, globus-gridftp-server-control 6.0, RSV 3.16.0 |

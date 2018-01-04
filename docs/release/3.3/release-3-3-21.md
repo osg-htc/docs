@@ -9,7 +9,7 @@ Summary of changes
 This release contains:
 
 -   OSG 3.3.21
-    -   osg-configure 1.6.1: [Additional support](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/IniConfigurationOptions#GipResourceEntry) for ATLAS AGIS in osg-configure
+    -   osg-configure 1.6.1: [Additional support](/other/configuration-with-osg-configure#subcluster-resource-entry) for ATLAS AGIS in osg-configure
     -   [glideinWMS 3.2.17](http://glideinwms.fnal.gov/doc.v3_2_17/history.html)
         -   See known issues below
     -   Important bug fixes for CVMFS server

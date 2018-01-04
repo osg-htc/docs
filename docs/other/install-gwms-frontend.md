@@ -1026,7 +1026,7 @@ Common causes of problems could be:
 Advanced Configurations
 -----------------------
 
-- [GlideinWMS Frontend on a Campus Grid](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GlideinWMSCampusGrid)
+- [GlideinWMS Frontend on a Campus Grid](https://github.com/opensciencegrid/docs/blob/master/archive/GlideinWMSCampusGrid)
 
 
 Getting Help
