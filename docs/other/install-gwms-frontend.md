@@ -216,12 +216,12 @@ The VO Frontend configuration file is `/etc/gwms-frontend/frontend.xml`. The nex
 
 1. The VO you are affiliated with. This will identify those CEs that the glideinWMS pilot will be authorized to run on using the %RED%pilot proxy%ENDCOLOR% described previously in the this [section](#credentials-and-proxies). Sometimes the whole `query_expr` is provided to you by the factory (see Factory access above):
 
-        :::file
+        :::xml
         <factory query_expr='((stringListMember("VO", GLIDEIN_Supported_VOs)))'>
 
 2. Factory collector information. The `username` that you are assigned by the factory (also called the identity you will be mapped to on the factory, see above) . Note that if you are using a factory different than the production factory, you will have to change also `DN`, `factory_identity` and `node` attributes. (refer to the information provided to you by the factory operator):
 
-        :::file
+        :::xml
         <collector DN="/DC=org/DC=doegrids/OU=Services/CN=gfactory-1.t2.ucsd.edu"
                    comment="Define factory collector globally for simplicity"
                    factory_identity="gfactory@gfactory-1.t2.ucsd.edu"
@@ -237,7 +237,7 @@ The VO Frontend configuration file is `/etc/gwms-frontend/frontend.xml`. The nex
 Both the `classad_proxy` and `absfname` files should be owned by `frontend` user.
 
 
-            :::file
+            :::xml
             # These lines are from the configuration of v 3.x
             <security classad_proxy="/tmp/vo_proxy" proxy_DN="DN of vo_proxy"
                   proxy_selection_plugin="ProxyAll"
@@ -256,7 +256,7 @@ Both the `classad_proxy` and `absfname` files should be owned by `frontend` user
     A secondary schedd is optional. You will need to delete the secondary schedd line if you are not using it. Multiple schedds allow the frontend to service requests from multiple submit hosts.
 
 
-            :::file
+            :::xml
             <schedds>
               <schedd DN="Cert DN used by the schedd at fullname:"
                     fullname="Hostname of the schedd"/>
@@ -273,7 +273,7 @@ Both the `classad_proxy` and `absfname` files should be owned by `frontend` user
      The default Condor configuration of the VO Frontend starts multiple Collector processes on the host (`/etc/condor/config.d/11_gwms_secondary_collectors.config`). The `DN` and `hostname` on the first line are the hostname and the host certificate of the VO Frontend. The `DN` and `hostname` on the second line are the same as the ones in the first one. The hostname (e.g. hostname.domain.tld) is filled automatically during the installation. The secondary collector ports can be defined as a range, e.g., 9620-9660).
 
 
-            :::file
+            :::xml
             <collector DN="DN of main collector"
                    node="hostname.domain.tld:9618" secondary="False"/>
             <collector DN="DN of secondary collectors (usually same as DN in line above)"
@@ -366,7 +366,7 @@ on the local machine. It is important that you map the DN's of:
 
 - %RED%Each schedd proxy%ENDCOLOR%: The `DN` of each schedd that the frontend talks to. Specified in the frontend.xml schedd element `DN` attribute:
 
-        :::file
+        :::xml
         <schedds>
           <schedd DN="/DC=org/DC=doegrids/OU=Services/CN=YOUR_HOST" fullname="YOUR_HOST"/>
           <schedd DN="/DC=org/DC=doegrids/OU=Services/CN=YOUR_HOST" fullname="schedd_jobs2@YOUR_HOST"/>
@@ -374,12 +374,12 @@ on the local machine. It is important that you map the DN's of:
 
 - %GREEN%Frontend proxy%ENDCOLOR%: The DN of the proxy that the frontend uses to communicate with the other glideinWMS services. Specified in the frontend.xml security element `proxy_DN` attribute:
 
-        :::file
+        :::xml
         <security classad_proxy="/tmp/vo_proxy" proxy_DN="DN of vo_proxy" ....
 
 - %RED%Each pilot proxy%ENDCOLOR% The DN of __each__ proxy that the frontend forwards to the factory to use with the glideinWMS pilots.  This allows the !glideinWMs pilot jobs to communicate with the User Collector. Specified in the frontend.xml proxy `absfname` attribute (you need to specify the `DN` of each of those proxies:
 
-        :::file
+        :::xml
         <security ....
         <proxies>
            < proxy absfname="/tmp/vo_proxy" ....
@@ -621,7 +621,7 @@ to test a specific site), a frontend can be configured to match on
 
 3. Add the `DESIRED_Sites` attribute to the match attributes list:
 
-        ::file
+        :::xml
         <match_attrs>
            <match_attr name="DESIRED_Sites" type="string"/>
         </match_attrs>
@@ -643,19 +643,19 @@ groupwould only match jobs that have the `+is_itb=True` ClassAd.
 
 2. Set the group's `start_expr` so that the group's glideins will only match user jobs with `+is_itb=True`:
 
-        :::file
+        :::xml
         <match match_expr="True" start_expr="(is_itb)">
         
 
 3. Set the `factory_query_expr` so that this group only communicates with ITB factories:
 
-        :::file
+        :::xml
         <factory query_expr='FactoryType=?="itb"'>
         
 
 4. Set the group's `collector` stanza to reference the ITB factory, replacing `username@gfactory-1.t2.ucsd.edu` with your factory identity:
 
-        :::file
+        :::xml
         <collector DN="/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=glidein-itb.grid.iu.edu" \
                   factory_identity="gfactory@glidein-itb.grid.iu.edu" \
                   my_identity="username@gfactory-1.t2.ucsd.edu" \
@@ -664,13 +664,13 @@ groupwould only match jobs that have the `+is_itb=True` ClassAd.
 
 5. Set the job `query_expr` so that only ITB jobs appear in `condor_q`:
 
-        :::file
+        :::xml
         <job query_expr="(!isUndefined(is_itb) && is_itb)">
         
 
 6. Reconfigure the Frontend:
 
-        :::file
+        :::console
         /etc/init.d/gwms-frontend reconfig
         
 
@@ -780,7 +780,7 @@ There are a few things that can be checked prior to submitting user jobs to Cond
 
 2. Verify all VO Frontend Condor services are communicating.
 
-        :::file
+        :::console
         user@host $ condor_status -any
         MyType               TargetType           Name
         glideresource        None                 MM_fermicloud026@gfactory_inst
@@ -875,7 +875,7 @@ Remember also that when you change DN:
 
 You can increase the log level of the frontend. To add a log file with all the log information add the following line with all the message types in the `process_log` section of `/etc/gwms-frontend/frontend.xml`:
 
-``` file
+``` xml
 <log_retention>
    <process_logs>
        <process_log extension="all" max_days="7.0" max_mbytes="100.0" min_days="3.0" msg_types="DEBUG,EXCEPTION,INFO,ERROR,ERR"/>
