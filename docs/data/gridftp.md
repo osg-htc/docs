@@ -101,7 +101,7 @@ If you want to use GUMS security (recommended), you will need to enable it using
 
 ### Enabling Gratia GridFTP transfer probe
 
-The [Gratia GridFTP probe](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/GratiaTransferProbe) collects the information about the Gridftp transfers and forwards it to central Gratia collector. You need to enable the probe first. To do this, edit `/etc/gratia/gridftp-transfer/ProbeConfig` to set:
+The [Gratia GridFTP probe](https://github.com/opensciencegrid/docs/blob/master/archive/GratiaTransferProbe) collects the information about the Gridftp transfers and forwards it to central Gratia collector. You need to enable the probe first. To do this, edit `/etc/gratia/gridftp-transfer/ProbeConfig` to set:
 
 ```text
 EnableProbe="1"
