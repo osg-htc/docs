@@ -89,7 +89,6 @@ Before installing the Glidein WMS VO Frontend you need the information about a [
 
 1. (recommended) OSG is managing a factory at UCSD and one at GOC and you can request access to them
 2. You have another Glidein Factory that you can access
-3. You [install your own Glidein Factory](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/InstallGlideinWMSFactory)
 
 To request access to the OSG Glidein Factory at UCSD you have to send an email to <osg-gfactory-support@physics.ucsd.edu> providing:
 
