@@ -31,7 +31,7 @@ Before Starting
 Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `apache` (UID 48), `condor`, `frontend`, and `gratia`
--   **Network:** The VO frontend must have reliable network connectivity, be on the public internet (no NAT), and preferably with no firewalls. Each running pilot requires 5 outgoing TCP ports. Incoming TCP ports 9618 to 9660 must be open.
+-   **Network:** The VO frontend must have reliable network connectivity, be on the public internet (no NAT), and preferably with no firewalls. Incoming TCP ports 9618 and 9620 to 9660 must be open.
 -   **Host choice**: The Glidein WMS VO Frontend has the following hardware requirements for a production host:
     -   **CPU**: Four cores, preferably no more than 2 years old.
     -   **RAM**: 3GB plus 2MB per running job. For example, to sustain 2000 running jobs, a host with 5GB is needed.
@@ -1010,12 +1010,10 @@ proxies.
 
 ### Networking
 
-| Service Name      | Protocol | Port Number      |Inbound|Outbound| Comment                 |
-|:------------------|:---------|:-----------------|:------|:-------|-------------------------|
-|HTCondor port range| tcp      |`LOWPORT, HIGHPORT`|`YES` |        |contiguous range of ports|
-|GlideinWMS Frontend| tcp      | 9618 to 9660     |`YES`  |        |HTCondor Collectors for the GlideinWMS Frontend (received ClassAds from resources and jobs)|
+| Service Name      | Protocol | Port Number        |Inbound|Outbound| Comment                 |
+|:------------------|:---------|:-------------------|:------|:-------|-------------------------|
+|HTCondor port range| tcp      |`LOWPORT, HIGHPORT` |`YES`  |        |contiguous range of ports|
+|GlideinWMS Frontend| tcp      | 9618, 9620 to 9660 |`YES`  |        |HTCondor Collectors for the GlideinWMS Frontend (received ClassAds from resources and jobs)|
 
 The VO frontend must have reliable network connectivity, be on the public
 internet (no NAT), and preferably with no firewalls. Incoming TCP ports 9618 to 9660 must be open.
-
-Each running pilot requires 5 outgoing TCP connections. For example, 2000 running jobs require about 10,100 TCP connections. This will overwhelm many firewalls; if you are unfamiliar with your network topology, you may want to warn your network administrator.
