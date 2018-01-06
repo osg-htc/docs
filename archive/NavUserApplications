@@ -45,7 +45,7 @@ There are many steps and questions about accessing Compute Elements to run jobs.
       * [[http://www.cs.wisc.edu/condor/manual/v7.5/2_10DAGMan_Applications.html][Building workflows in Condor]] (external link).  This link covers in-depth how to allow Condor to handle dependencies between jobs using DAGMan.  The link discusses vanilla universe jobs, but DAGMan works with grid universe jobs as well.
    * Running jobs with !glideinWMS
       * How to convert a Condor-G submit file to use !glideinWMS: [[Documentation.CondorGToGlidein][Condor-G to Glidein Workflow Management System porting guide]]
-      * Using the Corral Frontend: [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/corral.html][glideinWMS Corral installation and tutorial]]
+      * Using the Corral Frontend: [[http://glideinwms.fnal.gov/doc.prd/corral.html][glideinWMS Corral installation and tutorial]]
    * [[ReleaseDocumentation/UsingWorkerNodeClient][The OSG job environment (Where can I install software? What's in the environment?)]]
    * [[http://osgmm.sourceforge.net/][Using the OSG Matchmaker to run jobs]].  The OSG Match Maker does that work of site discovery, verification, and selection for you.  It is easy-to-install and works for a wide variety of users.
    * [[TestOSGClient][Debugging tools (globus-job-run, globus-url-copy)]]

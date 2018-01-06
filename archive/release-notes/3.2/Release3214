@@ -8,7 +8,7 @@ This release contains:
    * HTCondor CE 1.4
       * osg-configure mprovements to better support HTCondor CE 1.4
       * RSV improvements to better support HTCondor CE 1.4
-   * [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/history.html][GlideinWMS 3.2.5.1]] (updating from version 3.2.3)
+   * [[http://glideinwms.fnal.gov/doc.prd/history.html][GlideinWMS 3.2.5.1]] (updating from version 3.2.3)
    * [[https://twiki.grid.iu.edu/bin/view/Operations/PackageV56][VO Package v56]]
    * Other osg-configure improvements
       * Better error message for missing environment variables

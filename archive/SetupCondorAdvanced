@@ -257,7 +257,7 @@ STARTD_ATTRS = $(STARTD_ATTRS) IsMonitorSlot MyMonitorSlot HAS_MONITOR_SLOT
 </pre>
 
 ---++ Use
-You could then use this [[http://home.fnal.gov/~sfiligoi/condor_monitoring/job_monitor.tgz][example job monitoring tool]] extracted from [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/index.html][glideinWMS]] to submit jobs to the monitoring slot. The basic idea is to figure out where the job is running (by using condor_q) and then submit a job with the following constraints in its submit file:
+You could then use this [[http://home.fnal.gov/~sfiligoi/condor_monitoring/job_monitor.tgz][example job monitoring tool]] extracted from [[http://glideinwms.fnal.gov/doc.prd/index.html][glideinWMS]] to submit jobs to the monitoring slot. The basic idea is to figure out where the job is running (by using condor_q) and then submit a job with the following constraints in its submit file:
 <pre class="file">
 +JOB_Is_Monitor=True
 Requirements=(Name=?=”slot1@&lt;node running job>”)

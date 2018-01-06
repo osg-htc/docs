@@ -12,7 +12,7 @@
 ---+ About This Document
 This document describes how to install the Glidein Workflow Managment System (!GlideinWMS) VO Frontend for use with the OSG glidein factory.  This software is the minimum requirement for a VO to use glideinWMS.
 
-This document assumes expertise with Condor and familiarity with the glideinWMS software.  It *does not* cover anything but the simplest possible install.   Please consult the [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/install.html][Glidein WMS reference documentation]] for advanced topics, including non-=root=, non-RPM-based installation.
+This document assumes expertise with Condor and familiarity with the glideinWMS software.  It *does not* cover anything but the simplest possible install.   Please consult the [[http://glideinwms.fnal.gov/doc.prd/install.html][Glidein WMS reference documentation]] for advanced topics, including non-=root=, non-RPM-based installation.
 
 This document covers three components of the !GlideinWMS a !VO needs to install:
    * *User Pool Collectors*: A set of =condor_collector= processes.  Pilots submitted by the factory will join to one of these collectors to form a Condor pool.
@@ -113,7 +113,7 @@ Once all requirements are satisfied you must take a couple of actions before ins
    * *Remember to install HTCondor BEFORE installing the Frontend ([[#Install_HTCondor][instructions are below]])!*
 
 ---++ OSG Factory access
-Before installing the Glidein WMS VO Frontend you need the information about a [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/factory/index.html][Glidein Factory]] that you can access:
+Before installing the Glidein WMS VO Frontend you need the information about a [[http://glideinwms.fnal.gov/doc.prd/factory/index.html][Glidein Factory]] that you can access:
    1 (recommended) OSG is managing a factory at UCSD and one at GOC and you can request access to them
    1 You have another Glidein Factory that you can access
    1 You [[InstallGlideinWMSFactory][install your own Glidein Factory]]
@@ -254,7 +254,7 @@ After installing the RPM, you need to configure the components of the glideinWMS
 
 ---++ Configuring the Frontend
 
-The VO Frontend configuration file is =/etc/gwms-frontend/frontend.xml=.  The next steps will describe each line that you will need to edit if you are using the OSG Factory at UCSD.  The portions to edit are highlighted in red font. If you are using a different Factory more changes are necessary, please check [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/frontend/configuration.html][the VO Frontend configuration reference]].
+The VO Frontend configuration file is =/etc/gwms-frontend/frontend.xml=.  The next steps will describe each line that you will need to edit if you are using the OSG Factory at UCSD.  The portions to edit are highlighted in red font. If you are using a different Factory more changes are necessary, please check [[http://glideinwms.fnal.gov/doc.prd/frontend/configuration.html][the VO Frontend configuration reference]].
 
    1. The VO you are affiliated with. This will identify those CEs that the glideinWMS pilot will be authorized to run on using the %BLUE%pilot proxy%ENDCOLOR% described previously in the [[InstallGlideinWMSFrontend#Pilot_proxies][this section]]. Sometimes the whole =query_expr= is provided to you by the factory (see Factory access above):
    <pre class="file">
@@ -1019,7 +1019,7 @@ You can also change the rotation policy and choose whether compress the rotated 
    * max_days it will be rotated.
    * compression specifies if rotated files are compressed
    * backup_count is the number of rotated log files kept 
-Further details are in the [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/frontend/configuration.html#process_logs][reference documentation]].
+Further details are in the [[http://glideinwms.fnal.gov/doc.prd/frontend/configuration.html#process_logs][reference documentation]].
 
 ---++ Frontend reconfig failing
 If =service gwms-frontend reconfig= fails at the end with an error like "Writing back config file failed, Reconfiguring the frontend [FAILED]", make sure that =/etc/gwms-frontend/= belongs to the =frontend= user. It must be able to write to update the configuration file.
@@ -1105,8 +1105,7 @@ Definitions:
    * You can [[http://twiki.grid.iu.edu/bin/view/Trash/Trash/Engagement/EngageNewUserGuide][get started with the support of the Engage VO]]
 
 Documents about the Glidein-WMS system and the VO frontend:
-   * http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/
-   * http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/manual/
+   * http://glideinwms.fnal.gov/doc.prd/
    * [[GlideinWMSCampusGrid][How to setup a Submit host flocking to the VO Frontend]]
    * [[Trash/Trash/CampusGrids.InstallCondorFlockSubmit][Install a Submit host flocking to OSG run frontends]]
 

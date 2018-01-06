@@ -585,7 +585,7 @@ And jobs can be submitted and monitored using =condor_submit= and =condor_q=.
 For more examples check Trash/Trash/CampusGrids.RunningCampusGridJobs.
 
 ---++ Job submission using OSG's !GlideinWMS system
-The purpose of the [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/index.html][glideinWMS] is to provide a simple way to access the Grid resources.
+The purpose of the [[http://glideinwms.fnal.gov/][glideinWMS] is to provide a simple way to access the Grid resources.
 !GlideinWMS is a Glidein Based WMS (Workload Management System) that works on top of Condor: it separates the glideins (or pilots) submitted to the Grid by a central factory from the user jobs that land on top of nodes already occupied by a running glidein, allowing late binding scheduling and reducing failures.
 !GlideinWMS is the recommended way to submit jobs to OSG.
 To submit !GlideinWMS it is necessary to have also a glidein factory, a VO Frontend and a Condor submit host, as documented in Documentation.GlideinWMSVOFrontendInstall.
@@ -1154,7 +1154,7 @@ References:
       * Validation: https://twiki.grid.iu.edu/bin/view/Documentation/Release3/TestOSGClient
    * Glidein WMS
       * VO frontend installation: https://twiki.grid.iu.edu/bin/view/Documentation/GlideinWMSVOFrontendInstall
-      * Reference doc: http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/index.html
+      * Reference doc: http://glideinwms.fnal.gov/
       * Job submission: https://twiki.grid.iu.edu/bin/view/Documentation/CondorGToGlidein
    * Discovery tools
       * https://twiki.grid.iu.edu/bin/view/ReleaseDocumentation/OSGStorageDiscoveryTool

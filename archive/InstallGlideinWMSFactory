@@ -12,7 +12,7 @@
 
 This document describes how to install the Glidein Workflow Managment System (!GlideinWMS) Factory instance.
 
-This document assumes expertise with Condor and familiarity with the glideinWMS software.  It *does not* cover anything but the simplest possible install.   Please consult the [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/install.html][Glidein WMS reference documentation]] for advanced topics, including non-root, non-RPM-based installation.
+This document assumes expertise with Condor and familiarity with the glideinWMS software.  It *does not* cover anything but the simplest possible install.   Please consult the [[http://glideinwms.fnal.gov/doc.prd/install.html][Glidein WMS reference documentation]] for advanced topics, including non-root, non-RPM-based installation.
 
 This document covers three primary components of the Glidein WMS system:
    * *WMS Collector / Schedd*: A set of =condor_collector= and =condor_schedd= processes that allow the submission of pilots to Grid entries.  
@@ -95,7 +95,7 @@ If you don't have HTCondor already installed, you can install the HTCondor RPM i
 See [[CondorInformation][this HTCondor document]] for more information on the different options.
 
 ---+++ Install HTCondor-BOSCO
-If you plan to send jobs using [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/recipes/batch.html][direct batch submission]] (aka BOSCO), then you need also the =condor-bosco= package. You'll have to install the package and remove one of its file (=/etc/condor/config.d/60-campus_factory.config=) because it interferes with the factory configuration.
+If you plan to send jobs using [[http://glideinwms.fnal.gov/doc.prd/recipes/batch.html][direct batch submission]] (aka BOSCO), then you need also the =condor-bosco= package. You'll have to install the package and remove one of its file (=/etc/condor/config.d/60-campus_factory.config=) because it interferes with the factory configuration.
 <pre class="rootscreen">%UCL_PROMPT_ROOT% yum install condor-bosco
 %UCL_PROMPT_ROOT% rm /etc/condor/config.d/60-campus_factory.config
 %UCL_PROMPT_ROOT% touch /etc/condor/config.d/60-campus_factory.config</pre>
@@ -232,7 +232,7 @@ For example this snippet advertises =GLIDEIN_Supported_VOs= attribute with the s
 %NOTE% Specially if jobs are sent to OSG resources, it is very important to set the GLIDEIN_Resource_Name and to be consistent with the Resource Name reported in OIM because that name will be used for job accounting in Gratia. It should be the name of the Resource in OIM or the name of the Resource Group (specially if there are many gatekeepers submitting to the same cluster).
 
 More information on options can be found here:
-http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/factory/configuration.html
+http://glideinwms.fnal.gov/doc.prd/factory/configuration.html
 
 ---++ Configuring Tarballs
 
@@ -247,7 +247,7 @@ Once you have downloaded the tarball, configure it in =/etc/gwms-factory/glidein
    </pre>
 
 Remember also to modify the =condor_os= and =condor_arch= attributes in the entries (the configured Compute Elements) to pick the correct HTCondor binary.
-[[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/factory/configuration.html#tarballs][Here] are more details on using multiple condor binaries. Note that is sufficient to set the =base_dir=; the reconfigure command will prepare the tarball and add it to the XML config file.
+[[http://glideinwms.fnal.gov/doc.prd/factory/configuration.html#tarballs][Here] are more details on using multiple condor binaries. Note that is sufficient to set the =base_dir=; the reconfigure command will prepare the tarball and add it to the XML config file.
   
 ---++ Configuring Condor
 
@@ -547,7 +547,7 @@ You can also change the rotation policy and choose whether compress the rotated 
    * max_days it will be rotated.
    * compression specifies if rotated files are compressed
    * backup_count is the number of rotated log files kept 
-Further details are in the [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/factory/configuration.html#process_logs][reference documentation]].
+Further details are in the [[http://glideinwms.fnal.gov/doc.prd/factory/configuration.html#process_logs][reference documentation]].
 
 ---++ Failed authentication errors
 
@@ -590,7 +590,7 @@ Lastly, verify that permissions are correct.  The parent directory of all valid-
 
 ---+ References
 
-   * http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd
+   * http://glideinwms.fnal.gov/doc.prd/
    * http://twiki.grid.iu.edu/bin/view/Documentation/Release/GlideinWMSVOFrontendInstall
 
 

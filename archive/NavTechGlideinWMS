@@ -8,7 +8,7 @@
 
 The purpose of the glideinWMS is to provide a simple way to access the Grid resources. !GlideinWMS is a Glidein Based WMS (Workload Management System) that works on top of Condor. For those familiar with the Condor system, it is used for scheduling and job control.
 
-The glideinWMS is made of several services visible in the animation copied from the [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/index.html][glideinWMS website]] (technical documentation). <img src="%ATTACHURLPATH%/simple_animation.gif" alt="simple_animation.gif" width='236' height='300' />    
+The glideinWMS is made of several services visible in the animation copied from the [[http://glideinwms.fnal.gov/][glideinWMS website]] (technical documentation). <img src="%ATTACHURLPATH%/simple_animation.gif" alt="simple_animation.gif" width='236' height='300' />    
 
 The Frontend and the Factory are distributed by OSG as RPMs.
 
@@ -22,7 +22,7 @@ Some older documents:
    * Documentation.GlideinWMSGroups
 
 ---+ References
-   * [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/index.html][The GlideinWMS technical documentation]]
+   * [[http://glideinwms.fnal.gov/][The GlideinWMS technical documentation]]
 
 <!-- CONTENT MANAGEMENT PROJECT
 

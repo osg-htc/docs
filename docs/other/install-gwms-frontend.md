@@ -8,7 +8,7 @@ the minimum requirement for a VO to use glideinWMS.
 This document assumes expertise with Condor and familiarity with the glideinWMS
 software. It **does not** cover anything but the simplest possible install.
 Please consult the [Glidein WMS reference
-documentation](http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/install.html)
+documentation](http://glideinwms.fnal.gov/doc.prd/install.html)
 for advanced topics, including non-`root`, non-RPM-based installation.
 
 This document covers three components of the GlideinWMS a VO needs to install:
@@ -85,7 +85,7 @@ request to the GlideinWMS factory.
 
 ### OSG Factory access
 
-Before installing the Glidein WMS VO Frontend you need the information about a [Glidein Factory](http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/factory/index.html) that you can access:
+Before installing the Glidein WMS VO Frontend you need the information about a [Glidein Factory](http://glideinwms.fnal.gov/doc.prd/factory/index.html) that you can access:
 
 1. (recommended) OSG is managing a factory at UCSD and one at GOC and you can request access to them
 2. You have another Glidein Factory that you can access
@@ -957,7 +957,7 @@ You can also change the rotation policy and choose whether compress the rotated 
 -   compression specifies if rotated files are compressed
 -   backup_count is the number of rotated log files kept
 
-Further details are in the [reference documentation](http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/frontend/configuration.html#process_logs).
+Further details are in the [reference documentation](http://glideinwms.fnal.gov/doc.prd/frontend/configuration.html#process_logs).
 
 ### Frontend reconfig failing
 
@@ -1047,8 +1047,7 @@ Definitions:
 
 Documents about the Glidein-WMS system and the VO frontend:
 
--   <http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/>
--   <http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/manual/>
+-   <http://glideinwms.fnal.gov/>
 
 ### Users
 

@@ -5,7 +5,7 @@
 ---++ Summary of changes
 
 This release contains:
-   * [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/history.html][GlideinWMS 3.2.11.2]]
+   * [[http://glideinwms.fnal.gov/doc.prd/history.html][GlideinWMS 3.2.11.2]]
    * [[https://github.com/xrootd/xrootd/blob/v4.2.3/docs/ReleaseNotes.txt][XRootD 4.2.3]]
    * GUMS 1.5.1
       * Return groupName for pool account mappers

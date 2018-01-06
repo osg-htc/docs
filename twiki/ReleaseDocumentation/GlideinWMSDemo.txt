@@ -163,7 +163,7 @@ That's it!  Have fun, change around test.sh and test.jdl (what happens if you do
 ---++ More information
 
 glideinWMS:
-http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/
+http://glideinwms.fnal.gov/
 
 %BR%
 %COMPLETE1% %BR%

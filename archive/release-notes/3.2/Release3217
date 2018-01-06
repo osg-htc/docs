@@ -12,7 +12,7 @@ This release contains:
    * Disable SSLv3 in OSG PKI tools
    * [[https://lists.cs.wisc.edu/archive/htcondor-users/2014-October/msg00003.shtml][HTCondor 8.2.3]]
    * [[https://github.com/xrootd/xrootd/blob/v4.0.4/docs/ReleaseNotes.txt][XRootD 4.0.4]]
-   * [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/history.html][GlideinWMS 3.2.7]]
+   * [[http://glideinwms.fnal.gov/doc.prd/history.html][GlideinWMS 3.2.7]]
    * [[https://twiki.grid.iu.edu/bin/view/Operations/PackageV57][VO Package v57]]
    * CA Certificate update to [[https://dist.eugridpma.info/distribution/igtf/current/CHANGES][IGTF 1.60]]
    * GFAL tools come from EPEL
