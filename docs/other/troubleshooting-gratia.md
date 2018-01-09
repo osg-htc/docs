@@ -1,7 +1,7 @@
 Troubleshooting Gratia Accounting
 =================================
 
-This document will help you troubleshoot problems with the Gratia Accounting, particularly with problems in collecting and reporting accounting information to the central OSG accounting service. See also other documents recommended in the Reference section below.
+This document will help you troubleshoot problems with the Gratia Accounting, particularly with problems in collecting and reporting accounting information to the central OSG accounting service.
 
 
 Gratia/GRACC: The Big Picture
@@ -12,7 +12,7 @@ Gratia is software used in OSG to gather accounting information. The information
 !!! note "Difference between Gratia and GRACC"
     Gratia is the legacy name of the OSG Accounting system.  GRACC is the new name of the server and hosted components of the accounting system.  When we refer to Gratia, we mean either the data or the probes on the resources.  If we mention GRACC, we are referring to the hosted components that the OSG maintains.
 
-![Gratia Basics](../images/gratia-overview.png)
+![Gratia Basics](/images/gratia-overview.png)
 
 These are the definitions of the major elements in the above figure.
 
@@ -21,9 +21,9 @@ These are the definitions of the major elements in the above figure.
 -   **Reporter**: A web service running on the GRACC server. Users can connect to the reporter via a web browser to explore the Gratia data.
 -   **Collector**: A web service running on the GRACC server that collects data from one or more Gratia probes. Users do not directly interact with the collector.
 
-You can see the OSG's GRACC website at https://gracc.opensciencegrid.org.
+You can see the OSG's GRACC website at <https://gracc.opensciencegrid.org>.
 
-You can see a fancier version of the Gratia data at [display.grid.iu.edu](http://display.grid.iu.edu/). This is **not** running a Gratia collector, but is a separate service.
+You can see a fancier version of the Gratia data at <https://display.grid.iu.edu/>. This is **not** running a Gratia collector, but is a separate service.
 
 Gratia Probes
 -------------
@@ -112,7 +112,7 @@ A future release of Gratia will provide status on each of the individual probes,
     glexec/ProbeConfig:    EnableProbe="0"
     gridftp-transfer/ProbeConfig:    EnableProbe="1"
 
-If you see no log files in `/var/log/gratia` you may have an error in the probe configuration file. Run manually the test for your probe (check `/etc/cron.d/gratia-probe-condor.cron`), e.g. `/usr/share/gratia/common/cron_check  /etc/gratia/condor/ProbeConfig`. If there is an error you may get a suggestion on where it is, e.g.:
+If you see no log files in `/var/log/gratia` you may have an error in the probe configuration file. Manually run the test for your probe (check `/etc/cron.d/gratia-probe-condor.cron`), e.g. `/usr/share/gratia/common/cron_check  /etc/gratia/condor/ProbeConfig`. If there is an error you may get a suggestion on where it is, e.g.:
 
     :::console
     root@host # /usr/share/gratia/common/cron_check  /etc/gratia/condor/ProbeConfig
@@ -123,7 +123,7 @@ Correct the error and restart gratia.
 Have you configured the resource names correctly? 
 -------------------------------------------------
 
-Do the names of your resources match the names in OIM?  Gratia retrieves the resource name from the `Site Information` section of the `/etc/osg/config.d/40-siteinfo.ini`
+Do the names of your resources match the names in [OIM](https://oim.grid.iu.edu/oim/topology)?  Gratia retrieves the resource name from the `Site Information` section of the `/etc/osg/config.d/40-siteinfo.ini`
 
 
 ``` file
@@ -164,12 +164,18 @@ Do those names match the names that you registered with OIM? If not, edit the na
 Did the site name change?
 -------------------------
 
-Was the site previously reporting data, but the site name (not host name, but site name) changed? When the site name changes, you need to ask the Gratia operations team to update the name of your site at the GRACC collector. To do this:
+Was the site previously reporting data, but the site name (not host name, but site name) changed? When the site name changes, you need to ask the GRACC operations team to update the name of your site at the GRACC collector. To do this:
 
-1.  Open a ticket at [the GOC ticket web page](https://ticket.grid.iu.edu/goc/submit)
-2.  Select "Software or Service"
-3.  Select "GRACC Operations"
-4.  Type a friendly email that asks the GRACC team to change your site name at the collector. Make sure to tell them the old name and the new name.
+1.  Open a ticket at [the GOC ticket web page](https://ticket.opensciencegrid.org/submit)
+1.  Select "Software or Service"
+1.  Select "GRACC Operations"
+1.  Type a friendly email that asks the GRACC team to change your site name at the collector. Make sure to tell them the old name and the new name.  Below is an example email:
+
+        Hello GRACC Team,
+        
+        Please change the site name of my site from <Insert Old Name> to <Insert New Name>.
+        
+        Thanks, ...
 
  Is a site reporting data?
 --------------------------
@@ -178,12 +184,15 @@ You can see if the OSG GRACC Server is getting data from a site by going to [GRA
 
 1.  Specify the site name in Facility
 
-Condor must be configured to put information about each job into a special directory.
--------------------------------------------------------------------------------------
+HTCondor's Gratia Configuration 
+-------------------------------
 
-Gratia will read and remove the files in order to collect the accounting information.
+!!! note 
+    Only applicable to HTCondor batch sites, not SLURM, PBS, SGE or LSF sites
 
-The configuration variable is called `PER_JOB_HISTORY_DIR`. If you install the OSG RPM for Condor, the Gratia probe will extend its configuration by adding a file to `/etc/condor/config.d`, and will set this variable to `/var/lib/gratia/data`. If you are using a different installation method, you probably need to set the variable yourself. You can check if it's set by using `condor_config_val`, like this:
+Condor must be configured to put information about each job into a special directory.  Gratia will read and remove the files in order to collect the accounting information.
+
+The configuration variable is called `PER_JOB_HISTORY_DIR`. If you install the OSG RPM for Condor, the Gratia probe will extend its configuration by adding a file to `/etc/condor/config.d`, and will set this variable to `/var/lib/gratia/data`. If you are using a different installation method, you may need to set the variable yourself. You can check if it's set by using `condor_config_val`, like this:
 
     :::console
     user@host $ condor_config_val -v PER_JOB_HISTORY_DIR
@@ -198,8 +207,7 @@ If you set this value, you need to restart condor:
 
 Unlike many Condor settings, a **condor\_reconfig** is not sufficient - you must restart!
 
-If you accidentally did not set `PER_JOB_HISTORY_DIR` (see above)
------------------------------------------------------------------
+### If you accidentally did not set `PER_JOB_HISTORY_DIR` (see above)
 
 The HTCondor Gratia probe will not publish accounting information about jobs without `PER_JOB_HISTORY_DIR`. You can have Gratia read the Condor history file and publish data that way. If you know the time period of the missing data, you should specify a start and end times. This reduces the load on the Gratia collector. To do so:
 
@@ -248,12 +256,11 @@ Not much is printed to the screen, but you can see progress in the Gratia log fi
 
 
 !!! note 
-    Condor rotates history files, so you can only report what Condor has kept. Controlling the Condor history is documented in the Condor manual. In particular, see the options for [MAX\_HISTORY\_LOG](http://research.cs.wisc.edu/condor/manual/v7.6/3_3Configuration.html#param:MaxHistoryLog) and [MAX\_HISTORY\_ROTATIONS](http://research.cs.wisc.edu/condor/manual/v7.6/3_3Configuration.html#param:MaxHistoryRotations).
+    Condor rotates history files, so you can only report what Condor has kept. Controlling the Condor history is documented in the Condor manual. In particular, see the options for [MAX_HISTORY_LOG](http://research.cs.wisc.edu/htcondor/manual/v8.7/3_5Configuration_Macros.html#param:MaxHistoryLog) and [MAX_HISTORY_ROTATIONS](http://research.cs.wisc.edu/htcondor/manual/v8.7/3_5Configuration_Macros.html#param:MaxHistoryRotations).
 
-Gratia log files: bad Gratia hostname
--------------------------------------
+### Bad Gratia hostname
 
-This is an example problem where the configuration was bad: there was an incorrect hostname for the Gratia server. The problem is clearly visible in the Gratia log file, which is located in `cd /var/log/gratia/`. There is one log file per day, labeled by the date:
+This is an example problem where the configuration was bad: there was an incorrect hostname for the Gratia server. The problem is clearly visible in the Gratia log file, which is located in `/var/log/gratia/`. There is one log file per day, labeled by the date:
 
     :::console
     root@host # cd /var/log/gratia/
@@ -281,7 +288,6 @@ This is an example problem where the configuration was bad: there was an incorre
 
 
 If you accidentally had a bad Gratia hostname, you probably want to recover your Gratia data. 
----------------------------------------------------------------------------------------------------
 
 This can be done, though it's not simple. There are a few things you need to do. But first, you need to understand exactly where Gratia stores files.
 
@@ -349,10 +355,10 @@ In the examples below, the hostname for gratia was "accidentally" spelled backwa
 
     When you've done this, you can re-run the Gratia probe by hand, or wait for it to run via cron.
 
-Appendix: Important Gratia files
+Reference: Important Gratia files
 --------------------------------
 
-This document cannot cover all the errors you might experience. If you need to look for more data, you can look at log files for the various services on your CE.
+If you need to look for more data, you can look at log files for the various services on your CE.
 
 | File                                                | Purpose                                                                                                                                                                            |
 |:----------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

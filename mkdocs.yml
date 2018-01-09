@@ -55,6 +55,7 @@ pages:
   - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
   - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
   - 'Network Performance Toolkit': 'other/network-performance-toolkit.md'
+  - 'Troubleshooting Gratia': 'other/troubleshooting-gratia.md'
 - Release Information:
   - 'Release Notes': 'release/notes.md'
   - 'OSG Release Series': 'release/release_series.md'
