@@ -25,7 +25,7 @@ Yum priorities is a *yum plugin*. Once enabled, you can set the priority of each
     root@host # cat /etc/yum.repos.d/osg.repo
     [osg]
     name=OSG Software for Enterprise Linux 5 - $basearch
-    mirrorlist=http://repo.grid.iu.edu/mirror/osg-release/$basearch
+    mirrorlist=http://repo.opensciencegrid.org/mirror/osg-release/$basearch
     failovermethod=priority
     priority=%RED%98%ENDCOLOR%
     enabled=0
