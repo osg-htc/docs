@@ -35,13 +35,13 @@ Install the new CA bundle as soon as possible. The latest CA bundle will NOT be 
 
 For Linux servers (including worker nodes), ensure that the certificate bundle RPM is at version osg-ca-certs-1.50-1 or igtf-ca-certs-1.69-1 or greater.
 
-Instructions for installing server CA certificate bundles are at <https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth>
+[Instructions for installing server CA certificate bundles](/common/ca)
 
-We also highly recommend that you use the CA Cert automatic updater <https://twiki.grid.iu.edu/bin/view/Documentation/Release3/OsgCaCertsUpdater> but note that you need to be using a current OSG software distribution for that to work, that is, OSG 3.2 or 3.3.
+We also highly recommend that you use the [CA Cert automatic updater](/security/certificate-management#osg-ca-certificates-updater) but note that you need to be using a current OSG software distribution for that to work, that is, OSG 3.2 or 3.3.
 
 ### Other Information:
 
-If you have the CA certificate bundle installed on a server with OSG 3.1, you need to upgrade to OSG 3.2 or greater. Follow these instructions: <https://twiki.grid.iu.edu/bin/view/Documentation/Release3/OSGReleaseSeries#Updating_from_OSG_3_1_or_3_2_to>
+If you have the CA certificate bundle installed on a server with OSG 3.1, you need to upgrade to OSG 3.2 or greater. Follow [these instructions](/release/release_series/#updating-from-osg-31-32-33-to-33-or-34)
 
 Please email OSG Security Team with questions or comments
 
