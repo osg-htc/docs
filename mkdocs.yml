@@ -42,7 +42,7 @@ pages:
     - 'Install XRootD Client': 'data/install-xroot-client.md'
 - Security:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
-  - 'Host Certificates': 'security/host-certs.md'
+  - 'Host and Service Certificates': 'security/host-certs.md'
   - 'User Certificates': 'security/user-certs.md'
   - 'Certificate Management Reference': 'security/certificate-management.md'
 - Common:
@@ -56,9 +56,13 @@ pages:
   - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
   - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
   - 'Network Performance Toolkit': 'other/network-performance-toolkit.md'
+  - 'Troubleshooting Gratia': 'other/troubleshooting-gratia.md'
+  - 'Transfer log filebeats installation': 'other/schedd-filebeats.md'
 - Release Information:
   - 'Release Note Overview': 'release/notes.md'
   - 3.4 Release Notes:
+    - 'OSG Release 3.4.6': 'release/3.4/release-3-4-6.md'
+    - 'OSG Release 3.4.5-4': 'release/3.4/release-3-4-5-4.md'
     - 'OSG Release 3.4.5-3': 'release/3.4/release-3-4-5-3.md'
     - 'OSG Release 3.4.5-2': 'release/3.4/release-3-4-5-2.md'
     - 'OSG Release 3.4.5': 'release/3.4/release-3-4-5.md'
@@ -73,6 +77,8 @@ pages:
     - 'OSG Release 3.4.0-2': 'release/3.4/release-3-4-0-2.md'
     - 'OSG Release 3.4.0': 'release/3.4/release-3-4-0.md'
   - 3.3 Release Notes:
+    - 'OSG Release 3.3.31': 'release/3.3/release-3-3-31.md'
+    - 'OSG Release 3.3.30-4': 'release/3.3/release-3-3-30-4.md'
     - 'OSG Release 3.3.30-3': 'release/3.3/release-3-3-30-3.md'
     - 'OSG Release 3.3.30-2': 'release/3.3/release-3-3-30-2.md'
     - 'OSG Release 3.3.30': 'release/3.3/release-3-3-30.md'
