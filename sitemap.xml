@@ -256,6 +256,12 @@
     </url>
         
     <url>
+     <loc>https://opensciencegrid.github.io/docs//other/troubleshooting-gratia/</loc>
+     <lastmod>2018-01-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>https://opensciencegrid.github.io/docs//other/schedd-filebeats/</loc>
      <lastmod>2018-01-10</lastmod>
      <changefreq>daily</changefreq>

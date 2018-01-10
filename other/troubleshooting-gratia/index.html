@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Troubleshooting Gratia - OSG Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Troubleshooting Gratia";
+    var mkdocs_page_input_path = "other/troubleshooting-gratia.md";
+    var mkdocs_page_url = "/other/troubleshooting-gratia/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-69012-29', 'opensciencegrid.github.io');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OSG Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../..">Home</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../site-planning/">Site Planning</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Compute Element</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/htcondor-ce-overview/">HTCondor-CE Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/install-htcondor-ce/">Install HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/job-router-recipes/">Job Router Recipes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/troubleshoot-htcondor-ce/">Troubleshooting HTCondor-CE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../compute-element/submit-htcondor-ce/">Submitting to HTCondor-CE</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Worker Node</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/using-wn/">Worker Node Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn/">Worker Node via RPM</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-tarball/">Worker Node via Tarball</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-wn-oasis/">Worker Node via OASIS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-cvmfs/">CVMFS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-singularity/">Singularity</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data - HTTP & CVMFS</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/frontier-squid/">Install HTTP Cache</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/update-oasis/">Update OASIS Shared Repo</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/external-oasis-repos/">Install an OASIS Repo</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data - POSIX Storage</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/gridftp/">Install GridFTP Server</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/load-balanced-gridftp/">Install Load Balanced GridFTP</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data - HDFS</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/hadoop-overview/">HDFS Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-hadoop-2-0-0/">Install HDFS</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Data - XRootD</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/xrootd-overview/">XRootD Overview</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-xrootd/">Install XRootD</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-xroot-client/">Install XRootD Client</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Security</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../security/lcmaps-voms-authentication/">LCMAPS-VOMS authentication</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/host-certs/">Host and Service Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/user-certs/">User Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/certificate-management/">Certificate Management Reference</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Common</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../common/install-best-practices/">Install Best Practices</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/ca/">CA Certificates</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/yum/">Yum Repos</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../common/openjdk7/">Java 7</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../configuration-with-osg-configure/">Configuration with OSG-Configure</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Other</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../gsissh/">GSI-enabled SSH</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-gwms-frontend/">GlideinWMS Frontend</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-cvmfs-stratum1/">Install a CVMFS Stratum 1</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../network-performance-toolkit/">Network Performance Toolkit</a>
+  
+        </li>
+        <li class=" current">
+          
+  
+    <a class="current" href="./">Troubleshooting Gratia</a>
+  
+  <ul class="subnav">
+      
+    <li class="toctree-l3"><a href="#troubleshooting-gratia-accounting">Troubleshooting Gratia Accounting</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#gratiagracc-the-big-picture">Gratia/GRACC: The Big Picture</a></li>
+        
+            <li><a class="toctree-l4" href="#gratia-probes">Gratia Probes</a></li>
+        
+            <li><a class="toctree-l4" href="#are-the-gratia-cron-jobs-running">Are the Gratia cron jobs running?</a></li>
+        
+            <li><a class="toctree-l4" href="#have-you-configured-the-resource-names-correctly">Have you configured the resource names correctly?</a></li>
+        
+            <li><a class="toctree-l4" href="#did-the-site-name-change">Did the site name change?</a></li>
+        
+            <li><a class="toctree-l4" href="#is-a-site-reporting-data">Is a site reporting data?</a></li>
+        
+            <li><a class="toctree-l4" href="#htcondors-gratia-configuration">HTCondor's Gratia Configuration</a></li>
+        
+            <li><a class="toctree-l4" href="#reference-important-gratia-files">Reference: Important Gratia files</a></li>
+        
+        </ul>
+    
+
+  </ul>
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../schedd-filebeats/">Transfer log filebeats installation</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Release Information</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../release/notes/">Release Notes</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/release_series/">OSG Release Series</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/supported_platforms/">Supported Platforms</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-osg-upcoming-software/">OSG upcoming software</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/yum-basics/">Yum Basics</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/signing/">RPM Signing</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../release/contrib/">Contrib Software</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Monitoring</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv/">Install RSV</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/advanced-rsv-configuration/">Advanced RSV Configuration</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/rsv-control/">Manage RSV via rsv-control</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../monitoring/install-rsv-gwms-tester/">RSV GlideinWMS Tester</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  <span class="caption-text">Deprecated Software</span>
+  <ul class="subnav">
+        <li class="">
+          
+  
+    <a class="" href="../../data/bestman-install/">BeStMan Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../data/install-bestman-xrootd/">BeStMan Xrootd SE</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/edg-mkgridmap/">EDG-Mkgridmap Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../security/install-gums/">GUMS</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../../worker-node/install-glexec/">Worker node glexec Install</a>
+  
+        </li>
+        <li class="">
+          
+  
+    <a class="" href="../install-voms/">Install VOMS</a>
+  
+        </li>
+  </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+    <a class="" href="../../common/help/">Get Help</a>
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+            <li class="toctree-l1">
+		
+  
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OSG Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Other &raquo;</li>
+        
+      
+    
+    <li>Troubleshooting Gratia</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/opensciencegrid/docs/edit/master/docs/other/troubleshooting-gratia.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="troubleshooting-gratia-accounting">Troubleshooting Gratia Accounting<a class="headerlink" href="#troubleshooting-gratia-accounting" title="Permanent link">&para;</a></h1>
+<p>This document will help you troubleshoot problems with the Gratia Accounting, particularly with problems in collecting and reporting accounting information to the central OSG accounting service.</p>
+<h2 id="gratiagracc-the-big-picture">Gratia/GRACC: The Big Picture<a class="headerlink" href="#gratiagracc-the-big-picture" title="Permanent link">&para;</a></h2>
+<p>Gratia is software used in OSG to gather accounting information. The information is collected from individual resources at a site, such as a Compute Element or a a submission host. The program that collects the data is called a "Gratia probe". The information is transferred to a GRACC server. Most sites will choose to send the accounting data to the central OSG Gratia server, but you can also use a Gratia server at your site (which can send forward the data to the central OSG Gratia server). Here is a diagram:</p>
+<div class="admonition note">
+<p class="admonition-title">Difference between Gratia and GRACC</p>
+<p>Gratia is the legacy name of the OSG Accounting system.  GRACC is the new name of the server and hosted components of the accounting system.  When we refer to Gratia, we mean either the data or the probes on the resources.  If we mention GRACC, we are referring to the hosted components that the OSG maintains.</p>
+</div>
+<p><img alt="Gratia Basics" src="../../images/gratia-overview.png" /></p>
+<p>These are the definitions of the major elements in the above figure.</p>
+<ul>
+<li><strong>Gratia probe</strong>: A piece of software that collects accounting data from the computer on which it's running, and transmits it to a Gratia server.</li>
+<li><strong>GRACC server</strong>: A server that collects Gratia accounting data from one or more sites and can share it with users via a web page.  The GRACC server is hosted by the OSG.</li>
+<li><strong>Reporter</strong>: A web service running on the GRACC server. Users can connect to the reporter via a web browser to explore the Gratia data.</li>
+<li><strong>Collector</strong>: A web service running on the GRACC server that collects data from one or more Gratia probes. Users do not directly interact with the collector.</li>
+</ul>
+<p>You can see the OSG's GRACC website at <a href="https://gracc.opensciencegrid.org">https://gracc.opensciencegrid.org</a>.</p>
+<p>You can see a fancier version of the Gratia data at <a href="https://display.grid.iu.edu/">https://display.grid.iu.edu/</a>. This is <strong>not</strong> running a Gratia collector, but is a separate service.</p>
+<h2 id="gratia-probes">Gratia Probes<a class="headerlink" href="#gratia-probes" title="Permanent link">&para;</a></h2>
+<p>Gratia Probes are periodically run as cron jobs, but different probes will run at different intervals. The cron jobs will always run and you should not remove them. You can find them in <code>/etc/cron.d</code>.</p>
+<p>However, the cron jobs will only do anything if you have enabled them. You enable them via an init script. For example, to enable them:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service gratia-probes-cron start
+<span class="go">Enabling gratia probes cron:                               [  <span style="color:green">OK</span>  ]</span>
+</pre></div>
+
+
+<p>To disable them:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service gratia-probes-cron stop
+<span class="go">Disabling gratia probes cron:                               [  <span style="color:green">OK</span>  ]</span>
+</pre></div>
+
+
+<p>You also need to enable individual probes, usually via <code>osg-configure</code>.  Documentation on using <code>osg-configure</code> with Gratia <a href="../configuration-with-osg-configure#gratia">documented elsewhere</a>.</p>
+<h3 id="running-gratia-probes">Running Gratia Probes<a class="headerlink" href="#running-gratia-probes" title="Permanent link">&para;</a></h3>
+<p>When the cron jobs are enabled and run, they go through the following process, with minor changes between different Gratia probes:</p>
+<ol>
+<li>The probe is invoked. It reads its configuration from <code>/etc/gratia/<span style="color:red">PROBE-NAME</span>/ProbeConfig</code>.</li>
+<li>It collects the accounting information from the underlying system. For example, the Condor probe will read it from the <code>PER_JOB_HISTORY_DIR</code>, which is usually <code>/var/lib/gratia/data</code>.</li>
+<li>It transforms the data into Gratia records and saves them into <code>/var/lib/gratia/tmp/gratiafiles/</code></li>
+<li>When there are sufficient Gratia records, or when sufficient time has passed, it uploads sets of records in batches to the GRACC server, then removes them from the <code>gratiafiles</code> directory.</li>
+<li>All progress is logged to <code>/var/log/gratia</code>.</li>
+<li>If there are failures in uploading the files to the GRACC server<ol>
+<li>Files are not removed from <code>gratiafiles</code> until they are successfully uploaded.</li>
+<li>Errors are logged to log files in <code>/var/log/gratia</code>.</li>
+<li>The uploads will be tried again later.</li>
+</ol>
+</li>
+</ol>
+<h3 id="gratia-probe-configuration">Gratia Probe Configuration<a class="headerlink" href="#gratia-probe-configuration" title="Permanent link">&para;</a></h3>
+<p>In normal cases, <code>osg-configure</code> does the editing of the probe configuration files, at least on the CE. The configuration is found in <code>/etc/osg/config.d/30-gratia.ini</code> and <a href="../configuration-with-osg-configure#gratia">documented elsewhere</a>.</p>
+<p>If there are problems or special configuration, you might need to edit the Gratia configuration files yourself. Each probe has a separate configuration file found in <code>/etc/gratia/<span style="color:red">PROBE-NAME</span>/ProbeConfig</code>.</p>
+<p>The ProbeConfig files have many details. A few options that you might need to edit are shown before. This is <strong>not</strong> a complete file, but only shows a subset of the options.</p>
+<div class="codehilite"><pre><span></span>&lt;ProbeConfiguration 
+
+    CollectorHost=&quot;gratia-osg-itb.opensciencegrid.org:80&quot;
+    SSLHost=&quot;gratia-osg-itb.opensciencegrid.org:80&quot;
+    SSLRegistrationHost=&quot;gratia-osg-itb.opensciencegrid.org:80&quot;
+
+    ProbeName=&quot;condor:fermicloud084.fnal.gov&quot;
+    SiteName=&quot;WISC_OSG_EDU&quot;
+    EnableProbe=&quot;1&quot;
+/&gt;
+</pre></div>
+
+
+<p>The options you see here are:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Option</th>
+<th align="left">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">CollectorHost</td>
+<td align="left">The GRACC server this probe reports to</td>
+</tr>
+<tr>
+<td align="left">SSLHost</td>
+<td align="left">The GRACC server this probe reports to</td>
+</tr>
+<tr>
+<td align="left">SSLRegistrationHost</td>
+<td align="left">The GRACC server this probe reports to</td>
+</tr>
+<tr>
+<td align="left">ProbeName</td>
+<td align="left">The unique name for this probe. Note that it includes the probe type and the host name</td>
+</tr>
+<tr>
+<td align="left">SiteName</td>
+<td align="left">The name of your site, as registered in OIM. If your site must be registered in OIM</td>
+</tr>
+<tr>
+<td align="left">EnableProbe</td>
+<td align="left">The probe will only run if this is "1"</td>
+</tr>
+</tbody>
+</table>
+<p>Again, there are many more options in this file. Most of the time you won't need to touch them.</p>
+<h2 id="are-the-gratia-cron-jobs-running">Are the Gratia cron jobs running?<a class="headerlink" href="#are-the-gratia-cron-jobs-running" title="Permanent link">&para;</a></h2>
+<p>You should make sure the Gratia cron jobs are running. The simplest way is with the <code>service</code> command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /sbin/service gratia-probes-cron status
+<span class="go">gratia probes cron is enabled.</span>
+</pre></div>
+
+
+<p>If it is not enabled, enable it as described above.</p>
+<p>A future release of Gratia will provide status on each of the individual probes, but right now this only ensures that the basic cron job is running. In the meantime, you can check if the individual Gratia probes are enabled. To do this, look at the <code>EnableProbe</code> option in the <code>ProbeConfig</code> file, as described above. A quick command to do this is shown here. Note that the Condor and GridFTP Transfer probes are enabled while the glexec probe is disabled:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">cd</span> /etc/gratia
+<span class="gp">root@host #</span> grep -r EnableProbe *
+<span class="go">condor/ProbeConfig:    EnableProbe=&quot;1&quot;</span>
+<span class="go">glexec/ProbeConfig:    EnableProbe=&quot;0&quot;</span>
+<span class="go">gridftp-transfer/ProbeConfig:    EnableProbe=&quot;1&quot;</span>
+</pre></div>
+
+
+<p>If you see no log files in <code>/var/log/gratia</code> you may have an error in the probe configuration file. Manually run the test for your probe (check <code>/etc/cron.d/gratia-probe-condor.cron</code>), e.g. <code>/usr/share/gratia/common/cron_check  /etc/gratia/condor/ProbeConfig</code>. If there is an error you may get a suggestion on where it is, e.g.:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /usr/share/gratia/common/cron_check  /etc/gratia/condor/ProbeConfig
+<span class="go">Parse error in /etc/gratia/condor/ProbeConfig: not well-formed (invalid token): line 21, column 4</span>
+</pre></div>
+
+
+<p>Correct the error and restart gratia.</p>
+<h2 id="have-you-configured-the-resource-names-correctly">Have you configured the resource names correctly?<a class="headerlink" href="#have-you-configured-the-resource-names-correctly" title="Permanent link">&para;</a></h2>
+<p>Do the names of your resources match the names in <a href="https://oim.grid.iu.edu/oim/topology">OIM</a>?  Gratia retrieves the resource name from the <code>Site Information</code> section of the <code>/etc/osg/config.d/40-siteinfo.ini</code></p>
+<div class="codehilite"><pre><span></span><span class="p">;</span><span class="o">===================================================================</span>
+<span class="p">;</span>                       <span class="n">Site</span> <span class="n">Information</span>
+<span class="p">;</span><span class="o">===================================================================</span>
+
+<span class="p">[</span><span class="n">Site</span> <span class="n">Information</span><span class="p">]</span>
+<span class="p">;</span> <span class="n">The</span> <span class="n">group</span> <span class="n">option</span> <span class="n">indicates</span> <span class="n">the</span> <span class="n">group</span> <span class="n">that</span> <span class="n">the</span> <span class="n">OSG</span> <span class="n">site</span> <span class="n">should</span> <span class="n">be</span> <span class="n">listed</span> <span class="k">in</span><span class="p">,</span>
+<span class="p">;</span> <span class="k">for</span> <span class="n">production</span> <span class="n">sites</span> <span class="n">this</span> <span class="n">should</span> <span class="n">be</span> <span class="n">OSG</span><span class="p">,</span> <span class="k">for</span> <span class="n">vtb</span> <span class="n">or</span> <span class="n">itb</span> <span class="n">testing</span> <span class="n">it</span> <span class="n">should</span> <span class="n">be</span>
+<span class="p">;</span> <span class="n">OSG</span><span class="o">-</span><span class="n">ITB</span>
+<span class="p">;</span> 
+<span class="p">;</span> <span class="n">YOU</span> <span class="n">WILL</span> <span class="n">NEED</span> <span class="n">TO</span> <span class="n">CHANGE</span> <span class="n">THIS</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">OSG</span>
+
+<span class="p">;</span> <span class="n">The</span> <span class="n">host_name</span> <span class="n">setting</span> <span class="n">should</span> <span class="n">give</span> <span class="n">the</span> <span class="n">host</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">CE</span>  <span class="n">that</span> <span class="n">is</span> <span class="n">being</span> 
+<span class="p">;</span> <span class="n">configured</span><span class="p">,</span> <span class="n">this</span> <span class="n">setting</span> <span class="n">must</span> <span class="n">be</span> <span class="n">a</span> <span class="n">valid</span> <span class="n">dns</span> <span class="n">name</span> <span class="n">that</span> <span class="n">resolves</span>
+<span class="p">;</span> 
+<span class="p">;</span> <span class="n">YOU</span> <span class="n">WILL</span> <span class="n">NEED</span> <span class="n">TO</span> <span class="n">CHANGE</span> <span class="n">THIS</span>
+<span class="n">host_name</span> <span class="o">=</span> <span class="n">tusker</span><span class="o">-</span><span class="n">gw1</span><span class="p">.</span><span class="n">unl</span><span class="p">.</span><span class="n">edu</span>
+
+<span class="p">;</span> <span class="n">The</span> <span class="n">resource</span> <span class="n">setting</span> <span class="n">should</span> <span class="n">be</span> <span class="n">set</span> <span class="n">to</span> <span class="n">the</span> <span class="n">same</span> <span class="n">value</span> <span class="n">as</span> <span class="n">used</span> <span class="k">in</span> <span class="n">the</span> <span class="n">OIM</span> 
+<span class="p">;</span> <span class="n">registration</span> <span class="n">at</span> <span class="n">the</span> <span class="n">goc</span> 
+<span class="p">;</span> 
+<span class="p">;</span> <span class="n">YOU</span> <span class="n">WILL</span> <span class="n">NEED</span> <span class="n">TO</span> <span class="n">CHANGE</span> <span class="n">THIS</span>
+<span class="n">resource</span> <span class="o">=</span> <span class="n">Tusker</span><span class="o">-</span><span class="n">CE1</span>
+
+<span class="p">;</span> <span class="n">The</span> <span class="n">resource_group</span> <span class="n">setting</span> <span class="n">should</span> <span class="n">be</span> <span class="n">set</span> <span class="n">to</span> <span class="n">the</span> <span class="n">same</span> <span class="n">value</span> <span class="n">as</span> <span class="n">used</span> <span class="k">in</span> <span class="n">the</span> <span class="n">OIM</span> 
+<span class="p">;</span> <span class="n">registration</span> <span class="n">at</span> <span class="n">the</span> <span class="n">goc</span> 
+<span class="p">;</span> 
+<span class="p">;</span> <span class="n">YOU</span> <span class="n">WILL</span> <span class="n">NEED</span> <span class="n">TO</span> <span class="n">CHANGE</span> <span class="n">THIS</span>
+<span class="n">resource_group</span> <span class="o">=</span> <span class="n">Tusker</span>
+</pre></div>
+
+
+<p>Do those names match the names that you registered with OIM? If not, edit the names, and rerun "osg-configure -c".</p>
+<h2 id="did-the-site-name-change">Did the site name change?<a class="headerlink" href="#did-the-site-name-change" title="Permanent link">&para;</a></h2>
+<p>Was the site previously reporting data, but the site name (not host name, but site name) changed? When the site name changes, you need to ask the GRACC operations team to update the name of your site at the GRACC collector. To do this:</p>
+<ol>
+<li>Open a ticket at <a href="https://ticket.opensciencegrid.org/submit">the GOC ticket web page</a></li>
+<li>Select "Software or Service"</li>
+<li>Select "GRACC Operations"</li>
+<li>Type a friendly email that asks the GRACC team to change your site name at the collector. Make sure to tell them the old name and the new name.  Below is an example email:<div class="codehilite"><pre><span></span>Hello GRACC Team,
+
+Please change the site name of my site from &lt;Insert Old Name&gt; to &lt;Insert New Name&gt;.
+
+Thanks, ...
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="is-a-site-reporting-data">Is a site reporting data?<a class="headerlink" href="#is-a-site-reporting-data" title="Permanent link">&para;</a></h2>
+<p>You can see if the OSG GRACC Server is getting data from a site by going to <a href="https://gracc.opensciencegrid.org/dashboard/db/pilot-jobs-summary?orgId=1">GRACC</a>:</p>
+<ol>
+<li>Specify the site name in Facility</li>
+</ol>
+<h2 id="htcondors-gratia-configuration">HTCondor's Gratia Configuration<a class="headerlink" href="#htcondors-gratia-configuration" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only applicable to HTCondor batch sites, not SLURM, PBS, SGE or LSF sites</p>
+</div>
+<p>Condor must be configured to put information about each job into a special directory.  Gratia will read and remove the files in order to collect the accounting information.</p>
+<p>The configuration variable is called <code>PER_JOB_HISTORY_DIR</code>. If you install the OSG RPM for Condor, the Gratia probe will extend its configuration by adding a file to <code>/etc/condor/config.d</code>, and will set this variable to <code>/var/lib/gratia/data</code>. If you are using a different installation method, you may need to set the variable yourself. You can check if it's set by using <code>condor_config_val</code>, like this:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_config_val -v PER_JOB_HISTORY_DIR
+<span class="go">PER_JOB_HISTORY_DIR: /var/lib/gratia/data</span>
+<span class="go">    Defined in &#39;/etc/condor/config.d/99_gratia.conf&#39;, line 5.</span>
+</pre></div>
+
+
+<p>If you set this value, you need to restart condor:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> condor_restart
+<span class="go">Sent &quot;Restart&quot; command to local master</span>
+</pre></div>
+
+
+<p>Unlike many Condor settings, a <strong>condor_reconfig</strong> is not sufficient - you must restart!</p>
+<h3 id="if-you-accidentally-did-not-set-per_job_history_dir-see-above">If you accidentally did not set <code>PER_JOB_HISTORY_DIR</code> (see above)<a class="headerlink" href="#if-you-accidentally-did-not-set-per_job_history_dir-see-above" title="Permanent link">&para;</a></h3>
+<p>The HTCondor Gratia probe will not publish accounting information about jobs without <code>PER_JOB_HISTORY_DIR</code>. You can have Gratia read the Condor history file and publish data that way. If you know the time period of the missing data, you should specify a start and end times. This reduces the load on the Gratia collector. To do so:</p>
+<div class="codehilite"><pre><span></span><span class="gp">%</span>BLUE%Preferred method using start and end times</span>
+<span class="gp">root@host #</span> /usr/share/gratia/condor/condor_meter --history --start-time<span class="o">=</span><span class="s2">&quot;2014-06-01&quot;</span> --end-time<span class="o">=</span><span class="s2">&quot;2014-06-02&quot;</span> --verbose
+<span class="go">2014-06-03 10:00:36 CDT Gratia: RUNNING condor_meter MANUALLY using HTCondor history from 2014-06-01 to 2014-06-02</span>
+<span class="go">2014-06-03 10:00:36 CDT Gratia: RUNNING: condor_history -l -constraint &#39;((JobCurrentStartDate &gt; 1401598800) &amp;&amp; (JobCurrentStartDate &lt; 1401685200))&#39;</span>
+<span class="go">2014-06-03 10:00:49 CDT Gratia: condor_meter --history: Usage records submitted: 399</span>
+<span class="go">2014-06-03 10:00:49 CDT Gratia: condor_meter --history: Usage records found: 400</span>
+<span class="go">2014-06-03 10:00:49 CDT Gratia: RUNNING condor_meter MANUALLY Finished</span>
+
+<span class="gp">%</span>BLUE% or <span class="k">if</span> you need to go back to the beginning of time</span>
+<span class="gp">root@host #</span> /usr/share/gratia/condor/condor_meter --history --verbose
+<span class="go">2014-06-03 10:06:19 CDT Gratia: RUNNING condor_meter MANUALLY using all HTCondor history</span>
+<span class="go">2014-06-03 10:06:19 CDT Gratia: RUNNING: condor_history -l</span>
+<span class="go">2014-06-03 10:11:38 CDT Gratia: condor_meter --history: Usage records submitted: 13026</span>
+<span class="go">2014-06-03 10:11:38 CDT Gratia: condor_meter --history: Usage records found: 13027</span>
+<span class="go">2014-06-03 10:11:38 CDT Gratia: RUNNING condor_meter MANUALLY Finished</span>
+</pre></div>
+
+
+<p>Not much is printed to the screen, but you can see progress in the Gratia log file:</p>
+<div class="codehilite"><pre><span></span><span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">28</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="n">Initializing</span> <span class="n">Gratia</span> <span class="k">with</span> <span class="sr">/etc/gratia/condor/</span><span class="n">ProbeConfig</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">28</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="n">Creating</span> <span class="n">a</span> <span class="n">ProbeDetails</span> <span class="n">record</span> <span class="mi">2012</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">04</span><span class="n">T18</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">28</span><span class="n">Z</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">28</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="o">***********************************************************</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">28</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="n">OK</span> <span class="o">-</span> <span class="n">Handshake</span> <span class="n">added</span> <span class="n">to</span> <span class="n">bundle</span> <span class="o">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">100</span><span class="o">)</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">28</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="o">***********************************************************</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">28</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="n">List</span> <span class="n">of</span> <span class="n">backup</span> <span class="n">directories</span><span class="o">:</span> <span class="o">[</span><span class="n">u</span><span class="s1">&#39;/var/lib/gratia/tmp&#39;</span><span class="o">]</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">28</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="n">Reprocessing</span> <span class="n">response</span><span class="o">:</span> <span class="n">OK</span> <span class="o">-</span> <span class="n">Reprocessing</span> <span class="mi">0</span> <span class="n">record</span><span class="o">(</span><span class="n">s</span><span class="o">)</span> <span class="n">uploaded</span><span class="o">,</span> <span class="mi">0</span> <span class="n">bundled</span><span class="o">,</span> <span class="mi">0</span> <span class="n">failed</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">28</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="n">After</span> <span class="n">reprocessing</span><span class="o">:</span> <span class="mi">0</span> <span class="k">in</span> <span class="n">outbox</span> <span class="mi">0</span> <span class="k">in</span> <span class="n">staged</span> <span class="n">outbox</span> <span class="mi">0</span> <span class="n">tar</span> <span class="n">files</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">28</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="n">Creating</span> <span class="n">a</span> <span class="n">UsageRecord</span> <span class="mi">2012</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">04</span><span class="n">T18</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">28</span><span class="n">Z</span>
+<span class="o">...</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">29</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="n">Processing</span> <span class="n">bundle</span> <span class="n">file</span><span class="o">:</span> 
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">29</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="n">Processing</span> <span class="n">bundle</span> <span class="n">file</span><span class="o">:</span> <span class="sr">/var/lib/gratia/tmp/gratiafiles/</span>
+    <span class="n">subdir</span><span class="o">.</span><span class="na">condor_fermicloud084</span><span class="o">.</span><span class="na">fnal</span><span class="o">.</span><span class="na">gov_gratia</span><span class="o">-</span><span class="n">osg</span><span class="o">-</span><span class="n">itb</span><span class="o">.</span><span class="na">opensciencegrid</span><span class="o">.</span><span class="na">org_80</span><span class="o">/</span>
+    <span class="n">outbox</span><span class="o">/</span><span class="n">r</span><span class="o">.</span><span class="mi">18425</span><span class="o">.</span><span class="na">condor_fermicloud084</span><span class="o">.</span><span class="na">fnal</span><span class="o">.</span><span class="na">gov_gratia</span><span class="o">-</span><span class="n">osg</span><span class="o">-</span><span class="n">itb</span><span class="o">.</span><span class="na">opensciencegrid</span><span class="o">.</span><span class="na">org_80</span><span class="o">.</span><span class="na">gratia</span><span class="o">.</span><span class="na">xml__BSuXo18428</span>
+<span class="o">...</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">29</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="o">***********************************************************</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">29</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="n">Removing</span> <span class="n">log</span> <span class="n">files</span> <span class="n">older</span> <span class="n">than</span> <span class="mi">31</span> <span class="n">days</span> <span class="n">from</span> <span class="sr">/var/log/g</span><span class="n">ratia</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">29</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="sr">/var/log/g</span><span class="n">ratia</span> <span class="n">uses</span> <span class="mf">0.035</span><span class="o">%</span> <span class="n">and</span> <span class="n">there</span> <span class="k">is</span> <span class="mi">73</span><span class="o">%</span> <span class="n">free</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">29</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="n">Removing</span> <span class="n">incomplete</span> <span class="n">data</span> <span class="n">files</span> <span class="n">older</span> <span class="n">than</span> <span class="mi">31</span> <span class="n">days</span> <span class="n">from</span> <span class="sr">/var/lib/gratia/data/</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">29</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="sr">/var/lib/gratia/</span><span class="n">data</span> <span class="n">uses</span> <span class="mi">0</span><span class="o">%</span> <span class="n">and</span> <span class="n">there</span> <span class="k">is</span> <span class="mi">73</span><span class="o">%</span> <span class="n">free</span>
+<span class="mi">13</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">29</span> <span class="n">CDT</span> <span class="n">Gratia</span><span class="o">:</span> <span class="n">End</span> <span class="n">of</span> <span class="n">execution</span> <span class="n">summary</span><span class="o">:</span> <span class="k">new</span> <span class="n">records</span> <span class="n">sent</span> <span class="n">successfully</span><span class="o">:</span> <span class="mi">37</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Condor rotates history files, so you can only report what Condor has kept. Controlling the Condor history is documented in the Condor manual. In particular, see the options for <a href="https://research.cs.wisc.edu/htcondor/manual/v8.6/3_5Configuration_Macros.html#21780">MAX_HISTORY_LOG</a> and <a href="https://research.cs.wisc.edu/htcondor/manual/v8.6/3_5Configuration_Macros.html#21785">MAX_HISTORY_ROTATIONS</a>.</p>
+</div>
+<h3 id="bad-gratia-hostname">Bad Gratia hostname<a class="headerlink" href="#bad-gratia-hostname" title="Permanent link">&para;</a></h3>
+<p>This is an example problem where the configuration was bad: there was an incorrect hostname for the Gratia server. The problem is clearly visible in the Gratia log file, which is located in <code>/var/log/gratia/</code>. There is one log file per day, labeled by the date:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">cd</span> /var/log/gratia/
+<span class="gp">root@host #</span> cat <span class="m">2012</span>-04-03.log 
+<span class="go">...</span>
+<span class="gp">%</span>RED%You can see that Gratia is using the correct configuration file:</span>
+<span class="go">15:06:55 CDT Gratia: Using config file: /etc/gratia/condor/ProbeConfig</span>
+
+<span class="gp">%</span>RED%Here Gratia is removing a file from the Condor PER_JOB_HISTORY_DIR and creating a Gratia accounting record <span class="k">for</span> it</span>
+<span class="go">15:06:55 CDT Gratia: Creating a UsageRecord 2012-04-03T20:06:55Z</span>
+<span class="go">15:06:55 CDT Gratia: Registering transient input file: /var/lib/gratia/data/history.37.0</span>
+<span class="go">15:06:55 CDT Gratia: ***********************************************************</span>
+<span class="go">15:06:55 CDT Gratia: Saved record to /var/lib/gratia/tmp/gratiafiles/</span>
+<span class="go">    subdir.condor_fermicloud084.fnal.gov_ggratia-osg-itb.opensciencegrid.org_80/</span>
+<span class="go">    outbox/r.30604.condor_fermicloud084.fnal.gov_ggratia-osg-itb.opensciencegrid.org_80.gratia.xml__wfIgi30606</span>
+<span class="go">15:06:55 CDT Gratia: Deleting transient input file: /var/lib/gratia/data/history.37.0</span>
+
+<span class="gp">%</span>RED%Later, Gratia failed to connect to the server due to a bad hostname</span>
+<span class="go">15:06:55 CDT Gratia: Failed to send xml to web service due to an error of type &quot;socket.gaierror&quot;: (-2, &#39;Name or service not known&#39;)</span>
+<span class="go">...</span>
+<span class="go">15:06:55 CDT Gratia: Response indicates failure, the following files will not be deleted:</span>
+<span class="go">15:06:55 CDT Gratia:    /var/lib/gratia/tmp/gratiafiles/</span>
+<span class="go">    subdir.condor_fermicloud084.fnal.gov_ggratia-osg-itb.opensciencegrid.org_80/</span>
+<span class="go">    outbox/r.30604.condor_fermicloud084.fnal.gov_ggratia-osg-itb.opensciencegrid.org_80.gratia.xml__wfIgi30606</span>
+</pre></div>
+
+
+<p>If you accidentally had a bad Gratia hostname, you probably want to recover your Gratia data. </p>
+<p>This can be done, though it's not simple. There are a few things you need to do. But first, you need to understand exactly where Gratia stores files.</p>
+<p>When a Gratia extracts accounting information, it creates one file per record and stores it in a directory. The directory is a long name that contains the type of the probe (such as <code>condor</code>), the name of the host you're running on, and the name of the GRACC host you're sending the information to. For simplicity, lets call that name <em>probe-records</em>, but you'll see what it really looks like below. Within this directory, you'll see some subdirectories:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Directory</th>
+<th align="left">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">/var/lib/gratia/tmp/grataifiles/<span style="color:red">probe-records</span>/outbox</td>
+<td align="left">The usual location for the accounting records</td>
+</tr>
+<tr>
+<td align="left">/var/lib/gratia/tmp/grataifiles/<span style="color:red">probe-records</span>/staged/store</td>
+<td align="left">An overflow location when there are problems</td>
+</tr>
+</tbody>
+</table>
+<p>When you recover old records, you need to:</p>
+<ol>
+<li>Move files from the outbox of the incorrect <em>probe-records</em> directory into the outbox of the correctly named <em>probe-records</em> directory.</li>
+<li>Move tarred and compressed files from the staged/store of the incorrect <em>probe-records</em> directory into the staged/store of the correctly named <em>probe-records</em> directory. Then you uncompress them and remove the compressed version.</li>
+</ol>
+<p>In the examples below, the hostname for gratia was "accidentally" spelled backwards. Instead of <code>gratia-osg-itb.opensciencegrid.org</code>, it was <code>aitarg-osg-itb.opensciencegrid.org</code>.</p>
+<ol>
+<li>
+<p>First you need to fix the hostname. For a CE, you can edit <code>/etc/osg/config.d/30-gratia.ini</code> and rerun <code>osg-configure -c</code>. In other installations, you have to edit the appropriate <code>ProbeConfig</code> file.</p>
+</li>
+<li>
+<p>Next, submit a job via to your batch system, then run the appropriate Gratia probe (or wait for it to run via cron). This will create the properly named directories on your disk. For example:</p>
+<p>As a user: </p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> globus-job-run fermicloud084.fnal.gov/jobmanager-condor /bin/hostname
+</pre></div>
+
+
+<p>As root (adjust for your batch system): </p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /share/gratia/condor/condor<span class="se">\_</span>meter
+</pre></div>
+
+
+</li>
+<li>
+<p>Find the Gratia records that can be easily uploaded. They are located in a a directory with an unwieldly name that includes your hostname and the incorrect name of the Gratia host. You can see the directory name in the Gratia log: the misspelled name is noted in red below, but <em>it will be different on your computer</em>.</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> less /var/log/gratia/2012-04-06
+<span class="go">...</span>
+<span class="go">16:04:29 CDT Gratia: Response indicates failure, the following files will not be deleted:</span>
+<span class="go">16:04:29 CDT Gratia:    /var/lib/gratia/tmp/gratiafiles/</span>
+<span class="go">    subdir.condor_fermicloud084.fnal.gov_<span style="color:red">aitarg</span>-osg-itb.opensciencegrid.org_80/</span>
+<span class="go">    outbox/r.916.condor_fermicloud084.fnal.gov_aitarg-osg-itb.opensciencegrid.org_80.gratia.xml__JDlHbNb918</span>
+</pre></div>
+
+
+<p>(The filename was wrapped for legibility.)</p>
+<p>You can simply copy these to the correct directory. Wait for the Gratia cron job to run, or force it to run.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">cd</span> /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_<span style="color:red">aitarg</span>-osg-itb.opensciencegrid.org_80/outbox/.
+<span class="gp">root@host #</span> mv * /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_<span style="color:red">gratia</span>-osg-itb.opensciencegrid.org_80/outbox/.
+</pre></div>
+
+
+</li>
+<li>
+<p>If this has been a persistent problem, you might have many records. After a while, they are put into a compressed files in another directory. You can move those files, then uncompress them. This is a long name: note that the path ends in "staged/store" instead of "outbox" as above:</p>
+<div class="codehilite"><pre><span></span><span class="gp">%</span>RED%# Find the old files</span>
+<span class="gp">root@host #</span> <span class="nb">cd</span> /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_<span style="color:red">aitarg</span>-osg-itb.opensciencegrid.org_80/staged/store
+
+<span class="gp">%</span>RED%# Move them to the correct directory</span>
+<span class="gp">root@host #</span> mv tz* /var/lib/gratia/tmp/gratiafiles/subdir.condor_fermicloud084.fnal.gov_<span style="color:red">gratia</span>-osg-itb.opensciencegrid.org_80/outbox/.
+<span class="gp">root@host #</span> <span class="nb">cd</span> !$
+
+<span class="gp">%</span>RED%# For each tz file:</span>
+<span class="gp">root@host #</span> tar xf tz.1223.... <span class="o">[</span>name shortened <span class="k">for</span> legibility<span class="o">]</span>
+<span class="gp">root@host #</span> rm tz.1223....
+</pre></div>
+
+
+<p>When you've done this, you can re-run the Gratia probe by hand, or wait for it to run via cron.</p>
+</li>
+</ol>
+<h2 id="reference-important-gratia-files">Reference: Important Gratia files<a class="headerlink" href="#reference-important-gratia-files" title="Permanent link">&para;</a></h2>
+<p>If you need to look for more data, you can look at log files for the various services on your CE.</p>
+<table>
+<thead>
+<tr>
+<th align="left">File</th>
+<th align="left">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>/var/log/gratia/<span style="color:red">DATE</span>.log</code></td>
+<td align="left">Log file that records information about processing and uploading of Gratia accounting data</td>
+</tr>
+<tr>
+<td align="left"><code>/var/log/gratia/gridftpTransfer.log</code></td>
+<td align="left">Log file specific to the Gratia GridFTP probe</td>
+</tr>
+<tr>
+<td align="left"><code>/var/lib/gratia/data</code></td>
+<td align="left">Location for Condor and PBS job data before being processed by Gratia<br>Condor's <code>PER_JOB_HISTORY_DIR</code> should be set to this location</td>
+</tr>
+<tr>
+<td align="left"><code>/var/lib/gratia/tmp/gratiafiles</code></td>
+<td align="left">Location for temporary Gratia data as it is being processed, usually empty.<br>If you have files that are more than 30 minutes old in this directory, there may be a problem</td>
+</tr>
+<tr>
+<td align="left"><code>/etc/gratia/<span style="color:red">PROBE-NAME</span>/ProbeConfig</code></td>
+<td align="left">Configuration for Gratia probes, one per probe type</br>Normally you don't need to edit this</td>
+</tr>
+</tbody>
+</table>
+<p>Not all RPMs will be on all hosts.  Instead, only the <code>gratia-probe-common</code> and the one RPM specific to that host will be installed. The most common RPMs you will see are:</p>
+<table>
+<thead>
+<tr>
+<th align="left">RPM</th>
+<th align="left">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>gratia-probe-common</code></td>
+<td align="left">Code shared between all Graita probes</td>
+</tr>
+<tr>
+<td align="left"><code>gratia-probe-condor</code></td>
+<td align="left">The probe that tracks Condor usage</td>
+</tr>
+<tr>
+<td align="left"><code>gratia-probe-slurm</code></td>
+<td align="left">The probe that tracks SLURM usage</td>
+</tr>
+<tr>
+<td align="left"><code>gratia-probe-pbs-lsf</code></td>
+<td align="left">The probe that tracks PBS and/or LSF usage</td>
+</tr>
+<tr>
+<td align="left"><code>gratia-probe-gridftp-transfer</code></td>
+<td align="left">The probe that tracks transfers done with GridFTP</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../schedd-filebeats/" class="btn btn-neutral float-right" title="Transfer log filebeats installation">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../network-performance-toolkit/" class="btn btn-neutral" title="Network Performance Toolkit"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/opensciencegrid/docs/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../network-performance-toolkit/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../schedd-filebeats/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/require.js"></script>
+      <script src="../../search/search.js"></script>
+
+</body>
+</html>
