@@ -368,7 +368,7 @@ If you need to look for more data, you can look at log files for the various ser
 | `/var/lib/gratia/tmp/gratiafiles`                   | Location for temporary Gratia data as it is being processed, usually empty.<br>If you have files that are more than 30 minutes old in this directory, there may be a problem |
 | `/etc/gratia/%RED%PROBE-NAME%ENDCOLOR%/ProbeConfig` | Configuration for Gratia probes, one per probe type</br>Normally you don't need to edit this                                                                                 |
 
-The most common RPMs you will see are:
+Not all RPMs will be on all hosts.  Instead, only the `gratia-probe-common` and the one RPM specific to that host will be installed. The most common RPMs you will see are:
 
 | RPM                             | Purpose                                                                             |
 |:--------------------------------|:------------------------------------------------------------------------------------|
