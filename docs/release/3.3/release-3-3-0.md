@@ -16,7 +16,7 @@ This release contains:
 -   improved logging of failures in lcmaps-plugins-verify-proxy
 -   better credential handling and fix for crashes in lcamps-plugins-scas-client
 -   CA Certificates are no longer repackaged for compatibility with old software
--   VO Package v61
+-   [VO Package v61](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-61)
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.0%20ORDER%20BY%20priority%20DESC) were addressed in this release.
 
