@@ -374,7 +374,7 @@ The most common RPMs you will see are:
 |:--------------------------------|:------------------------------------------------------------------------------------|
 | `gratia-probe-common`           | Code shared between all Graita probes                                               |                            |
 | `gratia-probe-condor`           | The probe that tracks Condor usage                                         |
-| `gratia-probe-slurm`           | The probe that tracks Condor usage                                         |
+| `gratia-probe-slurm`           | The probe that tracks SLURM usage                                         |
 | `gratia-probe-pbs-lsf`          | The probe that tracks PBS and/or LSF usage                                  |
 | `gratia-probe-gridftp-transfer` | The probe that tracks transfers done with GridFTP                                   |
 
