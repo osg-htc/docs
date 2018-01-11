@@ -31,7 +31,6 @@ The configuration of filebeats revolves around this file `/etc/filebeat/filebeat
 
         :::file
         - input_type: log
-	enabled: false
         paths:
         - /var/log/condor/XferStatsLog
 
@@ -66,6 +65,16 @@ The configuration of filebeats revolves around this file `/etc/filebeat/filebeat
         #username: "elastic"
         #password: "changeme"
 
+1. Test configuration is correct by running:
+ 
+        :::console
+        root@host # filebeat.sh -configtest -e
+
+1. Start the filebeats services
+
+        :::console
+        root@host # service filebeat start
+
 1. The general section should look like this:
 
         :::file
@@ -78,17 +87,6 @@ The configuration of filebeats revolves around this file `/etc/filebeat/filebeat
         # output.
         #fields:
         #  env: staging
-
-1. Test configuration is correct by running:
- 
-        :::console
-        root@host # filebeat.sh -configtest -e
-
-1. Start the filebeats services
-
-        :::console
-        root@host # service filebeat start
-
 
 
 
@@ -109,7 +107,7 @@ For the configuration of the HTCondor submit host to use the TransferLog follow 
         :::console
         root@host #condor_reconfig
 
-1. Make sure that after a while the new log `/var/log/condor/XferStatsLog` is present.
+1. Make sure that after a while the new log `/var/log/XferStatsLog` is present.
 
 
 
