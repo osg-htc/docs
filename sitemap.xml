@@ -4,7 +4,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//site-planning/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,31 +21,31 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//compute-element/htcondor-ce-overview/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//compute-element/install-htcondor-ce/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//compute-element/job-router-recipes/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//compute-element/troubleshoot-htcondor-ce/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//compute-element/submit-htcondor-ce/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -55,37 +55,37 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//worker-node/using-wn/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//worker-node/install-wn/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//worker-node/install-wn-tarball/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//worker-node/install-wn-oasis/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//worker-node/install-cvmfs/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//worker-node/install-singularity/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -95,19 +95,19 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//data/frontier-squid/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//data/update-oasis/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//data/external-oasis-repos/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -117,13 +117,13 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//data/gridftp/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//data/load-balanced-gridftp/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -133,13 +133,13 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//data/hadoop-overview/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//data/install-hadoop-2-0-0/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -149,19 +149,19 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//data/xrootd-overview/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//data/install-xrootd/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//data/install-xroot-client/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -171,25 +171,25 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//security/lcmaps-voms-authentication/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//security/host-certs/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//security/user-certs/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//security/certificate-management/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -199,31 +199,31 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//common/install-best-practices/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//common/ca/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//common/yum/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//common/openjdk7/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//other/configuration-with-osg-configure/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -233,37 +233,37 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//other/gsissh/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//other/install-gwms-frontend/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//other/install-cvmfs-stratum1/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//other/network-performance-toolkit/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//other/troubleshooting-gratia/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//other/schedd-filebeats/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -273,43 +273,43 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/notes/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/release_series/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/supported_platforms/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//other/install-osg-upcoming-software/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/yum-basics/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/signing/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/contrib/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -319,25 +319,25 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//monitoring/install-rsv/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//monitoring/advanced-rsv-configuration/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//monitoring/rsv-control/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//monitoring/install-rsv-gwms-tester/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -347,37 +347,37 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//data/bestman-install/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//data/install-bestman-xrootd/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//security/edg-mkgridmap/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//security/install-gums/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//worker-node/install-glexec/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//other/install-voms/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -386,7 +386,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//common/help/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -394,7 +394,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-6/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -402,7 +402,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-31/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -410,7 +410,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-5-4/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -418,7 +418,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-30-4/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -426,7 +426,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-5-3/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -434,7 +434,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-30-3/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -442,7 +442,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-5-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -450,7 +450,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-30-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -458,7 +458,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-5/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -466,7 +466,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-30/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -474,7 +474,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-4-3/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -482,7 +482,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-29-3/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -490,7 +490,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-4-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -498,7 +498,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-29-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -506,7 +506,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-4/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -514,7 +514,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-29/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -522,7 +522,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-3/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -530,7 +530,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-28/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -538,7 +538,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-2-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -546,7 +546,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -554,7 +554,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-1-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -562,7 +562,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-1/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -570,7 +570,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-0-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -578,7 +578,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.4/release-3-4-0/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -586,7 +586,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-27-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -594,7 +594,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-27/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -602,7 +602,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-26-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -610,7 +610,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-26/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -618,7 +618,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-25-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -626,7 +626,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-25/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -634,7 +634,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-24-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -642,7 +642,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-24/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -650,7 +650,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-23/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -658,7 +658,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-22-3/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -666,7 +666,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-22-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -674,7 +674,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-22/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -682,7 +682,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-21-3/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -690,7 +690,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-21-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -698,7 +698,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-21/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -706,7 +706,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-20-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -714,7 +714,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-20/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -722,7 +722,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-19/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -730,7 +730,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-18/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -738,7 +738,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-17-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -746,7 +746,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-17/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -754,7 +754,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-16/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -762,7 +762,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-15/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -770,7 +770,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-14/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -778,7 +778,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-13/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -786,7 +786,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-12/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -794,7 +794,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-11/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -802,7 +802,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-10/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -810,7 +810,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-9/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -818,7 +818,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-8/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -826,7 +826,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-7/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -834,7 +834,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-6/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -842,7 +842,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-5/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -850,7 +850,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-4/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -858,7 +858,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-3/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -866,7 +866,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-2/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -874,7 +874,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-1/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -882,7 +882,7 @@
     
     <url>
      <loc>https://opensciencegrid.github.io/docs//release/3.3/release-3-3-0/</loc>
-     <lastmod>2018-01-10</lastmod>
+     <lastmod>2018-01-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

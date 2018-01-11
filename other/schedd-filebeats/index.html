@@ -877,11 +877,12 @@
 <li>
 <p>The <code>Filebeat Prospectors</code> section, the input should look like this:</p>
 <div class="codehilite"><pre><span></span>- input_type: log
-paths:
-- /var/log/condor/XferStatsLog
 </pre></div>
 
 
+<p>enabled: false
+    paths:
+    - /var/log/condor/XferStatsLog</p>
 </li>
 <li>
 <p>The output logstash section should look like:</p>
@@ -919,20 +920,6 @@ ssl.key: &quot;/etc/grid-security/hostkey.pem&quot;
 
 </li>
 <li>
-<p>Test configuration is correct by running:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> filebeat.sh -configtest -e
-</pre></div>
-
-
-</li>
-<li>
-<p>Start the filebeats services</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service filebeat start
-</pre></div>
-
-
-</li>
-<li>
 <p>The general section should look like this:</p>
 <div class="codehilite"><pre><span></span>#================================ General =====================================
 
@@ -943,6 +930,20 @@ tags: [&quot;xfer-log&quot;]
 # output.
 #fields:
 #  env: staging
+</pre></div>
+
+
+</li>
+<li>
+<p>Test configuration is correct by running:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> filebeat.sh -configtest -e
+</pre></div>
+
+
+</li>
+<li>
+<p>Start the filebeats services</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service filebeat start
 </pre></div>
 
 
@@ -968,7 +969,7 @@ tags: [&quot;xfer-log&quot;]
 
 </li>
 <li>
-<p>Make sure that after a while the new log <code>/var/log/XferStatsLog</code> is present.</p>
+<p>Make sure that after a while the new log <code>/var/log/condor/XferStatsLog</code> is present.</p>
 </li>
 </ol>
               
