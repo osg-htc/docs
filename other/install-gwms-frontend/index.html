@@ -864,7 +864,7 @@
 the minimum requirement for a VO to use glideinWMS.</p>
 <p>This document assumes expertise with Condor and familiarity with the glideinWMS
 software. It <strong>does not</strong> cover anything but the simplest possible install.
-Please consult the <a href="http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/install.html">Glidein WMS reference
+Please consult the <a href="http://glideinwms.fnal.gov/doc.prd/install.html">Glidein WMS reference
 documentation</a>
 for advanced topics, including non-<code>root</code>, non-RPM-based installation.</p>
 <p>This document covers three components of the GlideinWMS a VO needs to install:</p>
@@ -929,7 +929,7 @@ x509 -in /etc/grid-security/hostcert.pem -subject -issuer -dates -noout</code>. 
 will need that to find out information for the configuration files and the
 request to the GlideinWMS factory.</p>
 <h3 id="osg-factory-access">OSG Factory access<a class="headerlink" href="#osg-factory-access" title="Permanent link">&para;</a></h3>
-<p>Before installing the Glidein WMS VO Frontend you need the information about a <a href="http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/factory/index.html">Glidein Factory</a> that you can access:</p>
+<p>Before installing the Glidein WMS VO Frontend you need the information about a <a href="http://glideinwms.fnal.gov/doc.prd/factory/index.html">Glidein Factory</a> that you can access:</p>
 <ol>
 <li>(recommended) OSG is managing a factory at UCSD and one at GOC and you can request access to them</li>
 <li>You have another Glidein Factory that you can access</li>
@@ -1857,7 +1857,7 @@ made available on the Web:
 <li>compression specifies if rotated files are compressed</li>
 <li>backup_count is the number of rotated log files kept</li>
 </ul>
-<p>Further details are in the <a href="http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/frontend/configuration.html#process_logs">reference documentation</a>.</p>
+<p>Further details are in the <a href="http://glideinwms.fnal.gov/doc.prd/frontend/configuration.html#process_logs">reference documentation</a>.</p>
 <h3 id="frontend-reconfig-failing">Frontend reconfig failing<a class="headerlink" href="#frontend-reconfig-failing" title="Permanent link">&para;</a></h3>
 <p>If <code>service gwms-frontend reconfig</code> fails at the end with an error like "Writing back config file failed, Reconfiguring the frontend [FAILED]", make sure that <code>/etc/gwms-frontend/</code> belongs to the <code>frontend</code> user. It must be able to write to update the configuration file.</p>
 <h3 id="frontend-failing-to-start">Frontend failing to start<a class="headerlink" href="#frontend-failing-to-start" title="Permanent link">&para;</a></h3>
@@ -1930,8 +1930,7 @@ made available on the Web:
 </ul>
 <p>Documents about the Glidein-WMS system and the VO frontend:</p>
 <ul>
-<li><a href="http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/">http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/</a></li>
-<li><a href="http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/manual/">http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/manual/</a></li>
+<li><a href="http://glideinwms.fnal.gov/">http://glideinwms.fnal.gov/</a></li>
 </ul>
 <h3 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h3>
 <p>The Glidein WMS Frontend installation will create the following users unless they are already created.</p>
