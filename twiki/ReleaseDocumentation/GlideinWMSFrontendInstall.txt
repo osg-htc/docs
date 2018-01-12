@@ -15,7 +15,7 @@
 
 This document describes how to install the Glidein Workflow Managment System (!GlideinWMS) VO Frontend for use with the OSG glidein factory.  This software is the minimum requirement for a VO to use glideinWMS.
 
-This document is assumes expertise with Condor and familiarity with the glideinWMS software.  It *does not* cover anything but the simplest possible install.   Please consult the [[http://glideinwms.fnal.gov/doc.prd/install.html][Glidein WMS reference documentation]] for advanced topics, including non-=root=, non-RPM-based installation.
+This document is assumes expertise with Condor and familiarity with the glideinWMS software.  It *does not* cover anything but the simplest possible install.   Please consult the [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/install.html][Glidein WMS reference documentation]] for advanced topics, including non-=root=, non-RPM-based installation.
 
 This document covers three primary components of the frontend:
    * *User Pool Collectors*: A set of =condor_collector= processes.  Pilots submitted by the factory will join to one of these collectors to form a Condor pool.
@@ -211,10 +211,10 @@ When asked if you want to enable Match authentication, if you are using Condor 7
 
 ---++ Factory access
 <!--
-Before installing the Glidein WMS VO Frontend you need the information about a [[http://glideinwms.fnal.gov/doc.prd/factory/index.html][Glidein Factory]] that you can access:
+Before installing the Glidein WMS VO Frontend you need the information about a [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/factory/index.html][Glidein Factory]] that you can access:
    1 (recommended) OSG is managing a factory at UCSD and you can request access to it
    1 You have another Glidein Factory that you can access
-   1 You [[http://glideinwms.fnal.gov/doc.prd/factory/install.html][install your own Glidein Factory]]
+   1 You [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/factory/install.html][install your own Glidein Factory]]
 -->
 
 To request access the OSG Glidein Factory you have to send an email to osg-gfactory-support@physics.ucsd.edu providing:
@@ -288,7 +288,7 @@ After installing the RPM you need to configure the components of the Glidein WMS
 
 ---++ Configuring the Frontend
 
-The configuration file is =/etc/gwms-frontend/frontend.xml=.  The next steps will describe each line that you will need to edit if you are using the OSG Factory at UCSD.  The portions to edit are highlighted in red font. If you are using a different Factory more changes are necessary, please check [[http://glideinwms.fnal.gov/doc.prd/frontend/configuration.html][the VO Frontend configuration reference]].
+The configuration file is =/etc/gwms-frontend/frontend.xml=.  The next steps will describe each line that you will need to edit if you are using the OSG Factory at UCSD.  The portions to edit are highlighted in red font. If you are using a different Factory more changes are necessary, please check [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/frontend/configuration.html][the VO Frontend configuration reference]].
 
    1. The VO you are affiliated with. Sometime the whole =query_expr= is provided to you by the factory (see Factory access above):
    <pre class="file">
@@ -519,7 +519,8 @@ Definitions:
    * You can [[http://twiki.grid.iu.edu/bin/view/Trash/Trash/Engagement/EngageNewUserGuide][get started with the support of the Engage VO]]
 
 Documents about the Glidein-WMS system and the VO frontend:
-   * http://glideinwms.fnal.gov/
+   * http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/
+   * http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/manual/
    * http://twiki.grid.iu.edu/bin/view/Documentation/GlideinWMSVOFrontendInstall
 
 <!--

@@ -5,7 +5,7 @@
 ---++ Summary of changes
 
 This release contains:
-   * Update to [[http://glideinwms.fnal.gov/doc.prd/history.html][GlideinWMS 3.2.10]] (from version 3.2.8) 
+   * Update to [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/history.html][GlideinWMS 3.2.10]] (from version 3.2.8) 
    * Update to [[https://github.com/xrootd/xrootd/blob/v4.2.1/docs/ReleaseNotes.txt][XRootD 4.2.1]] (from version 4.1.1)
    * Added an RSV probe that checks job submission into the batch system ([[https://jira.opensciencegrid.org/browse/SOFTWARE-793][SOFTWARE-793]])
    * Switch RSV SRM probe to use gfal2 client instead of !BeStMan 2  ([[https://jira.opensciencegrid.org/browse/SOFTWARE-1888][SOFTWARE-1888]])

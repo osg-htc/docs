@@ -14,7 +14,7 @@ Changes include:
       * Correct problem where data from SLAC failed to get entered into gratia database
    * Update to HTCondor-CE 0.6.3 - now works with PBS and SLURM through SLURM's PBS emulation layer 
    * Update !BeStMan to support "root" SRM transfer protocol - [[https://jira.opensciencegrid.org/browse/SOFTWARE-1379][SOFTWARE-1379]]
-   * Update to !GlideinWMS 3.2.3 - [[http://glideinwms.fnal.gov/doc.prd/history.html][several bug fixes]]
+   * Update to !GlideinWMS 3.2.3 - [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/history.html][several bug fixes]]
    * Update to HTCondor 8.0.6 - [[http://research.cs.wisc.edu/htcondor/manual/v8.0.6/10_3Stable_Release.html#SECTION001131000000000000000][several bug fixes]]
    * Update to xrootd 3.3.6 - [[https://github.com/xrootd/xrootd/blob/v3.3.6/docs/ReleaseNotes.txt][minor bug fixes]]
 

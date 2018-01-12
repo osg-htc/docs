@@ -272,7 +272,7 @@ OSG Software
 HTCondor documents:
    * [[http://research.cs.wisc.edu/htcondor/manual/v8.1/3_6Security.html][HTCondor security]]
    * [[http://research.cs.wisc.edu/htcondor/manual/v8.1/3_6Security.html#sec:GSI-Authentication][GSI Authentication in HTCondor]]
-   * [[http://glideinwms.fnal.gov/doc.prd/components/gsi.html][GSI authentication in Glidein WMS systems]]
+   * [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/components/gsi.html][GSI authentication in Glidein WMS systems]]
 
 ---+ Comments
 %COMMENT{type="tableappend"}%

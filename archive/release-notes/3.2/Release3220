@@ -7,7 +7,7 @@
 This release contains:
    * GIP now produces information about the HTCondor-CE for BDII (See the known issues section below for a manual configuration step)
    * [[https://www-auth.cs.wisc.edu/lists/htcondor-users/2015-February/msg00055.shtml][HTCondor 8.2.7]]
-   * [[http://glideinwms.fnal.gov/doc.prd/history.html][GlideinWMS 3.2.8]] (improved monitoring and bug fixes)
+   * [[http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/history.html][GlideinWMS 3.2.8]] (improved monitoring and bug fixes)
    * Based on request of OSG VOs, a subset of EGI.EU CVMFS repositories are now accessible by default with the oasis-config RPM
    * Several updates to osg-configure
    * Security fixes for HTCondor 8.3.2 in upcoming
