@@ -978,9 +978,9 @@ namespaces until this is resolved.</p>
 <p>Once you have the host configured properly, log in as an ordinary
 unprivileged user and verify that singularity works:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity <span class="se">\</span>
-                <span class="nb">exec</span> -C -H <span class="nv">$HOME</span>:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 <span class="se">\</span>
+                <span class="nb">exec</span> -c --ipc --pid -H <span class="nv">$HOME</span>:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 <span class="se">\</span>
                 ps -ef
-<span class="go">WARNING: Container does not have an exec helper script, calling &#39;cat&#39; directly</span>
+<span class="go">WARNING: Container does not have an exec helper script, calling &#39;ps&#39; directly</span>
 <span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
 <span class="go">user         1     0  0 21:34 ?        00:00:00 ps -ef</span>
 </pre></div>
@@ -1069,9 +1069,9 @@ defaults.</p>
 <h2 id="validating-singularity_1">Validating singularity<a class="headerlink" href="#validating-singularity_1" title="Permanent link">&para;</a></h2>
 <p>After singularity is installed, as an ordinary user run the following
 command to verify it:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> singularity <span class="nb">exec</span> -C -H <span class="nv">$HOME</span>:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 <span class="se">\</span>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> singularity <span class="nb">exec</span> -c --ipc --pid -H <span class="nv">$HOME</span>:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 <span class="se">\</span>
                 ps -ef
-<span class="go">WARNING: Container does not have an exec helper script, calling &#39;cat&#39; directly</span>
+<span class="go">WARNING: Container does not have an exec helper script, calling &#39;ps&#39; directly</span>
 <span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
 <span class="go">user         1     0  0 21:34 ?        00:00:00 ps -ef</span>
 </pre></div>
