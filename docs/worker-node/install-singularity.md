@@ -113,9 +113,9 @@ unprivileged user and verify that singularity works:
 
 ```console
 user@host $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity \
-                exec -C -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
+                exec -c --ipc --pid -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
                 ps -ef
-WARNING: Container does not have an exec helper script, calling 'cat' directly
+WARNING: Container does not have an exec helper script, calling 'ps' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
 user         1     0  0 21:34 ?        00:00:00 ps -ef
 ```
@@ -196,9 +196,9 @@ After singularity is installed, as an ordinary user run the following
 command to verify it:
 
 ```console
-user@host $ singularity exec -C -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
+user@host $ singularity exec -c --ipc --pid -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
                 ps -ef
-WARNING: Container does not have an exec helper script, calling 'cat' directly
+WARNING: Container does not have an exec helper script, calling 'ps' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
 user         1     0  0 21:34 ?        00:00:00 ps -ef
 ```
