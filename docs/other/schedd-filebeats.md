@@ -31,7 +31,7 @@ The configuration of filebeats revolves around this file `/etc/filebeat/filebeat
 
         :::file
         - input_type: log
-	enabled: false
+        enabled: false
         paths:
         - /var/log/condor/XferStatsLog
 
