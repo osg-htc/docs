@@ -876,30 +876,28 @@
 <ol>
 <li>
 <p>The <code>Filebeat Prospectors</code> section, the input should look like this:</p>
-<div class="codehilite"><pre><span></span>- input_type: log
+<div class="codehilite"><pre><span></span>filebeat.prospectors:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/condor/XferStatsLog
 </pre></div>
 
 
-<p>enabled: false
-    paths:
-    - /var/log/condor/XferStatsLog</p>
 </li>
 <li>
 <p>The output logstash section should look like:</p>
 <div class="codehilite"><pre><span></span>#----------------------------- Logstash output --------------------------------
 output.logstash:
-# The Logstash hosts
-hosts: [&quot;gracc.opensciencegrid.org:6938&quot;]
-
-# Optional SSL. By default is off. 
-# List of root certificates for HTTPS server verifications
-ssl.certificate_authorities: [&quot;/etc/grid-security/certificates/cilogon-osg.pem&quot;]
-
-#  Certificate for SSL client authentication
-ssl.certificate: &quot;/etc/grid-security/hostcert.pem&quot;
-
-# Client Certificate Key
-ssl.key: &quot;/etc/grid-security/hostkey.pem&quot;
+  # The Logstash hosts
+  hosts: [&quot;gracc.opensciencegrid.org:6938&quot;]
+  # Optional SSL. By default is off. 
+  # List of root certificates for HTTPS server verifications
+  ssl.certificate_authorities: [&quot;/etc/grid-security/certificates/cilogon-osg.pem&quot;]
+  #  Certificate for SSL client authentication
+  ssl.certificate: &quot;/etc/grid-security/hostcert.pem&quot;
+  # Client Certificate Key
+  ssl.key: &quot;/etc/grid-security/hostkey.pem&quot;
 </pre></div>
 
 
@@ -920,23 +918,17 @@ ssl.key: &quot;/etc/grid-security/hostkey.pem&quot;
 
 </li>
 <li>
-<p>The general section should look like this:</p>
+<p>The general section should look like this, where <code>hostname</code> should be replaced by the hostname of the machine you are installing filebeats on.</p>
 <div class="codehilite"><pre><span></span>#================================ General =====================================
-
 name: <span style="color:red">&lt;hostname&gt;</span>
 tags: [&quot;xfer-log&quot;]
-
-# Optional fields that you can specify to add additional information to the
-# output.
-#fields:
-#  env: staging
 </pre></div>
 
 
 </li>
 <li>
 <p>Test that the configuration is correct by running:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> filebeat.sh -configtest -e
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> filebeat -configtest -e
 </pre></div>
 
 
