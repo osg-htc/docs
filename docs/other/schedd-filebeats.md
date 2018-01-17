@@ -30,28 +30,26 @@ The configuration of filebeats revolves around this file `/etc/filebeat/filebeat
 1. The `Filebeat Prospectors` section, the input should look like this:
 
         :::file
-        - input_type: log
-        enabled: false
-        paths:
-        - /var/log/condor/XferStatsLog
+        filebeat.prospectors:
+        - type: log
+          enabled: true
+          paths:
+            - /var/log/condor/XferStatsLog
 
 1. The output logstash section should look like:
 
         :::file
         #----------------------------- Logstash output --------------------------------
         output.logstash:
-        # The Logstash hosts
-        hosts: ["gracc.opensciencegrid.org:6938"]
- 
-        # Optional SSL. By default is off. 
-        # List of root certificates for HTTPS server verifications
-        ssl.certificate_authorities: ["/etc/grid-security/certificates/cilogon-osg.pem"]
-
-        #  Certificate for SSL client authentication
-        ssl.certificate: "/etc/grid-security/hostcert.pem"
- 
-        # Client Certificate Key
-        ssl.key: "/etc/grid-security/hostkey.pem"
+          # The Logstash hosts
+          hosts: ["gracc.opensciencegrid.org:6938"]
+          # Optional SSL. By default is off. 
+          # List of root certificates for HTTPS server verifications
+          ssl.certificate_authorities: ["/etc/grid-security/certificates/cilogon-osg.pem"]
+          #  Certificate for SSL client authentication
+          ssl.certificate: "/etc/grid-security/hostcert.pem"
+          # Client Certificate Key
+          ssl.key: "/etc/grid-security/hostkey.pem"
 
 1. Comment out all of the `Elasticsearch output` since we are using LogStash
 
@@ -66,23 +64,17 @@ The configuration of filebeats revolves around this file `/etc/filebeat/filebeat
         #username: "elastic"
         #password: "changeme"
 
-1. The general section should look like this:
+1. The general section should look like this, where `hostname` should be replaced by the hostname of the machine you are installing filebeats on.
 
         :::file
         #================================ General =====================================
-
         name: %RED%<hostname>%ENDCOLOR%
         tags: ["xfer-log"]
-
-        # Optional fields that you can specify to add additional information to the
-        # output.
-        #fields:
-        #  env: staging
 
 1. Test that the configuration is correct by running:
  
         :::console
-        root@host # filebeat.sh -configtest -e
+        root@host # filebeat -configtest -e
 
 1. Start the filebeats services:
 
