@@ -43,7 +43,7 @@ In case the user can be mapped to more than one account, specify it explicitly i
 user@host $ gsissh -o GSSAPIDelegateCredentials=yes ouser.%RED%VO%ENDCOLOR%@oasis-login.opensciencegrid.org
 ```
 
-Instead of putting <verbatim>-o GSSAPIDelegateCredentials`yes</verbatim> on the command line, you can put it in your =~/.ssh/config` like this:
+Instead of putting `-o GSSAPIDelegateCredentials=yes` on the command line, you can put it in your `~/.ssh/config` like this:
 
 ``` console
 Host oasis-login.opensciencegrid.org
