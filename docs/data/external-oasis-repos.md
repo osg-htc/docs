@@ -194,10 +194,10 @@ VO should open a GGUS ticket following EGI's [PROC20](https://wiki.egi.eu/wiki/P
 Replacing an Existing OASIS Repository Server
 ---------------------------------------
 
-There are two recommended ways to replace the server for an existing opensciencegrid.org or osgstorage.org repository, one without GOC intervention and one with:
+There are two recommended ways to replace the server for an existing ``*.opensciencegrid.org`` or ``*.osgstorage.org`` repository, one without GOC intervention and one with:
 
 1. In order to do it without GOC intervention, plan on reusing the original fully qualified domain name for the server that is registered with the GOC.
-   If you are recreating the repository on the same machine, use ``cvmfs_server rmfs -p %RED%example.opensciencegrid.org%ENDCOLOR%`` to remove the repository while preserving the data and keys.
+   If you are recreating the repository on the same machine, use ``cvmfs_server rmfs -p example.opensciencegrid.org`` to remove the repository configuration while preserving the data and keys.
    Otherwise copy the keys from /etc/cvmfs/keys/%RED%example.opensciencegrid.org%ENDCOLOR%.* and the data from /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR% from the old server to the new, making sure that no publish operations happen on the old server while you copy the data.
    Then use ``cvmfs_server import`` instead of ``cvmfs_server mkfs`` in the above instructions for creating the repository, which reuses old data and keys.
    If you run an old and a new machine in parallel for a while, make sure that when you put the new machine into production that it has had at least as many publishes as the old machine, because the revision number is not allowed to decrease.
@@ -206,7 +206,7 @@ There are two recommended ways to replace the server for an existing openscience
     Follow the normal install instructions, but for step 2 in the "Hosting a Repository on OASIS" section above,
     instead of asking in the GOC ticket to create a new repository ask to change to the new URL.
     After they have done that, continue with the other steps, but there's no need for step 6.
-    When you do the publish in step 5, add a ``-n NNNN`` option where NNNN is a revision number greater than the number on the existing repository.
+    When you do the publish in step 5, add a ``-n NNNN`` option where ``NNNN`` is a revision number greater than the number on the existing repository.
     That number can be found by this command on a client machine:
 
         :::console
