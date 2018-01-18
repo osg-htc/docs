@@ -191,12 +191,28 @@ Once the repository is fully replicated on the OSG, the VO may proceed in publis
 If the repository ends in `.opensciencegrid.org`, the VO may ask for it to be replicated outside the US.  The
 VO should open a GGUS ticket following EGI's [PROC20](https://wiki.egi.eu/wiki/PROC20).
 
-Changing the URL of a Repository on OASIS
------------------------------------------
+Replacing an Existing OASIS Repository Server
+---------------------------------------
 
-If necessary, it is possible to change the URL of the repository server; simply have the repository administrator
-open a support ticket with the new value, and OSG operations will update OIM's OASIS repository URL for the VO.
-The GOC Stratum-1 will then be updated within an hour.
+There are two recommended ways to replace the server for an existing opensciencegrid.org or osgstorage.org repository, one without GOC intervention and one with:
+
+1. In order to do it without GOC intervention, plan on reusing the original fully qualified domain name for the server that is registered with the GOC.
+   If you are recreating the repository on the same machine, use ``cvmfs_server rmfs -p %RED%example.opensciencegrid.org%ENDCOLOR%`` to remove the repository while preserving the data and keys.
+   Otherwise copy the keys from /etc/cvmfs/keys/%RED%example.opensciencegrid.org%ENDCOLOR%.* and the data from /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR% from the old server to the new, making sure that no publish operations happen on the old server while you copy the data.
+   Then use ``cvmfs_server import`` instead of ``cvmfs_server mkfs`` in the above instructions for creating the repository, which reuses old data and keys.
+   If you run an old and a new machine in parallel for a while, make sure that when you put the new machine into production that it has had at least as many publishes as the old machine, because the revision number is not allowed to decrease.
+
+1. Otherwise you can recreate a repository from scratch on a new server, and for that it works better to use a new fully qualified domain name for the server because it results in some necessary reinitialization on the GOC servers.
+    Follow the normal install instructions, but for step 2 in the "Hosting a Repository on OASIS" section above,
+    instead of asking in the GOC ticket to create a new repository ask to change to the new URL.
+    After they have done that, continue with the other steps, but there's no need for step 6.
+    When you do the publish in step 5, add a ``-n NNNN`` option where NNNN is a revision number greater than the number on the existing repository.
+    That number can be found by this command on a client machine:
+
+        :::console
+        user@host $ attr -qg revision /cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%
+
+    After enough time has elapsed for the publish to propagate to clients, typically around 15 minutes, verify that the new chosen revision has reached a client.
 
 Removing a Repository from OASIS
 --------------------------------
