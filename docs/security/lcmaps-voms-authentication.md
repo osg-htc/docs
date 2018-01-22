@@ -27,7 +27,7 @@ To install the LCMAPS VOMS plugin, make sure that your host is up to date before
 1. Install `lcmaps`, the default mapfile, and the configuration tools:
 
         :::console
-        [root@server]# yum install lcmaps vo-client-lcmaps-voms osg-configure-misc
+        root@host # yum install lcmaps vo-client-lcmaps-voms osg-configure-misc
 
 
 Configuring the LCMAPS VOMS Plugin
@@ -36,7 +36,7 @@ Configuring the LCMAPS VOMS Plugin
 The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication. If you are using OSG 3.3 packages, there are software-specific instructions that must be followed for [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../data/gridftp), and [XRootD](../data/install-xrootd). To check if you are running OSG 3.3, run the following command:
 
 ``` console
-[root@server]# rpm -q --queryformat="%{VERSION}\n" osg-release
+root@host # rpm -q --queryformat="%{VERSION}\n" osg-release
 ```
 
 Additionally, there is [optional configuration](#optional-configuration) if you need to make changes to the default mappings.
@@ -82,12 +82,12 @@ Making changes to the OSG configuration files in the `/etc/osg/config.d` directo
 1.  Validate the configuration settings:
 
         :::console
-        [root@server]# osg-configure -v
+        root@host # osg-configure -v
 
 1.  Once the validation command succeeds without errors, apply the configuration settings:
 
         :::console
-        [root@server]# osg-configure -c
+        root@host # osg-configure -c
 
 
 
@@ -127,21 +127,28 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
     1. Find where `GRIDMAP` is set:
 
             :::console
-            [root@ce]# condor_ce_config_val -v GRIDMAP
+            root@host # condor_ce_config_val -v GRIDMAP
 
     1. If the above command returns `Not defined: GRIDMAP`, skip to step 4. Otherwise, delete the line that sets the `GRIDMAP` configuration variable
     1. Reconfigure HTCondor-CE:
 
             :::console
-            [root@ce]# condor_ce_reconfig
+            root@host # condor_ce_reconfig
 
-1. Remove edg-mkgridmap and related packages:
+1. If running OSG 3.3, disable edg-mkgridmap:
 
         :::console
-        [root@ce]# yum erase edg-mkgridmap
+        root@host # service edg-mkgridmap stop
+        root@host # chkconfig edg-mkgridmap off
+
+1. If running OSG 3.4, remove edg-mkgridmap and related packages:
+
+        :::console
+        root@host # yum erase edg-mkgridmap
 
     !!! warning
-        In the output from this command, yum should **not** list other packages than the one. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their OSG 3.3 (or 3.4) versions (they should have ".osg33" or ".osg34" in their versions), and try again.
+        In the output from this command, yum should **not** list other packages than the one.
+        If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest OSG 3.4 versions (they should have ".osg34" in their versions), and try again.
 
 
 #### Mapping VOs
@@ -232,22 +239,22 @@ To validate the LCMAPS VOMS plugin by itself, use the following procedure to tes
 1.  Install the `llrun` and `voms-clients` packages:
 
         :::console
-        [root@host]# yum install llrun voms-clients
+        root@host # yum install llrun voms-clients
 
 1.  As an unprivileged user, create a VOMS proxy (filling in `<YOUR_VO>` with a VO you are a member of):
 
         :::console
-        [you@client]$ voms-proxy-init -voms %RED%<YOUR_VO>%ENDCOLOR%
+        user@host $ voms-proxy-init -voms %RED%<YOUR_VO>%ENDCOLOR%
 
 1.  Verify that your credentials are mapped as expected:
 
         :::console
-        [you@client]$ llrun -s -l mode=pem,policy=authorize_only,db=/etc/lcmaps.db \
+        user@host $ llrun -s -l mode=pem,policy=authorize_only,db=/etc/lcmaps.db \
             -p/tmp/x509up_u`id -u`
 
 If you did not get correctly mapped, check your proxy's FQAN by running:
 ``` console
-[you@client]$ voms-proxy-info -fqan
+user@host $ voms-proxy-info -fqan
 ```
 and make sure it matches one of the patterns in `/etc/grid-security/voms-mapfile` or `/usr/share/osg/voms-mapfile-default`, and does not match any patterns in `/etc/grid-security/ban-voms-mapfile`.
 
