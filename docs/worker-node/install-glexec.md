@@ -26,7 +26,7 @@ Many worker node clusters use shared file systems like NFS for much of their sof
 
 For more information regarding pilot-based systems and glexec:
 
-1. [glideinWMS - The glidein based WMS](http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.html)
+1. [glideinWMS - The glidein based WMS](http://glideinwms.fnal.gov/doc.html)
 2. [Addressing the pilot security problem with gLExec (pdf)](http://iopscience.iop.org/1742-6596/119/5/052029/pdf/jpconf8_119_052029.pdf)
 
 Engineering Considerations

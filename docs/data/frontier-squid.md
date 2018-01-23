@@ -48,7 +48,7 @@ Before starting the installation process, consider the following points (consult
 -   **User IDs:** If it does not exist already, the installation will create the `squid` Linux user
 -   **Network ports:** Frontier squid communicates on ports 3128 (TCP) and 3401 (UDP)
 -   **Host choice:** If you will be supporting the Frontier application at your site, review the
-[upstream documentation Hardware considerations section](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Hardware) to determine how to size your equipment.
+[upstream documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Hardware) to determine how to size your equipment.
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 

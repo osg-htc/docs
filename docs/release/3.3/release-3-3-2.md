@@ -8,7 +8,7 @@ Summary of changes
 
 This release contains:
 
--   [GlideinWMS 3.2.11.2](http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/history.html)
+-   [GlideinWMS 3.2.11.2](http://glideinwms.fnal.gov/doc.prd/history.html)
 -   [XRootD 4.2.3](https://github.com/xrootd/xrootd/blob/v4.2.3/docs/ReleaseNotes.txt)
 -   [HTCondor 8.4.0](https://www-auth.cs.wisc.edu/lists/htcondor-users/2015-September/msg00029.shtml)
 -   StashCache 0.6

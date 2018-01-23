@@ -106,7 +106,7 @@ It is useful to test *manual* submission of jobs from inside and outside of your
 Start GlideinWMS Pilot Submissions
 ----------------------------------
 
-To begin running [GlideinWMS](http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/) pilot jobs at your site, e-mail <osg-gfactory-support@physics.ucsd.edu> and tell them that you want to start accepting Glideins. Please provide them with the following information:
+To begin running [GlideinWMS](http://glideinwms.fnal.gov/) pilot jobs at your site, e-mail <osg-gfactory-support@physics.ucsd.edu> and tell them that you want to start accepting Glideins. Please provide them with the following information:
 
 -   The fully qualified hostname of the CE
 -   Resource/WLCG name
