@@ -8,7 +8,7 @@ Summary of changes
 
 This release contains:
 
--   CA Certificates based on [IGTF 1.88](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+-   CA Certificates based on [IGTF 1.89](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
     - Discontinued expiring UGRID (2008) root CA (UA)
 -   SHA256 checksums are provided in addition to the MD5 checksums
 
