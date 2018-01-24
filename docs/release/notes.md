@@ -8,6 +8,7 @@ Release Notes
 
 | Version                          | Date       | Summary                                                                          |
 |:---------------------------------|:-----------|:---------------------------------------------------------------------------------|
+| [3.4.6-2](3.4/release-3-4-6-2)   | 2018-01-24 | IGTF 1.89                                                                        |
 | [3.4.6](3.4/release-3-4-6)       | 2017-12-21 | XRootD 4.8.0, CernVM-FS 2.4.4, GlideinWMS 3.2.20, osg-pki-tools 2.1.2, HTCondor-CE 3.0.4, osg-configure 2.2.3 |
 | [3.4.5-4](3.4/release-3-4-5-4)   | 2017-12-20 | VO Package v77                                                                   |
 | [3.4.5-3](3.4/release-3-4-5-3)   | 2017-11-29 | IGTF 1.88                                                                        |
@@ -28,6 +29,7 @@ Release Notes
 
 | Version                          | Date       | Summary                                                                          |
 |:---------------------------------|:-----------|:---------------------------------------------------------------------------------|
+| [3.3.31-2](3.3/release-3-3-31-2) | 2018-01-24 | IGTF 1.89                                                                        |
 | [3.3.31](3.3/release-3-3-31)     | 2017-12-21 | XRootD 4.8.0, CernVM-FS 2.4.4, GlideinWMS 3.2.20, osg-pki-tools 2.1.2, lcmaps 1.6.6-1.9, GridFTP-HDFS 1.1.1, HTCondor-CE 2.2.4, osg-configure 1.10.3 |
 | [3.3.30-4](3.3/release-3-3-30-4) | 2017-12-20 | VO Package v77                                                                   |
 | [3.3.30-3](3.3/release-3-3-30-3) | 2017-11-29 | IGTF 1.88                                                                        |
@@ -67,11 +69,11 @@ Release Notes
 | [3.3.10](3.3/release-3-3-10)     | 2016-03-08 | VO Package v64, IGTF 1.72, osg-ca-certs-updater 1.4, BLAHP 1.18.17, osg-configure 1.2.6, HTCondor 8.4.4, GUMS 1.5.2, Gratia probes 1.15.0, StashCache 0.6, AutoPyFactory 2.4.6, XRootD-HDFS 1.8.7, GridFTP-HDFS 3.3, HTCondor CE 2.0.2; Upcoming: HTCondor 8.5.2 |
 | [3.3.9](3.3/release-3-3-9)       | 2016-02-09 | GSI-OpenSSH 5.7, glideinWMS 3.2.12, XRootD LCMAPS 1.2.1, XRootD HDFS plugin 1.8.6, lcmaps-plugins-scas-client 0.5.6, IGTF 1.71, VO Package v63, VOMS admin 2.7.0, RSV-perfsonar 1.1.2; Upcoming: CVMFS 2.2.0, CVMFS over StashCache |
 | [3.3.8](3.3/release-3-3-8)       | 2016-01-12 | HTCondor CE 2.0, HTCondor 8.4.3, cctools 4.4.3, VO Package v62, MyProxy 6.1.15, gratia 1.16.2, osg-pki-tools 1.2.14, condor-cron 1.0.11; Upcoming: HTCondor 8.5.1 |
-| [3.3.7](3.3/release-3-3-7)       | 2015-12-15 | osg-pki-tools-1.2.13 |
-| [3.3.6](3.3/release-3-3-6)       | 2015-12-08 | IGTF 1.70, voms-admin-server-2.7.0-1.17, condor-8.4.2-1.2 |
+| [3.3.7](3.3/release-3-3-7)       | 2015-12-15 | osg-pki-tools-1.2.13                                                             |
+| [3.3.6](3.3/release-3-3-6)       | 2015-12-08 | IGTF 1.70, voms-admin-server-2.7.0-1.17, condor-8.4.2-1.2                        |
 | [3.3.5](3.3/release-3-3-5)       | 2015-11-19 | HTCondor CE 1.20, HTCondor 8.4.2, lcmaps-plugins-scas-client 0.5.5, osg-configure 1.2.4, RSV 3.12.5 |
 | [3.3.4](3.3/release-3-3-4)       | 2015-11-10 | CILogon CA certs, CVMFS support approved repos, lcmaps process tracking, osg-ca-cert-updater 1.3, RSV perfSONAR probe, RSV 3.12.0, EL7: Frontier Squid and MyProxy |
-| [3.3.3](3.3/release-3-3-3)       | 2015-11-03 | IGTF 1.69 |
+| [3.3.3](3.3/release-3-3-3)       | 2015-11-03 | IGTF 1.69                                                                        |
 | [3.3.2](3.3/release-3-3-2)       | 2015-10-13 | GlideinWMS 3.2.11.2, XRootD 4.2.3, HTCondor 8.4.0, StashCache 0.6, GUMS 1.5.1, HTCondor-CE 1.16, GIP 1.3.11, osg-configure 1.2.2, RSV 3.10.4, lcmaps-plugins-mount-under-scratch, edg-mkgridmap 4.0.3, IGTF 1.68 |
 | [3.3.1](3.3/release-3-3-1)       | 2015-09-08 | GUMS 1.5.0, HTCondor 8.3.8, HTCondor CE 1.15, gridFTP-HDFS checksum verification, IGTF 1.67, StashCache 0.4 |
 | [3.3.0](3.3/release-3-3-0)       | 2015-08-11 | EL7 support for worker nodes, XRootD 4.2.2, 2 patches to HTCondor 8.3.6, lcmaps-plugins-verify-proxy 1.5.7, lcmaps-plugins-scas-client 0.5.5, VO Package v61 |
