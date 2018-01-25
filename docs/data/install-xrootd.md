@@ -206,7 +206,7 @@ fi
 The procedure for starting a second instance differs between EL 6 and EL 7. This
 section is the procedure for EL 6.
 
-Now, we have to change **`/etc/sysconfig/xrootd`** on the redirector node (%RED%hostA%ENDCOLOR%) to run multiple instances of xrootd. The second instance of xrootd will be named "cns" and will be used for SSI.
+Now, we have to change **`/etc/sysconfig/xrootd`** on the redirector node (%RED%hostA%ENDCOLOR%) to run multiple instances of XRootD. The second instance of XRootD will be named "cns" and will be used for SSI.
 
 ```file
 XROOTD\_USER=xrootd 
@@ -220,7 +220,7 @@ CMSD\_INSTANCES="default"
 FRMD\_INSTANCES="default" 
 ```
 
-Now, we can start xrootd cluster executing the following commands. On redirector you will see:
+Now, we can start XRootD cluster executing the following commands. On redirector you will see:
 
 ```console
 root@host # service xrootd start 
@@ -318,7 +318,7 @@ plugins. In this document, we will cover two options for security:
 
 Note: On the data nodes, the files will actually be owned by unix user `xrootd`
 (or other daemon user), not as the user authenticated to, under most
-circumstances. xrootd will verify the permissions and authorization based on the
+circumstances. XRootD will verify the permissions and authorization based on the
 user that the security plugin authenticates you to (for instance, your unix user
 for option 1 or your gums id for option 2), but, internally, the data node files
 will be owned by the `xrootd` user.
@@ -408,7 +408,7 @@ sure they are writable by `xrootd` user (or the daemon user, if you have changed
 it). Files in localroot on the data nodes are normally owned by `xrootd` not by
 the authenticated username.
 
-After making all the changes, please, restart xrootd and cmsd daemons on all nodes.
+After making all the changes, please, restart XRootD and cmsd daemons on all nodes.
 
 #### Testing an XRootD cluster with simple security enabled
 
@@ -448,9 +448,9 @@ root@host # su - %RED%user%ENDCOLOR%
 
 #### Security option 2: Shared keys
 
-If you want to enable security for access to xrootd via xrootdfs you will need to modify xrootd configuration and perform several steps to make xrootdfs secured.
+If you want to enable security for access to XRootD via xrootdfs you will need to modify XRootD configuration and perform several steps to make xrootdfs secured.
 
-1. On the xrootd redirector node, execute the following command:
+1. On the XRootD redirector node, execute the following command:
 
         :::console
         root@host # xrdsssadmin -k %RED%<my_key_name>%ENDCOLOR% -u anybody -g usrgroup add %RED%<keyfile>%ENDCOLOR%
@@ -469,7 +469,7 @@ If you want to enable security for access to xrootd via xrootdfs you will need t
         :::console
         root@host # xrootdfs %RED%/mnt/xrootd %ENDCOLOR% fuse rdr=xroot://%RED%redirector1.domain.com%ENDCOLOR%:1094/%RED%/path/redirector1%ENDCOLOR%,uid=xrootd,sss=%RED%keyfile%ENDCOLOR%0 0
 
-1. On all xrootd data servers and redirector nodes, modify xrootd configuration (**`/etc/xrootd/xrootd-clustered.cfg`**) by adding the following segment:
+1. On all XRootD data servers and redirector nodes, modify XRootD configuration (**`/etc/xrootd/xrootd-clustered.cfg`**) by adding the following segment:
 
         :::file
         # ENABLE_SECURITY_BEGIN
@@ -483,11 +483,11 @@ If you want to enable security for access to xrootd via xrootdfs you will need t
            ofs.authorize
            # ENABLE_SECURITY_END
 
-1. On all xrootd data server nodes, edit `/etc/xrootd/auth_file` to add authorized users of the form `u %RED%username%ENDCOLOR% %RED%/directoryname%ENDCOLOR% lr` where "lr" is the permission set.
+1. On all XRootD data server nodes, edit `/etc/xrootd/auth_file` to add authorized users of the form `u %RED%username%ENDCOLOR% %RED%/directoryname%ENDCOLOR% lr` where "lr" is the permission set.
 
 1. Copy %RED%keyfile%ENDCOLOR% from redirector node to every data server node and the xrootdfs node. Make sure that this file is owned by the `xrootd` user.
 
-1. Restart xrootd cluster by restarting all the relevant daemons.
+1. Restart XRootD cluster by restarting all the relevant daemons.
 
 1. On xroodfs node execute mount:
 
@@ -527,9 +527,9 @@ lists. See the following documents for instructions:
 yum install xrootd-lcmaps
 ```
 
-Note that the xrootd-lcmaps is usually coupled to a specific version of xrootd,
+Note that the xrootd-lcmaps is usually coupled to a specific version of XRootD,
 so make sure that you install xrootd-lcmaps from the same repository that you
-install xrootd from. Otherwise, you may have dependency issues due to differing
+install XRootD from. Otherwise, you may have dependency issues due to differing
 versions of shared libraries.
 
 **Create host certificates**
@@ -545,7 +545,7 @@ host certificate, you can use a copy of that:
  chmod 400 /etc/grid-security/xrd/xrdkey.pem
 ```
 
-This certificate should be owned by xrootd and located in `/etc/grid-security/xrd`.
+This certificate should be owned by `xrootd` and located in `/etc/grid-security/xrd`.
 
 **Authorization File**
 
@@ -603,7 +603,7 @@ Last server error 3010 ('cannot obtain credentials for protocol: Secgsi: ErrPars
 Error accessing path/file for root://fermicloud121.fnal.gov/tmp/test2
 ```
 
-After running `voms-proxy-init` or `grid-proxy-init` to initialize your x509 certificate (usually found in `/tmp/x509up_uUID`), the `xrdcp` command should execute cleanly. For instance, the following shows an example of a user creating a voms certificate and copying to the xrootd client and then re-executing the xrdcp command.
+After running `voms-proxy-init` or `grid-proxy-init` to initialize your x509 certificate (usually found in `/tmp/x509up_uUID`), the `xrdcp` command should execute cleanly. For instance, the following shows an example of a user creating a voms certificate and copying to the XRootD client and then re-executing the xrdcp command.
 
 ``` console
 user@host $ voms-proxy-init -voms Engage -valid 999:0
@@ -637,7 +637,7 @@ yum install --enablerepo=osg-contrib xrootd-cmstfc
 ```
 
 You will need to add your `storage.xml` to `/etc/xrootd/storage.xml` and then
-add the following line to your xrootd configuration:
+add the following line to your XRootD configuration:
 
 ``` file
 # Integrate with CMS TFC, placed in /etc/xrootd/storage.xml
@@ -682,9 +682,9 @@ The FRM deals with two major mechanisms:
 -   local disk
 -   remote servers
 
-The description of fully functional multiple xrootd clusters is beyond the scope
+The description of fully functional multiple XRootD clusters is beyond the scope
 of this document. In order to have this fully functional system you will need a
-global redirector and at least one remote xrootd cluster from where files could
+global redirector and at least one remote XRootD cluster from where files could
 be moved to the local cluster.
 
 Below are the modifications you should make in order to enable FRM on your local
@@ -742,7 +742,7 @@ root@host # yum install osg-gridftp-xrootd
 For information on how to configure authentication for your GridFTP installation, please refer to
 the [configuring authentication section of the GridFTP guide](gridftp#configuring-authentication).
 
-Edit `/etc/sysconfig/xrootd-dsi` to set `XROOTD_VMP` to use your Xrootd redirector.
+Edit `/etc/sysconfig/xrootd-dsi` to set `XROOTD_VMP` to use your XRootD redirector.
 
     :::bash
     export XROOTD_VMP="%RED%redirector:1094:/local_path=/remote_path%ENDCOLOR%"

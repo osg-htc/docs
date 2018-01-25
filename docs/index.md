@@ -89,7 +89,7 @@ installed [CVMFS](worker-node/install-cvmfs) on your worker nodes.
         -   [Hadoop Overview](data/hadoop-overview): HDFS information, planning, and guides
     -   XRootD:
         -   [XRootd Overview](data/xrootd-overview): XRootD information, planning, and guides
-        -   [Install Xrootd Server](data/install-xrootd): XRootD redirector installation
+        -   [Install XRootD Server](data/install-xrootd): XRootD redirector installation
 -   RSV monitoring to monitor and report to OSG on the health of your site
     -   [Install RSV](monitoring/install-rsv)
 -   [Install the GlideinWMS VO Frontend](other/install-gwms-frontend) if your want your users’ jobs to run on the OSG

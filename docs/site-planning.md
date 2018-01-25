@@ -102,16 +102,16 @@ Data Service
 There are two types of data services on the OSG:
 
 - A *cache* pulls in data on read-demand, keeping it locally for further use.  We provide support for the
-  [Squid HTTP](data/frontier-squid) cache for smaller working set sizes and software called [Xrootd](http://xrootd.org)
+  [Squid HTTP](data/frontier-squid) cache for smaller working set sizes and software called [XRootD](http://xrootd.org)
   for larger datasets.  Almost every site on the OSG installs a Squid cache.
 - A **Storage Element** provides remote, POSIX-like access to your site storage service for reading and writing of data.
-  All Storage Element implementations in the OSG support the GridFTP, Xrootd, and HTTPs protocols.
+  All Storage Element implementations in the OSG support the GridFTP, XRootD, and HTTPs protocols.
 
 The storage element model is chosen mostly by sites that support either ATLAS or CMS VOs; otherwise, only caches are
 typically provided.  Sites that need a SE which have existing POSIX-like storage (e.g., Lustre, GPFS) layer remote
 access services (such as [GridFTP](data/gridftp)) on top of the existing storage.  For sites wanting petascale storage -
 but without an existing install - we provide support for [HDFS](data/hadoop-overview) and
-[Xrootd](data/xrootd-overview).
+[XRootD](data/xrootd-overview).
 
 <!-- TODO: these figures were all garbage.  Redraw
 ## Example Configurations

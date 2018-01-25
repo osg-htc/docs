@@ -22,7 +22,7 @@ We broadly break down the server components of the Hadoop SE into three categori
     -   BeStMan SRM: A generic SRM server that can be run on top of any POSIX-like filesystem. This is run in "gateway" mode, which limits the amount of the SRM protocol implemented. To date, this has been sufficient to LHC VOs.
     -   Globus GridFTP: The standard GridFTP from Globus. We use a plug-in module (using the Globus Direct Storage Interface) that allows the GridFTP process to use the HDFS C-bindings directly.
     -   Gratia probe: Gratia is an accounting system that records batch system and transfer records to a database. The records are collected by a client program called a "probe" which runs on the GridFTP server. It parses the GridFTP server's log files and creates transfer records.
-    -   Xrootd server plugin: Xrootd is an extremely flexible and powerful data server popular in the high energy physics community. There exists a HDFS plugin for Xrootd; integrating with Xrootd provides a means to export HDFS securely outside the local cluster, as another Xrootd plugin provides GSI-based authentication and authorization.
+    -   XRootD server plugin: XRootD is an extremely flexible and powerful data server popular in the high energy physics community. There exists a HDFS plugin for XRootD; integrating with XRootD provides a means to export HDFS securely outside the local cluster, as another XRootD plugin provides GSI-based authentication and authorization.
 -   HDFS auxiliary:
     -   "Secondary Namenode": Perhaps more aptly called a "checkpoint server". This server downloads the file system image and journal from the namenode, merges the two together, and uploads the new file system image up to the namenode. This is done on a different server in order to reduce the memory footprint of the namenode.
     -   Hadoop Balancer: This is a script (unlike the others, which are daemons) that runs on the namenode. It requests transfers of random blocks between the datanodes. This works until all datanodes have approximately the same percentage of free space. Well-balanced datanodes are necessary for having a healthy cluster.
@@ -76,5 +76,5 @@ There are some ways to improve security of your cluster:
 There are three options to export your data outside your cluster:
 
 -   Globus GridFTP.
--   Xrootd.
+-   XRootD.
 -   HTTP and HTTPS.  OSG utilizes the HTTP(S) protocol implementation built into the XRootD server.

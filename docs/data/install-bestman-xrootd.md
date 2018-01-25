@@ -1,4 +1,4 @@
-Install Bestman Xrootd SE
+Install Bestman XRootD SE
 =========================
 
 !!! warning
@@ -17,7 +17,7 @@ Host and OS
 
 -   OS is Red Hat Enterprise Linux 6, 7, and variants (see [details...](../common/yum.md))
 -   [EPEL](http://fedoraproject.org/wiki/EPEL) repos enabled.
--   A working XRootD Server. See [the xrootd install documentation](install-xrootd) for details.
+-   A working XRootD Server. See [the XRootD install documentation](install-xrootd) for details.
 -   Root access
 
 Users
@@ -29,7 +29,7 @@ This installation will create several users unless they are already created.
 |:----------|:--------------------------------------------------------|
 | `bestman` | Used by Bestman SRM server (needs sudo access).         |
 | `daemon`  | Used by globus-gridftp-server.                          |
-| `xrootd`  | Used by the xrootd client to contact xrootd redirector. |
+| `xrootd`  | Used by the XRootD client to contact XRootD redirector. |
 
 For this package to function correctly, you will have to create the users needed for grid operation. Any user that can be authenticated should be created.
 
@@ -63,7 +63,7 @@ Networking
 Install Instructions
 =-===================
 
-Note that this package is primarily intended for Bestman-Gateway acting as an endpoint for XRootD server. If you have not installed an XRootD server yet, follow the instructions in [the xrootd install documentation](install-xrootd).
+Note that this package is primarily intended for Bestman-Gateway acting as an endpoint for XRootD server. If you have not installed an XRootD server yet, follow the instructions in [the XRootD install documentation](install-xrootd).
 
 
 
@@ -89,9 +89,9 @@ For information on how to configure authentication for your GridFTP installation
 Configuring GridFTP XRootD support
 ----------------------------------
 
- In order to configure GridFTP to work with XRootD, you will need to configure the Data Storage Interface (DSI) module with Xrootd pre-load libraries. This module is used to access Xrootd and POSIX file systems.
+ In order to configure GridFTP to work with XRootD, you will need to configure the Data Storage Interface (DSI) module with XRootD pre-load libraries. This module is used to access XRootD and POSIX file systems.
 
-Edit `/etc/sysconfig/xrootd-dsi` (create it if it is missing) and set XROOTD\_VMP (XRootD Virtual Mount Point) to use your Xrootd redirector.
+Edit `/etc/sysconfig/xrootd-dsi` (create it if it is missing) and set XROOTD\_VMP (XRootD Virtual Mount Point) to use your XRootD redirector.
 
     :::file
     export XROOTD_VMP="%RED%redirector:1094:/local_path=/remote_path%ENDCOLOR%"
@@ -127,9 +127,9 @@ You should now be able to run UNIX commands such as `ls /mnt/xrootd` to see the 
 
 ### (Optional) Configuring secured xrootdfs
 
-If you want to enable security for access to xrootd via xrootdfs you will need to modify xrootd configuration and perform several steps to make xrootdfs secured.
+If you want to enable security for access to XRootD via xrootdfs you will need to modify XRootD configuration and perform several steps to make xrootdfs secured.
 
-1. On the xrootd redirector node, execute the following command:
+1. On the XRootD redirector node, execute the following command:
 
         :::console
         root@host # xrdsssadmin -k %RED%<my_key_name>%ENDCOLOR% -u anybody -g usrgroup add %RED%<keyfile>%ENDCOLOR%
@@ -148,7 +148,7 @@ If you want to enable security for access to xrootd via xrootdfs you will need t
         :::console
         root@host # xrootdfs %RED%/mnt/xrootd %ENDCOLOR" fuse rdr=xroot://%RED%redirector1.domain.com%ENDCOLOR%:1094/%RED%/path/redirector1%ENDCOLOR%,uid=xrootd,sss=%RED%keyfile%ENDCOLOR% 0 0
 
-4. On all xrootd data servers and redirector node, modify xrootd configuration (**`/etc/xrootd/xrootd-clustered.cfg`**) by adding the following segment: 
+4. On all XRootD data servers and redirector node, modify XRootD configuration (**`/etc/xrootd/xrootd-clustered.cfg`**) by adding the following segment: 
 
         :::file
         # ENABLE_SECURITY_BEGIN 
@@ -162,11 +162,11 @@ If you want to enable security for access to xrootd via xrootdfs you will need t
            ofs.authorize 
            # ENABLE_SECURITY_END
 
-5. On all xrootd data server nodes, edit /etc/xrootd/auth\_file to add authorized users of the form `u %RED%username%ENDCOLOR% %RED%/directoryname%ENDCOLOR% lr` where "lr" is the permission set.
+5. On all XRootD data server nodes, edit /etc/xrootd/auth\_file to add authorized users of the form `u %RED%username%ENDCOLOR% %RED%/directoryname%ENDCOLOR% lr` where "lr" is the permission set.
 
 6. Copy %RED%keyfile<span class="twiki-macro ENDCOLOR"></span> from redirector node to every data server node and the xrootdfs node. Make sure that this file is owned by the `xrootd` user.
 
-7. Restart xrootd cluster by following [these instructions](install-xrootd)
+7. Restart XRootD cluster by following [these instructions](install-xrootd)
 8. On xroodfs node execute mount:
 
         :::console
