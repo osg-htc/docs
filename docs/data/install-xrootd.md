@@ -73,7 +73,7 @@ component below.
 
 ### Creating an XRootD cluster
 
-![XRootD cluster](../images/xrootd.jpg)
+![XRootD cluster](/img/xrootd.jpg)
 
 If your storage is spread out over multiple hosts, you will need to set up an
 XRootD *cluster*. The cluster uses one "redirector" node as a frontend for user

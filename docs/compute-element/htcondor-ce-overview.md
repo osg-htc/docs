@@ -40,7 +40,7 @@ If your site intends to run thousands of OSG jobs, you will need to host a stand
 
 To discuss using a hosted SSH HTCondor-CE, contact OSG User Support at [user-support@opensciencegrid.org](mailto:user-support@opensciencegrid.org)
 
-![HTCondor-CE-Bosco](/images/HTCondorCEBosco.png)
+![HTCondor-CE-Bosco](/img/HTCondorCEBosco.png)
 
 ### On HTCondor batch systems
 
@@ -50,7 +50,7 @@ For a site with an HTCondor **batch system**, the JobRouter can use HTCondor pro
 -   HTCondor-CE: the incoming grid job’s ID
 -   HTCondor batch system: the routed job’s ID
 
-![HTCondor-CE with an HTCondor batch system](/images/ce_condorbatchsystem.png)
+![HTCondor-CE with an HTCondor batch system](/img/ce_condorbatchsystem.png)
 
 In an HTCondor-CE/HTCondor setup, files are transferred from HTCondor-CE’s spool directory to the batch system’s spool directory using internal HTCondor protocols.
 
@@ -67,7 +67,7 @@ For non-HTCondor batch systems, the JobRouter transforms the grid job into a rou
 
 Although the following figure specifies the PBS case, it applies to all non-HTCondor batch systems:
 
-![HTCondor-CE with other batch systems](/images/ce_otherbatchsystem.png)
+![HTCondor-CE with other batch systems](/img/ce_otherbatchsystem.png)
 
 With non-HTCondor batch systems, HTCondor-CE cannot use internal HTCondor protocols to transfer files so its spool directory must be exported to a shared file system that is mounted on the batch system’s worker nodes.
 
