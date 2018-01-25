@@ -890,7 +890,7 @@ Before continuing with the overview, make sure that you are familiar with the fo
 <p>The hosted HTCondor-CE is intended for small sites or as an introduction to the OSG. The OSG configures and maintains the HTCondor-CE on behalf of the site.  The hosted HTCondor-CE is a special configuration of HTCondor-CE that can submit jobs to a remote cluster over SSH. It provides a simple starting point for opportunistic resource owners that want to start contributing to the OSG with minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a submit node in their cluster.</p>
 <p>If your site intends to run thousands of OSG jobs, you will need to host a standard <a href="../install-htcondor-ce">HTCondor-CE</a> because the hosted HTCondor-CE has not yet been optimized for such loads.</p>
 <p>To discuss using a hosted SSH HTCondor-CE, contact OSG User Support at <a href="mailto:user-support@opensciencegrid.org">user-support@opensciencegrid.org</a></p>
-<p><img alt="HTCondor-CE-Bosco" src="../../images/HTCondorCEBosco.png" /></p>
+<p><img alt="HTCondor-CE-Bosco" src="../../img/HTCondorCEBosco.png" /></p>
 <h3 id="on-htcondor-batch-systems">On HTCondor batch systems<a class="headerlink" href="#on-htcondor-batch-systems" title="Permanent link">&para;</a></h3>
 <p>For a site with an HTCondor <strong>batch system</strong>, the JobRouter can use HTCondor protocols to place a transformed copy of the grid job directly into the batch system’s scheduler, meaning that the routed and batch system jobs are one and the same. Thus, there are three representations of your job, each with its own ID (see diagram below):</p>
 <ul>
@@ -898,7 +898,7 @@ Before continuing with the overview, make sure that you are familiar with the fo
 <li>HTCondor-CE: the incoming grid job’s ID</li>
 <li>HTCondor batch system: the routed job’s ID</li>
 </ul>
-<p><img alt="HTCondor-CE with an HTCondor batch system" src="../../images/ce_condorbatchsystem.png" /></p>
+<p><img alt="HTCondor-CE with an HTCondor batch system" src="../../img/ce_condorbatchsystem.png" /></p>
 <p>In an HTCondor-CE/HTCondor setup, files are transferred from HTCondor-CE’s spool directory to the batch system’s spool directory using internal HTCondor protocols.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -912,7 +912,7 @@ Before continuing with the overview, make sure that you are familiar with the fo
 <li>HTCondor batch system: the batch system’s job ID</li>
 </ul>
 <p>Although the following figure specifies the PBS case, it applies to all non-HTCondor batch systems:</p>
-<p><img alt="HTCondor-CE with other batch systems" src="../../images/ce_otherbatchsystem.png" /></p>
+<p><img alt="HTCondor-CE with other batch systems" src="../../img/ce_otherbatchsystem.png" /></p>
 <p>With non-HTCondor batch systems, HTCondor-CE cannot use internal HTCondor protocols to transfer files so its spool directory must be exported to a shared file system that is mounted on the batch system’s worker nodes.</p>
 <h2 id="how-the-ce-is-customized">How the CE is Customized<a class="headerlink" href="#how-the-ce-is-customized" title="Permanent link">&para;</a></h2>
 <p>Aside from the <a href="../install-htcondor-ce#configuring-htcondor-ce">basic configuration</a> required in the CE installation, there are two main ways to customize your CE (if you decide any customization is required at all):</p>
