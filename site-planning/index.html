@@ -938,16 +938,16 @@ resources regardless, but installing CVMFS is a primary mechanism to attract mor
 <p>There are two types of data services on the OSG:</p>
 <ul>
 <li>A <em>cache</em> pulls in data on read-demand, keeping it locally for further use.  We provide support for the
-  <a href="../data/frontier-squid">Squid HTTP</a> cache for smaller working set sizes and software called <a href="http://xrootd.org">Xrootd</a>
+  <a href="../data/frontier-squid">Squid HTTP</a> cache for smaller working set sizes and software called <a href="http://xrootd.org">XRootD</a>
   for larger datasets.  Almost every site on the OSG installs a Squid cache.</li>
 <li>A <strong>Storage Element</strong> provides remote, POSIX-like access to your site storage service for reading and writing of data.
-  All Storage Element implementations in the OSG support the GridFTP, Xrootd, and HTTPs protocols.</li>
+  All Storage Element implementations in the OSG support the GridFTP, XRootD, and HTTPs protocols.</li>
 </ul>
 <p>The storage element model is chosen mostly by sites that support either ATLAS or CMS VOs; otherwise, only caches are
 typically provided.  Sites that need a SE which have existing POSIX-like storage (e.g., Lustre, GPFS) layer remote
 access services (such as <a href="../data/gridftp">GridFTP</a>) on top of the existing storage.  For sites wanting petascale storage -
 but without an existing install - we provide support for <a href="../data/hadoop-overview">HDFS</a> and
-<a href="../data/xrootd-overview">Xrootd</a>.</p>
+<a href="../data/xrootd-overview">XRootD</a>.</p>
 <!-- TODO: these figures were all garbage.  Redraw
 ## Example Configurations
 This section contains a few example that illustrate how the different elements contributing to an OSG site can be

@@ -448,7 +448,7 @@
   
   <ul class="subnav">
       
-    <li class="toctree-l3"><a href="#install-bestman-xrootd-se">Install Bestman Xrootd SE</a></li>
+    <li class="toctree-l3"><a href="#install-bestman-xrootd-se">Install Bestman XRootD SE</a></li>
     
 
     <li class="toctree-l3"><a href="#about-this-document">About this Document</a></li>
@@ -897,7 +897,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="install-bestman-xrootd-se">Install Bestman Xrootd SE<a class="headerlink" href="#install-bestman-xrootd-se" title="Permanent link">&para;</a></h1>
+                <h1 id="install-bestman-xrootd-se">Install Bestman XRootD SE<a class="headerlink" href="#install-bestman-xrootd-se" title="Permanent link">&para;</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of May 2018.</p>
@@ -909,7 +909,7 @@
 <ul>
 <li>OS is Red Hat Enterprise Linux 6, 7, and variants (see <a href="../../common/yum/">details...</a>)</li>
 <li><a href="http://fedoraproject.org/wiki/EPEL">EPEL</a> repos enabled.</li>
-<li>A working XRootD Server. See <a href="../install-xrootd">the xrootd install documentation</a> for details.</li>
+<li>A working XRootD Server. See <a href="../install-xrootd">the XRootD install documentation</a> for details.</li>
 <li>Root access</li>
 </ul>
 <h2 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h2>
@@ -932,7 +932,7 @@
 </tr>
 <tr>
 <td align="left"><code>xrootd</code></td>
-<td align="left">Used by the xrootd client to contact xrootd redirector.</td>
+<td align="left">Used by the XRootD client to contact XRootD redirector.</td>
 </tr>
 </tbody>
 </table>
@@ -996,7 +996,7 @@
 </tbody>
 </table>
 <h1 id="install-instructions">Install Instructions<a class="headerlink" href="#install-instructions" title="Permanent link">&para;</a></h1>
-<p>Note that this package is primarily intended for Bestman-Gateway acting as an endpoint for XRootD server. If you have not installed an XRootD server yet, follow the instructions in <a href="../install-xrootd">the xrootd install documentation</a>.</p>
+<p>Note that this package is primarily intended for Bestman-Gateway acting as an endpoint for XRootD server. If you have not installed an XRootD server yet, follow the instructions in <a href="../install-xrootd">the XRootD install documentation</a>.</p>
 <h2 id="certificates_1">Certificates<a class="headerlink" href="#certificates_1" title="Permanent link">&para;</a></h2>
 <p>GridFTP, which is a part of this meta-package, requires a certificate package to run. If you require a specific certificate package, follow the <a href="../../common/ca/">InstallCertAuth</a> instructions to install it. If you do not install a grid certificate package first, the install procedure will install one for you as part of its dependencies. (usually osg-ca-certs).</p>
 <h2 id="package-installation-instructions">Package installation instructions<a class="headerlink" href="#package-installation-instructions" title="Permanent link">&para;</a></h2>
@@ -1011,8 +1011,8 @@
 <h2 id="configuring-gridftp-authentication">Configuring GridFTP authentication<a class="headerlink" href="#configuring-gridftp-authentication" title="Permanent link">&para;</a></h2>
 <p>For information on how to configure authentication for your GridFTP installation, please refer to the <a href="../../data/gridftp/#configuring-gridftp">configuring authentication section of the GridFTP guide</a>.</p>
 <h2 id="configuring-gridftp-xrootd-support">Configuring GridFTP XRootD support<a class="headerlink" href="#configuring-gridftp-xrootd-support" title="Permanent link">&para;</a></h2>
-<p>In order to configure GridFTP to work with XRootD, you will need to configure the Data Storage Interface (DSI) module with Xrootd pre-load libraries. This module is used to access Xrootd and POSIX file systems.</p>
-<p>Edit <code>/etc/sysconfig/xrootd-dsi</code> (create it if it is missing) and set XROOTD_VMP (XRootD Virtual Mount Point) to use your Xrootd redirector.</p>
+<p>In order to configure GridFTP to work with XRootD, you will need to configure the Data Storage Interface (DSI) module with XRootD pre-load libraries. This module is used to access XRootD and POSIX file systems.</p>
+<p>Edit <code>/etc/sysconfig/xrootd-dsi</code> (create it if it is missing) and set XROOTD_VMP (XRootD Virtual Mount Point) to use your XRootD redirector.</p>
 <div class="codehilite"><pre><span></span>export XROOTD_VMP=&quot;<span style="color:red">redirector:1094:/local_path=/remote_path</span>&quot;
 </pre></div>
 
@@ -1046,10 +1046,10 @@ xrootdfs                <span style="color:red">/mnt/xrootd</span>              
 
 <p>You should now be able to run UNIX commands such as <code>ls /mnt/xrootd</code> to see the contents of the XRootD server.</p>
 <h3 id="optional-configuring-secured-xrootdfs">(Optional) Configuring secured xrootdfs<a class="headerlink" href="#optional-configuring-secured-xrootdfs" title="Permanent link">&para;</a></h3>
-<p>If you want to enable security for access to xrootd via xrootdfs you will need to modify xrootd configuration and perform several steps to make xrootdfs secured.</p>
+<p>If you want to enable security for access to XRootD via xrootdfs you will need to modify XRootD configuration and perform several steps to make xrootdfs secured.</p>
 <ol>
 <li>
-<p>On the xrootd redirector node, execute the following command:</p>
+<p>On the XRootD redirector node, execute the following command:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdsssadmin -k <span style="color:red">&lt;my_key_name&gt;</span> -u anybody -g usrgroup add <span style="color:red">&lt;keyfile&gt;</span>
 
 <span class="go">eg:</span>
@@ -1074,7 +1074,7 @@ xrootdfs                <span style="color:red">/mnt/xrootd</span>              
 
 </li>
 <li>
-<p>On all xrootd data servers and redirector node, modify xrootd configuration (<strong><code>/etc/xrootd/xrootd-clustered.cfg</code></strong>) by adding the following segment: </p>
+<p>On all XRootD data servers and redirector node, modify XRootD configuration (<strong><code>/etc/xrootd/xrootd-clustered.cfg</code></strong>) by adding the following segment: </p>
 <div class="codehilite"><pre><span></span># ENABLE_SECURITY_BEGIN 
    xrootd.seclib /usr/lib64/libXrdSec.so 
    #the line below should be before &quot;sec.protocol ... unix&quot;
@@ -1090,13 +1090,13 @@ xrootdfs                <span style="color:red">/mnt/xrootd</span>              
 
 </li>
 <li>
-<p>On all xrootd data server nodes, edit /etc/xrootd/auth_file to add authorized users of the form <code>u <span style="color:red">username</span> <span style="color:red">/directoryname</span> lr</code> where "lr" is the permission set.</p>
+<p>On all XRootD data server nodes, edit /etc/xrootd/auth_file to add authorized users of the form <code>u <span style="color:red">username</span> <span style="color:red">/directoryname</span> lr</code> where "lr" is the permission set.</p>
 </li>
 <li>
 <p>Copy <span style="color:red">keyfile<span class="twiki-macro ENDCOLOR"></span> from redirector node to every data server node and the xrootdfs node. Make sure that this file is owned by the <code>xrootd</code> user.</p>
 </li>
 <li>
-<p>Restart xrootd cluster by following <a href="../install-xrootd">these instructions</a></p>
+<p>Restart XRootD cluster by following <a href="../install-xrootd">these instructions</a></p>
 </li>
 <li>
 <p>On xroodfs node execute mount:</p>

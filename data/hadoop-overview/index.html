@@ -879,7 +879,7 @@
 <li>BeStMan SRM: A generic SRM server that can be run on top of any POSIX-like filesystem. This is run in "gateway" mode, which limits the amount of the SRM protocol implemented. To date, this has been sufficient to LHC VOs.</li>
 <li>Globus GridFTP: The standard GridFTP from Globus. We use a plug-in module (using the Globus Direct Storage Interface) that allows the GridFTP process to use the HDFS C-bindings directly.</li>
 <li>Gratia probe: Gratia is an accounting system that records batch system and transfer records to a database. The records are collected by a client program called a "probe" which runs on the GridFTP server. It parses the GridFTP server's log files and creates transfer records.</li>
-<li>Xrootd server plugin: Xrootd is an extremely flexible and powerful data server popular in the high energy physics community. There exists a HDFS plugin for Xrootd; integrating with Xrootd provides a means to export HDFS securely outside the local cluster, as another Xrootd plugin provides GSI-based authentication and authorization.</li>
+<li>XRootD server plugin: XRootD is an extremely flexible and powerful data server popular in the high energy physics community. There exists a HDFS plugin for XRootD; integrating with XRootD provides a means to export HDFS securely outside the local cluster, as another XRootD plugin provides GSI-based authentication and authorization.</li>
 </ul>
 </li>
 <li>HDFS auxiliary:<ul>
@@ -926,7 +926,7 @@
 <p>There are three options to export your data outside your cluster:</p>
 <ul>
 <li>Globus GridFTP.</li>
-<li>Xrootd.</li>
+<li>XRootD.</li>
 <li>HTTP and HTTPS.  OSG utilizes the HTTP(S) protocol implementation built into the XRootD server.</li>
 </ul>
               
