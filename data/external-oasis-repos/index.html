@@ -187,7 +187,7 @@
         
             <li><a class="toctree-l4" href="#hosting-a-repository-on-oasis">Hosting a Repository on OASIS</a></li>
         
-            <li><a class="toctree-l4" href="#changing-the-url-of-a-repository-on-oasis">Changing the URL of a Repository on OASIS</a></li>
+            <li><a class="toctree-l4" href="#replacing-an-existing-oasis-repository-server">Replacing an Existing OASIS Repository Server</a></li>
         
             <li><a class="toctree-l4" href="#removing-a-repository-from-oasis">Removing a Repository from OASIS</a></li>
         
@@ -973,6 +973,12 @@ The next steps will fail if the web server is not accessible.</p>
 
 <p>That should print several lines including some gibberish at the end.</p>
 <h2 id="hosting-a-repository-on-oasis">Hosting a Repository on OASIS<a class="headerlink" href="#hosting-a-repository-on-oasis" title="Permanent link">&para;</a></h2>
+<!-- NOTE: these steps are referenced by the "Replacing an Existing
+     OASIS Repository Server" section below and also on the
+     operations/external-oasis-repos.md page, so if you change
+     anything here check those to make sure they are still accurate.
+  -->
+
 <p>In order to host a repository on OASIS, perform the following steps:</p>
 <ol>
 <li>
@@ -1041,10 +1047,45 @@ following contents:</p>
 </div>
 <p>If the repository ends in <code>.opensciencegrid.org</code>, the VO may ask for it to be replicated outside the US.  The
 VO should open a GGUS ticket following EGI's <a href="https://wiki.egi.eu/wiki/PROC20">PROC20</a>.</p>
-<h2 id="changing-the-url-of-a-repository-on-oasis">Changing the URL of a Repository on OASIS<a class="headerlink" href="#changing-the-url-of-a-repository-on-oasis" title="Permanent link">&para;</a></h2>
-<p>If necessary, it is possible to change the URL of the repository server; simply have the repository administrator
-open a support ticket with the new value, and OSG operations will update OIM's OASIS repository URL for the VO.
-The GOC Stratum-1 will then be updated within an hour.</p>
+<h2 id="replacing-an-existing-oasis-repository-server">Replacing an Existing OASIS Repository Server<a class="headerlink" href="#replacing-an-existing-oasis-repository-server" title="Permanent link">&para;</a></h2>
+<p>There are two ways to replace the server for an existing <code>*.opensciencegrid.org</code> or <code>*.osgstorage.org</code> repository, one without changing the DNS name and one with changing it.
+The latter can take longer because it requires GOC intervention.</p>
+<div class="admonition note">
+<p class="admonition-title">Revision numbers must increase</p>
+<p>CVMFS does not allow repository revision numbers to decrease, so the instructions below make sure the revision numbers only go up.</p>
+</div>
+<h3 id="without-changing-the-server-dns-name">Without changing the server DNS name<a class="headerlink" href="#without-changing-the-server-dns-name" title="Permanent link">&para;</a></h3>
+<p>If you are recreating the repository on the same machine, use the following command to 
+remove the repository configuration while preserving the data and keys:</p>
+<div class="codehilite"><pre><span></span>    :::console
+    root@host # cvmfs_server rmfs -p example.opensciencegrid.org
+</pre></div>
+
+
+<p>Otherwise if it is a new machine, copy the keys from /etc/cvmfs/keys/<span style="color:red">example.opensciencegrid.org</span>.* and the data from /srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span> from the old server to the new, making sure that no publish operations happen on the old server while you copy the data.</p>
+<p>Then in either case use <code>cvmfs_server import</code> instead of <code>cvmfs_server mkfs</code> in the above instructions for <a href="#creating-a-repository">Creating the Repository</a>, in order to reuse old data and keys.</p>
+<p>If you run an old and a new machine in parallel for a while, make sure that when you put the new machine into production (by moving the DNS name) that the new machine has had at least as many publishes as the old machine, so the revision number does not decrease.</p>
+<h3 id="with-changing-the-server-dns-name">With changing the server DNS name<a class="headerlink" href="#with-changing-the-server-dns-name" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you create a repository from scratch, as opposed to copying the data and keys from an old server, it is in fact better to change the DNS name of the server because that causes the GOC server to reinitialize the .cvmfswhitelist.</p>
+</div>
+<p>If you create a replacement repository on a new machine from scratch, follow the normal instructions on this page above, but with the following differences in the <a href="#hosting-a-repository-on-oasis">Hosting a Repository on OASIS</a> section:</p>
+<ul>
+<li>In step 2, instead of asking in the GOC ticket to create a new repository, give the new URL and ask them to change the repository registration to that URL.</li>
+<li>
+<p>When you do the publish in step 5, add a <code>-n NNNN</code> option where <code>NNNN</code> is a revision number greater than the number on the existing repository.
+    That number can be found by this command on a client machine:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> attr -qg revision /cvmfs/<span style="color:red">example.opensciencegrid.org</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Skip step 6; there is no need to tell the GOC when you are finished.</p>
+</li>
+<li>After enough time has elapsed for the publish to propagate to clients, typically around 15 minutes, verify that the new chosen revision has reached a client.</li>
+</ul>
 <h2 id="removing-a-repository-from-oasis">Removing a Repository from OASIS<a class="headerlink" href="#removing-a-repository-from-oasis" title="Permanent link">&para;</a></h2>
 <p>In order to remove a repository that is being hosted on OASIS, perform the following steps:</p>
 <ol>
