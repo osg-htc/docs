@@ -953,6 +953,10 @@ tags: [&quot;xfer-log&quot;]
 </ol>
 <h2 id="configuration-of-htcondor">Configuration of HTCondor<a class="headerlink" href="#configuration-of-htcondor" title="Permanent link">&para;</a></h2>
 <p>For the configuration of the HTCondor submit host to use the TransferLog follow the next instructions:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The transfer metrics was introduced in HTCondor 8.6 series. You need to be running a version equal or greater than 8.6.1 to enable it.</p>
+</div>
 <ol>
 <li>
 <p>Create a file named <code>/etc/condor/config.d/50-transferLog.config</code> with the following contents:</p>
