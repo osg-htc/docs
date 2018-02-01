@@ -80,20 +80,15 @@ You must install and enable those first.
     -   Either no `priority` setting, or a `priority` setting that is 99 or higher
 
 !!! warning
-    If you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the priority of the EPEL repository is either missing, 99 or a higher number.
+    If you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the priority of the EPEL repository is either missing, or 99 or a higher number.
     The OSG repositories must have a better (numerically lower) priority than the EPEL repositories;
     you might have dependency resolution ("depsolving") issues otherwise.
 
 
 ### Install OSG Repositories
 
-If you are upgrading from one OSG series to another, remove the old OSG repository definition files and clean the Yum cache:
-
-    :::console
-    root@host # yum clean all 
-    root@host # rpm -e osg-release
-    
-This step ensures that local changes to `*.repo` files will not block the installation of the new OSG repositories. After this step, `*.repo` files that have been changed will exist in `/etc/yum.repos.d/` with the `*.rpmsave` extension. After installing the new OSG repositories (the next step) you may want to apply any changes made in the `*.rpmsave` files to the new `*.repo` files.
+This document assumes a fresh install.
+For instructions on upgrading from one OSG series to another, see the [release series document](/release/release_series#updating-from-old).
 
 Install the OSG repositories:
 
