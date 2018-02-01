@@ -23,8 +23,8 @@ pages:
   - 'Install from RPM': 'worker-node/install-wn.md'
   - 'Install from Tarball': 'worker-node/install-wn-tarball.md'
   - 'Install from OASIS': 'worker-node/install-wn-oasis.md'
-  - 'CVMFS': 'worker-node/install-cvmfs.md'
-  - 'Singularity': 'worker-node/install-singularity.md'
+  - 'Install CVMFS': 'worker-node/install-cvmfs.md'
+  - 'Install Singularity': 'worker-node/install-singularity.md'
 - Data:
   - HTTP & CVMFS:
     - 'Install HTTP Cache': 'data/frontier-squid.md'
@@ -52,12 +52,12 @@ pages:
   - 'Java 7': 'common/openjdk7.md'
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
 - Other:
-  - 'GSI-enabled SSH': 'other/gsissh.md'
-  - 'GlideinWMS Frontend': 'other/install-gwms-frontend.md'
+  - 'Install GSI-enabled SSH': 'other/gsissh.md'
+  - 'Install GlideinWMS Frontend': 'other/install-gwms-frontend.md'
   - 'Install a CVMFS Stratum 1': 'other/install-cvmfs-stratum1.md'
-  - 'Network Performance Toolkit': 'other/network-performance-toolkit.md'
+  - 'Install the Network Performance Toolkit': 'other/network-performance-toolkit.md'
   - 'Troubleshooting Gratia': 'other/troubleshooting-gratia.md'
-  - 'Transfer log filebeats installation': 'other/schedd-filebeats.md'
+  - 'Install Transfer Log Filebeats': 'other/schedd-filebeats.md'
 - Release Information:
   - 'Release Note Overview': 'release/notes.md'
   - 3.4 Release Notes:
@@ -138,11 +138,11 @@ pages:
   - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
   - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
 - Deprecated Software:
-  - 'BeStMan Install': 'data/bestman-install.md'
-  - 'BeStMan Xrootd SE': 'data/install-bestman-xrootd.md'
-  - 'EDG-Mkgridmap Install': 'security/edg-mkgridmap.md'
-  - 'GUMS': 'security/install-gums.md'
-  - 'Worker node glexec Install': 'worker-node/install-glexec.md'
+  - 'Install BeStMan': 'data/bestman-install.md'
+  - 'Install BeStMan Xrootd SE': 'data/install-bestman-xrootd.md'
+  - 'Install EDG-Mkgridmap': 'security/edg-mkgridmap.md'
+  - 'Install GUMS': 'security/install-gums.md'
+  - 'Install Worker node glexec': 'worker-node/install-glexec.md'
   - 'Install VOMS': 'other/install-voms.md'
 - 'Get Help': 'common/help.md'
 
