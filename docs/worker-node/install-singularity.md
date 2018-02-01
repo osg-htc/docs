@@ -53,7 +53,8 @@ As with all OSG software installations, there are some one-time (per host) steps
 !!! note "Validation Steps"
     The validation steps below require CVMFS to be installed.  Follow the steps on the [CVMFS Installation](/worker-node/install-cvmfs) page.
 
-# Installing Singularity as Privileged
+Installing Singularity as Privileged
+------------------------------------
 
 To install singularity as `setuid`, make sure that your host is up to date before installing the required packages:
 
@@ -136,7 +137,8 @@ user         1     0  0 21:34 ?        00:00:00 ps -ef
     The remainder of this document pertains to the un-privileged
     (non-`setuid`) mode of singularity.
 
-# Enabling Unprivileged Mode for Singularity
+Enabling Unprivileged Mode for Singularity
+------------------------------------------
 
 !!! note
     As of December 2017, no VO in the OSG is ready to use non-setuid
@@ -210,6 +212,7 @@ user         1     0  0 21:34 ?        00:00:00 ps -ef
 
 singularity has no services to start or stop.
 
-# References
+References
+----------
 
 - [Additional guidance for CMS sites](https://twiki.cern.ch/twiki/bin/view/Main/CmsSingularity)
