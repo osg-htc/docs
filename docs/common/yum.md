@@ -18,9 +18,9 @@ OSG hosts four public-facing repositories at [repo.opensciencegrid.org](https://
 
 OSG's RPM packages rely also on external packages provided by supported OSes and EPEL. You must have the following repositories available and enabled:
 
--   your OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories)
+-   OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories)
 -   EPEL repositories
--   the OSG repositories you'd like to use
+-   OSG repositories
 
 If one of these repositories is missing you may have missing dependencies.
 
