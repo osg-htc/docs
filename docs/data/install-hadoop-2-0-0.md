@@ -143,7 +143,7 @@ root@host # yum install osg-se-hadoop-srm
 ```
 
 !!! note
-    If you are using a single system to host the SRM software and the gridftp node, you'll also need to install the `osg-se-hadoop-gridftp` rpm as well.
+    If you are using a single system to host the SRM software and the GridFTP node, you'll also need to install the `osg-se-hadoop-gridftp` rpm as well.
 
 Configuration
 =============

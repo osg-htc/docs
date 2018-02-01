@@ -131,6 +131,12 @@ That should print several lines including some gibberish at the end.
 Hosting a Repository on OASIS
 -----------------------------
 
+<!-- NOTE: these steps are referenced by the "Replacing an Existing
+     OASIS Repository Server" section below and also on the
+     operations/external-oasis-repos.md page, so if you change
+     anything here check those to make sure they are still accurate.
+  -->
+
 In order to host a repository on OASIS, perform the following steps:
 
 1.  **Verify your VO's OIM registration is up-to-date**.  All repositories need to be associated with a VO; the VO
@@ -191,12 +197,46 @@ Once the repository is fully replicated on the OSG, the VO may proceed in publis
 If the repository ends in `.opensciencegrid.org`, the VO may ask for it to be replicated outside the US.  The
 VO should open a GGUS ticket following EGI's [PROC20](https://wiki.egi.eu/wiki/PROC20).
 
-Changing the URL of a Repository on OASIS
------------------------------------------
+Replacing an Existing OASIS Repository Server
+---------------------------------------
 
-If necessary, it is possible to change the URL of the repository server; simply have the repository administrator
-open a support ticket with the new value, and OSG operations will update OIM's OASIS repository URL for the VO.
-The GOC Stratum-1 will then be updated within an hour.
+There are two ways to replace the server for an existing `*.opensciencegrid.org` or `*.osgstorage.org` repository, one without changing the DNS name and one with changing it.
+The latter can take longer because it requires GOC intervention.
+
+!!! note "Revision numbers must increase"
+    CVMFS does not allow repository revision numbers to decrease, so the instructions below make sure the revision numbers only go up.
+
+
+### Without changing the server DNS name
+
+If you are recreating the repository on the same machine, use the following command to 
+remove the repository configuration while preserving the data and keys:
+
+        :::console
+        root@host # cvmfs_server rmfs -p example.opensciencegrid.org
+
+Otherwise if it is a new machine, copy the keys from /etc/cvmfs/keys/%RED%example.opensciencegrid.org%ENDCOLOR%.* and the data from /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR% from the old server to the new, making sure that no publish operations happen on the old server while you copy the data.
+
+Then in either case use `cvmfs_server import` instead of `cvmfs_server mkfs` in the above instructions for [Creating the Repository](#creating-a-repository), in order to reuse old data and keys.
+
+If you run an old and a new machine in parallel for a while, make sure that when you put the new machine into production (by moving the DNS name) that the new machine has had at least as many publishes as the old machine, so the revision number does not decrease.
+
+### With changing the server DNS name
+
+!!! note "Note"
+    If you create a repository from scratch, as opposed to copying the data and keys from an old server, it is in fact better to change the DNS name of the server because that causes the GOC server to reinitialize the .cvmfswhitelist.
+
+If you create a replacement repository on a new machine from scratch, follow the normal instructions on this page above, but with the following differences in the [Hosting a Repository on OASIS](#hosting-a-repository-on-oasis) section:
+
+-   In step 2, instead of asking in the GOC ticket to create a new repository, give the new URL and ask them to change the repository registration to that URL.
+-   When you do the publish in step 5, add a `-n NNNN` option where `NNNN` is a revision number greater than the number on the existing repository.
+    That number can be found by this command on a client machine:
+
+        :::console
+        user@host $ attr -qg revision /cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%
+
+-   Skip step 6; there is no need to tell the GOC when you are finished.
+-   After enough time has elapsed for the publish to propagate to clients, typically around 15 minutes, verify that the new chosen revision has reached a client.
 
 Removing a Repository from OASIS
 --------------------------------

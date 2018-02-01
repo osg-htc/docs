@@ -1,18 +1,18 @@
-OSG Software Stack -- Data Release -- 3.3.30-3
+OSG Software Stack -- Data Release -- 3.3.31-2
 ==============================================
 
-**Release Date**: 2017-11-29
+**Release Date**: 2018-01-24
 
 Summary of changes
 ------------------
 
 This release contains:
 
--   CA Certificates based on [IGTF 1.88](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
-    - updated UKeScience 2B ICA based on a SHA-2 family digest (UK)
-    - added new PKIUNAMgrid (2017) trust anchor for roll-over (MX)
+-   CA Certificates based on [IGTF 1.89](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    - Discontinued expiring UGRID (2008) root CA (UA)
+-   SHA256 checksums are provided in addition to the MD5 checksums
 
-These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.30-3%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
+These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.31-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
 Detailed changes are below. All of the documentation can be found [here](../../).
 
@@ -51,13 +51,13 @@ We added or updated the following packages to the production OSG yum repository.
 
 #### Enterprise Linux 6
 
--   [igtf-ca-certs-1.88-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.88-1.osg33.el6)
--   [osg-ca-certs-1.68-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.68-1.osg33.el6)
+-   [igtf-ca-certs-1.89-2.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.89-2.osg33.el6)
+-   [osg-ca-certs-1.69-2.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.69-2.osg33.el6)
 
 #### Enterprise Linux 7
 
--   [igtf-ca-certs-1.88-1.osg33.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.88-1.osg33.el7)
--   [osg-ca-certs-1.68-1.osg33.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.68-1.osg33.el7)
+-   [igtf-ca-certs-1.89-2.osg33.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.89-2.osg33.el7)
+-   [osg-ca-certs-1.69-2.osg33.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.69-2.osg33.el7)
 
 ### RPMs
 
@@ -70,13 +70,13 @@ If you wish to only update the RPMs that changed, the set of RPMs is:
 #### Enterprise Linux 6
 
 ``` file
-igtf-ca-certs-1.88-1.osg33.el6
-osg-ca-certs-1.68-1.osg33.el6
+igtf-ca-certs-1.89-2.osg33.el6
+osg-ca-certs-1.69-2.osg33.el6
 ```
 
 #### Enterprise Linux 7
 
 ``` file
-igtf-ca-certs-1.88-1.osg33.el7
-osg-ca-certs-1.68-1.osg33.el7
+igtf-ca-certs-1.89-2.osg33.el7
+osg-ca-certs-1.69-2.osg33.el7
 ```
