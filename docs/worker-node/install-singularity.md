@@ -50,79 +50,8 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Obtain root access to the host
 - If you're installing singularity, prepare the [required Yum repositories](../common/yum)
 
-# Enabling Unprivileged Mode for Singularity
-
-!!! note
-    As of December 2017, no VO in the OSG is ready to use non-setuid
-    Singularity in production.  Only testing sites will need to follow
-    these instructions; contact the VOs you support for more
-    information.
-
-    Most sites will want to follow the privileged RPM install instructions
-    until there is wider VO support.
-
-If the operating system is an EL 7 variant and has been updated to the EL
-7.4 kernel (3.10.0-693 or greater), you can skip
-installation altogether and instead do these steps to enable
-singularity to be run as an unprivileged user via CVMFS:
-
-1. Set the `namespace.unpriv_enable=1` boot option.  The easiest way
-    to do this is to add it in `/etc/sysconfig/grub` to the end of the
-    `GRUB_CMDLINE_LINUX` variable, before the ending double-quote.
-2. Update the grub configuration:
-
-        :::console
-        root@host # grub2-mkconfig -o /boot/grub2/grub.cfg
-
-3. Enable user namespaces via `sysctl`:
-
-        :::console
-        root@host # echo "user.max_user_namespaces = 15000" \
-            > /etc/sysctl.d/90-max_user_namespaces.conf
-            
-4. Disable network namespaces:
-
-        :::console
-        root@host # echo "user.max_net_namespaces = 0" \
-            > /etc/sysctl.d/90-max_net_namespaces.conf
-
-    OSG VOs do not need network namespaces with singularity, and
-    disabling them reduces the risk profile of enabling user
-    namespaces.  Network namespaces are, however, utilized by other
-    container systems, such as Docker.  Disabling network namespaces
-    may break other container solutions, or limit their capabilities
-    (such as requiring the `--net=host` option in Docker).
-
-    !!! danger "Danger: current public exploit"
-        As of December 19, 2018 there is no patch from Redhat for a
-        [public exploit](https://access.redhat.com/security/cve/CVE-2017-16939)
-        of a vulnerability due to the combination of network namespaces
-        and user namespaces.  This vulnerability can crash a kernel and
-        potentially lead to privilege escalation.  Do not leave network
-        namespaces enabled at the same time as unprivileged user
-        namespaces until this is resolved.
-
-4. Reboot
-5. If you haven't yet installed [cvmfs](install-cvmfs), do so.
-
-
-## Validating singularity
-
-Once you have the host configured properly, log in as an ordinary
-unprivileged user and verify that singularity works:
-
-```console
-user@host $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity \
-                exec -c --ipc --pid -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
-                ps -ef
-WARNING: Container does not have an exec helper script, calling 'ps' directly
-UID        PID  PPID  C STIME TTY          TIME CMD
-user         1     0  0 21:34 ?        00:00:00 ps -ef
-```
-
-!!! tip
-    The remainder of this document pertains to the privileged
-    (`setuid`) mode of singularity.
+!!! note "Validation Steps"
+    The validation steps below require CVMFS to be installed.  Follow the steps on the [CVMFS Installation](/worker-node/install-cvmfs) page.
 
 # Installing Singularity as Privileged
 
@@ -197,6 +126,80 @@ command to verify it:
 
 ```console
 user@host $ singularity exec -c --ipc --pid -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
+                ps -ef
+WARNING: Container does not have an exec helper script, calling 'ps' directly
+UID        PID  PPID  C STIME TTY          TIME CMD
+user         1     0  0 21:34 ?        00:00:00 ps -ef
+```
+
+!!! tip
+    The remainder of this document pertains to the un-privileged
+    (non-`setuid`) mode of singularity.
+
+# Enabling Unprivileged Mode for Singularity
+
+!!! note
+    As of December 2017, no VO in the OSG is ready to use non-setuid
+    Singularity in production.  Only testing sites will need to follow
+    these instructions; contact the VOs you support for more
+    information.
+
+    Most sites will want to follow the privileged RPM install instructions
+    until there is wider VO support.
+
+If the operating system is an EL 7 variant and has been updated to the EL
+7.4 kernel (3.10.0-693 or greater), you can skip
+installation altogether and instead do these steps to enable
+singularity to be run as an unprivileged user via CVMFS:
+
+1. Set the `namespace.unpriv_enable=1` boot option.  The easiest way
+    to do this is to add it in `/etc/sysconfig/grub` to the end of the
+    `GRUB_CMDLINE_LINUX` variable, before the ending double-quote.
+2. Update the grub configuration:
+
+        :::console
+        root@host # grub2-mkconfig -o /boot/grub2/grub.cfg
+
+3. Enable user namespaces via `sysctl`:
+
+        :::console
+        root@host # echo "user.max_user_namespaces = 15000" \
+            > /etc/sysctl.d/90-max_user_namespaces.conf
+
+4. Disable network namespaces:
+
+        :::console
+        root@host # echo "user.max_net_namespaces = 0" \
+            > /etc/sysctl.d/90-max_net_namespaces.conf
+
+    OSG VOs do not need network namespaces with singularity, and
+    disabling them reduces the risk profile of enabling user
+    namespaces.  Network namespaces are, however, utilized by other
+    container systems, such as Docker.  Disabling network namespaces
+    may break other container solutions, or limit their capabilities
+    (such as requiring the `--net=host` option in Docker).
+
+    !!! danger "Danger: current public exploit"
+        As of December 19, 2017 there is no patch from Redhat for a
+        [public exploit](https://access.redhat.com/security/cve/CVE-2017-16939)
+        of a vulnerability due to the combination of network namespaces
+        and user namespaces.  This vulnerability can crash a kernel and
+        potentially lead to privilege escalation.  Do not leave network
+        namespaces enabled at the same time as unprivileged user
+        namespaces until this is resolved.
+
+4. Reboot
+5. If you haven't yet installed [cvmfs](install-cvmfs), do so.
+
+
+## Validating singularity
+
+Once you have the host configured properly, log in as an ordinary
+unprivileged user and verify that singularity works:
+
+```console
+user@host $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity \
+                exec -c --ipc --pid -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
                 ps -ef
 WARNING: Container does not have an exec helper script, calling 'ps' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
