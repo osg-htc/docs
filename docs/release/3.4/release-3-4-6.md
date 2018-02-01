@@ -38,9 +38,6 @@ Known Issues
 ------------
 
 -   Because the Gratia system has been turned off, RSV emits the following warning: `WARNING: Gratia server gratia-osg-prod.opensciencegrid.org:80 not responding to obtain last contact details`. This warning can safely be ignored.
--   In GlideinWMS, a small configuration change must be added to account for changes in HTCondor 8.6. Add the following line to the HTCondor configuration.
-
-        COLLECTOR.USE_SHARED_PORT=False
 
 Updating to the new release
 ---------------------------
