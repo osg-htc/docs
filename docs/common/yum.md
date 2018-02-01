@@ -24,11 +24,14 @@ OSG's RPM packages rely also on external packages provided by supported OSes and
 -   EPEL repositories
 -   OSG repositories
 
-If one of these repositories is missing you may have missing dependencies.
+If any of these repositories are missing, you may end up with missing dependencies.
 
 !!! warning
-    We did not test other repositories. If you use packages from other repositories, like `jpackage`, `dag`, or `rpmforge`, you may encounter problems.
+    Other repositories, such as `jpackage`, `dag`, or `rpmforge`, are not supported and you may encounter problems.
 
+
+Installing and Configuring Repositories
+---------------------------------------
 
 ### Install the YUM priorities plugin
 
@@ -45,21 +48,6 @@ It is important to install and enable the YUM priorities plugin before installin
         :::file
         plugins=1
 
-
-Enabling Repositories
----------------------
-
-In [our advice on using yum](install-best-practices) you will learn many tricks and tips on using yum.
-
-To use the packages in a repository without adding special options to the yum command the repository must be enabled.
-
-
-### Install the Yum Repositories required by OSG
-
-The OSG RPMs currently support Red Hat Enterprise Linux 6, 7, and variants.
-
-OSG RPMs are distributed via the OSG yum repositories. Some packages depend on packages distributed via the [EPEL](http://fedoraproject.org/wiki/EPEL) repositories. So both repositories must be enabled.
-
 ### Install the EPEL repositories
 
 OSG software depends on packages distributed via the [EPEL](http://fedoraproject.org/wiki/EPEL) repositories.
@@ -73,9 +61,9 @@ You must install and enable those first.
         # EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
         root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
--   Verify that `/etc/yum.repos.d/epel.repo` exists; the `epel` section should contain:
+-   Verify that `/etc/yum.repos.d/epel.repo` exists; the `[epel]` section should contain:
 
-    -   The line `enabled = 1`
+    -   The line `enabled=1`
 
     -   Either no `priority` setting, or a `priority` setting that is 99 or higher
 
