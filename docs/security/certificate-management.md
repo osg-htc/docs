@@ -1,4 +1,3 @@
-
 Managing Certificates
 =====================
 
@@ -11,7 +10,7 @@ reference guide for several of these tools:
 
 !!! note
     This is a reference document and not introduction on how to install CA certificates or request
-    host / user certificates.  Most users will want the [CA overview](../common/ca.md),
+    host / user certificates.  Most users will want the [CA overview](/common/ca.md),
     [host certificate overview](host-certs.md), or [user certificate overview](user-certs.md) documents.
 
 
@@ -26,7 +25,7 @@ The OSG PKI Command Line Clients provide a command-line interface for requesting
 Prerequisites
 -------------
 
-If you have not already done so, you need to [configure the OSG software repositories](../common/yum.md).
+If you have not already done so, you need to [configure the OSG software repositories](/common/yum.md).
 
 Installation
 ------------
@@ -89,39 +88,7 @@ If the user provides the CSR, then this script would just send the same CSR to O
 -   Private key, to filename specified by `-o` or `./hostkey.pem` by default.
 -   Request Id, to `stdout`.
 
-```console
-root@host # osg-cert-request --help
-Usage: osg-cert-request [options]
-
-Options:
-  -h, --help            show this help message and exit
-  -c CSR, --csr=CSR     Specify CSR name (default = gennew.csr)
-  -o OUTPUT KEYFILE, --outkeyfile=OUTPUT KEYFILE
-                        Specify the output filename for the retrieved user certificate.
-                        Default is ./hostkey.pem
-  -v VO name, --vo=VO name
-                        Specify the VO for the host request
-  -y CC LIST, --cc=CC LIST
-                        Specify the CC list(the email id's to be CCed).
-                        Separate values by ','
-  -m COMMENT, --comment=COMMENT
-                        The comment to be added to the request
-  -H CN, --hostname=CN  Specify a hostname for CSR (FQDN)
-  -a HOSTNAME, --altname=HOSTNAME
-                        Specify an alternative hostname for the CSR (FQDN). May be used more than once
-  -e EMAIL, --email=EMAIL
-                        Email address to receive certificate
-  -n NAME, --name=NAME  Name of user receiving certificate
-  -p PHONE, --phone=PHONE
-                        Phone number of user receiving certificate
-  -t TIMEOUT, --timeout=TIMEOUT
-                        Specify the timeout in minutes
-  -T, --test            Run in test mode
-  -q, --quiet           don't print status messages to stdout
-  -d WRITE_DIRECTORY, --directory=WRITE_DIRECTORY
-                        Write the output files to this directory
-  -V, --version         Print version information and exit
-```
+Documentation for usage of this script can be found [here](https://github.com/opensciencegrid/osg-pki-tools/tree/master/docs)
 
 #### Examples.
 
@@ -174,25 +141,7 @@ This script:
 
 -   Host certificate as PEM, to filename specified or `./hostcert.pem`.
 
-```console
-root@host # osg-cert-retrieve --help
-Usage: osg-cert-retrieve [options] <Request ID>
-Usage: osg-cert-retrieve -h/--help [for detailed explanations of options]
-
-Options:
-  -h, --help            show this help message and exit
-  -o ID, --certfile=ID  Specify the output filename for the retrieved user
-                        certificate . Default is ./hostcert.pem
-  -T, --test            Run in test mode
-  -t TIMEOUT, --timeout=TIMEOUT
-                        Specify the timeout in minutes
-  -q, --quiet           don't print status messages to stdout
-  -d WRITE_DIRECTORY, --directory=WRITE_DIRECTORY
-                        Write the output files to this directory
-  -V, --version         Print version information and exit
-  -i, --id              Specify ID# of certificate to be retrieved
-                        [deprecated]
-```
+Documentation for usage of this script can be found [here](https://github.com/opensciencegrid/osg-pki-tools/tree/master/docs)
 
 Example:
 
@@ -234,49 +183,7 @@ This script does the following in the process of acquiring certificates for the 
 -   `N` host certificates in PEM format.
 -   `N` private keys in PEM format.
 
-```console
-root@host # osg-gridadmin-cert-request --help
-Usage: osg-gridadmin-cert-request [options] arg
-Usage: osg-gridadmin-cert-request -h/--help [for detailed explanations of options]
-
-Options:
-  -h, --help            show this help message and exit
-  -k PKEY, --pkey=PKEY  Specify Requestor's private key (PEM Format). If not
-                        specifiedwill take the value of X509_USER_KEY or
-                        $HOME/.globus/userkey.pem
-  -c CERT, --cert=CERT  Specify Requestor's certificate (PEM Format). If not
-                        specified, will take the value of X509_USER_CERT or
-                        $HOME/.globus/usercert.pem
-  -a HOSTNAME, --altname=HOSTNAME
-                        Specify an alternative hostname for CSR (FQDN). May be
-                        used more than once and if specified, -f/--hostfile
-                        will be ignored
-  -v VO name, --vo=VO name
-                        Specify the VO for the host request
-  -y CC List, --cc=CC List
-                        Specify the CC list(the email id's to be
-                        CCed).Separate values by ','
-  -T, --test            Run in test mode
-  -t TIMEOUT, --timeout=TIMEOUT
-                        Specify the timeout in minutes
-  -q, --quiet           don't print status messages to stdout
-  -d WRITE_DIRECTORY, --directory=WRITE_DIRECTORY
-                        Write the output files to this directory
-  -V, --version         Print version information and exit
-
-  Hostname Options:
-    Use either of these options. Specify hostname as a single hostname
-    using -H/--hostname or specify from a file using -f/--hostfile.
-
-    -H HOSTNAME, --hostname=HOSTNAME
-                        Specify the hostname or service/hostname for which you
-                        want to request the certificate for. If specified,
-                        -f/--hostfile will be ignored
-    -f HOSTFILE, --hostfile=HOSTFILE
-                        Filename with one host (hostname or service/hostname
-                        and its optional,alternative hostnames, separated by
-                        spaces) per line
-```
+Documentation for usage of this script can be found [here](https://github.com/opensciencegrid/osg-pki-tools/tree/master/docs)
 
 Examples:
 
@@ -310,26 +217,7 @@ The script generates request for renewing user certificate to the OIM, and if th
 
         https://oim.opensciencegrid.org/oim/certificateuser?id=<REQID>
 
-```console
-root@host # osg-user-cert-renew --help
-Usage: osg-user-cert-renew [options]
-
-Options:
-  -h, --help            show this help message and exit
-  -k PKEY, --pkey=PKEY  Specify Requestor's private key (PEM Format). If not
-                        specified  will take the value of X509_USER_KEY or
-                        $HOME/.globus/userkey.pem
-  -c CERT, --cert=CERT  Specify Requestor's certificate (PEM Format).  If not
-                        specified will take the value of X509_USER_CERT or
-                        $HOME/.globus/usercert.pem
-  -T, --test            Run in test mode
-  -t TIMEOUT, --timeout=TIMEOUT
-                        Specify the timeout in minutes
-  -d WRITE_DIRECTORY, --directory=WRITE_DIRECTORY
-                        Write the output files to this directory
-  -q, --quiet           don't print status messages to stdout
-  -V, --version         Print version information and exit
-```
+Documentation for usage of this script can be found [here](https://github.com/opensciencegrid/osg-pki-tools/tree/master/docs)
 
 **Example**
 
@@ -362,34 +250,8 @@ For revoking user certificate, user authentication is done and if the user is au
 
 If the user's private key and certificate are not provided, the script takes the private key and user certificate from the `~/.globus` folder using the default names (`userkey.pem` and `usercert.pem`, respectively)
 
-```console
-root@host # osg-user-cert-revoke --help
-Usage: osg-user-cert-revoke [options] <Request ID> <message>
-Usage: osg-user-cert-revoke -h/--help [for detailed explanations of options]
+Documentation for usage of this script can be found [here](https://github.com/opensciencegrid/osg-pki-tools/tree/master/docs)
 
-Options:
-  -h, --help            show this help message and exit
-  -n, --certid          Treat the ID argument as the serial ID# for the
-                        certificate to be revoked
-  -u, --user            Certificate to be revoked is a user certificate.
-                        Redundant when using `osg-user-cert-revoke`.
-  -k PKEY, --pkey=PKEY  Specify Requestor's private key (PEM Format). If not
-                        specified, this takes the value of X509_USER_KEY or
-                        $HOME/.globus/userkey.pem
-  -c CERT, --cert=CERT  Specify Requestor's certificate (PEM Format). If not
-                        specified, this takes the value of X509_USER_CERT or
-                        $HOME/.globus/usercert.pem
-  -T, --test            Run in test mode
-  -t TIMEOUT, --timeout=TIMEOUT
-                        Specify the timeout in minutes
-  -q, --quiet           don't print status messages to stdout
-  -V, --version         Print version information and exit
-  -m REASON, --message=REASON
-                        Specify the reason for certificate revocation
-                        [deprecated]
-  -i, --id              Specify ID# of certificate to be retrieved
-                        [deprecated]
-```
 
 **Example:**
 
@@ -422,34 +284,7 @@ For revoking host certificate, user authentication is done and if the user is au
 
 If the user's private key and certificate are not provided, the script takes the private key and user certificate from the `~/.globus` folder using the default names (`userkey.pem` and `usercert.pem`, respectively).
 
-```console
-root@host # osg-user-cert-revoke --help
-Usage: osg-cert-revoke [options] <Request ID> <message>
-Usage: osg-cert-revoke -h/--help [for detailed explanations of options]
-
-Options:
-  -h, --help            show this help message and exit
-  -n, --certid          Treat the ID argument as the serial ID# for the
-                        certificate to be revoked
-  -u, --user            Certificate to be revoked is a user certificate.
-                        Redundant when using `osg-user-cert-revoke`.
-  -k PKEY, --pkey=PKEY  Specify Requestor's private key (PEM Format). If not
-                        specified, this takes the value of X509_USER_KEY or
-                        $HOME/.globus/userkey.pem
-  -c CERT, --cert=CERT  Specify Requestor's certificate (PEM Format). If not
-                        specified, this takes the value of X509_USER_CERT or
-                        $HOME/.globus/usercert.pem
-  -T, --test            Run in test mode
-  -t TIMEOUT, --timeout=TIMEOUT
-                        Specify the timeout in minutes
-  -q, --quiet           don't print status messages to stdout
-  -V, --version         Print version information and exit
-  -m REASON, --message=REASON
-                        Specify the reason for certificate revocation
-                        [deprecated]
-  -i, --id              Specify ID# of certificate to be retrieved
-                        [deprecated]
-```
+Documentation for usage of this script can be found [here](https://github.com/opensciencegrid/osg-pki-tools/tree/master/docs)
 
 **Example:**
 
@@ -483,10 +318,10 @@ Requirements
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](../release/supported_platforms)
+- Ensure the host has [a supported operating system](/release/supported_platforms)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](../common/yum)
-- Install [CA certificates](../common/ca)
+- Prepare the [required Yum repositories](/common/yum)
+- Install [CA certificates](/common/ca)
 
 Install instructions
 --------------------
@@ -830,5 +665,5 @@ Logs and configuration:
 References
 ----------
 
--   [Installing the Certificate Authorities Certificates and the related RPMs](../common/ca)
+-   [Installing the Certificate Authorities Certificates and the related RPMs](/common/ca)
 
