@@ -19,10 +19,10 @@ pages:
   - 'Troubleshooting HTCondor-CE': 'compute-element/troubleshoot-htcondor-ce.md'
   - 'Submitting to HTCondor-CE': 'compute-element/submit-htcondor-ce.md'
 - Worker Node:
-  - 'Worker Node Overview': 'worker-node/using-wn.md'
-  - 'Worker Node via RPM': 'worker-node/install-wn.md'
-  - 'Worker Node via Tarball': 'worker-node/install-wn-tarball.md'
-  - 'Worker Node via OASIS': 'worker-node/install-wn-oasis.md'
+  - 'Overview': 'worker-node/using-wn.md'
+  - 'Install from RPM': 'worker-node/install-wn.md'
+  - 'Install from Tarball': 'worker-node/install-wn-tarball.md'
+  - 'Install from OASIS': 'worker-node/install-wn-oasis.md'
   - 'CVMFS': 'worker-node/install-cvmfs.md'
   - 'Singularity': 'worker-node/install-singularity.md'
 - Data:
