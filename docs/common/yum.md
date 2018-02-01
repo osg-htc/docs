@@ -60,19 +60,29 @@ The OSG RPMs currently support Red Hat Enterprise Linux 6, 7, and variants.
 
 OSG RPMs are distributed via the OSG yum repositories. Some packages depend on packages distributed via the [EPEL](http://fedoraproject.org/wiki/EPEL) repositories. So both repositories must be enabled.
 
-### Install EPEL
+### Install the EPEL repositories
 
--   Install the EPEL repository, if not already present. **Note:** This enables EPEL by default. Choose the right version to match your OS version.
+OSG software depends on packages distributed via the [EPEL](http://fedoraproject.org/wiki/EPEL) repositories.
+You must install and enable those first.
+
+-   Install the EPEL repository, if not already present.  Choose the right version to match your OS version.
 
         :::console
         # EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
         root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-        # EPEL 7 (For RHEL 7, CentOS 7, and SL 7) 
+        # EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
         root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
+-   Verify that `/etc/yum.repos.d/epel.repo` exists; the `epel` section should contain:
+
+    -   The line `enabled = 1`
+
+    -   Either no `priority` setting, or a `priority` setting that is 99 or higher
 
 !!! warning
-    if you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the OSG repository has a better yum priority than EPEL ([details](install-best-practices#YumPriorities)). Otherwise, you will have strange dependency resolution (*depsolving*) issues.
+    If you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the priority of the EPEL repository is either missing, 99 or a higher number.
+    The OSG repositories must have a better (numerically lower) priority than the EPEL repositories;
+    you might have dependency resolution ("depsolving") issues otherwise.
 
 
 ### Install OSG Repositories
