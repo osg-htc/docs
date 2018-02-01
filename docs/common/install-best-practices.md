@@ -94,19 +94,3 @@ Replace %RED%OSG_RELEASE%ENDCOLOR% with the OSG release you want to use (e.g. '3
 On your worker node, you can replace the `baseurl` line of `/etc/yum.repos.d/osg.repo` with the appropriate URL for your mirror.
 
 If you are interested in having your mirror be part of the OSG's default set of mirrors, [please file a GOC ticket](https://ticket.opensciencegrid.org/).
-
-CA Certificate Installation Considerations
-------------------------------------------
-
-CAs are distributed in two ways:
-
--   As an RPM that contains the set of CAs. There are several such RPMs corresponding to different sets of CAs.
--   Through direct downloads from GOC with the `osg-update-certs` tool (provided by the `osg-ca-scripts` RPM).
-
-As long as you use one of these two mechanisms, the OSG software will install successfully.
-
-Certificate Revocation List (CRL) Installation/Update
------------------------------------------------------
-
-CRLs are not distributed via `yum`. Instead, we provide the `fetch-crl` [tool](../common/ca/#managing-certificate-revocation-lists) that downloads CRLs to the CA directory.
-
