@@ -14,7 +14,7 @@ This release contains:
 -   [Pegasus 4.8.1](https://pegasus.isi.edu/2018/01/16/pegasus-4-8-1-released/): Feature upgrade from Pegasus 4.7.4
     -   See [Pegasus 4.8.0 release notes](https://pegasus.isi.edu/2017/09/05/pegasus-4-8-0-released/) for a list of new features and improvements
 -   Updated gratia-probe to account for GPUs
--   perfsonar-tools meta-package including updated bwctl, owamp, and nuttcp packages
+-   perfSONAR-tools meta-package including updated BWCTL, OWAMP, and nuttcp packages
 -   [HTCondor 8.6.9](https://www-auth.cs.wisc.edu/lists/htcondor-world/2018/msg00000.shtml): Bug fix release
 -   [frontier-squid 3.5.27-2.1](http://frontier.cern.ch/dist/rpms/frontier-squidRELEASE_NOTES): Bug fix release
 -   Minor bug fix for osg-user-cert-renew
