@@ -149,52 +149,6 @@ Example:
 root@host # osg-cert-retrieve -i 555
 ```
 
-### osg-gridadmin-cert-request
-
-Request and retrieve multliple host certificates from OIM. Authenticates to OIM and is only for use by Grid Admins for certificates they are authorized to approve. This script is only supported with all hosts being in the same domain (so we ensure they go to the same Grid Admin). The certificates are stored with the format of `hostname-requestid.pem` (i.e. the id generated from the request for the certificate). The key is stored as `hostname-serial-key.pem`.
-
-This script does the following in the process of acquiring certificates for the hostnames specified:
-
--   Reads a list of fully-qualified hostnames from a file specified by the user.
--   For each hostname:
-    -   Generates a new private key and CSR.
-    -   Only important part of CSR is `CN=<HOSTNAME>` component.
-    -   Writes the private key to a file with filename: `<PREFIX>/<HOSTNAME>-key.pem`.
-    -   Prompts the user for their private key pass phrase (the pass phrase is cached so user is not re-prompted).
-    -   Authenticates to OIM and posts the CSRs as a single request to OIM.
-    -   Request ID is returned and subsequently used.
-    -   Authenticates to OIM and approves the request.
-    -   Waits one minute for request to be processed by OIM.
-    -   Connects to OIM and attempts to retrieve certificates.
-    -   Writes out any certificates it retrieves with filename of `<PREFIX>/<HOSTNAME>-<ID>.pem`.
-    -   If all certificates have been retrieved, exits loop.
-    -   Wait 5 seconds and proceeds with the next repeat.
-
-**Inputs:**
-
--   filename of list of hostnames.
--   prefix path in which to write private keys and certificates (default: `.`.)
--   path to user's certificate (optional: default is path specified by `$X509_USER_CERT` environment variable, then `~/.globus/usercert.pem`).
--   path to user's private key (optional, default is path specified by `$X509_USER_KEY` environment variable, then `~/.globus/userkey.pem`).
--   Passphrase for user's private key via non-echoing prompt.
-
-**Outputs:**
-
--   `N` host certificates in PEM format.
--   `N` private keys in PEM format.
-
-Documentation for usage of this script can be found [here](https://github.com/opensciencegrid/osg-pki-tools/tree/master/docs)
-
-Examples:
-
-```console
-root@host # osg-gridadmin-cert-request -f filename -k privatekeyfile -c certificatefile
-```
-
-```console
-root@host # osg-gridadmin-cert-request -H hostname.domain.com -k privatekeyfile -c certificatefile
-```
-
 ### osg-user-cert-renew
 
 Sends a request for renewing a user certificate and if the certificate can be renewed, fetches and writes the renewed certificate.
