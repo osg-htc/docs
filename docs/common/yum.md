@@ -9,7 +9,7 @@ This document introduces YUM repositories and how OSG uses them.
 Repositories
 ------------
 
-OSG hosts four public-facing repositories at [repo.opensciencegrid.org](http://repo.opensciencegrid.org/):
+OSG hosts four public-facing repositories at [repo.opensciencegrid.org](https://repo.opensciencegrid.org/):
 
 -   **release**: This repository contains software that we are willing to support and can be used by the general community.
 -   **contrib**: RPMs contributed from outside the OSG.
@@ -106,8 +106,8 @@ The only OSG repository enabled by default is the release one. If you want to en
 ``` file
 [osg-testing]
 name=OSG Software for Enterprise Linux 7 - Testing - $basearch
-#baseurl=http://repo.opensciencegrid.org/osg/3.4/el7/testing/$basearch
-mirrorlist=http://repo.opensciencegrid.org/mirror/osg/3.4/el7/testing/$basearch
+#baseurl=https://repo.opensciencegrid.org/osg/3.4/el7/testing/$basearch
+mirrorlist=https://repo.opensciencegrid.org/mirror/osg/3.4/el7/testing/$basearch
 failovermethod=priority
 priority=98
 enabled=%RED%1%ENDCOLOR%
