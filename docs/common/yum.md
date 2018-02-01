@@ -29,6 +29,23 @@ If one of these repositories is missing you may have missing dependencies.
 !!! warning
     We did not test other repositories. If you use packages from other repositories, like `jpackage`, `dag`, or `rpmforge`, you may encounter problems.
 
+
+### Install the YUM priorities plugin
+
+We use YUM priorities to tell YUM to prefer OSG packages over EPEL or OS packages.
+It is important to install and enable the YUM priorities plugin before installing grid software to avoid getting the wrong versions.
+
+1.  Install the YUM priorities package:
+
+        :::console
+        root@host # yum install yum-plugin-priorities
+
+2.  Ensure that `/etc/yum.conf` has the following line in the `[main]` section:
+
+        :::file
+        plugins=1
+
+
 Enabling Repositories
 ---------------------
 
@@ -56,22 +73,6 @@ OSG RPMs are distributed via the OSG yum repositories. Some packages depend on p
 
 !!! warning
     if you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the OSG repository has a better yum priority than EPEL ([details](install-best-practices#YumPriorities)). Otherwise, you will have strange dependency resolution (*depsolving*) issues.
-
-
-### Install the YUM priorities plugin
-
-We use YUM priorities to tell YUM to prefer OSG packages over EPEL or OS packages.
-It is important to install and enable the YUM priorities plugin before installing grid software to avoid getting the wrong versions.
-
-1.  Install the YUM priorities package:
-
-        :::console
-        root@host # yum install yum-plugin-priorities
-
-2.  Ensure that `/etc/yum.conf` has the following line in the `[main]` section:
-
-        :::file
-        plugins=1
 
 
 ### Install OSG Repositories
