@@ -70,7 +70,9 @@ Unix accounts must exist for each VO, VO role, VO group, or user you choose to s
 allowed_vos="VO1,VO2..."
 ```
 
-The full list of VOs is located on [OIM](https://oim.opensciencegrid.org/oim/vo). You are not expected to support all the VOs; recommended VOs are:
+The full list of VOs is located on [OIM](https://oim.opensciencegrid.org/oim/vo).
+You are not expected to support all the VOs.
+If you would like to support opportunistic usage, we recommend creating the following Unix accounts:
 
 | **VO name**                                             | **Unix account(s)**                                                    |
 |---------------------------------------------------------|------------------------------------------------------------------------|
@@ -82,7 +84,6 @@ The full list of VOs is located on [OIM](https://oim.opensciencegrid.org/oim/vo)
 | [HCC](https://oim.opensciencegrid.org/oim/vo?id=67)     | `hcc`                                                                  |
 | [Gluex](https://oim.opensciencegrid.org/oim/vo?id=62)   | `gluex`                                                                |
 
-These VOs make good use of opportunistic resources.
 
 ### Applying configuration settings
 
