@@ -11,10 +11,12 @@ Repositories
 
 OSG hosts four public-facing repositories at [repo.opensciencegrid.org](https://repo.opensciencegrid.org/):
 
--   **release**: This repository contains software that we are willing to support and can be used by the general community.
--   **contrib**: RPMs contributed from outside the OSG.
--   **testing**: This repository contains software ready for testing. If you install packages from here, they may be buggy, but we will provide limited assistance in providing a migration path to a fixed version.
--   **development**: This repository is the bleeding edge. Installing from this repository may cause the host to stop functioning, and we will not assist in undoing any damage.
+-   **release**: RPMs considered production-ready.
+-   **testing**: RPMs not yet ready for release; expect bugs.
+-   **development**: RPMs that are bleeding-edge;
+      do not use without instruction from OSG Software and Release team members.
+-   **contrib**: RPMs contributed from outside the OSG S&R team;
+      no official OSG support.
 
 OSG's RPM packages rely also on external packages provided by supported OSes and EPEL. You must have the following repositories available and enabled:
 
