@@ -200,7 +200,8 @@ VO should open a GGUS ticket following EGI's [PROC20](https://wiki.egi.eu/wiki/P
 Replacing an Existing OASIS Repository Server
 ---------------------------------------
 
-There are two ways to replace the server for an existing `*.opensciencegrid.org` or `*.osgstorage.org` repository, one without changing the DNS name and one with changing it.
+If a need arises to replace a server for an existing `*.opensciencegrid.org` or `*.osgstorage.org` repository, there are two ways to do it:
+one without changing the DNS name and one with changing it.
 The latter can take longer because it requires GOC intervention.
 
 !!! note "Revision numbers must increase"
