@@ -50,10 +50,6 @@ install singularity or enable it to be run as an unprivileged user.
 Before Starting
 ---------------
 
-!!! note "Applicable versions"
-    The applicable software versions for this document are OSG version 3.4.7 or later.
-    The version of singularity installed should be 2.4.2 or later.
-
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
 - Ensure the host has [a supported operating system](../release/supported_platforms)
