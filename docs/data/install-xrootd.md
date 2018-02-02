@@ -80,10 +80,10 @@ XRootD *cluster*. The cluster uses one "redirector" node as a frontend for user
 accesses, and multiple data nodes that have the data that users request. Two
 daemons will run on each node:
 
-`xrootd`  
+`xrootd`<br/>
 The eXtended Root Daemon controls file access and storage.
 
-`cmsd`  
+`cmsd`<br/>
 The Cluster Management Services Daemon controls communication between nodes.
 
 Note that for large virtual organizations, a site-level redirector may actually
@@ -185,7 +185,7 @@ as such:
 all.export /data/xrootdfs
 set xrdr=%RED%hostA%ENDCOLOR%
 all.manager $(xrdr):3121
-if $(xrdr) &amp;&amp; named cns
+if $(xrdr) && named cns
       all.export /data/inventory
       xrd.port 1095
 else if $(xrdr)
@@ -209,44 +209,44 @@ section is the procedure for EL 6.
 Now, we have to change **`/etc/sysconfig/xrootd`** on the redirector node (%RED%hostA%ENDCOLOR%) to run multiple instances of XRootD. The second instance of XRootD will be named "cns" and will be used for SSI.
 
 ```file
-XROOTD\_USER=xrootd 
-XROOTD\_GROUP=xrootd 
-XROOTD\_DEFAULT\_OPTIONS="%RED%-k 7%ENDCOLOR% -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"
-%RED%XROOTD\_CNS\_OPTIONS="-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"%ENDCOLOR% 
-CMSD\_DEFAULT\_OPTIONS="%RED%-k 7%ENDCOLOR% -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg" 
-FRMD\_DEFAULT\_OPTIONS="%RED%-k 7%ENDCOLOR% -l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg" 
-%RED%XROOTD\_INSTANCES="default cns"%ENDCOLOR% 
-CMSD\_INSTANCES="default" 
-FRMD\_INSTANCES="default" 
+XROOTD_USER=xrootd
+XROOTD_GROUP=xrootd
+XROOTD_DEFAULT_OPTIONS="%RED%-k 7%ENDCOLOR% -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"
+%RED%XROOTD_CNS_OPTIONS="-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"%ENDCOLOR%
+CMSD_DEFAULT_OPTIONS="%RED%-k 7%ENDCOLOR% -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg"
+FRMD_DEFAULT_OPTIONS="%RED%-k 7%ENDCOLOR% -l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg"
+%RED%XROOTD_INSTANCES="default cns"%ENDCOLOR%
+CMSD_INSTANCES="default"
+FRMD_INSTANCES="default"
 ```
 
 Now, we can start XRootD cluster executing the following commands. On redirector you will see:
 
 ```console
-root@host # service xrootd start 
-Starting xrootd (xrootd, default): %GREEN%\[ OK \]%ENDCOLOR% 
-Starting xrootd (xrootd, cns): %GREEN%\[ OK \]%ENDCOLOR% 
-root@host # service cmsd start 
-Starting xrootd (cmsd, default): %GREEN%\[ OK \]%ENDCOLOR% 
+root@host # service xrootd start
+Starting xrootd (xrootd, default): %GREEN%[ OK ]%ENDCOLOR%
+Starting xrootd (xrootd, cns): %GREEN%[ OK ]%ENDCOLOR%
+root@host # service cmsd start
+Starting xrootd (cmsd, default): %GREEN%[ OK ]%ENDCOLOR%
 ```
 
 On redirector node you should see two instances of xrootd running:
 
 ```console
-root@host # ps auxww|grep xrootd 
-xrootd 29036 0.0 0.0 44008 3172 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default 
-xrootd 29108 0.0 0.0 43868 3016 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-cns.pid -n cns 
-xrootd 29196 0.0 0.0 51420 3692 ? Sl Apr11 0:00 /usr/bin/cmsd -k 7 -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default 
+root@host # ps auxww|grep xrootd
+xrootd 29036 0.0 0.0 44008 3172 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default
+xrootd 29108 0.0 0.0 43868 3016 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-cns.pid -n cns
+xrootd 29196 0.0 0.0 51420 3692 ? Sl Apr11 0:00 /usr/bin/cmsd -k 7 -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default
 ```
 %RED%warning%ENDCOLOR% the log file for second named instance of xrootd with be placed in `/var/log/xrootd/cns/xrootd.log`
 
 On data server node you should that XrdCnsd process has been started:
 
 ```console
-root@host # ps auxww|grep xrootd 
-xrootd 19156 0.0 0.0 48096 3256 ? Sl 07:37 0:00 /usr/bin/cmsd -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default 
-xrootd 19880 0.0 0.0 46124 2916 ? Sl 08:33 0:00 /usr/bin/xrootd -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default 
-xrootd 19894 0.0 0.1 71164 6960 ? Sl 08:33 0:00 /usr/bin/XrdCnsd -d -D 2 -i 90 -b fermicloud053.fnal.gov:1095:/data/inventory 
+root@host # ps auxww|grep xrootd
+xrootd 19156 0.0 0.0 48096 3256 ? Sl 07:37 0:00 /usr/bin/cmsd -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default
+xrootd 19880 0.0 0.0 46124 2916 ? Sl 08:33 0:00 /usr/bin/xrootd -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default
+xrootd 19894 0.0 0.1 71164 6960 ? Sl 08:33 0:00 /usr/bin/XrdCnsd -d -D 2 -i 90 -b fermicloud053.fnal.gov:1095:/data/inventory
 ```
 
 #### Starting a second instance of XRootD on EL 7
@@ -256,7 +256,7 @@ The procedure for starting a second instance differs between EL 6 and EL 7. This
 1.  Create a symlink pointing to `/etc/xrootd/xrootd-clustered.cfg` at `/etc/xrootd/xrootd-cns.cfg`:
 
 ```console
-root@host # ln -s /etc/xrootd/xrootd-clustered.cfg /etc/xrootd/xrootd-cns.cfg 
+root@host # ln -s /etc/xrootd/xrootd-clustered.cfg /etc/xrootd/xrootd-cns.cfg
 ```
 
 1.  Start an instance of the `xrootd` service named `cns` using the syntax in the [managing services section](#ManagingServices):
@@ -267,22 +267,22 @@ root@host # systemctl start <xrootd@cns>
 
 #### Testing an XRootD cluster with SSI
 
-1.  Copy file to redirector node specifying storage path (/data/xrootdfs instead of /tmp): 
+1.  Copy file to redirector node specifying storage path (/data/xrootdfs instead of /tmp):
 
 ```console
-root@host # xrdcp /bin/sh root://localhost:1094//data/xrootdfs/test1 
-\[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\] 
+root@host # xrdcp /bin/sh root://localhost:1094//data/xrootdfs/test1
+[xrootd] Total 0.00 MB |================| 100.00 % [inf MB/s]
 ```
 
-1.  To verify that SSI is working execute cns\_ssi command on the redirector node: 
+1.  To verify that SSI is working execute `cns_ssi` command on the redirector node:
 
 ```console
-root@host # cns\_ssi list /data/inventory 
-fermicloud054.fnal.gov incomplete inventory as of Mon Apr 11 17:28:11 2011 
-root@host # cns\_ssi updt /data/inventory 
-cns\_ssi: fermicloud054.fnal.gov inventory with 1 directory and 1 file updated with 0 errors. 
-root@host # cns\_ssi list /data/inventory 
-fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/xrootdfs/test1 
+root@host # cns_ssi list /data/inventory
+fermicloud054.fnal.gov incomplete inventory as of Mon Apr 11 17:28:11 2011
+root@host # cns_ssi updt /data/inventory
+cns_ssi: fermicloud054.fnal.gov inventory with 1 directory and 1 file updated with 0 errors.
+root@host # cns_ssi list /data/inventory
+fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/xrootdfs/test1
 ```
 
 **Note**: In this example, `fermicloud53.fnal.gov` is a redirector node and `fermicloud054.fnal.gov` is a data node.
@@ -325,20 +325,20 @@ will be owned by the `xrootd` user.
 
 #### Authorization file
 
-In order to add security to your cluster you will need to add "auth\_file" on
+In order to add security to your cluster you will need to add `auth_file` on
 the your data server node. Create `/etc/xrootd/auth_file` :
 
 ```file
-\# This means that all the users have read access to the datasets 
-u \* %RED%/data/xrootdfs%ENDCOLOR% lr
+# This means that all the users have read access to the datasets
+u * %RED%/data/xrootdfs%ENDCOLOR% lr
 
-\# This means that all the users have full access to their private dirs 
+# This means that all the users have full access to their private dirs
 u = %RED%/data/xrootdfs/%ENDCOLOR%@=/ a
 
-\# This means that this privileged user can do everything 
-\# You need at least one user like that, in order to create the 
-\# private dir for each user willing to store his data in the facility 
-u xrootd %RED%/data/xrootdfs%ENDCOLOR% a 
+# This means that this privileged user can do everything
+# You need at least one user like that, in order to create the
+# private dir for each user willing to store his data in the facility
+u xrootd %RED%/data/xrootdfs%ENDCOLOR% a
 ```
 
 Here we assume that your storage path is `/data/xrootdfs` (same as in the
@@ -347,7 +347,7 @@ previous example).
 Change file ownership (if you have created file as root):
 
 ```console
-root@host # chown xrootd:xrootd /etc/xrootd/auth\_file
+root@host # chown xrootd:xrootd /etc/xrootd/auth_file
 ```
 
 
@@ -361,12 +361,12 @@ Some examples of each option. For more details or examples on how to use
 templated user options, see [XRootd Authorization Database
 File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
 
-|        |                                                                                                                                                            |
-|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| idtype | Type of id - u for username, g for group, etc                                                                                                              |
-| id     | Username (or groupname). Use <noop>\*</noop> for all users or <noop>=</noop> for user-specific capabilities, like home directories |
-| path   | The path prefix to be used for matching purposes.                                                                                                          |
-| privs  | Letter list of privileges: `a - all ; l - lookup ; d - delete ; n - rename ; i - insert ; r - read ; k - lock (not used) ; w - write`                      |
+|        |                                                                                                                                       |
+|--------|---------------------------------------------------------------------------------------------------------------------------------------|
+| idtype | Type of id. Use `u` for username, `g` for group, etc.                                                                                 |
+| id     | Username (or groupname). Use `*` for all users or `=` for user-specific capabilities, like home directories                           |
+| path   | The path prefix to be used for matching purposes                                                                                      |
+| privs  | Letter list of privileges: `a - all ; l - lookup ; d - delete ; n - rename ; i - insert ; r - read ; k - lock (not used) ; w - write` |
 
 #### Security option 1: adding simple (Unix) security
 
@@ -376,30 +376,30 @@ to create the `auth_file` as in the previous section.
 The next step is to modify **`/etc/xrootd/xrootd-clustered.cfg`** on both nodes:
 
 ```file
-all.export /data/xrootdfs 
-set xrdr=%RED%hostA%ENDCOLOR% 
-all.manager $(xrdr):3121 
-if $(xrdr) && named cns 
-    all.export /data/inventory 
-    xrd.port 1095 
-else if $(xrdr) 
-    all.role manager 
-    xrd.port 1094 
-else 
-    all.role server 
-    oss.localroot /local/xrootd 
-    ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory 
-    cms.space min 2g 5g 
-    
-    %RED% \# ENABLE\_SECURITY\_BEGIN 
-    xrootd.seclib /usr/lib64/libXrdSec.so 
-    \# this specify that we use the 'unix' authentication module, additional one can be specified. 
-    sec.protocol /usr/lib64 unix 
-    \# this is the authorization file 
-    acc.authdb /etc/xrootd/auth\_file 
-    ofs.authorize 
-    \# ENABLE\_SECURITY\_END %ENDCOLOR% 
-fi 
+all.export /data/xrootdfs
+set xrdr=%RED%hostA%ENDCOLOR%
+all.manager $(xrdr):3121
+if $(xrdr) && named cns
+    all.export /data/inventory
+    xrd.port 1095
+else if $(xrdr)
+    all.role manager
+    xrd.port 1094
+else
+    all.role server
+    oss.localroot /local/xrootd
+    ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory
+    cms.space min 2g 5g
+
+    %RED% # ENABLE_SECURITY_BEGIN
+    xrootd.seclib /usr/lib64/libXrdSec.so
+    # this specify that we use the 'unix' authentication module, additional one can be specified.
+    sec.protocol /usr/lib64 unix
+    # this is the authorization file
+    acc.authdb /etc/xrootd/auth_file
+    ofs.authorize
+    # ENABLE_SECURITY_END %ENDCOLOR%
+fi
 ```
 
 Note that, to access users directories, you will have to create them in
@@ -413,37 +413,37 @@ After making all the changes, please, restart XRootD and cmsd daemons on all nod
 #### Testing an XRootD cluster with simple security enabled
 
 1.  Login on redirector node as root
-2.  Check that user "root" still can read files: 
+2.  Check that user "root" still can read files:
 
 ```console
-root@host # xrdcp root://localhost:1094//data/xrootdfs/test1 /tmp/b 
-\[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\]
+root@host # xrdcp root://localhost:1094//data/xrootdfs/test1 /tmp/b
+[xrootd] Total 0.00 MB |================| 100.00 % [inf MB/s]
 ```
 
 1.  Check that user "root" can not write files under /data/xrootdfs:
 
 ```console
-root@host # xrdcp /tmp/b root://localhost:1094//data/xrootdfs/test2 
-Last server error 3010 ('Unable to create /data/xrootdfs/test2; Permission denied') 
-Error accessing path/file for root://localhost:1094//data/xrootdfs/test3 
+root@host # xrdcp /tmp/b root://localhost:1094//data/xrootdfs/test2
+Last server error 3010 ('Unable to create /data/xrootdfs/test2; Permission denied')
+Error accessing path/file for root://localhost:1094//data/xrootdfs/test3
 ```
 
 or you may get this error:
 
 ```console
-root@host # xrdcp /tmp/b root://localhost:1094//data/xrootdfs/test2 
-Last server error 3011 ('No servers are available to write the file.') 
+root@host # xrdcp /tmp/b root://localhost:1094//data/xrootdfs/test2
+Last server error 3011 ('No servers are available to write the file.')
 Error accessing path/file for root://localhost:1094//data/xrootdfs/test2
 ```
 
 1.  Check that user can copy/retrieve files to/from /data/xrootdfs/~/...
 
 ```console
-root@host # su - %RED%user%ENDCOLOR% 
+root@host # su - %RED%user%ENDCOLOR%
 -bash-3.2$ xrdcp /tmp/a root://localhost:1094//data/xrootdfs/%RED%user%ENDCOLOR%/test1
-\[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\] 
--bash-3.2$ xrdcp root://localhost:1094//data/xrootdfs/%RED%user%ENDCOLOR%/test1 /tmp/c 
-\[xrootd\] Total 0.00 MB |**`================`**| 100.00 % \[inf MB/s\]
+[xrootd] Total 0.00 MB |================| 100.00 % [inf MB/s]
+-bash-3.2$ xrdcp root://localhost:1094//data/xrootdfs/%RED%user%ENDCOLOR%/test1 /tmp/c
+[xrootd] Total 0.00 MB |================| 100.00 % [inf MB/s]
 ```
 
 #### Security option 2: Shared keys
@@ -498,7 +498,7 @@ If you want to enable security for access to XRootD via xrootdfs you will need t
 
         :::console
         root@host # cp /bin/sh /mnt/xrootd/tlevshin/test1 cp:
-        cannot create regular file \`/mnt/xrootd/tlevshin/test1': Permission denied
+        cannot create regular file `/mnt/xrootd/tlevshin/test1': Permission denied
 
     Login as yourself and try:
 
@@ -532,24 +532,23 @@ so make sure that you install xrootd-lcmaps from the same repository that you
 install XRootD from. Otherwise, you may have dependency issues due to differing
 versions of shared libraries.
 
-**Create host certificates**
+**Create service certificate**
 
-You will need to have a X509 certificate to talk to GUMS. If you already have a
-host certificate, you can use a copy of that:
+You will need to have an X.509 certificate/key pair for xrootd. If you already have one for the host, you can use a copy of that:
 
 ``` console
- mkdir /etc/grid-security/xrd
- cp /etc/grid-security/hostkey.pem /etc/grid-security/xrd/xrdkey.pem
- cp /etc/grid-security/hostcert.pem /etc/grid-security/xrd/xrdcert.pem
- chown -R xrootd:xrootd /etc/grid-security/xrd/
- chmod 400 /etc/grid-security/xrd/xrdkey.pem
+root@host # mkdir /etc/grid-security/xrd
+root@host # cp /etc/grid-security/hostkey.pem /etc/grid-security/xrd/xrdkey.pem
+root@host # cp /etc/grid-security/hostcert.pem /etc/grid-security/xrd/xrdcert.pem
+root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
+root@host # chmod 400 /etc/grid-security/xrd/xrdkey.pem
 ```
 
-This certificate should be owned by `xrootd` and located in `/etc/grid-security/xrd`.
+This certificate and key should be owned by `xrootd` and located in `/etc/grid-security/xrd`.
 
 **Authorization File**
 
-Next, create `/etc/xrootd/auth_file` using the example in the above section.
+Next, create `/etc/xrootd/auth_file` using the example in the [above section](#authorization-file).
 
 **Modify /etc/xrootd/lcmaps.cfg**
 
@@ -693,22 +692,22 @@ cluster:
 1.  Make sure that FRM is enabled in `/etc/sysconfig/xrootd` on your data sever:
 
 ```file
-ROOTD\_USER=xrootd 
-XROOTD\_GROUP=xrootd 
-XROOTD\_DEFAULT\_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg" 
-CMSD\_DEFAULT\_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg" 
-FRMD\_DEFAULT\_OPTIONS="-l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg" 
-XROOTD\_INSTANCES="default" 
-CMSD\_INSTANCES="default" 
-FRMD\_INSTANCES="default"
+ROOTD_USER=xrootd
+XROOTD_GROUP=xrootd
+XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg"
+CMSD_DEFAULT_OPTIONS="-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg"
+FRMD_DEFAULT_OPTIONS="-l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg"
+XROOTD_INSTANCES="default"
+CMSD_INSTANCES="default"
+FRMD_INSTANCES="default"
 ```
 
 1.  Modify `/etc/xrootd/xrootd-clustered.cfg` on both nodes to specify options for `frm_xfrd` (File Transfer Daemon) and `frm_purged` (File Purging Daemon). For more information, you can visit the [FRM Documentation](http://xrootd.org/doc/dev4/frm_config.htm)
-2.  Start frm daemons on data server: 
+2.  Start frm daemons on data server:
 
 ```console
-root@host # service frm\_xfrd start
-root@host # service frm\_purged start
+root@host # service frm_xfrd start
+root@host # service frm_purged start
 ```
 
 (Optional) Installing a GridFTP Server
@@ -751,8 +750,8 @@ Edit `/etc/sysconfig/xrootd-dsi` to set `XROOTD_VMP` to use your XRootD redirect
     The syntax of `XROOTD_VMP` is tricky; make sure to use the following guidance:
 
     - **Redirector**: The hostname and domain of the local XRootD redirector server.
-    - **local\_path**: The path exported by the GridFTP server.
-    - **remote\_path**: The XRootD path that will be mounted at **local\_path**.
+    - **local_path**: The path exported by the GridFTP server.
+    - **remote_path**: The XRootD path that will be mounted at **local_path**.
 
 When `xrootd-dsi` is enabled, GridFTP configuration changes should go into
 `/etc/xrootd-dsi/gridftp-xrootd.conf`, not `/etc/gridftp.conf`.  Sites should review any
@@ -818,12 +817,12 @@ The services are:
 As a reminder, here are common service commands (all run as `root`):
 
 
-| To …                                        | On EL 6, run the command…             | On EL 7, run the command…                 |
-|:--------------------------------------------|:--------------------------------------|:------------------------------------------|
-| Start a service                             | `service <em>SERVICE-NAME</em> start` | `systemctl start <em>SERVICE-NAME</em>`   |
-| Stop a service                              | `service <em>SERVICE-NAME</em> stop`  | `systemctl start <em>SERVICE-NAME</em>`   |
-| Enable a service to start during boot       | `chkconfig <em>SERVICE-NAME</em> on`  | `systemctl enable <em>SERVICE-NAME</em>`  |
-| Disable a service from starting during boot | `chkconfig <em>SERVICE-NAME</em> off` | `systemctl disable <em>SERVICE-NAME</em>` |
+| To …                                        | On EL 6, run the command…    | On EL 7, run the command…        |
+|:--------------------------------------------|:-----------------------------|:---------------------------------|
+| Start a service                             | `service SERVICE-NAME start` | `systemctl start SERVICE-NAME`   |
+| Stop a service                              | `service SERVICE-NAME stop`  | `systemctl start SERVICE-NAME`   |
+| Enable a service to start during boot       | `chkconfig SERVICE-NAME on`  | `systemctl enable SERVICE-NAME`  |
+| Disable a service from starting during boot | `chkconfig SERVICE-NAME off` | `systemctl disable SERVICE-NAME` |
 
 Getting Help
 ------------
@@ -840,7 +839,7 @@ Reference
 | Service/Process | Configuration File                 | Description                              |
 |:----------------|:-----------------------------------|:-----------------------------------------|
 | `xrootd`        | `/etc/xrootd/xrootd-clustered.cfg` | Main clustered mode XRootD configuration |
-| ^               | `/etc/xrootd/auth_file`            | Authorized users file                    |
+|                 | `/etc/xrootd/auth_file`            | Authorized users file                    |
 
 | Service/Process          | Log File                         | Description                                 |
 |:-------------------------|:---------------------------------|:--------------------------------------------|
