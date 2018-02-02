@@ -43,9 +43,7 @@ install singularity or enable it to be run as an unprivileged user.
 
     As of February 2018, no VO in the OSG is ready to use non-setuid Singularity in production without a worker node installation.
     Most sites will want to follow the privileged RPM install instructions until there is wider VO support.
-    You may additionally want to enable unprivileged singularity for testing.
-
-    It is possible to both install the RPM and enable unprivileged singularity, and then disable the privileges in the RPM without the VO being involved, but it is not recommended because it involves modifying files installed by the RPM.
+    Contact the VOs you support for more information.
 
 Before Starting
 ---------------
