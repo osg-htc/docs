@@ -135,5 +135,4 @@ Reference
 ---------
 
 -   [Basic use of Yum](../release/yum-basics.md)
--   [Best practices in using Yum](install-best-practices)
 

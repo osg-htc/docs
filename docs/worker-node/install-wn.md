@@ -77,7 +77,7 @@ To get assistance please use this [Help Procedure](/common/help).
 Reference
 ---------
 
-Please see the documentation on using [yum and RPM](/release/yum-basics.md), [the best practices](/common/install-best-practices) for using yum to install software, and using [yum repositories](/common/yum.md).
+Please see the documentation on using [YUM and RPM](../release/yum-basics.md), and using the [OSG YUM repositories](../common/yum.md).
 
 ### Worker node contents
 

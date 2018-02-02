@@ -46,7 +46,6 @@ pages:
   - 'User Certificates': 'security/user-certs.md'
   - 'Certificate Management Reference': 'security/certificate-management.md'
 - Common:
-  - 'Install Best Practices': 'common/install-best-practices.md'
   - 'CA Certificates': 'common/ca.md'
   - 'Yum Repos': 'common/yum.md'
   - 'Java 7': 'common/openjdk7.md'

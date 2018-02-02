@@ -171,5 +171,4 @@ References
 
 -   [Yum repositories](../common/yum)
 -   [Basic use of Yum](../release/yum-basics)
--   [Yum best practices](../common/install-best-practices)
 
