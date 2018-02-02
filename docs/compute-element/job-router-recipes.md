@@ -5,13 +5,6 @@ The [JobRouter](http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job
 
 If you have needs beyond delegating all incoming jobs to your batch system as they are, this document provides examples of common job routes and job route problems.
 
-!!! note "Definitions"
-    - **Incoming Job**: A job which was submitted to the CE from an outside source, such as a GlideinWMS Factory.
-
-    - **Routed Job**: A job which was transformed by the JobRouter.
-
-    - **Batch System**: The underlying batch system that the HTCondor-CE will submit.  This can be SLURM, PBS, HTCondor, SGE, LSF,...
-
 Quirks and Pitfalls
 -------------------
 
@@ -25,7 +18,7 @@ Quirks and Pitfalls
 How Job Routes are Constructed
 ------------------------------
 
-Each job route’s [ClassAd](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_1HTCondor_s_ClassAd.html) is constructed by combining each entry from the `JOB_ROUTER_ENTRIES` with the `JOB_ROUTER_DEFAULTS`. Attributes that are [set_*](#setting-attributes) in `JOB_ROUTER_ENTRIES` will override those [set_*](#setting-attributes) in `JOB_ROUTER_DEFAULTS`
+Each job route’s [ClassAd](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_1HTCondor_s_ClassAd.html) is constructed by combining each entry from the `JOB_ROUTER_ENTRIES` with the `JOB_ROUTER_DEFAULTS`. Attributes that are [set_](#setting-attributes) in `JOB_ROUTER_ENTRIES` will override those [set_](#setting-attributes) in `JOB_ROUTER_DEFAULTS`
 
 ### JOB_ROUTER_ENTRIES
 
@@ -33,10 +26,11 @@ Each job route’s [ClassAd](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_
 
 ### JOB_ROUTER_DEFAULTS
 
-`JOB_ROUTER_DEFAULTS` is a python-generated configuration variable that sets default job route values that are required for the HTCondor-CE's functionality. To view its contents in a readable format, run the following command:
+`JOB_ROUTER_DEFAULTS` is a python-generated configuration variable that sets default job route values that are required for the HTCondor-CE's functionality. To view its contents, run the following command:
 
-    :::console
-    user@host $ condor_ce_config_val JOB_ROUTER_DEFAULTS | sed 's/;/;\n/g'
+``` console
+user@host $ condor_ce_config_val JOB_ROUTER_DEFAULTS | sed 's/;/;\n/g'
+```
 
 !!! warning
     If a value is set in [JOB\_ROUTER\_DEFAULTS](#job_router_defaults) with `eval_set_<variable>`, override it by using `eval_set_<variable>` in the `JOB_ROUTER_ENTRIES`. Do this at your own risk as it may cause the CE to break.
@@ -55,7 +49,7 @@ The minimum requirements for a route are that you specify the type of batch syst
 
 #### Batch system
 
-Each route needs to indicate the type of batch system that jobs should be routed to. For HTCondor batch systems, the `TargetUniverse` attribute needs to be set to `5` or `"vanilla"`. For all other batch systems, the `TargetUniverse` attribute needs to be set to `9` or `"grid"` and the `GridResource` attribute needs to be set to `"batch <batch system>"` (where `<batch system>` can be one of `pbs`, `slurm`, `lsf`, or `sge`).
+Each route needs to indicate the type of batch system that jobs should be routed to. For HTCondor batch systems, the `TargetUniverse` attribute needs to be set to `5` or `"vanilla"`. For all other batch systems, the `TargetUniverse` attribute needs to be set to `9` or `"grid"` and the `GridResource` attribute needs to be set to `"batch <batch system>"` (where `<batch system>` can be one of `pbs` (for both users of `pbs` and `SLURM`), `lsf`, or `sge`).
 
 ```
 JOB_ROUTER_ENTRIES = [ \
@@ -80,7 +74,7 @@ JOB_ROUTER_ENTRIES = [ \
 ]
 ```
 
-The name of the route will be useful in debugging since it shows up in the output of [condor\_ce\_job\_router\_info](/compute-element/troubleshoot-htcondor-ce#condor_ce_job_router_info), the [JobRouterLog](/compute-element/troubleshoot-htcondor-ce#jobrouterlog), and in the ClassAd of the routed job, which can be viewed with [condor\_ce\_q](/compute-element/troubleshoot-htcondor-ce#condor_ce_q) or [condor\_ce\_history](/compute-element/troubleshoot-htcondor-ce#condor_ce_history).
+The name of the route will be useful in debugging since it shows up in the output of [condor\_ce\_job\_router\_info](troubleshoot-htcondor-ce#condor_ce_job_router_info), the [JobRouterLog](troubleshoot-htcondor-ce#jobrouterlog), and in the ClassAd of the routed job, which can be viewed with [condor\_ce\_q](troubleshoot-htcondor-ce#condor_ce_q) or [condor\_ce\_history](troubleshoot-htcondor-ce#condor_ce_history).
 
 ### Writing multiple routes
 
@@ -141,7 +135,7 @@ JOB_ROUTER_DEFAULTS = $(JOB_ROUTER_DEFAULTS) %RED%[set_Periodic_Hold = (NumJobSt
 
 ### Filtering jobs based on…
 
-To filter jobs, use the `Requirements` attribute. Jobs will evaluate against the ClassAd expression set in the `Requirements` and if the expression evaluates to `TRUE`, the route will match. More information on the syntax of ClassAd's can be found in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_1HTCondor_s_ClassAd.html). For an example on how incoming jobs interact with filtering in job routes, consult [this document](/compute-element/submit-htcondor-ce).
+To filter jobs, use the `Requirements` attribute. Jobs will evaluate against the ClassAd expression set in the `Requirements` and if the expression evaluates to `TRUE`, the route will match. More information on the syntax of ClassAd's can be found in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_1HTCondor_s_ClassAd.html). For an example on how incoming jobs interact with filtering in job routes, consult [this document](submit-htcondor-ce).
 
 When setting requirements, you need to prefix job attributes that you are filtering with `TARGET.` so that the job route knows to compare the attribute of the incoming job rather than the route’s own attribute. For example, if an incoming job has a `queue = "analy"` attribute, then the following job route will not match:
 
@@ -164,7 +158,7 @@ This is because when evaluating the route requirement, the job route will compar
 
 #### Glidein queue
 
-To filter jobs based on their glidein queue attribute, your routes will need a `Requirements` expression using the incoming job's `queue` attribute. The following entry routes jobs to PBS if the incoming job (specified by `TARGET`) is an `analy` (Analysis) glidein:
+To filter jobs based on their glidein queue attribute, your routes will need a `Requirements` expression using the incoming job's `queue` attribute. The following entry routes jobs to the PBS queue if the incoming job (specified by `TARGET`) is an `analy` (Analysis) glidein:
 
 ```
 JOB_ROUTER_ENTRIES = [ \
@@ -176,7 +170,7 @@ JOB_ROUTER_ENTRIES = [ \
 
 #### Job submitter
 
-To filter jobs based on who submitted it, your routes will need a `Requirements` expression using the incoming job's `Owner` attribute. The following entry routes jobs to the HTCondor batch system if the submitter is `usatlas2`:
+To filter jobs based on who submitted it, your routes will need a `Requirements` expression using the incoming job's `Owner` attribute. The following entry routes jobs to the HTCondor batch system iff the submitter is `usatlas2`:
 
 ```
 JOB_ROUTER_ENTRIES = [ \
@@ -186,7 +180,7 @@ JOB_ROUTER_ENTRIES = [ \
 ]
 ```
 
-Alternatively, you can match based on regular expression. The following entry routes jobs to the PBS batch system if the submitter's name begins with `usatlas`:
+Alternatively, you can match based on regular expression. The following entry routes jobs to the PBS batch system iff the submitter's name begins with `usatlas`:
 
 ```
 JOB_ROUTER_ENTRIES = [ \
@@ -223,7 +217,7 @@ CONDORCE_MAX_JOBS = 10000
 ```
 
 !!! note
-    The above configuration is to be placed directly into the HTCondor-CE configuration, not into a job route.
+    The above configuration  is to be placed directly into the HTCondor-CE configuration, not into a job route.
 
 #### Maximum memory
 
@@ -276,7 +270,7 @@ The following functions are operations that affect job attributes and are evalua
 3.  `set_*`
 4.  `eval_set_*`
 
-After each job route’s ClassAd is [constructed](#how-job-routes-are-constructed), the above operations are evaluated in order. For example, if the attribute `foo` is set using `eval_set_foo` in the `JOB_ROUTER_DEFAULTS`, you'll be unable to use `delete_foo` to remove it from your jobs since the attribute is set using `eval_set_foo` after the deletion occurs according to the order of operations. To get around this, we can take advantage of the fact that operations defined in `JOB_ROUTER_DEFAULTS` get overridden by the same operation in `JOB_ROUTER_ENTRIES`. So to 'delete' `foo`, we would add `eval_set_foo = ""` to the route in the `JOB_ROUTER_ENTRIES`, resulting in `foo` being absent from the routed job.
+After each job route’s ClassAd is [constructed](#how-job-routes-are-constructed), the above operations are evaluated in order. For example, if the attribute `foo` is set using `eval_set_foo` in the `JOB_ROUTER_DEFAULTS`, you'll be unable to use `delete_foo` to remote it from your jobs since the attribute is set using `eval_set_foo` after the deletion occurs according to the order of operations. To get around this, we can take advantage of the fact that operations defined in `JOB_ROUTER_DEFAULTS` get overriden by the same operation in `JOB_ROUTER_ENTRIES`. So to 'delete' `foo`, we would add `eval_set_foo = ""` to the route in the `JOB_ROUTER_ENTRIES`, resulting in `foo` being absent from the routed job.
 
 More documentation can be found in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html#SECTION00644000000000000000).
 
@@ -321,7 +315,7 @@ JOB_ROUTER_ENTRIES = [ \
 
 #### Setting attributes with ClassAd expressions
 
-To set an attribute to a ClassAd expression to be evaluated, use `eval_set`. The following route sets the `Experiment` attribute to `atlas.osguser` if the Owner of the incoming job is `osguser`:
+To set an attribute to a ClassAd expression to be evaluated, use `set_eval`. The following route sets the `Experiment` attribute to `atlas.osguser` if the Owner of the incoming job is `osguser`:
 
 !!! note
     If a value is set in JOB\_ROUTER\_DEFAULTS with `eval_set_<variable>`, override it by using `eval_set_<variable>` in the `JOB_ROUTER_ENTRIES`.
@@ -408,8 +402,6 @@ This section contains information about job routes that can be used if you are r
 
 To release, remove or put a job on hold if it meets certain criteria, use the `PERIODIC_*` family of attributes. By default, periodic expressions are evaluated once every 300 seconds but this can be changed by setting `PERIODIC_EXPR_INTERVAL` in your CE's configuration.
 
-In this example, we set the routed job on hold if the job is idle and has been started at least once or if the job has tried to start more than once.  This will catch jobs which are starting and stopping multiple times.
-
 ```
 JOB_ROUTER_ENTRIES = [ \
      TargetUniverse = 5; \
@@ -425,7 +417,7 @@ JOB_ROUTER_ENTRIES = [ \
 
 ### Setting routed job requirements
 
-If you need to set requirements on your routed job, you will need to use `set_Requirements` instead of `Requirements`. The `Requirements` attribute filters jobs coming into your CE into different job routes whereas `set_Requirements` will set conditions on the routed job that must be met by the worker node it lands on. For more information on requirements, consult the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html#SECTION00357000000000000000).
+If you need to set requirements on your routed job, you will need to use `set_Requirements` instead of `Requirements`. The `Requirements` attribute filters jobs coming into your CE into different job routes whereas `set_requirements` will set conditions on the routed job that must be met by the worker node it lands on. For more information on requirements, consult the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/2_5Submitting_Job.html#SECTION00357000000000000000).
 
 To ensure that your job lands on a Linux machine in your pool:
 
@@ -438,7 +430,7 @@ JOB_ROUTER_ENTRIES = [ \
 
 ### Setting accounting groups
 
-To assign jobs to an HTCondor accounting group to manage fair share on your local batch system, we recommend using [UID and ExtAttr tables](/compute-element/install-htcondor-ce#htcondor-accounting-groups).
+To assign jobs to an HTCondor accounting group to manage fair share on your local batch system, we recommend using [UID and ExtAttr tables](install-htcondor-ce#htcondor-accounting-groups).
 
 Routes for non-HTCondor Batch Systems
 -------------------------------------
@@ -702,6 +694,14 @@ Atlas BNL T1, they are using an HTCondor batch system. Here are some things to n
 Source: <http://www.usatlas.bnl.gov/twiki/bin/view/Admins/HTCondorCE.html>
 
 ```
+###############################################################################
+#
+# HTCondor-CE HTCondor batch system configuration file.
+#
+###############################################################################
+
+# Submit the job to the site Condor
+
 JOB_ROUTER_ENTRIES = \
    [ \
      GridResource = "condor localhost localhost"; \
