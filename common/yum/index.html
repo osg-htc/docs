@@ -772,18 +772,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-best-practices/" title="Install Best Practices" class="md-nav__link">
-      Install Best Practices
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../ca/" title="CA Certificates" class="md-nav__link">
       CA Certificates
     </a>
@@ -837,37 +825,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enabling-repositories" title="Enabling Repositories" class="md-nav__link">
-    Enabling Repositories
+  <a href="#installing-and-configuring-repositories" title="Installing and Configuring Repositories" class="md-nav__link">
+    Installing and Configuring Repositories
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-the-yum-repositories-required-by-osg" title="Install the Yum Repositories required by OSG" class="md-nav__link">
-    Install the Yum Repositories required by OSG
+  <a href="#install-the-yum-priorities-plugin" title="Install the YUM priorities plugin" class="md-nav__link">
+    Install the YUM priorities plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-epel" title="Install EPEL" class="md-nav__link">
-    Install EPEL
+  <a href="#install-the-epel-repositories" title="Install the EPEL repositories" class="md-nav__link">
+    Install the EPEL repositories
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-the-yum-priorities-package" title="Install the Yum priorities package" class="md-nav__link">
-    Install the Yum priorities package
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-osg-repositories" title="Install OSG Repositories" class="md-nav__link">
-    Install OSG Repositories
+  <a href="#install-the-osg-repositories" title="Install the OSG Repositories" class="md-nav__link">
+    Install the OSG Repositories
   </a>
   
 </li>
@@ -878,8 +859,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#priorities" title="Priorities" class="md-nav__link">
-    Priorities
+  <a href="#repository-mirrors" title="Repository Mirrors" class="md-nav__link">
+    Repository Mirrors
   </a>
   
 </li>
@@ -2176,37 +2157,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enabling-repositories" title="Enabling Repositories" class="md-nav__link">
-    Enabling Repositories
+  <a href="#installing-and-configuring-repositories" title="Installing and Configuring Repositories" class="md-nav__link">
+    Installing and Configuring Repositories
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-the-yum-repositories-required-by-osg" title="Install the Yum Repositories required by OSG" class="md-nav__link">
-    Install the Yum Repositories required by OSG
+  <a href="#install-the-yum-priorities-plugin" title="Install the YUM priorities plugin" class="md-nav__link">
+    Install the YUM priorities plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-epel" title="Install EPEL" class="md-nav__link">
-    Install EPEL
+  <a href="#install-the-epel-repositories" title="Install the EPEL repositories" class="md-nav__link">
+    Install the EPEL repositories
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-the-yum-priorities-package" title="Install the Yum priorities package" class="md-nav__link">
-    Install the Yum priorities package
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-osg-repositories" title="Install OSG Repositories" class="md-nav__link">
-    Install OSG Repositories
+  <a href="#install-the-osg-repositories" title="Install the OSG Repositories" class="md-nav__link">
+    Install the OSG Repositories
   </a>
   
 </li>
@@ -2217,8 +2191,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#priorities" title="Priorities" class="md-nav__link">
-    Priorities
+  <a href="#repository-mirrors" title="Repository Mirrors" class="md-nav__link">
+    Repository Mirrors
   </a>
   
 </li>
@@ -2249,77 +2223,85 @@
                 
                 <h1 id="yum-repositories">YUM Repositories<a class="headerlink" href="#yum-repositories" title="Permanent link">&para;</a></h1>
 <h2 id="about-this-document">About This Document<a class="headerlink" href="#about-this-document" title="Permanent link">&para;</a></h2>
-<p>This document introduces YUM repositories and how OSG uses them.</p>
+<p>This document introduces YUM repositories and how OSG uses them.
+If you are unfamiliar with YUM, see the <a href="../../release/yum-basics">documentation on using YUM and RPM</a>.</p>
 <h2 id="repositories">Repositories<a class="headerlink" href="#repositories" title="Permanent link">&para;</a></h2>
-<p>OSG hosts four public-facing repositories at <a href="http://repo.opensciencegrid.org/">repo.opensciencegrid.org</a>:</p>
+<p>OSG hosts four public-facing repositories at <a href="https://repo.opensciencegrid.org/">repo.opensciencegrid.org</a>:</p>
 <ul>
-<li><strong>release</strong>: This repository contains software that we are willing to support and can be used by the general community.</li>
-<li><strong>contrib</strong>: RPMs contributed from outside the OSG.</li>
-<li><strong>testing</strong>: This repository contains software ready for testing. If you install packages from here, they may be buggy, but we will provide limited assistance in providing a migration path to a fixed version.</li>
-<li><strong>development</strong>: This repository is the bleeding edge. Installing from this repository may cause the host to stop functioning, and we will not assist in undoing any damage.</li>
+<li><strong>release</strong>: RPMs considered production-ready.</li>
+<li><strong>testing</strong>: RPMs not yet ready for release; expect bugs.</li>
+<li><strong>development</strong>: RPMs that are bleeding-edge;
+      do not use without instruction from OSG Software and Release team members.</li>
+<li><strong>contrib</strong>: RPMs contributed from outside the OSG S&amp;R team;
+      no official OSG support.</li>
+<li><strong>upcoming release/testing/development</strong>: Similar to release/testing/development but for new versions of software that may require manual action after an update.</li>
 </ul>
 <p>OSG's RPM packages rely also on external packages provided by supported OSes and EPEL. You must have the following repositories available and enabled:</p>
 <ul>
-<li>your OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories)</li>
+<li>OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories)</li>
 <li>EPEL repositories</li>
-<li>the OSG repositories you'd like to use</li>
+<li>OSG repositories</li>
 </ul>
-<p>If one of these repositories is missing you may have missing dependencies.</p>
+<p>If any of these repositories are missing, you may end up with missing dependencies.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>We did not test other repositories. If you use packages from other repositories, like <code>jpackage</code>, <code>dag</code>, or <code>rpmforge</code>, you may encounter problems.</p>
+<p>Other repositories, such as <code>jpackage</code>, <code>dag</code>, or <code>rpmforge</code>, are not supported and you may encounter problems if you use them.</p>
 </div>
-<h2 id="enabling-repositories">Enabling Repositories<a class="headerlink" href="#enabling-repositories" title="Permanent link">&para;</a></h2>
-<p>In <a href="../install-best-practices">our advice on using yum</a> you will learn many tricks and tips on using yum.</p>
-<p>To use the packages in a repository without adding special options to the yum command the repository must be enabled.</p>
-<h3 id="install-the-yum-repositories-required-by-osg">Install the Yum Repositories required by OSG<a class="headerlink" href="#install-the-yum-repositories-required-by-osg" title="Permanent link">&para;</a></h3>
-<p>The OSG RPMs currently support Red Hat Enterprise Linux 6, 7, and variants.</p>
-<p>OSG RPMs are distributed via the OSG yum repositories. Some packages depend on packages distributed via the <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a> repositories. So both repositories must be enabled.</p>
-<h3 id="install-epel">Install EPEL<a class="headerlink" href="#install-epel" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Install the EPEL repository, if not already present. <strong>Note:</strong> This enables EPEL by default. Choose the right version to match your OS version.<div class="codehilite"><pre><span></span><span class="gp">#</span> EPEL <span class="m">6</span> <span class="o">(</span>For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL <span class="m">6</span><span class="o">)</span>
-<span class="gp">root@host #</span> rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-<span class="gp">#</span> EPEL <span class="m">7</span> <span class="o">(</span>For RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL <span class="m">7</span><span class="o">)</span> 
-<span class="gp">root@host #</span> rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-</pre></div>
-
-
-</li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>if you have your own mirror or configuration of the EPEL repository, you <strong>MUST</strong> verify that the OSG repository has a better yum priority than EPEL (<a href="../install-best-practices#YumPriorities">details</a>). Otherwise, you will have strange dependency resolution (<em>depsolving</em>) issues.</p>
-</div>
-<h3 id="install-the-yum-priorities-package">Install the Yum priorities package<a class="headerlink" href="#install-the-yum-priorities-package" title="Permanent link">&para;</a></h3>
-<p>For packages that exist in both OSG and EPEL repositories, it is important to prefer the OSG ones or else OSG software installs may fail. Installing the Yum priorities package enables the repository priority system to work.</p>
+<h2 id="installing-and-configuring-repositories">Installing and Configuring Repositories<a class="headerlink" href="#installing-and-configuring-repositories" title="Permanent link">&para;</a></h2>
+<h3 id="install-the-yum-priorities-plugin">Install the YUM priorities plugin<a class="headerlink" href="#install-the-yum-priorities-plugin" title="Permanent link">&para;</a></h3>
+<p>We use YUM priorities to tell YUM to prefer OSG packages over EPEL or OS packages.
+It is important to install and enable the YUM priorities plugin before installing grid software to avoid getting the wrong versions.</p>
 <ol>
 <li>
-<p>Install the Yum priorities package:</p>
+<p>Install the YUM priorities package:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install yum-plugin-priorities
 </pre></div>
 
 
 </li>
 <li>
-<p>Ensure that <code>/etc/yum.conf</code> has the following line in the <code>[main]</code> section (particularly when using ROCKS), thereby enabling Yum plugins, including the priorities one:</p>
+<p>Ensure that <code>/etc/yum.conf</code> has the following line in the <code>[main]</code> section:</p>
 <div class="codehilite"><pre><span></span>plugins=1
 </pre></div>
 
 
 </li>
 </ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you do not have a required key you can force the installation using <code>--nogpgcheck=</code>; e.g., <code>yum install --nogpgcheck yum-priorities</code>.</p>
-</div>
-<h3 id="install-osg-repositories">Install OSG Repositories<a class="headerlink" href="#install-osg-repositories" title="Permanent link">&para;</a></h3>
-<p>If you are upgrading from one OSG series to another, remove the old OSG repository definition files and clean the Yum cache:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum clean all 
-<span class="gp">root@host #</span> rpm -e osg-release
+<h3 id="install-the-epel-repositories">Install the EPEL repositories<a class="headerlink" href="#install-the-epel-repositories" title="Permanent link">&para;</a></h3>
+<p>OSG software depends on packages distributed via the <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a> repositories.
+You must install and enable those first.</p>
+<ul>
+<li>
+<p>Install the EPEL repository, if not already present.  Choose the right version to match your OS version.</p>
+<div class="codehilite"><pre><span></span><span class="gp">#</span><span class="c1"># EPEL 6 (For RHEL 6, CentOS 6, and SL 6)</span>
+<span class="gp">root@host #</span> rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+<span class="gp">#</span><span class="c1"># EPEL 7 (For RHEL 7, CentOS 7, and SL 7)</span>
+<span class="gp">root@host #</span> rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 </pre></div>
 
 
-<p>This step ensures that local changes to <code>*.repo</code> files will not block the installation of the new OSG repositories. After this step, <code>*.repo</code> files that have been changed will exist in <code>/etc/yum.repos.d/</code> with the <code>*.rpmsave</code> extension. After installing the new OSG repositories (the next step) you may want to apply any changes made in the <code>*.rpmsave</code> files to the new <code>*.repo</code> files.</p>
+</li>
+<li>
+<p>Verify that <code>/etc/yum.repos.d/epel.repo</code> exists; the <code>[epel]</code> section should contain:</p>
+<ul>
+<li>
+<p>The line <code>enabled=1</code></p>
+</li>
+<li>
+<p>Either no <code>priority</code> setting, or a <code>priority</code> setting that is 99 or higher</p>
+</li>
+</ul>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you have your own mirror or configuration of the EPEL repository, you <strong>MUST</strong> verify that the priority of the EPEL repository is either missing, or 99 or a higher number.
+The OSG repositories must have a better (numerically lower) priority than the EPEL repositories;
+you might have dependency resolution ("depsolving") issues otherwise.</p>
+</div>
+<h3 id="install-the-osg-repositories">Install the OSG Repositories<a class="headerlink" href="#install-the-osg-repositories" title="Permanent link">&para;</a></h3>
+<p>This document assumes a fresh install.
+For instructions on upgrading from one OSG series to another, see the <a href="../../release/release_series#updating-from-old">release series document</a>.</p>
 <p>Install the OSG repositories:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -Uvh &lt;URL&gt;
 </pre></div>
@@ -2347,16 +2329,11 @@
 </tr>
 </tbody>
 </table>
-<h2 id="priorities">Priorities<a class="headerlink" href="#priorities" title="Permanent link">&para;</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Make sure you installed the Yum priorities plugin, as described above. Not doing so is a common mistake that causes failed installations.</p>
-</div>
 <p>The only OSG repository enabled by default is the release one. If you want to enable another one, such as <code>osg-testing</code>, then edit its file (e.g. <code>/etc/yum.repos.d/osg-testing.repo</code>) and change the enabled option from 0 to 1:</p>
 <div class="codehilite"><pre><span></span><span class="k">[osg-testing]</span>
 <span class="na">name</span><span class="o">=</span><span class="s">OSG Software for Enterprise Linux 7 - Testing - $basearch</span>
-<span class="c1">#baseurl=http://repo.opensciencegrid.org/osg/3.4/el7/testing/$basearch</span>
-<span class="na">mirrorlist</span><span class="o">=</span><span class="s">http://repo.opensciencegrid.org/mirror/osg/3.4/el7/testing/$basearch</span>
+<span class="c1">#baseurl=https://repo.opensciencegrid.org/osg/3.4/el7/testing/$basearch</span>
+<span class="na">mirrorlist</span><span class="o">=</span><span class="s">https://repo.opensciencegrid.org/mirror/osg/3.4/el7/testing/$basearch</span>
 <span class="na">failovermethod</span><span class="o">=</span><span class="s">priority</span>
 <span class="na">priority</span><span class="o">=</span><span class="s">98</span>
 <span class="na">enabled</span><span class="o">=</span><span class="s"><span style="color:red">1</span></span>
@@ -2365,14 +2342,26 @@
 </pre></div>
 
 
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>if you have your own mirror or configuration of the EPEL repository, you <strong>MUST</strong> verify that the OSG repository has a better yum priority than EPEL. Otherwise, you will have strange dependency resolution issues.</p>
-</div>
+<h2 id="repository-mirrors">Repository Mirrors<a class="headerlink" href="#repository-mirrors" title="Permanent link">&para;</a></h2>
+<p>If you run a large site (&gt;20 nodes), you should consider setting up a local mirror for the OSG repositories.
+A local YUM mirror allows you to reduce the amount of external bandwidth used when updating or installing packages.</p>
+<p>Add the following to a file in <code>/etc/cron.d</code>:</p>
+<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">RANDOM</span> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/ /var/www/html/osg/</span>
+</pre></div>
+
+
+<p>Or, to mirror only a single repository:</p>
+<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">RANDOM</span> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/<span style="color:red">OSG_RELEASE</span>/el6/development /var/www/html/osg/<span style="color:red">OSG_RELEASE</span>/el6</span>
+</pre></div>
+
+
+<p>Replace <span style="color:red">RANDOM</span> with a number between 0 and 59.</p>
+<p>Replace <span style="color:red">OSG_RELEASE</span> with the OSG release you want to use (e.g. '3.3', or '3.4').</p>
+<p>On your worker node, you can replace the <code>baseurl</code> line of <code>/etc/yum.repos.d/osg.repo</code> with the appropriate URL for your mirror.</p>
+<p>If you are interested in having your mirror be part of the OSG's default set of mirrors, <a href="https://ticket.opensciencegrid.org/">please file a GOC ticket</a>.</p>
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../../release/yum-basics/">Basic use of Yum</a></li>
-<li><a href="../install-best-practices">Best practices in using Yum</a></li>
 </ul>
                 
                   
