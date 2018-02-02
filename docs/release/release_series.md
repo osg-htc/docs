@@ -30,6 +30,8 @@ Installing an OSG Release Series
 
 See the [yum repositories document](/common/yum) for instructions on installing the OSG repositories.
 
+<a name="updating-from-old"></a>
+
 Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4
 =============================================
 
@@ -169,5 +171,4 @@ References
 
 -   [Yum repositories](../common/yum)
 -   [Basic use of Yum](../release/yum-basics)
--   [Yum best practices](../common/install-best-practices)
 
