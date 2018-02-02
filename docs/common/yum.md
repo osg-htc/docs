@@ -18,6 +18,7 @@ OSG hosts four public-facing repositories at [repo.opensciencegrid.org](https://
       do not use without instruction from OSG Software and Release team members.
 -   **contrib**: RPMs contributed from outside the OSG S&R team;
       no official OSG support.
+-   **upcoming release/testing/development**: Similar to release/testing/development but for new versions of software that may require manual action after an update.
 
 OSG's RPM packages rely also on external packages provided by supported OSes and EPEL. You must have the following repositories available and enabled:
 
@@ -28,7 +29,7 @@ OSG's RPM packages rely also on external packages provided by supported OSes and
 If any of these repositories are missing, you may end up with missing dependencies.
 
 !!! warning
-    Other repositories, such as `jpackage`, `dag`, or `rpmforge`, are not supported and you may encounter problems.
+    Other repositories, such as `jpackage`, `dag`, or `rpmforge`, are not supported and you may encounter problems if you use them.
 
 
 Installing and Configuring Repositories
@@ -44,7 +45,7 @@ It is important to install and enable the YUM priorities plugin before installin
         :::console
         root@host # yum install yum-plugin-priorities
 
-2.  Ensure that `/etc/yum.conf` has the following line in the `[main]` section:
+1.  Ensure that `/etc/yum.conf` has the following line in the `[main]` section:
 
         :::file
         plugins=1
@@ -57,9 +58,9 @@ You must install and enable those first.
 -   Install the EPEL repository, if not already present.  Choose the right version to match your OS version.
 
         :::console
-        # EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
+        ## EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
         root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-        # EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
+        ## EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
         root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 -   Verify that `/etc/yum.repos.d/epel.repo` exists; the `[epel]` section should contain:
@@ -74,7 +75,7 @@ You must install and enable those first.
     you might have dependency resolution ("depsolving") issues otherwise.
 
 
-### Install OSG Repositories
+### Install the OSG Repositories
 
 This document assumes a fresh install.
 For instructions on upgrading from one OSG series to another, see the [release series document](/release/release_series#updating-from-old).
@@ -134,5 +135,5 @@ If you are interested in having your mirror be part of the OSG's default set of 
 Reference
 ---------
 
--   [Basic use of Yum](../release/yum-basics.md)
+-   [Basic use of Yum](/release/yum-basics.md)
 
