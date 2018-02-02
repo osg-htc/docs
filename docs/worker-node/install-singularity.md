@@ -41,13 +41,11 @@ install singularity or enable it to be run as an unprivileged user.
     one for [installing privileged singularity](#installing-singularity-as-privileged)
     and one for [enabling unprivileged singularity](#enabling-unprivileged-mode-for-singularity).
 
-    As of February 2018, no VO in the OSG is ready to invoke non-setuid Singularity in production without a worker node installation.
+    As of February 2018, no VO in the OSG is ready to use non-setuid Singularity in production without a worker node installation.
     Most sites will want to follow the privileged RPM install instructions until there is wider VO support.
     You may additionally want to enable unprivileged singularity for testing.
 
-    It is possible to both install the RPM and enable unprivileged singularity, then disable the privileges in the RPM, without the VO being involved.
-    You can do that by removing the '-suid' files in the RPM and setting the singularity.conf option to disable setuid.
-    You will be responsible for removing the '-suid' files again each time the RPM is installed and merging in any changes from the RPM's singularity.conf.
+    It is possible to both install the RPM and enable unprivileged singularity, and then disable the privileges in the RPM without the VO being involved, but it is not recommended because it involves modifying files installed by the RPM.
 
 Before Starting
 ---------------
