@@ -36,13 +36,25 @@ available as at least a security update for all RHEL7-based releases.
 The document is intended for system administrators who wish to either
 install singularity or enable it to be run as an unprivileged user.
 
-!!! note "Applicable versions"
-    The applicable software versions for this document are OSG version 3.4.2 or later.
-    The version of singularity installed should be 2.3.1 or later.
+!!! note
+    There are two separate sets of instructions on this page,
+    one for [installing privileged singularity](#installing-singularity-as-privileged)
+    and one for [enabling unprivileged singularity](#enabling-unprivileged-mode-for-singularity).
 
+    As of February 2018, no VO in the OSG is ready to invoke non-setuid Singularity in production without a worker node installation.
+    Most sites will want to follow the privileged RPM install instructions until there is wider VO support.
+    You may additionally want to enable unprivileged singularity for testing.
+
+    It is possible to both install the RPM and enable unprivileged singularity, then disable the privileges in the RPM, without the VO being involved.
+    You can do that by removing the '-suid' files in the RPM and setting the singularity.conf option to disable setuid.
+    You will be responsible for removing the '-suid' files again each time the RPM is installed and merging in any changes from the RPM's singularity.conf.
 
 Before Starting
 ---------------
+
+!!! note "Applicable versions"
+    The applicable software versions for this document are OSG version 3.4.7 or later.
+    The version of singularity installed should be 2.4.2 or later.
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
@@ -139,15 +151,6 @@ user         1     0  0 21:34 ?        00:00:00 ps -ef
 
 Enabling Unprivileged Mode for Singularity
 ------------------------------------------
-
-!!! note
-    As of December 2017, no VO in the OSG is ready to use non-setuid
-    Singularity in production.  Only testing sites will need to follow
-    these instructions; contact the VOs you support for more
-    information.
-
-    Most sites will want to follow the privileged RPM install instructions
-    until there is wider VO support.
 
 If the operating system is an EL 7 variant and has been updated to the EL
 7.4 kernel (3.10.0-693 or greater), you can skip
