@@ -104,6 +104,32 @@ gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 ```
 
+
+Repository Mirrors
+------------------
+
+If you run a large site (>20 nodes), you should consider setting up a local mirror for the OSG repositories.
+A local YUM mirror allows you to reduce the amount of external bandwidth used when updating or installing packages.
+
+Add the following to a file in `/etc/cron.d`:
+
+    :::file
+    %RED%RANDOM%ENDCOLOR% * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/ /var/www/html/osg/
+
+Or, to mirror only a single repository:
+
+    :::file
+    %RED%RANDOM%ENDCOLOR% * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/%RED%OSG_RELEASE%ENDCOLOR%/el6/development /var/www/html/osg/%RED%OSG_RELEASE%ENDCOLOR%/el6
+
+
+Replace %RED%RANDOM%ENDCOLOR% with a number between 0 and 59.
+
+Replace %RED%OSG\_RELEASE%ENDCOLOR% with the OSG release you want to use (e.g. '3.3', or '3.4').
+
+On your worker node, you can replace the `baseurl` line of `/etc/yum.repos.d/osg.repo` with the appropriate URL for your mirror.
+
+If you are interested in having your mirror be part of the OSG's default set of mirrors, [please file a GOC ticket](https://ticket.opensciencegrid.org/).
+
 Reference
 ---------
 
