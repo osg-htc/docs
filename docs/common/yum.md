@@ -5,6 +5,7 @@ About This Document
 -------------------
 
 This document introduces YUM repositories and how OSG uses them.
+If you are unfamiliar with YUM, see the [documentation on using YUM and RPM](/release/yum-basics).
 
 Repositories
 ------------
