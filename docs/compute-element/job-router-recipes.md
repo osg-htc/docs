@@ -10,7 +10,7 @@ If you have needs beyond delegating all incoming jobs to your batch system as th
 
     - **Routed Job**: A job which was transformed by the JobRouter.
 
-    - **Batch System**: The underlying batch system that the HTCondor-CE will submit.  This can be SLURM, PBS, HTCondor, SGE, LSF,...
+    - **Batch System**: The underlying batch system that the HTCondor-CE will submit.  This can be Slurm, PBS, HTCondor, SGE, LSF,...
 
 Quirks and Pitfalls
 -------------------
