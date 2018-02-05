@@ -79,14 +79,14 @@ A complete set of options available though `osg-ca-manage` command, can be found
 ### Option 3: Site-managed CAs ###
 
 If you want to handle the list of CAs completely internally to your site, you can utilize the `empty-ca-certs` RPM to satisfy
-RPM dependencies - but not actually install any CAs. To install this RPM, run the following command:
+RPM dependencies while not actually installing any CAs. To install this RPM, run the following command:
 
 ``` console
 root@host # yum install empty-ca-certs –-enablerepo=osg-empty
 ```
 
 !!! warning
-    If you choose this option, you are responsible for installing and maintaing the CA certificates. They must be installed in `/etc/grid-security/certificates`, or make a symlink from that location to the directory that contains the CA certificates.
+    If you choose this option, you are responsible for installing and maintaining the CA certificates. They must be installed in `/etc/grid-security/certificates`, or a symlink must be made from that location to the directory that contains the CA certificates.
 
 
 ### Installing other CAs ###
@@ -103,7 +103,7 @@ In addition to the above CAs, you can install other CAs via RPM. These only work
 Managing Certificate Revocation Lists
 -------------------------------------
 
-In addition to CA certificates, you must have updated Certificate Revocation Lists (CRLs). CRLs contain a certificate blacklists that OSG software uses to ensure that your hosts are talking to valid clients or servers. To maintain up to date CAs, you will need to run the `fetch-crl` services. 
+In addition to CA certificates, you must have updated Certificate Revocation Lists (CRLs). CRLs contain certificate blacklists that OSG software uses to ensure that your hosts are only talking to valid clients or servers. To maintain up to date CAs, you will need to run the `fetch-crl` services. 
 
 !!! note
     Normally `fetch-crl` is installed when you install the rest of the software and you do not need to explicitly install it.
