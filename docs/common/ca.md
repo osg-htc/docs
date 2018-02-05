@@ -42,8 +42,10 @@ To automatically keep your RPM installation of CAs up to date, we recommend the 
 
 The `osg-ca-scripts` package provides scripts to install and update predefined sets of CAs with the ability to add or remove specific CAs. 
 
-- The OSG CA certificates. This is similar to the IGTF set, but may have a small number of additions or deletions. (See [this section](#contents-of-osg-ca-package) for details)
-- The [IGTF](http://www.igtf.net/) CA certificates.
+- The OSG CA certificates. This is similar to the IGTF set but may have a small number of additions or deletions
+- The [IGTF](http://www.igtf.net/) CA certificates
+
+See [this page](https://opensciencegrid.github.io/security/CaDistribution/) for details of the contents of the OSG CA package
 
 1. Install the `osg-ca-scripts` package:
 
@@ -176,14 +178,6 @@ Related software:
 
 -   [osg-ca-manage](/security/certificate-management#managing-cas)
 -   [osg-ca-certs-updater](/security/certificate-management#osg-ca-certificates-updater)
-
-### Contents of OSG CA package
-
-The OSG CA Distribution contains:
-
--   [IGTF Distribution of Authority Root Certificates](http://dist.eugridpma.info/distribution/igtf/current/) (CAs accredited by the [International Grid Trust Federation](http://igtf.net/))
-
-For additional details what is in the current release, see the [distribution site](http://repo.opensciencegrid.org/pacman/cadist/) and [change log](http://repo.opensciencegrid.org/pacman/cadist/CHANGES).
 
 ### Configuration files ###
 
