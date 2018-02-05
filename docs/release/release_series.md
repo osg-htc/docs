@@ -8,7 +8,7 @@ When a new series is released, it is an opportunity for the OSG Technology area 
 Our goal is, within a series, that one may upgrade their OSG services via `yum update` cleanly and without any necessary config file changes or excessive downtime.
 
 OSG Release Series
-==================
+------------------
 
 Since the start of the RPM-based OSG software stack, we have offered the following release series:
 
@@ -21,19 +21,19 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
 -   **OSG 3.4** stared June 2017. The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server packages.
 
 OSG Upcoming
-============
+------------
 
 There is one more OSG Series called "upcoming" which contains major updates planned for a future release series. The yum repositories for upcoming (`osg-upcoming` and `osg-upcoming-testing`) are available from all OSG 3.x series, and individual packages can be installed from Upcoming without needing to update entirely to a new series. Note, however, that packages in the "upcoming" repositories are tested against the most recent OSG series.  As of the time of writing, `osg-upcoming` is meant to work with OSG 3.4.
 
 Installing an OSG Release Series
-================================
+--------------------------------
 
 See the [yum repositories document](/common/yum) for instructions on installing the OSG repositories.
 
 <a name="updating-from-old"></a>
 
 Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4
-=============================================
+---------------------------------------------
 
 1.  If you have an existing installation based on OSG 3.1, 3.2, or 3.3 (which will be referred to as the *old series*), and want to upgrade to 3.3 or 3.4 (the *new series*), we recommend the following procedure:
 
@@ -51,12 +51,10 @@ Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4
 
     where `<URL>` is one of the following:
 
-    | Series                    | EL5 URL (for RHEL5, CentOS5, or SL5)                             | EL6 URL (for RHEL6, CentOS6, or SL6)                             | EL7 URL (for RHEL7, CentOS7, or SL7)                             |
-    |:--------------------------|:-----------------------------------------------------------------|:-----------------------------------------------------------------|:-----------------------------------------------------------------|
-    | **OSG 3.1** (unsupported) | `http://repo.opensciencegrid.org/osg/3.1/osg-3.1-el5-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.1/osg-3.1-el6-release-latest.rpm` | N/A                                                              |
-    | **OSG 3.2** (unsupported) | `http://repo.opensciencegrid.org/osg/3.2/osg-3.2-el5-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.2/osg-3.2-el6-release-latest.rpm` | N/A                                                              |
-    | **OSG 3.3**               | N/A                                                              | `http://repo.opensciencegrid.org/osg/3.3/osg-3.3-el6-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.3/osg-3.3-el7-release-latest.rpm` |
-    | **OSG 3.4**               | N/A                                                              | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm` |
+    | Series                    | EL6 URL (for RHEL6, CentOS6, or SL6)                             | EL7 URL (for RHEL7, CentOS7, or SL7)                             |
+    |:--------------------------|:-----------------------------------------------------------------|:-----------------------------------------------------------------|
+    | **OSG 3.3**               | `http://repo.opensciencegrid.org/osg/3.3/osg-3.3-el6-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.3/osg-3.3-el7-release-latest.rpm` |
+    | **OSG 3.4**               | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm` |
 
 3.  Clean yum cache:
 
@@ -167,7 +165,7 @@ To cleanly uninstall CEMon from your CE, perform the following procedure (after 
     In the output from this command, yum should **not** list other packages than those three. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their OSG 3.3 (or 3.4) versions (they should have `.osg33` or `.osg34` in their versions), and try again.
 
 References
-==========
+----------
 
 -   [Yum repositories](../common/yum)
 -   [Basic use of Yum](../release/yum-basics)
