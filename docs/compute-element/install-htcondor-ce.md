@@ -343,7 +343,7 @@ In addition to the HTCondor-CE job gateway service itself, there are a number of
 
 | Software          | Service name                          | Notes                                                                                  |
 |:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca/#startstop-fetch-crl-a-quick-guide) for more info |
+| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 | Gratia            | `gratia-probes-cron`                  | Accounting software                                                                    |
 | Your batch system | `condor` or `pbs_server` or …         |                                                                                        |
 | HTCondor-CE       | `condor-ce`                           |                                                                                        |
