@@ -12,7 +12,7 @@ Before starting the installation process, consider the following points (consult
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `condor` (UID 4716) and `gratia` (UID 42401)
 -   **Service certificate:** The HTCondor-CE service uses a host certificate at `/etc/grid-security/hostcert.pem` and an accompanying key at `/etc/grid-security/hostkey.pem`
--   **Network ports:** The pilot factories must be able to contact your HTCondor-CE service on ports 9619 and 9620 for condor versions < 8.3.2 (TCP)
+-   **Network ports:** The pilot factories must be able to contact your HTCondor-CE service on port 9619 (TCP)
 -   **Host choice:** HTCondor-CE should be installed on a host that already has the ability to submit jobs into your local cluster
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
