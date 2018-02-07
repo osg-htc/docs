@@ -28,7 +28,7 @@ If you just want to see the packages to update, but do not want to perform the u
 If the contents of your HTCondor-CE packages have been changed, the CE may cease to function properly. To verify the contents of your packages (ignoring changes to configuration files):
 
 ``` console
-user@host $ rpm -q --verify htcondor-ce htcondor-ce-client blahp | awk '$2 != "c" {print $0}'
+user@host $ rpm -q --verify htcondor-ce htcondor-ce-client blahp | grep -v '/var/' | awk '$2 != "c" {print $0}'
 ```
 
 If the verification command returns output, this means that your packages have been changed. To fix this, you can reinstall the packages:
@@ -43,6 +43,25 @@ user@host $ yum reinstall htcondor-ce htcondor-ce-client blahp
 ### Verify clocks are synchronized
 
 Like all GSI-based authentication, HTCondor-CE is sensitive to time skews. Make sure the clock on your CE is synchronized using a utility such as `ntpd`. Additionally, HTCondor itself is sensitive to time skews on the NFS server. If you see empty stdout / err being returned to the submitter, verify there is no NFS server time skew.
+
+### Verify host cerificates and CRLs are valid
+
+An expired host certificate or CRLs will cause various issues with GSI
+authentication. Verify that your host certificate is valid by running:
+
+```console 
+root@host # openssl x509 -in /etc/grid-security/hostcert.pem -noout -dates
+```
+
+Likewise, run the `fetch-crl` script to update your CRLs:
+
+```console
+root@host # fetch-crl
+```
+
+If updating CRLs fix your issues, make sure that the `fetch-crl-cron` and
+`fetch-crl-boot` services are enabled and running.
+
 
 HTCondor-CE Troubleshooting Items
 ---------------------------------
