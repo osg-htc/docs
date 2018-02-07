@@ -45,6 +45,8 @@ install singularity or enable it to be run as an unprivileged user.
     Most sites will want to follow the privileged RPM install instructions until there is wider VO support.
     Contact the VOs you support for more information.
 
+    It is possible to enable unprivileged singularity for testing on the same machines that have the privileged RPM installed.
+
 Before Starting
 ---------------
 
