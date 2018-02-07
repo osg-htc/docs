@@ -212,6 +212,9 @@ The patterns are compared in the order they are listed in. Therefore, more gener
 
 Each non-commented line is a shell-style pattern which is compared against a user's VOMS attributes. If the pattern matches, that user will be unable to access your resources.
 
+!!!danger
+    When banning VOs, you must restart the services using LCMAPS VOMS authentication (e.g. `condor-ce`, `globus-gridftp-server`, etc.) to clear any authentication caches.
+
 !!!warning
     `/etc/grid-security/ban-voms-mapfile` *must* exist, even if you are not banning any VOs. In that case, the file should be blank. If the file does not exist, LCMAPS will ban every user.
 
@@ -224,6 +227,9 @@ Each non-commented line is a shell-style pattern which is compared against a use
 # ban Matyas's FNAL DN
 "/DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Matyas Selmeci/CN=UID:matyas"
 ```
+
+!!!danger
+    When banning users, you must restart the services using LCMAPS VOMS authentication (e.g. `condor-ce`, `globus-gridftp-server`, etc.) to clear any authentication caches.
 
 !!!warning
     `/etc/grid-security/ban-mapfile` *must* exist, even if you are not banning any users. In that case, the file should be blank. If the file does not exist, LCMAPS will ban every user.
