@@ -60,24 +60,54 @@ We added or updated the following packages to the production OSG yum repository.
 
 #### Enterprise Linux 6
 
+-   [glideinwms-3.2.20-2.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=glideinwms-3.2.20-2.osg34.el6)
+-   [osg-version-3.4.8-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-version-3.4.8-1.osg34.el6)
 
 #### Enterprise Linux 7
 
+-   [glideinwms-3.2.20-2.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=glideinwms-3.2.20-2.osg34.el7)
+-   [osg-version-3.4.8-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-version-3.4.8-1.osg34.el7)
 
 ### RPMs
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-    <LIST OF PACKAGES>
+    glideinwms-common-tools glideinwms-condor-common-config glideinwms-factory glideinwms-factory-condor glideinwms-glidecondor-tools glideinwms-libs glideinwms-minimal-condor glideinwms-usercollector glideinwms-userschedd glideinwms-vofrontend glideinwms-vofrontend-standalone osg-version
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 6
 
 ``` file
+glideinwms-3.2.20-2.osg34.el6
+glideinwms-common-tools-3.2.20-2.osg34.el6
+glideinwms-condor-common-config-3.2.20-2.osg34.el6
+glideinwms-factory-3.2.20-2.osg34.el6
+glideinwms-factory-condor-3.2.20-2.osg34.el6
+glideinwms-glidecondor-tools-3.2.20-2.osg34.el6
+glideinwms-libs-3.2.20-2.osg34.el6
+glideinwms-minimal-condor-3.2.20-2.osg34.el6
+glideinwms-usercollector-3.2.20-2.osg34.el6
+glideinwms-userschedd-3.2.20-2.osg34.el6
+glideinwms-vofrontend-3.2.20-2.osg34.el6
+glideinwms-vofrontend-standalone-3.2.20-2.osg34.el6
+osg-version-3.4.8-1.osg34.el6
 ```
 
 #### Enterprise Linux 7
 
 ``` file
+glideinwms-3.2.20-2.osg34.el7
+glideinwms-common-tools-3.2.20-2.osg34.el7
+glideinwms-condor-common-config-3.2.20-2.osg34.el7
+glideinwms-factory-3.2.20-2.osg34.el7
+glideinwms-factory-condor-3.2.20-2.osg34.el7
+glideinwms-glidecondor-tools-3.2.20-2.osg34.el7
+glideinwms-libs-3.2.20-2.osg34.el7
+glideinwms-minimal-condor-3.2.20-2.osg34.el7
+glideinwms-usercollector-3.2.20-2.osg34.el7
+glideinwms-userschedd-3.2.20-2.osg34.el7
+glideinwms-vofrontend-3.2.20-2.osg34.el7
+glideinwms-vofrontend-standalone-3.2.20-2.osg34.el7
+osg-version-3.4.8-1.osg34.el7
 ```
