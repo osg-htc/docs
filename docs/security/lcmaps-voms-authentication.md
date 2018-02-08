@@ -248,9 +248,7 @@ By default, the LCMAPS VOMS plugin only considers the first FQAN of a VOMS proxy
 -   If you are configuring `lcmaps.db` manually (see [manual configuration](#manual-configuration) below), add `"-all-fqans"` to the module definitions for `vomsmapfile` and `defaultmapfile`
 
 
-
-
-Validating the LCMAPS VOMS plugin VO mappings
+Validating the LCMAPS VOMS Plugin VO Mappings
 ---------------------------------------------
 
 To validate the LCMAPS VOMS plugin by itself, use the following procedure to test mapping your own cert to a user:
@@ -279,7 +277,7 @@ user@host $ voms-proxy-info -fqan
 ```
 and make sure it matches one of the patterns in `/etc/grid-security/voms-mapfile` or `/usr/share/osg/voms-mapfile-default`, and does not match any patterns in `/etc/grid-security/ban-voms-mapfile`.
 
-Troubleshooting the LCMAPS VOMS plugin
+Troubleshooting the LCMAPS VOMS Plugin
 --------------------------------------
 
 LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity of the logging can be increased by setting the `LCMAPS_DEBUG_LEVEL` environment variable. You can also change the destination of the logging by setting the `LCMAPS_LOG_FILE` environment variable.
