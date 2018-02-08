@@ -247,6 +247,11 @@ By default, the LCMAPS VOMS plugin only considers the first FQAN of a VOMS proxy
 
 -   If you are configuring `lcmaps.db` manually (see [manual configuration](#manual-configuration) below), add `"-all-fqans"` to the module definitions for `vomsmapfile` and `defaultmapfile`
 
+Using the LCMAPS VOMS Plugin
+----------------------------
+
+LCMAPS is a software library that is called for authentication;
+therefore, there are no running services and it does not have to be invoked manually.
 
 Validating the LCMAPS VOMS Plugin VO Mappings
 ---------------------------------------------
