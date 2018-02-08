@@ -2293,9 +2293,14 @@ lower security risk.</p>
 <p>The document is intended for system administrators who wish to either
 install singularity or enable it to be run as an unprivileged user.</p>
 <div class="admonition note">
-<p class="admonition-title">Applicable versions</p>
-<p>The applicable software versions for this document are OSG version 3.4.2 or later.
-The version of singularity installed should be 2.3.1 or later.</p>
+<p class="admonition-title">Note</p>
+<p>There are two separate sets of instructions on this page,
+one for <a href="#installing-singularity-as-privileged">installing privileged singularity</a>
+and one for <a href="#enabling-unprivileged-mode-for-singularity">enabling unprivileged singularity</a>.</p>
+<p>As of February 2018, no VO in the OSG is ready to use non-setuid Singularity in production without a worker node installation.
+Most sites will want to follow the privileged RPM install instructions until there is wider VO support.
+Contact the VOs you support for more information.</p>
+<p>It is possible to enable unprivileged singularity for testing on the same machines that have the privileged RPM installed.</p>
 </div>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
@@ -2400,15 +2405,6 @@ command to verify it:</p>
 (non-<code>setuid</code>) mode of singularity.</p>
 </div>
 <h2 id="enabling-unprivileged-mode-for-singularity">Enabling Unprivileged Mode for Singularity<a class="headerlink" href="#enabling-unprivileged-mode-for-singularity" title="Permanent link">&para;</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>As of December 2017, no VO in the OSG is ready to use non-setuid
-Singularity in production.  Only testing sites will need to follow
-these instructions; contact the VOs you support for more
-information.</p>
-<p>Most sites will want to follow the privileged RPM install instructions
-until there is wider VO support.</p>
-</div>
 <p>If the operating system is an EL 7 variant and has been updated to the EL
 7.4 kernel (3.10.0-693 or greater), you can skip
 installation altogether and instead do these steps to enable
