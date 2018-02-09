@@ -9,7 +9,7 @@ Grid Operations Center
 The Grid Operations Center (GOC) is available to coordinate users, site admins, and developers around an issue.  Additionally, the GOC can provide basic monitoring and troubleshooting.  There are several ways to receive support:
 
 *  You can [submit a trouble ticket](https://ticket.opensciencegrid.org) or send an email to [help@opensciencegrid.org](mailto:help@opensciencegrid.org) (which also accept general inquiries not intended for tickets.)
-*  The [trouble ticket system](https://ticket.opensciencegrid.org/goc/list/open) is searchable.  Historical tickets may contain the solution for similar problems others have encountered.
+*  The [trouble ticket system](https://ticket.opensciencegrid.org/list/open) is searchable.  Historical tickets may contain the solution for similar problems others have encountered.
 *  The [operations blog](http://osggoc.blogspot.com/) contains information about recent software releases, and important outage and maintenance notifications of central OSG services.
 *  For emergencies, the OSG Grid Operation Center provides extended support. Operators are on hand 24x7 at the GOC and can be reached via phone at +1 317-278-9699.   Non-emergency issues can be opened 24x7 but will be handled during normal business hours.
 
