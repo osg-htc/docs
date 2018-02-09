@@ -169,44 +169,20 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
 
 GUMS is no longer available starting in OSG 3.4 and is being replaced by the LCMAPS VOMS plugin.
 Note that unlike GUMS, which runs on a central host, the LCMAPS VOMS plugin will run on your GUMS clients (e.g. HTCondor-CE, GridFTP, and XRootD).
-To migrate any custom configuration from GUMS to the LCMAPS VOMS plugin, perform the following procedure:
+To migrate any custom authentication configuration from GUMS to the LCMAPS VOMS plugin, perform the following procedure:
 
 1. On your GUMS host, retrieve the conversion helper script and run it:
 
         :::console
-        root@gums-host # wget https://raw.githubusercontent.com/opensciencegrid/osg-vo-config/mapfile-generator-0.1/bin/manual-mapfile-from-gumsdb.py
+        root@gums-host # wget https://raw.githubusercontent.com/opensciencegrid/osg-vo-config/mapfile-generator-0.2/bin/manual-mapfile-from-gumsdb.py
         root@gums-host # python manual-mapfile-from-gumsdb.py
-        # Add the following contents to /etc/grid-security/ban-mapfile
-        # http://opensciencegrid.github.io/docs/security/lcmaps-voms-authentication/#banning-users
 
-        "/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Alpha Flight 7727"
-        "/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Dancing Zorba 4528"
-        "/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Freddie Redonschnider 1234"
-
-        # ---
-
-        # Add the following contents to /etc/grid-security/grid-mapfile
-        # http://opensciencegrid.github.io/docs/security/lcmaps-voms-authentication/#mapping-users
-
-        "/DC=com/DC=example/OU=People/CN=Example User 12345" test
-        "/DC=org/DC=doegrids/OU=People/CN=Janet Doe 123456" osg
-        "/DC=org/DC=doegrids/OU=People/CN=Jane Doe 12345" osg
-        "/DC=com/DC=example/OU=People/CN=Example User 12345" osg
-        "/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Carl Edquist 1013" osg
-
-        # ---
-
-        # Add the following contents to /etc/grid-security/voms-mapfile
-        # http://opensciencegrid.github.io/docs/security/lcmaps-voms-authentication/#mapping-vos
-
-        "/osg/testgroup/Role=somerole/*" sam
-
-        # ---
-
-1. Review the output and verify that it includes any custom banned users, user mappings, or VO mappings.
+1. Verify that the contents of `ban-mapfile`, `grid-mapfile.additions`, and `voms-mapfile.additions` include any custom
+   banned users, user mappings, and VO mappings, respectively.
 
     !!! note
-        The OSG provides default VO mappings in `/usr/share/osg/voms-mapfile-default`
+        The above files will not include all VO mappings; the OSG provides default VO mappings in
+        `/usr/share/osg/voms-mapfile-default`
 
 1. On each of your client hosts, add the lines from the output of `manual-mapfile-from-gumsdb.py` to the specified files
 
