@@ -177,14 +177,14 @@ To migrate any custom authentication configuration from GUMS to the LCMAPS VOMS 
         root@gums-host # wget https://raw.githubusercontent.com/opensciencegrid/osg-vo-config/mapfile-generator-0.2/bin/manual-mapfile-from-gumsdb.py
         root@gums-host # python manual-mapfile-from-gumsdb.py
 
-1. Verify that the contents of `ban-mapfile`, `grid-mapfile.additions`, and `voms-mapfile.additions` include any custom
+1. Verify that the contents of `ban-mapfile.additions`, `grid-mapfile.additions`, and `voms-mapfile.additions` include any custom
    banned users, user mappings, and VO mappings, respectively.
 
     !!! note
         The above files will not include all VO mappings; the OSG provides default VO mappings in
         `/usr/share/osg/voms-mapfile-default`
 
-1. On each of your client hosts, add the lines from the output of `manual-mapfile-from-gumsdb.py` to the specified files
+1. On each of your client hosts, append each `.additions` file to its corresponding file in `/etc/grid-security/` (creating those files if they do not exist).
 
 #### Mapping VOs
 
