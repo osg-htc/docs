@@ -778,6 +778,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#migrating-from-gums" title="Migrating from GUMS" class="md-nav__link">
+    Migrating from GUMS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mapping-vos" title="Mapping VOs" class="md-nav__link">
     Mapping VOs
   </a>
@@ -823,15 +830,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validating-the-lcmaps-voms-plugin-vo-mappings" title="Validating the LCMAPS VOMS plugin VO mappings" class="md-nav__link">
-    Validating the LCMAPS VOMS plugin VO mappings
+  <a href="#using-the-lcmaps-voms-plugin" title="Using the LCMAPS VOMS Plugin" class="md-nav__link">
+    Using the LCMAPS VOMS Plugin
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting-the-lcmaps-voms-plugin" title="Troubleshooting the LCMAPS VOMS plugin" class="md-nav__link">
-    Troubleshooting the LCMAPS VOMS plugin
+  <a href="#validating-the-lcmaps-voms-plugin-vo-mappings" title="Validating the LCMAPS VOMS Plugin VO Mappings" class="md-nav__link">
+    Validating the LCMAPS VOMS Plugin VO Mappings
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-the-lcmaps-voms-plugin" title="Troubleshooting the LCMAPS VOMS Plugin" class="md-nav__link">
+    Troubleshooting the LCMAPS VOMS Plugin
   </a>
   
     <nav class="md-nav">
@@ -2313,6 +2327,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#migrating-from-gums" title="Migrating from GUMS" class="md-nav__link">
+    Migrating from GUMS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mapping-vos" title="Mapping VOs" class="md-nav__link">
     Mapping VOs
   </a>
@@ -2358,15 +2379,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validating-the-lcmaps-voms-plugin-vo-mappings" title="Validating the LCMAPS VOMS plugin VO mappings" class="md-nav__link">
-    Validating the LCMAPS VOMS plugin VO mappings
+  <a href="#using-the-lcmaps-voms-plugin" title="Using the LCMAPS VOMS Plugin" class="md-nav__link">
+    Using the LCMAPS VOMS Plugin
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting-the-lcmaps-voms-plugin" title="Troubleshooting the LCMAPS VOMS plugin" class="md-nav__link">
-    Troubleshooting the LCMAPS VOMS plugin
+  <a href="#validating-the-lcmaps-voms-plugin-vo-mappings" title="Validating the LCMAPS VOMS Plugin VO Mappings" class="md-nav__link">
+    Validating the LCMAPS VOMS Plugin VO Mappings
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-the-lcmaps-voms-plugin" title="Troubleshooting the LCMAPS VOMS Plugin" class="md-nav__link">
+    Troubleshooting the LCMAPS VOMS Plugin
   </a>
   
     <nav class="md-nav">
@@ -2436,7 +2464,7 @@
                 
                 
                 <h1 id="installing-and-maintaining-the-lcmaps-voms-plugin">Installing and Maintaining the LCMAPS VOMS Plugin<a class="headerlink" href="#installing-and-maintaining-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h1>
-<p>LCMAPS is a software library used on <a href="../../compute-element/install-htcondor-ce">HTCondor-CE</a>, <a href="../../data/gridftp">GridFTP</a>, or <a href="../../data/install-xrootd">XRootD</a> hosts for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., <code>/cms/Role=production/Capability=NULL</code>. Starting in OSG 3.4, the LCMAPS VOMS plugin will replace GUMS and edg-mkgridmap as the authentication method at OSG sites.</p>
+<p>LCMAPS is a software library used on <a href="../../compute-element/install-htcondor-ce">HTCondor-CE</a>, <a href="../../data/gridftp">GridFTP</a>, and <a href="../../data/install-xrootd">XRootD</a> hosts for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., <code>/cms/Role=production/Capability=NULL</code>. Starting in OSG 3.4, the LCMAPS VOMS plugin will replace GUMS and edg-mkgridmap as the authentication method at OSG sites.</p>
 <p>The OSG provides a default set of mappings from VOMS attributes to Unix accounts. By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to, banning based on VOMS attributes, banning a specific user, or adding a VO, VO group, VO role, and/or user that is not in the OSG's set of mappings.</p>
 <p>Use this page to learn how to install and configure the LCMAPS VOMS plugin to authenticate users to access your resources on a per-VO basis.</p>
 <h2 id="installing-the-lcmaps-voms-plugin">Installing the LCMAPS VOMS Plugin<a class="headerlink" href="#installing-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h2>
@@ -2656,6 +2684,32 @@ If it lists other packages, cancel the erase operation, make sure the other pack
 </div>
 </li>
 </ol>
+<h4 id="migrating-from-gums">Migrating from GUMS<a class="headerlink" href="#migrating-from-gums" title="Permanent link">&para;</a></h4>
+<p>GUMS is no longer available starting in OSG 3.4 and is being replaced by the LCMAPS VOMS plugin.
+Note that unlike GUMS, which runs on a central host, the LCMAPS VOMS plugin will run on your GUMS clients (e.g. HTCondor-CE, GridFTP, and XRootD).
+To migrate any custom authentication configuration from GUMS to the LCMAPS VOMS plugin, perform the following procedure:</p>
+<ol>
+<li>
+<p>On your GUMS host, retrieve the conversion helper script and run it:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@gums-host #</span> wget https://raw.githubusercontent.com/opensciencegrid/osg-vo-config/mapfile-generator-0.2/bin/manual-mapfile-from-gumsdb.py
+<span class="gp">root@gums-host #</span> python manual-mapfile-from-gumsdb.py
+</pre></div>
+
+
+</li>
+<li>
+<p>Verify that the contents of <code>ban-mapfile.additions</code>, <code>grid-mapfile.additions</code>, and <code>voms-mapfile.additions</code> include any custom
+   banned users, user mappings, and VO mappings, respectively.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The above files will not include all VO mappings; the OSG provides default VO mappings in
+<code>/usr/share/osg/voms-mapfile-default</code></p>
+</div>
+</li>
+<li>
+<p>On each of your client hosts, append each <code>.additions</code> file to its corresponding file in <code>/etc/grid-security/</code> (creating those files if they do not exist).</p>
+</li>
+</ol>
 <h4 id="mapping-vos">Mapping VOs<a class="headerlink" href="#mapping-vos" title="Permanent link">&para;</a></h4>
 <p><code>/etc/grid-security/voms-mapfile</code> is used to map VOs, VO roles, or VO groups to Unix accounts based on their VOMS attributes. An example of the format of a <code>voms-mapfile</code> follows:</p>
 <div class="codehilite"><pre><span></span># map GLOW jobs in the chtc group to the &#39;glow1&#39; Unix account.
@@ -2730,7 +2784,10 @@ The patterns are compared in the order they are listed in. Therefore, more gener
 <p>If you are configuring <code>lcmaps.db</code> manually (see <a href="#manual-configuration">manual configuration</a> below), add <code>"-all-fqans"</code> to the module definitions for <code>vomsmapfile</code> and <code>defaultmapfile</code></p>
 </li>
 </ul>
-<h2 id="validating-the-lcmaps-voms-plugin-vo-mappings">Validating the LCMAPS VOMS plugin VO mappings<a class="headerlink" href="#validating-the-lcmaps-voms-plugin-vo-mappings" title="Permanent link">&para;</a></h2>
+<h2 id="using-the-lcmaps-voms-plugin">Using the LCMAPS VOMS Plugin<a class="headerlink" href="#using-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h2>
+<p>LCMAPS is a software library that is called for authentication;
+therefore, there are no running services and it does not have to be invoked manually.</p>
+<h2 id="validating-the-lcmaps-voms-plugin-vo-mappings">Validating the LCMAPS VOMS Plugin VO Mappings<a class="headerlink" href="#validating-the-lcmaps-voms-plugin-vo-mappings" title="Permanent link">&para;</a></h2>
 <p>To validate the LCMAPS VOMS plugin by itself, use the following procedure to test mapping your own cert to a user:</p>
 <ol>
 <li>Verify your DN is <em>not</em> in <code>/etc/grid-security/grid-mapfile</code>, or else it will generate a false positive</li>
@@ -2764,7 +2821,7 @@ The patterns are compared in the order they are listed in. Therefore, more gener
 
 
 <p>and make sure it matches one of the patterns in <code>/etc/grid-security/voms-mapfile</code> or <code>/usr/share/osg/voms-mapfile-default</code>, and does not match any patterns in <code>/etc/grid-security/ban-voms-mapfile</code>.</p>
-<h2 id="troubleshooting-the-lcmaps-voms-plugin">Troubleshooting the LCMAPS VOMS plugin<a class="headerlink" href="#troubleshooting-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h2>
+<h2 id="troubleshooting-the-lcmaps-voms-plugin">Troubleshooting the LCMAPS VOMS Plugin<a class="headerlink" href="#troubleshooting-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h2>
 <p>LCMAPS logs to <code>journalctl</code> (EL7) or <code>/var/log/messages</code> (EL6) and the verbosity of the logging can be increased by setting the <code>LCMAPS_DEBUG_LEVEL</code> environment variable. You can also change the destination of the logging by setting the <code>LCMAPS_LOG_FILE</code> environment variable.</p>
 <ol>
 <li>
