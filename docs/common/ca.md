@@ -56,19 +56,19 @@ See [this page](https://opensciencegrid.github.io/security/CaDistribution/) for 
 
 1. Choose and install the CA certificate set:
 
-        | **If you choose...** | **Then run the following command...**              |
-        |----------------------|----------------------------------------------------|
-        | OSG CA certificates  | `osg-ca-manage setupCA --location root --url osg`  |
-        | IGTF CA certificates | `osg-ca-manage setupCA --location root --url igtf` |
+    | **If you choose...** | **Then run the following command...**              |
+    |----------------------|----------------------------------------------------|
+    | OSG CA certificates  | `osg-ca-manage setupCA --location root --url osg`  |
+    | IGTF CA certificates | `osg-ca-manage setupCA --location root --url igtf` |
 
 1. Enable the `osg-update-certs-cron` service to enable periodic CA updates. As a reminder, here are common service commands (all run as `root`):
 
-        | To...                                   | On EL6, run the command...                  | On EL7, run the command...                      |
-        | :-------------------------------------- | :----------------------------------------   | :--------------------------------------------   |
-        | Start a service                         | `service <SERVICE-NAME> start` | `systemctl start <SERVICE-NAME>`   |
-        | Stop a  service                         | `service <SERVICE-NAME> stop`  | `systemctl stop <SERVICE-NAME>`    |
-        | Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`  | `systemctl enable <SERVICE-NAME>`  |
-        | Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off` | `systemctl disable <SERVICE-NAME>` |
+    | To...                                   | On EL6, run the command...                  | On EL7, run the command...                      |
+    | :-------------------------------------- | :----------------------------------------   | :--------------------------------------------   |
+    | Start a service                         | `service <SERVICE-NAME> start` | `systemctl start <SERVICE-NAME>`   |
+    | Stop a  service                         | `service <SERVICE-NAME> stop`  | `systemctl stop <SERVICE-NAME>`    |
+    | Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`  | `systemctl enable <SERVICE-NAME>`  |
+    | Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off` | `systemctl disable <SERVICE-NAME>` |
 
 1. (Optional) To add a new CA:
 
@@ -101,7 +101,7 @@ root@host # yum install empty-ca-certs –-enablerepo=osg-empty
 In addition to the above CAs, you can install other CAs via RPM. These only work with the RPMs that provide CAs (that is, `osg-ca-certs` and the like, but not `osg-ca-scripts`.) They are in addition to the above RPMs, so do not only install these extra CAs.
 
 | **Set of CAs** | **RPM name**     | **Installation command (as root)** |
-|----------------|------------------|------------------|------------------------------------|
+|:---------------|:-----------------|:-----------------------------------|
 | cilogon-openid | cilogon-ca-certs | `yum install cilogon-ca-certs`     |
 
 Managing Certificate Revocation Lists
