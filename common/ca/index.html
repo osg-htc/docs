@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../img/favicon.ico">
-      <meta name="generator" content="mkdocs-0.17.1, mkdocs-material-2.6.1">
+      <meta name="generator" content="mkdocs-0.17.1, mkdocs-material-2.6.2">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.a315b664.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.9b572555.css">
       
     
     
@@ -2418,25 +2418,58 @@ For example, <code>yum install osg-ce</code> will bring in <code>osg-ca-certs</c
 </li>
 <li>
 <p>Choose and install the CA certificate set:</p>
-<div class="codehilite"><pre><span></span>| **If you choose...** | **Then run the following command...**              |
-|----------------------|----------------------------------------------------|
-| OSG CA certificates  | `osg-ca-manage setupCA --location root --url osg`  |
-| IGTF CA certificates | `osg-ca-manage setupCA --location root --url igtf` |
-</pre></div>
-
-
+<table>
+<thead>
+<tr>
+<th><strong>If you choose...</strong></th>
+<th><strong>Then run the following command...</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSG CA certificates</td>
+<td><code>osg-ca-manage setupCA --location root --url osg</code></td>
+</tr>
+<tr>
+<td>IGTF CA certificates</td>
+<td><code>osg-ca-manage setupCA --location root --url igtf</code></td>
+</tr>
+</tbody>
+</table>
 </li>
 <li>
 <p>Enable the <code>osg-update-certs-cron</code> service to enable periodic CA updates. As a reminder, here are common service commands (all run as <code>root</code>):</p>
-<div class="codehilite"><pre><span></span><span class="p">|</span> <span class="nv">To</span><span class="p">...</span>                                   <span class="p">|</span> <span class="nv">On</span> <span class="nv">EL6</span><span class="p">,</span> <span class="s s-Atom">run</span> <span class="s s-Atom">the</span> <span class="s s-Atom">command</span><span class="p">...</span>                  <span class="p">|</span> <span class="nv">On</span> <span class="nv">EL7</span><span class="p">,</span> <span class="s s-Atom">run</span> <span class="s s-Atom">the</span> <span class="s s-Atom">command</span><span class="p">...</span>                      <span class="p">|</span>
-<span class="p">|</span> <span class="p">:-</span><span class="s s-Atom">-------------------------------------</span> <span class="p">|</span> <span class="p">:-</span><span class="s s-Atom">---------------------------------------</span>   <span class="p">|</span> <span class="p">:-</span><span class="s s-Atom">-------------------------------------------</span>   <span class="p">|</span>
-<span class="p">|</span> <span class="nv">Start</span> <span class="s s-Atom">a</span> <span class="s s-Atom">service</span>                         <span class="p">|</span> <span class="err">`</span><span class="s s-Atom">service</span> <span class="o">&lt;</span><span class="nv">SERVICE</span><span class="o">-</span><span class="nv">NAME</span><span class="o">&gt;</span> <span class="s s-Atom">start</span><span class="err">`</span> <span class="p">|</span> <span class="err">`</span><span class="s s-Atom">systemctl</span> <span class="s s-Atom">start</span> <span class="o">&lt;</span><span class="nv">SERVICE</span><span class="o">-</span><span class="nv">NAME</span><span class="s s-Atom">&gt;</span><span class="err">`</span>   <span class="p">|</span>
-<span class="p">|</span> <span class="nv">Stop</span> <span class="s s-Atom">a</span>  <span class="s s-Atom">service</span>                         <span class="p">|</span> <span class="err">`</span><span class="s s-Atom">service</span> <span class="o">&lt;</span><span class="nv">SERVICE</span><span class="o">-</span><span class="nv">NAME</span><span class="o">&gt;</span> <span class="s s-Atom">stop</span><span class="err">`</span>  <span class="p">|</span> <span class="err">`</span><span class="s s-Atom">systemctl</span> <span class="s s-Atom">stop</span> <span class="o">&lt;</span><span class="nv">SERVICE</span><span class="o">-</span><span class="nv">NAME</span><span class="s s-Atom">&gt;</span><span class="err">`</span>    <span class="p">|</span>
-<span class="p">|</span> <span class="nv">Enable</span> <span class="s s-Atom">a</span> <span class="s s-Atom">service</span> <span class="s s-Atom">to</span> <span class="s s-Atom">start</span> <span class="s s-Atom">on</span> <span class="s s-Atom">boot</span>       <span class="p">|</span> <span class="err">`</span><span class="s s-Atom">chkconfig</span> <span class="o">&lt;</span><span class="nv">SERVICE</span><span class="o">-</span><span class="nv">NAME</span><span class="o">&gt;</span> <span class="s s-Atom">on</span><span class="err">`</span>  <span class="p">|</span> <span class="err">`</span><span class="s s-Atom">systemctl</span> <span class="s s-Atom">enable</span> <span class="o">&lt;</span><span class="nv">SERVICE</span><span class="o">-</span><span class="nv">NAME</span><span class="s s-Atom">&gt;</span><span class="err">`</span>  <span class="p">|</span>
-<span class="p">|</span> <span class="nv">Disable</span> <span class="s s-Atom">a</span> <span class="s s-Atom">service</span> <span class="s s-Atom">from</span> <span class="s s-Atom">starting</span> <span class="s s-Atom">on</span> <span class="s s-Atom">boot</span> <span class="p">|</span> <span class="err">`</span><span class="s s-Atom">chkconfig</span> <span class="o">&lt;</span><span class="nv">SERVICE</span><span class="o">-</span><span class="nv">NAME</span><span class="o">&gt;</span> <span class="s s-Atom">off</span><span class="err">`</span> <span class="p">|</span> <span class="err">`</span><span class="s s-Atom">systemctl</span> <span class="s s-Atom">disable</span> <span class="o">&lt;</span><span class="nv">SERVICE</span><span class="o">-</span><span class="nv">NAME</span><span class="s s-Atom">&gt;</span><span class="err">`</span> <span class="p">|</span>
-</pre></div>
-
-
+<table>
+<thead>
+<tr>
+<th align="left">To...</th>
+<th align="left">On EL6, run the command...</th>
+<th align="left">On EL7, run the command...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Start a service</td>
+<td align="left"><code>service &lt;SERVICE-NAME&gt; start</code></td>
+<td align="left"><code>systemctl start &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Stop a  service</td>
+<td align="left"><code>service &lt;SERVICE-NAME&gt; stop</code></td>
+<td align="left"><code>systemctl stop &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Enable a service to start on boot</td>
+<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; on</code></td>
+<td align="left"><code>systemctl enable &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Disable a service from starting on boot</td>
+<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; off</code></td>
+<td align="left"><code>systemctl disable &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+</tbody>
+</table>
 </li>
 <li>
 <p>(Optional) To add a new CA:</p>
@@ -2471,9 +2504,22 @@ RPM dependencies while not actually installing any CAs. To install this RPM, run
 <p>The <code>cilogon-openid</code> CA is only distributed in OSG 3.3.  Support will be removed by March 2018.</p>
 </div>
 <p>In addition to the above CAs, you can install other CAs via RPM. These only work with the RPMs that provide CAs (that is, <code>osg-ca-certs</code> and the like, but not <code>osg-ca-scripts</code>.) They are in addition to the above RPMs, so do not only install these extra CAs.</p>
-<p>| <strong>Set of CAs</strong> | <strong>RPM name</strong>     | <strong>Installation command (as root)</strong> |
-|----------------|------------------|------------------|------------------------------------|
-| cilogon-openid | cilogon-ca-certs | <code>yum install cilogon-ca-certs</code>     |</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Set of CAs</strong></th>
+<th align="left"><strong>RPM name</strong></th>
+<th align="left"><strong>Installation command (as root)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">cilogon-openid</td>
+<td align="left">cilogon-ca-certs</td>
+<td align="left"><code>yum install cilogon-ca-certs</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="managing-certificate-revocation-lists">Managing Certificate Revocation Lists<a class="headerlink" href="#managing-certificate-revocation-lists" title="Permanent link">&para;</a></h2>
 <p>In addition to CA certificates, you must have updated Certificate Revocation Lists (CRLs). CRLs contain certificate blacklists that OSG software uses to ensure that your hosts are only talking to valid clients or servers. To maintain up to date CAs, you will need to run the <code>fetch-crl</code> services. </p>
 <div class="admonition note">
@@ -2735,7 +2781,7 @@ syslogfacility = daemon
       
     </div>
     
-      <script src="../../assets/javascripts/application.9fb73e57.js"></script>
+      <script src="../../assets/javascripts/application.abd7b172.js"></script>
       
       <script>app.initialize({version:"0.17.1",url:{base:"../.."}})</script>
       
