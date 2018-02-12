@@ -184,7 +184,10 @@ To migrate any custom authentication configuration from GUMS to the LCMAPS VOMS 
         The above files will not include all VO mappings; the OSG provides default VO mappings in
         `/usr/share/osg/voms-mapfile-default`
 
-1. On each of your client hosts, append each `.additions` file to its corresponding file in `/etc/grid-security/` (creating those files if they do not exist).
+1. On each of your client hosts (e.g. HTCondor-CE, GridFTP, XRootD), perform the following:
+
+    1. If you have not done so already, [install](#installing-the-lcmaps-voms-plugin) and [configure](#configuring-the-lcmaps-voms-plugin) the LCMAPS VOMS plugin
+    1. Append each `.additions` file to its corresponding file in `/etc/grid-security/` (creating those files if they do not exist)
 
 #### Mapping VOs
 
