@@ -47,7 +47,7 @@ A new installation of XRootD is already configured to run a standalone server
 that serves files from `/tmp` on the local file system. This configuration is
 useful to verify basic connectivity between your clients and your server. To do
 this, start the `xrootd` service with standalone config as described in the
-[managing services section](#ManagingServices).
+[managing services section](#using-xrootd).
 
 You should be able now to copy a file such as `/bin/sh` using `xrdcp` command
 into `/tmp`. To test, do:
@@ -129,7 +129,7 @@ Further information can be found at <http://xrootd.slac.stanford.edu/doc>
 #### Verifying the clustered config
 
 Start both `xrootd` and `cmsd` on all nodes according to the instructions in the
-[managing services section](#ManagingServices).
+[managing services section](#using-xrootd).
 
 Verify that you can copy a file such as `/bin/sh` to `/tmp` on the server data
 via the redirector:
