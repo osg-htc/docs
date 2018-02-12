@@ -2696,7 +2696,7 @@ dependencies. Install these with Yum:</p>
 that serves files from <code>/tmp</code> on the local file system. This configuration is
 useful to verify basic connectivity between your clients and your server. To do
 this, start the <code>xrootd</code> service with standalone config as described in the
-<a href="#ManagingServices">managing services section</a>.</p>
+<a href="#using-xrootd">managing services section</a>.</p>
 <p>You should be able now to copy a file such as <code>/bin/sh</code> using <code>xrdcp</code> command
 into <code>/tmp</code>. To test, do:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-client
@@ -2777,7 +2777,7 @@ fi
 <p>Further information can be found at <a href="http://xrootd.slac.stanford.edu/doc">http://xrootd.slac.stanford.edu/doc</a></p>
 <h4 id="verifying-the-clustered-config">Verifying the clustered config<a class="headerlink" href="#verifying-the-clustered-config" title="Permanent link">&para;</a></h4>
 <p>Start both <code>xrootd</code> and <code>cmsd</code> on all nodes according to the instructions in the
-<a href="#ManagingServices">managing services section</a>.</p>
+<a href="#using-xrootd">managing services section</a>.</p>
 <p>Verify that you can copy a file such as <code>/bin/sh</code> to <code>/tmp</code> on the server data
 via the redirector:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp /bin/sh  root://<span style="color:red">RDRNODE</span>:1094///tmp/second_test
