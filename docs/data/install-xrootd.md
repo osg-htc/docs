@@ -1,16 +1,15 @@
 Installing and Maintaining XRootD
 =================================
 
-[XRootD](http://xrootd.org/) is a hierarchical storage system that can be used
-in a variety of ways to access data, typically distributed among actual storage
-resources. One way to use XRootD is to have it refer to many data resources at a
-single site, and another way to use it is to refer to many storage systems, most
-likely distributed among sites. An XRootD system includes a *redirector*, which
-accepts requests for data and finds a storage repository — locally or
+[XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in a variety of ways to access data,
+typically distributed among actual storage resources. 
+One way to use XRootD is to have it refer to many data resources at a single site, and another way to use it is to refer
+to many storage systems, most likely distributed among sites.  An XRootD system includes a *redirector*, which accepts
+requests for data and finds a storage repository — locally or
 otherwise — that can provide the data to the requestor.
 
-Use this page to learn how to install, configure, and use an XRootD redirector
-as part of a Storage Element (SE) or as part of a global namespace.
+Use this page to learn how to install, configure, and use an XRootD redirector as part of a Storage Element (SE) or as
+part of a global namespace.
 
 Before Starting
 ---------------
@@ -31,8 +30,8 @@ As with all OSG software installations, there are some one-time (per host) steps
 Installing an XRootD Server
 ---------------------------
 
-An installation of the XRootD server consists of the server itself and its
-dependencies. Install these with Yum:
+An installation of the XRootD server consists of the server itself and its dependencies. 
+Install these with Yum:
 
 ``` console
 root@host # yum install xrootd
@@ -43,14 +42,14 @@ Configuring an XRootD Server
 
 ### Minimal configuration
 
-A new installation of XRootD is already configured to run a standalone server
-that serves files from `/tmp` on the local file system. This configuration is
-useful to verify basic connectivity between your clients and your server. To do
-this, start the `xrootd` service with standalone config as described in the
-[managing services section](#managing-xrootd-services).
+A new installation of XRootD is already configured to run a standalone server that serves files from `/tmp` on the local
+file system. 
+This configuration is useful to verify basic connectivity between your clients and your server. 
+To do this, start the `xrootd` service with standalone config as described in the [managing services
+section](#managing-xrootd-services).
 
-You should be able now to copy a file such as `/bin/sh` using `xrdcp` command
-into `/tmp`. To test, do:
+You should be able now to copy a file such as `/bin/sh` using `xrdcp` command into `/tmp`. 
+To test, do:
 
 ``` console
 root@host # yum install xrootd-client
@@ -60,25 +59,24 @@ root@host # ls -l /tmp/first_test
 -rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
 ```
 
-Other than for testing, a standalone server is useful when you want to serve
-files off of a single host with lots of large disks. If your storage capacity is
-spread out over multiple hosts, you will need to set up an XRootD cluster.
+Other than for testing, a standalone server is useful when you want to serve files off of a single host with lots of
+large disks. 
+If your storage capacity is spread out over multiple hosts, you will need to set up an XRootD cluster.
 
 ### Advanced configuration
 
-An advanced XRootD setup has multiple components; it is important to validate
-that each additional component that you set up is working before moving on to
-the next component. We have included validation instructions after each
-component below.
+An advanced XRootD setup has multiple components; it is important to validate that each additional component that you
+set up is working before moving on to the next component. 
+We have included validation instructions after each component below.
 
 ### Creating an XRootD cluster
 
 ![XRootD cluster](/img/xrootd.jpg)
 
-If your storage is spread out over multiple hosts, you will need to set up an
-XRootD *cluster*. The cluster uses one "redirector" node as a frontend for user
-accesses, and multiple data nodes that have the data that users request. Two
-daemons will run on each node:
+If your storage is spread out over multiple hosts, you will need to set up an XRootD *cluster*. 
+The cluster uses one "redirector" node as a frontend for user accesses, and multiple data nodes that have the data that
+users request. 
+Two daemons will run on each node:
 
 `xrootd`  
 The eXtended Root Daemon controls file access and storage.
@@ -86,20 +84,18 @@ The eXtended Root Daemon controls file access and storage.
 `cmsd`  
 The Cluster Management Services Daemon controls communication between nodes.
 
-Note that for large virtual organizations, a site-level redirector may actually
-also communicate upwards to a regional or global redirector that handles access
-to a multi-level hierarchy. This section will only cover handling one level of
-XRootD hierarchy.
+Note that for large virtual organizations, a site-level redirector may actually also communicate upwards to a regional
+or global redirector that handles access to a multi-level hierarchy. 
+This section will only cover handling one level of XRootD hierarchy.
 
-In the instructions below, %RED%RDRNODE%ENDCOLOR% will refer to the redirector host
-and %RED%DATANODE%ENDCOLOR% will refer to the data node host. These should be
-replaced with the fully-qualified domain name of the host in question.
+In the instructions below, %RED%RDRNODE%ENDCOLOR% will refer to the redirector host and %RED%DATANODE%ENDCOLOR% will
+refer to the data node host. 
+These should be replaced with the fully-qualified domain name of the host in question.
 
 #### Modify /etc/xrootd/xrootd-clustered.cfg
 
-You will need to modify the `xrootd-clustered.cfg` on the redirector node and
-each data node. The following example should serve as a base configuration for
-clustering. Further customizations are detailed below.
+You will need to modify the `xrootd-clustered.cfg` on the redirector node and each data node. 
+The following example should serve as a base configuration for clustering. Further customizations are detailed below.
 
 ``` file
 all.export %RED%/tmp%ENDCOLOR% stage
@@ -128,11 +124,10 @@ Further information can be found at <http://xrootd.slac.stanford.edu/doc>
 
 #### Verifying the clustered config
 
-Start both `xrootd` and `cmsd` on all nodes according to the instructions in the
-[managing services section](#ManagingServices).
+Start both `xrootd` and `cmsd` on all nodes according to the instructions in the [managing services
+section](#ManagingServices).
 
-Verify that you can copy a file such as `/bin/sh` to `/tmp` on the server data
-via the redirector:
+Verify that you can copy a file such as `/bin/sh` to `/tmp` on the server data via the redirector:
 
 ``` console
 root@host # xrdcp /bin/sh  root://%RED%RDRNODE%ENDCOLOR%:1094///tmp/second_test
@@ -143,8 +138,8 @@ Check that the `/tmp/second_test` is located on data server %RED%DATANODE%ENDCOL
 
 ### (Optional) Adding Simple Server Inventory to your cluster
 
-The Simple Server Inventory (SSI) provide means to have an inventory for each
-data server. SSI requires:
+The Simple Server Inventory (SSI) provide means to have an inventory for each data server. 
+SSI requires:
 
 -   A second instance of the `xrootd` daemon on the redirector
 -   A "composite name space daemon" (`XrdCnsd`) on each data server; this daemon handles the inventory
@@ -170,17 +165,15 @@ root@host # mkdir -p /data/inventory
 root@host # chown xrootd:xrootd /data/inventory
 ```
 
-On the data server (host B) let's use a storage cache that will be at a
-different location from `/tmp`. 
+On the data server (host B) let's use a storage cache that will be at a different location from `/tmp`. 
 
 ``` console
 root@host # mkdir -p  /local/xrootd
 root@host # chown xrootd:xrootd /local/xrootd
 ```
 
-We will be running two instances of XRootD on %RED%hostA%ENDCOLOR%. Modify
-`/etc/xrootd/xrootd-clustered.cfg` to give the two instances different behavior,
-as such:
+We will be running two instances of XRootD on %RED%hostA%ENDCOLOR%. 
+Modify `/etc/xrootd/xrootd-clustered.cfg` to give the two instances different behavior, as such:
 
 ``` file
 all.export /data/xrootdfs
@@ -202,18 +195,18 @@ else
 fi
 ```
 
-The value of `oss.localroot` will be prepended to any file access.  E.g. accessing
-`root://%RED%RDRNODE%ENDCOLOR%:1094//data/xrootdfs/test1` will actually go to
+The value of `oss.localroot` will be prepended to any file access.  
+E.g. accessing `root://%RED%RDRNODE%ENDCOLOR%:1094//data/xrootdfs/test1` will actually go to
 `/local/xrootd/data/xrootdfs/test1`.
 
 #### Starting a second instance of XRootD on EL 6
 
-The procedure for starting a second instance differs between EL 6 and EL 7. This
-section is the procedure for EL 6.
+The procedure for starting a second instance differs between EL 6 and EL 7. 
+This section is the procedure for EL 6.
 
-Now, we have to change `/etc/sysconfig/xrootd` on the redirector node
-(%RED%hostA%ENDCOLOR%) to run multiple instances of XRootD. The second instance
-of XRootD will be named "cns" and will be used for SSI.
+Now, we have to change `/etc/sysconfig/xrootd` on the redirector node (%RED%hostA%ENDCOLOR%) to run multiple instances
+of XRootD. 
+The second instance of XRootD will be named "cns" and will be used for SSI.
 
 ```file
 XROOTD_USER=xrootd 
@@ -227,7 +220,8 @@ CMSD_INSTANCES="default"
 FRMD_INSTANCES="default" 
 ```
 
-Now, we can start XRootD cluster executing the following commands. On redirector you will see:
+Now, we can start XRootD cluster executing the following commands. 
+On redirector you will see:
 
 ```console
 root@host # service xrootd start 
@@ -259,8 +253,8 @@ xrootd 19894 0.0 0.1 71164 6960 ? Sl 08:33 0:00 /usr/bin/XrdCnsd -d -D 2 -i 90 -
 
 #### Starting a second instance of XRootD on EL 7
 
-The procedure for starting a second instance differs between EL 6 and EL 7. This
-section is the procedure for EL 7.
+The procedure for starting a second instance differs between EL 6 and EL 7. 
+This section is the procedure for EL 7.
 
 1.  Create a symlink pointing to `/etc/xrootd/xrootd-clustered.cfg` at `/etc/xrootd/xrootd-cns.cfg`:
 
@@ -307,7 +301,9 @@ Modify `/etc/fstab` by adding the following entries:
     xrootdfs                %RED%/mnt/xrootd%ENDCOLOR%              fuse    rdr=xroot://%RED%redirector1.domain.com%ENDCOLOR%:1094/%RED%/path/%ENDCOLOR%,uid=xrootd 0 0
 
 
-Replace `/mnt/xrootd` with the path that you would like to access with. This should also match the GridFTP settings for the `XROOTD_VMP` local path. Create `/mnt/xrootd` directory. Make sure the xrootd user exists on the system. Once you are finished, you can mount it:
+Replace `/mnt/xrootd` with the path that you would like to access with. 
+This should also match the GridFTP settings for the `XROOTD_VMP` local path. 
+Create `/mnt/xrootd` directory. Make sure the xrootd user exists on the system. Once you are finished, you can mount it:
 
     :::file
     mount /mnt/xrootd
@@ -316,8 +312,8 @@ You should now be able to run UNIX commands such as `ls /mnt/xrootd` to see the 
 
 ### (Optional) Authorization
 
-There are several authorization options in XRootD available through the security
-plugins. In this document, we will cover two options for security:
+There are several authorization options in XRootD available through the security plugins. 
+In this document, we will cover two options for security:
 
 -   [Simple Unix Security](#security-option-1-adding-simple-unix-security): Based on user accounts that the client is
     logged in as.
@@ -325,17 +321,16 @@ plugins. In this document, we will cover two options for security:
 -   [`xrootd-lcmaps`](#security-option-3-xrootd-lcmaps-authorization): Using the LCMAPS callout to use X509-based
     authentication
 
-Note: On the data nodes, the files will actually be owned by unix user `xrootd`
-(or other daemon user), not as the user authenticated to, under most
-circumstances. XRootD will verify the permissions and authorization based on the
-user that the security plugin authenticates you to (for instance, your unix user
-for option 1 or your gums id for option 2), but, internally, the data node files
-will be owned by the `xrootd` user.
+Note: On the data nodes, the files will actually be owned by unix user `xrootd` (or other daemon user), not as the user
+authenticated to, under most circumstances. 
+XRootD will verify the permissions and authorization based on the user that the security plugin authenticates you to
+(for instance, your unix user for option 1 or your gums id for option 2), but, internally, the data node files will be
+owned by the `xrootd` user.
 
 #### Authorization file
 
-In order to add security to your cluster you will need to add "auth\_file" on
-the your data server node. Create `/etc/xrootd/auth_file` :
+In order to add security to your cluster you will need to add "auth\_file" on the your data server node. 
+Create `/etc/xrootd/auth_file` :
 
 ```file
 # This means that all the users have read access to the datasets 
@@ -379,8 +374,8 @@ File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
 
 #### Security option 1: adding simple (Unix) security
 
-The first step in adding simple Unix security to validate based on username is
-to create the `auth_file` as in the previous section.
+The first step in adding simple Unix security to validate based on username is to create the `auth_file` as in the
+previous section.
 
 The next step is to modify `/etc/xrootd/xrootd-clustered.cfg` on both nodes:
 
@@ -411,11 +406,10 @@ else
 fi 
 ```
 
-Note that, to access users directories, you will have to create them in
-oss.localroot (For instance, `/local/xrootd/data/xrootdfs/username`) and make
-sure they are writable by `xrootd` user (or the daemon user, if you have changed
-it). Files in localroot on the data nodes are normally owned by `xrootd` not by
-the authenticated username.
+Note that, to access users directories, you will have to create them in oss.localroot (For instance,
+`/local/xrootd/data/xrootdfs/username`) and make sure they are writable by `xrootd` user (or the daemon user, if you
+have changed it). 
+Files in localroot on the data nodes are normally owned by `xrootd` not by the authenticated username.
 
 After making all the changes, please, restart XRootD and cmsd daemons on all nodes.
 
@@ -457,7 +451,8 @@ root@host # su - %RED%user%ENDCOLOR%
 
 #### Security option 2: Shared keys
 
-If you want to enable security for access to XRootD via xrootdfs you will need to modify XRootD configuration and perform several steps to make xrootdfs secured.
+If you want to enable security for access to XRootD via xrootdfs you will need to modify XRootD configuration and
+perform several steps to make xrootdfs secured.
 
 1. On the XRootD redirector node, execute the following command:
 
@@ -519,13 +514,13 @@ If you want to enable security for access to XRootD via xrootdfs you will need t
 
 #### Security option 3: xrootd-lcmaps authorization
 
-The xrootd-lcmaps security plugin uses the `lcmaps` package to access the `GUMS`
-server to authenticate and authorize users based on X509 certificates.
+The xrootd-lcmaps security plugin uses the `lcmaps` package to access the `GUMS` server to authenticate and authorize
+users based on X509 certificates.
 
 **Certificate Installation**
 
-In order to use lcmaps, you will need CA certificates and certificate revocation
-lists. See the following documents for instructions:
+In order to use lcmaps, you will need CA certificates and certificate revocation lists. 
+See the following documents for instructions:
 
 -   [Install CA certificates](../common/ca/)
 -   [Managing Certificate Revocation Lists](../common/ca/)
@@ -536,15 +531,14 @@ lists. See the following documents for instructions:
 yum install xrootd-lcmaps
 ```
 
-Note that the xrootd-lcmaps is usually coupled to a specific version of XRootD,
-so make sure that you install xrootd-lcmaps from the same repository that you
-install XRootD from. Otherwise, you may have dependency issues due to differing
-versions of shared libraries.
+Note that the xrootd-lcmaps is usually coupled to a specific version of XRootD, so make sure that you install
+xrootd-lcmaps from the same repository that you install XRootD from. 
+Otherwise, you may have dependency issues due to differing versions of shared libraries.
 
 **Create host certificates**
 
-You will need to have a X509 certificate to talk to GUMS. If you already have a
-host certificate, you can use a copy of that:
+You will need to have a X509 certificate to talk to GUMS. 
+If you already have a host certificate, you can use a copy of that:
 
 ``` console
  mkdir /etc/grid-security/xrd
@@ -577,7 +571,11 @@ scasclient = "lcmaps_scas_client.mod"
 
 **Modify /etc/xrootd/xrootd-clustered.cfg**
 
-You will need to add the security plugins to `/etc/xrootd/xrootd-clustered.cfg`. Add the following lines to the `/etc/xrootd/xrootd-clustered.cfg`. This will need to be added to all data nodes in the section relevant to the data node server. (For instance, in the above example(s), this should be placed in the last "else" clause after "all.role server". See the section above on Unix security for an example of where the security commands should go).
+You will need to add the security plugins to `/etc/xrootd/xrootd-clustered.cfg`. 
+Add the following lines to the `/etc/xrootd/xrootd-clustered.cfg`. 
+This will need to be added to all data nodes in the section relevant to the data node server. 
+(For instance, in the above example(s), this should be placed in the last "else" clause after "all.role server". 
+See the section above on Unix security for an example of where the security commands should go).
 
 ```text
 xrootd.seclib /usr/lib64/libXrdSec.so
@@ -602,7 +600,8 @@ root@host # service cmsd restart
 
 #### Testing an XRootd Cluster with LCMAPS security enabled
 
-From any machine with the `xrootd-client` installed, you can test with xrdcp. With a user that has no grid certificate installed, you should get an error:
+From any machine with the `xrootd-client` installed, you can test with xrdcp. 
+With a user that has no grid certificate installed, you should get an error:
 
 ``` console
 user@host $ xrdcp /bin/bash root://HOSTNAME/tmp/lcmaps_test
@@ -612,7 +611,10 @@ Last server error 3010 ('cannot obtain credentials for protocol: Secgsi: ErrPars
 Error accessing path/file for root://fermicloud121.fnal.gov/tmp/test2
 ```
 
-After running `voms-proxy-init` or `grid-proxy-init` to initialize your x509 certificate (usually found in `/tmp/x509up_uUID`), the `xrdcp` command should execute cleanly. For instance, the following shows an example of a user creating a voms certificate and copying to the XRootD client and then re-executing the xrdcp command.
+After running `voms-proxy-init` or `grid-proxy-init` to initialize your x509 certificate (usually found in
+`/tmp/x509up_uUID`), the `xrdcp` command should execute cleanly. 
+For instance, the following shows an example of a user creating a voms certificate and copying to the XRootD client and
+then re-executing the xrdcp command.
 
 ``` console
 user@host $ voms-proxy-init -voms Engage -valid 999:0
@@ -637,16 +639,15 @@ In the above examples, make sure to change "/tmp" to a directory allowed by the
 
 ### (Optional) Adding CMS TFC support to XRootD (CMS sites only)
 
-For CMS users, there is a package available to integrate rule-based name lookup
-using a `storage.xml` file. If you are not setting up a CMS site, you can skip
-this section.
+For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file. 
+If you are not setting up a CMS site, you can skip this section.
 
 ``` console
 yum install --enablerepo=osg-contrib xrootd-cmstfc
 ```
 
-You will need to add your `storage.xml` to `/etc/xrootd/storage.xml` and then
-add the following line to your XRootD configuration:
+You will need to add your `storage.xml` to `/etc/xrootd/storage.xml` and then add the following line to your XRootD
+configuration:
 
 ``` file
 # Integrate with CMS TFC, placed in /etc/xrootd/storage.xml
@@ -662,8 +663,7 @@ See the CMS TWiki for more information:
 
 ### (Optional) Adding Hadoop support to XRootD
 
-HDFS-based sites should utilize the `xrootd-hdfs` plugin to allow XRootD to access
-their storage.
+HDFS-based sites should utilize the `xrootd-hdfs` plugin to allow XRootD to access their storage.
 
 ``` console
 root@host # yum install xrootd-hdfs
@@ -681,23 +681,20 @@ For more information, see [the HDFS installation documents](install-hadoop-2-0-0
 
 ### (Optional) Adding File Residency Manager (FRM) to an XRootd cluster
 
-If you have a multi-tiered storage system (e.g. some data is stored on SSDs and
-some on disks or tapes), then install the File Residency Manager (FRM), so you
-can move data between tiers more easily. If you do not have a multi-tiered
-storage system, then you do not need FRM and you can skip this section.
+If you have a multi-tiered storage system (e.g. some data is stored on SSDs and some on disks or tapes), then install
+the File Residency Manager (FRM), so you can move data between tiers more easily. 
+If you do not have a multi-tiered storage system, then you do not need FRM and you can skip this section.
 
 The FRM deals with two major mechanisms:
 
 -   local disk
 -   remote servers
 
-The description of fully functional multiple XRootD clusters is beyond the scope
-of this document. In order to have this fully functional system you will need a
-global redirector and at least one remote XRootD cluster from where files could
-be moved to the local cluster.
+The description of fully functional multiple XRootD clusters is beyond the scope of this document. 
+In order to have this fully functional system you will need a global redirector and at least one remote XRootD cluster
+from where files could be moved to the local cluster.
 
-Below are the modifications you should make in order to enable FRM on your local
-cluster:
+Below are the modifications you should make in order to enable FRM on your local cluster:
 
 1.  Make sure that FRM is enabled in `/etc/sysconfig/xrootd` on your data sever:
 
@@ -723,8 +720,8 @@ root@host # service frm_purged start
 (Optional) Installing a GridFTP Server
 --------------------------------------
 
-The Globus GridFTP server can be installed alongside an XRootD storage element to provide
-GridFTP-based access to the storage.
+The Globus GridFTP server can be installed alongside an XRootD storage element to provide GridFTP-based access to the
+storage.
 
 !!! note "See Also"
     OSG has extensive documentation on setting up a GridFTP server; this section is an
@@ -735,8 +732,8 @@ GridFTP-based access to the storage.
     -   [Load-balanced GridFTP Install](load-balanced-gridftp).  Covers the creation of
         a load-balanced GridFTP service using multiple servers.
 
-Prior to following this installation guide, verify the host certificates and networking is
-configured correctly as in the [basic GridFTP install](gridftp).
+Prior to following this installation guide, verify the host certificates and networking is configured correctly as in
+the [basic GridFTP install](gridftp).
 
 ### Installation
 
@@ -748,8 +745,8 @@ root@host # yum install osg-gridftp-xrootd
 
 ### Configuration
 
-For information on how to configure authentication for your GridFTP installation, please refer to
-the [configuring authentication section of the GridFTP guide](gridftp#configuring-authentication).
+For information on how to configure authentication for your GridFTP installation, please refer to the [configuring
+authentication section of the GridFTP guide](gridftp#configuring-authentication).
 
 Edit `/etc/sysconfig/xrootd-dsi` to set `XROOTD_VMP` to use your XRootD redirector.
 
@@ -763,13 +760,12 @@ Edit `/etc/sysconfig/xrootd-dsi` to set `XROOTD_VMP` to use your XRootD redirect
     - **local_path**: The path exported by the GridFTP server.
     - **remote_path**: The XRootD path that will be mounted at **local_path**.
 
-When `xrootd-dsi` is enabled, GridFTP configuration changes should go into
-`/etc/xrootd-dsi/gridftp-xrootd.conf`, not `/etc/gridftp.conf`.  Sites should review any
-customizations made in the latter and copy them as necessary.
+When `xrootd-dsi` is enabled, GridFTP configuration changes should go into `/etc/xrootd-dsi/gridftp-xrootd.conf`, not
+`/etc/gridftp.conf`.  
+Sites should review any customizations made in the latter and copy them as necessary.
 
 You can use the FUSE mount in order to test POSIX access to xrootd in the GridFTP server.
-You should be able to run Unix commands such as `ls /mnt/xrootd` and see the contents of the
-XRootD server.
+You should be able to run Unix commands such as `ls /mnt/xrootd` and see the contents of the XRootD server.
 
 For log / config file locations and system services to run, see the [basic GridFTP install](gridftp).
 
@@ -778,18 +774,15 @@ Using XRootD
 
 ### Managing XRootD services
 
-Start services on the redirector node before starting any services on the data
-nodes. If you installed only XRootD itself, you will only need to start the
-`xrootd` service. However, if you installed cluster management services, you
-will need to start `cmsd` as well.
+Start services on the redirector node before starting any services on the data nodes. 
+If you installed only XRootD itself, you will only need to start the `xrootd` service. 
+However, if you installed cluster management services, you will need to start `cmsd` as well.
 
-The instructions for starting and stopping an XRootD service depend on whether
-the service is installed on an EL 6 or EL 7 machine, and whether you are using a
-standalone or clustered configuration.
+The instructions for starting and stopping an XRootD service depend on whether the service is installed on an EL 6 or EL
+7 machine, and whether you are using a standalone or clustered configuration.
 
-On EL 6, which config to use is set in the file `/etc/sysconfig/xrootd`. For
-example, to have `xrootd` use the clustered config, you would have a line such
-as this:
+On EL 6, which config to use is set in the file `/etc/sysconfig/xrootd`. 
+For example, to have `xrootd` use the clustered config, you would have a line such as this:
 
 ``` file
 XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-%RED%clustered%ENDCOLOR%.cfg -k fifo"
@@ -801,9 +794,8 @@ To use the standalone config instead, you would use:
 XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-%RED%standalone%ENDCOLOR%.cfg -k fifo"
 ```
 
-On EL 7, which config to use is determined by the service name given to
-`systemctl`. For example, to have `xrootd` use the clustered config, you would
-start up `xrootd` with this line:
+On EL 7, which config to use is determined by the service name given to `systemctl`. 
+For example, to have `xrootd` use the clustered config, you would start up `xrootd` with this line:
 
 ``` console
 root@host # systemctl start xrootd@%RED%clustered%ENDCOLOR%
