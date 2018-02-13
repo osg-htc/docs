@@ -2660,15 +2660,14 @@
                 
                 
                 <h1 id="installing-and-maintaining-xrootd">Installing and Maintaining XRootD<a class="headerlink" href="#installing-and-maintaining-xrootd" title="Permanent link">&para;</a></h1>
-<p><a href="http://xrootd.org/">XRootD</a> is a hierarchical storage system that can be used
-in a variety of ways to access data, typically distributed among actual storage
-resources. One way to use XRootD is to have it refer to many data resources at a
-single site, and another way to use it is to refer to many storage systems, most
-likely distributed among sites. An XRootD system includes a <em>redirector</em>, which
-accepts requests for data and finds a storage repository — locally or
+<p><a href="http://xrootd.org/">XRootD</a> is a hierarchical storage system that can be used in a variety of ways to access data,
+typically distributed among actual storage resources. 
+One way to use XRootD is to have it refer to many data resources at a single site, and another way to use it is to refer
+to many storage systems, most likely distributed among sites.  An XRootD system includes a <em>redirector</em>, which accepts
+requests for data and finds a storage repository — locally or
 otherwise — that can provide the data to the requestor.</p>
-<p>Use this page to learn how to install, configure, and use an XRootD redirector
-as part of a Storage Element (SE) or as part of a global namespace.</p>
+<p>Use this page to learn how to install, configure, and use an XRootD redirector as part of a Storage Element (SE) or as
+part of a global namespace.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points:</p>
 <ul>
@@ -2684,58 +2683,55 @@ as part of a Storage Element (SE) or as part of a global namespace.</p>
 <li>Install <a href="../../common/ca">CA certificates</a></li>
 </ul>
 <h2 id="installing-an-xrootd-server">Installing an XRootD Server<a class="headerlink" href="#installing-an-xrootd-server" title="Permanent link">&para;</a></h2>
-<p>An installation of the XRootD server consists of the server itself and its
-dependencies. Install these with Yum:</p>
+<p>An installation of the XRootD server consists of the server itself and its dependencies. 
+Install these with Yum:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd
 </pre></div>
 
 
 <h2 id="configuring-an-xrootd-server">Configuring an XRootD Server<a class="headerlink" href="#configuring-an-xrootd-server" title="Permanent link">&para;</a></h2>
 <h3 id="minimal-configuration">Minimal configuration<a class="headerlink" href="#minimal-configuration" title="Permanent link">&para;</a></h3>
-<p>A new installation of XRootD is already configured to run a standalone server
-that serves files from <code>/tmp</code> on the local file system. This configuration is
-useful to verify basic connectivity between your clients and your server. To do
-this, start the <code>xrootd</code> service with standalone config as described in the
-<a href="#using-xrootd">managing services section</a>.</p>
-<p>You should be able now to copy a file such as <code>/bin/sh</code> using <code>xrdcp</code> command
-into <code>/tmp</code>. To test, do:</p>
+<p>A new installation of XRootD is already configured to run a standalone server that serves files from <code>/tmp</code> on the local
+file system. 
+This configuration is useful to verify basic connectivity between your clients and your server. 
+To do this, start the <code>xrootd</code> service with standalone config as described in the <a href="#managing-xrootd-services">managing services
+section</a>.</p>
+<p>You should be able now to copy a file such as <code>/bin/sh</code> using <code>xrdcp</code> command into <code>/tmp</code>. 
+To test, do:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-client
 <span class="gp">root@host #</span> xrdcp /bin/sh root://localhost:1094//tmp/first_test
-<span class="go">[xrootd] Total 0.76 MB  |====================| 100.00 % [inf MB/s]</span>
+<span class="go">[xrootd] Total 0.76 MB  [====================] 100.00 % [inf MB/s]</span>
 <span class="gp">root@host #</span> ls -l /tmp/first_test
 <span class="go">-rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test</span>
 </pre></div>
 
 
-<p>Other than for testing, a standalone server is useful when you want to serve
-files off of a single host with lots of large disks. If your storage capacity is
-spread out over multiple hosts, you will need to set up an XRootD cluster.</p>
+<p>Other than for testing, a standalone server is useful when you want to serve files off of a single host with lots of
+large disks. 
+If your storage capacity is spread out over multiple hosts, you will need to set up an XRootD cluster.</p>
 <h3 id="advanced-configuration">Advanced configuration<a class="headerlink" href="#advanced-configuration" title="Permanent link">&para;</a></h3>
-<p>An advanced XRootD setup has multiple components; it is important to validate
-that each additional component that you set up is working before moving on to
-the next component. We have included validation instructions after each
-component below.</p>
+<p>An advanced XRootD setup has multiple components; it is important to validate that each additional component that you
+set up is working before moving on to the next component. 
+We have included validation instructions after each component below.</p>
 <h3 id="creating-an-xrootd-cluster">Creating an XRootD cluster<a class="headerlink" href="#creating-an-xrootd-cluster" title="Permanent link">&para;</a></h3>
 <p><img alt="XRootD cluster" src="../../img/xrootd.jpg" /></p>
-<p>If your storage is spread out over multiple hosts, you will need to set up an
-XRootD <em>cluster</em>. The cluster uses one "redirector" node as a frontend for user
-accesses, and multiple data nodes that have the data that users request. Two
-daemons will run on each node:</p>
+<p>If your storage is spread out over multiple hosts, you will need to set up an XRootD <em>cluster</em>. 
+The cluster uses one "redirector" node as a frontend for user accesses, and multiple data nodes that have the data that
+users request. 
+Two daemons will run on each node:</p>
 <p><code>xrootd</code><br/>
 The eXtended Root Daemon controls file access and storage.</p>
 <p><code>cmsd</code><br/>
 The Cluster Management Services Daemon controls communication between nodes.</p>
-<p>Note that for large virtual organizations, a site-level redirector may actually
-also communicate upwards to a regional or global redirector that handles access
-to a multi-level hierarchy. This section will only cover handling one level of
-XRootD hierarchy.</p>
-<p>In the instructions below, <span style="color:red">RDRNODE</span> will refer to the redirector host
-and <span style="color:red">DATANODE</span> will refer to the data node host. These should be
-replaced with the fully-qualified domain name of the host in question.</p>
+<p>Note that for large virtual organizations, a site-level redirector may actually also communicate upwards to a regional
+or global redirector that handles access to a multi-level hierarchy. 
+This section will only cover handling one level of XRootD hierarchy.</p>
+<p>In the instructions below, <span style="color:red">RDRNODE</span> will refer to the redirector host and <span style="color:red">DATANODE</span> will
+refer to the data node host. 
+These should be replaced with the fully-qualified domain name of the host in question.</p>
 <h4 id="modify-etcxrootdxrootd-clusteredcfg">Modify /etc/xrootd/xrootd-clustered.cfg<a class="headerlink" href="#modify-etcxrootdxrootd-clusteredcfg" title="Permanent link">&para;</a></h4>
-<p>You will need to modify the <code>xrootd-clustered.cfg</code> on the redirector node and
-each data node. The following example should serve as a base configuration for
-clustering. Further customizations are detailed below.</p>
+<p>You will need to modify the <code>xrootd-clustered.cfg</code> on the redirector node and each data node. 
+The following example should serve as a base configuration for clustering. Further customizations are detailed below.</p>
 <div class="codehilite"><pre><span></span>all.export <span style="color:red">/tmp</span> stage
 set xrdr = <span style="color:red">RDRNODE</span>
 all.manager $(xrdr):3121
@@ -2776,19 +2772,18 @@ fi
 </table>
 <p>Further information can be found at <a href="http://xrootd.slac.stanford.edu/doc">http://xrootd.slac.stanford.edu/doc</a></p>
 <h4 id="verifying-the-clustered-config">Verifying the clustered config<a class="headerlink" href="#verifying-the-clustered-config" title="Permanent link">&para;</a></h4>
-<p>Start both <code>xrootd</code> and <code>cmsd</code> on all nodes according to the instructions in the
-<a href="#using-xrootd">managing services section</a>.</p>
-<p>Verify that you can copy a file such as <code>/bin/sh</code> to <code>/tmp</code> on the server data
-via the redirector:</p>
+<p>Start both <code>xrootd</code> and <code>cmsd</code> on all nodes according to the instructions in the <a href="#ManagingServices">managing services
+section</a>.</p>
+<p>Verify that you can copy a file such as <code>/bin/sh</code> to <code>/tmp</code> on the server data via the redirector:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp /bin/sh  root://<span style="color:red">RDRNODE</span>:1094///tmp/second_test
-<span class="go">[xrootd] Total 0.76 MB  |====================| 100.00 % [inf MB/s]</span>
+<span class="go">[xrootd] Total 0.76 MB  [====================] 100.00 % [inf MB/s]</span>
 </pre></div>
 
 
 <p>Check that the <code>/tmp/second_test</code> is located on data server <span style="color:red">DATANODE</span>.</p>
 <h3 id="optional-adding-simple-server-inventory-to-your-cluster">(Optional) Adding Simple Server Inventory to your cluster<a class="headerlink" href="#optional-adding-simple-server-inventory-to-your-cluster" title="Permanent link">&para;</a></h3>
-<p>The Simple Server Inventory (SSI) provide means to have an inventory for each
-data server. SSI requires:</p>
+<p>The Simple Server Inventory (SSI) provide means to have an inventory for each data server. 
+SSI requires:</p>
 <ul>
 <li>A second instance of the <code>xrootd</code> daemon on the redirector</li>
 <li>A "composite name space daemon" (<code>XrdCnsd</code>) on each data server; this daemon handles the inventory</li>
@@ -2812,15 +2807,14 @@ data server. SSI requires:</p>
 </pre></div>
 
 
-<p>On the data server (host B) let's create the storage cache that will be different from <strong><code>/tmp</code></strong>.</p>
+<p>On the data server (host B) let's use a storage cache that will be at a different location from <code>/tmp</code>. </p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mkdir -p  /local/xrootd
 <span class="gp">root@host #</span> chown xrootd:xrootd /local/xrootd
 </pre></div>
 
 
-<p>We will be running two instances of XRootD on <span style="color:red">hostA</span>. Modify
-<code>/etc/xrootd/xrootd-clustered.cfg</code> to give the two instances different behavior,
-as such:</p>
+<p>We will be running two instances of XRootD on <span style="color:red">hostA</span>. 
+Modify <code>/etc/xrootd/xrootd-clustered.cfg</code> to give the two instances different behavior, as such:</p>
 <div class="codehilite"><pre><span></span>all.export /data/xrootdfs
 set xrdr=<span style="color:red">hostA</span>
 all.manager $(xrdr):3121
@@ -2841,28 +2835,34 @@ fi
 </pre></div>
 
 
+<p>The value of <code>oss.localroot</code> will be prepended to any file access.<br />
+E.g. accessing <code>root://<span style="color:red">RDRNODE</span>:1094//data/xrootdfs/test1</code> will actually go to
+<code>/local/xrootd/data/xrootdfs/test1</code>.</p>
 <h4 id="starting-a-second-instance-of-xrootd-on-el-6">Starting a second instance of XRootD on EL 6<a class="headerlink" href="#starting-a-second-instance-of-xrootd-on-el-6" title="Permanent link">&para;</a></h4>
-<p>The procedure for starting a second instance differs between EL 6 and EL 7. This
-section is the procedure for EL 6.</p>
-<p>Now, we have to change <strong><code>/etc/sysconfig/xrootd</code></strong> on the redirector node (<span style="color:red">hostA</span>) to run multiple instances of XRootD. The second instance of XRootD will be named "cns" and will be used for SSI.</p>
-<div class="codehilite"><pre><span></span>XROOTD_USER=xrootd
-XROOTD_GROUP=xrootd
+<p>The procedure for starting a second instance differs between EL 6 and EL 7. 
+This section is the procedure for EL 6.</p>
+<p>Now, we have to change <code>/etc/sysconfig/xrootd</code> on the redirector node (<span style="color:red">hostA</span>) to run multiple instances
+of XRootD. 
+The second instance of XRootD will be named "cns" and will be used for SSI.</p>
+<div class="codehilite"><pre><span></span>XROOTD_USER=xrootd 
+XROOTD_GROUP=xrootd 
 XROOTD_DEFAULT_OPTIONS=&quot;<span style="color:red">-k 7</span> -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;
-<span style="color:red">XROOTD_CNS_OPTIONS=&quot;-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;</span>
-CMSD_DEFAULT_OPTIONS=&quot;<span style="color:red">-k 7</span> -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;
-FRMD_DEFAULT_OPTIONS=&quot;<span style="color:red">-k 7</span> -l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;
-<span style="color:red">XROOTD_INSTANCES=&quot;default cns&quot;</span>
-CMSD_INSTANCES=&quot;default&quot;
-FRMD_INSTANCES=&quot;default&quot;
+<span style="color:red">XROOTD_CNS_OPTIONS=&quot;-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;</span> 
+CMSD_DEFAULT_OPTIONS=&quot;<span style="color:red">-k 7</span> -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
+FRMD_DEFAULT_OPTIONS=&quot;<span style="color:red">-k 7</span> -l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
+<span style="color:red">XROOTD_INSTANCES=&quot;default cns&quot;</span> 
+CMSD_INSTANCES=&quot;default&quot; 
+FRMD_INSTANCES=&quot;default&quot; 
 </pre></div>
 
 
-<p>Now, we can start XRootD cluster executing the following commands. On redirector you will see:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service xrootd start
-<span class="go">Starting xrootd (xrootd, default): <span style="color:green">[ OK ]</span></span>
-<span class="go">Starting xrootd (xrootd, cns): <span style="color:green">[ OK ]</span></span>
-<span class="gp">root@host #</span> service cmsd start
-<span class="go">Starting xrootd (cmsd, default): <span style="color:green">[ OK ]</span></span>
+<p>Now, we can start XRootD cluster executing the following commands. 
+On redirector you will see:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service xrootd start 
+<span class="go">Starting xrootd (xrootd, default): <span style="color:green">[ OK ]</span> </span>
+<span class="go">Starting xrootd (xrootd, cns): <span style="color:green">[ OK ]</span> </span>
+<span class="gp">root@host #</span> service cmsd start 
+<span class="go">Starting xrootd (cmsd, default): <span style="color:green">[ OK ]</span> </span>
 </pre></div>
 
 
@@ -2874,7 +2874,8 @@ FRMD_INSTANCES=&quot;default&quot;
 </pre></div>
 
 
-<p><span style="color:red">warning</span> the log file for second named instance of xrootd with be placed in <code>/var/log/xrootd/cns/xrootd.log</code></p>
+<p><span style="color:red">Warning</span> the log file for second named instance of xrootd with be
+placed in <code>/var/log/xrootd/cns/xrootd.log</code></p>
 <p>On data server node you should that XrdCnsd process has been started:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> ps auxww<span class="p">|</span>grep xrootd
 <span class="go">xrootd 19156 0.0 0.0 48096 3256 ? Sl 07:37 0:00 /usr/bin/cmsd -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default</span>
@@ -2884,7 +2885,8 @@ FRMD_INSTANCES=&quot;default&quot;
 
 
 <h4 id="starting-a-second-instance-of-xrootd-on-el-7">Starting a second instance of XRootD on EL 7<a class="headerlink" href="#starting-a-second-instance-of-xrootd-on-el-7" title="Permanent link">&para;</a></h4>
-<p>The procedure for starting a second instance differs between EL 6 and EL 7. This section is the procedure for EL 7.</p>
+<p>The procedure for starting a second instance differs between EL 6 and EL 7. 
+This section is the procedure for EL 7.</p>
 <ol>
 <li>Create a symlink pointing to <code>/etc/xrootd/xrootd-clustered.cfg</code> at <code>/etc/xrootd/xrootd-cns.cfg</code>:</li>
 </ol>
@@ -2895,7 +2897,7 @@ FRMD_INSTANCES=&quot;default&quot;
 <ol>
 <li>Start an instance of the <code>xrootd</code> service named <code>cns</code> using the syntax in the <a href="#ManagingServices">managing services section</a>:</li>
 </ol>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl start &lt;xrootd@cns&gt;
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl start xrootd@cns
 </pre></div>
 
 
@@ -2903,41 +2905,43 @@ FRMD_INSTANCES=&quot;default&quot;
 <ol>
 <li>Copy file to redirector node specifying storage path (/data/xrootdfs instead of /tmp):</li>
 </ol>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp /bin/sh root://localhost:1094//data/xrootdfs/test1
-<span class="go">[xrootd] Total 0.00 MB |================| 100.00 % [inf MB/s]</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp /bin/sh root://<span style="color:red">RDRNODE</span>:1094//data/xrootdfs/test1 
+<span class="go">[xrootd] Total 0.00 MB [================] 100.00 % [inf MB/s] </span>
 </pre></div>
 
 
 <ol>
 <li>To verify that SSI is working execute <code>cns_ssi</code> command on the redirector node:</li>
 </ol>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cns_ssi list /data/inventory
-<span class="go">fermicloud054.fnal.gov incomplete inventory as of Mon Apr 11 17:28:11 2011</span>
-<span class="gp">root@host #</span> cns_ssi updt /data/inventory
-<span class="go">cns_ssi: fermicloud054.fnal.gov inventory with 1 directory and 1 file updated with 0 errors.</span>
-<span class="gp">root@host #</span> cns_ssi list /data/inventory
-<span class="go">fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/xrootdfs/test1</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cns_ssi list /data/inventory 
+<span class="go">fermicloud054.fnal.gov incomplete inventory as of Mon Apr 11 17:28:11 2011 </span>
+<span class="gp">root@host #</span> cns_ssi updt /data/inventory 
+<span class="go">cns_ssi: fermicloud054.fnal.gov inventory with 1 directory and 1 file updated with 0 errors. </span>
+<span class="gp">root@host #</span> cns_ssi list /data/inventory 
+<span class="go">fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/xrootdfs/test1 </span>
 </pre></div>
 
 
 <p><strong>Note</strong>: In this example, <code>fermicloud53.fnal.gov</code> is a redirector node and <code>fermicloud054.fnal.gov</code> is a data node.</p>
 <h3 id="optional-enabling-a-fuse-mount">(Optional) Enabling a FUSE mount<a class="headerlink" href="#optional-enabling-a-fuse-mount" title="Permanent link">&para;</a></h3>
 <p>XRootD storage can be mounted as a standard POSIX filesystem via FUSE, providing users with a more familiar interface..</p>
-<p>Modify <strong><code>/etc/fstab</code></strong> by adding the following entries:</p>
+<p>Modify <code>/etc/fstab</code> by adding the following entries:</p>
 <div class="codehilite"><pre><span></span>....
 xrootdfs                <span style="color:red">/mnt/xrootd</span>              fuse    rdr=xroot://<span style="color:red">redirector1.domain.com</span>:1094/<span style="color:red">/path/</span>,uid=xrootd 0 0
 </pre></div>
 
 
-<p>Replace <code>/mnt/xrootd</code> with the path that you would like to access with. This should also match the GridFTP settings for the <code>XROOTD_VMP</code> local path. Create <strong><code>/mnt/xrootd</code></strong> directory. Once you are finished, you can mount it:</p>
+<p>Replace <code>/mnt/xrootd</code> with the path that you would like to access with. 
+This should also match the GridFTP settings for the <code>XROOTD_VMP</code> local path. 
+Create <code>/mnt/xrootd</code> directory. Make sure the xrootd user exists on the system. Once you are finished, you can mount it:</p>
 <div class="codehilite"><pre><span></span>mount /mnt/xrootd
 </pre></div>
 
 
 <p>You should now be able to run UNIX commands such as <code>ls /mnt/xrootd</code> to see the contents of the XRootD server.</p>
 <h3 id="optional-authorization">(Optional) Authorization<a class="headerlink" href="#optional-authorization" title="Permanent link">&para;</a></h3>
-<p>There are several authorization options in XRootD available through the security
-plugins. In this document, we will cover two options for security:</p>
+<p>There are several authorization options in XRootD available through the security plugins. 
+In this document, we will cover two options for security:</p>
 <ul>
 <li><a href="#security-option-1-adding-simple-unix-security">Simple Unix Security</a>: Based on user accounts that the client is
     logged in as.</li>
@@ -2945,25 +2949,24 @@ plugins. In this document, we will cover two options for security:</p>
 <li><a href="#security-option-3-xrootd-lcmaps-authorization"><code>xrootd-lcmaps</code></a>: Using the LCMAPS callout to use X509-based
     authentication</li>
 </ul>
-<p>Note: On the data nodes, the files will actually be owned by unix user <code>xrootd</code>
-(or other daemon user), not as the user authenticated to, under most
-circumstances. XRootD will verify the permissions and authorization based on the
-user that the security plugin authenticates you to (for instance, your unix user
-for option 1 or your gums id for option 2), but, internally, the data node files
-will be owned by the <code>xrootd</code> user.</p>
+<p>Note: On the data nodes, the files will actually be owned by unix user <code>xrootd</code> (or other daemon user), not as the user
+authenticated to, under most circumstances. 
+XRootD will verify the permissions and authorization based on the user that the security plugin authenticates you to
+(for instance, your unix user for option 1 or your gums id for option 2), but, internally, the data node files will be
+owned by the <code>xrootd</code> user.</p>
 <h4 id="authorization-file">Authorization file<a class="headerlink" href="#authorization-file" title="Permanent link">&para;</a></h4>
-<p>In order to add security to your cluster you will need to add <code>auth_file</code> on
-the your data server node. Create <code>/etc/xrootd/auth_file</code> :</p>
-<div class="codehilite"><pre><span></span># This means that all the users have read access to the datasets
+<p>In order to add security to your cluster you will need to add "auth_file" on the your data server node. 
+Create <code>/etc/xrootd/auth_file</code> :</p>
+<div class="codehilite"><pre><span></span># This means that all the users have read access to the datasets 
 u * <span style="color:red">/data/xrootdfs</span> lr
 
-# This means that all the users have full access to their private dirs
+# This means that all the users have full access to their private dirs 
 u = <span style="color:red">/data/xrootdfs/</span>@=/ a
 
-# This means that this privileged user can do everything
-# You need at least one user like that, in order to create the
-# private dir for each user willing to store his data in the facility
-u xrootd <span style="color:red">/data/xrootdfs</span> a
+# This means that this privileged user can do everything 
+# You need at least one user like that, in order to create the 
+# private dir for each user willing to store his data in the facility 
+u xrootd <span style="color:red">/data/xrootdfs</span> a 
 </pre></div>
 
 
@@ -3009,64 +3012,63 @@ File</a>.</p>
 </tbody>
 </table>
 <h4 id="security-option-1-adding-simple-unix-security">Security option 1: adding simple (Unix) security<a class="headerlink" href="#security-option-1-adding-simple-unix-security" title="Permanent link">&para;</a></h4>
-<p>The first step in adding simple Unix security to validate based on username is
-to create the <code>auth_file</code> as in the previous section.</p>
-<p>The next step is to modify <strong><code>/etc/xrootd/xrootd-clustered.cfg</code></strong> on both nodes:</p>
-<div class="codehilite"><pre><span></span>all.export /data/xrootdfs
-set xrdr=<span style="color:red">hostA</span>
-all.manager $(xrdr):3121
-if $(xrdr) &amp;&amp; named cns
-    all.export /data/inventory
-    xrd.port 1095
-else if $(xrdr)
-    all.role manager
-    xrd.port 1094
-else
-    all.role server
-    oss.localroot /local/xrootd
-    ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory
-    cms.space min 2g 5g
+<p>The first step in adding simple Unix security to validate based on username is to create the <code>auth_file</code> as in the
+previous section.</p>
+<p>The next step is to modify <code>/etc/xrootd/xrootd-clustered.cfg</code> on both nodes:</p>
+<div class="codehilite"><pre><span></span>all.export /data/xrootdfs 
+set xrdr=<span style="color:red">hostA</span> 
+all.manager $(xrdr):3121 
+if $(xrdr) &amp;&amp; named cns 
+    all.export /data/inventory 
+    xrd.port 1095 
+else if $(xrdr) 
+    all.role manager 
+    xrd.port 1094 
+else 
+    all.role server 
+    oss.localroot /local/xrootd 
+    ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory 
+    cms.space min 2g 5g 
 
-    <span style="color:red"> # ENABLE_SECURITY_BEGIN
-    xrootd.seclib /usr/lib64/libXrdSec.so
-    # this specify that we use the &#39;unix&#39; authentication module, additional one can be specified.
-    sec.protocol /usr/lib64 unix
-    # this is the authorization file
-    acc.authdb /etc/xrootd/auth_file
-    ofs.authorize
-    # ENABLE_SECURITY_END </span>
-fi
+    <span style="color:red"> # ENABLE_SECURITY_BEGIN 
+    xrootd.seclib /usr/lib64/libXrdSec.so 
+    # this specify that we use the &#39;unix&#39; authentication module, additional one can be specified. 
+    sec.protocol /usr/lib64 unix 
+    # this is the authorization file 
+    acc.authdb /etc/xrootd/auth_file 
+    ofs.authorize 
+    # ENABLE_SECURITY_END </span> 
+fi 
 </pre></div>
 
 
-<p>Note that, to access users directories, you will have to create them in
-oss.localroot (For instance, <code>/local/xrootd/data/xrootdfs/username</code>) and make
-sure they are writable by <code>xrootd</code> user (or the daemon user, if you have changed
-it). Files in localroot on the data nodes are normally owned by <code>xrootd</code> not by
-the authenticated username.</p>
+<p>Note that, to access users directories, you will have to create them in oss.localroot (For instance,
+<code>/local/xrootd/data/xrootdfs/username</code>) and make sure they are writable by <code>xrootd</code> user (or the daemon user, if you
+have changed it). 
+Files in localroot on the data nodes are normally owned by <code>xrootd</code> not by the authenticated username.</p>
 <p>After making all the changes, please, restart XRootD and cmsd daemons on all nodes.</p>
 <h4 id="testing-an-xrootd-cluster-with-simple-security-enabled">Testing an XRootD cluster with simple security enabled<a class="headerlink" href="#testing-an-xrootd-cluster-with-simple-security-enabled" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Login on redirector node as root</li>
 <li>Check that user "root" still can read files:</li>
 </ol>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp root://localhost:1094//data/xrootdfs/test1 /tmp/b
-<span class="go">[xrootd] Total 0.00 MB |================| 100.00 % [inf MB/s]</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp root://<span style="color:red">RDRNODE</span>:1094//data/xrootdfs/test1 /tmp/b 
+<span class="go">[xrootd] Total 0.00 MB [================] 100.00 % [inf MB/s]</span>
 </pre></div>
 
 
 <ol>
 <li>Check that user "root" can not write files under /data/xrootdfs:</li>
 </ol>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp /tmp/b root://localhost:1094//data/xrootdfs/test2
-<span class="go">Last server error 3010 (&#39;Unable to create /data/xrootdfs/test2; Permission denied&#39;)</span>
-<span class="go">Error accessing path/file for root://localhost:1094//data/xrootdfs/test3</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp /tmp/b root://<span style="color:red">RDRNODE</span>:1094//data/xrootdfs/test2 
+<span class="go">Last server error 3010 (&#39;Unable to create /data/xrootdfs/test2; Permission denied&#39;) </span>
+<span class="go">Error accessing path/file for root://localhost:1094//data/xrootdfs/test3 </span>
 </pre></div>
 
 
 <p>or you may get this error:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp /tmp/b root://localhost:1094//data/xrootdfs/test2
-<span class="go">Last server error 3011 (&#39;No servers are available to write the file.&#39;)</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp /tmp/b root://<span style="color:red">RDRNODE</span>:1094//data/xrootdfs/test2 
+<span class="go">Last server error 3011 (&#39;No servers are available to write the file.&#39;) </span>
 <span class="go">Error accessing path/file for root://localhost:1094//data/xrootdfs/test2</span>
 </pre></div>
 
@@ -3074,16 +3076,17 @@ the authenticated username.</p>
 <ol>
 <li>Check that user can copy/retrieve files to/from /data/xrootdfs/~/...</li>
 </ol>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> su - <span style="color:red">user</span>
-<span class="go">-bash-3.2$ xrdcp /tmp/a root://localhost:1094//data/xrootdfs/<span style="color:red">user</span>/test1</span>
-<span class="go">[xrootd] Total 0.00 MB |================| 100.00 % [inf MB/s]</span>
-<span class="go">-bash-3.2$ xrdcp root://localhost:1094//data/xrootdfs/<span style="color:red">user</span>/test1 /tmp/c</span>
-<span class="go">[xrootd] Total 0.00 MB |================| 100.00 % [inf MB/s]</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> su - <span style="color:red">user</span> 
+<span class="go">-bash-3.2$ xrdcp /tmp/a root://<span style="color:red">RDRNODE</span>:1094//data/xrootdfs/<span style="color:red">user</span>/test1</span>
+<span class="go">[xrootd] Total 0.00 MB [================] 100.00 % [inf MB/s] </span>
+<span class="go">-bash-3.2$ xrdcp root://localhost:1094//data/xrootdfs/<span style="color:red">user</span>/test1 /tmp/c </span>
+<span class="go">[xrootd] Total 0.00 MB [================] 100.00 % [inf MB/s]</span>
 </pre></div>
 
 
 <h4 id="security-option-2-shared-keys">Security option 2: Shared keys<a class="headerlink" href="#security-option-2-shared-keys" title="Permanent link">&para;</a></h4>
-<p>If you want to enable security for access to XRootD via xrootdfs you will need to modify XRootD configuration and perform several steps to make xrootdfs secured.</p>
+<p>If you want to enable security for access to XRootD via xrootdfs you will need to modify XRootD configuration and
+perform several steps to make xrootdfs secured.</p>
 <ol>
 <li>
 <p>On the XRootD redirector node, execute the following command:</p>
@@ -3105,14 +3108,14 @@ the authenticated username.</p>
 
 </li>
 <li>
-<p>On the node where xrootdfs is installed modify <strong><code>/etc/fstab</code></strong> add security information:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrootdfs <span style="color:red">/mnt/xrootd </span> fuse <span class="nv">rdr</span><span class="o">=</span>xroot://<span style="color:red">redirector1.domain.com</span>:1094/<span style="color:red">/path/redirector1</span>,uid<span class="o">=</span>xrootd,sss<span class="o">=</span><span style="color:red">keyfile</span>0 <span class="m">0</span>
+<p>On the node where xrootdfs is installed modify <code>/etc/fstab</code> add security information:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrootdfs <span style="color:red">/mnt/xrootd </span> fuse <span class="nv">rdr</span><span class="o">=</span>xroot://<span style="color:red">redirector1.domain.com</span>:1094/<span style="color:red">/path/redirector1</span>,uid<span class="o">=</span>xrootd,sss<span class="o">=</span><span style="color:red">keyfile</span> <span class="m">0</span> <span class="m">0</span>
 </pre></div>
 
 
 </li>
 <li>
-<p>On all XRootD data servers and redirector nodes, modify XRootD configuration (<strong><code>/etc/xrootd/xrootd-clustered.cfg</code></strong>) by adding the following segment:</p>
+<p>On all XRootD data servers and redirector nodes, modify XRootD configuration (<code>/etc/xrootd/xrootd-clustered.cfg</code>) by adding the following segment:</p>
 <div class="codehilite"><pre><span></span># ENABLE_SECURITY_BEGIN
    xrootd.seclib /usr/lib64/libXrdSec.so
    #the line below should be before &quot;sec.protocol ... unix&quot;
@@ -3159,11 +3162,11 @@ the authenticated username.</p>
 </li>
 </ol>
 <h4 id="security-option-3-xrootd-lcmaps-authorization">Security option 3: xrootd-lcmaps authorization<a class="headerlink" href="#security-option-3-xrootd-lcmaps-authorization" title="Permanent link">&para;</a></h4>
-<p>The xrootd-lcmaps security plugin uses the <code>lcmaps</code> package to access the <code>GUMS</code>
-server to authenticate and authorize users based on X509 certificates.</p>
+<p>The xrootd-lcmaps security plugin uses the <code>lcmaps</code> package to access the <code>GUMS</code> server to authenticate and authorize
+users based on X509 certificates.</p>
 <p><strong>Certificate Installation</strong></p>
-<p>In order to use lcmaps, you will need CA certificates and certificate revocation
-lists. See the following documents for instructions:</p>
+<p>In order to use lcmaps, you will need CA certificates and certificate revocation lists. 
+See the following documents for instructions:</p>
 <ul>
 <li><a href="../../common/ca/">Install CA certificates</a></li>
 <li><a href="../../common/ca/">Managing Certificate Revocation Lists</a></li>
@@ -3173,12 +3176,12 @@ lists. See the following documents for instructions:</p>
 </pre></div>
 
 
-<p>Note that the xrootd-lcmaps is usually coupled to a specific version of XRootD,
-so make sure that you install xrootd-lcmaps from the same repository that you
-install XRootD from. Otherwise, you may have dependency issues due to differing
-versions of shared libraries.</p>
+<p>Note that the xrootd-lcmaps is usually coupled to a specific version of XRootD, so make sure that you install
+xrootd-lcmaps from the same repository that you install XRootD from. 
+Otherwise, you may have dependency issues due to differing versions of shared libraries.</p>
 <p><strong>Create service certificate</strong></p>
-<p>You will need to have an X.509 certificate/key pair for xrootd. If you already have one for the host, you can use a copy of that:</p>
+<p>You will need to have a X509 certificate to talk to GUMS. 
+If you already have a host certificate, you can use a copy of that:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mkdir /etc/grid-security/xrd
 <span class="gp">root@host #</span> cp /etc/grid-security/hostkey.pem /etc/grid-security/xrd/xrdkey.pem
 <span class="gp">root@host #</span> cp /etc/grid-security/hostcert.pem /etc/grid-security/xrd/xrdcert.pem
@@ -3204,7 +3207,11 @@ hostname in red):</p>
 
 
 <p><strong>Modify /etc/xrootd/xrootd-clustered.cfg</strong></p>
-<p>You will need to add the security plugins to <code>/etc/xrootd/xrootd-clustered.cfg</code>. Add the following lines to the <code>/etc/xrootd/xrootd-clustered.cfg</code>. This will need to be added to all data nodes in the section relevant to the data node server. (For instance, in the above example(s), this should be placed in the last "else" clause after "all.role server". See the section above on Unix security for an example of where the security commands should go).</p>
+<p>You will need to add the security plugins to <code>/etc/xrootd/xrootd-clustered.cfg</code>. 
+Add the following lines to the <code>/etc/xrootd/xrootd-clustered.cfg</code>. 
+This will need to be added to all data nodes in the section relevant to the data node server. 
+(For instance, in the above example(s), this should be placed in the last "else" clause after "all.role server". 
+See the section above on Unix security for an example of where the security commands should go).</p>
 <div class="codehilite"><pre><span></span>xrootd.seclib /usr/lib64/libXrdSec.so
 
 set CERTDIR=-certdir:/etc/grid-security/certificates
@@ -3226,7 +3233,8 @@ ofs.authorize
 
 
 <h4 id="testing-an-xrootd-cluster-with-lcmaps-security-enabled">Testing an XRootd Cluster with LCMAPS security enabled<a class="headerlink" href="#testing-an-xrootd-cluster-with-lcmaps-security-enabled" title="Permanent link">&para;</a></h4>
-<p>From any machine with the <code>xrootd-client</code> installed, you can test with xrdcp. With a user that has no grid certificate installed, you should get an error:</p>
+<p>From any machine with the <code>xrootd-client</code> installed, you can test with xrdcp. 
+With a user that has no grid certificate installed, you should get an error:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> xrdcp /bin/bash root://HOSTNAME/tmp/lcmaps_test
 <span class="go">120327 14:31:52 10509 secgsi_InitProxy: cannot access private key file: /home/dstrain/.globus/userkey.pem</span>
 <span class="go">XrdSec: No authentication protocols are available.</span>
@@ -3235,7 +3243,10 @@ ofs.authorize
 </pre></div>
 
 
-<p>After running <code>voms-proxy-init</code> or <code>grid-proxy-init</code> to initialize your x509 certificate (usually found in <code>/tmp/x509up_uUID</code>), the <code>xrdcp</code> command should execute cleanly. For instance, the following shows an example of a user creating a voms certificate and copying to the XRootD client and then re-executing the xrdcp command.</p>
+<p>After running <code>voms-proxy-init</code> or <code>grid-proxy-init</code> to initialize your x509 certificate (usually found in
+<code>/tmp/x509up_uUID</code>), the <code>xrdcp</code> command should execute cleanly. 
+For instance, the following shows an example of a user creating a voms certificate and copying to the XRootD client and
+then re-executing the xrdcp command.</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> voms-proxy-init -voms Engage -valid <span class="m">999</span>:0
 <span class="go">Your identity: /DC=org/DC=doegrids/OU=People/CN=Doug Strain 834323</span>
 <span class="go">Creating temporary proxy ..................................................... Done</span>
@@ -3249,22 +3260,21 @@ ofs.authorize
 
 <p>On the <code>xrootd-client</code> node,</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> xrdcp /bin/bash root://fermicloud121.fnal.gov//tmp/lcmaps_test
-<span class="go">[xrootd] Total 0.73 MB  |====================| 100.00 % [inf MB/s]</span>
+<span class="go">[xrootd] Total 0.73 MB  [====================] 100.00 % [inf MB/s]</span>
 </pre></div>
 
 
 <p>In the above examples, make sure to change "/tmp" to a directory allowed by the
 <code>/etc/xrootd/auth_file</code> created in a previous section.</p>
 <h3 id="optional-adding-cms-tfc-support-to-xrootd-cms-sites-only">(Optional) Adding CMS TFC support to XRootD (CMS sites only)<a class="headerlink" href="#optional-adding-cms-tfc-support-to-xrootd-cms-sites-only" title="Permanent link">&para;</a></h3>
-<p>For CMS users, there is a package available to integrate rule-based name lookup
-using a <code>storage.xml</code> file. If you are not setting up a CMS site, you can skip
-this section.</p>
+<p>For CMS users, there is a package available to integrate rule-based name lookup using a <code>storage.xml</code> file. 
+If you are not setting up a CMS site, you can skip this section.</p>
 <div class="codehilite"><pre><span></span><span class="go">yum install --enablerepo=osg-contrib xrootd-cmstfc</span>
 </pre></div>
 
 
-<p>You will need to add your <code>storage.xml</code> to <code>/etc/xrootd/storage.xml</code> and then
-add the following line to your XRootD configuration:</p>
+<p>You will need to add your <code>storage.xml</code> to <code>/etc/xrootd/storage.xml</code> and then add the following line to your XRootD
+configuration:</p>
 <div class="codehilite"><pre><span></span># Integrate with CMS TFC, placed in /etc/xrootd/storage.xml
 oss.namelib /usr/lib64/libXrdCmsTfc.so file:/etc/xrootd/storage.xml%ORANGE%?protocol=hadoop</span>
 </pre></div>
@@ -3277,8 +3287,7 @@ oss.namelib /usr/lib64/libXrdCmsTfc.so file:/etc/xrootd/storage.xml%ORANGE%?prot
 <li><a href="https://twiki.cern.ch/twiki/bin/view/Main/HdfsXrootdInstall">https://twiki.cern.ch/twiki/bin/view/Main/HdfsXrootdInstall</a></li>
 </ul>
 <h3 id="optional-adding-hadoop-support-to-xrootd">(Optional) Adding Hadoop support to XRootD<a class="headerlink" href="#optional-adding-hadoop-support-to-xrootd" title="Permanent link">&para;</a></h3>
-<p>HDFS-based sites should utilize the <code>xrootd-hdfs</code> plugin to allow XRootD to access
-their storage.</p>
+<p>HDFS-based sites should utilize the <code>xrootd-hdfs</code> plugin to allow XRootD to access their storage.</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-hdfs
 </pre></div>
 
@@ -3292,31 +3301,28 @@ ofs.osslib /usr/lib64/libXrdHdfs.so
 
 <p>For more information, see <a href="../install-hadoop-2-0-0">the HDFS installation documents</a>.</p>
 <h3 id="optional-adding-file-residency-manager-frm-to-an-xrootd-cluster">(Optional) Adding File Residency Manager (FRM) to an XRootd cluster<a class="headerlink" href="#optional-adding-file-residency-manager-frm-to-an-xrootd-cluster" title="Permanent link">&para;</a></h3>
-<p>If you have a multi-tiered storage system (e.g. some data is stored on SSDs and
-some on disks or tapes), then install the File Residency Manager (FRM), so you
-can move data between tiers more easily. If you do not have a multi-tiered
-storage system, then you do not need FRM and you can skip this section.</p>
+<p>If you have a multi-tiered storage system (e.g. some data is stored on SSDs and some on disks or tapes), then install
+the File Residency Manager (FRM), so you can move data between tiers more easily. 
+If you do not have a multi-tiered storage system, then you do not need FRM and you can skip this section.</p>
 <p>The FRM deals with two major mechanisms:</p>
 <ul>
 <li>local disk</li>
 <li>remote servers</li>
 </ul>
-<p>The description of fully functional multiple XRootD clusters is beyond the scope
-of this document. In order to have this fully functional system you will need a
-global redirector and at least one remote XRootD cluster from where files could
-be moved to the local cluster.</p>
-<p>Below are the modifications you should make in order to enable FRM on your local
-cluster:</p>
+<p>The description of fully functional multiple XRootD clusters is beyond the scope of this document. 
+In order to have this fully functional system you will need a global redirector and at least one remote XRootD cluster
+from where files could be moved to the local cluster.</p>
+<p>Below are the modifications you should make in order to enable FRM on your local cluster:</p>
 <ol>
 <li>Make sure that FRM is enabled in <code>/etc/sysconfig/xrootd</code> on your data sever:</li>
 </ol>
-<div class="codehilite"><pre><span></span>ROOTD_USER=xrootd
-XROOTD_GROUP=xrootd
-XROOTD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;
-CMSD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;
-FRMD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;
-XROOTD_INSTANCES=&quot;default&quot;
-CMSD_INSTANCES=&quot;default&quot;
+<div class="codehilite"><pre><span></span>ROOTD_USER=xrootd 
+XROOTD_GROUP=xrootd 
+XROOTD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
+CMSD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
+FRMD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
+XROOTD_INSTANCES=&quot;default&quot; 
+CMSD_INSTANCES=&quot;default&quot; 
 FRMD_INSTANCES=&quot;default&quot;
 </pre></div>
 
@@ -3331,8 +3337,8 @@ FRMD_INSTANCES=&quot;default&quot;
 
 
 <h2 id="optional-installing-a-gridftp-server">(Optional) Installing a GridFTP Server<a class="headerlink" href="#optional-installing-a-gridftp-server" title="Permanent link">&para;</a></h2>
-<p>The Globus GridFTP server can be installed alongside an XRootD storage element to provide
-GridFTP-based access to the storage.</p>
+<p>The Globus GridFTP server can be installed alongside an XRootD storage element to provide GridFTP-based access to the
+storage.</p>
 <div class="admonition note">
 <p class="admonition-title">See Also</p>
 <p>OSG has extensive documentation on setting up a GridFTP server; this section is an
@@ -3344,8 +3350,8 @@ You may also find the following useful:</p>
     a load-balanced GridFTP service using multiple servers.</li>
 </ul>
 </div>
-<p>Prior to following this installation guide, verify the host certificates and networking is
-configured correctly as in the <a href="../gridftp">basic GridFTP install</a>.</p>
+<p>Prior to following this installation guide, verify the host certificates and networking is configured correctly as in
+the <a href="../gridftp">basic GridFTP install</a>.</p>
 <h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
 <p>GridFTP support for XRootD-based storage is provided by the <code>osg-gridftp-xrootd</code> meta-package:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-gridftp-xrootd
@@ -3353,8 +3359,8 @@ configured correctly as in the <a href="../gridftp">basic GridFTP install</a>.</
 
 
 <h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
-<p>For information on how to configure authentication for your GridFTP installation, please refer to
-the <a href="../gridftp#configuring-authentication">configuring authentication section of the GridFTP guide</a>.</p>
+<p>For information on how to configure authentication for your GridFTP installation, please refer to the <a href="../gridftp#configuring-authentication">configuring
+authentication section of the GridFTP guide</a>.</p>
 <p>Edit <code>/etc/sysconfig/xrootd-dsi</code> to set <code>XROOTD_VMP</code> to use your XRootD redirector.</p>
 <div class="codehilite"><pre><span></span><span class="nb">export</span> <span class="nv">XROOTD_VMP</span><span class="o">=</span><span class="s2">&quot;<span style="color:red">redirector:1094:/local_path=/remote_path</span>&quot;</span>
 </pre></div>
@@ -3369,25 +3375,21 @@ the <a href="../gridftp#configuring-authentication">configuring authentication s
 <li><strong>remote_path</strong>: The XRootD path that will be mounted at <strong>local_path</strong>.</li>
 </ul>
 </div>
-<p>When <code>xrootd-dsi</code> is enabled, GridFTP configuration changes should go into
-<code>/etc/xrootd-dsi/gridftp-xrootd.conf</code>, not <code>/etc/gridftp.conf</code>.  Sites should review any
-customizations made in the latter and copy them as necessary.</p>
+<p>When <code>xrootd-dsi</code> is enabled, GridFTP configuration changes should go into <code>/etc/xrootd-dsi/gridftp-xrootd.conf</code>, not
+<code>/etc/gridftp.conf</code>.<br />
+Sites should review any customizations made in the latter and copy them as necessary.</p>
 <p>You can use the FUSE mount in order to test POSIX access to xrootd in the GridFTP server.
-You should be able to run Unix commands such as <code>ls /mnt/xrootd</code> and see the contents of the
-XRootD server.</p>
+You should be able to run Unix commands such as <code>ls /mnt/xrootd</code> and see the contents of the XRootD server.</p>
 <p>For log / config file locations and system services to run, see the <a href="../gridftp">basic GridFTP install</a>.</p>
 <h2 id="using-xrootd">Using XRootD<a class="headerlink" href="#using-xrootd" title="Permanent link">&para;</a></h2>
 <h3 id="managing-xrootd-services">Managing XRootD services<a class="headerlink" href="#managing-xrootd-services" title="Permanent link">&para;</a></h3>
-<p>Start services on the redirector node before starting any services on the data
-nodes. If you installed only XRootD itself, you will only need to start the
-<code>xrootd</code> service. However, if you installed cluster management services, you
-will need to start <code>cmsd</code> as well.</p>
-<p>The instructions for starting and stopping an XRootD service depend on whether
-the service is installed on an EL 6 or EL 7 machine, and whether you are using a
-standalone or clustered configuration.</p>
-<p>On EL 6, which config to use is set in the file <code>/etc/sysconfig/xrootd</code>. For
-example, to have <code>xrootd</code> use the clustered config, you would have a line such
-as this:</p>
+<p>Start services on the redirector node before starting any services on the data nodes. 
+If you installed only XRootD itself, you will only need to start the <code>xrootd</code> service. 
+However, if you installed cluster management services, you will need to start <code>cmsd</code> as well.</p>
+<p>The instructions for starting and stopping an XRootD service depend on whether the service is installed on an EL 6 or EL
+7 machine, and whether you are using a standalone or clustered configuration.</p>
+<p>On EL 6, which config to use is set in the file <code>/etc/sysconfig/xrootd</code>. 
+For example, to have <code>xrootd</code> use the clustered config, you would have a line such as this:</p>
 <div class="codehilite"><pre><span></span>XROOTD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-<span style="color:red">clustered</span>.cfg -k fifo&quot;
 </pre></div>
 
@@ -3397,9 +3399,8 @@ as this:</p>
 </pre></div>
 
 
-<p>On EL 7, which config to use is determined by the service name given to
-<code>systemctl</code>. For example, to have <code>xrootd</code> use the clustered config, you would
-start up <code>xrootd</code> with this line:</p>
+<p>On EL 7, which config to use is determined by the service name given to <code>systemctl</code>. 
+For example, to have <code>xrootd</code> use the clustered config, you would start up <code>xrootd</code> with this line:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl start xrootd@<span style="color:red">clustered</span>
 </pre></div>
 
