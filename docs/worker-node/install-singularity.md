@@ -26,7 +26,7 @@ singularity in [cvmfs](install-cvmfs), so  you can avoid installing
 singularity at all.  The minimum version of the kernel (3.10.0-693) is
 available as at least a security update for all RHEL7-based releases.
 
-!!! danger "Kernel vs. Userspace security"
+!!! danger "Kernel vs. Userspace Security"
     Enabling unprivileged user namespaces increases the risk to the
     kernel. However, the kernel is more widely reviewed than Singularity and
     the additional capability given to users is more limited.
@@ -121,7 +121,7 @@ While reasonable for some sites, this is not required as there are currently
 no public kernel exploits for this issue; any exploits are patched by
 RedHat when they are discovered.
 
-!!! warning "Warning: No Free Lunches"
+!!! warning
     If you modify `/etc/singularity/singularity.conf`, carefully test any
     upgrade procedures.
     RPM will not automatically merge your changes with new upstream
@@ -184,7 +184,7 @@ singularity to be run as an unprivileged user via CVMFS:
     may break other container solutions, or limit their capabilities
     (such as requiring the `--net=host` option in Docker).
 
-    !!! danger "Danger: current public exploit"
+    !!! danger "Current Public Exploit"
         As of December 19, 2017 there is no patch from Redhat for a
         [public exploit](https://access.redhat.com/security/cve/CVE-2017-16939)
         of a vulnerability due to the combination of network namespaces
