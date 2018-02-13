@@ -2494,19 +2494,7 @@ for Hadoop Distributed File System (HDFS) and XRootD based storage:</p>
 <p>In OSG 3.3, there are three methods to manage authentication for incoming jobs: the <a href="../../security/lcmaps-voms-authentication">LCMAPS VOMS plugin</a>, <a href="../../security/edg-mkgridmap">edg-mkgridmap</a> and <a href="../../security/install-gums">GUMS</a>. Of these, GUMS has the most features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support "<a href="https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html">pool accounts</a>", GUMS is the only option with that capability.</p>
 <p>In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution.</p>
 <h4 id="authentication-with-the-lcmaps-voms-plugin">Authentication with the LCMAPS VOMS plugin<a class="headerlink" href="#authentication-with-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h4>
-<ol>
-<li>
-<p>Add the following line to <code>/etc/sysconfig/globus-gridftp-server</code>:</p>
-<div class="codehilite"><pre><span></span><span class="nb">export</span> <span class="nv">LLGT_VOMS_ENABLE_CREDENTIAL_CHECK</span><span class="o">=</span><span class="m">1</span>
-</pre></div>
-
-
-<p>This should <em>only</em> be done for OSG 3.3; it is unnecessary for OSG 3.4.</p>
-</li>
-<li>
-<p>Follow the instructions in <a href="../../security/lcmaps-voms-authentication">the LCMAPS VOMS plugin installation and configuration document</a> to prepare the LCMAPS VOMS plugin.</p>
-</li>
-</ol>
+<p>To configure your GridFTP server to use the LCMAPS VOMS plugin, follow the instructions in <a href="../../security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin">the LCMAPS VOMS plugin document</a> to prepare the LCMAPS VOMS plugin.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This is the suggested mechanism for all new installs.</p>

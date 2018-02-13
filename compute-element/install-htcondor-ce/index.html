@@ -2825,19 +2825,7 @@ blah_disable_limited_proxy=yes
 <p>In OSG 3.3, there are three methods to manage authentication for incoming jobs: the <a href="../../security/lcmaps-voms-authentication">LCMAPS VOMS plugin</a>, <a href="../../security/edg-mkgridmap">edg-mkgridmap</a> and <a href="../../security/install-gums">GUMS</a>. edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support <a href="https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html">pool accounts</a>, GUMS is the only software with that capability.</p>
 <p>In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution.</p>
 <h4 id="authentication-with-the-lcmaps-voms-plugin">Authentication with the LCMAPS VOMS plugin<a class="headerlink" href="#authentication-with-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h4>
-<p>To configure your CE to use the LCMAPS VOMS plugin:</p>
-<ol>
-<li>
-<p>If you are using OSG 3.3, add the following line to <code>/etc/sysconfig/condor-ce</code>:</p>
-<div class="codehilite"><pre><span></span>export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1
-</pre></div>
-
-
-</li>
-<li>
-<p>Follow the instructions in <a href="../../security/lcmaps-voms-authentication">the LCMAPS VOMS plugin installation and configuration document</a> to prepare the LCMAPS VOMS plugin</p>
-</li>
-</ol>
+<p>To configure your CE to use the LCMAPS VOMS plugin, follow the instructions in <a href="../../security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin">the LCMAPS VOMS plugin document</a> to prepare the LCMAPS VOMS plugin.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the <code>condor_mapfile</code>. If this is not the desired behavior, set <code>GSI_AUTHZ_CONF=/dev/null</code> in the local HTCondor configuration.</p>
