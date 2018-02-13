@@ -60,8 +60,7 @@ machine dependent) so these proxies must be owned by the user `frontend`.
 
 The use of a service certificate is recommended. Then you create a proxy from
 the certificate as explained in the [proxy configuration
-section](#proxy-configuration). This can be a plain grid proxy (from
-`grid-proxy-init`), no VO extensions are required.
+section](#proxy-configuration).
 
 **You must give the Factory operations team the DN of this proxy when you
 initially setup the frontend and each time the DN changes**.
@@ -419,6 +418,61 @@ proxy%ENDCOLOR% can be the same. By default, the VO Frontend will run as user
 `frontend` (UID is machine dependent) so these proxies must be owned by the user
 `frontend`.
 
+#### Automatic proxy renewal
+
+GlideinWMS comes with the [gwms-renew-proxies service](#managing-glideinwms-services) that can automatically generate
+and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOLOR%. To configure this service, modify
+`/etc/gwms-frontend/proxies.ini` using the following instructions:
+
+1. For each of your %GREEN%pilot proxies%ENDCOLOR%, create a `[PILOT <NAME>]` section, where `<NAME>` is a descriptive
+   name for the proxy that is unique to your local configuration. In each section, set the `proxy_cert`, `proxy_key`,
+   `output`, and `vo` corresponding to each pilot proxy:
+
+        [PILOT %RED%<NAME>%ENDCOLOR%]
+        proxy_cert = %RED%<PATH TO THE PILOT CERTIFICATE>%ENDCOLOR%
+        proxy_key = %RED%<PATH TO THE PILOT KEY>%ENDCOLOR%
+        output = %RED%<PATH TO CREATE THE PILOT PROXY>%ENDCOLOR%
+        vo = %RED%<NAME OF VIRTUAL ORGANIZATION>%ENDCOLOR%
+
+    Additionally, in each `[PILOT <NAME>]` section, you must specify how the proxy's VOMS attributes will be signed by
+    setting `use_voms_server`:
+
+    - To directly sign the VOMS attributes (recommended), you must have access to the `vo`'s certificate and key. Specify the paths to the `vo` certificate and key, and optionally, the VOMS attribute (e.g. `/osg/Role=NULL/Capability=NULL` for the OSG VO):
+
+            use_voms_server = %RED%false%ENDCOLOR%
+            vo_cert = %RED%<PATH TO THE PILOT CERTIFICATE>%ENDCOLOR%
+            vo_key = %RED%<PATH TO THE PILOT KEY>%ENDCOLOR%
+            fqan = %RED%<VOMS ATTRIBUTE>%ENDCOLOR%
+
+        !!! note
+            If you do not have access to the `vo`'s `voms_cert` and `voms_key`, contact the VO manager.
+
+    - To have your proxy's VOMS attributes signed by the `vo`'s VOMS server, set `use_voms_server = true`
+
+        !!! warning
+            Due to the [retirement of VOMS Admin server](https://opensciencegrid.github.io/technology/policy/voms-admin-retire/)
+            in the OSG, `use_voms_server = false` is the preferred method for signing VOMS attributes. 
+
+    Optionally, the proxy renewal `frequency` and `lifetime` (in hours) can be specified in each `[PILOT <NAME>]` section:
+
+        # Default: 1
+        frequency = %RED%<RENEWAL FREQUENCY>%ENDCOLOR%
+        # Default: 24
+        lifetime = %RED%<PROXY LIFETIME>%ENDCOLOR%
+
+1. Configure the location and output of the %GREEN%VO Frontend proxy%ENDCOLOR% under the `[FRONTEND]` section and set
+   the `proxy_cert`, `proxy_key`, and `output` to paths corresponding to your VO Frontend:
+
+        [FRONTEND]
+        proxy_cert = %RED%<PATH TO THE FRONTEND CERTIFICATE>%ENDCOLOR%
+        proxy_key = %RED%<PATH TO THE FRONTEND KEY>%ENDCOLOR%
+        output = %RED%<PATH TO CREATE THE FRONTEND PROXY>%ENDCOLOR%
+
+    !!! note
+        `output` must be the same path as the `classad_proxy` specified in [this section](#configuring-the-frontend)
+
+1. Start and enable the [gwms-renew-proxies service](#managing-glideinwms-services)
+
 #### Manual proxy renewal
 
 %GREEN%VO Frontend proxy%ENDCOLOR%
@@ -457,103 +511,6 @@ described in the [Configuring the Frontend](#configuring-the-frontend) section.
 
 You may want to automate the procedure above (or part of it) by writing a script
 and adding it to crontab.
-
-#### Example of automatic proxy renewal
-
-This example (user provided) uses the script
-[make-proxy.sh](../other/make-proxy.sh) attached to this document. You still
-need to do some prep-work but this can be done only once a year and the script
-will warn you with an email.
-
-Preparation for the %GREEN%VO Frontend proxy%ENDCOLOR%. You'll have to redo this
-each time the Host (or Service) certificate and key are renewed:
-
-1. Copy the Host (or Service) certificate and key
-
-        :::console
-        root@host # cp /etc/grid-security/hostcert.pem /etc/grid-security/hostkey.pem /var/lib/gwms-frontend/
-        
-
-2. Change ownership and permission of the certificate and key
-
-        :::console
-        root@host # chown frontend: /var/lib/gwms-frontend/host**.pem
-        root@host # chmod 0600 /var/lib/gwms-frontend/host**.pem
-         
-
-Preparation for the %RED% pilot proxy%ENDCOLOR%. You'll have to redo this for
-each new or renewed pilot cert.
-
-1. Create the proxy using the pilot certificate/key (as the user/submitter)
-
-        :::console
-        root@host # grid-proxy-init -valid 8800:0 -out /tmp/tmp_proxy
-        
-
-2. Copy the proxy to the correct name and change ownership and permissions (as root):
-
-        :::console
-        root@host # cp /tmp/tmp_proxy /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
-        root@host # chown frontend: /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
-        root@host # chmod 0600 /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
-        root@host # rm /tmp/tmp_proxy
-        
-
-Configure the script for the %GREEN%VO Frontend proxy%ENDCOLOR%
-
-1. Download the [attached script](../other/make-proxy.sh) (the latest one is [Here on Github](https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy.sh)) and save it as `/var/lib/gwms-frontend/make-frontend-proxy.sh`, make sure that it is executable.
-
-2. Edit the VARIABLES section to look something like (replace your email, host name and the paths that are different in your setup - the comments in the script will help):
-
-        :::file
-        SETUP_FILE=""
-        CERT_FILE="/var/lib/gwms-frontend/hostcert.pem"
-        KEY_FILE="/var/lib/gwms-frontend/hostkey.pem"
-        IN_NAME="/var/lib/gwms-frontend/frontend_base_proxy"
-        OUT_NAME="/tmp/vofe_proxy"
-        OWNER_EMAIL="%RED%<your@email_here>%ENDCOLOR%"
-        PROXY_DESCRIPTION="VO Fronted on %RED%<hostname>%ENDCOLOR%"
-        VOMS_OPTION=""
-        
-
-Configure the script for the %RED%pilot proxy%ENDCOLOR%:
-
-1.  Download the [attached script](../other/make-proxy.sh) (the latest one is [Here on Github](https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy.sh)) and save it as `/var/lib/gwms-frontend/make-pilot-proxy.sh`, make sure that it is executable.
-
-2.  Edit the VARIABLES section to look something like (replace your email, host name and the paths that are different in your setup - the comments in the script will help):
-
-        :::file
-        SETUP_FILE=""
-        CERT_FILE=""
-        KEY_FILE=""
-        IN_NAME="/var/lib/gwms-frontend/vofe_base_gi_delegated_proxy"
-        OUT_NAME="/tmp/vofe_gi_delegated_proxy"
-        OWNER_EMAIL="%RED%<your@email_here>%ENDCOLOR%"
-        PROXY_DESCRIPTION="VO Fronted glidein delegated on %RED%<hostname>%ENDCOLOR%"
-        VOMS_OPTION="osg:/osg"
-         
-
-Before adding the scripts to the crontab I'd recommend to test them manually
-once to make sure that there are no errors. As user `frontend` run the scripts
-(you can also use **`sh -x`** to debug them):
-
-    :::console
-    /var/lib/gwms-frontend/make-frontend-proxy.sh --no-voms-proxy /var/lib/gwms-frontend/make-pilot-proxy.sh
-    
-
-Add the scripts to the crontab of the user `frontend` with `crontab -e`:
-
-    :::file
-    10 * * * * /var/lib/gwms-frontend/make-frontend-proxy.sh --no-voms-proxy
-    10 * * * * /var/lib/gwms-frontend/make-pilot-proxy.sh
-     
-
-An additional script like
-[make-proxy-control.sh](../other/make-proxy-control.sh) (the latest one is [Here
-on
-Github](https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy-control.sh))
-can be used for an independent verification of the proxies. If you like,
-download it, fix the variables and add it to the crontab like the other two.
 
 ### Reconfigure and verify installation
 
