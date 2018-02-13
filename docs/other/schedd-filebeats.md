@@ -89,6 +89,9 @@ Configuration of HTCondor
 
 For the configuration of the HTCondor submit host to use the TransferLog follow the next instructions:
 
+!!! note
+    The transfer metrics was introduced in HTCondor 8.6 series. You need to be running a version equal or greater than 8.6.1 to enable it.
+
 1. Create a file named `/etc/condor/config.d/50-transferLog.config` with the following contents:
     
         :::file

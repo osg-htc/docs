@@ -46,7 +46,6 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 -   [Using Yum and RPM](release/yum-basics)
 -   [Install the OSG repositories](common/yum)
 -   [OSG Software release series](release/release_series) - look here to upgrade from OSG 3.1 to OSG 3.2 or from OSG 3.2 to OSG 3.3
--   [Installation best practices](common/install-best-practices)
 
 ### Installing and Managing Certificates for Site Security ###
 

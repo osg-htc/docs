@@ -78,10 +78,10 @@ The cluster uses one "redirector" node as a frontend for user accesses, and mult
 users request. 
 Two daemons will run on each node:
 
-`xrootd`  
+`xrootd`<br/>
 The eXtended Root Daemon controls file access and storage.
 
-`cmsd`  
+`cmsd`<br/>
 The Cluster Management Services Daemon controls communication between nodes.
 
 Note that for large virtual organizations, a site-level redirector may actually also communicate upwards to a regional
@@ -234,10 +234,10 @@ Starting xrootd (cmsd, default): %GREEN%[ OK ]%ENDCOLOR%
 On redirector node you should see two instances of xrootd running:
 
 ```console
-root@host # ps auxww|grep xrootd 
-xrootd 29036 0.0 0.0 44008 3172 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default 
-xrootd 29108 0.0 0.0 43868 3016 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-cns.pid -n cns 
-xrootd 29196 0.0 0.0 51420 3692 ? Sl Apr11 0:00 /usr/bin/cmsd -k 7 -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default 
+root@host # ps auxww|grep xrootd
+xrootd 29036 0.0 0.0 44008 3172 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default
+xrootd 29108 0.0 0.0 43868 3016 ? Sl Apr11 0:00 /usr/bin/xrootd -k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-cns.pid -n cns
+xrootd 29196 0.0 0.0 51420 3692 ? Sl Apr11 0:00 /usr/bin/cmsd -k 7 -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default
 ```
 %RED%Warning%ENDCOLOR% the log file for second named instance of xrootd with be
 placed in `/var/log/xrootd/cns/xrootd.log`
@@ -245,10 +245,10 @@ placed in `/var/log/xrootd/cns/xrootd.log`
 On data server node you should that XrdCnsd process has been started:
 
 ```console
-root@host # ps auxww|grep xrootd 
-xrootd 19156 0.0 0.0 48096 3256 ? Sl 07:37 0:00 /usr/bin/cmsd -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default 
-xrootd 19880 0.0 0.0 46124 2916 ? Sl 08:33 0:00 /usr/bin/xrootd -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default 
-xrootd 19894 0.0 0.1 71164 6960 ? Sl 08:33 0:00 /usr/bin/XrdCnsd -d -D 2 -i 90 -b fermicloud053.fnal.gov:1095:/data/inventory 
+root@host # ps auxww|grep xrootd
+xrootd 19156 0.0 0.0 48096 3256 ? Sl 07:37 0:00 /usr/bin/cmsd -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/cmsd-default.pid -n default
+xrootd 19880 0.0 0.0 46124 2916 ? Sl 08:33 0:00 /usr/bin/xrootd -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg -b -s /var/run/xrootd/xrootd-default.pid -n default
+xrootd 19894 0.0 0.1 71164 6960 ? Sl 08:33 0:00 /usr/bin/XrdCnsd -d -D 2 -i 90 -b fermicloud053.fnal.gov:1095:/data/inventory
 ```
 
 #### Starting a second instance of XRootD on EL 7
@@ -259,7 +259,7 @@ This section is the procedure for EL 7.
 1.  Create a symlink pointing to `/etc/xrootd/xrootd-clustered.cfg` at `/etc/xrootd/xrootd-cns.cfg`:
 
 ```console
-root@host # ln -s /etc/xrootd/xrootd-clustered.cfg /etc/xrootd/xrootd-cns.cfg 
+root@host # ln -s /etc/xrootd/xrootd-clustered.cfg /etc/xrootd/xrootd-cns.cfg
 ```
 
 1.  Start an instance of the `xrootd` service named `cns` using the syntax in the [managing services section](#ManagingServices):
@@ -270,14 +270,14 @@ root@host # systemctl start xrootd@cns
 
 #### Testing an XRootD cluster with SSI
 
-1.  Copy file to redirector node specifying storage path (/data/xrootdfs instead of /tmp): 
+1.  Copy file to redirector node specifying storage path (/data/xrootdfs instead of /tmp):
 
 ```console
 root@host # xrdcp /bin/sh root://%RED%RDRNODE%ENDCOLOR%:1094//data/xrootdfs/test1 
 [xrootd] Total 0.00 MB [================] 100.00 % [inf MB/s] 
 ```
 
-1.  To verify that SSI is working execute cns\_ssi command on the redirector node: 
+1.  To verify that SSI is working execute `cns_ssi` command on the redirector node:
 
 ```console
 root@host # cns_ssi list /data/inventory 
@@ -365,12 +365,12 @@ Some examples of each option. For more details or examples on how to use
 templated user options, see [XRootd Authorization Database
 File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
 
-|        |                                                                                                                                                            |
-|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| idtype | Type of id - u for username, g for group, etc                                                                                                              |
-| id     | Username (or groupname). Use <noop>\*</noop> for all users or <noop>=</noop> for user-specific capabilities, like home directories |
-| path   | The path prefix to be used for matching purposes.                                                                                                          |
-| privs  | Letter list of privileges: `a - all ; l - lookup ; d - delete ; n - rename ; i - insert ; r - read ; k - lock (not used) ; w - write`                      |
+|        |                                                                                                                                       |
+|--------|---------------------------------------------------------------------------------------------------------------------------------------|
+| idtype | Type of id. Use `u` for username, `g` for group, etc.                                                                                 |
+| id     | Username (or groupname). Use `*` for all users or `=` for user-specific capabilities, like home directories                           |
+| path   | The path prefix to be used for matching purposes                                                                                      |
+| privs  | Letter list of privileges: `a - all ; l - lookup ; d - delete ; n - rename ; i - insert ; r - read ; k - lock (not used) ; w - write` |
 
 #### Security option 1: adding simple (Unix) security
 
@@ -416,7 +416,7 @@ After making all the changes, please, restart XRootD and cmsd daemons on all nod
 #### Testing an XRootD cluster with simple security enabled
 
 1.  Login on redirector node as root
-2.  Check that user "root" still can read files: 
+2.  Check that user "root" still can read files:
 
 ```console
 root@host # xrdcp root://%RED%RDRNODE%ENDCOLOR%:1094//data/xrootdfs/test1 /tmp/b 
@@ -535,24 +535,24 @@ Note that the xrootd-lcmaps is usually coupled to a specific version of XRootD, 
 xrootd-lcmaps from the same repository that you install XRootD from. 
 Otherwise, you may have dependency issues due to differing versions of shared libraries.
 
-**Create host certificates**
+**Create service certificate**
 
 You will need to have a X509 certificate to talk to GUMS. 
 If you already have a host certificate, you can use a copy of that:
 
 ``` console
- mkdir /etc/grid-security/xrd
- cp /etc/grid-security/hostkey.pem /etc/grid-security/xrd/xrdkey.pem
- cp /etc/grid-security/hostcert.pem /etc/grid-security/xrd/xrdcert.pem
- chown -R xrootd:xrootd /etc/grid-security/xrd/
- chmod 400 /etc/grid-security/xrd/xrdkey.pem
+root@host # mkdir /etc/grid-security/xrd
+root@host # cp /etc/grid-security/hostkey.pem /etc/grid-security/xrd/xrdkey.pem
+root@host # cp /etc/grid-security/hostcert.pem /etc/grid-security/xrd/xrdcert.pem
+root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
+root@host # chmod 400 /etc/grid-security/xrd/xrdkey.pem
 ```
 
-This certificate should be owned by `xrootd` and located in `/etc/grid-security/xrd`.
+This certificate and key should be owned by `xrootd` and located in `/etc/grid-security/xrd`.
 
 **Authorization File**
 
-Next, create `/etc/xrootd/auth_file` using the example in the above section.
+Next, create `/etc/xrootd/auth_file` using the example in the [above section](#authorization-file).
 
 **Modify /etc/xrootd/lcmaps.cfg**
 
@@ -710,7 +710,7 @@ FRMD_INSTANCES="default"
 ```
 
 1.  Modify `/etc/xrootd/xrootd-clustered.cfg` on both nodes to specify options for `frm_xfrd` (File Transfer Daemon) and `frm_purged` (File Purging Daemon). For more information, you can visit the [FRM Documentation](http://xrootd.org/doc/dev4/frm_config.htm)
-2.  Start frm daemons on data server: 
+2.  Start frm daemons on data server:
 
 ```console
 root@host # service frm_xfrd start
@@ -819,12 +819,12 @@ The services are:
 As a reminder, here are common service commands (all run as `root`):
 
 
-| To …                                        | On EL 6, run the command…             | On EL 7, run the command…                 |
-|:--------------------------------------------|:--------------------------------------|:------------------------------------------|
-| Start a service                             | `service <em>SERVICE-NAME</em> start` | `systemctl start <em>SERVICE-NAME</em>`   |
-| Stop a service                              | `service <em>SERVICE-NAME</em> stop`  | `systemctl start <em>SERVICE-NAME</em>`   |
-| Enable a service to start during boot       | `chkconfig <em>SERVICE-NAME</em> on`  | `systemctl enable <em>SERVICE-NAME</em>`  |
-| Disable a service from starting during boot | `chkconfig <em>SERVICE-NAME</em> off` | `systemctl disable <em>SERVICE-NAME</em>` |
+| To …                                        | On EL 6, run the command…    | On EL 7, run the command…        |
+|:--------------------------------------------|:-----------------------------|:---------------------------------|
+| Start a service                             | `service SERVICE-NAME start` | `systemctl start SERVICE-NAME`   |
+| Stop a service                              | `service SERVICE-NAME stop`  | `systemctl start SERVICE-NAME`   |
+| Enable a service to start during boot       | `chkconfig SERVICE-NAME on`  | `systemctl enable SERVICE-NAME`  |
+| Disable a service from starting during boot | `chkconfig SERVICE-NAME off` | `systemctl disable SERVICE-NAME` |
 
 Getting Help
 ------------
@@ -841,7 +841,7 @@ Reference
 | Service/Process | Configuration File                 | Description                              |
 |:----------------|:-----------------------------------|:-----------------------------------------|
 | `xrootd`        | `/etc/xrootd/xrootd-clustered.cfg` | Main clustered mode XRootD configuration |
-| ^               | `/etc/xrootd/auth_file`            | Authorized users file                    |
+|                 | `/etc/xrootd/auth_file`            | Authorized users file                    |
 
 | Service/Process          | Log File                         | Description                                 |
 |:-------------------------|:---------------------------------|:--------------------------------------------|

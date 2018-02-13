@@ -1046,7 +1046,7 @@ How to get Help?
 
 If you cannot resolve the problem, there are several ways to receive help:
 
--   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.opensciencegrid.org/goc).
+-   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.opensciencegrid.org).
 -   For community support and best-effort software team support contact <osg-software@opensciencegrid.org>.
 -   For additional community support, contact <osg-hadoop@opensciencegrid.org>. Note, this is only best-effort help from OSG Software team.
 
