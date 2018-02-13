@@ -132,7 +132,7 @@ RedHat when they are discovered.
     Look for `.rpmnew` files after upgrades and merge in any changes to the
     defaults.
 
-#### Validating singularity ####
+### Validating singularity ###
 
 After singularity is installed, as an ordinary user run the following
 command to verify it:
