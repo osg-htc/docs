@@ -130,13 +130,6 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
 
     * If you do not have a local grid mapfile, remove `/etc/grid-security/grid-mapfile`.
 
-1.  If you are remaining on OSG 3.3, ensure that the you have set `export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1` in the appropriate file and restart the service. If you have updated your host to OSG 3.4, skip to the next step.
-
-    | **If your host is a(n)...** | **Add the aforementioned line to...**  | **And restart this service...** |
-    |:----------------------------|:---------------------------------------| :------------------------------ |
-    | HTCondor-CE                 | `/etc/sysconfig/condor-ce`             | `condor-ce`                     |
-    | GridFTP server              | `/etc/sysconfig/globus-gridftp-server` | `globus-gridftp-server`         |
-
 1.  If you are converting an HTCondor-CE host, remove the HTCondor-CE `GRIDMAP` configuration. Otherwise, skip to the next step.
 
     1. Find where `GRIDMAP` is set:

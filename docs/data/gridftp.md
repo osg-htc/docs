@@ -52,14 +52,7 @@ In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution
 
 #### Authentication with the LCMAPS VOMS plugin
 
-1.  Add the following line to `/etc/sysconfig/globus-gridftp-server`:
-
-        :::shell
-        export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1
-
-    This should _only_ be done for OSG 3.3; it is unnecessary for OSG 3.4.
-
-2.  Follow the instructions in [the LCMAPS VOMS plugin installation and configuration document](../security/lcmaps-voms-authentication) to prepare the LCMAPS VOMS plugin.
+To configure your GridFTP server to use the LCMAPS VOMS plugin, follow the instructions in [the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin) to prepare the LCMAPS VOMS plugin.
 
 !!! note
     This is the suggested mechanism for all new installs.
