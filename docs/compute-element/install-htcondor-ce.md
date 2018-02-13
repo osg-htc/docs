@@ -129,13 +129,7 @@ In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution
 
 #### Authentication with the LCMAPS VOMS plugin
 
-To configure your CE to use the LCMAPS VOMS plugin:
-
-1. If you are using OSG 3.3, add the following line to `/etc/sysconfig/condor-ce`:
-
-        export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1
-
-2. Follow the instructions in [the LCMAPS VOMS plugin installation and configuration document](../security/lcmaps-voms-authentication) to prepare the LCMAPS VOMS plugin
+To configure your CE to use the LCMAPS VOMS plugin, follow the instructions in [the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin) to prepare the LCMAPS VOMS plugin.
 
 !!! note
     If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the `condor_mapfile`. If this is not the desired behavior, set `GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.

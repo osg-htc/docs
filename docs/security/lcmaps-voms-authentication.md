@@ -33,13 +33,9 @@ To install the LCMAPS VOMS plugin, make sure that your host is up to date before
 Configuring the LCMAPS VOMS Plugin
 ----------------------------------
 
-The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication. If you are using OSG 3.3 packages, there are software-specific instructions that must be followed for [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../data/gridftp), and [XRootD](../data/install-xrootd). To check if you are running OSG 3.3, run the following command:
-
-``` console
-root@host # rpm -q --queryformat="%{VERSION}\n" osg-release
-```
-
-Additionally, there is [optional configuration](#optional-configuration) if you need to make changes to the default mappings.
+The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication.
+Additionally, there are [optional configuration](#optional-configuration) instructions if you need to make changes to
+the default mappings, or migrate from edg-mkgridmap or GUMS.
 
 
 ### Enabling the LCMAPS VOMS plugin
@@ -129,13 +125,6 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
     * If you have a local grid mapfile (see [the EDG-mkgridmap docs](../security/edg-mkgridmap)), replace the contents of `/etc/grid-security/grid-mapfile` with the contents of the local grid mapfile.
 
     * If you do not have a local grid mapfile, remove `/etc/grid-security/grid-mapfile`.
-
-1.  If you are remaining on OSG 3.3, ensure that the you have set `export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1` in the appropriate file and restart the service. If you have updated your host to OSG 3.4, skip to the next step.
-
-    | **If your host is a(n)...** | **Add the aforementioned line to...**  | **And restart this service...** |
-    |:----------------------------|:---------------------------------------| :------------------------------ |
-    | HTCondor-CE                 | `/etc/sysconfig/condor-ce`             | `condor-ce`                     |
-    | GridFTP server              | `/etc/sysconfig/globus-gridftp-server` | `globus-gridftp-server`         |
 
 1.  If you are converting an HTCondor-CE host, remove the HTCondor-CE `GRIDMAP` configuration. Otherwise, skip to the next step.
 
