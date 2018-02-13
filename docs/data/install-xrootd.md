@@ -307,7 +307,7 @@ Modify `/etc/fstab` by adding the following entries:
     xrootdfs                %RED%/mnt/xrootd%ENDCOLOR%              fuse    rdr=xroot://%RED%redirector1.domain.com%ENDCOLOR%:1094/%RED%/path/%ENDCOLOR%,uid=xrootd 0 0
 
 
-Replace `/mnt/xrootd` with the path that you would like to access with. This should also match the GridFTP settings for the `XROOTD_VMP` local path. Create `/mnt/xrootd` directory. Once you are finished, you can mount it:
+Replace `/mnt/xrootd` with the path that you would like to access with. This should also match the GridFTP settings for the `XROOTD_VMP` local path. Create `/mnt/xrootd` directory. Make sure the xrootd user exists on the system. Once you are finished, you can mount it:
 
     :::file
     mount /mnt/xrootd
