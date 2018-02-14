@@ -102,7 +102,7 @@ For the configuration of the HTCondor submit host to use the TransferLog follow 
 1. Reconfigure condor:
 
         :::console
-        root@host #condor_reconfig
+        root@host # condor_reconfig
 
 1. Make sure that after a couple of minutes the new log `/var/log/condor/XferStatsLog` is present.
 
