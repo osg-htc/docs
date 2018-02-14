@@ -409,17 +409,6 @@ After configuring condor, be sure to restart condor:
 
 ### Proxy Configuration
 
-There are 2 types of (or purposes for) proxies required for the VO Frontend: 1
-the %GREEN%VO Frontend proxy%ENDCOLOR% (used to authenticate with the other
-glideinWMS services) 1 one or more glideinWMS %GREEN%pilot proxies%ENDCOLOR%
-(used/delegated to the factory services and submitted on the glideinWMS pilot
-jobs) The %GREEN%VO Frontend proxy%ENDCOLOR% and the %GREEN%pilot
-proxy%ENDCOLOR% can be the same. By default, the VO Frontend will run as user
-`frontend` (UID is machine dependent) so these proxies must be owned by the user
-`frontend`.
-
-#### Automatic proxy renewal
-
 GlideinWMS comes with the [gwms-renew-proxies service](#managing-glideinwms-services) that can automatically generate
 and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOLOR%. To configure this service, modify
 `/etc/gwms-frontend/proxies.ini` using the following instructions:
@@ -472,45 +461,6 @@ and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOL
         `output` must be the same path as the `classad_proxy` specified in [this section](#configuring-the-frontend)
 
 1. Start and enable the [gwms-renew-proxies service](#managing-glideinwms-services)
-
-#### Manual proxy renewal
-
-%GREEN%VO Frontend proxy%ENDCOLOR%
-The VO Frontend Proxy is used for communicating with the other glideinWMS
-services (Factory, User Collector and Schedd/Submit services). Create the proxy
-using the glidenWMS VO Frontend Host (or Service) cert and change ownership to
-the frontend user.
-
-``` console
-root@host # voms-proxy-init-valid %RED%<hours_valid>%ENDCOLOR% \
--cert /etc/grid-security/hostcert.pem \
--key /etc/grid-security/hostkey.pem \
--out %GREEN%/tmp/vofe_proxy%ENDCOLOR%
-root@host # chown frontend %GREEN%/tmp/vofe_proxy%ENDCOLOR%
-```    
-
-%RED%Pilot proxy%ENDCOLOR%
-The pilot proxy is used on the glideinWMS pilot jobs submitted to the CEs.
-Create the proxy using the %RED%pilot certificate%ENDCOLOR% and change ownership
-to the frontend user.
-
-``` console
-root@host # voms-proxy-init -valid %RED%<hours_valid>%ENDCOLOR% \
--voms <vo>
--cert <pilot_cert> \
--key <pilot_key> \
--out %RED%/tmp/pilot_proxy%ENDCOLOR%
-root@host # chown frontend %RED%/tmp/pilot_proxy%ENDCOLOR%
-```
-
-!!! warning
-    **Proxies do expire.** You can extend the validity by using a longer time interval, e.g. `-valid 3000:0`. This sequence of commands will need to be renewed when the proxy expires or the machine reboots (if /tmp is used only).
-
-Make sure that this location is specified correctly in the `frontend.xml`
-described in the [Configuring the Frontend](#configuring-the-frontend) section.
-
-You may want to automate the procedure above (or part of it) by writing a script
-and adding it to crontab.
 
 ### Reconfigure and verify installation
 
