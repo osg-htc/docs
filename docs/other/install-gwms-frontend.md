@@ -620,12 +620,13 @@ Start the services in the order listed and stop them in reverse order. As a remi
 
 ### Reconfiguring GlideinWMS ###
 
-After changing the configuration of GlideinWMS, use the following table to find the appropriate command for your operating system:
+After changing the configuration of GlideinWMS, use the following table to find the appropriate command for your
+operating system (run as `root`):
 
 | If your operating system is... | Run the following command...                 |
 |:-------------------------------|:---------------------------------------------|
-| Enterprise Linux 7             | `root@host # systemctl reload gwms-frontend` |
-| Enterprise Linux 6             | `root@host # service gwms-frontend reconfig`  |
+| Enterprise Linux 7             | `systemctl reload gwms-frontend` |
+| Enterprise Linux 6             | `service gwms-frontend reconfig`  |
 
 ### Upgrading GlideinWMS ###
 
@@ -637,6 +638,7 @@ After upgrading the GlideinWMS RPM, you must issue an upgrade command to Glidein
 
     1. Issue the upgrade command:
 
+            :::console
             root@host # /usr/sbin/gwms-frontend upgrade
 
     1. Start the `condor` and `gwms-frontend` services as specified in [this section](#managing-glideinwms-services)
@@ -645,6 +647,7 @@ After upgrading the GlideinWMS RPM, you must issue an upgrade command to Glidein
 
     1. Upgrade the GlideinWMS Frontend:
 
+            :::console
             root@host # service gwms-frontend upgrade
 
     1. Restart the `condor` service as specified in the [managing GlideinWMS services section](#managing-glideinwms-services)
