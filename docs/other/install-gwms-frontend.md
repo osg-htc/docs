@@ -172,32 +172,6 @@ In addition, you will need to perform the following steps:
 - In `/etc/condor/certs/condor_mapfile`, you will need to all DNs for each machine (userschedd, usercollector, vofrontend). Take great care to escape all special characters. Alternatively, you can use the `glidecondor_addDN` to add these values.
 - In the `/etc/gwms-frontend/frontend.xml` file, change the schedd locations to match the correct server. Also change the collectors tags at the bottom of the file. More details on frontend xml are in the following sections.
 
-### Upgrading the GlideinWMS Frontend
-
-If you have a working installation of glideinwms-frontend you can just upgrade
-the frontend rpms and skip the most of the configuration procedure below. These
-general upgrade instructions apply when upgrading the glideinwms-frontend rpm
-within same major versions.
-
-``` console
-# %RED% Update the glideinwms-vofrontend packages%ENDCOLOR%
-root@host # yum update glideinwms\*
-# %RED% Update the scripts in the working directory to the latest one%ENDCOLOR%
-# %RED% For RHEL 7, CentOS 7, and SL7%ENDCOLOR%
-root@host # /usr/sbin/gwms-frontend upgrade
-# %RED% For RHEL 6, CentOS 6, and SL6%ENDCOLOR%
-root@host # service gwms-frontend upgrade
-# %RED% Restart HTCondor because the configuration may be different%ENDCOLOR%
-root@host # service condor restart
-```
-
-!!! note
-    When upgrading to GlideinWMS 3.2.7 the second schedd is removed from the default configuration. For a smooth transition:
-
-    1. remove from **`/etc/gwms-frontend/frontend.xml`** the second schedd (the line containing **`schedd_jobs2@YOUR_HOST`**)
-    2. reconfigure the frontend (`service gwms-frontend reconfig`)
-    3. restart HTCondor (`service condor restart`)
-
 Configuring GlideinWMS Frontend
 --------------------------------
 
@@ -620,82 +594,60 @@ groupwould only match jobs that have the `+is_itb=True` ClassAd.
         
 
 
-Managing GlideinWMS Services
-----------------------------
+Using GlideinWMS
+----------------
 
-The scripts updating your CA and CRLs plus three frontend services need to be running:
+### Managing GlideinWMS Services ###
 
-1. You need to fetch the latest CA Certificate Revocation Lists (CRLs) and you should enable the fetch-crl service to keep the CRLs up to date:
+In addition to the GlideinWMS service itself, there are a number of supporting services in your installation. The specific services are:
 
-        :::console
-        # %RED% For RHEL 6, CentOS 6, and SL6, or OSG 3 _older_ than 3.1.15%ENDCOLOR%
-        root@host # /usr/sbin/fetch-crl   # This fetches the CRLs
-        root@host # /sbin/service fetch-crl-boot start
-        root@host # /sbin/service fetch-crl-cron start
-        # %RED% For RHEL 7, CentOS 7, and SL7 %ENDCOLOR%
-        root@host # /usr/sbin/fetch-crl   # This fetches the CRLs
-        root@host # systemctl start fetch-crl-boot
-        root@host # systemctl start fetch-crl-cron
-        
+| Software   | Service name                             | Notes                                                                        |
+|:-----------|:-----------------------------------------|:-----------------------------------------------------------------------------|
+| Fetch CRL  | `fetch-crl-boot` and `fetch-crl-cron`    | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
+| Gratia     | `gratia-probes-cron`                     | Accounting software                                                          |
+| HTCondor   | `condor`                                 |                                                                              |
+| HTTPD      | `httpd`                                  | GlideinWMS monitoring                                                        |
+| GlideinWMS | `gwms-renew-proxies` and `gwms-frontend` | [Automatic proxy renewal](#proxy-configuration) and main GlideinWMS service  |
 
-2.  HTCondor, httpd, VO Frontend
+Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as `root`):
 
-        :::console
-        # %RED%For RHEL 6, CentOS 6, and SL6%ENDCOLOR%
-        root@host # service condor start
-        root@host # service httpd start
-        root@host # service gwms-frontend start
-        # %RED% For RHEL 7, CentOS 7, and SL7%ENDCOLOR%
-        root@host # systemctl start condor
-        root@host # systemctl start gwms-frontend
-        
+| To...                                   | On EL6, run the command...                  | On EL7, run the command...                      |
+| :-------------------------------------- | :----------------------------------------   | :--------------------------------------------   |
+| Start a service                         | `service <SERVICE-NAME> start` | `systemctl start <SERVICE-NAME>`   |
+| Stop a  service                         | `service <SERVICE-NAME> stop`  | `systemctl stop <SERVICE-NAME>`    |
+| Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`  | `systemctl enable <SERVICE-NAME>`  |
+| Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off` | `systemctl disable <SERVICE-NAME>` |
 
-!!! note
-    Once you successfully start using the frontend service, each time you change the configuration or want to upgrade, you need to run the following commands
+### Reconfiguring GlideinWMS ###
 
-        :::console
-        # %RED% For RHEL 6, CentOS 6, and SL6%ENDCOLOR%
-        root@host # service gwms-frontend reconfig
-        # %RED% And if you change also some code%ENDCOLOR%
-        root@host # service gwms-frontend upgrade
-        
+After changing the configuration of GlideinWMS, use the following table to find the appropriate command for your operating system:
 
-        # %RED% But the situation is a bit more complicated in RHEL 7, CentOS 7, and SL7 due to systemd restrictions%ENDCOLOR%
-        # %GREEN% For reconfig:%ENDCOLOR%
-        A. %RED% when the frontend is running%ENDCOLOR%
-        A.1 %RED% without any additional options%ENDCOLOR%
-        root@host # /usr/sbin/gwms-frontend reconfig%ENDCOLOR%
-        or
-        root@host # systemctl reload gwms-frontend
+| If your operating system is... | Run the following command...                 |
+|:-------------------------------|:---------------------------------------------|
+| Enterprise Linux 7             | `root@host # systemctl reload gwms-frontend` |
+| Enterprise Linux 6             | `root@host # service gwms-frontend reconfig`  |
 
-        A.2 %RED% if you want to give additional options %ENDCOLOR%
-        systemctl stop gwms-frontend
-        /usr/sbin/gwms-frontend reconfig "and your options"
-        systemctl start gwms-frontend
+### Upgrading GlideinWMS ###
 
-        B. %RED% when the frontend is NOT running %ENDCOLOR%
-        root@host # /usr/sbin/gwms-frontend reconfig ("and your options")
+After upgrading the GlideinWMS RPM, you must issue an upgrade command to GlideinWMS:
 
-        $ %GREEN%For upgrade:%ENDCOLOR%
-        A. %RED% when the frontend is running %ENDCOLOR%
-        systemctl stop gwms-frontend
-        /usr/sbin/gwms-frontend upgrade ("and your options if any")
-        systemctl start gwms-frontend
+- **If you are using Enterprise Linux 7**:
 
-        B. %RED% when the frontend is NOT running %ENDCOLOR%
-        /usr/sbin/gwms-frontend upgrade ("and your options if any")
+    1. Stop the `condor` and `gwms-frontend` services as specified in [this section](#managing-glideinwms-services)
 
-To stop the frontend:
+    1. Issue the upgrade command:
 
-```console
-# %RED%For RHEL 6, CentOS 6, and SL6 %ENDCOLOR%
-root@host # service gwms-frontend stop
-# %RED%For RHEL 7, CentOS 7, and SL7%ENDCOLOR%
-root@host # systemctl stop gwms-frontend
-```    
+            root@host # /usr/sbin/gwms-frontend upgrade
 
-And you can stop also the other services if you are not using them independently
-of the frontend.
+    1. Start the `condor` and `gwms-frontend` services as specified in [this section](#managing-glideinwms-services)
+
+- **If you are using Enterprise Linux 6**:
+
+    1. Upgrade the GlideinWMS Frontend:
+
+            root@host # service gwms-frontend upgrade
+
+    1. Restart the `condor` service as specified in the [managing GlideinWMS services section](#managing-glideinwms-services)
 
 Validating GlideinWMS Frontend
 ------------------------------
