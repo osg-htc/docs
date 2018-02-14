@@ -460,31 +460,6 @@ and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOL
     !!! note
         `output` must be the same path as the `classad_proxy` specified in [this section](#configuring-the-frontend)
 
-1. Start and enable the [gwms-renew-proxies service](#managing-glideinwms-services)
-
-### Reconfigure and verify installation
-
-!!! warning
-    In order to use the frontend, first you must reconfigure and upgrade it.
-        
-        :::console
-        # %RED% For RHEL 6, CentOS 6, and SL6%ENDCOLOR%
-        root@host # service gwms-frontend reconfig
-        root@host # service gwms-frontend upgrade
-
-        # %RED% For RHEL 7, CentOS 7, and SL7%ENDCOLOR%
-        root@host # /usr/sbin/gwms-frontend reconfig
-        root@host # /usr/sbin/gwms-frontend upgrade
-
-After this initial reconfiguring/upgrading, you can start the frontend:
-
-```console
-# %RED% For RHEL 6, CentOS 6, and SL6%ENDCOLOR%
-root@host # service gwms-frontend start
-# %RED% For RHEL 7, CentOS 7, and SL7%ENDCOLOR%
-root@host # systemctl start gwms-frontend
-```
-
 ### Adding Gratia Accounting and a Local Monitoring Page on a Production Server
 
 You must report accounting information if you are running more than a few test jobs on the OSG .
@@ -507,12 +482,6 @@ You must report accounting information if you are running more than a few test j
 
         :::console
         root@host # condor_reconfig
-
-4.  Start the services, and add them to be started automatically when the system reboots:
-
-        :::console
-        root@host # service gratia-probes-cron start
-        root@host # chkconfig --level 345 gratia-probes-cron on
 
 #### Optional Accounting Configuration
 
