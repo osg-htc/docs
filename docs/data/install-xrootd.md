@@ -520,15 +520,15 @@ on all data nodes:
 
 1. Install [CA certificates](/common/ca#installing-ca-certificates) and [manage CRLs](/common/ca#installing-ca-certificates#managing-certificate-revocation-lists)
 
-1. Install `xrootd-lcmaps` and necessary configuration:
-
-        :::console
-        root@host # yum install xrootd-lcmaps osg-configure-misc vo-client vo-client-lcmaps-voms
-
 1. Follow the instructions for requesting a [service certificate](/security/host-certs#requesting-and-installing-a-service-certificate),
    using `xrootd` for both the `<SERVICE>` and `<OWNER>`.
 
-1. Configure the [LCMAPS VOMS plugin](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin)
+1. Install and configure the [LCMAPS VOMS plugin](/security/lcmaps-voms-authentication)
+
+1. Install `xrootd-lcmaps` and necessary configuration:
+
+        :::console
+        root@host # yum install xrootd-lcmaps vo-client
 
 1. Append the following to `/etc/lcmaps.db`:
 
