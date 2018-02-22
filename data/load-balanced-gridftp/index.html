@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../img/favicon.ico">
-      <meta name="generator" content="mkdocs-0.17.1, mkdocs-material-2.6.3">
+      <meta name="generator" content="mkdocs-0.17.1, mkdocs-material-2.6.5">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.9b572555.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.9d8fef76.css">
       
     
     
@@ -578,6 +578,13 @@
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-starting" title="Before Starting" class="md-nav__link">
+    Before Starting
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#designing-your-load-balanced-gridftp-system" title="Designing Your Load-Balanced GridFTP System" class="md-nav__link">
@@ -2311,6 +2318,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#before-starting" title="Before Starting" class="md-nav__link">
+    Before Starting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#designing-your-load-balanced-gridftp-system" title="Designing Your Load-Balanced GridFTP System" class="md-nav__link">
     Designing Your Load-Balanced GridFTP System
   </a>
@@ -2535,7 +2549,7 @@
 <p>GridFTP is designed for high throughput data transfers and in many cases can handle all of the transfers for a site. However, in some cases it may be useful to run multiple GridFTP servers to distribute the load. For such sites, we recommend using a <a href="https://en.wikipedia.org/wiki/Load_balancing_(computing)">load balancer</a> to distribute requests and present the appearance of a single high-throughput GridFTP server.</p>
 <p>One general-purpose technology for implementing a load balancer on Linux is <a href="http://www.linuxvirtualserver.org/whatis.html">Linux Virtual Server</a> (LVS). To use it with GridFTP, a single load balancer listens on a virtual IP address, monitors the health of the set of real GridFTP servers, and forwards requests to available ones. Optionally, there can be one or more inactive, backup load balancers that can activate and take over the virtual IP address in case the primary load balancer fails, resulting in a system that is more resilient to failure. LVS is implemented by the <a href="http://www.linuxvirtualserver.org/software/ipvs.html">IP Virtual Server</a> kernel module, which can be managed by userspace services on the load balancers such as <a href="http://www.keepalived.org">keepalived</a>.</p>
 <p>This guide explains how to install, configure, run, test, and troubleshoot the <code>keepalived</code> service on a load balancing host for a set of <a href="../gridftp">GridFTP</a> servers.</p>
-<hr />
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following requirements:</p>
 <ul>
 <li>You must have <a href="http://oim.opensciencegrid.org/oim/gridadmin">grid administrator privileges</a></li>
@@ -2990,7 +3004,7 @@ router_id &lt;MACHINE-IDENTIFYING-STRING&gt;
       
     </div>
     
-      <script src="../../assets/javascripts/application.abd7b172.js"></script>
+      <script src="../../assets/javascripts/application.02434462.js"></script>
       
       <script>app.initialize({version:"0.17.1",url:{base:"../.."}})</script>
       
