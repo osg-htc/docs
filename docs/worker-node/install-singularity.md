@@ -22,7 +22,7 @@ Beginning with the kernel released with RHEL 7.4, there is a new
 [technology preview feature](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/7.4_Release_Notes/index.html#technology_previews_kernel)
 to allow unprivileged bind mounts in user namespaces, which allows
 singularity to run as an unprivileged user.  The OSG has installed
-singularity in [cvmfs](install-cvmfs), so  you can avoid installing
+singularity in [OASIS](/worker-node/install-cvmfs), so you can avoid installing
 singularity at all.  The minimum version of the kernel (3.10.0-693) is
 available as at least a security update for all RHEL7-based releases.
 
@@ -148,7 +148,8 @@ user         1     0  0 21:34 ?        00:00:00 ps -ef
 Unprivileged Singularity
 ------------------------
 
-The instructions in this section are for installing singularity with non-setuid executables.
+The instructions in this section are for enabling singularity with non-setuid executables, which is available in OASIS,
+the OSG Software [CVMFS distribution](/worker-node/install-cvmfs).
 
 ### Enabling Singularity via OASIS ###
 
