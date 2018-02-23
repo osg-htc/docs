@@ -1,5 +1,5 @@
-
-# Install Singularity
+Install Singularity
+===================
 
 [Singularity](http://singularity.lbl.gov) is a tool that creates
 docker-like process containers but without giving extra privileges to
@@ -22,11 +22,11 @@ Beginning with the kernel released with RHEL 7.4, there is a new
 [technology preview feature](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/7.4_Release_Notes/index.html#technology_previews_kernel)
 to allow unprivileged bind mounts in user namespaces, which allows
 singularity to run as an unprivileged user.  The OSG has installed
-singularity in [cvmfs](install-cvmfs), so  you can avoid installing
+singularity in [OASIS](/worker-node/install-cvmfs), so you can avoid installing
 singularity at all.  The minimum version of the kernel (3.10.0-693) is
 available as at least a security update for all RHEL7-based releases.
 
-!!! danger "Kernel vs. Userspace security"
+!!! danger "Kernel vs. Userspace Security"
     Enabling unprivileged user namespaces increases the risk to the
     kernel. However, the kernel is more widely reviewed than Singularity and
     the additional capability given to users is more limited.
@@ -35,17 +35,6 @@ available as at least a security update for all RHEL7-based releases.
 
 The document is intended for system administrators who wish to either
 install singularity or enable it to be run as an unprivileged user.
-
-!!! note
-    There are two separate sets of instructions on this page,
-    one for [installing privileged singularity](#installing-singularity-as-privileged)
-    and one for [enabling unprivileged singularity](#enabling-unprivileged-mode-for-singularity).
-
-    As of February 2018, no VO in the OSG is ready to use non-setuid Singularity in production without a worker node installation.
-    Most sites will want to follow the privileged RPM install instructions until there is wider VO support.
-    Contact the VOs you support for more information.
-
-    It is possible to enable unprivileged singularity for testing on the same machines that have the privileged RPM installed.
 
 Before Starting
 ---------------
@@ -59,8 +48,25 @@ As with all OSG software installations, there are some one-time (per host) steps
 !!! note "Validation Steps"
     The validation steps below require CVMFS to be installed.  Follow the steps on the [CVMFS Installation](/worker-node/install-cvmfs) page.
 
-Installing Singularity as Privileged
-------------------------------------
+Choosing Privileged vs Unprivileged Singularity
+-----------------------------------------------
+
+There are two separate sets of instructions on this page:
+
+- [Installing privileged singularity](#privileged-singularity) via RPM
+- [Enabling unprivileged singularity](#unprivileged-singularity) via OASIS
+
+As of February 2018, no VO in the OSG is ready to use unprivileged, non-setuid Singularity in production.
+Only testing sites will need to follow these instructions; contact the VOs you support for more information.
+
+Most sites will want to follow the privileged RPM install instructions until there is wider VO support.
+
+Privileged Singularity
+----------------------
+
+The instructions in this section are for installing singularity with setuid-root executables.
+
+### Installing Singularity via RPM ###
 
 To install singularity as `setuid`, make sure that your host is up to date before installing the required packages:
 
@@ -91,12 +97,12 @@ To install singularity as `setuid`, make sure that your host is up to date befor
     installing only this smaller package reduces risk of potential security
     exploits.
 
-## Configuring singularity
+### Configuring singularity ###
 
 There are no required changes to the default configuration.  If you want
 to see what options are available, see `/etc/singularity/singularity.conf`.
 
-### Limiting Image Types
+#### Limiting image types ####
 
 Images based on loopback devices carry an inherently higher exposure to
 unknown kernel exploits compared to directory-based images distributed via
@@ -115,7 +121,7 @@ While reasonable for some sites, this is not required as there are currently
 no public kernel exploits for this issue; any exploits are patched by
 RedHat when they are discovered.
 
-!!! warning "Warning: No Free Lunches"
+!!! warning
     If you modify `/etc/singularity/singularity.conf`, carefully test any
     upgrade procedures.
     RPM will not automatically merge your changes with new upstream
@@ -126,7 +132,7 @@ RedHat when they are discovered.
     Look for `.rpmnew` files after upgrades and merge in any changes to the
     defaults.
 
-## Validating singularity
+### Validating singularity ###
 
 After singularity is installed, as an ordinary user run the following
 command to verify it:
@@ -139,12 +145,13 @@ UID        PID  PPID  C STIME TTY          TIME CMD
 user         1     0  0 21:34 ?        00:00:00 ps -ef
 ```
 
-!!! tip
-    The remainder of this document pertains to the un-privileged
-    (non-`setuid`) mode of singularity.
+Unprivileged Singularity
+------------------------
 
-Enabling Unprivileged Mode for Singularity
-------------------------------------------
+The instructions in this section are for enabling singularity with non-setuid executables, which is available in OASIS,
+the OSG Software [CVMFS distribution](/worker-node/install-cvmfs).
+
+### Enabling Singularity via OASIS ###
 
 If the operating system is an EL 7 variant and has been updated to the EL
 7.4 kernel (3.10.0-693 or greater), you can skip
@@ -178,7 +185,7 @@ singularity to be run as an unprivileged user via CVMFS:
     may break other container solutions, or limit their capabilities
     (such as requiring the `--net=host` option in Docker).
 
-    !!! danger "Danger: current public exploit"
+    !!! danger "Current Public Exploit"
         As of December 19, 2017 there is no patch from Redhat for a
         [public exploit](https://access.redhat.com/security/cve/CVE-2017-16939)
         of a vulnerability due to the combination of network namespaces
@@ -191,7 +198,7 @@ singularity to be run as an unprivileged user via CVMFS:
 5. If you haven't yet installed [cvmfs](install-cvmfs), do so.
 
 
-## Validating singularity
+### Validating singularity ###
 
 Once you have the host configured properly, log in as an ordinary
 unprivileged user and verify that singularity works:
@@ -205,7 +212,8 @@ UID        PID  PPID  C STIME TTY          TIME CMD
 user         1     0  0 21:34 ?        00:00:00 ps -ef
 ```
 
-## Starting and Stopping services
+Starting and Stopping Services
+------------------------------
 
 singularity has no services to start or stop.
 
