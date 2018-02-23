@@ -1,5 +1,5 @@
-
-# Install Singularity
+Install Singularity
+===================
 
 [Singularity](http://singularity.lbl.gov) is a tool that creates
 docker-like process containers but without giving extra privileges to
