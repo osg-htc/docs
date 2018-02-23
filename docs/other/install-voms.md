@@ -2,7 +2,7 @@ Install VOMS
 =================
 
 !!! warning
-    As of the June 2017 release of OSG 3.4.0, this software is officially deprecated.  Support is scheduled to end as of May 2018.
+    As of the June 2017 release of OSG 3.4.0, installation of VOMS with VOMS Admin Server is officially deprecated.  Support is scheduled to end as of [May 2018](https://opensciencegrid.github.io/technology/policy/voms-admin-retire/).
 
 This document is for VO System Administrators.
 
