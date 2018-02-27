@@ -434,6 +434,15 @@ and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOL
     !!! note
         `output` must be the same path as the `classad_proxy` specified in [this section](#configuring-the-frontend)
 
+1. **(OPTIONAL)** If you are running the `gwms-frontend` service under a non-default user (default: `frontend`),
+   specify the user as the owner of your proxies under the `[COMMON]` section:
+
+        [COMMON]
+        owner = %RED%<GWMS FRONTEND USER>%ENDCOLOR%
+
+    !!! note
+        The `[COMMON]` section is required but its contents are optional
+
 ### Adding Gratia Accounting and a Local Monitoring Page on a Production Server
 
 You must report accounting information if you are running more than a few test jobs on the OSG .
