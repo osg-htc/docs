@@ -111,22 +111,22 @@ All other configuration settings should be suitable for most purposes. However, 
 
 ### Optional configuration
 
-#### Setting transfer limits
+#### Setting transfer limits for GridFTP - HDFS
 
-Create file named `/etc/sysconfig/gridftp-limits`. To set a limit on the total or per-user number of transfers, set the following configuration:
+Create file named `/etc/sysconfig/gridftp-hdfs`. To set a limit on the total or per-user number of transfers, set the following configuration:
 
     :::file
     export GRIDFTP_TRANSFER_LIMIT="80"
     export GRIDFTP_DEFAULT_USER_TRANSFER_LIMIT="50"
-    export GRIDFTP_LIGO_USER_TRANSFER_LIMIT="40"
-    export GRIDFTP_CMS_USER_TRANSFER_LIMIT="20"
+    export GRIDFTP_%RED%<UNIX USERNAME>%ENDCOLOR%_USER_TRANSFER_LIMIT="40"
+
 
 In the above configuration:
 
 - There would be no more than 80 transfers going at a time, across all users.
 - By default, any single user can have no more than 50 transfers at a time.
-- The `ligo` user has a more stringent limit of 40 transfers at a time.
-- The `cms` user has an even more stringent limit of 20 transfers at a time.
+- The `%RED%<UNIX USERNAME>%ENDCOLOR%` user has a more stringent limit of 40 transfers at a time.
+
 
 
 !!!note
