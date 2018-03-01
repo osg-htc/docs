@@ -3548,7 +3548,7 @@ Before troubleshooting, we recommend increasing the log level:</p>
 <ol>
 <li>
 <p>Write the following into <code>/etc/condor-ce/config.d/99-local.conf</code> to increase the log level for all daemons:</p>
-<div class="codehilite"><pre><span></span>ALL_DEBUG = D_FULLDEBUG
+<div class="codehilite"><pre><span></span>ALL_DEBUG = D_FULLDEBUG D_CAT
 </pre></div>
 
 
@@ -3952,8 +3952,8 @@ Mapping: glow@users.opensciencegrid.org</code>):</p>
 <ol>
 <li>
 <p><strong>If you see “ERROR: couldn’t locate (null)”</strong>, that means the HTCondor-CE schedd (the daemon that schedules jobs) cannot be reached. To track down the issue, increase debugging levels on the CE:</p>
-<div class="codehilite"><pre><span></span>MASTER_DEBUG = D_FULLDEBUG
-SCHEDD_DEBUG = D_FULLDEBUG
+<div class="codehilite"><pre><span></span>MASTER_DEBUG = D_FULLDEBUG D_CAT
+SCHEDD_DEBUG = D_FULLDEBUG D_CAT
 </pre></div>
 
 
@@ -3984,8 +3984,8 @@ SCHEDD_DEBUG = D_FULLDEBUG
 <ol>
 <li>
 <p><strong>If the schedd is not running:</strong> You will see a lengthy message about being unable to contact the schedd. To track down the issue, increase the debugging levels on the CE with:</p>
-<div class="codehilite"><pre><span></span>MASTER_DEBUG = D_FULLDEBUG
-SCHEDD_DEBUG = D_FULLDEBUG
+<div class="codehilite"><pre><span></span>MASTER_DEBUG = D_FULLDEBUG D_CAT
+SCHEDD_DEBUG = D_FULLDEBUG D_CAT
 </pre></div>
 
 
@@ -4205,7 +4205,7 @@ they fail to start.</p>
 <ol>
 <li>
 <p>Set the following value in <code>/etc/condor-ce/config.d/99-local.conf</code> on the CE host:</p>
-<div class="codehilite"><pre><span></span>MASTER_DEBUG = D_FULLDEBUG
+<div class="codehilite"><pre><span></span>MASTER_DEBUG = D_FULLDEBUG D_CAT
 </pre></div>
 
 
@@ -4242,7 +4242,7 @@ It contains valuable information when trying to troubleshoot authentication issu
 <ol>
 <li>
 <p>Set the following value in <code>/etc/condor-ce/config.d/99-local.conf</code> on the CE host:</p>
-<div class="codehilite"><pre><span></span>SCHEDD_DEBUG = D_FULLDEBUG
+<div class="codehilite"><pre><span></span>SCHEDD_DEBUG = D_FULLDEBUG D_CAT
 </pre></div>
 
 
@@ -4343,7 +4343,7 @@ troubleshoot issues with job routing.</p>
 <ol>
 <li>
 <p>Set the following value in <code>/etc/condor-ce/config.d/99-local.conf</code> on the CE host:</p>
-<div class="codehilite"><pre><span></span>JOB_ROUTER_DEBUG = D_FULLDEBUG
+<div class="codehilite"><pre><span></span>JOB_ROUTER_DEBUG = D_FULLDEBUG D_CAT
 </pre></div>
 
 
@@ -4425,7 +4425,7 @@ Wiki</a>.</p>
 <p>Set the following value in <code>/etc/condor-ce/config.d/99-local.conf</code> on the CE host:</p>
 <div class="codehilite"><pre><span></span>MAX_GRIDMANAGER_LOG = 6h
 MAX_NUM_GRIDMANAGER_LOG = 8
-GRIDMANAGER_DEBUG = D_FULLDEBUG
+GRIDMANAGER_DEBUG = D_FULLDEBUG D_CAT
 </pre></div>
 
 
@@ -4494,7 +4494,7 @@ This log is a good place to check if experiencing connectivity issues with HTCon
 <ol>
 <li>
 <p>Set the following value in <code>/etc/condor-ce/config.d/99-local.conf</code> on the CE host:</p>
-<div class="codehilite"><pre><span></span>SHARED_PORT_DEBUG = D_FULLDEBUG
+<div class="codehilite"><pre><span></span>SHARED_PORT_DEBUG = D_FULLDEBUG D_CAT
 </pre></div>
 
 
