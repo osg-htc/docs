@@ -19,7 +19,6 @@ We broadly break down the server components of the Hadoop SE into three categori
     -   Namenode: The core metadata server of Hadoop. This is the most critical piece of the system, and there can only be one of these. This stores both the file system image and the file system journal. The namenode keeps all of the filesystem layout information (files, blocks, directories, permissions, etc) and the block locations. The filesystem layout is persisted on disk and the block locations are kept solely in memory. When a client opens a file, the namenode tells the client the locations of all the blocks in the file; the client then no longer needs to communicate with the namenode for data transfer.
     -   Datanode: This node stores copies of the blocks in HDFS. They communicate with the namenode to perform "housekeeping" such as creating new replicas, transferring blocks between datanodes, and deleting excess blocks. They also communicate with the clients to transfer data. To reach the best scalability, there should be as many datanodes as possible.
 -   Grid extensions
-    -   BeStMan SRM: A generic SRM server that can be run on top of any POSIX-like filesystem. This is run in "gateway" mode, which limits the amount of the SRM protocol implemented. To date, this has been sufficient to LHC VOs.
     -   Globus GridFTP: The standard GridFTP from Globus. We use a plug-in module (using the Globus Direct Storage Interface) that allows the GridFTP process to use the HDFS C-bindings directly.
     -   Gratia probe: Gratia is an accounting system that records batch system and transfer records to a database. The records are collected by a client program called a "probe" which runs on the GridFTP server. It parses the GridFTP server's log files and creates transfer records.
     -   XRootD server plugin: XRootD is an extremely flexible and powerful data server popular in the high energy physics community. There exists a HDFS plugin for XRootD; integrating with XRootD provides a means to export HDFS securely outside the local cluster, as another XRootD plugin provides GSI-based authentication and authorization.
@@ -44,24 +43,33 @@ Minimal Installation (0-50TB, WAN transfers up to 1Gbps)
 
 The minimal installation would involve 5 nodes:
 
-1 hadoop-name: The namenode for the Hadoop system. Must be on private NAT. 1 hadoop-name2: This will run the HDFS secondary namenode. Must also be on private NAT. 1 hadoop-data1, hadoop-data2: Two HDFS datanodes. They will hold data for the system, so they should have sizable hard drives. These must be on the private NAT. As the Hadoop installation grows to many terabytes, this will be the only class of nodes one adds. 1 hadoop-grid: Runs the BeStMan SRM and Globus GridFTP server. Must have a public interface and a private interface.
+1 hadoop-name: The namenode for the Hadoop system.  Must be on a private network.
+1 hadoop-name2: This will run the HDFS secondary namenode. Must be on a private network.
+1 hadoop-data1, hadoop-data2: Two HDFS datanodes. They will hold data for the system, so they should have sizable hard drives. As the Hadoop installation grows to many terabytes, this will be the only class of nodes one adds. Must be on a private network.
+1 hadoop-grid: Runs the Globus GridFTP server. Must have a public interface and a private interface.
 
 If desired, hadoop-name and hadoop-name2 may be virtualized. Prior to installation, DNS / host name resolution **must** work. That is, you should be able to resolve all the hadoop servers either through DNS or /etc/hosts. Because of the grid software, hadoop-grid **must** have reverse DNS working.
 
 Medium Installation (50-150TB, WAN transfers up to 2 Gbps)
 ----------------------------------------------------------
 
-For a medium install, make the following changes over the minimal install: 1 Run BeStMan on a separate machine, hadoop-srm. This host may be virtualized. 1 Run multiple GridFTP servers (2 should be fine); if possible, use 10 Gbps cards for these hosts. 1 Add many more HDFS datanodes. This usually means starting to add 1 or 2 TB hard drives to some worker nodes.
+For a medium install, make the following changes over the minimal install: 
+
+1 Run multiple GridFTP servers (2 should be fine); if possible, use 10 Gbps cards for these hosts. 
+1 Add many more HDFS datanodes. This usually means starting to add 1 or 2 TB hard drives to some worker nodes.
 
 Large Installation (>150TB, WAN transfers over 2 Gbps)
 ---------------------------------------------------------
 
-For a large installation, make the following changes: 1 Run more GridFTP servers; plan for 800 Mbps per host with 1 Gbps card in order to have excess capacity. 1 Purchase machines suitable for HDFS datanodes. It is possible to get a 2U box with 8-12 hard drives; for many projects, this will provide a more suitable CPU to disk ratio than the 1U boxes with 2 hard drives.
+For a large installation, make the following changes: 
+
+1 Run more GridFTP servers; plan for 800 Mbps per host with 1 Gbps card in order to have excess capacity. 
+1 Purchase machines suitable for HDFS datanodes. It is possible to get a 2U box with 8-12 hard drives; for many projects, this will provide a more suitable CPU to disk ratio than the 1U boxes with 2 hard drives.
 
 Hadoop Security
 ---------------
 
-HDFS has Unix-like user/group authorization, but no strict authentication. **HDFS should only be exposed to a secure internal network which only non-malicious users are able to access**. For users with access to the local cluster, it is not difficult to bypass authentication.
+HDFS has Unix-like user/group authorization, but no strict authentication. **HDFS should use a secure internal network which only non-malicious users are able to access**. For users with access to the local cluster, it is not difficult to bypass authentication.
 
 [The default ports are listed here](http://www.cloudera.com/blog/2009/08/14/hadoop-default-ports-quick-reference/).
 
