@@ -4,7 +4,7 @@ Network Performance Toolkit
 This document is for System Administrators and advanced Grid Users. It describes the usage of tools provided by the [Virtual Data Toolkit](http://vdt.cs.wisc.edu) to evaluate the network performance between resources.
 
 Introduction
-=================
+------------
 
 The Network Performance Toolkit is a collection of applications provided by the [perfSONAR project](http://www.perfsonar.net/) and distributed by the [Open Science Grid](http://www.opensciencegrid.org). The *server* components of the Network Performance Toolkit have been installed on dedicated resources of the [Open Science Grid](http://www.opensciencegrid.org). Following *client* tools are described in this document:
 
@@ -14,10 +14,10 @@ The Network Performance Toolkit is a collection of applications provided by the 
 -   Network Path and Application Diagnosis (NPAD)
 
 Installation
-=================
+------------
 
-Client Site Installation 
-------------------------------------------------------------------
+### Client Site Installation 
+
 
 The Network Performance Toolkit is installed with the OSG Client. Specifically, the tools included are: BWCTL, NDT and OWAMP (bwctl-client, bwctl-server, bwctl, ndt, owamp-client). NPAD is currently not in OSG client.
 
@@ -37,8 +37,8 @@ You may install these utilities separately as RPM using yum by following the [pe
 -   BWCTL: bwctl, bwctl-client, bwctl-server
 -   NPAD: npad
 
-Server Site Installation 
-------------------------------------------------------------------
+### Server Site Installation 
+
 
 The [perfSONAR](http://www.perfsonar.net/about)-based tools and services support the following tasks for OSG VO's:
 
@@ -50,19 +50,19 @@ The *server site components* can be brought-up *on demand* using the netinstall 
 Once the Toolkit server has booted you may begin on-demand testing. The server tools will use a generic set of configuration files. The intent is to make it easy to stand up a temporary server when and where it is needed. However, it is expected that a permanently installed server will be customized/configured, allowing it to support both on-demand testing and regularly scheduled monitoring. See the [perfSONAR home page](http://docs.perfsonar.net/) for step-by-step instructions on how to complete this customization process.
 
 Finding Target Servers
-===========================
+----------------------
 
 Finding servers against which to run on-demand tests can be a major impediment to effectively using these tools. The [perfSONAR](http://www.perfsonar.net/about) project tackles this problem by running a registration service for participating tools. The Performance Node ISO automatically uses this Lookup Service to advertise the tools' existence. You can also create custom views by making web-service calls to retrieve the data of interest. 
 
 We also have requested ALL OSG sites register their perfSONAR Toolkit installations in OIM (See <https://www.opensciencegrid.org/bin/view/Documentation/RegisterPSinOIM> ). You can use the MyOSG -> Resource Group -> Resource Group Summary page to see a list of perfSONAR Toolkit hosts that are installed at <http://tinyurl.com/mxfmutg>. Using this list you can select a "closest" relevant instance to use for running on-demand tests. Alternately if you have a perfSONAR toolkit install, the web interface has a "Global Services" link you can visit to see ALL perfSONAR instances that have updated the perfSONAR lookup service.
 
 Using the Client Tools
-===========================
+----------------------
 
 These tools support delay measurements (OWAMP), throughput measurements (BWCTL), and advanced diagnostics (NDT and NPAD). The command syntax for each tool is described in the following sub-sections. Each of the client tools listed above communicates with a companion server process to perform a measurement/test.
 
-Network Diagnostic Tool (NDT) 
------------------------------------------------------------------------
+### Network Diagnostic Tool (NDT) 
+
 
 The Network Diagnostic Tool (NDT) runs a series of short tests to determine what the current performance is and what, if anything, is limiting that performance. It can distinguish between host configuration and network infrastructure problems. To diagnose the CE/SE configuration and network connection run the `web100clt` command:
 
@@ -82,8 +82,7 @@ To increase the output further use:
 [user@client /opt/npt]$ web100clt –n <Target Server for Measurement> -ll
 ```
 
-One Way Active Measurement Protocol (OWAMP) 
--------------------------------------------------------------------------------------
+### One Way Active Measurement Protocol (OWAMP) 
 
 The One Way Active Measurement Protocol (OWAMP) is an advanced version of the common `ping` program. The OWAMP client `owping` communicates with an OWAMP server and measures the delay in each direction using NTP based time stamps. OWAMP can be used to identify delay, loss, and packet reordering problems inside the network. To measure the delay between the CE/SE and the remote server use the `owping` command:
 
@@ -91,8 +90,7 @@ The One Way Active Measurement Protocol (OWAMP) is an advanced version of the co
 [user@client /opt/npt]$ owping <Target Server for Measurement>
 ```
 
-Bandwidth Control tool (BWCTL) 
-------------------------------------------------------------------------
+### Bandwidth Control tool (BWCTL) 
 
 The Bandwidth Control tool (BWCTL) is a wrapper for the `iperf` command, its policy and a daemon. BWCTL improves the usability of `iperf` by avoiding following problems:
 
@@ -113,8 +111,7 @@ Third party tests, between 2 remote BWCTL servers, will let you measure various 
 
 Other useful options are `-f`, format, `-t`, length of test, and `-i`, test interval.
 
-Network Path and Application Diagnosis (NPAD) 
----------------------------------------------------------------------------------------
+### Network Path and Application Diagnosis (NPAD) 
 
 **NOTE: Network Path and Application Diagnosis (NPAD) is deprecated and won't be in future versions of the OSG distribution**
 
@@ -132,7 +129,7 @@ The Network Path and Application Diagnosis (NPAD) tool examines a host and its l
     The `diag-client` commands return a partial URL, enabling easy sharing of results between users and site administrators. To view the results, prepend the Toolkit servers name/port to the returned string. The example above would result in this URL: `http://server.this.osg.domain:8002/ServerData/Reports-2011-07/vtbv-ce.uchicago.edu:2011-07-12-18:50:07.html`.
 
 [Advanced Topic: Scheduled Monitoring](http://docs.perfsonar.net/manage_regular_tests.html)
-================================================================================================
+------------------------------------------------------------------------------------------
 
 (See <http://docs.perfsonar.net/install_quick_start.html> for more details.)
 
@@ -143,7 +140,7 @@ pSB-throughput: This utility will run regularly scheduled BWCTL tests between yo
 pSB-delay: This utility will run regularly scheduled OWAMP tests between your Toolkit server and the selected peers. Results are stored in a database and displayed on the server’s web page. You may also use standard web-service calls to retrieve this data for display on remote web servers. This would allow monitoring of a common core infrastructure at a central site, while each site could keep local/customized views as required.
 
 References
-===============
+----------
 
 * [One Way Active Measurement Protocol (OWAMP)](http://docs.perfsonar.net/config_owamp.html)
 * [Bandwidth Control tool (BWCTL)](http://docs.perfsonar.net/config_bwctl.html)
