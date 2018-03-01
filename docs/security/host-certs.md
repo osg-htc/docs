@@ -177,7 +177,7 @@ Since a single host can run multiple services, service certificates must be plac
 1. Set the appropriate permissions on the service certificate and key
 
         :::console
-        root@host # chmod 444 /etc/grid-security/%RED%<SERVICE>%ENDCOLOR%/%RED%<SERVICE>%ENDCOLOR%.pem
+        root@host # chmod 444 /etc/grid-security/%RED%<SERVICE>%ENDCOLOR%/%RED%<SERVICE>%ENDCOLOR%cert.pem
         root@host # chmod 400 /etc/grid-security/%RED%<SERVICE>%ENDCOLOR%/%RED%<SERVICE>%ENDCOLOR%key.pem
 
 1. Set the ownership of the directory and its underlying files to the Unix user, indicated as `<USER>`, who runs the service:
