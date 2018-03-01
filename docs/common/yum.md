@@ -5,109 +5,100 @@ About This Document
 -------------------
 
 This document introduces YUM repositories and how OSG uses them.
+If you are unfamiliar with YUM, see the [documentation on using YUM and RPM](/release/yum-basics).
 
 Repositories
 ------------
 
-OSG hosts four public-facing repositories at [repo.opensciencegrid.org](http://repo.opensciencegrid.org/):
+OSG hosts four public-facing repositories at [repo.opensciencegrid.org](https://repo.opensciencegrid.org/):
 
--   **release**: This repository contains software that we are willing to support and can be used by the general community.
--   **contrib**: RPMs contributed from outside the OSG.
--   **testing**: This repository contains software ready for testing. If you install packages from here, they may be buggy, but we will provide limited assistance in providing a migration path to a fixed version.
--   **development**: This repository is the bleeding edge. Installing from this repository may cause the host to stop functioning, and we will not assist in undoing any damage.
+-   **release**: RPMs considered production-ready.
+-   **testing**: RPMs not yet ready for release; expect bugs.
+-   **development**: RPMs that are bleeding-edge;
+      do not use without instruction from OSG Software and Release team members.
+-   **contrib**: RPMs contributed from outside the OSG S&R team;
+      no official OSG support.
+-   **upcoming release/testing/development**: Similar to release/testing/development but for new versions of software that may require manual action after an update.
 
 OSG's RPM packages rely also on external packages provided by supported OSes and EPEL. You must have the following repositories available and enabled:
 
--   your OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories)
+-   OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories)
 -   EPEL repositories
--   the OSG repositories you'd like to use
+-   OSG repositories
 
-If one of these repositories is missing you may have missing dependencies.
-
-!!! warning
-    We did not test other repositories. If you use packages from other repositories, like `jpackage`, `dag`, or `rpmforge`, you may encounter problems.
-
-Enabling Repositories
----------------------
-
-In [our advice on using yum](install-best-practices) you will learn many tricks and tips on using yum.
-
-To use the packages in a repository without adding special options to the yum command the repository must be enabled.
-
-
-### Install the Yum Repositories required by OSG
-
-The OSG RPMs currently support Red Hat Enterprise Linux 6, 7, and variants.
-
-OSG RPMs are distributed via the OSG yum repositories. Some packages depend on packages distributed via the [EPEL](http://fedoraproject.org/wiki/EPEL) repositories. So both repositories must be enabled.
-
-### Install EPEL
-
--   Install the EPEL repository, if not already present. **Note:** This enables EPEL by default. Choose the right version to match your OS version.
-
-        :::console
-        # EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
-        root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-        # EPEL 7 (For RHEL 7, CentOS 7, and SL 7) 
-        root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-
+If any of these repositories are missing, you may end up with missing dependencies.
 
 !!! warning
-    if you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the OSG repository has a better yum priority than EPEL ([details](install-best-practices#YumPriorities)). Otherwise, you will have strange dependency resolution (*depsolving*) issues.
+    Other repositories, such as `jpackage`, `dag`, or `rpmforge`, are not supported and you may encounter problems if you use them.
 
 
-### Install the Yum priorities package
+Installing and Configuring Repositories
+---------------------------------------
 
-For packages that exist in both OSG and EPEL repositories, it is important to prefer the OSG ones or else OSG software installs may fail. Installing the Yum priorities package enables the repository priority system to work.
+### Install the YUM priorities plugin
 
-1.  Install the Yum priorities package:
+We use YUM priorities to tell YUM to prefer OSG packages over EPEL or OS packages.
+It is important to install and enable the YUM priorities plugin before installing grid software to avoid getting the wrong versions.
+
+1.  Install the YUM priorities package:
 
         :::console
         root@host # yum install yum-plugin-priorities
 
-2.  Ensure that `/etc/yum.conf` has the following line in the `[main]` section (particularly when using ROCKS), thereby enabling Yum plugins, including the priorities one:
-    
+1.  Ensure that `/etc/yum.conf` has the following line in the `[main]` section:
+
         :::file
         plugins=1
 
-!!! note
-    If you do not have a required key you can force the installation using `--nogpgcheck=`; e.g., `yum install --nogpgcheck yum-priorities`.
+### Install the EPEL repositories
 
-### Install OSG Repositories
+OSG software depends on packages distributed via the [EPEL](http://fedoraproject.org/wiki/EPEL) repositories.
+You must install and enable those first.
 
-If you are upgrading from one OSG series to another, remove the old OSG repository definition files and clean the Yum cache:
+-   Install the EPEL repository, if not already present.  Choose the right version to match your OS version.
 
-    :::console
-    root@host # yum clean all 
-    root@host # rpm -e osg-release
-    
-This step ensures that local changes to `*.repo` files will not block the installation of the new OSG repositories. After this step, `*.repo` files that have been changed will exist in `/etc/yum.repos.d/` with the `*.rpmsave` extension. After installing the new OSG repositories (the next step) you may want to apply any changes made in the `*.rpmsave` files to the new `*.repo` files.
+        :::console
+        ## EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
+        root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+        ## EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
+        root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+-   Verify that `/etc/yum.repos.d/epel.repo` exists; the `[epel]` section should contain:
+
+    -   The line `enabled=1`
+
+    -   Either no `priority` setting, or a `priority` setting that is 99 or higher
+
+!!! warning
+    If you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the priority of the EPEL repository is either missing, or 99 or a higher number.
+    The OSG repositories must have a better (numerically lower) priority than the EPEL repositories;
+    you might have dependency resolution ("depsolving") issues otherwise.
+
+
+### Install the OSG Repositories
+
+This document assumes a fresh install.
+For instructions on upgrading from one OSG series to another, see the [release series document](/release/release_series#updating-from-old).
 
 Install the OSG repositories:
 
     :::console
     root@host # rpm -Uvh <URL>
-    
+
 Where `<URL>` is one of the following:
 
-| Series      |              EL6 URL (for RHEL 6, CentOS 6, or SL 6)              |              EL7 URL (for RHEL 7, CentOS 7, or SL 7)              |
-|:------------|:-----------------------------------------------------------------:|:-----------------------------------------------------------------:|
+| Series      |                  EL6 URL (for RHEL 6, CentOS 6, or SL 6)                  |                  EL7 URL (for RHEL 7, CentOS 7, or SL 7)                  |
+|:------------|:-------------------------------------------------------------------------:|:-------------------------------------------------------------------------:|
 | **OSG 3.3** | `https://repo.opensciencegrid.org/osg/3.3/osg-3.3-el6-release-latest.rpm` | `https://repo.opensciencegrid.org/osg/3.3/osg-3.3-el7-release-latest.rpm` |
 | **OSG 3.4** | `https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm` | `https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm` |
-
-Priorities
-----------
-
-!!! note
-    Make sure you installed the Yum priorities plugin, as described above. Not doing so is a common mistake that causes failed installations.
 
 The only OSG repository enabled by default is the release one. If you want to enable another one, such as `osg-testing`, then edit its file (e.g. `/etc/yum.repos.d/osg-testing.repo`) and change the enabled option from 0 to 1:
 
 ``` file
 [osg-testing]
 name=OSG Software for Enterprise Linux 7 - Testing - $basearch
-#baseurl=http://repo.opensciencegrid.org/osg/3.4/el7/testing/$basearch
-mirrorlist=http://repo.opensciencegrid.org/mirror/osg/3.4/el7/testing/$basearch
+#baseurl=https://repo.opensciencegrid.org/osg/3.4/el7/testing/$basearch
+mirrorlist=https://repo.opensciencegrid.org/mirror/osg/3.4/el7/testing/$basearch
 failovermethod=priority
 priority=98
 enabled=%RED%1%ENDCOLOR%
@@ -115,12 +106,34 @@ gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 ```
 
-!!! warning
-    if you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the OSG repository has a better yum priority than EPEL. Otherwise, you will have strange dependency resolution issues.
+
+Repository Mirrors
+------------------
+
+If you run a large site (>20 nodes), you should consider setting up a local mirror for the OSG repositories.
+A local YUM mirror allows you to reduce the amount of external bandwidth used when updating or installing packages.
+
+Add the following to a file in `/etc/cron.d`:
+
+    :::file
+    %RED%RANDOM%ENDCOLOR% * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/ /var/www/html/osg/
+
+Or, to mirror only a single repository:
+
+    :::file
+    %RED%RANDOM%ENDCOLOR% * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/%RED%OSG_RELEASE%ENDCOLOR%/el6/development /var/www/html/osg/%RED%OSG_RELEASE%ENDCOLOR%/el6
+
+
+Replace %RED%RANDOM%ENDCOLOR% with a number between 0 and 59.
+
+Replace %RED%OSG\_RELEASE%ENDCOLOR% with the OSG release you want to use (e.g. '3.3', or '3.4').
+
+On your worker node, you can replace the `baseurl` line of `/etc/yum.repos.d/osg.repo` with the appropriate URL for your mirror.
+
+If you are interested in having your mirror be part of the OSG's default set of mirrors, [please file a GOC ticket](https://ticket.opensciencegrid.org/).
 
 Reference
 ---------
 
--   [Basic use of Yum](../release/yum-basics.md)
--   [Best practices in using Yum](install-best-practices)
+-   [Basic use of Yum](/release/yum-basics.md)
 

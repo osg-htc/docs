@@ -1,14 +1,19 @@
 HTCondor-CE Troubleshooting Guide
 =================================
 
-In this document, you will find a collection of files and commands to help troubleshoot HTCondor-CE along with a list of common issues with suggested troubleshooting steps.
+In this document, you will find a collection of files and commands to help troubleshoot HTCondor-CE along with a list of
+common issues with suggested troubleshooting steps.
 
 Known Issues
 ------------
 
 ### SUBMIT_EXPRS are not applied to jobs on the local HTCondor ###
 
-If you are adding attributes to jobs submitted to your HTCondor pool with `SUBMIT_EXPRS`, these will *not* be applied to jobs that are entering your pool from the HTCondor-CE. To get around this, you will want to add the attributes to your [job routes](job-router-recipes). If the CE is the only entry point for jobs into your pool, you can get rid of `SUBMIT_EXPRS` on your backend. Otherwise, you will have to maintain your list of attributes both in your list of routes and in your `SUBMIT_EXPRS`.
+If you are adding attributes to jobs submitted to your HTCondor pool with `SUBMIT_EXPRS`, these will *not* be applied to
+jobs that are entering your pool from the HTCondor-CE. 
+To get around this, you will want to add the attributes to your [job routes](job-router-recipes). 
+If the CE is the only entry point for jobs into your pool, you can get rid of `SUBMIT_EXPRS` on your backend. Otherwise,
+you will have to maintain your list of attributes both in your list of routes and in your `SUBMIT_EXPRS`.
 
 General Troubleshooting Items
 -----------------------------
@@ -25,13 +30,15 @@ If you just want to see the packages to update, but do not want to perform the u
 
 ### Verify package contents
 
-If the contents of your HTCondor-CE packages have been changed, the CE may cease to function properly. To verify the contents of your packages (ignoring changes to configuration files):
+If the contents of your HTCondor-CE packages have been changed, the CE may cease to function properly. To verify the
+contents of your packages (ignoring changes to configuration files):
 
 ``` console
-user@host $ rpm -q --verify htcondor-ce htcondor-ce-client blahp | awk '$2 != "c" {print $0}'
+user@host $ rpm -q --verify htcondor-ce htcondor-ce-client blahp | grep -v '/var/' | awk '$2 != "c" {print $0}'
 ```
 
-If the verification command returns output, this means that your packages have been changed. To fix this, you can reinstall the packages:
+If the verification command returns output, this means that your packages have been changed. To fix this, you can
+reinstall the packages:
 
 ``` console
 user@host $ yum reinstall htcondor-ce htcondor-ce-client blahp
@@ -42,12 +49,35 @@ user@host $ yum reinstall htcondor-ce htcondor-ce-client blahp
 
 ### Verify clocks are synchronized
 
-Like all GSI-based authentication, HTCondor-CE is sensitive to time skews. Make sure the clock on your CE is synchronized using a utility such as `ntpd`. Additionally, HTCondor itself is sensitive to time skews on the NFS server. If you see empty stdout / err being returned to the submitter, verify there is no NFS server time skew.
+Like all GSI-based authentication, HTCondor-CE is sensitive to time skews. Make sure the clock on your CE is
+synchronized using a utility such as `ntpd`. 
+Additionally, HTCondor itself is sensitive to time skews on the NFS server.
+If you see empty stdout / err being returned to the submitter, verify there is no NFS server time skew.
+
+### Verify host cerificates and CRLs are valid
+
+An expired host certificate or CRLs will cause various issues with GSI authentication. 
+Verify that your host certificate is valid by running:
+
+```console 
+root@host # openssl x509 -in /etc/grid-security/hostcert.pem -noout -dates
+```
+
+Likewise, run the `fetch-crl` script to update your CRLs:
+
+```console
+root@host # fetch-crl
+```
+
+If updating CRLs fix your issues, make sure that the `fetch-crl-cron` and
+`fetch-crl-boot` services are enabled and running.
+
 
 HTCondor-CE Troubleshooting Items
 ---------------------------------
 
-This section contains common issues you may encounter using HTCondor-CE and next actions to take when you do. Before troubleshooting, we recommend increasing the log level:
+This section contains common issues you may encounter using HTCondor-CE and next actions to take when you do. 
+Before troubleshooting, we recommend increasing the log level:
 
 1.  Write the following into `/etc/condor-ce/config.d/99-local.conf` to increase the log level for all daemons:
 
@@ -64,7 +94,9 @@ This section contains common issues you may encounter using HTCondor-CE and next
 
 ### Daemons fail to start
 
-If there are errors in your configuration of HTCondor-CE, this may cause some of its required daemons to fail to startup. Check the following subsections in order:
+If there are errors in your configuration of HTCondor-CE, this may cause some of its required daemons to fail to
+startup. 
+Check the following subsections in order:
 
 **Symptoms**
 
@@ -105,7 +137,9 @@ Daemon startup failure may manifest in many ways, the following are few symptoms
 
 ### Jobs fail to submit to the CE
 
-If a user is having issues submitting jobs to the CE and you've ruled out general connectivity or firewalls as the culprit, then you may have encountered an authentication or authorization issue. You may see error messages like the following in your [SchedLog](#schedlog):
+If a user is having issues submitting jobs to the CE and you've ruled out general connectivity or firewalls as the
+culprit, then you may have encountered an authentication or authorization issue. 
+You may see error messages like the following in your [SchedLog](#schedlog):
 
 ```text
 08/30/16 16:52:56 DC_AUTHENTICATE: required authentication of 72.33.0.189 failed: AUTHENTICATE:1003:Failed to authenticate with any method|AUTHENTICATE:1004:Failed to authenticate using GSI|GSI:5002:Failed to authenticate because the remote (client) side was not able to acquire its credentials.|AUTHENTICATE:1004:Failed to authenticate using FS|FS:1004:Unable to lstat(/tmp/FS_XXXZpUlYa)
@@ -121,11 +155,15 @@ If a user is having issues submitting jobs to the CE and you've ruled out genera
 
 ### Jobs stay idle on the CE
 
-Check the following subsections in order, but note that jobs may take several minutes or longer to run if the CE is busy.
+Check the following subsections in order, but note that jobs may take several minutes or longer to run if the CE is
+busy.
 
 #### Idle jobs on CE: Is the job router handling the incoming job?
 
-Jobs on the CE will be put on hold if they do not match any job routes after 30 minutes, but you can check a few things if you suspect that the jobs are not being matched. Check if the JobRouter sees a job before that by looking at the [job router log](#jobrouterlog) and looking for the text `src=<JOB-ID>…claimed job`.
+Jobs on the CE will be put on hold if they do not match any job routes after 30 minutes, but you can check a few things
+if you suspect that the jobs are not being matched. 
+Check if the JobRouter sees a job before that by looking at the [job router log](#jobrouterlog) and looking for the text
+`src=<JOB-ID>…claimed job`.
 
 **Next actions**
 
@@ -135,7 +173,8 @@ Use [condor\_ce\_job\_router\_info](#condor_ce_job_router_info) to see why your 
 
 ##### For HTCondor batch systems
 
-HTCondor-CE submits jobs directly to an HTCondor batch system via the JobRouter, so any issues with the CE/local batch system interaction will appear in the [JobRouterLog](#jobrouterlog).
+HTCondor-CE submits jobs directly to an HTCondor batch system via the JobRouter, so any issues with the CE/local batch
+system interaction will appear in the [JobRouterLog](#jobrouterlog).
 
 **Next actions**
 
@@ -146,7 +185,9 @@ HTCondor-CE submits jobs directly to an HTCondor batch system via the JobRouter,
 
 ##### For non-HTCondor batch systems
 
-HTCondor-CE submits jobs to a non-HTCondor batch system via the Gridmanager, so any issues with the CE/local batch system interaction will appear in the [GridmanagerLog](#gridmanagerlog). Look for `gm state change…` lines to figure out where the issures are occuring.
+HTCondor-CE submits jobs to a non-HTCondor batch system via the Gridmanager, so any issues with the CE/local batch
+system interaction will appear in the [GridmanagerLog](#gridmanagerlog). 
+Look for `gm state change…` lines to figure out where the issures are occuring.
 
 **Next actions**
 
@@ -162,7 +203,10 @@ HTCondor-CE submits jobs to a non-HTCondor batch system via the Gridmanager, so 
 
 #### Idle jobs on CE: Make sure the underlying batch system can run jobs
 
-HTCondor-CE communicates directly with an HTCondor batch system schedd, so if jobs are not running, examine the [SchedLog](#schedlog) and diagnose the problem from there. For other batch systems, the BLAHP is used to submit jobs using your batch system’s job submission binaries, whose location is specified in `/etc/blah.config`.
+HTCondor-CE communicates directly with an HTCondor batch system schedd, so if jobs are not running, examine the
+[SchedLog](#schedlog) and diagnose the problem from there. 
+For other batch systems, the BLAHP is used to submit jobs using your batch system’s job submission binaries, whose
+location is specified in `/etc/blah.config`.
 
 **Procedure**
 
@@ -173,11 +217,14 @@ HTCondor-CE communicates directly with an HTCondor batch system schedd, so if jo
 
 **Next actions**
 
-If the underlying batch system does not run a simple manual job, it will probably not run a job coming from HTCondor-CE. Once you can run simple manual jobs on your batch system, try submitting to the HTCondor-CE again.
+If the underlying batch system does not run a simple manual job, it will probably not run a job coming from HTCondor-CE.
+Once you can run simple manual jobs on your batch system, try submitting to the HTCondor-CE again.
 
 #### Idle jobs on CE: Verify ability to change permissions on key files
 
-HTCondor-CE needs the ability to write and chown files in its `spool` directory and if it cannot, jobs will not run at all. Spool permission errors can appear in the [SchedLog](#schedlog) and the [JobRouterLog](#jobrouterlog).
+HTCondor-CE needs the ability to write and chown files in its `spool` directory and if it cannot, jobs will not run at
+all. 
+Spool permission errors can appear in the [SchedLog](#schedlog) and the [JobRouterLog](#jobrouterlog).
 
 **Symptoms**
 
@@ -192,7 +239,10 @@ HTCondor-CE needs the ability to write and chown files in its `spool` directory 
 
 ### Jobs stay idle on a remote host submitting to the CE
 
-If you are submitting your job from a separate submit host to the CE, it stays idle in the queue forever, and you do not see a resultant job in the CE's queue, this means that your job cannot contact the CE for submission or it is not authorized to run there. Note that jobs may take several minutes or longer if the CE is busy.
+If you are submitting your job from a separate submit host to the CE, it stays idle in the queue forever, and you do not
+see a resultant job in the CE's queue, this means that your job cannot contact the CE for submission or it is not
+authorized to run there. 
+Note that jobs may take several minutes or longer if the CE is busy.
 
 #### Remote idle jobs: Can you contact the CE?
 
@@ -215,7 +265,9 @@ ERROR: couldn't locate condorce.example.com!
 
 #### Remote idle jobs: Are you authorized to run jobs on the CE?
 
-The CE will only accept jobs from users that authenticate via LCMAPS, grid mapfile, or GUMS. You can use [condor\_ce\_ping](#condor_ce_ping) to check if you are authorized and what user your proxy is being mapped to.
+The CE will only accept jobs from users that authenticate via LCMAPS, grid mapfile, or GUMS. 
+You can use [condor\_ce\_ping](#condor_ce_ping) to check if you are authorized and what user your proxy is being mapped
+to.
 
 **Symptoms**
 
@@ -252,7 +304,8 @@ HoldReason = "CE job in status 5 put on hold by SYSTEM_PERIODIC_HOLD due to non-
 
 #### Held jobs: Missing/expired user proxy
 
-HTCondor-CE requires a valid user proxy for each job that is submitted. You can check the status of your proxy with the following
+HTCondor-CE requires a valid user proxy for each job that is submitted. 
+You can check the status of your proxy with the following
 
 ``` console
 user@host $ voms-proxy-info -all
@@ -264,7 +317,10 @@ Ensure that the owner of the job generates their proxy with `voms-proxy-init`.
 
 #### Held jobs: Invalid job universe
 
-The HTCondor-CE only accepts jobs that have `universe` in their submit files set to `vanilla`, `standard`, `local`, or `scheduler`. These universes also have corresponding integer values that can be found in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/12_Appendix_A.html#104736).
+The HTCondor-CE only accepts jobs that have `universe` in their submit files set to `vanilla`, `standard`, `local`, or
+`scheduler`. 
+These universes also have corresponding integer values that can be found in the [HTCondor
+manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/12_Appendix_A.html#104736).
 
 **Next actions**
 
@@ -287,7 +343,9 @@ Use [condor\_ce\_job\_router\_info](#condor_ce_job_router_info) to see why your 
 
 ### Identifying the corresponding job ID on the local batch system
 
-When troubleshooting interactions between your CE and your local batch system, you will need to associate the CE job ID and the resultant job ID on the batch system. The methods for finding the resultant job ID differs between batch systems.
+When troubleshooting interactions between your CE and your local batch system, you will need to associate the CE job ID
+and the resultant job ID on the batch system. 
+The methods for finding the resultant job ID differs between batch systems.
 
 #### HTCondor batch systems
 
@@ -307,7 +365,8 @@ When troubleshooting interactions between your CE and your local batch system, y
 
 #### Non-HTCondor batch systems
 
-When HTCondor-CE records the corresponding batch system job ID, it is written in the form `<BATCH-SYSTEM>/<DATE>/<JOB ID>`:
+When HTCondor-CE records the corresponding batch system job ID, it is written in the form `<BATCH-SYSTEM>/<DATE>/<JOB
+ID>`:
 
 ```
 lsf/20141206/482046
@@ -322,7 +381,8 @@ lsf/20141206/482046
 
 ### Jobs removed from the local HTCondor pool become resubmitted (HTCondor batch systems only)
 
-By design, HTCondor-CE will resubmit jobs that have been removed from the underlying HTCondor pool. Therefore, to remove misbehaving jobs, they will need to be removed on the CE level following these steps:
+By design, HTCondor-CE will resubmit jobs that have been removed from the underlying HTCondor pool. 
+Therefore, to remove misbehaving jobs, they will need to be removed on the CE level following these steps:
 
 1.  Identify the misbehaving job ID in your batch system queue
 2.  Find the job's corresponding CE job ID:
@@ -334,7 +394,8 @@ By design, HTCondor-CE will resubmit jobs that have been removed from the underl
 
 ### Missing HTCondor tools
 
-Most of the HTCondor-CE tools are just wrappers around existing HTCondor tools that load the CE-specific config. If you are trying to use HTCondor-CE tools and you see the following error:
+Most of the HTCondor-CE tools are just wrappers around existing HTCondor tools that load the CE-specific config. 
+If you are trying to use HTCondor-CE tools and you see the following error:
 
 ``` console
 user@host $ condor_ce_job_router_info
@@ -352,7 +413,14 @@ This means that the `condor_job_router_info` (note this is not the CE version), 
 HTCondor-CE Troubleshooting Tools
 ---------------------------------
 
-HTCondor-CE has its own separate set of of the HTCondor tools with **ce** in the name (i.e., `condor_ce_submit` vs `condor_submit`). Some of the the commands are only for the CE (e.g., `condor_ce_run` and `condor_ce_trace`) but many of them are just HTCondor commands configured to interact with the CE (e.g., `condor_ce_q`, `condor_ce_status`). It is important to differentiate the two: `condor_ce_config_val` will provide configuration values for your HTCondor-CE while `condor_config_val` will provide configuration values for your HTCondor batch system. If you are not running an HTCondor batch system, the non-CE commands will return errors.
+HTCondor-CE has its own separate set of of the HTCondor tools with **ce** in the name (i.e., `condor_ce_submit` vs
+`condor_submit`). 
+Some of the the commands are only for the CE (e.g., `condor_ce_run` and `condor_ce_trace`) but many of them are just
+HTCondor commands configured to interact with the CE (e.g., `condor_ce_q`, `condor_ce_status`). 
+It is important to differentiate the two: `condor_ce_config_val` will provide configuration values for your HTCondor-CE
+while
+`condor_config_val` will provide configuration values for your HTCondor batch system. 
+If you are not running an HTCondor batch system, the non-CE commands will return errors.
 
 ### condor_ce_trace
 
@@ -367,7 +435,9 @@ HTCondor-CE has its own separate set of of the HTCondor tools with **ce** in the
 user@host $ condor_ce_trace condorce.example.com
 ```
 
-Replacing the `condorce.example.com` with the hostname of the CE. If you are familiar with the output of condor commands, the command also takes a `--debug` option that displays verbose condor output.
+Replacing the `condorce.example.com` with the hostname of the CE. 
+If you are familiar with the output of condor commands, the command also takes a `--debug` option that displays verbose
+condor output.
 
 #### Troubleshooting
 
@@ -379,7 +449,9 @@ Replacing the `condorce.example.com` with the hostname of the CE. If you are fam
 
 #### Usage
 
-Similar to `globus-job-run`, `condor_ce_run` is a tool that submits a simple job to your CE, so it is useful for quickly submitting jobs through your CE. To submit a job to the CE and run the `env` command on the remote batch system:
+Similar to `globus-job-run`, `condor_ce_run` is a tool that submits a simple job to your CE, so it is useful for quickly
+submitting jobs through your CE. 
+To submit a job to the CE and run the `env` command on the remote batch system:
 
 !!! note
     You must have generated a proxy (e.g., `voms-proxy-init`) and your DN must be added to your [chosen authentication method](install-htcondor-ce#configuring-authentication).
@@ -388,13 +460,18 @@ Similar to `globus-job-run`, `condor_ce_run` is a tool that submits a simple job
 user@host $ condor_ce_run -r condorce.example.com:9619 /bin/env
 ```
 
-Replacing the `condorce.example.com` with the hostname of the CE. If you are troubleshooting an HTCondor-CE that you do not have a login for and the CE accepts local universe jobs, you can run commands locally on the CE with `condor_ce_run` with the `-l` option. The following example outputs the JobRouterLog of the CE in question:
+Replacing the `condorce.example.com` with the hostname of the CE. 
+If you are troubleshooting an HTCondor-CE that you do not have a login for and the CE accepts local universe jobs, you
+can run commands locally on the CE with `condor_ce_run` with the `-l` option. 
+The following example outputs the JobRouterLog of the CE in question:
 
 ``` console
 user@host $ condor_ce_run -lr condorce.example.com:9619 cat /var/log/condor-ce/JobRouterLog
 ```
 
-Replacing the `condorce.example.com` text with the hostname of the CE. To disable this feature on your CE, consult [this](install-htcondor-ce#limiting-or-disabling-locally-running-jobs-on-the-ce) section of the install documentation.
+Replacing the `condorce.example.com` text with the hostname of the CE. 
+To disable this feature on your CE, consult
+[this](install-htcondor-ce#limiting-or-disabling-locally-running-jobs-on-the-ce) section of the install documentation.
 
 #### Troubleshooting
 
@@ -409,13 +486,15 @@ See the [submitting to HTCondor-CE](submit-htcondor-ce) document for details.
 
 #### Usage
 
-Use the following `condor_ce_ping` command to test your ability to submit jobs to an HTCondor-CE, replacing `condorce.example.com` with the hostname of your CE:
+Use the following `condor_ce_ping` command to test your ability to submit jobs to an HTCondor-CE, replacing
+`condorce.example.com` with the hostname of your CE:
 
 ``` console
 user@host $ condor_ce_ping -verbose -name condorce.example.com -pool condorce.example.com:9619 WRITE
 ```
 
-The following shows successful output where I am able to submit jobs (`Authorized: TRUE`) as the glow user (`Remote Mapping: glow@users.opensciencegrid.org`):
+The following shows successful output where I am able to submit jobs (`Authorized: TRUE`) as the glow user (`Remote
+Mapping: glow@users.opensciencegrid.org`):
 
 ``` console
 Remote Version:              $CondorVersion: 8.0.7 Sep 24 2014 $
@@ -528,13 +607,16 @@ user@host $ condor_ce_history -name condorce.example.com -pool condorce.example.
 
 #### Usage
 
-Use the `condor_ce_job_router_info` command to help troubleshoot your routes and how jobs will match to them. To see all of your routes (the output is long because it combines your routes with the [JOB\_ROUTER\_DEFAULTS](job-router-recipes#job_router_defaults) configuration variable):
+Use the `condor_ce_job_router_info` command to help troubleshoot your routes and how jobs will match to them. 
+To see all of your routes (the output is long because it combines your routes with the
+[JOB\_ROUTER\_DEFAULTS](job-router-recipes#job_router_defaults) configuration variable):
 
 ``` console
 root@host # condor_ce_job_router_info -config
 ```
 
-To see how the job router is handling a job that is currently in the CE’s queue, analyze the output of `condor_ce_q` (replace the `<JOB-ID>` with the job ID that you are interested in):
+To see how the job router is handling a job that is currently in the CE’s queue, analyze the output of `condor_ce_q`
+(replace the `<JOB-ID>` with the job ID that you are interested in):
 
 ``` console
 root@host # condor_ce_q -l <JOB-ID> | condor_ce_job_router_info -match-jobs -ignore-prior-routing -jobads -
@@ -591,13 +673,15 @@ root@host # condor_ce_job_router_info -match-jobs -ignore-prior-routing -jobads 
 
 #### Usage
 
-If you have multiple job routes and many jobs, `condor_ce_router_q` is a useful tool to see how jobs are being routed and their statuses:
+If you have multiple job routes and many jobs, `condor_ce_router_q` is a useful tool to see how jobs are being routed
+and their statuses:
 
 ``` console
 user@host $ condor_ce_router_q
 ```
 
-`condor_ce_router_q` takes the same options as `condor_router_q` and `condor_q` and is documented in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/condor_router_q.html)
+`condor_ce_router_q` takes the same options as `condor_router_q` and `condor_q` and is documented in the [HTCondor
+manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/condor_router_q.html)
 
 
 ### condor_ce_status
@@ -632,7 +716,9 @@ If you do not see these daemons in the output of `condor_ce_status`, check the [
 
 #### Usage
 
-To see the value of configuration variables and where they are set, use `condor_ce_config_val`. Primarily, This tool is used with the other troubleshooting tools to make sure your configuration is set properly. To see the value of a single variable and where it is set:
+To see the value of configuration variables and where they are set, use `condor_ce_config_val`. 
+Primarily, This tool is used with the other troubleshooting tools to make sure your configuration is set properly. 
+To see the value of a single variable and where it is set:
 
 ``` console
 user@host $ condor_ce_config_val -v <CONFIGURATION-VARIABLE>
@@ -644,7 +730,8 @@ To see a list of all configuration variables and their values:
 user@host $ condor_ce_config_val -dump
 ```
 
-To see a list of all the files that are used to create your configuration and the order that they are parsed, use the following command:
+To see a list of all the files that are used to create your configuration and the order that they are parsed, use the
+following command:
 
 ``` console
 user@host $ condor_ce_config_val -config
@@ -675,7 +762,8 @@ root@host # condor_ce_off
 root@host # condor_ce_restart
 ```
 
-The HTCondor-CE service uses the previous commands with default values. Using these commands directly gives you more fine-grained control over the behavior of HTCondor-CE's on/off/restart:
+The HTCondor-CE service uses the previous commands with default values. 
+Using these commands directly gives you more fine-grained control over the behavior of HTCondor-CE's on/off/restart:
 
 -   If you have installed a new version of HTCondor-CE and want to restart the CE under the new version, run the following command:
 
@@ -699,7 +787,8 @@ The following files are located on the CE host.
 
 ### MasterLog
 
-The HTCondor-CE master log tracks status of all of the other HTCondor daemons and thus contains valuable information if they fail to start.
+The HTCondor-CE master log tracks status of all of the other HTCondor daemons and thus contains valuable information if
+they fail to start.
 
 - Location: `/var/log/condor-ce/MasterLog`
 - Key contents: Start-up, shut-down, and communication with other HTCondor daemons
@@ -715,7 +804,8 @@ The HTCondor-CE master log tracks status of all of the other HTCondor daemons an
 
 #### What to look for: ####
 
-Successful daemon start-up. The following line shows that the Collector daemon started successfully:
+Successful daemon start-up. 
+The following line shows that the Collector daemon started successfully:
 
 ```
 10/07/14 14:20:27 Started DaemonCore process "/usr/sbin/condor_collector -f -port 9619", pid and pgroup = 7318
@@ -723,7 +813,8 @@ Successful daemon start-up. The following line shows that the Collector daemon s
 
 ### SchedLog
 
-The HTCondor-CE schedd log contains information on all jobs that are submitted to the CE. It contains valuable information when trying to troubleshoot authentication issues.
+The HTCondor-CE schedd log contains information on all jobs that are submitted to the CE. 
+It contains valuable information when trying to troubleshoot authentication issues.
 
 - Location: `/var/log/condor-ce/SchedLog`
 - Key contents:
@@ -796,7 +887,8 @@ The HTCondor-CE schedd log contains information on all jobs that are submitted t
 
 ### JobRouterLog
 
-The HTCondor-CE job router log produced by the job router itself and thus contains valuable information when trying to troubleshoot issues with job routing.
+The HTCondor-CE job router log produced by the job router itself and thus contains valuable information when trying to
+troubleshoot issues with job routing.
 
 - Location: `/var/log/condor-ce/JobRouterLog`
 - Key contents:
@@ -851,7 +943,10 @@ The HTCondor-CE job router log produced by the job router itself and thus contai
 
 ### GridmanagerLog
 
-The HTCondor-CE grid manager log tracks the submission and status of jobs on non-HTCondor batch systems. It contains valuable information when trying to troubleshoot jobs that have been routed but failed to complete. Details on how to read the Gridmanager log can be found on the [HTCondor Wiki](https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=GridmanagerLog).
+The HTCondor-CE grid manager log tracks the submission and status of jobs on non-HTCondor batch systems. 
+It contains valuable information when trying to troubleshoot jobs that have been routed but failed to complete. 
+Details on how to read the Gridmanager log can be found on the [HTCondor
+Wiki](https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=GridmanagerLog).
 
 - Location: `/var/log/condor-ce/GridmanagerLog.<JOB-OWNER>`
 - Key contents:
@@ -905,7 +1000,10 @@ The HTCondor-CE grid manager log tracks the submission and status of jobs on non
 
 ### SharedPortLog
 
-The HTCondor-CE shared port log keeps track of all connections to all of the HTCondor-CE daemons other than the collector. This log is a good place to check if experiencing connectivity issues with HTCondor-CE. More information can be found [here](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_9Networking_includes.html#SECTION00492000000000000000).
+The HTCondor-CE shared port log keeps track of all connections to all of the HTCondor-CE daemons other than the
+collector. 
+This log is a good place to check if experiencing connectivity issues with HTCondor-CE. More information can be found
+[here](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_9Networking_includes.html#SECTION00492000000000000000).
 
 - Location: `/var/log/condor-ce/SharedPortLog`
 - Key contents: Every attempt to connect to HTCondor-CE (except collector queries)
@@ -921,7 +1019,9 @@ The HTCondor-CE shared port log keeps track of all connections to all of the HTC
 
 ### Messages log
 
-The messages file can include output from lcmaps, which handles mapping of X.509 proxies to Unix usernames. If there are issues with the [authentication setup](install-htcondor-ce#configuring-authentication), the errors may appear here.
+The messages file can include output from lcmaps, which handles mapping of X.509 proxies to Unix usernames. 
+If there are issues with the [authentication setup](install-htcondor-ce#configuring-authentication), the errors may
+appear here.
 
 - Location: `/var/log/messages`
 - Key contents: User authentication
@@ -936,20 +1036,23 @@ Oct 6 10:35:32 osgserv06 htondor-ce-llgt[12147]: Callout to "LCMAPS" returned lo
 
 ### BLAHP Configuration File
 
-HTCondor-CE uses the BLAHP to submit jobs to your local non-HTCondor batch system using your batch system's client tools.
+HTCondor-CE uses the BLAHP to submit jobs to your local non-HTCondor batch system using your batch system's client
+tools.
 
 - Location: `/etc/blah.config`
 - Key contents:
     -   Locations of the batch system's client binaries and logs
     -   Location to save files that are submitted to the local batch system
 
-You can also tell the BLAHP to save the files that are being submitted to the local batch system to `<DIR-NAME>` by adding the following line:
+You can also tell the BLAHP to save the files that are being submitted to the local batch system to `<DIR-NAME>` by
+adding the following line:
 
 ```
 blah_debug_save_submit_info=<DIR_NAME>
 ```
 
-The BLAHP will then create a directory with the format `bl_*` for each submission to the local jobmanager with the submit file and proxy used.
+The BLAHP will then create a directory with the format `bl_*` for each submission to the local jobmanager with the
+submit file and proxy used.
 
 !!! note
     Whitespace is important so do not put any spaces around the = sign. In addition, the directory must be created and HTCondor-CE should have sufficient permissions to create directories within `<DIR_NAME>`.

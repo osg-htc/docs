@@ -1,5 +1,5 @@
-
-# Install Singularity
+Install Singularity
+===================
 
 [Singularity](http://singularity.lbl.gov) is a tool that creates
 docker-like process containers but without giving extra privileges to
@@ -22,11 +22,11 @@ Beginning with the kernel released with RHEL 7.4, there is a new
 [technology preview feature](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/7.4_Release_Notes/index.html#technology_previews_kernel)
 to allow unprivileged bind mounts in user namespaces, which allows
 singularity to run as an unprivileged user.  The OSG has installed
-singularity in [cvmfs](install-cvmfs), so  you can avoid installing
+singularity in [OASIS](/worker-node/install-cvmfs), so you can avoid installing
 singularity at all.  The minimum version of the kernel (3.10.0-693) is
 available as at least a security update for all RHEL7-based releases.
 
-!!! danger "Kernel vs. Userspace security"
+!!! danger "Kernel vs. Userspace Security"
     Enabling unprivileged user namespaces increases the risk to the
     kernel. However, the kernel is more widely reviewed than Singularity and
     the additional capability given to users is more limited.
@@ -35,11 +35,6 @@ available as at least a security update for all RHEL7-based releases.
 
 The document is intended for system administrators who wish to either
 install singularity or enable it to be run as an unprivileged user.
-
-!!! note "Applicable versions"
-    The applicable software versions for this document are OSG version 3.4.2 or later.
-    The version of singularity installed should be 2.3.1 or later.
-
 
 Before Starting
 ---------------
@@ -50,81 +45,28 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Obtain root access to the host
 - If you're installing singularity, prepare the [required Yum repositories](../common/yum)
 
-# Enabling Unprivileged Mode for Singularity
+!!! note "Validation Steps"
+    The validation steps below require CVMFS to be installed.  Follow the steps on the [CVMFS Installation](/worker-node/install-cvmfs) page.
 
-!!! note
-    As of December 2017, no VO in the OSG is ready to use non-setuid
-    Singularity in production.  Only testing sites will need to follow
-    these instructions; contact the VOs you support for more
-    information.
+Choosing Privileged vs Unprivileged Singularity
+-----------------------------------------------
 
-    Most sites will want to follow the privileged RPM install instructions
-    until there is wider VO support.
+There are two separate sets of instructions on this page:
 
-If the operating system is an EL 7 variant and has been updated to the EL
-7.4 kernel (3.10.0-693 or greater), you can skip
-installation altogether and instead do these steps to enable
-singularity to be run as an unprivileged user via CVMFS:
+- [Installing privileged singularity](#privileged-singularity) via RPM
+- [Enabling unprivileged singularity](#unprivileged-singularity) via OASIS
 
-1. Set the `namespace.unpriv_enable=1` boot option.  The easiest way
-    to do this is to add it in `/etc/sysconfig/grub` to the end of the
-    `GRUB_CMDLINE_LINUX` variable, before the ending double-quote.
-2. Update the grub configuration:
+As of February 2018, no VO in the OSG is ready to use unprivileged, non-setuid Singularity in production.
+Only testing sites will need to follow these instructions; contact the VOs you support for more information.
 
-        :::console
-        root@host # grub2-mkconfig -o /boot/grub2/grub.cfg
+Most sites will want to follow the privileged RPM install instructions until there is wider VO support.
 
-3. Enable user namespaces via `sysctl`:
+Privileged Singularity
+----------------------
 
-        :::console
-        root@host # echo "user.max_user_namespaces = 15000" \
-            > /etc/sysctl.d/90-max_user_namespaces.conf
-            
-4. Disable network namespaces:
+The instructions in this section are for installing singularity with setuid-root executables.
 
-        :::console
-        root@host # echo "user.max_net_namespaces = 0" \
-            > /etc/sysctl.d/90-max_net_namespaces.conf
-
-    OSG VOs do not need network namespaces with singularity, and
-    disabling them reduces the risk profile of enabling user
-    namespaces.  Network namespaces are, however, utilized by other
-    container systems, such as Docker.  Disabling network namespaces
-    may break other container solutions, or limit their capabilities
-    (such as requiring the `--net=host` option in Docker).
-
-    !!! danger "Danger: current public exploit"
-        As of December 19, 2018 there is no patch from Redhat for a
-        [public exploit](https://access.redhat.com/security/cve/CVE-2017-16939)
-        of a vulnerability due to the combination of network namespaces
-        and user namespaces.  This vulnerability can crash a kernel and
-        potentially lead to privilege escalation.  Do not leave network
-        namespaces enabled at the same time as unprivileged user
-        namespaces until this is resolved.
-
-4. Reboot
-5. If you haven't yet installed [cvmfs](install-cvmfs), do so.
-
-
-## Validating singularity
-
-Once you have the host configured properly, log in as an ordinary
-unprivileged user and verify that singularity works:
-
-```console
-user@host $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity \
-                exec -c --ipc --pid -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
-                ps -ef
-WARNING: Container does not have an exec helper script, calling 'ps' directly
-UID        PID  PPID  C STIME TTY          TIME CMD
-user         1     0  0 21:34 ?        00:00:00 ps -ef
-```
-
-!!! tip
-    The remainder of this document pertains to the privileged
-    (`setuid`) mode of singularity.
-
-# Installing Singularity as Privileged
+### Installing Singularity via RPM ###
 
 To install singularity as `setuid`, make sure that your host is up to date before installing the required packages:
 
@@ -155,12 +97,12 @@ To install singularity as `setuid`, make sure that your host is up to date befor
     installing only this smaller package reduces risk of potential security
     exploits.
 
-## Configuring singularity
+### Configuring singularity ###
 
 There are no required changes to the default configuration.  If you want
 to see what options are available, see `/etc/singularity/singularity.conf`.
 
-### Limiting Image Types
+#### Limiting image types ####
 
 Images based on loopback devices carry an inherently higher exposure to
 unknown kernel exploits compared to directory-based images distributed via
@@ -179,7 +121,7 @@ While reasonable for some sites, this is not required as there are currently
 no public kernel exploits for this issue; any exploits are patched by
 RedHat when they are discovered.
 
-!!! warning "Warning: No Free Lunches"
+!!! warning
     If you modify `/etc/singularity/singularity.conf`, carefully test any
     upgrade procedures.
     RPM will not automatically merge your changes with new upstream
@@ -190,7 +132,7 @@ RedHat when they are discovered.
     Look for `.rpmnew` files after upgrades and merge in any changes to the
     defaults.
 
-## Validating singularity
+### Validating singularity ###
 
 After singularity is installed, as an ordinary user run the following
 command to verify it:
@@ -203,10 +145,79 @@ UID        PID  PPID  C STIME TTY          TIME CMD
 user         1     0  0 21:34 ?        00:00:00 ps -ef
 ```
 
-## Starting and Stopping services
+Unprivileged Singularity
+------------------------
+
+The instructions in this section are for enabling singularity with non-setuid executables, which is available in OASIS,
+the OSG Software [CVMFS distribution](/worker-node/install-cvmfs).
+
+### Enabling Singularity via OASIS ###
+
+If the operating system is an EL 7 variant and has been updated to the EL
+7.4 kernel (3.10.0-693 or greater), you can skip
+installation altogether and instead do these steps to enable
+singularity to be run as an unprivileged user via CVMFS:
+
+1. Set the `namespace.unpriv_enable=1` boot option.  The easiest way
+    to do this is to add it in `/etc/sysconfig/grub` to the end of the
+    `GRUB_CMDLINE_LINUX` variable, before the ending double-quote.
+2. Update the grub configuration:
+
+        :::console
+        root@host # grub2-mkconfig -o /boot/grub2/grub.cfg
+
+3. Enable user namespaces via `sysctl`:
+
+        :::console
+        root@host # echo "user.max_user_namespaces = 15000" \
+            > /etc/sysctl.d/90-max_user_namespaces.conf
+
+4. Disable network namespaces:
+
+        :::console
+        root@host # echo "user.max_net_namespaces = 0" \
+            > /etc/sysctl.d/90-max_net_namespaces.conf
+
+    OSG VOs do not need network namespaces with singularity, and
+    disabling them reduces the risk profile of enabling user
+    namespaces.  Network namespaces are, however, utilized by other
+    container systems, such as Docker.  Disabling network namespaces
+    may break other container solutions, or limit their capabilities
+    (such as requiring the `--net=host` option in Docker).
+
+    !!! danger "Current Public Exploit"
+        As of December 19, 2017 there is no patch from Redhat for a
+        [public exploit](https://access.redhat.com/security/cve/CVE-2017-16939)
+        of a vulnerability due to the combination of network namespaces
+        and user namespaces.  This vulnerability can crash a kernel and
+        potentially lead to privilege escalation.  Do not leave network
+        namespaces enabled at the same time as unprivileged user
+        namespaces until this is resolved.
+
+4. Reboot
+5. If you haven't yet installed [cvmfs](install-cvmfs), do so.
+
+
+### Validating singularity ###
+
+Once you have the host configured properly, log in as an ordinary
+unprivileged user and verify that singularity works:
+
+```console
+user@host $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity \
+                exec -c --ipc --pid -H $HOME:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
+                ps -ef
+WARNING: Container does not have an exec helper script, calling 'ps' directly
+UID        PID  PPID  C STIME TTY          TIME CMD
+user         1     0  0 21:34 ?        00:00:00 ps -ef
+```
+
+Starting and Stopping Services
+------------------------------
 
 singularity has no services to start or stop.
 
-# References
+References
+----------
 
 - [Additional guidance for CMS sites](https://twiki.cern.ch/twiki/bin/view/Main/CmsSingularity)

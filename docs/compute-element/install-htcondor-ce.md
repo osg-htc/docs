@@ -12,7 +12,7 @@ Before starting the installation process, consider the following points (consult
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `condor` (UID 4716) and `gratia` (UID 42401)
 -   **Service certificate:** The HTCondor-CE service uses a host certificate at `/etc/grid-security/hostcert.pem` and an accompanying key at `/etc/grid-security/hostkey.pem`
--   **Network ports:** The pilot factories must be able to contact your HTCondor-CE service on ports 9619 and 9620 for condor versions < 8.3.2 (TCP)
+-   **Network ports:** The pilot factories must be able to contact your HTCondor-CE service on port 9619 (TCP)
 -   **Host choice:** HTCondor-CE should be installed on a host that already has the ability to submit jobs into your local cluster
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
@@ -129,13 +129,7 @@ In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution
 
 #### Authentication with the LCMAPS VOMS plugin
 
-To configure your CE to use the LCMAPS VOMS plugin:
-
-1. If you are using OSG 3.3, add the following line to `/etc/sysconfig/condor-ce`:
-
-        export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1
-
-2. Follow the instructions in [the LCMAPS VOMS plugin installation and configuration document](../security/lcmaps-voms-authentication) to prepare the LCMAPS VOMS plugin
+To configure your CE to use the LCMAPS VOMS plugin, follow the instructions in [the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin) to prepare the LCMAPS VOMS plugin.
 
 !!! note
     If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the `condor_mapfile`. If this is not the desired behavior, set `GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
@@ -343,7 +337,7 @@ In addition to the HTCondor-CE job gateway service itself, there are a number of
 
 | Software          | Service name                          | Notes                                                                                  |
 |:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca/#startstop-fetch-crl-a-quick-guide) for more info |
+| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 | Gratia            | `gratia-probes-cron`                  | Accounting software                                                                    |
 | Your batch system | `condor` or `pbs_server` or …         |                                                                                        |
 | HTCondor-CE       | `condor-ce`                           |                                                                                        |

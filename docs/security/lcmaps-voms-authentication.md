@@ -1,7 +1,7 @@
 Installing and Maintaining the LCMAPS VOMS Plugin
 =================================================
 
-LCMAPS is a software library used on [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../data/gridftp), or [XRootD](../data/install-xrootd) hosts for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., `/cms/Role=production/Capability=NULL`. Starting in OSG 3.4, the LCMAPS VOMS plugin will replace GUMS and edg-mkgridmap as the authentication method at OSG sites.
+LCMAPS is a software library used on [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../data/gridftp), and [XRootD](../data/install-xrootd) hosts for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., `/cms/Role=production/Capability=NULL`. Starting in OSG 3.4, the LCMAPS VOMS plugin will replace GUMS and edg-mkgridmap as the authentication method at OSG sites.
 
 The OSG provides a default set of mappings from VOMS attributes to Unix accounts. By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to, banning based on VOMS attributes, banning a specific user, or adding a VO, VO group, VO role, and/or user that is not in the OSG's set of mappings.
 
@@ -33,13 +33,9 @@ To install the LCMAPS VOMS plugin, make sure that your host is up to date before
 Configuring the LCMAPS VOMS Plugin
 ----------------------------------
 
-The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication. If you are using OSG 3.3 packages, there are software-specific instructions that must be followed for [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../data/gridftp), and [XRootD](../data/install-xrootd). To check if you are running OSG 3.3, run the following command:
-
-``` console
-root@host # rpm -q --queryformat="%{VERSION}\n" osg-release
-```
-
-Additionally, there is [optional configuration](#optional-configuration) if you need to make changes to the default mappings.
+The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication.
+Additionally, there are [optional configuration](#optional-configuration) instructions if you need to make changes to
+the default mappings, or migrate from edg-mkgridmap or GUMS.
 
 
 ### Enabling the LCMAPS VOMS plugin
@@ -69,6 +65,21 @@ Unix accounts must exist for each VO, VO role, VO group, or user you choose to s
 ``` ini
 allowed_vos="VO1,VO2..."
 ```
+
+The full list of VOs is located on [OIM](https://oim.opensciencegrid.org/oim/vo).
+You are not expected to support all the VOs.
+If you would like to support opportunistic usage, we recommend creating the following Unix accounts:
+
+| **VO name**                                             | **Unix account(s)**                                                    |
+|---------------------------------------------------------|------------------------------------------------------------------------|
+| [GLOW](https://oim.opensciencegrid.org/oim/vo?id=13)    | `glow`                                                                 |
+| [OSG](https://oim.opensciencegrid.org/oim/vo?id=30)     | `osg`                                                                  |
+| [ATLAS](https://oim.opensciencegrid.org/oim/vo?id=35)   | `usatlas1`, `usatlas2`, `usatlas3`, `usatlas4`                         |
+| [CMS](https://oim.opensciencegrid.org/oim/vo?id=3)      | `cmspilot`, `uscmslocal`, `cmslocal`, `cmsprod`, `lcgadmin`, `cmsuser` |
+| [Fermilab](https://oim.opensciencegrid.org/oim/vo?id=9) | `fermigli`, `fermilab`                                                 |
+| [HCC](https://oim.opensciencegrid.org/oim/vo?id=67)     | `hcc`                                                                  |
+| [Gluex](https://oim.opensciencegrid.org/oim/vo?id=62)   | `gluex`                                                                |
+
 
 ### Applying configuration settings
 
@@ -115,13 +126,6 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
 
     * If you do not have a local grid mapfile, remove `/etc/grid-security/grid-mapfile`.
 
-1.  If you are remaining on OSG 3.3, ensure that the you have set `export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1` in the appropriate file and restart the service. If you have updated your host to OSG 3.4, skip to the next step.
-
-    | **If your host is a(n)...** | **Add the aforementioned line to...**  | **And restart this service...** |
-    |:----------------------------|:---------------------------------------| :------------------------------ |
-    | HTCondor-CE                 | `/etc/sysconfig/condor-ce`             | `condor-ce`                     |
-    | GridFTP server              | `/etc/sysconfig/globus-gridftp-server` | `globus-gridftp-server`         |
-
 1.  If you are converting an HTCondor-CE host, remove the HTCondor-CE `GRIDMAP` configuration. Otherwise, skip to the next step.
 
     1. Find where `GRIDMAP` is set:
@@ -150,6 +154,29 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
         In the output from this command, yum should **not** list other packages than the one.
         If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest OSG 3.4 versions (they should have ".osg34" in their versions), and try again.
 
+#### Migrating from GUMS
+
+GUMS is no longer available starting in OSG 3.4 and is being replaced by the LCMAPS VOMS plugin.
+Note that unlike GUMS, which runs on a central host, the LCMAPS VOMS plugin will run on your GUMS clients (e.g. HTCondor-CE, GridFTP, and XRootD).
+To migrate any custom authentication configuration from GUMS to the LCMAPS VOMS plugin, perform the following procedure:
+
+1. On your GUMS host, retrieve the conversion helper script and run it:
+
+        :::console
+        root@gums-host # wget https://raw.githubusercontent.com/opensciencegrid/osg-vo-config/mapfile-generator-0.2/bin/manual-mapfile-from-gumsdb.py
+        root@gums-host # python manual-mapfile-from-gumsdb.py
+
+1. Verify that the contents of `ban-mapfile.additions`, `grid-mapfile.additions`, and `voms-mapfile.additions` include any custom
+   banned users, user mappings, and VO mappings, respectively.
+
+    !!! note
+        The above files will not include all VO mappings; the OSG provides default VO mappings in
+        `/usr/share/osg/voms-mapfile-default`
+
+1. On each of your client hosts (e.g. HTCondor-CE, GridFTP, XRootD), perform the following:
+
+    1. If you have not done so already, [install](#installing-the-lcmaps-voms-plugin) and [configure](#configuring-the-lcmaps-voms-plugin) the LCMAPS VOMS plugin
+    1. Append each `.additions` file to its corresponding file in `/etc/grid-security/` (creating those files if they do not exist)
 
 #### Mapping VOs
 
@@ -197,6 +224,9 @@ The patterns are compared in the order they are listed in. Therefore, more gener
 
 Each non-commented line is a shell-style pattern which is compared against a user's VOMS attributes. If the pattern matches, that user will be unable to access your resources.
 
+!!!danger
+    When banning VOs, you must restart the services using LCMAPS VOMS authentication (e.g. `condor-ce`, `globus-gridftp-server`, etc.) to clear any authentication caches.
+
 !!!warning
     `/etc/grid-security/ban-voms-mapfile` *must* exist, even if you are not banning any VOs. In that case, the file should be blank. If the file does not exist, LCMAPS will ban every user.
 
@@ -209,6 +239,9 @@ Each non-commented line is a shell-style pattern which is compared against a use
 # ban Matyas's FNAL DN
 "/DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Matyas Selmeci/CN=UID:matyas"
 ```
+
+!!!danger
+    When banning users, you must restart the services using LCMAPS VOMS authentication (e.g. `condor-ce`, `globus-gridftp-server`, etc.) to clear any authentication caches.
 
 !!!warning
     `/etc/grid-security/ban-mapfile` *must* exist, even if you are not banning any users. In that case, the file should be blank. If the file does not exist, LCMAPS will ban every user.
@@ -226,10 +259,13 @@ By default, the LCMAPS VOMS plugin only considers the first FQAN of a VOMS proxy
 
 -   If you are configuring `lcmaps.db` manually (see [manual configuration](#manual-configuration) below), add `"-all-fqans"` to the module definitions for `vomsmapfile` and `defaultmapfile`
 
+Using the LCMAPS VOMS Plugin
+----------------------------
 
+LCMAPS is a software library that is called for authentication;
+therefore, there are no running services and it does not have to be invoked manually.
 
-
-Validating the LCMAPS VOMS plugin VO mappings
+Validating the LCMAPS VOMS Plugin VO Mappings
 ---------------------------------------------
 
 To validate the LCMAPS VOMS plugin by itself, use the following procedure to test mapping your own cert to a user:
@@ -258,7 +294,7 @@ user@host $ voms-proxy-info -fqan
 ```
 and make sure it matches one of the patterns in `/etc/grid-security/voms-mapfile` or `/usr/share/osg/voms-mapfile-default`, and does not match any patterns in `/etc/grid-security/ban-voms-mapfile`.
 
-Troubleshooting the LCMAPS VOMS plugin
+Troubleshooting the LCMAPS VOMS Plugin
 --------------------------------------
 
 LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity of the logging can be increased by setting the `LCMAPS_DEBUG_LEVEL` environment variable. You can also change the destination of the logging by setting the `LCMAPS_LOG_FILE` environment variable.

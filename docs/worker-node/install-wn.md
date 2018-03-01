@@ -3,7 +3,7 @@ Installing the Worker Node Client From RPMs
 
 The **OSG Worker Node Client** is a collection of software components that is expected to be added to every worker node
 that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect
-to use. Contents of the worker node client can be found [here](install-wn.md#worker-node-contents).
+to use. Contents of the worker node client can be found [here](#worker-node-contents).
 
 !!! note
     It is possible to install the Worker Node Client software in a variety of ways, depending on your local site:
@@ -20,10 +20,10 @@ Before Starting
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
--   Ensure the host has [a supported operating system](../release/supported_platforms.md)
+-   Ensure the host has [a supported operating system](/release/supported_platforms.md)
 -   Obtain root access to the host
--   Prepare [the required Yum repositories](../common/yum.md)
--   Install [CA certificates](../common/ca.md)
+-   Prepare [the required Yum repositories](/common/yum.md)
+-   Install [CA certificates](/common/ca.md)
 
 Install the Worker Node Client
 ------------------------------
@@ -42,7 +42,7 @@ Fetch-CRL is the only service required to support the WN Client.
 
 | Software  | Service name                          | Notes                                                                                  |
 |:----------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca.md) for more info |
+| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca.md) for more info |
 
 !!! note
     `fetch-crl-boot` will begin fetching CRLS, which can take a few minutes and fail on transient errors. You can add configuration to ignore these transient errors in `/etc/fetch-crl.conf`:
@@ -65,19 +65,19 @@ Validating the Worker Node Client
 
 To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.
 
-1.  Submit a job that executes the `env` command (e.g. Run [condor\_ce\_trace](../compute-element/troubleshoot-htcondor-ce#condor_ce_trace) with the `-d` flag from your HTCondor CE)
+1.  Submit a job that executes the `env` command (e.g. Run [condor\_ce\_trace](/compute-element/troubleshoot-htcondor-ce#condor_ce_trace) with the `-d` flag from your HTCondor CE)
 2.  Verify that the value of `OSG_GRID` is set to `/etc/osg/wn-client`
 
 How to get Help?
 ----------------
 
-To get assistance please use this [Help Procedure](../common/help).
+To get assistance please use this [Help Procedure](/common/help).
 
 
 Reference
 ---------
 
-Please see the documentation on using [yum and RPM](../release/yum-basics.md), [the best practices](../common/install-best-practices) for using yum to install software, and using [yum repositories](../common/yum.md).
+Please see the documentation on using [YUM and RPM](../release/yum-basics.md), and using the [OSG YUM repositories](../common/yum.md).
 
 ### Worker node contents
 
@@ -93,7 +93,6 @@ The worker node may be updated from time to time. As of OSG 3.3.21 in February 2
 -   ldapsearch
 -   MyProxy
 -   osg-system-profiler
--   osg-version
 -   UberFTP
 -   vo-client (includes /etc/vomses file)
 -   VOMS client
@@ -106,4 +105,4 @@ To see the currently installed version of the worker node package, run the follo
 root@host # rpm -q --requires osg-wn-client
 ```
 
-Click [here](../release/yum-basics.md) for more details on using RPM to see what was installed.
+Click [here](/release/yum-basics.md) for more details on using RPM to see what was installed.

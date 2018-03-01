@@ -1,27 +1,27 @@
-**How do I get a PKI/X509 Personal Certificate?**
-======================================================
+User Certificates
+=================
 
 !!! note
     For instructions on getting **service** and **host** certificates, **you're in the wrong place**. See [Get Host and Service Certificates](host-certs.md).
 
 This document describes how to get and set up a **personal** certificate (also called a grid user certificate), from the OSG Certificate Authority (OSG CA). The OSG CA is recognized by all OSG resources. Other CAs may be used; if your virtual organization (VO) requires that you get a certificate from a different CA, [contact your VO Support Center](http://www.opensciencegrid.org/?pid=1000187) for instructions.
 
-Know your Responsibilities
-===============================
+Know Your Responsibilities
+--------------------------
 
 When you request a certificate your provide some public personal information about yourself; *name, email address, phone number*, and which *VO* (virtual organization) you belong to. If any of this information changes after you have your certificate you should notify OSG (and probably VO) of the changes. For the OSG RA send email to osg-ra at opensciencegrid dot org.
 
 Your **name** and **email** address are encoded into the signed certificate and **if either of those change** (usually email address) then you should **request a new certificate** with the correct information and **revoke the old certificate**.
 
-Getting your Certificate
-=============================
+Requesting a User Certificate
+-----------------------------
 
 There are two different ways to obtain your certificate, either via a command line interface, or through a web browser. The links below will guide you through whichever method you choose. The command line method is generally simpler and less prone to errors than using a web browser but it may require extra setup and package installation the first time you do it. Most people end up needing their certificate for both command line grid use and web browser use and it is generally easier to import your certificate into your browser (and email client) from the command line certificate files than to export your certificate from your web browser to use on the command line. This is because of the large variety of web browsers each with it's own way to deal with certificates. If you will use the certificate ONLY in your web browser then requesting it from your browser is probably the easiest method.
 
 [Get or renew a certificate with command line interface.](../security/certificate-management.md)
 
 PKCS12 (.p12) vs PEM format
-================================
+---------------------------
 
 Your certificate and key pair can be stored as separate files, by default named `~/.globus/usercert.pem` and `~/.globus/userkey.pem`, or they can be bundled in a single file in PKCS12 (Public Key Cryptography Standard \#12), by default named `~/.globus/usercred.p12`. All OSG user tools works with both formats. Unless you specify a name in the command, they look first for the certificate/key pair default names, then for the PKCS12 default name and use the first one they find. PKCS 12 is a single file, convenient to move and used by many softwares, e.g. the Web browsers (so you don't need conversions).
 
@@ -85,12 +85,12 @@ of returning a valid AC for the user.
 
 To solve the problem split the bundle in the two PEM files as documented in the [referenced document](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html), so that the embedded CA chain is not used.
 
-Revoke your Certificate if Compromised
-===========================================
+Revoking Your User Certificate
+------------------------------
 
 If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate. You can follow the steps [here](../security/certificate-management#osg-user-cert-revoke) to revoke your certificate. The same instructions apply if you need to revoke a certificate because your email address changed or your name has changed.
 
 References
-===============
+----------
 
 -   [Useful Documentation.OpenSSL commands (from NCSA)](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html) - e.g. how to convert the format of your certificate.
