@@ -647,6 +647,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#setting-transfer-limits-for-gridftp-hdfs" title="Setting transfer limits for GridFTP-HDFS" class="md-nav__link">
+    Setting transfer limits for GridFTP-HDFS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modifying-the-environment" title="Modifying the environment" class="md-nav__link">
     Modifying the environment
   </a>
@@ -2352,6 +2359,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#setting-transfer-limits-for-gridftp-hdfs" title="Setting transfer limits for GridFTP-HDFS" class="md-nav__link">
+    Setting transfer limits for GridFTP-HDFS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#modifying-the-environment" title="Modifying the environment" class="md-nav__link">
     Modifying the environment
   </a>
@@ -2546,6 +2560,24 @@ gumsclient = &quot;lcmaps_gums_client.mod&quot;
 
 <p>All other configuration settings should be suitable for most purposes. However, you can edit them if needed. The probe runs every 30 minutes as a cron job.</p>
 <h3 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
+<h4 id="setting-transfer-limits-for-gridftp-hdfs">Setting transfer limits for GridFTP-HDFS<a class="headerlink" href="#setting-transfer-limits-for-gridftp-hdfs" title="Permanent link">&para;</a></h4>
+<p>To set a limit on the total or per-user number of transfers, create <code>/etc/sysconfig/gridftp-hdfs</code> and set the following configuration:</p>
+<div class="codehilite"><pre><span></span>export GRIDFTP_TRANSFER_LIMIT=&quot;80&quot;
+export GRIDFTP_DEFAULT_USER_TRANSFER_LIMIT=&quot;50&quot;
+export GRIDFTP_<span style="color:red">&lt;UNIX USERNAME&gt;</span>_USER_TRANSFER_LIMIT=&quot;40&quot;
+</pre></div>
+
+
+<p>In the above configuration:</p>
+<ul>
+<li>There would be no more than 80 transfers going at a time, across all users.</li>
+<li>By default, any single user can have no more than 50 transfers at a time.</li>
+<li>The <code><span style="color:red">&lt;UNIX USERNAME&gt;</span></code> user has a more stringent limit of 40 transfers at a time.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This limits are per gridftp server. If you have several gridftp servers you may want to have this limits divided by the number of gridftp servers at your site.</p>
+</div>
 <h4 id="modifying-the-environment">Modifying the environment<a class="headerlink" href="#modifying-the-environment" title="Permanent link">&para;</a></h4>
 <p>Environment variables are stored in <code>/etc/sysconfig/globus-gridftp-server</code> which is sourced on service startup.  If you want to change LCMAPS log levels, or GridFTP port ranges, you can edit them there.</p>
 <div class="codehilite"><pre><span></span><span class="c1">#Uncomment and modify for firewalls</span>
