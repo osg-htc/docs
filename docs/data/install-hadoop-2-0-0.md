@@ -22,10 +22,10 @@ from the OSG repositories. It is also recommended that you enable [EPEL](http://
     service.  Both of these are deprecated as of June 2017 and support will end May 2018.
 
 Requirements
-============
-
-Architecture
 ------------
+
+### Architecture
+
 
 !!! note
     There are several important components to a storage element installation. Throughout this document, it will be stated which node the relevant installation instructions apply to. It can apply to one of the following:
@@ -42,8 +42,8 @@ Note that these components are not necessarily mutually exclusive. For instance,
     Total installation time, on an average, should not exceed 8 to 24 man-hours. If your site needs further assistance
     to help expedite, please email <mailto:help@opensciencegrid.org>.
 
-Host and OS
------------
+### Host and OS
+
 
 Hadoop will run anywhere that Java is supported (including Solaris). However, these instructions are for RedHat derivants (including Scientific Linux) because of the RPM based installation. The current supported Operating Systems supported by the OSG are Red Hat Enterprise Linux 6, 7, and variants (see [details...](../release/supported_platforms)).
 
@@ -55,8 +55,8 @@ The HDFS prerequisites are:
 -   `fuse` kernel module and `fuse-libs`.
 -   Java RPM. If java isn't already installed we supply the Oracle jdk 1.6.0 rpm and it will come in as a dependency. Oracle jdk is currently the only jdk supported by OSG so we highly recommend you use the version supplied.
 
-Users
------
+### Users
+
 
 This installation will create following users unless they are already created.
 
@@ -72,8 +72,8 @@ For gums users, this means that each user that can be authenticated by gums shou
 
 Note that these users must be kept in sync with the authentication method. For instance, if new users or rules are added in gums, then new users should also be added here.
 
-Certificates
-------------
+### Certificates
+
 
 | Certificate                 | User that owns certificate | Path to certificate                                                                                 |
 |:----------------------------|:---------------------------|:----------------------------------------------------------------------------------------------------|
@@ -89,40 +89,40 @@ cluster.
     Make sure you enable [fetch-crl](../common/ca#install-fetch-crl)
 
 Installation
-============
+------------
 
 Installation depends on the node you are installing:
 
-Namenode Installation
----------------------
+### Namenode Installation
+
 
 ``` console
 root@host # yum install osg-se-hadoop-namenode
 ```
 
-Secondary Namenode Installation
--------------------------------
+### Secondary Namenode Installation
+
 
 ``` console
 root@host # yum install osg-se-hadoop-secondarynamenode
 ```
 
-Datanode Installation
----------------------
+### Datanode Installation
+
 
 ``` console
 root@host # yum install osg-se-hadoop-datanode
 ```
 
-Client/FUSE Installation
-------------------------
+### Client/FUSE Installation
+
 
 ``` console
 root@host # yum install osg-se-hadoop-client
 ```
 
-Standalone Gridftp Node Installation
-------------------------------------
+### Standalone Gridftp Node Installation
+
 
 ``` console
 root@host # yum install osg-se-hadoop-gridftp
@@ -135,8 +135,8 @@ root@host # yum install lcmaps-plugins-gums-client
 root@host # yum install lcmaps-plugins-basic
 ```
 
-SRM Node Installation
----------------------
+### SRM Node Installation
+
 
 ``` console
 root@host # yum install osg-se-hadoop-srm
@@ -146,10 +146,10 @@ root@host # yum install osg-se-hadoop-srm
     If you are using a single system to host the SRM software and the GridFTP node, you'll also need to install the `osg-se-hadoop-gridftp` rpm as well.
 
 Configuration
-=============
+-------------
 
-Hadoop Configuration
---------------------
+### Hadoop Configuration
+
 
 !!! note
     Needed by: Hadoop namenode, Hadoop datanodes, Hadoop client, GridFTP, SRM
@@ -177,7 +177,7 @@ See <http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/hdfs-d
 !!! note
     Namenodes must have a `/etc/hosts_exclude` present
 
-### Special namenode instructions for brand new installs
+#### Special namenode instructions for brand new installs
 
 If this is a new installation (%RED%and only if this is a brand new installation<span class="twiki-macro ENDCOLOR"></span>), you should run the following command as the `hdfs` user. (Otherwise, be sure to `chown` your storage directory to hdfs after running):
 
@@ -187,8 +187,7 @@ hadoop namenode -format
 
 This will initialize the storage directory on your namenode
 
-FUSE Client Configuration
--------------------------
+### FUSE Client Configuration
 
 !!! note
     Needed by: Hadoop client and SRM node. Recommended but not neccessary for GridFTP nodes.
@@ -222,8 +221,8 @@ INFO fuse_options.c:110 Ignoring option allow_other
 
 If you have troubles mounting FUSE refer to [Running FUSE in Debug Mode](#running-fuse-in-debug-mode) in the Troubleshooting section.
 
-Creating VO and User Areas
---------------------------
+### Creating VO and User Areas
+
 
 !!! note
     Grid Users are needed by GridFTP and SRM nodes. VO areas are common to all nodes.
@@ -275,8 +274,8 @@ root@host # chown -R sam:sam /mnt/hadoop/dzero
 root@host # chown -R michaelthomas:cms /mnt/hadoop/cms/store/user/michaelthomas
 ```
 
-GridFTP Configuration
----------------------
+### GridFTP Configuration
+
 
 gridftp-hdfs reads the Hadoop configuration file to learn how to talk to Hadoop. By now, you should have followed the instruction for installing hadoop as detailed in the previous section as well as created the proper users/directories.
 
@@ -297,12 +296,12 @@ The default settings in `/etc/gridftp.conf` along with `/etc/gridftp.d/gridftp-h
 
 Lastly, you will need to configure an authentication mechanism for GridFTP.
 
-### Configuring authentication
+#### Configuring authentication
 
 For information on how to configure authentication for your GridFTP installation, please refer to the [configuring authentication section of the GridFTP guide](gridftp#configuring-authentication).
 
-GridFTP Gratia Transfer Probe Configuration
--------------------------------------------
+### GridFTP Gratia Transfer Probe Configuration
+
 
 !!! note
     Needed by GridFTP node only.
@@ -339,14 +338,14 @@ This is usually one XML node spread over multiple lines. Note that comments (\#)
 | SuppressNoDNRecords             | Maybe                                                                                      | Set to 1 to suppress records that can't be matched to a DN; 0 is strongly recommended.                                                     |
 | EnableProbe                     | Yes                                                                                        | Set to 1 to enable the probe.                                                                                                              |
 
-### Selecting a collector host
+#### Selecting a collector host
 
 The collector is the central server which logs the GridFTP transfers into a database. There are usually three options:
 
 1. **OSG Transfer Collector**: This is the primary collector for transfers in the OSG. Use `CollectorHost="gratia-osg-prod.opensciencegrid.org:80"`.
 1. **OSG-ITB Transfer Collector**: This is the test collector for transfers in the OSG. Use `CollectorHost=" gratia-osg-itb.opensciencegrid.org:80"`.
 
-### Validation
+#### Validation
 
 Run the Gratia probe once by hand to check for functionality:
 
@@ -356,8 +355,8 @@ root@host # /usr/share/gratia/gridftp-transfer/GridftpTransferProbeDriver
 
 Look for any abnormal termination and report it if it is a non-trivial site issue. Look in the log files in `/var/log/gratia/<date>.log` and make sure there are no error messages printed.
 
-BeStMan Configuration
----------------------
+### BeStMan Configuration
+
 
 !!! warning "Deprecation Warning"
     As of June 2017, support for the `bestman2` software has been deprecated.  Support will end in May 2018
@@ -371,8 +370,8 @@ and `ls`.  It is **not** necessary (or even recommended) to start any HDFS servi
 Make sure that you modify `localPathListAllowed` to use the Hadoop mount in `/etc/bestman2/conf/bestman2.rc`.
 
 
-Hadoop Storage Probe Configuration
-----------------------------------
+### Hadoop Storage Probe Configuration
+
 
 !!! note
     This is only needed by the Hadoop Namenode
@@ -392,7 +391,7 @@ The RPM installs the Gratia probe into the system crontab, but does not configur
     /etc/gratia/hadoop-storage/ProbeConfig
     /etc/gratia/hadoop-storage/storage.cfg
 
-### ProbeConfig
+#### ProbeConfig
 
 This is usually one XML node spread over multiple lines. Note that comments (\#) have no effect on this file. You will need to edit the following:
 
@@ -404,7 +403,7 @@ This is usually one XML node spread over multiple lines. Note that comments (\#)
 | Grid          | Maybe         | Set to "ITB" if this is a test resource; otherwise, leave as OSG.                                                                       |
 | EnableProbe   | Yes           | Set to 1 to enable the probe.                                                                                                           |
 
-### storage.cfg
+#### storage.cfg
 
 This file controls which paths in HDFS should be monitored. This is in the Windows INI format.
 
@@ -427,7 +426,7 @@ Trim = /user/cms
 
 For each such area, add a section to your configuration file.
 
-#### Example file
+##### Example file
 
 Below is a configuration file that includes three distinct areas. Note that you shouldn't have to touch the \[Gratia\] section if you edited the ProbeConfig above:
 
@@ -457,7 +456,7 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 ```
 
 Running Services
-================
+----------------
 
 Namenode:
 
@@ -515,7 +514,7 @@ root@host # chkconfig bestman2 on
 ```
 
 Validation
-==========
+----------
 
 The first thing you may want to do after installing and starting your **Namenode** is to verify that the web interface works. In your web browser go to:
 
@@ -648,8 +647,8 @@ total 935855
 -rw-rw-r-- 1 engage engage   9259360 Jun 15 16:32 glideinWMS_v2_5_1.tgz
 ```
 
-GridFTP Validation
-------------------
+### GridFTP Validation
+
 
 !!! note
     The commands used to verify GridFTP below assume you have access to a node where you can first generate a valid proxy using `voms-proxy-init` or `grid-proxy-init`. Obtaining grid credentials is beyond the scope of this document.
@@ -660,8 +659,8 @@ user$ globus-url-copy file:///home/users/jdost/test.txt gsiftp://devg-7.t2.ucsd.
 
 If you are having troubles running GridFTP refer to [Starting GridFTP in Standalone Mode](#starting-gridftp-in-standalone-mode) in the Troubleshooting section.
 
-BeStMan Validation
-------------------
+### BeStMan Validation
+
 
 There are three ways of validating BeStMan: \* SrmTester: BeStMan testing application \* InstallRSV: RSV monitoring tools \* BestMan client tools
 
@@ -675,10 +674,9 @@ srm-copy file:////tmp/test1  srm://BeStMan_host:secured_http_port/srm/v2/server\
 The `srm-ping` tool should return a valid mapping `gumsIDMapped` that is not null
 
 Troubleshooting
-===============
+---------------
 
-Hadoop
-------
+### Hadoop
 
 To view all of the currently configured settings of Hadoop from the web interface, enter the following url in your browser:
 
@@ -911,14 +909,14 @@ You will see the entire configuration in XML format, for example:
 
 Please refer to the [Apache Hadoop FAQ webpage](http://wiki.apache.org/hadoop/FAQ) for answers to common questions/concerns
 
-FUSE
-----
+### FUSE
 
-### Notes on Building a FUSE Module
+
+#### Notes on Building a FUSE Module
 
 If you are running a custom kernel, then be sure to enable the `fuse` module with `CONFIG_FUSE_FS=m` in your kernel config. Building and installing a `fuse` kernel module for your custom kernel is beyond the scope of this document.
 
-### Running FUSE in Debug Mode
+#### Running FUSE in Debug Mode
 
 To start the FUSE mount in debug mode, you can run the FUSE mount command by hand:
 
@@ -928,12 +926,12 @@ root@host #  /usr/bin/hadoop-fuse-dfs  /mnt/hadoop -o rw,server=%RED%namenode.ho
 
 Debug output will be printed to stderr, which you will probably want to redirect to a file. Most FUSE-related problems can be tackled by reading through the stderr and looking for error messages.
 
-GridFTP
--------
+### GridFTP
+
 
 \#GridFTPStand
 
-### Starting GridFTP in Standalone Mode
+#### Starting GridFTP in Standalone Mode
 
 If you would like to test the gridftp-hdfs server in a debug standalone mode, you can run the command:
 
@@ -944,7 +942,7 @@ root@host # gridftp-hdfs-standalone
 The standalone server runs on port 5002, handles a single GridFTP request, and will log output to stdout/stderr.
 
 File Locations
-==============
+--------------
 
 |                                                       |                                                                       |                                                     |                                   |
 |-------------------------------------------------------|-----------------------------------------------------------------------|-----------------------------------------------------|-----------------------------------|
@@ -983,9 +981,9 @@ File Locations
 |                 | `/var/log/messages`               | Main system log (look here for LCMAPS errors) |
 
 Known Issues
-============
+------------
 
-### Replicas
+#### Replicas
 
 You may need to change the following line in `/usr/share/gridftp-hdfs/gridftp-hdfs-environment`:
 
@@ -993,7 +991,7 @@ You may need to change the following line in `/usr/share/gridftp-hdfs/gridftp-hd
 export GRIDFTP_HDFS_REPLICAS=2
 ```
 
-### copyFromLocal java IOException
+#### copyFromLocal java IOException
 
 When trying to copy a local file into Hadoop you may come across the following java exception:
 
@@ -1042,7 +1040,7 @@ This can occur if you try to install a Datanode on a machine with less than 10GB
 Hadoop always requires this amount of disk space to be available for non-hdfs usage on the machine.
 
 How to get Help?
-================
+----------------
 
 If you cannot resolve the problem, there are several ways to receive help:
 
@@ -1053,7 +1051,7 @@ If you cannot resolve the problem, there are several ways to receive help:
 For a full set of help options, see [Help Procedure](../common/help).
 
 References
-==========
+----------
 
 -   [Using Hadoop as a Grid Storage Element](http://www.iop.org/EJ/article/1742-6596/180/1/012047/jpconf9_180_012047.pdf), *Journal of Physics Conference Series, 2009*.
 -   [Hadoop Distributed File System for the Grid](http://osg-docdb.opensciencegrid.org/0009/000911/001/Hadoop.pdf), *IEEE Nuclear Science Symposium, 2009*.

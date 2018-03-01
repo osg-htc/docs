@@ -64,7 +64,7 @@ error-hours = 12
 This would lead to the probe getting called with the command-line parameters `--warning-hours 6 --error-hours 12`.
 
 Configure consumers
-===================
+-------------------
 
 There is a configuration file common to all consumers: `/etc/rsv/consumers.conf`. It is a file in INI format and possible entries are:
 
@@ -157,10 +157,10 @@ You can configure the RSV framework using `/etc/rsv/rsv.conf`. It is a file in I
 </table>
 
 Troubleshooting
-===============
+---------------
 
-Important files locations
--------------------------
+### Important files locations
+
 
 Configuration files:
 
