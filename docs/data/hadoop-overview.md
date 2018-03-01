@@ -4,16 +4,29 @@ Hadoop Overview
 Hadoop Introduction
 -------------------
 
-Hadoop is a data processing framework. It is an open-source Apache Foundation project, and the main contributor is Yahoo! The framework has two main parts - job scheduling and a distributed file system, the Hadoop Distributed File System (HDFS). We currently utilize HDFS as a general-purpose file system. For this document, we'll use the words "Hadoop" and "HDFS" interchangeably, but it's nice to know the distinction.
+Hadoop is a data processing framework. 
+It is an open-source Apache Foundation project, and the main contributor is Yahoo! The framework has two main parts -
+job scheduling and a distributed file system, the Hadoop Distributed File System (HDFS). 
+We currently utilize HDFS as a general-purpose file system. For this document, we'll use the words "Hadoop" and "HDFS"
+interchangeably, but it's nice to know the distinction.
 
-We recommend starting with [HDFS architecture document](http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html).
+We recommend starting with [HDFS architecture
+document](http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html).
 
-Please do read through this. We will assume you have read this, or at least the important architectural portions. The file system is block-oriented; each file is broken up into 64 MB or 128 MB chunks (user configurable). These chunks are stored on data nodes and served up from there; the central namenode keeps track of the block locations, the namespace information, and block placement policies. HDFS provides POSIX-like semantics; it provides fully random-access reads and non-random-access writes. Currently, fsync and appends (after the file has been initially closed) are experimental and not available to OSG-based installs.
+Please do read through this. 
+We will assume you have read this, or at least the important architectural portions. 
+The file system is block-oriented; each file is broken up into 64 MB or 128 MB chunks (user configurable). 
+These chunks are stored on data nodes and served up from there; the central namenode keeps track of the block locations,
+the namespace information, and block placement policies. 
+HDFS provides POSIX-like semantics; it provides fully random-access reads and non-random-access writes. Currently, fsync
+and appends (after the file has been initially closed) are experimental and not available to OSG-based installs.
 
 Hadoop SE Components
 --------------------
 
-We broadly break down the server components of the Hadoop SE into three categories: HDFS core, Grid extensions, and HDFS auxiliary. The components in each of these categories are outlined below:
+We broadly break down the server components of the Hadoop SE into three categories: HDFS core, Grid extensions, and HDFS
+auxiliary. 
+The components in each of these categories are outlined below:
 
 -   HDFS Core:
     -   Namenode: The core metadata server of Hadoop. This is the most critical piece of the system, and there can only be one of these. This stores both the file system image and the file system journal. The namenode keeps all of the filesystem layout information (files, blocks, directories, permissions, etc) and the block locations. The filesystem layout is persisted on disk and the block locations are kept solely in memory. When a client opens a file, the namenode tells the client the locations of all the blocks in the file; the client then no longer needs to communicate with the namenode for data transfer.
@@ -43,33 +56,38 @@ Minimal Installation (0-50TB, WAN transfers up to 1Gbps)
 
 The minimal installation would involve 5 nodes:
 
-1 hadoop-name: The namenode for the Hadoop system.  Must be on a private network.
-1 hadoop-name2: This will run the HDFS secondary namenode. Must be on a private network.
-1 hadoop-data1, hadoop-data2: Two HDFS datanodes. They will hold data for the system, so they should have sizable hard drives. As the Hadoop installation grows to many terabytes, this will be the only class of nodes one adds. Must be on a private network.
-1 hadoop-grid: Runs the Globus GridFTP server. Must have a public interface and a private interface.
+- hadoop-name: The namenode for the Hadoop system.  Must be on a private network.
+- hadoop-name2: This will run the HDFS secondary namenode. Must be on a private network.
+- hadoop-data1, hadoop-data2: Two HDFS datanodes. They will hold data for the system, so they should have sizable hard drives. As the Hadoop installation grows to many terabytes, this will be the only class of nodes one adds. Must be on a private network.
+- hadoop-grid: Runs the Globus GridFTP server. Must have a public interface and a private interface.
 
-If desired, hadoop-name and hadoop-name2 may be virtualized. Prior to installation, DNS / host name resolution **must** work. That is, you should be able to resolve all the hadoop servers either through DNS or /etc/hosts. Because of the grid software, hadoop-grid **must** have reverse DNS working.
+If desired, hadoop-name and hadoop-name2 may be virtualized. 
+Prior to installation, DNS / host name resolution **must** work. 
+That is, you should be able to resolve all the hadoop servers either through DNS or /etc/hosts. 
+Because of the grid software, hadoop-grid **must** have reverse DNS working.
 
 Medium Installation (50-150TB, WAN transfers up to 2 Gbps)
 ----------------------------------------------------------
 
 For a medium install, make the following changes over the minimal install: 
 
-1 Run multiple GridFTP servers (2 should be fine); if possible, use 10 Gbps cards for these hosts. 
-1 Add many more HDFS datanodes. This usually means starting to add 1 or 2 TB hard drives to some worker nodes.
+- Run multiple GridFTP servers (2 should be fine); if possible, use 10 Gbps cards for these hosts. 
+- Add many more HDFS datanodes. This usually means starting to add 1 or 2 TB hard drives to some worker nodes.
 
 Large Installation (>150TB, WAN transfers over 2 Gbps)
 ---------------------------------------------------------
 
 For a large installation, make the following changes: 
 
-1 Run more GridFTP servers; plan for 800 Mbps per host with 1 Gbps card in order to have excess capacity. 
-1 Purchase machines suitable for HDFS datanodes. It is possible to get a 2U box with 8-12 hard drives; for many projects, this will provide a more suitable CPU to disk ratio than the 1U boxes with 2 hard drives.
+- Run more GridFTP servers; plan for 800 Mbps per host with 1 Gbps card in order to have excess capacity. 
+- Purchase machines suitable for HDFS datanodes. It is possible to get a 2U box with 8-12 hard drives; for many projects, this will provide a more suitable CPU to disk ratio than the 1U boxes with 2 hard drives.
 
 Hadoop Security
 ---------------
 
-HDFS has Unix-like user/group authorization, but no strict authentication. **HDFS should use a secure internal network which only non-malicious users are able to access**. For users with access to the local cluster, it is not difficult to bypass authentication.
+HDFS has Unix-like user/group authorization, but no strict authentication. 
+**HDFS should use a secure internal network which only non-malicious users are able to access**. 
+For users with access to the local cluster, it is not difficult to bypass authentication.
 
 [The default ports are listed here](http://www.cloudera.com/blog/2009/08/14/hadoop-default-ports-quick-reference/).
 
