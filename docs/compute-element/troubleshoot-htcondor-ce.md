@@ -81,7 +81,7 @@ Before troubleshooting, we recommend increasing the log level:
 
 1.  Write the following into `/etc/condor-ce/config.d/99-local.conf` to increase the log level for all daemons:
 
-        ALL_DEBUG = D_FULLDEBUG
+        ALL_DEBUG = D_FULLDEBUG D_CAT
 
 2.  Ensure that the configuration is in place:
 
@@ -517,8 +517,8 @@ Authorized:                  TRUE
 
 1.  **If you see “ERROR: couldn’t locate (null)”**, that means the HTCondor-CE schedd (the daemon that schedules jobs) cannot be reached. To track down the issue, increase debugging levels on the CE:
 
-        MASTER_DEBUG = D_FULLDEBUG
-        SCHEDD_DEBUG = D_FULLDEBUG
+        MASTER_DEBUG = D_FULLDEBUG D_CAT
+        SCHEDD_DEBUG = D_FULLDEBUG D_CAT
 
     Then look in the [MasterLog](#masterlog) and [SchedLog](#schedlog) for any errors.
 
@@ -550,8 +550,8 @@ If the jobs that you are submiting to a CE are not completing, `condor_ce_q` can
 
 1.  **If the schedd is not running:** You will see a lengthy message about being unable to contact the schedd. To track down the issue, increase the debugging levels on the CE with:
 
-        MASTER_DEBUG = D_FULLDEBUG
-        SCHEDD_DEBUG = D_FULLDEBUG
+        MASTER_DEBUG = D_FULLDEBUG D_CAT
+        SCHEDD_DEBUG = D_FULLDEBUG D_CAT
 
     To apply these changes, reconfigure HTCondor-CE:
 
@@ -795,7 +795,7 @@ they fail to start.
 - Increasing the debug level:
     1. Set the following value in `/etc/condor-ce/config.d/99-local.conf` on the CE host:
 
-            MASTER_DEBUG = D_FULLDEBUG
+            MASTER_DEBUG = D_FULLDEBUG D_CAT
 
     2. To apply these changes, reconfigure HTCondor-CE:
 
@@ -823,7 +823,7 @@ It contains valuable information when trying to troubleshoot authentication issu
 - Increasing the debug level:
     1. Set the following value in `/etc/condor-ce/config.d/99-local.conf` on the CE host:
 
-            SCHEDD_DEBUG = D_FULLDEBUG
+            SCHEDD_DEBUG = D_FULLDEBUG D_CAT
 
     2. To apply these changes, reconfigure HTCondor-CE:
 
@@ -900,7 +900,7 @@ troubleshoot issues with job routing.
 - Increasing the debug level:
     1. Set the following value in `/etc/condor-ce/config.d/99-local.conf` on the CE host:
 
-            JOB_ROUTER_DEBUG = D_FULLDEBUG
+            JOB_ROUTER_DEBUG = D_FULLDEBUG D_CAT
 
     2. Apply these changes, reconfigure HTCondor-CE:
 
@@ -958,7 +958,7 @@ Wiki](https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=GridmanagerLog).
 
             MAX_GRIDMANAGER_LOG = 6h
             MAX_NUM_GRIDMANAGER_LOG = 8
-            GRIDMANAGER_DEBUG = D_FULLDEBUG
+            GRIDMANAGER_DEBUG = D_FULLDEBUG D_CAT
 
     2. To apply these changes, reconfigure HTCondor-CE:
 
@@ -1010,7 +1010,7 @@ This log is a good place to check if experiencing connectivity issues with HTCon
 - Increasing the debug level:
     1. Set the following value in `/etc/condor-ce/config.d/99-local.conf` on the CE host:
 
-            SHARED_PORT_DEBUG = D_FULLDEBUG
+            SHARED_PORT_DEBUG = D_FULLDEBUG D_CAT
 
     2. To apply these changes, reconfigure HTCondor-CE:
 
