@@ -35,11 +35,10 @@ For smaller sites (less than 50 worker nodes), the most common way to add a site
 Add OSG Software
 ----------------
 
-If necessary, provision all OSG hosts that are in your site plan and that do not exist yet.  The general steps to installing an OSG site are:
+If necessary, provision all OSG hosts that are in your site plan that do not exist yet.  The general steps to installing an OSG site are:
 
-1. [Retrive a Host Certificate](#installing-and-managing-certificates-for-site-security) for your CE.
 1. Install [OSG Yum Repos](release/yum-basics) and the [Compute Element software](#installing-and-configuring-the-compute-element) on your CE host
-1. Install [OSG Yum Repos](release/yum-basics) and the [Worker Node client](#adding-osg-software-to-worker-nodes) on your worker nodes.
+1. Install the [Worker Node client](#adding-osg-software-to-worker-nodes) on your worker nodes.
 1. Install [optional software](#installing-and-configuring-other-services) to increase the capabilities of your site.
 1. [Test the OSG installation](#test-osg-software).
 1. Make your [site available to researchers](#start-glideinwms-pilot-submissions).
@@ -53,7 +52,7 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 -   [Security information for OSG signed RPMs](release/signing)
 -   [Using Yum and RPM](release/yum-basics)
 -   [Install the OSG repositories](common/yum)
--   [OSG Software release series](release/release_series) - look here to upgrade between releases 3.1 to 3.4.
+-   [OSG Software release series](release/release_series) - look here to upgrade between releases 3.1, 3.2, 3.3, and 3.4.
 
 ### Installing and Managing Certificates for Site Security ###
 
