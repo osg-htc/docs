@@ -181,7 +181,8 @@ To migrate any custom authentication configuration from GUMS to the LCMAPS VOMS 
 
 #### Mapping VOs
 
-`/etc/grid-security/voms-mapfile` is used to map VOs, VO roles, or VO groups to Unix accounts based on their VOMS attributes. An example of the format of a `voms-mapfile` follows:
+To map VOs, VO roles, or VO groups to Unix accounts based on their VOMS attributes, create `/etc/grid-security/voms-mapfile`.
+An example of the format of a `voms-mapfile` follows:
 
 ```
 # map GLOW jobs in the chtc group to the 'glow1' Unix account.
@@ -203,7 +204,8 @@ The patterns are compared in the order they are listed in. Therefore, more gener
 
 #### Mapping users
 
-`/etc/grid-security/grid-mapfile` is used to map specific users to Unix accounts based on their certificates' DNs. An example of the format of a `grid-mapfile` follows:
+To map specific users to Unix accounts based on their certificates' DNs, create `/etc/grid-security/grid-mapfile`.
+An example of the format of a `grid-mapfile` follows:
 
 ```
 # map Matyas's FNAL DN to the 'matyas' Unix account
@@ -229,7 +231,8 @@ Each non-commented line is a shell-style pattern which is compared against a use
     When banning VOs, you must restart the services using LCMAPS VOMS authentication (e.g. `condor-ce`, `globus-gridftp-server`, etc.) to clear any authentication caches.
 
 !!!warning
-    `/etc/grid-security/ban-voms-mapfile` *must* exist, even if you are not banning any VOs. In that case, the file should be blank. If the file does not exist, LCMAPS will ban every user.
+    `/etc/grid-security/ban-voms-mapfile` *must* exist, even if you are not banning any VOs.
+    In that case, the file should not contain any entries. If the file does not exist, LCMAPS will ban every user.
 
 
 #### Banning users
