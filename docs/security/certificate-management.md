@@ -146,14 +146,14 @@ Managing CAs
 
 The osg-ca-manage tool provides a unified interface to manage the CA Certificate installations. This page provides the instructions on using this command. It provides status commands that allows you to list the CAs and the validity of the CAs and CRLs included in the installation. The manage commands allow you to fetch CAs and CRLs, change the distribution URL, as well as add and remove CAs from your local installation.
 
-### Usage Examples
+### Usage examples
 
 Documentation for usage of the osg-ca-manage tool can be found [here](https://github.com/opensciencegrid/osg-ca-scripts/)
 
 !!! note
     These commands will not work if of the osg-ca-certs (or igtf-ca-certs) RPM packages are installed.
 
-#### Install a Certificate Authority Package
+#### Install a certificate authority package
 
 Before you proceed to install a Certificate Authority Package you should decide which of the available packages to install.
 
@@ -169,7 +169,7 @@ Next decide at what location to install the Certificate Authority Package:
 1.  on the `root` file system in a system directory `/etc/grid-security/certificates`
 2.  in a `custom` directory that can also be shared
 
-##### Setup the CA Certificates
+##### Setup the CA certificates
 
 The Certificate Authority Package is preferably be used by grid users without root privileges *or* if the CA certificates will not be shared by other installations on the same host.
 
@@ -296,7 +296,7 @@ NOTE:
     Run `osg-ca-manage refreshCA` and `osg-ca-manage fetchCRL` to commit your changes immediately.
 ```
 
-#### Inspect Installed CA Certificates
+#### Inspect installed CA certificates
 
 You can inspect the list of CA Certificates that have been installed:
 
