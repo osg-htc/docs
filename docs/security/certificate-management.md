@@ -191,9 +191,7 @@ Setting CA Certificates for at '$HOME/certificates'
 Setup completed successfully.
 ```
 
-#### Adding/Removing a directory of local CAs
-
-##### Adding
+#### Adding a directory of local CAs
 
 ``` console
 root@host #osg-ca-manage add --cadir /etc/grid-security/localca
@@ -234,7 +232,7 @@ include=/etc/grid-security/localca/*
 debug = 0
 ```
 
-##### Removing
+#### Removing a directory of local CAs
 
 ``` console
 root@host #osg-ca-manage remove --cadir /etc/grid-security/localca
@@ -245,9 +243,7 @@ NOTE:
     Run `osg-ca-manage refreshCA` and `osg-ca-manage fetchCRL` to commit your changes immediately.
 ```
 
-#### Removing/Adding a particular CA included in OSG CA package
-
-##### Removing
+#### Removing a particular CA included in OSG CA package
 
 ``` console
 root@host #osg-ca-manage remove --caname ce33db76
@@ -289,7 +285,7 @@ exclude_ca = IRAN-GRID
 debug = 0
 ```
 
-##### Adding back the removed CA
+#### Adding a CA from the OSG CA package
 
 ``` console
 root@host #osg-ca-manage add --caname IRAN-GRID
