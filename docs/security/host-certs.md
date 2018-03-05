@@ -183,12 +183,12 @@ Since a single host can run multiple services, service certificates must be plac
 1. Set the ownership of the directory and its underlying files to the Unix user, indicated as `<USER>`, who runs the service:
 
         :::console
-        root@host # chown -R %RED%<USER>%ENDCOLOR%.%RED%<USER>%ENDCOLOR% /etc/grid-security/%RED%<SERVICE>%ENDCOLOR%/
+        root@host # chown -R %RED%<USER>%ENDCOLOR%:%RED%<USER>%ENDCOLOR% /etc/grid-security/%RED%<SERVICE>%ENDCOLOR%/
 
     For example, both the Apache and Tomcat services are run by the `tomcat` user:
 
         :::console
-        root@host # chown -R tomcat.tomcat /etc/grid-security/http/
+        root@host # chown -R tomcat:tomcat /etc/grid-security/http/
 
 Requesting Host/Service Certificate Using OIM
 ----------------------------------------------

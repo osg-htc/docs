@@ -329,7 +329,8 @@ LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity
 
     1. Set `--loglevel,5` under the `-authzfunparms` of the `sec.protocol /usr/lib64 gsi` line. For example:
     
-            sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates -cert:/etc/grid-security/xrootd/xrootdcert.pem \
+            sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
+                        -cert:/etc/grid-security/xrootd/xrootdcert.pem \
                         -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
                         -authzfun:libXrdLcmaps.so -authzfunparms:%RED%--loglevel,5%ENDCOLOR% \
                         -gmapopt:10 -gmapto:0

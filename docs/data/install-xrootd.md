@@ -521,7 +521,8 @@ on all data nodes:
 1. Install [CA certificates](/common/ca#installing-ca-certificates) and [manage CRLs](/common/ca#installing-ca-certificates#managing-certificate-revocation-lists)
 
 1. Follow the instructions for requesting a [service certificate](/security/host-certs#requesting-and-installing-a-service-certificate),
-   using `xrootd` for both the `<SERVICE>` and `<OWNER>`.
+   using `xrootd` for both the `<SERVICE>` and `<OWNER>`, resulting in a certificate and key in `/etc/grid-security/xrootd/xrootdcert.pem`
+   and `/etc/grid-security/xrootd/xrootdkey.pem`, respectively.
 
 1. Install and configure the [LCMAPS VOMS plugin](/security/lcmaps-voms-authentication)
 
@@ -558,7 +559,8 @@ on all data nodes:
     1. Add the following lines to the configuration that you chose above:
 
             xrootd.seclib /usr/lib64/libXrdSec-4.so
-            sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates -cert:/etc/grid-security/xrootd/xrootdcert.pem \
+            sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
+                                -cert:/etc/grid-security/xrootd/xrootdcert.pem \
                                 -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
                                 -authzfun:libXrdLcmaps.so -authzfunparms:--loglevel,0 \
                                 -gmapopt:10 -gmapto:0
@@ -584,7 +586,8 @@ on all data nodes:
 
                 %RED% # ENABLE_SECURITY_BEGIN
                 xrootd.seclib /usr/lib64/libXrdSec-4.so
-                sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates -cert:/etc/grid-security/xrootd/xrootdcert.pem \
+                sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
+                                    -cert:/etc/grid-security/xrootd/xrootdcert.pem \
                                     -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
                                     -authzfun:libXrdLcmaps.so -authzfunparms:--loglevel,0 \
                                     -gmapopt:10 -gmapto:0
@@ -613,8 +616,10 @@ To verify the LCMAPS security, run the following commands from a machine with yo
 
         :::console
         user@client $ voms-proxy-init
-        user@client $ xrdcp /bin/sh root://%RED%<XROOTD HOST>%ENDCOLOR%/%RED%<DESTINATION PATH>%ENDCOLOR%
+        user@client $ xrdcp  /bin/sh root://%RED%<XROOTD HOST>%ENDCOLOR%/%RED%<DESTINATION PATH>%ENDCOLOR%
         [938.1kB/938.1kB][100%][==================================================][938.1kB/s]
+
+    If your transfer does not succeed, run the previous command with `--debug 2` for more information.
 
 ### (Optional) Adding CMS TFC support to XRootD (CMS sites only)
 
