@@ -398,9 +398,11 @@ and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOL
         vo = %RED%<NAME OF VIRTUAL ORGANIZATION>%ENDCOLOR%
 
     Additionally, in each `[PILOT <NAME>]` section, you must specify how the proxy's VOMS attributes will be signed by
-    setting `use_voms_server`:
+    setting `use_voms_server`. Choose one of the following options:
 
-    - To directly sign the VOMS attributes (recommended), you must have access to the `vo`'s certificate and key. Specify the paths to the `vo` certificate and key, and optionally, the VOMS attribute (e.g. `/osg/Role=NULL/Capability=NULL` for the OSG VO):
+    - To directly sign the VOMS attributes (recommended), you must have access to the `vo`'s certificate and key.
+      Specify the paths to the `vo` certificate and key, and optionally, the VOMS attribute (e.g. `/osg/Role=NULL/Capability=NULL`
+      for the OSG VO):
 
             use_voms_server = %RED%false%ENDCOLOR%
             vo_cert = %RED%<PATH TO THE PILOT CERTIFICATE>%ENDCOLOR%
@@ -411,6 +413,10 @@ and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOL
             If you do not have access to the `vo`'s `voms_cert` and `voms_key`, contact the VO manager.
 
     - To have your proxy's VOMS attributes signed by the `vo`'s VOMS server, set `use_voms_server = true`
+      and the VOMS attribute (e.g. `/osg/Role=NULL/Capability=NULL` for the OSG VO):
+
+            use_voms_server = %RED%true%ENDCOLOR%
+            fqan = %RED%<VOMS ATTRIBUTE>%ENDCOLOR%
 
         !!! warning
             Due to the [retirement of VOMS Admin server](https://opensciencegrid.github.io/technology/policy/voms-admin-retire/)
