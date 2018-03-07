@@ -297,30 +297,45 @@ and make sure it matches one of the patterns in `/etc/grid-security/voms-mapfile
 Troubleshooting the LCMAPS VOMS Plugin
 --------------------------------------
 
-LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity of the logging can be increased by setting the `LCMAPS_DEBUG_LEVEL` environment variable. You can also change the destination of the logging by setting the `LCMAPS_LOG_FILE` environment variable.
+LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity of the logging can be increased by modifying the appropriate configuration and restarting the service:
 
-1.  Use the table below to choose the appropriate file to edit:
+- **If you are troubleshooting an HTCondor-CE or GridFTP host...**
 
-    | If your host is a(n)... | Edit this file...                      |
-    |:------------------------|:---------------------------------------|
-    | HTCondor-CE             | `/etc/sysconfig/condor-ce`             |
-    | GridFTP server          | `/etc/sysconfig/globus-gridftp-server` |
+    1.  Use the table below to choose the appropriate file to edit:
 
-    Add the following to the file chosen in the previous step:
+        | If your host is a(n)... | Edit this file...                      |
+        |:------------------------|:---------------------------------------|
+        | HTCondor-CE             | `/etc/sysconfig/condor-ce`             |
+        | GridFTP server          | `/etc/sysconfig/globus-gridftp-server` |
 
-        :::bash
-        export LCMAPS_DEBUG_LEVEL=5
-        # optional (uncomment the following line to output log messages to a file):
-        # export LCMAPS_LOG_FILE=/tmp/lcmaps.log
+    1. Add the following to the file chosen in the previous step:
 
+            :::bash
+            export LCMAPS_DEBUG_LEVEL=5
+            # optional (uncomment the following line to output log messages to a file):
+            # export LCMAPS_LOG_FILE=/tmp/lcmaps.log
 
-1.  Use the table below to choose the appropriate service to restart:
+    1. Restart the [condor-ce](/compute-element/install-htcondor-ce#managing-htcondor-ce-and-associated-services) or 
+       [globus-gridftp-server](/data/gridftp#managing-gridftp) service.
 
-    | If your host is a(n)... | Restart the following service... |
-    |:------------------------|:---------------------------------|
-    | HTCondor-CE             | `condor-ce`                      |
-    | GridFTP server          | `globus-gridftp-server`          |
+- **If you are troubleshooting an XRootD host...**
 
+    1. Choose the configuration file to edit based on the following table:
+
+        | If you are running XRootD in... | Then modify the following file...   |
+        |:--------------------------------|:------------------------------------|
+        | Standalone mode                 | `/etc/xrootd/xrootd-standalone.cfg` |
+        | Clustered mode                  | `/etc/xrootd/xrootd-clustered.cfg`  |
+
+    1. Set `--loglevel,5` under the `-authzfunparms` of the `sec.protocol /usr/lib64 gsi` line. For example:
+    
+            sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
+                        -cert:/etc/grid-security/xrootd/xrootdcert.pem \
+                        -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
+                        -authzfun:libXrdLcmaps.so -authzfunparms:%RED%--loglevel,5%ENDCOLOR% \
+                        -gmapopt:10 -gmapto:0
+
+    1. Restart the [xrootd](/data/install-xrootd#managing-xrootd-services) service
 
 ### Troubleshooting mapping with HTCondor-CE
 
