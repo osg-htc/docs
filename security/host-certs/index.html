@@ -2586,10 +2586,9 @@ host.opensciencegrid.org host1.opensciencegrid.org host2.opensciencegrid.org
 
 <h3 id="requesting-and-installing-a-service-certificate">Requesting and installing a service certificate<a class="headerlink" href="#requesting-and-installing-a-service-certificate" title="Permanent link">&para;</a></h3>
 <h4 id="requesting-service-certificates">Requesting service certificates<a class="headerlink" href="#requesting-service-certificates" title="Permanent link">&para;</a></h4>
-<p>To request a service certificate, use the same <strong>osg-gridadmin-cert-request</strong>
-that is used to request host certificates but prepend <code>&lt;service&gt;/</code> to the
-requested hostname:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-gridadmin-cert-request -H http/host.opensciencegrid.org 
+<p>To request a service certificate, use the same <strong>osg-gridadmin-cert-request</strong> command used to request host certificates
+but prepend the service name, <code>&lt;SERVICE&gt;</code>, to the requested hostname:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-gridadmin-cert-request -H <span style="color:red">&lt;SERVICE&gt;</span>/host.opensciencegrid.org
 </pre></div>
 
 
@@ -2598,26 +2597,50 @@ requested hostname:</p>
 <p>All methods for <a href="#requesting-host-certificates">requesting host certificates</a> can also be used to request service certificates</p>
 </div>
 <h4 id="installing-service-certificates">Installing service certificates<a class="headerlink" href="#installing-service-certificates" title="Permanent link">&para;</a></h4>
-<p><strong>Service certificates</strong> should be installed under a sub-directory in
-<code>/etc/grid-security/</code> indicating the name of the service. For example, the
-service certificate for an Apache httpd service should be installed in
-<code>/etc/grid-security/http</code>:</p>
+<p>Since a single host can run multiple services, service certificates must be placed in their own directory.</p>
+<ol>
+<li>
+<p>Create a directory indicating the name of the service, <code>&lt;SERVICE&gt;</code>, under <code>/etc/grid-security/</code>.</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mkdir /etc/grid-security/&lt;SERVICE&gt;
+</pre></div>
+
+
+</li>
+<li>
+<p>Copy and rename the service certificate and key to the <code>&lt;SERVICE&gt;</code> directory that you created above:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp ./<span style="color:red">&lt;SERVICE&gt;</span>-host.opensciencegrid.org.pem /etc/grid-security/<span style="color:red">&lt;SERVICE&gt;</span>/<span style="color:red">&lt;SERVICE&gt;</span>cert.pem
+<span class="gp">root@host #</span> cp ./<span style="color:red">&lt;SERVICE&gt;</span>-host.opensciencegrid.org-key.pem /etc/grid-security/<span style="color:red">&lt;SERVICE&gt;</span>/<span style="color:red">&lt;SERVICE&gt;</span>key.pem
+</pre></div>
+
+
+<p>For example, the service certificate for an Apache httpd service should be installed in <code>/etc/grid-security/http</code>:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp ./http-host.opensciencegrid.org.pem /etc/grid-security/http/httpcert.pem
-<span class="gp">root@host #</span> chmod <span class="m">444</span> /etc/grid-security/http/httpcert.pem
 <span class="gp">root@host #</span> cp ./http-host.opensciencegrid.org-key.pem /etc/grid-security/http/httpkey.pem
-<span class="gp">root@host #</span> chmod <span class="m">400</span> /etc/grid-security/http/httpkey.pem
 </pre></div>
 
 
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Please note that the service certificate must also be owned by the Unix user who runs the service. For <strong>Apache/Tomcat</strong> this is the tomcat user:</p>
-</div>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chown tomcat.tomcat /etc/grid-security/http/httpcert.pem
-<span class="gp">root@host #</span> chown tomcat.tomcat /etc/grid-security/http/httpkey.pem
+</li>
+<li>
+<p>Set the appropriate permissions on the service certificate and key</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chmod <span class="m">444</span> /etc/grid-security/<span style="color:red">&lt;SERVICE&gt;</span>/<span style="color:red">&lt;SERVICE&gt;</span>cert.pem
+<span class="gp">root@host #</span> chmod <span class="m">400</span> /etc/grid-security/<span style="color:red">&lt;SERVICE&gt;</span>/<span style="color:red">&lt;SERVICE&gt;</span>key.pem
 </pre></div>
 
 
+</li>
+<li>
+<p>Set the ownership of the directory and its underlying files to the Unix user, indicated as <code>&lt;USER&gt;</code>, who runs the service:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chown -R <span style="color:red">&lt;USER&gt;</span>:<span style="color:red">&lt;USER&gt;</span> /etc/grid-security/<span style="color:red">&lt;SERVICE&gt;</span>/
+</pre></div>
+
+
+<p>For example, both the Apache and Tomcat services are run by the <code>tomcat</code> user:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chown -R tomcat:tomcat /etc/grid-security/http/
+</pre></div>
+
+
+</li>
+</ol>
 <h2 id="requesting-hostservice-certificate-using-oim">Requesting Host/Service Certificate Using OIM<a class="headerlink" href="#requesting-hostservice-certificate-using-oim" title="Permanent link">&para;</a></h2>
 <p>If you do not have Grid Admin privileges, please use OIM to request any host or
 service certificates that you may need.  The OSG PKI Certificate Request &amp;

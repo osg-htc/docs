@@ -2804,7 +2804,10 @@ therefore, there are no running services and it does not have to be invoked manu
 
 <p>and make sure it matches one of the patterns in <code>/etc/grid-security/voms-mapfile</code> or <code>/usr/share/osg/voms-mapfile-default</code>, and does not match any patterns in <code>/etc/grid-security/ban-voms-mapfile</code>.</p>
 <h2 id="troubleshooting-the-lcmaps-voms-plugin">Troubleshooting the LCMAPS VOMS Plugin<a class="headerlink" href="#troubleshooting-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h2>
-<p>LCMAPS logs to <code>journalctl</code> (EL7) or <code>/var/log/messages</code> (EL6) and the verbosity of the logging can be increased by setting the <code>LCMAPS_DEBUG_LEVEL</code> environment variable. You can also change the destination of the logging by setting the <code>LCMAPS_LOG_FILE</code> environment variable.</p>
+<p>LCMAPS logs to <code>journalctl</code> (EL7) or <code>/var/log/messages</code> (EL6) and the verbosity of the logging can be increased by modifying the appropriate configuration and restarting the service:</p>
+<ul>
+<li>
+<p><strong>If you are troubleshooting an HTCondor-CE or GridFTP host...</strong></p>
 <ol>
 <li>
 <p>Use the table below to choose the appropriate file to edit:</p>
@@ -2826,6 +2829,8 @@ therefore, there are no running services and it does not have to be invoked manu
 </tr>
 </tbody>
 </table>
+</li>
+<li>
 <p>Add the following to the file chosen in the previous step:</p>
 <div class="codehilite"><pre><span></span><span class="nb">export</span> <span class="nv">LCMAPS_DEBUG_LEVEL</span><span class="o">=</span><span class="m">5</span>
 <span class="c1"># optional (uncomment the following line to output log messages to a file):</span>
@@ -2835,27 +2840,52 @@ therefore, there are no running services and it does not have to be invoked manu
 
 </li>
 <li>
-<p>Use the table below to choose the appropriate service to restart:</p>
+<p>Restart the <a href="../../compute-element/install-htcondor-ce#managing-htcondor-ce-and-associated-services">condor-ce</a> or 
+   <a href="../../data/gridftp#managing-gridftp">globus-gridftp-server</a> service.</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>If you are troubleshooting an XRootD host...</strong></p>
+<ol>
+<li>
+<p>Choose the configuration file to edit based on the following table:</p>
 <table>
 <thead>
 <tr>
-<th align="left">If your host is a(n)...</th>
-<th align="left">Restart the following service...</th>
+<th align="left">If you are running XRootD in...</th>
+<th align="left">Then modify the following file...</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">HTCondor-CE</td>
-<td align="left"><code>condor-ce</code></td>
+<td align="left">Standalone mode</td>
+<td align="left"><code>/etc/xrootd/xrootd-standalone.cfg</code></td>
 </tr>
 <tr>
-<td align="left">GridFTP server</td>
-<td align="left"><code>globus-gridftp-server</code></td>
+<td align="left">Clustered mode</td>
+<td align="left"><code>/etc/xrootd/xrootd-clustered.cfg</code></td>
 </tr>
 </tbody>
 </table>
 </li>
+<li>
+<p>Set <code>--loglevel,5</code> under the <code>-authzfunparms</code> of the <code>sec.protocol /usr/lib64 gsi</code> line. For example:</p>
+<div class="codehilite"><pre><span></span>sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
+            -cert:/etc/grid-security/xrootd/xrootdcert.pem \
+            -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
+            -authzfun:libXrdLcmaps.so -authzfunparms:<span style="color:red">--loglevel,5</span> \
+            -gmapopt:10 -gmapto:0
+</pre></div>
+
+
+</li>
+<li>
+<p>Restart the <a href="../../data/install-xrootd#managing-xrootd-services">xrootd</a> service</p>
+</li>
 </ol>
+</li>
+</ul>
 <h3 id="troubleshooting-mapping-with-htcondor-ce">Troubleshooting mapping with HTCondor-CE<a class="headerlink" href="#troubleshooting-mapping-with-htcondor-ce" title="Permanent link">&para;</a></h3>
 <p>HTCondor-CE caches auth lookups for 30 minutes by default. If you are testing changes to your various mapfiles with HTCondor-CE, you will need to disable this caching.</p>
 <p>To do this, create a file in <code>/etc/condor-ce/config.d</code> called e.g. <code>99-disablegsicache.conf</code> with the following line:</p>
