@@ -16,11 +16,11 @@ This release contains:
     -   Honor "Pragma: no-cache" directive
     -   Included patches from recent Squid security advisories
 -   RSV 3.17.0
-    -   Enhanced security by verifying certificates with sha256
-    -   Use GRACC (rather than the retired gratia service) to verify the last upload time of job records
+    -   Enhanced security by verifying certificates with SHA256
+    -   Use GRACC (rather than the retired Gratia service) to verify the last upload time of job records
     -   Added CREAM and nordugrid support back
-    -   Change the java probe to not emit the pipe character which is a problem for the gratia service
--   osg-release: Use HTTPS protocl for OSG repositories
+    -   Change the Java probe to not emit the pipe character which is a problem for the Gratia service
+-   osg-release: Use HTTPS protocol for OSG repositories
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.9%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
