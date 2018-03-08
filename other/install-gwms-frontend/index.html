@@ -959,13 +959,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#upgrading-the-glideinwms-frontend" title="Upgrading the GlideinWMS Frontend" class="md-nav__link">
-    Upgrading the GlideinWMS Frontend
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1037,33 +1030,6 @@
           <li class="md-nav__item">
   <a href="#proxy-configuration" title="Proxy Configuration" class="md-nav__link">
     Proxy Configuration
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#manual-proxy-renewal" title="Manual proxy renewal" class="md-nav__link">
-    Manual proxy renewal
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-of-automatic-proxy-renewal" title="Example of automatic proxy renewal" class="md-nav__link">
-    Example of automatic proxy renewal
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reconfigure-and-verify-installation" title="Reconfigure and verify installation" class="md-nav__link">
-    Reconfigure and verify installation
   </a>
   
 </li>
@@ -1155,9 +1121,36 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#using-glideinwms" title="Using GlideinWMS" class="md-nav__link">
+    Using GlideinWMS
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#managing-glideinwms-services" title="Managing GlideinWMS Services" class="md-nav__link">
     Managing GlideinWMS Services
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconfiguring-glideinwms" title="Reconfiguring GlideinWMS" class="md-nav__link">
+    Reconfiguring GlideinWMS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrading-glideinwms" title="Upgrading GlideinWMS" class="md-nav__link">
+    Upgrading GlideinWMS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2626,13 +2619,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#upgrading-the-glideinwms-frontend" title="Upgrading the GlideinWMS Frontend" class="md-nav__link">
-    Upgrading the GlideinWMS Frontend
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2704,33 +2690,6 @@
           <li class="md-nav__item">
   <a href="#proxy-configuration" title="Proxy Configuration" class="md-nav__link">
     Proxy Configuration
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#manual-proxy-renewal" title="Manual proxy renewal" class="md-nav__link">
-    Manual proxy renewal
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-of-automatic-proxy-renewal" title="Example of automatic proxy renewal" class="md-nav__link">
-    Example of automatic proxy renewal
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reconfigure-and-verify-installation" title="Reconfigure and verify installation" class="md-nav__link">
-    Reconfigure and verify installation
   </a>
   
 </li>
@@ -2822,9 +2781,36 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#using-glideinwms" title="Using GlideinWMS" class="md-nav__link">
+    Using GlideinWMS
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#managing-glideinwms-services" title="Managing GlideinWMS Services" class="md-nav__link">
     Managing GlideinWMS Services
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reconfiguring-glideinwms" title="Reconfiguring GlideinWMS" class="md-nav__link">
+    Reconfiguring GlideinWMS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrading-glideinwms" title="Upgrading GlideinWMS" class="md-nav__link">
+    Upgrading GlideinWMS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3064,8 +3050,7 @@ machine dependent) so these proxies must be owned by the user <code>frontend</co
 <h4 id="vo-frontend-proxy">VO Frontend proxy<a class="headerlink" href="#vo-frontend-proxy" title="Permanent link">&para;</a></h4>
 <p>The use of a service certificate is recommended. Then you create a proxy from
 the certificate as explained in the <a href="#proxy-configuration">proxy configuration
-section</a>. This can be a plain grid proxy (from
-<code>grid-proxy-init</code>), no VO extensions are required.</p>
+section</a>.</p>
 <p><strong>You must give the Factory operations team the DN of this proxy when you
 initially setup the frontend and each time the DN changes</strong>.</p>
 <h4 id="pilot-proxies">Pilot proxies<a class="headerlink" href="#pilot-proxies" title="Permanent link">&para;</a></h4>
@@ -3162,32 +3147,6 @@ machines):</p>
 <li>In <code>/etc/condor/certs/condor_mapfile</code>, you will need to all DNs for each machine (userschedd, usercollector, vofrontend). Take great care to escape all special characters. Alternatively, you can use the <code>glidecondor_addDN</code> to add these values.</li>
 <li>In the <code>/etc/gwms-frontend/frontend.xml</code> file, change the schedd locations to match the correct server. Also change the collectors tags at the bottom of the file. More details on frontend xml are in the following sections.</li>
 </ul>
-<h3 id="upgrading-the-glideinwms-frontend">Upgrading the GlideinWMS Frontend<a class="headerlink" href="#upgrading-the-glideinwms-frontend" title="Permanent link">&para;</a></h3>
-<p>If you have a working installation of glideinwms-frontend you can just upgrade
-the frontend rpms and skip the most of the configuration procedure below. These
-general upgrade instructions apply when upgrading the glideinwms-frontend rpm
-within same major versions.</p>
-<div class="codehilite"><pre><span></span><span class="gp">#</span> <span style="color:red"> Update the glideinwms-vofrontend packages</span>
-<span class="gp">root@host #</span> yum update glideinwms<span class="se">\*</span>
-<span class="gp">#</span> <span style="color:red"> Update the scripts in the working directory to the latest one</span>
-<span class="gp">#</span> <span style="color:red"> For RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL7</span>
-<span class="gp">root@host #</span> /usr/sbin/gwms-frontend upgrade
-<span class="gp">#</span> <span style="color:red"> For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6</span>
-<span class="gp">root@host #</span> service gwms-frontend upgrade
-<span class="gp">#</span> <span style="color:red"> Restart HTCondor because the configuration may be different</span>
-<span class="gp">root@host #</span> service condor restart
-</pre></div>
-
-
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>When upgrading to GlideinWMS 3.2.7 the second schedd is removed from the default configuration. For a smooth transition:</p>
-<ol>
-<li>remove from <strong><code>/etc/gwms-frontend/frontend.xml</code></strong> the second schedd (the line containing <strong><code>schedd_jobs2@YOUR_HOST</code></strong>)</li>
-<li>reconfigure the frontend (<code>service gwms-frontend reconfig</code>)</li>
-<li>restart HTCondor (<code>service condor restart</code>)</li>
-</ol>
-</div>
 <h2 id="configuring-glideinwms-frontend">Configuring GlideinWMS Frontend<a class="headerlink" href="#configuring-glideinwms-frontend" title="Permanent link">&para;</a></h2>
 <p>After installing the RPM, you need to configure the components of the glideinWMS VO Frontend:</p>
 <ol>
@@ -3407,176 +3366,94 @@ FS (.*) \1
 
 
 <h3 id="proxy-configuration">Proxy Configuration<a class="headerlink" href="#proxy-configuration" title="Permanent link">&para;</a></h3>
-<p>There are 2 types of (or purposes for) proxies required for the VO Frontend: 1
-the <span style="color:green">VO Frontend proxy</span> (used to authenticate with the other
-glideinWMS services) 1 one or more glideinWMS <span style="color:green">pilot proxies</span>
-(used/delegated to the factory services and submitted on the glideinWMS pilot
-jobs) The <span style="color:green">VO Frontend proxy</span> and the <span style="color:green">pilot
-proxy</span> can be the same. By default, the VO Frontend will run as user
-<code>frontend</code> (UID is machine dependent) so these proxies must be owned by the user
-<code>frontend</code>.</p>
-<h4 id="manual-proxy-renewal">Manual proxy renewal<a class="headerlink" href="#manual-proxy-renewal" title="Permanent link">&para;</a></h4>
-<p><span style="color:green">VO Frontend proxy</span>
-The VO Frontend Proxy is used for communicating with the other glideinWMS
-services (Factory, User Collector and Schedd/Submit services). Create the proxy
-using the glidenWMS VO Frontend Host (or Service) cert and change ownership to
-the frontend user.</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> voms-proxy-init-valid <span style="color:red">&lt;hours_valid&gt;</span> <span class="se">\</span>
--cert /etc/grid-security/hostcert.pem <span class="se">\</span>
--key /etc/grid-security/hostkey.pem <span class="se">\</span>
--out <span style="color:green">/tmp/vofe_proxy</span>
-<span class="gp">root@host #</span> chown frontend <span style="color:green">/tmp/vofe_proxy</span>
+<p>GlideinWMS comes with the <a href="#managing-glideinwms-services">gwms-renew-proxies service</a> that can automatically generate
+and renew the <span style="color:green">pilot proxies</span> and <span style="color:green">VO Frontend proxy</span>. To configure this service, modify
+<code>/etc/gwms-frontend/proxies.ini</code> using the following instructions:</p>
+<ol>
+<li>
+<p>For each of your <span style="color:green">pilot proxies</span>, create a <code>[PILOT &lt;NAME&gt;]</code> section, where <code>&lt;NAME&gt;</code> is a descriptive
+   name for the proxy that is unique to your local configuration. In each section, set the <code>proxy_cert</code>, <code>proxy_key</code>,
+   <code>output</code>, and <code>vo</code> corresponding to each pilot proxy:</p>
+<div class="codehilite"><pre><span></span><span class="k">[PILOT <span style="color:red">&lt;NAME&gt;</span>]</span>
+<span class="na">proxy_cert</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO THE PILOT CERTIFICATE&gt;</span></span>
+<span class="na">proxy_key</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO THE PILOT KEY&gt;</span></span>
+<span class="na">output</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO CREATE THE PILOT PROXY&gt;</span></span>
+<span class="na">vo</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;NAME OF VIRTUAL ORGANIZATION&gt;</span></span>
 </pre></div>
 
 
-<p><span style="color:red">Pilot proxy</span>
-The pilot proxy is used on the glideinWMS pilot jobs submitted to the CEs.
-Create the proxy using the <span style="color:red">pilot certificate</span> and change ownership
-to the frontend user.</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> voms-proxy-init -valid <span style="color:red">&lt;hours_valid&gt;</span> <span class="se">\</span>
--voms &lt;vo&gt;
-<span class="go">-cert &lt;pilot_cert&gt; \</span>
-<span class="go">-key &lt;pilot_key&gt; \</span>
-<span class="go">-out <span style="color:red">/tmp/pilot_proxy</span></span>
-<span class="gp">root@host #</span> chown frontend <span style="color:red">/tmp/pilot_proxy</span>
+<p>Additionally, in each <code>[PILOT &lt;NAME&gt;]</code> section, you must specify how the proxy's VOMS attributes will be signed by
+setting <code>use_voms_server</code>. Choose one of the following options:</p>
+<ul>
+<li>
+<p>To directly sign the VOMS attributes (recommended), you must have access to the <code>vo</code>'s certificate and key.
+  Specify the paths to the <code>vo</code> certificate and key, and optionally, the VOMS attribute (e.g. <code>/osg/Role=NULL/Capability=NULL</code>
+  for the OSG VO):</p>
+<div class="codehilite"><pre><span></span>use_voms_server = <span style="color:red">false</span>
+vo_cert = <span style="color:red">&lt;PATH TO THE PILOT CERTIFICATE&gt;</span>
+vo_key = <span style="color:red">&lt;PATH TO THE PILOT KEY&gt;</span>
+fqan = <span style="color:red">&lt;VOMS ATTRIBUTE&gt;</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you do not have access to the <code>vo</code>'s <code>voms_cert</code> and <code>voms_key</code>, contact the VO manager.</p>
+</div>
+</li>
+<li>
+<p>To have your proxy's VOMS attributes signed by the <code>vo</code>'s VOMS server, set <code>use_voms_server = true</code>
+  and the VOMS attribute (e.g. <code>/osg/Role=NULL/Capability=NULL</code> for the OSG VO):</p>
+<div class="codehilite"><pre><span></span>use_voms_server = <span style="color:red">true</span>
+fqan = <span style="color:red">&lt;VOMS ATTRIBUTE&gt;</span>
 </pre></div>
 
 
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p><strong>Proxies do expire.</strong> You can extend the validity by using a longer time interval, e.g. <code>-valid 3000:0</code>. This sequence of commands will need to be renewed when the proxy expires or the machine reboots (if /tmp is used only).</p>
+<p>Due to the <a href="https://opensciencegrid.github.io/technology/policy/voms-admin-retire/">retirement of VOMS Admin server</a>
+in the OSG, <code>use_voms_server = false</code> is the preferred method for signing VOMS attributes. </p>
 </div>
-<p>Make sure that this location is specified correctly in the <code>frontend.xml</code>
-described in the <a href="#configuring-the-frontend">Configuring the Frontend</a> section.</p>
-<p>You may want to automate the procedure above (or part of it) by writing a script
-and adding it to crontab.</p>
-<h4 id="example-of-automatic-proxy-renewal">Example of automatic proxy renewal<a class="headerlink" href="#example-of-automatic-proxy-renewal" title="Permanent link">&para;</a></h4>
-<p>This example (user provided) uses the script
-<a href="../../other/make-proxy.sh">make-proxy.sh</a> attached to this document. You still
-need to do some prep-work but this can be done only once a year and the script
-will warn you with an email.</p>
-<p>Preparation for the <span style="color:green">VO Frontend proxy</span>. You'll have to redo this
-each time the Host (or Service) certificate and key are renewed:</p>
-<ol>
-<li>
-<p>Copy the Host (or Service) certificate and key</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp /etc/grid-security/hostcert.pem /etc/grid-security/hostkey.pem /var/lib/gwms-frontend/
+</li>
+</ul>
+<p>Optionally, the proxy renewal <code>frequency</code> and <code>lifetime</code> (in hours) can be specified in each <code>[PILOT &lt;NAME&gt;]</code> section:</p>
+<div class="codehilite"><pre><span></span># Default: 1
+frequency = <span style="color:red">&lt;RENEWAL FREQUENCY&gt;</span>
+# Default: 24
+lifetime = <span style="color:red">&lt;PROXY LIFETIME&gt;</span>
 </pre></div>
 
 
 </li>
 <li>
-<p>Change ownership and permission of the certificate and key</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chown frontend: /var/lib/gwms-frontend/host**.pem
-<span class="gp">root@host #</span> chmod <span class="m">0600</span> /var/lib/gwms-frontend/host**.pem
+<p>Configure the location and output of the <span style="color:green">VO Frontend proxy</span> under the <code>[FRONTEND]</code> section and set
+   the <code>proxy_cert</code>, <code>proxy_key</code>, and <code>output</code> to paths corresponding to your VO Frontend:</p>
+<div class="codehilite"><pre><span></span><span class="k">[FRONTEND]</span>
+<span class="na">proxy_cert</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO THE FRONTEND CERTIFICATE&gt;</span></span>
+<span class="na">proxy_key</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO THE FRONTEND KEY&gt;</span></span>
+<span class="na">output</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO CREATE THE FRONTEND PROXY&gt;</span></span>
 </pre></div>
 
 
-</li>
-</ol>
-<p>Preparation for the <span style="color:red"> pilot proxy</span>. You'll have to redo this for
-each new or renewed pilot cert.</p>
-<ol>
-<li>
-<p>Create the proxy using the pilot certificate/key (as the user/submitter)</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> grid-proxy-init -valid <span class="m">8800</span>:0 -out /tmp/tmp_proxy
-</pre></div>
-
-
-</li>
-<li>
-<p>Copy the proxy to the correct name and change ownership and permissions (as root):</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp /tmp/tmp_proxy /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
-<span class="gp">root@host #</span> chown frontend: /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
-<span class="gp">root@host #</span> chmod <span class="m">0600</span> /var/lib/gwms-frontend/vofe_base_gi_delegated_proxy
-<span class="gp">root@host #</span> rm /tmp/tmp_proxy
-</pre></div>
-
-
-</li>
-</ol>
-<p>Configure the script for the <span style="color:green">VO Frontend proxy</span></p>
-<ol>
-<li>
-<p>Download the <a href="../../other/make-proxy.sh">attached script</a> (the latest one is <a href="https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy.sh">Here on Github</a>) and save it as <code>/var/lib/gwms-frontend/make-frontend-proxy.sh</code>, make sure that it is executable.</p>
-</li>
-<li>
-<p>Edit the VARIABLES section to look something like (replace your email, host name and the paths that are different in your setup - the comments in the script will help):</p>
-<div class="codehilite"><pre><span></span>SETUP_FILE=&quot;&quot;
-CERT_FILE=&quot;/var/lib/gwms-frontend/hostcert.pem&quot;
-KEY_FILE=&quot;/var/lib/gwms-frontend/hostkey.pem&quot;
-IN_NAME=&quot;/var/lib/gwms-frontend/frontend_base_proxy&quot;
-OUT_NAME=&quot;/tmp/vofe_proxy&quot;
-OWNER_EMAIL=&quot;<span style="color:red">&lt;your@email_here&gt;</span>&quot;
-PROXY_DESCRIPTION=&quot;VO Fronted on <span style="color:red">&lt;hostname&gt;</span>&quot;
-VOMS_OPTION=&quot;&quot;
-</pre></div>
-
-
-</li>
-</ol>
-<p>Configure the script for the <span style="color:red">pilot proxy</span>:</p>
-<ol>
-<li>
-<p>Download the <a href="../../other/make-proxy.sh">attached script</a> (the latest one is <a href="https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy.sh">Here on Github</a>) and save it as <code>/var/lib/gwms-frontend/make-pilot-proxy.sh</code>, make sure that it is executable.</p>
-</li>
-<li>
-<p>Edit the VARIABLES section to look something like (replace your email, host name and the paths that are different in your setup - the comments in the script will help):</p>
-<div class="codehilite"><pre><span></span>SETUP_FILE=&quot;&quot;
-CERT_FILE=&quot;&quot;
-KEY_FILE=&quot;&quot;
-IN_NAME=&quot;/var/lib/gwms-frontend/vofe_base_gi_delegated_proxy&quot;
-OUT_NAME=&quot;/tmp/vofe_gi_delegated_proxy&quot;
-OWNER_EMAIL=&quot;<span style="color:red">&lt;your@email_here&gt;</span>&quot;
-PROXY_DESCRIPTION=&quot;VO Fronted glidein delegated on <span style="color:red">&lt;hostname&gt;</span>&quot;
-VOMS_OPTION=&quot;osg:/osg&quot;
-</pre></div>
-
-
-</li>
-</ol>
-<p>Before adding the scripts to the crontab I'd recommend to test them manually
-once to make sure that there are no errors. As user <code>frontend</code> run the scripts
-(you can also use <strong><code>sh -x</code></strong> to debug them):</p>
-<div class="codehilite"><pre><span></span><span class="go">/var/lib/gwms-frontend/make-frontend-proxy.sh --no-voms-proxy /var/lib/gwms-frontend/make-pilot-proxy.sh</span>
-</pre></div>
-
-
-<p>Add the scripts to the crontab of the user <code>frontend</code> with <code>crontab -e</code>:</p>
-<div class="codehilite"><pre><span></span>10 * * * * /var/lib/gwms-frontend/make-frontend-proxy.sh --no-voms-proxy
-10 * * * * /var/lib/gwms-frontend/make-pilot-proxy.sh
-</pre></div>
-
-
-<p>An additional script like
-<a href="../../other/make-proxy-control.sh">make-proxy-control.sh</a> (the latest one is <a href="https://raw.github.com/DHTC-Tools/OSG-Connect/master/gwms-frontend/make-proxy-control.sh">Here
-on
-Github</a>)
-can be used for an independent verification of the proxies. If you like,
-download it, fix the variables and add it to the crontab like the other two.</p>
-<h3 id="reconfigure-and-verify-installation">Reconfigure and verify installation<a class="headerlink" href="#reconfigure-and-verify-installation" title="Permanent link">&para;</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>In order to use the frontend, first you must reconfigure and upgrade it.</p>
-<div class="codehilite"><pre><span></span><span class="gp">#</span> <span style="color:red"> For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6</span>
-<span class="gp">root@host #</span> service gwms-frontend reconfig
-<span class="gp">root@host #</span> service gwms-frontend upgrade
-
-<span class="gp">#</span> <span style="color:red"> For RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL7</span>
-<span class="gp">root@host #</span> /usr/sbin/gwms-frontend reconfig
-<span class="gp">root@host #</span> /usr/sbin/gwms-frontend upgrade
-</pre></div>
-
-
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>output</code> must be the same path as the <code>classad_proxy</code> specified in <a href="#configuring-the-frontend">this section</a></p>
 </div>
-<p>After this initial reconfiguring/upgrading, you can start the frontend:</p>
-<div class="codehilite"><pre><span></span><span class="gp">#</span> <span style="color:red"> For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6</span>
-<span class="gp">root@host #</span> service gwms-frontend start
-<span class="gp">#</span> <span style="color:red"> For RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL7</span>
-<span class="gp">root@host #</span> systemctl start gwms-frontend
+</li>
+<li>
+<p><strong>(OPTIONAL)</strong> If you are running the <code>gwms-frontend</code> service under a non-default user (default: <code>frontend</code>),
+   specify the user as the owner of your proxies under the <code>[COMMON]</code> section:</p>
+<div class="codehilite"><pre><span></span><span class="k">[COMMON]</span>
+<span class="na">owner</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;GWMS FRONTEND USER&gt;</span></span>
 </pre></div>
 
 
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>[COMMON]</code> section is required but its contents are optional</p>
+</div>
+</li>
+</ol>
 <h3 id="adding-gratia-accounting-and-a-local-monitoring-page-on-a-production-server">Adding Gratia Accounting and a Local Monitoring Page on a Production Server<a class="headerlink" href="#adding-gratia-accounting-and-a-local-monitoring-page-on-a-production-server" title="Permanent link">&para;</a></h3>
 <p>You must report accounting information if you are running more than a few test jobs on the OSG .</p>
 <ol>
@@ -3603,14 +3480,6 @@ SiteName=&quot;HCC-GlideinWMW-Frontend&quot;
 <li>
 <p>Reconfigure HTCondor:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> condor_reconfig
-</pre></div>
-
-
-</li>
-<li>
-<p>Start the services, and add them to be started automatically when the system reboots:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service gratia-probes-cron start
-<span class="gp">root@host #</span> chkconfig --level <span class="m">345</span> gratia-probes-cron on
 </pre></div>
 
 
@@ -3750,83 +3619,135 @@ groupwould only match jobs that have the <code>+is_itb=True</code> ClassAd.</p>
 
 </li>
 </ol>
-<h2 id="managing-glideinwms-services">Managing GlideinWMS Services<a class="headerlink" href="#managing-glideinwms-services" title="Permanent link">&para;</a></h2>
-<p>The scripts updating your CA and CRLs plus three frontend services need to be running:</p>
+<h2 id="using-glideinwms">Using GlideinWMS<a class="headerlink" href="#using-glideinwms" title="Permanent link">&para;</a></h2>
+<h3 id="managing-glideinwms-services">Managing GlideinWMS Services<a class="headerlink" href="#managing-glideinwms-services" title="Permanent link">&para;</a></h3>
+<p>In addition to the GlideinWMS service itself, there are a number of supporting services in your installation. The specific services are:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Software</th>
+<th align="left">Service name</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Fetch CRL</td>
+<td align="left"><code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
+<td align="left">See <a href="../../common/ca#managing-fetch-crl-services">CA documentation</a> for more info</td>
+</tr>
+<tr>
+<td align="left">Gratia</td>
+<td align="left"><code>gratia-probes-cron</code></td>
+<td align="left">Accounting software</td>
+</tr>
+<tr>
+<td align="left">HTCondor</td>
+<td align="left"><code>condor</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">HTTPD</td>
+<td align="left"><code>httpd</code></td>
+<td align="left">GlideinWMS monitoring</td>
+</tr>
+<tr>
+<td align="left">GlideinWMS</td>
+<td align="left"><code>gwms-renew-proxies</code> and <code>gwms-frontend</code></td>
+<td align="left"><a href="#proxy-configuration">Automatic proxy renewal</a> and main GlideinWMS service</td>
+</tr>
+</tbody>
+</table>
+<p>Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as <code>root</code>):</p>
+<table>
+<thead>
+<tr>
+<th align="left">To...</th>
+<th align="left">On EL6, run the command...</th>
+<th align="left">On EL7, run the command...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Start a service</td>
+<td align="left"><code>service &lt;SERVICE-NAME&gt; start</code></td>
+<td align="left"><code>systemctl start &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Stop a  service</td>
+<td align="left"><code>service &lt;SERVICE-NAME&gt; stop</code></td>
+<td align="left"><code>systemctl stop &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Enable a service to start on boot</td>
+<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; on</code></td>
+<td align="left"><code>systemctl enable &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Disable a service from starting on boot</td>
+<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; off</code></td>
+<td align="left"><code>systemctl disable &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="reconfiguring-glideinwms">Reconfiguring GlideinWMS<a class="headerlink" href="#reconfiguring-glideinwms" title="Permanent link">&para;</a></h3>
+<p>After changing the configuration of GlideinWMS, use the following table to find the appropriate command for your
+operating system (run as <code>root</code>):</p>
+<table>
+<thead>
+<tr>
+<th align="left">If your operating system is...</th>
+<th align="left">Run the following command...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Enterprise Linux 7</td>
+<td align="left"><code>systemctl reload gwms-frontend</code></td>
+</tr>
+<tr>
+<td align="left">Enterprise Linux 6</td>
+<td align="left"><code>service gwms-frontend reconfig</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="upgrading-glideinwms">Upgrading GlideinWMS<a class="headerlink" href="#upgrading-glideinwms" title="Permanent link">&para;</a></h3>
+<p>After upgrading the GlideinWMS RPM, you must issue an upgrade command to GlideinWMS:</p>
+<ul>
+<li>
+<p><strong>If you are using Enterprise Linux 7</strong>:</p>
 <ol>
 <li>
-<p>You need to fetch the latest CA Certificate Revocation Lists (CRLs) and you should enable the fetch-crl service to keep the CRLs up to date:</p>
-<div class="codehilite"><pre><span></span><span class="gp">#</span> <span style="color:red"> For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6, or OSG <span class="m">3</span> _older_ than <span class="m">3</span>.1.15</span>
-<span class="gp">root@host #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs</span>
-<span class="gp">root@host #</span> /sbin/service fetch-crl-boot start
-<span class="gp">root@host #</span> /sbin/service fetch-crl-cron start
-<span class="gp">#</span> <span style="color:red"> For RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL7 </span>
-<span class="gp">root@host #</span> /usr/sbin/fetch-crl   <span class="c1"># This fetches the CRLs</span>
-<span class="gp">root@host #</span> systemctl start fetch-crl-boot
-<span class="gp">root@host #</span> systemctl start fetch-crl-cron
+<p>Stop the <code>condor</code> and <code>gwms-frontend</code> services as specified in <a href="#managing-glideinwms-services">this section</a></p>
+</li>
+<li>
+<p>Issue the upgrade command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /usr/sbin/gwms-frontend upgrade
 </pre></div>
 
 
 </li>
 <li>
-<p>HTCondor, httpd, VO Frontend</p>
-<div class="codehilite"><pre><span></span><span class="gp">#</span> <span style="color:red">For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6</span>
-<span class="gp">root@host #</span> service condor start
-<span class="gp">root@host #</span> service httpd start
-<span class="gp">root@host #</span> service gwms-frontend start
-<span class="gp">#</span> <span style="color:red"> For RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL7</span>
-<span class="gp">root@host #</span> systemctl start condor
-<span class="gp">root@host #</span> systemctl start gwms-frontend
+<p>Start the <code>condor</code> and <code>gwms-frontend</code> services as specified in <a href="#managing-glideinwms-services">this section</a></p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>If you are using Enterprise Linux 6</strong>:</p>
+<ol>
+<li>
+<p>Upgrade the GlideinWMS Frontend:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service gwms-frontend upgrade
 </pre></div>
 
 
 </li>
+<li>
+<p>Restart the <code>condor</code> service as specified in the <a href="#managing-glideinwms-services">managing GlideinWMS services section</a></p>
+</li>
 </ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Once you successfully start using the frontend service, each time you change the configuration or want to upgrade, you need to run the following commands</p>
-<div class="codehilite"><pre><span></span><span class="gp">#</span> <span style="color:red"> For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6</span>
-<span class="gp">root@host #</span> service gwms-frontend reconfig
-<span class="gp">#</span> <span style="color:red"> And <span class="k">if</span> you change also some code</span>
-<span class="gp">root@host #</span> service gwms-frontend upgrade
-
-<span class="gp">#</span> <span style="color:red"> But the situation is a bit more complicated in RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL7 due to systemd restrictions</span>
-<span class="gp">#</span> <span style="color:green"> For reconfig:</span>
-<span class="go">A. <span style="color:red"> when the frontend is running</span></span>
-<span class="go">A.1 <span style="color:red"> without any additional options</span></span>
-<span class="gp">root@host #</span> /usr/sbin/gwms-frontend reconfig</span>
-<span class="go">or</span>
-<span class="gp">root@host #</span> systemctl reload gwms-frontend
-
-<span class="go">A.2 <span style="color:red"> if you want to give additional options </span></span>
-<span class="go">systemctl stop gwms-frontend</span>
-<span class="go">/usr/sbin/gwms-frontend reconfig &quot;and your options&quot;</span>
-<span class="go">systemctl start gwms-frontend</span>
-
-<span class="go">B. <span style="color:red"> when the frontend is NOT running </span></span>
-<span class="gp">root@host #</span> /usr/sbin/gwms-frontend reconfig <span class="o">(</span><span class="s2">&quot;and your options&quot;</span><span class="o">)</span>
-
-<span class="gp">$</span> <span style="color:green">For upgrade:</span>
-<span class="go">A. <span style="color:red"> when the frontend is running </span></span>
-<span class="go">systemctl stop gwms-frontend</span>
-<span class="go">/usr/sbin/gwms-frontend upgrade (&quot;and your options if any&quot;)</span>
-<span class="go">systemctl start gwms-frontend</span>
-
-<span class="go">B. <span style="color:red"> when the frontend is NOT running </span></span>
-<span class="go">/usr/sbin/gwms-frontend upgrade (&quot;and your options if any&quot;)</span>
-</pre></div>
-
-
-</div>
-<p>To stop the frontend:</p>
-<div class="codehilite"><pre><span></span><span class="gp">#</span> <span style="color:red">For RHEL <span class="m">6</span>, CentOS <span class="m">6</span>, and SL6 </span>
-<span class="gp">root@host #</span> service gwms-frontend stop
-<span class="gp">#</span> <span style="color:red">For RHEL <span class="m">7</span>, CentOS <span class="m">7</span>, and SL7</span>
-<span class="gp">root@host #</span> systemctl stop gwms-frontend
-</pre></div>
-
-
-<p>And you can stop also the other services if you are not using them independently
-of the frontend.</p>
+</li>
+</ul>
 <h2 id="validating-glideinwms-frontend">Validating GlideinWMS Frontend<a class="headerlink" href="#validating-glideinwms-frontend" title="Permanent link">&para;</a></h2>
 <p>The complete validation of the frontend is the submission of actual jobs.
 However, there are a few things that can be checked prior to submitting user
