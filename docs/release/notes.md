@@ -8,7 +8,8 @@ Release Notes
 
 | Version                          | Date       | Summary                                                                          |
 |:---------------------------------|:-----------|:---------------------------------------------------------------------------------|
-| [3.4.8](/release/3.4/release-3-4-8)       | 2018-02-08 | GlideinWMS 3.2.20-2 |
+| [3.4.9](3.4/release-3-4-9)       | 2018-03-08 | XRootD 4.8.1, GlideinWMS 3.2.21, Frontier Squid 3.5.27-3, RSV 3.17.0, osg-release 3.4-4 |
+| [3.4.8](3.4/release-3-4-8)       | 2018-02-08 | GlideinWMS 3.2.20-2                                                              |
 | [3.4.7](3.4/release-3-4-7)       | 2018-02-01 | Singularity 2.4.2, Pegasus 4.8.1, gratia-probe 1.19.0, perfsonar-tools 4.0.1, HTCondor 8.6.9, frontier-squid 3.5.27-2.1, osg-pki-tools 2.1.4; Upcoming: HDFS 2.6, HTCondor 8.7.6 |
 | [3.4.6-2](3.4/release-3-4-6-2)   | 2018-01-24 | IGTF 1.89                                                                        |
 | [3.4.6](3.4/release-3-4-6)       | 2017-12-21 | XRootD 4.8.0, CernVM-FS 2.4.4, GlideinWMS 3.2.20, osg-pki-tools 2.1.2, HTCondor-CE 3.0.4, osg-configure 2.2.3 |
@@ -31,7 +32,8 @@ Release Notes
 
 | Version                          | Date       | Summary                                                                          |
 |:---------------------------------|:-----------|:---------------------------------------------------------------------------------|
-| [3.3.32](/release/3.3/release-3-3-32)     | 2018-02-08 | GlideinWMS 3.2.20-2 |
+| [3.3.32](3.3/release-3-3-33)     | 2018-03-08 | XRootD 4.8.0-2                                                                   |
+| [3.3.32](3.3/release-3-3-32)     | 2018-02-08 | GlideinWMS 3.2.20-2                                                              |
 | [3.3.31-2](3.3/release-3-3-31-2) | 2018-01-24 | IGTF 1.89                                                                        |
 | [3.3.31](3.3/release-3-3-31)     | 2017-12-21 | XRootD 4.8.0, CernVM-FS 2.4.4, GlideinWMS 3.2.20, osg-pki-tools 2.1.2, lcmaps 1.6.6-1.9, GridFTP-HDFS 1.1.1, HTCondor-CE 2.2.4, osg-configure 1.10.3 |
 | [3.3.30-4](3.3/release-3-3-30-4) | 2017-12-20 | VO Package v77                                                                   |
