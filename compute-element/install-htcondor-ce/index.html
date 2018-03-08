@@ -2691,7 +2691,9 @@
 <li>Install <a href="../../common/ca">CA certificates</a></li>
 </ul>
 <h2 id="installing-htcondor-ce">Installing HTCondor-CE<a class="headerlink" href="#installing-htcondor-ce" title="Permanent link">&para;</a></h2>
-<p>An HTCondor-CE installation consists of the job gateway (i.e., the HTCondor-CE job router) and other support software (e.g., GridFTP, a Gratia probe, authentication software). To simplify installation, OSG provides convenience RPMs that install all required software with a single command.</p>
+<p>An HTCondor-CE installation consists of the job gateway (i.e., the HTCondor-CE job router) and other support software
+(e.g., GridFTP, a Gratia probe, authentication software).
+To simplify installation, OSG provides convenience RPMs that install all required software.</p>
 <ol>
 <li>
 <p>Clean yum cache:</p>
@@ -2709,7 +2711,8 @@
 <p>This command will update <strong>all</strong> packages</p>
 </li>
 <li>
-<p>If your batch system is already installed via non-RPM means and is in the following list, install the appropriate 'empty' RPM. Otherwise, skip to the next step.</p>
+<p><strong>(Optional)</strong> If your batch system is already installed via non-RPM means and is in the following list, install the appropriate 'empty' RPM.
+   Otherwise, skip to the next step.</p>
 <table>
 <thead>
 <tr>
@@ -2730,19 +2733,20 @@
 </table>
 </li>
 <li>
-<p>If your HTCondor batch system is already installed via non-OSG RPM means, add the line below to <code>/etc/yum.repos.d/osg.repo</code>. Otherwise, skip to the next step.</p>
-<div class="codehilite"><pre><span></span>exclude=condor empty-condor
+<p><strong>(Optional)</strong> If your HTCondor batch system is already installed via non-OSG RPM means, add the line below to <code>/etc/yum.repos.d/osg.repo</code>.
+   Otherwise, skip to the next step.</p>
+<div class="codehilite"><pre><span></span>exclude=condor
 </pre></div>
 
 
 </li>
 <li>
-<p>Select the appropriate convenience RPM(s):</p>
+<p>Select the appropriate convenience RPM:</p>
 <table>
 <thead>
 <tr>
-<th align="left">If your batch system is…</th>
-<th align="left">Then use the following package(s)…</th>
+<th align="left">If your batch system is...</th>
+<th align="left">Then use the following package...</th>
 </tr>
 </thead>
 <tbody>
@@ -2771,7 +2775,7 @@
 </li>
 <li>
 <p>Install the CE software:</p>
-<div class="codehilite"><pre><span></span>root@host # yum install *PACKAGE(S)*
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install <span style="color:red">&lt;PACKAGE&gt;</span>
 </pre></div>
 
 
@@ -2823,7 +2827,13 @@ blah_disable_limited_proxy=yes
 <p>There should be no whitespace around the <code>=</code>.</p>
 </div>
 <h3 id="configuring-authentication">Configuring authentication<a class="headerlink" href="#configuring-authentication" title="Permanent link">&para;</a></h3>
-<p>In OSG 3.3, there are three methods to manage authentication for incoming jobs: the <a href="../../security/lcmaps-voms-authentication">LCMAPS VOMS plugin</a>, <a href="../../security/edg-mkgridmap">edg-mkgridmap</a> and <a href="../../security/install-gums">GUMS</a>. edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support <a href="https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html">pool accounts</a>, GUMS is the only software with that capability.</p>
+<p>In OSG 3.3, there are three methods to manage authentication for incoming jobs:
+the <a href="../../security/lcmaps-voms-authentication">LCMAPS VOMS plugin</a>, <a href="../../security/edg-mkgridmap">edg-mkgridmap</a> and <a href="../../security/install-gums">GUMS</a>.
+edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities.
+The LCMAPS VOMS plugin is the new OSG-preferred authentication,
+offering the simplicity of edg-mkgridmap and GUMS' ability to perform VOMS attribute-based mapping.
+If you need to support <a href="https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html">pool accounts</a>,
+GUMS is the only software with that capability.</p>
 <p>In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution.</p>
 <h4 id="authentication-with-the-lcmaps-voms-plugin">Authentication with the LCMAPS VOMS plugin<a class="headerlink" href="#authentication-with-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h4>
 <p>To configure your CE to use the LCMAPS VOMS plugin, follow the instructions in <a href="../../security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin">the LCMAPS VOMS plugin document</a> to prepare the LCMAPS VOMS plugin.</p>
@@ -3059,7 +3069,7 @@ cms\/Role=production cms.prod
 </li>
 <li>
 <p>Next, uncomment the <code>DAEMON_LIST</code> configuration located at <code>/etc/condor-ce/config.d/05-ce-view.conf</code>:</p>
-<div class="codehilite"><pre><span></span><span class="nv">DAEMON_LIST</span> <span class="o">=</span> <span class="k">$(</span>DAEMON_LIST<span class="k">)</span>, CEVIEW, GANGLIAD
+<div class="codehilite"><pre><span></span><span class="nv">DAEMON_LIST</span> <span class="o">=</span> <span class="k">$(</span>DAEMON_LIST<span class="k">)</span>, CEVIEW, GANGLIAD, SCHEDD
 </pre></div>
 
 
@@ -3077,7 +3087,7 @@ cms\/Role=production cms.prod
 </ol>
 <p>The website is served on port 80 by default. To change this default, edit the value of <code>HTCONDORCE_VIEW_PORT</code> in <code>/etc/condor-ce/config.d/05-ce-view.conf</code>.</p>
 <h2 id="using-htcondor-ce">Using HTCondor-CE<a class="headerlink" href="#using-htcondor-ce" title="Permanent link">&para;</a></h2>
-<p>As a site administrator, there are a few ways in which you might use the HTCondor-CE:</p>
+<p>As a site administrator, there are a few ways to use the HTCondor-CE:</p>
 <ul>
 <li>Managing the HTCondor-CE and associated services</li>
 <li>Using HTCondor-CE administrative tools to monitor and maintain the job gateway</li>
