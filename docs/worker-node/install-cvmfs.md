@@ -40,6 +40,7 @@ The following will install CVMFS from the OSG yum repository. It will also insta
 
         :::console
         root@host # yum update
+
     This command will update **all** packages
 
 3. Install CVMFS software:

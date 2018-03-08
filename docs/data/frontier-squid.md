@@ -69,6 +69,7 @@ To install Frontier Squid, make sure that your host is up to date before install
 
         :::console
         root@host # yum update
+
     This command will update **all** packages
 
 3. Install Frontier Squid:

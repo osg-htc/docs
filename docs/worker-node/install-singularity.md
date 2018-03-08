@@ -79,6 +79,7 @@ To install singularity as `setuid`, make sure that your host is up to date befor
 
         :::console
         root@host # yum update
+
     This command will update **all** packages
 
 3. The singularity packages are split into two parts, choose the command that corresponds to your situation:

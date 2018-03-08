@@ -170,6 +170,7 @@ The `keepalived` package is available from standard operating system repositorie
 
         :::console
         root@host # yum update
+
     This command will update **all** packages
 
 1. Install the `keepalived` package:
