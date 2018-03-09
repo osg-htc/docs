@@ -100,14 +100,14 @@ To configure the Frontier Squid service itself:
 
 To configure the OSG Compute Element (CE) to know about your Frontier Squid service:
 
-1.  On your CE host, edit `/etc/osg/config.d/01-squid.ini`
+1.  On your CE host (which may be different than your Frontier Squid host), edit `/etc/osg/config.d/01-squid.ini`
     -   Make sure that `enabled` is set to `True`
     -   Set `location` to the hostname and port of your Frontier Squid
         service (e.g., `my.squid.host.edu:3128`)
     -   Leave the other settings at `DEFAULT` unless you have specific
         reasons to change them
 
-2.  Run `osg-configure` to propagate the changes on your CE.
+2.  Run `osg-configure -c` to propagate the changes on your CE.
 
 !!! Note
     You may want to finish other CE configuration tasks before running
@@ -128,15 +128,15 @@ Start the frontier-squid service and enable it to start at boot time. As a remin
 ## Validating Frontier Squid
 
 As any user on another computer, do the following (where
-`yoursquid.your.domain` is the fully qualified domain name of your
+`%RED%my.squid.host.edu%ENDCOLOR%` is the fully qualified domain name of your
 squid server):
 
 ``` console
-user@host $ export http_proxy=http://%RED%yoursquid.your.domain%ENDCOLOR%:3128
+user@host $ export http_proxy=http://%RED%my.squid.host.edu%ENDCOLOR%:3128
 user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
-X-Cache: MISS from %RED%yoursquid.your.domain%ENDCOLOR%
+X-Cache: MISS from %RED%my.squid.host.edu%ENDCOLOR%
 user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
-X-Cache: HIT from %RED%yoursquid.your.domain%ENDCOLOR%
+X-Cache: HIT from %RED%my.squid.host.edu%ENDCOLOR%
 ```
 
 If the grep doesn't print anything, try removing it from the pipeline
