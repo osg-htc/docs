@@ -27,7 +27,7 @@ pages:
   - 'Install Singularity': 'worker-node/install-singularity.md'
 - Data:
   - HTTP & CVMFS:
-    - 'Install HTTP Cache': 'data/frontier-squid.md'
+    - 'Install Frontier-Squid HTTP Cache': 'data/frontier-squid.md'
     - 'Update OASIS Shared Repo': 'data/update-oasis.md'
     - 'Install an OASIS Repo': 'data/external-oasis-repos.md'
   - POSIX Storage:
