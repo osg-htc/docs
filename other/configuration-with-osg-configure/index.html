@@ -3068,6 +3068,9 @@ This directory will be accesed via the <code>$OSG_APP</code> environment variabl
 should be visible on both the CE and worker nodes. Only the CE needs to
 have write access to this directory. This directory must also contain a
 sub-directory <code>etc/</code> with 1777 permissions.</p>
+<p>This directory may also be in OASIS, in which case set <code>app_dir</code> to
+<code>/cvmfs/oasis.opensciencegrid.org</code>. (The CE does not need write access in
+that case.)</p>
 <p><strong>data_dir</strong>:<br/>
 This directory can be accessed via the <code>$OSG_DATA</code> environment variable. It
 should be readable and writable on both the CE and worker nodes.</p>
