@@ -299,8 +299,23 @@ Jobs will be put on held with a `HoldReason` attribute that can be inspected wit
 
 ``` console
 user@host $ condor_ce_q -l <JOB-ID> -attr HoldReason
-HoldReason = "CE job in status 5 put on hold by SYSTEM_PERIODIC_HOLD due to non-existent route or entry in JOB_ROUTER_ENTRIES."
+HoldReason = "CE job in status 5 put on hold by SYSTEM_PERIODIC_HOLD due to no matching routes, route job limit, or route failure threshold."
 ```
+
+#### Held jobs: no matching routes, route job limit, or route failure threshold
+
+Jobs on the CE will be put on hold if they are not claimed by the job router within 30 minutes.
+The most common cases for this behavior are as follows:
+
+- **The job does not match any job routes:**
+  use [condor\_ce\_job\_router\_info](#condor_ce_job_router_info) to see why your idle job does not match any
+  [routes](/compute-element/job-router-recipes#how-job-routes-are-constructed).
+- **The route(s) that the job matches to are full:**
+  See [limiting the number of jobs](/compute-element/job-router-recipes#limiting-the-number-of-jobs).
+- **The job router is throttling submission to your batch system due to submission failures:**
+  See the HTCondor manual for [FailureRateThreshold](http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html#55958).
+  Check for errors in the [JobRouterLog](#jobrouterlog) or [GridmanagerLog](#gridmanagerlog) for HTCondor and
+  non-HTCondor batch systems, respectively.
 
 #### Held jobs: Missing/expired user proxy
 
@@ -331,15 +346,6 @@ manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/12_Appendix_A.html#1047
         grid_resource = condor condorce.example.com condorce.example.com:9619
 
     replacing `condorce.example.com` with the hostname of the CE.
-
-#### Held jobs: Non-existent route or entry in JOB_ROUTER_ENTRIES
-
-Jobs on the CE will be put on hold if they do not match any job routes within 30 minutes.
-
-**Next actions**
-
-Use [condor\_ce\_job\_router\_info](#condor_ce_job_router_info) to see why your idle job does not match any routes.
-
 
 ### Identifying the corresponding job ID on the local batch system
 
