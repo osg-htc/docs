@@ -335,7 +335,7 @@ JOB_ROUTER_ENTRIES = [ \
 ]
 ```
 
-### Limiting the number of...
+### Limiting the number of jobs
 
 This section outlines how to limit the number of total or idle jobs in a specific route (i.e., if this limit is reached, jobs will no longer be placed in this route).
 
