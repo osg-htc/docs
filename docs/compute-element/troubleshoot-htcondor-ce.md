@@ -308,7 +308,8 @@ Jobs on the CE will be put on hold if they are not claimed by the job router wit
 The most common cases for this behavior are as follows:
 
 - **The job does not match any job routes:**
-  use [condor\_ce\_job\_router\_info](#condor_ce_job_router_info) to see why your idle job does not match any routes.
+  use [condor\_ce\_job\_router\_info](#condor_ce_job_router_info) to see why your idle job does not match any
+  [routes](/compute-element/job-router-recipes#how-job-routes-are-constructed).
 - **The route(s) that the job matches to are full:**
   See [limiting the number of jobs](/compute-element/job-router-recipes#limiting-the-number-of-jobs).
 - **The job router is throttling submission to your batch system due to submission failures:**
