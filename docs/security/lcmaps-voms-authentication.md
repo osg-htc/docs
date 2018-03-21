@@ -60,27 +60,28 @@ Unix accounts must exist for each VO, VO role, VO group, or user you choose to s
         "%RED%<VO, VO role, VO group or user>%ENDCOLOR%" %RED%<Unix account>%ENDCOLOR%
 
 
-1.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support
+1.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support.
+    The full list of VOs is located on [OIM](https://oim.opensciencegrid.org/oim/vo).
+    You are not expected to support all the VOs.
+    If you would like to support opportunistic usage, we recommend creating the following Unix accounts:
+
+    | **VO name**                                             | **Unix account(s)**                                                    |
+    |---------------------------------------------------------|------------------------------------------------------------------------|
+    | [GLOW](https://oim.opensciencegrid.org/oim/vo?id=13)    | `glow`                                                                 |
+    | [OSG](https://oim.opensciencegrid.org/oim/vo?id=30)     | `osg`                                                                  |
+    | [ATLAS](https://oim.opensciencegrid.org/oim/vo?id=35)   | `usatlas1`, `usatlas2`, `usatlas3`, `usatlas4`                         |
+    | [CMS](https://oim.opensciencegrid.org/oim/vo?id=3)      | `cmspilot`, `uscmslocal`, `cmslocal`, `cmsprod`, `lcgadmin`, `cmsuser` |
+    | [Fermilab](https://oim.opensciencegrid.org/oim/vo?id=9) | `fermigli`, `fermilab`                                                 |
+    | [HCC](https://oim.opensciencegrid.org/oim/vo?id=67)     | `hcc`                                                                  |
+    | [Gluex](https://oim.opensciencegrid.org/oim/vo?id=62)   | `gluex`                                                                |
+
+    Additionally, it is also recommended to create the `mis` Unix account,
+    which is used by OSG staff to assist with troubleshooting.
+
 1.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](../other/configuration-with-osg-configure#subcluster-resource-entry):
 
-``` ini
-allowed_vos="VO1,VO2..."
-```
-
-The full list of VOs is located on [OIM](https://oim.opensciencegrid.org/oim/vo).
-You are not expected to support all the VOs.
-If you would like to support opportunistic usage, we recommend creating the following Unix accounts:
-
-| **VO name**                                             | **Unix account(s)**                                                    |
-|---------------------------------------------------------|------------------------------------------------------------------------|
-| [GLOW](https://oim.opensciencegrid.org/oim/vo?id=13)    | `glow`                                                                 |
-| [OSG](https://oim.opensciencegrid.org/oim/vo?id=30)     | `osg`                                                                  |
-| [ATLAS](https://oim.opensciencegrid.org/oim/vo?id=35)   | `usatlas1`, `usatlas2`, `usatlas3`, `usatlas4`                         |
-| [CMS](https://oim.opensciencegrid.org/oim/vo?id=3)      | `cmspilot`, `uscmslocal`, `cmslocal`, `cmsprod`, `lcgadmin`, `cmsuser` |
-| [Fermilab](https://oim.opensciencegrid.org/oim/vo?id=9) | `fermigli`, `fermilab`                                                 |
-| [HCC](https://oim.opensciencegrid.org/oim/vo?id=67)     | `hcc`                                                                  |
-| [Gluex](https://oim.opensciencegrid.org/oim/vo?id=62)   | `gluex`                                                                |
-
+        :::ini
+        allowed_vos="VO1,VO2..."
 
 ### Applying configuration settings
 
