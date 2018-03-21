@@ -44,9 +44,7 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Ensure the host has [a supported operating system](/release/supported_platforms)
 - Obtain root access to the host
 - Prepare the [required Yum repositories](/common/yum)
-
-!!! note "Validation Steps"
-    The validation steps below require CVMFS to be installed.  Follow the steps on the [CVMFS Installation](/worker-node/install-cvmfs) page.
+- A [CVMFS installation](/worker-node/install-cvmfs) for Singularity image distribution
 
 Choosing Privileged vs Unprivileged Singularity
 -----------------------------------------------
