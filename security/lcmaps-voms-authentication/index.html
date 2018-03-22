@@ -2629,6 +2629,7 @@ which is used by OSG staff to assist with troubleshooting.</p>
 <p>For a table of the configuration files and their order of evaluation, consult the <a href="#configuration-files">reference section</a>.</p>
 <ul>
 <li><a href="#migrating-from-edg-mkgridmap">Migrating from edg-mkgridmap</a></li>
+<li><a href="#migrating-from-gums">Migrating from GUMS</a></li>
 <li><a href="#mapping-vos">Mapping VOs</a></li>
 <li><a href="#mapping-users">Mapping users</a></li>
 <li><a href="#banning-vos">Banning VOs</a></li>
@@ -2660,7 +2661,8 @@ which is used by OSG staff to assist with troubleshooting.</p>
 
 </li>
 <li>
-<p>If the above command returns <code>Not defined: GRIDMAP</code>, skip to step 4. Otherwise, delete the line that sets the <code>GRIDMAP</code> configuration variable</p>
+<p>If the above command returns a file, remove the <code>GRIDMAP</code> configuration from that file.
+   Repeat this until the command returns <code>Not defined: GRIDMAP</code>.</p>
 </li>
 <li>Reconfigure HTCondor-CE:<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> condor_ce_reconfig
 </pre></div>
