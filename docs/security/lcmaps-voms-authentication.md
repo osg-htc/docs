@@ -111,6 +111,7 @@ The following subsections contain information on migration from `edg-mkgridmap`,
 For a table of the configuration files and their order of evaluation, consult the [reference section](#configuration-files).
 
 -   [Migrating from edg-mkgridmap](#migrating-from-edg-mkgridmap)
+-   [Migrating from GUMS](#migrating-from-gums)
 -   [Mapping VOs](#mapping-vos)
 -   [Mapping users](#mapping-users)
 -   [Banning VOs](#banning-vos)
