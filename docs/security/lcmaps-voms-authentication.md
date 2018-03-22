@@ -136,7 +136,8 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
             :::console
             root@host # condor_ce_config_val -v GRIDMAP
 
-    1. If the above command returns `Not defined: GRIDMAP`, skip to step 4. Otherwise, delete the line that sets the `GRIDMAP` configuration variable
+    1. If the above command returns a file, remove the `GRIDMAP` configuration from that file.
+       Repeat this until the command returns `Not defined: GRIDMAP`.
     1. Reconfigure HTCondor-CE:
 
             :::console
