@@ -78,22 +78,11 @@ An example of the `/etc/grid-security/grid-mapfile` follows:
 
 ### Using LCMAPS for authorization
 
-In order to use LCMAPS callouts with GSI OpenSSH, you'll first need to edit `/etc/grid-security/gsi-authz.conf` to
-indicate that Globus should do a GSI callout for authorization. 
-The file should contain the following:
 
-```
-globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout
-```
+In order to use LCMAPS callouts with GSI OpenSSH,, follow the instructions in [the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin) to prepare the LCMAPS VOMS plugin.
 
-so that LCMAPS is used. Next, install the lcmaps rpms:
-
-``` console
-[root@server]# yum install lcmaps lcas-lcmaps-gt4-interface
-```
-
-Finally, you'll need to modify `/etc/lcmaps.db` so that the `gumsclient` entry has the correct endpoint for your gums
-server.
+!!! note
+    This is the suggested mechanism for all new installs.
 
 Using GSI OpenSSH
 ------------------
