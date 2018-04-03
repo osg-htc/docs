@@ -4,22 +4,25 @@ Hadoop Overview
 Hadoop Introduction
 -------------------
 
-Hadoop is a data processing framework. 
-It is an open-source Apache Foundation project, and the main contributor is Yahoo! The framework has two main parts -
-job scheduling and a distributed file system, the Hadoop Distributed File System (HDFS). 
-We currently utilize HDFS as a general-purpose file system. For this document, we'll use the words "Hadoop" and "HDFS"
-interchangeably, but it's nice to know the distinction.
+Hadoop is a data processing framework 
+The framework has two main parts - job scheduling and a distributed file system,
+the Hadoop Distributed File System (HDFS).  
 
-We recommend starting with [HDFS architecture
-document](http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html).
+We currently utilize HDFS as a general-purpose file system. For this document,
+we'll use the words "Hadoop" and "HDFS" interchangeably, but it's nice to know
+the distinction.
 
-Please do read through this. 
-We will assume you have read this, or at least the important architectural portions. 
-The file system is block-oriented; each file is broken up into 64 MB or 128 MB chunks (user configurable). 
-These chunks are stored on data nodes and served up from there; the central namenode keeps track of the block locations,
-the namespace information, and block placement policies. 
-HDFS provides POSIX-like semantics; it provides fully random-access reads and non-random-access writes. Currently, fsync
-and appends (after the file has been initially closed) are experimental and not available to OSG-based installs.
+
+The HDFS file system has several features, some of which differ a bit from a typical
+file system:
+
+- Each file is broken up into 64 MB or 128 MB chunks (user configurable)
+    - These chunks are stored on data nodes and served up from there; 
+    - The central namenode manages block locations, the namespace information, and block placement policies. 
+- HDFS provides a subset of POSIX semantics:
+    - Random-access reads and non-random-access writes are fully supported. 
+    - Fsync and appends (after the file has been initially closed) are experimental and not available to OSG-based installs.
+    - Rewriting closed files is not supported
 
 Hadoop SE Components
 --------------------
@@ -63,7 +66,7 @@ The minimal installation would involve 5 nodes:
 
 If desired, hadoop-name and hadoop-name2 may be virtualized. 
 Prior to installation, DNS / host name resolution **must** work. 
-That is, you should be able to resolve all the hadoop servers either through DNS or /etc/hosts. 
+That is, you should be able to resolve all the Hadoop servers either through DNS or /etc/hosts. 
 Because of the grid software, hadoop-grid **must** have reverse DNS working.
 
 Medium Installation (50-150TB, WAN transfers up to 2 Gbps)
@@ -93,7 +96,7 @@ For users with access to the local cluster, it is not difficult to bypass authen
 
 There are some ways to improve security of your cluster:
 
--   Keep the namenode behind a firewall. One possibility is to run hadoop entirely on the private subnet of a cluster.
+-   Keep the namenode behind a firewall. One possibility is to run Hadoop entirely on the private subnet of a cluster.
 -   Use firewalls to protect the HDFS ports (default for the datanode is 50010 and 50075; for the namenode, 50070 and 9000).
 -   For clusters utilizing FUSE, one can block outgoing connections to the HDFS ports except for user root. This means that only root-owned processes (such as FUSE-DFS) will be able to access Hadoop.
     -   This is sufficient for grid environments, but does not protect one in the case where the attacker has physical access to the network switch.
@@ -104,3 +107,10 @@ There are three options to export your data outside your cluster:
 -   Globus GridFTP.
 -   XRootD.
 -   HTTP and HTTPS.  OSG utilizes the HTTP(S) protocol implementation built into the XRootD server.
+
+
+References
+----------
+
+- [Hadoop Architecture](http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html)
+
