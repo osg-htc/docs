@@ -46,25 +46,9 @@ In order to do this, symlink `/etc/gsissh/ssh_host_dsa_key` and `/etc/gsissh/ssh
     account that will be used with GSI OpenSSH must have a shell 
     assigned to it and not be locked (e.g., have `!` in the password field of `/etc/shadow`).
 
-### Using a gridmap file for authorization
+### Configuring authentication
 
-In order to use gsissh, you'll need to create mappings in your `/etc/grid-security/grid-mapfile` for the DNs that you
-will allow to login. An example of the `/etc/grid-security/grid-mapfile` follows:
-
-```
-"/DC=org/DC=doegrids/OU=People/CN=USER NAME 123456" useraccount
-```
-
-!!! note
-    The mappings will not consider VOMS extensions so the first mapping that matches will be used regardless of the VO role or VO present in the users proxy
-
-Also, ensure that the `/etc/grid-security/gsi-authz.conf` file is empty or that all of the lines in the file are
-commented out using a `#` at the beginning of the line.
-
-### Using LCMAPS for authorization
-
-In order to use LCMAPS callouts with GSI OpenSSH, follow the instructions in
-[the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin)
+To configure authentication for GSI OpenSSH, follow the instructions in [the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin)
 to prepare the LCMAPS VOMS plugin.
 
 Using GSI OpenSSH
