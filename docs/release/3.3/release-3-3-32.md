@@ -19,7 +19,7 @@ Updating to the new release
 
 ### Update Repositories
 
-To update to this series, you need [install the current OSG repositories](/common/yum#install-osg-repositories#updating-from-osg-31-32-33-to-33-or-34).
+To update to this series, you need to [install the current OSG repositories](/common/yum#install-osg-repositories#updating-from-osg-31-32-33-to-33-or-34).
 
 ### Update Software
 

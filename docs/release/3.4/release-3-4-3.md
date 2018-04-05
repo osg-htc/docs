@@ -51,7 +51,7 @@ To update to the OSG 3.4 series, please consult the page on [updating between re
 
 ### Update Repositories
 
-To update to this series, you need to [install the current OSG repositories](../../common/yum#install-osg-repositories).
+To update to this series, you need to to [install the current OSG repositories](../../common/yum#install-osg-repositories).
 
 ### Update Software
 
