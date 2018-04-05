@@ -2,9 +2,9 @@ Installing and Using the XRootD Client
 ==============================================
 
 XRootD is a high performance data system widely used by several science VOs on OSG to store and to distribute data to
-jobs. 
+jobs.
 It can be used to create a data store from distributed data nodes or to serve data to systems using a distributed
-caching architecure.  
+caching architecture.
 Either mode of operation requires you to install the XRootD client software.
 
 This page provides instructions for installing and using the XRootD client software to access data using XRootD.
@@ -25,16 +25,16 @@ Before Starting
 ---------------
 
 Before starting the installation process, consider the following points *if you are using a FUSE mount to access
-XRootD*:
+XRootD:*
 
 -   **User IDs:** If it does not exist already, you will need to create Linux users `xrootd` 
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](../release/supported_platforms)
+- Ensure the host has [a supported operating system](/docs/release/supported_platforms)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](../common/yum)
-- Install [CA certificates](../common/ca)
+- Prepare the [required Yum repositories](/docs/common/yum)
+- Install [CA certificates](/docs/common/ca)
 
 
 Installing the XRootD Software
@@ -81,8 +81,8 @@ If you are planning on using a FUSE mount, you'll need to install the client rpm
 Configuring the XRootD Client Software
 --------------------------------------
 
-Once the appropriate RPM(s) are installed, only the FUSE setup will need further configuration.  
-See [this](/docs/data//install-xrootd/#optional-enabling-a-fuse-mount) for instructions on updating your `fstab`.
+Once the appropriate RPM(s) are installed, only the FUSE setup will need further configuration.
+See [this](/docs/data//install-xrootd#optional-enabling-a-fuse-mount) for instructions on updating your `fstab` file.
 
 
 Using the XRootD Client Software
@@ -91,7 +91,7 @@ Using the XRootD Client Software
 ### Using the XRootD client tools
 
 Once the `xrootd-client` rpm is installed, you should be able to use the `xrdcp` command to copy files to and from
-XRootD systems and the local file system.  
+XRootD systems and the local file system.
 For example:
 
 ``` console
@@ -101,9 +101,9 @@ user@host # xrdcp xroot://redirector.domain.org:1094//storage/path/test /tmp/tes
 user@host # diff /tmp/test1 /tmp/test 
 ```
 
-For other operations, you'll need to use the `xrdfs` command.  
+For other operations, you'll need to use the `xrdfs` command.
 This command allows you to do file operations such as creating directories, removing directories, deleting files, and
-moving files on a XRootD system, provided you have the appropriate authorization.  
+moving files on a XRootD system, provided you have the appropriate authorization.
 The `xrdfs` command can be used interactively by running `xrdfs xroot://redirector.domain.org:1094/`.
 Alternatively, you can use it in batch mode by adding the `xrdfs` command after the xroot URI.  For example:
 
@@ -120,25 +120,25 @@ user@host # xrdfs xroot://redirector.domain.org:1094/  rmdir  /storage/path/test
 !!! Note
     To access remote XRootD resources, you will may need to use a VOMS proxy in order to authenticate successfully.  The
     XRootD client tools will automatically locate your proxy if you generate it using `voms-proxy-init`, otherwise you
-    can set the `X509_USER_PROXY` to the location of the proxy XRootD should use.
+    can set the `X509_USER_PROXY` environment variable to the location of the proxy XRootD should use.
 
 ### Using LD\_PRELOAD method
 
 In order to use the LD\_PRELOAD method to access a XRootD data store, you'll need to change your environment to use the
-XRootD libraries in conjunction with the standard Unix binaries.  
-This is done by setting the `LD\_PRELOAD` environment variable. 
-Once this is done, the standard unix commands like `mkdir`, `rm`, `cp`, etc. will work with xroot URIs.  
+XRootD libraries in conjunction with the standard Unix binaries.
+This is done by setting the `LD_PRELOAD` environment variable.
+Once this is done, the standard unix commands like `mkdir`, `rm`, `cp`, etc. will work with xroot URIs.
 For example:
 
 ``` console
-root@host # export LD_PRELOAD=/usr/lib64/libXrdPosixPreload.so 
-root@host # echo "This is a new test" >/tmp/test 
-root@host # mkdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
-root@host # cp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
-root@host # cp xroot://redirector.yourdomain.org:1094//storage/path/subdir/test /tmp/test1 
-root@host # diff /tmp/test1 /tmp/test 
-root@host # rm xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
-root@host # rmdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
+user@host # export LD_PRELOAD=/usr/lib64/libXrdPosixPreload.so 
+user@host # echo "This is a new test" >/tmp/test 
+user@host # mkdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
+user@host # cp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
+user@host # cp xuser://redirector.yourdomain.org:1094//storage/path/subdir/test /tmp/test1 
+user@host # diff /tmp/test1 /tmp/test 
+user@host # rm xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
+user@host # rmdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
 ```
 
 ### Using the XRootDFS FUSE Mount
@@ -150,13 +150,13 @@ Try using `cp`, `rm`, `mv`, `mkdir`, `rmdir`.
 Assuming your mount is `/mnt/xrootd`:
 
 ``` console
-root@host # echo "This is a new test" >/tmp/test 
-root@host # mkdir -p /mnt/xrootd/subdir/sub2
-root@host # cp /tmp/test /mnt/xrootd/subdir/sub2/test 
-root@host # cp /mnt/xrootd/subdir/sub2/test /mnt/xrootd/subdir/sub2/test1 
-root@host # cp /mnt/xrootd/subdir/sub2/test1 /tmp/test1 
-root@host # diff /tmp/test1 /tmp/test 
-root@host # rm -r /mnt/xrootd/subdir
+user@host # echo "This is a new test" >/tmp/test 
+user@host # mkdir -p /mnt/xrootd/subdir/sub2
+user@host # cp /tmp/test /mnt/xrootd/subdir/sub2/test 
+user@host # cp /mnt/xrootd/subdir/sub2/test /mnt/xrootd/subdir/sub2/test1 
+user@host # cp /mnt/xuserd/subdir/sub2/test1 /tmp/test1 
+user@host # diff /tmp/test1 /tmp/test 
+user@host # rm -r /mnt/xrootd/subdir
 ```
 
 Validation
@@ -169,7 +169,7 @@ You can validate your XRootD client installation by copying an example file from
 Assuming that there is a file called `test_file` in your XRootD data store:
 
 ``` console
-root@host # xrdcp xroot://redirector.yourdomain.org:1094//storage/path/test_file /tmp/test1
+user@host # xrdcp xroot://redirector.yourdomain.org:1094//storage/path/test_file /tmp/test1
 ```
 
 ### LD\_PRELOAD
@@ -177,8 +177,8 @@ root@host # xrdcp xroot://redirector.yourdomain.org:1094//storage/path/test_file
 Assuming that there is a file called `test_file` in your XRootD data store:
 
 ``` console
-root@host # export LD_PRELOAD=/usr/lib64/libXrdPosixPreload.so
-root@host # cp xroot://redirector.yourdomain.org:1094//storage/path/test_file /tmp/test1
+user@host # export LD_PRELOAD=/usr/lib64/libXrdPosixPreload.so
+user@host # cp xroot://redirector.yourdomain.org:1094//storage/path/test_file /tmp/test1
 ```
 
 
@@ -187,9 +187,8 @@ root@host # cp xroot://redirector.yourdomain.org:1094//storage/path/test_file /t
 Assuming your mount is `/mnt/xrootd` and that there is a file called `test_file` in your XRootD data store:
 
 ``` console
-root@host # cp /mnt/xrootd/test_file /tmp/test1
+user@host # cp /mnt/xrootd/test_file /tmp/test1
 ```
-
 
 
 How to get Help?
