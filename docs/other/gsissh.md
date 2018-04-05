@@ -1,8 +1,8 @@
 Installing and Maintaining GSI OpenSSH
 =======================================
 
-This document gives instructions on installing and using the GSI OpenSSH server available in the OSG repository and
-configuring it so that you can use on your cluster.
+This document contains instructions to install and configure the GSI OpenSSH server available in the OSG repository for
+use on your cluster.
 
 Before Starting
 ---------------
@@ -22,8 +22,8 @@ As with all OSG software installations, there are some one-time (per host) steps
 
 ### Users and Groups
 
-The RPM installation will try to create the `gsisshd` user and group and the `/var/empty/gsisshd` directory with the
-correct ownership if they are not present. 
+The RPM installation will create the `gsisshd` user and group and the `/var/empty/gsisshd` directory with the correct
+ownership if they are not present.
 If you are using a configuration management system or ROCKS, you should make
 sure that these users and groups are created before installing the RPMs to avoid potential issues. 
 The gsisshd user should have an empty home directory. 
@@ -34,12 +34,11 @@ You may change it if needed to something else as long as the ownerships remain t
 Installing GSI OpenSSH
 ----------------------
 
-OSG provides rpms for GSI OpenSSH, the installation procedure just consists of installing them.
+Install the GSI OpenSSH rpms:
 
-1. Install the GSI OpenSSH rpms
-     :::console
-     [root@server]# yum install gsi-openssh-server gsi-openssh-clients
-
+```
+root@server # yum install gsi-openssh-server gsi-openssh-clients
+```
 
 Configuring GSI OpenSSH
 -----------------------
@@ -56,33 +55,28 @@ In order to do this, symlink `/etc/gsissh/ssh_host_dsa_key` and `/etc/gsissh/ssh
 !!! note
     Regardless of the authorization method used for the user, any 
     account that will be used with GSI OpenSSH must have a shell 
-    assigned to it and not be locked (have ! in the password field of `/etc/shadow`).
+    assigned to it and not be locked (e.g., have `!` in the password field of `/etc/shadow`).
 
 ### Using a gridmap file for authorization
 
 In order to use gsissh, you'll need to create mappings in your `/etc/grid-security/grid-mapfile` for the DNs that you
-will allow to login. 
-The mappings should be entered one to a line, with each line consisting of DN followed by the account the DN should map
-to. 
-Also, you should ensure that the `/etc/grid-security/gsi-authz.conf` file is empty or that all of the lines in the file
-are commented out using a `#` at the beginning of the line.
-
-!!! note
-    The mappings will not consider VOMS extensions so the first mapping that matches will be used regardless of the VO role or VO present in the users proxy
-
-An example of the `/etc/grid-security/grid-mapfile` follows:
+will allow to login. An example of the `/etc/grid-security/grid-mapfile` follows:
 
 ```
 "/DC=org/DC=doegrids/OU=People/CN=USER NAME 123456" useraccount
 ```
 
+!!! note
+    The mappings will not consider VOMS extensions so the first mapping that matches will be used regardless of the VO role or VO present in the users proxy
+
+Also, ensure that the `/etc/grid-security/gsi-authz.conf` file is empty or that all of the lines in the file are
+commented out using a `#` at the beginning of the line.
+
 ### Using LCMAPS for authorization
 
-
-In order to use LCMAPS callouts with GSI OpenSSH,, follow the instructions in [the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin) to prepare the LCMAPS VOMS plugin.
-
-!!! note
-    This is the suggested mechanism for all new installs.
+In order to use LCMAPS callouts with GSI OpenSSH, follow the instructions in
+[the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin)
+to prepare the LCMAPS VOMS plugin.
 
 Using GSI OpenSSH
 ------------------
@@ -103,7 +97,7 @@ Validating GSI OpenSSH
 After starting the `gsisshd` service you can check if it is running correctly
 
 ``` console
-$ grid-proxy-init
+user@client $ grid-proxy-init
 Your identity: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=User Name
 Enter GRID pass phrase for this identity:
 Creating proxy ............................................................................................... Done
@@ -127,7 +121,7 @@ level:
 LCMAPS_DEBUG_LEVEL=2
 ```
 
-Output goes to `/var/log/messages` by default.
+Output goes to `/var/log/messages` or `journalctl` by default.
 
 
 Help
