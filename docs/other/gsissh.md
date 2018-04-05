@@ -20,17 +20,6 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Prepare the [required Yum repositories](/docs/common/yum)
 - Install [CA certificates](/docs/common/ca)
 
-### Users and Groups
-
-The RPM installation will create the `gsisshd` user and group and the `/var/empty/gsisshd` directory with the correct
-ownership if they are not present.
-If you are using a configuration management system or ROCKS, you should make
-sure that these users and groups are created before installing the RPMs to avoid potential issues. 
-The gsisshd user should have an empty home directory. 
-By default, this is home directory set to `/var/empty/gsisshd` and belongs to the `gsisshd` user and group. 
-You may change it if needed to something else as long as the ownerships remain the same.
-
-
 Installing GSI OpenSSH
 ----------------------
 
