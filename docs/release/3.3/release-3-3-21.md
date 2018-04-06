@@ -38,7 +38,7 @@ This release contains:
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.21%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
-Detailed changes are below. All of the documentation can be found [here](../../)
+Detailed changes are below. All of the documentation can be found [here](/index.md)
 
 Known Issues
 ------------
@@ -61,7 +61,7 @@ Updating to the new release
 
 ### Update Repositories
 
-To update to this series, you need to [install the current OSG repositories](../../common/yum#install-osg-repositories).
+To update to this series, you need to [install the current OSG repositories](/common/yum#install-osg-repositories).
 
 ### Update Software
 
@@ -78,7 +78,7 @@ root@host # yum update
 Need help?
 ----------
 
-Do you need help with this release? [Contact us for help](../../common/help).
+Do you need help with this release? [Contact us for help](/common/help).
 
 Detailed changes in this release
 --------------------------------
