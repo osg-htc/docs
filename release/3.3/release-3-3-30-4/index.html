@@ -2403,10 +2403,10 @@
 </li>
 </ul>
 <p>These <a href="https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.30-4%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a> were addressed in this release.</p>
-<p>Detailed changes are below. All of the documentation can be found <a href="../../../">here</a></p>
+<p>Detailed changes are below. All of the documentation can be found <a href="../../..">here</a></p>
 <h2 id="updating-to-the-new-release">Updating to the new release<a class="headerlink" href="#updating-to-the-new-release" title="Permanent link">&para;</a></h2>
 <h3 id="update-repositories">Update Repositories<a class="headerlink" href="#update-repositories" title="Permanent link">&para;</a></h3>
-<p>To update to this series, you need <a href="../../../common/yum#install-osg-repositories">install the current OSG repositories</a>.</p>
+<p>To update to this series, you need to <a href="../../../common/yum#install-osg-repositories">install the current OSG repositories</a>.</p>
 <h3 id="update-software">Update Software<a class="headerlink" href="#update-software" title="Permanent link">&para;</a></h3>
 <p>Once the repositories are installed, you can update to this new release with:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum update
@@ -2414,12 +2414,11 @@
 
 
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Please be aware that running <code>yum update</code> may also update other RPMs. You can exclude packages from being updated using the <code>--exclude=[package-name or glob]</code> option for the <code>yum</code> command.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Watch the yum update carefully for any messages about a <code>.rpmnew</code> file being created. That means that a configuration file had been edited, and a new default version was to be installed. In that case, RPM does not overwrite the edited configuration file but instead installs the new version with a <code>.rpmnew</code> extension. You will need to merge any edits that have made into the <code>.rpmnew</code> file and then move the merged version into place (that is, without the <code>.rpmnew</code> extension).</p>
+<p class="admonition-title">Notes</p>
+<ul>
+<li>Please be aware that running <code>yum update</code> may also update other RPMs. You can exclude packages from being updated using the <code>--exclude=[package-name or glob]</code> option for the <code>yum</code> command.</li>
+<li>Watch the yum update carefully for any messages about a <code>.rpmnew</code> file being created. That means that a configuration file had been edited, and a new default version was to be installed. In that case, RPM does not overwrite the edited configuration file but instead installs the new version with a <code>.rpmnew</code> extension. You will need to merge any edits that have made into the <code>.rpmnew</code> file and then move the merged version into place (that is, without the <code>.rpmnew</code> extension).</li>
+</ul>
 </div>
 <h2 id="need-help">Need help?<a class="headerlink" href="#need-help" title="Permanent link">&para;</a></h2>
 <p>Do you need help with this release? <a href="../../../common/help">Contact us for help</a>.</p>
