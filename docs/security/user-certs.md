@@ -93,7 +93,58 @@ To solve the problem split the bundle in the two PEM files as documented in the 
 
 If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate. You can follow the steps [here](../security/certificate-management#osg-user-cert-revoke) to revoke your certificate. The same instructions apply if you need to revoke a certificate because your email address changed or your name has changed.
 
+
+Getting a Certificate from a Service Provider with cigetcert
+------------------------------------------------------------
+
+You may also get a user certificate from a SAML 2.0 Service Provider such as your home institution or XSEDE.
+This kind of certificate is short-lived, typically valid only for a week.
+Therefore it is more suitable for running jobs than using in your browser.
+
+You will need to use the `cigetcert` tool to get a certificate this way.
+Use yum to install the `cigetcert` package from the OSG repositories.
+
+This is a new way of getting a certificate and does not work with all institutions.
+To get a list of institutions supported by `cigetcert`, run:
+```console
+user@host $ cigetcert --listinstitutions
+Clemson University
+Fermi National Accelerator Laboratory
+LIGO Scientific Collaboration
+LTER Network
+...
+```
+
+To get a certificate, run
+```console
+user@host $ cigetcert -i "<INSTITUTION>"
+Authorizing ...... authorized
+Fetching certificate ..... fetched
+Storing certificate in /tmp/x509up_u46142
+Your certificate is valid until: Fri Apr 13 17:03:13 2018
+```
+Authentication is controlled by the institution;
+depending on the institution, you may need a valid Kerberos token, or will be prompted for a password.
+
+If all goes well, you should see output similar to what's above.
+The certificate is created in `/tmp/x509up_u<YOUR UID>`, which is the same place proxies are created by `grid-proxy-init`.
+
+You may specify default arguments in the `CIGETCERTOPTS` environment variable.
+This can save you from having to type in the entire institution name every time you want a cert.
+For example, to always use FNAL as the institution, put this in your `.bashrc`:
+```bash
+export CIGETCERTOPTS="-i 'Fermi National Accelerator Laboratory'"
+```
+
+Your VO may also provide specific instructions for how to best use this tool.
+Contact your VO support center for details.
+
+Finally, cigetcert has advanced options for things like selecting an auth method, loading a configuration from a server, or storing the cert on a MyProxy server.
+See the [manual page for cigetcert](http://htmlpreview.github.io/?https://github.com/fermitools/cigetcert/blob/master/cigetcert.html) for more information.
+
+
 References
 ----------
 
 -   [Useful Documentation.OpenSSL commands (from NCSA)](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html) - e.g. how to convert the format of your certificate.
+-   [Manual page for cigetcert](http://htmlpreview.github.io/?https://github.com/fermitools/cigetcert/blob/master/cigetcert.html)
