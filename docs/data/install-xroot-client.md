@@ -26,10 +26,10 @@ Before Starting
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](/docs/release/supported_platforms)
+- Ensure the host has [a supported operating system](/release/supported_platforms)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](/docs/common/yum)
-- Install [CA certificates](/docs/common/ca)
+- Prepare the [required Yum repositories](/common/yum)
+- Install [CA certificates](/common/ca)
 
 If you are using the FUSE mount, you should also consider the following requirement:
 
@@ -137,7 +137,7 @@ If you are planning on using a FUSE mount, you'll need to install the xrootd-fus
 ### Configuring the FUSE Mount 
 
 Once the appropriate rpms are installed, the FUSE setup will need further configuration.
-See [this](/docs/data//install-xrootd#optional-enabling-a-fuse-mount) for instructions on updating your `fstab` file.
+See [this](/data//install-xrootd#optional-enabling-a-fuse-mount) for instructions on updating your `fstab` file.
 
 ### Using the XRootDFS FUSE Mount
 
