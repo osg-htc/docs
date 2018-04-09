@@ -99,7 +99,8 @@ Getting a Certificate from a Service Provider with cigetcert
 
 You may also get a user certificate from a SAML 2.0 Service Provider such as your home institution or XSEDE.
 This kind of certificate is short-lived, typically valid only for a week.
-Therefore it is more suitable for running jobs than using in your browser.
+Therefore it is not suitable for using in your browser.
+However, it is useful for command-line access to site services such as compute or storage.
 
 You will need to use the `cigetcert` tool to get a certificate this way.
 Use yum to install the `cigetcert` package from the OSG repositories.
