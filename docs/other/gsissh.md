@@ -53,9 +53,9 @@ root@host # ln -s /etc/ssh/ssh_host_ed25519_key.pub ssh_host_ed25519_key.pub
 !!! note
     Your system may not have all of these host keys
 
-If you choose not to replace your existing service, you'll need to change the port setting in the GSI OpenSSH
+If you choose not to replace your existing SSH service, you'll need to change the port setting in the GSI OpenSSH
 configuration to another port (e.g. 2222) so that you can run both SSH services at the same time.
-This can be done by editing `/etc/gsissh/sshd` and adding `Port 2222` to the file.
+This can be done by editing `/etc/gsissh/sshd` and setting `Port 2222`.
 
 
 
