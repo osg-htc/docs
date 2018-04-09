@@ -616,13 +616,14 @@ Using GlideinWMS
 
 In addition to the GlideinWMS service itself, there are a number of supporting services in your installation. The specific services are:
 
-| Software   | Service name                             | Notes                                                                        |
-|:-----------|:-----------------------------------------|:-----------------------------------------------------------------------------|
-| Fetch CRL  | `fetch-crl-boot` and `fetch-crl-cron`    | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
-| Gratia     | `gratia-probes-cron`                     | Accounting software                                                          |
-| HTCondor   | `condor`                                 |                                                                              |
-| HTTPD      | `httpd`                                  | GlideinWMS monitoring                                                        |
-| GlideinWMS | `gwms-renew-proxies` and `gwms-frontend` | [Automatic proxy renewal](#proxy-configuration) and main GlideinWMS service  |
+| Software   | Service name                                                   | Notes                                                                        |
+|:-----------|:---------------------------------------------------------------|:-----------------------------------------------------------------------------|
+| Fetch CRL  | `fetch-crl-boot` and `fetch-crl-cron`                          | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
+| Gratia     | `gratia-probes-cron`                                           | Accounting software                                                          |
+| HTCondor   | `condor`                                                       |                                                                              |
+| HTTPD      | `httpd`                                                        | GlideinWMS monitoring                                                        |
+| GlideinWMS | `gwms-renew-proxies` (EL6) or `gwms-renew-proxies.timer` (EL7) | [Automatic proxy renewal](#proxy-configuration)                              |
+|            | `gwms-frontend`                                                | The main GlideinWMS service                                                  |
 
 Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as `root`):
 
