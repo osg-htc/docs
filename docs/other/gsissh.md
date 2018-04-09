@@ -35,11 +35,29 @@ Configuring GSI OpenSSH
 In order to get a running instance of the GSI OpenSSH server, you'll need to change the default configuration. 
 However, before you go any further, you'll need to decide whether you want GSI OpenSSH to be your primary ssh service or
 not (e.g. whether the GSI OpenSSH service will replace your existing SSH service). 
+Regardless of your choice, you should probably have both services use the same host keys.  
+This can be done by running the following commands :
+
+```console
+root@host # cd /etc/gsissh
+root@host # ln -s /etc/ssh/ssh_host_rsa_key ssh_host_rsa_key
+root@host # ln -s /etc/ssh/ssh_host_rsa_key.pub ssh_host_rsa_key.pub
+root@host # ln -s /etc/ssh/ssh_host_dsa_key ssh_host_dsa_key
+root@host # ln -s /etc/ssh/ssh_host_dsa_key.pub ssh_host_dsa_key.pub
+root@host # ln -s /etc/ssh/ssh_host_ecdsa_key ssh_host_ecdsa_key
+root@host # ln -s /etc/ssh/ssh_host_ecdsa_key.pub ssh_host_ecdsa_key.pub
+root@host # ln -s /etc/ssh/ssh_host_ed25519_key ssh_host_ed25519_key
+root@host # ln -s /etc/ssh/ssh_host_ed25519_key.pub ssh_host_ed25519_key.pub
+```
+
+!!! note
+    Your system may not have all of these host keys
+
 If you choose not to replace your existing service, you'll need to change the port setting in the GSI OpenSSH
-configuration to another port (e.g. 2222) so that you can run both SSH services at the same time. 
-Regardless of your choice, you should probably have both services use the same host key. 
-In order to do this, symlink `/etc/gsissh/ssh_host_dsa_key` and `/etc/gsissh/ssh_host_rsa_key` to
-`/etc/ssh/ssh_host_dsa_key` and `/etc/ssh/ssh_host_rsa_key` respectively. 
+configuration to another port (e.g. 2222) so that you can run both SSH services at the same time.
+This can be done by editing `/etc/gsissh/sshd` and adding `Port 2222` to the file.
+
+
 
 !!! note
     Regardless of the authorization method used for the user, any 
