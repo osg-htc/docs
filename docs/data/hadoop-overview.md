@@ -4,7 +4,7 @@ Hadoop Overview
 Hadoop Introduction
 -------------------
 
-Hadoop is a data processing framework 
+Hadoop is a data processing framework.
 The framework has two main parts - job scheduling and a distributed file system,
 the Hadoop Distributed File System (HDFS).  
 
@@ -36,7 +36,7 @@ The components in each of these categories are outlined below:
     -   Datanode: This node stores copies of the blocks in HDFS. They communicate with the namenode to perform "housekeeping" such as creating new replicas, transferring blocks between datanodes, and deleting excess blocks. They also communicate with the clients to transfer data. To reach the best scalability, there should be as many datanodes as possible.
 -   Grid extensions
     -   Globus GridFTP: The standard GridFTP from Globus. We use a plug-in module (using the Globus Direct Storage Interface) that allows the GridFTP process to use the HDFS C-bindings directly.
-    -   Gratia probe: Gratia is an accounting system that records batch system and transfer records to a database. The records are collected by a client program called a "probe" which runs on the GridFTP server. It parses the GridFTP server's log files and creates transfer records.
+    -   Gratia probe: Gratia is an accounting system that records batch system and transfer records to a database. The records are collected by a client program called a "probe" which runs on the GridFTP or XRootD server.  The probe parses the GridFTP or XRootD logs and generates transfer records.
     -   XRootD server plugin: XRootD is an extremely flexible and powerful data server popular in the high energy physics community. There exists a HDFS plugin for XRootD; integrating with XRootD provides a means to export HDFS securely outside the local cluster, as another XRootD plugin provides GSI-based authentication and authorization.
 -   HDFS auxiliary:
     -   "Secondary Namenode": Perhaps more aptly called a "checkpoint server". This server downloads the file system image and journal from the namenode, merges the two together, and uploads the new file system image up to the namenode. This is done on a different server in order to reduce the memory footprint of the namenode.
@@ -52,38 +52,27 @@ In addition to the server components, there are two client components:
 -   Namenode: We recommend at least 8GB of RAM (minimum is 2GB RAM), preferably 16GB or more. A rough rule of thumb is 1GB per 100TB of raw disk space; the actual requirements is around 1GB per million objects (files, directories, and blocks). The CPU requirements are any modern multi-core server CPU. Typically, the namenode will only use 2-5% of your CPU.
     -   As this is a single point of failure, the **most important** requirement is reliable hardware rather than high performance hardware. We suggest a node with redundant power supplies and at least 2 hard drives.
 -   Secondary namenode: This node needs the same amount of RAM as the namenode for merging namespaces. It does not need to be high performance or high reliability.
--   Datanode: Each datanode should plan to dedicate 200-500MB of RAM to HDFS. A general rule of thumb is to dedicate 1 CPU to HDFS per 5TB of disk capacity under heavily load; clusters with moderate load (i.e., mostly sequential workflows) will need less. At idle, HDFS will consume almost no CPU.
+-   Datanode: Each datanode should plan to dedicate about 1-1.5 GB of RAM to HDFS. A general rule of thumb is to dedicate 1 CPU to HDFS per 5TB of disk capacity under heavily load; clusters with moderate load (i.e., mostly sequential workflows) will need less. At idle, HDFS will consume almost no CPU.
 
-Minimal Installation (0-50TB, WAN transfers up to 1Gbps)
---------------------------------------------------------
+Sizing Your Cluster
+---------------------
 
 The minimal installation would involve 5 nodes:
 
-- hadoop-name: The namenode for the Hadoop system.  Must be on a private network.
-- hadoop-name2: This will run the HDFS secondary namenode. Must be on a private network.
-- hadoop-data1, hadoop-data2: Two HDFS datanodes. They will hold data for the system, so they should have sizable hard drives. As the Hadoop installation grows to many terabytes, this will be the only class of nodes one adds. Must be on a private network.
-- hadoop-grid: Runs the Globus GridFTP server. Must have a public interface and a private interface.
+- hadoop-name: The namenode for the Hadoop system.  
+- hadoop-name2: This will run the HDFS secondary namenode. 
+- hadoop-data1, hadoop-data2: Two HDFS datanodes. They will hold data for the system, so they should have sizable hard drives. As the Hadoop installation grows to many terabytes, this will be the only class of nodes one adds.
+- hadoop-grid: Runs the Globus GridFTP server. 
 
 If desired, hadoop-name and hadoop-name2 may be virtualized. 
 Prior to installation, DNS / host name resolution **must** work. 
 That is, you should be able to resolve all the Hadoop servers either through DNS or /etc/hosts. 
-Because of the grid software, hadoop-grid **must** have reverse DNS working.
+Because of the grid software, hadoop-grid **must** have reverse DNS working.  
 
-Medium Installation (50-150TB, WAN transfers up to 2 Gbps)
-----------------------------------------------------------
-
-For a medium install, make the following changes over the minimal install: 
-
-- Run multiple GridFTP servers (2 should be fine); if possible, use 10 Gbps cards for these hosts. 
-- Add many more HDFS datanodes. This usually means starting to add 1 or 2 TB hard drives to some worker nodes.
-
-Large Installation (>150TB, WAN transfers over 2 Gbps)
----------------------------------------------------------
-
-For a large installation, make the following changes: 
-
-- Run more GridFTP servers; plan for 800 Mbps per host with 1 Gbps card in order to have excess capacity. 
-- Purchase machines suitable for HDFS datanodes. It is possible to get a 2U box with 8-12 hard drives; for many projects, this will provide a more suitable CPU to disk ratio than the 1U boxes with 2 hard drives.
+Larger clusters have the same basic components but with  more HDFS datanodes and gridftp servers. 
+Adding HDFS datanodes increases the capacity and  number of IOPS the cluster can provide.
+Additional GridFTP servers will increase the data transfer rates to locations outside your data center.
+As your cluster increases in size, virtualized namenodes may need to be moved to physical hardware.
 
 Hadoop Security
 ---------------
