@@ -39,7 +39,7 @@ pages:
   - XRootD:
     - 'XRootD Overview': 'data/xrootd-overview.md'
     - 'Install XRootD': 'data/install-xrootd.md'
-    - 'Install XRootD Client': 'data/install-xroot-client.md'
+    - 'Using XRootD': 'data/install-xroot-client.md'
 - Security:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host and Service Certificates': 'security/host-certs.md'
