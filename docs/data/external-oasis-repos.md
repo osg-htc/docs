@@ -103,7 +103,14 @@ The initial repository creation must be run as `root`:
     root@host # echo -e "\*\\t\\t-\\tnofile\\t\\t16384" >>/etc/security/limits.conf
     root@host # ulimit -n 16384
     root@host # cvmfs_server mkfs -o %BLUE%LIBRARIAN%ENDCOLOR% %RED%example.opensciencegrid.org%ENDCOLOR%
-    root@host # (echo Order deny,allow;echo Deny from all;echo Allow from 127.0.0.1;echo Allow from ::1;echo Allow from 129.79.53.0/24 129.93.244.192/26, 129.93.244.192/26;echo Allow from 2001:18e8:2:6::/56 2600:900:6::/48) >/srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.htaccess
+    root@host # cat >/srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.htaccess <<xEOFx
+    Order deny,allow
+    Deny from all
+    Allow from 127.0.0.1
+    Allow from ::1
+    Allow from 129.79.53.0/24 129.93.244.192/26, 129.93.244.192/26
+    Allow from 2001:18e8:2:6::/56 2600:900:6::/48 
+    xEOFx
 
 Here, we increase the number of open files allowed, create the repository using the `mkfs` command, and then limit the hosts that are allowed to access the repo to the OSG CDN.
 
