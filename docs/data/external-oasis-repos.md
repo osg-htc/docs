@@ -108,7 +108,7 @@ The initial repository creation must be run as `root`:
     Deny from all
     Allow from 127.0.0.1
     Allow from ::1
-    Allow from 129.79.53.0/24 129.93.244.192/26, 129.93.244.192/26
+    Allow from 129.79.53.0/24 129.93.244.192/26 129.93.244.192/26
     Allow from 2001:18e8:2:6::/56 2600:900:6::/48 
     xEOFx
 
