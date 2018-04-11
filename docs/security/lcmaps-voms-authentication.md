@@ -358,6 +358,39 @@ and then restart `condor-ce`.
 
 Once you are satisfied that your mappings are working, you may remove this file and restart `condor-ce` in order to reduce the load on your CE caused by authentication.
 
+### Common issues
+
+#### Wrong version of GridFTP
+
+If you have the EPEL version of the GridFTP server, you may see error messages in `journalctl` (EL7),
+`var/log/messages` (EL6), or the location specified by `LCMAPS_LOG_FILE`.
+
+**Symptoms**
+
+```
+Apr 11 13:51:41 atlas-hub globus-gridftp-server: You are still root after the LCMAPS execution. The implicit root-mapping safety is enabled. See documentation for details
+```
+
+**Next actions**
+
+1. Check that the versions of the `globus-gridftp-server-*` do not end in `osgXX.elY`:
+
+        :::console
+        user@host $ rpm -q ^globus-gridftp
+
+1. Verify that the [priority](/common/yum#installing-and-configuring-repositories) of the OSG repositories are set
+   properly
+
+1. Clean your yum cache
+
+        :::console
+        root@host # yum clean all --enablerepo=*
+
+1. Reinstall `globus-gridftp-server`:
+
+        :::console
+        root@host # yum update globus-gridftp-server
+
 Getting Help
 ------------
 
