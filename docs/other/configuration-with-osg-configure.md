@@ -536,6 +536,10 @@ should be visible on both the CE and worker nodes. Only the CE needs to
 have write access to this directory. This directory must also contain a
 sub-directory `etc/` with 1777 permissions.
 
+This directory may also be in OASIS, in which case set `app_dir` to
+`/cvmfs/oasis.opensciencegrid.org`. (The CE does not need write access in
+that case.)
+
 **data_dir**:<br/>
 This directory can be accessed via the `$OSG_DATA` environment variable. It
 should be readable and writable on both the CE and worker nodes.

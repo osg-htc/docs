@@ -1,19 +1,21 @@
-OSG Software Stack -- Data Release -- 3.3.29-3
+OSG Software Stack -- Data Release -- 3.3.33-2
 ==============================================
 
-**Release Date**: 2017-11-01
+**Release Date**: 2018-04-05
 
 Summary of changes
 ------------------
 
 This release contains:
 
--   CA Certificates based on [IGTF 1.87](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
-    - added new accredited classic DarkMatter Private Root G4 and ICA (AE)
-    - updated PK-Grid-2007 trust anchor with extended validity period (PK)
-    - extended validity period for UNAMgrid-ca trust anchor (MX)
+-   CA Certificates based on [IGTF 1.90](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
+    -   Added new Grid-FR hierarchy for Renater (AC-GRID-FR series) (FR)
+    -   Added new GARUDAINDIA2 root for key roll-over IGCA (IN)
+    -   Updated contact metadata for UNAM trust anchors (MX)
+-   [VO Package v78](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-78)
+    -   Update ATLAS default mappings
 
-These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.29-3%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
+These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.33-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
 Detailed changes are below. All of the documentation can be found [here](/index.md).
 
@@ -50,32 +52,42 @@ We added or updated the following packages to the production OSG yum repository.
 
 #### Enterprise Linux 6
 
--   [igtf-ca-certs-1.87-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.87-1.osg33.el6)
--   [osg-ca-certs-1.67-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.67-1.osg33.el6)
+-   [igtf-ca-certs-1.90-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.90-1.osg33.el6)
+-   [osg-ca-certs-1.70-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.70-1.osg33.el6)
+-   [vo-client-78-1.osg33.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=vo-client-78-1.osg33.el6)
 
 #### Enterprise Linux 7
 
--   [igtf-ca-certs-1.87-1.osg33.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.87-1.osg33.el7)
--   [osg-ca-certs-1.67-1.osg33.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.67-1.osg33.el7)
+-   [igtf-ca-certs-1.90-1.osg33.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=igtf-ca-certs-1.90-1.osg33.el7)
+-   [osg-ca-certs-1.70-1.osg33.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.70-1.osg33.el7)
+-   [vo-client-78-1.osg33.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=vo-client-78-1.osg33.el7)
 
 ### RPMs
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-    igtf-ca-certs osg-ca-certs
+    igtf-ca-certs osg-ca-certs osg-gums-config vo-client vo-client-edgmkgridmap vo-client-lcmaps-voms
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 6
 
 ``` file
-igtf-ca-certs-1.87-1.osg33.el6
-osg-ca-certs-1.67-1.osg33.el6
+igtf-ca-certs-1.90-1.osg33.el6
+osg-ca-certs-1.70-1.osg33.el6
+osg-gums-config-78-1.osg33.el6
+vo-client-78-1.osg33.el6
+vo-client-edgmkgridmap-78-1.osg33.el6
+vo-client-lcmaps-voms-78-1.osg33.el6
 ```
 
 #### Enterprise Linux 7
 
 ``` file
-igtf-ca-certs-1.87-1.osg33.el7
-osg-ca-certs-1.67-1.osg33.el7
+igtf-ca-certs-1.90-1.osg33.el7
+osg-ca-certs-1.70-1.osg33.el7
+osg-gums-config-78-1.osg33.el7
+vo-client-78-1.osg33.el7
+vo-client-edgmkgridmap-78-1.osg33.el7
+vo-client-lcmaps-voms-78-1.osg33.el7
 ```

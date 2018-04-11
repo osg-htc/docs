@@ -27,7 +27,7 @@ pages:
   - 'Install Singularity': 'worker-node/install-singularity.md'
 - Data:
   - HTTP & CVMFS:
-    - 'Install HTTP Cache': 'data/frontier-squid.md'
+    - 'Install Squid HTTP Cache': 'data/frontier-squid.md'
     - 'Update OASIS Shared Repo': 'data/update-oasis.md'
     - 'Install an OASIS Repo': 'data/external-oasis-repos.md'
   - POSIX Storage:
@@ -60,6 +60,8 @@ pages:
 - Release Information:
   - 'Release Note Overview': 'release/notes.md'
   - 3.4 Release Notes:
+    - 'OSG Release 3.4.9-2': 'release/3.4/release-3-4-9-2.md'
+    - 'OSG Release 3.4.9': 'release/3.4/release-3-4-9.md'
     - 'OSG Release 3.4.8': 'release/3.4/release-3-4-8.md'
     - 'OSG Release 3.4.7': 'release/3.4/release-3-4-7.md'
     - 'OSG Release 3.4.6-2': 'release/3.4/release-3-4-6-2.md'
@@ -79,6 +81,8 @@ pages:
     - 'OSG Release 3.4.0-2': 'release/3.4/release-3-4-0-2.md'
     - 'OSG Release 3.4.0': 'release/3.4/release-3-4-0.md'
   - 3.3 Release Notes:
+    - 'OSG Release 3.3.33-2': 'release/3.3/release-3-3-33-2.md'
+    - 'OSG Release 3.3.33': 'release/3.3/release-3-3-33.md'
     - 'OSG Release 3.3.32': 'release/3.3/release-3-3-32.md'
     - 'OSG Release 3.3.31-2': 'release/3.3/release-3-3-31-2.md'
     - 'OSG Release 3.3.31': 'release/3.3/release-3-3-31.md'

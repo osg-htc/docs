@@ -22,6 +22,7 @@ To install the LCMAPS VOMS plugin, make sure that your host is up to date before
 
         :::console
         root@host # yum update
+
     This command will update **all** packages
 
 1. Install `lcmaps`, the default mapfile, and the configuration tools:
@@ -59,27 +60,28 @@ Unix accounts must exist for each VO, VO role, VO group, or user you choose to s
         "%RED%<VO, VO role, VO group or user>%ENDCOLOR%" %RED%<Unix account>%ENDCOLOR%
 
 
-1.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support
+1.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support.
+    The full list of VOs is located on [OIM](https://oim.opensciencegrid.org/oim/vo).
+    You are not expected to support all the VOs.
+    If you would like to support opportunistic usage, we recommend creating the following Unix accounts:
+
+    | **VO name**                                             | **Unix account(s)**                                                    |
+    |---------------------------------------------------------|------------------------------------------------------------------------|
+    | [GLOW](https://oim.opensciencegrid.org/oim/vo?id=13)    | `glow`                                                                 |
+    | [OSG](https://oim.opensciencegrid.org/oim/vo?id=30)     | `osg`                                                                  |
+    | [ATLAS](https://oim.opensciencegrid.org/oim/vo?id=35)   | `usatlas1`, `usatlas2`, `usatlas3`, `usatlas4`                         |
+    | [CMS](https://oim.opensciencegrid.org/oim/vo?id=3)      | `cmspilot`, `uscmslocal`, `cmslocal`, `cmsprod`, `lcgadmin`, `cmsuser` |
+    | [Fermilab](https://oim.opensciencegrid.org/oim/vo?id=9) | `fermigli`, `fermilab`                                                 |
+    | [HCC](https://oim.opensciencegrid.org/oim/vo?id=67)     | `hcc`                                                                  |
+    | [Gluex](https://oim.opensciencegrid.org/oim/vo?id=62)   | `gluex`                                                                |
+
+    Additionally, it is also recommended to create the `mis` Unix account,
+    which is used by OSG staff to assist with troubleshooting.
+
 1.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](../other/configuration-with-osg-configure#subcluster-resource-entry):
 
-``` ini
-allowed_vos="VO1,VO2..."
-```
-
-The full list of VOs is located on [OIM](https://oim.opensciencegrid.org/oim/vo).
-You are not expected to support all the VOs.
-If you would like to support opportunistic usage, we recommend creating the following Unix accounts:
-
-| **VO name**                                             | **Unix account(s)**                                                    |
-|---------------------------------------------------------|------------------------------------------------------------------------|
-| [GLOW](https://oim.opensciencegrid.org/oim/vo?id=13)    | `glow`                                                                 |
-| [OSG](https://oim.opensciencegrid.org/oim/vo?id=30)     | `osg`                                                                  |
-| [ATLAS](https://oim.opensciencegrid.org/oim/vo?id=35)   | `usatlas1`, `usatlas2`, `usatlas3`, `usatlas4`                         |
-| [CMS](https://oim.opensciencegrid.org/oim/vo?id=3)      | `cmspilot`, `uscmslocal`, `cmslocal`, `cmsprod`, `lcgadmin`, `cmsuser` |
-| [Fermilab](https://oim.opensciencegrid.org/oim/vo?id=9) | `fermigli`, `fermilab`                                                 |
-| [HCC](https://oim.opensciencegrid.org/oim/vo?id=67)     | `hcc`                                                                  |
-| [Gluex](https://oim.opensciencegrid.org/oim/vo?id=62)   | `gluex`                                                                |
-
+        :::ini
+        allowed_vos="VO1,VO2..."
 
 ### Applying configuration settings
 
@@ -109,6 +111,7 @@ The following subsections contain information on migration from `edg-mkgridmap`,
 For a table of the configuration files and their order of evaluation, consult the [reference section](#configuration-files).
 
 -   [Migrating from edg-mkgridmap](#migrating-from-edg-mkgridmap)
+-   [Migrating from GUMS](#migrating-from-gums)
 -   [Mapping VOs](#mapping-vos)
 -   [Mapping users](#mapping-users)
 -   [Banning VOs](#banning-vos)
@@ -133,7 +136,8 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
             :::console
             root@host # condor_ce_config_val -v GRIDMAP
 
-    1. If the above command returns `Not defined: GRIDMAP`, skip to step 4. Otherwise, delete the line that sets the `GRIDMAP` configuration variable
+    1. If the above command returns a file, remove the `GRIDMAP` configuration from that file.
+       Repeat this until the command returns `Not defined: GRIDMAP`.
     1. Reconfigure HTCondor-CE:
 
             :::console
@@ -180,7 +184,8 @@ To migrate any custom authentication configuration from GUMS to the LCMAPS VOMS 
 
 #### Mapping VOs
 
-`/etc/grid-security/voms-mapfile` is used to map VOs, VO roles, or VO groups to Unix accounts based on their VOMS attributes. An example of the format of a `voms-mapfile` follows:
+To map VOs, VO roles, or VO groups to Unix accounts based on their VOMS attributes, create `/etc/grid-security/voms-mapfile`.
+An example of the format of a `voms-mapfile` follows:
 
 ```
 # map GLOW jobs in the chtc group to the 'glow1' Unix account.
@@ -202,7 +207,8 @@ The patterns are compared in the order they are listed in. Therefore, more gener
 
 #### Mapping users
 
-`/etc/grid-security/grid-mapfile` is used to map specific users to Unix accounts based on their certificates' DNs. An example of the format of a `grid-mapfile` follows:
+To map specific users to Unix accounts based on their certificates' DNs, create `/etc/grid-security/grid-mapfile`.
+An example of the format of a `grid-mapfile` follows:
 
 ```
 # map Matyas's FNAL DN to the 'matyas' Unix account
@@ -228,7 +234,8 @@ Each non-commented line is a shell-style pattern which is compared against a use
     When banning VOs, you must restart the services using LCMAPS VOMS authentication (e.g. `condor-ce`, `globus-gridftp-server`, etc.) to clear any authentication caches.
 
 !!!warning
-    `/etc/grid-security/ban-voms-mapfile` *must* exist, even if you are not banning any VOs. In that case, the file should be blank. If the file does not exist, LCMAPS will ban every user.
+    `/etc/grid-security/ban-voms-mapfile` *must* exist, even if you are not banning any VOs.
+    In that case, the file should not contain any entries. If the file does not exist, LCMAPS will ban every user.
 
 
 #### Banning users
@@ -297,30 +304,45 @@ and make sure it matches one of the patterns in `/etc/grid-security/voms-mapfile
 Troubleshooting the LCMAPS VOMS Plugin
 --------------------------------------
 
-LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity of the logging can be increased by setting the `LCMAPS_DEBUG_LEVEL` environment variable. You can also change the destination of the logging by setting the `LCMAPS_LOG_FILE` environment variable.
+LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity of the logging can be increased by modifying the appropriate configuration and restarting the service:
 
-1.  Use the table below to choose the appropriate file to edit:
+- **If you are troubleshooting an HTCondor-CE or GridFTP host...**
 
-    | If your host is a(n)... | Edit this file...                      |
-    |:------------------------|:---------------------------------------|
-    | HTCondor-CE             | `/etc/sysconfig/condor-ce`             |
-    | GridFTP server          | `/etc/sysconfig/globus-gridftp-server` |
+    1.  Use the table below to choose the appropriate file to edit:
 
-    Add the following to the file chosen in the previous step:
+        | If your host is a(n)... | Edit this file...                      |
+        |:------------------------|:---------------------------------------|
+        | HTCondor-CE             | `/etc/sysconfig/condor-ce`             |
+        | GridFTP server          | `/etc/sysconfig/globus-gridftp-server` |
 
-        :::bash
-        export LCMAPS_DEBUG_LEVEL=5
-        # optional (uncomment the following line to output log messages to a file):
-        # export LCMAPS_LOG_FILE=/tmp/lcmaps.log
+    1. Add the following to the file chosen in the previous step:
 
+            :::bash
+            export LCMAPS_DEBUG_LEVEL=5
+            # optional (uncomment the following line to output log messages to a file):
+            # export LCMAPS_LOG_FILE=/tmp/lcmaps.log
 
-1.  Use the table below to choose the appropriate service to restart:
+    1. Restart the [condor-ce](/compute-element/install-htcondor-ce#managing-htcondor-ce-and-associated-services) or 
+       [globus-gridftp-server](/data/gridftp#managing-gridftp) service.
 
-    | If your host is a(n)... | Restart the following service... |
-    |:------------------------|:---------------------------------|
-    | HTCondor-CE             | `condor-ce`                      |
-    | GridFTP server          | `globus-gridftp-server`          |
+- **If you are troubleshooting an XRootD host...**
 
+    1. Choose the configuration file to edit based on the following table:
+
+        | If you are running XRootD in... | Then modify the following file...   |
+        |:--------------------------------|:------------------------------------|
+        | Standalone mode                 | `/etc/xrootd/xrootd-standalone.cfg` |
+        | Clustered mode                  | `/etc/xrootd/xrootd-clustered.cfg`  |
+
+    1. Set `--loglevel,5` under the `-authzfunparms` of the `sec.protocol /usr/lib64 gsi` line. For example:
+    
+            sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
+                        -cert:/etc/grid-security/xrootd/xrootdcert.pem \
+                        -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
+                        -authzfun:libXrdLcmaps.so -authzfunparms:%RED%--loglevel,5%ENDCOLOR% \
+                        -gmapopt:10 -gmapto:0
+
+    1. Restart the [xrootd](/data/install-xrootd#managing-xrootd-services) service
 
 ### Troubleshooting mapping with HTCondor-CE
 

@@ -11,7 +11,7 @@ Introduction
 [Hadoop Distributed File System](http://hadoop.apache.org/) (HDFS) is a scalable reliable distributed file system developed in the Apache project. It is based on map-reduce framework and design of the Google file system. The VDT distribution of Hadoop includes all components needed to operate a multi-terabyte storage site. Included are:
 
 -   [Apache Hadoop](http://hadoop.apache.org/)
--   A [FUSE interface](http://fuse.sourceforge.net/) for localized POSIX access.
+-   A [FUSE interface](https://en.wikipedia.org/wiki/Filesystem_in_Userspace) for localized POSIX access.
 -   GridFTP and XRootD for offsite transfers
 
 The OSG packaging and distribution of Hadoop is based on YUM. All components are packaged as RPMs and are available
@@ -33,7 +33,7 @@ Requirements
 -   **Namenode**: You will have at least one namenode. The name node functions as the directory server and coordinator of the hadoop cluster. It houses all the meta-data for the hadoop cluster. %RED%The namenode and secondary namenode need to have a directory that they can both access on a shared filesystem so that they can exchange filesystem checkpoints.%ENDCOLOR%
 -   **Secondary Namenode**: This is a secondary machine that periodically merges updates to the HDFS file system back into the fsimage. This dramatically improves startup and restart times.
 -   **Datanode**: You will have many datanodes. Each data node stores large blocks of files to be stored on the hadoop cluster.
--   **Client**: This is a documentation shorthand that refers to any machine with the hadoop client commands and [FUSE](http://fuse.sourceforge.net/) mount. Any machine that needs a FUSE mount to access data in a POSIX-like fashion will need this.
+-   **Client**: This is a documentation shorthand that refers to any machine with the hadoop client commands and [FUSE](https://en.wikipedia.org/wiki/Filesystem_in_Userspace) mount. Any machine that needs a FUSE mount to access data in a POSIX-like fashion will need this.
 -   **GridFTP node**: This is a node with [Globus GridFTP](gridftp). The GridFTP server for Hadoop can be very memory-hungry, up to 500MB/transfer in the default configuration. You should plan accordingly to provision enough GridFTP servers to handle the bandwidth that your site can support.
 
 Note that these components are not necessarily mutually exclusive. For instance, you may consider having your GridFTP server co-located on the SRM node. Alternatively, you can locate a client (or even a GridFTP node) co-located on each data node. That way, each data node also acts as an access point to the hadoop cluster.
