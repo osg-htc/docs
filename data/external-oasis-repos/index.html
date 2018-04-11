@@ -2440,7 +2440,14 @@ The next steps will fail if the web server is not accessible.</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> -e <span class="s2">&quot;\*\\t\\t-\\tnofile\\t\\t16384&quot;</span> &gt;&gt;/etc/security/limits.conf
 <span class="gp">root@host #</span> <span class="nb">ulimit</span> -n <span class="m">16384</span>
 <span class="gp">root@host #</span> cvmfs_server mkfs -o <span style="color:blue">LIBRARIAN</span> <span style="color:red">example.opensciencegrid.org</span>
-<span class="gp">root@host #</span> <span class="o">(</span><span class="nb">echo</span> Order deny,allow<span class="p">;</span><span class="nb">echo</span> Deny from all<span class="p">;</span><span class="nb">echo</span> Allow from <span class="m">127</span>.0.0.1<span class="p">;</span><span class="nb">echo</span> Allow from ::1<span class="p">;</span><span class="nb">echo</span> Allow from <span class="m">129</span>.79.53.0/24<span class="p">;</span><span class="nb">echo</span> Allow from <span class="m">2001</span>:18e8:2:6::/56<span class="o">)</span> &gt;/srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.htaccess
+<span class="gp">root@host #</span> cat &gt;/srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.htaccess <span class="s">&lt;&lt;xEOFx</span>
+<span class="go">Order deny,allow</span>
+<span class="go">Deny from all</span>
+<span class="go">Allow from 127.0.0.1</span>
+<span class="go">Allow from ::1</span>
+<span class="go">Allow from 129.79.53.0/24 129.93.244.192/26 129.93.244.192/26</span>
+<span class="go">Allow from 2001:18e8:2:6::/56 2600:900:6::/48 </span>
+<span class="go">xEOFx</span>
 </pre></div>
 
 
