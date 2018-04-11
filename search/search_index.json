@@ -3012,88 +3012,63 @@
         }, 
         {
             "location": "/other/gsissh/", 
-            "text": "Installing GSI OpenSSH\n\n\nThis document gives instructions on installing and using the GSI OpenSSH server available in the OSG repository and configuring it so that you can use on your cluster.\n\n\nRequirements\n\n\nHost and OS\n\n\nThe GSI OpenSSH rpms will require an user account and group in order for the privilege separation to work.\n\n\nUsers and Groups\n\n\nThe RPM installation will try to create the \ngsisshd\n user and group and the \n/var/empty/gsisshd\n directory with the correct ownership if they are not present. If you are using a configuration management system or ROCKS, you should make sure that these users and groups are created before installing the RPMs to avoid potential issues. The gsisshd user should have an empty home directory. By default, this is home directory set to \n/var/empty/gsisshd\n and belongs to the \ngsisshd\n user and group. You may change it if needed to something else as long as the ownerships remain the same.\n\n\nInstallation procedure\n\n\nPrior to install, make sure you have:\n\n \nYum repositories correctly configured\n for OSG.\n\n \nCA certificates installed\n\n\nGSI OpenSSH Installation\n\n\nStart with installing GSI OpenSSH from the repository\n\n\n[root@server]#\n yum install gsi-openssh-server gsi-openssh-clients\n\n\n\n\n\nIn addition, you'll need to install CA certificates in order for GSIOpenSSH to work. You can follow the instructions below in order to install them:\n\n\nConfiguration and Operations\n\n\nUseful configuration and log files\n\n\nConfiguration Files\n\n\n\n\n\n\n\n\nService or Process\n\n\nConfiguration File\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\ngsisshd\n\n\n/etc/gsissh/sshd_config\n\n\nConfiguration file\n\n\n\n\n\n\ngsisshd\n\n\n/etc/sysconfig/gsisshd\n\n\nEnvironment variables for gsisshd\n\n\n\n\n\n\ngsisshd\n\n\n/etc/lcmaps.db\n\n\nLCMAPS configuration\n\n\n\n\n\n\n\n\nLog Files\n\n\n\n\n\n\n\n\nService or Process\n\n\nLog File\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\ngsisshd\n\n\n/var/log/messages\n\n\nAll log messages\n\n\n\n\n\n\n\n\nOther Files\n\n\n\n\n\n\n\n\nService or Process\n\n\nFile\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\ngsisshd\n\n\n/etc/grid-security/hostcert.pem\n\n\nHost certificate\n\n\n\n\n\n\ngsisshd\n\n\n/etc/grid-security/hostkey.pem\n\n\nX.509 host key\n\n\n\n\n\n\ngsisshd\n\n\n/etc/gsissh/ssh_host_rsa_key\n\n\nRSA Host key\n\n\n\n\n\n\n\n\nConfiguration\n\n\nIn order to get a running instance of the GSI OpenSSH server, you'll\nneed to change the default configuration. However, before you go any\nfurther, you'll need to decide whether you want GSI OpenSSH to be your \nprimary ssh service or not (e.g. whether the GSI OpenSSH service will \nreplace your existing SSH service). If you choose not to replace your \nexisting service, you'll need to change the port setting in the GSI \nOpenSSH configuration to another port (e.g. 2222) so that you can run \nboth SSH services at the same time. Regardless of your choice, you \nshould probably have both services use the same host key. In order \nto do this, symlink \n/etc/gsissh/ssh_host_dsa_key\n and \n/etc/gsissh/ssh_host_rsa_key\n \nto \n/etc/ssh/ssh_host_dsa_key\n and \n/etc/ssh/ssh_host_rsa_key\n respectively. \n\n\n\n\nNote\n\n\nRegardless of the authorization method used for the user, any \naccount that will be used with GSI OpenSSH must have a shell \nassigned to it and not be locked (have ! in the password field of \n/etc/shadow\n).\n\n\n\n\nUsing a gridmap file for authorization\n\n\nIn order to use gsissh, you'll need to create mappings in your \n\n/etc/grid-security/grid-mapfile\n for the DNs that you will \nallow to login. The mappings should be entered one to a line, \nwith each line consisting of DN followed by the account the DN \nshould map to. Also, you should ensure that the \n\n/etc/grid-security/gsi-authz.conf\n file is empty or that all \nof the lines in the file are commented out using a \n#\n at the beginning of the line.\n\n\n\n\nNote\n\n\nThe mappings will not consider VOMS extensions so the first mapping that matches will be used regardless of the VO role or VO present in the users proxy\n\n\n\n\nAn example of the \n/etc/grid-security/grid-mapfile\n follows:\n\n\n/DC=org/DC=doegrids/OU=People/CN=USER NAME 123456\n useraccount\n\n\n\n\n\nUsing LCMAPS and GUMS for authorization\n\n\nIn order to use LCMAPS callouts with GSI OpenSSH, you'll first need to edit \n/etc/grid-security/gsi-authz.conf\n to indicate that Globus should do a GSI callout for authorization. The file should contain the following:\n\n\nglobus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout\n\n\n\n\n\nso that LCMAPS is used. Next, install the lcmaps rpms:\n\n\n[root@server]#\n yum install lcmaps lcas-lcmaps-gt4-interface\n\n\n\n\n\nFinally, you'll need to modify \n/etc/lcmaps.db\n so that the \ngumsclient\n entry has the correct endpoint for your gums server.\n\n\nStarting and Enabling Services\n\n\nTo start the services:\n\n\n\n\nTo start GSI OpenSSH you can use the service command, e.g.:\n[root@server]#\n service gsisshd start\n\n\n\n\n\n\n\n\n\nYou should also enable the appropriate services so that they are automatically started when your system is powered on:\n\n\n\n\nTo enable OpenSSH by default on the node:\n[root@server]#\n chkconfig gsisshd on\n\n\n\n\n\n\n\n\n\nStopping and Disabling Services\n\n\nTo stop the services:\n\n\n\n\nTo stop OpenSSH you can use:\n[root@server]#\n service gsisshd stop\n\n\n\n\n\n\n\n\n\nIn addition, you can disable services by running the following commands. However, you don't need to do this normally.\n\n\n\n\nOptionally, to disable OpenSSH:\n[root@server]#\n chkconfig gsisshd off\n\n\n\n\n\n\n\n\n\nTroubleshooting\n\n\nYou can get information on troubleshooting errors on the \nNCSA page\n.\n\n\nTo troubleshoot LCMAPS authorization, you can add the following to \n/etc/sysconfig/gsisshd\n and choose a higher debug level:\n\n\n# level 0: no messages, 1: errors, 2: also warnings, 3: also notices,\n\n\n#  4: also info, 5: maximum debug\n\n\nLCMAPS_DEBUG_LEVEL\n=\n2\n\n\n\n\n\n\nOutput goes to \n/var/log/messages\n by default.\n\n\nTest GSI OpenSSH\n\n\nAfter starting the \ngsisshd\n service you can check if it is running correctly\n\n\n$\n grid-proxy-init\n\nYour identity: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=User Name\n\n\nEnter GRID pass phrase for this identity:\n\n\nCreating proxy ............................................................................................... Done\n\n\nYour proxy is valid until: Sat Apr 23 08:18:27 2016\n\n\n$\n gsissh localhost -p \n2222\n\n\nLast login: Tue Sep 18 16:08:03 2012 from itb4.uchicago.edu\n\n\n$\n\n\n\n\n\n\nHow to get Help?\n\n\nTo get assistance please use this \nHelp Procedure\n.", 
+            "text": "Installing and Maintaining GSI OpenSSH\n\n\nThis document contains instructions to install and configure the GSI OpenSSH server available in the OSG repository for\nuse on your cluster.\n\n\nBefore Starting\n\n\nBefore starting the installation process, consider the following points (consulting \nthe Reference section\nbelow\n as needed):\n\n\n\n\nUser IDs:\n If they do not exist already, the installation will create the Linux users \ngsisshd\n and \ngsisshd\n\n\n\n\nAs with all OSG software installations, there are some one-time (per host) steps to prepare in advance:\n\n\n\n\nEnsure the host has \na supported operating system\n\n\nObtain root access to the host\n\n\nPrepare the \nrequired Yum repositories\n\n\nInstall \nCA certificates\n\n\n\n\nInstalling GSI OpenSSH\n\n\nInstall the GSI OpenSSH rpms:\n\n\nroot@server # yum install gsi-openssh-server gsi-openssh-clients\n\n\n\n\n\nConfiguring GSI OpenSSH\n\n\nIn order to get a running instance of the GSI OpenSSH server, you'll need to change the default configuration. \nHowever, before you go any further, you'll need to decide whether you want GSI OpenSSH to be your primary ssh service or\nnot (e.g. whether the GSI OpenSSH service will replace your existing SSH service). \nRegardless of your choice, you should probably have both services use the same host keys.\n\nThis can be done by running the following commands :\n\n\nroot@host #\n \ncd\n /etc/gsissh\n\nroot@host #\n ln -s /etc/ssh/ssh_host_rsa_key ssh_host_rsa_key\n\nroot@host #\n ln -s /etc/ssh/ssh_host_rsa_key.pub ssh_host_rsa_key.pub\n\nroot@host #\n ln -s /etc/ssh/ssh_host_dsa_key ssh_host_dsa_key\n\nroot@host #\n ln -s /etc/ssh/ssh_host_dsa_key.pub ssh_host_dsa_key.pub\n\nroot@host #\n ln -s /etc/ssh/ssh_host_ecdsa_key ssh_host_ecdsa_key\n\nroot@host #\n ln -s /etc/ssh/ssh_host_ecdsa_key.pub ssh_host_ecdsa_key.pub\n\nroot@host #\n ln -s /etc/ssh/ssh_host_ed25519_key ssh_host_ed25519_key\n\nroot@host #\n ln -s /etc/ssh/ssh_host_ed25519_key.pub ssh_host_ed25519_key.pub\n\n\n\n\n\n\n\nNote\n\n\nYour system may not have all of these host keys\n\n\n\n\nIf you choose not to replace your existing SSH service, you'll need to change the port setting in the GSI OpenSSH\nconfiguration to another port (e.g. 2222) so that you can run both SSH services at the same time.\nThis can be done by editing \n/etc/gsissh/sshd\n and setting \nPort 2222\n.\n\n\n\n\nNote\n\n\nRegardless of the authorization method used for the user, any \naccount that will be used with GSI OpenSSH must have a shell \nassigned to it and not be locked (e.g., have \n!\n in the password field of \n/etc/shadow\n).\n\n\n\n\nConfiguring authentication\n\n\nTo configure authentication for GSI OpenSSH, follow the instructions in \nthe LCMAPS VOMS plugin document\n\nto prepare the LCMAPS VOMS plugin.\n\n\nUsing GSI OpenSSH\n\n\nThe following table gives the commands needed to start, stop, enable, and disable GSI OpenSSH.\n\n\n\n\n\n\n\n\nTo...\n\n\nOn EL6, run the command...\n\n\nOn EL7, run the command...\n\n\n\n\n\n\n\n\n\n\nStart  service\n\n\nservice gsisshd start\n\n\nsystemctl start gsisshd\n\n\n\n\n\n\nStop a  service\n\n\nservice gsisshd stop\n\n\nsystemctl stop gsisshd\n\n\n\n\n\n\nEnable a service to start on boot\n\n\nchkconfig gsisshd on\n\n\nsystemctl enable gsisshd\n\n\n\n\n\n\nDisable a service from starting on boot\n\n\nchkconfig gsisshd off\n\n\nsystemctl disable gsisshd\n\n\n\n\n\n\n\n\nValidating GSI OpenSSH\n\n\nAfter starting the \ngsisshd\n service you can check if it is running correctly\n\n\nuser@client $\n grid-proxy-init\n\nYour identity: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=User Name\n\n\nEnter GRID pass phrase for this identity:\n\n\nCreating proxy ............................................................................................... Done\n\n\nYour proxy is valid until: Sat Apr 23 08:18:27 2016\n\n\n$\n gsissh localhost -p \n2222\n\n\nLast login: Tue Sep 18 16:08:03 2012 from itb4.uchicago.edu\n\n\n$\n\n\n\n\n\n\nTroubleshooting\n\n\nYou can get information on troubleshooting errors on the \nNCSA page\n.\n\n\nTo troubleshoot LCMAPS authorization, you can add the following to \n/etc/sysconfig/gsisshd\n and choose a higher debug\nlevel:\n\n\n# level 0: no messages, 1: errors, 2: also warnings, 3: also notices,\n\n\n#  4: also info, 5: maximum debug\n\n\nLCMAPS_DEBUG_LEVEL\n=\n2\n\n\n\n\n\n\nOutput goes to \n/var/log/messages\n or \njournalctl\n by default.\n\n\nHelp\n\n\nTo get assistance please use this \nHelp Procedure\n.\n\n\nReference\n\n\nUseful configuration and log files\n\n\nConfiguration Files\n\n\n\n\n\n\n\n\nService or Process\n\n\nConfiguration File\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\ngsisshd\n\n\n/etc/gsissh/sshd_config\n\n\nConfiguration file\n\n\n\n\n\n\ngsisshd\n\n\n/etc/sysconfig/gsisshd\n\n\nEnvironment variables for gsisshd\n\n\n\n\n\n\ngsisshd\n\n\n/etc/lcmaps.db\n\n\nLCMAPS configuration\n\n\n\n\n\n\n\n\nLog Files\n\n\n\n\n\n\n\n\nService or Process\n\n\nLog File\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\ngsisshd\n\n\n/var/log/messages\n\n\nAll log messages\n\n\n\n\n\n\n\n\nOther Files\n\n\n\n\n\n\n\n\nService or Process\n\n\nFile\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\ngsisshd\n\n\n/etc/grid-security/hostcert.pem\n\n\nHost certificate\n\n\n\n\n\n\ngsisshd\n\n\n/etc/grid-security/hostkey.pem\n\n\nX.509 host key\n\n\n\n\n\n\ngsisshd\n\n\n/etc/gsissh/ssh_host_rsa_key\n\n\nRSA Host key", 
             "title": "Install GSI-enabled SSH"
         }, 
         {
+            "location": "/other/gsissh/#installing-and-maintaining-gsi-openssh", 
+            "text": "This document contains instructions to install and configure the GSI OpenSSH server available in the OSG repository for\nuse on your cluster.", 
+            "title": "Installing and Maintaining GSI OpenSSH"
+        }, 
+        {
+            "location": "/other/gsissh/#before-starting", 
+            "text": "Before starting the installation process, consider the following points (consulting  the Reference section\nbelow  as needed):   User IDs:  If they do not exist already, the installation will create the Linux users  gsisshd  and  gsisshd   As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:   Ensure the host has  a supported operating system  Obtain root access to the host  Prepare the  required Yum repositories  Install  CA certificates", 
+            "title": "Before Starting"
+        }, 
+        {
             "location": "/other/gsissh/#installing-gsi-openssh", 
-            "text": "This document gives instructions on installing and using the GSI OpenSSH server available in the OSG repository and configuring it so that you can use on your cluster.", 
+            "text": "Install the GSI OpenSSH rpms:  root@server # yum install gsi-openssh-server gsi-openssh-clients", 
             "title": "Installing GSI OpenSSH"
         }, 
         {
-            "location": "/other/gsissh/#requirements", 
+            "location": "/other/gsissh/#configuring-gsi-openssh", 
+            "text": "In order to get a running instance of the GSI OpenSSH server, you'll need to change the default configuration. \nHowever, before you go any further, you'll need to decide whether you want GSI OpenSSH to be your primary ssh service or\nnot (e.g. whether the GSI OpenSSH service will replace your existing SSH service). \nRegardless of your choice, you should probably have both services use the same host keys. \nThis can be done by running the following commands :  root@host #   cd  /etc/gsissh root@host #  ln -s /etc/ssh/ssh_host_rsa_key ssh_host_rsa_key root@host #  ln -s /etc/ssh/ssh_host_rsa_key.pub ssh_host_rsa_key.pub root@host #  ln -s /etc/ssh/ssh_host_dsa_key ssh_host_dsa_key root@host #  ln -s /etc/ssh/ssh_host_dsa_key.pub ssh_host_dsa_key.pub root@host #  ln -s /etc/ssh/ssh_host_ecdsa_key ssh_host_ecdsa_key root@host #  ln -s /etc/ssh/ssh_host_ecdsa_key.pub ssh_host_ecdsa_key.pub root@host #  ln -s /etc/ssh/ssh_host_ed25519_key ssh_host_ed25519_key root@host #  ln -s /etc/ssh/ssh_host_ed25519_key.pub ssh_host_ed25519_key.pub   Note  Your system may not have all of these host keys   If you choose not to replace your existing SSH service, you'll need to change the port setting in the GSI OpenSSH\nconfiguration to another port (e.g. 2222) so that you can run both SSH services at the same time.\nThis can be done by editing  /etc/gsissh/sshd  and setting  Port 2222 .   Note  Regardless of the authorization method used for the user, any \naccount that will be used with GSI OpenSSH must have a shell \nassigned to it and not be locked (e.g., have  !  in the password field of  /etc/shadow ).", 
+            "title": "Configuring GSI OpenSSH"
+        }, 
+        {
+            "location": "/other/gsissh/#configuring-authentication", 
+            "text": "To configure authentication for GSI OpenSSH, follow the instructions in  the LCMAPS VOMS plugin document \nto prepare the LCMAPS VOMS plugin.", 
+            "title": "Configuring authentication"
+        }, 
+        {
+            "location": "/other/gsissh/#using-gsi-openssh", 
+            "text": "The following table gives the commands needed to start, stop, enable, and disable GSI OpenSSH.     To...  On EL6, run the command...  On EL7, run the command...      Start  service  service gsisshd start  systemctl start gsisshd    Stop a  service  service gsisshd stop  systemctl stop gsisshd    Enable a service to start on boot  chkconfig gsisshd on  systemctl enable gsisshd    Disable a service from starting on boot  chkconfig gsisshd off  systemctl disable gsisshd", 
+            "title": "Using GSI OpenSSH"
+        }, 
+        {
+            "location": "/other/gsissh/#validating-gsi-openssh", 
+            "text": "After starting the  gsisshd  service you can check if it is running correctly  user@client $  grid-proxy-init Your identity: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=User Name  Enter GRID pass phrase for this identity:  Creating proxy ............................................................................................... Done  Your proxy is valid until: Sat Apr 23 08:18:27 2016  $  gsissh localhost -p  2222  Last login: Tue Sep 18 16:08:03 2012 from itb4.uchicago.edu  $", 
+            "title": "Validating GSI OpenSSH"
+        }, 
+        {
+            "location": "/other/gsissh/#troubleshooting", 
+            "text": "You can get information on troubleshooting errors on the  NCSA page .  To troubleshoot LCMAPS authorization, you can add the following to  /etc/sysconfig/gsisshd  and choose a higher debug\nlevel:  # level 0: no messages, 1: errors, 2: also warnings, 3: also notices,  #  4: also info, 5: maximum debug  LCMAPS_DEBUG_LEVEL = 2   Output goes to  /var/log/messages  or  journalctl  by default.", 
+            "title": "Troubleshooting"
+        }, 
+        {
+            "location": "/other/gsissh/#help", 
+            "text": "To get assistance please use this  Help Procedure .", 
+            "title": "Help"
+        }, 
+        {
+            "location": "/other/gsissh/#reference", 
             "text": "", 
-            "title": "Requirements"
-        }, 
-        {
-            "location": "/other/gsissh/#host-and-os", 
-            "text": "The GSI OpenSSH rpms will require an user account and group in order for the privilege separation to work.", 
-            "title": "Host and OS"
-        }, 
-        {
-            "location": "/other/gsissh/#users-and-groups", 
-            "text": "The RPM installation will try to create the  gsisshd  user and group and the  /var/empty/gsisshd  directory with the correct ownership if they are not present. If you are using a configuration management system or ROCKS, you should make sure that these users and groups are created before installing the RPMs to avoid potential issues. The gsisshd user should have an empty home directory. By default, this is home directory set to  /var/empty/gsisshd  and belongs to the  gsisshd  user and group. You may change it if needed to something else as long as the ownerships remain the same.", 
-            "title": "Users and Groups"
-        }, 
-        {
-            "location": "/other/gsissh/#installation-procedure", 
-            "text": "Prior to install, make sure you have:   Yum repositories correctly configured  for OSG.   CA certificates installed", 
-            "title": "Installation procedure"
-        }, 
-        {
-            "location": "/other/gsissh/#gsi-openssh-installation", 
-            "text": "Start with installing GSI OpenSSH from the repository  [root@server]#  yum install gsi-openssh-server gsi-openssh-clients  In addition, you'll need to install CA certificates in order for GSIOpenSSH to work. You can follow the instructions below in order to install them:", 
-            "title": "GSI OpenSSH Installation"
-        }, 
-        {
-            "location": "/other/gsissh/#configuration-and-operations", 
-            "text": "", 
-            "title": "Configuration and Operations"
+            "title": "Reference"
         }, 
         {
             "location": "/other/gsissh/#useful-configuration-and-log-files", 
             "text": "Configuration Files     Service or Process  Configuration File  Description      gsisshd  /etc/gsissh/sshd_config  Configuration file    gsisshd  /etc/sysconfig/gsisshd  Environment variables for gsisshd    gsisshd  /etc/lcmaps.db  LCMAPS configuration     Log Files     Service or Process  Log File  Description      gsisshd  /var/log/messages  All log messages     Other Files     Service or Process  File  Description      gsisshd  /etc/grid-security/hostcert.pem  Host certificate    gsisshd  /etc/grid-security/hostkey.pem  X.509 host key    gsisshd  /etc/gsissh/ssh_host_rsa_key  RSA Host key", 
             "title": "Useful configuration and log files"
-        }, 
-        {
-            "location": "/other/gsissh/#configuration", 
-            "text": "In order to get a running instance of the GSI OpenSSH server, you'll\nneed to change the default configuration. However, before you go any\nfurther, you'll need to decide whether you want GSI OpenSSH to be your \nprimary ssh service or not (e.g. whether the GSI OpenSSH service will \nreplace your existing SSH service). If you choose not to replace your \nexisting service, you'll need to change the port setting in the GSI \nOpenSSH configuration to another port (e.g. 2222) so that you can run \nboth SSH services at the same time. Regardless of your choice, you \nshould probably have both services use the same host key. In order \nto do this, symlink  /etc/gsissh/ssh_host_dsa_key  and  /etc/gsissh/ssh_host_rsa_key  \nto  /etc/ssh/ssh_host_dsa_key  and  /etc/ssh/ssh_host_rsa_key  respectively.    Note  Regardless of the authorization method used for the user, any \naccount that will be used with GSI OpenSSH must have a shell \nassigned to it and not be locked (have ! in the password field of  /etc/shadow ).", 
-            "title": "Configuration"
-        }, 
-        {
-            "location": "/other/gsissh/#using-a-gridmap-file-for-authorization", 
-            "text": "In order to use gsissh, you'll need to create mappings in your  /etc/grid-security/grid-mapfile  for the DNs that you will \nallow to login. The mappings should be entered one to a line, \nwith each line consisting of DN followed by the account the DN \nshould map to. Also, you should ensure that the  /etc/grid-security/gsi-authz.conf  file is empty or that all \nof the lines in the file are commented out using a  #  at the beginning of the line.   Note  The mappings will not consider VOMS extensions so the first mapping that matches will be used regardless of the VO role or VO present in the users proxy   An example of the  /etc/grid-security/grid-mapfile  follows:  /DC=org/DC=doegrids/OU=People/CN=USER NAME 123456  useraccount", 
-            "title": "Using a gridmap file for authorization"
-        }, 
-        {
-            "location": "/other/gsissh/#using-lcmaps-and-gums-for-authorization", 
-            "text": "In order to use LCMAPS callouts with GSI OpenSSH, you'll first need to edit  /etc/grid-security/gsi-authz.conf  to indicate that Globus should do a GSI callout for authorization. The file should contain the following:  globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout  so that LCMAPS is used. Next, install the lcmaps rpms:  [root@server]#  yum install lcmaps lcas-lcmaps-gt4-interface  Finally, you'll need to modify  /etc/lcmaps.db  so that the  gumsclient  entry has the correct endpoint for your gums server.", 
-            "title": "Using LCMAPS and GUMS for authorization"
-        }, 
-        {
-            "location": "/other/gsissh/#starting-and-enabling-services", 
-            "text": "To start the services:   To start GSI OpenSSH you can use the service command, e.g.: [root@server]#  service gsisshd start    You should also enable the appropriate services so that they are automatically started when your system is powered on:   To enable OpenSSH by default on the node: [root@server]#  chkconfig gsisshd on", 
-            "title": "Starting and Enabling Services"
-        }, 
-        {
-            "location": "/other/gsissh/#stopping-and-disabling-services", 
-            "text": "To stop the services:   To stop OpenSSH you can use: [root@server]#  service gsisshd stop    In addition, you can disable services by running the following commands. However, you don't need to do this normally.   Optionally, to disable OpenSSH: [root@server]#  chkconfig gsisshd off", 
-            "title": "Stopping and Disabling Services"
-        }, 
-        {
-            "location": "/other/gsissh/#troubleshooting", 
-            "text": "You can get information on troubleshooting errors on the  NCSA page .  To troubleshoot LCMAPS authorization, you can add the following to  /etc/sysconfig/gsisshd  and choose a higher debug level:  # level 0: no messages, 1: errors, 2: also warnings, 3: also notices,  #  4: also info, 5: maximum debug  LCMAPS_DEBUG_LEVEL = 2   Output goes to  /var/log/messages  by default.", 
-            "title": "Troubleshooting"
-        }, 
-        {
-            "location": "/other/gsissh/#test-gsi-openssh", 
-            "text": "After starting the  gsisshd  service you can check if it is running correctly  $  grid-proxy-init Your identity: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=User Name  Enter GRID pass phrase for this identity:  Creating proxy ............................................................................................... Done  Your proxy is valid until: Sat Apr 23 08:18:27 2016  $  gsissh localhost -p  2222  Last login: Tue Sep 18 16:08:03 2012 from itb4.uchicago.edu  $", 
-            "title": "Test GSI OpenSSH"
-        }, 
-        {
-            "location": "/other/gsissh/#how-to-get-help", 
-            "text": "To get assistance please use this  Help Procedure .", 
-            "title": "How to get Help?"
         }, 
         {
             "location": "/other/install-gwms-frontend/", 
