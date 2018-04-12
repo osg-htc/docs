@@ -56,6 +56,9 @@ The %GREEN%VO Frontend proxy%ENDCOLOR% and the %RED% pilot proxy%ENDCOLOR% can
 be the same. By default, the VO Frontend will run as user `frontend` (UID is
 machine dependent) so these proxies must be owned by the user `frontend`.
 
+!!! note
+    Both proxies need to be passwordless to allow [automatic proxy renewal](#proxy-configuration).
+
 #### VO Frontend proxy
 
 The use of a service certificate is recommended. Then you create a proxy from
