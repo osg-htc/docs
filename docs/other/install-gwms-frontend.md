@@ -46,8 +46,8 @@ As with all OSG software installations, there are some one-time (per host) steps
 
 ### Credentials and Proxies
 
-The VO Frontend will use two credentials in its interactions with the the other
-glideinWMS services. At this time, these will be proxy files.
+The VO Frontend will use two service certificates in its interactions with the the other glideinWMS services.
+GlideinWMS will generate proxies from these two certificates:
 
 1. the %GREEN%VO Frontend proxy%ENDCOLOR% (used to authenticate with the other glideinWMS services).
 2. one or more glideinWMS %RED%pilot proxies%ENDCOLOR% (used/delegated to the factory services and submitted on the glideinWMS pilot jobs).
@@ -55,6 +55,9 @@ glideinWMS services. At this time, these will be proxy files.
 The %GREEN%VO Frontend proxy%ENDCOLOR% and the %RED% pilot proxy%ENDCOLOR% can
 be the same. By default, the VO Frontend will run as user `frontend` (UID is
 machine dependent) so these proxies must be owned by the user `frontend`.
+
+!!! note
+    Both proxies need to be passwordless to allow [automatic proxy renewal](#proxy-configuration).
 
 #### VO Frontend proxy
 
