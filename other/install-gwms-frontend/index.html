@@ -3086,8 +3086,8 @@ significant, large host, we have been able to scale the single-host install to
 <li>Install <a href="../../common/ca">CA certificates</a></li>
 </ul>
 <h3 id="credentials-and-proxies">Credentials and Proxies<a class="headerlink" href="#credentials-and-proxies" title="Permanent link">&para;</a></h3>
-<p>The VO Frontend will use two credentials in its interactions with the the other
-glideinWMS services. At this time, these will be proxy files.</p>
+<p>The VO Frontend will use two service certificates in its interactions with the the other glideinWMS services.
+GlideinWMS will generate proxies from these two certificates:</p>
 <ol>
 <li>the <span style="color:green">VO Frontend proxy</span> (used to authenticate with the other glideinWMS services).</li>
 <li>one or more glideinWMS <span style="color:red">pilot proxies</span> (used/delegated to the factory services and submitted on the glideinWMS pilot jobs).</li>
@@ -3095,6 +3095,10 @@ glideinWMS services. At this time, these will be proxy files.</p>
 <p>The <span style="color:green">VO Frontend proxy</span> and the <span style="color:red"> pilot proxy</span> can
 be the same. By default, the VO Frontend will run as user <code>frontend</code> (UID is
 machine dependent) so these proxies must be owned by the user <code>frontend</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Both proxies need to be passwordless to allow <a href="#proxy-configuration">automatic proxy renewal</a>.</p>
+</div>
 <h4 id="vo-frontend-proxy">VO Frontend proxy<a class="headerlink" href="#vo-frontend-proxy" title="Permanent link">&para;</a></h4>
 <p>The use of a service certificate is recommended. Then you create a proxy from
 the certificate as explained in the <a href="#proxy-configuration">proxy configuration
