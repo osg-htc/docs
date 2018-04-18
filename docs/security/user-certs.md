@@ -140,7 +140,7 @@ export CIGETCERTOPTS="-i 'Fermi National Accelerator Laboratory'"
 Your VO may also provide specific instructions for how to best use this tool.
 Contact your VO support center for details.
 
-Finally, `cigetcert` has advanced options for things like selecting an auth method, loading a configuration from a server, or storing the cert on a MyProxy server.
+Finally, `cigetcert` has advanced features, such as the ability to load configuration from a server, or store the cert on a MyProxy server.
 See the [manual page for cigetcert](http://htmlpreview.github.io/?https://github.com/fermitools/cigetcert/blob/master/cigetcert.html) for more information.
 
 
@@ -149,7 +149,7 @@ See the [manual page for cigetcert](http://htmlpreview.github.io/?https://github
 `cigetcert` also works with XSEDE as the service provider.
 To use XSEDE credentials, you will first need an account at <https://portal.xsede.org>.
 In addition, you _need_ to set up two-factor authentication with XSEDE; see their [MFA documentation](https://portal.xsede.org/mfa) for details.
-Push notifications using the Duo Mobile app are strongly recommended; the login prompt times out too quickly for a phone call to work.
+Push notifications using the Duo Mobile app are required.
 
 Once you have set all those up, run `cigetcert` as follows:
 ```console
@@ -158,8 +158,7 @@ user@host $ cigetcert -u %RED%<USERNAME>%ENDCOLOR% -i XSEDE
 `<USERNAME>` is your username at portal.xsede.org.
 You will get prompted to "Enter XSEDE Kerberos Password."
 Enter the password for your account at portal.xsede.org.
-You should then get a 2FA authentication request using the method you set up above.
-Once you complete the request (for example, accept the Duo Mobile notification), `cigetcert` will issue the certificate.
+You should then get a 2FA authentication request with Duo Mobile; once you accept this, `cigetcert` will issue the certificate.
 
 References
 ----------
