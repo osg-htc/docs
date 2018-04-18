@@ -8,6 +8,7 @@ Release Notes
 
 | Version                          | Date       | Summary                                                                          |
 |:---------------------------------|:-----------|:---------------------------------------------------------------------------------|
+| [3.4.10](3.4/release-3-4-10)     | 2018-04-18 | Singularity 2.4.6, HTCondor-CE 3.1.1, HTCondor 8.6.10, gigetcert 1.16, BLAHP 1.18.36, xrootd-lcmaps 1.2.1-3, osg-configure 2.2.4; Upcoming: HTCondor 8.7.7, xrootd-hdfs 2.0.2 |
 | [3.4.9-2](3.4/release-3-4-9-2)   | 2018-04-05 | IGTF 1.90, VO Package v78                                                        |
 | [3.4.9](3.4/release-3-4-9)       | 2018-03-08 | XRootD 4.8.1, GlideinWMS 3.2.21, Frontier Squid 3.5.27-3, RSV 3.17.0, osg-release 3.4-4 |
 | [3.4.8](3.4/release-3-4-8)       | 2018-02-08 | GlideinWMS 3.2.20-2                                                              |
