@@ -9,8 +9,20 @@ Summary of changes
 This release contains:
 
 -   [Singularity 2.4.6](https://github.com/singularityware/singularity/releases)
+
+    !!! danger "CMS Sites"
+        If you support the CMS VO, do not update Singularity until CMS announces that it is safe to do so
+
     -   Addresses a high severity security issue with bind mounts on hosts using overlayfs
-    -   Upgrade from 2.4.2
+    -   `/tmp` and `/var/tmp` are automatically scratch-mounted in containers started with the `--contain` option.
+        If you are invoking singularity with `--scratch /tmp --scratch /var/tmp --contain`,
+        this is redundant and will result in the following error:
+
+            ERROR  : Not mounting requested scratch directory (already mounted in container): /tmp
+            ABORT  : Retval = 255
+
+        To fix this, drop any `--scratch /tmp` and/or `--scratch /var/tmp` options.
+
 -   [HTCondor-CE 3.1.1](https://github.com/opensciencegrid/htcondor-ce/releases): now accepts InCommon certificates
 -   [HTCondor 8.6.10](https://lists.cs.wisc.edu/archive/htcondor-world/2018/msg00004.shtml): fixed handling of grid jobs when submit fails and other fixes
 -   Added [cigetcert 1.16](https://cdcvs.fnal.gov/redmine/projects/fermitools/wiki/Cigetcert)
@@ -43,7 +55,8 @@ Detailed changes are below. All of the documentation can be found [here](/index.
 Known Issues
 ------------
 
--   None.
+-   Singularity 2.4.6 has [exhibited slow startup times](https://github.com/singularityware/singularity/issues/1447)
+    on systems with a high number of maximum open file descriptors.
 
 Updating to the new release
 ---------------------------
