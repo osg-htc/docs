@@ -514,128 +514,112 @@ perform several steps to make xrootdfs secured.
 
 #### Security option 3: xrootd-lcmaps authorization
 
-The xrootd-lcmaps security plugin uses the `lcmaps` package to access the `GUMS` server to authenticate and authorize
-users based on X509 certificates.
+The xrootd-lcmaps security plugin uses the `lcmaps` library and the [LCMAPS VOMS plugin](/security/lcmaps-voms-authentication)
+to authenticate and authorize users based on X509 certificates and VOMS attributes. Perform the following instructions
+on all data nodes:
 
-**Certificate Installation**
+1. Install [CA certificates](/common/ca#installing-ca-certificates) and [manage CRLs](/common/ca#installing-ca-certificates#managing-certificate-revocation-lists)
 
-In order to use lcmaps, you will need CA certificates and certificate revocation lists. 
-See the following documents for instructions:
+1. Follow the instructions for requesting a [service certificate](/security/host-certs#requesting-and-installing-a-service-certificate),
+   using `xrootd` for both the `<SERVICE>` and `<OWNER>`, resulting in a certificate and key in `/etc/grid-security/xrootd/xrootdcert.pem`
+   and `/etc/grid-security/xrootd/xrootdkey.pem`, respectively.
 
--   [Install CA certificates](../common/ca/)
--   [Managing Certificate Revocation Lists](../common/ca/)
+1. Install and configure the [LCMAPS VOMS plugin](/security/lcmaps-voms-authentication)
 
-**Install xrootd-lcmaps**
+1. Install `xrootd-lcmaps` and necessary configuration:
 
-``` console
-yum install xrootd-lcmaps
-```
+        :::console
+        root@host # yum install xrootd-lcmaps vo-client
 
-Note that the xrootd-lcmaps is usually coupled to a specific version of XRootD, so make sure that you install
-xrootd-lcmaps from the same repository that you install XRootD from. 
-Otherwise, you may have dependency issues due to differing versions of shared libraries.
+1. Append the following to `/etc/lcmaps.db`:
 
-**Create service certificate**
+        xrootd_policy:
+        verifyproxynokey -> banfile
+        banfile -> banvomsfile | bad
+        banvomsfile -> gridmapfile | bad
+        gridmapfile -> good | vomsmapfile
+        vomsmapfile -> good | defaultmapfile
+        defaultmapfile -> good | bad
 
-You will need to have a X509 certificate to talk to GUMS. 
-If you already have a host certificate, you can use a copy of that:
+1. Modify `/etc/osg/config.d/10-misc.ini` so that future invocations don't overwrite your `/etc/lcmaps.db` changes:
 
-``` console
-root@host # mkdir /etc/grid-security/xrd
-root@host # cp /etc/grid-security/hostkey.pem /etc/grid-security/xrd/xrdkey.pem
-root@host # cp /etc/grid-security/hostcert.pem /etc/grid-security/xrd/xrdcert.pem
-root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
-root@host # chmod 400 /etc/grid-security/xrd/xrdkey.pem
-```
+        edit_lcmaps_db = False
 
-This certificate and key should be owned by `xrootd` and located in `/etc/grid-security/xrd`.
+1. Configure access rights for mapped users by creating and modifying the XRootD [authorization file](#authorization-file)
 
-**Authorization File**
+1. Modify your XRootD configuration:
 
-Next, create `/etc/xrootd/auth_file` using the example in the [above section](#authorization-file).
+    1. Choose the configuration file to edit based on the following table:
 
-**Modify /etc/xrootd/lcmaps.cfg**
+        | If you are running XRootD in... | Then modify the following file...   |
+        |:--------------------------------|:------------------------------------|
+        | Standalone mode                 | `/etc/xrootd/xrootd-standalone.cfg` |
+        | Clustered mode                  | `/etc/xrootd/xrootd-clustered.cfg`  |
 
-Edit `/etc/xrootd/lcmaps.cfg` to point to your authorization server (replace the
-hostname in red):
+    1. Add the following lines to the configuration that you chose above:
 
-``` file
-scasclient = "lcmaps_scas_client.mod"
-             "-resourcetype wn"
-             "-actiontype execute-now"
-             "-capath /etc/grid-security/certificates"
-             "-cert   /etc/grid-security/xrd/xrdcert.pem"
-             "-key    /etc/grid-security/xrd/xrdkey.pem"
-             "--endpoint https://%RED%gums.fnal.gov%ENDCOLOR%:8443/gums/services/GUMSXACMLAuthorizationServicePort"
-```
+            xrootd.seclib /usr/lib64/libXrdSec-4.so
+            sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
+                                -cert:/etc/grid-security/xrootd/xrootdcert.pem \
+                                -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
+                                -authzfun:libXrdLcmaps.so -authzfunparms:--loglevel,0 \
+                                -gmapopt:10 -gmapto:0
+            acc.authdb /etc/xrootd/auth_file
+            ofs.authorize
 
-**Modify /etc/xrootd/xrootd-clustered.cfg**
+        If you are running XRootD in clustered mode, the above will also need to be added to all data nodes in the section relevant to the data node server. For instance, in the [above example](#security-option-1-adding-unix-security), the security configuration should be placed after the `all.role server` line:
 
-You will need to add the security plugins to `/etc/xrootd/xrootd-clustered.cfg`. 
-Add the following lines to the `/etc/xrootd/xrootd-clustered.cfg`. 
-This will need to be added to all data nodes in the section relevant to the data node server. 
-(For instance, in the above example(s), this should be placed in the last "else" clause after "all.role server". 
-See the section above on Unix security for an example of where the security commands should go).
+            all.export /data/xrootdfs
+            set xrdr=%RED%hostA%ENDCOLOR%
+            all.manager $(xrdr):3121
+            if $(xrdr) && named cns
+                all.export /data/inventory
+                xrd.port 1095
+            else if $(xrdr)
+                all.role manager
+                xrd.port 1094
+            else
+                all.role server
+                oss.localroot /local/xrootd
+                ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory
+                cms.space min 2g 5g
 
-```text
-xrootd.seclib /usr/lib64/libXrdSec.so
+                %RED% # ENABLE_SECURITY_BEGIN
+                xrootd.seclib /usr/lib64/libXrdSec-4.so
+                sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
+                                    -cert:/etc/grid-security/xrootd/xrootdcert.pem \
+                                    -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
+                                    -authzfun:libXrdLcmaps.so -authzfunparms:--loglevel,0 \
+                                    -gmapopt:10 -gmapto:0
+                acc.authdb /etc/xrootd/auth_file
+                ofs.authorize
+                # ENABLE_SECURITY_END %ENDCOLOR%
+            fi
 
-set CERTDIR=-certdir:/etc/grid-security/certificates
-set CERT=-cert:/etc/grid-security/xrd/xrdcert.pem
-set KEY=-key:/etc/grid-security/xrd/xrdkey.pem
-set AUTHZFUN=-authzfun:libXrdLcmaps.so
-set AUTHZFUNPARMS=-authzfunparms:--osg,--lcmapscfg,/etc/xrootd/lcmaps.cfg,--loglevel,0|useglobals
+1. Restart the [relevant services](#using-xrootd)
 
-sec.protocol /usr/lib64 gsi $CERTDIR $CERT $KEY -crl:3 $AUTHZFUN $AUTHZFUNPARMS --gmapopt:2 --gmapto:0
-acc.authdb /etc/xrootd/auth_file
-ofs.authorize
-```
+To verify the LCMAPS security, run the following commands from a machine with your user certificate/key pair,
+`xrootd-client`, and `voms-clients-cpp` installed:
 
-**Restart xrootd and cmsd**
+1. Destroy any pre-existing proxies and attempt a copy to `<DESTINATION PATH>` on the `<XROOTD HOST>` to verify failure:
 
-``` console
-root@host # service xrootd restart
-root@host # service cmsd restart
-```
+        :::console
+        user@client $ voms-proxy-destroy
+        user@client $ xrdcp /bin/bash root://%RED%<XROOTD HOST>%ENDCOLOR%/%RED%<DESTINATION PATH>%ENDCOLOR%
+        180213 13:56:49 396570 cryptossl_X509CreateProxy: EEC certificate has expired
+        [0B/0B][100%][==================================================][0B/s]
+        Run: [FATAL] Auth failed
 
-#### Testing an XRootd Cluster with LCMAPS security enabled
+1. On the XRootD host, add your DN to [/etc/grid-security/grid-mapfile](/security/lcmaps-voms-authentication#mapping-users)
 
-From any machine with the `xrootd-client` installed, you can test with xrdcp. 
-With a user that has no grid certificate installed, you should get an error:
+1. Generate your proxy and verify that you can successfully transfer files:
 
-``` console
-user@host $ xrdcp /bin/bash root://HOSTNAME/tmp/lcmaps_test
-120327 14:31:52 10509 secgsi_InitProxy: cannot access private key file: /home/dstrain/.globus/userkey.pem
-XrdSec: No authentication protocols are available.
-Last server error 3010 ('cannot obtain credentials for protocol: Secgsi: ErrParseBuffer: error getting user proxies: kXGS_init: unable to get protocol object.')
-Error accessing path/file for root://fermicloud121.fnal.gov/tmp/test2
-```
+        :::console
+        user@client $ voms-proxy-init
+        user@client $ xrdcp  /bin/sh root://%RED%<XROOTD HOST>%ENDCOLOR%/%RED%<DESTINATION PATH>%ENDCOLOR%
+        [938.1kB/938.1kB][100%][==================================================][938.1kB/s]
 
-After running `voms-proxy-init` or `grid-proxy-init` to initialize your x509 certificate (usually found in
-`/tmp/x509up_uUID`), the `xrdcp` command should execute cleanly. 
-For instance, the following shows an example of a user creating a voms certificate and copying to the XRootD client and
-then re-executing the xrdcp command.
-
-``` console
-user@host $ voms-proxy-init -voms Engage -valid 999:0
-Your identity: /DC=org/DC=doegrids/OU=People/CN=Doug Strain 834323
-Creating temporary proxy ..................................................... Done
-Contacting  osg-engage.renci.org:15001 [/DC=org/DC=doegrids/OU=Services/CN=osg-engage.renci.org] "Engage" Done
-Creating proxy .......................... Done
-
-Your proxy is valid until Tue May  8 05:34:40 2012
-user@host $ scp /tmp/x509up_u44678 CLIENT_HOSTNAME:/tmp/x509up_u44678
-```
-
-On the `xrootd-client` node,
-
-``` console
-user@host $ xrdcp /bin/bash root://fermicloud121.fnal.gov//tmp/lcmaps_test
-[xrootd] Total 0.73 MB  [====================] 100.00 % [inf MB/s]
-```
-
-In the above examples, make sure to change "/tmp" to a directory allowed by the
-`/etc/xrootd/auth_file` created in a previous section.
+    If your transfer does not succeed, run the previous command with `--debug 2` for more information.
 
 ### (Optional) Adding CMS TFC support to XRootD (CMS sites only)
 

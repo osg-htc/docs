@@ -66,7 +66,7 @@ Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4
         :::console
         root@host # yum update
 
-This command will update **all** packages on your system.
+    This command will update **all** packages on your system.
 
 **Troubleshooting** If you are not having the expected result or having problems with Yum please see the [Yum troubleshooting guide](../release/yum-basics#troubleshooting)
 

@@ -41,12 +41,10 @@ Before Starting
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](../release/supported_platforms)
+- Ensure the host has [a supported operating system](/release/supported_platforms)
 - Obtain root access to the host
-- If you're installing singularity, prepare the [required Yum repositories](../common/yum)
-
-!!! note "Validation Steps"
-    The validation steps below require CVMFS to be installed.  Follow the steps on the [CVMFS Installation](/worker-node/install-cvmfs) page.
+- Prepare the [required Yum repositories](/common/yum)
+- A [CVMFS installation](/worker-node/install-cvmfs) for Singularity image distribution
 
 Choosing Privileged vs Unprivileged Singularity
 -----------------------------------------------
@@ -79,6 +77,7 @@ To install singularity as `setuid`, make sure that your host is up to date befor
 
         :::console
         root@host # yum update
+
     This command will update **all** packages
 
 3. The singularity packages are split into two parts, choose the command that corresponds to your situation:

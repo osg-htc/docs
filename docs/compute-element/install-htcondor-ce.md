@@ -25,43 +25,49 @@ As with all OSG software installations, there are some one-time (per host) steps
 Installing HTCondor-CE
 ----------------------
 
-An HTCondor-CE installation consists of the job gateway (i.e., the HTCondor-CE job router) and other support software (e.g., GridFTP, a Gratia probe, authentication software). To simplify installation, OSG provides convenience RPMs that install all required software with a single command.
+An HTCondor-CE installation consists of the job gateway (i.e., the HTCondor-CE job router) and other support software
+(e.g., GridFTP, a Gratia probe, authentication software).
+To simplify installation, OSG provides convenience RPMs that install all required software.
 
 1. Clean yum cache:
 
         ::console
         root@host # yum clean all --enablerepo=*
 
-2. Update software:
+1. Update software:
 
         :::console
         root@host # yum update
+
     This command will update **all** packages
 
-3. If your batch system is already installed via non-RPM means and is in the following list, install the appropriate 'empty' RPM. Otherwise, skip to the next step.
+1. **(Optional)** If your batch system is already installed via non-RPM means and is in the following list, install the appropriate 'empty' RPM.
+   Otherwise, skip to the next step.
 
     | If your batch system is… | Then run the following command…                       |
     |:-------------------------|:------------------------------------------------------|
     | HTCondor                 | `yum install empty-condor --enablerepo=osg-empty`     |
     | SLURM                    | `yum install empty-slurm --enablerepo=osg-empty`      |
 
-4. If your HTCondor batch system is already installed via non-OSG RPM means, add the line below to `/etc/yum.repos.d/osg.repo`. Otherwise, skip to the next step.
+1. **(Optional)** If your HTCondor batch system is already installed via non-OSG RPM means, add the line below to `/etc/yum.repos.d/osg.repo`.
+   Otherwise, skip to the next step.
 
-        exclude=condor empty-condor
+        exclude=condor
 
-5. Select the appropriate convenience RPM(s):
+1. Select the appropriate convenience RPM:
 
-    | If your batch system is… | Then use the following package(s)… |
-    |:-------------------------|:-----------------------------------|
-    | HTCondor                 | `osg-ce-condor`                    |
-    | LSF                      | `osg-ce-lsf`                       |
-    | PBS                      | `osg-ce-pbs`                       |
-    | SGE                      | `osg-ce-sge`                       |
-    | SLURM                    | `osg-ce-slurm`                     |
+    | If your batch system is... | Then use the following package... |
+    |:---------------------------|:----------------------------------|
+    | HTCondor                   | `osg-ce-condor`                   |
+    | LSF                        | `osg-ce-lsf`                      |
+    | PBS                        | `osg-ce-pbs`                      |
+    | SGE                        | `osg-ce-sge`                      |
+    | SLURM                      | `osg-ce-slurm`                    |
 
-6. Install the CE software:
+1. Install the CE software:
 
-        root@host # yum install *PACKAGE(S)*
+        :::console
+        root@host # yum install %RED%<PACKAGE>%ENDCOLOR%
 
 
 Configuring HTCondor-CE
@@ -123,7 +129,13 @@ blah_disable_limited_proxy=yes
 
 ### Configuring authentication
 
-In OSG 3.3, there are three methods to manage authentication for incoming jobs: the [LCMAPS VOMS plugin](../security/lcmaps-voms-authentication), [edg-mkgridmap](../security/edg-mkgridmap) and [GUMS](../security/install-gums). edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support [pool accounts](https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html), GUMS is the only software with that capability.
+In OSG 3.3, there are three methods to manage authentication for incoming jobs:
+the [LCMAPS VOMS plugin](/security/lcmaps-voms-authentication), [edg-mkgridmap](/security/edg-mkgridmap) and [GUMS](/security/install-gums).
+edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities.
+The LCMAPS VOMS plugin is the new OSG-preferred authentication,
+offering the simplicity of edg-mkgridmap and GUMS' ability to perform VOMS attribute-based mapping.
+If you need to support [pool accounts](https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html),
+GUMS is the only software with that capability.
 
 In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution.
 
@@ -311,7 +323,7 @@ The HTCondor-CE View is an optional web interface to the status of your CE. To r
 
 2.  Next, uncomment the `DAEMON_LIST` configuration located at `/etc/condor-ce/config.d/05-ce-view.conf`:
 
-        DAEMON_LIST = $(DAEMON_LIST), CEVIEW, GANGLIAD
+        DAEMON_LIST = $(DAEMON_LIST), CEVIEW, GANGLIAD, SCHEDD
 
 3.  Restart the CE service:
 
@@ -325,7 +337,7 @@ The website is served on port 80 by default. To change this default, edit the va
 Using HTCondor-CE
 -----------------
 
-As a site administrator, there are a few ways in which you might use the HTCondor-CE:
+As a site administrator, there are a few ways to use the HTCondor-CE:
 
 -   Managing the HTCondor-CE and associated services
 -   Using HTCondor-CE administrative tools to monitor and maintain the job gateway

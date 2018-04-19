@@ -12,7 +12,7 @@ If you are not a site adminstrator:
 
 This document outlines the overall installation process for an OSG site and provides many links into detailed
 installation, configuration, troubleshooting, and similar pages. If you do not see software-related technical
-documentation listed here, try the search bar to the left or contacting us at
+documentation listed here, try the search bar at the top or contacting us at
 [help@opensciencegrid.org](mailto:help@opensciencegrid.org).
 
 Plan the Site
@@ -28,14 +28,21 @@ If you have not done so already, [plan the overall architecture of your OSG site
 Prepare the Batch System
 ------------------------
 
-The assumption is that you have an existing batch system at your site. Currently, we support [HTCondor](http://research.cs.wisc.edu/htcondor/), [LSF](http://www-03.ibm.com/systems/platformcomputing/products/lsf/), [PBS](http://www.pbsworks.com) and [TORQUE](http://www.adaptivecomputing.com/products/open-source/torque/), [SGE](http://en.wikipedia.org/wiki/Oracle_Grid_Engine), and [Slurm](http://slurm.schedmd.com) batch systems.
+The assumption is that you have an existing batch system at your site. Currently, we support [HTCondor](http://research.cs.wisc.edu/htcondor/), [LSF](https://www.ibm.com/us-en/marketplace/hpc-workload-management), [PBS](http://www.pbsworks.com) and [TORQUE](http://www.adaptivecomputing.com/products/open-source/torque/), [SGE](http://en.wikipedia.org/wiki/Oracle_Grid_Engine), and [Slurm](http://slurm.schedmd.com) batch systems.
 
 For smaller sites (less than 50 worker nodes), the most common way to add a site to OSG is to install the OSG Compute Element (CE) on the central host of your batch system.  At such a site - especially if you have minimal time to maintain a CE - you may want to contact <mailto:help@opensciencegrid.org> to ask about using an OSG-hosted CE instead of running your own.  Before proceeding with an install, be sure that you can submit and successfully run a job from your OSG CE host into your batch system.
 
 Add OSG Software
 ----------------
 
-If necessary, provision all OSG hosts that are in your site plan and that do not exist yet.
+If necessary, provision all OSG hosts that are in your site plan that do not exist yet.  The general steps to installing an OSG site are:
+
+1. Install [OSG Yum Repos](release/yum-basics) and the [Compute Element software](#installing-and-configuring-the-compute-element) on your CE host
+1. Install the [Worker Node client](#adding-osg-software-to-worker-nodes) on your worker nodes.
+1. Install [optional software](#installing-and-configuring-other-services) to increase the capabilities of your site.
+1. [Test the OSG installation](#test-osg-software).
+1. Make your [site available to researchers](#start-glideinwms-pilot-submissions).
+1. Verify your [site's accounting](#verify-reporting-and-monitoring).
 
 !!! note
     For sites with more than a handful of worker nodes, it is recommended to use some sort of configuration management tool to install, configure, and maintain your site. While beyond the scope of OSG’s documentation to explain how to select and use such a system, some popular configuration management tools are [Puppet](http://puppetlabs.com), [Chef](https://www.chef.io), [Ansible](https://www.ansible.com), and [CFEngine](http://cfengine.com).
@@ -45,7 +52,7 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 -   [Security information for OSG signed RPMs](release/signing)
 -   [Using Yum and RPM](release/yum-basics)
 -   [Install the OSG repositories](common/yum)
--   [OSG Software release series](release/release_series) - look here to upgrade from OSG 3.1 to OSG 3.2 or from OSG 3.2 to OSG 3.3
+-   [OSG Software release series](release/release_series) - look here to upgrade between releases 3.1, 3.2, 3.3, and 3.4.
 
 ### Installing and Managing Certificates for Site Security ###
 
@@ -53,6 +60,16 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 -   [How do I get PKI host and service X.509 certificates?](security/host-certs)
 -   [Automatically updating the grid certificate authorities (CAs)](security/certificate-management)
 -   [OSG PKI command line client reference](security/certificate-management)
+
+### Installing and Configuring the Compute Element ###
+
+-   Install the compute element (HTCondor-CE and other software):
+    -   [Overview and architecture](compute-element/htcondor-ce-overview)
+    -   [Install HTCondor-CE](compute-element/install-htcondor-ce)
+    -   [Configure the HTCondor-CE job router](compute-element/job-router-recipes), including common recipes
+    -   [Troubleshooting HTCondor-CE installations](compute-element/troubleshoot-htcondor-ce)
+    -   [Submitting jobs to HTCondor-CE](compute-element/submit-htcondor-ce)
+-   [`osg-configure` Reference](other/configuration-with-osg-configure)
 
 ### Adding OSG Software to Worker Nodes ###
 
@@ -64,15 +81,6 @@ If necessary, provision all OSG hosts that are in your site plan and that do not
 -   (optional) [Install the CernVM-FS client](worker-node/install-cvmfs) to make it easy for user jobs to use needed software from OSG's OASIS repositories
 -   (optional) [Install singularity on the OSG worker node](worker-node/install-singularity), to allow pilot jobs to isolate user jobs.
 
-### Installing and Configuring the Compute Element ###
-
--   Install the compute element (HTCondor-CE and other software):
-    -   [Overview and architecture](compute-element/htcondor-ce-overview)
-    -   [Install HTCondor-CE](compute-element/install-htcondor-ce)
-    -   [Configure the HTCondor-CE job router](compute-element/job-router-recipes), including common recipes
-    -   [Troubleshooting HTCondor-CE installations](compute-element/troubleshoot-htcondor-ce)
-    -   [Submitting jobs to HTCondor-CE](compute-element/submit-htcondor-ce)
--   [`osg-configure` Reference](other/configuration-with-osg-configure)
 
 ### Installing and Configuring Other Services ###
 
