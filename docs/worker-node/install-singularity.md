@@ -73,14 +73,14 @@ To install singularity as `setuid`, make sure that your host is up to date befor
         ::console
         root@host # yum clean all --enablerepo=*
 
-2. Update software:
+1. Update software:
 
         :::console
         root@host # yum update
 
     This command will update **all** packages
 
-3. The singularity packages are split into two parts, choose the command that corresponds to your situation:
+1. The singularity packages are split into two parts, choose the command that corresponds to your situation:
     - If you are installing singularity on a worker node, where images do not need to be created or manipulated, install just the smaller part to limit the amount of setuid-root code that is installed:
 
             :::console
@@ -160,18 +160,18 @@ singularity to be run as an unprivileged user via CVMFS:
 1. Set the `namespace.unpriv_enable=1` boot option.  The easiest way
     to do this is to add it in `/etc/sysconfig/grub` to the end of the
     `GRUB_CMDLINE_LINUX` variable, before the ending double-quote.
-2. Update the grub configuration:
+1. Update the grub configuration:
 
         :::console
         root@host # grub2-mkconfig -o /boot/grub2/grub.cfg
 
-3. Enable user namespaces via `sysctl`:
+1. Enable user namespaces via `sysctl`:
 
         :::console
         root@host # echo "user.max_user_namespaces = 15000" \
             > /etc/sysctl.d/90-max_user_namespaces.conf
 
-4. Disable network namespaces:
+1. Disable network namespaces:
 
         :::console
         root@host # echo "user.max_net_namespaces = 0" \
@@ -193,8 +193,8 @@ singularity to be run as an unprivileged user via CVMFS:
         namespaces enabled at the same time as unprivileged user
         namespaces until this is resolved.
 
-4. Reboot
-5. If you haven't yet installed [cvmfs](install-cvmfs), do so.
+1. Reboot
+1. If you haven't yet installed [cvmfs](install-cvmfs), do so.
 
 
 ### Validating singularity ###
