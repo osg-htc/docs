@@ -211,6 +211,24 @@ UID        PID  PPID  C STIME TTY          TIME CMD
 user         1     0  0 21:34 ?        00:00:00 ps -ef
 ```
 
+Singularity CLI Options
+-----------------------
+
+Singularity has several command line options and for completeness the documentaion is found [here](http://singularity.lbl.gov/). However, following there are some command line options that are common:
+
+1. `--contain`. This flag mounts the "scratch space" `/tmp` and `/var/tmp` inside the container and it is redudant with (`--scratch /tmp` and `--scratch /var/tmp`).
+
+    !!! warning
+        In Singularity version 2.4.6 having both `--scratch /tmp` and --contain will cause singularity to not work.
+
+1. `--bind`. [Bind](http://singularity.lbl.gov/docs-mount) allows a user to bind a part of the namespace outside of the container inside the container. If for example singularity is run with `--bind global` then `/global` must priorly exist in the container. Or an error as follows will show up:
+
+        :::console        
+        user@host $ singularity shell --bind /global /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6
+        WARNING: Non existent bind point (directory) in container: '/global'
+        Singularity: Invoking an interactive shell within container...
+
+
 Starting and Stopping Services
 ------------------------------
 
