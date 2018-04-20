@@ -191,13 +191,12 @@ You can find more information on troubleshooting RSV in the [rsv-control documen
 
 ### Failed to send via Gratia
 
-OSG in the process of turning of the gratia RSV collector in this process you might find a message `Failed to send via Gratia`, you should process to disable the gratia consumer using the following commands
+If you see `Failed to send record Failed to send via Gratia: Server unable to receive data:` in `/var/log/rsv/consumers/gratia-consumer.output` you should process to disable the gratia consumer using the following commands
 
 ```console
 root@host#  rsv-control --disable --host %RED%<YOUR RSV HOST>%ENDCOLOR% gratia-consumer
 root@host#  rsv-control --off --host %RED%<YOUR RSV HOST>%ENDCOLOR% gratia-consumer
 ```
-
 
 ### Important file locations
 
