@@ -236,5 +236,6 @@ singularity has no services to start or stop.
 
 References
 ----------
-
+- [Singularity Documentation](http://singularity.lbl.gov/)
+- [Singularity Support/News](http://singularity.lbl.gov/support)
 - [Additional guidance for CMS sites](https://twiki.cern.ch/twiki/bin/view/Main/CmsSingularity)
