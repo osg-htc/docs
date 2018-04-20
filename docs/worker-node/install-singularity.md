@@ -133,6 +133,9 @@ RedHat when they are discovered.
 
 ### Validating singularity ###
 
+After singularity is installed, as an ordinary user run the following
+command to verify it:
+
 ```console
 user@host $ singularity exec -c --ipc --pid \
                 --home $PWD:/srv \
@@ -143,9 +146,6 @@ WARNING: Container does not have an exec helper script, calling 'ps' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
 user         1     0  0 21:34 ?        00:00:00 ps -ef
 ```
-
-After singularity is installed, as an ordinary user run the following
-command to verify it:
 
 Unprivileged Singularity
 ------------------------
