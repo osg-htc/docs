@@ -147,8 +147,6 @@ user         1     0  0 21:34 ?        00:00:00 ps -ef
 After singularity is installed, as an ordinary user run the following
 command to verify it:
 
-
-
 Unprivileged Singularity
 ------------------------
 
