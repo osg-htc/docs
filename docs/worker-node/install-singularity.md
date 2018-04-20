@@ -139,7 +139,7 @@ command to verify it:
 ```console
 user@host $ singularity exec -c --ipc --pid \
                 --home $PWD:/srv \
-                --pwd /srv \
+                --bind /cvms \
                 /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
                 ps -ef
 WARNING: Container does not have an exec helper script, calling 'ps' directly
@@ -209,7 +209,7 @@ unprivileged user and verify that singularity works:
 user@host $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity \
                 exec -c --ipc --pid \
                 --home $PWD:/srv \
-                --pwd /srv \
+                --bind /cvmfs \
                 /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
                 ps -ef
 WARNING: Container does not have an exec helper script, calling 'ps' directly
