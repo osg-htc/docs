@@ -10,7 +10,8 @@ Getting an User Certificate
 ---------------------------
 
 This section describes how to get and set up a personal certificate to use on OSG.
-Your user certificate will be issued by CILogon or by XSEDE.
+Currently you can get a certificate from either the OSG CA or from CILogon.
+After May 31st, you will only be able to get a certificate issued by CILogon.
 Other CAs may be used; if your virtual organization (VO) requires that you get a certificate from a different CA, [contact your VO Support Center](http://www.opensciencegrid.org/?pid=1000187) for instructions.
 
 ### Know your responsibilities
@@ -19,19 +20,30 @@ When you request a certificate your provide some public personal information abo
 
 Your **name** and **email** address are encoded into the signed certificate and **if either of those change** (usually email address) then you should **request a new certificate** with the correct information and **revoke the old certificate**.
 
-### Requesting a User Certificate
+### Getting a Certificate from CILogon
 
 You will have to obtain your user certificate using the [CILogon web UI](https://cilogon.org/).
 Follow the steps below to get an user certificate:
 
 1. First, either search for your institution and select it or scroll through list and do the same. <br>![Institution Selection](/img/cilogon_select_idp.png)
-1. When you hit the `Log On` button, you'll be presented by your institution asking for your credentiala.
-1. Upon successfully entering, your credentials, you'll get a page asking for you to enter a password.  You should pick
-and enter a 12 character password and then click on the `Get New Certificate` button.<br>![Password entry](/img/cilogon_cert_password.png) 
+1. Click the `Log On` button and enter your instutional credentials.
+1. Upon successfully entering your credentials, you'll get a page asking for you to enter a password.  Enter a password that is at least 12 characters long and then click on the `Get New Certificate` button.<br>![Password entry](/img/cilogon_cert_password.png) 
 1. The web page will generate a `usercred.p12` file and prompt you to download it.  The certiticate will be protected
-using thhe password you entered in the prior step.
+using the password you entered in the prior step.
 
+### Getting a Certificate from the OSG CA
 
+There are two different ways to obtain your certificate, either via a command line interface, or through a web browser.
+The links below will guide you through whichever method you choose.
+The command line method is generally simpler and less prone to errors than using a web browser but it may require extra
+setup and package installation the first time you do it.
+Most people end up needing their certificate for both command line grid use and web browser use and it is generally
+easier to import your certificate into your browser (and email client) from the command line certificate files than to
+export your certificate from your web browser to use on the command line. 
+This is because of the large variety of web browsers each with it's own way to deal with certificates. If you will use
+the certificate ONLY in your web browser then requesting it from your browser is probably the easiest method.
+
+[Get or renew a certificate with command line interface.](/security/certificate-management.md)
 
 ### PKCS12 (.p12) vs PEM format
 
