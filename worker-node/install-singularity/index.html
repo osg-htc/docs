@@ -2520,7 +2520,10 @@ defaults.</p>
 <h3 id="validating-singularity">Validating singularity<a class="headerlink" href="#validating-singularity" title="Permanent link">&para;</a></h3>
 <p>After singularity is installed, as an ordinary user run the following
 command to verify it:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> singularity <span class="nb">exec</span> -c --ipc --pid -H <span class="nv">$HOME</span>:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 <span class="se">\</span>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> singularity <span class="nb">exec</span> --contain --ipc --pid <span class="se">\</span>
+                --home <span class="nv">$PWD</span>:/srv <span class="se">\</span>
+                --bind /cvms <span class="se">\</span>
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 <span class="se">\</span>
                 ps -ef
 <span class="go">WARNING: Container does not have an exec helper script, calling &#39;ps&#39; directly</span>
 <span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
@@ -2588,7 +2591,10 @@ namespaces until this is resolved.</p>
 <p>Once you have the host configured properly, log in as an ordinary
 unprivileged user and verify that singularity works:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity <span class="se">\</span>
-                <span class="nb">exec</span> -c --ipc --pid -H <span class="nv">$HOME</span>:/srv /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 <span class="se">\</span>
+                <span class="nb">exec</span> --contain --ipc --pid <span class="se">\</span>
+                --home <span class="nv">$PWD</span>:/srv <span class="se">\</span>
+                --bind /cvmfs <span class="se">\</span>
+                /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 <span class="se">\</span>
                 ps -ef
 <span class="go">WARNING: Container does not have an exec helper script, calling &#39;ps&#39; directly</span>
 <span class="go">UID        PID  PPID  C STIME TTY          TIME CMD</span>
@@ -2600,6 +2606,8 @@ unprivileged user and verify that singularity works:</p>
 <p>singularity has no services to start or stop.</p>
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
+<li><a href="http://singularity.lbl.gov/">Singularity Documentation</a></li>
+<li><a href="http://singularity.lbl.gov/support">Singularity Support/News</a></li>
 <li><a href="https://twiki.cern.ch/twiki/bin/view/Main/CmsSingularity">Additional guidance for CMS sites</a></li>
 </ul>
                 
