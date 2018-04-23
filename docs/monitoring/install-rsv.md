@@ -189,20 +189,13 @@ You can find more information on troubleshooting RSV in the [rsv-control documen
 !!! note
     If you are getting assistance via the trouble ticket system, you must add a `.txt` extension to the tarball so it can be uploaded:
 
-### Resending failed Gratia records
+### Failed to send via Gratia
 
-If RSV fails to send Gratia records, it will save a copy of the output into `/var/spool/rsv/failed-gratia-scripts`.
-You will be notified if files are in this directory on your HTML status page.
+If you see `Failed to send record Failed to send via Gratia: Server unable to receive data:` in `/var/log/rsv/consumers/gratia-consumer.output` you should process to disable the gratia consumer using the following commands
 
-If files appear here, you can attempt to determine why by looking at this log file: `/var/log/rsv/consumers/gratia-consumer.output`.
-(This file is rotated, so the error message may no longer be present.)
-
-Usually this error is spurious - there may have been a problem with the central collector being unavailable, or there may have been a network problem.
-The first step to fix this problem is to try to resend these files.
-To do so, move them back into the `gratia` directory and they will be resent the next time the gratia-script-consumer runs (about every 5 minutes):
-
-``` console
-root@host# mv /var/spool/rsv/failed-gratia-records/* /var/spool/rsv/gratia-consumer/
+```console
+root@host#  rsv-control --disable --host %RED%<YOUR RSV HOST>%ENDCOLOR% gratia-consumer
+root@host#  rsv-control --off --host %RED%<YOUR RSV HOST>%ENDCOLOR% gratia-consumer
 ```
 
 ### Important file locations
