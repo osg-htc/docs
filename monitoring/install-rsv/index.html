@@ -2091,8 +2091,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#resending-failed-gratia-records" title="Resending failed Gratia records" class="md-nav__link">
-    Resending failed Gratia records
+  <a href="#failed-to-send-via-gratia" title="Failed to send via Gratia" class="md-nav__link">
+    Failed to send via Gratia
   </a>
   
 </li>
@@ -2434,8 +2434,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#resending-failed-gratia-records" title="Resending failed Gratia records" class="md-nav__link">
-    Resending failed Gratia records
+  <a href="#failed-to-send-via-gratia" title="Failed to send via Gratia" class="md-nav__link">
+    Failed to send via Gratia
   </a>
   
 </li>
@@ -2733,15 +2733,10 @@ To use it:</p>
 <p class="admonition-title">Note</p>
 <p>If you are getting assistance via the trouble ticket system, you must add a <code>.txt</code> extension to the tarball so it can be uploaded:</p>
 </div>
-<h3 id="resending-failed-gratia-records">Resending failed Gratia records<a class="headerlink" href="#resending-failed-gratia-records" title="Permanent link">&para;</a></h3>
-<p>If RSV fails to send Gratia records, it will save a copy of the output into <code>/var/spool/rsv/failed-gratia-scripts</code>.
-You will be notified if files are in this directory on your HTML status page.</p>
-<p>If files appear here, you can attempt to determine why by looking at this log file: <code>/var/log/rsv/consumers/gratia-consumer.output</code>.
-(This file is rotated, so the error message may no longer be present.)</p>
-<p>Usually this error is spurious - there may have been a problem with the central collector being unavailable, or there may have been a network problem.
-The first step to fix this problem is to try to resend these files.
-To do so, move them back into the <code>gratia</code> directory and they will be resent the next time the gratia-script-consumer runs (about every 5 minutes):</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host#</span> mv /var/spool/rsv/failed-gratia-records/* /var/spool/rsv/gratia-consumer/
+<h3 id="failed-to-send-via-gratia">Failed to send via Gratia<a class="headerlink" href="#failed-to-send-via-gratia" title="Permanent link">&para;</a></h3>
+<p>If you see <code>Failed to send record Failed to send via Gratia: Server unable to receive data:</code> in <code>/var/log/rsv/consumers/gratia-consumer.output</code> you should process to disable the gratia consumer using the following commands</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host#</span>  rsv-control --disable --host <span style="color:red">&lt;YOUR RSV HOST&gt;</span> gratia-consumer
+<span class="gp">root@host#</span>  rsv-control --off --host <span style="color:red">&lt;YOUR RSV HOST&gt;</span> gratia-consumer
 </pre></div>
 
 
