@@ -137,7 +137,7 @@ After singularity is installed, as an ordinary user run the following
 command to verify it:
 
 ```console
-user@host $ singularity exec -c --ipc --pid \
+user@host $ singularity exec --contain --ipc --pid \
                 --home $PWD:/srv \
                 --bind /cvms \
                 /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
@@ -207,7 +207,7 @@ unprivileged user and verify that singularity works:
 
 ```console
 user@host $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/el7-x86_64/bin/singularity \
-                exec -c --ipc --pid \
+                exec --contain --ipc --pid \
                 --home $PWD:/srv \
                 --bind /cvmfs \
                 /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
