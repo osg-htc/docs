@@ -205,6 +205,71 @@ For instructions on how to request a host or service certificate using the Web
 interface please see the [user guide maintained by
 the OIM development team](https://confluence.grid.iu.edu/pages/viewpage.action?pageId=3244064).
 
+Requesting Host Certificate for HTCondor-CE Using Let's Encrypt
+----------------------------------------------
+
+As an alternative to the above options, the Let's Encrypt software can be used to obtain host certificates.
+
+We use the following guide as a reference:
+
+   - https://github.com/cilogon/letsencrypt-certificates
+
+In particular, under Getting your host certificate, we follow the two "Setting up" sections.
+
+(See also: https://letsencrypt.org/getting-started/)
+
+The letsencrypt software can be obtained from https://github.com/letsencrypt/letsencrypt
+
+        :::console
+        root@host # git clone https://github.com/letsencrypt/letsencrypt
+
+If you already have an HTCondor-CE set up and running, stop the CE View service (as it listens on
+port 80, which the letsencrypt setup needs to bind on temporarily).
+
+From the git checkout, you can run the following script to automate obtaining the host certificate
+with Let's Encrypt:
+
+        :::console
+        root@host # ./letsencrypt-auto --debug certonly --standalone --email %RED%<ADMIN_EMAIL>%ENDCOLOR% -d %RED%<HOST>%ENDCOLOR%
+
+
+Set up hostcert/hostkey links:
+
+        :::console
+        root@host # ln -s /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
+        root@host # ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
+        root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
+
+Set up /etc/grid-security/certificates:
+
+        :::console
+        root@host # git clone https://github.com/cilogon/letsencrypt-certificates.git
+        root@host # cd letsencrypt-certificates/
+        root@host # make check
+        root@host # make install
+
+
+Now, for HTCondor-CE, we need to add the appropriate line to /etc/condor-ce/condor_mapfile so that CE daemons can authorize with each other.
+
+Add:
+
+        :::console
+        GSI "^/CN=([-.A-Za-z0-9/= ]+)$" \1@daemon.opensciencegrid.org
+
+Just above the line
+
+        :::console
+        GSI (.*) GSS_ASSIST_GRIDMAP
+
+in /etc/condor-ce/condor_mapfile
+
+
+Before the hostcert expires, you can renew it with:
+
+        :::console
+        root@host # ./letsencrypt-auto renew
+
+
 Frequently Asked Questions
 ---------------------------
 
