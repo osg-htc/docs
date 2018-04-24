@@ -2658,11 +2658,6 @@ Legal values for <code>probe_type</code> are:</p>
 <td>If you don't use a service certificate for rsv, you will need to specify a  proxy file that RSV should use in the proxy_file setting.  If this is set, then  service_cert, service_key, and service_proxy should be left blank, or set to <code>UNAVAILABE</code> or <code>DEFAULT</code>.</td>
 </tr>
 <tr>
-<td><strong>enable_gratia</strong></td>
-<td><code>True</code>, <code>False</code></td>
-<td>This option will enable RSV record uploading to central RSV collector at the GOC.   This should be set to True on all OSG resources (and to False on non-OSG resources).</td>
-</tr>
-<tr>
 <td><strong>setup_rsv_nagios</strong></td>
 <td><code>True</code>, <code>False</code></td>
 <td>This option indicates whether rsv should upload results to a local  nagios server instance. This should be set to True or False.<br> This plugin is provided as an experimental component, and admins are recommend <em>not to enable</em> it on production resources.</td>
