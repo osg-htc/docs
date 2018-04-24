@@ -373,7 +373,9 @@ Apr 11 13:51:41 atlas-hub globus-gridftp-server: You are still root after the LC
 
 **Next actions**
 
-1. Check that the versions of the `globus-gridftp-server-*` do not end in `osgXX.elY`:
+1. If the versions of the `globus-gridftp-server-*` packages do not end in `osgXX.elY`, 
+   continue with these instructions.
+   To check the version of your `globus-gridftp-server-*`, run the following command:
 
         :::console
         user@host $ rpm -q ^globus-gridftp
