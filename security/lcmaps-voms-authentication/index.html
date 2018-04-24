@@ -859,6 +859,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#common-issues" title="Common issues" class="md-nav__link">
+    Common issues
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wrong-version-of-gridftp" title="Wrong version of GridFTP" class="md-nav__link">
+    Wrong version of GridFTP
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2470,6 +2490,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#common-issues" title="Common issues" class="md-nav__link">
+    Common issues
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wrong-version-of-gridftp" title="Wrong version of GridFTP" class="md-nav__link">
+    Wrong version of GridFTP
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2964,6 +3004,45 @@ therefore, there are no running services and it does not have to be invoked manu
 
 <p>and then restart <code>condor-ce</code>.</p>
 <p>Once you are satisfied that your mappings are working, you may remove this file and restart <code>condor-ce</code> in order to reduce the load on your CE caused by authentication.</p>
+<h3 id="common-issues">Common issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h3>
+<h4 id="wrong-version-of-gridftp">Wrong version of GridFTP<a class="headerlink" href="#wrong-version-of-gridftp" title="Permanent link">&para;</a></h4>
+<p>If you have the EPEL version of the GridFTP server, you may see error messages in <code>journalctl</code> (EL7),
+<code>var/log/messages</code> (EL6), or the location specified by <code>LCMAPS_LOG_FILE</code>.</p>
+<p><strong>Symptoms</strong></p>
+<div class="codehilite"><pre><span></span>Apr 11 13:51:41 atlas-hub globus-gridftp-server: You are still root after the LCMAPS execution. The implicit root-mapping safety is enabled. See documentation for details
+</pre></div>
+
+
+<p><strong>Next actions</strong></p>
+<ol>
+<li>
+<p>If the versions of the <code>globus-gridftp-server-*</code> packages do not end in <code>osgXX.elY</code>, 
+   continue with these instructions.
+   To check the version of your <code>globus-gridftp-server-*</code>, run the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> rpm -q ^globus-gridftp
+</pre></div>
+
+
+</li>
+<li>
+<p>Verify that the <a href="../../common/yum#installing-and-configuring-repositories">priority</a> of the OSG repositories are set
+   properly</p>
+</li>
+<li>
+<p>Clean your yum cache</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum clean all --enablerepo<span class="o">=</span>*
+</pre></div>
+
+
+</li>
+<li>
+<p>Reinstall <code>globus-gridftp-server</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum update globus-gridftp-server
+</pre></div>
+
+
+</li>
+</ol>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use the <a href="../../common/help">this page</a>.</p>
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
