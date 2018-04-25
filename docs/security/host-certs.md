@@ -249,21 +249,6 @@ Set up /etc/grid-security/certificates:
         root@host # make install
 
 
-Now, for HTCondor-CE, we need to add the appropriate line to /etc/condor-ce/condor_mapfile so that CE daemons can authorize with each other.
-
-Add:
-
-        :::console
-        GSI "^/CN=([-.A-Za-z0-9/= ]+)$" \1@daemon.opensciencegrid.org
-
-Just above the line
-
-        :::console
-        GSI (.*) GSS_ASSIST_GRIDMAP
-
-in /etc/condor-ce/condor_mapfile
-
-
 Before the hostcert expires, you can renew it with:
 
         :::console
