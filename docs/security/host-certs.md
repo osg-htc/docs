@@ -206,7 +206,7 @@ interface please see the [user guide maintained by
 the OIM development team](https://confluence.grid.iu.edu/pages/viewpage.action?pageId=3244064).
 
 Requesting Host Certificate for HTCondor-CE Using Let's Encrypt
-----------------------------------------------
+---------------------------------------------------------------
 
 As an alternative to the above options, the Let's Encrypt software can be used to obtain host certificates.
 
