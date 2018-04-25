@@ -218,19 +218,19 @@ In particular, under Getting your host certificate, we follow the two "Setting u
 
 (See also: https://letsencrypt.org/getting-started/)
 
-The letsencrypt software can be obtained from https://github.com/letsencrypt/letsencrypt
+The `letsencrypt` software (AKA `certbot`) can be obtained from the EPEL 7 yum repo:
 
         :::console
-        root@host # git clone https://github.com/letsencrypt/letsencrypt
+        root@host # yum install certbot
 
 If you already have an HTCondor-CE set up and running, stop the CE View service (as it listens on
 port 80, which the letsencrypt setup needs to bind on temporarily).
 
-From the git checkout, you can run the following script to automate obtaining the host certificate
+From the git checkout, you can run the following command to obtain the host certificate
 with Let's Encrypt:
 
         :::console
-        root@host # ./letsencrypt-auto --debug certonly --standalone --email %RED%<ADMIN_EMAIL>%ENDCOLOR% -d %RED%<HOST>%ENDCOLOR%
+        root@host # certbot certonly --standalone --email %RED%<ADMIN_EMAIL>%ENDCOLOR% -d %RED%<HOST>%ENDCOLOR%
 
 
 Set up hostcert/hostkey links:
@@ -267,7 +267,7 @@ in /etc/condor-ce/condor_mapfile
 Before the hostcert expires, you can renew it with:
 
         :::console
-        root@host # ./letsencrypt-auto renew
+        root@host # certbot renew
 
 
 Frequently Asked Questions
