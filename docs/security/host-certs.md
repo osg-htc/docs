@@ -210,14 +210,6 @@ Requesting Host Certificate for HTCondor-CE Using [Let's Encrypt](https://letsen
 
 As an alternative to the above options, the Let's Encrypt software can be used to obtain host certificates.
 
-We use the following guide as a reference:
-
-   - https://github.com/cilogon/letsencrypt-certificates
-
-In particular, under Getting your host certificate, we follow the two "Setting up" sections.
-
-(See also: https://letsencrypt.org/getting-started/)
-
 The `letsencrypt` software (AKA `certbot`) can be obtained from the EPEL 7 yum repo:
 
         :::console
@@ -343,3 +335,8 @@ References
 ------------
 
 -   [Useful OpenSSL commands (from NCSA)](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html) - e.g. how to convert the format of your certificate.
+
+-   [Official Let's Encrypt setup guide](https://letsencrypt.org/getting-started/)
+
+-   Another [Let's Encrypt setup reference](https://github.com/cilogon/letsencrypt-certificates)
+    Under Getting your host certificate, we follow the first "Setting up" section.
