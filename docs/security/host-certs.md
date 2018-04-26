@@ -337,26 +337,6 @@ notBefore=Jan  4 21:08:41 2010 GMT
 notAfter=Jan  4 21:08:41 2011 GMT
 ```
 
-### How can I change the URLs queried by the PKI clients?
-
-This configuration should not need to be changed for the vast majority of uses.
-The information is provided in case you need it for debugging purposes.
-
-The client checks for `pki-clients.ini` file at three location in order:
-
--   `$HOME/.osg-pki/OSG_PKI.ini`
--   `./pki-clients.ini`
--   `/etc/osg/pki-clients.ini` (default location)
-
-The INI file contains the following information:
-
--   Request URL
--   Approve URL
--   Retrieve URL
--   Host URL
-
-
-
 References
 ------------
 
