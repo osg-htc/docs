@@ -218,8 +218,7 @@ The `letsencrypt` software (AKA `certbot`) can be obtained from the EPEL 7 yum r
 If you already have an HTCondor-CE set up and running, stop the CE View service (as it listens on
 port 80, which the letsencrypt setup needs to bind on temporarily).
 
-From the git checkout, you can run the following command to obtain the host certificate
-with Let's Encrypt:
+You can then run the following command to obtain the host certificate with Let's Encrypt:
 
         :::console
         root@host # certbot certonly --standalone --email %RED%<ADMIN_EMAIL>%ENDCOLOR% -d %RED%<HOST>%ENDCOLOR%
