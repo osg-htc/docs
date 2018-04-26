@@ -215,8 +215,11 @@ The `letsencrypt` software (AKA `certbot`) can be obtained from the EPEL 7 yum r
         :::console
         root@host # yum install certbot
 
-If you already have an HTCondor-CE set up and running, stop the CE View service (as it listens on
-port 80, which the letsencrypt setup needs to bind on temporarily).
+If you have any service running on port 80, you will have to disable it temporarily to obtain
+certificates, as the letsencrypt needs to bind on it temporarily in order to verify the host.
+For instance, if you already have an HTCondor-CE set up and running, stop the
+[CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view)
+(which listens on port 80).
 
 You can then run the following command to obtain the host certificate with Let's Encrypt:
 
