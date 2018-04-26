@@ -232,14 +232,6 @@ Set up hostcert/hostkey links:
         root@host # ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
         root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
 
-Set up /etc/grid-security/certificates:
-
-        :::console
-        root@host # git clone https://github.com/cilogon/letsencrypt-certificates.git
-        root@host # cd letsencrypt-certificates/
-        root@host # make check
-        root@host # make install
-
 
 Before the hostcert expires, you can renew it with:
 
