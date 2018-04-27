@@ -87,7 +87,9 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
         :::console
         root@server # chmod 0600 hostkey.pem req.pem
 
-1. Submit the CSR to your institution
+1. Find your institution-specific InCommon contact
+   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/))
+   and submit the CSR that you generated above
 1. Install the [host](#installing-host-certificates) or [service](#installing-service-certificates) certificate
 
 Requesting Let's Encrypt Certificates
