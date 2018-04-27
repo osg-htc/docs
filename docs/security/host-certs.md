@@ -13,6 +13,22 @@ hostname (e.g.  mymachine.mydomain.edu) while a service certificate will prepend
 a service name to the hostname (e.g. http/mymachine.mydomain.edu for an Apache
 httpd service certificate).
 
+Since October 2015 the OSG has run its own OSG CA service that handled host and service certificate requests.
+At the end of May 2018, this service will be retired;
+see [the policy details here](https://opensciencegrid.github.io/technology/policy/service-migrations-spring-2018/#osg-ca).
+To replace the OSG CA service, we suggest using one or more of the following services depending on your site's needs:
+
+- [InCommon](https://www.incommon.org/cert/): an IGTF-accredited CA for services that interact with the WLCG;
+  requires a subscription, generally held by an institution
+- [Let's Encrypt](https://letsencrypt.org/): a free, automated, and open CA frequently used for web services;
+  see the [security team's position on Let's Encrypt](https://opensciencegrid.github.io/security/LetsEncryptOSGCAbundle/)
+  for more details
+
+!!! tip "Recommendation"
+    Certificates issued from the OSG CA before the service retirement will still be valid until they expire.
+    Therefore, we recommend that you request certificates for any currently existing or planned hosts and services
+    prior to retirement.
+
 After reading this document you should be able to apply for and install a host
 or service certificate on a grid resource.  This document does not explain how
 to apply for a grid user certificate. To learn how to apply for a grid user
@@ -32,6 +48,56 @@ issuer=/DC=org/DC=cilogon/C=US/O=CILogon/CN=CILogon OSG CA 1
 notBefore=Jan  4 21:08:09 2010 GMT
 notAfter=Jan  4 21:08:09 2011 GMT
 ```
+
+Requesting InCommon Certificates
+--------------------------------
+
+Many institution in the United States already subscribe to InCommon and offer certificate services.
+If your institution is in the list of [InCommon subscribers](https://www.incommon.org/certificates/subscribers.html),
+continue with the instructions below.
+If your institution is not in the list and Let's Encrypt certificates do not meet your needs, please
+[contact us](/common/help.md).
+
+1. Construct the Common Name based on the type of certificate you need:
+
+    1. Determine if you need a host and/or service certificate:
+
+        | If the host is a(n)... | You need a host certificate | You need a service certificate |
+        |------------------------|-----------------------------|--------------------------------|
+        | HTCondor-CE            | Yes                         | No                             |
+        | GridFTP                | Yes                         | No                             |
+        | XRootD                 | Yes                         | No                             |
+        | GlideinWMS             | Yes                         | Yes, frontend and pilot(s)     |
+        | GUMS                   | No                          | Yes, tomcat                    |
+        | RSV                    | No                          | Yes                            |
+
+        If you need both kinds of certificates, repeat the following instructions for each certificate.
+
+    1. If you need a host certificate, the Common Name should be the hostname, e.g. `mymachine.mydomain.edu`.
+       If you need a service certificate, the Common Name should be the name of the service prepended to the hostname,
+       e.g. `http/mymachine.mydomain.edu` for an Apache httpd service certificate.
+
+1. Generate a Certificate Signing Request (CSR) and private key, using the Common Name from the previous step:
+
+        :::console
+        root@server # openssl req -nodes -new -newkey rsa:2048 -sha256 -out req.pem -keyout hostkey.pem -subj "/CN=%RED%<COMMON NAME>%ENDCOLOR%"
+
+1. Set the permissions on the CSR and private key:
+
+        :::console
+        root@server # chmod 0600 hostkey.pem req.pem
+
+1. Submit the CSR to your institution
+1. Install the [host](#installing-host-certificates) or [service](#installing-service-certificates) certificate
+
+Requesting Let's Encrypt Certificates
+-------------------------------------
+
+Instructions for requesting Let's Encrypt host certificates will be released with the next release of the
+[OSG CA certificate bundle](/common/ca.md), expected in early May 2018.
+
+See the [security team's position on Let's Encrypt](https://opensciencegrid.github.io/security/LetsEncryptOSGCAbundle/)
+for more details
 
 Requesting Host/Service Certificates Using the Command Line
 -----------------------------------------------------------
@@ -292,4 +358,5 @@ The INI file contains the following information:
 References
 ------------
 
+-   [CILogon documentation for requesting InCommon certificates](http://www.cilogon.org/globus-with-incommon-ca)
 -   [Useful OpenSSL commands (from NCSA)](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html) - e.g. how to convert the format of your certificate.
