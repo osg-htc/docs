@@ -87,7 +87,9 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
         :::console
         root@server # chmod 0600 hostkey.pem req.pem
 
-1. Submit the CSR to your institution
+1. Find your institution-specific InCommon contact
+   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/))
+   and submit the CSR that you generated above
 1. Install the [host](#installing-host-certificates) or [service](#installing-service-certificates) certificate
 
 Requesting Let's Encrypt Certificates
@@ -334,26 +336,6 @@ root@host # openssl x509 -in /etc/grid-security/hostcert.pem -dates -noout
 notBefore=Jan  4 21:08:41 2010 GMT
 notAfter=Jan  4 21:08:41 2011 GMT
 ```
-
-### How can I change the URLs queried by the PKI clients?
-
-This configuration should not need to be changed for the vast majority of uses.
-The information is provided in case you need it for debugging purposes.
-
-The client checks for `pki-clients.ini` file at three location in order:
-
--   `$HOME/.osg-pki/OSG_PKI.ini`
--   `./pki-clients.ini`
--   `/etc/osg/pki-clients.ini` (default location)
-
-The INI file contains the following information:
-
--   Request URL
--   Approve URL
--   Retrieve URL
--   Host URL
-
-
 
 References
 ------------
