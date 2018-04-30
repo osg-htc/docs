@@ -898,13 +898,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#how-can-i-change-the-urls-queried-by-the-pki-clients" title="How can I change the URLs queried by the PKI clients?" class="md-nav__link">
-    How can I change the URLs queried by the PKI clients?
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2504,13 +2497,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#how-can-i-change-the-urls-queried-by-the-pki-clients" title="How can I change the URLs queried by the PKI clients?" class="md-nav__link">
-    How can I change the URLs queried by the PKI clients?
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2664,7 +2650,9 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
 
 </li>
 <li>
-<p>Submit the CSR to your institution</p>
+<p>Find your institution-specific InCommon contact
+   (e.g. <a href="https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/">UW-Madison InCommon contact</a>)
+   and submit the CSR that you generated above</p>
 </li>
 <li>Install the <a href="#installing-host-certificates">host</a> or <a href="#installing-service-certificates">service</a> certificate</li>
 </ol>
@@ -2891,22 +2879,6 @@ to retrieve information about the certificate:</p>
 </pre></div>
 
 
-<h3 id="how-can-i-change-the-urls-queried-by-the-pki-clients">How can I change the URLs queried by the PKI clients?<a class="headerlink" href="#how-can-i-change-the-urls-queried-by-the-pki-clients" title="Permanent link">&para;</a></h3>
-<p>This configuration should not need to be changed for the vast majority of uses.
-The information is provided in case you need it for debugging purposes.</p>
-<p>The client checks for <code>pki-clients.ini</code> file at three location in order:</p>
-<ul>
-<li><code>$HOME/.osg-pki/OSG_PKI.ini</code></li>
-<li><code>./pki-clients.ini</code></li>
-<li><code>/etc/osg/pki-clients.ini</code> (default location)</li>
-</ul>
-<p>The INI file contains the following information:</p>
-<ul>
-<li>Request URL</li>
-<li>Approve URL</li>
-<li>Retrieve URL</li>
-<li>Host URL</li>
-</ul>
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="http://www.cilogon.org/globus-with-incommon-ca">CILogon documentation for requesting InCommon certificates</a></li>
