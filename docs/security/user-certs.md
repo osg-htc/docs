@@ -112,7 +112,11 @@ To solve the problem split the bundle in the two PEM files as documented in the 
 ### Revoking your user certificate
 
 If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate.
-Contact [ca@cilogon.org](mailto:ca@cilogon.org) in order revoke your certificate. 
+In addition, if your name or email address changes, you must revoke your certificate and get a new one with the correct
+information.
+
+If you have an OSG issued certifiacte, you can follow the steps [here](/security/certificate-management#osg-user-cert-revoke) to revoke your certificate. 
+If you have a CILogon issued certificate, contact [ca@cilogon.org](mailto:ca@cilogon.org) in order revoke your certificate. 
 
 
 Getting a Certificate from a Service Provider with cigetcert
