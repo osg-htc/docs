@@ -10,7 +10,7 @@ This release contains:
 
 -   [Singularity 2.5.0](https://github.com/singularityware/singularity/releases/tag/2.5.0)
     - This release includes fixes for several high and medium severity security issues.
-      It also contains a whole slew of bug fixes including the much awaited docker aufs whiteout file fix.
+      It also contains a number of bug fixes including the much awaited docker aufs whiteout file fix.
       It's a new release instead of a point release because it adds a new dependency to handle this bug,
       includes some new (albeit minor) feature enhancements, and changes the behavior of a few environment variables.
     - Singularity 2.5 should be installed immediately and all previous versions of Singularity should be removed.
