@@ -16,7 +16,7 @@ The GridFTP package contains components necessary to set up a stand-alone gsiftp
     This document is for a standalone GridFTP server on top of POSIX storage.  We have two specialized documents
     for Hadoop Distributed File System (HDFS) and XRootD based storage:
 
-    -   [Install and configure a GridFTP server on top of HDFS.](install-hadoop-2-0-0#standalone-gridftp-node-installation)
+    -   [Install and configure a GridFTP server on top of HDFS.](install-hadoop#standalone-gridftp-node-installation)
     -   [Install and configure a GridFTP server on top of XRootD.](install-xrootd#optional-installing-a-gridftp-server)
 
 Before Starting
