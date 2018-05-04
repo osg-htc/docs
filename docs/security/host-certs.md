@@ -89,7 +89,14 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
 
 1. Find your institution-specific InCommon contact
    (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/))
-   and submit the CSR that you generated above
+   and submit the CSR that you generated above, asking for the certificate to be signed by the InCommon IGTF CA
+1. After the certificate has been issued by your institution, download it on its intended host
+1. Verify that the issuer `CN` field is ` InCommon IGTF Server CA`:
+
+        :::console
+        $ openssl x509 -in %RED%<PATH TO CERTIFICATE>%ENDCOLOR% -noout -issuer
+        issuer= /C=US/O=Internet2/OU=InCommon/CN=InCommon IGTF Server CA
+
 1. Install the [host](#installing-host-certificates) or [service](#installing-service-certificates) certificate
 
 Requesting Let's Encrypt Certificates
