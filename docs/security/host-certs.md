@@ -49,8 +49,8 @@ notBefore=Jan  4 21:08:09 2010 GMT
 notAfter=Jan  4 21:08:09 2011 GMT
 ```
 
-Requesting InCommon Certificates
---------------------------------
+Requesting InCommon Host Certificates
+-------------------------------------
 
 Many institution in the United States already subscribe to InCommon and offer certificate services.
 If your institution is in the list of [InCommon subscribers](https://www.incommon.org/certificates/subscribers.html),
@@ -58,34 +58,22 @@ continue with the instructions below.
 If your institution is not in the list and Let's Encrypt certificates do not meet your needs, please
 [contact us](/common/help.md).
 
-1. Construct the Common Name based on the type of certificate you need:
-
-    1. Determine if you need a host and/or service certificate:
-
-        | If the host is a(n)... | You need a host certificate | You need a service certificate |
-        |------------------------|-----------------------------|--------------------------------|
-        | HTCondor-CE            | Yes                         | No                             |
-        | GridFTP                | Yes                         | No                             |
-        | XRootD                 | Yes                         | No                             |
-        | GlideinWMS             | Yes                         | Yes, frontend and pilot(s)     |
-        | GUMS                   | No                          | Yes, tomcat                    |
-        | RSV                    | No                          | Yes                            |
-
-        If you need both kinds of certificates, repeat the following instructions for each certificate.
-
-    1. If you need a host certificate, the Common Name should be the hostname, e.g. `mymachine.mydomain.edu`.
-       If you need a service certificate, the Common Name should be the name of the service prepended to the hostname,
-       e.g. `http/mymachine.mydomain.edu` for an Apache httpd service certificate.
-
-1. Generate a Certificate Signing Request (CSR) and private key, using the Common Name from the previous step:
+1. Generate a Certificate Signing Request (CSR) and private key:
 
         :::console
-        root@server # openssl req -nodes -new -newkey rsa:2048 -sha256 -out req.pem -keyout hostkey.pem -subj "/CN=%RED%<COMMON NAME>%ENDCOLOR%"
+        root@server # openssl req -nodes -new -newkey rsa:2048 -sha256 -out req.pem -keyout hostkey.pem
 
-1. Set the permissions on the CSR and private key:
+    When prompted, use your institution's information for the `Country`, `State or Province`, `Locality` (city),
+    and `Organization Name` fields then the hostname for the `Common Name` field.
+
+    !!! note
+        Your institution may require more information in the request.
+        Try using the CSR generated above in your initial request.
+
+1. Set the permissions on the private key:
 
         :::console
-        root@server # chmod 0600 hostkey.pem req.pem
+        root@server # chmod 0600 hostkey.pem
 
 1. Find your institution-specific InCommon contact
    (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/))
