@@ -631,22 +631,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#minimal-installation-0-50tb-wan-transfers-up-to-1gbps" title="Minimal Installation (0-50TB, WAN transfers up to 1Gbps)" class="md-nav__link">
-    Minimal Installation (0-50TB, WAN transfers up to 1Gbps)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#medium-installation-50-150tb-wan-transfers-up-to-2-gbps" title="Medium Installation (50-150TB, WAN transfers up to 2 Gbps)" class="md-nav__link">
-    Medium Installation (50-150TB, WAN transfers up to 2 Gbps)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#large-installation-150tb-wan-transfers-over-2-gbps" title="Large Installation (&gt;150TB, WAN transfers over 2 Gbps)" class="md-nav__link">
-    Large Installation (&gt;150TB, WAN transfers over 2 Gbps)
+  <a href="#sizing-your-cluster" title="Sizing Your Cluster" class="md-nav__link">
+    Sizing Your Cluster
   </a>
   
 </li>
@@ -654,6 +640,13 @@
         <li class="md-nav__item">
   <a href="#hadoop-security" title="Hadoop Security" class="md-nav__link">
     Hadoop Security
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" title="References" class="md-nav__link">
+    References
   </a>
   
 </li>
@@ -2238,22 +2231,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#minimal-installation-0-50tb-wan-transfers-up-to-1gbps" title="Minimal Installation (0-50TB, WAN transfers up to 1Gbps)" class="md-nav__link">
-    Minimal Installation (0-50TB, WAN transfers up to 1Gbps)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#medium-installation-50-150tb-wan-transfers-up-to-2-gbps" title="Medium Installation (50-150TB, WAN transfers up to 2 Gbps)" class="md-nav__link">
-    Medium Installation (50-150TB, WAN transfers up to 2 Gbps)
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#large-installation-150tb-wan-transfers-over-2-gbps" title="Large Installation (&gt;150TB, WAN transfers over 2 Gbps)" class="md-nav__link">
-    Large Installation (&gt;150TB, WAN transfers over 2 Gbps)
+  <a href="#sizing-your-cluster" title="Sizing Your Cluster" class="md-nav__link">
+    Sizing Your Cluster
   </a>
   
 </li>
@@ -2261,6 +2240,13 @@
         <li class="md-nav__item">
   <a href="#hadoop-security" title="Hadoop Security" class="md-nav__link">
     Hadoop Security
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" title="References" class="md-nav__link">
+    References
   </a>
   
 </li>
@@ -2286,11 +2272,31 @@
                 
                 <h1 id="hadoop-overview">Hadoop Overview<a class="headerlink" href="#hadoop-overview" title="Permanent link">&para;</a></h1>
 <h2 id="hadoop-introduction">Hadoop Introduction<a class="headerlink" href="#hadoop-introduction" title="Permanent link">&para;</a></h2>
-<p>Hadoop is a data processing framework. It is an open-source Apache Foundation project, and the main contributor is Yahoo! The framework has two main parts - job scheduling and a distributed file system, the Hadoop Distributed File System (HDFS). We currently utilize HDFS as a general-purpose file system. For this document, we'll use the words "Hadoop" and "HDFS" interchangeably, but it's nice to know the distinction.</p>
-<p>We recommend starting with <a href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html">HDFS architecture document</a>.</p>
-<p>Please do read through this. We will assume you have read this, or at least the important architectural portions. The file system is block-oriented; each file is broken up into 64 MB or 128 MB chunks (user configurable). These chunks are stored on data nodes and served up from there; the central namenode keeps track of the block locations, the namespace information, and block placement policies. HDFS provides POSIX-like semantics; it provides fully random-access reads and non-random-access writes. Currently, fsync and appends (after the file has been initially closed) are experimental and not available to OSG-based installs.</p>
+<p>Hadoop is a data processing framework.
+The framework has two main parts - job scheduling and a distributed file system,
+the Hadoop Distributed File System (HDFS).  </p>
+<p>We currently utilize HDFS as a general-purpose file system. For this document,
+we'll use the words "Hadoop" and "HDFS" interchangeably, but it's nice to know
+the distinction.</p>
+<p>The HDFS file system has several features, some of which differ a bit from a typical
+file system:</p>
+<ul>
+<li>Each file is broken up into 64 MB or 128 MB chunks (user configurable)<ul>
+<li>These chunks are stored on data nodes and served up from there; </li>
+<li>The central namenode manages block locations, the namespace information, and block placement policies. </li>
+</ul>
+</li>
+<li>HDFS provides a subset of POSIX semantics:<ul>
+<li>Random-access reads and non-random-access writes are fully supported. </li>
+<li>Fsync and appends (after the file has been initially closed) are experimental and not available to OSG-based installs.</li>
+<li>Rewriting closed files is not supported</li>
+</ul>
+</li>
+</ul>
 <h2 id="hadoop-se-components">Hadoop SE Components<a class="headerlink" href="#hadoop-se-components" title="Permanent link">&para;</a></h2>
-<p>We broadly break down the server components of the Hadoop SE into three categories: HDFS core, Grid extensions, and HDFS auxiliary. The components in each of these categories are outlined below:</p>
+<p>We broadly break down the server components of the Hadoop SE into three categories: HDFS core, Grid extensions, and HDFS
+auxiliary. 
+The components in each of these categories are outlined below:</p>
 <ul>
 <li>HDFS Core:<ul>
 <li>Namenode: The core metadata server of Hadoop. This is the most critical piece of the system, and there can only be one of these. This stores both the file system image and the file system journal. The namenode keeps all of the filesystem layout information (files, blocks, directories, permissions, etc) and the block locations. The filesystem layout is persisted on disk and the block locations are kept solely in memory. When a client opens a file, the namenode tells the client the locations of all the blocks in the file; the client then no longer needs to communicate with the namenode for data transfer.</li>
@@ -2298,9 +2304,8 @@
 </ul>
 </li>
 <li>Grid extensions<ul>
-<li>BeStMan SRM: A generic SRM server that can be run on top of any POSIX-like filesystem. This is run in "gateway" mode, which limits the amount of the SRM protocol implemented. To date, this has been sufficient to LHC VOs.</li>
 <li>Globus GridFTP: The standard GridFTP from Globus. We use a plug-in module (using the Globus Direct Storage Interface) that allows the GridFTP process to use the HDFS C-bindings directly.</li>
-<li>Gratia probe: Gratia is an accounting system that records batch system and transfer records to a database. The records are collected by a client program called a "probe" which runs on the GridFTP server. It parses the GridFTP server's log files and creates transfer records.</li>
+<li>Gratia probe: Gratia is an accounting system that records batch system and transfer records to a database. The records are collected by a client program called a "probe" which runs on the GridFTP or XRootD server.  The probe parses the GridFTP or XRootD logs and generates transfer records.</li>
 <li>XRootD server plugin: XRootD is an extremely flexible and powerful data server popular in the high energy physics community. There exists a HDFS plugin for XRootD; integrating with XRootD provides a means to export HDFS securely outside the local cluster, as another XRootD plugin provides GSI-based authentication and authorization.</li>
 </ul>
 </li>
@@ -2322,22 +2327,32 @@
 </ul>
 </li>
 <li>Secondary namenode: This node needs the same amount of RAM as the namenode for merging namespaces. It does not need to be high performance or high reliability.</li>
-<li>Datanode: Each datanode should plan to dedicate 200-500MB of RAM to HDFS. A general rule of thumb is to dedicate 1 CPU to HDFS per 5TB of disk capacity under heavily load; clusters with moderate load (i.e., mostly sequential workflows) will need less. At idle, HDFS will consume almost no CPU.</li>
+<li>Datanode: Each datanode should plan to dedicate about 1-1.5 GB of RAM to HDFS. A general rule of thumb is to dedicate 1 CPU to HDFS per 5TB of disk capacity under heavily load; clusters with moderate load (i.e., mostly sequential workflows) will need less. At idle, HDFS will consume almost no CPU.</li>
 </ul>
-<h2 id="minimal-installation-0-50tb-wan-transfers-up-to-1gbps">Minimal Installation (0-50TB, WAN transfers up to 1Gbps)<a class="headerlink" href="#minimal-installation-0-50tb-wan-transfers-up-to-1gbps" title="Permanent link">&para;</a></h2>
+<h2 id="sizing-your-cluster">Sizing Your Cluster<a class="headerlink" href="#sizing-your-cluster" title="Permanent link">&para;</a></h2>
 <p>The minimal installation would involve 5 nodes:</p>
-<p>1 hadoop-name: The namenode for the Hadoop system. Must be on private NAT. 1 hadoop-name2: This will run the HDFS secondary namenode. Must also be on private NAT. 1 hadoop-data1, hadoop-data2: Two HDFS datanodes. They will hold data for the system, so they should have sizable hard drives. These must be on the private NAT. As the Hadoop installation grows to many terabytes, this will be the only class of nodes one adds. 1 hadoop-grid: Runs the BeStMan SRM and Globus GridFTP server. Must have a public interface and a private interface.</p>
-<p>If desired, hadoop-name and hadoop-name2 may be virtualized. Prior to installation, DNS / host name resolution <strong>must</strong> work. That is, you should be able to resolve all the hadoop servers either through DNS or /etc/hosts. Because of the grid software, hadoop-grid <strong>must</strong> have reverse DNS working.</p>
-<h2 id="medium-installation-50-150tb-wan-transfers-up-to-2-gbps">Medium Installation (50-150TB, WAN transfers up to 2 Gbps)<a class="headerlink" href="#medium-installation-50-150tb-wan-transfers-up-to-2-gbps" title="Permanent link">&para;</a></h2>
-<p>For a medium install, make the following changes over the minimal install: 1 Run BeStMan on a separate machine, hadoop-srm. This host may be virtualized. 1 Run multiple GridFTP servers (2 should be fine); if possible, use 10 Gbps cards for these hosts. 1 Add many more HDFS datanodes. This usually means starting to add 1 or 2 TB hard drives to some worker nodes.</p>
-<h2 id="large-installation-150tb-wan-transfers-over-2-gbps">Large Installation (&gt;150TB, WAN transfers over 2 Gbps)<a class="headerlink" href="#large-installation-150tb-wan-transfers-over-2-gbps" title="Permanent link">&para;</a></h2>
-<p>For a large installation, make the following changes: 1 Run more GridFTP servers; plan for 800 Mbps per host with 1 Gbps card in order to have excess capacity. 1 Purchase machines suitable for HDFS datanodes. It is possible to get a 2U box with 8-12 hard drives; for many projects, this will provide a more suitable CPU to disk ratio than the 1U boxes with 2 hard drives.</p>
+<ul>
+<li>hadoop-name: The namenode for the Hadoop system.  </li>
+<li>hadoop-name2: This will run the HDFS secondary namenode. </li>
+<li>hadoop-data1, hadoop-data2: Two HDFS datanodes. They will hold data for the system, so they should have sizable hard drives. As the Hadoop installation grows to many terabytes, this will be the only class of nodes one adds.</li>
+<li>hadoop-grid: Runs the Globus GridFTP server. </li>
+</ul>
+<p>If desired, hadoop-name and hadoop-name2 may be virtualized. 
+Prior to installation, DNS / host name resolution <strong>must</strong> work. 
+That is, you should be able to resolve all the Hadoop servers either through DNS or /etc/hosts. 
+Because of the grid software, hadoop-grid <strong>must</strong> have reverse DNS working.  </p>
+<p>Larger clusters have the same basic components but with  more HDFS datanodes and gridftp servers. 
+Adding HDFS datanodes increases the capacity and  number of IOPS the cluster can provide.
+Additional GridFTP servers will increase the data transfer rates to locations outside your data center.
+As your cluster increases in size, virtualized namenodes may need to be moved to physical hardware.</p>
 <h2 id="hadoop-security">Hadoop Security<a class="headerlink" href="#hadoop-security" title="Permanent link">&para;</a></h2>
-<p>HDFS has Unix-like user/group authorization, but no strict authentication. <strong>HDFS should only be exposed to a secure internal network which only non-malicious users are able to access</strong>. For users with access to the local cluster, it is not difficult to bypass authentication.</p>
+<p>HDFS has Unix-like user/group authorization, but no strict authentication. 
+<strong>HDFS should use a secure internal network which only non-malicious users are able to access</strong>. 
+For users with access to the local cluster, it is not difficult to bypass authentication.</p>
 <p><a href="http://www.cloudera.com/blog/2009/08/14/hadoop-default-ports-quick-reference/">The default ports are listed here</a>.</p>
 <p>There are some ways to improve security of your cluster:</p>
 <ul>
-<li>Keep the namenode behind a firewall. One possibility is to run hadoop entirely on the private subnet of a cluster.</li>
+<li>Keep the namenode behind a firewall. One possibility is to run Hadoop entirely on the private subnet of a cluster.</li>
 <li>Use firewalls to protect the HDFS ports (default for the datanode is 50010 and 50075; for the namenode, 50070 and 9000).</li>
 <li>For clusters utilizing FUSE, one can block outgoing connections to the HDFS ports except for user root. This means that only root-owned processes (such as FUSE-DFS) will be able to access Hadoop.<ul>
 <li>This is sufficient for grid environments, but does not protect one in the case where the attacker has physical access to the network switch.</li>
@@ -2350,6 +2365,10 @@
 <li>Globus GridFTP.</li>
 <li>XRootD.</li>
 <li>HTTP and HTTPS.  OSG utilizes the HTTP(S) protocol implementation built into the XRootD server.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html">Hadoop Architecture</a></li>
 </ul>
                 
                   
