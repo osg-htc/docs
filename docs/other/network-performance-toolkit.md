@@ -1,7 +1,7 @@
 Network Performance Toolkit
 ================================
 
-This document is for System Administrators and advanced Grid Users. It describes the usage of tools provided by the [Virtual Data Toolkit](http://vdt.cs.wisc.edu) to evaluate the network performance between resources.
+This document is for System Administrators and advanced Grid Users. It describes the usage of tools provided by the Open Science Grid to evaluate the network performance between resources.
 
 Introduction
 ------------
