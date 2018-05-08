@@ -264,10 +264,6 @@ Grid Admin privileges [here](https://oim.opensciencegrid.org/oim/gridadmin) afte
 your [user certificate](user-certs).
 
 
-For instructions on how to request a host or service certificate using the Web
-interface please see the [user guide maintained by
-the OIM development team](https://confluence.grid.iu.edu/pages/viewpage.action?pageId=3244064).
-
 Frequently Asked Questions
 ---------------------------
 
