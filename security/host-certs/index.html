@@ -747,8 +747,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#requesting-incommon-certificates" title="Requesting InCommon Certificates" class="md-nav__link">
-    Requesting InCommon Certificates
+  <a href="#requesting-incommon-host-certificates" title="Requesting InCommon Host Certificates" class="md-nav__link">
+    Requesting InCommon Host Certificates
   </a>
   
 </li>
@@ -2358,8 +2358,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#requesting-incommon-certificates" title="Requesting InCommon Certificates" class="md-nav__link">
-    Requesting InCommon Certificates
+  <a href="#requesting-incommon-host-certificates" title="Requesting InCommon Host Certificates" class="md-nav__link">
+    Requesting InCommon Host Certificates
   </a>
   
 </li>
@@ -2585,7 +2585,7 @@ safely skip this document:</p>
 </pre></div>
 
 
-<h2 id="requesting-incommon-certificates">Requesting InCommon Certificates<a class="headerlink" href="#requesting-incommon-certificates" title="Permanent link">&para;</a></h2>
+<h2 id="requesting-incommon-host-certificates">Requesting InCommon Host Certificates<a class="headerlink" href="#requesting-incommon-host-certificates" title="Permanent link">&para;</a></h2>
 <p>Many institution in the United States already subscribe to InCommon and offer certificate services.
 If your institution is in the list of <a href="https://www.incommon.org/certificates/subscribers.html">InCommon subscribers</a>,
 continue with the instructions below.
@@ -2593,70 +2593,22 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
 <a href="../../common/help/">contact us</a>.</p>
 <ol>
 <li>
-<p>Construct the Common Name based on the type of certificate you need:</p>
-<ol>
-<li>
-<p>Determine if you need a host and/or service certificate:</p>
-<table>
-<thead>
-<tr>
-<th>If the host is a(n)...</th>
-<th>You need a host certificate</th>
-<th>You need a service certificate</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HTCondor-CE</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr>
-<td>GridFTP</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr>
-<td>XRootD</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr>
-<td>GlideinWMS</td>
-<td>Yes</td>
-<td>Yes, frontend and pilot(s)</td>
-</tr>
-<tr>
-<td>GUMS</td>
-<td>No</td>
-<td>Yes, tomcat</td>
-</tr>
-<tr>
-<td>RSV</td>
-<td>No</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
-<p>If you need both kinds of certificates, repeat the following instructions for each certificate.</p>
-</li>
-<li>
-<p>If you need a host certificate, the Common Name should be the hostname, e.g. <code>mymachine.mydomain.edu</code>.
-   If you need a service certificate, the Common Name should be the name of the service prepended to the hostname,
-   e.g. <code>http/mymachine.mydomain.edu</code> for an Apache httpd service certificate.</p>
-</li>
-</ol>
-</li>
-<li>
-<p>Generate a Certificate Signing Request (CSR) and private key, using the Common Name from the previous step:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@server #</span> openssl req -nodes -new -newkey rsa:2048 -sha256 -out req.pem -keyout hostkey.pem -subj <span class="s2">&quot;/CN=<span style="color:red">&lt;COMMON NAME&gt;</span>&quot;</span>
+<p>Generate a Certificate Signing Request (CSR) and private key:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@server #</span> openssl req -nodes -new -newkey rsa:2048 -sha256 -out req.pem -keyout hostkey.pem
 </pre></div>
 
 
+<p>When prompted, use your institution's information for the <code>Country</code>, <code>State or Province</code>, <code>Locality</code> (city),
+and <code>Organization Name</code> fields then the hostname for the <code>Common Name</code> field.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Your institution may require more information in the request.
+Try using the CSR generated above in your initial request.</p>
+</div>
 </li>
 <li>
-<p>Set the permissions on the CSR and private key:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@server #</span> chmod <span class="m">0600</span> hostkey.pem req.pem
+<p>Set the permissions on the private key:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@server #</span> chmod <span class="m">0600</span> hostkey.pem
 </pre></div>
 
 
@@ -2664,9 +2616,20 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
 <li>
 <p>Find your institution-specific InCommon contact
    (e.g. <a href="https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/">UW-Madison InCommon contact</a>)
-   and submit the CSR that you generated above</p>
+   and submit the CSR that you generated above, asking for the certificate to be signed by the InCommon IGTF CA</p>
 </li>
-<li>Install the <a href="#installing-host-certificates">host</a> or <a href="#installing-service-certificates">service</a> certificate</li>
+<li>After the certificate has been issued by your institution, download it on its intended host and copy over the key you generated above.</li>
+<li>
+<p>Verify that the issuer <code>CN</code> field is <code>InCommon IGTF Server CA</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> openssl x509 -in <span style="color:red">&lt;PATH TO CERTIFICATE&gt;</span> -noout -issuer
+<span class="go">issuer= /C=US/O=Internet2/OU=InCommon/CN=InCommon IGTF Server CA</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Install the <a href="#installing-host-certificates">host</a> or <a href="#installing-service-certificates">service</a> certificate</p>
+</li>
 </ol>
 <h2 id="requesting-lets-encrypt-certificates">Requesting Let's Encrypt Certificates<a class="headerlink" href="#requesting-lets-encrypt-certificates" title="Permanent link">&para;</a></h2>
 <p>Instructions for requesting Let's Encrypt host certificates will be released with the next release of the
