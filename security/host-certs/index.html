@@ -2554,13 +2554,13 @@ a service name to the hostname (e.g. http/mymachine.mydomain.edu for an Apache
 httpd service certificate).</p>
 <p>Since October 2015 the OSG has run its own OSG CA service that handled host and service certificate requests.
 At the end of May 2018, this service will be retired;
-see <a href="https://opensciencegrid.github.io/technology/policy/service-migrations-spring-2018/#osg-ca">the policy details here</a>.
+see <a href="https://opensciencegrid.org/technology/policy/service-migrations-spring-2018/#osg-ca">the policy details here</a>.
 To replace the OSG CA service, we suggest using one or more of the following services depending on your site's needs:</p>
 <ul>
 <li><a href="https://www.incommon.org/cert/">InCommon</a>: an IGTF-accredited CA for services that interact with the WLCG;
   requires a subscription, generally held by an institution</li>
 <li><a href="https://letsencrypt.org/">Let's Encrypt</a>: a free, automated, and open CA frequently used for web services;
-  see the <a href="https://opensciencegrid.github.io/security/LetsEncryptOSGCAbundle/">security team's position on Let's Encrypt</a>
+  see the <a href="https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/">security team's position on Let's Encrypt</a>
   for more details</li>
 </ul>
 <div class="admonition tip">
@@ -2634,7 +2634,7 @@ Try using the CSR generated above in your initial request.</p>
 <h2 id="requesting-lets-encrypt-certificates">Requesting Let's Encrypt Certificates<a class="headerlink" href="#requesting-lets-encrypt-certificates" title="Permanent link">&para;</a></h2>
 <p>Instructions for requesting Let's Encrypt host certificates will be released with the next release of the
 <a href="../../common/ca/">OSG CA certificate bundle</a>, expected in early May 2018.</p>
-<p>See the <a href="https://opensciencegrid.github.io/security/LetsEncryptOSGCAbundle/">security team's position on Let's Encrypt</a>
+<p>See the <a href="https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/">security team's position on Let's Encrypt</a>
 for more details</p>
 <h2 id="requesting-hostservice-certificates-using-the-command-line">Requesting Host/Service Certificates Using the Command Line<a class="headerlink" href="#requesting-hostservice-certificates-using-the-command-line" title="Permanent link">&para;</a></h2>
 <p>The OSG PKI Command Line Clients are tested to work on Python version 2.4+. They
@@ -2802,9 +2802,6 @@ Management System can be found at:
 <a href="https://oim.opensciencegrid.org/oim/certificate">https://oim.opensciencegrid.org/oim/certificate</a>. Alternatively, you can request
 Grid Admin privileges <a href="https://oim.opensciencegrid.org/oim/gridadmin">here</a> after obtaining
 your <a href="../user-certs">user certificate</a>.</p>
-<p>For instructions on how to request a host or service certificate using the Web
-interface please see the <a href="https://confluence.grid.iu.edu/pages/viewpage.action?pageId=3244064">user guide maintained by
-the OIM development team</a>.</p>
 <h2 id="frequently-asked-questions">Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permanent link">&para;</a></h2>
 <h3 id="can-i-use-any-host-to-request-a-certificate-for-a-different-host">Can I use any host to request a certificate for a different host?<a class="headerlink" href="#can-i-use-any-host-to-request-a-certificate-for-a-different-host" title="Permanent link">&para;</a></h3>
 <p>YES, you can use any host to create a certificate request as long as the hostname for the certificate is a fully qualified domain name.</p>

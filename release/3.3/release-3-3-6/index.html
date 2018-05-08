@@ -2607,7 +2607,7 @@ all.pidpath /var/run/xrootd
 <li>
 <p>Manual configuration for cache server</p>
 <ul>
-<li>In contrast to the origin server configuration, one needs to declare <code>pss.origin &lt;stash-redirector.example.com&gt;</code> instead of configuring the cmsd or manager (only the xrootd daemon is required on the cache server). More detailed configuration of cache server for StashCache is <a href="http://opensciencegrid.github.io/StashCache/admin/configure-cache/">here</a>.</li>
+<li>In contrast to the origin server configuration, one needs to declare <code>pss.origin &lt;stash-redirector.example.com&gt;</code> instead of configuring the cmsd or manager (only the xrootd daemon is required on the cache server). More detailed configuration of cache server for StashCache is <a href="http://opensciencegrid.org/StashCache/admin/configure-cache/">here</a>.</li>
 </ul>
 </li>
 <li>In both cases, administrator needs to set the path of custom configuration file for its xrootd/cmds instance in /etc/sysconfig/xrootd, For example, change the cmds default from:<div class="codehilite"><pre><span></span>CMSD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg -k fifo&quot;
