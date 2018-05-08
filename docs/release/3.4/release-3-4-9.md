@@ -11,7 +11,7 @@ This release contains:
 -   [XRootD 4.8.1](https://github.com/xrootd/xrootd/blob/v4.8.1/docs/ReleaseNotes.txt): Several important bug fixes
 -   [GlideinWMS 3.2.21](http://glideinwms.fnal.gov/doc.v3_2_21/history.html)
     -   Enhanced Singularity support
-    -   [Automatic proxy renewal](http://opensciencegrid.github.io/docs/other/install-gwms-frontend/#proxy-configuration)
+    -   [Automatic proxy renewal](http://opensciencegrid.org/docs/other/install-gwms-frontend/#proxy-configuration)
 -   [Frontier Squid 3.5.27-3](http://frontier.cern.ch/dist/frontier-squid-releasenotes.txt)
     -   Honor "Pragma: no-cache" directive
     -   Included patches from recent Squid security advisories

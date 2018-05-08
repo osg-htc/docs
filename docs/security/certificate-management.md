@@ -157,12 +157,12 @@ Documentation for usage of the osg-ca-manage tool can be found [here](https://gi
 
 Before you proceed to install a Certificate Authority Package you should decide which of the available packages to install.
 
-- `osg`, the package recommended to be used by production resources on the OSG. It is based on the CA distribution from the IGTF, but it may differ slightly as decided by the [Security Team](https://opensciencegrid.github.io/security). 
+- `osg`, the package recommended to be used by production resources on the OSG. It is based on the CA distribution from the IGTF, but it may differ slightly as decided by the [Security Team](https://opensciencegrid.org/security).
 - `igtf`, the package is a redistribution of the unchanged CA distribution from the IGTF
 - `url` a package provided at a given URL
 
 !!! note
-    If in doubt, please consult the policies of your home institution and get in contact with the [Security Team](https://opensciencegrid.github.io/security).
+    If in doubt, please consult the policies of your home institution and get in contact with the [Security Team](https://opensciencegrid.org/security).
 
 Next decide at what location to install the Certificate Authority Package:
 
@@ -307,7 +307,7 @@ Hash=0a12b607; Subject= /DC=org/DC=ugrid/CN=UGRID CA; Issuer= /DC=org/DC=ugrid/C
 [...]
 ```
 
-Any certificate issued by any of the Certificate Authorities listed will be trusted. If in doubt please contact the [OSG Security Team](https://opensciencegrid.github.io/security) and review the policies of your home institution.
+Any certificate issued by any of the Certificate Authorities listed will be trusted. If in doubt please contact the [OSG Security Team](https://opensciencegrid.org/security) and review the policies of your home institution.
 
 Troubleshooting
 ---------------

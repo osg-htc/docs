@@ -464,7 +464,7 @@ References
 * [SLAC Gateway mode Instruction](http://wt2.slac.stanford.edu/xrootdfs/bestman-gateway.html) - SLAC guide on gateway mode
 * [US ATLAS instruction page](http://www.usatlas.bnl.gov/twiki/bin/view/Admins/BestMan)
 * [S2](https://github.com/dCache/s2) - A SRM v2.2 test suite from CERN. It provides basic functionality tests based on use cases, and cross-copy tests, as part of the certification process and supports file access/transfer protocols: rfio, dcap, gsidcap, gsiftp
-* [SHA-2 compliance page](https://opensciencegrid.github.io/technology/projects/sha2-support/)
+* [SHA-2 compliance page](https://opensciencegrid.org/technology/projects/sha2-support/)
 
 Known Issues
 ============

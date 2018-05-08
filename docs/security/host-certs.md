@@ -15,13 +15,13 @@ httpd service certificate).
 
 Since October 2015 the OSG has run its own OSG CA service that handled host and service certificate requests.
 At the end of May 2018, this service will be retired;
-see [the policy details here](https://opensciencegrid.github.io/technology/policy/service-migrations-spring-2018/#osg-ca).
+see [the policy details here](https://opensciencegrid.org/technology/policy/service-migrations-spring-2018/#osg-ca).
 To replace the OSG CA service, we suggest using one or more of the following services depending on your site's needs:
 
 - [InCommon](https://www.incommon.org/cert/): an IGTF-accredited CA for services that interact with the WLCG;
   requires a subscription, generally held by an institution
 - [Let's Encrypt](https://letsencrypt.org/): a free, automated, and open CA frequently used for web services;
-  see the [security team's position on Let's Encrypt](https://opensciencegrid.github.io/security/LetsEncryptOSGCAbundle/)
+  see the [security team's position on Let's Encrypt](https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/)
   for more details
 
 !!! tip "Recommendation"
@@ -93,7 +93,7 @@ Requesting Let's Encrypt Certificates
 Instructions for requesting Let's Encrypt host certificates will be released with the next release of the
 [OSG CA certificate bundle](/common/ca.md), expected in early May 2018.
 
-See the [security team's position on Let's Encrypt](https://opensciencegrid.github.io/security/LetsEncryptOSGCAbundle/)
+See the [security team's position on Let's Encrypt](https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/)
 for more details
 
 Requesting Host/Service Certificates Using the Command Line

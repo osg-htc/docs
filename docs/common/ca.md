@@ -31,7 +31,7 @@ In the OSG repositories, you will find two different sets of predefined CA certi
 - (*default*) The OSG CA certificates. This is similar to the IGTF set but may have a small number of additions or deletions
 - The [IGTF](http://www.igtf.net/) CA certificates
 
-See [this page](https://opensciencegrid.github.io/security/CaDistribution/) for details of the contents of the OSG CA package.
+See [this page](https://opensciencegrid.org/security/CaDistribution/) for details of the contents of the OSG CA package.
 
 | **If you chose...**  | **Then run the following command...** |
 |----------------------|---------------------------------------|
@@ -47,7 +47,7 @@ The `osg-ca-scripts` package provides scripts to install and update predefined s
 - The OSG CA certificates. This is similar to the IGTF set but may have a small number of additions or deletions
 - The [IGTF](http://www.igtf.net/) CA certificates
 
-See [this page](https://opensciencegrid.github.io/security/CaDistribution/) for details of the contents of the OSG CA package.
+See [this page](https://opensciencegrid.org/security/CaDistribution/) for details of the contents of the OSG CA package.
 
 1. Install the `osg-ca-scripts` package:
 
