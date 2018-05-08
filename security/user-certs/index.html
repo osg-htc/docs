@@ -752,8 +752,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#getting-a-certificate-from-the-osg-ca" title="Getting a Certificate from the OSG CA" class="md-nav__link">
-    Getting a Certificate from the OSG CA
+  <a href="#getting-an-user-certificate" title="Getting an User Certificate" class="md-nav__link">
+    Getting an User Certificate
   </a>
   
     <nav class="md-nav">
@@ -767,8 +767,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#requesting-a-user-certificate" title="Requesting a User Certificate" class="md-nav__link">
-    Requesting a User Certificate
+  <a href="#getting-a-certificate-from-cilogon" title="Getting a Certificate from CILogon" class="md-nav__link">
+    Getting a Certificate from CILogon
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-a-certificate-from-the-osg-ca" title="Getting a Certificate from the OSG CA" class="md-nav__link">
+    Getting a Certificate from the OSG CA
   </a>
   
 </li>
@@ -2248,8 +2255,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#getting-a-certificate-from-the-osg-ca" title="Getting a Certificate from the OSG CA" class="md-nav__link">
-    Getting a Certificate from the OSG CA
+  <a href="#getting-an-user-certificate" title="Getting an User Certificate" class="md-nav__link">
+    Getting an User Certificate
   </a>
   
     <nav class="md-nav">
@@ -2263,8 +2270,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#requesting-a-user-certificate" title="Requesting a User Certificate" class="md-nav__link">
-    Requesting a User Certificate
+  <a href="#getting-a-certificate-from-cilogon" title="Getting a Certificate from CILogon" class="md-nav__link">
+    Getting a Certificate from CILogon
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-a-certificate-from-the-osg-ca" title="Getting a Certificate from the OSG CA" class="md-nav__link">
+    Getting a Certificate from the OSG CA
   </a>
   
 </li>
@@ -2340,15 +2354,34 @@
 <p>This document describes how to get and set up a <strong>personal</strong> certificate (also called a grid user certificate).
 For instructions on getting <strong>service</strong> and <strong>host</strong> certificates, <strong>you're in the wrong place</strong>. See <a href="../host-certs/">Get Host and Service Certificates</a>.</p>
 </div>
-<h2 id="getting-a-certificate-from-the-osg-ca">Getting a Certificate from the OSG CA<a class="headerlink" href="#getting-a-certificate-from-the-osg-ca" title="Permanent link">&para;</a></h2>
-<p>This section describes how to get and set up a personal certificate from the OSG Certificate Authority (OSG CA).
-The OSG CA is recognized by all OSG resources.
+<h2 id="getting-an-user-certificate">Getting an User Certificate<a class="headerlink" href="#getting-an-user-certificate" title="Permanent link">&para;</a></h2>
+<p>This section describes how to get and set up a personal certificate to use on OSG.
+Currently you can get a certificate from either the OSG CA or from CILogon.
+After May 31st, you will only be able to get a certificate issued by CILogon.
 Other CAs may be used; if your virtual organization (VO) requires that you get a certificate from a different CA, <a href="http://www.opensciencegrid.org/?pid=1000187">contact your VO Support Center</a> for instructions.</p>
 <h3 id="know-your-responsibilities">Know your responsibilities<a class="headerlink" href="#know-your-responsibilities" title="Permanent link">&para;</a></h3>
 <p>When you request a certificate your provide some public personal information about yourself; <em>name, email address, phone number</em>, and which <em>VO</em> (virtual organization) you belong to. If any of this information changes after you have your certificate you should notify OSG (and probably VO) of the changes. For the OSG RA send email to osg-ra at opensciencegrid dot org.</p>
 <p>Your <strong>name</strong> and <strong>email</strong> address are encoded into the signed certificate and <strong>if either of those change</strong> (usually email address) then you should <strong>request a new certificate</strong> with the correct information and <strong>revoke the old certificate</strong>.</p>
-<h3 id="requesting-a-user-certificate">Requesting a User Certificate<a class="headerlink" href="#requesting-a-user-certificate" title="Permanent link">&para;</a></h3>
-<p>There are two different ways to obtain your certificate, either via a command line interface, or through a web browser. The links below will guide you through whichever method you choose. The command line method is generally simpler and less prone to errors than using a web browser but it may require extra setup and package installation the first time you do it. Most people end up needing their certificate for both command line grid use and web browser use and it is generally easier to import your certificate into your browser (and email client) from the command line certificate files than to export your certificate from your web browser to use on the command line. This is because of the large variety of web browsers each with it's own way to deal with certificates. If you will use the certificate ONLY in your web browser then requesting it from your browser is probably the easiest method.</p>
+<h3 id="getting-a-certificate-from-cilogon">Getting a Certificate from CILogon<a class="headerlink" href="#getting-a-certificate-from-cilogon" title="Permanent link">&para;</a></h3>
+<p>You will have to obtain your user certificate using the <a href="https://cilogon.org/">CILogon web UI</a>.
+Follow the steps below to get an user certificate:</p>
+<ol>
+<li>First, either search for your institution and select it or scroll through list and do the same. <br><img alt="Institution Selection" src="../../img/cilogon_select_idp.png" /></li>
+<li>Click the <code>Log On</code> button and enter your instutional credentials.</li>
+<li>Upon successfully entering your credentials, you'll get a page asking for you to enter a password.  Enter a password that is at least 12 characters long and then click on the <code>Get New Certificate</code> button.<br><img alt="Password entry" src="../../img/cilogon_cert_password.png" /> </li>
+<li>The web page will generate a <code>usercred.p12</code> file and prompt you to download it.  The certiticate will be protected
+using the password you entered in the prior step.</li>
+</ol>
+<h3 id="getting-a-certificate-from-the-osg-ca">Getting a Certificate from the OSG CA<a class="headerlink" href="#getting-a-certificate-from-the-osg-ca" title="Permanent link">&para;</a></h3>
+<p>There are two different ways to obtain your certificate, either via a command line interface, or through a web browser.
+The links below will guide you through whichever method you choose.
+The command line method is generally simpler and less prone to errors than using a web browser but it may require extra
+setup and package installation the first time you do it.
+Most people end up needing their certificate for both command line grid use and web browser use and it is generally
+easier to import your certificate into your browser (and email client) from the command line certificate files than to
+export your certificate from your web browser to use on the command line. 
+This is because of the large variety of web browsers each with it's own way to deal with certificates. If you will use
+the certificate ONLY in your web browser then requesting it from your browser is probably the easiest method.</p>
 <p><a href="../certificate-management/">Get or renew a certificate with command line interface.</a></p>
 <h3 id="pkcs12-p12-vs-pem-format">PKCS12 (.p12) vs PEM format<a class="headerlink" href="#pkcs12-p12-vs-pem-format" title="Permanent link">&para;</a></h3>
 <p>Your certificate and key pair can be stored as separate files, by default named <code>~/.globus/usercert.pem</code> and <code>~/.globus/userkey.pem</code>, or they can be bundled in a single file in PKCS12 (Public Key Cryptography Standard #12), by default named <code>~/.globus/usercred.p12</code>. All OSG user tools works with both formats. Unless you specify a name in the command, they look first for the certificate/key pair default names, then for the PKCS12 default name and use the first one they find. PKCS 12 is a single file, convenient to move and used by many softwares, e.g. the Web browsers (so you don't need conversions).</p>
@@ -2411,7 +2444,11 @@ Other CAs may be used; if your virtual organization (VO) requires that you get a
 
 <p>To solve the problem split the bundle in the two PEM files as documented in the <a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">referenced document</a>, so that the embedded CA chain is not used.</p>
 <h3 id="revoking-your-user-certificate">Revoking your user certificate<a class="headerlink" href="#revoking-your-user-certificate" title="Permanent link">&para;</a></h3>
-<p>If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate. You can follow the steps <a href="../../security/certificate-management#osg-user-cert-revoke">here</a> to revoke your certificate. The same instructions apply if you need to revoke a certificate because your email address changed or your name has changed.</p>
+<p>If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate.
+In addition, if your name or email address changes, you must revoke your certificate and get a new one with the correct
+information.</p>
+<p>If you have an OSG issued certifiacte, you can follow the steps <a href="../../security/certificate-management#osg-user-cert-revoke">here</a> to revoke your certificate. 
+If you have a CILogon issued certificate, contact <a href="mailto:ca@cilogon.org">ca@cilogon.org</a> in order revoke your certificate. </p>
 <h2 id="getting-a-certificate-from-a-service-provider-with-cigetcert">Getting a Certificate from a Service Provider with cigetcert<a class="headerlink" href="#getting-a-certificate-from-a-service-provider-with-cigetcert" title="Permanent link">&para;</a></h2>
 <p>You may also get a user certificate from a SAML 2.0 Service Provider such as your home institution or XSEDE.
 This kind of certificate is short-lived, typically valid only for a week.
