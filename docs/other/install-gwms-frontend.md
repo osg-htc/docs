@@ -422,7 +422,7 @@ and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOL
             fqan = %RED%<VOMS ATTRIBUTE>%ENDCOLOR%
 
         !!! warning
-            Due to the [retirement of VOMS Admin server](https://opensciencegrid.github.io/technology/policy/voms-admin-retire/)
+            Due to the [retirement of VOMS Admin server](https://opensciencegrid.org/technology/policy/voms-admin-retire/)
             in the OSG, `use_voms_server = false` is the preferred method for signing VOMS attributes. 
 
     Optionally, the proxy renewal `frequency` and `lifetime` (in hours) can be specified in each `[PILOT <NAME>]` section:
