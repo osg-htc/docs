@@ -9,13 +9,38 @@ Summary of changes
 This release contains:
 
 -   Updated all references to grid.iu.edu with opensciencegrid.org
--   xrootd-lcmaps 1.2.1-3: fixed crashes on Enterprise Linux 6 when request were made using HTTPS
+    -   Updated Packages: osg-ca-certs-updater, osg-ca-scripts, osg-release, osg-test, rsv
+
+!!! note
+The repository referenced by osg-release will be retired on May 15th. Update osg-release before that date.
+
+-   xrootd-lcmaps 1.2.1-3: fixed crashes on Enterprise Linux 6 when requests were made using HTTPS
 -   frontier-squid: Fixed startup problem under SELinux
 -   xrootd-hdfs 2.0.2: Improved write support
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.34%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
 Detailed changes are below. All of the documentation can be found [here](/index.md).
+
+Known Issues
+------------
+
+Because the central RSV service is going away, please disable the RSV component that reports to the central service, "gratia-consumer" by running the following commands on your RSV host:
+
+``` console
+root@host # rsv-control --disable gratia-consumer
+root@host # rsv-control --off gratia-consumer
+```
+
+In addition, if you are using osg-configure, please edit "/etc/osg/config.d/30-rsv.ini" and set:
+
+``` file
+enable_gratia = False
+```
+
+See this page for more information:
+https://opensciencegrid.org/technology/policy/service-migrations-spring-2018/#rsv
+
 
 Updating to the new release
 ---------------------------
