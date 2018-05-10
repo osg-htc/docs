@@ -7,16 +7,12 @@ OSG Software Release 3.4.12
     Due to the retirement of `grid.iu.edu` hosts (see [this document](https://opensciencegrid.org/technology/policy/service-migrations-spring-2018/)
     for details), some software packages require updates to reference new hosts.
 
-    1. Find all packages that may contain references to `grid.iu.edu`:
+    1. Update all packages that may contain references to `grid.iu.edu`:
+       (Yum will only update already installed packages.)
 
             :::console
-            root@host # rpm -q osg-ca-certs-updater osg-ca-scripts osg-release osg-release-itb \
-                        osg-test rsv
-
-    1. Update each package above that is already installed on your host:
-
-            :::console
-            root@host # yum update %RED%<LIST OF INSTALLED PACKAGES>%ENDCOLOR%
+            root@host # yum update osg-ca-certs-updater osg-ca-scripts osg-release osg-release-itb \
+                        osg-test\* rsv\*
 
     1. If you have `rsv` installed, see [this section](#known-issues) below for rsv-specific instructions.
 
