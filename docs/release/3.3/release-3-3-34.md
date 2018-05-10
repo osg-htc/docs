@@ -10,7 +10,7 @@ Summary of changes
 The repositories referenced by osg-release will be retired on May 15th. Update osg-release before that date.
 
 ``` console
-root@host # yum update osg-release
+root@host # yum update osg-ca-certs-updater osg-ca-scripts osg-release osg-test rsv
 ```
 
 This release contains:
