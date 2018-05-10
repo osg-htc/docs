@@ -300,6 +300,12 @@ Before the hostcert expires, you can renew it with:
         root@host # certbot renew
 
 
+To automate renewal monthly with a cron job; for example you can create `/etc/cron.d/certbot-renew` with the following contents:
+
+        :::console
+        * * 1 * * root certbot renew
+
+
 Frequently Asked Questions
 ---------------------------
 
