@@ -3,20 +3,35 @@ OSG Software Release 3.3.34
 
 **Release Date**: 2018-05-09
 
+!!! warning "Required Actions"
+    Due to the retirement of `grid.iu.edu` hosts (see [this document](https://opensciencegrid.org/technology/policy/service-migrations-spring-2018/)
+    for details), some software packages require updates to reference new hosts.
+
+    1. Find all packages that may contain references to `grid.iu.edu`:
+
+            :::console
+            root@host # rpm -q osg-ca-certs-updater osg-ca-scripts osg-release osg-release-itb \
+                        osg-test rsv
+
+    1. Update each package above that is already installed on your host:
+
+            :::console
+            root@host # yum update %RED%<LIST OF INSTALLED PACKAGES>%ENDCOLOR%
+
+    1. If you have `rsv` installed, see [this section](#known-issues) below for rsv-specific instructions.
+
 Summary of changes
 ------------------
-
-!!! note
-The repositories referenced by osg-release will be retired on May 15th. Update osg-release before that date.
-
-``` console
-root@host # yum update osg-ca-certs-updater osg-ca-scripts osg-release osg-test rsv
-```
 
 This release contains:
 
 -   Updated all references to grid.iu.edu with opensciencegrid.org
-    -   Updated Packages: osg-ca-certs-updater, osg-ca-scripts, osg-release, osg-test, rsv
+    -   osg-ca-certs-updater
+    -   osg-ca-scripts
+    -   osg-release
+    -   osg-release-itb
+    -   osg-test
+    -   rsv
 -   xrootd-lcmaps 1.2.1-3: fixed crashes on Enterprise Linux 6 when requests were made using HTTPS
 -   frontier-squid: Fixed startup problem under SELinux
 -   xrootd-hdfs 2.0.2: Improved write support
@@ -28,20 +43,20 @@ Detailed changes are below. All of the documentation can be found [here](/index.
 Known Issues
 ------------
 
-Because the central RSV service is going away, please disable the RSV component that reports to the central service, "gratia-consumer" by running the following commands on your RSV host:
+Due to the central RSV service retirement (see [this document](https://opensciencegrid.org/technology/policy/service-migrations-spring-2018/) for details),
+please disable the `gratia-consumer` RSV component that reports to the central service by running the following commands
+on your RSV host:
 
 ``` console
 root@host # rsv-control --disable gratia-consumer
 root@host # rsv-control --off gratia-consumer
 ```
 
-In addition, if you are using osg-configure, please edit "/etc/osg/config.d/30-rsv.ini" and set:
+Additionally, if you are using osg-configure, please edit `/etc/osg/config.d/30-rsv.ini` and set the following:
 
 ``` file
 enable_gratia = False
 ```
-
-See this [page](https://opensciencegrid.org/technology/policy/service-migrations-spring-2018/#rsv) for more information.
 
 Updating to the new release
 ---------------------------

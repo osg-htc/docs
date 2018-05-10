@@ -3,20 +3,35 @@ OSG Software Release 3.4.12
 
 **Release Date**: 2018-05-10
 
+!!! warning "Required Actions"
+    Due to the retirement of `grid.iu.edu` hosts (see [this document](https://opensciencegrid.org/technology/policy/service-migrations-spring-2018/)
+    for details), some software packages require updates to reference new hosts.
+
+    1. Find all packages that may contain references to `grid.iu.edu`:
+
+            :::console
+            root@host # rpm -q osg-ca-certs-updater osg-ca-scripts osg-release osg-release-itb \
+                        osg-test rsv
+
+    1. Update each package above that is already installed on your host:
+
+            :::console
+            root@host # yum update %RED%<LIST OF INSTALLED PACKAGES>%ENDCOLOR%
+
+    1. If you have `rsv` installed, see [this section](#known-issues) below for rsv-specific instructions.
+
 Summary of changes
 ------------------
 
-!!! note
-The repositories referenced by osg-release will be retired on May 15th. Update osg-release before that date.
-
-``` console
-root@host # yum update osg-ca-certs-updater osg-ca-scripts osg-release osg-test rsv
-```
-
 This release contains:
 
--   Updated all references to grid.iu.edu with opensciencegrid.org
-    -   Package list: osg-ca-certs-updater, osg-ca-scripts, osg-release, osg-test, rsv
+-   Updated references to grid.iu.edu with opensciencegrid.org in the following packages:
+    -   osg-ca-certs-updater
+    -   osg-ca-scripts
+    -   osg-release
+    -   osg-release-itb
+    -   osg-test
+    -   rsv
 -   [HTCondor-CE 3.1.2](https://github.com/opensciencegrid/htcondor-ce/releases/tag/v3.1.2): Added mapping for Let's Encrypt
 -   [GlideinWMS 3.2.22.2](http://glideinwms.fnal.gov/doc.v3_2_22_2/history.html)
     -   Improved interoperation with Singularity
@@ -47,19 +62,19 @@ Detailed changes are below. All of the documentation can be found [here](/index.
 Known Issues
 ------------
 
-Because the central RSV service is going away, the new version of RSV will disable component that reports to the central service, "gratia-consumer" will be disabled.  Please update _all_ RSV packages by running the following command on your RSV host:
+Due to the central RSV service retirement (see [this document](https://opensciencegrid.org/technology/policy/service-migrations-spring-2018/) for details),
+the new version of RSV will disable the `gratia-consumer` component that reports to the central service.
+Please update _all_ RSV packages by running the following command on your RSV host:
 
 ``` console
 root@host # yum update rsv\*
 ```
 
-In addition, if you are using osg-configure, please edit "/etc/osg/config.d/30-rsv.ini" and set:
+Additionally, if you are using osg-configure, please edit `/etc/osg/config.d/30-rsv.ini` and set the following:
 
 ``` file
 enable_gratia = False
 ```
-
-See this [page](https://opensciencegrid.org/technology/policy/service-migrations-spring-2018/#rsv) for more information.
 
 Updating to the new release
 ---------------------------
