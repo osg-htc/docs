@@ -6,14 +6,17 @@ OSG Software Release 3.4.12
 Summary of changes
 ------------------
 
+!!! note
+The repositories referenced by osg-release will be retired on May 15th. Update osg-release before that date.
+
+``` console
+root@host # yum update osg-release
+```
+
 This release contains:
 
 -   Updated all references to grid.iu.edu with opensciencegrid.org
     -   Package list: osg-ca-certs-updater, osg-ca-scripts, osg-release, osg-test, rsv
-
-!!! note
-The repository referenced by osg-release will be retired on May 15th. Update osg-release before that date.
-
 -   [HTCondor-CE 3.1.2](https://github.com/opensciencegrid/htcondor-ce/releases/tag/v3.1.2): Added mapping for Let's Encrypt
 -   [GlideinWMS 3.2.22.2](http://glideinwms.fnal.gov/doc.v3_2_22_2/history.html)
     -   Improved interoperation with Singularity

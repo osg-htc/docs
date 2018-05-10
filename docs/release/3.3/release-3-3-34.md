@@ -6,14 +6,17 @@ OSG Software Release 3.3.34
 Summary of changes
 ------------------
 
+!!! note
+The repositories referenced by osg-release will be retired on May 15th. Update osg-release before that date.
+
+``` console
+root@host # yum update osg-release
+```
+
 This release contains:
 
 -   Updated all references to grid.iu.edu with opensciencegrid.org
     -   Updated Packages: osg-ca-certs-updater, osg-ca-scripts, osg-release, osg-test, rsv
-
-!!! note
-The repository referenced by osg-release will be retired on May 15th. Update osg-release before that date.
-
 -   xrootd-lcmaps 1.2.1-3: fixed crashes on Enterprise Linux 6 when requests were made using HTTPS
 -   frontier-squid: Fixed startup problem under SELinux
 -   xrootd-hdfs 2.0.2: Improved write support
