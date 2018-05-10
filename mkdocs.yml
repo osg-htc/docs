@@ -83,6 +83,7 @@ pages:
     - 'OSG Release 3.4.0-2': 'release/3.4/release-3-4-0-2.md'
     - 'OSG Release 3.4.0': 'release/3.4/release-3-4-0.md'
   - 3.3 Release Notes:
+    - 'OSG Release 3.3.34': 'release/3.3/release-3-3-34.md'
     - 'OSG Release 3.3.33-2': 'release/3.3/release-3-3-33-2.md'
     - 'OSG Release 3.3.33': 'release/3.3/release-3-3-33.md'
     - 'OSG Release 3.3.32': 'release/3.3/release-3-3-32.md'
