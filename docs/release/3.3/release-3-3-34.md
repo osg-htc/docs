@@ -38,9 +38,7 @@ In addition, if you are using osg-configure, please edit "/etc/osg/config.d/30-r
 enable_gratia = False
 ```
 
-See this page for more information:
-https://opensciencegrid.org/technology/policy/service-migrations-spring-2018/#rsv
-
+See this [page](https://opensciencegrid.org/technology/policy/service-migrations-spring-2018/#rsv) for more information.
 
 Updating to the new release
 ---------------------------
