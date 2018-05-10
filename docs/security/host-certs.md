@@ -13,6 +13,22 @@ hostname (e.g.  mymachine.mydomain.edu) while a service certificate will prepend
 a service name to the hostname (e.g. http/mymachine.mydomain.edu for an Apache
 httpd service certificate).
 
+Since October 2015 the OSG has run its own OSG CA service that handled host and service certificate requests.
+At the end of May 2018, this service will be retired;
+see [the policy details here](https://opensciencegrid.org/technology/policy/service-migrations-spring-2018/#osg-ca).
+To replace the OSG CA service, we suggest using one or more of the following services depending on your site's needs:
+
+- [InCommon](https://www.incommon.org/cert/): an IGTF-accredited CA for services that interact with the WLCG;
+  requires a subscription, generally held by an institution
+- [Let's Encrypt](https://letsencrypt.org/): a free, automated, and open CA frequently used for web services;
+  see the [security team's position on Let's Encrypt](https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/)
+  for more details
+
+!!! tip "Recommendation"
+    Certificates issued from the OSG CA before the service retirement will still be valid until they expire.
+    Therefore, we recommend that you request certificates for any currently existing or planned hosts and services
+    prior to retirement.
+
 After reading this document you should be able to apply for and install a host
 or service certificate on a grid resource.  This document does not explain how
 to apply for a grid user certificate. To learn how to apply for a grid user
@@ -32,6 +48,53 @@ issuer=/DC=org/DC=cilogon/C=US/O=CILogon/CN=CILogon OSG CA 1
 notBefore=Jan  4 21:08:09 2010 GMT
 notAfter=Jan  4 21:08:09 2011 GMT
 ```
+
+Requesting InCommon Host Certificates
+-------------------------------------
+
+Many institution in the United States already subscribe to InCommon and offer certificate services.
+If your institution is in the list of [InCommon subscribers](https://www.incommon.org/certificates/subscribers.html),
+continue with the instructions below.
+If your institution is not in the list and Let's Encrypt certificates do not meet your needs, please
+[contact us](/common/help.md).
+
+1. Generate a Certificate Signing Request (CSR) and private key:
+
+        :::console
+        root@server # openssl req -nodes -new -newkey rsa:2048 -sha256 -out req.pem -keyout hostkey.pem
+
+    When prompted, use your institution's information for the `Country`, `State or Province`, `Locality` (city),
+    and `Organization Name` fields then the hostname for the `Common Name` field.
+
+    !!! note
+        Your institution may require more information in the request.
+        Try using the CSR generated above in your initial request.
+
+1. Set the permissions on the private key:
+
+        :::console
+        root@server # chmod 0600 hostkey.pem
+
+1. Find your institution-specific InCommon contact
+   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/))
+   and submit the CSR that you generated above, asking for the certificate to be signed by the InCommon IGTF CA
+1. After the certificate has been issued by your institution, download it on its intended host and copy over the key you generated above.
+1. Verify that the issuer `CN` field is ` InCommon IGTF Server CA`:
+
+        :::console
+        $ openssl x509 -in %RED%<PATH TO CERTIFICATE>%ENDCOLOR% -noout -issuer
+        issuer= /C=US/O=Internet2/OU=InCommon/CN=InCommon IGTF Server CA
+
+1. Install the [host](#installing-host-certificates) or [service](#installing-service-certificates) certificate
+
+Requesting Let's Encrypt Certificates
+-------------------------------------
+
+Instructions for requesting Let's Encrypt host certificates will be released with the next release of the
+[OSG CA certificate bundle](/common/ca.md), expected in early May 2018.
+
+See the [security team's position on Let's Encrypt](https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/)
+for more details
 
 Requesting Host/Service Certificates Using the Command Line
 -----------------------------------------------------------
@@ -201,10 +264,6 @@ Grid Admin privileges [here](https://oim.opensciencegrid.org/oim/gridadmin) afte
 your [user certificate](user-certs).
 
 
-For instructions on how to request a host or service certificate using the Web
-interface please see the [user guide maintained by
-the OIM development team](https://confluence.grid.iu.edu/pages/viewpage.action?pageId=3244064).
-
 Requesting Host Certificate Using [Let's Encrypt](https://letsencrypt.org/)
 ---------------------------------------------------------------
 
@@ -305,29 +364,10 @@ notBefore=Jan  4 21:08:41 2010 GMT
 notAfter=Jan  4 21:08:41 2011 GMT
 ```
 
-### How can I change the URLs queried by the PKI clients?
-
-This configuration should not need to be changed for the vast majority of uses.
-The information is provided in case you need it for debugging purposes.
-
-The client checks for `pki-clients.ini` file at three location in order:
-
--   `$HOME/.osg-pki/OSG_PKI.ini`
--   `./pki-clients.ini`
--   `/etc/osg/pki-clients.ini` (default location)
-
-The INI file contains the following information:
-
--   Request URL
--   Approve URL
--   Retrieve URL
--   Host URL
-
-
-
 References
 ------------
 
+-   [CILogon documentation for requesting InCommon certificates](http://www.cilogon.org/globus-with-incommon-ca)
 -   [Useful OpenSSL commands (from NCSA)](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html) - e.g. how to convert the format of your certificate.
 
 -   [Official Let's Encrypt setup guide](https://letsencrypt.org/getting-started/)

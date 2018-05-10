@@ -17,7 +17,7 @@ The Grid Operations Center (GOC) is available to coordinate users, site admins, 
 Security incident
 -----------------
 
-Security incidents can be reported by following the instructions on the [Incident Discovery and Reporting](https://opensciencegrid.github.io/security/IncidentDiscoveryReporting/) page.  Additional steps to aid in the incident handling process are also linked from that page.
+Security incidents can be reported by following the instructions on the [Incident Discovery and Reporting](https://opensciencegrid.org/security/IncidentDiscoveryReporting/) page.  Additional steps to aid in the incident handling process are also linked from that page.
 
 Information Required to Help You
 --------------------------------
