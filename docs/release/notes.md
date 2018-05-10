@@ -8,6 +8,7 @@ Release Notes
 
 | Version                          | Date       | Summary                                                                          |
 |:---------------------------------|:-----------|:---------------------------------------------------------------------------------|
+| [3.4.12-2](3.4/release-3-4-12-2) | 2018-05-10 | Added Let's Encrypt CA, VO Package v79                                           |
 | [3.4.12](3.4/release-3-4-12)     | 2018-05-10 | HTCondor-CE 3.1.2, GlideinWMS 3.2.22.2, XRootD 4.8.3, Gratia probes 1.20, RSV 3.18; Upcoming: GlideinWM 3.3.3 |
 | [3.4.11](3.4/release-3-4-11)     | 2018-05-01 | High Priority Release: Singularity 2.5.0                                         |
 | [3.4.10](3.4/release-3-4-10)     | 2018-04-18 | Singularity 2.4.6, HTCondor-CE 3.1.1, HTCondor 8.6.10, gigetcert 1.16, BLAHP 1.18.36, xrootd-lcmaps 1.2.1-3, osg-configure 2.2.4; Upcoming: HTCondor 8.7.7, xrootd-hdfs 2.0.2 |
@@ -36,7 +37,8 @@ Release Notes
 
 | Version                          | Date       | Summary                                                                          |
 |:---------------------------------|:-----------|:---------------------------------------------------------------------------------|
-| [3.3.34](3.3/release-3-3-34)     | 2018-03-08 | xrootd-lcmaps 1.2.1-3. frontier-squid 2.7.STABLE9-27.1.1, xrootd-hdfs 2.0.2 |
+| [3.3.34-2](3.3/release-3-3-34-2) | 2018-05-10 | Added Let's Encrypt CA, VO Package v79                                           |
+| [3.3.34](3.3/release-3-3-34)     | 2018-03-08 | xrootd-lcmaps 1.2.1-3. frontier-squid 2.7.STABLE9-27.1.1, xrootd-hdfs 2.0.2      |
 | [3.3.33-2](3.3/release-3-3-33-2) | 2018-04-05 | IGTF 1.90, VO Package v78                                                        |
 | [3.3.33](3.3/release-3-3-33)     | 2018-03-08 | XRootD 4.8.0-2                                                                   |
 | [3.3.32](3.3/release-3-3-32)     | 2018-02-08 | GlideinWMS 3.2.20-2                                                              |
