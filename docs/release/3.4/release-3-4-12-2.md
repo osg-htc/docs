@@ -50,21 +50,38 @@ We added or updated the following packages to the production OSG yum repository.
 
 #### Enterprise Linux 6
 
+-   [osg-ca-certs-1.72-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.72-1.osg34.el6)
+-   [vo-client-79-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=vo-client-79-1.osg34.el6)
+
 #### Enterprise Linux 7
 
+-   [osg-ca-certs-1.72-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-ca-certs-1.72-1.osg34.el7)
+-   [vo-client-79-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=vo-client-79-1.osg34.el7)
 
 ### RPMs
 
 If you wish to manually update your system, you can run yum update against the following packages:
+
+    osg-ca-certs osg-gums-config vo-client vo-client-edgmkgridmap vo-client-lcmaps-voms
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 6
 
 ``` file
+osg-ca-certs-1.72-1.osg34.el6
+osg-gums-config-79-1.osg34.el6
+vo-client-79-1.osg34.el6
+vo-client-edgmkgridmap-79-1.osg34.el6
+vo-client-lcmaps-voms-79-1.osg34.el6
 ```
 
 #### Enterprise Linux 7
 
 ``` file
+osg-ca-certs-1.72-1.osg34.el7
+osg-gums-config-79-1.osg34.el7
+vo-client-79-1.osg34.el7
+vo-client-edgmkgridmap-79-1.osg34.el7
+vo-client-lcmaps-voms-79-1.osg34.el7
 ```
