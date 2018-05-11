@@ -2486,16 +2486,10 @@
 for details), some software packages require updates to reference new hosts.</p>
 <ol>
 <li>
-<p>Find all packages that may contain references to <code>grid.iu.edu</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -q osg-ca-certs-updater osg-ca-scripts osg-release osg-release-itb <span class="se">\</span>
-            osg-test rsv
-</pre></div>
-
-
-</li>
-<li>
-<p>Update each package above that is already installed on your host:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum update <span style="color:red">&lt;LIST OF INSTALLED PACKAGES&gt;</span>
+<p>Update all packages that may contain references to <code>grid.iu.edu</code>:
+   (Yum will only update already installed packages.)</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum update osg-ca-certs-updater osg-ca-scripts osg-release osg-release-itb <span class="se">\</span>
+            osg-test<span class="se">\*</span> rsv<span class="se">\*</span>
 </pre></div>
 
 
