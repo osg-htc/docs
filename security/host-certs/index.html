@@ -849,6 +849,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#requesting-host-certificate-using-lets-encrypt" title="Requesting Host Certificate Using Let's Encrypt" class="md-nav__link">
+    Requesting Host Certificate Using Let's Encrypt
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#frequently-asked-questions" title="Frequently Asked Questions" class="md-nav__link">
     Frequently Asked Questions
   </a>
@@ -2508,6 +2515,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#requesting-host-certificate-using-lets-encrypt" title="Requesting Host Certificate Using Let's Encrypt" class="md-nav__link">
+    Requesting Host Certificate Using Let's Encrypt
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#frequently-asked-questions" title="Frequently Asked Questions" class="md-nav__link">
     Frequently Asked Questions
   </a>
@@ -2850,6 +2864,45 @@ Management System can be found at:
 <a href="https://oim.opensciencegrid.org/oim/certificate">https://oim.opensciencegrid.org/oim/certificate</a>. Alternatively, you can request
 Grid Admin privileges <a href="https://oim.opensciencegrid.org/oim/gridadmin">here</a> after obtaining
 your <a href="../user-certs">user certificate</a>.</p>
+<h2 id="requesting-host-certificate-using-lets-encrypt">Requesting Host Certificate Using <a href="https://letsencrypt.org/">Let's Encrypt</a><a class="headerlink" href="#requesting-host-certificate-using-lets-encrypt" title="Permanent link">&para;</a></h2>
+<p>As an alternative to the above options, the Let's Encrypt software can be used to obtain host certificates.</p>
+<p>The <code>letsencrypt</code> software (AKA <code>certbot</code>) can be obtained from the EPEL 7 yum repo:</p>
+<div class="codehilite"><pre><span></span>    :::console
+    root@host # yum install certbot
+</pre></div>
+
+
+<p>If you have any service running on port 80, you will have to disable it temporarily to obtain
+certificates, as the letsencrypt needs to bind on it temporarily in order to verify the host.
+For instance, if you already have an HTCondor-CE set up and running, stop the
+<a href="https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view">CE View service</a>
+(which listens on port 80).</p>
+<p>You can then run the following command to obtain the host certificate with Let's Encrypt:</p>
+<div class="codehilite"><pre><span></span>    :::console
+    root@host # certbot certonly --standalone --email <span style="color:red">&lt;ADMIN_EMAIL&gt;</span> -d <span style="color:red">&lt;HOST&gt;</span>
+</pre></div>
+
+
+<p>Set up hostcert/hostkey links:</p>
+<div class="codehilite"><pre><span></span>    :::console
+    root@host # ln -s /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
+    root@host # ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
+    root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
+</pre></div>
+
+
+<p>Before the hostcert expires, you can renew it with:</p>
+<div class="codehilite"><pre><span></span>    :::console
+    root@host # certbot renew
+</pre></div>
+
+
+<p>To automate renewal monthly with a cron job; for example you can create <code>/etc/cron.d/certbot-renew</code> with the following contents:</p>
+<div class="codehilite"><pre><span></span>    :::console
+    * * 1 * * root certbot renew
+</pre></div>
+
+
 <h2 id="frequently-asked-questions">Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permanent link">&para;</a></h2>
 <h3 id="can-i-use-any-host-to-request-a-certificate-for-a-different-host">Can I use any host to request a certificate for a different host?<a class="headerlink" href="#can-i-use-any-host-to-request-a-certificate-for-a-different-host" title="Permanent link">&para;</a></h3>
 <p>YES, you can use any host to create a certificate request as long as the hostname for the certificate is a fully qualified domain name.</p>
@@ -2902,7 +2955,16 @@ to retrieve information about the certificate:</p>
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="http://www.cilogon.org/globus-with-incommon-ca">CILogon documentation for requesting InCommon certificates</a></li>
-<li><a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">Useful OpenSSL commands (from NCSA)</a> - e.g. how to convert the format of your certificate.</li>
+<li>
+<p><a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">Useful OpenSSL commands (from NCSA)</a> - e.g. how to convert the format of your certificate.</p>
+</li>
+<li>
+<p><a href="https://letsencrypt.org/getting-started/">Official Let's Encrypt setup guide</a></p>
+</li>
+<li>
+<p>Another <a href="https://github.com/cilogon/letsencrypt-certificates">Let's Encrypt setup reference</a>
+    Under Getting your host certificate, we follow the first "Setting up" section.</p>
+</li>
 </ul>
                 
                   
