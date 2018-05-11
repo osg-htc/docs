@@ -264,6 +264,48 @@ Grid Admin privileges [here](https://oim.opensciencegrid.org/oim/gridadmin) afte
 your [user certificate](user-certs).
 
 
+Requesting Host Certificate Using [Let's Encrypt](https://letsencrypt.org/)
+---------------------------------------------------------------
+
+As an alternative to the above options, the Let's Encrypt software can be used to obtain host certificates.
+
+The `letsencrypt` software (AKA `certbot`) can be obtained from the EPEL 7 yum repo:
+
+        :::console
+        root@host # yum install certbot
+
+If you have any service running on port 80, you will have to disable it temporarily to obtain
+certificates, as the letsencrypt needs to bind on it temporarily in order to verify the host.
+For instance, if you already have an HTCondor-CE set up and running, stop the
+[CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view)
+(which listens on port 80).
+
+You can then run the following command to obtain the host certificate with Let's Encrypt:
+
+        :::console
+        root@host # certbot certonly --standalone --email %RED%<ADMIN_EMAIL>%ENDCOLOR% -d %RED%<HOST>%ENDCOLOR%
+
+
+Set up hostcert/hostkey links:
+
+        :::console
+        root@host # ln -s /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
+        root@host # ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
+        root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
+
+
+Before the hostcert expires, you can renew it with:
+
+        :::console
+        root@host # certbot renew
+
+
+To automate renewal monthly with a cron job; for example you can create `/etc/cron.d/certbot-renew` with the following contents:
+
+        :::console
+        * * 1 * * root certbot renew
+
+
 Frequently Asked Questions
 ---------------------------
 
@@ -333,3 +375,8 @@ References
 
 -   [CILogon documentation for requesting InCommon certificates](http://www.cilogon.org/globus-with-incommon-ca)
 -   [Useful OpenSSL commands (from NCSA)](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html) - e.g. how to convert the format of your certificate.
+
+-   [Official Let's Encrypt setup guide](https://letsencrypt.org/getting-started/)
+
+-   Another [Let's Encrypt setup reference](https://github.com/cilogon/letsencrypt-certificates)
+    Under Getting your host certificate, we follow the first "Setting up" section.
