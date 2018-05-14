@@ -87,14 +87,50 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
 
 1. Install the [host](#installing-host-certificates) or [service](#installing-service-certificates) certificate
 
-Requesting Let's Encrypt Certificates
--------------------------------------
+Requesting Host Certificates Using [Let's Encrypt](https://letsencrypt.org/)
+----------------------------------------------------------------------------
 
-Instructions for requesting Let's Encrypt host certificates will be released with the next release of the
-[OSG CA certificate bundle](/common/ca.md), expected in early May 2018.
+[Let's Encrypt](https://letsencrypt.org/) is a free, automated, and open CA frequently used for web services;
+see the [security team's position on Let's Encrypt](https://opensciencegrid.github.io/security/LetsEncryptOSGCAbundle/)
+for more details.  Let's Encrypt can be used to obtain host certificates as an alternative
+to InCommon if you do not have an InCommon subscription.
 
-See the [security team's position on Let's Encrypt](https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/)
-for more details
+The `letsencrypt` software (AKA `certbot`) can be obtained from the EPEL 7 yum repo:
+
+        :::console
+        root@host # yum install certbot
+
+If you have any service running on port 80, you will have to disable it temporarily to obtain
+certificates, as the letsencrypt needs to bind on it temporarily in order to verify the host.
+For instance, if you already have an HTCondor-CE set up and running, stop the
+[CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view)
+(which listens on port 80).
+
+You can then run the following command to obtain the host certificate with Let's Encrypt:
+
+        :::console
+        root@host # certbot certonly --standalone --email %RED%<ADMIN_EMAIL>%ENDCOLOR% -d %RED%<HOST>%ENDCOLOR%
+
+
+Set up hostcert/hostkey links:
+
+        :::console
+        root@host # ln -s /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
+        root@host # ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
+        root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
+
+
+Before the hostcert expires, you can renew it with:
+
+        :::console
+        root@host # certbot renew
+
+
+To automate renewal monthly with a cron job; for example you can create `/etc/cron.d/certbot-renew` with the following contents:
+
+        :::console
+        * * 1 * * root certbot renew
+
 
 Requesting Host/Service Certificates Using the Command Line
 -----------------------------------------------------------
@@ -262,48 +298,6 @@ Management System can be found at:
 <https://oim.opensciencegrid.org/oim/certificate>. Alternatively, you can request
 Grid Admin privileges [here](https://oim.opensciencegrid.org/oim/gridadmin) after obtaining
 your [user certificate](user-certs).
-
-
-Requesting Host Certificate Using [Let's Encrypt](https://letsencrypt.org/)
----------------------------------------------------------------
-
-As an alternative to the above options, the Let's Encrypt software can be used to obtain host certificates.
-
-The `letsencrypt` software (AKA `certbot`) can be obtained from the EPEL 7 yum repo:
-
-        :::console
-        root@host # yum install certbot
-
-If you have any service running on port 80, you will have to disable it temporarily to obtain
-certificates, as the letsencrypt needs to bind on it temporarily in order to verify the host.
-For instance, if you already have an HTCondor-CE set up and running, stop the
-[CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view)
-(which listens on port 80).
-
-You can then run the following command to obtain the host certificate with Let's Encrypt:
-
-        :::console
-        root@host # certbot certonly --standalone --email %RED%<ADMIN_EMAIL>%ENDCOLOR% -d %RED%<HOST>%ENDCOLOR%
-
-
-Set up hostcert/hostkey links:
-
-        :::console
-        root@host # ln -s /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
-        root@host # ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
-        root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
-
-
-Before the hostcert expires, you can renew it with:
-
-        :::console
-        root@host # certbot renew
-
-
-To automate renewal monthly with a cron job; for example you can create `/etc/cron.d/certbot-renew` with the following contents:
-
-        :::console
-        * * 1 * * root certbot renew
 
 
 Frequently Asked Questions
