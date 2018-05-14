@@ -124,7 +124,7 @@ root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
 ```
 
 
-Before the hostcert expires, you can renew it with:
+Before the host certificate expires, you can renew it with:
 
 ``` console
 root@host # certbot renew
