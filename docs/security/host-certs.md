@@ -92,8 +92,9 @@ Requesting Host Certificates Using [Let's Encrypt](https://letsencrypt.org/)
 
 [Let's Encrypt](https://letsencrypt.org/) is a free, automated, and open CA frequently used for web services;
 see the [security team's position on Let's Encrypt](https://opensciencegrid.github.io/security/LetsEncryptOSGCAbundle/)
-for more details.  Let's Encrypt can be used to obtain host certificates as an alternative
-to InCommon if your institution does not have an InCommon subscription.
+for more details.
+Let's Encrypt can be used to obtain host certificates as an alternative to InCommon if your institution does not have
+an InCommon subscription.
 
 The `letsencrypt` software (AKA `certbot`) can be obtained from the EPEL 7 yum repo:
 
