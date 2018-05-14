@@ -754,8 +754,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#requesting-lets-encrypt-certificates" title="Requesting Let's Encrypt Certificates" class="md-nav__link">
-    Requesting Let's Encrypt Certificates
+  <a href="#requesting-host-certificates-using-lets-encrypt" title="Requesting Host Certificates Using Let's Encrypt" class="md-nav__link">
+    Requesting Host Certificates Using Let's Encrypt
   </a>
   
 </li>
@@ -844,13 +844,6 @@
         <li class="md-nav__item">
   <a href="#requesting-hostservice-certificate-using-oim" title="Requesting Host/Service Certificate Using OIM" class="md-nav__link">
     Requesting Host/Service Certificate Using OIM
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#requesting-host-certificate-using-lets-encrypt" title="Requesting Host Certificate Using Let's Encrypt" class="md-nav__link">
-    Requesting Host Certificate Using Let's Encrypt
   </a>
   
 </li>
@@ -2420,8 +2413,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#requesting-lets-encrypt-certificates" title="Requesting Let's Encrypt Certificates" class="md-nav__link">
-    Requesting Let's Encrypt Certificates
+  <a href="#requesting-host-certificates-using-lets-encrypt" title="Requesting Host Certificates Using Let's Encrypt" class="md-nav__link">
+    Requesting Host Certificates Using Let's Encrypt
   </a>
   
 </li>
@@ -2510,13 +2503,6 @@
         <li class="md-nav__item">
   <a href="#requesting-hostservice-certificate-using-oim" title="Requesting Host/Service Certificate Using OIM" class="md-nav__link">
     Requesting Host/Service Certificate Using OIM
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#requesting-host-certificate-using-lets-encrypt" title="Requesting Host Certificate Using Let's Encrypt" class="md-nav__link">
-    Requesting Host Certificate Using Let's Encrypt
   </a>
   
 </li>
@@ -2693,11 +2679,44 @@ Try using the CSR generated above in your initial request.</p>
 <p>Install the <a href="#installing-host-certificates">host</a> or <a href="#installing-service-certificates">service</a> certificate</p>
 </li>
 </ol>
-<h2 id="requesting-lets-encrypt-certificates">Requesting Let's Encrypt Certificates<a class="headerlink" href="#requesting-lets-encrypt-certificates" title="Permanent link">&para;</a></h2>
-<p>Instructions for requesting Let's Encrypt host certificates will be released with the next release of the
-<a href="../../common/ca/">OSG CA certificate bundle</a>, expected in early May 2018.</p>
-<p>See the <a href="https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/">security team's position on Let's Encrypt</a>
-for more details</p>
+<h2 id="requesting-host-certificates-using-lets-encrypt">Requesting Host Certificates Using <a href="https://letsencrypt.org/">Let's Encrypt</a><a class="headerlink" href="#requesting-host-certificates-using-lets-encrypt" title="Permanent link">&para;</a></h2>
+<p><a href="https://letsencrypt.org/">Let's Encrypt</a> is a free, automated, and open CA frequently used for web services;
+see the <a href="https://opensciencegrid.github.io/security/LetsEncryptOSGCAbundle/">security team's position on Let's Encrypt</a>
+for more details.
+Let's Encrypt can be used to obtain host certificates as an alternative to InCommon if your institution does not have
+an InCommon subscription.</p>
+<p>The <code>letsencrypt</code> software (AKA <code>certbot</code>) can be obtained from the EPEL 7 yum repo:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install certbot
+</pre></div>
+
+
+<p>If you have any service running on port 80, you will have to disable it temporarily to obtain
+certificates, as letsencrypt needs to bind on it temporarily in order to verify the host.
+For instance, if you already have an HTCondor-CE set up with the
+<a href="https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view">HTCondor-CE View service</a>
+running, stop the HTCondor-CE View service, as it listens on port 80.</p>
+<p>Run the following command to obtain the host certificate with Let's Encrypt:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> certbot certonly --standalone --email <span style="color:red">&lt;ADMIN_EMAIL&gt;</span> -d <span style="color:red">&lt;HOST&gt;</span>
+</pre></div>
+
+
+<p>Set up hostcert/hostkey links:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> ln -s /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
+<span class="gp">root@host #</span> ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
+<span class="gp">root@host #</span> chmod <span class="m">0600</span> /etc/letsencrypt/archive/*/privkey*.pem
+</pre></div>
+
+
+<p>Before the host certificate expires, you can renew it with:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> certbot renew
+</pre></div>
+
+
+<p>To automate renewal monthly with a cron job; for example you can create <code>/etc/cron.d/certbot-renew</code> with the following contents:</p>
+<div class="codehilite"><pre><span></span><span class="go">* * 1 * * root certbot renew</span>
+</pre></div>
+
+
 <h2 id="requesting-hostservice-certificates-using-the-command-line">Requesting Host/Service Certificates Using the Command Line<a class="headerlink" href="#requesting-hostservice-certificates-using-the-command-line" title="Permanent link">&para;</a></h2>
 <p>The OSG PKI Command Line Clients are tested to work on Python version 2.4+. They
 have not been tested on Python version 3. In order to proceed you will also
@@ -2864,45 +2883,6 @@ Management System can be found at:
 <a href="https://oim.opensciencegrid.org/oim/certificate">https://oim.opensciencegrid.org/oim/certificate</a>. Alternatively, you can request
 Grid Admin privileges <a href="https://oim.opensciencegrid.org/oim/gridadmin">here</a> after obtaining
 your <a href="../user-certs">user certificate</a>.</p>
-<h2 id="requesting-host-certificate-using-lets-encrypt">Requesting Host Certificate Using <a href="https://letsencrypt.org/">Let's Encrypt</a><a class="headerlink" href="#requesting-host-certificate-using-lets-encrypt" title="Permanent link">&para;</a></h2>
-<p>As an alternative to the above options, the Let's Encrypt software can be used to obtain host certificates.</p>
-<p>The <code>letsencrypt</code> software (AKA <code>certbot</code>) can be obtained from the EPEL 7 yum repo:</p>
-<div class="codehilite"><pre><span></span>    :::console
-    root@host # yum install certbot
-</pre></div>
-
-
-<p>If you have any service running on port 80, you will have to disable it temporarily to obtain
-certificates, as the letsencrypt needs to bind on it temporarily in order to verify the host.
-For instance, if you already have an HTCondor-CE set up and running, stop the
-<a href="https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view">CE View service</a>
-(which listens on port 80).</p>
-<p>You can then run the following command to obtain the host certificate with Let's Encrypt:</p>
-<div class="codehilite"><pre><span></span>    :::console
-    root@host # certbot certonly --standalone --email <span style="color:red">&lt;ADMIN_EMAIL&gt;</span> -d <span style="color:red">&lt;HOST&gt;</span>
-</pre></div>
-
-
-<p>Set up hostcert/hostkey links:</p>
-<div class="codehilite"><pre><span></span>    :::console
-    root@host # ln -s /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
-    root@host # ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
-    root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
-</pre></div>
-
-
-<p>Before the hostcert expires, you can renew it with:</p>
-<div class="codehilite"><pre><span></span>    :::console
-    root@host # certbot renew
-</pre></div>
-
-
-<p>To automate renewal monthly with a cron job; for example you can create <code>/etc/cron.d/certbot-renew</code> with the following contents:</p>
-<div class="codehilite"><pre><span></span>    :::console
-    * * 1 * * root certbot renew
-</pre></div>
-
-
 <h2 id="frequently-asked-questions">Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permanent link">&para;</a></h2>
 <h3 id="can-i-use-any-host-to-request-a-certificate-for-a-different-host">Can I use any host to request a certificate for a different host?<a class="headerlink" href="#can-i-use-any-host-to-request-a-certificate-for-a-different-host" title="Permanent link">&para;</a></h3>
 <p>YES, you can use any host to create a certificate request as long as the hostname for the certificate is a fully qualified domain name.</p>
