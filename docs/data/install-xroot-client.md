@@ -11,9 +11,9 @@ This page provides instructions for accessing data on XRootD data systems using 
 
 As a user you have three different ways to interact with XRootD: 
 
-1. [Using the XRootD clients](/data/install-xroot-client/#using-the-xrootd-client-software)
-1. [Using a XRootDFS FUSE mount to access a local XRootD data store](/data/install-xroot-client/#using-xrootdfs-fuse-mount)
-1. [Using LD\_PRELOAD to use XRootD libraries with Unix tools](/data/install-xroot-client/#using-ld95preload-to-access-xrootd)
+1. [Using the XRootD clients](#using-the-xrootd-client-software)
+1. [Using a XRootDFS FUSE mount to access a local XRootD data store](#using-xrootdfs-fuse-mount)
+1. [Using LD\_PRELOAD to use XRootD libraries with Unix tools](#using-ld95preload-to-access-xrootd)
 
 We'll show how to install the XRootD client software and use all three mechanisms to access data.
 
