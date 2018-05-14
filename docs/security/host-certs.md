@@ -103,7 +103,7 @@ root@host # yum install certbot
 ```
 
 If you have any service running on port 80, you will have to disable it temporarily to obtain
-certificates, as the letsencrypt needs to bind on it temporarily in order to verify the host.
+certificates, as letsencrypt needs to bind on it temporarily in order to verify the host.
 For instance, if you already have an HTCondor-CE set up and running, stop the
 [CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view)
 (which listens on port 80).
