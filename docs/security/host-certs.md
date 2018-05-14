@@ -97,8 +97,9 @@ to InCommon if you do not have an InCommon subscription.
 
 The `letsencrypt` software (AKA `certbot`) can be obtained from the EPEL 7 yum repo:
 
-        :::console
-        root@host # yum install certbot
+``` console
+root@host # yum install certbot
+```
 
 If you have any service running on port 80, you will have to disable it temporarily to obtain
 certificates, as the letsencrypt needs to bind on it temporarily in order to verify the host.
@@ -108,28 +109,32 @@ For instance, if you already have an HTCondor-CE set up and running, stop the
 
 You can then run the following command to obtain the host certificate with Let's Encrypt:
 
-        :::console
-        root@host # certbot certonly --standalone --email %RED%<ADMIN_EMAIL>%ENDCOLOR% -d %RED%<HOST>%ENDCOLOR%
+``` console
+root@host # certbot certonly --standalone --email %RED%<ADMIN_EMAIL>%ENDCOLOR% -d %RED%<HOST>%ENDCOLOR%
+```
 
 
 Set up hostcert/hostkey links:
 
-        :::console
-        root@host # ln -s /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
-        root@host # ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
-        root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
+``` console
+root@host # ln -s /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
+root@host # ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
+root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
+```
 
 
 Before the hostcert expires, you can renew it with:
 
-        :::console
-        root@host # certbot renew
+``` console
+root@host # certbot renew
+```
 
 
 To automate renewal monthly with a cron job; for example you can create `/etc/cron.d/certbot-renew` with the following contents:
 
-        :::console
-        * * 1 * * root certbot renew
+``` console
+* * 1 * * root certbot renew
+```
 
 
 Requesting Host/Service Certificates Using the Command Line
