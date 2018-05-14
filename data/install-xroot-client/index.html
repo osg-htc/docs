@@ -38,7 +38,7 @@
     
     
       
-        <title>Install XRootD Client - OSG Documentation</title>
+        <title>Using XRootD - OSG Documentation</title>
       
     
     
@@ -93,7 +93,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
     
-      <a href="#install-xrootd-client" tabindex="1" class="md-skip">
+      <a href="#using-xrootd" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -119,7 +119,7 @@
                 OSG Documentation
               </span>
               <span class="md-header-nav__topic">
-                Install XRootD Client
+                Using XRootD
               </span>
             
           
@@ -671,11 +671,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Install XRootD Client
+        Using XRootD
       </label>
     
-    <a href="./" title="Install XRootD Client" class="md-nav__link md-nav__link--active">
-      Install XRootD Client
+    <a href="./" title="Using XRootD" class="md-nav__link md-nav__link--active">
+      Using XRootD
     </a>
     
       
@@ -689,30 +689,44 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#installing-a-xrootd-client" title="Installing a XRootD Client" class="md-nav__link">
-    Installing a XRootD Client
+  <a href="#before-starting" title="Before Starting" class="md-nav__link">
+    Before Starting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-xrootd-client-software" title="Using the XRootD client software" class="md-nav__link">
+    Using the XRootD client software
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-repositories" title="Install Repositories" class="md-nav__link">
-    Install Repositories
+  <a href="#installing-the-xrootd-client" title="Installing the XRootD Client" class="md-nav__link">
+    Installing the XRootD Client
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#installing-xrootd-client" title="Installing XRootD Client" class="md-nav__link">
-    Installing XRootD Client
+  <a href="#installing-the-xrootd-client-rpm" title="Installing the XRootD Client RPM" class="md-nav__link">
+    Installing the XRootD Client RPM
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#installing-xrootd-fuse" title="Installing XRootD Fuse" class="md-nav__link">
-    Installing XRootD Fuse
+  <a href="#using-the-xrootd-client" title="Using the XRootD Client" class="md-nav__link">
+    Using the XRootD Client
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation" title="Validation" class="md-nav__link">
+    Validation
   </a>
   
 </li>
@@ -723,30 +737,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-the-xrootd-client-mechanisms" title="Using the XRootD Client Mechanisms" class="md-nav__link">
-    Using the XRootD Client Mechanisms
+  <a href="#using-xrootdfs-fuse-mount" title="Using XRootDFS FUSE mount" class="md-nav__link">
+    Using XRootDFS FUSE mount
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#using-the-xrdcp-client" title="Using the xrdcp client" class="md-nav__link">
-    Using the xrdcp client
+  <a href="#installing-the-xrootd-fuse-rpm" title="Installing the XRootD FUSE RPM" class="md-nav__link">
+    Installing the XRootD FUSE RPM
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#tests-using-the-libxrdposixpreload-library" title="Tests using the libXrdPosixPreload library" class="md-nav__link">
-    Tests using the libXrdPosixPreload library
+  <a href="#configuring-the-fuse-mount" title="Configuring the FUSE Mount" class="md-nav__link">
+    Configuring the FUSE Mount
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#tests-using-xrootdfs" title="Tests using XRootDFS" class="md-nav__link">
-    Tests using XRootDFS
+  <a href="#using-the-xrootdfs-fuse-mount" title="Using the XRootDFS FUSE Mount" class="md-nav__link">
+    Using the XRootDFS FUSE Mount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation_1" title="Validation" class="md-nav__link">
+    Validation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-ld95preload-to-access-xrootd" title="Using LD_PRELOAD to access XRootD" class="md-nav__link">
+    Using LD_PRELOAD to access XRootD
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-xrootd-libraries-for-ld95preload" title="Installing XRootD Libraries For LD_PRELOAD" class="md-nav__link">
+    Installing XRootD Libraries For LD_PRELOAD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-ld95preload-method" title="Using LD_PRELOAD method" class="md-nav__link">
+    Using LD_PRELOAD method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation_2" title="Validation" class="md-nav__link">
+    Validation
   </a>
   
 </li>
@@ -2305,30 +2360,44 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#installing-a-xrootd-client" title="Installing a XRootD Client" class="md-nav__link">
-    Installing a XRootD Client
+  <a href="#before-starting" title="Before Starting" class="md-nav__link">
+    Before Starting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-xrootd-client-software" title="Using the XRootD client software" class="md-nav__link">
+    Using the XRootD client software
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-repositories" title="Install Repositories" class="md-nav__link">
-    Install Repositories
+  <a href="#installing-the-xrootd-client" title="Installing the XRootD Client" class="md-nav__link">
+    Installing the XRootD Client
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#installing-xrootd-client" title="Installing XRootD Client" class="md-nav__link">
-    Installing XRootD Client
+  <a href="#installing-the-xrootd-client-rpm" title="Installing the XRootD Client RPM" class="md-nav__link">
+    Installing the XRootD Client RPM
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#installing-xrootd-fuse" title="Installing XRootD Fuse" class="md-nav__link">
-    Installing XRootD Fuse
+  <a href="#using-the-xrootd-client" title="Using the XRootD Client" class="md-nav__link">
+    Using the XRootD Client
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation" title="Validation" class="md-nav__link">
+    Validation
   </a>
   
 </li>
@@ -2339,30 +2408,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-the-xrootd-client-mechanisms" title="Using the XRootD Client Mechanisms" class="md-nav__link">
-    Using the XRootD Client Mechanisms
+  <a href="#using-xrootdfs-fuse-mount" title="Using XRootDFS FUSE mount" class="md-nav__link">
+    Using XRootDFS FUSE mount
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#using-the-xrdcp-client" title="Using the xrdcp client" class="md-nav__link">
-    Using the xrdcp client
+  <a href="#installing-the-xrootd-fuse-rpm" title="Installing the XRootD FUSE RPM" class="md-nav__link">
+    Installing the XRootD FUSE RPM
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#tests-using-the-libxrdposixpreload-library" title="Tests using the libXrdPosixPreload library" class="md-nav__link">
-    Tests using the libXrdPosixPreload library
+  <a href="#configuring-the-fuse-mount" title="Configuring the FUSE Mount" class="md-nav__link">
+    Configuring the FUSE Mount
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#tests-using-xrootdfs" title="Tests using XRootDFS" class="md-nav__link">
-    Tests using XRootDFS
+  <a href="#using-the-xrootdfs-fuse-mount" title="Using the XRootDFS FUSE Mount" class="md-nav__link">
+    Using the XRootDFS FUSE Mount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation_1" title="Validation" class="md-nav__link">
+    Validation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-ld95preload-to-access-xrootd" title="Using LD_PRELOAD to access XRootD" class="md-nav__link">
+    Using LD_PRELOAD to access XRootD
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-xrootd-libraries-for-ld95preload" title="Installing XRootD Libraries For LD_PRELOAD" class="md-nav__link">
+    Installing XRootD Libraries For LD_PRELOAD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-ld95preload-method" title="Using LD_PRELOAD method" class="md-nav__link">
+    Using LD_PRELOAD method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation_2" title="Validation" class="md-nav__link">
+    Validation
   </a>
   
 </li>
@@ -2398,68 +2508,206 @@
                   <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/install-xroot-client.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="install-xrootd-client">Install XRootd Client<a class="headerlink" href="#install-xrootd-client" title="Permanent link">&para;</a></h1>
-<p>XRootD is a high performance network storage system widely used in high energy physics experiments such as ATLAS and ALICE. The underlying XRootD data transfer protocol provides highly efficient access to ROOT based data files.</p>
-<p>This page provides instructions for using a XRootD client to connect to a XRootD storage system.</p>
-<h2 id="installing-a-xrootd-client">Installing a XRootD Client<a class="headerlink" href="#installing-a-xrootd-client" title="Permanent link">&para;</a></h2>
-<p>As a user you have three different ways to interact with XRootd: a file system mounted with XRootDFS, the application <code>xrdcp</code>, LD_PRELOAD.</p>
-<p>To use a XRootD file system mounted with XRootDFS you don't need any special setup, you will need the XRootD FUSE module.</p>
-<p>To use <code>xrdcp</code> you need to have it in your path (e.g. <code>source $INSTALL_DIR/setup.sh</code>, where <code>$INSTALL_DIR</code> is the XRootD installation directory)</p>
-<p>The use of LD_PRELOAD is not recommended if you have any alternative available.</p>
-<h3 id="install-repositories">Install Repositories<a class="headerlink" href="#install-repositories" title="Permanent link">&para;</a></h3>
-<p>If you have not done so, you will need to install the <a href="../../common/yum">proper yum repositories</a>:</p>
-<h3 id="installing-xrootd-client">Installing XRootD Client<a class="headerlink" href="#installing-xrootd-client" title="Permanent link">&para;</a></h3>
-<p>The XRootD client is needed to access XRootD via <code>xrdcp</code> or via POSIX preload.</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-client
+                <h1 id="using-xrootd">Using XRootD<a class="headerlink" href="#using-xrootd" title="Permanent link">&para;</a></h1>
+<p>XRootD is a high performance data system widely used by several science VOs on OSG to store and to distribute data to
+jobs.
+It can be used to create a data store from distributed data nodes or to serve data to systems using a distributed
+caching architecture.
+Either mode of operation requires you to install the XRootD client software.</p>
+<p>This page provides instructions for accessing data on XRootD data systems using a variety of methods.</p>
+<p>As a user you have three different ways to interact with XRootD: </p>
+<ol>
+<li><a href="#using-the-xrootd-client-software">Using the XRootD clients</a></li>
+<li><a href="#using-xrootdfs-fuse-mount">Using a XRootDFS FUSE mount to access a local XRootD data store</a></li>
+<li><a href="#using-ld95preload-to-access-xrootd">Using LD_PRELOAD to use XRootD libraries with Unix tools</a></li>
+</ol>
+<p>We'll show how to install the XRootD client software and use all three mechanisms to access data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only the client tools method should be used to access XRootD systems across a WAN link.</p>
+</div>
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
+<p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
+<ul>
+<li>Ensure the host has <a href="../../release/supported_platforms">a supported operating system</a></li>
+<li>Obtain root access to the host</li>
+<li>Prepare the <a href="../../common/yum">required Yum repositories</a></li>
+<li>Install <a href="../../common/ca">CA certificates</a></li>
+</ul>
+<p>If you are using the FUSE mount, you should also consider the following requirement:</p>
+<ul>
+<li><strong>User IDs:</strong> If it does not exist already, you will need to create a <code>xrootd</code> user</li>
+</ul>
+<h2 id="using-the-xrootd-client-software">Using the XRootD client software<a class="headerlink" href="#using-the-xrootd-client-software" title="Permanent link">&para;</a></h2>
+<h3 id="installing-the-xrootd-client">Installing the XRootD Client<a class="headerlink" href="#installing-the-xrootd-client" title="Permanent link">&para;</a></h3>
+<p>If you are planning on interacting with XRootD using the XRootD client, then you'll need to install the XRootD
+client RPM.</p>
+<h3 id="installing-the-xrootd-client-rpm">Installing the XRootD Client RPM<a class="headerlink" href="#installing-the-xrootd-client-rpm" title="Permanent link">&para;</a></h3>
+<p>The following steps will install the rpm on your system.</p>
+<ol>
+<li>
+<p>Clean yum cache:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@client $</span> yum clean all --enablerepo<span class="o">=</span><span class="se">\*</span>
 </pre></div>
 
 
-<h3 id="installing-xrootd-fuse">Installing XRootD Fuse<a class="headerlink" href="#installing-xrootd-fuse" title="Permanent link">&para;</a></h3>
-<p>The XRootD fuse package is needed to access via XRootDFS.</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-fuse
+</li>
+<li>
+<p>Update software:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@client $</span> yum update
 </pre></div>
 
 
-<h2 id="using-the-xrootd-client-mechanisms">Using the XRootD Client Mechanisms<a class="headerlink" href="#using-the-xrootd-client-mechanisms" title="Permanent link">&para;</a></h2>
-<h3 id="using-the-xrdcp-client">Using the xrdcp client<a class="headerlink" href="#using-the-xrdcp-client" title="Permanent link">&para;</a></h3>
-<p>From the redirector node, you can run this:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;This is a test&quot;</span> &gt;/tmp/test 
-<span class="gp">root@host #</span> xrdcp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/test 
-<span class="gp">root@host #</span> xrdcp xroot://redirector.yourdomain.org:1094//storage/path/test /tmp/test1 
-<span class="gp">root@host #</span> diff /tmp/test1 /tmp/test 
+<p>This command will update <strong>all</strong> packages</p>
+</li>
+<li>
+<p>Install XRootD Client rpm:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@client $</span> yum install xrootd-client
 </pre></div>
 
 
-<p>Users can write in their own space. E.g. a user with Unix account name <code>myuser</code> (the account must exist, eg. in <code>/etc/passwd</code>, etc, on the redirector and on all the data servers) could save a file in XRootD:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;This is a user test&quot;</span> &gt;/tmp/test 
-<span class="gp">root@host #</span> xrdcp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/myuser/test 
+</li>
+</ol>
+<h3 id="using-the-xrootd-client">Using the XRootD Client<a class="headerlink" href="#using-the-xrootd-client" title="Permanent link">&para;</a></h3>
+<p>Once the <code>xrootd-client</code> rpm is installed, you should be able to use the <code>xrdcp</code> command to copy files to and from
+XRootD systems and the local file system.
+For example:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@client $</span> <span class="nb">echo</span> <span class="s2">&quot;This is a test&quot;</span> &gt;/tmp/test 
+<span class="gp">user@client $</span> xrdcp /tmp/test xroot://redirector.domain.org:1094//storage/path/test 
+<span class="gp">user@client $</span> xrdcp xroot://redirector.domain.org:1094//storage/path/test /tmp/test1 
+<span class="gp">user@client $</span> diff /tmp/test1 /tmp/test 
 </pre></div>
 
 
-<p>Note that <code>xrdcp</code> creates missing directories.</p>
-<h3 id="tests-using-the-libxrdposixpreload-library">Tests using the libXrdPosixPreload library<a class="headerlink" href="#tests-using-the-libxrdposixpreload-library" title="Permanent link">&para;</a></h3>
-<p>Using XRootD with the POSIX preload library (replace <code>/usr/lib64</code> with <code>/usr/lib</code> on 32-bit systems)</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">export</span> <span class="nv">LD_PRELOAD</span><span class="o">=</span>/usr/lib64/libXrdPosixPreload.so 
-<span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;This is a new test&quot;</span> &gt;/tmp/test 
-<span class="gp">root@host #</span> mkdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
-<span class="gp">root@host #</span> cp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
-<span class="gp">root@host #</span> cp xroot://redirector.yourdomain.org:1094//storage/path/subdir/test /tmp/test1 
-<span class="gp">root@host #</span> diff /tmp/test1 /tmp/test 
-<span class="gp">root@host #</span> rm xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
-<span class="gp">root@host #</span> rmdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
+<p>For other operations, you'll need to use the <code>xrdfs</code> command.
+This command allows you to do file operations such as creating directories, removing directories, deleting files, and
+moving files on a XRootD system, provided you have the appropriate authorization.
+The <code>xrdfs</code> command can be used interactively by running <code>xrdfs xroot://redirector.domain.org:1094/</code>.
+Alternatively, you can use it in batch mode by adding the <code>xrdfs</code> command after the xroot URI.  For example:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@client $</span> <span class="nb">echo</span> <span class="s2">&quot;This is a test&quot;</span> &gt;/tmp/test 
+<span class="gp">user@client $</span> xrdfs xroot://redirector.domain.org:1094/  mkdir  /storage/path/test
+<span class="gp">user@client $</span> xrdcp xroot://redirector.domain.org:1094//storage/path/test/test1 /tmp/test1 
+<span class="gp">user@client $</span> xrdfs xroot://redirector.domain.org:1094/  ls  /storage/path/test/test1
+<span class="gp">user@client $</span> xrdfs xroot://redirector.domain.org:1094/  rm  /storage/path/test/test1
+<span class="gp">user@client $</span> xrdfs xroot://redirector.domain.org:1094/  rmdir  /storage/path/test
 </pre></div>
 
 
-<h3 id="tests-using-xrootdfs">Tests using XRootDFS<a class="headerlink" href="#tests-using-xrootdfs" title="Permanent link">&para;</a></h3>
-<p>The directory mounted using XRootDFS can be used as any other directory mounted on your file system. All the normal Unix commands should work. You don't need any special setup or library. Try using <code>cp</code>, <code>rm</code>, <code>mv</code>, <code>mkdir</code>, <code>rmdir</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To access remote XRootD resources, you will may need to use a VOMS proxy in order to authenticate successfully.  The
+XRootD client tools will automatically locate your proxy if you generate it using <code>voms-proxy-init</code>, otherwise you
+can set the <code>X509_USER_PROXY</code> environment variable to the location of the proxy XRootD should use.</p>
+</div>
+<h3 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h3>
+<p>Assuming that there is a file called <code>test_file</code> in your XRootD data store, you can do the following to validate your
+installation.  Here we assume that there is a file on your XRootD system at <code>/storage/path/test_file</code>.</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@client $</span> xrdcp xroot://redirector.yourdomain.org:1094//storage/path/test_file /tmp/test1
+</pre></div>
+
+
+<h2 id="using-xrootdfs-fuse-mount">Using XRootDFS FUSE mount<a class="headerlink" href="#using-xrootdfs-fuse-mount" title="Permanent link">&para;</a></h2>
+<p>This section will explain how to install, setup, and interact with XRootD using a FUSE mount.
+This method of accessing XRootD only works when accessing a local XRootD system.</p>
+<h3 id="installing-the-xrootd-fuse-rpm">Installing the XRootD FUSE RPM<a class="headerlink" href="#installing-the-xrootd-fuse-rpm" title="Permanent link">&para;</a></h3>
+<p>If you are planning on using a FUSE mount, you'll need to install the xrootd-fuse rpm by running the following commands:</p>
+<ol>
+<li>
+<p>Clean yum cache:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@client $</span> yum clean all --enablerepo<span class="o">=</span><span class="se">\*</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Update software:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@client $</span> yum update
+</pre></div>
+
+
+</li>
+<li>
+<p>Install XRootD FUSE rpm:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@client $</span> yum install xrootd-fuse
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="configuring-the-fuse-mount">Configuring the FUSE Mount<a class="headerlink" href="#configuring-the-fuse-mount" title="Permanent link">&para;</a></h3>
+<p>Once the appropriate rpms are installed, the FUSE setup will need further configuration.
+See <a href="../../data//install-xrootd#optional-enabling-a-fuse-mount">this</a> for instructions on updating your <code>fstab</code> file.</p>
+<h3 id="using-the-xrootdfs-fuse-mount">Using the XRootDFS FUSE Mount<a class="headerlink" href="#using-the-xrootdfs-fuse-mount" title="Permanent link">&para;</a></h3>
+<p>The directory mounted using XRootDFS can be used as any other directory mounted on your file system. 
+All the normal Unix commands should work out of the box.
+Try using <code>cp</code>, <code>rm</code>, <code>mv</code>, <code>mkdir</code>, <code>rmdir</code>.</p>
 <p>Assuming your mount is <code>/mnt/xrootd</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;This is a new test&quot;</span> &gt;/tmp/test 
-<span class="gp">root@host #</span> mkdir -p /mnt/xrootd/subdir/sub2
-<span class="gp">root@host #</span> cp /tmp/test /mnt/xrootd/subdir/sub2/test 
-<span class="gp">root@host #</span> cp /mnt/xrootd/subdir/sub2/test /mnt/xrootd/subdir/sub2/test1 
-<span class="gp">root@host #</span> cp /mnt/xrootd/subdir/sub2/test1 /tmp/test1 
-<span class="gp">root@host #</span> diff /tmp/test1 /tmp/test 
-<span class="gp">root@host #</span> rm -r /mnt/xrootd/subdir
+<div class="codehilite"><pre><span></span><span class="gp">user@client $</span> <span class="nb">echo</span> <span class="s2">&quot;This is a new test&quot;</span> &gt;/tmp/test 
+<span class="gp">user@client $</span> mkdir -p /mnt/xrootd/subdir/sub2
+<span class="gp">user@client $</span> cp /tmp/test /mnt/xrootd/subdir/sub2/test 
+<span class="gp">user@client $</span> cp /mnt/xrootd/subdir/sub2/test /mnt/xrootd/subdir/sub2/test1 
+<span class="gp">user@client $</span> cp /mnt/xuserd/subdir/sub2/test1 /tmp/test1 
+<span class="gp">user@client $</span> diff /tmp/test1 /tmp/test 
+<span class="gp">user@client $</span> rm -r /mnt/xrootd/subdir
+</pre></div>
+
+
+<h3 id="validation_1">Validation<a class="headerlink" href="#validation_1" title="Permanent link">&para;</a></h3>
+<p>Assuming your mount is <code>/mnt/xrootd</code> and that there is a file called <code>test_file</code> in your XRootD data store:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@client $</span> cp /mnt/xrootd/test_file /tmp/test1
+</pre></div>
+
+
+<h2 id="using-ld95preload-to-access-xrootd">Using LD_PRELOAD to access XRootD<a class="headerlink" href="#using-ld95preload-to-access-xrootd" title="Permanent link">&para;</a></h2>
+<h3 id="installing-xrootd-libraries-for-ld95preload">Installing XRootD Libraries For LD_PRELOAD<a class="headerlink" href="#installing-xrootd-libraries-for-ld95preload" title="Permanent link">&para;</a></h3>
+<p>In order to use LD_PRELOAD to access XRootD, you'll need to install the XRootD client libraries.<br />
+The following steps will install them on your system:</p>
+<ol>
+<li>
+<p>Clean yum cache:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@client $</span> yum clean all --enablerepo<span class="o">=</span><span class="se">\*</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Update software:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@client $</span> yum update
+</pre></div>
+
+
+<p>This command will update <strong>all</strong> packages</p>
+</li>
+<li>
+<p>Install XRootD Client rpm:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@client $</span> yum install xrootd-client
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="using-ld95preload-method">Using LD_PRELOAD method<a class="headerlink" href="#using-ld95preload-method" title="Permanent link">&para;</a></h3>
+<p>In order to use the LD_PRELOAD method to access a XRootD data store, you'll need to change your environment to use the
+XRootD libraries in conjunction with the standard Unix binaries.
+This is done by setting the <code>LD_PRELOAD</code> environment variable.
+Once this is done, the standard unix commands like <code>mkdir</code>, <code>rm</code>, <code>cp</code>, etc. will work with xroot URIs.
+For example:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@client $</span> <span class="nb">export</span> <span class="nv">LD_PRELOAD</span><span class="o">=</span>/usr/lib64/libXrdPosixPreload.so 
+<span class="gp">user@client $</span> <span class="nb">echo</span> <span class="s2">&quot;This is a new test&quot;</span> &gt;/tmp/test 
+<span class="gp">user@client $</span> mkdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
+<span class="gp">user@client $</span> cp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
+<span class="gp">user@client $</span> cp xuser://redirector.yourdomain.org:1094//storage/path/subdir/test /tmp/test1 
+<span class="gp">user@client $</span> diff /tmp/test1 /tmp/test 
+<span class="gp">user@client $</span> rm xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
+<span class="gp">user@client $</span> rmdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
+</pre></div>
+
+
+<h3 id="validation_2">Validation<a class="headerlink" href="#validation_2" title="Permanent link">&para;</a></h3>
+<p>Assuming that there is a file called <code>test_file</code> in your XRootD data store, the following steps will validate your
+installation:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@client $</span> <span class="nb">export</span> <span class="nv">LD_PRELOAD</span><span class="o">=</span>/usr/lib64/libXrdPosixPreload.so
+<span class="gp">user@client $</span> cp xroot://redirector.yourdomain.org:1094//storage/path/test_file /tmp/test1
 </pre></div>
 
 
