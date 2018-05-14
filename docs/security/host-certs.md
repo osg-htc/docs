@@ -108,7 +108,7 @@ For instance, if you already have an HTCondor-CE set up with the
 [HTCondor-CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view)
 running, stop the HTCondor-CE View service, as it listens on port 80.
 
-You can then run the following command to obtain the host certificate with Let's Encrypt:
+Run the following command to obtain the host certificate with Let's Encrypt:
 
 ``` console
 root@host # certbot certonly --standalone --email %RED%<ADMIN_EMAIL>%ENDCOLOR% -d %RED%<HOST>%ENDCOLOR%
