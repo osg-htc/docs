@@ -40,7 +40,7 @@ setup and package installation the first time you do it.
 Most people end up needing their certificate for both command line grid use and web browser use and it is generally
 easier to import your certificate into your browser (and email client) from the command line certificate files than to
 export your certificate from your web browser to use on the command line. 
-This is because of the large variety of web browsers each with it's own way to deal with certificates. If you will use
+This is because of the large variety of web browsers each with its own way to deal with certificates. If you will use
 the certificate ONLY in your web browser then requesting it from your browser is probably the easiest method.
 
 [Get or renew a certificate with command line interface.](/security/certificate-management.md)
