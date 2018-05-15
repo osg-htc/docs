@@ -26,6 +26,11 @@ You will have to obtain your user certificate using the [CILogon web UI](https:/
 Follow the steps below to get an user certificate:
 
 1. First, either search for your institution and select it or scroll through list and do the same. <br>![Institution Selection](/img/cilogon_select_idp.png)
+
+    !!! note
+        Make sure to select your educational institution from CILogon's list.
+        For instance, do not use your Google ID or GitHub ID.
+
 1. Click the `Log On` button and enter your instutional credentials.
 1. Upon successfully entering your credentials, you'll get a page asking for you to enter a password.  Enter a password that is at least 12 characters long and then click on the `Get New Certificate` button.<br>![Password entry](/img/cilogon_cert_password.png) 
 1. The web page will generate a `usercred.p12` file and prompt you to download it.  The certiticate will be protected
