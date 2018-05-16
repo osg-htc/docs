@@ -164,11 +164,6 @@ To revoke and re-request your OSG user certificate on the
    revoking in order to re-request your certificate.  Then click the red Revoke button.
 1. In the separate tab, fill out the rest of the User Certificate Request form and click Submit.
 
-#### Revoking and re-requesting an OSG user certificate using the command line interface
-
-To revoke and re-request your OSG user certificate on the command line, follow the steps in the
-[OSG PKI Tools documentation](/security/certificate-management#osg-user-cert-revoke).
-
 
 Getting a Certificate from a Service Provider with cigetcert
 ------------------------------------------------------------
