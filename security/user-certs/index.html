@@ -752,8 +752,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#getting-an-user-certificate" title="Getting an User Certificate" class="md-nav__link">
-    Getting an User Certificate
+  <a href="#getting-a-user-certificate" title="Getting a User Certificate" class="md-nav__link">
+    Getting a User Certificate
   </a>
   
     <nav class="md-nav">
@@ -787,15 +787,35 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#renewing-your-osg-user-certificate" title="Renewing your OSG user certificate" class="md-nav__link">
+    Renewing your OSG user certificate
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
-  <a href="#revoking-your-user-certificate" title="Revoking your user certificate" class="md-nav__link">
-    Revoking your user certificate
+  <a href="#issues-renewing-your-osg-user-certificate" title="Issues renewing your OSG user certificate" class="md-nav__link">
+    Issues renewing your OSG user certificate
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revoking-your-user-certificate" title="Revoking your user certificate" class="md-nav__link">
+    Revoking your user certificate
+  </a>
   
 </li>
       
@@ -2303,8 +2323,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#getting-an-user-certificate" title="Getting an User Certificate" class="md-nav__link">
-    Getting an User Certificate
+  <a href="#getting-a-user-certificate" title="Getting a User Certificate" class="md-nav__link">
+    Getting a User Certificate
   </a>
   
     <nav class="md-nav">
@@ -2338,15 +2358,35 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#renewing-your-osg-user-certificate" title="Renewing your OSG user certificate" class="md-nav__link">
+    Renewing your OSG user certificate
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
-  <a href="#revoking-your-user-certificate" title="Revoking your user certificate" class="md-nav__link">
-    Revoking your user certificate
+  <a href="#issues-renewing-your-osg-user-certificate" title="Issues renewing your OSG user certificate" class="md-nav__link">
+    Issues renewing your OSG user certificate
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revoking-your-user-certificate" title="Revoking your user certificate" class="md-nav__link">
+    Revoking your user certificate
+  </a>
   
 </li>
       
@@ -2402,7 +2442,7 @@
 <p>This document describes how to get and set up a <strong>personal</strong> certificate (also called a grid user certificate).
 For instructions on getting <strong>service</strong> and <strong>host</strong> certificates, <strong>you're in the wrong place</strong>. See <a href="../host-certs/">Get Host and Service Certificates</a>.</p>
 </div>
-<h2 id="getting-an-user-certificate">Getting an User Certificate<a class="headerlink" href="#getting-an-user-certificate" title="Permanent link">&para;</a></h2>
+<h2 id="getting-a-user-certificate">Getting a User Certificate<a class="headerlink" href="#getting-a-user-certificate" title="Permanent link">&para;</a></h2>
 <p>This section describes how to get and set up a personal certificate to use on OSG.
 Currently you can get a certificate from either the OSG CA or from CILogon.
 After May 31st, you will only be able to get a certificate issued by CILogon.
@@ -2500,12 +2540,59 @@ the certificate ONLY in your web browser then requesting it from your browser is
 
 
 <p>To solve the problem split the bundle in the two PEM files as documented in the <a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">referenced document</a>, so that the embedded CA chain is not used.</p>
-<h3 id="revoking-your-user-certificate">Revoking your user certificate<a class="headerlink" href="#revoking-your-user-certificate" title="Permanent link">&para;</a></h3>
+<h2 id="renewing-your-osg-user-certificate">Renewing your OSG user certificate<a class="headerlink" href="#renewing-your-osg-user-certificate" title="Permanent link">&para;</a></h2>
+<p>Your OSG user certificate can be renewed through the
+<a href="https://oim.opensciencegrid.org/oim/certificateuser">OIM Web Interface</a>
+or through the <a href="../../security/certificate-management#osg-pki-command-line-clients">command line interface</a>:</p>
+<div class="codehilite"><pre><span></span>user@host $ osg-user-cert-renew
+</pre></div>
+
+
+<h3 id="issues-renewing-your-osg-user-certificate">Issues renewing your OSG user certificate<a class="headerlink" href="#issues-renewing-your-osg-user-certificate" title="Permanent link">&para;</a></h3>
+<p>One requirement for renewing your OSG user certificate is that your identity must be vetted within the last 5 years.
+You can see whether this requirement is met for your user certificate when <em>logged in</em> to the
+<a href="https://oim.opensciencegrid.org/oim/certificateuser">OIM Web Interface</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using the OIM Web Interface, make sure you are logged in and your name appears in the upper right corner.
+If it shows "Login" instead of your name, click it to log in.</p>
+</div>
+<p>When you click on your user certificate, under the Renew tab, you will see a line item for
+"This certificate was approved within the last 5 years".
+If there is a red X on this line with no other red X's, then you will have to request a new certificate instead of
+renewing it.
+Your two options for requesting a new certificate are:</p>
+<ul>
+<li><a href="#getting-a-certificate-from-cilogon">Request a certificate issued by the CILogon Basic CA</a> (preferred)</li>
+<li>
+<p>If you need to keep your DN, or for whatever other reason you cannot use a CILogon Basic certificate, you will need to
+  revoke and renew your user certificate:</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>With this method, there is a risk that you may end up without a valid certificate.
+After revocation, if your sponsor is unresponsive past the May 31, 2018 OSG CA service retirement, your previous
+certificate will no longer be valid and you won't be able to request a new certificate.</p>
+</div>
+<ol>
+<li>Log in (your name should appear on the top right), and select your user certificate from the list in the
+   <a href="https://oim.opensciencegrid.org/oim/certificateuser">OIM Web Interface</a>.</li>
+<li>In a separate tab, open the <a href="https://oim.opensciencegrid.org/oim/certificaterequestuser">+Request New</a> page.
+   We recommend opening the <code>Request New</code> page in a separate tab before revoking, in order to ensure that your CN gets
+   correctly populated in the <code>Request New</code> page.
+   Also, to ensure a prompt response, be sure that you select a <code>Virtual Organization</code> that you are associated with and
+   a <code>Sponsor</code> who will be able to quickly verify your identity.</li>
+<li>Back in the first tab, with your user certificate selected, click the <code>Revoke</code> tab, and enter an explanation that you are
+   revoking in order to re-request your certificate.  Then click the red <code>Revoke</code> button.</li>
+<li>In the separate tab, fill out the rest of the User Certificate Request form and click <code>Submit</code>.</li>
+</ol>
+</li>
+</ul>
+<h2 id="revoking-your-user-certificate">Revoking your user certificate<a class="headerlink" href="#revoking-your-user-certificate" title="Permanent link">&para;</a></h2>
 <p>If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate.
 In addition, if your name or email address changes, you must revoke your certificate and get a new one with the correct
 information.</p>
-<p>If you have an OSG issued certifiacte, you can follow the steps <a href="../../security/certificate-management#osg-user-cert-revoke">here</a> to revoke your certificate. 
-If you have a CILogon issued certificate, contact <a href="mailto:ca@cilogon.org">ca@cilogon.org</a> in order revoke your certificate. </p>
+<p>If you have an OSG issued certifiacte, you can follow the steps <a href="../../security/certificate-management#osg-user-cert-revoke">here</a> to revoke your certificate.
+If you have a CILogon issued certificate, contact <a href="mailto:ca@cilogon.org">ca@cilogon.org</a> in order revoke your certificate.</p>
 <h2 id="getting-a-certificate-from-a-service-provider-with-cigetcert">Getting a Certificate from a Service Provider with cigetcert<a class="headerlink" href="#getting-a-certificate-from-a-service-provider-with-cigetcert" title="Permanent link">&para;</a></h2>
 <p>You may also get a user certificate from a SAML 2.0 Service Provider such as your home institution or XSEDE.
 This kind of certificate is short-lived, typically valid only for a week.
