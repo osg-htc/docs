@@ -114,15 +114,6 @@ of returning a valid AC for the user.
 
 To solve the problem split the bundle in the two PEM files as documented in the [referenced document](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html), so that the embedded CA chain is not used.
 
-### Revoking your user certificate
-
-If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate.
-In addition, if your name or email address changes, you must revoke your certificate and get a new one with the correct
-information.
-
-If you have an OSG issued certifiacte, you can follow the steps [here](/security/certificate-management#osg-user-cert-revoke) to revoke your certificate. 
-If you have a CILogon issued certificate, contact [ca@cilogon.org](mailto:ca@cilogon.org) in order revoke your certificate. 
-
 Renewing your OSG user certificate
 ----------------------------------
 
@@ -169,6 +160,17 @@ Your two options for requesting a new certificate are:
     1. Back in the first tab, with your user certificate selected, click the `Revoke` tab, and enter an explanation that you are
        revoking in order to re-request your certificate.  Then click the red `Revoke` button.
     1. In the separate tab, fill out the rest of the User Certificate Request form and click `Submit`.
+
+
+Revoking your user certificate
+------------------------------
+
+If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate.
+In addition, if your name or email address changes, you must revoke your certificate and get a new one with the correct
+information.
+
+If you have an OSG issued certifiacte, you can follow the steps [here](/security/certificate-management#osg-user-cert-revoke) to revoke your certificate.
+If you have a CILogon issued certificate, contact [ca@cilogon.org](mailto:ca@cilogon.org) in order revoke your certificate.
 
 
 Getting a Certificate from a Service Provider with cigetcert
