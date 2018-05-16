@@ -6,8 +6,8 @@ User Certificates
     For instructions on getting **service** and **host** certificates, **you're in the wrong place**. See [Get Host and Service Certificates](host-certs.md).
 
 
-Getting an User Certificate 
----------------------------
+Getting a User Certificate
+--------------------------
 
 This section describes how to get and set up a personal certificate to use on OSG.
 Currently you can get a certificate from either the OSG CA or from CILogon.
@@ -114,14 +114,63 @@ of returning a valid AC for the user.
 
 To solve the problem split the bundle in the two PEM files as documented in the [referenced document](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html), so that the embedded CA chain is not used.
 
-### Revoking your user certificate
+Renewing your OSG user certificate
+----------------------------------
+
+Your OSG user certificate can be renewed through the
+[OIM Web Interface](https://oim.opensciencegrid.org/oim/certificateuser)
+or through the [command line interface](/security/certificate-management#osg-pki-command-line-clients):
+
+```
+user@host $ osg-user-cert-renew
+```
+
+### Issues renewing your OSG user certificate
+
+One requirement for renewing your OSG user certificate is that your identity must be vetted within the last 5 years.
+You can see whether this requirement is met for your user certificate when *logged in* to the
+[OIM Web Interface](https://oim.opensciencegrid.org/oim/certificateuser).
+
+!!! note
+    When using the OIM Web Interface, make sure you are logged in and your name appears in the upper right corner.
+    If it shows "Login" instead of your name, click it to log in.
+
+When you click on your user certificate, under the Renew tab, you will see a line item for
+"This certificate was approved within the last 5 years".
+If there is a red X on this line with no other red X's, then you will have to request a new certificate instead of
+renewing it.
+Your two options for requesting a new certificate are:
+
+- [Request a certificate issued by the CILogon Basic CA](#getting-a-certificate-from-cilogon) (preferred)
+- If you need to keep your DN, or for whatever other reason you cannot use a CILogon Basic certificate, you will need to
+  revoke and renew your user certificate:
+
+    !!! danger
+        With this method, there is a risk that you may end up without a valid certificate.
+        After revocation, if your sponsor is unresponsive past the May 31, 2018 OSG CA service retirement, your previous
+        certificate will no longer be valid and you won't be able to request a new certificate.
+
+    1. Log in (your name should appear on the top right), and select your user certificate from the list in the
+       [OIM Web Interface](https://oim.opensciencegrid.org/oim/certificateuser).
+    1. In a separate tab, open the [+Request New](https://oim.opensciencegrid.org/oim/certificaterequestuser) page.
+       We recommend opening the `Request New` page in a separate tab before revoking, in order to ensure that your CN gets
+       correctly populated in the `Request New` page.
+       Also, to ensure a prompt response, be sure that you select a `Virtual Organization` that you are associated with and
+       a `Sponsor` who will be able to quickly verify your identity.
+    1. Back in the first tab, with your user certificate selected, click the `Revoke` tab, and enter an explanation that you are
+       revoking in order to re-request your certificate.  Then click the red `Revoke` button.
+    1. In the separate tab, fill out the rest of the User Certificate Request form and click `Submit`.
+
+
+Revoking your user certificate
+------------------------------
 
 If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate.
 In addition, if your name or email address changes, you must revoke your certificate and get a new one with the correct
 information.
 
-If you have an OSG issued certifiacte, you can follow the steps [here](/security/certificate-management#osg-user-cert-revoke) to revoke your certificate. 
-If you have a CILogon issued certificate, contact [ca@cilogon.org](mailto:ca@cilogon.org) in order revoke your certificate. 
+If you have an OSG issued certifiacte, you can follow the steps [here](/security/certificate-management#osg-user-cert-revoke) to revoke your certificate.
+If you have a CILogon issued certificate, contact [ca@cilogon.org](mailto:ca@cilogon.org) in order revoke your certificate.
 
 
 Getting a Certificate from a Service Provider with cigetcert
