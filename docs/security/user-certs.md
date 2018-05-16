@@ -123,6 +123,52 @@ information.
 If you have an OSG issued certifiacte, you can follow the steps [here](/security/certificate-management#osg-user-cert-revoke) to revoke your certificate. 
 If you have a CILogon issued certificate, contact [ca@cilogon.org](mailto:ca@cilogon.org) in order revoke your certificate. 
 
+Renewing your OSG user certificate
+----------------------------------
+
+Your OSG user certificate can be renewed with either using the
+[OIM Web Interface](https://oim.opensciencegrid.org/oim/certificateuser)
+or the command line interface using
+[OSG PKI Tools](/security/certificate-management).
+
+### Issues renewing your OSG user certificate
+
+One requirement for renewing your OSG user certificate is that your identity must be vetted within the last 5 years.
+You can see whether this requirement is met for your user certificate when *logged in* to the [OIM Web Interface].
+
+!!! note
+    When using the OIM Web Interface, make sure you are logged in and your name appears in the upper right corner.
+    If it shows "Login" instead of your name, click it to log in.
+
+When you click on your user certificate, under the Renew tab, you will see a line item for
+"This certificate was approved within the last 5 years".
+If there is a red X on this line, then you will have to request a new certificate instead of renewing.
+Your two options for requesting a new certificate are:
+
+1. [Request a certificate from CILogon](#getting-a-certificate-from-cilogon)
+1. If you need to keep your DN, or for whatever other reason you cannon use CILogon, you will need to:
+    1. Revoke your user certificate
+    2. Request a new user certificate with the same DN
+
+#### Revoking and re-requesting an OSG user certificate using the OIM Web Interface
+
+To revoke and re-request your OSG user certificate on the
+[OIM Web Interface](https://oim.opensciencegrid.org/oim/certificateuser)
+1. Login (your name should appear on the top right), and select your user certificate from the list.
+1. In a separate tab, open the [+Request New](https://oim.opensciencegrid.org/oim/certificaterequestuser) page.
+   We recommend opening the Request New page in a separate tab before revoking, in order to ensure that your CN gets
+   correctly populated in the Request New page.
+   Also, to ensure a prompt response, be sure that you select a Virtual Organization that has a Sponsor drop-down list,
+   and select the Sponsor who will be able to verify your identity.
+1. Back in the first tab, with your user certificate selected, click the Revoke tab, and enter an explanation that you are
+   revoking in order to re-request your certificate.  Then click the red Revoke button.
+1. In the separate tab, fill out the rest of the User Certificate Request form and click Submit.
+
+#### Revoking and re-requesting an OSG user certificate using the command line interface
+
+To revoke and re-request your OSG user certificate on the command line, follow the steps in the
+[OSG PKI Tools documentation](/security/certificate-management#osg-user-cert-revoke).
+
 
 Getting a Certificate from a Service Provider with cigetcert
 ------------------------------------------------------------
