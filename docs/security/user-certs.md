@@ -6,8 +6,8 @@ User Certificates
     For instructions on getting **service** and **host** certificates, **you're in the wrong place**. See [Get Host and Service Certificates](host-certs.md).
 
 
-Getting an User Certificate 
----------------------------
+Getting a User Certificate
+--------------------------
 
 This section describes how to get and set up a personal certificate to use on OSG.
 Currently you can get a certificate from either the OSG CA or from CILogon.
