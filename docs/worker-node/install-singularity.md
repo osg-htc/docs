@@ -182,9 +182,11 @@ singularity to be run as an unprivileged user via CVMFS:
 
     OSG VOs do not need network namespaces with singularity, and
     disabling them reduces the risk profile of enabling user
-    namespaces.  There are not currently any known vulnerabilities but
-    in the past Red Hat took a long time to make a patch available
-    even though there was a public exploit.
+    namespaces.  Since unprivileged user namespaces is a technology
+    preview, Red Hat does not consider it a high priority and in the
+    past took a long time to make a patch available even though there
+    was a public exploit with the combination of network namespaces
+    and unprivileged user namespaces.
 
     Network namespaces are, however, utilized by other container
     systems, such as Docker.  Disabling network namespaces may break
