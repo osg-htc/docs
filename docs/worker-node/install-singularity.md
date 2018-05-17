@@ -55,7 +55,7 @@ There are two separate sets of instructions on this page:
 - [Installing privileged singularity](#privileged-singularity) via RPM
 - [Enabling unprivileged singularity](#unprivileged-singularity) via OASIS
 
-As of February 2018, no VO in the OSG is ready to use unprivileged, non-setuid Singularity out of OASIS in production.
+As of May 2018, no VO in the OSG is ready to use unprivileged, non-setuid Singularity out of OASIS in production.
 Only testing sites will need to follow these instructions; contact the VOs you support for more information.
 
 Most sites will want to follow the privileged RPM install instructions until there is wider VO support.
@@ -110,8 +110,8 @@ CVMFS.  See [this article](https://lwn.net/Articles/652468/) for further
 discussion.
 
 The loopback-based images are the default image type produced by Singularity
-users and are common at sites with direct user logins.  However (as of December
-2017) we are only aware of directory-based images being used by OSG VOs.  Hence,
+users and are common at sites with direct user logins.  However (as of May
+2018) we are only aware of directory-based images being used by OSG VOs.  Hence,
 it is a reasonable measure to disable the loopback-based images by setting
 the following option in `/etc/singularity/singularity.conf`:
 
