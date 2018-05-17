@@ -2619,7 +2619,7 @@ singularity to be run as an unprivileged user via CVMFS:</p>
 
 </li>
 <li>
-<p>Disable network namespaces:</p>
+<p>(Optional) Disable network namespaces:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;user.max_net_namespaces = 0&quot;</span> <span class="se">\</span>
     &gt; /etc/sysctl.d/90-max_net_namespaces.conf
 </pre></div>
@@ -2627,20 +2627,15 @@ singularity to be run as an unprivileged user via CVMFS:</p>
 
 <p>OSG VOs do not need network namespaces with singularity, and
 disabling them reduces the risk profile of enabling user
-namespaces.  Network namespaces are, however, utilized by other
-container systems, such as Docker.  Disabling network namespaces
-may break other container solutions, or limit their capabilities
-(such as requiring the <code>--net=host</code> option in Docker).</p>
-<div class="admonition danger">
-<p class="admonition-title">Current Public Exploit</p>
-<p>As of December 19, 2017 there is no patch from Redhat for a
-<a href="https://access.redhat.com/security/cve/CVE-2017-16939">public exploit</a>
-of a vulnerability due to the combination of network namespaces
-and user namespaces.  This vulnerability can crash a kernel and
-potentially lead to privilege escalation.  Do not leave network
-namespaces enabled at the same time as unprivileged user
-namespaces until this is resolved.</p>
-</div>
+namespaces.  Since unprivileged user namespaces is a technology
+preview, Red Hat does not consider it a high priority and in the
+past took a long time to make a patch available even though there
+was a public exploit with the combination of network namespaces
+and unprivileged user namespaces.</p>
+<p>Network namespaces are, however, utilized by other container
+systems, such as Docker.  Disabling network namespaces may break
+other container solutions, or limit their capabilities (such as
+requiring the <code>--net=host</code> option in Docker).</p>
 </li>
 <li>
 <p>Reboot</p>
