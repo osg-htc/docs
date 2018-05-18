@@ -2466,20 +2466,21 @@ executables.  Securing setuid-root programs is difficult, but singularity
 keeps that privileged code to a
 <a href="http://singularity.lbl.gov/docs-security">minimum</a> to keep the
 vulnerability low.</p>
-<p>Beginning with the kernel released with RHEL 7.4, there is a new
+<p>Beginning with the kernel released with RHEL 7.4, there is a
 <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/7.4_Release_Notes/index.html#technology_previews_kernel">technology preview feature</a>
 to allow unprivileged bind mounts in user namespaces, which allows
 singularity to run as an unprivileged user.  The OSG has installed
 singularity in <a href="../../worker-node/install-cvmfs">OASIS</a>, so you can avoid installing
-singularity at all.  The minimum version of the kernel (3.10.0-693) is
-available as at least a security update for all RHEL7-based releases.</p>
+singularity at all. </p>
 <div class="admonition danger">
 <p class="admonition-title">Kernel vs. Userspace Security</p>
 <p>Enabling unprivileged user namespaces increases the risk to the
 kernel. However, the kernel is more widely reviewed than Singularity and
 the additional capability given to users is more limited.
 OSG Security considers the non-setuid, kernel-based method to have a
-lower security risk.</p>
+lower security risk.
+However, Red Hat does not consider technology preview features to be ready for production, so security issues are
+not guaranteed to be addressed promptly.</p>
 </div>
 <p>The document is intended for system administrators who wish to either
 install singularity or enable it to be run as an unprivileged user.</p>
@@ -2497,7 +2498,7 @@ install singularity or enable it to be run as an unprivileged user.</p>
 <li><a href="#privileged-singularity">Installing privileged singularity</a> via RPM</li>
 <li><a href="#unprivileged-singularity">Enabling unprivileged singularity</a> via OASIS</li>
 </ul>
-<p>As of February 2018, no VO in the OSG is ready to use unprivileged, non-setuid Singularity in production.
+<p>As of May 2018, no VO in the OSG is ready to use unprivileged, non-setuid Singularity out of OASIS in production.
 Only testing sites will need to follow these instructions; contact the VOs you support for more information.</p>
 <p>Most sites will want to follow the privileged RPM install instructions until there is wider VO support.</p>
 <h2 id="privileged-singularity">Privileged Singularity<a class="headerlink" href="#privileged-singularity" title="Permanent link">&para;</a></h2>
@@ -2555,8 +2556,8 @@ unknown kernel exploits compared to directory-based images distributed via
 CVMFS.  See <a href="https://lwn.net/Articles/652468/">this article</a> for further
 discussion.</p>
 <p>The loopback-based images are the default image type produced by Singularity
-users and are common at sites with direct user logins.  However (as of December
-2017) we are only aware of directory-based images being used by OSG VOs.  Hence,
+users and are common at sites with direct user logins.  However (as of May
+2018) we are only aware of directory-based images being used by OSG VOs.  Hence,
 it is a reasonable measure to disable the loopback-based images by setting
 the following option in <code>/etc/singularity/singularity.conf</code>:</p>
 <div class="codehilite"><pre><span></span>    max loop devices = 0
@@ -2565,7 +2566,7 @@ the following option in <code>/etc/singularity/singularity.conf</code>:</p>
 
 <p>While reasonable for some sites, this is not required as there are currently
 no public kernel exploits for this issue; any exploits are patched by
-RedHat when they are discovered.</p>
+Red Hat when they are discovered.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>If you modify <code>/etc/singularity/singularity.conf</code>, carefully test any
@@ -2594,9 +2595,15 @@ command to verify it:</p>
 <h2 id="unprivileged-singularity">Unprivileged Singularity<a class="headerlink" href="#unprivileged-singularity" title="Permanent link">&para;</a></h2>
 <p>The instructions in this section are for enabling singularity with non-setuid executables, which is available in OASIS,
 the OSG Software <a href="../../worker-node/install-cvmfs">CVMFS distribution</a>.</p>
+<div class="admonition danger">
+<p class="admonition-title">Technology Preview</p>
+<p>Unprivileged Singularity relies on the Red Hat technology preview of unprivileged user namespaces.
+Red Hat does not consider technology preview features to be ready for production, so security issues are not
+guaranteed to be addressed promptly.</p>
+</div>
 <h3 id="enabling-singularity-via-oasis">Enabling Singularity via OASIS<a class="headerlink" href="#enabling-singularity-via-oasis" title="Permanent link">&para;</a></h3>
 <p>If the operating system is an EL 7 variant and has been updated to the EL
-7.4 kernel (3.10.0-693 or greater), you can skip
+7.4 kernel or later, you can skip
 installation altogether and instead do these steps to enable
 singularity to be run as an unprivileged user via CVMFS:</p>
 <ol>
@@ -2627,11 +2634,7 @@ singularity to be run as an unprivileged user via CVMFS:</p>
 
 <p>OSG VOs do not need network namespaces with singularity, and
 disabling them reduces the risk profile of enabling user
-namespaces.  Since unprivileged user namespaces is a technology
-preview, Red Hat does not consider it a high priority and in the
-past took a long time to make a patch available even though there
-was a public exploit with the combination of network namespaces
-and unprivileged user namespaces.</p>
+namespaces.</p>
 <p>Network namespaces are, however, utilized by other container
 systems, such as Docker.  Disabling network namespaces may break
 other container solutions, or limit their capabilities (such as
