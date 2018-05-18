@@ -119,7 +119,7 @@ the following option in `/etc/singularity/singularity.conf`:
 
 While reasonable for some sites, this is not required as there are currently
 no public kernel exploits for this issue; any exploits are patched by
-RedHat when they are discovered.
+Red Hat when they are discovered.
 
 !!! warning
     If you modify `/etc/singularity/singularity.conf`, carefully test any
