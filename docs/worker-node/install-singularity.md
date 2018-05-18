@@ -30,9 +30,9 @@ singularity at all.
     kernel. However, the kernel is more widely reviewed than Singularity and
     the additional capability given to users is more limited.
     OSG Security considers the non-setuid, kernel-based method to have a
-    lower security risk.  On the other hand, Red Hat does not consider
-    technology preview features to be ready for production, so they
-    tend to take longer to distribute security patches.
+    lower security risk.
+    However, Red Hat does not consider technology preview features to be ready for production, so security issues are
+    not guaranteed to be addressed promptly.
 
 The document is intended for system administrators who wish to either
 install singularity or enable it to be run as an unprivileged user.
@@ -154,6 +154,11 @@ Unprivileged Singularity
 The instructions in this section are for enabling singularity with non-setuid executables, which is available in OASIS,
 the OSG Software [CVMFS distribution](/worker-node/install-cvmfs).
 
+!!! danger "Technology Preview"
+    Unprivileged Singularity relies on the Red Hat technology preview of unprivileged user namespaces.
+    Red Hat does not consider technology preview features to be ready for production, so security issues are not
+    guaranteed to be addressed promptly.
+
 ### Enabling Singularity via OASIS ###
 
 If the operating system is an EL 7 variant and has been updated to the EL
@@ -183,11 +188,7 @@ singularity to be run as an unprivileged user via CVMFS:
 
     OSG VOs do not need network namespaces with singularity, and
     disabling them reduces the risk profile of enabling user
-    namespaces.  Since unprivileged user namespaces is a technology
-    preview, Red Hat does not consider it a high priority and in the
-    past took a long time to make a patch available even though there
-    was a public exploit with the combination of network namespaces
-    and unprivileged user namespaces.
+    namespaces.
 
     Network namespaces are, however, utilized by other container
     systems, such as Docker.  Disabling network namespaces may break
