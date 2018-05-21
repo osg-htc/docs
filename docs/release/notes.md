@@ -8,6 +8,7 @@ Release Notes
 
 | Version                          | Date       | Summary                                                                          |
 |:---------------------------------|:-----------|:---------------------------------------------------------------------------------|
+| [3.4.12-3](3.4/release-3-4-12-3) | 2018-05-21 | IGTF 1.91                                                                        |
 | [3.4.12-2](3.4/release-3-4-12-2) | 2018-05-10 | Added Let's Encrypt CA, VO Package v79                                           |
 | [3.4.12](3.4/release-3-4-12)     | 2018-05-10 | HTCondor-CE 3.1.2, GlideinWMS 3.2.22.2, XRootD 4.8.3, Gratia probes 1.20, RSV 3.18; Upcoming: GlideinWM 3.3.3 |
 | [3.4.11](3.4/release-3-4-11)     | 2018-05-01 | High Priority Release: Singularity 2.5.0                                         |
@@ -37,6 +38,7 @@ Release Notes
 
 | Version                          | Date       | Summary                                                                          |
 |:---------------------------------|:-----------|:---------------------------------------------------------------------------------|
+| [3.3.34-3](3.3/release-3-3-34-3) | 2018-05-21 | IGTF 1.91                                                                        |
 | [3.3.34-2](3.3/release-3-3-34-2) | 2018-05-10 | Added Let's Encrypt CA, VO Package v79                                           |
 | [3.3.34](3.3/release-3-3-34)     | 2018-03-08 | xrootd-lcmaps 1.2.1-3. frontier-squid 2.7.STABLE9-27.1.1, xrootd-hdfs 2.0.2      |
 | [3.3.33-2](3.3/release-3-3-33-2) | 2018-04-05 | IGTF 1.90, VO Package v78                                                        |
