@@ -37,7 +37,7 @@ Community-specific Resources
 
 Some OSG VOs have dedicated forums or mechanisms for community-specific support.  If your VO provides user support, that should be a user's first line of support because the VO is most familiar with your applications and requirements.
 
-*  The list of support contacts for OSG VOs can be found in the [list of support centers](https://github.com/opensciencegrid/topology/blob/master/topology/support-centers.yaml).
+* The list of support centers for OSG VOs can be found in the [here](https://github.com/opensciencegrid/topology/blob/master/topology/support-centers.yaml).
 * Resources for **CMS** sites:
     * <http://www.uscms.org/uscms_at_work/physics/computing/grid/index.shtml>
     * CMS Hyper News: <https://hypernews.cern.ch/HyperNews/CMS/get/osg-tier3.html>
