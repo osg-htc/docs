@@ -461,7 +461,11 @@ You must report accounting information if you are running more than a few test j
         :::console
         root@host # yum install gratia-probe-glideinwms
 
-2.  Edit the ProbeConfig located in `/etc/gratia/condor/ProbeConfig`. First, edit the `SiteName` and `ProbeName` to be a unique identifier for your GlideinWMS Submit host. There can be multiple probes (with different names) per site. If you haven't already, you should register your GlideinWMS submit host in [OIM](https://oim.opensciencegrid.org/oim/home). Then you can use the name you used to register the resource.
+2.  Edit the ProbeConfig located in `/etc/gratia/condor/ProbeConfig`.
+    First, edit the `SiteName` and `ProbeName` to be a unique identifier for your GlideinWMS Submit host.
+    There can be multiple probes (with different names) per site.
+    If you haven't already, you should register your GlideinWMS submit host in [OIM](https://github.com/opensciencegrid/topology/#topology).
+    Then you can use the name you used to register the resource.
 
         ProbeName="condor:<hostname>"
         SiteName="HCC-GlideinWMW-Frontend"

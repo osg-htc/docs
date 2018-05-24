@@ -123,7 +123,8 @@ Correct the error and restart gratia.
 Have you configured the resource names correctly? 
 -------------------------------------------------
 
-Do the names of your resources match the names in [OIM](https://oim.opensciencegrid.org/oim/topology)?  Gratia retrieves the resource name from the `Site Information` section of the `/etc/osg/config.d/40-siteinfo.ini`
+Do the names of your resources match the names in [OIM](https://github.com/opensciencegrid/topology/tree/master/topology)?
+Gratia retrieves the resource name from the `Site Information` section of the `/etc/osg/config.d/40-siteinfo.ini`
 
 
 ``` file

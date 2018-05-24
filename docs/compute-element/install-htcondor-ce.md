@@ -386,10 +386,10 @@ For information on how to troubleshoot your HTCondor-CE, please refer to [the HT
 Registering the CE
 ------------------
 
-To be part of the OSG Production Grid, your CE must be registered in the [OSG Information Management System](https://oim.opensciencegrid.org) (OIM). To register your resource:
+To be part of the OSG Production Grid, your CE must be registered in the [OSG Information Management System](https://github.com/opensciencegrid/topology#topology) (OIM). To register your resource:
 
 1.  [Obtain, install, and verify your user certificate](../security/user-certs) (which you may have done already)
-2.  [Register your site and CE in OIM](https://oim.opensciencegrid.org/oim/oimregistration)
+2.  [Register your site and CE in OIM](https://github.com/opensciencegrid/topology#topology)
 
 Getting Help
 ------------
