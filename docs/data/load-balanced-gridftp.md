@@ -12,7 +12,6 @@ Before Starting
 
 Before starting the installation process, consider the following requirements:
 
--   You must have [grid administrator privileges](http://oim.opensciencegrid.org/oim/gridadmin)
 -   There must be a shared file system for file propagation across GridFTP servers
 -   You must have reserved a virtual IP address and associated virtual hostname
 
