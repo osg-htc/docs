@@ -60,20 +60,62 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
 
 1. Generate a Certificate Signing Request (CSR) and private key:
 
-        :::console
-        root@server # openssl req -nodes -new -newkey rsa:2048 -sha256 -out req.pem -keyout hostkey.pem
+1. Create a custom openssl config for this, using your institution's information for the different fields in the
+   `[ dn ]` section, and the desired hostname for the `CN` field.
 
-    When prompted, use your institution's information for the `Country`, `State or Province`, `Locality` (city),
-    and `Organization Name` fields then the hostname for the `Common Name` field.
+        :::console
+        # mycsr.conf
+        [ req ]
+        default_bits = 2048
+        prompt = no
+        encrypt_key = no
+        default_md = sha256
+        distinguished_name = dn
+
+        [ dn ]
+        DC = org
+        DC = incommon
+        C = US
+        postalCode = 53706
+        ST = WI
+        L = Madison
+        street = 1210 West Dayton Street
+        O = University of Wisconsin-Madison
+        OU = OCIS
+        CN = voms.opensciencegrid.org
+
+
+1. If you need to generate a CSR with Subject Alternative Names (SAN), add these lines into your config:
+
+        :::console
+        # mycsr.conf
+        [ req ]
+        req_extensions = req_ext
+
+        [ req_ext ]
+        subjectAltName = DNS: voms1.opensciencegrid.org, DNS: abc.opensciencegrid.org, DNS: def.opensciencegrid.org
+
+
+1. Then, generate the CSR and private key:
+
+        :::console
+        root@server # openssl req -new -config mycsr.conf -keyout mycsr.key -out mycsr.csr
+
+1. And verify the new CSR file:
+
+        :::console
+        root@server # openssl req -text -noout -verify -in mycsr.csr
+
 
     !!! note
         Your institution may require more information in the request.
-        Try using the CSR generated above in your initial request.
+        Try using the CSR generated above in your initial request, and if necessary add additional fields to the
+        `[ dn ]` section of your config file.
 
 1. Set the permissions on the private key:
 
         :::console
-        root@server # chmod 0600 hostkey.pem
+        root@server # chmod 0600 mycsr.key
 
 1. Find your institution-specific InCommon contact
    (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/))
