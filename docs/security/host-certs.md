@@ -60,11 +60,10 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
 
 1. Generate a Certificate Signing Request (CSR) and private key:
 
-1. Create a custom openssl config for this, using your institution's information for the different fields in the
-   `[ dn ]` section, and the desired hostname for the `CN` field.
+1. Create a custom openssl config file for this, `incommon.conf`, using your institution's information for the
+   different fields in the `[ dn ]` section, and the desired hostname for the `CN` field.
 
         :::console
-        # mycsr.conf
         [ req ]
         default_bits = 2048
         prompt = no
@@ -82,10 +81,9 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
         CN = voms.opensciencegrid.org
 
 
-1. If you need to generate a CSR with Subject Alternative Names (SAN), add these lines into your config:
+1. If you need to generate a CSR with Subject Alternative Names (SAN), add these lines to your `incommon.conf`:
 
         :::console
-        # mycsr.conf
         [ req ]
         req_extensions = req_ext
 
@@ -96,12 +94,12 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
 1. Then, generate the CSR and private key:
 
         :::console
-        root@server # openssl req -new -config mycsr.conf -keyout mycsr.key -out mycsr.csr
+        root@server # openssl req -new -config incommon.conf -keyout incommon.key -out incommon.csr
 
 1. And verify the new CSR file:
 
         :::console
-        root@server # openssl req -text -noout -verify -in mycsr.csr
+        root@server # openssl req -text -noout -verify -in incommon.csr
 
 
     !!! note
