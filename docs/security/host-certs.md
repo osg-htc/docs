@@ -76,12 +76,9 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
         DC = org
         DC = incommon
         C = US
-        postalCode = 53706
-        ST = WI
+        ST = Wisconsin
         L = Madison
-        street = 1210 West Dayton Street
         O = University of Wisconsin-Madison
-        OU = OCIS
         CN = voms.opensciencegrid.org
 
 
