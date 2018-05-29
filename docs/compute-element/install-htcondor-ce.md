@@ -386,10 +386,21 @@ For information on how to troubleshoot your HTCondor-CE, please refer to [the HT
 Registering the CE
 ------------------
 
-To be part of the OSG Production Grid, your CE must be registered in the [OSG Information Management System](https://github.com/opensciencegrid/topology#topology) (OIM). To register your resource:
+To be part of the OSG Production Grid, your CE must be registered in the [OSG Information Management System](https://github.com/opensciencegrid/topology#topology) (OIM).
+To register your resource:
 
-1.  [Obtain, install, and verify your user certificate](../security/user-certs) (which you may have done already)
-2.  [Register your site and CE in OIM](https://github.com/opensciencegrid/topology#topology)
+1.  Identify the facility, site, and resource group where your HTCondor-CE is hosted.
+    For example, the Center for High Throughput Computing at the University of Wisconsin-Madison uses the following
+    information:
+
+        Facility: University of Wisconsin
+        Site: CHTC
+        Resource Group: CHTC
+
+1. Using the above information, [create or update](https://github.com/opensciencegrid/topology#modifying-the-data) the
+   appropriate YAML file, using [this template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
+   as a guide.
+
 
 Getting Help
 ------------
