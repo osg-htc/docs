@@ -397,7 +397,7 @@ To register your resource:
         Site: CHTC
         Resource Group: CHTC
 
-1. Using the above information, [create or update](https://github.com/opensciencegrid/topology#modifying-the-data) the
+1. Using the above information, [create or update](https://github.com/opensciencegrid/topology#how-to-register) the
    appropriate YAML file, using [this template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
 
