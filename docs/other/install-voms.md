@@ -483,7 +483,10 @@ For example, for the VO named `test1` hosted on `fermicloud002`, the LSC file na
 
 The VOMS server manager must distribute the line for `/etc/vomses` and the LSC file to all hosts that will contact the VOMS server. OSG distributes with all its client and server installations a default list of VOMS servers (`/etc/vomses`) and a default set of LSC files. These are part of the `vo-client` RPM.
 
-To be included, use the VO Registration function at [OIM VO Registration](https://oim.opensciencegrid.org/oim/vo). Even if you are already registered as a VO you need to notify the Grid Operations Center if the information in the vomses file or the LSC file has changed.
+To be included, use the VO Registration function at
+[OIM VO Registration](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
+Even if you are already registered as a VO you need to notify the Grid Operations Center if the information in the
+vomses file or the LSC file has changed.
 
 Test
 =========

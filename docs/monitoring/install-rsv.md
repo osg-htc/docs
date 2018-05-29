@@ -11,11 +11,14 @@ Use this page to learn more about RSV in general, and how to install, configure,
 Introduction to RSV
 -------------------
 
-The Resource and Service Validation (RSV) software provides OSG site administrators a scalable and easy-to-maintain resource and service monitoring infrastructure. The components of RSV are:
-
-- **RSV Client.** The client tools allow a site administrator to run tests against their site by providing a set of tests (which can run on the same or other hosts within a site), HTCondor-Cron for scheduling, and tools for collecting and storing the results (using Gratia). The client package is not installed by default and may be installed on a CE or other host. Generally, you configure the RSV client to run tests at scheduled time intervals and then it makes results available on a local website. Also, the client can upload test results to a central collector (see next item).
-- **RSV Collector/Server.** The central OSG RSV Collector accepts and stores results from RSV clients throughout OSG, which can be viewed in [MyOSG](http://my.opensciencegrid.org/), on the “Current RSV Status” page and under the “Resource Group” menu.
-- **MyOSG and OIM Links.** RSV picks up resource information, WLCG interoperability information, etc., from a MyOSG resource group summary listing, which is in turn based on the [OSG Information Management (OIM) (topology) system](https://oim.opensciencegrid.org) (Requires registration). Resource [maintenance scheduled on OIM](http://oim.opensciencegrid.org/oim/oimmaint) are forwarded to WLCG SAM, if applicable.
+The Resource and Service Validation (RSV) software provides OSG site administrators a scalable and easy-to-maintain
+resource and service monitoring infrastructure.
+It consists of client tools that allow a site administrator to run tests against their site by providing a set of tests
+(which can run on the same or other hosts within a site), HTCondor-Cron for scheduling, and tools for collecting and
+storing the results (using Gratia).
+The client package is not installed by default and may be installed on a CE or other host.
+Generally, you configure the RSV client to run tests at scheduled time intervals and then it makes results available on
+a local website. Also, the client can upload test results to a central collector (see next item).
 
 
 Before Starting
