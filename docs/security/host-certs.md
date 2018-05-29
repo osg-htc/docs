@@ -74,22 +74,29 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
         [ dn ]
         DC = org
         DC = incommon
-        C = US
-        ST = Wisconsin
-        L = Madison
-        O = University of Wisconsin-Madison
-        CN = voms.opensciencegrid.org
+        C = %RED%US%ENDCOLOR%
+        ST = %RED%Wisconsin%ENDCOLOR%
+        L = %RED%Madison%ENDCOLOR%
+        O = %RED%University of Wisconsin-Madison%ENDCOLOR%
+        CN = %RED%voms.opensciencegrid.org%ENDCOLOR%
 
 
-1. If you need to generate a CSR with Subject Alternative Names (SAN), add these lines to your `incommon.conf`:
+1. If you need to generate a CSR with Subject Alternative Names (SAN), add these lines to your `incommon.conf`,
+   with as many alternate DNS entries as needed in the `[ alt_names ]` section:
 
         :::console
         [ req ]
         req_extensions = req_ext
 
         [ req_ext ]
-        subjectAltName = DNS: voms1.opensciencegrid.org, DNS: abc.opensciencegrid.org, DNS: def.opensciencegrid.org
+        subjectAltName = @alt_names
 
+        [ alt_names ]
+        DNS.1 = %RED%server1.example.com%ENDCOLOR%
+        DNS.2 = %RED%mail.example.com%ENDCOLOR%
+        DNS.3 = %RED%www.example.com%ENDCOLOR%
+        DNS.4 = %RED%<SAN 4>%ENDCOLOR%
+        DNS.5 = %RED%<SAN 5>%ENDCOLOR%
 
 1. Then, generate the CSR and private key:
 
