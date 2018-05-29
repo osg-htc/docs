@@ -113,7 +113,7 @@ Use the virtual IP address of your load balancer(s) as the secondary IPs of each
 1.  Add the virtual IP using the `ip` tool:
 
         :::console
-        root@host # ip addr add <VIRTUAL-IP-ADDRESS/<SUBNET-MASK dev <NETWORK-INTERFACE
+        root@host # ip addr add <VIRTUAL-IP-ADDRESS>/<SUBNET-MASK> dev <NETWORK-INTERFACE>
 
 1.  To persist the virtual IP changes across reboots, edit `/etc/rc.d/rc.local`, and add the same command as used above.
 1.  Make sure that `/etc/rc.d/rc.local` is executable:
