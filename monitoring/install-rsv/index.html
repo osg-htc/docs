@@ -2601,12 +2601,14 @@
 <p>The Resource and Service Validation (RSV) software helps a site administrator verify that certain site resources and services are working as expected. OSG recommends that sites install and run RSV, but it is optional; further, each site selects which specific tests (called <em>probes</em>) to run.</p>
 <p>Use this page to learn more about RSV in general, and how to install, configure, run, test, and troubleshoot RSV from the OSG software repositories. For documentation on specific probes or on how to write your own probes, please check the <a href="#reference">Reference section</a>.</p>
 <h2 id="introduction-to-rsv">Introduction to RSV<a class="headerlink" href="#introduction-to-rsv" title="Permanent link">&para;</a></h2>
-<p>The Resource and Service Validation (RSV) software provides OSG site administrators a scalable and easy-to-maintain resource and service monitoring infrastructure. The components of RSV are:</p>
-<ul>
-<li><strong>RSV Client.</strong> The client tools allow a site administrator to run tests against their site by providing a set of tests (which can run on the same or other hosts within a site), HTCondor-Cron for scheduling, and tools for collecting and storing the results (using Gratia). The client package is not installed by default and may be installed on a CE or other host. Generally, you configure the RSV client to run tests at scheduled time intervals and then it makes results available on a local website. Also, the client can upload test results to a central collector (see next item).</li>
-<li><strong>RSV Collector/Server.</strong> The central OSG RSV Collector accepts and stores results from RSV clients throughout OSG, which can be viewed in <a href="http://my.opensciencegrid.org/">MyOSG</a>, on the “Current RSV Status” page and under the “Resource Group” menu.</li>
-<li><strong>MyOSG and OIM Links.</strong> RSV picks up resource information, WLCG interoperability information, etc., from a MyOSG resource group summary listing, which is in turn based on the <a href="https://oim.opensciencegrid.org">OSG Information Management (OIM) (topology) system</a> (Requires registration). Resource <a href="http://oim.opensciencegrid.org/oim/oimmaint">maintenance scheduled on OIM</a> are forwarded to WLCG SAM, if applicable.</li>
-</ul>
+<p>The Resource and Service Validation (RSV) software provides OSG site administrators a scalable and easy-to-maintain
+resource and service monitoring infrastructure.
+It consists of client tools that allow a site administrator to run tests against their site by providing a set of tests
+(which can run on the same or other hosts within a site), HTCondor-Cron for scheduling, and tools for collecting and
+storing the results (using Gratia).
+The client package is not installed by default and may be installed on a CE or other host.
+Generally, you configure the RSV client to run tests at scheduled time intervals and then it makes results available on
+a local website. Also, the client can upload test results to a central collector (see next item).</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
 <ul>
