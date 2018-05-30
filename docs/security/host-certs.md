@@ -117,7 +117,7 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
 1. Set the permissions on the private key:
 
         :::console
-        root@server # chmod 0600 mycsr.key
+        root@server # chmod 0600 incommon.key
 
 1. Find your institution-specific InCommon contact
    (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/))
