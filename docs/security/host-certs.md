@@ -60,58 +60,58 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
 
 1. Generate a Certificate Signing Request (CSR) and private key:
 
-1. Create a custom openssl config file for this, `incommon.conf`, using your institution's information for the
-   different fields in the `[ dn ]` section, and the desired hostname for the `CN` field.
+    1. Create a custom openssl config file for this, `incommon.conf`, using your institution's information for the
+       different fields in the `[ dn ]` section, and the desired hostname for the `CN` field.
 
-        :::console
-        [ req ]
-        default_bits = 2048
-        prompt = no
-        encrypt_key = no
-        default_md = sha256
-        distinguished_name = dn
+            :::console
+            [ req ]
+            default_bits = 2048
+            prompt = no
+            encrypt_key = no
+            default_md = sha256
+            distinguished_name = dn
 
-        [ dn ]
-        DC = org
-        DC = incommon
-        C = %RED%US%ENDCOLOR%
-        ST = %RED%Wisconsin%ENDCOLOR%
-        L = %RED%Madison%ENDCOLOR%
-        O = %RED%University of Wisconsin-Madison%ENDCOLOR%
-        CN = %RED%voms.opensciencegrid.org%ENDCOLOR%
-
-
-1. If you need to generate a CSR with Subject Alternative Names (SAN), add these lines to your `incommon.conf`,
-   with as many alternate DNS entries as needed in the `[ alt_names ]` section:
-
-        :::console
-        [ req ]
-        req_extensions = req_ext
-
-        [ req_ext ]
-        subjectAltName = @alt_names
-
-        [ alt_names ]
-        DNS.1 = %RED%server1.example.com%ENDCOLOR%
-        DNS.2 = %RED%<SAN 2>%ENDCOLOR%
-        [...]
-        %RED%DNS.<N> = <SAN N>%ENDCOLOR%
-
-1. Then, generate the CSR and private key:
-
-        :::console
-        root@server # openssl req -new -config incommon.conf -keyout incommon.key -out incommon.csr
-
-1. And verify the new CSR file:
-
-        :::console
-        root@server # openssl req -text -noout -verify -in incommon.csr
+            [ dn ]
+            DC = org
+            DC = incommon
+            C = %RED%US%ENDCOLOR%
+            ST = %RED%Wisconsin%ENDCOLOR%
+            L = %RED%Madison%ENDCOLOR%
+            O = %RED%University of Wisconsin-Madison%ENDCOLOR%
+            CN = %RED%voms.opensciencegrid.org%ENDCOLOR%
 
 
-    !!! note
-        Your institution may require more information in the request.
-        Try using the CSR generated above in your initial request, and if necessary add additional fields to the
-        `[ dn ]` section of your config file.
+    1. If you need to generate a CSR with Subject Alternative Names (SAN), add these lines to your `incommon.conf`,
+       with as many alternate DNS entries as needed in the `[ alt_names ]` section:
+
+            :::console
+            [ req ]
+            req_extensions = req_ext
+
+            [ req_ext ]
+            subjectAltName = @alt_names
+
+            [ alt_names ]
+            DNS.1 = %RED%server1.example.com%ENDCOLOR%
+            DNS.2 = %RED%<SAN 2>%ENDCOLOR%
+            [...]
+            %RED%DNS.<N> = <SAN N>%ENDCOLOR%
+
+    1. Then, generate the CSR and private key:
+
+            :::console
+            root@server # openssl req -new -config incommon.conf -keyout incommon.key -out incommon.csr
+
+    1. And verify the new CSR file:
+
+            :::console
+            root@server # openssl req -text -noout -verify -in incommon.csr
+
+
+        !!! note
+            Your institution may require more information in the request.
+            Try using the CSR generated above in your initial request, and if necessary add additional fields to the
+            `[ dn ]` section of your config file.
 
 1. Set the permissions on the private key:
 
