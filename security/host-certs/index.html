@@ -2666,21 +2666,72 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
 <ol>
 <li>
 <p>Generate a Certificate Signing Request (CSR) and private key:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@server #</span> openssl req -nodes -new -newkey rsa:2048 -sha256 -out req.pem -keyout hostkey.pem
+<ol>
+<li>
+<p>Create a custom openssl config file for this, <code>incommon.conf</code>, using your institution's information for the
+   different fields in the <code>[ dn ]</code> section, and the desired hostname for the <code>CN</code> field.</p>
+<div class="codehilite"><pre><span></span><span class="go">[ req ]</span>
+<span class="go">default_bits = 2048</span>
+<span class="go">prompt = no</span>
+<span class="go">encrypt_key = no</span>
+<span class="go">default_md = sha256</span>
+<span class="go">distinguished_name = dn</span>
+
+<span class="go">[ dn ]</span>
+<span class="go">DC = org</span>
+<span class="go">DC = incommon</span>
+<span class="go">C = <span style="color:red">US</span></span>
+<span class="go">ST = <span style="color:red">Wisconsin</span></span>
+<span class="go">L = <span style="color:red">Madison</span></span>
+<span class="go">O = <span style="color:red">University of Wisconsin-Madison</span></span>
+<span class="go">CN = <span style="color:red">voms.opensciencegrid.org</span></span>
 </pre></div>
 
 
-<p>When prompted, use your institution's information for the <code>Country</code>, <code>State or Province</code>, <code>Locality</code> (city),
-and <code>Organization Name</code> fields then the hostname for the <code>Common Name</code> field.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Your institution may require more information in the request.
-Try using the CSR generated above in your initial request.</p>
+Try using the CSR generated above in your initial request, and if necessary add additional fields to the
+<code>[ dn ]</code> section of your config file.</p>
 </div>
 </li>
 <li>
+<p>If you need to generate a CSR with Subject Alternative Names (SAN), add these lines to your <code>incommon.conf</code>,
+   with as many alternate DNS entries as needed in the <code>[ alt_names ]</code> section:</p>
+<div class="codehilite"><pre><span></span><span class="go">[ req ]</span>
+<span class="go">req_extensions = req_ext</span>
+
+<span class="go">[ req_ext ]</span>
+<span class="go">subjectAltName = @alt_names</span>
+
+<span class="go">[ alt_names ]</span>
+<span class="go">DNS.1 = <span style="color:red">server1.example.com</span></span>
+<span class="go">DNS.2 = <span style="color:red">&lt;SAN 2&gt;</span></span>
+<span class="go">[...]</span>
+<span class="go">DNS.<span style="color:red">&lt;N&gt; = &lt;SAN N&gt;</span></span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Then, generate the CSR and private key:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@server #</span> openssl req -new -config incommon.conf -keyout incommon.key -out incommon.csr
+</pre></div>
+
+
+</li>
+<li>
+<p>And verify the new CSR file:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@server #</span> openssl req -text -noout -verify -in incommon.csr
+</pre></div>
+
+
+</li>
+</ol>
+</li>
+<li>
 <p>Set the permissions on the private key:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@server #</span> chmod <span class="m">0600</span> hostkey.pem
+<div class="codehilite"><pre><span></span><span class="gp">root@server #</span> chmod <span class="m">0600</span> incommon.key
 </pre></div>
 
 
