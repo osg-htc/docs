@@ -93,10 +93,9 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
 
         [ alt_names ]
         DNS.1 = %RED%server1.example.com%ENDCOLOR%
-        DNS.2 = %RED%mail.example.com%ENDCOLOR%
-        DNS.3 = %RED%www.example.com%ENDCOLOR%
-        DNS.4 = %RED%<SAN 4>%ENDCOLOR%
-        DNS.5 = %RED%<SAN 5>%ENDCOLOR%
+        DNS.2 = %RED%<SAN 2>%ENDCOLOR%
+        [...]
+        %RED%DNS.<N> = <SAN N>%ENDCOLOR%
 
 1. Then, generate the CSR and private key:
 
