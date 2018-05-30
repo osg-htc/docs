@@ -54,7 +54,7 @@ Finding Target Servers
 
 Finding servers against which to run on-demand tests can be a major impediment to effectively using these tools. The [perfSONAR](http://www.perfsonar.net/about) project tackles this problem by running a registration service for participating tools. The Performance Node ISO automatically uses this Lookup Service to advertise the tools' existence. You can also create custom views by making web-service calls to retrieve the data of interest. 
 
-We also have requested ALL OSG sites register their perfSONAR Toolkit installations in OIM. You can use the MyOSG -> Resource Group -> Resource Group Summary page to see a list of perfSONAR Toolkit hosts that are installed at <http://tinyurl.com/mxfmutg>. Using this list you can select a "closest" relevant instance to use for running on-demand tests. Alternately if you have a perfSONAR toolkit install, the web interface has a "Global Services" link you can visit to see ALL perfSONAR instances that have updated the perfSONAR lookup service.
+We also have requested ALL OSG sites register their perfSONAR Toolkit installations in [OIM](https://my.opensciencegrid.org/rgsummary/xml?gridtype_1=on&service=on&service_sel[]=130&service_sel[]=131&active_value=on&disable_value=off). Using this list you can select a "closest" relevant instance to use for running on-demand tests. Alternately if you have a perfSONAR toolkit install, the web interface has a "Global Services" link you can visit to see ALL perfSONAR instances that have updated the perfSONAR lookup service.
 
 Using the Client Tools
 ----------------------
