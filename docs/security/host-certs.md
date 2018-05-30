@@ -81,6 +81,12 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
             CN = %RED%voms.opensciencegrid.org%ENDCOLOR%
 
 
+        !!! note
+            Your institution may require more information in the request.
+            Try using the CSR generated above in your initial request, and if necessary add additional fields to the
+            `[ dn ]` section of your config file.
+
+
     1. If you need to generate a CSR with Subject Alternative Names (SAN), add these lines to your `incommon.conf`,
        with as many alternate DNS entries as needed in the `[ alt_names ]` section:
 
@@ -106,12 +112,6 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
 
             :::console
             root@server # openssl req -text -noout -verify -in incommon.csr
-
-
-        !!! note
-            Your institution may require more information in the request.
-            Try using the CSR generated above in your initial request, and if necessary add additional fields to the
-            `[ dn ]` section of your config file.
 
 1. Set the permissions on the private key:
 
