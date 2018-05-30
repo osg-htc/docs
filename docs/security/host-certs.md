@@ -1,5 +1,5 @@
-Host and Service Certificates
-=============================
+Host Certificates
+=================
 
 Host and service certificates are used to securely identify your system and to
 establish encrypted connections between services and clients in the OSG. Host
