@@ -23,7 +23,7 @@ Beginning with the kernel released with RHEL 7.4, there is a
 to allow unprivileged bind mounts in user namespaces, which allows
 singularity to run as an unprivileged user.  The OSG has installed
 singularity in [OASIS](/worker-node/install-cvmfs), so you can avoid installing
-singularity at all. 
+singularity at all.
 
 !!! danger "Kernel vs. Userspace Security"
     Enabling unprivileged user namespaces increases the risk to the
@@ -140,7 +140,7 @@ command to verify it:
 ```console
 user@host $ singularity exec --contain --ipc --pid \
                 --home $PWD:/srv \
-                --bind /cvms \
+                --bind /cvmfs \
                 /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 \
                 ps -ef
 WARNING: Container does not have an exec helper script, calling 'ps' directly
