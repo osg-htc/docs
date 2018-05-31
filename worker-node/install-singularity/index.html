@@ -2495,7 +2495,7 @@ vulnerability low.</p>
 to allow unprivileged bind mounts in user namespaces, which allows
 singularity to run as an unprivileged user.  The OSG has installed
 singularity in <a href="../../worker-node/install-cvmfs">OASIS</a>, so you can avoid installing
-singularity at all. </p>
+singularity at all.</p>
 <div class="admonition danger">
 <p class="admonition-title">Kernel vs. Userspace Security</p>
 <p>Enabling unprivileged user namespaces increases the risk to the
@@ -2607,7 +2607,7 @@ defaults.</p>
 command to verify it:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> singularity <span class="nb">exec</span> --contain --ipc --pid <span class="se">\</span>
                 --home <span class="nv">$PWD</span>:/srv <span class="se">\</span>
-                --bind /cvms <span class="se">\</span>
+                --bind /cvmfs <span class="se">\</span>
                 /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6 <span class="se">\</span>
                 ps -ef
 <span class="go">WARNING: Container does not have an exec helper script, calling &#39;ps&#39; directly</span>
