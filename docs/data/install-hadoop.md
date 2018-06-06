@@ -3,9 +3,10 @@ Installing and Maintaining HDFS
 
 [Hadoop Distributed File System](http://hadoop.apache.org/) (HDFS) is a scalable, reliable distributed file system developed in the Apache project. It is based on the map-reduce framework and design of the Google file system. The OSG distribution of Hadoop includes all components needed to operate a multi-terabyte storage site.
 
-The purpose of this document is to provide Hadoop based SE administrators the information on how to prepare, install
-and validate OSG storage based on the Hadoop Distributed File System (HDFS).  The OSG supports a patched version HDFS
-from Cloudera's CDH5 distribution of HDFS (https://www.cloudera.com/products/open-source/apache-hadoop/key-cdh-components.html).
+The purpose of this document is to provide Hadoop-based Storage Element administrators the information on how to prepare,
+install and validate OSG storage based on the Hadoop Distributed File System (HDFS).
+The OSG supports a patched version HDFS from Cloudera's CDH5 distribution of HDFS
+(<https://www.cloudera.com/products/open-source/apache-hadoop/key-cdh-components.html>).
 
 Before Starting
 ---------------
@@ -42,7 +43,7 @@ Alternatively, you can locate a client (or even a GridFTP node) co-located on ea
 Installing HDFS
 ---------------
 
-An OSG HDFS installation consists of HDFS and other support software (e.g. Gratia accounting).
+An OSG HDFS installation consists of HDFS and other support software (e.g., Gratia accounting).
 To simplify installation, OSG provides convenience RPMs that install all required software.
 
 1. Clean yum cache:
@@ -132,7 +133,7 @@ instructions on updating the yum repository files and your installation.
 
 #### Upgrading the Primary Namenode
 
-Once you have the HDFS rpms from OSG 3.4 installed, you will need to upgrade the HDFS metadata on the primary namenode.
+Once you have the HDFS RPMs from OSG 3.4 installed, you will need to upgrade the HDFS metadata on the primary namenode.
 On the primary namenode, running the following:
 
 ``` console
@@ -148,7 +149,7 @@ root@primary-namenode # tail -f /var/log/hadoop-hdfs/hadoop-hdfs-namenode-<hostn
 
 #### Upgrading the Datanodes
 
-Once the primary namenode has completed it's upgrade process, bring up the data nodes.
+Once the primary namenode has completed its upgrade process, bring up the data nodes.
 Verify that you have the HDFS rpms from OSG 3.4 installed and then turn on the datanode service:
 
 ``` console
@@ -173,7 +174,7 @@ root@secondary-namenode # /etc/init.d/hadoop-hdfs-secondarynamenode start
 
 #### Finalizing the upgrade
 
-Once you have verified that the HDFS cluster is running correctly, you should finalize the upgrade by running
+Once you have verified that the HDFS cluster is running correctly, finalize the upgrade:
 
 ``` console
 root@primary-namenode # hdfs dfsadmin -finalizeUpgrade
@@ -220,7 +221,7 @@ This will initialize the storage directory on your namenode
 
 ### (optional) FUSE Client Configuration ###
 
-A FUSE mount is required on any node that you would like to use standard POSIX-like commands on the Hadoop filesystem. FUSE (or "File system in User SpacE") is a way to access HDFS using typical UNIX directory commands (ie POSIX-like access). Note that not all advanced functions of a full POSIX-compliant file system are necessarily available.
+A FUSE mount is required on any node that you would like to use standard POSIX-like commands on the Hadoop filesystem. FUSE (or "File system in User SpacE") is a way to access HDFS using typical UNIX directory commands (i.e., POSIX-like access). Note that not all advanced functions of a full POSIX-compliant file system are necessarily available.
 
 FUSE is typically installed as part of this installation, but, if you are running a customized or non-standard system, make sure that the fuse kernel module is installed and loaded with `modprobe fuse`.
 
@@ -301,9 +302,18 @@ root@host # chown -R michaelthomas:cms /mnt/hadoop/cms/store/user/michaelthomas
 
 ### GridFTP Configuration ###
 
-gridftp-hdfs reads the Hadoop configuration file to learn how to talk to Hadoop. By now, you should have followed the instruction for installing hadoop as detailed in the previous section as well as created the proper users/directories.
+gridftp-hdfs reads the Hadoop configuration file to learn how to talk to Hadoop.
+By now, you should have followed the instruction for installing hadoop as detailed in the previous section as well as
+created the proper users/directories.
 
-The default settings in `/etc/gridftp.conf` along with `/etc/gridftp.d/gridftp-hdfs.conf` are used by the init.d script and should be ok for most installations. The file `/etc/gridftp-hdfs/gridftp-debug.conf` is used by `/usr/bin/gridftp-hdfs-standalone` for starting up the GridFTP server in a testing mode. Any additional config files under `/etc/gridftp.d` will be used for both the init.d and standalone GridFTP server. `/etc/sysconfig/gridftp-hdfs` contains additional site-specific environment variables that are used by the gridftp-hdfs dsi module in both the init.d and standalone GridFTP server. Some of the environment variables that can be used in `/etc/sysconfig/gridftp-hdfs` include:
+The default settings in `/etc/gridftp.conf` along with `/etc/gridftp.d/gridftp-hdfs.conf` are used by the init.d script
+and should be ok for most installations.
+The file `/etc/gridftp-hdfs/gridftp-debug.conf` is used by `/usr/bin/gridftp-hdfs-standalone` for starting up the
+GridFTP server in a testing mode.
+Any additional config files under `/etc/gridftp.d` will be used for both the init.d and standalone GridFTP server.
+`/etc/sysconfig/gridftp-hdfs` contains additional site-specific environment variables that are used by the gridftp-hdfs
+DSI module in both the init.d and standalone GridFTP server.
+Some of the environment variables that can be used in `/etc/sysconfig/gridftp-hdfs` include:
 
 |                              |                |                                                                                                                                                                                                                                                                                 |
 |------------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
