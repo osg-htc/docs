@@ -1,27 +1,56 @@
-**How do I get a PKI/X509 Personal Certificate?**
-======================================================
+User Certificates
+=================
 
 !!! note
+    This document describes how to get and set up a **personal** certificate (also called a grid user certificate).
     For instructions on getting **service** and **host** certificates, **you're in the wrong place**. See [Get Host and Service Certificates](host-certs.md).
 
-This document describes how to get and set up a **personal** certificate (also called a grid user certificate), from the OSG Certificate Authority (OSG CA). The OSG CA is recognized by all OSG resources. Other CAs may be used; if your virtual organization (VO) requires that you get a certificate from a different CA, [contact your VO Support Center](http://www.opensciencegrid.org/?pid=1000187) for instructions.
 
-Know your Responsibilities
-===============================
+Getting a User Certificate
+--------------------------
+
+This section describes how to get and set up a personal certificate to use on OSG.
+Currently you can get a certificate from either the OSG CA or from CILogon.
+After May 31st, you will only be able to get a certificate issued by CILogon.
+Other CAs may be used; if your virtual organization (VO) requires that you get a certificate from a different CA, [contact your VO Support Center](http://www.opensciencegrid.org/?pid=1000187) for instructions.
+
+### Know your responsibilities
 
 When you request a certificate your provide some public personal information about yourself; *name, email address, phone number*, and which *VO* (virtual organization) you belong to. If any of this information changes after you have your certificate you should notify OSG (and probably VO) of the changes. For the OSG RA send email to osg-ra at opensciencegrid dot org.
 
 Your **name** and **email** address are encoded into the signed certificate and **if either of those change** (usually email address) then you should **request a new certificate** with the correct information and **revoke the old certificate**.
 
-Getting your Certificate
-=============================
+### Getting a Certificate from CILogon
 
-There are two different ways to obtain your certificate, either via a command line interface, or through a web browser. The links below will guide you through whichever method you choose. The command line method is generally simpler and less prone to errors than using a web browser but it may require extra setup and package installation the first time you do it. Most people end up needing their certificate for both command line grid use and web browser use and it is generally easier to import your certificate into your browser (and email client) from the command line certificate files than to export your certificate from your web browser to use on the command line. This is because of the large variety of web browsers each with it's own way to deal with certificates. If you will use the certificate ONLY in your web browser then requesting it from your browser is probably the easiest method.
+You will have to obtain your user certificate using the [CILogon web UI](https://cilogon.org/).
+Follow the steps below to get an user certificate:
 
-[Get or renew a certificate with command line interface.](../security/certificate-management.md)
+1. First, either search for your institution and select it or scroll through list and do the same. <br>![Institution Selection](/img/cilogon_select_idp.png)
 
-PKCS12 (.p12) vs PEM format
-================================
+    !!! note
+        Make sure to select your educational institution from CILogon's list.
+        For instance, do not use your Google ID or GitHub ID.
+
+1. Click the `Log On` button and enter your instutional credentials.
+1. Upon successfully entering your credentials, you'll get a page asking for you to enter a password.  Enter a password that is at least 12 characters long and then click on the `Get New Certificate` button.<br>![Password entry](/img/cilogon_cert_password.png) 
+1. The web page will generate a `usercred.p12` file and prompt you to download it.  The certiticate will be protected
+using the password you entered in the prior step.
+
+### Getting a Certificate from the OSG CA
+
+There are two different ways to obtain your certificate, either via a command line interface, or through a web browser.
+The links below will guide you through whichever method you choose.
+The command line method is generally simpler and less prone to errors than using a web browser but it may require extra
+setup and package installation the first time you do it.
+Most people end up needing their certificate for both command line grid use and web browser use and it is generally
+easier to import your certificate into your browser (and email client) from the command line certificate files than to
+export your certificate from your web browser to use on the command line. 
+This is because of the large variety of web browsers each with its own way to deal with certificates. If you will use
+the certificate ONLY in your web browser then requesting it from your browser is probably the easiest method.
+
+[Get or renew a certificate with command line interface.](/security/certificate-management.md)
+
+### PKCS12 (.p12) vs PEM format
 
 Your certificate and key pair can be stored as separate files, by default named `~/.globus/usercert.pem` and `~/.globus/userkey.pem`, or they can be bundled in a single file in PKCS12 (Public Key Cryptography Standard \#12), by default named `~/.globus/usercred.p12`. All OSG user tools works with both formats. Unless you specify a name in the command, they look first for the certificate/key pair default names, then for the PKCS12 default name and use the first one they find. PKCS 12 is a single file, convenient to move and used by many softwares, e.g. the Web browsers (so you don't need conversions).
 
@@ -85,12 +114,133 @@ of returning a valid AC for the user.
 
 To solve the problem split the bundle in the two PEM files as documented in the [referenced document](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html), so that the embedded CA chain is not used.
 
-Revoke your Certificate if Compromised
-===========================================
+Renewing your OSG user certificate
+----------------------------------
 
-If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate. You can follow the steps [here](../security/certificate-management#osg-user-cert-revoke) to revoke your certificate. The same instructions apply if you need to revoke a certificate because your email address changed or your name has changed.
+Your OSG user certificate can be renewed through the
+[OIM Web Interface](https://oim.opensciencegrid.org/oim/certificateuser)
+or through the [command line interface](/security/certificate-management#osg-pki-command-line-clients):
+
+```
+user@host $ osg-user-cert-renew
+```
+
+### Issues renewing your OSG user certificate
+
+One requirement for renewing your OSG user certificate is that your identity must be vetted within the last 5 years.
+You can see whether this requirement is met for your user certificate when *logged in* to the
+[OIM Web Interface](https://oim.opensciencegrid.org/oim/certificateuser).
+
+!!! note
+    When using the OIM Web Interface, make sure you are logged in and your name appears in the upper right corner.
+    If it shows "Login" instead of your name, click it to log in.
+
+When you click on your user certificate, under the Renew tab, you will see a line item for
+"This certificate was approved within the last 5 years".
+If there is a red X on this line with no other red X's, then you will have to request a new certificate instead of
+renewing it.
+Your two options for requesting a new certificate are:
+
+- [Request a certificate issued by the CILogon Basic CA](#getting-a-certificate-from-cilogon) (preferred)
+- If you need to keep your DN, or for whatever other reason you cannot use a CILogon Basic certificate, you will need to
+  revoke and renew your user certificate:
+
+    !!! danger
+        With this method, there is a risk that you may end up without a valid certificate.
+        After revocation, if your sponsor is unresponsive past the May 31, 2018 OSG CA service retirement, your previous
+        certificate will no longer be valid and you won't be able to request a new certificate.
+
+    1. Log in (your name should appear on the top right), and select your user certificate from the list in the
+       [OIM Web Interface](https://oim.opensciencegrid.org/oim/certificateuser).
+    1. In a separate tab, open the [+Request New](https://oim.opensciencegrid.org/oim/certificaterequestuser) page.
+       We recommend opening the `Request New` page in a separate tab before revoking, in order to ensure that your CN gets
+       correctly populated in the `Request New` page.
+       Also, to ensure a prompt response, be sure that you select a `Virtual Organization` that you are associated with and
+       a `Sponsor` who will be able to quickly verify your identity.
+    1. Back in the first tab, with your user certificate selected, click the `Revoke` tab, and enter an explanation that you are
+       revoking in order to re-request your certificate.  Then click the red `Revoke` button.
+    1. In the separate tab, fill out the rest of the User Certificate Request form and click `Submit`.
+
+
+Revoking your user certificate
+------------------------------
+
+If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate.
+In addition, if your name or email address changes, you must revoke your certificate and get a new one with the correct
+information.
+
+If you have an OSG issued certifiacte, you can follow the steps [here](/security/certificate-management#osg-user-cert-revoke) to revoke your certificate.
+If you have a CILogon issued certificate, contact [ca@cilogon.org](mailto:ca@cilogon.org) in order revoke your certificate.
+
+
+Getting a Certificate from a Service Provider with cigetcert
+------------------------------------------------------------
+
+You may also get a user certificate from a SAML 2.0 Service Provider such as your home institution or XSEDE.
+This kind of certificate is short-lived, typically valid only for a week.
+Therefore it is not suitable for using in your browser.
+However, it is useful for command-line access to site services such as compute or storage.
+
+You will need to use the `cigetcert` tool to get a certificate this way.
+Use yum to install the `cigetcert` package from the OSG repositories.
+
+This is a new way of getting a certificate and does not work with all institutions.
+To get a list of institutions supported by `cigetcert`, run:
+```console
+user@host $ cigetcert --listinstitutions
+Clemson University
+Fermi National Accelerator Laboratory
+LIGO Scientific Collaboration
+LTER Network
+...
+```
+
+To get a certificate, run
+```console
+user@host $ cigetcert -i "<INSTITUTION>"
+Authorizing ...... authorized
+Fetching certificate ..... fetched
+Storing certificate in /tmp/x509up_u46142
+Your certificate is valid until: Fri Apr 13 17:03:13 2018
+```
+Authentication is controlled by the institution;
+depending on the institution, you may need a valid Kerberos token, or will be prompted for a password.
+
+If all goes well, you should see output similar to what's above.
+The certificate is created in `/tmp/x509up_u<YOUR UID>`, which is the same place proxies are created by `grid-proxy-init`.
+
+You may specify default arguments in the `CIGETCERTOPTS` environment variable.
+This can save you from having to type in the entire institution name every time you want a cert.
+For example, to always use FNAL as the institution, put this in your `.bashrc`:
+```bash
+export CIGETCERTOPTS="-i 'Fermi National Accelerator Laboratory'"
+```
+
+Your VO may also provide specific instructions for how to best use this tool.
+Contact your VO support center for details.
+
+Finally, `cigetcert` has advanced features, such as the ability to load configuration from a server, or store the cert on a MyProxy server.
+See the [manual page for cigetcert](http://htmlpreview.github.io/?https://github.com/fermitools/cigetcert/blob/master/cigetcert.html) for more information.
+
+
+### Using cigetcert with XSEDE credentials
+
+`cigetcert` also works with XSEDE as the service provider.
+To use XSEDE credentials, you will first need an account at <https://portal.xsede.org>.
+In addition, you _need_ to set up two-factor authentication with XSEDE; see their [MFA documentation](https://portal.xsede.org/mfa) for details.
+Push notifications using the Duo Mobile app are required.
+
+Once you have set all those up, run `cigetcert` as follows:
+```console
+user@host $ cigetcert -u %RED%<USERNAME>%ENDCOLOR% -i XSEDE
+```
+`<USERNAME>` is your username at portal.xsede.org.
+You will get prompted to "Enter XSEDE Kerberos Password."
+Enter the password for your account at portal.xsede.org.
+You should then get a 2FA authentication request with Duo Mobile; once you accept this, `cigetcert` will issue the certificate.
 
 References
-===============
+----------
 
 -   [Useful Documentation.OpenSSL commands (from NCSA)](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html) - e.g. how to convert the format of your certificate.
+-   [Manual page for cigetcert](http://htmlpreview.github.io/?https://github.com/fermitools/cigetcert/blob/master/cigetcert.html)

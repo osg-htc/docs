@@ -7,11 +7,11 @@ One general-purpose technology for implementing a load balancer on Linux is [Lin
 
 This guide explains how to install, configure, run, test, and troubleshoot the `keepalived` service on a load balancing host for a set of [GridFTP](gridftp) servers.
 
+Before Starting
 ---------------
 
 Before starting the installation process, consider the following requirements:
 
--   You must have [grid administrator privileges](http://oim.opensciencegrid.org/oim/gridadmin)
 -   There must be a shared file system for file propagation across GridFTP servers
 -   You must have reserved a virtual IP address and associated virtual hostname
 
@@ -112,7 +112,7 @@ Use the virtual IP address of your load balancer(s) as the secondary IPs of each
 1.  Add the virtual IP using the `ip` tool:
 
         :::console
-        root@host # ip addr add <VIRTUAL-IP-ADDRESS/<SUBNET-MASK dev <NETWORK-INTERFACE
+        root@host # ip addr add <VIRTUAL-IP-ADDRESS>/<SUBNET-MASK> dev <NETWORK-INTERFACE>
 
 1.  To persist the virtual IP changes across reboots, edit `/etc/rc.d/rc.local`, and add the same command as used above.
 1.  Make sure that `/etc/rc.d/rc.local` is executable:
@@ -169,6 +169,7 @@ The `keepalived` package is available from standard operating system repositorie
 
         :::console
         root@host # yum update
+
     This command will update **all** packages
 
 1. Install the `keepalived` package:

@@ -15,9 +15,9 @@ Requirements
 To begin the process to distribute software on OASIS using the service hosted at the OSG GOC, you must:
 
 -   [Obtain a personal grid certificate](../security/user-certs), if you don't have one already.
--   Register yourself in [OIM](http://oim.opensciencegrid.org/oim/home). To register, your certificate must be
-    installed in your browser.  Clicking "Login" in OIM will prompt you to register if you are not already.
--   Be associated with a [VO registered in OIM](http://oim.opensciencegrid.org/oim/vo).
+-   Register yourself in the OSG Information Management System (OIM) by sending an email to
+    <mailto:help@opensciencegrid.org)
+-   Be associated with a [VO registered in OIM](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
 
 How to use OASIS
 ----------------
@@ -26,7 +26,7 @@ How to use OASIS
 
 When you are ready to distribute your software with OASIS, submit a [GOC ticket](https://ticket.opensciencegrid.org/submit) with a request to enable OASIS for your VO. In your request, please specify your VO and provide a list of people who will install and administer the VO software in OASIS.
 
-The GOC will enable OASIS for your VO in [OIM](https://oim.opensciencegrid.org/oim/home) and add your list of administrators to the "OASIS Managers" list (which is near the bottom of the page of information about each VO in OIM). oasis-login will then grant access to the people who are listed as OASIS managers. Any time the list is to be modified, submit another GOC ticket.
+The GOC will enable OASIS for your VO in [OIM](https://github.com/opensciencegrid/topology#topology) and add your list of administrators to the "OASIS Managers" list (which is near the bottom of the page of information about each VO in OIM). oasis-login will then grant access to the people who are listed as OASIS managers. Any time the list is to be modified, submit another GOC ticket.
 
 ### Log in with GSISSH ###
 

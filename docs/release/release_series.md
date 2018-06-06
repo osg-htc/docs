@@ -18,7 +18,7 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
 
 -   **OSG 3.3** started in August 2015 and is still supported today.  End-of-support is scheduled for May 2018; sites are encouraged to investigate the upgrade to OSG 3.4. The main differences between 3.3 and 3.2 are the dropping of EL5 support, the addition of EL7 support, and the dropping of Globus GRAM support.
 
--   **OSG 3.4** stared June 2017. The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server packages.
+-   **OSG 3.4** started June 2017. The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server packages.
 
 OSG Upcoming
 ------------
@@ -66,7 +66,7 @@ Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4
         :::console
         root@host # yum update
 
-This command will update **all** packages on your system.
+    This command will update **all** packages on your system.
 
 **Troubleshooting** If you are not having the expected result or having problems with Yum please see the [Yum troubleshooting guide](../release/yum-basics#troubleshooting)
 

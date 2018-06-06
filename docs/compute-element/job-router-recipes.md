@@ -19,7 +19,7 @@ Quirks and Pitfalls
 -   If a value is set in [JOB\_ROUTER\_DEFAULTS](#job_router_defaults) with `eval_set_<variable>`, override it by using `eval_set_<variable>` in the `JOB_ROUTER_ENTRIES`. Do this at your own risk as it may cause the CE to break.
 -   Make sure to run `condor_ce_reconfig` after changing your routes, otherwise they will not take effect.
 -   Before the last square bracket, make sure all lines end in a line continuation character (backslash). You can inspect the syntax of your routes with `condor_ce_config_val JOB_ROUTER_ENTRIES` to see if HTCondor-CE has ingested them properly.
--   Do **not** set the job environment through the JobRouter. Instead, add any changes to the `[Local Settings]` section in `/etc/osg/config.d/40-localsettings.ini` and run osg-configure, as documented [here](../other/configuration-with-osg-configure).
+-   Do **not** set the job environment through the JobRouter. Instead, add any changes to the `[Local Settings]` section in `/etc/osg/config.d/40-localsettings.ini` and run osg-configure, as documented [here](/other/configuration-with-osg-configure#local-settings).
 -   HTCondor batch system only: Local universe jobs are excluded from any routing.
 
 How Job Routes are Constructed
@@ -335,7 +335,7 @@ JOB_ROUTER_ENTRIES = [ \
 ]
 ```
 
-### Limiting the number of...
+### Limiting the number of jobs
 
 This section outlines how to limit the number of total or idle jobs in a specific route (i.e., if this limit is reached, jobs will no longer be placed in this route).
 
