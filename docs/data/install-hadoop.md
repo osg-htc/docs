@@ -28,17 +28,17 @@ As with all OSG software installations, there are some one-time (per host) steps
 Designing Your HDFS Cluster
 ---------------------------
 
-!!! note
-    There are several important components to a storage element installation. Throughout this document, it will be stated which node the relevant installation instructions apply to. It can apply to one of the following:
+There are several important components to an HDFS installation:
 
--   **Namenode**: You will have at least one namenode. The name node functions as the directory server and coordinator of the hadoop cluster. It houses all the meta-data for the hadoop cluster. %RED%The namenode and secondary namenode need to have a directory that they can both access on a shared filesystem so that they can exchange filesystem checkpoints.%ENDCOLOR%
--   **Secondary Namenode**: This is a secondary machine that periodically merges updates to the HDFS file system back into the fsimage. This dramatically improves startup and restart times.
--   **Datanode**: You will have many datanodes. Each data node stores large blocks of files to be stored on the hadoop cluster.
--   **Client**: This is a documentation shorthand that refers to any machine with the hadoop client commands and [FUSE](http://fuse.sourceforge.net/) mount. Any machine that needs a FUSE mount to access data in a POSIX-like fashion will need this.
-
-Note that these components are not necessarily mutually exclusive. 
-For instance, you may consider having your GridFTP server co-located on a client node. 
-Alternatively, you can locate a client (or even a GridFTP node) co-located on each data node. That way, each data node also acts as an access point to the hadoop cluster.
+-   **NameNode**: The NameNode functions as the directory server and coordinator of the HDFS cluster.
+    It houses all the meta-data for the hadoop cluster.
+-   **Secondary NameNode (optional)**: This is a secondary machine that periodically merges updates to the HDFS file
+    system back into the `fsimage`.
+    It must share a directory with the primary namenode to exchange filesystem checkpoints.
+    An HDFS installation with a Secondary NameNode dramatically improves startup and restart times.
+-   **DataNode**: You will have many datanodes. Each data node stores large blocks of files to for the hadoop cluster.
+-   **Client**: This is a documentation shorthand that refers to any machine with the hadoop client commands or
+    [FUSE](https://en.wikipedia.org/wiki/Filesystem_in_Userspace) mount.
 
 Installing HDFS
 ---------------
