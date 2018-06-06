@@ -36,7 +36,7 @@ There are several important components to an HDFS installation:
     system back into the `fsimage`.
     It must share a directory with the primary namenode to exchange filesystem checkpoints.
     An HDFS installation with a Secondary NameNode dramatically improves startup and restart times.
--   **DataNode**: You will have many datanodes. Each data node stores large blocks of files to for the hadoop cluster.
+-   **DataNode**: You will have many DataNodes. Each DataNode stores large blocks of files to for the hadoop cluster.
 -   **Client**: This is a documentation shorthand that refers to any machine with the hadoop client commands or
     [FUSE](https://en.wikipedia.org/wiki/Filesystem_in_Userspace) mount.
 
@@ -79,7 +79,7 @@ The upgrade process occurs in several steps:
 1. Preparing for the upgrade
 1. Updating to HDFS from OSG 3.4
 1. Upgrading the namenodes
-1. Upgrading the datanodes
+1. Upgrading the DataNodes
 1. Finalizing the upgrade
 
 #### Preparing for the upgrade
@@ -147,16 +147,16 @@ You can follow the process by running
 root@primary-namenode # tail -f /var/log/hadoop-hdfs/hadoop-hdfs-namenode-<hostname>.log 
 ```
 
-#### Upgrading the Datanodes
+#### Upgrading the DataNodes
 
-Once the primary namenode has completed its upgrade process, bring up the data nodes.
-Verify that you have the HDFS rpms from OSG 3.4 installed and then turn on the datanode service:
+Once the primary namenode has completed its upgrade process, bring up the DataNodes.
+Verify that you have the HDFS rpms from OSG 3.4 installed and then turn on the DataNode service:
 
 ``` console
 root@datanode # /etc/init.d/hadoop-hdfs-datanode start
 ```
 
-After all the datanodes have been brought back up, the primary namenode should exit safe mode automatically.  
+After all the DataNodes have been brought back up, the primary namenode should exit safe mode automatically.  
 You can check on the safe mode status by running:
 
 ``` console
@@ -184,7 +184,7 @@ Configuring HDFS
 ----------------
 
 !!! note
-    Needed by: Hadoop namenode, Hadoop datanodes, Hadoop client, GridFTP
+    Needed by: Hadoop namenode, Hadoop DataNodes, Hadoop client, GridFTP
 
 Hadoop configuration is needed by every node in the hadoop cluster. However, in most cases, you can do the configuration once and copy it to all nodes in the cluster (possibly using your favorite configuration management tool). Special configuration for various special components is given in the below sections.
 
@@ -200,7 +200,7 @@ Hadoop configuration is stored in `/etc/hadoop/conf`. However, by default, these
 | `hdfs-site.xml` | dfs.block.size             | 134217728                        | Block size: 128MB by default                                                              |
 | `hdfs-site.xml` | dfs.replication            | 2                                | Default replication factor. Generally the same as dfs.replication.min/max                 |
 | `hdfs-site.xml` | dfs.datanode.du.reserved   | 100000000                        | How much free space hadoop will reserve for non-Hadoop usage                              |
-| `hdfs-site.xml` | dfs.datanode.handler.count | 20                               | Number of server threads for datanodes. Increase if you have many more client connections |
+| `hdfs-site.xml` | dfs.datanode.handler.count | 20                               | Number of server threads for DataNodes. Increase if you have many more client connections |
 | `hdfs-site.xml` | dfs.namenode.handler.count | 40                               | Number of server threads for namenodes. Increase if you need more connections             |
 | `hdfs-site.xml` | dfs.http.address           | namenode.domain.tld.:50070       | Web address for dfs health monitoring page                                                |
 
@@ -493,7 +493,7 @@ The relevant service for each node is as follows:
 | :----------------- | :---------------------------- |
 | Primary Namenode   | hadoop-hdfs-namenode          |
 | Secondary Namenode | hadoop-hdfs-secondarynamenode |
-| Datanode           | hadoop-hdfs-datanode          |
+| DataNode           | hadoop-hdfs-datanode          |
 | GridFTP            | globus-gridftp-server         |
 
 
@@ -992,7 +992,7 @@ org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1
 </p>
 </details>
 
-This can occur if you try to install a Datanode on a machine with less than 10GB of disk space available. This can be changed by lowering the value of the following property in `/usr/lib/hadoop-0.20/conf/hdfs-site.xml`:
+This can occur if you try to install a DataNode on a machine with less than 10GB of disk space available. This can be changed by lowering the value of the following property in `/usr/lib/hadoop-0.20/conf/hdfs-site.xml`:
 
 ``` file
 <property>
