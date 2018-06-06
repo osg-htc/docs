@@ -69,72 +69,68 @@ To simplify installation, OSG provides convenience RPMs that install all require
 Upgrading HDFS
 --------------
 
-This section will guide you through the process to upgrade a HDFS 2.0.0 installation from OSG 3.3 to the latest version.
+This section will guide you through the process to upgrade a HDFS 2.0.0 installation from OSG 3.3 to the HDFS 2.6.0
+from OSG 3.4.
 
-!!! note
-    The upgrade process will involve downtime for your HDFS cluster.  Please plan accordingly.  
+!!! warning
+    The upgrade process will involve downtime for your HDFS cluster. Please plan accordingly.
 
 The upgrade process occurs in several steps:
 
-1. Preparing for the upgrade
-1. Updating to HDFS from OSG 3.4
-1. Upgrading the NameNodes
-1. Upgrading the DataNodes
-1. Finalizing the upgrade
+1. [Preparing for the upgrade](#preparing-for-the-upgrade)
+1. [Updating to HDFS from OSG 3.4](#updating-to-hdfs-26)
+1. [Upgrading the NameNodes](#upgrading-the-primary-namenode)
+1. [Upgrading the DataNodes](#upgrading-the-datanodes)
+1. [Finalizing the upgrade](#finalizing-the-upgrade)
 
-#### Preparing for the upgrade
+### Preparing for the upgrade ###
 
-Before upgrading, you should backup your configuration data and HDFS metadata.  
-You should login to your primary NameNode and put it into safemode.  
+Before upgrading, you should backup your configuration data and HDFS metadata using the following method:
 
-``` console
-root@primary-namenode # hdfs dfsadmin -safemode enter
-```
+1. Put your Primary NameNode into safe mode:
 
-Then save a clean copy of your HDFS namespace.
+        :::console
+        root@primary-namenode # hdfs dfsadmin -safemode enter
 
-```console
-root@primary-namenode # hdfs dfsadmin -saveNamespace
-```
+1. Save a clean copy of your HDFS namespace:
 
-Once both these operations have successfully completed, shutdown the HDFS services on all your nodes.
-Following that, backup your HDFS metadata on your NameNode as below. 
-Login to your primary NameNode, and verify that your NameNode service is off. 
+        :::console
+        root@primary-namenode # hdfs dfsadmin -saveNamespace
 
-``` console
-root@primary-namenode # /etc/init.d/hadoop-hdfs-namenode status
-```
+1. Shutdown the HDFS services on all of your HDFS nodes (see [this section](#running-services) for instructions).
 
-This command should indicate that your NameNode service is not running.
-Now, find the location of the directory with the HDFS metadata.
+1. On the Primary NameNode, verify that your NameNode service is off:
 
-``` console
-root@primary-namenode # grep -C1 dfs.namenode.name.dir /etc/hadoop/conf/hdfs-site.xml
-```
+        :::console
+        root@primary-namenode # /etc/init.d/hadoop-hdfs-namenode status
 
-You should see something like this:
+    This command should indicate that your NameNode service is not running.
 
-``` file
-<property>
- <name>dfs.namenode.name.dir</name>
-  <value>file:///var/lib/dfs/nn,file:///home/hadoop/dfs/nn</value>
-```
+1. Find the location of the directory with the HDFS metadata:
 
-Backup the directory appears in the output.
-If more than one directory appears (as in the example above) in the list, you should choose the most convenient
-directory.
-All of the directories in the list will have the same contents. 
+        :::console
+        root@primary-namenode # grep -C1 dfs.namenode.name.dir /etc/hadoop/conf/hdfs-site.xml
 
-#### Updating to HDFS 2.6
+    And look for the value of `dfs.namenode.name.dir`:
 
-Once your HDFS services have been turned off and the HDFS metadata has been backed up, you should update to the OSG 3.4
-repositories and software.  [This](/release/release_series/#updating-from-osg-31-32-33-to-33-or-34) page has
-instructions on updating the yum repository files and your installation.
+        :::xml
+        <property>
+         <name>dfs.namenode.name.dir</name>
+          <value>file:///var/lib/dfs/nn,file:///home/hadoop/dfs/nn</value>
 
-#### Upgrading the Primary Namenode
+1. Backup the directory that appears in the output using your backup method of choice.
+   If more than one directory appears in the list (as in the example above), choose the most convenient directory.
+   All of the directories in the list will have the same contents.
 
-Once you have the HDFS RPMs from OSG 3.4 installed, you will need to upgrade the HDFS metadata on the primary NameNode.
-On the primary NameNode, running the following:
+### Updating to HDFS 2.6 ###
+
+Once your HDFS services have been turned off and the HDFS metadata has been backed up, update to the OSG 3.4
+repositories and software by following the instructions in [this section](/release/release_series/#updating-from-old).
+
+### Upgrading the Primary Namenode ###
+
+Once you have the HDFS RPMs from OSG 3.4 installed, upgrade the HDFS metadata on the primary NameNode.
+On the primary NameNode, run the following:
 
 ``` console
 root@primary-namenode # /etc/init.d/hadoop-hdfs-namenode upgrade
@@ -147,10 +143,10 @@ You can follow the process by running
 root@primary-namenode # tail -f /var/log/hadoop-hdfs/hadoop-hdfs-namenode-<hostname>.log 
 ```
 
-#### Upgrading the DataNodes
+### Upgrading the DataNodes ###
 
 Once the primary NameNode has completed its upgrade process, bring up the DataNodes.
-Verify that you have the HDFS rpms from OSG 3.4 installed and then turn on the DataNode service:
+Verify that you have the HDFS RPMs from OSG 3.4 installed and then turn on the DataNode service:
 
 ``` console
 root@datanode # /etc/init.d/hadoop-hdfs-datanode start
@@ -163,16 +159,16 @@ You can check on the safe mode status by running:
 root@primary-namenode # hdfs dfsadmin -safemode get
 ```
 
-#### Upgrading the Secondary Namenode
+### Upgrading the Secondary Namenode ###
 
-Once the primary NameNode has exited safe mode, verify that the secondary NameNode has the HDFS rpms from OSG 3.4.
+Once the primary NameNode has exited safe mode, verify that the secondary NameNode has the HDFS RPMs from OSG 3.4.
 Once that is done, turn on the secondary NameNode service:
 
 ``` console
 root@secondary-namenode # /etc/init.d/hadoop-hdfs-secondarynamenode start
 ```
 
-#### Finalizing the upgrade
+### Finalizing the upgrade ###
 
 Once you have verified that the HDFS cluster is running correctly, finalize the upgrade:
 
