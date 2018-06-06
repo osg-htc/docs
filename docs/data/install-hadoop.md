@@ -34,7 +34,7 @@ There are several important components to an HDFS installation:
     It houses all the meta-data for the hadoop cluster.
 -   **Secondary NameNode (optional)**: This is a secondary machine that periodically merges updates to the HDFS file
     system back into the `fsimage`.
-    It must share a directory with the primary namenode to exchange filesystem checkpoints.
+    It must share a directory with the primary NameNode to exchange filesystem checkpoints.
     An HDFS installation with a Secondary NameNode dramatically improves startup and restart times.
 -   **DataNode**: You will have many DataNodes. Each DataNode stores large blocks of files to for the hadoop cluster.
 -   **Client**: This is a documentation shorthand that refers to any machine with the hadoop client commands or
@@ -78,14 +78,14 @@ The upgrade process occurs in several steps:
 
 1. Preparing for the upgrade
 1. Updating to HDFS from OSG 3.4
-1. Upgrading the namenodes
+1. Upgrading the NameNodes
 1. Upgrading the DataNodes
 1. Finalizing the upgrade
 
 #### Preparing for the upgrade
 
 Before upgrading, you should backup your configuration data and HDFS metadata.  
-You should login to your primary namenode and put it into safemode.  
+You should login to your primary NameNode and put it into safemode.  
 
 ``` console
 root@primary-namenode # hdfs dfsadmin -safemode enter
@@ -98,14 +98,14 @@ root@primary-namenode # hdfs dfsadmin -saveNamespace
 ```
 
 Once both these operations have successfully completed, shutdown the HDFS services on all your nodes.
-Following that, backup your HDFS metadata on your namenode as below. 
-Login to your primary namenode, and verify that your namenode service is off. 
+Following that, backup your HDFS metadata on your NameNode as below. 
+Login to your primary NameNode, and verify that your NameNode service is off. 
 
 ``` console
 root@primary-namenode # /etc/init.d/hadoop-hdfs-namenode status
 ```
 
-This command should indicate that your namenode service is not running.
+This command should indicate that your NameNode service is not running.
 Now, find the location of the directory with the HDFS metadata.
 
 ``` console
@@ -133,8 +133,8 @@ instructions on updating the yum repository files and your installation.
 
 #### Upgrading the Primary Namenode
 
-Once you have the HDFS RPMs from OSG 3.4 installed, you will need to upgrade the HDFS metadata on the primary namenode.
-On the primary namenode, running the following:
+Once you have the HDFS RPMs from OSG 3.4 installed, you will need to upgrade the HDFS metadata on the primary NameNode.
+On the primary NameNode, running the following:
 
 ``` console
 root@primary-namenode # /etc/init.d/hadoop-hdfs-namenode upgrade
@@ -149,14 +149,14 @@ root@primary-namenode # tail -f /var/log/hadoop-hdfs/hadoop-hdfs-namenode-<hostn
 
 #### Upgrading the DataNodes
 
-Once the primary namenode has completed its upgrade process, bring up the DataNodes.
+Once the primary NameNode has completed its upgrade process, bring up the DataNodes.
 Verify that you have the HDFS rpms from OSG 3.4 installed and then turn on the DataNode service:
 
 ``` console
 root@datanode # /etc/init.d/hadoop-hdfs-datanode start
 ```
 
-After all the DataNodes have been brought back up, the primary namenode should exit safe mode automatically.  
+After all the DataNodes have been brought back up, the primary NameNode should exit safe mode automatically.  
 You can check on the safe mode status by running:
 
 ``` console
@@ -165,8 +165,8 @@ root@primary-namenode # hdfs dfsadmin -safemode get
 
 #### Upgrading the Secondary Namenode
 
-Once the primary namenode has exited safe mode, verify that the secondary namenode has the HDFS rpms from OSG 3.4.
-Once that is done, turn on the secondary namenode service:
+Once the primary NameNode has exited safe mode, verify that the secondary NameNode has the HDFS rpms from OSG 3.4.
+Once that is done, turn on the secondary NameNode service:
 
 ``` console
 root@secondary-namenode # /etc/init.d/hadoop-hdfs-secondarynamenode start
@@ -184,7 +184,7 @@ Configuring HDFS
 ----------------
 
 !!! note
-    Needed by: Hadoop namenode, Hadoop DataNodes, Hadoop client, GridFTP
+    Needed by: Hadoop NameNode, Hadoop DataNodes, Hadoop client, GridFTP
 
 Hadoop configuration is needed by every node in the hadoop cluster. However, in most cases, you can do the configuration once and copy it to all nodes in the cluster (possibly using your favorite configuration management tool). Special configuration for various special components is given in the below sections.
 
@@ -193,7 +193,7 @@ Hadoop configuration is stored in `/etc/hadoop/conf`. However, by default, these
 |                 |                            |                                  |                                                                                           |
 |-----------------|----------------------------|----------------------------------|-------------------------------------------------------------------------------------------|
 | File            | Setting                    | Example                          | Comments                                                                                  |
-| `core-site.xml` | fs.default.name            | hdfs://namenode.domain.tld.:9000 | This is the address of the namenode                                                       |
+| `core-site.xml` | fs.default.name            | hdfs://namenode.domain.tld.:9000 | This is the address of the NameNode                                                       |
 | `core-site.xml` | hadoop.tmp.dir             | /data/scratch                    | Scratch temp directory used by Hadoop                                                     |
 | `core-site.xml` | hadoop.log.dir             | /var/log/hadoop-hdfs             | Log directory used by Hadoop                                                              |
 | `core-site.xml` | dfs.umaskmode              | 002                              | umask for permissions used by default                                                     |
@@ -201,15 +201,15 @@ Hadoop configuration is stored in `/etc/hadoop/conf`. However, by default, these
 | `hdfs-site.xml` | dfs.replication            | 2                                | Default replication factor. Generally the same as dfs.replication.min/max                 |
 | `hdfs-site.xml` | dfs.datanode.du.reserved   | 100000000                        | How much free space hadoop will reserve for non-Hadoop usage                              |
 | `hdfs-site.xml` | dfs.datanode.handler.count | 20                               | Number of server threads for DataNodes. Increase if you have many more client connections |
-| `hdfs-site.xml` | dfs.namenode.handler.count | 40                               | Number of server threads for namenodes. Increase if you need more connections             |
+| `hdfs-site.xml` | dfs.namenode.handler.count | 40                               | Number of server threads for NameNodes. Increase if you need more connections             |
 | `hdfs-site.xml` | dfs.http.address           | namenode.domain.tld.:50070       | Web address for dfs health monitoring page                                                |
 
 See <http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml> for more parameters to configure.
 
 !!! note
-    Namenodes must have a `/etc/hosts_exclude` present
+    NameNodes must have a `/etc/hosts_exclude` present
 
-#### Special namenode instructions for brand new installs
+#### Special NameNode instructions for brand new installs
 
 If this is a new installation (%RED%and only if this is a brand new installation%ENDCOLOR%), you should run the following command as the `hdfs` user. (Otherwise, be sure to `chown` your storage directory to hdfs after running):
 
@@ -217,7 +217,7 @@ If this is a new installation (%RED%and only if this is a brand new installation
 hadoop namenode -format
 ```
 
-This will initialize the storage directory on your namenode
+This will initialize the storage directory on your NameNode
 
 ### (optional) FUSE Client Configuration ###
 
@@ -392,7 +392,7 @@ Look for any abnormal termination and report it if it is a non-trivial site issu
 ### Hadoop Storage Probe Configuration ###
 
 !!! note
-    This is only needed by the Hadoop Namenode
+    This is only needed by the Hadoop NameNode
 
 Here are the most relevant file and directory locations:
 
@@ -491,8 +491,8 @@ The relevant service for each node is as follows:
 
 | Node               | Service                       |
 | :----------------- | :---------------------------- |
-| Primary Namenode   | hadoop-hdfs-namenode          |
-| Secondary Namenode | hadoop-hdfs-secondarynamenode |
+| Primary NameNode   | hadoop-hdfs-namenode          |
+| Secondary NameNode | hadoop-hdfs-secondarynamenode |
 | DataNode           | hadoop-hdfs-datanode          |
 | GridFTP            | globus-gridftp-server         |
 
@@ -501,7 +501,7 @@ The relevant service for each node is as follows:
 Validation
 ----------
 
-The first thing you may want to do after installing and starting your primary namenode is to verify that the web interface works. In your web browser go to:
+The first thing you may want to do after installing and starting your primary NameNode is to verify that the web interface works. In your web browser go to:
 
 ``` file
 http://%RED%namenode.hostname%ENDCOLOR%:50070/dfshealth.jsp
@@ -919,7 +919,7 @@ The standalone server runs on port 5002, handles a single GridFTP request, and w
 | Hadoop                                                | runtime config files                                                  | `/etc/hadoop/conf/*`                                | Maybe                             |
 | Hadoop                                                | System binaries                                                       | `/usr/bin/hadoop`                                   | No                                |
 | Hadoop                                                | JARs                                                                  | `/usr/lib/hadoop/*`                                 | No                                |
-| Hadoop                                                | runtime config files                                                  | `/etc/hosts_exclude`                                | Yes, must be present on namenodes |
+| Hadoop                                                | runtime config files                                                  | `/etc/hosts_exclude`                                | Yes, must be present on NameNodes |
 | GridFTP                                               | Log files                                                             | `/var/log/gridftp-auth.log`, `/var/log/gridftp.log` | No                                |
 | GridFTP| init.d script                                | `/etc/init.d/globus-gridftp-server`                                   | No                                                  |
 | GridFTP| runtime config files                         | `/etc/gridftp-hdfs/*`, `/etc/sysconfig/gridftp-hdfs`                  | Maybe                                               |
