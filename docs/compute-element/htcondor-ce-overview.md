@@ -79,8 +79,7 @@ How the CE is Customized
 Aside from the [basic configuration](install-htcondor-ce#configuring-htcondor-ce) required in the CE installation, there are two main ways to customize your CE (if you decide any customization is required at all):
 
 -   **Deciding which VOs are allowed to run at your site:** The recommended method of authorizing VOs at your site is
-    based on the [LCMAPS framework](/security/lcmaps-voms-authentication); we plan to support the prior mechanisms,
-    [GUMS](/security/install-gums) and [edg-mkgridmap](/security/edg-mkgridmap) until May 2018.
+    based on the [LCMAPS framework](/security/lcmaps-voms-authentication)
 -   **How to filter and transform the grid jobs to be run on your batch system:** Filtering and transforming grid jobs (i.e., setting site-specific attributes or resource limits), requires configuration of your site’s job routes. For examples of common job routes, consult the [JobRouter recipes](job-router-recipes) page.
 
 !!! note
