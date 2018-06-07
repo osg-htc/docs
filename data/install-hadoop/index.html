@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://opensciencegrid.github.io/docs/data/install-hadoop-2-0-0/">
+        <link rel="canonical" href="https://opensciencegrid.github.io/docs/data/install-hadoop/">
       
       
       
@@ -93,7 +93,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
     
-      <a href="#hadoop-200-cdh4" tabindex="1" class="md-skip">
+      <a href="#installing-and-maintaining-hdfs" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -629,44 +629,72 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
+  <a href="#before-starting" title="Before Starting" class="md-nav__link">
+    Before Starting
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#requirements" title="Requirements" class="md-nav__link">
-    Requirements
+  <a href="#designing-your-hdfs-cluster" title="Designing Your HDFS Cluster" class="md-nav__link">
+    Designing Your HDFS Cluster
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-hdfs" title="Installing HDFS" class="md-nav__link">
+    Installing HDFS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading-hdfs" title="Upgrading HDFS" class="md-nav__link">
+    Upgrading HDFS
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#architecture" title="Architecture" class="md-nav__link">
-    Architecture
+  <a href="#preparing-for-the-upgrade" title="Preparing for the upgrade" class="md-nav__link">
+    Preparing for the upgrade
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#host-and-os" title="Host and OS" class="md-nav__link">
-    Host and OS
+  <a href="#updating-to-osg-34" title="Updating to OSG 3.4" class="md-nav__link">
+    Updating to OSG 3.4
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#users" title="Users" class="md-nav__link">
-    Users
+  <a href="#upgrading-the-primary-namenode" title="Upgrading the Primary NameNode" class="md-nav__link">
+    Upgrading the Primary NameNode
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#certificates" title="Certificates" class="md-nav__link">
-    Certificates
+  <a href="#upgrading-the-datanodes" title="Upgrading the DataNodes" class="md-nav__link">
+    Upgrading the DataNodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrading-the-secondary-namenode" title="Upgrading the Secondary NameNode" class="md-nav__link">
+    Upgrading the Secondary NameNode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finalizing-the-upgrade" title="Finalizing the upgrade" class="md-nav__link">
+    Finalizing the upgrade
   </a>
   
 </li>
@@ -677,91 +705,23 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation" title="Installation" class="md-nav__link">
-    Installation
+  <a href="#configuring-hdfs" title="Configuring HDFS" class="md-nav__link">
+    Configuring HDFS
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#namenode-installation" title="Namenode Installation" class="md-nav__link">
-    Namenode Installation
+  <a href="#special-namenode-instructions-for-brand-new-installs" title="Special NameNode instructions for brand new installs" class="md-nav__link">
+    Special NameNode instructions for brand new installs
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#secondary-namenode-installation" title="Secondary Namenode Installation" class="md-nav__link">
-    Secondary Namenode Installation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datanode-installation" title="Datanode Installation" class="md-nav__link">
-    Datanode Installation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clientfuse-installation" title="Client/FUSE Installation" class="md-nav__link">
-    Client/FUSE Installation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#standalone-gridftp-node-installation" title="Standalone Gridftp Node Installation" class="md-nav__link">
-    Standalone Gridftp Node Installation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#srm-node-installation" title="SRM Node Installation" class="md-nav__link">
-    SRM Node Installation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration" title="Configuration" class="md-nav__link">
-    Configuration
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#hadoop-configuration" title="Hadoop Configuration" class="md-nav__link">
-    Hadoop Configuration
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#special-namenode-instructions-for-brand-new-installs" title="Special namenode instructions for brand new installs" class="md-nav__link">
-    Special namenode instructions for brand new installs
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fuse-client-configuration" title="FUSE Client Configuration" class="md-nav__link">
-    FUSE Client Configuration
+  <a href="#optional-fuse-client-configuration" title="(optional) FUSE Client Configuration" class="md-nav__link">
+    (optional) FUSE Client Configuration
   </a>
   
 </li>
@@ -817,13 +777,6 @@
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bestman-configuration" title="BeStMan Configuration" class="md-nav__link">
-    BeStMan Configuration
-  </a>
   
 </li>
         
@@ -894,13 +847,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#bestman-validation" title="BeStMan Validation" class="md-nav__link">
-    BeStMan Validation
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -943,18 +889,12 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#gridftp" title="GridFTP" class="md-nav__link">
     GridFTP
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#starting-gridftp-in-standalone-mode" title="Starting GridFTP in Standalone Mode" class="md-nav__link">
@@ -968,19 +908,14 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#file-locations" title="File Locations" class="md-nav__link">
     File Locations
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#known-issues" title="Known Issues" class="md-nav__link">
     Known Issues
   </a>
@@ -1006,10 +941,15 @@
     </nav>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#how-to-get-help" title="How to get Help?" class="md-nav__link">
-    How to get Help?
+  <a href="#getting-help" title="Getting Help" class="md-nav__link">
+    Getting Help
   </a>
   
 </li>
@@ -1018,6 +958,19 @@
   <a href="#references" title="References" class="md-nav__link">
     References
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#users" title="Users" class="md-nav__link">
+    Users
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2647,44 +2600,72 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
+  <a href="#before-starting" title="Before Starting" class="md-nav__link">
+    Before Starting
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#requirements" title="Requirements" class="md-nav__link">
-    Requirements
+  <a href="#designing-your-hdfs-cluster" title="Designing Your HDFS Cluster" class="md-nav__link">
+    Designing Your HDFS Cluster
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-hdfs" title="Installing HDFS" class="md-nav__link">
+    Installing HDFS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading-hdfs" title="Upgrading HDFS" class="md-nav__link">
+    Upgrading HDFS
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#architecture" title="Architecture" class="md-nav__link">
-    Architecture
+  <a href="#preparing-for-the-upgrade" title="Preparing for the upgrade" class="md-nav__link">
+    Preparing for the upgrade
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#host-and-os" title="Host and OS" class="md-nav__link">
-    Host and OS
+  <a href="#updating-to-osg-34" title="Updating to OSG 3.4" class="md-nav__link">
+    Updating to OSG 3.4
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#users" title="Users" class="md-nav__link">
-    Users
+  <a href="#upgrading-the-primary-namenode" title="Upgrading the Primary NameNode" class="md-nav__link">
+    Upgrading the Primary NameNode
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#certificates" title="Certificates" class="md-nav__link">
-    Certificates
+  <a href="#upgrading-the-datanodes" title="Upgrading the DataNodes" class="md-nav__link">
+    Upgrading the DataNodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrading-the-secondary-namenode" title="Upgrading the Secondary NameNode" class="md-nav__link">
+    Upgrading the Secondary NameNode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finalizing-the-upgrade" title="Finalizing the upgrade" class="md-nav__link">
+    Finalizing the upgrade
   </a>
   
 </li>
@@ -2695,91 +2676,23 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation" title="Installation" class="md-nav__link">
-    Installation
+  <a href="#configuring-hdfs" title="Configuring HDFS" class="md-nav__link">
+    Configuring HDFS
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#namenode-installation" title="Namenode Installation" class="md-nav__link">
-    Namenode Installation
+  <a href="#special-namenode-instructions-for-brand-new-installs" title="Special NameNode instructions for brand new installs" class="md-nav__link">
+    Special NameNode instructions for brand new installs
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#secondary-namenode-installation" title="Secondary Namenode Installation" class="md-nav__link">
-    Secondary Namenode Installation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datanode-installation" title="Datanode Installation" class="md-nav__link">
-    Datanode Installation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clientfuse-installation" title="Client/FUSE Installation" class="md-nav__link">
-    Client/FUSE Installation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#standalone-gridftp-node-installation" title="Standalone Gridftp Node Installation" class="md-nav__link">
-    Standalone Gridftp Node Installation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#srm-node-installation" title="SRM Node Installation" class="md-nav__link">
-    SRM Node Installation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration" title="Configuration" class="md-nav__link">
-    Configuration
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#hadoop-configuration" title="Hadoop Configuration" class="md-nav__link">
-    Hadoop Configuration
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#special-namenode-instructions-for-brand-new-installs" title="Special namenode instructions for brand new installs" class="md-nav__link">
-    Special namenode instructions for brand new installs
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fuse-client-configuration" title="FUSE Client Configuration" class="md-nav__link">
-    FUSE Client Configuration
+  <a href="#optional-fuse-client-configuration" title="(optional) FUSE Client Configuration" class="md-nav__link">
+    (optional) FUSE Client Configuration
   </a>
   
 </li>
@@ -2835,13 +2748,6 @@
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bestman-configuration" title="BeStMan Configuration" class="md-nav__link">
-    BeStMan Configuration
-  </a>
   
 </li>
         
@@ -2912,13 +2818,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#bestman-validation" title="BeStMan Validation" class="md-nav__link">
-    BeStMan Validation
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2961,18 +2860,12 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#gridftp" title="GridFTP" class="md-nav__link">
     GridFTP
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#starting-gridftp-in-standalone-mode" title="Starting GridFTP in Standalone Mode" class="md-nav__link">
@@ -2986,19 +2879,14 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#file-locations" title="File Locations" class="md-nav__link">
     File Locations
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#known-issues" title="Known Issues" class="md-nav__link">
     Known Issues
   </a>
@@ -3024,10 +2912,15 @@
     </nav>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#how-to-get-help" title="How to get Help?" class="md-nav__link">
-    How to get Help?
+  <a href="#getting-help" title="Getting Help" class="md-nav__link">
+    Getting Help
   </a>
   
 </li>
@@ -3036,6 +2929,19 @@
   <a href="#references" title="References" class="md-nav__link">
     References
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#users" title="Users" class="md-nav__link">
+    Users
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3055,148 +2961,278 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/install-hadoop-2-0-0.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/install-hadoop.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="hadoop-200-cdh4">Hadoop 2.0.0 (CDH4)<a class="headerlink" href="#hadoop-200-cdh4" title="Permanent link">&para;</a></h1>
-<p>The purpose of this document is to provide Hadoop based SE administrators the information on how to prepare, install
-and validate OSG storage based on the Hadoop Distributed File System (HDFS).  Currently, OSG supports a patched version
-of the CDH4 distribution of HDFS.</p>
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p><a href="http://hadoop.apache.org/">Hadoop Distributed File System</a> (HDFS) is a scalable reliable distributed file system developed in the Apache project. It is based on map-reduce framework and design of the Google file system. The VDT distribution of Hadoop includes all components needed to operate a multi-terabyte storage site. Included are:</p>
+                <h1 id="installing-and-maintaining-hdfs">Installing and Maintaining HDFS<a class="headerlink" href="#installing-and-maintaining-hdfs" title="Permanent link">&para;</a></h1>
+<p><a href="http://hadoop.apache.org/">Hadoop Distributed File System</a> (HDFS) is a scalable, reliable distributed file system developed in the Apache project. It is based on the map-reduce framework and design of the Google file system. The OSG distribution of Hadoop includes all components needed to operate a multi-terabyte storage site.</p>
+<p>The purpose of this document is to provide Hadoop-based Storage Element administrators the information on how to prepare,
+install and validate OSG storage based on the Hadoop Distributed File System (HDFS).
+The OSG supports a patched version HDFS from Cloudera's CDH5 distribution of HDFS
+(<a href="https://www.cloudera.com/products/open-source/apache-hadoop/key-cdh-components.html">https://www.cloudera.com/products/open-source/apache-hadoop/key-cdh-components.html</a>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The OSG only supports HDFS on EL7 hosts</p>
+</div>
+<h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
+<p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
 <ul>
-<li><a href="http://hadoop.apache.org/">Apache Hadoop</a></li>
-<li>A <a href="https://en.wikipedia.org/wiki/Filesystem_in_Userspace">FUSE interface</a> for localized POSIX access.</li>
-<li>GridFTP and XRootD for offsite transfers</li>
+<li><strong>User IDs:</strong> If they do not exist already, the installation will create the Linux users <code>hdfs</code> and <code>zookeeper</code> on all nodes
+    as well as <code>hadoop</code> and <code>mapred</code> on the NameNodes</li>
+<li><strong>Firewall:</strong> In the OSG, HDFS is intended to run as an internal service without any direct, external access to any of the nodes.
+    For more information on the ports used for communication between the various HDFS nodes, see the 
+    <a href="https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_ports_cdh5.html">Cloudera documentation</a>.</li>
 </ul>
-<p>The OSG packaging and distribution of Hadoop is based on YUM. All components are packaged as RPMs and are available
-from the OSG repositories. It is also recommended that you enable <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a> repos.</p>
+<p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
+<ul>
+<li>Ensure the host has <a href="../../release/supported_platforms">a supported operating system</a></li>
+<li>Obtain root access to the host</li>
+<li>Prepare the <a href="../../common/yum">required Yum repositories</a></li>
+</ul>
+<h2 id="designing-your-hdfs-cluster">Designing Your HDFS Cluster<a class="headerlink" href="#designing-your-hdfs-cluster" title="Permanent link">&para;</a></h2>
+<p>There are several important components to an HDFS installation:</p>
+<ul>
+<li><strong>NameNode</strong>: The NameNode functions as the directory server and coordinator of the HDFS cluster.
+    It houses all the meta-data for the hadoop cluster.</li>
+<li><strong>Secondary NameNode (optional)</strong>: This is a secondary machine that periodically merges updates to the HDFS file
+    system back into the <code>fsimage</code>.
+    It must share a directory with the primary NameNode to exchange filesystem checkpoints.
+    An HDFS installation with a Secondary NameNode dramatically improves startup and restart times.</li>
+<li><strong>DataNode</strong>: You will have many DataNodes. Each DataNode stores large blocks of files to for the hadoop cluster.</li>
+<li><strong>Client</strong>: This is a documentation shorthand that refers to any machine with the hadoop client commands or
+    <a href="https://en.wikipedia.org/wiki/Filesystem_in_Userspace">FUSE</a> mount.</li>
+</ul>
+<h2 id="installing-hdfs">Installing HDFS<a class="headerlink" href="#installing-hdfs" title="Permanent link">&para;</a></h2>
+<p>An OSG HDFS installation consists of HDFS and other support software (e.g., Gratia accounting).
+To simplify installation, OSG provides convenience RPMs that install all required software.</p>
+<ol>
+<li>
+<p>Clean yum cache:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum clean all --enablerepo<span class="o">=</span>*
+</pre></div>
+
+
+</li>
+<li>
+<p>Update software:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum update
+</pre></div>
+
+
+<p>This command will update <strong>all</strong> packages</p>
+</li>
+<li>
+<p>Install the relevant packages based on the node you are installing:</p>
+<table>
+<thead>
+<tr>
+<th align="left">If you are installing a(n)...</th>
+<th align="left">Then run the following command...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Primary NameNode</td>
+<td align="left"><code>yum install osg-se-hadoop-namenode</code></td>
+</tr>
+<tr>
+<td align="left">Secondary NameNode</td>
+<td align="left"><code>yum install osg-se-hadoop-secondarynamenode</code></td>
+</tr>
+<tr>
+<td align="left">DataNode</td>
+<td align="left"><code>yum install osg-se-hadoop-datanode</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h2 id="upgrading-hdfs">Upgrading HDFS<a class="headerlink" href="#upgrading-hdfs" title="Permanent link">&para;</a></h2>
+<p>This section will guide you through the process to upgrade a HDFS 2.0.0 installation from OSG 3.3 to the HDFS 2.6.0
+from OSG 3.4.</p>
 <div class="admonition warning">
-<p class="admonition-title">Deprecation Notice</p>
-<p>This installation page additionally includes integration with both the BestMan SRM server and GUMS authorization
-service.  Both of these are deprecated as of June 2017 and support will end May 2018.</p>
+<p class="admonition-title">Warning</p>
+<p>The upgrade process will involve downtime for your HDFS cluster. Please plan accordingly.</p>
 </div>
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<h3 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>There are several important components to a storage element installation. Throughout this document, it will be stated which node the relevant installation instructions apply to. It can apply to one of the following:</p>
+<p>The OSG only offers HDFS 2.6.0 for EL7 hosts.</p>
 </div>
-<ul>
-<li><strong>Namenode</strong>: You will have at least one namenode. The name node functions as the directory server and coordinator of the hadoop cluster. It houses all the meta-data for the hadoop cluster. <span style="color:red">The namenode and secondary namenode need to have a directory that they can both access on a shared filesystem so that they can exchange filesystem checkpoints.</span></li>
-<li><strong>Secondary Namenode</strong>: This is a secondary machine that periodically merges updates to the HDFS file system back into the fsimage. This dramatically improves startup and restart times.</li>
-<li><strong>Datanode</strong>: You will have many datanodes. Each data node stores large blocks of files to be stored on the hadoop cluster.</li>
-<li><strong>Client</strong>: This is a documentation shorthand that refers to any machine with the hadoop client commands and <a href="https://en.wikipedia.org/wiki/Filesystem_in_Userspace">FUSE</a> mount. Any machine that needs a FUSE mount to access data in a POSIX-like fashion will need this.</li>
-<li><strong>GridFTP node</strong>: This is a node with <a href="../gridftp">Globus GridFTP</a>. The GridFTP server for Hadoop can be very memory-hungry, up to 500MB/transfer in the default configuration. You should plan accordingly to provision enough GridFTP servers to handle the bandwidth that your site can support.</li>
-</ul>
-<p>Note that these components are not necessarily mutually exclusive. For instance, you may consider having your GridFTP server co-located on the SRM node. Alternatively, you can locate a client (or even a GridFTP node) co-located on each data node. That way, each data node also acts as an access point to the hadoop cluster.</p>
+<p>The upgrade process occurs in several steps:</p>
+<ol>
+<li><a href="#preparing-for-the-upgrade">Preparing for the upgrade</a></li>
+<li><a href="#updating-to-osg-34">Updating to OSG 3.4</a></li>
+<li><a href="#upgrading-the-primary-namenode">Upgrading the Primary NameNode</a></li>
+<li><a href="#upgrading-the-datanodes">Upgrading the DataNodes</a></li>
+<li><a href="#upgrading-the-secondary-namenode">Upgrading the Secondary NameNode</a></li>
+<li><a href="#finalizing-the-upgrade">Finalizing the upgrade</a></li>
+</ol>
+<h3 id="preparing-for-the-upgrade">Preparing for the upgrade<a class="headerlink" href="#preparing-for-the-upgrade" title="Permanent link">&para;</a></h3>
+<p>Before upgrading, backup your configuration data and HDFS metadata.</p>
+<ol>
+<li>
+<p>Put your Primary NameNode into safe mode:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@primary-namenode #</span> hdfs dfsadmin -safemode enter
+<span class="go">Safe mode is ON</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Save a clean copy of your HDFS namespace:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@primary-namenode #</span> hdfs dfsadmin -saveNamespace
+<span class="go">Save namespace successful</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Shutdown the HDFS services on all of your HDFS nodes (see <a href="#running-services">this section</a> for instructions).</p>
+</li>
+<li>
+<p>On the Primary NameNode, verify that your NameNode service is off:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@primary-namenode #</span> /etc/init.d/hadoop-hdfs-namenode status
+</pre></div>
+
+
+<p>This command should indicate that your NameNode service is not running.</p>
+</li>
+<li>
+<p>Find the location of the directory with the HDFS metadata:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@primary-namenode #</span> grep -C1 dfs.namenode.name.dir /etc/hadoop/conf/hdfs-site.xml
+</pre></div>
+
+
+<p>And look for the value of <code>dfs.namenode.name.dir</code>:</p>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;property&gt;</span>
+ <span class="nt">&lt;name&gt;</span>dfs.namenode.name.dir<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>file:///var/lib/dfs/nn,file:///home/hadoop/dfs/nn<span class="nt">&lt;/value&gt;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Backup the directory that appears in the output using your backup method of choice.
+   If more than one directory appears in the list (as in the example above), choose the most convenient directory.
+   All of the directories in the list will have the same contents.</p>
+</li>
+</ol>
+<h3 id="updating-to-osg-34">Updating to OSG 3.4<a class="headerlink" href="#updating-to-osg-34" title="Permanent link">&para;</a></h3>
+<p>Once your HDFS services have been turned off and the HDFS metadata has been backed up, update each node to OSG 3.4 by
+following the instructions in <a href="../../release/release_series/#updating-from-old">this section</a>.</p>
+<h3 id="upgrading-the-primary-namenode">Upgrading the Primary NameNode<a class="headerlink" href="#upgrading-the-primary-namenode" title="Permanent link">&para;</a></h3>
+<p>To upgrade your Primary NameNode, update all relevant packages then run the upgrade command.</p>
+<ol>
+<li>
+<p>Clear the yum cache:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@primary-namenode #</span> yum clean all --enablerepo<span class="o">=</span>*
+</pre></div>
+
+
+</li>
+<li>
+<p>Update the HDFS RPMs:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@primary-namenode #</span> yum update osg-se-hadoop-namenode --enablerepo-osg-upcoming
+</pre></div>
+
+
+</li>
+<li>
+<p>Perform the upgrade command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@primary-namenode #</span> /etc/init.d/hadoop-hdfs-namenode upgrade
+</pre></div>
+
+
+<p>This will start the upgrade process for the HDFS metadata on your primary namenode.
+You can follow the process by running</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@primary-namenode #</span> tail -f /var/log/hadoop-hdfs/hadoop-hdfs-namenode-&lt;hostname&gt;.log
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="upgrading-the-datanodes">Upgrading the DataNodes<a class="headerlink" href="#upgrading-the-datanodes" title="Permanent link">&para;</a></h3>
+<p>Once the Primary NameNode has completed its upgrade process, start the process of upgrading each of your DataNodes.</p>
+<ol>
+<li>
+<p>Clear the yum cache:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@datanode #</span> yum clean all --enablerepo<span class="o">=</span>*
+</pre></div>
+
+
+</li>
+<li>
+<p>Update the HDFS RPMs:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@datanode #</span> yum update osg-se-hadoop-datanode --enablerepo-osg-upcoming
+</pre></div>
+
+
+</li>
+<li>
+<p>Start the DataNode service:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@datanode #</span> /etc/init.d/hadoop-hdfs-datanode start
+</pre></div>
+
+
+</li>
+<li>
+<p>After all the DataNodes have been brought back up, the Primary NameNode should exit safe mode automatically.
+   On the Primary NameNode, run the following command to verify is no longer in safe mode:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@primary-namenode #</span> hdfs dfsadmin -safemode get
+<span class="go">Safe mode is OFF</span>
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="upgrading-the-secondary-namenode">Upgrading the Secondary NameNode<a class="headerlink" href="#upgrading-the-secondary-namenode" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Total installation time, on an average, should not exceed 8 to 24 man-hours. If your site needs further assistance
-to help expedite, please email <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.</p>
+<p>This section only applies to sites with a Secondary NameNode.
+If you do not run a Secondary NameNode, skip to the <a href="#finalizing-the-upgrade">next section</a>.</p>
 </div>
-<h3 id="host-and-os">Host and OS<a class="headerlink" href="#host-and-os" title="Permanent link">&para;</a></h3>
-<p>Hadoop will run anywhere that Java is supported (including Solaris). However, these instructions are for RedHat derivants (including Scientific Linux) because of the RPM based installation. The current supported Operating Systems supported by the OSG are Red Hat Enterprise Linux 6, 7, and variants (see <a href="../../release/supported_platforms">details...</a>).</p>
-<p>The HDFS prerequisites are:</p>
-<ul>
-<li>Minimum of 1 headnode (the namenode)</li>
-<li>At least one node which will hold data, preferably at least 2. Most sites will have 20 to 200 datanodes.</li>
-<li>Working Yum and RPM installation on every system.</li>
-<li><code>fuse</code> kernel module and <code>fuse-libs</code>.</li>
-<li>Java RPM. If java isn't already installed we supply the Oracle jdk 1.6.0 rpm and it will come in as a dependency. Oracle jdk is currently the only jdk supported by OSG so we highly recommend you use the version supplied.</li>
-</ul>
-<h3 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h3>
-<p>This installation will create following users unless they are already created.</p>
-<table>
-<thead>
-<tr>
-<th align="left">User</th>
-<th align="left">Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>hdfs</code></td>
-<td align="left">Used by Hadoop to store data blocks and meta-data</td>
-</tr>
-</tbody>
-</table>
-<p>For this package to function correctly, you will have to create the users needed for grid operation. Any user that can be authenticated should be created.</p>
-<p>For grid-mapfile users, each line of the grid-mapfile is a certificate/user pair. Each user in this file should be created on the server.</p>
-<p>For gums users, this means that each user that can be authenticated by gums should be created on the server.</p>
-<p>Note that these users must be kept in sync with the authentication method. For instance, if new users or rules are added in gums, then new users should also be added here.</p>
-<h3 id="certificates">Certificates<a class="headerlink" href="#certificates" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th align="left">Certificate</th>
-<th align="left">User that owns certificate</th>
-<th align="left">Path to certificate</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Host certificate</td>
-<td align="left"><code>root</code></td>
-<td align="left"><code>/etc/grid-security/hostcert.pem</code> <br> <code>/etc/grid-security/hostkey.pem</code></td>
-</tr>
-</tbody>
-</table>
-<p><a href="../../security/host-certs">Instructions</a> to request a service certificate.</p>
-<p>You will also need a copy of CA certificates; see the <a href="../../common/ca">CA certificate installation document</a> if you are
-unfamiliar with this procedure.  This is needed by GridFTP and SRM nodes, but it is recommended for all nodes in the
-cluster.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Make sure you enable <a href="../../common/ca#install-fetch-crl">fetch-crl</a></p>
-</div>
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<p>Installation depends on the node you are installing:</p>
-<h3 id="namenode-installation">Namenode Installation<a class="headerlink" href="#namenode-installation" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-se-hadoop-namenode
+<p>Once the Primary NameNode has exited safe mode, start the process of upgrading your Secondary NameNode.</p>
+<ol>
+<li>
+<p>Clear the yum cache:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@secondary-namenode #</span> yum clean all --enablerepo<span class="o">=</span>*
 </pre></div>
 
 
-<h3 id="secondary-namenode-installation">Secondary Namenode Installation<a class="headerlink" href="#secondary-namenode-installation" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-se-hadoop-secondarynamenode
+</li>
+<li>
+<p>Update the HDFS RPMs:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@secondary-namenode #</span> yum update osg-se-hadoop-secondarynamenode --enablerepo-osg-upcoming
 </pre></div>
 
 
-<h3 id="datanode-installation">Datanode Installation<a class="headerlink" href="#datanode-installation" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-se-hadoop-datanode
+</li>
+<li>
+<p>Start the Secondary NameNode service:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@secondary-namenode #</span> /etc/init.d/hadoop-hdfs-secondarynamenode start
 </pre></div>
 
 
-<h3 id="clientfuse-installation">Client/FUSE Installation<a class="headerlink" href="#clientfuse-installation" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-se-hadoop-client
+</li>
+</ol>
+<h3 id="finalizing-the-upgrade">Finalizing the upgrade<a class="headerlink" href="#finalizing-the-upgrade" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Verify that the HDFS cluster is running correctly by following the instructions in <a href="#validation_1">this section</a>.</p>
+</li>
+<li>
+<p>Finalize the upgrade from the Primary NameNode:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@primary-namenode #</span> hdfs dfsadmin -finalizeUpgrade
+<span class="go">Finalize upgrade successful</span>
 </pre></div>
 
 
-<h3 id="standalone-gridftp-node-installation">Standalone Gridftp Node Installation<a class="headerlink" href="#standalone-gridftp-node-installation" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-se-hadoop-gridftp
-</pre></div>
-
-
-<p>If you are using GUMS authorization, the follow rpms need to be installed as well:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install lcmaps-plugins-gums-client
-<span class="gp">root@host #</span> yum install lcmaps-plugins-basic
-</pre></div>
-
-
-<h3 id="srm-node-installation">SRM Node Installation<a class="headerlink" href="#srm-node-installation" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-se-hadoop-srm
-</pre></div>
-
-
+</li>
+</ol>
+<h2 id="configuring-hdfs">Configuring HDFS<a class="headerlink" href="#configuring-hdfs" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you are using a single system to host the SRM software and the GridFTP node, you'll also need to install the <code>osg-se-hadoop-gridftp</code> rpm as well.</p>
-</div>
-<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
-<h3 id="hadoop-configuration">Hadoop Configuration<a class="headerlink" href="#hadoop-configuration" title="Permanent link">&para;</a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Needed by: Hadoop namenode, Hadoop datanodes, Hadoop client, GridFTP, SRM</p>
+<p>Needed by: Hadoop NameNode, Hadoop DataNodes, Hadoop client, GridFTP</p>
 </div>
 <p>Hadoop configuration is needed by every node in the hadoop cluster. However, in most cases, you can do the configuration once and copy it to all nodes in the cluster (possibly using your favorite configuration management tool). Special configuration for various special components is given in the below sections.</p>
 <p>Hadoop configuration is stored in <code>/etc/hadoop/conf</code>. However, by default, these files are mostly blank. OSG provides a sample configuration in <code>/etc/hadoop/conf.osg</code> with most common values filled in. You will need to copy these into <code>/etc/hadoop/conf</code> before they become active. Please let us know if there are any common values that should be added/changed across the whole grid. You will likely need to modify <code>hdfs-site.xml</code> and <code>core-site.xml</code>. Review all the settings in these files, but listed below are common settings to modify:</p>
@@ -3220,7 +3256,7 @@ cluster.</p>
 <td><code>core-site.xml</code></td>
 <td>fs.default.name</td>
 <td>hdfs://namenode.domain.tld.:9000</td>
-<td>This is the address of the namenode</td>
+<td>This is the address of the NameNode</td>
 </tr>
 <tr>
 <td><code>core-site.xml</code></td>
@@ -3262,13 +3298,13 @@ cluster.</p>
 <td><code>hdfs-site.xml</code></td>
 <td>dfs.datanode.handler.count</td>
 <td>20</td>
-<td>Number of server threads for datanodes. Increase if you have many more client connections</td>
+<td>Number of server threads for DataNodes. Increase if you have many more client connections</td>
 </tr>
 <tr>
 <td><code>hdfs-site.xml</code></td>
 <td>dfs.namenode.handler.count</td>
 <td>40</td>
-<td>Number of server threads for namenodes. Increase if you need more connections</td>
+<td>Number of server threads for NameNodes. Increase if you need more connections</td>
 </tr>
 <tr>
 <td><code>hdfs-site.xml</code></td>
@@ -3281,21 +3317,17 @@ cluster.</p>
 <p>See <a href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml">http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml</a> for more parameters to configure.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Namenodes must have a <code>/etc/hosts_exclude</code> present</p>
+<p>NameNodes must have a <code>/etc/hosts_exclude</code> present</p>
 </div>
-<h4 id="special-namenode-instructions-for-brand-new-installs">Special namenode instructions for brand new installs<a class="headerlink" href="#special-namenode-instructions-for-brand-new-installs" title="Permanent link">&para;</a></h4>
-<p>If this is a new installation (<span style="color:red">and only if this is a brand new installation<span class="twiki-macro ENDCOLOR"></span>), you should run the following command as the <code>hdfs</code> user. (Otherwise, be sure to <code>chown</code> your storage directory to hdfs after running):</p>
+<h4 id="special-namenode-instructions-for-brand-new-installs">Special NameNode instructions for brand new installs<a class="headerlink" href="#special-namenode-instructions-for-brand-new-installs" title="Permanent link">&para;</a></h4>
+<p>If this is a new installation (<span style="color:red">and only if this is a brand new installation</span>), you should run the following command as the <code>hdfs</code> user. (Otherwise, be sure to <code>chown</code> your storage directory to hdfs after running):</p>
 <div class="codehilite"><pre><span></span><span class="go">hadoop namenode -format</span>
 </pre></div>
 
 
-<p>This will initialize the storage directory on your namenode</p>
-<h3 id="fuse-client-configuration">FUSE Client Configuration<a class="headerlink" href="#fuse-client-configuration" title="Permanent link">&para;</a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Needed by: Hadoop client and SRM node. Recommended but not neccessary for GridFTP nodes.</p>
-</div>
-<p>A FUSE mount is required on any node that you would like to use standard POSIX-like commands on the Hadoop filesystem. FUSE (or "file system in user space") is a way to access Hadoop using typical UNIX directory commands (ie POSIX-like access). Note that not all advanced functions of a full POSIX-compliant file system are necessarily available.</p>
+<p>This will initialize the storage directory on your NameNode</p>
+<h3 id="optional-fuse-client-configuration">(optional) FUSE Client Configuration<a class="headerlink" href="#optional-fuse-client-configuration" title="Permanent link">&para;</a></h3>
+<p>A FUSE mount is required on any node that you would like to use standard POSIX-like commands on the Hadoop filesystem. FUSE (or "File system in User SpacE") is a way to access HDFS using typical UNIX directory commands (i.e., POSIX-like access). Note that not all advanced functions of a full POSIX-compliant file system are necessarily available.</p>
 <p>FUSE is typically installed as part of this installation, but, if you are running a customized or non-standard system, make sure that the fuse kernel module is installed and loaded with <code>modprobe fuse</code>.</p>
 <p>You can add the FUSE to be mounted at boot time by adding the following line to <code>/etc/fstab</code>:</p>
 <div class="codehilite"><pre><span></span>hadoop-fuse-dfs# <span style="color:red">/mnt/hadoop</span> fuse server=<span style="color:red">namenode.host</span>,port=9000,rdbuffer=131072,allow_other 0 0
@@ -3320,12 +3352,11 @@ cluster.</p>
 <h3 id="creating-vo-and-user-areas">Creating VO and User Areas<a class="headerlink" href="#creating-vo-and-user-areas" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Grid Users are needed by GridFTP and SRM nodes. VO areas are common to all nodes.</p>
+<p>Grid Users are needed by GridFTP nodes. VO areas are common to all nodes.</p>
 </div>
 <p>For this package to function correctly, you will have to create the users needed for grid operation. Any user that can be authenticated should be created.</p>
 <p>For grid-mapfile users, each line of the grid-mapfile is a certificate/user pair. Each user in this file should be created on the server.</p>
-<p>For gums users, this means that each user that can be authenticated by gums should be created on the server.</p>
-<p>Note that these users must be kept in sync with the authentication method. For instance, if new users or rules are added in gums, then new users should also be added here.</p>
+<p>Note that these users must be kept in sync with the authentication method.</p>
 <p>Prior to starting basic day-to-day operations, it is important to create dedicated areas for each VO and/or user. This is similar to user management in simple UNIX filesystems. Create (and maintain) usernames and groups with UIDs and GIDs on <strong>all nodes</strong>. These are maintained in basic system files such as <code>/etc/passwd</code> and <code>/etc/group</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -3361,8 +3392,17 @@ cluster.</p>
 
 
 <h3 id="gridftp-configuration">GridFTP Configuration<a class="headerlink" href="#gridftp-configuration" title="Permanent link">&para;</a></h3>
-<p>gridftp-hdfs reads the Hadoop configuration file to learn how to talk to Hadoop. By now, you should have followed the instruction for installing hadoop as detailed in the previous section as well as created the proper users/directories.</p>
-<p>The default settings in <code>/etc/gridftp.conf</code> along with <code>/etc/gridftp.d/gridftp-hdfs.conf</code> are used by the init.d script and should be ok for most installations. The file <code>/etc/gridftp-hdfs/gridftp-debug.conf</code> is used by <code>/usr/bin/gridftp-hdfs-standalone</code> for starting up the GridFTP server in a testing mode. Any additional config files under <code>/etc/gridftp.d</code> will be used for both the init.d and standalone GridFTP server. <code>/etc/sysconfig/gridftp-hdfs</code> contains additional site-specific environment variables that are used by the gridftp-hdfs dsi module in both the init.d and standalone GridFTP server. Some of the environment variables that can be used in <code>/etc/sysconfig/gridftp-hdfs</code> include:</p>
+<p>gridftp-hdfs reads the Hadoop configuration file to learn how to talk to Hadoop.
+By now, you should have followed the instruction for installing hadoop as detailed in the previous section as well as
+created the proper users/directories.</p>
+<p>The default settings in <code>/etc/gridftp.conf</code> along with <code>/etc/gridftp.d/gridftp-hdfs.conf</code> are used by the init.d script
+and should be ok for most installations.
+The file <code>/etc/gridftp-hdfs/gridftp-debug.conf</code> is used by <code>/usr/bin/gridftp-hdfs-standalone</code> for starting up the
+GridFTP server in a testing mode.
+Any additional config files under <code>/etc/gridftp.d</code> will be used for both the init.d and standalone GridFTP server.
+<code>/etc/sysconfig/gridftp-hdfs</code> contains additional site-specific environment variables that are used by the gridftp-hdfs
+DSI module in both the init.d and standalone GridFTP server.
+Some of the environment variables that can be used in <code>/etc/sysconfig/gridftp-hdfs</code> include:</p>
 <table>
 <thead>
 <tr>
@@ -3423,7 +3463,8 @@ cluster.</p>
 <p class="admonition-title">Note</p>
 <p>Needed by GridFTP node only.</p>
 </div>
-<p>The Gratia probe requires the file <code>user-vo-map</code> to exist and be up to date. This file is created and updated by the <code>gums-client</code> package that comes in as a dependency of <code>osg-se-hadoop-gridftp</code> or <code>osg-gridftp-hdfs</code>. Assuming you installed GridFTP using the <code>osg-se-hadoop-gridftp</code> rpm, the Gratia Transfer Probe will already be installed.</p>
+<p>The Gratia probe requires the file <code>user-vo-map</code> to exist and be up to date.
+Assuming you installed GridFTP using the <code>osg-se-hadoop-gridftp</code> rpm, the Gratia Transfer Probe will already be installed.</p>
 <p>Here are the most relevant file and directory locations:</p>
 <table>
 <thead>
@@ -3546,20 +3587,10 @@ cluster.</p>
 
 
 <p>Look for any abnormal termination and report it if it is a non-trivial site issue. Look in the log files in <code>/var/log/gratia/&lt;date&gt;.log</code> and make sure there are no error messages printed.</p>
-<h3 id="bestman-configuration">BeStMan Configuration<a class="headerlink" href="#bestman-configuration" title="Permanent link">&para;</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Deprecation Warning</p>
-<p>As of June 2017, support for the <code>bestman2</code> software has been deprecated.  Support will end in May 2018</p>
-</div>
-<p>See the <a href="../bestman-install#authorization">bestman2 documentation</a> for instructions on how to install and configure
-<code>bestman2</code>.</p>
-<p>BeStMan2 SRM uses the Hadoop FUSE mount to perform namespace operations via common POSIX tools, such as <code>mkdir</code>, <code>rm</code>,
-and <code>ls</code>.  It is <strong>not</strong> necessary (or even recommended) to start any HDFS services on the <code>bestman2</code> host.</p>
-<p>Make sure that you modify <code>localPathListAllowed</code> to use the Hadoop mount in <code>/etc/bestman2/conf/bestman2.rc</code>.</p>
 <h3 id="hadoop-storage-probe-configuration">Hadoop Storage Probe Configuration<a class="headerlink" href="#hadoop-storage-probe-configuration" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This is only needed by the Hadoop Namenode</p>
+<p>This is only needed by the Hadoop NameNode</p>
 </div>
 <p>Here are the most relevant file and directory locations:</p>
 <table>
@@ -3686,56 +3717,67 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 
 
 <h2 id="running-services">Running Services<a class="headerlink" href="#running-services" title="Permanent link">&para;</a></h2>
-<p>Namenode:</p>
-<div class="codehilite"><pre><span></span><span class="gp">#</span>Starting namenode
-<span class="go">service hadoop-hdfs-namenode start</span>
-<span class="gp">#</span>Stopping namenode
-<span class="go">service hadoop-hdfs-namenode stop</span>
-</pre></div>
-
-
-<p>Secondary Namenode:</p>
-<div class="codehilite"><pre><span></span><span class="gp">#</span>Starting secondary namenode
-<span class="go">service hadoop-hdfs-secondarynamenode start</span>
-<span class="gp">#</span>Stopping secondary namenode
-<span class="go">service hadoop-hdfs-secondarynamenode stop</span>
-</pre></div>
-
-
-<p>Datanode:</p>
-<div class="codehilite"><pre><span></span><span class="gp">#</span>Starting namenode
-<span class="go">service hadoop-hdfs-datanode start</span>
-<span class="gp">#</span>Stopping namenode
-<span class="go">service hadoop-hdfs-datanode stop</span>
-</pre></div>
-
-
-<p>GridFTP:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service globus-gridftp-server start
-</pre></div>
-
-
-<p>To start Gridftp automatically at boot time</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chkconfig globus-gridftp-server on
-</pre></div>
-
-
-<p>Stopping GridFTP:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service globus-gridftp-server stop
-</pre></div>
-
-
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service bestman2 start
-</pre></div>
-
-
-<p>To start Bestman automatically at boot time</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chkconfig bestman2 on
-</pre></div>
-
-
+<p>Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as <code>root</code>):</p>
+<table>
+<thead>
+<tr>
+<th align="left">To...</th>
+<th align="left">On EL6, run the command...</th>
+<th align="left">On EL7, run the command...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Start a service</td>
+<td align="left"><code>service &lt;SERVICE-NAME&gt; start</code></td>
+<td align="left"><code>systemctl start &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Stop a  service</td>
+<td align="left"><code>service &lt;SERVICE-NAME&gt; stop</code></td>
+<td align="left"><code>systemctl stop &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Enable a service to start on boot</td>
+<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; on</code></td>
+<td align="left"><code>systemctl enable &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Disable a service from starting on boot</td>
+<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; off</code></td>
+<td align="left"><code>systemctl disable &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>The relevant service for each node is as follows:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Node</th>
+<th align="left">Service</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Primary NameNode</td>
+<td align="left">hadoop-hdfs-namenode</td>
+</tr>
+<tr>
+<td align="left">Secondary NameNode</td>
+<td align="left">hadoop-hdfs-secondarynamenode</td>
+</tr>
+<tr>
+<td align="left">DataNode</td>
+<td align="left">hadoop-hdfs-datanode</td>
+</tr>
+<tr>
+<td align="left">GridFTP</td>
+<td align="left">globus-gridftp-server</td>
+</tr>
+</tbody>
+</table>
 <h2 id="validation_1">Validation<a class="headerlink" href="#validation_1" title="Permanent link">&para;</a></h2>
-<p>The first thing you may want to do after installing and starting your <strong>Namenode</strong> is to verify that the web interface works. In your web browser go to:</p>
+<p>The first thing you may want to do after installing and starting your primary NameNode is to verify that the web interface works. In your web browser go to:</p>
 <div class="codehilite"><pre><span></span>http://<span style="color:red">namenode.hostname</span>:50070/dfshealth.jsp
 </pre></div>
 
@@ -3869,15 +3911,6 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 
 
 <p>If you are having troubles running GridFTP refer to <a href="#starting-gridftp-in-standalone-mode">Starting GridFTP in Standalone Mode</a> in the Troubleshooting section.</p>
-<h3 id="bestman-validation">BeStMan Validation<a class="headerlink" href="#bestman-validation" title="Permanent link">&para;</a></h3>
-<p>There are three ways of validating BeStMan: * SrmTester: BeStMan testing application * InstallRSV: RSV monitoring tools * BestMan client tools</p>
-<p>See the relevant pages for the first two options. This section will detail some basic client commands to validate. You will need grid credentials in order to test using client tools.</p>
-<div class="codehilite"><pre><span></span><span class="go">srm-ping srm://BeStMan_host:secured_http_port/srm/v2/server</span>
-<span class="go">srm-copy file:////tmp/test1  srm://BeStMan_host:secured_http_port/srm/v2/server\?SFN=/mnt/hadoop/VONAME/test_1</span>
-</pre></div>
-
-
-<p>The <code>srm-ping</code> tool should return a valid mapping <code>gumsIDMapped</code> that is not null</p>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <h3 id="hadoop">Hadoop<a class="headerlink" href="#hadoop" title="Permanent link">&para;</a></h3>
 <p>To view all of the currently configured settings of Hadoop from the web interface, enter the following url in your browser:</p>
@@ -4117,8 +4150,7 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 
 
 <p>Debug output will be printed to stderr, which you will probably want to redirect to a file. Most FUSE-related problems can be tackled by reading through the stderr and looking for error messages.</p>
-<h3 id="gridftp">GridFTP<a class="headerlink" href="#gridftp" title="Permanent link">&para;</a></h3>
-<p>#GridFTPStand</p>
+<h4 id="gridftp">GridFTP<a class="headerlink" href="#gridftp" title="Permanent link">&para;</a></h4>
 <h4 id="starting-gridftp-in-standalone-mode">Starting GridFTP in Standalone Mode<a class="headerlink" href="#starting-gridftp-in-standalone-mode" title="Permanent link">&para;</a></h4>
 <p>If you would like to test the gridftp-hdfs server in a debug standalone mode, you can run the command:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> gridftp-hdfs-standalone
@@ -4126,7 +4158,7 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 
 
 <p>The standalone server runs on port 5002, handles a single GridFTP request, and will log output to stdout/stderr.</p>
-<h2 id="file-locations">File Locations<a class="headerlink" href="#file-locations" title="Permanent link">&para;</a></h2>
+<h3 id="file-locations">File Locations<a class="headerlink" href="#file-locations" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -4189,7 +4221,7 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 <td>Hadoop</td>
 <td>runtime config files</td>
 <td><code>/etc/hosts_exclude</code></td>
-<td>Yes, must be present on namenodes</td>
+<td>Yes, must be present on NameNodes</td>
 </tr>
 <tr>
 <td>GridFTP</td>
@@ -4312,7 +4344,7 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 </tr>
 </tbody>
 </table>
-<h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h2>
+<h3 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h3>
 <h4 id="replicas">Replicas<a class="headerlink" href="#replicas" title="Permanent link">&para;</a></h4>
 <p>You may need to change the following line in <code>/usr/share/gridftp-hdfs/gridftp-hdfs-environment</code>:</p>
 <div class="codehilite"><pre><span></span>export GRIDFTP_HDFS_REPLICAS=2
@@ -4354,7 +4386,7 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 
 <p></p>
 </details></p>
-<p>This can occur if you try to install a Datanode on a machine with less than 10GB of disk space available. This can be changed by lowering the value of the following property in <code>/usr/lib/hadoop-0.20/conf/hdfs-site.xml</code>:</p>
+<p>This can occur if you try to install a DataNode on a machine with less than 10GB of disk space available. This can be changed by lowering the value of the following property in <code>/usr/lib/hadoop-0.20/conf/hdfs-site.xml</code>:</p>
 <div class="codehilite"><pre><span></span><span class="nt">&lt;property&gt;</span>
   <span class="nt">&lt;name&gt;</span>dfs.datanode.du.reserved<span class="nt">&lt;/name&gt;</span>
   <span class="nt">&lt;value&gt;</span>10000000000<span class="nt">&lt;/value&gt;</span>
@@ -4363,19 +4395,42 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 
 
 <p>Hadoop always requires this amount of disk space to be available for non-hdfs usage on the machine.</p>
-<h2 id="how-to-get-help">How to get Help?<a class="headerlink" href="#how-to-get-help" title="Permanent link">&para;</a></h2>
-<p>If you cannot resolve the problem, there are several ways to receive help:</p>
-<ul>
-<li>For bug support and issues, submit a ticket to the <a href="https://ticket.opensciencegrid.org">Grid Operations Center</a>.</li>
-<li>For community support and best-effort software team support contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#115;&#103;&#45;&#115;&#111;&#102;&#116;&#119;&#97;&#114;&#101;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#111;&#115;&#103;&#45;&#115;&#111;&#102;&#116;&#119;&#97;&#114;&#101;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.</li>
-<li>For additional community support, contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#115;&#103;&#45;&#104;&#97;&#100;&#111;&#111;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#111;&#115;&#103;&#45;&#104;&#97;&#100;&#111;&#111;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>. Note, this is only best-effort help from OSG Software team.</li>
-</ul>
-<p>For a full set of help options, see <a href="../../common/help">Help Procedure</a>.</p>
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
+<p>To get assistance, please use the <a href="../../common/help">this page</a>.</p>
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="http://www.iop.org/EJ/article/1742-6596/180/1/012047/jpconf9_180_012047.pdf">Using Hadoop as a Grid Storage Element</a>, <em>Journal of Physics Conference Series, 2009</em>.</li>
 <li><a href="http://osg-docdb.opensciencegrid.org/0009/000911/001/Hadoop.pdf">Hadoop Distributed File System for the Grid</a>, <em>IEEE Nuclear Science Symposium, 2009</em>.</li>
 </ul>
+<h3 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h3>
+<p>This installation will create following users unless they are already created.</p>
+<table>
+<thead>
+<tr>
+<th align="left">User</th>
+<th align="left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>hadoop</code></td>
+<td align="left">Runs the NameNode services</td>
+</tr>
+<tr>
+<td align="left"><code>hdfs</code></td>
+<td align="left">Used by Hadoop to store data blocks and meta-data</td>
+</tr>
+<tr>
+<td align="left"><code>mapred</code></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>zookeeper</code></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>For this package to function correctly, you will have to create the users needed for grid operation. Any user that can be authenticated should be created.</p>
                 
                   
                 
