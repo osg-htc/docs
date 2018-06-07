@@ -98,11 +98,13 @@ Before upgrading, backup your configuration data and HDFS metadata.
 
         :::console
         root@primary-namenode # hdfs dfsadmin -safemode enter
+        Safe mode is ON
 
 1. Save a clean copy of your HDFS namespace:
 
         :::console
         root@primary-namenode # hdfs dfsadmin -saveNamespace
+        Save namespace successful
 
 1. Shutdown the HDFS services on all of your HDFS nodes (see [this section](#running-services) for instructions).
 
@@ -183,6 +185,9 @@ Once the Primary NameNode has completed its upgrade process, start the process o
 
         :::console
         root@primary-namenode # hdfs dfsadmin -safemode get
+        Safe mode is OFF
+
+   
 
 ### Upgrading the Secondary NameNode ###
 
@@ -215,6 +220,7 @@ Once the Primary NameNode has exited safe mode, start the process of upgrading y
 
         :::console
         root@primary-namenode # hdfs dfsadmin -finalizeUpgrade
+        Finalize upgrade successful
 
 Configuring HDFS
 ----------------
