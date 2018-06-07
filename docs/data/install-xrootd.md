@@ -661,7 +661,7 @@ xrootd.fslib /usr/lib64/libXrdOfs.so
 ofs.osslib /usr/lib64/libXrdHdfs.so
 ```
 
-For more information, see [the HDFS installation documents](install-hadoop-2-0-0).
+For more information, see [the HDFS installation documents](install-hadoop).
 
 ### (Optional) Adding File Residency Manager (FRM) to an XRootd cluster
 

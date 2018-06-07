@@ -35,7 +35,7 @@ pages:
     - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
   - HDFS:
     - 'HDFS Overview': 'data/hadoop-overview.md'
-    - 'Install HDFS': 'data/install-hadoop-2-0-0.md'
+    - 'Install HDFS': 'data/install-hadoop.md'
   - XRootD:
     - 'XRootD Overview': 'data/xrootd-overview.md'
     - 'Install XRootD': 'data/install-xrootd.md'
