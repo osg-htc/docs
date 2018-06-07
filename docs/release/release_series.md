@@ -91,8 +91,8 @@ Therefore, the VOMS Admin service should be disabled immediately.
 
     | If your host OS is... | Then the service name is... |
     |-----------------------|-----------------------------|
-    | EL6                   | `tomcat5`                   |
-    | EL7                   | `tomcat6`                   |
+    | EL6                   | `tomcat6`                   |
+    | EL7                   | `tomcat`                    |
 
 1. Turn off and disable the VOMS Admin server webapp:
 
