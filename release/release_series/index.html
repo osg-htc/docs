@@ -2004,6 +2004,53 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#retiring-your-voms-server" title="Retiring Your VOMS Server" class="md-nav__link">
+    Retiring Your VOMS Server
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#disabling-the-voms-admin-service" title="Disabling the VOMS Admin service" class="md-nav__link">
+    Disabling the VOMS Admin service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disabling-the-voms-service" title="Disabling the VOMS service" class="md-nav__link">
+    Disabling the VOMS service
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identifying-voms-clients" title="Identifying VOMS clients" class="md-nav__link">
+    Identifying VOMS clients
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finalizing-the-voms-retirement" title="Finalizing the VOMS retirement" class="md-nav__link">
+    Finalizing the VOMS retirement
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#migrating-from-edg-mkgridmap-to-lcmaps-voms-plugin" title="Migrating from edg-mkgridmap to LCMAPS VOMS Plugin" class="md-nav__link">
     Migrating from edg-mkgridmap to LCMAPS VOMS Plugin
   </a>
@@ -2350,6 +2397,53 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#retiring-your-voms-server" title="Retiring Your VOMS Server" class="md-nav__link">
+    Retiring Your VOMS Server
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#disabling-the-voms-admin-service" title="Disabling the VOMS Admin service" class="md-nav__link">
+    Disabling the VOMS Admin service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disabling-the-voms-service" title="Disabling the VOMS service" class="md-nav__link">
+    Disabling the VOMS service
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identifying-voms-clients" title="Identifying VOMS clients" class="md-nav__link">
+    Identifying VOMS clients
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finalizing-the-voms-retirement" title="Finalizing the VOMS retirement" class="md-nav__link">
+    Finalizing the VOMS retirement
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#migrating-from-edg-mkgridmap-to-lcmaps-voms-plugin" title="Migrating from edg-mkgridmap to LCMAPS VOMS Plugin" class="md-nav__link">
     Migrating from edg-mkgridmap to LCMAPS VOMS Plugin
   </a>
@@ -2492,6 +2586,83 @@
 </li>
 </ol>
 <p><strong>Troubleshooting</strong> If you are not having the expected result or having problems with Yum please see the <a href="../../release/yum-basics#troubleshooting">Yum troubleshooting guide</a></p>
+<h2 id="retiring-your-voms-server">Retiring Your VOMS Server<a class="headerlink" href="#retiring-your-voms-server" title="Permanent link">&para;</a></h2>
+<p>Due to the <a href="https://opensciencegrid.org/technology/policy/release-series/">end of OSG 3.3 support</a>, VOMS Admin server is
+no longer supported in the OSG as of May 2018.
+Please see <a href="https://opensciencegrid.org/technology/policy/voms-admin-retire/">this policy document</a> for details on the
+VOMS Admin retirement.</p>
+<p>This section describes how to gracefully retire your VOMS host.</p>
+<h3 id="disabling-the-voms-admin-service">Disabling the VOMS Admin service<a class="headerlink" href="#disabling-the-voms-admin-service" title="Permanent link">&para;</a></h3>
+<p>The VOMS Admin service provides a web interface to manage membership of your virtual organization (VO).
+It also handles queries for the list of VO members, which may have
+<a href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation">General Data Protection Regulation</a> implications.
+Therefore, the VOMS Admin service should be disabled immediately.</p>
+<ol>
+<li>
+<p>Choose the service name based on your OS version for subsequent steps:</p>
+<table>
+<thead>
+<tr>
+<th>If your host OS is...</th>
+<th>Then the service name is...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EL6</td>
+<td><code>tomcat6</code></td>
+</tr>
+<tr>
+<td>EL7</td>
+<td><code>tomcat</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Turn off and disable the VOMS Admin server webapp:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@voms #</span> service <span style="color:red">&lt;SERVICE NAME&gt;</span> stop
+<span class="gp">root@voms #</span> chkconfig disable <span style="color:red">&lt;SERVICE NAME&gt;</span>
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="disabling-the-voms-service">Disabling the VOMS service<a class="headerlink" href="#disabling-the-voms-service" title="Permanent link">&para;</a></h3>
+<p>The VOMS service accepts requests from clients to sign the VOMS attributes of their proxies.
+These VOMS attributes can then be used to authorize job submissions and file transfers in the OSG.</p>
+<p>Before turning off the VOMS service, it is important to migrate any clients to avoid disruption of your VO's workflows.</p>
+<h4 id="identifying-voms-clients">Identifying VOMS clients<a class="headerlink" href="#identifying-voms-clients" title="Permanent link">&para;</a></h4>
+<p>To find all clients requesting VOMS attribute signatures, run the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@voms #</span> awk -F <span class="s1">&#39;:&#39;</span> <span class="s1">&#39;/Received request from/ {print $11}&#39;</span> /var/log/voms/voms.<span style="color:red">&lt;VO&gt;</span>.1 <span class="p">|</span> sort <span class="p">|</span> uniq -c
+</pre></div>
+
+
+<ul>
+<li>
+<p>If there are any GlideinWMS frontends requesting VOMS attribute signatures:</p>
+<ol>
+<li>Securely copy the VOMS certificate and key to the frontend host(s)</li>
+<li>Configure the GlideinWMS frontend to directly sign the VOMS attributes of the pilot proxies using the
+instructions in <a href="../../other/install-gwms-frontend#proxy-configuration">this section</a>.</li>
+</ol>
+</li>
+<li>
+<p>If there are any VO users requesting VOMS attribute signatures: contact them to tell them that they will need to
+  generate proxies differently after the VOMS server retirement using one of the following commands:</p>
+<ul>
+<li><code>user@host $ voms-proxy-init</code></li>
+<li><code>user@host$ grid-proxy-init</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="finalizing-the-voms-retirement">Finalizing the VOMS retirement<a class="headerlink" href="#finalizing-the-voms-retirement" title="Permanent link">&para;</a></h4>
+<p>When you have migrated all clients off of your VOMS server, it is safe to turn off and disable the VOMS service:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@voms #</span> service voms stop
+<span class="gp">root@voms #</span> chkconfig disable voms
+</pre></div>
+
+
 <h2 id="migrating-from-edg-mkgridmap-to-lcmaps-voms-plugin">Migrating from edg-mkgridmap to LCMAPS VOMS Plugin<a class="headerlink" href="#migrating-from-edg-mkgridmap-to-lcmaps-voms-plugin" title="Permanent link">&para;</a></h2>
 <p>After following the update instructions above, perform the migration process documented <a href="../../security/lcmaps-voms-authentication#migrating-from-edg-mkgridmap">here</a>.</p>
 <h2 id="updating-from-frontier-squid-27-to-frontier-squid-35-upgrading-from-osg-33">Updating from Frontier Squid 2.7 to Frontier Squid 3.5 (upgrading from OSG 3.3)<a class="headerlink" href="#updating-from-frontier-squid-27-to-frontier-squid-35-upgrading-from-osg-33" title="Permanent link">&para;</a></h2>
