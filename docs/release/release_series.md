@@ -112,7 +112,9 @@ Before turning off the VOMS service, it is important to migrate any clients to a
 To find all clients requesting VOMS attribute signatures, run the following command:
 
 ``` console
-root@voms # awk -F ':' '/Received request from/ {print $11}' /var/log/voms/voms.%RED%<VO>%ENDCOLOR%.1 | sort | uniq -c
+root@voms # awk -F ':' '/Received request from/ {print $11}' \
+    /var/log/voms/voms.%RED%<VO>%ENDCOLOR% \
+    /var/log/voms/voms.%RED%<VO>%ENDCOLOR%.[0-9] | sort | uniq -c
 ```
 
 - If there are any GlideinWMS frontends requesting VOMS attribute signatures:
