@@ -70,6 +70,72 @@ Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4
 
 **Troubleshooting** If you are not having the expected result or having problems with Yum please see the [Yum troubleshooting guide](../release/yum-basics#troubleshooting)
 
+Retiring Your VOMS Server
+-------------------------
+
+Due to the [end of OSG 3.3 support](https://opensciencegrid.org/technology/policy/release-series/), VOMS Admin server is
+no longer supported in the OSG as of May 2018.
+Please see [this policy document](https://opensciencegrid.org/technology/policy/voms-admin-retire/) for details on the
+VOMS Admin retirement.
+
+This section describes how to gracefully retire your VOMS host.
+
+### Disabling the VOMS Admin service ###
+
+The VOMS Admin service provides a web interface to manage membership of your virtual organization (VO).
+It also handles queries for the list of VO members, which may have
+[General Data Protection Regulation](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation) implications.
+Therefore, the VOMS Admin service should be disabled immediately.
+
+1. Choose the service name based on your OS version for subsequent steps:
+
+    | If your host OS is... | Then the service name is... |
+    |-----------------------|-----------------------------|
+    | EL6                   | `tomcat6`                   |
+    | EL7                   | `tomcat`                    |
+
+1. Turn off and disable the VOMS Admin server webapp:
+
+        :::console
+        root@voms # service %RED%<SERVICE NAME>%ENDCOLOR% stop
+        root@voms # chkconfig disable %RED%<SERVICE NAME>%ENDCOLOR%
+
+### Disabling the VOMS service ###
+
+The VOMS service accepts requests from clients to sign the VOMS attributes of their proxies.
+These VOMS attributes can then be used to authorize job submissions and file transfers in the OSG.
+
+Before turning off the VOMS service, it is important to migrate any clients to avoid disruption of your VO's workflows.
+
+#### Identifying VOMS clients ####
+
+To find all clients requesting VOMS attribute signatures, run the following command:
+
+``` console
+root@voms # awk -F ':' '/Received request from/ {print $11}' /var/log/voms/voms.%RED%<VO>%ENDCOLOR%.1 | sort | uniq -c
+```
+
+- If there are any GlideinWMS frontends requesting VOMS attribute signatures:
+
+    1. Securely copy the VOMS certificate and key to the frontend host(s)
+    1. Configure the GlideinWMS frontend to directly sign the VOMS attributes of the pilot proxies using the
+    instructions in [this section](/other/install-gwms-frontend#proxy-configuration).
+
+- If there are any VO users requesting VOMS attribute signatures: contact them to tell them that they will need to
+  generate proxies differently after the VOMS server retirement using one of the following commands:
+
+    - `user@host $ voms-proxy-init`
+    - `user@host$ grid-proxy-init`
+
+#### Finalizing the VOMS retirement ####
+
+When you have migrated all clients off of your VOMS server, it is safe to turn off and disable the VOMS service:
+
+``` console
+root@voms # service voms stop
+root@voms # chkconfig disable voms
+```
+
 Migrating from edg-mkgridmap to LCMAPS VOMS Plugin
 --------------------------------------------------
 
