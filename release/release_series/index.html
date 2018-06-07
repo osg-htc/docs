@@ -2526,7 +2526,9 @@ These VOMS attributes can then be used to authorize job submissions and file tra
 <p>Before turning off the VOMS service, it is important to migrate any clients to avoid disruption of your VO's workflows.</p>
 <h4 id="identifying-voms-clients">Identifying VOMS clients<a class="headerlink" href="#identifying-voms-clients" title="Permanent link">&para;</a></h4>
 <p>To find all clients requesting VOMS attribute signatures, run the following command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@voms #</span> awk -F <span class="s1">&#39;:&#39;</span> <span class="s1">&#39;/Received request from/ {print $11}&#39;</span> /var/log/voms/voms.<span style="color:red">&lt;VO&gt;</span>.1 <span class="p">|</span> sort <span class="p">|</span> uniq -c
+<div class="codehilite"><pre><span></span><span class="gp">root@voms #</span> awk -F <span class="s1">&#39;:&#39;</span> <span class="s1">&#39;/Received request from/ {print $11}&#39;</span> <span class="se">\</span>
+    /var/log/voms/voms.<span style="color:red">&lt;VO&gt;</span> <span class="se">\</span>
+    /var/log/voms/voms.<span style="color:red">&lt;VO&gt;</span>.<span class="o">[</span><span class="m">0</span>-9<span class="o">]</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c
 </pre></div>
 
 
