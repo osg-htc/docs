@@ -151,13 +151,6 @@ pages:
   - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
   - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
   - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
-- Deprecated Software:
-  - 'Install BeStMan': 'data/bestman-install.md'
-  - 'Install BeStMan Xrootd SE': 'data/install-bestman-xrootd.md'
-  - 'Install EDG-Mkgridmap': 'security/edg-mkgridmap.md'
-  - 'Install GUMS': 'security/install-gums.md'
-  - 'Install Worker node glexec': 'worker-node/install-glexec.md'
-  - 'Install VOMS': 'other/install-voms.md'
 - 'Get Help': 'common/help.md'
 
 markdown_extensions:
