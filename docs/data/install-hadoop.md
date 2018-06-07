@@ -8,6 +8,9 @@ install and validate OSG storage based on the Hadoop Distributed File System (HD
 The OSG supports a patched version HDFS from Cloudera's CDH5 distribution of HDFS
 (<https://www.cloudera.com/products/open-source/apache-hadoop/key-cdh-components.html>).
 
+!!! note
+    The OSG only supports HDFS on EL7 hosts
+
 Before Starting
 ---------------
 
@@ -74,6 +77,9 @@ from OSG 3.4.
 
 !!! warning
     The upgrade process will involve downtime for your HDFS cluster. Please plan accordingly.
+
+!!! note
+    The OSG only offers HDFS 2.6.0 for EL7 hosts.
 
 The upgrade process occurs in several steps:
 
