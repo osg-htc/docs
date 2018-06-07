@@ -389,36 +389,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#configuring-authentication" title="Configuring authentication" class="md-nav__link">
-    Configuring authentication
+  <a href="#configuring-authorization" title="Configuring authorization" class="md-nav__link">
+    Configuring authorization
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#authentication-with-the-lcmaps-voms-plugin" title="Authentication with the LCMAPS VOMS plugin" class="md-nav__link">
-    Authentication with the LCMAPS VOMS plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#authentication-with-edg-mkgridmap" title="Authentication with edg-mkgridmap" class="md-nav__link">
-    Authentication with edg-mkgridmap
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#authentication-with-gums" title="Authentication with GUMS" class="md-nav__link">
-    Authentication with GUMS
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1091,18 +1064,6 @@
   <li class="md-nav__item">
     <a href="../../common/yum/" title="Yum Repos" class="md-nav__link">
       Yum Repos
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../common/openjdk7/" title="Java 7" class="md-nav__link">
-      Java 7
     </a>
   </li>
 
@@ -2401,102 +2362,6 @@
       
 
 
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
-    
-    <label class="md-nav__link" for="nav-11">
-      Deprecated Software
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-11">
-        Deprecated Software
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../data/bestman-install/" title="Install BeStMan" class="md-nav__link">
-      Install BeStMan
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../data/install-bestman-xrootd/" title="Install BeStMan Xrootd SE" class="md-nav__link">
-      Install BeStMan Xrootd SE
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../security/edg-mkgridmap/" title="Install EDG-Mkgridmap" class="md-nav__link">
-      Install EDG-Mkgridmap
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../security/install-gums/" title="Install GUMS" class="md-nav__link">
-      Install GUMS
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../worker-node/install-glexec/" title="Install Worker node glexec" class="md-nav__link">
-      Install Worker node glexec
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../other/install-voms/" title="Install VOMS" class="md-nav__link">
-      Install VOMS
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
   <li class="md-nav__item">
     <a href="../../common/help/" title="Get Help" class="md-nav__link">
       Get Help
@@ -2594,36 +2459,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#configuring-authentication" title="Configuring authentication" class="md-nav__link">
-    Configuring authentication
+  <a href="#configuring-authorization" title="Configuring authorization" class="md-nav__link">
+    Configuring authorization
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#authentication-with-the-lcmaps-voms-plugin" title="Authentication with the LCMAPS VOMS plugin" class="md-nav__link">
-    Authentication with the LCMAPS VOMS plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#authentication-with-edg-mkgridmap" title="Authentication with edg-mkgridmap" class="md-nav__link">
-    Authentication with edg-mkgridmap
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#authentication-with-gums" title="Authentication with GUMS" class="md-nav__link">
-    Authentication with GUMS
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -2940,7 +2778,7 @@ htcondor_gateway_enabled = True
 </pre></div>
 
 
-<p>If you are using HTCondor as your <strong>local batch system</strong> (i.e., in addition to your HTCondor-CE), skip to the <a href="#configuring-authentication">configuring authentication</a> section. For other batch systems (e.g., PBS, LSF, SGE, SLURM), keep reading.</p>
+<p>If you are using HTCondor as your <strong>local batch system</strong> (i.e., in addition to your HTCondor-CE), skip to the <a href="#configuring-authorization">configuring authorization</a> section. For other batch systems (e.g., PBS, LSF, SGE, SLURM), keep reading.</p>
 <h4 id="batch-systems-other-than-htcondor">Batch systems other than HTCondor<a class="headerlink" href="#batch-systems-other-than-htcondor" title="Permanent link">&para;</a></h4>
 <p>Non-HTCondor batch systems require additional configuration to support file transfer to your site's worker nodes.</p>
 <h5 id="sharing-the-spool-directory">Sharing the spool directory<a class="headerlink" href="#sharing-the-spool-directory" title="Permanent link">&para;</a></h5>
@@ -2970,52 +2808,13 @@ blah_disable_limited_proxy=yes
 <p class="admonition-title">Note</p>
 <p>There should be no whitespace around the <code>=</code>.</p>
 </div>
-<h3 id="configuring-authentication">Configuring authentication<a class="headerlink" href="#configuring-authentication" title="Permanent link">&para;</a></h3>
-<p>In OSG 3.3, there are three methods to manage authentication for incoming jobs:
-the <a href="../../security/lcmaps-voms-authentication">LCMAPS VOMS plugin</a>, <a href="../../security/edg-mkgridmap">edg-mkgridmap</a> and <a href="../../security/install-gums">GUMS</a>.
-edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities.
-The LCMAPS VOMS plugin is the new OSG-preferred authentication,
-offering the simplicity of edg-mkgridmap and GUMS' ability to perform VOMS attribute-based mapping.
-If you need to support <a href="https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html">pool accounts</a>,
-GUMS is the only software with that capability.</p>
-<p>In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution.</p>
-<h4 id="authentication-with-the-lcmaps-voms-plugin">Authentication with the LCMAPS VOMS plugin<a class="headerlink" href="#authentication-with-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h4>
-<p>To configure your CE to use the LCMAPS VOMS plugin, follow the instructions in <a href="../../security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin">the LCMAPS VOMS plugin document</a> to prepare the LCMAPS VOMS plugin.</p>
+<h3 id="configuring-authorization">Configuring authorization<a class="headerlink" href="#configuring-authorization" title="Permanent link">&para;</a></h3>
+<p>To configure which virtual organizations and users are authorized to submit jobs to your, follow the instructions in
+<a href="../../security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin">the LCMAPS VOMS plugin document</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the <code>condor_mapfile</code>. If this is not the desired behavior, set <code>GSI_AUTHZ_CONF=/dev/null</code> in the local HTCondor configuration.</p>
-</div>
-<h4 id="authentication-with-edg-mkgridmap">Authentication with edg-mkgridmap<a class="headerlink" href="#authentication-with-edg-mkgridmap" title="Permanent link">&para;</a></h4>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>edg-mkgridmap is unavailable in OSG 3.4</p>
-</div>
-<p>To configure your CE to use edg-mkgridmap:</p>
-<ol>
-<li>Follow the configuration instructions in <a href="../../security/edg-mkgridmap">the edg-mkgridmap document</a> to define the VOs that your site accepts</li>
-<li>Set some critical gridmap attributes by editing the <code>/etc/osg/config.d/10-misc.ini</code> file on the HTCondor-CE host:<div class="codehilite"><pre><span></span>authorization_method = gridmap
-</pre></div>
-
-
-</li>
-</ol>
-<h4 id="authentication-with-gums">Authentication with GUMS<a class="headerlink" href="#authentication-with-gums" title="Permanent link">&para;</a></h4>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>GUMS is unavailable in OSG 3.4</p>
-</div>
-<ol>
-<li>Follow the instructions in <a href="../../security/install-gums">the GUMS installation and configuration document</a> to prepare GUMS</li>
-<li>Set some critical GUMS attributes by editing the <code>/etc/osg/config.d/10-misc.ini</code> file on the HTCondor-CE host:<div class="codehilite"><pre><span></span>authorization_method = xacml
-gums_host = <span style="color:red">YOUR GUMS HOSTNAME</span>
-</pre></div>
-
-
-</li>
-</ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the <code>condor_mapfile</code>. If this is not the desired behavior, set <code>GSI_AUTHZ_CONF=/dev/null</code> in the local HTCondor configuration.</p>
+<p>If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the <code>condor_mapfile</code>.
+If this is not the desired behavior, set <code>GSI_AUTHZ_CONF=/dev/null</code> in the local HTCondor configuration.</p>
 </div>
 <h3 id="configuring-ce-collector-advertising">Configuring CE collector advertising<a class="headerlink" href="#configuring-ce-collector-advertising" title="Permanent link">&para;</a></h3>
 <p>To split jobs between the various sites of the OSG, information about each site's capabilities are uploaded to a central collector. The job factories then query the central collector for idle resources and submit pilot jobs to the available sites. To advertise your site, you will need to enter some information about the worker nodes of your clusters.</p>
@@ -3040,31 +2839,10 @@ gums_host = <span style="color:red">YOUR GUMS HOSTNAME</span>
 <li>
 <p>Fix any errors (at least) that <code>osg-configure</code> reports.</p>
 </li>
-<li>
-<p>Once the validation command succeeds without errors, apply the configuration settings:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-configure -c
+<li>Once the validation command succeeds without errors, apply the configuration settings:<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> osg-configure -c
 </pre></div>
 
 
-</li>
-<li>
-<p>Generate a <code>user-vo-map</code> file with your authentication set up (skip this step if you're using the LCMAPS VOMS plugin):</p>
-<ol>
-<li>
-<p>If you're using edg-mkgridmap, run the following:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> edg-mkgridmap
-</pre></div>
-
-
-</li>
-<li>
-<p>If you're using GUMS, run the following:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> gums-host-cron
-</pre></div>
-
-
-</li>
-</ol>
 </li>
 </ol>
 <h3 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
@@ -3411,7 +3189,7 @@ To register your resource:</p>
 <tr>
 <td align="left">Host key</td>
 <td align="left"><code>root</code></td>
-<td align="left"><code>/etc/grid-security/hostkey.pem</code></td>
+<td align="left"><code>/grid-security/hostkey.pem</code></td>
 </tr>
 </tbody>
 </table>
@@ -3439,7 +3217,7 @@ To register your resource:</p>
 </tr>
 </tbody>
 </table>
-<p>Allow inbound and outbound network connection to all internal site servers, such as GUMS and the batch system head-node only ephemeral outgoing ports are necessary.</p>
+<p>Allow inbound and outbound network connection to all internal site servers, such as the batch system head-node only ephemeral outgoing ports are necessary.</p>
                 
                   
                 

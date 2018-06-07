@@ -602,33 +602,6 @@
     Configuring authentication
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#authentication-with-the-lcmaps-voms-plugin" title="Authentication with the LCMAPS VOMS plugin" class="md-nav__link">
-    Authentication with the LCMAPS VOMS plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#authentication-with-edg-mkgridmap" title="Authentication with edg-mkgridmap" class="md-nav__link">
-    Authentication with edg-mkgridmap
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#authentication-with-gums" title="Authentication with GUMS" class="md-nav__link">
-    Authentication with GUMS
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -991,18 +964,6 @@
   <li class="md-nav__item">
     <a href="../../common/yum/" title="Yum Repos" class="md-nav__link">
       Yum Repos
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../common/openjdk7/" title="Java 7" class="md-nav__link">
-      Java 7
     </a>
   </li>
 
@@ -2301,102 +2262,6 @@
       
 
 
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
-    
-    <label class="md-nav__link" for="nav-11">
-      Deprecated Software
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-11">
-        Deprecated Software
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../bestman-install/" title="Install BeStMan" class="md-nav__link">
-      Install BeStMan
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../install-bestman-xrootd/" title="Install BeStMan Xrootd SE" class="md-nav__link">
-      Install BeStMan Xrootd SE
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../security/edg-mkgridmap/" title="Install EDG-Mkgridmap" class="md-nav__link">
-      Install EDG-Mkgridmap
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../security/install-gums/" title="Install GUMS" class="md-nav__link">
-      Install GUMS
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../worker-node/install-glexec/" title="Install Worker node glexec" class="md-nav__link">
-      Install Worker node glexec
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../other/install-voms/" title="Install VOMS" class="md-nav__link">
-      Install VOMS
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
   <li class="md-nav__item">
     <a href="../../common/help/" title="Get Help" class="md-nav__link">
       Get Help
@@ -2457,33 +2322,6 @@
   <a href="#configuring-authentication" title="Configuring authentication" class="md-nav__link">
     Configuring authentication
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#authentication-with-the-lcmaps-voms-plugin" title="Authentication with the LCMAPS VOMS plugin" class="md-nav__link">
-    Authentication with the LCMAPS VOMS plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#authentication-with-edg-mkgridmap" title="Authentication with edg-mkgridmap" class="md-nav__link">
-    Authentication with edg-mkgridmap
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#authentication-with-gums" title="Authentication with GUMS" class="md-nav__link">
-    Authentication with GUMS
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -2650,52 +2488,8 @@ for Hadoop Distributed File System (HDFS) and XRootD based storage:</p>
 
 <h2 id="configuring-gridftp">Configuring GridFTP<a class="headerlink" href="#configuring-gridftp" title="Permanent link">&para;</a></h2>
 <h3 id="configuring-authentication">Configuring authentication<a class="headerlink" href="#configuring-authentication" title="Permanent link">&para;</a></h3>
-<p>In OSG 3.3, there are three methods to manage authentication for incoming jobs: the <a href="../../security/lcmaps-voms-authentication">LCMAPS VOMS plugin</a>, <a href="../../security/edg-mkgridmap">edg-mkgridmap</a> and <a href="../../security/install-gums">GUMS</a>. Of these, GUMS has the most features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support "<a href="https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html">pool accounts</a>", GUMS is the only option with that capability.</p>
-<p>In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution.</p>
-<h4 id="authentication-with-the-lcmaps-voms-plugin">Authentication with the LCMAPS VOMS plugin<a class="headerlink" href="#authentication-with-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h4>
-<p>To configure your GridFTP server to use the LCMAPS VOMS plugin, follow the instructions in <a href="../../security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin">the LCMAPS VOMS plugin document</a> to prepare the LCMAPS VOMS plugin.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is the suggested mechanism for all new installs.</p>
-</div>
-<h4 id="authentication-with-edg-mkgridmap">Authentication with edg-mkgridmap<a class="headerlink" href="#authentication-with-edg-mkgridmap" title="Permanent link">&para;</a></h4>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>As of the June 2017 release of OSG 3.4.0, this software is officially deprecated. Support is scheduled to end as of May 2018.</p>
-</div>
-<p>By default, GridFTP uses a gridmap file, found in <code>/etc/grid-security/grid-mapfile</code>. This is the file generated by <code>edg-mkgridmap</code> if you follow the default <a href="../../security/edg-mkgridmap">install instructions</a>.  No further configuration is needed.</p>
-<h4 id="authentication-with-gums">Authentication with GUMS<a class="headerlink" href="#authentication-with-gums" title="Permanent link">&para;</a></h4>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>As of the June 2017 release of OSG 3.4.0, this software is officially deprecated. Support is scheduled to end as of May 2018.</p>
-</div>
-<p>If you want to use GUMS security (recommended), you will need to enable it using the following steps:</p>
-<ol>
-<li>
-<p>Edit <code>/etc/grid-security/gsi-authz.conf</code> and uncomment the globus callout.</p>
-<div class="codehilite"><pre><span></span>globus_mapping liblcas_lcmaps_gt4_mapping.so lcmaps_callout
-</pre></div>
-
-
-<p>Note that this used to be the full path to the library (<code>/usr/lib64</code> or <code>/usr/lib</code>), but now we rely on the linker for proper resolution in this file.</p>
-</li>
-<li>
-<p>Edit <code>/etc/lcmaps.db</code> to include your service endpoint:</p>
-<div class="codehilite"><pre><span></span>...
-gumsclient = &quot;lcmaps_gums_client.mod&quot;
-             &quot;-resourcetype ce&quot;
-             &quot;-actiontype execute-now&quot;
-             &quot;-capath /etc/grid-security/certificates&quot;
-             &quot;-cert   /etc/grid-security/hostcert.pem&quot;
-             &quot;-key    /etc/grid-security/hostkey.pem&quot;
-             &quot;--cert-owner root&quot;
-# Change this URL to your GUMS server
-             &quot;--endpoint https://<span style="color:red">gums.example.com:8443</span>/gums/services/GUMSXACMLAuthorizationServicePort&quot;
-</pre></div>
-
-
-</li>
-</ol>
+<p>To configure which virtual organizations and users are allowed to use your GridFTP server, follow the instructions in
+<a href="../../security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin">the LCMAPS VOMS plugin document</a>.</p>
 <h3 id="enabling-gratia-gridftp-transfer-probe">Enabling Gratia GridFTP transfer probe<a class="headerlink" href="#enabling-gratia-gridftp-transfer-probe" title="Permanent link">&para;</a></h3>
 <p>The <a href="https://github.com/opensciencegrid/docs/blob/master/archive/GratiaTransferProbe">Gratia GridFTP probe</a> collects the information about the Gridftp transfers and forwards it to central Gratia collector. You need to enable the probe first. To do this, edit <code>/etc/gratia/gridftp-transfer/ProbeConfig</code> to set:</p>
 <div class="codehilite"><pre><span></span>EnableProbe=&quot;1&quot;
@@ -2876,7 +2670,7 @@ ipc_interface IP-TO-USE
 <p><a href="../../security/host-certs/">Instructions</a> to request a service certificate.</p>
 <p>You will also need a copy of CA certificates.</p>
 <h3 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h3>
-<p>For this package to function correctly, you will have to create the users needed for grid operation. Any Unix username that can be mapped by LCMAPS VOMS, <code>edg-mkgridmap</code>, or GUMS should be created on the GridFTP host.</p>
+<p>For this package to function correctly, you will have to create the users needed for grid operation. Any Unix username that can be mapped by LCMAPS VOMS should be created on the GridFTP host.</p>
 <p>For example, VOs newly-added to the LCMAPS VOMS configuration will not be able to transfer files until the corresponding Unix user account is created.</p>
 <h3 id="networking">Networking<a class="headerlink" href="#networking" title="Permanent link">&para;</a></h3>
 <table>

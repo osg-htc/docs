@@ -162,12 +162,6 @@
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs//common/openjdk7/</loc>
-     <lastmod>2018-06-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
      <loc>https://opensciencegrid.github.io/docs//other/configuration-with-osg-configure/</loc>
      <lastmod>2018-06-07</lastmod>
      <changefreq>daily</changefreq>
@@ -295,46 +289,6 @@
         
     <url>
      <loc>https://opensciencegrid.github.io/docs//monitoring/install-rsv-gwms-tester/</loc>
-     <lastmod>2018-06-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    
-
-    
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs//data/bestman-install/</loc>
-     <lastmod>2018-06-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs//data/install-bestman-xrootd/</loc>
-     <lastmod>2018-06-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs//security/edg-mkgridmap/</loc>
-     <lastmod>2018-06-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs//security/install-gums/</loc>
-     <lastmod>2018-06-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs//worker-node/install-glexec/</loc>
-     <lastmod>2018-06-07</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://opensciencegrid.github.io/docs//other/install-voms/</loc>
      <lastmod>2018-06-07</lastmod>
      <changefreq>daily</changefreq>
     </url>

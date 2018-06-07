@@ -1019,18 +1019,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../../common/openjdk7/" title="Java 7" class="md-nav__link">
-      Java 7
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../../other/configuration-with-osg-configure/" title="Configuration with OSG-Configure" class="md-nav__link">
       Configuration with OSG-Configure
     </a>
@@ -2319,102 +2307,6 @@
       
 
 
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
-    
-    <label class="md-nav__link" for="nav-11">
-      Deprecated Software
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-11">
-        Deprecated Software
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../data/bestman-install/" title="Install BeStMan" class="md-nav__link">
-      Install BeStMan
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../data/install-bestman-xrootd/" title="Install BeStMan Xrootd SE" class="md-nav__link">
-      Install BeStMan Xrootd SE
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../edg-mkgridmap/" title="Install EDG-Mkgridmap" class="md-nav__link">
-      Install EDG-Mkgridmap
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../install-gums/" title="Install GUMS" class="md-nav__link">
-      Install GUMS
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../worker-node/install-glexec/" title="Install Worker node glexec" class="md-nav__link">
-      Install Worker node glexec
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../other/install-voms/" title="Install VOMS" class="md-nav__link">
-      Install VOMS
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
   <li class="md-nav__item">
     <a href="../../common/help/" title="Get Help" class="md-nav__link">
       Get Help
@@ -2801,14 +2693,19 @@ which is used by OSG staff to assist with troubleshooting.</p>
 <ol>
 <li>
 <p>Configure user DN mappings:</p>
-<ul>
+<ol>
+<li>Remove <code>/etc/grid-security/grid-mapfile</code></li>
 <li>
-<p>If you have a local grid mapfile (see <a href="../../security/edg-mkgridmap">the EDG-mkgridmap docs</a>), replace the contents of <code>/etc/grid-security/grid-mapfile</code> with the contents of the local grid mapfile.</p>
+<p>Check if you have a local grid mapfile:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> grep gmf_local /etc/edg-mkgridmap.conf
+</pre></div>
+
+
 </li>
 <li>
-<p>If you do not have a local grid mapfile, remove <code>/etc/grid-security/grid-mapfile</code>.</p>
+<p>If the above command returns a file that exists and has contents, move it to <code>/etc/grid-security/grid-mapfile</code>.</p>
 </li>
-</ul>
+</ol>
 </li>
 <li>
 <p>If you are converting an HTCondor-CE host, remove the HTCondor-CE <code>GRIDMAP</code> configuration. Otherwise, skip to the next step.</p>
