@@ -1039,16 +1039,10 @@ This can occur if you try to install a DataNode on a machine with less than 10GB
 
 Hadoop always requires this amount of disk space to be available for non-hdfs usage on the machine.
 
-How to get Help?
-----------------
+Getting Help
+------------
 
-If you cannot resolve the problem, there are several ways to receive help:
-
--   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.opensciencegrid.org).
--   For community support and best-effort software team support contact <osg-software@opensciencegrid.org>.
--   For additional community support, contact <osg-hadoop@opensciencegrid.org>. Note, this is only best-effort help from OSG Software team.
-
-For a full set of help options, see [Help Procedure](../common/help).
+To get assistance, please use the [this page](/common/help).
 
 References
 ----------
