@@ -84,14 +84,15 @@ from OSG 3.4.
 The upgrade process occurs in several steps:
 
 1. [Preparing for the upgrade](#preparing-for-the-upgrade)
-1. [Updating to HDFS from OSG 3.4](#updating-to-hdfs-26)
-1. [Upgrading the NameNodes](#upgrading-the-primary-namenode)
+1. [Updating to OSG 3.4](#updating-to-osg-34)
+1. [Upgrading the Primary NameNode](#upgrading-the-primary-namenode)
 1. [Upgrading the DataNodes](#upgrading-the-datanodes)
+1. [Upgrading the Secondary NameNode](#upgrading-the-secondary-namenode)
 1. [Finalizing the upgrade](#finalizing-the-upgrade)
 
 ### Preparing for the upgrade ###
 
-Before upgrading, you should backup your configuration data and HDFS metadata using the following method:
+Before upgrading, backup your configuration data and HDFS metadata.
 
 1. Put your Primary NameNode into safe mode:
 
@@ -128,59 +129,92 @@ Before upgrading, you should backup your configuration data and HDFS metadata us
    If more than one directory appears in the list (as in the example above), choose the most convenient directory.
    All of the directories in the list will have the same contents.
 
-### Updating to HDFS 2.6 ###
+### Updating to OSG 3.4 ###
 
-Once your HDFS services have been turned off and the HDFS metadata has been backed up, update to the OSG 3.4
-repositories and software by following the instructions in [this section](/release/release_series/#updating-from-old).
+Once your HDFS services have been turned off and the HDFS metadata has been backed up, update each node to OSG 3.4 by
+following the instructions in [this section](/release/release_series/#updating-from-old).
 
-### Upgrading the Primary Namenode ###
+### Upgrading the Primary NameNode ###
 
-Once you have the HDFS RPMs from OSG 3.4 installed, upgrade the HDFS metadata on the primary NameNode.
-On the primary NameNode, run the following:
+To upgrade your Primary NameNode, update all relevant packages then run the upgrade command.
 
-``` console
-root@primary-namenode # /etc/init.d/hadoop-hdfs-namenode upgrade
-```
+1. Clear the yum cache:
 
-This will start the upgrade process for the HDFS metadata on your primary namenode.
-You can follow the process by running
+        :::console
+        root@primary-namenode # yum clean all --enablerepo=*
 
-``` console
-root@primary-namenode # tail -f /var/log/hadoop-hdfs/hadoop-hdfs-namenode-<hostname>.log 
-```
+1. Update the HDFS RPMs:
+
+        :::console
+        root@primary-namenode # yum update osg-se-hadoop-namenode --enablerepo-osg-upcoming
+
+1. Perform the upgrade command:
+
+        :::console
+        root@primary-namenode # /etc/init.d/hadoop-hdfs-namenode upgrade
+
+    This will start the upgrade process for the HDFS metadata on your primary namenode.
+    You can follow the process by running
+
+        :::console
+        root@primary-namenode # tail -f /var/log/hadoop-hdfs/hadoop-hdfs-namenode-<hostname>.log
 
 ### Upgrading the DataNodes ###
 
-Once the primary NameNode has completed its upgrade process, bring up the DataNodes.
-Verify that you have the HDFS RPMs from OSG 3.4 installed and then turn on the DataNode service:
+Once the Primary NameNode has completed its upgrade process, start the process of upgrading each of your DataNodes.
 
-``` console
-root@datanode # /etc/init.d/hadoop-hdfs-datanode start
-```
+1. Clear the yum cache:
 
-After all the DataNodes have been brought back up, the primary NameNode should exit safe mode automatically.  
-You can check on the safe mode status by running:
+        :::console
+        root@datanode # yum clean all --enablerepo=*
 
-``` console
-root@primary-namenode # hdfs dfsadmin -safemode get
-```
+1. Update the HDFS RPMs:
 
-### Upgrading the Secondary Namenode ###
+        :::console
+        root@datanode # yum update osg-se-hadoop-datanode --enablerepo-osg-upcoming
 
-Once the primary NameNode has exited safe mode, verify that the secondary NameNode has the HDFS RPMs from OSG 3.4.
-Once that is done, turn on the secondary NameNode service:
+1. Start the DataNode service:
 
-``` console
-root@secondary-namenode # /etc/init.d/hadoop-hdfs-secondarynamenode start
-```
+        :::console
+        root@datanode # /etc/init.d/hadoop-hdfs-datanode start
+
+1. After all the DataNodes have been brought back up, the Primary NameNode should exit safe mode automatically.
+   On the Primary NameNode, run the following command to verify is no longer in safe mode:
+
+        :::console
+        root@primary-namenode # hdfs dfsadmin -safemode get
+
+### Upgrading the Secondary NameNode ###
+
+!!! note
+    This section only applies to sites with a Secondary NameNode.
+    If you do not run a Secondary NameNode, skip to the [next section](#finalizing-the-upgrade).
+
+Once the Primary NameNode has exited safe mode, start the process of upgrading your Secondary NameNode.
+
+1. Clear the yum cache:
+
+        :::console
+        root@secondary-namenode # yum clean all --enablerepo=*
+
+1. Update the HDFS RPMs:
+
+        :::console
+        root@secondary-namenode # yum update osg-se-hadoop-secondarynamenode --enablerepo-osg-upcoming
+
+1. Start the Secondary NameNode service:
+
+        :::console
+        root@secondary-namenode # /etc/init.d/hadoop-hdfs-secondarynamenode start
 
 ### Finalizing the upgrade ###
 
-Once you have verified that the HDFS cluster is running correctly, finalize the upgrade:
+1. Verify that the HDFS cluster is running correctly by following the instructions in [this section](#validation_1).
 
-``` console
-root@primary-namenode # hdfs dfsadmin -finalizeUpgrade
-```
+1. Finalize the upgrade from the Primary NameNode:
+
+        :::console
+        root@primary-namenode # hdfs dfsadmin -finalizeUpgrade
 
 Configuring HDFS
 ----------------
