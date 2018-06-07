@@ -48,7 +48,6 @@ pages:
 - Common:
   - 'CA Certificates': 'common/ca.md'
   - 'Yum Repos': 'common/yum.md'
-  - 'Java 7': 'common/openjdk7.md'
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
 - Other:
   - 'Install GSI-enabled SSH': 'other/gsissh.md'
@@ -151,13 +150,6 @@ pages:
   - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
   - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
   - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
-- Deprecated Software:
-  - 'Install BeStMan': 'data/bestman-install.md'
-  - 'Install BeStMan Xrootd SE': 'data/install-bestman-xrootd.md'
-  - 'Install EDG-Mkgridmap': 'security/edg-mkgridmap.md'
-  - 'Install GUMS': 'security/install-gums.md'
-  - 'Install Worker node glexec': 'worker-node/install-glexec.md'
-  - 'Install VOMS': 'other/install-voms.md'
 - 'Get Help': 'common/help.md'
 
 markdown_extensions:

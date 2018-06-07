@@ -125,9 +125,13 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
 
 1.  Configure user DN mappings:
 
-    * If you have a local grid mapfile (see [the EDG-mkgridmap docs](../security/edg-mkgridmap)), replace the contents of `/etc/grid-security/grid-mapfile` with the contents of the local grid mapfile.
+    1. Remove `/etc/grid-security/grid-mapfile`
+    1. Check if you have a local grid mapfile:
 
-    * If you do not have a local grid mapfile, remove `/etc/grid-security/grid-mapfile`.
+            :::console
+            root@host # grep gmf_local /etc/edg-mkgridmap.conf
+
+    1. If the above command returns a file that exists and has contents, move it to `/etc/grid-security/grid-mapfile`.
 
 1.  If you are converting an HTCondor-CE host, remove the HTCondor-CE `GRIDMAP` configuration. Otherwise, skip to the next step.
 
