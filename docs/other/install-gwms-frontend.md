@@ -174,25 +174,6 @@ In addition, you will need to perform the following steps:
 - In `/etc/condor/certs/condor_mapfile`, you will need to add the DNs of each machine (userschedd, usercollector, vofrontend). Take great care to escape all special characters. Alternatively, you can use the `glidecondor_addDN` to add these values.
 - In the `/etc/gwms-frontend/frontend.xml` file, change the schedd locations to match the correct server. Also change the collectors tags at the bottom of the file. More details on frontend.xml are in the following sections.
 
-### Upgrading the GlideinWMS Frontend
-
-If you have a working installation of glideinwms-frontend you can just upgrade
-the frontend rpms and skip the most of the configuration procedure below. These
-general upgrade instructions apply when upgrading the glideinwms-frontend rpm
-within same major versions.
-
-``` console
-# %RED% Update the glideinwms-vofrontend packages%ENDCOLOR%
-root@host # yum update glideinwms\*
-# %RED% Update the scripts in the working directory to the latest one%ENDCOLOR%
-# %RED% For RHEL 7, CentOS 7, and SL7%ENDCOLOR%
-root@host # /usr/sbin/gwms-frontend upgrade
-# %RED% For RHEL 6, CentOS 6, and SL6%ENDCOLOR%
-root@host # service gwms-frontend upgrade
-# %RED% Restart HTCondor because the configuration may be different%ENDCOLOR%
-root@host # service condor restart
-```
-
 Configuring GlideinWMS Frontend
 --------------------------------
 
@@ -351,7 +332,7 @@ listed.
 
 #### Creating a HTCondor grid mapfile.
 
-The HTCondor grid mapfile (`/etc/condor/certs/condor_mapfile`) is used for
+The HTCondor mapfile (`/etc/condor/certs/condor_mapfile`) is used for
 authentication between the GlideinWMS pilot running on a remote worker node, and
 the local collector. HTCondor uses the mapfile to map certificates to pseudo-users
 on the local machine. It is important that you map the DN's of:
@@ -381,9 +362,6 @@ on the local machine. It is important that you map the DN's of:
 Below is an example mapfile, by default found in
 `/etc/condor/certs/condor_mapfile`. In this example there are lines for each of
 services mentioned above.
-
-!!! note
-    Previously, the `example_of_format` entry was using scape format for each DN like for example: *GSI "^\/DC\=org\/DC\=doegrids\/OU\=Services\/CN\=personal\-submit\-host2\.mydomain\.edu$" %RED<example_of_format>%ENDCOLOR%* for security purposes. This is no longer needed:
 
 ``` file
 GSI "%RED%DN of schedd proxy%ENDCOLOR%" schedd
@@ -439,7 +417,7 @@ and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOL
             fqan = %RED%<VOMS ATTRIBUTE>%ENDCOLOR%
 
         !!! warning
-            Due to the [retirement of VOMS Admin server](https://opensciencegrid.github.io/technology/policy/voms-admin-retire/)
+            Due to the [retirement of VOMS Admin server](https://opensciencegrid.org/technology/policy/voms-admin-retire/)
             in the OSG, `use_voms_server = false` is the preferred method for signing VOMS attributes. 
 
     Optionally, the proxy renewal `frequency` and `lifetime` (in hours) can be specified in each `[PILOT <NAME>]` section:
@@ -465,8 +443,6 @@ and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOL
 
         [COMMON]
         owner = %RED%<GWMS FRONTEND USER>%ENDCOLOR%
-
-
     !!! note
         The `[COMMON]` section is required but its contents are optional
 
@@ -479,7 +455,7 @@ You must report accounting information if you are running more than a few test j
         :::console
         root@host # yum install gratia-probe-glideinwms
 
-2.  Edit the ProbeConfig located in `/etc/gratia/condor/ProbeConfig`. First, edit the `SiteName` and `ProbeName` to be a unique identifier for your GlideinWMS Submit host. There can be multiple probes (with different names) per site. If you haven't already, you should register your GlideinWMS submit host in [OIM](https://oim.opensciencegrid.org/oim/home). Then you can use the name you used to register the resource.
+2.  Edit the ProbeConfig located in `/etc/gratia/condor/ProbeConfig`. First, edit the `SiteName` and `ProbeName` to be a unique identifier for your GlideinWMS Submit host. There can be multiple probes (with different names) per site. If you haven't already, you should register your GlideinWMS submit host in [OIM](https://github.com/opensciencegrid/topology/). Then you can use the name you used to register the resource.
 
         ProbeName="condor:<hostname>"
         SiteName="HCC-GlideinWMW-Frontend"
@@ -623,7 +599,7 @@ groupwould only match jobs that have the `+is_itb=True` ClassAd.
         <job query_expr="(!isUndefined(is_itb) && is_itb)">
         
 
-6. Reconfigure the Frontend (see the section below):
+6. Reconfigure the Frontend (see the [section below](#reconfiguring-glideinwms)):
 
         :::console
         # on EL7 systems
@@ -666,7 +642,7 @@ operating system (run as `root`):
 | Enterprise Linux 7             | `systemctl reload gwms-frontend` |
 | Enterprise Linux 6             | `service gwms-frontend reconfig`  |
 
-### Upgrading GlideinWMS ###
+### Upgrading GlideinWMS FrontEnd###
 
 After upgrading the GlideinWMS RPM, you must issue an upgrade command to GlideinWMS:
 
@@ -714,7 +690,7 @@ There are a few things that can be checked prior to submitting user jobs to HTCo
         Defined in '/etc/condor/config.d/11_gwms_secondary_collectors.config', line 193.
        
 
-       If you don't see all the **collectors and the two schedd**, then the configuration must be corrected. There should be no startd daemons listed
+       If you don't see all the **collectors and the two schedds**, then the configuration must be corrected. There should be no startd daemons listed
 
 2. Verify all VO Frontend HTCondor services are communicating.
 
@@ -953,4 +929,4 @@ proxies.
 |GlideinWMS Frontend| tcp      | 9618, 9620 to 9660 |`YES`  |        |HTCondor Collectors for the GlideinWMS Frontend (received ClassAds from resources and jobs)|
 
 The VO frontend must have reliable network connectivity, be on the public
-internet (no NAT), and preferably with no firewalls. Incoming TCP ports 9618 to 9660 must be open. 
+internet (no NAT), and preferably with no firewalls. Incoming TCP ports 9618 to 9660 must be open.
