@@ -85,10 +85,11 @@ Depending on the VOs you want to support, additional data services may not be ne
 Site Policies
 -------------
 
-Sites are encouraged to clearly specify and communicate their local policies regarding resource access. One common
-mechanism to do this is post them on a web page and make this page part of your site registration in
-[MyOSG](http://my.opensciencegrid.org).  Written policies help external entities understand what your site wants to
-accomplish with the OSG -- and are often internally clarifying.
+Sites are encouraged to clearly specify and communicate their local policies regarding resource access.
+One common mechanism to do this is post them on a web page and make this page part of your
+[site registration](https://github.com/opensciencegrid/topology/).
+Written policies help external entities understand what your site wants to accomplish with the OSG -- and are often
+internally clarifying.
 
 In line of our principle of *sharing*, we encourage you to allow virtual organizations registered with the OSG
 "opportunistic use" of your resources. You may need to preempt those jobs when higher priority jobs come around.
