@@ -620,8 +620,10 @@ In addition to the GlideinWMS service itself, there are a number of supporting s
 | Fetch CRL  | `fetch-crl-boot` and `fetch-crl-cron`    | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 | Gratia     | `gratia-probes-cron`                     | Accounting software                                                          |
 | HTCondor   | `condor`                                 |                                                                              |
-| HTTPD      | `httpd`                                  | GlideinWMS monitoring and staging                                            |
-| GlideinWMS | `gwms-renew-proxies` and `gwms-frontend` | [Automatic proxy renewal](#proxy-configuration) and main GlideinWMS service  |
+| HTTPD      | `httpd`                                  | GlideinWMS monitoring and staging                                 |
+| GlideinWMS | `gwms-renew-proxies` (EL6) or `gwms-renew-proxies.timer` (EL7) | [Automatic proxy renewal](#proxy-configuration)                              |
+|            | `gwms-frontend`                                                | The main GlideinWMS service
+|
 
 Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as `root`):
 
@@ -698,7 +700,7 @@ There are a few things that can be checked prior to submitting user jobs to HTCo
         user@host $ condor_status -any
         MyType               TargetType           Name
         glideresource        None                 MM_fermicloud026@gfactory_inst
-        Scheduler            None                 fermicloud020.fnal.gov
+        Scheduler            None                 fermicloud0wms-renew-proxies20.fnal.gov
         DaemonMaster         None                 fermicloud020.fnal.gov
         Negotiator           None                 fermicloud020.fnal.gov
         Collector            None                 frontend_service@fermicloud020
