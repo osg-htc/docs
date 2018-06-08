@@ -1,5 +1,5 @@
-Introduction
---------
+Site Planning
+=============
 
 The OSG vision is to integrate computing across different resource types and business models to allow campus IT to offer
 a maximally flexible _high throughput computing_ (HTC) environment for their researchers.
@@ -57,12 +57,13 @@ system.  However, today, there are two options for accepting pilot jobs at your 
 ### Runtime environment
 
 The OSG provides a very minimal runtime environment that can be deployed via tarball, RPM, or through a global
-filesystem.
+filesystem on your cluster's worker nodes.
 
-We believe that all scientific applications should be portable and self-contained, with no OS dependencies.  This
-provides access to the most resources and minimizes the presence at sites.  However, this purist position is often
-difficult to achieve in practice.  For sites that want to support a uniform runtime environment, we provide a global
-filesystem called CVMFS that VOs can use to distribute their own software dependencies.
+We believe that all scientific applications should be portable and self-contained, with no OS dependencies.
+This provides access to the most resources and minimizes the presence at sites.
+However, this ideal is often difficult to achieve in practice.
+For sites that want to support a uniform runtime environment, we provide a global filesystem called CVMFS that VOs can
+use to distribute their own software dependencies.
 
 Finally, many researchers use applications that require a specific OS environment - not just individual dependencies -
 that is distributed as a container.  OSG supports the use of the [Singularity](http://singularity.lbl.gov/) container
