@@ -700,11 +700,11 @@ There are a few things that can be checked prior to submitting user jobs to HTCo
         user@host $ condor_status -any
         MyType               TargetType           Name
         glideresource        None                 MM_fermicloud026@gfactory_inst
-        Scheduler            None                 fermicloud0wms-renew-proxies20.fnal.gov
+        Scheduler            None                 fermicloud020.fnal.gov
         DaemonMaster         None                 fermicloud020.fnal.gov
         Negotiator           None                 fermicloud020.fnal.gov
-        Collector            None                 frontend_service@fermicloud020
-        Scheduler            None                 schedd_jobs2@fermicloud020.fnal
+        Collector            None                 frontend_service@fermicloud020.fnal.gov
+        Scheduler            None                 schedd_jobs2@fermicloud020.fnal.gov
         
 
 3. To see the details of the glidein resource use `condor_status -subsystem glideresource -l`, including the GlideFactoryName.
