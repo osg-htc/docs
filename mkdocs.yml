@@ -59,6 +59,7 @@ pages:
 - Release Information:
   - 'Release Note Overview': 'release/notes.md'
   - 3.4 Release Notes:
+    - 'OSG Release 3.4.13': 'release/3.4/release-3-4-13.md'
     - 'OSG Release 3.4.12-3': 'release/3.4/release-3-4-12-3.md'
     - 'OSG Release 3.4.12-2': 'release/3.4/release-3-4-12-2.md'
     - 'OSG Release 3.4.12': 'release/3.4/release-3-4-12.md'
