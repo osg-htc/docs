@@ -84,25 +84,109 @@ We added or updated the following packages to the production OSG yum repository.
 
 #### Enterprise Linux 6
 
+-   [condor-8.6.11-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.6.11-1.osg34.el6)
+-   [cvmfs-2.5.0-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=cvmfs-2.5.0-1.osg34.el6)
+-   [osg-oasis-9-2.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-oasis-9-2.osg34.el6)
+-   [osg-release-3.4-5.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-3.4-5.osg34.el6)
+-   [osg-tested-internal-3.4-6.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-tested-internal-3.4-6.osg34.el6)
+-   [osg-version-3.4.13-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-version-3.4.13-1.osg34.el6)
+-   [pegasus-4.8.2-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=pegasus-4.8.2-1.osg34.el6)
+-   [singularity-2.5.1-1.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=singularity-2.5.1-1.osg34.el6)
+-   [voms-2.0.14-1.4.osg34.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=voms-2.0.14-1.4.osg34.el6)
 
 #### Enterprise Linux 7
 
+-   [condor-8.6.11-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.6.11-1.osg34.el7)
+-   [cvmfs-2.5.0-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=cvmfs-2.5.0-1.osg34.el7)
+-   [osg-oasis-9-2.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-oasis-9-2.osg34.el7)
+-   [osg-release-3.4-5.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-release-3.4-5.osg34.el7)
+-   [osg-tested-internal-3.4-6.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-tested-internal-3.4-6.osg34.el7)
+-   [osg-version-3.4.13-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=osg-version-3.4.13-1.osg34.el7)
+-   [pegasus-4.8.2-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=pegasus-4.8.2-1.osg34.el7)
+-   [singularity-2.5.1-1.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=singularity-2.5.1-1.osg34.el7)
+-   [voms-2.0.14-1.4.osg34.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=voms-2.0.14-1.4.osg34.el7)
 
 ### RPMs
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
+    condor condor-all condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-test condor-vm-gahp cvmfs cvmfs-devel cvmfs-server cvmfs-unittests igtf-ca-certs osg-ca-certs osg-gums-config osg-oasis osg-release osg-tested-internal osg-version pegasus pegasus-debuginfo singularity singularity-debuginfo singularity-devel singularity-runtime vo-client vo-client-edgmkgridmap vo-client-lcmaps-voms voms voms-clients-cpp voms-debuginfo voms-devel voms-doc voms-server
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 6
 
 ``` file
+condor-8.6.11-1.osg34.el6
+condor-all-8.6.11-1.osg34.el6
+condor-bosco-8.6.11-1.osg34.el6
+condor-classads-8.6.11-1.osg34.el6
+condor-classads-devel-8.6.11-1.osg34.el6
+condor-cream-gahp-8.6.11-1.osg34.el6
+condor-debuginfo-8.6.11-1.osg34.el6
+condor-kbdd-8.6.11-1.osg34.el6
+condor-procd-8.6.11-1.osg34.el6
+condor-python-8.6.11-1.osg34.el6
+condor-std-universe-8.6.11-1.osg34.el6
+condor-test-8.6.11-1.osg34.el6
+condor-vm-gahp-8.6.11-1.osg34.el6
+cvmfs-2.5.0-1.osg34.el6
+cvmfs-devel-2.5.0-1.osg34.el6
+cvmfs-server-2.5.0-1.osg34.el6
+cvmfs-unittests-2.5.0-1.osg34.el6
+osg-oasis-9-2.osg34.el6
+osg-release-3.4-5.osg34.el6
+osg-tested-internal-3.4-6.osg34.el6
+osg-version-3.4.13-1.osg34.el6
+pegasus-4.8.2-1.osg34.el6
+pegasus-debuginfo-4.8.2-1.osg34.el6
+singularity-2.5.1-1.osg34.el6
+singularity-debuginfo-2.5.1-1.osg34.el6
+singularity-devel-2.5.1-1.osg34.el6
+singularity-runtime-2.5.1-1.osg34.el6
+voms-2.0.14-1.4.osg34.el6
+voms-clients-cpp-2.0.14-1.4.osg34.el6
+voms-debuginfo-2.0.14-1.4.osg34.el6
+voms-devel-2.0.14-1.4.osg34.el6
+voms-doc-2.0.14-1.4.osg34.el6
+voms-server-2.0.14-1.4.osg34.el6
 ```
 
 #### Enterprise Linux 7
 
 ``` file
+condor-8.6.11-1.osg34.el7
+condor-all-8.6.11-1.osg34.el7
+condor-bosco-8.6.11-1.osg34.el7
+condor-classads-8.6.11-1.osg34.el7
+condor-classads-devel-8.6.11-1.osg34.el7
+condor-cream-gahp-8.6.11-1.osg34.el7
+condor-debuginfo-8.6.11-1.osg34.el7
+condor-kbdd-8.6.11-1.osg34.el7
+condor-procd-8.6.11-1.osg34.el7
+condor-python-8.6.11-1.osg34.el7
+condor-test-8.6.11-1.osg34.el7
+condor-vm-gahp-8.6.11-1.osg34.el7
+cvmfs-2.5.0-1.osg34.el7
+cvmfs-devel-2.5.0-1.osg34.el7
+cvmfs-server-2.5.0-1.osg34.el7
+cvmfs-unittests-2.5.0-1.osg34.el7
+osg-oasis-9-2.osg34.el7
+osg-release-3.4-5.osg34.el7
+osg-tested-internal-3.4-6.osg34.el7
+osg-version-3.4.13-1.osg34.el7
+pegasus-4.8.2-1.osg34.el7
+pegasus-debuginfo-4.8.2-1.osg34.el7
+singularity-2.5.1-1.osg34.el7
+singularity-debuginfo-2.5.1-1.osg34.el7
+singularity-devel-2.5.1-1.osg34.el7
+singularity-runtime-2.5.1-1.osg34.el7
+voms-2.0.14-1.4.osg34.el7
+voms-clients-cpp-2.0.14-1.4.osg34.el7
+voms-debuginfo-2.0.14-1.4.osg34.el7
+voms-devel-2.0.14-1.4.osg34.el7
+voms-doc-2.0.14-1.4.osg34.el7
+voms-server-2.0.14-1.4.osg34.el7
 ```
 
 ### Upcoming Packages
@@ -111,23 +195,59 @@ We added or updated the following packages to the **upcoming** OSG yum repositor
 
 #### Enterprise Linux 6
 
+-   [blahp-1.18.36.bosco-2.osgup.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=blahp-1.18.36.bosco-2.osgup.el6)
+-   [condor-8.7.8-2.osgup.el6](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.7.8-2.osgup.el6)
 
 #### Enterprise Linux 7
 
+-   [blahp-1.18.36.bosco-2.osgup.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=blahp-1.18.36.bosco-2.osgup.el7)
+-   [condor-8.7.8-2.osgup.el7](https://koji.chtc.wisc.edu/koji/search?match=glob&type=build&terms=condor-8.7.8-2.osgup.el7)
 
 ### Upcoming RPMs
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
+    blahp blahp-debuginfo condor condor-all condor-annex-ec2 condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-test condor-vm-gahp
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 6
 
 ``` file
+blahp-1.18.36.bosco-2.osgup.el6
+blahp-debuginfo-1.18.36.bosco-2.osgup.el6
+condor-8.7.8-2.osgup.el6
+condor-all-8.7.8-2.osgup.el6
+condor-annex-ec2-8.7.8-2.osgup.el6
+condor-bosco-8.7.8-2.osgup.el6
+condor-classads-8.7.8-2.osgup.el6
+condor-classads-devel-8.7.8-2.osgup.el6
+condor-cream-gahp-8.7.8-2.osgup.el6
+condor-debuginfo-8.7.8-2.osgup.el6
+condor-kbdd-8.7.8-2.osgup.el6
+condor-procd-8.7.8-2.osgup.el6
+condor-python-8.7.8-2.osgup.el6
+condor-std-universe-8.7.8-2.osgup.el6
+condor-test-8.7.8-2.osgup.el6
+condor-vm-gahp-8.7.8-2.osgup.el6
 ```
 
 #### Enterprise Linux 7
 
 ``` file
+blahp-1.18.36.bosco-2.osgup.el7
+blahp-debuginfo-1.18.36.bosco-2.osgup.el7
+condor-8.7.8-2.osgup.el7
+condor-all-8.7.8-2.osgup.el7
+condor-annex-ec2-8.7.8-2.osgup.el7
+condor-bosco-8.7.8-2.osgup.el7
+condor-classads-8.7.8-2.osgup.el7
+condor-classads-devel-8.7.8-2.osgup.el7
+condor-cream-gahp-8.7.8-2.osgup.el7
+condor-debuginfo-8.7.8-2.osgup.el7
+condor-kbdd-8.7.8-2.osgup.el7
+condor-procd-8.7.8-2.osgup.el7
+condor-python-8.7.8-2.osgup.el7
+condor-test-8.7.8-2.osgup.el7
+condor-vm-gahp-8.7.8-2.osgup.el7
 ```
