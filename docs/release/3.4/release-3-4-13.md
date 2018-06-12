@@ -16,7 +16,7 @@ This release contains:
     -   Fixed several other minor problems
 -   [Singularity 2.5.1](https://singularity.lbl.gov/release-2-5-1): Minor bug fix release
 -   [Pegasus 4.8.2](https://pegasus.isi.edu/2018/05/03/pegasus-4-8-2-released/): Minor bug fix release
--   VOMS: added voms-proxy-direct to use when signing VOMS attributes directly
+-   VOMS: added voms-proxy-direct for use when signing VOMS attributes directly
 -   Upcoming repository:
     -   [HTCondor 8.7.8](https://www-auth.cs.wisc.edu/lists/htcondor-world/2018/msg00012.shtml)
         -   The condor annex can easily use multiple regions simultaneously
