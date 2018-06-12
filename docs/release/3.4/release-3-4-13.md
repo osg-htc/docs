@@ -110,7 +110,7 @@ We added or updated the following packages to the production OSG yum repository.
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-    condor condor-all condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-test condor-vm-gahp cvmfs cvmfs-devel cvmfs-server cvmfs-unittests igtf-ca-certs osg-ca-certs osg-gums-config osg-oasis osg-release osg-tested-internal osg-version pegasus pegasus-debuginfo singularity singularity-debuginfo singularity-devel singularity-runtime vo-client vo-client-edgmkgridmap vo-client-lcmaps-voms voms voms-clients-cpp voms-debuginfo voms-devel voms-doc voms-server
+    condor condor-all condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-test condor-vm-gahp cvmfs cvmfs-devel cvmfs-server cvmfs-unittests osg-oasis osg-release osg-tested-internal osg-version pegasus pegasus-debuginfo singularity singularity-debuginfo singularity-devel singularity-runtime voms voms-clients-cpp voms-debuginfo voms-devel voms-doc voms-server
 
 If you wish to only update the RPMs that changed, the set of RPMs is:
 
