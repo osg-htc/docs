@@ -74,6 +74,20 @@ You must install and enable those first.
     The OSG repositories must have a better (numerically lower) priority than the EPEL repositories;
     you might have dependency resolution ("depsolving") issues otherwise.
 
+### Automatic Updates
+
+We strongly recommend against automatic updates for production services.
+You want to only change software versions during a controlled downtime (or, at least, while a human is watching);
+we strive to thoroughly test software updates, but cannot guarantee new version of software will not be problematic for
+your site.
+
+For testbeds, automatic updates are suggested.
+
+To enable only security related automatic updates:
+
+-   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `USE_YUMSEC="true"`
+
+-   On Enterprise Linux 7, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
 
 ### Install the OSG Repositories
 
