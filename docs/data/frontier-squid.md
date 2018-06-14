@@ -22,7 +22,7 @@ This document is intended for System Administrators who are installing
     are upgrading from a 2.7STABLE9 version to a 3.5 version, see the
     [upstream documentation on upgrading](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Upgrading).
 
-## Frontier Squid is Recommended
+## Frontier Squid Is Recommended
 
 OSG recommends that all sites run a caching proxy for HTTP and HTTPS
 to help reduce bandwidth and improve throughput. To that end, Compute
