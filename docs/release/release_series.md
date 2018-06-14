@@ -16,7 +16,7 @@ Since the start of the RPM-based OSG software stack, we have offered the followi
 
 -   **OSG 3.2** started in November 2013, and was end-of-lifed in August 2016. While the files have not been removed, it is strongly recommended that it not be installed anymore. The main differences between it and 3.1 were the introduction of glideinWMS 3.2, HTCondor 8.0, and Hadoop/HDFS 2.0; also the gLite CE Monitor system was dropped in favor of osg-info-services.
 
--   **OSG 3.3** started in August 2015 and is still supported today.  End-of-support is scheduled for May 2018; sites are encouraged to investigate the upgrade to OSG 3.4. The main differences between 3.3 and 3.2 are the dropping of EL5 support, the addition of EL7 support, and the dropping of Globus GRAM support.
+-   **OSG 3.3** started in August 2015 and was end-of-lifed in May 2018. While the files have not been removed, it is strongly recommended that it not be installed anymore. The main differences between 3.3 and 3.2 are the dropping of EL5 support, the addition of EL7 support, and the dropping of Globus GRAM support.
 
 -   **OSG 3.4** started June 2017. The main differences between it and 3.3 are the removal of edg-mkgridmap, GUMS, BeStMan, and VOMS Admin Server packages.
 
@@ -32,10 +32,10 @@ See the [yum repositories document](/common/yum) for instructions on installing 
 
 <a name="updating-from-old"></a>
 
-Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4
----------------------------------------------
+Updating from OSG 3.1, 3.2, 3.3 to 3.4
+--------------------------------------
 
-1.  If you have an existing installation based on OSG 3.1, 3.2, or 3.3 (which will be referred to as the *old series*), and want to upgrade to 3.3 or 3.4 (the *new series*), we recommend the following procedure:
+1.  If you have an existing installation based on OSG 3.1, 3.2, or 3.3 (which will be referred to as the *old series*), and want to upgrade to 3.4 (the *new series*), we recommend the following procedure:
 
     First, remove the old series yum repositories:
 
@@ -53,7 +53,6 @@ Updating from OSG 3.1, 3.2, 3.3 to 3.3 or 3.4
 
     | Series                    | EL6 URL (for RHEL6, CentOS6, or SL6)                             | EL7 URL (for RHEL7, CentOS7, or SL7)                             |
     |:--------------------------|:-----------------------------------------------------------------|:-----------------------------------------------------------------|
-    | **OSG 3.3**               | `http://repo.opensciencegrid.org/osg/3.3/osg-3.3-el6-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.3/osg-3.3-el7-release-latest.rpm` |
     | **OSG 3.4**               | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm` | `http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm` |
 
 3.  Clean yum cache:
@@ -188,7 +187,7 @@ To cleanly uninstall OSG Info Services from your CE, perform the following proce
         :::console
         root@host # rpm -q osg-ce
 
-    should be at least 3.3-12 (OSG 3.3) or 3.4-1 (OSG 3.4).  If not, update them:
+    should be at least 3.4-1 (OSG 3.4).  If not, update them:
 
         :::console
         root@host # yum update osg-ce
@@ -204,7 +203,7 @@ To cleanly uninstall OSG Info Services from your CE, perform the following proce
         root@host # yum erase gip osg-info-services
 
 !!! note
-    In the output from this command, yum should **not** list other packages than those two. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest OSG 3.3 (or 3.4) versions, and try again.
+    In the output from this command, yum should **not** list other packages than those two. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest OSG 3.4 versions, and try again.
 
 Uninstalling CEMon from the Compute Element (upgrading from OSG 3.1)
 --------------------------------------------------------------------
@@ -218,7 +217,7 @@ To cleanly uninstall CEMon from your CE, perform the following procedure (after 
         :::console
         root@host # rpm -q osg-ce
 
-    should be at least 3.3-12 (OSG 3.3) or 3.4-1 (OSG 3.4). If not, update them:
+    should be at least 3.4-1 (OSG 3.4). If not, update them:
 
         :::console
         root@host # yum update osg-ce
@@ -230,7 +229,7 @@ To cleanly uninstall CEMon from your CE, perform the following procedure (after 
         root@host # yum erase glite-ce-monitor glite-ce-osg-ce-plugin osg-configure-cemon
 
 !!! note
-    In the output from this command, yum should **not** list other packages than those three. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their OSG 3.3 (or 3.4) versions (they should have `.osg33` or `.osg34` in their versions), and try again.
+    In the output from this command, yum should **not** list other packages than those three. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their OSG 3.4 versions (they should have `.osg34` in their versions), and try again.
 
 References
 ----------
