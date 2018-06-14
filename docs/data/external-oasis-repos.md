@@ -11,7 +11,7 @@ covers how to install, configure, and host your own CVMFS _repository server_.  
 via OASIS, but will be hosted and operated externally from the OSG project.
 
 OASIS-based distribution and key signing is available to OSG VOs or repositories affiliated with an OSG VO.
-See the [policy page](https://opensciencegrid.github.io/technology/policy/external-oasis-repos/) for more information
+See the [policy page](https://opensciencegrid.org/technology/policy/external-oasis-repos/) for more information
 on what repositories OSG is willing to distribute.
 
 Before Starting
@@ -149,7 +149,7 @@ In order to host a repository on OASIS, perform the following steps:
 1.  **Verify your VO's OIM registration is up-to-date**.  All repositories need to be associated with a VO; the VO
     needs to assign an _OASIS manager_ in OIM who would be responsible for the contents of any of the VO's repositories
     and will be contacted in case of issues. To designate an OASIS manager, have the VO manager update the
-    [OIM registration](https://oim.opensciencegrid.org).
+    [OIM registration](https://github.com/opensciencegrid/topology/#topology).
 
 1.  Create a [support ticket](https://ticket.opensciencegrid.org/submit) using the following template:
 

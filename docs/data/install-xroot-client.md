@@ -1,96 +1,227 @@
+Using XRootD 
+=============
 
-Install XRootd Client 
-=====================
+XRootD is a high performance data system widely used by several science VOs on OSG to store and to distribute data to
+jobs.
+It can be used to create a data store from distributed data nodes or to serve data to systems using a distributed
+caching architecture.
+Either mode of operation requires you to install the XRootD client software.
 
-XRootD is a high performance network storage system widely used in high energy physics experiments such as ATLAS and ALICE. The underlying XRootD data transfer protocol provides highly efficient access to ROOT based data files.
+This page provides instructions for accessing data on XRootD data systems using a variety of methods.
 
-This page provides instructions for using a XRootD client to connect to a XRootD storage system.
+As a user you have three different ways to interact with XRootD: 
 
-Installing a XRootD Client
---------------------------
+1. [Using the XRootD clients](#using-the-xrootd-client-software)
+1. [Using a XRootDFS FUSE mount to access a local XRootD data store](#using-xrootdfs-fuse-mount)
+1. [Using LD\_PRELOAD to use XRootD libraries with Unix tools](#using-ld95preload-to-access-xrootd)
 
-As a user you have three different ways to interact with XRootd: a file system mounted with XRootDFS, the application `xrdcp`, LD\_PRELOAD.
+We'll show how to install the XRootD client software and use all three mechanisms to access data.
 
-To use a XRootD file system mounted with XRootDFS you don't need any special setup, you will need the XRootD FUSE module.
-
-To use `xrdcp` you need to have it in your path (e.g. `source $INSTALL_DIR/setup.sh`, where `$INSTALL_DIR` is the XRootD installation directory)
-
-The use of LD\_PRELOAD is not recommended if you have any alternative available.
-
-### Install Repositories 
-
-If you have not done so, you will need to install the [proper yum repositories](../common/yum):
+!!! Note
+    Only the client tools method should be used to access XRootD systems across a WAN link.
 
 
-### Installing XRootD Client
+Before Starting
+---------------
 
-The XRootD client is needed to access XRootD via `xrdcp` or via POSIX preload.
+As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
+
+- Ensure the host has [a supported operating system](/release/supported_platforms)
+- Obtain root access to the host
+- Prepare the [required Yum repositories](/common/yum)
+- Install [CA certificates](/common/ca)
+
+If you are using the FUSE mount, you should also consider the following requirement:
+
+-   **User IDs:** If it does not exist already, you will need to create a `xrootd` user
+
+
+Using the XRootD client software
+------------------------------------------------
+
+### Installing the XRootD Client 
+
+If you are planning on interacting with XRootD using the XRootD client, then you'll need to install the XRootD
+client RPM.
+
+### Installing the XRootD Client RPM
+
+The following steps will install the rpm on your system.
+
+1. Clean yum cache:
+
+        ::console
+        root@client $ yum clean all --enablerepo=\*
+
+1. Update software:
+
+        :::console
+        root@client $ yum update
+
+    This command will update **all** packages
+
+1. Install XRootD Client rpm:
+
+        :::console
+        root@client $ yum install xrootd-client
+
+### Using the XRootD Client 
+
+Once the `xrootd-client` rpm is installed, you should be able to use the `xrdcp` command to copy files to and from
+XRootD systems and the local file system.
+For example:
 
 ``` console
-root@host # yum install xrootd-client
+user@client $ echo "This is a test" >/tmp/test 
+user@client $ xrdcp /tmp/test xroot://redirector.domain.org:1094//storage/path/test 
+user@client $ xrdcp xroot://redirector.domain.org:1094//storage/path/test /tmp/test1 
+user@client $ diff /tmp/test1 /tmp/test 
 ```
 
-### Installing XRootD Fuse
-
-The XRootD fuse package is needed to access via XRootDFS.
+For other operations, you'll need to use the `xrdfs` command.
+This command allows you to do file operations such as creating directories, removing directories, deleting files, and
+moving files on a XRootD system, provided you have the appropriate authorization.
+The `xrdfs` command can be used interactively by running `xrdfs xroot://redirector.domain.org:1094/`.
+Alternatively, you can use it in batch mode by adding the `xrdfs` command after the xroot URI.  For example:
 
 ``` console
-root@host # yum install xrootd-fuse
+user@client $ echo "This is a test" >/tmp/test 
+user@client $ xrdfs xroot://redirector.domain.org:1094/  mkdir  /storage/path/test
+user@client $ xrdcp xroot://redirector.domain.org:1094//storage/path/test/test1 /tmp/test1 
+user@client $ xrdfs xroot://redirector.domain.org:1094/  ls  /storage/path/test/test1
+user@client $ xrdfs xroot://redirector.domain.org:1094/  rm  /storage/path/test/test1
+user@client $ xrdfs xroot://redirector.domain.org:1094/  rmdir  /storage/path/test
 ```
 
-Using the XRootD Client Mechanisms
-----------------------------------
 
-### Using the xrdcp client
+!!! Note
+    To access remote XRootD resources, you will may need to use a VOMS proxy in order to authenticate successfully.  The
+    XRootD client tools will automatically locate your proxy if you generate it using `voms-proxy-init`, otherwise you
+    can set the `X509_USER_PROXY` environment variable to the location of the proxy XRootD should use.
 
-From the redirector node, you can run this:
+### Validation
+
+Assuming that there is a file called `test_file` in your XRootD data store, you can do the following to validate your
+installation.  Here we assume that there is a file on your XRootD system at `/storage/path/test_file`.
 
 ``` console
-root@host # echo "This is a test" >/tmp/test 
-root@host # xrdcp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/test 
-root@host # xrdcp xroot://redirector.yourdomain.org:1094//storage/path/test /tmp/test1 
-root@host # diff /tmp/test1 /tmp/test 
+user@client $ xrdcp xroot://redirector.yourdomain.org:1094//storage/path/test_file /tmp/test1
 ```
 
-Users can write in their own space. E.g. a user with Unix account name `myuser` (the account must exist, eg. in `/etc/passwd`, etc, on the redirector and on all the data servers) could save a file in XRootD:
 
-``` console
-root@host # echo "This is a user test" >/tmp/test 
-root@host # xrdcp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/myuser/test 
-```
+Using XRootDFS FUSE mount
+-----------------------------------------
 
-Note that `xrdcp` creates missing directories.
+This section will explain how to install, setup, and interact with XRootD using a FUSE mount.
+This method of accessing XRootD only works when accessing a local XRootD system.
 
-### Tests using the libXrdPosixPreload library
+### Installing the XRootD FUSE RPM
 
-Using XRootD with the POSIX preload library (replace `/usr/lib64` with `/usr/lib` on 32-bit systems)
+If you are planning on using a FUSE mount, you'll need to install the xrootd-fuse rpm by running the following commands:
 
-``` console
-root@host # export LD_PRELOAD=/usr/lib64/libXrdPosixPreload.so 
-root@host # echo "This is a new test" >/tmp/test 
-root@host # mkdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
-root@host # cp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
-root@host # cp xroot://redirector.yourdomain.org:1094//storage/path/subdir/test /tmp/test1 
-root@host # diff /tmp/test1 /tmp/test 
-root@host # rm xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
-root@host # rmdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
-```
+1. Clean yum cache:
 
-### Tests using XRootDFS
+        ::console
+        root@client $ yum clean all --enablerepo=\*
 
-The directory mounted using XRootDFS can be used as any other directory mounted on your file system. All the normal Unix commands should work. You don't need any special setup or library. Try using `cp`, `rm`, `mv`, `mkdir`, `rmdir`.
+1. Update software:
+
+        :::console
+        root@client $ yum update
+
+1. Install XRootD FUSE rpm:
+
+        :::console
+        root@client $ yum install xrootd-fuse
+
+### Configuring the FUSE Mount 
+
+Once the appropriate rpms are installed, the FUSE setup will need further configuration.
+See [this](/data//install-xrootd#optional-enabling-a-fuse-mount) for instructions on updating your `fstab` file.
+
+### Using the XRootDFS FUSE Mount
+
+The directory mounted using XRootDFS can be used as any other directory mounted on your file system. 
+All the normal Unix commands should work out of the box.
+Try using `cp`, `rm`, `mv`, `mkdir`, `rmdir`.
 
 Assuming your mount is `/mnt/xrootd`:
 
 ``` console
-root@host # echo "This is a new test" >/tmp/test 
-root@host # mkdir -p /mnt/xrootd/subdir/sub2
-root@host # cp /tmp/test /mnt/xrootd/subdir/sub2/test 
-root@host # cp /mnt/xrootd/subdir/sub2/test /mnt/xrootd/subdir/sub2/test1 
-root@host # cp /mnt/xrootd/subdir/sub2/test1 /tmp/test1 
-root@host # diff /tmp/test1 /tmp/test 
-root@host # rm -r /mnt/xrootd/subdir
+user@client $ echo "This is a new test" >/tmp/test 
+user@client $ mkdir -p /mnt/xrootd/subdir/sub2
+user@client $ cp /tmp/test /mnt/xrootd/subdir/sub2/test 
+user@client $ cp /mnt/xrootd/subdir/sub2/test /mnt/xrootd/subdir/sub2/test1 
+user@client $ cp /mnt/xuserd/subdir/sub2/test1 /tmp/test1 
+user@client $ diff /tmp/test1 /tmp/test 
+user@client $ rm -r /mnt/xrootd/subdir
 ```
+
+### Validation
+
+Assuming your mount is `/mnt/xrootd` and that there is a file called `test_file` in your XRootD data store:
+
+``` console
+user@client $ cp /mnt/xrootd/test_file /tmp/test1
+```
+
+
+Using LD\_PRELOAD to access XRootD
+-----------------------------------
+
+### Installing XRootD Libraries For LD\_PRELOAD
+
+In order to use LD\_PRELOAD to access XRootD, you'll need to install the XRootD client libraries.  
+The following steps will install them on your system:
+
+1. Clean yum cache:
+
+        ::console
+        root@client $ yum clean all --enablerepo=\*
+
+1. Update software:
+
+        :::console
+        root@client $ yum update
+
+    This command will update **all** packages
+
+1. Install XRootD Client rpm:
+
+        :::console
+        root@client $ yum install xrootd-client
+
+
+
+### Using LD\_PRELOAD method
+
+In order to use the LD\_PRELOAD method to access a XRootD data store, you'll need to change your environment to use the
+XRootD libraries in conjunction with the standard Unix binaries.
+This is done by setting the `LD_PRELOAD` environment variable.
+Once this is done, the standard unix commands like `mkdir`, `rm`, `cp`, etc. will work with xroot URIs.
+For example:
+
+``` console
+user@client $ export LD_PRELOAD=/usr/lib64/libXrdPosixPreload.so 
+user@client $ echo "This is a new test" >/tmp/test 
+user@client $ mkdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
+user@client $ cp /tmp/test xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
+user@client $ cp xuser://redirector.yourdomain.org:1094//storage/path/subdir/test /tmp/test1 
+user@client $ diff /tmp/test1 /tmp/test 
+user@client $ rm xroot://redirector.yourdomain.org:1094//storage/path/subdir/test 
+user@client $ rmdir xroot://redirector.yourdomain.org:1094//storage/path/subdir
+```
+
+### Validation
+
+Assuming that there is a file called `test_file` in your XRootD data store, the following steps will validate your
+installation:
+
+``` console
+user@client $ export LD_PRELOAD=/usr/lib64/libXrdPosixPreload.so
+user@client $ cp xroot://redirector.yourdomain.org:1094//storage/path/test_file /tmp/test1
+```
+
 
 How to get Help?
 ----------------

@@ -12,7 +12,6 @@ Before Starting
 
 Before starting the installation process, consider the following requirements:
 
--   You must have [grid administrator privileges](http://oim.opensciencegrid.org/oim/gridadmin)
 -   There must be a shared file system for file propagation across GridFTP servers
 -   You must have reserved a virtual IP address and associated virtual hostname
 
@@ -32,7 +31,7 @@ The number of GridFTP servers that you should run is determined first and foremo
 
 #### Shared file system
 
-The number of GridFTP servers can also be determined by your hardware needs, which are determined by your choice of shared file system. If you choose a POSIX-based shared file system, plan for machines with more cores, or more GridFTP hosts to distribute the CPU load. If you are running [GridFTP with Hadoop](install-hadoop-2-0-0#standalone-gridftp-node-installation), plan for machines with more memory, or more GridFTP hosts to distribute the memory load.
+The number of GridFTP servers can also be determined by your hardware needs, which are determined by your choice of shared file system. If you choose a POSIX-based shared file system, plan for machines with more cores, or more GridFTP hosts to distribute the CPU load. If you are running [GridFTP with Hadoop](install-hadoop#standalone-gridftp-node-installation), plan for machines with more memory, or more GridFTP hosts to distribute the memory load.
 
 !!! note
     If you determine that you need only a single GridFTP host, you do not need load balancing. Instead, follow the [standalone-GridFTP installation guide](gridftp).
@@ -113,7 +112,7 @@ Use the virtual IP address of your load balancer(s) as the secondary IPs of each
 1.  Add the virtual IP using the `ip` tool:
 
         :::console
-        root@host # ip addr add <VIRTUAL-IP-ADDRESS/<SUBNET-MASK dev <NETWORK-INTERFACE
+        root@host # ip addr add <VIRTUAL-IP-ADDRESS>/<SUBNET-MASK> dev <NETWORK-INTERFACE>
 
 1.  To persist the virtual IP changes across reboots, edit `/etc/rc.d/rc.local`, and add the same command as used above.
 1.  Make sure that `/etc/rc.d/rc.local` is executable:

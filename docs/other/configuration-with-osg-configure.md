@@ -1,42 +1,14 @@
 Configuration with OSG-Configure
 ================================
 
--   [About this document](#about-this-document)
--   [Invocation and script usage](#invocation-and-script-usage)
--   [Syntax and layout](#syntax-and-layout)
--   [Configuration sections](#configuration-sections)
-    -   Job managers (batch systems):
-        -   [Bosco](#bosco)
-        -   [Condor](#condor)
-        -   [LSF](#lsf)
-        -   [PBS](#pbs)
-        -   [SGE](#sge)
-        -   [Slurm](#slurm)
-    -   Monitoring/reporting:
-        -   [Gratia](#gratia)
-        -   [Info Services](#info-services)
-        -   [RSV](#rsv)
-        -   [Subcluster / Resource Entry](#subcluster-resource-entry)
-    -   [Gateway](#gateway)
-    -   [Local Settings](#local-settings)
-    -   [Misc Services](#misc-services)
-    -   [Site Information](#site-information)
-    -   [Squid](#squid)
-    -   [Storage](#storage)
-
-
-About this document
-===================
-
 OSG-Configure and the INI files in `/etc/osg/config.d` allow a high level configuration of OSG services.
 This document outlines the settings and options found in the INI files for system administers that are installing and configuring OSG software.
 
 This page gives an overview of the options for each of the sections of the configuration files that `osg-configure` uses.
 
 
-
 Invocation and script usage
-===========================
+---------------------------
 
 The `osg-configure` script is used to process the INI files and apply changes to the system.
 `osg-configure` must be run as root.
@@ -88,8 +60,7 @@ If something goes wrong, specify the `-d` flag to add more verbose output to `os
 The rest of this document will detail what to specify in the INI files.
 
 
-Conventions
------------
+### Conventions ###
 
 In the tables below:
 
@@ -99,7 +70,7 @@ In the tables below:
 
 
 Syntax and layout
-=================
+-----------------
 
 The configuration files used by `osg-configure` are the one supported by Python's [SafeConfigParser](http://docs.python.org/library/configparser.html), similar in format to the [INI configuration file](http://en.wikipedia.org/wiki/INI_file) used by MS Windows:
 
@@ -114,8 +85,7 @@ The configuration files used by `osg-configure` are the one supported by Python'
 Each of the files are successively read and merged to create a final configuration that is then used to configure OSG software. Options and settings in files read later override the ones in previous files. This allows admins to create a file with local settings (e.g. `99-local-site-settings.ini`) that can be read last and which will be take precedence over the default settings in configuration files installed by various RPMs and which will not be overwritten if RPMs are updated.
 
 
-Variable substitution
----------------------
+### Variable substitution ###
 
 The osg-configure parser allows variables to be defined and used in the configuration file:
 any option set in a given section can be used as a variable in that section.  Assuming that you have set an option with the name `myoption` in the section, you can substitute the value of that option elsewhere in the section by referring to it as `%(myoption)s`.
@@ -123,12 +93,11 @@ any option set in a given section can be used as a variable in that section.  As
 !!! note
     The trailing `s` is required. Also, option names cannot have a variable subsitution in them.
 
-Special Settings
-----------------
+### Special Settings ###
 
 If a setting is set to UNAVAILABLE or DEFAULT or left blank, osg-configure will try to use a sensible default for setting if possible.
 
-### Ignore setting
+#### Ignore setting ####
 
 The `enabled` option, specifying whether a service is enabled or not, is a boolean but also accepts `Ignore` as a possible value. Using Ignore, results in the service associated with the section being ignored entirely (and any configuration is skipped). This differs from using `False` (or the `%(disabled)s` variable), because using `False` results in the service associated with the section being disabled. `osg-configure` will not change the configuration of the service if the `enabled` is set to `Ignore`.
 
@@ -138,7 +107,7 @@ This is useful, if you have a complex configuration for a given that can't be se
 
 
 Configuration sections
-======================
+----------------------
 
 The OSG configuration is divided into sections with each section starting with a section name in square brackets (e.g. `[Section 1]`). The configuration is split in multiple files and options form one section can be in more than one files.
 
@@ -146,8 +115,7 @@ The following sections give an overview of the options for each of the sections 
 
 
 
-Bosco
------
+### Bosco ###
 
 This section is contained in `/etc/osg/config.d/20-bosco.ini` which is provided by the `osg-configure-bosco` RPM.
 
@@ -160,8 +128,7 @@ This section is contained in `/etc/osg/config.d/20-bosco.ini` which is provided 
 | **ssh\_key** | String                    | The location of the ssh key, as created above.                                                                                                                                                                                                                                                                                |
 
 
-Condor
-------
+### Condor ###
 
 This section describes the parameters for a Condor jobmanager if it's being used in the current CE installation. If Condor is not being used, the `enabled` setting should be set to `False`.
 
@@ -174,8 +141,7 @@ This section is contained in `/etc/osg/config.d/20-condor.ini` which is provided
 | condor\_config    | String                    | This should be set to be path where the condor\_config file is located. If this is set to a blank variable, DEFAULT or UNAVAILABLE, the `osg-configure` script will try to get this from the CONDOR\_CONFIG environment variable if available otherwise it will use `/etc/condor/condor_config`, the default for the RPM installation. |
 
 
-LSF
----
+### LSF ###
 
 This section describes the parameters for a LSF jobmanager if it's being used in the current CE installation. If LSF is not being used, the `enabled` setting should be set to `False`.
 
@@ -187,8 +153,7 @@ This section is contained in `/etc/osg/config.d/20-lsf.ini` which is provided by
 | lsf\_location      | String                    | This should be set to be directory where lsf is installed       |
 
 
-PBS
----
+### PBS ###
 
 This section describes the parameters for a pbs jobmanager if it's being used in the current CE installation. If PBS is not being used, the `enabled` setting should be set to `False`.
 
@@ -202,8 +167,7 @@ This section is contained in `/etc/osg/config.d/20-pbs.ini` which is provided by
 | pbs\_server                    | String                    | This setting is optional and should point to your PBS server node if it is different from your OSG CE                                     |
 
 
-SGE
----
+### SGE ###
 
 This section describes the parameters for a SGE jobmanager if it's being used in the current CE installation. If SGE is not being used, the `enabled` setting should be set to `False`.
 
@@ -224,8 +188,7 @@ This section is contained in `/etc/osg/config.d/20-sge.ini` which is provided by
     validation, otherwise SGE will be queried for available queues.
 
 
-Slurm
------
+### Slurm ###
 
 This section describes the parameters for a Slurm jobmanager if it's being used in the current CE installation. If Slurm is not being used, the `enabled` setting should be set to `False`.
 
@@ -243,8 +206,7 @@ This section is contained in `/etc/osg/config.d/20-slurm.ini` which is provided 
 | slurm\_cluster      | String                    | The name of the Slurm cluster                                                                                                                     |
 
 
-Gratia
-------
+### Gratia ###
 
 This section configures Gratia. If `probes` is set to `UNAVAILABLE`, then `osg-configure` will use appropriate default values. If you need to specify custom reporting (e.g. a local gratia collector) in addition to the default probes, `%(osg-jobmanager-gratia)s`, `%(osg-gridftp-gratia)s`, `%(osg-metric-gratia)s`, `%(itb-jobmanager-gratia)s`, `%(itb-gridftp-gratia)s`, `%(itb-metric-gratia)s` are defined in the default configuration files to make it easier to specify the standard osg reporting.
 
@@ -265,8 +227,7 @@ This section is contained in `/etc/osg/config.d/30-gratia.ini` which is provided
     -   `gridftp` (for the GridFTP transfer probe)
 
 
-Info Services
--------------
+### Info Services ###
 
 Reporting to the central CE Collectors is configured in this section.  In the majority of cases, this file can be left untouched; you only need to configure this section if you wish to report to your own CE Collector instead of the ones run by OSG Operations.
 
@@ -286,8 +247,7 @@ This section is contained in `/etc/osg/config.d/30-infoservices.ini`, which is p
     -   Otherwise, set this to the `hostname:port` of a host running a `condor-ce-collector` daemon
 
 
-RSV
----
+### RSV ###
 
 This section handles the configuration and setup of the RSV services.
 
@@ -310,7 +270,6 @@ This section is contained in `/etc/osg/config.d/30-rsv.ini` which is provided by
 | service_key          | String                    | This option should point to the private key file (pem) for your service  certificate. If this is left blank or set to `UNAVAILABLE` and the `service_cert` setting is enabled, it will default to `/etc/grid-security/rsvkey.pem` .                                    |
 | service_proxy        | String                    | This should point to the location of the rsv proxy file. If this is left blank or set to `UNAVAILABLE` and the use_service_cert  setting is enabled, it will default to `/tmp/rsvproxy`.                                                                               |
 | user_proxy           | String                    | If you don't use a service certificate for rsv, you will need to specify a  proxy file that RSV should use in the proxy_file setting.  If this is set, then  service_cert, service_key, and service_proxy should be left blank, or set to `UNAVAILABE` or `DEFAULT`.   |
-| **enable_gratia**    | `True`, `False`           | This option will enable RSV record uploading to central RSV collector at the GOC.   This should be set to True on all OSG resources (and to False on non-OSG resources).                                                                                               |
 | **setup_rsv_nagios** | `True`, `False`           | This option indicates whether rsv should upload results to a local  nagios server instance. This should be set to True or False.<br> This plugin is provided as an experimental component, and admins are recommend *not to enable* it on production resources.        |
 | rsv_nagios_conf_file | String                    | This option indicates the location of the rsv nagios  file to use for configuration details. This file *needs to be configured locally for RSV-Nagios forwarding to work* -- see inline comments in file for more information.                                         |
 | condor_location      | String                    | If you installed Condor in a non-standard location (somewhere other than /usr, which is where the RPM puts it)  you must specify the path to the install dir here.                                                                                                     |
@@ -324,8 +283,7 @@ This section is contained in `/etc/osg/config.d/30-rsv.ini` which is provided by
     SE.
 
 
-Subcluster / Resource Entry
----------------------------
+### Subcluster / Resource Entry ###
 
 Subcluster and Resource Entry configuration is for reporting about the worker resources on your site. A **subcluster** is a homogeneous set of worker node hardware; a **resource** is a set of subcluster(s) with common capabilities that will be reported to the ATLAS AGIS system.
 
@@ -338,7 +296,7 @@ This configuration uses multiple sections of the OSG configuration files:
 -   [Subcluster\*](#subcluster-configuration): options about homogeneous subclusters
 -   [Resource Entry\*](#resource-entry-configuration-atlas-only): options for specifying ATLAS queues for AGIS
 
-### Notes for multi-CE sites.
+#### Notes for multi-CE sites. ####
 
 If you would like to properly advertise multiple CEs per cluster, make sure that you:
 
@@ -346,7 +304,7 @@ If you would like to properly advertise multiple CEs per cluster, make sure that
 -   Have the **exact** same configuration values for the Subcluster\* and Resource Entry\* sections in each CE.
 
 
-### Subcluster Configuration
+#### Subcluster Configuration ####
 
 Each homogeneous set of worker node hardware is called a **subcluster**. For each subcluster in your cluster, fill in the information about the worker node hardware by creating a new Subcluster section with a unique name in the following format: `[Subcluster CHANGEME]`, where CHANGEME is the globally unique subcluster name (yes, it must be a **globally** unique name for the whole grid, not just unique to your site. Get creative.)
 
@@ -370,7 +328,7 @@ The following attributes are optional:
 -   `allowed_vos` is mandatory
 
 
-### Resource Entry Configuration (ATLAS only)
+#### Resource Entry Configuration (ATLAS only) ####
 
 If you are configuring a CE for the ATLAS VO, you must provide hardware information to advertise the queues that are available to AGIS. For each queue, create a new `Resource Entry` section with a unique name in the following format: `[Resource Entry RESOURCE]` where RESOURCE is a globally unique resource name (it must be a **globally** unique name for the whole grid, not just unique to your site). The following options are required for the `Resource Entry` section and are used to generate the data required by AGIS:
 
@@ -395,8 +353,7 @@ The following attributes are optional:
 -   `allowed_vos` is mandatory
 
 
-Gateway
--------
+### Gateway ###
 
 This section gives information about the options in the Gateway section of the configuration files. These options control the behavior of job gateways on the CE. CEs are based on HTCondor-CE, which uses `condor-ce` as the gateway.
 
@@ -408,8 +365,7 @@ This section is contained in `/etc/osg/config.d/10-gateway.ini` which is provide
 | **job\_envvar\_path**          | String          | The value of the PATH environment variable to put into HTCondor jobs running with HTCondor-CE. This value is ignored if not using that batch system/gateway combination.                                               |
 
 
-Local Settings
---------------
+### Local Settings ###
 
 This section differs from other sections in that there are no set options in this section. Rather, the options set in this section will be placed in the `osg-local-job-environment.conf` verbatim. The options in this section are case sensitive and the case will be preserved when they are converted to environment variables. The `osg-local-job-environment.conf` file gets sourced by jobs run on your cluster so any variables set in this section will appear in the environment of jobs run on your system.
 
@@ -424,8 +380,7 @@ MY_PATH = /usr/local/myapp
 This section is contained in `/etc/osg/config.d/40-localsettings.ini` which is provided by the `osg-configure-ce` RPM.
 
 
-Misc Services
--------------
+### Misc Services ###
 
 This section handles the configuration of services that do not have a dedicated section for their configuration.
 
@@ -449,8 +404,7 @@ This section primarily deals with authentication/authorization. For information 
 -   `authorization_method` will raise a warning if set to `xacml`
 
 
-Site Information
-----------------
+### Site Information ###
 
 The settings found in the `Site Information` section are described below. This section is used to give information about a resource such as resource name, site sponsors, administrators, etc.
 
@@ -480,8 +434,7 @@ This section is contained in `/etc/osg/config.d/40-siteinfo.ini` which is provid
     indicate this by using 'local' as the VO.
 
 
-Squid
------
+### Squid ###
 
 This section handles the configuration and setup of the squid web caching and proxy service.
 
@@ -493,8 +446,7 @@ This section is contained in `/etc/osg/config.d/01-squid.ini` which is provided 
 | location    | String                    | This should be set to the `hostname:port` of the squid server. |
 
 
-Storage
--------
+### Storage ###
 
 This section gives information about the options in the Storage section of the configuration file.
 Several of these values are constrained and need to be set in a way that is consistent with one of the OSG storage models.

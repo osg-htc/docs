@@ -1,158 +1,232 @@
-Hadoop 2.0.0 (CDH4)
-===================
+Installing and Maintaining HDFS
+===============================
 
-The purpose of this document is to provide Hadoop based SE administrators the information on how to prepare, install
-and validate OSG storage based on the Hadoop Distributed File System (HDFS).  Currently, OSG supports a patched version
-of the CDH4 distribution of HDFS.
+[Hadoop Distributed File System](http://hadoop.apache.org/) (HDFS) is a scalable, reliable distributed file system developed in the Apache project. It is based on the map-reduce framework and design of the Google file system. The OSG distribution of Hadoop includes all components needed to operate a multi-terabyte storage site.
 
-Introduction
-------------
-
-[Hadoop Distributed File System](http://hadoop.apache.org/) (HDFS) is a scalable reliable distributed file system developed in the Apache project. It is based on map-reduce framework and design of the Google file system. The VDT distribution of Hadoop includes all components needed to operate a multi-terabyte storage site. Included are:
-
--   [Apache Hadoop](http://hadoop.apache.org/)
--   A [FUSE interface](https://en.wikipedia.org/wiki/Filesystem_in_Userspace) for localized POSIX access.
--   GridFTP and XRootD for offsite transfers
-
-The OSG packaging and distribution of Hadoop is based on YUM. All components are packaged as RPMs and are available
-from the OSG repositories. It is also recommended that you enable [EPEL](http://fedoraproject.org/wiki/EPEL) repos.
-
-!!! warning "Deprecation Notice"
-    This installation page additionally includes integration with both the BestMan SRM server and GUMS authorization
-    service.  Both of these are deprecated as of June 2017 and support will end May 2018.
-
-Requirements
-------------
-
-### Architecture
-
+The purpose of this document is to provide Hadoop-based Storage Element administrators the information on how to prepare,
+install and validate OSG storage based on the Hadoop Distributed File System (HDFS).
+The OSG supports a patched version HDFS from Cloudera's CDH5 distribution of HDFS
+(<https://www.cloudera.com/products/open-source/apache-hadoop/key-cdh-components.html>).
 
 !!! note
-    There are several important components to a storage element installation. Throughout this document, it will be stated which node the relevant installation instructions apply to. It can apply to one of the following:
+    The OSG only supports HDFS on EL7 hosts
 
--   **Namenode**: You will have at least one namenode. The name node functions as the directory server and coordinator of the hadoop cluster. It houses all the meta-data for the hadoop cluster. %RED%The namenode and secondary namenode need to have a directory that they can both access on a shared filesystem so that they can exchange filesystem checkpoints.%ENDCOLOR%
--   **Secondary Namenode**: This is a secondary machine that periodically merges updates to the HDFS file system back into the fsimage. This dramatically improves startup and restart times.
--   **Datanode**: You will have many datanodes. Each data node stores large blocks of files to be stored on the hadoop cluster.
--   **Client**: This is a documentation shorthand that refers to any machine with the hadoop client commands and [FUSE](https://en.wikipedia.org/wiki/Filesystem_in_Userspace) mount. Any machine that needs a FUSE mount to access data in a POSIX-like fashion will need this.
--   **GridFTP node**: This is a node with [Globus GridFTP](gridftp). The GridFTP server for Hadoop can be very memory-hungry, up to 500MB/transfer in the default configuration. You should plan accordingly to provision enough GridFTP servers to handle the bandwidth that your site can support.
+Before Starting
+---------------
 
-Note that these components are not necessarily mutually exclusive. For instance, you may consider having your GridFTP server co-located on the SRM node. Alternatively, you can locate a client (or even a GridFTP node) co-located on each data node. That way, each data node also acts as an access point to the hadoop cluster.
+Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
-!!! note
-    Total installation time, on an average, should not exceed 8 to 24 man-hours. If your site needs further assistance
-    to help expedite, please email <mailto:help@opensciencegrid.org>.
+-   **User IDs:** If they do not exist already, the installation will create the Linux users `hdfs` and `zookeeper` on all nodes
+    as well as `hadoop` and `mapred` on the NameNodes
+-   **Firewall:** In the OSG, HDFS is intended to run as an internal service without any direct, external access to any of the nodes.
+    For more information on the ports used for communication between the various HDFS nodes, see the 
+    [Cloudera documentation](https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_ports_cdh5.html).
 
-### Host and OS
+As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
+- Ensure the host has [a supported operating system](/release/supported_platforms)
+- Obtain root access to the host
+- Prepare the [required Yum repositories](/common/yum)
 
-Hadoop will run anywhere that Java is supported (including Solaris). However, these instructions are for RedHat derivants (including Scientific Linux) because of the RPM based installation. The current supported Operating Systems supported by the OSG are Red Hat Enterprise Linux 6, 7, and variants (see [details...](../release/supported_platforms)).
+Designing Your HDFS Cluster
+---------------------------
 
-The HDFS prerequisites are:
+There are several important components to an HDFS installation:
 
--   Minimum of 1 headnode (the namenode)
--   At least one node which will hold data, preferably at least 2. Most sites will have 20 to 200 datanodes.
--   Working Yum and RPM installation on every system.
--   `fuse` kernel module and `fuse-libs`.
--   Java RPM. If java isn't already installed we supply the Oracle jdk 1.6.0 rpm and it will come in as a dependency. Oracle jdk is currently the only jdk supported by OSG so we highly recommend you use the version supplied.
+-   **NameNode**: The NameNode functions as the directory server and coordinator of the HDFS cluster.
+    It houses all the meta-data for the hadoop cluster.
+-   **Secondary NameNode (optional)**: This is a secondary machine that periodically merges updates to the HDFS file
+    system back into the `fsimage`.
+    It must share a directory with the primary NameNode to exchange filesystem checkpoints.
+    An HDFS installation with a Secondary NameNode dramatically improves startup and restart times.
+-   **DataNode**: You will have many DataNodes. Each DataNode stores large blocks of files to for the hadoop cluster.
+-   **Client**: This is a documentation shorthand that refers to any machine with the hadoop client commands or
+    [FUSE](https://en.wikipedia.org/wiki/Filesystem_in_Userspace) mount.
 
-### Users
+Installing HDFS
+---------------
 
+An OSG HDFS installation consists of HDFS and other support software (e.g., Gratia accounting).
+To simplify installation, OSG provides convenience RPMs that install all required software.
 
-This installation will create following users unless they are already created.
+1. Clean yum cache:
 
-| User      | Comment                                           |
-|:----------|:--------------------------------------------------|
-| `hdfs`    | Used by Hadoop to store data blocks and meta-data |
+        ::console
+        root@host # yum clean all --enablerepo=*
 
-For this package to function correctly, you will have to create the users needed for grid operation. Any user that can be authenticated should be created.
+1. Update software:
 
-For grid-mapfile users, each line of the grid-mapfile is a certificate/user pair. Each user in this file should be created on the server.
+        :::console
+        root@host # yum update
+    This command will update **all** packages
 
-For gums users, this means that each user that can be authenticated by gums should be created on the server.
+1. Install the relevant packages based on the node you are installing:
 
-Note that these users must be kept in sync with the authentication method. For instance, if new users or rules are added in gums, then new users should also be added here.
-
-### Certificates
-
-
-| Certificate                 | User that owns certificate | Path to certificate                                                                                 |
-|:----------------------------|:---------------------------|:----------------------------------------------------------------------------------------------------|
-| Host certificate            | `root`                     | `/etc/grid-security/hostcert.pem` <br> `/etc/grid-security/hostkey.pem`                       |
-
-[Instructions](../security/host-certs) to request a service certificate.
-
-You will also need a copy of CA certificates; see the [CA certificate installation document](../common/ca) if you are
-unfamiliar with this procedure.  This is needed by GridFTP and SRM nodes, but it is recommended for all nodes in the
-cluster.
-
-!!! tip
-    Make sure you enable [fetch-crl](../common/ca#install-fetch-crl)
-
-Installation
-------------
-
-Installation depends on the node you are installing:
-
-### Namenode Installation
+    | If you are installing a(n)... | Then run the following command...             |
+    | :---------------------------- | :--------------------------------             |
+    | Primary NameNode              | `yum install osg-se-hadoop-namenode`          |
+    | Secondary NameNode            | `yum install osg-se-hadoop-secondarynamenode` |
+    | DataNode                      | `yum install osg-se-hadoop-datanode`          |
 
 
-``` console
-root@host # yum install osg-se-hadoop-namenode
-```
+Upgrading HDFS
+--------------
 
-### Secondary Namenode Installation
+This section will guide you through the process to upgrade a HDFS 2.0.0 installation from OSG 3.3 to the HDFS 2.6.0
+from OSG 3.4.
 
-
-``` console
-root@host # yum install osg-se-hadoop-secondarynamenode
-```
-
-### Datanode Installation
-
-
-``` console
-root@host # yum install osg-se-hadoop-datanode
-```
-
-### Client/FUSE Installation
-
-
-``` console
-root@host # yum install osg-se-hadoop-client
-```
-
-### Standalone Gridftp Node Installation
-
-
-``` console
-root@host # yum install osg-se-hadoop-gridftp
-```
-
-If you are using GUMS authorization, the follow rpms need to be installed as well:
-
-``` console
-root@host # yum install lcmaps-plugins-gums-client
-root@host # yum install lcmaps-plugins-basic
-```
-
-### SRM Node Installation
-
-
-``` console
-root@host # yum install osg-se-hadoop-srm
-```
+!!! warning
+    The upgrade process will involve downtime for your HDFS cluster. Please plan accordingly.
 
 !!! note
-    If you are using a single system to host the SRM software and the GridFTP node, you'll also need to install the `osg-se-hadoop-gridftp` rpm as well.
+    The OSG only offers HDFS 2.6.0 for EL7 hosts.
 
-Configuration
--------------
+The upgrade process occurs in several steps:
 
-### Hadoop Configuration
+1. [Preparing for the upgrade](#preparing-for-the-upgrade)
+1. [Updating to OSG 3.4](#updating-to-osg-34)
+1. [Upgrading the Primary NameNode](#upgrading-the-primary-namenode)
+1. [Upgrading the DataNodes](#upgrading-the-datanodes)
+1. [Upgrading the Secondary NameNode](#upgrading-the-secondary-namenode)
+1. [Finalizing the upgrade](#finalizing-the-upgrade)
 
+### Preparing for the upgrade ###
+
+Before upgrading, backup your configuration data and HDFS metadata.
+
+1. Put your Primary NameNode into safe mode:
+
+        :::console
+        root@primary-namenode # hdfs dfsadmin -safemode enter
+        Safe mode is ON
+
+1. Save a clean copy of your HDFS namespace:
+
+        :::console
+        root@primary-namenode # hdfs dfsadmin -saveNamespace
+        Save namespace successful
+
+1. Shutdown the HDFS services on all of your HDFS nodes (see [this section](#running-services) for instructions).
+
+1. On the Primary NameNode, verify that your NameNode service is off:
+
+        :::console
+        root@primary-namenode # /etc/init.d/hadoop-hdfs-namenode status
+
+    This command should indicate that your NameNode service is not running.
+
+1. Find the location of the directory with the HDFS metadata:
+
+        :::console
+        root@primary-namenode # grep -C1 dfs.namenode.name.dir /etc/hadoop/conf/hdfs-site.xml
+
+    And look for the value of `dfs.namenode.name.dir`:
+
+        :::xml
+        <property>
+         <name>dfs.namenode.name.dir</name>
+          <value>file:///var/lib/dfs/nn,file:///home/hadoop/dfs/nn</value>
+
+1. Backup the directory that appears in the output using your backup method of choice.
+   If more than one directory appears in the list (as in the example above), choose the most convenient directory.
+   All of the directories in the list will have the same contents.
+
+### Updating to OSG 3.4 ###
+
+Once your HDFS services have been turned off and the HDFS metadata has been backed up, update each node to OSG 3.4 by
+following the instructions in [this section](/release/release_series/#updating-from-old).
+
+### Upgrading the Primary NameNode ###
+
+To upgrade your Primary NameNode, update all relevant packages then run the upgrade command.
+
+1. Clear the yum cache:
+
+        :::console
+        root@primary-namenode # yum clean all --enablerepo=*
+
+1. Update the HDFS RPMs:
+
+        :::console
+        root@primary-namenode # yum update osg-se-hadoop-namenode --enablerepo-osg-upcoming
+
+1. Perform the upgrade command:
+
+        :::console
+        root@primary-namenode # /etc/init.d/hadoop-hdfs-namenode upgrade
+
+    This will start the upgrade process for the HDFS metadata on your primary namenode.
+    You can follow the process by running
+
+        :::console
+        root@primary-namenode # tail -f /var/log/hadoop-hdfs/hadoop-hdfs-namenode-<hostname>.log
+
+### Upgrading the DataNodes ###
+
+Once the Primary NameNode has completed its upgrade process, start the process of upgrading each of your DataNodes.
+
+1. Clear the yum cache:
+
+        :::console
+        root@datanode # yum clean all --enablerepo=*
+
+1. Update the HDFS RPMs:
+
+        :::console
+        root@datanode # yum update osg-se-hadoop-datanode --enablerepo-osg-upcoming
+
+1. Start the DataNode service:
+
+        :::console
+        root@datanode # /etc/init.d/hadoop-hdfs-datanode start
+
+1. After all the DataNodes have been brought back up, the Primary NameNode should exit safe mode automatically.
+   On the Primary NameNode, run the following command to verify is no longer in safe mode:
+
+        :::console
+        root@primary-namenode # hdfs dfsadmin -safemode get
+        Safe mode is OFF
+
+   
+
+### Upgrading the Secondary NameNode ###
 
 !!! note
-    Needed by: Hadoop namenode, Hadoop datanodes, Hadoop client, GridFTP, SRM
+    This section only applies to sites with a Secondary NameNode.
+    If you do not run a Secondary NameNode, skip to the [next section](#finalizing-the-upgrade).
+
+Once the Primary NameNode has exited safe mode, start the process of upgrading your Secondary NameNode.
+
+1. Clear the yum cache:
+
+        :::console
+        root@secondary-namenode # yum clean all --enablerepo=*
+
+1. Update the HDFS RPMs:
+
+        :::console
+        root@secondary-namenode # yum update osg-se-hadoop-secondarynamenode --enablerepo-osg-upcoming
+
+1. Start the Secondary NameNode service:
+
+        :::console
+        root@secondary-namenode # /etc/init.d/hadoop-hdfs-secondarynamenode start
+
+### Finalizing the upgrade ###
+
+1. Verify that the HDFS cluster is running correctly by following the instructions in [this section](#validation_1).
+
+1. Finalize the upgrade from the Primary NameNode:
+
+        :::console
+        root@primary-namenode # hdfs dfsadmin -finalizeUpgrade
+        Finalize upgrade successful
+
+Configuring HDFS
+----------------
+
+!!! note
+    Needed by: Hadoop NameNode, Hadoop DataNodes, Hadoop client, GridFTP
 
 Hadoop configuration is needed by every node in the hadoop cluster. However, in most cases, you can do the configuration once and copy it to all nodes in the cluster (possibly using your favorite configuration management tool). Special configuration for various special components is given in the below sections.
 
@@ -161,38 +235,35 @@ Hadoop configuration is stored in `/etc/hadoop/conf`. However, by default, these
 |                 |                            |                                  |                                                                                           |
 |-----------------|----------------------------|----------------------------------|-------------------------------------------------------------------------------------------|
 | File            | Setting                    | Example                          | Comments                                                                                  |
-| `core-site.xml` | fs.default.name            | hdfs://namenode.domain.tld.:9000 | This is the address of the namenode                                                       |
+| `core-site.xml` | fs.default.name            | hdfs://namenode.domain.tld.:9000 | This is the address of the NameNode                                                       |
 | `core-site.xml` | hadoop.tmp.dir             | /data/scratch                    | Scratch temp directory used by Hadoop                                                     |
 | `core-site.xml` | hadoop.log.dir             | /var/log/hadoop-hdfs             | Log directory used by Hadoop                                                              |
 | `core-site.xml` | dfs.umaskmode              | 002                              | umask for permissions used by default                                                     |
 | `hdfs-site.xml` | dfs.block.size             | 134217728                        | Block size: 128MB by default                                                              |
 | `hdfs-site.xml` | dfs.replication            | 2                                | Default replication factor. Generally the same as dfs.replication.min/max                 |
 | `hdfs-site.xml` | dfs.datanode.du.reserved   | 100000000                        | How much free space hadoop will reserve for non-Hadoop usage                              |
-| `hdfs-site.xml` | dfs.datanode.handler.count | 20                               | Number of server threads for datanodes. Increase if you have many more client connections |
-| `hdfs-site.xml` | dfs.namenode.handler.count | 40                               | Number of server threads for namenodes. Increase if you need more connections             |
+| `hdfs-site.xml` | dfs.datanode.handler.count | 20                               | Number of server threads for DataNodes. Increase if you have many more client connections |
+| `hdfs-site.xml` | dfs.namenode.handler.count | 40                               | Number of server threads for NameNodes. Increase if you need more connections             |
 | `hdfs-site.xml` | dfs.http.address           | namenode.domain.tld.:50070       | Web address for dfs health monitoring page                                                |
 
 See <http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml> for more parameters to configure.
 
 !!! note
-    Namenodes must have a `/etc/hosts_exclude` present
+    NameNodes must have a `/etc/hosts_exclude` present
 
-#### Special namenode instructions for brand new installs
+#### Special NameNode instructions for brand new installs
 
-If this is a new installation (%RED%and only if this is a brand new installation<span class="twiki-macro ENDCOLOR"></span>), you should run the following command as the `hdfs` user. (Otherwise, be sure to `chown` your storage directory to hdfs after running):
+If this is a new installation (%RED%and only if this is a brand new installation%ENDCOLOR%), you should run the following command as the `hdfs` user. (Otherwise, be sure to `chown` your storage directory to hdfs after running):
 
 ``` console
 hadoop namenode -format
 ```
 
-This will initialize the storage directory on your namenode
+This will initialize the storage directory on your NameNode
 
-### FUSE Client Configuration
+### (optional) FUSE Client Configuration ###
 
-!!! note
-    Needed by: Hadoop client and SRM node. Recommended but not neccessary for GridFTP nodes.
-
-A FUSE mount is required on any node that you would like to use standard POSIX-like commands on the Hadoop filesystem. FUSE (or "file system in user space") is a way to access Hadoop using typical UNIX directory commands (ie POSIX-like access). Note that not all advanced functions of a full POSIX-compliant file system are necessarily available.
+A FUSE mount is required on any node that you would like to use standard POSIX-like commands on the Hadoop filesystem. FUSE (or "File system in User SpacE") is a way to access HDFS using typical UNIX directory commands (i.e., POSIX-like access). Note that not all advanced functions of a full POSIX-compliant file system are necessarily available.
 
 FUSE is typically installed as part of this installation, but, if you are running a customized or non-standard system, make sure that the fuse kernel module is installed and loaded with `modprobe fuse`.
 
@@ -221,19 +292,16 @@ INFO fuse_options.c:110 Ignoring option allow_other
 
 If you have troubles mounting FUSE refer to [Running FUSE in Debug Mode](#running-fuse-in-debug-mode) in the Troubleshooting section.
 
-### Creating VO and User Areas
-
+### Creating VO and User Areas ###
 
 !!! note
-    Grid Users are needed by GridFTP and SRM nodes. VO areas are common to all nodes.
+    Grid Users are needed by GridFTP nodes. VO areas are common to all nodes.
 
 For this package to function correctly, you will have to create the users needed for grid operation. Any user that can be authenticated should be created.
 
 For grid-mapfile users, each line of the grid-mapfile is a certificate/user pair. Each user in this file should be created on the server.
 
-For gums users, this means that each user that can be authenticated by gums should be created on the server.
-
-Note that these users must be kept in sync with the authentication method. For instance, if new users or rules are added in gums, then new users should also be added here.
+Note that these users must be kept in sync with the authentication method.
 
 Prior to starting basic day-to-day operations, it is important to create dedicated areas for each VO and/or user. This is similar to user management in simple UNIX filesystems. Create (and maintain) usernames and groups with UIDs and GIDs on **all nodes**. These are maintained in basic system files such as `/etc/passwd` and `/etc/group`.
 
@@ -274,12 +342,20 @@ root@host # chown -R sam:sam /mnt/hadoop/dzero
 root@host # chown -R michaelthomas:cms /mnt/hadoop/cms/store/user/michaelthomas
 ```
 
-### GridFTP Configuration
+### GridFTP Configuration ###
 
+gridftp-hdfs reads the Hadoop configuration file to learn how to talk to Hadoop.
+By now, you should have followed the instruction for installing hadoop as detailed in the previous section as well as
+created the proper users/directories.
 
-gridftp-hdfs reads the Hadoop configuration file to learn how to talk to Hadoop. By now, you should have followed the instruction for installing hadoop as detailed in the previous section as well as created the proper users/directories.
-
-The default settings in `/etc/gridftp.conf` along with `/etc/gridftp.d/gridftp-hdfs.conf` are used by the init.d script and should be ok for most installations. The file `/etc/gridftp-hdfs/gridftp-debug.conf` is used by `/usr/bin/gridftp-hdfs-standalone` for starting up the GridFTP server in a testing mode. Any additional config files under `/etc/gridftp.d` will be used for both the init.d and standalone GridFTP server. `/etc/sysconfig/gridftp-hdfs` contains additional site-specific environment variables that are used by the gridftp-hdfs dsi module in both the init.d and standalone GridFTP server. Some of the environment variables that can be used in `/etc/sysconfig/gridftp-hdfs` include:
+The default settings in `/etc/gridftp.conf` along with `/etc/gridftp.d/gridftp-hdfs.conf` are used by the init.d script
+and should be ok for most installations.
+The file `/etc/gridftp-hdfs/gridftp-debug.conf` is used by `/usr/bin/gridftp-hdfs-standalone` for starting up the
+GridFTP server in a testing mode.
+Any additional config files under `/etc/gridftp.d` will be used for both the init.d and standalone GridFTP server.
+`/etc/sysconfig/gridftp-hdfs` contains additional site-specific environment variables that are used by the gridftp-hdfs
+DSI module in both the init.d and standalone GridFTP server.
+Some of the environment variables that can be used in `/etc/sysconfig/gridftp-hdfs` include:
 
 |                              |                |                                                                                                                                                                                                                                                                                 |
 |------------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -296,17 +372,17 @@ The default settings in `/etc/gridftp.conf` along with `/etc/gridftp.d/gridftp-h
 
 Lastly, you will need to configure an authentication mechanism for GridFTP.
 
-#### Configuring authentication
+#### Configuring authentication ####
 
 For information on how to configure authentication for your GridFTP installation, please refer to the [configuring authentication section of the GridFTP guide](gridftp#configuring-authentication).
 
-### GridFTP Gratia Transfer Probe Configuration
-
+### GridFTP Gratia Transfer Probe Configuration ###
 
 !!! note
     Needed by GridFTP node only.
 
-The Gratia probe requires the file `user-vo-map` to exist and be up to date. This file is created and updated by the `gums-client` package that comes in as a dependency of `osg-se-hadoop-gridftp` or `osg-gridftp-hdfs`. Assuming you installed GridFTP using the `osg-se-hadoop-gridftp` rpm, the Gratia Transfer Probe will already be installed.
+The Gratia probe requires the file `user-vo-map` to exist and be up to date.
+Assuming you installed GridFTP using the `osg-se-hadoop-gridftp` rpm, the Gratia Transfer Probe will already be installed.
 
 Here are the most relevant file and directory locations:
 
@@ -338,14 +414,14 @@ This is usually one XML node spread over multiple lines. Note that comments (\#)
 | SuppressNoDNRecords             | Maybe                                                                                      | Set to 1 to suppress records that can't be matched to a DN; 0 is strongly recommended.                                                     |
 | EnableProbe                     | Yes                                                                                        | Set to 1 to enable the probe.                                                                                                              |
 
-#### Selecting a collector host
+#### Selecting a collector host ####
 
 The collector is the central server which logs the GridFTP transfers into a database. There are usually three options:
 
 1. **OSG Transfer Collector**: This is the primary collector for transfers in the OSG. Use `CollectorHost="gratia-osg-prod.opensciencegrid.org:80"`.
 1. **OSG-ITB Transfer Collector**: This is the test collector for transfers in the OSG. Use `CollectorHost=" gratia-osg-itb.opensciencegrid.org:80"`.
 
-#### Validation
+#### Validation ####
 
 Run the Gratia probe once by hand to check for functionality:
 
@@ -355,26 +431,10 @@ root@host # /usr/share/gratia/gridftp-transfer/GridftpTransferProbeDriver
 
 Look for any abnormal termination and report it if it is a non-trivial site issue. Look in the log files in `/var/log/gratia/<date>.log` and make sure there are no error messages printed.
 
-### BeStMan Configuration
-
-
-!!! warning "Deprecation Warning"
-    As of June 2017, support for the `bestman2` software has been deprecated.  Support will end in May 2018
-
-See the [bestman2 documentation](bestman-install#authorization) for instructions on how to install and configure
-`bestman2`.
-
-BeStMan2 SRM uses the Hadoop FUSE mount to perform namespace operations via common POSIX tools, such as `mkdir`, `rm`,
-and `ls`.  It is **not** necessary (or even recommended) to start any HDFS services on the `bestman2` host.
-
-Make sure that you modify `localPathListAllowed` to use the Hadoop mount in `/etc/bestman2/conf/bestman2.rc`.
-
-
-### Hadoop Storage Probe Configuration
-
+### Hadoop Storage Probe Configuration ###
 
 !!! note
-    This is only needed by the Hadoop Namenode
+    This is only needed by the Hadoop NameNode
 
 Here are the most relevant file and directory locations:
 
@@ -391,7 +451,7 @@ The RPM installs the Gratia probe into the system crontab, but does not configur
     /etc/gratia/hadoop-storage/ProbeConfig
     /etc/gratia/hadoop-storage/storage.cfg
 
-#### ProbeConfig
+#### ProbeConfig ####
 
 This is usually one XML node spread over multiple lines. Note that comments (\#) have no effect on this file. You will need to edit the following:
 
@@ -403,7 +463,7 @@ This is usually one XML node spread over multiple lines. Note that comments (\#)
 | Grid          | Maybe         | Set to "ITB" if this is a test resource; otherwise, leave as OSG.                                                                       |
 | EnableProbe   | Yes           | Set to 1 to enable the probe.                                                                                                           |
 
-#### storage.cfg
+#### storage.cfg ####
 
 This file controls which paths in HDFS should be monitored. This is in the Windows INI format.
 
@@ -426,7 +486,7 @@ Trim = /user/cms
 
 For each such area, add a section to your configuration file.
 
-##### Example file
+##### Example file #####
 
 Below is a configuration file that includes three distinct areas. Note that you shouldn't have to touch the \[Gratia\] section if you edited the ProbeConfig above:
 
@@ -458,65 +518,32 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 Running Services
 ----------------
 
-Namenode:
 
-``` console
-#Starting namenode
-service hadoop-hdfs-namenode start
-#Stopping namenode
-service hadoop-hdfs-namenode stop
-```
+Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as `root`):
 
-Secondary Namenode:
+| To...                                   | On EL6, run the command...                  | On EL7, run the command...                      |
+| :-------------------------------------- | :----------------------------------------   | :--------------------------------------------   |
+| Start a service                         | `service <SERVICE-NAME> start` | `systemctl start <SERVICE-NAME>`   |
+| Stop a  service                         | `service <SERVICE-NAME> stop`  | `systemctl stop <SERVICE-NAME>`    |
+| Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`  | `systemctl enable <SERVICE-NAME>`  |
+| Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off` | `systemctl disable <SERVICE-NAME>` |
 
-``` console
-#Starting secondary namenode
-service hadoop-hdfs-secondarynamenode start
-#Stopping secondary namenode
-service hadoop-hdfs-secondarynamenode stop
-```
 
-Datanode:
+The relevant service for each node is as follows:
 
-``` console
-#Starting namenode
-service hadoop-hdfs-datanode start
-#Stopping namenode
-service hadoop-hdfs-datanode stop
-```
+| Node               | Service                       |
+| :----------------- | :---------------------------- |
+| Primary NameNode   | hadoop-hdfs-namenode          |
+| Secondary NameNode | hadoop-hdfs-secondarynamenode |
+| DataNode           | hadoop-hdfs-datanode          |
+| GridFTP            | globus-gridftp-server         |
 
-GridFTP:
 
-``` console
-root@host # service globus-gridftp-server start
-```
-
-To start Gridftp automatically at boot time
-
-``` console
-root@host # chkconfig globus-gridftp-server on
-```
-
-Stopping GridFTP:
-
-``` console
-root@host # service globus-gridftp-server stop
-```
-
-``` console
-root@host # service bestman2 start
-```
-
-To start Bestman automatically at boot time
-
-``` console
-root@host # chkconfig bestman2 on
-```
 
 Validation
 ----------
 
-The first thing you may want to do after installing and starting your **Namenode** is to verify that the web interface works. In your web browser go to:
+The first thing you may want to do after installing and starting your primary NameNode is to verify that the web interface works. In your web browser go to:
 
 ``` file
 http://%RED%namenode.hostname%ENDCOLOR%:50070/dfshealth.jsp
@@ -647,8 +674,7 @@ total 935855
 -rw-rw-r-- 1 engage engage   9259360 Jun 15 16:32 glideinWMS_v2_5_1.tgz
 ```
 
-### GridFTP Validation
-
+### GridFTP Validation ###
 
 !!! note
     The commands used to verify GridFTP below assume you have access to a node where you can first generate a valid proxy using `voms-proxy-init` or `grid-proxy-init`. Obtaining grid credentials is beyond the scope of this document.
@@ -659,24 +685,10 @@ user$ globus-url-copy file:///home/users/jdost/test.txt gsiftp://devg-7.t2.ucsd.
 
 If you are having troubles running GridFTP refer to [Starting GridFTP in Standalone Mode](#starting-gridftp-in-standalone-mode) in the Troubleshooting section.
 
-### BeStMan Validation
-
-
-There are three ways of validating BeStMan: \* SrmTester: BeStMan testing application \* InstallRSV: RSV monitoring tools \* BestMan client tools
-
-See the relevant pages for the first two options. This section will detail some basic client commands to validate. You will need grid credentials in order to test using client tools.
-
-``` console
-srm-ping srm://BeStMan_host:secured_http_port/srm/v2/server
-srm-copy file:////tmp/test1  srm://BeStMan_host:secured_http_port/srm/v2/server\?SFN=/mnt/hadoop/VONAME/test_1
-```
-
-The `srm-ping` tool should return a valid mapping `gumsIDMapped` that is not null
-
 Troubleshooting
 ---------------
 
-### Hadoop
+### Hadoop ###
 
 To view all of the currently configured settings of Hadoop from the web interface, enter the following url in your browser:
 
@@ -909,14 +921,13 @@ You will see the entire configuration in XML format, for example:
 
 Please refer to the [Apache Hadoop FAQ webpage](http://wiki.apache.org/hadoop/FAQ) for answers to common questions/concerns
 
-### FUSE
+### FUSE ###
 
-
-#### Notes on Building a FUSE Module
+#### Notes on Building a FUSE Module ####
 
 If you are running a custom kernel, then be sure to enable the `fuse` module with `CONFIG_FUSE_FS=m` in your kernel config. Building and installing a `fuse` kernel module for your custom kernel is beyond the scope of this document.
 
-#### Running FUSE in Debug Mode
+#### Running FUSE in Debug Mode ####
 
 To start the FUSE mount in debug mode, you can run the FUSE mount command by hand:
 
@@ -926,12 +937,9 @@ root@host #  /usr/bin/hadoop-fuse-dfs  /mnt/hadoop -o rw,server=%RED%namenode.ho
 
 Debug output will be printed to stderr, which you will probably want to redirect to a file. Most FUSE-related problems can be tackled by reading through the stderr and looking for error messages.
 
-### GridFTP
+#### GridFTP ####
 
-
-\#GridFTPStand
-
-#### Starting GridFTP in Standalone Mode
+#### Starting GridFTP in Standalone Mode ####
 
 If you would like to test the gridftp-hdfs server in a debug standalone mode, you can run the command:
 
@@ -941,8 +949,7 @@ root@host # gridftp-hdfs-standalone
 
 The standalone server runs on port 5002, handles a single GridFTP request, and will log output to stdout/stderr.
 
-File Locations
---------------
+### File Locations ###
 
 |                                                       |                                                                       |                                                     |                                   |
 |-------------------------------------------------------|-----------------------------------------------------------------------|-----------------------------------------------------|-----------------------------------|
@@ -954,7 +961,7 @@ File Locations
 | Hadoop                                                | runtime config files                                                  | `/etc/hadoop/conf/*`                                | Maybe                             |
 | Hadoop                                                | System binaries                                                       | `/usr/bin/hadoop`                                   | No                                |
 | Hadoop                                                | JARs                                                                  | `/usr/lib/hadoop/*`                                 | No                                |
-| Hadoop                                                | runtime config files                                                  | `/etc/hosts_exclude`                                | Yes, must be present on namenodes |
+| Hadoop                                                | runtime config files                                                  | `/etc/hosts_exclude`                                | Yes, must be present on NameNodes |
 | GridFTP                                               | Log files                                                             | `/var/log/gridftp-auth.log`, `/var/log/gridftp.log` | No                                |
 | GridFTP| init.d script                                | `/etc/init.d/globus-gridftp-server`                                   | No                                                  |
 | GridFTP| runtime config files                         | `/etc/gridftp-hdfs/*`, `/etc/sysconfig/gridftp-hdfs`                  | Maybe                                               |
@@ -980,10 +987,9 @@ File Locations
 |                 | `/var/log/gridftp-auth.log`       | Authentication log                            |
 |                 | `/var/log/messages`               | Main system log (look here for LCMAPS errors) |
 
-Known Issues
-------------
+### Known Issues ###
 
-#### Replicas
+#### Replicas ####
 
 You may need to change the following line in `/usr/share/gridftp-hdfs/gridftp-hdfs-environment`:
 
@@ -991,7 +997,7 @@ You may need to change the following line in `/usr/share/gridftp-hdfs/gridftp-hd
 export GRIDFTP_HDFS_REPLICAS=2
 ```
 
-#### copyFromLocal java IOException
+#### copyFromLocal java IOException ####
 
 When trying to copy a local file into Hadoop you may come across the following java exception:
 
@@ -1028,7 +1034,7 @@ org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1
 </p>
 </details>
 
-This can occur if you try to install a Datanode on a machine with less than 10GB of disk space available. This can be changed by lowering the value of the following property in `/usr/lib/hadoop-0.20/conf/hdfs-site.xml`:
+This can occur if you try to install a DataNode on a machine with less than 10GB of disk space available. This can be changed by lowering the value of the following property in `/usr/lib/hadoop-0.20/conf/hdfs-site.xml`:
 
 ``` file
 <property>
@@ -1039,19 +1045,27 @@ This can occur if you try to install a Datanode on a machine with less than 10GB
 
 Hadoop always requires this amount of disk space to be available for non-hdfs usage on the machine.
 
-How to get Help?
-----------------
+Getting Help
+------------
 
-If you cannot resolve the problem, there are several ways to receive help:
-
--   For bug support and issues, submit a ticket to the [Grid Operations Center](https://ticket.opensciencegrid.org).
--   For community support and best-effort software team support contact <osg-software@opensciencegrid.org>.
--   For additional community support, contact <osg-hadoop@opensciencegrid.org>. Note, this is only best-effort help from OSG Software team.
-
-For a full set of help options, see [Help Procedure](../common/help).
+To get assistance, please use the [this page](/common/help).
 
 References
 ----------
 
 -   [Using Hadoop as a Grid Storage Element](http://www.iop.org/EJ/article/1742-6596/180/1/012047/jpconf9_180_012047.pdf), *Journal of Physics Conference Series, 2009*.
 -   [Hadoop Distributed File System for the Grid](http://osg-docdb.opensciencegrid.org/0009/000911/001/Hadoop.pdf), *IEEE Nuclear Science Symposium, 2009*.
+
+### Users ###
+
+This installation will create following users unless they are already created.
+
+| User        | Comment                                           |
+|:------------|:--------------------------------------------------|
+| `hadoop`    | Runs the NameNode services                        |
+| `hdfs`      | Used by Hadoop to store data blocks and meta-data |
+| `mapred`    |                                                   |
+| `zookeeper` |                                                   |
+
+For this package to function correctly, you will have to create the users needed for grid operation. Any user that can be authenticated should be created.
+

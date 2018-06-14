@@ -92,7 +92,7 @@ Enable your batch system by editing the `enabled` field in the `/etc/osg/config.
 enabled = %RED%True%ENDCOLOR%
 ```
 
-If you are using HTCondor as your **local batch system** (i.e., in addition to your HTCondor-CE), skip to the [configuring authentication](#configuring-authentication) section. For other batch systems (e.g., PBS, LSF, SGE, SLURM), keep reading.
+If you are using HTCondor as your **local batch system** (i.e., in addition to your HTCondor-CE), skip to the [configuring authorization](#configuring-authorization) section. For other batch systems (e.g., PBS, LSF, SGE, SLURM), keep reading.
 
 #### Batch systems other than HTCondor
 
@@ -127,50 +127,14 @@ blah_disable_limited_proxy=yes
 !!! note
     There should be no whitespace around the `=`.
 
-### Configuring authentication
+### Configuring authorization
 
-In OSG 3.3, there are three methods to manage authentication for incoming jobs:
-the [LCMAPS VOMS plugin](/security/lcmaps-voms-authentication), [edg-mkgridmap](/security/edg-mkgridmap) and [GUMS](/security/install-gums).
-edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities.
-The LCMAPS VOMS plugin is the new OSG-preferred authentication,
-offering the simplicity of edg-mkgridmap and GUMS' ability to perform VOMS attribute-based mapping.
-If you need to support [pool accounts](https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html),
-GUMS is the only software with that capability.
-
-In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution.
-
-#### Authentication with the LCMAPS VOMS plugin
-
-To configure your CE to use the LCMAPS VOMS plugin, follow the instructions in [the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin) to prepare the LCMAPS VOMS plugin.
+To configure which virtual organizations and users are authorized to submit jobs to your, follow the instructions in
+[the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin).
 
 !!! note
-    If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the `condor_mapfile`. If this is not the desired behavior, set `GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
-
-#### Authentication with edg-mkgridmap
-
-!!! warning
-    edg-mkgridmap is unavailable in OSG 3.4
-
-To configure your CE to use edg-mkgridmap:
-
-1. Follow the configuration instructions in [the edg-mkgridmap document](../security/edg-mkgridmap) to define the VOs that your site accepts
-2. Set some critical gridmap attributes by editing the `/etc/osg/config.d/10-misc.ini` file on the HTCondor-CE host:
-
-        authorization_method = gridmap
-
-#### Authentication with GUMS
-
-!!! warning
-    GUMS is unavailable in OSG 3.4
-
-1. Follow the instructions in [the GUMS installation and configuration document](../security/install-gums) to prepare GUMS
-2. Set some critical GUMS attributes by editing the `/etc/osg/config.d/10-misc.ini` file on the HTCondor-CE host:
-
-        authorization_method = xacml
-        gums_host = %RED%YOUR GUMS HOSTNAME%ENDCOLOR%
-
-!!! note
-    If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the `condor_mapfile`. If this is not the desired behavior, set `GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
+    If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the `condor_mapfile`.
+    If this is not the desired behavior, set `GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
 
 ### Configuring CE collector advertising
 
@@ -197,17 +161,6 @@ Making changes to the OSG configuration files in the `/etc/osg/config.d` directo
 
         :::console
         root@host # osg-configure -c
-
-5. Generate a `user-vo-map` file with your authentication set up (skip this step if you're using the LCMAPS VOMS plugin):
-    1. If you're using edg-mkgridmap, run the following:
-
-            :::console
-            root@host # edg-mkgridmap
-
-    2. If you're using GUMS, run the following:
-
-            :::console
-            root@host # gums-host-cron
 
 ### Optional configuration
 
@@ -386,10 +339,21 @@ For information on how to troubleshoot your HTCondor-CE, please refer to [the HT
 Registering the CE
 ------------------
 
-To be part of the OSG Production Grid, your CE must be registered in the [OSG Information Management System](https://oim.opensciencegrid.org) (OIM). To register your resource:
+To be part of the OSG Production Grid, your CE must be registered in the [OSG Information Management System](https://github.com/opensciencegrid/topology#topology) (OIM).
+To register your resource:
 
-1.  [Obtain, install, and verify your user certificate](../security/user-certs) (which you may have done already)
-2.  [Register your site and CE in OIM](https://oim.opensciencegrid.org/oim/oimregistration)
+1.  Identify the facility, site, and resource group where your HTCondor-CE is hosted.
+    For example, the Center for High Throughput Computing at the University of Wisconsin-Madison uses the following
+    information:
+
+        Facility: University of Wisconsin
+        Site: CHTC
+        Resource Group: CHTC
+
+1. Using the above information, [create or update](https://github.com/opensciencegrid/topology#how-to-register) the
+   appropriate YAML file, using [this template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
+   as a guide.
+
 
 Getting Help
 ------------
@@ -435,7 +399,7 @@ The following users are needed by HTCondor-CE at all sites:
 | File             | User that owns certificate | Path to certificate               |
 |:-----------------|:---------------------------|:----------------------------------|
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` |
-| Host key         | `root`                     | `/etc/grid-security/hostkey.pem`  |
+| Host key         | `root`                     | `/grid-security/hostkey.pem`  |
 
 Find instructions to request a host certificate [here](../security/host-certs).
 
@@ -445,4 +409,4 @@ Find instructions to request a host certificate [here](../security/host-certs).
 | :----------- | :------: | :---------: | :-----: | :------: | :---------------------- |
 | Htcondor-CE  | tcp      | 9619        | X       |          | HTCondor-CE shared port |
 
-Allow inbound and outbound network connection to all internal site servers, such as GUMS and the batch system head-node only ephemeral outgoing ports are necessary.
+Allow inbound and outbound network connection to all internal site servers, such as the batch system head-node only ephemeral outgoing ports are necessary.

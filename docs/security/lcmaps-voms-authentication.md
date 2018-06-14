@@ -61,19 +61,19 @@ Unix accounts must exist for each VO, VO role, VO group, or user you choose to s
 
 
 1.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support.
-    The full list of VOs is located on [OIM](https://oim.opensciencegrid.org/oim/vo).
+    The full list of VOs is located on [OIM](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
     You are not expected to support all the VOs.
     If you would like to support opportunistic usage, we recommend creating the following Unix accounts:
 
-    | **VO name**                                             | **Unix account(s)**                                                    |
-    |---------------------------------------------------------|------------------------------------------------------------------------|
-    | [GLOW](https://oim.opensciencegrid.org/oim/vo?id=13)    | `glow`                                                                 |
-    | [OSG](https://oim.opensciencegrid.org/oim/vo?id=30)     | `osg`                                                                  |
-    | [ATLAS](https://oim.opensciencegrid.org/oim/vo?id=35)   | `usatlas1`, `usatlas2`, `usatlas3`, `usatlas4`                         |
-    | [CMS](https://oim.opensciencegrid.org/oim/vo?id=3)      | `cmspilot`, `uscmslocal`, `cmslocal`, `cmsprod`, `lcgadmin`, `cmsuser` |
-    | [Fermilab](https://oim.opensciencegrid.org/oim/vo?id=9) | `fermigli`, `fermilab`                                                 |
-    | [HCC](https://oim.opensciencegrid.org/oim/vo?id=67)     | `hcc`                                                                  |
-    | [Gluex](https://oim.opensciencegrid.org/oim/vo?id=62)   | `gluex`                                                                |
+    | **VO name**                                                                                             | **Unix account(s)**                                                    |
+    |---------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+    | [GLOW](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/GLOW.yaml)         | `glow`                                                                 |
+    | [OSG](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/OSG.yaml)           | `osg`                                                                  |
+    | [ATLAS](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/ATLAS.yaml)       | `usatlas1`, `usatlas2`, `usatlas3`, `usatlas4`                         |
+    | [CMS](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/CMS.yaml)           | `cmspilot`, `uscmslocal`, `cmslocal`, `cmsprod`, `lcgadmin`, `cmsuser` |
+    | [Fermilab](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Fermilab.yaml) | `fermigli`, `fermilab`                                                 |
+    | [HCC](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/HCC.yaml)           | `hcc`                                                                  |
+    | [Gluex](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Gluex.yaml)       | `gluex`                                                                |
 
     Additionally, it is also recommended to create the `mis` Unix account,
     which is used by OSG staff to assist with troubleshooting.
@@ -125,9 +125,13 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
 
 1.  Configure user DN mappings:
 
-    * If you have a local grid mapfile (see [the EDG-mkgridmap docs](../security/edg-mkgridmap)), replace the contents of `/etc/grid-security/grid-mapfile` with the contents of the local grid mapfile.
+    1. Remove `/etc/grid-security/grid-mapfile`
+    1. Check if you have a local grid mapfile:
 
-    * If you do not have a local grid mapfile, remove `/etc/grid-security/grid-mapfile`.
+            :::console
+            root@host # grep gmf_local /etc/edg-mkgridmap.conf
+
+    1. If the above command returns a file that exists and has contents, move it to `/etc/grid-security/grid-mapfile`.
 
 1.  If you are converting an HTCondor-CE host, remove the HTCondor-CE `GRIDMAP` configuration. Otherwise, skip to the next step.
 
@@ -357,6 +361,41 @@ GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION=0
 and then restart `condor-ce`.
 
 Once you are satisfied that your mappings are working, you may remove this file and restart `condor-ce` in order to reduce the load on your CE caused by authentication.
+
+### Common issues
+
+#### Wrong version of GridFTP
+
+If you have the EPEL version of the GridFTP server, you may see error messages in `journalctl` (EL7),
+`var/log/messages` (EL6), or the location specified by `LCMAPS_LOG_FILE`.
+
+**Symptoms**
+
+```
+Apr 11 13:51:41 atlas-hub globus-gridftp-server: You are still root after the LCMAPS execution. The implicit root-mapping safety is enabled. See documentation for details
+```
+
+**Next actions**
+
+1. If the versions of the `globus-gridftp-server-*` packages do not end in `osgXX.elY`, 
+   continue with these instructions.
+   To check the version of your `globus-gridftp-server-*`, run the following command:
+
+        :::console
+        user@host $ rpm -q ^globus-gridftp
+
+1. Verify that the [priority](/common/yum#installing-and-configuring-repositories) of the OSG repositories are set
+   properly
+
+1. Clean your yum cache
+
+        :::console
+        root@host # yum clean all --enablerepo=*
+
+1. Reinstall `globus-gridftp-server`:
+
+        :::console
+        root@host # yum update globus-gridftp-server
 
 Getting Help
 ------------

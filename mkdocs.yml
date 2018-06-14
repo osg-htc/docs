@@ -35,20 +35,19 @@ pages:
     - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
   - HDFS:
     - 'HDFS Overview': 'data/hadoop-overview.md'
-    - 'Install HDFS': 'data/install-hadoop-2-0-0.md'
+    - 'Install HDFS': 'data/install-hadoop.md'
   - XRootD:
     - 'XRootD Overview': 'data/xrootd-overview.md'
     - 'Install XRootD': 'data/install-xrootd.md'
-    - 'Install XRootD Client': 'data/install-xroot-client.md'
+    - 'Using XRootD': 'data/install-xroot-client.md'
 - Security:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
-  - 'Host and Service Certificates': 'security/host-certs.md'
+  - 'Host Certificates': 'security/host-certs.md'
   - 'User Certificates': 'security/user-certs.md'
   - 'Certificate Management Reference': 'security/certificate-management.md'
 - Common:
   - 'CA Certificates': 'common/ca.md'
   - 'Yum Repos': 'common/yum.md'
-  - 'Java 7': 'common/openjdk7.md'
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
 - Other:
   - 'Install GSI-enabled SSH': 'other/gsissh.md'
@@ -60,6 +59,11 @@ pages:
 - Release Information:
   - 'Release Note Overview': 'release/notes.md'
   - 3.4 Release Notes:
+    - 'OSG Release 3.4.13': 'release/3.4/release-3-4-13.md'
+    - 'OSG Release 3.4.12-3': 'release/3.4/release-3-4-12-3.md'
+    - 'OSG Release 3.4.12-2': 'release/3.4/release-3-4-12-2.md'
+    - 'OSG Release 3.4.12': 'release/3.4/release-3-4-12.md'
+    - 'OSG Release 3.4.11': 'release/3.4/release-3-4-11.md'
     - 'OSG Release 3.4.10': 'release/3.4/release-3-4-10.md'
     - 'OSG Release 3.4.9-2': 'release/3.4/release-3-4-9-2.md'
     - 'OSG Release 3.4.9': 'release/3.4/release-3-4-9.md'
@@ -82,6 +86,9 @@ pages:
     - 'OSG Release 3.4.0-2': 'release/3.4/release-3-4-0-2.md'
     - 'OSG Release 3.4.0': 'release/3.4/release-3-4-0.md'
   - 3.3 Release Notes:
+    - 'OSG Release 3.3.34-3': 'release/3.3/release-3-3-34-3.md'
+    - 'OSG Release 3.3.34-2': 'release/3.3/release-3-3-34-2.md'
+    - 'OSG Release 3.3.34': 'release/3.3/release-3-3-34.md'
     - 'OSG Release 3.3.33-2': 'release/3.3/release-3-3-33-2.md'
     - 'OSG Release 3.3.33': 'release/3.3/release-3-3-33.md'
     - 'OSG Release 3.3.32': 'release/3.3/release-3-3-32.md'
@@ -144,13 +151,6 @@ pages:
   - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
   - 'Manage RSV via rsv-control': 'monitoring/rsv-control.md'
   - 'RSV GlideinWMS Tester': 'monitoring/install-rsv-gwms-tester.md'
-- Deprecated Software:
-  - 'Install BeStMan': 'data/bestman-install.md'
-  - 'Install BeStMan Xrootd SE': 'data/install-bestman-xrootd.md'
-  - 'Install EDG-Mkgridmap': 'security/edg-mkgridmap.md'
-  - 'Install GUMS': 'security/install-gums.md'
-  - 'Install Worker node glexec': 'worker-node/install-glexec.md'
-  - 'Install VOMS': 'other/install-voms.md'
 - 'Get Help': 'common/help.md'
 
 markdown_extensions:

@@ -1,5 +1,5 @@
-Host and Service Certificates
-=============================
+Host Certificates
+=================
 
 Host and service certificates are used to securely identify your system and to
 establish encrypted connections between services and clients in the OSG. Host
@@ -12,6 +12,22 @@ name (CN) field of the certificate.  A host certificate's CN contains the
 hostname (e.g.  mymachine.mydomain.edu) while a service certificate will prepend
 a service name to the hostname (e.g. http/mymachine.mydomain.edu for an Apache
 httpd service certificate).
+
+Since October 2015 the OSG has run its own OSG CA service that handled host and service certificate requests.
+At the end of May 2018, this service will be retired;
+see [the policy details here](https://opensciencegrid.org/technology/policy/service-migrations-spring-2018/#osg-ca).
+To replace the OSG CA service, we suggest using one or more of the following services depending on your site's needs:
+
+- [InCommon](https://www.incommon.org/cert/): an IGTF-accredited CA for services that interact with the WLCG;
+  requires a subscription, generally held by an institution
+- [Let's Encrypt](https://letsencrypt.org/): a free, automated, and open CA frequently used for web services;
+  see the [security team's position on Let's Encrypt](https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/)
+  for more details
+
+!!! tip "Recommendation"
+    Certificates issued from the OSG CA before the service retirement will still be valid until they expire.
+    Therefore, we recommend that you request certificates for any currently existing or planned hosts and services
+    prior to retirement.
 
 After reading this document you should be able to apply for and install a host
 or service certificate on a grid resource.  This document does not explain how
@@ -32,6 +48,138 @@ issuer=/DC=org/DC=cilogon/C=US/O=CILogon/CN=CILogon OSG CA 1
 notBefore=Jan  4 21:08:09 2010 GMT
 notAfter=Jan  4 21:08:09 2011 GMT
 ```
+
+Requesting InCommon Host Certificates
+-------------------------------------
+
+Many institution in the United States already subscribe to InCommon and offer certificate services.
+If your institution is in the list of [InCommon subscribers](https://www.incommon.org/certificates/subscribers.html),
+continue with the instructions below.
+If your institution is not in the list and Let's Encrypt certificates do not meet your needs, please
+[contact us](/common/help.md).
+
+1. Generate a Certificate Signing Request (CSR) and private key:
+
+    1. Create a custom openssl config file for this, `incommon.conf`, using your institution's information for the
+       different fields in the `[ dn ]` section, and the desired hostname for the `CN` field.
+
+            :::console
+            [ req ]
+            default_bits = 2048
+            prompt = no
+            encrypt_key = no
+            default_md = sha256
+            distinguished_name = dn
+
+            [ dn ]
+            DC = org
+            DC = incommon
+            C = %RED%US%ENDCOLOR%
+            ST = %RED%Wisconsin%ENDCOLOR%
+            L = %RED%Madison%ENDCOLOR%
+            O = %RED%University of Wisconsin-Madison%ENDCOLOR%
+            CN = %RED%voms.opensciencegrid.org%ENDCOLOR%
+
+
+        !!! note
+            Your institution may require more information in the request.
+            Try using the CSR generated above in your initial request, and if necessary add additional fields to the
+            `[ dn ]` section of your config file.
+
+
+    1. If you need to generate a CSR with Subject Alternative Names (SAN), add these lines to your `incommon.conf`,
+       with as many alternate DNS entries as needed in the `[ alt_names ]` section:
+
+            :::console
+            [ req ]
+            req_extensions = req_ext
+
+            [ req_ext ]
+            subjectAltName = @alt_names
+
+            [ alt_names ]
+            DNS.1 = %RED%server1.example.com%ENDCOLOR%
+            DNS.2 = %RED%<SAN 2>%ENDCOLOR%
+            [...]
+            DNS.%RED%<N> = <SAN N>%ENDCOLOR%
+
+    1. Then, generate the CSR and private key:
+
+            :::console
+            root@server # openssl req -new -config incommon.conf -keyout incommon.key -out incommon.csr
+
+    1. And verify the new CSR file:
+
+            :::console
+            root@server # openssl req -text -noout -verify -in incommon.csr
+
+1. Set the permissions on the private key:
+
+        :::console
+        root@server # chmod 0600 incommon.key
+
+1. Find your institution-specific InCommon contact
+   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/))
+   and submit the CSR that you generated above, asking for the certificate to be signed by the InCommon IGTF CA
+1. After the certificate has been issued by your institution, download it on its intended host and copy over the key you generated above.
+1. Verify that the issuer `CN` field is ` InCommon IGTF Server CA`:
+
+        :::console
+        $ openssl x509 -in %RED%<PATH TO CERTIFICATE>%ENDCOLOR% -noout -issuer
+        issuer= /C=US/O=Internet2/OU=InCommon/CN=InCommon IGTF Server CA
+
+1. Install the [host](#installing-host-certificates) or [service](#installing-service-certificates) certificate
+
+Requesting Host Certificates Using [Let's Encrypt](https://letsencrypt.org/)
+----------------------------------------------------------------------------
+
+[Let's Encrypt](https://letsencrypt.org/) is a free, automated, and open CA frequently used for web services;
+see the [security team's position on Let's Encrypt](https://opensciencegrid.github.io/security/LetsEncryptOSGCAbundle/)
+for more details.
+Let's Encrypt can be used to obtain host certificates as an alternative to InCommon if your institution does not have
+an InCommon subscription.
+
+The `letsencrypt` software (AKA `certbot`) can be obtained from the EPEL 7 yum repo:
+
+``` console
+root@host # yum install certbot
+```
+
+If you have any service running on port 80, you will have to disable it temporarily to obtain
+certificates, as letsencrypt needs to bind on it temporarily in order to verify the host.
+For instance, if you already have an HTCondor-CE set up with the
+[HTCondor-CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view)
+running, stop the HTCondor-CE View service, as it listens on port 80.
+
+Run the following command to obtain the host certificate with Let's Encrypt:
+
+``` console
+root@host # certbot certonly --standalone --email %RED%<ADMIN_EMAIL>%ENDCOLOR% -d %RED%<HOST>%ENDCOLOR%
+```
+
+
+Set up hostcert/hostkey links:
+
+``` console
+root@host # ln -s /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
+root@host # ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
+root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
+```
+
+
+Before the host certificate expires, you can renew it with:
+
+``` console
+root@host # certbot renew
+```
+
+
+To automate renewal monthly with a cron job; for example you can create `/etc/cron.d/certbot-renew` with the following contents:
+
+``` console
+* * 1 * * root certbot renew
+```
+
 
 Requesting Host/Service Certificates Using the Command Line
 -----------------------------------------------------------
@@ -201,10 +349,6 @@ Grid Admin privileges [here](https://oim.opensciencegrid.org/oim/gridadmin) afte
 your [user certificate](user-certs).
 
 
-For instructions on how to request a host or service certificate using the Web
-interface please see the [user guide maintained by
-the OIM development team](https://confluence.grid.iu.edu/pages/viewpage.action?pageId=3244064).
-
 Frequently Asked Questions
 ---------------------------
 
@@ -269,27 +413,13 @@ notBefore=Jan  4 21:08:41 2010 GMT
 notAfter=Jan  4 21:08:41 2011 GMT
 ```
 
-### How can I change the URLs queried by the PKI clients?
-
-This configuration should not need to be changed for the vast majority of uses.
-The information is provided in case you need it for debugging purposes.
-
-The client checks for `pki-clients.ini` file at three location in order:
-
--   `$HOME/.osg-pki/OSG_PKI.ini`
--   `./pki-clients.ini`
--   `/etc/osg/pki-clients.ini` (default location)
-
-The INI file contains the following information:
-
--   Request URL
--   Approve URL
--   Retrieve URL
--   Host URL
-
-
-
 References
 ------------
 
+-   [CILogon documentation for requesting InCommon certificates](http://www.cilogon.org/globus-with-incommon-ca)
 -   [Useful OpenSSL commands (from NCSA)](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html) - e.g. how to convert the format of your certificate.
+
+-   [Official Let's Encrypt setup guide](https://letsencrypt.org/getting-started/)
+
+-   Another [Let's Encrypt setup reference](https://github.com/cilogon/letsencrypt-certificates)
+    Under Getting your host certificate, we follow the first "Setting up" section.
