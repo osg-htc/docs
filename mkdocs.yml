@@ -4,6 +4,7 @@ repo_url: https://github.com/opensciencegrid/docs/
 google_analytics: ['UA-69012-29', 'opensciencegrid.github.io']
 theme:
   name: material
+  custom_dir: osgthedocs
   favicon: 'img/favicon.ico'
 
 extra_css:

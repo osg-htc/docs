@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{%- block site_meta %}
+  {%- if "TechArea" in page.canonical_url %}<meta name="robots" content="noindex, nofollow" />{% endif %}
+{{ super() }}
+{%- endblock %}
