@@ -10,8 +10,9 @@ Getting a User Certificate
 --------------------------
 
 This section describes how to get and set up a personal certificate to use on OSG.
-User certificates are needed for tasks such as managing OASIS, directly submitting jobs to OSG resources, transferring
-files between OSG sites, or viewing OSG contact info via the OSG topology.
+You need an user certificate if you are going to interact directly with OSG resources or infrastructure. 
+Examples of this would be tasks like managing OASIS, directly running jobs on OSG resources, interactingly directly with 
+OSG storage elements, or updating or querying OSG site information (such as site topology).
 Currently, you can get am user certificate from CILogon.
 You may also be able to user other CAs to get a certificate; if your virtual organization (VO) requires that you get a
 certificate from a different CA, [contact your VO Support Center](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations) for
@@ -19,10 +20,11 @@ instructions.
 
 ### Know your responsibilities
 
-When you request a certificate your provide some public personal information about yourself; *name, email address, phone
+When you receive an user certificate, 
+When you request a certificate, you provide some public personal information about yourself; *name, email address, phone
 number*, and which *VO* (virtual organization) you belong to. 
 If any of this information changes after you have your certificate you should notify CILogon (and probably VO) of the changes. 
-In addition if your account or user certificate is compromised, you *must* notify the issuer of your certificate. 
+In addition, if your account or user certificate is compromised, you **must** notify the issuer of your certificate. 
 For the CILogon RA send email to ca at ciloogon dot org. 
 Additional responsibilities required by the CILogon CA are given on [their page](http://ca.cilogon.org/responsibilities).  
 
@@ -33,7 +35,7 @@ Your **name** and **email** address are encoded into the signed certificate and 
 You will have to obtain your user certificate using the [CILogon web UI](https://cilogon.org/).
 Follow the steps below to get an user certificate:
 
-1. First, either search for your institution and select it or scroll through list and do the same. <br>![Institution Selection](/img/cilogon_select_idp.png).  If your institution is not on the list, please contact your institution's IT support to see if they can support CILogon.
+1. First, either search for your institution and select it or scroll through list and do the same. If your institution is not on the list, please contact your institution's IT support to see if they can support CILogon. <br>![Institution Selection](/img/cilogon_select_idp.png).  
 
     !!! note
         Make sure to select your educational institution from CILogon's list.
@@ -47,9 +49,9 @@ using the password you entered in the prior step.
 
 ### PKCS12 (.p12) vs PEM format
 
-Your certificate and key pair can be stored as separate files, by default named `~/.globus/usercert.pem` and `~/.globus/userkey.pem`, or they can be bundled in a single file in PKCS12 (Public Key Cryptography Standard \#12), by default named `~/.globus/usercred.p12`. All OSG user tools works with both formats. Unless you specify a name in the command, they look first for the certificate/key pair default names, then for the PKCS12 default name and use the first one they find. PKCS 12 is a single file, convenient to move and used by many softwares, e.g. the Web browsers (so you don't need conversions).
+Your certificate and key pair can be stored as separate files, by default named `~/.globus/usercert.pem` and `~/.globus/userkey.pem`, or they can be bundled in a single file in PKCS12 (Public Key Cryptography Standard \#12), by default named `~/.globus/usercred.p12`. All OSG user tools works with both formats. Unless you specify a name in the command, they look first for the certificate/key pair default names, then for the PKCS12 default name and use the first one they find. PKCS 12 is a single file, convenient to move and used by many applications, e.g. web browsers (so you don't need to convert user certificate format).
 
-Anyway note that the PKCS12 bundle includes normally the certificate, the key and also the CA certificate (or a certificate chain) validating your certificate. In the rare (but possible) case where the CA certificate expires before your certificate this may lead to the creation of a proxy without VOMS attributes and confusing error messages where it is not clear if the problem is with the host, remote server or the certificate, e.g. "Error: Error during SSL handshake:Either proxy or user certificate are expired." or "error:80066423:lib(128):verify\_callback:remote certificate has expired:sslutils.c:1963 remote certificate has expired".
+Anyway, note that the PKCS12 bundle includes normally the certificate, the key and also the CA certificate (or a certificate chain) validating your certificate. In the rare (but possible) case where the CA certificate expires before your certificate this may lead to the creation of a proxy without VOMS attributes and confusing error messages where it is not clear if the problem is with the host, remote server or the certificate, e.g. "Error: Error during SSL handshake:Either proxy or user certificate are expired." or "error:80066423:lib(128):verify\_callback:remote certificate has expired:sslutils.c:1963 remote certificate has expired".
 
 ``` console
 user@host $  voms-proxy-init -debug
