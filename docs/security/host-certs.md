@@ -116,7 +116,13 @@ generated above.
         $ openssl x509 -in %RED%<PATH TO CERTIFICATE>%ENDCOLOR% -noout -issuer
         issuer= /C=US/O=Internet2/OU=InCommon/CN=InCommon IGTF Server CA
 
-1. Install the [host](#installing-host-certificates) certificate
+1. Install the host certificate and key:
+
+        :::console
+        root@host # cp %RED%<PATH TO CERTIFICATE>%ENDCOLOR% /etc/grid-security/hostcert.pem
+        root@host # chmod 444 /etc/grid-security/hostcert.pem
+        root@host # cp %RED%<PATH TO KEY>%ENDCOLOR% /etc/grid-security/hostkey.pem
+        root@host # chmod 400 /etc/grid-security/hostkey.pem
 
 Requesting Host Certificates Using [Let's Encrypt](https://letsencrypt.org/)
 ----------------------------------------------------------------------------
@@ -127,56 +133,43 @@ for more details.
 Let's Encrypt can be used to obtain host certificates as an alternative to InCommon if your institution does not have
 an InCommon subscription.
 
-The `letsencrypt` software (AKA `certbot`) can be obtained from the EPEL 7 yum repo:
+1. Install the `certbot` package (available from the EPEL 7 repository):
 
-``` console
-root@host # yum install certbot
-```
+        :::console
+        root@host # yum install certbot
 
-If you have any service running on port 80, you will have to disable it temporarily to obtain
-certificates, as letsencrypt needs to bind on it temporarily in order to verify the host.
-For instance, if you already have an HTCondor-CE set up with the
-[HTCondor-CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view)
-running, stop the HTCondor-CE View service, as it listens on port 80.
+1. If you have any service running on port 80, you will have to disable it temporarily to obtain certificates, as Let's
+   Encrypt needs to bind on it temporarily in order to verify the host.
+   For instance, if you already have an HTCondor-CE set up with the
+   [HTCondor-CE View service](https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/#install-and-run-the-htcondor-ce-view)
+   running, stop the HTCondor-CE View service, as it listens on port 80.
 
-Run the following command to obtain the host certificate with Let's Encrypt:
+1. Run the following command to obtain the host certificate with Let's Encrypt:
 
-``` console
-root@host # certbot certonly --standalone --email %RED%<ADMIN_EMAIL>%ENDCOLOR% -d %RED%<HOST>%ENDCOLOR%
-```
+        :::console
+        root@host # certbot certonly --standalone --email %RED%<ADMIN_EMAIL>%ENDCOLOR% -d %RED%<HOST>%ENDCOLOR%
 
+1. Set up hostcert/hostkey links:
 
-Set up hostcert/hostkey links:
-
-``` console
-root@host # ln -s /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
-root@host # ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
-root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
-```
+        :::console
+        root@host # ln -s /etc/letsencrypt/live/*/cert.pem /etc/grid-security/hostcert.pem
+        root@host # ln -s /etc/letsencrypt/live/*/privkey.pem /etc/grid-security/hostkey.pem
+        root@host # chmod 0600 /etc/letsencrypt/archive/*/privkey*.pem
 
 
-Before the host certificate expires, you can renew it with:
+### Renewing Let's Encrypt host certificates ###
+
+Before the host certificate expires, you can renew it with the following command:
 
 ``` console
 root@host # certbot renew
 ```
 
-
-To automate renewal monthly with a cron job; for example you can create `/etc/cron.d/certbot-renew` with the following contents:
+To automate renewal monthly with a cron job; for example you can create `/etc/cron.d/certbot-renew` with the following
+contents:
 
 ``` console
 * * 1 * * root certbot renew
-```
-
-#### Installing host certificates
-
-Finally, install the certificate in the default location `/etc/grid-security/`:
-
-``` console
-root@host # cp ./host.opensciencegrid.org.pem /etc/grid-security/hostcert.pem
-root@host # chmod 444 /etc/grid-security/hostcert.pem
-root@host # cp ./host.opensciencegrid.org-key.pem /etc/grid-security/hostkey.pem
-root@host # chmod 400 /etc/grid-security/hostkey.pem
 ```
 
 Frequently Asked Questions
@@ -188,6 +181,8 @@ YES, you can use any host to create a certificate signing request as long as the
 qualified domain name.
 
 ### How do I renew a host certificate? 
+
+For Let's Encrypt certificates, see [this section](#renewing-lets-encrypt-host-certificates)
 
 There is no separate renewal procedure.
 Instead, request a new certificate using one of the methods above.
