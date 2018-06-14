@@ -224,12 +224,6 @@
     </url>
         
     <url>
-     <loc>https://opensciencegrid.github.io/docs/</loc>
-     <lastmod></lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
      <loc>https://opensciencegrid.github.io/docs//release/release_series/</loc>
      <lastmod>2018-06-14</lastmod>
      <changefreq>daily</changefreq>
