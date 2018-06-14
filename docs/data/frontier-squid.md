@@ -36,11 +36,6 @@ software still will be installed on the CE, but it need not be
 enabled. Instead, install your proxy service on the separate host and
 then configure the CE host to refer to the proxy on that host.
 
-The `osg-configure` configuration tool (version 1.0.45 and later)
-warns users who have not added the proxy location to their CE
-configuration. In the future, a proxy will be required and
-osg-configure will fail if the proxy location is not set.
-
 ## Before Starting
 
 Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
