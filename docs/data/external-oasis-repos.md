@@ -151,7 +151,7 @@ In order to host a repository on OASIS, perform the following steps:
     and will be contacted in case of issues. To designate an OASIS manager, have the VO manager update the
     [OIM registration](https://github.com/opensciencegrid/topology/#topology).
 
-1.  Create a [support ticket](https://ticket.opensciencegrid.org/submit) using the following template:
+1.  Create a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) using the following template:
 
         Please add a new CVMFS repository to OASIS for VO %RED%voname%ENDCOLOR% using the URL 
             http://%RED%fully.qualified.domain%ENDCOLOR%:8000/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%
@@ -253,6 +253,6 @@ In order to remove a repository that is being hosted on OASIS, perform the follo
 
 1.  If the repository has been replicated outside of the U.S., open a GGUS ticket asking that the replication be removed
     from EGI Stratum-1s. Wait until this ticket is resolved before proceeding.
-2.  Open a [support ticket](https://ticket.opensciencegrid.org/submit) asking to shut down the repository, giving the repository
+2.  Open a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) asking to shut down the repository, giving the repository
     name (e.g., %RED%example.opensciencegrid.org%ENDCOLOR%), and the corresponding VO.
 
