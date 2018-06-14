@@ -16,7 +16,7 @@ Make sure you've in place following prerequisites from [install step here](insta
       
 * __Network ports__: allow connections on port `8443 (TCP)` 
 
-Beware, authenticated cache requires presence of the [config file](../configs/xrootd-stashcache-cache-server.cfg) `/etc/xrootd/xrootd-stashcache-cache-server.cfg`. 
+Beware, authenticated cache requires presence of the config file created in the regular [configuration document](configure-cache.md). 
 
 Now, create symbolic link to existing configuration file with `-auth` postfix:
 
