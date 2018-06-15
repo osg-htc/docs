@@ -86,6 +86,16 @@ To enable only security related automatic updates:
 
 -   On Enterprise Linux 7, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
 
+
+To disable automatic updates entirely:
+
+-   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `ENABLED="false"`
+
+-   On Enterprise Linux 7, run:
+
+        :::console
+        root@host # service yum-cron stop
+
 ### Install the OSG Repositories
 
 This document assumes a fresh install.
