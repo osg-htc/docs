@@ -76,10 +76,8 @@ You must install and enable those first.
 
 ### Automatic Updates
 
-We strongly recommend against automatic updates for production services.
-You want to only change software versions during a controlled downtime (or, at least, while a human is watching);
-we strive to thoroughly test software updates, but cannot guarantee new version of software will not be problematic for
-your site.
+For production services, we suggest only changing software versions during controlled downtime.
+Therefore we recommend security-only automatic updates or disabling automatic updates entirely.
 
 
 To enable only security related automatic updates:
