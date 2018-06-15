@@ -81,7 +81,6 @@ You want to only change software versions during a controlled downtime (or, at l
 we strive to thoroughly test software updates, but cannot guarantee new version of software will not be problematic for
 your site.
 
-For testbeds, automatic updates are suggested.
 
 To enable only security related automatic updates:
 
