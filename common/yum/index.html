@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../img/favicon.ico">
-      <meta name="generator" content="mkdocs-0.17.1, mkdocs-material-2.9.0">
+      <meta name="generator" content="mkdocs-0.17.1, mkdocs-material-2.9.1">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.4f4f49e8.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.ba0fd1a6.css">
       
       
     
@@ -849,6 +849,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#automatic-updates" title="Automatic Updates" class="md-nav__link">
+    Automatic Updates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#install-the-osg-repositories" title="Install the OSG Repositories" class="md-nav__link">
     Install the OSG Repositories
   </a>
@@ -1583,6 +1590,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#automatic-updates" title="Automatic Updates" class="md-nav__link">
+    Automatic Updates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#install-the-osg-repositories" title="Install the OSG Repositories" class="md-nav__link">
     Install the OSG Repositories
   </a>
@@ -1705,6 +1719,31 @@ You must install and enable those first.</p>
 The OSG repositories must have a better (numerically lower) priority than the EPEL repositories;
 you might have dependency resolution ("depsolving") issues otherwise.</p>
 </div>
+<h3 id="automatic-updates">Automatic Updates<a class="headerlink" href="#automatic-updates" title="Permanent link">&para;</a></h3>
+<p>For production services, we suggest only changing software versions during controlled downtime.
+Therefore we recommend security-only automatic updates or disabling automatic updates entirely.</p>
+<p>To enable only security related automatic updates:</p>
+<ul>
+<li>
+<p>On Enterprise Linux 6, edit <code>/etc/sysconfig/yum-autoupdate</code> and set <code>USE_YUMSEC="true"</code></p>
+</li>
+<li>
+<p>On Enterprise Linux 7, edit <code>/etc/yum/yum-cron.conf</code> and set <code>update_cmd = security</code></p>
+</li>
+</ul>
+<p>To disable automatic updates entirely:</p>
+<ul>
+<li>
+<p>On Enterprise Linux 6, edit <code>/etc/sysconfig/yum-autoupdate</code> and set <code>ENABLED="false"</code></p>
+</li>
+<li>
+<p>On Enterprise Linux 7, run:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service yum-cron stop
+</pre></div>
+
+
+</li>
+</ul>
 <h3 id="install-the-osg-repositories">Install the OSG Repositories<a class="headerlink" href="#install-the-osg-repositories" title="Permanent link">&para;</a></h3>
 <p>This document assumes a fresh install.
 For instructions on upgrading from one OSG series to another, see the <a href="../../release/release_series#updating-from-old">release series document</a>.</p>
