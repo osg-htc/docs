@@ -1967,8 +1967,7 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 <li>
 <p><strong>Service certificate:</strong> create copy of the host certificate to <code>/etc/grid-security/xrd/xrd{cert,key}.pem</code></p>
 <ul>
-<li>set owner of the directory <code>/etc/grid-security/xrd/</code> to <code>xrootd:xrootd</code> user:<div class="codehilite"><pre><span></span><span class="go">::: console</span>
-<span class="gp">root@host #</span> chown -R xrootd:xrootd /etc/grid-security/xrd/
+<li>set owner of the directory <code>/etc/grid-security/xrd/</code> to <code>xrootd:xrootd</code> user:<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chown -R xrootd:xrootd /etc/grid-security/xrd/
 </pre></div>
 
 
@@ -1995,8 +1994,7 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If installing authenticated StashCache Cache server, you need additional packages to be installed:</p>
-<div class="codehilite"><pre><span></span><span class="go">::: console</span>
-<span class="gp">root@host #</span> yum install xrootd-lcmaps globus-proxy-utils
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-lcmaps globus-proxy-utils
 </pre></div>
 
 
@@ -2134,8 +2132,7 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 <li>
 <p><strong>Host certificate:</strong> create copy of the certificate to <code>/etc/grid-security/xrd/xrd{cert,key}.pem</code></p>
 <ul>
-<li>Set owner of the directory <code>/etc/grid-security/xrd/</code> to <code>xrootd:xrootd</code> user:<div class="codehilite"><pre><span></span><span class="go">::: console</span>
-<span class="gp">root@host #</span> chown -R xrootd:xrootd /etc/grid-security/xrd/
+<li>Set owner of the directory <code>/etc/grid-security/xrd/</code> to <code>xrootd:xrootd</code> user:<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chown -R xrootd:xrootd /etc/grid-security/xrd/
 </pre></div>
 
 
@@ -2162,16 +2159,14 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 <ol>
 <li>
 <p>Enable <code>xrootd@stashcache-cache-server-auth.service</code> instance:</p>
-<div class="codehilite"><pre><span></span><span class="go">::: console</span>
-<span class="gp">root@host #</span> systemctl <span class="nb">enable</span> xrootd@stashcache-cache-server-auth
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> xrootd@stashcache-cache-server-auth
 </pre></div>
 
 
 </li>
 <li>
 <p>Reload daemons:</p>
-<div class="codehilite"><pre><span></span><span class="go">::: console</span>
-<span class="gp">root@host #</span> systemctl daemon-reload
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl daemon-reload
 </pre></div>
 
 
@@ -2197,8 +2192,7 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 
 
 <ol>
-<li>Reload daemons:<div class="codehilite"><pre><span></span><span class="go">::: console</span>
-<span class="gp">root@host #</span> systemctl daemon-reload
+<li>Reload daemons:<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl daemon-reload
 </pre></div>
 
 
@@ -2224,16 +2218,14 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 <ol>
 <li>
 <p>Enable timer:</p>
-<div class="codehilite"><pre><span></span><span class="go">::: console</span>
-<span class="gp">root@host #</span> systemctl <span class="nb">enable</span> xrootd-renew-proxy.timer
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> xrootd-renew-proxy.timer
 </pre></div>
 
 
 </li>
 <li>
 <p>Start and check if timer is active and working:</p>
-<div class="codehilite"><pre><span></span><span class="go">::: console</span>
-<span class="gp">root@host #</span> systemctl start xrootd-renew-proxy.timer
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl start xrootd-renew-proxy.timer
 <span class="go">...</span>
 <span class="gp">root@host #</span> systemctl is-active xrootd-renew-proxy.timer
 <span class="go">active</span>
@@ -2246,8 +2238,7 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 </li>
 <li>
 <p>Reload daemons:</p>
-<div class="codehilite"><pre><span></span><span class="go">::: console</span>
-<span class="gp">root@host #</span> systemctl daemon-reload
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl daemon-reload
 </pre></div>
 
 
@@ -2256,7 +2247,7 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 <h4 id="crls-updates">CRLs updates<a class="headerlink" href="#crls-updates" title="Permanent link">&para;</a></h4>
 <p>It is very important to keep CRL list updated from cron:
 1. Enable fetch-crl-cron</p>
-<div class="codehilite"><pre><span></span>    ::: console
+<div class="codehilite"><pre><span></span>    :::console
     root@host # systemctl enable fetch-crl-cron
 </pre></div>
 
@@ -2264,16 +2255,14 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 <ol>
 <li>
 <p>Start fetch-crl-cron</p>
-<div class="codehilite"><pre><span></span><span class="go">::: console</span>
-<span class="gp">root@host #</span> systemctl start fetch-crl-cron
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl start fetch-crl-cron
 </pre></div>
 
 
 </li>
 <li>
 <p>Reload daemons:</p>
-<div class="codehilite"><pre><span></span><span class="go">::: console</span>
-<span class="gp">root@host #</span> systemctl daemon-reload
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl daemon-reload
 </pre></div>
 
 
