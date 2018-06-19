@@ -31,13 +31,8 @@ root@host # yum install stashcache-daemon fetch-crl stashcache-cache-origin
 Mount the disk that will be used for the origin data to */stash* and set owner of the directory to `xrootd:xrootd` user.  
 
 
-# Configuring Origin Server
+## Configuring Origin Server
 
-Packages installed: `stashcache-daemon fetch-crl stashcache-origin-server`
-
-The following section describes required configuration to have a functional StashCache Origin (not cache server!). StashCache Origin package `stashcache-cache-origin` needs to be manually configured from pre-existing XRootD configuration.
-
-## Origin server
 The origin server connects only to a redirector (not directly to cache server), thus minimal xrootd configuration is required. `StashCache-daemon` package provides default configuration file `/etc/xrootd/xrootd-stashcache-origin-server.cfg`. Example of the configuration of origin server is as follows:
 ```
 all.export /
@@ -72,13 +67,13 @@ On RHEL7 system, you need to run following systemd units:
 * `cmsd@stashcache-cache-origin.service`
 
 
-# Origin server services
+## Origin server services
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
 | XRootD | `xrootd@stashcache-origin-server.service` | RHEL7 |
 | XRootD | `cmsd@stashcache-origin-server.service` | RHEL7  |
 
-## Test Origin server availability in Stash Federation
+### Test Origin server availability in Stash Federation
 To verify that your origin is being subscribed to the redirector, run the following command:
 ```
 [user@client ~]$ xrdmapc --list s redirector.opensciencegrid.org:1094 
@@ -92,7 +87,7 @@ To verify that your origin is being subscribed to the redirector, run the follow
 ```
 The output should list hostname of your service. If not, look for any signs of trouble in the log files or contact us at `stashcache@opensciencegrid.org`.
 
-## Start/stop services
+### Start/stop services
 | **To...** | **Run the command...** | **Notes** |
 |-----------|------------------------|-----------|
 | Start a service | systemctl start SERVICE-NAME | RHEL7 |
