@@ -2104,15 +2104,15 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 </ul>
 <h3 id="add-authfile-for-non-authenticated-cache">Add Authfile for non-authenticated cache<a class="headerlink" href="#add-authfile-for-non-authenticated-cache" title="Permanent link">&para;</a></h3>
 <p>In Authfile you want to allow local reads below <code>$(cachedir)</code> defined in the main config. Example of Authfile:</p>
-<div class="codehilite"><pre><span></span><span class="go">   root@host # cat /etc/xrootd/Authfile-noauth </span>
-<span class="go">   u * /user/ligo -rl / rl</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat /etc/xrootd/Authfile-noauth 
+<span class="go">u * /user/ligo -rl / rl</span>
 </pre></div>
 
 
 <h3 id="add-robots-file">Add Robots file<a class="headerlink" href="#add-robots-file" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="go">   root@host # cat /etc/xrootd/stashcache-robots.txt </span>
-<span class="go">   User-agent: *</span>
-<span class="go">   Disallow: /</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat /etc/xrootd/stashcache-robots.txt 
+<span class="go">User-agent: *</span>
+<span class="go">Disallow: /</span>
 </pre></div>
 
 
