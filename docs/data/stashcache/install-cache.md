@@ -153,14 +153,16 @@ Some important lines to edit:
 
 ### Add Authfile for non-authenticated cache
 In Authfile you want to allow local reads below `$(cachedir)` defined in the main config. Example of Authfile:
-```
-   [root@client ~]$ cat /etc/xrootd/Authfile-noauth 
+
+```console
+   root@host # cat /etc/xrootd/Authfile-noauth 
    u * /user/ligo -rl / rl
 ```
 
 ### Add Robots file
-```
-   [root@client ~]$ cat /etc/xrootd/stashcache-robots.txt 
+
+```console
+   root@host # cat /etc/xrootd/stashcache-robots.txt 
    User-agent: *
    Disallow: /
 ```
@@ -184,14 +186,17 @@ Make sure you've in place following prerequisites from [install step here](#inst
 * __Host certificate:__ create copy of the certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
     * Set owner of the directory `/etc/grid-security/xrd/` to `xrootd:xrootd` user:
     
-            $ chown -R xrootd:xrootd /etc/grid-security/xrd/
+            ::: console
+            root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
       
 * __Network ports__: allow connections on port `8443 (TCP)` 
 
 Now, create symbolic link to existing configuration file with `-auth` postfix:
 
-    [root@client ~]$ cd /etc/xrootd/
-    [root@client ~]$ ln -s xrootd-stashcache-cache-server.cfg xrootd-stashcache-cache-server-auth.cfg
+```console
+root@host # cd /etc/xrootd/
+root@host # ln -s xrootd-stashcache-cache-server.cfg xrootd-stashcache-cache-server-auth.cfg
+```
 
 ### RHEL7
 
@@ -204,19 +209,21 @@ On RHEL7 system, you need to configure and run following systemd units:
 #### Auth.service
 1. Enable `xrootd@stashcache-cache-server-auth.service` instance:
 
-        [root@client ~]$ systemctl enable xrootd@stashcache-cache-server-auth
+        ::: console
+        root@host # systemctl enable xrootd@stashcache-cache-server-auth
 
 
 2. Reload daemons:
 
-        [root@client ~]$ systemctl daemon-reload
+        ::: console
+        root@host # systemctl daemon-reload
 
 
 #### Proxy.service
 1. Create the file with following content:
 
-```
-[root@client ~]$ cat /usr/lib/systemd/system/xrootd-renew-proxy.service
+```console
+root@host # cat /usr/lib/systemd/system/xrootd-renew-proxy.service
 [Unit]
 Description=Renew xrootd proxy
 
@@ -232,13 +239,15 @@ WantedBy=multi-user.target
 
 2. Reload daemons:
 
-        [root@client ~]$ systemctl daemon-reload
+        ::: console
+        root@host # systemctl daemon-reload
 
 
 #### Proxy.timer
 1. Create the file with following content:
-```
-[root@client ~]$ cat /usr/lib/systemd/system/xrootd-renew-proxy.timer
+
+```console
+root@host # cat /usr/lib/systemd/system/xrootd-renew-proxy.timer
 [Unit]
 Description=Renew proxy every day at midnight
 
@@ -252,49 +261,54 @@ WantedBy=multi-user.target
 
 2. Enable timer:
 
-        [root@client ~]$ systemctl enable xrootd-renew-proxy.timer
+        ::: console
+        root@host # systemctl enable xrootd-renew-proxy.timer
 
 
 3. Start and check if timer is active and working:
 
-
-        [root@client ~]$ systemctl start xrootd-renew-proxy.timer
+        ::: console
+        root@host # systemctl start xrootd-renew-proxy.timer
         ...
-        [root@client ~]$ systemctl is-active xrootd-renew-proxy.timer
+        root@host # systemctl is-active xrootd-renew-proxy.timer
         active
-        [root@client ~]$ systemctl list-timers xrootd-renew-proxy*
+        root@host # systemctl list-timers xrootd-renew-proxy*
         NEXT                         LEFT       LAST                         PASSED  UNIT                     ACTIVATES
         Thu 2017-05-11 00:00:00 CDT  54min left Wed 2017-05-10 00:00:01 CDT  23h ago xrootd-renew-proxy.timer xrootd-renew-proxy.service
 
 
 4. Reload daemons:
 
-        [root@client ~]$ systemctl daemon-reload
+        ::: console
+        root@host # systemctl daemon-reload
 
 
 #### CRLs updates
 It is very important to keep CRL list updated from cron:
 1. Enable fetch-crl-cron
-```
-[root@client ~]$ systemctl enable fetch-crl-cron
-```
+
+        ::: console
+        root@host # systemctl enable fetch-crl-cron
 
 2. Start fetch-crl-cron
 
-        [root@client ~]$ systemctl start fetch-crl-cron
+        ::: console
+        root@host # systemctl start fetch-crl-cron
 
 
 3. Reload daemons:
 
-        [root@client ~]$ systemctl daemon-reload
+        ::: console
+        root@host # systemctl daemon-reload
 
 
 ### Add Authfile for authenticated cache
 Authfile for authenticated cache may differ from `/etc/xrootd/Authfile-noauth` defined in non-authenticated cache configuration. Example:
-```
-   [root@client ~]$ cat /etc/xrootd/Authfile-auth 
-   g /osg/ligo /user/ligo r
-   u ligo /user/ligo lr / rl
+
+```console
+root@host # cat /etc/xrootd/Authfile-auth 
+g /osg/ligo /user/ligo r
+u ligo /user/ligo lr / rl
 ```
 
 When ready with configuration, you may [start](#managing-stashcache-and-associated-services) your StashCache Cache server.
@@ -342,7 +356,7 @@ Ensure that your `/stash` disk is mounted, and then start `xrootd` and `condor` 
 ### Test Cache server reports to HTCondor collector
 To verify that your cache is being monitored properly, run the following command:
 ```
-[user@client ~]$ condor_status -any -l -const "Name==\"xrootd@`hostname`\""
+user@host $ condor_status -any -l -const "Name==\"xrootd@`hostname`\""
 ```
 Where `hostname` is the string returned by the hostname command. The output of the above command should provide an HTCondor ClassAd that details the status of your cache.
 
