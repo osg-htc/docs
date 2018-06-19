@@ -19,7 +19,7 @@ If installing the (optional) authenticated StashCache, you need to do in additio
 * __Service certificate:__ create copy of the host certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
     * set owner of the directory `/etc/grid-security/xrd/` to `xrootd:xrootd` user:
     
-            ::: console
+            :::console
             root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
 
 * __Network ports__: allow connections on port `8443 (TCP)` 
@@ -42,7 +42,7 @@ root@host # yum install stashcache-daemon fetch-crl stashcache-cache-server
 !!! note 
     If installing authenticated StashCache Cache server, you need additional packages to be installed:
         
-        ::: console
+        :::console
         root@host # yum install xrootd-lcmaps globus-proxy-utils
 
 
@@ -186,7 +186,7 @@ Make sure you've in place following prerequisites from [install step here](#inst
 * __Host certificate:__ create copy of the certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
     * Set owner of the directory `/etc/grid-security/xrd/` to `xrootd:xrootd` user:
     
-            ::: console
+            :::console
             root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
       
 * __Network ports__: allow connections on port `8443 (TCP)` 
@@ -209,13 +209,13 @@ On RHEL7 system, you need to configure and run following systemd units:
 #### Auth.service
 1. Enable `xrootd@stashcache-cache-server-auth.service` instance:
 
-        ::: console
+        :::console
         root@host # systemctl enable xrootd@stashcache-cache-server-auth
 
 
 2. Reload daemons:
 
-        ::: console
+        :::console
         root@host # systemctl daemon-reload
 
 
@@ -239,7 +239,7 @@ WantedBy=multi-user.target
 
 2. Reload daemons:
 
-        ::: console
+        :::console
         root@host # systemctl daemon-reload
 
 
@@ -261,13 +261,13 @@ WantedBy=multi-user.target
 
 2. Enable timer:
 
-        ::: console
+        :::console
         root@host # systemctl enable xrootd-renew-proxy.timer
 
 
 3. Start and check if timer is active and working:
 
-        ::: console
+        :::console
         root@host # systemctl start xrootd-renew-proxy.timer
         ...
         root@host # systemctl is-active xrootd-renew-proxy.timer
@@ -279,7 +279,7 @@ WantedBy=multi-user.target
 
 4. Reload daemons:
 
-        ::: console
+        :::console
         root@host # systemctl daemon-reload
 
 
@@ -287,18 +287,18 @@ WantedBy=multi-user.target
 It is very important to keep CRL list updated from cron:
 1. Enable fetch-crl-cron
 
-        ::: console
+        :::console
         root@host # systemctl enable fetch-crl-cron
 
 2. Start fetch-crl-cron
 
-        ::: console
+        :::console
         root@host # systemctl start fetch-crl-cron
 
 
 3. Reload daemons:
 
-        ::: console
+        :::console
         root@host # systemctl daemon-reload
 
 
