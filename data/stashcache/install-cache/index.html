@@ -1,0 +1,2149 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://opensciencegrid.github.io/docs/data/stashcache/install-cache/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../img/favicon.ico">
+      <meta name="generator" content="mkdocs-0.17.1, mkdocs-material-2.9.1">
+    
+    
+      
+        <title>Intstall Cache - OSG Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.ba0fd1a6.css">
+      
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../../../css/extra.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#stashcache-cache-installation-guide" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://opensciencegrid.github.io/docs/" title="OSG Documentation" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                OSG Documentation
+              </span>
+              <span class="md-header-nav__topic">
+                Intstall Cache
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    OSG Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/opensciencegrid/docs/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../site-planning/" title="Site Planning" class="md-nav__link">
+      Site Planning
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Compute Element
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Compute Element
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../compute-element/htcondor-ce-overview/" title="HTCondor-CE Overview" class="md-nav__link">
+      HTCondor-CE Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../compute-element/install-htcondor-ce/" title="Install HTCondor-CE" class="md-nav__link">
+      Install HTCondor-CE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../compute-element/job-router-recipes/" title="Job Router Recipes" class="md-nav__link">
+      Job Router Recipes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../compute-element/troubleshoot-htcondor-ce/" title="Troubleshooting HTCondor-CE" class="md-nav__link">
+      Troubleshooting HTCondor-CE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../compute-element/submit-htcondor-ce/" title="Submitting to HTCondor-CE" class="md-nav__link">
+      Submitting to HTCondor-CE
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Worker Node
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Worker Node
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../worker-node/using-wn/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../worker-node/install-wn/" title="Install from RPM" class="md-nav__link">
+      Install from RPM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../worker-node/install-wn-tarball/" title="Install from Tarball" class="md-nav__link">
+      Install from Tarball
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../worker-node/install-wn-oasis/" title="Install from OASIS" class="md-nav__link">
+      Install from OASIS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../worker-node/install-cvmfs/" title="Install CVMFS" class="md-nav__link">
+      Install CVMFS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../worker-node/install-singularity/" title="Install Singularity" class="md-nav__link">
+      Install Singularity
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Data
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Data
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1">
+    
+    <label class="md-nav__link" for="nav-5-1">
+      HTTP & CVMFS
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-1">
+        HTTP & CVMFS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../frontier-squid/" title="Install Squid HTTP Cache" class="md-nav__link">
+      Install Squid HTTP Cache
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../update-oasis/" title="Update OASIS Shared Repo" class="md-nav__link">
+      Update OASIS Shared Repo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../external-oasis-repos/" title="Install an OASIS Repo" class="md-nav__link">
+      Install an OASIS Repo
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+    
+    <label class="md-nav__link" for="nav-5-2">
+      POSIX Storage
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        POSIX Storage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../gridftp/" title="Install GridFTP Server" class="md-nav__link">
+      Install GridFTP Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../load-balanced-gridftp/" title="Install Load Balanced GridFTP" class="md-nav__link">
+      Install Load Balanced GridFTP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3" type="checkbox" id="nav-5-3">
+    
+    <label class="md-nav__link" for="nav-5-3">
+      HDFS
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-3">
+        HDFS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../hadoop-overview/" title="HDFS Overview" class="md-nav__link">
+      HDFS Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install-hadoop/" title="Install HDFS" class="md-nav__link">
+      Install HDFS
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
+    
+    <label class="md-nav__link" for="nav-5-4">
+      XRootD
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        XRootD
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../xrootd-overview/" title="XRootD Overview" class="md-nav__link">
+      XRootD Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install-xrootd/" title="Install XRootD" class="md-nav__link">
+      Install XRootD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../install-xroot-client/" title="Using XRootD" class="md-nav__link">
+      Using XRootD
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5" type="checkbox" id="nav-5-5" checked>
+    
+    <label class="md-nav__link" for="nav-5-5">
+      StashCache
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-5">
+        StashCache
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../overview/" title="StashCache Overview" class="md-nav__link">
+      StashCache Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Intstall Cache
+      </label>
+    
+    <a href="./" title="Intstall Cache" class="md-nav__link md-nav__link--active">
+      Intstall Cache
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation-prerequisites-for-cache" title="Installation prerequisites for Cache" class="md-nav__link">
+    Installation prerequisites for Cache
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-stashcache-metapackage" title="Installing the StashCache metapackage" class="md-nav__link">
+    Installing the StashCache metapackage
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install-origin/" title="Install Origin" class="md-nav__link">
+      Install Origin
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Security
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Security
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../security/lcmaps-voms-authentication/" title="LCMAPS-VOMS authentication" class="md-nav__link">
+      LCMAPS-VOMS authentication
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../security/host-certs/" title="Host Certificates" class="md-nav__link">
+      Host Certificates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../security/user-certs/" title="User Certificates" class="md-nav__link">
+      User Certificates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../security/certificate-management/" title="Certificate Management Reference" class="md-nav__link">
+      Certificate Management Reference
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Common
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Common
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../common/ca/" title="CA Certificates" class="md-nav__link">
+      CA Certificates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../common/yum/" title="Yum Repos" class="md-nav__link">
+      Yum Repos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../other/configuration-with-osg-configure/" title="Configuration with OSG-Configure" class="md-nav__link">
+      Configuration with OSG-Configure
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Other
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Other
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../other/gsissh/" title="Install GSI-enabled SSH" class="md-nav__link">
+      Install GSI-enabled SSH
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../other/install-gwms-frontend/" title="Install GlideinWMS Frontend" class="md-nav__link">
+      Install GlideinWMS Frontend
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../other/install-cvmfs-stratum1/" title="Install a CVMFS Stratum 1" class="md-nav__link">
+      Install a CVMFS Stratum 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../other/network-performance-toolkit/" title="Install the Network Performance Toolkit" class="md-nav__link">
+      Install the Network Performance Toolkit
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../other/troubleshooting-gratia/" title="Troubleshooting Gratia" class="md-nav__link">
+      Troubleshooting Gratia
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../other/schedd-filebeats/" title="Install Transfer Log Filebeats" class="md-nav__link">
+      Install Transfer Log Filebeats
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Release Information
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Release Information
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/notes/" title="Release Note Overview" class="md-nav__link">
+      Release Note Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2" type="checkbox" id="nav-9-2">
+    
+    <label class="md-nav__link" for="nav-9-2">
+      3.4 Release Notes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-2">
+        3.4 Release Notes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-13/" title="OSG Release 3.4.13" class="md-nav__link">
+      OSG Release 3.4.13
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-12-3/" title="OSG Release 3.4.12-3" class="md-nav__link">
+      OSG Release 3.4.12-3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-12-2/" title="OSG Release 3.4.12-2" class="md-nav__link">
+      OSG Release 3.4.12-2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-12/" title="OSG Release 3.4.12" class="md-nav__link">
+      OSG Release 3.4.12
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-11/" title="OSG Release 3.4.11" class="md-nav__link">
+      OSG Release 3.4.11
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-10/" title="OSG Release 3.4.10" class="md-nav__link">
+      OSG Release 3.4.10
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-9-2/" title="OSG Release 3.4.9-2" class="md-nav__link">
+      OSG Release 3.4.9-2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-9/" title="OSG Release 3.4.9" class="md-nav__link">
+      OSG Release 3.4.9
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-8/" title="OSG Release 3.4.8" class="md-nav__link">
+      OSG Release 3.4.8
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-7/" title="OSG Release 3.4.7" class="md-nav__link">
+      OSG Release 3.4.7
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-6-2/" title="OSG Release 3.4.6-2" class="md-nav__link">
+      OSG Release 3.4.6-2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-6/" title="OSG Release 3.4.6" class="md-nav__link">
+      OSG Release 3.4.6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-5-4/" title="OSG Release 3.4.5-4" class="md-nav__link">
+      OSG Release 3.4.5-4
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-5-3/" title="OSG Release 3.4.5-3" class="md-nav__link">
+      OSG Release 3.4.5-3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-5-2/" title="OSG Release 3.4.5-2" class="md-nav__link">
+      OSG Release 3.4.5-2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-5/" title="OSG Release 3.4.5" class="md-nav__link">
+      OSG Release 3.4.5
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-4-3/" title="OSG Release 3.4.4-3" class="md-nav__link">
+      OSG Release 3.4.4-3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-4-2/" title="OSG Release 3.4.4-2" class="md-nav__link">
+      OSG Release 3.4.4-2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-4/" title="OSG Release 3.4.4" class="md-nav__link">
+      OSG Release 3.4.4
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-3/" title="OSG Release 3.4.3" class="md-nav__link">
+      OSG Release 3.4.3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-2-2/" title="OSG Release 3.4.2-2" class="md-nav__link">
+      OSG Release 3.4.2-2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-2/" title="OSG Release 3.4.2" class="md-nav__link">
+      OSG Release 3.4.2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-1-2/" title="OSG Release 3.4.1-2" class="md-nav__link">
+      OSG Release 3.4.1-2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-1/" title="OSG Release 3.4.1" class="md-nav__link">
+      OSG Release 3.4.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-0-2/" title="OSG Release 3.4.0-2" class="md-nav__link">
+      OSG Release 3.4.0-2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/3.4/release-3-4-0/" title="OSG Release 3.4.0" class="md-nav__link">
+      OSG Release 3.4.0
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/release_series/" title="OSG Release Series" class="md-nav__link">
+      OSG Release Series
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/supported_platforms/" title="Supported Platforms" class="md-nav__link">
+      Supported Platforms
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../other/install-osg-upcoming-software/" title="OSG upcoming software" class="md-nav__link">
+      OSG upcoming software
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/yum-basics/" title="Yum Basics" class="md-nav__link">
+      Yum Basics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/signing/" title="RPM Signing" class="md-nav__link">
+      RPM Signing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../release/contrib/" title="Contrib Software" class="md-nav__link">
+      Contrib Software
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Monitoring
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        Monitoring
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../monitoring/install-rsv/" title="Install RSV" class="md-nav__link">
+      Install RSV
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../monitoring/advanced-rsv-configuration/" title="Advanced RSV Configuration" class="md-nav__link">
+      Advanced RSV Configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../monitoring/rsv-control/" title="Manage RSV via rsv-control" class="md-nav__link">
+      Manage RSV via rsv-control
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../monitoring/install-rsv-gwms-tester/" title="RSV GlideinWMS Tester" class="md-nav__link">
+      RSV GlideinWMS Tester
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../common/help/" title="Get Help" class="md-nav__link">
+      Get Help
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation-prerequisites-for-cache" title="Installation prerequisites for Cache" class="md-nav__link">
+    Installation prerequisites for Cache
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-stashcache-metapackage" title="Installing the StashCache metapackage" class="md-nav__link">
+    Installing the StashCache metapackage
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/stashcache/install-cache.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="stashcache-cache-installation-guide">StashCache Cache Installation Guide<a class="headerlink" href="#stashcache-cache-installation-guide" title="Permanent link">&para;</a></h1>
+<p>This document describes how to install a StashCache cache service. The installation utilizes XRootD and HTCondor for file storage and monitoring, respectively.
+The role of <strong>"cache"</strong> server is to keep data cached and immediately available (via <a href="https://support.opensciencegrid.org/support/solutions/articles/12000002775-transferring-data-with-stashcach">stashcp</a> or CVMFS) within Stash federation (without re-transferring from "origin").</p>
+<h2 id="installation-prerequisites-for-cache">Installation prerequisites for Cache<a class="headerlink" href="#installation-prerequisites-for-cache" title="Permanent link">&para;</a></h2>
+<p>Before starting the installation process, consider the following mandatory points:</p>
+<ul>
+<li><strong>User IDs:</strong> If they do not exist already, the installation will create the Linux user IDs <code>condor</code> and <code>xrootd</code></li>
+<li><strong>Host certificate:</strong> The StashCache server uses a host certificate to advertise to a central collector.  More information on how to retrieve a certificate can be found <a href="../../../security/host-certs/">here</a></li>
+<li><strong>Network ports:</strong> The StashCache service must listen on ports:<ul>
+<li>XRootD service on port <code>1094 (TCP)</code></li>
+<li>and allow XRootD service over HTTP on port <code>8000 (TCP)</code></li>
+</ul>
+</li>
+<li><strong>Hardware requirements:</strong> We recommend that a StashCache server has at least 10Gbps connectivity, 1TB of disk space, and 8GB of RAM. </li>
+</ul>
+<p>If installing the (optional) authenticated StashCache, you need to do in addition the following:</p>
+<ul>
+<li>
+<p><strong>Service certificate:</strong> create copy of the host certificate to <code>/etc/grid-security/xrd/xrd{cert,key}.pem</code></p>
+<ul>
+<li>set owner of the directory <code>/etc/grid-security/xrd/</code> to <code>xrootd:xrootd</code> user:<div class="codehilite"><pre><span></span><span class="go">::: console</span>
+<span class="gp">root@host #</span> chown -R xrootd:xrootd /etc/grid-security/xrd/
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Network ports</strong>: allow connections on port <code>8443 (TCP)</code> </p>
+</li>
+</ul>
+<p>As with all OSG software installations, there are some one-time steps to prepare in advance:</p>
+<ul>
+<li>Ensure the host has <a href="../../../release/supported_platforms/">a supported operating system</a></li>
+<li>Obtain root access to the host</li>
+<li>Prepare <a href="../../../common/yum/">the required Yum repositories</a></li>
+<li>Install <a href="../../../common/ca/">CA certificates</a></li>
+</ul>
+<h2 id="installing-the-stashcache-metapackage">Installing the StashCache metapackage<a class="headerlink" href="#installing-the-stashcache-metapackage" title="Permanent link">&para;</a></h2>
+<p>The StashCache daemon consists of an XRootD server and an HTCondor-based service for collecting and reporting statistics about the cache. To simplify installation, OSG provides convenience RPMs that install all required software with a single command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install stashcache-daemon fetch-crl stashcache-cache-server
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If installing authenticated StashCache Cache server, you need additional packages to be installed:</p>
+<div class="codehilite"><pre><span></span><span class="go">::: console</span>
+<span class="gp">root@host #</span> yum install xrootd-lcmaps globus-proxy-utils
+</pre></div>
+
+
+</div>
+<p>Mount the disk that will be used for the cache data to <em>/stash</em> and set owner of the directory to <code>xrootd:xrootd</code> user.  </p>
+<h1 id="configuring-cache-server">Configuring Cache Server<a class="headerlink" href="#configuring-cache-server" title="Permanent link">&para;</a></h1>
+<p>The following section describes required configuration to have a functional non-authenticated StashCache Cache (not origin server!). StashCache Cache package <code>stashcache-cache-server</code> needs to be manually configured from pre-existing XRootD configuration.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While example of the configuration file below provides combination of <em>authenticated</em> and <em>non-authenticated</em> <em>Cache</em>, the non-authenticated cache is considered to be default and authenticated cache just optional (additional) service.</p>
+</div>
+<p>For configuring <strong>cache</strong> one needs to define directive <code>pss.origin redirector.osgstorage.org:1024</code> (not <code>all.manager redirector.osgstorage.org+ 1213</code> directive as it is in case of <a href="../install-origin/">configuring origin</a>). 
+<code>StashCache-daemon</code> package provides default configuration file <code>/etc/xrootd/xrootd-stashcache-cache-server.cfg</code>. Example of the configuration of cache server is as follows:</p>
+<div class="codehilite"><pre><span></span><span class="s s-Atom">all</span><span class="p">.</span><span class="s s-Atom">export</span>  <span class="o">/</span>
+<span class="s s-Atom">set</span> <span class="s s-Atom">cachedir</span> <span class="o">=</span> <span class="o">/</span><span class="s s-Atom">stash</span>
+<span class="s s-Atom">xrd</span><span class="p">.</span><span class="s s-Atom">allow</span> <span class="s s-Atom">host</span> <span class="o">*</span>
+<span class="s s-Atom">sec</span><span class="p">.</span><span class="s s-Atom">protocol</span>  <span class="s s-Atom">host</span>
+<span class="s s-Atom">all</span><span class="p">.</span><span class="s s-Atom">adminpath</span> <span class="o">/</span><span class="s s-Atom">var</span><span class="o">/</span><span class="s s-Atom">spool</span><span class="o">/</span><span class="s s-Atom">xrootd</span>
+
+<span class="s s-Atom">xrootd</span><span class="p">.</span><span class="s s-Atom">trace</span> <span class="s s-Atom">emsg</span> <span class="s s-Atom">login</span> <span class="s s-Atom">stall</span> <span class="s s-Atom">redirect</span>
+<span class="s s-Atom">ofs</span><span class="p">.</span><span class="s s-Atom">trace</span> <span class="s s-Atom">all</span>
+<span class="s s-Atom">xrd</span><span class="p">.</span><span class="s s-Atom">trace</span> <span class="s s-Atom">all</span>
+<span class="s s-Atom">cms</span><span class="p">.</span><span class="s s-Atom">trace</span> <span class="s s-Atom">all</span>
+
+<span class="s s-Atom">ofs</span><span class="p">.</span><span class="s s-Atom">osslib</span>  <span class="s s-Atom">libXrdPss</span><span class="p">.</span><span class="s s-Atom">so</span>
+<span class="s s-Atom">pss</span><span class="p">.</span><span class="s s-Atom">origin</span> <span class="s s-Atom">redirector</span><span class="p">.</span><span class="s s-Atom">osgstorage</span><span class="p">.</span><span class="nn">org</span><span class="p">:</span><span class="mi">1094</span>
+<span class="s s-Atom">pss</span><span class="p">.</span><span class="s s-Atom">cachelib</span> <span class="s s-Atom">libXrdFileCache</span><span class="p">.</span><span class="s s-Atom">so</span>
+<span class="s s-Atom">pss</span><span class="p">.</span><span class="s s-Atom">setopt</span> <span class="nv">DebugLevel</span> <span class="mi">1</span>
+
+<span class="s s-Atom">oss</span><span class="p">.</span><span class="s s-Atom">localroot</span> <span class="err">$</span><span class="p">(</span><span class="s s-Atom">cachedir</span><span class="p">)</span>
+
+<span class="c1"># Config for v1 (xrootd &lt;=v4.5.0)</span>
+<span class="c1">#pfc.nramprefetch 4</span>
+<span class="c1">#pfc.nramread 4</span>
+<span class="c1">#pfc.diskusage 0.98 0.99</span>
+
+<span class="c1"># Config for v2 (xrootd &gt;v4.5.0)</span>
+<span class="s s-Atom">pfc</span><span class="p">.</span><span class="s s-Atom">blocksize</span> <span class="mi">512</span><span class="s s-Atom">k</span>
+<span class="s s-Atom">pfc</span><span class="p">.</span><span class="s s-Atom">ram</span>       <span class="mi">32</span><span class="s s-Atom">g</span>
+<span class="s s-Atom">pfc</span><span class="p">.</span><span class="s s-Atom">prefetch</span>  <span class="mi">10</span>
+<span class="s s-Atom">pfc</span><span class="p">.</span><span class="s s-Atom">diskusage</span> <span class="mf">0.98</span> <span class="mf">0.99</span>
+
+<span class="s s-Atom">xrootd</span><span class="p">.</span><span class="s s-Atom">seclib</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span><span class="o">/</span><span class="s s-Atom">libXrdSec</span><span class="p">.</span><span class="s s-Atom">so</span>
+<span class="s s-Atom">sec</span><span class="p">.</span><span class="s s-Atom">protocol</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span> <span class="s s-Atom">gsi</span> <span class="s s-Atom">\</span>
+  <span class="o">-</span><span class="nn">certdir</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">certificates</span> <span class="s s-Atom">\</span>
+  <span class="o">-</span><span class="nn">cert</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrd</span><span class="o">/</span><span class="s s-Atom">xrdcert</span><span class="p">.</span><span class="s s-Atom">pem</span> <span class="s s-Atom">\</span>
+  <span class="o">-</span><span class="nn">key</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrd</span><span class="o">/</span><span class="s s-Atom">xrdkey</span><span class="p">.</span><span class="s s-Atom">pem</span> <span class="s s-Atom">\</span>
+  <span class="o">-</span><span class="nn">crl</span><span class="p">:</span><span class="mi">1</span> <span class="s s-Atom">\</span>
+  <span class="o">-</span><span class="nn">authzfun</span><span class="p">:</span><span class="s s-Atom">libXrdLcmaps</span><span class="p">.</span><span class="s s-Atom">so</span> <span class="s s-Atom">\</span>
+  <span class="o">-</span><span class="nn">authzfunparms</span><span class="p">:</span><span class="s s-Atom">--lcmapscfg</span><span class="p">,</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">lcmaps</span><span class="p">.</span><span class="s s-Atom">cfg</span><span class="p">,</span><span class="s s-Atom">--loglevel</span><span class="p">,</span><span class="mi">4</span><span class="p">|</span><span class="s s-Atom">useglobals</span> <span class="s s-Atom">\</span>
+  <span class="o">-</span><span class="nn">gmapopt</span><span class="p">:</span><span class="mi">10</span> <span class="s s-Atom">\</span>
+  <span class="o">-</span><span class="nn">authzto</span><span class="p">:</span><span class="mi">3600</span>
+
+<span class="c1"># Enable the authorization module, even if we have an unauthenticated instance.</span>
+<span class="s s-Atom">ofs</span><span class="p">.</span><span class="s s-Atom">authorize</span> <span class="mi">1</span>
+<span class="s s-Atom">acc</span><span class="p">.</span><span class="s s-Atom">audit</span> <span class="s s-Atom">deny</span> <span class="s s-Atom">grant</span>
+
+<span class="c1"># Run the authenticated instance on port 8443 (Xrootd and HTTPS)</span>
+<span class="c1"># Notice authenticated and unauthenticated instances use separate auth</span>
+<span class="c1"># files.</span>
+<span class="s s-Atom">if</span> <span class="s s-Atom">named</span> <span class="s s-Atom">stashcache</span><span class="o">-</span><span class="s s-Atom">cache</span><span class="o">-</span><span class="s s-Atom">server</span><span class="o">-</span><span class="s s-Atom">auth</span>
+   <span class="s s-Atom">#pss</span><span class="p">.</span><span class="s s-Atom">origin</span>  <span class="s s-Atom">red</span><span class="o">-</span><span class="s s-Atom">gridftp4</span><span class="p">.</span><span class="s s-Atom">unl</span><span class="p">.</span><span class="nn">edu</span><span class="p">:</span><span class="mi">1094</span>
+   <span class="s s-Atom">xrd</span><span class="p">.</span><span class="s s-Atom">port</span> <span class="mi">8443</span>
+   <span class="s s-Atom">acc</span><span class="p">.</span><span class="s s-Atom">authdb</span> <span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="nv">Authfile</span><span class="o">-</span><span class="s s-Atom">auth</span>
+   <span class="s s-Atom">sec</span><span class="p">.</span><span class="s s-Atom">protbind</span> <span class="o">*</span> <span class="s s-Atom">gsi</span>
+   <span class="s s-Atom">xrd</span><span class="p">.</span><span class="s s-Atom">protocol</span> <span class="nn">http</span><span class="p">:</span><span class="mi">8443</span> <span class="s s-Atom">libXrdHttp</span><span class="p">.</span><span class="s s-Atom">so</span>
+   <span class="s s-Atom">pss</span><span class="p">.</span><span class="s s-Atom">origin</span> <span class="s s-Atom">xrootd</span><span class="o">-</span><span class="s s-Atom">local</span><span class="p">.</span><span class="s s-Atom">unl</span><span class="p">.</span><span class="nn">edu</span><span class="p">:</span><span class="mi">1094</span>
+<span class="s s-Atom">else</span>
+<span class="c1"># Unauthenticated instance runs on port 1094 (Xrootd) and 8000 (HTTP/HTTPS)</span>
+   <span class="s s-Atom">acc</span><span class="p">.</span><span class="s s-Atom">authdb</span> <span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="nv">Authfile</span><span class="o">-</span><span class="s s-Atom">noauth</span>
+   <span class="s s-Atom">#sec</span><span class="p">.</span><span class="s s-Atom">protbind</span> <span class="o">*</span> <span class="s s-Atom">none</span>
+   <span class="s s-Atom">sec</span><span class="p">.</span><span class="s s-Atom">protbind</span>  <span class="o">*</span> <span class="s s-Atom">none</span>
+   <span class="s s-Atom">xrd</span><span class="p">.</span><span class="s s-Atom">protocol</span> <span class="nn">http</span><span class="p">:</span><span class="mi">8000</span> <span class="s s-Atom">libXrdHttp</span><span class="p">.</span><span class="s s-Atom">so</span>
+<span class="s s-Atom">fi</span>
+
+<span class="s s-Atom">http</span><span class="p">.</span><span class="s s-Atom">cadir</span> <span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">certificates</span>
+<span class="s s-Atom">http</span><span class="p">.</span><span class="s s-Atom">cert</span> <span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrd</span><span class="o">/</span><span class="s s-Atom">xrdcert</span><span class="p">.</span><span class="s s-Atom">pem</span>
+<span class="s s-Atom">http</span><span class="p">.</span><span class="s s-Atom">key</span> <span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrd</span><span class="o">/</span><span class="s s-Atom">xrdkey</span><span class="p">.</span><span class="s s-Atom">pem</span>
+<span class="s s-Atom">http</span><span class="p">.</span><span class="s s-Atom">secxtractor</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span><span class="o">/</span><span class="s s-Atom">libXrdLcmaps</span><span class="p">.</span><span class="s s-Atom">so</span>
+<span class="s s-Atom">http</span><span class="p">.</span><span class="s s-Atom">listingdeny</span> <span class="s s-Atom">yes</span>
+<span class="s s-Atom">http</span><span class="p">.</span><span class="s s-Atom">staticpreload</span> <span class="nn">http</span><span class="p">:</span><span class="o">//</span><span class="s s-Atom">static</span><span class="o">/</span><span class="s s-Atom">robots</span><span class="p">.</span><span class="s s-Atom">txt</span> <span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">stashcache</span><span class="o">-</span><span class="s s-Atom">robots</span><span class="p">.</span><span class="s s-Atom">txt</span>
+
+<span class="c1"># Tune the client timeouts to more aggressively timeout.</span>
+<span class="s s-Atom">pss</span><span class="p">.</span><span class="s s-Atom">setopt</span> <span class="nv">ParallelEvtLoop</span> <span class="mi">10</span>
+<span class="s s-Atom">pss</span><span class="p">.</span><span class="s s-Atom">setopt</span> <span class="nv">RequestTimeout</span> <span class="mi">25</span>
+<span class="s s-Atom">pss</span><span class="p">.</span><span class="s s-Atom">setopt</span> <span class="nv">ConnectTimeout</span> <span class="mi">25</span>
+<span class="s s-Atom">pss</span><span class="p">.</span><span class="s s-Atom">setopt</span> <span class="nv">ConnectionRetry</span> <span class="mi">2</span>
+
+<span class="c1">#Sending monitoring information</span>
+<span class="s s-Atom">xrd</span><span class="p">.</span><span class="s s-Atom">report</span> <span class="s s-Atom">uct2</span><span class="o">-</span><span class="s s-Atom">collectd</span><span class="p">.</span><span class="s s-Atom">mwt2</span><span class="p">.</span><span class="nn">org</span><span class="p">:</span><span class="mi">9931</span>
+<span class="s s-Atom">xrootd</span><span class="p">.</span><span class="s s-Atom">monitor</span> <span class="s s-Atom">all</span> <span class="s s-Atom">auth</span> <span class="s s-Atom">flush</span> <span class="mi">30</span><span class="s s-Atom">s</span> <span class="s s-Atom">window</span> <span class="mi">5</span><span class="s s-Atom">s</span> <span class="s s-Atom">fstat</span> <span class="mi">60</span> <span class="s s-Atom">lfn</span> <span class="s s-Atom">ops</span> <span class="s s-Atom">xfr</span> <span class="mi">5</span> <span class="s s-Atom">dest</span> <span class="s s-Atom">redir</span> <span class="s s-Atom">fstat</span> <span class="s s-Atom">info</span> <span class="s s-Atom">user</span> <span class="s s-Atom">uct2</span><span class="o">-</span><span class="s s-Atom">collectd</span><span class="p">.</span><span class="s s-Atom">mwt2</span><span class="p">.</span><span class="nn">org</span><span class="p">:</span><span class="mi">9930</span> <span class="s s-Atom">dest</span> <span class="s s-Atom">fstat</span> <span class="s s-Atom">info</span> <span class="s s-Atom">user</span> <span class="s s-Atom">xrd</span><span class="o">-</span><span class="s s-Atom">mon</span><span class="p">.</span><span class="s s-Atom">osgstorage</span><span class="p">.</span><span class="nn">org</span><span class="p">:</span><span class="mi">9930</span>
+
+<span class="s s-Atom">all</span><span class="p">.</span><span class="s s-Atom">sitename</span> <span class="nv">Nebraska</span>
+
+<span class="c1"># Optional configuration</span>
+<span class="c1"># Remote debugging</span>
+<span class="s s-Atom">xrootd</span><span class="p">.</span><span class="s s-Atom">diglib</span> <span class="o">*</span> <span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">digauth</span><span class="p">.</span><span class="s s-Atom">cf</span>
+</pre></div>
+
+
+<p>Some important lines to edit:</p>
+<ul>
+<li><code>all.sitename Nebraska</code>: Edit to your local (arbitrary) site name.</li>
+<li><code>set cachedir = /stash</code>: Edit to the directory that you wish to use for caching.</li>
+</ul>
+<h3 id="add-authfile-for-non-authenticated-cache">Add Authfile for non-authenticated cache<a class="headerlink" href="#add-authfile-for-non-authenticated-cache" title="Permanent link">&para;</a></h3>
+<p>In Authfile you want to allow local reads below <code>$(cachedir)</code> defined in the main config. Example of Authfile:</p>
+<div class="codehilite"><pre><span></span><span class="go">   root@host # cat /etc/xrootd/Authfile-noauth </span>
+<span class="go">   u * /user/ligo -rl / rl</span>
+</pre></div>
+
+
+<h3 id="add-robots-file">Add Robots file<a class="headerlink" href="#add-robots-file" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="go">   root@host # cat /etc/xrootd/stashcache-robots.txt </span>
+<span class="go">   User-agent: *</span>
+<span class="go">   Disallow: /</span>
+</pre></div>
+
+
+<h3 id="rhel7">RHEL7<a class="headerlink" href="#rhel7" title="Permanent link">&para;</a></h3>
+<p>On RHEL7 system, you need to run following systemd unit:</p>
+<ul>
+<li>
+<p><code>systemctl start xrootd@stashcache-cache-server.service</code></p>
+</li>
+<li>
+<p><code>systemctl start condor.service</code></p>
+</li>
+</ul>
+<h1 id="optional-configure-authenticated-cache">(Optional) Configure Authenticated Cache<a class="headerlink" href="#optional-configure-authenticated-cache" title="Permanent link">&para;</a></h1>
+<p>Before you continue, make sure default Cache Server is configured in first place. Enabling authenticated cache is optional and additional to the default cache instance. This chapter describes all the steps needed. </p>
+<h2 id="authenticated-cache-server">Authenticated Cache server<a class="headerlink" href="#authenticated-cache-server" title="Permanent link">&para;</a></h2>
+<p>Make sure you've in place following prerequisites from <a href="#installation-prerequisites-for-cache">install step here</a>:</p>
+<ul>
+<li>
+<p><strong>Host certificate:</strong> create copy of the certificate to <code>/etc/grid-security/xrd/xrd{cert,key}.pem</code></p>
+<ul>
+<li>Set owner of the directory <code>/etc/grid-security/xrd/</code> to <code>xrootd:xrootd</code> user:<div class="codehilite"><pre><span></span><span class="go">::: console</span>
+<span class="gp">root@host #</span> chown -R xrootd:xrootd /etc/grid-security/xrd/
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Network ports</strong>: allow connections on port <code>8443 (TCP)</code> </p>
+</li>
+</ul>
+<p>Now, create symbolic link to existing configuration file with <code>-auth</code> postfix:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">cd</span> /etc/xrootd/
+<span class="gp">root@host #</span> ln -s xrootd-stashcache-cache-server.cfg xrootd-stashcache-cache-server-auth.cfg
+</pre></div>
+
+
+<h3 id="rhel7_1">RHEL7<a class="headerlink" href="#rhel7_1" title="Permanent link">&para;</a></h3>
+<p>On RHEL7 system, you need to configure and run following systemd units:
+<em> <code>xrootd@stashcache-cache-server-auth.service</code>
+</em> <code>xrootd-renew-proxy.service</code>
+<em> <code>xrootd-renew-proxy.timer</code>
+</em> <code>fetch-crl-cron</code></p>
+<h4 id="authservice">Auth.service<a class="headerlink" href="#authservice" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p>Enable <code>xrootd@stashcache-cache-server-auth.service</code> instance:</p>
+<div class="codehilite"><pre><span></span><span class="go">::: console</span>
+<span class="gp">root@host #</span> systemctl <span class="nb">enable</span> xrootd@stashcache-cache-server-auth
+</pre></div>
+
+
+</li>
+<li>
+<p>Reload daemons:</p>
+<div class="codehilite"><pre><span></span><span class="go">::: console</span>
+<span class="gp">root@host #</span> systemctl daemon-reload
+</pre></div>
+
+
+</li>
+</ol>
+<h4 id="proxyservice">Proxy.service<a class="headerlink" href="#proxyservice" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Create the file with following content:</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat /usr/lib/systemd/system/xrootd-renew-proxy.service
+<span class="go">[Unit]</span>
+<span class="go">Description=Renew xrootd proxy</span>
+
+<span class="go">[Service]</span>
+<span class="go">User=xrootd</span>
+<span class="go">Group=xrootd</span>
+<span class="go">Type = oneshot</span>
+<span class="go">ExecStart = /bin/grid-proxy-init -cert /etc/grid-security/xrd/xrdcert.pem -key /etc/grid-security/xrd/xrdkey.pem -out /tmp/x509up_xrootd -valid 48:00</span>
+
+<span class="go">[Install]</span>
+<span class="go">WantedBy=multi-user.target</span>
+</pre></div>
+
+
+<ol>
+<li>Reload daemons:<div class="codehilite"><pre><span></span><span class="go">::: console</span>
+<span class="gp">root@host #</span> systemctl daemon-reload
+</pre></div>
+
+
+</li>
+</ol>
+<h4 id="proxytimer">Proxy.timer<a class="headerlink" href="#proxytimer" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Create the file with following content:</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat /usr/lib/systemd/system/xrootd-renew-proxy.timer
+<span class="go">[Unit]</span>
+<span class="go">Description=Renew proxy every day at midnight</span>
+
+<span class="go">[Timer]</span>
+<span class="go">OnCalendar=*-*-* 00:00:00</span>
+<span class="go">Unit=xrootd-renew-proxy.service</span>
+
+<span class="go">[Install]</span>
+<span class="go">WantedBy=multi-user.target</span>
+</pre></div>
+
+
+<ol>
+<li>
+<p>Enable timer:</p>
+<div class="codehilite"><pre><span></span><span class="go">::: console</span>
+<span class="gp">root@host #</span> systemctl <span class="nb">enable</span> xrootd-renew-proxy.timer
+</pre></div>
+
+
+</li>
+<li>
+<p>Start and check if timer is active and working:</p>
+<div class="codehilite"><pre><span></span><span class="go">::: console</span>
+<span class="gp">root@host #</span> systemctl start xrootd-renew-proxy.timer
+<span class="go">...</span>
+<span class="gp">root@host #</span> systemctl is-active xrootd-renew-proxy.timer
+<span class="go">active</span>
+<span class="gp">root@host #</span> systemctl list-timers xrootd-renew-proxy*
+<span class="go">NEXT                         LEFT       LAST                         PASSED  UNIT                     ACTIVATES</span>
+<span class="go">Thu 2017-05-11 00:00:00 CDT  54min left Wed 2017-05-10 00:00:01 CDT  23h ago xrootd-renew-proxy.timer xrootd-renew-proxy.service</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Reload daemons:</p>
+<div class="codehilite"><pre><span></span><span class="go">::: console</span>
+<span class="gp">root@host #</span> systemctl daemon-reload
+</pre></div>
+
+
+</li>
+</ol>
+<h4 id="crls-updates">CRLs updates<a class="headerlink" href="#crls-updates" title="Permanent link">&para;</a></h4>
+<p>It is very important to keep CRL list updated from cron:
+1. Enable fetch-crl-cron</p>
+<div class="codehilite"><pre><span></span>    ::: console
+    root@host # systemctl enable fetch-crl-cron
+</pre></div>
+
+
+<ol>
+<li>
+<p>Start fetch-crl-cron</p>
+<div class="codehilite"><pre><span></span><span class="go">::: console</span>
+<span class="gp">root@host #</span> systemctl start fetch-crl-cron
+</pre></div>
+
+
+</li>
+<li>
+<p>Reload daemons:</p>
+<div class="codehilite"><pre><span></span><span class="go">::: console</span>
+<span class="gp">root@host #</span> systemctl daemon-reload
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="add-authfile-for-authenticated-cache">Add Authfile for authenticated cache<a class="headerlink" href="#add-authfile-for-authenticated-cache" title="Permanent link">&para;</a></h3>
+<p>Authfile for authenticated cache may differ from <code>/etc/xrootd/Authfile-noauth</code> defined in non-authenticated cache configuration. Example:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat /etc/xrootd/Authfile-auth 
+<span class="go">g /osg/ligo /user/ligo r</span>
+<span class="go">u ligo /user/ligo lr / rl</span>
+</pre></div>
+
+
+<p>When ready with configuration, you may <a href="#managing-stashcache-and-associated-services">start</a> your StashCache Cache server.</p>
+<h2 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="adjust-disk-utilization">Adjust disk utilization<a class="headerlink" href="#adjust-disk-utilization" title="Permanent link">&para;</a></h3>
+<p>To adjust the disk utilization of your StashCache cache, modify the values of <code>pfc.diskusage</code> in <code>/etc/xrootd/xrootd-stashcache-cache-server.cfg</code>:</p>
+<div class="codehilite"><pre><span></span>pfc.diskusage 0.98 .99
+</pre></div>
+
+
+<p>The first value and second values correspond to the low and high usage watermarks, respectively, in percentages. When the high watermark is reached, the XRootD service will automatically purge cache objects down to the low watermark.</p>
+<h3 id="enable-remote-debugging">Enable remote debugging<a class="headerlink" href="#enable-remote-debugging" title="Permanent link">&para;</a></h3>
+<p>This feature enables remote debugging via the <code>digFS</code> read-only file system, it's optional line in the config file that was created when configuring the cache:</p>
+<div class="codehilite"><pre><span></span>xrootd.diglib * /etc/xrootd/digauth.cf
+</pre></div>
+
+
+<p>where <code>/etc/xrootd/digauth.cf</code> may have following content:</p>
+<div class="codehilite"><pre><span></span>all allow host h=abc.org
+all allow host h=*.xyz.edu
+</pre></div>
+
+
+<h2 id="managing-stashcache-and-associated-services">Managing StashCache and associated services<a class="headerlink" href="#managing-stashcache-and-associated-services" title="Permanent link">&para;</a></h2>
+<p>Ensure that your <code>/stash</code> disk is mounted, and then start <code>xrootd</code> and <code>condor</code> service.</p>
+<h3 id="non-authenticated-cache-server-services">Non-authenticated Cache server services<a class="headerlink" href="#non-authenticated-cache-server-services" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Software</strong></th>
+<th><strong>Service name</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XRootD</td>
+<td><code>xrootd@stashcache-cache-server.service</code></td>
+<td>RHEL7</td>
+</tr>
+<tr>
+<td>HTCondor</td>
+<td><code>condor.service</code></td>
+<td>RHEL7</td>
+</tr>
+<tr>
+<td>Fetch CRL</td>
+<td><code>fetch-crl-cron</code></td>
+<td>RHEL7</td>
+</tr>
+</tbody>
+</table>
+<h3 id="authenticated-cache-server-services">Authenticated Cache server services<a class="headerlink" href="#authenticated-cache-server-services" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Software</strong></th>
+<th><strong>Service name</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XRootD</td>
+<td><code>xrootd@stashcache-cache-server-auth.service</code></td>
+<td>RHEL7</td>
+</tr>
+<tr>
+<td></td>
+<td><code>xrootd-renew-proxy.service</code></td>
+<td>RHEL7</td>
+</tr>
+<tr>
+<td></td>
+<td><code>xrootd-renew-proxy.timer</code></td>
+<td>RHEL7</td>
+</tr>
+<tr>
+<td>HTCondor</td>
+<td><code>condor.service</code></td>
+<td>RHEL7</td>
+</tr>
+<tr>
+<td>Fetch CRL</td>
+<td><code>fetch-crl-cron</code></td>
+<td>RHEL7</td>
+</tr>
+</tbody>
+</table>
+<h3 id="test-cache-server-reports-to-htcondor-collector">Test Cache server reports to HTCondor collector<a class="headerlink" href="#test-cache-server-reports-to-htcondor-collector" title="Permanent link">&para;</a></h3>
+<p>To verify that your cache is being monitored properly, run the following command:</p>
+<div class="codehilite"><pre><span></span>user@host $ condor_status -any -l -const &quot;Name==\&quot;xrootd@`hostname`\&quot;&quot;
+</pre></div>
+
+
+<p>Where <code>hostname</code> is the string returned by the hostname command. The output of the above command should provide an HTCondor ClassAd that details the status of your cache.</p>
+<h3 id="test-cvmfs-accessibility-via-cache-server">Test CVMFS accessibility via Cache server<a class="headerlink" href="#test-cvmfs-accessibility-via-cache-server" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span>[user@client ~]$ curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/query1
+</pre></div>
+
+
+<h3 id="startstop-services">Start/stop services<a class="headerlink" href="#startstop-services" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>To...</strong></th>
+<th><strong>Run the command...</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start a service</td>
+<td>systemctl start SERVICE-NAME</td>
+<td>RHEL7</td>
+</tr>
+<tr>
+<td>Stop a service</td>
+<td>systemctl stop SERVICE-NAME</td>
+<td>RHEL7</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>systemctl status SERVICE-NAME</td>
+<td>RHEL7</td>
+</tr>
+<tr>
+<td>Enable</td>
+<td>systemctl enable SERVICE-NAME</td>
+<td>RHEL7</td>
+</tr>
+</tbody>
+</table>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../overview/" title="StashCache Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                StashCache Overview
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../install-origin/" title="Install Origin" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Install Origin
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.a59e2a89.js"></script>
+      
+      <script>app.initialize({version:"0.17.1",url:{base:"../../.."}})</script>
+      
+    
+    
+      
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-69012-29","opensciencegrid.github.io"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+      
+    
+  </body>
+</html>
