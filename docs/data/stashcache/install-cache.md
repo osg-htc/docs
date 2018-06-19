@@ -19,7 +19,8 @@ If installing the (optional) authenticated StashCache, you need to do in additio
 * __Service certificate:__ create copy of the host certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
     * set owner of the directory `/etc/grid-security/xrd/` to `xrootd:xrootd` user:
     
-            $ chown -R xrootd:xrootd /etc/grid-security/xrd/
+            ::: console
+            root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
 
 * __Network ports__: allow connections on port `8443 (TCP)` 
 
@@ -34,21 +35,21 @@ As with all OSG software installations, there are some one-time steps to prepare
 
 The StashCache daemon consists of an XRootD server and an HTCondor-based service for collecting and reporting statistics about the cache. To simplify installation, OSG provides convenience RPMs that install all required software with a single command:
 
-    [root@client ~]$ yum install stashcache-daemon fetch-crl stashcache-cache-server
-   
+```console
+root@host # yum install stashcache-daemon fetch-crl stashcache-cache-server
+```
 
 !!! note 
     If installing authenticated StashCache Cache server, you need additional packages to be installed:
-
-        [root@client ~]$ yum install xrootd-lcmaps globus-proxy-utils
+        
+        ::: console
+        root@host # yum install xrootd-lcmaps globus-proxy-utils
 
 
 Mount the disk that will be used for the cache data to */stash* and set owner of the directory to `xrootd:xrootd` user.  
 
 
 # Configuring Cache Server
-
-Packages installed: `stashcache-daemon fetch-crl stashcache-cache-server`
 
 The following section describes required configuration to have a functional non-authenticated StashCache Cache (not origin server!). StashCache Cache package `stashcache-cache-server` needs to be manually configured from pre-existing XRootD configuration.
 

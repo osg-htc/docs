@@ -28,7 +28,9 @@ As with all OSG software installations, there are some one-time steps to prepare
 
 The StashCache daemon consists of an XRootD server and an HTCondor-based service for collecting and reporting statistics about the cache. To simplify installation, OSG provides convenience RPMs that install all required software with a single command:
 
-    [root@client ~]$ yum install stashcache-daemon fetch-crl stashcache-cache-origin
+```console
+root@host # yum install stashcache-daemon fetch-crl stashcache-cache-origin
+```
    
 
 Mount the disk that will be used for the origin data to */stash* and set owner of the directory to `xrootd:xrootd` user.  
