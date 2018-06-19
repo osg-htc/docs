@@ -155,16 +155,16 @@ Some important lines to edit:
 In Authfile you want to allow local reads below `$(cachedir)` defined in the main config. Example of Authfile:
 
 ```console
-   root@host # cat /etc/xrootd/Authfile-noauth 
-   u * /user/ligo -rl / rl
+root@host # cat /etc/xrootd/Authfile-noauth 
+u * /user/ligo -rl / rl
 ```
 
 ### Add Robots file
 
 ```console
-   root@host # cat /etc/xrootd/stashcache-robots.txt 
-   User-agent: *
-   Disallow: /
+root@host # cat /etc/xrootd/stashcache-robots.txt 
+User-agent: *
+Disallow: /
 ```
 
 ### RHEL7
