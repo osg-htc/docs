@@ -1,6 +1,6 @@
 # Overview of StashCache
 
-StashCache is a data caching federation with many distributed caches spread across the U.S.
+StashCache is a data caching federation used researchers and the sites that support them. The federation has many distributed caches spread across the U.S.
 
 
 ![StashCache Map](StashCacheMap.png "StashCache Map")
