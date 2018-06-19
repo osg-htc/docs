@@ -41,6 +41,10 @@ pages:
     - 'XRootD Overview': 'data/xrootd-overview.md'
     - 'Install XRootD': 'data/install-xrootd.md'
     - 'Using XRootD': 'data/install-xroot-client.md'
+  - 'StashCache': 
+    - 'StashCache Overview': 'data/stashcache/overview.md'
+    - 'Intstall Cache': 'data/stashcache/install-cache.md'
+    - 'Install Origin': 'data/stashcache/install-origin.md'
 - Security:
   - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host Certificates': 'security/host-certs.md'
