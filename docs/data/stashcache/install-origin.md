@@ -11,8 +11,8 @@ This document describes how to install a StashCache origin service. The installa
 
 Before starting the installation process, consider the following mandatory points:
 
-* __User IDs:__ If they do not exist already, the installation will create the Linux user IDs condor and xrootd
-* __Host certificate:__ The StashCache server uses a host certificate to advertise to a central collector.  More information on how to receive a certificate can be found [here](/security/host-certs.md)
+* __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and `xrootd`
+* __Host certificate:__ The StashCache server uses a host certificate to advertise to a central collector.  More information on how to retrieve a certificate can be found [here](/security/host-certs.md)
 * __Network ports:__ The StashCache service must listen on ports:
     * XRootD service on port `1094 (TCP)`
 * __Hardware requirements:__ We recommend that a StashCache server has at least 10Gbps connectivity, 1TB of disk space, and 8GB of RAM. 
