@@ -49,11 +49,11 @@ root@host # yum install stashcache-daemon fetch-crl stashcache-cache-server
 Mount the disk that will be used for the cache data to */stash* and set owner of the directory to `xrootd:xrootd` user.  
 
 
-# Configuring Cache Server
+## Configuring Cache Server
 
 The following section describes required configuration to have a functional non-authenticated StashCache Cache (not origin server!). StashCache Cache package `stashcache-cache-server` needs to be manually configured from pre-existing XRootD configuration.
 
-## Cache server
+### Cache server
 !!! note
     While example of the configuration file below provides combination of _authenticated_ and _non-authenticated_ _Cache_, the non-authenticated cache is considered to be default and authenticated cache just optional (additional) service.
 
@@ -175,11 +175,11 @@ On RHEL7 system, you need to run following systemd unit:
 * `systemctl start condor.service`
 
 
-# (Optional) Configure Authenticated Cache
+## (Optional) Configure Authenticated Cache
 
 Before you continue, make sure default Cache Server is configured in first place. Enabling authenticated cache is optional and additional to the default cache instance. This chapter describes all the steps needed. 
 
-## Authenticated Cache server
+### Authenticated Cache server
 
 Make sure you've in place following prerequisites from [install step here](#installation-prerequisites-for-cache):
 
