@@ -30,11 +30,10 @@ Element (CE) installations include Frontier Squid automatically. We
 encourage all sites to configure and use this service, as described
 below.
 
-For large sites that expect heavy load on the proxy, it may be best to
-run the proxy on its own host. In that case, the Frontier Squid
-software still will be installed on the CE, but it need not be
-enabled. Instead, install your proxy service on the separate host and
-then configure the CE host to refer to the proxy on that host.
+For large sites that expect heavy load on the proxy, it is best to run the proxy on its own host.
+If you are unsure if your site qualifies, we recommend initially running the proxy on your CE host and monitoring its
+bandwidth.
+If the network usage regularly peaks at over one third of the bandwidth capacity, move the proxy to a new host.
 
 ## Before Starting
 
