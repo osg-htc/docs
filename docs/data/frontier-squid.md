@@ -12,17 +12,17 @@ This document is intended for System Administrators who are installing
 `frontier-squid`, the OSG distribution of the Frontier Squid software.
 
 !!! note "Applicable versions"
-    The applicable software versions for this document are OSG Version >= 3.4.0.
+    This document applies to software from the OSG 3.4 Release Series.
     The version of frontier-squid installed should be >= 3.5.24-3.1.
-    When using an OSG Version < 3.4.0 and a frontier-squid version in the
-    2.7STABLE9 series, refer to the
+    When using OSG software from a previous Release Series (eg, OSG 3.3)
+    and a frontier-squid version in the 2.7STABLE9 series, refer to the
     [old upstream install documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/OldInstallSquid)
     instead of the current links included below. There are some
-    incompatibilities between the two versions, so if you are upgrading
-    from a 2.7STABLE9 version to a 3.5 version, see the
+    incompatibilities between the two versions of frontier-squid, so if you
+    are upgrading from a 2.7STABLE9 version to a 3.5 version, see the
     [upstream documentation on upgrading](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Upgrading).
 
-## Frontier Squid is Recommended
+## Frontier Squid Is Recommended
 
 OSG recommends that all sites run a caching proxy for HTTP and HTTPS
 to help reduce bandwidth and improve throughput. To that end, Compute
@@ -30,16 +30,10 @@ Element (CE) installations include Frontier Squid automatically. We
 encourage all sites to configure and use this service, as described
 below.
 
-For large sites that expect heavy load on the proxy, it may be best to
-run the proxy on its own host. In that case, the Frontier Squid
-software still will be installed on the CE, but it need not be
-enabled. Instead, install your proxy service on the separate host and
-then configure the CE host to refer to the proxy on that host.
-
-The `osg-configure` configuration tool (version 1.0.45 and later)
-warns users who have not added the proxy location to their CE
-configuration. In the future, a proxy will be required and
-osg-configure will fail if the proxy location is not set.
+For large sites that expect heavy load on the proxy, it is best to run the proxy on its own host.
+If you are unsure if your site qualifies, we recommend initially running the proxy on your CE host and monitoring its
+bandwidth.
+If the network usage regularly peaks at over one third of the bandwidth capacity, move the proxy to a new host.
 
 ## Before Starting
 
@@ -100,14 +94,14 @@ To configure the Frontier Squid service itself:
 
 To configure the OSG Compute Element (CE) to know about your Frontier Squid service:
 
-1.  On your CE host, edit `/etc/osg/config.d/01-squid.ini`
+1.  On your CE host (which may be different than your Frontier Squid host), edit `/etc/osg/config.d/01-squid.ini`
     -   Make sure that `enabled` is set to `True`
     -   Set `location` to the hostname and port of your Frontier Squid
         service (e.g., `my.squid.host.edu:3128`)
     -   Leave the other settings at `DEFAULT` unless you have specific
         reasons to change them
 
-2.  Run `osg-configure` to propagate the changes on your CE.
+2.  Run `osg-configure -c` to propagate the changes on your CE.
 
 !!! Note
     You may want to finish other CE configuration tasks before running
@@ -128,15 +122,15 @@ Start the frontier-squid service and enable it to start at boot time. As a remin
 ## Validating Frontier Squid
 
 As any user on another computer, do the following (where
-`yoursquid.your.domain` is the fully qualified domain name of your
+`%RED%my.squid.host.edu%ENDCOLOR%` is the fully qualified domain name of your
 squid server):
 
 ``` console
-user@host $ export http_proxy=http://%RED%yoursquid.your.domain%ENDCOLOR%:3128
+user@host $ export http_proxy=http://%RED%my.squid.host.edu%ENDCOLOR%:3128
 user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
-X-Cache: MISS from %RED%yoursquid.your.domain%ENDCOLOR%
+X-Cache: MISS from %RED%my.squid.host.edu%ENDCOLOR%
 user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
-X-Cache: HIT from %RED%yoursquid.your.domain%ENDCOLOR%
+X-Cache: HIT from %RED%my.squid.host.edu%ENDCOLOR%
 ```
 
 If the grep doesn't print anything, try removing it from the pipeline
