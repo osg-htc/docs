@@ -510,8 +510,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#frontier-squid-is-recommended" title="Frontier Squid is Recommended" class="md-nav__link">
-    Frontier Squid is Recommended
+  <a href="#frontier-squid-is-recommended" title="Frontier Squid Is Recommended" class="md-nav__link">
+    Frontier Squid Is Recommended
   </a>
   
 </li>
@@ -1649,8 +1649,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#frontier-squid-is-recommended" title="Frontier Squid is Recommended" class="md-nav__link">
-    Frontier Squid is Recommended
+  <a href="#frontier-squid-is-recommended" title="Frontier Squid Is Recommended" class="md-nav__link">
+    Frontier Squid Is Recommended
   </a>
   
 </li>
@@ -1781,31 +1781,26 @@ upstream frontier-squid package for the convenience of OSG users.</p>
 <code>frontier-squid</code>, the OSG distribution of the Frontier Squid software.</p>
 <div class="admonition note">
 <p class="admonition-title">Applicable versions</p>
-<p>The applicable software versions for this document are OSG Version &gt;= 3.4.0.
+<p>This document applies to software from the OSG 3.4 Release Series.
 The version of frontier-squid installed should be &gt;= 3.5.24-3.1.
-When using an OSG Version &lt; 3.4.0 and a frontier-squid version in the
-2.7STABLE9 series, refer to the
+When using OSG software from a previous Release Series (eg, OSG 3.3)
+and a frontier-squid version in the 2.7STABLE9 series, refer to the
 <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/OldInstallSquid">old upstream install documentation</a>
 instead of the current links included below. There are some
-incompatibilities between the two versions, so if you are upgrading
-from a 2.7STABLE9 version to a 3.5 version, see the
+incompatibilities between the two versions of frontier-squid, so if you
+are upgrading from a 2.7STABLE9 version to a 3.5 version, see the
 <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Upgrading">upstream documentation on upgrading</a>.</p>
 </div>
-<h2 id="frontier-squid-is-recommended">Frontier Squid is Recommended<a class="headerlink" href="#frontier-squid-is-recommended" title="Permanent link">&para;</a></h2>
+<h2 id="frontier-squid-is-recommended">Frontier Squid Is Recommended<a class="headerlink" href="#frontier-squid-is-recommended" title="Permanent link">&para;</a></h2>
 <p>OSG recommends that all sites run a caching proxy for HTTP and HTTPS
 to help reduce bandwidth and improve throughput. To that end, Compute
 Element (CE) installations include Frontier Squid automatically. We
 encourage all sites to configure and use this service, as described
 below.</p>
-<p>For large sites that expect heavy load on the proxy, it may be best to
-run the proxy on its own host. In that case, the Frontier Squid
-software still will be installed on the CE, but it need not be
-enabled. Instead, install your proxy service on the separate host and
-then configure the CE host to refer to the proxy on that host.</p>
-<p>The <code>osg-configure</code> configuration tool (version 1.0.45 and later)
-warns users who have not added the proxy location to their CE
-configuration. In the future, a proxy will be required and
-osg-configure will fail if the proxy location is not set.</p>
+<p>For large sites that expect heavy load on the proxy, it is best to run the proxy on its own host.
+If you are unsure if your site qualifies, we recommend initially running the proxy on your CE host and monitoring its
+bandwidth.
+If the network usage regularly peaks at over one third of the bandwidth capacity, move the proxy to a new host.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
 <ul>
@@ -1868,7 +1863,7 @@ the Frontier Squid variant is that Frontier Squid changes are in
 <p>To configure the OSG Compute Element (CE) to know about your Frontier Squid service:</p>
 <ol>
 <li>
-<p>On your CE host, edit <code>/etc/osg/config.d/01-squid.ini</code></p>
+<p>On your CE host (which may be different than your Frontier Squid host), edit <code>/etc/osg/config.d/01-squid.ini</code></p>
 <ul>
 <li>Make sure that <code>enabled</code> is set to <code>True</code></li>
 <li>Set <code>location</code> to the hostname and port of your Frontier Squid
@@ -1878,7 +1873,7 @@ the Frontier Squid variant is that Frontier Squid changes are in
 </ul>
 </li>
 <li>
-<p>Run <code>osg-configure</code> to propagate the changes on your CE.</p>
+<p>Run <code>osg-configure -c</code> to propagate the changes on your CE.</p>
 </li>
 </ol>
 <div class="admonition note">
@@ -1922,13 +1917,13 @@ services.</p>
 </table>
 <h2 id="validating-frontier-squid">Validating Frontier Squid<a class="headerlink" href="#validating-frontier-squid" title="Permanent link">&para;</a></h2>
 <p>As any user on another computer, do the following (where
-<code>yoursquid.your.domain</code> is the fully qualified domain name of your
+<code><span style="color:red">my.squid.host.edu</span></code> is the fully qualified domain name of your
 squid server):</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> <span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://<span style="color:red">yoursquid.your.domain</span>:3128
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> <span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://<span style="color:red">my.squid.host.edu</span>:3128
 <span class="gp">user@host $</span> wget -qdO/dev/null http://frontier.cern.ch <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">|</span>grep X-Cache
-<span class="go">X-Cache: MISS from <span style="color:red">yoursquid.your.domain</span></span>
+<span class="go">X-Cache: MISS from <span style="color:red">my.squid.host.edu</span></span>
 <span class="gp">user@host $</span> wget -qdO/dev/null http://frontier.cern.ch <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">|</span>grep X-Cache
-<span class="go">X-Cache: HIT from <span style="color:red">yoursquid.your.domain</span></span>
+<span class="go">X-Cache: HIT from <span style="color:red">my.squid.host.edu</span></span>
 </pre></div>
 
 
