@@ -72,8 +72,6 @@ If your institution is not in the list and Let's Encrypt certificates do not mee
             distinguished_name = dn
 
             [ dn ]
-            DC = org
-            DC = incommon
             C = %RED%US%ENDCOLOR%
             ST = %RED%Wisconsin%ENDCOLOR%
             L = %RED%Madison%ENDCOLOR%
