@@ -9,15 +9,15 @@ Summary of changes
 This release contains:
 
 -   OSG 3.4 respository
-    -   [Hadoop Distributed File System 2.6](https://opensciencegrid.org/docs/data/hadoop-overview/) (EL7 Only)
-    -   osg-configure 2.3.1: automatically turns off proxy renewal in BLAHP on HTCondor-CE
-    -   RSV 3.19.7: now works with Apache 2.4, fixed CA and CRL probes
-    -   lcmaps-plugins-voms 1.7.1-1.6: works again with llrun
+    -   [Hadoop Distributed File System 2.6](https://opensciencegrid.org/docs/data/hadoop-overview/) on El7 (Based on cloudera CDH 5)
+    -   osg-configure 2.3.1: automatically turn off BLAHP proxy renewal on HTCondor-CE
+    -   RSV 3.19.7: works with Apache 2.4, fixed CA and CRL probes
+    -   lcmaps-plugins-voms 1.7.1-1.6: fixes issues with llrun
     -   Gratia probes 1.20.3: improve performance with PBS/LSF batch systems
-    -   osg-pki-tools 3.0.0: [generate CSRs for non OSG CAs](https://opensciencegrid.org/docs/security/host-certs/#requesting-incommon-host-certificates)
+    -   osg-pki-tools 3.0.0: [generate CSRs for CAs](https://opensciencegrid.org/docs/security/host-certs/#requesting-incommon-host-certificates)
 
-    !!! note
-        The OSG CA has been retired
+        !!! note
+            The OSG CA has been retired
 
 
     -   GridFTP-HDFS 1.1.1-1.2: increase control channel timeout to avoid checksum failures
@@ -28,12 +28,13 @@ This release contains:
     -   [GlideinWMS 3.4](http://glideinwms.fnal.gov/doc.v3_4/history.html)
         -   Code modernization to Python 2.7 idioms (Python 2.6 is still supported)
         -   Support for Google CE and the policy plugins.
-        -   Glidein lifetime is not based on the length of the proxy any longer
-        -   New option to kill glideins when job requests decrease
-        -   Estimate in advance the cores provided to glideins discovering cores automatically
+        -   Glidein lifetime is no longer based on the length of the proxy
+        -   New option to kill glideins when the number of job requests drop
+        -   Estimate in advance how many cores will be provided to glideins
         -   Add entry monitoring breakdown for metasites
         -   Review Factory and Frontend tools, especially glidien_off and manual_glidein_submit.py
-        -   Singularity improvements to use PATH and module when SINGULARITY_BIN does not contain the correct path and to run in a separate session to support restricted-access CVMFS
+        -   Singularity improvements to use PATH and module when SINGULARITY_BIN does not contain the correct path
+        -   Run in a separate session to support restricted-access CVMFS
 
         !!! note "Notes"
             -   All nodes
