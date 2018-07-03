@@ -17,7 +17,7 @@ This release contains:
     -   osg-pki-tools 3.0.0: [generate CSRs for non OSG CAs](https://opensciencegrid.org/docs/security/host-certs/#requesting-incommon-host-certificates)
 
     !!! note
-    The OSG CA has been retired
+        The OSG CA has been retired
 
 
     -   GridFTP-HDFS 1.1.1-1.2: increase control channel timeout to avoid checksum failures
