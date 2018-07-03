@@ -8,6 +8,7 @@ Release Notes
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.14](/release/3.4/release-3-4-14)     | 2018-07-02 | TBA |
 | [3.4.13](/release/3.4/release-3-4-13)     | 2018-06-12 | CVMFS 2.5.0, HTCondor 8.6.11, Singularity 2.5.1, Pegasus 4.8.2, voms-proxy-direct; Upcoming: HTCondor 8.7.8 |
 | [3.4.12-3](/release/3.4/release-3-4-12-3) | 2018-05-21 | IGTF 1.91                                                               |
 | [3.4.12-2](/release/3.4/release-3-4-12-2) | 2018-05-10 | Added Let's Encrypt CA, VO Package v79                                  |
