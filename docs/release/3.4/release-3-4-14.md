@@ -15,8 +15,11 @@ This release contains:
     -   lcmaps-plugins-voms 1.7.1-1.6: works again with llrun
     -   Gratia probes 1.20.3: improve performance with PBS/LSF batch systems
     -   osg-pki-tools 3.0.0: [generate CSRs for non OSG CAs](https://opensciencegrid.org/docs/security/host-certs/#requesting-incommon-host-certificates)
+
     !!! note
     The OSG CA has been retired
+
+
     -   GridFTP-HDFS 1.1.1-1.2: increase control channel timeout to avoid checksum failures
     -   lcmaps-plugins-verify-proxy: fix rare crash
     -   [One-Way Ping (OWAMP) 3.5.6](http://software.internet2.edu/owamp/): Minor bug fixes
