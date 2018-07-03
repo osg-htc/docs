@@ -33,8 +33,9 @@ This release contains:
         -   Estimate in advance how many cores will be provided to glideins
         -   Add entry monitoring breakdown for metasites
         -   Review Factory and Frontend tools, especially glidien_off and manual_glidein_submit.py
-        -   Singularity improvements to use PATH and module when SINGULARITY_BIN does not contain the correct path
-        -   Run in a separate session to support restricted-access CVMFS
+        -   Singularity improvements
+            -   Use PATH and module when SINGULARITY_BIN does not contain the correct path
+            -   Run in a separate session to support restricted-access CVMFS
 
         !!! note "Notes"
             -   All nodes
