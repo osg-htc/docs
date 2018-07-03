@@ -9,12 +9,14 @@ Summary of changes
 This release contains:
 
 -   OSG 3.4 respository
-    -   [Hadoop Distributed File System 2.6](https://opensciencegrid.org/docs/data/hadoop-overview/)
+    -   [Hadoop Distributed File System 2.6](https://opensciencegrid.org/docs/data/hadoop-overview/) (EL7 Only)
     -   osg-configure 2.3.1: automatically turns off proxy renewal in BLAHP on HTCondor-CE
     -   RSV 3.19.7: now works with Apache 2.4, fixed CA and CRL probes
     -   lcmaps-plugins-voms 1.7.1-1.6: works again with llrun
     -   Gratia probes 1.20.3: improve performance with PBS/LSF batch systems
     -   osg-pki-tools 3.0.0: [generate CSRs for non OSG CAs](https://opensciencegrid.org/docs/security/host-certs/#requesting-incommon-host-certificates)
+    !!! note
+    The OSG CA has been retired
     -   GridFTP-HDFS 1.1.1-1.2: increase control channel timeout to avoid checksum failures
     -   lcmaps-plugins-verify-proxy: fix rare crash
     -   [One-Way Ping (OWAMP) 3.5.6](http://software.internet2.edu/owamp/): Minor bug fixes
@@ -30,16 +32,16 @@ This release contains:
         -   Review Factory and Frontend tools, especially glidien_off and manual_glidein_submit.py
         -   Singularity improvements to use PATH and module when SINGULARITY_BIN does not contain the correct path and to run in a separate session to support restricted-access CVMFS
 
-!!! note "Notes"
-        -   All nodes
-            -   GLIDEIN_ToDie is no longer shortened depending on the X509 proxy lifetime, to get the old behavior set GLIDEIN_Ignore_X509_Duration to False
-            -   The type of the GLIDEIN_CPU attr is String (to accomodate the keywords auto, slot, node). It was incorrectly documented as type Int. Make sure your configuration uses the correct type or you may get a reconfig/upgrade error.
-        -   Factory only:
-            -   If you use HTCondor 8.7.2 or later with the GlideinWMS Factory, then GRAM gateways are no longer supported
-            -   'entry_sets' should be considered an experimental feature: the implementation will change in 3.4.1 and there may be errors and manual interventions required when upgrading to new versions of GlideinWMS if metasites are configured
+        !!! note "Notes"
+            -   All nodes
+                -   GLIDEIN_ToDie is no longer shortened depending on the X509 proxy lifetime, to get the old behavior set GLIDEIN_Ignore_X509_Duration to False
+                -   The type of the GLIDEIN_CPU attr is String (to accomodate the keywords auto, slot, node). It was incorrectly documented as type Int. Make sure your configuration uses the correct type or you may get a reconfig/upgrade error.
+            -   Factory only:
+                -   If you use HTCondor 8.7.2 or later with the GlideinWMS Factory, then GRAM gateways are no longer supported
+                -   'entry_sets' should be considered an experimental feature: the implementation will change in 3.4.1 and there may be errors and manual interventions required when upgrading to new versions of GlideinWMS if metasites are configured
 
-    -   BLAHP: Improved security 
 
+    -   BLAHP: Improved security
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.14%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
