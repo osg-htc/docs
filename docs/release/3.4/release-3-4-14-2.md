@@ -1,7 +1,7 @@
 OSG Software Stack -- Data Release -- 3.4.14-2
 ==============================================
 
-**Release Date**: 2018-05-21
+**Release Date**: 2018-07-05
 
 Summary of changes
 ------------------
