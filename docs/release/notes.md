@@ -8,6 +8,7 @@ Release Notes
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.15](/release/3.4/release-3-4-15)     | 2018-07-06 | High Priority Release: Singularity 2.5.2                                |
 | [3.4.14-2](/release/3.4/release-3-4-14-2) | 2018-07-05 | IGTF 1.92                                                               |
 | [3.4.14](/release/3.4/release-3-4-14)     | 2018-07-02 | HDFS 2.6(EL7), osg-configure 2.3.1, RSV 3.19.7, lcmaps-plugins-voms 1.7.1-1.6, Gratia probes 1.20.3, osg-pki-tools 3.0.0, GridFTP-HDFS 1.1.1-1.2(EL7), lcmaps-plugins-verify-proxy 1.5.11, OWAMP 3.5.6 BLAHP 1.18.37; Upcoming: GlideinWMS 3.4, BLAHP 1.18.37 |
 | [3.4.13](/release/3.4/release-3-4-13)     | 2018-06-12 | CVMFS 2.5.0, HTCondor 8.6.11, Singularity 2.5.1, Pegasus 4.8.2, voms-proxy-direct; Upcoming: HTCondor 8.7.8 |
