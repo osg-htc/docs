@@ -44,74 +44,34 @@ Follow the steps below to get an user certificate:
 1. The web page will generate a `usercred.p12` file and prompt you to download it.  The certiticate will be protected
 using the password you entered in the prior step.
 
-### PKCS12 (.p12) vs PEM format
 
-Your certificate and key pair can be stored as separate files, by default named `~/.globus/usercert.pem` and
-`~/.globus/userkey.pem`, or they can be bundled in a single file in [PKCS12 (Public Key Cryptography Standard
-\#12)](https://en.wikipedia.org/wiki/PKCS_12), by default named `~/.globus/usercred.p12`. 
-Most OSG user tools works with both formats. 
-Unless you specify a name in the command, they look first for the certificate/key pair default names, then for the
-PKCS12 default name and use the first one they find. 
+### Certificate formats
 
-Anyway, note that the PKCS12 bundle includes normally the certificate, the key and also the CA certificate (or a certificate chain) validating your certificate. In the rare (but possible) case where the CA certificate expires before your certificate this may lead to the creation of a proxy without VOMS attributes and confusing error messages where it is not clear if the problem is with the host, remote server or the certificate, e.g. "Error: Error during SSL handshake:Either proxy or user certificate are expired." or "error:80066423:lib(128):verify\_callback:remote certificate has expired:sslutils.c:1963 remote certificate has expired".
+Your user certficate can be stored in a few different formats.
+The two most common formats used on OSG are the [PKCS12](https://en.wikipedia.org/wiki/PKCS_12) and
+[PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) formats.
+In the PEM format, your user certificate is stored in two separate files: one for the certificate and another for the
+private key.
+The PKCS12 format stores the certificate and private key in a single file along with an optional certificate chain.
+Most OSG user tools will work with both but will try to use PEM files first.   
 
-``` console
-user@host $  voms-proxy-init -debug
-Detected Globus version: 2.2
-Unspecified proxy version, settling on Globus version: 2
-Number of bits in key :1024
-Files being used:
- CA certificate file: none
- Trusted certificates directory : /etc/grid-security/certificates
- Proxy certificate file : /tmp/x509up_u20003
- User certificate file: /home/user/.globus/usercred.p12
- User key file: /home/user/.globus/usercred.p12
-Output to /tmp/x509up_u20003
-Enter GRID pass phrase for this identity:
-Your identity: /DC=org/DC=doegrids/OU=People/CN=First Lastname 12345
-Creating proxy to /tmp/x509up_u20003 .............++++++
-.....................++++++
- Done
+To convert a PKCS12 file to  PEM files, do the following.  
+   
+1. First, extract your user certificate from your PKCS12 file.  We assume that the PKCS12 file is called `usercred.p12` and output the PEM certificate to `usercert.pem`.
 
-Your proxy is valid until Fri Aug  9 00:18:07 2013
-Error: Certificate verify failed.
-error:80066423:lib(128):verify_callback:remote certificate has expired:sslutils.c:1963
-remote certificate has expired
-Function: verify_callback
-error:80066412:lib(128):verify_callback:certificate::sslutils.c:2283
-        subject=/DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1
-        issuer =/DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1
-certificate:
-        subject=/DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1
-        issuer =/DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1
-Function: verify_callback
-user@host $ voms-proxy-init -debug -voms osg
-Detected Globus version: 2.2
-Unspecified proxy version, settling on Globus version: 2
-Number of bits in key :1024
-Files being used:
- CA certificate file: none
- Trusted certificates directory : /etc/grid-security/certificates
- Proxy certificate file : /tmp/x509up_u20003
- User certificate file: /home/user/.globus/usercred.p12
- User key file: /home/user/.globus/usercred.p12
-Output to /tmp/x509up_u20003
-Enter GRID pass phrase for this identity:
-Your identity: /DC=org/DC=doegrids/OU=People/CN=First Lastname 12345
-Using configuration file /home/marco/.glite/vomses
-Using configuration file /etc/vomses
-Creating temporary proxy to /tmp/tmp_x509up_u20003_17448 ..........................++++++
-...................++++++
- Done
-Contacting  voms.opensciencegrid.org:15027 [/DC=org/DC=doegrids/OU=Services/CN=host/voms.opensciencegrid.org] "osg" Failed
+        :::console
+        user@host $ openssl pkcs12 -in usercred.p12 -out usercert.pem -nodes -clcerts -nokeys
+        Enter Import Password:
+        MAC verified OK
+   
+1. Second, extract the private key. The private key will be saved to userkey.pem
 
-Error: Error during SSL handshake:Either proxy or user certificate are expired.
-
-None of the contacted servers for osg were capable
-of returning a valid AC for the user.
-```
-
-To solve the problem split the bundle in the two PEM files as documented in the [referenced document](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html), so that the embedded CA chain is not used.
+        :::console 
+        user@host $ openssl pkcs12 -in usercred.p12 -out userkey.pem  -nocerts
+        Enter Import Password:
+        MAC verified OK
+        Enter PEM pass phrase:
+        Verifying - Enter PEM pass phrase:
 
 Revoking your user certificate
 ------------------------------
