@@ -9,13 +9,14 @@ Summary of changes
 This release contains:
 
 -   [Singularity 2.5.2](https://github.com/singularityware/singularity/releases/tag/2.5.2)
-    -   This release contains fixes for a *high severity* security issue affecting Singularity 2.3.0 through 2.5.1 on
-        kernels that support overlay file systems (CVE-2018-12021). A malicious user with network access to the host
+    -   This release contains fixes for an EL7 *high severity* security issue affecting Singularity 2.3.0 through 2.5.1
+        on kernels that support overlay file systems (CVE-2018-12021). A malicious user with network access to the host
         system (e.g. ssh) could exploit this vulnerability to access sensitive information on disk and bypass directory
         image restrictions like those preventing the root file system from being mounted into the container.
     -   Singularity 2.5.2 should be installed immediately, and all previous versions of Singularity should be removed.
         The vulnerability addressed in this release affects kernels that support overlayfs. If you are unable to upgrade
         immediately, you should set `enable overlay = no` in `singularity.conf`.
+    -   In addition, this release contains a large number of bug fixes.
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.15%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
