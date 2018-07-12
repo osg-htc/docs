@@ -48,7 +48,7 @@ using the password you entered in the prior step.
 ### Certificate formats
 
 Your user certficate can be stored in a few different formats.
-The two most common formats used on OSG are the [PKCS12](https://en.wikipedia.org/wiki/PKCS_12) and
+The two most common formats used in OSG are the [PKCS12](https://en.wikipedia.org/wiki/PKCS_12) and
 [PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) formats.
 In the PEM format, your user certificate is stored in two separate files: one for the certificate and another for the
 private key.
@@ -57,14 +57,14 @@ Most OSG user tools will work with both but will try to use PEM files first.
 
 To convert a PKCS12 file to  PEM files, do the following.  
    
-1. First, extract your user certificate from your PKCS12 file.  We assume that the PKCS12 file is called `usercred.p12` and output the PEM certificate to `usercert.pem`.
+1. First, extract your user certificate from your PKCS12 file by running the following command.  You'll be prompted for the password you used to create the certificate. The invocation assumes that the PKCS12 file is called `usercred.p12`.  After running, the PEM certificate will be written to `usercert.pem`. 
 
         :::console
         user@host $ openssl pkcs12 -in usercred.p12 -out usercert.pem -nodes -clcerts -nokeys
         Enter Import Password:
         MAC verified OK
    
-1. Second, extract the private key. The private key will be saved to userkey.pem
+1. Second, extract the private key by running the following command. You'll be prompted for two different passwords.  The first prompt will be for the password that you used to create the certficate.  The second prompt will be for the password that will encrypt the PEM certificate that will be created.  As before, the invocation assumes that your PKCS12 certificate is located in `usercred.p12`. After running, the PEM certificate with your private key will be written to `userkey.pem`.
 
         :::console 
         user@host $ openssl pkcs12 -in usercred.p12 -out userkey.pem  -nocerts
