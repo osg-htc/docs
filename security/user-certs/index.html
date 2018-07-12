@@ -835,35 +835,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#getting-a-certificate-from-the-osg-ca" title="Getting a Certificate from the OSG CA" class="md-nav__link">
-    Getting a Certificate from the OSG CA
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pkcs12-p12-vs-pem-format" title="PKCS12 (.p12) vs PEM format" class="md-nav__link">
-    PKCS12 (.p12) vs PEM format
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#renewing-your-osg-user-certificate" title="Renewing your OSG user certificate" class="md-nav__link">
-    Renewing your OSG user certificate
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#issues-renewing-your-osg-user-certificate" title="Issues renewing your OSG user certificate" class="md-nav__link">
-    Issues renewing your OSG user certificate
+  <a href="#certificate-formats" title="Certificate formats" class="md-nav__link">
+    Certificate formats
   </a>
   
 </li>
@@ -897,6 +870,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" title="Getting Help" class="md-nav__link">
+    Getting Help
+  </a>
   
 </li>
       
@@ -1698,35 +1678,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#getting-a-certificate-from-the-osg-ca" title="Getting a Certificate from the OSG CA" class="md-nav__link">
-    Getting a Certificate from the OSG CA
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pkcs12-p12-vs-pem-format" title="PKCS12 (.p12) vs PEM format" class="md-nav__link">
-    PKCS12 (.p12) vs PEM format
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#renewing-your-osg-user-certificate" title="Renewing your OSG user certificate" class="md-nav__link">
-    Renewing your OSG user certificate
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#issues-renewing-your-osg-user-certificate" title="Issues renewing your OSG user certificate" class="md-nav__link">
-    Issues renewing your OSG user certificate
+  <a href="#certificate-formats" title="Certificate formats" class="md-nav__link">
+    Certificate formats
   </a>
   
 </li>
@@ -1764,6 +1717,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#getting-help" title="Getting Help" class="md-nav__link">
+    Getting Help
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#references" title="References" class="md-nav__link">
     References
   </a>
@@ -1797,22 +1757,30 @@ For instructions on getting <strong>service</strong> and <strong>host</strong> c
 </div>
 <h2 id="getting-a-user-certificate">Getting a User Certificate<a class="headerlink" href="#getting-a-user-certificate" title="Permanent link">&para;</a></h2>
 <p>This section describes how to get and set up a personal certificate to use on OSG.
-Currently you can get a certificate from either the OSG CA or from CILogon.
-After May 31st, you will only be able to get a certificate issued by CILogon.
-Other CAs may be used; if your virtual organization (VO) requires that you get a certificate from a different CA, <a href="http://www.opensciencegrid.org/?pid=1000187">contact your VO Support Center</a> for instructions.</p>
+You need a user certificate if you are going to interact directly with OSG resources or infrastructure. 
+Examples of this would be tasks like managing OASIS, directly running jobs on OSG resources, interacting directly with 
+OSG storage elements, or to get private contact information from OSG systems.
+Currently, you can get a user certificate from CILogon.
+You may also be able to user other CAs to get a certificate; if your virtual organization (VO) requires that you get a
+certificate from a different CA, <a href="https://github.com/opensciencegrid/topology/tree/master/virtual-organizations">contact your VO Support Center</a> for
+instructions.</p>
 <h3 id="know-your-responsibilities">Know your responsibilities<a class="headerlink" href="#know-your-responsibilities" title="Permanent link">&para;</a></h3>
-<p>When you request a certificate your provide some public personal information about yourself; <em>name, email address, phone number</em>, and which <em>VO</em> (virtual organization) you belong to. If any of this information changes after you have your certificate you should notify OSG (and probably VO) of the changes. For the OSG RA send email to osg-ra at opensciencegrid dot org.</p>
-<p>Your <strong>name</strong> and <strong>email</strong> address are encoded into the signed certificate and <strong>if either of those change</strong> (usually email address) then you should <strong>request a new certificate</strong> with the correct information and <strong>revoke the old certificate</strong>.</p>
+<p>If your account or user certificate is compromised, you <strong>must</strong> notify the issuer of your certificate. 
+In addition, you should update your certificate and revoke the old certificate if any of the information in the
+certificate (such as name or email address) change.
+For the CILogon RA send email to <a href="mailto:ca@cilogon.org">ca@ciloogon.org</a>. 
+Additional responsibilities required by the CILogon CA are given on <a href="http://ca.cilogon.org/responsibilities">their page</a>.  </p>
 <h3 id="getting-a-certificate-from-cilogon">Getting a Certificate from CILogon<a class="headerlink" href="#getting-a-certificate-from-cilogon" title="Permanent link">&para;</a></h3>
 <p>You will have to obtain your user certificate using the <a href="https://cilogon.org/">CILogon web UI</a>.
 Follow the steps below to get an user certificate:</p>
 <ol>
 <li>
-<p>First, either search for your institution and select it or scroll through list and do the same. <br><img alt="Institution Selection" src="../../img/cilogon_select_idp.png" /></p>
+<p>First, either search for your institution and select it or scroll through list and do the same.<br>If your institution is not on the list, please contact your institution's IT support to see if they can support CILogon.<br><img alt="Institution Selection" src="../../img/cilogon_select_idp.png" />.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Make sure to select your educational institution from CILogon's list.
-For instance, do not use your Google ID or GitHub ID.</p>
+For instance, do not use OpenID (e.g. Google, Github, etc.) as a provider since not all OSG resources support
+certificates using an OpenID provider.</p>
 </div>
 </li>
 <li>
@@ -1822,130 +1790,43 @@ For instance, do not use your Google ID or GitHub ID.</p>
 <li>The web page will generate a <code>usercred.p12</code> file and prompt you to download it.  The certiticate will be protected
 using the password you entered in the prior step.</li>
 </ol>
-<h3 id="getting-a-certificate-from-the-osg-ca">Getting a Certificate from the OSG CA<a class="headerlink" href="#getting-a-certificate-from-the-osg-ca" title="Permanent link">&para;</a></h3>
-<p>There are two different ways to obtain your certificate, either via a command line interface, or through a web browser.
-The links below will guide you through whichever method you choose.
-The command line method is generally simpler and less prone to errors than using a web browser but it may require extra
-setup and package installation the first time you do it.
-Most people end up needing their certificate for both command line grid use and web browser use and it is generally
-easier to import your certificate into your browser (and email client) from the command line certificate files than to
-export your certificate from your web browser to use on the command line. 
-This is because of the large variety of web browsers each with its own way to deal with certificates. If you will use
-the certificate ONLY in your web browser then requesting it from your browser is probably the easiest method.</p>
-<p><a href="../certificate-management/">Get or renew a certificate with command line interface.</a></p>
-<h3 id="pkcs12-p12-vs-pem-format">PKCS12 (.p12) vs PEM format<a class="headerlink" href="#pkcs12-p12-vs-pem-format" title="Permanent link">&para;</a></h3>
-<p>Your certificate and key pair can be stored as separate files, by default named <code>~/.globus/usercert.pem</code> and <code>~/.globus/userkey.pem</code>, or they can be bundled in a single file in PKCS12 (Public Key Cryptography Standard #12), by default named <code>~/.globus/usercred.p12</code>. All OSG user tools works with both formats. Unless you specify a name in the command, they look first for the certificate/key pair default names, then for the PKCS12 default name and use the first one they find. PKCS 12 is a single file, convenient to move and used by many softwares, e.g. the Web browsers (so you don't need conversions).</p>
-<p>Anyway note that the PKCS12 bundle includes normally the certificate, the key and also the CA certificate (or a certificate chain) validating your certificate. In the rare (but possible) case where the CA certificate expires before your certificate this may lead to the creation of a proxy without VOMS attributes and confusing error messages where it is not clear if the problem is with the host, remote server or the certificate, e.g. "Error: Error during SSL handshake:Either proxy or user certificate are expired." or "error:80066423:lib(128):verify_callback:remote certificate has expired:sslutils.c:1963 remote certificate has expired".</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span>  voms-proxy-init -debug
-<span class="go">Detected Globus version: 2.2</span>
-<span class="go">Unspecified proxy version, settling on Globus version: 2</span>
-<span class="go">Number of bits in key :1024</span>
-<span class="go">Files being used:</span>
-<span class="go"> CA certificate file: none</span>
-<span class="go"> Trusted certificates directory : /etc/grid-security/certificates</span>
-<span class="go"> Proxy certificate file : /tmp/x509up_u20003</span>
-<span class="go"> User certificate file: /home/user/.globus/usercred.p12</span>
-<span class="go"> User key file: /home/user/.globus/usercred.p12</span>
-<span class="go">Output to /tmp/x509up_u20003</span>
-<span class="go">Enter GRID pass phrase for this identity:</span>
-<span class="go">Your identity: /DC=org/DC=doegrids/OU=People/CN=First Lastname 12345</span>
-<span class="go">Creating proxy to /tmp/x509up_u20003 .............++++++</span>
-<span class="go">.....................++++++</span>
-<span class="go"> Done</span>
-
-<span class="go">Your proxy is valid until Fri Aug  9 00:18:07 2013</span>
-<span class="go">Error: Certificate verify failed.</span>
-<span class="go">error:80066423:lib(128):verify_callback:remote certificate has expired:sslutils.c:1963</span>
-<span class="go">remote certificate has expired</span>
-<span class="go">Function: verify_callback</span>
-<span class="go">error:80066412:lib(128):verify_callback:certificate::sslutils.c:2283</span>
-<span class="go">        subject=/DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1</span>
-<span class="go">        issuer =/DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1</span>
-<span class="go">certificate:</span>
-<span class="go">        subject=/DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1</span>
-<span class="go">        issuer =/DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1</span>
-<span class="go">Function: verify_callback</span>
-<span class="gp">user@host $</span> voms-proxy-init -debug -voms osg
-<span class="go">Detected Globus version: 2.2</span>
-<span class="go">Unspecified proxy version, settling on Globus version: 2</span>
-<span class="go">Number of bits in key :1024</span>
-<span class="go">Files being used:</span>
-<span class="go"> CA certificate file: none</span>
-<span class="go"> Trusted certificates directory : /etc/grid-security/certificates</span>
-<span class="go"> Proxy certificate file : /tmp/x509up_u20003</span>
-<span class="go"> User certificate file: /home/user/.globus/usercred.p12</span>
-<span class="go"> User key file: /home/user/.globus/usercred.p12</span>
-<span class="go">Output to /tmp/x509up_u20003</span>
-<span class="go">Enter GRID pass phrase for this identity:</span>
-<span class="go">Your identity: /DC=org/DC=doegrids/OU=People/CN=First Lastname 12345</span>
-<span class="go">Using configuration file /home/marco/.glite/vomses</span>
-<span class="go">Using configuration file /etc/vomses</span>
-<span class="go">Creating temporary proxy to /tmp/tmp_x509up_u20003_17448 ..........................++++++</span>
-<span class="go">...................++++++</span>
-<span class="go"> Done</span>
-<span class="go">Contacting  voms.opensciencegrid.org:15027 [/DC=org/DC=doegrids/OU=Services/CN=host/voms.opensciencegrid.org] &quot;osg&quot; Failed</span>
-
-<span class="go">Error: Error during SSL handshake:Either proxy or user certificate are expired.</span>
-
-<span class="go">None of the contacted servers for osg were capable</span>
-<span class="go">of returning a valid AC for the user.</span>
-</pre></div>
-
-
-<p>To solve the problem split the bundle in the two PEM files as documented in the <a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">referenced document</a>, so that the embedded CA chain is not used.</p>
-<h2 id="renewing-your-osg-user-certificate">Renewing your OSG user certificate<a class="headerlink" href="#renewing-your-osg-user-certificate" title="Permanent link">&para;</a></h2>
-<p>Your OSG user certificate can be renewed through the
-<a href="https://oim.opensciencegrid.org/oim/certificateuser">OIM Web Interface</a>
-or through the <a href="../../security/certificate-management#osg-pki-command-line-clients">command line interface</a>:</p>
-<div class="codehilite"><pre><span></span>user@host $ osg-user-cert-renew
-</pre></div>
-
-
-<h3 id="issues-renewing-your-osg-user-certificate">Issues renewing your OSG user certificate<a class="headerlink" href="#issues-renewing-your-osg-user-certificate" title="Permanent link">&para;</a></h3>
-<p>One requirement for renewing your OSG user certificate is that your identity must be vetted within the last 5 years.
-You can see whether this requirement is met for your user certificate when <em>logged in</em> to the
-<a href="https://oim.opensciencegrid.org/oim/certificateuser">OIM Web Interface</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>When using the OIM Web Interface, make sure you are logged in and your name appears in the upper right corner.
-If it shows "Login" instead of your name, click it to log in.</p>
-</div>
-<p>When you click on your user certificate, under the Renew tab, you will see a line item for
-"This certificate was approved within the last 5 years".
-If there is a red X on this line with no other red X's, then you will have to request a new certificate instead of
-renewing it.
-Your two options for requesting a new certificate are:</p>
-<ul>
-<li><a href="#getting-a-certificate-from-cilogon">Request a certificate issued by the CILogon Basic CA</a> (preferred)</li>
-<li>
-<p>If you need to keep your DN, or for whatever other reason you cannot use a CILogon Basic certificate, you will need to
-  revoke and renew your user certificate:</p>
-<div class="admonition danger">
-<p class="admonition-title">Danger</p>
-<p>With this method, there is a risk that you may end up without a valid certificate.
-After revocation, if your sponsor is unresponsive past the May 31, 2018 OSG CA service retirement, your previous
-certificate will no longer be valid and you won't be able to request a new certificate.</p>
-</div>
+<h3 id="certificate-formats">Certificate formats<a class="headerlink" href="#certificate-formats" title="Permanent link">&para;</a></h3>
+<p>Your user certficate can be stored in a few different formats.
+The two most common formats used in OSG are the <a href="https://en.wikipedia.org/wiki/PKCS_12">PKCS12</a> and
+<a href="https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail">PEM</a> formats.
+In the PEM format, your user certificate is stored in two separate files: one for the certificate and another for the
+private key.
+The PKCS12 format stores the certificate and private key in a single file along with an optional certificate chain.
+Most OSG user tools will work with both but will try to use PEM files first.   </p>
+<p>To convert a PKCS12 file to  PEM files, do the following.  </p>
 <ol>
-<li>Log in (your name should appear on the top right), and select your user certificate from the list in the
-   <a href="https://oim.opensciencegrid.org/oim/certificateuser">OIM Web Interface</a>.</li>
-<li>In a separate tab, open the <a href="https://oim.opensciencegrid.org/oim/certificaterequestuser">+Request New</a> page.
-   We recommend opening the <code>Request New</code> page in a separate tab before revoking, in order to ensure that your CN gets
-   correctly populated in the <code>Request New</code> page.
-   Also, to ensure a prompt response, be sure that you select a <code>Virtual Organization</code> that you are associated with and
-   a <code>Sponsor</code> who will be able to quickly verify your identity.</li>
-<li>Back in the first tab, with your user certificate selected, click the <code>Revoke</code> tab, and enter an explanation that you are
-   revoking in order to re-request your certificate.  Then click the red <code>Revoke</code> button.</li>
-<li>In the separate tab, fill out the rest of the User Certificate Request form and click <code>Submit</code>.</li>
-</ol>
+<li>
+<p>First, extract your user certificate from your PKCS12 file by running the following command.  You'll be prompted for the password you used to create the certificate. The invocation assumes that the PKCS12 file is called <code>usercred.p12</code>.  After running, the PEM certificate will be written to <code>usercert.pem</code>. </p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> openssl pkcs12 -in usercred.p12 -out usercert.pem -nodes -clcerts -nokeys
+<span class="go">Enter Import Password:</span>
+<span class="go">MAC verified OK</span>
+</pre></div>
+
+
 </li>
-</ul>
+<li>
+<p>Second, extract the private key by running the following command. You'll be prompted for two different passwords.  The first prompt will be for the password that you used to create the certficate.  The second prompt will be for the password that will encrypt the PEM certificate that will be created.  As before, the invocation assumes that your PKCS12 certificate is located in <code>usercred.p12</code>. After running, the PEM certificate with your private key will be written to <code>userkey.pem</code>.</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> openssl pkcs12 -in usercred.p12 -out userkey.pem  -nocerts
+<span class="go">Enter Import Password:</span>
+<span class="go">MAC verified OK</span>
+<span class="go">Enter PEM pass phrase:</span>
+<span class="go">Verifying - Enter PEM pass phrase:</span>
+</pre></div>
+
+
+</li>
+</ol>
 <h2 id="revoking-your-user-certificate">Revoking your user certificate<a class="headerlink" href="#revoking-your-user-certificate" title="Permanent link">&para;</a></h2>
 <p>If the security of your certificate or private key has been compromised, you have a responsibility to revoke the certificate.
 In addition, if your name or email address changes, you must revoke your certificate and get a new one with the correct
 information.</p>
-<p>If you have an OSG issued certifiacte, you can follow the steps <a href="../../security/certificate-management#osg-user-cert-revoke">here</a> to revoke your certificate.
-If you have a CILogon issued certificate, contact <a href="mailto:ca@cilogon.org">ca@cilogon.org</a> in order revoke your certificate.</p>
+<p>If you have a CILogon issued certificate, contact <a href="mailto:ca@cilogon.org">ca@cilogon.org</a> in order revoke your certificate.
+If you received a certificate from another CA, please contact the CA to intiate a certificate revocation.</p>
 <h2 id="getting-a-certificate-from-a-service-provider-with-cigetcert">Getting a Certificate from a Service Provider with cigetcert<a class="headerlink" href="#getting-a-certificate-from-a-service-provider-with-cigetcert" title="Permanent link">&para;</a></h2>
 <p>You may also get a user certificate from a SAML 2.0 Service Provider such as your home institution or XSEDE.
 This kind of certificate is short-lived, typically valid only for a week.
@@ -2002,6 +1883,8 @@ Push notifications using the Duo Mobile app are required.</p>
 You will get prompted to "Enter XSEDE Kerberos Password."
 Enter the password for your account at portal.xsede.org.
 You should then get a 2FA authentication request with Duo Mobile; once you accept this, <code>cigetcert</code> will issue the certificate.</p>
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
+<p>To get assistance, please use the <a href="../../common/help">this page</a>.</p>
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">Useful Documentation.OpenSSL commands (from NCSA)</a> - e.g. how to convert the format of your certificate.</li>
