@@ -47,67 +47,48 @@ continue with the instructions below.
 If your institution is not in the list, Let's Encrypt certificates do not meet your needs, and you do not have access to
 another IGTF CA subscription, please [contact us](/common/help.md).
 
-1. Generate a Certificate Signing Request (CSR) and private key:
+As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-    1. Create a custom openssl config file, `incommon.conf`, using your institution's information for the
-       different fields in the `[ dn ]` section, and the desired hostname for the `CN` field.
+- Ensure the host has [a supported operating system](/release/supported_platforms)
+- Obtain root access to the host
+- Prepare the [required Yum repositories](/common/yum)
 
-            :::console
-            [ req ]
-            default_bits = 2048
-            prompt = no
-            encrypt_key = no
-            default_md = sha256
-            distinguished_name = dn
+From a host that meets the above requirements, follow the instructions below to request a new host certificate:
 
-            [ dn ]
-            C = %RED%US%ENDCOLOR%
-            ST = %RED%Wisconsin%ENDCOLOR%
-            L = %RED%Madison%ENDCOLOR%
-            O = %RED%University of Wisconsin-Madison%ENDCOLOR%
-            CN = %RED%voms.opensciencegrid.org%ENDCOLOR%
-
-
-        !!! note
-            Your institution may require additional information in the request.
-            Try using the CSR generated above in your initial request, and if necessary add additional fields to the
-            `[ dn ]` section of your config file.
-
-
-    1. If you need to generate a CSR with Subject Alternative Names (SAN), add these lines to your `incommon.conf`,
-       with as many alternate DNS entries as needed in the `[ alt_names ]` section:
-
-            :::console
-            [ req ]
-            req_extensions = req_ext
-
-            [ req_ext ]
-            subjectAltName = @alt_names
-
-            [ alt_names ]
-            DNS.1 = %RED%server1.example.com%ENDCOLOR%
-            DNS.2 = %RED%<SAN 2>%ENDCOLOR%
-            [...]
-            DNS.%RED%<N> = <SAN N>%ENDCOLOR%
-
-    1. Then, generate the CSR and private key:
-
-            :::console
-            root@server # openssl req -new -config incommon.conf -keyout incommon.key -out incommon.csr
-
-    1. And verify the new CSR file:
-
-            :::console
-            root@server # openssl req -text -noout -verify -in incommon.csr
-
-1. Set the permissions on the private key:
+1. Install the `osg-pki-tools`:
 
         :::console
-        root@server # chmod 0600 incommon.key
+        root@host # yum install osg-pki-tools
+
+1. Generate a Certificate Signing Request (CSR) and private key using the `osg-cert-request` tool:
+
+        :::console
+        user@host $ osg-cert-request --hostname <HOSTNAME> \
+                     --country <COUNTRY> \
+                     --state <STATE> \
+                     --locality <LOCALITY> \
+                     --organization <ORGANIZATION>
+
+    You may also add [DNS Subject Alternative Names](https://en.wikipedia.org/wiki/Subject_Alternative_Name) (SAN) to
+    the request by specifying any number of `--altname <SAN>`.
+    For example, the following generates a CSR for `test.opensciencegrid.org` with `foo.opensciencegrid.org` and
+    `bar.opensciencegrid.org` as SANs:
+
+        :::console
+        user@host $ osg-cert-request --hostname test.opensciencegrid.org \
+                     --country US \
+                     --state Wisconsin \
+                     --locality Madison \
+                     --organization 'University of Wisconsin' \
+                     --altname foo.opensciencegrid.org \
+                     --altname bar.opensciencegrid.org
+
+    If successful, the CSR will be named `<HOSTNAME>.req` and the private key will be named `<HOSTNAME>-key.pem`.
+    Additional options and descriptions can be found [here](https://github.com/opensciencegrid/osg-pki-tools#options).
 
 1. Find your institution-specific InCommon contact
-   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/))
-   and submit the CSR that you generated above, asking for the certificate to be signed by the InCommon IGTF CA
+   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/)),
+   submit the CSR that you generated above, and ask for the certificate to be signed by the InCommon IGTF CA.
 1. After the certificate has been issued by your institution, download it on its intended host and copy over the key you
 generated above.
 1. Verify that the issuer `CN` field is ` InCommon IGTF Server CA`:
