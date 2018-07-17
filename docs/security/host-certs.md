@@ -20,14 +20,15 @@ We recommend requesting host certificates from one of the following CA services:
   see the [security team's position on Let's Encrypt](https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/)
   for more details
 - If neither of the above options work for your site, the OSG also accepts all
-  [IGTF-accredited CAs](http://repo.opensciencegrid.org/pacman/cadist/).
+  [IGTF-accredited CAs](https://repo.opensciencegrid.org/cadist/).
 
 Use this page to learn how to request and install host certificates on an OSG resource.
 
 Before Starting
 ---------------
 
-Before requesting a new host certificate, use `openssl` to check if your host already has a valid certificate.
+Before requesting a new host certificate, use `openssl` to check if your host already has a valid certificate, i.e. the
+present is between `notBefore` and `notAfter` dates and times.
 If so, you may safely skip this document:
 
 ``` console
@@ -37,6 +38,8 @@ issuer=/DC=org/DC=cilogon/C=US/O=CILogon/CN=CILogon OSG CA 1
 notBefore=Jan  4 21:08:09 2010 GMT
 notAfter=Jan  4 21:08:09 2011 GMT
 ```
+
+If you are using OpenSSL 1.1, you may notice minor formatting differences.
 
 Requesting InCommon Host Certificates
 -------------------------------------
@@ -179,7 +182,7 @@ qualified domain name.
 
 For Let's Encrypt certificates, see [this section](#renewing-lets-encrypt-host-certificates)
 
-There is no separate renewal procedure.
+For other certificates, there is no separate renewal procedure.
 Instead, request a new certificate using one of the methods above.
 
 ### How can I check if I have a host certificate installed already? 
