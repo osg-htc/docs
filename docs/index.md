@@ -57,7 +57,7 @@ If necessary, provision all OSG hosts that are in your site plan that do not exi
 ### Installing and Managing Certificates for Site Security ###
 
 -   [Installing the grid certificate authorities (CAs)](common/ca)
--   [How do I get PKI host and service X.509 certificates?](security/host-certs)
+-   [How do I get X.509 host certificates?](security/host-certs)
 -   [Automatically updating the grid certificate authorities (CAs)](security/certificate-management)
 -   [OSG PKI command line client reference](security/certificate-management)
 

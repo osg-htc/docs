@@ -3,8 +3,7 @@ User Certificates
 
 !!! note
     This document describes how to get and set up a **personal** certificate (also called a grid user certificate).
-    For instructions on getting **service** and **host** certificates, **you're in the wrong place**. See [Get Host and Service Certificates](host-certs.md).
-
+    For instructions on how to get **host** certificates, see the [Host Certificates document](host-certs.md).
 
 Getting a User Certificate
 --------------------------
