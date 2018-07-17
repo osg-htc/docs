@@ -1,6 +1,0 @@
-%META:TOPICINFO{author="NehaSharma" date="1285882082" format="1.1" version="1.8"}%
-%META:TOPICPARENT{name="Storage"}%
-%DOC_STATUS_TABLE%
-%RED%DEPRECATED%RED%
-
-%META:TOPICMOVED{by="TedHesselroth" date="1271192816" from="Storage.SpaceResServerSetup" to="ReleaseDocumentation.SpaceResServerSetup"}%

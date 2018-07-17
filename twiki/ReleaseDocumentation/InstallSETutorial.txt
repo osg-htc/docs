@@ -1,3 +1,0 @@
-%META:TOPICINFO{author="TedHesselroth" date="1270496686" format="1.1" version="1.2"}%
-%META:TOPICPARENT{name="WebHome"}%
-deprecated
