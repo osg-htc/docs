@@ -1,3 +1,0 @@
-%META:TOPICINFO{author="TedHesselroth" date="1270495931" format="1.1" version="1.3"}%
-%META:TOPICPARENT{name="BestmanGatewayXrootd"}%
-deprecated
