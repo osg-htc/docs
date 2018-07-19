@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://opensciencegrid.github.io/docs/common/ca/">
+        <link rel="canonical" href="https://opensciencegrid.github.io/docs/common/registration/">
       
       
       
@@ -38,7 +38,7 @@
     
     
       
-        <title>CA Certificates - OSG Documentation</title>
+        <title>Registration - OSG Documentation</title>
       
     
     
@@ -94,7 +94,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#installing-certificate-authorities-cas" tabindex="1" class="md-skip">
+      <a href="#registering-in-the-osg" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -120,7 +120,7 @@
                 OSG Documentation
               </span>
               <span class="md-header-nav__topic">
-                CA Certificates
+                Registration
               </span>
             
           
@@ -832,157 +832,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        CA Certificates
-      </label>
-    
-    <a href="./" title="CA Certificates" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../ca/" title="CA Certificates" class="md-nav__link">
       CA Certificates
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#installing-ca-certificates" title="Installing CA Certificates" class="md-nav__link">
-    Installing CA Certificates
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#option-1-install-an-rpm-for-a-specific-set-of-ca-certificates" title="Option 1: Install an RPM for a specific set of CA certificates" class="md-nav__link">
-    Option 1: Install an RPM for a specific set of CA certificates
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#option-2-install-osg-ca-scripts" title="Option 2: Install osg-ca-scripts" class="md-nav__link">
-    Option 2: Install osg-ca-scripts
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#option-3-site-managed-cas" title="Option 3: Site-managed CAs" class="md-nav__link">
-    Option 3: Site-managed CAs
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#installing-other-cas" title="Installing other CAs" class="md-nav__link">
-    Installing other CAs
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#managing-certificate-revocation-lists" title="Managing Certificate Revocation Lists" class="md-nav__link">
-    Managing Certificate Revocation Lists
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#optional-configuring-fetch-crl" title="Optional: configuring fetch-crl" class="md-nav__link">
-    Optional: configuring fetch-crl
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#changing-the-frequency-of-fetch-crl-cron" title="Changing the frequency of fetch-crl-cron" class="md-nav__link">
-    Changing the frequency of fetch-crl-cron
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#logging-with-syslog" title="Logging with syslog" class="md-nav__link">
-    Logging with syslog
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#managing-fetch-crl-services" title="Managing fetch-crl services" class="md-nav__link">
-    Managing fetch-crl services
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" title="References" class="md-nav__link">
-    References
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#configuration-files" title="Configuration files" class="md-nav__link">
-    Configuration files
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#logs-files" title="Logs files" class="md-nav__link">
-    Logs files
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1014,11 +868,76 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../registration/" title="Registration" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Registration
+      </label>
+    
+    <a href="./" title="Registration" class="md-nav__link md-nav__link--active">
       Registration
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-register" title="How to Register" class="md-nav__link">
+    How to Register
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-registrations" title="New registrations" class="md-nav__link">
+    New registrations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updating-existing-registrations" title="Updating existing registrations" class="md-nav__link">
+    Updating existing registrations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-register-downtime" title="How to Register Downtime" class="md-nav__link">
+    How to Register Downtime
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1708,111 +1627,30 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#installing-ca-certificates" title="Installing CA Certificates" class="md-nav__link">
-    Installing CA Certificates
+  <a href="#how-to-register" title="How to Register" class="md-nav__link">
+    How to Register
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#option-1-install-an-rpm-for-a-specific-set-of-ca-certificates" title="Option 1: Install an RPM for a specific set of CA certificates" class="md-nav__link">
-    Option 1: Install an RPM for a specific set of CA certificates
+  <a href="#new-registrations" title="New registrations" class="md-nav__link">
+    New registrations
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-2-install-osg-ca-scripts" title="Option 2: Install osg-ca-scripts" class="md-nav__link">
-    Option 2: Install osg-ca-scripts
+  <a href="#updating-existing-registrations" title="Updating existing registrations" class="md-nav__link">
+    Updating existing registrations
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-3-site-managed-cas" title="Option 3: Site-managed CAs" class="md-nav__link">
-    Option 3: Site-managed CAs
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#installing-other-cas" title="Installing other CAs" class="md-nav__link">
-    Installing other CAs
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#managing-certificate-revocation-lists" title="Managing Certificate Revocation Lists" class="md-nav__link">
-    Managing Certificate Revocation Lists
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#optional-configuring-fetch-crl" title="Optional: configuring fetch-crl" class="md-nav__link">
-    Optional: configuring fetch-crl
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#changing-the-frequency-of-fetch-crl-cron" title="Changing the frequency of fetch-crl-cron" class="md-nav__link">
-    Changing the frequency of fetch-crl-cron
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#logging-with-syslog" title="Logging with syslog" class="md-nav__link">
-    Logging with syslog
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#managing-fetch-crl-services" title="Managing fetch-crl services" class="md-nav__link">
-    Managing fetch-crl services
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" title="References" class="md-nav__link">
-    References
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#configuration-files" title="Configuration files" class="md-nav__link">
-    Configuration files
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#logs-files" title="Logs files" class="md-nav__link">
-    Logs files
+  <a href="#how-to-register-downtime" title="How to Register Downtime" class="md-nav__link">
+    How to Register Downtime
   </a>
   
 </li>
@@ -1838,366 +1676,106 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/common/ca.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/common/registration.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="installing-certificate-authorities-cas">Installing Certificate Authorities (CAs)<a class="headerlink" href="#installing-certificate-authorities-cas" title="Permanent link">&para;</a></h1>
-<p>The <a href="https://en.wikipedia.org/wiki/Certificate_authority">certificate authorities</a> (CAs) provide the trust roots for the
-<a href="https://en.wikipedia.org/wiki/Public_key_infrastructure">public key infrastructure</a> OSG uses to maintain integrity of its sites and services.
-This document provides details of various options to install the Certificate Authority (CA) certificates and have up-to-date
-<a href="https://en.wikipedia.org/wiki/Certificate_revocation_list">certificate revocation lists</a> (CRLs) on your OSG hosts.</p>
-<p>We provide three options for installing CA certificates that offer varying levels of control:</p>
-<ol>
-<li>Install an RPM for a specific set of CA certificates (<em>default</em>)</li>
-<li>Install <code>osg-ca-scripts</code>, a set of scripts that provide fine-grained CA management</li>
-<li>Install an RPM that doesn't install <strong>any</strong> CAs.
-    This is useful if you'd like to manage CAs yourself while satisfying RPM dependencies.</li>
-</ol>
-<p>Prior to following the instructions on this page, you must enable our <a href="../yum/">yum repositories</a></p>
-<h2 id="installing-ca-certificates">Installing CA Certificates<a class="headerlink" href="#installing-ca-certificates" title="Permanent link">&para;</a></h2>
-<p>Please choose one of the three options to install CA certificates.</p>
-<h3 id="option-1-install-an-rpm-for-a-specific-set-of-ca-certificates">Option 1: Install an RPM for a specific set of CA certificates<a class="headerlink" href="#option-1-install-an-rpm-for-a-specific-set-of-ca-certificates" title="Permanent link">&para;</a></h3>
+                <h1 id="registering-in-the-osg">Registering in the OSG<a class="headerlink" href="#registering-in-the-osg" title="Permanent link">&para;</a></h1>
+<p>The OSG keeps a registry containing active projects, virtual organizations (VOs), resources, and resource
+downtimes in the <a href="https://github.com/opensciencegrid/topology/">topology Github repository</a>.
+This registry is used for <a href="https://gracc.opensciencegrid.org">accounting data</a>, contact information, and resource
+availability, particularly if your site is part of the <a href="http://wlcg.web.cern.ch/">World LHC Computing Grid</a> (WLCG).</p>
+<p>Use this page to learn how to register information in the OSG.</p>
+<h2 id="how-to-register">How to Register<a class="headerlink" href="#how-to-register" title="Permanent link">&para;</a></h2>
+<p>OSG registry information is stored in <a href="https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html">YAML files</a>
+in the topology Github repository.
+The formatting and locations of the YAML files for the different types of registration data are described
+in the following table:</p>
+<table>
+<thead>
+<tr>
+<th>The following data...</th>
+<th>Is defined by template file...</th>
+<th>And should be copied to location, relative to the Git root directory...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Project</td>
+<td><code>template-project.yaml</code></td>
+<td><code>projects/&lt;PROJECT NAME&gt;.yaml</code></td>
+</tr>
+<tr>
+<td>Resource Downtime</td>
+<td><code>template-downtime.yaml</code></td>
+<td><code>topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP NAME&gt;_downtime.yaml</code></td>
+</tr>
+<tr>
+<td>Resource Topology</td>
+<td><code>template-resourcegroup.yaml</code></td>
+<td><code>topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP NAME&gt;.yaml</code></td>
+</tr>
+<tr>
+<td>Virtual Organization</td>
+<td><code>template-virtual-organization.yaml</code></td>
+<td><code>virtual-organizations/&lt;VO NAME&gt;.yaml</code></td>
+</tr>
+</tbody>
+</table>
+<p>The comments in the template files explain the structure and the meaning of the data.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This option is the default if you install OSG software without pre-installing CAs.
-For example, <code>yum install osg-ce</code> will bring in <code>osg-ca-certs</code> by default.</p>
+<p>File and directory names <em>must</em> match the name of your project, VO, facility, site, or resource group, as
+appropriate.
+This includes case and spaces.</p>
 </div>
-<p>In the OSG repositories, you will find two different sets of predefined CA certificates:</p>
+<h3 id="new-registrations">New registrations<a class="headerlink" href="#new-registrations" title="Permanent link">&para;</a></h3>
+<p>To create a new resource group, project, or VO, please create the YAML file according to the table above, and use the
+corresponding template file to fill in the appropriate information.
+If you do not feel comfortable creating the new file yourself, send an email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> with
+details about your resource group, project, or VO.</p>
+<h3 id="updating-existing-registrations">Updating existing registrations<a class="headerlink" href="#updating-existing-registrations" title="Permanent link">&para;</a></h3>
+<p>To update the data for your site resources, project, or VO, make and submit your changes using one of the following
+methods:</p>
 <ul>
-<li>(<em>default</em>) The OSG CA certificates. This is similar to the IGTF set but may have a small number of additions or deletions</li>
-<li>The <a href="http://www.igtf.net/">IGTF</a> CA certificates</li>
+<li><a href="https://help.github.com/articles/editing-files-in-your-repository/">Modify the corresponding YAML file</a> and submit
+  your changes as a GitHub pull request.</li>
+<li>Send an email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> requesting your desired changes.</li>
 </ul>
-<p>See <a href="https://opensciencegrid.org/security/CaDistribution/">this page</a> for details of the contents of the OSG CA package.</p>
-<table>
-<thead>
-<tr>
-<th><strong>If you chose...</strong></th>
-<th><strong>Then run the following command...</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>OSG CA certificates</td>
-<td><code>yum install osg-ca-certs</code></td>
-</tr>
-<tr>
-<td>IGTF CA certificates</td>
-<td><code>yum install igtf-ca-certs</code></td>
-</tr>
-</tbody>
-</table>
-<p>To automatically keep your RPM installation of CAs up to date, we recommend the <a href="../../security/certificate-management#osg-ca-certificates-updater">OSG CA certificates updater</a> service.</p>
-<h3 id="option-2-install-osg-ca-scripts">Option 2: Install osg-ca-scripts<a class="headerlink" href="#option-2-install-osg-ca-scripts" title="Permanent link">&para;</a></h3>
-<p>The <code>osg-ca-scripts</code> package provides scripts to install and update predefined sets of CAs with the ability to add or remove specific CAs. </p>
+<p>For definitions for the various fields, consult the corresponding template file for the type of data you are updating.</p>
+<h3 id="how-to-register-downtime">How to Register Downtime<a class="headerlink" href="#how-to-register-downtime" title="Permanent link">&para;</a></h3>
+<p>Downtime is a period of time for which one or more services you provide are unavailable.
+You should register downtime if one of these is true:</p>
 <ul>
-<li>The OSG CA certificates. This is similar to the IGTF set but may have a small number of additions or deletions</li>
-<li>The <a href="http://www.igtf.net/">IGTF</a> CA certificates</li>
+<li>your site is part of the WLCG</li>
+<li>
+<p>your CE is one of the services affected</p>
+</li>
+<li>
+<p>Find the file that should contain downtime information about resources you own.
+   It is named <code>topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP NAME&gt;_downtime.yaml</code>.</p>
+</li>
 </ul>
-<p>See <a href="https://opensciencegrid.org/security/CaDistribution/">this page</a> for details of the contents of the OSG CA package.</p>
+<p>For example, <code>topology/University of Wisconsin/GLOW/GLOW.yaml</code> has the corresponding downtime file
+   <code>topology/University of Wisconsin/GLOW/GLOW_downtime.yaml</code>.</p>
+<p>If the downtime file does not exist, create it.</p>
+<p>To find out what resource group a host is in, search for the FQDN of the host with something like:</p>
+<p><code>grep -F "&lt;FQDN&gt;" topology/*/*/*.yaml | grep -Fv _downtime.yaml | grep -Fv SITE.yaml</code></p>
+<p>If the above command returns nothing, then the host is not registered in the topology data
+   and you don't need to register downtime for it.</p>
 <ol>
 <li>
-<p>Install the <code>osg-ca-scripts</code> package:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-ca-scripts
-</pre></div>
-
-
+<p>Add the contents of <code>template-downtime.yaml</code> to the end of the downtime file in the path above.</p>
 </li>
 <li>
-<p>Choose and install the CA certificate set:</p>
-<table>
-<thead>
-<tr>
-<th><strong>If you choose...</strong></th>
-<th><strong>Then run the following command...</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>OSG CA certificates</td>
-<td><code>osg-ca-manage setupCA --location root --url osg</code></td>
-</tr>
-<tr>
-<td>IGTF CA certificates</td>
-<td><code>osg-ca-manage setupCA --location root --url igtf</code></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>Enable the <code>osg-update-certs-cron</code> service to enable periodic CA updates. As a reminder, here are common service commands (all run as <code>root</code>):</p>
-<table>
-<thead>
-<tr>
-<th align="left">To...</th>
-<th align="left">On EL6, run the command...</th>
-<th align="left">On EL7, run the command...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Start a service</td>
-<td align="left"><code>service &lt;SERVICE-NAME&gt; start</code></td>
-<td align="left"><code>systemctl start &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-<tr>
-<td align="left">Stop a  service</td>
-<td align="left"><code>service &lt;SERVICE-NAME&gt; stop</code></td>
-<td align="left"><code>systemctl stop &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-<tr>
-<td align="left">Enable a service to start on boot</td>
-<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; on</code></td>
-<td align="left"><code>systemctl enable &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-<tr>
-<td align="left">Disable a service from starting on boot</td>
-<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; off</code></td>
-<td align="left"><code>systemctl disable &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>(Optional) To add a new CA:</p>
-<div class="codehilite"><pre><span></span>osg-ca-manage add [--dir &lt;local_dir&gt;] --hash &lt;CA-HASH&gt;
-</pre></div>
-
-
-</li>
-<li>
-<p>(Optional) To remove a CA</p>
-<div class="codehilite"><pre><span></span>osg-ca-manage remove --hash &lt;CA-HASH&gt;
-</pre></div>
-
-
+<p>Follow the instructions in the comments to fill out the necessary fields.</p>
 </li>
 </ol>
-<p>A complete set of options available though <code>osg-ca-manage</code> command, can be found in the <a href="../../security/certificate-management#managing-cas">osg-ca-manage documentation</a></p>
-<h3 id="option-3-site-managed-cas">Option 3: Site-managed CAs<a class="headerlink" href="#option-3-site-managed-cas" title="Permanent link">&para;</a></h3>
-<p>If you want to handle the list of CAs completely internally to your site, you can utilize the <code>empty-ca-certs</code> RPM to satisfy
-RPM dependencies while not actually installing any CAs. To install this RPM, run the following command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install empty-ca-certs –-enablerepo<span class="o">=</span>osg-empty
-</pre></div>
-
-
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>If you choose this option, you are responsible for installing and maintaining the CA certificates. They must be installed in <code>/etc/grid-security/certificates</code>, or a symlink must be made from that location to the directory that contains the CA certificates.</p>
-</div>
-<h3 id="installing-other-cas">Installing other CAs<a class="headerlink" href="#installing-other-cas" title="Permanent link">&para;</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The <code>cilogon-openid</code> CA is only distributed in OSG 3.3.  Support will be removed by March 2018.</p>
-</div>
-<p>In addition to the above CAs, you can install other CAs via RPM. These only work with the RPMs that provide CAs (that is, <code>osg-ca-certs</code> and the like, but not <code>osg-ca-scripts</code>.) They are in addition to the above RPMs, so do not only install these extra CAs.</p>
-<table>
-<thead>
-<tr>
-<th align="left"><strong>Set of CAs</strong></th>
-<th align="left"><strong>RPM name</strong></th>
-<th align="left"><strong>Installation command (as root)</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">cilogon-openid</td>
-<td align="left">cilogon-ca-certs</td>
-<td align="left"><code>yum install cilogon-ca-certs</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="managing-certificate-revocation-lists">Managing Certificate Revocation Lists<a class="headerlink" href="#managing-certificate-revocation-lists" title="Permanent link">&para;</a></h2>
-<p>In addition to CA certificates, you must have updated Certificate Revocation Lists (CRLs). CRLs contain certificate blacklists that OSG software uses to ensure that your hosts are only talking to valid clients or servers. To maintain up to date CAs, you will need to run the <code>fetch-crl</code> services. </p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Normally <code>fetch-crl</code> is installed when you install the rest of the software and you do not need to explicitly install it.
-If you do wish to install it manually, run the following command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install fetch-crl
-</pre></div>
-
-
-</div>
-<p>If you do not wish to change the frequency of <code>fetch-crl</code> updates (default: every 6 hours) or use syslog for <code>fetch-crl</code> output, 
-<a href="#managing-fetch-crl-services">skip to the service management section</a></p>
-<h3 id="optional-configuring-fetch-crl">Optional: configuring <code>fetch-crl</code><a class="headerlink" href="#optional-configuring-fetch-crl" title="Permanent link">&para;</a></h3>
-<p>The following sub-sections contain optional configuration instructions.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Note that the <code>nosymlinks</code> option in the configuration files refers to ignoring links within the certificates directory (e.g. two different names for the same file). It is perfectly fine if the path of the CA certificates directory itself (<code>infodir</code>) is a link to a directory.</p>
-</div>
-<h4 id="changing-the-frequency-of-fetch-crl-cron">Changing the frequency of <code>fetch-crl-cron</code><a class="headerlink" href="#changing-the-frequency-of-fetch-crl-cron" title="Permanent link">&para;</a></h4>
-<p>To modify the times that <code>fetch-crl-cron</code> runs, edit <code>/etc/cron.d/fetch-crl</code>.</p>
-<h4 id="logging-with-syslog">Logging with syslog<a class="headerlink" href="#logging-with-syslog" title="Permanent link">&para;</a></h4>
-<p><code>fetch-crl</code> can produce quite a bit of output when run in verbose mode. To send <code>fetch-crl</code> output to syslog, use the following instructions:</p>
+<p><strong>Note:</strong> Make sure the info you add matches the formatting and indentation of the template or the other downtime entries in the file.
+   In particular, make sure no additional indentation gets added when pasting in the new data.</p>
 <ol>
-<li>
-<p>Change the configuration file to enable syslog:</p>
-<div class="codehilite"><pre><span></span>logmode = syslog
-syslogfacility = daemon
-</pre></div>
-
-
-</li>
-<li>
-<p>Make sure the file <code>/var/log/daemon</code> exists, e.g. touching the file</p>
-</li>
-<li>Change <code>/etc/logrotate.d</code> files to rotate it</li>
+<li>Submit your changes as a GitHub pull request.</li>
 </ol>
-<h3 id="managing-fetch-crl-services">Managing <code>fetch-crl</code> services<a class="headerlink" href="#managing-fetch-crl-services" title="Permanent link">&para;</a></h3>
-<p><code>fetch-crl</code> is installed as two different system services. The fetch-crl-boot service runs <code>fetch-crl</code> and is intended to only be enabled or disabled. The <code>fetch-crl-cron</code> service runs <code>fetch-crl</code> every 6 hours (with a random sleep time included). Both services are disabled by default. At the very minimum, the <code>fetch-crl-cron</code> service needs to be enabled and started, otherwise services will begin to fail as existing CRLs expire.</p>
-<table>
-<thead>
-<tr>
-<th align="left">Software</th>
-<th align="left">Service name</th>
-<th align="left">Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Fetch CRL</td>
-<td align="left"><code>fetch-crl-cron</code></td>
-<td align="left">Runs <code>fetch-crl</code> every 6 hours</td>
-</tr>
-<tr>
-<td align="left"></td>
-<td align="left"><code>fetch-crl-boot</code></td>
-<td align="left">Runs <code>fetch-crl</code> immediately</td>
-</tr>
-</tbody>
-</table>
-<p>Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as <code>root</code>):</p>
-<table>
-<thead>
-<tr>
-<th align="left">To...</th>
-<th align="left">On EL6, run the command...</th>
-<th align="left">On EL7, run the command...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Start a service</td>
-<td align="left"><code>service &lt;SERVICE-NAME&gt; start</code></td>
-<td align="left"><code>systemctl start &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-<tr>
-<td align="left">Stop a  service</td>
-<td align="left"><code>service &lt;SERVICE-NAME&gt; stop</code></td>
-<td align="left"><code>systemctl stop &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-<tr>
-<td align="left">Enable a service to start on boot</td>
-<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; on</code></td>
-<td align="left"><code>systemctl enable &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-<tr>
-<td align="left">Disable a service from starting on boot</td>
-<td align="left"><code>chkconfig &lt;SERVICE-NAME&gt; off</code></td>
-<td align="left"><code>systemctl disable &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
-<p>x509 certificates:</p>
-<ul>
-<li>Useful commands: <a href="http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html">http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html</a></li>
-<li>Install GSI authentication on a server: <a href="http://security.ncsa.illinois.edu/research/wssec/gsihttps/">http://security.ncsa.illinois.edu/research/wssec/gsihttps/</a></li>
-<li>Certificates how-to: <a href="http://www.nordugrid.org/documents/certificate_howto.html">http://www.nordugrid.org/documents/certificate_howto.html</a></li>
-</ul>
-<p>Verifying certificates:</p>
-<ul>
-<li><a href="http://gagravarr.org/writing/openssl-certs/others.shtml">http://gagravarr.org/writing/openssl-certs/others.shtml</a></li>
-<li><a href="http://www.cyberciti.biz/faq/test-ssl-certificates-diagnosis-ssl-certificate/">http://www.cyberciti.biz/faq/test-ssl-certificates-diagnosis-ssl-certificate/</a></li>
-<li><a href="http://www.cyberciti.biz/tips/debugging-ssl-communications-from-unix-shell-prompt.html">http://www.cyberciti.biz/tips/debugging-ssl-communications-from-unix-shell-prompt.html</a></li>
-</ul>
-<p>Related software:</p>
-<ul>
-<li><a href="../../security/certificate-management#managing-cas">osg-ca-manage</a></li>
-<li><a href="../../security/certificate-management#osg-ca-certificates-updater">osg-ca-certs-updater</a></li>
-</ul>
-<h3 id="configuration-files">Configuration files<a class="headerlink" href="#configuration-files" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th align="left">Package</th>
-<th align="left">File Description</th>
-<th align="left">Location</th>
-<th align="left">Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">All CA Packages</td>
-<td align="left">CA File Location</td>
-<td align="left"><code>/etc/grid-security/certificates</code></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">All CA Packages</td>
-<td align="left">Index files</td>
-<td align="left"><code>/etc/grid-security/certificates/INDEX.html</code> or <code>/etc/grid-security/certificates/INDEX.txt</code></td>
-<td align="left">Latest version also available at <a href="http://repo.opensciencegrid.org/pacman/cadist/">http://repo.opensciencegrid.org/pacman/cadist/</a></td>
-</tr>
-<tr>
-<td align="left">All CA Packages</td>
-<td align="left">Change Log</td>
-<td align="left"><code>/etc/grid-security/certificates/CHANGES</code></td>
-<td align="left">Latest version also available at <a href="http://repo.opensciencegrid.org/pacman/cadist/CHANGES">http://repo.opensciencegrid.org/pacman/cadist/CHANGES</a></td>
-</tr>
-<tr>
-<td align="left">osg-ca-certs or igtf-ca-certs</td>
-<td align="left">contain only CA files</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">osg-ca-scripts</td>
-<td align="left">Configuration File for osg-update-certs</td>
-<td align="left"><code>/etc/osg/osg-update-certs.conf</code></td>
-<td align="left">This file may be edited by hand, though it is recommended to use osg-ca-manage to set configuration parameters.</td>
-</tr>
-<tr>
-<td align="left">fetch-crl-3.x</td>
-<td align="left">Configuration file</td>
-<td align="left"><code>/etc/fetch-crl.conf</code></td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
-<p>The index and change log files contain a summary of all the CA distributed and their version.</p>
-<h3 id="logs-files">Logs files<a class="headerlink" href="#logs-files" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th align="left">Package</th>
-<th align="left">File Description</th>
-<th align="left">Location</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">osg-ca-scripts</td>
-<td align="left">Log file of osg-update-certs</td>
-<td align="left"><code>/var/log/osg-update-certs.log</code></td>
-</tr>
-<tr>
-<td align="left">osg-ca-scripts</td>
-<td align="left">Stdout of osg-update-certs</td>
-<td align="left"><code>/var/log/osg-ca-certs-status.system.out</code></td>
-</tr>
-<tr>
-<td align="left">osg-ca-scripts</td>
-<td align="left">Stdout of osg-ca-manage</td>
-<td align="left"><code>/var/log/osg-ca-manage.system.out</code></td>
-</tr>
-<tr>
-<td align="left">osg-ca-scripts</td>
-<td align="left">Stdout of initial CA setup</td>
-<td align="left"><code>/var/log/osg-setup-ca-certificates.system.out</code></td>
-</tr>
-</tbody>
-</table>
+<p>Alternatively, send an email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> requesting your desired changes.</p>
                 
                   
                 
@@ -2218,7 +1796,7 @@ syslogfacility = daemon
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../security/certificate-management/" title="Certificate Management Reference" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../other/configuration-with-osg-configure/" title="Configuration with OSG-Configure" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2227,19 +1805,19 @@ syslogfacility = daemon
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Certificate Management Reference
+                Configuration with OSG-Configure
               </span>
             </div>
           </a>
         
         
-          <a href="../yum/" title="Yum Repos" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../other/gsissh/" title="Install GSI-enabled SSH" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Yum Repos
+                Install GSI-enabled SSH
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
