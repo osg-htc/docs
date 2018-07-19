@@ -54,6 +54,7 @@ pages:
   - 'CA Certificates': 'common/ca.md'
   - 'Yum Repos': 'common/yum.md'
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
+  - 'Registration': 'common/registration.md'
 - Other:
   - 'Install GSI-enabled SSH': 'other/gsissh.md'
   - 'Install GlideinWMS Frontend': 'other/install-gwms-frontend.md'

@@ -136,3 +136,9 @@ Scale Up Site to Full Production
 --------------------------------
 
 After successfully running all the pilot jobs that are submitted by the test factory and verifying your site reports, your site will be deemed production ready. No action is required on your end, factory operations will start submitting pilot jobs from the production factory.
+
+Maintain the Site
+-----------------
+
+In order to continue receiving jobs from the OSG, you must [register](/common/registration.md) any publicly facing
+resources with OSG software: HTCondor-CE, Frontier Squid, GridFTP, and/or XRootD.
