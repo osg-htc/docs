@@ -11,8 +11,8 @@ Use this page to learn how to register information in the OSG.
 How to Register
 ---------------
 
-OSG registry information is stored in [YAML files](http://yaml.org/) in the topology Github
-repository.
+OSG registry information is stored in [YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
+in the topology Github repository.
 The formatting and locations of the YAML files for the different types of registration data are described
 in the following table:
 
