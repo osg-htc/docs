@@ -4,15 +4,14 @@ Registering in the OSG
 The OSG keeps a registry containing active projects, virtual organizations (VOs), resources, and resource
 downtimes in the [topology Github repository](https://github.com/opensciencegrid/topology/).
 This registry is used for [accounting data](https://gracc.opensciencegrid.org), contact information, and resource
-availability, particularly if your site is part of the [World LHC Computing Grid](https://en.wikipedia.org/wiki/Worldwide_LHC_Computing_Grid)
-(WLCG).
+availability, particularly if your site is part of the [World LHC Computing Grid](http://wlcg.web.cern.ch/) (WLCG).
 
-Use this page below to learn how to register in the OSG.
+Use this page to learn how to register information in the OSG.
 
 How to Register
 ---------------
 
-OSG registry information is stored in [YAML files](https://en.wikipedia.org/wiki/YAML) in the topology Github
+OSG registry information is stored in [YAML files](http://yaml.org/) in the topology Github
 repository.
 The formatting and locations of the YAML files for the different types of registration data are described
 in the following table:
