@@ -130,6 +130,10 @@ Verify OSG Software
 Before receiving real OSG work, your site needs to successfully run test jobs from our
 [GlideinWMS](http://glideinwms.fnal.gov/) factory and report usage to the [GRACC](https://gracc.opensciencegrid.org).
 
+
+If you haven't already, [register](/common/registration.md) any publicly facing resources with OSG software installed,
+including HTCondor-CE, Frontier Squid, GridFTP, and/or XRootD.
+
 ### Test locally ###
 
 It is useful to test *manual* submission of jobs from inside and outside of your site through your CE to your batch
@@ -161,8 +165,8 @@ To verify that your site is correctly reporting to the OSG, check
 (select your site from the drop-down box). If you have enabled the OSG VO, you can also check
 <http://flock.opensciencegrid.org/monitoring/condor/sites/all_1day.html>.
 
-Scale Up Site to Full Production
---------------------------------
+Scale Up to Full Production
+---------------------------
 
 After successfully running all the pilot jobs that are submitted by the test factory and verifying your site reports,
 your site will be deemed production ready.
@@ -171,5 +175,16 @@ No action is required on your end, factory operations will start submitting pilo
 Maintain the Site
 -----------------
 
-In order to continue receiving jobs from the OSG, you must [register](/common/registration.md) any publicly facing
-resources with OSG software: HTCondor-CE, Frontier Squid, GridFTP, and/or XRootD.
+In order to continue receiving jobs from the OSG, it is important to notify us of changes to your site.
+This includes:
+
+- OS version changes on the worker nodes
+- Policy changes regarding maximum walltime or memory usage
+- Scheduled or unscheduled [downtimes](/common/registration.md#how-to-register-downtime)
+- Site topology resource additions, modifications, or retirements ([see this documentation](/commmon/registration.md))
+- Changes to administrative or security staff for site contact purposes
+
+It is also important to keep your software and [data](/common/ca.md) up-to-date with the
+[latest OSG release](/release/overview.md).
+To stay abreast of software releases, we recommend subscribing to the <mailto:osg-sites@opensciencegrid.org> mailing
+list.
