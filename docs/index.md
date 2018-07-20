@@ -55,9 +55,6 @@ The general steps to installing an OSG site are:
    on your CE host
 1. Install the [Worker Node client](#adding-osg-software-to-worker-nodes) on your worker nodes.
 1. Install [optional software](#installing-and-configuring-other-services) to increase the capabilities of your site.
-1. [Test the OSG installation](#test-osg-software).
-1. Make your [site available to researchers](#start-glideinwms-pilot-submissions).
-1. Verify your [site's accounting](#verify-reporting-and-monitoring).
 
 !!! note
     For sites with more than a handful of worker nodes, it is recommended to use some sort of configuration management
@@ -127,25 +124,28 @@ installed [CVMFS](worker-node/install-cvmfs) on your worker nodes.
     -   [Install the RSV GlideinWMS Tester](monitoring/install-rsv-gwms-tester) if you want to test your front-end's
         ability to submit jobs to sites in the OSG
 
-Test OSG Software
------------------
+Verify OSG Software
+-------------------
+
+Before receiving real OSG work, your site needs to successfully run test jobs from our
+[GlideinWMS](http://glideinwms.fnal.gov/) factory and report usage to the [GRACC](https://gracc.opensciencegrid.org).
+
+### Test locally ###
 
 It is useful to test *manual* submission of jobs from inside and outside of your site through your CE to your batch
 system.
-If this process does not work manually, it will probably not work for the glideinWMS pilot factory either.
+If this process does not work manually, it will probably not work for the GlideinWMS pilot factory either.
 
 -   [Test job submission into an HTCondor-CE](compute-element/submit-htcondor-ce)
 
-Start GlideinWMS Pilot Submissions
-----------------------------------
+### Get test jobs ####
 
-To begin running [GlideinWMS](http://glideinwms.fnal.gov/) pilot jobs at your site, e-mail
-<osg-gfactory-support@physics.ucsd.edu> and tell them that you want to start accepting Glideins.
+To begin running pilots at your site, e-mail <osg-gfactory-support@physics.ucsd.edu> and ask for test pilots.
 Please provide them with the following information:
 
--   The fully qualified hostname of the CE
+-   The fully qualified domain name of the CE
 -   Resource name
--   Supported OS version of your worker nodes (e.g., EL6, EL7, or both)
+-   Supported OS version of your worker nodes (e.g., EL6, EL7, or both)
 -   Support for multicore jobs
 -   Maximum job walltime
 -   Maximum job memory usage
@@ -154,8 +154,7 @@ Once the factory team has enough information, they will start submitting pilots 
 Initially, this will be one pilot at a time but once the factory verifies that pilot jobs are running successfully, that
 number will be ramped up to 10, then 100.
 
-Verify Reporting and Monitoring
--------------------------------
+### Verify reporting and monitoring ###
 
 To verify that your site is correctly reporting to the OSG, check
 [OSG's Accounting Portal](https://gracc.opensciencegrid.org/dashboard/db/site-summary) for records of your site reports
