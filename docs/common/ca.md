@@ -104,6 +104,29 @@ In addition to the above CAs, you can install other CAs via RPM. These only work
 |:---------------|:-----------------|:-----------------------------------|
 | cilogon-openid | cilogon-ca-certs | `yum install cilogon-ca-certs`     |
 
+Verifying CA Certificates
+-------------------------
+
+After installing the CA certificates, they can be verified with the following command:
+
+```console
+root@host # curl --cacert <CA FILE> \
+              --capath <CA DIRECTORY> \
+              https://gracc.opensciencegrid.org \
+              && echo "CA certificate installation verified"
+```
+
+Where `<CA FILE>` is the path to a valid X.509 CA certificate and `<CA DIRECTORY>` is the path to the directory
+containing the installed CA certificates.
+For example, the following command can be used to verify a default OSG CA certificate installation:
+
+```console
+root@host # curl --cacert /etc/grid-security/certificates/cilogon-osg.pem \
+              --capath /etc/grid-security/certificates/ \
+              https://gracc.opensciencegrid.org \
+              && echo "CA certificate installation verified"
+```
+
 Managing Certificate Revocation Lists
 -------------------------------------
 
