@@ -133,6 +133,9 @@ root@host # curl --cacert /etc/grid-security/certificates/cilogon-osg.pem \
 CA certificate installation verified
 ```
 
+If you do not see `CA certificate installation verified` this means that your CA certificate installation is broken.
+First, ensure that your CA installation is up-to-date and if you continue to see issues please [contact us](#getting-help).
+
 Managing Certificate Revocation Lists
 -------------------------------------
 
@@ -189,6 +192,10 @@ Start the services in the order listed and stop them in reverse order. As a remi
 | Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`             | `systemctl enable <SERVICE-NAME>`             |
 | Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off`            | `systemctl disable <SERVICE-NAME>`            |
 
+Getting Help
+------------
+
+To get assistance, please use the [this page](/common/help).
 
 References
 ----------
