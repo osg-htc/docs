@@ -1879,7 +1879,7 @@
 <p>Before starting the installation process, consider the following points:</p>
 <ul>
 <li><strong>User IDs and Group IDs:</strong> If your machine is also going to be a repository server like the OSG GOC, the installation will create the same user and group IDs as the <a href="../../worker-node/install-cvmfs">cvmfs client</a>.  If you are installing frontier-squid, the installation will also create the same user id as <a href="../../data/frontier-squid">frontier-squid</a>.</li>
-<li><strong>Network ports:</strong> This installation will host the stratum 1 on ports 80 and 8000 and, if squid is installed, it will host the uncached apache on port 8080.</li>
+<li><strong>Network ports:</strong> This installation will host the stratum 1 on ports 80 and 8000 and, if squid is installed, it will host the uncached apache on port 8081.</li>
 <li><strong>Host choice:</strong> -  Make sure there is adequate disk space for the repositories that will be served, at <code>/srv/cvmfs</code>. Do not use xfs as the filesystem type on operating systems older than EL7, because it has been demonstrated to perform poorly for CVMFS repositories; instead use ext3 or ext4. About 10GB should be reserved for apache and squid logs under /var/log on a production server, although they normally will not get that large. A Stratum 1 that is also a repository server should have at least 5GB available at <code>/var/cache</code>.</li>
 <li><strong>SELinux</strong> - Ensure SELinux is disabled</li>
 </ul>
@@ -1945,7 +1945,7 @@
 
 <h3 id="configuring-apache">Configuring apache<a class="headerlink" href="#configuring-apache" title="Permanent link">&para;</a></h3>
 <p>If you are installing frontier-squid, create <code>/etc/httpd/conf.d/cvmfs.conf</code> and put the following lines into it:</p>
-<div class="codehilite"><pre><span></span>Listen 8080 KeepAlive On
+<div class="codehilite"><pre><span></span>Listen 8081 KeepAlive On
 </pre></div>
 
 
@@ -2024,8 +2024,8 @@ Allow from all
 <span class="s1">insertline(&quot;^http_access deny all&quot;, &quot;cache deny CVMFSAPI&quot;)</span>
 
 <span class="s1"># port 80 is also supported, through an iptables redirect </span>
-<span class="s1">setoption(&quot;http_port&quot;, &quot;8000 accel defaultsite=localhost:8080 no-vhost&quot;)</span>
-<span class="s1">setoption(&quot;cache_peer&quot;, &quot;localhost parent 8080 0 no-query originserver&quot;)</span>
+<span class="s1">setoption(&quot;http_port&quot;, &quot;8000 accel defaultsite=localhost:8081 no-vhost&quot;)</span>
+<span class="s1">setoption(&quot;cache_peer&quot;, &quot;localhost parent 8081 0 no-query originserver&quot;)</span>
 
 <span class="s1"># allow incoming http accesses from anywhere</span>
 <span class="s1"># all requests will be forwarded to the originserver </span>
