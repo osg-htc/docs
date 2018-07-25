@@ -902,6 +902,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#verifying-ca-certificates" title="Verifying CA Certificates" class="md-nav__link">
+    Verifying CA Certificates
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#managing-certificate-revocation-lists" title="Managing Certificate Revocation Lists" class="md-nav__link">
     Managing Certificate Revocation Lists
   </a>
@@ -945,6 +952,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" title="Getting Help" class="md-nav__link">
+    Getting Help
+  </a>
   
 </li>
       
@@ -1749,6 +1763,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#verifying-ca-certificates" title="Verifying CA Certificates" class="md-nav__link">
+    Verifying CA Certificates
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#managing-certificate-revocation-lists" title="Managing Certificate Revocation Lists" class="md-nav__link">
     Managing Certificate Revocation Lists
   </a>
@@ -1792,6 +1813,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" title="Getting Help" class="md-nav__link">
+    Getting Help
+  </a>
   
 </li>
       
@@ -2006,6 +2034,33 @@ RPM dependencies while not actually installing any CAs. To install this RPM, run
 </tr>
 </tbody>
 </table>
+<h2 id="verifying-ca-certificates">Verifying CA Certificates<a class="headerlink" href="#verifying-ca-certificates" title="Permanent link">&para;</a></h2>
+<p>After installing the CA certificates, they can be verified with the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> curl --cacert &lt;CA FILE&gt; <span class="se">\</span>
+              --capath &lt;CA DIRECTORY&gt; <span class="se">\</span>
+              -o /dev/null <span class="se">\</span>
+              https://gracc.opensciencegrid.org <span class="se">\</span>
+              <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;CA certificate installation verified&quot;</span>
+</pre></div>
+
+
+<p>Where <code>&lt;CA FILE&gt;</code> is the path to a valid X.509 CA certificate and <code>&lt;CA DIRECTORY&gt;</code> is the path to the directory
+containing the installed CA certificates.
+For example, the following command can be used to verify a default OSG CA certificate installation:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> curl --cacert /etc/grid-security/certificates/cilogon-osg.pem <span class="se">\</span>
+              --capath /etc/grid-security/certificates/ <span class="se">\</span>
+              -o /dev/null <span class="se">\</span>
+              https://gracc.opensciencegrid.org <span class="se">\</span>
+              <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;CA certificate installation verified&quot;</span>
+<span class="gp">  %</span> Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+<span class="go">                                 Dload  Upload   Total   Spent    Left  Speed</span>
+<span class="go">100 22005    0 22005    0     0  86633      0 --:--:-- --:--:-- --:--:--  499k</span>
+<span class="go">CA certificate installation verified</span>
+</pre></div>
+
+
+<p>If you do not see <code>CA certificate installation verified</code> this means that your CA certificate installation is broken.
+First, ensure that your CA installation is up-to-date and if you continue to see issues please <a href="#getting-help">contact us</a>.</p>
 <h2 id="managing-certificate-revocation-lists">Managing Certificate Revocation Lists<a class="headerlink" href="#managing-certificate-revocation-lists" title="Permanent link">&para;</a></h2>
 <p>In addition to CA certificates, you must have updated Certificate Revocation Lists (CRLs). CRLs contain certificate blacklists that OSG software uses to ensure that your hosts are only talking to valid clients or servers. To maintain up to date CAs, you will need to run the <code>fetch-crl</code> services. </p>
 <div class="admonition note">
@@ -2098,6 +2153,8 @@ syslogfacility = daemon
 </tr>
 </tbody>
 </table>
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
+<p>To get assistance, please use the <a href="../../common/help">this page</a>.</p>
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <p>x509 certificates:</p>
 <ul>
