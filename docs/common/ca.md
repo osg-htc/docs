@@ -112,6 +112,7 @@ After installing the CA certificates, they can be verified with the following co
 ```console
 root@host # curl --cacert <CA FILE> \
               --capath <CA DIRECTORY> \
+              -o /dev/null \
               https://gracc.opensciencegrid.org \
               && echo "CA certificate installation verified"
 ```
@@ -123,8 +124,13 @@ For example, the following command can be used to verify a default OSG CA certif
 ```console
 root@host # curl --cacert /etc/grid-security/certificates/cilogon-osg.pem \
               --capath /etc/grid-security/certificates/ \
+              -o /dev/null \
               https://gracc.opensciencegrid.org \
               && echo "CA certificate installation verified"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 22005    0 22005    0     0  86633      0 --:--:-- --:--:-- --:--:--  499k
+CA certificate installation verified
 ```
 
 Managing Certificate Revocation Lists
