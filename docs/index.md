@@ -175,16 +175,16 @@ No action is required on your end, factory operations will start submitting pilo
 Maintain the Site
 -----------------
 
-In order to continue receiving jobs from the OSG, it is important to notify us of changes to your site.
-This includes:
+To continue receiving OSG jobs, please [notify us](mailto:help@opensciencegrid.org) of major changes to your site,
+including:
 
-- OS version changes on the worker nodes
+- Major OS version changes on the worker nodes (e.g., upgraded from EL 6 to EL 7)
 - Policy changes regarding maximum walltime or memory usage
-- Scheduled or unscheduled [downtimes](/common/registration.md#how-to-register-downtime)
-- Site topology resource additions, modifications, or retirements ([see this documentation](/commmon/registration.md))
-- Changes to administrative or security staff for site contact purposes
+- Scheduled or unscheduled [downtimes](/common/registration#how-to-register-downtime)
+- Site topology resource additions, modifications, or retirements ([see this documentation](/commmon/registration))
+- Changes to site contacts, such as administrative or security staff
 
-It is also important to keep your software and [data](/common/ca.md) up-to-date with the
-[latest OSG release](/release/overview.md).
+It is also important to keep your software and data (e.g., CA and VO client) up-to-date with the
+[latest OSG release](/release/notes).
 To stay abreast of software releases, we recommend subscribing to the <mailto:osg-sites@opensciencegrid.org> mailing
 list.
