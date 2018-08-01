@@ -8,7 +8,7 @@ Summary of changes
 
 This release contains:
 
--   [Frontier Squid 3.5.27-5.1](http://frontier.cern.ch/dist/rpms/frontier-squidRELEASE_NOTES): Improve performance by not doing a reverse DNS lookup for every client connection
+-   [Frontier Squid 3.5.27-5.2](http://frontier.cern.ch/dist/rpms/frontier-squidRELEASE_NOTES): Improve performance by not doing a reverse DNS lookup for every client connection
 -   [XRootD 4.8.4](https://github.com/xrootd/xrootd/blob/v4.8.4/docs/ReleaseNotes.txt): Bug fix release
 -   [SciTokens 1.2.0](https://github.com/scitokens/scitokens/releases/tag/v1.2.0): Initial SciTokens Support (EL7 only)
 
