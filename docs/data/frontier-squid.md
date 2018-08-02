@@ -152,7 +152,7 @@ Additionally:
 
 1.  Add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
 
-2.  If you are setting up a new resource, you will want to set `Active: false`.
+2.  If you are setting up a new resource, set `Active: false`.
     Only set `Active: true` for a resource when it is accepting requests and ready for production.
 
 ## Reference
