@@ -80,7 +80,7 @@ To configure the Frontier Squid service itself:
 1.  Follow the
     [Configuration section of the upstream Frontier Squid documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Configuration).
 2.  Enable, start, and test the service (as described below).
-3.  [Register the squid](#registering_frontier_squid).
+3.  [Register the squid](#registering-frontier-squid).
 4.  If your site is part of the WLCG, enable WLCG monitoring as described in the
     [upstream documentation on enabling monitoring](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring).
 
