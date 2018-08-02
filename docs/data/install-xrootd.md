@@ -294,18 +294,9 @@ fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/x
 
 XRootD can be accessed using the HTTP protocol. To do that:
 
-1.   Modify `/etc/xrootd/xrootd-clustered.cfg` and add the following lines:
+1.   Modify `/etc/xrootd/xrootd-clustered.cfg` and add the following lines. You will also need to add the configuration regarding [lcmaps authorization](#security-option-3-xrootd-lcmaps-authorization)
 
         :::file
-           sec.protocol /usr/lib64 gsi \
-              -certdir:/etc/grid-security/certificates \
-              -cert:/etc/grid-security/xrd/xrdcert.pem \
-              -key:/etc/grid-security/xrd/xrdkey.pem \
-              -crl:3 \
-              -authzfun:libXrdLcmaps.so \
-              -authzfunparms:--lcmapscfg,/etc/xrootd/lcmaps.cfg,--loglevel,4 \
-              -gmapopt:10 \
-              -gmapto:0
            if exec xrootd
             xrd.protocol http:1094 libXrdHttp.so
             http.cadir /etc/grid-security/certificates
@@ -325,7 +316,7 @@ XRootD can be accessed using the HTTP protocol. To do that:
 
 1.   Testing the configuration
     
-     From the terminal, generate a proxy and attempt to use davix-get to copy from your XRootD host:
+     From the terminal, generate a proxy and attempt to use davix-get to copy from your XRootD host (XrootD service needs to be up and running see the [services section](#managing-xrootd-services))
    
         :::console
            davix-get https://%RED%yourHostname%ENDCOLOR%:1094/store/user/goughes/test.root -E /tmp/x509up_u28772 --capath /etc/grid-security/certificates
@@ -333,26 +324,12 @@ XRootD can be accessed using the HTTP protocol. To do that:
 !!! note
     For clients to successfully read from the regional redirector, HTTPS must be enabled for the data servers and the site-level redirector.
 
+!!! warning
+    If you have `u *` in your Authfile recall this allows ALL users, including unauthenticated. This includes random web spiders!
+
 #### (Optional) Enable HTTP based Writes
 
-The primary changes are to the Authfile; you will need to add several a (all) authorizations to where users need to be able to write. Here's an example:
-    
-    :::file
-       t writecmsdata /store/foo/          a  \
-                      /store/bar/          a  \
-       t readcmsdata  /store/              lr
-  
-!!! note
-    - List authorizations from most specific to least specific.
-    - The first two columns must be unique; if multiple authorizations are needed for a user, add them to the same line.
-    - `t` is a template.
-    - `u` lines are for users as mapped by LCMAPS (such as cmsprod). These should correspond to Unix usernames at your site.
-    - `g` lines refer to VOMS groups (such as /cms). These do not correspond to Unix group names at your site.
- 
-    The [upstream documentation](http://xrootd.org/doc/dev49/sec_config.htm#_Toc517294132) has further information on the Authfile format.
-
-!!! warning
-    If you have `u *`, recall this allows ALL users, including unauthenticated. This includes random web spiders!
+The primary changes are to the Authfile; you will need to add several a (all) authorizations to where users need to be able to write. See the [Authentication File Section](##authorization-file)    
 
 ### (Optional) Enabling a FUSE mount
 
