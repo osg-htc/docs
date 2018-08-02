@@ -150,7 +150,7 @@ if you are adding the squid service to an existing resource or resource group.)
 
 Additionally:
 
-1.  You will want to add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
+1.  Add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
 
 2.  If you are setting up a new resource, you will want to set `Active:` to `false`.
     The `Active:` field for a resource should only be set to `true` when it is accepting requests and ready for
