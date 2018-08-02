@@ -12,7 +12,7 @@ This document is a step by step explanation of how a Virtual Organization (VO) S
 Requirements
 ------------
 
-To begin the process to distribute software on OASIS using the service hosted at the OSG GOC, you must:
+To begin the process to distribute software on OASIS using the service hosted by OSG Operations, you must:
 
 -   [Obtain a personal grid certificate](../security/user-certs), if you don't have one already.
 -   Register yourself in the OSG Information Management System (OIM) by sending an email to
@@ -24,9 +24,9 @@ How to use OASIS
 
 ### Enable OASIS ###
 
-When you are ready to distribute your software with OASIS, submit a [GOC ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) with a request to enable OASIS for your VO. In your request, please specify your VO and provide a list of people who will install and administer the VO software in OASIS.
+When you are ready to distribute your software with OASIS, submit a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) with a request to enable OASIS for your VO. In your request, please specify your VO and provide a list of people who will install and administer the VO software in OASIS.
 
-The GOC will enable OASIS for your VO in [OIM](https://github.com/opensciencegrid/topology#topology) and add your list of administrators to the "OASIS Managers" list (which is near the bottom of the page of information about each VO in OIM). oasis-login will then grant access to the people who are listed as OASIS managers. Any time the list is to be modified, submit another GOC ticket.
+The GOC will enable OASIS for your VO in [OSG topology](https://github.com/opensciencegrid/topology#topology) and add your list of administrators to the "OASIS Managers" list (which is near the bottom of the page of information about each VO in OIM). oasis-login will then grant access to the people who are listed as OASIS managers. Any time the list is to be modified, submit another ticket.
 
 ### Log in with GSISSH ###
 
@@ -68,7 +68,7 @@ This command queues a process to sync the content of OASIS with the content of `
 
 ### Limitations on repository content ###
 
-Although CVMFS provides a POSIX filesystem, it does not work well with all types of content. Content in OASIS is expected to adhere to the [CVMFS repository content limitations](http://cernvm.cern.ch/portal/filesystem/repository-limits) so please review those guidelines carefully.
+Although CVMFS provides a POSIX filesystem, it does not work well with all types of content. Content in OASIS is expected to adhere to the [CVMFS repository content limitations](http://cvmfs.readthedocs.io/en/stable/cpt-repo.html#limitations-on-repository-content) so please review those guidelines carefully.
 
 ### Testing ###
 
@@ -78,7 +78,7 @@ After `osg-oasis-update` completes and the changes have been propagated to the C
 root@host # cvmfs_talk -i oasis.opensciencegrid.org remount
 ```
 
-This can be done while the filesystem is mounted (despite what the name sounds like it does not do umount/mount). If the filesystem is not mounted, it will automatically check for new updates the next time it is mounted.
+This can be done while the filesystem is mounted (despite the name, it does not do an OS-level umount/mount of the filesystem). If the filesystem is not mounted, it will automatically check for new updates the next time it is mounted.
 
 In order to find out if an update has reached the CVMFS stratum 1 server, you can find out the latest `osg-oasis-update` time seen by the stratum 1 most favored by your CVMFS client with the following long command on your client machine:
 
