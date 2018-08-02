@@ -147,8 +147,6 @@ good to do the test in the
 See the [registration doc](/common/registration#new-registrations) for instructions on registering a new resource.
 (Or see the instructions for [updating existing registrations](/common/registration#updating-existing-registrations)
 if you are adding the squid service to an existing resource or resource group.)
-You will be using `template-resourcegroup.yaml` for your reference template to register various information about your
-resource.
 
 Additionally:
 
