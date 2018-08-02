@@ -48,12 +48,11 @@ methods:
 
 For definitions for the various fields, consult the corresponding template file for the type of data you are updating.
 
-To remove or disable a resource already registered, follow the steps:
+To remove or disable a resource already registered:
 
-1. If the resource is a Compute Element or OSG submitter, set `Active: false` within resource group's yaml file.  For example, to remove
+- If the resource is a Compute Element or OSG submitter, set `Active: false` within resource group's yaml file.  For example, to remove
    the resource GLOW, edit the file `topology/University of Wisconsin/GLOW/GLOW.yaml`, setting `Active: false`:
-    
-        :::toml
+
         ...
         Production: true
         Resources:
@@ -63,7 +62,7 @@ To remove or disable a resource already registered, follow the steps:
     
     You may have to add the `Active` attribute it if does not already exist within the resource definition.
 
-2. If the resource is not an Compute Element or OSG submitter, you may remove the resource completely.  If there are no more resources
+- If the resource is not a Compute Element or OSG submitter, you may remove the resource completely.  If there are no more resources
    in the resource group, you may remove the entire resource group file.
 
 
