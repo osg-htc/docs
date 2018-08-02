@@ -290,6 +290,70 @@ fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/x
 
 **Note**: In this example, `fermicloud53.fnal.gov` is a redirector node and `fermicloud054.fnal.gov` is a data node.
 
+### (Optional) Enabling Xrootd over HTTP
+
+XRootD can be accessed using the HTTP protocol. To do that:
+
+1.   Modify `/etc/xrootd/xrootd-clustered.cfg` and add the following lines:
+
+        :::file
+           sec.protocol /usr/lib64 gsi \
+              -certdir:/etc/grid-security/certificates \
+              -cert:/etc/grid-security/xrd/xrdcert.pem \
+              -key:/etc/grid-security/xrd/xrdkey.pem \
+              -crl:3 \
+              -authzfun:libXrdLcmaps.so \
+              -authzfunparms:--lcmapscfg,/etc/xrootd/lcmaps.cfg,--loglevel,4 \
+              -gmapopt:10 \
+              -gmapto:0
+           if exec xrootd
+            xrd.protocol http:1094 libXrdHttp.so
+            http.cadir /etc/grid-security/certificates
+            http.cert /etc/grid-security/xrd/xrdcert.pem
+            http.key /etc/grid-security/xrd/xrdkey.pem
+            http.secxtractor /usr/lib64/libXrdLcmaps.so
+            http.listingdeny yes
+            http.staticpreload http://static/robots.txt /etc/xrootd/robots.txt
+            http.desthttps yes
+           fi
+  
+1.   Create robots.txt. Add file `/etc/xrootd/robots.txt` with these contents:
+
+        :::file
+           User-agent: *
+           Disallow: / 
+
+1.   Testing the configuration
+    
+     From the terminal, generate a proxy and attempt to use davix-get to copy from your XRootD host:
+   
+        :::console
+           davix-get https://%RED%yourHostname%ENDCOLOR%:1094/store/user/goughes/test.root -E /tmp/x509up_u28772 --capath /etc/grid-security/certificates
+
+!!! note
+    For clients to successfully read from the regional redirector, HTTPS must be enabled for the data servers and the site-level redirector.
+
+#### (Optional) Enable HTTP based Writes
+
+The primary changes are to the Authfile; you will need to add several a (all) authorizations to where users need to be able to write. Here's an example:
+    
+    :::file
+       t writecmsdata /store/foo/          a  \
+                      /store/bar/          a  \
+       t readcmsdata  /store/              lr
+  
+!!! note
+    - List authorizations from most specific to least specific.
+    - The first two columns must be unique; if multiple authorizations are needed for a user, add them to the same line.
+    - `t` is a template.
+    - `u` lines are for users as mapped by LCMAPS (such as cmsprod). These should correspond to Unix usernames at your site.
+    - `g` lines refer to VOMS groups (such as /cms). These do not correspond to Unix group names at your site.
+ 
+    The [upstream documentation](http://xrootd.org/doc/dev49/sec_config.htm#_Toc517294132) has further information on the Authfile format.
+
+!!! warning
+    If you have `u *`, recall this allows ALL users, including unauthenticated. This includes random web spiders!
+
 ### (Optional) Enabling a FUSE mount
 
 XRootD storage can be mounted as a standard POSIX filesystem via FUSE, providing users with a more familiar interface..
