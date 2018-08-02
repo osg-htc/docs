@@ -82,8 +82,7 @@ To configure the Frontier Squid service itself:
 2.  Enable, start, and test the service (as described below).
 3.  Enable WLCG monitoring as described in the
     [upstream documentation on enabling monitoring](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring)
-    and
-    [register the squid in OIM](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#OIM).
+    and [register the squid](#registering_frontier_squid).
 
 !!! Note
     An important difference between the standard Squid software and
@@ -142,6 +141,22 @@ to try to see what's wrong.
 If your squid will be supporting the Frontier application, it is also
 good to do the test in the
 [upstream documentation Testing the installation section](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Testing_the_installation).
+
+## Registering Frontier Squid
+
+See the [registration doc](/common/registration#new-registrations) for instructions on registering a new resource.
+(Or see the instructions for [updating existing registrations](/common/registration#updating-existing-registrations)
+if you are adding the squid service to an existing resource or resource group.)
+You will be using `template-resourcegroup.yaml` for your reference template to register various information about your
+resource.
+
+Additionally:
+
+- You will want to add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
+
+- If you are setting up a new resource, you will want to set `Active:` to `false`.
+  The `Active:` field for a resource should only be set to `true` when it is accepting requests and ready for
+  production.
 
 ## Reference
 
