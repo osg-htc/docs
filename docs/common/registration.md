@@ -48,6 +48,23 @@ methods:
 
 For definitions for the various fields, consult the corresponding template file for the type of data you are updating.
 
+To remove or disable a resource already registered:
+
+- If the resource is a Compute Element or OSG submitter, set `Active: false` within resource group's yaml file.  For example, to remove
+   the resource GLOW, edit the file `topology/University of Wisconsin/GLOW/GLOW.yaml`, setting `Active: false`:
+
+        ...
+        Production: true
+        Resources:
+          GLOW:
+            Active: %RED%false%ENDCOLOR%
+            ...
+    
+    You may have to add the `Active` attribute it if does not already exist within the resource definition.
+
+- If the resource is not a Compute Element or OSG submitter, you may remove the resource completely.  If there are no more resources
+   in the resource group, you may remove the entire resource group file.
+
 
 ### How to Register Downtime ###
 
