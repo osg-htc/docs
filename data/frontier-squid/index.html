@@ -578,6 +578,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#registering-frontier-squid" title="Registering Frontier Squid" class="md-nav__link">
+    Registering Frontier Squid
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#reference" title="Reference" class="md-nav__link">
     Reference
   </a>
@@ -1777,6 +1784,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#registering-frontier-squid" title="Registering Frontier Squid" class="md-nav__link">
+    Registering Frontier Squid
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#reference" title="Reference" class="md-nav__link">
     Reference
   </a>
@@ -1908,7 +1922,7 @@ If the network usage regularly peaks at over one third of the bandwidth capacity
 <li>Follow the
     <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Configuration">Configuration section of the upstream Frontier Squid documentation</a>.</li>
 <li>Enable, start, and test the service (as described below).</li>
-<li><a href="https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#OIM">Register the squid in OIM</a>.</li>
+<li><a href="#registering-frontier-squid">Register the squid</a>.</li>
 <li>If your site is part of the WLCG, enable WLCG monitoring as described in the
     <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring">upstream documentation on enabling monitoring</a>.</li>
 </ol>
@@ -1994,6 +2008,29 @@ to try to see what's wrong.</p>
 <p>If your squid will be supporting the Frontier application, it is also
 good to do the test in the
 <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Testing_the_installation">upstream documentation Testing the installation section</a>.</p>
+<h2 id="registering-frontier-squid">Registering Frontier Squid<a class="headerlink" href="#registering-frontier-squid" title="Permanent link">&para;</a></h2>
+<p>See the <a href="../../common/registration#new-registrations">registration doc</a> for instructions on registering a new resource.
+(Or see the instructions for <a href="../../common/registration#updating-existing-registrations">updating existing registrations</a>
+if you are adding the squid service to an existing resource or resource group.)</p>
+<p>Additionally:</p>
+<ol>
+<li>
+<p>Add a <code>Squid:</code> section to the <code>Services:</code> list, with any relevant fields for that service.
+    For example:</p>
+<div class="codehilite"><pre><span></span><span class="go">...</span>
+<span class="go">Services:</span>
+<span class="go">  Squid:</span>
+<span class="go">    Description: Generic squid service</span>
+<span class="go">...</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>If you are setting up a new resource, set <code>Active: false</code>.
+    Only set <code>Active: true</code> for a resource when it is accepting requests and ready for production.</p>
+</li>
+</ol>
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <h3 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h3>
 <p>The frontier-squid installation will create one user account unless it
