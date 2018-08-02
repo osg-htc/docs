@@ -1760,7 +1760,7 @@
 </ul>
 </div>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<p>To begin the process to distribute software on OASIS using the service hosted at the OSG GOC, you must:</p>
+<p>To begin the process to distribute software on OASIS using the service hosted by OSG Operations, you must:</p>
 <ul>
 <li><a href="../../security/user-certs">Obtain a personal grid certificate</a>, if you don't have one already.</li>
 <li>Register yourself in the OSG Information Management System (OIM) by sending an email to
@@ -1769,8 +1769,8 @@
 </ul>
 <h2 id="how-to-use-oasis">How to use OASIS<a class="headerlink" href="#how-to-use-oasis" title="Permanent link">&para;</a></h2>
 <h3 id="enable-oasis">Enable OASIS<a class="headerlink" href="#enable-oasis" title="Permanent link">&para;</a></h3>
-<p>When you are ready to distribute your software with OASIS, submit a <a href="https://support.opensciencegrid.org/helpdesk/tickets/new">GOC ticket</a> with a request to enable OASIS for your VO. In your request, please specify your VO and provide a list of people who will install and administer the VO software in OASIS.</p>
-<p>The GOC will enable OASIS for your VO in <a href="https://github.com/opensciencegrid/topology#topology">OIM</a> and add your list of administrators to the "OASIS Managers" list (which is near the bottom of the page of information about each VO in OIM). oasis-login will then grant access to the people who are listed as OASIS managers. Any time the list is to be modified, submit another GOC ticket.</p>
+<p>When you are ready to distribute your software with OASIS, submit a <a href="https://support.opensciencegrid.org/helpdesk/tickets/new">support ticket</a> with a request to enable OASIS for your VO. In your request, please specify your VO and provide a list of people who will install and administer the VO software in OASIS.</p>
+<p>The GOC will enable OASIS for your VO in <a href="https://github.com/opensciencegrid/topology#topology">OSG topology</a> and add your list of administrators to the "OASIS Managers" list (which is near the bottom of the page of information about each VO in OIM). oasis-login will then grant access to the people who are listed as OASIS managers. Any time the list is to be modified, submit another ticket.</p>
 <h3 id="log-in-with-gsissh">Log in with GSISSH<a class="headerlink" href="#log-in-with-gsissh" title="Permanent link">&para;</a></h3>
 <p>The next step is to generate a proxy and log into <code>oasis-login.opensciencegrid.org</code> with <code>gsissh</code>. These commands should be run on a computer that has the <a href="../../worker-node/install-wn">OSG worker node client</a> software. First make sure that your grid certificate is installed in <code>~/.globus/usercred.p12</code> on that computer and that it is mode 600, then run these commands:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> voms-proxy-init
@@ -1800,14 +1800,14 @@
 <p>This command queues a process to sync the content of OASIS with the content of <code>/stage/oasis/$VO</code></p>
 <p><code>osg-oasis-update</code> returns immediately, but only one update can run at a time (across all VOs); your request may be queued behind a different VO. If you encounter severe delays before the update is finished being published (more than 4 hours), please file a GOC ticket.</p>
 <h3 id="limitations-on-repository-content">Limitations on repository content<a class="headerlink" href="#limitations-on-repository-content" title="Permanent link">&para;</a></h3>
-<p>Although CVMFS provides a POSIX filesystem, it does not work well with all types of content. Content in OASIS is expected to adhere to the <a href="http://cernvm.cern.ch/portal/filesystem/repository-limits">CVMFS repository content limitations</a> so please review those guidelines carefully.</p>
+<p>Although CVMFS provides a POSIX filesystem, it does not work well with all types of content. Content in OASIS is expected to adhere to the <a href="http://cvmfs.readthedocs.io/en/stable/cpt-repo.html#limitations-on-repository-content">CVMFS repository content limitations</a> so please review those guidelines carefully.</p>
 <h3 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h3>
 <p>After <code>osg-oasis-update</code> completes and the changes have been propagated to the CVMFS stratum 1 servers (typically between 0 and 60 minutes, but possibly longer if the servers are busy with updates of other repositories) then the changes can be visible under <code>/cvmfs/oasis.opensciencegrid.org</code> on a computer that has the <a href="../../worker-node/install-cvmfs">CVMFS client installed</a>. A client normally only checks for updates if at least an hour has passed since it last checked, but people who have superuser access on the client machine can force it to check again with</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cvmfs_talk -i oasis.opensciencegrid.org remount
 </pre></div>
 
 
-<p>This can be done while the filesystem is mounted (despite what the name sounds like it does not do umount/mount). If the filesystem is not mounted, it will automatically check for new updates the next time it is mounted.</p>
+<p>This can be done while the filesystem is mounted (despite the name, it does not do an OS-level umount/mount of the filesystem). If the filesystem is not mounted, it will automatically check for new updates the next time it is mounted.</p>
 <p>In order to find out if an update has reached the CVMFS stratum 1 server, you can find out the latest <code>osg-oasis-update</code> time seen by the stratum 1 most favored by your CVMFS client with the following long command on your client machine:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> date -d <span class="s2">&quot;1970-1-1 GMT + </span><span class="k">$(</span>wget -qO- <span class="k">$(</span>attr -qg host /cvmfs/oasis.opensciencegrid.org<span class="k">)</span>/.cvmfspublished <span class="p">|</span> <span class="se">\</span>
                                                             cat -v<span class="p">|</span>sed -n <span class="s1">&#39;/^T/{s/^T//p;q;}&#39;</span><span class="k">)</span><span class="s2"> sec&quot;</span>
