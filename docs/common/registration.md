@@ -2,11 +2,109 @@ Registering in the OSG
 ======================
 
 The OSG keeps a registry containing active projects, virtual organizations (VOs), resources, and resource
-downtimes in the [topology Github repository](https://github.com/opensciencegrid/topology/).
+downtimes stored as as [YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
+in the [topology Github repository](https://github.com/opensciencegrid/topology/).
 This registry is used for [accounting data](https://gracc.opensciencegrid.org), contact information, and resource
 availability, particularly if your site is part of the [World LHC Computing Grid](http://wlcg.web.cern.ch/) (WLCG).
 
+!!! note "Registration Requirements"
+    The instructions in this document require a [GitHub account](https://github.com/) and a working knowledge of
+    [GitHub collaboration](https://help.github.com/categories/collaborating-with-issues-and-pull-requests/).
+
 Use this page to learn how to register information in the OSG.
+
+Registering Resources
+---------------------
+
+An OSG resource is a host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.
+See the full list of services that should be registered in the OSG topology
+[here](https://github.com/opensciencegrid/topology/blob/master/topology/services.yaml).
+
+OSG resources are stored under a hierarchy of facilities, sites, and resource groups, defined as follows:
+
+| Level          | Definition                                                                                                                                                             |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Facility       | The institution or company where your resource is located, e.g. `University of Wisconsin`                                                                              |
+| Site           | Smaller than a facility; typically represents an academic department, research group, or a computing center, e.g. `CHTC` for the Center for High Throughput Computing. |
+| Resource Group | A logical grouping of resources, e.g. you may group together resources that serve your Slurm cluster under a resource group named `Slurm-HPC`                          |
+| Resource       | A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.                                                                      |
+
+OSG resources are stored in YAML files that can be found in the GitHub repository in a directory structure that reflects
+the above hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
+[root of the topology repository](https://github.com/opensciencegrid/topology/tree/master/).
+
+### Searching for resources ###
+
+Whether you are registering a new resource or modifying an existing resource, start by searching for the FQDN of your
+host to avoid any duplicate registrations:
+
+1. Open the [topology repository](https://github.com/opensciencegrid/topology/tree/master/) in your browser.
+
+1. Search the repository for the FQDN of your resource wrapped in double-quotes using the GitHub search bar
+   (e.g., `"glidein2.chtc.wisc.edu"`):
+
+    ![GitHub search](/img/registration/github-search.png)
+
+    - **If the search doesn't return any results**, skip to [these instructions](#new-resources) for registering a new
+      resource.
+    - **If the search returns a single YAML file**, open the link to the YAML file and skip to
+      [these instructions](#modifying-existing-resources) for modifying an existing resources.
+    - **If the search returns more than one YAML file**, please [contact us](#getting-help).
+
+### New resources ###
+
+To register a new resource, follow the instructions below:
+
+1. If you haven't already, verify that the FQDN of your resource is not [already registered](#registering-resources)
+
+1. Choose the names of your facility, site, and resource group, ensuring that the names match any pre-existing
+   facilities, sites, or resource groups (including case and spaces). Use the names that you choose to replace
+   `<FACILITY>`, `<SITE>`, and `<RESOURCE GROUP>` below:
+
+    - If your resource group already exists under your facility and site, open the following URL in your browser:
+
+            https://github.com/opensciencegrid/topology/edit/master/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml
+
+        For example, to add a resource to the `CHTC` resource group for the `CHTC` site at the `University of
+        Wisconsin`, use the following URL:
+
+            https://github.com/opensciencegrid/topology/edit/master/topology/University of Wisconsin/CHTC/CHTC.yaml
+
+    - If any of your facility, site, or resource group do not exist, open the following URL in your browser:
+
+            https://github.com/opensciencegrid/topology/new/master?filename=topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml
+
+        For example, to create a `Slurm-HPC` resource group for the Center for High Throughput Computing (`CHTC`) at the
+        `University of Wisconsin`, use the following URL:
+
+            https://github.com/opensciencegrid/topology/new/master?filename=topology/University of Wisconsin/CHTC/Slurm-HPC.yaml
+
+1. Use the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) to make changes
+   using the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
+   as a guide.
+
+1. Submit your changes as a pull request, providing a descriptive commit message. For example:
+
+        Adding a new compute element to the CHTC
+
+### Modifying existing resources ###
+
+To modify an existing resource, follow these instructions:
+
+1. Find the resource that you would like to modify by [searching GitHub](#searching-for-resources) and opening the link
+   to the YAML file.
+
+1. Use the branch selector dropdown next to the file path and select the `master` branch.
+
+    ![GitHub branch selection](/img/registration/switch-branch.png)
+
+1. Use the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) to make changes
+   using the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
+   as a guide.
+
+1. Submit your changes as a pull request, providing a descriptive commit message. For example:
+
+        Updating administrative contact information for CHTC-glidein2
 
 How to Register
 ---------------
@@ -100,4 +198,7 @@ You should register downtime if one of these is true:
 
 Alternatively, send an email to <help@opensciencegrid.org> requesting your desired changes.
 
+Getting Help
+------------
 
+To get assistance, please use the [this page](/common/help).
