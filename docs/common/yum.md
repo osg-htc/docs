@@ -74,6 +74,27 @@ You must install and enable those first.
     The OSG repositories must have a better (numerically lower) priority than the EPEL repositories;
     you might have dependency resolution ("depsolving") issues otherwise.
 
+### Automatic Updates
+
+For production services, we suggest only changing software versions during controlled downtime.
+Therefore we recommend security-only automatic updates or disabling automatic updates entirely.
+
+
+To enable only security related automatic updates:
+
+-   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `USE_YUMSEC="true"`
+
+-   On Enterprise Linux 7, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
+
+
+To disable automatic updates entirely:
+
+-   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `ENABLED="false"`
+
+-   On Enterprise Linux 7, run:
+
+        :::console
+        root@host # service yum-cron stop
 
 ### Install the OSG Repositories
 
@@ -130,7 +151,7 @@ Replace %RED%OSG\_RELEASE%ENDCOLOR% with the OSG release you want to use (e.g. '
 
 On your worker node, you can replace the `baseurl` line of `/etc/yum.repos.d/osg.repo` with the appropriate URL for your mirror.
 
-If you are interested in having your mirror be part of the OSG's default set of mirrors, [please file a GOC ticket](https://ticket.opensciencegrid.org/).
+If you are interested in having your mirror be part of the OSG's default set of mirrors, [please file a GOC ticket](https://support.opensciencegrid.org/helpdesk/tickets/new).
 
 Reference
 ---------

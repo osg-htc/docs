@@ -3,164 +3,74 @@ User Certificates
 
 !!! note
     This document describes how to get and set up a **personal** certificate (also called a grid user certificate).
-    For instructions on getting **service** and **host** certificates, **you're in the wrong place**. See [Get Host and Service Certificates](host-certs.md).
-
+    For instructions on how to get **host** certificates, see the [Host Certificates document](host-certs.md).
 
 Getting a User Certificate
 --------------------------
 
 This section describes how to get and set up a personal certificate to use on OSG.
-Currently you can get a certificate from either the OSG CA or from CILogon.
-After May 31st, you will only be able to get a certificate issued by CILogon.
-Other CAs may be used; if your virtual organization (VO) requires that you get a certificate from a different CA, [contact your VO Support Center](http://www.opensciencegrid.org/?pid=1000187) for instructions.
+You need a user certificate if you are going to interact directly with OSG resources or infrastructure. 
+Examples of this would be tasks like managing OASIS, directly running jobs on OSG resources, interacting directly with 
+OSG storage elements, or to get private contact information from OSG systems.
+Currently, you can get a user certificate from CILogon.
+You may also be able to user other CAs to get a certificate; if your virtual organization (VO) requires that you get a
+certificate from a different CA, [contact your VO Support Center](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations) for
+instructions.
 
 ### Know your responsibilities
 
-When you request a certificate your provide some public personal information about yourself; *name, email address, phone number*, and which *VO* (virtual organization) you belong to. If any of this information changes after you have your certificate you should notify OSG (and probably VO) of the changes. For the OSG RA send email to osg-ra at opensciencegrid dot org.
+If your account or user certificate is compromised, you **must** notify the issuer of your certificate. 
+In addition, you should update your certificate and revoke the old certificate if any of the information in the
+certificate (such as name or email address) change.
+For the CILogon RA send email to [ca@ciloogon.org](mailto:ca@cilogon.org). 
+Additional responsibilities required by the CILogon CA are given on [their page](http://ca.cilogon.org/responsibilities).  
 
-Your **name** and **email** address are encoded into the signed certificate and **if either of those change** (usually email address) then you should **request a new certificate** with the correct information and **revoke the old certificate**.
 
 ### Getting a Certificate from CILogon
 
 You will have to obtain your user certificate using the [CILogon web UI](https://cilogon.org/).
 Follow the steps below to get an user certificate:
 
-1. First, either search for your institution and select it or scroll through list and do the same. <br>![Institution Selection](/img/cilogon_select_idp.png)
+1. First, either search for your institution and select it or scroll through list and do the same.<br>If your institution is not on the list, please contact your institution's IT support to see if they can support CILogon.<br>![Institution Selection](/img/cilogon_select_idp.png).
 
     !!! note
         Make sure to select your educational institution from CILogon's list.
-        For instance, do not use your Google ID or GitHub ID.
+        For instance, do not use OpenID (e.g. Google, Github, etc.) as a provider since not all OSG resources support
+        certificates using an OpenID provider.
 
 1. Click the `Log On` button and enter your instutional credentials.
 1. Upon successfully entering your credentials, you'll get a page asking for you to enter a password.  Enter a password that is at least 12 characters long and then click on the `Get New Certificate` button.<br>![Password entry](/img/cilogon_cert_password.png) 
 1. The web page will generate a `usercred.p12` file and prompt you to download it.  The certiticate will be protected
 using the password you entered in the prior step.
 
-### Getting a Certificate from the OSG CA
 
-There are two different ways to obtain your certificate, either via a command line interface, or through a web browser.
-The links below will guide you through whichever method you choose.
-The command line method is generally simpler and less prone to errors than using a web browser but it may require extra
-setup and package installation the first time you do it.
-Most people end up needing their certificate for both command line grid use and web browser use and it is generally
-easier to import your certificate into your browser (and email client) from the command line certificate files than to
-export your certificate from your web browser to use on the command line. 
-This is because of the large variety of web browsers each with its own way to deal with certificates. If you will use
-the certificate ONLY in your web browser then requesting it from your browser is probably the easiest method.
+### Certificate formats
 
-[Get or renew a certificate with command line interface.](/security/certificate-management.md)
+Your user certficate can be stored in a few different formats.
+The two most common formats used in OSG are the [PKCS12](https://en.wikipedia.org/wiki/PKCS_12) and
+[PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) formats.
+In the PEM format, your user certificate is stored in two separate files: one for the certificate and another for the
+private key.
+The PKCS12 format stores the certificate and private key in a single file along with an optional certificate chain.
+Most OSG user tools will work with both but will try to use PEM files first.   
 
-### PKCS12 (.p12) vs PEM format
+To convert a PKCS12 file to  PEM files, do the following.  
+   
+1. First, extract your user certificate from your PKCS12 file by running the following command.  You'll be prompted for the password you used to create the certificate. The invocation assumes that the PKCS12 file is called `usercred.p12`.  After running, the PEM certificate will be written to `usercert.pem`. 
 
-Your certificate and key pair can be stored as separate files, by default named `~/.globus/usercert.pem` and `~/.globus/userkey.pem`, or they can be bundled in a single file in PKCS12 (Public Key Cryptography Standard \#12), by default named `~/.globus/usercred.p12`. All OSG user tools works with both formats. Unless you specify a name in the command, they look first for the certificate/key pair default names, then for the PKCS12 default name and use the first one they find. PKCS 12 is a single file, convenient to move and used by many softwares, e.g. the Web browsers (so you don't need conversions).
+        :::console
+        user@host $ openssl pkcs12 -in usercred.p12 -out usercert.pem -nodes -clcerts -nokeys
+        Enter Import Password:
+        MAC verified OK
+   
+1. Second, extract the private key by running the following command. You'll be prompted for two different passwords.  The first prompt will be for the password that you used to create the certficate.  The second prompt will be for the password that will encrypt the PEM certificate that will be created.  As before, the invocation assumes that your PKCS12 certificate is located in `usercred.p12`. After running, the PEM certificate with your private key will be written to `userkey.pem`.
 
-Anyway note that the PKCS12 bundle includes normally the certificate, the key and also the CA certificate (or a certificate chain) validating your certificate. In the rare (but possible) case where the CA certificate expires before your certificate this may lead to the creation of a proxy without VOMS attributes and confusing error messages where it is not clear if the problem is with the host, remote server or the certificate, e.g. "Error: Error during SSL handshake:Either proxy or user certificate are expired." or "error:80066423:lib(128):verify\_callback:remote certificate has expired:sslutils.c:1963 remote certificate has expired".
-
-``` console
-user@host $  voms-proxy-init -debug
-Detected Globus version: 2.2
-Unspecified proxy version, settling on Globus version: 2
-Number of bits in key :1024
-Files being used:
- CA certificate file: none
- Trusted certificates directory : /etc/grid-security/certificates
- Proxy certificate file : /tmp/x509up_u20003
- User certificate file: /home/user/.globus/usercred.p12
- User key file: /home/user/.globus/usercred.p12
-Output to /tmp/x509up_u20003
-Enter GRID pass phrase for this identity:
-Your identity: /DC=org/DC=doegrids/OU=People/CN=First Lastname 12345
-Creating proxy to /tmp/x509up_u20003 .............++++++
-.....................++++++
- Done
-
-Your proxy is valid until Fri Aug  9 00:18:07 2013
-Error: Certificate verify failed.
-error:80066423:lib(128):verify_callback:remote certificate has expired:sslutils.c:1963
-remote certificate has expired
-Function: verify_callback
-error:80066412:lib(128):verify_callback:certificate::sslutils.c:2283
-        subject=/DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1
-        issuer =/DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1
-certificate:
-        subject=/DC=org/DC=DOEGrids/OU=Certificate Authorities/CN=DOEGrids CA 1
-        issuer =/DC=net/DC=ES/O=ESnet/OU=Certificate Authorities/CN=ESnet Root CA 1
-Function: verify_callback
-user@host $ voms-proxy-init -debug -voms osg
-Detected Globus version: 2.2
-Unspecified proxy version, settling on Globus version: 2
-Number of bits in key :1024
-Files being used:
- CA certificate file: none
- Trusted certificates directory : /etc/grid-security/certificates
- Proxy certificate file : /tmp/x509up_u20003
- User certificate file: /home/user/.globus/usercred.p12
- User key file: /home/user/.globus/usercred.p12
-Output to /tmp/x509up_u20003
-Enter GRID pass phrase for this identity:
-Your identity: /DC=org/DC=doegrids/OU=People/CN=First Lastname 12345
-Using configuration file /home/marco/.glite/vomses
-Using configuration file /etc/vomses
-Creating temporary proxy to /tmp/tmp_x509up_u20003_17448 ..........................++++++
-...................++++++
- Done
-Contacting  voms.opensciencegrid.org:15027 [/DC=org/DC=doegrids/OU=Services/CN=host/voms.opensciencegrid.org] "osg" Failed
-
-Error: Error during SSL handshake:Either proxy or user certificate are expired.
-
-None of the contacted servers for osg were capable
-of returning a valid AC for the user.
-```
-
-To solve the problem split the bundle in the two PEM files as documented in the [referenced document](http://security.ncsa.illinois.edu/research/grid-howtos/usefulopenssl.html), so that the embedded CA chain is not used.
-
-Renewing your OSG user certificate
-----------------------------------
-
-Your OSG user certificate can be renewed through the
-[OIM Web Interface](https://oim.opensciencegrid.org/oim/certificateuser)
-or through the [command line interface](/security/certificate-management#osg-pki-command-line-clients):
-
-```
-user@host $ osg-user-cert-renew
-```
-
-### Issues renewing your OSG user certificate
-
-One requirement for renewing your OSG user certificate is that your identity must be vetted within the last 5 years.
-You can see whether this requirement is met for your user certificate when *logged in* to the
-[OIM Web Interface](https://oim.opensciencegrid.org/oim/certificateuser).
-
-!!! note
-    When using the OIM Web Interface, make sure you are logged in and your name appears in the upper right corner.
-    If it shows "Login" instead of your name, click it to log in.
-
-When you click on your user certificate, under the Renew tab, you will see a line item for
-"This certificate was approved within the last 5 years".
-If there is a red X on this line with no other red X's, then you will have to request a new certificate instead of
-renewing it.
-Your two options for requesting a new certificate are:
-
-- [Request a certificate issued by the CILogon Basic CA](#getting-a-certificate-from-cilogon) (preferred)
-- If you need to keep your DN, or for whatever other reason you cannot use a CILogon Basic certificate, you will need to
-  revoke and renew your user certificate:
-
-    !!! danger
-        With this method, there is a risk that you may end up without a valid certificate.
-        After revocation, if your sponsor is unresponsive past the May 31, 2018 OSG CA service retirement, your previous
-        certificate will no longer be valid and you won't be able to request a new certificate.
-
-    1. Log in (your name should appear on the top right), and select your user certificate from the list in the
-       [OIM Web Interface](https://oim.opensciencegrid.org/oim/certificateuser).
-    1. In a separate tab, open the [+Request New](https://oim.opensciencegrid.org/oim/certificaterequestuser) page.
-       We recommend opening the `Request New` page in a separate tab before revoking, in order to ensure that your CN gets
-       correctly populated in the `Request New` page.
-       Also, to ensure a prompt response, be sure that you select a `Virtual Organization` that you are associated with and
-       a `Sponsor` who will be able to quickly verify your identity.
-    1. Back in the first tab, with your user certificate selected, click the `Revoke` tab, and enter an explanation that you are
-       revoking in order to re-request your certificate.  Then click the red `Revoke` button.
-    1. In the separate tab, fill out the rest of the User Certificate Request form and click `Submit`.
-
+        :::console 
+        user@host $ openssl pkcs12 -in usercred.p12 -out userkey.pem  -nocerts
+        Enter Import Password:
+        MAC verified OK
+        Enter PEM pass phrase:
+        Verifying - Enter PEM pass phrase:
 
 Revoking your user certificate
 ------------------------------
@@ -169,8 +79,8 @@ If the security of your certificate or private key has been compromised, you hav
 In addition, if your name or email address changes, you must revoke your certificate and get a new one with the correct
 information.
 
-If you have an OSG issued certifiacte, you can follow the steps [here](/security/certificate-management#osg-user-cert-revoke) to revoke your certificate.
 If you have a CILogon issued certificate, contact [ca@cilogon.org](mailto:ca@cilogon.org) in order revoke your certificate.
+If you received a certificate from another CA, please contact the CA to intiate a certificate revocation.
 
 
 Getting a Certificate from a Service Provider with cigetcert
@@ -238,6 +148,12 @@ user@host $ cigetcert -u %RED%<USERNAME>%ENDCOLOR% -i XSEDE
 You will get prompted to "Enter XSEDE Kerberos Password."
 Enter the password for your account at portal.xsede.org.
 You should then get a 2FA authentication request with Duo Mobile; once you accept this, `cigetcert` will issue the certificate.
+
+Getting Help
+------------
+
+To get assistance, please use the [this page](/common/help).
+
 
 References
 ----------
