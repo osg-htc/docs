@@ -1754,6 +1754,27 @@ methods:</p>
 <li>Send an email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> requesting your desired changes.</li>
 </ul>
 <p>For definitions for the various fields, consult the corresponding template file for the type of data you are updating.</p>
+<p>To remove or disable a resource already registered:</p>
+<ul>
+<li>
+<p>If the resource is a Compute Element or OSG submitter, set <code>Active: false</code> within resource group's yaml file.  For example, to remove
+   the resource GLOW, edit the file <code>topology/University of Wisconsin/GLOW/GLOW.yaml</code>, setting <code>Active: false</code>:</p>
+<div class="codehilite"><pre><span></span>...
+Production: true
+Resources:
+  GLOW:
+    Active: <span style="color:red">false</span>
+    ...
+</pre></div>
+
+
+<p>You may have to add the <code>Active</code> attribute it if does not already exist within the resource definition.</p>
+</li>
+<li>
+<p>If the resource is not a Compute Element or OSG submitter, you may remove the resource completely.  If there are no more resources
+   in the resource group, you may remove the entire resource group file.</p>
+</li>
+</ul>
 <h3 id="how-to-register-downtime">How to Register Downtime<a class="headerlink" href="#how-to-register-downtime" title="Permanent link">&para;</a></h3>
 <p>Downtime is a period of time for which one or more services you provide are unavailable.
 You should register downtime if one of these is true:</p>
