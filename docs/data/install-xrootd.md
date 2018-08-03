@@ -294,7 +294,7 @@ fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/x
 
 XRootD can be accessed using the HTTP protocol. To do that:
 
-1.   Modify `/etc/xrootd/xrootd-clustered.cfg` and add the following lines. You will also need to add the configuration regarding [lcmaps authorization](#security-option-3-xrootd-lcmaps-authorization)
+1.   Modify `/etc/xrootd/xrootd-clustered.cfg` and add the following lines. You will also need to add the configuration regarding [lcmaps authorization](#security-option-3-xrootd-lcmaps-authorization).
 
         :::file
            if exec xrootd
@@ -316,20 +316,20 @@ XRootD can be accessed using the HTTP protocol. To do that:
 
 1.   Testing the configuration
     
-     From the terminal, generate a proxy and attempt to use davix-get to copy from your XRootD host (XrootD service needs to be up and running see the [services section](#managing-xrootd-services))
+     From the terminal, generate a proxy and attempt to use davix-get to copy from your XRootD host (the XRootD service needs running; see the [services section](#managing-xrootd-services)).  For example, if your server has a file named `/store/user/test.root`:
    
         :::console
-           davix-get https://%RED%yourHostname%ENDCOLOR%:1094/store/user/goughes/test.root -E /tmp/x509up_u28772 --capath /etc/grid-security/certificates
+           davix-get https://%RED%yourHostname%ENDCOLOR%:1094/store/user/test.root -E /tmp/x509up_u`id -u` --capath /etc/grid-security/certificates
 
 !!! note
     For clients to successfully read from the regional redirector, HTTPS must be enabled for the data servers and the site-level redirector.
 
 !!! warning
-    If you have `u *` in your Authfile recall this allows ALL users, including unauthenticated. This includes random web spiders!
+    If you have `u *` in your Authfile, recall this provides an authorization to ALL users, including unauthenticated. This includes random web spiders!
 
 #### (Optional) Enable HTTP based Writes
 
-The primary changes are to the Authfile; you will need to add several a (all) authorizations to where users need to be able to write. See the [Authentication File Section](##authorization-file)    
+No changes to the HTTP module is needed to enable HTTP-based writes.  The HTTP protocol uses the same authorization setup as the XRootD protocol.  For example, you may need to provide `a` (all) style authorizations to allow users authorization to write. See the [Authentication File section](##authorization-file) for more details.
 
 ### (Optional) Enabling a FUSE mount
 
