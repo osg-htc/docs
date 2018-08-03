@@ -775,6 +775,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#optional-enabling-xrootd-over-http" title="(Optional) Enabling Xrootd over HTTP" class="md-nav__link">
+    (Optional) Enabling Xrootd over HTTP
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optional-enable-http-based-writes" title="(Optional) Enable HTTP based Writes" class="md-nav__link">
+    (Optional) Enable HTTP based Writes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#optional-enabling-a-fuse-mount" title="(Optional) Enabling a FUSE mount" class="md-nav__link">
     (Optional) Enabling a FUSE mount
   </a>
@@ -1963,6 +1983,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#optional-enabling-xrootd-over-http" title="(Optional) Enabling Xrootd over HTTP" class="md-nav__link">
+    (Optional) Enabling Xrootd over HTTP
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optional-enable-http-based-writes" title="(Optional) Enable HTTP based Writes" class="md-nav__link">
+    (Optional) Enable HTTP based Writes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#optional-enabling-a-fuse-mount" title="(Optional) Enabling a FUSE mount" class="md-nav__link">
     (Optional) Enabling a FUSE mount
   </a>
@@ -2407,6 +2447,52 @@ This section is the procedure for EL 7.</p>
 
 
 <p><strong>Note</strong>: In this example, <code>fermicloud53.fnal.gov</code> is a redirector node and <code>fermicloud054.fnal.gov</code> is a data node.</p>
+<h3 id="optional-enabling-xrootd-over-http">(Optional) Enabling Xrootd over HTTP<a class="headerlink" href="#optional-enabling-xrootd-over-http" title="Permanent link">&para;</a></h3>
+<p>XRootD can be accessed using the HTTP protocol. To do that:</p>
+<ol>
+<li>
+<p>Modify <code>/etc/xrootd/xrootd-clustered.cfg</code> and add the following lines. You will also need to add the configuration regarding <a href="#security-option-3-xrootd-lcmaps-authorization">lcmaps authorization</a>.</p>
+<div class="codehilite"><pre><span></span>   if exec xrootd
+    xrd.protocol http:1094 libXrdHttp.so
+    http.cadir /etc/grid-security/certificates
+    http.cert /etc/grid-security/xrd/xrdcert.pem
+    http.key /etc/grid-security/xrd/xrdkey.pem
+    http.secxtractor /usr/lib64/libXrdLcmaps.so
+    http.listingdeny yes
+    http.staticpreload http://static/robots.txt /etc/xrootd/robots.txt
+    http.desthttps yes
+   fi
+</pre></div>
+
+
+</li>
+<li>
+<p>Create robots.txt. Add file <code>/etc/xrootd/robots.txt</code> with these contents:</p>
+<div class="codehilite"><pre><span></span>   User-agent: *
+   Disallow: /
+</pre></div>
+
+
+</li>
+<li>
+<p>Testing the configuration</p>
+<p>From the terminal, generate a proxy and attempt to use davix-get to copy from your XRootD host (the XRootD service needs running; see the <a href="#managing-xrootd-services">services section</a>).  For example, if your server has a file named <code>/store/user/test.root</code>:</p>
+<div class="codehilite"><pre><span></span><span class="go">   davix-get https://<span style="color:red">yourHostname</span>:1094/store/user/test.root -E /tmp/x509up_u`id -u` --capath /etc/grid-security/certificates</span>
+</pre></div>
+
+
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For clients to successfully read from the regional redirector, HTTPS must be enabled for the data servers and the site-level redirector.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you have <code>u *</code> in your Authfile, recall this provides an authorization to ALL users, including unauthenticated. This includes random web spiders!</p>
+</div>
+<h4 id="optional-enable-http-based-writes">(Optional) Enable HTTP based Writes<a class="headerlink" href="#optional-enable-http-based-writes" title="Permanent link">&para;</a></h4>
+<p>No changes to the HTTP module is needed to enable HTTP-based writes.  The HTTP protocol uses the same authorization setup as the XRootD protocol.  For example, you may need to provide <code>a</code> (all) style authorizations to allow users authorization to write. See the <a href="##authorization-file">Authentication File section</a> for more details.</p>
 <h3 id="optional-enabling-a-fuse-mount">(Optional) Enabling a FUSE mount<a class="headerlink" href="#optional-enabling-a-fuse-mount" title="Permanent link">&para;</a></h3>
 <p>XRootD storage can be mounted as a standard POSIX filesystem via FUSE, providing users with a more familiar interface..</p>
 <p>Modify <code>/etc/fstab</code> by adding the following entries:</p>
