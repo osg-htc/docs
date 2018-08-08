@@ -170,7 +170,8 @@ Additionally:
 2.  If you are setting up a new resource, set `Active: false`.
     Only set `Active: true` for a resource when it is accepting requests and ready for production.
 
-A few hours after a squid is registered and marked Active,
+If you are running a WLCG site, a few hours after a squid is registered
+and marked Active
 [verify that it is monitored by WLCG](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#Verify_monitor).
 
 ## Reference
