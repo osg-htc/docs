@@ -1193,6 +1193,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../release/3.4/release-3-4-16-2/" title="OSG Release 3.4.16-2" class="md-nav__link">
+      OSG Release 3.4.16-2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../release/3.4/release-3-4-16/" title="OSG Release 3.4.16" class="md-nav__link">
       OSG Release 3.4.16
     </a>
@@ -2025,10 +2037,6 @@ RPM dependencies while not actually installing any CAs. To install this RPM, run
 <p>If you choose this option, you are responsible for installing and maintaining the CA certificates. They must be installed in <code>/etc/grid-security/certificates</code>, or a symlink must be made from that location to the directory that contains the CA certificates.</p>
 </div>
 <h3 id="installing-other-cas">Installing other CAs<a class="headerlink" href="#installing-other-cas" title="Permanent link">&para;</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The <code>cilogon-openid</code> CA is only distributed in OSG 3.3.  Support will be removed by March 2018.</p>
-</div>
 <p>In addition to the above CAs, you can install other CAs via RPM. These only work with the RPMs that provide CAs (that is, <code>osg-ca-certs</code> and the like, but not <code>osg-ca-scripts</code>.) They are in addition to the above RPMs, so do not only install these extra CAs.</p>
 <table>
 <thead>
@@ -2041,8 +2049,8 @@ RPM dependencies while not actually installing any CAs. To install this RPM, run
 <tbody>
 <tr>
 <td align="left">cilogon-openid</td>
-<td align="left">cilogon-ca-certs</td>
-<td align="left"><code>yum install cilogon-ca-certs</code></td>
+<td align="left">cilogon-openid-ca-cert</td>
+<td align="left"><code>yum install cilogon-openid-ca-cert</code></td>
 </tr>
 </tbody>
 </table>
