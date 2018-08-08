@@ -145,24 +145,36 @@ good to do the test in the
 ## Registering Frontier Squid
 
 See the [registration doc](/common/registration#new-registrations) for instructions on registering a new resource.
-(Or see the instructions for [updating existing registrations](/common/registration#updating-existing-registrations)
-if you are adding the squid service to an existing resource or resource group.)
+See the instructions for [updating existing registrations](/common/registration#updating-existing-registrations)
+if you are adding the squid service to an existing resource or resource group.
 
 Additionally:
 
 1.  Add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
-    For example:
+    This is a partial example:
 
         :::console
         ...
+        FQDN: fully,qualified.DNS.name.of.your.server(s)
         Services:
           Squid:
             Description: Generic squid service
         ...
 
+    See the [BNL-ATLAS](https://github.com/opensciencegrid/topology/blob/master/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml) Squid resource for a complete example.
+
+    If you have more than one server providing the same squid service,
+    it is best to register them with one FQDN that is a round-robin DNS
+    entry listing all the squids, instead of registering them separately.
 
 2.  If you are setting up a new resource, set `Active: false`.
     Only set `Active: true` for a resource when it is accepting requests and ready for production.
+
+Once a squid is registered and marked Active, within a few hours it should be
+monitored in the 
+[WLCG Squid Monitor](http://wlcg-squid-monitor.cern.ch/snmpstats/all.html).
+If that is not the case please contact
+[wlcg-squidmon-support@cern.ch](mailto:wlcg-squidmon-support@cern.ch).
 
 ## Reference
 
