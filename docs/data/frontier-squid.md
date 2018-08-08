@@ -155,7 +155,7 @@ Additionally:
 
         :::console
         ...
-        FQDN: fully,qualified.DNS.name.of.your.server(s)
+        FQDN: fully.qualified.DNS.name.of.your.server(s)
         Services:
           Squid:
             Description: Generic squid service
