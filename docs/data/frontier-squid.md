@@ -170,11 +170,8 @@ Additionally:
 2.  If you are setting up a new resource, set `Active: false`.
     Only set `Active: true` for a resource when it is accepting requests and ready for production.
 
-Once a squid is registered and marked Active, within a few hours it should be
-monitored in the 
-[WLCG Squid Monitor](http://wlcg-squid-monitor.cern.ch/snmpstats/all.html).
-If that is not the case please contact
-[wlcg-squidmon-support@cern.ch](mailto:wlcg-squidmon-support@cern.ch).
+A few hours after a squid is registered and marked Active,
+[verify that it is monitored by WLCG](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#Verify_monitor).
 
 ## Reference
 
