@@ -319,7 +319,7 @@ The following attributes are optional:
 
 | Option            | Values Accepted  | Explanation                                                                                                                |
 |-------------------|------------------|----------------------------------------------------------------------------------------------------------------------------|
-| max\_wall\_time   | Positive Integer | Maximum wall-clock time, in minutes, that a job is allowed to run on this subcluster (the default is one day or 1440 mins) |
+| max\_wall\_time   | Positive Integer | Maximum wall-clock time, in minutes, that a job is allowed to run on this subcluster. The default is 1440, or the equivalent of one day.
 | queue             | String           | The queue to which jobs should be submitted in order to run on this subcluster                                             |
 | extra\_transforms | Classad          | Transformation attributes which the HTCondor Job Router should apply to incoming jobs so they can run on this subcluster   |
 
