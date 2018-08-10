@@ -179,6 +179,7 @@ To avoid potential issues with OSG job submissions, please [notify us](mailto:he
 to your site, including:
 
 - Major OS version changes on the worker nodes (e.g., upgraded from EL 6 to EL 7)
+- Adding or removing [container support](/worker-node/install-singularity)
 - Policy changes regarding maximum walltime or memory usage
 - Scheduled or unscheduled [downtimes](/common/registration#how-to-register-downtime)
 - [Site topology changes](/commmon/registration) such as additions, modifications, or retirements
