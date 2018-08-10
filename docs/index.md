@@ -182,7 +182,7 @@ to your site, including:
 - Adding or removing [container support](/worker-node/install-singularity)
 - Policy changes regarding maximum walltime or memory usage
 - Scheduled or unscheduled [downtimes](/common/registration#how-to-register-downtime)
-- [Site topology changes](/commmon/registration) such as additions, modifications, or retirements
+- [Site topology changes](/common/registration) such as additions, modifications, or retirements
 - Changes to site contacts, such as administrative or security staff
 
 It is also important to keep your software and data (e.g., CA and VO client) up-to-date with the
