@@ -91,7 +91,7 @@ From a host that meets the above requirements, follow the instructions below to 
 
 1. Find your institution-specific InCommon contact
    (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/)),
-   submit the CSR that you generated above, and ask for the certificate to be signed by the InCommon IGTF CA.
+   submit the CSR that you generated above, and request a 1-year `IGTF Server Certificate` for `OTHER` server software.
 1. After the certificate has been issued by your institution, download it on its intended host and copy over the key you
 generated above.
 1. Verify that the issuer `CN` field is ` InCommon IGTF Server CA`:
