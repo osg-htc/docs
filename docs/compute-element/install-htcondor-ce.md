@@ -323,13 +323,11 @@ Some of the HTCondor-CE administrative and user tools are documented in [the HTC
 Validating HTCondor-CE
 ----------------------
 
-There are different ways to make sure that your HTCondor-CE host is working well:
+To validate an HTCondor-CE, perform the following verification steps:
 
--   Perform automated validation by running [RSV](../monitoring/install-rsv)
--   Manually verify your HTCondor-CE using [HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce); useful tools include:
-    -   [condor\_ce\_run](troubleshoot-htcondor-ce#condor_ce_run)
-    -   [condor\_ce\_trace](troubleshoot-htcondor-ce#condor_ce_trace)
-    -   [condor\_submit](troubleshoot-htcondor-ce#condor_submit)
+1. Verify the CE's network configuration using [condor\_ce\_host\_network\_check](troubleshoot-htcondor-ce#condor_ce_host_network_check).
+
+1. Verify that jobs can complete successfully using [condor\_ce\_trace](troubleshoot-htcondor-ce#condor_ce_trace).
 
 Troubleshooting HTCondor-CE
 ---------------------------
