@@ -451,6 +451,31 @@ condor output.
 2.  **If you see “gsi@unmapped” in the “Remote Mapping” line:** Either your credentials are not mapped on the CE or authentication is not set up at all. To set up authentication, refer to our [installation document](install-htcondor-ce#configuring-authentication).
 3.  **If the job submits but does not complete:** Look at the status of the job and perform the relevant [troubleshooting steps](#htcondor-ce-troubleshooting-items).
 
+### condor_ce_host_network_check
+
+#### Usage
+
+`condor_ce_host_network_check` is a tool for testing an HTCondor-CE's networking configuration:
+
+```console
+root@host # condor_ce_host_network_check
+Starting analysis of host networking for HTCondor-CE
+System hostname: fermicloud360.fnal.gov
+FQDN matches hostname
+Forward resolution of hostname fermicloud360.fnal.gov is 131.225.155.96.
+Backward resolution of IPv4 131.225.155.96 is fermicloud360.fnal.gov.
+Forward and backward resolution match!
+HTCondor is considering all network interfaces and addresses.
+HTCondor would pick address of 131.225.155.96 as primary address.
+HTCondor primary address 131.225.155.96 matches system preferred address.
+Host network configuration should work with HTCondor-CE
+```
+
+#### Troubleshooting
+
+If the tool reports that `Host network configuration not expected to work with HTCondor-CE`, ensure that forward and
+reverse DNS resolution return the public IP and hostname.
+
 ### condor_ce_run
 
 #### Usage

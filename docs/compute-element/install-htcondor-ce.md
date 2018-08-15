@@ -325,49 +325,9 @@ Validating HTCondor-CE
 
 To validate an HTCondor-CE, perform the following verification steps:
 
-1. Verify the CE's network configuration using `condor_ce_host_network_check`:
+1. Verify the CE's network configuration using [condor\_ce\_host\_network\_check](troubleshoot-htcondor-ce#condor_ce_host_network_check).
 
-        :::console
-        root@host # condor_ce_host_network_check
-        Starting analysis of host networking for HTCondor-CE
-        System hostname: fermicloud360.fnal.gov
-        FQDN matches hostname
-        Forward resolution of hostname fermicloud360.fnal.gov is 131.225.155.96.
-        Backward resolution of IPv4 131.225.155.96 is fermicloud360.fnal.gov.
-        Forward and backward resolution match!
-        HTCondor is considering all network interfaces and addresses.
-        HTCondor would pick address of 131.225.155.96 as primary address.
-        HTCondor primary address 131.225.155.96 matches system preferred address.
-        Host network configuration should work with HTCondor-CE
-
-    If the tool reports that `Host network configuration not expected to work with HTCondor-CE`, ensure that forward and
-    reverse DNS resolution return the public IP and hostname.
-
-1. Verify that jobs can complete successfully:
-
-    1. Generate an X.509 proxy using `voms-proxy-init` as a non-root user. For example:
-
-            :::console
-            user@host $ voms-proxy-init
-            Enter GRID pass phrase:
-            Your identity: /DC=org/DC=cilogon/C=US/O=University of Wisconsin-Madison/CN=Brian Lin A106521
-            Creating proxy .................................................................. Done
-
-            Your proxy is valid until Thu Aug 16 00:47:09 2018
-
-        Note the Distinguished Name (DN) in the output, everything after `Your identity: `.
-        In the above example, the DN is:
-
-            /DC=org/DC=cilogon/C=US/O=University of Wisconsin-Madison/CN=Brian Lin A106521
-
-    1. [Map your DN](/security/lcmaps-voms-authentication/#mapping-users) to a user that exists on the CE and can run
-       jobs on your cluster.
-
-    1. Submit a test job using [condor\_ce\_trace](troubleshoot-htcondor-ce#condor_ce_trace):
-
-            :::console
-            user@host $ condor_ce_trace `hostname`
-
+1. Verify that jobs can complete successfully using [condor\_ce\_trace](troubleshoot-htcondor-ce#condor_ce_trace).
 
 Troubleshooting HTCondor-CE
 ---------------------------
