@@ -2556,16 +2556,15 @@ cms\/Role=production cms.prod
 <h3 id="using-htcondor-ce-tools">Using HTCondor-CE tools<a class="headerlink" href="#using-htcondor-ce-tools" title="Permanent link">&para;</a></h3>
 <p>Some of the HTCondor-CE administrative and user tools are documented in <a href="../troubleshoot-htcondor-ce">the HTCondor-CE troubleshooting guide</a>.</p>
 <h2 id="validating-htcondor-ce">Validating HTCondor-CE<a class="headerlink" href="#validating-htcondor-ce" title="Permanent link">&para;</a></h2>
-<p>There are different ways to make sure that your HTCondor-CE host is working well:</p>
-<ul>
-<li>Perform automated validation by running <a href="../../monitoring/install-rsv">RSV</a></li>
-<li>Manually verify your HTCondor-CE using <a href="../troubleshoot-htcondor-ce">HTCondor-CE troubleshooting guide</a>; useful tools include:<ul>
-<li><a href="../troubleshoot-htcondor-ce#condor_ce_run">condor_ce_run</a></li>
-<li><a href="../troubleshoot-htcondor-ce#condor_ce_trace">condor_ce_trace</a></li>
-<li><a href="../troubleshoot-htcondor-ce#condor_submit">condor_submit</a></li>
-</ul>
+<p>To validate an HTCondor-CE, perform the following verification steps:</p>
+<ol>
+<li>
+<p>Verify the CE's network configuration using <a href="../troubleshoot-htcondor-ce#condor_ce_host_network_check">condor_ce_host_network_check</a>.</p>
 </li>
-</ul>
+<li>
+<p>Verify that jobs can complete successfully using <a href="../troubleshoot-htcondor-ce#condor_ce_trace">condor_ce_trace</a>.</p>
+</li>
+</ol>
 <h2 id="troubleshooting-htcondor-ce">Troubleshooting HTCondor-CE<a class="headerlink" href="#troubleshooting-htcondor-ce" title="Permanent link">&para;</a></h2>
 <p>For information on how to troubleshoot your HTCondor-CE, please refer to <a href="../troubleshoot-htcondor-ce">the HTCondor-CE troubleshooting guide</a>.</p>
 <h2 id="registering-the-ce">Registering the CE<a class="headerlink" href="#registering-the-ce" title="Permanent link">&para;</a></h2>
