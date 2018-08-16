@@ -100,8 +100,10 @@ To install singularity as `setuid`, make sure that your host is up to date befor
 ### Configuring singularity ###
 
 The OSG distribution of singularity includes a feature called
-`underlay` that is not enabled by default but recommended because it
-is less vulnerable to security problems than the default `overlay`
+`underlay` that enables using bind mount points that do not exist in
+the container image.
+It is not enabled by default but recommended because it is less
+vulnerable to security problems than the similar default `overlay`
 feature.
 In addition, the `overlay` feature does not work on RHEL6 and does not
 work correctly on RHEL7 when container images are distributed by CVMFS.
