@@ -8,6 +8,7 @@ Release Notes
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.17](/release/3.4/release-3-4-17)     | 2018-08-01 | Singularity 2.6.0, HTCondor 8.6.12, Pegasus 4.8.3, HTCondor-CE 3.1.3, xrootd-lcmaps 1.4.0; Upcoming: HTCondor 8.7.9 |
 | [3.4.16-2](/release/3.4/release-3-4-16-2) | 2018-08-08 | CILogon OpenID Certification Authority Certificate                      |
 | [3.4.16](/release/3.4/release-3-4-16)     | 2018-08-01 | Frontier Squid 3.5.27-5.1, XRootD 4.8.4, SciTokens 1.2.0                |
 | [3.4.15](/release/3.4/release-3-4-15)     | 2018-07-06 | High Priority Release: Singularity 2.5.2                                |
@@ -16,7 +17,7 @@ Release Notes
 | [3.4.13](/release/3.4/release-3-4-13)     | 2018-06-12 | CVMFS 2.5.0, HTCondor 8.6.11, Singularity 2.5.1, Pegasus 4.8.2, voms-proxy-direct; Upcoming: HTCondor 8.7.8 |
 | [3.4.12-3](/release/3.4/release-3-4-12-3) | 2018-05-21 | IGTF 1.91                                                               |
 | [3.4.12-2](/release/3.4/release-3-4-12-2) | 2018-05-10 | Added Let's Encrypt CA, VO Package v79                                  |
-| [3.4.12](/release/3.4/release-3-4-12)     | 2018-05-10 | HTCondor-CE 3.1.2, GlideinWMS 3.2.22.2, XRootD 4.8.3, Gratia probes 1.20, RSV 3.18; Upcoming: GlideinWM 3.3.3 |
+| [3.4.12](/release/3.4/release-3-4-12)     | 2018-05-10 | HTCondor-CE 3.1.2, GlideinWMS 3.2.22.2, XRootD 4.8.3, Gratia probes 1.20, RSV 3.18; Upcoming: GlideinWMS 3.3.3 |
 | [3.4.11](/release/3.4/release-3-4-11)     | 2018-05-01 | High Priority Release: Singularity 2.5.0                                |
 | [3.4.10](/release/3.4/release-3-4-10)     | 2018-04-18 | Singularity 2.4.6, HTCondor-CE 3.1.1, HTCondor 8.6.10, gigetcert 1.16, BLAHP 1.18.36, xrootd-lcmaps 1.2.1-3, osg-configure 2.2.4; Upcoming: HTCondor 8.7.7, xrootd-hdfs 2.0.2 |
 | [3.4.9-2](/release/3.4/release-3-4-9-2)   | 2018-04-05 | IGTF 1.90, VO Package v78                                               |
