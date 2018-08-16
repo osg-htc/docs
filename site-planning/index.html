@@ -276,36 +276,42 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#background" title="Background" class="md-nav__link">
-    Background
+  <a href="#osg-site-services" title="OSG Site Services" class="md-nav__link">
+    OSG Site Services
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pilot-jobs" title="Pilot Jobs" class="md-nav__link">
+    Pilot Jobs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runtime-environment" title="Runtime environment" class="md-nav__link">
+    Runtime environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-services" title="Data Services" class="md-nav__link">
+    Data Services
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#site-policies" title="Site Policies" class="md-nav__link">
     Site Policies
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compute-element" title="Compute Element" class="md-nav__link">
-    Compute Element
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#worker-node-client" title="Worker Node Client" class="md-nav__link">
-    Worker Node Client
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#data-service" title="Data Service" class="md-nav__link">
-    Data Service
   </a>
   
 </li>
@@ -1650,36 +1656,42 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#background" title="Background" class="md-nav__link">
-    Background
+  <a href="#osg-site-services" title="OSG Site Services" class="md-nav__link">
+    OSG Site Services
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pilot-jobs" title="Pilot Jobs" class="md-nav__link">
+    Pilot Jobs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runtime-environment" title="Runtime environment" class="md-nav__link">
+    Runtime environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-services" title="Data Services" class="md-nav__link">
+    Data Services
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#site-policies" title="Site Policies" class="md-nav__link">
     Site Policies
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compute-element" title="Compute Element" class="md-nav__link">
-    Compute Element
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#worker-node-client" title="Worker Node Client" class="md-nav__link">
-    Worker Node Client
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#data-service" title="Data Service" class="md-nav__link">
-    Data Service
   </a>
   
 </li>
@@ -1704,97 +1716,95 @@
                 
                 
                 <h1 id="site-planning">Site Planning<a class="headerlink" href="#site-planning" title="Permanent link">&para;</a></h1>
-<p>This document is for <strong>System Administrators</strong>. The purpose of the document is to provide an overview about the different ways to setup an OSG site and to encourage you to plan your site before you continue to install the OSG software on your site.</p>
-<p>After reading this document you should be able to identify the site elements needed to setup your OSG site and choose among different technology choices presented.</p>
-<h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h2>
-<p>The goal for the OSG Software stack is to provide a uniform computing and storage fabric across many
-independently-managed computing and storage resources. These individual services will be accessed by virtual
-organizations (VOs), which will delegate the resources to scientists, researchers, and students.</p>
-<p><em>Sharing</em> is a fundamental principle for the OSG: your site is encouraged to support as many OSG-registered VOs as
-local conditions allow.  <em>Autonomy</em> is another principle: you are not required to support any you do not want.</p>
-<p>As the administrator responsible for deployment of the OSG software stack, your task is to make your existing computing
-and storage resources available to and reliable for your supported VOs. Fundamentally, there are three components:</p>
-<ul>
-<li><em>Compute Element</em> (CE): This provides remote access for VOs to submit "pilot jobs" to your local batch system.</li>
-<li><em>Worker node</em> (WN): A standardized runtime environment for pilot jobs, managed and allocated by the batch system.</li>
-<li><em>Data</em>: Various services that provide access to the data and storage resources at your site.</li>
-</ul>
-<p>Depending on the VOs you want to support, data services may not be necessary.  Even a compute element is not strictly
-necessary: OSG offers a "hosted CE" service where OSG will run the software provided only with a SSH connection to the
-batch submit host.  Contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> for more information on the hosted CE.</p>
-<ul>
-<li>The simplest way to support OSG is to only provide SSH logins for the hosted CE and install the worker node
-  environment.</li>
-<li>Larger or more complex sites will elect to run their own CE in addition to the WN environment and the simplest
-  data service (HTTP proxy cache).</li>
-<li>The largest sites will additionally run large-scale data services such as a "storage element".  This is often required
-  for sites that want to support more complex organizations such as ATLAS or CMS.</li>
-</ul>
+<p>The OSG vision is to integrate computing across different resource types and business models to allow campus IT to offer
+a maximally flexible <em>high throughput computing</em> (HTC) environment for their researchers.</p>
+<p>This document is for <strong>System Administrators</strong> and aims to provide an overview of the different options to consider when
+planning to share resources via the OSG.</p>
+<p>After reading, you should be able to understand what software or services you want to provide to support your
+researchers</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>An essential concept on the OSG is the "pilot job".  The pilot, which arrives at your batch system, is sent by the
-VO and gets a resource allocation.  However, it <em>does not</em> contain any scientific payload.  Once started, it will
-connect back to a resource pool and pull down individuals' scientific "payload jobs".  Hence, we do not think about
-submitting "jobs" to sites but rather "resource requests".</p>
+<p>This document covers the most common options.
+OSG is a diverse infrastructure: depending on what groups you want to support, you may need to install additional
+services.
+Coordinate with your local researchers.</p>
 </div>
+<h2 id="osg-site-services">OSG Site Services<a class="headerlink" href="#osg-site-services" title="Permanent link">&para;</a></h2>
+<p>The OSG Software stack tries to provide a uniform computing and storage fabric across many independently-managed
+computing and storage resources.
+These individual services will be accessed by virtual organizations (VOs), which will delegate the resources to
+scientists, researchers, and students.</p>
+<p><em>Sharing</em> is a fundamental principle for the OSG: your site is encouraged to support as many OSG-registered VOs as
+local conditions allow.
+<em>Autonomy</em> is another principle: you are not required to support any VOs you do not want.
+As the administrator, your task is to make your existing computing and storage resources available to and reliable for
+your supported VOs.</p>
+<p>We break this down into three tasks:</p>
+<ul>
+<li>Getting <a href="#pilot-jobs">"pilot jobs"</a> submitted to your site batch system.</li>
+<li>Establishing an OSG <a href="#runtime-environment">runtime environment</a> for running jobs.</li>
+<li><a href="#data-services">Delivering data</a> to payload applications to be processed.</li>
+</ul>
+<p>There are multiple approaches for each item, depending on the VOs you support, and time you have to invest in the OSG.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An essential concept in the OSG is the "pilot job".
+The pilot, which arrives at your batch system, is sent by the VO to get a resource allocation.
+However, it <em>does not</em> contain any research payload.
+Once started, it will connect back to a resource pool and pull down individuals' research "payload jobs".
+Hence, we do not think about submitting "jobs" to sites but rather "resource requests".</p>
+</div>
+<h3 id="pilot-jobs">Pilot Jobs<a class="headerlink" href="#pilot-jobs" title="Permanent link">&para;</a></h3>
+<p>Traditionally, an OSG <em>Compute Element</em> (CE) provides remote access for VOs to submit pilot jobs to your
+<a href="..#prepare-the-batch-system">local batch system</a>.
+However, today, there are two options for accepting pilot jobs at your site:</p>
+<ul>
+<li><strong>Hosted CE</strong>: OSG will run and operate the CE services; the site only needs to provide a SSH pubkey-based
+   authentication access to the central OSG host.
+   OSG will interface with the VO and submit pilots directly to your batch system via SSH.
+   By far, this is the <em>simplest option</em>: however, it is less-scalable and the site delegates many of the scheduling
+   decisions to the OSG.
+   Contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> for more information on the hosted CE.</li>
+<li><strong>OSG CE</strong>: The traditional option where the site installs and operates a HTCondor-based CE on a dedicated host.
+   This provides the best scalability and flexibility, but may require an ongoing time investment from the site.
+   The OSG CE install and operation is covered in this documentation page.</li>
+</ul>
+<h3 id="runtime-environment">Runtime environment<a class="headerlink" href="#runtime-environment" title="Permanent link">&para;</a></h3>
+<p>The OSG requires a very minimal runtime environment that can be deployed via <a href="../worker-node/install-wn-tarball">tarball</a>,
+<a href="../worker-node/install-wn">RPM</a>, or through a <a href="../worker-node/install-wn-oasis">global filesystem</a> on your cluster's worker
+nodes.</p>
+<p>We believe that all research applications should be portable and self-contained, with no OS dependencies.
+This provides access to the most resources and minimizes the presence at sites.
+However, this ideal is often difficult to achieve in practice.
+For sites that want to support a uniform runtime environment, we provide a global filesystem called
+<a href="../worker-node/install-cvmfs">CVMFS</a> that VOs can use to distribute their own software dependencies.</p>
+<p>Finally, many researchers use applications that require a specific OS environment - not just individual dependencies -
+that is distributed as a container.
+OSG supports the use of the <a href="http://singularity.lbl.gov/">Singularity</a> container runtime with
+<a href="https://hub.docker.com">Docker-based</a> image distribution.</p>
+<h3 id="data-services">Data Services<a class="headerlink" href="#data-services" title="Permanent link">&para;</a></h3>
+<p>Whether accessed through CVMFS or command-line software like <code>curl</code>, the majority of software is moved via HTTP in
+cache-friendly patterns.
+All sites are highly encouraged to use an <a href="../data/frontier-squid">HTTP proxy</a> to reduce the load on the WAN from the
+cluster.</p>
+<p>Depending on the VOs you want to support, additional data services may be necessary:</p>
+<ul>
+<li>Some VOs elect to stream their larger input data from offsite using OSG's "StashCache" service.
+  This requires no services to be run by the site</li>
+<li>The largest sites will additionally run large-scale data services such as a "storage element".
+  This is often required for sites that want to support more complex organizations such as ATLAS or CMS.</li>
+</ul>
 <h2 id="site-policies">Site Policies<a class="headerlink" href="#site-policies" title="Permanent link">&para;</a></h2>
-<p>Sites are encouraged to clearly specify and communicate their local policies regarding resource access. One common
-mechanism to do this is post them on a web page and make this page part of your site registration in
-<a href="http://my.opensciencegrid.org">MyOSG</a>.  Written policies help external entities understand what your site wants to
-accomplish with the OSG -- and are often internally clarifying.</p>
+<p>Sites are encouraged to clearly specify and communicate their local policies regarding resource access.
+One common mechanism to do this is post them on a web page and make this page part of your
+<a href="https://github.com/opensciencegrid/topology/">site registration</a>.
+Written policies help external entities understand what your site wants to accomplish with the OSG -- and are often
+internally clarifying.</p>
 <p>In line of our principle of <em>sharing</em>, we encourage you to allow virtual organizations registered with the OSG
-"opportunistic use" of your resources. You may need to preempt those jobs when higher priority jobs come around.
+"opportunistic use" of your resources.
+You may need to preempt those jobs when higher priority jobs come around.
 The end-users using the OSG generally prefer having access to your site subject to preemption over having no access
 at all.</p>
-<h2 id="compute-element">Compute Element<a class="headerlink" href="#compute-element" title="Permanent link">&para;</a></h2>
-<p>A <strong>Compute Element</strong> allows VOs to access the resources at your site via external submission to a batch system.  To
-provide this service, the OSG provides a vertically-integrated set of software centered around the "HTCondor-CE".</p>
-<p>As part of the CE deploy, you must make a few site design choices:</p>
-<ul>
-<li>Host operating system: Red Hat Enterprise Linux 6 or 7 are supported, as well as derivative distributions (CentOS,
-  ScientificLinux),</li>
-<li>The batch system:  HTCondor, PBS, LSF, SGE, and Slurm are presently supported.  About 70% of OSG sites select
-  HTCondor.  Non-HTCondor sites will need a shared filesystem between the CE and worker nodes that is <em>writable by
-  root</em> from the CE.</li>
-<li>The network architecture of your cluster: Most VOs require unrestricted outbound network access from the worker nodes;
-  this is typically done through a NAT.  For sites where this is difficult to provide, some VOs are be able to provide
-  a whitelist of IP addresses they will need outbound access to; contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> for support.</li>
-</ul>
-<p>The CE will map each VO to one Unix user accont at the site (due to historic concerns, a handful may map to 2-3
-accounts).  Except in the case of HTCondor, the CE and the worker nodes need to have uniform username-to-UID mappings.</p>
-<p>In addition to the basic remote submission service, the CE providers accounting and monitoring services, which will
-run by default when the CE is enabled and started. The OSG central accounting system, GRACC, recieves individual
-records for each job run by the OSG on your CE. Aggregated summaries of this information can be viewed via the
-<a href="https://gracc.opensciencegrid.org">GRACC</a> web interface.</p>
-<h2 id="worker-node-client">Worker Node Client<a class="headerlink" href="#worker-node-client" title="Permanent link">&para;</a></h2>
-<p>The Worker Node Client is software installed on each worker node to provide a minimal runtime environment for pilot
-jobs.  We strive to keep this as lightweight as possible; it includes basic grid utilities, not scientific libraries.</p>
-<p>There is a wide range of worker node management practices; accordingly, we provide the worker node client in three
-forms:</p>
-<ul>
-<li><a href="../worker-node/install-wn/"><em>RPM packaging</em></a>: Grid utilities are deployed at the system level using <code>yum</code>.</li>
-<li><a href="../worker-node/install-wn-tarball/"><em>Tarball installation</em></a>: Utilities are deployed onto a sitewide shared
-  filesystem by unpacking a tarball and running a configuration script.</li>
-<li><a href="../worker-node/install-wn-oasis"><em>CVMFS</em></a>: CVMFS, a heavily-used global read-only filesystem, provides a copy of the grid utilities.</li>
-</ul>
-<p>Additionally, OSG packages a global read-only filesystem called <a href="../worker-node/install-cvmfs">CVMFS</a> for distribution of
-software and data.  Many VOs either completely rely on CVMFS for software (LIGO, CMS, ATLAS) or rely on CVMFS for a
-majority of jobs (OSG VO).  Some jobs can utilize worker nodes without CVMFS.  You will be able to share your
-resources regardless, but installing CVMFS is a primary mechanism to attract more jobs.</p>
-<h2 id="data-service">Data Service<a class="headerlink" href="#data-service" title="Permanent link">&para;</a></h2>
-<p>There are two types of data services on the OSG:</p>
-<ul>
-<li>A <em>cache</em> pulls in data on read-demand, keeping it locally for further use.  We provide support for the
-  <a href="../data/frontier-squid">Squid HTTP</a> cache for smaller working set sizes and software called <a href="http://xrootd.org">XRootD</a>
-  for larger datasets.  Almost every site on the OSG installs a Squid cache.</li>
-<li>A <strong>Storage Element</strong> provides remote, POSIX-like access to your site storage service for reading and writing of data.
-  All Storage Element implementations in the OSG support the GridFTP, XRootD, and HTTPS protocols.</li>
-</ul>
-<p>The storage element model is chosen mostly by sites that support either ATLAS or CMS VOs; otherwise, only caches are
-typically provided.  Sites that need a SE which have existing POSIX-like storage (e.g., Lustre, GPFS) layer remote
-access services (such as <a href="../data/gridftp">GridFTP</a>) on top of the existing storage.  For sites wanting petascale storage -
-but without an existing install - we provide support for <a href="../data/hadoop-overview">HDFS</a> and
-<a href="../data/xrootd-overview">XRootD</a>.</p>
 <!-- TODO: these figures were all garbage.  Redraw
 ## Example Configurations
 This section contains a few example that illustrate how the different elements contributing to an OSG site can be
