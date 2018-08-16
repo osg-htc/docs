@@ -1,7 +1,7 @@
 OSG Software Release 3.4.17
 ===========================
 
-**Release Date**: 2018-08-08
+**Release Date**: 2018-08-16
 
 Summary of changes
 ------------------
