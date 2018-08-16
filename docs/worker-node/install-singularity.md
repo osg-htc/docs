@@ -99,8 +99,28 @@ To install singularity as `setuid`, make sure that your host is up to date befor
 
 ### Configuring singularity ###
 
-There are no required changes to the default configuration.  If you want
-to see what options are available, see `/etc/singularity/singularity.conf`.
+The OSG distribution of singularity includes a feature called
+`underlay` that is not enabled by default but recommended because it
+is less vulnerable to security problems than the default `overlay`
+feature.
+In addition, the `overlay` feature does not work on RHEL6 and does not
+work correctly oh RHEL7 when container images are distributed by CVMFS.
+
+Set these options in `/etc/singularity/singularity.conf`:
+
+        use overlay = no
+        use underlay = yes
+
+!!! warning
+    If you modify `/etc/singularity/singularity.conf`, be careful with
+    your upgrade procedures.
+    RPM will not automatically merge your changes with new upstream
+    configuration keys, which may cause a broken install or inadvertently
+    change the site configuration.  Singularity changes its default
+    configuration file more frequently than typical OSG software.
+
+    Look for `singularity.conf.rpmnew` after upgrades and merge in any
+    changes to the defaults.
 
 #### Limiting image types ####
 
@@ -120,17 +140,6 @@ the following option in `/etc/singularity/singularity.conf`:
 While reasonable for some sites, this is not required as there are currently
 no public kernel exploits for this issue; any exploits are patched by
 Red Hat when they are discovered.
-
-!!! warning
-    If you modify `/etc/singularity/singularity.conf`, carefully test any
-    upgrade procedures.
-    RPM will not automatically merge your changes with new upstream
-    configuration keys, which may cause a broken install or inadvertently
-    change the site configuration.  Singularity renames configuration keys
-    more frequently than typical OSG software.
-
-    Look for `.rpmnew` files after upgrades and merge in any changes to the
-    defaults.
 
 ### Validating singularity ###
 
