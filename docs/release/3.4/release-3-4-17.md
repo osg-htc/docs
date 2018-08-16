@@ -17,15 +17,15 @@ This release contains:
     -   [HTCondor 8.6.12](https://www-auth.cs.wisc.edu/lists/htcondor-world/2018/msg00016.shtml): Bug fix release
         -   Fixed memory leak when SSL authentication fails
         -   Can now set job environment variables in Singularity containers
-    -   CVMFS X.509 helper: Fixed file descriptor leak
-    -   Gratia probes: Fix for missing Slurm accounting records
-    -   [Pegasus 4.8.3](https://pegasus.isi.edu/2018/08/06/pegasus-4-8-3-released/): Bug fixes and container based example
-    -   [HTCondor-CE 3.1.3](https://github.com/opensciencegrid/htcondor-ce/releases/tag/v3.1.3): Fix for condor\_ce\_info\_status using the wrong port for the central collector
-    -   xrootd-lcmaps 1.4.0: Fix ability to specify an alternate policy name (EL7 Only)
-    -   New xrootd-multiuser plugin (EL7 only)
+    -   CVMFS X.509 helper 1.1: Fixed file descriptor leak
+    -   Gratia probes 1.20.4: Fixed problem where some Slurm jobs weren't reported
+    -   [Pegasus 4.8.3](https://pegasus.isi.edu/2018/08/06/pegasus-4-8-3-released/): Minor bug fix release
+    -   [HTCondor-CE 3.1.3](https://github.com/opensciencegrid/htcondor-ce/releases/tag/v3.1.3): Fix for `condor_ce_info_status` using the wrong port for the central collector
+    -   xrootd-lcmaps 1.4.0: Fixed the ability to specify an alternate policy name in lcmaps.db (EL7 Only)
+    -   New xrootd-multiuser 0.4.2 plugin (EL7 only)
 -   Upcoming Repository
     -   [HTCondor 8.7.9](https://www-auth.cs.wisc.edu/lists/htcondor-world/2018/msg00017.shtml)
-        -   Can now specify a host name alias (CNAME) for NETWORK_HOSTNAME
+        -   Fixed handling of CNAMEs in NETWORK_HOSTNAME
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.17%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
