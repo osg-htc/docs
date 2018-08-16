@@ -41,8 +41,8 @@ There are multiple approaches for each item, depending on the VOs you support, a
 !!! note
     An essential concept on the OSG is the "pilot job".
     The pilot, which arrives at your batch system, is sent by the VO and gets a resource allocation.
-    However, it _does not_ contain any scientific payload.
-    Once started, it will connect back to a resource pool and pull down individuals' scientific "payload jobs".
+    However, it _does not_ contain any research payload.
+    Once started, it will connect back to a resource pool and pull down individuals' research "payload jobs".
     Hence, we do not think about submitting "jobs" to sites but rather "resource requests".
 
 ### Pilot Jobs
@@ -66,7 +66,7 @@ However, today, there are two options for accepting pilot jobs at your site:
 The OSG provides a very minimal runtime environment that can be deployed via tarball, RPM, or through a global
 filesystem on your cluster's worker nodes.
 
-We believe that all scientific applications should be portable and self-contained, with no OS dependencies.
+We believe that all research applications should be portable and self-contained, with no OS dependencies.
 This provides access to the most resources and minimizes the presence at sites.
 However, this ideal is often difficult to achieve in practice.
 For sites that want to support a uniform runtime environment, we provide a global filesystem called CVMFS that VOs can
@@ -135,7 +135,7 @@ Worker Node Client
 ------------------
 
 The Worker Node Client is software installed on each worker node to provide a minimal runtime environment for pilot
-jobs.  We strive to keep this as lightweight as possible; it includes basic grid utilities, not scientific libraries.
+jobs.  We strive to keep this as lightweight as possible; it includes basic grid utilities, not research libraries.
 
 There is a wide range of worker node management practices; accordingly, we provide the worker node client in three
 forms:
