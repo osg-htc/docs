@@ -104,7 +104,7 @@ The OSG distribution of singularity includes a feature called
 is less vulnerable to security problems than the default `overlay`
 feature.
 In addition, the `overlay` feature does not work on RHEL6 and does not
-work correctly oh RHEL7 when container images are distributed by CVMFS.
+work correctly on RHEL7 when container images are distributed by CVMFS.
 
 Set these options in `/etc/singularity/singularity.conf`:
 
