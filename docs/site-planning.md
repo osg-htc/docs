@@ -26,21 +26,21 @@ scientists, researchers, and students.
 
 _Sharing_ is a fundamental principle for the OSG: your site is encouraged to support as many OSG-registered VOs as
 local conditions allow.
-_Autonomy_ is another principle: you are not required to support any you do not want.
+_Autonomy_ is another principle: you are not required to support any VOs you do not want.
 As the administrator, your task is to make your existing computing and storage resources available to and reliable for
 your supported VOs.
 
 We break this down into three tasks:
 
-- Getting "pilot jobs" submitted to your site batch system.
-- Establishing a OSG runtime environment for running jobs.
-- Delivering data to payload applications to be processed.
+- Getting ["pilot jobs"](#pilot-jobs) submitted to your site batch system.
+- Establishing an OSG [runtime environment](#runtime-environment) for running jobs.
+- [Delivering data](#data-services) to payload applications to be processed.
 
-There are multiple approaches for each item, depending on the VOs you support, and time you have to invest i the OSG.
+There are multiple approaches for each item, depending on the VOs you support, and time you have to invest in the OSG.
 
 !!! note
-    An essential concept on the OSG is the "pilot job".
-    The pilot, which arrives at your batch system, is sent by the VO and gets a resource allocation.
+    An essential concept in the OSG is the "pilot job".
+    The pilot, which arrives at your batch system, is sent by the VO to get a resource allocation.
     However, it _does not_ contain any research payload.
     Once started, it will connect back to a resource pool and pull down individuals' research "payload jobs".
     Hence, we do not think about submitting "jobs" to sites but rather "resource requests".
@@ -63,14 +63,15 @@ However, today, there are two options for accepting pilot jobs at your site:
 
 ### Runtime environment
 
-The OSG provides a very minimal runtime environment that can be deployed via tarball, RPM, or through a global
-filesystem on your cluster's worker nodes.
+The OSG provides a very minimal runtime environment that can be deployed via [tarball](/worker-node/install-wn-tarball),
+[RPM](/worker-node/install-wn), or through a [global filesystem](/worker-node/install-wn-oasis) on your cluster's worker
+nodes.
 
 We believe that all research applications should be portable and self-contained, with no OS dependencies.
 This provides access to the most resources and minimizes the presence at sites.
 However, this ideal is often difficult to achieve in practice.
-For sites that want to support a uniform runtime environment, we provide a global filesystem called CVMFS that VOs can
-use to distribute their own software dependencies.
+For sites that want to support a uniform runtime environment, we provide a global filesystem called
+[CVMFS](/worker-node/install-cvmfs) that VOs can use to distribute their own software dependencies.
 
 Finally, many researchers use applications that require a specific OS environment - not just individual dependencies -
 that is distributed as a container.
@@ -84,7 +85,7 @@ cache-friendly patterns.
 All sites are highly encouraged to use a HTTP proxy (such as the Squid software) to reduce the load on the WAN from the
 cluster.
 
-Depending on the VOs you want to support, additional data services may not be necessary:
+Depending on the VOs you want to support, additional data services may be necessary:
 
 - Some VOs elect to stream their larger input data from offsite using OSG's "StashCache" service.
   This requires no services to be run by the site
