@@ -47,6 +47,9 @@ user@host $ condor_ce_trace --debug --attribute='+xcount=4' --attribute='+maxMem
 
 For a list of other attributes that can be set with the `--attribute` option, consult the [job attributes](#job-attributes) section.
 
+!!! warning
+    If the htcondor-ce is submitting to a non-htcondor based cluster, job attributes may not be correctly translated. 
+
 #### condor_ce_run
 
 `condor_ce_run` is a Python script that calls `condor_submit` on a generated submit file and tracks its progress with `condor_q`. To submit a job with `condor_ce_run`, run the following command:
