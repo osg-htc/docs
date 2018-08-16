@@ -12,7 +12,7 @@ Before starting the installation process, consider the following points (consult
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `condor` (UID 4716) and `gratia` (UID 42401)
 -   **Service certificate:** The HTCondor-CE service uses a host certificate at `/etc/grid-security/hostcert.pem` and an accompanying key at `/etc/grid-security/hostkey.pem`
--   **Network ports:** The pilot factories must be able to contact your HTCondor-CE service on ports 9619 and 9620 for condor versions < 8.3.2 (TCP)
+-   **Network ports:** The pilot factories must be able to contact your HTCondor-CE service on port 9619 (TCP)
 -   **Host choice:** HTCondor-CE should be installed on a host that already has the ability to submit jobs into your local cluster
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
@@ -25,43 +25,49 @@ As with all OSG software installations, there are some one-time (per host) steps
 Installing HTCondor-CE
 ----------------------
 
-An HTCondor-CE installation consists of the job gateway (i.e., the HTCondor-CE job router) and other support software (e.g., GridFTP, a Gratia probe, authentication software). To simplify installation, OSG provides convenience RPMs that install all required software with a single command.
+An HTCondor-CE installation consists of the job gateway (i.e., the HTCondor-CE job router) and other support software
+(e.g., GridFTP, a Gratia probe, authentication software).
+To simplify installation, OSG provides convenience RPMs that install all required software.
 
 1. Clean yum cache:
 
         ::console
         root@host # yum clean all --enablerepo=*
 
-2. Update software:
+1. Update software:
 
         :::console
         root@host # yum update
+
     This command will update **all** packages
 
-3. If your batch system is already installed via non-RPM means and is in the following list, install the appropriate 'empty' RPM. Otherwise, skip to the next step.
+1. **(Optional)** If your batch system is already installed via non-RPM means and is in the following list, install the appropriate 'empty' RPM.
+   Otherwise, skip to the next step.
 
     | If your batch system is… | Then run the following command…                       |
     |:-------------------------|:------------------------------------------------------|
     | HTCondor                 | `yum install empty-condor --enablerepo=osg-empty`     |
     | SLURM                    | `yum install empty-slurm --enablerepo=osg-empty`      |
 
-4. If your HTCondor batch system is already installed via non-OSG RPM means, add the line below to `/etc/yum.repos.d/osg.repo`. Otherwise, skip to the next step.
+1. **(Optional)** If your HTCondor batch system is already installed via non-OSG RPM means, add the line below to `/etc/yum.repos.d/osg.repo`.
+   Otherwise, skip to the next step.
 
-        exclude=condor empty-condor
+        exclude=condor
 
-5. Select the appropriate convenience RPM(s):
+1. Select the appropriate convenience RPM:
 
-    | If your batch system is… | Then use the following package(s)… |
-    |:-------------------------|:-----------------------------------|
-    | HTCondor                 | `osg-ce-condor`                    |
-    | LSF                      | `osg-ce-lsf`                       |
-    | PBS                      | `osg-ce-pbs`                       |
-    | SGE                      | `osg-ce-sge`                       |
-    | SLURM                    | `osg-ce-slurm`                     |
+    | If your batch system is... | Then use the following package... |
+    |:---------------------------|:----------------------------------|
+    | HTCondor                   | `osg-ce-condor`                   |
+    | LSF                        | `osg-ce-lsf`                      |
+    | PBS                        | `osg-ce-pbs`                      |
+    | SGE                        | `osg-ce-sge`                      |
+    | SLURM                      | `osg-ce-slurm`                    |
 
-6. Install the CE software:
+1. Install the CE software:
 
-        root@host # yum install *PACKAGE(S)*
+        :::console
+        root@host # yum install %RED%<PACKAGE>%ENDCOLOR%
 
 
 Configuring HTCondor-CE
@@ -86,7 +92,7 @@ Enable your batch system by editing the `enabled` field in the `/etc/osg/config.
 enabled = %RED%True%ENDCOLOR%
 ```
 
-If you are using HTCondor as your **local batch system** (i.e., in addition to your HTCondor-CE), skip to the [configuring authentication](#configuring-authentication) section. For other batch systems (e.g., PBS, LSF, SGE, SLURM), keep reading.
+If you are using HTCondor as your **local batch system** (i.e., in addition to your HTCondor-CE), skip to the [configuring authorization](#configuring-authorization) section. For other batch systems (e.g., PBS, LSF, SGE, SLURM), keep reading.
 
 #### Batch systems other than HTCondor
 
@@ -121,50 +127,14 @@ blah_disable_limited_proxy=yes
 !!! note
     There should be no whitespace around the `=`.
 
-### Configuring authentication
+### Configuring authorization
 
-In OSG 3.3, there are three methods to manage authentication for incoming jobs: the [LCMAPS VOMS plugin](../security/lcmaps-voms-authentication), [edg-mkgridmap](../security/edg-mkgridmap) and [GUMS](../security/install-gums). edg-mkgridmap is easy to set up and maintain, and GUMS has more features and capabilities. The LCMAPS VOMS plugin is the new OSG-preferred authentication, offering the simplicity of edg-mkgridmap and many of GUMS' rich feature set. If you need to support [pool accounts](https://www.racf.bnl.gov/Facility/GUMS/1.4/use_configuration.html), GUMS is the only software with that capability.
-
-In OSG 3.4, the LCMAPS VOMS plugin is the only available authentication solution.
-
-#### Authentication with the LCMAPS VOMS plugin
-
-To configure your CE to use the LCMAPS VOMS plugin:
-
-1. If you are using OSG 3.3, add the following line to `/etc/sysconfig/condor-ce`:
-
-        export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1
-
-2. Follow the instructions in [the LCMAPS VOMS plugin installation and configuration document](../security/lcmaps-voms-authentication) to prepare the LCMAPS VOMS plugin
+To configure which virtual organizations and users are authorized to submit jobs to your, follow the instructions in
+[the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin).
 
 !!! note
-    If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the `condor_mapfile`. If this is not the desired behavior, set `GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
-
-#### Authentication with edg-mkgridmap
-
-!!! warning
-    edg-mkgridmap is unavailable in OSG 3.4
-
-To configure your CE to use edg-mkgridmap:
-
-1. Follow the configuration instructions in [the edg-mkgridmap document](../security/edg-mkgridmap) to define the VOs that your site accepts
-2. Set some critical gridmap attributes by editing the `/etc/osg/config.d/10-misc.ini` file on the HTCondor-CE host:
-
-        authorization_method = gridmap
-
-#### Authentication with GUMS
-
-!!! warning
-    GUMS is unavailable in OSG 3.4
-
-1. Follow the instructions in [the GUMS installation and configuration document](../security/install-gums) to prepare GUMS
-2. Set some critical GUMS attributes by editing the `/etc/osg/config.d/10-misc.ini` file on the HTCondor-CE host:
-
-        authorization_method = xacml
-        gums_host = %RED%YOUR GUMS HOSTNAME%ENDCOLOR%
-
-!!! note
-    If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the `condor_mapfile`. If this is not the desired behavior, set `GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
+    If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the `condor_mapfile`.
+    If this is not the desired behavior, set `GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
 
 ### Configuring CE collector advertising
 
@@ -189,18 +159,8 @@ Making changes to the OSG configuration files in the `/etc/osg/config.d` directo
 3. Fix any errors (at least) that `osg-configure` reports.
 4. Once the validation command succeeds without errors, apply the configuration settings:
 
+        :::console
         root@host # osg-configure -c
-
-5. Generate a `user-vo-map` file with your authentication set up (skip this step if you're using the LCMAPS VOMS plugin):
-    1. If you're using edg-mkgridmap, run the following:
-
-            :::console
-            root@host # edg-mkgridmap
-
-    2. If you're using GUMS, run the following:
-
-            :::console
-            root@host # gums-host-cron
 
 ### Optional configuration
 
@@ -316,7 +276,7 @@ The HTCondor-CE View is an optional web interface to the status of your CE. To r
 
 2.  Next, uncomment the `DAEMON_LIST` configuration located at `/etc/condor-ce/config.d/05-ce-view.conf`:
 
-        DAEMON_LIST = $(DAEMON_LIST), CEVIEW, GANGLIAD
+        DAEMON_LIST = $(DAEMON_LIST), CEVIEW, GANGLIAD, SCHEDD
 
 3.  Restart the CE service:
 
@@ -330,7 +290,7 @@ The website is served on port 80 by default. To change this default, edit the va
 Using HTCondor-CE
 -----------------
 
-As a site administrator, there are a few ways in which you might use the HTCondor-CE:
+As a site administrator, there are a few ways to use the HTCondor-CE:
 
 -   Managing the HTCondor-CE and associated services
 -   Using HTCondor-CE administrative tools to monitor and maintain the job gateway
@@ -342,7 +302,7 @@ In addition to the HTCondor-CE job gateway service itself, there are a number of
 
 | Software          | Service name                          | Notes                                                                                  |
 |:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca/#startstop-fetch-crl-a-quick-guide) for more info |
+| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 | Gratia            | `gratia-probes-cron`                  | Accounting software                                                                    |
 | Your batch system | `condor` or `pbs_server` or …         |                                                                                        |
 | HTCondor-CE       | `condor-ce`                           |                                                                                        |
@@ -363,13 +323,11 @@ Some of the HTCondor-CE administrative and user tools are documented in [the HTC
 Validating HTCondor-CE
 ----------------------
 
-There are different ways to make sure that your HTCondor-CE host is working well:
+To validate an HTCondor-CE, perform the following verification steps:
 
--   Perform automated validation by running [RSV](../monitoring/install-rsv)
--   Manually verify your HTCondor-CE using [HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce); useful tools include:
-    -   [condor\_ce\_run](troubleshoot-htcondor-ce#condor_ce_run)
-    -   [condor\_ce\_trace](troubleshoot-htcondor-ce#condor_ce_trace)
-    -   [condor\_submit](troubleshoot-htcondor-ce#condor_submit)
+1. Verify the CE's network configuration using [condor\_ce\_host\_network\_check](troubleshoot-htcondor-ce#condor_ce_host_network_check).
+
+1. Verify that jobs can complete successfully using [condor\_ce\_trace](troubleshoot-htcondor-ce#condor_ce_trace).
 
 Troubleshooting HTCondor-CE
 ---------------------------
@@ -379,10 +337,21 @@ For information on how to troubleshoot your HTCondor-CE, please refer to [the HT
 Registering the CE
 ------------------
 
-To be part of the OSG Production Grid, your CE must be registered in the [OSG Information Management System](https://oim.opensciencegrid.org) (OIM). To register your resource:
+To be part of the OSG Production Grid, your CE must be registered in the [OSG Information Management System](https://github.com/opensciencegrid/topology#topology) (OIM).
+To register your resource:
 
-1.  [Obtain, install, and verify your user certificate](../security/user-certs) (which you may have done already)
-2.  [Register your site and CE in OIM](https://twiki.opensciencegrid.org/bin/view/Operations/OIMRegistrationInstructions)
+1.  Identify the facility, site, and resource group where your HTCondor-CE is hosted.
+    For example, the Center for High Throughput Computing at the University of Wisconsin-Madison uses the following
+    information:
+
+        Facility: University of Wisconsin
+        Site: CHTC
+        Resource Group: CHTC
+
+1. Using the above information, [create or update](https://github.com/opensciencegrid/topology#how-to-register) the
+   appropriate YAML file, using [this template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
+   as a guide.
+
 
 Getting Help
 ------------
@@ -428,7 +397,7 @@ The following users are needed by HTCondor-CE at all sites:
 | File             | User that owns certificate | Path to certificate               |
 |:-----------------|:---------------------------|:----------------------------------|
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` |
-| Host key         | `root`                     | `/etc/grid-security/hostkey.pem`  |
+| Host key         | `root`                     | `/grid-security/hostkey.pem`  |
 
 Find instructions to request a host certificate [here](../security/host-certs).
 
@@ -438,4 +407,4 @@ Find instructions to request a host certificate [here](../security/host-certs).
 | :----------- | :------: | :---------: | :-----: | :------: | :---------------------- |
 | Htcondor-CE  | tcp      | 9619        | X       |          | HTCondor-CE shared port |
 
-Allow inbound and outbound network connection to all internal site servers, such as GUMS and the batch system head-node only ephemeral outgoing ports are necessary.
+Allow inbound and outbound network connection to all internal site servers, such as the batch system head-node only ephemeral outgoing ports are necessary.

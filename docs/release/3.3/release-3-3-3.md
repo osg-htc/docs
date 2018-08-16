@@ -12,7 +12,7 @@ This release contains:
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.3%20ORDER%20BY%20priority%20DESC) were addressed in this release.
 
-Detailed changes are below. All of the documentation can be found [here](../../)
+Detailed changes are below. All of the documentation can be found [here](/index.md)
 
 CA Certificate Update Information
 ---------------------------------
@@ -35,13 +35,13 @@ Install the new CA bundle as soon as possible. The latest CA bundle will NOT be 
 
 For Linux servers (including worker nodes), ensure that the certificate bundle RPM is at version osg-ca-certs-1.50-1 or igtf-ca-certs-1.69-1 or greater.
 
-Instructions for installing server CA certificate bundles are at <https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCertAuth>
+[Instructions for installing server CA certificate bundles](/common/ca)
 
-We also highly recommend that you use the CA Cert automatic updater <https://twiki.grid.iu.edu/bin/view/Documentation/Release3/OsgCaCertsUpdater> but note that you need to be using a current OSG software distribution for that to work, that is, OSG 3.2 or 3.3.
+We also highly recommend that you use the [CA Cert automatic updater](/security/certificate-management#osg-ca-certificates-updater) but note that you need to be using a current OSG software distribution for that to work, that is, OSG 3.2 or 3.3.
 
 ### Other Information:
 
-If you have the CA certificate bundle installed on a server with OSG 3.1, you need to upgrade to OSG 3.2 or greater. Follow these instructions: <https://twiki.grid.iu.edu/bin/view/Documentation/Release3/OSGReleaseSeries#Updating_from_OSG_3_1_or_3_2_to>
+If you have the CA certificate bundle installed on a server with OSG 3.1, you need to upgrade to OSG 3.2 or greater. Follow [these instructions](/release/release_series/#updating-from-osg-31-32-33-to-33-or-34)
 
 Please email OSG Security Team with questions or comments
 
@@ -72,7 +72,7 @@ Known Issues
                 all.pidpath /var/run/xrootd
 
 -   Manual configuration for cache server
-    -   In contrast to the origin server configuration, one needs to declare `pss.origin <stash-redirector.example.com>` instead of configuring the cmsd or manager (only the xrootd daemon is required on the cache server). More detailed configuration of cache server for StashCache is [here](http://opensciencegrid.github.io/StashCache/admin/configure-cache/).
+    -   In contrast to the origin server configuration, one needs to declare `pss.origin <stash-redirector.example.com>` instead of configuring the cmsd or manager (only the xrootd daemon is required on the cache server). More detailed configuration of cache server for StashCache is [here](http://opensciencegrid.org/StashCache/admin/configure-cache/).
 -   In both cases, administrator needs to set the path of custom configuration file for its xrootd/cmds instance in /etc/sysconfig/xrootd, For example, change the cmds default from:
 
         :::file
@@ -89,7 +89,7 @@ Updating to the new release
 
 ### Update Repositories
 
-To update to this series, you need [install the current OSG repositories](../../common/yum#install-osg-repositories).
+To update to this series, you need to [install the current OSG repositories](/common/yum#install-osg-repositories).
 
 ### Update Software
 
@@ -99,16 +99,14 @@ Once the new repositories are installed, you can update to this new release with
 root@host # yum update
 ```
 
-!!! note
-    Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
-
-!!! note
-    Watch the yum update carefully for any messages about a `.rpmnew` file being created. That means that a configuration file had been editted, and a new default version was to be installed. In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a `.rpmnew` extension. You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version into place (that is, without the `.rpmnew` extension). Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
+!!! note "Notes"
+    -   Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
+    -   Watch the yum update carefully for any messages about a `.rpmnew` file being created. That means that a configuration file had been edited, and a new default version was to be installed. In that case, RPM does not overwrite the edited configuration file but instead installs the new version with a `.rpmnew` extension. You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version into place (that is, without the `.rpmnew` extension). Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
 
 Need help?
 ----------
 
-Do you need help with this release? [Contact us for help](../../common/help).
+Do you need help with this release? [Contact us for help](/common/help).
 
 Detailed changes in this release
 --------------------------------

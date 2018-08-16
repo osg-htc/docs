@@ -3,7 +3,7 @@ Installing the Worker Node Client via Tarball
 
 The **OSG Worker Node Client** is a collection of software components that is expected to be added to every worker node
 that can run OSG jobs. It provides a common environment and a minimal set of common tools that all OSG jobs can expect
-to use. Contents of the worker node client can be found [here](install-wn.md#worker-node-contents).
+to use. Contents of the worker node client can be found [here](/worker-node/install-wn.md#worker-node-contents).
 
 !!! note
     It is possible to install the Worker Node Client software in a variety of ways, depending on your local site:
@@ -16,7 +16,7 @@ This document is intended to guide users through the process of installing the w
 installed worker node software.  Although this document is oriented to system administrators, any unprivileged user
 may install and use the client.
 
-Before starting, ensure the host has [a supported operating system](../release/supported_platforms.md).
+Before starting, ensure the host has [a supported operating system](/release/supported_platforms.md).
 
 Download the WN Client
 ----------------------
@@ -41,7 +41,7 @@ Install the WN Client
 2.  Move the directory that was created to where you want the tarball client to be.
 3.  Run `osg-post-install` (**`<PATH_TO_CLIENT>/osg/osg-post-install`**) to fix the directories in the installation.
 4.  Source the setup **`source <PATH_TO_CLIENT>/setup.sh`** (or **`setup.csh`** depending on the shell).
-5.  Download and set up CA certificiates using **`osg-ca-manage`** (See the [CA management documentation](../security/certificate-management) for the available options).
+5.  Download and set up CA certificiates using **`osg-ca-manage`** (See the [CA management documentation](/security/certificate-management) for the available options).
 6.  Download CRLs using **`fetch-crl`**.
 
 !!! warning
@@ -66,7 +66,7 @@ Configure the CE
 
 Using the wn-client software installed from the tarball will require a few changes on the compute element so that the resource's configuration can be correctly reported.
 
-Set `grid_dir` in the `Storage` section of your OSG-Configure configs: [CE configuration instructions](../other/configuration-with-osg-configure#storage). `grid_dir` is used as the `$OSG_GRID` environment variable in running jobs - see the [worker node environment document](../worker-node/using-wn.md). Pilot jobs source `$OSG_GRID/setup.sh` before performing any work. The value set for `grid_dir` must be the path of the wn-client installation directory. This is the path returned by **`echo $OSG_LOCATION`** once you source the setup file created by this installation.
+Set `grid_dir` in the `Storage` section of your OSG-Configure configs: [CE configuration instructions](/other/configuration-with-osg-configure#storage). `grid_dir` is used as the `$OSG_GRID` environment variable in running jobs - see the [worker node environment document](/worker-node/using-wn.md). Pilot jobs source `$OSG_GRID/setup.sh` before performing any work. The value set for `grid_dir` must be the path of the wn-client installation directory. This is the path returned by **`echo $OSG_LOCATION`** once you source the setup file created by this installation.
 
 Services
 --------
@@ -105,10 +105,10 @@ Validing the Worker Node Client
 
 To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.
 
-1.  Submit a job that executes the `env` command (e.g. Run [`condor_ce_trace`](../compute-element/troubleshoot-htcondor-ce#condor_ce_trace) with the `-d` flag from your HTCondor CE)
+1.  Submit a job that executes the `env` command (e.g. Run [`condor_ce_trace`](/compute-element/troubleshoot-htcondor-ce#condor_ce_trace) with the `-d` flag from your HTCondor CE)
 2.  Verify that the value of `$OSG_GRID` is set to the directory of your worker node client installation
 
 How to get Help?
 ----------------
 
-To get assistance please use this [Help Procedure](../common/help).
+To get assistance please use this [Help Procedure](/common/help).

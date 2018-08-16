@@ -9,7 +9,7 @@ Summary of changes
 This release contains:
 
 -   OSG 3.3.21
-    -   osg-configure 1.6.1: [Additional support](https://twiki.opensciencegrid.org/bin/view/Documentation/Release3/IniConfigurationOptions#GipResourceEntry) for ATLAS AGIS in osg-configure
+    -   osg-configure 1.6.1: [Additional support](/other/configuration-with-osg-configure#subcluster-resource-entry) for ATLAS AGIS in osg-configure
     -   [glideinWMS 3.2.17](http://glideinwms.fnal.gov/doc.v3_2_17/history.html)
         -   See known issues below
     -   Important bug fixes for CVMFS server
@@ -38,7 +38,7 @@ This release contains:
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.3.21%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
-Detailed changes are below. All of the documentation can be found [here](../../)
+Detailed changes are below. All of the documentation can be found [here](/index.md)
 
 Known Issues
 ------------
@@ -61,7 +61,7 @@ Updating to the new release
 
 ### Update Repositories
 
-To update to this series, you need [install the current OSG repositories](../../common/yum#install-osg-repositories).
+To update to this series, you need to [install the current OSG repositories](/common/yum#install-osg-repositories).
 
 ### Update Software
 
@@ -71,16 +71,14 @@ Once the new repositories are installed, you can update to this new release with
 root@host # yum update
 ```
 
-!!! note
-    Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
-
-!!! note
-    Watch the yum update carefully for any messages about a `.rpmnew` file being created. That means that a configuration file had been editted, and a new default version was to be installed. In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a `.rpmnew` extension. You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version into place (that is, without the `.rpmnew` extension). Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
+!!! note "Notes"
+    -   Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
+    -   Watch the yum update carefully for any messages about a `.rpmnew` file being created. That means that a configuration file had been edited, and a new default version was to be installed. In that case, RPM does not overwrite the edited configuration file but instead installs the new version with a `.rpmnew` extension. You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version into place (that is, without the `.rpmnew` extension). Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
 
 Need help?
 ----------
 
-Do you need help with this release? [Contact us for help](../../common/help).
+Do you need help with this release? [Contact us for help](/common/help).
 
 Detailed changes in this release
 --------------------------------

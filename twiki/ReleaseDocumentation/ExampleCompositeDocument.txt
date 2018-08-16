@@ -1,8 +1,0 @@
-%META:TOPICINFO{author="JamesWeichel" date="1318440609" format="1.1" version="1.6"}%
-%META:TOPICPARENT{name="FormattingRules"}%
----+!! *<noop>%SPACEOUT{ "%TOPIC%" }%*
-%TOC{depth="2"}%
----++ First Heading for Main Document
-%INCLUDE{"ExampleTopicInclude"}%
----++ Second Heading for Main Document
-%INCLUDE{"ExampleTopicInclude"}%

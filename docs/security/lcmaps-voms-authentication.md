@@ -1,7 +1,7 @@
 Installing and Maintaining the LCMAPS VOMS Plugin
 =================================================
 
-LCMAPS is a software library used on [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../data/gridftp), or [XRootD](../data/install-xrootd) hosts for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., `/cms/Role=production/Capability=NULL`. Starting in OSG 3.4, the LCMAPS VOMS plugin will replace GUMS and edg-mkgridmap as the authentication method at OSG sites.
+LCMAPS is a software library used on [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../data/gridftp), and [XRootD](../data/install-xrootd) hosts for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., `/cms/Role=production/Capability=NULL`. Starting in OSG 3.4, the LCMAPS VOMS plugin will replace GUMS and edg-mkgridmap as the authentication method at OSG sites.
 
 The OSG provides a default set of mappings from VOMS attributes to Unix accounts. By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to, banning based on VOMS attributes, banning a specific user, or adding a VO, VO group, VO role, and/or user that is not in the OSG's set of mappings.
 
@@ -22,24 +22,21 @@ To install the LCMAPS VOMS plugin, make sure that your host is up to date before
 
         :::console
         root@host # yum update
+
     This command will update **all** packages
 
 1. Install `lcmaps`, the default mapfile, and the configuration tools:
 
         :::console
-        [root@server]# yum install lcmaps vo-client-lcmaps-voms osg-configure-misc
+        root@host # yum install lcmaps vo-client-lcmaps-voms osg-configure-misc
 
 
 Configuring the LCMAPS VOMS Plugin
 ----------------------------------
 
-The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication. If you are using OSG 3.3 packages, there are software-specific instructions that must be followed for [HTCondor-CE](../compute-element/install-htcondor-ce), [GridFTP](../data/gridftp), and [XRootD](../data/install-xrootd). To check if you are running OSG 3.3, run the following command:
-
-``` console
-[root@server]# rpm -q --queryformat="%{VERSION}\n" osg-release
-```
-
-Additionally, there is [optional configuration](#optional-configuration) if you need to make changes to the default mappings.
+The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication.
+Additionally, there are [optional configuration](#optional-configuration) instructions if you need to make changes to
+the default mappings, or migrate from edg-mkgridmap or GUMS.
 
 
 ### Enabling the LCMAPS VOMS plugin
@@ -63,12 +60,28 @@ Unix accounts must exist for each VO, VO role, VO group, or user you choose to s
         "%RED%<VO, VO role, VO group or user>%ENDCOLOR%" %RED%<Unix account>%ENDCOLOR%
 
 
-1.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support
+1.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support.
+    The full list of VOs is located on [OIM](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
+    You are not expected to support all the VOs.
+    If you would like to support opportunistic usage, we recommend creating the following Unix accounts:
+
+    | **VO name**                                                                                             | **Unix account(s)**                                                    |
+    |---------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+    | [GLOW](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/GLOW.yaml)         | `glow`                                                                 |
+    | [OSG](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/OSG.yaml)           | `osg`                                                                  |
+    | [ATLAS](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/ATLAS.yaml)       | `usatlas1`, `usatlas2`, `usatlas3`, `usatlas4`                         |
+    | [CMS](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/CMS.yaml)           | `cmspilot`, `uscmslocal`, `cmslocal`, `cmsprod`, `lcgadmin`, `cmsuser` |
+    | [Fermilab](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Fermilab.yaml) | `fermigli`, `fermilab`                                                 |
+    | [HCC](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/HCC.yaml)           | `hcc`                                                                  |
+    | [Gluex](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Gluex.yaml)       | `gluex`                                                                |
+
+    Additionally, it is also recommended to create the `mis` Unix account,
+    which is used by OSG staff to assist with troubleshooting.
+
 1.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](../other/configuration-with-osg-configure#subcluster-resource-entry):
 
-``` ini
-allowed_vos="VO1,VO2..."
-```
+        :::ini
+        allowed_vos="VO1,VO2..."
 
 ### Applying configuration settings
 
@@ -82,12 +95,12 @@ Making changes to the OSG configuration files in the `/etc/osg/config.d` directo
 1.  Validate the configuration settings:
 
         :::console
-        [root@server]# osg-configure -v
+        root@host # osg-configure -v
 
 1.  Once the validation command succeeds without errors, apply the configuration settings:
 
         :::console
-        [root@server]# osg-configure -c
+        root@host # osg-configure -c
 
 
 
@@ -98,6 +111,7 @@ The following subsections contain information on migration from `edg-mkgridmap`,
 For a table of the configuration files and their order of evaluation, consult the [reference section](#configuration-files).
 
 -   [Migrating from edg-mkgridmap](#migrating-from-edg-mkgridmap)
+-   [Migrating from GUMS](#migrating-from-gums)
 -   [Mapping VOs](#mapping-vos)
 -   [Mapping users](#mapping-users)
 -   [Banning VOs](#banning-vos)
@@ -111,42 +125,71 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
 
 1.  Configure user DN mappings:
 
-    * If you have a local grid mapfile (see [the EDG-mkgridmap docs](../security/edg-mkgridmap)), replace the contents of `/etc/grid-security/grid-mapfile` with the contents of the local grid mapfile.
+    1. Remove `/etc/grid-security/grid-mapfile`
+    1. Check if you have a local grid mapfile:
 
-    * If you do not have a local grid mapfile, remove `/etc/grid-security/grid-mapfile`.
+            :::console
+            root@host # grep gmf_local /etc/edg-mkgridmap.conf
 
-1.  If you are remaining on OSG 3.3, ensure that the you have set `export LLGT_VOMS_ENABLE_CREDENTIAL_CHECK=1` in the appropriate file and restart the service. If you have updated your host to OSG 3.4, skip to the next step.
-
-    | **If your host is a(n)...** | **Add the aforementioned line to...**  | **And restart this service...** |
-    |:----------------------------|:---------------------------------------| :------------------------------ |
-    | HTCondor-CE                 | `/etc/sysconfig/condor-ce`             | `condor-ce`                     |
-    | GridFTP server              | `/etc/sysconfig/globus-gridftp-server` | `globus-gridftp-server`         |
+    1. If the above command returns a file that exists and has contents, move it to `/etc/grid-security/grid-mapfile`.
 
 1.  If you are converting an HTCondor-CE host, remove the HTCondor-CE `GRIDMAP` configuration. Otherwise, skip to the next step.
 
     1. Find where `GRIDMAP` is set:
 
             :::console
-            [root@ce]# condor_ce_config_val -v GRIDMAP
+            root@host # condor_ce_config_val -v GRIDMAP
 
-    1. If the above command returns `Not defined: GRIDMAP`, skip to step 4. Otherwise, delete the line that sets the `GRIDMAP` configuration variable
+    1. If the above command returns a file, remove the `GRIDMAP` configuration from that file.
+       Repeat this until the command returns `Not defined: GRIDMAP`.
     1. Reconfigure HTCondor-CE:
 
             :::console
-            [root@ce]# condor_ce_reconfig
+            root@host # condor_ce_reconfig
 
-1. Remove edg-mkgridmap and related packages:
+1. If running OSG 3.3, disable edg-mkgridmap:
 
         :::console
-        [root@ce]# yum erase edg-mkgridmap
+        root@host # service edg-mkgridmap stop
+        root@host # chkconfig edg-mkgridmap off
+
+1. If running OSG 3.4, remove edg-mkgridmap and related packages:
+
+        :::console
+        root@host # yum erase edg-mkgridmap
 
     !!! warning
-        In the output from this command, yum should **not** list other packages than the one. If it lists other packages, cancel the erase operation, make sure the other packages are updated to their OSG 3.3 (or 3.4) versions (they should have ".osg33" or ".osg34" in their versions), and try again.
+        In the output from this command, yum should **not** list other packages than the one.
+        If it lists other packages, cancel the erase operation, make sure the other packages are updated to their latest OSG 3.4 versions (they should have ".osg34" in their versions), and try again.
 
+#### Migrating from GUMS
+
+GUMS is no longer available starting in OSG 3.4 and is being replaced by the LCMAPS VOMS plugin.
+Note that unlike GUMS, which runs on a central host, the LCMAPS VOMS plugin will run on your GUMS clients (e.g. HTCondor-CE, GridFTP, and XRootD).
+To migrate any custom authentication configuration from GUMS to the LCMAPS VOMS plugin, perform the following procedure:
+
+1. On your GUMS host, retrieve the conversion helper script and run it:
+
+        :::console
+        root@gums-host # wget https://raw.githubusercontent.com/opensciencegrid/osg-vo-config/mapfile-generator-0.2/bin/manual-mapfile-from-gumsdb.py
+        root@gums-host # python manual-mapfile-from-gumsdb.py
+
+1. Verify that the contents of `ban-mapfile.additions`, `grid-mapfile.additions`, and `voms-mapfile.additions` include any custom
+   banned users, user mappings, and VO mappings, respectively.
+
+    !!! note
+        The above files will not include all VO mappings; the OSG provides default VO mappings in
+        `/usr/share/osg/voms-mapfile-default`
+
+1. On each of your client hosts (e.g. HTCondor-CE, GridFTP, XRootD), perform the following:
+
+    1. If you have not done so already, [install](#installing-the-lcmaps-voms-plugin) and [configure](#configuring-the-lcmaps-voms-plugin) the LCMAPS VOMS plugin
+    1. Append each `.additions` file to its corresponding file in `/etc/grid-security/` (creating those files if they do not exist)
 
 #### Mapping VOs
 
-`/etc/grid-security/voms-mapfile` is used to map VOs, VO roles, or VO groups to Unix accounts based on their VOMS attributes. An example of the format of a `voms-mapfile` follows:
+To map VOs, VO roles, or VO groups to Unix accounts based on their VOMS attributes, create `/etc/grid-security/voms-mapfile`.
+An example of the format of a `voms-mapfile` follows:
 
 ```
 # map GLOW jobs in the chtc group to the 'glow1' Unix account.
@@ -168,7 +211,8 @@ The patterns are compared in the order they are listed in. Therefore, more gener
 
 #### Mapping users
 
-`/etc/grid-security/grid-mapfile` is used to map specific users to Unix accounts based on their certificates' DNs. An example of the format of a `grid-mapfile` follows:
+To map specific users to Unix accounts based on their certificates' DNs, create `/etc/grid-security/grid-mapfile`.
+An example of the format of a `grid-mapfile` follows:
 
 ```
 # map Matyas's FNAL DN to the 'matyas' Unix account
@@ -190,8 +234,12 @@ The patterns are compared in the order they are listed in. Therefore, more gener
 
 Each non-commented line is a shell-style pattern which is compared against a user's VOMS attributes. If the pattern matches, that user will be unable to access your resources.
 
+!!!danger
+    When banning VOs, you must restart the services using LCMAPS VOMS authentication (e.g. `condor-ce`, `globus-gridftp-server`, etc.) to clear any authentication caches.
+
 !!!warning
-    `/etc/grid-security/ban-voms-mapfile` *must* exist, even if you are not banning any VOs. In that case, the file should be blank. If the file does not exist, LCMAPS will ban every user.
+    `/etc/grid-security/ban-voms-mapfile` *must* exist, even if you are not banning any VOs.
+    In that case, the file should not contain any entries. If the file does not exist, LCMAPS will ban every user.
 
 
 #### Banning users
@@ -202,6 +250,9 @@ Each non-commented line is a shell-style pattern which is compared against a use
 # ban Matyas's FNAL DN
 "/DC=gov/DC=fnal/O=Fermilab/OU=People/CN=Matyas Selmeci/CN=UID:matyas"
 ```
+
+!!!danger
+    When banning users, you must restart the services using LCMAPS VOMS authentication (e.g. `condor-ce`, `globus-gridftp-server`, etc.) to clear any authentication caches.
 
 !!!warning
     `/etc/grid-security/ban-mapfile` *must* exist, even if you are not banning any users. In that case, the file should be blank. If the file does not exist, LCMAPS will ban every user.
@@ -219,10 +270,13 @@ By default, the LCMAPS VOMS plugin only considers the first FQAN of a VOMS proxy
 
 -   If you are configuring `lcmaps.db` manually (see [manual configuration](#manual-configuration) below), add `"-all-fqans"` to the module definitions for `vomsmapfile` and `defaultmapfile`
 
+Using the LCMAPS VOMS Plugin
+----------------------------
 
+LCMAPS is a software library that is called for authentication;
+therefore, there are no running services and it does not have to be invoked manually.
 
-
-Validating the LCMAPS VOMS plugin VO mappings
+Validating the LCMAPS VOMS Plugin VO Mappings
 ---------------------------------------------
 
 To validate the LCMAPS VOMS plugin by itself, use the following procedure to test mapping your own cert to a user:
@@ -232,52 +286,67 @@ To validate the LCMAPS VOMS plugin by itself, use the following procedure to tes
 1.  Install the `llrun` and `voms-clients` packages:
 
         :::console
-        [root@host]# yum install llrun voms-clients
+        root@host # yum install llrun voms-clients
 
 1.  As an unprivileged user, create a VOMS proxy (filling in `<YOUR_VO>` with a VO you are a member of):
 
         :::console
-        [you@client]$ voms-proxy-init -voms %RED%<YOUR_VO>%ENDCOLOR%
+        user@host $ voms-proxy-init -voms %RED%<YOUR_VO>%ENDCOLOR%
 
 1.  Verify that your credentials are mapped as expected:
 
         :::console
-        [you@client]$ llrun -s -l mode=pem,policy=authorize_only,db=/etc/lcmaps.db \
+        user@host $ llrun -s -l mode=pem,policy=authorize_only,db=/etc/lcmaps.db \
             -p/tmp/x509up_u`id -u`
 
 If you did not get correctly mapped, check your proxy's FQAN by running:
 ``` console
-[you@client]$ voms-proxy-info -fqan
+user@host $ voms-proxy-info -fqan
 ```
 and make sure it matches one of the patterns in `/etc/grid-security/voms-mapfile` or `/usr/share/osg/voms-mapfile-default`, and does not match any patterns in `/etc/grid-security/ban-voms-mapfile`.
 
-Troubleshooting the LCMAPS VOMS plugin
+Troubleshooting the LCMAPS VOMS Plugin
 --------------------------------------
 
-LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity of the logging can be increased by setting the `LCMAPS_DEBUG_LEVEL` environment variable. You can also change the destination of the logging by setting the `LCMAPS_LOG_FILE` environment variable.
+LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity of the logging can be increased by modifying the appropriate configuration and restarting the service:
 
-1.  Use the table below to choose the appropriate file to edit:
+- **If you are troubleshooting an HTCondor-CE or GridFTP host...**
 
-    | If your host is a(n)... | Edit this file...                      |
-    |:------------------------|:---------------------------------------|
-    | HTCondor-CE             | `/etc/sysconfig/condor-ce`             |
-    | GridFTP server          | `/etc/sysconfig/globus-gridftp-server` |
+    1.  Use the table below to choose the appropriate file to edit:
 
-    Add the following to the file chosen in the previous step:
+        | If your host is a(n)... | Edit this file...                      |
+        |:------------------------|:---------------------------------------|
+        | HTCondor-CE             | `/etc/sysconfig/condor-ce`             |
+        | GridFTP server          | `/etc/sysconfig/globus-gridftp-server` |
 
-        :::bash
-        export LCMAPS_DEBUG_LEVEL=5
-        # optional (uncomment the following line to output log messages to a file):
-        # export LCMAPS_LOG_FILE=/tmp/lcmaps.log
+    1. Add the following to the file chosen in the previous step:
 
+            :::bash
+            export LCMAPS_DEBUG_LEVEL=5
+            # optional (uncomment the following line to output log messages to a file):
+            # export LCMAPS_LOG_FILE=/tmp/lcmaps.log
 
-1.  Use the table below to choose the appropriate service to restart:
+    1. Restart the [condor-ce](/compute-element/install-htcondor-ce#managing-htcondor-ce-and-associated-services) or 
+       [globus-gridftp-server](/data/gridftp#managing-gridftp) service.
 
-    | If your host is a(n)... | Restart the following service... |
-    |:------------------------|:---------------------------------|
-    | HTCondor-CE             | `condor-ce`                      |
-    | GridFTP server          | `globus-gridftp-server`          |
+- **If you are troubleshooting an XRootD host...**
 
+    1. Choose the configuration file to edit based on the following table:
+
+        | If you are running XRootD in... | Then modify the following file...   |
+        |:--------------------------------|:------------------------------------|
+        | Standalone mode                 | `/etc/xrootd/xrootd-standalone.cfg` |
+        | Clustered mode                  | `/etc/xrootd/xrootd-clustered.cfg`  |
+
+    1. Set `--loglevel,5` under the `-authzfunparms` of the `sec.protocol /usr/lib64 gsi` line. For example:
+    
+            sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
+                        -cert:/etc/grid-security/xrootd/xrootdcert.pem \
+                        -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
+                        -authzfun:libXrdLcmaps.so -authzfunparms:%RED%--loglevel,5%ENDCOLOR% \
+                        -gmapopt:10 -gmapto:0
+
+    1. Restart the [xrootd](/data/install-xrootd#managing-xrootd-services) service
 
 ### Troubleshooting mapping with HTCondor-CE
 
@@ -292,6 +361,41 @@ GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION=0
 and then restart `condor-ce`.
 
 Once you are satisfied that your mappings are working, you may remove this file and restart `condor-ce` in order to reduce the load on your CE caused by authentication.
+
+### Common issues
+
+#### Wrong version of GridFTP
+
+If you have the EPEL version of the GridFTP server, you may see error messages in `journalctl` (EL7),
+`var/log/messages` (EL6), or the location specified by `LCMAPS_LOG_FILE`.
+
+**Symptoms**
+
+```
+Apr 11 13:51:41 atlas-hub globus-gridftp-server: You are still root after the LCMAPS execution. The implicit root-mapping safety is enabled. See documentation for details
+```
+
+**Next actions**
+
+1. If the versions of the `globus-gridftp-server-*` packages do not end in `osgXX.elY`, 
+   continue with these instructions.
+   To check the version of your `globus-gridftp-server-*`, run the following command:
+
+        :::console
+        user@host $ rpm -q ^globus-gridftp
+
+1. Verify that the [priority](/common/yum#installing-and-configuring-repositories) of the OSG repositories are set
+   properly
+
+1. Clean your yum cache
+
+        :::console
+        root@host # yum clean all --enablerepo=*
+
+1. Reinstall `globus-gridftp-server`:
+
+        :::console
+        root@host # yum update globus-gridftp-server
 
 Getting Help
 ------------

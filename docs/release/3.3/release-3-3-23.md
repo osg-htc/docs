@@ -28,7 +28,7 @@ root@host # service osg-info-services stop
 root@host # yum erase gip osg-info-services
 ```
 
-Detailed changes are below. All of the documentation can be found [here](../../)
+Detailed changes are below. All of the documentation can be found [here](/index.md)
 
 Known Issues
 ------------
@@ -50,7 +50,7 @@ Updating to the new release
 
 ### Update Repositories
 
-To update to this series, you need [install the current OSG repositories](../../common/yum#install-osg-repositories).
+To update to this series, you need to [install the current OSG repositories](/common/yum#install-osg-repositories).
 
 ### Update Software
 
@@ -60,16 +60,14 @@ Once the new repositories are installed, you can update to this new release with
 root@host # yum update
 ```
 
-!!! note
-    Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
-
-!!! note
-    Watch the yum update carefully for any messages about a `.rpmnew` file being created. That means that a configuration file had been editted, and a new default version was to be installed. In that case, RPM does not overwrite the editted configuration file but instead installs the new version with a `.rpmnew` extension. You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version into place (that is, without the `.rpmnew` extension). Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
+!!! note "Notes"
+    -   Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
+    -   Watch the yum update carefully for any messages about a `.rpmnew` file being created. That means that a configuration file had been edited, and a new default version was to be installed. In that case, RPM does not overwrite the edited configuration file but instead installs the new version with a `.rpmnew` extension. You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version into place (that is, without the `.rpmnew` extension). Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
 
 Need help?
 ----------
 
-Do you need help with this release? [Contact us for help](../../common/help).
+Do you need help with this release? [Contact us for help](/common/help).
 
 Detailed changes in this release
 --------------------------------
