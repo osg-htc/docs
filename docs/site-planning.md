@@ -63,7 +63,7 @@ However, today, there are two options for accepting pilot jobs at your site:
 
 ### Runtime environment
 
-The OSG provides a very minimal runtime environment that can be deployed via [tarball](/worker-node/install-wn-tarball),
+The OSG requires a very minimal runtime environment that can be deployed via [tarball](/worker-node/install-wn-tarball),
 [RPM](/worker-node/install-wn), or through a [global filesystem](/worker-node/install-wn-oasis) on your cluster's worker
 nodes.
 
