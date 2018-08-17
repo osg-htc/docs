@@ -31,23 +31,27 @@ The number of GridFTP servers that you should run is determined first and foremo
 
 #### Shared file system
 
-The number of GridFTP servers can also be determined by your hardware needs, which are determined by your choice of shared file system. If you choose a POSIX-based shared file system, plan for machines with more cores, or more GridFTP hosts to distribute the CPU load. If you are running [GridFTP with Hadoop](install-hadoop#standalone-gridftp-node-installation), plan for machines with more memory, or more GridFTP hosts to distribute the memory load.
+The number of GridFTP servers can also be determined by your hardware needs and by your choice of shared file system. If you choose a POSIX-based shared file system, plan for machines with more cores, or more GridFTP hosts to distribute the CPU load. If you are running [GridFTP with Hadoop](install-hadoop#standalone-gridftp-node-installation), plan for machines with more memory, or more GridFTP hosts to distribute the memory load.
 
 !!! note
     If you determine that you need only a single GridFTP host, you do not need load balancing. Instead, follow the [standalone-GridFTP installation guide](gridftp).
 
 ### Load balancer(s)
 
-In the recommended direct routing mode, load balancers simply rewrite initial packets from a given request so the hardware requirements are minimal. When choosing load balancer hosts, aim for stability. If your chosen host is unstable or if you do not want to introduce downtime for operating system or hardware updates, one additional load balancer as a backup should be sufficient.
+In the recommended direct routing mode, load balancers simply rewrite initial packets from a given request so the hardware requirements are minimal. When choosing load balancer hosts, aim for stability. If your chosen host is unstable or if you do not want to introduce downtime for operating system or hardware updates, at least one additional load balancer will be needed as a backup.
 
 Preparing the GridFTP Servers
 -----------------------------
 
-Before adding your GridFTP hosts to the load-balanced system, each host requires the GridFTP software, special certificates, and load-balancing configuration.
+Before adding your GridFTP hosts to the load-balanced system, each host requires the following:
 
-### Acquiring service certificate(s)
+* GridFTP software
+* Special host certificates
+* Load-balancing configuration
 
-When authenticating with a GridFTP server, clients verify that the server's host certificate matches the hostname of the server. In the case of a load-balanced GridFTP system, clients contact the GridFTP server through the virtual hostname, so the GridFTP server will have to present a certificate containing the virtual hostname as well as the GridFTP server's hostname. Use the [OSG PKI tools reference](../security/certificate-management.md) for more information on how to request these types of certificates.
+### Acquiring host certificate(s)
+
+When authenticating with a GridFTP server, clients verify that the server's host certificate matches the hostname of the server. In the case of a load-balanced GridFTP system, clients contact the GridFTP server through the virtual hostname, so the GridFTP server will have to present a certificate containing the virtual hostname as well as the GridFTP server's hostname. Use the [OSG host certificate reference](/security/host-certs) for more information on how to request these types of certificates.
 
 If your GridFTP servers are also running XRootD, you will need unique certificates for each GridFTP server. Otherwise, you can request a single certificate that can be shared among the GridFTP servers.
 
@@ -58,21 +62,27 @@ The single shared certificate must have the hostname associated with the load-ba
 1.  Request and generate the shared certificate:
 
         :::console
-        user@host $ osg-gridadmin-cert-request -H <VIRTUAL-HOSTNAME> -a <GRIDFTP-SERVER-#1-HOSTNAME> [...]
+        user@host $ osg-cert-request --hostname <VIRTUAL-HOSTNAME> \
+                    --country <COUNTRY> \
+                    --state <STATE> \
+                    --locality <LOCALITY> \
+                    --organization <ORGANIZATION>
+                    --altname <GRIDFTP-SERVER-#1-HOSTNAME> \
+                    --altname <GRIDFTP-SERVER-#2-HOSTNAME>
 
-1.  Copy the resulting certificate-key pair to each GridFTP server
-2.  Create a directory to contain the shared service certificate:
+1.  Take the resulting CSR and get it signed by the appropriate authority.  Most institutions can use InCommon as outlined [here](/security/host-certs/#requesting-incommon-host-certificates).
+2.  Create a directory to contain the shared certificate:
 
         :::console
         root@host # mkdir /etc/grid-security/gridftp
 
-3.  Place the shared service certificate-key pair in the newly created directory:
+3.  Place the shared certificate-key pair in the newly created directory:
 
         :::console
         root@host # mv <PATH-TO-SERVICE-CERT> /etc/grid-security/gridftp/gridftp-hostcert.pem
         root@host # mv <PATH-TO-SERVICE-KEY> /etc/grid-security/gridftp/gridftp-hostkey.pem
 
-1.  Edit `/etc/sysconfig/globus-gridftp-server` to identify the shared service certificate-key pair:
+1.  Edit `/etc/sysconfig/globus-gridftp-server` to identify the shared certificate-key pair:
 
         export X509_USER_CERT=/etc/grid-security/gridftp/gridftp-hostcert.pem
         export X509_USER_KEY=/etc/grid-security/gridftp/gridftp-hostkey.pem
@@ -102,8 +112,8 @@ Whether you are starting from scratch or adding more GridFTP servers to your loa
 
 Each GridFTP server requires changes to its IP configuration and potentially its arptables:
 
--   [Adding your virtual IP address](#AddingVIP)
--   [Disabling ARP](#DisableArp) − if your GridFTP servers are on the same network segment as the virtual IP
+-   [Adding your virtual IP address](#adding-your-virtual-ip-address)
+-   [Disabling ARP](#disabling-arp) − if your GridFTP servers are on the same network segment as the virtual IP
 
 #### Adding your virtual IP address
 
@@ -270,7 +280,7 @@ Using Your Load Balanced GridFTP System
 
 ### Using GridFTP
 
-On the GridFTP real servers, arptables is the only additional service required for running a load-balanced GridFTP system. The name of the arptables service depends on the version of your host OS:
+On the GridFTP servers, arptables is the only additional service required for running a load-balanced GridFTP system. The name of the arptables service depends on the version of your host OS:
 
 1. Select the appropriate RPM:
 
