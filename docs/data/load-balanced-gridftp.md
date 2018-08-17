@@ -46,8 +46,8 @@ Preparing the GridFTP Servers
 Before adding your GridFTP hosts to the load-balanced system, each host requires the following:
 
 * GridFTP software
-* special host certificates
-* load-balancing configuration.
+* Special host certificates
+* Load-balancing configuration
 
 ### Acquiring host certificate(s)
 
