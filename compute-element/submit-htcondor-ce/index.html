@@ -1989,6 +1989,10 @@
 
 
 <p>For a list of other attributes that can be set with the <code>--attribute</code> option, consult the <a href="#job-attributes">job attributes</a> section.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Non HTCondor batch systems may need additional configuration to support these job attributes.  See the <a href="../../compute-element/job-router-recipes/#setting-batch-system-directives">job router recipes</a> for details on how to support them.</p>
+</div>
 <h4 id="condor_ce_run">condor_ce_run<a class="headerlink" href="#condor_ce_run" title="Permanent link">&para;</a></h4>
 <p><code>condor_ce_run</code> is a Python script that calls <code>condor_submit</code> on a generated submit file and tracks its progress with <code>condor_q</code>. To submit a job with <code>condor_ce_run</code>, run the following command:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_ce_run -r condorce.example.com:9619 /bin/env
