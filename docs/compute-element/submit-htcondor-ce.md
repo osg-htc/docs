@@ -47,7 +47,7 @@ user@host $ condor_ce_trace --debug --attribute='+xcount=4' --attribute='+maxMem
 
 For a list of other attributes that can be set with the `--attribute` option, consult the [job attributes](#job-attributes) section.
 
-!!! warning
+!!! note
     Non HTCondor batch systems may need additional configuration to support these job attributes.  See the [job router recipes](/compute-element/job-router-recipes/#setting-batch-system-directives) for details on how to support them.
 
 #### condor_ce_run
