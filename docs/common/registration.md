@@ -117,6 +117,51 @@ To modify an existing resource, follow these instructions:
 
         Updating administrative contact information for CHTC-glidein2
 
+Registering Resource Downtimes
+------------------------------
+
+Resource downtime is a period of time for which one or more of the grid services of a registered resource are
+unavailable.
+Downtimes are stored in YAML files alongside the resource group YAML files as described [here](#registering-resources),
+i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>_downtime.yaml` from the
+[root of the topology repository](https://github.com/opensciencegrid/topology/tree/master/).
+To register a new downtime for a registered resource, follow the instructions below:
+
+1. Open the [topology repository](https://github.com/opensciencegrid/topology/tree/master/) in your browser.
+
+1. Search the repository for the FQDN of your resource wrapped in double-quotes using the GitHub search bar
+   (e.g., `"glidein2.chtc.wisc.edu"`):
+
+    ![GitHub search](/img/registration/github-search.png)
+
+    - **If the search returns a single YAML file**, note the name of the facility, site, and resource group and continue
+      to the next step.
+    - **If the search doesn't return any results**, your resource is not registered.
+      Follow the [resource registration](#registering-resources) instructions before registering a downtime.
+    - **If the search returns more than one YAML file**, please [contact us](#getting-help).
+
+1. Open the following URL in your browser using the facility, site, and resource group names to replace `<FACILITY>`,
+   `<SITE>`, and `<RESOURCE GROUP`>, respectively:
+
+        https://github.com/opensciencegrid/topology/edit/master/<FACILITY>/<SITE>/<RESOURCE GROUP>_downtime.yaml
+
+    If the above URL returns a 404, use this link instead:
+
+        https://github.com/opensciencegrid/topology/new/master?filename=topology/<FACILITY>/<SITE>/<RESOURCE GROUP>_downtime.yaml
+
+1. Use the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) to make changes
+   using the [downtime template](https://github.com/opensciencegrid/topology/blob/master/template-downtime.yaml) as a
+   guide.
+
+    !!! note
+        Make sure the info you add matches the formatting and indentation of the template or the other downtime entries
+        in the file.
+        In particular, make sure no additional indentation gets added when pasting in the new data.
+
+1. Submit your changes as a pull request, providing a descriptive commit message. For example:
+
+        Adding downtime for CHTC-glidein2 for regular maintenance
+
 How to Register
 ---------------
 
@@ -173,41 +218,6 @@ To remove or disable a resource already registered:
 
 - If the resource is not a Compute Element or OSG submitter, you may remove the resource completely.  If there are no more resources
    in the resource group, you may remove the entire resource group file.
-
-
-### How to Register Downtime ###
-
-Downtime is a period of time for which one or more services you provide are unavailable.
-You should register downtime if one of these is true:
-
--  your site is part of the WLCG
--  your CE is one of the services affected
-
-1. Find the file that should contain downtime information about resources you own.
-   It is named `topology/<FACILITY>/<SITE>/<RESOURCE GROUP NAME>_downtime.yaml`.
-
-   For example, `topology/University of Wisconsin/GLOW/GLOW.yaml` has the corresponding downtime file
-   `topology/University of Wisconsin/GLOW/GLOW_downtime.yaml`.
-
-   If the downtime file does not exist, create it.
-
-   To find out what resource group a host is in, search for the FQDN of the host with something like:
-
-   `grep -F "<FQDN>" topology/*/*/*.yaml | grep -Fv _downtime.yaml | grep -Fv SITE.yaml`
-
-   If the above command returns nothing, then the host is not registered in the topology data
-   and you don't need to register downtime for it.
-
-2. Add the contents of `template-downtime.yaml` to the end of the downtime file in the path above.
-
-3. Follow the instructions in the comments to fill out the necessary fields.
-
-   **Note:** Make sure the info you add matches the formatting and indentation of the template or the other downtime entries in the file.
-   In particular, make sure no additional indentation gets added when pasting in the new data.
-
-4. Submit your changes as a GitHub pull request.
-
-Alternatively, send an email to <help@opensciencegrid.org> requesting your desired changes.
 
 Getting Help
 ------------
