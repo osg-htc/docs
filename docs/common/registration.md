@@ -94,6 +94,10 @@ To register a new resource, follow the instructions below:
    using the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
 
+    !!! note
+        Make sure the info you add matches the formatting and indentation of the template file.
+        In particular, make sure no additional indentation gets added when pasting in the new data.
+
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
 
         Adding a new compute element to the CHTC
@@ -102,8 +106,8 @@ To register a new resource, follow the instructions below:
 
 To modify an existing resource, follow these instructions:
 
-1. Find the resource that you would like to modify by [searching GitHub](#searching-for-resources) and opening the link
-   to the YAML file.
+1. Find the resource that you would like to modify by [searching GitHub](#searching-for-resources) and open the link to
+   the YAML file.
 
 1. Use the branch selector dropdown next to the file path and select the `master` branch.
 
@@ -112,6 +116,10 @@ To modify an existing resource, follow these instructions:
 1. Use the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) to make changes
    using the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
+
+    !!! note
+        Make sure the info you add matches the formatting and indentation of the template file.
+        In particular, make sure no additional indentation gets added when pasting in the new data.
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
 
