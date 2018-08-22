@@ -66,7 +66,7 @@ If your site intends to run thousands of OSG jobs, you will need to host a stand
 loads.
 
 To discuss using a hosted SSH HTCondor-CE, contact OSG User Support at
-[user-support@opensciencegrid.org](mailto:user-support@opensciencegrid.org)
+[user-support@opensciencegrid.org](mailto:user-support@opensciencegrid.org).
 
 ![HTCondor-CE-Bosco](/img/HTCondorCEBosco.png)
 
@@ -134,8 +134,7 @@ When these clients and hosts wish to communicate with each other, the identities
 cross-checking their certificates with the signing CA and establishing trust.
 
 In its default configuration, HTCondor-CE uses GSI-based authentication and authorization to verify the certificate
-chain, which will work with [LCMAPS VOMS authentication](/security/lcmaps-voms-authentication), existing GUMS servers,
-or grid mapfiles.
+chain, which will work with [LCMAPS VOMS authentication](/security/lcmaps-voms-authentication).
 Additionally, it can be reconfigured to provide alternate authentication mechanisms such as Kerberos, SSL, shared
 secret, or even IP-based authentication.
 More information about authorization methods can be found
