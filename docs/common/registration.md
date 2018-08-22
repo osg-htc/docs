@@ -269,46 +269,6 @@ To modify a VO's information or register a new VO, follow the instructions below
 
         Updating contact information for the Mu2e project
 
-How to Register
----------------
-
-OSG registry information is stored in [YAML files](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
-in the topology GitHub repository.
-The formatting and locations of the YAML files for the different types of registration data are described
-in the following table:
-
-| The following data... | Is defined by template file...       | And should be copied to location, relative to the Git root directory... |
-|-----------------------|--------------------------------------|-------------------------------------------------------------------------|
-| Project               | `template-project.yaml`              | `projects/<PROJECT NAME>.yaml`                                          |
-| Resource Downtime     | `template-downtime.yaml`             | `topology/<FACILITY>/<SITE>/<RESOURCE GROUP NAME>_downtime.yaml`        |
-| Resource Topology     | `template-resourcegroup.yaml`        | `topology/<FACILITY>/<SITE>/<RESOURCE GROUP NAME>.yaml`                 |
-| Virtual Organization  | `template-virtual-organization.yaml` | `virtual-organizations/<VO NAME>.yaml`                                  |
-
-The comments in the template files explain the structure and the meaning of the data.
-
-!!! note
-    File and directory names _must_ match the name of your project, VO, facility, site, or resource group, as
-    appropriate.
-    This includes case and spaces.
-
-### New registrations ###
-
-To create a new resource group, project, or VO, please create the YAML file according to the table above, and use the
-corresponding template file to fill in the appropriate information.
-If you do not feel comfortable creating the new file yourself, send an email to <help@opensciencegrid.org> with
-details about your resource group, project, or VO.
-
-### Updating existing registrations ###
-
-To update the data for your site resources, project, or VO, make and submit your changes using one of the following
-methods:
-
-- [Modify the corresponding YAML file](https://help.github.com/articles/editing-files-in-your-repository/) and submit
-  your changes as a GitHub pull request.
-- Send an email to <help@opensciencegrid.org> requesting your desired changes.
-
-For definitions for the various fields, consult the corresponding template file for the type of data you are updating.
-
 Getting Help
 ------------
 
