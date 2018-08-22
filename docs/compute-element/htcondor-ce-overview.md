@@ -147,6 +147,6 @@ Once the basic installation is done, additional activities include:
 
 -   [Setting up job routes to customize incoming jobs](/compute-element/job-router-recipes)
 -   [Submitting jobs to a HTCondor-CE](/compute-element/submit-htcondor-ce) 
--   [Troubleshooting the HTCondor-CE](/compute/element/troubleshoot-htcondor-ce) 
+-   [Troubleshooting the HTCondor-CE](/compute-element/troubleshoot-htcondor-ce)
 -   Register the CE with OIM
 -   Register with the OSG GlideinWMS factories and/or the ATLAS AutoPyFactory
