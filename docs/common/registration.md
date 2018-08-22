@@ -16,7 +16,8 @@ The instructions in this document require the following:
 
 - A [GitHub](https://github.com/) account
 - A working knowledge of [GitHub collaboration](https://help.github.com/categories/collaborating-with-issues-and-pull-requests/)
-- OSG contact registration. Send an email to <mailto:help@opensciencegrid.org> with the following information:
+- OSG contact registration. If not already registered [here](https://topology.opensciencegrid.org/miscuser/xml?), send
+  an email to <mailto:help@opensciencegrid.org> with the following information:
     - Full name
     - GitHub ID
     - Description of your OSG affiliation, e.g. FermiGrid site administrator, senior scientist for the DUNE experiment,
