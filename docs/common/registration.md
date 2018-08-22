@@ -198,6 +198,45 @@ To register a new downtime for a registered resource, follow the instructions be
 
         Adding downtime for CHTC-glidein2 for regular maintenance
 
+Registering Virtual Organizations
+---------------------------------
+
+Virtual Organizations (VOs) are sets of groups or individuals defined by some common cyber-infrastructure need.
+This can be a scientific experiment, a university campus or a distributed research effort.
+A VO represents all its members and their common needs in a grid environment.
+A VO also includes the group’s computing/storage resources and services.
+For more information about VOs, see [this page](https://opensciencegrid.org/about/organization#virtual-organizations).
+
+!!! note
+    Before submitting a registration for a new VO, please [contact us](#getting-help) describing your organization's
+    computing needs.
+
+VO information is stored as YAML files in the `virtual-organizations` directory of the
+[topology repository](https://github.com/opensciencegrid/topology/tree/master).
+To modify a VO's information or register a new VO, follow the instructions below:
+
+1. Open the [topology repository](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations) in your
+   browser.
+
+1. If you see your VO in the list, open the file and continue to the next step.
+   If you do not see your VO in the list, click `Create new file` button:
+
+    ![GitHub file creation](/img/registration/create-file.png)
+
+    In the new file dialog, enter `<VO>.yaml`, replacing `<VO>` with the name of your VO.
+
+1. Use the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) to make changes
+   using the [VO template](https://github.com/opensciencegrid/topology/blob/master/template-virtual-organization.yaml)
+   as a guide.
+
+    !!! note
+        Make sure the info you add matches the formatting and indentation of the template file.
+        In particular, make sure no additional indentation gets added when pasting in the new data.
+
+1. Submit your changes as a pull request, providing a descriptive commit message. For example:
+
+        Updating contact information for the GLOW VO
+
 How to Register
 ---------------
 
