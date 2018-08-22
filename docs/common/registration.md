@@ -119,7 +119,7 @@ To register a new resource, follow the instructions below:
 
 To modify an existing resource, follow these instructions:
 
-1. Find the resource that you would like to modify by [searching GitHub](#searching-for-resources) and open the link to
+1. Find the resource that you would like to modify by [searching GitHub](#searching-for-resources), and open the link to
    the YAML file.
 
 1. Use the branch selector dropdown next to the file path and select the `master` branch.
