@@ -237,6 +237,38 @@ To modify a VO's information or register a new VO, follow the instructions below
 
         Updating contact information for the GLOW VO
 
+Registering Projects
+--------------------
+
+!!! note
+    Before submitting a registration for a new project, please [contact us](#getting-help) describing your organization's
+    computing needs.
+
+Project information is stored as YAML files in the `projects` directory of the
+[topology repository](https://github.com/opensciencegrid/topology/tree/master).
+To modify a VO's information or register a new VO, follow the instructions below:
+
+1. Open the [topology repository](https://github.com/opensciencegrid/topology/tree/master/projects) in your browser.
+
+1. If you see your project in the list, open the file and continue to the next step.
+   If you do not see your project in the list, click `Create new file` button:
+
+    ![GitHub file creation](/img/registration/create-file.png)
+
+    In the new file dialog, enter `<PROJECT>.yaml`, replacing `<PROJECT>` with the name of your project.
+
+1. Use the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) to make changes
+   using the [VO template](https://github.com/opensciencegrid/topology/blob/master/template-projects.yaml)
+   as a guide.
+
+    !!! note
+        Make sure the info you add matches the formatting and indentation of the template file.
+        In particular, make sure no additional indentation gets added when pasting in the new data.
+
+1. Submit your changes as a pull request, providing a descriptive commit message. For example:
+
+        Updating contact information for the Mu2e project
+
 How to Register
 ---------------
 
