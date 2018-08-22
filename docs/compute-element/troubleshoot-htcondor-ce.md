@@ -719,29 +719,32 @@ manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/condor_router_q.html)
 
 #### Usage
 
-To see the daemons running on a CE, you can run the following:
+To see the daemons running on a CE, run the following command:
 
 ``` console
-user@host $ condor_ce_status -any -name condorce.example.com -pool condorce.example.com:9619
+user@host $ condor_ce_status -any
 ```
 
-Replacing `condorce.example.com`  with the hostname of the CE.
+`condor_ce_status` takes the same arguments as `condor_status`, which are documented in the
+[HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/condor_status.html).
 
-!!! note
-    If you run the `condor_ce_status` command on the CE that you are testing, omit the `-name` and `-pool` options. `condor_ce_status` takes the same arguments as `condor_status` and is documented in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/condor_status.html).
+!!! note ""Missing" Worker Nodes"
+    An HTCondor-CE will not show any worker nodes (e.g. `Machine` entries in the `condor_ce_status -any` output) if
+    it does not have any running GlideinWMS pilot jobs.
+    This is expected since HTCondor-CE only forwards incoming grid jobs to your batch system and does not match jobs to
+    worker nodes.
 
 #### Troubleshooting
 
-To list the daemons that are configured to run:
+If the output of `condor_ce_status -any` does not show at least the following daemons:
 
-``` console
-user@host $ condor_ce_config_val -v DAEMON_LIST
-DAEMON_LIST: MASTER COLLECTOR SCHEDD JOB_ROUTER, SHARED_PORT, SHARED_PORT
-  Defined in '/etc/condor-ce/config.d/03-ce-shared-port.conf', line 9.
-```
+- Collector
+- Scheduler
+- DaemonMaster
+- Job_Router
 
-If you do not see these daemons in the output of `condor_ce_status`, check the [Master log](#masterlog) for errors.
-
+Increase the [debug level](/compute-element/troubleshoot-htcondor-ce/#htcondor-ce-troubleshooting-items) and consult the
+[HTCondor-CE logs](/compute-element/troubleshoot-htcondor-ce/#htcondor-ce-troubleshooting-data) for errors.
 
 ### condor_ce_config_val
 
