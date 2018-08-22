@@ -16,13 +16,26 @@ The instructions in this document require the following:
 
 - A [GitHub](https://github.com/) account
 - A working knowledge of [GitHub collaboration](https://help.github.com/categories/collaborating-with-issues-and-pull-requests/)
-- OSG contact registration. If not already registered [here](https://topology.opensciencegrid.org/miscuser/xml?), send
-  an email to <mailto:help@opensciencegrid.org> with the following information:
+- [OSG contact](#registering-contacts) registration
+
+Registering Contacts
+--------------------
+
+The OSG keeps a database of contact information for resources, virtual organizations, and projects.
+Before submitting any registrations in the topology repository, you must have an entry in the contact database with an
+associated GitHub ID.
+To register as an OSG contact or add your GitHub ID to your pre-existing contact entry, search for your name in the
+[contact database](https://topology.opensciencegrid.org/miscuser/xml?) and choose one of the following:
+
+- **If you find your name and see an associated `GitHub` account**, you can start submitting registrations!
+- **If you find your name but do not see an associated `GitHub` account**, send an email to <mailto:help@opensciencegrid.org>
+  with your GitHub ID.
+- **If you cannot find your name**, send an email to <mailto:help@opensciencegrid.org> with the following information:
     - Full name
     - GitHub ID
     - Description of your OSG affiliation, e.g. FermiGrid site administrator, senior scientist for the DUNE experiment,
       etc.
-    - Contact information of site, Virtual Organization, or project sponsor to prove affiliation
+    - Contact information of site, virtual organization, or project sponsor to prove your affiliation
 
 Registering Resources
 ---------------------
