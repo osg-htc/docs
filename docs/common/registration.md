@@ -125,6 +125,34 @@ To modify an existing resource, follow these instructions:
 
         Updating administrative contact information for CHTC-glidein2
 
+### Retiring resources ###
+
+To retire an already registered resource, choose one of the following, depending on the resource's service(s):
+
+- If the resource contains a `CE` (Compute Element) or `OSG submitter` service, set `Active: false` within resource
+  group's YAML file.
+  For example, to remove the resource GLOW, edit the file `topology/University of Wisconsin/GLOW/GLOW.yaml`, setting
+  `Active: false`:
+
+        ...
+        Production: true
+        Resources:
+          GLOW:
+            Active: %RED%false%ENDCOLOR%
+            ...
+            Services
+              CE:
+                Description: Compute Element
+                Details:
+                  hidden: false
+
+    You may have to add the `Active` attribute it if does not already exist within the resource definition.
+
+- If the resource does not contain a `CE` (Compute Element) or OSG submitter service, you may remove the resource
+  completely.
+  If there are no more resources in the resource group, you may remove the entire resource group file.
+
+
 Registering Resource Downtimes
 ------------------------------
 
@@ -209,23 +237,6 @@ methods:
 - Send an email to <help@opensciencegrid.org> requesting your desired changes.
 
 For definitions for the various fields, consult the corresponding template file for the type of data you are updating.
-
-To remove or disable a resource already registered:
-
-- If the resource is a Compute Element or OSG submitter, set `Active: false` within resource group's yaml file.  For example, to remove
-   the resource GLOW, edit the file `topology/University of Wisconsin/GLOW/GLOW.yaml`, setting `Active: false`:
-
-        ...
-        Production: true
-        Resources:
-          GLOW:
-            Active: %RED%false%ENDCOLOR%
-            ...
-    
-    You may have to add the `Active` attribute it if does not already exist within the resource definition.
-
-- If the resource is not a Compute Element or OSG submitter, you may remove the resource completely.  If there are no more resources
-   in the resource group, you may remove the entire resource group file.
 
 Getting Help
 ------------
