@@ -7,11 +7,21 @@ in the [topology Github repository](https://github.com/opensciencegrid/topology/
 This registry is used for [accounting data](https://gracc.opensciencegrid.org), contact information, and resource
 availability, particularly if your site is part of the [World LHC Computing Grid](http://wlcg.web.cern.ch/) (WLCG).
 
-!!! note "Registration Requirements"
-    The instructions in this document require a [GitHub account](https://github.com/) and a working knowledge of
-    [GitHub collaboration](https://help.github.com/categories/collaborating-with-issues-and-pull-requests/).
-
 Use this page to learn how to register information in the OSG.
+
+Registration Requirements
+-------------------------
+
+The instructions in this document require the following:
+
+- A [GitHub](https://github.com/) account
+- A working knowledge of [GitHub collaboration](https://help.github.com/categories/collaborating-with-issues-and-pull-requests/)
+- OSG contact registration. Send an email to <mailto:help@opensciencegrid.org> with the following information:
+    - Full name
+    - GitHub ID
+    - Description of your OSG affiliation, e.g. FermiGrid site administrator, senior scientist for the DUNE experiment,
+      etc.
+    - Contact information of site, Virtual Organization, or project sponsor to prove affiliation
 
 Registering Resources
 ---------------------
