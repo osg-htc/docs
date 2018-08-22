@@ -3721,25 +3721,30 @@ and their statuses:</p>
 manual</a></p>
 <h3 id="condor_ce_status">condor_ce_status<a class="headerlink" href="#condor_ce_status" title="Permanent link">&para;</a></h3>
 <h4 id="usage_8">Usage<a class="headerlink" href="#usage_8" title="Permanent link">&para;</a></h4>
-<p>To see the daemons running on a CE, you can run the following:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_ce_status -any -name condorce.example.com -pool condorce.example.com:9619
+<p>To see the daemons running on a CE, run the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_ce_status -any
 </pre></div>
 
 
-<p>Replacing <code>condorce.example.com</code>  with the hostname of the CE.</p>
+<p><code>condor_ce_status</code> takes the same arguments as <code>condor_status</code>, which are documented in the
+<a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/condor_status.html">HTCondor manual</a>.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you run the <code>condor_ce_status</code> command on the CE that you are testing, omit the <code>-name</code> and <code>-pool</code> options. <code>condor_ce_status</code> takes the same arguments as <code>condor_status</code> and is documented in the <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/condor_status.html">HTCondor manual</a>.</p>
+<p class="admonition-title">"Missing" Worker Nodes</p>
+<p>An HTCondor-CE will not show any worker nodes (e.g. <code>Machine</code> entries in the <code>condor_ce_status -any</code> output) if
+it does not have any running GlideinWMS pilot jobs.
+This is expected since HTCondor-CE only forwards incoming grid jobs to your batch system and does not match jobs to
+worker nodes.</p>
 </div>
 <h4 id="troubleshooting_6">Troubleshooting<a class="headerlink" href="#troubleshooting_6" title="Permanent link">&para;</a></h4>
-<p>To list the daemons that are configured to run:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_ce_config_val -v DAEMON_LIST
-<span class="go">DAEMON_LIST: MASTER COLLECTOR SCHEDD JOB_ROUTER, SHARED_PORT, SHARED_PORT</span>
-<span class="go">  Defined in &#39;/etc/condor-ce/config.d/03-ce-shared-port.conf&#39;, line 9.</span>
-</pre></div>
-
-
-<p>If you do not see these daemons in the output of <code>condor_ce_status</code>, check the <a href="#masterlog">Master log</a> for errors.</p>
+<p>If the output of <code>condor_ce_status -any</code> does not show at least the following daemons:</p>
+<ul>
+<li>Collector</li>
+<li>Scheduler</li>
+<li>DaemonMaster</li>
+<li>Job_Router</li>
+</ul>
+<p>Increase the <a href="../../compute-element/troubleshoot-htcondor-ce/#htcondor-ce-troubleshooting-items">debug level</a> and consult the
+<a href="../../compute-element/troubleshoot-htcondor-ce/#htcondor-ce-troubleshooting-data">HTCondor-CE logs</a> for errors.</p>
 <h3 id="condor_ce_config_val">condor_ce_config_val<a class="headerlink" href="#condor_ce_config_val" title="Permanent link">&para;</a></h3>
 <h4 id="usage_9">Usage<a class="headerlink" href="#usage_9" title="Permanent link">&para;</a></h4>
 <p>To see the value of configuration variables and where they are set, use <code>condor_ce_config_val</code>. 
