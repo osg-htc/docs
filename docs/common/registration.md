@@ -37,11 +37,11 @@ OSG resources are stored under a hierarchy of facilities, sites, and resource gr
 |----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Facility       | The institution or company where your resource is located, e.g. `University of Wisconsin`                                                                              |
 | Site           | Smaller than a facility; typically represents an academic department, research group, or a computing center, e.g. `CHTC` for the Center for High Throughput Computing. |
-| Resource Group | A logical grouping of resources, e.g. you may group together resources that serve your Slurm cluster under a resource group named `Slurm-HPC`                          |
+| Resource Group | A logical grouping of resources, e.g. you may group together resources that serve your Slurm cluster under a resource group named `CHTC-Slurm-HPC`                     |
 | Resource       | A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.                                                                      |
 
-OSG resources are stored in YAML files that can be found in the GitHub repository in a directory structure that reflects
-the above hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
+OSG resources are stored in the GitHub repository as YAML files under a directory structure that reflects the above
+hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
 [root of the topology repository](https://github.com/opensciencegrid/topology/tree/master/).
 
 ### Searching for resources ###
@@ -85,10 +85,10 @@ To register a new resource, follow the instructions below:
 
             https://github.com/opensciencegrid/topology/new/master?filename=topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml
 
-        For example, to create a `Slurm-HPC` resource group for the Center for High Throughput Computing (`CHTC`) at the
-        `University of Wisconsin`, use the following URL:
+        For example, to create a `CHTC-Slurm-HPC` resource group for the Center for High Throughput Computing (`CHTC`)
+        at the `University of Wisconsin`, use the following URL:
 
-            https://github.com/opensciencegrid/topology/new/master?filename=topology/University of Wisconsin/CHTC/Slurm-HPC.yaml
+            https://github.com/opensciencegrid/topology/new/master?filename=topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC.yaml
 
 1. Use the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) to make changes
    using the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
@@ -129,8 +129,8 @@ To modify an existing resource, follow these instructions:
 
 To retire an already registered resource, choose one of the following, depending on the resource's service(s):
 
-- If the resource contains a `CE` (Compute Element) or `OSG submitter` service, set `Active: false` within resource
-  group's YAML file.
+- If the resource contains a `CE` (Compute Element) or `Submit Node` (GlideinWMS frontend) service, set `Active: false`
+  within resource group's YAML file.
   For example, to remove the resource GLOW, edit the file `topology/University of Wisconsin/GLOW/GLOW.yaml`, setting
   `Active: false`:
 
@@ -140,7 +140,7 @@ To retire an already registered resource, choose one of the following, depending
           GLOW:
             Active: %RED%false%ENDCOLOR%
             ...
-            Services
+            Services:
               CE:
                 Description: Compute Element
                 Details:
@@ -179,7 +179,7 @@ To register a new downtime for a registered resource, follow the instructions be
 1. Open the following URL in your browser using the facility, site, and resource group names to replace `<FACILITY>`,
    `<SITE>`, and `<RESOURCE GROUP`>, respectively:
 
-        https://github.com/opensciencegrid/topology/edit/master/<FACILITY>/<SITE>/<RESOURCE GROUP>_downtime.yaml
+        https://github.com/opensciencegrid/topology/edit/master/topology/<FACILITY>/<SITE>/<RESOURCE GROUP>_downtime.yaml
 
     If the above URL returns a 404, use this link instead:
 
