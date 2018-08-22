@@ -325,6 +325,9 @@ Validating HTCondor-CE
 
 To validate an HTCondor-CE, perform the following verification steps:
 
+1. Verify that all the necessary daemons are running with
+   [condor\_ce\_status](/compute-element/troubleshoot-htcondor-ce#condor_ce_status).
+
 1. Verify the CE's network configuration using [condor\_ce\_host\_network\_check](troubleshoot-htcondor-ce#condor_ce_host_network_check).
 
 1. Verify that jobs can complete successfully using [condor\_ce\_trace](troubleshoot-htcondor-ce#condor_ce_trace).
