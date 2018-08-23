@@ -82,15 +82,16 @@ To register a new resource, follow the instructions below:
 1. If you haven't already, verify that the FQDN of your resource is not [already registered](#registering-resources)
 
 1. Choose the names of your facility, site, and resource group, ensuring that the names match any pre-existing
-   facilities, sites, or resource groups (including case and spaces). Use the names that you choose to replace
-   `<FACILITY>`, `<SITE>`, and `<RESOURCE GROUP>` below:
+   facilities, sites, or resource groups (including case and spaces).
+   Follow the instructions below, replacing instances of `<FACILITY>`, `<SITE>`, and `<RESOURCE GROUP>` with the
+   corresponding names that you chose above:
 
     - If your resource group already exists under your facility and site, open the following URL in your browser:
 
             https://github.com/opensciencegrid/topology/edit/master/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml
 
         For example, to add a resource to the `CHTC` resource group for the `CHTC` site at the `University of
-        Wisconsin`, use the following URL:
+        Wisconsin`, open the following URL:
 
             https://github.com/opensciencegrid/topology/edit/master/topology/University of Wisconsin/CHTC/CHTC.yaml
 
@@ -99,12 +100,12 @@ To register a new resource, follow the instructions below:
             https://github.com/opensciencegrid/topology/new/master?filename=topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml
 
         For example, to create a `CHTC-Slurm-HPC` resource group for the Center for High Throughput Computing (`CHTC`)
-        at the `University of Wisconsin`, use the following URL:
+        at the `University of Wisconsin`, open the following URL:
 
             https://github.com/opensciencegrid/topology/new/master?filename=topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC.yaml
 
-1. Use the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) to make changes
-   using the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
+1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+   the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
 
     !!! note
@@ -122,12 +123,12 @@ To modify an existing resource, follow these instructions:
 1. Find the resource that you would like to modify by [searching GitHub](#searching-for-resources), and open the link to
    the YAML file.
 
-1. Use the branch selector dropdown next to the file path and select the `master` branch.
+1. Click the branch selector button next to the file path and select the `master` branch.
 
     ![GitHub branch selection](/img/registration/switch-branch.png)
 
-1. Use the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) to make changes
-   using the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
+1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+   the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
 
     !!! note
@@ -194,12 +195,12 @@ To register a new downtime for a registered resource, follow the instructions be
 
         https://github.com/opensciencegrid/topology/edit/master/topology/<FACILITY>/<SITE>/<RESOURCE GROUP>_downtime.yaml
 
-    If the above URL returns a 404, use this link instead:
+    If the above URL returns a 404, open this link instead:
 
         https://github.com/opensciencegrid/topology/new/master?filename=topology/<FACILITY>/<SITE>/<RESOURCE GROUP>_downtime.yaml
 
-1. Use the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) to make changes
-   using the [downtime template](https://github.com/opensciencegrid/topology/blob/master/template-downtime.yaml) as a
+1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+   the [downtime template](https://github.com/opensciencegrid/topology/blob/master/template-downtime.yaml) as a
    guide.
 
     !!! note
@@ -238,8 +239,8 @@ To modify a VO's information or register a new VO, follow the instructions below
 
     In the new file dialog, enter `<VO>.yaml`, replacing `<VO>` with the name of your VO.
 
-1. Use the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) to make changes
-   using the [VO template](https://github.com/opensciencegrid/topology/blob/master/template-virtual-organization.yaml)
+1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+   the [VO template](https://github.com/opensciencegrid/topology/blob/master/template-virtual-organization.yaml)
    as a guide.
 
     !!! note
@@ -270,8 +271,8 @@ To modify a VO's information or register a new VO, follow the instructions below
 
     In the new file dialog, enter `<PROJECT>.yaml`, replacing `<PROJECT>` with the name of your project.
 
-1. Use the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) to make changes
-   using the [VO template](https://github.com/opensciencegrid/topology/blob/master/template-projects.yaml)
+1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+   the [VO template](https://github.com/opensciencegrid/topology/blob/master/template-projects.yaml)
    as a guide.
 
     !!! note
