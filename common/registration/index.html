@@ -897,36 +897,85 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-to-register" title="How to Register" class="md-nav__link">
-    How to Register
+  <a href="#registration-requirements" title="Registration Requirements" class="md-nav__link">
+    Registration Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-contacts" title="Registering Contacts" class="md-nav__link">
+    Registering Contacts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-resources" title="Registering Resources" class="md-nav__link">
+    Registering Resources
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#new-registrations" title="New registrations" class="md-nav__link">
-    New registrations
+  <a href="#searching-for-resources" title="Searching for resources" class="md-nav__link">
+    Searching for resources
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#updating-existing-registrations" title="Updating existing registrations" class="md-nav__link">
-    Updating existing registrations
+  <a href="#new-resources" title="New resources" class="md-nav__link">
+    New resources
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-to-register-downtime" title="How to Register Downtime" class="md-nav__link">
-    How to Register Downtime
+  <a href="#modifying-existing-resources" title="Modifying existing resources" class="md-nav__link">
+    Modifying existing resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retiring-resources" title="Retiring resources" class="md-nav__link">
+    Retiring resources
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-resource-downtimes" title="Registering Resource Downtimes" class="md-nav__link">
+    Registering Resource Downtimes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-virtual-organizations" title="Registering Virtual Organizations" class="md-nav__link">
+    Registering Virtual Organizations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-projects" title="Registering Projects" class="md-nav__link">
+    Registering Projects
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" title="Getting Help" class="md-nav__link">
+    Getting Help
+  </a>
   
 </li>
       
@@ -1663,36 +1712,85 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-to-register" title="How to Register" class="md-nav__link">
-    How to Register
+  <a href="#registration-requirements" title="Registration Requirements" class="md-nav__link">
+    Registration Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-contacts" title="Registering Contacts" class="md-nav__link">
+    Registering Contacts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-resources" title="Registering Resources" class="md-nav__link">
+    Registering Resources
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#new-registrations" title="New registrations" class="md-nav__link">
-    New registrations
+  <a href="#searching-for-resources" title="Searching for resources" class="md-nav__link">
+    Searching for resources
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#updating-existing-registrations" title="Updating existing registrations" class="md-nav__link">
-    Updating existing registrations
+  <a href="#new-resources" title="New resources" class="md-nav__link">
+    New resources
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-to-register-downtime" title="How to Register Downtime" class="md-nav__link">
-    How to Register Downtime
+  <a href="#modifying-existing-resources" title="Modifying existing resources" class="md-nav__link">
+    Modifying existing resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retiring-resources" title="Retiring resources" class="md-nav__link">
+    Retiring resources
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-resource-downtimes" title="Registering Resource Downtimes" class="md-nav__link">
+    Registering Resource Downtimes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-virtual-organizations" title="Registering Virtual Organizations" class="md-nav__link">
+    Registering Virtual Organizations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-projects" title="Registering Projects" class="md-nav__link">
+    Registering Projects
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" title="Getting Help" class="md-nav__link">
+    Getting Help
+  </a>
   
 </li>
       
@@ -1717,122 +1815,345 @@
                 
                 <h1 id="registering-in-the-osg">Registering in the OSG<a class="headerlink" href="#registering-in-the-osg" title="Permanent link">&para;</a></h1>
 <p>The OSG keeps a registry containing active projects, virtual organizations (VOs), resources, and resource
-downtimes in the <a href="https://github.com/opensciencegrid/topology/">topology Github repository</a>.
+downtimes stored as as <a href="https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html">YAML files</a>
+in the <a href="https://github.com/opensciencegrid/topology/">topology GitHub repository</a>.
 This registry is used for <a href="https://gracc.opensciencegrid.org">accounting data</a>, contact information, and resource
 availability, particularly if your site is part of the <a href="http://wlcg.web.cern.ch/">World LHC Computing Grid</a> (WLCG).</p>
 <p>Use this page to learn how to register information in the OSG.</p>
-<h2 id="how-to-register">How to Register<a class="headerlink" href="#how-to-register" title="Permanent link">&para;</a></h2>
-<p>OSG registry information is stored in <a href="https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html">YAML files</a>
-in the topology Github repository.
-The formatting and locations of the YAML files for the different types of registration data are described
-in the following table:</p>
+<h2 id="registration-requirements">Registration Requirements<a class="headerlink" href="#registration-requirements" title="Permanent link">&para;</a></h2>
+<p>The instructions in this document require the following:</p>
+<ul>
+<li>A <a href="https://github.com/">GitHub</a> account</li>
+<li>A working knowledge of <a href="https://help.github.com/categories/collaborating-with-issues-and-pull-requests/">GitHub collaboration</a></li>
+<li><a href="#registering-contacts">OSG contact</a> registration</li>
+</ul>
+<h2 id="registering-contacts">Registering Contacts<a class="headerlink" href="#registering-contacts" title="Permanent link">&para;</a></h2>
+<p>The OSG keeps a database of contact information for resources, virtual organizations, and projects.
+Before submitting any registrations in the topology repository, you must have an entry in the contact database with an
+associated GitHub ID.
+To register as an OSG contact or add your GitHub ID to your pre-existing contact entry, search for your name in the
+<a href="https://topology.opensciencegrid.org/miscuser/xml?">contact database</a> and choose one of the following:</p>
+<ul>
+<li><strong>If you find your name and see an associated <code>GitHub</code> account</strong>, you can start submitting registrations!</li>
+<li><strong>If you find your name but do not see an associated <code>GitHub</code> account</strong>, send an email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>
+  with your GitHub ID.</li>
+<li><strong>If you cannot find your name</strong>, send an email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> with the following information:<ul>
+<li>Full name</li>
+<li>GitHub ID</li>
+<li>Description of your OSG affiliation, e.g. FermiGrid site administrator, senior scientist for the DUNE experiment,
+  etc.</li>
+<li>Contact information of site, virtual organization, or project sponsor to prove your affiliation</li>
+</ul>
+</li>
+</ul>
+<h2 id="registering-resources">Registering Resources<a class="headerlink" href="#registering-resources" title="Permanent link">&para;</a></h2>
+<p>An OSG resource is a host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.
+See the full list of services that should be registered in the OSG topology
+<a href="https://github.com/opensciencegrid/topology/blob/master/topology/services.yaml">here</a>.</p>
+<p>OSG resources are stored under a hierarchy of facilities, sites, and resource groups, defined as follows:</p>
 <table>
 <thead>
 <tr>
-<th>The following data...</th>
-<th>Is defined by template file...</th>
-<th>And should be copied to location, relative to the Git root directory...</th>
+<th>Level</th>
+<th>Definition</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Project</td>
-<td><code>template-project.yaml</code></td>
-<td><code>projects/&lt;PROJECT NAME&gt;.yaml</code></td>
+<td>Facility</td>
+<td>The institution or company where your resource is located, e.g. <code>University of Wisconsin</code></td>
 </tr>
 <tr>
-<td>Resource Downtime</td>
-<td><code>template-downtime.yaml</code></td>
-<td><code>topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP NAME&gt;_downtime.yaml</code></td>
+<td>Site</td>
+<td>Smaller than a facility; typically represents an academic department, research group, or a computing center, e.g. <code>CHTC</code> for the Center for High Throughput Computing.</td>
 </tr>
 <tr>
-<td>Resource Topology</td>
-<td><code>template-resourcegroup.yaml</code></td>
-<td><code>topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP NAME&gt;.yaml</code></td>
+<td>Resource Group</td>
+<td>A logical grouping of resources, e.g. you may group together resources that serve your Slurm cluster under a resource group named <code>CHTC-Slurm-HPC</code></td>
 </tr>
 <tr>
-<td>Virtual Organization</td>
-<td><code>template-virtual-organization.yaml</code></td>
-<td><code>virtual-organizations/&lt;VO NAME&gt;.yaml</code></td>
+<td>Resource</td>
+<td>A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.</td>
 </tr>
 </tbody>
 </table>
-<p>The comments in the template files explain the structure and the meaning of the data.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>File and directory names <em>must</em> match the name of your project, VO, facility, site, or resource group, as
-appropriate.
-This includes case and spaces.</p>
-</div>
-<h3 id="new-registrations">New registrations<a class="headerlink" href="#new-registrations" title="Permanent link">&para;</a></h3>
-<p>To create a new resource group, project, or VO, please create the YAML file according to the table above, and use the
-corresponding template file to fill in the appropriate information.
-If you do not feel comfortable creating the new file yourself, send an email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> with
-details about your resource group, project, or VO.</p>
-<h3 id="updating-existing-registrations">Updating existing registrations<a class="headerlink" href="#updating-existing-registrations" title="Permanent link">&para;</a></h3>
-<p>To update the data for your site resources, project, or VO, make and submit your changes using one of the following
-methods:</p>
+<p>OSG resources are stored in the GitHub repository as YAML files under a directory structure that reflects the above
+hierarchy, i.e. <code>topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;.yaml</code> from the
+<a href="https://github.com/opensciencegrid/topology/tree/master/">root of the topology repository</a>.</p>
+<h3 id="searching-for-resources">Searching for resources<a class="headerlink" href="#searching-for-resources" title="Permanent link">&para;</a></h3>
+<p>Whether you are registering a new resource or modifying an existing resource, start by searching for the FQDN of your
+host to avoid any duplicate registrations:</p>
+<ol>
+<li>
+<p>Open the <a href="https://github.com/opensciencegrid/topology/tree/master/">topology repository</a> in your browser.</p>
+</li>
+<li>
+<p>Search the repository for the FQDN of your resource wrapped in double-quotes using the GitHub search bar
+   (e.g., <code>"glidein2.chtc.wisc.edu"</code>):</p>
+<p><img alt="GitHub search" src="../../img/registration/github-search.png" /></p>
 <ul>
-<li><a href="https://help.github.com/articles/editing-files-in-your-repository/">Modify the corresponding YAML file</a> and submit
-  your changes as a GitHub pull request.</li>
-<li>Send an email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> requesting your desired changes.</li>
+<li><strong>If the search doesn't return any results</strong>, skip to <a href="#new-resources">these instructions</a> for registering a new
+  resource.</li>
+<li><strong>If the search returns a single YAML file</strong>, open the link to the YAML file and skip to
+  <a href="#modifying-existing-resources">these instructions</a> for modifying an existing resources.</li>
+<li><strong>If the search returns more than one YAML file</strong>, please <a href="#getting-help">contact us</a>.</li>
 </ul>
-<p>For definitions for the various fields, consult the corresponding template file for the type of data you are updating.</p>
-<p>To remove or disable a resource already registered:</p>
+</li>
+</ol>
+<h3 id="new-resources">New resources<a class="headerlink" href="#new-resources" title="Permanent link">&para;</a></h3>
+<p>To register a new resource, follow the instructions below:</p>
+<ol>
+<li>
+<p>If you haven't already, verify that the FQDN of your resource is not <a href="#registering-resources">already registered</a></p>
+</li>
+<li>
+<p>Choose the names of your facility, site, and resource group, ensuring that the names match any pre-existing
+   facilities, sites, or resource groups (including case and spaces).
+   Follow the instructions below, replacing instances of <code>&lt;FACILITY&gt;</code>, <code>&lt;SITE&gt;</code>, and <code>&lt;RESOURCE GROUP&gt;</code> with the
+   corresponding names that you chose above:</p>
 <ul>
 <li>
-<p>If the resource is a Compute Element or OSG submitter, set <code>Active: false</code> within resource group's yaml file.  For example, to remove
-   the resource GLOW, edit the file <code>topology/University of Wisconsin/GLOW/GLOW.yaml</code>, setting <code>Active: false</code>:</p>
+<p>If your resource group already exists under your facility and site, open the following URL in your browser:</p>
+<div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/edit/master/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;.yaml
+</pre></div>
+
+
+<p>For example, to add a resource to the <code>CHTC</code> resource group for the <code>CHTC</code> site at the <code>University of
+Wisconsin</code>, open the following URL:</p>
+<div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/edit/master/topology/University of Wisconsin/CHTC/CHTC.yaml
+</pre></div>
+
+
+</li>
+<li>
+<p>If any of your facility, site, or resource group do not exist, open the following URL in your browser:</p>
+<div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/new/master?filename=topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;.yaml
+</pre></div>
+
+
+<p>For example, to create a <code>CHTC-Slurm-HPC</code> resource group for the Center for High Throughput Computing (<code>CHTC</code>)
+at the <code>University of Wisconsin</code>, open the following URL:</p>
+<div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/new/master?filename=topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC.yaml
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+<li>
+<p>Make changes with the <a href="https://help.github.com/articles/editing-files-in-your-repository/">GitHub file editor</a> using
+   the <a href="https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml">resource group template</a>
+   as a guide.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure the info you add matches the formatting and indentation of the template file.
+In particular, make sure no additional indentation gets added when pasting in the new data.</p>
+</div>
+</li>
+<li>
+<p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
+<div class="codehilite"><pre><span></span>Adding a new compute element to the CHTC
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="modifying-existing-resources">Modifying existing resources<a class="headerlink" href="#modifying-existing-resources" title="Permanent link">&para;</a></h3>
+<p>To modify an existing resource, follow these instructions:</p>
+<ol>
+<li>
+<p>Find the resource that you would like to modify by <a href="#searching-for-resources">searching GitHub</a>, and open the link to
+   the YAML file.</p>
+</li>
+<li>
+<p>Click the branch selector button next to the file path and select the <code>master</code> branch.</p>
+<p><img alt="GitHub branch selection" src="../../img/registration/switch-branch.png" /></p>
+</li>
+<li>
+<p>Make changes with the <a href="https://help.github.com/articles/editing-files-in-your-repository/">GitHub file editor</a> using
+   the <a href="https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml">resource group template</a>
+   as a guide.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure the info you add matches the formatting and indentation of the template file.
+In particular, make sure no additional indentation gets added when pasting in the new data.</p>
+</div>
+</li>
+<li>
+<p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
+<div class="codehilite"><pre><span></span>Updating administrative contact information for CHTC-glidein2
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="retiring-resources">Retiring resources<a class="headerlink" href="#retiring-resources" title="Permanent link">&para;</a></h3>
+<p>To retire an already registered resource, choose one of the following, depending on the resource's service(s):</p>
+<ul>
+<li>
+<p>If the resource contains a <code>CE</code> (Compute Element) or <code>Submit Node</code> (GlideinWMS frontend) service, set <code>Active: false</code>
+  within resource group's YAML file.
+  For example, to remove the resource GLOW, edit the file <code>topology/University of Wisconsin/GLOW/GLOW.yaml</code>, setting
+  <code>Active: false</code>:</p>
 <div class="codehilite"><pre><span></span>...
 Production: true
 Resources:
   GLOW:
     Active: <span style="color:red">false</span>
     ...
+    Services:
+      CE:
+        Description: Compute Element
+        Details:
+          hidden: false
 </pre></div>
 
 
 <p>You may have to add the <code>Active</code> attribute it if does not already exist within the resource definition.</p>
 </li>
 <li>
-<p>If the resource is not a Compute Element or OSG submitter, you may remove the resource completely.  If there are no more resources
-   in the resource group, you may remove the entire resource group file.</p>
+<p>If the resource does not contain a <code>CE</code> (Compute Element) or OSG submitter service, you may remove the resource
+  completely.
+  If there are no more resources in the resource group, you may remove the entire resource group file.</p>
 </li>
 </ul>
-<h3 id="how-to-register-downtime">How to Register Downtime<a class="headerlink" href="#how-to-register-downtime" title="Permanent link">&para;</a></h3>
-<p>Downtime is a period of time for which one or more services you provide are unavailable.
-You should register downtime if one of these is true:</p>
+<h2 id="registering-resource-downtimes">Registering Resource Downtimes<a class="headerlink" href="#registering-resource-downtimes" title="Permanent link">&para;</a></h2>
+<p>Resource downtime is a period of time for which one or more of the grid services of a registered resource are
+unavailable.
+Downtimes are stored in YAML files alongside the resource group YAML files as described <a href="#registering-resources">here</a>,
+i.e. <code>topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;_downtime.yaml</code> from the
+<a href="https://github.com/opensciencegrid/topology/tree/master/">root of the topology repository</a>.
+To register a new downtime for a registered resource, follow the instructions below:</p>
+<ol>
+<li>
+<p>Open the <a href="https://github.com/opensciencegrid/topology/tree/master/">topology repository</a> in your browser.</p>
+</li>
+<li>
+<p>Search the repository for the FQDN of your resource wrapped in double-quotes using the GitHub search bar
+   (e.g., <code>"glidein2.chtc.wisc.edu"</code>):</p>
+<p><img alt="GitHub search" src="../../img/registration/github-search.png" /></p>
 <ul>
-<li>your site is part of the WLCG</li>
-<li>
-<p>your CE is one of the services affected</p>
-</li>
-<li>
-<p>Find the file that should contain downtime information about resources you own.
-   It is named <code>topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP NAME&gt;_downtime.yaml</code>.</p>
-</li>
+<li><strong>If the search returns a single YAML file</strong>, note the name of the facility, site, and resource group and continue
+  to the next step.</li>
+<li><strong>If the search doesn't return any results</strong>, your resource is not registered.
+  Follow the <a href="#registering-resources">resource registration</a> instructions before registering a downtime.</li>
+<li><strong>If the search returns more than one YAML file</strong>, please <a href="#getting-help">contact us</a>.</li>
 </ul>
-<p>For example, <code>topology/University of Wisconsin/GLOW/GLOW.yaml</code> has the corresponding downtime file
-   <code>topology/University of Wisconsin/GLOW/GLOW_downtime.yaml</code>.</p>
-<p>If the downtime file does not exist, create it.</p>
-<p>To find out what resource group a host is in, search for the FQDN of the host with something like:</p>
-<p><code>grep -F "&lt;FQDN&gt;" topology/*/*/*.yaml | grep -Fv _downtime.yaml | grep -Fv SITE.yaml</code></p>
-<p>If the above command returns nothing, then the host is not registered in the topology data
-   and you don't need to register downtime for it.</p>
-<ol>
-<li>
-<p>Add the contents of <code>template-downtime.yaml</code> to the end of the downtime file in the path above.</p>
 </li>
 <li>
-<p>Follow the instructions in the comments to fill out the necessary fields.</p>
+<p>Open the following URL in your browser using the facility, site, and resource group names to replace <code>&lt;FACILITY&gt;</code>,
+   <code>&lt;SITE&gt;</code>, and <code>&lt;RESOURCE GROUP</code>&gt;, respectively:</p>
+<div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/edit/master/topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;_downtime.yaml
+</pre></div>
+
+
+<p>If the above URL returns a 404, open this link instead:</p>
+<div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/new/master?filename=topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;_downtime.yaml
+</pre></div>
+
+
+</li>
+<li>
+<p>Make changes with the <a href="https://help.github.com/articles/editing-files-in-your-repository/">GitHub file editor</a> using
+   the <a href="https://github.com/opensciencegrid/topology/blob/master/template-downtime.yaml">downtime template</a> as a
+   guide.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure the info you add matches the formatting and indentation of the template or the other downtime entries
+in the file.
+In particular, make sure no additional indentation gets added when pasting in the new data.</p>
+</div>
+</li>
+<li>
+<p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
+<div class="codehilite"><pre><span></span>Adding downtime for CHTC-glidein2 for regular maintenance
+</pre></div>
+
+
 </li>
 </ol>
-<p><strong>Note:</strong> Make sure the info you add matches the formatting and indentation of the template or the other downtime entries in the file.
-   In particular, make sure no additional indentation gets added when pasting in the new data.</p>
+<h2 id="registering-virtual-organizations">Registering Virtual Organizations<a class="headerlink" href="#registering-virtual-organizations" title="Permanent link">&para;</a></h2>
+<p>Virtual Organizations (VOs) are sets of groups or individuals defined by some common cyber-infrastructure need.
+This can be a scientific experiment, a university campus or a distributed research effort.
+A VO represents all its members and their common needs in a grid environment.
+A VO also includes the group’s computing/storage resources and services.
+For more information about VOs, see <a href="https://opensciencegrid.org/about/organization#virtual-organizations">this page</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before submitting a registration for a new VO, please <a href="#getting-help">contact us</a> describing your organization's
+computing needs.</p>
+</div>
+<p>VO information is stored as YAML files in the <code>virtual-organizations</code> directory of the
+<a href="https://github.com/opensciencegrid/topology/tree/master">topology repository</a>.
+To modify a VO's information or register a new VO, follow the instructions below:</p>
 <ol>
-<li>Submit your changes as a GitHub pull request.</li>
+<li>
+<p>Open the <a href="https://github.com/opensciencegrid/topology/tree/master/virtual-organizations">topology repository</a> in your
+   browser.</p>
+</li>
+<li>
+<p>If you see your VO in the list, open the file and continue to the next step.
+   If you do not see your VO in the list, click <code>Create new file</code> button:</p>
+<p><img alt="GitHub file creation" src="../../img/registration/create-file.png" /></p>
+<p>In the new file dialog, enter <code>&lt;VO&gt;.yaml</code>, replacing <code>&lt;VO&gt;</code> with the name of your VO.</p>
+</li>
+<li>
+<p>Make changes with the <a href="https://help.github.com/articles/editing-files-in-your-repository/">GitHub file editor</a> using
+   the <a href="https://github.com/opensciencegrid/topology/blob/master/template-virtual-organization.yaml">VO template</a>
+   as a guide.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure the info you add matches the formatting and indentation of the template file.
+In particular, make sure no additional indentation gets added when pasting in the new data.</p>
+</div>
+</li>
+<li>
+<p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
+<div class="codehilite"><pre><span></span>Updating contact information for the GLOW VO
+</pre></div>
+
+
+</li>
 </ol>
-<p>Alternatively, send an email to <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> requesting your desired changes.</p>
+<h2 id="registering-projects">Registering Projects<a class="headerlink" href="#registering-projects" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before submitting a registration for a new project, please <a href="#getting-help">contact us</a> describing your organization's
+computing needs.</p>
+</div>
+<p>Project information is stored as YAML files in the <code>projects</code> directory of the
+<a href="https://github.com/opensciencegrid/topology/tree/master">topology repository</a>.
+To modify a VO's information or register a new VO, follow the instructions below:</p>
+<ol>
+<li>
+<p>Open the <a href="https://github.com/opensciencegrid/topology/tree/master/projects">topology repository</a> in your browser.</p>
+</li>
+<li>
+<p>If you see your project in the list, open the file and continue to the next step.
+   If you do not see your project in the list, click <code>Create new file</code> button:</p>
+<p><img alt="GitHub file creation" src="../../img/registration/create-file.png" /></p>
+<p>In the new file dialog, enter <code>&lt;PROJECT&gt;.yaml</code>, replacing <code>&lt;PROJECT&gt;</code> with the name of your project.</p>
+</li>
+<li>
+<p>Make changes with the <a href="https://help.github.com/articles/editing-files-in-your-repository/">GitHub file editor</a> using
+   the <a href="https://github.com/opensciencegrid/topology/blob/master/template-projects.yaml">VO template</a>
+   as a guide.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure the info you add matches the formatting and indentation of the template file.
+In particular, make sure no additional indentation gets added when pasting in the new data.</p>
+</div>
+</li>
+<li>
+<p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
+<div class="codehilite"><pre><span></span>Updating contact information for the Mu2e project
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
+<p>To get assistance, please use the <a href="../../common/help">this page</a>.</p>
                 
                   
                 
