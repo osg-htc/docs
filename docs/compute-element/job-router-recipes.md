@@ -212,7 +212,7 @@ JOB_ROUTER_ENTRIES = [ \
 
 ### Setting a default…
 
-This section outlines how to set default job limits, memory, cores, queue, and maximum walltime. For an example on how users can override these defaults, consult [this document](submit-htcondor-ce#route-defaults).
+This section outlines how to set default job limits, memory, cores, and maximum walltime. For an example on how users can override these defaults, consult [this document](submit-htcondor-ce#route-defaults).
 
 #### Maximum number of jobs
 
