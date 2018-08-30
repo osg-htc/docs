@@ -1,19 +1,28 @@
 Installing and Maintaining HTCondor-CE
 ======================================
 
-The [HTCondor-CE](htcondor-ce-overview) software is a *job gateway* for an OSG Compute Element (CE). As such, HTCondor-CE is the entry point for jobs coming from the OSG — it handles authorization and delegation of jobs to your local batch system. In OSG today, most CEs accept *pilot jobs* from a factory, which in turn are able to accept and run end-user jobs.  See the [HTCondor-CE Overview](htcondor-ce-overview) for a much more detailed introduction.
+The [HTCondor-CE](htcondor-ce-overview) software is a *job gateway* for an OSG Compute Element (CE).
+As such, HTCondor-CE is the entry point for jobs coming from the OSG — it handles authorization and delegation of jobs
+to your local batch system.
+In OSG today, most CEs accept *pilot jobs* from a factory, which in turn are able to accept and run end-user jobs.
+See the [HTCondor-CE Overview](htcondor-ce-overview) for a much more detailed introduction.
 
-Use this page to learn how to install, configure, run, test, and troubleshoot HTCondor-CE from the OSG software repositories.
+Use this page to learn how to install, configure, run, test, and troubleshoot HTCondor-CE from the OSG software
+repositories.
 
 Before Starting
 ---------------
 
-Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
+Before starting the installation process, consider the following points
+(consulting [the Reference section below](#reference) as needed):
 
--   **User IDs:** If they do not exist already, the installation will create the Linux users `condor` (UID 4716) and `gratia` (UID 42401)
--   **Service certificate:** The HTCondor-CE service uses a host certificate at `/etc/grid-security/hostcert.pem` and an accompanying key at `/etc/grid-security/hostkey.pem`
+-   **User IDs:** If they do not exist already, the installation will create the Linux users `condor` (UID 4716) and
+    `gratia` (UID 42401)
+-   **Service certificate:** The HTCondor-CE service uses a host certificate at `/etc/grid-security/hostcert.pem` and an
+    accompanying key at `/etc/grid-security/hostkey.pem`
 -   **Network ports:** The pilot factories must be able to contact your HTCondor-CE service on port 9619 (TCP)
--   **Host choice:** HTCondor-CE should be installed on a host that already has the ability to submit jobs into your local cluster
+-   **Host choice:** HTCondor-CE should be installed on a host that already has the ability to submit jobs into your
+    local cluster
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
@@ -41,7 +50,8 @@ To simplify installation, OSG provides convenience RPMs that install all require
 
     This command will update **all** packages
 
-1. **(Optional)** If your batch system is already installed via non-RPM means and is in the following list, install the appropriate 'empty' RPM.
+1. **(Optional)** If your batch system is already installed via non-RPM means and is in the following list, install the
+   appropriate 'empty' RPM.
    Otherwise, skip to the next step.
 
     | If your batch system is… | Then run the following command…                       |
@@ -49,7 +59,8 @@ To simplify installation, OSG provides convenience RPMs that install all require
     | HTCondor                 | `yum install empty-condor --enablerepo=osg-empty`     |
     | SLURM                    | `yum install empty-slurm --enablerepo=osg-empty`      |
 
-1. **(Optional)** If your HTCondor batch system is already installed via non-OSG RPM means, add the line below to `/etc/yum.repos.d/osg.repo`.
+1. **(Optional)** If your HTCondor batch system is already installed via non-OSG RPM means, add the line below to
+`/etc/yum.repos.d/osg.repo`.
    Otherwise, skip to the next step.
 
         exclude=condor
@@ -73,11 +84,16 @@ To simplify installation, OSG provides convenience RPMs that install all require
 Configuring HTCondor-CE
 -----------------------
 
-There are a few required configuration steps to connect HTCondor-CE with your batch system and authentication method. For more advanced configuration, see the section on [optional configurations](#optional-configuration).
+There are a few required configuration steps to connect HTCondor-CE with your batch system and authentication method.
+For more advanced configuration, see the section on [optional configurations](#optional-configuration).
 
 ### Enabling HTCondor-CE
 
-If you are installing HTCondor-CE on a new host, the default configuration is correct and you can skip this step and continue onto [Configuring the batch system](#configuring-the-batch-system)! However, if you are updating a host that used a Globus GRAM job gateway ("Globus gatekeeper"), you must disable GRAM and enable the HTCondor job gateway. Edit the gateway configuration file `/etc/osg/config.d/10-gateway.ini` so that it reads:
+If you are  installing HTCondor-CE on a new  host, the default configuration is correct and you can skip this step and
+continue onto [Configuring the batch system](#configuring-the-batch-system)!
+However, if you are updating a host that used a Globus GRAM job gateway ("Globus gatekeeper"), you must disable GRAM and
+enable the HTCondor job gateway.
+Edit the gateway configuration file `/etc/osg/config.d/10-gateway.ini` so that it reads:
 
 ```
 gram_gateway_enabled = False
@@ -92,7 +108,9 @@ Enable your batch system by editing the `enabled` field in the `/etc/osg/config.
 enabled = %RED%True%ENDCOLOR%
 ```
 
-If you are using HTCondor as your **local batch system** (i.e., in addition to your HTCondor-CE), skip to the [configuring authorization](#configuring-authorization) section. For other batch systems (e.g., PBS, LSF, SGE, SLURM), keep reading.
+If you are using HTCondor as your **local batch system** (i.e., in addition to your HTCondor-CE), skip to the
+[configuring authorization](#configuring-authorization) section.
+For other batch systems (e.g., PBS, LSF, SGE, SLURM), keep reading.
 
 #### Batch systems other than HTCondor
 
@@ -100,12 +118,21 @@ Non-HTCondor batch systems require additional configuration to support file tran
 
 ##### Sharing the spool directory
 
-To transfer files between the CE and the batch system, HTCondor-CE requires a shared file system. The current recommendation is to run a dedicated NFS server (whose installation is beyond the scope of this document) on the **CE host**. In this setup, HTCondor-CE writes to the local spool directory, the NFS server shares the directory, and each worker node mounts the directory in the same location as on the CE. For example, if your spool directory is `/var/lib/condor-ce` (the default), you must mount the shared directory to `/var/lib/condor-ce` on the worker nodes.
+To transfer files between the CE and the batch system, HTCondor-CE requires a shared file system.
+The current recommendation is to run a dedicated NFS server (whose installation is beyond the scope of this document) on
+the **CE host**.
+In this setup, HTCondor-CE writes to the local spool directory, the NFS server shares the directory, and each worker
+node mounts the directory in the same location as on the CE.
+For example, if your spool directory is `/var/lib/condor-ce` (the default), you must mount the shared directory to
+`/var/lib/condor-ce` on the worker nodes.
 
 !!! note
-    If you choose not to host the NFS server on your CE, you will need to turn off root squash so that the HTCondor-CE daemons can write to the spool directory.
+    If you choose not to host the NFS server on your CE, you will need to turn off root squash so that the HTCondor-CE
+    daemons can write to the spool directory.
 
-You can control the value of the spool directory by setting `SPOOL` in `/etc/condor-ce/config.d/99-local.conf` (create this file if it doesn't exist). For example, the following sets the `SPOOL` directory to `/home/condor`:
+You can control the value of the spool directory by setting `SPOOL` in `/etc/condor-ce/config.d/99-local.conf` (create
+this file if it doesn't exist).
+For example, the following sets the `SPOOL` directory to `/home/condor`:
 
 ``` file
 SPOOL = /home/condor
@@ -120,23 +147,35 @@ To configure which virtual organizations and users are authorized to submit jobs
 [the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin).
 
 !!! note
-    If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the `condor_mapfile`.
+    If your local batch system is HTCondor, it will attempt to utilize the LCMAPS callouts if enabled in the
+    `condor_mapfile`.
     If this is not the desired behavior, set `GSI_AUTHZ_CONF=/dev/null` in the local HTCondor configuration.
 
 ### Configuring CE collector advertising
 
-To split jobs between the various sites of the OSG, information about each site's capabilities are uploaded to a central collector. The job factories then query the central collector for idle resources and submit pilot jobs to the available sites. To advertise your site, you will need to enter some information about the worker nodes of your clusters.
+To split jobs between the various sites of the OSG, information about each site's capabilities are uploaded to a central
+collector.
+The job factories then query the central collector for idle resources and submit pilot jobs to the available sites.
+To advertise your site, you will need to enter some information about the worker nodes of your clusters.
 
-Please see the [Subcluster / Resource Entry configuration document](../other/configuration-with-osg-configure#subcluster-resource-entry) about configuring the data that will be uploaded to the central collector.
+Please see the [Subcluster / Resource Entry configuration document](../other/configuration-with-osg-configure#subcluster-resource-entry)
+about configuring the data that will be uploaded to the central collector.
 
 ### Applying configuration settings
 
-Making changes to the OSG configuration files in the `/etc/osg/config.d` directory does not apply those settings to software automatically. Settings that are made outside of the OSG directory take effect immediately or at least when the relevant service is restarted. For the OSG settings, use the [osg-configure](../other/configuration-with-osg-configure) tool to validate (to a limited extent) and apply the settings to the relevant software components. The `osg-configure` software is included automatically in an HTCondor-CE installation.
+Making changes to the OSG configuration files in the `/etc/osg/config.d` directory does not apply those settings to
+software automatically.
+Settings that are made outside of the OSG directory take effect immediately or at least when the relevant service is
+restarted.
+For the OSG settings, use the [osg-configure](../other/configuration-with-osg-configure) tool to validate (to a limited
+extent) and apply the settings to the relevant software components.
+The `osg-configure` software is included automatically in an HTCondor-CE installation.
 
 1. Make all changes to `.ini` files in the `/etc/osg/config.d` directory
 
     !!! note
-        This document describes the critical settings for HTCondor-CE and related software. You may need to configure other software that is installed on your HTCondor-CE host, too.
+        This document describes the critical settings for HTCondor-CE and related software.
+        You may need to configure other software that is installed on your HTCondor-CE host, too.
 
 2. Validate the configuration settings
 
@@ -151,7 +190,9 @@ Making changes to the OSG configuration files in the `/etc/osg/config.d` directo
 
 ### Optional configuration
 
-The following configuration steps are optional and will likely not be required for setting up a small site. If you do not need any of the following special configurations, skip to [the section on using HTCondor-CE](#using-htcondor-ce).
+The following configuration steps are optional and will likely not be required for setting up a small site.
+If you do not need any of the following special configurations, skip to
+[the section on using HTCondor-CE](#using-htcondor-ce).
 
 -   [Transforming and filtering jobs](#transforming-and-filtering-jobs)
 -   [Configuring for multiple network interfaces](#configuring-for-multiple-network-interfaces)
@@ -162,34 +203,46 @@ The following configuration steps are optional and will likely not be required f
 
 #### Transforming and filtering jobs
 
-If you need to modify or filter jobs, more information can be found in the [Job Router Recipes](job-router-recipes) document.
+If you need to modify or filter jobs, more information can be found in the [Job Router Recipes](job-router-recipes)
+document.
 
 !!! note
     If you need to assign jobs to HTCondor accounting groups, refer to [this](#htcondor-accounting-groups) section.
 
 #### Configuring for multiple network interfaces
 
-If you have multiple network interfaces with different hostnames, the HTCondor-CE daemons need to know which hostname and interface to use when communicating to each other. Set `NETWORK_HOSTNAME` and `NETWORK_INTERFACE` to the hostname and IP address of your public interface, respectively, in `/etc/condor-ce/config.d/99-local.conf` directory with the line:
+If you have multiple network interfaces with different hostnames, the HTCondor-CE daemons need to know which hostname
+and interface to use when communicating to each other.
+Set `NETWORK_HOSTNAME` and `NETWORK_INTERFACE` to the hostname and IP address of your public interface, respectively, in
+`/etc/condor-ce/config.d/99-local.conf` directory with the line:
 
 ``` file
 NETWORK_HOSTNAME = %RED%condorce.example.com%ENDCOLOR%
 NETWORK_INTERFACE = %RED%127.0.0.1%ENDCOLOR%
 ```
 
-Replacing `condorce.example.com` text with your public interface’s hostname and `127.0.0.1` with your public interface’s IP address.
+Replacing `condorce.example.com` text with your public interface’s hostname and `127.0.0.1` with your public interface’s
+IP address.
 
 #### Limiting or disabling locally running jobs on the CE
 
-If you want to limit or disable jobs running locally on your CE, you will need to configure HTCondor-CE's local and scheduler universes. Local and scheduler universes allow jobs to be run on the CE itself, mainly for remote troubleshooting. Pilot jobs will not run as local/scheduler universe jobs so leaving them enabled does NOT turn your CE into another worker node.
+If you want to limit or disable jobs running locally on your CE, you will need to configure HTCondor-CE's local and
+scheduler universes.
+Local and scheduler universes allow jobs to be run on the CE itself, mainly for remote troubleshooting.
+Pilot jobs will not run as local/scheduler universe jobs so leaving them enabled does NOT turn your CE into another
+worker node.
 
-The two universes are effectively the same (scheduler universe launches a starter process for each job), so we will be configuring them in unison.
+The two universes are effectively the same (scheduler universe launches a starter process for each job), so we will be
+configuring them in unison.
 
-- **To change the default limit** on the number of locally run jobs (the current default is 20), add the following to `/etc/condor-ce/config.d/99-local.conf`:
+- **To change the default limit** on the number of locally run jobs (the current default is 20), add the following to
+  `/etc/condor-ce/config.d/99-local.conf`:
 
         START_LOCAL_UNIVERSE = TotalLocalJobsRunning + TotalSchedulerJobsRunning < %RED%<JOB-LIMIT>%ENDCOLOR%
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 
-- **To only allow a specific user** to start locally run jobs, add the following to `/etc/condor-ce/config.d/99-local.conf`:
+- **To only allow a specific user** to start locally run jobs, add the following to
+  `/etc/condor-ce/config.d/99-local.conf`:
 
         START_LOCAL_UNIVERSE = target.Owner =?= "%RED%<USERNAME>%ENDCOLOR%"
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
@@ -200,14 +253,17 @@ The two universes are effectively the same (scheduler universe launches a starte
         START_SCHEDULER_UNIVERSE = $(START_LOCAL_UNIVERSE)
 
 !!! note
-    RSV requires the ability to start local universe jobs so if you are using RSV, you need to allow local universe jobs from the `rsv` user.
+    RSV requires the ability to start local universe jobs so if you are using RSV, you need to allow local universe jobs
+    from the `rsv` user.
 
 #### Accounting with multiple CEs or local user jobs
 
 !!! note
     For non-HTCondor batch systems only
 
-If your site has multiple CEs or you have non-grid users submitting to the same local batch system, the OSG accounting software needs to be configured so that it doesn't over report the number of jobs. Use the following table to determine which file requires editing:
+If your site has multiple CEs or you have non-grid users submitting to the same local batch system, the OSG accounting
+software needs to be configured so that it doesn't over report the number of jobs.
+Use the following table to determine which file requires editing:
 
 | If your batch system is… | Then edit the following file on your CE(s)… |
 |:-------------------------|:--------------------------------------------|
@@ -227,7 +283,10 @@ SuppressNoDNRecords="1"
 !!! note
     For HTCondor batch systems only
 
-If you want to provide fairshare on a group basis, as opposed to a Unix user basis, you can use HTCondor accounting groups. They are independent of the Unix groups the user may already be in and are [documented in the HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_6User_Priorities.html#SECTION00467000000000000000). If you are using HTCondor accounting groups, you can map jobs from the CE into HTCondor accounting groups based on their UID, their DN, or their VOMS attributes.
+If you want to provide fairshare on a group basis, as opposed to a Unix user basis, you can use HTCondor accounting groups.
+They are independent of the Unix groups the user may already be in and are [documented in the HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_6User_Priorities.html#SECTION00467000000000000000).
+If you are using HTCondor accounting groups, you can map jobs from the CE into HTCondor accounting groups based on their
+UID, their DN, or their VOMS attributes.
 
 -   **To map UIDs to an accounting group,** add entries to `/etc/osg/uid_table.txt` with the following form:
 
@@ -238,7 +297,8 @@ If you want to provide fairshare on a group basis, as opposed to a Unix user bas
         uscms02 TestGroup
         osg     other.osgedu
 
--   **To map DNs or VOMS attributes to an accounting group,** add lines to `/etc/osg/extattr_table.txt` with the following form:
+-   **To map DNs or VOMS attributes to an accounting group,** add lines to `/etc/osg/extattr_table.txt` with the
+    following form:
 
         %RED%SubjectOrAttribute%ENDCOLOR% GroupName
 
@@ -250,7 +310,8 @@ If you want to provide fairshare on a group basis, as opposed to a Unix user bas
         .* other
 
 !!! note
-    Entries in `/etc/osg/uid_table.txt` are honored over `/etc/osg/extattr_table.txt` if a job would match to lines in both files.
+    Entries in `/etc/osg/uid_table.txt` are honored over `/etc/osg/extattr_table.txt` if a job would match to lines in
+    both files.
 
 #### Install and run the HTCondor-CE View
 
@@ -272,7 +333,8 @@ The HTCondor-CE View is an optional web interface to the status of your CE. To r
 
 4.  Verify the service by entering your CE's hostname into your web browser
 
-The website is served on port 80 by default. To change this default, edit the value of `HTCONDORCE_VIEW_PORT` in `/etc/condor-ce/config.d/05-ce-view.conf`.
+The website is served on port 80 by default. To change this default, edit the value of `HTCONDORCE_VIEW_PORT` in
+`/etc/condor-ce/config.d/05-ce-view.conf`.
 
 Using HTCondor-CE
 -----------------
@@ -285,7 +347,8 @@ As a site administrator, there are a few ways to use the HTCondor-CE:
 
 ### Managing HTCondor-CE and associated services
 
-In addition to the HTCondor-CE job gateway service itself, there are a number of supporting services in your installation. The specific services are:
+In addition to the HTCondor-CE job gateway service itself, there are a number of supporting services in your installation.
+The specific services are:
 
 | Software          | Service name                          | Notes                                                                                  |
 |:------------------|:--------------------------------------|:---------------------------------------------------------------------------------------|
@@ -324,12 +387,14 @@ To validate an HTCondor-CE, perform the following verification steps:
 Troubleshooting HTCondor-CE
 ---------------------------
 
-For information on how to troubleshoot your HTCondor-CE, please refer to [the HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce).
+For information on how to troubleshoot your HTCondor-CE, please refer to
+[the HTCondor-CE troubleshooting guide](troubleshoot-htcondor-ce).
 
 Registering the CE
 ------------------
 
-To be part of the OSG Production Grid, your CE must be registered in the [OSG Information Management System](https://github.com/opensciencegrid/topology#topology) (OIM).
+To be part of the OSG Production Grid, your CE must be registered in the
+[OSG Information Management System](https://github.com/opensciencegrid/topology#topology) (OIM).
 To register your resource:
 
 1.  Identify the facility, site, and resource group where your HTCondor-CE is hosted.
@@ -362,7 +427,9 @@ Here are some other HTCondor-CE documents that might be helpful:
 
 ### Configuration
 
-The following directories contain the configuration for HTCondor-CE. The directories are parsed in the order presented and thus configuration within the final directory will override configuration specified in the previous directories.
+The following directories contain the configuration for HTCondor-CE.
+The directories are parsed in the order presented and thus configuration within the final directory will override
+configuration specified in the previous directories.
 
 | Location                         | Comment                                                                                                                    |
 |:---------------------------------|:---------------------------------------------------------------------------------------------------------------------------|
@@ -399,4 +466,5 @@ Find instructions to request a host certificate [here](../security/host-certs).
 | :----------- | :------: | :---------: | :-----: | :------: | :---------------------- |
 | Htcondor-CE  | tcp      | 9619        | X       |          | HTCondor-CE shared port |
 
-Allow inbound and outbound network connection to all internal site servers, such as the batch system head-node only ephemeral outgoing ports are necessary.
+Allow inbound and outbound network connection to all internal site servers, such as the batch system head-node only
+ephemeral outgoing ports are necessary.
