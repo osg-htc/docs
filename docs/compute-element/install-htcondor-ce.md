@@ -101,11 +101,8 @@ For other batch systems (e.g., PBS, LSF, SGE, SLURM), keep reading.
 
 #### Batch systems other than HTCondor
 
-Non-HTCondor batch systems require additional configuration to support file transfer to your site's worker nodes.
-
-##### Sharing the spool directory
-
-To transfer files between the CE and the batch system, HTCondor-CE requires a shared file system.
+Non-HTCondor batch systems require a shared file system configuration to support file transfer from the HTCondor-CE to
+your site's worker nodes.
 The current recommendation is to run a dedicated NFS server (whose installation is beyond the scope of this document) on
 the **CE host**.
 In this setup, HTCondor-CE writes to the local spool directory, the NFS server shares the directory, and each worker
