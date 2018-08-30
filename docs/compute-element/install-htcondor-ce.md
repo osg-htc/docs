@@ -114,19 +114,6 @@ SPOOL = /home/condor
 !!! note
     The shared spool directory must be readable and writeable by the `condor` user for HTCondor-CE to function correctly.
 
-##### Disable worker node proxy renewal
-
-Worker node proxy renewal is not used by HTCondor-CE and leaving it on will cause some jobs to be held. Edit `/etc/blah.config` on the HTCondor-CE host and set the following values:
-
-``` file
-blah_disable_wn_proxy_renewal=yes
-blah_delegate_renewed_proxies=no
-blah_disable_limited_proxy=yes
-```
-
-!!! note
-    There should be no whitespace around the `=`.
-
 ### Configuring authorization
 
 To configure which virtual organizations and users are authorized to submit jobs to your, follow the instructions in
