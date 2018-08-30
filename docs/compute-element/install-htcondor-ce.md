@@ -26,10 +26,10 @@ Before starting the installation process, consider the following points
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
-- Ensure the host has [a supported operating system](../release/supported_platforms)
+- Ensure the host has [a supported operating system](/release/supported_platforms)
 - Obtain root access to the host
-- Prepare the [required Yum repositories](../common/yum)
-- Install [CA certificates](../common/ca)
+- Prepare the [required Yum repositories](/common/yum)
+- Install [CA certificates](/common/ca)
 
 Installing HTCondor-CE
 ----------------------
@@ -158,7 +158,7 @@ collector.
 The job factories then query the central collector for idle resources and submit pilot jobs to the available sites.
 To advertise your site, you will need to enter some information about the worker nodes of your clusters.
 
-Please see the [Subcluster / Resource Entry configuration document](../other/configuration-with-osg-configure#subcluster-resource-entry)
+Please see the [Subcluster / Resource Entry configuration document](/other/configuration-with-osg-configure#subcluster-resource-entry)
 about configuring the data that will be uploaded to the central collector.
 
 ### Applying configuration settings
@@ -167,7 +167,7 @@ Making changes to the OSG configuration files in the `/etc/osg/config.d` directo
 software automatically.
 Settings that are made outside of the OSG directory take effect immediately or at least when the relevant service is
 restarted.
-For the OSG settings, use the [osg-configure](../other/configuration-with-osg-configure) tool to validate (to a limited
+For the OSG settings, use the [osg-configure](/other/configuration-with-osg-configure) tool to validate (to a limited
 extent) and apply the settings to the relevant software components.
 The `osg-configure` software is included automatically in an HTCondor-CE installation.
 
@@ -413,7 +413,7 @@ To register your resource:
 Getting Help
 ------------
 
-To get assistance, please use the [this page](../common/help).
+To get assistance, please use the [this page](/common/help).
 
 Reference
 ---------
@@ -458,7 +458,7 @@ The following users are needed by HTCondor-CE at all sites:
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` |
 | Host key         | `root`                     | `/grid-security/hostkey.pem`  |
 
-Find instructions to request a host certificate [here](../security/host-certs).
+Find instructions to request a host certificate [here](/security/host-certs).
 
 ### Networking
 
