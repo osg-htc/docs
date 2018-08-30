@@ -87,19 +87,6 @@ Configuring HTCondor-CE
 There are a few required configuration steps to connect HTCondor-CE with your batch system and authentication method.
 For more advanced configuration, see the section on [optional configurations](#optional-configuration).
 
-### Enabling HTCondor-CE
-
-If you are  installing HTCondor-CE on a new  host, the default configuration is correct and you can skip this step and
-continue onto [Configuring the batch system](#configuring-the-batch-system)!
-However, if you are updating a host that used a Globus GRAM job gateway ("Globus gatekeeper"), you must disable GRAM and
-enable the HTCondor job gateway.
-Edit the gateway configuration file `/etc/osg/config.d/10-gateway.ini` so that it reads:
-
-```
-gram_gateway_enabled = False
-htcondor_gateway_enabled = True
-```
-
 ### Configuring the batch system
 
 Enable your batch system by editing the `enabled` field in the `/etc/osg/config.d/20-<YOUR BATCH SYSTEM>.ini`
