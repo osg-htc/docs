@@ -158,7 +158,7 @@ The following configuration steps are optional and will likely not be required f
 -   [Limiting or disabling locally running jobs on the CE](#limiting-or-disabling-locally-running-jobs-on-the-ce)
 -   [Accounting with multiple CEs or local user jobs](#accounting-with-multiple-ces-or-local-user-jobs)
 -   [HTCondor accounting groups](#htcondor-accounting-groups)
--   [Installing the HTCondor-CE View](#install-and-run-the-htcondor-ce-view)
+-   [HTCondor-CE monitoring web interface](#install-and-run-the-htcondor-ce-view)
 
 #### Transforming and filtering jobs
 
