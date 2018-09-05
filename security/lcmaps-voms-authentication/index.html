@@ -38,7 +38,7 @@
     
     
       
-        <title>LCMAPS-VOMS authentication - OSG Documentation</title>
+        <title>LCMAPS VOMS authentication - OSG Documentation</title>
       
     
     
@@ -120,7 +120,7 @@
                 OSG Documentation
               </span>
               <span class="md-header-nav__topic">
-                LCMAPS-VOMS authentication
+                LCMAPS VOMS authentication
               </span>
             
           
@@ -771,11 +771,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        LCMAPS-VOMS authentication
+        LCMAPS VOMS authentication
       </label>
     
-    <a href="./" title="LCMAPS-VOMS authentication" class="md-nav__link md-nav__link--active">
-      LCMAPS-VOMS authentication
+    <a href="./" title="LCMAPS VOMS authentication" class="md-nav__link md-nav__link--active">
+      LCMAPS VOMS authentication
     </a>
     
       
@@ -914,8 +914,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#troubleshooting-mapping-with-htcondor-ce" title="Troubleshooting mapping with HTCondor-CE" class="md-nav__link">
-    Troubleshooting mapping with HTCondor-CE
+  <a href="#htcondor-ce-hosts" title="HTCondor-CE hosts" class="md-nav__link">
+    HTCondor-CE hosts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xrootd-hosts" title="XRootD hosts" class="md-nav__link">
+    XRootD hosts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gridftp-hosts" title="GridFTP hosts" class="md-nav__link">
+    GridFTP hosts
   </a>
   
 </li>
@@ -1945,8 +1959,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#troubleshooting-mapping-with-htcondor-ce" title="Troubleshooting mapping with HTCondor-CE" class="md-nav__link">
-    Troubleshooting mapping with HTCondor-CE
+  <a href="#htcondor-ce-hosts" title="HTCondor-CE hosts" class="md-nav__link">
+    HTCondor-CE hosts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xrootd-hosts" title="XRootD hosts" class="md-nav__link">
+    XRootD hosts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gridftp-hosts" title="GridFTP hosts" class="md-nav__link">
+    GridFTP hosts
   </a>
   
 </li>
@@ -2379,34 +2407,15 @@ therefore, there are no running services and it does not have to be invoked manu
 
 <p>and make sure it matches one of the patterns in <code>/etc/grid-security/voms-mapfile</code> or <code>/usr/share/osg/voms-mapfile-default</code>, and does not match any patterns in <code>/etc/grid-security/ban-voms-mapfile</code>.</p>
 <h2 id="troubleshooting-the-lcmaps-voms-plugin">Troubleshooting the LCMAPS VOMS Plugin<a class="headerlink" href="#troubleshooting-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h2>
-<p>LCMAPS logs to <code>journalctl</code> (EL7) or <code>/var/log/messages</code> (EL6) and the verbosity of the logging can be increased by modifying the appropriate configuration and restarting the service:</p>
-<ul>
-<li>
-<p><strong>If you are troubleshooting an HTCondor-CE or GridFTP host...</strong></p>
+<p>LCMAPS logs to <code>journalctl</code> (EL7) or <code>/var/log/messages</code> (EL6) and the verbosity of the logging can be increased by
+modifying the appropriate configuration and restarting the relevant service.
+This section outlines the configuration necessary to raise the debug level for the different hosts that can use LCMAPS
+VOMS authentication as well as common LCMAPS VOMS authentication issues.</p>
+<h3 id="htcondor-ce-hosts">HTCondor-CE hosts<a class="headerlink" href="#htcondor-ce-hosts" title="Permanent link">&para;</a></h3>
+<p>If you are troubleshooting an HTCondor-CE host, follow these instructions to raise the LCMAPS debug level:</p>
 <ol>
 <li>
-<p>Use the table below to choose the appropriate file to edit:</p>
-<table>
-<thead>
-<tr>
-<th align="left">If your host is a(n)...</th>
-<th align="left">Edit this file...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">HTCondor-CE</td>
-<td align="left"><code>/etc/sysconfig/condor-ce</code></td>
-</tr>
-<tr>
-<td align="left">GridFTP server</td>
-<td align="left"><code>/etc/sysconfig/globus-gridftp-server</code></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>Add the following to the file chosen in the previous step:</p>
+<p>Add the following text to <code>/etc/sysconfig/condor-ce</code>:</p>
 <div class="codehilite"><pre><span></span><span class="nb">export</span> <span class="nv">LCMAPS_DEBUG_LEVEL</span><span class="o">=</span><span class="m">5</span>
 <span class="c1"># optional (uncomment the following line to output log messages to a file):</span>
 <span class="c1"># export LCMAPS_LOG_FILE=/tmp/lcmaps.log</span>
@@ -2415,13 +2424,23 @@ therefore, there are no running services and it does not have to be invoked manu
 
 </li>
 <li>
-<p>Restart the <a href="../../compute-element/install-htcondor-ce#managing-htcondor-ce-and-associated-services">condor-ce</a> or 
-   <a href="../../data/gridftp#managing-gridftp">globus-gridftp-server</a> service.</p>
-</li>
-</ol>
+<p>Disable HTCondor-CE authentication caches by creating <code>/etc/condor-ce/config.d/99-disablegsicache.conf</code> with the
+   following contents:</p>
+<div class="codehilite"><pre><span></span>GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION = 0
+</pre></div>
+
+
 </li>
 <li>
-<p><strong>If you are troubleshooting an XRootD host...</strong></p>
+<p>Restart the <a href="../../compute-element/install-htcondor-ce#managing-htcondor-ce-and-associated-services">condor-ce</a> service</p>
+</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>After you've completed troubleshooting, remember to revert the changes above and restart services!</p>
+</div>
+<h3 id="xrootd-hosts">XRootD hosts<a class="headerlink" href="#xrootd-hosts" title="Permanent link">&para;</a></h3>
+<p>If you are troubleshooting an XRootD host, follow these instructions to raise the LCMAPS debug level:</p>
 <ol>
 <li>
 <p>Choose the configuration file to edit based on the following table:</p>
@@ -2459,17 +2478,30 @@ therefore, there are no running services and it does not have to be invoked manu
 <p>Restart the <a href="../../data/install-xrootd#managing-xrootd-services">xrootd</a> service</p>
 </li>
 </ol>
-</li>
-</ul>
-<h3 id="troubleshooting-mapping-with-htcondor-ce">Troubleshooting mapping with HTCondor-CE<a class="headerlink" href="#troubleshooting-mapping-with-htcondor-ce" title="Permanent link">&para;</a></h3>
-<p>HTCondor-CE caches auth lookups for 30 minutes by default. If you are testing changes to your various mapfiles with HTCondor-CE, you will need to disable this caching.</p>
-<p>To do this, create a file in <code>/etc/condor-ce/config.d</code> called e.g. <code>99-disablegsicache.conf</code> with the following line:</p>
-<div class="codehilite"><pre><span></span>GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION=0
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>After you've completed troubleshooting, remember to revert the changes above and restart services!</p>
+</div>
+<h3 id="gridftp-hosts">GridFTP hosts<a class="headerlink" href="#gridftp-hosts" title="Permanent link">&para;</a></h3>
+<p>If you are troubleshooting a GridFTP host, follow these instructions to raise the LCMAPS debug level:</p>
+<ol>
+<li>
+<p>Add the following text to <code>/etc/sysconfig/globus-gridftp-server</code>:</p>
+<div class="codehilite"><pre><span></span><span class="nb">export</span> <span class="nv">LCMAPS_DEBUG_LEVEL</span><span class="o">=</span><span class="m">5</span>
+<span class="c1"># optional (uncomment the following line to output log messages to a file):</span>
+<span class="c1"># export LCMAPS_LOG_FILE=/tmp/lcmaps.log</span>
 </pre></div>
 
 
-<p>and then restart <code>condor-ce</code>.</p>
-<p>Once you are satisfied that your mappings are working, you may remove this file and restart <code>condor-ce</code> in order to reduce the load on your CE caused by authentication.</p>
+</li>
+<li>
+<p>Restart the <a href="../../data/gridftp#managing-gridftp">globus-gridftp-server</a> service.</p>
+</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>After you've completed troubleshooting, remember to revert the changes above and restart services!</p>
+</div>
 <h3 id="common-issues">Common issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h3>
 <h4 id="wrong-version-of-gridftp">Wrong version of GridFTP<a class="headerlink" href="#wrong-version-of-gridftp" title="Permanent link">&para;</a></h4>
 <p>If you have the EPEL version of the GridFTP server, you may see error messages in <code>journalctl</code> (EL7),
