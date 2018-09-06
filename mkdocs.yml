@@ -38,13 +38,17 @@ pages:
     - 'HDFS Overview': 'data/hadoop-overview.md'
     - 'Install HDFS': 'data/install-hadoop.md'
   - XRootD:
-    - 'XRootD Overview': 'data/xrootd-overview.md'
-    - 'Install XRootD': 'data/install-xrootd.md'
-    - 'Using XRootD': 'data/install-xroot-client.md'
-  - 'StashCache': 
+    - 'XRootD Overview': 'data/xrootd/overview.md'
+    - 'Install Standalone XRootD': 'data/xrootd/install-standalone.md'
+    - 'Install XRootD SE': 'data/xrootd/install-storage-element.md'
+    - 'Configure Authorization': 'data/xrootd/configure-authorization.md'
+    - 'Using XRootD': 'data/xrootd/install-client.md'
+  - XCache:
+    - 'XCache Overview': 'data/xcache/overview.md'
+    - 'Install XCache': 'data/xcache/install-xcache.md'
     - 'StashCache Overview': 'data/stashcache/overview.md'
-    - 'Install Cache': 'data/stashcache/install-cache.md'
-    - 'Install Origin': 'data/stashcache/install-origin.md'
+    - 'Install StashCache Cache': 'data/stashcache/install-cache.md'
+    - 'Install StashCache Origin': 'data/stashcache/install-origin.md'
 - Security:
   - 'LCMAPS VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host Certificates': 'security/host-certs.md'
