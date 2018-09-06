@@ -34,9 +34,6 @@ pages:
   - POSIX Storage:
     - 'Install GridFTP Server': 'data/gridftp.md'
     - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
-  - HDFS:
-    - 'HDFS Overview': 'data/hadoop-overview.md'
-    - 'Install HDFS': 'data/install-hadoop.md'
   - XRootD:
     - 'XRootD Overview': 'data/xrootd/overview.md'
     - 'Install Standalone XRootD': 'data/xrootd/install-standalone.md'
@@ -49,6 +46,9 @@ pages:
     - 'StashCache Overview': 'data/stashcache/overview.md'
     - 'Install StashCache Cache': 'data/stashcache/install-cache.md'
     - 'Install StashCache Origin': 'data/stashcache/install-origin.md'
+  - HDFS:
+    - 'HDFS Overview': 'data/hadoop-overview.md'
+    - 'Install HDFS': 'data/install-hadoop.md'
 - Security:
   - 'LCMAPS VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host Certificates': 'security/host-certs.md'
