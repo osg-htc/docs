@@ -1,2 +1,2 @@
-Install XRootD Standalone
-=========================
+Install XRootD Gateway
+======================

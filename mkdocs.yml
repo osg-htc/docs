@@ -36,7 +36,7 @@ pages:
     - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
   - XRootD:
     - 'XRootD Overview': 'data/xrootd/overview.md'
-    - 'Install Standalone XRootD': 'data/xrootd/install-standalone.md'
+    - 'Install XRootD Gateway': 'data/xrootd/install-gateway.md'
     - 'Install XRootD SE': 'data/xrootd/install-storage-element.md'
     - 'Configure Authorization': 'data/xrootd/configure-authorization.md'
     - 'Using XRootD': 'data/xrootd/install-client.md'
