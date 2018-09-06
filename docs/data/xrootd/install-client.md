@@ -137,7 +137,8 @@ If you are planning on using a FUSE mount, you'll need to install the xrootd-fus
 ### Configuring the FUSE Mount 
 
 Once the appropriate rpms are installed, the FUSE setup will need further configuration.
-See [this](/data/install-storage-element#optional-enabling-a-fuse-mount) for instructions on updating your `fstab` file.
+See [this](/data/xrootd/install-storage-element#optional-enabling-a-fuse-mount) for instructions on updating your
+`fstab` file.
 
 ### Using the XRootDFS FUSE Mount
 
