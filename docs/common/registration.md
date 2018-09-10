@@ -32,6 +32,7 @@ To register as an OSG contact or add your GitHub ID to your pre-existing contact
   with your GitHub ID.
 - **If you cannot find your name**, send an email to <mailto:help@opensciencegrid.org> with the following information:
     - Full name
+    - Primary email address
     - GitHub ID
     - Description of your OSG affiliation, e.g. FermiGrid site administrator, senior scientist for the DUNE experiment,
       etc.
