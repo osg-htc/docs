@@ -149,12 +149,62 @@ Before the host certificate expires, you can renew it with the following command
 root@host # certbot renew
 ```
 
-To automate renewal monthly with a cron job; for example you can create `/etc/cron.d/certbot-renew` with the following
+To automate the renewal process, you need to choose between using a cron job (SL6 and SL7 hosts) and a systemd timer
+(SL7 hosts only). 
+The two sections below outline both methods for automatically renewing your certificate.
+
+
+#### Automating renewals using cron
+
+To automate a monthly renewal with a cron job; you can create `/etc/cron.d/certbot-renew` with the following
 contents:
 
 ``` console
 * * 1 * * root certbot renew
 ```
+
+#### Automating renewals using systemd timers
+
+To automate a monthly  renewal using systemd, you'll need to create two files.
+The first is a service file that tells systemd how to invoke certbot. 
+The second is to generate a timer file that tells systemd how often to run the service.
+
+First, the create a service file, e.g. `/etc/systemd/system/certbot.service`, with the following contents
+
+``` file
+[Unit]
+Description=Let's Encrypt renewal
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/certbot renew --quiet --agree-tos
+
+```
+
+Once the service file is created, run `systemctl daemon-reload` to update systemd.  
+Then run `systemctl start certbot.service` and verify that the service ran successfully using `systemctl status
+certbot.service`.  
+Finally, enable the service by running `systemctl enable certbot.service`.
+
+Once the certbot service is working correctly, you'll need to create the timer file.  Create the timer file (e.g.
+`/etc/systemd/system/certbot.timer`) with the following contents:
+
+``` file
+[Unit]
+Description=Twice daily renewal of Let's Encrypt's certificates
+
+[Timer]
+OnCalendar=monthly
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+Once created, reload systemd by running  `systemctl daemon-reload`.  
+Then enable the timer by running `systemctl start certbot.timer` and enable the timer by running `systemctl enable
+certbot.timer`.  
+You can verify that the timer is active by running `systemctl list-timers`
 
 Requesting Service Certificates
 -------------------------------
