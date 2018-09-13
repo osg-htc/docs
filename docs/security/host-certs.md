@@ -150,7 +150,7 @@ root@host # certbot renew
 ```
 
 To automate the renewal process, you need to choose between using a cron job (SL6 and SL7 hosts) and a systemd timer
-(SL7 hosts only). 
+(SL7 hosts only).
 The two sections below outline both methods for automatically renewing your certificate.
 
 
@@ -166,45 +166,42 @@ contents:
 #### Automating renewals using systemd timers
 
 To automate a monthly  renewal using systemd, you'll need to create two files.
-The first is a service file that tells systemd how to invoke certbot. 
+The first is a service file that tells systemd how to invoke certbot.
 The second is to generate a timer file that tells systemd how often to run the service.
+The steps to setup the timer are as follows:
 
-First, the create a service file, e.g. `/etc/systemd/system/certbot.service`, with the following contents
+1. Create a service file called `/etc/systemd/system/certbot.service` with the following contents
 
-``` file
-[Unit]
-Description=Let's Encrypt renewal
+        :::file
+        [Unit]
+        Description=Let's Encrypt renewal
 
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/certbot renew --quiet --agree-tos
+        [Service]
+        Type=oneshot
+        ExecStart=/usr/bin/certbot renew --quiet --agree-tos
 
-```
+2. Run `systemctl daemon-reload` to update systemd
+3. Run `systemctl start certbot.service`
+4. Verify that the service ran successfully by running `systemctl status certbot.service`
+5. Enable the service by running `systemctl enable certbot.service`
+6. Once the certbot service is working correctly, you'll need to create the timer file.  Create the timer file at `/etc/systemd/system/certbot.timer`) with the following contents:
 
-Once the service file is created, run `systemctl daemon-reload` to update systemd.  
-Then run `systemctl start certbot.service` and verify that the service ran successfully using `systemctl status
-certbot.service`.  
-Finally, enable the service by running `systemctl enable certbot.service`.
+        :::file
+        [Unit]
+        Description=Twice daily renewal of Let's Encrypt's certificates
 
-Once the certbot service is working correctly, you'll need to create the timer file.  Create the timer file (e.g.
-`/etc/systemd/system/certbot.timer`) with the following contents:
+        [Timer]
+        OnCalendar=monthly
+        Persistent=true
 
-``` file
-[Unit]
-Description=Twice daily renewal of Let's Encrypt's certificates
+        [Install]
+        WantedBy=timers.target
 
-[Timer]
-OnCalendar=monthly
-Persistent=true
+7. Reload systemd by running  `systemctl daemon-reload`
+8. Start the timer by running `systemctl start certbot.timer`
+9. Enable the timer by running `systemctl enable certbot.timer`
 
-[Install]
-WantedBy=timers.target
-```
-
-Once created, reload systemd by running  `systemctl daemon-reload`.  
-Then enable the timer by running `systemctl start certbot.timer` and enable the timer by running `systemctl enable
-certbot.timer`.  
-You can verify that the timer is active by running `systemctl list-timers`
+You can verify that the timer is active by running `systemctl list-timers`.
 
 Requesting Service Certificates
 -------------------------------
