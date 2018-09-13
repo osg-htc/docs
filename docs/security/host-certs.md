@@ -180,11 +180,8 @@ The steps to setup the timer are as follows:
         Type=oneshot
         ExecStart=/usr/bin/certbot renew --quiet --agree-tos
 
-1. Run `systemctl daemon-reload` to update systemd
-1. Run `systemctl start certbot.service`
-1. Verify that the service ran successfully by running `systemctl status certbot.service`
-1. Enable the service by running `systemctl enable certbot.service`
-1. Once the certbot service is working correctly, you'll need to create the timer file.  Create the timer file at `/etc/systemd/system/certbot.timer`) with the following contents:
+1. Once the certbot service is working correctly, you will need to create the timer file.
+   Create the timer file at `/etc/systemd/system/certbot.timer`) with the following contents:
 
         :::file
         [Unit]
@@ -197,9 +194,18 @@ The steps to setup the timer are as follows:
         [Install]
         WantedBy=timers.target
 
-1. Reload systemd by running  `systemctl daemon-reload`
-1. Start the timer by running `systemctl start certbot.timer`
-1. Enable the timer by running `systemctl enable certbot.timer`
+1. Update the systemd manager configuration:
+
+        :::console
+        root@host # systemctl daemon-reload
+
+1. Start and enable the certbot service and timer:
+
+        :::console
+        root@host # systemctl start certbot.service
+        root@host # systemctl enable certbot.service
+        root@host # systemctl start certbot.timer
+        root@host # systemctl enable certbot.timer
 
 You can verify that the timer is active by running `systemctl list-timers`.
 
