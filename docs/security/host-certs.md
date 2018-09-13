@@ -210,6 +210,10 @@ The steps to setup the timer are as follows:
 
 You can verify that the timer is active by running `systemctl list-timers`.
 
+!!! note
+    Verify that the service has started correctly by running `systemctl status certbot.service`. The timer may fail 
+    without warnings if the service does not run correctly.
+
 Requesting Service Certificates
 -------------------------------
 
