@@ -188,7 +188,8 @@ The steps to setup the timer are as follows:
         Description=Twice daily renewal of Let's Encrypt's certificates
 
         [Timer]
-        OnCalendar=monthly
+        OnCalendar=0/12:00:00
+        RandomizedDelaySec=1h
         Persistent=true
 
         [Install]
