@@ -9,9 +9,9 @@ Summary of changes
 This release contains:
 
 -   [VO Package v83](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-83)
-    -   Generate grid-vorolemap from voms-mapfile to support dCache
-    -   Update SuperCDMS DN/CA from OSG to InCommon
-    -   LSST VOMS-admin server moved from Fermilab to SLAC
+    -   Added a default VO mapfile for dCache
+    -   Updated the SuperCDMS VOMS certificate information
+    -   LSST VOMS Admin server moved from Fermilab to SLAC
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.17-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
