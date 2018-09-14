@@ -41,8 +41,8 @@ notAfter=Jan  4 21:08:09 2011 GMT
 
 If you are using OpenSSL 1.1, you may notice minor formatting differences.
 
-Requesting InCommon Host Certificates
--------------------------------------
+Requesting InCommon IGTF Host Certificates
+------------------------------------------
 
 Many institution in the United States already subscribe to InCommon and offer certificate services.
 If your institution is in the list of [InCommon subscribers](https://www.incommon.org/certificates/subscribers.html),
