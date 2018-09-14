@@ -70,7 +70,8 @@ The single shared certificate must have the hostname associated with the load-ba
                     --altname <GRIDFTP-SERVER-#1-HOSTNAME> \
                     --altname <GRIDFTP-SERVER-#2-HOSTNAME>
 
-1.  Take the resulting CSR and get it signed by the appropriate authority.  Most institutions can use InCommon as outlined [here](/security/host-certs/#requesting-incommon-host-certificates).
+1.  Take the resulting CSR and get it signed by the appropriate authority.
+    Most institutions can use InCommon as outlined [here](/security/host-certs/#requesting-incommon-igtf-host-certificates).
 2.  Create a directory to contain the shared certificate:
 
         :::console
