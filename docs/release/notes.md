@@ -2,7 +2,8 @@ Release Notes
 =============
 
 !!! note
-    The 3.3 series was end-of-lifed in May 2018. Please [upgrade to the 3.4 series](/release/release_series/#updating-from-osg-31-32-33-to-34) at your earliest convenience.
+    The 3.3 series was [end-of-lifed in May 2018](https://opensciencegrid.org/technology/policy/release-series/#life-cycle-dates).
+    Please [upgrade to the 3.4 series](/release/release_series/#updating-from-osg-31-32-33-to-34) at your earliest convenience.
 
 ### OSG 3.4 ###
 
