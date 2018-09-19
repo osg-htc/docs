@@ -176,42 +176,78 @@ unavailable.
 Downtimes are stored in YAML files alongside the resource group YAML files as described [here](#registering-resources),
 i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>_downtime.yaml` from the
 [root of the topology repository](https://github.com/opensciencegrid/topology/tree/master/).
-To register a new downtime for a registered resource, follow the instructions below:
 
-1. Open the [topology repository](https://github.com/opensciencegrid/topology/tree/master/) in your browser.
 
-1. Search the repository for the FQDN of your resource wrapped in double-quotes using the GitHub search bar
-   (e.g., `"glidein2.chtc.wisc.edu"`):
+### Registering new downtime ###
+
+To register a new downtime for a registered resource,
+you will use a webform to generate content and copy and paste it into the matching downtime YAML file.
+Follow the instructions below:
+
+1.  Open the [generate downtime webform](https://topology.opensciencegrid.org/generate_downtime) in your browser.
+
+1.  Select your facility from the list.
+
+1.  Select the resource that will be down from the list.
+
+1.  Select all the services that will be down; to select multiple, use Control-Click on Windows or Linux,
+    and Command-Click on macOS.
+
+1.  Fill out all the other fields with information about the downtime.
+
+1.  Click the "Generate" button.
+
+1.  If your information is valid, a block of YAML will be displayed in the box labeled "Generated YAML".
+    Otherwise, check the error messages and fix the input.
+
+1.  Follow the instructions shown below the YAML block.
+
+!!! note
+    The GitHub file editor window may show a message such as "You're editing a file in a project you don't have write access to."
+    This is normal and refers to the fact that you do not have direct write access to OSG's copy of the topology data,
+    which is why you are creating a pull request.
+
+1.  Wait for OSG staff to approve and merge your new downtime.
+
+
+### Modifying existing downtime ###
+
+To modify an existing downtime entry for a registered resource,
+manually make the changes in the matching downtime YAML file.
+Follow the instructions below:
+
+1.  Open the [topology repository](https://github.com/opensciencegrid/topology/tree/master/) in your browser.
+
+1.  If you do not know the facility, site, and resource group of the resource the downtime entry refers to,
+    search the repository for the FQDN of your resource wrapped in double-quotes using the GitHub search bar
+    (e.g., `"glidein2.chtc.wisc.edu"`):
 
     ![GitHub search](/img/registration/github-search.png)
 
-    - **If the search returns a single YAML file**, note the name of the facility, site, and resource group and continue
-      to the next step.
-    - **If the search doesn't return any results**, your resource is not registered.
-      Follow the [resource registration](#registering-resources) instructions before registering a downtime.
-    - **If the search returns more than one YAML file**, please [contact us](#getting-help).
+    - **If the search returns a single YAML file**,
+      note the name of the facility, site, and resource group and continue to the next step.
+    - **If the search doesn't return any results or returns more than one YAML file**,
+      please [contact us](#getting-help).
 
-1. Open the following URL in your browser using the facility, site, and resource group names to replace `<FACILITY>`,
-   `<SITE>`, and `<RESOURCE GROUP`>, respectively:
+1.  Open the following URL in your browser using the facility, site, and resource group names to replace
+    `<FACILITY>`, `<SITE>`, and `<RESOURCE GROUP>`, respectively:
 
-        https://github.com/opensciencegrid/topology/edit/master/topology/<FACILITY>/<SITE>/<RESOURCE GROUP>_downtime.yaml
+         https://github.com/opensciencegrid/topology/edit/master/topology/<FACILITY>/<SITE>/<RESOURCE GROUP>_downtime.yaml
 
-    If the above URL returns a 404, open this link instead:
-
-        https://github.com/opensciencegrid/topology/new/master?filename=topology/<FACILITY>/<SITE>/<RESOURCE GROUP>_downtime.yaml
-
-1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
-   the [downtime template](https://github.com/opensciencegrid/topology/blob/master/template-downtime.yaml) as a
-   guide.
+1.  Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using the
+    [downtime template](https://github.com/opensciencegrid/topology/blob/master/template-downtime.yaml)
+    as a reference.
 
     !!! note
-        Make sure the info you add matches the formatting and indentation of the template or the other downtime entries
-        in the file.
-        In particular, make sure no additional indentation gets added when pasting in the new data.
+        Make sure the formatting and indentation of the modified entry does not get changed.
+        Also, do not change the `ID` or `CreatedTime` fields.
 
-1. Submit your changes as a pull request, providing a descriptive commit message. For example:
+1.  Submit your changes as a pull request, providing a descriptive commit message. For example:
 
-        Adding downtime for CHTC-glidein2 for regular maintenance
+        Move forward end date for CHTC-glidein2 regular maintenance
+
+1.  Wait for OSG staff to approve and merge your modified downtime.
+
 
 Registering Virtual Organizations
 ---------------------------------
