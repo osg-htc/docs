@@ -2270,8 +2270,8 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 </ol>
 <h4 id="proxyservice">Proxy.service<a class="headerlink" href="#proxyservice" title="Permanent link">&para;</a></h4>
 <ol>
-<li>Create the file with following content:</li>
-</ol>
+<li>
+<p>Create the file with following content:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat /usr/lib/systemd/system/xrootd-renew-proxy.service
 <span class="go">[Unit]</span>
 <span class="go">Description=Renew xrootd proxy</span>
@@ -2287,8 +2287,10 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 </pre></div>
 
 
-<ol>
-<li>Reload daemons:<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl daemon-reload
+</li>
+<li>
+<p>Reload daemons:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl daemon-reload
 </pre></div>
 
 
@@ -2296,8 +2298,8 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 </ol>
 <h4 id="proxytimer">Proxy.timer<a class="headerlink" href="#proxytimer" title="Permanent link">&para;</a></h4>
 <ol>
-<li>Create the file with following content:</li>
-</ol>
+<li>
+<p>Create the file with following content:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat /usr/lib/systemd/system/xrootd-renew-proxy.timer
 <span class="go">[Unit]</span>
 <span class="go">Description=Renew proxy every day at midnight</span>
@@ -2311,7 +2313,7 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 </pre></div>
 
 
-<ol>
+</li>
 <li>
 <p>Enable timer:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> xrootd-renew-proxy.timer
