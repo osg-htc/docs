@@ -2341,14 +2341,15 @@ The role of <strong>"cache"</strong> server is to keep data cached and immediate
 </li>
 </ol>
 <h4 id="crls-updates">CRLs updates<a class="headerlink" href="#crls-updates" title="Permanent link">&para;</a></h4>
-<p>It is very important to keep CRL list updated from cron:
-1. Enable fetch-crl-cron</p>
-<div class="codehilite"><pre><span></span>    :::console
-    root@host # systemctl enable fetch-crl-cron
+<p>It is very important to keep CRL list updated from cron:</p>
+<ol>
+<li>
+<p>Enable fetch-crl-cron</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> fetch-crl-cron
 </pre></div>
 
 
-<ol>
+</li>
 <li>
 <p>Start fetch-crl-cron</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl start fetch-crl-cron
