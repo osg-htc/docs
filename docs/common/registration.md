@@ -52,7 +52,7 @@ OSG resources are stored under a hierarchy of facilities, sites, and resource gr
 | Facility       | The institution or company where your resource is located, e.g. `University of Wisconsin`                                                                              |
 | Site           | Smaller than a facility; typically represents an academic department, research group, or a computing center, e.g. `CHTC` for the Center for High Throughput Computing. |
 | Resource Group | A logical grouping of resources, e.g. you may group together resources that serve your Slurm cluster under a resource group named `CHTC-Slurm-HPC`                     |
-| Resource       | A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.                                                                      |
+| Resource       | A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts. A resource may provide more than one service.                        |
 
 OSG resources are stored in the GitHub repository as YAML files under a directory structure that reflects the above
 hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
