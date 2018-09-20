@@ -222,20 +222,19 @@ On RHEL7 system, you need to configure and run following systemd units:
 #### Proxy.service
 1. Create the file with following content:
 
-```console
-root@host # cat /usr/lib/systemd/system/xrootd-renew-proxy.service
-[Unit]
-Description=Renew xrootd proxy
-
-[Service]
-User=xrootd
-Group=xrootd
-Type = oneshot
-ExecStart = /bin/grid-proxy-init -cert /etc/grid-security/xrd/xrdcert.pem -key /etc/grid-security/xrd/xrdkey.pem -out /tmp/x509up_xrootd -valid 48:00
-
-[Install]
-WantedBy=multi-user.target
-```
+        :::console
+        root@host # cat /usr/lib/systemd/system/xrootd-renew-proxy.service
+        [Unit]
+        Description=Renew xrootd proxy
+        
+        [Service]
+        User=xrootd
+        Group=xrootd
+        Type = oneshot
+        ExecStart = /bin/grid-proxy-init -cert /etc/grid-security/xrd/xrdcert.pem -key /etc/grid-security/xrd/xrdkey.pem -out /tmp/x509up_xrootd -valid 48:00
+        
+        [Install]
+        WantedBy=multi-user.target
 
 2. Reload daemons:
 
@@ -244,20 +243,20 @@ WantedBy=multi-user.target
 
 
 #### Proxy.timer
+
 1. Create the file with following content:
 
-```console
-root@host # cat /usr/lib/systemd/system/xrootd-renew-proxy.timer
-[Unit]
-Description=Renew proxy every day at midnight
-
-[Timer]
-OnCalendar=*-*-* 00:00:00
-Unit=xrootd-renew-proxy.service
-
-[Install]
-WantedBy=multi-user.target
-```
+        :::console
+        root@host # cat /usr/lib/systemd/system/xrootd-renew-proxy.timer
+        [Unit]
+        Description=Renew proxy every day at midnight
+        
+        [Timer]
+        OnCalendar=*-*-* 00:00:00
+        Unit=xrootd-renew-proxy.service
+        
+        [Install]
+        WantedBy=multi-user.target
 
 2. Enable timer:
 
@@ -305,6 +304,7 @@ It is very important to keep CRL list updated from cron:
 
 
 ### Add Authfile for authenticated cache
+
 Authfile for authenticated cache may differ from `/etc/xrootd/Authfile-noauth` defined in non-authenticated cache configuration. Example:
 
 ```console
@@ -318,18 +318,25 @@ When ready with configuration, you may [start](#managing-stashcache-and-associat
 ## Optional configuration
 
 ### Adjust disk utilization
+
 To adjust the disk utilization of your StashCache cache, modify the values of `pfc.diskusage` in `/etc/xrootd/xrootd-stashcache-cache-server.cfg`:
+
 ```
 pfc.diskusage 0.98 .99
 ```
+
 The first value and second values correspond to the low and high usage watermarks, respectively, in percentages. When the high watermark is reached, the XRootD service will automatically purge cache objects down to the low watermark.
 
 ### Enable remote debugging
+
 This feature enables remote debugging via the `digFS` read-only file system, it's optional line in the config file that was created when configuring the cache:
+
 ```
 xrootd.diglib * /etc/xrootd/digauth.cf
 ```
+
 where `/etc/xrootd/digauth.cf` may have following content:
+
 ```
 all allow host h=abc.org
 all allow host h=*.xyz.edu
