@@ -284,7 +284,9 @@ WantedBy=multi-user.target
 
 
 #### CRLs updates
+
 It is very important to keep CRL list updated from cron:
+
 1. Enable fetch-crl-cron
 
         :::console
