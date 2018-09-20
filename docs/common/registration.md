@@ -25,7 +25,7 @@ The OSG keeps a database of contact information for resources, virtual organizat
 Before submitting any registrations in the topology repository, you must have an entry in the contact database with an
 associated GitHub ID.
 To register as an OSG contact or add your GitHub ID to your pre-existing contact entry, search for your name in the
-[contact database](https://topology.opensciencegrid.org/miscuser/xml?) and choose one of the following:
+[contact database](https://topology.opensciencegrid.org/contacts) and choose one of the following:
 
 - **If you find your name and see an associated `GitHub` account**, you can start submitting registrations!
 - **If you find your name but do not see an associated `GitHub` account**, send an email to <mailto:help@opensciencegrid.org>
