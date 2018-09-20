@@ -956,6 +956,26 @@
     Registering Resource Downtimes
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registering-new-downtime" title="Registering new downtime" class="md-nav__link">
+    Registering new downtime
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modifying-existing-downtime" title="Modifying existing downtime" class="md-nav__link">
+    Modifying existing downtime
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1783,6 +1803,26 @@
     Registering Resource Downtimes
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registering-new-downtime" title="Registering new downtime" class="md-nav__link">
+    Registering new downtime
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modifying-existing-downtime" title="Modifying existing downtime" class="md-nav__link">
+    Modifying existing downtime
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1886,7 +1926,7 @@ See the full list of services that should be registered in the OSG topology
 </tr>
 <tr>
 <td>Resource</td>
-<td>A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts.</td>
+<td>A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts. A resource may provide more than one service.</td>
 </tr>
 </tbody>
 </table>
@@ -1952,16 +1992,17 @@ at the <code>University of Wisconsin</code>, open the following URL:</p>
 
 </li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">"You're editing a file in a project you don't have write access to."</p>
+<p>If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+access to the OSG copy of the topology data, which is why you are creating a pull request.</p>
+</div>
 </li>
 <li>
 <p>Make changes with the <a href="https://help.github.com/articles/editing-files-in-your-repository/">GitHub file editor</a> using
    the <a href="https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml">resource group template</a>
-   as a guide.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Make sure the info you add matches the formatting and indentation of the template file.
-In particular, make sure no additional indentation gets added when pasting in the new data.</p>
-</div>
+   as a guide.
+   If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.</p>
 </li>
 <li>
 <p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
@@ -1985,11 +2026,12 @@ In particular, make sure no additional indentation gets added when pasting in th
 <li>
 <p>Make changes with the <a href="https://help.github.com/articles/editing-files-in-your-repository/">GitHub file editor</a> using
    the <a href="https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml">resource group template</a>
-   as a guide.</p>
+   as a guide.
+   Make sure that the formatting and indentation of the modified entry does not change.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Make sure the info you add matches the formatting and indentation of the template file.
-In particular, make sure no additional indentation gets added when pasting in the new data.</p>
+<p class="admonition-title">"You're editing a file in a project you don't have write access to."</p>
+<p>If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+access to the OSG copy of the topology data, which is why you are creating a pull request.</p>
 </div>
 </li>
 <li>
@@ -2033,56 +2075,110 @@ Resources:
 <h2 id="registering-resource-downtimes">Registering Resource Downtimes<a class="headerlink" href="#registering-resource-downtimes" title="Permanent link">&para;</a></h2>
 <p>Resource downtime is a period of time for which one or more of the grid services of a registered resource are
 unavailable.
-Downtimes are stored in YAML files alongside the resource group YAML files as described <a href="#registering-resources">here</a>,
-i.e. <code>topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;_downtime.yaml</code> from the
-<a href="https://github.com/opensciencegrid/topology/tree/master/">root of the topology repository</a>.
-To register a new downtime for a registered resource, follow the instructions below:</p>
+Downtimes are stored in YAML files alongside the resource group YAML files as described <a href="#registering-resources">here</a>.</p>
+<p>For example, downtimes for resources in the <code>CHTC-Slurm-HPC</code> resource group of the <code>CHTC</code> site at the <code>University of
+Wisconsin</code> can be found and registered in the following file, relative to the
+<a href="https://github.com/opensciencegrid/topology/tree/master/">root of the topology repository</a>:</p>
+<div class="codehilite"><pre><span></span>topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC_downtime.yaml`
+</pre></div>
+
+
+<h3 id="registering-new-downtime">Registering new downtime<a class="headerlink" href="#registering-new-downtime" title="Permanent link">&para;</a></h3>
+<p>To register a new downtime for a registered resource,
+you will use a webform to generate the contents of the downtime entry,
+copy it into the downtime file corresponding to your resource,
+and submit it as a GitHub pull request.
+Follow the instructions below:</p>
+<ol>
+<li>
+<p>Open the <a href="https://topology.opensciencegrid.org/generate_downtime">downtime generation webform</a> in your browser.</p>
+</li>
+<li>
+<p>Select your facility from the corresponding list.</p>
+</li>
+<li>
+<p>Select the resource that will be down from the corresponding list.</p>
+</li>
+<li>
+<p>Select all the services that will be down. To select multiple, use Control-Click on Windows and Linux,
+    or Command-Click on macOS.</p>
+</li>
+<li>
+<p>Fill the other fields with information about the downtime.</p>
+</li>
+<li>
+<p>Click the <code>Generate</code> button.</p>
+</li>
+<li>
+<p>If the information is valid, a block of text will be displayed in the box labeled <code>Generated YAML</code>.
+    Otherwise, check for error messages and fix your input.</p>
+</li>
+<li>
+<p>Follow the instructions shown below the generated block of text.</p>
+<div class="admonition note">
+<p class="admonition-title">"You're editing a file in a project you don't have write access to."</p>
+<p>If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+access to the OSG copy of the topology data, which is why you are creating a pull request.</p>
+</div>
+</li>
+<li>
+<p>Wait for OSG staff to approve and merge your new downtime.</p>
+</li>
+</ol>
+<h3 id="modifying-existing-downtime">Modifying existing downtime<a class="headerlink" href="#modifying-existing-downtime" title="Permanent link">&para;</a></h3>
+<p>In case an already registered downtime is incorrect or need to be updated to reflect new information, you can modify
+existing downtime entries using the GitHub editor.</p>
+<div class="admonition failure">
+<p class="admonition-title">Failure</p>
+<p>Changes to the <code>ID</code> or <code>CreatedTime</code> fields will be rejected.</p>
+</div>
+<p>To modify an existing downtime entry for a registered resource,
+manually make the changes in the matching downtime YAML file.
+Follow the instructions below:</p>
 <ol>
 <li>
 <p>Open the <a href="https://github.com/opensciencegrid/topology/tree/master/">topology repository</a> in your browser.</p>
 </li>
 <li>
-<p>Search the repository for the FQDN of your resource wrapped in double-quotes using the GitHub search bar
-   (e.g., <code>"glidein2.chtc.wisc.edu"</code>):</p>
+<p>If you do not know the facility, site, and resource group of the resource the downtime entry refers to,
+    search the repository for the FQDN of your resource wrapped in double-quotes using the GitHub search bar
+    (e.g., <code>"glidein2.chtc.wisc.edu"</code>):</p>
 <p><img alt="GitHub search" src="../../img/registration/github-search.png" /></p>
 <ul>
-<li><strong>If the search returns a single YAML file</strong>, note the name of the facility, site, and resource group and continue
-  to the next step.</li>
-<li><strong>If the search doesn't return any results</strong>, your resource is not registered.
-  Follow the <a href="#registering-resources">resource registration</a> instructions before registering a downtime.</li>
-<li><strong>If the search returns more than one YAML file</strong>, please <a href="#getting-help">contact us</a>.</li>
+<li><strong>If the search returns a single YAML file</strong>,
+  note the name of the facility, site, and resource group and continue to the next step.</li>
+<li><strong>If the search doesn't return any results or returns more than one YAML file</strong>,
+  please <a href="#getting-help">contact us</a>.</li>
 </ul>
 </li>
 <li>
-<p>Open the following URL in your browser using the facility, site, and resource group names to replace <code>&lt;FACILITY&gt;</code>,
-   <code>&lt;SITE&gt;</code>, and <code>&lt;RESOURCE GROUP</code>&gt;, respectively:</p>
-<div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/edit/master/topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;_downtime.yaml
+<p>Open the following URL in your browser using the facility, site, and resource group names to replace
+    <code>&lt;FACILITY&gt;</code>, <code>&lt;SITE&gt;</code>, and <code>&lt;RESOURCE GROUP&gt;</code>, respectively:</p>
+<div class="codehilite"><pre><span></span> https://github.com/opensciencegrid/topology/edit/master/topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;_downtime.yaml
 </pre></div>
 
 
-<p>If the above URL returns a 404, open this link instead:</p>
-<div class="codehilite"><pre><span></span>https://github.com/opensciencegrid/topology/new/master?filename=topology/&lt;FACILITY&gt;/&lt;SITE&gt;/&lt;RESOURCE GROUP&gt;_downtime.yaml
-</pre></div>
-
-
-</li>
-<li>
-<p>Make changes with the <a href="https://help.github.com/articles/editing-files-in-your-repository/">GitHub file editor</a> using
-   the <a href="https://github.com/opensciencegrid/topology/blob/master/template-downtime.yaml">downtime template</a> as a
-   guide.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Make sure the info you add matches the formatting and indentation of the template or the other downtime entries
-in the file.
-In particular, make sure no additional indentation gets added when pasting in the new data.</p>
+<p class="admonition-title">"You're editing a file in a project you don't have write access to."</p>
+<p>If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+access to the OSG copy of the topology data, which is why you are creating a pull request.</p>
 </div>
 </li>
 <li>
+<p>Make changes with the <a href="https://help.github.com/articles/editing-files-in-your-repository/">GitHub file editor</a> using
+    the <a href="https://github.com/opensciencegrid/topology/blob/master/template-downtime.yaml">downtime template</a>
+    as a reference.
+    Make sure that the formatting and indentation of the modified entry does not change.</p>
+</li>
+<li>
 <p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
-<div class="codehilite"><pre><span></span>Adding downtime for CHTC-glidein2 for regular maintenance
+<div class="codehilite"><pre><span></span>Move forward end date for CHTC-glidein2 regular maintenance
 </pre></div>
 
 
+</li>
+<li>
+<p>Wait for OSG staff to approve and merge your modified downtime.</p>
 </li>
 </ol>
 <h2 id="registering-virtual-organizations">Registering Virtual Organizations<a class="headerlink" href="#registering-virtual-organizations" title="Permanent link">&para;</a></h2>
@@ -2091,8 +2187,8 @@ This can be a scientific experiment, a university campus or a distributed resear
 A VO represents all its members and their common needs in a grid environment.
 A VO also includes the group’s computing/storage resources and services.
 For more information about VOs, see <a href="https://opensciencegrid.org/about/organization#virtual-organizations">this page</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>Before submitting a registration for a new VO, please <a href="#getting-help">contact us</a> describing your organization's
 computing needs.</p>
 </div>
@@ -2109,16 +2205,17 @@ To modify a VO's information or register a new VO, follow the instructions below
    If you do not see your VO in the list, click <code>Create new file</code> button:</p>
 <p><img alt="GitHub file creation" src="../../img/registration/create-file.png" /></p>
 <p>In the new file dialog, enter <code>&lt;VO&gt;.yaml</code>, replacing <code>&lt;VO&gt;</code> with the name of your VO.</p>
+<div class="admonition note">
+<p class="admonition-title">"You're editing a file in a project you don't have write access to."</p>
+<p>If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+access to the OSG copy of the topology data, which is why you are creating a pull request.</p>
+</div>
 </li>
 <li>
 <p>Make changes with the <a href="https://help.github.com/articles/editing-files-in-your-repository/">GitHub file editor</a> using
    the <a href="https://github.com/opensciencegrid/topology/blob/master/template-virtual-organization.yaml">VO template</a>
-   as a guide.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Make sure the info you add matches the formatting and indentation of the template file.
-In particular, make sure no additional indentation gets added when pasting in the new data.</p>
-</div>
+   as a guide.
+   If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.</p>
 </li>
 <li>
 <p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
@@ -2129,8 +2226,8 @@ In particular, make sure no additional indentation gets added when pasting in th
 </li>
 </ol>
 <h2 id="registering-projects">Registering Projects<a class="headerlink" href="#registering-projects" title="Permanent link">&para;</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>Before submitting a registration for a new project, please <a href="#getting-help">contact us</a> describing your organization's
 computing needs.</p>
 </div>
@@ -2146,16 +2243,16 @@ To modify a VO's information or register a new VO, follow the instructions below
    If you do not see your project in the list, click <code>Create new file</code> button:</p>
 <p><img alt="GitHub file creation" src="../../img/registration/create-file.png" /></p>
 <p>In the new file dialog, enter <code>&lt;PROJECT&gt;.yaml</code>, replacing <code>&lt;PROJECT&gt;</code> with the name of your project.</p>
+<div class="admonition note">
+<p class="admonition-title">"You're editing a file in a project you don't have write access to."</p>
+<p>If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+access to the OSG copy of the topology data, which is why you are creating a pull request.</p>
+</div>
 </li>
 <li>
 <p>Make changes with the <a href="https://help.github.com/articles/editing-files-in-your-repository/">GitHub file editor</a> using
-   the <a href="https://github.com/opensciencegrid/topology/blob/master/template-projects.yaml">VO template</a>
-   as a guide.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Make sure the info you add matches the formatting and indentation of the template file.
-In particular, make sure no additional indentation gets added when pasting in the new data.</p>
-</div>
+   the <a href="https://github.com/opensciencegrid/topology/blob/master/template-projects.yaml">project template</a> as a guide.
+   If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.</p>
 </li>
 <li>
 <p>Submit your changes as a pull request, providing a descriptive commit message. For example:</p>
