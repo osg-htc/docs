@@ -105,13 +105,15 @@ To register a new resource, follow the instructions below:
 
             https://github.com/opensciencegrid/topology/new/master?filename=topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC.yaml
 
+    !!! note ""You're editing a file in a project you don't have write access to.""
+        If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+        access to the OSG copy of the topology data, which is why you are creating a pull request.
+
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
    the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
-
-    !!! note
-        Make sure the info you add matches the formatting and indentation of the template file.
-        In particular, make sure no additional indentation gets added when pasting in the new data.
+   If you are modifying pre-existing entries, make sure that the formatting and indentation of the modified entry does
+   not change.
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
 
@@ -131,10 +133,11 @@ To modify an existing resource, follow these instructions:
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
    the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
+   Make sure that the formatting and indentation of the modified entry does not change.
 
-    !!! note
-        Make sure the info you add matches the formatting and indentation of the template file.
-        In particular, make sure no additional indentation gets added when pasting in the new data.
+    !!! note ""You're editing a file in a project you don't have write access to.""
+        If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+        access to the OSG copy of the topology data, which is why you are creating a pull request.
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
 
@@ -253,9 +256,7 @@ Follow the instructions below:
 1.  Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
     the [downtime template](https://github.com/opensciencegrid/topology/blob/master/template-downtime.yaml)
     as a reference.
-
-    !!! note
-        Make sure that the formatting and indentation of the modified entry does not change.
+    Make sure that the formatting and indentation of the modified entry does not change.
 
 1.  Submit your changes as a pull request, providing a descriptive commit message. For example:
 
@@ -273,7 +274,7 @@ A VO represents all its members and their common needs in a grid environment.
 A VO also includes the group’s computing/storage resources and services.
 For more information about VOs, see [this page](https://opensciencegrid.org/about/organization#virtual-organizations).
 
-!!! note
+!!! info
     Before submitting a registration for a new VO, please [contact us](#getting-help) describing your organization's
     computing needs.
 
@@ -291,13 +292,15 @@ To modify a VO's information or register a new VO, follow the instructions below
 
     In the new file dialog, enter `<VO>.yaml`, replacing `<VO>` with the name of your VO.
 
+    !!! note ""You're editing a file in a project you don't have write access to.""
+        If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+        access to the OSG copy of the topology data, which is why you are creating a pull request.
+
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
    the [VO template](https://github.com/opensciencegrid/topology/blob/master/template-virtual-organization.yaml)
    as a guide.
-
-    !!! note
-        Make sure the info you add matches the formatting and indentation of the template file.
-        In particular, make sure no additional indentation gets added when pasting in the new data.
+   If you are modifying pre-existing entries, make sure that the formatting and indentation of the modified entry does
+   not change.
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
 
@@ -306,7 +309,7 @@ To modify a VO's information or register a new VO, follow the instructions below
 Registering Projects
 --------------------
 
-!!! note
+!!! info
     Before submitting a registration for a new project, please [contact us](#getting-help) describing your organization's
     computing needs.
 
@@ -323,13 +326,14 @@ To modify a VO's information or register a new VO, follow the instructions below
 
     In the new file dialog, enter `<PROJECT>.yaml`, replacing `<PROJECT>` with the name of your project.
 
-1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
-   the [VO template](https://github.com/opensciencegrid/topology/blob/master/template-projects.yaml)
-   as a guide.
+    !!! note ""You're editing a file in a project you don't have write access to.""
+        If you see this message in the GitHub file editor, this is normal and it is because you do not have direct write
+        access to the OSG copy of the topology data, which is why you are creating a pull request.
 
-    !!! note
-        Make sure the info you add matches the formatting and indentation of the template file.
-        In particular, make sure no additional indentation gets added when pasting in the new data.
+1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
+   the [project template](https://github.com/opensciencegrid/topology/blob/master/template-projects.yaml) as a guide.
+   If you are modifying pre-existing entries, make sure that the formatting and indentation of the modified entry does
+   not change.
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
 
