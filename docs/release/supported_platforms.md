@@ -1,7 +1,8 @@
 OSG Software Supported Operating Systems
 ==========================================
 
-The OSG Software 3.3 and 3.4 release series are supported on Red Hat Enterprise 6 and 7 for 64-bit (RHEL 6 and RHEL 7) and 32-bit (RHEL 6 only) Intel architectures.
+The OSG Software 3.4 release series is supported on Red Hat Enterprise 6 and 7 and compatible platforms,
+for 64-bit Intel architectures.
 
 OSG also supports select rebuilds of RHEL.  Specifically:
 
