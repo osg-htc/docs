@@ -12,5 +12,6 @@ OSG also supports select rebuilds of RHEL.  Specifically:
 -   Scientific Linux 6
 -   Scientific Linux 7
 
-The OSG Software 3.1 and 3.2 release series also supported Red Hat Enterprise Linux 5, but neither 3.1 nor 3.2 are actively supported.
-
+OSG builds and tests its RPMs on the latest releases of the relevant platforms (e.g., in 2018, the RHEL 7 builds were based on RHEL 7.5).
+Older releases of the OS may not receive thorough testing and have subtle bugs; we may ask sites to update to the latest OS packages
+as part of the support process.
