@@ -2108,10 +2108,10 @@ This can be done in the configuration of the <a href="../../security/lcmaps-voms
 </li>
 <li>
 <p>Set up HTTPS access by editing <code>/etc/httpd/conf.d/ssl.conf</code>:</p>
-<div class="codehilite"><pre><span></span>Listen 8443
-&lt;VirtualHost _default_:8443&gt;
-SSLCertificateFile /etc/grid-security/http/httpcert2.pem
-SSLCertificateKeyFile /etc/grid-security/http/httpkey2.pem
+<div class="codehilite"><pre><span></span><span class="nt">Listen</span> <span class="nt">8443</span>
+<span class="o">&amp;</span><span class="nt">lt</span><span class="o">;</span><span class="nt">VirtualHost</span> <span class="nt">_default_</span><span class="p">:</span><span class="nd">8443</span><span class="o">&amp;</span><span class="nt">gt</span><span class="o">;</span>
+<span class="nt">SSLCertificateFile</span> <span class="o">/</span><span class="nt">etc</span><span class="o">/</span><span class="nt">grid-security</span><span class="o">/</span><span class="nt">http</span><span class="o">/</span><span class="nt">httpcert2</span><span class="p">.</span><span class="nc">pem</span>
+<span class="nt">SSLCertificateKeyFile</span> <span class="o">/</span><span class="nt">etc</span><span class="o">/</span><span class="nt">grid-security</span><span class="o">/</span><span class="nt">http</span><span class="o">/</span><span class="nt">httpkey2</span><span class="p">.</span><span class="nc">pem</span>
 </pre></div>
 
 
@@ -2279,61 +2279,13 @@ To use it:</p>
 <li>3 = full debugging output</li>
 </ul>
 <p>For example, here is the output when running a metric with -v2.</p>
-<p><details>
-  <summary>Show detailed ouput</summary></p>
-<div class="codehilite"><pre><span></span><span class="go">   [root@fermicloud016 condor]# rsv-control -r org.osg.general.osg-version -v 2 -u osg-edu.cs.wisc.edu</span>
-<span class="go">   INFO: Reading configuration file /etc/rsv/rsv.conf</span>
-<span class="go">   INFO: Reading configuration file /etc/rsv/consumers.conf</span>
-<span class="go">   INFO: Validating configuration:</span>
-<span class="go">   INFO: Validating user:</span>
-<span class="go">INFO:     Invoked as root.  Switching to &#39;rsv&#39; user (uid: 100 - gid: 102)</span>
-<span class="go">INFO: Registered consumers: html-consumer, gratia-consumer</span>
-<span class="go">INFO: Loading config file &#39;/etc/rsv/meta/metrics/org.osg.general.osg-version.meta&#39;</span>
-<span class="go">INFO: Loading config file &#39;/etc/rsv/metrics/org.osg.general.osg-version.conf&#39;</span>
-<span class="go">INFO: Optional config file &#39;/etc/rsv/metrics/osg-edu.cs.wisc.edu/org.osg.general.osg-version.conf&#39; does not exist</span>
-<span class="go">INFO: Checking proxy:</span>
-<span class="go">INFO:     Using service certificate proxy</span>
-<span class="go">INFO: Running command with timeout (1200 seconds):</span>
-<span class="go">        /usr/bin/openssl x509 -in /tmp/rsvproxy -noout -enddate -checkend 21600</span>
-<span class="go">INFO: Exit code of job: 0</span>
-<span class="go">INFO:     Service certificate valid for at least 6 hours.</span>
-<span class="go">INFO: Pinging host osg-edu.cs.wisc.edu:</span>
-<span class="go">INFO: Running command with timeout (1200 seconds):</span>
-<span class="go">        /bin/ping -W 3 -c 1 osg-edu.cs.wisc.edu</span>
-<span class="go">INFO: Exit code of job: 0</span>
-<span class="go">INFO:     Ping successful</span>
+<details>
+  <summary>Show detailed ouput</summary>
 
-<span class="go">Running metric org.osg.general.osg-version:</span>
+wzxhzdk:3
 
-<span class="go">INFO: Executing job remotely using Condor-G</span>
-<span class="go">INFO: Setting up job environment:</span>
-<span class="go">INFO:     No environment setup declared</span>
-<span class="go">INFO: Condor-G working directory: /var/tmp/rsv/condor_g-JiQthF</span>
-<span class="go">INFO: Forming arguments:</span>
-<span class="go">INFO:     Arguments: &#39;&#39;</span>
-<span class="go">INFO: List of files to transfer: /usr/libexec/rsv/probes/RSVMetric.pm</span>
-<span class="go">INFO: Condor submission: Submitting job(s).</span>
-<span class="go">1 job(s) submitted to cluster 2.</span>
-<span class="go">INFO: Trimming data to 10000 bytes because details-data-trim-length is set</span>
-<span class="go">INFO: Creating record for html-consumer consumer at &#39;/var/spool/rsv/html-consumer/org.osg.general.osg-version.7rgLfn&#39;</span>
-<span class="go">INFO: Creating record for gratia-consumer consumer at &#39;/var/spool/rsv/gratia-consumer/org.osg.general.osg-version.-qelnL&#39;</span>
-<span class="go">INFO: Result:</span>
+</details>
 
-<span class="go">metricName: org.osg.general.osg-version</span>
-<span class="go">metricType: status</span>
-<span class="go">timestamp: 2012-01-25 16:12:40 CST</span>
-<span class="go">metricStatus: OK</span>
-<span class="go">serviceType: OSG-CE</span>
-<span class="go">serviceURI: osg-edu.cs.wisc.edu</span>
-<span class="go">gatheredAt: fermicloud016.fnal.gov</span>
-<span class="go">summaryData: OK</span>
-<span class="go">detailsData: OSG 1.2.26</span>
-
-<span class="go">EOT</span>
-</pre></div>
-
-
-<p></details></p>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
 <p>To get assistance, please use <a href="../../common/help/">this page</a> and attach the output of <code>rsv-control --profile</code>:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rsv-control --profile

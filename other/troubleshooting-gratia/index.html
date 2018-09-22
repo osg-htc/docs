@@ -2020,7 +2020,7 @@ Gratia retrieves the resource name from the <code>Site Information</code> sectio
 <li>Select "GRACC Operations"</li>
 <li>Type a friendly email that asks the GRACC team to change your site name at the collector. Make sure to tell them the old name and the new name.  Below is an example email:<div class="codehilite"><pre><span></span>Hello GRACC Team,
 
-Please change the site name of my site from &lt;Insert Old Name&gt; to &lt;Insert New Name&gt;.
+Please change the site name of my site from &amp;lt;Insert Old Name&amp;gt; to &amp;lt;Insert New Name&amp;gt;.
 
 Thanks, ...
 </pre></div>
@@ -2058,7 +2058,7 @@ Thanks, ...
 <div class="codehilite"><pre><span></span><span class="gp">%</span>BLUE%Preferred method using start and end times</span>
 <span class="gp">root@host #</span> /usr/share/gratia/condor/condor_meter --history --start-time<span class="o">=</span><span class="s2">&quot;2014-06-01&quot;</span> --end-time<span class="o">=</span><span class="s2">&quot;2014-06-02&quot;</span> --verbose
 <span class="go">2014-06-03 10:00:36 CDT Gratia: RUNNING condor_meter MANUALLY using HTCondor history from 2014-06-01 to 2014-06-02</span>
-<span class="go">2014-06-03 10:00:36 CDT Gratia: RUNNING: condor_history -l -constraint &#39;((JobCurrentStartDate &gt; 1401598800) &amp;&amp; (JobCurrentStartDate &lt; 1401685200))&#39;</span>
+<span class="go">2014-06-03 10:00:36 CDT Gratia: RUNNING: condor_history -l -constraint &#39;((JobCurrentStartDate &amp;gt; 1401598800) &amp;amp;&amp;amp; (JobCurrentStartDate &amp;lt; 1401685200))&#39;</span>
 <span class="go">2014-06-03 10:00:49 CDT Gratia: condor_meter --history: Usage records submitted: 399</span>
 <span class="go">2014-06-03 10:00:49 CDT Gratia: condor_meter --history: Usage records found: 400</span>
 <span class="go">2014-06-03 10:00:49 CDT Gratia: RUNNING condor_meter MANUALLY Finished</span>

@@ -2493,9 +2493,9 @@ from OSG 3.4.</p>
 
 
 <p>And look for the value of <code>dfs.namenode.name.dir</code>:</p>
-<div class="codehilite"><pre><span></span><span class="nt">&lt;property&gt;</span>
- <span class="nt">&lt;name&gt;</span>dfs.namenode.name.dir<span class="nt">&lt;/name&gt;</span>
-  <span class="nt">&lt;value&gt;</span>file:///var/lib/dfs/nn,file:///home/hadoop/dfs/nn<span class="nt">&lt;/value&gt;</span>
+<div class="codehilite"><pre><span></span><span class="ni">&amp;lt;</span>property<span class="ni">&amp;gt;</span>
+ <span class="ni">&amp;lt;</span>name<span class="ni">&amp;gt;</span>dfs.namenode.name.dir<span class="ni">&amp;lt;</span>/name<span class="ni">&amp;gt;</span>
+  <span class="ni">&amp;lt;</span>value<span class="ni">&amp;gt;</span>file:///var/lib/dfs/nn,file:///home/hadoop/dfs/nn<span class="ni">&amp;lt;</span>/value<span class="ni">&amp;gt;</span>
 </pre></div>
 
 
@@ -2534,7 +2534,7 @@ following the instructions in <a href="../../release/release_series/#updating-fr
 
 <p>This will start the upgrade process for the HDFS metadata on your primary namenode.
 You can follow the process by running</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@primary-namenode #</span> tail -f /var/log/hadoop-hdfs/hadoop-hdfs-namenode-&lt;hostname&gt;.log
+<div class="codehilite"><pre><span></span><span class="gp">root@primary-namenode #</span> tail -f /var/log/hadoop-hdfs/hadoop-hdfs-namenode-<span class="p">&amp;</span>lt<span class="p">;</span>hostname<span class="p">&amp;</span>gt<span class="p">;</span>.log
 </pre></div>
 
 
@@ -3172,96 +3172,25 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 
 
 <p>Get familiar with Hadoop commands. Run hadoop with no arguments to see the list of commands.</p>
-<p><details>
+<details>
   <summary>Show detailed ouput</summary>
-   <p></p>
-<div class="codehilite"><pre><span></span><span class="go">user$ hadoop</span>
-<span class="go">Usage: hadoop [--config confdir] COMMAND</span>
-<span class="go">where COMMAND is one of:</span>
-<span class="go">  namenode -format     format the DFS filesystem</span>
-<span class="go">  secondarynamenode    run the DFS secondary namenode</span>
-<span class="go">  namenode             run the DFS namenode</span>
-<span class="go">  datanode             run a DFS datanode</span>
-<span class="go">  dfsadmin             run a DFS admin client</span>
-<span class="go">  mradmin              run a Map-Reduce admin client</span>
-<span class="go">  fsck                 run a DFS filesystem checking utility</span>
-<span class="go">  fs                   run a generic filesystem user client</span>
-<span class="go">  balancer             run a cluster balancing utility</span>
-<span class="go">  fetchdt              fetch a delegation token from the NameNode</span>
-<span class="go">  jobtracker           run the MapReduce job Tracker node</span>
-<span class="go">  pipes                run a Pipes job</span>
-<span class="go">  tasktracker          run a MapReduce task Tracker node</span>
-<span class="go">  job                  manipulate MapReduce jobs</span>
-<span class="go">  queue                get information regarding JobQueues</span>
-<span class="go">  version              print the version</span>
-<span class="go">  jar &lt;jar&gt;            run a jar file</span>
-<span class="go">  distcp &lt;srcurl&gt; &lt;desturl&gt; copy file or directories recursively</span>
-<span class="go">  archive -archiveName NAME -p &lt;parent path&gt; &lt;src&gt;* &lt;dest&gt; create a hadoop archive</span>
-<span class="go">  oiv                  apply the offline fsimage viewer to an fsimage</span>
-<span class="go">  classpath            prints the class path needed to get the</span>
-<span class="go">                       Hadoop jar and the required libraries</span>
-<span class="go">  daemonlog            get/set the log level for each daemon</span>
-<span class="go"> or</span>
-<span class="go">  CLASSNAME            run the class named CLASSNAME</span>
-<span class="go">Most commands print help when invoked w/o parameters.</span>
-</pre></div>
+   <p>
 
+wzxhzdk:13
 
-<p></p>
-</details></p>
+</p>
+</details>
+
 <p>For a list of supported filesystem commands:</p>
-<p><details>
+<details>
   <summary>Show 'hadoop fs' detailed ouput</summary>
-   <p></p>
-<div class="codehilite"><pre><span></span><span class="go">user$ hadoop fs</span>
-<span class="go">Usage: java FsShell</span>
-<span class="go">           [-ls &lt;path&gt;]</span>
-<span class="go">           [-lsr &lt;path&gt;]</span>
-<span class="go">           [-df [&lt;path&gt;]]</span>
-<span class="go">           [-du &lt;path&gt;]</span>
-<span class="go">           [-dus &lt;path&gt;]</span>
-<span class="go">           [-count[-q] &lt;path&gt;]</span>
-<span class="go">           [-mv &lt;src&gt; &lt;dst&gt;]</span>
-<span class="go">           [-cp &lt;src&gt; &lt;dst&gt;]</span>
-<span class="go">           [-rm [-skipTrash] &lt;path&gt;]</span>
-<span class="go">           [-rmr [-skipTrash] &lt;path&gt;]</span>
-<span class="go">           [-expunge]</span>
-<span class="go">           [-put &lt;localsrc&gt; ... &lt;dst&gt;]</span>
-<span class="go">           [-copyFromLocal &lt;localsrc&gt; ... &lt;dst&gt;]</span>
-<span class="go">           [-moveFromLocal &lt;localsrc&gt; ... &lt;dst&gt;]</span>
-<span class="go">           [-get [-ignoreCrc] [-crc] &lt;src&gt; &lt;localdst&gt;]</span>
-<span class="go">           [-getmerge &lt;src&gt; &lt;localdst&gt; [addnl]]</span>
-<span class="go">           [-cat &lt;src&gt;]</span>
-<span class="go">           [-text &lt;src&gt;]</span>
-<span class="go">           [-copyToLocal [-ignoreCrc] [-crc] &lt;src&gt; &lt;localdst&gt;]</span>
-<span class="go">           [-moveToLocal [-crc] &lt;src&gt; &lt;localdst&gt;]</span>
-<span class="go">           [-mkdir &lt;path&gt;]</span>
-<span class="go">           [-setrep [-R] [-w] &lt;rep&gt; &lt;path/file&gt;]</span>
-<span class="go">           [-touchz &lt;path&gt;]</span>
-<span class="go">           [-test -[ezd] &lt;path&gt;]</span>
-<span class="go">           [-stat [format] &lt;path&gt;]</span>
-<span class="go">           [-tail [-f] &lt;file&gt;]</span>
-<span class="go">           [-chmod [-R] &lt;MODE[,MODE]... | OCTALMODE&gt; PATH...]</span>
-<span class="go">           [-chown [-R] [OWNER][:[GROUP]] PATH...]</span>
-<span class="go">           [-chgrp [-R] GROUP PATH...]</span>
-<span class="go">           [-help [cmd]]</span>
+   <p>
 
-<span class="go">Generic options supported are</span>
-<span class="go">-conf &lt;configuration file&gt;     specify an application configuration file</span>
-<span class="go">-D &lt;property=value&gt;            use value for given property</span>
-<span class="go">-fs &lt;local|namenode:port&gt;      specify a namenode</span>
-<span class="go">-jt &lt;local|jobtracker:port&gt;    specify a job tracker</span>
-<span class="go">-files &lt;comma separated list of files&gt;    specify comma separated files to be copied to the map reduce cluster</span>
-<span class="go">-libjars &lt;comma separated list of jars&gt;    specify comma separated jar files to include in the classpath.</span>
-<span class="go">-archives &lt;comma separated list of archives&gt;    specify comma separated archives to be unarchived on the compute machines.</span>
+wzxhzdk:14
 
-<span class="go">The general command line syntax is</span>
-<span class="go">bin/hadoop command [genericOptions] [commandOptions]</span>
-</pre></div>
+</p>
+</details>
 
-
-<p></p>
-</details></p>
 <p>An online guide is also available at <a href="https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/CommandsManual.html">Apache Hadoop commands manual</a>. You can use Hadoop commands to perform filesystem operations with more consistency.</p>
 <p>Example, to look into the internal hadoop namespace:</p>
 <div class="codehilite"><pre><span></span><span class="go">user$ hadoop fs -ls /</span>
@@ -3308,226 +3237,15 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 
 
 <p>You will see the entire configuration in XML format, for example:</p>
-<p><details>
+<details>
   <summary>Expand XML configuration</summary>
-    <p></p>
-<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;</span><span class="nt">&lt;configuration&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.s3n.impl<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.fs.s3native.NativeS3FileSystem<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.task.cache.levels<span class="nt">&lt;/name&gt;&lt;value&gt;</span>2<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>map.sort.class<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.util.QuickSort<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>hadoop.tmp.dir<span class="nt">&lt;/name&gt;&lt;value&gt;</span>/data1/hadoop//scratch<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>hadoop.native.lib<span class="nt">&lt;/name&gt;&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.namenode.decommission.nodes.per.interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>5<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.https.need.client.auth<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>ipc.client.idlethreshold<span class="nt">&lt;/name&gt;&lt;value&gt;</span>4000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.system.dir<span class="nt">&lt;/name&gt;&lt;value&gt;</span><span class="cp">${</span><span class="n">hadoop</span><span class="o">.</span><span class="n">tmp</span><span class="o">.</span><span class="n">dir</span><span class="cp">}</span>/mapred/system<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.datanode.data.dir.perm<span class="nt">&lt;/name&gt;&lt;value&gt;</span>755<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.job.tracker.persist.jobstatus.hours<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.namenode.logging.level<span class="nt">&lt;/name&gt;&lt;value&gt;</span>all<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.datanode.address<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.0.0.0:50010<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.skip.checksum.errors<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.block.access.token.enable<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from Unknown--&gt;</span><span class="nt">&lt;name&gt;</span>fs.default.name<span class="nt">&lt;/name&gt;&lt;value&gt;</span>hdfs://nagios.t2.ucsd.edu:9000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.child.tmp<span class="nt">&lt;/name&gt;&lt;value&gt;</span>./tmp<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.har.impl.disable.cache<span class="nt">&lt;/name&gt;&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.skip.reduce.max.skip.groups<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.safemode.threshold.pct<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.999f<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.heartbeats.in.second<span class="nt">&lt;/name&gt;&lt;value&gt;</span>100<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.namenode.handler.count<span class="nt">&lt;/name&gt;&lt;value&gt;</span>40<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.blockreport.initialDelay<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.jobtracker.instrumentation<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.mapred.JobTrackerMetricsInst<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.tasktracker.dns.nameserver<span class="nt">&lt;/name&gt;&lt;value&gt;</span>default<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.sort.factor<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.task.timeout<span class="nt">&lt;/name&gt;&lt;value&gt;</span>600000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.max.tracker.failures<span class="nt">&lt;/name&gt;&lt;value&gt;</span>4<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>hadoop.rpc.socket.factory.class.default<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.net.StandardSocketFactory<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.job.tracker.jobhistory.lru.cache.size<span class="nt">&lt;/name&gt;&lt;value&gt;</span>5<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.hdfs.impl<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.hdfs.DistributedFileSystem<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.skip.map.auto.incr.proc.count<span class="nt">&lt;/name&gt;&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.block.access.key.update.interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>600<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapreduce.job.complete.cancel.delegation.tokens<span class="nt">&lt;/name&gt;&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.mapfile.bloom.size<span class="nt">&lt;/name&gt;&lt;value&gt;</span>1048576<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapreduce.reduce.shuffle.connect.timeout<span class="nt">&lt;/name&gt;&lt;value&gt;</span>180000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.safemode.extension<span class="nt">&lt;/name&gt;&lt;value&gt;</span>30000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>tasktracker.http.threads<span class="nt">&lt;/name&gt;&lt;value&gt;</span>50<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.job.shuffle.merge.percent<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.66<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.ftp.impl<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.fs.ftp.FTPFileSystem<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.output.compress<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.bytes.per.checksum<span class="nt">&lt;/name&gt;&lt;value&gt;</span>4096<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.healthChecker.script.timeout<span class="nt">&lt;/name&gt;&lt;value&gt;</span>600000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>topology.node.switch.mapping.impl<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.net.ScriptBasedMapping<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.https.server.keystore.resource<span class="nt">&lt;/name&gt;&lt;value&gt;</span>ssl-server.xml<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.reduce.slowstart.completed.maps<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.05<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.reduce.max.attempts<span class="nt">&lt;/name&gt;&lt;value&gt;</span>4<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.ramfs.impl<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.fs.InMemoryFileSystem<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.block.access.token.lifetime<span class="nt">&lt;/name&gt;&lt;value&gt;</span>600<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.skip.map.max.skip.records<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.name.edits.dir<span class="nt">&lt;/name&gt;&lt;value&gt;</span><span class="cp">${</span><span class="n">dfs</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">dir</span><span class="cp">}</span><span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>hadoop.security.group.mapping<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.security.ShellBasedUnixGroupsMapping<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.job.tracker.persist.jobstatus.dir<span class="nt">&lt;/name&gt;&lt;value&gt;</span>/jobtracker/jobsInfo<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>hadoop.log.dir<span class="nt">&lt;/name&gt;&lt;value&gt;</span>/var/log/hadoop<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.s3.buffer.dir<span class="nt">&lt;/name&gt;&lt;value&gt;</span><span class="cp">${</span><span class="n">hadoop</span><span class="o">.</span><span class="n">tmp</span><span class="o">.</span><span class="n">dir</span><span class="cp">}</span>/s3<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.block.size<span class="nt">&lt;/name&gt;&lt;value&gt;</span>134217728<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>job.end.retry.attempts<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.file.impl<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.fs.LocalFileSystem<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.output.compression.type<span class="nt">&lt;/name&gt;&lt;value&gt;</span>RECORD<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.local.dir.minspacestart<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.datanode.ipc.address<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.0.0.0:50020<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.permissions<span class="nt">&lt;/name&gt;&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>topology.script.number.args<span class="nt">&lt;/name&gt;&lt;value&gt;</span>100<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.mapfile.bloom.error.rate<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.005<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.max.tracker.blacklists<span class="nt">&lt;/name&gt;&lt;value&gt;</span>4<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.task.profile.maps<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0-2<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.datanode.https.address<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.0.0.0:50475<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.umaskmode<span class="nt">&lt;/name&gt;&lt;value&gt;</span>002<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.userlog.retain.hours<span class="nt">&lt;/name&gt;&lt;value&gt;</span>24<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.secondary.http.address<span class="nt">&lt;/name&gt;&lt;value&gt;</span>gratia-1:50090<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.replication.max<span class="nt">&lt;/name&gt;&lt;value&gt;</span>32<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.job.tracker.persist.jobstatus.active<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>hadoop.security.authorization<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>local.cache.size<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10737418240<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.min.split.size<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.namenode.delegation.token.renew-interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>86400000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.map.tasks<span class="nt">&lt;/name&gt;&lt;value&gt;</span>7919<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.child.java.opts<span class="nt">&lt;/name&gt;&lt;value&gt;</span>-Xmx200m<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.https.client.keystore.resource<span class="nt">&lt;/name&gt;&lt;value&gt;</span>ssl-client.xml<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from Unknown--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.namenode.startup<span class="nt">&lt;/name&gt;&lt;value&gt;</span>REGULAR<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.job.queue.name<span class="nt">&lt;/name&gt;&lt;value&gt;</span>default<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.job.tracker.retiredjobs.cache.size<span class="nt">&lt;/name&gt;&lt;value&gt;</span>1000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.https.address<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.0.0.0:50470<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.balance.bandwidthPerSec<span class="nt">&lt;/name&gt;&lt;value&gt;</span>2000000000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>ipc.server.listen.queue.size<span class="nt">&lt;/name&gt;&lt;value&gt;</span>128<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>job.end.retry.interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>30000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.inmem.merge.threshold<span class="nt">&lt;/name&gt;&lt;value&gt;</span>1000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.skip.attempts.to.start.skipping<span class="nt">&lt;/name&gt;&lt;value&gt;</span>2<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.checkpoint.dir<span class="nt">&lt;/name&gt;&lt;value&gt;</span>/var/hadoop/checkpoint-a<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.reduce.tasks<span class="nt">&lt;/name&gt;&lt;value&gt;</span>1543<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.merge.recordsBeforeProgress<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.userlog.limit.kb<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>webinterface.private.actions<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.max.objects<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.job.shuffle.input.buffer.percent<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.70<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.sort.spill.percent<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.80<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.map.tasks.speculative.execution<span class="nt">&lt;/name&gt;&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>hadoop.util.hash.type<span class="nt">&lt;/name&gt;&lt;value&gt;</span>murmur<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.datanode.dns.nameserver<span class="nt">&lt;/name&gt;&lt;value&gt;</span>default<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.blockreport.intervalMsec<span class="nt">&lt;/name&gt;&lt;value&gt;</span>3600000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.map.max.attempts<span class="nt">&lt;/name&gt;&lt;value&gt;</span>4<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapreduce.job.acl-view-job<span class="nt">&lt;/name&gt;&lt;value&gt;</span> <span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.job.tracker.handler.count<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.client.block.write.retries<span class="nt">&lt;/name&gt;&lt;value&gt;</span>3<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.max.reduces.per.node<span class="nt">&lt;/name&gt;&lt;value&gt;</span>-1<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapreduce.reduce.shuffle.read.timeout<span class="nt">&lt;/name&gt;&lt;value&gt;</span>180000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.tasktracker.expiry.interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>600000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.https.enable<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.jobtracker.maxtasks.per.job<span class="nt">&lt;/name&gt;&lt;value&gt;</span>-1<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.jobtracker.job.history.block.size<span class="nt">&lt;/name&gt;&lt;value&gt;</span>3145728<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>keep.failed.task.files<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.datanode.failed.volumes.tolerated<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.task.profile.reduces<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0-2<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>ipc.client.tcpnodelay<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.output.compression.codec<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.io.compress.DefaultCodec<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.map.index.skip<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>ipc.server.tcpnodelay<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.namenode.delegation.key.update-interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>86400000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.running.map.limit<span class="nt">&lt;/name&gt;&lt;value&gt;</span>-1<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>jobclient.progress.monitor.poll.interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>1000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.default.chunk.view.size<span class="nt">&lt;/name&gt;&lt;value&gt;</span>32768<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>hadoop.logfile.size<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10000000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.reduce.tasks.speculative.execution<span class="nt">&lt;/name&gt;&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapreduce.tasktracker.outofband.heartbeat<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.s3n.block.size<span class="nt">&lt;/name&gt;&lt;value&gt;</span>67108864<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.datanode.du.reserved<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10000000000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>hadoop.security.authentication<span class="nt">&lt;/name&gt;&lt;value&gt;</span>simple<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.checkpoint.period<span class="nt">&lt;/name&gt;&lt;value&gt;</span>3600<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.running.reduce.limit<span class="nt">&lt;/name&gt;&lt;value&gt;</span>-1<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.job.reuse.jvm.num.tasks<span class="nt">&lt;/name&gt;&lt;value&gt;</span>1<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.web.ugi<span class="nt">&lt;/name&gt;&lt;value&gt;</span>webuser,webgroup<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.jobtracker.completeuserjobs.maximum<span class="nt">&lt;/name&gt;&lt;value&gt;</span>100<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.df.interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>60000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.task.tracker.task-controller<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.mapred.DefaultTaskController<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.data.dir<span class="nt">&lt;/name&gt;&lt;value&gt;</span>/data1/hadoop//data<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.s3.maxRetries<span class="nt">&lt;/name&gt;&lt;value&gt;</span>4<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.datanode.dns.interface<span class="nt">&lt;/name&gt;&lt;value&gt;</span>default<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.support.append<span class="nt">&lt;/name&gt;&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapreduce.job.acl-modify-job<span class="nt">&lt;/name&gt;&lt;value&gt;</span> <span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.local.dir<span class="nt">&lt;/name&gt;&lt;value&gt;</span><span class="cp">${</span><span class="n">hadoop</span><span class="o">.</span><span class="n">tmp</span><span class="o">.</span><span class="n">dir</span><span class="cp">}</span>/mapred/local<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.hftp.impl<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.hdfs.HftpFileSystem<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.permissions.supergroup<span class="nt">&lt;/name&gt;&lt;value&gt;</span>root<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.trash.interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.s3.sleepTimeSeconds<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.submit.replication<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.replication.min<span class="nt">&lt;/name&gt;&lt;value&gt;</span>1<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.har.impl<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.fs.HarFileSystem<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.map.output.compression.codec<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.io.compress.DefaultCodec<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.tasktracker.dns.interface<span class="nt">&lt;/name&gt;&lt;value&gt;</span>default<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.namenode.decommission.interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>30<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from Unknown--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.http.address<span class="nt">&lt;/name&gt;&lt;value&gt;</span>nagios:50070<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.job.tracker<span class="nt">&lt;/name&gt;&lt;value&gt;</span>nagios:9000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.heartbeat.interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>3<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.seqfile.sorter.recordlimit<span class="nt">&lt;/name&gt;&lt;value&gt;</span>1000000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.name.dir<span class="nt">&lt;/name&gt;&lt;value&gt;</span><span class="cp">${</span><span class="n">hadoop</span><span class="o">.</span><span class="n">tmp</span><span class="o">.</span><span class="n">dir</span><span class="cp">}</span>/dfs/name<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.line.input.format.linespermap<span class="nt">&lt;/name&gt;&lt;value&gt;</span>1<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.jobtracker.taskScheduler<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.mapred.JobQueueTaskScheduler<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.tasktracker.instrumentation<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.mapred.TaskTrackerMetricsInst<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.datanode.http.address<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.0.0.0:50075<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>jobclient.completion.poll.interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>5000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.max.maps.per.node<span class="nt">&lt;/name&gt;&lt;value&gt;</span>-1<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.local.dir.minspacekill<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.replication.interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>3<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.sort.record.percent<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.05<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.kfs.impl<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.fs.kfs.KosmosFileSystem<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.temp.dir<span class="nt">&lt;/name&gt;&lt;value&gt;</span><span class="cp">${</span><span class="n">hadoop</span><span class="o">.</span><span class="n">tmp</span><span class="o">.</span><span class="n">dir</span><span class="cp">}</span>/mapred/temp<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.tasktracker.reduce.tasks.maximum<span class="nt">&lt;/name&gt;&lt;value&gt;</span>4<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.replication<span class="nt">&lt;/name&gt;&lt;value&gt;</span>2<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.checkpoint.edits.dir<span class="nt">&lt;/name&gt;&lt;value&gt;</span><span class="cp">${</span><span class="n">fs</span><span class="o">.</span><span class="n">checkpoint</span><span class="o">.</span><span class="n">dir</span><span class="cp">}</span><span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.tasktracker.tasks.sleeptime-before-sigkill<span class="nt">&lt;/name&gt;&lt;value&gt;</span>5000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.job.reduce.input.buffer.percent<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.tasktracker.indexcache.mb<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapreduce.job.split.metainfo.maxsize<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10000000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.skip.reduce.auto.incr.proc.count<span class="nt">&lt;/name&gt;&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>hadoop.logfile.count<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.automatic.close<span class="nt">&lt;/name&gt;&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.seqfile.compress.blocksize<span class="nt">&lt;/name&gt;&lt;value&gt;</span>1000000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.hosts.exclude<span class="nt">&lt;/name&gt;&lt;value&gt;</span>/etc/hadoop-0.20/conf/hosts_exclude<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.s3.block.size<span class="nt">&lt;/name&gt;&lt;value&gt;</span>67108864<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.tasktracker.taskmemorymanager.monitoring-interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>5000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.acls.enabled<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapreduce.jobtracker.staging.root.dir<span class="nt">&lt;/name&gt;&lt;value&gt;</span><span class="cp">${</span><span class="n">hadoop</span><span class="o">.</span><span class="n">tmp</span><span class="o">.</span><span class="n">dir</span><span class="cp">}</span>/mapred/staging<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.queue.names<span class="nt">&lt;/name&gt;&lt;value&gt;</span>default<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.access.time.precision<span class="nt">&lt;/name&gt;&lt;value&gt;</span>3600000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.hsftp.impl<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.hdfs.HsftpFileSystem<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.task.tracker.http.address<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.0.0.0:50060<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.reduce.parallel.copies<span class="nt">&lt;/name&gt;&lt;value&gt;</span>5<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.seqfile.lazydecompress<span class="nt">&lt;/name&gt;&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.safemode.min.datanodes<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.sort.mb<span class="nt">&lt;/name&gt;&lt;value&gt;</span>100<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>ipc.client.connection.maxidletime<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.compress.map.output<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.task.tracker.report.address<span class="nt">&lt;/name&gt;&lt;value&gt;</span>127.0.0.1:0<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.healthChecker.interval<span class="nt">&lt;/name&gt;&lt;value&gt;</span>60000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>ipc.client.kill.max<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>ipc.client.connect.max.retries<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.s3.impl<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.fs.s3.S3FileSystem<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.job.tracker.http.address<span class="nt">&lt;/name&gt;&lt;value&gt;</span>0.0.0.0:50030<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.file.buffer.size<span class="nt">&lt;/name&gt;&lt;value&gt;</span>4096<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.jobtracker.restart.recover<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.serializations<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.io.serializer.WritableSerialization<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.task.profile<span class="nt">&lt;/name&gt;&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.datanode.handler.count<span class="nt">&lt;/name&gt;&lt;value&gt;</span>10<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.reduce.copy.backoff<span class="nt">&lt;/name&gt;&lt;value&gt;</span>300<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.replication.considerLoad<span class="nt">&lt;/name&gt;&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>jobclient.output.filter<span class="nt">&lt;/name&gt;&lt;value&gt;</span>FAILED<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from hdfs-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>dfs.namenode.delegation.token.max-lifetime<span class="nt">&lt;/name&gt;&lt;value&gt;</span>604800000<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from mapred-site.xml--&gt;</span><span class="nt">&lt;name&gt;</span>mapred.tasktracker.map.tasks.maximum<span class="nt">&lt;/name&gt;&lt;value&gt;</span>4<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>io.compression.codecs<span class="nt">&lt;/name&gt;&lt;value&gt;</span>org.apache.hadoop.io.compress.DefaultCodec,org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.BZip2Codec<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;property&gt;</span><span class="c">&lt;!--Loaded from core-default.xml--&gt;</span><span class="nt">&lt;name&gt;</span>fs.checkpoint.size<span class="nt">&lt;/name&gt;&lt;value&gt;</span>67108864<span class="nt">&lt;/value&gt;&lt;/property&gt;</span>
-<span class="nt">&lt;/configuration&gt;</span>
-</pre></div>
+    <p>
 
+wzxhzdk:20
 
-<p></p>
-</details></p>
+</p>
+</details>
+
 <p>Please refer to the <a href="http://wiki.apache.org/hadoop/FAQ">Apache Hadoop FAQ webpage</a> for answers to common questions/concerns</p>
 <h3 id="fuse">FUSE<a class="headerlink" href="#fuse" title="Permanent link">&para;</a></h3>
 <h4 id="notes-on-building-a-fuse-module">Notes on Building a FUSE Module<a class="headerlink" href="#notes-on-building-a-fuse-module" title="Permanent link">&para;</a></h4>
@@ -3742,39 +3460,15 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 
 <h4 id="copyfromlocal-java-ioexception">copyFromLocal java IOException<a class="headerlink" href="#copyfromlocal-java-ioexception" title="Permanent link">&para;</a></h4>
 <p>When trying to copy a local file into Hadoop you may come across the following java exception:</p>
-<p><details>
+<details>
   <summary>Show detailed java exception</summary>
-    <p></p>
-<div class="codehilite"><pre><span></span><span class="go">11/06/24 11:10:50 WARN hdfs.DFSClient: Error Recovery for block null bad datanode[0]</span>
-<span class="go">nodes == null</span>
-<span class="go">11/06/24 11:10:50 WARN hdfs.DFSClient: Could not get block locations. Source file</span>
-<span class="go">&quot;/osg/ddd&quot; - Aborting...</span>
-<span class="go">copyFromLocal: java.io.IOException: File /osg/ddd could only be replicated to 0</span>
-<span class="go">nodes, instead of 1</span>
-<span class="go">11/06/24 11:10:50 ERROR hdfs.DFSClient: Exception closing file /osg/ddd :</span>
-<span class="go">org.apache.hadoop.ipc.RemoteException: java.io.IOException: File /osg/ddd could only</span>
-<span class="go">be replicated to 0 nodes, instead of 1</span>
-<span class="go">        at</span>
-<span class="go">org.apache.hadoop.hdfs.server.namenode.FSNamesystem.getAdditionalBlock(FSNamesystem.java:1415)</span>
-<span class="go">        at org.apache.hadoop.hdfs.server.namenode.NameNode.addBlock(NameNode.java:588)</span>
-<span class="go">        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span>
-<span class="go">        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)</span>
-<span class="go">        at</span>
-<span class="go">sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)</span>
-<span class="go">        at java.lang.reflect.Method.invoke(Method.java:597)</span>
-<span class="go">        at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:528)</span>
-<span class="go">        at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:1319)</span>
-<span class="go">        at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:1315)</span>
-<span class="go">        at java.security.AccessController.doPrivileged(Native Method)</span>
-<span class="go">        at javax.security.auth.Subject.doAs(Subject.java:396)</span>
-<span class="go">        at</span>
-<span class="go">org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1063)</span>
-<span class="go">        at org.apache.hadoop.ipc.Server$Handler.run(Server.java:1313)</span>
-</pre></div>
+    <p>
 
+wzxhzdk:24
 
-<p></p>
-</details></p>
+</p>
+</details>
+
 <p>This can occur if you try to install a DataNode on a machine with less than 10GB of disk space available. This can be changed by lowering the value of the following property in <code>/usr/lib/hadoop-0.20/conf/hdfs-site.xml</code>:</p>
 <div class="codehilite"><pre><span></span><span class="nt">&lt;property&gt;</span>
   <span class="nt">&lt;name&gt;</span>dfs.datanode.du.reserved<span class="nt">&lt;/name&gt;</span>

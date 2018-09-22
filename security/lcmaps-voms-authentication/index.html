@@ -2117,7 +2117,7 @@ The LCMAPS VOMS plugin does not work with gLExec.</p>
 <ol>
 <li>
 <p>Consult the default VO mappings in <code>/usr/share/osg/voms-mapfile-default</code> to determine the mapped Unix account names. Each of the mapfiles has the following format:</p>
-<div class="codehilite"><pre><span></span>&quot;<span style="color:red">&lt;VO, VO role, VO group or user&gt;</span>&quot; <span style="color:red">&lt;Unix account&gt;</span>
+<div class="codehilite"><pre><span></span>&quot;<span style="color:red">&amp;lt;VO, VO role, VO group or user&amp;gt;</span>&quot; <span style="color:red">&amp;lt;Unix account&amp;gt;</span>
 </pre></div>
 
 
@@ -2398,7 +2398,7 @@ therefore, there are no running services and it does not have to be invoked manu
 </li>
 <li>
 <p>As an unprivileged user, create a VOMS proxy (filling in <code>&lt;YOUR_VO&gt;</code> with a VO you are a member of):</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> voms-proxy-init -voms <span style="color:red">&lt;YOUR_VO&gt;</span>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> voms-proxy-init -voms <span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>YOUR_VO<span class="p">&amp;</span>gt<span class="p">;</span></span>
 </pre></div>
 
 
@@ -2626,12 +2626,12 @@ verifyproxynokey = &quot;lcmaps_verify_proxy2.mod&quot;
 </li>
 <li>
 <p>Edit the <code>authorize_only</code> section so that it contains only the following uncommented lines:</p>
-<div class="codehilite"><pre><span></span>verifyproxynokey -&gt; banfile
-banfile -&gt; banvomsfile | bad
-banvomsfile -&gt; gridmapfile | bad
-gridmapfile -&gt; good | vomsmapfile
-vomsmapfile -&gt; good | defaultmapfile
-defaultmapfile -&gt; good | bad
+<div class="codehilite"><pre><span></span>verifyproxynokey -&amp;gt; banfile
+banfile -&amp;gt; banvomsfile | bad
+banvomsfile -&amp;gt; gridmapfile | bad
+gridmapfile -&amp;gt; good | vomsmapfile
+vomsmapfile -&amp;gt; good | defaultmapfile
+defaultmapfile -&amp;gt; good | bad
 </pre></div>
 
 

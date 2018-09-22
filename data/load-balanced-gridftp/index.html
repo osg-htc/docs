@@ -2121,13 +2121,13 @@
 <ol>
 <li>
 <p>Request and generate the shared certificate:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-cert-request --hostname &lt;VIRTUAL-HOSTNAME&gt; <span class="se">\</span>
-            --country &lt;COUNTRY&gt; <span class="se">\</span>
-            --state &lt;STATE&gt; <span class="se">\</span>
-            --locality &lt;LOCALITY&gt; <span class="se">\</span>
-            --organization &lt;ORGANIZATION&gt;
-<span class="go">            --altname &lt;GRIDFTP-SERVER-#1-HOSTNAME&gt; \</span>
-<span class="go">            --altname &lt;GRIDFTP-SERVER-#2-HOSTNAME&gt;</span>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-cert-request --hostname <span class="p">&amp;</span>lt<span class="p">;</span>VIRTUAL-HOSTNAME<span class="p">&amp;</span>gt<span class="p">;</span> <span class="se">\</span>
+            --country <span class="p">&amp;</span>lt<span class="p">;</span>COUNTRY<span class="p">&amp;</span>gt<span class="p">;</span> <span class="se">\</span>
+            --state <span class="p">&amp;</span>lt<span class="p">;</span>STATE<span class="p">&amp;</span>gt<span class="p">;</span> <span class="se">\</span>
+            --locality <span class="p">&amp;</span>lt<span class="p">;</span>LOCALITY<span class="p">&amp;</span>gt<span class="p">;</span> <span class="se">\</span>
+            --organization <span class="p">&amp;</span>lt<span class="p">;</span>ORGANIZATION<span class="p">&amp;</span>gt<span class="p">;</span>
+<span class="go">            --altname &amp;lt;GRIDFTP-SERVER-#1-HOSTNAME&amp;gt; \</span>
+<span class="go">            --altname &amp;lt;GRIDFTP-SERVER-#2-HOSTNAME&amp;gt;</span>
 </pre></div>
 
 
@@ -2145,8 +2145,8 @@
 </li>
 <li>
 <p>Place the shared certificate-key pair in the newly created directory:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mv &lt;PATH-TO-SERVICE-CERT&gt; /etc/grid-security/gridftp/gridftp-hostcert.pem
-<span class="gp">root@host #</span> mv &lt;PATH-TO-SERVICE-KEY&gt; /etc/grid-security/gridftp/gridftp-hostkey.pem
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mv <span class="p">&amp;</span>lt<span class="p">;</span>PATH-TO-SERVICE-CERT<span class="p">&amp;</span>gt<span class="p">;</span> /etc/grid-security/gridftp/gridftp-hostcert.pem
+<span class="gp">root@host #</span> mv <span class="p">&amp;</span>lt<span class="p">;</span>PATH-TO-SERVICE-KEY<span class="p">&amp;</span>gt<span class="p">;</span> /etc/grid-security/gridftp/gridftp-hostkey.pem
 </pre></div>
 
 
@@ -2165,8 +2165,8 @@ export X509_USER_KEY=/etc/grid-security/gridftp/gridftp-hostkey.pem
 <ol>
 <li>
 <p>Create a list of GridFTP server hostnames in <code>load-balanced-hosts.txt</code>:</p>
-<div class="codehilite"><pre><span></span>&lt;GRIDFTP-SERVER-#1-HOSTNAME&gt; &lt;VIRTUAL-HOSTNAME&gt;
-&lt;GRIDFTP-SERVER-#2-HOSTNAME&gt; &lt;VIRTUAL-HOSTNAME&gt;
+<div class="codehilite"><pre><span></span>&amp;lt;GRIDFTP-SERVER-#1-HOSTNAME&amp;gt; &amp;lt;VIRTUAL-HOSTNAME&amp;gt;
+&amp;lt;GRIDFTP-SERVER-#2-HOSTNAME&amp;gt; &amp;lt;VIRTUAL-HOSTNAME&amp;gt;
 [...]
 </pre></div>
 
@@ -2197,7 +2197,7 @@ export X509_USER_KEY=/etc/grid-security/gridftp/gridftp-hostkey.pem
 <ol>
 <li>
 <p>Add the virtual IP using the <code>ip</code> tool:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> ip addr add &lt;VIRTUAL-IP-ADDRESS&gt;/&lt;SUBNET-MASK&gt; dev &lt;NETWORK-INTERFACE&gt;
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> ip addr add <span class="p">&amp;</span>lt<span class="p">;</span>VIRTUAL-IP-ADDRESS<span class="p">&amp;</span>gt<span class="p">;</span>/<span class="p">&amp;</span>lt<span class="p">;</span>SUBNET-MASK<span class="p">&amp;</span>gt<span class="p">;</span> dev <span class="p">&amp;</span>lt<span class="p">;</span>NETWORK-INTERFACE<span class="p">&amp;</span>gt<span class="p">;</span>
 </pre></div>
 
 
@@ -2237,7 +2237,7 @@ export X509_USER_KEY=/etc/grid-security/gridftp/gridftp-hostkey.pem
 </li>
 <li>
 <p>Install the arptables software:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install &lt;PACKAGE&gt;
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install <span class="p">&amp;</span>lt<span class="p">;</span>PACKAGE<span class="p">&amp;</span>gt<span class="p">;</span>
 </pre></div>
 
 
@@ -2245,15 +2245,15 @@ export X509_USER_KEY=/etc/grid-security/gridftp/gridftp-hostkey.pem
 <li>
 <p>Disable ARP:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> arptables -F 
-<span class="gp">root@host #</span> arptables -A IN -d &lt;VIRTUAL-IP-ADDRESS&gt; -j DROP 
-<span class="gp">root@host #</span> arptables -A OUT -s &lt;VIRTUAL-IP-ADDRESS&gt; -j mangle --mangle-ip-s &lt;GRIDFTP-REAL-IP-ADDRESS&gt;
+<span class="gp">root@host #</span> arptables -A IN -d <span class="p">&amp;</span>lt<span class="p">;</span>VIRTUAL-IP-ADDRESS<span class="p">&amp;</span>gt<span class="p">;</span> -j DROP 
+<span class="gp">root@host #</span> arptables -A OUT -s <span class="p">&amp;</span>lt<span class="p">;</span>VIRTUAL-IP-ADDRESS<span class="p">&amp;</span>gt<span class="p">;</span> -j mangle --mangle-ip-s <span class="p">&amp;</span>lt<span class="p">;</span>GRIDFTP-REAL-IP-ADDRESS<span class="p">&amp;</span>gt<span class="p">;</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>Save ARP tables to survive reboots:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> arptables-save &gt; /etc/sysconfig/arptables
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> arptables-save <span class="p">&amp;</span>gt<span class="p">;</span> /etc/sysconfig/arptables
 </pre></div>
 
 

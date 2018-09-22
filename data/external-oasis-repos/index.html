@@ -1922,10 +1922,10 @@ The next steps will fail if the web server is not accessible.</p>
     document, we will use <span style="color:blue">LIBRARIAN</span> as the account name of the repository owner.</li>
 </ul>
 <p>The initial repository creation must be run as <code>root</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> -e <span class="s2">&quot;\*\\t\\t-\\tnofile\\t\\t16384&quot;</span> &gt;&gt;/etc/security/limits.conf
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> -e <span class="s2">&quot;\*\\t\\t-\\tnofile\\t\\t16384&quot;</span> <span class="p">&amp;</span>gt<span class="p">;&amp;</span>gt<span class="p">;</span>/etc/security/limits.conf
 <span class="gp">root@host #</span> <span class="nb">ulimit</span> -n <span class="m">16384</span>
 <span class="gp">root@host #</span> cvmfs_server mkfs -o <span style="color:blue">LIBRARIAN</span> <span style="color:red">example.opensciencegrid.org</span>
-<span class="gp">root@host #</span> cat &gt;/srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.htaccess <span class="s">&lt;&lt;xEOFx</span>
+<span class="gp">root@host #</span> cat <span class="p">&amp;</span>gt<span class="p">;</span>/srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.htaccess <span class="p">&amp;</span>lt<span class="p">;&amp;</span>lt<span class="p">;</span>xEOFx
 <span class="go">Order deny,allow</span>
 <span class="go">Deny from all</span>
 <span class="go">Allow from 127.0.0.1</span>
@@ -1938,7 +1938,7 @@ The next steps will fail if the web server is not accessible.</p>
 
 <p>Here, we increase the number of open files allowed, create the repository using the <code>mkfs</code> command, and then limit the hosts that are allowed to access the repo to the OSG CDN.</p>
 <p>Next, adjust the configuration in the repository as follows.  </p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat &gt;&gt;/etc/cvmfs/repositories.d/<span style="color:red">example.opensciencegrid.org</span>/server.conf <span class="s">&lt;&lt;xEOFx</span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat <span class="p">&amp;</span>gt<span class="p">;&amp;</span>gt<span class="p">;</span>/etc/cvmfs/repositories.d/<span style="color:red">example.opensciencegrid.org</span>/server.conf <span class="p">&amp;</span>lt<span class="p">;&amp;</span>lt<span class="p">;</span>xEOFx
 <span class="go">CVMFS_AUTO_TAG_TIMESPAN=&quot;2 weeks ago&quot;</span>
 <span class="go">CVMFS_IGNORE_XDIR_HARDLINKS=true</span>
 <span class="go">CVMFS_GENERATE_LEGACY_BULK_CHUNKS=false</span>
@@ -2007,7 +2007,7 @@ The VO responsible manager will be <span style="color:red">OASIS Manager Name</s
 <p>Within an hour, the repository updates should appear at the GOC and FNAL Stratum-1 servers.</p>
 <p>On success, make sure the whitelist update happens daily by creating <code>/etc/cron.d/fetch-cvmfs-whitelist</code> with the
 following contents:</p>
-<div class="codehilite"><pre><span></span>5 4 * * * <span style="color:blue">LIBRARIAN</span> cd /srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span> &amp;&amp; wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.cvmfswhitelist &amp;&amp; mv .cvmfswhitelist.new .cvmfswhitelist
+<div class="codehilite"><pre><span></span><span class="nt">5</span> <span class="nt">4</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">%</span><span class="nt">BLUE</span><span class="o">%</span><span class="nt">LIBRARIAN</span><span class="o">%</span><span class="nt">ENDCOLOR</span><span class="o">%</span> <span class="nt">cd</span> <span class="o">/</span><span class="nt">srv</span><span class="o">/</span><span class="nt">cvmfs</span><span class="o">/%</span><span class="nt">RED</span><span class="o">%</span><span class="nt">example</span><span class="p">.</span><span class="nc">opensciencegrid</span><span class="p">.</span><span class="nc">org</span><span class="o">%</span><span class="nt">ENDCOLOR</span><span class="o">%</span> <span class="o">&amp;</span><span class="nt">amp</span><span class="o">;&amp;</span><span class="nt">amp</span><span class="o">;</span> <span class="nt">wget</span> <span class="nt">-qO</span> <span class="p">.</span><span class="nc">cvmfswhitelist</span><span class="p">.</span><span class="nc">new</span> <span class="nt">http</span><span class="o">://</span><span class="nt">oasis</span><span class="p">.</span><span class="nc">opensciencegrid</span><span class="p">.</span><span class="nc">org</span><span class="o">/</span><span class="nt">cvmfs</span><span class="o">/%</span><span class="nt">RED</span><span class="o">%</span><span class="nt">example</span><span class="p">.</span><span class="nc">opensciencegrid</span><span class="p">.</span><span class="nc">org</span><span class="o">%</span><span class="nt">ENDCOLOR</span><span class="o">%/</span><span class="p">.</span><span class="nc">cvmfswhitelist</span> <span class="o">&amp;</span><span class="nt">amp</span><span class="o">;&amp;</span><span class="nt">amp</span><span class="o">;</span> <span class="nt">mv</span> <span class="p">.</span><span class="nc">cvmfswhitelist</span><span class="p">.</span><span class="nc">new</span> <span class="p">.</span><span class="nc">cvmfswhitelist</span>
 </pre></div>
 
 
