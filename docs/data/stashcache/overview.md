@@ -1,4 +1,4 @@
-# The OSG Data Federation
+# Overview of StashCache
 
 The OSG operates the _StashCache data federation_, a service that allows organizations to export their data utilizing
 an _origin server_ and have the data streamed to end jobs from a distributed set of _cache servers_ throughout the US.
