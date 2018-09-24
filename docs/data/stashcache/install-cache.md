@@ -1,24 +1,41 @@
-# StashCache Cache Installation Guide
+Installing the StashCache Cache
+===============================
 
-This document describes how to install a StashCache cache service. The installation utilizes XRootD and HTCondor for file storage and monitoring, respectively.
-The role of **"cache"** server is to keep data cached and immediately available (via [stashcp](https://support.opensciencegrid.org/support/solutions/articles/12000002775-transferring-data-with-stashcach) or CVMFS) within Stash federation (without re-transferring from "origin").
+This document describes how to install a StashCache cache service.  This service allows a site or regional
+network to cache data frequently used on the OSG, reducing data transfer over the wide-area network and
+decreasing access latency.
+
+!!! note
+    The cache service must be registered with the OSG if it is to be used by clients.  You may start the
+    registration procedure prior to finishing the installation by contacting <support@opensciencegrid.org>
+    with the following details:
+
+    * Resource name and hostname.
+    * Administrative and security contact.
+
+    Follow the [registration documentation](/common/registration.md) for more information.
 
 ## Installation prerequisites for Cache
 
 Before starting the installation process, consider the following mandatory points:
 
-* __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and `xrootd`
-* __Host certificate:__ The StashCache server uses a host certificate to advertise to a central collector.  More information on how to retrieve a certificate can be found [here](/security/host-certs.md)
-* __Network ports:__ The StashCache service must listen on ports:
-    * XRootD service on port `1094 (TCP)`
-    * and allow XRootD service over HTTP on port `8000 (TCP)`
-* __Hardware requirements:__ We recommend that a StashCache server has at least 10Gbps connectivity, 1TB of disk space, and 8GB of RAM. 
+* __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and
+  `xrootd`
+* __Host certificate:__ The StashCache server uses a host certificate to advertise to a central collector.
+  The [host certificate documentation](/security/host-certs.md) provides more information on setting up host
+  certificates.
+* __Network ports:__ The cache service requires to inbound ports, one for the xrootd protocol and the other for
+  HTTP.  The defaults are:
+    * TCP port 1094 for xrootd.
+    * TCP port 8000 for HTTP.
+* __Hardware requirements:__ We recommend that a StashCache server has at least 10Gbps connectivity, 1TB of
+ disk space, and 8GB of RAM.
 
 If installing the (optional) authenticated StashCache, you need to do in addition the following:
 
 * __Service certificate:__ create copy of the host certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
     * set owner of the directory `/etc/grid-security/xrd/` to `xrootd:xrootd` user:
-    
+
             :::console
             root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
 
@@ -26,17 +43,21 @@ If installing the (optional) authenticated StashCache, you need to do in additio
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
-* Ensure the host has [a supported operating system](/release/supported_platforms.md)
+* Ensure the host has [a supported operating system](/release/supported_platforms.md).  At this time, we
+  only support RHEL7-based cache servers.
 * Obtain root access to the host
 * Prepare [the required Yum repositories](/common/yum.md)
 * Install [CA certificates](/common/ca.md)
 
-## Installing the StashCache metapackage
+Installing the StashCache cache
+-------------------------------
 
-The StashCache daemon consists of an XRootD server and an HTCondor-based service for collecting and reporting statistics about the cache. To simplify installation, OSG provides convenience RPMs that install all required software with a single command:
+The StashCache daemon consists of an XRootD server and an HTCondor-based service for collecting and reporting
+statistics about the cache. To simplify installation, OSG provides convenience RPMs that install all required
+software with a single command:
 
 ```console
-root@host # yum install stashcache-daemon fetch-crl stashcache-cache-server
+root@host # yum install stashcache-cache-server
 ```
 
 !!! note 
@@ -45,151 +66,78 @@ root@host # yum install stashcache-daemon fetch-crl stashcache-cache-server
         :::console
         root@host # yum install xrootd-lcmaps globus-proxy-utils
 
+The cache server configuration assumes the disk user to cache data is mounted at */stash* and owned by the
+`xrootd:xrootd` user.
 
-Mount the disk that will be used for the cache data to */stash* and set owner of the directory to `xrootd:xrootd` user.  
+Configuring Cache Server
+------------------------
 
+The `stashcache-cache-server` provides a default configuration file,
+`/etc/xrootd/xrootd-stashcache-cache-server.cfg`, which must be customized for your cache.
 
-## Configuring Cache Server
+The most common lines to customize are:
 
-The following section describes required configuration to have a functional non-authenticated StashCache Cache (not origin server!). StashCache Cache package `stashcache-cache-server` needs to be manually configured from pre-existing XRootD configuration.
+* `all.sitename Nebraska`: The registered OSG resource name.
+* `set cachedir = /stash`: The location of the cache directory for this service.  Files downloaded by the
+  cache will be stored here; we recommend it is at least 1TB in size.
+* `pss.origin redirector.osgstorage.org:1094`: The data federation for this cache to join.  The default,
+  `redirector.osgstorage.org`, is the production instance; test caches may need to join other federations.
+  Customization of this directive is rare.
+* `*.trace`, `pss.setopt`: These control the logging verbosity of the cache.  The defaults are relatively high
+  in order to aid in debugging.  These lines can be commented out to reduce logging; however, if issues occur,
+  OSG support may ask you to re-enable them.
+* `pfc.ram 32g`: The amount of RAM the caching service should target to use.
 
-### Cache server
-!!! note
-    While example of the configuration file below provides combination of _authenticated_ and _non-authenticated_ _Cache_, the non-authenticated cache is considered to be default and authenticated cache just optional (additional) service.
+<!-- TODO: not clear someone could reasonably setup their authentication using this information.
 
-For configuring **cache** one needs to define directive `pss.origin redirector.osgstorage.org:1024` (not `all.manager redirector.osgstorage.org+ 1213` directive as it is in case of [configuring origin](install-origin.md)). 
-`StashCache-daemon` package provides default configuration file `/etc/xrootd/xrootd-stashcache-cache-server.cfg`. Example of the configuration of cache server is as follows:
-```
-all.export  /
-set cachedir = /stash
-xrd.allow host *
-sec.protocol  host
-all.adminpath /var/spool/xrootd
-
-xrootd.trace emsg login stall redirect
-ofs.trace all
-xrd.trace all
-cms.trace all
-
-ofs.osslib  libXrdPss.so
-pss.origin redirector.osgstorage.org:1094
-pss.cachelib libXrdFileCache.so
-pss.setopt DebugLevel 1
-
-oss.localroot $(cachedir)
-
-# Config for v1 (xrootd <=v4.5.0)
-#pfc.nramprefetch 4
-#pfc.nramread 4
-#pfc.diskusage 0.98 0.99
-
-# Config for v2 (xrootd >v4.5.0)
-pfc.blocksize 512k
-pfc.ram       32g
-pfc.prefetch  10
-pfc.diskusage 0.98 0.99
-
-xrootd.seclib /usr/lib64/libXrdSec.so
-sec.protocol /usr/lib64 gsi \
-  -certdir:/etc/grid-security/certificates \
-  -cert:/etc/grid-security/xrd/xrdcert.pem \
-  -key:/etc/grid-security/xrd/xrdkey.pem \
-  -crl:1 \
-  -authzfun:libXrdLcmaps.so \
-  -authzfunparms:--lcmapscfg,/etc/xrootd/lcmaps.cfg,--loglevel,4|useglobals \
-  -gmapopt:10 \
-  -authzto:3600
-
-# Enable the authorization module, even if we have an unauthenticated instance.
-ofs.authorize 1
-acc.audit deny grant
-
-# Run the authenticated instance on port 8443 (Xrootd and HTTPS)
-# Notice authenticated and unauthenticated instances use separate auth
-# files.
-if named stashcache-cache-server-auth
-   #pss.origin  red-gridftp4.unl.edu:1094
-   xrd.port 8443
-   acc.authdb /etc/xrootd/Authfile-auth
-   sec.protbind * gsi
-   xrd.protocol http:8443 libXrdHttp.so
-   pss.origin xrootd-local.unl.edu:1094
-else
-# Unauthenticated instance runs on port 1094 (Xrootd) and 8000 (HTTP/HTTPS)
-   acc.authdb /etc/xrootd/Authfile-noauth
-   #sec.protbind * none
-   sec.protbind  * none
-   xrd.protocol http:8000 libXrdHttp.so
-fi
-
-http.cadir /etc/grid-security/certificates
-http.cert /etc/grid-security/xrd/xrdcert.pem
-http.key /etc/grid-security/xrd/xrdkey.pem
-http.secxtractor /usr/lib64/libXrdLcmaps.so
-http.listingdeny yes
-http.staticpreload http://static/robots.txt /etc/xrootd/stashcache-robots.txt
-
-# Tune the client timeouts to more aggressively timeout.
-pss.setopt ParallelEvtLoop 10
-pss.setopt RequestTimeout 25
-pss.setopt ConnectTimeout 25
-pss.setopt ConnectionRetry 2
-
-#Sending monitoring information
-xrd.report uct2-collectd.mwt2.org:9931
-xrootd.monitor all auth flush 30s window 5s fstat 60 lfn ops xfr 5 dest redir fstat info user uct2-collectd.mwt2.org:9930 dest fstat info user xrd-mon.osgstorage.org:9930
-
-all.sitename Nebraska
-
-# Optional configuration
-# Remote debugging
-xrootd.diglib * /etc/xrootd/digauth.cf
-```
-
-Some important lines to edit:
-
-* `all.sitename Nebraska`: Edit to your local (arbitrary) site name.
-* `set cachedir = /stash`: Edit to the directory that you wish to use for caching.
-
-### Add Authfile for non-authenticated cache
 In Authfile you want to allow local reads below `$(cachedir)` defined in the main config. Example of Authfile:
 
 ```console
 root@host # cat /etc/xrootd/Authfile-noauth 
 u * /user/ligo -rl / rl
 ```
+-->
 
-### Add Robots file
+<!-- TODO: this is complete copy/paste.  Add to RPM. -->
 
-```console
-root@host # cat /etc/xrootd/stashcache-robots.txt 
+Additionally, create `/etc/xrootd/stashcache-robots.txt` with the following contents to prevent search engines
+from attempting to index your server:
+
+```
 User-agent: *
 Disallow: /
 ```
 
-### RHEL7
-On RHEL7 system, you need to run following systemd unit:
+Managing the Cache Service
+---------------------------
+The cache service consists of the following systemd units:
 
-* `systemctl start xrootd@stashcache-cache-server.service`
+| **Software** | **Service name** | **Notes** |
+|--------------|------------------|-----------|
+| XRootD    | `xrootd@stashcache-origin-server.service` | The xrootd daemon, which performs the data transfers |
+| XRootD    | `cmsd@stashcache-origin-server.service` | The "cluster management service" daemon, which integrates the origin into the data federation.  |
+| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 
-* `systemctl start condor.service`
+<!-- TODO: how to run the condor-based monitoring? -->
 
+These services must be managed with `systemctl`.  As a reminder, here are common service commands (all run as
+`root`):
 
-## (Optional) Configure Authenticated Cache
+| To...                                   | On EL7, run the command...         |
+| :-------------------------------------- | :--------------------------------- |
+| Start a service                         | `systemctl start <SERVICE-NAME>`   |
+| Stop a  service                         | `systemctl stop <SERVICE-NAME>`    |
+| Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
+| Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 
-Before you continue, make sure default Cache Server is configured in first place. Enabling authenticated cache is optional and additional to the default cache instance. This chapter describes all the steps needed. 
+(Optional) Configuring the Authenticated Cache
+----------------------------------------------
 
-### Authenticated Cache server
+Once the public Cache Server is registered and functioning, you may want to enable the authenticated cache
+service.  This is an optional step.  Before proceeding, make sure you have followed the
+[prerequisite steps](#installation-prerequisites-for-cache).
 
-Make sure you've in place following prerequisites from [install step here](#installation-prerequisites-for-cache):
-
-* __Host certificate:__ create copy of the certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
-    * Set owner of the directory `/etc/grid-security/xrd/` to `xrootd:xrootd` user:
-    
-            :::console
-            root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
-      
-* __Network ports__: allow connections on port `8443 (TCP)` 
+<!-- TODO: this can be done completely within the RPM.  Remove this. -->
 
 Now, create symbolic link to existing configuration file with `-auth` postfix:
 
@@ -315,7 +263,8 @@ u ligo /user/ligo lr / rl
 
 When ready with configuration, you may [start](#managing-stashcache-and-associated-services) your StashCache Cache server.
 
-## Optional configuration
+Configuring Optional Features
+-----------------------------
 
 ### Adjust disk utilization
 
@@ -373,11 +322,3 @@ Where `hostname` is the string returned by the hostname command. The output of t
 ```
 [user@client ~]$ curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/query1
 ```
-
-### Start/stop services
-| **To...** | **Run the command...** | **Notes** |
-|-----------|------------------------|-----------|
-| Start a service | systemctl start SERVICE-NAME | RHEL7 |
-| Stop a service | systemctl stop SERVICE-NAME | RHEL7 |
-| Status | systemctl status SERVICE-NAME | RHEL7 | 
-| Enable | systemctl enable SERVICE-NAME | RHEL7 |
