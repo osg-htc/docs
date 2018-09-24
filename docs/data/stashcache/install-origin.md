@@ -1,80 +1,117 @@
-# StashCache Origin Installation Guide
+Installing the StashCache Origin
+================================
 
-This document describes how to install a StashCache origin service. The installation utilizes XRootD and HTCondor for file storage and monitoring, respectively. 
+This document describes how to install a StashCache origin service.  This service allows an organization
+to export its data to the StashCache data federation.
 
-## Installation prerequisites for Origin
+!!! note
+    The origin must be registered with the OSG prior to joining the data federation.  You may start the
+    registration process prior to finishing the installation by contacting <support@opensciencegrid.org>
+    with the following details:
 
-Before starting the installation process, consider the following mandatory points:
+    * Resource name and hostname.
+    * VO associated with this origin server (will be used to determine the origin's namespace prefix).
+    * Administrative and security contact.
+
+    Follow the [registration documentation](/common/registration.md) for more information.
+
+This guide covers the procedure for exporting world-readable data; publishing proprietary data is still
+experimental.
+
+Before Starting
+---------------
+
+Before starting the installation process, consider the following points:
 
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and `xrootd`
-* __Host certificate:__ The StashCache server uses a host certificate to advertise to a central collector.  More information on how to retrieve a certificate can be found [here](/security/host-certs.md)
-* __Network ports:__ The StashCache service must listen on ports:
-    * XRootD service on port `1094 (TCP)`
-* __Hardware requirements:__ We recommend that a StashCache server has at least 10Gbps connectivity, 1TB of disk space, and 8GB of RAM. 
+* __Host certificate:__ The StashCache server uses a host certificate to advertise to a central collector.
+  The [host certificate documentation](/security/host-certs.md) provides more information on setting up host
+  certificates.
+* __Network ports:__ The StashCache Origin service defaults to using inbound TCP port 1094.  Outbound
+  connectivity to TCP `redirector.osgstorage.org:1213` and UDP `collector.opensciencegrid.org:9619` is
+  required.
+* __Hardware requirements:__ We recommend that a StashCache server has at least 10Gbps connectivity and 8GB of
+  RAM.  We suggest that several gigabytes of local disk space be available for log files.
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
-* Ensure the host has [a supported operating system](/release/supported_platforms.md)
+* Ensure the host has [a supported operating system](/release/supported_platforms.md).  We strongly recommend
+  all origin servers run RHEL7 or later; this document only covers systemd-based services.  For RHEL6 support,
+  please contact <support@opensciencegrid.org>
 * Obtain root access to the host
 * Prepare [the required Yum repositories](/common/yum.md)
 * Install [CA certificates](/common/ca.md)
 
-## Installing the StashCache metapackage
+Installing the StashCache metapackage
+-------------------------------------
 
-The StashCache daemon consists of an XRootD server and an HTCondor-based service for collecting and reporting statistics about the cache. To simplify installation, OSG provides convenience RPMs that install all required software with a single command:
+The StashCache daemon consists of an XRootD server and an HTCondor-based service for collecting and reporting
+statistics about the cache. To simplify installation, OSG provides convenience RPMs that install all required
+software with a single command:
 
 ```console
-root@host # yum install stashcache-daemon fetch-crl stashcache-cache-origin
-```
-   
-
-Mount the disk that will be used for the origin data to */stash* and set owner of the directory to `xrootd:xrootd` user.  
-
-
-## Configuring Origin Server
-
-The origin server connects only to a redirector (not directly to cache server), thus minimal xrootd configuration is required. `StashCache-daemon` package provides default configuration file `/etc/xrootd/xrootd-stashcache-origin-server.cfg`. Example of the configuration of origin server is as follows:
-```
-all.export /
-set localroot = /stash
-xrd.port 1094
-
-all.role server
-all.manager redirector.osgstorage.org+ 1213
-
-oss.localroot $(localroot)
-xrootd.trace emsg login stall redirect
-ofs.trace none
-xrd.trace conn
-cms.trace all
-sec.protocol  host
-sec.protbind  * none
-all.adminpath /var/spool/xrootd
-all.pidpath /var/run/xrootd
-
-# Sending monitoring information
-xrd.report uct2-collectd.mwt2.org:9931
-xrootd.monitor all auth flush 30s window 5s fstat 60 lfn ops xfr 5 dest redir fstat info user uct2-collectd.mwt2.org:9930
+root@host # yum install stashcache-cache-origin
 ```
 
-Important lines to edit:
+For this installation guide, we assume that the data to be exported to the federation is mounted at */stash*
+and owned by the `xrootd:xrootd` user.  
 
-* `set localroot = /stash`: Change to the directory you would like to serve.
+Configuring the Origin Server
+-----------------------------
 
-### RHEL7
-On RHEL7 system, you need to run following systemd units:
-* `xrootd@stashcache-cache-origin.service`
-* `cmsd@stashcache-cache-origin.service`
+The `stashcache-daemon` package provides a default configuration file,
+`/etc/xrootd/xrootd-stashcache-origin-server.cfg`, which must be customized for your origin.
 
+The most common lines to customize are:
 
-## Origin server services
+* `oss.remoteroot /`: A prefix that will be prepended to all exported filenames.  Must be set to `/$VONAME`
+  for your VO.  May only be specified once.
+* `set localroot = /stash`: Change the `localroot` to the location where your data is mounted on
+  the origin server; default is `/stash`.
+* `all.export /`: A sub-directory within the `localroot` directory that will be exported.  Customize
+  if not all data within `localroot` should be exported; default is `/`.  If multiple directories must
+  be exported, you may specify `all.export` multiple times.
+
+For example, if the HCC VO would like to setup an origin server, exporting from the mountpoint `/mnt/bigdata`,
+but only exporting the sub-directories `/mnt/bigdata/bio/datasets` and `/mnt/bigdata/hep/generators`, they
+would use the following configuration:
+
+```
+oss.remoteroot /hcc
+set localroot = /mnt/bigdata
+all.export /bio/datasets
+all.export /hep/generators
+```
+
+With this configuration, the data in `/mnt/bigdata/chemistry` would not be available via StashCache; the
+contents in `/mnt/bigdata/bio/datasets` would be available under the StashCache path `/hcc/bio/datasets`.
+
+Managing the Origin Service
+---------------------------
+The origin service consists of the following systemd units:
+
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
-| XRootD | `xrootd@stashcache-origin-server.service` | RHEL7 |
-| XRootD | `cmsd@stashcache-origin-server.service` | RHEL7  |
+| XRootD | `xrootd@stashcache-origin-server.service` | The xrootd daemon, which performs the data transfers |
+| XRootD | `cmsd@stashcache-origin-server.service` | The "cluster management service" daemon, which integrates the origin into the data federation.  |
+| Fetch CRL         | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 
-### Test Origin server availability in Stash Federation
-To verify that your origin is being subscribed to the redirector, run the following command:
+These services must be managed with `systemctl`.  As a reminder, here are common service commands (all run as `root`):
+
+| To...                                   | On EL7, run the command...         |
+| :-------------------------------------- | :--------------------------------- |
+| Start a service                         | `systemctl start <SERVICE-NAME>`   |
+| Stop a  service                         | `systemctl stop <SERVICE-NAME>`    |
+| Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
+| Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
+
+Testing Origin server Availability
+----------------------------------
+
+Once your server has been registered with the OSG and started, it should subscribe to the OSG-wide
+redirector service.  To verify that your origin is correctly advertising its availability, run the
+following command:
+
 ```
 [user@client ~]$ xrdmapc --list s redirector.opensciencegrid.org:1094 
 0**** redirector.grid.iu.edu:1094
@@ -85,12 +122,8 @@ To verify that your origin is being subscribed to the redirector, run the follow
       Srv redirector2.grid.iu.edu:2094
       Srv ceph-gridftp1.grid.uchicago.edu:1094
 ```
-The output should list hostname of your service. If not, look for any signs of trouble in the log files or contact us at `stashcache@opensciencegrid.org`.
 
-### Start/stop services
-| **To...** | **Run the command...** | **Notes** |
-|-----------|------------------------|-----------|
-| Start a service | systemctl start SERVICE-NAME | RHEL7 |
-| Stop a service | systemctl stop SERVICE-NAME | RHEL7 |
-| Status | systemctl status SERVICE-NAME | RHEL7 | 
-| Enable | systemctl enable SERVICE-NAME | RHEL7 |
+The output should list hostname of your service. If not, look for any signs of trouble in the log files
+or contact `support@opensciencegrid.org` for support.
+
+<!-- TODO: include an example for downloading via `stashcp` -->
