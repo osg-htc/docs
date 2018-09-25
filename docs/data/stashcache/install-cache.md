@@ -24,22 +24,21 @@ Before starting the installation process, consider the following mandatory point
 * __Host certificate:__ The StashCache server uses a host certificate to advertise to a central collector.
   The [host certificate documentation](/security/host-certs.md) provides more information on setting up host
   certificates.
-* __Network ports:__ The cache service requires to inbound ports, one for the xrootd protocol and the other for
-  HTTP.  The defaults are:
+* __Network ports:__ The cache service requires inbound ports, one for the xrootd protocol, one for
+  HTTP and, if authenticated StashCache is used, one for HTTPS.  The defaults are:
     * TCP port 1094 for xrootd.
     * TCP port 8000 for HTTP.
+    * TCP port 8443 for HTTPS (optional).
 * __Hardware requirements:__ We recommend that a StashCache server has at least 10Gbps connectivity, 1TB of
  disk space, and 8GB of RAM.
 
-If installing the (optional) authenticated StashCache, you need to do in addition the following:
+If installing the (optional) authenticated StashCache, you also need to do the following:
 
 * __Service certificate:__ create copy of the host certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
     * set owner of the directory `/etc/grid-security/xrd/` to `xrootd:xrootd` user:
 
             :::console
             root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
-
-* __Network ports__: allow connections on port `8443 (TCP)` 
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
