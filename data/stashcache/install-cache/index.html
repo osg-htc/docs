@@ -1998,29 +1998,25 @@ with the following details:</p>
 <li><strong>Host certificate:</strong> The StashCache server uses a host certificate to advertise to a central collector.
   The <a href="../../../security/host-certs/">host certificate documentation</a> provides more information on setting up host
   certificates.</li>
-<li><strong>Network ports:</strong> The cache service requires to inbound ports, one for the xrootd protocol and the other for
-  HTTP.  The defaults are:<ul>
+<li><strong>Network ports:</strong> The cache service requires inbound ports, one for the xrootd protocol, one for
+  HTTP and, if authenticated StashCache is used, one for HTTPS.  The defaults are:<ul>
 <li>TCP port 1094 for xrootd.</li>
 <li>TCP port 8000 for HTTP.</li>
+<li>TCP port 8443 for HTTPS (optional).</li>
 </ul>
 </li>
 <li><strong>Hardware requirements:</strong> We recommend that a StashCache server has at least 10Gbps connectivity, 1TB of
  disk space, and 8GB of RAM.</li>
 </ul>
-<p>If installing the (optional) authenticated StashCache, you need to do in addition the following:</p>
+<p>If installing the (optional) authenticated StashCache, you also need to do the following:</p>
 <ul>
-<li>
-<p><strong>Service certificate:</strong> create copy of the host certificate to <code>/etc/grid-security/xrd/xrd{cert,key}.pem</code></p>
-<ul>
+<li><strong>Service certificate:</strong> create copy of the host certificate to <code>/etc/grid-security/xrd/xrd{cert,key}.pem</code><ul>
 <li>set owner of the directory <code>/etc/grid-security/xrd/</code> to <code>xrootd:xrootd</code> user:<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chown -R xrootd:xrootd /etc/grid-security/xrd/
 </pre></div>
 
 
 </li>
 </ul>
-</li>
-<li>
-<p><strong>Network ports</strong>: allow connections on port <code>8443 (TCP)</code> </p>
 </li>
 </ul>
 <p>As with all OSG software installations, there are some one-time steps to prepare in advance:</p>
