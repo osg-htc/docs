@@ -42,15 +42,15 @@ As with all OSG software installations, there are some one-time steps to prepare
 * Prepare [the required Yum repositories](/common/yum.md)
 * Install [CA certificates](/common/ca.md)
 
-Installing the StashCache metapackage
--------------------------------------
+Installing the StashCache origin
+--------------------------------
 
 The StashCache daemon consists of an XRootD server and an HTCondor-based service for collecting and reporting
-statistics about the cache. To simplify installation, OSG provides convenience RPMs that install all required
+monitoring data about the origin. To simplify installation, OSG provides convenience RPMs that install all required
 software with a single command:
 
 ```console
-root@host # yum install stashcache-cache-origin
+root@host # yum install stashcache-origin-server
 ```
 
 For this installation guide, we assume that the data to be exported to the federation is mounted at */stash*
