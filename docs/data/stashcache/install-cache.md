@@ -15,10 +15,11 @@ decreasing access latency.
 
     Follow the [registration documentation](/common/registration.md) for more information.
 
-## Installation prerequisites for Cache
+## Installation prerequisites for the Cache
 
 Before starting the installation process, consider the following mandatory points:
 
+* __Operating system:__ Only RHEL 7 and compatible operating systems are supported.
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and
   `xrootd`
 * __Host certificate:__ The StashCache server uses a host certificate to advertise to a central collector.
@@ -34,22 +35,22 @@ Before starting the installation process, consider the following mandatory point
 
 If installing the (optional) authenticated StashCache, you also need to do the following:
 
-* __Service certificate:__ create copy of the host certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
-    * set owner of the directory `/etc/grid-security/xrd/` to `xrootd:xrootd` user:
+* __Service certificate:__ copy the host certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
+    * Set the directory and contents `/etc/grid-security/xrd/` to the `xrootd:xrootd` user and group:
 
             :::console
             root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
-* Ensure the host has [a supported operating system](/release/supported_platforms.md).  At this time, we
-  only support RHEL7-based cache servers.
+* Ensure the host has [a supported operating system](/release/supported_platforms.md).
+  At this time, we only support RHEL7-based cache servers.
 * Obtain root access to the host
 * Prepare [the required Yum repositories](/common/yum.md)
 * Install [CA certificates](/common/ca.md)
 
-Installing the StashCache cache
--------------------------------
+Installing the Cache
+--------------------
 
 The StashCache daemon consists of an XRootD server and an HTCondor-based service for collecting and reporting
 statistics about the cache. To simplify installation, OSG provides convenience RPMs that install all required
@@ -64,23 +65,20 @@ software with a single command:
         :::console
         root@host # yum install stashcache-cache-server-auth
 
-The cache server configuration assumes the disk user to cache data is mounted at `/stash` and owned by the
-`xrootd:xrootd` user.
+The cache server configuration assumes the disk used to cache data is mounted at `/stash` and owned by the
+`xrootd:xrootd` user and group.
 
-Configuring Cache Server
-------------------------
+Configuring the Cache
+---------------------
 
 The `stashcache-cache-server` provides a default configuration file,
 `/etc/xrootd/xrootd-stashcache-cache-server.cfg`, which must be customized for your cache.
 
 The most common lines to customize are:
 
-* `all.sitename Nebraska`: The registered OSG resource name.
+* `all.sitename YOUR_SITE_NAME`: The registered OSG resource name.  This **must** be changed.
 * `set cachedir = /stash`: The location of the cache directory for this service.  Files downloaded by the
   cache will be stored here; we recommend it is at least 1TB in size.
-* `pss.origin redirector.osgstorage.org:1094`: The data federation for this cache to join.  The default,
-  `redirector.osgstorage.org`, is the production instance; test caches may need to join other federations.
-  Customization of this directive is rare.
 * `*.trace`, `pss.setopt`: These control the logging verbosity of the cache.  The defaults are relatively high
   in order to aid in debugging.  These lines can be commented out to reduce logging; however, if issues occur,
   OSG support may ask you to re-enable them.
@@ -96,21 +94,30 @@ u * /user/ligo -rl / rl
 ```
 -->
 
-Managing the Cache Service
+Managing the Cache Services
 ---------------------------
-The cache service is started by the following systemd unit:
+You need to enable and start the following systemd units:
+* `xrootd@stashcache-cache-server.service`
+* `fetch-crl-boot` and `fetch-crl-cron`
+* `condor`
 
-| **Software** | **Service name** | **Notes** |
-|--------------|------------------|-----------|
-| XRootD    | `xrootd@stashcache-cache-server.service` | The xrootd daemon, which performs the data transfers |
-
-1. Enable and start `xrootd@stashcache-cache-server.service` instance:
+1. Enable and start `xrootd@stashcache-cache-server.service`:
 
         :::console
         root@host # systemctl enable xrootd@stashcache-cache-server
         root@host # systemctl start  xrootd@stashcache-cache-server
 
-<!-- TODO: how to run the condor-based monitoring? -->
+2. Update CRLs periodically and on boot. The CRLs are used by HTCondor, as well as the authenticated StashCache:
+
+        :::console
+        root@host # systemctl enable fetch-crl-cron fetch-crl-boot
+        root@host # systemctl start  fetch-crl-cron fetch-crl-boot
+
+3. Enable and start `condor` for StashCache statistics reporting:
+
+        :::console
+        root@host # systemctl enable condor
+        root@host # systemctl start  condor
 
 These services must be managed with `systemctl`.  As a reminder, here are common service commands (all run as `root`):
 
@@ -121,20 +128,17 @@ These services must be managed with `systemctl`.  As a reminder, here are common
 | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
 | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 
-(Optional) Configuring the Authenticated Cache
+Configuring the Authenticated Cache (Optional)
 ----------------------------------------------
 
-Once the public Cache Server is registered and functioning, you may want to enable the authenticated cache
+Once the public StashCache server is registered and functioning, you may want to enable the authenticated cache
 service.  This is an optional step.  Before proceeding, make sure you have followed the
 [prerequisite steps](#installation-prerequisites-for-cache).
 
-### RHEL7
-
-On RHEL7 system, you need to configure and run following systemd units:
+Enable and start the following additional systemd units:
 * `xrootd@stashcache-cache-server-auth.service`
 * `xrootd-renew-proxy.service`
 * `xrootd-renew-proxy.timer`
-* `fetch-crl-cron`
 
 #### Auth.service
 1. Enable and start `xrootd@stashcache-cache-server-auth.service` instance:
@@ -145,7 +149,7 @@ On RHEL7 system, you need to configure and run following systemd units:
 
 #### Proxy.service and Proxy.timer
 
-1. Run the service to generate the xrootd proxy and confirm the file exists
+1. Run the service to generate the xrootd proxy and confirm the file exists:
 
         :::console
         root@host # systemctl start xrootd-renew-proxy
@@ -169,19 +173,9 @@ On RHEL7 system, you need to configure and run following systemd units:
         NEXT                         LEFT       LAST                         PASSED  UNIT                     ACTIVATES
         Thu 2017-05-11 00:00:00 CDT  54min left Wed 2017-05-10 00:00:01 CDT  23h ago xrootd-renew-proxy.timer xrootd-renew-proxy.service
 
-#### CRLs updates
-
-It is very important to keep CRL list updated from cron:
-
-1. Enable and start fetch-crl-cron
-
-        :::console
-        root@host # systemctl enable fetch-crl-cron
-        root@host # systemctl start  fetch-crl-cron
-
 ### Add Authfile for authenticated cache
 
-Authfile for authenticated cache may differ from `/etc/xrootd/Authfile-noauth` defined in non-authenticated cache configuration. Example:
+The Authfile for authenticated cache may differ from `/etc/xrootd/Authfile-noauth` defined in non-authenticated cache configuration. Example:
 
 ```console
 root@host # cat /etc/xrootd/Authfile-auth
@@ -202,7 +196,7 @@ To adjust the disk utilization of your StashCache cache, modify the values of `p
 pfc.diskusage 0.98 0.99
 ```
 
-The first value and second values correspond to the low and high usage watermarks, respectively, in percentages. When the high watermark is reached, the XRootD service will automatically purge cache objects down to the low watermark.
+The first value and second values correspond to the low and high usage watermarks, respectively, in fractions. When the high watermark is reached, the XRootD service will automatically purge cache objects down to the low watermark.
 
 ### Enable remote debugging
 
@@ -221,22 +215,23 @@ all allow host h=*.xyz.edu
 
 ## Managing StashCache and associated services
 
-Ensure that your `/stash` disk is mounted, and then start `xrootd` and `condor` service.
+Ensure that your `/stash` disk is mounted, and then start `xrootd` and `condor` services.
 
 ### Non-authenticated Cache server services
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
-| XRootD | `xrootd@stashcache-cache-server.service` | RHEL7 |
-| HTCondor | `condor.service` | RHEL7  |
+| XRootD | `xrootd@stashcache-cache-server.service` | The xrootd daemon, which performs the data transfers |
+| HTCondor | `condor.service` | Report cache statistics to central OSG collector |
+| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 
 ### Authenticated Cache server services
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
-| XRootD | `xrootd@stashcache-cache-server-auth.service` | RHEL7 |
-|  | `xrootd-renew-proxy.service` | RHEL7 |
-|  | `xrootd-renew-proxy.timer` | RHEL7  |
-| HTCondor | `condor.service` | RHEL7  |
-| Fetch CRL | `fetch-crl-cron` | RHEL7 |
+| XRootD | `xrootd@stashcache-cache-server-auth.service` | The xrootd daemon, which performs the authenticated data transfer |
+|  | `xrootd-renew-proxy.service` | Renew a proxy for authenticated XRootD third-party copies |
+|  | `xrootd-renew-proxy.timer` | Trigger daily proxy renewal |
+| HTCondor | `condor.service` | Report cache statistics to central OSG collector |
+| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 
 ### Test Cache server reports to HTCondor collector
 To verify that your cache is being monitored properly, run the following command:
