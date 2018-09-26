@@ -9,6 +9,7 @@ Release Notes
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.17-3](/release/3.4/release-3-4-17-3) | 2018-09-26 | IGTF 1.93                                                               |
 | [3.4.17-2](/release/3.4/release-3-4-17-2) | 2018-09-13 | VO Package v83                                                          |
 | [3.4.17](/release/3.4/release-3-4-17)     | 2018-08-16 | Singularity 2.6.0, HTCondor 8.6.12, Pegasus 4.8.3, HTCondor-CE 3.1.3, xrootd-lcmaps 1.4.0; Upcoming: HTCondor 8.7.9 |
 | [3.4.16-2](/release/3.4/release-3-4-16-2) | 2018-08-08 | CILogon OpenID Certification Authority Certificate                      |
