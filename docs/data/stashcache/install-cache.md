@@ -36,15 +36,15 @@ Before starting the installation process, consider the following mandatory point
 If installing the (optional) authenticated StashCache, you also need to do the following:
 
 * __Service certificate:__ copy the host certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
-    * Set the directory and contents `/etc/grid-security/xrd/` to the `xrootd:xrootd` user and group:
+    * Set the owner of the directory and contents `/etc/grid-security/xrd/` to `xrootd:xrootd`:
 
             :::console
             root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
-* Ensure the host has [a supported operating system](/release/supported_platforms.md).
-  At this time, we only support RHEL7-based cache servers.
+* Ensure the host has [a supported operating system](/release/supported_platforms.md).  At this time, we
+  only support RHEL7-based cache servers.
 * Obtain root access to the host
 * Prepare [the required Yum repositories](/common/yum.md)
 * Install [CA certificates](/common/ca.md)
@@ -60,7 +60,7 @@ software with a single command:
         root@host # yum install stashcache-cache-server
 
 !!! note
-    If installing authenticated StashCache Cache server, you need additional packages to be installed:
+    If installing authenticated StashCache Cache server, you need an additional package:
 
         :::console
         root@host # yum install stashcache-cache-server-auth
@@ -104,34 +104,33 @@ You need to enable and start the following systemd units:
 1. Enable and start `xrootd@stashcache-cache-server.service`:
 
         :::console
-        root@host # systemctl enable xrootd@stashcache-cache-server
-        root@host # systemctl start  xrootd@stashcache-cache-server
+        root@host # systemctl enable --now xrootd@stashcache-cache-server
 
 2. Update CRLs periodically and on boot. The CRLs are used by HTCondor, as well as the authenticated StashCache:
 
         :::console
-        root@host # systemctl enable fetch-crl-cron fetch-crl-boot
-        root@host # systemctl start  fetch-crl-cron fetch-crl-boot
+        root@host # systemctl enable --now fetch-crl-cron fetch-crl-boot
 
 3. Enable and start `condor` for StashCache statistics reporting:
 
         :::console
-        root@host # systemctl enable condor
-        root@host # systemctl start  condor
+        root@host # systemctl enable --now condor
 
 These services must be managed with `systemctl`.  As a reminder, here are common service commands (all run as `root`):
 
-| To...                                   | On EL7, run the command...         |
-| :-------------------------------------- | :--------------------------------- |
-| Start a service                         | `systemctl start <SERVICE-NAME>`   |
-| Stop a  service                         | `systemctl stop <SERVICE-NAME>`    |
-| Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
-| Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
+| To...                                   | On EL7, run the command...               |
+| :-------------------------------------- | :--------------------------------------- |
+| Start a service                         | `systemctl start <SERVICE-NAME>`         |
+| Stop a service                          | `systemctl stop <SERVICE-NAME>`          |
+| Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`        |
+| Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>`       |
+| Both enable and start a service         | `systemctl enable --now <SERVICE-NAME>`  |
+| Both disable and stop a service         | `systemctl disable --now <SERVICE-NAME>` |
 
 Configuring the Authenticated Cache (Optional)
 ----------------------------------------------
 
-Once the public StashCache server is registered and functioning, you may want to enable the authenticated cache
+Once the public Cache server is registered and functioning, you may want to enable the authenticated cache
 service.  This is an optional step.  Before proceeding, make sure you have followed the
 [prerequisite steps](#installation-prerequisites-for-cache).
 
@@ -144,8 +143,7 @@ Enable and start the following additional systemd units:
 1. Enable and start `xrootd@stashcache-cache-server-auth.service` instance:
 
         :::console
-        root@host # systemctl enable xrootd@stashcache-cache-server-auth
-        root@host # systemctl start  xrootd@stashcache-cache-server-auth
+        root@host # systemctl enable --now xrootd@stashcache-cache-server-auth
 
 #### Proxy.service and Proxy.timer
 
@@ -157,16 +155,14 @@ Enable and start the following additional systemd units:
         root@host # ls -al /tmp/x509up_xrootd
         -rw-------. 1 xrootd xrootd 4644 Sep 25 18:35 /tmp/x509up_xrootd
 
-2. Enable timer:
+2. Enable timer and start:
 
         :::console
-        root@host # systemctl enable xrootd-renew-proxy.timer
+        root@host # systemctl enable --now xrootd-renew-proxy.timer
 
-3. Start and check if timer is active and working:
+3. Confirm the timer is active and working:
 
         :::console
-        root@host # systemctl start xrootd-renew-proxy.timer
-        ...
         root@host # systemctl is-active xrootd-renew-proxy.timer
         active
         root@host # systemctl list-timers xrootd-renew-proxy*
