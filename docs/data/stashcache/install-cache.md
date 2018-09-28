@@ -84,15 +84,19 @@ The most common lines to customize are:
   OSG support may ask you to re-enable them.
 * `pfc.ram 7g`: The amount of RAM the caching service should target to use.
 
-<!-- TODO: not clear someone could reasonably setup their authentication using this information.
+<!-- TODO: not clear someone could reasonably setup their authentication using this information. -->
 
-In Authfile you want to allow local reads below `$(cachedir)` defined in the main config. Example of Authfile:
+The Authfile specifies which files and directories can be read,
+relative to the `cachedir` that was defined in the main config.
+An example:
 
 ```console
 root@host # cat /etc/xrootd/Authfile-noauth
 u * /user/ligo -rl / rl
 ```
--->
+
+This permits all users (`u *`) to read all directories (`/ rl`) _except_ those under `/user/ligo` (`/user/ligo -rl`).
+For more details, see the [XRootD security documentation](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606598).
 
 Managing the Cache Services
 ---------------------------
