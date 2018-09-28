@@ -23,6 +23,9 @@ Before Starting
 
 Before starting the installation process, consider the following points:
 
+* __Operating system:__ A RHEL 7 or compatible operating systems is **strongly** recommended.
+    If you have special needs that require you to run your origin server on a RHEL 6-based host,
+    contact us at support@opensciencegrid.org.
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and `xrootd`
 * __Host certificate:__ The StashCache server uses a host certificate to advertise to a central collector.
   The [host certificate documentation](/security/host-certs.md) provides more information on setting up host
@@ -35,9 +38,8 @@ Before starting the installation process, consider the following points:
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
-* Ensure the host has [a supported operating system](/release/supported_platforms.md).  We strongly recommend
-  all origin servers run RHEL7 or later; this document only covers systemd-based services.  For RHEL6 support,
-  please contact <support@opensciencegrid.org>
+* Ensure the host has [a supported operating system](/release/supported_platforms.md).
+  A RHEL 7-based operating system is strongly recommended.
 * Obtain root access to the host
 * Prepare [the required Yum repositories](/common/yum.md)
 * Install [CA certificates](/common/ca.md)
