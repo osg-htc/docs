@@ -138,6 +138,18 @@ Once the public Cache server is registered and functioning, you may want to enab
 service.  This is an optional step.  Before proceeding, make sure you have followed the
 [prerequisite steps](#installation-prerequisites-for-cache).
 
+### Add Authfile for authenticated cache
+
+The Authfile for authenticated cache may differ from `/etc/xrootd/Authfile-noauth` defined in non-authenticated cache configuration. Example:
+
+```console
+root@host # cat /etc/xrootd/Authfile-auth
+g /osg/ligo /user/ligo r
+u ligo /user/ligo lr / rl
+```
+
+### Starting the service
+
 Enable and start the following additional systemd units:
 * `xrootd@stashcache-cache-server-auth.service`
 * `xrootd-renew-proxy.service`
@@ -172,16 +184,6 @@ Enable and start the following additional systemd units:
         root@host # systemctl list-timers xrootd-renew-proxy*
         NEXT                         LEFT       LAST                         PASSED  UNIT                     ACTIVATES
         Thu 2017-05-11 00:00:00 CDT  54min left Wed 2017-05-10 00:00:01 CDT  23h ago xrootd-renew-proxy.timer xrootd-renew-proxy.service
-
-### Add Authfile for authenticated cache
-
-The Authfile for authenticated cache may differ from `/etc/xrootd/Authfile-noauth` defined in non-authenticated cache configuration. Example:
-
-```console
-root@host # cat /etc/xrootd/Authfile-auth
-g /osg/ligo /user/ligo r
-u ligo /user/ligo lr / rl
-```
 
 When ready with configuration, you may [start](#managing-stashcache-and-associated-services) your StashCache Cache server.
 
