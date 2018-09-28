@@ -84,15 +84,19 @@ The most common lines to customize are:
   OSG support may ask you to re-enable them.
 * `pfc.ram 7g`: The amount of RAM the caching service should target to use.
 
-<!-- TODO: not clear someone could reasonably setup their authentication using this information.
+The Authfile specifies which files and directories can be read,
+relative to the `cachedir` that was defined in the main config.
 
-In Authfile you want to allow local reads below `$(cachedir)` defined in the main config. Example of Authfile:
+An example:
 
 ```console
 root@host # cat /etc/xrootd/Authfile-noauth
 u * /user/ligo -rl / rl
 ```
--->
+
+This permits all users (`u *`) to read all directories (`/ rl`) _except_ those under `/user/ligo` (`/user/ligo -rl`);
+the `/user/ligo` directory should only be readable in authenticated setups.
+For more details, see the [XRootD security documentation](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606598).
 
 Managing the Cache Services
 ---------------------------
@@ -130,9 +134,33 @@ These services must be managed with `systemctl`.  As a reminder, here are common
 Configuring the Authenticated Cache (Optional)
 ----------------------------------------------
 
-Once the public Cache server is registered and functioning, you may want to enable the authenticated cache
-service.  This is an optional step.  Before proceeding, make sure you have followed the
-[prerequisite steps](#installation-prerequisites-for-cache).
+The authenticated cache service is a separate instance of the StashCache cache service,
+and runs alongside the unauthenticated instance.
+You should make sure that the unauthenticated instance is functioning before setting up the authenticated instance.
+Before proceeding, make sure you have followed the [prerequisite steps](#installation-prerequisites-for-cache).
+
+### Add Authfile for authenticated cache
+
+The Authfile for the authenticated cache is located in `/etc/xrootd/Authfile-auth`.
+This is a separate file from the non-authenticated cache Authfile.
+
+Since the authenticated cache runs alongside the unauthenticated cache,
+care must be taken to avoid conflicts between the two.
+In particular, paths that are accessible via the authenticated cache should not be accessible via the unauthenticated cache,
+and vice versa.
+
+As an example:
+
+```console
+root@host # cat /etc/xrootd/Authfile-auth
+g /osg/ligo /user/ligo rl
+u ligo /user/ligo rl
+```
+
+This permits users in the VOMS group `/osg/ligo` and users mapped to `ligo` to read and list anything under
+`/user/ligo`.
+
+### Starting the service
 
 Enable and start the following additional systemd units:
 * `xrootd@stashcache-cache-server-auth.service`
@@ -168,16 +196,6 @@ Enable and start the following additional systemd units:
         root@host # systemctl list-timers xrootd-renew-proxy*
         NEXT                         LEFT       LAST                         PASSED  UNIT                     ACTIVATES
         Thu 2017-05-11 00:00:00 CDT  54min left Wed 2017-05-10 00:00:01 CDT  23h ago xrootd-renew-proxy.timer xrootd-renew-proxy.service
-
-### Add Authfile for authenticated cache
-
-The Authfile for authenticated cache may differ from `/etc/xrootd/Authfile-noauth` defined in non-authenticated cache configuration. Example:
-
-```console
-root@host # cat /etc/xrootd/Authfile-auth
-g /osg/ligo /user/ligo r
-u ligo /user/ligo lr / rl
-```
 
 When ready with configuration, you may [start](#managing-stashcache-and-associated-services) your StashCache Cache server.
 
