@@ -84,8 +84,6 @@ The most common lines to customize are:
   OSG support may ask you to re-enable them.
 * `pfc.ram 7g`: The amount of RAM the caching service should target to use.
 
-<!-- TODO: not clear someone could reasonably setup their authentication using this information. -->
-
 The Authfile specifies which files and directories can be read,
 relative to the `cachedir` that was defined in the main config.
 
@@ -96,7 +94,8 @@ root@host # cat /etc/xrootd/Authfile-noauth
 u * /user/ligo -rl / rl
 ```
 
-This permits all users (`u *`) to read all directories (`/ rl`) _except_ those under `/user/ligo` (`/user/ligo -rl`).
+This permits all users (`u *`) to read all directories (`/ rl`) _except_ those under `/user/ligo` (`/user/ligo -rl`);
+the `/user/ligo` directory should only be readable in authenticated setups.
 For more details, see the [XRootD security documentation](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606598).
 
 Managing the Cache Services
@@ -150,18 +149,16 @@ care must be taken to avoid conflicts between the two.
 In particular, paths that are accessible via the authenticated cache should not be accessible via the unauthenticated cache,
 and vice versa.
 
-An example:
+As an example:
 
 ```console
 root@host # cat /etc/xrootd/Authfile-auth
-g /osg/ligo /user/ligo r
-u ligo /user/ligo lr / rl
+g /osg/ligo /user/ligo rl
+u ligo /user/ligo rl
 ```
 
-This permits users in the VOMS group `/osg/ligo` to read anything under `/user/ligo`, <!-- TODO is that true? -->
-and users mapped to `ligo` to read anything under `/user/ligo` and anything under `/`.
-<!-- TODO ^ doesn't this overlap with Authfile-noauth? Also, isn't it redundant? -->
-
+This permits users in the VOMS group `/osg/ligo` and users mapped to `ligo` to read and list anything under
+`/user/ligo`.
 
 ### Starting the service
 
