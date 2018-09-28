@@ -88,6 +88,7 @@ The most common lines to customize are:
 
 The Authfile specifies which files and directories can be read,
 relative to the `cachedir` that was defined in the main config.
+
 An example:
 
 ```console
@@ -134,19 +135,33 @@ These services must be managed with `systemctl`.  As a reminder, here are common
 Configuring the Authenticated Cache (Optional)
 ----------------------------------------------
 
-Once the public Cache server is registered and functioning, you may want to enable the authenticated cache
-service.  This is an optional step.  Before proceeding, make sure you have followed the
-[prerequisite steps](#installation-prerequisites-for-cache).
+The authenticated cache service is a separate instance of the StashCache cache service,
+and runs alongside the unauthenticated instance.
+You should make sure that the unauthenticated instance is functioning before setting up the authenticated instance.
+Before proceeding, make sure you have followed the [prerequisite steps](#installation-prerequisites-for-cache).
 
 ### Add Authfile for authenticated cache
 
-The Authfile for authenticated cache may differ from `/etc/xrootd/Authfile-noauth` defined in non-authenticated cache configuration. Example:
+The Authfile for the authenticated cache is located in `/etc/xrootd/Authfile-auth`.
+This is a separate file from the non-authenticated cache Authfile.
+
+Since the authenticated cache runs alongside the unauthenticated cache,
+care must be taken to avoid conflicts between the two.
+In particular, paths that are accessible via the authenticated cache should not be accessible via the unauthenticated cache,
+and vice versa.
+
+An example:
 
 ```console
 root@host # cat /etc/xrootd/Authfile-auth
 g /osg/ligo /user/ligo r
 u ligo /user/ligo lr / rl
 ```
+
+This permits users in the VOMS group `/osg/ligo` to read anything under `/user/ligo`, <!-- TODO is that true? -->
+and users mapped to `ligo` to read anything under `/user/ligo` and anything under `/`.
+<!-- TODO ^ doesn't this overlap with Authfile-noauth? Also, isn't it redundant? -->
+
 
 ### Starting the service
 
