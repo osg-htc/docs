@@ -774,6 +774,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#add-authfile-for-authenticated-cache" title="Add Authfile for authenticated cache" class="md-nav__link">
+    Add Authfile for authenticated cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starting-the-service" title="Starting the service" class="md-nav__link">
+    Starting the service
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#authservice" title="Auth.service" class="md-nav__link">
     Auth.service
   </a>
@@ -787,10 +802,8 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#add-authfile-for-authenticated-cache" title="Add Authfile for authenticated cache" class="md-nav__link">
-    Add Authfile for authenticated cache
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
@@ -1833,6 +1846,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#add-authfile-for-authenticated-cache" title="Add Authfile for authenticated cache" class="md-nav__link">
+    Add Authfile for authenticated cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starting-the-service" title="Starting the service" class="md-nav__link">
+    Starting the service
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#authservice" title="Auth.service" class="md-nav__link">
     Auth.service
   </a>
@@ -1846,10 +1874,8 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#add-authfile-for-authenticated-cache" title="Add Authfile for authenticated cache" class="md-nav__link">
-    Add Authfile for authenticated cache
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
@@ -2030,15 +2056,17 @@ software with a single command:</p>
   OSG support may ask you to re-enable them.</li>
 <li><code>pfc.ram 7g</code>: The amount of RAM the caching service should target to use.</li>
 </ul>
-<!-- TODO: not clear someone could reasonably setup their authentication using this information.
+<p>The Authfile specifies which files and directories can be read,
+relative to the <code>cachedir</code> that was defined in the main config.</p>
+<p>An example:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat /etc/xrootd/Authfile-noauth
+<span class="go">u * /user/ligo -rl / rl</span>
+</pre></div>
 
-In Authfile you want to allow local reads below `$(cachedir)` defined in the main config. Example of Authfile:
 
-
-wzxhzdk:0
-
--->
-
+<p>This permits all users (<code>u *</code>) to read all directories (<code>/ rl</code>) <em>except</em> those under <code>/user/ligo</code> (<code>/user/ligo -rl</code>);
+the <code>/user/ligo</code> directory should only be readable in authenticated setups.
+For more details, see the <a href="http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606598">XRootD security documentation</a>.</p>
 <h2 id="managing-the-cache-services">Managing the Cache Services<a class="headerlink" href="#managing-the-cache-services" title="Permanent link">&para;</a></h2>
 <p>You need to enable and start the following systemd units:
 <em> <code>xrootd@stashcache-cache-server.service</code>
@@ -2103,9 +2131,27 @@ In Authfile you want to allow local reads below `$(cachedir)` defined in the mai
 </tbody>
 </table>
 <h2 id="configuring-the-authenticated-cache-optional">Configuring the Authenticated Cache (Optional)<a class="headerlink" href="#configuring-the-authenticated-cache-optional" title="Permanent link">&para;</a></h2>
-<p>Once the public Cache server is registered and functioning, you may want to enable the authenticated cache
-service.  This is an optional step.  Before proceeding, make sure you have followed the
-<a href="#installation-prerequisites-for-cache">prerequisite steps</a>.</p>
+<p>The authenticated cache service is a separate instance of the StashCache cache service,
+and runs alongside the unauthenticated instance.
+You should make sure that the unauthenticated instance is functioning before setting up the authenticated instance.
+Before proceeding, make sure you have followed the <a href="#installation-prerequisites-for-cache">prerequisite steps</a>.</p>
+<h3 id="add-authfile-for-authenticated-cache">Add Authfile for authenticated cache<a class="headerlink" href="#add-authfile-for-authenticated-cache" title="Permanent link">&para;</a></h3>
+<p>The Authfile for the authenticated cache is located in <code>/etc/xrootd/Authfile-auth</code>.
+This is a separate file from the non-authenticated cache Authfile.</p>
+<p>Since the authenticated cache runs alongside the unauthenticated cache,
+care must be taken to avoid conflicts between the two.
+In particular, paths that are accessible via the authenticated cache should not be accessible via the unauthenticated cache,
+and vice versa.</p>
+<p>As an example:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat /etc/xrootd/Authfile-auth
+<span class="go">g /osg/ligo /user/ligo rl</span>
+<span class="go">u ligo /user/ligo rl</span>
+</pre></div>
+
+
+<p>This permits users in the VOMS group <code>/osg/ligo</code> and users mapped to <code>ligo</code> to read and list anything under
+<code>/user/ligo</code>.</p>
+<h3 id="starting-the-service">Starting the service<a class="headerlink" href="#starting-the-service" title="Permanent link">&para;</a></h3>
 <p>Enable and start the following additional systemd units:
 <em> <code>xrootd@stashcache-cache-server-auth.service</code>
 </em> <code>xrootd-renew-proxy.service</code>
@@ -2149,14 +2195,6 @@ service.  This is an optional step.  Before proceeding, make sure you have follo
 
 </li>
 </ol>
-<h3 id="add-authfile-for-authenticated-cache">Add Authfile for authenticated cache<a class="headerlink" href="#add-authfile-for-authenticated-cache" title="Permanent link">&para;</a></h3>
-<p>The Authfile for authenticated cache may differ from <code>/etc/xrootd/Authfile-noauth</code> defined in non-authenticated cache configuration. Example:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat /etc/xrootd/Authfile-auth
-<span class="go">g /osg/ligo /user/ligo r</span>
-<span class="go">u ligo /user/ligo lr / rl</span>
-</pre></div>
-
-
 <p>When ready with configuration, you may <a href="#managing-stashcache-and-associated-services">start</a> your StashCache Cache server.</p>
 <h2 id="configuring-optional-features">Configuring Optional Features<a class="headerlink" href="#configuring-optional-features" title="Permanent link">&para;</a></h2>
 <h3 id="adjust-disk-utilization">Adjust disk utilization<a class="headerlink" href="#adjust-disk-utilization" title="Permanent link">&para;</a></h3>
