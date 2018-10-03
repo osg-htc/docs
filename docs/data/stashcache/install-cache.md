@@ -56,8 +56,8 @@ The StashCache daemon consists of an XRootD server and an HTCondor-based service
 statistics about the cache. To simplify installation, OSG provides convenience RPMs that install all required
 software with a single command:
 
-        :::console
-        root@host # yum install stashcache-cache-server
+    :::console
+    root@host # yum install stashcache-cache-server
 
 !!! note
     If installing authenticated StashCache Cache server, you need an additional package:
@@ -256,5 +256,5 @@ Where `hostname` is the string returned by the hostname command. The output of t
 
 ### Test CVMFS accessibility via Cache server
 ```
-[user@client ~]$ curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/query1
+user@host $ curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/query1
 ```
