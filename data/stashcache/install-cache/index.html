@@ -2028,8 +2028,7 @@ with the following details:</p>
 <p>The StashCache daemon consists of an XRootD server and an HTCondor-based service for collecting and reporting
 statistics about the cache. To simplify installation, OSG provides convenience RPMs that install all required
 software with a single command:</p>
-<div class="codehilite"><pre><span></span>    :::console
-    root@host # yum install stashcache-cache-server
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install stashcache-cache-server
 </pre></div>
 
 
@@ -2290,7 +2289,7 @@ all allow host h=*.xyz.edu
 
 <p>Where <code>hostname</code> is the string returned by the hostname command. The output of the above command should provide an HTCondor ClassAd that details the status of your cache.</p>
 <h3 id="test-cvmfs-accessibility-via-cache-server">Test CVMFS accessibility via Cache server<a class="headerlink" href="#test-cvmfs-accessibility-via-cache-server" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span>[user@client ~]$ curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/query1
+<div class="codehilite"><pre><span></span>user@host $ curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/query1
 </pre></div>
                 
                   
