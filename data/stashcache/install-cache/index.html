@@ -759,13 +759,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#managing-the-cache-services" title="Managing the Cache Services" class="md-nav__link">
-    Managing the Cache Services
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#configuring-the-authenticated-cache-optional" title="Configuring the Authenticated Cache (Optional)" class="md-nav__link">
     Configuring the Authenticated Cache (Optional)
   </a>
@@ -777,33 +770,6 @@
   <a href="#add-authfile-for-authenticated-cache" title="Add Authfile for authenticated cache" class="md-nav__link">
     Add Authfile for authenticated cache
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#starting-the-service" title="Starting the service" class="md-nav__link">
-    Starting the service
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#authservice" title="Auth.service" class="md-nav__link">
-    Auth.service
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#proxyservice-and-proxytimer" title="Proxy.service and Proxy.timer" class="md-nav__link">
-    Proxy.service and Proxy.timer
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -848,29 +814,35 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#non-authenticated-cache-server-services" title="Non-authenticated Cache server services" class="md-nav__link">
-    Non-authenticated Cache server services
+  <a href="#public-cache-services" title="Public Cache Services" class="md-nav__link">
+    Public Cache Services
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#authenticated-cache-server-services" title="Authenticated Cache server services" class="md-nav__link">
-    Authenticated Cache server services
+  <a href="#authenticated-cache-services" title="Authenticated Cache Services" class="md-nav__link">
+    Authenticated Cache Services
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-functionality" title="Testing Functionality" class="md-nav__link">
+    Testing Functionality
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#test-cache-server-reports-to-htcondor-collector" title="Test Cache server reports to HTCondor collector" class="md-nav__link">
     Test Cache server reports to HTCondor collector
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#test-cvmfs-accessibility-via-cache-server" title="Test CVMFS accessibility via Cache server" class="md-nav__link">
-    Test CVMFS accessibility via Cache server
   </a>
   
 </li>
@@ -1843,13 +1815,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#managing-the-cache-services" title="Managing the Cache Services" class="md-nav__link">
-    Managing the Cache Services
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#configuring-the-authenticated-cache-optional" title="Configuring the Authenticated Cache (Optional)" class="md-nav__link">
     Configuring the Authenticated Cache (Optional)
   </a>
@@ -1861,33 +1826,6 @@
   <a href="#add-authfile-for-authenticated-cache" title="Add Authfile for authenticated cache" class="md-nav__link">
     Add Authfile for authenticated cache
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#starting-the-service" title="Starting the service" class="md-nav__link">
-    Starting the service
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#authservice" title="Auth.service" class="md-nav__link">
-    Auth.service
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#proxyservice-and-proxytimer" title="Proxy.service and Proxy.timer" class="md-nav__link">
-    Proxy.service and Proxy.timer
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1932,29 +1870,35 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#non-authenticated-cache-server-services" title="Non-authenticated Cache server services" class="md-nav__link">
-    Non-authenticated Cache server services
+  <a href="#public-cache-services" title="Public Cache Services" class="md-nav__link">
+    Public Cache Services
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#authenticated-cache-server-services" title="Authenticated Cache server services" class="md-nav__link">
-    Authenticated Cache server services
+  <a href="#authenticated-cache-services" title="Authenticated Cache Services" class="md-nav__link">
+    Authenticated Cache Services
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-functionality" title="Testing Functionality" class="md-nav__link">
+    Testing Functionality
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#test-cache-server-reports-to-htcondor-collector" title="Test Cache server reports to HTCondor collector" class="md-nav__link">
     Test Cache server reports to HTCondor collector
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#test-cvmfs-accessibility-via-cache-server" title="Test CVMFS accessibility via Cache server" class="md-nav__link">
-    Test CVMFS accessibility via Cache server
   </a>
   
 </li>
@@ -2040,14 +1984,14 @@ with the following details:</p>
 <p>The StashCache daemon consists of an XRootD server and an HTCondor-based service for collecting and reporting
 statistics about the cache. To simplify installation, OSG provides convenience RPMs that install all required
 software with a single command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install stashcache-cache-server
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install --enablerepo<span class="o">=</span>osg-development stashcache-cache-server
 </pre></div>
 
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If installing authenticated StashCache Cache server, you need an additional package:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install stashcache-cache-server-auth
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install --enablerepo<span class="o">=</span>osg-development stashcache-cache-server-auth
 </pre></div>
 
 
@@ -2078,69 +2022,6 @@ relative to the <code>cachedir</code> that was defined in the main config.</p>
 <p>This permits all users (<code>u *</code>) to read all directories (<code>/ rl</code>) <em>except</em> those under <code>/user/ligo</code> (<code>/user/ligo -rl</code>);
 the <code>/user/ligo</code> directory should only be readable in authenticated setups.
 For more details, see the <a href="http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606598">XRootD security documentation</a>.</p>
-<h2 id="managing-the-cache-services">Managing the Cache Services<a class="headerlink" href="#managing-the-cache-services" title="Permanent link">&para;</a></h2>
-<p>You need to enable and start the following systemd units:
-<em> <code>xrootd@stashcache-cache-server.service</code>
-</em> <code>fetch-crl-boot</code> and <code>fetch-crl-cron</code>
-* <code>condor</code></p>
-<ol>
-<li>
-<p>Enable and start <code>xrootd@stashcache-cache-server.service</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> --now xrootd@stashcache-cache-server
-</pre></div>
-
-
-</li>
-<li>
-<p>Update CRLs periodically and on boot. The CRLs are used by HTCondor, as well as the authenticated StashCache:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> --now fetch-crl-cron fetch-crl-boot
-</pre></div>
-
-
-</li>
-<li>
-<p>Enable and start <code>condor</code> for StashCache statistics reporting:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> --now condor
-</pre></div>
-
-
-</li>
-</ol>
-<p>These services must be managed with <code>systemctl</code>.  As a reminder, here are common service commands (all run as <code>root</code>):</p>
-<table>
-<thead>
-<tr>
-<th align="left">To...</th>
-<th align="left">On EL7, run the command...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Start a service</td>
-<td align="left"><code>systemctl start &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-<tr>
-<td align="left">Stop a service</td>
-<td align="left"><code>systemctl stop &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-<tr>
-<td align="left">Enable a service to start on boot</td>
-<td align="left"><code>systemctl enable &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-<tr>
-<td align="left">Disable a service from starting on boot</td>
-<td align="left"><code>systemctl disable &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-<tr>
-<td align="left">Both enable and start a service</td>
-<td align="left"><code>systemctl enable --now &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-<tr>
-<td align="left">Both disable and stop a service</td>
-<td align="left"><code>systemctl disable --now &lt;SERVICE-NAME&gt;</code></td>
-</tr>
-</tbody>
-</table>
 <h2 id="configuring-the-authenticated-cache-optional">Configuring the Authenticated Cache (Optional)<a class="headerlink" href="#configuring-the-authenticated-cache-optional" title="Permanent link">&para;</a></h2>
 <p>The authenticated cache service is a separate instance of the StashCache cache service,
 and runs alongside the unauthenticated instance.
@@ -2162,51 +2043,7 @@ and vice versa.</p>
 
 <p>This permits users in the VOMS group <code>/osg/ligo</code> and users mapped to <code>ligo</code> to read and list anything under
 <code>/user/ligo</code>.</p>
-<h3 id="starting-the-service">Starting the service<a class="headerlink" href="#starting-the-service" title="Permanent link">&para;</a></h3>
-<p>Enable and start the following additional systemd units:
-<em> <code>xrootd@stashcache-cache-server-auth.service</code>
-</em> <code>xrootd-renew-proxy.service</code>
-* <code>xrootd-renew-proxy.timer</code></p>
-<h4 id="authservice">Auth.service<a class="headerlink" href="#authservice" title="Permanent link">&para;</a></h4>
-<ol>
-<li>Enable and start <code>xrootd@stashcache-cache-server-auth.service</code> instance:<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> --now xrootd@stashcache-cache-server-auth
-</pre></div>
-
-
-</li>
-</ol>
-<h4 id="proxyservice-and-proxytimer">Proxy.service and Proxy.timer<a class="headerlink" href="#proxyservice-and-proxytimer" title="Permanent link">&para;</a></h4>
-<ol>
-<li>
-<p>Run the service to generate the xrootd proxy and confirm the file exists:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl start xrootd-renew-proxy
-
-<span class="gp">root@host #</span> ls -al /tmp/x509up_xrootd
-<span class="go">-rw-------. 1 xrootd xrootd 4644 Sep 25 18:35 /tmp/x509up_xrootd</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>Enable timer and start:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl <span class="nb">enable</span> --now xrootd-renew-proxy.timer
-</pre></div>
-
-
-</li>
-<li>
-<p>Confirm the timer is active and working:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl is-active xrootd-renew-proxy.timer
-<span class="go">active</span>
-<span class="gp">root@host #</span> systemctl list-timers xrootd-renew-proxy*
-<span class="go">NEXT                         LEFT       LAST                         PASSED  UNIT                     ACTIVATES</span>
-<span class="go">Thu 2017-05-11 00:00:00 CDT  54min left Wed 2017-05-10 00:00:01 CDT  23h ago xrootd-renew-proxy.timer xrootd-renew-proxy.service</span>
-</pre></div>
-
-
-</li>
-</ol>
-<p>When ready with configuration, you may <a href="#managing-stashcache-and-associated-services">start</a> your StashCache Cache server.</p>
+<p>When ready with configuration, you may <a href="#managing-stashcache-and-associated-services">start</a> your Cache server.</p>
 <h2 id="configuring-optional-features">Configuring Optional Features<a class="headerlink" href="#configuring-optional-features" title="Permanent link">&para;</a></h2>
 <h3 id="adjust-disk-utilization">Adjust disk utilization<a class="headerlink" href="#adjust-disk-utilization" title="Permanent link">&para;</a></h3>
 <p>To adjust the disk utilization of your StashCache cache, modify the values of <code>pfc.diskusage</code> in <code>/etc/xrootd/xrootd-stashcache-cache-server.cfg</code>:</p>
@@ -2228,8 +2065,36 @@ all allow host h=*.xyz.edu
 
 
 <h2 id="managing-stashcache-and-associated-services">Managing StashCache and associated services<a class="headerlink" href="#managing-stashcache-and-associated-services" title="Permanent link">&para;</a></h2>
-<p>Ensure that your <code>/stash</code> disk is mounted, and then start <code>xrootd</code> and <code>condor</code> services.</p>
-<h3 id="non-authenticated-cache-server-services">Non-authenticated Cache server services<a class="headerlink" href="#non-authenticated-cache-server-services" title="Permanent link">&para;</a></h3>
+<p>StashCache daemons are managed by systemd units.  First ensure that your cache directory (default <code>/stash</code>) is
+mounted, then ensure you <em>enable</em> (set to start at boot) and <em>start</em> the StashCache-related services.</p>
+<p>As a reminder, here are common service commands (all run as <code>root</code>) for EL7:</p>
+<table>
+<thead>
+<tr>
+<th align="left">To...</th>
+<th align="left">On EL7, run the command...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Start a service</td>
+<td align="left"><code>systemctl start &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Stop a  service</td>
+<td align="left"><code>systemctl stop &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Enable a service to start on boot</td>
+<td align="left"><code>systemctl enable &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+<tr>
+<td align="left">Disable a service from starting on boot</td>
+<td align="left"><code>systemctl disable &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="public-cache-services">Public Cache Services<a class="headerlink" href="#public-cache-services" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -2252,11 +2117,12 @@ all allow host h=*.xyz.edu
 <tr>
 <td>Fetch CRL</td>
 <td><code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
-<td>See <a href="../../../common/ca#managing-fetch-crl-services">CA documentation</a> for more info</td>
+<td>Required to authenticate monitoring services.  See <a href="../../../common/ca#managing-fetch-crl-services">CA documentation</a> for more info</td>
 </tr>
 </tbody>
 </table>
-<h3 id="authenticated-cache-server-services">Authenticated Cache server services<a class="headerlink" href="#authenticated-cache-server-services" title="Permanent link">&para;</a></h3>
+<h3 id="authenticated-cache-services">Authenticated Cache Services<a class="headerlink" href="#authenticated-cache-services" title="Permanent link">&para;</a></h3>
+<p><em>In addition</em> to the public cache services, there are three systemd units specific to the authenticated cache.</p>
 <table>
 <thead>
 <tr>
@@ -2269,40 +2135,33 @@ all allow host h=*.xyz.edu
 <tr>
 <td>XRootD</td>
 <td><code>xrootd@stashcache-cache-server-auth.service</code></td>
-<td>The xrootd daemon, which performs the authenticated data transfer</td>
+<td>The xrootd daemon which performs the authenticated data transfers</td>
 </tr>
 <tr>
 <td></td>
 <td><code>xrootd-renew-proxy.service</code></td>
-<td>Renew a proxy for authenticated XRootD third-party copies</td>
+<td>Renew a proxy for authenticated downloads to the cache</td>
 </tr>
 <tr>
 <td></td>
 <td><code>xrootd-renew-proxy.timer</code></td>
 <td>Trigger daily proxy renewal</td>
 </tr>
-<tr>
-<td>HTCondor</td>
-<td><code>condor.service</code></td>
-<td>Report cache statistics to central OSG collector</td>
-</tr>
-<tr>
-<td>Fetch CRL</td>
-<td><code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
-<td>See <a href="../../../common/ca#managing-fetch-crl-services">CA documentation</a> for more info</td>
-</tr>
 </tbody>
 </table>
+<h2 id="testing-functionality">Testing Functionality<a class="headerlink" href="#testing-functionality" title="Permanent link">&para;</a></h2>
+<p>The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as <code>curl</code>.</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/query1
+</pre></div>
+
+
 <h3 id="test-cache-server-reports-to-htcondor-collector">Test Cache server reports to HTCondor collector<a class="headerlink" href="#test-cache-server-reports-to-htcondor-collector" title="Permanent link">&para;</a></h3>
-<p>To verify that your cache is being monitored properly, run the following command:</p>
-<div class="codehilite"><pre><span></span>user@host $ condor_status -any -l -const &quot;Name==\&quot;xrootd@`hostname`\&quot;&quot;
+<p>To verify the cache is reporting to the central collector, run the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_status -any -l -const <span class="s2">&quot;Name==\&quot;xrootd@`hostname`\&quot;&quot;</span>
 </pre></div>
 
 
 <p>Where <code>hostname</code> is the string returned by the hostname command. The output of the above command should provide an HTCondor ClassAd that details the status of your cache.</p>
-<h3 id="test-cvmfs-accessibility-via-cache-server">Test CVMFS accessibility via Cache server<a class="headerlink" href="#test-cvmfs-accessibility-via-cache-server" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span>user@host $ curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/query1
-</pre></div>
                 
                   
                 
