@@ -57,13 +57,13 @@ statistics about the cache. To simplify installation, OSG provides convenience R
 software with a single command:
 
     :::console
-    root@host # yum install stashcache-cache-server
+    root@host # yum install --enablerepo=osg-development stashcache-cache-server
 
 !!! note
     If installing authenticated StashCache Cache server, you need an additional package:
 
         :::console
-        root@host # yum install stashcache-cache-server-auth
+        root@host # yum install --enablerepo=osg-development stashcache-cache-server-auth
 
 The cache server configuration assumes the disk used to cache data is mounted at `/stash` and owned by the
 `xrootd:xrootd` user and group.
@@ -98,39 +98,6 @@ This permits all users (`u *`) to read all directories (`/ rl`) _except_ those u
 the `/user/ligo` directory should only be readable in authenticated setups.
 For more details, see the [XRootD security documentation](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606598).
 
-Managing the Cache Services
----------------------------
-You need to enable and start the following systemd units:
-* `xrootd@stashcache-cache-server.service`
-* `fetch-crl-boot` and `fetch-crl-cron`
-* `condor`
-
-1. Enable and start `xrootd@stashcache-cache-server.service`:
-
-        :::console
-        root@host # systemctl enable --now xrootd@stashcache-cache-server
-
-2. Update CRLs periodically and on boot. The CRLs are used by HTCondor, as well as the authenticated StashCache:
-
-        :::console
-        root@host # systemctl enable --now fetch-crl-cron fetch-crl-boot
-
-3. Enable and start `condor` for StashCache statistics reporting:
-
-        :::console
-        root@host # systemctl enable --now condor
-
-These services must be managed with `systemctl`.  As a reminder, here are common service commands (all run as `root`):
-
-| To...                                   | On EL7, run the command...               |
-| :-------------------------------------- | :--------------------------------------- |
-| Start a service                         | `systemctl start <SERVICE-NAME>`         |
-| Stop a service                          | `systemctl stop <SERVICE-NAME>`          |
-| Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`        |
-| Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>`       |
-| Both enable and start a service         | `systemctl enable --now <SERVICE-NAME>`  |
-| Both disable and stop a service         | `systemctl disable --now <SERVICE-NAME>` |
-
 Configuring the Authenticated Cache (Optional)
 ----------------------------------------------
 
@@ -160,44 +127,7 @@ u ligo /user/ligo rl
 This permits users in the VOMS group `/osg/ligo` and users mapped to `ligo` to read and list anything under
 `/user/ligo`.
 
-### Starting the service
-
-Enable and start the following additional systemd units:
-* `xrootd@stashcache-cache-server-auth.service`
-* `xrootd-renew-proxy.service`
-* `xrootd-renew-proxy.timer`
-
-#### Auth.service
-1. Enable and start `xrootd@stashcache-cache-server-auth.service` instance:
-
-        :::console
-        root@host # systemctl enable --now xrootd@stashcache-cache-server-auth
-
-#### Proxy.service and Proxy.timer
-
-1. Run the service to generate the xrootd proxy and confirm the file exists:
-
-        :::console
-        root@host # systemctl start xrootd-renew-proxy
-
-        root@host # ls -al /tmp/x509up_xrootd
-        -rw-------. 1 xrootd xrootd 4644 Sep 25 18:35 /tmp/x509up_xrootd
-
-2. Enable timer and start:
-
-        :::console
-        root@host # systemctl enable --now xrootd-renew-proxy.timer
-
-3. Confirm the timer is active and working:
-
-        :::console
-        root@host # systemctl is-active xrootd-renew-proxy.timer
-        active
-        root@host # systemctl list-timers xrootd-renew-proxy*
-        NEXT                         LEFT       LAST                         PASSED  UNIT                     ACTIVATES
-        Thu 2017-05-11 00:00:00 CDT  54min left Wed 2017-05-10 00:00:01 CDT  23h ago xrootd-renew-proxy.timer xrootd-renew-proxy.service
-
-When ready with configuration, you may [start](#managing-stashcache-and-associated-services) your StashCache Cache server.
+When ready with configuration, you may [start](#managing-stashcache-and-associated-services) your Cache server.
 
 Configuring Optional Features
 -----------------------------
@@ -229,32 +159,50 @@ all allow host h=*.xyz.edu
 
 ## Managing StashCache and associated services
 
-Ensure that your `/stash` disk is mounted, and then start `xrootd` and `condor` services.
+StashCache daemons are managed by systemd units.  First ensure that your cache directory (default `/stash`) is
+mounted, then ensure you *enable* (set to start at boot) and *start* the StashCache-related services.
 
-### Non-authenticated Cache server services
+As a reminder, here are common service commands (all run as `root`) for EL7:
+
+| To...                                   | On EL7, run the command...         |
+| :-------------------------------------- | :--------------------------------- |
+| Start a service                         | `systemctl start <SERVICE-NAME>`   |
+| Stop a  service                         | `systemctl stop <SERVICE-NAME>`    |
+| Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
+| Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
+
+### Public Cache Services
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
 | XRootD | `xrootd@stashcache-cache-server.service` | The xrootd daemon, which performs the data transfers |
 | HTCondor | `condor.service` | Report cache statistics to central OSG collector |
-| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
+| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 
-### Authenticated Cache server services
+### Authenticated Cache Services
+
+_In addition_ to the public cache services, there are three systemd units specific to the authenticated cache.
+
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
-| XRootD | `xrootd@stashcache-cache-server-auth.service` | The xrootd daemon, which performs the authenticated data transfer |
-|  | `xrootd-renew-proxy.service` | Renew a proxy for authenticated XRootD third-party copies |
+| XRootD | `xrootd@stashcache-cache-server-auth.service` | The xrootd daemon which performs the authenticated data transfers |
+|  | `xrootd-renew-proxy.service` | Renew a proxy for authenticated downloads to the cache |
 |  | `xrootd-renew-proxy.timer` | Trigger daily proxy renewal |
-| HTCondor | `condor.service` | Report cache statistics to central OSG collector |
-| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 
-### Test Cache server reports to HTCondor collector
-To verify that your cache is being monitored properly, run the following command:
-```
-user@host $ condor_status -any -l -const "Name==\"xrootd@`hostname`\""
-```
-Where `hostname` is the string returned by the hostname command. The output of the above command should provide an HTCondor ClassAd that details the status of your cache.
+## Testing Functionality
 
-### Test CVMFS accessibility via Cache server
-```
+The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as `curl`.
+
+
+```console
 user@host $ curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/query1
 ```
+
+### Test Cache server reports to HTCondor collector
+
+To verify the cache is reporting to the central collector, run the following command:
+
+```console
+user@host $ condor_status -any -l -const "Name==\"xrootd@`hostname`\""
+```
+
+Where `hostname` is the string returned by the hostname command. The output of the above command should provide an HTCondor ClassAd that details the status of your cache.
