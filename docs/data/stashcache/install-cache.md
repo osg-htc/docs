@@ -52,7 +52,7 @@ As with all OSG software installations, there are some one-time steps to prepare
 Installing the Cache
 --------------------
 
-The StashCache daemon consists of an XRootD server and an HTCondor-based service for collecting and reporting
+The StashCache daemon consists of an XRootD server and a service for collecting and reporting
 statistics about the cache. To simplify installation, OSG provides convenience RPMs that install all required
 software with a single command:
 
@@ -175,7 +175,7 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
 | XRootD | `xrootd@stashcache-cache-server.service` | The xrootd daemon, which performs the data transfers |
-| HTCondor | `condor.service` | Report cache statistics to central OSG collector |
+| StashCache Reporter | `stashcache-reporter.timer` | Report cache statistics to central OSG collector |
 | Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 
 ### Authenticated Cache Services
