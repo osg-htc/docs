@@ -66,27 +66,35 @@ The `stashcache-daemon` package provides a default configuration file,
 
 The most common lines to customize are:
 
-* `oss.remoteroot /`: A prefix that will be prepended to all exported filenames.  Must be set to `/$VONAME`
-  for your VO.  May only be specified once.
-* `set localroot = /stash`: Change the `localroot` to the location where your data is mounted on
+* `oss.localroot /stash`: Change the `localroot` to the location where your data is mounted on
   the origin server; default is `/stash`.
 * `all.export /`: A sub-directory within the `localroot` directory that will be exported.  Customize
   if not all data within `localroot` should be exported; default is `/`.  If multiple directories must
   be exported, you may specify `all.export` multiple times.
 
-For example, if the HCC VO would like to setup an origin server, exporting from the mountpoint `/mnt/bigdata`,
-but only exporting the sub-directories `/mnt/bigdata/bio/datasets` and `/mnt/bigdata/hep/generators`, they
-would use the following configuration:
+For example, if the HCC VO would like to set up an origin server exporting from the mountpoint `/mnt/bigdata`,
+but only export the subdirectories `/mnt/bigdata/hcc/bio/datasets` and `/mnt/bigdata/hcc/hep/generators`,
+they would use the following configuration:
 
 ```
-oss.remoteroot /hcc
-set localroot = /mnt/bigdata
-all.export /bio/datasets
-all.export /hep/generators
+oss.localroot /mnt/bigdata
+all.export /hcc/bio/datasets
+all.export /hcc/hep/generators
 ```
 
-With this configuration, the data in `/mnt/bigdata/chemistry` would not be available via StashCache; the
-contents in `/mnt/bigdata/bio/datasets` would be available under the StashCache path `/hcc/bio/datasets`.
+With this configuration, the data under `/mnt/bigdata/hcc/bio/datasets` would be available under the StashCache path
+`/hcc/bio/datasets`, the data under `/mnt/bigdata/hcc/hep/generators` would be available under the StashCache path
+`/hcc/hep/generators`, and no other data would be available via StashCache.
+
+!!! warning
+    The StashCache namespace is *global* within a data federation.
+    Directories you export **must not** collide with directories provided by other origin servers.
+    <br>
+    The best way to do this is to create a directory named after your VO or project,
+    place all files you want to distribute within that directory,
+    and export only that directory or its subdirectories.
+
+
 
 Managing the Origin Service
 ---------------------------
