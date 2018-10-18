@@ -30,9 +30,10 @@ Before starting the installation process, consider the following points:
 * __Host certificate:__ The StashCache server uses a host certificate to advertise to a central collector.
   The [host certificate documentation](/security/host-certs.md) provides more information on setting up host
   certificates.
-* __Network ports:__ The StashCache Origin service defaults to using inbound TCP port 1094.  Outbound
-  connectivity to TCP `redirector.osgstorage.org:1213` and UDP `collector.opensciencegrid.org:9619` is
-  required.
+* __Network ports:__ The StashCache Origin service requires the following ports open:
+    * Inbound TCP port 1094 for file access via the XRootD protocol
+    * Outbound TCP port 1213 to `redirector.osgstorage.org` for connecting to the data federation
+    * Outbound UDP port 9619 for reporting
 * __Hardware requirements:__ We recommend that a StashCache server has at least 10Gbps connectivity and 8GB of
   RAM.  We suggest that several gigabytes of local disk space be available for log files.
 
@@ -55,8 +56,8 @@ software with a single command:
 root@host # yum install stashcache-origin-server
 ```
 
-For this installation guide, we assume that the data to be exported to the federation is mounted at */stash*
-and owned by the `xrootd:xrootd` user.  
+For this installation guide, we assume that the data to be exported to the federation is mounted at `/stash`
+and owned by the `xrootd:xrootd` user.
 
 Configuring the Origin Server
 -----------------------------
@@ -88,7 +89,7 @@ With this configuration, the data under `/mnt/bigdata/hcc/bio/datasets` would be
 !!! warning
     The StashCache namespace is *global* within a data federation.
     Directories you export **must not** collide with directories provided by other origin servers.
-    <br>
+
     The best way to do this is to create a directory named after your VO or project,
     place all files you want to distribute within that directory,
     and export only that directory or its subdirectories.
@@ -114,25 +115,49 @@ These services must be managed with `systemctl`.  As a reminder, here are common
 | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
 | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 
-Testing Origin server Availability
-----------------------------------
 
-Once your server has been registered with the OSG and started, it should subscribe to the OSG-wide
-redirector service.  To verify that your origin is correctly advertising its availability, run the
-following command:
+Verifying the Origin Server
+---------------------------
+
+Once your server has been registered with the OSG and started,
+perform the following steps to verify that it is functional.
+
+
+### Testing availability
+
+To verify that your origin is correctly advertising its availability, run the following command from the origin server:
 
 ```
-[user@client ~]$ xrdmapc --list s redirector.opensciencegrid.org:1094 
-0**** redirector.grid.iu.edu:1094
-      Srv redirector1.grid.iu.edu:2094
-      Srv csiu.grid.iu.edu:1094
-      Srv stash.osgconnect.net:1094
-      Srv stashcache.fnal.gov:1094
-      Srv redirector2.grid.iu.edu:2094
+[user@server ~]$ xrdmapc -r --list s redirector.osgstorage.org:1094
+0**** redirector.osgstorage.org:1094
       Srv ceph-gridftp1.grid.uchicago.edu:1094
+      Srv stashcache.fnal.gov:1094
+      Srv stash.osgconnect.net:1094
+      Srv origin.ligo.caltech.edu:1094
+      Srv csiu.grid.iu.edu:1094
 ```
 
-The output should list hostname of your service. If not, look for any signs of trouble in the log files
-or contact `support@opensciencegrid.org` for support.
+The output should list the hostname of your origin server.
 
+
+### Testing directory export
+
+To verify that the directories you are exporting are visible from the redirector,
+run the following command from the origin server:
+
+```console
+[user@server ~]$ xrdmapc -r --verify --list s redirector.osgstorage.org:1094 %RED%<exported dir>%ENDCOLOR%
+0*rv* redirector.osgstorage.org:1094
+  >+  Srv ceph-gridftp1.grid.uchicago.edu:1094
+   ?  Srv stashcache.fnal.gov:1094 [not authorized]
+  >+  Srv stash.osgconnect.net:1094
+   -  Srv origin.ligo.caltech.edu:1094
+   ?  Srv csiu.grid.iu.edu:1094 [connect error]
+```
+
+Your server should be marked with a `>+` to indicate that it contains the given path and the path was accessible.
+
+### Testing file access
+
+To verify that you can download a file from the origin server, use the `stashcp` tool.
 <!-- TODO: include an example for downloading via `stashcp` -->
