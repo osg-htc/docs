@@ -68,9 +68,8 @@ The most common lines to customize are:
 
 * `oss.localroot /stash`: Change the `localroot` to the location where your data is mounted on
   the origin server; default is `/stash`.
-* `all.export /`: A sub-directory within the `localroot` directory that will be exported.  Customize
-  if not all data within `localroot` should be exported; default is `/`.  If multiple directories must
-  be exported, you may specify `all.export` multiple times.
+* `all.export /<YOUR VO>`: A sub-directory within the `localroot` directory that will be exported.
+  If multiple directories must be exported, you may specify `all.export` multiple times.
 
 For example, if the HCC VO would like to set up an origin server exporting from the mountpoint `/mnt/bigdata`,
 but only export the subdirectories `/mnt/bigdata/hcc/bio/datasets` and `/mnt/bigdata/hcc/hep/generators`,
