@@ -13,12 +13,12 @@ Planning
 Installation
 ------------
 
--   [Install XRootD Server](install-xrootd): This page explains how to install an XRootD redirector and data nodes
+-   [Install XRootD Server](/data/xrootd/install-storage-element): This page explains how to install an XRootD redirector and data nodes
 
 Operations
 ----------
 
--   [Install XRootD client](install-xroot-client): Installing and using XRootD clients
+-   [Install XRootD client](/data/xrootd/install-client): Installing and using XRootD clients
 -   [XRootD bug reporting](https://github.com/xrootd/xrootd/issues)
 -   [Source code](https://github.com/xrootd/xrootd/)
 
