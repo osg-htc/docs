@@ -69,6 +69,10 @@ pages:
 - Release Information:
   - 'Release Note Overview': 'release/notes.md'
   - 3.4 Release Notes:
+    - 'OSG Release 3.4.18-2': 'release/3.4/release-3-4-18-2.md'
+    - 'OSG Release 3.4.18': 'release/3.4/release-3-4-18.md'
+    - 'OSG Release 3.4.17-3': 'release/3.4/release-3-4-17-3.md'
+    - 'OSG Release 3.4.17-2': 'release/3.4/release-3-4-17-2.md'
     - 'OSG Release 3.4.17': 'release/3.4/release-3-4-17.md'
     - 'OSG Release 3.4.16-2': 'release/3.4/release-3-4-16-2.md'
     - 'OSG Release 3.4.16': 'release/3.4/release-3-4-16.md'
@@ -117,5 +121,6 @@ pages:
 markdown_extensions:
   - admonition
   - codehilite
-  - toc(permalink=true)
+  - toc:
+     permalink: True
   - osg_markdown.colors

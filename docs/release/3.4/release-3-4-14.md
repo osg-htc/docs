@@ -1,7 +1,7 @@
 OSG Software Release 3.4.14
 ===========================
 
-**Release Date**: 2018-06-12
+**Release Date**: 2018-07-02
 
 Summary of changes
 ------------------
@@ -14,7 +14,7 @@ This release contains:
     -   RSV 3.19.7: works with Apache 2.4, fixed CA and CRL probes
     -   lcmaps-plugins-voms 1.7.1-1.6: fixes issues with llrun
     -   Gratia probes 1.20.3: improve performance with PBS/LSF batch systems
-    -   osg-pki-tools 3.0.0: [generate CSRs for CAs](https://opensciencegrid.org/docs/security/host-certs/#requesting-incommon-host-certificates)
+    -   osg-pki-tools 3.0.0: [generate CSRs for CAs](https://opensciencegrid.org/docs/security/host-certs/#requesting-incommon-igtf-host-certificates)
 
         !!! note
             The OSG CA has been retired

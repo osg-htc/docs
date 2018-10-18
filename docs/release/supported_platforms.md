@@ -1,7 +1,8 @@
 OSG Software Supported Operating Systems
 ==========================================
 
-The OSG Software 3.3 and 3.4 release series are supported on Red Hat Enterprise 6 and 7 for 64-bit (RHEL 6 and RHEL 7) and 32-bit (RHEL 6 only) Intel architectures.
+The OSG Software 3.4 release series is supported on Red Hat Enterprise 6 and 7 and compatible platforms,
+for 64-bit Intel architectures.
 
 OSG also supports select rebuilds of RHEL.  Specifically:
 
@@ -12,5 +13,10 @@ OSG also supports select rebuilds of RHEL.  Specifically:
 -   Scientific Linux 6
 -   Scientific Linux 7
 
-The OSG Software 3.1 and 3.2 release series also supported Red Hat Enterprise Linux 5, but neither 3.1 nor 3.2 are actively supported.
+OSG builds and tests its RPMs on the latest releases of the relevant platforms (e.g., in 2018, the RHEL 7 builds were based on RHEL 7.5).
+Older releases of the OS may not receive thorough testing and have subtle bugs; we may ask sites to update to the latest OS packages
+as part of the support process.
 
+The OSG Software 3.3 release series was supported on Red Hat Enterprise 6 (32-bit and 64-bit) and 7 (64-bit only) and compatible
+platforms.  Support for this release series (including security patches) ended in May 2018.  If you need help migrating from OSG 3.3,
+please contact support@opensciencegrid.org.

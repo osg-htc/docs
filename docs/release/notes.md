@@ -2,12 +2,17 @@ Release Notes
 =============
 
 !!! note
-    The 3.3 series was end-of-lifed in May 2018. Please [upgrade to the 3.4 series](/release/release_series/#updating-from-osg-31-32-33-to-34) at your earliest convenience.
+    The 3.3 series was [end-of-lifed in May 2018](https://opensciencegrid.org/technology/policy/release-series/#life-cycle-dates).
+    Please [upgrade to the 3.4 series](/release/release_series/#updating-from-osg-31-32-33-to-34) at your earliest convenience.
 
 ### OSG 3.4 ###
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.18-2](/release/3.4/release-3-4-18-2) | 2018-10-03 | VO Package v84                                                          |
+| [3.4.18](/release/3.4/release-3-4-18)     | 2018-09-27 | XRootD 4.8.4 + HTTP Patches, xrootd-lcmaps 1.4.1, xrootd-hdfs 2.1.3, HTCondor CE 3.1.4, CernVM-FS 2.5.1, Gratia probes 1.20.7, Pegasus 4.8.4, GlideinWMS 3.4, RSV 3.19.8, BLAHP 1.18.38 |
+| [3.4.17-3](/release/3.4/release-3-4-17-3) | 2018-09-26 | IGTF 1.93                                                               |
+| [3.4.17-2](/release/3.4/release-3-4-17-2) | 2018-09-13 | VO Package v83                                                          |
 | [3.4.17](/release/3.4/release-3-4-17)     | 2018-08-16 | Singularity 2.6.0, HTCondor 8.6.12, Pegasus 4.8.3, HTCondor-CE 3.1.3, xrootd-lcmaps 1.4.0; Upcoming: HTCondor 8.7.9 |
 | [3.4.16-2](/release/3.4/release-3-4-16-2) | 2018-08-08 | CILogon OpenID Certification Authority Certificate                      |
 | [3.4.16](/release/3.4/release-3-4-16)     | 2018-08-01 | Frontier Squid 3.5.27-5.1, XRootD 4.8.4, SciTokens 1.2.0                |
