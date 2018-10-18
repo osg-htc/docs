@@ -41,8 +41,8 @@ notAfter=Jan  4 21:08:09 2011 GMT
 
 If you are using OpenSSL 1.1, you may notice minor formatting differences.
 
-Requesting InCommon Host Certificates
--------------------------------------
+Requesting InCommon IGTF Host Certificates
+------------------------------------------
 
 Many institution in the United States already subscribe to InCommon and offer certificate services.
 If your institution is in the list of [InCommon subscribers](https://www.incommon.org/certificates/subscribers.html),
@@ -91,7 +91,7 @@ From a host that meets the above requirements, follow the instructions below to 
 
 1. Find your institution-specific InCommon contact
    (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/)),
-   submit the CSR that you generated above, and ask for the certificate to be signed by the InCommon IGTF CA.
+   submit the CSR that you generated above, and request a 1-year `IGTF Server Certificate` for `OTHER` server software.
 1. After the certificate has been issued by your institution, download it on its intended host and copy over the key you
 generated above.
 1. Verify that the issuer `CN` field is ` InCommon IGTF Server CA`:
@@ -149,12 +149,70 @@ Before the host certificate expires, you can renew it with the following command
 root@host # certbot renew
 ```
 
-To automate renewal monthly with a cron job; for example you can create `/etc/cron.d/certbot-renew` with the following
+To automate the renewal process, you need to choose between using a cron job (SL6 and SL7 hosts) and a systemd timer
+(SL7 hosts only).
+The two sections below outline both methods for automatically renewing your certificate.
+
+
+#### Automating renewals using cron
+
+To automate a monthly renewal with a cron job; you can create `/etc/cron.d/certbot-renew` with the following
 contents:
 
 ``` console
 * * 1 * * root certbot renew
 ```
+
+#### Automating renewals using systemd timers
+
+To automate a monthly  renewal using systemd, you'll need to create two files.
+The first is a service file that tells systemd how to invoke certbot.
+The second is to generate a timer file that tells systemd how often to run the service.
+The steps to setup the timer are as follows:
+
+1. Create a service file called `/etc/systemd/system/certbot.service` with the following contents
+
+        :::file
+        [Unit]
+        Description=Let's Encrypt renewal
+
+        [Service]
+        Type=oneshot
+        ExecStart=/usr/bin/certbot renew --quiet --agree-tos
+
+1. Once the certbot service is working correctly, you will need to create the timer file.
+   Create the timer file at `/etc/systemd/system/certbot.timer`) with the following contents:
+
+        :::file
+        [Unit]
+        Description=Twice daily renewal of Let's Encrypt's certificates
+
+        [Timer]
+        OnCalendar=0/12:00:00
+        RandomizedDelaySec=1h
+        Persistent=true
+
+        [Install]
+        WantedBy=timers.target
+
+1. Update the systemd manager configuration:
+
+        :::console
+        root@host # systemctl daemon-reload
+
+1. Start and enable the certbot service and timer:
+
+        :::console
+        root@host # systemctl start certbot.service
+        root@host # systemctl enable certbot.service
+        root@host # systemctl start certbot.timer
+        root@host # systemctl enable certbot.timer
+
+You can verify that the timer is active by running `systemctl list-timers`.
+
+!!! note
+    Verify that the service has started correctly by running `systemctl status certbot.service`. The timer may fail 
+    without warnings if the service does not run correctly.
 
 Requesting Service Certificates
 -------------------------------

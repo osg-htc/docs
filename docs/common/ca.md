@@ -95,14 +95,11 @@ root@host # yum install empty-ca-certs –-enablerepo=osg-empty
 
 ### Installing other CAs ###
 
-!!! warning
-    The `cilogon-openid` CA is only distributed in OSG 3.3.  Support will be removed by March 2018.
-
 In addition to the above CAs, you can install other CAs via RPM. These only work with the RPMs that provide CAs (that is, `osg-ca-certs` and the like, but not `osg-ca-scripts`.) They are in addition to the above RPMs, so do not only install these extra CAs.
 
-| **Set of CAs** | **RPM name**     | **Installation command (as root)** |
-|:---------------|:-----------------|:-----------------------------------|
-| cilogon-openid | cilogon-ca-certs | `yum install cilogon-ca-certs`     |
+| **Set of CAs** | **RPM name**           | **Installation command (as root)**   |
+|:---------------|:-----------------------|:-------------------------------------|
+| [cilogon-openid](https://ca.cilogon.org/policy/openid) | cilogon-openid-ca-cert | `yum install cilogon-openid-ca-cert` |
 
 Verifying CA Certificates
 -------------------------

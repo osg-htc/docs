@@ -43,10 +43,10 @@ pages:
     - 'Using XRootD': 'data/install-xroot-client.md'
   - 'StashCache': 
     - 'StashCache Overview': 'data/stashcache/overview.md'
-    - 'Intstall Cache': 'data/stashcache/install-cache.md'
+    - 'Install Cache': 'data/stashcache/install-cache.md'
     - 'Install Origin': 'data/stashcache/install-origin.md'
 - Security:
-  - 'LCMAPS-VOMS authentication': 'security/lcmaps-voms-authentication.md'
+  - 'LCMAPS VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host Certificates': 'security/host-certs.md'
   - 'User Certificates': 'security/user-certs.md'
   - 'Certificate Management Reference': 'security/certificate-management.md'
@@ -65,6 +65,12 @@ pages:
 - Release Information:
   - 'Release Note Overview': 'release/notes.md'
   - 3.4 Release Notes:
+    - 'OSG Release 3.4.18-2': 'release/3.4/release-3-4-18-2.md'
+    - 'OSG Release 3.4.18': 'release/3.4/release-3-4-18.md'
+    - 'OSG Release 3.4.17-3': 'release/3.4/release-3-4-17-3.md'
+    - 'OSG Release 3.4.17-2': 'release/3.4/release-3-4-17-2.md'
+    - 'OSG Release 3.4.17': 'release/3.4/release-3-4-17.md'
+    - 'OSG Release 3.4.16-2': 'release/3.4/release-3-4-16-2.md'
     - 'OSG Release 3.4.16': 'release/3.4/release-3-4-16.md'
     - 'OSG Release 3.4.15': 'release/3.4/release-3-4-15.md'
     - 'OSG Release 3.4.14-2': 'release/3.4/release-3-4-14-2.md'
@@ -111,5 +117,6 @@ pages:
 markdown_extensions:
   - admonition
   - codehilite
-  - toc(permalink=true)
+  - toc:
+     permalink: True
   - osg_markdown.colors

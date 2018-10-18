@@ -80,10 +80,9 @@ To configure the Frontier Squid service itself:
 1.  Follow the
     [Configuration section of the upstream Frontier Squid documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Configuration).
 2.  Enable, start, and test the service (as described below).
-3.  Enable WLCG monitoring as described in the
-    [upstream documentation on enabling monitoring](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring)
-    and
-    [register the squid in OIM](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#OIM).
+3.  [Register the squid](#registering-frontier-squid).
+4.  If your site is part of the WLCG, enable WLCG monitoring as described in the
+    [upstream documentation on enabling monitoring](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring).
 
 !!! Note
     An important difference between the standard Squid software and
@@ -142,6 +141,38 @@ to try to see what's wrong.
 If your squid will be supporting the Frontier application, it is also
 good to do the test in the
 [upstream documentation Testing the installation section](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Testing_the_installation).
+
+## Registering Frontier Squid
+
+See the [registration doc](/common/registration#new-registrations) for instructions on registering a new resource.
+See the instructions for [updating existing registrations](/common/registration#updating-existing-registrations)
+if you are adding the squid service to an existing resource or resource group.
+
+Additionally:
+
+1.  Add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
+    This is a partial example:
+
+        :::console
+        ...
+        FQDN: fully.qualified.DNS.name.of.your.server(s)
+        Services:
+          Squid:
+            Description: Generic squid service
+        ...
+
+    See the [BNL-ATLAS](https://github.com/opensciencegrid/topology/blob/master/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml) Squid resource for a complete example.
+
+    If you have more than one server providing the same squid service,
+    it is best to register them with one FQDN that is a round-robin DNS
+    entry listing all the squids, instead of registering them separately.
+
+2.  If you are setting up a new resource, set `Active: false`.
+    Only set `Active: true` for a resource when it is accepting requests and ready for production.
+
+If you are running a WLCG site, a few hours after a squid is registered
+and marked Active
+[verify that it is monitored by WLCG](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#Verify_monitor).
 
 ## Reference
 

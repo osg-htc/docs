@@ -201,7 +201,7 @@ Once the repository is fully replicated on the OSG, the VO may proceed in publis
     [maintaining repositories](http://cernvm.cern.ch/portal/filesystem/maintain-repositories) and
     [content limitations](http://cernvm.cern.ch/portal/filesystem/repository-limits).
 
-If the repository ends in `.opensciencegrid.org`, the VO may ask for it to be replicated outside the US.  The
+If the repository ends in `.opensciencegrid.org` or `.osgstorage.org`, the VO may ask for it to be replicated outside the US.  The
 VO should open a GGUS ticket following EGI's [PROC20](https://wiki.egi.eu/wiki/PROC20).
 
 Replacing an Existing OASIS Repository Server

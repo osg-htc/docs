@@ -308,59 +308,71 @@ and make sure it matches one of the patterns in `/etc/grid-security/voms-mapfile
 Troubleshooting the LCMAPS VOMS Plugin
 --------------------------------------
 
-LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity of the logging can be increased by modifying the appropriate configuration and restarting the service:
+LCMAPS logs to `journalctl` (EL7) or `/var/log/messages` (EL6) and the verbosity of the logging can be increased by
+modifying the appropriate configuration and restarting the relevant service.
+This section outlines the configuration necessary to raise the debug level for the different hosts that can use LCMAPS
+VOMS authentication as well as common LCMAPS VOMS authentication issues.
 
-- **If you are troubleshooting an HTCondor-CE or GridFTP host...**
+### HTCondor-CE hosts ###
 
-    1.  Use the table below to choose the appropriate file to edit:
+If you are troubleshooting an HTCondor-CE host, follow these instructions to raise the LCMAPS debug level:
 
-        | If your host is a(n)... | Edit this file...                      |
-        |:------------------------|:---------------------------------------|
-        | HTCondor-CE             | `/etc/sysconfig/condor-ce`             |
-        | GridFTP server          | `/etc/sysconfig/globus-gridftp-server` |
+1. Add the following text to `/etc/sysconfig/condor-ce`:
 
-    1. Add the following to the file chosen in the previous step:
+        :::bash
+        export LCMAPS_DEBUG_LEVEL=5
+        # optional (uncomment the following line to output log messages to a file):
+        # export LCMAPS_LOG_FILE=/tmp/lcmaps.log
 
-            :::bash
-            export LCMAPS_DEBUG_LEVEL=5
-            # optional (uncomment the following line to output log messages to a file):
-            # export LCMAPS_LOG_FILE=/tmp/lcmaps.log
+1. Disable HTCondor-CE authentication caches by creating `/etc/condor-ce/config.d/99-disablegsicache.conf` with the
+   following contents:
 
-    1. Restart the [condor-ce](/compute-element/install-htcondor-ce#managing-htcondor-ce-and-associated-services) or 
-       [globus-gridftp-server](/data/gridftp#managing-gridftp) service.
+        GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION = 0
 
-- **If you are troubleshooting an XRootD host...**
+1. Restart the [condor-ce](/compute-element/install-htcondor-ce#managing-htcondor-ce-and-associated-services) service
 
-    1. Choose the configuration file to edit based on the following table:
+!!! tip
+    After you've completed troubleshooting, remember to revert the changes above and restart services!
 
-        | If you are running XRootD in... | Then modify the following file...   |
-        |:--------------------------------|:------------------------------------|
-        | Standalone mode                 | `/etc/xrootd/xrootd-standalone.cfg` |
-        | Clustered mode                  | `/etc/xrootd/xrootd-clustered.cfg`  |
+### XRootD hosts ###
 
-    1. Set `--loglevel,5` under the `-authzfunparms` of the `sec.protocol /usr/lib64 gsi` line. For example:
-    
-            sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
-                        -cert:/etc/grid-security/xrootd/xrootdcert.pem \
-                        -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
-                        -authzfun:libXrdLcmaps.so -authzfunparms:%RED%--loglevel,5%ENDCOLOR% \
-                        -gmapopt:10 -gmapto:0
+If you are troubleshooting an XRootD host, follow these instructions to raise the LCMAPS debug level:
 
-    1. Restart the [xrootd](/data/install-xrootd#managing-xrootd-services) service
+1. Choose the configuration file to edit based on the following table:
 
-### Troubleshooting mapping with HTCondor-CE
+    | If you are running XRootD in... | Then modify the following file...   |
+    |:--------------------------------|:------------------------------------|
+    | Standalone mode                 | `/etc/xrootd/xrootd-standalone.cfg` |
+    | Clustered mode                  | `/etc/xrootd/xrootd-clustered.cfg`  |
 
-HTCondor-CE caches auth lookups for 30 minutes by default. If you are testing changes to your various mapfiles with HTCondor-CE, you will need to disable this caching.
+1. Set `--loglevel,5` under the `-authzfunparms` of the `sec.protocol /usr/lib64 gsi` line. For example:
 
-To do this, create a file in `/etc/condor-ce/config.d` called e.g. `99-disablegsicache.conf` with the following line:
+        sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
+                    -cert:/etc/grid-security/xrootd/xrootdcert.pem \
+                    -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
+                    -authzfun:libXrdLcmaps.so -authzfunparms:%RED%--loglevel,5%ENDCOLOR% \
+                    -gmapopt:10 -gmapto:0
 
-```
-GSS_ASSIST_GRIDMAP_CACHE_EXPIRATION=0
-```
+1. Restart the [xrootd](/data/install-xrootd#managing-xrootd-services) service
 
-and then restart `condor-ce`.
+!!! tip
+    After you've completed troubleshooting, remember to revert the changes above and restart services!
 
-Once you are satisfied that your mappings are working, you may remove this file and restart `condor-ce` in order to reduce the load on your CE caused by authentication.
+### GridFTP hosts ###
+
+If you are troubleshooting a GridFTP host, follow these instructions to raise the LCMAPS debug level:
+
+1. Add the following text to `/etc/sysconfig/globus-gridftp-server`:
+
+        :::bash
+        export LCMAPS_DEBUG_LEVEL=5
+        # optional (uncomment the following line to output log messages to a file):
+        # export LCMAPS_LOG_FILE=/tmp/lcmaps.log
+
+1. Restart the [globus-gridftp-server](/data/gridftp#managing-gridftp) service.
+
+!!! tip
+    After you've completed troubleshooting, remember to revert the changes above and restart services!
 
 ### Common issues
 

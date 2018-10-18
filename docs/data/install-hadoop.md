@@ -20,7 +20,7 @@ Before starting the installation process, consider the following points (consult
     as well as `hadoop` and `mapred` on the NameNodes
 -   **Firewall:** In the OSG, HDFS is intended to run as an internal service without any direct, external access to any of the nodes.
     For more information on the ports used for communication between the various HDFS nodes, see the 
-    [Cloudera documentation](https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_ports_cdh5.html).
+    [Cloudera documentation](https://www.cloudera.com/documentation/cdh/5-0-x/CDH5-Installation-Guide/cdh5ig_ports_cdh5.html).
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 

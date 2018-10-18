@@ -18,6 +18,8 @@ Installation
 
 ### Client Site Installation 
 
+!!! warning
+    Note that BWCTL is [deprecated](http://docs.perfsonar.net/manage_update.html?highlight=bwctl#bwctl-support)
 
 The Network Performance Toolkit is installed with the OSG Client. Specifically, the tools included are: BWCTL, NDT and OWAMP (bwctl-client, bwctl-server, bwctl, ndt, owamp-client). NPAD is currently not in OSG client.
 
@@ -143,5 +145,4 @@ References
 ----------
 
 * [One Way Active Measurement Protocol (OWAMP)](http://docs.perfsonar.net/config_owamp.html)
-* [Bandwidth Control tool (BWCTL)](http://docs.perfsonar.net/config_bwctl.html)
 * [OSG/WLCG pages on perfSONAR](https://opensciencegrid.org/networking/perfsonar/installation/).
