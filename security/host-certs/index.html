@@ -1972,11 +1972,11 @@ another IGTF CA subscription, please <a href="../../common/help/">contact us</a>
 </li>
 <li>
 <p>Generate a Certificate Signing Request (CSR) and private key using the <code>osg-cert-request</code> tool:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-cert-request --hostname <span class="p">&amp;</span>lt<span class="p">;</span>HOSTNAME<span class="p">&amp;</span>gt<span class="p">;</span> <span class="se">\</span>
-             --country <span class="p">&amp;</span>lt<span class="p">;</span>COUNTRY<span class="p">&amp;</span>gt<span class="p">;</span> <span class="se">\</span>
-             --state <span class="p">&amp;</span>lt<span class="p">;</span>STATE<span class="p">&amp;</span>gt<span class="p">;</span> <span class="se">\</span>
-             --locality <span class="p">&amp;</span>lt<span class="p">;</span>LOCALITY<span class="p">&amp;</span>gt<span class="p">;</span> <span class="se">\</span>
-             --organization <span class="p">&amp;</span>lt<span class="p">;</span>ORGANIZATION<span class="p">&amp;</span>gt<span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-cert-request --hostname &lt;HOSTNAME&gt; <span class="se">\</span>
+             --country &lt;COUNTRY&gt; <span class="se">\</span>
+             --state &lt;STATE&gt; <span class="se">\</span>
+             --locality &lt;LOCALITY&gt; <span class="se">\</span>
+             --organization &lt;ORGANIZATION&gt;
 </pre></div>
 
 
@@ -2006,7 +2006,7 @@ Additional options and descriptions can be found <a href="https://github.com/ope
 generated above.</li>
 <li>
 <p>Verify that the issuer <code>CN</code> field is <code>InCommon IGTF Server CA</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">$</span> openssl x509 -in <span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>PATH TO CERTIFICATE<span class="p">&amp;</span>gt<span class="p">;</span></span> -noout -issuer
+<div class="codehilite"><pre><span></span><span class="gp">$</span> openssl x509 -in <span style="color:red">&lt;PATH TO CERTIFICATE&gt;</span> -noout -issuer
 <span class="go">issuer= /C=US/O=Internet2/OU=InCommon/CN=InCommon IGTF Server CA</span>
 </pre></div>
 
@@ -2014,9 +2014,9 @@ generated above.</li>
 </li>
 <li>
 <p>Install the host certificate and key:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp <span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>PATH TO CERTIFICATE<span class="p">&amp;</span>gt<span class="p">;</span></span> /etc/grid-security/hostcert.pem
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp <span style="color:red">&lt;PATH TO CERTIFICATE&gt;</span> /etc/grid-security/hostcert.pem
 <span class="gp">root@host #</span> chmod <span class="m">444</span> /etc/grid-security/hostcert.pem
-<span class="gp">root@host #</span> cp <span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>PATH TO KEY<span class="p">&amp;</span>gt<span class="p">;</span></span> /etc/grid-security/hostkey.pem
+<span class="gp">root@host #</span> cp <span style="color:red">&lt;PATH TO KEY&gt;</span> /etc/grid-security/hostkey.pem
 <span class="gp">root@host #</span> chmod <span class="m">400</span> /etc/grid-security/hostkey.pem
 </pre></div>
 
@@ -2046,7 +2046,7 @@ an InCommon subscription.</p>
 </li>
 <li>
 <p>Run the following command to obtain the host certificate with Let's Encrypt:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> certbot certonly --standalone --email <span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>ADMIN_EMAIL<span class="p">&amp;</span>gt<span class="p">;</span></span> -d <span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>HOST<span class="p">&amp;</span>gt<span class="p">;</span></span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> certbot certonly --standalone --email <span style="color:red">&lt;ADMIN_EMAIL&gt;</span> -d <span style="color:red">&lt;HOST&gt;</span>
 </pre></div>
 
 

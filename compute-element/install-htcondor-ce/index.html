@@ -2266,7 +2266,7 @@ To simplify installation, OSG provides convenience RPMs that install all require
 </li>
 <li>
 <p>Install the CE software:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install <span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>PACKAGE<span class="p">&amp;</span>gt<span class="p">;</span></span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install <span style="color:red">&lt;PACKAGE&gt;</span>
 </pre></div>
 
 
@@ -2424,7 +2424,7 @@ configuring them in unison.</p>
 <li>
 <p><strong>To change the default limit</strong> on the number of locally run jobs (the current default is 20), add the following to
   <code>/etc/condor-ce/config.d/99-local.conf</code>:</p>
-<div class="codehilite"><pre><span></span><span class="nv">START_LOCAL_UNIVERSE</span> <span class="o">=</span> TotalLocalJobsRunning + TotalSchedulerJobsRunning <span class="p">&amp;</span>lt<span class="p">;</span> <span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>JOB-LIMIT<span class="p">&amp;</span>gt<span class="p">;</span></span>
+<div class="codehilite"><pre><span></span><span class="nv">START_LOCAL_UNIVERSE</span> <span class="o">=</span> TotalLocalJobsRunning + TotalSchedulerJobsRunning &lt; <span style="color:red">&lt;JOB-LIMIT&gt;</span>
 <span class="nv">START_SCHEDULER_UNIVERSE</span> <span class="o">=</span> <span class="k">$(</span>START_LOCAL_UNIVERSE<span class="k">)</span>
 </pre></div>
 
@@ -2433,7 +2433,7 @@ configuring them in unison.</p>
 <li>
 <p><strong>To only allow a specific user</strong> to start locally run jobs, add the following to
   <code>/etc/condor-ce/config.d/99-local.conf</code>:</p>
-<div class="codehilite"><pre><span></span><span class="nv">START_LOCAL_UNIVERSE</span> <span class="o">=</span> target.Owner <span class="o">=</span>?<span class="o">=</span> <span class="s2">&quot;<span style="color:red">&amp;lt;USERNAME&amp;gt;</span>&quot;</span>
+<div class="codehilite"><pre><span></span><span class="nv">START_LOCAL_UNIVERSE</span> <span class="o">=</span> target.Owner <span class="o">=</span>?<span class="o">=</span> <span class="s2">&quot;<span style="color:red">&lt;USERNAME&gt;</span>&quot;</span>
 <span class="nv">START_SCHEDULER_UNIVERSE</span> <span class="o">=</span> <span class="k">$(</span>START_LOCAL_UNIVERSE<span class="k">)</span>
 </pre></div>
 

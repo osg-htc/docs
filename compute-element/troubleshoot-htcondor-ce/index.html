@@ -3425,14 +3425,14 @@ The methods for finding the resultant job ID differs between batch systems.</p>
 <ul>
 <li>
 <p>Use <code>condor_ce_q</code> if the job is still in the CE’s queue:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_ce_q <span class="p">&amp;</span>lt<span class="p">;</span>JOB-ID<span class="p">&amp;</span>gt<span class="p">;</span> -af RoutedToJobId
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_ce_q &lt;JOB-ID&gt; -af RoutedToJobId
 </pre></div>
 
 
 </li>
 <li>
 <p>Use <code>condor_ce_history</code> if the job has left the CE’s queue:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_ce_history <span class="p">&amp;</span>lt<span class="p">;</span>JOB-ID<span class="p">&amp;</span>gt<span class="p">;</span> -af RoutedToJobId
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_ce_history &lt;JOB-ID&gt; -af RoutedToJobId
 </pre></div>
 
 
@@ -3453,7 +3453,7 @@ ID&gt;</code>:</p>
 <ol>
 <li>
 <p>To inspect the CE’s job ad, use <a href="#condor_ce_q">condor_ce_q</a>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_ce_q <span class="p">&amp;</span>lt<span class="p">;</span>JOB-ID<span class="p">&amp;</span>gt<span class="p">;</span> -af GridJobId
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_ce_q &lt;JOB-ID&gt; -af GridJobId
 </pre></div>
 
 
@@ -3469,7 +3469,7 @@ Therefore, to remove misbehaving jobs, they will need to be removed on the CE le
 <li>Identify the misbehaving job ID in your batch system queue</li>
 <li>
 <p>Find the job's corresponding CE job ID:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_q <span class="p">&amp;</span>lt<span class="p">;</span>JOB-ID<span class="p">&amp;</span>gt<span class="p">;</span> -af RoutedFromJobId
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_q &lt;JOB-ID&gt; -af RoutedFromJobId
 </pre></div>
 
 
@@ -3653,7 +3653,7 @@ SCHEDD_DEBUG = D_FULLDEBUG D_CAT
 <p><strong>If there are issues with contacting the collector:</strong> You will see the following message:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_ce_q -pool ce1.accre.vanderbilt.edu -name ce1.accre.vanderbilt.edu
 
-<span class="go">-- Failed to fetch ads from: &amp;lt;129.59.197.223:9620?sock`33630_8b33_4&amp;gt; : ce1.accre.vanderbilt.edu</span>
+<span class="go">-- Failed to fetch ads from: &lt;129.59.197.223:9620?sock`33630_8b33_4&gt; : ce1.accre.vanderbilt.edu</span>
 </pre></div>
 
 
@@ -3667,7 +3667,7 @@ SCHEDD_DEBUG = D_FULLDEBUG D_CAT
 </li>
 <li>
 <p><strong>If a job is held:</strong> There should be an accompanying <code>HoldReason</code> that will tell you why it is being held. The <code>HoldReason</code> is in the job’s ClassAd, so you can use the long form of <code>condor_ce_q</code> to extract its value:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_ce_q -name condorce.example.com -pool condorce.example.com:9619 -l <span class="p">&amp;</span>lt<span class="p">;</span>Job ID<span class="p">&amp;</span>gt<span class="p">;</span> <span class="p">|</span> grep HoldReason
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> condor_ce_q -name condorce.example.com -pool condorce.example.com:9619 -l &lt;Job ID&gt; <span class="p">|</span> grep HoldReason
 </pre></div>
 
 
@@ -3737,17 +3737,17 @@ Route Matches: Condor_Test
 
 
 <p>To troubleshoot why this is occuring, look at the combined Requirements expressions for all routes and compare it to the job’s ClassAd provided. The combined Requirements expression is <span style="color:red">highlighted below</span>:</p>
-<div class="codehilite"><pre><span></span><span class="nt">Umbrella</span> <span class="nt">constraint</span><span class="o">:</span> <span class="o">((</span><span class="nt">target</span><span class="p">.</span><span class="nc">x509userproxysubject</span> <span class="o">=!=</span> <span class="nt">UNDEFINED</span><span class="o">)</span> <span class="o">&amp;</span><span class="nt">amp</span><span class="o">;&amp;</span><span class="nt">amp</span><span class="o">;</span>
-<span class="o">(</span><span class="nt">target</span><span class="p">.</span><span class="nc">x509UserProxyExpiration</span> <span class="o">=!=</span> <span class="nt">UNDEFINED</span><span class="o">)</span> <span class="o">&amp;</span><span class="nt">amp</span><span class="o">;&amp;</span><span class="nt">amp</span><span class="o">;</span>
-<span class="o">(</span><span class="nt">time</span><span class="o">()</span> <span class="o">&amp;</span><span class="nt">lt</span><span class="o">;</span> <span class="nt">target</span><span class="p">.</span><span class="nc">x509UserProxyExpiration</span><span class="o">)</span> <span class="o">&amp;</span><span class="nt">amp</span><span class="o">;&amp;</span><span class="nt">amp</span><span class="o">;</span>
-<span class="o">(</span><span class="nt">target</span><span class="p">.</span><span class="nc">JobUniverse</span> <span class="o">=?=</span> <span class="nt">5</span> <span class="o">||</span> <span class="nt">target</span><span class="p">.</span><span class="nc">JobUniverse</span> <span class="o">=?=</span> <span class="nt">1</span><span class="o">))</span> <span class="o">&amp;</span><span class="nt">amp</span><span class="o">;&amp;</span><span class="nt">amp</span><span class="o">;</span>
-<span class="o">%</span><span class="nt">RED</span><span class="o">%(</span> <span class="o">(</span><span class="nt">target</span><span class="p">.</span><span class="nc">osgTestPBS</span> <span class="nt">is</span> <span class="nt">true</span><span class="o">)</span> <span class="o">||</span> <span class="o">(</span><span class="nt">true</span><span class="o">)</span> <span class="o">)%</span><span class="nt">ENDCOLOR</span><span class="o">%</span> <span class="o">&amp;</span><span class="nt">amp</span><span class="o">;&amp;</span><span class="nt">amp</span><span class="o">;</span>
-<span class="o">(</span><span class="nt">target</span><span class="p">.</span><span class="nc">ProcId</span> <span class="o">&amp;</span><span class="nt">gt</span><span class="o">;=</span> <span class="nt">0</span> <span class="o">&amp;</span><span class="nt">amp</span><span class="o">;&amp;</span><span class="nt">amp</span><span class="o">;</span> <span class="nt">target</span><span class="p">.</span><span class="nc">JobStatus</span> <span class="o">==</span> <span class="nt">1</span> <span class="o">&amp;</span><span class="nt">amp</span><span class="o">;&amp;</span><span class="nt">amp</span><span class="o">;</span>
-<span class="o">(</span><span class="nt">target</span><span class="p">.</span><span class="nc">StageInStart</span> <span class="nt">is</span> <span class="nt">undefined</span> <span class="o">||</span> <span class="nt">target</span><span class="p">.</span><span class="nc">StageInFinish</span> <span class="nt">isnt</span> <span class="nt">undefined</span><span class="o">)</span> <span class="o">&amp;</span><span class="nt">amp</span><span class="o">;&amp;</span><span class="nt">amp</span><span class="o">;</span>
-<span class="nt">target</span><span class="p">.</span><span class="nc">Managed</span> <span class="nt">isnt</span> <span class="s2">&quot;ScheddDone&quot;</span> <span class="o">&amp;</span><span class="nt">amp</span><span class="o">;&amp;</span><span class="nt">amp</span><span class="o">;</span>
-<span class="nt">target</span><span class="p">.</span><span class="nc">Managed</span> <span class="nt">isnt</span> <span class="s2">&quot;Extenal&quot;</span> <span class="o">&amp;</span><span class="nt">amp</span><span class="o">;&amp;</span><span class="nt">amp</span><span class="o">;</span>
-<span class="nt">target</span><span class="p">.</span><span class="nc">Owner</span> <span class="nt">isnt</span> <span class="nt">Undefined</span> <span class="o">&amp;</span><span class="nt">amp</span><span class="o">;&amp;</span><span class="nt">amp</span><span class="o">;</span>
-<span class="nt">target</span><span class="p">.</span><span class="nc">RoutedBy</span> <span class="nt">isnt</span> <span class="s2">&quot;htcondor-ce&quot;</span><span class="o">)</span>
+<div class="codehilite"><pre><span></span>Umbrella constraint: ((target.x509userproxysubject =!= UNDEFINED) &amp;&amp;
+(target.x509UserProxyExpiration =!= UNDEFINED) &amp;&amp;
+(time() &lt; target.x509UserProxyExpiration) &amp;&amp;
+(target.JobUniverse =?= 5 || target.JobUniverse =?= 1)) &amp;&amp;
+<span style="color:red">( (target.osgTestPBS is true) || (true) )</span> &amp;&amp;
+(target.ProcId &gt;= 0 &amp;&amp; target.JobStatus == 1 &amp;&amp;
+(target.StageInStart is undefined || target.StageInFinish isnt undefined) &amp;&amp;
+target.Managed isnt &quot;ScheddDone&quot; &amp;&amp;
+target.Managed isnt &quot;Extenal&quot; &amp;&amp;
+target.Owner isnt Undefined &amp;&amp;
+target.RoutedBy isnt &quot;htcondor-ce&quot;)
 </pre></div>
 
 
@@ -3927,9 +3927,9 @@ It contains valuable information when trying to troubleshoot authentication issu
 </li>
 <li>
 <p>Job owner is authorized and mapped:</p>
-<div class="codehilite"><pre><span></span><span class="nt">10</span><span class="o">/</span><span class="nt">07</span><span class="o">/</span><span class="nt">14</span> <span class="nt">16</span><span class="p">:</span><span class="nd">52</span><span class="p">:</span><span class="nd">17</span> <span class="nt">Command</span><span class="o">=</span><span class="nt">QMGMT_WRITE_CMD</span><span class="o">,</span> <span class="nt">peer</span><span class="o">=&amp;</span><span class="nt">lt</span><span class="o">;</span><span class="nt">131</span><span class="p">.</span><span class="nc">225</span><span class="p">.</span><span class="nc">154</span><span class="p">.</span><span class="nc">68</span><span class="p">:</span><span class="nd">42262</span><span class="o">&amp;</span><span class="nt">gt</span><span class="o">;</span>
-<span class="nt">10</span><span class="o">/</span><span class="nt">07</span><span class="o">/</span><span class="nt">14</span> <span class="nt">16</span><span class="p">:</span><span class="nd">52</span><span class="p">:</span><span class="nd">17</span> <span class="nt">AuthMethod</span><span class="o">=</span><span class="nt">GSI</span><span class="o">,</span> <span class="nt">AuthId</span><span class="o">=/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">com</span><span class="o">/</span><span class="nt">DC</span><span class="o">=</span><span class="nt">DigiCert-Grid</span><span class="o">/</span><span class="nt">O</span><span class="o">=</span><span class="nt">Open</span> <span class="nt">Science</span> <span class="nt">Grid</span><span class="o">/</span><span class="nt">OU</span><span class="o">=</span><span class="nt">People</span><span class="o">/</span><span class="nt">CN</span><span class="o">=</span><span class="nt">Brian</span> <span class="nt">Lin</span> <span class="nt">1047</span><span class="o">,</span>
-                  <span class="o">/</span><span class="nt">GLOW</span><span class="o">/</span><span class="nt">Role</span><span class="o">=</span><span class="nt">NULL</span><span class="o">/</span><span class="nt">Capability</span><span class="o">=</span><span class="nt">NULL</span><span class="o">,</span> <span class="o">&amp;</span><span class="nt">lt</span><span class="o">;</span><span class="nt">CondorId</span><span class="o">=</span><span class="nt">glow</span><span class="p">@</span><span class="k">users</span><span class="p">.</span><span class="nc">opensciencegrid</span><span class="p">.</span><span class="nc">org</span><span class="o">&amp;</span><span class="nt">gt</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span>10/07/14 16:52:17 Command=QMGMT_WRITE_CMD, peer=&lt;131.225.154.68:42262&gt;
+10/07/14 16:52:17 AuthMethod=GSI, AuthId=/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=People/CN=Brian Lin 1047,
+                  /GLOW/Role=NULL/Capability=NULL, &lt;CondorId=glow@users.opensciencegrid.org&gt;
 </pre></div>
 
 
@@ -3943,7 +3943,7 @@ It contains valuable information when trying to troubleshoot authentication issu
                   authenticate because the remote (client) side was not able to acquire its
                   credentials.|AUTHENTICATE:1004:Failed to authenticate using FS|FS:1004:Unable to
                   lstat(/tmp/FS_XXXZpUlYa)
-08/30/16 16:53:12 PERMISSION DENIED to &amp;lt;gsi@unmapped&amp;gt;
+08/30/16 16:53:12 PERMISSION DENIED to &lt;gsi@unmapped&gt;
                   from host 72.33.0.189 for command 60021 (DC_NOP_WRITE), access level WRITE:
                   reason: WRITE authorization policy contains no matching ALLOW entry for this
                   request; identifiers used for this host:
@@ -3969,14 +3969,14 @@ It contains valuable information when trying to troubleshoot authentication issu
 </li>
 <li>
 <p>Corrupted <code>job_queue.log</code>:</p>
-<div class="codehilite"><pre><span></span><span class="nt">02</span><span class="o">/</span><span class="nt">07</span><span class="o">/</span><span class="nt">17</span> <span class="nt">10</span><span class="p">:</span><span class="nd">55</span><span class="p">:</span><span class="nd">49</span> <span class="nt">WARNING</span><span class="o">:</span> <span class="nt">Encountered</span> <span class="nt">corrupt</span> <span class="nt">log</span> <span class="nt">record</span> <span class="nt">_654</span> <span class="o">(</span><span class="nt">byte</span> <span class="nt">offset</span> <span class="nt">5046225</span><span class="o">)</span>
-<span class="nt">02</span><span class="o">/</span><span class="nt">07</span><span class="o">/</span><span class="nt">17</span> <span class="nt">10</span><span class="p">:</span><span class="nd">55</span><span class="p">:</span><span class="nd">49</span> <span class="nt">103</span> <span class="nt">1354325</span><span class="p">.</span><span class="nc">0</span> <span class="nt">PeriodicRemove</span> <span class="o">(</span> <span class="nt">StageInFinish</span> <span class="o">&amp;</span><span class="nt">gt</span><span class="o">;</span> <span class="nt">0</span> <span class="o">)</span> <span class="nt">105</span>
-<span class="nt">02</span><span class="o">/</span><span class="nt">07</span><span class="o">/</span><span class="nt">17</span> <span class="nt">10</span><span class="p">:</span><span class="nd">55</span><span class="p">:</span><span class="nd">49</span> <span class="nt">Lines</span> <span class="nt">following</span> <span class="nt">corrupt</span> <span class="nt">log</span> <span class="nt">record</span> <span class="nt">_654</span> <span class="o">(</span><span class="nt">up</span> <span class="nt">to</span> <span class="nt">3</span><span class="o">):</span>
-<span class="nt">02</span><span class="o">/</span><span class="nt">07</span><span class="o">/</span><span class="nt">17</span> <span class="nt">10</span><span class="p">:</span><span class="nd">55</span><span class="p">:</span><span class="nd">49</span> <span class="nt">103</span> <span class="nt">1346101</span><span class="p">.</span><span class="nc">0</span> <span class="nt">RemoteWallClockTime</span> <span class="nt">116668</span><span class="p">.</span><span class="nc">000000</span>
-<span class="nt">02</span><span class="o">/</span><span class="nt">07</span><span class="o">/</span><span class="nt">17</span> <span class="nt">10</span><span class="p">:</span><span class="nd">55</span><span class="p">:</span><span class="nd">49</span> <span class="nt">104</span> <span class="nt">1346101</span><span class="p">.</span><span class="nc">0</span> <span class="nt">WallClockCheckpoint</span>
-<span class="nt">02</span><span class="o">/</span><span class="nt">07</span><span class="o">/</span><span class="nt">17</span> <span class="nt">10</span><span class="p">:</span><span class="nd">55</span><span class="p">:</span><span class="nd">49</span> <span class="nt">104</span> <span class="nt">1346101</span><span class="p">.</span><span class="nc">0</span> <span class="nt">ShadowBday</span>
-<span class="nt">02</span><span class="o">/</span><span class="nt">07</span><span class="o">/</span><span class="nt">17</span> <span class="nt">10</span><span class="p">:</span><span class="nd">55</span><span class="p">:</span><span class="nd">49</span> <span class="nt">ERROR</span> <span class="s2">&quot;Error: corrupt log record _654 (byte offset 5046225) occurred inside closed transaction,</span>
-<span class="s2">                  recovery failed&quot;</span> <span class="nt">at</span> <span class="nt">line</span> <span class="nt">1080</span> <span class="nt">in</span> <span class="nt">file</span> <span class="o">/</span><span class="nt">builddir</span><span class="o">/</span><span class="nt">build</span><span class="o">/</span><span class="nt">BUILD</span><span class="o">/</span><span class="nt">condor-8</span><span class="p">.</span><span class="nc">4</span><span class="p">.</span><span class="nc">8</span><span class="o">/</span><span class="nt">src</span><span class="o">/</span><span class="nt">condor_utils</span><span class="o">/</span><span class="nt">classad_log</span><span class="p">.</span><span class="nc">cpp</span>
+<div class="codehilite"><pre><span></span>02/07/17 10:55:49 WARNING: Encountered corrupt log record _654 (byte offset 5046225)
+02/07/17 10:55:49 103 1354325.0 PeriodicRemove ( StageInFinish &gt; 0 ) 105
+02/07/17 10:55:49 Lines following corrupt log record _654 (up to 3):
+02/07/17 10:55:49 103 1346101.0 RemoteWallClockTime 116668.000000
+02/07/17 10:55:49 104 1346101.0 WallClockCheckpoint
+02/07/17 10:55:49 104 1346101.0 ShadowBday
+02/07/17 10:55:49 ERROR &quot;Error: corrupt log record _654 (byte offset 5046225) occurred inside closed transaction,
+                  recovery failed&quot; at line 1080 in file /builddir/build/BUILD/condor-8.4.8/src/condor_utils/classad_log.cpp
 </pre></div>
 
 
@@ -4102,7 +4102,7 @@ GRIDMANAGER_DEBUG = D_FULLDEBUG D_CAT
 <ul>
 <li>
 <p>Job is submitted to the batch system:</p>
-<div class="codehilite"><pre><span></span><span class="nt">09</span><span class="o">/</span><span class="nt">17</span><span class="o">/</span><span class="nt">14</span> <span class="nt">09</span><span class="p">:</span><span class="nd">51</span><span class="p">:</span><span class="nd">34</span> <span class="cp">[</span><span class="mi">12997</span><span class="cp">]</span> <span class="o">(</span><span class="nt">85</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span> <span class="nt">gm</span> <span class="nt">state</span> <span class="nt">change</span><span class="o">:</span> <span class="nt">GM_SUBMIT_SAVE</span> <span class="nt">-</span><span class="o">&amp;</span><span class="nt">gt</span><span class="o">;</span> <span class="nt">GM_SUBMITTED</span>
+<div class="codehilite"><pre><span></span>09/17/14 09:51:34 [12997] (85.0) gm state change: GM_SUBMIT_SAVE -&gt; GM_SUBMITTED
 </pre></div>
 
 
@@ -4110,13 +4110,13 @@ GRIDMANAGER_DEBUG = D_FULLDEBUG D_CAT
 </li>
 <li>
 <p>Job status being updated:</p>
-<div class="codehilite"><pre><span></span>09/17/14 15:07:24 [25543] (87.0) gm state change: GM_SUBMITTED -&amp;gt; GM_POLL_ACTIVE
-09/17/14 15:07:24 [25543] GAHP[25563] &amp;lt;- &#39;BLAH_JOB_STATUS 3 lsf/20140917/482046&#39;
-09/17/14 15:07:24 [25543] GAHP[25563] -&amp;gt; &#39;S&#39;
-09/17/14 15:07:25 [25543] GAHP[25563] &amp;lt;- &#39;RESULTS&#39;
-09/17/14 15:07:25 [25543] GAHP[25563] -&amp;gt; &#39;R&#39;
-09/17/14 15:07:25 [25543] GAHP[25563] -&amp;gt; &#39;S&#39; &#39;1&#39;
-09/17/14 15:07:25 [25543] GAHP[25563] -&amp;gt; &#39;3&#39; &#39;0&#39; &#39;No Error&#39; &#39;4&#39; &#39;[ BatchjobId = &quot;482046&quot;; JobStatus = 4; ExitCode = 0; WorkerNode = &quot;atl-prod08&quot; ]&#39;
+<div class="codehilite"><pre><span></span>09/17/14 15:07:24 [25543] (87.0) gm state change: GM_SUBMITTED -&gt; GM_POLL_ACTIVE
+09/17/14 15:07:24 [25543] GAHP[25563] &lt;- &#39;BLAH_JOB_STATUS 3 lsf/20140917/482046&#39;
+09/17/14 15:07:24 [25543] GAHP[25563] -&gt; &#39;S&#39;
+09/17/14 15:07:25 [25543] GAHP[25563] &lt;- &#39;RESULTS&#39;
+09/17/14 15:07:25 [25543] GAHP[25563] -&gt; &#39;R&#39;
+09/17/14 15:07:25 [25543] GAHP[25563] -&gt; &#39;S&#39; &#39;1&#39;
+09/17/14 15:07:25 [25543] GAHP[25563] -&gt; &#39;3&#39; &#39;0&#39; &#39;No Error&#39; &#39;4&#39; &#39;[ BatchjobId = &quot;482046&quot;; JobStatus = 4; ExitCode = 0; WorkerNode = &quot;atl-prod08&quot; ]&#39;
 </pre></div>
 
 
@@ -4124,8 +4124,8 @@ GRIDMANAGER_DEBUG = D_FULLDEBUG D_CAT
 </li>
 <li>
 <p>Finding the corresponding job ID on your non-HTCondor batch system:</p>
-<div class="codehilite"><pre><span></span>09/17/14 15:07:24 [25543] (87.0) gm state change: GM_SUBMITTED -&amp;gt; GM_POLL_ACTIVE
-09/17/14 15:07:24 [25543] GAHP[25563] &amp;lt;- &#39;BLAH_JOB_STATUS 3 lsf/20140917/482046&#39;
+<div class="codehilite"><pre><span></span>09/17/14 15:07:24 [25543] (87.0) gm state change: GM_SUBMITTED -&gt; GM_POLL_ACTIVE
+09/17/14 15:07:24 [25543] GAHP[25563] &lt;- &#39;BLAH_JOB_STATUS 3 lsf/20140917/482046&#39;
 </pre></div>
 
 
@@ -4133,7 +4133,7 @@ GRIDMANAGER_DEBUG = D_FULLDEBUG D_CAT
 </li>
 <li>
 <p>Job completion on the batch system:</p>
-<div class="codehilite"><pre><span></span><span class="nt">09</span><span class="o">/</span><span class="nt">17</span><span class="o">/</span><span class="nt">14</span> <span class="nt">15</span><span class="p">:</span><span class="nd">07</span><span class="p">:</span><span class="nd">25</span> <span class="cp">[</span><span class="mi">25543</span><span class="cp">]</span> <span class="o">(</span><span class="nt">87</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span> <span class="nt">gm</span> <span class="nt">state</span> <span class="nt">change</span><span class="o">:</span> <span class="nt">GM_TRANSFER_OUTPUT</span> <span class="nt">-</span><span class="o">&amp;</span><span class="nt">gt</span><span class="o">;</span> <span class="nt">GM_DONE_SAVE</span>
+<div class="codehilite"><pre><span></span>09/17/14 15:07:25 [25543] (87.0) gm state change: GM_TRANSFER_OUTPUT -&gt; GM_DONE_SAVE
 </pre></div>
 
 

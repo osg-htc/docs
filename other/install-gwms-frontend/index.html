@@ -2731,18 +2731,18 @@ machines):</p>
 <ol>
 <li>
 <p>The VO you are affiliated with. This will identify those CEs that the GlideinWMS pilot will be authorized to run on using the <span style="color:red">pilot proxy</span> described previously in <a href="#credentials-and-proxies">this section</a>. Sometimes the whole <code>query_expr</code> is provided to you by the Factory operators (see Factory access above):</p>
-<div class="codehilite"><pre><span></span><span class="ni">&amp;lt;</span>factory query_expr=&#39;((stringListMember(&quot;VO&quot;, GLIDEIN_Supported_VOs)))&#39;<span class="ni">&amp;gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;factory</span> <span class="na">query_expr=</span><span class="s">&#39;((stringListMember(&quot;VO&quot;, GLIDEIN_Supported_VOs)))&#39;</span><span class="nt">&gt;</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>Factory collector information. The <code>username</code> that you are assigned by the Factory (also called the identity you will be mapped to on the factory, see above) . Note that if you are using a factory different than the production Factory, you will have to change also <code>DN</code>, <code>factory_identity</code> and <code>node</code> attributes. (refer to the information provided to you by the Factory operator):</p>
-<div class="codehilite"><pre><span></span><span class="ni">&amp;lt;</span>collector DN=&quot;/DC=org/DC=doegrids/OU=Services/CN=gfactory-1.t2.ucsd.edu&quot;
-           comment=&quot;Define factory collector globally for simplicity&quot;
-           factory_identity=&quot;gfactory@gfactory-1.t2.ucsd.edu&quot;
-           my_identity=&quot;username@gfactory-1.t2.ucsd.edu&quot;
-           node=&quot;gfactory-1.t2.ucsd.edu&quot;/<span class="ni">&amp;gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;collector</span> <span class="na">DN=</span><span class="s">&quot;/DC=org/DC=doegrids/OU=Services/CN=gfactory-1.t2.ucsd.edu&quot;</span>
+           <span class="na">comment=</span><span class="s">&quot;Define factory collector globally for simplicity&quot;</span>
+           <span class="na">factory_identity=</span><span class="s">&quot;gfactory@gfactory-1.t2.ucsd.edu&quot;</span>
+           <span class="na">my_identity=</span><span class="s">&quot;username@gfactory-1.t2.ucsd.edu&quot;</span>
+           <span class="na">node=</span><span class="s">&quot;gfactory-1.t2.ucsd.edu&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 
 
@@ -2754,15 +2754,15 @@ machines):</p>
 <li>The <code>proxy_DN</code> is the DN of the <code>classad_proxy</code> above.</li>
 <li>The <code>security_name</code> identifies this VO Frontend to the the Factory, It is provided by the Factory operator.</li>
 <li>The <code>absfname</code> in the credential entry is the location of the GlideinWMS <span style="color:red"><code>pilot</code></span> proxy described in the requirements section <a href="#credentials-and-proxies">here</a>. There can be multiple pilot proxies, or even other kind of keys (e.g. if you use cloud resources). <strong><em>The type and trust_domain of the credential must match respectively auth_method and trust_domain used in the entry definition in the Factory. If there is no match, between these two attributes in one of the credentials and the corresponding ones in some entry in one of the Factories, then this Frontend cannot trigger glideins.</em></strong>
-Both the <code>classad_proxy</code> and <code>absfname</code> files should be owned by <code>frontend</code> user.<div class="codehilite"><pre><span></span><span class="ni">&amp;lt;</span>security classad_proxy=&quot;/tmp/vo_proxy&quot; proxy_DN=&quot;DN of vo_proxy&quot;
-      proxy_selection_plugin=&quot;ProxyAll&quot;
-      security_name=&quot;The security name, this is used by factory&quot;
-      sym_key=&quot;aes_256_cbc&quot;<span class="ni">&amp;gt;</span>
-      <span class="ni">&amp;lt;</span>credentials<span class="ni">&amp;gt;</span>
-        <span class="ni">&amp;lt;</span>credential absfname=&quot;/tmp/pilot_proxy&quot; security_class=&quot;frontend&quot;
-        trust_domain=&quot;OSG&quot; type=&quot;grid_proxy&quot;/<span class="ni">&amp;gt;</span>
-      <span class="ni">&amp;lt;</span>/credentials<span class="ni">&amp;gt;</span>
-<span class="ni">&amp;lt;</span>/security<span class="ni">&amp;gt;</span>
+Both the <code>classad_proxy</code> and <code>absfname</code> files should be owned by <code>frontend</code> user.<div class="codehilite"><pre><span></span><span class="nt">&lt;security</span> <span class="na">classad_proxy=</span><span class="s">&quot;/tmp/vo_proxy&quot;</span> <span class="na">proxy_DN=</span><span class="s">&quot;DN of vo_proxy&quot;</span>
+      <span class="na">proxy_selection_plugin=</span><span class="s">&quot;ProxyAll&quot;</span>
+      <span class="na">security_name=</span><span class="s">&quot;The security name, this is used by factory&quot;</span>
+      <span class="na">sym_key=</span><span class="s">&quot;aes_256_cbc&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;credentials&gt;</span>
+        <span class="nt">&lt;credential</span> <span class="na">absfname=</span><span class="s">&quot;/tmp/pilot_proxy&quot;</span> <span class="na">security_class=</span><span class="s">&quot;frontend&quot;</span>
+        <span class="na">trust_domain=</span><span class="s">&quot;OSG&quot;</span> <span class="na">type=</span><span class="s">&quot;grid_proxy&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/credentials&gt;</span>
+<span class="nt">&lt;/security&gt;</span>
 </pre></div>
 
 
@@ -2774,12 +2774,12 @@ Both the <code>classad_proxy</code> and <code>absfname</code> files should be ow
 <ul>
 <li>The <code>DN</code> of the <span style="color:green">VO Frontend Proxy</span> described previously <a href="#credentials-and-proxies">here</a>.</li>
 <li>The <code>fullname</code> attribute is the fully qualified domain name of the host where you installed the VO Frontend (<code>hostname --fqdn</code>).
-A secondary schedd is optional. You will need to delete the secondary schedd line if you are not using it. Multiple schedds allow the Frontend to service requests from multiple submit hosts.<div class="codehilite"><pre><span></span><span class="ni">&amp;lt;</span>schedds<span class="ni">&amp;gt;</span>
-  <span class="ni">&amp;lt;</span>schedd DN=&quot;Cert DN used by the schedd at fullname:&quot;
-        fullname=&quot;Hostname of the schedd&quot;/<span class="ni">&amp;gt;</span>
-   <span class="ni">&amp;lt;</span>schedd DN=&quot;Cert DN used by the second Schedd at fullname:&quot;
-         fullname=&quot;schedd name@Hostname of second schedd&quot;/<span class="ni">&amp;gt;</span>
-<span class="ni">&amp;lt;</span>/schedds<span class="ni">&amp;gt;</span>
+A secondary schedd is optional. You will need to delete the secondary schedd line if you are not using it. Multiple schedds allow the Frontend to service requests from multiple submit hosts.<div class="codehilite"><pre><span></span><span class="nt">&lt;schedds&gt;</span>
+  <span class="nt">&lt;schedd</span> <span class="na">DN=</span><span class="s">&quot;Cert DN used by the schedd at fullname:&quot;</span>
+        <span class="na">fullname=</span><span class="s">&quot;Hostname of the schedd&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;schedd</span> <span class="na">DN=</span><span class="s">&quot;Cert DN used by the second Schedd at fullname:&quot;</span>
+         <span class="na">fullname=</span><span class="s">&quot;schedd name@Hostname of second schedd&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/schedds&gt;</span>
 </pre></div>
 
 
@@ -2792,10 +2792,10 @@ A secondary schedd is optional. You will need to delete the secondary schedd lin
 <li>The <code>DN</code> of the <span style="color:green">VO Frontend Proxy</span> described previously <a href="#credentials-and-proxies">here</a>.</li>
 <li>The <code>node</code> attribute is the full hostname of the collectors (<code>hostname --fqdn</code>) and port</li>
 <li>The <code>secondary</code> attribute indicates whether the element is for the primary or secondary collectors (True/False).
- The default HTCondor configuration of the VO Frontend starts multiple Collector processes on the host (<code>/etc/condor/config.d/11_gwms_secondary_collectors.config</code>). The <code>DN</code> and <code>hostname</code> on the first line are the hostname and the host certificate of the VO Frontend. The <code>DN</code> and <code>hostname</code> on the second line are the same as the ones in the first one. The hostname (e.g. hostname.domain.tld) is filled automatically during the installation. The secondary collector ports can be defined as a range, e.g., 9620-9660).<div class="codehilite"><pre><span></span><span class="ni">&amp;lt;</span>collector DN=&quot;DN of main collector&quot;
-       node=&quot;hostname.domain.tld:9618&quot; secondary=&quot;False&quot;/<span class="ni">&amp;gt;</span>
-<span class="ni">&amp;lt;</span>collector DN=&quot;DN of secondary collectors (usually same as DN in line above)&quot;
-       node=&quot;hostname.domain.tld:9620-9660&quot; secondary=&quot;True&quot;/<span class="ni">&amp;gt;</span>
+ The default HTCondor configuration of the VO Frontend starts multiple Collector processes on the host (<code>/etc/condor/config.d/11_gwms_secondary_collectors.config</code>). The <code>DN</code> and <code>hostname</code> on the first line are the hostname and the host certificate of the VO Frontend. The <code>DN</code> and <code>hostname</code> on the second line are the same as the ones in the first one. The hostname (e.g. hostname.domain.tld) is filled automatically during the installation. The secondary collector ports can be defined as a range, e.g., 9620-9660).<div class="codehilite"><pre><span></span><span class="nt">&lt;collector</span> <span class="na">DN=</span><span class="s">&quot;DN of main collector&quot;</span>
+       <span class="na">node=</span><span class="s">&quot;hostname.domain.tld:9618&quot;</span> <span class="na">secondary=</span><span class="s">&quot;False&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;collector</span> <span class="na">DN=</span><span class="s">&quot;DN of secondary collectors (usually same as DN in line above)&quot;</span>
+       <span class="na">node=</span><span class="s">&quot;hostname.domain.tld:9620-9660&quot;</span> <span class="na">secondary=</span><span class="s">&quot;True&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 
 
@@ -2886,28 +2886,28 @@ on the local machine. It is important that you map the DN's of:</p>
 <ul>
 <li>
 <p><span style="color:red">Each schedd proxy</span>: The <code>DN</code> of each schedd that the frontend talks to. Specified in the frontend.xml schedd element <code>DN</code> attribute:</p>
-<div class="codehilite"><pre><span></span><span class="ni">&amp;lt;</span>schedds<span class="ni">&amp;gt;</span>
-  <span class="ni">&amp;lt;</span>schedd DN=&quot;/DC=org/DC=doegrids/OU=Services/CN=YOUR_HOST&quot; fullname=&quot;YOUR_HOST&quot;/<span class="ni">&amp;gt;</span>
-  <span class="ni">&amp;lt;</span>schedd DN=&quot;/DC=org/DC=doegrids/OU=Services/CN=YOUR_HOST&quot; fullname=&quot;schedd_jobs2@YOUR_HOST&quot;/<span class="ni">&amp;gt;</span>
-<span class="ni">&amp;lt;</span>/schedds<span class="ni">&amp;gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;schedds&gt;</span>
+  <span class="nt">&lt;schedd</span> <span class="na">DN=</span><span class="s">&quot;/DC=org/DC=doegrids/OU=Services/CN=YOUR_HOST&quot;</span> <span class="na">fullname=</span><span class="s">&quot;YOUR_HOST&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;schedd</span> <span class="na">DN=</span><span class="s">&quot;/DC=org/DC=doegrids/OU=Services/CN=YOUR_HOST&quot;</span> <span class="na">fullname=</span><span class="s">&quot;schedd_jobs2@YOUR_HOST&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/schedds&gt;</span>
 </pre></div>
 
 
 </li>
 <li>
 <p><span style="color:green">Frontend proxy</span>: The DN of the proxy that the Frontend uses to communicate with the other GlideinWMS services. Specified in the frontend.xml security element <code>proxy_DN</code> attribute:</p>
-<div class="codehilite"><pre><span></span><span class="ni">&amp;lt;</span>security classad_proxy=&quot;/tmp/vo_proxy&quot; proxy_DN=&quot;DN of vo_proxy&quot; ....
+<div class="codehilite"><pre><span></span><span class="nt">&lt;security</span> <span class="na">classad_proxy=</span><span class="s">&quot;/tmp/vo_proxy&quot;</span> <span class="na">proxy_DN=</span><span class="s">&quot;DN of vo_proxy&quot;</span> <span class="err">....</span>
 </pre></div>
 
 
 </li>
 <li>
 <p><span style="color:red">Each pilot proxy</span> The DN of <strong>each</strong> proxy that the frontend forwards to the factory to use with the GlideinWMS pilots.  This allows the !GlideinWMS pilot jobs to communicate with the User Collector. Specified in the frontend.xml proxy <code>absfname</code> attribute (you need to specify the <code>DN</code> of each of those proxies:</p>
-<div class="codehilite"><pre><span></span><span class="ni">&amp;lt;</span>security ....
-<span class="ni">&amp;lt;</span>proxies<span class="ni">&amp;gt;</span>
-   <span class="ni">&amp;lt;</span> proxy absfname=&quot;/tmp/vo_proxy&quot; ....
-   :
-<span class="ni">&amp;lt;</span>/proxies<span class="ni">&amp;gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;security</span> <span class="err">....</span>
+<span class="err">&lt;proxies</span><span class="nt">&gt;</span>
+   <span class="nt">&lt; proxy</span> <span class="na">absfname=</span><span class="s">&quot;/tmp/vo_proxy&quot;</span> <span class="err">....</span>
+   <span class="err">:</span>
+<span class="err">&lt;/proxies</span><span class="nt">&gt;</span>
 </pre></div>
 
 
@@ -2940,11 +2940,11 @@ and renew the <span style="color:green">pilot proxies</span> and <span style="co
 <p>For each of your <span style="color:green">pilot proxies</span>, create a <code>[PILOT &lt;NAME&gt;]</code> section, where <code>&lt;NAME&gt;</code> is a descriptive
    name for the proxy that is unique to your local configuration. In each section, set the <code>proxy_cert</code>, <code>proxy_key</code>,
    <code>output</code>, and <code>vo</code> corresponding to each pilot proxy:</p>
-<div class="codehilite"><pre><span></span><span class="k">[PILOT <span style="color:red">&amp;lt;NAME&amp;gt;</span>]</span>
-<span class="na">proxy_cert</span> <span class="o">=</span> <span class="s"><span style="color:red">&amp;lt;PATH TO THE PILOT CERTIFICATE&amp;gt;</span></span>
-<span class="na">proxy_key</span> <span class="o">=</span> <span class="s"><span style="color:red">&amp;lt;PATH TO THE PILOT KEY&amp;gt;</span></span>
-<span class="na">output</span> <span class="o">=</span> <span class="s"><span style="color:red">&amp;lt;PATH TO CREATE THE PILOT PROXY&amp;gt;</span></span>
-<span class="na">vo</span> <span class="o">=</span> <span class="s"><span style="color:red">&amp;lt;NAME OF VIRTUAL ORGANIZATION&amp;gt;</span></span>
+<div class="codehilite"><pre><span></span><span class="k">[PILOT <span style="color:red">&lt;NAME&gt;</span>]</span>
+<span class="na">proxy_cert</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO THE PILOT CERTIFICATE&gt;</span></span>
+<span class="na">proxy_key</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO THE PILOT KEY&gt;</span></span>
+<span class="na">output</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO CREATE THE PILOT PROXY&gt;</span></span>
+<span class="na">vo</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;NAME OF VIRTUAL ORGANIZATION&gt;</span></span>
 </pre></div>
 
 
@@ -2956,9 +2956,9 @@ setting <code>use_voms_server</code>. Choose one of the following options:</p>
   Specify the paths to the <code>vo</code> certificate and key, and optionally, the VOMS attribute (e.g. <code>/osg/Role=NULL/Capability=NULL</code>
   for the OSG VO):</p>
 <div class="codehilite"><pre><span></span>use_voms_server = <span style="color:red">false</span>
-vo_cert = <span style="color:red">&amp;lt;PATH TO THE PILOT CERTIFICATE&amp;gt;</span>
-vo_key = <span style="color:red">&amp;lt;PATH TO THE PILOT KEY&amp;gt;</span>
-fqan = <span style="color:red">&amp;lt;VOMS ATTRIBUTE&amp;gt;</span>
+vo_cert = <span style="color:red">&lt;PATH TO THE PILOT CERTIFICATE&gt;</span>
+vo_key = <span style="color:red">&lt;PATH TO THE PILOT KEY&gt;</span>
+fqan = <span style="color:red">&lt;VOMS ATTRIBUTE&gt;</span>
 </pre></div>
 
 
@@ -2971,7 +2971,7 @@ fqan = <span style="color:red">&amp;lt;VOMS ATTRIBUTE&amp;gt;</span>
 <p>To have your proxy's VOMS attributes signed by the <code>vo</code>'s VOMS server, set <code>use_voms_server = true</code>
   and the VOMS attribute (e.g. <code>/osg/Role=NULL/Capability=NULL</code> for the OSG VO):</p>
 <div class="codehilite"><pre><span></span>use_voms_server = <span style="color:red">true</span>
-fqan = <span style="color:red">&amp;lt;VOMS ATTRIBUTE&amp;gt;</span>
+fqan = <span style="color:red">&lt;VOMS ATTRIBUTE&gt;</span>
 </pre></div>
 
 
@@ -2984,9 +2984,9 @@ in the OSG, <code>use_voms_server = false</code> is the preferred method for sig
 </ul>
 <p>Optionally, the proxy renewal <code>frequency</code> and <code>lifetime</code> (in hours) can be specified in each <code>[PILOT &lt;NAME&gt;]</code> section:</p>
 <div class="codehilite"><pre><span></span># Default: 1
-frequency = <span style="color:red">&amp;lt;RENEWAL FREQUENCY&amp;gt;</span>
+frequency = <span style="color:red">&lt;RENEWAL FREQUENCY&gt;</span>
 # Default: 24
-lifetime = <span style="color:red">&amp;lt;PROXY LIFETIME&amp;gt;</span>
+lifetime = <span style="color:red">&lt;PROXY LIFETIME&gt;</span>
 </pre></div>
 
 
@@ -2995,9 +2995,9 @@ lifetime = <span style="color:red">&amp;lt;PROXY LIFETIME&amp;gt;</span>
 <p>Configure the location and output of the <span style="color:green">VO Frontend proxy</span> under the <code>[FRONTEND]</code> section and set
    the <code>proxy_cert</code>, <code>proxy_key</code>, and <code>output</code> to paths corresponding to your VO Frontend:</p>
 <div class="codehilite"><pre><span></span><span class="k">[FRONTEND]</span>
-<span class="na">proxy_cert</span> <span class="o">=</span> <span class="s"><span style="color:red">&amp;lt;PATH TO THE FRONTEND CERTIFICATE&amp;gt;</span></span>
-<span class="na">proxy_key</span> <span class="o">=</span> <span class="s"><span style="color:red">&amp;lt;PATH TO THE FRONTEND KEY&amp;gt;</span></span>
-<span class="na">output</span> <span class="o">=</span> <span class="s"><span style="color:red">&amp;lt;PATH TO CREATE THE FRONTEND PROXY&amp;gt;</span></span>
+<span class="na">proxy_cert</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO THE FRONTEND CERTIFICATE&gt;</span></span>
+<span class="na">proxy_key</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO THE FRONTEND KEY&gt;</span></span>
+<span class="na">output</span> <span class="o">=</span> <span class="s"><span style="color:red">&lt;PATH TO CREATE THE FRONTEND PROXY&gt;</span></span>
 </pre></div>
 
 
@@ -3027,8 +3027,8 @@ lifetime = <span style="color:red">&amp;lt;PROXY LIFETIME&amp;gt;</span>
 </li>
 <li>
 <p>Edit the ProbeConfig located in <code>/etc/gratia/condor/ProbeConfig</code>. First, edit the <code>SiteName</code> and <code>ProbeName</code> to be a unique identifier for your GlideinWMS Submit host. There can be multiple probes (with different names) per site. If you haven't already, you should register your GlideinWMS submit host in <a href="https://github.com/opensciencegrid/topology/">OIM</a>. Then you can use the name you used to register the resource.</p>
-<div class="codehilite"><pre><span></span><span class="nt">ProbeName</span><span class="o">=</span><span class="s2">&quot;condor:&amp;lt;hostname&amp;gt;&quot;</span>
-<span class="nt">SiteName</span><span class="o">=</span><span class="s2">&quot;HCC-GlideinWMW-Frontend&quot;</span>
+<div class="codehilite"><pre><span></span>ProbeName=&quot;condor:&lt;hostname&gt;&quot;
+SiteName=&quot;HCC-GlideinWMW-Frontend&quot;
 </pre></div>
 
 
@@ -3118,9 +3118,9 @@ to test a specific site), a Frontend can be configured to match on
 </li>
 <li>
 <p>Add the <code>DESIRED_Sites</code> attribute to the match attributes list:</p>
-<div class="codehilite"><pre><span></span><span class="ni">&amp;lt;</span>match_attrs<span class="ni">&amp;gt;</span>
-   <span class="ni">&amp;lt;</span>match_attr name=&quot;DESIRED_Sites&quot; type=&quot;string&quot;/<span class="ni">&amp;gt;</span>
-<span class="ni">&amp;lt;</span>/match_attrs<span class="ni">&amp;gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;match_attrs&gt;</span>
+   <span class="nt">&lt;match_attr</span> <span class="na">name=</span><span class="s">&quot;DESIRED_Sites&quot;</span> <span class="na">type=</span><span class="s">&quot;string&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/match_attrs&gt;</span>
 </pre></div>
 
 
@@ -3143,31 +3143,31 @@ groupwould only match jobs that have the <code>+is_itb=True</code> ClassAd.</p>
 </li>
 <li>
 <p>Set the group's <code>start_expr</code> so that the group's glideins will only match user jobs with <code>+is_itb=True</code>:</p>
-<div class="codehilite"><pre><span></span><span class="ni">&amp;lt;</span>match match_expr=&quot;True&quot; start_expr=&quot;(is_itb)&quot;<span class="ni">&amp;gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;match</span> <span class="na">match_expr=</span><span class="s">&quot;True&quot;</span> <span class="na">start_expr=</span><span class="s">&quot;(is_itb)&quot;</span><span class="nt">&gt;</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>Set the <code>factory_query_expr</code> so that this group only communicates with ITB factories:</p>
-<div class="codehilite"><pre><span></span><span class="ni">&amp;lt;</span>factory query_expr=&#39;FactoryType=?=&quot;itb&quot;&#39;<span class="ni">&amp;gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;factory</span> <span class="na">query_expr=</span><span class="s">&#39;FactoryType=?=&quot;itb&quot;&#39;</span><span class="nt">&gt;</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>Set the group's <code>collector</code> stanza to reference the ITB factory, replacing <code>username@gfactory-1.t2.ucsd.edu</code> with your factory identity:</p>
-<div class="codehilite"><pre><span></span><span class="ni">&amp;lt;</span>collector DN=&quot;/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=glidein-itb.grid.iu.edu&quot; \
-          factory_identity=&quot;gfactory@glidein-itb.grid.iu.edu&quot; \
-          my_identity=&quot;username@gfactory-1.t2.ucsd.edu&quot; \
-          node=&quot;glidein-itb.grid.iu.edu&quot;/<span class="ni">&amp;gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;collector</span> <span class="na">DN=</span><span class="s">&quot;/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=glidein-itb.grid.iu.edu&quot;</span> <span class="err">\</span>
+          <span class="na">factory_identity=</span><span class="s">&quot;gfactory@glidein-itb.grid.iu.edu&quot;</span> <span class="err">\</span>
+          <span class="na">my_identity=</span><span class="s">&quot;username@gfactory-1.t2.ucsd.edu&quot;</span> <span class="err">\</span>
+          <span class="na">node=</span><span class="s">&quot;glidein-itb.grid.iu.edu&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>Set the job <code>query_expr</code> so that only ITB jobs appear in <code>condor_q</code>:</p>
-<div class="codehilite"><pre><span></span><span class="ni">&amp;lt;</span>job query_expr=&quot;(!isUndefined(is_itb) <span class="ni">&amp;amp;&amp;amp;</span> is_itb)&quot;<span class="ni">&amp;gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;job</span> <span class="na">query_expr=</span><span class="s">&quot;(!isUndefined(is_itb) &amp;&amp; is_itb)&quot;</span><span class="nt">&gt;</span>
 </pre></div>
 
 

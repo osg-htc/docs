@@ -1979,7 +1979,7 @@
 <ol>
 <li>
 <p>Authorize the Tester host to connect to your Central Manager:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> glidecondor_addDN -allow-others -daemon <span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>COMMENT<span class="p">&amp;</span>gt<span class="p">;</span> <span class="p">&amp;</span>lt<span class="p">;</span>TESTER_DN<span class="p">&amp;</span>gt<span class="p">;</span></span> condor
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> glidecondor_addDN -allow-others -daemon <span style="color:red">&lt;COMMENT&gt; &lt;TESTER_DN&gt;</span> condor
 </pre></div>
 
 
@@ -2005,12 +2005,12 @@
 <li>
 <p>Add the new Tester to your GlideinWMS front-end configuration.
    Edit the file <code>/etc/gwms-frontend/frontend.xml</code> and add a line as follows within the <code>&lt;schedds&gt;</code> element</p>
-<div class="codehilite"><pre><span></span>&amp;lt;schedd DN=&quot;<span style="color:red">&amp;lt;TESTER_DN&amp;gt;</span>&quot; fullname=&quot;<span style="color:red">&amp;lt;TESTER_HOSTNAME&amp;gt;</span>&quot;&amp;gt;
+<div class="codehilite"><pre><span></span>&lt;schedd DN=&quot;<span style="color:red">&lt;TESTER_DN&gt;</span>&quot; fullname=&quot;<span style="color:red">&lt;TESTER_HOSTNAME&gt;</span>&quot;&gt;
 </pre></div>
 
 
 <p>Where <code>TESTER_DN</code> is the Distinguished Name (DN) of the host certificate of your Tester host (as above), and <code>TESTER_HOSTNAME</code> is the fully qualified hostname of the Tester host. For example:</p>
-<div class="codehilite"><pre><span></span>&amp;lt;schedd DN=&quot;/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=fermicloud357.fnal.gov&quot; fullname=&quot;fermicloud357.fnal.gov&quot;&amp;gt;
+<div class="codehilite"><pre><span></span>&lt;schedd DN=&quot;/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=Services/CN=fermicloud357.fnal.gov&quot; fullname=&quot;fermicloud357.fnal.gov&quot;&gt;
 </pre></div>
 
 
@@ -2041,7 +2041,7 @@
 </li>
 <li>
 <p>Authorize the central manager of your Front-end to connect to the tester host:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> glidecondor_addDN -allow-others -daemon <span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>COMMENT<span class="p">&amp;</span>gt<span class="p">;</span> <span class="p">&amp;</span>lt<span class="p">;</span>CENTRAL_MGR<span class="p">&amp;</span>gt<span class="p">;</span></span> condor
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> glidecondor_addDN -allow-others -daemon <span style="color:red">&lt;COMMENT&gt; &lt;CENTRAL_MGR&gt;</span> condor
 </pre></div>
 
 
@@ -2054,8 +2054,8 @@
 <li>
 <p>Configure the special HTCondor-RSV instance with your host IP address.</p>
 <p>Create the file <code>/etc/condor/config.d/98_public_interface.config</code> with this content:</p>
-<div class="codehilite"><pre><span></span>NETWORK_INTERFACE = <span style="color:red">&amp;lt;ADDRESS&amp;gt;</span>
-CONDOR_HOST = <span style="color:red">&amp;lt;CENTRAL_MGR&amp;gt;</span>
+<div class="codehilite"><pre><span></span>NETWORK_INTERFACE = <span style="color:red">&lt;ADDRESS&gt;</span>
+CONDOR_HOST = <span style="color:red">&lt;CENTRAL_MGR&gt;</span>
 </pre></div>
 
 

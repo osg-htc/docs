@@ -2732,7 +2732,7 @@ perform several steps to make xrootdfs secured.</p>
 <ol>
 <li>
 <p>On the XRootD redirector node, execute the following command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdsssadmin -k <span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>my_key_name<span class="p">&amp;</span>gt<span class="p">;</span></span> -u anybody -g usrgroup add <span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>keyfile<span class="p">&amp;</span>gt<span class="p">;</span></span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdsssadmin -k <span style="color:red">&lt;my_key_name&gt;</span> -u anybody -g usrgroup add <span style="color:red">&lt;keyfile&gt;</span>
 </pre></div>
 
 
@@ -2829,12 +2829,12 @@ on all data nodes:</p>
 <li>
 <p>Append the following to <code>/etc/lcmaps.db</code>:</p>
 <div class="codehilite"><pre><span></span><span class="n">xrootd_policy</span><span class="o">:</span>
-<span class="n">verifyproxynokey</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="o">;</span> <span class="n">banfile</span>
-<span class="n">banfile</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="o">;</span> <span class="n">banvomsfile</span> <span class="o">|</span> <span class="n">bad</span>
-<span class="n">banvomsfile</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="o">;</span> <span class="n">gridmapfile</span> <span class="o">|</span> <span class="n">bad</span>
-<span class="n">gridmapfile</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="o">;</span> <span class="n">good</span> <span class="o">|</span> <span class="n">vomsmapfile</span>
-<span class="n">vomsmapfile</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="o">;</span> <span class="n">good</span> <span class="o">|</span> <span class="n">defaultmapfile</span>
-<span class="n">defaultmapfile</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="o">;</span> <span class="n">good</span> <span class="o">|</span> <span class="n">bad</span>
+<span class="n">verifyproxynokey</span> <span class="o">-&gt;</span> <span class="n">banfile</span>
+<span class="n">banfile</span> <span class="o">-&gt;</span> <span class="n">banvomsfile</span> <span class="o">|</span> <span class="n">bad</span>
+<span class="n">banvomsfile</span> <span class="o">-&gt;</span> <span class="n">gridmapfile</span> <span class="o">|</span> <span class="n">bad</span>
+<span class="n">gridmapfile</span> <span class="o">-&gt;</span> <span class="n">good</span> <span class="o">|</span> <span class="n">vomsmapfile</span>
+<span class="n">vomsmapfile</span> <span class="o">-&gt;</span> <span class="n">good</span> <span class="o">|</span> <span class="n">defaultmapfile</span>
+<span class="n">defaultmapfile</span> <span class="o">-&gt;</span> <span class="n">good</span> <span class="o">|</span> <span class="n">bad</span>
 </pre></div>
 
 
@@ -2890,7 +2890,7 @@ on all data nodes:</p>
 <div class="codehilite"><pre><span></span><span class="s s-Atom">all</span><span class="p">.</span><span class="s s-Atom">export</span> <span class="o">/</span><span class="s s-Atom">data</span><span class="o">/</span><span class="s s-Atom">xrootdfs</span>
 <span class="s s-Atom">set</span> <span class="s s-Atom">xrdr=</span><span class="c1"><span style="color:red">hostA</span></span>
 <span class="s s-Atom">all</span><span class="p">.</span><span class="s s-Atom">manager</span> <span class="err">$</span><span class="p">(</span><span class="s s-Atom">xrdr</span><span class="p">)</span><span class="s s-Atom">:</span><span class="mi">3121</span>
-<span class="s s-Atom">if</span> <span class="err">$</span><span class="p">(</span><span class="s s-Atom">xrdr</span><span class="p">)</span> <span class="s s-Atom">&amp;amp</span><span class="p">;</span><span class="s s-Atom">&amp;amp</span><span class="p">;</span> <span class="s s-Atom">named</span> <span class="s s-Atom">cns</span>
+<span class="s s-Atom">if</span> <span class="err">$</span><span class="p">(</span><span class="s s-Atom">xrdr</span><span class="p">)</span> <span class="s s-Atom">&amp;&amp;</span> <span class="s s-Atom">named</span> <span class="s s-Atom">cns</span>
     <span class="s s-Atom">all</span><span class="p">.</span><span class="s s-Atom">export</span> <span class="o">/</span><span class="s s-Atom">data</span><span class="o">/</span><span class="s s-Atom">inventory</span>
     <span class="s s-Atom">xrd</span><span class="p">.</span><span class="s s-Atom">port</span> <span class="mi">1095</span>
 <span class="s s-Atom">else</span> <span class="s s-Atom">if</span> <span class="err">$</span><span class="p">(</span><span class="s s-Atom">xrdr</span><span class="p">)</span>
@@ -2929,7 +2929,7 @@ on all data nodes:</p>
 <li>
 <p>Destroy any pre-existing proxies and attempt a copy to <code>&lt;DESTINATION PATH&gt;</code> on the <code>&lt;XROOTD HOST&gt;</code> to verify failure:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@client $</span> voms-proxy-destroy
-<span class="gp">user@client $</span> xrdcp /bin/bash root://<span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>XROOTD HOST<span class="p">&amp;</span>gt<span class="p">;</span></span>/<span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>DESTINATION PATH<span class="p">&amp;</span>gt<span class="p">;</span></span>
+<span class="gp">user@client $</span> xrdcp /bin/bash root://<span style="color:red">&lt;XROOTD HOST&gt;</span>/<span style="color:red">&lt;DESTINATION PATH&gt;</span>
 <span class="go">180213 13:56:49 396570 cryptossl_X509CreateProxy: EEC certificate has expired</span>
 <span class="go">[0B/0B][100%][==================================================][0B/s]</span>
 <span class="go">Run: [FATAL] Auth failed</span>
@@ -2943,7 +2943,7 @@ on all data nodes:</p>
 <li>
 <p>Generate your proxy and verify that you can successfully transfer files:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@client $</span> voms-proxy-init
-<span class="gp">user@client $</span> xrdcp  /bin/sh root://<span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>XROOTD HOST<span class="p">&amp;</span>gt<span class="p">;</span></span>/<span style="color:red"><span class="p">&amp;</span>lt<span class="p">;</span>DESTINATION PATH<span class="p">&amp;</span>gt<span class="p">;</span></span>
+<span class="gp">user@client $</span> xrdcp  /bin/sh root://<span style="color:red">&lt;XROOTD HOST&gt;</span>/<span style="color:red">&lt;DESTINATION PATH&gt;</span>
 <span class="go">[938.1kB/938.1kB][100%][==================================================][938.1kB/s]</span>
 </pre></div>
 

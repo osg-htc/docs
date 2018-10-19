@@ -2081,7 +2081,7 @@ singularity to be run as an unprivileged user via CVMFS:</p>
 <li>
 <p>Enable user namespaces via <code>sysctl</code>:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;user.max_user_namespaces = 15000&quot;</span> <span class="se">\</span>
-    <span class="p">&amp;</span>gt<span class="p">;</span> /etc/sysctl.d/90-max_user_namespaces.conf
+    &gt; /etc/sysctl.d/90-max_user_namespaces.conf
 </pre></div>
 
 
@@ -2089,7 +2089,7 @@ singularity to be run as an unprivileged user via CVMFS:</p>
 <li>
 <p>(Optional) Disable network namespaces:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> <span class="nb">echo</span> <span class="s2">&quot;user.max_net_namespaces = 0&quot;</span> <span class="se">\</span>
-    <span class="p">&amp;</span>gt<span class="p">;</span> /etc/sysctl.d/90-max_net_namespaces.conf
+    &gt; /etc/sysctl.d/90-max_net_namespaces.conf
 </pre></div>
 
 
