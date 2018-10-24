@@ -157,7 +157,26 @@ run the following command from the origin server:
 
 Your server should be marked with a `>+` to indicate that it contains the given path and the path was accessible.
 
+
 ### Testing file access
 
 To verify that you can download a file from the origin server, use the `stashcp` tool.
-<!-- TODO: include an example for downloading via `stashcp` -->
+Place a test file in the exported dir.
+`stashcp` is available in the `stashcache-client` RPM.
+Run the following command:
+
+```console
+[user@host]$ stashcp %RED%<test file>%ENDCOLOR% /tmp/testfile
+```
+<!-- ^ note the unicode space ' ' between "test" and "file" to fix syntax highlighting
+       (because it thinks "test" is a keyword)
+--->
+
+If successful, there should be a file at `/tmp/testfile` with the contents of the test file on your origin server.
+If unsuccessful, you can pass the `-d` flag to `stashcp` for debug info.
+
+
+## Getting help
+
+If you need help setting up your origin server, contact us at support@opensciencegrid.org.
+
