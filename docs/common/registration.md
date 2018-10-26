@@ -89,7 +89,7 @@ To register a new resource, follow the instructions below:
 
     - If your resource group already exists under your facility and site, open the following URL in your browser:
 
-            https://github.com/opensciencegrid/topology/edit/master/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml
+            https://github.com/opensciencegrid/topology/edit/master/topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml
 
         For example, to add a resource to the `CHTC` resource group for the `CHTC` site at the `University of
         Wisconsin`, open the following URL:
