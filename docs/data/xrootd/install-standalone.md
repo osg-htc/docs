@@ -16,10 +16,10 @@ Before starting the installation process, consider the following points:
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
--   Ensure the host has [a supported operating system](../release/supported_platforms)
+-   Ensure the host has [a supported operating system](/release/supported_platforms)
 -   Obtain root access to the host
--   Prepare [the required Yum repositories](../common/yum)
--   Install [CA certificates](../common/ca)
+-   Prepare [the required Yum repositories](/common/yum)
+-   Install [CA certificates](/common/ca)
 
 Installing an XRootD Server
 ---------------------------
@@ -64,20 +64,19 @@ xrd.network keepalive kaparms 10m,1m,5
 xrd.timeout idle 60m
 ```
 #### (Optional) Enable HTTP support
-In order to enable Xrootd HTTP support pleae follow the instructions [here](data/install-xrootd/#optional-enabling-xrootd-over-http)
+In order to enable Xrootd HTTP support pleae follow the instructions [here](/data/install-xrootd/#optional-enabling-xrootd-over-http)
 
 #### (Optional) Adding Hadoop support to XRootD
 
-For documentation on how to use export your hadoop storage using xrootd please see [here](data/install-xrootd/#optional-adding-hadoop-support-to-xrootd)
+For documentation on how to use export your hadoop storage using xrootd please see [here](/data/install-xrootd/#optional-adding-hadoop-support-to-xrootd)
 
 #### (Optional) Adding CMS TFC support to XRootD (CMS sites only)
 
-For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file. See [here](data/install-xrootd/#optional-adding-cms-tfc-support-to\
--xrootd-cms-sites-only)
+For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file. See [here](/data/install-xrootd/#optional-adding-cms-tfc-support-to-xrootd-cms-sites-only)
 
 ### Authorization file
 
-For the authorization options on xrootd pleasee see [here](data/install-xrootd/#optional-authorization)
+For the authorization options on xrootd pleasee see [here](/data/install-xrootd/#optional-authorization)
 
 An example of an autorization file for read only of store by CMS would be:
 
@@ -87,7 +86,7 @@ g /cms /store lr
 
 #### LCMAPS authorization
 
-To configure the LCMAPS authentication please follow the documentation [here](data/install-xrootd/#security-option-3-xrootd-lcmaps-authorization)
+To configure the LCMAPS authentication please follow the documentation [here](/data/install-xrootd/#security-option-3-xrootd-lcmaps-authorization)
 
 Using Xrootd
 ------------
