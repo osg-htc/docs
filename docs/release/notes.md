@@ -9,6 +9,7 @@ Release Notes
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.20](/release/3.4/release-3-4-20)     | 2018-11-01 | GlideinWM 3.4.2, SciTokens 1.2.1, stashcache 0.10, stashcache-client 5.1.0-4, HTCondor 8.6.13; Upcoming: HTCondor 8.7.10 |
 | [3.4.19](/release/3.4/release-3-4-19)     | 2018-10-25 | Patched tarball, XRootD 4.8.5, osg-flock 1.0, stashcache 0.9, autopyfactory 2.4.9 |
 | [3.4.18-2](/release/3.4/release-3-4-18-2) | 2018-10-03 | VO Package v84                                                          |
 | [3.4.18](/release/3.4/release-3-4-18)     | 2018-09-27 | XRootD 4.8.4 + HTTP Patches, xrootd-lcmaps 1.4.1, xrootd-hdfs 2.1.3, HTCondor CE 3.1.4, CernVM-FS 2.5.1, Gratia probes 1.20.7, Pegasus 4.8.4, GlideinWMS 3.4, RSV 3.19.8, BLAHP 1.18.38 |
