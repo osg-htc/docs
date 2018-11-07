@@ -112,7 +112,6 @@ To register a new resource, follow the instructions below:
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
    the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
-   If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
 
