@@ -80,7 +80,7 @@ host to avoid any duplicate registrations:
 
 To register a new resource, follow the instructions below:
 
-1. If you haven't already, verify that the FQDN of your resource is not [already registered](#registering-resources)
+1. If you haven't already, verify that the FQDN of your resource is not [already registered](#searching-for-resources)
 
 1. Choose the names of your facility, site, and resource group, ensuring that the names match any pre-existing
    facilities, sites, or resource groups (including case and spaces).

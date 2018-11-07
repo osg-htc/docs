@@ -144,18 +144,15 @@ good to do the test in the
 
 ## Registering Frontier Squid
 
-See the [registration doc](/common/registration#new-registrations) for instructions on registering a new resource.
-See the instructions for [updating existing registrations](/common/registration#updating-existing-registrations)
-if you are adding the squid service to an existing resource or resource group.
-
-Additionally:
+To register your Frontier Squid host, follow the general registration instructions
+[here](/common/registration#new-resources) with the following Frontier Squid-specific details:
 
 1.  Add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
     This is a partial example:
 
         :::console
         ...
-        FQDN: fully.qualified.DNS.name.of.your.server(s)
+        FQDN: fully.qualified.DNS.name.of.your.server
         Services:
           Squid:
             Description: Generic squid service
@@ -166,6 +163,15 @@ Additionally:
     If you have more than one server providing the same squid service,
     it is best to register them with one FQDN that is a round-robin DNS
     entry listing all the squids, instead of registering them separately.
+    For example:
+
+        :::console
+        ...
+        FQDN: fully.qualified.DNS.name.of.your.server
+        FQDNAliases:
+          - second.fully.qualified.DNS.name.of.your.server
+          - third.fully.qualified.DNS.name.of.your.server
+        ...
 
 2.  If you are setting up a new resource, set `Active: false`.
     Only set `Active: true` for a resource when it is accepting requests and ready for production.
