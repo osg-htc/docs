@@ -144,11 +144,8 @@ good to do the test in the
 
 ## Registering Frontier Squid
 
-See the [registration doc](/common/registration#new-registrations) for instructions on registering a new resource.
-See the instructions for [updating existing registrations](/common/registration#updating-existing-registrations)
-if you are adding the squid service to an existing resource or resource group.
-
-Additionally:
+To register your Frontier Squid host, follow the general registration instructions
+[here](/common/registration#new-resources) with the following Frontier Squid-specific details:
 
 1.  Add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
     This is a partial example:
