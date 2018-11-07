@@ -155,7 +155,7 @@ Additionally:
 
         :::console
         ...
-        FQDN: fully.qualified.DNS.name.of.your.server(s)
+        FQDN: fully.qualified.DNS.name.of.your.server
         Services:
           Squid:
             Description: Generic squid service
@@ -166,6 +166,15 @@ Additionally:
     If you have more than one server providing the same squid service,
     it is best to register them with one FQDN that is a round-robin DNS
     entry listing all the squids, instead of registering them separately.
+    For example:
+
+        :::console
+        ...
+        FQDN: fully.qualified.DNS.name.of.your.server
+        FQDNAliases:
+          - second.fully.qualified.DNS.name.of.your.server
+          - third.fully.qualified.DNS.name.of.your.server
+        ...
 
 2.  If you are setting up a new resource, set `Active: false`.
     Only set `Active: true` for a resource when it is accepting requests and ready for production.
