@@ -2105,16 +2105,14 @@ to try to see what's wrong.</p>
 good to do the test in the
 <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Testing_the_installation">upstream documentation Testing the installation section</a>.</p>
 <h2 id="registering-frontier-squid">Registering Frontier Squid<a class="headerlink" href="#registering-frontier-squid" title="Permanent link">&para;</a></h2>
-<p>See the <a href="../../common/registration#new-registrations">registration doc</a> for instructions on registering a new resource.
-See the instructions for <a href="../../common/registration#updating-existing-registrations">updating existing registrations</a>
-if you are adding the squid service to an existing resource or resource group.</p>
-<p>Additionally:</p>
+<p>To register your Frontier Squid host, follow the general registration instructions
+<a href="../../common/registration#new-resources">here</a> with the following Frontier Squid-specific details:</p>
 <ol>
 <li>
 <p>Add a <code>Squid:</code> section to the <code>Services:</code> list, with any relevant fields for that service.
     This is a partial example:</p>
 <div class="codehilite"><pre><span></span><span class="go">...</span>
-<span class="go">FQDN: fully.qualified.DNS.name.of.your.server(s)</span>
+<span class="go">FQDN: fully.qualified.DNS.name.of.your.server</span>
 <span class="go">Services:</span>
 <span class="go">  Squid:</span>
 <span class="go">    Description: Generic squid service</span>
@@ -2125,7 +2123,17 @@ if you are adding the squid service to an existing resource or resource group.</
 <p>See the <a href="https://github.com/opensciencegrid/topology/blob/master/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml">BNL-ATLAS</a> Squid resource for a complete example.</p>
 <p>If you have more than one server providing the same squid service,
 it is best to register them with one FQDN that is a round-robin DNS
-entry listing all the squids, instead of registering them separately.</p>
+entry listing all the squids, instead of registering them separately.
+For example:</p>
+<div class="codehilite"><pre><span></span><span class="go">...</span>
+<span class="go">FQDN: fully.qualified.DNS.name.of.your.server</span>
+<span class="go">FQDNAliases:</span>
+<span class="go">  - second.fully.qualified.DNS.name.of.your.server</span>
+<span class="go">  - third.fully.qualified.DNS.name.of.your.server</span>
+<span class="go">...</span>
+</pre></div>
+
+
 </li>
 <li>
 <p>If you are setting up a new resource, set <code>Active: false</code>.
