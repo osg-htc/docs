@@ -516,5 +516,5 @@ References
 ----------
 
 - [The main yum web site](http://yum.baseurl.org/)
-- A good description of the commands for RPM and yum can be found at [Learn Linux 101: RPM and YUM Package Management](http://www.ibm.com/developerworks/linux/library/l-lpic1-v3-102-5/?ca=drs-).
+- A good description of the commands for RPM and yum can be found at [Learn Linux 101: RPM and YUM Package Management](https://developer.ibm.com/tutorials/l-lpic1-102-5/).
 
