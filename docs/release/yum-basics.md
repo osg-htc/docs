@@ -492,7 +492,7 @@ Error Downloading Packages:
 then you can try cleaning up Yum's cache: 
 
 ```console
-root@host # yum clean all --enablerpeo=*
+root@host # yum clean all --enablerepo=*
 ```
 
 !!! note 
