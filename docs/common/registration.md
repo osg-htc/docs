@@ -113,7 +113,7 @@ To register a new resource, follow the instructions below:
    the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
    You may leave any `ID` or `GroupID` fields blank.
-   When adding new entries, make sure that you do not change the formatting or indentation of the template.
+   When adding new entries, make sure that the formatting and indentation of your entry matches that of the template.
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
 
