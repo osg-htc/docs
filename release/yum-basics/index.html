@@ -2413,22 +2413,13 @@
 </pre></div>
 
 
-<p>then you can try cleaning up Yum's cache: </p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum clean all --enablerpeo<span class="o">=</span>*
+<p>then you can try cleaning up Yum's cache:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum clean all --enablerepo<span class="o">=</span>*
 </pre></div>
 
 
-<p>to make an even more thorough job you can follow also add:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum clean expire-cache --enablerepo<span class="o">=</span>*
-</pre></div>
-
-
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code>yum clean</code> cleans only enabled repositories. If you want to also clean any (temporarily) disabled repositories you need to use <code>--enablerepo=’*’</code> option.</p>
-</div>
 <h3 id="yum-complaining-about-missing-keys">Yum complaining about missing keys<a class="headerlink" href="#yum-complaining-about-missing-keys" title="Permanent link">&para;</a></h3>
-<p>If yum is complaining you can re-import the keys in your distribution: </p>
+<p>If yum is complaining you can re-import the keys in your distribution:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
 </pre></div>
 
@@ -2436,7 +2427,7 @@
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="http://yum.baseurl.org/">The main yum web site</a></li>
-<li>A good description of the commands for RPM and yum can be found at <a href="http://www.ibm.com/developerworks/linux/library/l-lpic1-v3-102-5/?ca=drs-">Learn Linux 101: RPM and YUM Package Management</a>.</li>
+<li>A good description of the commands for RPM and yum can be found at <a href="https://developer.ibm.com/tutorials/l-lpic1-102-5/">Learn Linux 101: RPM and YUM Package Management</a>.</li>
 </ul>
                 
                   
