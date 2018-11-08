@@ -495,12 +495,6 @@ then you can try cleaning up Yum's cache:
 root@host # yum clean all --enablerpeo=*
 ```
 
-to make an even more thorough job you can follow also add:
-
-```console
-root@host # yum clean expire-cache --enablerepo=*
-```
-
 !!! note 
     `yum clean` cleans only enabled repositories. If you want to also clean any (temporarily) disabled repositories you need to use `--enablerepo=’*’` option.
 
