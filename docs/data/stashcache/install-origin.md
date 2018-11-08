@@ -34,7 +34,7 @@ Before starting the installation process, consider the following points:
     * Inbound TCP port 1094 for file access via the XRootD protocol
     * Outbound TCP port 1213 to `redirector.osgstorage.org` for connecting to the data federation
     * Outbound UDP port 9619 for reporting to `collector1.opensciencegrid.org` and `collector2.opensciencegrid.org`
-* __Hardware requirements:__ We recommend that a StashCache server has at least 10Gbps connectivity and 8GB of
+* __Hardware requirements:__ We recommend that a StashCache origin has at least 1Gbps connectivity and 8GB of
   RAM.  We suggest that several gigabytes of local disk space be available for log files.
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
