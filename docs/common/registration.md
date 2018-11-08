@@ -112,7 +112,8 @@ To register a new resource, follow the instructions below:
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
    the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
-   If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.
+   You may leave any `ID` or `GroupID` fields blank.
+   When adding new entries, make sure that the formatting and indentation of your entry matches that of the template.
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
 
@@ -132,6 +133,7 @@ To modify an existing resource, follow these instructions:
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
    the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
+   You may leave any `ID` or `GroupID` fields blank.
    Make sure that the formatting and indentation of the modified entry does not change.
 
     !!! note ""You're editing a file in a project you don't have write access to.""
@@ -300,6 +302,7 @@ To modify a VO's information or register a new VO, follow the instructions below
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
    the [VO template](https://github.com/opensciencegrid/topology/blob/master/template-virtual-organization.yaml)
    as a guide.
+   You may leave any `ID` fields blank.
    If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
@@ -332,6 +335,7 @@ To modify a VO's information or register a new VO, follow the instructions below
 
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
    the [project template](https://github.com/opensciencegrid/topology/blob/master/template-projects.yaml) as a guide.
+   You may leave any `ID` fields blank.
    If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
