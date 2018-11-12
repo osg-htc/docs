@@ -46,16 +46,31 @@ This file is a flat file of the following form:
 idtype id path privs
 ```
 
-Some examples of each option. For more details or examples on how to use
-templated user options, see [XRootd Authorization Database
-File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
-
-|        |                                                                                                                                       |
+| Item   | Description                                                                                                                           |
 |--------|---------------------------------------------------------------------------------------------------------------------------------------|
 | idtype | Type of id. Use `u` for username, `g` for group, etc.                                                                                 |
 | id     | Username (or groupname). Use `*` for all users or `=` for user-specific capabilities, like home directories                           |
 | path   | The path prefix to be used for matching purposes                                                                                      |
 | privs  | Letter list of privileges: `a - all ; l - lookup ; d - delete ; n - rename ; i - insert ; r - read ; k - lock (not used) ; w - write` |
+
+Examples:
+
+            # any user can read files everywhere _except_ under /private
+            u * -rl /private / rl
+            # users can do anything to files and dirs under their home directories
+            u = /home/@=/ a
+            # VOMS group uscms can do anything to files and dirs under /uscms
+            g uscms /uscms a
+
+
+Note: specific paths need to be specified _before_ generic paths, i.e.
+
+            u * rl / -rl /private
+
+does not work.
+
+For more details or examples on how to use templated user options, see
+[XRootd Authorization Database File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
 
 
 #### Recommended Security Option: xrootd-lcmaps authorization
