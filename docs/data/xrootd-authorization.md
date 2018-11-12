@@ -77,20 +77,6 @@ on all data nodes:
         :::console
         root@host # yum install xrootd-lcmaps vo-client
 
-1. Append the following to `/etc/lcmaps.db`:
-
-        xrootd_policy:
-        verifyproxynokey -> banfile
-        banfile -> banvomsfile | bad
-        banvomsfile -> gridmapfile | bad
-        gridmapfile -> good | vomsmapfile
-        vomsmapfile -> good | defaultmapfile
-        defaultmapfile -> good | bad
-
-1. Modify `/etc/osg/config.d/10-misc.ini` so that future invocations don't overwrite your `/etc/lcmaps.db` changes:
-
-        edit_lcmaps_db = False
-
 1. Configure access rights for mapped users by creating and modifying the XRootD [authorization file](#authorization-file)
 
 1. Modify your XRootD configuration:
