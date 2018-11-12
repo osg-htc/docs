@@ -113,35 +113,6 @@ on all data nodes:
             acc.authdb /etc/xrootd/auth_file
             ofs.authorize
 
-        If you are running XRootD in clustered mode, the above will also need to be added to all data nodes in the section relevant to the data node server. For instance, in the [above example](#security-option-1-adding-unix-security), the security configuration should be placed after the `all.role server` line:
-
-            all.export /data/xrootdfs
-            set xrdr=%RED%hostA%ENDCOLOR%
-            all.manager $(xrdr):3121
-            if $(xrdr) && named cns
-                all.export /data/inventory
-                xrd.port 1095
-            else if $(xrdr)
-                all.role manager
-                xrd.port 1094
-            else
-                all.role server
-                oss.localroot /local/xrootd
-                ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory
-                cms.space min 2g 5g
-
-                %RED% # ENABLE_SECURITY_BEGIN
-                xrootd.seclib /usr/lib64/libXrdSec-4.so
-                sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
-                                    -cert:/etc/grid-security/xrootd/xrootdcert.pem \
-                                    -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
-                                    -authzfun:libXrdLcmaps.so -authzfunparms:--loglevel,0 \
-                                    -gmapopt:10 -gmapto:0
-                acc.authdb /etc/xrootd/auth_file
-                ofs.authorize
-                # ENABLE_SECURITY_END %ENDCOLOR%
-            fi
-
 1. Restart the [relevant services](#using-xrootd)
 
 To verify the LCMAPS security, run the following commands from a machine with your user certificate/key pair,
