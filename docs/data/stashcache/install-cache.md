@@ -57,13 +57,13 @@ statistics about the cache. To simplify installation, OSG provides convenience R
 software with a single command:
 
     :::console
-    root@host # yum install --enablerepo=osg-development stashcache-cache-server
+    root@host # yum install --enablerepo=osg-testing stashcache-cache-server
 
 !!! note
     If installing authenticated StashCache Cache server, you need an additional package:
 
         :::console
-        root@host # yum install --enablerepo=osg-development stashcache-cache-server-auth
+        root@host # yum install --enablerepo=osg-testing stashcache-cache-server-auth
 
 The cache server configuration assumes the disk used to cache data is mounted at `/stash` and owned by the
 `xrootd:xrootd` user and group.

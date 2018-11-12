@@ -30,10 +30,11 @@ Before starting the installation process, consider the following points:
 * __Host certificate:__ The StashCache server uses a host certificate to advertise to a central collector.
   The [host certificate documentation](/security/host-certs.md) provides more information on setting up host
   certificates.
-* __Network ports:__ The StashCache Origin service defaults to using inbound TCP port 1094.  Outbound
-  connectivity to TCP `redirector.osgstorage.org:1213` and UDP `collector.opensciencegrid.org:9619` is
-  required.
-* __Hardware requirements:__ We recommend that a StashCache server has at least 10Gbps connectivity and 8GB of
+* __Network ports:__ The StashCache Origin service requires the following ports open:
+    * Inbound TCP port 1094 for file access via the XRootD protocol
+    * Outbound TCP port 1213 to `redirector.osgstorage.org` for connecting to the data federation
+    * Outbound UDP port 9619 for reporting to `collector1.opensciencegrid.org` and `collector2.opensciencegrid.org`
+* __Hardware requirements:__ We recommend that a StashCache origin has at least 1Gbps connectivity and 8GB of
   RAM.  We suggest that several gigabytes of local disk space be available for log files.
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
@@ -55,8 +56,8 @@ software with a single command:
 root@host # yum install stashcache-origin-server
 ```
 
-For this installation guide, we assume that the data to be exported to the federation is mounted at */stash*
-and owned by the `xrootd:xrootd` user.  
+For this installation guide, we assume that the data to be exported to the federation is mounted at `/stash`
+and owned by the `xrootd:xrootd` user.
 
 Configuring the Origin Server
 -----------------------------
@@ -66,27 +67,34 @@ The `stashcache-daemon` package provides a default configuration file,
 
 The most common lines to customize are:
 
-* `oss.remoteroot /`: A prefix that will be prepended to all exported filenames.  Must be set to `/$VONAME`
-  for your VO.  May only be specified once.
-* `set localroot = /stash`: Change the `localroot` to the location where your data is mounted on
+* `oss.localroot /stash`: Change the `localroot` to the location where your data is mounted on
   the origin server; default is `/stash`.
-* `all.export /`: A sub-directory within the `localroot` directory that will be exported.  Customize
-  if not all data within `localroot` should be exported; default is `/`.  If multiple directories must
-  be exported, you may specify `all.export` multiple times.
+* `all.export /<YOUR VO>`: A sub-directory within the `localroot` directory that will be exported.
+  If multiple directories must be exported, you may specify `all.export` multiple times.
 
-For example, if the HCC VO would like to setup an origin server, exporting from the mountpoint `/mnt/bigdata`,
-but only exporting the sub-directories `/mnt/bigdata/bio/datasets` and `/mnt/bigdata/hep/generators`, they
-would use the following configuration:
+For example, if the HCC VO would like to set up an origin server exporting from the mountpoint `/mnt/bigdata`,
+but only export the subdirectories `/mnt/bigdata/hcc/bio/datasets` and `/mnt/bigdata/hcc/hep/generators`,
+they would use the following configuration:
 
 ```
-oss.remoteroot /hcc
-set localroot = /mnt/bigdata
-all.export /bio/datasets
-all.export /hep/generators
+oss.localroot /mnt/bigdata
+all.export /hcc/bio/datasets
+all.export /hcc/hep/generators
 ```
 
-With this configuration, the data in `/mnt/bigdata/chemistry` would not be available via StashCache; the
-contents in `/mnt/bigdata/bio/datasets` would be available under the StashCache path `/hcc/bio/datasets`.
+With this configuration, the data under `/mnt/bigdata/hcc/bio/datasets` would be available under the StashCache path
+`/hcc/bio/datasets`, the data under `/mnt/bigdata/hcc/hep/generators` would be available under the StashCache path
+`/hcc/hep/generators`, and no other data would be available via StashCache.
+
+!!! warning
+    The StashCache namespace is *global* within a data federation.
+    Directories you export **must not** collide with directories provided by other origin servers.
+
+    The best way to do this is to create a directory named after your VO or project,
+    place all files you want to distribute within that directory,
+    and export only that directory or its subdirectories.
+
+
 
 Managing the Origin Service
 ---------------------------
@@ -107,25 +115,68 @@ These services must be managed with `systemctl`.  As a reminder, here are common
 | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
 | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 
-Testing Origin server Availability
-----------------------------------
 
-Once your server has been registered with the OSG and started, it should subscribe to the OSG-wide
-redirector service.  To verify that your origin is correctly advertising its availability, run the
-following command:
+Verifying the Origin Server
+---------------------------
+
+Once your server has been registered with the OSG and started,
+perform the following steps to verify that it is functional.
+
+
+### Testing availability
+
+To verify that your origin is correctly advertising its availability, run the following command from the origin server:
 
 ```
-[user@client ~]$ xrdmapc --list s redirector.opensciencegrid.org:1094 
-0**** redirector.grid.iu.edu:1094
-      Srv redirector1.grid.iu.edu:2094
-      Srv csiu.grid.iu.edu:1094
-      Srv stash.osgconnect.net:1094
-      Srv stashcache.fnal.gov:1094
-      Srv redirector2.grid.iu.edu:2094
+[user@server ~]$ xrdmapc -r --list s redirector.osgstorage.org:1094
+0**** redirector.osgstorage.org:1094
       Srv ceph-gridftp1.grid.uchicago.edu:1094
+      Srv stashcache.fnal.gov:1094
+      Srv stash.osgconnect.net:1094
+      Srv origin.ligo.caltech.edu:1094
+      Srv csiu.grid.iu.edu:1094
 ```
 
-The output should list hostname of your service. If not, look for any signs of trouble in the log files
-or contact `support@opensciencegrid.org` for support.
+The output should list the hostname of your origin server.
 
-<!-- TODO: include an example for downloading via `stashcp` -->
+
+### Testing directory export
+
+To verify that the directories you are exporting are visible from the redirector,
+run the following command from the origin server:
+
+```console
+[user@server ~]$ xrdmapc -r --verify --list s redirector.osgstorage.org:1094 %RED%<exported dir>%ENDCOLOR%
+0*rv* redirector.osgstorage.org:1094
+  >+  Srv ceph-gridftp1.grid.uchicago.edu:1094
+   ?  Srv stashcache.fnal.gov:1094 [not authorized]
+  >+  Srv stash.osgconnect.net:1094
+   -  Srv origin.ligo.caltech.edu:1094
+   ?  Srv csiu.grid.iu.edu:1094 [connect error]
+```
+
+Your server should be marked with a `>+` to indicate that it contains the given path and the path was accessible.
+
+
+### Testing file access
+
+To verify that you can download a file from the origin server, use the `stashcp` tool.
+Place a test file in the exported dir.
+`stashcp` is available in the `stashcache-client` RPM.
+Run the following command:
+
+```console
+[user@host]$ stashcp %RED%<test file>%ENDCOLOR% /tmp/testfile
+```
+<!-- ^ note the unicode space ' ' between "test" and "file" to fix syntax highlighting
+       (because it thinks "test" is a keyword)
+--->
+
+If successful, there should be a file at `/tmp/testfile` with the contents of the test file on your origin server.
+If unsuccessful, you can pass the `-d` flag to `stashcp` for debug info.
+
+
+## Getting help
+
+If you need help setting up your origin server, contact us at support@opensciencegrid.org.
+
