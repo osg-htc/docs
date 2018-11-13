@@ -158,7 +158,8 @@ To register your Frontier Squid host, follow the general registration instructio
             Description: Generic squid service
         ...
 
-    See the [BNL-ATLAS](https://github.com/opensciencegrid/topology/blob/master/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml) Squid resource for a complete example.
+    See the [BNL_ATLAS_Frontier_Squid](https://github.com/opensciencegrid/topology/blob/master/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml#L306-L325) 
+    for a complete example.
 
     For a resource served by multiple Frontier Squid servers, we recommend setting up a round-robin DNS entry and using
     it for the FQDN field in your registration.
