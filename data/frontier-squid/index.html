@@ -2112,7 +2112,7 @@ good to do the test in the
 <p>Add a <code>Squid:</code> section to the <code>Services:</code> list, with any relevant fields for that service.
     This is a partial example:</p>
 <div class="codehilite"><pre><span></span><span class="go">...</span>
-<span class="go">FQDN: fully.qualified.DNS.name.of.your.server</span>
+<span class="go">FQDN: &lt;FULLY QUALIFIED DOMAIN NAME&gt;</span>
 <span class="go">Services:</span>
 <span class="go">  Squid:</span>
 <span class="go">    Description: Generic squid service</span>
@@ -2120,20 +2120,10 @@ good to do the test in the
 </pre></div>
 
 
-<p>See the <a href="https://github.com/opensciencegrid/topology/blob/master/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml">BNL-ATLAS</a> Squid resource for a complete example.</p>
-<p>If you have more than one server providing the same squid service,
-it is best to register them with one FQDN that is a round-robin DNS
-entry listing all the squids, instead of registering them separately.
-For example:</p>
-<div class="codehilite"><pre><span></span><span class="go">...</span>
-<span class="go">FQDN: fully.qualified.DNS.name.of.your.server</span>
-<span class="go">FQDNAliases:</span>
-<span class="go">  - second.fully.qualified.DNS.name.of.your.server</span>
-<span class="go">  - third.fully.qualified.DNS.name.of.your.server</span>
-<span class="go">...</span>
-</pre></div>
-
-
+<p>Replacing <code>&lt;FULLY QUALIFIED DOMAIN NAME&gt;</code> with your Frontier Squid server's DNS entry or in the case of multiple
+Frontier Squid servers for a single resource, the round-robin DNS entry.</p>
+<p>See the <a href="https://github.com/opensciencegrid/topology/blob/master/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml#L306-L325">BNL_ATLAS_Frontier_Squid</a> 
+for a complete example.</p>
 </li>
 <li>
 <p>If you are setting up a new resource, set <code>Active: false</code>.
