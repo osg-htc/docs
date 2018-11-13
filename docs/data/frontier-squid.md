@@ -152,17 +152,17 @@ To register your Frontier Squid host, follow the general registration instructio
 
         :::console
         ...
-        FQDN: fully.qualified.DNS.name.of.your.server
+        FQDN: <FULLY QUALIFIED DOMAIN NAME>
         Services:
           Squid:
             Description: Generic squid service
         ...
 
+    Replacing `<FULLY QUALIFIED DOMAIN NAME>` with your Frontier Squid server's DNS entry or in the case of multiple
+    Frontier Squid servers for a single resource, the round-robin DNS entry.
+
     See the [BNL_ATLAS_Frontier_Squid](https://github.com/opensciencegrid/topology/blob/master/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml#L306-L325) 
     for a complete example.
-
-    For a resource served by multiple Frontier Squid servers, we recommend setting up a round-robin DNS entry and using
-    it for the FQDN field in your registration.
 
 2.  If you are setting up a new resource, set `Active: false`.
     Only set `Active: true` for a resource when it is accepting requests and ready for production.
