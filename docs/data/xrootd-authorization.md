@@ -109,7 +109,7 @@ on all data nodes:
             sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
                                 -cert:/etc/grid-security/xrootd/xrootdcert.pem \
                                 -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
-                                -authzfun:libXrdLcmaps.so -authzfunparms:--loglevel,0 \
+                                -authzfun:libXrdLcmaps.so -authzfunparms:--loglevel,0,--policy,authorize_only \
                                 -gmapopt:10 -gmapto:0
             acc.authdb /etc/xrootd/auth_file
             ofs.authorize
