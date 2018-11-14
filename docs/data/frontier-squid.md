@@ -168,7 +168,7 @@ To register your Frontier Squid host, follow the general registration instructio
     Only set `Active: true` for a resource when it is accepting requests and ready for production.
 
 If you are running a WLCG site, a few hours after a squid is registered
-and marked Active
+and marked `Active`, 
 [verify that it is monitored by WLCG](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#Verify_monitor).
 
 ## Reference
