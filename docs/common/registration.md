@@ -187,7 +187,8 @@ Wisconsin` can be found and registered in the following file, relative to the
 topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC_downtime.yaml`
 ```
 
-!!! note Do not put downtime updates in the same pull request as other topology updates.
+!!! note 
+    Do not put downtime updates in the same pull request as other topology updates.
 
 ### Registering new downtime ###
 
