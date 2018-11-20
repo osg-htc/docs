@@ -6,14 +6,14 @@ network to cache data frequently used on the OSG, reducing data transfer over th
 decreasing access latency.
 
 !!! note
-    The cache service must be registered with the OSG if it is to be used by clients.  You may start the
-    registration procedure prior to finishing the installation by contacting <support@opensciencegrid.org>
-    with the following details:
+    The _cache_ service must be registered with the OSG if it is to be used by clients. You may start 
+    registration procedure prior to finishing the installation by [using this link](#registering-the-cache) 
+    along with the basic information like:
 
     * Resource name and hostname.
     * Administrative and security contact.
 
-    Follow the [registration documentation](/common/registration.md) for more information.
+    Detailed walkthrough of the process is described [here](#registering-the-cache). 
 
 ## Installation prerequisites for the Cache
 
@@ -206,3 +206,73 @@ user@host $ condor_status -any -l -const "Name==\"xrootd@`hostname`\""
 ```
 
 Where `hostname` is the string returned by the hostname command. The output of the above command should provide an HTCondor ClassAd that details the status of your cache.
+
+Registering the Cache
+---------------------
+To be part of the OSG StashCache Federation, your _cache_ must be
+[registered with the OSG](https://github.com/opensciencegrid/topology#topology).
+To register your resource:
+
+1. Identify the facility, site, and resource group where your _cache_ is hosted.
+   For example, the CHTC-Wisconsin uses the following information:
+
+```
+Disable: false
+GroupDescription: The University of Wisconsin's Center for High Throughput Computing. Note
+  that CHTC and GLOW are closely related, and in many contexts, they are synonyms.
+GroupID: 314
+Production: true
+Resources:
+  CHTC_STASHCACHE_CACHE:
+    Active: false
+    Description: This is a StashCache cache server at UW.
+    ID: 958
+    ContactLists:
+      Administrative Contact:
+        Primary:
+          ID: ec1013224934d6a11a2a46a5234b3337095f5ec4
+          Name: Matyas Selmeci
+        Secondary:
+          ID: 46a55ac4815b2b8c00ff283549f413113b45d628
+          Name: Aaron Moate
+        Tertiary:
+          ID: 3f306d87236d84ef770ddf0c34844908e2d94dfa
+          Name: Timothy Slauson
+      Security Contact:
+        Primary:
+          ID: ec1013224934d6a11a2a46a5234b3337095f5ec4
+          Name: Matyas Selmeci
+        Secondary:
+          ID: 46a55ac4815b2b8c00ff283549f413113b45d628
+          Name: Aaron Moate
+        Tertiary:
+          ID: 3f306d87236d84ef770ddf0c34844908e2d94dfa
+          Name: Timothy Slauson
+    FQDN: sc-cache.chtc.wisc.edu
+    Services:
+      XRootD cache server:
+        Description: StashCache cache server
+    VOOwnership:
+      GLOW: 100
+```
+
+!!! warning
+    The contact person should be listed in the OSG topology [contacts list](https://topology.opensciencegrid.org/contacts). 
+    If the person or the resource are completely new (e.g. ID and/or GroupID doesn't exist), 
+    you should consider to follow [main OSG registration documentation](/common/registration.md).
+
+1. Using the above information, [create or update](https://github.com/opensciencegrid/topology#how-to-register) the
+   appropriate YAML file, using [this template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
+   as a guide.
+
+1. Update information of your resource (longitute/latitude included) in the [stashcp.json](https://github.com/opensciencegrid/StashCache/blob/master/bin/caches.json) by opening pull request.
+   In order to identify GeoIP information you can use the following tool provided by [MAXMIND](https://www.maxmind.com/en/geoip-demo).  
+
+1. In order to get your cache available to the CVMFS _osg-config_ repository (OASIS), open pull request by adding your resource under `CVMFS_EXTERNAL_URL` [here](https://github.com/opensciencegrid/oasis-server/blob/6aa1492b44ed7d74f1b737f1ea92ace31190e6a2/goc/config-osg/etc/cvmfs/domain.d/osgstorage.org.conf#L7).
+
+1. If you run authenticated cache instance for the specific VO, for example LIGO, edit and update `CVMFS_EXTERNAL_URL` [here](https://github.com/opensciencegrid/oasis-server/blob/6aa1492b44ed7d74f1b737f1ea92ace31190e6a2/goc/config-osg/etc/cvmfs/config.d/ligo.osgstorage.org.conf#L1).
+
+Getting Help
+------------
+
+To get assistance, please use the [this page](/common/help) or contact directly <support@opensciencegrid.org>.
