@@ -14,6 +14,10 @@ in the OSG.
 #### Authorization file
 
 In order to add security to your cluster you will need to add "auth\_file" on the your data server node. 
+
+For more details or examples on how to use templated user options, see
+[XRootd Authorization Database File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
+
 Create `/etc/xrootd/auth_file` :
 
 ```file
@@ -73,9 +77,6 @@ may look like the following:
     attempted.
     This allows you to provide for file system areas that are effectively "owned" by a user without needing to specify
     the actual user's name.
-
-For more details or examples on how to use templated user options, see
-[XRootd Authorization Database File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
 
 
 #### Enabling xrootd-lcmaps authorization
