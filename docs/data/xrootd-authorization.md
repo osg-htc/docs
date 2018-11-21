@@ -2,10 +2,8 @@ Configuring XRootD Authorization
 ================================
 
 There are several authorization options in XRootD available through the security plugins. 
-In this document, we will cover the security option supported in the OSG:
-
--   [`xrootd-lcmaps`](#recommended-security-option-xrootd-lcmaps-authorization): Using the LCMAPS callout to use
-    X509-based authentication
+In this document, we will cover the [`xrootd-lcmaps`](#enabling-xrootd-lcmaps-authorization) security option supported
+in the OSG.
 
 !!! note
     On the data nodes, the files will actually be owned by unix user `xrootd` (or other daemon user), not as the user
@@ -80,7 +78,7 @@ For more details or examples on how to use templated user options, see
 [XRootd Authorization Database File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
 
 
-#### Recommended Security Option: xrootd-lcmaps authorization
+#### Enabling xrootd-lcmaps authorization
 
 The xrootd-lcmaps security plugin uses the `lcmaps` library and the [LCMAPS VOMS plugin](/security/lcmaps-voms-authentication)
 to authenticate and authorize users based on X509 certificates and VOMS attributes. Perform the following instructions
