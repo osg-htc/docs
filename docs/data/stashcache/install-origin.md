@@ -11,9 +11,7 @@ to export its data to the StashCache data federation.
 
     * Resource name and hostname.
     * VO associated with this origin server (will be used to determine the origin's namespace prefix).
-    * Administrative and security contact.
-
-    Detailed walkthrough of the process is described [here](#registering-the-origin). 
+    * Administrative and security contact. 
 
 This guide covers the procedure for exporting world-readable data; publishing proprietary data is still
 experimental.
@@ -178,52 +176,9 @@ If unsuccessful, you can pass the `-d` flag to `stashcp` for debug info.
 
 Registering the Origin
 ----------------------
-To be part of the OSG StashCache Federation, your _origin_ must be
-[registered with the OSG](https://github.com/opensciencegrid/topology#topology).
-To register your resource:
+To be part of the OSG StashCache Federation, your _cache_ must be
+[registered with the OSG](/common/registration.md).  The service type is "XRootD origin server"
 
-1. Identify the facility, site, and resource group where your _origin_ is hosted.
-   For example, the LIGO-Caltech uses the following information:
-
-```
-Disable: false
-Production: true
-GroupDescription: XRootD Origin Server for LIGO in OSG StashCache Federation
-GroupID: 485 
-Resources:
-  CIT_LIGO_ORIGIN:
-    ContactLists:
-      Administrative Contact:
-        Primary:
-          Name: Stuart Anderson
-          ID: c50e7cc9d0086272ef995fb76461612d40c70435
-      Security Contact:
-        Primary:
-          Name: Stuart Anderson
-          ID: c50e7cc9d0086272ef995fb76461612d40c70435
-      Resource Report Contact:
-        Primary:
-          Name: Stuart Anderson
-          ID: c50e7cc9d0086272ef995fb76461612d40c70435
-    FQDN: origin.ligo.caltech.edu
-    ID: 948
-    Services:
-      XRootD origin server:
-        Description: StashCache Origin server
-SupportCenter: Advanced LIGO
-```
-
-!!! warning
-    The contact person should be listed in the OSG topology [contacts list](https://topology.opensciencegrid.org/contacts). 
-    If the person or the resource are completely new (e.g. ID and/or GroupID doesn't exist), 
-    you should consider to follow [main OSG registration documentation](/common/registration.md).
-
-1. Using the above information, [create or update](https://github.com/opensciencegrid/topology#how-to-register) the
-   appropriate YAML file, using [this template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
-   as a guide.
-
-1. Update information of your resource (longitute/latitude included) in the [stashcp.json](https://github.com/opensciencegrid/StashCache/blob/master/bin/caches.json) by opening pull request.
-   In order to identify GeoIP information you can use the following tool provided by [MAXMIND](https://www.maxmind.com/en/geoip-demo).  
 
 Getting Help
 ------------
