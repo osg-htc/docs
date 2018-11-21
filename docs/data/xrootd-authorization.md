@@ -47,7 +47,7 @@ This file is a flat file of the following form:
 idtype id path privs
 ```
 
-| Item   | Description                                                                                                                           |
+| Field  | Description                                                                                                                           |
 |--------|---------------------------------------------------------------------------------------------------------------------------------------|
 | idtype | Type of id. Use `u` for username, `g` for group, etc.                                                                                 |
 | id     | Username (or groupname). Use `*` for all users or `=` for user-specific capabilities, like home directories                           |
