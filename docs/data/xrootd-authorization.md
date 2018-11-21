@@ -63,11 +63,10 @@ Examples:
             g uscms /uscms a
 
 
-Note: specific paths need to be specified _before_ generic paths, i.e.
+!!! note
+    Specific paths need to be specified _before_ generic paths; e.g, this does not work:
 
             u * rl / -rl /private
-
-does not work.
 
 For more details or examples on how to use templated user options, see
 [XRootd Authorization Database File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
