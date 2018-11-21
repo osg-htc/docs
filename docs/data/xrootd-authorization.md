@@ -70,6 +70,12 @@ may look like the following:
 
             u * rl / -rl /private
 
+!!! note
+    The character sequence `@=` indicates where the user's name should be substituted before a path prefix match is
+    attempted.
+    This allows you to provide for file system areas that are effectively "owned" by a user without needing to specify
+    the actual user's name.
+
 For more details or examples on how to use templated user options, see
 [XRootd Authorization Database File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
 
