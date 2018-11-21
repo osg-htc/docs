@@ -50,7 +50,7 @@ idtype id path privs
 | idtype | Type of id. Use `u` for username, `g` for group, etc.                                                                                 |
 | id     | Username (or groupname). Use `*` for all users or `=` for user-specific capabilities, like home directories                           |
 | path   | The path prefix to be used for matching purposes                                                                                      |
-| privs  | Letter list of privileges: `a - all ; l - lookup ; d - delete ; n - rename ; i - insert ; r - read ; k - lock (not used) ; w - write` |
+| privs  | Letter list of privileges: `a` - all ; `l` - lookup ; `d` - delete ; `n` - rename ; `i` - insert ; `r` - read ; `k` - lock (not used) ; `w` - write ; `-` - prefix to remove specified privileges |
 
 For example, a site with a CMS-specific and private storage areas as well as home directories private to each local user
 may look like the following:
