@@ -54,7 +54,8 @@ idtype id path privs
 | path   | The path prefix to be used for matching purposes                                                                                      |
 | privs  | Letter list of privileges: `a - all ; l - lookup ; d - delete ; n - rename ; i - insert ; r - read ; k - lock (not used) ; w - write` |
 
-Examples:
+For example, a site with a CMS-specific and private storage areas as well as home directories private to each local user
+may look like the following:
 
             # any user can read files everywhere _except_ under /private
             u * -rl /private / rl
