@@ -7,10 +7,11 @@ In this document, we will cover the security option supported in the OSG:
 -   [`xrootd-lcmaps`](#recommended-security-option-xrootd-lcmaps-authorization): Using the LCMAPS callout to use
     X509-based authentication
 
-Note: On the data nodes, the files will actually be owned by unix user `xrootd` (or other daemon user), not as the user
-authenticated to, under most circumstances. 
-XRootD will verify the permissions and authorization based on the user that the security plugin authenticates you to,
-but, internally, the data node files will be owned by the `xrootd` user.
+!!! note
+    On the data nodes, the files will actually be owned by unix user `xrootd` (or other daemon user), not as the user
+    authenticated to, under most circumstances.
+    XRootD will verify the permissions and authorization based on the user that the security plugin authenticates you
+    to, but, internally, the data node files will be owned by the `xrootd` user.
 
 #### Authorization file
 
