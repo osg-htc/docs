@@ -13,7 +13,12 @@ in the OSG.
 
 #### Authorization file
 
-In order to add security to your cluster you will need to add "auth\_file" on the your data server node. 
+XRootD allows configuring fine-grained file access permissions based on usernames and paths.
+This is configured in the authorization file `/etc/xrootd/auth_file` on the data server node, which should be writable
+only by the xrootd user, optionally readable by others.
+
+(The path `/etc/xrootd/auth_file` corresponds to the
+[`acc.authdb`](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606592) parameter in your xrootd config.)
 
 For more details or examples on how to use templated user options, see
 [XRootd Authorization Database File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
