@@ -62,21 +62,6 @@ xrd.network keepalive kaparms 10m,1m,5
 xrd.timeout idle 60m
 ```
 
-#### (Optional) Enable HTTP support
-
-In order to enable XRootD HTTP support please follow the instructions
-[here](/data/install-xrootd/#optional-enabling-xrootd-over-http)
-
-#### (Optional) Adding Hadoop support to XRootD
-
-For documentation on how to export your Hadoop storage using XRootD please see
-[this documentation](/data/install-xrootd/#optional-adding-hadoop-support-to-xrootd)
-
-#### (Optional) Adding CMS TFC support to XRootD (CMS sites only)
-
-For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
-See [this documentation](/data/install-xrootd/#optional-adding-cms-tfc-support-to-xrootd-cms-sites-only).
-
 ### Authorization file
 
 For the authorization options on XRootD please see [here](/data/install-xrootd/#optional-authorization)
@@ -91,6 +76,27 @@ g /cms /store lr
 
 To configure the LCMAPS authentication please follow the documentation
 [here](/data/install-xrootd/#security-option-3-xrootd-lcmaps-authorization)
+
+### Optional Configuration
+
+The following configuration steps are optional and will likely not be required for setting up a small site.
+If you do not need any of the following special configurations, skip to
+[the section on using XRootD](#using-xrootd).
+
+#### Enabling HTTP support
+
+In order to enable XRootD HTTP support please follow the instructions
+[here](/data/install-xrootd/#optional-enabling-xrootd-over-http)
+
+#### Enabling Hadoop support
+
+For documentation on how to export your Hadoop storage using XRootD please see
+[this documentation](/data/install-xrootd/#optional-adding-hadoop-support-to-xrootd)
+
+#### Enabling CMS TFC support (CMS sites only)
+
+For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
+See [this documentation](/data/install-xrootd/#optional-adding-cms-tfc-support-to-xrootd-cms-sites-only).
 
 Using XRootD
 ------------
