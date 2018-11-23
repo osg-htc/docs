@@ -2,8 +2,8 @@ Install XRootD Standalone
 =========================
 
 [XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in a variety of ways to access data,
-typically distributed among actual storage resources. In this document we focus on using XrootD as a simple layer of exporting
-an underlaying storage system like HDFS or through a POSIX enabled mount to the outside world.
+typically distributed among actual storage resources. In this document we focus on using XRootD as a simple layer
+exporting an underlying storage system (e.g., [HDFS](/data/install-hadoop.md)) to the outside world.
 
 Before Starting
 ---------------
