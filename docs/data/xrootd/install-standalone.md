@@ -1,5 +1,5 @@
-Install XRootD Standalone
-=========================
+Install XRootD Gateway
+======================
 
 [XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in a variety of ways to access data,
 typically distributed among actual storage resources. In this document we focus on using XRootD as a simple layer
