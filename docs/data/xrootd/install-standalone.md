@@ -109,31 +109,48 @@ As a reminder, here are common service commands (all run as `root`):
 | Enable a service to start during boot       | `chkconfig SERVICE-NAME on`  | `systemctl enable SERVICE-NAME`  |
 | Disable a service from starting during boot | `chkconfig SERVICE-NAME off` | `systemctl disable SERVICE-NAME` |
 
-Testing XRootD
---------------
+Validating XRootD
+-----------------
 
-### Basic XRootD Test
+To validate an XRootD installation, perform the following verification steps:
 
-To perform a basic test of XRootD you can use:
+1. Verify file transfer over the XRootD protocol using XRootD client tools:
 
-``` console
-root@host # yum install xrootd-client
-root@host # xrdcp /bin/sh root://localhost:1094//tmp/first_test
-[xrootd] Total 0.76 MB  [====================] 100.00 % [inf MB/s]
-root@host # ls -l /tmp/first_test
--rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
-```
+    1. Install the client tools:
 
-#### (Optional) Testing XRootD over HTTP
+            :::console
+            root@host # yum install xrootd-client
 
-To perform a test of the HTTP connectivity try:
+    1. Copy a file to a directory for which you have write access:
 
-``` console
-root@host # yum install gfal2*
-root@host # gfal-copy /bin/sh http://localhost:1094//tmp/first_test
-root@host # ls -l /tmp/first_test
--rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
-```
+            :::console
+            root@host # xrdcp /bin/sh root://localhost:1094//tmp/first_test
+            [xrootd] Total 0.76 MB  [====================] 100.00 % [inf MB/s]
+
+    1. Verify that the file has been copied over:
+
+            :::console
+            root@host # ls -l /tmp/first_test
+            -rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
+
+1. If you have enabled [HTTP support](#optional-enable-http-support), verify file transfer over HTTP using GFAL2 client
+   tools:
+
+    1. Install the GFAL2 client tools:
+
+            :::console
+            root@host # yum install gfal2-util gfal2-plugin-http
+
+    1. Copy a file to a directory for which you have write access:
+
+            :::console
+            root@host # gfal-copy /bin/sh http://localhost:1094//tmp/first_test
+
+    1. Verify that the file has been copied over:
+
+            :::console
+            root@host # ls -l /tmp/first_test
+            -rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
 
 Getting Help
 ------------
