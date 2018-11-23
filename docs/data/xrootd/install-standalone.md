@@ -138,7 +138,7 @@ root@host # ls -l /tmp/first_test
 Getting Help
 ------------
 
-To get assistance. please use the [Help Procedure](../common/help/) page.
+To get assistance. please use the [Help Procedure](/common/help/) page.
 
 Reference
 ---------
