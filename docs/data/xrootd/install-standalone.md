@@ -11,7 +11,8 @@ Before Starting
 Before starting the installation process, consider the following points:
 
 -   **User IDs:** If it does not exist already, the installation will create the Linux user ID `xrootd`
--   **Service certificate:** The XRootD service uses a host certificate at `/etc/grid-security/xrd/[xrdcert.pem|xrdkey.pem]`
+-   **Service certificate:** The XRootD service uses a host certificate and key pair at
+    `/etc/grid-security/xrd/xrdcert.pem` and `/etc/grid-security/xrd/xrdkey.pem`
 -   **Networking:** The XRootD service uses port 1094 by default
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
