@@ -1,25 +1,29 @@
 XRootD Overview
 ===============
 
-The XRootD project aims at giving high performance, scalable fault tolerant access to data repositories of many kinds. The typical usage is to give access to file-based ones. It is based on a scalable architecture, a communication protocol, and a set of plugins and tools based on those. The freedom to configure it and to make it scale (for size and performance) allows the deployment of data access clusters of virtually any size, which can include sophisticated features, like authentication/authorization, integrations with other systems, WAN data distribution, etc.
+[XRootD](xrootd.org) is a highly-configurable data server used by sites in the OSG to support VO-specific
+storage needs.
+The software can be used to create a export an existing file system through multiple protocols, participate in a data
+federation, or act as a caching service.
+XRootD data servers can stream data directly to client applications or support experiment-wide data management by
+performing bulk data transfer via "third-party-copy" between distinct sites.
+The OSG currently supports two different configurations of XRootD:
 
-XRootD software framework is a fully generic suite for fast, low latency and scalable data access, which can serve natively any kind of data, organized as a hierarchical filesystem-like namespace, based on the concept of directory. As a general rule, particular emphasis has been put in the quality of the core software parts.
+XCache
+------
 
-Planning
---------
+Previously known as the "XRootD proxy cache", XCache provides a caching service for data federations that serve one or
+more VOs.
+In the OSG, there are three data federations based on XCache: ATLAS XCache, CMS XCache, and
+[StashCache](/data/stashcache/overview).
 
--   [XRootD Homepage](http://xrootd.slac.stanford.edu/)
+If you are affiliated with a site or VO interested in contributing to or starting a data federation, contact us at
+<mailto:help@opensciencegrid.org>.
 
-Installation
-------------
+XRootD Gateway
+--------------
 
--   [Install XRootD Server](/data/xrootd/install-storage-element): This page explains how to install an XRootD redirector and data nodes
-
-Operations
-----------
-
--   [Install XRootD client](/data/xrootd/install-client): Installing and using XRootD clients
--   [XRootD bug reporting](https://github.com/xrootd/xrootd/issues)
--   [Source code](https://github.com/xrootd/xrootd/)
-
-
+An [XRootD gateway](/data/xrootd/install-gateway) exports an existing filesystem, such as HDFS or Lustre, using both the
+XRootD and WebDAV protocols.
+Generally, only sites affiliated with large VOs would need to install an XRootD gateway so consult your VO if you are
+interested in contributing storage.
