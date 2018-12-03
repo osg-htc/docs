@@ -63,7 +63,9 @@ There are two separate sets of instructions on this page:
 As of December 2018, no VO in the OSG is ready to use unprivileged, non-setuid Singularity from OASIS in production.
 VOs are, however, working to support it soon so OSG recommends that
 all RHEL 7.x installations enable support for unprivileged singularity,
-and for now also install the privileged RPM.
+and for now also install the privileged RPM.  RHEL 6.x installations
+have no option for unprivileged singularity and so will have to
+install the privileged RPM.
 
 In addition, there a few singularity features that only work with the
 privileged RPM, so a limited number of sites will want to continue to
