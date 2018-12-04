@@ -59,7 +59,8 @@ There are two separate sets of instructions on this page:
 - [Enabling unprivileged singularity](#unprivileged-singularity) via OASIS
 - [Installing privileged singularity](#privileged-singularity) via RPM
 
-As of December 2018, no VO in the OSG is ready to use unprivileged, non-setuid singularity from OASIS in production.
+As of December 2018, no VO in the OSG is ready to use unprivileged, non-setuid
+singularity from OASIS in production.
 VOs are, however, working to support it soon so OSG recommends that
 all RHEL 7.x installations enable support for unprivileged singularity,
 and for now also install the privileged RPM.  RHEL 6.x installations
@@ -104,8 +105,9 @@ only supported by privileged singularity:
 Unprivileged Singularity
 ------------------------
 
-The instructions in this section are for enabling singularity with non-setuid executables, which is available in OASIS,
-the OSG Software [CVMFS distribution](/worker-node/install-cvmfs).
+The instructions in this section are for enabling singularity with non-setuid
+executables, which is available in OASIS, the OSG Software
+[CVMFS distribution](/worker-node/install-cvmfs).
 
 ### Enabling Singularity via OASIS ###
 
@@ -149,7 +151,7 @@ user@host $ /cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity \
                 ps -ef
 WARNING: Container does not have an exec helper script, calling 'ps' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
-user         1     0  2 21:27 ?        00:00:00 shim-init                      
+user         1     0  2 21:27 ?        00:00:00 shim-init
 user         2     1  0 21:27 ?        00:00:00 ps -ef
 ```
 
@@ -248,7 +250,7 @@ user@host $ singularity exec --contain --ipc --pid --bind /cvmfs \
                 ps -ef
 WARNING: Container does not have an exec helper script, calling 'ps' directly
 UID        PID  PPID  C STIME TTY          TIME CMD
-user         1     0  1 21:41 ?        00:00:00 shim-init                      
+user         1     0  1 21:41 ?        00:00:00 shim-init
 user         2     1  0 21:41 ?        00:00:00 ps -ef
 ```
 
