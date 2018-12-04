@@ -16,20 +16,19 @@ to the root user, so it has to be installed with setuid-root
 executables.  Securing setuid-root programs is difficult, but singularity
 keeps that privileged code to a
 [minimum](https://www.sylabs.io/guides/2.6/user-guide/introduction.html#security-and-privilege-escalation)
-to keep the vulnerability to a minimum.
+to keep the vulnerability low.
 
 Beginning with the kernel released with RHEL 7.6, there is a
 fully supported but optional feature
 to allow unprivileged bind mounts in user namespaces, which allows
 singularity to run as an unprivileged user.
 The kernel version (3.10.0-957) is available as a security update for
-all RHEL (and its derivatives Scientific Linux and CentOS) 7.x
+all RHEL (and its derivatives, Scientific Linux and CentOS) 7.x
 releases so it does not require upgrading to 7.6.
 
-The OSG has installed
-singularity in [OASIS](/worker-node/install-cvmfs), so many sites
-will eventually not need to install singularity locally if they enable
-it to run unprivileged.
+The OSG has installed singularity in [OASIS](/worker-node/install-cvmfs),
+so many sites will eventually not need to install singularity locally if
+they enable it to run unprivileged.
 
 !!! danger "Kernel vs. Userspace Security"
     Enabling unprivileged user namespaces increases the risk to the
@@ -39,8 +38,8 @@ it to run unprivileged.
     lower security risk.
 
 The document is intended for system administrators who wish to either
-enable singularity to be run as an unprivileged user or install
-privileged singularity, or both.
+enable singularity to be run as an unprivileged user, install privileged
+singularity, or both.
 
 Before Starting
 ---------------
@@ -60,7 +59,7 @@ There are two separate sets of instructions on this page:
 - [Enabling unprivileged singularity](#unprivileged-singularity) via OASIS
 - [Installing privileged singularity](#privileged-singularity) via RPM
 
-As of December 2018, no VO in the OSG is ready to use unprivileged, non-setuid Singularity from OASIS in production.
+As of December 2018, no VO in the OSG is ready to use unprivileged, non-setuid singularity from OASIS in production.
 VOs are, however, working to support it soon so OSG recommends that
 all RHEL 7.x installations enable support for unprivileged singularity,
 and for now also install the privileged RPM.  RHEL 6.x installations
@@ -70,34 +69,32 @@ install the privileged RPM.
 In addition, there a few singularity features that only work with the
 privileged RPM, so a limited number of sites will want to continue to
 take the risk of running the privileged RPM.  These are the features
-not supported in unprivileged singularity:
+only supported by privileged singularity:
 
-1. Using loopback-based container image files.  The default container
+1. **Using loopback-based container image files.**  The default container
     images made by singularity are single, monolithic images containing
     a filesystem of files that need to be loopback-mounted by the kernel
-    with root privileges.  We [recommend below](#limiting-image-types)
-    disabling that feature in privileged singularity because of
-    inherent risks and to use unpacked directory-based images instead,
-    but some sites may need the feature.  In particular, High
+    with root privileges.  We [recommend disabling this feature](#limiting-image-types)
+    in privileged singularity and to use unpacked directory-based images instead.
+    However, some sites may need this feature:  in particular, High
     Performance Computing (HPC) systems often work better with large
-    image files than with many small files in CVMFS.
+    image files than with a collection of small files.
 
-1. The overlay feature.  The overlay feature of singularity uses
+1. **The overlay feature.**  The overlay feature of singularity uses
     overlayfs to be able to add bind mounts where mount points don't
     exist in the underlying image, and overlayfs is a privileged
     kernel feature.  However, singularity also has another feature
     called underlay that provides essentially the same functionality
-    without privileges.  Also, the overlay feature doesn't work when
-    the image is a directory distributed in CVMFS.  We [recommend
-    below](#configuring-singularity) to enable underlay and disable
-    overlay in privileged singularity installations.
+    without privileges.  Additionally, the overlay feature doesn't work when
+    the image is a directory distributed in CVMFS.  We 
+    [recommend enabling underlay and disabling overlay](#configuring-singularity) 
+    in privileged singularity installations.
 
-1. Allocating new pseudo-tty devices.  In the current RHEL 7.6 kernel,
-    allocating pseudo-tty devices is also a privileged operation.
-    Most workflows don't use that feature and so won't notice, but
-    certain features such as `condor_ssh_to_job` and `condor_submit -i`
-    will not work, and some users might need those.  There is also a
-    workaround in the next (3.x) version of singularity in an option
+1. **Allocating new pseudo-tty devices.**  In the current RHEL 7.6 kernel,
+    allocating pseudo-tty devices is a privileged operation.
+    Therefore, interactive workflows such as those using `condor_ssh_to_job` and
+    `condor_submit -i` require privileged singularity. There is a workaround in
+    the next (3.x) version of singularity in an option
     called `--fakeroot` that makes the user name space appear to be
     running as the root user even though all its file accesses are as
     the original unprivileged user.  The kernel then allows allocating
