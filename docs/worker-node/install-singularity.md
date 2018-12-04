@@ -49,7 +49,7 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Ensure the host has [a supported operating system](/release/supported_platforms)
 - Obtain root access to the host
 - Prepare the [required Yum repositories](/common/yum)
-- A [CVMFS installation](/worker-node/install-cvmfs) for Singularity image distribution
+- A [CVMFS installation](/worker-node/install-cvmfs) for singularity image distribution
 
 Choosing Unprivileged vs Privileged Singularity
 -----------------------------------------------
@@ -225,7 +225,7 @@ unknown kernel exploits compared to directory-based images distributed via
 CVMFS.  See [this article](https://lwn.net/Articles/652468/) for further
 discussion.
 
-The loopback-based images are the default image type produced by Singularity
+The loopback-based images are the default image type produced by singularity
 users and are common at sites with direct user logins.  However (as of May
 2018) we are only aware of directory-based images being used by OSG VOs.  Hence,
 it is a reasonable measure to disable the loopback-based images by setting
