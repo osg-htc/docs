@@ -31,7 +31,7 @@ Before starting the installation process, consider the following mandatory point
     * TCP port 8000 for HTTP.
     * TCP port 8443 for HTTPS (optional).
 * __Hardware requirements:__ We recommend that a StashCache server has at least 10Gbps connectivity, 1TB of
- disk space, and 8GB of RAM.
+ disk space for the cache directory, and 8GB of RAM.
 
 If installing the (optional) authenticated StashCache, you also need to do the following:
 
@@ -65,11 +65,17 @@ software with a single command:
         :::console
         root@host # yum install --enablerepo=osg-testing stashcache-cache-server-auth
 
-The cache server configuration assumes the disk used to cache data is mounted at `/stash` and owned by the
-`xrootd:xrootd` user and group.
 
 Configuring the Cache
 ---------------------
+
+First, you must create a "cache directory", which will be used to store downloaded files.
+By default this is `/stash`.
+We recommend using a separate file system for the cache directory,
+with at least 1 TB of storage available.
+
+!!! note
+    The cache directory must be writable by the `xrootd:xrootd` user and group.
 
 The `stashcache-cache-server` provides a default configuration file,
 `/etc/xrootd/xrootd-stashcache-cache-server.cfg`, which must be customized for your cache.
@@ -77,15 +83,14 @@ The `stashcache-cache-server` provides a default configuration file,
 The most common lines to customize are:
 
 * `all.sitename YOUR_SITE_NAME`: The registered OSG resource name.  This **must** be changed.
-* `set cachedir = /stash`: The location of the cache directory for this service.  Files downloaded by the
-  cache will be stored here; we recommend it is at least 1TB in size.
+* `set cachedir = /stash`: The location of the cache directory for this service.
 * `*.trace`, `pss.setopt`: These control the logging verbosity of the cache.  The defaults are relatively high
   in order to aid in debugging.  These lines can be commented out to reduce logging; however, if issues occur,
   OSG support may ask you to re-enable them.
 * `pfc.ram 7g`: The amount of RAM the caching service should target to use.
 
 The Authfile specifies which files and directories can be read,
-relative to the `cachedir` that was defined in the main config.
+relative to the cache directory (`cachedir` in the main config).
 
 An example:
 
