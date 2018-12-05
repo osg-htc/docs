@@ -1983,7 +1983,7 @@ with the following details:</p>
 </ul>
 </li>
 <li><strong>Hardware requirements:</strong> We recommend that a StashCache server has at least 10Gbps connectivity, 1TB of
- disk space, and 8GB of RAM.</li>
+ disk space for the cache directory, and 8GB of RAM.</li>
 </ul>
 <p>If installing the (optional) authenticated StashCache, you also need to do the following:</p>
 <ul>
@@ -2020,23 +2020,28 @@ software with a single command:</p>
 
 
 </div>
-<p>The cache server configuration assumes the disk used to cache data is mounted at <code>/stash</code> and owned by the
-<code>xrootd:xrootd</code> user and group.</p>
 <h2 id="configuring-the-cache">Configuring the Cache<a class="headerlink" href="#configuring-the-cache" title="Permanent link">&para;</a></h2>
+<p>First, you must create a "cache directory", which will be used to store downloaded files.
+By default this is <code>/stash</code>.
+We recommend using a separate file system for the cache directory,
+with at least 1 TB of storage available.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The cache directory must be writable by the <code>xrootd:xrootd</code> user and group.</p>
+</div>
 <p>The <code>stashcache-cache-server</code> provides a default configuration file,
 <code>/etc/xrootd/xrootd-stashcache-cache-server.cfg</code>, which must be customized for your cache.</p>
 <p>The most common lines to customize are:</p>
 <ul>
 <li><code>all.sitename YOUR_SITE_NAME</code>: The registered OSG resource name.  This <strong>must</strong> be changed.</li>
-<li><code>set cachedir = /stash</code>: The location of the cache directory for this service.  Files downloaded by the
-  cache will be stored here; we recommend it is at least 1TB in size.</li>
+<li><code>set cachedir = /stash</code>: The location of the cache directory for this service.</li>
 <li><code>*.trace</code>, <code>pss.setopt</code>: These control the logging verbosity of the cache.  The defaults are relatively high
   in order to aid in debugging.  These lines can be commented out to reduce logging; however, if issues occur,
   OSG support may ask you to re-enable them.</li>
 <li><code>pfc.ram 7g</code>: The amount of RAM the caching service should target to use.</li>
 </ul>
 <p>The Authfile specifies which files and directories can be read,
-relative to the <code>cachedir</code> that was defined in the main config.</p>
+relative to the cache directory (<code>cachedir</code> in the main config).</p>
 <p>An example:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cat /etc/xrootd/Authfile-noauth
 <span class="go">u * /user/ligo -rl / rl</span>
