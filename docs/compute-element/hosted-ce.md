@@ -1,12 +1,12 @@
-OSG Managed Services
-====================
+OSG Hosted CE
+=============
 
 
 ## Overview
 
-As an alternative to setting up your own CE, OSG offers a *managed service option*
+As an alternative to setting up your own CE, OSG offers a hosted CE option
 to connect your existing campus HPC/HTC cluster to the Open Science Grid.
-The OSG team will host and operate an HTCondor compute element which routes user jobs to your cluster,
+The OSG team will host and operate the HTCondor compute element which routes user jobs to your cluster,
 configured for the science communities that you choose to support.
 
 ![fig bosco](/compute-element/img/screenshot_2983.png)
@@ -22,38 +22,53 @@ Here are the requirements:
 -   Outbound network connectivity from the compute nodes (they can be behind NAT)
 
 -   A Unix account on your cluster's submit server, accessible via an SSH key
-    The OSG services will use this account to automatically submit jobs, so it
-    must also have permissions to submit jobs to the batch system
+    The OSG CE will use this account to automatically submit jobs,
+    so it must also have permissions to submit jobs to the batch system
 
 
 ## Setup Process
 
-Setup and installation process consists of the following steps:
+Before making any system changes, you should do the following steps:
 
-<ul>
-<li>Fill out <a href="http://goo.gl/forms/8OukxsyG6KBSGHuR2">this questionnaire</a>
-so that we have basic cluster details.</li> 
-<li> Consultation call to discuss how you'll like to contribute to OSG. E.g.
-number of OSG jobs that should run, resource limits, etc.</li>
-<li> Create Unix login account for the OSG service</li>
-<li> Install public SSH keys for the service</li>
-<li> We configure the OSG service with your system details</li>
-<li> We validate operation with a set of test jobs</li>
-<li> We configure central OSG services to schedule jobs for science communities you support</li>
-<li> (Optional): we can assist you in installing and setting up the Squid and
-     OASIS software on your cluster to support application software repositories</li>
-</ul>
+-   Fill out the [cluster integration questionnaire](http://goo.gl/forms/8OukxsyG6KBSGHuR2)
+    so that the OSG team has basic information about your cluster
+
+-   Email [help@opensciencegrid.org](mailto:help@opensciencegrid.org)
+    to set up a consultation call with the OSG team,
+    in order to discuss how you would like to contribute to the OSG;
+    for example, the number of OSG jobs that should run, what resource limits you have,
+    or which science communities you support
+
+After the consultation, do the following:
+
+-   Create a Unix account on the submit server for use by the OSG CE
+
+-   Install public SSH keys for the account
+
+Once this is done, the OSG team will:
+
+-   Configure the OSG CE with your system details
+
+-   Validate operation with a set of test jobs
+
+-   Configure central OSG services to schedule jobs
+
+Optionally, we can assist you in installing and setting up the Squid and OASIS software on your cluster
+in order to support application software repositories.
+This will allow a broader set of jobs to run on your cluster.
+
 
 ## Security
 
 OSG takes multiple precautions to maintain security and prevent unauthorized
 usage of resources:
 
-* Access to the OSG system with ssh keys are restricted to the OSG staff maintaining them 
-* Users are carefully vetted before they are allowed to submit jobs to OSG 
-* Jobs running through OSG can be traced back to the user that submitted them
-* Job submission can quickly be disabled if needed
-* OSG staff are readily contactable through several means in case of an emergency through [email](mailto:goc@opensciencegrid.org), [the help desk](http://ticket.grid.iu.edu), or phone (317-278-9699)
+-   Access to the OSG system with ssh keys are restricted to the OSG staff maintaining them
+-   Users are carefully vetted before they are allowed to submit jobs to OSG
+-   Jobs running through OSG can be traced back to the user that submitted them
+-   Job submission can quickly be disabled if needed
+-   OSG staff are readily contactable in case of an emergency,
+    through email at [help@opensciencegrid.org](help@opensciencegrid.org)
 
 
 ## Which Science Communities and Institutions am I supporting?
