@@ -806,47 +806,6 @@
     (Optional) Authorization
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#authorization-file" title="Authorization file" class="md-nav__link">
-    Authorization file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#security-option-1-adding-simple-unix-security" title="Security option 1: adding simple (Unix) security" class="md-nav__link">
-    Security option 1: adding simple (Unix) security
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#testing-an-xrootd-cluster-with-simple-security-enabled" title="Testing an XRootD cluster with simple security enabled" class="md-nav__link">
-    Testing an XRootD cluster with simple security enabled
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#security-option-2-shared-keys" title="Security option 2: Shared keys" class="md-nav__link">
-    Security option 2: Shared keys
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#security-option-3-xrootd-lcmaps-authorization" title="Security option 3: xrootd-lcmaps authorization" class="md-nav__link">
-    Security option 3: xrootd-lcmaps authorization
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -964,6 +923,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xrootd-authorization/" title="Configure XRootD Authorization" class="md-nav__link">
+      Configure XRootD Authorization
+    </a>
   </li>
 
         
@@ -2110,47 +2081,6 @@
     (Optional) Authorization
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#authorization-file" title="Authorization file" class="md-nav__link">
-    Authorization file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#security-option-1-adding-simple-unix-security" title="Security option 1: adding simple (Unix) security" class="md-nav__link">
-    Security option 1: adding simple (Unix) security
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#testing-an-xrootd-cluster-with-simple-security-enabled" title="Testing an XRootD cluster with simple security enabled" class="md-nav__link">
-    Testing an XRootD cluster with simple security enabled
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#security-option-2-shared-keys" title="Security option 2: Shared keys" class="md-nav__link">
-    Security option 2: Shared keys
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#security-option-3-xrootd-lcmaps-authorization" title="Security option 3: xrootd-lcmaps authorization" class="md-nav__link">
-    Security option 3: xrootd-lcmaps authorization
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -2606,375 +2536,8 @@ Create <code>/mnt/xrootd</code> directory. Make sure the xrootd user exists on t
 
 <p>You should now be able to run UNIX commands such as <code>ls /mnt/xrootd</code> to see the contents of the XRootD server.</p>
 <h3 id="optional-authorization">(Optional) Authorization<a class="headerlink" href="#optional-authorization" title="Permanent link">&para;</a></h3>
-<p>There are several authorization options in XRootD available through the security plugins. 
-In this document, we will cover two options for security:</p>
-<ul>
-<li><a href="#security-option-1-adding-simple-unix-security">Simple Unix Security</a>: Based on user accounts that the client is
-    logged in as.</li>
-<li><a href="#security-option-2-shared-keys">Shared-key based authentication</a>.</li>
-<li><a href="#security-option-3-xrootd-lcmaps-authorization"><code>xrootd-lcmaps</code></a>: Using the LCMAPS callout to use X509-based
-    authentication</li>
-</ul>
-<p>Note: On the data nodes, the files will actually be owned by unix user <code>xrootd</code> (or other daemon user), not as the user
-authenticated to, under most circumstances. 
-XRootD will verify the permissions and authorization based on the user that the security plugin authenticates you to
-(for instance, your unix user for option 1 or your gums id for option 2), but, internally, the data node files will be
-owned by the <code>xrootd</code> user.</p>
-<h4 id="authorization-file">Authorization file<a class="headerlink" href="#authorization-file" title="Permanent link">&para;</a></h4>
-<p>In order to add security to your cluster you will need to add "auth_file" on the your data server node. 
-Create <code>/etc/xrootd/auth_file</code> :</p>
-<div class="codehilite"><pre><span></span># This means that all the users have read access to the datasets 
-u * <span style="color:red">/data/xrootdfs</span> lr
-
-# This means that all the users have full access to their private dirs 
-u = <span style="color:red">/data/xrootdfs/</span>@=/ a
-
-# This means that this privileged user can do everything 
-# You need at least one user like that, in order to create the 
-# private dir for each user willing to store his data in the facility 
-u xrootd <span style="color:red">/data/xrootdfs</span> a 
-</pre></div>
-
-
-<p>Here we assume that your storage path is <code>/data/xrootdfs</code> (same as in the
-previous example).</p>
-<p>Change file ownership (if you have created file as root):</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chown xrootd:xrootd /etc/xrootd/auth_file
-</pre></div>
-
-
-<p>This file is a flat file of the following form:</p>
-<div class="codehilite"><pre><span></span>idtype id path privs
-</pre></div>
-
-
-<p>Some examples of each option. For more details or examples on how to use
-templated user options, see <a href="http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599">XRootd Authorization Database
-File</a>.</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>idtype</td>
-<td>Type of id. Use <code>u</code> for username, <code>g</code> for group, etc.</td>
-</tr>
-<tr>
-<td>id</td>
-<td>Username (or groupname). Use <code>*</code> for all users or <code>=</code> for user-specific capabilities, like home directories</td>
-</tr>
-<tr>
-<td>path</td>
-<td>The path prefix to be used for matching purposes</td>
-</tr>
-<tr>
-<td>privs</td>
-<td>Letter list of privileges: <code>a - all ; l - lookup ; d - delete ; n - rename ; i - insert ; r - read ; k - lock (not used) ; w - write</code></td>
-</tr>
-</tbody>
-</table>
-<h4 id="security-option-1-adding-simple-unix-security">Security option 1: adding simple (Unix) security<a class="headerlink" href="#security-option-1-adding-simple-unix-security" title="Permanent link">&para;</a></h4>
-<p>The first step in adding simple Unix security to validate based on username is to create the <code>auth_file</code> as in the
-previous section.</p>
-<p>The next step is to modify <code>/etc/xrootd/xrootd-clustered.cfg</code> on both nodes:</p>
-<div class="codehilite"><pre><span></span>all.export /data/xrootdfs 
-set xrdr=<span style="color:red">hostA</span> 
-all.manager $(xrdr):3121 
-if $(xrdr) &amp;&amp; named cns 
-    all.export /data/inventory 
-    xrd.port 1095 
-else if $(xrdr) 
-    all.role manager 
-    xrd.port 1094 
-else 
-    all.role server 
-    oss.localroot /local/xrootd 
-    ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory 
-    cms.space min 2g 5g 
-
-    <span style="color:red"> # ENABLE_SECURITY_BEGIN 
-    xrootd.seclib /usr/lib64/libXrdSec.so 
-    # this specify that we use the &#39;unix&#39; authentication module, additional one can be specified. 
-    sec.protocol /usr/lib64 unix 
-    # this is the authorization file 
-    acc.authdb /etc/xrootd/auth_file 
-    ofs.authorize 
-    # ENABLE_SECURITY_END </span> 
-fi 
-</pre></div>
-
-
-<p>Note that, to access users directories, you will have to create them in oss.localroot (For instance,
-<code>/local/xrootd/data/xrootdfs/username</code>) and make sure they are writable by <code>xrootd</code> user (or the daemon user, if you
-have changed it). 
-Files in localroot on the data nodes are normally owned by <code>xrootd</code> not by the authenticated username.</p>
-<p>After making all the changes, please, restart XRootD and cmsd daemons on all nodes.</p>
-<h4 id="testing-an-xrootd-cluster-with-simple-security-enabled">Testing an XRootD cluster with simple security enabled<a class="headerlink" href="#testing-an-xrootd-cluster-with-simple-security-enabled" title="Permanent link">&para;</a></h4>
-<ol>
-<li>Login on redirector node as root</li>
-<li>Check that user "root" still can read files:</li>
-</ol>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp root://<span style="color:red">RDRNODE</span>:1094//data/xrootdfs/test1 /tmp/b 
-<span class="go">[xrootd] Total 0.00 MB [================] 100.00 % [inf MB/s]</span>
-</pre></div>
-
-
-<ol>
-<li>Check that user "root" can not write files under /data/xrootdfs:</li>
-</ol>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp /tmp/b root://<span style="color:red">RDRNODE</span>:1094//data/xrootdfs/test2 
-<span class="go">Last server error 3010 (&#39;Unable to create /data/xrootdfs/test2; Permission denied&#39;) </span>
-<span class="go">Error accessing path/file for root://localhost:1094//data/xrootdfs/test3 </span>
-</pre></div>
-
-
-<p>or you may get this error:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdcp /tmp/b root://<span style="color:red">RDRNODE</span>:1094//data/xrootdfs/test2 
-<span class="go">Last server error 3011 (&#39;No servers are available to write the file.&#39;) </span>
-<span class="go">Error accessing path/file for root://localhost:1094//data/xrootdfs/test2</span>
-</pre></div>
-
-
-<ol>
-<li>Check that user can copy/retrieve files to/from /data/xrootdfs/~/...</li>
-</ol>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> su - <span style="color:red">user</span> 
-<span class="go">-bash-3.2$ xrdcp /tmp/a root://<span style="color:red">RDRNODE</span>:1094//data/xrootdfs/<span style="color:red">user</span>/test1</span>
-<span class="go">[xrootd] Total 0.00 MB [================] 100.00 % [inf MB/s] </span>
-<span class="go">-bash-3.2$ xrdcp root://localhost:1094//data/xrootdfs/<span style="color:red">user</span>/test1 /tmp/c </span>
-<span class="go">[xrootd] Total 0.00 MB [================] 100.00 % [inf MB/s]</span>
-</pre></div>
-
-
-<h4 id="security-option-2-shared-keys">Security option 2: Shared keys<a class="headerlink" href="#security-option-2-shared-keys" title="Permanent link">&para;</a></h4>
-<p>If you want to enable security for access to XRootD via xrootdfs you will need to modify XRootD configuration and
-perform several steps to make xrootdfs secured.</p>
-<ol>
-<li>
-<p>On the XRootD redirector node, execute the following command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrdsssadmin -k <span style="color:red">&lt;my_key_name&gt;</span> -u anybody -g usrgroup add <span style="color:red">&lt;keyfile&gt;</span>
-</pre></div>
-
-
-<p>eg:</p>
-<div class="codehilite"><pre><span></span>root@host # xrdsssadmin -k top_secret -u anybody -g usrgroup add /etc/xrootd/xrootd.key
-</pre></div>
-
-
-</li>
-<li>
-<p>Set ownership</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> chown xrootd.xrootd /etc/xrootd/xrootd.key
-</pre></div>
-
-
-</li>
-<li>
-<p>On the node where xrootdfs is installed modify <code>/etc/fstab</code> add security information:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> xrootdfs <span style="color:red">/mnt/xrootd </span> fuse <span class="nv">rdr</span><span class="o">=</span>xroot://<span style="color:red">redirector1.domain.com</span>:1094/<span style="color:red">/path/redirector1</span>,uid<span class="o">=</span>xrootd,sss<span class="o">=</span><span style="color:red">keyfile</span> <span class="m">0</span> <span class="m">0</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>On all XRootD data servers and redirector nodes, modify XRootD configuration (<code>/etc/xrootd/xrootd-clustered.cfg</code>) by adding the following segment:</p>
-<div class="codehilite"><pre><span></span># ENABLE_SECURITY_BEGIN
-   xrootd.seclib /usr/lib64/libXrdSec.so
-   #the line below should be before &quot;sec.protocol ... unix&quot;
-   <span style="color:red">sec.protocol /usr/lib64 sss -s keyfile </span>
-   sec.protocol /usr/lib64 unix
-   # this specify that we use the &#39;unix&#39; authentication module, additional one can be specified.
-   # this is the authorization file
-   acc.authdb /etc/xrootd/auth_file
-   ofs.authorize
-   # ENABLE_SECURITY_END
-</pre></div>
-
-
-</li>
-<li>
-<p>On all XRootD data server nodes, edit <code>/etc/xrootd/auth_file</code> to add authorized users of the form <code>u <span style="color:red">username</span> <span style="color:red">/directoryname</span> lr</code> where "lr" is the permission set.</p>
-</li>
-<li>
-<p>Copy <span style="color:red">keyfile</span> from redirector node to every data server node and the xrootdfs node. Make sure that this file is owned by the <code>xrootd</code> user.</p>
-</li>
-<li>
-<p>Restart XRootD cluster by restarting all the relevant daemons.</p>
-</li>
-<li>
-<p>On xroodfs node execute mount:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> mount <span style="color:red">/mnt/xrootd</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>Verify that you can access the mount point (df,ls) and can not write into unauthorized path, e.g:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cp /bin/sh /mnt/xrootd/tlevshin/test1 cp:
-<span class="go">cannot create regular file `/mnt/xrootd/tlevshin/test1&#39;: Permission denied</span>
-</pre></div>
-
-
-<p>Login as yourself and try:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> su - tlevshin
-<span class="gp">user@host $</span> cp /bin/sh /mnt/xrootd/tlevshin/test1
-</pre></div>
-
-
-</li>
-</ol>
-<h4 id="security-option-3-xrootd-lcmaps-authorization">Security option 3: xrootd-lcmaps authorization<a class="headerlink" href="#security-option-3-xrootd-lcmaps-authorization" title="Permanent link">&para;</a></h4>
-<p>The xrootd-lcmaps security plugin uses the <code>lcmaps</code> library and the <a href="../../security/lcmaps-voms-authentication">LCMAPS VOMS plugin</a>
-to authenticate and authorize users based on X509 certificates and VOMS attributes. Perform the following instructions
-on all data nodes:</p>
-<ol>
-<li>
-<p>Install <a href="../../common/ca#installing-ca-certificates">CA certificates</a> and <a href="../../common/ca#installing-ca-certificates#managing-certificate-revocation-lists">manage CRLs</a></p>
-</li>
-<li>
-<p>Follow the instructions for requesting a <a href="../../security/host-certs#requesting-and-installing-a-service-certificate">service certificate</a>,
-   using <code>xrootd</code> for both the <code>&lt;SERVICE&gt;</code> and <code>&lt;OWNER&gt;</code>, resulting in a certificate and key in <code>/etc/grid-security/xrootd/xrootdcert.pem</code>
-   and <code>/etc/grid-security/xrootd/xrootdkey.pem</code>, respectively.</p>
-</li>
-<li>
-<p>Install and configure the <a href="../../security/lcmaps-voms-authentication">LCMAPS VOMS plugin</a></p>
-</li>
-<li>
-<p>Install <code>xrootd-lcmaps</code> and necessary configuration:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-lcmaps vo-client
-</pre></div>
-
-
-</li>
-<li>
-<p>Append the following to <code>/etc/lcmaps.db</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">xrootd_policy</span><span class="o">:</span>
-<span class="n">verifyproxynokey</span> <span class="o">-&gt;</span> <span class="n">banfile</span>
-<span class="n">banfile</span> <span class="o">-&gt;</span> <span class="n">banvomsfile</span> <span class="o">|</span> <span class="n">bad</span>
-<span class="n">banvomsfile</span> <span class="o">-&gt;</span> <span class="n">gridmapfile</span> <span class="o">|</span> <span class="n">bad</span>
-<span class="n">gridmapfile</span> <span class="o">-&gt;</span> <span class="n">good</span> <span class="o">|</span> <span class="n">vomsmapfile</span>
-<span class="n">vomsmapfile</span> <span class="o">-&gt;</span> <span class="n">good</span> <span class="o">|</span> <span class="n">defaultmapfile</span>
-<span class="n">defaultmapfile</span> <span class="o">-&gt;</span> <span class="n">good</span> <span class="o">|</span> <span class="n">bad</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>Modify <code>/etc/osg/config.d/10-misc.ini</code> so that future invocations don't overwrite your <code>/etc/lcmaps.db</code> changes:</p>
-<div class="codehilite"><pre><span></span>edit_lcmaps_db = False
-</pre></div>
-
-
-</li>
-<li>
-<p>Configure access rights for mapped users by creating and modifying the XRootD <a href="#authorization-file">authorization file</a></p>
-</li>
-<li>
-<p>Modify your XRootD configuration:</p>
-<ol>
-<li>
-<p>Choose the configuration file to edit based on the following table:</p>
-<table>
-<thead>
-<tr>
-<th align="left">If you are running XRootD in...</th>
-<th align="left">Then modify the following file...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Standalone mode</td>
-<td align="left"><code>/etc/xrootd/xrootd-standalone.cfg</code></td>
-</tr>
-<tr>
-<td align="left">Clustered mode</td>
-<td align="left"><code>/etc/xrootd/xrootd-clustered.cfg</code></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>Add the following lines to the configuration that you chose above:</p>
-<div class="codehilite"><pre><span></span><span class="s s-Atom">xrootd</span><span class="p">.</span><span class="s s-Atom">seclib</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span><span class="o">/</span><span class="s s-Atom">libXrdSec</span><span class="o">-</span><span class="mf">4.</span><span class="s s-Atom">so</span>
-<span class="s s-Atom">sec</span><span class="p">.</span><span class="s s-Atom">protocol</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span> <span class="s s-Atom">gsi</span> <span class="o">-</span><span class="nn">certdir</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">certificates</span> <span class="s s-Atom">\</span>
-                    <span class="o">-</span><span class="nn">cert</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">xrootdcert</span><span class="p">.</span><span class="s s-Atom">pem</span> <span class="s s-Atom">\</span>
-                    <span class="o">-</span><span class="nn">key</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">xrootdkey</span><span class="p">.</span><span class="s s-Atom">pem</span> <span class="o">-</span><span class="nn">crl</span><span class="p">:</span><span class="mi">1</span> <span class="s s-Atom">\</span>
-                    <span class="o">-</span><span class="nn">authzfun</span><span class="p">:</span><span class="s s-Atom">libXrdLcmaps</span><span class="p">.</span><span class="s s-Atom">so</span> <span class="o">-</span><span class="nn">authzfunparms</span><span class="p">:</span><span class="s s-Atom">--loglevel</span><span class="p">,</span><span class="mi">0</span> <span class="s s-Atom">\</span>
-                    <span class="o">-</span><span class="nn">gmapopt</span><span class="p">:</span><span class="mi">10</span> <span class="o">-</span><span class="nn">gmapto</span><span class="p">:</span><span class="mi">0</span>
-<span class="s s-Atom">acc</span><span class="p">.</span><span class="s s-Atom">authdb</span> <span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">auth_file</span>
-<span class="s s-Atom">ofs</span><span class="p">.</span><span class="s s-Atom">authorize</span>
-</pre></div>
-
-
-<p>If you are running XRootD in clustered mode, the above will also need to be added to all data nodes in the section relevant to the data node server. For instance, in the <a href="#security-option-1-adding-unix-security">above example</a>, the security configuration should be placed after the <code>all.role server</code> line:</p>
-<div class="codehilite"><pre><span></span><span class="s s-Atom">all</span><span class="p">.</span><span class="s s-Atom">export</span> <span class="o">/</span><span class="s s-Atom">data</span><span class="o">/</span><span class="s s-Atom">xrootdfs</span>
-<span class="s s-Atom">set</span> <span class="s s-Atom">xrdr=</span><span class="c1"><span style="color:red">hostA</span></span>
-<span class="s s-Atom">all</span><span class="p">.</span><span class="s s-Atom">manager</span> <span class="err">$</span><span class="p">(</span><span class="s s-Atom">xrdr</span><span class="p">)</span><span class="s s-Atom">:</span><span class="mi">3121</span>
-<span class="s s-Atom">if</span> <span class="err">$</span><span class="p">(</span><span class="s s-Atom">xrdr</span><span class="p">)</span> <span class="s s-Atom">&amp;&amp;</span> <span class="s s-Atom">named</span> <span class="s s-Atom">cns</span>
-    <span class="s s-Atom">all</span><span class="p">.</span><span class="s s-Atom">export</span> <span class="o">/</span><span class="s s-Atom">data</span><span class="o">/</span><span class="s s-Atom">inventory</span>
-    <span class="s s-Atom">xrd</span><span class="p">.</span><span class="s s-Atom">port</span> <span class="mi">1095</span>
-<span class="s s-Atom">else</span> <span class="s s-Atom">if</span> <span class="err">$</span><span class="p">(</span><span class="s s-Atom">xrdr</span><span class="p">)</span>
-    <span class="s s-Atom">all</span><span class="p">.</span><span class="s s-Atom">role</span> <span class="s s-Atom">manager</span>
-    <span class="s s-Atom">xrd</span><span class="p">.</span><span class="s s-Atom">port</span> <span class="mi">1094</span>
-<span class="s s-Atom">else</span>
-    <span class="s s-Atom">all</span><span class="p">.</span><span class="s s-Atom">role</span> <span class="s s-Atom">server</span>
-    <span class="s s-Atom">oss</span><span class="p">.</span><span class="s s-Atom">localroot</span> <span class="o">/</span><span class="s s-Atom">local</span><span class="o">/</span><span class="s s-Atom">xrootd</span>
-    <span class="s s-Atom">ofs</span><span class="p">.</span><span class="s s-Atom">notify</span> <span class="s s-Atom">closew</span> <span class="s s-Atom">create</span> <span class="s s-Atom">mkdir</span> <span class="s s-Atom">mv</span> <span class="s s-Atom">rm</span> <span class="s s-Atom">rmdir</span> <span class="s s-Atom">trunc</span> <span class="p">|</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">bin</span><span class="o">/</span><span class="nv">XrdCnsd</span> <span class="o">-</span><span class="s s-Atom">d</span> <span class="o">-</span><span class="nv">D</span> <span class="mi">2</span> <span class="o">-</span><span class="s s-Atom">i</span> <span class="mi">90</span> <span class="o">-</span><span class="s s-Atom">b</span> <span class="err">$</span><span class="p">(</span><span class="s s-Atom">xrdr</span><span class="p">)</span><span class="s s-Atom">:</span><span class="mi">1095</span><span class="s s-Atom">:/data</span><span class="o">/</span><span class="s s-Atom">inventory</span>
-    <span class="s s-Atom">cms</span><span class="p">.</span><span class="s s-Atom">space</span> <span class="s s-Atom">min</span> <span class="mi">2</span><span class="s s-Atom">g</span> <span class="mi">5</span><span class="s s-Atom">g</span>
-
-    <span class="c1"><span style="color:red"> # ENABLE_SECURITY_BEGIN</span>
-    <span class="s s-Atom">xrootd</span><span class="p">.</span><span class="s s-Atom">seclib</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span><span class="o">/</span><span class="s s-Atom">libXrdSec</span><span class="o">-</span><span class="mf">4.</span><span class="s s-Atom">so</span>
-    <span class="s s-Atom">sec</span><span class="p">.</span><span class="s s-Atom">protocol</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span> <span class="s s-Atom">gsi</span> <span class="o">-</span><span class="nn">certdir</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">certificates</span> <span class="s s-Atom">\</span>
-                        <span class="o">-</span><span class="nn">cert</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">xrootdcert</span><span class="p">.</span><span class="s s-Atom">pem</span> <span class="s s-Atom">\</span>
-                        <span class="o">-</span><span class="nn">key</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">xrootdkey</span><span class="p">.</span><span class="s s-Atom">pem</span> <span class="o">-</span><span class="nn">crl</span><span class="p">:</span><span class="mi">1</span> <span class="s s-Atom">\</span>
-                        <span class="o">-</span><span class="nn">authzfun</span><span class="p">:</span><span class="s s-Atom">libXrdLcmaps</span><span class="p">.</span><span class="s s-Atom">so</span> <span class="o">-</span><span class="nn">authzfunparms</span><span class="p">:</span><span class="s s-Atom">--loglevel</span><span class="p">,</span><span class="mi">0</span> <span class="s s-Atom">\</span>
-                        <span class="o">-</span><span class="nn">gmapopt</span><span class="p">:</span><span class="mi">10</span> <span class="o">-</span><span class="nn">gmapto</span><span class="p">:</span><span class="mi">0</span>
-    <span class="s s-Atom">acc</span><span class="p">.</span><span class="s s-Atom">authdb</span> <span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">auth_file</span>
-    <span class="s s-Atom">ofs</span><span class="p">.</span><span class="s s-Atom">authorize</span>
-    <span class="s s-Atom">#</span> <span class="nv">ENABLE_SECURITY_END</span> <span class="c1"></span></span>
-<span class="s s-Atom">fi</span>
-</pre></div>
-
-
-</li>
-</ol>
-</li>
-<li>
-<p>Restart the <a href="#using-xrootd">relevant services</a></p>
-</li>
-</ol>
-<p>To verify the LCMAPS security, run the following commands from a machine with your user certificate/key pair,
-<code>xrootd-client</code>, and <code>voms-clients-cpp</code> installed:</p>
-<ol>
-<li>
-<p>Destroy any pre-existing proxies and attempt a copy to <code>&lt;DESTINATION PATH&gt;</code> on the <code>&lt;XROOTD HOST&gt;</code> to verify failure:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@client $</span> voms-proxy-destroy
-<span class="gp">user@client $</span> xrdcp /bin/bash root://<span style="color:red">&lt;XROOTD HOST&gt;</span>/<span style="color:red">&lt;DESTINATION PATH&gt;</span>
-<span class="go">180213 13:56:49 396570 cryptossl_X509CreateProxy: EEC certificate has expired</span>
-<span class="go">[0B/0B][100%][==================================================][0B/s]</span>
-<span class="go">Run: [FATAL] Auth failed</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>On the XRootD host, add your DN to <a href="../../security/lcmaps-voms-authentication#mapping-users">/etc/grid-security/grid-mapfile</a></p>
-</li>
-<li>
-<p>Generate your proxy and verify that you can successfully transfer files:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@client $</span> voms-proxy-init
-<span class="gp">user@client $</span> xrdcp  /bin/sh root://<span style="color:red">&lt;XROOTD HOST&gt;</span>/<span style="color:red">&lt;DESTINATION PATH&gt;</span>
-<span class="go">[938.1kB/938.1kB][100%][==================================================][938.1kB/s]</span>
-</pre></div>
-
-
-<p>If your transfer does not succeed, run the previous command with <code>--debug 2</code> for more information.</p>
-</li>
-</ol>
+<p>For information on how to configure xrootd-lcmaps authorization, please refer to the
+<a href="../xrootd-authorization">Configuring XRootD Authorization guide</a>.</p>
 <h3 id="optional-adding-cms-tfc-support-to-xrootd-cms-sites-only">(Optional) Adding CMS TFC support to XRootD (CMS sites only)<a class="headerlink" href="#optional-adding-cms-tfc-support-to-xrootd-cms-sites-only" title="Permanent link">&para;</a></h3>
 <p>For CMS users, there is a package available to integrate rule-based name lookup using a <code>storage.xml</code> file. 
 If you are not setting up a CMS site, you can skip this section.</p>
@@ -3273,13 +2836,13 @@ For example, to have <code>xrootd</code> use the clustered config, you would sta
           </a>
         
         
-          <a href="../install-xroot-client/" title="Using XRootD" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../xrootd-authorization/" title="Configure XRootD Authorization" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Using XRootD
+                Configure XRootD Authorization
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
