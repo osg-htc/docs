@@ -852,6 +852,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#registering-the-cache" title="Registering the Cache" class="md-nav__link">
+    Registering the Cache
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" title="Getting Help" class="md-nav__link">
+    Getting Help
+  </a>
+  
+</li>
+      
       
       
       
@@ -1932,6 +1946,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#registering-the-cache" title="Registering the Cache" class="md-nav__link">
+    Registering the Cache
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" title="Getting Help" class="md-nav__link">
+    Getting Help
+  </a>
+  
+</li>
+      
       
       
       
@@ -1957,14 +1985,13 @@ network to cache data frequently used on the OSG, reducing data transfer over th
 decreasing access latency.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The cache service must be registered with the OSG if it is to be used by clients.  You may start the
-registration procedure prior to finishing the installation by contacting <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>
-with the following details:</p>
+<p>The <em>cache</em> service must be registered with the OSG if it is to be used by clients. You may start 
+registration procedure prior to finishing the installation by <a href="#registering-the-cache">using this link</a> 
+along with the basic information like:</p>
 <ul>
 <li>Resource name and hostname.</li>
 <li>Administrative and security contact.</li>
 </ul>
-<p>Follow the <a href="../../../common/registration/">registration documentation</a> for more information.</p>
 </div>
 <h2 id="installation-prerequisites-for-the-cache">Installation prerequisites for the Cache<a class="headerlink" href="#installation-prerequisites-for-the-cache" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following mandatory points:</p>
@@ -2191,6 +2218,12 @@ mounted, then ensure you <em>enable</em> (set to start at boot) and <em>start</e
 
 
 <p>Where <code>hostname</code> is the string returned by the hostname command. The output of the above command should provide an HTCondor ClassAd that details the status of your cache.</p>
+<h2 id="registering-the-cache">Registering the Cache<a class="headerlink" href="#registering-the-cache" title="Permanent link">&para;</a></h2>
+<p>To be part of the OSG StashCache Federation, your <em>cache</em> must be
+<a href="../../../common/registration/">registered with the OSG</a>.  The service type is "XRootD cache server"</p>
+<p>Once the cache has been registered, open a <a href="https://support.opensciencegrid.org">help ticket</a> with your cache name.  Mention in your ticket that you would like to "Finalize the cache registration."</p>
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
+<p>To get assistance, please use the <a href="../../../common/help">this page</a> or contact directly <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.</p>
                 
                   
                 

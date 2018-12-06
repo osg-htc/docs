@@ -812,8 +812,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-help" title="Getting help" class="md-nav__link">
-    Getting help
+  <a href="#registering-the-origin" title="Registering the Origin" class="md-nav__link">
+    Registering the Origin
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" title="Getting Help" class="md-nav__link">
+    Getting Help
   </a>
   
 </li>
@@ -1834,8 +1841,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-help" title="Getting help" class="md-nav__link">
-    Getting help
+  <a href="#registering-the-origin" title="Registering the Origin" class="md-nav__link">
+    Registering the Origin
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" title="Getting Help" class="md-nav__link">
+    Getting Help
   </a>
   
 </li>
@@ -1864,15 +1878,14 @@
 to export its data to the StashCache data federation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The origin must be registered with the OSG prior to joining the data federation.  You may start the
-registration process prior to finishing the installation by contacting <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>
-with the following details:</p>
+<p>The <em>origin</em> must be registered with the OSG prior to joining the data federation. You may start the
+registration process prior to finishing the installation by <a href="#registering-the-origin">using this link</a> 
+along with the basic information like:</p>
 <ul>
 <li>Resource name and hostname.</li>
 <li>VO associated with this origin server (will be used to determine the origin's namespace prefix).</li>
-<li>Administrative and security contact.</li>
+<li>Administrative and security contact. </li>
 </ul>
-<p>Follow the <a href="../../../common/registration/">registration documentation</a> for more information.</p>
 </div>
 <p>This guide covers the procedure for exporting world-readable data; publishing proprietary data is still
 experimental.</p>
@@ -2003,13 +2016,13 @@ and export only that directory or its subdirectories.</p>
 perform the following steps to verify that it is functional.</p>
 <h3 id="testing-availability">Testing availability<a class="headerlink" href="#testing-availability" title="Permanent link">&para;</a></h3>
 <p>To verify that your origin is correctly advertising its availability, run the following command from the origin server:</p>
-<div class="codehilite"><pre><span></span>[user@server ~]$ xrdmapc -r --list s redirector.osgstorage.org:1094
-0**** redirector.osgstorage.org:1094
-      Srv ceph-gridftp1.grid.uchicago.edu:1094
-      Srv stashcache.fnal.gov:1094
-      Srv stash.osgconnect.net:1094
-      Srv origin.ligo.caltech.edu:1094
-      Srv csiu.grid.iu.edu:1094
+<div class="codehilite"><pre><span></span><span class="gp">[user@server ~]$</span> xrdmapc -r --list s redirector.osgstorage.org:1094
+<span class="go">0**** redirector.osgstorage.org:1094</span>
+<span class="go">      Srv ceph-gridftp1.grid.uchicago.edu:1094</span>
+<span class="go">      Srv stashcache.fnal.gov:1094</span>
+<span class="go">      Srv stash.osgconnect.net:1094</span>
+<span class="go">      Srv origin.ligo.caltech.edu:1094</span>
+<span class="go">      Srv csiu.grid.iu.edu:1094</span>
 </pre></div>
 
 
@@ -2043,8 +2056,11 @@ Run the following command:</p>
 
 <p>If successful, there should be a file at <code>/tmp/testfile</code> with the contents of the test file on your origin server.
 If unsuccessful, you can pass the <code>-d</code> flag to <code>stashcp</code> for debug info.</p>
-<h2 id="getting-help">Getting help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
-<p>If you need help setting up your origin server, contact us at support@opensciencegrid.org.</p>
+<h2 id="registering-the-origin">Registering the Origin<a class="headerlink" href="#registering-the-origin" title="Permanent link">&para;</a></h2>
+<p>To be part of the OSG StashCache Federation, your <em>cache</em> must be
+<a href="../../../common/registration/">registered with the OSG</a>.  The service type is "XRootD origin server"</p>
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
+<p>To get assistance, please use the <a href="../../../common/help">this page</a> or contact directly <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.</p>
                 
                   
                 
