@@ -41,7 +41,7 @@ A simple example of such a configuration is below with further customizations in
 xrd.port 1094
 all.role server
 # Allow all contents of /store to be served from this host
-all.export %RED%/store/ global %ENDCOLOR% readonly
+all.export %RED%/store/%ENDCOLOR% readonly
 
 cms.allow host *
 # Logging verbosity
@@ -61,6 +61,11 @@ xrootd.monitor all auth flush io 60s ident 5m mbuff 8k rbuff 4k rnums 3 window 1
 xrd.network keepalive kaparms 10m,1m,5
 xrd.timeout idle 60m
 ```
+
+Notice the following:
+
+1. The directory `/store` is the one your users will interact "see" from this xrootd gateway. Other control options can be added like "writable" see [documenation here](http://xrootd.org/doc/dev48/ofs_config.htm).
+1. The sitename has only implications for monitoring, so should match whatever is registered (if) on [Topology](/common/registration/).
 
 ### Authorization file
 
@@ -100,11 +105,14 @@ See [this documentation](/data/install-xrootd/#optional-adding-cms-tfc-support-t
 
 Using XRootD
 ------------
-In order to start your XRootD server you need to run
+In order to start your XRootD server you need to run where "server" is the "arbritrary" name you want to give
+to your Xrootd Unix process instance. 
 
 ``` console
 root@xrootd-server # systemctl start xrootd@%RED%server%ENDCOLOR%
 ```
+
+In this case SERVICE-NAME would be xrootd@server.
 
 As a reminder, here are common service commands (all run as `root`):
 
