@@ -9,7 +9,7 @@ to connect your existing campus HPC/HTC cluster to the Open Science Grid.
 The OSG team will host and operate the HTCondor compute element which routes user jobs to your cluster,
 configured for the science communities that you choose to support.
 
-![fig bosco](/compute-element/img/screenshot_2983.png)
+![managed services diagram](/compute-element/img/screenshot_2983.png)
 
 
 ## Requirements
@@ -24,6 +24,9 @@ Here are the requirements:
 -   A Unix account on your cluster's submit server, accessible via an SSH key
     The OSG CE will use this account to automatically submit jobs,
     so it must also have permissions to submit jobs to the batch system
+
+-   If your batch system is not HTCondor,
+    there needs to be a shared file system between the submit server and the compute nodes
 
 
 ## Setup Process
@@ -71,7 +74,7 @@ usage of resources:
     through email at [help@opensciencegrid.org](help@opensciencegrid.org)
 
 
-## Which Science Communities and Institutions am I supporting?
+## Which Science Communities and Institutions am I Supporting?
 
 The OSG provides monitoring to view which communities are accessing your site, their fields of science, and home institution.
 Below is an example of the monitoring views that will be available for your cluster.
