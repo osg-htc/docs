@@ -132,6 +132,12 @@ To verify the LCMAPS security, run the following commands from a machine with yo
 
 1. On the XRootD host, add your DN to [/etc/grid-security/grid-mapfile](/security/lcmaps-voms-authentication#mapping-users)
 
+1. Add a line to `/etc/xrootd/auth_file` to ensure the mapped user can write to `<DESTINATION PATH>`
+
+1. Restart the xrootd service. (See
+   [this section](https://opensciencegrid.org/docs/data/install-xrootd/#managing-xrootd-services)
+   for more information of managing XRootD services.)
+
 1. Generate your proxy and verify that you can successfully transfer files:
 
         :::console
