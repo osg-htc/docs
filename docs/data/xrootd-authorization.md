@@ -48,12 +48,6 @@ Here we assume that your storage path is `/data/xrootdfs`.
 
             u * rl /data/xrootdfs -rl /data/xrootdfs/private
 
-!!! note
-    The character sequence `@=` indicates where the user's name should be substituted before a path prefix match is
-    attempted.
-    This allows you to provide for file system areas that are effectively "owned" by a user without needing to specify
-    the actual user's name.
-
 
 More generally, each configuration line of the auth file has the following form:
 
@@ -65,7 +59,7 @@ idtype id path privs
 |--------|---------------------------------------------------------------------------------------------------------------------------------------|
 | idtype | Type of id. Use `u` for username, `g` for group, etc.                                                                                 |
 | id     | Username (or groupname). Use `*` for all users or `=` for user-specific capabilities, like home directories                           |
-| path   | The path prefix to be used for matching purposes                                                                                      |
+| path   | The path prefix to be used for matching purposes.  `@=` expands to the current user name before a path prefix match is attempted      |
 | privs  | Letter list of privileges: `a` - all ; `l` - lookup ; `d` - delete ; `n` - rename ; `i` - insert ; `r` - read ; `k` - lock (not used) ; `w` - write ; `-` - prefix to remove specified privileges |
 
 
