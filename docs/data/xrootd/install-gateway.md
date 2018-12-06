@@ -5,6 +5,9 @@ Install XRootD Gateway
 typically distributed among actual storage resources. In this document we focus on using XRootD as a simple layer
 exporting an underlying storage system (e.g., [HDFS](/data/install-hadoop.md)) to the outside world.
 
+!!! note
+    The OSG only supports XRootD gateway installations on EL7 hosts
+
 Before Starting
 ---------------
 
