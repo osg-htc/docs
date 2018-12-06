@@ -64,10 +64,8 @@ idtype id path privs
 | path   | The path prefix to be used for matching purposes.  `@=` expands to the current user name before a path prefix match is attempted      |
 | privs  | Letter list of privileges: `a` - all ; `l` - lookup ; `d` - delete ; `n` - rename ; `i` - insert ; `r` - read ; `k` - lock (not used) ; `w` - write ; `-` - prefix to remove specified privileges |
 
-
 For more details or examples on how to use templated user options, see
 [XRootd Authorization Database File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
-
 
 Ensure the auth file is owned by `xrootd` (if you have created file as root), and that it is not writable by others.
 
@@ -75,8 +73,6 @@ Ensure the auth file is owned by `xrootd` (if you have created file as root), an
 root@host # chown xrootd:xrootd /etc/xrootd/auth_file
 root@host # chmod 0640 /etc/xrootd/auth_file  # or 0644
 ```
-
-
 
 
 #### Enabling xrootd-lcmaps authorization
