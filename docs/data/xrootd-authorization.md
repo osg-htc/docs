@@ -121,7 +121,7 @@ on all data nodes:
 To verify the LCMAPS security, run the following commands from a machine with your user certificate/key pair,
 `xrootd-client`, and `voms-clients-cpp` installed:
 
-1. Destroy any pre-existing proxies and attempt a copy to `<DESTINATION PATH>` on the `<XROOTD HOST>` to verify failure:
+1. Destroy any pre-existing proxies and attempt a copy to a directory (which we will refer to as `<DESTINATION PATH>`) on the `<XROOTD HOST>` to verify failure:
 
         :::console
         user@client $ voms-proxy-destroy
