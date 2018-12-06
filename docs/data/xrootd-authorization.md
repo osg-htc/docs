@@ -42,6 +42,8 @@ g biology %RED%/data/xrootdfs%ENDCOLOR%/biology a
 ```
 
 Here we assume that your storage path is `/data/xrootdfs`.
+This path is relative to the `oss.localroot` or `all.localroot` configuration values, if either one is defined in the
+xrootd config file.
 
 !!! note
     Specific paths need to be specified _before_ generic paths; e.g., this does not work:
