@@ -44,7 +44,7 @@ g biology %RED%/data/xrootdfs%ENDCOLOR%/biology a
 Here we assume that your storage path is `/data/xrootdfs`.
 
 !!! note
-    Specific paths need to be specified _before_ generic paths; e.g, this does not work:
+    Specific paths need to be specified _before_ generic paths; e.g., this does not work:
 
             u * rl /data/xrootdfs -rl /data/xrootdfs/private
 
