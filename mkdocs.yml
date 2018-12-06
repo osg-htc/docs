@@ -40,6 +40,7 @@ pages:
   - XRootD:
     - 'XRootD Overview': 'data/xrootd-overview.md'
     - 'Install XRootD': 'data/install-xrootd.md'
+    - 'Configure XRootD Authorization': 'data/xrootd-authorization.md'
     - 'Using XRootD': 'data/install-xroot-client.md'
   - 'StashCache': 
     - 'StashCache Overview': 'data/stashcache/overview.md'
