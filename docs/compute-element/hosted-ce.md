@@ -83,7 +83,8 @@ Below is an example of the monitoring views that will be available for your clus
 
 Many OSG communities use software modules provided by their collaborations or by the OSG User Support team.
 In order to support these communities, without requiring specific application software on your cluster,
-OSG sites use a distributed software repository system called OASIS.
+OSG sites use a distributed software repository system called OASIS,
+built on top of a file system called CVMFS.
 
 In order to use OASIS, you will need the following:
 
@@ -93,22 +94,14 @@ In order to use OASIS, you will need the following:
 -   A local scratch area on each compute node; typical recommendations are 10 GB per job,
     plus an additional 20GB for caching OASIS data
 
+Installation instructions for Frontier Squid are [provided here](/data/frontier-squid).
 
-### Install the OSG Packaged Frontier Squid Service
+After setting up the Squid proxy, you will need to install the CVMFS software and the OASIS configuration
+on each compute node.
+Installation instructions for CVMFS and OASIS are [provided here](/worker-node/install-cvmfs).
 
-OSG has a yum repository with rpms of the OSG Frontier Squid service.  The rpms
-include configuration files that allow Squid to access certified OSG software 
-repositories.  Instructions on setting up Frontier Squid are available 
-[here](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallFrontierSquid).
 
-### Install the OSG OASIS Software on Your Cluster Compute Servers
+## How to Get Help
 
-OSG also provides rpms for the OASIS software in it's yum repositories.
-Instructions on installing and making OASIS based software available on your
-compute nodes are available
-[here](https://twiki.grid.iu.edu/bin/view/Documentation/Release3/InstallCvmfs).
+If you need help with setup or troubleshooting, see our [help procedure](../common/help).
 
-<br/>
-## Getting Started
-
-Drop us a note at [user-support@opensciencegrid.org](mailto:user-support@opensciencegrid.org) if this is of interest to you. We will contact you to setup a consultation.  
