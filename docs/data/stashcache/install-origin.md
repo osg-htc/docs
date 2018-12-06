@@ -5,15 +5,13 @@ This document describes how to install a StashCache origin service.  This servic
 to export its data to the StashCache data federation.
 
 !!! note
-    The origin must be registered with the OSG prior to joining the data federation.  You may start the
-    registration process prior to finishing the installation by contacting <support@opensciencegrid.org>
-    with the following details:
+    The _origin_ must be registered with the OSG prior to joining the data federation. You may start the
+    registration process prior to finishing the installation by [using this link](#registering-the-origin) 
+    along with the basic information like:
 
     * Resource name and hostname.
     * VO associated with this origin server (will be used to determine the origin's namespace prefix).
-    * Administrative and security contact.
-
-    Follow the [registration documentation](/common/registration.md) for more information.
+    * Administrative and security contact. 
 
 This guide covers the procedure for exporting world-readable data; publishing proprietary data is still
 experimental.
@@ -127,7 +125,7 @@ perform the following steps to verify that it is functional.
 
 To verify that your origin is correctly advertising its availability, run the following command from the origin server:
 
-```
+```console
 [user@server ~]$ xrdmapc -r --list s redirector.osgstorage.org:1094
 0**** redirector.osgstorage.org:1094
       Srv ceph-gridftp1.grid.uchicago.edu:1094
@@ -176,7 +174,13 @@ If successful, there should be a file at `/tmp/testfile` with the contents of th
 If unsuccessful, you can pass the `-d` flag to `stashcp` for debug info.
 
 
-## Getting help
+Registering the Origin
+----------------------
+To be part of the OSG StashCache Federation, your _cache_ must be
+[registered with the OSG](/common/registration.md).  The service type is "XRootD origin server"
 
-If you need help setting up your origin server, contact us at support@opensciencegrid.org.
 
+Getting Help
+------------
+
+To get assistance, please use the [this page](/common/help) or contact directly <support@opensciencegrid.org>.

@@ -6,14 +6,12 @@ network to cache data frequently used on the OSG, reducing data transfer over th
 decreasing access latency.
 
 !!! note
-    The cache service must be registered with the OSG if it is to be used by clients.  You may start the
-    registration procedure prior to finishing the installation by contacting <support@opensciencegrid.org>
-    with the following details:
+    The _cache_ service must be registered with the OSG if it is to be used by clients. You may start 
+    registration procedure prior to finishing the installation by [using this link](#registering-the-cache) 
+    along with the basic information like:
 
     * Resource name and hostname.
     * Administrative and security contact.
-
-    Follow the [registration documentation](/common/registration.md) for more information.
 
 ## Installation prerequisites for the Cache
 
@@ -211,3 +209,15 @@ user@host $ condor_status -any -l -const "Name==\"xrootd@`hostname`\""
 ```
 
 Where `hostname` is the string returned by the hostname command. The output of the above command should provide an HTCondor ClassAd that details the status of your cache.
+
+Registering the Cache
+---------------------
+To be part of the OSG StashCache Federation, your _cache_ must be
+[registered with the OSG](/common/registration.md).  The service type is "XRootD cache server"
+
+Once the cache has been registered, open a [help ticket](https://support.opensciencegrid.org) with your cache name.  Mention in your ticket that you would like to "Finalize the cache registration."
+
+Getting Help
+------------
+
+To get assistance, please use the [this page](/common/help) or contact directly <support@opensciencegrid.org>.
