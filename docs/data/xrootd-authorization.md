@@ -20,35 +20,42 @@ only by the xrootd user, optionally readable by others.
 (The path `/etc/xrootd/auth_file` corresponds to the
 [`acc.authdb`](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606592) parameter in your xrootd config.)
 
-For more details or examples on how to use templated user options, see
-[XRootd Authorization Database File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
-
-Create `/etc/xrootd/auth_file` :
+Here is an example `/etc/xrootd/auth_file` :
 
 ```file
-# This means that all the users have read access to the datasets 
-u * %RED%/data/xrootdfs%ENDCOLOR% lr
+# This means that all the users have read access to the datasets, _except_ under /private
+u * -rl %RED%/data/xrootdfs%ENDCOLOR%/private %RED%/data/xrootdfs%ENDCOLOR% rl
 
-# This means that all the users have full access to their private dirs 
-u = %RED%/data/xrootdfs/%ENDCOLOR%@=/ a
+# Or the following, without a restricted /private dir
+# u * %RED%/data/xrootdfs%ENDCOLOR% rl
 
-# This means that this privileged user can do everything 
-# You need at least one user like that, in order to create the 
-# private dir for each user willing to store his data in the facility 
-u xrootd %RED%/data/xrootdfs%ENDCOLOR% a 
+# This means that all the users have full access to their private dirs
+u = %RED%/data/xrootdfs%ENDCOLOR%/home/@=/ a
+
+# This means that this privileged user can do everything
+# You need at least one user like that, in order to create the
+# private dirs for users willing to store their data in the facility
+u xrootd %RED%/data/xrootdfs%ENDCOLOR% a
+
+# This means that users in group 'biology' can do anything under this path
+g biology %RED%/data/xrootdfs%ENDCOLOR%/biology a
 ```
 
-Here we assume that your storage path is `/data/xrootdfs` (same as in the
-previous example).
+Here we assume that your storage path is `/data/xrootdfs`.
 
-Change file ownership (if you have created file as root):
+!!! note
+    Specific paths need to be specified _before_ generic paths; e.g, this does not work:
 
-```console
-root@host # chown xrootd:xrootd /etc/xrootd/auth_file
-```
+            u * rl /data/xrootdfs -rl /data/xrootdfs/private
+
+!!! note
+    The character sequence `@=` indicates where the user's name should be substituted before a path prefix match is
+    attempted.
+    This allows you to provide for file system areas that are effectively "owned" by a user without needing to specify
+    the actual user's name.
 
 
-This file is a flat file of the following form:
+More generally, each configuration line of the auth file has the following form:
 
 ``` file
 idtype id path privs
@@ -61,27 +68,19 @@ idtype id path privs
 | path   | The path prefix to be used for matching purposes                                                                                      |
 | privs  | Letter list of privileges: `a` - all ; `l` - lookup ; `d` - delete ; `n` - rename ; `i` - insert ; `r` - read ; `k` - lock (not used) ; `w` - write ; `-` - prefix to remove specified privileges |
 
-For example, a site with a CMS-specific and private storage areas as well as home directories private to each local user
-may look like the following:
 
-            # any user can read files everywhere _except_ under /private
-            u * -rl /private / rl
-            # users can do anything to files and dirs under their home directories
-            u = /home/@=/ a
-            # VOMS group uscms can do anything to files and dirs under /uscms
-            g uscms /uscms a
+For more details or examples on how to use templated user options, see
+[XRootd Authorization Database File](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606599).
 
 
-!!! note
-    Specific paths need to be specified _before_ generic paths; e.g, this does not work:
+Ensure the auth file is owned by `xrootd` (if you have created file as root), and that it is not writable by others.
 
-            u * rl / -rl /private
+```console
+root@host # chown xrootd:xrootd /etc/xrootd/auth_file
+root@host # chmod 0640 /etc/xrootd/auth_file  # or 0644
+```
 
-!!! note
-    The character sequence `@=` indicates where the user's name should be substituted before a path prefix match is
-    attempted.
-    This allows you to provide for file system areas that are effectively "owned" by a user without needing to specify
-    the actual user's name.
+
 
 
 #### Enabling xrootd-lcmaps authorization
