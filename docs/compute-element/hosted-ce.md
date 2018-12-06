@@ -73,23 +73,26 @@ usage of resources:
 
 ## Which Science Communities and Institutions am I supporting?
 
-The OSG provides monitoring to view which communities are accessing your site, their fields of science, home institution. Below is an example of the monitoring views that will be available for your cluster. 
+The OSG provides monitoring to view which communities are accessing your site, their fields of science, and home institution.
+Below is an example of the monitoring views that will be available for your cluster.
 
-![fig gracc](/compute-element/img/screenshot_2979.png)
+![monitoring graphs](/compute-element/img/screenshot_2979.png)
 
-<br/>
+
 ## **Optional**: Providing Access to Application Software Using OASIS
 
-Many OSG communities use software modules provided by their collaborations or by
-the OSG User Support team. You do not need to install any application software
-on your cluster. OSG uses a FUSE-based distributed software repository system
-called OASIS. To support these communities, the following additional components
-are needed: 
-       
-* A (cluster-wide) Squid service with a minimum 50GB of cache space.
-* Local scratch area on compute nodes: typical recommendations are 10 GB per job
-* On each compute node, installation of the OASIS software package and associated FUSE kernel modules
-* Local scratch space of at least 10 GB (preferably 22GB) on compute nodes for caching OASIS data.
+Many OSG communities use software modules provided by their collaborations or by the OSG User Support team.
+In order to support these communities, without requiring specific application software on your cluster,
+OSG sites use a distributed software repository system called OASIS.
+
+In order to use OASIS, you will need the following:
+
+-   A cluster-wide Squid proxy service with at least 50GB of cache space;
+    we recommend using the Frontier Squid software provided in the OSG repositories
+
+-   A local scratch area on each compute node; typical recommendations are 10 GB per job,
+    plus an additional 20GB for caching OASIS data
+
 
 ### Install the OSG Packaged Frontier Squid Service
 
