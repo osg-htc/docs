@@ -105,14 +105,12 @@ See [this documentation](/data/install-xrootd/#optional-adding-cms-tfc-support-t
 
 Using XRootD
 ------------
-In order to start your XRootD server you need to run where "server" is the "arbritrary" name you want to give
+In order to start your XRootD server you need to run where `server` is the "arbritrary" name you want to give
 to your Xrootd Unix process instance. 
 
 ``` console
 root@xrootd-server # systemctl start xrootd@%RED%server%ENDCOLOR%
 ```
-
-In this case SERVICE-NAME would be xrootd@server.
 
 As a reminder, here are common service commands (all run as `root`):
 
@@ -122,6 +120,9 @@ As a reminder, here are common service commands (all run as `root`):
 | Stop a service                              | `service SERVICE-NAME stop`  | `systemctl start SERVICE-NAME`   |
 | Enable a service to start during boot       | `chkconfig SERVICE-NAME on`  | `systemctl enable SERVICE-NAME`  |
 | Disable a service from starting during boot | `chkconfig SERVICE-NAME off` | `systemctl disable SERVICE-NAME` |
+
+!!! Note
+    In this case `SERVICE-NAME` would be `xrootd@%RED%server%ENDCOLOR%`.
 
 Validating XRootD
 -----------------
