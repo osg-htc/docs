@@ -1,37 +1,30 @@
 OSG Managed Services
 ====================
 
+
 ## Overview
 
-Enabling campus researchers to share computational and data resources
-with external collaborators is a powerful multiplier in advancing
-science. Sharing spare capacity for even short durations allows an
-institutional HPC resource a cost-efficient means of participating
-in a larger cyber ecosystem. In this document we will show you how to
-integrate your HPC cluster resource to the Open Science Grid to support
-collaborative, multi-institutional science. The only requirements are
-that your cluster can provide SSH access to a single OSG staff member,
-that your cluster job submission and worker nodes have outbound IP
-connectivity, the operating system is CentOS/RHEL 6.x, 7.x or similar,
-and that a common batch scheduler is used (e.g. SLURM, PBS, HTCondor).
-
-## How the Service Works
-
-OSG offers a *managed service option* to connect a campus HPC/HTC cluster to the Open Science Grid. The OSG team will host and operate an HTCondor compute element which routes user jobs to your cluster, configured for science communities that you choose to support. 
+As an alternative to setting up your own CE, OSG offers a *managed service option*
+to connect your existing campus HPC/HTC cluster to the Open Science Grid.
+The OSG team will host and operate an HTCondor compute element which routes user jobs to your cluster,
+configured for the science communities that you choose to support.
 
 ![fig bosco](/compute-element/img/screenshot_2983.png)
 
 
 ## Requirements
 
-Here are the basic system requirements:
+Here are the requirements:
 
-* Cluster operating system must be RHEL 6.x, 7.x or CentOS 6.x, 7.x or Scientific Linux 6.x, 7.x 
-* A standard Unix account on your system's login server. The OSG service will use this account and submit to your batch queue in a manner you define.
-* SSH access to this account via public SSH keys.
-* Shared home directory in the cluster
-* A supported batch system (Slurm, HTCondor, PBS, LSF, SGE)
-* Outbound network connectivity from the compute nodes (can be behind NAT)
+-   An existing compute cluster with a supported batch system (HTCondor, LSF, PBS, Slurm, SGE),
+    and a supported operating system (RHEL 6 or 7 or compatible)
+
+-   Outbound network connectivity from the compute nodes (they can be behind NAT)
+
+-   A Unix account on your cluster's submit server, accessible via an SSH key
+    The OSG services will use this account to automatically submit jobs, so it
+    must also have permissions to submit jobs to the batch system
+
 
 ## Setup Process
 
