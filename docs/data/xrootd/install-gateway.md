@@ -70,14 +70,9 @@ Notice the following:
 1. The directory `/store` is the one your users will interact "see" from this xrootd gateway. Other control options can be added like "writable" see [documenation here](http://xrootd.org/doc/dev48/ofs_config.htm).
 1. The sitename has only implications for monitoring, so should match whatever is registered (if) on [Topology](/common/registration/).
 
-### Authorization file
-
-To configure XRootD authorization, please follow the documentation [here](/data/xrootd/xrootd-authorization)
-
 #### LCMAPS authorization
 
-To configure the LCMAPS authentication please follow the documentation
-[here](/data/install-xrootd/#security-option-3-xrootd-lcmaps-authorization)
+To configure the LCMAPS authentication please follow the documentation [here](/data/xrootd/xrootd-authorization).
 
 ### Optional Configuration
 
