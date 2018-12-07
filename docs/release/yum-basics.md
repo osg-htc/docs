@@ -489,24 +489,15 @@ Error Downloading Packages:
   packageXYZ: failure: packageXYZ.rpm from osg: [Errno 256] No more mirrors to try.
 ```
 
-then you can try cleaning up Yum's cache: 
+then you can try cleaning up Yum's cache:
 
 ```console
-root@host # yum clean all --enablerpeo=*
+root@host # yum clean all --enablerepo=*
 ```
-
-to make an even more thorough job you can follow also add:
-
-```console
-root@host # yum clean expire-cache --enablerepo=*
-```
-
-!!! note 
-    `yum clean` cleans only enabled repositories. If you want to also clean any (temporarily) disabled repositories you need to use `--enablerepo=’*’` option.
 
 ### Yum complaining about missing keys
 
-If yum is complaining you can re-import the keys in your distribution: 
+If yum is complaining you can re-import the keys in your distribution:
 
 ```console
 root@host # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
@@ -516,5 +507,5 @@ References
 ----------
 
 - [The main yum web site](http://yum.baseurl.org/)
-- A good description of the commands for RPM and yum can be found at [Learn Linux 101: RPM and YUM Package Management](http://www.ibm.com/developerworks/linux/library/l-lpic1-v3-102-5/?ca=drs-).
+- A good description of the commands for RPM and yum can be found at [Learn Linux 101: RPM and YUM Package Management](https://developer.ibm.com/tutorials/l-lpic1-102-5/).
 
