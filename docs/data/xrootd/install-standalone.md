@@ -1,12 +1,12 @@
-Install XRootD Gateway
-======================
+Install XRootD Standalone
+=========================
 
 [XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in a variety of ways to access data,
 typically distributed among actual storage resources. In this document we focus on using XRootD as a simple layer
 exporting an underlying storage system (e.g., [HDFS](/data/install-hadoop.md)) to the outside world.
 
 !!! note
-    The OSG only supports XRootD gateway installations on EL7 hosts
+    The OSG only supports XRootD standalone installations on EL7 hosts
 
 Before Starting
 ---------------
@@ -31,13 +31,13 @@ Installing XRootD
 To install XRootD, run the following Yum command:
 
 ``` console
-root@xrootd-server # yum install xrootd
+root@xrootd-standalone # yum install xrootd
 ```
 
 Configuring XRootD
 ------------------
 
-You will need to modify the file `/etc/xrootd/xrootd-server.cfg` that we will refer now on (unless explicitly said) as THE configuration file.
+You will need to modify the file `/etc/xrootd/xrootd-standalone.cfg` that we will refer now on (unless explicitly said) as THE configuration file.
 A simple example of such a configuration is below with further customizations in the rest of the document.
 
 ``` file
@@ -105,7 +105,7 @@ The specific services are:
 | Software  | Service Name                          | Notes                                                                        |
 |:----------|:--------------------------------------|:-----------------------------------------------------------------------------|
 | Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
-| XRootD    | `xrootd@PROCESS-NAME`                 | `PROCESS-NAME` is an abritrary string to assign to the XRootD server process |
+| XRootD    | `xrootd@standalone`                   |                                                                              |
 
 Start the services in the order listed and stop them in reverse order.
 As a reminder, here are common service commands (all run as `root`):
@@ -127,18 +127,18 @@ To validate an XRootD installation, perform the following verification steps:
     1. Install the client tools:
 
             :::console
-            root@xrootd-server # yum install xrootd-client
+            root@xrootd-standalone # yum install xrootd-client
 
     1. Copy a file to a directory for which you have write access:
 
             :::console
-            root@xrootd-server # xrdcp /bin/sh root://localhost:1094//tmp/first_test
+            root@xrootd-standalone # xrdcp /bin/sh root://localhost:1094//tmp/first_test
             [xrootd] Total 0.76 MB  [====================] 100.00 % [inf MB/s]
 
     1. Verify that the file has been copied over:
 
             :::console
-            root@xrootd-server # ls -l /tmp/first_test
+            root@xrootd-standalone # ls -l /tmp/first_test
             -rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
 
 1. If you have enabled [HTTP support](#enabling-http-support), verify file transfer over HTTP using GFAL2 client
@@ -147,17 +147,17 @@ To validate an XRootD installation, perform the following verification steps:
     1. Install the GFAL2 client tools:
 
             :::console
-            root@xrootd-server # yum install gfal2-util gfal2-plugin-http
+            root@xrootd-standalone # yum install gfal2-util gfal2-plugin-http
 
     1. Copy a file to a directory for which you have write access:
 
             :::console
-            root@xrootd-server # gfal-copy /bin/sh http://localhost:1094//tmp/first_test
+            root@xrootd-standalone # gfal-copy /bin/sh http://localhost:1094//tmp/first_test
 
     1. Verify that the file has been copied over:
 
             :::console
-            root@xrootd-server # ls -l /tmp/first_test
+            root@xrootd-standalone # ls -l /tmp/first_test
             -rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
 
 Getting Help
@@ -172,10 +172,10 @@ Reference
 
 ### File locations
 
-| Service/Process | Configuration File                 | Description                              |
-|:----------------|:-----------------------------------|:-----------------------------------------|
-| `xrootd`        | `/etc/xrootd/xrootd-server.cfg` | Main clustered mode XRootD configuration |
-|                 | `/etc/xrootd/auth_file`            | Authorized users file                    |
+| Service/Process | Configuration File                  | Description               |
+|:----------------|:------------------------------------|:--------------------------|
+| `xrootd`        | `/etc/xrootd/xrootd-standalone.cfg` | Main XRootD configuration |
+|                 | `/etc/xrootd/auth_file`             | Authorized users file     |
 
 | Service/Process          | Log File                                | Description                                 |
 |:-------------------------|:----------------------------------------|:--------------------------------------------|

@@ -20,10 +20,10 @@ In the OSG, there are three data federations based on XCache: ATLAS XCache, CMS 
 If you are affiliated with a site or VO interested in contributing to or starting a data federation, contact us at
 <mailto:help@opensciencegrid.org>.
 
-XRootD Gateway
---------------
+XRootD Standalone
+-----------------
 
-An [XRootD gateway](/data/xrootd/install-gateway) exports an existing filesystem, such as HDFS or Lustre, using both the
-XRootD and WebDAV protocols.
-Generally, only sites affiliated with large VOs would need to install an XRootD gateway so consult your VO if you are
-interested in contributing storage.
+An [XRootD standalone server](/data/xrootd/install-standalone) exports an existing filesystem, such as HDFS or Lustre, 
+using both the XRootD and WebDAV protocols.
+Generally, only sites affiliated with large VOs would need to install an XRootD standalone server so consult your VO if
+you are interested in contributing storage.
