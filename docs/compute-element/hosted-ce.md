@@ -2,7 +2,8 @@ OSG Hosted CE
 =============
 
 
-## Overview
+Introduction
+------------
 
 As an alternative to setting up your own CE, OSG offers a hosted CE option
 to connect your existing campus HPC/HTC cluster to the Open Science Grid.
@@ -12,7 +13,8 @@ configured for the science communities that you choose to support.
 ![managed services diagram](/compute-element/img/managed_services_diagram.png)
 
 
-## Before Starting
+Before Starting
+---------------
 
 Before preparing your cluster for OSG jobs, consider the following requirements:
 
@@ -29,7 +31,8 @@ Before preparing your cluster for OSG jobs, consider the following requirements:
     there must be a shared file system between the submit server and the compute nodes
 
 
-## Applying for an OSG Hosted CE
+Applying for an OSG Hosted CE
+-----------------------------
 
 Before making any system changes, you should do the following steps:
 
@@ -61,7 +64,8 @@ in order to support application software repositories.
 This will allow a broader set of jobs to run on your cluster.
 
 
-## Security
+Security
+--------
 
 OSG takes multiple precautions to maintain security and prevent unauthorized
 usage of resources:
@@ -74,7 +78,8 @@ usage of resources:
     through email at <mailto:help@opensciencegrid.org>
 
 
-## Which Science Communities and Institutions am I Supporting?
+Which Science Communities and Institutions am I Supporting?
+-----------------------------------------------------------
 
 The OSG provides monitoring to view which communities are accessing your site, their fields of science, and home institution.
 Below is an example of the monitoring views that will be available for your cluster.
@@ -82,7 +87,8 @@ Below is an example of the monitoring views that will be available for your clus
 ![monitoring graphs](/compute-element/img/monitoring_graphs.png)
 
 
-## **Optional**: Providing Access to Application Software Using OASIS
+**Optional**: Providing Access to Application Software Using OASIS
+------------------------------------------------------------------
 
 Many OSG communities use software modules provided by their collaborations or by the OSG User Support team.
 In order to support these communities, without requiring specific application software on your cluster,
@@ -104,7 +110,8 @@ on each compute node.
 Installation instructions for CVMFS and OASIS are [provided here](/worker-node/install-cvmfs).
 
 
-## How to Get Help
+How to Get Help
+---------------
 
 If you need help with setup or troubleshooting, see our [help procedure](/common/help).
 
