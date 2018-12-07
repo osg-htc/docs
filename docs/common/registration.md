@@ -80,7 +80,7 @@ host to avoid any duplicate registrations:
 
 To register a new resource, follow the instructions below:
 
-1. If you haven't already, verify that the FQDN of your resource is not [already registered](#registering-resources)
+1. If you haven't already, verify that the FQDN of your resource is not [already registered](#searching-for-resources)
 
 1. Choose the names of your facility, site, and resource group, ensuring that the names match any pre-existing
    facilities, sites, or resource groups (including case and spaces).
@@ -89,7 +89,7 @@ To register a new resource, follow the instructions below:
 
     - If your resource group already exists under your facility and site, open the following URL in your browser:
 
-            https://github.com/opensciencegrid/topology/edit/master/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml
+            https://github.com/opensciencegrid/topology/edit/master/topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml
 
         For example, to add a resource to the `CHTC` resource group for the `CHTC` site at the `University of
         Wisconsin`, open the following URL:
@@ -112,7 +112,8 @@ To register a new resource, follow the instructions below:
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
    the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
-   If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.
+   You may leave any `ID` or `GroupID` fields blank.
+   When adding new entries, make sure that the formatting and indentation of your entry matches that of the template.
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
 
@@ -132,6 +133,7 @@ To modify an existing resource, follow these instructions:
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
    the [resource group template](https://github.com/opensciencegrid/topology/blob/master/template-resourcegroup.yaml)
    as a guide.
+   You may leave any `ID` or `GroupID` fields blank.
    Make sure that the formatting and indentation of the modified entry does not change.
 
     !!! note ""You're editing a file in a project you don't have write access to.""
@@ -185,7 +187,8 @@ Wisconsin` can be found and registered in the following file, relative to the
 topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC_downtime.yaml`
 ```
 
-!!! note Do not put downtime updates in the same pull request as other topology updates.
+!!! note 
+    Do not put downtime updates in the same pull request as other topology updates.
 
 ### Registering new downtime ###
 
@@ -300,6 +303,7 @@ To modify a VO's information or register a new VO, follow the instructions below
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
    the [VO template](https://github.com/opensciencegrid/topology/blob/master/template-virtual-organization.yaml)
    as a guide.
+   You may leave any `ID` fields blank.
    If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
@@ -332,6 +336,7 @@ To modify a VO's information or register a new VO, follow the instructions below
 
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
    the [project template](https://github.com/opensciencegrid/topology/blob/master/template-projects.yaml) as a guide.
+   You may leave any `ID` fields blank.
    If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.
 
 1. Submit your changes as a pull request, providing a descriptive commit message. For example:
