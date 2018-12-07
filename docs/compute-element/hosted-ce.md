@@ -5,10 +5,17 @@ OSG Hosted CE
 Introduction
 ------------
 
-As an alternative to setting up your own CE, OSG offers a hosted CE option
-to connect your existing campus HPC/HTC cluster to the Open Science Grid.
-The OSG team will host and operate the HTCondor compute element which routes user jobs to your cluster,
-configured for the science communities that you choose to support.
+An OSG Compute Element (CE) is the entry point for jobs coming from the OSG;
+it handles authorization and delegation of jobs to your existing campus HPC/HTC cluster.
+
+Many sites set up their compute element locally.
+As an alternative, OSG offers a hosted CE option
+wherein the OSG team will host and operate the HTCondor compute element,
+and configure it for the science communities that you choose to support.
+
+This document explains the requirements and the procuedure for obtaining a hosted CE.
+If you wish to have a local compute element instead,
+see page for [installing HTCondor-CE](/compute-element/install-htcondor-ce).
 
 ![managed services diagram](/compute-element/img/managed_services_diagram.png)
 
