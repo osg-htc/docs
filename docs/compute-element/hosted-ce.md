@@ -31,6 +31,29 @@ Before preparing your cluster for OSG jobs, consider the following requirements:
     there must be a shared file system between the submit server and the compute nodes
 
 
+Which Science Communities and Institutions am I Supporting?
+-----------------------------------------------------------
+
+The OSG provides monitoring to view which communities are accessing your site, their fields of science, and home institution.
+Below is an example of the monitoring views that will be available for your cluster.
+
+![monitoring graphs](/compute-element/img/monitoring_graphs.png)
+
+
+Security
+--------
+
+OSG takes multiple precautions to maintain security and prevent unauthorized
+usage of resources:
+
+-   Access to the OSG system with SSH keys are restricted to the OSG staff maintaining them
+-   Users are carefully vetted before they are allowed to submit jobs to OSG
+-   Jobs running through OSG can be traced back to the user that submitted them
+-   Job submission can quickly be disabled if needed
+-   OSG staff are readily contactable in case of an emergency,
+    through email at <mailto:help@opensciencegrid.org>
+
+
 Applying for an OSG Hosted CE
 -----------------------------
 
@@ -62,29 +85,6 @@ Once this is done, the OSG team will:
 Optionally, we can assist you in installing and setting up the Squid and OASIS software on your cluster
 in order to support application software repositories.
 This will allow a broader set of jobs to run on your cluster.
-
-
-Security
---------
-
-OSG takes multiple precautions to maintain security and prevent unauthorized
-usage of resources:
-
--   Access to the OSG system with SSH keys are restricted to the OSG staff maintaining them
--   Users are carefully vetted before they are allowed to submit jobs to OSG
--   Jobs running through OSG can be traced back to the user that submitted them
--   Job submission can quickly be disabled if needed
--   OSG staff are readily contactable in case of an emergency,
-    through email at <mailto:help@opensciencegrid.org>
-
-
-Which Science Communities and Institutions am I Supporting?
------------------------------------------------------------
-
-The OSG provides monitoring to view which communities are accessing your site, their fields of science, and home institution.
-Below is an example of the monitoring views that will be available for your cluster.
-
-![monitoring graphs](/compute-element/img/monitoring_graphs.png)
 
 
 **Optional**: Providing Access to Application Software Using OASIS
