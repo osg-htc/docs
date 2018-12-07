@@ -12,12 +12,12 @@ configured for the science communities that you choose to support.
 ![managed services diagram](/compute-element/img/screenshot_2983.png)
 
 
-## Requirements
+## Before Starting
 
-Here are the requirements:
+Before preparing your cluster for OSG jobs, consider the following requirements:
 
--   An existing compute cluster with a supported batch system (HTCondor, LSF, PBS, Slurm, SGE),
-    and a supported operating system (RHEL 6 or 7 or compatible)
+-   An existing compute cluster with a [supported batch system](/index#prepare-the-batch-system)
+    running on a [supported operating system](release/supported_platforms)
 
 -   Outbound network connectivity from the compute nodes (they can be behind NAT)
 
@@ -26,10 +26,10 @@ Here are the requirements:
     so it must also have permissions to submit jobs to the batch system
 
 -   If your batch system is not HTCondor,
-    there needs to be a shared file system between the submit server and the compute nodes
+    there must be a shared file system between the submit server and the compute nodes
 
 
-## Setup Process
+## Applying for an OSG Hosted CE
 
 Before making any system changes, you should do the following steps:
 
@@ -66,12 +66,12 @@ This will allow a broader set of jobs to run on your cluster.
 OSG takes multiple precautions to maintain security and prevent unauthorized
 usage of resources:
 
--   Access to the OSG system with ssh keys are restricted to the OSG staff maintaining them
+-   Access to the OSG system with SSH keys are restricted to the OSG staff maintaining them
 -   Users are carefully vetted before they are allowed to submit jobs to OSG
 -   Jobs running through OSG can be traced back to the user that submitted them
 -   Job submission can quickly be disabled if needed
 -   OSG staff are readily contactable in case of an emergency,
-    through email at [help@opensciencegrid.org](help@opensciencegrid.org)
+    through email at <mailto:help@opensciencegrid.org>
 
 
 ## Which Science Communities and Institutions am I Supporting?
