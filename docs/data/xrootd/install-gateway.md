@@ -108,24 +108,24 @@ See [this documentation](/data/install-xrootd/#optional-adding-cms-tfc-support-t
 
 Using XRootD
 ------------
-In order to start your XRootD server you need to run where `server` is the "arbritrary" name you want to give
-to your Xrootd Unix process instance. 
 
-``` console
-root@xrootd-server # systemctl start xrootd@%RED%server%ENDCOLOR%
-```
+In addition to the XRootD service itself, there are a number of supporting services in your installation.
+The specific services are:
 
+| Software  | Service Name                          | Notes                                                                        |
+|:----------|:--------------------------------------|:-----------------------------------------------------------------------------|
+| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
+| XRootD    | `xrootd@PROCESS-NAME`                 | `PROCESS-NAME` is an abritrary string to assign to the XRootD server process |
+
+Start the services in the order listed and stop them in reverse order.
 As a reminder, here are common service commands (all run as `root`):
 
-| To …                                        | On EL 6, run the command…    | On EL 7, run the command…        |
-|:--------------------------------------------|:-----------------------------|:---------------------------------|
-| Start a service                             | `service SERVICE-NAME start` | `systemctl start SERVICE-NAME`   |
-| Stop a service                              | `service SERVICE-NAME stop`  | `systemctl start SERVICE-NAME`   |
-| Enable a service to start during boot       | `chkconfig SERVICE-NAME on`  | `systemctl enable SERVICE-NAME`  |
-| Disable a service from starting during boot | `chkconfig SERVICE-NAME off` | `systemctl disable SERVICE-NAME` |
-
-!!! Note
-    In this case `SERVICE-NAME` would be `xrootd@%RED%server%ENDCOLOR%`.
+| To …                                        | On EL 7, run the command…        |
+|:--------------------------------------------|:---------------------------------|
+| Start a service                             | `systemctl start SERVICE-NAME`   |
+| Stop a service                              | `systemctl start SERVICE-NAME`   |
+| Enable a service to start during boot       | `systemctl enable SERVICE-NAME`  |
+| Disable a service from starting during boot | `systemctl disable SERVICE-NAME` |
 
 Validating XRootD
 -----------------
