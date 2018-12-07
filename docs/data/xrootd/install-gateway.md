@@ -72,13 +72,7 @@ Notice the following:
 
 ### Authorization file
 
-For the authorization options on XRootD please see [here](/data/install-xrootd/#optional-authorization)
-
-An example of an authorization file for read only of store by CMS would be:
-
-```file
-g /cms /store lr
-```
+To configure XRootD authorization, please follow the documentation [here](/data/xrootd/xrootd-authorization)
 
 #### LCMAPS authorization
 
