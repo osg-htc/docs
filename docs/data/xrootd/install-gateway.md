@@ -41,10 +41,13 @@ You will need to modify the file `/etc/xrootd/xrootd-server.cfg` that we will re
 A simple example of such a configuration is below with further customizations in the rest of the document.
 
 ``` file
-xrd.port 1094
-all.role server
 # Allow all contents of /store to be served from this host
 all.export %RED%/store/%ENDCOLOR% readonly
+# This site name is only used for monitoring purposes (ex: T2_US_UCSD or UCSD)
+all.sitename   %RED%YOUR SITE NAME%ENDCOLOR%
+
+xrd.port 1094
+all.role server
 
 cms.allow host *
 # Logging verbosity
@@ -55,8 +58,6 @@ cms.trace all
 
 all.adminpath /var/run/xrootd
 all.pidpath   /var/run/xrootd
-# This site name is only used for monitoring purposes (ex: T2_US_UCSD or UCSD)
-all.sitename   %RED%YOUR SITE NAME%ENDCOLOR%
 
 xrd.report     xrootd.t2.ucsd.edu:9931,desire.physics.ucsd.edu:9931 every 30s all sync
 xrootd.monitor all auth flush io 60s ident 5m mbuff 8k rbuff 4k rnums 3 window 10s dest files io info user redir xrootd.t2.ucsd.edu:9930 dest files iov info user xrootd.t2.ucsd.edu:9932
@@ -67,8 +68,8 @@ xrd.timeout idle 60m
 
 Notice the following:
 
-1. The directory `/store` is the one your users will interact "see" from this xrootd gateway. Other control options can be added like "writable" see [documenation here](http://xrootd.org/doc/dev48/ofs_config.htm).
-1. The sitename has only implications for monitoring, so should match whatever is registered (if) on [Topology](/common/registration/).
+1. The directory `/store` is the one your users will interact "see" from this xrootd gateway. Other control options can be added like "writable" see [documentation here](http://xrootd.org/doc/dev48/ofs_config.htm) (look for `export`).
+1. The sitename has only implications for monitoring, so should match whatever is registered (if) on [Topology](/common/registration/). 
 
 #### LCMAPS authorization
 
