@@ -84,8 +84,8 @@ on all data nodes:
 1. Install [CA certificates](/common/ca#installing-ca-certificates) and [manage CRLs](/common/ca#installing-ca-certificates#managing-certificate-revocation-lists)
 
 1. Follow the instructions for requesting a [service certificate](/security/host-certs#requesting-and-installing-a-service-certificate),
-   using `xrootd` for both the `<SERVICE>` and `<OWNER>`, resulting in a certificate and key in `/etc/grid-security/xrootd/xrootdcert.pem`
-   and `/etc/grid-security/xrootd/xrootdkey.pem`, respectively.
+   using `xrootd` for both the `<SERVICE>` and `<OWNER>`, resulting in a certificate and key in `/etc/grid-security/xrd/xrdcert.pem`
+   and `/etc/grid-security/xrd/xrdkey.pem`, respectively.
 
 1. Install and configure the [LCMAPS VOMS plugin](/security/lcmaps-voms-authentication)
 
@@ -109,8 +109,8 @@ on all data nodes:
 
             xrootd.seclib /usr/lib64/libXrdSec-4.so
             sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
-                                -cert:/etc/grid-security/xrootd/xrootdcert.pem \
-                                -key:/etc/grid-security/xrootd/xrootdkey.pem -crl:1 \
+                                -cert:/etc/grid-security/xrd/xrdcert.pem \
+                                -key:/etc/grid-security/xrd/xrdkey.pem -crl:1 \
                                 -authzfun:libXrdLcmaps.so -authzfunparms:--loglevel,0,--policy,authorize_only \
                                 -gmapopt:10 -gmapto:0
             acc.authdb /etc/xrootd/auth_file
