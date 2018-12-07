@@ -9,15 +9,15 @@ to connect your existing campus HPC/HTC cluster to the Open Science Grid.
 The OSG team will host and operate the HTCondor compute element which routes user jobs to your cluster,
 configured for the science communities that you choose to support.
 
-![managed services diagram](/compute-element/img/screenshot_2983.png)
+![managed services diagram](/compute-element/img/managed_services_diagram.png)
 
 
 ## Before Starting
 
 Before preparing your cluster for OSG jobs, consider the following requirements:
 
--   An existing compute cluster with a [supported batch system](/index#prepare-the-batch-system)
-    running on a [supported operating system](release/supported_platforms)
+-   An existing compute cluster with a [supported batch system](/index.md#prepare-the-batch-system)
+    running on a [supported operating system](/release/supported_platforms)
 
 -   Outbound network connectivity from the compute nodes (they can be behind NAT)
 
@@ -79,7 +79,7 @@ usage of resources:
 The OSG provides monitoring to view which communities are accessing your site, their fields of science, and home institution.
 Below is an example of the monitoring views that will be available for your cluster.
 
-![monitoring graphs](/compute-element/img/screenshot_2979.png)
+![monitoring graphs](/compute-element/img/monitoring_graphs.png)
 
 
 ## **Optional**: Providing Access to Application Software Using OASIS
@@ -106,5 +106,5 @@ Installation instructions for CVMFS and OASIS are [provided here](/worker-node/i
 
 ## How to Get Help
 
-If you need help with setup or troubleshooting, see our [help procedure](../common/help).
+If you need help with setup or troubleshooting, see our [help procedure](/common/help).
 
