@@ -108,9 +108,9 @@ We added or updated the following packages to the production OSG yum repository.
 
 If you wish to manually update your system, you can run yum update against the following packages:
 
-If you wish to only update the RPMs that changed, the set of RPMs is:
-
     condor condor-all condor-bosco condor-classads condor-classads-devel condor-cream-gahp condor-debuginfo condor-kbdd condor-procd condor-python condor-std-universe condor-test condor-vm-gahp glideinwms-common-tools glideinwms-condor-common-config glideinwms-factory glideinwms-factory-condor glideinwms-glidecondor-tools glideinwms-libs glideinwms-minimal-condor glideinwms-usercollector glideinwms-userschedd glideinwms-vofrontend glideinwms-vofrontend-standalone osg-version python2-jwt python2-scitokens python34-jwt stashcache-cache-server stashcache-cache-server-auth stashcache-client stashcache-daemon stashcache-origin-server xrootd-scitokens xrootd-scitokens-debuginfo
+
+If you wish to only update the RPMs that changed, the set of RPMs is:
 
 #### Enterprise Linux 6
 
