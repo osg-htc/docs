@@ -9,7 +9,7 @@ Release Notes
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
-| [3.4.21](/release/3.4/release-3.4.21)     | 2018-11-01 | High Priority Release: Singularity 2.6.1                                |
+| [3.4.21](/release/3.4/release-3-4-21)     | 2018-12-12 | High Priority Release: Singularity 2.6.1                                |
 | [3.4.20](/release/3.4/release-3-4-20)     | 2018-11-01 | GlideinWM 3.4.2, SciTokens 1.2.1, stashcache 0.10, stashcache-client 5.1.0-4, HTCondor 8.6.13; Upcoming: HTCondor 8.7.10 |
 | [3.4.19](/release/3.4/release-3-4-19)     | 2018-10-25 | Patched tarball, XRootD 4.8.5, osg-flock 1.0, stashcache 0.9, autopyfactory 2.4.9 |
 | [3.4.18-2](/release/3.4/release-3-4-18-2) | 2018-10-03 | VO Package v84                                                          |
