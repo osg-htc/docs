@@ -37,39 +37,51 @@ root@xrootd-standalone # yum install xrootd
 Configuring XRootD
 ------------------
 
-You will need to modify the file `/etc/xrootd/xrootd-standalone.cfg` that we will refer now on (unless explicitly said) as THE configuration file.
-A simple example of such a configuration is below with further customizations in the rest of the document.
+To configure XRootD as a standalone server, replace the contents of `/etc/xrootd/xrootd-standalone.cfg` as follows:
 
-``` file
-# Allow all contents of /store to be served from this host
-all.export %RED%/store/%ENDCOLOR% readonly
-# This site name is only used for monitoring purposes (ex: T2_US_UCSD or UCSD)
-all.sitename   %RED%YOUR SITE NAME%ENDCOLOR%
+1.  Add an `all.export` directive for each directory that you wish to serve via XRootD.
+    For example, to serve the contents of `/store` and `/public`:
 
-xrd.port 1094
-all.role server
+        all.export /store/
+        all.export /public/
 
-cms.allow host *
-# Logging verbosity
-xrootd.trace emsg login stall redirect
-ofs.trace -all
-xrd.trace conn
-cms.trace all
+    !!! note
+        The directories specified this way are writable by default.
+        Access controls should be managed via [authorization configuration](#configuring-authorization).
 
-all.adminpath /var/run/xrootd
-all.pidpath   /var/run/xrootd
+1. Add an `all.sitename` directive set to the [resource name](/common/registration/#registering-resources) of your
+   XRootD service.
+   For example, the XRootD service registered at the
+   [FermiGrid site](https://github.com/opensciencegrid/topology/blob/master/topology/Fermi%20National%20Accelerator%20Laboratory/FermiGrid/FNAL_PUBLIC_DCACHE.yaml#L6)
+   should set the following configuration:
 
-xrd.report     xrootd.t2.ucsd.edu:9931,desire.physics.ucsd.edu:9931 every 30s all sync
-xrootd.monitor all auth flush io 60s ident 5m mbuff 8k rbuff 4k rnums 3 window 10s dest files io info user redir xrootd.t2.ucsd.edu:9930 dest files iov info user xrootd.t2.ucsd.edu:9932
+        all.sitename   Fermilab Public DCache
 
-xrd.network keepalive kaparms 10m,1m,5
-xrd.timeout idle 60m
-```
+    !!! note
+        CMS sites should follow CMS policy for `all.sitename`
 
-Notice the following:
+1.  Append the following configuration to the end of `/etc/xrootd/xrootd-standalone.cfg`
 
-1. The directory `/store` is the one your users will interact "see" from this xrootd gateway. Other control options can be added like "writable" see [documentation here](http://xrootd.org/doc/dev48/ofs_config.htm) (look for `export`).
-1. The sitename has only implications for monitoring, so should match whatever is registered (if) on [Topology](/common/registration/). 
+        xrd.port 1094
+        all.role server
+
+        cms.allow host *
+        # Logging verbosity
+        xrootd.trace emsg login stall redirect
+        ofs.trace -all
+        xrd.trace conn
+        cms.trace all
+
+        xrd.report xrd-report.osgstorage.org:9931
+        xrootd.monitor all \
+                       auth \
+                       flush 30s \
+                       window 5s fstat 60 lfn ops xfr 5 \
+                       dest redir fstat info user xrd-report.osgstorage.org:9930 \
+                       dest fstat info user xrd-mon.osgstorage.org:9930
+
+        xrd.network keepalive kaparms 10m,1m,5
+        xrd.timeout idle 60m
 
 ### Configuring authorization
 
