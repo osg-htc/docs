@@ -120,12 +120,14 @@ steps:
         :::console
         root@host # echo "user.max_user_namespaces = 15000" \
             > /etc/sysctl.d/90-max_user_namespaces.conf
+        root@host # sysctl -p /etc/sysctl.d/90-max_user_namespaces.conf
 
 1. (Optional) Disable network namespaces:
 
         :::console
         root@host # echo "user.max_net_namespaces = 0" \
             > /etc/sysctl.d/90-max_net_namespaces.conf
+        root@host # sysctl -p /etc/sysctl.d/90-max_net_namespaces.conf
 
     OSG VOs do not need network namespaces with singularity, and
     disabling them reduces the risk profile of enabling user
