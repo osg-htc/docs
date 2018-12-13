@@ -96,17 +96,17 @@ If you do not need any of the following special configurations, skip to
 #### Enabling HTTP support
 
 In order to enable XRootD HTTP support please follow the instructions
-[here](/data/install-xrootd/#optional-enabling-xrootd-over-http)
+[here](/data/xrootd/install-storage-element#optional-enabling-xrootd-over-http)
 
 #### Enabling Hadoop support
 
 For documentation on how to export your Hadoop storage using XRootD please see
-[this documentation](/data/install-xrootd/#optional-adding-hadoop-support-to-xrootd)
+[this documentation](/data/xrootd/install-storage-element#optional-adding-hadoop-support-to-xrootd)
 
 #### Enabling CMS TFC support (CMS sites only)
 
 For CMS users, there is a package available to integrate rule-based name lookup using a `storage.xml` file.
-See [this documentation](/data/install-xrootd/#optional-adding-cms-tfc-support-to-xrootd-cms-sites-only).
+See [this documentation](/data/xrootd/install-storage-element#optional-adding-cms-tfc-support-to-xrootd-cms-sites-only).
 
 Using XRootD
 ------------
