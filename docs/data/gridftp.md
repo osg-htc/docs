@@ -119,7 +119,8 @@ data_interface IP-TO-USE
 ipc_interface IP-TO-USE
 ```
 
-For more options available for the GridFTP server, read the comments in the configuration file (`/etc/gridftp.conf`) or see the [Globus manual](http://www.globus.org/toolkit/docs/latest-stable/gridftp/admin/#gridftp-configuring).
+For more options available for the GridFTP server, read the comments in the configuration file (`/etc/gridftp.conf`) or
+see the [GridFTP manual](https://gridcf.org/gct-docs/gridftp/admin/index.html).
 
 Managing GridFTP
 ----------------
@@ -154,8 +155,8 @@ For assistance, please use [this page](../common/help).
 Reference
 ---------
 
--   [Globus GridFTP administration manual](http://www.globus.org/toolkit/docs/latest-stable/gridftp/admin/)
--   [Globus GridFTP tutorial](http://www.mcs.anl.gov/~mlink/tutorials/GridFTPTutorialHandout.pdf)
+-   [GridFTP administration manual](https://gridcf.org/gct-docs/gridftp/admin/index.html)
+-   [GridFTP tutorial](http://www.mcs.anl.gov/~mlink/tutorials/GridFTPTutorialHandout.pdf)
 
 ### Configuration and Log Files
 
