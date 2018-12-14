@@ -22,10 +22,10 @@ Before starting the installation process, consider the following points:
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
--   Ensure the host has [a supported operating system](../release/supported_platforms)
+-   Ensure the host has [a supported operating system](/release/supported_platforms)
 -   Obtain root access to the host
--   Prepare [the required Yum repositories](../common/yum)
--   Install [CA certificates](../common/ca)
+-   Prepare [the required Yum repositories](/common/yum)
+-   Install [CA certificates](/common/ca)
 
 Installing an XRootD Server
 ---------------------------
@@ -396,7 +396,7 @@ xrootd.fslib /usr/lib64/libXrdOfs.so
 ofs.osslib /usr/lib64/libXrdHdfs.so
 ```
 
-For more information, see [the HDFS installation documents](install-hadoop).
+For more information, see [the HDFS installation documents](/data/install-hadoop).
 
 ### (Optional) Adding File Residency Manager (FRM) to an XRootd cluster
 
@@ -447,12 +447,12 @@ storage.
     abbreviated version documenting the special steps needed for XRootD integration.
     You may also find the following useful:
 
-    -   [Basic GridFTP Install](gridftp).  Additionally covers service planning topics.
-    -   [Load-balanced GridFTP Install](load-balanced-gridftp).  Covers the creation of
+    -   [Basic GridFTP Install](/data/gridftp).  Additionally covers service planning topics.
+    -   [Load-balanced GridFTP Install](/data/load-balanced-gridftp).  Covers the creation of
         a load-balanced GridFTP service using multiple servers.
 
 Prior to following this installation guide, verify the host certificates and networking is configured correctly as in
-the [basic GridFTP install](gridftp).
+the [basic GridFTP install](/data/gridftp).
 
 ### Installation
 
@@ -465,7 +465,7 @@ root@host # yum install osg-gridftp-xrootd
 ### Configuration
 
 For information on how to configure authentication for your GridFTP installation, please refer to the [configuring
-authentication section of the GridFTP guide](gridftp#configuring-authentication).
+authentication section of the GridFTP guide](/data/gridftp#configuring-authentication).
 
 Edit `/etc/sysconfig/xrootd-dsi` to set `XROOTD_VMP` to use your XRootD redirector.
 
@@ -486,7 +486,7 @@ Sites should review any customizations made in the latter and copy them as neces
 You can use the FUSE mount in order to test POSIX access to xrootd in the GridFTP server.
 You should be able to run Unix commands such as `ls /mnt/xrootd` and see the contents of the XRootD server.
 
-For log / config file locations and system services to run, see the [basic GridFTP install](gridftp).
+For log / config file locations and system services to run, see the [basic GridFTP install](/data/gridftp).
 
 Using XRootD
 ------------
@@ -548,7 +548,7 @@ As a reminder, here are common service commands (all run as `root`):
 Getting Help
 ------------
 
-To get assistance. please use the [Help Procedure](../common/help/) page.
+To get assistance. please use the [Help Procedure](/common/help/) page.
 
 Reference
 ---------

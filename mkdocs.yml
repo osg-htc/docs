@@ -34,18 +34,19 @@ pages:
   - POSIX Storage:
     - 'Install GridFTP Server': 'data/gridftp.md'
     - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
+  - XRootD:
+    - 'XRootD Overview': 'data/xrootd/overview.md'
+    - 'Install XRootD Standalone': 'data/xrootd/install-standalone.md'
+    - 'Install XRootD SE': 'data/xrootd/install-storage-element.md'
+    - 'Configure Authorization': 'data/xrootd/xrootd-authorization.md'
+    - 'Using XRootD': 'data/xrootd/install-client.md'
+  - StashCache:
+    - 'StashCache Overview': 'data/stashcache/overview.md'
+    - 'Install StashCache Cache': 'data/stashcache/install-cache.md'
+    - 'Install StashCache Origin': 'data/stashcache/install-origin.md'
   - HDFS:
     - 'HDFS Overview': 'data/hadoop-overview.md'
     - 'Install HDFS': 'data/install-hadoop.md'
-  - XRootD:
-    - 'XRootD Overview': 'data/xrootd-overview.md'
-    - 'Install XRootD': 'data/install-xrootd.md'
-    - 'Configure XRootD Authorization': 'data/xrootd-authorization.md'
-    - 'Using XRootD': 'data/install-xroot-client.md'
-  - 'StashCache': 
-    - 'StashCache Overview': 'data/stashcache/overview.md'
-    - 'Install Cache': 'data/stashcache/install-cache.md'
-    - 'Install Origin': 'data/stashcache/install-origin.md'
 - Security:
   - 'LCMAPS VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host Certificates': 'security/host-certs.md'
