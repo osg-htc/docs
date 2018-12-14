@@ -116,7 +116,7 @@ on all data nodes:
             acc.authdb /etc/xrootd/auth_file
             ofs.authorize
 
-1. Restart the [relevant services](#using-xrootd)
+1. Restart the [relevant services](/data/xrootd/install-standalone/#using-xrootd)
 
 To verify the LCMAPS security, run the following commands from a machine with your user certificate/key pair,
 `xrootd-client`, and `voms-clients-cpp` installed:
@@ -134,9 +134,8 @@ To verify the LCMAPS security, run the following commands from a machine with yo
 
 1. Add a line to `/etc/xrootd/auth_file` to ensure the mapped user can write to `<DESTINATION PATH>`
 
-1. Restart the xrootd service. (See
-   [this section](https://opensciencegrid.org/docs/data/install-xrootd/#managing-xrootd-services)
-   for more information of managing XRootD services.)
+1. Restart the xrootd service. (See [this section](/data/xrootd/install-standalone/#using-xrootd) for more information
+   of managing XRootD services.)
 
 1. Generate your proxy and verify that you can successfully transfer files:
 

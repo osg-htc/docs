@@ -25,10 +25,10 @@ Before Starting
 Before starting the installation process you will need to fulfill these prerequisites.
 
 
--   Ensure the host has [a supported operating system](../release/supported_platforms.md)
+-   Ensure the host has [a supported operating system](/release/supported_platforms.md)
 -   Obtain root access to the host
--   Prepare [the required Yum repositories](../common/yum.md)
--   Install [CA certificates](../common/ca.md)
+-   Prepare [the required Yum repositories](/common/yum.md)
+-   Install [CA certificates](/common/ca.md)
 -   Service certificate: The GridFTP service uses a host certificate at `/etc/grid-security/hostcert.pem` and an accompanying key at `/etc/grid-security/hostkey.pem`
 -   Network ports: GridFTP listens on TCP port 2811 and the list of ports configured by the `GLOBUS_TCP_SOURCE_RANGE` environment variable.
 
@@ -119,7 +119,8 @@ data_interface IP-TO-USE
 ipc_interface IP-TO-USE
 ```
 
-For more options available for the GridFTP server, read the comments in the configuration file (`/etc/gridftp.conf`) or see the [Globus manual](http://www.globus.org/toolkit/docs/latest-stable/gridftp/admin/#gridftp-configuring).
+For more options available for the GridFTP server, read the comments in the configuration file (`/etc/gridftp.conf`) or
+see the [GridFTP manual](https://gridcf.org/gct-docs/gridftp/admin/index.html).
 
 Managing GridFTP
 ----------------
@@ -128,7 +129,7 @@ In addition to the GridFTP service itself, there are a number of supporting serv
 
 | Software  | Service name                          | Notes                                                                                  |
 |:----------|:--------------------------------------|:---------------------------------------------------------------------------------------|
-| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](../common/ca/#startstop-fetch-crl-a-quick-guide) for more info |
+| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca/#startstop-fetch-crl-a-quick-guide) for more info |
 | Gratia    | `gratia-probes-cron`                  | Accounting software                                                                    |
 | GridFTP   | `globus-gridftp-server`               |                                                                                        |
 
@@ -149,13 +150,13 @@ Run the validation as an unprivileged user; when invoked as root, `globus-url-co
 Getting Help
 ------------
 
-For assistance, please use [this page](../common/help).
+For assistance, please use [this page](/common/help).
 
 Reference
 ---------
 
--   [Globus GridFTP administration manual](http://www.globus.org/toolkit/docs/latest-stable/gridftp/admin/)
--   [Globus GridFTP tutorial](http://www.mcs.anl.gov/~mlink/tutorials/GridFTPTutorialHandout.pdf)
+-   [GridFTP administration manual](https://gridcf.org/gct-docs/gridftp/admin/index.html)
+-   [GridFTP tutorial](http://www.mcs.anl.gov/~mlink/tutorials/GridFTPTutorialHandout.pdf)
 
 ### Configuration and Log Files
 
@@ -178,7 +179,7 @@ Reference
 |:-----------------|:---------------------------|:------------------------------------------------------------------------------|
 | Host certificate | `root`                     | `/etc/grid-security/hostcert.pem` and `/etc/grid-security/hostkey.pem` |
 
-[Instructions](../security/host-certs.md) to request a service certificate.
+[Instructions](/security/host-certs.md) to request a service certificate.
 
 You will also need a copy of CA certificates.
 
