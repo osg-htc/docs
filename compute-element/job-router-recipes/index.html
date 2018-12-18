@@ -2778,7 +2778,7 @@
 
 <h3 id="debugging-routes">Debugging routes<a class="headerlink" href="#debugging-routes" title="Permanent link">&para;</a></h3>
 <p>To help debug expressions in your routes, you can use the <code>debug()</code> function. First, set the debug mode for the JobRouter by editing a file in <code>/etc/condor-ce/config.d/</code> to read</p>
-<div class="codehilite"><pre><span></span>JOB_ROUTER_DEBUG = D_FULLDEBUG
+<div class="codehilite"><pre><span></span>JOB_ROUTER_DEBUG = D_ALWAYS:2 D_CAT
 </pre></div>
 
 
