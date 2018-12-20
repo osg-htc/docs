@@ -8,7 +8,7 @@ Summary of changes
 
 This release contains:
 
--   [HTCondor-CE 3.2.0](https://github.com/opensciencegrid/htcondor-ce/releases/tag/v3.2.0): [Accept host certificates for pilot jobs](https://opensciencegrid.atlassian.net/browse/SOFTWARE-3489)
+-   [HTCondor-CE 3.2.0](https://github.com/opensciencegrid/htcondor-ce/releases/tag/v3.2.0): [Accept pilot jobs authenticated with host certificates signed by a VO](https://opensciencegrid.atlassian.net/browse/SOFTWARE-3489)
 -   [frontier-squid 4.4](http://frontier.cern.ch/dist/rpms/frontier-squidRELEASE_NOTES): Update from 3.5.28
 -   [Pegasus 4.9.0](https://pegasus.isi.edu/2018/10/31/pegasus-4-9-0-released/): Update from 4.8.4
 -   HTCondor 8.6.13: [Patched memory leak when remote daemon is offline](https://htcondor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6837)
@@ -23,10 +23,11 @@ This release contains:
     -   Update `INFN` CA DN
     -   Add backup VOMS server for `enmr.eu` and `glast.org`
 
-!!! note
-    This release of HTCondor-CE can use host certificates signed by
-    a VO for pilot jobs. This functionality must be in place before OSG
-    service certificates begin expiring in April 2019.
+!!! important "Important HTCondor-CE update"
+    This release of HTCondor-CE adds support for pilot jobs authenticating
+    with host certificates signed by a VO.  Due to the expiration of service
+    certificates starting in April 2019, it is important to update to this
+    version to continue to receive OSG jobs.
 
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.22%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
