@@ -4091,6 +4091,15 @@ troubleshoot issues with job routing.</p>
 <h4 id="known-errors">Known Errors<a class="headerlink" href="#known-errors" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
+<p><strong>(HTCondor batch systems only)</strong> If you see the following error message:</p>
+<div class="codehilite"><pre><span></span>Can&#39;t find address of schedd
+</pre></div>
+
+
+<p>This means that HTCondor-CE cannot communicate with your HTCondor batch system.
+Verify that the <code>condor</code> service is running on the HTCondor-CE host and is configured for your central manager.</p>
+</li>
+<li>
 <p>If you have <code>D_ALWAYS:2</code> turned on for the job router, you will see errors like the following:</p>
 <div class="codehilite"><pre><span></span>06/12/15 14:00:28 HOOK_UPDATE_JOB_INFO not configured.
 </pre></div>

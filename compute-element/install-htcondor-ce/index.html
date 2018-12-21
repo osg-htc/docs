@@ -2348,8 +2348,14 @@ To simplify installation, OSG provides convenience RPMs that install all require
 <p>There are a few required configuration steps to connect HTCondor-CE with your batch system and authentication method.
 For more advanced configuration, see the section on <a href="#optional-configuration">optional configurations</a>.</p>
 <h3 id="configuring-the-batch-system">Configuring the batch system<a class="headerlink" href="#configuring-the-batch-system" title="Permanent link">&para;</a></h3>
-<p>Enable your batch system by editing the <code>enabled</code> field in the <code>/etc/osg/config.d/20-&lt;YOUR BATCH SYSTEM&gt;.ini</code></p>
-<div class="codehilite"><pre><span></span>enabled = <span style="color:red">True</span>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>HTCondor-CE must be installed on a host that is configured to submit jobs to your batch system.
+The details of this configuration is likely site-specific and therefore beyond the scope of this document.</p>
+</div>
+<p>Enable your batch system in the HTCondor-CE configuration by editing the <code>enabled</code> field in the
+<code>/etc/osg/config.d/20-&lt;YOUR BATCH SYSTEM&gt;.ini</code>:</p>
+<div class="codehilite"><pre><span></span>enabled = True
 </pre></div>
 
 
@@ -2724,6 +2730,10 @@ The specific services are:</p>
 <li>
 <p>Verify the CE's network configuration using
    <a href="../../compute-element/troubleshoot-htcondor-ce#condor_ce_host_network_check">condor_ce_host_network_check</a>.</p>
+</li>
+<li>
+<p>Verify that local job submissions complete successfully from the CE host.
+   For example, run <code>sbatch</code> from the CE and verify that it runs and completes in your Slurm cluster.</p>
 </li>
 <li>
 <p>Verify that jobs can complete successfully using
