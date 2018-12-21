@@ -3319,7 +3319,8 @@ You may see error messages like the following in your <a href="#schedlog">SchedL
 
 <p><strong>Next actions</strong></p>
 <ol>
-<li><strong>Check GUMS or grid-mapfile</strong> and ensure that the user's DN is known to your <a href="../install-htcondor-ce#configuring-authentication">authentication method</a></li>
+<li><strong>Check voms-mapfile or grid-mapfile</strong> and ensure that the user's DN or VOMS attributes are known to your
+    <a href="../install-htcondor-ce#configuring-authentication">authentication method</a></li>
 <li><strong>Check for lcmaps errors</strong> in <code>/var/log/messages</code></li>
 <li><strong>If you do not see helpful error messages in <code>/var/log/messages</code>,</strong> adjust the debug level by adding <code>export LCMAPS_DEBUG_LEVEL=5</code> to <code>/etc/sysconfig/condor-ce</code>, restarting the condor-ce service, and checking <code>/var/log/messages</code> for errors again.</li>
 </ol>
@@ -3413,7 +3414,7 @@ Note that jobs may take several minutes or longer if the CE is busy.</p>
 </li>
 </ol>
 <h4 id="remote-idle-jobs-are-you-authorized-to-run-jobs-on-the-ce">Remote idle jobs: Are you authorized to run jobs on the CE?<a class="headerlink" href="#remote-idle-jobs-are-you-authorized-to-run-jobs-on-the-ce" title="Permanent link">&para;</a></h4>
-<p>The CE will only accept jobs from users that authenticate via LCMAPS, grid mapfile, or GUMS. 
+<p>The CE will only accept jobs from users that authenticate via <a href="../../security/lcmaps-voms-authentication">LCMAPS VOMS</a>.
 You can use <a href="#condor_ce_ping">condor_ce_ping</a> to check if you are authorized and what user your proxy is being mapped
 to.</p>
 <p><strong>Symptoms</strong></p>

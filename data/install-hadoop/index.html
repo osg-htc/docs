@@ -2997,11 +2997,6 @@ Assuming you installed GridFTP using the <code>osg-se-hadoop-gridftp</code> rpm,
 <td>No</td>
 <td>/var/lib/gratia/tmp</td>
 </tr>
-<tr>
-<td>Gums configuration</td>
-<td>Yes</td>
-<td>/etc/gums/gums-client.properties</td>
-</tr>
 </tbody>
 </table>
 <p>The RPM installs the Gratia probe into the system crontab, but does not configure it. The configuration of the probe is controlled by the file</p>
@@ -3752,7 +3747,7 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 </tr>
 <tr>
 <td>GridFTP</td>
-<td>GUMS client (called by LCMAPS) configuration</td>
+<td>LCMAPS VOMS configuration</td>
 <td><code>/etc/lcmaps.db</code></td>
 <td>Yes</td>
 </tr>
