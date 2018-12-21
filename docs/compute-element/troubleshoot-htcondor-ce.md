@@ -149,7 +149,8 @@ You may see error messages like the following in your [SchedLog](#schedlog):
 
 **Next actions**
 
-1.  **Check GUMS or grid-mapfile** and ensure that the user's DN is known to your [authentication method](install-htcondor-ce#configuring-authentication)
+1.  **Check voms-mapfile or grid-mapfile** and ensure that the user's DN or VOMS attributes are known to your
+    [authentication method](install-htcondor-ce#configuring-authentication)
 2.  **Check for lcmaps errors** in `/var/log/messages`
 3.  **If you do not see helpful error messages in `/var/log/messages`,** adjust the debug level by adding `export LCMAPS_DEBUG_LEVEL=5` to `/etc/sysconfig/condor-ce`, restarting the condor-ce service, and checking `/var/log/messages` for errors again.
 
@@ -265,7 +266,7 @@ ERROR: couldn't locate condorce.example.com!
 
 #### Remote idle jobs: Are you authorized to run jobs on the CE?
 
-The CE will only accept jobs from users that authenticate via LCMAPS, grid mapfile, or GUMS. 
+The CE will only accept jobs from users that authenticate via [LCMAPS VOMS](/security/lcmaps-voms-authentication).
 You can use [condor\_ce\_ping](#condor_ce_ping) to check if you are authorized and what user your proxy is being mapped
 to.
 
