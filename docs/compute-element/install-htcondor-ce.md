@@ -94,10 +94,15 @@ For more advanced configuration, see the section on [optional configurations](#o
 
 ### Configuring the batch system
 
-Enable your batch system by editing the `enabled` field in the `/etc/osg/config.d/20-<YOUR BATCH SYSTEM>.ini`
+!!! important
+    HTCondor-CE must be installed on a host that is configured to submit jobs to your batch system.
+    The details of this configuration is likely site-specific and therefore beyond the scope of this document.
+
+Enable your batch system in the HTCondor-CE configuration by editing the `enabled` field in the
+`/etc/osg/config.d/20-<YOUR BATCH SYSTEM>.ini`:
 
 ``` file
-enabled = %RED%True%ENDCOLOR%
+enabled = True
 ```
 
 If you are using HTCondor as your **local batch system** (i.e., in addition to your HTCondor-CE), skip to the
@@ -387,6 +392,9 @@ To validate an HTCondor-CE, perform the following verification steps:
 
 1. Verify the CE's network configuration using
    [condor\_ce\_host\_network\_check](/compute-element/troubleshoot-htcondor-ce#condor_ce_host_network_check).
+
+1. Verify that local job submissions complete successfully from the CE host.
+   For example, run `sbatch` from the CE and verify that it runs and completes in your Slurm cluster.
 
 1. Verify that jobs can complete successfully using
    [condor\_ce\_trace](/compute-element/troubleshoot-htcondor-ce#condor_ce_trace).
