@@ -63,7 +63,7 @@ The LCMAPS VOMS plugin does not work with gLExec.
 
 ### Supporting mapped VOs and users
 
-Unix accounts must exist for each VO, VO role, VO group, or user you choose to support in the [mapfiles](#configuration-files):
+ Ensure Unix accounts exist for each VO, VO role, VO group, or user you choose to support in the [mapfiles](#configuration-files):
 
 1.  Consult the default VO mappings in `/usr/share/osg/voms-mapfile-default` to determine the mapped Unix account names.
     Each of the mapfiles has the following format:
