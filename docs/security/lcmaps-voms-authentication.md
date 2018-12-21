@@ -1,7 +1,7 @@
 Installing and Maintaining the LCMAPS VOMS Plugin
 =================================================
 
-LCMAPS is a software library used on [HTCondor-CE](/compute-element/install-htcondor-ce), [GridFTP](/data/gridftp), and [XRootD](/data/xrootd/install-storage-element) hosts for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., `/cms/Role=production/Capability=NULL`. Starting in OSG 3.4, the LCMAPS VOMS plugin will replace GUMS and edg-mkgridmap as the authentication method at OSG sites.
+LCMAPS is a software library used on [HTCondor-CE](/compute-element/install-htcondor-ce), [GridFTP](/data/gridftp), and [XRootD](/data/xrootd/install-storage-element) hosts for mapping grid certificates of incoming connections to specific Unix accounts. The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOMS attributes of grid certificates, e.g., `/cms/Role=production/Capability=NULL`. In OSG 3.4, the LCMAPS VOMS plugin replaced GUMS and edg-mkgridmap as the authentication method at OSG sites.
 
 The OSG provides a default set of mappings from VOMS attributes to Unix accounts. By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to, banning based on VOMS attributes, banning a specific user, or adding a VO, VO group, VO role, and/or user that is not in the OSG's set of mappings.
 
@@ -121,7 +121,7 @@ For a table of the configuration files and their order of evaluation, consult th
 
 #### Migrating from edg-mkgridmap
 
-The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authentication on HTCondor-CE, GridFTP, and XRootD hosts, is no longer available starting in OSG 3.4. The LCMAPS VOMS plugin (package `lcmaps-plugins-voms`) now provides the same functionality. To migrate from edg-mkgridmap to the LCMAPS VOMS plugin, perform the following procedure:
+The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authentication on HTCondor-CE, GridFTP, and XRootD hosts, is no longer supported by the OSG. The LCMAPS VOMS plugin (package `lcmaps-plugins-voms`) now provides the same functionality. To migrate from edg-mkgridmap to the LCMAPS VOMS plugin, perform the following procedure:
 
 1.  Configure user DN mappings:
 
@@ -147,13 +147,7 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
             :::console
             root@host # condor_ce_reconfig
 
-1. If running OSG 3.3, disable edg-mkgridmap:
-
-        :::console
-        root@host # service edg-mkgridmap stop
-        root@host # chkconfig edg-mkgridmap off
-
-1. If running OSG 3.4, remove edg-mkgridmap and related packages:
+1. Remove edg-mkgridmap and related packages:
 
         :::console
         root@host # yum erase edg-mkgridmap
@@ -164,7 +158,7 @@ The program edg-mkgridmap (found in the package `edg-mkgridmap`), used for authe
 
 #### Migrating from GUMS
 
-GUMS is no longer available starting in OSG 3.4 and is being replaced by the LCMAPS VOMS plugin.
+GUMS is no longer supported by the OSG and has been replaced by the LCMAPS VOMS plugin.
 Note that unlike GUMS, which runs on a central host, the LCMAPS VOMS plugin will run on your GUMS clients (e.g. HTCondor-CE, GridFTP, and XRootD).
 To migrate any custom authentication configuration from GUMS to the LCMAPS VOMS plugin, perform the following procedure:
 
@@ -261,12 +255,12 @@ Each non-commented line is a shell-style pattern which is compared against a use
 
 ### Mapping using all FQANs
 
-By default, the LCMAPS VOMS plugin only considers the first FQAN of a VOMS proxy for mapping. This matches the behavior of GUMS. If you want to consider all FQANs, you must set the appropriate option.
+By default, the LCMAPS VOMS plugin only considers the first FQAN of a VOMS proxy for mapping. If you want to consider all FQANs, you must set the appropriate option.
 
 -   If you are using osg-configure, set `all_fqans = True` in `10-misc.ini`, then run `osg-configure -c`
 
     !!! note
-        If you are using OSG 3.3, osg-configure should be at least version 1.10.2.  If you are using OSG 3.4, osg-configure should be at least version 2.2.2.
+        If you are using OSG 3.4, osg-configure should be at least version 2.2.2.
 
 -   If you are configuring `lcmaps.db` manually (see [manual configuration](#manual-configuration) below), add `"-all-fqans"` to the module definitions for `vomsmapfile` and `defaultmapfile`
 
