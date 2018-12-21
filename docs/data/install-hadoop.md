@@ -393,7 +393,6 @@ Here are the most relevant file and directory locations:
 | Probe Executables   | No             | /usr/share/gratia/gridftp-transfer       |
 | Log files           | No             | /var/log/gratia                          |
 | Temporary files     | No             | /var/lib/gratia/tmp                      |
-| Gums configuration  | Yes            | /etc/gums/gums-client.properties         |
 
 The RPM installs the Gratia probe into the system crontab, but does not configure it. The configuration of the probe is controlled by the file
 
@@ -967,7 +966,7 @@ The standalone server runs on port 5002, handles a single GridFTP request, and w
 | GridFTP| runtime config files                         | `/etc/gridftp-hdfs/*`, `/etc/sysconfig/gridftp-hdfs`                  | Maybe                                               |
 | GridFTP| System binaries                              | `/usr/bin/gridftp-hdfs-standalone`, `/usr/sbin/globus-gridftp-server` | No                                                  |
 | GridFTP| System libraries                             | `/usr/lib64/libglobus_gridftp_server_hdfs.so*`                        | No                                                  |
-| GridFTP| GUMS client (called by LCMAPS) configuration | `/etc/lcmaps.db`                                                      | Yes                                                 |
+| GridFTP| LCMAPS VOMS configuration                    | `/etc/lcmaps.db`                                                      | Yes                                                 |
 | GridFTP| CA certificates                              | `/etc/grid-security/certificates/*`                                   | No                                                  |
 
 | Service/Process | Configuration File               | Description                                                                                     |
