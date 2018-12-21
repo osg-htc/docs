@@ -102,7 +102,7 @@ Enable your batch system in the HTCondor-CE configuration by editing the `enable
 `/etc/osg/config.d/20-<YOUR BATCH SYSTEM>.ini`:
 
 ``` file
-enabled = %RED%True%ENDCOLOR%
+enabled = TRUE
 ```
 
 If you are using HTCondor as your **local batch system** (i.e., in addition to your HTCondor-CE), skip to the
