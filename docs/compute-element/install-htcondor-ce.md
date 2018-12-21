@@ -94,7 +94,12 @@ For more advanced configuration, see the section on [optional configurations](#o
 
 ### Configuring the batch system
 
-Enable your batch system by editing the `enabled` field in the `/etc/osg/config.d/20-<YOUR BATCH SYSTEM>.ini`
+!!! important
+    HTCondor-CE must be installed on a host that is configured to submit jobs to your batch system.
+    The details of this configuration is likely site-specific and therefore beyond the scope of this document.
+
+Enable your batch system in the HTCondor-CE configuration by editing the `enabled` field in the
+`/etc/osg/config.d/20-<YOUR BATCH SYSTEM>.ini`:
 
 ``` file
 enabled = %RED%True%ENDCOLOR%
