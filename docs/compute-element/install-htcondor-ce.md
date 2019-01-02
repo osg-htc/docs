@@ -10,6 +10,9 @@ See the [HTCondor-CE Overview](htcondor-ce-overview) for a much more detailed in
 Use this page to learn how to install, configure, run, test, and troubleshoot HTCondor-CE from the OSG software
 repositories.
 
+!!! note
+    If you are installing an HTCondor-CE for use outside of the OSG, consult [this documentation](https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=InstallHtcondorCe)
+
 Before Starting
 ---------------
 
