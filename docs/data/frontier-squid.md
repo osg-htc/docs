@@ -167,8 +167,15 @@ To register your Frontier Squid host, follow the general registration instructio
 2.  If you are setting up a new resource, set `Active: false`.
     Only set `Active: true` for a resource when it is accepting requests and ready for production.
 
-If you are running a WLCG site, a few hours after a squid is registered
-and marked `Active`, 
+3.  By default registered squids will be monitored by WLCG.  This is
+strongly recommended even for non-WLCG sites so operations experts can
+help with diagnosing problems.  However, if a site declines
+monitoring, that can be indicated by adding `Monitored: false`
+directly below `ID`.  Registration is still important for the sake of
+excluding squids from worker node failover monitors.
+
+A few hours after a squid is registered and marked `Active` (and not
+marked `Monitored: false`), 
 [verify that it is monitored by WLCG](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#Verify_monitor).
 
 ## Reference
