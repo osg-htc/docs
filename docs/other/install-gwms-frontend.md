@@ -31,7 +31,12 @@ Before Starting
 Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `apache` (UID 48), `condor`, `frontend`, and `gratia`
--   **Network:** The VO frontend must have reliable network connectivity, be on the public internet (no NAT), and preferably with no firewalls. The Web server port, likely port 80, must be open. Starting from GlideinWMS 3.4.1, all the daemons on the Frontend machine have been migrated to using the shared port daemon. With this new configuration, there is no more need to open the port range 9620 to 9660 as it was, previously. But remember, if you install the user schedd on a separate host, incoming TCP port 9618 remains to be open (it was 9615 for GlideinWMS 3.4.0 and earlier). For more detailed information, see [Installing GlideinWMS Frontend on Multiple Nodes (Advanced)](#installing-glideinwms-frontend-on-multiple-nodes-advanced).
+-   **Network:** The VO frontend must have reliable network connectivity, be on the public internet (no NAT), and preferably with no firewalls. Make sure, the following ports are open:
+    -   The Web server port, likely port 80.
+    -   Port 9618, as all HTCondor daemons on the Frontend (including User Collector and Schedd) use the shared port daemon on that port.
+    -   Ports range from 9620 to 9660 if your configuration needs it(i.e. if Glideins call back on those ports) because of the secondary collectors.
+    -   For versions prior to 3.4.1, it's also required that also port 9615 and the port range 9620 to 9660 are always open.
+    Please note, if you install the user schedd on a separate host, incoming TCP port 9618 remains to be open (it was 9615 for GlideinWMS 3.4.0 and earlier). For more detailed information, see [Installing GlideinWMS Frontend on Multiple Nodes (Advanced)](#installing-glideinwms-frontend-on-multiple-nodes-advanced).
 -   **Host choice**: The GlideinWMS VO Frontend has the following hardware requirements for a production host:
     -   **CPU**: Four cores, preferably no more than 2 years old.
     -   **RAM**: 3GB plus 2MB per running job. For example, to sustain 2000 running jobs, a host with 5GB is needed.
