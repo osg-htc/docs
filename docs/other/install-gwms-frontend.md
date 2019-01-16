@@ -31,16 +31,18 @@ Before Starting
 Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `apache` (UID 48), `condor`, `frontend`, and `gratia`
--   **Network:** The VO frontend must have reliable network connectivity, be on the public internet (no NAT), and preferably with no firewalls. Make sure, the following ports are open:
-    -   The Web server port, likely port 80.
-    -   Port 9618, as all HTCondor daemons on the Frontend (including User Collector and Schedd) use the shared port daemon on that port.
-    -   Ports range from 9620 to 9660 if your configuration needs it(i.e. if Glideins call back on those ports) because of the secondary collectors.
-    -   For versions prior to 3.4.1, it's also required that also port 9615 and the port range 9620 to 9660 are always open.
-    Please note, if you install the user schedd on a separate host, incoming TCP port 9618 remains to be open (it was 9615 for GlideinWMS 3.4.0 and earlier). For more detailed information, see [Installing GlideinWMS Frontend on Multiple Nodes (Advanced)](#installing-glideinwms-frontend-on-multiple-nodes-advanced).
+-   **Network:** The VO frontend must have reliable network connectivity and be on the public internet (i.e. no NAT).
+    The latest version requires the following TCP ports to be open:
+    -   80 (HTTP) for monitoring and serving configuration to workers
+    -   9618 (HTCondor shared port) for HTCondor daemons including the Schedd and User Collector
+    -   9620 to 9660 for secondary collectors (recommended)
 -   **Host choice**: The GlideinWMS VO Frontend has the following hardware requirements for a production host:
     -   **CPU**: Four cores, preferably no more than 2 years old.
     -   **RAM**: 3GB plus 2MB per running job. For example, to sustain 2000 running jobs, a host with 5GB is needed.
     -   **Disk**: 30GB will be sufficient for all the binaries, config and log files related to GlideinWMS. As this will be an interactive submit host, have enough disk space for your users' jobs. 
+
+!!! note
+    GlideinWMS versions prior to 3.4.1 used port 9615 instead of 9618.
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
