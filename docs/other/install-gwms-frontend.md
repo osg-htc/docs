@@ -35,14 +35,25 @@ Before starting the installation process, consider the following points (consult
     The latest version requires the following TCP ports to be open:
     -   80 (HTTP) for monitoring and serving configuration to workers
     -   9618 (HTCondor shared port) for HTCondor daemons including the Schedd and User Collector
-    -   9620 to 9660 for secondary collectors (recommended)
+    -   9620 to 9660 for secondary collectors (depending on configuration, see below)
 -   **Host choice**: The GlideinWMS VO Frontend has the following hardware requirements for a production host:
     -   **CPU**: Four cores, preferably no more than 2 years old.
     -   **RAM**: 3GB plus 2MB per running job. For example, to sustain 2000 running jobs, a host with 5GB is needed.
     -   **Disk**: 30GB will be sufficient for all the binaries, config and log files related to GlideinWMS. As this will be an interactive submit host, have enough disk space for your users' jobs. 
 
+
 !!! note
-    GlideinWMS versions prior to 3.4.1 used port 9615 instead of 9618.
+    The default configuration uses a port range (9620 to 9660) for the secondary collectors.
+    You can configure the secondary collectors to use the shared port 9618 instead;
+    this will become the default in the future.
+    
+    GlideinWMS versions prior to 3.4.1 also required port 9615 for the Schedd,
+    and did not support using shared port for the secondary collectors.
+    
+    If you are upgrading from version 3.4.1 or earlier, review your firewall settings and ensure that port 9618 is open.
+    
+    For more detailed information, see [Configuring GlideinWMS Frontend](#configuring-glideinwms-frontend).
+
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
