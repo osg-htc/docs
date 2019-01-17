@@ -85,7 +85,6 @@ The most common lines to customize are:
 * `*.trace`, `pss.setopt`: These control the logging verbosity of the cache.  The defaults are relatively high
   in order to aid in debugging.  These lines can be commented out to reduce logging; however, if issues occur,
   OSG support may ask you to re-enable them.
-* `pfc.ram 7g`: The amount of RAM the caching service should target to use.
 
 The Authfile specifies which files and directories can be read,
 relative to the cache directory (`cachedir` in the main config).
