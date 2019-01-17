@@ -47,10 +47,12 @@ Before starting the installation process, consider the following points (consult
     You can configure the secondary collectors to use the shared port 9618 instead;
     this will become the default in the future.
     
+!!! note
     GlideinWMS versions prior to 3.4.1 also required port 9615 for the Schedd,
     and did not support using shared port for the secondary collectors.
     
-    If you are upgrading from version 3.4.1 or earlier, review your firewall settings and ensure that port 9618 is open.
+    If you are upgrading a standalone frontend or submit host from version 3.4.1 or earlier,
+    review your firewall settings and ensure that port 9618 is open.
     
     For more detailed information, see [Configuring GlideinWMS Frontend](#configuring-glideinwms-frontend).
 
