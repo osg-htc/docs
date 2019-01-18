@@ -267,8 +267,9 @@ Both the `classad_proxy` and `absfname` files should be owned by `frontend` user
 
 
 !!! note
+
 In GlideinWMS v3.4.1, shared port only configuration is incompatible if talking to older Factories (v3.4 or older). By GlideinWMS v3.5 , in order to make it compatible and to allow a smother transition, we will have a temporary default configuration to switch from separate ports to shared_port making possible to support both (A secondary collector can both listen on a separate port and listen to the shared port daemon)
-Therefore, for the secondary collectors configuration and for CCBs, there are multiple options like port number or port range (9620-9640) [Example 1] and single collector (sock=collectorX), or sinful string that can be used for the sock range case (sock=collectorID1-ID2) as shown in the Example 2. It's very important to follow this configuration pattern. No coma or semicolon is allowed in the node specification.
+Therefore, for the secondary collectors configuration and for CCBs, there are multiple options like port number (9618) or port range (9620-9640) [Example 1] and single collector (sock=collector24), or sinful string that can be used for the sock range case (sock=collector0-40) as shown in the Example 2. It's very important to follow this configuration pattern. No coma or semicolon is allowed in the node specification.
 
 [Example 1]
 
