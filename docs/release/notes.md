@@ -9,6 +9,7 @@ Release Notes
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.23](/release/3.4/release-3-4-23)     | 2019-01-23 | Gratia probes 1.20.8; Upcoming: Singularity 3.0.2, HTCondor 8.8.0       |
 | [3.4.22-2](/release/3.4/release-3-4-22-2) | 2019-01-14 | IGTF 1.95                                                               |
 | [3.4.22](/release/3.4/release-3-4-22)     | 2018-12-20 | HTCondor-CE 3.2.0, frontier-squid 4.4, Pegasus 4.9.0, CVMFS 2.5.2, IGTF 1.94, VO Package v85 |
 | [3.4.21](/release/3.4/release-3-4-21)     | 2018-12-12 | High Priority Release: Singularity 2.6.1                                |
