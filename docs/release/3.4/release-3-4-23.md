@@ -11,7 +11,7 @@ This release contains:
 -   Gratia probes 1.20.8
     -   Interpret CPU expressions for Hosted CEs (Needed for proper accounting)
     -   Set Processors field properly for Slurm
-    -   Tests: validate processors field
+    -   Added unit tests for the HTCondor probe processors field
 -   Upcoming Repository
     -   [Singularity 3.0.2](https://github.com/sylabs/singularity/releases/tag/v3.0.2)
         -   Reimplemented in Go
