@@ -9,8 +9,8 @@ Summary of changes
 This release contains:
 
 -   Gratia probes 1.20.8
-    -   Interpret CPU expressions for Hosted CEs (Needed for proper accounting)
-    -   Set Processors field properly for Slurm
+    -   Interpret CPU expressions for Hosted CEs (needed for proper accounting)
+    -   Minor change properly set `Processor` field for Slurm (no impact on accounting)
     -   Added unit tests for the HTCondor probe processors field
 -   Upcoming Repository
     -   [Singularity 3.0.2](https://github.com/sylabs/singularity/releases/tag/v3.0.2)
@@ -18,6 +18,12 @@ This release contains:
         -   [Many changes](https://github.com/sylabs/singularity/blob/master/CHANGELOG.md)
     -   [HTCondor 8.8.0](https://www-auth.cs.wisc.edu/lists/htcondor-world/2019/msg00000.shtml)
         -   Job Router: follow first match by default, easier to write routing rules
+
+        !!! danger "Sites with multiple routes"
+            If instead you prefer round-robin matching to to distribute jobs over routes,
+            add `JOB_ROUTER_ROUND_ROBIN_SELECTION = True` to a file in the `/etc/condor-ce/config.d` directory
+            and run `condor_ce_reconfig`.
+
         -   Performance improvements in the collector
         -   Tracks GPU resources
 
