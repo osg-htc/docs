@@ -236,7 +236,7 @@ JOB_ROUTER_ENTRIES = [ \
 ]
 ```
 
-If a user could submitted their job with `+foo=bar`, the job would match `Route 1`.
+If a user submitted their job with `+foo = bar` in their submit file, the job would match `Route 1`.
 
 ### Route defaults
 
