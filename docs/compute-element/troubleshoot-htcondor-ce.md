@@ -81,7 +81,7 @@ Before troubleshooting, we recommend increasing the log level:
 
 1.  Write the following into `/etc/condor-ce/config.d/99-local.conf` to increase the log level for all daemons:
 
-        ALL_DEBUG = D_FULLDEBUG D_CAT
+        ALL_DEBUG = D_ALWAYS:2 D_CAT
 
 2.  Ensure that the configuration is in place:
 
@@ -149,7 +149,8 @@ You may see error messages like the following in your [SchedLog](#schedlog):
 
 **Next actions**
 
-1.  **Check GUMS or grid-mapfile** and ensure that the user's DN is known to your [authentication method](install-htcondor-ce#configuring-authentication)
+1.  **Check voms-mapfile or grid-mapfile** and ensure that the user's DN or VOMS attributes are known to your
+    [authentication method](install-htcondor-ce#configuring-authentication)
 2.  **Check for lcmaps errors** in `/var/log/messages`
 3.  **If you do not see helpful error messages in `/var/log/messages`,** adjust the debug level by adding `export LCMAPS_DEBUG_LEVEL=5` to `/etc/sysconfig/condor-ce`, restarting the condor-ce service, and checking `/var/log/messages` for errors again.
 
@@ -265,7 +266,7 @@ ERROR: couldn't locate condorce.example.com!
 
 #### Remote idle jobs: Are you authorized to run jobs on the CE?
 
-The CE will only accept jobs from users that authenticate via LCMAPS, grid mapfile, or GUMS. 
+The CE will only accept jobs from users that authenticate via [LCMAPS VOMS](/security/lcmaps-voms-authentication).
 You can use [condor\_ce\_ping](#condor_ce_ping) to check if you are authorized and what user your proxy is being mapped
 to.
 
@@ -548,8 +549,8 @@ Authorized:                  TRUE
 
 1.  **If you see “ERROR: couldn’t locate (null)”**, that means the HTCondor-CE schedd (the daemon that schedules jobs) cannot be reached. To track down the issue, increase debugging levels on the CE:
 
-        MASTER_DEBUG = D_FULLDEBUG D_CAT
-        SCHEDD_DEBUG = D_FULLDEBUG D_CAT
+        MASTER_DEBUG = D_ALWAYS:2 D_CAT
+        SCHEDD_DEBUG = D_ALWAYS:2 D_CAT
 
     Then look in the [MasterLog](#masterlog) and [SchedLog](#schedlog) for any errors.
 
@@ -581,8 +582,8 @@ If the jobs that you are submiting to a CE are not completing, `condor_ce_q` can
 
 1.  **If the schedd is not running:** You will see a lengthy message about being unable to contact the schedd. To track down the issue, increase the debugging levels on the CE with:
 
-        MASTER_DEBUG = D_FULLDEBUG D_CAT
-        SCHEDD_DEBUG = D_FULLDEBUG D_CAT
+        MASTER_DEBUG = D_ALWAYS:2 D_CAT
+        SCHEDD_DEBUG = D_ALWAYS:2 D_CAT
 
     To apply these changes, reconfigure HTCondor-CE:
 
@@ -829,7 +830,7 @@ they fail to start.
 - Increasing the debug level:
     1. Set the following value in `/etc/condor-ce/config.d/99-local.conf` on the CE host:
 
-            MASTER_DEBUG = D_FULLDEBUG D_CAT
+            MASTER_DEBUG = D_ALWAYS:2 D_CAT
 
     2. To apply these changes, reconfigure HTCondor-CE:
 
@@ -857,7 +858,7 @@ It contains valuable information when trying to troubleshoot authentication issu
 - Increasing the debug level:
     1. Set the following value in `/etc/condor-ce/config.d/99-local.conf` on the CE host:
 
-            SCHEDD_DEBUG = D_FULLDEBUG D_CAT
+            SCHEDD_DEBUG = D_ALWAYS:2 D_CAT
 
     2. To apply these changes, reconfigure HTCondor-CE:
 
@@ -934,7 +935,7 @@ troubleshoot issues with job routing.
 - Increasing the debug level:
     1. Set the following value in `/etc/condor-ce/config.d/99-local.conf` on the CE host:
 
-            JOB_ROUTER_DEBUG = D_FULLDEBUG D_CAT
+            JOB_ROUTER_DEBUG = D_ALWAYS:2 D_CAT
 
     2. Apply these changes, reconfigure HTCondor-CE:
 
@@ -943,7 +944,14 @@ troubleshoot issues with job routing.
 
 #### Known Errors ####
 
--   If you have `D_FULLDEBUG` turned on for the job router, you will see errors like the following:
+-   **(HTCondor batch systems only)** If you see the following error message:
+
+        Can't find address of schedd
+
+    This means that HTCondor-CE cannot communicate with your HTCondor batch system.
+    Verify that the `condor` service is running on the HTCondor-CE host and is configured for your central manager.
+
+-   If you have `D_ALWAYS:2` turned on for the job router, you will see errors like the following:
 
         06/12/15 14:00:28 HOOK_UPDATE_JOB_INFO not configured.
 
@@ -992,7 +1000,7 @@ Wiki](https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=GridmanagerLog).
 
             MAX_GRIDMANAGER_LOG = 6h
             MAX_NUM_GRIDMANAGER_LOG = 8
-            GRIDMANAGER_DEBUG = D_FULLDEBUG D_CAT
+            GRIDMANAGER_DEBUG = D_ALWAYS:2 D_CAT
 
     2. To apply these changes, reconfigure HTCondor-CE:
 
@@ -1044,7 +1052,7 @@ This log is a good place to check if experiencing connectivity issues with HTCon
 - Increasing the debug level:
     1. Set the following value in `/etc/condor-ce/config.d/99-local.conf` on the CE host:
 
-            SHARED_PORT_DEBUG = D_FULLDEBUG D_CAT
+            SHARED_PORT_DEBUG = D_ALWAYS:2 D_CAT
 
     2. To apply these changes, reconfigure HTCondor-CE:
 

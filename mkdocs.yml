@@ -34,17 +34,19 @@ pages:
   - POSIX Storage:
     - 'Install GridFTP Server': 'data/gridftp.md'
     - 'Install Load Balanced GridFTP': 'data/load-balanced-gridftp.md'
+  - XRootD:
+    - 'XRootD Overview': 'data/xrootd/overview.md'
+    - 'Install XRootD Standalone': 'data/xrootd/install-standalone.md'
+    - 'Install XRootD SE': 'data/xrootd/install-storage-element.md'
+    - 'Configure Authorization': 'data/xrootd/xrootd-authorization.md'
+    - 'Using XRootD': 'data/xrootd/install-client.md'
+  - StashCache:
+    - 'StashCache Overview': 'data/stashcache/overview.md'
+    - 'Install StashCache Cache': 'data/stashcache/install-cache.md'
+    - 'Install StashCache Origin': 'data/stashcache/install-origin.md'
   - HDFS:
     - 'HDFS Overview': 'data/hadoop-overview.md'
     - 'Install HDFS': 'data/install-hadoop.md'
-  - XRootD:
-    - 'XRootD Overview': 'data/xrootd-overview.md'
-    - 'Install XRootD': 'data/install-xrootd.md'
-    - 'Using XRootD': 'data/install-xroot-client.md'
-  - 'StashCache': 
-    - 'StashCache Overview': 'data/stashcache/overview.md'
-    - 'Install Cache': 'data/stashcache/install-cache.md'
-    - 'Install Origin': 'data/stashcache/install-origin.md'
 - Security:
   - 'LCMAPS VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host Certificates': 'security/host-certs.md'
@@ -65,6 +67,12 @@ pages:
 - Release Information:
   - 'Release Note Overview': 'release/notes.md'
   - 3.4 Release Notes:
+    - 'OSG Release 3.4.23': 'release/3.4/release-3-4-23.md'
+    - 'OSG Release 3.4.22-2': 'release/3.4/release-3-4-22-2.md'
+    - 'OSG Release 3.4.22': 'release/3.4/release-3-4-22.md'
+    - 'OSG Release 3.4.21': 'release/3.4/release-3-4-21.md'
+    - 'OSG Release 3.4.20': 'release/3.4/release-3-4-20.md'
+    - 'OSG Release 3.4.19': 'release/3.4/release-3-4-19.md'
     - 'OSG Release 3.4.18-2': 'release/3.4/release-3-4-18-2.md'
     - 'OSG Release 3.4.18': 'release/3.4/release-3-4-18.md'
     - 'OSG Release 3.4.17-3': 'release/3.4/release-3-4-17-3.md'

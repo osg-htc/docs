@@ -9,6 +9,12 @@ Release Notes
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.23](/release/3.4/release-3-4-23)     | 2019-01-23 | Gratia probes 1.20.8; Upcoming: Singularity 3.0.2, HTCondor 8.8.0       |
+| [3.4.22-2](/release/3.4/release-3-4-22-2) | 2019-01-14 | IGTF 1.95                                                               |
+| [3.4.22](/release/3.4/release-3-4-22)     | 2018-12-20 | HTCondor-CE 3.2.0, frontier-squid 4.4, Pegasus 4.9.0, CVMFS 2.5.2, IGTF 1.94, VO Package v85 |
+| [3.4.21](/release/3.4/release-3-4-21)     | 2018-12-12 | High Priority Release: Singularity 2.6.1                                |
+| [3.4.20](/release/3.4/release-3-4-20)     | 2018-11-01 | GlideinWM 3.4.2, SciTokens 1.2.1, stashcache 0.10, stashcache-client 5.1.0-4, HTCondor 8.6.13; Upcoming: HTCondor 8.7.10 |
+| [3.4.19](/release/3.4/release-3-4-19)     | 2018-10-25 | Patched tarball, XRootD 4.8.5, osg-flock 1.0, stashcache 0.9, autopyfactory 2.4.9 |
 | [3.4.18-2](/release/3.4/release-3-4-18-2) | 2018-10-03 | VO Package v84                                                          |
 | [3.4.18](/release/3.4/release-3-4-18)     | 2018-09-27 | XRootD 4.8.4 + HTTP Patches, xrootd-lcmaps 1.4.1, xrootd-hdfs 2.1.3, HTCondor CE 3.1.4, CernVM-FS 2.5.1, Gratia probes 1.20.7, Pegasus 4.8.4, GlideinWMS 3.4, RSV 3.19.8, BLAHP 1.18.38 |
 | [3.4.17-3](/release/3.4/release-3-4-17-3) | 2018-09-26 | IGTF 1.93                                                               |

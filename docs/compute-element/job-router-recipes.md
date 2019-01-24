@@ -383,7 +383,7 @@ JOB_ROUTER_ENTRIES = [ \
 To help debug expressions in your routes, you can use the `debug()` function. First, set the debug mode for the JobRouter by editing a file in `/etc/condor-ce/config.d/` to read
 
 ```
-JOB_ROUTER_DEBUG = D_FULLDEBUG
+JOB_ROUTER_DEBUG = D_ALWAYS:2 D_CAT
 ```
 
 Then wrap the problematic attribute in `debug()`:

@@ -22,7 +22,7 @@ instructions.
 If your account or user certificate is compromised, you **must** notify the issuer of your certificate. 
 In addition, you should update your certificate and revoke the old certificate if any of the information in the
 certificate (such as name or email address) change.
-For the CILogon RA send email to [ca@ciloogon.org](mailto:ca@cilogon.org). 
+For the CILogon RA send email to [ca@cilogon.org](mailto:ca@cilogon.org).
 Additional responsibilities required by the CILogon CA are given on [their page](http://ca.cilogon.org/responsibilities).  
 
 
@@ -31,17 +31,27 @@ Additional responsibilities required by the CILogon CA are given on [their page]
 You will have to obtain your user certificate using the [CILogon web UI](https://cilogon.org/).
 Follow the steps below to get an user certificate:
 
-1. First, either search for your institution and select it or scroll through list and do the same.<br>If your institution is not on the list, please contact your institution's IT support to see if they can support CILogon.<br>![Institution Selection](/img/cilogon_select_idp.png).
+1. Open the CILogon page, <https://cilogon.org>, in your browser of choice
+1. First, either search for your institution and select it or scroll through list and do the same.
+
+    If your institution is not on the list, please contact your institution's IT support to see if they can support
+    CILogon.
+
+    ![Institution Selection](/img/cilogon_select_idp.png).
 
     !!! note
         Make sure to select your educational institution from CILogon's list.
         For instance, do not use OpenID (e.g. Google, Github, etc.) as a provider since not all OSG resources support
         certificates using an OpenID provider.
 
-1. Click the `Log On` button and enter your instutional credentials.
-1. Upon successfully entering your credentials, you'll get a page asking for you to enter a password.  Enter a password that is at least 12 characters long and then click on the `Get New Certificate` button.<br>![Password entry](/img/cilogon_cert_password.png) 
-1. The web page will generate a `usercred.p12` file and prompt you to download it.  The certiticate will be protected
-using the password you entered in the prior step.
+1. Click the `Log On` button and enter your instutional credentials if prompted.
+1. Upon successfully entering your credentials, you'll get a page asking for you to enter a password.
+   Enter a password that is at least 12 characters long and then click on the `Get New Certificate` button.
+
+   ![Password entry](/img/cilogon_cert_password.png)
+
+1. The web page will generate a `usercred.p12` file and prompt you to download it.
+   The certificate will be protected using the password you entered in the prior step.
 
 
 ### Certificate formats

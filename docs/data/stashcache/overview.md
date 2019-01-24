@@ -1,36 +1,44 @@
 # Overview of StashCache
 
-The OSG operates the _StashCache data federation_, a service that allows organizations to export their data utilizing
-an _origin server_ and have the data streamed to end jobs from a distributed set of _cache servers_ throughout the US.
-By participating in StashCache, organizations can distribute their data in a scalable manner to thousands of jobs without
-needing to pre-place data across sites or operate their own scalable infrastructure.
+The OSG operates the _StashCache data federation_, which provides organizations with a method to distribute their data
+in a scalable manner to thousands of jobs without needing to pre-stage data across sites or operate their own scalable infrastructure.
 
-The map below shows the location of the current caches in StashCache:
+Organizations export their data from an _origin server_,
+and the data is streamed to jobs from a set of _cache servers_ distributed throughout the OSG and Internet2.
+Jobs can achieve lower latency and higher throughput for data transfer by using a nearby cache
+instead of accessing the origin directly.
+
+The map below shows the location of the current caches in the StashCache federation:
 
 ![StashCache Map](StashCacheMap.png "StashCache Map")
 
-The StashCache federation consists of two service types:
+## Architecture
 
-* **Origin**: Authoritative copy data available to the caching servers.  The origin is only accessed when the Caches do not have the requested data.  The Origin is run and maintained by organizations wishing to distribute data within the StashCache federation.
-* **Cache**: Clients request data from the cache server, which either serves it from local disk or fetches it from the origin.
-The caches will store frequently used data on disk for future clients.  By distributing caches throughout the OSG and Internet2, clients 
-can access their data with lower latency and higher throughput compared to accessing the origin directly.  A site may install their own
-cache and make it available locally and /or to the wider user community.  A site-local cache can reduce the amount of data transferred
-across the wide area network. 
+The StashCache federation consists of three service types:
 
-OSG users access the data via the [stashcp](https://support.opensciencegrid.org/support/solutions/articles/12000002775-transferring-data-with-stashcach) client or from CVMFS.
+* **Origin**: Keeps the authoritative copy of an organization's data.
+    Each origin is operated by the organization that wants to distribute its data within the StashCache federation.
+* **Cache**: Transfers data to clients such as jobs or users.
+    A set of caches are operated across the OSG for the benefit of nearby sites;
+    in addition, each site may run its own cache in order to reduce the amount of data transferred over the WAN.
+* **Redirector**: Tells a cache service which origin to download data from.
+    The redirectors are run centrally by OSG Operations.
 
-The architecture of StashCache is illustrated below:
+The structure of the federation is illustrated below:
 
 ![StashCache Diagram](StashCache-Diagram.png "StashCache Diagram")
 
-Jobs request data from the nearest discovered cache service.  If there is a cache miss, it will query the OSG redirectors for the
-location of the data.  The redirectors query the known origin servers, which then report whether they have the data.  Once the redirector
-determines the location, it will redirect the cache server to the appropriate origin.  Finally, the cache will download the data from
-the origin and 
+A job will request data from a cache.
+The cache will serve the requested data from local disk if possible.
+Otherwise, it will query a redirector for the origin server that provides the data,
+download the data from that origin server, and then serve the data to the job.
+A copy of the data will be kept on the cache for use by future jobs.
+
 
 ## Joining and Using StashCache
 
 * Organizations can export their data to StashCache by [installing the StashCache **Origin**](install-origin.md)
 * Sites can reduce data transfer via the WAN by [installing the StashCache **Cache**](install-cache.md)
-* Users can access StashCache via the [stashcp](https://support.opensciencegrid.org/support/solutions/articles/12000002775-transferring-data-with-stashcach) client
+* Users can access StashCache via the
+  [stashcp client](https://support.opensciencegrid.org/support/solutions/articles/12000002775-transferring-data-with-stashcach)
+  or from CVMFS via the `/cvmfs/stash.osgstorage.org` directory tree.
