@@ -204,10 +204,8 @@ Upon successful submission of your job, the Job Router takes control of your job
 
 ### Matching
 
-First, the Job Router checks if your job [matches any routes](job-router-recipes#filtering-jobs-based-on). It does this by checking the routes `Requirements` expression against the job and selecting the first match. If your job does not match any routes, the job will be put on hold and eventually removed from the CE queue without completing.
-
-!!! note
-    For versions of HTCondor < 8.7.1, the JobRouter matches jobs to routes in a round-robin fashion. This means that if a job can match to multiple routes, it can be routed by any of them! So when writing job routes, make sure that they are exclusive to each other and that your jobs can only match to a single route.
+See [this section](/compute-element/job-router-recipes#how-jobs-match-to-job-routes) for details on how jobs are matched
+to job routes.
 
 **Examples**
 
