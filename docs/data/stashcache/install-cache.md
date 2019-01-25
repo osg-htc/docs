@@ -258,4 +258,4 @@ Once the cache has been registered, open a [help ticket](https://support.opensci
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help) or contact directly <support@opensciencegrid.org>.
+To get assistance, please use the [this page](/common/help) or contact <help@opensciencegrid.org> directly.

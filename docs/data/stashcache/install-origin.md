@@ -199,4 +199,4 @@ that VO must also allow the origin in its `DataFederations/StashCache/AllowedOri
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help) or contact directly <support@opensciencegrid.org>.
+To get assistance, please use the [this page](/common/help) or contact <help@opensciencegrid.org> directly.
