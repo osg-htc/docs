@@ -73,21 +73,21 @@ directive there must be configured.
 
 The three mandatory directives that must be customized are:
 
-* `origindir`: the mounted filesystem path to export.  This document refers to this as `/stash`.
+* `origindir`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
 * `originexport`: the file within the `origindir` to export.  This MUST be in your supported VO's registered namespace.
 * `sitename`: the resource name registered with OSG.
 
-For example, if the HCC VO would like to set up an origin server exporting from the mountpoint `/mnt/bigdata`,
+For example, if the HCC VO would like to set up an origin server exporting from the mountpoint `/mnt/stash`,
 but HCC's registered namespace is `/hcc`, then the following would be set:
 
 ```
-set origindir = /mnt/bigdata
+set origindir = /mnt/stash
 set originexport = /hcc
 set sitename = HCC_STASH_ORIGIN
 ```
 
-With this configuration, the data under `/mnt/bigdata/hcc/bio/datasets` would be available under the StashCache path
-`/hcc/bio/datasets` and the data under `/mnt/bigdata/hcc/hep/generators` would be available under the StashCache path
+With this configuration, the data under `/mnt/stash/hcc/bio/datasets` would be available under the StashCache path
+`/hcc/bio/datasets` and the data under `/mnt/stash/hcc/hep/generators` would be available under the StashCache path
 `/hcc/hep/generators`.
 
 !!! warning
