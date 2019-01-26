@@ -104,7 +104,7 @@ The origin service consists of the following systemd units:
 |--------------|------------------|-----------|
 | XRootD | `xrootd@stash-origin.service` | The xrootd daemon, which performs the data transfers |
 | XRootD | `xrootd@stash-origin-auth.service` | The xrootd daemon, which performs authenticated data transfers |
-| XRootD | `cmsd@stashcache-origin-server.service` | The "cluster management service" daemon, which integrates the origin into the data federation.  |
+| XRootD | `cmsd@stash-origin.service` | The "cluster management service" daemon, which integrates the origin into the data federation.  |
 
 These services must be managed with `systemctl` and may start additional services as dependencies.  As a reminder, here are common service commands (all run as `root`):
 
