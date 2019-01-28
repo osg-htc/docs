@@ -56,7 +56,7 @@ root@host # yum install --enablerepo=osg-development stash-origin
     This document covers a completely overhauled stash origin service that depends on XRootD 4.9.0; while this
     has not yet been released into the OSG production repository, we strongly recommend using this version.
 
-For this installation guide, we assume that the data to be exported to the federation is mounted at `/stash`
+For this installation guide, we assume that the data to be exported to the federation is mounted at `/mnt/stash`
 and owned by the `xrootd:xrootd` user.
 
 Configuring the Origin Server
