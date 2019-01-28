@@ -187,7 +187,7 @@ This is because when evaluating the route requirement, the job route will compar
     If you have an HTCondor batch system, note the difference with [set\_requirements](#setting-routed-job-requirements).
 
 !!! note
-        For versions of HTCondor < 8.7.1, the JobRouter matches jobs to routes in a round-robin fashion. This means that if a job can match to multiple routes, it can be routed by any of them! So when writing job routes, make sure that they are exclusive to each other and that your jobs can only match to a single route.
+    Before writing multiple routes, consider the details of [how jobs match to job routes](#how-jobs-match-to-job-routes).
 
 #### Glidein queue
 
