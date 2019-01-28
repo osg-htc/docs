@@ -367,6 +367,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-jobs-match-to-job-routes" title="How Jobs Match to Job Routes" class="md-nav__link">
+    How Jobs Match to Job Routes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#generic-routes" title="Generic Routes" class="md-nav__link">
     Generic Routes
   </a>
@@ -2153,6 +2160,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-jobs-match-to-job-routes" title="How Jobs Match to Job Routes" class="md-nav__link">
+    How Jobs Match to Job Routes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#generic-routes" title="Generic Routes" class="md-nav__link">
     Generic Routes
   </a>
@@ -2502,7 +2516,6 @@
 </div>
 <h2 id="quirks-and-pitfalls">Quirks and Pitfalls<a class="headerlink" href="#quirks-and-pitfalls" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The JobRouter matches jobs to routes in a round-robin fashion (for HTCondor versions &lt; 8.7.1). This means that if a job can match to multiple routes, it can be routed by any of them! So when writing job routes, make sure that they are exclusive to each other and that your jobs can only match to a single route.</li>
 <li>If a value is set in <a href="#job_router_defaults">JOB_ROUTER_DEFAULTS</a> with <code>eval_set_&lt;variable&gt;</code>, override it by using <code>eval_set_&lt;variable&gt;</code> in the <code>JOB_ROUTER_ENTRIES</code>. Do this at your own risk as it may cause the CE to break.</li>
 <li>Make sure to run <code>condor_ce_reconfig</code> after changing your routes, otherwise they will not take effect.</li>
 <li>Before the last square bracket, make sure all lines end in a line continuation character (backslash). You can inspect the syntax of your routes with <code>condor_ce_config_val JOB_ROUTER_ENTRIES</code> to see if HTCondor-CE has ingested them properly.</li>
@@ -2527,6 +2540,43 @@
 <p class="admonition-title">Warning</p>
 <p>Do <strong>not</strong> set the <code>JOB_ROUTER_DEFAULTS</code> configuration variable yourself. This will cause the CE to stop functioning.</p>
 </div>
+<h2 id="how-jobs-match-to-job-routes">How Jobs Match to Job Routes<a class="headerlink" href="#how-jobs-match-to-job-routes" title="Permanent link">&para;</a></h2>
+<p>The job router considers jobs in the queue (<a href="../../compute-element/troubleshoot-htcondor-ce#condor_ce_q">condor_ce_q</a>) that
+meet the following constraints:</p>
+<ul>
+<li>The job has not already been considered by the job router</li>
+<li>The job is associated with an unexpired x509 proxy</li>
+<li>The job's universe is standard or vanilla</li>
+</ul>
+<p>If the job meets the above constraints, then the job's ClassAd is compared against each
+<a href="../../compute-element/job-router-recipes/#filtering-jobs-based-on">route's requirements</a>.
+If the job only meets one route's requirements, the job is matched to that route.
+If the job meets the requirements of multiple routes,  the route that is chosen depends on your version of HTCondor
+(<code>condor_version</code>):</p>
+<table>
+<thead>
+<tr>
+<th>If your version of HTCondor is...</th>
+<th>Then the route is chosen by...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; 8.7.1</td>
+<td><strong>Round-robin</strong> between all matching routes. In this case, we recommend making each route's requirements mutually exclusive.</td>
+</tr>
+<tr>
+<td>&gt;= 8.7.1</td>
+<td><strong>First matching route</strong> where routes are considered in the same order that they are configured</td>
+</tr>
+</tbody>
+</table>
+<p>If you're using HTCondor &gt;= 8.7.1 and would like to use round-robin matching, add the following text to a file in
+<code>/etc/condor-ce/config.d/</code>:</p>
+<div class="codehilite"><pre><span></span>JOB_ROUTER_ROUND_ROBIN_SELECTION = True
+</pre></div>
+
+
 <h2 id="generic-routes">Generic Routes<a class="headerlink" href="#generic-routes" title="Permanent link">&para;</a></h2>
 <p>This section contains general information about job routes that can be used regardless of the type of batch system at your site. New routes should be placed in <code>/etc/condor-ce/config.d/99-local.conf</code>, not the original <code>02-ce-*.conf</code>.</p>
 <h3 id="required-fields">Required fields<a class="headerlink" href="#required-fields" title="Permanent link">&para;</a></h3>
@@ -2556,11 +2606,11 @@
 
 <p>The name of the route will be useful in debugging since it shows up in the output of <a href="../../compute-element/troubleshoot-htcondor-ce#condor_ce_job_router_info">condor_ce_job_router_info</a>, the <a href="../../compute-element/troubleshoot-htcondor-ce#jobrouterlog">JobRouterLog</a>, and in the ClassAd of the routed job, which can be viewed with <a href="../../compute-element/troubleshoot-htcondor-ce#condor_ce_q">condor_ce_q</a> or <a href="../../compute-element/troubleshoot-htcondor-ce#condor_ce_history">condor_ce_history</a>.</p>
 <h3 id="writing-multiple-routes">Writing multiple routes<a class="headerlink" href="#writing-multiple-routes" title="Permanent link">&para;</a></h3>
-<p>If your batch system needs incoming jobs to be sorted (e.g. if different VO's need to go to separate queues), you will need to write multiple job routes. Each route is enclosed by square brackets and unless they're the last closing bracket, they need to be followed by the line continuation character. The following routes takes incoming jobs that have a <code>queue</code> attribute set to <code>"analy"</code> and routes them to the site's HTCondor batch system. Any other jobs will be sent to that site's PBS batch system.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For versions of HTCondor &lt; 8.7.1, the JobRouter matches jobs to routes in a round-robin fashion. This means that if a job can match to multiple routes, it can be routed by any of them! So when writing job routes, make sure that they are exclusive to each other and that your jobs can only match to a single route.</p>
+<p>Before writing multiple routes, consider the details of <a href="#how-jobs-match-to-job-routes">how jobs match to job routes</a></p>
 </div>
+<p>If your batch system needs incoming jobs to be sorted (e.g. if different VO's need to go to separate queues), you will need to write multiple job routes. Each route is enclosed by square brackets and unless they're the last closing bracket, they need to be followed by the line continuation character. The following routes takes incoming jobs that have a <code>queue</code> attribute set to <code>"analy"</code> and routes them to the site's HTCondor batch system. Any other jobs will be sent to that site's PBS batch system.</p>
 <div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES = <span style="color:red">[ \</span>
      TargetUniverse = 5; \
      name = &quot;Route jobs to HTCondor&quot;; \
@@ -2624,8 +2674,8 @@
 <p>If you have an HTCondor batch system, note the difference with <a href="#setting-routed-job-requirements">set_requirements</a>.</p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">Note<p>For versions of HTCondor &lt; 8.7.1, the JobRouter matches jobs to routes in a round-robin fashion. This means that if a job can match to multiple routes, it can be routed by any of them! So when writing job routes, make sure that they are exclusive to each other and that your jobs can only match to a single route.</p>
-</p>
+<p class="admonition-title">Note</p>
+<p>Before writing multiple routes, consider the details of <a href="#how-jobs-match-to-job-routes">how jobs match to job routes</a>.</p>
 </div>
 <h4 id="glidein-queue">Glidein queue<a class="headerlink" href="#glidein-queue" title="Permanent link">&para;</a></h4>
 <p>To filter jobs based on their glidein queue attribute, your routes will need a <code>Requirements</code> expression using the incoming job's <code>queue</code> attribute. The following entry routes jobs to PBS if the incoming job (specified by <code>TARGET</code>) is an <code>analy</code> (Analysis) glidein:</p>

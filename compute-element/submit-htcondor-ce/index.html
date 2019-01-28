@@ -2340,11 +2340,8 @@ env
 <h2 id="how-job-routes-affect-your-job">How Job Routes Affect Your Job<a class="headerlink" href="#how-job-routes-affect-your-job" title="Permanent link">&para;</a></h2>
 <p>Upon successful submission of your job, the Job Router takes control of your job by matching it to routes and submitting a transformed job to your batch system.</p>
 <h3 id="matching">Matching<a class="headerlink" href="#matching" title="Permanent link">&para;</a></h3>
-<p>First, the Job Router checks if your job <a href="../job-router-recipes#filtering-jobs-based-on">matches any routes</a>. It does this by checking the routes <code>Requirements</code> expression against the job and selecting the first match. If your job does not match any routes, the job will be put on hold and eventually removed from the CE queue without completing.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>For versions of HTCondor &lt; 8.7.1, the JobRouter matches jobs to routes in a round-robin fashion. This means that if a job can match to multiple routes, it can be routed by any of them! So when writing job routes, make sure that they are exclusive to each other and that your jobs can only match to a single route.</p>
-</div>
+<p>See <a href="../../compute-element/job-router-recipes#how-jobs-match-to-job-routes">this section</a> for details on how jobs are matched
+to job routes.</p>
 <p><strong>Examples</strong></p>
 <p>The following three routes only perform filtering and submission of routed jobs to an HTCondor batch system. The only differences are in the types of jobs that they match:</p>
 <ul>
@@ -2374,7 +2371,7 @@ env
 </pre></div>
 
 
-<p>If a user could submitted their job with <code>+foo=bar</code>, the job would match <code>Route 1</code>.</p>
+<p>If a user submitted their job with <code>+foo = bar</code> in their submit file, the job would match <code>Route 1</code>.</p>
 <h3 id="route-defaults">Route defaults<a class="headerlink" href="#route-defaults" title="Permanent link">&para;</a></h3>
 <p><a href="../job-router-recipes#setting-a-default">Route defaults</a> can be set for batch system queue, maximum memory, number of cores to request, and maximum walltime. The submitting user can override any of these by setting the corresponding <a href="#job-attributes">attribute</a> in their job.</p>
 <p><strong>Examples</strong></p>
