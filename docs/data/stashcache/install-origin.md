@@ -44,7 +44,7 @@ As with all OSG software installations, there are some one-time steps to prepare
 Installing the origin
 ---------------------
 
-The origin service consists of an XRootD daemons and its dependencies for the authentication infrastructure.
+The origin service consists of one or more XRootD daemons and their dependencies for the authentication infrastructure.
 To simplify installation, OSG provides convenience RPMs that install all required
 software with a single command:
 
