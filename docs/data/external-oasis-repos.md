@@ -179,7 +179,7 @@ In order to host a repository on OASIS, perform the following steps:
         root@host # su %BLUE%LIBRARIAN%ENDCOLOR% -c "cvmfs_server transaction %RED%example.opensciencegrid.org%ENDCOLOR%"
         root@host # su %BLUE%LIBRARIAN%ENDCOLOR% -c "cvmfs_server publish %RED%example.opensciencegrid.org%ENDCOLOR%"
 
-    Within an hour, the repository updates should appear at the GOC and FNAL Stratum-1 servers.
+    Within an hour, the repository updates should appear at the OSG Operations and FNAL Stratum-1 servers.
 
     On success, make sure the whitelist update happens daily by creating `/etc/cron.d/fetch-cvmfs-whitelist` with the
     following contents:
@@ -209,7 +209,7 @@ Replacing an Existing OASIS Repository Server
 
 If a need arises to replace a server for an existing `*.opensciencegrid.org` or `*.osgstorage.org` repository, there are two ways to do it:
 one without changing the DNS name and one with changing it.
-The latter can take longer because it requires GOC intervention.
+The latter can take longer because it requires Operations intervention.
 
 !!! note "Revision numbers must increase"
     CVMFS does not allow repository revision numbers to decrease, so the instructions below make sure the revision numbers only go up.
@@ -232,18 +232,18 @@ If you run an old and a new machine in parallel for a while, make sure that when
 ### With changing the server DNS name
 
 !!! note "Note"
-    If you create a repository from scratch, as opposed to copying the data and keys from an old server, it is in fact better to change the DNS name of the server because that causes the GOC server to reinitialize the .cvmfswhitelist.
+    If you create a repository from scratch, as opposed to copying the data and keys from an old server, it is in fact better to change the DNS name of the server because that causes the OSG Operations server to reinitialize the .cvmfswhitelist.
 
 If you create a replacement repository on a new machine from scratch, follow the normal instructions on this page above, but with the following differences in the [Hosting a Repository on OASIS](#hosting-a-repository-on-oasis) section:
 
--   In step 2, instead of asking in the GOC ticket to create a new repository, give the new URL and ask them to change the repository registration to that URL.
+-   In step 2, instead of asking in the support ticket to create a new repository, give the new URL and ask them to change the repository registration to that URL.
 -   When you do the publish in step 5, add a `-n NNNN` option where `NNNN` is a revision number greater than the number on the existing repository.
     That number can be found by this command on a client machine:
 
         :::console
         user@host $ attr -qg revision /cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%
 
--   Skip step 6; there is no need to tell the GOC when you are finished.
+-   Skip step 6; there is no need to tell OSG Operations when you are finished.
 -   After enough time has elapsed for the publish to propagate to clients, typically around 15 minutes, verify that the new chosen revision has reached a client.
 
 Removing a Repository from OASIS

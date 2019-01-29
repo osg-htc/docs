@@ -151,7 +151,7 @@ Replace %RED%OSG\_RELEASE%ENDCOLOR% with the OSG release you want to use (e.g. '
 
 On your worker node, you can replace the `baseurl` line of `/etc/yum.repos.d/osg.repo` with the appropriate URL for your mirror.
 
-If you are interested in having your mirror be part of the OSG's default set of mirrors, [please file a GOC ticket](https://support.opensciencegrid.org/helpdesk/tickets/new).
+If you are interested in having your mirror be part of the OSG's default set of mirrors, [please file a support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new).
 
 Reference
 ---------
