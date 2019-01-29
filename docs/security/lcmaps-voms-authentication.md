@@ -76,15 +76,15 @@ The LCMAPS VOMS plugin does not work with gLExec.
     You are not expected to support all the VOs.
     If you would like to support opportunistic usage, we recommend creating the following Unix accounts:
 
-    | **VO name**                                                                                             | **Unix account(s)**                                                    |
-    |---------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-    | [GLOW](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/GLOW.yaml)         | `glow`                                                                 |
-    | [OSG](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/OSG.yaml)           | `osg`                                                                  |
-    | [ATLAS](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/ATLAS.yaml)       | `usatlas1`, `usatlas2`, `usatlas3`, `usatlas4`                         |
-    | [CMS](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/CMS.yaml)           | `cmspilot`, `uscmslocal`, `cmslocal`, `cmsprod`, `lcgadmin`, `cmsuser` |
-    | [Fermilab](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Fermilab.yaml) | `fermigli`, `fermilab`                                                 |
-    | [HCC](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/HCC.yaml)           | `hcc`                                                                  |
-    | [Gluex](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Gluex.yaml)       | `gluex`                                                                |
+    | **VO name**                                                                                             | **Unix account(s)** |
+    |---------------------------------------------------------------------------------------------------------|---------------------|
+    | [GLOW](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/GLOW.yaml)         | `glow`              |
+    | [OSG](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/OSG.yaml)           | `osg`               |
+    | [ATLAS](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/ATLAS.yaml)       | `usatlas3`          |
+    | [CMS](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/CMS.yaml)           | `cmsuser`           |
+    | [Fermilab](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Fermilab.yaml) | `fnalgrid`          |
+    | [HCC](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/HCC.yaml)           | `hcc`               |
+    | [Gluex](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Gluex.yaml)       | `gluex`             |
 
     Additionally, it is also recommended to create the `mis` Unix account,
     which is used by OSG staff to assist with troubleshooting.
