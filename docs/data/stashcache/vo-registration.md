@@ -68,7 +68,7 @@ Registering data federation information
 ---------------------------------------
 
 In order to declare your VO's role in the StashCache federation,
-you must add StashCache information to the VO's YAML file in the OSG Topology repository.
+you must add StashCache information to your VO's YAML file in the OSG Topology repository.
 
 The data will look like the following:
 ```
