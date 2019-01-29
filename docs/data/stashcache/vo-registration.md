@@ -56,7 +56,7 @@ We recommend using the lowercase version of your VO as the top-level directory.
 In addition, public data, if any, should be stored in a subdirectory named `PUBLIC`,
 and protected data, if any, should be stored in a subdirectory named `PROTECTED`.
 
-Putting this together, if your VO is named Astro, you should have:
+Putting this together, if your VO is named `Astro`, you should have:
 
 - `/astro/PUBLIC` for public data
 - `/astro/PROTECTED` for protected data
