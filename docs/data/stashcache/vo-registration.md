@@ -3,9 +3,6 @@ Managing VO Registration for the StashCache Federation
 
 This document describes the registration steps required to manage a VO's role
 in the StashCache Data Federation.
-The StashCache Federation allows a site or regional network to cache data frequently used on the OSG,
-reducing data transfer over the wide-area network and decreasing access latency
-for the VO's jobs.
 
 For general information about StashCache, see the [overview document](/data/stashcache/overview/).
 
@@ -26,9 +23,10 @@ Definitions
 Requirements
 ------------
 
-In order for a VO to join the StashCache Federation, the following needs to be true:
+In order for a Virtual Organization to join the StashCache Federation, the following needs to be true:
 
 - The VO must already be registered in the OSG Topology.
+  See the [registration document](/common/registration/#registering-virtual-organizations).
 
 - The VO must pick one or more "namespaces" for their data.
   A namespace is a directory tree in the federation where VO data is found.
