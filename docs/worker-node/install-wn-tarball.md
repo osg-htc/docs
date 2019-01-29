@@ -23,12 +23,6 @@ Download the WN Client
 
 Please pick the `osg-wn-client` tarball that is appropriate for your distribution and architecture. You will find them in <https://repo.opensciencegrid.org/tarball-install/> .
 
-The latest available the tarballs for OSG 3.3 are:
-
--   [Binaries for 32-bit RHEL6](https://repo.opensciencegrid.org/tarball-install/3.3/osg-wn-client-latest.el6.i386.tar.gz)
--   [Binaries for 64-bit RHEL6](https://repo.opensciencegrid.org/tarball-install/3.3/osg-wn-client-latest.el6.x86_64.tar.gz)
--   [Binaries for RHEL7](https://repo.opensciencegrid.org/tarball-install/3.3/osg-wn-client-latest.el7.x86_64.tar.gz)
-
 For OSG 3.4:
 
 -   [Binaries for 64-bit RHEL6](https://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz)
