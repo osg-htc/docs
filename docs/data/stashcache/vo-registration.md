@@ -66,11 +66,12 @@ The data will look like the following:
 DataFederations:
   StashCache:
     Namespaces:
-      <Namespaces section>
+      /astro/PUBLIC:
+        - ANY
     AllowedCaches:
-      <AllowedCaches list>
+      - ANY
     AllowedOrigins:
-      <AllowedOrigins list>
+      - CHTC_STASHCACHE_ORIGIN
 ```
 
 The sections are described below.
