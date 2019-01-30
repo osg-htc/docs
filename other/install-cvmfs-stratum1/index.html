@@ -2050,7 +2050,7 @@
                 
                 
                 <h1 id="install-a-cvmfs-stratum-1">Install a CVMFS Stratum 1<a class="headerlink" href="#install-a-cvmfs-stratum-1" title="Permanent link">&para;</a></h1>
-<p>This document describes how to install a CVMFS Stratum 1. There are many different variations on how to do that, but this document focuses on the configuration of the OSG GOC Stratum 1 oasis-replica.opensciencegrid.org. It is applicable to other Stratum 1s as well, very likely with modifications (some of which are suggested in the document below).</p>
+<p>This document describes how to install a CVMFS Stratum 1. There are many different variations on how to do that, but this document focuses on the configuration of the OSG Operations Stratum 1 oasis-replica.opensciencegrid.org. It is applicable to other Stratum 1s as well, very likely with modifications (some of which are suggested in the document below).</p>
 <div class="admonition note">
 <p class="admonition-title">Applicable versions</p>
 <p>The applicable software versions for this document are cvmfs and cvmfs-server &gt;= 2.4.2.</p>
@@ -2058,7 +2058,7 @@
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points:</p>
 <ul>
-<li><strong>User IDs and Group IDs:</strong> If your machine is also going to be a repository server like the OSG GOC, the installation will create the same user and group IDs as the <a href="../../worker-node/install-cvmfs">cvmfs client</a>.  If you are installing frontier-squid, the installation will also create the same user id as <a href="../../data/frontier-squid">frontier-squid</a>.</li>
+<li><strong>User IDs and Group IDs:</strong> If your machine is also going to be a repository server like OSG Operations, the installation will create the same user and group IDs as the <a href="../../worker-node/install-cvmfs">cvmfs client</a>.  If you are installing frontier-squid, the installation will also create the same user id as <a href="../../data/frontier-squid">frontier-squid</a>.</li>
 <li><strong>Network ports:</strong> This installation will host the stratum 1 on ports 80 and 8000 and, if squid is installed, it will host the uncached apache on port 8081.</li>
 <li><strong>Host choice:</strong> -  Make sure there is adequate disk space for the repositories that will be served, at <code>/srv/cvmfs</code>. Do not use xfs as the filesystem type on operating systems older than EL7, because it has been demonstrated to perform poorly for CVMFS repositories; instead use ext3 or ext4. About 10GB should be reserved for apache and squid logs under /var/log on a production server, although they normally will not get that large. A Stratum 1 that is also a repository server should have at least 5GB available at <code>/var/cache</code>.</li>
 <li><strong>SELinux</strong> - Ensure SELinux is disabled</li>
@@ -2072,7 +2072,7 @@
 <h2 id="installing">Installing<a class="headerlink" href="#installing" title="Permanent link">&para;</a></h2>
 <p>All CVMFS Stratum 1s require cvmfs-server software and apache (httpd). It is highly recommended to also install <a href="../../data/frontier-squid">frontier-squid</a> and <a href="https://twiki.cern.ch/twiki/bin/view/Frontier/InstallAwstats">frontier-awstats</a> on the same machine to be able to easily join the WLCG <a href="http://wlcg-squid-monitor.cern.ch/snmpstats/indexcvmfs.html">MRTG</a> and <a href="http://wlcg-squid-monitor.cern.ch/awstats/cvmfs.html">awstats</a> monitoring systems. The recommended configuration for frontier-squid below only caches geo api lookups.  Other than that, it is primarily for monitoring.</p>
 <h3 id="installing-cvmfs-server-and-httpd">Installing cvmfs-server and httpd<a class="headerlink" href="#installing-cvmfs-server-and-httpd" title="Permanent link">&para;</a></h3>
-<p>The OSG GOC Stratum 1 has to function as a repository server in addition to serving repository replications; most Stratum 1s serve only replications. Instructions are also provided for how to install cvmfs-server on Stratum 1s that do not have to be repository servers.  Choose the appropriate subsection.</p>
+<p>The OSG Operations Stratum 1 has to function as a repository server in addition to serving repository replications; most Stratum 1s serve only replications. Instructions are also provided for how to install cvmfs-server on Stratum 1s that do not have to be repository servers.  Choose the appropriate subsection.</p>
 <h4 id="installing-a-cvmfs-stratum-1-that-is-also-a-repository-server">Installing a CVMFS stratum 1 that is also a repository server<a class="headerlink" href="#installing-a-cvmfs-stratum-1-that-is-also-a-repository-server" title="Permanent link">&para;</a></h4>
 <p>EL6 does not support a CVMFS repository server with the standard kernel, so use EL7.  EL7.2 cannot be reliably used as a repository server, because of bugs in the union filesystem OverlayFS. The bugs are fixed in EL7.3, so use EL7.3 or later.</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum -y install cvmfs-server cvmfs mod_wsgi
@@ -2080,7 +2080,7 @@
 
 
 <h4 id="installing-cvmfs-stratum-1-that-is-not-a-repository-server">Installing CVMFS stratum 1 that is not a repository server<a class="headerlink" href="#installing-cvmfs-stratum-1-that-is-not-a-repository-server" title="Permanent link">&para;</a></h4>
-<p>If you're not installing for the OSG GOC or otherwise want to support serving repositories on the same machine as a Stratum 1, use this command on either EL6 or EL7:</p>
+<p>If you're not installing for OSG Operations or otherwise want to support serving repositories on the same machine as a Stratum 1, use this command on either EL6 or EL7:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum -y install cvmfs-server cvmfs-config mod_wsgi
 </pre></div>
 
@@ -2268,7 +2268,7 @@ Allow from all
 <h2 id="verifying">Verifying<a class="headerlink" href="#verifying" title="Permanent link">&para;</a></h2>
 <p>In order to verify that everything is installed correctly, create a repository replica. The repository chosen for the instructions below is one from egi.eu because it is very small, but you can use another one if you prefer.</p>
 <h3 id="adding-an-example-repository">Adding an example repository<a class="headerlink" href="#adding-an-example-repository" title="Permanent link">&para;</a></h3>
-<p>The OSG GOC Stratum 1 should add a repository replica using the <code>add_osg_repository</code> script from the oasis-goc rpm. Instructions for installing that are elsewhere. That script assumes that the oasis.opensciencegrid.org replica repository was first created, so this instruction creates it but does not download the first snapshot because that would take a lot of space and time. Use these commands to create the oasis replica and to create and download the example replica:</p>
+<p>The OSG Operations Stratum 1 should add a repository replica using the <code>add_osg_repository</code> script from the oasis-goc rpm. Instructions for installing that are elsewhere. That script assumes that the oasis.opensciencegrid.org replica repository was first created, so this instruction creates it but does not download the first snapshot because that would take a lot of space and time. Use these commands to create the oasis replica and to create and download the example replica:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cvmfs_server add-replica -o root http://oasis.opensciencegrid.org:8000/cvmfs/oasis.opensciencegrid.org /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub 
 <span class="gp">root@host #</span> add_osg_repository http://cvmfs-stratum0.gridpp.rl.ac.uk:8000/cvmfs/config-egi.egi.eu
 </pre></div>
@@ -2279,7 +2279,7 @@ Allow from all
 </pre></div>
 
 
-<p>However, non-GOC OSG Stratum 1s (that is, at BNL and FNAL), for the sake of fulfilling an OSG security requirement, need to instead read from the OSG GOC machine with this as their first command:</p>
+<p>However, non-OSG Operations Stratum 1s (that is, at BNL and FNAL), for the sake of fulfilling an OSG security requirement, need to instead read from the OSG Operations machine with this as their first command:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cvmfs_server add-replica -o root http://oasis-replica.opensciencegrid.org:8000/cvmfs/config-egi.egi.eu /etc/cvmfs/keys/egi.eu/egi.eu.pub:/etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub
 </pre></div>
 

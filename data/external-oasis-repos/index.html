@@ -2136,7 +2136,7 @@ The VO responsible manager will be <span style="color:red">OASIS Manager Name</s
 </pre></div>
 
 
-<p>Within an hour, the repository updates should appear at the GOC and FNAL Stratum-1 servers.</p>
+<p>Within an hour, the repository updates should appear at the OSG Operations and FNAL Stratum-1 servers.</p>
 <p>On success, make sure the whitelist update happens daily by creating <code>/etc/cron.d/fetch-cvmfs-whitelist</code> with the
 following contents:</p>
 <div class="codehilite"><pre><span></span>5 4 * * * <span style="color:blue">LIBRARIAN</span> cd /srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span> &amp;&amp; wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.cvmfswhitelist &amp;&amp; mv .cvmfswhitelist.new .cvmfswhitelist
@@ -2166,7 +2166,7 @@ VO should open a GGUS ticket following EGI's <a href="https://wiki.egi.eu/wiki/P
 <h2 id="replacing-an-existing-oasis-repository-server">Replacing an Existing OASIS Repository Server<a class="headerlink" href="#replacing-an-existing-oasis-repository-server" title="Permanent link">&para;</a></h2>
 <p>If a need arises to replace a server for an existing <code>*.opensciencegrid.org</code> or <code>*.osgstorage.org</code> repository, there are two ways to do it:
 one without changing the DNS name and one with changing it.
-The latter can take longer because it requires GOC intervention.</p>
+The latter can take longer because it requires OSG Operations intervention.</p>
 <div class="admonition note">
 <p class="admonition-title">Revision numbers must increase</p>
 <p>CVMFS does not allow repository revision numbers to decrease, so the instructions below make sure the revision numbers only go up.</p>
@@ -2185,11 +2185,11 @@ remove the repository configuration while preserving the data and keys:</p>
 <h3 id="with-changing-the-server-dns-name">With changing the server DNS name<a class="headerlink" href="#with-changing-the-server-dns-name" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you create a repository from scratch, as opposed to copying the data and keys from an old server, it is in fact better to change the DNS name of the server because that causes the GOC server to reinitialize the .cvmfswhitelist.</p>
+<p>If you create a repository from scratch, as opposed to copying the data and keys from an old server, it is in fact better to change the DNS name of the server because that causes the OSG Operations server to reinitialize the .cvmfswhitelist.</p>
 </div>
 <p>If you create a replacement repository on a new machine from scratch, follow the normal instructions on this page above, but with the following differences in the <a href="#hosting-a-repository-on-oasis">Hosting a Repository on OASIS</a> section:</p>
 <ul>
-<li>In step 2, instead of asking in the GOC ticket to create a new repository, give the new URL and ask them to change the repository registration to that URL.</li>
+<li>In step 2, instead of asking in the support ticket to create a new repository, give the new URL and ask them to change the repository registration to that URL.</li>
 <li>
 <p>When you do the publish in step 5, add a <code>-n NNNN</code> option where <code>NNNN</code> is a revision number greater than the number on the existing repository.
     That number can be found by this command on a client machine:</p>
@@ -2199,7 +2199,7 @@ remove the repository configuration while preserving the data and keys:</p>
 
 </li>
 <li>
-<p>Skip step 6; there is no need to tell the GOC when you are finished.</p>
+<p>Skip step 6; there is no need to tell OSG Operations when you are finished.</p>
 </li>
 <li>After enough time has elapsed for the publish to propagate to clients, typically around 15 minutes, verify that the new chosen revision has reached a client.</li>
 </ul>
