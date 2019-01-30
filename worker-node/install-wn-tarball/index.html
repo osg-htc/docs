@@ -465,8 +465,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validing-the-worker-node-client" title="Validing the Worker Node Client" class="md-nav__link">
-    Validing the Worker Node Client
+  <a href="#validating-the-worker-node-client" title="Validating the Worker Node Client" class="md-nav__link">
+    Validating the Worker Node Client
   </a>
   
 </li>
@@ -1883,8 +1883,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validing-the-worker-node-client" title="Validing the Worker Node Client" class="md-nav__link">
-    Validing the Worker Node Client
+  <a href="#validating-the-worker-node-client" title="Validating the Worker Node Client" class="md-nav__link">
+    Validating the Worker Node Client
   </a>
   
 </li>
@@ -1934,12 +1934,6 @@ may install and use the client.</p>
 <p>Before starting, ensure the host has <a href="../../release/supported_platforms/">a supported operating system</a>.</p>
 <h2 id="download-the-wn-client">Download the WN Client<a class="headerlink" href="#download-the-wn-client" title="Permanent link">&para;</a></h2>
 <p>Please pick the <code>osg-wn-client</code> tarball that is appropriate for your distribution and architecture. You will find them in <a href="https://repo.opensciencegrid.org/tarball-install/">https://repo.opensciencegrid.org/tarball-install/</a> .</p>
-<p>The latest available the tarballs for OSG 3.3 are:</p>
-<ul>
-<li><a href="https://repo.opensciencegrid.org/tarball-install/3.3/osg-wn-client-latest.el6.i386.tar.gz">Binaries for 32-bit RHEL6</a></li>
-<li><a href="https://repo.opensciencegrid.org/tarball-install/3.3/osg-wn-client-latest.el6.x86_64.tar.gz">Binaries for 64-bit RHEL6</a></li>
-<li><a href="https://repo.opensciencegrid.org/tarball-install/3.3/osg-wn-client-latest.el7.x86_64.tar.gz">Binaries for RHEL7</a></li>
-</ul>
 <p>For OSG 3.4:</p>
 <ul>
 <li><a href="https://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz">Binaries for 64-bit RHEL6</a></li>
@@ -1951,7 +1945,7 @@ may install and use the client.</p>
 <li>Move the directory that was created to where you want the tarball client to be.</li>
 <li>Run <code>osg-post-install</code> (<strong><code>&lt;PATH_TO_CLIENT&gt;/osg/osg-post-install</code></strong>) to fix the directories in the installation.</li>
 <li>Source the setup <strong><code>source &lt;PATH_TO_CLIENT&gt;/setup.sh</code></strong> (or <strong><code>setup.csh</code></strong> depending on the shell).</li>
-<li>Download and set up CA certificiates using <strong><code>osg-ca-manage</code></strong> (See the <a href="../../security/certificate-management">CA management documentation</a> for the available options).</li>
+<li>Download and set up CA certificates using <strong><code>osg-ca-manage</code></strong> (See the <a href="../../security/certificate-management">CA management documentation</a> for the available options).</li>
 <li>Download CRLs using <strong><code>fetch-crl</code></strong>.</li>
 </ol>
 <div class="admonition warning">
@@ -1997,7 +1991,7 @@ may install and use the client.</p>
 <h3 id="enabling-and-disabling-services">Enabling and Disabling Services<a class="headerlink" href="#enabling-and-disabling-services" title="Permanent link">&para;</a></h3>
 <p>To enable the CRL updates, you must edit your cron with <strong><code>crontab -e</code></strong> and add the lines above.  To disable, remove
 the lines from the <code>crontab</code>.</p>
-<h2 id="validing-the-worker-node-client">Validing the Worker Node Client<a class="headerlink" href="#validing-the-worker-node-client" title="Permanent link">&para;</a></h2>
+<h2 id="validating-the-worker-node-client">Validating the Worker Node Client<a class="headerlink" href="#validating-the-worker-node-client" title="Permanent link">&para;</a></h2>
 <p>To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.</p>
 <ol>
 <li>Submit a job that executes the <code>env</code> command (e.g. Run <a href="../../compute-element/troubleshoot-htcondor-ce#condor_ce_trace"><code>condor_ce_trace</code></a> with the <code>-d</code> flag from your HTCondor CE)</li>
