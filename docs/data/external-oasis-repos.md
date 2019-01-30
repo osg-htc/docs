@@ -209,7 +209,7 @@ Replacing an Existing OASIS Repository Server
 
 If a need arises to replace a server for an existing `*.opensciencegrid.org` or `*.osgstorage.org` repository, there are two ways to do it:
 one without changing the DNS name and one with changing it.
-The latter can take longer because it requires Operations intervention.
+The latter can take longer because it requires OSG Operations intervention.
 
 !!! note "Revision numbers must increase"
     CVMFS does not allow repository revision numbers to decrease, so the instructions below make sure the revision numbers only go up.
