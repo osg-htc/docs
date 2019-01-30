@@ -37,6 +37,10 @@ A namespace is a directory tree in the federation where VO data is found.
 !!! note
     Namespaces are global across the federation, so you must work with the StashCache Operations team
     to ensure that your VO's namespaces do not collide with those of another VO.
+    
+    Send an email to help@opensciencegrid.org with the following subject:
+    "Requesting StashCache namespaces for VO <VO>"
+    and put the desired namespaces in the body of the email.
 
 A namespace should be easy for your users to remember but not so generic that it collides with other VOs.
 We recommend using the lowercase version of your VO as the top-level directory.
