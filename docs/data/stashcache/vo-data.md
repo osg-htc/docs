@@ -1,13 +1,11 @@
-Managing VO Registration for the StashCache Federation
-======================================================
+Getting Your VO's Data into StashCache
+======================================
 
-This document describes the registration steps required to manage a VO's role
-in the StashCache Data Federation.
+This document describes the steps required to manage a VO's role
+in the StashCache Data Federation including selecting a namespace, registration,
+and selecting which resources are allowed to host or cache your data.
 
 For general information about StashCache, see the [overview document](/data/stashcache/overview/).
-
-For general information about VO registration in the OSG Topology,
-see the [registration document](/common/registration/#registering-virtual-organizations).
 
 Site admins should work together with VO managers in order to perform these steps.
 

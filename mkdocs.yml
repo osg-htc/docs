@@ -44,7 +44,7 @@ pages:
     - 'StashCache Overview': 'data/stashcache/overview.md'
     - 'Install StashCache Cache': 'data/stashcache/install-cache.md'
     - 'Install StashCache Origin': 'data/stashcache/install-origin.md'
-    - 'Managing VO registration in StashCache': 'data/stashcache/vo-registration.md'
+    - 'Getting VO data into StashCache': 'data/stashcache/vo-data.md'
   - HDFS:
     - 'HDFS Overview': 'data/hadoop-overview.md'
     - 'Install HDFS': 'data/install-hadoop.md'
