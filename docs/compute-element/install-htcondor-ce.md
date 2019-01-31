@@ -27,6 +27,8 @@ Before starting the installation process, consider the following points
 -   **Network ports:** The pilot factories must be able to contact your HTCondor-CE service on port 9619 (TCP)
 -   **Submit host:** HTCondor-CE should be installed on a host that already has the ability to submit jobs into your
     local cluster
+-   **File Systems**: Non-HTCondor batch systems require a [shared file system](#batch-systems-other-than-htcondor)
+    between the HTCondor-CE host and the batch system worker nodes.
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
