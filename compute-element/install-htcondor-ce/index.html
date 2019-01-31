@@ -363,13 +363,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#configuring-the-job-queue-location" title="Configuring the job queue location" class="md-nav__link">
-    Configuring the job queue location
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#configuring-authorization" title="Configuring authorization" class="md-nav__link">
     Configuring authorization
   </a>
@@ -2041,13 +2034,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#configuring-the-job-queue-location" title="Configuring the job queue location" class="md-nav__link">
-    Configuring the job queue location
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#configuring-authorization" title="Configuring authorization" class="md-nav__link">
     Configuring authorization
   </a>
@@ -2267,10 +2253,8 @@ repositories.</p>
 <li><strong>Network ports:</strong> The pilot factories must be able to contact your HTCondor-CE service on port 9619 (TCP)</li>
 <li><strong>Submit host:</strong> HTCondor-CE should be installed on a host that already has the ability to submit jobs into your
     local cluster</li>
-<li><strong>File Systems:</strong> We recommend separate partitions for the <a href="#configuring-the-job-queue-location">job queue log</a> and
-    <code>SPOOL</code> directory.
-    Additionally, non-HTCondor batch systems require a <a href="#batch-systems-other-than-htcondor">shared file system</a> between
-    the HTCondor-CE host and the batch system worker nodes.</li>
+<li><strong>File Systems</strong>: Non-HTCondor batch systems require a <a href="#batch-systems-other-than-htcondor">shared file system</a>
+    between the HTCondor-CE host and the batch system worker nodes.</li>
 </ul>
 <p>As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:</p>
 <ul>
@@ -2415,29 +2399,6 @@ For example, the following sets the <code>SPOOL</code> directory to <code>/home/
 <p class="admonition-title">Note</p>
 <p>The shared spool directory must be readable and writeable by the <code>condor</code> user for HTCondor-CE to function correctly.</p>
 </div>
-<h3 id="configuring-the-job-queue-location">Configuring the job queue location<a class="headerlink" href="#configuring-the-job-queue-location" title="Permanent link">&para;</a></h3>
-<p>The <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/4_5Logging_in.html#53484">job queue log</a> is a frequently written
-to file that contains the state of the HTCondor-CE job queue.
-For performance reasons, we recommend storing this file and the <code>SPOOL</code> directory on a different file system partitions.
-To configure the location of the job queue log:</p>
-<ol>
-<li>
-<p>Find which file system partition your <code>SPOOL</code> directory is located on:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@htcondor-ce $</span> df <span class="k">$(</span>condor_ce_config_val SPOOL<span class="k">)</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>Set <code>JOB_QUEUE_LOG</code> in <code>/etc/condor-ce/config.d/99-local.conf</code> to the path of the job queue log on a separate file
-   system partition than the above.
-   For example, if you have a separate SSD that is mounted on <code>/ssd</code>, you could set the following:</p>
-<div class="codehilite"><pre><span></span>JOB_QUEUE_LOG = /ssd/condor/job_queue.log
-</pre></div>
-
-
-</li>
-</ol>
 <h3 id="configuring-authorization">Configuring authorization<a class="headerlink" href="#configuring-authorization" title="Permanent link">&para;</a></h3>
 <p>To configure which virtual organizations and users are authorized to submit jobs to your, follow the instructions in
 <a href="../../security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin">the LCMAPS VOMS plugin document</a>.</p>
