@@ -71,7 +71,7 @@ The LCMAPS VOMS plugin does not work with gLExec.
 
 
 1.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support.
-    The full list of VOs is located on [OIM](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
+    The full list of VOs is located in the [OSG topology](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
     You are not expected to support all the VOs.
     If you would like to support opportunistic usage, we recommend creating the following Unix accounts:
 
