@@ -9,9 +9,8 @@ The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOM
 In OSG 3.4, the LCMAPS VOMS plugin replaced GUMS and edg-mkgridmap as the authentication method at OSG sites.
 
 The OSG provides a default set of mappings from VOMS attributes to Unix accounts.
-By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to,
-banning based on VOMS attributes, banning a specific user, or adding a VO, VO group, VO role, and/or user that is not in
-the OSG's set of mappings.
+By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to;
+adding custom mappings for specific users and VOMS attributes; and/or banning specific users and VOMS attributes.
 
 Use this page to learn how to install and configure the LCMAPS VOMS plugin to authenticate users to access your
 resources on a per-VO basis.
