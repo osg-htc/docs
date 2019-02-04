@@ -1,4 +1,4 @@
-Getting Your VO's Data into StashCache
+Getting VO Data into StashCache
 ======================================
 
 This document describes the steps required to manage a VO's role
@@ -26,7 +26,7 @@ See the [registration document](/common/registration/#registering-virtual-organi
 
 
 
-Choosing namespaces
+Choosing Namespaces
 -------------------
 
 The VO must pick one or more "namespaces" for their data.
@@ -53,7 +53,7 @@ Putting this together, if your VO is named `Astro`, you should have:
 Separating the public and protected data in separate directory trees is preferred for technical reasons.
 
 
-Registering data federation information
+Registering Data Federation Information
 ---------------------------------------
 
 The VO must allow one or more StashCache origins to host their data.
@@ -63,7 +63,8 @@ For information about setting up an origin, see the [installation document](/dat
 In order to declare your VO's role in the StashCache federation,
 you must add StashCache information to your VO's YAML file in the OSG Topology repository.
 
-The data will look like the following:
+For example, the full registration for the `Astro` VO may look something like the following:
+
 ```
 DataFederations:
   StashCache:
