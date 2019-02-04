@@ -194,7 +194,7 @@ You can use the special value `ANY` to indicate that the origin will serve data 
 
 In addition to the origin allowing a VOs via the `AllowedVOs` list,
 that VO must also allow the origin in its `DataFederations/StashCache/AllowedOrigins` list.
-
+See the page on [getting your VO's data into StashCache](/data/stashcache/vo-data).
 
 Getting Help
 ------------

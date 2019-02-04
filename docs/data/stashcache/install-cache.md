@@ -228,6 +228,7 @@ There are extra requirements for serving non-public data:
 
 - In addition to the cache allowing a VO in the `AllowedVOs` list,
   that VO must also allow the cache in its `AllowedCaches` list.
+  See the page on [getting your VO's data into StashCache](/data/stashcache/vo-data).
 - There must be an authenticated XRootD instance on the cache server.
 - There must be a `DN` attribute in the resource
   with the DN of the cert used by the authenticated XRootD instance.
