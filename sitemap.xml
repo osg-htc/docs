@@ -131,6 +131,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://opensciencegrid.github.io/docs/data/stashcache/vo-data/</loc>
+     <lastmod>2019-02-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://opensciencegrid.github.io/docs/data/hadoop-overview/</loc>
      <lastmod>2019-02-04</lastmod>
      <changefreq>daily</changefreq>
