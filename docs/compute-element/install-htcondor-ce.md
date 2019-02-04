@@ -370,6 +370,8 @@ Validating HTCondor-CE
 
 To validate an HTCondor-CE, perform the following verification steps:
 
+1. Verify that you can manually submit jobs (e.g., `condor_submit`, `qsub`, etc.)to your batch system from the CE host.
+
 1. Verify that all the necessary daemons are running with
    [condor\_ce\_status](/compute-element/troubleshoot-htcondor-ce#condor_ce_status).
 
