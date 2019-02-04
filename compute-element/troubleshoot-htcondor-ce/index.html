@@ -436,6 +436,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#idle-jobs-on-ce-make-sure-the-underlying-batch-system-can-run-jobs" title="Idle jobs on CE: Make sure the underlying batch system can run jobs" class="md-nav__link">
+    Idle jobs on CE: Make sure the underlying batch system can run jobs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#idle-jobs-on-ce-is-the-job-router-handling-the-incoming-job" title="Idle jobs on CE: Is the job router handling the incoming job?" class="md-nav__link">
     Idle jobs on CE: Is the job router handling the incoming job?
   </a>
@@ -466,13 +473,6 @@
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#idle-jobs-on-ce-make-sure-the-underlying-batch-system-can-run-jobs" title="Idle jobs on CE: Make sure the underlying batch system can run jobs" class="md-nav__link">
-    Idle jobs on CE: Make sure the underlying batch system can run jobs
-  </a>
   
 </li>
         
@@ -2572,6 +2572,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#idle-jobs-on-ce-make-sure-the-underlying-batch-system-can-run-jobs" title="Idle jobs on CE: Make sure the underlying batch system can run jobs" class="md-nav__link">
+    Idle jobs on CE: Make sure the underlying batch system can run jobs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#idle-jobs-on-ce-is-the-job-router-handling-the-incoming-job" title="Idle jobs on CE: Is the job router handling the incoming job?" class="md-nav__link">
     Idle jobs on CE: Is the job router handling the incoming job?
   </a>
@@ -2602,13 +2609,6 @@
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#idle-jobs-on-ce-make-sure-the-underlying-batch-system-can-run-jobs" title="Idle jobs on CE: Make sure the underlying batch system can run jobs" class="md-nav__link">
-    Idle jobs on CE: Make sure the underlying batch system can run jobs
-  </a>
   
 </li>
         
@@ -3351,6 +3351,20 @@ You may see error messages like the following in your <a href="#schedlog">SchedL
 <h3 id="jobs-stay-idle-on-the-ce">Jobs stay idle on the CE<a class="headerlink" href="#jobs-stay-idle-on-the-ce" title="Permanent link">&para;</a></h3>
 <p>Check the following subsections in order, but note that jobs may take several minutes or longer to run if the CE is
 busy.</p>
+<h4 id="idle-jobs-on-ce-make-sure-the-underlying-batch-system-can-run-jobs">Idle jobs on CE: Make sure the underlying batch system can run jobs<a class="headerlink" href="#idle-jobs-on-ce-make-sure-the-underlying-batch-system-can-run-jobs" title="Permanent link">&para;</a></h4>
+<p>HTCondor-CE delegates jobs to your batch system, which is then responsible for matching jobs to worker nodes.
+If you cannot manually submit jobs (e.g., <code>condor_submit</code>, <code>qsub</code>) on the CE host to your batch system, then HTCondor-CE
+won't be able to either.</p>
+<p><strong>Procedure</strong></p>
+<ol>
+<li>Manually create and submit a simple job (e.g., one that runs <code>sleep</code>)</li>
+<li>Check for errors in the submission itself</li>
+<li>Watch the job in the batch system queue (e.g., <code>condor_q</code>, <code>qstat</code>)</li>
+<li>If the job does not run, check for errors on the batch system</li>
+</ol>
+<p><strong>Next actions</strong></p>
+<p>Consult troubleshooting documentation or support avenues for your batch system.
+Once you can run simple manual jobs on your batch system, try submitting to the HTCondor-CE again.</p>
 <h4 id="idle-jobs-on-ce-is-the-job-router-handling-the-incoming-job">Idle jobs on CE: Is the job router handling the incoming job?<a class="headerlink" href="#idle-jobs-on-ce-is-the-job-router-handling-the-incoming-job" title="Permanent link">&para;</a></h4>
 <p>Jobs on the CE will be put on hold if they do not match any job routes after 30 minutes, but you can check a few things
 if you suspect that the jobs are not being matched. 
@@ -3386,21 +3400,6 @@ Look for <code>gm state change…</code> lines to figure out where the issures a
 <p>If the script fails, <a href="#getting-help">request help</a> from the OSG.</p>
 </li>
 </ol>
-<h4 id="idle-jobs-on-ce-make-sure-the-underlying-batch-system-can-run-jobs">Idle jobs on CE: Make sure the underlying batch system can run jobs<a class="headerlink" href="#idle-jobs-on-ce-make-sure-the-underlying-batch-system-can-run-jobs" title="Permanent link">&para;</a></h4>
-<p>HTCondor-CE communicates directly with an HTCondor batch system schedd, so if jobs are not running, examine the
-<a href="#schedlog">SchedLog</a> and diagnose the problem from there. 
-For other batch systems, the BLAHP is used to submit jobs using your batch system’s job submission binaries, whose
-location is specified in <code>/etc/blah.config</code>.</p>
-<p><strong>Procedure</strong></p>
-<ol>
-<li>Manually create and submit a simple job (e.g., one that runs <code>sleep</code>)</li>
-<li>Check for errors in the submission itself</li>
-<li>Watch the job in the batch system queue (e.g., using <code>condor_q</code>)</li>
-<li>If the job does not run, check for errors on the batch system</li>
-</ol>
-<p><strong>Next actions</strong></p>
-<p>If the underlying batch system does not run a simple manual job, it will probably not run a job coming from HTCondor-CE.
-Once you can run simple manual jobs on your batch system, try submitting to the HTCondor-CE again.</p>
 <h4 id="idle-jobs-on-ce-verify-ability-to-change-permissions-on-key-files">Idle jobs on CE: Verify ability to change permissions on key files<a class="headerlink" href="#idle-jobs-on-ce-verify-ability-to-change-permissions-on-key-files" title="Permanent link">&para;</a></h4>
 <p>HTCondor-CE needs the ability to write and chown files in its <code>spool</code> directory and if it cannot, jobs will not run at
 all. 
