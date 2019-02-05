@@ -65,7 +65,7 @@ you must add StashCache information to your VO's YAML file in the OSG Topology r
 
 For example, the full registration for the `Astro` VO may look something like the following:
 
-```
+```yaml
 DataFederations:
   StashCache:
     Namespaces:
@@ -92,7 +92,7 @@ The list will contain one or more of these:
 - `ANY` allows anyone; this is used for public data
 
 A complete declaration looks like:
-```
+```yaml
     Namespaces:
       /astro/PUBLIC:
         - ANY
@@ -118,6 +118,7 @@ There are two cases:
 
 - If you only have public data, your AllowedCaches list can look like:
 
+        :::yaml
         AllowedCaches:
             - ANY
 
