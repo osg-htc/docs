@@ -433,7 +433,7 @@ Apr 11 13:51:41 atlas-hub globus-gridftp-server: You are still root after the LC
    To check the version of your `globus-gridftp-server-*`, run the following command:
 
         :::console
-        user@host $ rpm -q ^globus-gridftp
+        user@host $ rpm -qa 'globus-gridftp*'
 
 1. Verify that the [priority](/common/yum#installing-and-configuring-repositories) of the OSG repositories are set
    properly
