@@ -17,32 +17,22 @@ decreasing access latency.
 
 Before starting the installation process, consider the following mandatory points:
 
-* __Operating system:__ Only RHEL 7 and compatible operating systems are supported.
+* __Operating system:__ A RHEL 7 or compatible operating systems.
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and
   `xrootd`
-* __Host certificate:__ The StashCache server uses a host certificate to advertise to a central collector.
+* __Host certificate:__ Optional, required for authenticated StashCache.
   The [host certificate documentation](/security/host-certs.md) provides more information on setting up host
   certificates.
-* __Network ports:__ The cache service requires inbound ports, one for the xrootd protocol, one for
-  HTTP and, if authenticated StashCache is used, one for HTTPS.  The defaults are:
-    * TCP port 1094 for xrootd.
-    * TCP port 8000 for HTTP.
-    * TCP port 8443 for HTTPS (optional).
-* __Hardware requirements:__ We recommend that a StashCache server has at least 10Gbps connectivity, 1TB of
+* __Network ports:__ The cache service requires the following ports open:
+    * Inbound TCP port 1094 for file access via the XRootD protocol
+    * Inbound TCP port 8000 for file access via HTTP
+    * Inbound TCP port 8443 for authenticated file access via HTTPS (optional)
+    * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
+* __Hardware requirements:__ We recommend that a StashCache cache has at least 10Gbps connectivity, 1TB of
  disk space for the cache directory, and 8GB of RAM.
-
-If installing the (optional) authenticated StashCache, you also need to do the following:
-
-* __Service certificate:__ copy the host certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
-    * Set the owner of the directory and contents `/etc/grid-security/xrd/` to `xrootd:xrootd`:
-
-            :::console
-            root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
-* Ensure the host has [a supported operating system](/release/supported_platforms.md).  At this time, we
-  only support RHEL7-based cache servers.
 * Obtain root access to the host
 * Prepare [the required Yum repositories](/common/yum.md)
 * Install [CA certificates](/common/ca.md)
@@ -100,6 +90,7 @@ This permits all users (`u *`) to read all directories (`/ rl`) _except_ those u
 the `/user/ligo` directory should only be readable in authenticated setups.
 For more details, see the [XRootD security documentation](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606598).
 
+
 Configuring the Authenticated Cache (Optional)
 ----------------------------------------------
 
@@ -107,6 +98,19 @@ The authenticated cache service is a separate instance of the StashCache cache s
 and runs alongside the unauthenticated instance.
 You should make sure that the unauthenticated instance is functioning before setting up the authenticated instance.
 Before proceeding, make sure you have followed the [prerequisite steps](#installation-prerequisites-for-cache).
+
+
+### Add a service certificate
+
+The service will need a certificate to authenticate to StashCache origins.
+Do the following:
+
+1. Copy the host certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
+1. Set the owner of the directory and contents `/etc/grid-security/xrd/` to `xrootd:xrootd`:
+
+        :::console
+        root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
+
 
 ### Add Authfile for authenticated cache
 
@@ -176,8 +180,7 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 ### Public Cache Services
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
-| XRootD | `xrootd@stashcache-cache-server.service` | The xrootd daemon, which performs the data transfers |
-| StashCache Reporter | `stashcache-reporter.timer` | Report cache statistics to central OSG collector |
+| XRootD | `xrootd@stash-cache.service` | The xrootd daemon, which performs the data transfers |
 | Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 
 ### Authenticated Cache Services
@@ -186,7 +189,7 @@ _In addition_ to the public cache services, there are three systemd units specif
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
-| XRootD | `xrootd@stashcache-cache-server-auth.service` | The xrootd daemon which performs the authenticated data transfers |
+| XRootD | `xrootd@stash-cache-auth.service` | The xrootd daemon which performs authenticated data transfers |
 |  | `xrootd-renew-proxy.service` | Renew a proxy for authenticated downloads to the cache |
 |  | `xrootd-renew-proxy.timer` | Trigger daily proxy renewal |
 
