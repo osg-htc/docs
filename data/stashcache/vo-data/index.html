@@ -1958,15 +1958,15 @@ For information about setting up an origin, see the <a href="../../../data/stash
 <p>In order to declare your VO's role in the StashCache federation,
 you must add StashCache information to your VO's YAML file in the OSG Topology repository.</p>
 <p>For example, the full registration for the <code>Astro</code> VO may look something like the following:</p>
-<div class="codehilite"><pre><span></span><span class="n">DataFederations</span><span class="p">:</span>
-  <span class="n">StashCache</span><span class="p">:</span>
-    <span class="n">Namespaces</span><span class="p">:</span>
-      <span class="o">/</span><span class="n">astro</span><span class="o">/</span><span class="k">PUBLIC</span><span class="p">:</span>
-        <span class="o">-</span> <span class="n">ANY</span>
-    <span class="n">AllowedCaches</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">ANY</span>
-    <span class="n">AllowedOrigins</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">CHTC_STASHCACHE_ORIGIN</span>
+<div class="codehilite"><pre><span></span><span class="nt">DataFederations</span><span class="p">:</span>
+  <span class="nt">StashCache</span><span class="p">:</span>
+    <span class="nt">Namespaces</span><span class="p">:</span>
+      <span class="nt">/astro/PUBLIC</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ANY</span>
+    <span class="nt">AllowedCaches</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ANY</span>
+    <span class="nt">AllowedOrigins</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">CHTC_STASHCACHE_ORIGIN</span>
 </pre></div>
 
 
@@ -1981,12 +1981,12 @@ list who is allowed to access that namespace.</p>
 <li><code>ANY</code> allows anyone; this is used for public data</li>
 </ul>
 <p>A complete declaration looks like:</p>
-<div class="codehilite"><pre><span></span>    <span class="n">Namespaces</span><span class="p">:</span>
-      <span class="o">/</span><span class="n">astro</span><span class="o">/</span><span class="k">PUBLIC</span><span class="p">:</span>
-        <span class="o">-</span> <span class="n">ANY</span>
-      <span class="o">/</span><span class="n">astro</span><span class="o">/</span><span class="k">PROTECTED</span><span class="p">:</span>
-        <span class="o">-</span> <span class="n">FQAN</span><span class="p">:</span><span class="o">/</span><span class="n">Astro</span>
-        <span class="o">-</span> <span class="n">DN</span><span class="p">:</span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">org</span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">opensciencegrid</span><span class="o">/</span><span class="n">O</span><span class="o">=</span><span class="n">Open</span> <span class="n">Science</span> <span class="n">Grid</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">People</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">Matyas</span> <span class="n">Selmeci</span>
+<div class="codehilite"><pre><span></span>    <span class="nt">Namespaces</span><span class="p">:</span>
+      <span class="nt">/astro/PUBLIC</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ANY</span>
+      <span class="nt">/astro/PROTECTED</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">FQAN:/Astro</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">DN:/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci</span>
 </pre></div>
 
 
@@ -2001,8 +2001,8 @@ For information about setting up a cache, see the <a href="../../../data/stashca
 <p>AllowedCaches is a list of which caches are allowed to host copies of your data.
 There are two cases:</p>
 <ul>
-<li>If you only have public data, your AllowedCaches list can look like:<div class="codehilite"><pre><span></span>AllowedCaches:
-    - ANY
+<li>If you only have public data, your AllowedCaches list can look like:<div class="codehilite"><pre><span></span><span class="nt">AllowedCaches</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ANY</span>
 </pre></div>
 
 
