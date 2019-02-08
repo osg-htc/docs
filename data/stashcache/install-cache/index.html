@@ -2302,11 +2302,50 @@ mounted, then ensure you <em>enable</em> (set to start at boot) and <em>start</e
 
 <p>Where <code>hostname</code> is the string returned by the hostname command. The output of the above command should provide an HTCondor ClassAd that details the status of your cache.</p>
 <h2 id="registering-the-cache">Registering the Cache<a class="headerlink" href="#registering-the-cache" title="Permanent link">&para;</a></h2>
-<p>To be part of the OSG StashCache Federation, your <em>cache</em> must be
-<a href="../../../common/registration/">registered with the OSG</a>.  The service type is "XRootD cache server"</p>
+<p>To be part of the OSG StashCache Federation, your cache must be
+<a href="../../../common/registration/">registered with the OSG</a>.  The service type is <code>XRootD cache server</code>.</p>
+<p>The resource may also specify which VOs it will serve data from.
+To do this, add an <code>AllowedVOs</code> list, with each line specifying a VO whose StashCache data the resource is willing to cache.</p>
+<p>There are special values you can use in <code>AllowedVOs</code>:</p>
+<ul>
+<li><code>ANY_PUBLIC</code> indicates that the cache is willing to serve public data from any VO.</li>
+<li><code>ANY</code> indicates that the cache is willing to serve data from any VO,
+  both public and non-public.
+  <code>ANY</code> implies <code>ANY_PUBLIC</code>.</li>
+</ul>
+<p>There are extra requirements for serving non-public data:</p>
+<ul>
+<li>In addition to the cache allowing a VO in the <code>AllowedVOs</code> list,
+  that VO must also allow the cache in its <code>AllowedCaches</code> list.
+  See the page on <a href="../../../data/stashcache/vo-data">getting your VO's data into StashCache</a>.</li>
+<li>There must be an authenticated XRootD instance on the cache server.</li>
+<li>There must be a <code>DN</code> attribute in the resource
+  with the DN of the cert used by the authenticated XRootD instance.</li>
+</ul>
+<p>This is an example of a cache server that serves all public data:</p>
+<div class="codehilite"><pre><span></span>  <span class="nt">MY_STASHCACHE_CACHE</span><span class="p">:</span>
+    <span class="nt">FQDN</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-cache.example.net</span>
+    <span class="nt">Service</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">XRootD cache server</span>
+      <span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">StashCache cache server</span>
+    <span class="nt">AllowedVOs</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ANY_PUBLIC</span>
+</pre></div>
+
+
+<p>This is an example of a cache server that only serves authenticated data from the OSG VO:</p>
+<div class="codehilite"><pre><span></span>  <span class="nt">MY_AUTH_STASHCACHE_CACHE</span><span class="p">:</span>
+    <span class="nt">FQDN</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-auth-cache.example.net</span>
+    <span class="nt">Service</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">XRootD cache server</span>
+      <span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">StashCache cache server</span>
+    <span class="nt">AllowedVOs</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">OSG</span>
+    <span class="nt">DN</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-auth-cache.example.net</span>
+</pre></div>
+
+
 <p>Once the cache has been registered, open a <a href="https://support.opensciencegrid.org">help ticket</a> with your cache name.  Mention in your ticket that you would like to "Finalize the cache registration."</p>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
-<p>To get assistance, please use the <a href="../../../common/help">this page</a> or contact directly <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.</p>
+<p>To get assistance, please use the <a href="../../../common/help">this page</a> or contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> directly.</p>
                 
                   
                 

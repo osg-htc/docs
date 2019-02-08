@@ -2141,10 +2141,26 @@ Run the following command:</p>
 <p>If successful, there should be a file at <code>/tmp/testfile</code> with the contents of the test file on your origin server.
 If unsuccessful, you can pass the <code>-d</code> flag to <code>stashcp</code> for debug info.</p>
 <h2 id="registering-the-origin">Registering the Origin<a class="headerlink" href="#registering-the-origin" title="Permanent link">&para;</a></h2>
-<p>To be part of the OSG StashCache Federation, your <em>cache</em> must be
-<a href="../../../common/registration/">registered with the OSG</a>.  The service type is "XRootD origin server"</p>
+<p>To be part of the OSG StashCache Federation, your origin must be
+<a href="../../../common/registration/">registered with the OSG</a>.  The service type is <code>XRootD origin server</code>.</p>
+<p>The resource must also specify which VOs it will serve data from.
+To do this, add an <code>AllowedVOs</code> list, with each line specifying a VO whose StashCache data the resource is willing to host.
+For example:</p>
+<div class="codehilite"><pre><span></span>  <span class="nt">MY_STASHCACHE_ORIGIN</span><span class="p">:</span>
+    <span class="nt">Service</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">XRootD origin server</span>
+      <span class="l l-Scalar l-Scalar-Plain">Description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">StashCache origin server</span>
+    <span class="nt">AllowedVOs</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">GLOW</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">OSG</span>
+</pre></div>
+
+
+<p>You can use the special value <code>ANY</code> to indicate that the origin will serve data from any VO that puts data on it.</p>
+<p>In addition to the origin allowing a VOs via the <code>AllowedVOs</code> list,
+that VO must also allow the origin in its <code>DataFederations/StashCache/AllowedOrigins</code> list.
+See the page on <a href="../../../data/stashcache/vo-data">getting your VO's data into StashCache</a>.</p>
 <h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
-<p>To get assistance, please use the <a href="../../../common/help">this page</a> or contact directly <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.</p>
+<p>To get assistance, please use the <a href="../../../common/help">this page</a> or contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#104;&#101;&#108;&#112;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a> directly.</p>
                 
                   
                 
