@@ -211,12 +211,52 @@ Where `hostname` is the string returned by the hostname command. The output of t
 
 Registering the Cache
 ---------------------
-To be part of the OSG StashCache Federation, your _cache_ must be
-[registered with the OSG](/common/registration.md).  The service type is "XRootD cache server"
+To be part of the OSG StashCache Federation, your cache must be
+[registered with the OSG](/common/registration.md).  The service type is `XRootD cache server`.
+
+The resource may also specify which VOs it will serve data from.
+To do this, add an `AllowedVOs` list, with each line specifying a VO whose StashCache data the resource is willing to cache.
+
+There are special values you can use in `AllowedVOs`:
+
+- `ANY_PUBLIC` indicates that the cache is willing to serve public data from any VO.
+- `ANY` indicates that the cache is willing to serve data from any VO,
+  both public and non-public.
+  `ANY` implies `ANY_PUBLIC`.
+
+There are extra requirements for serving non-public data:
+
+- In addition to the cache allowing a VO in the `AllowedVOs` list,
+  that VO must also allow the cache in its `AllowedCaches` list.
+  See the page on [getting your VO's data into StashCache](/data/stashcache/vo-data).
+- There must be an authenticated XRootD instance on the cache server.
+- There must be a `DN` attribute in the resource
+  with the DN of the cert used by the authenticated XRootD instance.
+
+This is an example of a cache server that serves all public data:
+```yaml
+  MY_STASHCACHE_CACHE:
+    FQDN: my-cache.example.net
+    Service: XRootD cache server
+      Description: StashCache cache server
+    AllowedVOs:
+      - ANY_PUBLIC
+```
+
+This is an example of a cache server that only serves authenticated data from the OSG VO:
+```yaml
+  MY_AUTH_STASHCACHE_CACHE:
+    FQDN: my-auth-cache.example.net
+    Service: XRootD cache server
+      Description: StashCache cache server
+    AllowedVOs:
+      - OSG
+    DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-auth-cache.example.net
+```
 
 Once the cache has been registered, open a [help ticket](https://support.opensciencegrid.org) with your cache name.  Mention in your ticket that you would like to "Finalize the cache registration."
 
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help) or contact directly <support@opensciencegrid.org>.
+To get assistance, please use the [this page](/common/help) or contact <help@opensciencegrid.org> directly.
