@@ -234,7 +234,7 @@ There are extra requirements for serving non-public data:
   with the DN of the cert used by the authenticated XRootD instance.
 
 This is an example of a cache server that serves all public data:
-```
+```yaml
   MY_STASHCACHE_CACHE:
     FQDN: my-cache.example.net
     Service: XRootD cache server
@@ -244,7 +244,7 @@ This is an example of a cache server that serves all public data:
 ```
 
 This is an example of a cache server that only serves authenticated data from the OSG VO:
-```
+```yaml
   MY_AUTH_STASHCACHE_CACHE:
     FQDN: my-auth-cache.example.net
     Service: XRootD cache server

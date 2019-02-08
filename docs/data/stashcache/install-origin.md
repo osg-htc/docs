@@ -182,7 +182,7 @@ To be part of the OSG StashCache Federation, your origin must be
 The resource must also specify which VOs it will serve data from.
 To do this, add an `AllowedVOs` list, with each line specifying a VO whose StashCache data the resource is willing to host.
 For example:
-```
+```yaml
   MY_STASHCACHE_ORIGIN:
     Service: XRootD origin server
       Description: StashCache origin server
