@@ -6,6 +6,10 @@ This document is intended for system administrators who wish to
 install this client to have access to files distributed by CVMFS
 servers via HTTP.
 
+By installing CVMFS, you will be able to support a much larger range of jobs on your site.
+OASIS uses CVMFS to provides easy access to worker node software, CA certificates, CRLs, etc. via CVMFS.
+It also provides easy access to StashCache resources.
+
 !!! note "Applicable versions"
     The applicable software versions for this document are OSG Version >= 3.4.3.
     The version of CVMFS installed should be >= 2.4.1
