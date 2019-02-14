@@ -15,9 +15,6 @@ Available tags include:
 * `3.4`: The OSG 3.4 release series on top of the most recent supported OS.  As of June 2017, this is RHEL7.
 * `3.4-el7`: The OSG 3.4 release series on top of a RHEL7 environment.
 * `3.4-el6`: The OSG 3.4 release series on top of a RHEL6 environment.
-* `3.3`: The OSG 3.3 release series on top of the most recent supported OS.  As of June 2017, this is RHEL7.
-* `3.3-el7`: The OSG 3.3 release series on top of a RHEL7 environment.
-* `3.3-el6`: The OSG 3.3 release series on top of a RHEL6 environment.
 
 Building Upon the Container
 ---------------------------
