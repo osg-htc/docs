@@ -6,9 +6,8 @@ network to cache data frequently used on the OSG, reducing data transfer over th
 decreasing access latency.
 
 !!! note
-    The _cache_ service must be registered with the OSG if it is to be used by clients. You may start 
-    registration procedure prior to finishing the installation by [using this link](#registering-the-cache) 
-    along with the basic information like:
+    The cache service _must_ be registered with the OSG before installation.
+    [Use this link](#registering-the-cache) along with the basic information like:
 
     * Resource name and hostname.
     * Administrative and security contact.
@@ -40,55 +39,33 @@ As with all OSG software installations, there are some one-time steps to prepare
 Installing the Cache
 --------------------
 
-The StashCache daemon consists of an XRootD server and a service for collecting and reporting
-statistics about the cache. To simplify installation, OSG provides convenience RPMs that install all required
-software with a single command:
+The StashCache software consists of an XRootD server with special configuration and supporting services.
+To simplify installation, OSG provides convenience RPMs that install all required
+packages with a single command:
 
     :::console
-    root@host # yum install --enablerepo=osg-testing stashcache-cache-server
-
-!!! note
-    If installing authenticated StashCache Cache server, you need an additional package:
-
-        :::console
-        root@host # yum install --enablerepo=osg-testing stashcache-cache-server-auth
+    root@host # yum install --enablerepo=osg-testing stash-cache
 
 
 Configuring the Cache
 ---------------------
 
 First, you must create a "cache directory", which will be used to store downloaded files.
-By default this is `/stash`.
+By default this is `/mnt/stash`.
 We recommend using a separate file system for the cache directory,
 with at least 1 TB of storage available.
 
 !!! note
     The cache directory must be writable by the `xrootd:xrootd` user and group.
 
-The `stashcache-cache-server` provides a default configuration file,
-`/etc/xrootd/xrootd-stashcache-cache-server.cfg`, which must be customized for your cache.
+The `stash-cache` package provides default configuration files in `/etc/xrootd/xrootd-stash-cache.cfg` and `/etc/xrootd/config.d/`.
+Administrators may provide additional configuration by placing files in `/etc/xrootd/config.d/1*.cfg` (for files that need to be processed BEFORE the OSG configuration) or `/etc/xrootd/config.d/9*.cfg` (for files that need to be processed AFTER the OSG configuration).
 
-The most common lines to customize are:
+You _must_ configure every variable in `/etc/xrootd/10-cache-site-local.cfg`.
 
-* `all.sitename YOUR_SITE_NAME`: The registered OSG resource name.  This **must** be changed.
-* `set cachedir = /stash`: The location of the cache directory for this service.
-* `*.trace`, `pss.setopt`: These control the logging verbosity of the cache.  The defaults are relatively high
-  in order to aid in debugging.  These lines can be commented out to reduce logging; however, if issues occur,
-  OSG support may ask you to re-enable them.
-
-The Authfile specifies which files and directories can be read,
-relative to the cache directory (`cachedir` in the main config).
-
-An example:
-
-```console
-root@host # cat /etc/xrootd/Authfile-noauth
-u * /user/ligo -rl / rl
-```
-
-This permits all users (`u *`) to read all directories (`/ rl`) _except_ those under `/user/ligo` (`/user/ligo -rl`);
-the `/user/ligo` directory should only be readable in authenticated setups.
-For more details, see the [XRootD security documentation](http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606598).
+The mandatory variables to configure are:
+* `set cachedir = /mnt/stash`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
+* `set sitename = YOUR_SITE_NAME`: the resource name registered with the OSG.
 
 
 Configuring the Authenticated Cache (Optional)
@@ -140,40 +117,38 @@ Configuring Optional Features
 
 ### Adjust disk utilization
 
-To adjust the disk utilization of your StashCache cache, modify the values of `pfc.diskusage` in `/etc/xrootd/xrootd-stashcache-cache-server.cfg`:
+To adjust the disk utilization of your StashCache cache, create or edit a file named `/etc/xrootd/config.d/90-local.cfg`
+and set the values of `pfc.diskusage`.
 
 ```
-pfc.diskusage 0.98 0.99
+pfc.diskusage 0.90 0.95
 ```
 
-The first value and second values correspond to the low and high usage watermarks, respectively, in fractions. When the high watermark is reached, the XRootD service will automatically purge cache objects down to the low watermark.
+The two values correspond to the low and high usage water marks, respectively.
+When usage goes above the high water mark,
+the XRootD service will delete cached files until usage goes below the low water mark.
+
 
 ### Enable remote debugging
 
-This feature enables remote debugging via the `digFS` read-only file system, it's optional line in the config file that was created when configuring the cache:
+XRootD provides remote debugging via a read-only file system named digFS.
+This feature is disabled by default, but you can enable it when you need assistance with your server.
 
-```
-xrootd.diglib * /etc/xrootd/digauth.cf
-```
+To enable remote debugging, edit `/etc/xrootd/digauth.cfg` and specify the authorizations for reading digFS.
 
-where `/etc/xrootd/digauth.cf` may have following content:
+See [the XRootD manual](http://xrootd.org/doc/dev48/xrd_config.htm#_Toc496911334) for the syntax.
 
-```
-all allow host h=abc.org
-all allow host h=*.xyz.edu
-```
 
-## Managing StashCache and associated services
+Managing StashCache and associated services
+-------------------------------------------
 
-StashCache daemons are managed by systemd units.  First ensure that your cache directory (default `/stash`) is
-mounted, then ensure you *enable* (set to start at boot) and *start* the StashCache-related services.
-
+These services must be managed by `systemctl` and may start additional services as dependencies.
 As a reminder, here are common service commands (all run as `root`) for EL7:
 
 | To...                                   | On EL7, run the command...         |
 | :-------------------------------------- | :--------------------------------- |
 | Start a service                         | `systemctl start <SERVICE-NAME>`   |
-| Stop a  service                         | `systemctl stop <SERVICE-NAME>`    |
+| Stop a service                          | `systemctl stop <SERVICE-NAME>`    |
 | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
 | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 
