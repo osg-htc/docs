@@ -89,28 +89,6 @@ Do the following:
         :::console
         root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
 
-
-### Add Authfile for authenticated cache
-
-The Authfile for the authenticated cache is located in `/etc/xrootd/Authfile-auth`.
-This is a separate file from the non-authenticated cache Authfile.
-
-Since the authenticated cache runs alongside the unauthenticated cache,
-care must be taken to avoid conflicts between the two.
-In particular, paths that are accessible via the authenticated cache should not be accessible via the unauthenticated cache,
-and vice versa.
-
-As an example:
-
-```console
-root@host # cat /etc/xrootd/Authfile-auth
-g /osg/ligo /user/ligo rl
-u ligo /user/ligo rl
-```
-
-This permits users in the VOMS group `/osg/ligo` and users mapped to `ligo` to read and list anything under
-`/user/ligo`.
-
 When ready with configuration, you may [start](#managing-stashcache-and-associated-services) your xrootd@stash-cache-auth service.
 
 Configuring Optional Features
