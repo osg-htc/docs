@@ -5,14 +5,9 @@ This document describes how to install a StashCache cache service.  This service
 network to cache data frequently used on the OSG, reducing data transfer over the wide-area network and
 decreasing access latency.
 
-!!! note
-    The cache service _must_ be registered with the OSG before installation.
-    [Use this link](#registering-the-cache) along with the basic information like:
 
-    * Resource name and hostname.
-    * Administrative and security contact.
-
-## Installation prerequisites for the Cache
+Installation Prerequisites for the Cache
+----------------------------------------
 
 Before starting the installation process, consider the following mandatory points:
 
@@ -35,6 +30,71 @@ As with all OSG software installations, there are some one-time steps to prepare
 * Obtain root access to the host
 * Prepare [the required Yum repositories](/common/yum.md)
 * Install [CA certificates](/common/ca.md)
+
+
+Registering the Cache
+---------------------
+
+To be part of the OSG StashCache Federation, your cache must be registered with the OSG.
+You will need basic information like the resource name and hostname,
+and the administrative and security contacts.
+
+
+### Initial registration
+
+Initial registration is documented [here](/common/registration.md).
+The service type is `XRootD cache server`.
+
+!!! note
+    This step must be completed before installation.
+
+The resource may also specify which VOs it will serve data from.
+To do this, add an `AllowedVOs` list, with each line specifying a VO whose StashCache data the resource is willing to cache.
+
+There are special values you can use in `AllowedVOs`:
+
+- `ANY_PUBLIC` indicates that the cache is willing to serve public data from any VO.
+- `ANY` indicates that the cache is willing to serve data from any VO,
+  both public and non-public.
+  `ANY` implies `ANY_PUBLIC`.
+
+There are extra requirements for serving non-public data:
+
+- In addition to the cache allowing a VO in the `AllowedVOs` list,
+  that VO must also allow the cache in its `AllowedCaches` list.
+  See the page on [getting your VO's data into StashCache](/data/stashcache/vo-data).
+- There must be an authenticated XRootD instance on the cache server.
+- There must be a `DN` attribute in the resource
+  with the DN of the cert used by the authenticated XRootD instance.
+
+This is an example of a cache server that serves all public data:
+```yaml
+  MY_STASHCACHE_CACHE:
+    FQDN: my-cache.example.net
+    Service: XRootD cache server
+      Description: StashCache cache server
+    AllowedVOs:
+      - ANY_PUBLIC
+```
+
+This is an example of a cache server that only serves authenticated data from the OSG VO:
+```yaml
+  MY_AUTH_STASHCACHE_CACHE:
+    FQDN: my-auth-cache.example.net
+    Service: XRootD cache server
+      Description: StashCache cache server
+    AllowedVOs:
+      - OSG
+    DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-auth-cache.example.net
+```
+
+
+### Finalizing registration
+
+Once initial registration is complete, you may start the installation process.
+In the meantime, open a [help ticket](https://support.opensciencegrid.org) with your cache name.
+Mention in your ticket that you would like to "Finalize the cache registration."
+
 
 Installing the Cache
 --------------------
@@ -166,52 +226,6 @@ user@host $ condor_status -any -l -const "Name==\"xrootd@`hostname`\""
 
 Where `hostname` is the string returned by the hostname command. The output of the above command should provide an HTCondor ClassAd that details the status of your cache.
 
-Registering the Cache
----------------------
-To be part of the OSG StashCache Federation, your cache must be
-[registered with the OSG](/common/registration.md).  The service type is `XRootD cache server`.
-
-The resource may also specify which VOs it will serve data from.
-To do this, add an `AllowedVOs` list, with each line specifying a VO whose StashCache data the resource is willing to cache.
-
-There are special values you can use in `AllowedVOs`:
-
-- `ANY_PUBLIC` indicates that the cache is willing to serve public data from any VO.
-- `ANY` indicates that the cache is willing to serve data from any VO,
-  both public and non-public.
-  `ANY` implies `ANY_PUBLIC`.
-
-There are extra requirements for serving non-public data:
-
-- In addition to the cache allowing a VO in the `AllowedVOs` list,
-  that VO must also allow the cache in its `AllowedCaches` list.
-  See the page on [getting your VO's data into StashCache](/data/stashcache/vo-data).
-- There must be an authenticated XRootD instance on the cache server.
-- There must be a `DN` attribute in the resource
-  with the DN of the cert used by the authenticated XRootD instance.
-
-This is an example of a cache server that serves all public data:
-```yaml
-  MY_STASHCACHE_CACHE:
-    FQDN: my-cache.example.net
-    Service: XRootD cache server
-      Description: StashCache cache server
-    AllowedVOs:
-      - ANY_PUBLIC
-```
-
-This is an example of a cache server that only serves authenticated data from the OSG VO:
-```yaml
-  MY_AUTH_STASHCACHE_CACHE:
-    FQDN: my-auth-cache.example.net
-    Service: XRootD cache server
-      Description: StashCache cache server
-    AllowedVOs:
-      - OSG
-    DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-auth-cache.example.net
-```
-
-Once the cache has been registered, open a [help ticket](https://support.opensciencegrid.org) with your cache name.  Mention in your ticket that you would like to "Finalize the cache registration."
 
 Getting Help
 ------------
