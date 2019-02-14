@@ -1,7 +1,7 @@
 # Install CVMFS
 
 Here we describe how to install the
-[CVMFS](http://cernvm.cern.ch/portal/filesystem) (Cern-VM file system) client.
+[CVMFS](http://cernvm.cern.ch/portal/filesystem) (CernVM File System) client.
 This document is intended for system administrators who wish to
 install this client to have access to files distributed by CVMFS
 servers via HTTP.
@@ -13,7 +13,7 @@ servers via HTTP.
 Before Starting
 ---------------
 
-Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
+Before starting the installation process, consider the following points (consulting [the Reference section below](#references) as needed):
 
 -   **User IDs:** If it does not exist already, the installation will create the `cvmfs` Linux user
 -   **Group IDs:** If they do not exist already, the installation will create the Linux groups `cvmfs` and `fuse`
@@ -124,7 +124,7 @@ proxy is acceptable for small sites but discouraged for large sites
 because of the potential load that could be put upon globally shared
 servers.
 
-Set up the cache limit in `CVMFS_QUOTA_LIMIT` (in MegaBytes). The
+Set up the cache limit in `CVMFS_QUOTA_LIMIT` (in Megabytes). The
 recommended value for most applications is 20000 MB. This is the
 combined limit for all but the osgstorage.org repositories. This cache
 will be stored in `/var/lib/cvmfs` by default; to override the
@@ -140,7 +140,7 @@ it.
 
 !!! warning
     If you use SELinux and change `CVMFS_CACHE_BASE`, then the
-    new cache directory must be labelled with SELinux type
+    new cache directory must be labeled with SELinux type
     `cvmfs_cache_t`. This can be done by executing the following command:
 
         :::console
@@ -227,7 +227,7 @@ If you cannot resolve the problem, there are several ways to receive help:
 - For bug reporting and OSG-specific issues, see our [help procedure](../common/help)
 - For community support and best-effort software team support contact
    <osg-cvmfs@opensciencegrid.org>.
-- For general CERN VM FileSystem support contact <cernvm.support@cern.ch>.
+- For general CernVM File System support contact <cernvm.support@cern.ch>.
 
 ## References
 
@@ -243,8 +243,8 @@ This installation will create one user unless it already exists
 | `cvmfs` | CernVM-FS service account |
 
 The installation will also create a cvmfs group and default the cvmfs
-user to that group. In addition, if the fuse rpm is not for some
-reason already installed, installing cvmfs will also install fuse and
+user to that group. In addition, if the fuse RPM is not
+already installed, installing cvmfs will also install fuse and
 that will create another group:
 
 | Group   | Comment                   | Group members |
