@@ -94,7 +94,7 @@ in order to support application software repositories.
 This will allow a broader set of jobs to run on your cluster.
 
 
-Technical Setup
+Providing the OSG Worker Node client (HTCondor batch systems only)
 ---------------
 
 An OSG Hosted CE site needs to have access to the worker node client.
