@@ -103,11 +103,11 @@ users home directories, if this is on a shared filesystem.
 But for sites with an HTCondor batch system, often there is no shared filesystem set up.
 If it is easier for your site to install and maintain the worker node client than to set up a shared file system, you have the following options:
 
-1.  Install the [osg-wn-client rpm](/worker-node/install-wn)
+-   Install the [osg-wn-client rpm](/worker-node/install-wn)
 
-1.  Install the [osg-wn tarball](/worker-node/install-wn-tarball)
+-   Install the [osg-wn tarball](/worker-node/install-wn-tarball)
 
-1.  Install the worker node client from [OASIS](/worker-node/install-wn-oasis)
+-   Install the worker node client from [OASIS](/worker-node/install-wn-oasis)
 
 
 **Optional**: Providing Access to Application Software Using OASIS
