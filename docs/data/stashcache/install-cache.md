@@ -124,8 +124,9 @@ Administrators may provide additional configuration by placing files in `/etc/xr
 You _must_ configure every variable in `/etc/xrootd/10-cache-site-local.cfg`.
 
 The mandatory variables to configure are:
-* `set rootdir = /mnt/stash`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
-* `set sitename = YOUR_SITE_NAME`: the resource name registered with the OSG.
+
+- `set rootdir = /mnt/stash`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
+- `set sitename = YOUR_SITE_NAME`: the resource name registered with the OSG.
 
 When ready with configuration, you may [start](#managing-stashcache-and-associated-services) your xrootd@stash-cache service.
 
@@ -177,6 +178,9 @@ To enable remote debugging, edit `/etc/xrootd/digauth.cfg` and specify the autho
 
 See [the XRootD manual](http://xrootd.org/doc/dev48/xrd_config.htm#_Toc496911334) for the syntax.
 
+Remote debugging should only be enabled for as long as you need assistance.
+Once your problem has been resolved, turn it off.
+
 
 Managing StashCache and associated services
 -------------------------------------------
@@ -191,15 +195,17 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
 | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 
-### Public Cache Services
+### Public cache services
+
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
 | XRootD | `xrootd@stash-cache.service` | The xrootd daemon, which performs the data transfers |
 | Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 
-### Authenticated Cache Services
 
-_In addition_ to the public cache services, there are three systemd units specific to the authenticated cache.
+### Authenticated cache services
+
+In addition to the public cache services, there are three systemd units specific to the authenticated cache.
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
@@ -207,7 +213,9 @@ _In addition_ to the public cache services, there are three systemd units specif
 |  | `xrootd-renew-proxy.service` | Renew a proxy for authenticated downloads to the cache |
 |  | `xrootd-renew-proxy.timer` | Trigger daily proxy renewal |
 
-## Testing Functionality
+
+Testing Functionality
+---------------------
 
 The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as `curl`.
 
@@ -216,15 +224,15 @@ The cache server functions as a normal HTTP server and can interact with typical
 user@host $ curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/query1
 ```
 
-### Test Cache server reports to HTCondor collector
+### Test cache server reporting to the central collector
 
-To verify the cache is reporting to the central collector, run the following command:
+To verify the cache is reporting to the central collector, run the following command from the cache server:
 
 ```console
 user@host $ condor_status -any -l -const "Name==\"xrootd@`hostname`\""
 ```
 
-Where `hostname` is the string returned by the hostname command. The output of the above command should provide an HTCondor ClassAd that details the status of your cache.
+The output of the above command should provide an HTCondor ClassAd that details the status of your cache.
 
 
 Getting Help
