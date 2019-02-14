@@ -13,10 +13,10 @@ Hardware Recommendations
 ------------------------
 | Hardware               | Minimum | Recommended                         | Notes                                             |
 |:-----------------------|:--------|:----------------------|:--------------------------------------------------|
-|Core per pilot                   |  1      |8                      | Dependends on the supported users. The total core count on every node in the cluster must be divisible by core per pilot.|
-|Memory per core                 | 1024MB  | 2048MB                  | Memory per core times core per pilot needs to be less than the total memory on every node. Do not overcommit |
-|Scratch disk per core ([OSG_WN_TMP](/worker-node/using-wn/#osg_wn_tmp))| 2GB    | 10 GB                  | This can be overcommitted if a mix of different VO jobs is expected|
-|CVMFS [Cache](/worker-node/install-cvmfs/#before-starting) (optional)| 10 GB | 20 GB | This is a value per node and not per core |
+|Core per pilot                   |  1      |8                      | Dependends on the supported VOs. The total core count on every node in the cluster must be divisible by core per pilot.|
+|Memory per core                 | 1024MB  | 2048MB                  | Memory per core times core per pilot needs to be less than the total memory on every node. Do not overcommit. |
+|Scratch disk per core ([OSG_WN_TMP](/worker-node/using-wn/#osg_wn_tmp))| 2GB    | 10 GB                  | This can be overcommitted if a mix of different VO jobs is expected.|
+|CVMFS [Cache](/worker-node/install-cvmfs/#before-starting) (optional)| 10 GB | 20 GB | This is a value per node and not per core.|
 
 
 Common Software Available on Worker Nodes
