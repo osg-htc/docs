@@ -1,4 +1,3 @@
-
 Worker Node Overview
 ====================
 
@@ -9,6 +8,16 @@ This page describes how to initialize the environment of your job to correctly a
 The OSG provides no scientific software dependencies or software build tools on the worker node; you are expected to bring along all application-level dependencies yourself (preferred; most portable) or utilize CVMFS. Sites are not required to provide any specific tools (`gcc`, `lapack`, `blas`, etc.) beyond the ones in the OSG worker node client and the base OS.
 
 If you would like to test the minimal OS environment that jobs can expect, you can test out your scientific software in [the OSG Docker image](https://hub.docker.com/r/opensciencegrid/osg-wn/).
+
+Suggested Hardware Requirements on Worker Nodes
+-----------------------------------------------
+| Hardware               | Minimum | Recommended                         | Notes                                             |
+|:-----------------------|:--------|:----------------------|:--------------------------------------------------|
+|Core per pilot                   |  1      |8                      | Dependends on the supported users. The total core count on every node in the cluster must be divisible by core per pilot.|
+|Memory per core                 | 1024MB  | 2048MB                  | Memory per core times core per pilot should be less than the total memory on every node. Do not overcommit |
+|Scratch disk per core([OSG_WN_TMP](worker-node/using-wn/#osg_wn_tmp))| 2GB    | 10 GB                  | This can be overcommitted if a mix of different VO jobs is expected|
+|CVMFS [Cache](/worker-node/install-cvmfs/#before-starting) | 10 GB | 20 GB | This is a value per node and not per core |
+
 
 Common Software Available on Worker Nodes
 -----------------------------------------
@@ -47,7 +56,7 @@ Custom variables and those that aren't listed may be defined in the [Local Setti
 |:-----------------------|:------------------------------|:-----------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------|
 | `$OSG_GRID`            | `Storage`/`grid_dir`          | Location of additional environment variables.              | Pilots should source `$OSG_GRID/setup.sh` in order to guarantee the environment contains the worker node binaries in `$PATH`. |
 | `$OSG_SQUID_LOCATION`, | `Squid`/`location`            | Location of a HTTP caching proxy server                    | Utilize this service for downloading files via HTTP for cache-friendly workflows.                                             |
-| `$OSG_WN_TMP`          | `Storage`/`worker_node_temp`  | Temporary storage area in which your job(s) run            | Local to each worker node (recommended size: 10 GB/job). See [this section](#osg_wn_tmp) below for details.                   |
+| `$OSG_WN_TMP`          | `Storage`/`worker_node_temp`  | Temporary storage area in which your job(s) run            | Local to each worker node. See [this section](#osg_wn_tmp) below for details.                   |
 | `$X509_CERT_DIR`       |                               | Location of the CA certificates                            | If not defined, defaults to `/etc/grid-security/certificates`.                                                                |
 | `$_CONDOR_SCRATCH_DIR` |                               | Suggested temporary storage for glideinWMS-based payloads. | Users should prefer this environment variable over `$OSG_WN_TMP` if running inside glideinWMS.                                |
 
