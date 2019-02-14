@@ -2009,7 +2009,7 @@
                 
                 <h1 id="install-cvmfs">Install CVMFS<a class="headerlink" href="#install-cvmfs" title="Permanent link">&para;</a></h1>
 <p>Here we describe how to install the
-<a href="http://cernvm.cern.ch/portal/filesystem">CVMFS</a> (Cern-VM file system) client.
+<a href="http://cernvm.cern.ch/portal/filesystem">CVMFS</a> (CernVM File System) client.
 This document is intended for system administrators who wish to
 install this client to have access to files distributed by CVMFS
 servers via HTTP.</p>
@@ -2019,7 +2019,7 @@ servers via HTTP.</p>
 The version of CVMFS installed should be &gt;= 2.4.1</p>
 </div>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
-<p>Before starting the installation process, consider the following points (consulting <a href="#reference">the Reference section below</a> as needed):</p>
+<p>Before starting the installation process, consider the following points (consulting <a href="#references">the Reference section below</a> as needed):</p>
 <ul>
 <li><strong>User IDs:</strong> If it does not exist already, the installation will create the <code>cvmfs</code> Linux user</li>
 <li><strong>Group IDs:</strong> If they do not exist already, the installation will create the Linux groups <code>cvmfs</code> and <code>fuse</code></li>
@@ -2145,7 +2145,7 @@ directly connecting to servers if all other proxies fail. A DIRECT
 proxy is acceptable for small sites but discouraged for large sites
 because of the potential load that could be put upon globally shared
 servers.</p>
-<p>Set up the cache limit in <code>CVMFS_QUOTA_LIMIT</code> (in MegaBytes). The
+<p>Set up the cache limit in <code>CVMFS_QUOTA_LIMIT</code> (in Megabytes). The
 recommended value for most applications is 20000 MB. This is the
 combined limit for all but the osgstorage.org repositories. This cache
 will be stored in <code>/var/lib/cvmfs</code> by default; to override the
@@ -2161,7 +2161,7 @@ it.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>If you use SELinux and change <code>CVMFS_CACHE_BASE</code>, then the
-new cache directory must be labelled with SELinux type
+new cache directory must be labeled with SELinux type
 <code>cvmfs_cache_t</code>. This can be done by executing the following command:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> chcon -R -t cvmfs_cache_t <span style="color:red"><span class="nv">$CVMFS_CACHE_BASE</span></span>
 </pre></div>
@@ -2241,7 +2241,7 @@ the repositories are accessed; there are no system services to start.</p>
 <li>For bug reporting and OSG-specific issues, see our <a href="../../common/help">help procedure</a></li>
 <li>For community support and best-effort software team support contact
    <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#115;&#103;&#45;&#99;&#118;&#109;&#102;&#115;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;">&#111;&#115;&#103;&#45;&#99;&#118;&#109;&#102;&#115;&#64;&#111;&#112;&#101;&#110;&#115;&#99;&#105;&#101;&#110;&#99;&#101;&#103;&#114;&#105;&#100;&#46;&#111;&#114;&#103;</a>.</li>
-<li>For general CERN VM FileSystem support contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#101;&#114;&#110;&#118;&#109;&#46;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#99;&#101;&#114;&#110;&#46;&#99;&#104;">&#99;&#101;&#114;&#110;&#118;&#109;&#46;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#99;&#101;&#114;&#110;&#46;&#99;&#104;</a>.</li>
+<li>For general CernVM File System support contact <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#101;&#114;&#110;&#118;&#109;&#46;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#99;&#101;&#114;&#110;&#46;&#99;&#104;">&#99;&#101;&#114;&#110;&#118;&#109;&#46;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#99;&#101;&#114;&#110;&#46;&#99;&#104;</a>.</li>
 </ul>
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2265,8 +2265,8 @@ the repositories are accessed; there are no system services to start.</p>
 </tbody>
 </table>
 <p>The installation will also create a cvmfs group and default the cvmfs
-user to that group. In addition, if the fuse rpm is not for some
-reason already installed, installing cvmfs will also install fuse and
+user to that group. In addition, if the fuse RPM is not
+already installed, installing cvmfs will also install fuse and
 that will create another group:</p>
 <table>
 <thead>
