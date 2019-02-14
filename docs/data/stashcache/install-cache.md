@@ -9,7 +9,7 @@ decreasing access latency.
 Installation Prerequisites for the Cache
 ----------------------------------------
 
-Before starting the installation process, consider the following mandatory points:
+Before starting the installation process, consider the following requirements:
 
 * __Operating system:__ A RHEL 7 or compatible operating systems.
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and
