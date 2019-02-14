@@ -67,6 +67,7 @@ The mandatory variables to configure are:
 * `set cachedir = /mnt/stash`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
 * `set sitename = YOUR_SITE_NAME`: the resource name registered with the OSG.
 
+When ready with configuration, you may [start](#managing-stashcache-and-associated-services) your xrootd@stash-cache service.
 
 Configuring the Authenticated Cache (Optional)
 ----------------------------------------------
@@ -110,7 +111,7 @@ u ligo /user/ligo rl
 This permits users in the VOMS group `/osg/ligo` and users mapped to `ligo` to read and list anything under
 `/user/ligo`.
 
-When ready with configuration, you may [start](#managing-stashcache-and-associated-services) your Cache server.
+When ready with configuration, you may [start](#managing-stashcache-and-associated-services) your xrootd@stash-cache-auth service.
 
 Configuring Optional Features
 -----------------------------
