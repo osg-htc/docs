@@ -101,8 +101,11 @@ An OSG Hosted CE site needs to have access to the worker node client.
 On a Hosted CE with a non-HTCondor batch system, this is often done by unpacking the worker node client tarball into the
 users home directories, if this is on a shared filesystem.
 But for sites with an HTCondor batch system, often there is no shared filesystem set up.
-In that case, the site can either set up a shared filesystem, or install the OSG worker node client.
-This can be obtained from the osg-wn-client rpm, the osg-wn tarball, or used directly from OASIS.
+In that case, the site can either set up a shared filesystem, or
+[install the OSG worker node client](/worker-node/install-wn).
+This can be obtained from the [osg-wn-client rpm](/worker-node/install-wn),
+the [osg-wn tarball](/worker-node/install-wn-tarball),
+or installed directly from [OASIS](/worker-node/install-wn-oasis).
 
 
 **Optional**: Providing Access to Application Software Using OASIS
