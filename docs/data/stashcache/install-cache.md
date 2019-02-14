@@ -124,7 +124,7 @@ Administrators may provide additional configuration by placing files in `/etc/xr
 You _must_ configure every variable in `/etc/xrootd/10-cache-site-local.cfg`.
 
 The mandatory variables to configure are:
-* `set cachedir = /mnt/stash`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
+* `set rootdir = /mnt/stash`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
 * `set sitename = YOUR_SITE_NAME`: the resource name registered with the OSG.
 
 When ready with configuration, you may [start](#managing-stashcache-and-associated-services) your xrootd@stash-cache service.
