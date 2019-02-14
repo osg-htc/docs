@@ -176,11 +176,27 @@ If unsuccessful, you can pass the `-d` flag to `stashcp` for debug info.
 
 Registering the Origin
 ----------------------
-To be part of the OSG StashCache Federation, your _cache_ must be
-[registered with the OSG](/common/registration.md).  The service type is "XRootD origin server"
+To be part of the OSG StashCache Federation, your origin must be
+[registered with the OSG](/common/registration.md).  The service type is `XRootD origin server`.
 
+The resource must also specify which VOs it will serve data from.
+To do this, add an `AllowedVOs` list, with each line specifying a VO whose StashCache data the resource is willing to host.
+For example:
+```yaml
+  MY_STASHCACHE_ORIGIN:
+    Service: XRootD origin server
+      Description: StashCache origin server
+    AllowedVOs:
+      - GLOW
+      - OSG
+```
+You can use the special value `ANY` to indicate that the origin will serve data from any VO that puts data on it.
+
+In addition to the origin allowing a VOs via the `AllowedVOs` list,
+that VO must also allow the origin in its `DataFederations/StashCache/AllowedOrigins` list.
+See the page on [getting your VO's data into StashCache](/data/stashcache/vo-data).
 
 Getting Help
 ------------
 
-To get assistance, please use the [this page](/common/help) or contact directly <support@opensciencegrid.org>.
+To get assistance, please use the [this page](/common/help) or contact <help@opensciencegrid.org> directly.
