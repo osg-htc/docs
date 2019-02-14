@@ -393,6 +393,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#hardware-recommendations" title="Hardware Recommendations" class="md-nav__link">
+    Hardware Recommendations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#common-software-available-on-worker-nodes" title="Common Software Available on Worker Nodes" class="md-nav__link">
     Common Software Available on Worker Nodes
   </a>
@@ -1825,6 +1832,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#hardware-recommendations" title="Hardware Recommendations" class="md-nav__link">
+    Hardware Recommendations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#common-software-available-on-worker-nodes" title="Common Software Available on Worker Nodes" class="md-nav__link">
     Common Software Available on Worker Nodes
   </a>
@@ -1888,6 +1902,43 @@
 <p>This page describes how to initialize the environment of your job to correctly access the execution and data areas from the worker node.</p>
 <p>The OSG provides no scientific software dependencies or software build tools on the worker node; you are expected to bring along all application-level dependencies yourself (preferred; most portable) or utilize CVMFS. Sites are not required to provide any specific tools (<code>gcc</code>, <code>lapack</code>, <code>blas</code>, etc.) beyond the ones in the OSG worker node client and the base OS.</p>
 <p>If you would like to test the minimal OS environment that jobs can expect, you can test out your scientific software in <a href="https://hub.docker.com/r/opensciencegrid/osg-wn/">the OSG Docker image</a>.</p>
+<h2 id="hardware-recommendations">Hardware Recommendations<a class="headerlink" href="#hardware-recommendations" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th align="left">Hardware</th>
+<th align="left">Minimum</th>
+<th align="left">Recommended</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Core per pilot</td>
+<td align="left">1</td>
+<td align="left">8</td>
+<td align="left">Depends on the supported VOs. The total core count on every node in the cluster must be divisible by core per pilot.</td>
+</tr>
+<tr>
+<td align="left">Memory per core</td>
+<td align="left">1024MB</td>
+<td align="left">2048MB</td>
+<td align="left">Memory per core times core per pilot needs to be less than the total memory on every node. Do not overcommit.</td>
+</tr>
+<tr>
+<td align="left">Scratch disk per core (<a href="#osg_wn_tmp">OSG_WN_TMP</a>)</td>
+<td align="left">2GB</td>
+<td align="left">10 GB</td>
+<td align="left">This can be overcommitted if a mix of different VO jobs is expected.</td>
+</tr>
+<tr>
+<td align="left">CVMFS <a href="../../worker-node/install-cvmfs/#before-starting">Cache</a> (optional)</td>
+<td align="left">10 GB</td>
+<td align="left">20 GB</td>
+<td align="left">This is a value per node and not per core.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="common-software-available-on-worker-nodes">Common Software Available on Worker Nodes<a class="headerlink" href="#common-software-available-on-worker-nodes" title="Permanent link">&para;</a></h2>
 <p>The OSG worker node environment contains the following software:</p>
 <ul>
@@ -1949,7 +2000,7 @@ Custom variables and those that aren't listed may be defined in the <a href="../
 <td align="left"><code>$OSG_WN_TMP</code></td>
 <td align="left"><code>Storage</code>/<code>worker_node_temp</code></td>
 <td align="left">Temporary storage area in which your job(s) run</td>
-<td align="left">Local to each worker node (recommended size: 10 GB/job). See <a href="#osg_wn_tmp">this section</a> below for details.</td>
+<td align="left">Local to each worker node. See <a href="#osg_wn_tmp">this section</a> below for details.</td>
 </tr>
 <tr>
 <td align="left"><code>$X509_CERT_DIR</code></td>
