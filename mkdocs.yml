@@ -26,6 +26,7 @@ pages:
   - 'Install from OASIS': 'worker-node/install-wn-oasis.md'
   - 'Install CVMFS': 'worker-node/install-cvmfs.md'
   - 'Install Singularity': 'worker-node/install-singularity.md'
+  - 'Using WN Containers': 'worker-node/using-wn-containers.md'
 - Data:
   - HTTP & CVMFS:
     - 'Install Squid HTTP Cache': 'data/frontier-squid.md'
