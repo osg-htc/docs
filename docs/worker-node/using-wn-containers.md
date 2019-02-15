@@ -2,7 +2,7 @@
 Using the Worker Node Containers
 ================================
 
-The OSG worker node containers contain the suggested base environment for worker nodes.  They can be used as a base image to build containers, run jobs within, or to perform testing.
+The OSG worker node containers contain the suggested base environment for worker nodes.  They can be used as a base image to build containers or to perform testing.
 
 The containers are available on [Docker Hub](https://hub.docker.com/r/opensciencegrid/osg-wn/).
 
@@ -32,11 +32,5 @@ Perform Testing
 You may perform testing from within the OSG worker node envionment by running the command:
 
     root@host # docker run -ti --rm opensciencegrid/osg-wn:latest /bin/bash
-
-
-Running Jobs Within Container
------------------------------
-
-Running jobs within a container requires special configuration of the scheduler.  For example, in HTCondor, you may configure to run each job within a docker container using the [Docker universe](http://research.cs.wisc.edu/htcondor/manual/v8.8/DockerUniverseApplications.html#x24-1260002.12).
 
 
