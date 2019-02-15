@@ -68,14 +68,12 @@ by placing files in `/etc/xrootd/config.d` of the form `/etc/xrootd/config.d/1*.
 be processed BEFORE the OSG configuration) or `/etc/xrootd/config.d/9*.cfg` (for directives that are processed
 AFTER the OSG configuration).
 
-All _mandatory_ configuration that the admin must make is in `/etc/xrootd/config.d/10-origin-site-local.cfg`; EVERY
-directive there must be configured.
+You _must_ configure every variable in `/etc/xrootd/10-common-site-local.cfg` and `/etc/xrootd/10-origin-site-local.cfg`.
 
-The three mandatory directives that must be customized are:
+The mandatory variables to configure in `10-common-site-local.cfg` are:
 
-* `origindir`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
-* `originexport`: the file within the `origindir` to export.  This MUST be in your supported VO's registered namespace.
-* `sitename`: the resource name registered with OSG.
+* `set rootdir = /mnt/stash`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
+* `set sitename = YOUR_SITE_NAME`: the resource name registered with OSG.
 
 For example, if the HCC VO would like to set up an origin server exporting from the mountpoint `/mnt/stash`,
 but HCC's registered namespace is `/hcc`, then the following would be set:
