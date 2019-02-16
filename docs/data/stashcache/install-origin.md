@@ -75,13 +75,21 @@ The mandatory variables to configure in `10-common-site-local.cfg` are:
 * `set rootdir = /mnt/stash`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
 * `set sitename = YOUR_SITE_NAME`: the resource name registered with OSG.
 
+The mandatory variable to configure in `10-origin-site-local.cfg` is:
+* `set originexport = /VO`: the directory relative to `rootdir` that is the top of the exported namespace
+  for the origin services
+
 For example, if the HCC VO would like to set up an origin server exporting from the mountpoint `/mnt/stash`,
-but HCC's registered namespace is `/hcc`, then the following would be set:
+and HCC's registered namespace is `/hcc`, then the following would be set in `10-common-site-local.cfg`:
 
 ```
-set origindir = /mnt/stash
-set originexport = /hcc
+set rootdir = /mnt/stash
 set sitename = HCC_STASH_ORIGIN
+```
+
+And the following would be set in `10-origin-site-local.cfg`:
+```
+set originexport = /hcc
 ```
 
 With this configuration, the data under `/mnt/stash/hcc/bio/datasets` would be available under the StashCache path
