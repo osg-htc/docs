@@ -44,7 +44,7 @@ If you are using OpenSSL 1.1, you may notice minor formatting differences.
 Requesting InCommon IGTF Host Certificates
 ------------------------------------------
 
-Many institution in the United States already subscribe to InCommon and offer certificate services.
+Many institutions in the United States already subscribe to InCommon and offer certificate services.
 If your institution is in the list of [InCommon subscribers](https://www.incommon.org/certificates/subscribers.html),
 continue with the instructions below.
 If your institution is not in the list, Let's Encrypt certificates do not meet your needs, and you do not have access to
@@ -222,7 +222,7 @@ on a host.
 This practice has become less popular as sites have separated SSL-requiring services to their own hosts.
 
 In the case where your host is only running a single service that requires a service certificate, we recommend using
-your host certificate as your service certificate.
+your [host certificate](#host-certificates) as your service certificate.
 Ensure that the ownership of the host certificate and key are appropriate for the service you are running.
 
 If you are running multiple services that require host certificates, we recommend requesting a certificate whose

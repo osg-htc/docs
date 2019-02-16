@@ -15,7 +15,6 @@ If you have needs beyond delegating all incoming jobs to your batch system as th
 Quirks and Pitfalls
 -------------------
 
--   The JobRouter matches jobs to routes in a round-robin fashion (for HTCondor versions < 8.7.1). This means that if a job can match to multiple routes, it can be routed by any of them! So when writing job routes, make sure that they are exclusive to each other and that your jobs can only match to a single route.
 -   If a value is set in [JOB\_ROUTER\_DEFAULTS](#job_router_defaults) with `eval_set_<variable>`, override it by using `eval_set_<variable>` in the `JOB_ROUTER_ENTRIES`. Do this at your own risk as it may cause the CE to break.
 -   Make sure to run `condor_ce_reconfig` after changing your routes, otherwise they will not take effect.
 -   Before the last square bracket, make sure all lines end in a line continuation character (backslash). You can inspect the syntax of your routes with `condor_ce_config_val JOB_ROUTER_ENTRIES` to see if HTCondor-CE has ingested them properly.
@@ -43,6 +42,34 @@ Each job route’s [ClassAd](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_
 
 !!! warning
     Do **not** set the `JOB_ROUTER_DEFAULTS` configuration variable yourself. This will cause the CE to stop functioning.
+
+How Jobs Match to Job Routes
+----------------------------
+
+The job router considers jobs in the queue ([condor_ce_q](/compute-element/troubleshoot-htcondor-ce#condor_ce_q)) that
+meet the following constraints:
+
+- The job has not already been considered by the job router
+- The job is associated with an unexpired x509 proxy
+- The job's universe is standard or vanilla
+
+If the job meets the above constraints, then the job's ClassAd is compared against each
+[route's requirements](/compute-element/job-router-recipes/#filtering-jobs-based-on).
+If the job only meets one route's requirements, the job is matched to that route.
+If the job meets the requirements of multiple routes,  the route that is chosen depends on your version of HTCondor
+(`condor_version`):
+
+| If your version of HTCondor is... | Then the route is chosen by...                                                                                               |
+|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| < 8.7.1                           | **Round-robin** between all matching routes. In this case, we recommend making each route's requirements mutually exclusive. |
+| >= 8.7.1                          | **First matching route** where routes are considered in the same order that they are configured                              |
+
+If you're using HTCondor >= 8.7.1 and would like to use round-robin matching, add the following text to a file in
+`/etc/condor-ce/config.d/`:
+
+```
+JOB_ROUTER_ROUND_ROBIN_SELECTION = True
+```
 
 Generic Routes
 --------------
@@ -84,10 +111,10 @@ The name of the route will be useful in debugging since it shows up in the outpu
 
 ### Writing multiple routes
 
-If your batch system needs incoming jobs to be sorted (e.g. if different VO's need to go to separate queues), you will need to write multiple job routes. Each route is enclosed by square brackets and unless they're the last closing bracket, they need to be followed by the line continuation character. The following routes takes incoming jobs that have a `queue` attribute set to `"analy"` and routes them to the site's HTCondor batch system. Any other jobs will be sent to that site's PBS batch system.
-
 !!! note
-    For versions of HTCondor < 8.7.1, the JobRouter matches jobs to routes in a round-robin fashion. This means that if a job can match to multiple routes, it can be routed by any of them! So when writing job routes, make sure that they are exclusive to each other and that your jobs can only match to a single route.
+    Before writing multiple routes, consider the details of [how jobs match to job routes](#how-jobs-match-to-job-routes)
+
+If your batch system needs incoming jobs to be sorted (e.g. if different VO's need to go to separate queues), you will need to write multiple job routes. Each route is enclosed by square brackets and unless they're the last closing bracket, they need to be followed by the line continuation character. The following routes takes incoming jobs that have a `queue` attribute set to `"analy"` and routes them to the site's HTCondor batch system. Any other jobs will be sent to that site's PBS batch system.
 
 ```
 JOB_ROUTER_ENTRIES = %RED%[ \%ENDCOLOR%
@@ -160,7 +187,7 @@ This is because when evaluating the route requirement, the job route will compar
     If you have an HTCondor batch system, note the difference with [set\_requirements](#setting-routed-job-requirements).
 
 !!! note
-        For versions of HTCondor < 8.7.1, the JobRouter matches jobs to routes in a round-robin fashion. This means that if a job can match to multiple routes, it can be routed by any of them! So when writing job routes, make sure that they are exclusive to each other and that your jobs can only match to a single route.
+    Before writing multiple routes, consider the details of [how jobs match to job routes](#how-jobs-match-to-job-routes).
 
 #### Glidein queue
 
@@ -227,7 +254,7 @@ CONDORCE_MAX_JOBS = 10000
 
 #### Maximum memory
 
-To set a default maximum memory for routed jobs, set the attribute `default_maxMemory`:
+To set a default maximum memory (in MB) for routed jobs, set the attribute `default_maxMemory`:
 
 ```
 JOB_ROUTER_ENTRIES = [ \

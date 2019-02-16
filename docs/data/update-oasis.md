@@ -16,7 +16,7 @@ To begin the process to distribute software on OASIS using the service hosted by
 
 -   [Obtain a personal grid certificate](../security/user-certs), if you don't have one already.
 -   Register yourself in the OSG Information Management System (OIM) by sending an email to
-    <mailto:help@opensciencegrid.org)
+    <mailto:help@opensciencegrid.org>
 -   Be associated with a [VO registered in OIM](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
 
 How to use OASIS
@@ -26,7 +26,7 @@ How to use OASIS
 
 When you are ready to distribute your software with OASIS, submit a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) with a request to enable OASIS for your VO. In your request, please specify your VO and provide a list of people who will install and administer the VO software in OASIS.
 
-The GOC will enable OASIS for your VO in [OSG topology](https://github.com/opensciencegrid/topology#topology) and add your list of administrators to the "OASIS Managers" list (which is near the bottom of the page of information about each VO in OIM). oasis-login will then grant access to the people who are listed as OASIS managers. Any time the list is to be modified, submit another ticket.
+OSG Operations will enable OASIS for your VO in [OSG topology](https://github.com/opensciencegrid/topology#topology) and add your list of administrators to the "OASIS Managers" list (which is near the bottom of the page of information about each VO in OIM). oasis-login will then grant access to the people who are listed as OASIS managers. Any time the list is to be modified, submit another ticket.
 
 ### Log in with GSISSH ###
 
@@ -64,7 +64,7 @@ user@host $ osg-oasis-update
 
 This command queues a process to sync the content of OASIS with the content of `/stage/oasis/$VO`
 
-`osg-oasis-update` returns immediately, but only one update can run at a time (across all VOs); your request may be queued behind a different VO. If you encounter severe delays before the update is finished being published (more than 4 hours), please file a GOC ticket.
+`osg-oasis-update` returns immediately, but only one update can run at a time (across all VOs); your request may be queued behind a different VO. If you encounter severe delays before the update is finished being published (more than 4 hours), please file a [support ticket](/common/help).
 
 ### Limitations on repository content ###
 

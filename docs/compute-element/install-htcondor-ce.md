@@ -27,10 +27,8 @@ Before starting the installation process, consider the following points
 -   **Network ports:** The pilot factories must be able to contact your HTCondor-CE service on port 9619 (TCP)
 -   **Submit host:** HTCondor-CE should be installed on a host that already has the ability to submit jobs into your
     local cluster
--   **File Systems:** We recommend separate partitions for the [job queue log](#configuring-the-job-queue-location) and
-    `SPOOL` directory.
-    Additionally, non-HTCondor batch systems require a [shared file system](#batch-systems-other-than-htcondor) between
-    the HTCondor-CE host and the batch system worker nodes.
+-   **File Systems**: Non-HTCondor batch systems require a [shared file system](#batch-systems-other-than-htcondor)
+    between the HTCondor-CE host and the batch system worker nodes.
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
@@ -137,24 +135,6 @@ SPOOL = /home/condor
 
 !!! note
     The shared spool directory must be readable and writeable by the `condor` user for HTCondor-CE to function correctly.
-
-### Configuring the job queue location
-
-The [job queue log](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_5Logging_in.html#53484) is a frequently written
-to file that contains the state of the HTCondor-CE job queue.
-For performance reasons, we recommend storing this file and the `SPOOL` directory on a different file system partitions.
-To configure the location of the job queue log:
-
-1. Find which file system partition your `SPOOL` directory is located on:
-
-        :::console
-        user@htcondor-ce $ df $(condor_ce_config_val SPOOL)
-
-1. Set `JOB_QUEUE_LOG` in `/etc/condor-ce/config.d/99-local.conf` to the path of the job queue log on a separate file
-   system partition than the above.
-   For example, if you have a separate SSD that is mounted on `/ssd`, you could set the following:
-
-        JOB_QUEUE_LOG = /ssd/condor/job_queue.log
 
 ### Configuring authorization
 
@@ -389,6 +369,8 @@ Validating HTCondor-CE
 ----------------------
 
 To validate an HTCondor-CE, perform the following verification steps:
+
+1. Verify that you can manually submit jobs (e.g., `condor_submit`, `qsub`, etc.)to your batch system from the CE host.
 
 1. Verify that all the necessary daemons are running with
    [condor\_ce\_status](/compute-element/troubleshoot-htcondor-ce#condor_ce_status).

@@ -541,7 +541,7 @@ As a reminder, here are common service commands (all run as `root`):
 | To …                                        | On EL 6, run the command…    | On EL 7, run the command…        |
 |:--------------------------------------------|:-----------------------------|:---------------------------------|
 | Start a service                             | `service SERVICE-NAME start` | `systemctl start SERVICE-NAME`   |
-| Stop a service                              | `service SERVICE-NAME stop`  | `systemctl start SERVICE-NAME`   |
+| Stop a service                              | `service SERVICE-NAME stop`  | `systemctl stop SERVICE-NAME`    |
 | Enable a service to start during boot       | `chkconfig SERVICE-NAME on`  | `systemctl enable SERVICE-NAME`  |
 | Disable a service from starting during boot | `chkconfig SERVICE-NAME off` | `systemctl disable SERVICE-NAME` |
 
