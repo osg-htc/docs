@@ -91,8 +91,9 @@ Once this is done, the OSG team will:
 
 -   Configure central OSG services to schedule jobs
 
-Optionally, we can assist you in installing and setting up the Squid and OASIS software on your cluster
-in order to support application software repositories.
+Optionally, we can assist you in
+[installing and setting up the Squid and OASIS](#optional-providing-access-to-application-software-using-oasis)
+software on your cluster in order to support application software repositories.
 This will allow a broader set of jobs to run on your cluster.
 
 
