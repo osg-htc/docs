@@ -106,7 +106,7 @@ If it is easier for your site to install and maintain the worker node client tha
 
 -   Install the [Worker Node Client from tarball](/worker-node/install-wn-tarball)
 
--   Install the worker node client from [OASIS](/worker-node/install-wn-oasis)
+-   Install the Worker Node Client from [OASIS](/worker-node/install-wn-oasis)
 
 
 **Optional**: Providing Access to Application Software Using OASIS
