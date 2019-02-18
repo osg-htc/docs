@@ -104,7 +104,7 @@ If it is easier for your site to install and maintain the worker node client tha
 
 -   Install the [Worker Node Client from RPM](/worker-node/install-wn)
 
--   Install the [osg-wn tarball](/worker-node/install-wn-tarball)
+-   Install the [Worker Node Client from tarball](/worker-node/install-wn-tarball)
 
 -   Install the worker node client from [OASIS](/worker-node/install-wn-oasis)
 
