@@ -97,7 +97,7 @@ This will allow a broader set of jobs to run on your cluster.
 Providing the OSG Worker Node client (HTCondor batch systems only)
 ------------------------------------------------------------------
 
-All OSG sites need to provide the worker node client.
+All OSG sites need to provide the OSG Worker Node Client on each worker node in the cluster.
 This is normally handled by OSG staff for a Hosted CE, but requires shared home directories across the cluster.
 However, for sites with an HTCondor batch system, often there is no shared filesystem set up.
 If it is easier for your site to install and maintain the worker node client than to set up a shared file system, you have the following options:
