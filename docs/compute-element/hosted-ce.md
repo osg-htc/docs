@@ -102,7 +102,7 @@ This is normally handled by OSG staff for a Hosted CE, but requires shared home 
 However, for sites with an HTCondor batch system, often there is no shared filesystem set up.
 If it is easier for your site to install and maintain the worker node client than to set up a shared file system, you have the following options:
 
--   Install the [osg-wn-client rpm](/worker-node/install-wn)
+-   Install the [Worker Node Client from RPM](/worker-node/install-wn)
 
 -   Install the [osg-wn tarball](/worker-node/install-wn-tarball)
 
