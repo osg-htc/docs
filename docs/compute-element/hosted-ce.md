@@ -5,15 +5,15 @@ OSG Hosted CE
 Introduction
 ------------
 
-An OSG Compute Element (CE) is the entry point for jobs coming from the OSG;
+An OSG Hosted Compute Element (CE) is the entry point for jobs coming from the OSG;
 it handles authorization and delegation of jobs to your existing campus HPC/HTC cluster.
 
 Many sites set up their compute element locally.
-As an alternative, OSG offers a hosted CE option
+As an alternative, OSG offers a Hosted CE option
 wherein the OSG team will host and operate the HTCondor compute element,
 and configure it for the science communities that you choose to support.
 
-This document explains the requirements and the procedure for obtaining a hosted CE.
+This document explains the requirements and the procedure for obtaining a Hosted CE.
 If you wish to have a local compute element instead,
 see page for [installing HTCondor-CE](/compute-element/install-htcondor-ce).
 
@@ -31,7 +31,7 @@ Before preparing your cluster for OSG jobs, consider the following requirements:
 -   Outbound network connectivity from the compute nodes (they can be behind NAT)
 
 -   A Unix account on your cluster's submit server, accessible via an SSH key
-    The OSG CE will use this account to automatically submit jobs,
+    The Hosted CE will use this account to automatically submit jobs,
     so it must also have permissions to submit jobs to the batch system
 
 -   If your batch system is not HTCondor,
@@ -83,7 +83,7 @@ After the consultation, do the following:
 
 Once this is done, the OSG team will:
 
--   Configure the OSG CE with your system details
+-   Configure the Hosted CE with your system details
 
 -   Validate operation with a set of test jobs
 
