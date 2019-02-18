@@ -15,8 +15,8 @@ and configure it for the science communities that you choose to support.
 The Hosted CE can support thousands of concurrent job submissions.
 
 This document explains the requirements and the procedure for obtaining a Hosted CE.
-If you wish to have a local compute element instead,
-see page for [installing HTCondor-CE](/compute-element/install-htcondor-ce).
+If you wish to run your own local compute element or expect to support more than 10,000 concurrently running OSG jobs,
+see [this page](/compute-element/install-htcondor-ce) for installing the HTCondor-CE.
 
 ![managed services diagram](/compute-element/img/managed_services_diagram.png)
 
