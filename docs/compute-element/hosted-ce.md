@@ -35,7 +35,8 @@ Before preparing your cluster for OSG jobs, consider the following requirements:
     so it must also have permissions to submit jobs to the batch system
 
 -   If your batch system is not HTCondor,
-    there must be a shared file system between the submit server and the compute nodes
+    there must be a shared file system between the submit server and the compute nodes.
+    See [this section](#providing-the-osg-worker-node-client-htcondor-batch-systems-only) for details.
 
 
 Which Science Communities and Institutions am I Supporting?
