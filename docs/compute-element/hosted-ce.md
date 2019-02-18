@@ -79,7 +79,7 @@ After the consultation, do the following:
 
 -   Create a Unix account on the submit server for use by the OSG CE
 
--   Install public SSH keys for the account
+-   Install OSG-provided public SSH keys for the account
 
 Once this is done, the OSG team will:
 
