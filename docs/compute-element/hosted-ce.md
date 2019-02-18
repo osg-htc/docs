@@ -77,7 +77,7 @@ Before making any system changes, you should do the following steps:
 
 After the consultation, do the following:
 
--   Create a Unix account on the submit server for use by the OSG CE
+-   Create a Unix account for OSG jobs on the submit server and across the cluster as necessary
 
 -   Install OSG-provided public SSH keys for the account
 
