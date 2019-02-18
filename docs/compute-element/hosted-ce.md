@@ -13,7 +13,7 @@ As an alternative, OSG offers a hosted CE option
 wherein the OSG team will host and operate the HTCondor compute element,
 and configure it for the science communities that you choose to support.
 
-This document explains the requirements and the procuedure for obtaining a hosted CE.
+This document explains the requirements and the procedure for obtaining a hosted CE.
 If you wish to have a local compute element instead,
 see page for [installing HTCondor-CE](/compute-element/install-htcondor-ce).
 
