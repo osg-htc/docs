@@ -1,14 +1,18 @@
-# Install CVMFS
+# Installing and Maintaining the CernVM File System Client
 
-Here we describe how to install the
-[CVMFS](http://cernvm.cern.ch/portal/filesystem) (CernVM File System) client.
-This document is intended for system administrators who wish to
-install this client to have access to files distributed by CVMFS
-servers via HTTP.
+The CernVM File System ([CVMFS](http://cernvm.cern.ch/portal/filesystem)) is an HTTP-based file distribution service
+used to provide data and software for jobs.
+By installing CVMFS, you have access to an alternative installation method for required worker node software and your
+site you will be able to support a wider range of user jobs.
+For example, CVMFS provides easy access to the following:
 
-By installing CVMFS, you will be able to support a much larger range of jobs on your site.
-OASIS uses CVMFS to provides easy access to worker node software, CA certificates, CRLs, etc. via CVMFS.
-It also provides easy access to StashCache resources.
+- The [worker node client](/worker-node/install-wn-oasis)
+- CA and VO security data
+- Software used by VOs
+- Data stored in [StashCache](/data/stashcache/overview).
+
+Use this page to learn how to install, configure, run, test, and troubleshoot the CVMFS client from the OSG software
+repositories.
 
 !!! note "Applicable versions"
     The applicable software versions for this document are OSG Version >= 3.4.3.
