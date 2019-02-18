@@ -12,6 +12,7 @@ Many sites set up their compute element locally.
 As an alternative, OSG offers a Hosted CE option
 wherein the OSG team will host and operate the HTCondor compute element,
 and configure it for the science communities that you choose to support.
+The Hosted CE can support thousands of concurrent job submissions.
 
 This document explains the requirements and the procedure for obtaining a Hosted CE.
 If you wish to have a local compute element instead,
