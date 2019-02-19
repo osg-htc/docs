@@ -31,7 +31,7 @@ Before preparing your cluster for OSG jobs, consider the following requirements:
 
 -   Outbound network connectivity from the compute nodes (they can be behind NAT)
 
--   A Unix account on your cluster's submit server, accessible via an SSH key
+-   A Unix account on your cluster's submit server, accessible via an SSH key.
     The Hosted CE will use this account to automatically submit jobs,
     so it must also have permissions to submit jobs to the batch system
 
