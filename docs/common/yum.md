@@ -1,11 +1,8 @@
-YUM Repositories
+OSG Yum Repositories
 ====================
 
-About This Document
--------------------
-
-This document introduces YUM repositories and how OSG uses them.
-If you are unfamiliar with YUM, see the [documentation on using YUM and RPM](/release/yum-basics).
+This document introduces Yum repositories and how they are used in the OSG.
+If you are unfamiliar with Yum, see the [documentation on using Yum and RPM](/release/yum-basics).
 
 Repositories
 ------------
@@ -18,29 +15,33 @@ OSG hosts four public-facing repositories at [repo.opensciencegrid.org](https://
       do not use without instruction from OSG Software and Release team members.
 -   **contrib**: RPMs contributed from outside the OSG S&R team;
       no official OSG support.
--   **upcoming release/testing/development**: Similar to release/testing/development but for new versions of software that may require manual action after an update.
+-   **upcoming release/testing/development**: Similar to release/testing/development but for new versions of software
+    that may require manual action after an update.
 
-OSG's RPM packages rely also on external packages provided by supported OSes and EPEL. You must have the following repositories available and enabled:
+OSG's RPM packages rely also on external packages provided by supported OSes and EPEL.
+You must have the following repositories available and enabled:
 
 -   OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories)
 -   EPEL repositories
 -   OSG repositories
 
-If any of these repositories are missing, you may end up with missing dependencies.
+If any of these repositories are missing, you may end up with installation issues or missing dependencies.
 
-!!! warning
-    Other repositories, such as `jpackage`, `dag`, or `rpmforge`, are not supported and you may encounter problems if you use them.
+!!! danger
+    Other repositories, such as `jpackage`, `dag`, or `rpmforge`, are not supported and you may encounter problems if
+    you use them.
 
 
 Installing and Configuring Repositories
 ---------------------------------------
 
-### Install the YUM priorities plugin
+### Install the Yum priorities plugin
 
-We use YUM priorities to tell YUM to prefer OSG packages over EPEL or OS packages.
-It is important to install and enable the YUM priorities plugin before installing grid software to avoid getting the wrong versions.
+The Yum priorities plugin is used to tell Yum to prefer OSG packages over EPEL or OS packages.
+It is important to install and enable the Yum priorities plugin before installing grid software to ensure that you are
+getting the OSG-supported versions.
 
-1.  Install the YUM priorities package:
+1.  Install the Yum priorities package:
 
         :::console
         root@host # yum install yum-plugin-priorities
@@ -53,7 +54,7 @@ It is important to install and enable the YUM priorities plugin before installin
 ### Install the EPEL repositories
 
 OSG software depends on packages distributed via the [EPEL](http://fedoraproject.org/wiki/EPEL) repositories.
-You must install and enable those first.
+You must install and enable these first.
 
 -   Install the EPEL repository, if not already present.  Choose the right version to match your OS version.
 
@@ -70,9 +71,10 @@ You must install and enable those first.
     -   Either no `priority` setting, or a `priority` setting that is 99 or higher
 
 !!! warning
-    If you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the priority of the EPEL repository is either missing, or 99 or a higher number.
+    If you have your own mirror or configuration of the EPEL repository, you **MUST** verify that the priority of the
+    EPEL repository is either missing, or 99 or a higher number.
     The OSG repositories must have a better (numerically lower) priority than the EPEL repositories;
-    you might have dependency resolution ("depsolving") issues otherwise.
+    otherwise, you might have dependency resolution ("depsolving") issues.
 
 ### Automatic Updates
 
@@ -82,7 +84,7 @@ Therefore we recommend security-only automatic updates or disabling automatic up
 
 To enable only security related automatic updates:
 
--   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `USE_YUMSEC="true"`
+-   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `USE_YumSEC="true"`
 
 -   On Enterprise Linux 7, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
 
@@ -99,7 +101,8 @@ To disable automatic updates entirely:
 ### Install the OSG Repositories
 
 This document assumes a fresh install.
-For instructions on upgrading from one OSG series to another, see the [release series document](/release/release_series#updating-from-old).
+For instructions on upgrading from one OSG series to another, see the
+[release series document](/release/release_series#updating-from-old).
 
 Install the OSG repositories:
 
@@ -110,10 +113,11 @@ Where `<URL>` is one of the following:
 
 | Series      |                  EL6 URL (for RHEL 6, CentOS 6, or SL 6)                  |                  EL7 URL (for RHEL 7, CentOS 7, or SL 7)                  |
 |:------------|:-------------------------------------------------------------------------:|:-------------------------------------------------------------------------:|
-| **OSG 3.3** | `https://repo.opensciencegrid.org/osg/3.3/osg-3.3-el6-release-latest.rpm` | `https://repo.opensciencegrid.org/osg/3.3/osg-3.3-el7-release-latest.rpm` |
 | **OSG 3.4** | `https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm` | `https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm` |
 
-The only OSG repository enabled by default is the release one. If you want to enable another one, such as `osg-testing`, then edit its file (e.g. `/etc/yum.repos.d/osg-testing.repo`) and change the enabled option from 0 to 1:
+The only OSG repository enabled by default is the release one.
+If you want to [enable another one](#repositories) (e.g. `osg-testing`), then edit its file
+(e.g. `/etc/yum.repos.d/osg-testing.repo`) and change the enabled option from 0 to 1:
 
 ``` file
 [osg-testing]
@@ -132,7 +136,7 @@ Repository Mirrors
 ------------------
 
 If you run a large site (>20 nodes), you should consider setting up a local mirror for the OSG repositories.
-A local YUM mirror allows you to reduce the amount of external bandwidth used when updating or installing packages.
+A local Yum mirror allows you to reduce the amount of external bandwidth used when updating or installing packages.
 
 Add the following to a file in `/etc/cron.d`:
 
@@ -147,11 +151,13 @@ Or, to mirror only a single repository:
 
 Replace %RED%RANDOM%ENDCOLOR% with a number between 0 and 59.
 
-Replace %RED%OSG\_RELEASE%ENDCOLOR% with the OSG release you want to use (e.g. '3.3', or '3.4').
+Replace %RED%OSG\_RELEASE%ENDCOLOR% with the OSG release you would like to use (e.g. '3.4').
 
-On your worker node, you can replace the `baseurl` line of `/etc/yum.repos.d/osg.repo` with the appropriate URL for your mirror.
+On your worker node, you can replace the `baseurl` line of `/etc/yum.repos.d/osg.repo` with the appropriate URL for your
+mirror.
 
-If you are interested in having your mirror be part of the OSG's default set of mirrors, [please file a support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new).
+If you are interested in having your mirror be part of the OSG's default set of mirrors,
+[please file a support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new).
 
 Reference
 ---------

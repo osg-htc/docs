@@ -57,7 +57,7 @@ pages:
   - 'Certificate Management Reference': 'security/certificate-management.md'
 - Common:
   - 'CA Certificates': 'common/ca.md'
-  - 'Yum Repos': 'common/yum.md'
+  - 'OSG Yum Repos': 'common/yum.md'
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
   - 'Registration': 'common/registration.md'
 - Other:
