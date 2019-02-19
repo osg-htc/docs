@@ -2767,7 +2767,7 @@ If the job meets the requirements of multiple routes,  the route that is chosen 
 <p>The above configuration is to be placed directly into the HTCondor-CE configuration, not into a job route.</p>
 </div>
 <h4 id="maximum-memory">Maximum memory<a class="headerlink" href="#maximum-memory" title="Permanent link">&para;</a></h4>
-<p>To set a default maximum memory for routed jobs, set the attribute <code>default_maxMemory</code>:</p>
+<p>To set a default maximum memory (in MB) for routed jobs, set the attribute <code>default_maxMemory</code>:</p>
 <div class="codehilite"><pre><span></span>JOB_ROUTER_ENTRIES = [ \
      GridResource = &quot;batch pbs&quot;; \
      TargetUniverse = 9; \
