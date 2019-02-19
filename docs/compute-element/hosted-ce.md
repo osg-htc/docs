@@ -1,5 +1,5 @@
-OSG Hosted CE
-=============
+Requesting an OSG Hosted CE
+===========================
 
 
 Introduction

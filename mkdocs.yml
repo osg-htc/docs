@@ -15,11 +15,11 @@ pages:
 - Site Planning: 'site-planning.md'
 - Compute Element:
   - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
+  - 'Request a Hosted CE': 'compute-element/hosted-ce.md'
   - 'Install HTCondor-CE': 'compute-element/install-htcondor-ce.md'
   - 'Job Router Recipes': 'compute-element/job-router-recipes.md'
   - 'Troubleshooting HTCondor-CE': 'compute-element/troubleshoot-htcondor-ce.md'
   - 'Submitting to HTCondor-CE': 'compute-element/submit-htcondor-ce.md'
-  - 'Obtain a Hosted CE': 'compute-element/hosted-ce.md'
 - Worker Node:
   - 'Overview': 'worker-node/using-wn.md'
   - 'Install from RPM': 'worker-node/install-wn.md'

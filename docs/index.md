@@ -81,6 +81,7 @@ The general steps to installing an OSG site are:
 
 -   Install the compute element (HTCondor-CE and other software):
     -   [Overview and architecture](compute-element/htcondor-ce-overview)
+    -   [Request a Hosted CE](/compute-element/hosted-ce)
     -   [Install HTCondor-CE](compute-element/install-htcondor-ce)
     -   [Configure the HTCondor-CE job router](compute-element/job-router-recipes), including common recipes
     -   [Troubleshooting HTCondor-CE installations](compute-element/troubleshoot-htcondor-ce)
