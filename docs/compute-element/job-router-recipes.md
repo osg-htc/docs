@@ -254,7 +254,7 @@ CONDORCE_MAX_JOBS = 10000
 
 #### Maximum memory
 
-To set a default maximum memory for routed jobs, set the attribute `default_maxMemory`:
+To set a default maximum memory (in MB) for routed jobs, set the attribute `default_maxMemory`:
 
 ```
 JOB_ROUTER_ENTRIES = [ \
