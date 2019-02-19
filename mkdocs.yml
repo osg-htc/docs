@@ -114,7 +114,6 @@ pages:
     - 'OSG Release 3.4.0': 'release/3.4/release-3-4-0.md'
   - 'OSG Release Series': 'release/release_series.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
-  - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
   - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
 - Monitoring:

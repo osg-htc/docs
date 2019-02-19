@@ -16,7 +16,7 @@ intended for public use:
 | `osg-rolling`                                                                              | Passed integration and acceptance testing but have not yet been officially released.                                                 |
 | `osg-testing`                                                                              | Passed developer or integration testing but not acceptance testing                                                                   |
 | `osg-development`                                                                          | Have not passed developer, integration or acceptance testing. Do not use without instruction from the OSG Software and Release Team. |
-| `osg-upcoming`, `osg-upcoming-rolling`, `osg-upcoming-testing`, `osg-upcoming-development` | Have newer versions that may require manual action after an update.                                                                  |
+| `osg-upcoming`, `osg-upcoming-rolling`, `osg-upcoming-testing`, `osg-upcoming-development` | Have newer versions that may require manual action after an update. See [this section](#upcoming-software) for details.              |
 | `osg-contrib`                                                                              | Have been contributed from outside of the OSG Software and Release Team. See [this section](#contrib-software) for details.          |
 
 OSG's RPM packages also rely on external packages provided by supported OSes and EPEL.
@@ -31,6 +31,30 @@ If any of these repositories are missing, you may end up with installation issue
 !!! danger
     Other repositories, such as `jpackage`, `dag`, or `rpmforge`, are not supported and you may encounter problems if
     you use them.
+
+### Upcoming Software
+
+Certain sites have requested new versions of software that would be considered "disruptive" or "experimental":
+upgrading to them would likely require manual intervention after their installation.
+We do not want sites to unwittingly upgrade to these versions.
+For the benefit of the sites that are interested in upgrading to these versions, we want to provide the same assurance
+of quality and production-readiness that we guarantee for the `osg` release repository.
+
+Due to the relatively small number of such packages, a full fork of the OSG 3 distribution is not warranted.
+Instead, we have created a separate set of repositories that contain only the "disruptive" versions of the software.
+
+These repositories have the same structure as our standard repositories.
+For example, there are `osg-upcoming-testing` and `osg-upcoming` repositories, which are analagous to the `osg-testing`
+and `osg` repositories, respectively.
+
+A full installation of our software stack is *not* possible using only the `osg-upcoming` repositories, since they
+contain a small subset of the software we ship.
+Both the main `osg` and the `osg-upcoming` repositories will need to be enabled for the installation to work.
+Because of this, interoperability will be maintained between the main `osg` and `osg-upcoming`.
+
+Depending on test results from sites, some packages in `osg-upcoming` may eventually end up in the main `osg` branch.
+The rest of the packages will eventually form the basis of the next [OSG release series](/release/release_series)
+(e.g. "OSG 3.5").
 
 ### Contrib Software
 
