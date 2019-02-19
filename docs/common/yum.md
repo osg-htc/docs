@@ -7,18 +7,19 @@ If you are unfamiliar with Yum, see the [documentation on using Yum and RPM](/re
 Repositories
 ------------
 
-OSG hosts four public-facing repositories at [repo.opensciencegrid.org](https://repo.opensciencegrid.org/):
+The OSG hosts multiple repositories at [repo.opensciencegrid.org](https://repo.opensciencegrid.org/osg/) that are
+intended for public use:
 
--   **release**: RPMs considered production-ready.
--   **testing**: RPMs not yet ready for release; expect bugs.
--   **development**: RPMs that are bleeding-edge;
-      do not use without instruction from OSG Software and Release team members.
--   **contrib**: RPMs contributed from outside the OSG S&R team;
-      no official OSG support.
--   **upcoming release/testing/development**: Similar to release/testing/development but for new versions of software
-    that may require manual action after an update.
+| Yum repository                                                                             | Contains RPMs that...                                                                                                                |
+|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| `osg`                                                                                      | Are considered production-ready (default).                                                                                           |
+| `osg-rolling`                                                                              | Passed integration and acceptance testing but have not yet been officially released.                                                 |
+| `osg-testing`                                                                              | Passed developer or integration testing but not acceptance testing                                                                   |
+| `osg-development`                                                                          | Have not passed developer, integration or acceptance testing. Do not use without instruction from the OSG Software and Release Team. |
+| `osg-upcoming`, `osg-upcoming-rolling`, `osg-upcoming-testing`, `osg-upcoming-development` | Have newer versions that may require manual action after an update.                                                                  |
+| `osg-contrib`                                                                              | Have been contributed from outside of the OSG Software and Release Team. No official OSG support.                                    |
 
-OSG's RPM packages rely also on external packages provided by supported OSes and EPEL.
+OSG's RPM packages also rely on external packages provided by supported OSes and EPEL.
 You must have the following repositories available and enabled:
 
 -   OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories)
