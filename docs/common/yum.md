@@ -124,7 +124,7 @@ Therefore we recommend security-only automatic updates or disabling automatic up
 
 To enable only security related automatic updates:
 
--   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `USE_YumSEC="true"`
+-   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `USE_YUMSEC="true"`
 
 -   On Enterprise Linux 7, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
 
