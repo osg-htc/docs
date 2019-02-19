@@ -17,7 +17,7 @@ intended for public use:
 | `osg-testing`                                                                              | Passed developer or integration testing but not acceptance testing                                                                   |
 | `osg-development`                                                                          | Have not passed developer, integration or acceptance testing. Do not use without instruction from the OSG Software and Release Team. |
 | `osg-upcoming`, `osg-upcoming-rolling`, `osg-upcoming-testing`, `osg-upcoming-development` | Have newer versions that may require manual action after an update.                                                                  |
-| `osg-contrib`                                                                              | Have been contributed from outside of the OSG Software and Release Team. No official OSG support.                                    |
+| `osg-contrib`                                                                              | Have been contributed from outside of the OSG Software and Release Team. See [this section](#contrib-software) for details.          |
 
 OSG's RPM packages also rely on external packages provided by supported OSes and EPEL.
 You must have the following repositories available and enabled:
@@ -32,6 +32,21 @@ If any of these repositories are missing, you may end up with installation issue
     Other repositories, such as `jpackage`, `dag`, or `rpmforge`, are not supported and you may encounter problems if
     you use them.
 
+### Contrib Software
+
+In addition to our regular software repositories, we also have a `contrib` (short for "contributed") software repository.
+This is software that is does not go through the same software testing and release processes as the official OSG
+Software release, but may be useful to you.
+Particularly, contrib software is not guaranteed to be compatible with the rest of the OSG Software stack nor is it
+supported by the OSG.
+
+The definitive list of software in the contrib repository can be found here:
+
+-   [OSG 3.4 EL6 contrib software repository](http://repo.opensciencegrid.org/osg/3.4/el6/contrib/x86_64/)
+-   [OSG 3.4 EL7 contrib software repository](http://repo.opensciencegrid.org/osg/3.4/el7/contrib/x86_64/)
+
+If you would like to distribute your software in the OSG `contrib` repository, please [contact us](/common/help) with a
+description of your software, what users it serves, and relevant RPM packaging.
 
 Installing and Configuring Repositories
 ---------------------------------------
