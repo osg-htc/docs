@@ -23,7 +23,7 @@ Installation and Usage
 
 The following directions must be followed to install software from the Upcoming repositories.
 
-First, install the standard OSG YUM repositories as per [the YUM repositories guide](../common/yum).
+First, install the standard OSG Yum repositories as per [the Yum repositories guide](/common/yum).
 
 Enabling Upcoming repositories
 ------------------------------
