@@ -94,7 +94,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#install-cvmfs" tabindex="1" class="md-skip">
+      <a href="#installing-and-maintaining-the-cernvm-file-system-client" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -2031,15 +2031,20 @@
                   <a href="https://github.com/opensciencegrid/docs/edit/master/docs/worker-node/install-cvmfs.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="install-cvmfs">Install CVMFS<a class="headerlink" href="#install-cvmfs" title="Permanent link">&para;</a></h1>
-<p>Here we describe how to install the
-<a href="http://cernvm.cern.ch/portal/filesystem">CVMFS</a> (CernVM File System) client.
-This document is intended for system administrators who wish to
-install this client to have access to files distributed by CVMFS
-servers via HTTP.</p>
-<p>By installing CVMFS, you will be able to support a much larger range of jobs on your site.
-OASIS uses CVMFS to provides easy access to worker node software, CA certificates, CRLs, etc. via CVMFS.
-It also provides easy access to StashCache resources.</p>
+                <h1 id="installing-and-maintaining-the-cernvm-file-system-client">Installing and Maintaining the CernVM File System Client<a class="headerlink" href="#installing-and-maintaining-the-cernvm-file-system-client" title="Permanent link">&para;</a></h1>
+<p>The CernVM File System (<a href="http://cernvm.cern.ch/portal/filesystem">CVMFS</a>) is an HTTP-based file distribution service
+used to provide data and software for jobs.
+By installing CVMFS, you have access to an alternative installation method for required worker node software and your
+site you will be able to support a wider range of user jobs.
+For example, CVMFS provides easy access to the following:</p>
+<ul>
+<li>The <a href="../../worker-node/install-wn-oasis">worker node client</a></li>
+<li>CA and VO security data</li>
+<li>Software used by VOs</li>
+<li>Data stored in <a href="../../data/stashcache/overview">StashCache</a>.</li>
+</ul>
+<p>Use this page to learn how to install, configure, run, test, and troubleshoot the CVMFS client from the OSG software
+repositories.</p>
 <div class="admonition note">
 <p class="admonition-title">Applicable versions</p>
 <p>The applicable software versions for this document are OSG Version &gt;= 3.4.3.
