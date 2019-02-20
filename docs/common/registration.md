@@ -38,7 +38,7 @@ To register as an OSG contact or add your GitHub ID to your pre-existing contact
       etc.
     - Contact information of site, virtual organization, or project sponsor to prove your affiliation
 
-    !!! info "Privacy Policy"
+    !!! info "Privacy"
         The OSG treats any email addresses and phone numbers as confidential data but does not make any guarantees of
         privacy.
 
