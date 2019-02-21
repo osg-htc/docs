@@ -38,7 +38,7 @@
     
     
       
-        <title>Yum Repos - OSG Documentation</title>
+        <title>OSG Yum Repos - OSG Documentation</title>
       
     
     
@@ -94,7 +94,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#yum-repositories" tabindex="1" class="md-skip">
+      <a href="#osg-yum-repositories" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -120,7 +120,7 @@
                 OSG Documentation
               </span>
               <span class="md-header-nav__topic">
-                Yum Repos
+                OSG Yum Repos
               </span>
             
           
@@ -915,11 +915,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Yum Repos
+        OSG Yum Repos
       </label>
     
-    <a href="./" title="Yum Repos" class="md-nav__link md-nav__link--active">
-      Yum Repos
+    <a href="./" title="OSG Yum Repos" class="md-nav__link md-nav__link--active">
+      OSG Yum Repos
     </a>
     
       
@@ -933,16 +933,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#about-this-document" title="About This Document" class="md-nav__link">
-    About This Document
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#repositories" title="Repositories" class="md-nav__link">
     Repositories
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upcoming-software" title="Upcoming Software" class="md-nav__link">
+    Upcoming Software
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contrib-software" title="Contrib Software" class="md-nav__link">
+    Contrib Software
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -955,8 +968,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-the-yum-priorities-plugin" title="Install the YUM priorities plugin" class="md-nav__link">
-    Install the YUM priorities plugin
+  <a href="#install-the-yum-priorities-plugin" title="Install the Yum priorities plugin" class="md-nav__link">
+    Install the Yum priorities plugin
   </a>
   
 </li>
@@ -1738,18 +1751,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/install-osg-upcoming-software/" title="OSG upcoming software" class="md-nav__link">
-      OSG upcoming software
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../../release/yum-basics/" title="Yum Basics" class="md-nav__link">
       Yum Basics
     </a>
@@ -1764,18 +1765,6 @@
   <li class="md-nav__item">
     <a href="../../release/signing/" title="RPM Signing" class="md-nav__link">
       RPM Signing
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../release/contrib/" title="Contrib Software" class="md-nav__link">
-      Contrib Software
     </a>
   </li>
 
@@ -1890,16 +1879,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#about-this-document" title="About This Document" class="md-nav__link">
-    About This Document
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#repositories" title="Repositories" class="md-nav__link">
     Repositories
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upcoming-software" title="Upcoming Software" class="md-nav__link">
+    Upcoming Software
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contrib-software" title="Contrib Software" class="md-nav__link">
+    Contrib Software
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1912,8 +1914,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-the-yum-priorities-plugin" title="Install the YUM priorities plugin" class="md-nav__link">
-    Install the YUM priorities plugin
+  <a href="#install-the-yum-priorities-plugin" title="Install the Yum priorities plugin" class="md-nav__link">
+    Install the Yum priorities plugin
   </a>
   
 </li>
@@ -1977,39 +1979,98 @@
                   <a href="https://github.com/opensciencegrid/docs/edit/master/docs/common/yum.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="yum-repositories">YUM Repositories<a class="headerlink" href="#yum-repositories" title="Permanent link">&para;</a></h1>
-<h2 id="about-this-document">About This Document<a class="headerlink" href="#about-this-document" title="Permanent link">&para;</a></h2>
-<p>This document introduces YUM repositories and how OSG uses them.
-If you are unfamiliar with YUM, see the <a href="../../release/yum-basics">documentation on using YUM and RPM</a>.</p>
+                <h1 id="osg-yum-repositories">OSG Yum Repositories<a class="headerlink" href="#osg-yum-repositories" title="Permanent link">&para;</a></h1>
+<p>This document introduces Yum repositories and how they are used in the OSG.
+If you are unfamiliar with Yum, see the <a href="../../release/yum-basics">documentation on using Yum and RPM</a>.</p>
 <h2 id="repositories">Repositories<a class="headerlink" href="#repositories" title="Permanent link">&para;</a></h2>
-<p>OSG hosts four public-facing repositories at <a href="https://repo.opensciencegrid.org/">repo.opensciencegrid.org</a>:</p>
-<ul>
-<li><strong>release</strong>: RPMs considered production-ready.</li>
-<li><strong>testing</strong>: RPMs not yet ready for release; expect bugs.</li>
-<li><strong>development</strong>: RPMs that are bleeding-edge;
-      do not use without instruction from OSG Software and Release team members.</li>
-<li><strong>contrib</strong>: RPMs contributed from outside the OSG S&amp;R team;
-      no official OSG support.</li>
-<li><strong>upcoming release/testing/development</strong>: Similar to release/testing/development but for new versions of software that may require manual action after an update.</li>
-</ul>
-<p>OSG's RPM packages rely also on external packages provided by supported OSes and EPEL. You must have the following repositories available and enabled:</p>
+<p>The OSG hosts multiple repositories at <a href="https://repo.opensciencegrid.org/osg/">repo.opensciencegrid.org</a> that are
+intended for public use:</p>
+<table>
+<thead>
+<tr>
+<th>The OSG Yum repository...</th>
+<th>Contains RPMs that...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>osg</code></td>
+<td>are considered production-ready (default).</td>
+</tr>
+<tr>
+<td><code>osg-rolling</code></td>
+<td>are considered production-ready but are released at faster pace than the <code>osg</code> repository.</td>
+</tr>
+<tr>
+<td><code>osg-testing</code></td>
+<td>have passed developer or integration testing but not acceptance testing</td>
+</tr>
+<tr>
+<td><code>osg-development</code></td>
+<td>have not passed developer, integration or acceptance testing. Do not use without instruction from the OSG Software and Release Team.</td>
+</tr>
+<tr>
+<td><code>osg-upcoming</code>, <code>osg-upcoming-rolling</code>, <code>osg-upcoming-testing</code>, <code>osg-upcoming-development</code></td>
+<td>have newer versions that may require manual action after an update. See <a href="#upcoming-software">this section</a> for details.</td>
+</tr>
+<tr>
+<td><code>osg-contrib</code></td>
+<td>have been contributed from outside of the OSG Software and Release Team. See <a href="#contrib-software">this section</a> for details.</td>
+</tr>
+</tbody>
+</table>
+<p>OSG's RPM packages also rely on external packages provided by supported OSes and EPEL.
+You must have the following repositories available and enabled:</p>
 <ul>
 <li>OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories)</li>
 <li>EPEL repositories</li>
 <li>OSG repositories</li>
 </ul>
-<p>If any of these repositories are missing, you may end up with missing dependencies.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Other repositories, such as <code>jpackage</code>, <code>dag</code>, or <code>rpmforge</code>, are not supported and you may encounter problems if you use them.</p>
+<p>If any of these repositories are missing, you may end up with installation issues or missing dependencies.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Other repositories, such as <code>jpackage</code>, <code>dag</code>, or <code>rpmforge</code>, are not supported and you may encounter problems if
+you use them.</p>
 </div>
+<h3 id="upcoming-software">Upcoming Software<a class="headerlink" href="#upcoming-software" title="Permanent link">&para;</a></h3>
+<p>Certain sites have requested new versions of software that would be considered "disruptive" or "experimental":
+upgrading to them would likely require manual intervention after their installation.
+We do not want sites to unwittingly upgrade to these versions.
+For the benefit of the sites that are interested in upgrading to these versions, we want to provide the same assurance
+of quality and production-readiness that we guarantee for the <code>osg</code> release repository.</p>
+<p>Due to the relatively small number of such packages, a full fork of the OSG 3 distribution is not warranted.
+Instead, we have created a separate set of repositories that contain only the "disruptive" versions of the software.</p>
+<p>These repositories have the same structure as our standard repositories.
+For example, there are <code>osg-upcoming-testing</code> and <code>osg-upcoming</code> repositories, which are analagous to the <code>osg-testing</code>
+and <code>osg</code> repositories, respectively.</p>
+<p>A full installation of our software stack is <em>not</em> possible using only the <code>osg-upcoming</code> repositories, since they
+contain a small subset of the software we ship.
+Both the main <code>osg</code> and the <code>osg-upcoming</code> repositories will need to be enabled for the installation to work.
+Because of this, interoperability will be maintained between the main <code>osg</code> and <code>osg-upcoming</code>.</p>
+<p>Depending on test results from sites, some packages in <code>osg-upcoming</code> may eventually end up in the main <code>osg</code> branch.
+The rest of the packages will eventually form the basis of the next <a href="../../release/release_series">OSG release series</a>
+(e.g. "OSG 3.5").</p>
+<h3 id="contrib-software">Contrib Software<a class="headerlink" href="#contrib-software" title="Permanent link">&para;</a></h3>
+<p>In addition to our regular software repositories, we also have a <code>contrib</code> (short for "contributed") software repository.
+This is software that is does not go through the same software testing and release processes as the official OSG
+Software release, but may be useful to you.
+Particularly, contrib software is not guaranteed to be compatible with the rest of the OSG Software stack nor is it
+supported by the OSG.</p>
+<p>The definitive list of software in the contrib repository can be found here:</p>
+<ul>
+<li><a href="http://repo.opensciencegrid.org/osg/3.4/el6/contrib/x86_64/">OSG 3.4 EL6 contrib software repository</a></li>
+<li><a href="http://repo.opensciencegrid.org/osg/3.4/el7/contrib/x86_64/">OSG 3.4 EL7 contrib software repository</a></li>
+</ul>
+<p>If you would like to distribute your software in the OSG <code>contrib</code> repository, please <a href="../../common/help">contact us</a> with a
+description of your software, what users it serves, and relevant RPM packaging.</p>
 <h2 id="installing-and-configuring-repositories">Installing and Configuring Repositories<a class="headerlink" href="#installing-and-configuring-repositories" title="Permanent link">&para;</a></h2>
-<h3 id="install-the-yum-priorities-plugin">Install the YUM priorities plugin<a class="headerlink" href="#install-the-yum-priorities-plugin" title="Permanent link">&para;</a></h3>
-<p>We use YUM priorities to tell YUM to prefer OSG packages over EPEL or OS packages.
-It is important to install and enable the YUM priorities plugin before installing grid software to avoid getting the wrong versions.</p>
+<h3 id="install-the-yum-priorities-plugin">Install the Yum priorities plugin<a class="headerlink" href="#install-the-yum-priorities-plugin" title="Permanent link">&para;</a></h3>
+<p>The Yum priorities plugin is used to tell Yum to prefer OSG packages over EPEL or OS packages.
+It is important to install and enable the Yum priorities plugin before installing grid software to ensure that you are
+getting the OSG-supported versions.</p>
 <ol>
 <li>
-<p>Install the YUM priorities package:</p>
+<p>Install the Yum priorities package:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install yum-plugin-priorities
 </pre></div>
 
@@ -2025,7 +2086,7 @@ It is important to install and enable the YUM priorities plugin before installin
 </ol>
 <h3 id="install-the-epel-repositories">Install the EPEL repositories<a class="headerlink" href="#install-the-epel-repositories" title="Permanent link">&para;</a></h3>
 <p>OSG software depends on packages distributed via the <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a> repositories.
-You must install and enable those first.</p>
+You must install and enable these first.</p>
 <ul>
 <li>
 <p>Install the EPEL repository, if not already present.  Choose the right version to match your OS version.</p>
@@ -2051,9 +2112,10 @@ You must install and enable those first.</p>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>If you have your own mirror or configuration of the EPEL repository, you <strong>MUST</strong> verify that the priority of the EPEL repository is either missing, or 99 or a higher number.
+<p>If you have your own mirror or configuration of the EPEL repository, you <strong>MUST</strong> verify that the priority of the
+EPEL repository is either missing, or 99 or a higher number.
 The OSG repositories must have a better (numerically lower) priority than the EPEL repositories;
-you might have dependency resolution ("depsolving") issues otherwise.</p>
+otherwise, you might have dependency resolution ("depsolving") issues.</p>
 </div>
 <h3 id="automatic-updates">Automatic Updates<a class="headerlink" href="#automatic-updates" title="Permanent link">&para;</a></h3>
 <p>For production services, we suggest only changing software versions during controlled downtime.
@@ -2082,7 +2144,8 @@ Therefore we recommend security-only automatic updates or disabling automatic up
 </ul>
 <h3 id="install-the-osg-repositories">Install the OSG Repositories<a class="headerlink" href="#install-the-osg-repositories" title="Permanent link">&para;</a></h3>
 <p>This document assumes a fresh install.
-For instructions on upgrading from one OSG series to another, see the <a href="../../release/release_series#updating-from-old">release series document</a>.</p>
+For instructions on upgrading from one OSG series to another, see the
+<a href="../../release/release_series#updating-from-old">release series document</a>.</p>
 <p>Install the OSG repositories:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -Uvh &lt;URL&gt;
 </pre></div>
@@ -2099,18 +2162,15 @@ For instructions on upgrading from one OSG series to another, see the <a href=".
 </thead>
 <tbody>
 <tr>
-<td align="left"><strong>OSG 3.3</strong></td>
-<td align="center"><code>https://repo.opensciencegrid.org/osg/3.3/osg-3.3-el6-release-latest.rpm</code></td>
-<td align="center"><code>https://repo.opensciencegrid.org/osg/3.3/osg-3.3-el7-release-latest.rpm</code></td>
-</tr>
-<tr>
 <td align="left"><strong>OSG 3.4</strong></td>
 <td align="center"><code>https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm</code></td>
 <td align="center"><code>https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm</code></td>
 </tr>
 </tbody>
 </table>
-<p>The only OSG repository enabled by default is the release one. If you want to enable another one, such as <code>osg-testing</code>, then edit its file (e.g. <code>/etc/yum.repos.d/osg-testing.repo</code>) and change the enabled option from 0 to 1:</p>
+<p>The only OSG repository enabled by default is the release one.
+If you want to <a href="#repositories">enable another one</a> (e.g. <code>osg-testing</code>), then edit its file
+(e.g. <code>/etc/yum.repos.d/osg-testing.repo</code>) and change the enabled option from 0 to 1:</p>
 <div class="codehilite"><pre><span></span><span class="k">[osg-testing]</span>
 <span class="na">name</span><span class="o">=</span><span class="s">OSG Software for Enterprise Linux 7 - Testing - $basearch</span>
 <span class="c1">#baseurl=https://repo.opensciencegrid.org/osg/3.4/el7/testing/$basearch</span>
@@ -2125,7 +2185,7 @@ For instructions on upgrading from one OSG series to another, see the <a href=".
 
 <h2 id="repository-mirrors">Repository Mirrors<a class="headerlink" href="#repository-mirrors" title="Permanent link">&para;</a></h2>
 <p>If you run a large site (&gt;20 nodes), you should consider setting up a local mirror for the OSG repositories.
-A local YUM mirror allows you to reduce the amount of external bandwidth used when updating or installing packages.</p>
+A local Yum mirror allows you to reduce the amount of external bandwidth used when updating or installing packages.</p>
 <p>Add the following to a file in <code>/etc/cron.d</code>:</p>
 <div class="codehilite"><pre><span></span><span class="c"><span style="color:red">RANDOM</span> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/ /var/www/html/osg/</span>
 </pre></div>
@@ -2137,9 +2197,11 @@ A local YUM mirror allows you to reduce the amount of external bandwidth used wh
 
 
 <p>Replace <span style="color:red">RANDOM</span> with a number between 0 and 59.</p>
-<p>Replace <span style="color:red">OSG_RELEASE</span> with the OSG release you want to use (e.g. '3.3', or '3.4').</p>
-<p>On your worker node, you can replace the <code>baseurl</code> line of <code>/etc/yum.repos.d/osg.repo</code> with the appropriate URL for your mirror.</p>
-<p>If you are interested in having your mirror be part of the OSG's default set of mirrors, <a href="https://support.opensciencegrid.org/helpdesk/tickets/new">please file a support ticket</a>.</p>
+<p>Replace <span style="color:red">OSG_RELEASE</span> with the OSG release you would like to use (e.g. '3.4').</p>
+<p>On your worker node, you can replace the <code>baseurl</code> line of <code>/etc/yum.repos.d/osg.repo</code> with the appropriate URL for your
+mirror.</p>
+<p>If you are interested in having your mirror be part of the OSG's default set of mirrors,
+<a href="https://support.opensciencegrid.org/helpdesk/tickets/new">please file a support ticket</a>.</p>
 <h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../../release/yum-basics/">Basic use of Yum</a></li>

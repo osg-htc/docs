@@ -456,22 +456,12 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://opensciencegrid.github.io/docs/other/install-osg-upcoming-software/</loc>
-     <lastmod>2019-02-21</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
      <loc>https://opensciencegrid.github.io/docs/release/yum-basics/</loc>
      <lastmod>2019-02-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/release/signing/</loc>
-     <lastmod>2019-02-21</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/release/contrib/</loc>
      <lastmod>2019-02-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
