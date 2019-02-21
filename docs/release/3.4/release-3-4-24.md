@@ -10,14 +10,12 @@ This release contains:
 
 -   BLAHP 1.18.39: Now propagates signals down to the payload job
 -   osg-pki-tools 3.0.1: Now accepts multi-word states or provinces
--   HTCondor-CE 3.2.1: Minor adjustments to work with new HTCondor versions (8.6.x, 8.8.x, and 8.9.x)
--   condor-cron 1.1.4: Minor adjustments to work with new HTCondor versions (8.6.x, 8.8.x, and 8.9.x)
+-   HTCondor-CE 3.2.1: Minor adjustments to work with new HTCondor versions
+-   condor-cron 1.1.4: Minor adjustments to work with new HTCondor versions
 -   osg-release 3.4-1: New osg-rolling repository (disabled by default) allows early access to fully tested software
 -   Upcoming Repository
-    -   [Singularity 3.0.3](https://github.com/sylabs/singularity/releases/tag/v3.0.3): Bug fix release
-        -   [Change Log](https://github.com/sylabs/singularity/blob/master/CHANGELOG.md#v303---20190121)
-    -   Limited HDFS functionality for EL6 hosts
-        -   Client Only: Mount HDFS via FUSE
+    -   [Singularity 3.0.3](https://github.com/sylabs/singularity/releases/tag/v3.0.3): [Change Log](https://github.com/sylabs/singularity/blob/master/CHANGELOG.md#v303---20190121)
+    -   Limited client HDFS functionality to mount HDFS on EL6 hosts via FUSE
 
         !!! info
             Upgrade to EL7 to update name nodes, data nodes, XRootD, or GridFTP hosts.
