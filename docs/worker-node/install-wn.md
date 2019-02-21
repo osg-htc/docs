@@ -77,7 +77,7 @@ To get assistance please use this [Help Procedure](/common/help).
 Reference
 ---------
 
-Please see the documentation on using [YUM and RPM](../release/yum-basics.md), and using the [OSG YUM repositories](../common/yum.md).
+Please see the documentation on using [Yum and RPM](/release/yum-basics.md), and using the [OSG Yum repositories](/common/yum.md).
 
 ### Worker node contents
 

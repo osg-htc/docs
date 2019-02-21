@@ -506,6 +506,6 @@ root@host # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
 References
 ----------
 
-- [The main yum web site](http://yum.baseurl.org/)
-- A good description of the commands for RPM and yum can be found at [Learn Linux 101: RPM and YUM Package Management](https://developer.ibm.com/tutorials/l-lpic1-102-5/).
+- [The main Yum web site](http://yum.baseurl.org/)
+- A good description of the commands for RPM and Yum can be found at [Learn Linux 101: RPM and Yum Package Management](https://developer.ibm.com/tutorials/l-lpic1-102-5/).
 
