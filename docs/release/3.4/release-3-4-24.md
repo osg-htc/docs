@@ -14,7 +14,7 @@ This release contains:
 -   condor-cron 1.1.4: Minor adjustments to work with new HTCondor versions
 -   osg-release 3.4-1: New osg-rolling repository (disabled by default) allows early access to fully tested software
 -   Upcoming Repository
-    -   [Singularity 3.0.3](https://github.com/sylabs/singularity/releases/tag/v3.0.3): [Change Log](https://github.com/sylabs/singularity/blob/master/CHANGELOG.md#v303---20190121)
+    -   [Singularity 3.0.3](https://github.com/sylabs/singularity/releases/tag/v3.0.3) ([change Log](https://github.com/sylabs/singularity/blob/master/CHANGELOG.md#v303---20190121))
     -   Limited client HDFS functionality to mount HDFS on EL6 hosts via FUSE
 
         !!! info
