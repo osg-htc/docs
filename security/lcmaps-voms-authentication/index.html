@@ -2233,9 +2233,8 @@ The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOM
 <code>/cms/Role=production/Capability=NULL</code>.
 In OSG 3.4, the LCMAPS VOMS plugin replaced GUMS and edg-mkgridmap as the authentication method at OSG sites.</p>
 <p>The OSG provides a default set of mappings from VOMS attributes to Unix accounts.
-By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to,
-banning based on VOMS attributes, banning a specific user, or adding a VO, VO group, VO role, and/or user that is not in
-the OSG's set of mappings.</p>
+By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to;
+adding custom mappings for specific users and VOMS attributes; and/or banning specific users and VOMS attributes.</p>
 <p>Use this page to learn how to install and configure the LCMAPS VOMS plugin to authenticate users to access your
 resources on a per-VO basis.</p>
 <h2 id="installing-the-lcmaps-voms-plugin">Installing the LCMAPS VOMS Plugin<a class="headerlink" href="#installing-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h2>
@@ -2291,7 +2290,7 @@ The LCMAPS VOMS plugin does not work with gLExec.</p>
 </li>
 <li>
 <p>Create Unix accounts for each VO, VO role, VO group, and user that you wish to support.
-    The full list of VOs is located on <a href="https://github.com/opensciencegrid/topology/tree/master/virtual-organizations">OIM</a>.
+    The full list of VOs is located in the <a href="https://github.com/opensciencegrid/topology/tree/master/virtual-organizations">OSG topology</a>.
     You are not expected to support all the VOs.
     If you would like to support opportunistic usage, we recommend creating the following Unix accounts:</p>
 <table>
