@@ -44,7 +44,7 @@ If you are using OpenSSL 1.1, you may notice minor formatting differences.
 Requesting InCommon IGTF Host Certificates
 ------------------------------------------
 
-Many institution in the United States already subscribe to InCommon and offer certificate services.
+Many institutions in the United States already subscribe to InCommon and offer certificate services.
 If your institution is in the list of [InCommon subscribers](https://www.incommon.org/certificates/subscribers.html),
 continue with the instructions below.
 If your institution is not in the list, Let's Encrypt certificates do not meet your needs, and you do not have access to
