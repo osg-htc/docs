@@ -16,6 +16,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://opensciencegrid.github.io/docs/compute-element/hosted-ce/</loc>
+     <lastmod>2019-02-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://opensciencegrid.github.io/docs/compute-element/install-htcondor-ce/</loc>
      <lastmod>2019-02-26</lastmod>
      <changefreq>daily</changefreq>
@@ -32,11 +37,6 @@
     </url>
     <url>
      <loc>https://opensciencegrid.github.io/docs/compute-element/submit-htcondor-ce/</loc>
-     <lastmod>2019-02-26</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://opensciencegrid.github.io/docs/compute-element/hosted-ce/</loc>
      <lastmod>2019-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
