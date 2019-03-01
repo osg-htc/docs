@@ -50,11 +50,15 @@ Before starting the installation process, consider the following points (consult
 !!! note
     GlideinWMS versions prior to 3.4.1 also required port 9615 for the Schedd,
     and did not support using shared port for the secondary collectors.
+    If you are upgrading a standalone submit host from version 3.4 or earlier, the default open 
+    port has changed from 9615 to 9618, and you need to update your firewall rules to reflect this change.
+    You can figure out which port will be used by running the following command:
     
-    If you are upgrading a standalone frontend or submit host from version 3.4.1 or earlier,
-    review your firewall settings and ensure that port 9618 is open.
-    
-    For more detailed information, see [Configuring GlideinWMS Frontend](#configuring-glideinwms-frontend).
+    ``` console
+     condor_config_val SHARED_PORT_ARGS
+    ```
+
+   For more detailed information, see [Configuring GlideinWMS Frontend](#configuring-glideinwms-frontend).
 
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
@@ -263,14 +267,41 @@ Both the `classad_proxy` and `absfname` files should be owned by `frontend` user
      - The `DN` of the %GREEN%VO Frontend Proxy%ENDCOLOR% described previously [here](#credentials-and-proxies).
      - The `node` attribute is the full hostname of the collectors (`hostname --fqdn`) and port
      - The `secondary` attribute indicates whether the element is for the primary or secondary collectors (True/False).
-     The default HTCondor configuration of the VO Frontend starts multiple Collector processes on the host (`/etc/condor/config.d/11_gwms_secondary_collectors.config`). The `DN` and `hostname` on the first line are the hostname and the host certificate of the VO Frontend. The `DN` and `hostname` on the second line are the same as the ones in the first one. The hostname (e.g. hostname.domain.tld) is filled automatically during the installation. The secondary collector ports can be defined as a range, e.g., 9620-9660).
+     The default HTCondor configuration of the VO Frontend starts multiple Collector processes on the host (`/etc/condor/config.d/11_gwms_secondary_collectors.config`). The `DN` and `hostname` on the first line are the hostname and the host certificate of the VO Frontend. The `DN` and `hostname` on the second line are the same as the ones in the first one. The hostname (e.g. hostname.domain.tld) is filled automatically during the installation. The secondary collector connection can be defined as sinful string for the sock case , e.g., hostname.domain.tld:9618?sock=collector16.
 
+[Example 1]
 
             :::xml
             <collector DN="DN of main collector"
                    node="hostname.domain.tld:9618" secondary="False"/>
             <collector DN="DN of secondary collectors (usually same as DN in line above)"
                    node="hostname.domain.tld:9620-9660" secondary="True"/>
+
+!!! note
+
+In GlideinWMS v3.4.1, shared port only configuration is incompatible if talking to older Factories (v3.4 or older). We strongly recommend any user of GlideinWMS Frontend v3.4.1 or newer, to transition to the use of shared port for secondary collectors and CCBs.
+The shared port configuration is incompatible if your Frontend is talking to Factories v3.4 or older and you'll get an error telling you to wait.
+To transition to the use of shared port for secondary collectors, you have to change the collectors section in the Frontend configuration. If you are using the default port range for the secondary collectors as shown in [Example 2] below, then you should replace it with port `9618` and the sock-range as shown in [Example 1] above.
+
+If you have a more complex configuration, please read the [detailed GlideinWMS configuration](http://glideinwms.fnal.gov/doc.prd/frontend/configuration.html)
+
+[Example 2]
+
+            :::xml
+            <collector DN="DN of main collector"
+                   node="hostname.domain.tld:9618" secondary="False"/>
+            <collector DN="DN of secondary collectors (usually same as DN in line above)"
+                   node=“hostname.domain.tld:9618?sock=collector0-40" secondary="True"/>
+
+6. The CCBs information.
+    If you have a different configuration of the HTCondor Connection Brokering (CCB servers) from the default (usually the section is empty as the User Collectors acts as CCB if needed), you can set the connection in the CCB section the same way that User Collector information previously mentioned. Also, the same rules for transition to shared_port of the connections, apply to the CCBs.
+    
+            :::xml
+            <ccb DN="DN of the CCB server"
+                   node="hostname.domain.tld:9618"/>
+            <ccb DN="DN of the CCB server"
+                   node=“hostname.domain.tld:9618?sock=collector0-40" secondary="True"/>
+    
 
 !!! warning
     The Frontend configuration includes many knobs, some of which are conflicting with a RPM installation where there is only one version of the Frontend installed and it uses well known paths.     Do not change the following in the Frontend configuration (you must leave the default values coming with the RPM installation):
