@@ -51,8 +51,8 @@ Before starting the installation process, consider the following points (consult
     GlideinWMS versions prior to 3.4.1 also required port 9615 for the Schedd,
     and did not support using shared port for the secondary collectors.
     If you are upgrading a standalone submit host from version 3.4 or earlier, the default open 
-    port has changed from 9615 to 9618 and you need to upgrade your firewall rules to reflect this change.
-    You figure out which port would be used by running the following command:
+    port has changed from 9615 to 9618, and you need to update your firewall rules to reflect this change.
+    You can figure out which port will be used by running the following command:
     
     ``` console
      condor_config_val SHARED_PORT_ARGS
