@@ -10,7 +10,7 @@ This document describes how to install a CVMFS Stratum 1. There are many differe
 Before starting the installation process, consider the following points:
 
 - **User IDs and Group IDs:** If your machine is also going to be a repository server like the OSG GOC, the installation will create the same user and group IDs as the [cvmfs client](../worker-node/install-cvmfs).  If you are installing frontier-squid, the installation will also create the same user id as [frontier-squid](../data/frontier-squid).
--  **Network ports:** This installation will host the stratum 1 on ports 80 and 8000 and, if squid is installed, it will host the uncached apache on port 8080.
+-  **Network ports:** This installation will host the stratum 1 on ports 80 and 8000 and, if squid is installed, it will host the uncached apache on port 8081.
 - **Host choice:** -  Make sure there is adequate disk space for the repositories that will be served, at `/srv/cvmfs`. Do not use xfs as the filesystem type on operating systems older than EL7, because it has been demonstrated to perform poorly for CVMFS repositories; instead use ext3 or ext4. About 10GB should be reserved for apache and squid logs under /var/log on a production server, although they normally will not get that large. A Stratum 1 that is also a repository server should have at least 5GB available at `/var/cache`.
 - **SELinux** - Ensure SELinux is disabled
 
@@ -96,7 +96,7 @@ Also, put the following in `/etc/logrotate.d/cvmfs`:
 If you are installing frontier-squid, create `/etc/httpd/conf.d/cvmfs.conf` and put the following lines into it:
 
 ```
-Listen 8080 KeepAlive On
+Listen 8081 KeepAlive On
 ```
 
 If you are not installing frontier-squid, instead put the following lines into that file:
@@ -124,6 +124,7 @@ RewriteRule ^/cvmfs/(.*)$ /srv/cvmfs/$1
   </FilesMatch>
 
   Header unset Last-Modified 
+  RequestHeader unset If-Modified-Since
   FileETag None
 
   ExpiresActive On 
@@ -179,8 +180,8 @@ insertline("^http_access deny all", "acl CVMFSAPI urlpath_regex ^/cvmfs/[^/]*/ap
 insertline("^http_access deny all", "cache deny CVMFSAPI")
 
 # port 80 is also supported, through an iptables redirect 
-setoption("http_port", "8000 accel defaultsite=localhost:8080 no-vhost")
-setoption("cache_peer", "localhost parent 8080 0 no-query originserver")
+setoption("http_port", "8000 accel defaultsite=localhost:8081 no-vhost")
+setoption("cache_peer", "localhost parent 8081 0 no-query originserver")
 
 # allow incoming http accesses from anywhere
 # all requests will be forwarded to the originserver 

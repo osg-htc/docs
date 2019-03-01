@@ -12,17 +12,17 @@ This document is intended for System Administrators who are installing
 `frontier-squid`, the OSG distribution of the Frontier Squid software.
 
 !!! note "Applicable versions"
-    The applicable software versions for this document are OSG Version >= 3.4.0.
+    This document applies to software from the OSG 3.4 Release Series.
     The version of frontier-squid installed should be >= 3.5.24-3.1.
-    When using an OSG Version < 3.4.0 and a frontier-squid version in the
-    2.7STABLE9 series, refer to the
+    When using OSG software from a previous Release Series (eg, OSG 3.3)
+    and a frontier-squid version in the 2.7STABLE9 series, refer to the
     [old upstream install documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/OldInstallSquid)
     instead of the current links included below. There are some
-    incompatibilities between the two versions, so if you are upgrading
-    from a 2.7STABLE9 version to a 3.5 version, see the
+    incompatibilities between the two versions of frontier-squid, so if you
+    are upgrading from a 2.7STABLE9 version to a 3.5 version, see the
     [upstream documentation on upgrading](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Upgrading).
 
-## Frontier Squid is Recommended
+## Frontier Squid Is Recommended
 
 OSG recommends that all sites run a caching proxy for HTTP and HTTPS
 to help reduce bandwidth and improve throughput. To that end, Compute
@@ -30,16 +30,10 @@ Element (CE) installations include Frontier Squid automatically. We
 encourage all sites to configure and use this service, as described
 below.
 
-For large sites that expect heavy load on the proxy, it may be best to
-run the proxy on its own host. In that case, the Frontier Squid
-software still will be installed on the CE, but it need not be
-enabled. Instead, install your proxy service on the separate host and
-then configure the CE host to refer to the proxy on that host.
-
-The `osg-configure` configuration tool (version 1.0.45 and later)
-warns users who have not added the proxy location to their CE
-configuration. In the future, a proxy will be required and
-osg-configure will fail if the proxy location is not set.
+For large sites that expect heavy load on the proxy, it is best to run the proxy on its own host.
+If you are unsure if your site qualifies, we recommend initially running the proxy on your CE host and monitoring its
+bandwidth.
+If the network usage regularly peaks at over one third of the bandwidth capacity, move the proxy to a new host.
 
 ## Before Starting
 
@@ -69,6 +63,7 @@ To install Frontier Squid, make sure that your host is up to date before install
 
         :::console
         root@host # yum update
+
     This command will update **all** packages
 
 3. Install Frontier Squid:
@@ -85,10 +80,9 @@ To configure the Frontier Squid service itself:
 1.  Follow the
     [Configuration section of the upstream Frontier Squid documentation](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Configuration).
 2.  Enable, start, and test the service (as described below).
-3.  Enable WLCG monitoring as described in the
-    [upstream documentation on enabling monitoring](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring)
-    and
-    [register the squid in OIM](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#OIM).
+3.  [Register the squid](#registering-frontier-squid).
+4.  If your site is part of the WLCG, enable WLCG monitoring as described in the
+    [upstream documentation on enabling monitoring](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Enabling_monitoring).
 
 !!! Note
     An important difference between the standard Squid software and
@@ -99,14 +93,14 @@ To configure the Frontier Squid service itself:
 
 To configure the OSG Compute Element (CE) to know about your Frontier Squid service:
 
-1.  On your CE host, edit `/etc/osg/config.d/01-squid.ini`
+1.  On your CE host (which may be different than your Frontier Squid host), edit `/etc/osg/config.d/01-squid.ini`
     -   Make sure that `enabled` is set to `True`
     -   Set `location` to the hostname and port of your Frontier Squid
         service (e.g., `my.squid.host.edu:3128`)
     -   Leave the other settings at `DEFAULT` unless you have specific
         reasons to change them
 
-2.  Run `osg-configure` to propagate the changes on your CE.
+2.  Run `osg-configure -c` to propagate the changes on your CE.
 
 !!! Note
     You may want to finish other CE configuration tasks before running
@@ -127,15 +121,15 @@ Start the frontier-squid service and enable it to start at boot time. As a remin
 ## Validating Frontier Squid
 
 As any user on another computer, do the following (where
-`yoursquid.your.domain` is the fully qualified domain name of your
+`%RED%my.squid.host.edu%ENDCOLOR%` is the fully qualified domain name of your
 squid server):
 
 ``` console
-user@host $ export http_proxy=http://%RED%yoursquid.your.domain%ENDCOLOR%:3128
+user@host $ export http_proxy=http://%RED%my.squid.host.edu%ENDCOLOR%:3128
 user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
-X-Cache: MISS from %RED%yoursquid.your.domain%ENDCOLOR%
+X-Cache: MISS from %RED%my.squid.host.edu%ENDCOLOR%
 user@host $ wget -qdO/dev/null http://frontier.cern.ch 2>&1|grep X-Cache
-X-Cache: HIT from %RED%yoursquid.your.domain%ENDCOLOR%
+X-Cache: HIT from %RED%my.squid.host.edu%ENDCOLOR%
 ```
 
 If the grep doesn't print anything, try removing it from the pipeline
@@ -147,6 +141,35 @@ to try to see what's wrong.
 If your squid will be supporting the Frontier application, it is also
 good to do the test in the
 [upstream documentation Testing the installation section](https://twiki.cern.ch/twiki/bin/view/Frontier/InstallSquid#Testing_the_installation).
+
+## Registering Frontier Squid
+
+To register your Frontier Squid host, follow the general registration instructions
+[here](/common/registration#new-resources) with the following Frontier Squid-specific details:
+
+1.  Add a `Squid:` section to the `Services:` list, with any relevant fields for that service.
+    This is a partial example:
+
+        :::console
+        ...
+        FQDN: <FULLY QUALIFIED DOMAIN NAME>
+        Services:
+          Squid:
+            Description: Generic squid service
+        ...
+
+    Replacing `<FULLY QUALIFIED DOMAIN NAME>` with your Frontier Squid server's DNS entry or in the case of multiple
+    Frontier Squid servers for a single resource, the round-robin DNS entry.
+
+    See the [BNL_ATLAS_Frontier_Squid](https://github.com/opensciencegrid/topology/blob/master/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml#L306-L325) 
+    for a complete example.
+
+2.  If you are setting up a new resource, set `Active: false`.
+    Only set `Active: true` for a resource when it is accepting requests and ready for production.
+
+If you are running a WLCG site, a few hours after a squid is registered
+and marked `Active`, 
+[verify that it is monitored by WLCG](https://twiki.cern.ch/twiki/bin/view/LCG/WLCGSquidRegistration#Verify_monitor).
 
 ## Reference
 

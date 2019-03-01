@@ -81,7 +81,7 @@ Before troubleshooting, we recommend increasing the log level:
 
 1.  Write the following into `/etc/condor-ce/config.d/99-local.conf` to increase the log level for all daemons:
 
-        ALL_DEBUG = D_FULLDEBUG
+        ALL_DEBUG = D_ALWAYS:2 D_CAT
 
 2.  Ensure that the configuration is in place:
 
@@ -149,7 +149,8 @@ You may see error messages like the following in your [SchedLog](#schedlog):
 
 **Next actions**
 
-1.  **Check GUMS or grid-mapfile** and ensure that the user's DN is known to your [authentication method](install-htcondor-ce#configuring-authentication)
+1.  **Check voms-mapfile or grid-mapfile** and ensure that the user's DN or VOMS attributes are known to your
+    [authentication method](install-htcondor-ce#configuring-authentication)
 2.  **Check for lcmaps errors** in `/var/log/messages`
 3.  **If you do not see helpful error messages in `/var/log/messages`,** adjust the debug level by adding `export LCMAPS_DEBUG_LEVEL=5` to `/etc/sysconfig/condor-ce`, restarting the condor-ce service, and checking `/var/log/messages` for errors again.
 
@@ -265,7 +266,7 @@ ERROR: couldn't locate condorce.example.com!
 
 #### Remote idle jobs: Are you authorized to run jobs on the CE?
 
-The CE will only accept jobs from users that authenticate via LCMAPS, grid mapfile, or GUMS. 
+The CE will only accept jobs from users that authenticate via [LCMAPS VOMS](/security/lcmaps-voms-authentication).
 You can use [condor\_ce\_ping](#condor_ce_ping) to check if you are authorized and what user your proxy is being mapped
 to.
 
@@ -299,8 +300,23 @@ Jobs will be put on held with a `HoldReason` attribute that can be inspected wit
 
 ``` console
 user@host $ condor_ce_q -l <JOB-ID> -attr HoldReason
-HoldReason = "CE job in status 5 put on hold by SYSTEM_PERIODIC_HOLD due to non-existent route or entry in JOB_ROUTER_ENTRIES."
+HoldReason = "CE job in status 5 put on hold by SYSTEM_PERIODIC_HOLD due to no matching routes, route job limit, or route failure threshold."
 ```
+
+#### Held jobs: no matching routes, route job limit, or route failure threshold
+
+Jobs on the CE will be put on hold if they are not claimed by the job router within 30 minutes.
+The most common cases for this behavior are as follows:
+
+- **The job does not match any job routes:**
+  use [condor\_ce\_job\_router\_info](#condor_ce_job_router_info) to see why your idle job does not match any
+  [routes](/compute-element/job-router-recipes#how-job-routes-are-constructed).
+- **The route(s) that the job matches to are full:**
+  See [limiting the number of jobs](/compute-element/job-router-recipes#limiting-the-number-of-jobs).
+- **The job router is throttling submission to your batch system due to submission failures:**
+  See the HTCondor manual for [FailureRateThreshold](http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html#55958).
+  Check for errors in the [JobRouterLog](#jobrouterlog) or [GridmanagerLog](#gridmanagerlog) for HTCondor and
+  non-HTCondor batch systems, respectively.
 
 #### Held jobs: Missing/expired user proxy
 
@@ -331,15 +347,6 @@ manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/12_Appendix_A.html#1047
         grid_resource = condor condorce.example.com condorce.example.com:9619
 
     replacing `condorce.example.com` with the hostname of the CE.
-
-#### Held jobs: Non-existent route or entry in JOB_ROUTER_ENTRIES
-
-Jobs on the CE will be put on hold if they do not match any job routes within 30 minutes.
-
-**Next actions**
-
-Use [condor\_ce\_job\_router\_info](#condor_ce_job_router_info) to see why your idle job does not match any routes.
-
 
 ### Identifying the corresponding job ID on the local batch system
 
@@ -445,6 +452,31 @@ condor output.
 2.  **If you see “gsi@unmapped” in the “Remote Mapping” line:** Either your credentials are not mapped on the CE or authentication is not set up at all. To set up authentication, refer to our [installation document](install-htcondor-ce#configuring-authentication).
 3.  **If the job submits but does not complete:** Look at the status of the job and perform the relevant [troubleshooting steps](#htcondor-ce-troubleshooting-items).
 
+### condor_ce_host_network_check
+
+#### Usage
+
+`condor_ce_host_network_check` is a tool for testing an HTCondor-CE's networking configuration:
+
+```console
+root@host # condor_ce_host_network_check
+Starting analysis of host networking for HTCondor-CE
+System hostname: fermicloud360.fnal.gov
+FQDN matches hostname
+Forward resolution of hostname fermicloud360.fnal.gov is 131.225.155.96.
+Backward resolution of IPv4 131.225.155.96 is fermicloud360.fnal.gov.
+Forward and backward resolution match!
+HTCondor is considering all network interfaces and addresses.
+HTCondor would pick address of 131.225.155.96 as primary address.
+HTCondor primary address 131.225.155.96 matches system preferred address.
+Host network configuration should work with HTCondor-CE
+```
+
+#### Troubleshooting
+
+If the tool reports that `Host network configuration not expected to work with HTCondor-CE`, ensure that forward and
+reverse DNS resolution return the public IP and hostname.
+
 ### condor_ce_run
 
 #### Usage
@@ -517,8 +549,8 @@ Authorized:                  TRUE
 
 1.  **If you see “ERROR: couldn’t locate (null)”**, that means the HTCondor-CE schedd (the daemon that schedules jobs) cannot be reached. To track down the issue, increase debugging levels on the CE:
 
-        MASTER_DEBUG = D_FULLDEBUG
-        SCHEDD_DEBUG = D_FULLDEBUG
+        MASTER_DEBUG = D_ALWAYS:2 D_CAT
+        SCHEDD_DEBUG = D_ALWAYS:2 D_CAT
 
     Then look in the [MasterLog](#masterlog) and [SchedLog](#schedlog) for any errors.
 
@@ -550,8 +582,8 @@ If the jobs that you are submiting to a CE are not completing, `condor_ce_q` can
 
 1.  **If the schedd is not running:** You will see a lengthy message about being unable to contact the schedd. To track down the issue, increase the debugging levels on the CE with:
 
-        MASTER_DEBUG = D_FULLDEBUG
-        SCHEDD_DEBUG = D_FULLDEBUG
+        MASTER_DEBUG = D_ALWAYS:2 D_CAT
+        SCHEDD_DEBUG = D_ALWAYS:2 D_CAT
 
     To apply these changes, reconfigure HTCondor-CE:
 
@@ -688,29 +720,32 @@ manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/condor_router_q.html)
 
 #### Usage
 
-To see the daemons running on a CE, you can run the following:
+To see the daemons running on a CE, run the following command:
 
 ``` console
-user@host $ condor_ce_status -any -name condorce.example.com -pool condorce.example.com:9619
+user@host $ condor_ce_status -any
 ```
 
-Replacing `condorce.example.com`  with the hostname of the CE.
+`condor_ce_status` takes the same arguments as `condor_status`, which are documented in the
+[HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/condor_status.html).
 
-!!! note
-    If you run the `condor_ce_status` command on the CE that you are testing, omit the `-name` and `-pool` options. `condor_ce_status` takes the same arguments as `condor_status` and is documented in the [HTCondor manual](http://research.cs.wisc.edu/htcondor/manual/v8.6/condor_status.html).
+!!! note ""Missing" Worker Nodes"
+    An HTCondor-CE will not show any worker nodes (e.g. `Machine` entries in the `condor_ce_status -any` output) if
+    it does not have any running GlideinWMS pilot jobs.
+    This is expected since HTCondor-CE only forwards incoming grid jobs to your batch system and does not match jobs to
+    worker nodes.
 
 #### Troubleshooting
 
-To list the daemons that are configured to run:
+If the output of `condor_ce_status -any` does not show at least the following daemons:
 
-``` console
-user@host $ condor_ce_config_val -v DAEMON_LIST
-DAEMON_LIST: MASTER COLLECTOR SCHEDD JOB_ROUTER, SHARED_PORT, SHARED_PORT
-  Defined in '/etc/condor-ce/config.d/03-ce-shared-port.conf', line 9.
-```
+- Collector
+- Scheduler
+- DaemonMaster
+- Job_Router
 
-If you do not see these daemons in the output of `condor_ce_status`, check the [Master log](#masterlog) for errors.
-
+Increase the [debug level](/compute-element/troubleshoot-htcondor-ce/#htcondor-ce-troubleshooting-items) and consult the
+[HTCondor-CE logs](/compute-element/troubleshoot-htcondor-ce/#htcondor-ce-troubleshooting-data) for errors.
 
 ### condor_ce_config_val
 
@@ -795,7 +830,7 @@ they fail to start.
 - Increasing the debug level:
     1. Set the following value in `/etc/condor-ce/config.d/99-local.conf` on the CE host:
 
-            MASTER_DEBUG = D_FULLDEBUG
+            MASTER_DEBUG = D_ALWAYS:2 D_CAT
 
     2. To apply these changes, reconfigure HTCondor-CE:
 
@@ -823,7 +858,7 @@ It contains valuable information when trying to troubleshoot authentication issu
 - Increasing the debug level:
     1. Set the following value in `/etc/condor-ce/config.d/99-local.conf` on the CE host:
 
-            SCHEDD_DEBUG = D_FULLDEBUG
+            SCHEDD_DEBUG = D_ALWAYS:2 D_CAT
 
     2. To apply these changes, reconfigure HTCondor-CE:
 
@@ -900,7 +935,7 @@ troubleshoot issues with job routing.
 - Increasing the debug level:
     1. Set the following value in `/etc/condor-ce/config.d/99-local.conf` on the CE host:
 
-            JOB_ROUTER_DEBUG = D_FULLDEBUG
+            JOB_ROUTER_DEBUG = D_ALWAYS:2 D_CAT
 
     2. Apply these changes, reconfigure HTCondor-CE:
 
@@ -909,7 +944,14 @@ troubleshoot issues with job routing.
 
 #### Known Errors ####
 
--   If you have `D_FULLDEBUG` turned on for the job router, you will see errors like the following:
+-   **(HTCondor batch systems only)** If you see the following error message:
+
+        Can't find address of schedd
+
+    This means that HTCondor-CE cannot communicate with your HTCondor batch system.
+    Verify that the `condor` service is running on the HTCondor-CE host and is configured for your central manager.
+
+-   If you have `D_ALWAYS:2` turned on for the job router, you will see errors like the following:
 
         06/12/15 14:00:28 HOOK_UPDATE_JOB_INFO not configured.
 
@@ -958,7 +1000,7 @@ Wiki](https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=GridmanagerLog).
 
             MAX_GRIDMANAGER_LOG = 6h
             MAX_NUM_GRIDMANAGER_LOG = 8
-            GRIDMANAGER_DEBUG = D_FULLDEBUG
+            GRIDMANAGER_DEBUG = D_ALWAYS:2 D_CAT
 
     2. To apply these changes, reconfigure HTCondor-CE:
 
@@ -1010,7 +1052,7 @@ This log is a good place to check if experiencing connectivity issues with HTCon
 - Increasing the debug level:
     1. Set the following value in `/etc/condor-ce/config.d/99-local.conf` on the CE host:
 
-            SHARED_PORT_DEBUG = D_FULLDEBUG
+            SHARED_PORT_DEBUG = D_ALWAYS:2 D_CAT
 
     2. To apply these changes, reconfigure HTCondor-CE:
 
@@ -1067,7 +1109,7 @@ If you are still experiencing issues after using this document, please let us kn
 
         root@host # osg-system-profiler
 
-3.  Start a support request using [a web interface](https://ticket.opensciencegrid.org/submit) or by email to <help@opensciencegrid.org>
+3.  Start a support request using [a web interface](https://support.opensciencegrid.org/helpdesk/tickets/new) or by email to <help@opensciencegrid.org>
     -   Describe issue and expected or desired behavior
     -   Include basic HTCondor-CE and related information
     -   Attach the osg-system-profiler output

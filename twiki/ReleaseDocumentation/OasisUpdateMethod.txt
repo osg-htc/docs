@@ -1,5 +1,0 @@
-%META:TOPICINFO{author="DaveDykstra" date="1383665905" format="1.1" version="1.15"}%
-%META:TOPICPARENT{name="WebHome"}%
----+!! Updating Software on OASIS
-
-This page has been moved to https://twiki.grid.iu.edu/bin/view/Documentation/Release3/UpdateOasis

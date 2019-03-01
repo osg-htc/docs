@@ -31,7 +31,7 @@ In the OSG repositories, you will find two different sets of predefined CA certi
 - (*default*) The OSG CA certificates. This is similar to the IGTF set but may have a small number of additions or deletions
 - The [IGTF](http://www.igtf.net/) CA certificates
 
-See [this page](https://opensciencegrid.github.io/security/CaDistribution/) for details of the contents of the OSG CA package.
+See [this page](https://opensciencegrid.org/security/CaDistribution/) for details of the contents of the OSG CA package.
 
 | **If you chose...**  | **Then run the following command...** |
 |----------------------|---------------------------------------|
@@ -47,7 +47,7 @@ The `osg-ca-scripts` package provides scripts to install and update predefined s
 - The OSG CA certificates. This is similar to the IGTF set but may have a small number of additions or deletions
 - The [IGTF](http://www.igtf.net/) CA certificates
 
-See [this page](https://opensciencegrid.github.io/security/CaDistribution/) for details of the contents of the OSG CA package.
+See [this page](https://opensciencegrid.org/security/CaDistribution/) for details of the contents of the OSG CA package.
 
 1. Install the `osg-ca-scripts` package:
 
@@ -95,14 +95,43 @@ root@host # yum install empty-ca-certs –-enablerepo=osg-empty
 
 ### Installing other CAs ###
 
-!!! warning
-    The `cilogon-openid` CA is only distributed in OSG 3.3.  Support will be removed by March 2018.
-
 In addition to the above CAs, you can install other CAs via RPM. These only work with the RPMs that provide CAs (that is, `osg-ca-certs` and the like, but not `osg-ca-scripts`.) They are in addition to the above RPMs, so do not only install these extra CAs.
 
-| **Set of CAs** | **RPM name**     | **Installation command (as root)** |
-|:---------------|:-----------------|:-----------------------------------|
-| cilogon-openid | cilogon-ca-certs | `yum install cilogon-ca-certs`     |
+| **Set of CAs** | **RPM name**           | **Installation command (as root)**   |
+|:---------------|:-----------------------|:-------------------------------------|
+| [cilogon-openid](https://ca.cilogon.org/policy/openid) | cilogon-openid-ca-cert | `yum install cilogon-openid-ca-cert` |
+
+Verifying CA Certificates
+-------------------------
+
+After installing the CA certificates, they can be verified with the following command:
+
+```console
+root@host # curl --cacert <CA FILE> \
+              --capath <CA DIRECTORY> \
+              -o /dev/null \
+              https://gracc.opensciencegrid.org \
+              && echo "CA certificate installation verified"
+```
+
+Where `<CA FILE>` is the path to a valid X.509 CA certificate and `<CA DIRECTORY>` is the path to the directory
+containing the installed CA certificates.
+For example, the following command can be used to verify a default OSG CA certificate installation:
+
+```console
+root@host # curl --cacert /etc/grid-security/certificates/cilogon-osg.pem \
+              --capath /etc/grid-security/certificates/ \
+              -o /dev/null \
+              https://gracc.opensciencegrid.org \
+              && echo "CA certificate installation verified"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 22005    0 22005    0     0  86633      0 --:--:-- --:--:-- --:--:--  499k
+CA certificate installation verified
+```
+
+If you do not see `CA certificate installation verified` this means that your CA certificate installation is broken.
+First, ensure that your CA installation is up-to-date and if you continue to see issues please [contact us](#getting-help).
 
 Managing Certificate Revocation Lists
 -------------------------------------
@@ -160,6 +189,10 @@ Start the services in the order listed and stop them in reverse order. As a remi
 | Enable a service to start on boot       | `chkconfig <SERVICE-NAME> on`             | `systemctl enable <SERVICE-NAME>`             |
 | Disable a service from starting on boot | `chkconfig <SERVICE-NAME> off`            | `systemctl disable <SERVICE-NAME>`            |
 
+Getting Help
+------------
+
+To get assistance, please use the [this page](/common/help).
 
 References
 ----------

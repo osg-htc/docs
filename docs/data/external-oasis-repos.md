@@ -11,7 +11,7 @@ covers how to install, configure, and host your own CVMFS _repository server_.  
 via OASIS, but will be hosted and operated externally from the OSG project.
 
 OASIS-based distribution and key signing is available to OSG VOs or repositories affiliated with an OSG VO.
-See the [policy page](https://opensciencegrid.github.io/technology/policy/external-oasis-repos/) for more information
+See the [policy page](https://opensciencegrid.org/technology/policy/external-oasis-repos/) for more information
 on what repositories OSG is willing to distribute.
 
 Before Starting
@@ -103,7 +103,14 @@ The initial repository creation must be run as `root`:
     root@host # echo -e "\*\\t\\t-\\tnofile\\t\\t16384" >>/etc/security/limits.conf
     root@host # ulimit -n 16384
     root@host # cvmfs_server mkfs -o %BLUE%LIBRARIAN%ENDCOLOR% %RED%example.opensciencegrid.org%ENDCOLOR%
-    root@host # (echo Order deny,allow;echo Deny from all;echo Allow from 127.0.0.1;echo Allow from ::1;echo Allow from 129.79.53.0/24;echo Allow from 2001:18e8:2:6::/56) >/srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.htaccess
+    root@host # cat >/srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.htaccess <<xEOFx
+    Order deny,allow
+    Deny from all
+    Allow from 127.0.0.1
+    Allow from ::1
+    Allow from 129.79.53.0/24 129.93.244.192/26 129.93.227.64/26
+    Allow from 2001:18e8:2:6::/56 2600:900:6::/48 
+    xEOFx
 
 Here, we increase the number of open files allowed, create the repository using the `mkfs` command, and then limit the hosts that are allowed to access the repo to the OSG CDN.
 
@@ -142,9 +149,9 @@ In order to host a repository on OASIS, perform the following steps:
 1.  **Verify your VO's OIM registration is up-to-date**.  All repositories need to be associated with a VO; the VO
     needs to assign an _OASIS manager_ in OIM who would be responsible for the contents of any of the VO's repositories
     and will be contacted in case of issues. To designate an OASIS manager, have the VO manager update the
-    [OIM registration](https://oim.grid.iu.edu).
+    [OIM registration](https://github.com/opensciencegrid/topology/#topology).
 
-1.  Create a [support ticket](https://ticket.opensciencegrid.org/submit) using the following template:
+1.  Create a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) using the following template:
 
         Please add a new CVMFS repository to OASIS for VO %RED%voname%ENDCOLOR% using the URL 
             http://%RED%fully.qualified.domain%ENDCOLOR%:8000/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%
@@ -194,7 +201,7 @@ Once the repository is fully replicated on the OSG, the VO may proceed in publis
     [maintaining repositories](http://cernvm.cern.ch/portal/filesystem/maintain-repositories) and
     [content limitations](http://cernvm.cern.ch/portal/filesystem/repository-limits).
 
-If the repository ends in `.opensciencegrid.org`, the VO may ask for it to be replicated outside the US.  The
+If the repository ends in `.opensciencegrid.org` or `.osgstorage.org`, the VO may ask for it to be replicated outside the US.  The
 VO should open a GGUS ticket following EGI's [PROC20](https://wiki.egi.eu/wiki/PROC20).
 
 Replacing an Existing OASIS Repository Server
@@ -246,6 +253,6 @@ In order to remove a repository that is being hosted on OASIS, perform the follo
 
 1.  If the repository has been replicated outside of the U.S., open a GGUS ticket asking that the replication be removed
     from EGI Stratum-1s. Wait until this ticket is resolved before proceeding.
-2.  Open a [support ticket](https://ticket.opensciencegrid.org/submit) asking to shut down the repository, giving the repository
+2.  Open a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) asking to shut down the repository, giving the repository
     name (e.g., %RED%example.opensciencegrid.org%ENDCOLOR%), and the corresponding VO.
 

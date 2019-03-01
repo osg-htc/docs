@@ -23,7 +23,7 @@ These are the definitions of the major elements in the above figure.
 
 You can see the OSG's GRACC website at <https://gracc.opensciencegrid.org>.
 
-You can see a fancier version of the Gratia data at <https://display.grid.iu.edu/>. This is **not** running a Gratia collector, but is a separate service.
+You can see a fancier version of the Gratia data at <https://display.opensciencegrid.org/>. This is **not** running a Gratia collector, but is a separate service.
 
 Gratia Probes
 -------------
@@ -123,7 +123,8 @@ Correct the error and restart gratia.
 Have you configured the resource names correctly? 
 -------------------------------------------------
 
-Do the names of your resources match the names in [OIM](https://oim.grid.iu.edu/oim/topology)?  Gratia retrieves the resource name from the `Site Information` section of the `/etc/osg/config.d/40-siteinfo.ini`
+Do the names of your resources match the names in [OIM](https://github.com/opensciencegrid/topology/tree/master/topology)?
+Gratia retrieves the resource name from the `Site Information` section of the `/etc/osg/config.d/40-siteinfo.ini`
 
 
 ``` file
@@ -166,7 +167,7 @@ Did the site name change?
 
 Was the site previously reporting data, but the site name (not host name, but site name) changed? When the site name changes, you need to ask the GRACC operations team to update the name of your site at the GRACC collector. To do this:
 
-1.  Open a ticket at [the GOC ticket web page](https://ticket.opensciencegrid.org/submit)
+1.  Open a ticket at [the GOC ticket web page](https://support.opensciencegrid.org/helpdesk/tickets/new)
 1.  Select "Software or Service"
 1.  Select "GRACC Operations"
 1.  Type a friendly email that asks the GRACC team to change your site name at the collector. Make sure to tell them the old name and the new name.  Below is an example email:

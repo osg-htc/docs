@@ -31,11 +31,35 @@ Before Starting
 Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
 
 -   **User IDs:** If they do not exist already, the installation will create the Linux users `apache` (UID 48), `condor`, `frontend`, and `gratia`
--   **Network:** The VO frontend must have reliable network connectivity, be on the public internet (no NAT), and preferably with no firewalls. Incoming TCP ports 9618 and 9620 to 9660 must be open. The Web server port, likely port 80, must be open as well.
+-   **Network:** The VO frontend must have reliable network connectivity and be on the public internet (i.e. no NAT).
+    The latest version requires the following TCP ports to be open:
+    -   80 (HTTP) for monitoring and serving configuration to workers
+    -   9618 (HTCondor shared port) for HTCondor daemons including the Schedd and User Collector
+    -   9620 to 9660 for secondary collectors (depending on configuration, see below)
 -   **Host choice**: The GlideinWMS VO Frontend has the following hardware requirements for a production host:
     -   **CPU**: Four cores, preferably no more than 2 years old.
     -   **RAM**: 3GB plus 2MB per running job. For example, to sustain 2000 running jobs, a host with 5GB is needed.
     -   **Disk**: 30GB will be sufficient for all the binaries, config and log files related to GlideinWMS. As this will be an interactive submit host, have enough disk space for your users' jobs. 
+
+
+!!! note
+    The default configuration uses a port range (9620 to 9660) for the secondary collectors.
+    You can configure the secondary collectors to use the shared port 9618 instead;
+    this will become the default in the future.
+    
+!!! note
+    GlideinWMS versions prior to 3.4.1 also required port 9615 for the Schedd,
+    and did not support using shared port for the secondary collectors.
+    If you are upgrading a standalone submit host from version 3.4 or earlier, the default open 
+    port has changed from 9615 to 9618 and you need to upgrade your firewall rules to reflect this change.
+    You figure out which port would be used by running the following command:
+    
+    ``` console
+     condor_config_val SHARED_PORT_ARGS
+    ```
+
+   For more detailed information, see [Configuring GlideinWMS Frontend](#configuring-glideinwms-frontend).
+
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
@@ -46,8 +70,7 @@ As with all OSG software installations, there are some one-time (per host) steps
 
 ### Credentials and Proxies
 
-The VO Frontend will use two credentials in its interactions with the other
-GlideinWMS services. At this time, these will be proxy files.
+The VO Frontend will use two credentials in its interactions with the other GlideinWMS services. At this time, these will be proxy files.
 
 1. the %GREEN%VO Frontend proxy%ENDCOLOR% (used to authenticate with the other GlideinWMS services).
 2. one or more GlideinWMS %RED%pilot proxies%ENDCOLOR% (used/delegated to the Factory services and submitted on the GlideinWMS pilot jobs).
@@ -175,25 +198,6 @@ In addition, you will need to perform the following steps:
 - In `/etc/condor/certs/condor_mapfile`, you will need to add the DNs of each machine (userschedd, usercollector, vofrontend). Take great care to escape all special characters. Alternatively, you can use the `glidecondor_addDN` to add these values.
 - In the `/etc/gwms-frontend/frontend.xml` file, change the schedd locations to match the correct server. Also change the collectors tags at the bottom of the file. More details on frontend.xml are in the following sections.
 
-### Upgrading the GlideinWMS Frontend
-
-If you have a working installation of glideinwms-frontend you can just upgrade
-the frontend rpms and skip the most of the configuration procedure below. These
-general upgrade instructions apply when upgrading the glideinwms-frontend rpm
-within same major versions.
-
-``` console
-# %RED% Update the glideinwms-vofrontend packages%ENDCOLOR%
-root@host # yum update glideinwms\*
-# %RED% Update the scripts in the working directory to the latest one%ENDCOLOR%
-# %RED% For RHEL 7, CentOS 7, and SL7%ENDCOLOR%
-root@host # /usr/sbin/gwms-frontend upgrade
-# %RED% For RHEL 6, CentOS 6, and SL6%ENDCOLOR%
-root@host # service gwms-frontend upgrade
-# %RED% Restart HTCondor because the configuration may be different%ENDCOLOR%
-root@host # service condor restart
-```
-
 Configuring GlideinWMS Frontend
 --------------------------------
 
@@ -263,14 +267,41 @@ Both the `classad_proxy` and `absfname` files should be owned by `frontend` user
      - The `DN` of the %GREEN%VO Frontend Proxy%ENDCOLOR% described previously [here](#credentials-and-proxies).
      - The `node` attribute is the full hostname of the collectors (`hostname --fqdn`) and port
      - The `secondary` attribute indicates whether the element is for the primary or secondary collectors (True/False).
-     The default HTCondor configuration of the VO Frontend starts multiple Collector processes on the host (`/etc/condor/config.d/11_gwms_secondary_collectors.config`). The `DN` and `hostname` on the first line are the hostname and the host certificate of the VO Frontend. The `DN` and `hostname` on the second line are the same as the ones in the first one. The hostname (e.g. hostname.domain.tld) is filled automatically during the installation. The secondary collector ports can be defined as a range, e.g., 9620-9660).
+     The default HTCondor configuration of the VO Frontend starts multiple Collector processes on the host (`/etc/condor/config.d/11_gwms_secondary_collectors.config`). The `DN` and `hostname` on the first line are the hostname and the host certificate of the VO Frontend. The `DN` and `hostname` on the second line are the same as the ones in the first one. The hostname (e.g. hostname.domain.tld) is filled automatically during the installation. The secondary collector connection can be defined as sinful string for the sock case , e.g., hostname.domain.tld:9618?sock=collector16.
 
+[Example 1]
 
             :::xml
             <collector DN="DN of main collector"
                    node="hostname.domain.tld:9618" secondary="False"/>
             <collector DN="DN of secondary collectors (usually same as DN in line above)"
                    node="hostname.domain.tld:9620-9660" secondary="True"/>
+
+!!! note
+
+In GlideinWMS v3.4.1, shared port only configuration is incompatible if talking to older Factories (v3.4 or older). We strongly recommend any user of GlideinWMS Frontend v3.4.1 or newer, to transition to the use of shared port for secondary collectors and CCBs.
+The shared port configuration is incompatible if your Frontend is talking to Factories v3.4 or older and you'll get an error telling you to wait.
+To transition to the use of shared port for secondary collectors, you have to change the collectors section in the Frontend configuration. If you are using the default port range for the secondary collectors as shown in [Example 2] below, then you should replace it with port `9618` and the sock-range as shown in [Example 1] above.
+
+If you have a more complex configuration, please read the [detailed GlideinWMS configuration](http://glideinwms.fnal.gov/doc.prd/frontend/configuration.html)
+
+[Example 2]
+
+            :::xml
+            <collector DN="DN of main collector"
+                   node="hostname.domain.tld:9618" secondary="False"/>
+            <collector DN="DN of secondary collectors (usually same as DN in line above)"
+                   node=“hostname.domain.tld:9618?sock=collector0-40" secondary="True"/>
+
+6. The CCBs information.
+    If you have a different configuration of the HTCondor Connection Brokering (CCB servers) from the default (usually the section is empty as the User Collectors acts as CCB if needed), you can set the connection in the CCB section the same way that User Collector information previously mentioned. Also, the same rules for transition to shared_port of the connections, apply to the CCBs.
+    
+            :::xml
+            <ccb DN="DN of the CCB server"
+                   node="hostname.domain.tld:9618"/>
+            <ccb DN="DN of the CCB server"
+                   node=“hostname.domain.tld:9618?sock=collector0-40" secondary="True"/>
+    
 
 !!! warning
     The Frontend configuration includes many knobs, some of which are conflicting with a RPM installation where there is only one version of the Frontend installed and it uses well known paths.     Do not change the following in the Frontend configuration (you must leave the default values coming with the RPM installation):
@@ -352,7 +383,7 @@ listed.
 
 #### Creating a HTCondor grid mapfile.
 
-The HTCondor grid mapfile (`/etc/condor/certs/condor_mapfile`) is used for
+The HTCondor mapfile (`/etc/condor/certs/condor_mapfile`) is used for
 authentication between the GlideinWMS pilot running on a remote worker node, and
 the local collector. HTCondor uses the mapfile to map certificates to pseudo-users
 on the local machine. It is important that you map the DN's of:
@@ -382,9 +413,6 @@ on the local machine. It is important that you map the DN's of:
 Below is an example mapfile, by default found in
 `/etc/condor/certs/condor_mapfile`. In this example there are lines for each of
 services mentioned above.
-
-!!! note
-    Previously, the `example_of_format` entry was using scape format for each DN like for example: *GSI "^\/DC\=org\/DC\=doegrids\/OU\=Services\/CN\=personal\-submit\-host2\.mydomain\.edu$" %RED<example_of_format>%ENDCOLOR%* for security purposes. This is no longer needed:
 
 ``` file
 GSI "%RED%DN of schedd proxy%ENDCOLOR%" schedd
@@ -440,7 +468,7 @@ and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOL
             fqan = %RED%<VOMS ATTRIBUTE>%ENDCOLOR%
 
         !!! warning
-            Due to the [retirement of VOMS Admin server](https://opensciencegrid.github.io/technology/policy/voms-admin-retire/)
+            Due to the [retirement of VOMS Admin server](https://opensciencegrid.org/technology/policy/voms-admin-retire/)
             in the OSG, `use_voms_server = false` is the preferred method for signing VOMS attributes. 
 
     Optionally, the proxy renewal `frequency` and `lifetime` (in hours) can be specified in each `[PILOT <NAME>]` section:
@@ -466,7 +494,6 @@ and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOL
 
         [COMMON]
         owner = %RED%<GWMS FRONTEND USER>%ENDCOLOR%
-
     !!! note
         The `[COMMON]` section is required but its contents are optional
 
@@ -479,7 +506,7 @@ You must report accounting information if you are running more than a few test j
         :::console
         root@host # yum install gratia-probe-glideinwms
 
-2.  Edit the ProbeConfig located in `/etc/gratia/condor/ProbeConfig`. First, edit the `SiteName` and `ProbeName` to be a unique identifier for your GlideinWMS Submit host. There can be multiple probes (with different names) per site. If you haven't already, you should register your GlideinWMS submit host in [OIM](https://oim.opensciencegrid.org/oim/home). Then you can use the name you used to register the resource.
+2.  Edit the ProbeConfig located in `/etc/gratia/condor/ProbeConfig`. First, edit the `SiteName` and `ProbeName` to be a unique identifier for your GlideinWMS Submit host. There can be multiple probes (with different names) per site. If you haven't already, you should register your GlideinWMS submit host in [OIM](https://github.com/opensciencegrid/topology/). Then you can use the name you used to register the resource.
 
         ProbeName="condor:<hostname>"
         SiteName="HCC-GlideinWMW-Frontend"
@@ -623,7 +650,7 @@ groupwould only match jobs that have the `+is_itb=True` ClassAd.
         <job query_expr="(!isUndefined(is_itb) && is_itb)">
         
 
-6. Reconfigure the Frontend (see the section below):
+6. Reconfigure the Frontend (see the [section below](#reconfiguring-glideinwms)):
 
         :::console
         # on EL7 systems
@@ -644,8 +671,10 @@ In addition to the GlideinWMS service itself, there are a number of supporting s
 | Fetch CRL  | `fetch-crl-boot` and `fetch-crl-cron`    | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 | Gratia     | `gratia-probes-cron`                     | Accounting software                                                          |
 | HTCondor   | `condor`                                 |                                                                              |
-| HTTPD      | `httpd`                                  | GlideinWMS monitoring and staging                                            |
-| GlideinWMS | `gwms-renew-proxies` and `gwms-frontend` | [Automatic proxy renewal](#proxy-configuration) and main GlideinWMS service  |
+| HTTPD      | `httpd`                                  | GlideinWMS monitoring and staging                                 |
+| GlideinWMS | `gwms-renew-proxies` (EL6) or `gwms-renew-proxies.timer` (EL7) | [Automatic proxy renewal](#proxy-configuration)                              |
+|            | `gwms-frontend`                                                | The main GlideinWMS service
+|
 
 Start the services in the order listed and stop them in reverse order. As a reminder, here are common service commands (all run as `root`):
 
@@ -666,7 +695,7 @@ operating system (run as `root`):
 | Enterprise Linux 7             | `systemctl reload gwms-frontend` |
 | Enterprise Linux 6             | `service gwms-frontend reconfig`  |
 
-### Upgrading GlideinWMS ###
+### Upgrading GlideinWMS FrontEnd###
 
 After upgrading the GlideinWMS RPM, you must issue an upgrade command to GlideinWMS:
 
@@ -714,7 +743,7 @@ There are a few things that can be checked prior to submitting user jobs to HTCo
         Defined in '/etc/condor/config.d/11_gwms_secondary_collectors.config', line 193.
        
 
-       If you don't see all the **collectors and the two schedd**, then the configuration must be corrected. There should be no startd daemons listed
+       If you don't see all the **collectors and the two schedds**, then the configuration must be corrected. There should be no startd daemons listed
 
 2. Verify all VO Frontend HTCondor services are communicating.
 
@@ -725,8 +754,8 @@ There are a few things that can be checked prior to submitting user jobs to HTCo
         Scheduler            None                 fermicloud020.fnal.gov
         DaemonMaster         None                 fermicloud020.fnal.gov
         Negotiator           None                 fermicloud020.fnal.gov
-        Collector            None                 frontend_service@fermicloud020
-        Scheduler            None                 schedd_jobs2@fermicloud020.fnal
+        Collector            None                 frontend_service@fermicloud020.fnal.gov
+        Scheduler            None                 schedd_jobs2@fermicloud020.fnal.gov
         
 
 3. To see the details of the glidein resource use `condor_status -subsystem glideresource -l`, including the GlideFactoryName.
@@ -953,4 +982,4 @@ proxies.
 |GlideinWMS Frontend| tcp      | 9618, 9620 to 9660 |`YES`  |        |HTCondor Collectors for the GlideinWMS Frontend (received ClassAds from resources and jobs)|
 
 The VO frontend must have reliable network connectivity, be on the public
-internet (no NAT), and preferably with no firewalls. Incoming TCP ports 9618 to 9660 must be open. 
+internet (no NAT), and preferably with no firewalls. Incoming TCP ports 9618 to 9660 must be open.

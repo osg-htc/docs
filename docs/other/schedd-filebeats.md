@@ -8,22 +8,22 @@ This document is for frontend administrators. It describes the installation of [
 
 
 Introduction
-=================
+------------
 
 A submit host (HTCondor schedd) is a login node where users submit jobs to the Grid. One interesting log that it produces is the TransferLog. The TransferLogs report all the transfers of files between compute node and submit nodes. In this guide we describe the installation of Filebeats to upload this log to Elastic Search.
 
 Installation
-=================
+------------
 
-FileBeat Installation
-----------------------------------------------
+### FileBeat Installation
+
+
 For the installation of filebeats follow the  official instruction to set up the repositories and install filebeats as described [here](https://www.elastic.co/guide/en/beats/filebeat/current/setup-repositories.html).
 
 Configuration
-================
+-------------
 
-Configuration of Filebeats
------------------------------------------
+### Configuration of Filebeats
 
 The configuration of filebeats revolves around this file `/etc/filebeat/filebeat.yml`. Bellow are the steps to modify the different sections of this file
 
@@ -84,8 +84,7 @@ The configuration of filebeats revolves around this file `/etc/filebeat/filebeat
 
 
 
-Configuration of HTCondor
------------------------------------------
+### Configuration of HTCondor
 
 For the configuration of the HTCondor submit host to use the TransferLog follow the next instructions:
 
@@ -102,7 +101,7 @@ For the configuration of the HTCondor submit host to use the TransferLog follow 
 1. Reconfigure condor:
 
         :::console
-        root@host #condor_reconfig
+        root@host # condor_reconfig
 
 1. Make sure that after a couple of minutes the new log `/var/log/condor/XferStatsLog` is present.
 

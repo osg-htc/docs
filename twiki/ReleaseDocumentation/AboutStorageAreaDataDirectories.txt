@@ -1,3 +1,0 @@
-%META:TOPICINFO{author="TedHesselroth" date="1270495582" format="1.1" version="1.4"}%
-%META:TOPICPARENT{name="LocalStorageConfiguration"}%
-deprecated

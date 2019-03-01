@@ -8,30 +8,26 @@ What's New in OSG 3.4
 
 The OSG 3.4.0 software stack features a more streamlined and consolidated package list. Specifically, the varied authentication solutions proved to be good candidates for consolidation and a new piece of software, the LCMAPS VOMS plugin, has been designed to replace both edg-mkgridmap and GUMS.
 
-See [install the LCMAPS VOMS plugin](../../security/lcmaps-voms-authentication) to replace GUMS + edg-mkgridmap.
+See [install the LCMAPS VOMS plugin](/security/lcmaps-voms-authentication) to replace GUMS + edg-mkgridmap.
 
-See [migrating from edg-mkgridmap to lcmaps VOMS plugin](../../security/lcmaps-voms-authentication#migrating-from-edg-mkgridmap) to transistion from edg-mkgridmap.
+See [migrating from edg-mkgridmap to lcmaps VOMS plugin](/security/lcmaps-voms-authentication#migrating-from-edg-mkgridmap) to transistion from edg-mkgridmap.
 
 In 3.4.0, we dropped HDFS 2.x with the intention of adding HDFS 3.x in a subsequent OSG 3.4 release when it becomes available upstream.
 
 In addition to GUMS, edg-mkgridmap, and HDFS 2.x, we dropped packages related to the following software:
 
--   VOMS Admin Server − [Retirement Policy](https://opensciencegrid.github.io/technology/policy/voms-admin-retire/)
--   BeStMan − replaced by [Load Balanced GridFTP](../../data/load-balanced-gridftp)
--   GLExec − replaced by [Singularty](http://singularity.lbl.gov/)
--   Globus GRAM − available from EPEL
--   GIP and OSG Info Services − BDII servers retired
+-   VOMS Admin Server - [Retirement Policy](https://opensciencegrid.org/technology/policy/voms-admin-retire/)
+-   BeStMan - replaced by [Load Balanced GridFTP](/data/load-balanced-gridftp)
+-   GLExec - replaced by [Singularty](http://singularity.lbl.gov/)
+-   Globus GRAM available from EPEL
+-   GIP and OSG Info Services BDII servers retired
 
-The aforementioned packages are still be available in OSG 3.3 and will receive regular support until December 2017 and security updates until June 2018 per our [release policy](https://opensciencegrid.github.io/technology/policy/release-series/). See [this section](#PackagesRemoved) for the complete list of packages removed from OSG 3.4.
+The aforementioned packages are still be available in OSG 3.3 and will receive regular support until December 2017 and security updates until June 2018 per our [release policy](https://opensciencegrid.org/technology/policy/release-series/). See [this section](#PackagesRemoved) for the complete list of packages removed from OSG 3.4.
 
-!!! note
-    OSG 3.4 contains only 64-bit components.
-
-!!! note
-    StashCache is supported on EL7 only.
-
-!!! note
-    xrootd-lcmaps will remain at 1.2.1-2 on EL6.
+!!! note "Notes"
+    -   OSG 3.4 contains only 64-bit components.
+    -   StashCache is supported on EL7 only.
+    -   xrootd-lcmaps will remain at 1.2.1-2 on EL6.
 
 Summary of changes
 ------------------
@@ -77,7 +73,7 @@ This release contains:
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.0%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
-Detailed changes are below. All of the documentation can be found [here](../../)
+Detailed changes are below. All of the documentation can be found [here](/index.md)
 
 Known Issues
 ------------
@@ -93,11 +89,11 @@ COLLECTOR.USE_SHARED_PORT=False
 Updating to the new release
 ---------------------------
 
-To update to the OSG 3.4 series, please consult the page on [updating between release series](../release_series).
+To update to the OSG 3.4 series, please consult the page on [updating between release series](/release/release_series#updating-from-osg-31-32-33-to-33-or-34).
 
 ### Update Repositories
 
-To update to this series, you need to [install the current OSG repositories](../../common/yum#install-osg-repositories).
+To update to this series, you need to to [install the current OSG repositories](/common/yum#install-osg-repositories).
 
 ### Update Software
 
@@ -107,16 +103,14 @@ Once the new repositories are installed, you can update to this new release with
 root@host # yum update
 ```
 
-!!! note
-    Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
-
-!!! note
-    Watch the yum update carefully for any messages about a `.rpmnew` file being created. That means that a configuration file had been edited, and a new default version was to be installed. In that case, RPM does not overwrite the edited configuration file but instead installs the new version with a `.rpmnew` extension. You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version into place (that is, without the `.rpmnew` extension). Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
+!!! note "Notes"
+    -   Please be aware that running `yum update` may also update other RPMs. You can exclude packages from being updated using the `--exclude=[package-name or glob]` option for the `yum` command.
+    -   Watch the yum update carefully for any messages about a `.rpmnew` file being created. That means that a configuration file had been edited, and a new default version was to be installed. In that case, RPM does not overwrite the edited configuration file but instead installs the new version with a `.rpmnew` extension. You will need to merge any edits that have made into the `.rpmnew` file and then move the merged version into place (that is, without the `.rpmnew` extension). Watch especially for `/etc/lcmaps.db`, which every site is expected to edit.
 
 Need help?
 ----------
 
-Do you need help with this release? [Contact us for help](../../common/help).
+Do you need help with this release? [Contact us for help](/common/help).
 
 Detailed changes in this release
 --------------------------------

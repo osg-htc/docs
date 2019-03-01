@@ -76,3 +76,22 @@ code, tt {
     font-size: 100%;
 }
 
+.wy-side-nav-search {
+background-color: #343a40;
+}
+.wy-nav-top {
+background-color: #343a40;
+}
+.md-header {
+background-color: #343a40;
+}
+@media only screen and (max-width: 76.1875em) {
+  html .md-nav--primary .md-nav__title--site {
+    background-color: #343a40;
+  }
+}
+
+/* Repository background color for mobile */
+.md-nav__source {
+background-color: #1f2326;
+}
