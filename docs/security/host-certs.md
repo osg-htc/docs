@@ -222,7 +222,7 @@ on a host.
 This practice has become less popular as sites have separated SSL-requiring services to their own hosts.
 
 In the case where your host is only running a single service that requires a service certificate, we recommend using
-your host certificate as your service certificate.
+your [host certificate](#host-certificates) as your service certificate.
 Ensure that the ownership of the host certificate and key are appropriate for the service you are running.
 
 If you are running multiple services that require host certificates, we recommend requesting a certificate whose
