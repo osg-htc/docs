@@ -9,12 +9,12 @@ Summary of changes
 This release contains:
 
 -   CA Certificates based on [IGTF 1.96](http://dist.eugridpma.info/distribution/igtf/current/CHANGES)
-    -   withdrawn superseded QuoVadis-Grid-ICA (1st gen) CA (BM)
-    -   added new trust anchor MD-Grid-CA-T for rollover of existing CA (MD)
-    -   discontinued expiring 2009 series MD-Grid-CA (MD)
+    -   Withdrawn superseded QuoVadis-Grid-ICA (1st gen) CA (BM)
+    -   Added new trust anchor MD-Grid-CA-T for rollover of existing CA (MD)
+    -   Discontinued expiring 2009 series MD-Grid-CA (MD)
 -   [VO Package v86](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-86)
-    -   Retire the CIGI VO
-    -   Add backup lz VOMS Admin Server
+    -   Retire the `CIGI` VO
+    -   Add backup `lz` VOMS Admin Server
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.24-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
