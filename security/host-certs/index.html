@@ -2261,7 +2261,7 @@ without warnings if the service does not run correctly.</p>
 on a host.
 This practice has become less popular as sites have separated SSL-requiring services to their own hosts.</p>
 <p>In the case where your host is only running a single service that requires a service certificate, we recommend using
-your host certificate as your service certificate.
+your <a href="#host-certificates">host certificate</a> as your service certificate.
 Ensure that the ownership of the host certificate and key are appropriate for the service you are running.</p>
 <p>If you are running multiple services that require host certificates, we recommend requesting a certificate whose
 CommonName is <code>&lt;service&gt;-hostname</code> and has the hostname in the list of subject alternative names.</p>
