@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://opensciencegrid.github.io/docs/compute-element/htcondor-ce-overview/">
+        <link rel="canonical" href="https://opensciencegrid.github.io/docs/release/3.4/release-3-4-24-2/">
       
       
       
@@ -33,21 +33,21 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../../img/favicon.ico">
+      <link rel="shortcut icon" href="../../../img/favicon.ico">
       <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.4">
     
     
       
-        <title>HTCondor-CE Overview - OSG Documentation</title>
+        <title>OSG Release 3.4.24-2 - OSG Documentation</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.451f80e5.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../../../assets/javascripts/modernizr.1aa3b519.js"></script>
     
     
       <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -56,9 +56,9 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
     
-      <link rel="stylesheet" href="../../css/extra.css">
+      <link rel="stylesheet" href="../../../css/extra.css">
     
     
   </head>
@@ -94,7 +94,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#htcondor-ce-overview" tabindex="1" class="md-skip">
+      <a href="#osg-software-stack-data-release-3424-2" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -120,7 +120,7 @@
                 OSG Documentation
               </span>
               <span class="md-header-nav__topic">
-                HTCondor-CE Overview
+                OSG Release 3.4.24-2
               </span>
             
           
@@ -237,7 +237,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="Home" class="md-nav__link">
+    <a href="../../.." title="Home" class="md-nav__link">
       Home
     </a>
   </li>
@@ -249,7 +249,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../site-planning/" title="Site Planning" class="md-nav__link">
+    <a href="../../../site-planning/" title="Site Planning" class="md-nav__link">
       Site Planning
     </a>
   </li>
@@ -259,12 +259,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
       Compute Element
@@ -280,111 +278,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        HTCondor-CE Overview
-      </label>
-    
-    <a href="./" title="HTCondor-CE Overview" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../../compute-element/htcondor-ce-overview/" title="HTCondor-CE Overview" class="md-nav__link">
       HTCondor-CE Overview
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-a-compute-element" title="What is a Compute Element?" class="md-nav__link">
-    What is a Compute Element?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-htcondor-ce" title="What is HTCondor-CE?" class="md-nav__link">
-    What is HTCondor-CE?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-jobs-run" title="How Jobs Run" class="md-nav__link">
-    How Jobs Run
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#hosted-ce-over-ssh" title="Hosted CE over SSH" class="md-nav__link">
-    Hosted CE over SSH
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#on-htcondor-batch-systems" title="On HTCondor batch systems" class="md-nav__link">
-    On HTCondor batch systems
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#on-other-batch-systems" title="On other batch systems" class="md-nav__link">
-    On other batch systems
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-the-ce-is-customized" title="How the CE is Customized" class="md-nav__link">
-    How the CE is Customized
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-security-works" title="How Security Works" class="md-nav__link">
-    How Security Works
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#next-steps" title="Next steps" class="md-nav__link">
-    Next steps
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -394,7 +292,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../hosted-ce/" title="Request a Hosted CE" class="md-nav__link">
+    <a href="../../../compute-element/hosted-ce/" title="Request a Hosted CE" class="md-nav__link">
       Request a Hosted CE
     </a>
   </li>
@@ -406,7 +304,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-htcondor-ce/" title="Install HTCondor-CE" class="md-nav__link">
+    <a href="../../../compute-element/install-htcondor-ce/" title="Install HTCondor-CE" class="md-nav__link">
       Install HTCondor-CE
     </a>
   </li>
@@ -418,7 +316,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../job-router-recipes/" title="Job Router Recipes" class="md-nav__link">
+    <a href="../../../compute-element/job-router-recipes/" title="Job Router Recipes" class="md-nav__link">
       Job Router Recipes
     </a>
   </li>
@@ -430,7 +328,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../troubleshoot-htcondor-ce/" title="Troubleshooting HTCondor-CE" class="md-nav__link">
+    <a href="../../../compute-element/troubleshoot-htcondor-ce/" title="Troubleshooting HTCondor-CE" class="md-nav__link">
       Troubleshooting HTCondor-CE
     </a>
   </li>
@@ -442,7 +340,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../submit-htcondor-ce/" title="Submitting to HTCondor-CE" class="md-nav__link">
+    <a href="../../../compute-element/submit-htcondor-ce/" title="Submitting to HTCondor-CE" class="md-nav__link">
       Submitting to HTCondor-CE
     </a>
   </li>
@@ -478,7 +376,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../worker-node/using-wn/" title="Overview" class="md-nav__link">
+    <a href="../../../worker-node/using-wn/" title="Overview" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -490,7 +388,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../worker-node/install-wn/" title="Install from RPM" class="md-nav__link">
+    <a href="../../../worker-node/install-wn/" title="Install from RPM" class="md-nav__link">
       Install from RPM
     </a>
   </li>
@@ -502,7 +400,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../worker-node/install-wn-tarball/" title="Install from Tarball" class="md-nav__link">
+    <a href="../../../worker-node/install-wn-tarball/" title="Install from Tarball" class="md-nav__link">
       Install from Tarball
     </a>
   </li>
@@ -514,7 +412,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../worker-node/install-wn-oasis/" title="Install from OASIS" class="md-nav__link">
+    <a href="../../../worker-node/install-wn-oasis/" title="Install from OASIS" class="md-nav__link">
       Install from OASIS
     </a>
   </li>
@@ -526,7 +424,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../worker-node/install-cvmfs/" title="Install CVMFS" class="md-nav__link">
+    <a href="../../../worker-node/install-cvmfs/" title="Install CVMFS" class="md-nav__link">
       Install CVMFS
     </a>
   </li>
@@ -538,7 +436,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../worker-node/install-singularity/" title="Install Singularity" class="md-nav__link">
+    <a href="../../../worker-node/install-singularity/" title="Install Singularity" class="md-nav__link">
       Install Singularity
     </a>
   </li>
@@ -550,7 +448,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../worker-node/using-wn-containers/" title="Using WN Containers" class="md-nav__link">
+    <a href="../../../worker-node/using-wn-containers/" title="Using WN Containers" class="md-nav__link">
       Using WN Containers
     </a>
   </li>
@@ -605,7 +503,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/frontier-squid/" title="Install Squid HTTP Cache" class="md-nav__link">
+    <a href="../../../data/frontier-squid/" title="Install Squid HTTP Cache" class="md-nav__link">
       Install Squid HTTP Cache
     </a>
   </li>
@@ -617,7 +515,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/update-oasis/" title="Update OASIS Shared Repo" class="md-nav__link">
+    <a href="../../../data/update-oasis/" title="Update OASIS Shared Repo" class="md-nav__link">
       Update OASIS Shared Repo
     </a>
   </li>
@@ -629,7 +527,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/external-oasis-repos/" title="Install an OASIS Repo" class="md-nav__link">
+    <a href="../../../data/external-oasis-repos/" title="Install an OASIS Repo" class="md-nav__link">
       Install an OASIS Repo
     </a>
   </li>
@@ -665,7 +563,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/gridftp/" title="Install GridFTP Server" class="md-nav__link">
+    <a href="../../../data/gridftp/" title="Install GridFTP Server" class="md-nav__link">
       Install GridFTP Server
     </a>
   </li>
@@ -677,7 +575,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/load-balanced-gridftp/" title="Install Load Balanced GridFTP" class="md-nav__link">
+    <a href="../../../data/load-balanced-gridftp/" title="Install Load Balanced GridFTP" class="md-nav__link">
       Install Load Balanced GridFTP
     </a>
   </li>
@@ -713,7 +611,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/xrootd/overview/" title="XRootD Overview" class="md-nav__link">
+    <a href="../../../data/xrootd/overview/" title="XRootD Overview" class="md-nav__link">
       XRootD Overview
     </a>
   </li>
@@ -725,7 +623,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/xrootd/install-standalone/" title="Install XRootD Standalone" class="md-nav__link">
+    <a href="../../../data/xrootd/install-standalone/" title="Install XRootD Standalone" class="md-nav__link">
       Install XRootD Standalone
     </a>
   </li>
@@ -737,7 +635,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/xrootd/install-storage-element/" title="Install XRootD SE" class="md-nav__link">
+    <a href="../../../data/xrootd/install-storage-element/" title="Install XRootD SE" class="md-nav__link">
       Install XRootD SE
     </a>
   </li>
@@ -749,7 +647,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/xrootd/xrootd-authorization/" title="Configure Authorization" class="md-nav__link">
+    <a href="../../../data/xrootd/xrootd-authorization/" title="Configure Authorization" class="md-nav__link">
       Configure Authorization
     </a>
   </li>
@@ -761,7 +659,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/xrootd/install-client/" title="Using XRootD" class="md-nav__link">
+    <a href="../../../data/xrootd/install-client/" title="Using XRootD" class="md-nav__link">
       Using XRootD
     </a>
   </li>
@@ -797,7 +695,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/stashcache/overview/" title="StashCache Overview" class="md-nav__link">
+    <a href="../../../data/stashcache/overview/" title="StashCache Overview" class="md-nav__link">
       StashCache Overview
     </a>
   </li>
@@ -809,7 +707,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/stashcache/install-cache/" title="Install StashCache Cache" class="md-nav__link">
+    <a href="../../../data/stashcache/install-cache/" title="Install StashCache Cache" class="md-nav__link">
       Install StashCache Cache
     </a>
   </li>
@@ -821,7 +719,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/stashcache/install-origin/" title="Install StashCache Origin" class="md-nav__link">
+    <a href="../../../data/stashcache/install-origin/" title="Install StashCache Origin" class="md-nav__link">
       Install StashCache Origin
     </a>
   </li>
@@ -833,7 +731,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/stashcache/vo-data/" title="Getting VO data into StashCache" class="md-nav__link">
+    <a href="../../../data/stashcache/vo-data/" title="Getting VO data into StashCache" class="md-nav__link">
       Getting VO data into StashCache
     </a>
   </li>
@@ -869,7 +767,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/hadoop-overview/" title="HDFS Overview" class="md-nav__link">
+    <a href="../../../data/hadoop-overview/" title="HDFS Overview" class="md-nav__link">
       HDFS Overview
     </a>
   </li>
@@ -881,7 +779,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../data/install-hadoop/" title="Install HDFS" class="md-nav__link">
+    <a href="../../../data/install-hadoop/" title="Install HDFS" class="md-nav__link">
       Install HDFS
     </a>
   </li>
@@ -922,7 +820,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../security/lcmaps-voms-authentication/" title="LCMAPS VOMS authentication" class="md-nav__link">
+    <a href="../../../security/lcmaps-voms-authentication/" title="LCMAPS VOMS authentication" class="md-nav__link">
       LCMAPS VOMS authentication
     </a>
   </li>
@@ -934,7 +832,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../security/host-certs/" title="Host Certificates" class="md-nav__link">
+    <a href="../../../security/host-certs/" title="Host Certificates" class="md-nav__link">
       Host Certificates
     </a>
   </li>
@@ -946,7 +844,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../security/user-certs/" title="User Certificates" class="md-nav__link">
+    <a href="../../../security/user-certs/" title="User Certificates" class="md-nav__link">
       User Certificates
     </a>
   </li>
@@ -958,7 +856,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../security/certificate-management/" title="Certificate Management Reference" class="md-nav__link">
+    <a href="../../../security/certificate-management/" title="Certificate Management Reference" class="md-nav__link">
       Certificate Management Reference
     </a>
   </li>
@@ -994,7 +892,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../common/ca/" title="CA Certificates" class="md-nav__link">
+    <a href="../../../common/ca/" title="CA Certificates" class="md-nav__link">
       CA Certificates
     </a>
   </li>
@@ -1006,7 +904,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../common/yum/" title="OSG Yum Repos" class="md-nav__link">
+    <a href="../../../common/yum/" title="OSG Yum Repos" class="md-nav__link">
       OSG Yum Repos
     </a>
   </li>
@@ -1018,7 +916,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/configuration-with-osg-configure/" title="Configuration with OSG-Configure" class="md-nav__link">
+    <a href="../../../other/configuration-with-osg-configure/" title="Configuration with OSG-Configure" class="md-nav__link">
       Configuration with OSG-Configure
     </a>
   </li>
@@ -1030,7 +928,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../common/registration/" title="Registration" class="md-nav__link">
+    <a href="../../../common/registration/" title="Registration" class="md-nav__link">
       Registration
     </a>
   </li>
@@ -1066,7 +964,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/gsissh/" title="Install GSI-enabled SSH" class="md-nav__link">
+    <a href="../../../other/gsissh/" title="Install GSI-enabled SSH" class="md-nav__link">
       Install GSI-enabled SSH
     </a>
   </li>
@@ -1078,7 +976,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/install-gwms-frontend/" title="Install GlideinWMS Frontend" class="md-nav__link">
+    <a href="../../../other/install-gwms-frontend/" title="Install GlideinWMS Frontend" class="md-nav__link">
       Install GlideinWMS Frontend
     </a>
   </li>
@@ -1090,7 +988,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/install-cvmfs-stratum1/" title="Install a CVMFS Stratum 1" class="md-nav__link">
+    <a href="../../../other/install-cvmfs-stratum1/" title="Install a CVMFS Stratum 1" class="md-nav__link">
       Install a CVMFS Stratum 1
     </a>
   </li>
@@ -1102,7 +1000,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/network-performance-toolkit/" title="Install the Network Performance Toolkit" class="md-nav__link">
+    <a href="../../../other/network-performance-toolkit/" title="Install the Network Performance Toolkit" class="md-nav__link">
       Install the Network Performance Toolkit
     </a>
   </li>
@@ -1114,7 +1012,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/troubleshooting-gratia/" title="Troubleshooting Gratia" class="md-nav__link">
+    <a href="../../../other/troubleshooting-gratia/" title="Troubleshooting Gratia" class="md-nav__link">
       Troubleshooting Gratia
     </a>
   </li>
@@ -1126,7 +1024,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../other/schedd-filebeats/" title="Install Transfer Log Filebeats" class="md-nav__link">
+    <a href="../../../other/schedd-filebeats/" title="Install Transfer Log Filebeats" class="md-nav__link">
       Install Transfer Log Filebeats
     </a>
   </li>
@@ -1141,10 +1039,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
     
     <label class="md-nav__link" for="nav-9">
       Release Information
@@ -1162,7 +1062,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/notes/" title="Release Note Overview" class="md-nav__link">
+    <a href="../../notes/" title="Release Note Overview" class="md-nav__link">
       Release Note Overview
     </a>
   </li>
@@ -1172,10 +1072,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2" type="checkbox" id="nav-9-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2" type="checkbox" id="nav-9-2" checked>
     
     <label class="md-nav__link" for="nav-9-2">
       3.4 Release Notes
@@ -1191,11 +1093,150 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-24-2/" title="OSG Release 3.4.24-2" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        OSG Release 3.4.24-2
+      </label>
+    
+    <a href="./" title="OSG Release 3.4.24-2" class="md-nav__link md-nav__link--active">
       OSG Release 3.4.24-2
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary-of-changes" title="Summary of changes" class="md-nav__link">
+    Summary of changes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-to-the-new-release" title="Updating to the new release" class="md-nav__link">
+    Updating to the new release
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-repositories" title="Update Repositories" class="md-nav__link">
+    Update Repositories
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-software" title="Update Software" class="md-nav__link">
+    Update Software
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#need-help" title="Need help?" class="md-nav__link">
+    Need help?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-changes-in-this-release" title="Detailed changes in this release" class="md-nav__link">
+    Detailed changes in this release
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#packages" title="Packages" class="md-nav__link">
+    Packages
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-6" title="Enterprise Linux 6" class="md-nav__link">
+    Enterprise Linux 6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7" title="Enterprise Linux 7" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpms" title="RPMs" class="md-nav__link">
+    RPMs
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-6_1" title="Enterprise Linux 6" class="md-nav__link">
+    Enterprise Linux 6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7_1" title="Enterprise Linux 7" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1205,7 +1246,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-24/" title="OSG Release 3.4.24" class="md-nav__link">
+    <a href="../release-3-4-24/" title="OSG Release 3.4.24" class="md-nav__link">
       OSG Release 3.4.24
     </a>
   </li>
@@ -1217,7 +1258,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-23/" title="OSG Release 3.4.23" class="md-nav__link">
+    <a href="../release-3-4-23/" title="OSG Release 3.4.23" class="md-nav__link">
       OSG Release 3.4.23
     </a>
   </li>
@@ -1229,7 +1270,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-22-2/" title="OSG Release 3.4.22-2" class="md-nav__link">
+    <a href="../release-3-4-22-2/" title="OSG Release 3.4.22-2" class="md-nav__link">
       OSG Release 3.4.22-2
     </a>
   </li>
@@ -1241,7 +1282,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-22/" title="OSG Release 3.4.22" class="md-nav__link">
+    <a href="../release-3-4-22/" title="OSG Release 3.4.22" class="md-nav__link">
       OSG Release 3.4.22
     </a>
   </li>
@@ -1253,7 +1294,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-21/" title="OSG Release 3.4.21" class="md-nav__link">
+    <a href="../release-3-4-21/" title="OSG Release 3.4.21" class="md-nav__link">
       OSG Release 3.4.21
     </a>
   </li>
@@ -1265,7 +1306,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-20/" title="OSG Release 3.4.20" class="md-nav__link">
+    <a href="../release-3-4-20/" title="OSG Release 3.4.20" class="md-nav__link">
       OSG Release 3.4.20
     </a>
   </li>
@@ -1277,7 +1318,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-19/" title="OSG Release 3.4.19" class="md-nav__link">
+    <a href="../release-3-4-19/" title="OSG Release 3.4.19" class="md-nav__link">
       OSG Release 3.4.19
     </a>
   </li>
@@ -1289,7 +1330,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-18-2/" title="OSG Release 3.4.18-2" class="md-nav__link">
+    <a href="../release-3-4-18-2/" title="OSG Release 3.4.18-2" class="md-nav__link">
       OSG Release 3.4.18-2
     </a>
   </li>
@@ -1301,7 +1342,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-18/" title="OSG Release 3.4.18" class="md-nav__link">
+    <a href="../release-3-4-18/" title="OSG Release 3.4.18" class="md-nav__link">
       OSG Release 3.4.18
     </a>
   </li>
@@ -1313,7 +1354,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-17-3/" title="OSG Release 3.4.17-3" class="md-nav__link">
+    <a href="../release-3-4-17-3/" title="OSG Release 3.4.17-3" class="md-nav__link">
       OSG Release 3.4.17-3
     </a>
   </li>
@@ -1325,7 +1366,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-17-2/" title="OSG Release 3.4.17-2" class="md-nav__link">
+    <a href="../release-3-4-17-2/" title="OSG Release 3.4.17-2" class="md-nav__link">
       OSG Release 3.4.17-2
     </a>
   </li>
@@ -1337,7 +1378,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-17/" title="OSG Release 3.4.17" class="md-nav__link">
+    <a href="../release-3-4-17/" title="OSG Release 3.4.17" class="md-nav__link">
       OSG Release 3.4.17
     </a>
   </li>
@@ -1349,7 +1390,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-16-2/" title="OSG Release 3.4.16-2" class="md-nav__link">
+    <a href="../release-3-4-16-2/" title="OSG Release 3.4.16-2" class="md-nav__link">
       OSG Release 3.4.16-2
     </a>
   </li>
@@ -1361,7 +1402,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-16/" title="OSG Release 3.4.16" class="md-nav__link">
+    <a href="../release-3-4-16/" title="OSG Release 3.4.16" class="md-nav__link">
       OSG Release 3.4.16
     </a>
   </li>
@@ -1373,7 +1414,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-15/" title="OSG Release 3.4.15" class="md-nav__link">
+    <a href="../release-3-4-15/" title="OSG Release 3.4.15" class="md-nav__link">
       OSG Release 3.4.15
     </a>
   </li>
@@ -1385,7 +1426,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-14-2/" title="OSG Release 3.4.14-2" class="md-nav__link">
+    <a href="../release-3-4-14-2/" title="OSG Release 3.4.14-2" class="md-nav__link">
       OSG Release 3.4.14-2
     </a>
   </li>
@@ -1397,7 +1438,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-14/" title="OSG Release 3.4.14" class="md-nav__link">
+    <a href="../release-3-4-14/" title="OSG Release 3.4.14" class="md-nav__link">
       OSG Release 3.4.14
     </a>
   </li>
@@ -1409,7 +1450,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-13/" title="OSG Release 3.4.13" class="md-nav__link">
+    <a href="../release-3-4-13/" title="OSG Release 3.4.13" class="md-nav__link">
       OSG Release 3.4.13
     </a>
   </li>
@@ -1421,7 +1462,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-12-3/" title="OSG Release 3.4.12-3" class="md-nav__link">
+    <a href="../release-3-4-12-3/" title="OSG Release 3.4.12-3" class="md-nav__link">
       OSG Release 3.4.12-3
     </a>
   </li>
@@ -1433,7 +1474,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-12-2/" title="OSG Release 3.4.12-2" class="md-nav__link">
+    <a href="../release-3-4-12-2/" title="OSG Release 3.4.12-2" class="md-nav__link">
       OSG Release 3.4.12-2
     </a>
   </li>
@@ -1445,7 +1486,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-12/" title="OSG Release 3.4.12" class="md-nav__link">
+    <a href="../release-3-4-12/" title="OSG Release 3.4.12" class="md-nav__link">
       OSG Release 3.4.12
     </a>
   </li>
@@ -1457,7 +1498,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-11/" title="OSG Release 3.4.11" class="md-nav__link">
+    <a href="../release-3-4-11/" title="OSG Release 3.4.11" class="md-nav__link">
       OSG Release 3.4.11
     </a>
   </li>
@@ -1469,7 +1510,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-10/" title="OSG Release 3.4.10" class="md-nav__link">
+    <a href="../release-3-4-10/" title="OSG Release 3.4.10" class="md-nav__link">
       OSG Release 3.4.10
     </a>
   </li>
@@ -1481,7 +1522,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-9-2/" title="OSG Release 3.4.9-2" class="md-nav__link">
+    <a href="../release-3-4-9-2/" title="OSG Release 3.4.9-2" class="md-nav__link">
       OSG Release 3.4.9-2
     </a>
   </li>
@@ -1493,7 +1534,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-9/" title="OSG Release 3.4.9" class="md-nav__link">
+    <a href="../release-3-4-9/" title="OSG Release 3.4.9" class="md-nav__link">
       OSG Release 3.4.9
     </a>
   </li>
@@ -1505,7 +1546,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-8/" title="OSG Release 3.4.8" class="md-nav__link">
+    <a href="../release-3-4-8/" title="OSG Release 3.4.8" class="md-nav__link">
       OSG Release 3.4.8
     </a>
   </li>
@@ -1517,7 +1558,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-7/" title="OSG Release 3.4.7" class="md-nav__link">
+    <a href="../release-3-4-7/" title="OSG Release 3.4.7" class="md-nav__link">
       OSG Release 3.4.7
     </a>
   </li>
@@ -1529,7 +1570,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-6-2/" title="OSG Release 3.4.6-2" class="md-nav__link">
+    <a href="../release-3-4-6-2/" title="OSG Release 3.4.6-2" class="md-nav__link">
       OSG Release 3.4.6-2
     </a>
   </li>
@@ -1541,7 +1582,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-6/" title="OSG Release 3.4.6" class="md-nav__link">
+    <a href="../release-3-4-6/" title="OSG Release 3.4.6" class="md-nav__link">
       OSG Release 3.4.6
     </a>
   </li>
@@ -1553,7 +1594,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-5-4/" title="OSG Release 3.4.5-4" class="md-nav__link">
+    <a href="../release-3-4-5-4/" title="OSG Release 3.4.5-4" class="md-nav__link">
       OSG Release 3.4.5-4
     </a>
   </li>
@@ -1565,7 +1606,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-5-3/" title="OSG Release 3.4.5-3" class="md-nav__link">
+    <a href="../release-3-4-5-3/" title="OSG Release 3.4.5-3" class="md-nav__link">
       OSG Release 3.4.5-3
     </a>
   </li>
@@ -1577,7 +1618,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-5-2/" title="OSG Release 3.4.5-2" class="md-nav__link">
+    <a href="../release-3-4-5-2/" title="OSG Release 3.4.5-2" class="md-nav__link">
       OSG Release 3.4.5-2
     </a>
   </li>
@@ -1589,7 +1630,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-5/" title="OSG Release 3.4.5" class="md-nav__link">
+    <a href="../release-3-4-5/" title="OSG Release 3.4.5" class="md-nav__link">
       OSG Release 3.4.5
     </a>
   </li>
@@ -1601,7 +1642,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-4-3/" title="OSG Release 3.4.4-3" class="md-nav__link">
+    <a href="../release-3-4-4-3/" title="OSG Release 3.4.4-3" class="md-nav__link">
       OSG Release 3.4.4-3
     </a>
   </li>
@@ -1613,7 +1654,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-4-2/" title="OSG Release 3.4.4-2" class="md-nav__link">
+    <a href="../release-3-4-4-2/" title="OSG Release 3.4.4-2" class="md-nav__link">
       OSG Release 3.4.4-2
     </a>
   </li>
@@ -1625,7 +1666,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-4/" title="OSG Release 3.4.4" class="md-nav__link">
+    <a href="../release-3-4-4/" title="OSG Release 3.4.4" class="md-nav__link">
       OSG Release 3.4.4
     </a>
   </li>
@@ -1637,7 +1678,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-3/" title="OSG Release 3.4.3" class="md-nav__link">
+    <a href="../release-3-4-3/" title="OSG Release 3.4.3" class="md-nav__link">
       OSG Release 3.4.3
     </a>
   </li>
@@ -1649,7 +1690,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-2-2/" title="OSG Release 3.4.2-2" class="md-nav__link">
+    <a href="../release-3-4-2-2/" title="OSG Release 3.4.2-2" class="md-nav__link">
       OSG Release 3.4.2-2
     </a>
   </li>
@@ -1661,7 +1702,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-2/" title="OSG Release 3.4.2" class="md-nav__link">
+    <a href="../release-3-4-2/" title="OSG Release 3.4.2" class="md-nav__link">
       OSG Release 3.4.2
     </a>
   </li>
@@ -1673,7 +1714,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-1-2/" title="OSG Release 3.4.1-2" class="md-nav__link">
+    <a href="../release-3-4-1-2/" title="OSG Release 3.4.1-2" class="md-nav__link">
       OSG Release 3.4.1-2
     </a>
   </li>
@@ -1685,7 +1726,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-1/" title="OSG Release 3.4.1" class="md-nav__link">
+    <a href="../release-3-4-1/" title="OSG Release 3.4.1" class="md-nav__link">
       OSG Release 3.4.1
     </a>
   </li>
@@ -1697,7 +1738,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-0-2/" title="OSG Release 3.4.0-2" class="md-nav__link">
+    <a href="../release-3-4-0-2/" title="OSG Release 3.4.0-2" class="md-nav__link">
       OSG Release 3.4.0-2
     </a>
   </li>
@@ -1709,7 +1750,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/3.4/release-3-4-0/" title="OSG Release 3.4.0" class="md-nav__link">
+    <a href="../release-3-4-0/" title="OSG Release 3.4.0" class="md-nav__link">
       OSG Release 3.4.0
     </a>
   </li>
@@ -1726,7 +1767,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/release_series/" title="OSG Release Series" class="md-nav__link">
+    <a href="../../release_series/" title="OSG Release Series" class="md-nav__link">
       OSG Release Series
     </a>
   </li>
@@ -1738,7 +1779,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/supported_platforms/" title="Supported Platforms" class="md-nav__link">
+    <a href="../../supported_platforms/" title="Supported Platforms" class="md-nav__link">
       Supported Platforms
     </a>
   </li>
@@ -1750,7 +1791,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/yum-basics/" title="Yum Basics" class="md-nav__link">
+    <a href="../../yum-basics/" title="Yum Basics" class="md-nav__link">
       Yum Basics
     </a>
   </li>
@@ -1762,7 +1803,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../release/signing/" title="RPM Signing" class="md-nav__link">
+    <a href="../../signing/" title="RPM Signing" class="md-nav__link">
       RPM Signing
     </a>
   </li>
@@ -1798,7 +1839,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../monitoring/install-rsv/" title="Install RSV" class="md-nav__link">
+    <a href="../../../monitoring/install-rsv/" title="Install RSV" class="md-nav__link">
       Install RSV
     </a>
   </li>
@@ -1810,7 +1851,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../monitoring/advanced-rsv-configuration/" title="Advanced RSV Configuration" class="md-nav__link">
+    <a href="../../../monitoring/advanced-rsv-configuration/" title="Advanced RSV Configuration" class="md-nav__link">
       Advanced RSV Configuration
     </a>
   </li>
@@ -1822,7 +1863,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../monitoring/rsv-control/" title="Manage RSV via rsv-control" class="md-nav__link">
+    <a href="../../../monitoring/rsv-control/" title="Manage RSV via rsv-control" class="md-nav__link">
       Manage RSV via rsv-control
     </a>
   </li>
@@ -1834,7 +1875,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../monitoring/install-rsv-gwms-tester/" title="RSV GlideinWMS Tester" class="md-nav__link">
+    <a href="../../../monitoring/install-rsv-gwms-tester/" title="RSV GlideinWMS Tester" class="md-nav__link">
       RSV GlideinWMS Tester
     </a>
   </li>
@@ -1851,7 +1892,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../common/help/" title="Get Help" class="md-nav__link">
+    <a href="../../../common/help/" title="Get Help" class="md-nav__link">
       Get Help
     </a>
   </li>
@@ -1878,44 +1919,30 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-is-a-compute-element" title="What is a Compute Element?" class="md-nav__link">
-    What is a Compute Element?
+  <a href="#summary-of-changes" title="Summary of changes" class="md-nav__link">
+    Summary of changes
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-htcondor-ce" title="What is HTCondor-CE?" class="md-nav__link">
-    What is HTCondor-CE?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-jobs-run" title="How Jobs Run" class="md-nav__link">
-    How Jobs Run
+  <a href="#updating-to-the-new-release" title="Updating to the new release" class="md-nav__link">
+    Updating to the new release
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#hosted-ce-over-ssh" title="Hosted CE over SSH" class="md-nav__link">
-    Hosted CE over SSH
+  <a href="#update-repositories" title="Update Repositories" class="md-nav__link">
+    Update Repositories
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#on-htcondor-batch-systems" title="On HTCondor batch systems" class="md-nav__link">
-    On HTCondor batch systems
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#on-other-batch-systems" title="On other batch systems" class="md-nav__link">
-    On other batch systems
+  <a href="#update-software" title="Update Software" class="md-nav__link">
+    Update Software
   </a>
   
 </li>
@@ -1926,23 +1953,76 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-the-ce-is-customized" title="How the CE is Customized" class="md-nav__link">
-    How the CE is Customized
+  <a href="#need-help" title="Need help?" class="md-nav__link">
+    Need help?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-security-works" title="How Security Works" class="md-nav__link">
-    How Security Works
+  <a href="#detailed-changes-in-this-release" title="Detailed changes in this release" class="md-nav__link">
+    Detailed changes in this release
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#packages" title="Packages" class="md-nav__link">
+    Packages
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-6" title="Enterprise Linux 6" class="md-nav__link">
+    Enterprise Linux 6
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#next-steps" title="Next steps" class="md-nav__link">
-    Next steps
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7" title="Enterprise Linux 7" class="md-nav__link">
+    Enterprise Linux 7
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpms" title="RPMs" class="md-nav__link">
+    RPMs
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-6_1" title="Enterprise Linux 6" class="md-nav__link">
+    Enterprise Linux 6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enterprise-linux-7_1" title="Enterprise Linux 7" class="md-nav__link">
+    Enterprise Linux 7
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1962,133 +2042,84 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/compute-element/htcondor-ce-overview.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/opensciencegrid/docs/edit/master/docs/release/3.4/release-3-4-24-2.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="htcondor-ce-overview">HTCondor-CE Overview<a class="headerlink" href="#htcondor-ce-overview" title="Permanent link">&para;</a></h1>
-<p>This document serves as an introduction to HTCondor-CE and how it works.
-Before continuing with the overview, make sure that you are familiar with the following concepts:</p>
+                <h1 id="osg-software-stack-data-release-3424-2">OSG Software Stack -- Data Release -- 3.4.24-2<a class="headerlink" href="#osg-software-stack-data-release-3424-2" title="Permanent link">&para;</a></h1>
+<p><strong>Release Date</strong>: 2019-03-05</p>
+<h2 id="summary-of-changes">Summary of changes<a class="headerlink" href="#summary-of-changes" title="Permanent link">&para;</a></h2>
+<p>This release contains:</p>
 <ul>
-<li>An OSG site plan<ul>
-<li>What is a batch system and which one will you use (<a href="http://htcondor.org/">HTCondor</a>, PBS, LSF, SGE, or
-    <a href="https://slurm.schedmd.com/">SLURM</a>)?</li>
-<li>Security in the OSG via <a href="https://gridcf.org/gct-docs/gsic/index.html">GSI</a> (i.e.,
-    <a href="https://en.wikipedia.org/wiki/Certificate_authority">Certificate authorities</a>, user and host
-    <a href="https://en.wikipedia.org/wiki/Public_key_certificate">certificates</a>, proxies)</li>
+<li>CA Certificates based on <a href="http://dist.eugridpma.info/distribution/igtf/current/CHANGES">IGTF 1.96</a><ul>
+<li>Withdrawn superseded QuoVadis-Grid-ICA (1st gen) CA (BM)</li>
+<li>Added new trust anchor MD-Grid-CA-T for rollover of existing CA (MD)</li>
+<li>Discontinued expiring 2009 series MD-Grid-CA (MD)</li>
 </ul>
 </li>
-<li>Pilot jobs, frontends, and factories (i.e., <a href="http://glideinwms.fnal.gov/doc.prd/index.html">GlideinWMS</a>,
-    AutoPyFactory)</li>
+<li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-86">VO Package v86</a><ul>
+<li>Retire the <code>CIGI</code> VO</li>
+<li>Add backup <code>lz</code> VOMS Admin Server</li>
 </ul>
-<h2 id="what-is-a-compute-element">What is a Compute Element?<a class="headerlink" href="#what-is-a-compute-element" title="Permanent link">&para;</a></h2>
-<p>An OSG Compute Element (CE) is the entry point for the OSG to your local resources: a layer of software that you install
-on a machine that can submit jobs into your local batch system.
-At the heart of the CE is the <em>job gateway</em> software, which is responsible for handling incoming jobs, authenticating
-and authorizing them, and delegating them to your batch system for execution.</p>
-<p>Today in the OSG, most jobs that arrive at a CE (called <em>grid jobs</em>) are <strong>not</strong> end-user jobs, but rather pilot jobs
-submitted from factories.
-Successful pilot jobs create and make available an environment for actual end-user jobs to match and ultimately run
-within the pilot job container.
-Eventually pilot jobs remove themselves, typically after a period of inactivity.</p>
-<h2 id="what-is-htcondor-ce">What is HTCondor-CE?<a class="headerlink" href="#what-is-htcondor-ce" title="Permanent link">&para;</a></h2>
-<p>HTCondor-CE is a special configuration of the HTCondor software designed to be a job gateway solution for the OSG.
-It is configured to use the <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/5_4HTCondor_Job.html">JobRouter daemon</a> to
-delegate jobs by transforming and submitting them to the site’s batch system.</p>
-<p>Benefits of running the HTCondor-CE:</p>
-<ul>
-<li><strong>Scalability:</strong> HTCondor-CE is capable of supporting job workloads of large sites</li>
-<li><strong>Debugging tools:</strong> HTCondor-CE offers <a href="../../compute-element/troubleshoot-htcondor-ce">many tools to help troubleshoot</a>
-    issues with jobs</li>
-<li><strong>Routing as configuration:</strong> HTCondor-CE’s mechanism to transform and submit jobs is customized via configuration
-    variables, which means that customizations will persist across upgrades and will not involve modification of
-    software internals to route jobs</li>
+</li>
 </ul>
-<h2 id="how-jobs-run">How Jobs Run<a class="headerlink" href="#how-jobs-run" title="Permanent link">&para;</a></h2>
-<p>Once an incoming grid job is authorized, it is placed into HTCondor-CE’s scheduler where the JobRouter creates a
-transformed copy (called the <em>routed job</em>) and submits the copy to the batch system (called the <em>batch system job</em>).
-After submission, HTCondor-CE monitors the batch system job and communicates its status to the original grid job, which
-in turn notifies the original submitter (e.g., job factory) of any updates.
-When the job completes, files are transferred along the same chain: from the batch system to the CE, then from the CE to
-the original submitter.</p>
-<h3 id="hosted-ce-over-ssh">Hosted CE over SSH<a class="headerlink" href="#hosted-ce-over-ssh" title="Permanent link">&para;</a></h3>
-<p>The Hosted CE is intended for small sites or as an introduction to the OSG.
-The OSG configures and maintains an HTCondor-CE on behalf of the site.
-The Hosted CE is a special configuration of HTCondor-CE that can submit jobs to a remote cluster over SSH.
-It provides a simple starting point for opportunistic resource owners that want to start contributing to the OSG with
-minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a submit node in their cluster.</p>
-<p>If your site intends to run over 10,000 concurrent OSG jobs, you will need to host your own
-<a href="../../compute-element/install-htcondor-ce">HTCondor-CE</a> because the Hosted CE has not yet been optimized for such
-loads.</p>
-<p>If you are interested in a Hosted CE solution, please follow the instructions on <a href="../../compute-element/hosted-ce">this page</a>.</p>
-<p><img alt="HTCondor-CE-Bosco" src="../../img/HTCondorCEBosco.png" /></p>
-<h3 id="on-htcondor-batch-systems">On HTCondor batch systems<a class="headerlink" href="#on-htcondor-batch-systems" title="Permanent link">&para;</a></h3>
-<p>For a site with an HTCondor <strong>batch system</strong>, the JobRouter can use HTCondor protocols to place a transformed copy of
-the grid job directly into the batch system’s scheduler, meaning that the routed and batch system jobs are one and the
-same.
-Thus, there are three representations of your job, each with its own ID (see diagram below):</p>
-<ul>
-<li>Submit host: the HTCondor job ID in the original queue</li>
-<li>HTCondor-CE: the incoming grid job’s ID</li>
-<li>HTCondor batch system: the routed job’s ID</li>
-</ul>
-<p><img alt="HTCondor-CE with an HTCondor batch system" src="../../img/ce_condorbatchsystem.png" /></p>
-<p>In an HTCondor-CE/HTCondor setup, files are transferred from HTCondor-CE’s spool directory to the batch system’s spool
-directory using internal HTCondor protocols.</p>
+<p>These <a href="https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.24-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC">JIRA tickets</a> were addressed in this release.</p>
+<p>Detailed changes are below. All of the documentation can be found <a href="../../..">here</a>.</p>
+<h2 id="updating-to-the-new-release">Updating to the new release<a class="headerlink" href="#updating-to-the-new-release" title="Permanent link">&para;</a></h2>
+<h3 id="update-repositories">Update Repositories<a class="headerlink" href="#update-repositories" title="Permanent link">&para;</a></h3>
+<p>To update to this series, you need to <a href="../../../common/yum#install-osg-repositories">install the current OSG repositories</a>.</p>
+<h3 id="update-software">Update Software<a class="headerlink" href="#update-software" title="Permanent link">&para;</a></h3>
+<p>Once the repositories are installed, you can update to this new release with:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum update
+</pre></div>
+
+
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The JobRouter copies the job directly into the batch system and does not make use of <code>condor_submit</code>.
-This means that if the HTCondor batch system is configured to add attributes to incoming jobs when they are
-submitted (i.e., <code>SUBMIT_EXPRS</code>), these attributes will not be added to the routed jobs.</p>
+<p class="admonition-title">Notes</p>
+<ul>
+<li>Please be aware that running <code>yum update</code> may also update other RPMs. You can exclude packages from being updated using the <code>--exclude=[package-name or glob]</code> option for the <code>yum</code> command.</li>
+<li>Watch the yum update carefully for any messages about a <code>.rpmnew</code> file being created. That means that a configuration file had been edited, and a new default version was to be installed. In that case, RPM does not overwrite the edited configuration file but instead installs the new version with a <code>.rpmnew</code> extension. You will need to merge any edits that have made into the <code>.rpmnew</code> file and then move the merged version into place (that is, without the <code>.rpmnew</code> extension). Watch especially for <code>/etc/lcmaps.db</code>, which every site is expected to edit.</li>
+</ul>
 </div>
-<h3 id="on-other-batch-systems">On other batch systems<a class="headerlink" href="#on-other-batch-systems" title="Permanent link">&para;</a></h3>
-<p>For non-HTCondor batch systems, the JobRouter transforms the grid job into a routed job on the CE and the routed job
-submits a job into the batch system via a process called the BLAHP.
-Thus, there are four representations of your job, each with its own ID (see diagram below):</p>
+<h2 id="need-help">Need help?<a class="headerlink" href="#need-help" title="Permanent link">&para;</a></h2>
+<p>Do you need help with this release? <a href="../../../common/help">Contact us for help</a>.</p>
+<h2 id="detailed-changes-in-this-release">Detailed changes in this release<a class="headerlink" href="#detailed-changes-in-this-release" title="Permanent link">&para;</a></h2>
+<h3 id="packages">Packages<a class="headerlink" href="#packages" title="Permanent link">&para;</a></h3>
+<p>We added or updated the following packages to the production OSG yum repository. Note that in some cases, there are multiple RPMs for each package. You can click on any given package to see the set of RPMs or see the complete list below.</p>
+<h4 id="enterprise-linux-6">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Submit host: the HTCondor job ID in the original queue</li>
-<li>HTCondor-CE: the incoming grid job’s ID and the routed job’s ID</li>
-<li>HTCondor batch system: the batch system’s job ID</li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=igtf-ca-certs-1.96-1.osg34.el6">igtf-ca-certs-1.96-1.osg34.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ca-certs-1.79-1.osg34.el6">osg-ca-certs-1.79-1.osg34.el6</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vo-client-86-1.osg34.el6">vo-client-86-1.osg34.el6</a></li>
 </ul>
-<p>Although the following figure specifies the PBS case, it applies to all non-HTCondor batch systems:</p>
-<p><img alt="HTCondor-CE with other batch systems" src="../../img/ce_otherbatchsystem.png" /></p>
-<p>With non-HTCondor batch systems, HTCondor-CE cannot use internal HTCondor protocols to transfer files so its spool
-directory must be exported to a shared file system that is mounted on the batch system’s worker nodes.</p>
-<h2 id="how-the-ce-is-customized">How the CE is Customized<a class="headerlink" href="#how-the-ce-is-customized" title="Permanent link">&para;</a></h2>
-<p>Aside from the <a href="../../compute-element/install-htcondor-ce#configuring-htcondor-ce">basic configuration</a> required in the CE
-installation, there are two main ways to customize your CE (if you decide any customization is required at all):</p>
+<h4 id="enterprise-linux-7">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>Deciding which VOs are allowed to run at your site:</strong> The recommended method of authorizing VOs at your site is
-    based on the <a href="../../security/lcmaps-voms-authentication">LCMAPS framework</a></li>
-<li><strong>How to filter and transform the grid jobs to be run on your batch system:</strong> Filtering and transforming grid jobs
-    (i.e., setting site-specific attributes or resource limits), requires configuration of your site’s job routes.
-    For examples of common job routes, consult the <a href="../../compute-element/job-router-recipes">JobRouter recipes</a> page.</li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=igtf-ca-certs-1.96-1.osg34.el7">igtf-ca-certs-1.96-1.osg34.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=osg-ca-certs-1.79-1.osg34.el7">osg-ca-certs-1.79-1.osg34.el7</a></li>
+<li><a href="https://koji.chtc.wisc.edu/koji/search?match=glob&amp;type=build&amp;terms=vo-client-86-1.osg34.el7">vo-client-86-1.osg34.el7</a></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you are running HTCondor as your batch system, you will have two HTCondor configurations side-by-side (one
-residing in <code>/etc/condor/</code> and the other in <code>/etc/condor-ce</code>) and will need to make sure to differentiate the two
-when editing any configuration.</p>
-</div>
-<h2 id="how-security-works">How Security Works<a class="headerlink" href="#how-security-works" title="Permanent link">&para;</a></h2>
-<p>In the OSG, security depends on a PKI infrastructure involving Certificate Authorities (CAs) where CAs sign and issue
-certificates.
-When these clients and hosts wish to communicate with each other, the identities of each party is confirmed by
-cross-checking their certificates with the signing CA and establishing trust.</p>
-<p>In its default configuration, HTCondor-CE uses GSI-based authentication and authorization to verify the certificate
-chain, which will work with <a href="../../security/lcmaps-voms-authentication">LCMAPS VOMS authentication</a>.
-Additionally, it can be reconfigured to provide alternate authentication mechanisms such as Kerberos, SSL, shared
-secret, or even IP-based authentication.
-More information about authorization methods can be found
-<a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/3_8Security.html#SECTION00483000000000000000">here</a>.</p>
-<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
-<p>Once the basic installation is done, additional activities include:</p>
-<ul>
-<li><a href="../../compute-element/job-router-recipes">Setting up job routes to customize incoming jobs</a></li>
-<li><a href="../../compute-element/submit-htcondor-ce">Submitting jobs to a HTCondor-CE</a> </li>
-<li><a href="../../compute-element/troubleshoot-htcondor-ce">Troubleshooting the HTCondor-CE</a></li>
-<li><a href="../../compute-element/install-htcondor-ce#registering-the-ce">Register the CE</a></li>
-<li>Register with the OSG GlideinWMS factories and/or the ATLAS AutoPyFactory</li>
-</ul>
+<h3 id="rpms">RPMs<a class="headerlink" href="#rpms" title="Permanent link">&para;</a></h3>
+<p>If you wish to manually update your system, you can run yum update against the following packages:</p>
+<div class="codehilite"><pre><span></span>igtf-ca-certs osg-ca-certs vo-client vo-client-dcache vo-client-lcmaps-voms
+</pre></div>
+
+
+<p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
+<h4 id="enterprise-linux-6_1">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span>igtf-ca-certs-1.96-1.osg34.el6
+osg-ca-certs-1.79-1.osg34.el6
+vo-client-86-1.osg34.el6
+vo-client-dcache-86-1.osg34.el6
+vo-client-lcmaps-voms-86-1.osg34.el6
+</pre></div>
+
+
+<h4 id="enterprise-linux-7_1">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span>igtf-ca-certs-1.96-1.osg34.el7
+osg-ca-certs-1.79-1.osg34.el7
+vo-client-86-1.osg34.el7
+vo-client-dcache-86-1.osg34.el7
+vo-client-lcmaps-voms-86-1.osg34.el7
+</pre></div>
                 
                   
                 
@@ -2109,7 +2140,7 @@ More information about authorization methods can be found
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../site-planning/" title="Site Planning" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../notes/" title="Release Note Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2118,19 +2149,19 @@ More information about authorization methods can be found
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Site Planning
+                Release Note Overview
               </span>
             </div>
           </a>
         
         
-          <a href="../hosted-ce/" title="Request a Hosted CE" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../release-3-4-24/" title="OSG Release 3.4.24" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Request a Hosted CE
+                OSG Release 3.4.24
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -2160,9 +2191,9 @@ More information about authorization methods can be found
       
     </div>
     
-      <script src="../../assets/javascripts/application.30f6b8b1.js"></script>
+      <script src="../../../assets/javascripts/application.30f6b8b1.js"></script>
       
-      <script>app.initialize({version:"0.17.5",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"0.17.5",url:{base:"../../.."}})</script>
       
     
     
