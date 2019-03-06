@@ -150,9 +150,10 @@ You may see error messages like the following in your [SchedLog](#schedlog):
 **Next actions**
 
 1.  **Check voms-mapfile or grid-mapfile** and ensure that the user's DN or VOMS attributes are known to your
-    [authentication method](install-htcondor-ce#configuring-authentication)
-2.  **Check for lcmaps errors** in `/var/log/messages`
-3.  **If you do not see helpful error messages in `/var/log/messages`,** adjust the debug level by adding `export LCMAPS_DEBUG_LEVEL=5` to `/etc/sysconfig/condor-ce`, restarting the condor-ce service, and checking `/var/log/messages` for errors again.
+    [authentication method](install-htcondor-ce#configuring-authentication), and that the mapped users exist
+    on your CE and cluster.
+1.  **Check for lcmaps errors** in `/var/log/messages`
+1.  **If you do not see helpful error messages in `/var/log/messages`,** adjust the debug level by adding `export LCMAPS_DEBUG_LEVEL=5` to `/etc/sysconfig/condor-ce`, restarting the condor-ce service, and checking `/var/log/messages` for errors again.
 
 ### Jobs stay idle on the CE
 
