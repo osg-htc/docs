@@ -3380,7 +3380,8 @@ You may see error messages like the following in your <a href="#schedlog">SchedL
 <p><strong>Next actions</strong></p>
 <ol>
 <li><strong>Check voms-mapfile or grid-mapfile</strong> and ensure that the user's DN or VOMS attributes are known to your
-    <a href="../install-htcondor-ce#configuring-authentication">authentication method</a></li>
+    <a href="../install-htcondor-ce#configuring-authentication">authentication method</a>, and that the mapped users exist
+    on your CE and cluster.</li>
 <li><strong>Check for lcmaps errors</strong> in <code>/var/log/messages</code></li>
 <li><strong>If you do not see helpful error messages in <code>/var/log/messages</code>,</strong> adjust the debug level by adding <code>export LCMAPS_DEBUG_LEVEL=5</code> to <code>/etc/sysconfig/condor-ce</code>, restarting the condor-ce service, and checking <code>/var/log/messages</code> for errors again.</li>
 </ol>
