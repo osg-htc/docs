@@ -125,7 +125,7 @@ As a reminder, here are common service commands (all run as `root`):
 | To …                                        | On EL 7, run the command…        |
 |:--------------------------------------------|:---------------------------------|
 | Start a service                             | `systemctl start SERVICE-NAME`   |
-| Stop a service                              | `systemctl start SERVICE-NAME`   |
+| Stop a service                              | `systemctl stop SERVICE-NAME`    |
 | Enable a service to start during boot       | `systemctl enable SERVICE-NAME`  |
 | Disable a service from starting during boot | `systemctl disable SERVICE-NAME` |
 
