@@ -42,16 +42,15 @@ and the administrative and security contacts.
 
 ### Initial registration
 
-Initial registration is documented [here](/common/registration.md).
+To register your Stash Cache host, follow the general registration instructions [here](https://opensciencegrid.org/docs/common/registration/#new-resources) with the following Stash Cache-specific details:
 The service type is `XRootD cache server`.
 
-!!! note
+!!! info
     This step must be completed before installation.
 
-The resource may also specify which VOs it will serve data from.
-To do this, add an `AllowedVOs` list, with each line specifying a VO whose StashCache data the resource is willing to cache.
+In your registration, you must specify which VOs your cache will serve by adding an `AllowedVOs` list, with each line specifying a VO whose data you are willing to cache.
 
-There are special values you can use in `AllowedVOs`:
+There are special values you may use in `AllowedVOs`:
 
 - `ANY_PUBLIC` indicates that the cache is willing to serve public data from any VO.
 - `ANY` indicates that the cache is willing to serve data from any VO,
@@ -64,10 +63,10 @@ There are extra requirements for serving non-public data:
   that VO must also allow the cache in its `AllowedCaches` list.
   See the page on [getting your VO's data into StashCache](/data/stashcache/vo-data).
 - There must be an authenticated XRootD instance on the cache server.
-- There must be a `DN` attribute in the resource
-  with the DN of the cert used by the authenticated XRootD instance.
+- There must be a `DN` attribute in the resource registration
+  with the [subject DN](/security/host-certs#before-starting) of the host certificate
 
-This is an example of a cache server that serves all public data:
+This is an example registration for a cache server that serves all public data:
 ```yaml
   MY_STASHCACHE_CACHE:
     FQDN: my-cache.example.net
@@ -77,7 +76,7 @@ This is an example of a cache server that serves all public data:
       - ANY_PUBLIC
 ```
 
-This is an example of a cache server that only serves authenticated data from the OSG VO:
+This is an example registration for a cache server that only serves authenticated data from the OSG VO:
 ```yaml
   MY_AUTH_STASHCACHE_CACHE:
     FQDN: my-auth-cache.example.net
@@ -104,7 +103,7 @@ To simplify installation, OSG provides convenience RPMs that install all require
 packages with a single command:
 
     :::console
-    root@host # yum install --enablerepo=osg-testing stash-cache
+    root@host # yum install stash-cache
 
 
 Configuring the Cache
@@ -172,14 +171,14 @@ the XRootD service will delete cached files until usage goes below the low water
 ### Enable remote debugging
 
 XRootD provides remote debugging via a read-only file system named digFS.
-This feature is disabled by default, but you can enable it when you need assistance with your server.
+This feature is disabled by default, but you may enable it if you need help troubleshooting your server.
 
 To enable remote debugging, edit `/etc/xrootd/digauth.cfg` and specify the authorizations for reading digFS.
 
 See [the XRootD manual](http://xrootd.org/doc/dev48/xrd_config.htm#_Toc496911334) for the syntax.
 
 Remote debugging should only be enabled for as long as you need assistance.
-Once your problem has been resolved, turn it off.
+As soon as your issue has been resolved, revert any changes you have made to `/etc/xrootd/digauth.cfg`.
 
 
 Managing StashCache and associated services
@@ -203,7 +202,7 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 | Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 
 
-### Authenticated cache services
+### Authenticated cache services (optional)
 
 In addition to the public cache services, there are three systemd units specific to the authenticated cache.
 
@@ -214,7 +213,7 @@ In addition to the public cache services, there are three systemd units specific
 |  | `xrootd-renew-proxy.timer` | Trigger daily proxy renewal |
 
 
-Testing Functionality
+Validating the Cache
 ---------------------
 
 The cache server functions as a normal HTTP server and can interact with typical HTTP clients, such as `curl`.
