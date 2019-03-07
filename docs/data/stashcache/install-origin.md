@@ -76,6 +76,7 @@ The mandatory variables to configure in `10-common-site-local.cfg` are:
 * `set sitename = YOUR_SITE_NAME`: the resource name registered with OSG.
 
 The mandatory variable to configure in `10-origin-site-local.cfg` is:
+
 * `set originexport = /VO`: the directory relative to `rootdir` that is the top of the exported namespace
   for the origin services
 
