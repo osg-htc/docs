@@ -97,6 +97,12 @@ With this configuration, the data under `/mnt/stash/hcc/bio/datasets` would be a
 `/hcc/hep/generators`.
 
 !!! warning
+    If you want to run origins for authenticated and unauthenticated data,
+    you **must** run them on separate hosts.
+    This requires registering a resource for each host.
+    This requirement will be removed in a future version of StashCache.
+
+!!! warning
     The StashCache namespace is *global* within a data federation.
     Directories you export **must not** collide with directories provided by other origin servers; this is
     why the explicit registration is required.
