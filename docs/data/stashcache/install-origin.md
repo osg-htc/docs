@@ -111,23 +111,31 @@ With this configuration, the data under `/mnt/stash/hcc/bio/datasets` would be a
 
 Managing the Origin Service
 ---------------------------
-The origin service consists of the following systemd units:
+The origin service consists of the following SystemD units that you must directly manage:
 
-| **Software** | **Service name** | **Notes** |
-|--------------|------------------|-----------|
-| XRootD | `xrootd@stash-origin.service` | The xrootd daemon, which performs the data transfers |
-| XRootD | `xrootd@stash-origin-auth.service` | The xrootd daemon, which performs authenticated data transfers |
-| XRootD | `cmsd@stash-origin.service` | The "cluster management service" daemon, which integrates the origin into the data federation.  |
+| **Service name** | **Notes** |
+|------------------|-----------|
+| `xrootd@stash-origin.service` | Performs data transfers (unauthenticated instance) |
+| `xrootd@stash-origin-auth.service` | Performs data transfers (authenticated instance) |
 
 These services must be managed with `systemctl` and may start additional services as dependencies.  As a reminder, here are common service commands (all run as `root`):
 
 | To...                                   | On EL7, run the command...         |
 | :-------------------------------------- | :--------------------------------- |
 | Start a service                         | `systemctl start <SERVICE-NAME>`   |
-| Stop a  service                         | `systemctl stop <SERVICE-NAME>`    |
+| Stop a service                          | `systemctl stop <SERVICE-NAME>`    |
 | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
 | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 
+In addition, the origin service automatically uses the following systemd units:
+
+| **Service name** | **Notes** |
+|------------------|-----------|
+| `cmsd@stash-origin.service` | Integrates the origin into the data federation (unauthenticated instance) |
+| `cmsd@stash-origin-auth.service` | Integrates the origin into the data federation (authenticated instance) |
+| `stash-origin-authfile.timer` | Updates the authorization files periodically |
+| `xcache-reporter.timer` | Reports usage stats periodically |
+| `xrootd-renew-proxy.timer` | Renews grid proxy periodically |
 
 Verifying the Origin Server
 ---------------------------
