@@ -6,17 +6,18 @@ network to cache data frequently used on the OSG, reducing data transfer over th
 decreasing access latency.
 
 
-Installation Prerequisites for the Cache
-----------------------------------------
+Before Starting
+---------------
 
 Before starting the installation process, consider the following requirements:
 
 * __Operating system:__ A RHEL 7 or compatible operating systems.
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and
   `xrootd`
-* __Host certificate:__ Optional, required for authenticated StashCache.
-  The [host certificate documentation](/security/host-certs.md) provides more information on setting up host
-  certificates.
+* __Host certificate:__ Required for reporting and authenticated StashCache.
+  (Authenticated StashCache is an optional feature.)
+  The [host certificate documentation](/security/host-certs.md) provides more information
+  on setting up host certificates.
 * __Network ports:__ The cache service requires the following ports open:
     * Inbound TCP port 1094 for file access via the XRootD protocol
     * Inbound TCP port 8000 for file access via HTTP
@@ -42,7 +43,7 @@ and the administrative and security contacts.
 
 ### Initial registration
 
-To register your Stash Cache host, follow the general registration instructions [here](https://opensciencegrid.org/docs/common/registration/#new-resources) with the following Stash Cache-specific details:
+To register your StashCache host, follow the general registration instructions [here](https://opensciencegrid.org/docs/common/registration/#new-resources).
 The service type is `XRootD cache server`.
 
 !!! info
@@ -62,7 +63,7 @@ There are extra requirements for serving non-public data:
 - In addition to the cache allowing a VO in the `AllowedVOs` list,
   that VO must also allow the cache in its `AllowedCaches` list.
   See the page on [getting your VO's data into StashCache](/data/stashcache/vo-data).
-- There must be an authenticated XRootD instance on the cache server.
+- There must be an [authenticated XRootD instance](#configuring-the-authenticated-cache-optional) on the cache server.
 - There must be a `DN` attribute in the resource registration
   with the [subject DN](/security/host-certs#before-starting) of the host certificate
 
@@ -127,7 +128,6 @@ The mandatory variables to configure are:
 - `set rootdir = /mnt/stash`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
 - `set resourcename = YOUR_RESOURCE_NAME`: the resource name registered with the OSG.
 
-When ready with configuration, you may [start](#managing-stashcache-and-associated-services) your xrootd@stash-cache service.
 
 Configuring the Authenticated Cache (Optional)
 ----------------------------------------------
@@ -135,7 +135,7 @@ Configuring the Authenticated Cache (Optional)
 The authenticated cache service is a separate instance of the StashCache cache service,
 and runs alongside the unauthenticated instance.
 You should make sure that the unauthenticated instance is functioning before setting up the authenticated instance.
-Before proceeding, make sure you have followed the [prerequisite steps](#installation-prerequisites-for-cache).
+Before proceeding, make sure you have followed the [prerequisite steps](#before-starting)).
 
 
 ### Add a service certificate
@@ -149,7 +149,6 @@ Do the following:
         :::console
         root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
 
-When ready with configuration, you may [start](#managing-stashcache-and-associated-services) your xrootd@stash-cache-auth service.
 
 Configuring Optional Features
 -----------------------------
@@ -174,8 +173,14 @@ XRootD provides remote debugging via a read-only file system named digFS.
 This feature is disabled by default, but you may enable it if you need help troubleshooting your server.
 
 To enable remote debugging, edit `/etc/xrootd/digauth.cfg` and specify the authorizations for reading digFS.
+An example of authorizations:
+```
+all allow gsi g=/glow h=*.cs.wisc.edu
+```
+This gives access to the config file, log files, core files, and process information
+to anyone from `*.cs.wisc.edu` in the `/glow` VOMS group.
 
-See [the XRootD manual](http://xrootd.org/doc/dev48/xrd_config.htm#_Toc496911334) for the syntax.
+See [the XRootD manual](http://xrootd.org/doc/dev48/xrd_config.htm#_Toc496911334) for the full syntax.
 
 Remote debugging should only be enabled for as long as you need assistance.
 As soon as your issue has been resolved, revert any changes you have made to `/etc/xrootd/digauth.cfg`.
