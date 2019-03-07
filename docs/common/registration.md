@@ -179,8 +179,13 @@ To retire an already registered resource, choose one of the following, depending
 Registering Resource Downtimes
 ------------------------------
 
-Resource downtime is a period of time for which one or more of the grid services of a registered resource are
+Resource downtime is a finite period of time for which one or more of the grid services of a registered resource are
 unavailable.
+
+!!! note
+    If your registered resource is expected to be in downtime for an undetermined amount of time, set `Active: False`
+    in the resource instead.
+
 Downtimes are stored in YAML files alongside the resource group YAML files as described [here](#registering-resources).
 
 For example, downtimes for resources in the `CHTC-Slurm-HPC` resource group of the `CHTC` site at the `University of
