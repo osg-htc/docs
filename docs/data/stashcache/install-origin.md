@@ -73,7 +73,7 @@ You _must_ configure every variable in `/etc/xrootd/10-common-site-local.cfg` an
 The mandatory variables to configure in `10-common-site-local.cfg` are:
 
 * `set rootdir = /mnt/stash`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
-* `set sitename = YOUR_SITE_NAME`: the resource name registered with OSG.
+* `set resourcename = YOUR_RESOURCE_NAME`: the resource name registered with OSG.
 
 The mandatory variable to configure in `10-origin-site-local.cfg` is:
 
@@ -85,7 +85,7 @@ and HCC's registered namespace is `/hcc`, then the following would be set in `10
 
 ```
 set rootdir = /mnt/stash
-set sitename = HCC_STASH_ORIGIN
+set resourcename = HCC_STASH_ORIGIN
 ```
 
 And the following would be set in `10-origin-site-local.cfg`:
