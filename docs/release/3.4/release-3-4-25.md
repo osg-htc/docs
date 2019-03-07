@@ -8,8 +8,8 @@ Summary of changes
 
 This release contains:
 
--   [gsi-openssh 7.4p1](https://www.openssh.com/txt/release-7.4): Update from 7.3
--   HTCondor 8.6.13: Fixed duplicate accounting records when HTCondor CE has a HTCondor backend
+-   gsi-openssh 7.4p1: Update from [OpenSSH 7.3](https://www.openssh.com/txt/release-7.4)
+-   HTCondor 8.6.13: Fixed duplicate accounting records when HTCondor-CE has a HTCondor backend
 -   xrootd-lcmaps 1.7.0: Added --no-authz flag for StashCache cache servers
 -   Upcoming Repository
     -   [HTCondor 8.8.1](https://www-auth.cs.wisc.edu/lists/htcondor-world/2019/msg00001.shtml): Bug fix release
@@ -18,7 +18,7 @@ These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%
 
 !!! note "Notes"
     -   OSG 3.4 contains only 64-bit components.
-    -   StashCache is supported on EL7 only.
+    -   StashCache is only supported on EL7
 
 Detailed changes are below. All of the documentation can be found [here](/index.md).
 
