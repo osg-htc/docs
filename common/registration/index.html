@@ -2250,9 +2250,14 @@ Resources:
 </li>
 </ul>
 <h2 id="registering-resource-downtimes">Registering Resource Downtimes<a class="headerlink" href="#registering-resource-downtimes" title="Permanent link">&para;</a></h2>
-<p>Resource downtime is a period of time for which one or more of the grid services of a registered resource are
-unavailable.
-Downtimes are stored in YAML files alongside the resource group YAML files as described <a href="#registering-resources">here</a>.</p>
+<p>Resource downtime is a finite period of time for which one or more of the grid services of a registered resource are
+unavailable.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If your registered resource is expected to be in downtime for an undetermined amount of time, set <code>Active: False</code>
+in the resource instead.</p>
+</div>
+<p>Downtimes are stored in YAML files alongside the resource group YAML files as described <a href="#registering-resources">here</a>.</p>
 <p>For example, downtimes for resources in the <code>CHTC-Slurm-HPC</code> resource group of the <code>CHTC</code> site at the <code>University of
 Wisconsin</code> can be found and registered in the following file, relative to the
 <a href="https://github.com/opensciencegrid/topology/tree/master/">root of the topology repository</a>:</p>
