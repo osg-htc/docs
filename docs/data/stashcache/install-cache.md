@@ -63,7 +63,7 @@ There are extra requirements for serving non-public data:
 - In addition to the cache allowing a VO in the `AllowedVOs` list,
   that VO must also allow the cache in its `AllowedCaches` list.
   See the page on [getting your VO's data into StashCache](/data/stashcache/vo-data).
-- There must be an [authenticated XRootD instance](#configuring-the-authenticated-cache-optional) on the cache server.
+- There must be an authenticated XRootD instance on the cache server.
 - There must be a `DN` attribute in the resource registration
   with the [subject DN](/security/host-certs#before-starting) of the host certificate
 
@@ -129,25 +129,21 @@ The mandatory variables to configure are:
 - `set resourcename = YOUR_RESOURCE_NAME`: the resource name registered with the OSG.
 
 
-Configuring the Authenticated Cache (Optional)
-----------------------------------------------
-
-The authenticated cache service is a separate instance of the StashCache cache service,
-and runs alongside the unauthenticated instance.
-You should make sure that the unauthenticated instance is functioning before setting up the authenticated instance.
-Before proceeding, make sure you have followed the [prerequisite steps](#before-starting)).
-
-
 ### Add a service certificate
 
-The service will need a certificate to authenticate to StashCache origins.
-Do the following:
+The service will need a certificate for reporting and to authenticate to StashCache origins.
+The easiest solution for this is to use your host certificate and key as follows:
 
 1. Copy the host certificate to `/etc/grid-security/xrd/xrd{cert,key}.pem`
 1. Set the owner of the directory and contents `/etc/grid-security/xrd/` to `xrootd:xrootd`:
 
         :::console
         root@host # chown -R xrootd:xrootd /etc/grid-security/xrd/
+
+!!! note
+    You must repeat the above steps whenever you renew your host certificate.
+    If you automate certificate renewal, e.g. for Let's Encrypt, you should create a cron job
+    to automatically make the copies after renewal.
 
 
 Configuring Optional Features
