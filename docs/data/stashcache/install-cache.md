@@ -233,10 +233,29 @@ user@host $ curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/qu
 To verify the cache is reporting to the central collector, run the following command from the cache server:
 
 ```console
-user@host $ condor_status -any -l -const "Name==\"xrootd@`hostname`\""
+user@host $ condor_status -any -pool collector.opensciencegrid.org:9619 \
+                          -l -const "Name==\"xrootd@`hostname`\""
 ```
 
-The output of the above command should provide an HTCondor ClassAd that details the status of your cache.
+The output of the above command should detail what the collector knows about the status of your cache.
+Here is an example snippet of the output:
+```
+AuthenticatedIdentity = "sc-cache.chtc.wisc.edu@daemon.opensciencegrid.org"
+AuthenticationMethod = "GSI"
+free_cache_bytes = 868104454144
+free_cache_fraction = 0.8022261674321525
+LastHeardFrom = 1552002482
+most_recent_access_time = 1551997049
+MyType = "Machine"
+Name = "xrootd@sc-cache.chtc.wisc.edu"
+ping_elapsed_time = 0.00763392448425293
+ping_response_code = 0
+ping_response_message = "[SUCCESS] "
+ping_response_status = "ok"
+STASHCACHE_DaemonVersion = "1.0.0"
+...
+```
+
 
 
 Getting Help
