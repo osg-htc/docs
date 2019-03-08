@@ -228,6 +228,12 @@ The cache server functions as a normal HTTP server and can interact with typical
 user@host $ curl -O http://cache_host:8000/user/dweitzel/public/blast/queries/query1
 ```
 
+`curl` may not correctly report a failure, so verify that the contents of the file are:
+```
+>Derek's first query!
+MPVSDSGFDNSSKTMKDDTIPTEDYEEITKESEMGDATKITSKIDANVIEKKDTDSENNITIAQDDEKVSWLQRVVEFFE
+```
+
 ### Test cache server reporting to the central collector
 
 To verify the cache is reporting to the central collector, run the following command from the cache server:
