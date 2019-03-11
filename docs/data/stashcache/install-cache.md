@@ -22,7 +22,7 @@ Before starting the installation process, consider the following requirements:
     * Inbound TCP port 8000 for file access via HTTP
     * Inbound TCP port 8443 for authenticated file access via HTTPS (optional)
     * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring
-* __Hardware requirements:__ We recommend that a StashCache cache has at least 10Gbps connectivity, 1TB of
+* __Hardware requirements:__ We recommend that a cache has at least 10Gbps connectivity, 1TB of
  disk space for the cache directory, and 8GB of RAM.
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
@@ -42,7 +42,7 @@ and the administrative and security contacts.
 
 ### Initial registration
 
-To register your StashCache host, follow the general registration instructions [here](https://opensciencegrid.org/docs/common/registration/#new-resources).
+To register your cache host, follow the general registration instructions [here](https://opensciencegrid.org/docs/common/registration/#new-resources).
 The service type is `XRootD cache server`.
 
 !!! info
@@ -151,7 +151,7 @@ Configuring Optional Features
 
 ### Adjust disk utilization
 
-To adjust the disk utilization of your StashCache cache, create or edit a file named `/etc/xrootd/config.d/90-local.cfg`
+To adjust the disk utilization of your cache, create or edit a file named `/etc/xrootd/config.d/90-local.cfg`
 and set the values of `pfc.diskusage`.
 
 ```
