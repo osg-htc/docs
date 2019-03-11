@@ -15,9 +15,8 @@ Before starting the installation process, consider the following requirements:
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and
   `xrootd`
 * __Host certificate:__ Required for reporting and authenticated StashCache.
-  (Authenticated StashCache is an optional feature.)
-  The [host certificate documentation](/security/host-certs.md) provides more information
-  on setting up host certificates.
+  Authenticated StashCache is an optional feature.
+  See our [documentation](/security/host-certs.md) for instructions on how to request and install host certificates.
 * __Network ports:__ The cache service requires the following ports open:
     * Inbound TCP port 1094 for file access via the XRootD protocol
     * Inbound TCP port 8000 for file access via HTTP
