@@ -24,16 +24,16 @@ Before starting the installation process, consider the following points:
 * __Operating system:__ A RHEL 7 or compatible operating system.
 * __User IDs:__ If they do not exist already, the installation will create the Linux user IDs `condor` and `xrootd`;
   only the `xrootd` user is utilized for the running daemons.
-* __Host certificate:__ The StashCache server uses a host certificate to authenticate with the caches it serves.
+* __Host certificate:__ The origin service uses a host certificate to authenticate with the caches it serves.
   The [host certificate documentation](/security/host-certs.md) provides more information on setting up host
   certificates.
-* __Network ports:__ The StashCache Origin service requires the following ports open:
-    * Inbound TCP port 1094 for file access via the XRootD protocol
-    * Outbound TCP port 1213 to `redirector.osgstorage.org` for connecting to the data federation
-    * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring.
-* __Hardware requirements:__ We recommend that a StashCache origin has at least 1Gbps connectivity and 8GB of
-  RAM.  We suggest that several gigabytes of local disk space be available for log files, although some logging verbosity
-  can be reduced.
+* __Network ports:__ The origin service requires the following ports open:
+  * Inbound TCP port 1094 for file access via the XRootD protocol
+  * Outbound TCP port 1213 to `redirector.osgstorage.org` for connecting to the data federation
+  * Outbound UDP port 9930 for reporting to `xrd-report.osgstorage.org` and `xrd-mon.osgstorage.org` for monitoring.
+* __Hardware requirements:__ We recommend that an origin has at least 1Gbps connectivity and 8GB of RAM.
+  We suggest that several gigabytes of local disk space be available for log files,
+  although some logging verbosity can be reduced.
 
 As with all OSG software installations, there are some one-time steps to prepare in advance:
 
@@ -41,7 +41,7 @@ As with all OSG software installations, there are some one-time steps to prepare
 * Prepare [the required Yum repositories](/common/yum.md)
 * Install [CA certificates](/common/ca.md)
 
-Installing the origin
+Installing the Origin
 ---------------------
 
 The origin service consists of one or more XRootD daemons and their dependencies for the authentication infrastructure.
@@ -72,7 +72,8 @@ You _must_ configure every variable in `/etc/xrootd/10-common-site-local.cfg` an
 
 The mandatory variables to configure in `10-common-site-local.cfg` are:
 
-* `set rootdir = /mnt/stash`: the mounted filesystem path to export.  This document refers to this as `/mnt/stash`.
+* `set rootdir = /mnt/stash`: the mounted filesystem path to export.
+  This document refers to this path as `/mnt/stash`.
 * `set resourcename = YOUR_RESOURCE_NAME`: the resource name registered with OSG.
 
 The mandatory variable to configure in `10-origin-site-local.cfg` is:
@@ -118,7 +119,8 @@ The origin service consists of the following SystemD units that you must directl
 | `xrootd@stash-origin.service` | Performs data transfers (unauthenticated instance) |
 | `xrootd@stash-origin-auth.service` | Performs data transfers (authenticated instance) |
 
-These services must be managed with `systemctl` and may start additional services as dependencies.  As a reminder, here are common service commands (all run as `root`):
+These services must be managed with `systemctl` and may start additional services as dependencies.
+As a reminder, here are common service commands (all run as `root`):
 
 | To...                                   | On EL7, run the command...         |
 | :-------------------------------------- | :--------------------------------- |
