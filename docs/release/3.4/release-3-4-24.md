@@ -10,7 +10,7 @@ This release contains:
 
 -   BLAHP 1.18.39: Now propagates signals down to the payload job
 -   osg-pki-tools 3.0.1: Now accepts multi-word states or provinces
--   HTCondor-CE 3.2.1: Minor adjustments to work with new HTCondor versions
+-   [HTCondor-CE 3.2.1](https://github.com/opensciencegrid/htcondor-ce/releases/tag/v3.2.1): Minor adjustments to work with new HTCondor versions
 -   condor-cron 1.1.4: Minor adjustments to work with new HTCondor versions
 -   osg-release 3.4-1: New osg-rolling repository (disabled by default) allows early access to fully tested software
 -   Upcoming Repository

@@ -9,6 +9,7 @@ Release Notes
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.26](/release/3.4/release-3-4-26)     | 2019-03-14 | cctools 7.0.9, Pegasus 4.9.1, osg-pki-tools 3.1.0; Upcoming: Singularity 3.1.0 |
 | [3.4.25](/release/3.4/release-3-4-25)     | 2019-03-07 | gsi-openssh 7.4p1, HTCondor 8.6.13 patched, xrootd-lcmaps 1.7.0; Upcoming: HTCondor 8.8.1 |
 | [3.4.24-2](/release/3.4/release-3-4-24-2) | 2019-03-05 | IGTF 1.96, VO Package v86                                               |
 | [3.4.24](/release/3.4/release-3-4-24)     | 2019-02-21 | BLAHP 1.18.39, osg-pki-tools 3.0.1, HTCondor-CE 3.2.1, condor-cron 1.14.1; Upcoming: Singularity 3.0.3, HDFS on EL6 |
