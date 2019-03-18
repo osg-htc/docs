@@ -1382,7 +1382,7 @@
         }, 
         {
             "location": "/worker-node/using-wn-containers/", 
-            "text": "Using the Worker Node Containers\n\n\nThe OSG worker node containers contain the suggested base environment for worker nodes.  They can be used as a base image to build containers or to perform testing.\n\n\nThe containers are available on \nDocker Hub\n.\n\n\nAvailable Containers\n\n\nAvailable tags include:\n\n\n\n\nlatest\n: The latest version of the OSG worker node environment on the most recent supported OS.  As of June 2017, this is OSG 3.4 and RHEL7.\n\n\n3.4\n: The OSG 3.4 release series on top of the most recent supported OS.  As of June 2017, this is RHEL7.\n\n\n3.4-el7\n: The OSG 3.4 release series on top of a RHEL7 environment.\n\n\n3.4-el6\n: The OSG 3.4 release series on top of a RHEL6 environment.\n\n\n\n\nBuilding Upon the Container\n\n\nYou may base the container on the OSG worker node by including it inside your \nDockerfile\n:\n\n\nFROM opensciencegrid/osg-wn:latest\n...\n\n\n\n\n\nYou can replace \nlatest\n with any tag listed above.\n\n\nPerform Testing\n\n\nYou may perform testing from within the OSG worker node envionment by running the command:\n\n\nroot@host # docker run -ti --rm opensciencegrid/osg-wn:latest /bin/bash", 
+            "text": "Using the Worker Node Containers\n\n\nThe OSG worker node containers contain the suggested base environment for worker nodes.  They can be used as a base image to build containers or to perform testing.\n\n\nThe containers are available on \nDocker Hub\n.\n\n\nAvailable Containers\n\n\nAvailable tags include:\n\n\n\n\nlatest\n: The latest version of the OSG worker node environment on the most recent supported OS.  As of June 2017, this is OSG 3.4 and RHEL7.\n\n\n3.4\n: The OSG 3.4 release series on top of the most recent supported OS.  As of June 2017, this is RHEL7.\n\n\n3.4-el7\n: The OSG 3.4 release series on top of a RHEL7 environment.\n\n\n3.4-el6\n: The OSG 3.4 release series on top of a RHEL6 environment.\n\n\n\n\nBuilding Upon the Container\n\n\nYou may base the container on the OSG worker node by including it inside your \nDockerfile\n:\n\n\nFROM opensciencegrid/osg-wn:latest\n\n\n\n\n\nYou can replace \nlatest\n with any tag listed above.\n\n\nPerform Testing\n\n\nYou may perform testing from within the OSG worker node envionment by running the command:\n\n\nroot@host # docker run -ti --rm opensciencegrid/osg-wn:latest /bin/bash", 
             "title": "Using WN Containers"
         }, 
         {
@@ -1397,7 +1397,7 @@
         }, 
         {
             "location": "/worker-node/using-wn-containers/#building-upon-the-container", 
-            "text": "You may base the container on the OSG worker node by including it inside your  Dockerfile :  FROM opensciencegrid/osg-wn:latest\n...  You can replace  latest  with any tag listed above.", 
+            "text": "You may base the container on the OSG worker node by including it inside your  Dockerfile :  FROM opensciencegrid/osg-wn:latest  You can replace  latest  with any tag listed above.", 
             "title": "Building Upon the Container"
         }, 
         {
