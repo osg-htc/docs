@@ -370,16 +370,14 @@ Validating HTCondor-CE
 
 To validate an HTCondor-CE, perform the following verification steps:
 
-1. Verify that you can manually submit jobs (e.g., `condor_submit`, `qsub`, etc.)to your batch system from the CE host.
+1. Verify that local job submissions complete successfully from the CE host.
+   For example, run `sbatch` from the CE and verify that it runs and completes in your Slurm cluster.
 
 1. Verify that all the necessary daemons are running with
    [condor\_ce\_status](/compute-element/troubleshoot-htcondor-ce#condor_ce_status).
 
 1. Verify the CE's network configuration using
    [condor\_ce\_host\_network\_check](/compute-element/troubleshoot-htcondor-ce#condor_ce_host_network_check).
-
-1. Verify that local job submissions complete successfully from the CE host.
-   For example, run `sbatch` from the CE and verify that it runs and completes in your Slurm cluster.
 
 1. Verify that jobs can complete successfully using
    [condor\_ce\_trace](/compute-element/troubleshoot-htcondor-ce#condor_ce_trace).
