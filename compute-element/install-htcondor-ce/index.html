@@ -2773,7 +2773,8 @@ The specific services are:</p>
 <p>To validate an HTCondor-CE, perform the following verification steps:</p>
 <ol>
 <li>
-<p>Verify that you can manually submit jobs (e.g., <code>condor_submit</code>, <code>qsub</code>, etc.)to your batch system from the CE host.</p>
+<p>Verify that local job submissions complete successfully from the CE host.
+   For example, run <code>sbatch</code> from the CE and verify that it runs and completes in your Slurm cluster.</p>
 </li>
 <li>
 <p>Verify that all the necessary daemons are running with
@@ -2782,10 +2783,6 @@ The specific services are:</p>
 <li>
 <p>Verify the CE's network configuration using
    <a href="../../compute-element/troubleshoot-htcondor-ce#condor_ce_host_network_check">condor_ce_host_network_check</a>.</p>
-</li>
-<li>
-<p>Verify that local job submissions complete successfully from the CE host.
-   For example, run <code>sbatch</code> from the CE and verify that it runs and completes in your Slurm cluster.</p>
 </li>
 <li>
 <p>Verify that jobs can complete successfully using
