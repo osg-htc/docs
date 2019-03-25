@@ -8,6 +8,8 @@ and the data is streamed to jobs from a set of _cache servers_ distributed throu
 Jobs can achieve lower latency and higher throughput for data transfer by using a nearby cache
 instead of accessing the origin directly.
 
+StashCache is most suitable for unique or shared data in the 1 GB to 10 GB range.
+
 The map below shows the location of the current caches in the StashCache federation:
 
 ![StashCache Map](StashCacheMap.png "StashCache Map")
