@@ -2,7 +2,8 @@
 
 The OSG operates the _StashCache data federation_, which provides organizations with a method to distribute their data
 in a scalable manner to thousands of jobs without needing to pre-stage data at each site.
-The StashCache data federation is best suited for data set sizes between 1-10 GB.
+The StashCache data federation is best suited for per-job data set sizes between 1 and 50 GB,
+with no more than 1 TB for a complete workflow.
 
 Organizations export their data from an _origin server_,
 and the data is streamed to jobs from a set of _cache servers_ distributed throughout the OSG and Internet2.
