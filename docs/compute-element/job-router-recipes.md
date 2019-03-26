@@ -312,13 +312,15 @@ JOB_ROUTER_ENTRIES @=jre
 To set a default maximum walltime (in minutes) for routed jobs, set the attribute `default_maxWallTime`:
 
 ```
-JOB_ROUTER_ENTRIES @=jre [
-     GridResource = "batch pbs";
-     TargetUniverse = 9;
-     name = "Setting WallTime";
-     /* Set the max walltime to 1 hr */
-     %RED%set_default_maxWallTime = 60;%ENDCOLOR%
+JOB_ROUTER_ENTRIES @=jre
+[
+  GridResource = "batch pbs";
+  TargetUniverse = 9;
+  name = "Setting WallTime";
+  /* Set the max walltime to 1 hr */
+  %RED%set_default_maxWallTime = 60;%ENDCOLOR%
 ]
+@jre
 ```
 
 ### Editing attributes…
