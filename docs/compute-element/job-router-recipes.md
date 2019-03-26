@@ -473,7 +473,7 @@ JOB_ROUTER_ENTRIES @=jre
 [
   TargetUniverse = 5;
   name = "Setting periodic statements";
-  %RED%# Puts the routed job on hold if the job's been idle and has been started at least once or if the job has tried to start more than once */
+  %RED%# Puts the routed job on hold if the job's been idle and has been started at least once or if the job has tried to start more than once
   set_Periodic_Hold = (NumJobStarts >= 1 && JobStatus == 1) || NumJobStarts > 1;
   # Remove routed jobs if their walltime is longer than 3 days and 5 minutes
   set_Periodic_Remove = ( RemoteWallClockTime > (3*24*60*60 + 5*60) );
