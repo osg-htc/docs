@@ -344,7 +344,7 @@ To modify a VO's information or register a new VO, follow the instructions below
         access to the OSG copy of the topology data, which is why you are creating a pull request.
 
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
-   the [project template](https://github.com/opensciencegrid/topology/blob/master/template-projects.yaml) as a guide.
+   the [project template](https://github.com/opensciencegrid/topology/blob/master/template-project.yaml) as a guide.
    You may leave any `ID` fields blank.
    If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.
 
