@@ -141,26 +141,14 @@ JOB_ROUTER_ENTRIES @=jre
 
 ### Writing comments
 
-To write comments you can use C-style comments, text enclosed by `/* */`. If the comment is at the end of a line, it still has to be followed by the line continuation character.
+To write comments you can use `#` to comment a line:
 
 ```
 JOB_ROUTER_ENTRIES @=jre
 [
   TargetUniverse = 5;
-  name = "C-style comments";
-  %RED%/* This is a comment */%ENDCOLOR%
-]
-@jre
-```
-
-You can also use `#` to comment out single lines:
-
-```
-JOB_ROUTER_ENTRIES @=jre
-[
-  TargetUniverse = 5;
-  name = "Hash comments";
-  %RED%# BrokenAttribute = "commented out";%ENDCOLOR%
+  name = "# comments";
+  # This is a comment
 ]
 @jre
 ```
@@ -285,7 +273,7 @@ JOB_ROUTER_ENTRIES @=jre
   GridResource = "batch pbs";
   TargetUniverse = 9;
   name = "Request memory";
-  /* Set the requested memory to 1 GB */
+  # Set the requested memory to 1 GB
   %RED%set_default_maxMemory = 1000;%ENDCOLOR%
 ]
 @jre
@@ -301,7 +289,7 @@ JOB_ROUTER_ENTRIES @=jre
   GridResource = "batch pbs";
   TargetUniverse = 9;
   name = "Request CPU";
-  /* Set the requested cores to 8 */
+  # Set the requested cores to 8
   %RED%set_default_xcount = 8;%ENDCOLOR%
 ]
 @jre
@@ -317,7 +305,7 @@ JOB_ROUTER_ENTRIES @=jre
   GridResource = "batch pbs";
   TargetUniverse = 9;
   name = "Setting WallTime";
-  /* Set the max walltime to 1 hr */
+  # Set the max walltime to 1 hr
   %RED%set_default_maxWallTime = 60;%ENDCOLOR%
 ]
 @jre
@@ -485,11 +473,11 @@ JOB_ROUTER_ENTRIES @=jre
 [
   TargetUniverse = 5;
   name = "Setting periodic statements";
-  %RED%/* Puts the routed job on hold if the job's been idle and has been started at least once or if the job has tried to start more than once */
+  %RED%# Puts the routed job on hold if the job's been idle and has been started at least once or if the job has tried to start more than once */
   set_Periodic_Hold = (NumJobStarts >= 1 && JobStatus == 1) || NumJobStarts > 1;
-  /* Remove routed jobs if their walltime is longer than 3 days and 5 minutes */
+  # Remove routed jobs if their walltime is longer than 3 days and 5 minutes
   set_Periodic_Remove = ( RemoteWallClockTime > (3*24*60*60 + 5*60) );
-  /* Release routed jobs if the condor_starter couldn't start the executable and 'VMGAHP_ERR_INTERNAL' is in the HoldReason */
+  # Release routed jobs if the condor_starter couldn't start the executable and 'VMGAHP_ERR_INTERNAL' is in the HoldReason
   set_Periodic_Release = HoldReasonCode == 6 && regexp("VMGAHP_ERR_INTERNAL", HoldReason);%ENDCOLOR%
 ]
 @jre
@@ -592,9 +580,9 @@ Source: <https://www.aglt2.org/wiki/bin/view/AGLT2/CondorCE#The_JobRouter_config
 
 ```
 JOB_ROUTER_ENTRIES @=jre
-/* Still to do on all routes, get job requirements and add them here */
-/* ***** Route no 1 ***** */
-/* ***** Analysis queue ***** */
+# Still to do on all routes, get job requirements and add them here
+# Route no 1
+# Analysis queue
   [
     GridResource = "condor localhost localhost";
     eval_set_GridResource = strcat("condor ", "$(FULL_HOSTNAME)", " $(JOB_ROUTER_SCHEDD2_POOL)");
@@ -612,8 +600,8 @@ JOB_ROUTER_ENTRIES @=jre
     set_JobMemoryLimit = 4194000;
     set_Periodic_Remove = ( ( RemoteWallClockTime > (3*24*60*60 + 5*60) ) || (ImageSize > JobMemoryLimit) );
   ]
-/* ***** Route no 2 ***** */
-/* ***** splitterNT queue ***** */
+# Route no 2
+# splitterNT queue
   [
     GridResource = "condor localhost localhost";
     eval_set_GridResource = strcat("condor ", "$(FULL_HOSTNAME)", " $(JOB_ROUTER_SCHEDD2_POOL)");
@@ -629,8 +617,8 @@ JOB_ROUTER_ENTRIES @=jre
     set_JobMemoryLimit = 4194000;
     set_Periodic_Remove = ( ( RemoteWallClockTime > (3*24*60*60 + 5*60) ) || (ImageSize > JobMemoryLimit) );
   ]
-/* ***** Route no 3 ***** */
-/* ***** splitter queue ***** */
+# Route no 3
+# splitter queue
   [
     GridResource = "condor localhost localhost";
     eval_set_GridResource = strcat("condor ", "$(FULL_HOSTNAME)", " $(JOB_ROUTER_SCHEDD2_POOL)");
@@ -646,8 +634,8 @@ JOB_ROUTER_ENTRIES @=jre
     set_JobMemoryLimit = 4194000;
     set_Periodic_Remove = ( ( RemoteWallClockTime > (3*24*60*60 + 5*60) ) || (ImageSize > JobMemoryLimit) );
   ]
-/* ***** Route no 4 ***** */
-/* ***** xrootd queue ***** */
+# Route no 4
+# xrootd queue
   [
     GridResource = "condor localhost localhost";
     eval_set_GridResource = strcat("condor ", "$(FULL_HOSTNAME)", " $(JOB_ROUTER_SCHEDD2_POOL)");
@@ -663,8 +651,8 @@ JOB_ROUTER_ENTRIES @=jre
     set_JobMemoryLimit = 4194000;
     set_Periodic_Remove = ( ( RemoteWallClockTime > (3*24*60*60 + 5*60) ) || (ImageSize > JobMemoryLimit) );
   ]
-/* ***** Route no 5 ***** */
-/* ***** Tier3Test queue ***** */
+# Route no 5
+# Tier3Test queue
   [
     GridResource = "condor localhost localhost";
     eval_set_GridResource = strcat("condor ", "$(FULL_HOSTNAME)", " $(JOB_ROUTER_SCHEDD2_POOL)");
@@ -681,8 +669,8 @@ JOB_ROUTER_ENTRIES @=jre
     set_JobMemoryLimit = 4194000;
     set_Periodic_Remove = ( ( RemoteWallClockTime > (3*24*60*60 + 5*60) ) || (ImageSize > JobMemoryLimit) );
   ]
-/* ***** Route no 6 ***** */
-/* ***** mp8 queue ***** */
+# Route no 6
+# mp8 queue
   [
     GridResource = "condor localhost localhost";
     eval_set_GridResource = strcat("condor ", "$(FULL_HOSTNAME)", " $(JOB_ROUTER_SCHEDD2_POOL)");
@@ -700,8 +688,8 @@ JOB_ROUTER_ENTRIES @=jre
     set_Slot_Type = "mp8";
     set_Periodic_Remove = ( ( RemoteWallClockTime > (3*24*60*60 + 5*60) ) || (ImageSize > JobMemoryLimit) );
   ]
-/* ***** Route no 7 ***** */
-/* ***** Installation queue, triggered by usatlas2 user ***** */
+# Route no 7
+# Installation queue, triggered by usatlas2 user
   [
     GridResource = "condor localhost localhost";
     eval_set_GridResource = strcat("condor ", "$(FULL_HOSTNAME)", " $(JOB_ROUTER_SCHEDD2_POOL)");
@@ -718,8 +706,8 @@ JOB_ROUTER_ENTRIES @=jre
     set_JobMemoryLimit = 4194000;
     set_Periodic_Remove = ( ( RemoteWallClockTime > (3*24*60*60 + 5*60) ) || (ImageSize > JobMemoryLimit) );
   ]
-/* ***** Route no 8 ***** */
-/* ***** Default queue for usatlas1 user ***** */
+# Route no 8
+# Default queue for usatlas1 user
   [
     GridResource = "condor localhost localhost";
     eval_set_GridResource = strcat("condor ", "$(FULL_HOSTNAME)", " $(JOB_ROUTER_SCHEDD2_POOL)");
@@ -734,8 +722,8 @@ JOB_ROUTER_ENTRIES @=jre
     set_JobMemoryLimit = 4194000;
     set_Periodic_Remove = ( ( RemoteWallClockTime > (3*24*60*60 + 5*60) ) || (ImageSize > JobMemoryLimit) );
   ]
-/* ***** Route no 9 ***** */
-/* ***** Default queue for any other usatlas account ***** */
+# Route no 9
+# Default queue for any other usatlas account
   [
     GridResource = "condor localhost localhost";
     eval_set_GridResource = strcat("condor ", "$(FULL_HOSTNAME)", " $(JOB_ROUTER_SCHEDD2_POOL)");
@@ -750,8 +738,8 @@ JOB_ROUTER_ENTRIES @=jre
     set_JobMemoryLimit = 4194000;
     set_Periodic_Remove = ( ( RemoteWallClockTime > (3*24*60*60 + 5*60) ) || (ImageSize > JobMemoryLimit) );
   ]
-/* ***** Route no 10 ***** */
-/* ***** Anything else. Set queue as Default and assign to other VOs  ***** */
+# Route no 10
+# Anything else. Set queue as Default and assign to other VOs
   [
     GridResource = "condor localhost localhost";
     eval_set_GridResource = strcat("condor ", "$(FULL_HOSTNAME)", " $(JOB_ROUTER_SCHEDD2_POOL)");
