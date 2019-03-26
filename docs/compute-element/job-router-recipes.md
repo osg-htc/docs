@@ -17,7 +17,6 @@ Quirks and Pitfalls
 
 -   If a value is set in [JOB\_ROUTER\_DEFAULTS](#job_router_defaults) with `eval_set_<variable>`, override it by using `eval_set_<variable>` in the `JOB_ROUTER_ENTRIES`. Do this at your own risk as it may cause the CE to break.
 -   Make sure to run `condor_ce_reconfig` after changing your routes, otherwise they will not take effect.
--   Before the last square bracket, make sure all lines end in a line continuation character (backslash). You can inspect the syntax of your routes with `condor_ce_config_val JOB_ROUTER_ENTRIES` to see if HTCondor-CE has ingested them properly.
 -   Do **not** set the job environment through the JobRouter. Instead, add any changes to the `[Local Settings]` section in `/etc/osg/config.d/40-localsettings.ini` and run osg-configure, as documented [here](/other/configuration-with-osg-configure#local-settings).
 -   HTCondor batch system only: Local universe jobs are excluded from any routing.
 
@@ -118,7 +117,11 @@ The name of the route will be useful in debugging since it shows up in the outpu
 !!! note
     Before writing multiple routes, consider the details of [how jobs match to job routes](#how-jobs-match-to-job-routes)
 
-If your batch system needs incoming jobs to be sorted (e.g. if different VO's need to go to separate queues), you will need to write multiple job routes. Each route is enclosed by square brackets and unless they're the last closing bracket, they need to be followed by the line continuation character. The following routes takes incoming jobs that have a `queue` attribute set to `"analy"` and routes them to the site's HTCondor batch system. Any other jobs will be sent to that site's PBS batch system.
+If your batch system needs incoming jobs to be sorted (e.g. if different VO's need to go to separate queues),
+you will need to write multiple job routes where each route is enclosed by square brackets.
+The following routes takes incoming jobs that have a `queue` attribute set to `"analy"` and routes them to the site's
+HTCondor batch system.
+Any other jobs will be sent to that site's PBS batch system.
 
 ```
 JOB_ROUTER_ENTRIES @=jre
