@@ -232,9 +232,8 @@ Hadoop configuration is needed by every node in the hadoop cluster. However, in 
 
 Hadoop configuration is stored in `/etc/hadoop/conf`. However, by default, these files are mostly blank. OSG provides a sample configuration in `/etc/hadoop/conf.osg` with most common values filled in. You will need to copy these into `/etc/hadoop/conf` before they become active. Please let us know if there are any common values that should be added/changed across the whole grid. You will likely need to modify `hdfs-site.xml` and `core-site.xml`. Review all the settings in these files, but listed below are common settings to modify:
 
-|                 |                            |                                  |                                                                                           |
-|-----------------|----------------------------|----------------------------------|-------------------------------------------------------------------------------------------|
 | File            | Setting                    | Example                          | Comments                                                                                  |
+|-----------------|----------------------------|----------------------------------|-------------------------------------------------------------------------------------------|
 | `core-site.xml` | fs.default.name            | hdfs://namenode.domain.tld.:9000 | This is the address of the NameNode                                                       |
 | `core-site.xml` | hadoop.tmp.dir             | /data/scratch                    | Scratch temp directory used by Hadoop                                                     |
 | `core-site.xml` | hadoop.log.dir             | /var/log/hadoop-hdfs             | Log directory used by Hadoop                                                              |
@@ -357,9 +356,8 @@ Any additional config files under `/etc/gridftp.d` will be used for both the ini
 DSI module in both the init.d and standalone GridFTP server.
 Some of the environment variables that can be used in `/etc/sysconfig/gridftp-hdfs` include:
 
-|                              |                |                                                                                                                                                                                                                                                                                 |
-|------------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Option Name                  | Needs Editing? | Suggested value                                                                                                                                                                                                                                                                 |
+|------------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | GRIDFTP\_HDFS\_REPLICA\_MAP  | No             | File containing a list of paths and replica values for setting the default \# of replicas for specific file paths                                                                                                                                                               |
 | GRIDFTP\_BUFFER\_COUNT       | No             | The number of 1MB memory buffers used to reorder data streams before writing them to Hadoop                                                                                                                                                                                     |
 | GRIDFTP\_FILE\_BUFFER\_COUNT | No             | The number of 1MB file-based buffers used to reorder data streams before writing them to Hadoop                                                                                                                                                                                 |
@@ -386,9 +384,8 @@ Assuming you installed GridFTP using the `osg-se-hadoop-gridftp` rpm, the Gratia
 
 Here are the most relevant file and directory locations:
 
-|                     |                |                                          |
-|---------------------|----------------|------------------------------------------|
 | Purpose             | Needs Editing? | Location                                 |
+|---------------------|----------------|------------------------------------------|
 | Probe Configuration | Yes            | /etc/gratia/gridftp-transfer/ProbeConfig |
 | Probe Executables   | No             | /usr/share/gratia/gridftp-transfer       |
 | Log files           | No             | /var/log/gratia                          |
@@ -400,9 +397,8 @@ The RPM installs the Gratia probe into the system crontab, but does not configur
 
 This is usually one XML node spread over multiple lines. Note that comments (\#) have no effect on this file. You will need to edit the following:
 
-|                                 |                                                                                            |                                                                                                                                            |
-|---------------------------------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | Attribute                       | Needs Editing                                                                              | Value                                                                                                                                      |
+|---------------------------------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | ProbeName                       | Maybe                                                                                      | This should be set to "gridftp-transfer:<hostname>", where <hostname> is the fully-qualified domain name of your gridftp host. |
 | CollectorHost                   | Maybe                                                                                      | Set to the hostname and port of the central collector. By default it sends to the OSG collector. See below.                                |
 | SiteName                        | Yes                                                                                        | Set to the resource group name of your site as registered in OIM.                                                                          |
@@ -437,9 +433,8 @@ Look for any abnormal termination and report it if it is a non-trivial site issu
 
 Here are the most relevant file and directory locations:
 
-|                     |                |                                                         |
-|---------------------|----------------|---------------------------------------------------------|
 | Purpose             | Needs Editing? | Location                                                |
+|---------------------|----------------|---------------------------------------------------------|
 | Probe Configuration | Yes            | /etc/gratia/hadoop-storage/ProbeConfig                  |
 | Probe Executable    | No             | /usr/share/gratia/hadoop-storage/hadoop\_storage\_probe |
 | Log files           | No             | /var/log/gratia                                         |
@@ -454,9 +449,8 @@ The RPM installs the Gratia probe into the system crontab, but does not configur
 
 This is usually one XML node spread over multiple lines. Note that comments (\#) have no effect on this file. You will need to edit the following:
 
-|               |               |                                                                                                                                         |
-|---------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 | Attribute     | Needs Editing | Value                                                                                                                                   |
+|---------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 | CollectorHost | Maybe         | Set to the hostname and port of the central collector. By default it sends to the OSG collector. You probably do not want to change it. |
 | SiteName      | Yes           | Set to the resource group name of your SE as registered in OIM.                                                                         |
 | Grid          | Maybe         | Set to "ITB" if this is a test resource; otherwise, leave as OSG.                                                                       |
