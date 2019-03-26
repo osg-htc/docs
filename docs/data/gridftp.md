@@ -49,15 +49,54 @@ Configuring GridFTP
 To configure which virtual organizations and users are allowed to use your GridFTP server, follow the instructions in
 [the LCMAPS VOMS plugin document](/security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin).
 
-### Enabling Gratia GridFTP transfer probe
+### Enabling GridFTP transfer probe
 
-The [Gratia GridFTP probe](https://github.com/opensciencegrid/docs/blob/master/archive/GratiaTransferProbe) collects the information about the Gridftp transfers and forwards it to central Gratia collector. You need to enable the probe first. To do this, edit `/etc/gratia/gridftp-transfer/ProbeConfig` to set:
+The Gratia probe requires the file `user-vo-map` to exist and be up to date.
+Assuming you installed GridFTP using the `osg-se-hadoop-gridftp` rpm, the Gratia Transfer Probe will already be installed.
 
-```text
-EnableProbe="1"
+Here are the most relevant file and directory locations:
+
+| Purpose             | Needs Editing? | Location                                 |
+|---------------------|----------------|------------------------------------------|
+| Probe Configuration | Yes            | /etc/gratia/gridftp-transfer/ProbeConfig |
+| Probe Executables   | No             | /usr/share/gratia/gridftp-transfer       |
+| Log files           | No             | /var/log/gratia                          |
+| Temporary files     | No             | /var/lib/gratia/tmp                      |
+
+The RPM installs the Gratia probe into the system crontab, but does not configure it. The configuration of the probe is controlled by the file
+
+    /etc/gratia/gridftp-transfer/ProbeConfig
+
+This is usually one XML node spread over multiple lines. Note that comments (\#) have no effect on this file. You will need to edit the following:
+
+| Attribute                       | Needs Editing                                                                              | Value                                                                                                                                      |
+|---------------------------------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| ProbeName                       | Maybe                                                                                      | This should be set to "gridftp-transfer:<hostname>", where <hostname> is the fully-qualified domain name of your gridftp host. |
+| CollectorHost                   | Maybe                                                                                      | Set to the hostname and port of the central collector. By default it sends to the OSG collector. See below.                                |
+| SiteName                        | Yes                                                                                        | Set to the resource group name of your site as registered in OIM.                                                                          |
+| GridftpLogDir                   | Yes                                                                                        | Set to /var/log, or wherever your current gridftp logs are located                                                                         |
+| Grid                            | Maybe                                                                                      | Set to "ITB" if this is a test resource; otherwise, leave as OSG.                                                                          |
+| UserVOMapFile                   | No                                                                                         | This should be set to /var/lib/osg/user-vo-map; see below for information about this file.                                                 |
+| SuppressUnknownVORecords| Maybe | Set to 1 to suppress any records that can't be matched to a VO; 0 is strongly recommended. |
+| SuppressNoDNRecords             | Maybe                                                                                      | Set to 1 to suppress records that can't be matched to a DN; 0 is strongly recommended.                                                     |
+| EnableProbe                     | Yes                                                                                        | Set to 1 to enable the probe.                                                                                                              |
+
+#### Selecting a collector host ####
+
+The collector is the central server which logs the GridFTP transfers into a database. There are usually three options:
+
+1. **OSG Transfer Collector**: This is the primary collector for transfers in the OSG. Use `CollectorHost="gratia-osg-prod.opensciencegrid.org:80"`.
+1. **OSG-ITB Transfer Collector**: This is the test collector for transfers in the OSG. Use `CollectorHost=" gratia-osg-itb.opensciencegrid.org:80"`.
+
+#### Validation ####
+
+Run the Gratia probe once by hand to check for functionality:
+
+``` console
+root@host # /usr/share/gratia/gridftp-transfer/GridftpTransferProbeDriver
 ```
 
-All other configuration settings should be suitable for most purposes. However, you can edit them if needed. The probe runs every 30 minutes as a cron job.
+Look for any abnormal termination and report it if it is a non-trivial site issue. Look in the log files in `/var/log/gratia/<date>.log` and make sure there are no error messages printed.
 
 ### Optional configuration
 
