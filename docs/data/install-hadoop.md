@@ -950,41 +950,27 @@ The standalone server runs on port 5002, handles a single GridFTP request, and w
 
 ### File Locations ###
 
-|                                                       |                                                                       |                                                     |                                   |
-|-------------------------------------------------------|-----------------------------------------------------------------------|-----------------------------------------------------|-----------------------------------|
-| Component                                             | File Type                                                             | Location                                            | Needs editing?                    |
-| Hadoop                                                | Log files                                                             | `/var/log/hadoop/*`                                 | No                                |
-| Hadoop                                                | PID files                                                             | `/var/run/hadoop/*.pid`                             | No                                |
-| Hadoop                                                | init scripts                                                          | `/etc/init.d/hadoop`                                | No                                |
-| Hadoop                                                | init script config file                                               | `/etc/sysconfig/hadoop`                             | Yes                               |
-| Hadoop                                                | runtime config files                                                  | `/etc/hadoop/conf/*`                                | Maybe                             |
-| Hadoop                                                | System binaries                                                       | `/usr/bin/hadoop`                                   | No                                |
-| Hadoop                                                | JARs                                                                  | `/usr/lib/hadoop/*`                                 | No                                |
-| Hadoop                                                | runtime config files                                                  | `/etc/hosts_exclude`                                | Yes, must be present on NameNodes |
-| GridFTP                                               | Log files                                                             | `/var/log/gridftp-auth.log`, `/var/log/gridftp.log` | No                                |
-| GridFTP| init.d script                                | `/etc/init.d/globus-gridftp-server`                                   | No                                                  |
-| GridFTP| runtime config files                         | `/etc/gridftp-hdfs/*`, `/etc/sysconfig/gridftp-hdfs`                  | Maybe                                               |
-| GridFTP| System binaries                              | `/usr/bin/gridftp-hdfs-standalone`, `/usr/sbin/globus-gridftp-server` | No                                                  |
-| GridFTP| System libraries                             | `/usr/lib64/libglobus_gridftp_server_hdfs.so*`                        | No                                                  |
-| GridFTP| LCMAPS VOMS configuration                    | `/etc/lcmaps.db`                                                      | Yes                                                 |
-| GridFTP| CA certificates                              | `/etc/grid-security/certificates/*`                                   | No                                                  |
 
-| Service/Process | Configuration File               | Description                                                                                     |
-|:----------------|:---------------------------------|:------------------------------------------------------------------------------------------------|
-| BeStMan2        | `/etc/bestman2/conf/bestman2.rc` | Main Configuration file                                                                         |
-|                 | `/etc/sysconfig/bestman2`        | Environment variables used by BeStMan2                                                          |
-|                 | `/etc/sysconfig/bestman2lib`     | Environment variables that store values of various client and server libraries used by BeStMan2 |
-|                 | `/etc/bestman2/conf/*`           | Other runtime configuration files                                                               |
-|                 | `/etc/init.d/bestman2`           | init.d startup script                                                                           |
-|                 | `/etc/gridftp.conf`              | Startup parameters                                                                              |
-
-| Service/Process | Log File                          | Description                                   |
-|:----------------|:----------------------------------|:----------------------------------------------|
-| BeStMan2        | `/var/log/bestman2/bestman2.log`  | BeStMan2 server log and errors                |
-|                 | `/var/log/bestman2/event.srm.log` | Records all SRM transactions                  |
-| GridFTP         | `/var/log/gridftp.log`            | Transfer log                                  |
-|                 | `/var/log/gridftp-auth.log`       | Authentication log                            |
-|                 | `/var/log/messages`               | Main system log (look here for LCMAPS errors) |
+| Component | File Type                 | Location                                                              | Needs editing?                    |
+|-----------|---------------------------|-----------------------------------------------------------------------|-----------------------------------|
+| Hadoop    | Log files                 | `/var/log/hadoop/*`                                                   | No                                |
+|           | PID files                 | `/var/run/hadoop/*.pid`                                               | No                                |
+|           | init scripts              | `/etc/init.d/hadoop`                                                  | No                                |
+|           | init script config file   | `/etc/sysconfig/hadoop`                                               | Yes                               |
+|           | runtime config files      | `/etc/hadoop/conf/*`                                                  | Maybe                             |
+|           | System binaries           | `/usr/bin/hadoop`                                                     | No                                |
+|           | JARs                      | `/usr/lib/hadoop/*`                                                   | No                                |
+|           | runtime config files      | `/etc/hosts_exclude`                                                  | Yes, must be present on NameNodes |
+|           | Log files                 | `/var/log/gridftp-auth.log`, `/var/log/gridftp.log`                   | No                                |
+| GridFTP   | Transfer log              | `/var/log/gridftp.log`                                                | No                                |
+|           | Authentication log        | `/var/log/gridftp-auth.log`                                           | No                                |
+|           | LCMAPS auth error log     | `/var/log/messages`                                                   | No                                |
+|           | init.d script             | `/etc/init.d/globus-gridftp-server`                                   | No                                |
+|           | runtime config files      | `/etc/gridftp-hdfs/*`, `/etc/sysconfig/gridftp-hdfs`                  | Maybe                             |
+|           | System binaries           | `/usr/bin/gridftp-hdfs-standalone`, `/usr/sbin/globus-gridftp-server` | No                                |
+|           | System libraries          | `/usr/lib64/libglobus_gridftp_server_hdfs.so*`                        | No                                |
+|           | LCMAPS VOMS configuration | `/etc/lcmaps.db`                                                      | Yes                               |
+|           | CA certificates           | `/etc/grid-security/certificates/*`                                   | No                                |
 
 ### Known Issues ###
 
