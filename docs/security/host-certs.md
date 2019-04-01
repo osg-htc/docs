@@ -14,12 +14,13 @@ you are interested in installing.
 To acquire a host certificate, you must submit a request to a Certificate Authority (CA).
 We recommend requesting host certificates from one of the following CA services:
 
-- [InCommon](https://www.incommon.org/cert/): an IGTF-accredited CA for services that interact with the WLCG;
+- [InCommon IGTF Server CA](https://www.incommon.org/certificates/): InCommon Certificate Service includes an IGTF-accredited CA named IGTF Server CA for services that interact with the WLCG;
   requires a subscription, generally held by an institution
 - [Let's Encrypt](https://letsencrypt.org/): a free, automated, and open CA frequently used for web services;
   see the [security team's position on Let's Encrypt](https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/)
   for more details
-- If neither of the above options work for your site, the OSG also accepts all
+
+If neither of the above options work for your site, the OSG also accepts all
   [IGTF-accredited CAs](https://repo.opensciencegrid.org/cadist/).
 
 Use this page to learn how to request and install host certificates on an OSG resource.
@@ -44,9 +45,10 @@ If you are using OpenSSL 1.1, you may notice minor formatting differences.
 Requesting InCommon IGTF Host Certificates
 ------------------------------------------
 
-Many institutions in the United States already subscribe to InCommon and offer certificate services.
+Many institutions in the United States already subscribe to InCommon and have access to certificate services.
 If your institution is in the list of [InCommon subscribers](https://www.incommon.org/certificates/subscribers.html),
 continue with the instructions below.
+
 If your institution is not in the list, Let's Encrypt certificates do not meet your needs, and you do not have access to
 another IGTF CA subscription, please [contact us](/common/help.md).
 
@@ -56,12 +58,17 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Obtain root access to the host
 - Prepare the [required Yum repositories](/common/yum)
 
-From a host that meets the above requirements, follow the instructions below to request a new host certificate:
+From a host that meets the above requirements, there are two options to get InCommon IGTF-accredited host certificates:
 
-1. Install the `osg-pki-tools`:
+1. Use the `osg-cert-request` tool to generate a Certificate Signing Request (CSR) and a private key.
+1. Use the `osg-incommon-cert-request` tool to request and retrieve certificates using the InCommon REST API.  
+
+Install the `osg-pki-tools` where both command line tools are available:
 
         :::console
         root@host # yum install osg-pki-tools
+
+### Generate a Certificate Signing Request (CSR)
 
 1. Generate a Certificate Signing Request (CSR) and private key using the `osg-cert-request` tool:
 
@@ -107,6 +114,18 @@ generated above.
         root@host # chmod 444 /etc/grid-security/hostcert.pem
         root@host # cp %RED%<PATH TO KEY>%ENDCOLOR% /etc/grid-security/hostkey.pem
         root@host # chmod 400 /etc/grid-security/hostkey.pem
+
+### Request certificates through the InCommon REST API
+
+1. Find your institution-specific InCommon contact
+   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/)), get an InCommon Department Registration Authority user. Ask your InCommon contact to enable SSL auto approve for your admin user. Also, ask your InCommon contact to send you an email invitation for a Client Certificate. Download your InCommon user certificate and split the .p12 file into your private key and your certificate.
+1. Request a certificate and generate the associated private key using the osg-incommon-cert-request:
+
+        :::console
+        user@host $ osg-incommoncert-request --username <INCOMMONLOGIN> \
+                    --cert <USERCERT> \
+                    --pkey <USERPRIVKEY> \ 
+                    --hostname <HOSTNAME>
 
 Requesting Host Certificates Using [Let's Encrypt](https://letsencrypt.org/)
 ----------------------------------------------------------------------------
