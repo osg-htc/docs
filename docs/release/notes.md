@@ -9,6 +9,7 @@ Release Notes
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.26-2](/release/3.4/release-3-4-26-2) | 2019-04-02 | IGTF 1.97, VO Package v87                                               |
 | [3.4.26](/release/3.4/release-3-4-26)     | 2019-03-14 | cctools 7.0.9, Pegasus 4.9.1, osg-pki-tools 3.1.0; Upcoming: Singularity 3.1.0 |
 | [3.4.25](/release/3.4/release-3-4-25)     | 2019-03-07 | gsi-openssh 7.4p1, HTCondor 8.6.13 patched, xrootd-lcmaps 1.7.0; Upcoming: HTCondor 8.8.1 |
 | [3.4.24-2](/release/3.4/release-3-4-24-2) | 2019-03-05 | IGTF 1.96, VO Package v86                                               |
