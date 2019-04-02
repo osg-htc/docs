@@ -28,7 +28,8 @@ releases so it does not require upgrading to 7.6.
 
 The OSG has installed singularity in [OASIS](/worker-node/install-cvmfs),
 so many sites will eventually not need to install singularity locally if
-they enable it to run unprivileged.
+they enable it to run unprivileged.  Meanwhile an RPM installation can
+be configured to be unprivileged or privileged.
 
 !!! danger "Kernel vs. Userspace Security"
     Enabling unprivileged user namespaces increases the risk to the
@@ -38,7 +39,7 @@ they enable it to run unprivileged.
     lower security risk.
 
 The document is intended for system administrators who wish to either
-enable singularity to be run as an unprivileged user, install privileged
+enable singularity to be run as an unprivileged user, install
 singularity, or both.
 
 Before Starting
@@ -49,23 +50,27 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Ensure the host has [a supported operating system](/release/supported_platforms)
 - Obtain root access to the host
 - Prepare the [required Yum repositories](/common/yum)
-- A [CVMFS installation](/worker-node/install-cvmfs) for singularity image distribution
+
+In addition, with Singularity this is highly recommended:
+
+- Install [CVMFS](/worker-node/install-cvmfs)
 
 Choosing Unprivileged vs Privileged Singularity
 -----------------------------------------------
 
-There are two separate sets of instructions on this page:
+There are two sets of instructions on this page:
 
-- [Enabling unprivileged singularity](#unprivileged-singularity) via OASIS
-- [Installing privileged singularity](#privileged-singularity) via RPM
+- [Enabling Unprivileged Singularity](#enabling-unprivileged-singularity)
+- [Singularity via RPM](#singularity-via-rpm)
 
-As of December 2018, no VO in the OSG is ready to use unprivileged, non-setuid
-singularity from OASIS in production.
+As of April 2019, no VO in the OSG is ready to run unprivileged, non-setuid
+singularity from OASIS, the OSG Software [CVMFS distribution](install-cvmfs).
 VOs are, however, working to support it soon so OSG recommends that
 all RHEL 7.x installations enable support for unprivileged singularity,
-and for now also install the privileged RPM.  RHEL 6.x installations
-have no option for unprivileged singularity and so will have to
-install the privileged RPM.
+and for now also install the RPM.  Sites may also choose to configure
+their RHEL 7.x RPM installations to run unprivileged.
+RHEL 6.x installations have no option for unprivileged singularity and
+so will have to install the RPM and leave it configured as privileged.
 
 In addition, there a few singularity features that only work with the
 privileged RPM, so a limited number of sites will want to continue to
@@ -92,24 +97,21 @@ only supported by privileged singularity:
     in privileged singularity installations.
 
 1. **Allocating new pseudo-tty devices.**  In the current RHEL 7.6 kernel,
-    allocating pseudo-tty devices is a privileged operation.
-    Therefore, interactive workflows such as those using `condor_ssh_to_job` and
-    `condor_submit -i` require privileged singularity. There is a workaround in
-    the next (3.x) version of singularity in an option
-    called `--fakeroot` that makes the user name space appear to be
-    running as the root user even though all its file accesses are as
-    the original unprivileged user.  The kernel then allows allocating
-    pseudo-tty devices in the fakeroot environment.
+    allocating pseudo-tty devices is a privileged operation.  For almost
+    all applications this will make no difference.  Singularity 3.x
+    (in the osg-upcoming yum repository) does especially well working
+    around this issue.
+
+On the other hand, using unprivileged namespaces makes it easier for
+`condor_ssh_to_job`, because then it can enter into the namespace without
+needing privileges itself.
 
 
-Unprivileged Singularity
-------------------------
+Enabling Unprivileged Singularity
+---------------------------------
 
-The instructions in this section are for enabling singularity with non-setuid
-executables, which is available in OASIS, the OSG Software
-[CVMFS distribution](/worker-node/install-cvmfs).
-
-### Enabling Singularity via OASIS ###
+The instructions in this section are for enabling singularity to run
+unprivileged.
 
 If the operating system is an EL 7 variant and has been updated to the EL
 7.6 kernel or later, enable unprivileged singularity with the following
@@ -138,10 +140,10 @@ steps:
     other container solutions, or limit their capabilities (such as
     requiring the `--net=host` option in Docker).
 
-1. If you haven't yet installed [cvmfs](install-cvmfs), do so.
+1. If you haven't yet installed [CVMFS](install-cvmfs), do so.
 
 
-### Validating singularity ###
+### Validating unprivileged singularity ###
 
 Once you have the host configured properly, log in as an ordinary
 unprivileged user and verify that singularity in OASIS works:
@@ -158,14 +160,17 @@ user         2     1  0 21:27 ?        00:00:00 ps -ef
 ```
 
 
-Privileged Singularity
-----------------------
+Singularity via RPM
+-------------------
 
-The instructions in this section are for installing singularity with setuid-root executables.
+The instructions in this section are for the Singularity RPM, which 
+includes setuid-root executables.  The setuid-root executables can
+however be disabled by configuration, details below.
 
 ### Installing Singularity via RPM ###
 
-To install singularity as `setuid`, make sure that your host is up to date before installing the required packages:
+To install the singularity RPM, make sure that your host is up to date
+before installing the required packages:
 
 1. Clean yum cache:
 
@@ -179,8 +184,11 @@ To install singularity as `setuid`, make sure that your host is up to date befor
 
     This command will update **all** packages
 
-1. The singularity packages are split into two parts, choose the command that corresponds to your situation:
-    - If you are installing singularity on a worker node, where images do not need to be created or manipulated, install just the smaller part to limit the amount of setuid-root code that is installed:
+1. The singularity packages are split into two parts, choose the command
+that corresponds to your situation:
+    - If you are installing singularity on a worker node, where images
+      do not need to be created or manipulated, install just the smaller
+      part to limit the amount of setuid-root code that is installed:
 
             :::console
             root@host # yum install singularity-runtime
@@ -193,7 +201,7 @@ To install singularity as `setuid`, make sure that your host is up to date befor
 !!! tip
     In most cases, only `singularity-runtime` is needed on the worker node;
     installing only this smaller package reduces risk of potential security
-    exploits.
+    exploits, especially when running in privileged mode.
 
 ### Configuring singularity ###
 
@@ -203,8 +211,9 @@ the container image.
 It is not enabled by default but recommended because it is less
 vulnerable to security problems than the similar default `overlay`
 option.
-In addition, the `overlay` option does not work on RHEL6 and does not
-work correctly on RHEL7 when container images are distributed by CVMFS.
+In addition, the `overlay` option does not work on RHEL6, does not
+work correctly on RHEL7 when container images are distributed by CVMFS,
+and does not work in unprivileged mode.
 
 Set these options in `/etc/singularity/singularity.conf`:
 
@@ -222,7 +231,24 @@ Set these options in `/etc/singularity/singularity.conf`:
     Look for `singularity.conf.rpmnew` after upgrades and merge in any
     changes to the defaults.
 
+#### Configuring the RPM to be unprivileged ####
+
+If you choose to run the RPM unprivileged, after
+[enabling unprivileged singularity](#enabling-unprivileged-singularity),
+change the line in `/etc/singularity/singularity.conf` that says
+`allow setuid = yes` to
+
+        allow setuid = no
+
+Note that the setuid-root executables stay installed, but they will exit
+very early if invoked when the configuration file disallows setuid, so
+the risk is very low.
+
 #### Limiting image types ####
+
+A side effect of disabling privileged singularity is that loopback
+mounts are disallowed.  If the installation is privileged, also consider
+the following.
 
 Images based on loopback devices carry an inherently higher exposure to
 unknown kernel exploits compared to directory-based images distributed via
@@ -230,9 +256,9 @@ CVMFS.  See [this article](https://lwn.net/Articles/652468/) for further
 discussion.
 
 The loopback-based images are the default image type produced by singularity
-users and are common at sites with direct user logins.  However (as of May
-2018) we are only aware of directory-based images being used by OSG VOs.  Hence,
-it is a reasonable measure to disable the loopback-based images by setting
+users and are common at sites with direct user logins.  However (as of April
+2019) we are only aware of directory-based images being used by OSG VOs.
+Hence, it is reasonable to disable the loopback-based images by setting
 the following option in `/etc/singularity/singularity.conf`:
 
         max loop devices = 0
@@ -241,7 +267,7 @@ While reasonable for some sites, this is not required as there are currently
 no public kernel exploits for this issue; any exploits are patched by
 Red Hat when they are discovered.
 
-### Validating singularity ###
+### Validating singularity RPM ###
 
 After singularity is installed, as an ordinary user run the following
 command to verify it:
