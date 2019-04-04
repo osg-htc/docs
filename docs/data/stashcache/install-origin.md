@@ -49,12 +49,13 @@ To simplify installation, OSG provides convenience RPMs that install all require
 software with a single command:
 
 ```console
-root@host # yum install --enablerepo=osg-development stash-origin
+root@host # yum install --enablerepo=osg-testing stash-origin
 ```
 
 !!! note
-    This document covers a completely overhauled stash origin service that depends on XRootD 4.9.0; while this
-    has not yet been released into the OSG production repository, we strongly recommend using this version.
+    This document covers a completely overhauled stash origin service based on XCache 1.0.2;
+    while this has not yet been released into the OSG production repository,
+    we strongly recommend using this version for configuration and accounting improvements.
 
 For this installation guide, we assume that the data to be exported to the federation is mounted at `/mnt/stash`
 and owned by the `xrootd:xrootd` user.
