@@ -120,7 +120,7 @@ ipc_interface IP-TO-USE
 ```
 
 For more options available for the GridFTP server, read the comments in the configuration file (`/etc/gridftp.conf`) or
-see the [GridFTP manual](https://gridcf.org/gct-docs/gridftp/admin/index.html).
+see the [GridFTP manual](https://gridcf.org/gct-docs/latest/gridftp/admin/index.html).
 
 Managing GridFTP
 ----------------
@@ -155,7 +155,7 @@ For assistance, please use [this page](/common/help).
 Reference
 ---------
 
--   [GridFTP administration manual](https://gridcf.org/gct-docs/gridftp/admin/index.html)
+-   [GridFTP administration manual](https://gridcf.org/gct-docs/latest/gridftp/admin/index.html)
 -   [GridFTP tutorial](http://www.mcs.anl.gov/~mlink/tutorials/GridFTPTutorialHandout.pdf)
 
 ### Configuration and Log Files
