@@ -7,7 +7,7 @@ Before continuing with the overview, make sure that you are familiar with the fo
 -   An OSG site plan
     -   What is a batch system and which one will you use ([HTCondor](http://htcondor.org/), PBS, LSF, SGE, or
         [SLURM](https://slurm.schedmd.com/))?
-    -   Security in the OSG via [GSI](https://gridcf.org/gct-docs/gsic/index.html) (i.e.,
+    -   Security in the OSG via [GSI](https://gridcf.org/gct-docs/latest/gsic/index.html) (i.e.,
         [Certificate authorities](https://en.wikipedia.org/wiki/Certificate_authority), user and host
         [certificates](https://en.wikipedia.org/wiki/Public_key_certificate), proxies)
 -   Pilot jobs, frontends, and factories (i.e., [GlideinWMS](http://glideinwms.fnal.gov/doc.prd/index.html),
