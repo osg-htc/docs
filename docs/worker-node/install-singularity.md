@@ -103,8 +103,9 @@ only supported by privileged singularity:
     around this issue.
 
 On the other hand, using unprivileged namespaces makes it easier for
-`condor_ssh_to_job`, because then it can enter into the namespace without
-needing privileges itself.
+`condor_ssh_to_job`, because then it can enter into the namespace
+without needing privileges itself.  With Singularity 3.x, unprivileged
+namespaces also allow running singularity within a container.
 
 
 Enabling Unprivileged Singularity
