@@ -63,7 +63,7 @@ and owned by the `xrootd:xrootd` user.
 Configuring the Origin Server
 -----------------------------
 
-The `stash-origin` package provides a default configuration files in
+The `stash-origin` package provides default configuration files in
 `/etc/xrootd/xrootd-stash-origin.cfg` and `/etc/xrootd/config.d`.  Administrators may provide additional configuration
 by placing files in `/etc/xrootd/config.d` of the form `/etc/xrootd/config.d/1*.cfg` (for directives that need to
 be processed BEFORE the OSG configuration) or `/etc/xrootd/config.d/9*.cfg` (for directives that are processed
