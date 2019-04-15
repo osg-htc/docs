@@ -7,14 +7,13 @@ to export its data to the StashCache data federation.
 !!! note
     The _origin_ must be registered with the OSG prior to joining the data federation. You may start the
     registration process prior to finishing the installation by [using this link](#registering-the-origin) 
-    along with the basic information like:
+    along with information like:
 
-    * Resource name and hostname.
-    * VO associated with this origin server (will be used to determine the origin's namespace prefix).
-    * Administrative and security contact.
-
-    Additionally, if this is the first origin for the VO, you will need to decide on what identities are
-    allowed to access the VO's data, as well as which caches are allowed to cache the VO data.
+    * Resource name and hostname
+    * VO associated with this origin server (which will be used to determine the origin's namespace prefix)
+    * Administrative and security contact(s)
+    * Who (or what) will be allowed to access the VO's data
+    * Which caches will be allowed to cache the VO data
 
 Before Starting
 ---------------
