@@ -63,11 +63,11 @@ and owned by the `xrootd:xrootd` user.
 Configuring the Origin Server
 -----------------------------
 
-The `stash-origin` package provides default configuration files in
-`/etc/xrootd/xrootd-stash-origin.cfg` and `/etc/xrootd/config.d`.  Administrators may provide additional configuration
-by placing files in `/etc/xrootd/config.d` of the form `/etc/xrootd/config.d/1*.cfg` (for directives that need to
-be processed BEFORE the OSG configuration) or `/etc/xrootd/config.d/9*.cfg` (for directives that are processed
-AFTER the OSG configuration).
+The `stash-origin` package provides a default configuration files in
+`/etc/xrootd/xrootd-stash-origin.cfg` and `/etc/xrootd/config.d`.
+Administrators may provide additional configuration by placing files in `/etc/xrootd/config.d`
+of the form `/etc/xrootd/config.d/1*.cfg` (for directives that need to be processed BEFORE the OSG configuration)
+or `/etc/xrootd/config.d/9*.cfg` (for directives that are processed AFTER the OSG configuration).
 
 You _must_ configure every variable in `/etc/xrootd/10-common-site-local.cfg` and `/etc/xrootd/10-origin-site-local.cfg`.
 
@@ -79,7 +79,7 @@ The mandatory variables to configure are:
 | 10-common-site-local.cfg | `set resourcename = YOUR_RESOURCE_NAME` | The resource name registered with OSG                                                                 |
 | 10-origin-site-local.cfg | `set originexport = /VO`                | The directory relative to `rootdir` that is the top of the exported namespace for the origin services |
 
-For example, if the HCC VO would like to set up an origin server exporting from the mountpoint `/mnt/stash`,
+For example, if the HCC VO would like to set up an origin server exporting from the mount point `/mnt/stash`,
 and HCC's registered namespace is `/hcc`, then the following would be set in `10-common-site-local.cfg`:
 
 ```
@@ -127,7 +127,7 @@ As a reminder, here are common service commands (all run as `root`):
 | Enable a service to start on boot       | `systemctl enable <SERVICE-NAME>`  |
 | Disable a service from starting on boot | `systemctl disable <SERVICE-NAME>` |
 
-In addition, the origin service automatically uses the following systemd units:
+In addition, the origin service automatically uses the following SystemD units:
 
 | **Service name** | **Notes** |
 |------------------|-----------|
