@@ -71,16 +71,13 @@ AFTER the OSG configuration).
 
 You _must_ configure every variable in `/etc/xrootd/10-common-site-local.cfg` and `/etc/xrootd/10-origin-site-local.cfg`.
 
-The mandatory variables to configure in `10-common-site-local.cfg` are:
+The mandatory variables to configure are:
 
-* `set rootdir = /mnt/stash`: the mounted filesystem path to export.
-  This document refers to this path as `/mnt/stash`.
-* `set resourcename = YOUR_RESOURCE_NAME`: the resource name registered with OSG.
-
-The mandatory variable to configure in `10-origin-site-local.cfg` is:
-
-* `set originexport = /VO`: the directory relative to `rootdir` that is the top of the exported namespace
-  for the origin services
+| File                     | Config line                             | Description                                                                                           |
+|--------------------------|-----------------------------------------|-------------------------------------------------------------------------------------------------------|
+| 10-common-site-local.cfg | `set rootdir = /mnt/stash`              | The mounted filesystem path to export; this document calls it `/mnt/stash`                            |
+| 10-common-site-local.cfg | `set resourcename = YOUR_RESOURCE_NAME` | The resource name registered with OSG                                                                 |
+| 10-origin-site-local.cfg | `set originexport = /VO`                | The directory relative to `rootdir` that is the top of the exported namespace for the origin services |
 
 For example, if the HCC VO would like to set up an origin server exporting from the mountpoint `/mnt/stash`,
 and HCC's registered namespace is `/hcc`, then the following would be set in `10-common-site-local.cfg`:
