@@ -115,10 +115,12 @@ generated above.
         root@host # cp %RED%<PATH TO KEY>%ENDCOLOR% /etc/grid-security/hostkey.pem
         root@host # chmod 400 /etc/grid-security/hostkey.pem
 
-### Request certificates through the InCommon REST API
+### Request certificates in bulk using osg-incommon-cert-request
 
 1. Find your institution-specific InCommon contact
-   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/)), get an InCommon Department Registration Authority user. Ask your InCommon contact to enable SSL auto approve for your admin user. Also, ask your InCommon contact to send you an email invitation for a Client Certificate. Download your InCommon user certificate and split the .p12 file into your private key and your certificate.
+   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/)),  
+1. Ask for a Department Registration Authority user with SSL auto approve enabled. 
+1. Ask for an email invitation for a Client Certificate. Download your InCommon user certificate and split the .p12 file into your private key and your certificate.
 1. Request a certificate and generate the associated private key using the osg-incommon-cert-request:
 
         :::console
