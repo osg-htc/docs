@@ -16,8 +16,8 @@ Requirements
 
 The requirements are:
 
-* A public IP address, forward and reverse DNS
-* Ability to open a few firewall ports to the WAN.
+* A public IP address, forward and reverse DNS.
+* Ability to open a few firewall incoming ports to the WAN.
 * HTCondor has to authenticate via pool GSI (preffered) or password. For GSI, the submit host
    has to have a host certificate.
 * Reporting to the OSG accounting system has to be enabled. This can
@@ -29,7 +29,7 @@ The requirements are:
 Required Packages
 -----------------
 
-Enable the [OSG Yum repository](http://opensciencegrid.github.io/docs/common/yum/).
+Enable the [OSG Yum repository](/common/yum/).
 
 Install the packages required:
 
@@ -40,7 +40,7 @@ root@host # yum install osg-flock
 Gratia Probe Configuration
 --------------------------
 
-Edit the */etc/gratia/condor/ProbeConfig* file. Change the probe section to be:
+Edit the `/etc/gratia/condor/ProbeConfig` file. Change the probe section to be:
 
 ```file
     ProbeName="condor:YOUR_HOSTNAME_HERE"
@@ -121,48 +121,10 @@ GSI: Requesting a Host Certificate
 
 A host certificate is used for authenticating your submit host to the OSG
 infrastructure. If you do not already have a certificate, you can request one
-using [these instructions](http://opensciencegrid.github.io/docs/security/host-certs/)
+using [these instructions](/security/host-certs/)
 
 Pool Password: HTCondor Configuration
 -------------------------------------
-
-The following is a starting point for the HTCondor configuration. Depending on other
-site configuration, some changes might be required. Put this in for example
-`/etc/condor/config.d/80-osg-flocking.conf`
-
-    #--  With glideins, there is nothing shared
-    CONDOR_HOST=$(FULL_HOSTNAME)
-    UID_DOMAIN=$(FULL_HOSTNAME)
-    FILESYSTEM_DOMAIN=$(FULL_HOSTNAME)
-    
-    #-- Authentication settings
-    SEC_PASSWORD_FILE = /etc/condor/pool_password
-    SEC_DEFAULT_AUTHENTICATION = REQUIRED
-    SEC_DEFAULT_AUTHENTICATION_METHODS = FS,PASSWORD
-    SEC_READ_AUTHENTICATION    = OPTIONAL
-    SEC_CLIENT_AUTHENTICATION  = OPTIONAL
-    SEC_ENABLE_MATCH_PASSWORD_AUTHENTICATION = TRUE
-    DENY_WRITE         = anonymous@*
-    DENY_ADMINISTRATOR = anonymous@*
-    DENY_DAEMON        = anonymous@*
-    DENY_NEGOTIATOR    = anonymous@*
-    DENY_CLIENT        = anonymous@*
-    
-    #--  Privacy settings
-    SEC_DEFAULT_ENCRYPTION = OPTIONAL
-    SEC_DEFAULT_INTEGRITY = REQUIRED
-    SEC_READ_INTEGRITY = OPTIONAL
-    SEC_CLIENT_INTEGRITY = OPTIONAL
-    SEC_READ_ENCRYPTION = OPTIONAL
-    SEC_CLIENT_ENCRYPTION = OPTIONAL
-    
-    #-- With strong security, do not use IP based controls
-    HOSTALLOW_WRITE = *
-    
-    # submitters/campus factories to flock to
-    FLOCK_TO = flock.opensciencegrid.org
-    
-## Pool Password: HTCondor Configuration
 
 The following is a starting point for the HTCondor configuration. Depending on other
 site configuration, some changes might be required. Put this in for example
@@ -212,7 +174,14 @@ used for accounting. New projects should be registered in the
 [OSG Topology Database](https://github.com/opensciencegrid/topology/blob/master/README.md).
 Please open at ticket to register a new project.
 Jobs should specify which project to be accounted against by adding
-the *+ProhectNane* attribute. Note that the value is a string and hence
+the *+ProjectNa,e* attribute. Note that the value is a string and hence
 the double quotes are required.  Example:
 
-    +ProjectName = "Some_Name_Here"
+```file
++ProjectName = "Some_Name_Here"
+```
+
+How to Get Help
+---------------
+
+If you need help with setup or troubleshooting, see our [help procedure](/common/help).
