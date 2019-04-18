@@ -94,9 +94,9 @@ getting the OSG-supported versions.
 ### Enable the "extras" OS repositories
 
 Some packages depend on packages in the "extras" repositories of your OS,
-and you should ensure that those repositories are enabled.
+so you must ensure that those repositories are enabled.
 
-The instructions for this vary based on distribution:
+The instructions for this vary based on your OS:
 
 - On Scientific Linux, install the `yum-conf-extras` RPM package,
   and ensure that the `sl-extras` repo in `/etc/yum.repos.d/sl-extras.repo` is enabled.
@@ -107,8 +107,8 @@ The instructions for this vary based on distribution:
 
 !!! note
     A repository is enabled if it has `enabled=1` in its definition,
-    or if the `enabled` line is missing.
-    (I.e. it is enabled unless specified otherwise.)
+    or if the `enabled` line is missing
+    (i.e. it is enabled unless specified otherwise.)
 
 ### Install the EPEL repositories
 
