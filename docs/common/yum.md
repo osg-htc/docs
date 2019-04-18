@@ -93,7 +93,7 @@ getting the OSG-supported versions.
 
 ### Enable the "extras" OS repositories
 
-Some packages depend on packages in the "extras" repositories of your distro,
+Some packages depend on packages in the "extras" repositories of your OS,
 and you should ensure that those repositories are enabled.
 
 The instructions for this vary based on distribution:
