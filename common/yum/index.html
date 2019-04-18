@@ -975,6 +975,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enable-the-extras-os-repositories" title="Enable the "extras" OS repositories" class="md-nav__link">
+    Enable the "extras" OS repositories
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#install-the-epel-repositories" title="Install the EPEL repositories" class="md-nav__link">
     Install the EPEL repositories
   </a>
@@ -1993,6 +2000,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enable-the-extras-os-repositories" title="Enable the "extras" OS repositories" class="md-nav__link">
+    Enable the "extras" OS repositories
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#install-the-epel-repositories" title="Install the EPEL repositories" class="md-nav__link">
     Install the EPEL repositories
   </a>
@@ -2094,7 +2108,7 @@ intended for public use:</p>
 <p>OSG's RPM packages also rely on external packages provided by supported OSes and EPEL.
 You must have the following repositories available and enabled:</p>
 <ul>
-<li>OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories)</li>
+<li>OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories, including "extras" repositories)</li>
 <li>EPEL repositories</li>
 <li>OSG repositories</li>
 </ul>
@@ -2156,6 +2170,28 @@ getting the OSG-supported versions.</p>
 
 </li>
 </ol>
+<h3 id="enable-the-extras-os-repositories">Enable the "extras" OS repositories<a class="headerlink" href="#enable-the-extras-os-repositories" title="Permanent link">&para;</a></h3>
+<p>Some packages depend on packages in the "extras" repositories of your OS,
+so you must ensure that those repositories are enabled.</p>
+<p>The instructions for this vary based on your OS:</p>
+<ul>
+<li>
+<p>On Scientific Linux, install the <code>yum-conf-extras</code> RPM package,
+  and ensure that the <code>sl-extras</code> repo in <code>/etc/yum.repos.d/sl-extras.repo</code> is enabled.</p>
+</li>
+<li>
+<p>On CentOS, ensure that the <code>extras</code> repo in <code>/etc/yum.repos.d/CentOS-Base.repo</code> is enabled.</p>
+</li>
+<li>
+<p>On Red Hat Enterprise Linux, ensure that the <code>Server-Extras</code> channel is enabled.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A repository is enabled if it has <code>enabled=1</code> in its definition,
+or if the <code>enabled</code> line is missing
+(i.e. it is enabled unless specified otherwise.)</p>
+</div>
 <h3 id="install-the-epel-repositories">Install the EPEL repositories<a class="headerlink" href="#install-the-epel-repositories" title="Permanent link">&para;</a></h3>
 <p>OSG software depends on packages distributed via the <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a> repositories.
 You must install and enable these first.</p>
