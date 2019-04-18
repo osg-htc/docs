@@ -72,8 +72,8 @@ The definitive list of software in the contrib repository can be found here:
 If you would like to distribute your software in the OSG `contrib` repository, please [contact us](/common/help) with a
 description of your software, what users it serves, and relevant RPM packaging.
 
-Installing and Configuring Repositories
----------------------------------------
+Installing Yum Repositories
+---------------------------
 
 ### Install the Yum priorities plugin
 
@@ -135,28 +135,6 @@ You must install and enable these first.
     The OSG repositories must have a better (numerically lower) priority than the EPEL repositories;
     otherwise, you might have dependency resolution ("depsolving") issues.
 
-### Automatic Updates
-
-For production services, we suggest only changing software versions during controlled downtime.
-Therefore we recommend security-only automatic updates or disabling automatic updates entirely.
-
-
-To enable only security related automatic updates:
-
--   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `USE_YUMSEC="true"`
-
--   On Enterprise Linux 7, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
-
-
-To disable automatic updates entirely:
-
--   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `ENABLED="false"`
-
--   On Enterprise Linux 7, run:
-
-        :::console
-        root@host # service yum-cron stop
-
 ### Install the OSG Repositories
 
 This document assumes a fresh install.
@@ -190,6 +168,40 @@ gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 ```
 
+Optional Configuration
+----------------------
+
+### Enable automatic security updates
+
+For production services, we suggest only changing software versions during controlled downtime.
+Therefore we recommend security-only automatic updates or disabling automatic updates entirely.
+
+
+To enable only security related automatic updates:
+
+-   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `USE_YUMSEC="true"`
+
+-   On Enterprise Linux 7, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
+
+
+To disable automatic updates entirely:
+
+-   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `ENABLED="false"`
+
+-   On Enterprise Linux 7, run:
+
+        :::console
+        root@host # service yum-cron stop
+
+### Configuring Spacewalk priorities ###
+
+Sites using [Spacewalk](https://spacewalkproject.github.io/) to manage RPM packages will need to configure OSG Yum
+repository priorities using their Spacewalk ID. For example, if the OSG 3.4 repository's Spacewalk ID is
+`centos_7_osg34_dev`, modify `/etc/yum/pluginconf.d/90-osg.conf` to include the following:
+
+```
+[centos_7_osg_34_dev]
+priority = 98
 
 Repository Mirrors
 ------------------
