@@ -174,6 +174,16 @@ To disable automatic updates entirely:
         :::console
         root@host # service yum-cron stop
 
+### Configuring Spacewalk priorities ###
+
+Sites using [Spacewalk](https://spacewalkproject.github.io/) to manage RPM packages will need to configure OSG Yum
+repository priorities using their Spacewalk ID. For example, if the OSG 3.4 repository's Spacewalk ID is
+`centos_7_osg34_dev`, modify `/etc/yum/pluginconf.d/90-osg.conf` to include the following:
+
+```
+[centos_7_osg_34_dev]
+priority = 98
+
 Repository Mirrors
 ------------------
 
