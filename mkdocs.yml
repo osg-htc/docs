@@ -50,6 +50,9 @@ pages:
   - HDFS:
     - 'HDFS Overview': 'data/hadoop-overview.md'
     - 'Install HDFS': 'data/install-hadoop.md'
+- Submit:
+  - Flocking:
+    - 'Flock to OSG': 'submit/osg-flock.md'
 - Security:
   - 'LCMAPS VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host Certificates': 'security/host-certs.md'
