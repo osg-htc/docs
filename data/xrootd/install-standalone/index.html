@@ -698,8 +698,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#enabling-hadoop-support" title="Enabling Hadoop support" class="md-nav__link">
-    Enabling Hadoop support
+  <a href="#enabling-hadoop-support-el-7-only" title="Enabling Hadoop support (EL 7 Only)" class="md-nav__link">
+    Enabling Hadoop support (EL 7 Only)
   </a>
   
 </li>
@@ -749,6 +749,13 @@
   
     <nav class="md-nav">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#service-configuration" title="Service Configuration" class="md-nav__link">
+    Service Configuration
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#file-locations" title="File locations" class="md-nav__link">
@@ -2024,8 +2031,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#enabling-hadoop-support" title="Enabling Hadoop support" class="md-nav__link">
-    Enabling Hadoop support
+  <a href="#enabling-hadoop-support-el-7-only" title="Enabling Hadoop support (EL 7 Only)" class="md-nav__link">
+    Enabling Hadoop support (EL 7 Only)
   </a>
   
 </li>
@@ -2077,6 +2084,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#service-configuration" title="Service Configuration" class="md-nav__link">
+    Service Configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#file-locations" title="File locations" class="md-nav__link">
     File locations
   </a>
@@ -2111,10 +2125,6 @@
 <p><a href="http://xrootd.org/">XRootD</a> is a hierarchical storage system that can be used in a variety of ways to access data,
 typically distributed among actual storage resources. In this document we focus on using XRootD as a simple layer
 exporting an underlying storage system (e.g., <a href="../../install-hadoop/">HDFS</a>) to the outside world.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The OSG only supports XRootD standalone installations on EL7 hosts</p>
-</div>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points:</p>
 <ul>
@@ -2194,6 +2204,13 @@ xrd.timeout idle 60m
 
 
 </li>
+<li>
+<p>On EL 6, set the default options to use the standalone configuration in the <code>/etc/sysconfig/xrootd</code> file.</p>
+<div class="codehilite"><pre><span></span>XROOTD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-standalone.cfg -k fifo&quot;
+</pre></div>
+
+
+</li>
 </ol>
 <h3 id="configuring-authorization">Configuring authorization<a class="headerlink" href="#configuring-authorization" title="Permanent link">&para;</a></h3>
 <p>To configure XRootD authorization please follow the documentation <a href="../../../data/xrootd/xrootd-authorization">here</a>.</p>
@@ -2204,7 +2221,7 @@ If you do not need any of the following special configurations, skip to
 <h4 id="enabling-http-support">Enabling HTTP support<a class="headerlink" href="#enabling-http-support" title="Permanent link">&para;</a></h4>
 <p>In order to enable XRootD HTTP support please follow the instructions
 <a href="../../../data/xrootd/install-storage-element#optional-enabling-xrootd-over-http">here</a></p>
-<h4 id="enabling-hadoop-support">Enabling Hadoop support<a class="headerlink" href="#enabling-hadoop-support" title="Permanent link">&para;</a></h4>
+<h4 id="enabling-hadoop-support-el-7-only">Enabling Hadoop support (EL 7 Only)<a class="headerlink" href="#enabling-hadoop-support-el-7-only" title="Permanent link">&para;</a></h4>
 <p>For documentation on how to export your Hadoop storage using XRootD please see
 <a href="../../../data/xrootd/install-storage-element#optional-adding-hadoop-support-to-xrootd">this documentation</a></p>
 <h4 id="enabling-cms-tfc-support-cms-sites-only">Enabling CMS TFC support (CMS sites only)<a class="headerlink" href="#enabling-cms-tfc-support-cms-sites-only" title="Permanent link">&para;</a></h4>
@@ -2229,7 +2246,7 @@ The specific services are:</p>
 </tr>
 <tr>
 <td align="left">XRootD</td>
-<td align="left"><code>xrootd@standalone</code></td>
+<td align="left">EL 7:<code>xrootd@standalone</code>, EL 6:<code>xrootd</code></td>
 <td align="left"></td>
 </tr>
 </tbody>
@@ -2241,24 +2258,29 @@ As a reminder, here are common service commands (all run as <code>root</code>):<
 <tr>
 <th align="left">To …</th>
 <th align="left">On EL 7, run the command…</th>
+<th align="left">On EL 6, run the command…</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">Start a service</td>
 <td align="left"><code>systemctl start SERVICE-NAME</code></td>
+<td align="left"><code>service SERVICE-NAME start</code></td>
 </tr>
 <tr>
 <td align="left">Stop a service</td>
 <td align="left"><code>systemctl stop SERVICE-NAME</code></td>
+<td align="left"><code>service SERVICE-NAME stop</code></td>
 </tr>
 <tr>
 <td align="left">Enable a service to start during boot</td>
 <td align="left"><code>systemctl enable SERVICE-NAME</code></td>
+<td align="left"><code>chkconfig SERVICE-NAME on</code></td>
 </tr>
 <tr>
 <td align="left">Disable a service from starting during boot</td>
 <td align="left"><code>systemctl disable SERVICE-NAME</code></td>
+<td align="left"><code>chkconfig SERVICE-NAME off</code></td>
 </tr>
 </tbody>
 </table>
@@ -2330,6 +2352,19 @@ As a reminder, here are common service commands (all run as <code>root</code>):<
 <li><a href="http://xrootd.org/doc/dev48/ofs_config.htm#_Toc401930729">Export directive</a> in the XRootD configuration and
   <a href="http://xrootd.org/doc/dev48/ofs_config.htm#_Toc401930728">relevant options</a></li>
 </ul>
+<h3 id="service-configuration">Service Configuration<a class="headerlink" href="#service-configuration" title="Permanent link">&para;</a></h3>
+<p>On EL 6, which config to use is set in the file <code>/etc/sysconfig/xrootd</code>.</p>
+<p>To use the standalone config, you would use:</p>
+<div class="codehilite"><pre><span></span>XROOTD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-<span style="color:red">standalone</span>.cfg -k fifo&quot;
+</pre></div>
+
+
+<p>On EL 7, which config to use is determined by the service name given to <code>systemctl</code>.
+To use the standalone config, you would use:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> systemctl start xrootd@<span style="color:red">standalone</span>
+</pre></div>
+
+
 <h3 id="file-locations">File locations<a class="headerlink" href="#file-locations" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
