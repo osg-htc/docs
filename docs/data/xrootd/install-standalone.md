@@ -5,9 +5,6 @@ Install XRootD Standalone
 typically distributed among actual storage resources. In this document we focus on using XRootD as a simple layer
 exporting an underlying storage system (e.g., [HDFS](/data/install-hadoop.md)) to the outside world.
 
-!!! note
-    The OSG only supports XRootD standalone installations on EL7 hosts
-
 Before Starting
 ---------------
 
@@ -83,6 +80,10 @@ To configure XRootD as a standalone server, replace the contents of `/etc/xrootd
         xrd.network keepalive kaparms 10m,1m,5
         xrd.timeout idle 60m
 
+1.  On EL 6, set the default options to use the standalone configuration in the `/etc/sysconfig/xrootd` file.
+
+        XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-standalone.cfg -k fifo"
+
 ### Configuring authorization
 
 To configure XRootD authorization please follow the documentation [here](/data/xrootd/xrootd-authorization).
@@ -98,7 +99,7 @@ If you do not need any of the following special configurations, skip to
 In order to enable XRootD HTTP support please follow the instructions
 [here](/data/xrootd/install-storage-element#optional-enabling-xrootd-over-http)
 
-#### Enabling Hadoop support
+#### Enabling Hadoop support (EL 7 Only)
 
 For documentation on how to export your Hadoop storage using XRootD please see
 [this documentation](/data/xrootd/install-storage-element#optional-adding-hadoop-support-to-xrootd)
@@ -114,20 +115,20 @@ Using XRootD
 In addition to the XRootD service itself, there are a number of supporting services in your installation.
 The specific services are:
 
-| Software  | Service Name                          | Notes                                                                        |
-|:----------|:--------------------------------------|:-----------------------------------------------------------------------------|
-| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
-| XRootD    | `xrootd@standalone`                   |                                                                              |
+| Software  | Service Name                            | Notes                                                                        |
+|:----------|:----------------------------------------|:-----------------------------------------------------------------------------|
+| Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron`   | See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
+| XRootD    | EL 7:`xrootd@standalone`, EL 6:`xrootd` |                                                                              |
 
 Start the services in the order listed and stop them in reverse order.
 As a reminder, here are common service commands (all run as `root`):
 
-| To …                                        | On EL 7, run the command…        |
-|:--------------------------------------------|:---------------------------------|
-| Start a service                             | `systemctl start SERVICE-NAME`   |
-| Stop a service                              | `systemctl stop SERVICE-NAME`    |
-| Enable a service to start during boot       | `systemctl enable SERVICE-NAME`  |
-| Disable a service from starting during boot | `systemctl disable SERVICE-NAME` |
+| To …                                        | On EL 7, run the command…        | On EL 6, run the command…    |
+|:--------------------------------------------|:---------------------------------|:-----------------------------|
+| Start a service                             | `systemctl start SERVICE-NAME`   | `service SERVICE-NAME start` |
+| Stop a service                              | `systemctl stop SERVICE-NAME`    | `service SERVICE-NAME stop`  |
+| Enable a service to start during boot       | `systemctl enable SERVICE-NAME`  | `chkconfig SERVICE-NAME on`  |
+| Disable a service from starting during boot | `systemctl disable SERVICE-NAME` | `chkconfig SERVICE-NAME off` |
 
 Validating XRootD
 -----------------
@@ -184,6 +185,23 @@ Reference
 - [Export directive](http://xrootd.org/doc/dev48/ofs_config.htm#_Toc401930729) in the XRootD configuration and
   [relevant options](http://xrootd.org/doc/dev48/ofs_config.htm#_Toc401930728)
 
+
+### Service Configuration
+
+On EL 6, which config to use is set in the file `/etc/sysconfig/xrootd`.
+
+To use the standalone config, you would use:
+
+``` file
+XROOTD_DEFAULT_OPTIONS="-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-%RED%standalone%ENDCOLOR%.cfg -k fifo"
+```
+
+On EL 7, which config to use is determined by the service name given to `systemctl`.
+To use the standalone config, you would use:
+
+``` console
+root@host # systemctl start xrootd@%RED%standalone%ENDCOLOR%
+```
 
 ### File locations
 
