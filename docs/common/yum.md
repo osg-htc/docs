@@ -22,7 +22,7 @@ intended for public use:
 OSG's RPM packages also rely on external packages provided by supported OSes and EPEL.
 You must have the following repositories available and enabled:
 
--   OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories)
+-   OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories, including "extras" repositories)
 -   EPEL repositories
 -   OSG repositories
 
@@ -90,6 +90,25 @@ getting the OSG-supported versions.
 
         :::file
         plugins=1
+
+### Enable the "extras" OS repositories
+
+Some packages depend on packages in the "extras" repositories of your OS,
+so you must ensure that those repositories are enabled.
+
+The instructions for this vary based on your OS:
+
+- On Scientific Linux, install the `yum-conf-extras` RPM package,
+  and ensure that the `sl-extras` repo in `/etc/yum.repos.d/sl-extras.repo` is enabled.
+  
+- On CentOS, ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Base.repo` is enabled.
+
+- On Red Hat Enterprise Linux, ensure that the `Server-Extras` channel is enabled.
+
+!!! note
+    A repository is enabled if it has `enabled=1` in its definition,
+    or if the `enabled` line is missing
+    (i.e. it is enabled unless specified otherwise.)
 
 ### Install the EPEL repositories
 
