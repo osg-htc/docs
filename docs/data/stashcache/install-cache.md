@@ -187,6 +187,24 @@ Remote debugging should only be enabled for as long as you need assistance.
 As soon as your issue has been resolved, revert any changes you have made to `/etc/xrootd/digauth.cfg`.
 
 
+### Enable HTTPS on the unauthenticated cache
+
+By default, the unauthenticated stash-cache instance uses plain HTTP, not HTTPS.
+To use HTTPS:
+
+1.  Add a service certificate according to the [instructions above](#add-a-service-certificate)
+
+1.  Create a file named `/etc/xrootd/config.d/11-cache-https.cfg` with the following contents:
+
+        # Support HTTPS access to unauthenticated cache
+        if named stash-cache
+          http.cadir /etc/grid-security/certificates
+          http.cert /etc/grid-security/xrd/xrdcert.pem
+          http.key /etc/grid-security/xrd/xrdkey.pem
+          http.secxtractor /usr/lib64/libXrdLcmaps.so
+        fi
+
+
 Managing StashCache and associated services
 -------------------------------------------
 
