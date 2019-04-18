@@ -960,8 +960,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-and-configuring-repositories" title="Installing and Configuring Repositories" class="md-nav__link">
-    Installing and Configuring Repositories
+  <a href="#installing-yum-repositories" title="Installing Yum Repositories" class="md-nav__link">
+    Installing Yum Repositories
   </a>
   
     <nav class="md-nav">
@@ -989,15 +989,35 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#automatic-updates" title="Automatic Updates" class="md-nav__link">
-    Automatic Updates
+  <a href="#install-the-osg-repositories" title="Install the OSG Repositories" class="md-nav__link">
+    Install the OSG Repositories
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-configuration" title="Optional Configuration" class="md-nav__link">
+    Optional Configuration
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable-automatic-security-updates" title="Enable automatic security updates" class="md-nav__link">
+    Enable automatic security updates
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-the-osg-repositories" title="Install the OSG Repositories" class="md-nav__link">
-    Install the OSG Repositories
+  <a href="#configuring-spacewalk-priorities" title="Configuring Spacewalk priorities" class="md-nav__link">
+    Configuring Spacewalk priorities
   </a>
   
 </li>
@@ -1985,8 +2005,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-and-configuring-repositories" title="Installing and Configuring Repositories" class="md-nav__link">
-    Installing and Configuring Repositories
+  <a href="#installing-yum-repositories" title="Installing Yum Repositories" class="md-nav__link">
+    Installing Yum Repositories
   </a>
   
     <nav class="md-nav">
@@ -2014,15 +2034,35 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#automatic-updates" title="Automatic Updates" class="md-nav__link">
-    Automatic Updates
+  <a href="#install-the-osg-repositories" title="Install the OSG Repositories" class="md-nav__link">
+    Install the OSG Repositories
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-configuration" title="Optional Configuration" class="md-nav__link">
+    Optional Configuration
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable-automatic-security-updates" title="Enable automatic security updates" class="md-nav__link">
+    Enable automatic security updates
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-the-osg-repositories" title="Install the OSG Repositories" class="md-nav__link">
-    Install the OSG Repositories
+  <a href="#configuring-spacewalk-priorities" title="Configuring Spacewalk priorities" class="md-nav__link">
+    Configuring Spacewalk priorities
   </a>
   
 </li>
@@ -2149,7 +2189,7 @@ supported by the OSG.</p>
 </ul>
 <p>If you would like to distribute your software in the OSG <code>contrib</code> repository, please <a href="../../common/help">contact us</a> with a
 description of your software, what users it serves, and relevant RPM packaging.</p>
-<h2 id="installing-and-configuring-repositories">Installing and Configuring Repositories<a class="headerlink" href="#installing-and-configuring-repositories" title="Permanent link">&para;</a></h2>
+<h2 id="installing-yum-repositories">Installing Yum Repositories<a class="headerlink" href="#installing-yum-repositories" title="Permanent link">&para;</a></h2>
 <h3 id="install-the-yum-priorities-plugin">Install the Yum priorities plugin<a class="headerlink" href="#install-the-yum-priorities-plugin" title="Permanent link">&para;</a></h3>
 <p>The Yum priorities plugin is used to tell Yum to prefer OSG packages over EPEL or OS packages.
 It is important to install and enable the Yum priorities plugin before installing grid software to ensure that you are
@@ -2225,31 +2265,6 @@ EPEL repository is either missing, or 99 or a higher number.
 The OSG repositories must have a better (numerically lower) priority than the EPEL repositories;
 otherwise, you might have dependency resolution ("depsolving") issues.</p>
 </div>
-<h3 id="automatic-updates">Automatic Updates<a class="headerlink" href="#automatic-updates" title="Permanent link">&para;</a></h3>
-<p>For production services, we suggest only changing software versions during controlled downtime.
-Therefore we recommend security-only automatic updates or disabling automatic updates entirely.</p>
-<p>To enable only security related automatic updates:</p>
-<ul>
-<li>
-<p>On Enterprise Linux 6, edit <code>/etc/sysconfig/yum-autoupdate</code> and set <code>USE_YUMSEC="true"</code></p>
-</li>
-<li>
-<p>On Enterprise Linux 7, edit <code>/etc/yum/yum-cron.conf</code> and set <code>update_cmd = security</code></p>
-</li>
-</ul>
-<p>To disable automatic updates entirely:</p>
-<ul>
-<li>
-<p>On Enterprise Linux 6, edit <code>/etc/sysconfig/yum-autoupdate</code> and set <code>ENABLED="false"</code></p>
-</li>
-<li>
-<p>On Enterprise Linux 7, run:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service yum-cron stop
-</pre></div>
-
-
-</li>
-</ul>
 <h3 id="install-the-osg-repositories">Install the OSG Repositories<a class="headerlink" href="#install-the-osg-repositories" title="Permanent link">&para;</a></h3>
 <p>This document assumes a fresh install.
 For instructions on upgrading from one OSG series to another, see the
@@ -2291,6 +2306,39 @@ If you want to <a href="#repositories">enable another one</a> (e.g. <code>osg-te
 </pre></div>
 
 
+<h2 id="optional-configuration">Optional Configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="enable-automatic-security-updates">Enable automatic security updates<a class="headerlink" href="#enable-automatic-security-updates" title="Permanent link">&para;</a></h3>
+<p>For production services, we suggest only changing software versions during controlled downtime.
+Therefore we recommend security-only automatic updates or disabling automatic updates entirely.</p>
+<p>To enable only security related automatic updates:</p>
+<ul>
+<li>
+<p>On Enterprise Linux 6, edit <code>/etc/sysconfig/yum-autoupdate</code> and set <code>USE_YUMSEC="true"</code></p>
+</li>
+<li>
+<p>On Enterprise Linux 7, edit <code>/etc/yum/yum-cron.conf</code> and set <code>update_cmd = security</code></p>
+</li>
+</ul>
+<p>To disable automatic updates entirely:</p>
+<ul>
+<li>
+<p>On Enterprise Linux 6, edit <code>/etc/sysconfig/yum-autoupdate</code> and set <code>ENABLED="false"</code></p>
+</li>
+<li>
+<p>On Enterprise Linux 7, run:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> service yum-cron stop
+</pre></div>
+
+
+</li>
+</ul>
+<h3 id="configuring-spacewalk-priorities">Configuring Spacewalk priorities<a class="headerlink" href="#configuring-spacewalk-priorities" title="Permanent link">&para;</a></h3>
+<p>Sites using <a href="https://spacewalkproject.github.io/">Spacewalk</a> to manage RPM packages will need to configure OSG Yum
+repository priorities using their Spacewalk ID. For example, if the OSG 3.4 repository's Spacewalk ID is
+<code>centos_7_osg34_dev</code>, modify <code>/etc/yum/pluginconf.d/90-osg.conf</code> to include the following:</p>
+<p>```
+[centos_7_osg_34_dev]
+priority = 98</p>
 <h2 id="repository-mirrors">Repository Mirrors<a class="headerlink" href="#repository-mirrors" title="Permanent link">&para;</a></h2>
 <p>If you run a large site (&gt;20 nodes), you should consider setting up a local mirror for the OSG repositories.
 A local Yum mirror allows you to reduce the amount of external bandwidth used when updating or installing packages.</p>
