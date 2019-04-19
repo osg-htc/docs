@@ -39,14 +39,14 @@ Gratia Probe Configuration
 
 1. Copy over the recommended probe configuration:
 
-     :::console
-     root@host # cp /etc/gratia/condor/Probeconfig-flocking /etc/gratia/condor/Probeconfig
+        :::console
+        root@host # cp /etc/gratia/condor/Probeconfig-flocking /etc/gratia/condor/Probeconfig
 
 1. Fill in the values for `ProbeName` and `SiteName` with the hostname and Topology resource name, respectively. For example:
 
-     :::xml
-     ProbeName="condor:foo.example.edu"
-     SiteName="OSG_US_RESOURCE_SUBMIT"
+        :::xml
+        ProbeName="condor:foo.example.edu"
+        SiteName="OSG_US_RESOURCE_SUBMIT"
 
 Please remember to enable and start the probe:
 
