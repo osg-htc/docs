@@ -171,7 +171,6 @@ Project Names
 
 OSG will only run jobs tagged with a valid *ProjectName* - this is the main attribute
 used for accounting. New projects should be registered in the
-[OSG Topology Database](https://github.com/opensciencegrid/topology/blob/master/README.md).
 Please open at ticket to register a new project.
 Jobs should specify which project to be accounted against by adding
 the *+ProjectNa,e* attribute. Note that the value is a string and hence
