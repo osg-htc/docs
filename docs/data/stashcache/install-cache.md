@@ -87,6 +87,17 @@ This is an example registration for a cache server that only serves authenticate
     DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-auth-cache.example.net
 ```
 
+This is an example registration for a cache server that serves all public data _and_ authenticated data from the OSG VO:
+```yaml
+  MY_COMBO_STASHCACHE_CACHE:
+    FQDN: my-combo-cache.example.net
+    Service: XRootD cache server
+      Description: StashCache cache server
+    AllowedVOs:
+      - OSG
+      - ANY_PUBLIC
+    DN: /DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=my-combo-cache.example.net
+```
 
 ### Finalizing registration
 
