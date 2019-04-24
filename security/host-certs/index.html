@@ -2177,13 +2177,26 @@ In the OSG, some grid resources (e.g., HTCondor-CE, XRootD, GridFTP) require hos
 If you are unsure if your host needs a host certificate, please consult the installation instructions for the software
 you are interested in installing.</p>
 <p>To acquire a host certificate, you must submit a request to a Certificate Authority (CA).
-We recommend requesting host certificates from one of the following CA services:</p>
+We recommend requesting host certificates from one of the following CAs:</p>
 <ul>
-<li><a href="https://www.incommon.org/cert/">InCommon</a>: an IGTF-accredited CA for services that interact with the WLCG;
-  requires a subscription, generally held by an institution</li>
-<li><a href="https://letsencrypt.org/">Let's Encrypt</a>: a free, automated, and open CA frequently used for web services;
+<li>
+<p><a href="#requesting-incommon-igtf-host-certificates">InCommon IGTF</a>:
+  an IGTF-accredited CA for services that interact with the WLCG;
+  requires a subscription, generally held by an institution</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>For integration with the OSG, InCommon host certificates must be issued by the
+<a href="https://spaces.at.internet2.edu/display/ICCS/InCommon+Cert+Types#InCommonCertTypes-IGTFServerCertificates">IGTF CA</a>
+and not the InCommon RSA CA.</p>
+</div>
+</li>
+<li>
+<p><a href="#requesting-host-certificates-using-lets-encrypt">Let's Encrypt</a>:
+  a free, automated, and open CA frequently used for web services;
   see the <a href="https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/">security team's position on Let's Encrypt</a>
-  for more details</li>
+  for more details.
+  Let's Encrypt is not IGTF-accredited so their certificates are not suitable for WLCG services.</p>
+</li>
 <li>If neither of the above options work for your site, the OSG also accepts all
   <a href="https://repo.opensciencegrid.org/cadist/">IGTF-accredited CAs</a>.</li>
 </ul>
@@ -2202,7 +2215,7 @@ If so, you may safely skip this document:</p>
 
 <p>If you are using OpenSSL 1.1, you may notice minor formatting differences.</p>
 <h2 id="requesting-incommon-igtf-host-certificates">Requesting InCommon IGTF Host Certificates<a class="headerlink" href="#requesting-incommon-igtf-host-certificates" title="Permanent link">&para;</a></h2>
-<p>Many institutions in the United States already subscribe to InCommon and offer certificate services.
+<p>Many institutions in the United States already subscribe to InCommon and offer IGTF certificate services.
 If your institution is in the list of <a href="https://www.incommon.org/certificates/subscribers.html">InCommon subscribers</a>,
 continue with the instructions below.
 If your institution is not in the list, Let's Encrypt certificates do not meet your needs, and you do not have access to
