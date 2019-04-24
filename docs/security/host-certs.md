@@ -12,13 +12,22 @@ If you are unsure if your host needs a host certificate, please consult the inst
 you are interested in installing.
 
 To acquire a host certificate, you must submit a request to a Certificate Authority (CA).
-We recommend requesting host certificates from one of the following CA services:
+We recommend requesting host certificates from one of the following CAs:
 
-- [InCommon](https://www.incommon.org/cert/): an IGTF-accredited CA for services that interact with the WLCG;
+- [InCommon IGTF](#requesting-incommon-igtf-host-certificates):
+  an IGTF-accredited CA for services that interact with the WLCG;
   requires a subscription, generally held by an institution
-- [Let's Encrypt](https://letsencrypt.org/): a free, automated, and open CA frequently used for web services;
+
+    !!! important
+        For integration with the OSG, InCommon host certificates must be issued by the
+        [IGTF CA](https://spaces.at.internet2.edu/display/ICCS/InCommon+Cert+Types#InCommonCertTypes-IGTFServerCertificates)
+        and not the InCommon RSA CA.
+
+- [Let's Encrypt](#requesting-host-certificates-using-lets-encrypt):
+  a free, automated, and open CA frequently used for web services;
   see the [security team's position on Let's Encrypt](https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/)
-  for more details
+  for more details.
+  Let's Encrypt is not IGTF-accredited so their certificates are not suitable for WLCG services.
 - If neither of the above options work for your site, the OSG also accepts all
   [IGTF-accredited CAs](https://repo.opensciencegrid.org/cadist/).
 
@@ -44,7 +53,7 @@ If you are using OpenSSL 1.1, you may notice minor formatting differences.
 Requesting InCommon IGTF Host Certificates
 ------------------------------------------
 
-Many institutions in the United States already subscribe to InCommon and offer certificate services.
+Many institutions in the United States already subscribe to InCommon and offer IGTF certificate services.
 If your institution is in the list of [InCommon subscribers](https://www.incommon.org/certificates/subscribers.html),
 continue with the instructions below.
 If your institution is not in the list, Let's Encrypt certificates do not meet your needs, and you do not have access to
