@@ -939,26 +939,6 @@
     GridFTP Gratia Transfer Probe Configuration
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#selecting-a-collector-host" title="Selecting a collector host" class="md-nav__link">
-    Selecting a collector host
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validation" title="Validation" class="md-nav__link">
-    Validation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -1014,7 +994,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validation_1" title="Validation" class="md-nav__link">
+  <a href="#validation" title="Validation" class="md-nav__link">
     Validation
   </a>
   
@@ -2406,26 +2386,6 @@
     GridFTP Gratia Transfer Probe Configuration
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#selecting-a-collector-host" title="Selecting a collector host" class="md-nav__link">
-    Selecting a collector host
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validation" title="Validation" class="md-nav__link">
-    Validation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -2481,7 +2441,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validation_1" title="Validation" class="md-nav__link">
+  <a href="#validation" title="Validation" class="md-nav__link">
     Validation
   </a>
   
@@ -2916,19 +2876,13 @@ If you do not run a Secondary NameNode, skip to the <a href="#finalizing-the-upg
 <table>
 <thead>
 <tr>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
+<th>File</th>
+<th>Setting</th>
+<th>Example</th>
+<th>Comments</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>File</td>
-<td>Setting</td>
-<td>Example</td>
-<td>Comments</td>
-</tr>
 <tr>
 <td><code>core-site.xml</code></td>
 <td>fs.default.name</td>
@@ -3083,49 +3037,49 @@ Some of the environment variables that can be used in <code>/etc/sysconfig/gridf
 <table>
 <thead>
 <tr>
-<th></th>
-<th></th>
-<th></th>
+<th>Option Name</th>
+<th>Needs Editing?</th>
+<th>Suggested value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Option Name</td>
-<td>Needs Editing?</td>
-<td>Suggested value</td>
-</tr>
-<tr>
-<td>GRIDFTP_HDFS_REPLICA_MAP</td>
+<td><code>GRIDFTP_HDFS_REPLICA_MAP</code></td>
 <td>No</td>
 <td>File containing a list of paths and replica values for setting the default # of replicas for specific file paths</td>
 </tr>
 <tr>
-<td>GRIDFTP_BUFFER_COUNT</td>
+<td><code>GRIDFTP_BUFFER_COUNT</code></td>
 <td>No</td>
 <td>The number of 1MB memory buffers used to reorder data streams before writing them to Hadoop</td>
 </tr>
 <tr>
-<td>GRIDFTP_FILE_BUFFER_COUNT</td>
+<td><code>GRIDFTP_FILE_BUFFER_COUNT</code></td>
 <td>No</td>
 <td>The number of 1MB file-based buffers used to reorder data streams before writing them to Hadoop</td>
 </tr>
 <tr>
-<td>GRIDFTP_SYSLOG</td>
+<td><code>GRIDFTP_SYSLOG</code></td>
 <td>No</td>
 <td>Set this to 1 in case if you want to send transfer activity data to syslog (only used for the HadoopViz application)</td>
 </tr>
 <tr>
-<td>GRIDFTP_HDFS_MOUNT_POINT</td>
+<td><code>GRIDFTP_HDFS_CHECKSUMS</code></td>
+<td>Maybe</td>
+<td>List of checksum calculations to perform on-the-fly (default: <code>"MD5,ADLER32,CRC32,CKSUM,CVMFS"</code>)</td>
+</tr>
+<tr>
+<td><code>GRIDFTP_HDFS_MOUNT_POINT</code></td>
 <td>Maybe</td>
 <td>The location of the FUSE mount point used during the Hadoop installation. Defaults to /mnt/hadoop. This is needed so that gridftp-hdfs can convert fuse paths on the incoming URL to native Hadoop paths. <strong>Note:</strong> this does not imply you need FUSE mounted on GridFTP nodes!</td>
 </tr>
 <tr>
-<td>GRIDFTP_LOAD_LIMIT</td>
+<td><code>GRIDFTP_LOAD_LIMIT</code></td>
 <td>No</td>
 <td>GridFTP will refuse to start new transfers if the load on the GridFTP host is higher than this number; defaults to 20.</td>
 </tr>
 <tr>
-<td>TMPDIR</td>
+<td><code>TMPDIR</code></td>
 <td>Maybe</td>
 <td>The temp directory where the file-based buffers are stored. Defaults to /tmp.</td>
 </tr>
@@ -3140,125 +3094,7 @@ Some of the environment variables that can be used in <code>/etc/sysconfig/gridf
 <p class="admonition-title">Note</p>
 <p>Needed by GridFTP node only.</p>
 </div>
-<p>The Gratia probe requires the file <code>user-vo-map</code> to exist and be up to date.
-Assuming you installed GridFTP using the <code>osg-se-hadoop-gridftp</code> rpm, the Gratia Transfer Probe will already be installed.</p>
-<p>Here are the most relevant file and directory locations:</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Purpose</td>
-<td>Needs Editing?</td>
-<td>Location</td>
-</tr>
-<tr>
-<td>Probe Configuration</td>
-<td>Yes</td>
-<td>/etc/gratia/gridftp-transfer/ProbeConfig</td>
-</tr>
-<tr>
-<td>Probe Executables</td>
-<td>No</td>
-<td>/usr/share/gratia/gridftp-transfer</td>
-</tr>
-<tr>
-<td>Log files</td>
-<td>No</td>
-<td>/var/log/gratia</td>
-</tr>
-<tr>
-<td>Temporary files</td>
-<td>No</td>
-<td>/var/lib/gratia/tmp</td>
-</tr>
-</tbody>
-</table>
-<p>The RPM installs the Gratia probe into the system crontab, but does not configure it. The configuration of the probe is controlled by the file</p>
-<div class="codehilite"><pre><span></span>/etc/gratia/gridftp-transfer/ProbeConfig
-</pre></div>
-
-
-<p>This is usually one XML node spread over multiple lines. Note that comments (#) have no effect on this file. You will need to edit the following:</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Attribute</td>
-<td>Needs Editing</td>
-<td>Value</td>
-</tr>
-<tr>
-<td>ProbeName</td>
-<td>Maybe</td>
-<td>This should be set to "gridftp-transfer:<hostname>", where <hostname> is the fully-qualified domain name of your gridftp host.</td>
-</tr>
-<tr>
-<td>CollectorHost</td>
-<td>Maybe</td>
-<td>Set to the hostname and port of the central collector. By default it sends to the OSG collector. See below.</td>
-</tr>
-<tr>
-<td>SiteName</td>
-<td>Yes</td>
-<td>Set to the resource group name of your site as registered in OIM.</td>
-</tr>
-<tr>
-<td>GridftpLogDir</td>
-<td>Yes</td>
-<td>Set to /var/log, or wherever your current gridftp logs are located</td>
-</tr>
-<tr>
-<td>Grid</td>
-<td>Maybe</td>
-<td>Set to "ITB" if this is a test resource; otherwise, leave as OSG.</td>
-</tr>
-<tr>
-<td>UserVOMapFile</td>
-<td>No</td>
-<td>This should be set to /var/lib/osg/user-vo-map; see below for information about this file.</td>
-</tr>
-<tr>
-<td>SuppressUnknownVORecords</td>
-<td>Maybe</td>
-<td>Set to 1 to suppress any records that can't be matched to a VO; 0 is strongly recommended.</td>
-</tr>
-<tr>
-<td>SuppressNoDNRecords</td>
-<td>Maybe</td>
-<td>Set to 1 to suppress records that can't be matched to a DN; 0 is strongly recommended.</td>
-</tr>
-<tr>
-<td>EnableProbe</td>
-<td>Yes</td>
-<td>Set to 1 to enable the probe.</td>
-</tr>
-</tbody>
-</table>
-<h4 id="selecting-a-collector-host">Selecting a collector host<a class="headerlink" href="#selecting-a-collector-host" title="Permanent link">&para;</a></h4>
-<p>The collector is the central server which logs the GridFTP transfers into a database. There are usually three options:</p>
-<ol>
-<li><strong>OSG Transfer Collector</strong>: This is the primary collector for transfers in the OSG. Use <code>CollectorHost="gratia-osg-prod.opensciencegrid.org:80"</code>.</li>
-<li><strong>OSG-ITB Transfer Collector</strong>: This is the test collector for transfers in the OSG. Use <code>CollectorHost=" gratia-osg-itb.opensciencegrid.org:80"</code>.</li>
-</ol>
-<h4 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h4>
-<p>Run the Gratia probe once by hand to check for functionality:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /usr/share/gratia/gridftp-transfer/GridftpTransferProbeDriver
-</pre></div>
-
-
-<p>Look for any abnormal termination and report it if it is a non-trivial site issue. Look in the log files in <code>/var/log/gratia/&lt;date&gt;.log</code> and make sure there are no error messages printed.</p>
+<p>See the <a href="../../data/gridftp#enabling-gridftp-transfer-probe">GridFTP documentation</a> for configuration details.</p>
 <h3 id="hadoop-storage-probe-configuration">Hadoop Storage Probe Configuration<a class="headerlink" href="#hadoop-storage-probe-configuration" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -3268,17 +3104,12 @@ Assuming you installed GridFTP using the <code>osg-se-hadoop-gridftp</code> rpm,
 <table>
 <thead>
 <tr>
-<th></th>
-<th></th>
-<th></th>
+<th>Purpose</th>
+<th>Needs Editing?</th>
+<th>Location</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>Purpose</td>
-<td>Needs Editing?</td>
-<td>Location</td>
-</tr>
 <tr>
 <td>Probe Configuration</td>
 <td>Yes</td>
@@ -3312,17 +3143,12 @@ Assuming you installed GridFTP using the <code>osg-se-hadoop-gridftp</code> rpm,
 <table>
 <thead>
 <tr>
-<th></th>
-<th></th>
-<th></th>
+<th>Attribute</th>
+<th>Needs Editing</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>Attribute</td>
-<td>Needs Editing</td>
-<td>Value</td>
-</tr>
 <tr>
 <td>CollectorHost</td>
 <td>Maybe</td>
@@ -3448,7 +3274,7 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 </tr>
 </tbody>
 </table>
-<h2 id="validation_1">Validation<a class="headerlink" href="#validation_1" title="Permanent link">&para;</a></h2>
+<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
 <p>The first thing you may want to do after installing and starting your primary NameNode is to verify that the web interface works. In your web browser go to:</p>
 <div class="codehilite"><pre><span></span>http://<span style="color:red">namenode.hostname</span>:50070/dfshealth.jsp
 </pre></div>
@@ -3834,19 +3660,13 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 <table>
 <thead>
 <tr>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
+<th>Component</th>
+<th>File Type</th>
+<th>Location</th>
+<th>Needs editing?</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>Component</td>
-<td>File Type</td>
-<td>Location</td>
-<td>Needs editing?</td>
-</tr>
 <tr>
 <td>Hadoop</td>
 <td>Log files</td>
@@ -3854,165 +3674,106 @@ ProbeConfig = %(gratia_location)s/hadoop-storage/ProbeConfig
 <td>No</td>
 </tr>
 <tr>
-<td>Hadoop</td>
+<td></td>
 <td>PID files</td>
 <td><code>/var/run/hadoop/*.pid</code></td>
 <td>No</td>
 </tr>
 <tr>
-<td>Hadoop</td>
+<td></td>
 <td>init scripts</td>
 <td><code>/etc/init.d/hadoop</code></td>
 <td>No</td>
 </tr>
 <tr>
-<td>Hadoop</td>
+<td></td>
 <td>init script config file</td>
 <td><code>/etc/sysconfig/hadoop</code></td>
 <td>Yes</td>
 </tr>
 <tr>
-<td>Hadoop</td>
+<td></td>
 <td>runtime config files</td>
 <td><code>/etc/hadoop/conf/*</code></td>
 <td>Maybe</td>
 </tr>
 <tr>
-<td>Hadoop</td>
+<td></td>
 <td>System binaries</td>
 <td><code>/usr/bin/hadoop</code></td>
 <td>No</td>
 </tr>
 <tr>
-<td>Hadoop</td>
+<td></td>
 <td>JARs</td>
 <td><code>/usr/lib/hadoop/*</code></td>
 <td>No</td>
 </tr>
 <tr>
-<td>Hadoop</td>
+<td></td>
 <td>runtime config files</td>
 <td><code>/etc/hosts_exclude</code></td>
 <td>Yes, must be present on NameNodes</td>
 </tr>
 <tr>
-<td>GridFTP</td>
+<td></td>
 <td>Log files</td>
 <td><code>/var/log/gridftp-auth.log</code>, <code>/var/log/gridftp.log</code></td>
 <td>No</td>
 </tr>
 <tr>
 <td>GridFTP</td>
+<td>Transfer log</td>
+<td><code>/var/log/gridftp.log</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td></td>
+<td>Authentication log</td>
+<td><code>/var/log/gridftp-auth.log</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td></td>
+<td>LCMAPS auth error log</td>
+<td><code>/var/log/messages</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td></td>
 <td>init.d script</td>
 <td><code>/etc/init.d/globus-gridftp-server</code></td>
 <td>No</td>
 </tr>
 <tr>
-<td>GridFTP</td>
+<td></td>
 <td>runtime config files</td>
 <td><code>/etc/gridftp-hdfs/*</code>, <code>/etc/sysconfig/gridftp-hdfs</code></td>
 <td>Maybe</td>
 </tr>
 <tr>
-<td>GridFTP</td>
+<td></td>
 <td>System binaries</td>
 <td><code>/usr/bin/gridftp-hdfs-standalone</code>, <code>/usr/sbin/globus-gridftp-server</code></td>
 <td>No</td>
 </tr>
 <tr>
-<td>GridFTP</td>
+<td></td>
 <td>System libraries</td>
 <td><code>/usr/lib64/libglobus_gridftp_server_hdfs.so*</code></td>
 <td>No</td>
 </tr>
 <tr>
-<td>GridFTP</td>
+<td></td>
 <td>LCMAPS VOMS configuration</td>
 <td><code>/etc/lcmaps.db</code></td>
 <td>Yes</td>
 </tr>
 <tr>
-<td>GridFTP</td>
+<td></td>
 <td>CA certificates</td>
 <td><code>/etc/grid-security/certificates/*</code></td>
 <td>No</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th align="left">Service/Process</th>
-<th align="left">Configuration File</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">BeStMan2</td>
-<td align="left"><code>/etc/bestman2/conf/bestman2.rc</code></td>
-<td align="left">Main Configuration file</td>
-</tr>
-<tr>
-<td align="left"></td>
-<td align="left"><code>/etc/sysconfig/bestman2</code></td>
-<td align="left">Environment variables used by BeStMan2</td>
-</tr>
-<tr>
-<td align="left"></td>
-<td align="left"><code>/etc/sysconfig/bestman2lib</code></td>
-<td align="left">Environment variables that store values of various client and server libraries used by BeStMan2</td>
-</tr>
-<tr>
-<td align="left"></td>
-<td align="left"><code>/etc/bestman2/conf/*</code></td>
-<td align="left">Other runtime configuration files</td>
-</tr>
-<tr>
-<td align="left"></td>
-<td align="left"><code>/etc/init.d/bestman2</code></td>
-<td align="left">init.d startup script</td>
-</tr>
-<tr>
-<td align="left"></td>
-<td align="left"><code>/etc/gridftp.conf</code></td>
-<td align="left">Startup parameters</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th align="left">Service/Process</th>
-<th align="left">Log File</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">BeStMan2</td>
-<td align="left"><code>/var/log/bestman2/bestman2.log</code></td>
-<td align="left">BeStMan2 server log and errors</td>
-</tr>
-<tr>
-<td align="left"></td>
-<td align="left"><code>/var/log/bestman2/event.srm.log</code></td>
-<td align="left">Records all SRM transactions</td>
-</tr>
-<tr>
-<td align="left">GridFTP</td>
-<td align="left"><code>/var/log/gridftp.log</code></td>
-<td align="left">Transfer log</td>
-</tr>
-<tr>
-<td align="left"></td>
-<td align="left"><code>/var/log/gridftp-auth.log</code></td>
-<td align="left">Authentication log</td>
-</tr>
-<tr>
-<td align="left"></td>
-<td align="left"><code>/var/log/messages</code></td>
-<td align="left">Main system log (look here for LCMAPS errors)</td>
 </tr>
 </tbody>
 </table>

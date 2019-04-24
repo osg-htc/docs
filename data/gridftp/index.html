@@ -630,9 +630,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#enabling-gratia-gridftp-transfer-probe" title="Enabling Gratia GridFTP transfer probe" class="md-nav__link">
-    Enabling Gratia GridFTP transfer probe
+  <a href="#enabling-gridftp-transfer-probe" title="Enabling GridFTP transfer probe" class="md-nav__link">
+    Enabling GridFTP transfer probe
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#selecting-a-collector-host" title="Selecting a collector host" class="md-nav__link">
+    Selecting a collector host
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation" title="Validation" class="md-nav__link">
+    Validation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2111,9 +2131,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#enabling-gratia-gridftp-transfer-probe" title="Enabling Gratia GridFTP transfer probe" class="md-nav__link">
-    Enabling Gratia GridFTP transfer probe
+  <a href="#enabling-gridftp-transfer-probe" title="Enabling GridFTP transfer probe" class="md-nav__link">
+    Enabling GridFTP transfer probe
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#selecting-a-collector-host" title="Selecting a collector host" class="md-nav__link">
+    Selecting a collector host
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation" title="Validation" class="md-nav__link">
+    Validation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2275,13 +2315,116 @@ for Hadoop Distributed File System (HDFS) and XRootD based storage:</p>
 <h3 id="configuring-authentication">Configuring authentication<a class="headerlink" href="#configuring-authentication" title="Permanent link">&para;</a></h3>
 <p>To configure which virtual organizations and users are allowed to use your GridFTP server, follow the instructions in
 <a href="../../security/lcmaps-voms-authentication#configuring-the-lcmaps-voms-plugin">the LCMAPS VOMS plugin document</a>.</p>
-<h3 id="enabling-gratia-gridftp-transfer-probe">Enabling Gratia GridFTP transfer probe<a class="headerlink" href="#enabling-gratia-gridftp-transfer-probe" title="Permanent link">&para;</a></h3>
-<p>The <a href="https://github.com/opensciencegrid/docs/blob/master/archive/GratiaTransferProbe">Gratia GridFTP probe</a> collects the information about the Gridftp transfers and forwards it to central Gratia collector. You need to enable the probe first. To do this, edit <code>/etc/gratia/gridftp-transfer/ProbeConfig</code> to set:</p>
-<div class="codehilite"><pre><span></span>EnableProbe=&quot;1&quot;
+<h3 id="enabling-gridftp-transfer-probe">Enabling GridFTP transfer probe<a class="headerlink" href="#enabling-gridftp-transfer-probe" title="Permanent link">&para;</a></h3>
+<p>The Gratia probe requires the file <code>user-vo-map</code> to exist and be up to date.
+Assuming you installed GridFTP using the <code>osg-se-hadoop-gridftp</code> rpm, the Gratia Transfer Probe will already be installed.</p>
+<p>Here are the most relevant file and directory locations:</p>
+<table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>Needs Editing?</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Probe Configuration</td>
+<td>Yes</td>
+<td>/etc/gratia/gridftp-transfer/ProbeConfig</td>
+</tr>
+<tr>
+<td>Probe Executables</td>
+<td>No</td>
+<td>/usr/share/gratia/gridftp-transfer</td>
+</tr>
+<tr>
+<td>Log files</td>
+<td>No</td>
+<td>/var/log/gratia</td>
+</tr>
+<tr>
+<td>Temporary files</td>
+<td>No</td>
+<td>/var/lib/gratia/tmp</td>
+</tr>
+</tbody>
+</table>
+<p>The RPM installs the Gratia probe into the system crontab, but does not configure it. The configuration of the probe is controlled by the file</p>
+<div class="codehilite"><pre><span></span>/etc/gratia/gridftp-transfer/ProbeConfig
 </pre></div>
 
 
-<p>All other configuration settings should be suitable for most purposes. However, you can edit them if needed. The probe runs every 30 minutes as a cron job.</p>
+<p>This is usually one XML node spread over multiple lines. Note that comments (#) have no effect on this file. You will need to edit the following:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Needs Editing</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ProbeName</td>
+<td>Maybe</td>
+<td>This should be set to "gridftp-transfer:<hostname>", where <hostname> is the fully-qualified domain name of your gridftp host.</td>
+</tr>
+<tr>
+<td>CollectorHost</td>
+<td>Maybe</td>
+<td>Set to the hostname and port of the central collector. By default it sends to the OSG collector. See below.</td>
+</tr>
+<tr>
+<td>SiteName</td>
+<td>Yes</td>
+<td>Set to the resource group name of your site as registered in OIM.</td>
+</tr>
+<tr>
+<td>GridftpLogDir</td>
+<td>Yes</td>
+<td>Set to /var/log, or wherever your current gridftp logs are located</td>
+</tr>
+<tr>
+<td>Grid</td>
+<td>Maybe</td>
+<td>Set to "ITB" if this is a test resource; otherwise, leave as OSG.</td>
+</tr>
+<tr>
+<td>UserVOMapFile</td>
+<td>No</td>
+<td>This should be set to /var/lib/osg/user-vo-map; see below for information about this file.</td>
+</tr>
+<tr>
+<td>SuppressUnknownVORecords</td>
+<td>Maybe</td>
+<td>Set to 1 to suppress any records that can't be matched to a VO; 0 is strongly recommended.</td>
+</tr>
+<tr>
+<td>SuppressNoDNRecords</td>
+<td>Maybe</td>
+<td>Set to 1 to suppress records that can't be matched to a DN; 0 is strongly recommended.</td>
+</tr>
+<tr>
+<td>EnableProbe</td>
+<td>Yes</td>
+<td>Set to 1 to enable the probe.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="selecting-a-collector-host">Selecting a collector host<a class="headerlink" href="#selecting-a-collector-host" title="Permanent link">&para;</a></h4>
+<p>The collector is the central server which logs the GridFTP transfers into a database. There are usually three options:</p>
+<ol>
+<li><strong>OSG Transfer Collector</strong>: This is the primary collector for transfers in the OSG. Use <code>CollectorHost="gratia-osg-prod.opensciencegrid.org:80"</code>.</li>
+<li><strong>OSG-ITB Transfer Collector</strong>: This is the test collector for transfers in the OSG. Use <code>CollectorHost=" gratia-osg-itb.opensciencegrid.org:80"</code>.</li>
+</ol>
+<h4 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h4>
+<p>Run the Gratia probe once by hand to check for functionality:</p>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> /usr/share/gratia/gridftp-transfer/GridftpTransferProbeDriver
+</pre></div>
+
+
+<p>Look for any abnormal termination and report it if it is a non-trivial site issue. Look in the log files in <code>/var/log/gratia/&lt;date&gt;.log</code> and make sure there are no error messages printed.</p>
 <h3 id="optional-configuration">Optional configuration<a class="headerlink" href="#optional-configuration" title="Permanent link">&para;</a></h3>
 <h4 id="setting-transfer-limits-for-gridftp-hdfs">Setting transfer limits for GridFTP-HDFS<a class="headerlink" href="#setting-transfer-limits-for-gridftp-hdfs" title="Permanent link">&para;</a></h4>
 <p>To set a limit on the total or per-user number of transfers, create <code>/etc/sysconfig/gridftp-hdfs</code> and set the following configuration:</p>
