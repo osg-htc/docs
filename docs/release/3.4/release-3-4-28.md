@@ -15,13 +15,13 @@ This release contains:
     -  Various bug fixes. See detailed release notes for more information.
 -   [xrootd-hdfs 2.1.4](https://github.com/opensciencegrid/xrootd-hdfs/releases/tag/v2.1.4): Bugfix release
 -   [GlideinWMS 3.4.5](http://glideinwms.fnal.gov/doc.v3_4_5/history.html): Updated from GlideinWMS 3.4.2
-    -  Frontend configurations now use shared port (e.g. only port 9618 is required)
+    -  Frontend configurations now use shared port (i.e. only port 9618 is required)
     -  Added a scaling factor for all Glidein limits in factory entries
-    -  Add the ability to completely disable Glidein removal
+    -  Added the ability to completely disable Glidein removal
     -  Includes unprivileged Singularity and preserve important system files
     -  Added option to ignore entries in downtime when considering Glidein matches
-    -  Track jobs that spawn multiple nodes, e.g. HPC submission 
-    -  Propagate attributes controlled by the Frontend to Factory and Glidein submission
+    -  Tracks jobs that spawn multiple nodes, e.g. HPC submission 
+    -  Propagates attributes controlled by the Frontend to Factory and Glidein submission
     -  Various bug fixes. See detailed release notes for more information.
 -   OSG Flock 1.1: Added new `flock.opensciencegrid.org` host certificate information
 -   [VO Package v89](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-89)
