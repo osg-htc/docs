@@ -12,15 +12,24 @@ If you are unsure if your host needs a host certificate, please consult the inst
 you are interested in installing.
 
 To acquire a host certificate, you must submit a request to a Certificate Authority (CA).
-We recommend requesting host certificates from one of the following CA services:
+We recommend requesting host certificates from one of the following CAs:
 
-- [InCommon IGTF Server CA](https://www.incommon.org/certificates/): InCommon Certificate Service includes an IGTF-accredited CA named IGTF Server CA for services that interact with the WLCG;
+- [InCommon IGTF](#requesting-incommon-igtf-host-certificates):
+  an IGTF-accredited CA for services that interact with the WLCG;
   requires a subscription, generally held by an institution
-- [Let's Encrypt](https://letsencrypt.org/): a free, automated, and open CA frequently used for web services;
-  see the [security team's position on Let's Encrypt](https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/)
-  for more details
 
-If neither of the above options work for your site, the OSG also accepts all
+    !!! important
+        For integration with the OSG, InCommon host certificates must be issued by the
+        [IGTF CA](https://spaces.at.internet2.edu/display/ICCS/InCommon+Cert+Types#InCommonCertTypes-IGTFServerCertificates)
+        and not the InCommon RSA CA.
+
+- [Let's Encrypt](#requesting-host-certificates-using-lets-encrypt):
+  a free, automated, and open CA frequently used for web services;
+  see the [security team's position on Let's Encrypt](https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/)
+  for more details.
+  
+  Let's Encrypt is not IGTF-accredited so their certificates are not suitable for WLCG services.
+- If neither of the above options work for your site, the OSG also accepts all
   [IGTF-accredited CAs](https://repo.opensciencegrid.org/cadist/).
 
 Use this page to learn how to request and install host certificates on an OSG resource.
@@ -45,7 +54,8 @@ If you are using OpenSSL 1.1, you may notice minor formatting differences.
 Requesting InCommon IGTF Host Certificates
 ------------------------------------------
 
-Many institutions in the United States already subscribe to InCommon and have access to certificate services.
+Many institutions in the United States already subscribe to InCommon and offer IGTF certificate services.
+
 If your institution is in the list of [InCommon subscribers](https://www.incommon.org/certificates/subscribers.html),
 continue with the instructions below.
 
@@ -97,7 +107,7 @@ Install the `osg-pki-tools` where both command line tools are available:
     Additional options and descriptions can be found [here](https://github.com/opensciencegrid/osg-pki-tools#options).
 
 1. Find your institution-specific InCommon contact
-   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/)),
+   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/division-of-information-technology/cybersecurity/security-tools-software/server-certificates/)),
    submit the CSR that you generated above, and request a 1-year `IGTF Server Certificate` for `OTHER` server software.
 1. After the certificate has been issued by your institution, download it on its intended host and copy over the key you
 generated above.

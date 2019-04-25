@@ -50,6 +50,9 @@ pages:
   - HDFS:
     - 'HDFS Overview': 'data/hadoop-overview.md'
     - 'Install HDFS': 'data/install-hadoop.md'
+- Submit:
+  - Flocking:
+    - 'Flock to OSG': 'submit/osg-flock.md'
 - Security:
   - 'LCMAPS VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host Certificates': 'security/host-certs.md'
@@ -70,6 +73,10 @@ pages:
 - Release Information:
   - 'Release Note Overview': 'release/notes.md'
   - 3.4 Release Notes:
+    - 'OSG Release 3.4.28': 'release/3.4/release-3-4-28.md'
+    - 'OSG Release 3.4.27-2': 'release/3.4/release-3-4-27-2.md'
+    - 'OSG Release 3.4.27': 'release/3.4/release-3-4-27.md'
+    - 'OSG Release 3.4.26-2': 'release/3.4/release-3-4-26-2.md'
     - 'OSG Release 3.4.26': 'release/3.4/release-3-4-26.md'
     - 'OSG Release 3.4.25': 'release/3.4/release-3-4-25.md'
     - 'OSG Release 3.4.24-2': 'release/3.4/release-3-4-24-2.md'

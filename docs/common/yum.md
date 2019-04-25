@@ -22,7 +22,7 @@ intended for public use:
 OSG's RPM packages also rely on external packages provided by supported OSes and EPEL.
 You must have the following repositories available and enabled:
 
--   OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories)
+-   OS repositories (SL 6/7, CentOS 6/7, or RHEL 6/7 repositories, including "extras" repositories)
 -   EPEL repositories
 -   OSG repositories
 
@@ -72,8 +72,8 @@ The definitive list of software in the contrib repository can be found here:
 If you would like to distribute your software in the OSG `contrib` repository, please [contact us](/common/help) with a
 description of your software, what users it serves, and relevant RPM packaging.
 
-Installing and Configuring Repositories
----------------------------------------
+Installing Yum Repositories
+---------------------------
 
 ### Install the Yum priorities plugin
 
@@ -90,6 +90,25 @@ getting the OSG-supported versions.
 
         :::file
         plugins=1
+
+### Enable the "extras" OS repositories
+
+Some packages depend on packages in the "extras" repositories of your OS,
+so you must ensure that those repositories are enabled.
+
+The instructions for this vary based on your OS:
+
+- On Scientific Linux, install the `yum-conf-extras` RPM package,
+  and ensure that the `sl-extras` repo in `/etc/yum.repos.d/sl-extras.repo` is enabled.
+  
+- On CentOS, ensure that the `extras` repo in `/etc/yum.repos.d/CentOS-Base.repo` is enabled.
+
+- On Red Hat Enterprise Linux, ensure that the `Server-Extras` channel is enabled.
+
+!!! note
+    A repository is enabled if it has `enabled=1` in its definition,
+    or if the `enabled` line is missing
+    (i.e. it is enabled unless specified otherwise.)
 
 ### Install the EPEL repositories
 
@@ -115,28 +134,6 @@ You must install and enable these first.
     EPEL repository is either missing, or 99 or a higher number.
     The OSG repositories must have a better (numerically lower) priority than the EPEL repositories;
     otherwise, you might have dependency resolution ("depsolving") issues.
-
-### Automatic Updates
-
-For production services, we suggest only changing software versions during controlled downtime.
-Therefore we recommend security-only automatic updates or disabling automatic updates entirely.
-
-
-To enable only security related automatic updates:
-
--   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `USE_YUMSEC="true"`
-
--   On Enterprise Linux 7, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
-
-
-To disable automatic updates entirely:
-
--   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `ENABLED="false"`
-
--   On Enterprise Linux 7, run:
-
-        :::console
-        root@host # service yum-cron stop
 
 ### Install the OSG Repositories
 
@@ -171,6 +168,40 @@ gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-OSG
 ```
 
+Optional Configuration
+----------------------
+
+### Enable automatic security updates
+
+For production services, we suggest only changing software versions during controlled downtime.
+Therefore we recommend security-only automatic updates or disabling automatic updates entirely.
+
+
+To enable only security related automatic updates:
+
+-   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `USE_YUMSEC="true"`
+
+-   On Enterprise Linux 7, edit `/etc/yum/yum-cron.conf` and set `update_cmd = security`
+
+
+To disable automatic updates entirely:
+
+-   On Enterprise Linux 6, edit `/etc/sysconfig/yum-autoupdate` and set `ENABLED="false"`
+
+-   On Enterprise Linux 7, run:
+
+        :::console
+        root@host # service yum-cron stop
+
+### Configuring Spacewalk priorities ###
+
+Sites using [Spacewalk](https://spacewalkproject.github.io/) to manage RPM packages will need to configure OSG Yum
+repository priorities using their Spacewalk ID. For example, if the OSG 3.4 repository's Spacewalk ID is
+`centos_7_osg34_dev`, modify `/etc/yum/pluginconf.d/90-osg.conf` to include the following:
+
+```
+[centos_7_osg_34_dev]
+priority = 98
 
 Repository Mirrors
 ------------------
