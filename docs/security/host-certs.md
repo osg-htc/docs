@@ -27,7 +27,6 @@ We recommend requesting host certificates from one of the following CAs:
   a free, automated, and open CA frequently used for web services;
   see the [security team's position on Let's Encrypt](https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/)
   for more details.
-  
   Let's Encrypt is not IGTF-accredited so their certificates are not suitable for WLCG services.
 - If neither of the above options work for your site, the OSG also accepts all
   [IGTF-accredited CAs](https://repo.opensciencegrid.org/cadist/).
@@ -55,10 +54,8 @@ Requesting InCommon IGTF Host Certificates
 ------------------------------------------
 
 Many institutions in the United States already subscribe to InCommon and offer IGTF certificate services.
-
 If your institution is in the list of [InCommon subscribers](https://www.incommon.org/certificates/subscribers.html),
 continue with the instructions below.
-
 If your institution is not in the list, Let's Encrypt certificates do not meet your needs, and you do not have access to
 another IGTF CA subscription, please [contact us](/common/help.md).
 
