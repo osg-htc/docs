@@ -67,15 +67,19 @@ As with all OSG software installations, there are some one-time (per host) steps
 
 From a host that meets the above requirements, there are two options to get InCommon IGTF-accredited host certificates:
 
-1. Use the `osg-cert-request` tool to generate a Certificate Signing Request (CSR) and a private key.
-1. Use the `osg-incommon-cert-request` tool to request and retrieve certificates using the InCommon REST API.  
+1. [Requesting certificates from a Registration Authority (RA)](#requesting-certificates-from-a-registration-authority):
+   This requires a Certificate Signing Request (CSR), which can be generated with the `osg-cert-request` tool.
+1. [Requesting certificates as an RA](#requesting-certificates-as-a-registration-authority):
+   As an RA, you can request, approve, and retrieve certificates yourself through the InCommon REST API using the
+   `osg-incommon-cert-request` tool .
 
 Install the `osg-pki-tools` where both command line tools are available:
 
-        :::console
-        root@host # yum install osg-pki-tools
+```console
+root@host # yum install osg-pki-tools
+```
 
-### Generate a Certificate Signing Request (CSR)
+### Requesting certificates from a registration authority
 
 1. Generate a Certificate Signing Request (CSR) and private key using the `osg-cert-request` tool:
 
@@ -122,49 +126,56 @@ generated above.
         root@host # cp %RED%<PATH TO KEY>%ENDCOLOR% /etc/grid-security/hostkey.pem
         root@host # chmod 400 /etc/grid-security/hostkey.pem
 
-### Request certificates in bulk using osg-incommon-cert-request
+### Requesting certificates as a registration authority
+
+If you are a Registration Authority for your institution, skip ahead to [this section](#osg-incommon-cert-request).
+If you are not already a Registration Authority (RA) for your institution, you must request to be made one:
 
 1. Find your institution-specific InCommon contact
-   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/)),  
-1. Ask for a Department Registration Authority user with SSL auto approve enabled. 
-1. Ask for an email invitation for a Client Certificate. Download your InCommon user certificate and split the .p12 file into your private key and your certificate:
-        
-        Extracting the private key from the .p12 file
-        :::console
-        user@host $ openssl pkcs12 -in incommon_file.p12 -nocerts -out ~/path_to_dir/incommon_user_key.pem
-        
-        Extracting the certificate from the .p12 file
-        :::console
-        user@host $ openssl pkcs12 -in incommon_file.p12 -nokeys -out ~/path_to_dir/incommon_user_cert.pem
+   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/)),
+1. Request a Department Registration Authority user with SSL auto-approve enabled and client certificate:
+    - If they do not grant your request, you will not be able to request, approve, and retrieve certificates yourself.
+      Instead, you must [request certificates from your RA](#requesting-certificates-from-a-registration-authority).
+    - If they grant your request, you will receive an email with your client certificate.
+      Download the `.p12` file and extract the certificate and key:
 
-1. Request a certificate and generate the associated private key using the osg-incommon-cert-request:
+            :::console
+            user@host $ openssl pkcs12 -in incommon_file.p12 -nocerts -out ~/path_to_dir/incommon_user_key.pem
+            user@host $ openssl pkcs12 -in incommon_file.p12 -nokeys -out ~/path_to_dir/incommon_user_cert.pem
 
-        Requesting a certificate with a single hostname <HOSTNAME> 
+<a name="osg-incommon-cert-request"></a>
+
+Once you have RA privileges, you may request, approve, and retrieve host certificates using `osg-incommon-cert-request`:
+
+- Requesting a certificate with a single hostname `<HOSTNAME>`:
+
         :::console
-        user@host $ osg-incommoncert-request --username <INCOMMONLOGIN> \
+        user@host $ osg-incommoncert-request --username <INCOMMON_LOGIN> \
                     --cert ~/path_to_dir/incommon_user_cert.pem \
                     --pkey ~/path_to_dir/incommon_user_key.pem \ 
                     --hostname <HOSTNAME>
 
-        Requesting a certificate with Subject Alternative Names (SANs)
+- Requesting a certificate with Subject Alternative Names (SANs):
+
         :::console
-        user@host $ osg-incommoncert-request --username <INCOMMONLOGIN> \
+        user@host $ osg-incommoncert-request --username <INCOMMON_LOGIN> \
                     --cert ~/path_to_dir/incommon_user_cert.pem \
                     --pkey ~/path_to_dir/incommon_user_key.pem \
                     --hostname <HOSTNAME> \
                     --altname <ALTNAME> \
                     --altname <ALTNAME2>
 
-        Requesting certificates in bulk using a hostfile name
+- Requesting certificates in bulk using a hostfile name:
+
         :::console
         user@host $ osg-incommoncert-request --username <INCOMMONLOGIN> \
                     --cert ~/path_to_dir/incommon_user_cert.pem \
                     --pkey ~/path_to_dir/incommon_user_key.pem \
                     --hostfile ~/path_to_file/hostfile.txt
 
-        :::console
-        hostfilepath.txt example
+    Where the contents of `hostfile.txt` contain one hostname and any number of SANs per line:
 
+        :::console
         hostname01.yourdomain
         hostname02.yourdomain hostnamealias.yourdomain hostname03.yourdomain
         hostname04.yourdomain hostname05.yourdomain
