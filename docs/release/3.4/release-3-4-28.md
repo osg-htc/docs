@@ -45,7 +45,7 @@ Detailed changes are below. All of the documentation can be found [here](/index.
 
 ### GlideinWMS ###
 
-1. GlideinWMS 3.4 is the last release supporting Globus GRAM (a.k.a. GT2/GT5).
+1. GlideinWMS 3.4.5 is the last release supporting Globus GRAM (a.k.a. GT2/GT5).
 
 1. For new Singularity features introduced in GlideinWMS 3.4.1, all factories and frontends need to be >= 3.4.1.
 
