@@ -120,14 +120,48 @@ generated above.
 1. Find your institution-specific InCommon contact
    (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/)),  
 1. Ask for a Department Registration Authority user with SSL auto approve enabled. 
-1. Ask for an email invitation for a Client Certificate. Download your InCommon user certificate and split the .p12 file into your private key and your certificate.
+1. Ask for an email invitation for a Client Certificate. Download your InCommon user certificate and split the .p12 file into your private key and your certificate:
+        
+        Extracting the private key from the .p12 file
+        :::console
+        user@host $ openssl pkcs12 -in incommon_file.p12 -nocerts -out ~/path_to_dir/incommon_user_key.pem
+        
+        Extracting the certificate from the .p12 file
+        :::console
+        user@host $ openssl pkcs12 -in incommon_file.p12 -nokeys -out ~/path_to_dir/incommon_user_cert.pem
+
 1. Request a certificate and generate the associated private key using the osg-incommon-cert-request:
 
+        Requesting a certificate with a single hostname <HOSTNAME> 
         :::console
         user@host $ osg-incommoncert-request --username <INCOMMONLOGIN> \
-                    --cert <USERCERT> \
-                    --pkey <USERPRIVKEY> \ 
+                    --cert ~/path_to_dir/incommon_user_cert.pem \
+                    --pkey ~/path_to_dir/incommon_user_key.pem \ 
                     --hostname <HOSTNAME>
+
+        Requesting a certificate with Subject Alternative Names (SANs)
+        :::console
+        user@host $ osg-incommoncert-request --username <INCOMMONLOGIN> \
+                    --cert ~/path_to_dir/incommon_user_cert.pem \
+                    --pkey ~/path_to_dir/incommon_user_key.pem \
+                    --hostname <HOSTNAME> \
+                    --altname <ALTNAME> \
+                    --altname <ALTNAME2>
+
+        Requesting certificates in bulk using a hostfile name
+        :::console
+        user@host $ osg-incommoncert-request --username <INCOMMONLOGIN> \
+                    --cert ~/path_to_dir/incommon_user_cert.pem \
+                    --pkey ~/path_to_dir/incommon_user_key.pem \
+                    --hostfile ~/path_to_file/hostfile.txt
+
+        :::console
+        hostfilepath.txt example
+
+        hostname01.yourdomain
+        hostname02.yourdomain hostnamealias.yourdomain hostname03.yourdomain
+        hostname04.yourdomain hostname05.yourdomain
+
 
 Requesting Host Certificates Using [Let's Encrypt](https://letsencrypt.org/)
 ----------------------------------------------------------------------------
