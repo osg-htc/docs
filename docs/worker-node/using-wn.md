@@ -62,9 +62,22 @@ Custom variables and those that aren't listed may be defined in the [Local Setti
 
 ### OSG_WN_TMP ###
 
-Site administrators are responsible for ensuring that `$OSG_WN_TMP` is cleaned up. We recommend one of the following solutions:
+Site administrators are responsible for ensuring that `$OSG_WN_TMP` is cleaned up.
+We recommend one of the following solutions:
 
-- Use common batch-system capabilities to create a temporary, per-job directory that is cleaned up after each job is run.
+- **(Recommended)** Use batch-system capabilities to create directories in the job scratch directory and bind mount
+  them for the job so that the batch system performs the clean up.
+  For example, HTCondor has this ability through
+  [MOUNT\_UNDER\_SCRATCH](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_5Configuration_Macros.html#24738):
+
+        MOUNT_UNDER_SCRATCH = $(MOUNT_UNDER_SCRATCH), <PATH TO OSG_WN_TMP>
+
+    If using this method, space set aside for `OSG_WN_TMP` should be reallocated to the partition containing the job
+    scratch directories.
+    If using HTCondor, this will be the partition containing the path defined by the HTCondor `EXECUTE` configuration
+    variable.
+
+- Use batch-system capabilities to create a temporary, per-job directory that is cleaned up after each job is run.
 - Periodically purge the directory (e.g. `tmpwatch`).
 
 #### For VO managers ####
