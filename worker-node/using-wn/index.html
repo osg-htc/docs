@@ -2173,9 +2173,26 @@ Custom variables and those that aren't listed may be defined in the <a href="../
 </tbody>
 </table>
 <h3 id="osg_wn_tmp">OSG_WN_TMP<a class="headerlink" href="#osg_wn_tmp" title="Permanent link">&para;</a></h3>
-<p>Site administrators are responsible for ensuring that <code>$OSG_WN_TMP</code> is cleaned up. We recommend one of the following solutions:</p>
+<p>Site administrators are responsible for ensuring that <code>$OSG_WN_TMP</code> is cleaned up.
+We recommend one of the following solutions:</p>
 <ul>
-<li>Use common batch-system capabilities to create a temporary, per-job directory that is cleaned up after each job is run.</li>
+<li>
+<p><strong>(Recommended)</strong> Use batch-system capabilities to create directories in the job scratch directory and bind mount
+  them for the job so that the batch system performs the clean up.
+  For example, HTCondor has this ability through
+  <a href="http://research.cs.wisc.edu/htcondor/manual/v8.6/3_5Configuration_Macros.html#24738">MOUNT_UNDER_SCRATCH</a>:</p>
+<div class="codehilite"><pre><span></span><span class="nv">MOUNT_UNDER_SCRATCH</span> <span class="o">=</span> <span class="k">$(</span>MOUNT_UNDER_SCRATCH<span class="k">)</span>, &lt;PATH TO OSG_WN_TMP&gt;
+</pre></div>
+
+
+<p>If using this method, space set aside for <code>OSG_WN_TMP</code> should be reallocated to the partition containing the job
+scratch directories.
+If using HTCondor, this will be the partition containing the path defined by the HTCondor <code>EXECUTE</code> configuration
+variable.</p>
+</li>
+<li>
+<p>Use batch-system capabilities to create a temporary, per-job directory that is cleaned up after each job is run.</p>
+</li>
 <li>Periodically purge the directory (e.g. <code>tmpwatch</code>).</li>
 </ul>
 <h4 id="for-vo-managers">For VO managers<a class="headerlink" href="#for-vo-managers" title="Permanent link">&para;</a></h4>
