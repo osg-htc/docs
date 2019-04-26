@@ -38,7 +38,7 @@ the information noted below:
     | If you are primarily associated with... | Submit new tickets to...                                                                                        |
     |-----------------------------------------|-----------------------------------------------------------------------------------------------------------------|
     | LHC VOs                                 | [GGUS](https://ggus.eu)                                                                                         |
-    | Anyone else                             | [Freshdesk](https://support.opensciencegrid.org) or [help@opensciencegrid.org](mailto:help@opensciencegrid.org) |
+    | Anyone else                             | [help@opensciencegrid.org](mailto:help@opensciencegrid.org) |
 
 ### Community-specific support ###
 
