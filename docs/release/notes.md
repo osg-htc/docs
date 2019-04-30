@@ -9,6 +9,7 @@ Release Notes
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.28-2](/release/3.4/release-3-4-28-2) | 2019-04-30 | IGTF 1.98                                                               |
 | [3.4.28](/release/3.4/release-3-4-28)     | 2019-04-25 | XRootD 4.9.1, xrootd-hdfs 2.1.4, GlideinWMS 3.4.5, osg-flock 1.1, VO Package v89; Upcoming: HTCondor 8.8.2 |
 | [3.4.27-2](/release/3.4/release-3-4-27-2) | 2019-04-16 | VO Package v88                                                          |
 | [3.4.27](/release/3.4/release-3-4-27)     | 2019-04-11 | Globus GridFTP uses GCT, CVMFS 2.6.0, HTCondor-CE 3.2.2, cctools 7.0.11, osg-pki-tools 3.2.2; Upcoming: Singularity 3.1.1 |
