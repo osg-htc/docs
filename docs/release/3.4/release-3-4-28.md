@@ -27,7 +27,7 @@ This release contains:
 -   [VO Package v89](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-89)
     -  Added new GLOW certificate information
     -  Removed retired SBGrid certificate information
--   Upcoming Repository: [HTCondor 8.8.2](http://research.cs.wisc.edu/htcondor/manual/v8.8.2/StableReleaseSeries88.html)
+-   Upcoming Repository: [HTCondor 8.8.2](https://www-auth.cs.wisc.edu/lists/htcondor-world/2019/msg00005.shtml)
     -  Added support for `condor_ssh_to_job` for jobs running under non-setuid Singularity
     -  Added new Python bindings function to output ClassAds as JSON
     -  Various bug fixes. See detailed release notes for more information.
