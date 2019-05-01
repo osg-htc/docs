@@ -144,7 +144,7 @@ The mandatory variables to configure are:
 - `set resourcename = YOUR_RESOURCE_NAME`: the resource name registered with the OSG.
 
 
-### Add a service certificate
+### Ensure the xrootd service has a certificate
 
 The service will need a certificate for reporting and to authenticate to StashCache origins.
 The easiest solution for this is to use your host certificate and key as follows:
@@ -203,7 +203,7 @@ As soon as your issue has been resolved, revert any changes you have made to `/e
 By default, the unauthenticated stash-cache instance uses plain HTTP, not HTTPS.
 To use HTTPS:
 
-1.  Add a service certificate according to the [instructions above](#add-a-service-certificate)
+1.  Add a certificate according to the [instructions above](#ensure-the-xrootd-service-has-a-certificate)
 
 1.  Create a file named `/etc/xrootd/config.d/11-cache-https.cfg` with the following contents:
 
