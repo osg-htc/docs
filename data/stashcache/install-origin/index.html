@@ -757,8 +757,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-the-stashcache-origin_1" title="Installing the StashCache origin" class="md-nav__link">
-    Installing the StashCache origin
+  <a href="#installing-the-origin" title="Installing the Origin" class="md-nav__link">
+    Installing the Origin
   </a>
   
 </li>
@@ -2038,8 +2038,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installing-the-stashcache-origin_1" title="Installing the StashCache origin" class="md-nav__link">
-    Installing the StashCache origin
+  <a href="#installing-the-origin" title="Installing the Origin" class="md-nav__link">
+    Installing the Origin
   </a>
   
 </li>
@@ -2132,111 +2132,132 @@ to export its data to the StashCache data federation.</p>
 <p class="admonition-title">Note</p>
 <p>The <em>origin</em> must be registered with the OSG prior to joining the data federation. You may start the
 registration process prior to finishing the installation by <a href="#registering-the-origin">using this link</a> 
-along with the basic information like:</p>
+along with information like:</p>
 <ul>
-<li>Resource name and hostname.</li>
-<li>VO associated with this origin server (will be used to determine the origin's namespace prefix).</li>
-<li>Administrative and security contact. </li>
+<li>Resource name and hostname</li>
+<li>VO associated with this origin server (which will be used to determine the origin's namespace prefix)</li>
+<li>Administrative and security contact(s)</li>
+<li>Who (or what) will be allowed to access the VO's data</li>
+<li>Which caches will be allowed to cache the VO data</li>
 </ul>
 </div>
-<p>This guide covers the procedure for exporting world-readable data; publishing proprietary data is still
-experimental.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before starting the installation process, consider the following points:</p>
 <ul>
-<li><strong>Operating system:</strong> A RHEL 7 or compatible operating systems is <strong>strongly</strong> recommended.
-    If you have special needs that require you to run your origin server on a RHEL 6-based host,
-    contact us at support@opensciencegrid.org.</li>
-<li><strong>User IDs:</strong> If they do not exist already, the installation will create the Linux user IDs <code>condor</code> and <code>xrootd</code></li>
-<li><strong>Host certificate:</strong> The StashCache server uses a host certificate to advertise to a central collector.
+<li><strong>Operating system:</strong> A RHEL 7 or compatible operating system.</li>
+<li><strong>User IDs:</strong> If they do not exist already, the installation will create the Linux user IDs <code>condor</code> and <code>xrootd</code>;
+  only the <code>xrootd</code> user is utilized for the running daemons.</li>
+<li><strong>Host certificate:</strong> The origin service uses a host certificate to authenticate with the caches it serves.
   The <a href="../../../security/host-certs/">host certificate documentation</a> provides more information on setting up host
   certificates.</li>
-<li><strong>Network ports:</strong> The StashCache Origin service requires the following ports open:<ul>
+<li><strong>Network ports:</strong> The origin service requires the following ports open:</li>
 <li>Inbound TCP port 1094 for file access via the XRootD protocol</li>
 <li>Outbound TCP port 1213 to <code>redirector.osgstorage.org</code> for connecting to the data federation</li>
-<li>Outbound UDP port 9619 for reporting to <code>collector1.opensciencegrid.org</code> and <code>collector2.opensciencegrid.org</code></li>
-</ul>
-</li>
-<li><strong>Hardware requirements:</strong> We recommend that a StashCache origin has at least 1Gbps connectivity and 8GB of
-  RAM.  We suggest that several gigabytes of local disk space be available for log files.</li>
+<li>Outbound UDP port 9930 for reporting to <code>xrd-report.osgstorage.org</code> and <code>xrd-mon.osgstorage.org</code> for monitoring.</li>
+<li><strong>Hardware requirements:</strong> We recommend that an origin has at least 1Gbps connectivity and 8GB of RAM.
+  We suggest that several gigabytes of local disk space be available for log files,
+  although some logging verbosity can be reduced.</li>
 </ul>
 <p>As with all OSG software installations, there are some one-time steps to prepare in advance:</p>
 <ul>
-<li>Ensure the host has <a href="../../../release/supported_platforms/">a supported operating system</a>.
-  A RHEL 7-based operating system is strongly recommended.</li>
 <li>Obtain root access to the host</li>
 <li>Prepare <a href="../../../common/yum/">the required Yum repositories</a></li>
 <li>Install <a href="../../../common/ca/">CA certificates</a></li>
 </ul>
-<h2 id="installing-the-stashcache-origin_1">Installing the StashCache origin<a class="headerlink" href="#installing-the-stashcache-origin_1" title="Permanent link">&para;</a></h2>
-<p>The StashCache daemon consists of an XRootD server and an HTCondor-based service for collecting and reporting
-monitoring data about the origin. To simplify installation, OSG provides convenience RPMs that install all required
+<h2 id="installing-the-origin">Installing the Origin<a class="headerlink" href="#installing-the-origin" title="Permanent link">&para;</a></h2>
+<p>The origin service consists of one or more XRootD daemons and their dependencies for the authentication infrastructure.
+To simplify installation, OSG provides convenience RPMs that install all required
 software with a single command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install stashcache-origin-server
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install stash-origin
 </pre></div>
 
 
-<p>For this installation guide, we assume that the data to be exported to the federation is mounted at <code>/stash</code>
+<p>For this installation guide, we assume that the data to be exported to the federation is mounted at <code>/mnt/stash</code>
 and owned by the <code>xrootd:xrootd</code> user.</p>
 <h2 id="configuring-the-origin-server">Configuring the Origin Server<a class="headerlink" href="#configuring-the-origin-server" title="Permanent link">&para;</a></h2>
-<p>The <code>stashcache-daemon</code> package provides a default configuration file,
-<code>/etc/xrootd/xrootd-stashcache-origin-server.cfg</code>, which must be customized for your origin.</p>
-<p>The most common lines to customize are:</p>
-<ul>
-<li><code>oss.localroot /stash</code>: Change the <code>localroot</code> to the location where your data is mounted on
-  the origin server; default is <code>/stash</code>.</li>
-<li><code>all.export /&lt;YOUR VO&gt;</code>: A sub-directory within the <code>localroot</code> directory that will be exported.
-  If multiple directories must be exported, you may specify <code>all.export</code> multiple times.</li>
-</ul>
-<p>For example, if the HCC VO would like to set up an origin server exporting from the mountpoint <code>/mnt/bigdata</code>,
-but only export the subdirectories <code>/mnt/bigdata/hcc/bio/datasets</code> and <code>/mnt/bigdata/hcc/hep/generators</code>,
-they would use the following configuration:</p>
-<div class="codehilite"><pre><span></span>oss.localroot /mnt/bigdata
-all.export /hcc/bio/datasets
-all.export /hcc/hep/generators
-</pre></div>
-
-
-<p>With this configuration, the data under <code>/mnt/bigdata/hcc/bio/datasets</code> would be available under the StashCache path
-<code>/hcc/bio/datasets</code>, the data under <code>/mnt/bigdata/hcc/hep/generators</code> would be available under the StashCache path
-<code>/hcc/hep/generators</code>, and no other data would be available via StashCache.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The StashCache namespace is <em>global</em> within a data federation.
-Directories you export <strong>must not</strong> collide with directories provided by other origin servers.</p>
-<p>The best way to do this is to create a directory named after your VO or project,
-place all files you want to distribute within that directory,
-and export only that directory or its subdirectories.</p>
-</div>
-<h2 id="managing-the-origin-service">Managing the Origin Service<a class="headerlink" href="#managing-the-origin-service" title="Permanent link">&para;</a></h2>
-<p>The origin service consists of the following systemd units:</p>
+<p>The <code>stash-origin</code> package provides a default configuration files in
+<code>/etc/xrootd/xrootd-stash-origin.cfg</code> and <code>/etc/xrootd/config.d</code>.
+Administrators may provide additional configuration by placing files in <code>/etc/xrootd/config.d</code>
+of the form <code>/etc/xrootd/config.d/1*.cfg</code> (for directives that need to be processed BEFORE the OSG configuration)
+or <code>/etc/xrootd/config.d/9*.cfg</code> (for directives that are processed AFTER the OSG configuration).</p>
+<p>You <em>must</em> configure every variable in <code>/etc/xrootd/10-common-site-local.cfg</code> and <code>/etc/xrootd/10-origin-site-local.cfg</code>.</p>
+<p>The mandatory variables to configure are:</p>
 <table>
 <thead>
 <tr>
-<th><strong>Software</strong></th>
+<th>File</th>
+<th>Config line</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10-common-site-local.cfg</td>
+<td><code>set rootdir = /mnt/stash</code></td>
+<td>The mounted filesystem path to export; this document calls it <code>/mnt/stash</code></td>
+</tr>
+<tr>
+<td>10-common-site-local.cfg</td>
+<td><code>set resourcename = YOUR_RESOURCE_NAME</code></td>
+<td>The resource name registered with OSG</td>
+</tr>
+<tr>
+<td>10-origin-site-local.cfg</td>
+<td><code>set originexport = /VO</code></td>
+<td>The directory relative to <code>rootdir</code> that is the top of the exported namespace for the origin services</td>
+</tr>
+</tbody>
+</table>
+<p>For example, if the HCC VO would like to set up an origin server exporting from the mount point <code>/mnt/stash</code>,
+and HCC's registered namespace is <code>/hcc</code>, then the following would be set in <code>10-common-site-local.cfg</code>:</p>
+<div class="codehilite"><pre><span></span>set rootdir = /mnt/stash
+set resourcename = HCC_STASH_ORIGIN
+</pre></div>
+
+
+<p>And the following would be set in <code>10-origin-site-local.cfg</code>:</p>
+<div class="codehilite"><pre><span></span>set originexport = /hcc
+</pre></div>
+
+
+<p>With this configuration, the data under <code>/mnt/stash/hcc/bio/datasets</code> would be available under the StashCache path
+<code>/hcc/bio/datasets</code> and the data under <code>/mnt/stash/hcc/hep/generators</code> would be available under the StashCache path
+<code>/hcc/hep/generators</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you want to run origins for authenticated and unauthenticated data,
+you <strong>must</strong> run them on separate hosts.
+This requires registering a resource for each host.
+This requirement will be removed in a future version of StashCache.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The StashCache namespace is <em>global</em> within a data federation.
+Directories you export <strong>must not</strong> collide with directories provided by other origin servers; this is
+why the explicit registration is required.</p>
+</div>
+<h2 id="managing-the-origin-service">Managing the Origin Service<a class="headerlink" href="#managing-the-origin-service" title="Permanent link">&para;</a></h2>
+<p>The origin service consists of the following SystemD units that you must directly manage:</p>
+<table>
+<thead>
+<tr>
 <th><strong>Service name</strong></th>
 <th><strong>Notes</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>XRootD</td>
-<td><code>xrootd@stashcache-origin-server.service</code></td>
-<td>The xrootd daemon, which performs the data transfers</td>
+<td><code>xrootd@stash-origin.service</code></td>
+<td>Performs data transfers (unauthenticated instance)</td>
 </tr>
 <tr>
-<td>XRootD</td>
-<td><code>cmsd@stashcache-origin-server.service</code></td>
-<td>The "cluster management service" daemon, which integrates the origin into the data federation.</td>
-</tr>
-<tr>
-<td>Fetch CRL</td>
-<td><code>fetch-crl-boot</code> and <code>fetch-crl-cron</code></td>
-<td>See <a href="../../../common/ca#managing-fetch-crl-services">CA documentation</a> for more info</td>
+<td><code>xrootd@stash-origin-auth.service</code></td>
+<td>Performs data transfers (authenticated instance)</td>
 </tr>
 </tbody>
 </table>
-<p>These services must be managed with <code>systemctl</code>.  As a reminder, here are common service commands (all run as <code>root</code>):</p>
+<p>These services must be managed with <code>systemctl</code> and may start additional services as dependencies.
+As a reminder, here are common service commands (all run as <code>root</code>):</p>
 <table>
 <thead>
 <tr>
@@ -2250,7 +2271,7 @@ and export only that directory or its subdirectories.</p>
 <td align="left"><code>systemctl start &lt;SERVICE-NAME&gt;</code></td>
 </tr>
 <tr>
-<td align="left">Stop a  service</td>
+<td align="left">Stop a service</td>
 <td align="left"><code>systemctl stop &lt;SERVICE-NAME&gt;</code></td>
 </tr>
 <tr>
@@ -2260,6 +2281,37 @@ and export only that directory or its subdirectories.</p>
 <tr>
 <td align="left">Disable a service from starting on boot</td>
 <td align="left"><code>systemctl disable &lt;SERVICE-NAME&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>In addition, the origin service automatically uses the following SystemD units:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Service name</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cmsd@stash-origin.service</code></td>
+<td>Integrates the origin into the data federation (unauthenticated instance)</td>
+</tr>
+<tr>
+<td><code>cmsd@stash-origin-auth.service</code></td>
+<td>Integrates the origin into the data federation (authenticated instance)</td>
+</tr>
+<tr>
+<td><code>stash-origin-authfile.timer</code></td>
+<td>Updates the authorization files periodically</td>
+</tr>
+<tr>
+<td><code>xcache-reporter.timer</code></td>
+<td>Reports usage stats periodically</td>
+</tr>
+<tr>
+<td><code>xrootd-renew-proxy.timer</code></td>
+<td>Renews grid proxy periodically</td>
 </tr>
 </tbody>
 </table>
