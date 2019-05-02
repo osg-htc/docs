@@ -114,13 +114,8 @@ To simplify installation, OSG provides convenience RPMs that install all require
 packages with a single command:
 
 ```console
-root@host # yum install --enablerepo=osg-testing stash-cache
+root@host # yum install stash-cache
 ```
-
-!!! note
-    This document covers a completely overhauled stash cache service based on XCache 1.0.2;
-    while this has not yet been released into the OSG production repository,
-    we strongly recommend using this version for configuration and accounting improvements.
 
 Configuring the Cache
 ---------------------
