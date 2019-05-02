@@ -21,17 +21,18 @@ This release contains:
         OSG Topology service
     -   automatically renew cache proxies
 
-    XCache is only available for EL7, and EL7 is now a requirement for
-    a cache or origin to join the StashCache Data Federation.
-
-    Because of the extensive changes to the configuration, sites upgrading
-    their caches or origins to this version should consider the upgrade to
-    be the same amount of work as a reinstall of the service.
-
-    The [overview document](https://opensciencegrid.org/docs/data/stashcache/overview/)
+    This [overview document](https://opensciencegrid.org/docs/data/stashcache/overview/)
     contains links to instructions for setting up new
     caches and origins, and instructions for VOs on how to get their data
     into the StashCache Federation.
+
+    !!! note
+        -   XCache is only available for EL7, and EL7 is now a requirement for
+            a cache or origin to join the StashCache Data Federation.
+
+        -   Because of the extensive changes to the configuration, sites upgrading
+            their caches or origins to this version should consider the upgrade to
+            be the same amount of work as a reinstall of the service.
 
 -   Update MyProxy to use the Grid Community Toolkit (GCT)
 
