@@ -144,13 +144,10 @@ For instructions on upgrading from one OSG series to another, see the
 Install the OSG repositories:
 
     :::console
-    root@host # rpm -Uvh <URL>
-
-Where `<URL>` is one of the following:
-
-| Series      |                  EL6 URL (for RHEL 6, CentOS 6, or SL 6)                  |                  EL7 URL (for RHEL 7, CentOS 7, or SL 7)                  |
-|:------------|:-------------------------------------------------------------------------:|:-------------------------------------------------------------------------:|
-| **OSG 3.4** | `https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm` | `https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm` |
+    ## EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
+    root@host # rpm -Uvh https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm
+    ## EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
+    root@host # rpm -Uvh https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm
 
 The only OSG repository enabled by default is the release one.
 If you want to [enable another one](#repositories) (e.g. `osg-testing`), then edit its file
