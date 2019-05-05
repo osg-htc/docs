@@ -7,7 +7,7 @@ Before continuing with the overview, make sure that you are familiar with the fo
 -   An OSG site plan
     -   What is a batch system and which one will you use ([HTCondor](http://htcondor.org/), PBS, LSF, SGE, or
         [SLURM](https://slurm.schedmd.com/))?
-    -   Security in the OSG via [GSI](https://gridcf.org/gct-docs/gsic/index.html) (i.e.,
+    -   Security in the OSG via [GSI](https://gridcf.org/gct-docs/latest/gsic/index.html) (i.e.,
         [Certificate authorities](https://en.wikipedia.org/wiki/Certificate_authority), user and host
         [certificates](https://en.wikipedia.org/wiki/Public_key_certificate), proxies)
 -   Pilot jobs, frontends, and factories (i.e., [GlideinWMS](http://glideinwms.fnal.gov/doc.prd/index.html),
@@ -53,20 +53,19 @@ in turn notifies the original submitter (e.g., job factory) of any updates.
 When the job completes, files are transferred along the same chain: from the batch system to the CE, then from the CE to
 the original submitter.
 
-### Hosted HTCondor-CE over SSH
+### Hosted CE over SSH
 
-The hosted HTCondor-CE is intended for small sites or as an introduction to the OSG.
-The OSG configures and maintains the HTCondor-CE on behalf of the site.
-The hosted HTCondor-CE is a special configuration of HTCondor-CE that can submit jobs to a remote cluster over SSH.
+The Hosted CE is intended for small sites or as an introduction to the OSG.
+The OSG configures and maintains an HTCondor-CE on behalf of the site.
+The Hosted CE is a special configuration of HTCondor-CE that can submit jobs to a remote cluster over SSH.
 It provides a simple starting point for opportunistic resource owners that want to start contributing to the OSG with
 minimal effort: an organization will be able to accept OSG jobs by allowing SSH access to a submit node in their cluster.
 
-If your site intends to run thousands of OSG jobs, you will need to host a standard
-[HTCondor-CE](/compute-element/install-htcondor-ce) because the hosted HTCondor-CE has not yet been optimized for such
+If your site intends to run over 10,000 concurrent OSG jobs, you will need to host your own
+[HTCondor-CE](/compute-element/install-htcondor-ce) because the Hosted CE has not yet been optimized for such
 loads.
 
-To discuss using a hosted SSH HTCondor-CE, contact OSG User Support at
-[user-support@opensciencegrid.org](mailto:user-support@opensciencegrid.org).
+If you are interested in a Hosted CE solution, please follow the instructions on [this page](/compute-element/hosted-ce).
 
 ![HTCondor-CE-Bosco](/img/HTCondorCEBosco.png)
 
@@ -148,5 +147,5 @@ Once the basic installation is done, additional activities include:
 -   [Setting up job routes to customize incoming jobs](/compute-element/job-router-recipes)
 -   [Submitting jobs to a HTCondor-CE](/compute-element/submit-htcondor-ce) 
 -   [Troubleshooting the HTCondor-CE](/compute-element/troubleshoot-htcondor-ce)
--   Register the CE with OIM
+-   [Register the CE](/compute-element/install-htcondor-ce#registering-the-ce)
 -   Register with the OSG GlideinWMS factories and/or the ATLAS AutoPyFactory

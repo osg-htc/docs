@@ -28,7 +28,8 @@ This release contains:
     with host certificates signed by a VO.  Due to the expiration of service
     certificates starting in April 2019, it is important to update to this
     version to continue to receive OSG jobs.
-
+    Be sure to watch out for `/etc/condor-ce/condor_mapfile.rpmnew` and merge
+    any changes into `/etc/condor-ce/condor_mapfile`.
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.22%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 

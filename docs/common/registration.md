@@ -33,10 +33,14 @@ To register as an OSG contact or add your GitHub ID to your pre-existing contact
 - **If you cannot find your name**, send an email to <mailto:help@opensciencegrid.org> with the following information:
     - Full name
     - Primary email address
-    - GitHub ID
+    - GitHub user name
     - Description of your OSG affiliation, e.g. FermiGrid site administrator, senior scientist for the DUNE experiment,
       etc.
     - Contact information of site, virtual organization, or project sponsor to prove your affiliation
+
+    !!! info "Privacy"
+        The OSG treats any email addresses and phone numbers as confidential data but does not make any guarantees of
+        privacy.
 
 Registering Resources
 ---------------------
@@ -175,8 +179,13 @@ To retire an already registered resource, choose one of the following, depending
 Registering Resource Downtimes
 ------------------------------
 
-Resource downtime is a period of time for which one or more of the grid services of a registered resource are
+Resource downtime is a finite period of time for which one or more of the grid services of a registered resource are
 unavailable.
+
+!!! note
+    If your registered resource is expected to be in downtime for an undetermined amount of time, set `Active: False`
+    in the resource instead.
+
 Downtimes are stored in YAML files alongside the resource group YAML files as described [here](#registering-resources).
 
 For example, downtimes for resources in the `CHTC-Slurm-HPC` resource group of the `CHTC` site at the `University of
@@ -335,7 +344,7 @@ To modify a VO's information or register a new VO, follow the instructions below
         access to the OSG copy of the topology data, which is why you are creating a pull request.
 
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
-   the [project template](https://github.com/opensciencegrid/topology/blob/master/template-projects.yaml) as a guide.
+   the [project template](https://github.com/opensciencegrid/topology/blob/master/template-project.yaml) as a guide.
    You may leave any `ID` fields blank.
    If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.
 

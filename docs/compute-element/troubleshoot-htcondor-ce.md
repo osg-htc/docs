@@ -150,14 +150,33 @@ You may see error messages like the following in your [SchedLog](#schedlog):
 **Next actions**
 
 1.  **Check voms-mapfile or grid-mapfile** and ensure that the user's DN or VOMS attributes are known to your
-    [authentication method](install-htcondor-ce#configuring-authentication)
-2.  **Check for lcmaps errors** in `/var/log/messages`
-3.  **If you do not see helpful error messages in `/var/log/messages`,** adjust the debug level by adding `export LCMAPS_DEBUG_LEVEL=5` to `/etc/sysconfig/condor-ce`, restarting the condor-ce service, and checking `/var/log/messages` for errors again.
+    [authentication method](install-htcondor-ce#configuring-authentication), and that the mapped users exist
+    on your CE and cluster.
+1.  **Check for lcmaps errors** in `/var/log/messages`
+1.  **If you do not see helpful error messages in `/var/log/messages`,** adjust the debug level by adding `export LCMAPS_DEBUG_LEVEL=5` to `/etc/sysconfig/condor-ce`, restarting the condor-ce service, and checking `/var/log/messages` for errors again.
 
 ### Jobs stay idle on the CE
 
 Check the following subsections in order, but note that jobs may take several minutes or longer to run if the CE is
 busy.
+
+#### Idle jobs on CE: Make sure the underlying batch system can run jobs
+
+HTCondor-CE delegates jobs to your batch system, which is then responsible for matching jobs to worker nodes.
+If you cannot manually submit jobs (e.g., `condor_submit`, `qsub`) on the CE host to your batch system, then HTCondor-CE
+won't be able to either.
+
+**Procedure**
+
+1.  Manually create and submit a simple job (e.g., one that runs `sleep`)
+2.  Check for errors in the submission itself
+3.  Watch the job in the batch system queue (e.g., `condor_q`, `qstat`)
+4.  If the job does not run, check for errors on the batch system
+
+**Next actions**
+
+Consult troubleshooting documentation or support avenues for your batch system.
+Once you can run simple manual jobs on your batch system, try submitting to the HTCondor-CE again.
 
 #### Idle jobs on CE: Is the job router handling the incoming job?
 
@@ -201,25 +220,6 @@ Look for `gm state change…` lines to figure out where the issures are occuring
 
     If the script fails, [request help](#getting-help) from the OSG.
 
-
-#### Idle jobs on CE: Make sure the underlying batch system can run jobs
-
-HTCondor-CE communicates directly with an HTCondor batch system schedd, so if jobs are not running, examine the
-[SchedLog](#schedlog) and diagnose the problem from there. 
-For other batch systems, the BLAHP is used to submit jobs using your batch system’s job submission binaries, whose
-location is specified in `/etc/blah.config`.
-
-**Procedure**
-
-1.  Manually create and submit a simple job (e.g., one that runs `sleep`)
-2.  Check for errors in the submission itself
-3.  Watch the job in the batch system queue (e.g., using `condor_q`)
-4.  If the job does not run, check for errors on the batch system
-
-**Next actions**
-
-If the underlying batch system does not run a simple manual job, it will probably not run a job coming from HTCondor-CE.
-Once you can run simple manual jobs on your batch system, try submitting to the HTCondor-CE again.
 
 #### Idle jobs on CE: Verify ability to change permissions on key files
 

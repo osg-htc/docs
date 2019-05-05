@@ -26,7 +26,7 @@ For the CILogon RA send email to [ca@cilogon.org](mailto:ca@cilogon.org).
 Additional responsibilities required by the CILogon CA are given on [their page](http://ca.cilogon.org/responsibilities).  
 
 
-### Getting a Certificate from CILogon
+### Getting a certificate from CILogon
 
 You will have to obtain your user certificate using the [CILogon web UI](https://cilogon.org/).
 Follow the steps below to get an user certificate:

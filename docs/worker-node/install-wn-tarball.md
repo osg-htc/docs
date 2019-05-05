@@ -23,12 +23,6 @@ Download the WN Client
 
 Please pick the `osg-wn-client` tarball that is appropriate for your distribution and architecture. You will find them in <https://repo.opensciencegrid.org/tarball-install/> .
 
-The latest available the tarballs for OSG 3.3 are:
-
--   [Binaries for 32-bit RHEL6](https://repo.opensciencegrid.org/tarball-install/3.3/osg-wn-client-latest.el6.i386.tar.gz)
--   [Binaries for 64-bit RHEL6](https://repo.opensciencegrid.org/tarball-install/3.3/osg-wn-client-latest.el6.x86_64.tar.gz)
--   [Binaries for RHEL7](https://repo.opensciencegrid.org/tarball-install/3.3/osg-wn-client-latest.el7.x86_64.tar.gz)
-
 For OSG 3.4:
 
 -   [Binaries for 64-bit RHEL6](https://repo.opensciencegrid.org/tarball-install/3.4/osg-wn-client-latest.el6.x86_64.tar.gz)
@@ -41,7 +35,7 @@ Install the WN Client
 2.  Move the directory that was created to where you want the tarball client to be.
 3.  Run `osg-post-install` (**`<PATH_TO_CLIENT>/osg/osg-post-install`**) to fix the directories in the installation.
 4.  Source the setup **`source <PATH_TO_CLIENT>/setup.sh`** (or **`setup.csh`** depending on the shell).
-5.  Download and set up CA certificiates using **`osg-ca-manage`** (See the [CA management documentation](/security/certificate-management) for the available options).
+5.  Download and set up CA certificates using **`osg-ca-manage`** (See the [CA management documentation](/security/certificate-management) for the available options).
 6.  Download CRLs using **`fetch-crl`**.
 
 !!! warning
@@ -100,7 +94,7 @@ You might want to configure proxy settings in `$OSG_LOCATION/etc/fetch-crl.conf`
 To enable the CRL updates, you must edit your cron with **`crontab -e`** and add the lines above.  To disable, remove
 the lines from the `crontab`.
 
-Validing the Worker Node Client
+Validating the Worker Node Client
 -------------------------------
 
 To verify functionality of the worker node client, you will need to submit a test job against your CE and verify the job's output.

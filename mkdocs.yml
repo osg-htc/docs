@@ -15,6 +15,7 @@ pages:
 - Site Planning: 'site-planning.md'
 - Compute Element:
   - 'HTCondor-CE Overview': 'compute-element/htcondor-ce-overview.md'
+  - 'Request a Hosted CE': 'compute-element/hosted-ce.md'
   - 'Install HTCondor-CE': 'compute-element/install-htcondor-ce.md'
   - 'Job Router Recipes': 'compute-element/job-router-recipes.md'
   - 'Troubleshooting HTCondor-CE': 'compute-element/troubleshoot-htcondor-ce.md'
@@ -26,6 +27,7 @@ pages:
   - 'Install from OASIS': 'worker-node/install-wn-oasis.md'
   - 'Install CVMFS': 'worker-node/install-cvmfs.md'
   - 'Install Singularity': 'worker-node/install-singularity.md'
+  - 'Using WN Containers': 'worker-node/using-wn-containers.md'
 - Data:
   - HTTP & CVMFS:
     - 'Install Squid HTTP Cache': 'data/frontier-squid.md'
@@ -44,9 +46,13 @@ pages:
     - 'StashCache Overview': 'data/stashcache/overview.md'
     - 'Install StashCache Cache': 'data/stashcache/install-cache.md'
     - 'Install StashCache Origin': 'data/stashcache/install-origin.md'
+    - 'Getting VO data into StashCache': 'data/stashcache/vo-data.md'
   - HDFS:
     - 'HDFS Overview': 'data/hadoop-overview.md'
     - 'Install HDFS': 'data/install-hadoop.md'
+- Submit:
+  - Flocking:
+    - 'Flock to OSG': 'submit/osg-flock.md'
 - Security:
   - 'LCMAPS VOMS authentication': 'security/lcmaps-voms-authentication.md'
   - 'Host Certificates': 'security/host-certs.md'
@@ -54,7 +60,7 @@ pages:
   - 'Certificate Management Reference': 'security/certificate-management.md'
 - Common:
   - 'CA Certificates': 'common/ca.md'
-  - 'Yum Repos': 'common/yum.md'
+  - 'OSG Yum Repos': 'common/yum.md'
   - 'Configuration with OSG-Configure': 'other/configuration-with-osg-configure.md'
   - 'Registration': 'common/registration.md'
 - Other:
@@ -67,6 +73,18 @@ pages:
 - Release Information:
   - 'Release Note Overview': 'release/notes.md'
   - 3.4 Release Notes:
+    - 'OSG Release 3.4.29': 'release/3.4/release-3-4-29.md'
+    - 'OSG Release 3.4.28-2': 'release/3.4/release-3-4-28-2.md'
+    - 'OSG Release 3.4.28': 'release/3.4/release-3-4-28.md'
+    - 'OSG Release 3.4.27-2': 'release/3.4/release-3-4-27-2.md'
+    - 'OSG Release 3.4.27': 'release/3.4/release-3-4-27.md'
+    - 'OSG Release 3.4.26-2': 'release/3.4/release-3-4-26-2.md'
+    - 'OSG Release 3.4.26': 'release/3.4/release-3-4-26.md'
+    - 'OSG Release 3.4.25': 'release/3.4/release-3-4-25.md'
+    - 'OSG Release 3.4.24-2': 'release/3.4/release-3-4-24-2.md'
+    - 'OSG Release 3.4.24': 'release/3.4/release-3-4-24.md'
+    - 'OSG Release 3.4.23': 'release/3.4/release-3-4-23.md'
+    - 'OSG Release 3.4.22-2': 'release/3.4/release-3-4-22-2.md'
     - 'OSG Release 3.4.22': 'release/3.4/release-3-4-22.md'
     - 'OSG Release 3.4.21': 'release/3.4/release-3-4-21.md'
     - 'OSG Release 3.4.20': 'release/3.4/release-3-4-20.md'
@@ -109,10 +127,8 @@ pages:
     - 'OSG Release 3.4.0': 'release/3.4/release-3-4-0.md'
   - 'OSG Release Series': 'release/release_series.md'
   - 'Supported Platforms': 'release/supported_platforms.md'
-  - 'OSG upcoming software': 'other/install-osg-upcoming-software.md'
   - 'Yum Basics': 'release/yum-basics.md'
   - 'RPM Signing': 'release/signing.md'
-  - 'Contrib Software': 'release/contrib.md'
 - Monitoring:
   - 'Install RSV': 'monitoring/install-rsv.md'
   - 'Advanced RSV Configuration': 'monitoring/advanced-rsv-configuration.md'
