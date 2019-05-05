@@ -221,8 +221,8 @@ and does not work in unprivileged mode.
 
 Set these options in `/etc/singularity/singularity.conf`:
 
-        use overlay = no
-        use underlay = yes
+        enable overlay = no
+        enable underlay = yes
 
 !!! warning
     If you modify `/etc/singularity/singularity.conf`, be careful with
