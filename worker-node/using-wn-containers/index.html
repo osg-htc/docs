@@ -2050,14 +2050,14 @@
 </ul>
 <h2 id="building-upon-the-container">Building Upon the Container<a class="headerlink" href="#building-upon-the-container" title="Permanent link">&para;</a></h2>
 <p>You may base the container on the OSG worker node by including it inside your <code>Dockerfile</code>:</p>
-<div class="codehilite"><pre><span></span>FROM opensciencegrid/osg-wn:latest
+<div class="codehilite"><pre><span></span><span class="k">FROM</span> <span class="n">opensciencegrid</span><span class="o">/</span><span class="n">osg</span><span class="o">-</span><span class="n">wn</span><span class="p">:</span><span class="n">latest</span>
 </pre></div>
 
 
 <p>You can replace <code>latest</code> with any tag listed above.</p>
 <h2 id="perform-testing">Perform Testing<a class="headerlink" href="#perform-testing" title="Permanent link">&para;</a></h2>
 <p>You may perform testing from within the OSG worker node envionment by running the command:</p>
-<div class="codehilite"><pre><span></span>root@host # docker run -ti --rm opensciencegrid/osg-wn:latest /bin/bash
+<div class="codehilite"><pre><span></span><span class="n">root</span><span class="nv">@host</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">-</span><span class="n">ti</span><span class="w"> </span><span class="c1">--rm opensciencegrid/osg-wn:latest /bin/bash</span>
 </pre></div>
                 
                   

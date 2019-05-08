@@ -3471,14 +3471,14 @@ Before troubleshooting, we recommend increasing the log level:</p>
 <ol>
 <li>
 <p>Write the following into <code>/etc/condor-ce/config.d/99-local.conf</code> to increase the log level for all daemons:</p>
-<div class="codehilite"><pre><span></span>ALL_DEBUG = D_ALWAYS:2 D_CAT
+<div class="codehilite"><pre><span></span><span class="n">ALL_DEBUG</span> <span class="o">=</span> <span class="n">D_ALWAYS</span><span class="p">:</span><span class="mi">2</span> <span class="n">D_CAT</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>Ensure that the configuration is in place:</p>
-<div class="codehilite"><pre><span></span>root@host # condor_ce_reconfig
+<div class="codehilite"><pre><span></span><span class="n">root</span><span class="nv">@host</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">condor_ce_reconfig</span><span class="w"></span>
 </pre></div>
 
 
@@ -3610,7 +3610,7 @@ Look for <code>gm state change…</code> lines to figure out where the issures a
 all. 
 Spool permission errors can appear in the <a href="#schedlog">SchedLog</a> and the <a href="#jobrouterlog">JobRouterLog</a>.</p>
 <p><strong>Symptoms</strong></p>
-<div class="codehilite"><pre><span></span>09/17/14 14:45:42 Error: Unable to chown &#39;/var/lib/condor-ce/spool/1/0/cluster1.proc0.subproc0/env&#39; from 12345 to 54321
+<div class="codehilite"><pre><span></span><span class="mi">09</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">14</span> <span class="mi">14</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mi">42</span> <span class="n">Error</span><span class="p">:</span> <span class="n">Unable</span> <span class="k">to</span> <span class="n">chown</span> <span class="s1">&#39;/var/lib/condor-ce/spool/1/0/cluster1.proc0.subproc0/env&#39;</span> <span class="k">from</span> <span class="mi">12345</span> <span class="k">to</span> <span class="mi">54321</span>
 </pre></div>
 
 
@@ -3707,8 +3707,8 @@ manual</a>.</p>
 <li>Ensure jobs submitted locally, from the CE host, are submitted with <code>universe = vanilla</code></li>
 <li>
 <p>Ensure jobs submitted from a remote submit point are submitted with:</p>
-<div class="codehilite"><pre><span></span>universe = grid
-grid_resource = condor condorce.example.com condorce.example.com:9619
+<div class="codehilite"><pre><span></span><span class="n">universe</span> <span class="o">=</span> <span class="n">grid</span>
+<span class="n">grid_resource</span> <span class="o">=</span> <span class="n">condor</span> <span class="n">condorce</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">com</span> <span class="n">condorce</span><span class="p">.</span><span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="p">:</span><span class="mi">9619</span>
 </pre></div>
 
 
@@ -3747,7 +3747,7 @@ The methods for finding the resultant job ID differs between batch systems.</p>
 <h4 id="non-htcondor-batch-systems">Non-HTCondor batch systems<a class="headerlink" href="#non-htcondor-batch-systems" title="Permanent link">&para;</a></h4>
 <p>When HTCondor-CE records the corresponding batch system job ID, it is written in the form <code>&lt;BATCH-SYSTEM&gt;/&lt;DATE&gt;/&lt;JOB
 ID&gt;</code>:</p>
-<div class="codehilite"><pre><span></span>lsf/20141206/482046
+<div class="codehilite"><pre><span></span><span class="n">lsf</span><span class="o">/</span><span class="mi">20141206</span><span class="o">/</span><span class="mi">482046</span>
 </pre></div>
 
 
@@ -3906,8 +3906,8 @@ Mapping: glow@users.opensciencegrid.org</code>):</p>
 <ol>
 <li>
 <p><strong>If you see “ERROR: couldn’t locate (null)”</strong>, that means the HTCondor-CE schedd (the daemon that schedules jobs) cannot be reached. To track down the issue, increase debugging levels on the CE:</p>
-<div class="codehilite"><pre><span></span>MASTER_DEBUG = D_ALWAYS:2 D_CAT
-SCHEDD_DEBUG = D_ALWAYS:2 D_CAT
+<div class="codehilite"><pre><span></span><span class="n">MASTER_DEBUG</span> <span class="o">=</span> <span class="n">D_ALWAYS</span><span class="p">:</span><span class="mi">2</span> <span class="n">D_CAT</span>
+<span class="n">SCHEDD_DEBUG</span> <span class="o">=</span> <span class="n">D_ALWAYS</span><span class="p">:</span><span class="mi">2</span> <span class="n">D_CAT</span>
 </pre></div>
 
 
@@ -3938,8 +3938,8 @@ SCHEDD_DEBUG = D_ALWAYS:2 D_CAT
 <ol>
 <li>
 <p><strong>If the schedd is not running:</strong> You will see a lengthy message about being unable to contact the schedd. To track down the issue, increase the debugging levels on the CE with:</p>
-<div class="codehilite"><pre><span></span>MASTER_DEBUG = D_ALWAYS:2 D_CAT
-SCHEDD_DEBUG = D_ALWAYS:2 D_CAT
+<div class="codehilite"><pre><span></span><span class="n">MASTER_DEBUG</span> <span class="o">=</span> <span class="n">D_ALWAYS</span><span class="p">:</span><span class="mi">2</span> <span class="n">D_CAT</span>
+<span class="n">SCHEDD_DEBUG</span> <span class="o">=</span> <span class="n">D_ALWAYS</span><span class="p">:</span><span class="mi">2</span> <span class="n">D_CAT</span>
 </pre></div>
 
 
@@ -4031,24 +4031,24 @@ To see all of your routes (the output is long because it combines your routes wi
 <li><strong>If the job does not match any route:</strong> You can identify this case when you see <code>0 candidate jobs found</code> in the <code>condor_job_router_info</code> output. This message means that, when compared to your job’s ClassAd, the Umbrella constraint does not evaluate to <code>true</code>. When troubleshooting, look at all of the expressions prior to the <code>target.ProcId &gt;= 0</code> expression, because it and everything following it is logic that the job router added so that routed jobs do not get routed again.</li>
 <li>
 <p><strong>If your job matches more than one route:</strong> the tool will tell you by showing all matching routes after the job ID:</p>
-<div class="codehilite"><pre><span></span>Checking Job src=162,0 against all routes
-Route Matches: Local_PBS
-Route Matches: Condor_Test
+<div class="codehilite"><pre><span></span><span class="n">Checking</span> <span class="n">Job</span> <span class="n">src</span><span class="o">=</span><span class="mi">162</span><span class="p">,</span><span class="mi">0</span> <span class="n">against</span> <span class="k">all</span> <span class="n">routes</span>
+<span class="n">Route</span> <span class="n">Matches</span><span class="p">:</span> <span class="n">Local_PBS</span>
+<span class="n">Route</span> <span class="n">Matches</span><span class="p">:</span> <span class="n">Condor_Test</span>
 </pre></div>
 
 
 <p>To troubleshoot why this is occuring, look at the combined Requirements expressions for all routes and compare it to the job’s ClassAd provided. The combined Requirements expression is <span style="color:red">highlighted below</span>:</p>
-<div class="codehilite"><pre><span></span>Umbrella constraint: ((target.x509userproxysubject =!= UNDEFINED) &amp;&amp;
-(target.x509UserProxyExpiration =!= UNDEFINED) &amp;&amp;
-(time() &lt; target.x509UserProxyExpiration) &amp;&amp;
-(target.JobUniverse =?= 5 || target.JobUniverse =?= 1)) &amp;&amp;
-<span style="color:red">( (target.osgTestPBS is true) || (true) )</span> &amp;&amp;
-(target.ProcId &gt;= 0 &amp;&amp; target.JobStatus == 1 &amp;&amp;
-(target.StageInStart is undefined || target.StageInFinish isnt undefined) &amp;&amp;
-target.Managed isnt &quot;ScheddDone&quot; &amp;&amp;
-target.Managed isnt &quot;Extenal&quot; &amp;&amp;
-target.Owner isnt Undefined &amp;&amp;
-target.RoutedBy isnt &quot;htcondor-ce&quot;)
+<div class="codehilite"><pre><span></span><span class="n">Umbrella</span> <span class="k">constraint</span><span class="p">:</span> <span class="p">((</span><span class="n">target</span><span class="p">.</span><span class="n">x509userproxysubject</span> <span class="o">=!=</span> <span class="n">UNDEFINED</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+<span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="n">x509UserProxyExpiration</span> <span class="o">=!=</span> <span class="n">UNDEFINED</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+<span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">.</span><span class="n">x509UserProxyExpiration</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+<span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="n">JobUniverse</span> <span class="o">=?=</span> <span class="mi">5</span> <span class="o">||</span> <span class="n">target</span><span class="p">.</span><span class="n">JobUniverse</span> <span class="o">=?=</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&amp;&amp;</span>
+<span class="o">%</span><span class="n">RED</span><span class="o">%</span><span class="p">(</span> <span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="n">osgTestPBS</span> <span class="k">is</span> <span class="k">true</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">)</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span> <span class="o">&amp;&amp;</span>
+<span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="n">ProcId</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">target</span><span class="p">.</span><span class="n">JobStatus</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span>
+<span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="n">StageInStart</span> <span class="k">is</span> <span class="n">undefined</span> <span class="o">||</span> <span class="n">target</span><span class="p">.</span><span class="n">StageInFinish</span> <span class="n">isnt</span> <span class="n">undefined</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+<span class="n">target</span><span class="p">.</span><span class="n">Managed</span> <span class="n">isnt</span> <span class="ss">&quot;ScheddDone&quot;</span> <span class="o">&amp;&amp;</span>
+<span class="n">target</span><span class="p">.</span><span class="n">Managed</span> <span class="n">isnt</span> <span class="ss">&quot;Extenal&quot;</span> <span class="o">&amp;&amp;</span>
+<span class="n">target</span><span class="p">.</span><span class="k">Owner</span> <span class="n">isnt</span> <span class="n">Undefined</span> <span class="o">&amp;&amp;</span>
+<span class="n">target</span><span class="p">.</span><span class="n">RoutedBy</span> <span class="n">isnt</span> <span class="ss">&quot;htcondor-ce&quot;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -4164,7 +4164,7 @@ they fail to start.</p>
 <ol>
 <li>
 <p>Set the following value in <code>/etc/condor-ce/config.d/99-local.conf</code> on the CE host:</p>
-<div class="codehilite"><pre><span></span>MASTER_DEBUG = D_ALWAYS:2 D_CAT
+<div class="codehilite"><pre><span></span><span class="n">MASTER_DEBUG</span> <span class="o">=</span> <span class="n">D_ALWAYS</span><span class="p">:</span><span class="mi">2</span> <span class="n">D_CAT</span>
 </pre></div>
 
 
@@ -4182,7 +4182,7 @@ they fail to start.</p>
 <h4 id="what-to-look-for">What to look for:<a class="headerlink" href="#what-to-look-for" title="Permanent link">&para;</a></h4>
 <p>Successful daemon start-up. 
 The following line shows that the Collector daemon started successfully:</p>
-<div class="codehilite"><pre><span></span>10/07/14 14:20:27 Started DaemonCore process &quot;/usr/sbin/condor_collector -f -port 9619&quot;, pid and pgroup = 7318
+<div class="codehilite"><pre><span></span><span class="mi">10</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">14</span> <span class="mi">14</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mi">27</span> <span class="n">Started</span> <span class="n">DaemonCore</span> <span class="n">process</span> <span class="ss">&quot;/usr/sbin/condor_collector -f -port 9619&quot;</span><span class="p">,</span> <span class="n">pid</span> <span class="k">and</span> <span class="n">pgroup</span> <span class="o">=</span> <span class="mi">7318</span>
 </pre></div>
 
 
@@ -4201,7 +4201,7 @@ It contains valuable information when trying to troubleshoot authentication issu
 <ol>
 <li>
 <p>Set the following value in <code>/etc/condor-ce/config.d/99-local.conf</code> on the CE host:</p>
-<div class="codehilite"><pre><span></span>SCHEDD_DEBUG = D_ALWAYS:2 D_CAT
+<div class="codehilite"><pre><span></span><span class="n">SCHEDD_DEBUG</span> <span class="o">=</span> <span class="n">D_ALWAYS</span><span class="p">:</span><span class="mi">2</span> <span class="n">D_CAT</span>
 </pre></div>
 
 
@@ -4220,7 +4220,7 @@ It contains valuable information when trying to troubleshoot authentication issu
 <ul>
 <li>
 <p>Job is submitted to the CE queue:</p>
-<div class="codehilite"><pre><span></span>10/07/14 16:52:17 Submitting new job 234.0
+<div class="codehilite"><pre><span></span><span class="mi">10</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">14</span> <span class="mi">16</span><span class="p">:</span><span class="mi">52</span><span class="p">:</span><span class="mi">17</span> <span class="n">Submitting</span> <span class="k">new</span> <span class="n">job</span> <span class="mi">234</span><span class="p">.</span><span class="mi">0</span>
 </pre></div>
 
 
@@ -4228,9 +4228,9 @@ It contains valuable information when trying to troubleshoot authentication issu
 </li>
 <li>
 <p>Job owner is authorized and mapped:</p>
-<div class="codehilite"><pre><span></span>10/07/14 16:52:17 Command=QMGMT_WRITE_CMD, peer=&lt;131.225.154.68:42262&gt;
-10/07/14 16:52:17 AuthMethod=GSI, AuthId=/DC=com/DC=DigiCert-Grid/O=Open Science Grid/OU=People/CN=Brian Lin 1047,
-                  /GLOW/Role=NULL/Capability=NULL, &lt;CondorId=glow@users.opensciencegrid.org&gt;
+<div class="codehilite"><pre><span></span><span class="mi">10</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">14</span><span class="w"> </span><span class="mi">16</span><span class="err">:</span><span class="mi">52</span><span class="err">:</span><span class="mi">17</span><span class="w"> </span><span class="n">Command</span><span class="o">=</span><span class="n">QMGMT_WRITE_CMD</span><span class="p">,</span><span class="w"> </span><span class="n">peer</span><span class="o">=&lt;</span><span class="mf">131.225.154.68</span><span class="err">:</span><span class="mi">42262</span><span class="o">&gt;</span><span class="w"></span>
+<span class="mi">10</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">14</span><span class="w"> </span><span class="mi">16</span><span class="err">:</span><span class="mi">52</span><span class="err">:</span><span class="mi">17</span><span class="w"> </span><span class="n">AuthMethod</span><span class="o">=</span><span class="n">GSI</span><span class="p">,</span><span class="w"> </span><span class="n">AuthId</span><span class="o">=/</span><span class="n">DC</span><span class="o">=</span><span class="n">com</span><span class="o">/</span><span class="n">DC</span><span class="o">=</span><span class="n">DigiCert</span><span class="o">-</span><span class="n">Grid</span><span class="o">/</span><span class="n">O</span><span class="o">=</span><span class="k">Open</span><span class="w"> </span><span class="n">Science</span><span class="w"> </span><span class="n">Grid</span><span class="o">/</span><span class="n">OU</span><span class="o">=</span><span class="n">People</span><span class="o">/</span><span class="n">CN</span><span class="o">=</span><span class="n">Brian</span><span class="w"> </span><span class="n">Lin</span><span class="w"> </span><span class="mi">1047</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="o">/</span><span class="n">GLOW</span><span class="o">/</span><span class="k">Role</span><span class="o">=</span><span class="k">NULL</span><span class="o">/</span><span class="n">Capability</span><span class="o">=</span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="n">CondorId</span><span class="o">=</span><span class="n">glow</span><span class="nv">@users</span><span class="p">.</span><span class="n">opensciencegrid</span><span class="p">.</span><span class="n">org</span><span class="o">&gt;</span><span class="w"></span>
 </pre></div>
 
 
@@ -4257,27 +4257,27 @@ It contains valuable information when trying to troubleshoot authentication issu
 </li>
 <li>
 <p>Missing negotiator:</p>
-<div class="codehilite"><pre><span></span>10/18/14 17:32:21 Can&#39;t find address for negotiator
-10/18/14 17:32:21 Failed to send RESCHEDULE to unknown daemon:
+<div class="codehilite"><pre><span></span><span class="mi">10</span><span class="o">/</span><span class="mi">18</span><span class="o">/</span><span class="mi">14</span> <span class="mi">17</span>:<span class="mi">32</span>:<span class="mi">21</span> <span class="nv">Can</span><span class="s1">&#39;</span><span class="s">t find address for negotiator</span>
+<span class="mi">10</span><span class="o">/</span><span class="mi">18</span><span class="o">/</span><span class="mi">14</span> <span class="mi">17</span>:<span class="mi">32</span>:<span class="mi">21</span> <span class="nv">Failed</span> <span class="nv">to</span> <span class="k">send</span> <span class="nv">RESCHEDULE</span> <span class="nv">to</span> <span class="nv">unknown</span> <span class="nv">daemon</span>:
 </pre></div>
 
 
 <p>Since HTCondor-CE does not manage any resources, it does not run a negotiator daemon by default and this error message is expected. In the same vein, you may see messages that there are 0 worker nodes:</p>
-<div class="codehilite"><pre><span></span>06/23/15 11:15:03 Number of Active Workers 0
+<div class="codehilite"><pre><span></span><span class="mi">06</span><span class="o">/</span><span class="mi">23</span><span class="o">/</span><span class="mi">15</span> <span class="mi">11</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">03</span> <span class="nb">Number</span> <span class="k">of</span> <span class="n">Active</span> <span class="n">Workers</span> <span class="mi">0</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>Corrupted <code>job_queue.log</code>:</p>
-<div class="codehilite"><pre><span></span>02/07/17 10:55:49 WARNING: Encountered corrupt log record _654 (byte offset 5046225)
-02/07/17 10:55:49 103 1354325.0 PeriodicRemove ( StageInFinish &gt; 0 ) 105
-02/07/17 10:55:49 Lines following corrupt log record _654 (up to 3):
-02/07/17 10:55:49 103 1346101.0 RemoteWallClockTime 116668.000000
-02/07/17 10:55:49 104 1346101.0 WallClockCheckpoint
-02/07/17 10:55:49 104 1346101.0 ShadowBday
-02/07/17 10:55:49 ERROR &quot;Error: corrupt log record _654 (byte offset 5046225) occurred inside closed transaction,
-                  recovery failed&quot; at line 1080 in file /builddir/build/BUILD/condor-8.4.8/src/condor_utils/classad_log.cpp
+<div class="codehilite"><pre><span></span><span class="mi">02</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">17</span> <span class="mi">10</span><span class="p">:</span><span class="mi">55</span><span class="p">:</span><span class="mi">49</span> <span class="n">WARNING</span><span class="p">:</span> <span class="n">Encountered</span> <span class="n">corrupt</span> <span class="n">log</span> <span class="n">record</span> <span class="n">_654</span> <span class="p">(</span><span class="n">byte</span> <span class="k">offset</span> <span class="mi">5046225</span><span class="p">)</span>
+<span class="mi">02</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">17</span> <span class="mi">10</span><span class="p">:</span><span class="mi">55</span><span class="p">:</span><span class="mi">49</span> <span class="mi">103</span> <span class="mi">1354325</span><span class="p">.</span><span class="mi">0</span> <span class="n">PeriodicRemove</span> <span class="p">(</span> <span class="n">StageInFinish</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span> <span class="mi">105</span>
+<span class="mi">02</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">17</span> <span class="mi">10</span><span class="p">:</span><span class="mi">55</span><span class="p">:</span><span class="mi">49</span> <span class="n">Lines</span> <span class="n">following</span> <span class="n">corrupt</span> <span class="n">log</span> <span class="n">record</span> <span class="n">_654</span> <span class="p">(</span><span class="n">up</span> <span class="k">to</span> <span class="mi">3</span><span class="p">):</span>
+<span class="mi">02</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">17</span> <span class="mi">10</span><span class="p">:</span><span class="mi">55</span><span class="p">:</span><span class="mi">49</span> <span class="mi">103</span> <span class="mi">1346101</span><span class="p">.</span><span class="mi">0</span> <span class="n">RemoteWallClockTime</span> <span class="mi">116668</span><span class="p">.</span><span class="mi">000000</span>
+<span class="mi">02</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">17</span> <span class="mi">10</span><span class="p">:</span><span class="mi">55</span><span class="p">:</span><span class="mi">49</span> <span class="mi">104</span> <span class="mi">1346101</span><span class="p">.</span><span class="mi">0</span> <span class="n">WallClockCheckpoint</span>
+<span class="mi">02</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">17</span> <span class="mi">10</span><span class="p">:</span><span class="mi">55</span><span class="p">:</span><span class="mi">49</span> <span class="mi">104</span> <span class="mi">1346101</span><span class="p">.</span><span class="mi">0</span> <span class="n">ShadowBday</span>
+<span class="mi">02</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">17</span> <span class="mi">10</span><span class="p">:</span><span class="mi">55</span><span class="p">:</span><span class="mi">49</span> <span class="n">ERROR</span> <span class="ss">&quot;Error: corrupt log record _654 (byte offset 5046225) occurred inside closed transaction,</span>
+<span class="ss">                  recovery failed&quot;</span> <span class="k">at</span> <span class="n">line</span> <span class="mi">1080</span> <span class="k">in</span> <span class="n">file</span> <span class="o">/</span><span class="n">builddir</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">BUILD</span><span class="o">/</span><span class="n">condor</span><span class="o">-</span><span class="mi">8</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">8</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">condor_utils</span><span class="o">/</span><span class="n">classad_log</span><span class="p">.</span><span class="n">cpp</span>
 </pre></div>
 
 
@@ -4302,7 +4302,7 @@ troubleshoot issues with job routing.</p>
 <ol>
 <li>
 <p>Set the following value in <code>/etc/condor-ce/config.d/99-local.conf</code> on the CE host:</p>
-<div class="codehilite"><pre><span></span>JOB_ROUTER_DEBUG = D_ALWAYS:2 D_CAT
+<div class="codehilite"><pre><span></span><span class="n">JOB_ROUTER_DEBUG</span> <span class="o">=</span> <span class="n">D_ALWAYS</span><span class="p">:</span><span class="mi">2</span> <span class="n">D_CAT</span>
 </pre></div>
 
 
@@ -4321,7 +4321,7 @@ troubleshoot issues with job routing.</p>
 <ul>
 <li>
 <p><strong>(HTCondor batch systems only)</strong> If you see the following error message:</p>
-<div class="codehilite"><pre><span></span>Can&#39;t find address of schedd
+<div class="codehilite"><pre><span></span><span class="n">Can</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">find</span> <span class="n">address</span> <span class="k">of</span> <span class="n">schedd</span>
 </pre></div>
 
 
@@ -4330,7 +4330,7 @@ Verify that the <code>condor</code> service is running on the HTCondor-CE host a
 </li>
 <li>
 <p>If you have <code>D_ALWAYS:2</code> turned on for the job router, you will see errors like the following:</p>
-<div class="codehilite"><pre><span></span>06/12/15 14:00:28 HOOK_UPDATE_JOB_INFO not configured.
+<div class="codehilite"><pre><span></span><span class="mi">06</span><span class="o">/</span><span class="mi">12</span><span class="o">/</span><span class="mi">15</span> <span class="mi">14</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">28</span> <span class="n">HOOK_UPDATE_JOB_INFO</span> <span class="k">not</span> <span class="n">configured</span><span class="p">.</span>
 </pre></div>
 
 
@@ -4341,7 +4341,7 @@ Verify that the <code>condor</code> service is running on the HTCondor-CE host a
 <ul>
 <li>
 <p>Job is considered for routing:</p>
-<div class="codehilite"><pre><span></span>09/17/14 15:00:56 JobRouter (src=86.0,route=Local_LSF): found candidate job
+<div class="codehilite"><pre><span></span><span class="mi">09</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">56</span> <span class="n">JobRouter</span> <span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="mi">86</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span><span class="n">route</span><span class="o">=</span><span class="n">Local_LSF</span><span class="p">):</span> <span class="k">found</span> <span class="n">candidate</span> <span class="n">job</span>
 </pre></div>
 
 
@@ -4349,14 +4349,14 @@ Verify that the <code>condor</code> service is running on the HTCondor-CE host a
 </li>
 <li>
 <p>Job is successfully routed:</p>
-<div class="codehilite"><pre><span></span>09/17/14 15:00:57 JobRouter (src=86.0,route=Local_LSF): claimed job
+<div class="codehilite"><pre><span></span><span class="mi">09</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">57</span> <span class="n">JobRouter</span> <span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="mi">86</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span><span class="n">route</span><span class="o">=</span><span class="n">Local_LSF</span><span class="p">):</span> <span class="n">claimed</span> <span class="n">job</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>Finding the corresponding job ID on your HTCondor batch system:</p>
-<div class="codehilite"><pre><span></span>09/17/14 15:00:57 JobRouter (src=86.0,dest=205.0,route=Local_Condor): claimed job
+<div class="codehilite"><pre><span></span><span class="mi">09</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">57</span> <span class="n">JobRouter</span> <span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="mi">86</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="mi">205</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span><span class="n">route</span><span class="o">=</span><span class="n">Local_Condor</span><span class="p">):</span> <span class="n">claimed</span> <span class="n">job</span>
 </pre></div>
 
 
@@ -4391,9 +4391,9 @@ Wiki</a>.</p>
 <ol>
 <li>
 <p>Set the following value in <code>/etc/condor-ce/config.d/99-local.conf</code> on the CE host:</p>
-<div class="codehilite"><pre><span></span>MAX_GRIDMANAGER_LOG = 6h
-MAX_NUM_GRIDMANAGER_LOG = 8
-GRIDMANAGER_DEBUG = D_ALWAYS:2 D_CAT
+<div class="codehilite"><pre><span></span><span class="n">MAX_GRIDMANAGER_LOG</span> <span class="o">=</span> <span class="mi">6</span><span class="n">h</span>
+<span class="n">MAX_NUM_GRIDMANAGER_LOG</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">GRIDMANAGER_DEBUG</span> <span class="o">=</span> <span class="n">D_ALWAYS</span><span class="p">:</span><span class="mi">2</span> <span class="n">D_CAT</span>
 </pre></div>
 
 
@@ -4412,7 +4412,7 @@ GRIDMANAGER_DEBUG = D_ALWAYS:2 D_CAT
 <ul>
 <li>
 <p>Job is submitted to the batch system:</p>
-<div class="codehilite"><pre><span></span>09/17/14 09:51:34 [12997] (85.0) gm state change: GM_SUBMIT_SAVE -&gt; GM_SUBMITTED
+<div class="codehilite"><pre><span></span><span class="mi">09</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">14</span> <span class="mi">09</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">34</span> <span class="p">[</span><span class="mi">12997</span><span class="p">]</span> <span class="p">(</span><span class="mi">85</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span> <span class="n">gm</span> <span class="k">state</span> <span class="n">change</span><span class="p">:</span> <span class="n">GM_SUBMIT_SAVE</span> <span class="o">-&gt;</span> <span class="n">GM_SUBMITTED</span>
 </pre></div>
 
 
@@ -4443,7 +4443,7 @@ GRIDMANAGER_DEBUG = D_ALWAYS:2 D_CAT
 </li>
 <li>
 <p>Job completion on the batch system:</p>
-<div class="codehilite"><pre><span></span>09/17/14 15:07:25 [25543] (87.0) gm state change: GM_TRANSFER_OUTPUT -&gt; GM_DONE_SAVE
+<div class="codehilite"><pre><span></span><span class="mi">09</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">14</span> <span class="mi">15</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mi">25</span> <span class="p">[</span><span class="mi">25543</span><span class="p">]</span> <span class="p">(</span><span class="mi">87</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span> <span class="n">gm</span> <span class="k">state</span> <span class="n">change</span><span class="p">:</span> <span class="n">GM_TRANSFER_OUTPUT</span> <span class="o">-&gt;</span> <span class="n">GM_DONE_SAVE</span>
 </pre></div>
 
 
@@ -4462,7 +4462,7 @@ This log is a good place to check if experiencing connectivity issues with HTCon
 <ol>
 <li>
 <p>Set the following value in <code>/etc/condor-ce/config.d/99-local.conf</code> on the CE host:</p>
-<div class="codehilite"><pre><span></span>SHARED_PORT_DEBUG = D_ALWAYS:2 D_CAT
+<div class="codehilite"><pre><span></span><span class="n">SHARED_PORT_DEBUG</span> <span class="o">=</span> <span class="n">D_ALWAYS</span><span class="p">:</span><span class="mi">2</span> <span class="n">D_CAT</span>
 </pre></div>
 
 
@@ -4487,7 +4487,7 @@ appear here.</p>
 </ul>
 <h4 id="what-to-look-for_4">What to look for<a class="headerlink" href="#what-to-look-for_4" title="Permanent link">&para;</a></h4>
 <p>A user is mapped:</p>
-<div class="codehilite"><pre><span></span>Oct 6 10:35:32 osgserv06 htondor-ce-llgt[12147]: Callout to &quot;LCMAPS&quot; returned local user (service condor): &quot;osgglow01&quot;
+<div class="codehilite"><pre><span></span><span class="n">Oct</span> <span class="mi">6</span> <span class="mi">10</span><span class="p">:</span><span class="mi">35</span><span class="p">:</span><span class="mi">32</span> <span class="n">osgserv06</span> <span class="n">htondor</span><span class="o">-</span><span class="n">ce</span><span class="o">-</span><span class="n">llgt</span><span class="p">[</span><span class="mi">12147</span><span class="p">]:</span> <span class="n">Callout</span> <span class="k">to</span> <span class="ss">&quot;LCMAPS&quot;</span> <span class="n">returned</span> <span class="k">local</span> <span class="k">user</span> <span class="p">(</span><span class="n">service</span> <span class="n">condor</span><span class="p">):</span> <span class="ss">&quot;osgglow01&quot;</span>
 </pre></div>
 
 
@@ -4504,7 +4504,7 @@ tools.</p>
 </ul>
 <p>You can also tell the BLAHP to save the files that are being submitted to the local batch system to <code>&lt;DIR-NAME&gt;</code> by
 adding the following line:</p>
-<div class="codehilite"><pre><span></span>blah_debug_save_submit_info=&lt;DIR_NAME&gt;
+<div class="codehilite"><pre><span></span><span class="n">blah_debug_save_submit_info</span><span class="o">=&lt;</span><span class="n">DIR_NAME</span><span class="o">&gt;</span>
 </pre></div>
 
 
@@ -4520,7 +4520,7 @@ submit file and proxy used.</p>
 <li>Gather basic HTCondor-CE and related information (versions, relevant configuration, problem description, etc.)</li>
 <li>
 <p>Gather system information:</p>
-<div class="codehilite"><pre><span></span>root@host # osg-system-profiler
+<div class="codehilite"><pre><span></span><span class="n">root</span><span class="nv">@host</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">osg</span><span class="o">-</span><span class="k">system</span><span class="o">-</span><span class="n">profiler</span><span class="w"></span>
 </pre></div>
 
 

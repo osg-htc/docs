@@ -2309,9 +2309,9 @@ The next steps will fail if the web server is not accessible.</p>
 </li>
 <li>
 <p>Create a <a href="https://support.opensciencegrid.org/helpdesk/tickets/new">support ticket</a> using the following template:</p>
-<div class="codehilite"><pre><span></span>Please add a new CVMFS repository to OASIS for VO <span style="color:red">voname</span> using the URL 
-    http://<span style="color:red">fully.qualified.domain</span>:8000/cvmfs/<span style="color:red">example.opensciencegrid.org</span>
-The VO responsible manager will be <span style="color:red">OASIS Manager Name</span>.
+<div class="codehilite"><pre><span></span><span class="nv">Please</span> <span class="nv">add</span> <span class="nv">a</span> <span class="nv">new</span> <span class="nv">CVMFS</span> <span class="nv">repository</span> <span class="nv">to</span> <span class="nv">OASIS</span> <span class="k">for</span> <span class="nv">VO</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">voname</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span> <span class="nv">using</span> <span class="nv">the</span> <span class="nv">URL</span> 
+    <span class="nv">http</span>:<span class="o">//%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">fully</span>.<span class="nv">qualified</span>.<span class="nv">domain</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span>:<span class="mi">8000</span><span class="o">/</span><span class="nv">cvmfs</span><span class="o">/%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">example</span>.<span class="nv">opensciencegrid</span>.<span class="nv">org</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span>
+<span class="nv">The</span> <span class="nv">VO</span> <span class="nv">responsible</span> <span class="nv">manager</span> <span class="nv">will</span> <span class="nv">be</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">OASIS</span> <span class="nv">Manager</span> <span class="nv">Name</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span>.
 </pre></div>
 
 
@@ -2343,7 +2343,7 @@ The VO responsible manager will be <span style="color:red">OASIS Manager Name</s
 <p>Within an hour, the repository updates should appear at the OSG Operations and FNAL Stratum-1 servers.</p>
 <p>On success, make sure the whitelist update happens daily by creating <code>/etc/cron.d/fetch-cvmfs-whitelist</code> with the
 following contents:</p>
-<div class="codehilite"><pre><span></span>5 4 * * * <span style="color:blue">LIBRARIAN</span> cd /srv/cvmfs/<span style="color:red">example.opensciencegrid.org</span> &amp;&amp; wget -qO .cvmfswhitelist.new http://oasis.opensciencegrid.org/cvmfs/<span style="color:red">example.opensciencegrid.org</span>/.cvmfswhitelist &amp;&amp; mv .cvmfswhitelist.new .cvmfswhitelist
+<div class="codehilite"><pre><span></span><span class="mi">5</span> <span class="mi">4</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">%</span><span class="n">BLUE</span><span class="o">%</span><span class="n">LIBRARIAN</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span> <span class="n">cd</span> <span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">cvmfs</span><span class="o">/%</span><span class="n">RED</span><span class="o">%</span><span class="n">example</span><span class="p">.</span><span class="n">opensciencegrid</span><span class="p">.</span><span class="n">org</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span> <span class="o">&amp;&amp;</span> <span class="n">wget</span> <span class="o">-</span><span class="n">qO</span> <span class="p">.</span><span class="n">cvmfswhitelist</span><span class="p">.</span><span class="k">new</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">oasis</span><span class="p">.</span><span class="n">opensciencegrid</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">cvmfs</span><span class="o">/%</span><span class="n">RED</span><span class="o">%</span><span class="n">example</span><span class="p">.</span><span class="n">opensciencegrid</span><span class="p">.</span><span class="n">org</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%/</span><span class="p">.</span><span class="n">cvmfswhitelist</span> <span class="o">&amp;&amp;</span> <span class="n">mv</span> <span class="p">.</span><span class="n">cvmfswhitelist</span><span class="p">.</span><span class="k">new</span> <span class="p">.</span><span class="n">cvmfswhitelist</span>
 </pre></div>
 
 
@@ -2378,8 +2378,8 @@ The latter can take longer because it requires OSG Operations intervention.</p>
 <h3 id="without-changing-the-server-dns-name">Without changing the server DNS name<a class="headerlink" href="#without-changing-the-server-dns-name" title="Permanent link">&para;</a></h3>
 <p>If you are recreating the repository on the same machine, use the following command to 
 remove the repository configuration while preserving the data and keys:</p>
-<div class="codehilite"><pre><span></span>    :::console
-    root@host # cvmfs_server rmfs -p example.opensciencegrid.org
+<div class="codehilite"><pre><span></span><span class="w">    </span><span class="o">::</span><span class="err">:</span><span class="n">console</span><span class="w"></span>
+<span class="w">    </span><span class="n">root</span><span class="nv">@host</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">cvmfs_server</span><span class="w"> </span><span class="n">rmfs</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="n">example</span><span class="p">.</span><span class="n">opensciencegrid</span><span class="p">.</span><span class="n">org</span><span class="w"></span>
 </pre></div>
 
 

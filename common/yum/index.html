@@ -2312,7 +2312,7 @@ getting the OSG-supported versions.</p>
 </li>
 <li>
 <p>Ensure that <code>/etc/yum.conf</code> has the following line in the <code>[main]</code> section:</p>
-<div class="codehilite"><pre><span></span>plugins=1
+<div class="codehilite"><pre><span></span><span class="n">plugins</span><span class="o">=</span><span class="mi">1</span>
 </pre></div>
 
 
@@ -2451,12 +2451,12 @@ priority = 98</p>
 <p>If you run a large site (&gt;20 nodes), you should consider setting up a local mirror for the OSG repositories.
 A local Yum mirror allows you to reduce the amount of external bandwidth used when updating or installing packages.</p>
 <p>Add the following to a file in <code>/etc/cron.d</code>:</p>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">RANDOM</span> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/ /var/www/html/osg/</span>
+<div class="codehilite"><pre><span></span><span class="o">%</span><span class="nv">RED</span><span class="o">%</span><span class="k">RANDOM</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="nv">root</span> <span class="nv">rsync</span> <span class="o">-</span><span class="nv">aH</span> <span class="nv">rsync</span>:<span class="o">//</span><span class="nv">repo</span>.<span class="nv">opensciencegrid</span>.<span class="nv">org</span><span class="o">/</span><span class="nv">osg</span><span class="o">/</span> <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">www</span><span class="o">/</span><span class="nv">html</span><span class="o">/</span><span class="nv">osg</span><span class="o">/</span>
 </pre></div>
 
 
 <p>Or, to mirror only a single repository:</p>
-<div class="codehilite"><pre><span></span><span class="c"><span style="color:red">RANDOM</span> * * * * root rsync -aH rsync://repo.opensciencegrid.org/osg/<span style="color:red">OSG_RELEASE</span>/el6/development /var/www/html/osg/<span style="color:red">OSG_RELEASE</span>/el6</span>
+<div class="codehilite"><pre><span></span><span class="o">%</span><span class="nv">RED</span><span class="o">%</span><span class="k">RANDOM</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="nv">root</span> <span class="nv">rsync</span> <span class="o">-</span><span class="nv">aH</span> <span class="nv">rsync</span>:<span class="o">//</span><span class="nv">repo</span>.<span class="nv">opensciencegrid</span>.<span class="nv">org</span><span class="o">/</span><span class="nv">osg</span><span class="o">/%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">OSG_RELEASE</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%/</span><span class="nv">el6</span><span class="o">/</span><span class="nv">development</span> <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">www</span><span class="o">/</span><span class="nv">html</span><span class="o">/</span><span class="nv">osg</span><span class="o">/%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">OSG_RELEASE</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%/</span><span class="nv">el6</span>
 </pre></div>
 
 

@@ -2043,22 +2043,22 @@ only by the xrootd user, optionally readable by others.</p>
 <p>(The path <code>/etc/xrootd/auth_file</code> corresponds to the
 <a href="http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606592"><code>acc.authdb</code></a> parameter in your xrootd config.)</p>
 <p>Here is an example <code>/etc/xrootd/auth_file</code> :</p>
-<div class="codehilite"><pre><span></span># This means that all the users have read access to the datasets, _except_ under /private
-u * -rl <span style="color:red">/data/xrootdfs</span>/private <span style="color:red">/data/xrootdfs</span> rl
+<div class="codehilite"><pre><span></span># <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">all</span> <span class="nv">the</span> <span class="nv">users</span> <span class="nv">have</span> <span class="nv">read</span> <span class="nv">access</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">datasets</span>, <span class="nv">_except_</span> <span class="nv">under</span> <span class="o">/</span><span class="nv">private</span>
+<span class="nv">u</span> <span class="o">*</span> <span class="o">-</span><span class="nv">rl</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%/</span><span class="nv">private</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span> <span class="nv">rl</span>
 
-# Or the following, without a restricted /private dir
-# u * <span style="color:red">/data/xrootdfs</span> rl
+# <span class="nv">Or</span> <span class="nv">the</span> <span class="nv">following</span>, <span class="nv">without</span> <span class="nv">a</span> <span class="nv">restricted</span> <span class="o">/</span><span class="nv">private</span> <span class="nv">dir</span>
+# <span class="nv">u</span> <span class="o">*</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span> <span class="nv">rl</span>
 
-# This means that all the users have full access to their private dirs
-u = <span style="color:red">/data/xrootdfs</span>/home/@=/ a
+# <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">all</span> <span class="nv">the</span> <span class="nv">users</span> <span class="nv">have</span> <span class="nv">full</span> <span class="nv">access</span> <span class="nv">to</span> <span class="nv">their</span> <span class="nv">private</span> <span class="nv">dirs</span>
+<span class="nv">u</span> <span class="o">=</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%/</span><span class="nv">home</span><span class="o">/</span>@<span class="o">=/</span> <span class="nv">a</span>
 
-# This means that this privileged user can do everything
-# You need at least one user like that, in order to create the
-# private dirs for users willing to store their data in the facility
-u xrootd <span style="color:red">/data/xrootdfs</span> a
+# <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">this</span> <span class="nv">privileged</span> <span class="nv">user</span> <span class="nv">can</span> <span class="k">do</span> <span class="nv">everything</span>
+# <span class="nv">You</span> <span class="nv">need</span> <span class="nv">at</span> <span class="nv">least</span> <span class="nv">one</span> <span class="nv">user</span> <span class="nv">like</span> <span class="nv">that</span>, <span class="nv">in</span> <span class="nv">order</span> <span class="nv">to</span> <span class="nv">create</span> <span class="nv">the</span>
+# <span class="nv">private</span> <span class="nv">dirs</span> <span class="k">for</span> <span class="nv">users</span> <span class="nv">willing</span> <span class="nv">to</span> <span class="nv">store</span> <span class="nv">their</span> <span class="nv">data</span> <span class="nv">in</span> <span class="nv">the</span> <span class="nv">facility</span>
+<span class="nv">u</span> <span class="nv">xrootd</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span> <span class="nv">a</span>
 
-# This means that users in group &#39;biology&#39; can do anything under this path
-g biology <span style="color:red">/data/xrootdfs</span>/biology a
+# <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">users</span> <span class="nv">in</span> <span class="nv">group</span> <span class="s1">&#39;</span><span class="s">biology</span><span class="s1">&#39;</span> <span class="nv">can</span> <span class="k">do</span> <span class="nv">anything</span> <span class="nv">under</span> <span class="nv">this</span> <span class="nv">path</span>
+<span class="nv">g</span> <span class="nv">biology</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%/</span><span class="nv">biology</span> <span class="nv">a</span>
 </pre></div>
 
 
@@ -2068,13 +2068,13 @@ xrootd config file.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Specific paths need to be specified <em>before</em> generic paths; e.g., this does not work:</p>
-<div class="codehilite"><pre><span></span>    u * rl /data/xrootdfs -rl /data/xrootdfs/private
+<div class="codehilite"><pre><span></span>    <span class="n">u</span> <span class="o">*</span> <span class="n">rl</span> <span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">xrootdfs</span> <span class="o">-</span><span class="n">rl</span> <span class="o">/</span><span class="k">data</span><span class="o">/</span><span class="n">xrootdfs</span><span class="o">/</span><span class="n">private</span>
 </pre></div>
 
 
 </div>
 <p>More generally, each configuration line of the auth file has the following form:</p>
-<div class="codehilite"><pre><span></span>idtype id path privs
+<div class="codehilite"><pre><span></span><span class="n">idtype</span> <span class="n">id</span> <span class="n">path</span> <span class="n">privs</span>
 </pre></div>
 
 

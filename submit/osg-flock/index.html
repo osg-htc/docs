@@ -2152,9 +2152,9 @@ using <a href="../../security/host-certs/">these instructions</a></p>
 <p>This section is optional and should be only considered if the local admin cannot obtain
 a host certificate for their submit host. To enable pool password authentication place a file here:
 <code>/etc/condor/config.d/90-flock-pool-password.conf</code> with the following contents.</p>
-<div class="codehilite"><pre><span></span>   #-- Flock to the OSG using pool password
-   SEC_PASSWORD_FILE = /etc/condor/pool_password
-   SEC_DEFAULT_AUTHENTICATION_METHODS = FS,PASSWORD
+<div class="codehilite"><pre><span></span>   <span class="o">#</span><span class="c1">-- Flock to the OSG using pool password</span>
+   <span class="n">SEC_PASSWORD_FILE</span> <span class="o">=</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">condor</span><span class="o">/</span><span class="n">pool_password</span>
+   <span class="n">SEC_DEFAULT_AUTHENTICATION_METHODS</span> <span class="o">=</span> <span class="n">FS</span><span class="p">,</span><span class="n">PASSWORD</span>
 </pre></div>
 
 
@@ -2164,7 +2164,7 @@ used for accounting. Please open at ticket to register a new project.
 Jobs should specify which project to be accounted against by adding
 the <em>+ProjectName</em> attribute. Note that the value is a string and hence
 the double quotes are required. For example:</p>
-<div class="codehilite"><pre><span></span>+ProjectName = &quot;Some_Name_Here&quot;
+<div class="codehilite"><pre><span></span><span class="o">+</span><span class="n">ProjectName</span> <span class="o">=</span> <span class="ss">&quot;Some_Name_Here&quot;</span>
 </pre></div>
 
 

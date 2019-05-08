@@ -2120,52 +2120,52 @@
 <ol>
 <li>
 <p>The <code>Filebeat Prospectors</code> section, the input should look like this:</p>
-<div class="codehilite"><pre><span></span>filebeat.prospectors:
-- type: log
-  enabled: true
-  paths:
-    - /var/log/condor/XferStatsLog
+<div class="codehilite"><pre><span></span><span class="n">filebeat</span><span class="p">.</span><span class="n">prospectors</span><span class="p">:</span>
+<span class="o">-</span> <span class="k">type</span><span class="p">:</span> <span class="n">log</span>
+  <span class="n">enabled</span><span class="p">:</span> <span class="k">true</span>
+  <span class="n">paths</span><span class="p">:</span>
+    <span class="o">-</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">condor</span><span class="o">/</span><span class="n">XferStatsLog</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>The output logstash section should look like:</p>
-<div class="codehilite"><pre><span></span>#----------------------------- Logstash output --------------------------------
-output.logstash:
-  # The Logstash hosts
-  hosts: [&quot;gracc.opensciencegrid.org:6938&quot;]
-  # Optional SSL. By default is off. 
-  # List of root certificates for HTTPS server verifications
-  ssl.certificate_authorities: [&quot;/etc/grid-security/certificates/cilogon-osg.pem&quot;]
-  #  Certificate for SSL client authentication
-  ssl.certificate: &quot;/etc/grid-security/hostcert.pem&quot;
-  # Client Certificate Key
-  ssl.key: &quot;/etc/grid-security/hostkey.pem&quot;
+<div class="codehilite"><pre><span></span>#<span class="o">-----------------------------</span> <span class="nv">Logstash</span> <span class="nv">output</span> <span class="o">--------------------------------</span>
+<span class="nv">output</span>.<span class="nv">logstash</span>:
+  # <span class="nv">The</span> <span class="nv">Logstash</span> <span class="nv">hosts</span>
+  <span class="nv">hosts</span>: [<span class="s2">&quot;</span><span class="s">gracc.opensciencegrid.org:6938</span><span class="s2">&quot;</span>]
+  # <span class="nv">Optional</span> <span class="nv">SSL</span>. <span class="nv">By</span> <span class="nv">default</span> <span class="nv">is</span> <span class="nv">off</span>. 
+  # <span class="nv">List</span> <span class="nv">of</span> <span class="nv">root</span> <span class="nv">certificates</span> <span class="k">for</span> <span class="nv">HTTPS</span> <span class="nv">server</span> <span class="nv">verifications</span>
+  <span class="nv">ssl</span>.<span class="nv">certificate_authorities</span>: [<span class="s2">&quot;</span><span class="s">/etc/grid-security/certificates/cilogon-osg.pem</span><span class="s2">&quot;</span>]
+  #  <span class="nv">Certificate</span> <span class="k">for</span> <span class="nv">SSL</span> <span class="nv">client</span> <span class="nv">authentication</span>
+  <span class="nv">ssl</span>.<span class="nv">certificate</span>: <span class="s2">&quot;</span><span class="s">/etc/grid-security/hostcert.pem</span><span class="s2">&quot;</span>
+  # <span class="nv">Client</span> <span class="nv">Certificate</span> <span class="nv">Key</span>
+  <span class="nv">ssl</span>.<span class="nv">key</span>: <span class="s2">&quot;</span><span class="s">/etc/grid-security/hostkey.pem</span><span class="s2">&quot;</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>Comment out all of the <code>Elasticsearch output</code> since we are using LogStash</p>
-<div class="codehilite"><pre><span></span>#-------------------------- Elasticsearch output ------------------------------
-#output.elasticsearch:
-# Array of hosts to connect to.
-#hosts: [&quot;localhost:9200&quot;]
+<div class="codehilite"><pre><span></span>#<span class="o">--------------------------</span> <span class="nv">Elasticsearch</span> <span class="nv">output</span> <span class="o">------------------------------</span>
+#<span class="nv">output</span>.<span class="nv">elasticsearch</span>:
+# <span class="nv">Array</span> <span class="nv">of</span> <span class="nv">hosts</span> <span class="nv">to</span> <span class="k">connect</span> <span class="nv">to</span>.
+#<span class="nv">hosts</span>: [<span class="s2">&quot;</span><span class="s">localhost:9200</span><span class="s2">&quot;</span>]
 
-# Optional protocol and basic auth credentials.
-#protocol: &quot;https&quot;
-#username: &quot;elastic&quot;
-#password: &quot;changeme&quot;
+# <span class="nv">Optional</span> <span class="nv">protocol</span> <span class="nv">and</span> <span class="nv">basic</span> <span class="nv">auth</span> <span class="nv">credentials</span>.
+#<span class="nv">protocol</span>: <span class="s2">&quot;</span><span class="s">https</span><span class="s2">&quot;</span>
+#<span class="nv">username</span>: <span class="s2">&quot;</span><span class="s">elastic</span><span class="s2">&quot;</span>
+#<span class="nv">password</span>: <span class="s2">&quot;</span><span class="s">changeme</span><span class="s2">&quot;</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>The general section should look like this, where <code>hostname</code> should be replaced by the hostname of the machine you are installing filebeats on.</p>
-<div class="codehilite"><pre><span></span>#================================ General =====================================
-name: <span style="color:red">&lt;hostname&gt;</span>
-tags: [&quot;xfer-log&quot;]
+<div class="codehilite"><pre><span></span><span class="o">#================================</span> <span class="k">General</span> <span class="o">=====================================</span>
+<span class="n">name</span><span class="p">:</span> <span class="o">%</span><span class="n">RED</span><span class="o">%&lt;</span><span class="n">hostname</span><span class="o">&gt;%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
+<span class="n">tags</span><span class="p">:</span> <span class="p">[</span><span class="ss">&quot;xfer-log&quot;</span><span class="p">]</span>
 </pre></div>
 
 

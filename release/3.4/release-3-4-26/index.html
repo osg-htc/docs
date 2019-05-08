@@ -2371,7 +2371,7 @@ Please update <em>all</em> RSV packages by running the following command on your
 
 
 <p>Additionally, if you are using osg-configure, please edit <code>/etc/osg/config.d/30-rsv.ini</code> and set the following:</p>
-<div class="codehilite"><pre><span></span>enable_gratia = False
+<div class="codehilite"><pre><span></span><span class="n">enable_gratia</span> <span class="o">=</span> <span class="k">False</span>
 </pre></div>
 
 
@@ -2413,30 +2413,30 @@ Please update <em>all</em> RSV packages by running the following command on your
 </ul>
 <h3 id="rpms">RPMs<a class="headerlink" href="#rpms" title="Permanent link">&para;</a></h3>
 <p>If you wish to manually update your system, you can run yum update against the following packages:</p>
-<div class="codehilite"><pre><span></span>cctools cctools-debuginfo cctools-devel osg-pki-tools osg-version pegasus pegasus-debuginfo
+<div class="codehilite"><pre><span></span><span class="n">cctools</span> <span class="n">cctools</span><span class="o">-</span><span class="n">debuginfo</span> <span class="n">cctools</span><span class="o">-</span><span class="n">devel</span> <span class="n">osg</span><span class="o">-</span><span class="n">pki</span><span class="o">-</span><span class="n">tools</span> <span class="n">osg</span><span class="o">-</span><span class="k">version</span> <span class="n">pegasus</span> <span class="n">pegasus</span><span class="o">-</span><span class="n">debuginfo</span>
 </pre></div>
 
 
 <p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
 <h4 id="enterprise-linux-6_1">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>cctools-7.0.9-2.osg34.el6
-cctools-debuginfo-7.0.9-2.osg34.el6
-cctools-devel-7.0.9-2.osg34.el6
-osg-pki-tools-3.1.0-1.1.osg34.el6
-osg-version-3.4.26-1.osg34.el6
-pegasus-4.9.1-1.osg34.el6
-pegasus-debuginfo-4.9.1-1.osg34.el6
+<div class="codehilite"><pre><span></span><span class="n">cctools</span><span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">9</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
+<span class="n">cctools</span><span class="o">-</span><span class="n">debuginfo</span><span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">9</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
+<span class="n">cctools</span><span class="o">-</span><span class="n">devel</span><span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">9</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
+<span class="n">osg</span><span class="o">-</span><span class="n">pki</span><span class="o">-</span><span class="n">tools</span><span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
+<span class="n">osg</span><span class="o">-</span><span class="k">version</span><span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">26</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
+<span class="n">pegasus</span><span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">9</span><span class="p">.</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
+<span class="n">pegasus</span><span class="o">-</span><span class="n">debuginfo</span><span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">9</span><span class="p">.</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el6</span>
 </pre></div>
 
 
 <h4 id="enterprise-linux-7_1">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>cctools-7.0.9-2.osg34.el7
-cctools-debuginfo-7.0.9-2.osg34.el7
-cctools-devel-7.0.9-2.osg34.el7
-osg-pki-tools-3.1.0-1.1.osg34.el7
-osg-version-3.4.26-1.osg34.el7
-pegasus-4.9.1-1.osg34.el7
-pegasus-debuginfo-4.9.1-1.osg34.el7
+<div class="codehilite"><pre><span></span><span class="n">cctools</span><span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">9</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
+<span class="n">cctools</span><span class="o">-</span><span class="n">debuginfo</span><span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">9</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
+<span class="n">cctools</span><span class="o">-</span><span class="n">devel</span><span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">9</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
+<span class="n">osg</span><span class="o">-</span><span class="n">pki</span><span class="o">-</span><span class="n">tools</span><span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
+<span class="n">osg</span><span class="o">-</span><span class="k">version</span><span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">26</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
+<span class="n">pegasus</span><span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">9</span><span class="p">.</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
+<span class="n">pegasus</span><span class="o">-</span><span class="n">debuginfo</span><span class="o">-</span><span class="mi">4</span><span class="p">.</span><span class="mi">9</span><span class="p">.</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osg34</span><span class="p">.</span><span class="n">el7</span>
 </pre></div>
 
 
@@ -2452,20 +2452,20 @@ pegasus-debuginfo-4.9.1-1.osg34.el7
 </ul>
 <h3 id="upcoming-rpms">Upcoming RPMs<a class="headerlink" href="#upcoming-rpms" title="Permanent link">&para;</a></h3>
 <p>If you wish to manually update your system, you can run yum update against the following packages:</p>
-<div class="codehilite"><pre><span></span>singularity singularity-debuginfo
+<div class="codehilite"><pre><span></span><span class="n">singularity</span> <span class="n">singularity</span><span class="o">-</span><span class="n">debuginfo</span>
 </pre></div>
 
 
 <p>If you wish to only update the RPMs that changed, the set of RPMs is:</p>
 <h4 id="enterprise-linux-6_3">Enterprise Linux 6<a class="headerlink" href="#enterprise-linux-6_3" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>singularity-3.1.0-1.osgup.el6
-singularity-debuginfo-3.1.0-1.osgup.el6
+<div class="codehilite"><pre><span></span><span class="n">singularity</span><span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osgup</span><span class="p">.</span><span class="n">el6</span>
+<span class="n">singularity</span><span class="o">-</span><span class="n">debuginfo</span><span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osgup</span><span class="p">.</span><span class="n">el6</span>
 </pre></div>
 
 
 <h4 id="enterprise-linux-7_3">Enterprise Linux 7<a class="headerlink" href="#enterprise-linux-7_3" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>singularity-3.1.0-1.osgup.el7
-singularity-debuginfo-3.1.0-1.osgup.el7
+<div class="codehilite"><pre><span></span><span class="n">singularity</span><span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osgup</span><span class="p">.</span><span class="n">el7</span>
+<span class="n">singularity</span><span class="o">-</span><span class="n">debuginfo</span><span class="o">-</span><span class="mi">3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="p">.</span><span class="n">osgup</span><span class="p">.</span><span class="n">el7</span>
 </pre></div>
                 
                   

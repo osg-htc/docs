@@ -2413,8 +2413,8 @@ In addition, the <code>overlay</code> option does not work on RHEL6, does not
 work correctly on RHEL7 when container images are distributed by CVMFS,
 and does not work in unprivileged mode.</p>
 <p>Set these options in <code>/etc/singularity/singularity.conf</code>:</p>
-<div class="codehilite"><pre><span></span>    enable overlay = no
-    enable underlay = yes
+<div class="codehilite"><pre><span></span>    <span class="n">enable</span> <span class="k">overlay</span> <span class="o">=</span> <span class="k">no</span>
+    <span class="n">enable</span> <span class="n">underlay</span> <span class="o">=</span> <span class="n">yes</span>
 </pre></div>
 
 
@@ -2434,7 +2434,7 @@ changes to the defaults.</p>
 <a href="#enabling-unprivileged-singularity">enabling unprivileged singularity</a>,
 change the line in <code>/etc/singularity/singularity.conf</code> that says
 <code>allow setuid = yes</code> to</p>
-<div class="codehilite"><pre><span></span>    allow setuid = no
+<div class="codehilite"><pre><span></span>    <span class="n">allow</span> <span class="n">setuid</span> <span class="o">=</span> <span class="k">no</span>
 </pre></div>
 
 
@@ -2455,7 +2455,7 @@ users and are common at sites with direct user logins.  However (as of April
 2019) we are only aware of directory-based images being used by OSG VOs.
 Hence, it is reasonable to disable the loopback-based images by setting
 the following option in <code>/etc/singularity/singularity.conf</code>:</p>
-<div class="codehilite"><pre><span></span>    max loop devices = 0
+<div class="codehilite"><pre><span></span>    <span class="nv">max</span> <span class="k">loop</span> <span class="nv">devices</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
 
 

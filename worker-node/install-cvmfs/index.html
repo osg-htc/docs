@@ -2277,7 +2277,7 @@ The version of CVMFS installed should be &gt;= 2.4.1</p>
 </li>
 <li>
 <p>Create or edit <code>/etc/auto.master</code> to have the following contents:</p>
-<div class="codehilite"><pre><span></span>/cvmfs /etc/auto.cvmfs
+<div class="codehilite"><pre><span></span><span class="o">/</span><span class="n">cvmfs</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">auto</span><span class="p">.</span><span class="n">cvmfs</span>
 </pre></div>
 
 
@@ -2302,7 +2302,7 @@ The version of CVMFS installed should be &gt;= 2.4.1</p>
 </li>
 <li>
 <p>Put the following in <code>/etc/auto.master.d/cvmfs.autofs</code>:</p>
-<div class="codehilite"><pre><span></span>/cvmfs /etc/auto.cvmfs
+<div class="codehilite"><pre><span></span><span class="o">/</span><span class="n">cvmfs</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">auto</span><span class="p">.</span><span class="n">cvmfs</span>
 </pre></div>
 
 
@@ -2321,9 +2321,9 @@ CVMFS configuration. Below is a sample configuration, but please note
 that you will need to <strong>edit the parts in <span style="color:red">red</span></strong>. In
 particular, the <code>CVMFS_HTTP_PROXY</code> line below must be edited for your
 site.</p>
-<div class="codehilite"><pre><span></span>CVMFS_REPOSITORIES=&quot;`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u)|tr &#39; &#39; ,`&quot;
-CVMFS_QUOTA_LIMIT=<span style="color:red">20000</span>
-CVMFS_HTTP_PROXY=<span style="color:red">&quot;http://squid.example.com:3128&quot;</span>
+<div class="codehilite"><pre><span></span><span class="n">CVMFS_REPOSITORIES</span><span class="o">=</span><span class="ss">&quot;`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u)|tr &#39; &#39; ,`&quot;</span>
+<span class="n">CVMFS_QUOTA_LIMIT</span><span class="o">=%</span><span class="n">RED</span><span class="o">%</span><span class="mi">20000</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
+<span class="n">CVMFS_HTTP_PROXY</span><span class="o">=%</span><span class="n">RED</span><span class="o">%</span><span class="ss">&quot;http://squid.example.com:3128&quot;</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
 </pre></div>
 
 

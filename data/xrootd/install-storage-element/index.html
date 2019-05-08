@@ -2546,18 +2546,18 @@ These should be replaced with the fully-qualified domain name of the host in que
 <h4 id="modify-etcxrootdxrootd-clusteredcfg">Modify /etc/xrootd/xrootd-clustered.cfg<a class="headerlink" href="#modify-etcxrootdxrootd-clusteredcfg" title="Permanent link">&para;</a></h4>
 <p>You will need to modify the <code>xrootd-clustered.cfg</code> on the redirector node and each data node. 
 The following example should serve as a base configuration for clustering. Further customizations are detailed below.</p>
-<div class="codehilite"><pre><span></span>all.export <span style="color:red">/tmp</span> stage
-set xrdr = <span style="color:red">RDRNODE</span>
-all.manager $(xrdr):3121
+<div class="codehilite"><pre><span></span><span class="nv">all</span>.<span class="nv">export</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%/</span><span class="nv">tmp</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span> <span class="nv">stage</span>
+<span class="nv">set</span> <span class="nv">xrdr</span> <span class="o">=</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">RDRNODE</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span>
+<span class="nv">all</span>.<span class="nv">manager</span> $<span class="ss">(</span><span class="nv">xrdr</span><span class="ss">)</span>:<span class="mi">3121</span>
 
-if $(xrdr)
-  # Lines in this block are only executed on the redirector node
-  all.role manager
-else
-  # Lines in this block are executed on all nodes but the redirector node
-  all.role server
-  cms.space min <span style="color:red">2g 5g</span>
-fi
+<span class="k">if</span> $<span class="ss">(</span><span class="nv">xrdr</span><span class="ss">)</span>
+  # <span class="nv">Lines</span> <span class="nv">in</span> <span class="nv">this</span> <span class="nv">block</span> <span class="nv">are</span> <span class="nv">only</span> <span class="nv">executed</span> <span class="nv">on</span> <span class="nv">the</span> <span class="nv">redirector</span> <span class="nv">node</span>
+  <span class="nv">all</span>.<span class="nv">role</span> <span class="nv">manager</span>
+<span class="k">else</span>
+  # <span class="nv">Lines</span> <span class="nv">in</span> <span class="nv">this</span> <span class="nv">block</span> <span class="nv">are</span> <span class="nv">executed</span> <span class="nv">on</span> <span class="nv">all</span> <span class="nv">nodes</span> <span class="nv">but</span> <span class="nv">the</span> <span class="nv">redirector</span> <span class="nv">node</span>
+  <span class="nv">all</span>.<span class="nv">role</span> <span class="nv">server</span>
+  <span class="nv">cms</span>.<span class="nv">space</span> <span class="nv">min</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%</span><span class="mi">2</span><span class="nv">g</span> <span class="mi">5</span><span class="nv">g</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span>
+<span class="nv">fi</span>
 </pre></div>
 
 
@@ -2629,23 +2629,23 @@ SSI requires:</p>
 
 <p>We will be running two instances of XRootD on <span style="color:red">hostA</span>. 
 Modify <code>/etc/xrootd/xrootd-clustered.cfg</code> to give the two instances different behavior, as such:</p>
-<div class="codehilite"><pre><span></span>all.export /data/xrootdfs
-set xrdr=<span style="color:red">hostA</span>
-all.manager $(xrdr):3121
-if $(xrdr) &amp;&amp; named cns
-      all.export /data/inventory
-      xrd.port 1095
-else if $(xrdr)
-      all.role manager
-      xrd.port 1094
-else
-      all.role server
-      oss.localroot /local/xrootd
-      ofs.notify closew create mkdir mv rm rmdir trunc | /usr/bin/XrdCnsd -d -D 2 -i 90 -b $(xrdr):1095:/data/inventory
-      #add cms.space if you have less the 11GB
-      # cms.space options http://xrootd.slac.stanford.edu/doc/dev/cms_config.htm
-      cms.space min 2g 5g
-fi
+<div class="codehilite"><pre><span></span><span class="nv">all</span>.<span class="nv">export</span> <span class="o">/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span>
+<span class="nv">set</span> <span class="nv">xrdr</span><span class="o">=%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">hostA</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span>
+<span class="nv">all</span>.<span class="nv">manager</span> $<span class="ss">(</span><span class="nv">xrdr</span><span class="ss">)</span>:<span class="mi">3121</span>
+<span class="k">if</span> $<span class="ss">(</span><span class="nv">xrdr</span><span class="ss">)</span> <span class="o">&amp;&amp;</span> <span class="nv">named</span> <span class="nv">cns</span>
+      <span class="nv">all</span>.<span class="nv">export</span> <span class="o">/</span><span class="nv">data</span><span class="o">/</span><span class="nv">inventory</span>
+      <span class="nv">xrd</span>.<span class="nv">port</span> <span class="mi">1095</span>
+<span class="k">else</span> <span class="k">if</span> $<span class="ss">(</span><span class="nv">xrdr</span><span class="ss">)</span>
+      <span class="nv">all</span>.<span class="nv">role</span> <span class="nv">manager</span>
+      <span class="nv">xrd</span>.<span class="nv">port</span> <span class="mi">1094</span>
+<span class="k">else</span>
+      <span class="nv">all</span>.<span class="nv">role</span> <span class="nv">server</span>
+      <span class="nv">oss</span>.<span class="nv">localroot</span> <span class="o">/</span><span class="nv">local</span><span class="o">/</span><span class="nv">xrootd</span>
+      <span class="nv">ofs</span>.<span class="nv">notify</span> <span class="nv">closew</span> <span class="nv">create</span> <span class="nv">mkdir</span> <span class="nv">mv</span> <span class="nv">rm</span> <span class="nv">rmdir</span> <span class="nv">trunc</span> <span class="o">|</span> <span class="o">/</span><span class="nv">usr</span><span class="o">/</span><span class="nv">bin</span><span class="o">/</span><span class="nv">XrdCnsd</span> <span class="o">-</span><span class="nv">d</span> <span class="o">-</span><span class="nv">D</span> <span class="mi">2</span> <span class="o">-</span><span class="nv">i</span> <span class="mi">90</span> <span class="o">-</span><span class="nv">b</span> $<span class="ss">(</span><span class="nv">xrdr</span><span class="ss">)</span>:<span class="mi">1095</span>:<span class="o">/</span><span class="nv">data</span><span class="o">/</span><span class="nv">inventory</span>
+      #<span class="nv">add</span> <span class="nv">cms</span>.<span class="nv">space</span> <span class="k">if</span> <span class="nv">you</span> <span class="nv">have</span> <span class="nv">less</span> <span class="nv">the</span> <span class="mi">11</span><span class="nv">GB</span>
+      # <span class="nv">cms</span>.<span class="nv">space</span> <span class="nv">options</span> <span class="nv">http</span>:<span class="o">//</span><span class="nv">xrootd</span>.<span class="nv">slac</span>.<span class="nv">stanford</span>.<span class="nv">edu</span><span class="o">/</span><span class="nv">doc</span><span class="o">/</span><span class="nv">dev</span><span class="o">/</span><span class="nv">cms_config</span>.<span class="nv">htm</span>
+      <span class="nv">cms</span>.<span class="nv">space</span> <span class="nv">min</span> <span class="mi">2</span><span class="nv">g</span> <span class="mi">5</span><span class="nv">g</span>
+<span class="nv">fi</span>
 </pre></div>
 
 
@@ -2658,15 +2658,15 @@ This section is the procedure for EL 6.</p>
 <p>Now, we have to change <code>/etc/sysconfig/xrootd</code> on the redirector node (<span style="color:red">hostA</span>) to run multiple instances
 of XRootD. 
 The second instance of XRootD will be named "cns" and will be used for SSI.</p>
-<div class="codehilite"><pre><span></span>XROOTD_USER=xrootd 
-XROOTD_GROUP=xrootd 
-XROOTD_DEFAULT_OPTIONS=&quot;<span style="color:red">-k 7</span> -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;
-<span style="color:red">XROOTD_CNS_OPTIONS=&quot;-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;</span> 
-CMSD_DEFAULT_OPTIONS=&quot;<span style="color:red">-k 7</span> -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
-FRMD_DEFAULT_OPTIONS=&quot;<span style="color:red">-k 7</span> -l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
-<span style="color:red">XROOTD_INSTANCES=&quot;default cns&quot;</span> 
-CMSD_INSTANCES=&quot;default&quot; 
-FRMD_INSTANCES=&quot;default&quot; 
+<div class="codehilite"><pre><span></span><span class="n">XROOTD_USER</span><span class="o">=</span><span class="n">xrootd</span> 
+<span class="n">XROOTD_GROUP</span><span class="o">=</span><span class="n">xrootd</span> 
+<span class="n">XROOTD_DEFAULT_OPTIONS</span><span class="o">=</span><span class="ss">&quot;<span style="color:red">-k 7</span> -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;</span>
+<span class="o">%</span><span class="n">RED</span><span class="o">%</span><span class="n">XROOTD_CNS_OPTIONS</span><span class="o">=</span><span class="ss">&quot;-k 7 -l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span> 
+<span class="n">CMSD_DEFAULT_OPTIONS</span><span class="o">=</span><span class="ss">&quot;<span style="color:red">-k 7</span> -l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;</span> 
+<span class="n">FRMD_DEFAULT_OPTIONS</span><span class="o">=</span><span class="ss">&quot;<span style="color:red">-k 7</span> -l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;</span> 
+<span class="o">%</span><span class="n">RED</span><span class="o">%</span><span class="n">XROOTD_INSTANCES</span><span class="o">=</span><span class="ss">&quot;default cns&quot;</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span> 
+<span class="n">CMSD_INSTANCES</span><span class="o">=</span><span class="ss">&quot;default&quot;</span> 
+<span class="n">FRMD_INSTANCES</span><span class="o">=</span><span class="ss">&quot;default&quot;</span> 
 </pre></div>
 
 
@@ -2742,24 +2742,24 @@ This section is the procedure for EL 7.</p>
 <ol>
 <li>
 <p>Modify <code>/etc/xrootd/xrootd-clustered.cfg</code> and add the following lines. You will also need to add the configuration regarding <a href="#security-option-3-xrootd-lcmaps-authorization">lcmaps authorization</a>.</p>
-<div class="codehilite"><pre><span></span>   if exec xrootd
-    xrd.protocol http:1094 libXrdHttp.so
-    http.cadir /etc/grid-security/certificates
-    http.cert /etc/grid-security/xrd/xrdcert.pem
-    http.key /etc/grid-security/xrd/xrdkey.pem
-    http.secxtractor /usr/lib64/libXrdLcmaps.so
-    http.listingdeny yes
-    http.staticpreload http://static/robots.txt /etc/xrootd/robots.txt
-    http.desthttps yes
-   fi
+<div class="codehilite"><pre><span></span>   <span class="k">if</span> <span class="k">exec</span> <span class="nv">xrootd</span>
+    <span class="nv">xrd</span>.<span class="nv">protocol</span> <span class="nv">http</span>:<span class="mi">1094</span> <span class="nv">libXrdHttp</span>.<span class="nv">so</span>
+    <span class="nv">http</span>.<span class="nv">cadir</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">grid</span><span class="o">-</span><span class="nv">security</span><span class="o">/</span><span class="nv">certificates</span>
+    <span class="nv">http</span>.<span class="nv">cert</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">grid</span><span class="o">-</span><span class="nv">security</span><span class="o">/</span><span class="nv">xrd</span><span class="o">/</span><span class="nv">xrdcert</span>.<span class="nv">pem</span>
+    <span class="nv">http</span>.<span class="nv">key</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">grid</span><span class="o">-</span><span class="nv">security</span><span class="o">/</span><span class="nv">xrd</span><span class="o">/</span><span class="nv">xrdkey</span>.<span class="nv">pem</span>
+    <span class="nv">http</span>.<span class="nv">secxtractor</span> <span class="o">/</span><span class="nv">usr</span><span class="o">/</span><span class="nv">lib64</span><span class="o">/</span><span class="nv">libXrdLcmaps</span>.<span class="nv">so</span>
+    <span class="nv">http</span>.<span class="nv">listingdeny</span> <span class="nv">yes</span>
+    <span class="nv">http</span>.<span class="nv">staticpreload</span> <span class="nv">http</span>:<span class="o">//</span><span class="nv">static</span><span class="o">/</span><span class="nv">robots</span>.<span class="nv">txt</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">xrootd</span><span class="o">/</span><span class="nv">robots</span>.<span class="nv">txt</span>
+    <span class="nv">http</span>.<span class="nv">desthttps</span> <span class="nv">yes</span>
+   <span class="nv">fi</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>Create robots.txt. Add file <code>/etc/xrootd/robots.txt</code> with these contents:</p>
-<div class="codehilite"><pre><span></span>   User-agent: *
-   Disallow: /
+<div class="codehilite"><pre><span></span>   <span class="k">User</span><span class="o">-</span><span class="n">agent</span><span class="p">:</span> <span class="o">*</span>
+   <span class="n">Disallow</span><span class="p">:</span> <span class="o">/</span>
 </pre></div>
 
 
@@ -2786,15 +2786,15 @@ This section is the procedure for EL 7.</p>
 <h3 id="optional-enabling-a-fuse-mount">(Optional) Enabling a FUSE mount<a class="headerlink" href="#optional-enabling-a-fuse-mount" title="Permanent link">&para;</a></h3>
 <p>XRootD storage can be mounted as a standard POSIX filesystem via FUSE, providing users with a more familiar interface..</p>
 <p>Modify <code>/etc/fstab</code> by adding the following entries:</p>
-<div class="codehilite"><pre><span></span>....
-xrootdfs                <span style="color:red">/mnt/xrootd</span>              fuse    rdr=xroot://<span style="color:red">redirector1.domain.com</span>:1094/<span style="color:red">/path/</span>,uid=xrootd 0 0
+<div class="codehilite"><pre><span></span><span class="p">....</span>
+<span class="n">xrootdfs</span>                <span class="o">%</span><span class="n">RED</span><span class="o">%/</span><span class="n">mnt</span><span class="o">/</span><span class="n">xrootd</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span>              <span class="n">fuse</span>    <span class="n">rdr</span><span class="o">=</span><span class="n">xroot</span><span class="p">:</span><span class="o">//%</span><span class="n">RED</span><span class="o">%</span><span class="n">redirector1</span><span class="p">.</span><span class="k">domain</span><span class="p">.</span><span class="n">com</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span><span class="p">:</span><span class="mi">1094</span><span class="o">/%</span><span class="n">RED</span><span class="o">%/</span><span class="n">path</span><span class="o">/%</span><span class="n">ENDCOLOR</span><span class="o">%</span><span class="p">,</span><span class="n">uid</span><span class="o">=</span><span class="n">xrootd</span> <span class="mi">0</span> <span class="mi">0</span>
 </pre></div>
 
 
 <p>Replace <code>/mnt/xrootd</code> with the path that you would like to access with. 
 This should also match the GridFTP settings for the <code>XROOTD_VMP</code> local path. 
 Create <code>/mnt/xrootd</code> directory. Make sure the xrootd user exists on the system. Once you are finished, you can mount it:</p>
-<div class="codehilite"><pre><span></span>mount /mnt/xrootd
+<div class="codehilite"><pre><span></span><span class="n">mount</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">xrootd</span>
 </pre></div>
 
 
@@ -2811,8 +2811,8 @@ If you are not setting up a CMS site, you can skip this section.</p>
 
 <p>You will need to add your <code>storage.xml</code> to <code>/etc/xrootd/storage.xml</code> and then add the following line to your XRootD
 configuration:</p>
-<div class="codehilite"><pre><span></span># Integrate with CMS TFC, placed in /etc/xrootd/storage.xml
-oss.namelib /usr/lib64/libXrdCmsTfc.so file:/etc/xrootd/storage.xml%ORANGE%?protocol=hadoop</span>
+<div class="codehilite"><pre><span></span><span class="o">#</span> <span class="n">Integrate</span> <span class="k">with</span> <span class="n">CMS</span> <span class="n">TFC</span><span class="p">,</span> <span class="n">placed</span> <span class="k">in</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">xrootd</span><span class="o">/</span><span class="k">storage</span><span class="p">.</span><span class="n">xml</span>
+<span class="n">oss</span><span class="p">.</span><span class="n">namelib</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libXrdCmsTfc</span><span class="p">.</span><span class="n">so</span> <span class="n">file</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">xrootd</span><span class="o">/</span><span class="k">storage</span><span class="p">.</span><span class="n">xml</span><span class="o">%</span><span class="n">ORANGE</span><span class="o">%?</span><span class="n">protocol</span><span class="o">=</span><span class="n">hadoop</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
 </pre></div>
 
 
@@ -2830,8 +2830,8 @@ oss.namelib /usr/lib64/libXrdCmsTfc.so file:/etc/xrootd/storage.xml%ORANGE%?prot
 
 <p>You will then need to add the following lines to your
 <code>/etc/xrootd/xrootd-clustered.cfg</code>:</p>
-<div class="codehilite"><pre><span></span>xrootd.fslib /usr/lib64/libXrdOfs.so
-ofs.osslib /usr/lib64/libXrdHdfs.so
+<div class="codehilite"><pre><span></span><span class="n">xrootd</span><span class="p">.</span><span class="n">fslib</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libXrdOfs</span><span class="p">.</span><span class="n">so</span>
+<span class="n">ofs</span><span class="p">.</span><span class="n">osslib</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libXrdHdfs</span><span class="p">.</span><span class="n">so</span>
 </pre></div>
 
 
@@ -2852,14 +2852,14 @@ from where files could be moved to the local cluster.</p>
 <ol>
 <li>Make sure that FRM is enabled in <code>/etc/sysconfig/xrootd</code> on your data sever:</li>
 </ol>
-<div class="codehilite"><pre><span></span>ROOTD_USER=xrootd 
-XROOTD_GROUP=xrootd 
-XROOTD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
-CMSD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
-FRMD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg&quot; 
-XROOTD_INSTANCES=&quot;default&quot; 
-CMSD_INSTANCES=&quot;default&quot; 
-FRMD_INSTANCES=&quot;default&quot;
+<div class="codehilite"><pre><span></span><span class="n">ROOTD_USER</span><span class="o">=</span><span class="n">xrootd</span> 
+<span class="n">XROOTD_GROUP</span><span class="o">=</span><span class="n">xrootd</span> 
+<span class="n">XROOTD_DEFAULT_OPTIONS</span><span class="o">=</span><span class="ss">&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;</span> 
+<span class="n">CMSD_DEFAULT_OPTIONS</span><span class="o">=</span><span class="ss">&quot;-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;</span> 
+<span class="n">FRMD_DEFAULT_OPTIONS</span><span class="o">=</span><span class="ss">&quot;-l /var/log/xrootd/frmd.log -c /etc/xrootd/xrootd-clustered.cfg&quot;</span> 
+<span class="n">XROOTD_INSTANCES</span><span class="o">=</span><span class="ss">&quot;default&quot;</span> 
+<span class="n">CMSD_INSTANCES</span><span class="o">=</span><span class="ss">&quot;default&quot;</span> 
+<span class="n">FRMD_INSTANCES</span><span class="o">=</span><span class="ss">&quot;default&quot;</span>
 </pre></div>
 
 
@@ -2926,12 +2926,12 @@ However, if you installed cluster management services, you will need to start <c
 7 machine, and whether you are using a standalone or clustered configuration.</p>
 <p>On EL 6, which config to use is set in the file <code>/etc/sysconfig/xrootd</code>. 
 For example, to have <code>xrootd</code> use the clustered config, you would have a line such as this:</p>
-<div class="codehilite"><pre><span></span>XROOTD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-<span style="color:red">clustered</span>.cfg -k fifo&quot;
+<div class="codehilite"><pre><span></span><span class="n">XROOTD_DEFAULT_OPTIONS</span><span class="o">=</span><span class="ss">&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-<span style="color:red">clustered</span>.cfg -k fifo&quot;</span>
 </pre></div>
 
 
 <p>To use the standalone config instead, you would use:</p>
-<div class="codehilite"><pre><span></span>XROOTD_DEFAULT_OPTIONS=&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-<span style="color:red">standalone</span>.cfg -k fifo&quot;
+<div class="codehilite"><pre><span></span><span class="n">XROOTD_DEFAULT_OPTIONS</span><span class="o">=</span><span class="ss">&quot;-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-<span style="color:red">standalone</span>.cfg -k fifo&quot;</span>
 </pre></div>
 
 

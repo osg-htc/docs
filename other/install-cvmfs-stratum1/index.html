@@ -2312,77 +2312,77 @@
 
 
 <p>Put the following in <code>/etc/cron.d/cvmfs</code>:</p>
-<div class="codehilite"><pre><span></span>*/5 * * * * root test -d /srv/cvmfs || exit;cvmfs_server snapshot -ai 
-6 1 * * * root cvmfs_server gc -af 2&gt;/dev/null || true
-0 9 * * * root find /srv/cvmfs/*.*/data/txn -name &quot;*.*&quot; -mtime +2 2&gt;/dev/null|xargs rm -f
+<div class="codehilite"><pre><span></span><span class="o">*/</span><span class="mi">5</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="nv">root</span> <span class="nv">test</span> <span class="o">-</span><span class="nv">d</span> <span class="o">/</span><span class="nv">srv</span><span class="o">/</span><span class="nv">cvmfs</span> <span class="o">||</span> <span class="k">exit</span><span class="c1">;cvmfs_server snapshot -ai </span>
+<span class="mi">6</span> <span class="mi">1</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="nv">root</span> <span class="nv">cvmfs_server</span> <span class="nv">gc</span> <span class="o">-</span><span class="nv">af</span> <span class="mi">2</span><span class="o">&gt;/</span><span class="nv">dev</span><span class="o">/</span><span class="nv">null</span> <span class="o">||</span> <span class="nv">true</span>
+<span class="mi">0</span> <span class="mi">9</span> <span class="o">*</span> <span class="o">*</span> <span class="o">*</span> <span class="nv">root</span> <span class="nv">find</span> <span class="o">/</span><span class="nv">srv</span><span class="o">/</span><span class="nv">cvmfs</span><span class="cm">/*.*/</span><span class="nv">data</span><span class="o">/</span><span class="nv">txn</span> <span class="o">-</span><span class="nv">name</span> <span class="s2">&quot;</span><span class="s">*.*</span><span class="s2">&quot;</span> <span class="o">-</span><span class="nv">mtime</span> <span class="o">+</span><span class="mi">2</span> <span class="mi">2</span><span class="o">&gt;/</span><span class="nv">dev</span><span class="o">/</span><span class="nv">null</span><span class="o">|</span><span class="nv">xargs</span> <span class="nv">rm</span> <span class="o">-</span><span class="nv">f</span>
 </pre></div>
 
 
 <p>Also, put the following in <code>/etc/logrotate.d/cvmfs</code>:</p>
-<div class="codehilite"><pre><span></span>/var/log/cvmfs/*.log {
-    weekly
-    missingok
-    notifempty
-}
+<div class="codehilite"><pre><span></span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">cvmfs</span><span class="cm">/*.log {</span>
+<span class="cm">    weekly</span>
+<span class="cm">    missingok</span>
+<span class="cm">    notifempty</span>
+<span class="cm">}</span>
 </pre></div>
 
 
 <h3 id="configuring-apache">Configuring apache<a class="headerlink" href="#configuring-apache" title="Permanent link">&para;</a></h3>
 <p>If you are installing frontier-squid, create <code>/etc/httpd/conf.d/cvmfs.conf</code> and put the following lines into it:</p>
-<div class="codehilite"><pre><span></span>Listen 8081 KeepAlive On
+<div class="codehilite"><pre><span></span><span class="k">Listen</span> <span class="mi">8081</span> <span class="n">KeepAlive</span> <span class="k">On</span>
 </pre></div>
 
 
 <p>If you are not installing frontier-squid, instead put the following lines into that file:</p>
-<div class="codehilite"><pre><span></span>Listen 8000 KeepAlive On
+<div class="codehilite"><pre><span></span><span class="k">Listen</span> <span class="mi">8000</span> <span class="n">KeepAlive</span> <span class="k">On</span>
 </pre></div>
 
 
 <p>If you will be serving opensciencegrid.org repositories, you have to allow for old client configurations that access repositories without the domain name added. For that reason, you will need to remove each <code>/etc/httpd/conf.d/cvmfs.&lt;repositoryname&gt;.conf</code> that adding a replica creates (this is included in the <a href="https://github.com/opensciencegrid/oasis-server/blob/master/goc/bin/add_osg_repository">add_osg_repository script</a>), and instead add the following to <code>/etc/httpd/conf.d/cvmfs.conf</code>:</p>
-<div class="codehilite"><pre><span></span>RewriteEngine On 
-RewriteRule ^/cvmfs/([^./]*)/(.*)$ /cvmfs/$1.opensciencegrid.org/$2 
-RewriteRule ^/cvmfs/([^/]+)/api/(.*)$ /var/www/wsgi-scripts/cvmfs-server/cvmfs-api.wsgi/$1/$2
-RewriteRule ^/cvmfs/(.*)$ /srv/cvmfs/$1 
-<span class="nt">&lt;Directory</span> <span class="err">&quot;/srv/cvmfs&quot;</span><span class="nt">&gt;</span> 
-  Options -MultiViews +FollowSymLinks -Indexes 
-  AllowOverride All 
-  Require all granted
+<div class="codehilite"><pre><span></span><span class="nv">RewriteEngine</span> <span class="nv">On</span> 
+<span class="nv">RewriteRule</span> <span class="o">^/</span><span class="nv">cvmfs</span><span class="o">/</span><span class="ss">(</span>[<span class="o">^</span>.<span class="o">/</span>]<span class="o">*</span><span class="ss">)</span><span class="o">/</span><span class="ss">(</span>.<span class="o">*</span><span class="ss">)</span>$ <span class="o">/</span><span class="nv">cvmfs</span><span class="o">/</span><span class="mh">$1</span>.<span class="nv">opensciencegrid</span>.<span class="nv">org</span><span class="o">/</span><span class="mh">$2</span> 
+<span class="nv">RewriteRule</span> <span class="o">^/</span><span class="nv">cvmfs</span><span class="o">/</span><span class="ss">(</span>[<span class="o">^/</span>]<span class="o">+</span><span class="ss">)</span><span class="o">/</span><span class="nv">api</span><span class="o">/</span><span class="ss">(</span>.<span class="o">*</span><span class="ss">)</span>$ <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">www</span><span class="o">/</span><span class="nv">wsgi</span><span class="o">-</span><span class="nv">scripts</span><span class="o">/</span><span class="nv">cvmfs</span><span class="o">-</span><span class="nv">server</span><span class="o">/</span><span class="nv">cvmfs</span><span class="o">-</span><span class="nv">api</span>.<span class="nv">wsgi</span><span class="o">/</span><span class="mh">$1</span><span class="o">/</span><span class="mh">$2</span>
+<span class="nv">RewriteRule</span> <span class="o">^/</span><span class="nv">cvmfs</span><span class="o">/</span><span class="ss">(</span>.<span class="o">*</span><span class="ss">)</span>$ <span class="o">/</span><span class="nv">srv</span><span class="o">/</span><span class="nv">cvmfs</span><span class="o">/</span><span class="mh">$1</span> 
+<span class="o">&lt;</span><span class="nv">Directory</span> <span class="s2">&quot;</span><span class="s">/srv/cvmfs</span><span class="s2">&quot;</span><span class="o">&gt;</span> 
+  <span class="nv">Options</span> <span class="o">-</span><span class="nv">MultiViews</span> <span class="o">+</span><span class="nv">FollowSymLinks</span> <span class="o">-</span><span class="nv">Indexes</span> 
+  <span class="nv">AllowOverride</span> <span class="nv">All</span> 
+  <span class="nv">Require</span> <span class="nv">all</span> <span class="nv">granted</span>
 
-  EnableMMAP Off EnableSendFile Off
+  <span class="nv">EnableMMAP</span> <span class="nv">Off</span> <span class="nv">EnableSendFile</span> <span class="nv">Off</span>
 
-  <span class="nt">&lt;FilesMatch</span> <span class="err">&quot;^\.cvmfs&quot;</span><span class="nt">&gt;</span>
-    ForceType application/x-cvmfs
-  <span class="nt">&lt;/FilesMatch&gt;</span>
+  <span class="o">&lt;</span><span class="nv">FilesMatch</span> <span class="s2">&quot;</span><span class="s">^\.cvmfs</span><span class="s2">&quot;</span><span class="o">&gt;</span>
+    <span class="nv">ForceType</span> <span class="nv">application</span><span class="o">/</span><span class="nv">x</span><span class="o">-</span><span class="nv">cvmfs</span>
+  <span class="o">&lt;/</span><span class="nv">FilesMatch</span><span class="o">&gt;</span>
 
-  Header unset Last-Modified 
-  RequestHeader unset If-Modified-Since
-  FileETag None
+  <span class="nv">Header</span> <span class="nv">unset</span> <span class="nv">Last</span><span class="o">-</span><span class="nv">Modified</span> 
+  <span class="nv">RequestHeader</span> <span class="nv">unset</span> <span class="k">If</span><span class="o">-</span><span class="nv">Modified</span><span class="o">-</span><span class="nv">Since</span>
+  <span class="nv">FileETag</span> <span class="nv">None</span>
 
-  ExpiresActive On 
-  ExpiresDefault &quot;access plus 3 days&quot; 
-  ExpiresByType text/html &quot;access plus 15 minutes&quot; 
-  ExpiresByType application/x-cvmfs &quot;access plus 61 seconds&quot; 
-  ExpiresByType application/json &quot;access plus 61 seconds&quot; 
-<span class="nt">&lt;/Directory&gt;</span>
+  <span class="nv">ExpiresActive</span> <span class="nv">On</span> 
+  <span class="nv">ExpiresDefault</span> <span class="s2">&quot;</span><span class="s">access plus 3 days</span><span class="s2">&quot;</span> 
+  <span class="nv">ExpiresByType</span> <span class="nv">text</span><span class="o">/</span><span class="nv">html</span> <span class="s2">&quot;</span><span class="s">access plus 15 minutes</span><span class="s2">&quot;</span> 
+  <span class="nv">ExpiresByType</span> <span class="nv">application</span><span class="o">/</span><span class="nv">x</span><span class="o">-</span><span class="nv">cvmfs</span> <span class="s2">&quot;</span><span class="s">access plus 61 seconds</span><span class="s2">&quot;</span> 
+  <span class="nv">ExpiresByType</span> <span class="nv">application</span><span class="o">/</span><span class="nv">json</span> <span class="s2">&quot;</span><span class="s">access plus 61 seconds</span><span class="s2">&quot;</span> 
+<span class="o">&lt;/</span><span class="nv">Directory</span><span class="o">&gt;</span>
 
-WSGIDaemonProcess cvmfs-api threads=64 display-name=%{GROUP} \
-    python-path=/usr/share/cvmfs-server/webapi
-<span class="nt">&lt;Directory</span> <span class="err">/var/www/wsgi-scripts/cvmfs-server</span><span class="nt">&gt;</span>
-  WSGIProcessGroup cvmfs-api
-  WSGIApplicationGroup cvmfs-api
-  Options ExecCGI
-  SetHandler wsgi-script
-  Require all granted
-<span class="nt">&lt;/Directory&gt;</span>
-WSGISocketPrefix /var/run/wsgi 
+<span class="nv">WSGIDaemonProcess</span> <span class="nv">cvmfs</span><span class="o">-</span><span class="nv">api</span> <span class="nv">threads</span><span class="o">=</span><span class="mi">64</span> <span class="nv">display</span><span class="o">-</span><span class="nv">name</span><span class="o">=%</span>{<span class="nv">GROUP</span>} \
+    <span class="nv">python</span><span class="o">-</span><span class="nv">path</span><span class="o">=/</span><span class="nv">usr</span><span class="o">/</span><span class="nv">share</span><span class="o">/</span><span class="nv">cvmfs</span><span class="o">-</span><span class="nv">server</span><span class="o">/</span><span class="nv">webapi</span>
+<span class="o">&lt;</span><span class="nv">Directory</span> <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">www</span><span class="o">/</span><span class="nv">wsgi</span><span class="o">-</span><span class="nv">scripts</span><span class="o">/</span><span class="nv">cvmfs</span><span class="o">-</span><span class="nv">server</span><span class="o">&gt;</span>
+  <span class="nv">WSGIProcessGroup</span> <span class="nv">cvmfs</span><span class="o">-</span><span class="nv">api</span>
+  <span class="nv">WSGIApplicationGroup</span> <span class="nv">cvmfs</span><span class="o">-</span><span class="nv">api</span>
+  <span class="nv">Options</span> <span class="nv">ExecCGI</span>
+  <span class="nv">SetHandler</span> <span class="nv">wsgi</span><span class="o">-</span><span class="nv">script</span>
+  <span class="nv">Require</span> <span class="nv">all</span> <span class="nv">granted</span>
+<span class="o">&lt;/</span><span class="nv">Directory</span><span class="o">&gt;</span>
+<span class="nv">WSGISocketPrefix</span> <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">run</span><span class="o">/</span><span class="nv">wsgi</span> 
 </pre></div>
 
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>On EL6-based systems (Apache httpd 2.2) replace both instances of <code>Require all granted</code> above with the following:</p>
-<div class="codehilite"><pre><span></span>Order allow, deny
-Allow from all
+<div class="codehilite"><pre><span></span><span class="k">Order</span> <span class="n">allow</span><span class="p">,</span> <span class="n">deny</span>
+<span class="n">Allow</span> <span class="k">from</span> <span class="k">all</span>
 </pre></div>
 
 

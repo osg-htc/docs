@@ -2371,14 +2371,14 @@ For example, <code>yum install osg-ce</code> will bring in <code>osg-ca-certs</c
 </li>
 <li>
 <p>(Optional) To add a new CA:</p>
-<div class="codehilite"><pre><span></span>osg-ca-manage add [--dir &lt;local_dir&gt;] --hash &lt;CA-HASH&gt;
+<div class="codehilite"><pre><span></span><span class="n">osg</span><span class="o">-</span><span class="n">ca</span><span class="o">-</span><span class="n">manage</span> <span class="k">add</span> <span class="p">[</span><span class="c1">--dir &lt;local_dir&gt;] --hash &lt;CA-HASH&gt;</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>(Optional) To remove a CA</p>
-<div class="codehilite"><pre><span></span>osg-ca-manage remove --hash &lt;CA-HASH&gt;
+<div class="codehilite"><pre><span></span><span class="n">osg</span><span class="o">-</span><span class="n">ca</span><span class="o">-</span><span class="n">manage</span> <span class="n">remove</span> <span class="c1">--hash &lt;CA-HASH&gt;</span>
 </pre></div>
 
 
@@ -2467,8 +2467,8 @@ If you do wish to install it manually, run the following command:</p>
 <ol>
 <li>
 <p>Change the configuration file to enable syslog:</p>
-<div class="codehilite"><pre><span></span>logmode = syslog
-syslogfacility = daemon
+<div class="codehilite"><pre><span></span><span class="n">logmode</span> <span class="o">=</span> <span class="n">syslog</span>
+<span class="n">syslogfacility</span> <span class="o">=</span> <span class="n">daemon</span>
 </pre></div>
 
 
