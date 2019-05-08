@@ -932,6 +932,26 @@
     Requesting InCommon IGTF Host Certificates
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requesting-certificates-from-a-registration-authority" title="Requesting certificates from a registration authority" class="md-nav__link">
+    Requesting certificates from a registration authority
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requesting-certificates-as-a-registration-authority" title="Requesting certificates as a registration authority" class="md-nav__link">
+    Requesting certificates as a registration authority
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2097,6 +2117,26 @@
     Requesting InCommon IGTF Host Certificates
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requesting-certificates-from-a-registration-authority" title="Requesting certificates from a registration authority" class="md-nav__link">
+    Requesting certificates from a registration authority
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requesting-certificates-as-a-registration-authority" title="Requesting certificates as a registration authority" class="md-nav__link">
+    Requesting certificates as a registration authority
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2245,10 +2285,9 @@ and not the InCommon RSA CA.</p>
   for more details.
   Let's Encrypt is not IGTF-accredited so their certificates are not suitable for WLCG services.</p>
 </li>
-<li>If neither of the above options work for your site, the OSG also accepts all
-  <a href="https://repo.opensciencegrid.org/cadist/">IGTF-accredited CAs</a>.</li>
 </ul>
-<p>Use this page to learn how to request and install host certificates on an OSG resource.</p>
+<p>If neither of the above options work for your site, the OSG also accepts all
+<a href="https://repo.opensciencegrid.org/cadist/">IGTF-accredited CAs</a>.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>Before requesting a new host certificate, use <code>openssl</code> to check if your host already has a valid certificate, i.e. the
 present is between <code>notBefore</code> and <code>notAfter</code> dates and times.
@@ -2274,15 +2313,21 @@ another IGTF CA subscription, please <a href="../../common/help/">contact us</a>
 <li>Obtain root access to the host</li>
 <li>Prepare the <a href="../../common/yum">required Yum repositories</a></li>
 </ul>
-<p>From a host that meets the above requirements, follow the instructions below to request a new host certificate:</p>
+<p>From a host that meets the above requirements, there are two options to get InCommon IGTF-accredited host certificates:</p>
 <ol>
-<li>
-<p>Install the <code>osg-pki-tools</code>:</p>
+<li><a href="#requesting-certificates-from-a-registration-authority">Requesting certificates from a Registration Authority (RA)</a>:
+   This requires a Certificate Signing Request (CSR), which can be generated with the <code>osg-cert-request</code> tool.</li>
+<li><a href="#requesting-certificates-as-a-registration-authority">Requesting certificates as an RA</a>:
+   As an RA, you can request, approve, and retrieve certificates yourself through the InCommon REST API using the
+   <code>osg-incommon-cert-request</code> tool .</li>
+</ol>
+<p>Install the <code>osg-pki-tools</code> where both command line tools are available:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install osg-pki-tools
 </pre></div>
 
 
-</li>
+<h3 id="requesting-certificates-from-a-registration-authority">Requesting certificates from a registration authority<a class="headerlink" href="#requesting-certificates-from-a-registration-authority" title="Permanent link">&para;</a></h3>
+<ol>
 <li>
 <p>Generate a Certificate Signing Request (CSR) and private key using the <code>osg-cert-request</code> tool:</p>
 <div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-cert-request --hostname &lt;HOSTNAME&gt; <span class="se">\</span>
@@ -2336,6 +2381,68 @@ generated above.</li>
 
 </li>
 </ol>
+<h3 id="requesting-certificates-as-a-registration-authority">Requesting certificates as a registration authority<a class="headerlink" href="#requesting-certificates-as-a-registration-authority" title="Permanent link">&para;</a></h3>
+<p>If you are a Registration Authority for your institution, skip ahead to <a href="#osg-incommon-cert-request">this section</a>.
+If you are not already a Registration Authority (RA) for your institution, you must request to be made one:</p>
+<ol>
+<li>Find your institution-specific InCommon contact
+   (e.g. <a href="https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/">UW-Madison InCommon contact</a>),</li>
+<li>Request a Department Registration Authority user with SSL auto-approve enabled and a client certificate:<ul>
+<li>If they do not grant your request, you will not be able to request, approve, and retrieve certificates yourself.
+  Instead, you must <a href="#requesting-certificates-from-a-registration-authority">request certificates from your RA</a>.</li>
+<li>If they grant your request, you will receive an email with instructions for requesting your client certificate.
+  Download the <code>.p12</code> file and extract the certificate and key:<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> openssl pkcs12 -in incommon_file.p12 -nocerts -out ~/path_to_dir/incommon_user_key.pem
+<span class="gp">user@host $</span> openssl pkcs12 -in incommon_file.p12 -nokeys -out ~/path_to_dir/incommon_user_cert.pem
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+</ol>
+<p><a name="osg-incommon-cert-request"></a></p>
+<p>Once you have RA privileges, you may request, approve, and retrieve host certificates using <code>osg-incommon-cert-request</code>:</p>
+<ul>
+<li>
+<p>Requesting a certificate with a single hostname <code>&lt;HOSTNAME&gt;</code>:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-incommoncert-request --username &lt;INCOMMON_LOGIN&gt; <span class="se">\</span>
+            --cert ~/path_to_dir/incommon_user_cert.pem <span class="se">\</span>
+            --pkey ~/path_to_dir/incommon_user_key.pem <span class="se">\ </span>
+<span class="go">            --hostname &lt;HOSTNAME&gt;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Requesting a certificate with Subject Alternative Names (SANs):</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-incommoncert-request --username &lt;INCOMMON_LOGIN&gt; <span class="se">\</span>
+            --cert ~/path_to_dir/incommon_user_cert.pem <span class="se">\</span>
+            --pkey ~/path_to_dir/incommon_user_key.pem <span class="se">\</span>
+            --hostname &lt;HOSTNAME&gt; <span class="se">\</span>
+            --altname &lt;ALTNAME&gt; <span class="se">\</span>
+            --altname &lt;ALTNAME2&gt;
+</pre></div>
+
+
+</li>
+<li>
+<p>Requesting certificates in bulk using a hostfile name:</p>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-incommoncert-request --username &lt;INCOMMON_LOGIN&gt; <span class="se">\</span>
+            --cert ~/path_to_dir/incommon_user_cert.pem <span class="se">\</span>
+            --pkey ~/path_to_dir/incommon_user_key.pem <span class="se">\</span>
+            --hostfile ~/path_to_file/hostfile.txt
+</pre></div>
+
+
+<p>Where the contents of <code>hostfile.txt</code> contain one hostname and any number of SANs per line:</p>
+<div class="codehilite"><pre><span></span><span class="go">hostname01.yourdomain</span>
+<span class="go">hostname02.yourdomain hostnamealias.yourdomain hostname03.yourdomain</span>
+<span class="go">hostname04.yourdomain hostname05.yourdomain</span>
+</pre></div>
+
+
+</li>
+</ul>
 <h2 id="requesting-host-certificates-using-lets-encrypt">Requesting Host Certificates Using <a href="https://letsencrypt.org/">Let's Encrypt</a><a class="headerlink" href="#requesting-host-certificates-using-lets-encrypt" title="Permanent link">&para;</a></h2>
 <p><a href="https://letsencrypt.org/">Let's Encrypt</a> is a free, automated, and open CA frequently used for web services;
 see the <a href="https://opensciencegrid.github.io/security/LetsEncryptOSGCAbundle/">security team's position on Let's Encrypt</a>
