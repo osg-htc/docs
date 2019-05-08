@@ -28,10 +28,9 @@ We recommend requesting host certificates from one of the following CAs:
   see the [security team's position on Let's Encrypt](https://opensciencegrid.org/security/LetsEncryptOSGCAbundle/)
   for more details.
   Let's Encrypt is not IGTF-accredited so their certificates are not suitable for WLCG services.
-- If neither of the above options work for your site, the OSG also accepts all
-  [IGTF-accredited CAs](https://repo.opensciencegrid.org/cadist/).
 
-Use this page to learn how to request and install host certificates on an OSG resource.
+If neither of the above options work for your site, the OSG also accepts all
+[IGTF-accredited CAs](https://repo.opensciencegrid.org/cadist/).
 
 Before Starting
 ---------------
@@ -65,12 +64,21 @@ As with all OSG software installations, there are some one-time (per host) steps
 - Obtain root access to the host
 - Prepare the [required Yum repositories](/common/yum)
 
-From a host that meets the above requirements, follow the instructions below to request a new host certificate:
+From a host that meets the above requirements, there are two options to get InCommon IGTF-accredited host certificates:
 
-1. Install the `osg-pki-tools`:
+1. [Requesting certificates from a Registration Authority (RA)](#requesting-certificates-from-a-registration-authority):
+   This requires a Certificate Signing Request (CSR), which can be generated with the `osg-cert-request` tool.
+1. [Requesting certificates as an RA](#requesting-certificates-as-a-registration-authority):
+   As an RA, you can request, approve, and retrieve certificates yourself through the InCommon REST API using the
+   `osg-incommon-cert-request` tool .
 
-        :::console
-        root@host # yum install osg-pki-tools
+Install the `osg-pki-tools` where both command line tools are available:
+
+```console
+root@host # yum install osg-pki-tools
+```
+
+### Requesting certificates from a registration authority
 
 1. Generate a Certificate Signing Request (CSR) and private key using the `osg-cert-request` tool:
 
@@ -116,6 +124,61 @@ generated above.
         root@host # chmod 444 /etc/grid-security/hostcert.pem
         root@host # cp %RED%<PATH TO KEY>%ENDCOLOR% /etc/grid-security/hostkey.pem
         root@host # chmod 400 /etc/grid-security/hostkey.pem
+
+### Requesting certificates as a registration authority
+
+If you are a Registration Authority for your institution, skip ahead to [this section](#osg-incommon-cert-request).
+If you are not already a Registration Authority (RA) for your institution, you must request to be made one:
+
+1. Find your institution-specific InCommon contact
+   (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/)),
+1. Request a Department Registration Authority user with SSL auto-approve enabled and a client certificate:
+    - If they do not grant your request, you will not be able to request, approve, and retrieve certificates yourself.
+      Instead, you must [request certificates from your RA](#requesting-certificates-from-a-registration-authority).
+    - If they grant your request, you will receive an email with instructions for requesting your client certificate.
+      Download the `.p12` file and extract the certificate and key:
+
+            :::console
+            user@host $ openssl pkcs12 -in incommon_file.p12 -nocerts -out ~/path_to_dir/incommon_user_key.pem
+            user@host $ openssl pkcs12 -in incommon_file.p12 -nokeys -out ~/path_to_dir/incommon_user_cert.pem
+
+<a name="osg-incommon-cert-request"></a>
+
+Once you have RA privileges, you may request, approve, and retrieve host certificates using `osg-incommon-cert-request`:
+
+- Requesting a certificate with a single hostname `<HOSTNAME>`:
+
+        :::console
+        user@host $ osg-incommoncert-request --username <INCOMMON_LOGIN> \
+                    --cert ~/path_to_dir/incommon_user_cert.pem \
+                    --pkey ~/path_to_dir/incommon_user_key.pem \ 
+                    --hostname <HOSTNAME>
+
+- Requesting a certificate with Subject Alternative Names (SANs):
+
+        :::console
+        user@host $ osg-incommoncert-request --username <INCOMMON_LOGIN> \
+                    --cert ~/path_to_dir/incommon_user_cert.pem \
+                    --pkey ~/path_to_dir/incommon_user_key.pem \
+                    --hostname <HOSTNAME> \
+                    --altname <ALTNAME> \
+                    --altname <ALTNAME2>
+
+- Requesting certificates in bulk using a hostfile name:
+
+        :::console
+        user@host $ osg-incommoncert-request --username <INCOMMON_LOGIN> \
+                    --cert ~/path_to_dir/incommon_user_cert.pem \
+                    --pkey ~/path_to_dir/incommon_user_key.pem \
+                    --hostfile ~/path_to_file/hostfile.txt
+
+    Where the contents of `hostfile.txt` contain one hostname and any number of SANs per line:
+
+        :::console
+        hostname01.yourdomain
+        hostname02.yourdomain hostnamealias.yourdomain hostname03.yourdomain
+        hostname04.yourdomain hostname05.yourdomain
+
 
 Requesting Host Certificates Using [Let's Encrypt](https://letsencrypt.org/)
 ----------------------------------------------------------------------------
