@@ -132,10 +132,10 @@ If you are not already a Registration Authority (RA) for your institution, you m
 
 1. Find your institution-specific InCommon contact
    (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/)),
-1. Request a Department Registration Authority user with SSL auto-approve enabled and client certificate:
+1. Request a Department Registration Authority user with SSL auto-approve enabled and a client certificate:
     - If they do not grant your request, you will not be able to request, approve, and retrieve certificates yourself.
       Instead, you must [request certificates from your RA](#requesting-certificates-from-a-registration-authority).
-    - If they grant your request, you will receive an email with your client certificate.
+    - If they grant your request, you will receive an email with instructions for requesting your client certificate.
       Download the `.p12` file and extract the certificate and key:
 
             :::console
@@ -167,7 +167,7 @@ Once you have RA privileges, you may request, approve, and retrieve host certifi
 - Requesting certificates in bulk using a hostfile name:
 
         :::console
-        user@host $ osg-incommoncert-request --username <INCOMMONLOGIN> \
+        user@host $ osg-incommoncert-request --username <INCOMMON_LOGIN> \
                     --cert ~/path_to_dir/incommon_user_cert.pem \
                     --pkey ~/path_to_dir/incommon_user_key.pem \
                     --hostfile ~/path_to_file/hostfile.txt
