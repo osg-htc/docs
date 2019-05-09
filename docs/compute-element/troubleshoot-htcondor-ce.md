@@ -951,6 +951,14 @@ troubleshoot issues with job routing.
     This means that HTCondor-CE cannot communicate with your HTCondor batch system.
     Verify that the `condor` service is running on the HTCondor-CE host and is configured for your central manager.
 
+-   **(HTCondor batch systems only)** If you see the following error message:
+
+        JobRouter failure (src=2810466.0,dest=47968.0,route=MWT2_UCORE): giving up, because submitted job is still not in job queue mirror (submitted 605 seconds ago).  Perhaps it has been removed?
+
+    Ensure that `condor_config_val SPOOL` and `condor_ce_config_val JOB_ROUTER_SCHEDD2_SPOOL` return the same value.
+    If they don't, change the value of `JOB_ROUTER_SCHEDD2_SPOOL` in your HTCondor-CE configuration to match `SPOOL`
+    from your HTCondor configuration.
+
 -   If you have `D_ALWAYS:2` turned on for the job router, you will see errors like the following:
 
         06/12/15 14:00:28 HOOK_UPDATE_JOB_INFO not configured.
