@@ -71,7 +71,6 @@ Detailed changes are below. All of the documentation can be found [here](/index.
    -  To start using shared port, change the secondary collectors lines and the CCBs lines (if any) in `/etc/gwms-frontend/frontend.xml`, changing the address to include the shared port sinful string:
       ```
         <collector DN="/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=Services/CN=gwms-frontend.domain" group="default" node="gwms-frontend.domain:9618?sock=collector0-40" secondary="True"/>
-      ```
       Replacing `gwms-frontend-domain` with the hostname of your GlideinWMS frontend.
       See the [GlideinWMS documentation](https://glideinwms.fnal.gov/doc.prd/components/condor.html#collectors ) for details. 
 
