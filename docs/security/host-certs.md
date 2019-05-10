@@ -109,8 +109,8 @@ root@host # yum install osg-pki-tools
 1. Find your institution-specific InCommon contact
    (e.g. [UW-Madison InCommon contact](https://it.wisc.edu/about/division-of-information-technology/cybersecurity/security-tools-software/server-certificates/)),
    submit the CSR that you generated above, and request a 1-year `IGTF Server Certificate` for `OTHER` server software.
-1. After the certificate has been issued by your institution, download it on its intended host and copy over the key you
-generated above.
+1. After the certificate has been issued by your institution, download the host certificate only (not the full chain) to
+   its intended host and copy over the key you generated above.
 1. Verify that the issuer `CN` field is ` InCommon IGTF Server CA`:
 
         :::console
