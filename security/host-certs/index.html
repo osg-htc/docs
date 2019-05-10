@@ -2360,8 +2360,8 @@ Additional options and descriptions can be found <a href="https://github.com/ope
    (e.g. <a href="https://it.wisc.edu/about/division-of-information-technology/cybersecurity/security-tools-software/server-certificates/">UW-Madison InCommon contact</a>),
    submit the CSR that you generated above, and request a 1-year <code>IGTF Server Certificate</code> for <code>OTHER</code> server software.</p>
 </li>
-<li>After the certificate has been issued by your institution, download it on its intended host and copy over the key you
-generated above.</li>
+<li>After the certificate has been issued by your institution, download the host certificate only (not the full chain) to
+   its intended host and copy over the key you generated above.</li>
 <li>
 <p>Verify that the issuer <code>CN</code> field is <code>InCommon IGTF Server CA</code>:</p>
 <div class="codehilite"><pre><span></span><span class="gp">$</span> openssl x509 -in <span style="color:red">&lt;PATH TO CERTIFICATE&gt;</span> -noout -issuer
