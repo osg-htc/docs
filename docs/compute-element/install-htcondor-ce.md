@@ -260,14 +260,14 @@ If your site has multiple CEs or you have non-grid users submitting to the same 
 software needs to be configured so that it doesn't over report the number of jobs.
 Use the following table to determine which file requires editing:
 
-| If your batch system is… | Then edit the following file on your CE(s)… |
+| If your batch system is… | Then edit the following file on each of your CE(s)… |
 |:-------------------------|:--------------------------------------------|
 | LSF                      | `/etc/gratia/pbs-lsf/ProbeConfig`           |
 | PBS                      | `/etc/gratia/pbs-lsf/ProbeConfig`           |
 | SGE                      | `/etc/gratia/sge/ProbeConfig`               |
 | SLURM                    | `/etc/gratia/slurm/ProbeConfig`             |
 
-Then edit the value of `SuppressNoDNRecords` so that it reads:
+Then edit the value of `SuppressNoDNRecords` on each of your CE's so that it reads:
 
 ``` file
 SuppressNoDNRecords="1"
