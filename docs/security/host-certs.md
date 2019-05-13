@@ -140,6 +140,11 @@ generated above.
         :::console
         user@host $ openssl pkcs12 -in incommon_file.p12 -nokeys -out ~/path_to_dir/incommon_user_cert.pem
 
+1. Find your institution-specific organization and department codes at the InCommon Cert Manager (https://cert-manager.com/customer/InCommon). These are numeric codes that should be specified through the command line using the -O/--orgcode ORG,DEPT option:
+    
+    * Organization code is shown as OrgID under Settings > Organizations > Edit
+    * Department code is shown as OrgID under Settings > Organizations > Departments > Edit
+
 1. Request a certificate and generate the associated private key using the osg-incommon-cert-request:
 
         Requesting a certificate with a single hostname <HOSTNAME> 
@@ -147,7 +152,7 @@ generated above.
         user@host $ osg-incommoncert-request --username <INCOMMONLOGIN> \
                     --cert ~/path_to_dir/incommon_user_cert.pem \
                     --pkey ~/path_to_dir/incommon_user_key.pem \ 
-                    --hostname <HOSTNAME>
+                    --hostname <HOSTNAME> [--orgcode <ORG,DEPT>]
 
         Requesting a certificate with Subject Alternative Names (SANs)
         :::console
@@ -156,14 +161,15 @@ generated above.
                     --pkey ~/path_to_dir/incommon_user_key.pem \
                     --hostname <HOSTNAME> \
                     --altname <ALTNAME> \
-                    --altname <ALTNAME2>
+                    --altname <ALTNAME2> [--orgcode <ORG,DEPT>]
 
         Requesting certificates in bulk using a hostfile name
         :::console
         user@host $ osg-incommoncert-request --username <INCOMMONLOGIN> \
                     --cert ~/path_to_dir/incommon_user_cert.pem \
                     --pkey ~/path_to_dir/incommon_user_key.pem \
-                    --hostfile ~/path_to_file/hostfile.txt
+                    --hostfile ~/path_to_file/hostfile.txt \
+                    [--orgcode <ORG,DEPT>]
 
         :::console
         hostfilepath.txt example
