@@ -193,7 +193,7 @@ Wisconsin` can be found and registered in the following file, relative to the
 [root of the topology repository](https://github.com/opensciencegrid/topology/tree/master/):
 
 ```
-topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC_downtime.yaml`
+topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC_downtime.yaml
 ```
 
 !!! note 
