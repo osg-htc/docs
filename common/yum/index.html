@@ -2378,27 +2378,13 @@ otherwise, you might have dependency resolution ("depsolving") issues.</p>
 For instructions on upgrading from one OSG series to another, see the
 <a href="../../release/release_series#updating-from-old">release series document</a>.</p>
 <p>Install the OSG repositories:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> rpm -Uvh &lt;URL&gt;
+<div class="codehilite"><pre><span></span><span class="gp">#</span><span class="c1"># EPEL 6 (For RHEL 6, CentOS 6, and SL 6)</span>
+<span class="gp">root@host #</span> rpm -Uvh https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm
+<span class="gp">#</span><span class="c1"># EPEL 7 (For RHEL 7, CentOS 7, and SL 7)</span>
+<span class="gp">root@host #</span> rpm -Uvh https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm
 </pre></div>
 
 
-<p>Where <code>&lt;URL&gt;</code> is one of the following:</p>
-<table>
-<thead>
-<tr>
-<th align="left">Series</th>
-<th align="center">EL6 URL (for RHEL 6, CentOS 6, or SL 6)</th>
-<th align="center">EL7 URL (for RHEL 7, CentOS 7, or SL 7)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><strong>OSG 3.4</strong></td>
-<td align="center"><code>https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm</code></td>
-<td align="center"><code>https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm</code></td>
-</tr>
-</tbody>
-</table>
 <p>The only OSG repository enabled by default is the release one.
 If you want to <a href="#repositories">enable another one</a> (e.g. <code>osg-testing</code>), then edit its file
 (e.g. <code>/etc/yum.repos.d/osg-testing.repo</code>) and change the enabled option from 0 to 1:</p>
