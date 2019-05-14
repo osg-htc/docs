@@ -119,9 +119,9 @@ You must install and enable these first.
 
         :::console
         ## EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
-        root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+        root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
         ## EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
-        root@host # rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        root@host # yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 -   Verify that `/etc/yum.repos.d/epel.repo` exists; the `[epel]` section should contain:
 
@@ -145,9 +145,9 @@ Install the OSG repositories:
 
     :::console
     ## EPEL 6 (For RHEL 6, CentOS 6, and SL 6)
-    root@host # rpm -Uvh https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm
+    root@host # yum install https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el6-release-latest.rpm
     ## EPEL 7 (For RHEL 7, CentOS 7, and SL 7)
-    root@host # rpm -Uvh https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm
+    root@host # yum install https://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-latest.rpm
 
 The only OSG repository enabled by default is the release one.
 If you want to [enable another one](#repositories) (e.g. `osg-testing`), then edit its file
