@@ -149,13 +149,16 @@ If you are not already a Registration Authority (RA) for your institution, you m
 
 Once you have RA privileges, you may request, approve, and retrieve host certificates using `osg-incommon-cert-request`:
 
+<a name="osg-incommon-cert-request"></a>
+
 - Requesting a certificate with a single hostname `<HOSTNAME>`:
 
         :::console
         user@host $ osg-incommoncert-request --username <INCOMMON_LOGIN> \
                     --cert ~/path_to_dir/incommon_user_cert.pem \
                     --pkey ~/path_to_dir/incommon_user_key.pem \ 
-                    --hostname <HOSTNAME> [--orgcode <ORG,DEPT>]
+                    --hostname <HOSTNAME>
+                    [--orgcode <ORG,DEPT>]
 
 - Requesting a certificate with Subject Alternative Names (SANs):
 
@@ -165,7 +168,8 @@ Once you have RA privileges, you may request, approve, and retrieve host certifi
                     --pkey ~/path_to_dir/incommon_user_key.pem \
                     --hostname <HOSTNAME> \
                     --altname <ALTNAME> \
-                    --altname <ALTNAME2> [--orgcode <ORG,DEPT>]
+                    --altname <ALTNAME2>
+                    [--orgcode <ORG,DEPT>]
 
 - Requesting certificates in bulk using a hostfile name:
 
