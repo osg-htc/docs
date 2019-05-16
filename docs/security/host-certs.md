@@ -154,7 +154,7 @@ Once you have RA privileges, you may request, approve, and retrieve host certifi
 - Requesting a certificate with a single hostname `<HOSTNAME>`:
 
         :::console
-        user@host $ osg-incommoncert-request --username <INCOMMON_LOGIN> \
+        user@host $ osg-incommon-cert-request --username <INCOMMON_LOGIN> \
                     --cert ~/path_to_dir/incommon_user_cert.pem \
                     --pkey ~/path_to_dir/incommon_user_key.pem \ 
                     --hostname <HOSTNAME>
@@ -163,7 +163,7 @@ Once you have RA privileges, you may request, approve, and retrieve host certifi
 - Requesting a certificate with Subject Alternative Names (SANs):
 
         :::console
-        user@host $ osg-incommoncert-request --username <INCOMMON_LOGIN> \
+        user@host $ osg-incommon-cert-request --username <INCOMMON_LOGIN> \
                     --cert ~/path_to_dir/incommon_user_cert.pem \
                     --pkey ~/path_to_dir/incommon_user_key.pem \
                     --hostname <HOSTNAME> \
@@ -174,7 +174,7 @@ Once you have RA privileges, you may request, approve, and retrieve host certifi
 - Requesting certificates in bulk using a hostfile name:
 
         :::console
-        user@host $ osg-incommoncert-request --username <INCOMMON_LOGIN> \
+        user@host $ osg-incommon-cert-request --username <INCOMMON_LOGIN> \
                     --cert ~/path_to_dir/incommon_user_cert.pem \
                     --pkey ~/path_to_dir/incommon_user_key.pem \
                     --hostfile ~/path_to_file/hostfile.txt \
