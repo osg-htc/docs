@@ -142,7 +142,8 @@ If you are not already a Registration Authority (RA) for your institution, you m
             user@host $ openssl pkcs12 -in incommon_file.p12 -nocerts -out ~/path_to_dir/incommon_user_key.pem
             user@host $ openssl pkcs12 -in incommon_file.p12 -nokeys -out ~/path_to_dir/incommon_user_cert.pem
 
-1. Find your institution-specific organization and department codes at the InCommon Cert Manager (https://cert-manager.com/customer/InCommon). These are numeric codes that should be specified through the command line using the -O/--orgcode ORG,DEPT option:
+1. Find your institution-specific organization and department codes at the InCommon Cert Manager (https://cert-manager.com/customer/InCommon).
+   These are numeric codes that should be specified through the command line using the -O/--orgcode ORG,DEPT option:
 
     * Organization code is shown as OrgID under Settings > Organizations > Edit
     * Department code is shown as OrgID under Settings > Organizations > Departments > Edit
