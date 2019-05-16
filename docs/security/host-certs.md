@@ -142,35 +142,44 @@ If you are not already a Registration Authority (RA) for your institution, you m
             user@host $ openssl pkcs12 -in incommon_file.p12 -nocerts -out ~/path_to_dir/incommon_user_key.pem
             user@host $ openssl pkcs12 -in incommon_file.p12 -nokeys -out ~/path_to_dir/incommon_user_cert.pem
 
-<a name="osg-incommon-cert-request"></a>
+1. Find your institution-specific organization and department codes at the InCommon Cert Manager (https://cert-manager.com/customer/InCommon).
+   These are numeric codes that should be specified through the command line using the -O/--orgcode ORG,DEPT option:
+
+    * Organization code is shown as OrgID under Settings > Organizations > Edit
+    * Department code is shown as OrgID under Settings > Organizations > Departments > Edit
 
 Once you have RA privileges, you may request, approve, and retrieve host certificates using `osg-incommon-cert-request`:
+
+<a name="osg-incommon-cert-request"></a>
 
 - Requesting a certificate with a single hostname `<HOSTNAME>`:
 
         :::console
-        user@host $ osg-incommoncert-request --username <INCOMMON_LOGIN> \
+        user@host $ osg-incommon-cert-request --username <INCOMMON_LOGIN> \
                     --cert ~/path_to_dir/incommon_user_cert.pem \
                     --pkey ~/path_to_dir/incommon_user_key.pem \ 
                     --hostname <HOSTNAME>
+                    [--orgcode <ORG,DEPT>]
 
 - Requesting a certificate with Subject Alternative Names (SANs):
 
         :::console
-        user@host $ osg-incommoncert-request --username <INCOMMON_LOGIN> \
+        user@host $ osg-incommon-cert-request --username <INCOMMON_LOGIN> \
                     --cert ~/path_to_dir/incommon_user_cert.pem \
                     --pkey ~/path_to_dir/incommon_user_key.pem \
                     --hostname <HOSTNAME> \
                     --altname <ALTNAME> \
                     --altname <ALTNAME2>
+                    [--orgcode <ORG,DEPT>]
 
 - Requesting certificates in bulk using a hostfile name:
 
         :::console
-        user@host $ osg-incommoncert-request --username <INCOMMON_LOGIN> \
+        user@host $ osg-incommon-cert-request --username <INCOMMON_LOGIN> \
                     --cert ~/path_to_dir/incommon_user_cert.pem \
                     --pkey ~/path_to_dir/incommon_user_key.pem \
-                    --hostfile ~/path_to_file/hostfile.txt
+                    --hostfile ~/path_to_file/hostfile.txt \
+                    [--orgcode <ORG,DEPT>]
 
     Where the contents of `hostfile.txt` contain one hostname and any number of SANs per line:
 
