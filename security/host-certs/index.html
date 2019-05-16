@@ -2387,7 +2387,9 @@ If you are not already a Registration Authority (RA) for your institution, you m
 <ol>
 <li>Find your institution-specific InCommon contact
    (e.g. <a href="https://it.wisc.edu/about/office-of-the-cio/cybersecurity/security-tools-software/server-certificates/">UW-Madison InCommon contact</a>),</li>
-<li>Request a Department Registration Authority user with SSL auto-approve enabled and a client certificate:<ul>
+<li>
+<p>Request a Department Registration Authority user with SSL auto-approve enabled and a client certificate:</p>
+<ul>
 <li>If they do not grant your request, you will not be able to request, approve, and retrieve certificates yourself.
   Instead, you must <a href="#requesting-certificates-from-a-registration-authority">request certificates from your RA</a>.</li>
 <li>If they grant your request, you will receive an email with instructions for requesting your client certificate.
@@ -2399,38 +2401,49 @@ If you are not already a Registration Authority (RA) for your institution, you m
 </li>
 </ul>
 </li>
+<li>
+<p>Find your institution-specific organization and department codes at the InCommon Cert Manager (https://cert-manager.com/customer/InCommon).
+   These are numeric codes that should be specified through the command line using the -O/--orgcode ORG,DEPT option:</p>
+<ul>
+<li>Organization code is shown as OrgID under Settings &gt; Organizations &gt; Edit</li>
+<li>Department code is shown as OrgID under Settings &gt; Organizations &gt; Departments &gt; Edit</li>
+</ul>
+</li>
 </ol>
-<p><a name="osg-incommon-cert-request"></a></p>
 <p>Once you have RA privileges, you may request, approve, and retrieve host certificates using <code>osg-incommon-cert-request</code>:</p>
+<p><a name="osg-incommon-cert-request"></a></p>
 <ul>
 <li>
 <p>Requesting a certificate with a single hostname <code>&lt;HOSTNAME&gt;</code>:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-incommoncert-request --username &lt;INCOMMON_LOGIN&gt; <span class="se">\</span>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-incommon-cert-request --username &lt;INCOMMON_LOGIN&gt; <span class="se">\</span>
             --cert ~/path_to_dir/incommon_user_cert.pem <span class="se">\</span>
             --pkey ~/path_to_dir/incommon_user_key.pem <span class="se">\ </span>
 <span class="go">            --hostname &lt;HOSTNAME&gt;</span>
+<span class="go">            [--orgcode &lt;ORG,DEPT&gt;]</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>Requesting a certificate with Subject Alternative Names (SANs):</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-incommoncert-request --username &lt;INCOMMON_LOGIN&gt; <span class="se">\</span>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-incommon-cert-request --username &lt;INCOMMON_LOGIN&gt; <span class="se">\</span>
             --cert ~/path_to_dir/incommon_user_cert.pem <span class="se">\</span>
             --pkey ~/path_to_dir/incommon_user_key.pem <span class="se">\</span>
             --hostname &lt;HOSTNAME&gt; <span class="se">\</span>
             --altname &lt;ALTNAME&gt; <span class="se">\</span>
             --altname &lt;ALTNAME2&gt;
+<span class="go">            [--orgcode &lt;ORG,DEPT&gt;]</span>
 </pre></div>
 
 
 </li>
 <li>
 <p>Requesting certificates in bulk using a hostfile name:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-incommoncert-request --username &lt;INCOMMON_LOGIN&gt; <span class="se">\</span>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> osg-incommon-cert-request --username &lt;INCOMMON_LOGIN&gt; <span class="se">\</span>
             --cert ~/path_to_dir/incommon_user_cert.pem <span class="se">\</span>
             --pkey ~/path_to_dir/incommon_user_key.pem <span class="se">\</span>
-            --hostfile ~/path_to_file/hostfile.txt
+            --hostfile ~/path_to_file/hostfile.txt <span class="se">\</span>
+            <span class="o">[</span>--orgcode &lt;ORG,DEPT&gt;<span class="o">]</span>
 </pre></div>
 
 
