@@ -8,7 +8,7 @@ Summary of changes
 
 This release contains:
 
-!!! note
+!!! danger
     This release contains a [security fix](https://opensciencegrid.org/security/vulns/OSG-SEC-2019-05-14-Vulnerability-in-Singularity/) for Singularity in the upcoming repository.
     The Singularity in OSG 3.4 does not have the vulnerability.
 
