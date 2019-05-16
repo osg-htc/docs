@@ -9,6 +9,7 @@ Release Notes
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.30](/release/3.4/release-3-4-30)     | 2019-05-16 | BLAHP 1.81.41, VO Package V91, xrootd-voms-plugin 0.6.0, osg-pki-tools 3.3.0; Upcoming: Singularity 3.1.1-1.1, osg-se-hadoop, BLAHP 1.18.41 |
 | [3.4.29-2](/release/3.4/release-3-4-29-2) | 2019-05-07 | VO Package v90                                                          |
 | [3.4.29](/release/3.4/release-3-4-29)     | 2019-05-02 | XCache 1.0.5, MyProxy 6.2.3                                             |
 | [3.4.28-2](/release/3.4/release-3-4-28-2) | 2019-04-30 | IGTF 1.98                                                               |
