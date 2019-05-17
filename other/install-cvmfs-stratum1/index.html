@@ -2418,7 +2418,7 @@
 
 <span class="s1"># cache only api calls </span>
 <span class="s1">insertline(&quot;^http_access deny all&quot;, &quot;acl CVMFSAPI urlpath_regex ^/cvmfs/[^/]*/api/&quot;)</span>
-<span class="s1">insertline(&quot;^http_access deny all&quot;, &quot;cache deny CVMFSAPI&quot;)</span>
+<span class="s1">insertline(&quot;^http_access deny all&quot;, &quot;cache deny !CVMFSAPI&quot;)</span>
 
 <span class="s1"># port 80 is also supported, through an iptables redirect </span>
 <span class="s1">setoption(&quot;http_port&quot;, &quot;8000 accel defaultsite=localhost:8081 no-vhost&quot;)</span>
