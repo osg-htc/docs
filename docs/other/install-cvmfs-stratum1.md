@@ -177,7 +177,7 @@ awk --file `dirname $0`/customhelps.awk --source '{
 
 # cache only api calls 
 insertline("^http_access deny all", "acl CVMFSAPI urlpath_regex ^/cvmfs/[^/]*/api/")
-insertline("^http_access deny all", "cache deny CVMFSAPI")
+insertline("^http_access deny all", "cache deny !CVMFSAPI")
 
 # port 80 is also supported, through an iptables redirect 
 setoption("http_port", "8000 accel defaultsite=localhost:8081 no-vhost")
