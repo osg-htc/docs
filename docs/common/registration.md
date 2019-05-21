@@ -150,31 +150,24 @@ To modify an existing resource, follow these instructions:
 
 ### Retiring resources ###
 
-To retire an already registered resource, choose one of the following, depending on the resource's service(s):
+To retire an already registered resource, set `Active: false`. For example:
 
-- If the resource contains a `CE` (Compute Element) or `Submit Node` (GlideinWMS frontend) service, set `Active: false`
-  within resource group's YAML file.
-  For example, to remove the resource GLOW, edit the file `topology/University of Wisconsin/GLOW/GLOW.yaml`, setting
-  `Active: false`:
+```
+...
+Production: true
+Resources:
+  GLOW:
+    Active: %RED%false%ENDCOLOR%
+    ...
+    Services:
+      CE:
+        Description: Compute Element
+        Details:
+          hidden: false
+```
 
-        ...
-        Production: true
-        Resources:
-          GLOW:
-            Active: %RED%false%ENDCOLOR%
-            ...
-            Services:
-              CE:
-                Description: Compute Element
-                Details:
-                  hidden: false
-
-    You may have to add the `Active` attribute it if does not already exist within the resource definition.
-
-- If the resource does not contain a `CE` (Compute Element) or OSG submitter service, you may remove the resource
-  completely.
-  If there are no more resources in the resource group, you may remove the entire resource group file.
-
+If the `Active` attribute does not already exist within the resource definition, add it.
+If your resource becomes available again, set `Active: true`.
 
 Registering Resource Downtimes
 ------------------------------
@@ -182,9 +175,9 @@ Registering Resource Downtimes
 Resource downtime is a finite period of time for which one or more of the grid services of a registered resource are
 unavailable.
 
-!!! note
-    If your registered resource is expected to be in downtime for an undetermined amount of time, set `Active: False`
-    in the resource instead.
+!!! warning
+    If you expect your resource to be indefinitely unavailable, [retire the resource](#retiring-resources) instead of
+    registering a downtime.
 
 Downtimes are stored in YAML files alongside the resource group YAML files as described [here](#registering-resources).
 
