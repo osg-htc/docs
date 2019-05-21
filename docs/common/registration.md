@@ -182,9 +182,9 @@ Registering Resource Downtimes
 Resource downtime is a finite period of time for which one or more of the grid services of a registered resource are
 unavailable.
 
-!!! note
-    If your registered resource is expected to be in downtime for an undetermined amount of time, set `Active: False`
-    in the resource instead.
+!!! warning
+    If you expect your resource to be indefinitely unavailable, [retire the resource](#retiring-resources) instead of
+    registering a downtime.
 
 Downtimes are stored in YAML files alongside the resource group YAML files as described [here](#registering-resources).
 
