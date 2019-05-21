@@ -2400,13 +2400,7 @@ access to the OSG copy of the topology data, which is why you are creating a pul
 </li>
 </ol>
 <h3 id="retiring-resources">Retiring resources<a class="headerlink" href="#retiring-resources" title="Permanent link">&para;</a></h3>
-<p>To retire an already registered resource, choose one of the following, depending on the resource's service(s):</p>
-<ul>
-<li>
-<p>If the resource contains a <code>CE</code> (Compute Element) or <code>Submit Node</code> (GlideinWMS frontend) service, set <code>Active: false</code>
-  within resource group's YAML file.
-  For example, to remove the resource GLOW, edit the file <code>topology/University of Wisconsin/GLOW/GLOW.yaml</code>, setting
-  <code>Active: false</code>:</p>
+<p>To retire an already registered resource, set <code>Active: false</code>. For example:</p>
 <div class="codehilite"><pre><span></span><span class="p">...</span>
 <span class="n">Production</span><span class="p">:</span> <span class="k">true</span>
 <span class="n">Resources</span><span class="p">:</span>
@@ -2421,21 +2415,15 @@ access to the OSG copy of the topology data, which is why you are creating a pul
 </pre></div>
 
 
-<p>You may have to add the <code>Active</code> attribute it if does not already exist within the resource definition.</p>
-</li>
-<li>
-<p>If the resource does not contain a <code>CE</code> (Compute Element) or OSG submitter service, you may remove the resource
-  completely.
-  If there are no more resources in the resource group, you may remove the entire resource group file.</p>
-</li>
-</ul>
+<p>If the <code>Active</code> attribute does not already exist within the resource definition, add it.
+If your resource becomes available again, set <code>Active: true</code>.</p>
 <h2 id="registering-resource-downtimes">Registering Resource Downtimes<a class="headerlink" href="#registering-resource-downtimes" title="Permanent link">&para;</a></h2>
 <p>Resource downtime is a finite period of time for which one or more of the grid services of a registered resource are
 unavailable.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If your registered resource is expected to be in downtime for an undetermined amount of time, set <code>Active: False</code>
-in the resource instead.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you expect your resource to be indefinitely unavailable, <a href="#retiring-resources">retire the resource</a> instead of
+registering a downtime.</p>
 </div>
 <p>Downtimes are stored in YAML files alongside the resource group YAML files as described <a href="#registering-resources">here</a>.</p>
 <p>For example, downtimes for resources in the <code>CHTC-Slurm-HPC</code> resource group of the <code>CHTC</code> site at the <code>University of
