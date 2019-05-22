@@ -102,14 +102,14 @@ CVMFS uses automount, and the steps to configure it are different on EL6 vs EL7.
 
 Create or edit `/etc/cvmfs/default.local`, a file that controls the
 CVMFS configuration. Below is a sample configuration, but please note
-that you will need to **edit the parts in %RED%red%ENDCOLOR%**. In
+that you will need to **edit the parts in angle brackets**. In
 particular, the `CVMFS_HTTP_PROXY` line below must be edited for your
 site.
 
 ```
 CVMFS_REPOSITORIES="`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u)|tr ' ' ,`"
-CVMFS_QUOTA_LIMIT=%RED%20000%ENDCOLOR%
-CVMFS_HTTP_PROXY=%RED%"http://squid.example.com:3128"%ENDCOLOR%
+CVMFS_QUOTA_LIMIT=<QUOTA LIMIT>
+CVMFS_HTTP_PROXY="<SQUID URL>:<SQUID PORT>"
 ```
 
 CVMFS by default allows any repository to be mounted, no matter what
@@ -152,7 +152,7 @@ it.
     `cvmfs_cache_t`. This can be done by executing the following command:
 
         :::console
-        user@host $ chcon -R -t cvmfs_cache_t %RED%$CVMFS_CACHE_BASE%ENDCOLOR%
+        user@host $ chcon -R -t cvmfs_cache_t <CVMFS_CACHE_BASE>
 
 ## Validating CVMFS
 
