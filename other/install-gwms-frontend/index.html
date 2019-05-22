@@ -3320,10 +3320,10 @@ setting <code>use_voms_server</code>. Choose one of the following options:</p>
 <p>To directly sign the VOMS attributes (recommended), you must have access to the <code>vo</code>'s certificate and key.
   Specify the paths to the <code>vo</code> certificate and key, and optionally, the VOMS attribute (e.g. <code>/osg/Role=NULL/Capability=NULL</code>
   for the OSG VO):</p>
-<div class="codehilite"><pre><span></span><span class="n">use_voms_server</span> <span class="o">=</span> <span class="o">%</span><span class="n">RED</span><span class="o">%</span><span class="k">false</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
-<span class="n">vo_cert</span> <span class="o">=</span> <span class="o">%</span><span class="n">RED</span><span class="o">%&lt;</span><span class="n">PATH</span> <span class="k">TO</span> <span class="n">THE</span> <span class="n">PILOT</span> <span class="n">CERTIFICATE</span><span class="o">&gt;%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
-<span class="n">vo_key</span> <span class="o">=</span> <span class="o">%</span><span class="n">RED</span><span class="o">%&lt;</span><span class="n">PATH</span> <span class="k">TO</span> <span class="n">THE</span> <span class="n">PILOT</span> <span class="k">KEY</span><span class="o">&gt;%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
-<span class="n">fqan</span> <span class="o">=</span> <span class="o">%</span><span class="n">RED</span><span class="o">%&lt;</span><span class="n">VOMS</span> <span class="n">ATTRIBUTE</span><span class="o">&gt;%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
+<div class="codehilite"><pre><span></span><span class="n">use_voms_server</span> <span class="o">=</span> <span class="k">false</span>
+<span class="n">vo_cert</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PATH</span> <span class="k">TO</span> <span class="n">THE</span> <span class="n">PILOT</span> <span class="n">CERTIFICATE</span><span class="o">&gt;</span>
+<span class="n">vo_key</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PATH</span> <span class="k">TO</span> <span class="n">THE</span> <span class="n">PILOT</span> <span class="k">KEY</span><span class="o">&gt;</span>
+<span class="n">fqan</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">VOMS</span> <span class="n">ATTRIBUTE</span><span class="o">&gt;</span>
 </pre></div>
 
 
@@ -3335,8 +3335,8 @@ setting <code>use_voms_server</code>. Choose one of the following options:</p>
 <li>
 <p>To have your proxy's VOMS attributes signed by the <code>vo</code>'s VOMS server, set <code>use_voms_server = true</code>
   and the VOMS attribute (e.g. <code>/osg/Role=NULL/Capability=NULL</code> for the OSG VO):</p>
-<div class="codehilite"><pre><span></span><span class="n">use_voms_server</span> <span class="o">=</span> <span class="o">%</span><span class="n">RED</span><span class="o">%</span><span class="k">true</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
-<span class="n">fqan</span> <span class="o">=</span> <span class="o">%</span><span class="n">RED</span><span class="o">%&lt;</span><span class="n">VOMS</span> <span class="n">ATTRIBUTE</span><span class="o">&gt;%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
+<div class="codehilite"><pre><span></span><span class="n">use_voms_server</span> <span class="o">=</span> <span class="k">true</span>
+<span class="n">fqan</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">VOMS</span> <span class="n">ATTRIBUTE</span><span class="o">&gt;</span>
 </pre></div>
 
 
@@ -3349,9 +3349,9 @@ in the OSG, <code>use_voms_server = false</code> is the preferred method for sig
 </ul>
 <p>Optionally, the proxy renewal <code>frequency</code> and <code>lifetime</code> (in hours) can be specified in each <code>[PILOT &lt;NAME&gt;]</code> section:</p>
 <div class="codehilite"><pre><span></span><span class="o">#</span> <span class="k">Default</span><span class="p">:</span> <span class="mi">1</span>
-<span class="n">frequency</span> <span class="o">=</span> <span class="o">%</span><span class="n">RED</span><span class="o">%&lt;</span><span class="n">RENEWAL</span> <span class="n">FREQUENCY</span><span class="o">&gt;%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
+<span class="n">frequency</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">RENEWAL</span> <span class="n">FREQUENCY</span><span class="o">&gt;</span>
 <span class="o">#</span> <span class="k">Default</span><span class="p">:</span> <span class="mi">24</span>
-<span class="n">lifetime</span> <span class="o">=</span> <span class="o">%</span><span class="n">RED</span><span class="o">%&lt;</span><span class="n">PROXY</span> <span class="n">LIFETIME</span><span class="o">&gt;%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
+<span class="n">lifetime</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PROXY</span> <span class="n">LIFETIME</span><span class="o">&gt;</span>
 </pre></div>
 
 
@@ -3428,8 +3428,8 @@ in the OSG, <code>use_voms_server = false</code> is the preferred method for sig
 <p>Further, if you want to record all usage as coming from a single VO, you can configure the probe to override the 'guessed' VO. In the below example, replace the <span style="color:red">Engage</span> with a registered VO that you would like to report as. If you don't have a VO that you are affiliated with, you may use Engage.</p>
 <div class="codehilite"><pre><span></span><span class="p">...</span>
     <span class="n">MapUnknownToGroup</span><span class="o">=</span><span class="ss">&quot;1&quot;</span>
-    <span class="o">%</span><span class="n">RED</span><span class="o">%</span><span class="n">MapGroupToRole</span><span class="o">=</span><span class="ss">&quot;1&quot;</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
-    <span class="o">%</span><span class="n">RED</span><span class="o">%</span><span class="n">VOOverride</span><span class="o">=</span><span class="ss">&quot;Engage&quot;</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
+    <span class="n">MapGroupToRole</span><span class="o">=</span><span class="ss">&quot;1&quot;</span>
+    <span class="n">VOOverride</span><span class="o">=</span><span class="ss">&quot;Engage&quot;</span>
 <span class="p">...</span>
 </pre></div>
 
