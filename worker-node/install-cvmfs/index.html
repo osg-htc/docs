@@ -2330,12 +2330,12 @@ The version of CVMFS installed should be &gt;= 2.4.1</p>
 <h2 id="configuring-cvmfs">Configuring CVMFS<a class="headerlink" href="#configuring-cvmfs" title="Permanent link">&para;</a></h2>
 <p>Create or edit <code>/etc/cvmfs/default.local</code>, a file that controls the
 CVMFS configuration. Below is a sample configuration, but please note
-that you will need to <strong>edit the parts in <span style="color:red">red</span></strong>. In
+that you will need to <strong>edit the parts in angle brackets</strong>. In
 particular, the <code>CVMFS_HTTP_PROXY</code> line below must be edited for your
 site.</p>
 <div class="codehilite"><pre><span></span><span class="n">CVMFS_REPOSITORIES</span><span class="o">=</span><span class="ss">&quot;`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u)|tr &#39; &#39; ,`&quot;</span>
-<span class="n">CVMFS_QUOTA_LIMIT</span><span class="o">=%</span><span class="n">RED</span><span class="o">%</span><span class="mi">20000</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
-<span class="n">CVMFS_HTTP_PROXY</span><span class="o">=%</span><span class="n">RED</span><span class="o">%</span><span class="ss">&quot;http://squid.example.com:3128&quot;</span><span class="o">%</span><span class="n">ENDCOLOR</span><span class="o">%</span>
+<span class="n">CVMFS_QUOTA_LIMIT</span><span class="o">=&lt;</span><span class="n">QUOTA</span> <span class="k">LIMIT</span><span class="o">&gt;</span>
+<span class="n">CVMFS_HTTP_PROXY</span><span class="o">=</span><span class="ss">&quot;&lt;SQUID URL&gt;:&lt;SQUID PORT&gt;&quot;</span>
 </pre></div>
 
 
@@ -2351,14 +2351,18 @@ set of always-known repositories.</p>
 the instructions to <a href="../../data/frontier-squid">install squid from OSG</a>.
 Vertical bars separating proxies means to load balance between them
 and try them all before continuing. A semicolon between proxies means
-to try that one only after the previous ones have failed. A special
-proxy called DIRECT can be placed last in the list to indicate
+to try that one only after the previous ones have failed. For example:</p>
+<div class="codehilite"><pre><span></span><span class="nt">CVMFS_HTTP_PROXY</span><span class="o">=</span><span class="s2">&quot;http://squid1.example.com:3128|http://squid2.example.com:3128;http://old-squid.example.com:3128&quot;</span>
+</pre></div>
+
+
+<p>A special proxy called DIRECT can be placed last in the list to indicate
 directly connecting to servers if all other proxies fail. A DIRECT
 proxy is acceptable for small sites but discouraged for large sites
 because of the potential load that could be put upon globally shared
 servers.</p>
 <p>Set up the cache limit in <code>CVMFS_QUOTA_LIMIT</code> (in Megabytes). The
-recommended value for most applications is 20000 MB. This is the
+recommended value for most applications is <code>20000</code> MB. This is the
 combined limit for all but the osgstorage.org repositories. This cache
 will be stored in <code>/var/lib/cvmfs</code> by default; to override the
 location, set <code>CVMFS_CACHE_BASE</code> in <code>/etc/cvmfs/default.local</code>. Note
@@ -2375,7 +2379,7 @@ it.</p>
 <p>If you use SELinux and change <code>CVMFS_CACHE_BASE</code>, then the
 new cache directory must be labeled with SELinux type
 <code>cvmfs_cache_t</code>. This can be done by executing the following command:</p>
-<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> chcon -R -t cvmfs_cache_t <span style="color:red"><span class="nv">$CVMFS_CACHE_BASE</span></span>
+<div class="codehilite"><pre><span></span><span class="gp">user@host $</span> chcon -R -t cvmfs_cache_t &lt;CVMFS_CACHE_BASE&gt;
 </pre></div>
 
 
