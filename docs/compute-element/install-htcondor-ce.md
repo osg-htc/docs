@@ -374,7 +374,7 @@ To validate an HTCondor-CE, perform the following verification steps:
    For example, run `sbatch` from the CE and verify that it runs and completes in your Slurm cluster.
 
 1. Verify that all the necessary daemons are running with
-   [condor\_ce\_status](/compute-element/troubleshoot-htcondor-ce#condor_ce_status).
+   [condor\_ce\_status -any](/compute-element/troubleshoot-htcondor-ce#condor_ce_status).
 
 1. Verify the CE's network configuration using
    [condor\_ce\_host\_network\_check](/compute-element/troubleshoot-htcondor-ce#condor_ce_host_network_check).
