@@ -284,9 +284,6 @@ If you want to consider all FQANs, you must set the appropriate option.
 
 -   If you are using osg-configure, set `all_fqans = True` in `10-misc.ini`, then run `osg-configure -c`
 
-    !!! note
-        If you are using OSG 3.4, osg-configure should be at least version 2.2.2.
-
 -   If you are configuring `lcmaps.db` manually (see [manual configuration](#manual-configuration) below),
     add `"-all-fqans"` to the module definitions for `vomsmapfile` and `defaultmapfile`
 
