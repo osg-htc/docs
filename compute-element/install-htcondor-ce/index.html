@@ -2930,11 +2930,12 @@ The specific services are:</p>
 <ol>
 <li>
 <p>Verify that local job submissions complete successfully from the CE host.
-   For example, run <code>sbatch</code> from the CE and verify that it runs and completes in your Slurm cluster.</p>
+   For example, if you have a Slurm cluster, run <code>sbatch</code> from the CE and verify that it runs and completes with
+   <code>scontrol</code> and <code>sacct</code>.</p>
 </li>
 <li>
 <p>Verify that all the necessary daemons are running with
-   <a href="../../compute-element/troubleshoot-htcondor-ce#condor_ce_status">condor_ce_status</a>.</p>
+   <a href="../../compute-element/troubleshoot-htcondor-ce#condor_ce_status">condor_ce_status -any</a>.</p>
 </li>
 <li>
 <p>Verify the CE's network configuration using
@@ -2950,7 +2951,7 @@ The specific services are:</p>
 <a href="../troubleshoot-htcondor-ce">the HTCondor-CE troubleshooting guide</a>.</p>
 <h2 id="registering-the-ce">Registering the CE<a class="headerlink" href="#registering-the-ce" title="Permanent link">&para;</a></h2>
 <p>To be part of the OSG Production Grid, your CE must be
-<a href="https://github.com/opensciencegrid/topology#topology">registered with the OSG</a>
+<a href="https://github.com/opensciencegrid/topology#topology">registered with the OSG</a>.
 To register your resource:</p>
 <ol>
 <li>

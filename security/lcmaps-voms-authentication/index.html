@@ -924,13 +924,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enabling-the-lcmaps-voms-plugin" title="Enabling the LCMAPS VOMS plugin" class="md-nav__link">
-    Enabling the LCMAPS VOMS plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#supporting-mapped-vos-and-users" title="Supporting mapped VOs and users" class="md-nav__link">
     Supporting mapped VOs and users
   </a>
@@ -2209,13 +2202,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enabling-the-lcmaps-voms-plugin" title="Enabling the LCMAPS VOMS plugin" class="md-nav__link">
-    Enabling the LCMAPS VOMS plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#supporting-mapped-vos-and-users" title="Supporting mapped VOs and users" class="md-nav__link">
     Supporting mapped VOs and users
   </a>
@@ -2459,16 +2445,6 @@ resources on a per-VO basis.</p>
 <p>The following section describes the steps required to configure the LCMAPS VOMS plugin for authentication.
 Additionally, there are <a href="#optional-configuration">optional configuration</a> instructions if you need to make changes to
 the default mappings, or migrate from edg-mkgridmap or GUMS.</p>
-<h3 id="enabling-the-lcmaps-voms-plugin">Enabling the LCMAPS VOMS plugin<a class="headerlink" href="#enabling-the-lcmaps-voms-plugin" title="Permanent link">&para;</a></h3>
-<p>To configure your host to use LCMAPS VOMS plugin authentication, edit <code>/etc/osg/config.d/10-misc.ini</code> and set the
-following options:</p>
-<div class="codehilite"><pre><span></span><span class="na">edit_lcmaps_db</span> <span class="o">=</span> <span class="s">True</span>
-<span class="na">authorization_method</span> <span class="o">=</span> <span class="s">vomsmap</span>
-</pre></div>
-
-
-<p>If the <code>glexec_location</code> option is present, you must comment it out or set it to <code>UNAVAILABLE</code>.
-The LCMAPS VOMS plugin does not work with gLExec.</p>
 <h3 id="supporting-mapped-vos-and-users">Supporting mapped VOs and users<a class="headerlink" href="#supporting-mapped-vos-and-users" title="Permanent link">&para;</a></h3>
 <p>Ensure Unix accounts exist for each VO, VO role, VO group, or user you choose to support in the <a href="#configuration-files">mapfiles</a>:</p>
 <ol>
@@ -2523,8 +2499,6 @@ The LCMAPS VOMS plugin does not work with gLExec.</p>
 </tr>
 </tbody>
 </table>
-<p>Additionally, it is also recommended to create the <code>mis</code> Unix account,
-which is used by OSG staff to assist with troubleshooting.</p>
 </li>
 <li>
 <p>Edit <code>/etc/osg/config.d/30-gip.ini</code> and specify the supported VOs per <a href="../../other/configuration-with-osg-configure#subcluster-resource-entry">Subcluster or ResourceEntry section</a>:</p>
@@ -2754,10 +2728,6 @@ If you want to consider all FQANs, you must set the appropriate option.</p>
 <ul>
 <li>
 <p>If you are using osg-configure, set <code>all_fqans = True</code> in <code>10-misc.ini</code>, then run <code>osg-configure -c</code></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you are using OSG 3.4, osg-configure should be at least version 2.2.2.</p>
-</div>
 </li>
 <li>
 <p>If you are configuring <code>lcmaps.db</code> manually (see <a href="#manual-configuration">manual configuration</a> below),
