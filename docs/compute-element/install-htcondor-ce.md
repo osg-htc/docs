@@ -371,10 +371,11 @@ Validating HTCondor-CE
 To validate an HTCondor-CE, perform the following verification steps:
 
 1. Verify that local job submissions complete successfully from the CE host.
-   For example, run `sbatch` from the CE and verify that it runs and completes in your Slurm cluster.
+   For example, if you have a Slurm cluster, run `sbatch` from the CE and verify that it runs and completes with
+   `scontrol` and `sacct`.
 
 1. Verify that all the necessary daemons are running with
-   [condor\_ce\_status](/compute-element/troubleshoot-htcondor-ce#condor_ce_status).
+   [condor\_ce\_status -any](/compute-element/troubleshoot-htcondor-ce#condor_ce_status).
 
 1. Verify the CE's network configuration using
    [condor\_ce\_host\_network\_check](/compute-element/troubleshoot-htcondor-ce#condor_ce_host_network_check).
@@ -392,7 +393,7 @@ Registering the CE
 ------------------
 
 To be part of the OSG Production Grid, your CE must be
-[registered with the OSG](https://github.com/opensciencegrid/topology#topology)
+[registered with the OSG](https://github.com/opensciencegrid/topology#topology).
 To register your resource:
 
 1.  Identify the facility, site, and resource group where your HTCondor-CE is hosted.

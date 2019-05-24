@@ -46,20 +46,6 @@ The following section describes the steps required to configure the LCMAPS VOMS 
 Additionally, there are [optional configuration](#optional-configuration) instructions if you need to make changes to
 the default mappings, or migrate from edg-mkgridmap or GUMS.
 
-
-### Enabling the LCMAPS VOMS plugin
-
-To configure your host to use LCMAPS VOMS plugin authentication, edit `/etc/osg/config.d/10-misc.ini` and set the
-following options:
-
-``` ini
-edit_lcmaps_db = True
-authorization_method = vomsmap
-```
-
-If the `glexec_location` option is present, you must comment it out or set it to `UNAVAILABLE`.
-The LCMAPS VOMS plugin does not work with gLExec.
-
 ### Supporting mapped VOs and users
 
  Ensure Unix accounts exist for each VO, VO role, VO group, or user you choose to support in the [mapfiles](#configuration-files):
@@ -84,9 +70,6 @@ The LCMAPS VOMS plugin does not work with gLExec.
     | [Fermilab](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Fermilab.yaml) | `fnalgrid`          |
     | [HCC](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/HCC.yaml)           | `hcc`               |
     | [Gluex](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Gluex.yaml)       | `gluex`             |
-
-    Additionally, it is also recommended to create the `mis` Unix account,
-    which is used by OSG staff to assist with troubleshooting.
 
 1.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](/other/configuration-with-osg-configure#subcluster-resource-entry):
 
@@ -300,9 +283,6 @@ By default, the LCMAPS VOMS plugin only considers the first FQAN of a VOMS proxy
 If you want to consider all FQANs, you must set the appropriate option.
 
 -   If you are using osg-configure, set `all_fqans = True` in `10-misc.ini`, then run `osg-configure -c`
-
-    !!! note
-        If you are using OSG 3.4, osg-configure should be at least version 2.2.2.
 
 -   If you are configuring `lcmaps.db` manually (see [manual configuration](#manual-configuration) below),
     add `"-all-fqans"` to the module definitions for `vomsmapfile` and `defaultmapfile`
