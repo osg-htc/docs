@@ -46,20 +46,6 @@ The following section describes the steps required to configure the LCMAPS VOMS 
 Additionally, there are [optional configuration](#optional-configuration) instructions if you need to make changes to
 the default mappings, or migrate from edg-mkgridmap or GUMS.
 
-
-### Enabling the LCMAPS VOMS plugin
-
-To configure your host to use LCMAPS VOMS plugin authentication, edit `/etc/osg/config.d/10-misc.ini` and set the
-following options:
-
-``` ini
-edit_lcmaps_db = True
-authorization_method = vomsmap
-```
-
-If the `glexec_location` option is present, you must comment it out or set it to `UNAVAILABLE`.
-The LCMAPS VOMS plugin does not work with gLExec.
-
 ### Supporting mapped VOs and users
 
  Ensure Unix accounts exist for each VO, VO role, VO group, or user you choose to support in the [mapfiles](#configuration-files):
