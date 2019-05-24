@@ -71,9 +71,6 @@ the default mappings, or migrate from edg-mkgridmap or GUMS.
     | [HCC](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/HCC.yaml)           | `hcc`               |
     | [Gluex](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Gluex.yaml)       | `gluex`             |
 
-    Additionally, it is also recommended to create the `mis` Unix account,
-    which is used by OSG staff to assist with troubleshooting.
-
 1.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](/other/configuration-with-osg-configure#subcluster-resource-entry):
 
         :::ini
