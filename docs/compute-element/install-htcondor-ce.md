@@ -393,7 +393,7 @@ Registering the CE
 ------------------
 
 To be part of the OSG Production Grid, your CE must be
-[registered with the OSG](https://github.com/opensciencegrid/topology#topology)
+[registered with the OSG](https://github.com/opensciencegrid/topology#topology).
 To register your resource:
 
 1.  Identify the facility, site, and resource group where your HTCondor-CE is hosted.
