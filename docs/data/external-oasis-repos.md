@@ -146,10 +146,10 @@ Hosting a Repository on OASIS
 
 In order to host a repository on OASIS, perform the following steps:
 
-1.  **Verify your VO's OIM registration is up-to-date**.  All repositories need to be associated with a VO; the VO
-    needs to assign an _OASIS manager_ in OIM who would be responsible for the contents of any of the VO's repositories
-    and will be contacted in case of issues. To designate an OASIS manager, have the VO manager update the
-    [OIM registration](https://github.com/opensciencegrid/topology/#topology).
+1.  **Verify your VO's registration is up-to-date**.  All repositories need to be associated with a VO; the VO needs to
+    assign an _OASIS manager_ in Topology who would be responsible for the contents of any of the VO's repositories and
+    will be contacted in case of issues. To designate an OASIS manager, have the VO manager update the
+    [Topology registration](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
 
 1.  Create a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) using the following template:
 
