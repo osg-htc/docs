@@ -161,7 +161,7 @@ To register your Frontier Squid host, follow the general registration instructio
     Replacing `<FULLY QUALIFIED DOMAIN NAME>` with your Frontier Squid server's DNS entry or in the case of multiple
     Frontier Squid servers for a single resource, the round-robin DNS entry.
 
-    See the [BNL_ATLAS_Frontier_Squid](https://github.com/opensciencegrid/topology/blob/master/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml#L306-L325) 
+    See the [BNL_ATLAS_Frontier_Squid](https://github.com/opensciencegrid/topology/blob/80e482279b10c7b13fc7688c71833c14ebdc1b50/topology/Brookhaven%20National%20Laboratory/Brookhaven%20ATLAS%20Tier1/BNL-ATLAS.yaml#L298-L318) 
     for a complete example.
 
 2.  If you are setting up a new resource, set `Active: false`.
