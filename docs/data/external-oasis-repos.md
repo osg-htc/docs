@@ -153,11 +153,11 @@ In order to host a repository on OASIS, perform the following steps:
 
 1.  Create a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) using the following template:
 
-        Please add a new CVMFS repository to OASIS for VO %RED%voname%ENDCOLOR% using the URL 
-            http://%RED%fully.qualified.domain%ENDCOLOR%:8000/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%
-        The VO responsible manager will be %RED%OASIS Manager Name%ENDCOLOR%.
+        Please add a new CVMFS repository to OASIS for VO <VO NAME> using the URL
+            http://<FQDN>:8000/cvmfs/<OASIS REPOSITORY>
+        The VO responsible manager will be <OASIS MANAGER>.
 
-    Replace the %RED%red%ENDCOLOR% items with the appropriate values.
+    Replace the `<ANGLE BRACKET TEXT>` items with the appropriate values.
 
 1.  If the repository name matches `*.opensciencegrid.org` or `*.osgstorage.org`, wait for the go-ahead from the OSG
     representative before continuing with the remaining instructions; for all other repositories (such as `*.egi.eu`),
