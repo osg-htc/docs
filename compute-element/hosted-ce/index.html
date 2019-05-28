@@ -321,13 +321,6 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#before-starting" title="Before Starting" class="md-nav__link">
     Before Starting
   </a>
@@ -2045,13 +2038,6 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#before-starting" title="Before Starting" class="md-nav__link">
     Before Starting
   </a>
@@ -2120,7 +2106,6 @@
                 
                 
                 <h1 id="requesting-an-osg-hosted-ce">Requesting an OSG Hosted CE<a class="headerlink" href="#requesting-an-osg-hosted-ce" title="Permanent link">&para;</a></h1>
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>An OSG Hosted Compute Element (CE) is the entry point for jobs coming from the OSG;
 it handles authorization and delegation of jobs to your existing campus HPC/HTC cluster.</p>
 <p>Many sites set up their compute element locally.
@@ -2210,19 +2195,14 @@ software on your cluster in order to support application software repositories.
 This will allow a broader set of jobs to run on your cluster.</p>
 <h2 id="providing-the-osg-worker-node-client-htcondor-batch-systems-only">Providing the OSG Worker Node client (HTCondor batch systems only)<a class="headerlink" href="#providing-the-osg-worker-node-client-htcondor-batch-systems-only" title="Permanent link">&para;</a></h2>
 <p>All OSG sites need to provide the OSG Worker Node Client on each worker node in the cluster.
-This is normally handled by OSG staff for a Hosted CE, but requires shared home directories across the cluster.
-However, for sites with an HTCondor batch system, often there is no shared filesystem set up.
-If it is easier for your site to install and maintain the Worker Node Client on each worker node than to set up a shared file system, you have the following options:</p>
+This is normally handled by OSG staff for a Hosted CE, but requires shared home directories across the cluster.</p>
+<p>However, for sites with an HTCondor batch system, often there is no shared filesystem set up.
+If you run an HTCondor site and it is easier to install and maintain the Worker Node Client on each worker node than to
+set up and maintain shared file system, you have the following options:</p>
 <ul>
-<li>
-<p>Install the <a href="../../worker-node/install-wn">Worker Node Client from RPM</a></p>
-</li>
-<li>
-<p>Install the <a href="../../worker-node/install-wn-tarball">Worker Node Client from tarball</a></p>
-</li>
-<li>
-<p>Install the Worker Node Client from <a href="../../worker-node/install-wn-oasis">OASIS</a></p>
-</li>
+<li>Install the <a href="../../worker-node/install-wn">Worker Node Client from RPM</a></li>
+<li>Install the <a href="../../worker-node/install-wn-tarball">Worker Node Client from tarball</a></li>
+<li>Install the Worker Node Client from <a href="../../worker-node/install-wn-oasis">OASIS</a></li>
 </ul>
 <h2 id="optional-providing-access-to-application-software-using-oasis"><strong>Optional</strong>: Providing Access to Application Software Using OASIS<a class="headerlink" href="#optional-providing-access-to-application-software-using-oasis" title="Permanent link">&para;</a></h2>
 <p>Many OSG communities use software modules provided by their collaborations or by the OSG User Support team.
