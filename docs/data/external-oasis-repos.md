@@ -220,8 +220,9 @@ The latter can take longer because it requires OSG Operations intervention.
 If you are recreating the repository on the same machine, use the following command to 
 remove the repository configuration while preserving the data and keys:
 
-        :::console
-        root@host # cvmfs_server rmfs -p example.opensciencegrid.org
+```console
+root@host # cvmfs_server rmfs -p example.opensciencegrid.org
+```
 
 Otherwise if it is a new machine, copy the keys from /etc/cvmfs/keys/%RED%example.opensciencegrid.org%ENDCOLOR%.* and the data from /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR% from the old server to the new, making sure that no publish operations happen on the old server while you copy the data.
 
