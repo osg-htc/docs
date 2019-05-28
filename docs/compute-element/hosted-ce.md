@@ -1,10 +1,6 @@
 Requesting an OSG Hosted CE
 ===========================
 
-
-Introduction
-------------
-
 An OSG Hosted Compute Element (CE) is the entry point for jobs coming from the OSG;
 it handles authorization and delegation of jobs to your existing campus HPC/HTC cluster.
 
