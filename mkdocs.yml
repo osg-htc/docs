@@ -29,7 +29,7 @@ pages:
   - 'Install Singularity': 'worker-node/install-singularity.md'
   - 'Using WN Containers': 'worker-node/using-wn-containers.md'
 - Data:
-  - HTTP & CVMFS:
+  - HTTP & OASIS:
     - 'Install Squid HTTP Cache': 'data/frontier-squid.md'
     - 'Update OASIS Shared Repo': 'data/update-oasis.md'
     - 'Install an OASIS Repo': 'data/external-oasis-repos.md'
