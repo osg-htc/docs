@@ -230,6 +230,10 @@ Before the host certificate expires, you can renew it with the following command
 root@host # certbot renew
 ```
 
+!!!note
+   Renewing a certificate requires you to temporarily disable services running on port 80 so that
+   certbot can bind to it to verify the host.
+
 To automate the renewal process, you need to choose between using a cron job (SL6 and SL7 hosts) and a systemd timer
 (SL7 hosts only).
 The two sections below outline both methods for automatically renewing your certificate.
