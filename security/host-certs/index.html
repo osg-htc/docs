@@ -2512,6 +2512,11 @@ an InCommon subscription.</p>
 </pre></div>
 
 
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<p>Renewing a certificate requires you to temporarily disable services running on port 80 so that
+   certbot can bind to it to verify the host.</p>
 <p>To automate the renewal process, you need to choose between using a cron job (SL6 and SL7 hosts) and a systemd timer
 (SL7 hosts only).
 The two sections below outline both methods for automatically renewing your certificate.</p>
