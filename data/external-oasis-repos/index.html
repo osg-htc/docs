@@ -2314,20 +2314,20 @@ The next steps will fail if the web server is not accessible.</p>
 <p>In order to host a repository on OASIS, perform the following steps:</p>
 <ol>
 <li>
-<p><strong>Verify your VO's OIM registration is up-to-date</strong>.  All repositories need to be associated with a VO; the VO
-    needs to assign an <em>OASIS manager</em> in OIM who would be responsible for the contents of any of the VO's repositories
-    and will be contacted in case of issues. To designate an OASIS manager, have the VO manager update the
-    <a href="https://github.com/opensciencegrid/topology/#topology">OIM registration</a>.</p>
+<p><strong>Verify your VO's registration is up-to-date</strong>.  All repositories need to be associated with a VO; the VO needs to
+    assign an <em>OASIS manager</em> in Topology who would be responsible for the contents of any of the VO's repositories and
+    will be contacted in case of issues. To designate an OASIS manager, have the VO manager update the
+    <a href="https://github.com/opensciencegrid/topology/tree/master/virtual-organizations">Topology registration</a>.</p>
 </li>
 <li>
 <p>Create a <a href="https://support.opensciencegrid.org/helpdesk/tickets/new">support ticket</a> using the following template:</p>
-<div class="codehilite"><pre><span></span><span class="nv">Please</span> <span class="nv">add</span> <span class="nv">a</span> <span class="nv">new</span> <span class="nv">CVMFS</span> <span class="nv">repository</span> <span class="nv">to</span> <span class="nv">OASIS</span> <span class="k">for</span> <span class="nv">VO</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">voname</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span> <span class="nv">using</span> <span class="nv">the</span> <span class="nv">URL</span> 
-    <span class="nv">http</span>:<span class="o">//%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">fully</span>.<span class="nv">qualified</span>.<span class="nv">domain</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span>:<span class="mi">8000</span><span class="o">/</span><span class="nv">cvmfs</span><span class="o">/%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">example</span>.<span class="nv">opensciencegrid</span>.<span class="nv">org</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span>
-<span class="nv">The</span> <span class="nv">VO</span> <span class="nv">responsible</span> <span class="nv">manager</span> <span class="nv">will</span> <span class="nv">be</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%</span><span class="nv">OASIS</span> <span class="nv">Manager</span> <span class="nv">Name</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span>.
+<div class="codehilite"><pre><span></span><span class="nv">Please</span> <span class="nv">add</span> <span class="nv">a</span> <span class="nv">new</span> <span class="nv">CVMFS</span> <span class="nv">repository</span> <span class="nv">to</span> <span class="nv">OASIS</span> <span class="k">for</span> <span class="nv">VO</span> <span class="o">&lt;</span><span class="nv">VO</span> <span class="nv">NAME</span><span class="o">&gt;</span> <span class="nv">using</span> <span class="nv">the</span> <span class="nv">URL</span>
+    <span class="nv">http</span>:<span class="o">//&lt;</span><span class="nv">FQDN</span><span class="o">&gt;</span>:<span class="mi">8000</span><span class="o">/</span><span class="nv">cvmfs</span><span class="o">/&lt;</span><span class="nv">OASIS</span> <span class="nv">REPOSITORY</span><span class="o">&gt;</span>
+<span class="nv">The</span> <span class="nv">VO</span> <span class="nv">responsible</span> <span class="nv">manager</span> <span class="nv">will</span> <span class="nv">be</span> <span class="o">&lt;</span><span class="nv">OASIS</span> <span class="nv">MANAGER</span><span class="o">&gt;</span>.
 </pre></div>
 
 
-<p>Replace the <span style="color:red">red</span> items with the appropriate values.</p>
+<p>Replace the <code>&lt;ANGLE BRACKET TEXT&gt;</code> items with the appropriate values.</p>
 </li>
 <li>
 <p>If the repository name matches <code>*.opensciencegrid.org</code> or <code>*.osgstorage.org</code>, wait for the go-ahead from the OSG
@@ -2390,8 +2390,7 @@ The latter can take longer because it requires OSG Operations intervention.</p>
 <h3 id="without-changing-the-server-dns-name">Without changing the server DNS name<a class="headerlink" href="#without-changing-the-server-dns-name" title="Permanent link">&para;</a></h3>
 <p>If you are recreating the repository on the same machine, use the following command to 
 remove the repository configuration while preserving the data and keys:</p>
-<div class="codehilite"><pre><span></span><span class="w">    </span><span class="o">::</span><span class="err">:</span><span class="n">console</span><span class="w"></span>
-<span class="w">    </span><span class="n">root</span><span class="nv">@host</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">cvmfs_server</span><span class="w"> </span><span class="n">rmfs</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="n">example</span><span class="p">.</span><span class="n">opensciencegrid</span><span class="p">.</span><span class="n">org</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> cvmfs_server rmfs -p example.opensciencegrid.org
 </pre></div>
 
 
