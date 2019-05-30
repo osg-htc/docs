@@ -146,18 +146,18 @@ Hosting a Repository on OASIS
 
 In order to host a repository on OASIS, perform the following steps:
 
-1.  **Verify your VO's OIM registration is up-to-date**.  All repositories need to be associated with a VO; the VO
-    needs to assign an _OASIS manager_ in OIM who would be responsible for the contents of any of the VO's repositories
-    and will be contacted in case of issues. To designate an OASIS manager, have the VO manager update the
-    [OIM registration](https://github.com/opensciencegrid/topology/#topology).
+1.  **Verify your VO's registration is up-to-date**.  All repositories need to be associated with a VO; the VO needs to
+    assign an _OASIS manager_ in Topology who would be responsible for the contents of any of the VO's repositories and
+    will be contacted in case of issues. To designate an OASIS manager, have the VO manager update the
+    [Topology registration](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
 
 1.  Create a [support ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) using the following template:
 
-        Please add a new CVMFS repository to OASIS for VO %RED%voname%ENDCOLOR% using the URL 
-            http://%RED%fully.qualified.domain%ENDCOLOR%:8000/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%
-        The VO responsible manager will be %RED%OASIS Manager Name%ENDCOLOR%.
+        Please add a new CVMFS repository to OASIS for VO <VO NAME> using the URL
+            http://<FQDN>:8000/cvmfs/<OASIS REPOSITORY>
+        The VO responsible manager will be <OASIS MANAGER>.
 
-    Replace the %RED%red%ENDCOLOR% items with the appropriate values.
+    Replace the `<ANGLE BRACKET TEXT>` items with the appropriate values.
 
 1.  If the repository name matches `*.opensciencegrid.org` or `*.osgstorage.org`, wait for the go-ahead from the OSG
     representative before continuing with the remaining instructions; for all other repositories (such as `*.egi.eu`),
@@ -220,8 +220,9 @@ The latter can take longer because it requires OSG Operations intervention.
 If you are recreating the repository on the same machine, use the following command to 
 remove the repository configuration while preserving the data and keys:
 
-        :::console
-        root@host # cvmfs_server rmfs -p example.opensciencegrid.org
+```console
+root@host # cvmfs_server rmfs -p example.opensciencegrid.org
+```
 
 Otherwise if it is a new machine, copy the keys from /etc/cvmfs/keys/%RED%example.opensciencegrid.org%ENDCOLOR%.* and the data from /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR% from the old server to the new, making sure that no publish operations happen on the old server while you copy the data.
 
