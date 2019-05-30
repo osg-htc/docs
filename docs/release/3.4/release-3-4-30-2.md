@@ -15,7 +15,7 @@ CA Certificates based on [IGTF 1.99](http://dist.eugridpma.info/distribution/igt
 
 [VO Package v92](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-92)
 
--   Adding nanohub back to the VO client
+-   Added nanoHUB back to the VO client
 
 These [JIRA tickets](https://jira.opensciencegrid.org/issues/?jql=project%20%3D%20SOFTWARE%20AND%20fixVersion%20%3D%203.4.30-2%20ORDER%20BY%20priority%20DESC%2C%20key%20DESC) were addressed in this release.
 
