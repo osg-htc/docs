@@ -139,9 +139,9 @@ steps:
     disabling them reduces the risk profile of enabling user
     namespaces.
 
-    Network namespaces are, however, utilized by other container
-    systems, such as Docker.  Disabling network namespaces may break
-    other container solutions, or limit their capabilities (such as
+    Network namespaces are, however, utilized by other software,
+    such as Docker.  Disabling network namespaces may break
+    other software, or limit its capabilities (such as
     requiring the `--net=host` option in Docker).
 
 1. If you haven't yet installed [CVMFS](install-cvmfs), do so.
