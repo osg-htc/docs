@@ -152,12 +152,12 @@ To modify an existing resource, follow these instructions:
 
 To retire an already registered resource, set `Active: false`. For example:
 
-```
+``` hl_lines="5"
 ...
 Production: true
 Resources:
   GLOW:
-    Active: %RED%false%ENDCOLOR%
+    Active: false
     ...
     Services:
       CE:
