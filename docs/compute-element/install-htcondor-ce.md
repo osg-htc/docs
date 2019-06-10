@@ -27,10 +27,8 @@ Before starting the installation process, consider the following points
 -   **Network ports:** The pilot factories must be able to contact your HTCondor-CE service on port 9619 (TCP)
 -   **Submit host:** HTCondor-CE should be installed on a host that already has the ability to submit jobs into your
     local cluster
--   **File Systems:** We recommend separate partitions for the [job queue log](#configuring-the-job-queue-location) and
-    `SPOOL` directory.
-    Additionally, non-HTCondor batch systems require a [shared file system](#batch-systems-other-than-htcondor) between
-    the HTCondor-CE host and the batch system worker nodes.
+-   **File Systems**: Non-HTCondor batch systems require a [shared file system](#batch-systems-other-than-htcondor)
+    between the HTCondor-CE host and the batch system worker nodes.
 
 As with all OSG software installations, there are some one-time (per host) steps to prepare in advance:
 
@@ -137,24 +135,6 @@ SPOOL = /home/condor
 
 !!! note
     The shared spool directory must be readable and writeable by the `condor` user for HTCondor-CE to function correctly.
-
-### Configuring the job queue location
-
-The [job queue log](http://research.cs.wisc.edu/htcondor/manual/v8.6/4_5Logging_in.html#53484) is a frequently written
-to file that contains the state of the HTCondor-CE job queue.
-For performance reasons, we recommend storing this file and the `SPOOL` directory on a different file system partitions.
-To configure the location of the job queue log:
-
-1. Find which file system partition your `SPOOL` directory is located on:
-
-        :::console
-        user@htcondor-ce $ df $(condor_ce_config_val SPOOL)
-
-1. Set `JOB_QUEUE_LOG` in `/etc/condor-ce/config.d/99-local.conf` to the path of the job queue log on a separate file
-   system partition than the above.
-   For example, if you have a separate SSD that is mounted on `/ssd`, you could set the following:
-
-        JOB_QUEUE_LOG = /ssd/condor/job_queue.log
 
 ### Configuring authorization
 
@@ -280,14 +260,14 @@ If your site has multiple CEs or you have non-grid users submitting to the same 
 software needs to be configured so that it doesn't over report the number of jobs.
 Use the following table to determine which file requires editing:
 
-| If your batch system is… | Then edit the following file on your CE(s)… |
+| If your batch system is… | Then edit the following file on each of your CE(s)… |
 |:-------------------------|:--------------------------------------------|
 | LSF                      | `/etc/gratia/pbs-lsf/ProbeConfig`           |
 | PBS                      | `/etc/gratia/pbs-lsf/ProbeConfig`           |
 | SGE                      | `/etc/gratia/sge/ProbeConfig`               |
 | SLURM                    | `/etc/gratia/slurm/ProbeConfig`             |
 
-Then edit the value of `SuppressNoDNRecords` so that it reads:
+Then edit the value of `SuppressNoDNRecords` on each of your CE's so that it reads:
 
 ``` file
 SuppressNoDNRecords="1"
@@ -390,14 +370,15 @@ Validating HTCondor-CE
 
 To validate an HTCondor-CE, perform the following verification steps:
 
+1. Verify that local job submissions complete successfully from the CE host.
+   For example, if you have a Slurm cluster, run `sbatch` from the CE and verify that it runs and completes with
+   `scontrol` and `sacct`.
+
 1. Verify that all the necessary daemons are running with
-   [condor\_ce\_status](/compute-element/troubleshoot-htcondor-ce#condor_ce_status).
+   [condor\_ce\_status -any](/compute-element/troubleshoot-htcondor-ce#condor_ce_status).
 
 1. Verify the CE's network configuration using
    [condor\_ce\_host\_network\_check](/compute-element/troubleshoot-htcondor-ce#condor_ce_host_network_check).
-
-1. Verify that local job submissions complete successfully from the CE host.
-   For example, run `sbatch` from the CE and verify that it runs and completes in your Slurm cluster.
 
 1. Verify that jobs can complete successfully using
    [condor\_ce\_trace](/compute-element/troubleshoot-htcondor-ce#condor_ce_trace).
@@ -412,7 +393,7 @@ Registering the CE
 ------------------
 
 To be part of the OSG Production Grid, your CE must be
-[registered with the OSG](https://github.com/opensciencegrid/topology#topology)
+[registered with the OSG](https://github.com/opensciencegrid/topology#topology).
 To register your resource:
 
 1.  Identify the facility, site, and resource group where your HTCondor-CE is hosted.

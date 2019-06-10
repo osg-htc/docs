@@ -9,6 +9,21 @@ Release Notes
 
 | Version                                   | Date       | Summary                                                                 |
 |:------------------------------------------|:-----------|:------------------------------------------------------------------------|
+| [3.4.30-2](/release/3.4/release-3-4-30-2) | 2019-05-30 | IGTF 1.99, VO Package v92                                               |
+| [3.4.30](/release/3.4/release-3-4-30)     | 2019-05-16 | BLAHP 1.81.41, VO Package V91, xrootd-voms-plugin 0.6.0, osg-pki-tools 3.3.0; Upcoming: Singularity 3.1.1-1.1, osg-se-hadoop, BLAHP 1.18.41 |
+| [3.4.29-2](/release/3.4/release-3-4-29-2) | 2019-05-07 | VO Package v90                                                          |
+| [3.4.29](/release/3.4/release-3-4-29)     | 2019-05-02 | XCache 1.0.5, MyProxy 6.2.3                                             |
+| [3.4.28-2](/release/3.4/release-3-4-28-2) | 2019-04-30 | IGTF 1.98                                                               |
+| [3.4.28](/release/3.4/release-3-4-28)     | 2019-04-25 | XRootD 4.9.1, xrootd-hdfs 2.1.4, GlideinWMS 3.4.5, osg-flock 1.1, VO Package v89; Upcoming: HTCondor 8.8.2 |
+| [3.4.27-2](/release/3.4/release-3-4-27-2) | 2019-04-16 | VO Package v88                                                          |
+| [3.4.27](/release/3.4/release-3-4-27)     | 2019-04-11 | Globus GridFTP uses GCT, CVMFS 2.6.0, HTCondor-CE 3.2.2, cctools 7.0.11, osg-pki-tools 3.2.2; Upcoming: Singularity 3.1.1 |
+| [3.4.26-2](/release/3.4/release-3-4-26-2) | 2019-04-02 | IGTF 1.97, VO Package v87                                               |
+| [3.4.26](/release/3.4/release-3-4-26)     | 2019-03-14 | cctools 7.0.9, Pegasus 4.9.1, osg-pki-tools 3.1.0; Upcoming: Singularity 3.1.0 |
+| [3.4.25](/release/3.4/release-3-4-25)     | 2019-03-07 | gsi-openssh 7.4p1, HTCondor 8.6.13 patched, xrootd-lcmaps 1.7.0; Upcoming: HTCondor 8.8.1 |
+| [3.4.24-2](/release/3.4/release-3-4-24-2) | 2019-03-05 | IGTF 1.96, VO Package v86                                               |
+| [3.4.24](/release/3.4/release-3-4-24)     | 2019-02-21 | BLAHP 1.18.39, osg-pki-tools 3.0.1, HTCondor-CE 3.2.1, condor-cron 1.14.1; Upcoming: Singularity 3.0.3, HDFS on EL6 |
+| [3.4.23](/release/3.4/release-3-4-23)     | 2019-01-23 | Gratia probes 1.20.8; Upcoming: Singularity 3.0.2, HTCondor 8.8.0       |
+| [3.4.22-2](/release/3.4/release-3-4-22-2) | 2019-01-14 | IGTF 1.95                                                               |
 | [3.4.22](/release/3.4/release-3-4-22)     | 2018-12-20 | HTCondor-CE 3.2.0, frontier-squid 4.4, Pegasus 4.9.0, CVMFS 2.5.2, IGTF 1.94, VO Package v85 |
 | [3.4.21](/release/3.4/release-3-4-21)     | 2018-12-12 | High Priority Release: Singularity 2.6.1                                |
 | [3.4.20](/release/3.4/release-3-4-20)     | 2018-11-01 | GlideinWM 3.4.2, SciTokens 1.2.1, stashcache 0.10, stashcache-client 5.1.0-4, HTCondor 8.6.13; Upcoming: HTCondor 8.7.10 |

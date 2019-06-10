@@ -51,8 +51,8 @@ Before starting the installation process, consider the following points (consult
     GlideinWMS versions prior to 3.4.1 also required port 9615 for the Schedd,
     and did not support using shared port for the secondary collectors.
     If you are upgrading a standalone submit host from version 3.4 or earlier, the default open 
-    port has changed from 9615 to 9618 and you need to upgrade your firewall rules to reflect this change.
-    You figure out which port would be used by running the following command:
+    port has changed from 9615 to 9618, and you need to update your firewall rules to reflect this change.
+    You can figure out which port will be used by running the following command:
     
     ``` console
      condor_config_val SHARED_PORT_ARGS
@@ -112,7 +112,7 @@ request to the GlideinWMS Factory.
 
 Before installing the GlideinWMS VO Frontend you need the information about a [Glidein Factory](http://glideinwms.fnal.gov/doc.prd/factory/index.html) that you can access:
 
-1. (recommended) OSG is managing a factory at UCSD and one at GOC and you can request access to them
+1. (recommended) OSG is managing a factory at UCSD
 2. You have another Glidein Factory that you can access
 
 To request access to the OSG Glidein Factory at UCSD you have to send an email to <osg-gfactory-support@physics.ucsd.edu> providing:
@@ -453,10 +453,10 @@ and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOL
       Specify the paths to the `vo` certificate and key, and optionally, the VOMS attribute (e.g. `/osg/Role=NULL/Capability=NULL`
       for the OSG VO):
 
-            use_voms_server = %RED%false%ENDCOLOR%
-            vo_cert = %RED%<PATH TO THE PILOT CERTIFICATE>%ENDCOLOR%
-            vo_key = %RED%<PATH TO THE PILOT KEY>%ENDCOLOR%
-            fqan = %RED%<VOMS ATTRIBUTE>%ENDCOLOR%
+            use_voms_server = false
+            vo_cert = <PATH TO THE PILOT CERTIFICATE>
+            vo_key = <PATH TO THE PILOT KEY>
+            fqan = <VOMS ATTRIBUTE>
 
         !!! note
             If you do not have access to the `vo`'s `voms_cert` and `voms_key`, contact the VO manager.
@@ -464,8 +464,8 @@ and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOL
     - To have your proxy's VOMS attributes signed by the `vo`'s VOMS server, set `use_voms_server = true`
       and the VOMS attribute (e.g. `/osg/Role=NULL/Capability=NULL` for the OSG VO):
 
-            use_voms_server = %RED%true%ENDCOLOR%
-            fqan = %RED%<VOMS ATTRIBUTE>%ENDCOLOR%
+            use_voms_server = true
+            fqan = <VOMS ATTRIBUTE>
 
         !!! warning
             Due to the [retirement of VOMS Admin server](https://opensciencegrid.org/technology/policy/voms-admin-retire/)
@@ -474,9 +474,9 @@ and renew the %GREEN%pilot proxies%ENDCOLOR% and %GREEN%VO Frontend proxy%ENDCOL
     Optionally, the proxy renewal `frequency` and `lifetime` (in hours) can be specified in each `[PILOT <NAME>]` section:
 
         # Default: 1
-        frequency = %RED%<RENEWAL FREQUENCY>%ENDCOLOR%
+        frequency = <RENEWAL FREQUENCY>
         # Default: 24
-        lifetime = %RED%<PROXY LIFETIME>%ENDCOLOR%
+        lifetime = <PROXY LIFETIME>
 
 1. Configure the location and output of the %GREEN%VO Frontend proxy%ENDCOLOR% under the `[FRONTEND]` section and set
    the `proxy_cert`, `proxy_key`, and `output` to paths corresponding to your VO Frontend:
@@ -543,8 +543,8 @@ Further, if you want to record all usage as coming from a single VO, you can con
 ``` file
 ...
     MapUnknownToGroup="1"
-    %RED%MapGroupToRole="1"%ENDCOLOR%
-    %RED%VOOverride="Engage"%ENDCOLOR%
+    MapGroupToRole="1"
+    VOOverride="Engage"
 ...
 ```
 

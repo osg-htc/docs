@@ -232,9 +232,8 @@ Hadoop configuration is needed by every node in the hadoop cluster. However, in 
 
 Hadoop configuration is stored in `/etc/hadoop/conf`. However, by default, these files are mostly blank. OSG provides a sample configuration in `/etc/hadoop/conf.osg` with most common values filled in. You will need to copy these into `/etc/hadoop/conf` before they become active. Please let us know if there are any common values that should be added/changed across the whole grid. You will likely need to modify `hdfs-site.xml` and `core-site.xml`. Review all the settings in these files, but listed below are common settings to modify:
 
-|                 |                            |                                  |                                                                                           |
-|-----------------|----------------------------|----------------------------------|-------------------------------------------------------------------------------------------|
 | File            | Setting                    | Example                          | Comments                                                                                  |
+|-----------------|----------------------------|----------------------------------|-------------------------------------------------------------------------------------------|
 | `core-site.xml` | fs.default.name            | hdfs://namenode.domain.tld.:9000 | This is the address of the NameNode                                                       |
 | `core-site.xml` | hadoop.tmp.dir             | /data/scratch                    | Scratch temp directory used by Hadoop                                                     |
 | `core-site.xml` | hadoop.log.dir             | /var/log/hadoop-hdfs             | Log directory used by Hadoop                                                              |
@@ -357,16 +356,16 @@ Any additional config files under `/etc/gridftp.d` will be used for both the ini
 DSI module in both the init.d and standalone GridFTP server.
 Some of the environment variables that can be used in `/etc/sysconfig/gridftp-hdfs` include:
 
-|                              |                |                                                                                                                                                                                                                                                                                 |
-|------------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Option Name                  | Needs Editing? | Suggested value                                                                                                                                                                                                                                                                 |
-| GRIDFTP\_HDFS\_REPLICA\_MAP  | No             | File containing a list of paths and replica values for setting the default \# of replicas for specific file paths                                                                                                                                                               |
-| GRIDFTP\_BUFFER\_COUNT       | No             | The number of 1MB memory buffers used to reorder data streams before writing them to Hadoop                                                                                                                                                                                     |
-| GRIDFTP\_FILE\_BUFFER\_COUNT | No             | The number of 1MB file-based buffers used to reorder data streams before writing them to Hadoop                                                                                                                                                                                 |
-| GRIDFTP\_SYSLOG              | No             | Set this to 1 in case if you want to send transfer activity data to syslog (only used for the HadoopViz application)                                                                                                                                                            |
-| GRIDFTP\_HDFS\_MOUNT\_POINT  | Maybe          | The location of the FUSE mount point used during the Hadoop installation. Defaults to /mnt/hadoop. This is needed so that gridftp-hdfs can convert fuse paths on the incoming URL to native Hadoop paths. **Note:** this does not imply you need FUSE mounted on GridFTP nodes! |
-| GRIDFTP\_LOAD\_LIMIT         | No             | GridFTP will refuse to start new transfers if the load on the GridFTP host is higher than this number; defaults to 20.                                                                                                                                                          |
-| TMPDIR                       | Maybe          | The temp directory where the file-based buffers are stored. Defaults to /tmp.                                                                                                                                                                                                   |
+| Option Name                 | Needs Editing? | Suggested value                                                                                                                                                                                                                                                                 |
+|-----------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `GRIDFTP_HDFS_REPLICA_MAP`  | No             | File containing a list of paths and replica values for setting the default # of replicas for specific file paths                                                                                                                                                                |
+| `GRIDFTP_BUFFER_COUNT`      | No             | The number of 1MB memory buffers used to reorder data streams before writing them to Hadoop                                                                                                                                                                                     |
+| `GRIDFTP_FILE_BUFFER_COUNT` | No             | The number of 1MB file-based buffers used to reorder data streams before writing them to Hadoop                                                                                                                                                                                 |
+| `GRIDFTP_SYSLOG`            | No             | Set this to 1 in case if you want to send transfer activity data to syslog (only used for the HadoopViz application)                                                                                                                                                            |
+| `GRIDFTP_HDFS_CHECKSUMS`    | Maybe          | List of checksum calculations to perform on-the-fly (default: `"MD5,ADLER32,CRC32,CKSUM,CVMFS"`)                                                                                                                                                                                                                                                                                |
+| `GRIDFTP_HDFS_MOUNT_POINT`  | Maybe          | The location of the FUSE mount point used during the Hadoop installation. Defaults to /mnt/hadoop. This is needed so that gridftp-hdfs can convert fuse paths on the incoming URL to native Hadoop paths. **Note:** this does not imply you need FUSE mounted on GridFTP nodes! |
+| `GRIDFTP_LOAD_LIMIT`        | No             | GridFTP will refuse to start new transfers if the load on the GridFTP host is higher than this number; defaults to 20.                                                                                                                                                          |
+| `TMPDIR`                    | Maybe          | The temp directory where the file-based buffers are stored. Defaults to /tmp.                                                                                                                                                                                                   |
 
 `/etc/sysconfig/gridftp-hdfs` is also a good place to increase per-process resource limits. For example, many installations will require more than the default number of open files (`ulimit -n`).
 
@@ -381,54 +380,7 @@ For information on how to configure authentication for your GridFTP installation
 !!! note
     Needed by GridFTP node only.
 
-The Gratia probe requires the file `user-vo-map` to exist and be up to date.
-Assuming you installed GridFTP using the `osg-se-hadoop-gridftp` rpm, the Gratia Transfer Probe will already be installed.
-
-Here are the most relevant file and directory locations:
-
-|                     |                |                                          |
-|---------------------|----------------|------------------------------------------|
-| Purpose             | Needs Editing? | Location                                 |
-| Probe Configuration | Yes            | /etc/gratia/gridftp-transfer/ProbeConfig |
-| Probe Executables   | No             | /usr/share/gratia/gridftp-transfer       |
-| Log files           | No             | /var/log/gratia                          |
-| Temporary files     | No             | /var/lib/gratia/tmp                      |
-
-The RPM installs the Gratia probe into the system crontab, but does not configure it. The configuration of the probe is controlled by the file
-
-    /etc/gratia/gridftp-transfer/ProbeConfig
-
-This is usually one XML node spread over multiple lines. Note that comments (\#) have no effect on this file. You will need to edit the following:
-
-|                                 |                                                                                            |                                                                                                                                            |
-|---------------------------------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| Attribute                       | Needs Editing                                                                              | Value                                                                                                                                      |
-| ProbeName                       | Maybe                                                                                      | This should be set to "gridftp-transfer:<hostname>", where <hostname> is the fully-qualified domain name of your gridftp host. |
-| CollectorHost                   | Maybe                                                                                      | Set to the hostname and port of the central collector. By default it sends to the OSG collector. See below.                                |
-| SiteName                        | Yes                                                                                        | Set to the resource group name of your site as registered in OIM.                                                                          |
-| GridftpLogDir                   | Yes                                                                                        | Set to /var/log, or wherever your current gridftp logs are located                                                                         |
-| Grid                            | Maybe                                                                                      | Set to "ITB" if this is a test resource; otherwise, leave as OSG.                                                                          |
-| UserVOMapFile                   | No                                                                                         | This should be set to /var/lib/osg/user-vo-map; see below for information about this file.                                                 |
-| SuppressUnknownVORecords| Maybe | Set to 1 to suppress any records that can't be matched to a VO; 0 is strongly recommended. |
-| SuppressNoDNRecords             | Maybe                                                                                      | Set to 1 to suppress records that can't be matched to a DN; 0 is strongly recommended.                                                     |
-| EnableProbe                     | Yes                                                                                        | Set to 1 to enable the probe.                                                                                                              |
-
-#### Selecting a collector host ####
-
-The collector is the central server which logs the GridFTP transfers into a database. There are usually three options:
-
-1. **OSG Transfer Collector**: This is the primary collector for transfers in the OSG. Use `CollectorHost="gratia-osg-prod.opensciencegrid.org:80"`.
-1. **OSG-ITB Transfer Collector**: This is the test collector for transfers in the OSG. Use `CollectorHost=" gratia-osg-itb.opensciencegrid.org:80"`.
-
-#### Validation ####
-
-Run the Gratia probe once by hand to check for functionality:
-
-``` console
-root@host # /usr/share/gratia/gridftp-transfer/GridftpTransferProbeDriver
-```
-
-Look for any abnormal termination and report it if it is a non-trivial site issue. Look in the log files in `/var/log/gratia/<date>.log` and make sure there are no error messages printed.
+See the [GridFTP documentation](/data/gridftp#enabling-gridftp-transfer-probe) for configuration details.
 
 ### Hadoop Storage Probe Configuration ###
 
@@ -437,9 +389,8 @@ Look for any abnormal termination and report it if it is a non-trivial site issu
 
 Here are the most relevant file and directory locations:
 
-|                     |                |                                                         |
-|---------------------|----------------|---------------------------------------------------------|
 | Purpose             | Needs Editing? | Location                                                |
+|---------------------|----------------|---------------------------------------------------------|
 | Probe Configuration | Yes            | /etc/gratia/hadoop-storage/ProbeConfig                  |
 | Probe Executable    | No             | /usr/share/gratia/hadoop-storage/hadoop\_storage\_probe |
 | Log files           | No             | /var/log/gratia                                         |
@@ -454,9 +405,8 @@ The RPM installs the Gratia probe into the system crontab, but does not configur
 
 This is usually one XML node spread over multiple lines. Note that comments (\#) have no effect on this file. You will need to edit the following:
 
-|               |               |                                                                                                                                         |
-|---------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 | Attribute     | Needs Editing | Value                                                                                                                                   |
+|---------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 | CollectorHost | Maybe         | Set to the hostname and port of the central collector. By default it sends to the OSG collector. You probably do not want to change it. |
 | SiteName      | Yes           | Set to the resource group name of your SE as registered in OIM.                                                                         |
 | Grid          | Maybe         | Set to "ITB" if this is a test resource; otherwise, leave as OSG.                                                                       |
@@ -950,41 +900,27 @@ The standalone server runs on port 5002, handles a single GridFTP request, and w
 
 ### File Locations ###
 
-|                                                       |                                                                       |                                                     |                                   |
-|-------------------------------------------------------|-----------------------------------------------------------------------|-----------------------------------------------------|-----------------------------------|
-| Component                                             | File Type                                                             | Location                                            | Needs editing?                    |
-| Hadoop                                                | Log files                                                             | `/var/log/hadoop/*`                                 | No                                |
-| Hadoop                                                | PID files                                                             | `/var/run/hadoop/*.pid`                             | No                                |
-| Hadoop                                                | init scripts                                                          | `/etc/init.d/hadoop`                                | No                                |
-| Hadoop                                                | init script config file                                               | `/etc/sysconfig/hadoop`                             | Yes                               |
-| Hadoop                                                | runtime config files                                                  | `/etc/hadoop/conf/*`                                | Maybe                             |
-| Hadoop                                                | System binaries                                                       | `/usr/bin/hadoop`                                   | No                                |
-| Hadoop                                                | JARs                                                                  | `/usr/lib/hadoop/*`                                 | No                                |
-| Hadoop                                                | runtime config files                                                  | `/etc/hosts_exclude`                                | Yes, must be present on NameNodes |
-| GridFTP                                               | Log files                                                             | `/var/log/gridftp-auth.log`, `/var/log/gridftp.log` | No                                |
-| GridFTP| init.d script                                | `/etc/init.d/globus-gridftp-server`                                   | No                                                  |
-| GridFTP| runtime config files                         | `/etc/gridftp-hdfs/*`, `/etc/sysconfig/gridftp-hdfs`                  | Maybe                                               |
-| GridFTP| System binaries                              | `/usr/bin/gridftp-hdfs-standalone`, `/usr/sbin/globus-gridftp-server` | No                                                  |
-| GridFTP| System libraries                             | `/usr/lib64/libglobus_gridftp_server_hdfs.so*`                        | No                                                  |
-| GridFTP| LCMAPS VOMS configuration                    | `/etc/lcmaps.db`                                                      | Yes                                                 |
-| GridFTP| CA certificates                              | `/etc/grid-security/certificates/*`                                   | No                                                  |
 
-| Service/Process | Configuration File               | Description                                                                                     |
-|:----------------|:---------------------------------|:------------------------------------------------------------------------------------------------|
-| BeStMan2        | `/etc/bestman2/conf/bestman2.rc` | Main Configuration file                                                                         |
-|                 | `/etc/sysconfig/bestman2`        | Environment variables used by BeStMan2                                                          |
-|                 | `/etc/sysconfig/bestman2lib`     | Environment variables that store values of various client and server libraries used by BeStMan2 |
-|                 | `/etc/bestman2/conf/*`           | Other runtime configuration files                                                               |
-|                 | `/etc/init.d/bestman2`           | init.d startup script                                                                           |
-|                 | `/etc/gridftp.conf`              | Startup parameters                                                                              |
-
-| Service/Process | Log File                          | Description                                   |
-|:----------------|:----------------------------------|:----------------------------------------------|
-| BeStMan2        | `/var/log/bestman2/bestman2.log`  | BeStMan2 server log and errors                |
-|                 | `/var/log/bestman2/event.srm.log` | Records all SRM transactions                  |
-| GridFTP         | `/var/log/gridftp.log`            | Transfer log                                  |
-|                 | `/var/log/gridftp-auth.log`       | Authentication log                            |
-|                 | `/var/log/messages`               | Main system log (look here for LCMAPS errors) |
+| Component | File Type                 | Location                                                              | Needs editing?                    |
+|-----------|---------------------------|-----------------------------------------------------------------------|-----------------------------------|
+| Hadoop    | Log files                 | `/var/log/hadoop/*`                                                   | No                                |
+|           | PID files                 | `/var/run/hadoop/*.pid`                                               | No                                |
+|           | init scripts              | `/etc/init.d/hadoop`                                                  | No                                |
+|           | init script config file   | `/etc/sysconfig/hadoop`                                               | Yes                               |
+|           | runtime config files      | `/etc/hadoop/conf/*`                                                  | Maybe                             |
+|           | System binaries           | `/usr/bin/hadoop`                                                     | No                                |
+|           | JARs                      | `/usr/lib/hadoop/*`                                                   | No                                |
+|           | runtime config files      | `/etc/hosts_exclude`                                                  | Yes, must be present on NameNodes |
+|           | Log files                 | `/var/log/gridftp-auth.log`, `/var/log/gridftp.log`                   | No                                |
+| GridFTP   | Transfer log              | `/var/log/gridftp.log`                                                | No                                |
+|           | Authentication log        | `/var/log/gridftp-auth.log`                                           | No                                |
+|           | LCMAPS auth error log     | `/var/log/messages`                                                   | No                                |
+|           | init.d script             | `/etc/init.d/globus-gridftp-server`                                   | No                                |
+|           | runtime config files      | `/etc/gridftp-hdfs/*`, `/etc/sysconfig/gridftp-hdfs`                  | Maybe                             |
+|           | System binaries           | `/usr/bin/gridftp-hdfs-standalone`, `/usr/sbin/globus-gridftp-server` | No                                |
+|           | System libraries          | `/usr/lib64/libglobus_gridftp_server_hdfs.so*`                        | No                                |
+|           | LCMAPS VOMS configuration | `/etc/lcmaps.db`                                                      | Yes                               |
+|           | CA certificates           | `/etc/grid-security/certificates/*`                                   | No                                |
 
 ### Known Issues ###
 

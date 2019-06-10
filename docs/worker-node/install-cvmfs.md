@@ -1,10 +1,18 @@
-# Install CVMFS
+# Installing and Maintaining the CernVM File System Client
 
-Here we describe how to install the
-[CVMFS](http://cernvm.cern.ch/portal/filesystem) (Cern-VM file system) client.
-This document is intended for system administrators who wish to
-install this client to have access to files distributed by CVMFS
-servers via HTTP.
+The CernVM File System ([CVMFS](http://cernvm.cern.ch/portal/filesystem)) is an HTTP-based file distribution service
+used to provide data and software for jobs.
+By installing CVMFS, you have access to an alternative installation method for required worker node software and your
+site you will be able to support a wider range of user jobs.
+For example, CVMFS provides easy access to the following:
+
+- The [worker node client](/worker-node/install-wn-oasis)
+- CA and VO security data
+- Software used by VOs
+- Data stored in [StashCache](/data/stashcache/overview).
+
+Use this page to learn how to install, configure, run, test, and troubleshoot the CVMFS client from the OSG software
+repositories.
 
 !!! note "Applicable versions"
     The applicable software versions for this document are OSG Version >= 3.4.3.
@@ -13,7 +21,7 @@ servers via HTTP.
 Before Starting
 ---------------
 
-Before starting the installation process, consider the following points (consulting [the Reference section below](#reference) as needed):
+Before starting the installation process, consider the following points (consulting [the Reference section below](#references) as needed):
 
 -   **User IDs:** If it does not exist already, the installation will create the `cvmfs` Linux user
 -   **Group IDs:** If they do not exist already, the installation will create the Linux groups `cvmfs` and `fuse`
@@ -94,14 +102,14 @@ CVMFS uses automount, and the steps to configure it are different on EL6 vs EL7.
 
 Create or edit `/etc/cvmfs/default.local`, a file that controls the
 CVMFS configuration. Below is a sample configuration, but please note
-that you will need to **edit the parts in %RED%red%ENDCOLOR%**. In
+that you will need to **edit the parts in angle brackets**. In
 particular, the `CVMFS_HTTP_PROXY` line below must be edited for your
 site.
 
 ```
 CVMFS_REPOSITORIES="`echo $((echo oasis.opensciencegrid.org;echo cms.cern.ch;ls /cvmfs)|sort -u)|tr ' ' ,`"
-CVMFS_QUOTA_LIMIT=%RED%20000%ENDCOLOR%
-CVMFS_HTTP_PROXY=%RED%"http://squid.example.com:3128"%ENDCOLOR%
+CVMFS_QUOTA_LIMIT=<QUOTA LIMIT>
+CVMFS_HTTP_PROXY="<SQUID URL>:<SQUID PORT>"
 ```
 
 CVMFS by default allows any repository to be mounted, no matter what
@@ -117,15 +125,20 @@ Set up a list of CVMFS HTTP proxies to retrieve from in
 the instructions to [install squid from OSG](../data/frontier-squid).
 Vertical bars separating proxies means to load balance between them
 and try them all before continuing. A semicolon between proxies means
-to try that one only after the previous ones have failed. A special
-proxy called DIRECT can be placed last in the list to indicate
+to try that one only after the previous ones have failed. For example:
+
+```
+CVMFS_HTTP_PROXY="http://squid1.example.com:3128|http://squid2.example.com:3128;http://old-squid.example.com:3128"
+```
+
+A special proxy called DIRECT can be placed last in the list to indicate
 directly connecting to servers if all other proxies fail. A DIRECT
 proxy is acceptable for small sites but discouraged for large sites
 because of the potential load that could be put upon globally shared
 servers.
 
-Set up the cache limit in `CVMFS_QUOTA_LIMIT` (in MegaBytes). The
-recommended value for most applications is 20000 MB. This is the
+Set up the cache limit in `CVMFS_QUOTA_LIMIT` (in Megabytes). The
+recommended value for most applications is `20000` MB. This is the
 combined limit for all but the osgstorage.org repositories. This cache
 will be stored in `/var/lib/cvmfs` by default; to override the
 location, set `CVMFS_CACHE_BASE` in `/etc/cvmfs/default.local`. Note
@@ -140,11 +153,11 @@ it.
 
 !!! warning
     If you use SELinux and change `CVMFS_CACHE_BASE`, then the
-    new cache directory must be labelled with SELinux type
+    new cache directory must be labeled with SELinux type
     `cvmfs_cache_t`. This can be done by executing the following command:
 
         :::console
-        user@host $ chcon -R -t cvmfs_cache_t %RED%$CVMFS_CACHE_BASE%ENDCOLOR%
+        user@host $ chcon -R -t cvmfs_cache_t <CVMFS_CACHE_BASE>
 
 ## Validating CVMFS
 
@@ -227,7 +240,7 @@ If you cannot resolve the problem, there are several ways to receive help:
 - For bug reporting and OSG-specific issues, see our [help procedure](../common/help)
 - For community support and best-effort software team support contact
    <osg-cvmfs@opensciencegrid.org>.
-- For general CERN VM FileSystem support contact <cernvm.support@cern.ch>.
+- For general CernVM File System support contact <cernvm.support@cern.ch>.
 
 ## References
 
@@ -243,8 +256,8 @@ This installation will create one user unless it already exists
 | `cvmfs` | CernVM-FS service account |
 
 The installation will also create a cvmfs group and default the cvmfs
-user to that group. In addition, if the fuse rpm is not for some
-reason already installed, installing cvmfs will also install fuse and
+user to that group. In addition, if the fuse RPM is not
+already installed, installing cvmfs will also install fuse and
 that will create another group:
 
 | Group   | Comment                   | Group members |

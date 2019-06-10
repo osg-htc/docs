@@ -9,9 +9,8 @@ The LCMAPS VOMS plugin enables LCMAPS to make mapping decisions based on the VOM
 In OSG 3.4, the LCMAPS VOMS plugin replaced GUMS and edg-mkgridmap as the authentication method at OSG sites.
 
 The OSG provides a default set of mappings from VOMS attributes to Unix accounts.
-By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to,
-banning based on VOMS attributes, banning a specific user, or adding a VO, VO group, VO role, and/or user that is not in
-the OSG's set of mappings.
+By configuring LCMAPS, you can override these mappings, including changing the Unix account that a VO is mapped to;
+adding custom mappings for specific users and VOMS attributes; and/or banning specific users and VOMS attributes.
 
 Use this page to learn how to install and configure the LCMAPS VOMS plugin to authenticate users to access your
 resources on a per-VO basis.
@@ -47,20 +46,6 @@ The following section describes the steps required to configure the LCMAPS VOMS 
 Additionally, there are [optional configuration](#optional-configuration) instructions if you need to make changes to
 the default mappings, or migrate from edg-mkgridmap or GUMS.
 
-
-### Enabling the LCMAPS VOMS plugin
-
-To configure your host to use LCMAPS VOMS plugin authentication, edit `/etc/osg/config.d/10-misc.ini` and set the
-following options:
-
-``` ini
-edit_lcmaps_db = True
-authorization_method = vomsmap
-```
-
-If the `glexec_location` option is present, you must comment it out or set it to `UNAVAILABLE`.
-The LCMAPS VOMS plugin does not work with gLExec.
-
 ### Supporting mapped VOs and users
 
  Ensure Unix accounts exist for each VO, VO role, VO group, or user you choose to support in the [mapfiles](#configuration-files):
@@ -72,22 +57,19 @@ The LCMAPS VOMS plugin does not work with gLExec.
 
 
 1.  Create Unix accounts for each VO, VO role, VO group, and user that you wish to support.
-    The full list of VOs is located on [OIM](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
+    The full list of VOs is located in the [OSG topology](https://github.com/opensciencegrid/topology/tree/master/virtual-organizations).
     You are not expected to support all the VOs.
     If you would like to support opportunistic usage, we recommend creating the following Unix accounts:
 
-    | **VO name**                                                                                             | **Unix account(s)**                                                    |
-    |---------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-    | [GLOW](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/GLOW.yaml)         | `glow`                                                                 |
-    | [OSG](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/OSG.yaml)           | `osg`                                                                  |
-    | [ATLAS](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/ATLAS.yaml)       | `usatlas1`, `usatlas2`, `usatlas3`, `usatlas4`                         |
-    | [CMS](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/CMS.yaml)           | `cmspilot`, `uscmslocal`, `cmslocal`, `cmsprod`, `lcgadmin`, `cmsuser` |
-    | [Fermilab](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Fermilab.yaml) | `fermigli`, `fermilab`                                                 |
-    | [HCC](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/HCC.yaml)           | `hcc`                                                                  |
-    | [Gluex](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Gluex.yaml)       | `gluex`                                                                |
-
-    Additionally, it is also recommended to create the `mis` Unix account,
-    which is used by OSG staff to assist with troubleshooting.
+    | **VO name**                                                                                             | **Unix account(s)** |
+    |---------------------------------------------------------------------------------------------------------|---------------------|
+    | [GLOW](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/GLOW.yaml)         | `glow`              |
+    | [OSG](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/OSG.yaml)           | `osg`               |
+    | [ATLAS](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/ATLAS.yaml)       | `usatlas3`          |
+    | [CMS](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/CMS.yaml)           | `cmsuser`           |
+    | [Fermilab](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Fermilab.yaml) | `fnalgrid`          |
+    | [HCC](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/HCC.yaml)           | `hcc`               |
+    | [Gluex](https://github.com/opensciencegrid/topology/blob/master/virtual-organizations/Gluex.yaml)       | `gluex`             |
 
 1.  Edit `/etc/osg/config.d/30-gip.ini` and specify the supported VOs per [Subcluster or ResourceEntry section](/other/configuration-with-osg-configure#subcluster-resource-entry):
 
@@ -302,9 +284,6 @@ If you want to consider all FQANs, you must set the appropriate option.
 
 -   If you are using osg-configure, set `all_fqans = True` in `10-misc.ini`, then run `osg-configure -c`
 
-    !!! note
-        If you are using OSG 3.4, osg-configure should be at least version 2.2.2.
-
 -   If you are configuring `lcmaps.db` manually (see [manual configuration](#manual-configuration) below),
     add `"-all-fqans"` to the module definitions for `vomsmapfile` and `defaultmapfile`
 
@@ -433,7 +412,7 @@ Apr 11 13:51:41 atlas-hub globus-gridftp-server: You are still root after the LC
    To check the version of your `globus-gridftp-server-*`, run the following command:
 
         :::console
-        user@host $ rpm -q ^globus-gridftp
+        user@host $ rpm -qa 'globus-gridftp*'
 
 1. Verify that the [priority](/common/yum#installing-and-configuring-repositories) of the OSG repositories are set
    properly

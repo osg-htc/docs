@@ -295,7 +295,7 @@ On the GridFTP servers, arptables is the only additional service required for ru
     | **To ...** | **On EL 6, run the command...** | **On EL 7, run the command...** | 
     | -------- | ----------------------------- | ----------------------------- |
     | Start a service | `service SERVICE-NAME start` | `systemctl start SERVICE-NAME` | 
-    | Stop a service | `service SERVICE-NAME stop` | `systemctl start SERVICE-NAME` | 
+    | Stop a service | `service SERVICE-NAME stop` | `systemctl stop SERVICE-NAME` |
     | Enable a service to start during boot | `chkconfig SERVICE-NAME on` | `systemctl enable SERVICE-NAME` | 
     | Disable a service from starting during boot | `chkconfig SERVICE-NAME off` | `systemctl disable SERVICE-NAME` |
 
@@ -308,7 +308,7 @@ On the load balancer nodes, `keepalived` is the only additional service required
 | To...                                       | On EL 6, run the command...  | On EL 7, run the command... |
 |:--------------------------------------------|:---------------------------|:-------------------------------|
 | Start a service                             | `service keepalived start` | `systemctl start keepalived`   |
-| Stop a service                              | `service keepalived stop`  | `systemctl start keepalived`   |
+| Stop a service                              | `service keepalived stop`  | `systemctl stop keepalived`    |
 | Enable a service to start during boot       | `chkconfig keepalived on`  | `systemctl enable keepalived`  |
 | Disable a service from starting during boot | `chkconfig keepalived off` | `systemctl disable keepalived` |
 

@@ -33,10 +33,14 @@ To register as an OSG contact or add your GitHub ID to your pre-existing contact
 - **If you cannot find your name**, send an email to <mailto:help@opensciencegrid.org> with the following information:
     - Full name
     - Primary email address
-    - GitHub ID
+    - GitHub user name
     - Description of your OSG affiliation, e.g. FermiGrid site administrator, senior scientist for the DUNE experiment,
       etc.
     - Contact information of site, virtual organization, or project sponsor to prove your affiliation
+
+    !!! info "Privacy"
+        The OSG treats any email addresses and phone numbers as confidential data but does not make any guarantees of
+        privacy.
 
 Registering Resources
 ---------------------
@@ -47,12 +51,12 @@ See the full list of services that should be registered in the OSG topology
 
 OSG resources are stored under a hierarchy of facilities, sites, and resource groups, defined as follows:
 
-| Level          | Definition                                                                                                                                                             |
-|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Facility       | The institution or company where your resource is located, e.g. `University of Wisconsin`                                                                              |
-| Site           | Smaller than a facility; typically represents an academic department, research group, or a computing center, e.g. `CHTC` for the Center for High Throughput Computing. |
-| Resource Group | A logical grouping of resources, e.g. you may group together resources that serve your Slurm cluster under a resource group named `CHTC-Slurm-HPC`                     |
-| Resource       | A host that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts. A resource may provide more than one service.                        |
+| Level          | Definition                                                                                                                                                                    |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Facility       | The institution or company where your resource is located, e.g. `University of Wisconsin`                                                                                     |
+| Site           | Smaller than a facility; typically represents an academic department, research group, or a computing center, e.g. `CHTC` for the Center for High Throughput Computing.        |
+| Resource Group | A logical grouping of resources at a site. Production and testing resources should be placed into separate Resource Groups.                                                   |
+| Resource       | A host belonging to a resource group that provides grid services, e.g. Compute Elements, storage endpoints, or perfSonar hosts. A resource may provide more than one service. |
 
 OSG resources are stored in the GitHub repository as YAML files under a directory structure that reflects the above
 hierarchy, i.e. `topology/<FACILITY>/<SITE>/<RESOURCE GROUP>.yaml` from the
@@ -146,37 +150,35 @@ To modify an existing resource, follow these instructions:
 
 ### Retiring resources ###
 
-To retire an already registered resource, choose one of the following, depending on the resource's service(s):
+To retire an already registered resource, set `Active: false`. For example:
 
-- If the resource contains a `CE` (Compute Element) or `Submit Node` (GlideinWMS frontend) service, set `Active: false`
-  within resource group's YAML file.
-  For example, to remove the resource GLOW, edit the file `topology/University of Wisconsin/GLOW/GLOW.yaml`, setting
-  `Active: false`:
+``` hl_lines="5"
+...
+Production: true
+Resources:
+  GLOW:
+    Active: false
+    ...
+    Services:
+      CE:
+        Description: Compute Element
+        Details:
+          hidden: false
+```
 
-        ...
-        Production: true
-        Resources:
-          GLOW:
-            Active: %RED%false%ENDCOLOR%
-            ...
-            Services:
-              CE:
-                Description: Compute Element
-                Details:
-                  hidden: false
-
-    You may have to add the `Active` attribute it if does not already exist within the resource definition.
-
-- If the resource does not contain a `CE` (Compute Element) or OSG submitter service, you may remove the resource
-  completely.
-  If there are no more resources in the resource group, you may remove the entire resource group file.
-
+If the `Active` attribute does not already exist within the resource definition, add it.
+If your resource becomes available again, set `Active: true`.
 
 Registering Resource Downtimes
 ------------------------------
 
-Resource downtime is a period of time for which one or more of the grid services of a registered resource are
+Resource downtime is a finite period of time for which one or more of the grid services of a registered resource are
 unavailable.
+
+!!! warning
+    If you expect your resource to be indefinitely unavailable, [retire the resource](#retiring-resources) instead of
+    registering a downtime.
+
 Downtimes are stored in YAML files alongside the resource group YAML files as described [here](#registering-resources).
 
 For example, downtimes for resources in the `CHTC-Slurm-HPC` resource group of the `CHTC` site at the `University of
@@ -184,7 +186,7 @@ Wisconsin` can be found and registered in the following file, relative to the
 [root of the topology repository](https://github.com/opensciencegrid/topology/tree/master/):
 
 ```
-topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC_downtime.yaml`
+topology/University of Wisconsin/CHTC/CHTC-Slurm-HPC_downtime.yaml
 ```
 
 !!! note 
@@ -335,7 +337,7 @@ To modify a VO's information or register a new VO, follow the instructions below
         access to the OSG copy of the topology data, which is why you are creating a pull request.
 
 1. Make changes with the [GitHub file editor](https://help.github.com/articles/editing-files-in-your-repository/) using
-   the [project template](https://github.com/opensciencegrid/topology/blob/master/template-projects.yaml) as a guide.
+   the [project template](https://github.com/opensciencegrid/topology/blob/master/template-project.yaml) as a guide.
    You may leave any `ID` fields blank.
    If you are modifying existing entries, make sure you do not change formatting or indentation of the modified entry.
 

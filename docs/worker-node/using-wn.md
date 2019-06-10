@@ -1,4 +1,3 @@
-
 Worker Node Overview
 ====================
 
@@ -9,6 +8,16 @@ This page describes how to initialize the environment of your job to correctly a
 The OSG provides no scientific software dependencies or software build tools on the worker node; you are expected to bring along all application-level dependencies yourself (preferred; most portable) or utilize CVMFS. Sites are not required to provide any specific tools (`gcc`, `lapack`, `blas`, etc.) beyond the ones in the OSG worker node client and the base OS.
 
 If you would like to test the minimal OS environment that jobs can expect, you can test out your scientific software in [the OSG Docker image](https://hub.docker.com/r/opensciencegrid/osg-wn/).
+
+Hardware Recommendations
+------------------------
+| Hardware               | Minimum | Recommended                         | Notes                                             |
+|:-----------------------|:--------|:----------------------|:--------------------------------------------------|
+|Core per pilot                   |  1      |8                      | Depends on the supported VOs. The total core count on every node in the cluster must be divisible by core per pilot.|
+|Memory per core                 | 1024MB  | 2048MB                  | Memory per core times core per pilot needs to be less than the total memory on every node. Do not overcommit. |
+|Scratch disk per core ([OSG_WN_TMP](#osg_wn_tmp))| 2GB    | 10 GB                  | This can be overcommitted if a mix of different VO jobs is expected.|
+|CVMFS [Cache](/worker-node/install-cvmfs/#before-starting) (optional)| 10 GB | 20 GB | This is a value per node and not per core.|
+
 
 Common Software Available on Worker Nodes
 -----------------------------------------
@@ -47,15 +56,28 @@ Custom variables and those that aren't listed may be defined in the [Local Setti
 |:-----------------------|:------------------------------|:-----------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------|
 | `$OSG_GRID`            | `Storage`/`grid_dir`          | Location of additional environment variables.              | Pilots should source `$OSG_GRID/setup.sh` in order to guarantee the environment contains the worker node binaries in `$PATH`. |
 | `$OSG_SQUID_LOCATION`, | `Squid`/`location`            | Location of a HTTP caching proxy server                    | Utilize this service for downloading files via HTTP for cache-friendly workflows.                                             |
-| `$OSG_WN_TMP`          | `Storage`/`worker_node_temp`  | Temporary storage area in which your job(s) run            | Local to each worker node (recommended size: 10 GB/job). See [this section](#osg_wn_tmp) below for details.                   |
+| `$OSG_WN_TMP`          | `Storage`/`worker_node_temp`  | Temporary storage area in which your job(s) run            | Local to each worker node. See [this section](#osg_wn_tmp) below for details.                   |
 | `$X509_CERT_DIR`       |                               | Location of the CA certificates                            | If not defined, defaults to `/etc/grid-security/certificates`.                                                                |
 | `$_CONDOR_SCRATCH_DIR` |                               | Suggested temporary storage for glideinWMS-based payloads. | Users should prefer this environment variable over `$OSG_WN_TMP` if running inside glideinWMS.                                |
 
 ### OSG_WN_TMP ###
 
-Site administrators are responsible for ensuring that `$OSG_WN_TMP` is cleaned up. We recommend one of the following solutions:
+Site administrators are responsible for ensuring that `$OSG_WN_TMP` is cleaned up.
+We recommend one of the following solutions:
 
-- Use common batch-system capabilities to create a temporary, per-job directory that is cleaned up after each job is run.
+- **(Recommended)** Use batch-system capabilities to create directories in the job scratch directory and bind mount
+  them for the job so that the batch system performs the clean up.
+  For example, HTCondor has this ability through
+  [MOUNT\_UNDER\_SCRATCH](http://research.cs.wisc.edu/htcondor/manual/v8.6/3_5Configuration_Macros.html#24738):
+
+        MOUNT_UNDER_SCRATCH = $(MOUNT_UNDER_SCRATCH), <PATH TO OSG_WN_TMP>
+
+    If using this method, space set aside for `OSG_WN_TMP` should be reallocated to the partition containing the job
+    scratch directories.
+    If using HTCondor, this will be the partition containing the path defined by the HTCondor `EXECUTE` configuration
+    variable.
+
+- Use batch-system capabilities to create a temporary, per-job directory that is cleaned up after each job is run.
 - Periodically purge the directory (e.g. `tmpwatch`).
 
 #### For VO managers ####
