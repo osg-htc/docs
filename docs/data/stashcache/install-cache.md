@@ -228,7 +228,8 @@ As a reminder, here are common service commands (all run as `root`) for EL7:
 
 | **Software** | **Service name** | **Notes** |
 |--------------|------------------|-----------|
-| XRootD | `xrootd@stash-cache.service` | The xrootd daemon, which performs the data transfers |
+| XRootD | `xrootd@stash-cache.service` | The XRootD daemon, which performs the data transfers |
+| XCache | `xcache-reporter.timer` | Reports usage information to collector.opensciencegrid.org |
 | Fetch CRL | `fetch-crl-boot` and `fetch-crl-cron` | Required to authenticate monitoring services.  See [CA documentation](/common/ca#managing-fetch-crl-services) for more info |
 
 
