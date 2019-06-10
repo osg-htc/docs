@@ -3,7 +3,7 @@ Configuring a submit host to flock to OSG
 
 If you have a HTCondor submit node on your campus, it can be configured
 to spill over onto available resources on the Open Science Grid. In
-HTCondor terms this is called [flocking](https://research.cs.wisc.edu/htcondor/manual/latest/ConnectingHTCondorPoolswithFlocking.html)
+HTCondor terms this is called [flocking](https://htcondor.readthedocs.io/en/stable/grid-computing/connecting-pools-with-flocking.html)
 
 If you are interested in this solution, please open a
 [new ticket](https://support.opensciencegrid.org/helpdesk/tickets/new) with the hostname.
