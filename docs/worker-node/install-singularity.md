@@ -188,24 +188,10 @@ before installing the required packages:
 
     This command will update **all** packages
 
-1. The singularity packages are split into two parts, choose the command
-that corresponds to your situation:
-    - If you are installing singularity on a worker node, where images
-      do not need to be created or manipulated, install just the smaller
-      part to limit the amount of setuid-root code that is installed:
+1. Install Singularity
 
-            :::console
-            root@host # yum install singularity-runtime
-
-    - If you want a full singularity installation, run the following command:
-
-            :::console
-            root@host # yum install singularity
-
-!!! tip
-    In most cases, only `singularity-runtime` is needed on the worker node;
-    installing only this smaller package reduces risk of potential security
-    exploits, especially when running in privileged mode.
+        :::console
+        root@host # yum install singularity
 
 ### Configuring Singularity ###
 
