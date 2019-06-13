@@ -13,9 +13,9 @@ This release contains:
     Be on the lookout for any .rpmnew files and merge in any local changes.
     There are numerous additions to the configuration.
 
--   [Singularity 3.2.1](https://github.com/sylabs/singularity/releases): Major upgrade from version 2.6.1
+-   [Singularity 3.2.1](https://github.com/sylabs/singularity/releases): Major upgrade from version 2.6.1 (See note above)
 -   GlideinWMS 3.4.5-2: Fix problems with the proxy renewal service
--   HTCondor 8.6.13-1.4: Bring RPM packaging in line with upstream and EPEL
+-   HTCondor 8.6.13-1.4: Fix problems when upgrading condor-python
 -   [VO Package v93](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-93): Add in sPHENIX VO
 -   Upcoming repository:
     -   [HTCondor 8.8.3](https://www-auth.cs.wisc.edu/lists/htcondor-world/2019/msg00011.shtml)
