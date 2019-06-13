@@ -2266,7 +2266,7 @@ the additional capability given to users is more limited.
 OSG Security considers the non-setuid, kernel-based method to have a
 lower security risk.</p>
 </div>
-<p>The document is intended for system administrators that wish to install
+<p>This document is intended for system administrators that wish to install
 and/or configure singularity.</p>
 <h2 id="before-starting">Before Starting<a class="headerlink" href="#before-starting" title="Permanent link">&para;</a></h2>
 <p>As with all OSG software installations, there are some one-time (per host)
@@ -2418,18 +2418,16 @@ before installing the required packages:</p>
 </li>
 </ol>
 <h3 id="configuring-singularity">Configuring Singularity<a class="headerlink" href="#configuring-singularity" title="Permanent link">&para;</a></h3>
-<p>The OSG distribution of singularity includes an option called
-<code>underlay</code> that enables using bind mount points that do not exist in
-the container image.
-It is not enabled by default but recommended because it is less
-vulnerable to security problems than the similar default <code>overlay</code>
-option.
-In addition, the <code>overlay</code> option does not work on RHEL6, does not
-work correctly on RHEL7 when container images are distributed by CVMFS,
-and does not work in unprivileged mode.</p>
-<p>Set these options in <code>/etc/singularity/singularity.conf</code>:</p>
+<p>singularity includes an option called <code>underlay</code> that enables using bind
+mount points that do not exist in the container image.
+By default it is enabled, but only if the similar <code>overlay</code> option cannot
+be used, such as on RHEL6 where kernel support for overlayfs is missing
+or when running in unprivileged mode.  On RHEL7 it is recommended to
+completely disable <code>overlay</code>, because it is more vulnerable to security
+problems than <code>underlay</code> and because it does not work correctly when
+container images are distributed by CVMFS.</p>
+<p>Set this option in <code>/etc/singularity/singularity.conf</code>:</p>
 <div class="codehilite"><pre><span></span>    <span class="n">enable</span> <span class="k">overlay</span> <span class="o">=</span> <span class="k">no</span>
-    <span class="n">enable</span> <span class="n">underlay</span> <span class="o">=</span> <span class="n">yes</span>
 </pre></div>
 
 
