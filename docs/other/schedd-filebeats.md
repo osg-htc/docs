@@ -45,7 +45,7 @@ The configuration of filebeats revolves around this file `/etc/filebeat/filebeat
           hosts: ["gracc.opensciencegrid.org:6938"]
           # Optional SSL. By default is off. 
           # List of root certificates for HTTPS server verifications
-          ssl.certificate_authorities: ["/etc/grid-security/certificates/cilogon-osg.pem"]
+          ssl.certificate_authorities: ["/etc/grid-security/certificates/InCommon-IGTF-Server-CA.pem"]
           #  Certificate for SSL client authentication
           ssl.certificate: "/etc/grid-security/hostcert.pem"
           # Client Certificate Key
