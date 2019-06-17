@@ -2190,7 +2190,7 @@ you must add StashCache information to your VO's YAML file in the OSG Topology r
   <span class="nt">StashCache</span><span class="p">:</span>
     <span class="nt">Namespaces</span><span class="p">:</span>
       <span class="nt">/astro/PUBLIC</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ANY</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PUBLIC</span>
     <span class="nt">AllowedCaches</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ANY</span>
     <span class="nt">AllowedOrigins</span><span class="p">:</span>
@@ -2206,12 +2206,12 @@ list who is allowed to access that namespace.</p>
 <ul>
 <li><code>FQAN:&lt;VOMS FQAN&gt;</code> allows someone using a proxy with the specified VOMS FQAN</li>
 <li><code>DN:&lt;DN&gt;</code> allows someone using a proxy with that specific DN</li>
-<li><code>ANY</code> allows anyone; this is used for public data</li>
+<li><code>PUBLIC</code> allows anyone; this is used for public data</li>
 </ul>
 <p>A complete declaration looks like:</p>
 <div class="codehilite"><pre><span></span>    <span class="nt">Namespaces</span><span class="p">:</span>
       <span class="nt">/astro/PUBLIC</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ANY</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PUBLIC</span>
       <span class="nt">/astro/PROTECTED</span><span class="p">:</span>
         <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">FQAN:/Astro</span>
         <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">DN:/DC=org/DC=opensciencegrid/O=Open Science Grid/OU=People/CN=Matyas Selmeci</span>
