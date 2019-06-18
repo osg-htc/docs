@@ -2420,6 +2420,12 @@ Run the following command:</p>
 
 <p>If successful, there should be a file at <code>/tmp/testfile</code> with the contents of the test file on your origin server.
 If unsuccessful, you can pass the <code>-d</code> flag to <code>stashcp</code> for debug info.</p>
+<p>You can also test directly downloading from the origin via <code>xrdcp</code>, which is available in the <code>xrootd-client</code> RPM.
+Run the following command:</p>
+<div class="codehilite"><pre><span></span><span class="gp">[user@host]$</span> xrdcp xroot://&lt;origin server&gt;:1094/&lt;testfile&gt; /tmp/testfile
+</pre></div>
+
+
 <h2 id="registering-the-origin">Registering the Origin<a class="headerlink" href="#registering-the-origin" title="Permanent link">&para;</a></h2>
 <p>To be part of the OSG StashCache Federation, your origin must be
 <a href="../../../common/registration/">registered with the OSG</a>.  The service type is <code>XRootD origin server</code>.</p>
