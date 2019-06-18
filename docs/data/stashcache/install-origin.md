@@ -190,6 +190,12 @@ Run the following command:
 If successful, there should be a file at `/tmp/testfile` with the contents of the test file on your origin server.
 If unsuccessful, you can pass the `-d` flag to `stashcp` for debug info.
 
+You can also test directly downloading from the origin via `xrdcp`, which is available in the `xrootd-client` RPM.
+Run the following command:
+
+```console
+[user@host]$ xrdcp xroot://<origin server>:1094/<testfile> /tmp/testfile
+```
 
 Registering the Origin
 ----------------------
