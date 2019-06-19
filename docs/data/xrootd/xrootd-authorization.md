@@ -83,7 +83,7 @@ on all data nodes:
 
 1. Install [CA certificates](/common/ca#installing-ca-certificates) and [manage CRLs](/common/ca#installing-ca-certificates#managing-certificate-revocation-lists)
 
-1. Follow the instructions for requesting a [service certificate](/security/host-certs#requesting-and-installing-a-service-certificate),
+1. Follow the instructions for requesting a [service certificate](/security/host-certs#requesting-service-certificates),
    using `xrootd` for both the `<SERVICE>` and `<OWNER>`, resulting in a certificate and key in `/etc/grid-security/xrd/xrdcert.pem`
    and `/etc/grid-security/xrd/xrdkey.pem`, respectively.
 
