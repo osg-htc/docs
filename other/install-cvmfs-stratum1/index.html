@@ -2475,16 +2475,14 @@
 </pre></div>
 
 
-<p>Forward port 80 to port 8000 (first command is for external, second command for localhost):</p>
+<p>Forward port 80 to port 8000:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> iptables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span> 
-<span class="gp">root@host #</span> iptables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span> 
 <span class="gp">root@host #</span> service iptables save
 </pre></div>
 
 
 <p>On EL7 also set up the the same port forwarding for IPv6 (unfortunately it is not supported on EL6):</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> ip6tables -t nat -A PREROUTING -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span>
-<span class="gp">root@host #</span> ip6tables -t nat -A OUTPUT -o lo -p tcp -m tcp --dport <span class="m">80</span> -j REDIRECT --to-ports <span class="m">8000</span>
 <span class="gp">root@host #</span> service ip6tables save
 </pre></div>
 
