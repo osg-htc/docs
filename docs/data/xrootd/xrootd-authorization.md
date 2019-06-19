@@ -22,26 +22,26 @@ only by the xrootd user, optionally readable by others.
 
 Here is an example `/etc/xrootd/auth_file` :
 
-```file
+```file hl_lines="2 5 8 13 16"
 # This means that all the users have read access to the datasets, _except_ under /private
-u * -rl %RED%/data/xrootdfs%ENDCOLOR%/private %RED%/data/xrootdfs%ENDCOLOR% rl
+u * -rl <STORAGE PATH>/private /data/xrootdfs rl
 
 # Or the following, without a restricted /private dir
-# u * %RED%/data/xrootdfs%ENDCOLOR% rl
+# u * <STORAGE PATH> rl
 
-# This means that all the users have full access to their private dirs
-u = %RED%/data/xrootdfs%ENDCOLOR%/home/@=/ a
+# This means that all the users have full access to their private home dirs
+u = <STORAGE PATH>/home/@=/ a
 
-# This means that this privileged user can do everything
-# You need at least one user like that, in order to create the
+# This means that the privileged 'xrootd' user can do everything
+# There must be at least one such user in order to create the
 # private dirs for users willing to store their data in the facility
-u xrootd %RED%/data/xrootdfs%ENDCOLOR% a
+u xrootd <STORAGE PATH> a
 
-# This means that users in group 'biology' can do anything under this path
-g biology %RED%/data/xrootdfs%ENDCOLOR%/biology a
+# This means that users in group 'biology' can do anything under the 'genomics' directory
+g biology <STORAGE PATH>/genomics a
 ```
 
-Here we assume that your storage path is `/data/xrootdfs`.
+Replacing `<STORAGE PATH>` with the path to the directory that will contain data served by XRootD, e.g. `/data/xrootdfs`.
 This path is relative to the `oss.localroot` or `all.localroot` configuration values, if either one is defined in the
 xrootd config file.
 
