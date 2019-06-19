@@ -168,7 +168,7 @@ In order to host a repository on OASIS, perform the following steps:
         :::console
         root@host # wget -O /srv/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.cvmfswhitelist \
                     http://oasis.opensciencegrid.org/cvmfs/%RED%example.opensciencegrid.org%ENDCOLOR%/.cvmfswhitelist 
-        root@host # /bin/cp /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub \
+        root@host # cp /etc/cvmfs/keys/opensciencegrid.org/opensciencegrid.org.pub \
                     /etc/cvmfs/keys/%RED%example.opensciencegrid.org%ENDCOLOR%.pub
 
     Replace %RED%example.opensciencegrid.org%ENDCOLOR% as appropriate.
