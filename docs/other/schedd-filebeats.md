@@ -27,10 +27,10 @@ Configuration
 
 The configuration of filebeats revolves around this file `/etc/filebeat/filebeat.yml`. Bellow are the steps to modify the different sections of this file
 
-1. The `Filebeat Prospectors` section, the input should look like this:
+1. The `Filebeat Inputs` section, the input should look like this:
 
         :::file
-        filebeat.prospectors:
+        filebeat.inputs:
         - type: log
           enabled: true
           paths:
