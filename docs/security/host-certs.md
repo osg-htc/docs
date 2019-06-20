@@ -53,7 +53,7 @@ Requesting InCommon IGTF Host Certificates
 ------------------------------------------
 
 Many institutions in the United States already subscribe to InCommon and offer IGTF certificate services.
-If your institution is in the list of [InCommon subscribers](https://www.incommon.org/certificates/subscribers.html),
+If your institution is in the list of [InCommon subscribers](https://www.incommon.org/federation/incommon-federation-participants/),
 continue with the instructions below.
 If your institution is not in the list, Let's Encrypt certificates do not meet your needs, and you do not have access to
 another IGTF CA subscription, please [contact us](/common/help.md).
