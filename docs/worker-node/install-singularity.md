@@ -279,5 +279,5 @@ singularity has no services to start or stop.
 References
 ----------
 - [Singularity Documentation](https://www.sylabs.io/docs/)
-- [Singularity Support](https://www.sylabs.io/singularity/support/)
+- [Singularity Support](https://sylabs.io/resources/support)
 - [Additional guidance for CMS sites](https://twiki.cern.ch/twiki/bin/view/Main/CmsSingularity)
