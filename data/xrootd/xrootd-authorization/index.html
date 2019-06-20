@@ -2080,25 +2080,25 @@ only by the xrootd user, optionally readable by others.</p>
 <a href="http://xrootd.org/doc/dev47/sec_config.htm#_Toc489606592"><code>acc.authdb</code></a> parameter in your xrootd config.)</p>
 <p>Here is an example <code>/etc/xrootd/auth_file</code> :</p>
 <div class="codehilite"><pre><span></span># <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">all</span> <span class="nv">the</span> <span class="nv">users</span> <span class="nv">have</span> <span class="nv">read</span> <span class="nv">access</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">datasets</span>, <span class="nv">_except_</span> <span class="nv">under</span> <span class="o">/</span><span class="nv">private</span>
-<span class="nv">u</span> <span class="o">*</span> <span class="o">-</span><span class="nv">rl</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%/</span><span class="nv">private</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span> <span class="nv">rl</span>
-
+<span class="hll"><span class="nv">u</span> <span class="o">*</span> <span class="o">-</span><span class="nv">rl</span> <span class="o">&lt;</span><span class="nv">STORAGE</span> <span class="nv">PATH</span><span class="o">&gt;/</span><span class="nv">private</span> <span class="o">/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span> <span class="nv">rl</span>
+</span>
 # <span class="nv">Or</span> <span class="nv">the</span> <span class="nv">following</span>, <span class="nv">without</span> <span class="nv">a</span> <span class="nv">restricted</span> <span class="o">/</span><span class="nv">private</span> <span class="nv">dir</span>
-# <span class="nv">u</span> <span class="o">*</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span> <span class="nv">rl</span>
-
-# <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">all</span> <span class="nv">the</span> <span class="nv">users</span> <span class="nv">have</span> <span class="nv">full</span> <span class="nv">access</span> <span class="nv">to</span> <span class="nv">their</span> <span class="nv">private</span> <span class="nv">dirs</span>
-<span class="nv">u</span> <span class="o">=</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%/</span><span class="nv">home</span><span class="o">/</span>@<span class="o">=/</span> <span class="nv">a</span>
-
-# <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">this</span> <span class="nv">privileged</span> <span class="nv">user</span> <span class="nv">can</span> <span class="k">do</span> <span class="nv">everything</span>
-# <span class="nv">You</span> <span class="nv">need</span> <span class="nv">at</span> <span class="nv">least</span> <span class="nv">one</span> <span class="nv">user</span> <span class="nv">like</span> <span class="nv">that</span>, <span class="nv">in</span> <span class="nv">order</span> <span class="nv">to</span> <span class="nv">create</span> <span class="nv">the</span>
+<span class="hll"># <span class="nv">u</span> <span class="o">*</span> <span class="o">&lt;</span><span class="nv">STORAGE</span> <span class="nv">PATH</span><span class="o">&gt;</span> <span class="nv">rl</span>
+</span>
+# <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">all</span> <span class="nv">the</span> <span class="nv">users</span> <span class="nv">have</span> <span class="nv">full</span> <span class="nv">access</span> <span class="nv">to</span> <span class="nv">their</span> <span class="nv">private</span> <span class="nv">home</span> <span class="nv">dirs</span>
+<span class="hll"><span class="nv">u</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nv">STORAGE</span> <span class="nv">PATH</span><span class="o">&gt;/</span><span class="nv">home</span><span class="o">/</span>@<span class="o">=/</span> <span class="nv">a</span>
+</span>
+# <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">the</span> <span class="nv">privileged</span> <span class="s1">&#39;</span><span class="s">xrootd</span><span class="s1">&#39;</span> <span class="nv">user</span> <span class="nv">can</span> <span class="k">do</span> <span class="nv">everything</span>
+# <span class="nv">There</span> <span class="nv">must</span> <span class="nv">be</span> <span class="nv">at</span> <span class="nv">least</span> <span class="nv">one</span> <span class="nv">such</span> <span class="nv">user</span> <span class="nv">in</span> <span class="nv">order</span> <span class="nv">to</span> <span class="nv">create</span> <span class="nv">the</span>
 # <span class="nv">private</span> <span class="nv">dirs</span> <span class="k">for</span> <span class="nv">users</span> <span class="nv">willing</span> <span class="nv">to</span> <span class="nv">store</span> <span class="nv">their</span> <span class="nv">data</span> <span class="nv">in</span> <span class="nv">the</span> <span class="nv">facility</span>
-<span class="nv">u</span> <span class="nv">xrootd</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%</span> <span class="nv">a</span>
+<span class="hll"><span class="nv">u</span> <span class="nv">xrootd</span> <span class="o">&lt;</span><span class="nv">STORAGE</span> <span class="nv">PATH</span><span class="o">&gt;</span> <span class="nv">a</span>
+</span>
+# <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">users</span> <span class="nv">in</span> <span class="nv">group</span> <span class="s1">&#39;</span><span class="s">biology</span><span class="s1">&#39;</span> <span class="nv">can</span> <span class="k">do</span> <span class="nv">anything</span> <span class="nv">under</span> <span class="nv">the</span> <span class="s1">&#39;</span><span class="s">genomics</span><span class="s1">&#39;</span> <span class="nv">directory</span>
+<span class="hll"><span class="nv">g</span> <span class="nv">biology</span> <span class="o">&lt;</span><span class="nv">STORAGE</span> <span class="nv">PATH</span><span class="o">&gt;/</span><span class="nv">genomics</span> <span class="nv">a</span>
+</span></pre></div>
 
-# <span class="nv">This</span> <span class="nv">means</span> <span class="nv">that</span> <span class="nv">users</span> <span class="nv">in</span> <span class="nv">group</span> <span class="s1">&#39;</span><span class="s">biology</span><span class="s1">&#39;</span> <span class="nv">can</span> <span class="k">do</span> <span class="nv">anything</span> <span class="nv">under</span> <span class="nv">this</span> <span class="nv">path</span>
-<span class="nv">g</span> <span class="nv">biology</span> <span class="o">%</span><span class="nv">RED</span><span class="o">%/</span><span class="nv">data</span><span class="o">/</span><span class="nv">xrootdfs</span><span class="o">%</span><span class="nv">ENDCOLOR</span><span class="o">%/</span><span class="nv">biology</span> <span class="nv">a</span>
-</pre></div>
 
-
-<p>Here we assume that your storage path is <code>/data/xrootdfs</code>.
+<p>Replacing <code>&lt;STORAGE PATH&gt;</code> with the path to the directory that will contain data served by XRootD, e.g. <code>/data/xrootdfs</code>.
 This path is relative to the <code>oss.localroot</code> or <code>all.localroot</code> configuration values, if either one is defined in the
 xrootd config file.</p>
 <div class="admonition note">
@@ -2157,7 +2157,7 @@ on all data nodes:</p>
 <p>Install <a href="../../../common/ca#installing-ca-certificates">CA certificates</a> and <a href="../../../common/ca#installing-ca-certificates#managing-certificate-revocation-lists">manage CRLs</a></p>
 </li>
 <li>
-<p>Follow the instructions for requesting a <a href="../../../security/host-certs#requesting-and-installing-a-service-certificate">service certificate</a>,
+<p>Follow the instructions for requesting a <a href="../../../security/host-certs#requesting-service-certificates">service certificate</a>,
    using <code>xrootd</code> for both the <code>&lt;SERVICE&gt;</code> and <code>&lt;OWNER&gt;</code>, resulting in a certificate and key in <code>/etc/grid-security/xrd/xrdcert.pem</code>
    and <code>/etc/grid-security/xrd/xrdkey.pem</code>, respectively.</p>
 </li>
