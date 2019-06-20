@@ -14,8 +14,8 @@ This release contains:
     There are numerous additions to the configuration.
 
 -   [Singularity 3.2.1](https://github.com/sylabs/singularity/releases): Major upgrade from version 2.6.1 (See note above).
-    This new version contains a single `singularity` package that contains the functionality of both the 2.6.1
-    `singularity` and `singularity-runtime` packages.
+    Singularity 3, no longer uses a setuid binary for building container images so the `singularity-runtime` package has
+    been merged into the `singularity` package.
 -   GlideinWMS 3.4.5-2: Fix problems with the proxy renewal service
 -   HTCondor 8.6.13-1.4: Fix problems when upgrading condor-python
 -   [VO Package v93](https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-93): Add in sPHENIX VO
