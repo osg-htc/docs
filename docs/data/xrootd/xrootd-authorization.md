@@ -113,7 +113,7 @@ on all data nodes:
                                 -key:/etc/grid-security/xrd/xrdkey.pem \
                                 -crl:1 \
                                 -authzfun:libXrdLcmaps.so \
-                                -authzfunparms:--loglevel=0,--policy=authorize_only \
+                                -authzfunparms:--lcmapscfg=/etc/xrootd/lcmaps.cfg,--loglevel=0,--policy=authorize_only \
                                 -gmapopt:10 -gmapto:0
             acc.authdb /etc/xrootd/auth_file
             ofs.authorize

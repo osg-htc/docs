@@ -371,7 +371,7 @@ If you are troubleshooting an XRootD host, follow these instructions to raise th
                     -key:/etc/grid-security/xrootd/xrootdkey.pem \
                     -crl:1 \
                     -authzfun:libXrdLcmaps.so \
-                    -authzfunparms:--loglevel=5 \
+                    -authzfunparms:--lcmapscfg=/etc/xrootd/lcmaps.cfg,--loglevel=5,--policy=authorize_only \
                     -gmapopt:10 -gmapto:0
 
 1. Restart the [xrootd](/data/xrootd/install-storage-element#managing-xrootd-services) service
