@@ -1,7 +1,7 @@
 Configuring XRootD Authorization
 ================================
 
-There are several authorization options in XRootD available through the security plugins. 
+There are several authorization options in XRootD available through its security plugins.
 In this document, we will cover the [`xrootd-lcmaps`](#enabling-xrootd-lcmaps-authorization) security option supported
 in the OSG.
 
@@ -110,13 +110,18 @@ on all data nodes:
             xrootd.seclib /usr/lib64/libXrdSec-4.so
             sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
                                 -cert:/etc/grid-security/xrd/xrdcert.pem \
-                                -key:/etc/grid-security/xrd/xrdkey.pem -crl:1 \
-                                -authzfun:libXrdLcmaps.so -authzfunparms:--loglevel,0,--policy,authorize_only \
+                                -key:/etc/grid-security/xrd/xrdkey.pem \
+                                -crl:1 \
+                                -authzfun:libXrdLcmaps.so \
+                                -authzfunparms:--lcmapscfg=/etc/xrootd/lcmaps.cfg,--loglevel=0,--policy=authorize_only \
                                 -gmapopt:10 -gmapto:0
             acc.authdb /etc/xrootd/auth_file
             ofs.authorize
 
 1. Restart the [relevant services](/data/xrootd/install-standalone/#using-xrootd)
+
+Verifying XRootD Authorization
+------------------------------
 
 To verify the LCMAPS security, run the following commands from a machine with your user certificate/key pair,
 `xrootd-client`, and `voms-clients-cpp` installed:

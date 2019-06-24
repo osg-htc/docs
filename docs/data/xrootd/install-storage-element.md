@@ -40,31 +40,6 @@ root@host # yum install xrootd
 Configuring an XRootD Server
 ----------------------------
 
-### Minimal configuration
-
-A new installation of XRootD is already configured to run a standalone server that serves files from `/tmp` on the local
-file system. 
-This configuration is useful to verify basic connectivity between your clients and your server. 
-To do this, start the `xrootd` service with standalone config as described in the [managing services
-section](#managing-xrootd-services).
-
-You should be able now to copy a file such as `/bin/sh` using `xrdcp` command into `/tmp`. 
-To test, do:
-
-``` console
-root@host # yum install xrootd-client
-root@host # xrdcp /bin/sh root://localhost:1094//tmp/first_test
-[xrootd] Total 0.76 MB  [====================] 100.00 % [inf MB/s]
-root@host # ls -l /tmp/first_test
--rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test
-```
-
-Other than for testing, a standalone server is useful when you want to serve files off of a single host with lots of
-large disks. 
-If your storage capacity is spread out over multiple hosts, you will need to set up an XRootD cluster.
-
-### Advanced configuration
-
 An advanced XRootD setup has multiple components; it is important to validate that each additional component that you
 set up is working before moving on to the next component. 
 We have included validation instructions after each component below.
@@ -294,7 +269,7 @@ fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/x
 
 XRootD can be accessed using the HTTP protocol. To do that:
 
-1.   Modify `/etc/xrootd/xrootd-clustered.cfg` and add the following lines. You will also need to add the configuration regarding [lcmaps authorization](#security-option-3-xrootd-lcmaps-authorization).
+1.  Modify `/etc/xrootd/xrootd-clustered.cfg` and add the following lines.
 
         :::file
            if exec xrootd
@@ -307,7 +282,9 @@ XRootD can be accessed using the HTTP protocol. To do that:
             http.staticpreload http://static/robots.txt /etc/xrootd/robots.txt
             http.desthttps yes
            fi
-  
+
+1. Add [LCMAPS authorization](/data/xrootd/xrootd-authorization) configuration to `/etc/xrootd/xrootd-clustered.cfg`.
+
 1.   Create robots.txt. Add file `/etc/xrootd/robots.txt` with these contents:
 
         :::file
