@@ -7,7 +7,7 @@ The software can be used to create a export an existing file system through mult
 federation, or act as a caching service.
 XRootD data servers can stream data directly to client applications or support experiment-wide data management by
 performing bulk data transfer via "third-party-copy" between distinct sites.
-The OSG currently supports three different configurations of XRootD:
+The OSG supports multiple different configurations of XRootD:
 
 XCache
 ------
