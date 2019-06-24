@@ -94,7 +94,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#installing-and-maintaining-xrootd" tabindex="1" class="md-skip">
+      <a href="#installing-an-xrootd-storage-element" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -2481,7 +2481,7 @@
                   <a href="https://github.com/opensciencegrid/docs/edit/master/docs/data/xrootd/install-storage-element.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="installing-and-maintaining-xrootd">Installing and Maintaining XRootD<a class="headerlink" href="#installing-and-maintaining-xrootd" title="Permanent link">&para;</a></h1>
+                <h1 id="installing-an-xrootd-storage-element">Installing an XRootD Storage Element<a class="headerlink" href="#installing-an-xrootd-storage-element" title="Permanent link">&para;</a></h1>
 <p><a href="http://xrootd.org/">XRootD</a> is a hierarchical storage system that can be used in a variety of ways to access data,
 typically distributed among actual storage resources. 
 One way to use XRootD is to have it refer to many data resources at a single site, and another way to use it is to refer
@@ -2814,18 +2814,23 @@ configuration:</p>
 <li><a href="https://twiki.cern.ch/twiki/bin/view/Main/HdfsXrootdInstall">https://twiki.cern.ch/twiki/bin/view/Main/HdfsXrootdInstall</a></li>
 </ul>
 <h3 id="optional-adding-hadoop-support-to-xrootd">(Optional) Adding Hadoop support to XRootD<a class="headerlink" href="#optional-adding-hadoop-support-to-xrootd" title="Permanent link">&para;</a></h3>
-<p>HDFS-based sites should utilize the <code>xrootd-hdfs</code> plugin to allow XRootD to access their storage.</p>
+<p>Hadoop File System (HDFS) based sites should utilize the <code>xrootd-hdfs</code> plugin to allow XRootD to access their storage:</p>
+<ol>
+<li>
+<p>Install the XRootD HDFS plugin package:</p>
 <div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-hdfs
 </pre></div>
 
 
-<p>You will then need to add the following lines to your
-<code>/etc/xrootd/xrootd-clustered.cfg</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">xrootd</span><span class="p">.</span><span class="n">fslib</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libXrdOfs</span><span class="p">.</span><span class="n">so</span>
-<span class="n">ofs</span><span class="p">.</span><span class="n">osslib</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libXrdHdfs</span><span class="p">.</span><span class="n">so</span>
+</li>
+<li>
+<p>Add the following configuration to <code>/etc/xrootd/xrootd-clustered.cfg</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">ofs</span><span class="p">.</span><span class="n">osslib</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">libXrdHdfs</span><span class="p">.</span><span class="n">so</span>
 </pre></div>
 
 
+</li>
+</ol>
 <p>For more information, see <a href="../../../data/install-hadoop">the HDFS installation documents</a>.</p>
 <h3 id="optional-adding-file-residency-manager-frm-to-an-xrootd-cluster">(Optional) Adding File Residency Manager (FRM) to an XRootd cluster<a class="headerlink" href="#optional-adding-file-residency-manager-frm-to-an-xrootd-cluster" title="Permanent link">&para;</a></h3>
 <p>If you have a multi-tiered storage system (e.g. some data is stored on SSDs and some on disks or tapes), then install
