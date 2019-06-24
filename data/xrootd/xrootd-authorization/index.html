@@ -691,6 +691,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#verifying-xrootd-authorization" title="Verifying XRootD Authorization" class="md-nav__link">
+    Verifying XRootD Authorization
+  </a>
+  
+</li>
+      
       
       
       
@@ -2042,6 +2049,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#verifying-xrootd-authorization" title="Verifying XRootD Authorization" class="md-nav__link">
+    Verifying XRootD Authorization
+  </a>
+  
+</li>
+      
       
       
       
@@ -2062,7 +2076,7 @@
                 
                 
                 <h1 id="configuring-xrootd-authorization">Configuring XRootD Authorization<a class="headerlink" href="#configuring-xrootd-authorization" title="Permanent link">&para;</a></h1>
-<p>There are several authorization options in XRootD available through the security plugins. 
+<p>There are several authorization options in XRootD available through its security plugins.
 In this document, we will cover the <a href="#enabling-xrootd-lcmaps-authorization"><code>xrootd-lcmaps</code></a> security option supported
 in the OSG.</p>
 <div class="admonition note">
@@ -2203,8 +2217,10 @@ on all data nodes:</p>
 <div class="codehilite"><pre><span></span><span class="s s-Atom">xrootd</span><span class="p">.</span><span class="s s-Atom">seclib</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span><span class="o">/</span><span class="s s-Atom">libXrdSec</span><span class="o">-</span><span class="mf">4.</span><span class="s s-Atom">so</span>
 <span class="s s-Atom">sec</span><span class="p">.</span><span class="s s-Atom">protocol</span> <span class="o">/</span><span class="s s-Atom">usr</span><span class="o">/</span><span class="s s-Atom">lib64</span> <span class="s s-Atom">gsi</span> <span class="o">-</span><span class="nn">certdir</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">certificates</span> <span class="s s-Atom">\</span>
                     <span class="o">-</span><span class="nn">cert</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrd</span><span class="o">/</span><span class="s s-Atom">xrdcert</span><span class="p">.</span><span class="s s-Atom">pem</span> <span class="s s-Atom">\</span>
-                    <span class="o">-</span><span class="nn">key</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrd</span><span class="o">/</span><span class="s s-Atom">xrdkey</span><span class="p">.</span><span class="s s-Atom">pem</span> <span class="o">-</span><span class="nn">crl</span><span class="p">:</span><span class="mi">1</span> <span class="s s-Atom">\</span>
-                    <span class="o">-</span><span class="nn">authzfun</span><span class="p">:</span><span class="s s-Atom">libXrdLcmaps</span><span class="p">.</span><span class="s s-Atom">so</span> <span class="o">-</span><span class="nn">authzfunparms</span><span class="p">:</span><span class="s s-Atom">--loglevel</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s s-Atom">--policy</span><span class="p">,</span><span class="s s-Atom">authorize_only</span> <span class="s s-Atom">\</span>
+                    <span class="o">-</span><span class="nn">key</span><span class="p">:</span><span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">grid</span><span class="o">-</span><span class="s s-Atom">security</span><span class="o">/</span><span class="s s-Atom">xrd</span><span class="o">/</span><span class="s s-Atom">xrdkey</span><span class="p">.</span><span class="s s-Atom">pem</span> <span class="s s-Atom">\</span>
+                    <span class="o">-</span><span class="nn">crl</span><span class="p">:</span><span class="mi">1</span> <span class="s s-Atom">\</span>
+                    <span class="o">-</span><span class="nn">authzfun</span><span class="p">:</span><span class="s s-Atom">libXrdLcmaps</span><span class="p">.</span><span class="s s-Atom">so</span> <span class="s s-Atom">\</span>
+                    <span class="o">-</span><span class="nn">authzfunparms</span><span class="p">:</span><span class="s s-Atom">--lcmapscfg=/etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">lcmaps</span><span class="p">.</span><span class="s s-Atom">cfg</span><span class="p">,</span><span class="s s-Atom">--loglevel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="s s-Atom">--policy</span><span class="o">=</span><span class="s s-Atom">authorize_only</span> <span class="s s-Atom">\</span>
                     <span class="o">-</span><span class="nn">gmapopt</span><span class="p">:</span><span class="mi">10</span> <span class="o">-</span><span class="nn">gmapto</span><span class="p">:</span><span class="mi">0</span>
 <span class="s s-Atom">acc</span><span class="p">.</span><span class="s s-Atom">authdb</span> <span class="o">/</span><span class="s s-Atom">etc</span><span class="o">/</span><span class="s s-Atom">xrootd</span><span class="o">/</span><span class="s s-Atom">auth_file</span>
 <span class="s s-Atom">ofs</span><span class="p">.</span><span class="s s-Atom">authorize</span>
@@ -2218,6 +2234,7 @@ on all data nodes:</p>
 <p>Restart the <a href="../../../data/xrootd/install-standalone/#using-xrootd">relevant services</a></p>
 </li>
 </ol>
+<h2 id="verifying-xrootd-authorization">Verifying XRootD Authorization<a class="headerlink" href="#verifying-xrootd-authorization" title="Permanent link">&para;</a></h2>
 <p>To verify the LCMAPS security, run the following commands from a machine with your user certificate/key pair,
 <code>xrootd-client</code>, and <code>voms-clients-cpp</code> installed:</p>
 <ol>

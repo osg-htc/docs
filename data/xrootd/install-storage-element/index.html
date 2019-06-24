@@ -688,20 +688,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#minimal-configuration" title="Minimal configuration" class="md-nav__link">
-    Minimal configuration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#advanced-configuration" title="Advanced configuration" class="md-nav__link">
-    Advanced configuration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#creating-an-xrootd-cluster" title="Creating an XRootD cluster" class="md-nav__link">
     Creating an XRootD cluster
   </a>
@@ -2275,20 +2261,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#minimal-configuration" title="Minimal configuration" class="md-nav__link">
-    Minimal configuration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#advanced-configuration" title="Advanced configuration" class="md-nav__link">
-    Advanced configuration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#creating-an-xrootd-cluster" title="Creating an XRootD cluster" class="md-nav__link">
     Creating an XRootD cluster
   </a>
@@ -2540,26 +2512,6 @@ Install these with Yum:</p>
 
 
 <h2 id="configuring-an-xrootd-server">Configuring an XRootD Server<a class="headerlink" href="#configuring-an-xrootd-server" title="Permanent link">&para;</a></h2>
-<h3 id="minimal-configuration">Minimal configuration<a class="headerlink" href="#minimal-configuration" title="Permanent link">&para;</a></h3>
-<p>A new installation of XRootD is already configured to run a standalone server that serves files from <code>/tmp</code> on the local
-file system. 
-This configuration is useful to verify basic connectivity between your clients and your server. 
-To do this, start the <code>xrootd</code> service with standalone config as described in the <a href="#managing-xrootd-services">managing services
-section</a>.</p>
-<p>You should be able now to copy a file such as <code>/bin/sh</code> using <code>xrdcp</code> command into <code>/tmp</code>. 
-To test, do:</p>
-<div class="codehilite"><pre><span></span><span class="gp">root@host #</span> yum install xrootd-client
-<span class="gp">root@host #</span> xrdcp /bin/sh root://localhost:1094//tmp/first_test
-<span class="go">[xrootd] Total 0.76 MB  [====================] 100.00 % [inf MB/s]</span>
-<span class="gp">root@host #</span> ls -l /tmp/first_test
-<span class="go">-rw-r--r-- 1 xrootd xrootd 801512 Apr 11 10:48 /tmp/first_test</span>
-</pre></div>
-
-
-<p>Other than for testing, a standalone server is useful when you want to serve files off of a single host with lots of
-large disks. 
-If your storage capacity is spread out over multiple hosts, you will need to set up an XRootD cluster.</p>
-<h3 id="advanced-configuration">Advanced configuration<a class="headerlink" href="#advanced-configuration" title="Permanent link">&para;</a></h3>
 <p>An advanced XRootD setup has multiple components; it is important to validate that each additional component that you
 set up is working before moving on to the next component. 
 We have included validation instructions after each component below.</p>
@@ -2777,7 +2729,7 @@ This section is the procedure for EL 7.</p>
 <p>XRootD can be accessed using the HTTP protocol. To do that:</p>
 <ol>
 <li>
-<p>Modify <code>/etc/xrootd/xrootd-clustered.cfg</code> and add the following lines. You will also need to add the configuration regarding <a href="#security-option-3-xrootd-lcmaps-authorization">lcmaps authorization</a>.</p>
+<p>Modify <code>/etc/xrootd/xrootd-clustered.cfg</code> and add the following lines.</p>
 <div class="codehilite"><pre><span></span>   <span class="k">if</span> <span class="k">exec</span> <span class="nv">xrootd</span>
     <span class="nv">xrd</span>.<span class="nv">protocol</span> <span class="nv">http</span>:<span class="mi">1094</span> <span class="nv">libXrdHttp</span>.<span class="nv">so</span>
     <span class="nv">http</span>.<span class="nv">cadir</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">grid</span><span class="o">-</span><span class="nv">security</span><span class="o">/</span><span class="nv">certificates</span>
@@ -2791,6 +2743,9 @@ This section is the procedure for EL 7.</p>
 </pre></div>
 
 
+</li>
+<li>
+<p>Add <a href="../../../data/xrootd/xrootd-authorization">LCMAPS authorization</a> configuration to <code>/etc/xrootd/xrootd-clustered.cfg</code>.</p>
 </li>
 <li>
 <p>Create robots.txt. Add file <code>/etc/xrootd/robots.txt</code> with these contents:</p>
