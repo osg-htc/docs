@@ -14,6 +14,8 @@ XCache
 
 Previously known as the "XRootD proxy cache", XCache provides a caching service for data federations that serve one or
 more VOs.
+If your site contributes large amounts of computing resources to the OSG, a site XCache could be part of a solution to
+help reduce incoming WAN usage.
 In the OSG, there are three data federations based on XCache: ATLAS XCache, CMS XCache, and
 [StashCache](/data/stashcache/overview).
 
