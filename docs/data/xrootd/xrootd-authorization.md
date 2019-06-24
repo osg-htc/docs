@@ -120,6 +120,9 @@ on all data nodes:
 
 1. Restart the [relevant services](/data/xrootd/install-standalone/#using-xrootd)
 
+Verifying XRootD Authorization
+------------------------------
+
 To verify the LCMAPS security, run the following commands from a machine with your user certificate/key pair,
 `xrootd-client`, and `voms-clients-cpp` installed:
 
