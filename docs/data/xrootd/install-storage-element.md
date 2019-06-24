@@ -369,7 +369,6 @@ Hadoop File System (HDFS) based sites should utilize the `xrootd-hdfs` plugin to
 1. Add the following configuration to `/etc/xrootd/xrootd-clustered.cfg`:
 
         :::file
-        xrootd.fslib /usr/lib64/libXrdOfs.so
         ofs.osslib /usr/lib64/libXrdHdfs.so
 
 For more information, see [the HDFS installation documents](/data/install-hadoop).
