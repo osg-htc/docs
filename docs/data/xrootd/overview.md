@@ -7,7 +7,7 @@ The software can be used to create a export an existing file system through mult
 federation, or act as a caching service.
 XRootD data servers can stream data directly to client applications or support experiment-wide data management by
 performing bulk data transfer via "third-party-copy" between distinct sites.
-The OSG currently supports two different configurations of XRootD:
+The OSG currently supports three different configurations of XRootD:
 
 XCache
 ------
@@ -27,3 +27,11 @@ An [XRootD standalone server](/data/xrootd/install-standalone) exports an existi
 using both the XRootD and WebDAV protocols.
 Generally, only sites affiliated with large VOs would need to install an XRootD standalone server so consult your VO if
 you are interested in contributing storage.
+
+XRootD Storage Element
+----------------------
+
+An [XRootD storage element (SE)](/data/xrootd/install-storage-element) is a network storage solution that enables
+external VO access using both the XRootD and WebDAV protocols.
+Generally, only sites affiliated with large VOs would need to install an XRootD SE so consult your VO if you are
+interested in contributing storage.
