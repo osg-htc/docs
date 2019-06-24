@@ -1,5 +1,5 @@
-Installing and Maintaining XRootD
-=================================
+Installing an XRootD Storage Element
+====================================
 
 [XRootD](http://xrootd.org/) is a hierarchical storage system that can be used in a variety of ways to access data,
 typically distributed among actual storage resources. 
