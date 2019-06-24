@@ -294,7 +294,9 @@ fermicloud054.fnal.gov complete inventory as of Tue Apr 12 07:38:29 2011 /data/x
 
 XRootD can be accessed using the HTTP protocol. To do that:
 
-1.   Modify `/etc/xrootd/xrootd-clustered.cfg` and add the following lines. You will also need to add the configuration regarding [lcmaps authorization](#security-option-3-xrootd-lcmaps-authorization).
+1.  Modify `/etc/xrootd/xrootd-clustered.cfg` and add the following lines.
+    You will also need to add the configuration regarding
+    [LCMAPS authorization](/data/xrootd/xrootd-authorization).
 
         :::file
            if exec xrootd
