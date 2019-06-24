@@ -1,7 +1,7 @@
 Configuring XRootD Authorization
 ================================
 
-There are several authorization options in XRootD available through the security plugins. 
+There are several authorization options in XRootD available through its security plugins.
 In this document, we will cover the [`xrootd-lcmaps`](#enabling-xrootd-lcmaps-authorization) security option supported
 in the OSG.
 
