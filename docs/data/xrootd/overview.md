@@ -25,15 +25,15 @@ If you are affiliated with a site or VO interested in contributing to a data fed
 XRootD Standalone
 -----------------
 
-An [XRootD standalone server](/data/xrootd/install-standalone) exports an existing network storage solution, such as
-HDFS or Lustre, using both the XRootD and WebDAV protocols.
+An [XRootD standalone server](/data/xrootd/install-standalone) exports data from an existing network storage solution,
+such as HDFS or Lustre, using both the XRootD and WebDAV protocols.
 Generally, only sites affiliated with large VOs would need to install an XRootD standalone server so consult your VO if
 you are interested in contributing storage.
 
 XRootD Storage Element
 ----------------------
 
-An [XRootD storage element (SE)](/data/xrootd/install-storage-element) is a network storage solution that enables
-external VO access using both the XRootD and WebDAV protocols.
+For an [XRootD storage element (SE)](/data/xrootd/install-storage-element), the XRootD software acts as the network
+storage technology, exporting data from multiple, distributed hosts using both the XRootD and WebDAV protocols.
 Generally, only sites affiliated with large VOs would need to install an XRootD SE so consult your VO if you are
 interested in contributing storage.
