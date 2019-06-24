@@ -19,7 +19,7 @@ help reduce incoming WAN usage.
 In the OSG, there are three data federations based on XCache: ATLAS XCache, CMS XCache, and
 [StashCache](/data/stashcache/overview).
 
-If you are affiliated with a site or VO interested in contributing to or starting a data federation, contact us at
+If you are affiliated with a site or VO interested in contributing to a data federation, contact us at
 <mailto:help@opensciencegrid.org>.
 
 XRootD Standalone
