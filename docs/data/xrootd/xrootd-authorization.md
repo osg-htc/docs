@@ -110,8 +110,10 @@ on all data nodes:
             xrootd.seclib /usr/lib64/libXrdSec-4.so
             sec.protocol /usr/lib64 gsi -certdir:/etc/grid-security/certificates \
                                 -cert:/etc/grid-security/xrd/xrdcert.pem \
-                                -key:/etc/grid-security/xrd/xrdkey.pem -crl:1 \
-                                -authzfun:libXrdLcmaps.so -authzfunparms:--loglevel,0,--policy,authorize_only \
+                                -key:/etc/grid-security/xrd/xrdkey.pem \
+                                -crl:1 \
+                                -authzfun:libXrdLcmaps.so \
+                                -authzfunparms:--loglevel=0,--policy=authorize_only \
                                 -gmapopt:10 -gmapto:0
             acc.authdb /etc/xrootd/auth_file
             ofs.authorize
