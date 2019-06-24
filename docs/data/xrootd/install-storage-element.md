@@ -359,19 +359,18 @@ See the CMS TWiki for more information:
 
 ### (Optional) Adding Hadoop support to XRootD
 
-HDFS-based sites should utilize the `xrootd-hdfs` plugin to allow XRootD to access their storage.
+Hadoop File System (HDFS) based sites should utilize the `xrootd-hdfs` plugin to allow XRootD to access their storage:
 
-``` console
-root@host # yum install xrootd-hdfs
-```
+1. Install the XRootD HDFS plugin package:
 
-You will then need to add the following lines to your
-`/etc/xrootd/xrootd-clustered.cfg`:
+        :::console
+        root@host # yum install xrootd-hdfs
 
-``` file
-xrootd.fslib /usr/lib64/libXrdOfs.so
-ofs.osslib /usr/lib64/libXrdHdfs.so
-```
+1. Add the following configuration to `/etc/xrootd/xrootd-clustered.cfg`:
+
+        :::file
+        xrootd.fslib /usr/lib64/libXrdOfs.so
+        ofs.osslib /usr/lib64/libXrdHdfs.so
 
 For more information, see [the HDFS installation documents](/data/install-hadoop).
 
