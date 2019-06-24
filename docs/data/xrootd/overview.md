@@ -23,8 +23,8 @@ If you are affiliated with a site or VO interested in contributing to or startin
 XRootD Standalone
 -----------------
 
-An [XRootD standalone server](/data/xrootd/install-standalone) exports an existing filesystem, such as HDFS or Lustre, 
-using both the XRootD and WebDAV protocols.
+An [XRootD standalone server](/data/xrootd/install-standalone) exports an existing network storage solution, such as
+HDFS or Lustre, using both the XRootD and WebDAV protocols.
 Generally, only sites affiliated with large VOs would need to install an XRootD standalone server so consult your VO if
 you are interested in contributing storage.
 
