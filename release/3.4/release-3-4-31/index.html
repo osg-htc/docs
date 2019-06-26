@@ -2422,7 +2422,9 @@ Be on the lookout for any .rpmnew files and merge in any local changes.
 There are numerous additions to the configuration.</p>
 </div>
 <ul>
-<li><a href="https://github.com/sylabs/singularity/releases">Singularity 3.2.1</a>: Major upgrade from version 2.6.1 (See note above)</li>
+<li><a href="https://github.com/sylabs/singularity/releases">Singularity 3.2.1</a>: Major upgrade from version 2.6.1 (See note above).
+    Singularity 3, no longer uses a setuid binary for building container images so the <code>singularity-runtime</code> package has
+    been merged into the <code>singularity</code> package.</li>
 <li>GlideinWMS 3.4.5-2: Fix problems with the proxy renewal service</li>
 <li>HTCondor 8.6.13-1.4: Fix problems when upgrading condor-python</li>
 <li><a href="https://github.com/opensciencegrid/osg-vo-config/releases/tag/release-93">VO Package v93</a>: Add in sPHENIX VO</li>
