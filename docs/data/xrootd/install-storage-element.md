@@ -73,7 +73,7 @@ You will need to modify the `xrootd-clustered.cfg` on the redirector node and ea
 The following example should serve as a base configuration for clustering. Further customizations are detailed below.
 
 ``` file hl_lines="1 2 11"
-all.export /tmp stage
+all.export /mnt/xrootd stage
 set xrdr = <RDRNODE>
 all.manager $(xrdr):3121
 
@@ -89,11 +89,11 @@ fi
 
 You will need to customize the following lines:
 
-| Configuration Line      | Changes Needed                                                                                                                                                                                                                                                                      |
-|:------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `all.export /tmp stage` | Change `/tmp` to the directory to allow XRootD access to                                                                                                                                                                                                                            |
-| `set xrdr=<RDRNODE>`    | Change to the hostname of the redirector                                                                                                                                                                                                                                            |
-| `cms.space min 2g 5g`   | Reserve this amount of free space on the node. For this example, if space falls below 2GB, xrootd will not store further files on this node until space climbs above 5GB. You can use `k`, `m`, `g`, or `t` to indicate kilobyte, megabytes, gigabytes, or terabytes, respectively. |
+| Configuration Line             | Changes Needed                                                                                                                                                                                                                                                                      |
+|:-------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `all.export /mnt/xrootd stage` | Change `/mnt/xrootd` to the directory to allow XRootD access to                                                                                                                                                                                                                            |
+| `set xrdr=<RDRNODE>`           | Change to the hostname of the redirector                                                                                                                                                                                                                                            |
+| `cms.space min 2g 5g`          | Reserve this amount of free space on the node. For this example, if space falls below 2GB, xrootd will not store further files on this node until space climbs above 5GB. You can use `k`, `m`, `g`, or `t` to indicate kilobyte, megabytes, gigabytes, or terabytes, respectively. |
 
 Further information can be found at <http://xrootd.slac.stanford.edu/doc>
 
@@ -102,14 +102,14 @@ Further information can be found at <http://xrootd.slac.stanford.edu/doc>
 Start both `xrootd` and `cmsd` on all nodes according to the instructions in the [managing services
 section](#ManagingServices).
 
-Verify that you can copy a file such as `/bin/sh` to `/tmp` on the server data via the redirector:
+Verify that you can copy a file such as `/bin/sh` to `/mnt/xrootd` on the server data via the redirector:
 
 ``` console
-root@host # xrdcp /bin/sh  root://<RDRNODE>:1094///tmp/second_test
+root@host # xrdcp /bin/sh  root://<RDRNODE>:1094///mnt/xrootd/second_test
 [xrootd] Total 0.76 MB  [====================] 100.00 % [inf MB/s]
 ```
 
-Check that the `/tmp/second_test` is located on data server `<DATANODE>`.
+Check that the `/mnt/xrootd/second_test` is located on data server `<DATANODE>`.
 
 ### (Optional) Adding Simple Server Inventory to your cluster
 
@@ -140,7 +140,7 @@ root@host # mkdir -p /data/inventory
 root@host # chown xrootd:xrootd /data/inventory
 ```
 
-On the data server (host B) let's use a storage cache that will be at a different location from `/tmp`. 
+On the data server (host B) let's use a storage cache that will be at a different location from `/mnt/xrootd`. 
 
 ``` console
 root@host # mkdir -p  /local/xrootd
@@ -245,7 +245,7 @@ root@host # systemctl start xrootd@cns
 
 #### Testing an XRootD cluster with SSI
 
-1.  Copy file to redirector node specifying storage path (/data/xrootdfs instead of /tmp):
+1.  Copy file to redirector node specifying storage path (/data/xrootdfs instead of /mnt/xrootd):
 
 ```console
 root@host # xrdcp /bin/sh root://<RDRNODE>:1094//data/xrootdfs/test1
@@ -296,7 +296,7 @@ XRootD can be accessed using the HTTP protocol. To do that:
      From the terminal, generate a proxy and attempt to use davix-get to copy from your XRootD host (the XRootD service needs running; see the [services section](#managing-xrootd-services)).  For example, if your server has a file named `/store/user/test.root`:
    
         :::console
-        davix-get https://<YOUR FQDN>:1094/store/user/test.root -E /tmp/x509up_u`id -u` --capath /etc/grid-security/certificates
+        davix-get https://<YOUR FQDN>:1094/store/user/test.root -E /mnt/xrootd/x509up_u`id -u` --capath /etc/grid-security/certificates
 
 !!! note
     For clients to successfully read from the regional redirector, HTTPS must be enabled for the data servers and the site-level redirector.
