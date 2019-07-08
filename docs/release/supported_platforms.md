@@ -14,8 +14,8 @@ OSG also supports select rebuilds of RHEL.  Specifically:
 -   Scientific Linux 7
 
 OSG builds and tests its RPMs on the latest releases of the relevant platforms (e.g., in 2018, the RHEL 7 builds were based on RHEL 7.5).
-Older releases of the OS may not receive thorough testing and have subtle bugs.
-In particular, versions of RHEL/CentOS/SL 7 less than 7.5 have known issues with several pieces of software.
+Older releases of the OS may not receive thorough testing and may have subtle bugs.
+In particular, versions of RHEL/CentOS/SL 7 less than 7.5 have known issues with several pieces of software, including `osg-oasis` and `xrootd-lcmaps`.
 If sites run into problems with one of those versions, we will ask them to update to the latest OS packages as part of the support process.
 
 The OSG Software 3.3 release series was supported on Red Hat Enterprise 6 (32-bit and 64-bit) and 7 (64-bit only) and compatible
