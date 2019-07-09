@@ -146,5 +146,5 @@ markdown_extensions:
   - codehilite:
       guess_lang: False
   - toc:
-     permalink: True
+      permalink: True
   - osg_markdown.colors
